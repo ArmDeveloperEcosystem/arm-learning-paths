@@ -9,13 +9,13 @@ layout: learningpathall
 
 ## Enable the debug view
 
-To inspect intermediate buffers during frame generation, enter this command in the Unreal Engine console:
+To inspect intermediate buffers during frame generation, enter this command in the console of the running Windows non-editor executable:
 
 ```console
 r.NFRU.ShowDebugView 1
 ```
 
-The debug view activates a grid that shows you depth, disocclusion, and warped color buffers.
+The debug view activates a grid that shows you depth, disocclusion, and warped color buffers. If the grid appears and updates during gameplay, it also verifies that the NFRU path is active. The command does not verify NFRU in Development Editor, DebugGame Editor, or Debug Editor because NFRU does not run in those builds.
 
 ![Nine-tile debug view grid showing depth, disocclusion, and warped color buffers for tm1 and tp1#center](./images/debug_view.png "Debug view grid for frame generation debugging")
 
@@ -40,7 +40,7 @@ The layout of the 3 × 3 grid is as follows:
 
 ### What each tile shows
 
-Depth tiles show the depth buffers for the previous and next frames. Use these to identify geometry and disocclusion regions.
+Depth tiles show the depth buffers for the previous and next frames. Use these tiles to identify geometry and disocclusion regions.
 
 Disocclusion mask tiles highlight pixels that become visible as the camera moves. These areas often require special handling during frame generation.
 
@@ -56,6 +56,8 @@ You can use the debug view to identify the following issues during development:
 - Detect disocclusion artifacts
 - Compare motion-vector and optical-flow warping results
 - Diagnose frame interpolation problems
+
+Run `stat FrameGen` at the same time when you need to correlate a visual issue with generated-frame or frame-pacing statistics.
 
 ## What you've accomplished and what's next
 

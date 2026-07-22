@@ -28,24 +28,25 @@ For setup instructions, see the [Arm Performance Studio install guide](/install-
 
 After installation, you'll find RenderDoc for Arm GPUs in the Windows **Start** menu.
 
-## Build a Windows package in Unreal Engine
+## Prepare a Windows non-editor build
 
-To prepare your Unreal Engine project for profiling:
+NFRU does not run in Development Editor, DebugGame Editor, or Debug Editor. Use the editor only to cook content, and prepare the same non-editor build you used to validate NFRU:
 
-1. Open your Unreal Engine project.
-2. Select **Platforms > Windows > Package Project**.
-3. Choose an output directory for the packaged build.
-4. Wait for packaging to complete.
+1. Start the project using **Development Editor**.
+2. Select **Platforms > Windows > Cook Content** and wait for cooking to finish.
+3. Close Unreal Editor.
+4. In Visual Studio 2022, compile a **Development**, **DebugGame**, or **Debug** non-editor build for Win64.
+5. Locate the exported `.exe` under `<project-root>\Binaries\Win64`.
 
-Your packaged build is ready for profiling with RenderDoc.
+If you changed only C++ code after the last cook, recompile without recooking. If you changed shaders or assets, cook the content again before profiling.
 
-## Launch the packaged build from RenderDoc
+## Launch the Windows executable from RenderDoc
 
 To profile your build:
 
 1. Open RenderDoc for Arm GPUs.
 2. Select **Launch Application**.
-3. Enter the full path to your packaged `.exe` in the **Executable Path** field.
+3. Enter the full path to the non-editor `.exe` in the **Executable Path** field.
 4. (Optional) Add command-line arguments in the **Command-line Arguments** field.
 5. Set the **Working Directory** to your packaged build folder if needed.
 6. Select **Launch**.
@@ -53,6 +54,8 @@ To profile your build:
 ![RenderDoc for Arm GPUs Launch Application tab showing the NFRU_Sample executable and working directory, with the Launch button highlighted#center](./images/renderdoc_launch.png "Launch the packaged NFRU application from RenderDoc")
 
 Your application launches under RenderDoc. You can now capture frames and analyze GPU activity.
+
+Before you capture a frame, enter `stat FrameGen` in the application console to confirm that NFRU is generating and pacing frames. Keep Vulkan Configurator running with the required Graph and Tensor emulation layers active while you profile.
 
 ## Capture a frame in RenderDoc
 

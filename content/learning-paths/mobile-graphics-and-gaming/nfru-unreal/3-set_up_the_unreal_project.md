@@ -7,79 +7,80 @@ weight: 4
 layout: learningpathall
 ---
 
-## Enable NFRU for Unreal Engine
+## Install Arm Neural Graphics Plugin 1.1.0
 
-To enable Neural Frame Rate Upscaling (NFRU) for Unreal Engine, follow these steps:
+1. Open Unreal Engine 5.4 or 5.6 and create a new **Third Person** template project using the **C++** option.
 
-1. Open Unreal Engine and create a new **Third Person** template project using the **C++** option. You need a C++ project to build the Neural Graphics for Unreal plugin.
+    ![Unreal Engine project selection screen showing a C++ Third Person template#center](./images/unreal_startup.png "Create a C++ project in a supported Unreal Engine version")
 
-    ![Unreal Engine project selection screen showing C++ Third Person template#center](./images/unreal_startup.png "Create a C++ project in Unreal Engine")
+2. Close Unreal Editor.
 
-2. Create a `Plugins` folder in your project's root directory if it doesn't already exist.
+3. Create a `Plugins` directory in the project root if it does not already exist.
 
-    ![Windows File Explorer showing the Plugins folder in the NFRU sample project root#center](./images/plug_in_structure.png "Plugins folder in the NFRU sample project")
+4. Copy the complete `neural-graphics-for-unreal` folder from the extracted Arm Neural Graphics Plugin 1.1.0 release into the project's `Plugins` directory. Do not copy selected subdirectories or create a symbolic link.
 
-3. Open Command Prompt in the `Plugins` directory and create a symbolic link to the plugin folder for your Unreal Engine version. You need administrator permissions to create the symbolic link.
+    The resulting directory structure starts as follows:
 
-    ```console
-    mklink /D neural-graphics-for-unreal /path/to/neural-graphics-for-unreal/[UEVersion]
+    ```text
+    <project-root>\
+    ├── <project-name>.uproject
+    └── Plugins\
+        └── neural-graphics-for-unreal\
     ```
 
-    ![Administrator Command Prompt running `mklink /D` to create the `neural-graphics-for-unreal` link inside the project’s Plugins directory#center](./images/mklink_command.png "Create the neural-graphics-for-unreal symbolic link")
+5. Right-click the project's `.uproject` file and select **Generate Visual Studio project files**.
 
-4. Regenerate the Visual Studio project files so Unreal Engine detects the plugin.
+6. Open the generated solution in Visual Studio. Select **Development Editor** and **Win64**, then build the solution.
 
-5. Open your project in Visual Studio and build it using **Build** > **Build Solution** or press `Ctrl+Shift+B`.
+7. Start the project in Unreal Editor. If Unreal Engine prompts you to rebuild missing modules, accept the prompt and wait for the build to finish.
 
-After building, open your project in Unreal Engine.
+## Use Vulkan as the rendering hardware interface
 
-## Change Unreal's rendering hardware interface to Vulkan
+Unreal Engine uses DirectX by default on Windows. NFRU requires Vulkan:
 
-Unreal Engine uses DirectX by default. To use NFRU, you must set Vulkan as the rendering hardware interface (RHI):
-
-1. Open **Project Settings** in Unreal Engine.
-2. Navigate to **Platform** > **Windows** > **Targeted RHIs** > **Default RHI**.
+1. Open **Edit > Project Settings**.
+2. Go to **Platforms > Windows > Targeted RHIs > Default RHI**.
 3. Select **Vulkan**.
-4. Restart Unreal Engine to apply the change.
+4. Restart Unreal Editor to apply the change.
 
-    ![Project Settings with Vulkan selected as Default RHI under Targeted RHIs#center](./images/targeted_rhis.png "Set Vulkan as the default RHI")
+    ![Project Settings with Vulkan selected as the default RHI under Targeted RHIs#center](./images/targeted_rhis.png "Set Vulkan as the default RHI")
 
-## Enable the plugin
+## Enable Arm Neural Graphics Plugin 1.1.0
 
 To enable the plugin, follow these steps:
 
-1. Open **Edit** in Unreal Engine and select **Plugins**.
-2. Search for **Neural Rendering** in the Plugins window.
+1. Open **Edit > Plugins**.
+2. Search for **Arm Neural Graphics Plugin 1.1.0**.
+3. Enable the plugin if it is not already enabled, and restart Unreal Editor if prompted.
 
-    ![Unreal Engine Plugins window showing the Neural Rendering search result and a checkbox for enabling the plugin#center](./images/verify_plugin_enabled.png "Enable the Neural Rendering plugin")
+![Unreal Engine Plugins window filtered for Arm, showing the Arm Neural Graphics Plugin enabled with its checkbox selected. This confirms that the plugin is ready to use in the project.#center](./images/confirm_plugin_enabled.png "Arm Neural Graphics Plugin enabled in Unreal Engine")
 
-3. Enable the plugin and restart Unreal Engine.
+## Configure NFRU project settings
+
+Open **Edit > Project Settings > Plugins > Arm Neural Graphics Plugin 1.1.0** to view and configure the NFRU settings stored with the project.
+
+These project settings provide the persistent configuration. You can use the `r.NFRU.*` console variables documented later in this Learning Path to inspect or override NFRU behavior while a supported non-editor build is running.
 
 ## Troubleshoot issues with setup
 
 Use the following guidance to troubleshoot issues with setting up the Unreal project with NFRU.
 
-### "Bad Image" error with ngsdk_windows_x64.dll
+### "Bad Image" error for ngsdk_windows_x64.dll
 
-If you see a "Bad Image" error that mentions `ngsdk_windows_x64.dll`, the Neural Graphics SDK binaries are missing or incompatible.
+If Windows reports a "Bad Image" error for `ngsdk_windows_x64.dll`, check that you copied the complete `neural-graphics-for-unreal` folder from the Arm Neural Graphics Plugin 1.1.0 release. Do not mix plugin files from different releases or Unreal Engine versions.
 
-To fix this:
+![Windows Bad Image error for the Neural Graphics SDK DLL#center](./images/bad_image.png "A Bad Image error can indicate missing or incompatible plugin binaries")
 
-- Build the SDK for your platform using the `buildsdk.bat` script. For more information, see [Build the SDK](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment).
-- Check that `ngsdk_windows_x64.dll` exists in the plugin's `Binaries` directory.
-
-    ![Developer Command Prompt showing that the SDK binaries built successfully.#center](./images/sdk_built_check.png "Successful SDK binary build")
-
-If the error continues, confirm the SDK built without errors and the binaries match your Unreal Engine version and platform. Rebuild the SDK and restart Unreal Engine.
+Replace any incomplete plugin copy with the complete folder from the release archive, regenerate the Visual Studio project files, and rebuild the solution.
 
 ### Vulkan backend support error
 
-If you see a "Plugin only supports Vulkan backend" error, return to the [Change Unreal's rendering hardware interface to Vulkan](#change-unreals-rendering-hardware-interface-to-vulkan) section and confirm Vulkan is set as the default RHI. Restart Unreal Engine after you make this change.
+If you see a "Plugin only supports Vulkan backend" error, confirm that Vulkan is selected under **Platforms > Windows > Targeted RHIs > Default RHI**, then restart Unreal Editor.
 
-![Vulkan backend error message in Unreal Engine#center](./images/rhi_vulkan_error.png "Error shown when Vulkan is not the default RHI")
+![Vulkan backend error message in Unreal Engine#center](./images/rhi_vulkan_error.png "The plugin reports an error when Vulkan is not the active RHI")
 
-## What you've accomplished and what's next
+### Missing Vulkan ML extensions
 
-You've now enabled NFRU, set Vulkan as the default RHI, and activated the plugin.
+If the project starts but NFRU is unavailable, confirm that you installed version 0.10.0 or later of the standalone [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan), Vulkan Configurator is running, the Graph layer is above the Tensor layer, and both emulation layers are active. The Vulkan environment must expose `VK_ARM_data_graph_optical_flow` for the NFRU optical-flow stage.
 
-Next, you'll run Neural Frame Rate Upscaling in Unreal Engine to validate your setup.
+You have now installed and configured Arm Neural Graphics Plugin 1.1.0. Next, cook the project and run a Windows non-editor build to validate NFRU.

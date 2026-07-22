@@ -41,10 +41,11 @@ If the example does not behave as expected, check the following common issues be
 - Check **Edit > Project Settings > Plugins > Arm Neural Graphics Plugin 1.1.0** to confirm that NSS is enabled.
 
 If the Arm Neural Graphics Plugin is enabled but NSS appears to have no effect:
+- Confirm that you installed version 0.10.0 or later of the standalone [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan).
 - Ensure Vulkan Configurator is running.
 - Verify that the correct layer configuration is selected and active.
 - Double-check that:
-  - The emulation layer path is correct
+  - The emulation layer path points to the extracted release's `bin` directory
   - The Graph layer is ordered above the Tensor layer
 
 Refer back to the [emulation layer section](/learning-paths/mobile-graphics-and-gaming/nss-unreal/2-emulation-layer/) for the full Vulkan Configurator setup and validation steps.

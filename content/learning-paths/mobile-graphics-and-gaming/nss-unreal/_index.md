@@ -15,9 +15,7 @@ learning_objectives:
 prerequisites:
     - Windows 11
     - Unreal Engine 4.27 or 5.4 or 5.6 (with the Templates and Feature Pack enabled)
-    - Visual Studio 2019 for Unreal Engine 4.27 (with Desktop Development with C++ and .NET desktop build tools)
-    - Visual Studio 2022 for Unreal Engine 5.4 or 5.6 (with Desktop Development with C++ and .NET desktop build tools)
-    - Vulkan SDK version 1.4.321.0 or later
+    - Visual Studio (with Desktop Development with C++ and .NET desktop build tools)
 
 author: Annie Tallund
 

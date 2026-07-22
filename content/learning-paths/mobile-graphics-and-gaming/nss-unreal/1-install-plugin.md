@@ -21,10 +21,10 @@ It uses a compact neural network to:
 
 Powered by the ML extensions for Vulkan, this new technology delivers smooth, crisp image quality, optimized for **mobile-class hardware** with a **Neural Accelerator** (NX). You’ll be able to render frames at a lower resolution and then upscale them using the technology, which helps you achieve higher frame rates without compromising the visual experience. This is especially useful on mobile, handheld, or thermally limited platforms, where battery life and thermal headroom are critical. It can also deliver improved image quality compared to other upsampling techniques, like spatio-temporal implementations.
 
-Under the hood, the Arm Neural Graphics Plugin runs Neural Super Sampling (NSS) inference through Vulkan using **ML extensions for Vulkan**, which bring machine learning workloads into the graphics pipeline. The Development Kit includes **emulation layers** that simulate the behavior of the extensions on Vulkan compute capable GPUs. These layers allow you to test and iterate without requiring access to NX hardware.
+Under the hood, Arm Neural Graphics Plugin 1.1.0 runs Neural Super Sampling (NSS) inference through Vulkan using **ML extensions for Vulkan**, which bring machine learning workloads into the graphics pipeline. On Vulkan compute-capable GPUs without native support for these extensions, use Arm's standalone [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan). The layers allow you to test and iterate without requiring access to NX hardware.
 
 ## Neural Upscaling in Unreal Engine
 
 With these resources, you can seamlessly integrate NSS into any Unreal Engine project. The setup is designed to work with Vulkan as your rendering backend, and you don’t need to overhaul your workflow - just plug it in and start leveraging ML-powered upscaling right away. The technology is available as a source-code implementation that you will build with Visual Studio.
 
-Proceed to the next section to set up your development environment and enable the Arm Neural Graphics Plugin.
+Proceed to the next section to set up your development environment and enable Arm Neural Graphics Plugin 1.1.0.

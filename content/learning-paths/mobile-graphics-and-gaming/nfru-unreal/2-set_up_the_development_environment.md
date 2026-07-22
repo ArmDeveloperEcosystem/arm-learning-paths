@@ -7,93 +7,64 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
 ## Install the required tools and dependencies
 
 To use Neural Frame Rate Upscaling (NFRU) in your Unreal Engine project, install and configure several tools. These components provide the development environment and runtime support for building and testing NFRU with ML extensions for Vulkan.
 
-Install the following:
+You will install the following:
 
-- [Vulkan SDK](https://vulkan.lunarg.com/sdk/home/) — Required for developing applications that use Vulkan. It includes the Vulkan Configurator, which you use to enable the emulation layers for running ML workloads through Vulkan ML extensions. Install the version 1.4.321.0 or newer.
-- [CMake](https://cmake.org/download/) — A build system that configures and generates project build files. You use CMake to build the Neural Graphics SDK, which compiles the components and dependencies required by the neural graphics plugins and tools. The minimum supported CMake version is 3.21, and the maximum version is 3.31.
-- [`neural-graphics-for-unreal`](https://github.com/arm/neural-graphics-for-unreal/tree/main) — The Unreal Engine integration for the Neural Graphics Development Kit. The `neural-graphics-for-unreal` repository contains the NFRU plugin and resources you need to integrate neural graphics features into Unreal Engine.
-- [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan) — The `neural-graphics-for-unreal` repository includes prebuilt Vulkan ML emulation layers for supported Unreal Engine versions. If you need support for a different version, build the emulation layer from source.
+- **Vulkan SDK 1.4.321.0 or later**. The SDK includes Vulkan Configurator, which you use to activate the ML emulation layers on Windows.
+- **ML Emulation Layer for Vulkan 0.10.0 or later**. The standalone Windows release is available in the `arm/ai-ml-emulation-layer-for-vulkan` repository. Version 0.10.0 or later is required for the NFRU optical-flow extension.
+- **Arm Neural Graphics Plugin 1.1.0**. The plugin sits in the `arm/neural-graphics-for-unreal` repository.
 
-## Set up the neural-graphics-for-unreal repository
+## Install the Vulkan SDK
 
-To clone and set up the `neural-graphics-for-unreal` repository and integrate it with your Unreal Engine project, follow these steps:
+Go to the [Vulkan SDK page](https://vulkan.lunarg.com/sdk/home) and install Vulkan SDK version 1.4.321.0 or later for Windows.
 
-1. Clone the repository:
+The Vulkan SDK supplies the development tools and headers, but NFRU also requires a Vulkan implementation that exposes the ML Extensions for Vulkan used by the plugin. In particular, the NFRU optical-flow path requires `VK_ARM_data_graph_optical_flow`, in addition to the tensor and data graph functionality used for neural inference.
 
-     ```bash
-     git clone https://github.com/arm/neural-graphics-for-unreal.git
-     cd neural-graphics-for-unreal
-     ```
+On a Windows development system without native support for these extensions, use the standalone ML Emulation Layer for Vulkan. The active Vulkan environment must expose `VK_ARM_data_graph_optical_flow`; otherwise, NFRU cannot run its optical-flow stage.
 
-2. Initialize the submodules:
+## Download the ML Emulation Layer for Vulkan
 
-     ```bash
-     git submodule update --init
-     ```
+Go to the [ML Emulation Layer for Vulkan releases](https://github.com/arm/ai-ml-emulation-layer-for-vulkan/releases) and download version 0.10.0 or later of the `Windows_AMD64.zip` archive. Version 0.10.0 added support for `VK_ARM_data_graph_optical_flow`.
 
-3. Initialize Git Large File Storage (LFS):
+Extract the archive. Its `bin` directory contains the Graph and Tensor layer DLLs and their Vulkan manifest files. Keep this directory separate from Arm Neural Graphics Plugin 1.1.0; the plugin and emulation layers are downloaded and installed independently.
 
-     ```bash
-     git lfs install
-     ```
+## Download Arm Neural Graphics Plugin 1.1.0
 
-4. Download the large files using LFS:
+Go to the [Arm Neural Graphics Plugin releases](https://github.com/arm/neural-graphics-for-unreal/releases) and download the 1.1.0 release `.zip` file. Extract the archive on your Windows system.
 
-     ```bash
-     git lfs pull
-     ```
+Keep the extracted `neural-graphics-for-unreal` folder intact. You will copy this complete folder into your Unreal project's `Plugins` directory in the next section.
 
-5. Select your Unreal Engine version and build the SDK:
+## Configure the Vulkan ML emulation layers
 
-     ```bash
-     cd [UEVersion]
-     BuildSDK.bat
-     ```
+Vulkan Configurator is installed with the Vulkan SDK. Use it to activate the emulation layers before you run the Windows non-editor build.
 
-## Configure Vulkan emulation layers
+1. Launch **Vulkan Configurator** from the Windows **Start** menu.
 
-The Vulkan Configurator (`vkconfig-gui`) is a tool included with the LunarG Vulkan SDK that you can use to manage Vulkan layers and runtime settings.
+2. Add a **user-defined Vulkan layer path** that points to the `bin` directory in the extracted standalone emulation-layer release:
 
-Enable the ML emulation layers for Vulkan to test neural graphics features such as NFRU during development without hardware with a dedicated neural accelerator.
+    ```text
+    <extracted-emulation-layer>\bin
+    ```
 
-To emulate the ML extensions for Vulkan:
+    ![Add a user-defined Vulkan layer path in Vulkan Configurator#center](./images/append_user_defined_layer_path.png "Add the standalone emulation layer's bin directory")
 
-1. Launch the **Vulkan Configurator** from the Windows **Start** menu.
+3. Verify that these layers appear in the list:
 
-2. Add a user-defined Vulkan layer path to locate the prebuilt Vulkan emulation binaries.
+    - `VK_LAYER_ML_Graph_Emulation`
+    - `VK_LAYER_ML_Tensor_Emulation`
 
-     ![Vulkan Configurator Vulkan Layers Location tab with the folder-add button highlighted for adding a user-defined layer path#center](./images/append_user_defined_layer_path.png "Add the prebuilt Vulkan emulation layer path")
+    ![Vulkan Configurator showing the loaded emulation layers#center](./images/loaded_layers.png "Confirm that both Vulkan ML emulation layers are available")
 
-3. Select the `neural-graphics-for-unreal/[UEVersion]/Binaries/ThirdParty/VulkanMLEmulation/Win64` folder.
+4. Switch to the **Vulkan Loader Management** tab. Make sure the Graph layer is above the Tensor layer, enable both layers, and apply the configuration.
 
+    ![Vulkan Configurator showing the Graph layer above the Tensor layer#center](./images/verify_layers.png "Verify the emulation layer ordering")
 
-     A **Loading Layer Completed** dialog appears, showing that two layer manifests loaded successfully.
-
-     ![Loading Layers Completed dialog confirming that two layer manifests were added from the Vulkan ML emulation Win64 folder#center](./images/add_prebuilt_vulkan_emulation_layer_path.png "Vulkan emulation layers loaded successfully")
-
-4. Verify that the following layers appear in the list:
-
-     - `VK_LAYER_ML_Graph_Emulation`
-     - `VK_LAYER_ML_Tensor_Emulation`
-
-     ![Vulkan Configurator layer list showing the Graph and Tensor emulation layers loaded from the selected folder#center](./images/loaded_layers.png "Loaded Vulkan emulation layers")
-
-5. Switch to the **Vulkan Loader Management** tab. Ensure the **Graph** layer is listed *before* the **Tensor** layer and configure the layer scope as follows:
-
-     ![Vulkan Loader Management tab with Validation selected and the Graph and Tensor emulation layers enabled, with Graph ordered before Tensor#center](./images/verify_layers.png "Graph layer ordered before Tensor")
-
-{{% notice Note %}}
-Keep the Vulkan Configurator running in the background while you complete the next steps.
+{{% notice Before you move on %}}
+Keep Vulkan Configurator running with this configuration active whenever you launch the NFRU Windows executable.
 {{% /notice %}}
 
-## What you've accomplished and what's next
-
-You've now installed required dependencies, set up the `neural-graphics-for-unreal` repository, and configured Vulkan emulation layers.
-
-With the ML emulation layers configured, Vulkan runs machine learning workloads using ML extensions for Vulkan. Neural inference runs alongside the graphics pipeline during development, even on systems without dedicated neural acceleration hardware.
-
-Next, you'll integrate NFRU into an Unreal Engine project. You'll enable the neural graphics plugin and create an example scene to verify the setup and observe NFRU in action.
+With the Vulkan requirements in place, you can install Arm Neural Graphics Plugin 1.1.0 in your Unreal Engine project.

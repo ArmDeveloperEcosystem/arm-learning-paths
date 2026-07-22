@@ -6,23 +6,51 @@ weight: 6
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Set console variables for NFRU
+
+## Configure the plugin through Project Settings
+
+In Development Editor, open **Edit > Project Settings > Plugins > Arm Neural Graphics Plugin 1.1.0** to configure the NFRU settings stored with the project.
+
+After you save a setting that affects shaders or assets, cook the Windows content again. Then close the editor and run a Development, DebugGame, or Debug non-editor executable to observe the result. NFRU does not run in an Editor build.
+
+## Configure the running build with console variables
 
 The following table summarizes key console variables for Neural Frame Rate Upscaling (NFRU) in Unreal Engine. These variables control enablement, debugging, performance tuning, and frame generation modes. Adjust them to optimize NFRU behavior for your development, testing, and performance needs.
 
-| Console Variable                  | Type | Default Value           | Description                                                                                                  | Notes                   |
-|-----------------------------------|------|-------------------------|---------------------------------------------------------------------------------------------------------------|-------------------------|
-| `r.NFRU.Enable`                    | int  | 0                       | Enables NFRU features. To activate NFRU, set this variable to `1`.                                                                                       | —                       |
-| `r.NFRU.CaptureDebugUI`            | int  | 1 (non-shipping builds) | Captures debug UI rendered on the first Slate DrawWindow call to help debug overlays                                              | Non-shipping builds only|
-| `r.NFRU.UpdateGlobalFrameTime`     | int  | 0                       | Includes interpolated frames in global frame time and FPS calculations to ensure performance metrics reflect NFRU's impact                                   | —                       |
-| `r.NFRU.ModifySlateDeltaTime`      | int  | 1                       | Sets Slate's delta time to `0.0` during UI redraws in Slate Redraw UI mode to avoid NativeTick side effects    | Slate Redraw UI mode    |
-| `r.NFRU.PaceAdjuster`              | int  | 0                       | Enables FPS Pace Adjuster for dynamic target FPS adjustment based on real performance for smoother pacing                                           | —                       |
-| `r.NFRU.UpAdjustFrameCount`        | int  | 40                      | Frames above target FPS needed to increase FPS when Pace Adjuster is active. Controls how quickly the Pace Adjuster responds to sustained FPS changes                                  | Requires Pace Adjuster  |
-| `r.NFRU.DownAdjustFrameCount`      | int  | 20                      | Frames below target FPS needed to decrease FPS when Pace Adjuster is active. Controls how quickly the Pace Adjuster responds to sustained FPS changes                                | Requires Pace Adjuster  |
-| `r.NFRU.DataGraphOpticalFlow`      | int  | 1                       | Selects optical flow method. Set the value as `0` for Data Graph to be the preferred method, `1` for Data Graph to be the only method, and `2` for a shader-based approach                 | Unreleased builds only  |
-| `r.NFRU.DataGraphFrameGeneration`  | int  | 1                       | Selects frame generation method. Set the value as `0` for NFRU, `1` for Neural, and `2` for a shader-based approach                                   | Unreleased builds only  |
-| `r.NFRU.OnlyInterpolatedFrames`    | int  | 0                       | Presents only interpolated frames for debugging and validating results                                                              | Dev/Test builds only    |
-| `r.NFRU.ShowDebugView`             | int  | 0                       | Shows debug visualization of frame interpolation                                                             | Dev/Test builds only    |
+| Console variable | Type | Default | Description | Notes |
+|---|---|---|---|---|
+| `r.NFRU.Enable` | int | 0 | Enables NFRU when set to `1`. | — |
+| `r.NFRU.CaptureDebugUI` | int | 1 | Captures debug UI rendered on the first Slate `DrawWindow` call. | Non-shipping builds only |
+| `r.NFRU.UpdateGlobalFrameTime` | int | 0 | Includes interpolated frames in global frame-time and FPS calculations. | — |
+| `r.NFRU.ModifySlateDeltaTime` | int | 1 | Sets the Slate delta time to zero during UI redraws to avoid `NativeTick` side effects. | Slate Redraw UI mode |
+| `r.NFRU.PaceAdjuster` | int | 0 | Enables dynamic target-FPS adjustment. | Set to `1` to enable |
+| `r.NFRU.UpAdjustFrameCount` | int | 40 | Sets how many frames above the target are required before the Pace Adjuster increases the target FPS. | Requires `r.NFRU.PaceAdjuster 1` |
+| `r.NFRU.DownAdjustFrameCount` | int | 20 | Sets how many frames below the target are required before the Pace Adjuster decreases the target FPS. | Requires `r.NFRU.PaceAdjuster 1` |
+| `r.NFRU.DataGraphOpticalFlow` | int | 1 | Selects the optical-flow method: `0` = Data Graph preferred, `1` = Data Graph only, `2` = shader-based. | Availability depends on the plugin build |
+| `r.NFRU.DataGraphFrameGeneration` | int | 1 | Selects frame generation: `0` = NFRU preferred, `1` = neural, `2` = shader-based. | Availability depends on the plugin build |
+| `r.NFRU.OnlyInterpolatedFrames` | int | 0 | Presents only interpolated frames for debugging. | Development and test builds only |
+| `r.NFRU.ShowDebugView` | int | 0 | Displays the NFRU intermediate-buffer grid. | Development and test builds only |
+
+For example, enable NFRU and display its debug view with:
+
+```console
+r.NFRU.Enable 1
+r.NFRU.ShowDebugView 1
+```
+
+## Tune frame pacing
+
+Enable the Pace Adjuster when you want NFRU to change its target FPS in response to sustained performance changes:
+
+```console
+r.NFRU.PaceAdjuster 1
+r.NFRU.UpAdjustFrameCount 40
+r.NFRU.DownAdjustFrameCount 20
+```
+
+`r.NFRU.UpAdjustFrameCount` controls how long performance must remain above the current target before the target increases. `r.NFRU.DownAdjustFrameCount` controls how long performance must remain below the target before it decreases. Larger values make the adjustment less reactive; smaller values make it respond sooner.
+
+Use `stat FrameGen` while you tune these values. Compare the generated and paced statistics to determine whether the application produces frames consistently and whether presentation pacing matches the intended cadence.
 
 ## Monitor frame generation performance with STATGROUP_FrameGen
 
@@ -34,16 +62,16 @@ Run the following command in the Unreal Engine console:
 stat FrameGen
 ```
 
-![Screenshot of the Unreal Engine console showing the output of the `stat FrameGen` command, highlighting NFRU performance metrics#center](./images/stat_framegen.png "NFRU performance metrics from stat FrameGen")
+![Unreal console output from the stat FrameGen command#center](./images/stat_framegen.png "Monitor NFRU frame generation and pacing with stat FrameGen")
 
 This command displays runtime metrics such as generated frame rate, generation time, and pacing information. Use these values to assess both internal frame generation performance and final frame pacing.
 
-| Stat Name       | Stat ID                      | Description |
-|-----------------|-----------------------------|-------------|
-| Generated FPS   | `STAT_FrameGen_GeneratedFPS` | Frames per second produced by the frame generator (interpolated or generated frames). Should match engine FPS from `stat FPS`. |
-| Generated Ms    | `STAT_FrameGen_GeneratedMs`  | Average time (ms) to generate an interpolated frame. Should match the engine’s `FrameTime`. |
-| Paced FPS       | `STAT_FrameGen_PacedFPS`     | Presentation-paced FPS, reflecting any swap chain pacing applied to generated frames. Useful for evaluating final upsampled frame rate. |
-| Paced Ms        | `STAT_FrameGen_PacedMs`      | Average time (in milliseconds) between paced frame presentations, reflecting wall-clock intervals with pacing or VSync. |
+| Stat | Stat ID | Description |
+|---|---|---|
+| Generated FPS | `STAT_FrameGen_GeneratedFPS` | Frames per second produced by the frame generator. Compare this value with the engine FPS from `stat FPS`. |
+| Generated Ms | `STAT_FrameGen_GeneratedMs` | Average time in milliseconds to generate an interpolated frame. |
+| Paced FPS | `STAT_FrameGen_PacedFPS` | Presentation-paced FPS after swap-chain pacing is applied. |
+| Paced Ms | `STAT_FrameGen_PacedMs` | Average wall-clock time in milliseconds between paced frame presentations. |
 
 ### Interpret frame generation statistics
 

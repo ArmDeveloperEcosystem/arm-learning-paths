@@ -10,7 +10,7 @@ With the Arm Neural Graphics Plugin, you’re set up to explore real-time neural
 
 You’ve covered:
 - Understanding the role of **ML Extensions for Vulkan** and how emulation layers let you run everything without needing dedicated ML hardware
-- Installing the **Vulkan SDK** and enabling ML Emulation Layer for Vulkan using Vulkan Configurator
+- Installing the **Vulkan SDK** and enabling the standalone [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan) using Vulkan Configurator
 - Setting up the **Arm Neural Graphics Plugin** and visualizing the NSS model output
 - Inspecting the **NSS model** in VGF on Hugging Face
 
