@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you will install a few dependencies into your Ubuntu environment. You'll need a working Python 3.10+ environment with some ML and system dependencies. 
+In this section, you will install dependencies into an Ubuntu 22.04 or later environment. You'll need Python 3.10, 3.11, or 3.12, CUDA Toolkit v13.1.1 or later, and some ML and system dependencies.
 
-Start by making sure Python is installed by verifying that the version is >3.10:
+Start by making sure a supported Python version is installed:
 
 ```bash
 python3 --version
@@ -32,13 +32,14 @@ git clone https://github.com/arm/neural-graphics-model-gym-examples.git
 cd neural-graphics-model-gym-examples
 ```
 
-From inside the `neural-graphics-model-gym-examples/` folder, run the setup script:
+From inside the `neural-graphics-model-gym-examples/` folder, run the environment creation script:
 
 ```bash
 python create_env.py
 ```
 
 This will do the following:
+
 - Create a Python virtual environment called `nb-env`
 - Install the `ng-model-gym` package and required dependencies
 - Download the datasets and weights needed to run the notebooks
@@ -60,4 +61,3 @@ print("Model Gym version:", ng_model_gym.__version__)
 ```
 
 You’ve completed your environment setup - great work! You’re now ready to start walking through the training and evaluation steps.
-
