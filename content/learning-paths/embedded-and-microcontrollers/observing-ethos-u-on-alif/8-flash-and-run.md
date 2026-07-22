@@ -42,9 +42,9 @@ Memory region         Used Size  Region Size  %age Used
             MRAM:      291008 B         2 MB     13.88%
 ```
 
-## Flash the pplication
+## Flash the application
 
-Press F1, select **Tasks: Run Task**. then select **Program with Security Toolkit (select COM port)**. Choose the DevKit's port when prompted.
+Open the Command Palette (`Ctrl+Shift+P` on Windows/Linux or `Cmd+Shift+P` on macOS), select **Tasks: Run Task**, then select **Program with Security Toolkit (select COM port)**. Choose the DevKit's port when prompted.
 Flashing takes about 30 seconds.
 
 ## Start the J-Link RTT server
@@ -101,3 +101,9 @@ Predicted digit: ...
 ```
 
 The predicted digit depends on the image you converted in the previous section.
+
+## Summary
+
+You have built and flashed a CMSIS-based firmware application that embeds an ExecuTorch `.pte` model, runs MNIST inference on the Ethos-U85 NPU, and reports the result through SEGGER RTT.
+
+You can extend this project by trying different MNIST images, retraining the model, or replacing MNIST with a different model, such as one trained to classify handwritten letters instead of digits.

@@ -13,9 +13,6 @@ This section exports an MNIST PyTorch model to ExecuTorch `.pte` format for the 
 If you are using the provided `.pte` file, you can skip this section.
 {{% /notice %}}
 
-The Docker container is used for this step. Files written to `/home/developer/output` in the container appear on your host machine in `~/mnist_alif/executorch-alif/output`.
-
-
 ## Start your container
 
 Ensure you are inside your container and load up the Executorch environment:
@@ -49,31 +46,53 @@ curl -L -o /home/developer/models/mnist_model.py https://raw.githubusercontent.c
 curl -L -o /home/developer/models/train_mnist.py https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/main/train_mnist.py
 ```
 
+The model script (`mnist_model.py`) defines a small convolutional network for 28 x 28 grayscale MNIST images. It has two convolution blocks followed by two fully connected layers:
+```python
+def __init__(self):
+        super().__init__()
+        self.conv1 = nn.Conv2d(1, 16, kernel_size=3, stride=1, padding=1)
+        self.relu1 = nn.ReLU()
+        self.pool1 = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1)
+        self.relu2 = nn.ReLU()
+        self.pool2 = nn.MaxPool2d(kernel_size=2, stride=2)
+        # Fully Connected Layers
+        self.fc1 = nn.Linear(32 * 7 * 7, 64)
+        self.relu3 = nn.ReLU()
+        self.fc2 = nn.Linear(64, 10)
+```
+The convolution layers extract image features such as strokes, edges, and digit shapes. Each output channel from a convolution is called a **feature map**.
+Layer 1 (`fc1`) takes in 32 feature maps of size 7 x 7 each, and reduces those values to 64 features. 
+The final layer (`fc2`) then maps those 64 features to 10 digit scores (0 to 9).
+
+The same file also exposes the objects expected by the ExecuTorch ahead-of-time compiler:
+```python
+ModelUnderTest = MNISTModel() # PyTorch model to export
+ModelInputs = (load_calibration_input(),) 
+```
+
+The training script, however, downloads the [MNIST dataset](https://datasetsearch.research.google.com/search?query=mnist&docid=L2cvMTF0ZGh0cHRmMA%3D%3D), normalizes the images, trains the model, and saves the trained weights to:
+```text
+/home/developer/models/mnist_model.pth
+```
 <!-- {{% notice Note %}}
 The model input is a normalized float32 tensor with shape [1, 1, 28, 28]. The output is 10 logits, one for each digit from 0 to 9.
 {{% /notice %}} -->
 
 ## Add calibration input
 
-The model is exported with int8 quantization, so the compiler needs a representative MNIST input during export. This input is not the image that runs on the board. It is only used to set quantization ranges when generating the `.pte` file.
+The model is exported with int8 quantization, so the compiler needs a representative MNIST input during export. 
+This input is not the image that runs on the board. It is only used to set quantization ranges when generating the `.pte` file.
+
+Download the calibration sample:
 ```bash
 curl -L -o /home/developer/output/sample_one.pt https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/main/sample_one.pt
 ```
 
-Verify the calibration input:
-```bash
-python3 - << 'EOF'
-import torch
-x = torch.load("/home/developer/output/sample_one.pt", map_location="cpu")
-print(x.shape)
-print(x.dtype)
-EOF
-```
-Expected output:
-```output
-torch.Size([1, 1, 28, 28])
-torch.float32
-```
+The file downloaded contains one normalized MNIST-style grayscale image, saved as a PyTorch tensor (`.pt`) with shape `[1, 1, 28, 28]` and type `float32`. 
+This allows `mnist_model.py` to load the exact format it needs without any image preprocessing step.
+
+For production-quality quantization, you would normally calibrate with a larger and more diverse set of representative inputs. This Learning Path uses one sample to keep the export flow small and reproducible.
 
 ## Train the model
 
@@ -108,15 +127,18 @@ cd $ET_HOME
 MNIST_LOAD_CHECKPOINT=1 python3 -m examples.arm.aot_arm_compiler --model_name=/home/developer/models/mnist_model.py --delegate --quantize --target=ethos-u85-256 --system_config=Ethos_U85_SYS_DRAM_Mid --memory_mode=Shared_Sram --output=/home/developer/output/mnist_ethos_u85.pte
 ```
 
+Argument definitions:
+- `MNIST_LOAD_CHECKPOINT=1`: loads the trained weights from /home/developer/models/mnist_model.pth.
+- `--model_name`: points to the PyTorch model definition.
+- `--delegate`: partitions supported operators for execution on the Ethos-U NPU.
+- `--quantize`: converts the model for int8 inference.
+- `--target=ethos-u85-256`: targets an Ethos-U85 configuration with 256 MACs per cycle.
+- `--system_config` and `--memory_mode`: selects the Vela memory configuration used when compiling the NPU command stream.
+- `--output`: writes the exported ExecuTorch program.
+
 {{% notice Important %}}
 Use full paths such as `/home/developer/models/mnist_model.py`. Do not use `~` in the export command.
 {{% /notice %}}
-
-Verify the exported file:
-
-```bash
-ls -lh /home/developer/output/mnist_ethos_u85.pte
-```
 
 ## Build ExecuTorch static libraries
 
@@ -165,4 +187,9 @@ Because `/home/developer/output` is mounted from your host machine, `et_bundle.t
 
 ```text
 ~/mnist_alif/executorch-alif/output/et_bundle.tar.gz
+```
+
+You may now exit Docker:
+```bash
+exit
 ```

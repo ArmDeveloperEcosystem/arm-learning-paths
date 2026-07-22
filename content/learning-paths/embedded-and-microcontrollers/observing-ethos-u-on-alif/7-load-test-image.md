@@ -67,8 +67,15 @@ Download `prepare_mnist_image.py` into the image directory:
 
 ```bash
 cd ~/mnist_alif/image
-curl -o prepare_mnist_image.py https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/refs/heads/main/prepare_mnist_image.py
+curl -o prepare_mnist_image.py https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/main/prepare_mnist_image.py
 ```
+
+The script converts the image to 28 x 28 grayscale pixels, scales each pixel into the int8 range used by the firmware input, then writes the values as a C array:
+```python
+pixels = np.clip(np.rint(pixels * 127.0 / 255.0), 0, 127).astype(np.int8)
+flat = pixels.reshape(-1)
+```
+The generated header will contain a total of 784 values, one for each pixel in the 28 x 28 input image.
 
 ## Generate the input header
 
@@ -99,6 +106,8 @@ Get-Item .\input_mnist.h
 Get-Content .\input_mnist.h -TotalCount 8
   {{< /tab >}}
 {{< /tabpane >}}
+
+Open `input_mnist.h` and look at the generated `input_mnist` array. This is the numeric pixel data that `main.cpp` passes into the ExecuTorch runner.
 
 ## Copy the header into the firmware project
 

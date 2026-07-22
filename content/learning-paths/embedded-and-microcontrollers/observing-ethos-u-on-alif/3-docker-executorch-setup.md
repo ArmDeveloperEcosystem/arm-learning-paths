@@ -122,7 +122,7 @@ Verify the image:
 docker images
 ```
 
-The output shopuld include:
+The output should include:
 ```output
 executorch-alif    latest
 ```
@@ -213,11 +213,13 @@ pip install 'lxml>=4.7.1,<6.0.1'
 ```bash
 cd $ET_HOME
 # Install ExecuTorch in editable mode
-pip install --no-build-isolation -e .
+CMAKE_BUILD_PARALLEL_LEVEL=2 pip install --no-build-isolation -e .
 ```
 
 {{% notice Note %}}
-The `--no-build-isolation` flag is required so ExecuTorch finds the PyTorch installation from `install_requirements.sh`.
+The `--no-build-isolation` flag is required so ExecuTorch finds the PyTorch installation from `install_requirements.sh`. 
+
+`CMAKE_BUILD_PARALLEL_LEVEL=2` limits the number of parallel CMake build jobs during installation. This reduces peak memory usage and helps avoid out-of-memory failures.
 {{% /notice %}}
 
 Verify the installation:

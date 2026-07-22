@@ -1,13 +1,13 @@
 ---
-title: Observing Ethos-U85 NPU on Alif E8 with MNIST Inference
+title: Run OCR (MNIST) on Alif E8 Ensemble DevKit using ExecuTorch and Ethos-U85
 
-minutes_to_complete: 90
+minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for embedded developers and ML engineers who want to run TinyML inference on physical hardware with Arm Ethos-U85 NPU acceleration.
 
 learning_objectives:
     - Set up the Alif Ensemble E8 development kit for ML applications
-    - Train, compile and export an MNIST PyTorch model to ExecuTorch .pte format using a Docker container
+    - (Optional) Train, compile and export an MNIST PyTorch model to ExecuTorch .pte format using a Docker container
     - Configure CMSIS project files, memory layout, and linker scripts for an ML workload on the Alif Ensemble E8
     - Build and flash firmware to the Alif Ensemble E8 DevKit
     - Run MNIST digit classification on Ethos-U85 NPU
@@ -52,6 +52,10 @@ further_reading:
     - resource:
         title: Introduction to TinyML on Arm using PyTorch and ExecuTorch
         link: /learning-paths/embedded-and-microcontrollers/introduction-to-tinyml-on-arm/
+        type: documentation
+    - resource:
+        title: Run image classification on an Alif Ensemble E8 DevKit using ExecuTorch and Ethos-U85
+        link: /learning-paths/embedded-and-microcontrollers/alif-image-classification/
         type: documentation
     - resource:
         title: Visualize Ethos-U NPU performance with ExecuTorch on Arm FVPs

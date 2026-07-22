@@ -25,19 +25,21 @@ New-Item -ItemType Directory -Force -Path ~\mnist_alif
 SETOOLS (Secure Enclave Tools) is Alif's toolset for flashing firmware to MRAM via the Secure Enclave.
 
 - Download the SETOOLS package from the [Alif Ensemble E8 DevKit support page](https://alifsemi.com/support/kits/ensemble-e8devkit/) and extract it to `~/mnist_alif`.
+Make sure to edit the command below with the name of your `.tar` or `.zip` file.
 {{< tabpane code=true >}}
   {{< tab header="macOS / Linux" language="bash" >}}
 cd ~/Downloads
-tar xvf replace_with_your_alif_security_toolkit_download.tar -C ~/mnist_alif
+tar xvf <replace_with_your_alif_security_toolkit_download.tar> -C ~/mnist_alif
   {{< /tab >}}
 
   {{< tab header="Windows (PowerShell)" language="powershell" >}}
 cd ~/Downloads
-Expand-Archive .\replace_with_your_alif_security_toolkit_download.zip -DestinationPath ~\mnist_alif
+Expand-Archive <.\replace_with_your_alif_security_toolkit_download.zip> -DestinationPath ~\mnist_alif
   {{< /tab >}}
 {{< /tabpane >}}
 
 - Verify the installation. The extracted folder name can vary by SETOOLS release. The commands below assume the package extracts to `app-release-exec-*`.
+Each command should print a `usage:` message. If either command fails, check that you are in the extracted SETOOLS directory for your operating system.
 {{< tabpane code=true >}}
   {{< tab header="macOS" language="bash" >}}
 cd ~/mnist_alif/app-release-exec-macos
@@ -57,7 +59,7 @@ cd ~\mnist_alif\app-release-exec-windows
 {{< /tabpane >}}
 
 {{% notice Important %}}
-On macOS, the system may block the unsigned binary the first time you run it. If this happens, open **System Settings** or **System Preferences**, go to **Privacy & Security**, and select **Allow Anyway**. Then run the command again.
+On macOS, the system may block the unsigned binary the first time you run it. If this happens, open **System Settings** or **System Preferences**, go to **Privacy & Security**, and select **Allow Anyway**. Then run the command again. (You may need to reapprove for both ./app-* commands)
 {{% /notice %}}
 
 
@@ -70,7 +72,6 @@ Version 7.94 or later is required for Alif Ensemble E8 support.
   {{< tab header="macOS" language="bash">}}
 brew install --cask segger-jlink
 JLinkExe --version
-# Expected output: SEGGER J-Link Commander V7.94 or later
   {{< /tab >}}
   {{< tab header="Linux" language="bash">}}
 wget https://www.segger.com/downloads/jlink/JLink_Linux_x86_64.deb
@@ -113,14 +114,18 @@ The recommended VS Code extensions are listed in .vscode/extensions.json. If you
 Restart VS Code if prompted.
 
 ## Install CMSIS packs
+CMSIS (Common Microcontroller Software Interface Standard) is a set of APIs, software components, and metadata that simplifies development on Arm Cortex-M processors. 
+Installing the CMSIS pack will provide the device definitions, startup files, drivers, and middleware components we need for our Alif E8 target. To install, follow these steps:
 
 In VS Code, open the Command Palette using **Ctrl+Shift+P** on Windows/Linux or **Command+Shift+P** on macOS.
 
-Run **Tasks: Run Task**, then select **First time pack installation**. When prompted, press **A** to accept all licenses.
+Click **Tasks: Run Task**, then select **First time pack installation**. When prompted, press **A** to accept all licenses.
 
 If the task does not appear, run **Developer: Reload Window** from the Command Palette and try again.
 
 ## Configure VS Code settings
+
+VS Code need to know where the external Alif SETOOLS and SEGGER J-Link tools are installed.
 
 Open the Command Palette and run **Preferences: Open User Settings (JSON)**.
 

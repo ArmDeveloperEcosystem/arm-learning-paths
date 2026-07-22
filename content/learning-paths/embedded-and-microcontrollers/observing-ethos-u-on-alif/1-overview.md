@@ -6,7 +6,7 @@ layout: learningpathall
 
 ## Overview
 
-[MNIST](https://en.wikipedia.org/wiki/MNIST_database), widely classified as the "Hello World" of machine learing, is a dataset containing 70,000 28x28 pixel grayscale images of handwritten digits 0-9. It is commonly used for training image processing systems.
+[MNIST](https://en.wikipedia.org/wiki/MNIST_database), widely classified as the "Hello World" of machine learning, is a dataset containing 70,000 28x28 pixel grayscale images of handwritten digits 0-9. It is commonly used for training image processing systems.
 
 In this Learning Path, you will run an MNIST digit-classification model on the Arm Ethos-U85 NPU. You can either use the provided `.pte` model or follow an optional walkthrough to train and export your own MNIST model. 
 

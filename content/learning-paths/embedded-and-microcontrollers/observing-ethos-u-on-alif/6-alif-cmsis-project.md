@@ -66,7 +66,7 @@ Copy-Item ~\mnist_alif\executorch-alif\output\mnist_model_data.h .\mnist_executo
 
 ## Create the SEGGER RTT configuration
 
-RTT (Real-Time Transfer) works through the J-Link debug probe, reading and writing a memory buffer through the debug interface. It's faster than UART and doesn't require extra wiring. Within your project folder in the vscode template, create the configuration file `mnist_executorch/SEGGER_RTT_Conf.h`:
+RTT (Real-Time Transfer) works through the J-Link debug probe, reading and writing a memory buffer through the debug interface. It's faster than UART and doesn't require extra wiring. Within `mnist_executorch/`, create the configuration file `SEGGER_RTT_Conf.h`:
 
 ```c
 #ifndef SEGGER_RTT_CONF_H
@@ -82,7 +82,9 @@ RTT (Real-Time Transfer) works through the J-Link debug probe, reading and writi
 
 ## Update the solution file
 
-Open `alif.csolution.yml` and make the following changes.
+The `alif.csolution.yml` file describes the whole CMSIS workspace: available projects, targets, devices, packs, and flash settings.
+
+Open it and make the following changes.
 
 Update the `created-for` field to match your CMSIS Toolbox version:
 
@@ -129,7 +131,8 @@ Add `mnist_executorch` to the projects list. It's at the bottom of the file:
 
 ## Configure the project file
 
-Replace the contents of `mnist_executorch/mnist_executorch.cproject.yml` with the following configuration:
+The `mnist_executorch/mnist_executorch.cproject.yml` file describes our MNIST application: its source files, components, include paths, and build options.
+Locate this file and replace the contents with the following configuration:
 
 ```yaml
 # yaml-language-server: $schema=https://raw.githubusercontent.com/Open-CMSIS-Pack/devtools/tools/projmgr/2.6.0/tools/projmgr/schemas/cproject.schema.json
@@ -235,6 +238,7 @@ curl -o main.cpp https://raw.githubusercontent.com/arm-education/alif-ethos-u85-
 curl -o executorch_runner.cpp  https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/refs/heads/main/mnist_executorch/executorch_runner.cpp
 curl -o executorch_runner.h https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/refs/heads/main/mnist_executorch/executorch_runner.h
 ```
+After downloading the files, open them in VS Code and briefly review how `main.cpp` calls into `executorch_runner.cpp` to initialize ExecuTorch, pass in the MNIST input tensor, and read back the model output.
 
 ## Update the linker script
 
