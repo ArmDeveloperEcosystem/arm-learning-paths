@@ -1,0 +1,465 @@
+html[theme='light'] {
+    color-scheme: light;
+    --learn-background: var(--ads-ui-gray-05, #f9f9f9);
+    --learn-surface: #ffffff;
+    --learn-surface-muted: var(--ads-ui-gray-10, #f0f0f0);
+    --learn-border: var(--ads-ui-gray-40, #d4d4d4);
+    --learn-border-strong: var(--ads-ui-gray-60, #a9a9a9);
+    --learn-text: var(--ads-brand-arm-ink, #080225);
+    --learn-text-muted: var(--ads-ui-ink-65, #484848);
+    --learn-link: var(--ads-brand-horizon-blue, #0057ff);
+    --learn-link-hover: var(--ads-ui-blue-105, #004ee6);
+    --learn-accent: var(--ads-brand-horizon-blue, #0057ff);
+    --learn-accent-hover: var(--ads-ui-blue-105, #004ee6);
+    --learn-accent-soft: var(--ads-ui-blue-10, #e6eeff);
+    --learn-brand-gradient: linear-gradient(115deg, #0057ff 0%, #3379ff 58%, #80abff 100%);
+    --learn-shadow: 0 10px 30px rgba(8, 2, 37, 0.08);
+    --learn-shadow-hover: 0 18px 42px rgba(0, 87, 255, 0.18);
+
+    --ads-color: var(--learn-text);
+    --ads-heading-color: var(--learn-text);
+    --ads-link-color: var(--learn-link);
+    --ads-table-border-color: var(--learn-border);
+}
+
+html[theme='dark'] {
+    color-scheme: dark;
+}
+
+html[theme='light'] body {
+    color: var(--learn-text);
+    background: var(--learn-background);
+    background-image: none;
+}
+
+html[theme='light'] #global-nav-height-fixer {
+    background: #ffffff;
+    background-color: #ffffff;
+}
+
+html[theme='light'] body.home-page {
+    background-image:
+        radial-gradient(circle at 8% 8%, rgba(0, 87, 255, 0.1), transparent 25rem),
+        radial-gradient(circle at 92% 20%, rgba(128, 171, 255, 0.24), transparent 31rem),
+        linear-gradient(180deg, #ffffff 0, var(--learn-background) 34rem);
+    background-repeat: no-repeat;
+}
+
+html[theme='light'] a {
+    color: var(--learn-link);
+}
+
+html[theme='light'] a:hover {
+    color: var(--learn-link-hover);
+}
+
+html[theme='light'] ads-button {
+    --ads-button-background-color-primary: var(--learn-accent);
+    --ads-button-background-color-primary-hover: var(--learn-accent-hover);
+    --ads-button-border-color-primary: var(--learn-accent);
+    --ads-button-border-color-primary-hover: var(--learn-accent-hover);
+    --ads-button-color-primary: #ffffff;
+    --ads-button-color-primary-hover: #ffffff;
+    --ads-button-color-secondary-hover: var(--learn-link-hover);
+    --ads-button-color-tertiary-hover: var(--learn-link-hover);
+}
+
+html[theme='light'] ads-cta-button {
+    --ads-cta-button-background-color-primary: var(--learn-accent);
+    --ads-cta-button-background-color-primary-hover: var(--learn-accent-hover);
+    --ads-cta-button-border-color-primary: var(--learn-accent);
+    --ads-cta-button-border-color-primary-hover: var(--learn-accent-hover);
+    --ads-cta-button-color-primary: #ffffff;
+    --ads-cta-button-color-primary-hover: #ffffff;
+    --ads-cta-button-color-secondary-hover: var(--learn-link-hover);
+    --ads-cta-button-color-tertiary-hover: var(--learn-link-hover);
+}
+
+html[theme='light'] ads-cta-link {
+    --ads-cta-link-color-hover: var(--learn-link-hover);
+}
+
+html[theme='light'] ads-tag {
+    --ads-tag-color-hover: var(--learn-link-hover);
+}
+
+html[theme='light'] ads-search {
+    --ads-search-background-color: var(--learn-surface);
+    --ads-search-input-background-color: var(--learn-surface);
+    --ads-search-input-background-color-hover: var(--learn-surface);
+    --ads-search-input-background-color-fill-hover: var(--learn-surface);
+    --ads-search-border-color: var(--learn-border-strong);
+    --ads-search-border-color-hover: var(--learn-accent);
+    --ads-search-border-color-focus: var(--learn-accent);
+    --ads-search-input-color: var(--learn-text);
+    --ads-search-input-color-focus: var(--learn-text);
+    --ads-search-input-placeholder-color: var(--learn-text-muted);
+    --ads-search-icon-color: var(--learn-text-muted);
+    --ads-search-button-background-color: var(--learn-accent);
+    --ads-search-button-background-color-hover: var(--learn-accent-hover);
+    --ads-search-button-background-color-focus: var(--learn-accent-hover);
+    --ads-search-button-color: #ffffff;
+    --ads-search-button-color-hover: #ffffff;
+    --ads-search-button-color-focus: #ffffff;
+}
+
+html[theme='light'] input[type='submit']:hover {
+    color: #ffffff;
+}
+
+html[theme='light'] #main {
+    color: var(--learn-text);
+}
+
+html[theme='light'] #only-breadcrumb-masthead {
+    background: var(--learn-surface);
+}
+
+html[theme='light'] div.content-box {
+    position: relative;
+    overflow: hidden;
+    border-color: var(--learn-border);
+    border-radius: 8px;
+    background: var(--learn-surface);
+    box-shadow: var(--learn-shadow);
+}
+
+html[theme='light'] div.content-box::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background: var(--learn-brand-gradient);
+    content: '';
+}
+
+html[theme='light'] div.markdown-content-div,
+html[theme='light'] div.markdown-content-div p,
+html[theme='light'] div.markdown-content-div li {
+    color: var(--learn-text);
+}
+
+html[theme='light'] .u-text-color-arm-light-grey,
+html[theme='light'] .u-text-color-arm-light-grey-alt,
+html[theme='light'] .u-text-color-arm-dark-grey,
+html[theme='light'] .u-text-color-arm-grey {
+    color: var(--learn-text-muted) !important;
+}
+
+html[theme='light'] div.markdown-content-div > table,
+html[theme='light'] div.markdown-content-div > table tbody,
+html[theme='light'] .normal-horizontal-tabs table tbody {
+    background: var(--learn-surface);
+}
+
+html[theme='light'] div.markdown-content-div table th,
+html[theme='light'] .normal-horizontal-tabs table thead th {
+    color: var(--learn-text);
+    background: var(--learn-surface-muted);
+}
+
+html[theme='light'] div.markdown-content-div table th,
+html[theme='light'] div.markdown-content-div table td,
+html[theme='light'] .normal-horizontal-tabs table th,
+html[theme='light'] .normal-horizontal-tabs table td {
+    border-color: var(--learn-border);
+}
+
+html[theme='light'] code:not([class*='language-']) {
+    color: #7a2e00;
+    background: #f2ede8;
+}
+
+html[theme='light'] pre[class*='language-'] a.token.url-link {
+    color: var(--learn-lilac);
+}
+
+html[theme='light'] pre[class*='language-'] a.token.url-link:hover {
+    color: #e5d8ff;
+}
+
+html[theme='light'] ads-card.notice-callout {
+    --ads-card-background-color: var(--learn-accent-soft);
+    --ads-card-border-color: var(--learn-accent);
+    --ads-card-border-color-hover: var(--learn-accent-hover);
+}
+
+html[theme='light'] .normal-tabpane {
+    border: 1px solid var(--learn-border);
+    border-radius: 6px;
+    background: var(--learn-surface);
+    --ads-horizontal-tabs-navigation-background-color: var(--learn-surface);
+}
+
+html[theme='light'] .normal-horizontal-tabs {
+    --ads-horizontal-tabs-tab-color: var(--learn-text-muted);
+    --ads-horizontal-tabs-tab-color-active: var(--learn-accent);
+    --ads-horizontal-tabs-tab-color-hover: var(--learn-link-hover);
+    --ads-horizontal-tabs-underline-color: var(--learn-accent);
+    --ads-horizontal-tabs-tab-content-background-color: var(--learn-surface);
+}
+
+html[theme='light'] .tab-row,
+html[theme='light'] .tab-row.active {
+    background: transparent;
+}
+
+html[theme='light'] .tab-right-card {
+    border-color: var(--learn-border);
+    border-radius: 8px;
+    background: var(--learn-surface);
+    box-shadow: 0 2px 8px rgba(23, 36, 45, 0.05);
+    transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+html[theme='light'] .tab-right-card > h6 {
+    color: var(--learn-text-muted);
+}
+
+html[theme='light'] .tab-right-card.active {
+    border-color: var(--learn-accent);
+    background: var(--learn-accent-soft);
+    box-shadow: inset 4px 0 0 var(--learn-accent), 0 8px 20px rgba(0, 87, 255, 0.12);
+}
+
+html[theme='light'] .tab-right-card.active > h6 {
+    color: var(--learn-link-hover);
+    font-weight: 700;
+}
+
+html[theme='light'] .tab-row.inactive:hover,
+html[theme='light'] .tab-row.inactive:hover .tab-right-card {
+    border-color: var(--ads-ui-blue-50, #80abff);
+    background: var(--learn-accent-soft);
+}
+
+html[theme='light'] .tab-row.inactive:hover .tab-right-card {
+    transform: translateX(3px);
+}
+
+html[theme='light'] .tab-row.inactive:hover h6 {
+    color: var(--learn-link-hover);
+}
+
+html[theme='light'] div.github-div {
+    border-color: var(--learn-border);
+    border-radius: 6px;
+    background: var(--learn-surface);
+}
+
+html[theme='light'] p.github-link {
+    color: var(--learn-link);
+}
+
+html[theme='light'] p.github-link:hover {
+    color: var(--learn-link-hover);
+}
+
+html[theme='light'] .pagefind-ui__search-input:hover,
+html[theme='light'] .pagefind-ui__search-input:focus,
+html[theme='light'] .pagefind-ui__button:hover,
+html[theme='light'] .pagefind-ui__button:focus,
+html[theme='light'] .pagefind-ui__result-link:hover {
+    color: var(--learn-link-hover) !important;
+}
+
+html[theme='light'] .pagefind-ui__search-input:hover::placeholder,
+html[theme='light'] .pagefind-ui__search-input:focus::placeholder {
+    color: var(--learn-text-muted) !important;
+}
+
+html[theme='light'] div.content-head-mobile,
+html[theme='light'] .content-individual-mobile,
+html[theme='light'] div#facets-background {
+    border-color: var(--learn-border);
+    background: var(--learn-surface);
+}
+
+html[theme='light'] .content-individual-mobile.active {
+    border-color: var(--learn-accent);
+    background: var(--learn-accent-soft);
+}
+
+html[theme='light'] ads-card.path-card,
+html[theme='light'] ads-card.tool-card,
+html[theme='light'] ads-card.module-card {
+    --ads-card-background-color: var(--learn-surface);
+    --ads-card-background-color-hover: var(--learn-accent-soft);
+    --ads-card-border-color: var(--learn-border);
+    --ads-card-border-color-hover: var(--learn-accent);
+    --ads-card-box-shadow: 0 3px 12px rgba(23, 36, 45, 0.06);
+    --ads-card-box-shadow-hover: var(--learn-shadow-hover);
+}
+
+html[theme='light'] ads-card.path-card.featured-path-card ads-card-content::before {
+    background: var(--learn-brand-gradient);
+    opacity: 0.65;
+}
+
+html[theme='light'] ads-card.path-card:not(.featured-path-card) ads-card-content,
+html[theme='light'] ads-card.tool-card ads-card-content,
+html[theme='light'] ads-card.module-card ads-card-content {
+    position: relative;
+    overflow: hidden;
+}
+
+html[theme='light'] ads-card.path-card:not(.featured-path-card) ads-card-content::after,
+html[theme='light'] ads-card.tool-card ads-card-content::after,
+html[theme='light'] ads-card.module-card ads-card-content::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 3px;
+    background: var(--learn-brand-gradient);
+    opacity: 0.55;
+    content: '';
+    transition: opacity 180ms ease;
+}
+
+html[theme='light'] ads-card.path-card:not(.featured-path-card):hover ads-card-content::after,
+html[theme='light'] ads-card.tool-card:hover ads-card-content::after,
+html[theme='light'] ads-card.module-card:hover ads-card-content::after {
+    opacity: 1;
+}
+
+html[theme='light'] .learning-path-title,
+html[theme='light'] .basics-title,
+html[theme='light'] ads-card.tool-card p {
+    color: var(--learn-link-hover);
+}
+
+html[theme='light'] .pinned-featured-label {
+    color: var(--learn-link-hover);
+}
+
+html[theme='light'] .pinned-inline-icon {
+    color: var(--learn-accent);
+}
+
+html[theme='light'] .basics-title:hover,
+html[theme='light'] ads-card.path-card:hover .learning-path-title,
+html[theme='light'] ads-card.path-card:hover .pinned-inline-icon,
+html[theme='light'] ads-card.path-card:hover .pinned-featured-label,
+html[theme='light'] ads-card.tool-card:hover p,
+html[theme='light'] ads-card.multi-install-card:hover .multi-tool-selection-title,
+html[theme='light'] .module-card-a:hover,
+html[theme='light'] .social-icons a:hover,
+html[theme='light'] #tag-clear-btn:hover,
+html[theme='light'] #reset-demo-txt:hover {
+    color: var(--learn-link-hover);
+}
+
+html[theme='light'] .share-icon:hover {
+    fill: var(--learn-link-hover);
+}
+
+html[theme='light'] .card-subject,
+html[theme='light'] .card-date,
+html[theme='light'] .module-card-subtitle,
+html[theme='light'] #tag-preface {
+    color: var(--learn-text-muted);
+}
+
+html[theme='light'] .learning-path-subtitle,
+html[theme='light'] .tool-card-subtitle,
+html[theme='light'] .card-description,
+html[theme='light'] .filter-facet,
+html[theme='light'] .homepage-top-desc,
+html[theme='light'] .homepage-top-desc p {
+    color: var(--learn-text-muted) !important;
+}
+
+html[theme='light'] ads-expansion-panel.learning-path-filters {
+    --ads-expansion-panel-border-color: var(--learn-border);
+    --ads-expansion-panel-content-background-color: var(--learn-surface);
+    --ads-expansion-panel-toggle-background-color: var(--learn-surface);
+    --ads-expansion-panel-toggle-background-color-hover: var(--learn-surface-muted);
+}
+
+html[theme='light'] .filter-facet {
+    --ads-tag-background-color: var(--learn-surface);
+    --ads-tag-background-color-hover: var(--learn-accent-soft);
+    --ads-tag-border-color: 1px solid var(--learn-border-strong);
+    --ads-tag-border-color-hover: 1px solid var(--learn-accent);
+    --ads-tag-color: var(--learn-text-muted);
+    --ads-tag-color-hover: var(--learn-link-hover);
+}
+
+html[theme='light'] .main-topic-card {
+    position: relative;
+    overflow: hidden;
+    border-color: var(--learn-border);
+    background: var(--learn-surface);
+    box-shadow: var(--learn-shadow);
+}
+
+html[theme='light'] .main-topic-card::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: 4px;
+    background: var(--learn-brand-gradient);
+    content: '';
+    transform: scaleX(0.34);
+    transform-origin: left;
+    transition: transform 220ms ease;
+}
+
+html[theme='light'] .main-topic-card:hover {
+    border-color: var(--learn-accent);
+    background: var(--learn-accent-soft);
+    box-shadow: var(--learn-shadow-hover);
+}
+
+html[theme='light'] .main-topic-card:hover::before {
+    transform: scaleX(1);
+}
+
+html[theme='light'] .main-topic-title {
+    color: var(--learn-link-hover);
+}
+
+html[theme='light'] .main-topic-card:hover .main-topic-title {
+    color: var(--learn-link-hover);
+}
+
+html[theme='light'] .main-topic-card img[src*='main-topic-icons'] {
+    filter: brightness(0) saturate(100%) invert(26%) sepia(98%) saturate(7492%) hue-rotate(222deg) brightness(102%) contrast(106%);
+}
+
+html[theme='light'] .main-topic-card .main-topic-subtitle,
+html[theme='light'] .homepage-top-desc > p,
+html[theme='light'] .homepage-dynamic-bottom-spacing + p {
+    color: var(--learn-text-muted) !important;
+}
+
+html[theme='light'] #homepage-header {
+    color: var(--learn-text);
+    background: linear-gradient(105deg, var(--learn-text) 4%, var(--learn-accent) 58%, #3379ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 12px 24px rgba(0, 87, 255, 0.14));
+}
+
+html[theme='light'] body.home-page #title-div {
+    position: relative;
+    isolation: isolate;
+}
+
+html[theme='light'] body.home-page .homepage-license {
+    color: var(--learn-text-muted);
+}
+
+html[theme='light'] table.contributor-table tbody {
+    background: var(--learn-surface);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html[theme='light'] .main-topic-card,
+    html[theme='light'] .main-topic-card::before,
+    html[theme='light'] .tab-right-card,
+}

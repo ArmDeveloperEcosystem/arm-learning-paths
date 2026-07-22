@@ -178,6 +178,28 @@ arm-top-navigation:not(:defined) {
     min-height: 60px;
 }
 
+.skip-link {
+    position: fixed;
+    top: 0;
+    left: 1rem;
+    z-index: 20000;
+    padding: 0.75rem 1rem;
+    color: #ffffff;
+    background: var(--ads-ui-ink-100, #080225);
+    border: 2px solid var(--ads-brand-horizon-blue, #0057ff);
+    border-radius: 0 0 4px 4px;
+    transform: translateY(-120%);
+    transition: transform 120ms ease;
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+    color: #ffffff;
+    transform: translateY(0);
+    outline: 3px solid var(--ads-brand-horizon-blue, #0057ff);
+    outline-offset: 2px;
+}
+
 /* Fix global nav height */
 /* The arm-global-web-components script renders a position:fixed nav (0 flow space)
    and may inject a 50px sub-navigation bar in flow */

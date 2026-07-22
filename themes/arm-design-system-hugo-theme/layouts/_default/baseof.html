@@ -14,7 +14,7 @@
            {{ partialCached "math.html" . }}
         {{ end }}
     </head>
-    <body>
+    <body class="{{ if .IsHome }}home-page{{ end }}">
         <a href="#main" class="skip-link">Skip to main content</a>
 
         {{partial "header/nav-masthead.html" .}}
