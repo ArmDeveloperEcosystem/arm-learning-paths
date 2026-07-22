@@ -6,34 +6,32 @@ weight: 5
 layout: learningpathall
 ---
 
-## The analysis report
+## Structure of an analysis report
 
-After every recipe run, the skill returns a structured report instead of raw
-data. Expect these sections:
+Every time you run a recipe using the skill, your AI assistant returns a structured report as the primary deliverable. 
 
-- **Bottleneck Summary**: what dominates, and how confident the skill is
-- **Key Metrics**: the three to five most decision-relevant numbers
-- **Hot Functions**: ranked, each with a brief root-cause note
-- **Recommended Actions**: concrete, prioritized fixes (file, function, line)
-- **Ruled Out**: hypotheses the data did *not* support, and why
-- **Next Step**: a single actionable instruction to run next, such as the next
-  recipe to try or one code change to make, then re-profile
+The report contains the following sections:
 
-This report is the skill's primary deliverable. If the data is noisy or
-insufficient, the skill says so plainly and recommends a re-run rather than
-guessing.
+- Bottleneck Summary: what dominates, and how confident the skill is
+- Key Metrics: the three to five most decision-relevant numbers
+- Hot Functions: a list of hot functions ranked by measured samples, each with a brief root-cause note
+- Recommended Actions: suggested fixes by file, function, and line
+- Ruled Out: hypotheses the data didn't support, and why
+- Next Step: a single actionable instruction to run before re-profiling, such as the next
+  recipe to try or one code change to make 
 
-## A worked example
+If the data is noisy or insufficient, you'll receive a recommendation to rerun the recipe.
 
-For a compute-bound workload, a first Code Hotspots report from the skill looks
-like this:
+## Example Code Hotspots analysis report
+
+The following is an example first Code Hotspots report for a compute-bound workload:
 
 ```markdown
 ## Performix Analysis Report
 
 **Recipe:** Code Hotspots
-**Target:** neoverse-box (Arm Neoverse, 64 cores)
-**Workload:** /home/me/build/myapp --input /home/me/data/bench.dat
+**Target:** `neoverse-box` (Arm Neoverse, 64 cores)
+**Workload:** `/home/me/build/myapp --input /home/me/data/bench.dat`
 
 ### Bottleneck Summary
 
@@ -45,20 +43,20 @@ a single function, stable across runs.
 
 | Metric | Value | Assessment |
 |--------|-------|------------|
-| escape_iterations self % | 72.3% | Critical: single dominant hotspot |
-| sqrt self % | 45.1% | Critical: unnecessary math |
+| `escape_iterations` self % | 72.3% | Critical: single dominant hotspot |
+| `sqrt` self % | 45.1% | Critical: unnecessary math |
 | Total samples | 48,201 | Good: enough for reliable data |
 
 ### Hot Functions
 
 | # | Function | Samples (%) | Root Cause |
 |---|----------|-------------|------------|
-| 1 | escape_iterations | 72.3% | sqrt in inner loop |
-| 2 | sqrt | 45.1% | magnitude check in escape_iterations |
+| 1 | `escape_iterations` | 72.3% | `sqrt` in inner loop |
+| 2 | `sqrt` | 45.1% | magnitude check in `escape_iterations` |
 
 ### Recommended Actions (priority order)
 
-1. **Remove sqrt** in `mandelbrot.c:22`: replace `sqrt(zr2 + zi2) > 2.0` with
+1. **Remove `sqrt`** in `mandelbrot.c:22`: replace `sqrt(zr2 + zi2) > 2.0` with
    `(zr2 + zi2) > 4.0`.
 
 ### Ruled Out
@@ -68,38 +66,31 @@ a single function, stable across runs.
 
 ### Next Step
 
-Rebuild with the sqrt removal, re-run Code Hotspots, and confirm
-escape_iterations falls under 30%.
+Rebuild with the `sqrt` removal, re-run Code Hotspots, and confirm
+`escape_iterations` falls under 30%.
 ```
-
-The report names a file and line, ranks the cost by measured samples, and ends
-with a single action you can take immediately, rather than a wall of raw
-counters.
 
 ## Expect a two-pass investigation
 
-The skill does not let a single Code Hotspots run justify "this is as fast as it
-gets." Code Hotspots shows *where* time goes, never *why*. Expect the skill to
-propose a **second pass** with a characterizing recipe (CPU Microarchitecture,
-Instruction Mix, or Memory Access) to explain why the hot spot is hot. Let it
-run that pass before deciding a cost is irreducible.
+The skill doesn't let a single Code Hotspots run justify "this is as fast as it
+gets." Code Hotspots shows where time goes, never why. 
 
-## Drive the improvement loop
+When you use the skill, expect your AI assistant to propose a second pass with a characterizing recipe such as CPU Microarchitecture, Instruction Mix, or Memory Access to explain why the hotspot is hot. Let the assistant run that pass before deciding whether a cost is irreducible.
 
-Work with the skill one change at a time:
+## Drive improvements to your application
 
-1. It establishes a **baseline** run.
-2. You or the skill make **one** focused change.
-3. It **re-profiles** with the same recipe and workload.
-4. It reports a **before/after comparison** with a measurement, not a claim.
-5. It looks for the **next bottleneck**, or summarizes the remaining trade-offs.
+To drive improvements, follow these steps:
 
-If you want to stop, ask for the remaining opportunities. The skill is designed to
-hand you measured options with their trade-offs rather than declare the work
-finished on its own.
+1. Your AI assistant refers to the skill and establishes a baseline run.
+2. You make the suggested focused change and use your assistant to re-profile.
+3. The assistant refers to the skill and re-profiles with the same recipe and workload.
+4. The assistant reports a before and after comparison with a measurement.
+5. The assistant looks for the next bottleneck, or summarizes the remaining trade-offs.
 
-{{% notice Tip %}}
-If you are using the CLI, you can ask the skill to export a run or render results
+If you want to stop, ask for the remaining opportunities. The skill is designed so that the AI assistant will hand you measured options with their trade-offs rather than declare the work finished on its own.
+
+{{% notice Note %}}
+If you are using the `apx` CLI, you can export a run or render results
 as JSON:
 
 ```bash
@@ -109,8 +100,11 @@ apx run render <run_id> --json
 
 Use the `Run ID` from the analysis report, or run `apx run list` to find it. The
 `<target_directory>` is a directory on the host where Arm Performix writes the
-exported `.zip` file. Run export/import and render commands are CLI workflows,
-not MCP tool operations.
+exported `.zip` file.
 {{% /notice %}}
 
-You now have a measurement-first workflow for using the arm-performix skill to profile Arm Neoverse workloads, read the results, and make focused improvements.
+## What you've accomplished
+
+You've now learned how to read reports generated by your AI assistant when you use the `arm-performix` skill. 
+
+You can use this measurement-first workflow with the `arm-performix` skill and an AI assistant to profile Arm Neoverse workloads, read the results, and make focused improvements.

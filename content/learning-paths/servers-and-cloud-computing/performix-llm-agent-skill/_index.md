@@ -1,14 +1,14 @@
 ---
 title: Profile and improve Arm workloads with the arm-performix agent skill
-    
+
 description: Learn how to install and use the arm-performix skill so an AI coding assistant can drive Arm Performix, find code hotspots, diagnose pipeline stalls, and propose measured improvements on Arm Neoverse.
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who use an AI coding assistant with Agent Skills support, such as GitHub Copilot in VS Code or Claude Code, and want the arm-performix skill to drive Arm Performix profiling workflows without memorizing the `apx` command-line interface.
+who_is_this_for: This is an introductory topic for developers who use an AI coding assistant with Agent Skills support, such as GitHub Copilot in VS Code or Claude Code, and want the `arm-performix` skill to drive Arm Performix profiling workflows without memorizing the `apx` command-line interface.
 
 learning_objectives:
-    - Install and enable the arm-performix skill in your AI assistant
+    - Install and enable the `arm-performix` skill in your AI assistant
     - Trigger the skill with phrasing that activates the profiling workflow
     - Provide the context the skill needs to profile (target, binary, workload)
     - Read the analysis report the skill produces and drive the improvement loop
@@ -52,8 +52,6 @@ further_reading:
         title: Optimize memory access behavior using Arm Performix and the Arm MCP Server
         link: /learning-paths/servers-and-cloud-computing/performix-memory-access/
         type: learning-path
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
