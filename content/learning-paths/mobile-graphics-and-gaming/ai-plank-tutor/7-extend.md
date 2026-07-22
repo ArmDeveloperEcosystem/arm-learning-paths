@@ -1,28 +1,26 @@
 ---
-title: Tune and extend the tutor
+title: Explore options for tuning and extending AI Plank Tutor
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Possible improvements
+## Possible improvements to the app
 
-You now have a complete on-device AI plank tutor. It detects pose landmarks from the camera, compares the learner against an instructor reference, prompts a local LLM, and speaks the result with Android text-to-speech.
+You now have a complete on-device AI Plank Tutor. It detects pose landmarks from the camera, compares the learner against an instructor reference, prompts a local LLM, and speaks the result with Android text-to-speech.
 
-This section outlines practical ways to tune the experience and extend it beyond the simple single-pose demo.
+You'll explore the following areas of improvement:
 
-You will go through:
-
-- Which app parameters are worth tuning.
-- How model, prompt, and feedback choices affect latency.
-- Why fine-tuning can improve coaching quality.
-- What a high-level fine-tuning workflow looks like.
-- How the full Yoga Tutor app expands this simple pipeline.
+- Which app parameters are worth tuning
+- How model, prompt, and feedback choices affect latency
+- Why fine-tuning can improve coaching quality
+- What a high-level fine-tuning workflow looks like
+- How the full yoga tutor app expands this simple pipeline
 
 ## Tune the feedback loop
 
-The demo is intentionally small, so the easiest improvements are in the constants and prompt text you have already used.
+The app is intentionally small, so you can make improvements to the constants and prompt text that you've already used.
 
 In `MainViewModel.kt`, tune how often pose data is scored:
 
@@ -51,7 +49,7 @@ In `LlmViewModel.kt`, tune how much text the model can generate:
 private const val LLM_GENERATION_LIMIT: Int = 128
 ```
 
-For this app, shorter is usually better. The tutor only needs one correction at a time, so a smaller limit can reduce latency and avoid long coaching messages.
+For this app, shorter is usually better. The tutor needs only one correction at a time, so a smaller limit can reduce latency and avoid long coaching messages.
 
 The system prompt is the other important control:
 
@@ -61,13 +59,13 @@ private const val TUTOR_SYSTEM_PROMPT = "You are a friendly..."
 
 You can use the system prompt to make the output more direct, more encouraging, or more safety-focused. Keep the prompt specific. This app works best when the model is told to give one short correction and avoid exposing the numeric joint-angle differences.
 
-The model choice also affects the experience. Smaller models usually load and respond faster, while larger models can give better language quality. Quantization affects both speed and quality. The Learning Path used a Q4_0 GGUF model because it is a practical balance for mobile inference, and gets good speed-up from KleidiAI kernels.
+The model choice also affects the experience. Smaller models usually load and respond faster, while larger models can give better language quality. Quantization affects both speed and quality. This app uses a Q4_0 GGUF model because it's a practical balance for mobile inference, and gets good speed-up from KleidiAI kernels.
 
 ## Improve feedback quality with fine-tuning
 
 Prompt engineering can make a general instruction model behave reasonably well, but fitness coaching has a narrow style requirement. The ideal response is short, natural, safe, and physically meaningful. Fine-tuning a small model on examples from this domain can make the output much more consistent.
 
-A useful fine-tuning dataset should contain pairs like this:
+A useful fine-tuning dataset should contain pairs similar to:
 
 ```json
 {
@@ -78,7 +76,7 @@ A useful fine-tuning dataset should contain pairs like this:
 
 The output should be the kind of phrase you want the app to speak. Avoid numbers, long explanations, and multiple corrections in one answer.
 
-A high-level workflow is:
+The following is a high-level workflow:
 
 1. Define the input format.
 
@@ -86,7 +84,7 @@ A high-level workflow is:
 
 2. Define the output style.
 
-   Write rules for the coaching phrase: one short cue, no numeric angles, no diagnosis, no unsafe claims, and no correction for joints that are not in the input.
+   Write rules for the coaching phrase: one short cue, no numeric angles, no diagnosis, no unsafe claims, and no correction for joints that aren't in the input.
 
 3. Generate a seed dataset.
 
@@ -98,7 +96,7 @@ A high-level workflow is:
 
 5. Review and clean the generated data.
 
-   This is the most important step. Remove responses that mention numbers, give multiple corrections, sound unnatural when spoken, or make unsafe assumptions. Generated fitness cues should be reviewed by someone who understands the movement being coached. The dataset will often be too big to go through all of it, so generate a small dataset first to determine quality. Examine a significant section of it and determine if it needs re-generating with adjusted rules.
+   This is the most important step. Remove responses that mention numbers, give multiple corrections, sound unnatural when spoken, or make unsafe assumptions. Generated fitness cues should be reviewed by someone who understands the movement being coached. The dataset will often be too big to review, so generate a small dataset first to determine quality. Examine a significant section of it and determine if it needs re-generating with adjusted rules.
 
 6. Split the dataset.
 
@@ -106,7 +104,7 @@ A high-level workflow is:
 
 7. Fine-tune the model.
 
-   Use supervised fine-tuning or a LoRA/QLoRA workflow on a model that can later run on the device. Train on prompt-response examples that match the app's runtime format. There are a number of good frameworks to work with, so this doesn't need setting up from scratch.
+   Use supervised fine-tuning or a Low-Rank adapatation (LoRA) or Quantized LoRA (QLoRA) workflow on a model that can later run on the device. Train on prompt-response examples that match the app's runtime format. There are a number of good frameworks to work with, so you don't need to set this up from scratch.
 
 8. Convert and quantize for Android.
 
@@ -116,15 +114,15 @@ A high-level workflow is:
 
    Run the app with real camera input. Check whether the model gives short, useful corrections, whether latency is acceptable, and whether repeated prompts produce varied but consistent feedback.
 
-Fine-tuning is not included as a formal step in this Learning Path because it adds dataset design, training infrastructure, model conversion, quantization, and evaluation. However, it can make a significant quality difference to the app by making responses more accurate, natural, and stylistically consistent with the intended yoga instructor persona. Treat it as a follow-up project once the app pipeline is working.
+Fine-tuning isn't a formal step in this Learning Path because it adds dataset design, training infrastructure, model conversion, quantization, and evaluation. However, it can make a significant quality difference to the app by making responses more accurate, natural, and stylistically consistent with the intended yoga instructor persona. Treat it as a follow-up project after the app pipeline is working.
 
 ## Extend beyond one pose
 
-The full Yoga Tutor app uses the same broad pipeline, but adds more product features around it.
+The full AI Yoga Tutor app uses the same broad pipeline, but adds more product features around it.
 
 To support multiple poses, replace the single `PlankPoseData.kt` object with a pose data repository that can load data from files. Each pose needs a name, instructor reference landmarks, joint weights, and display media. The prompt should include the current pose name so the LLM can choose language that fits the pose.
 
-To show richer instructor guidance, replace `plank.jpg` with pose-specific images or videos. If you add videos, you will also need lifecycle handling for playback and a way to keep the instructor media synchronized with the current pose.
+To show richer instructor guidance, replace `plank.jpg` with pose-specific images or videos. If you add videos, you'll also need lifecycle handling for playback and a way to keep the instructor media synchronized with the current pose.
 
 To support transitions between poses, add transition states to the app. Transitions need different feedback rules from static holds: the tutor might give timing, breathing, or movement cues rather than strict alignment corrections.
 
@@ -137,19 +135,10 @@ To make the tutor feel more natural, add different message types. For example:
 
 To make the app more robust, handle interruptions and edge cases. For example, decide what should happen when the learner leaves the camera view, when no pose is detected, when the LLM is still responding, or when TTS is still speaking.
 
-To improve voice quality, you can replace Android's built-in `TextToSpeech` with a higher-quality neural TTS engine. That adds model size, latency and runtime complexity, so Android TTS is a good starting point for this Learning Path.
+Android TTS is a good starting point for this Learning Path. To improve voice quality, you can replace Android's built-in `TextToSpeech` with a higher-quality neural TTS engine. Note that this replacement can add model size, latency and runtime complexity. 
 
 ## Summary
 
-You built a complete on-device AI pipeline for real-time coaching:
+You've now learned practical ways to tune the experience and extend it beyond the single-pose demo.
 
-```text
-CameraX frames
-    -> MediaPipe pose landmarks
-    -> joint-angle scoring
-    -> compact prompt
-    -> local GGUF model with AI Chat
-    -> Android TextToSpeech
-```
-
-The same structure can be adapted to other fitness, movement, accessibility, or training apps, and a slightly different computer vision input pipeline will have many other use cases. The key design choice is to keep each model doing the job it is good at: pose estimation extracts structured body data, scoring converts it into compact facts, and the LLM turns those facts into human-friendly coaching.
+You can adapt the same structure to other fitness, movement, accessibility, or training apps. A slightly different computer vision input pipeline will have many other use cases. The key design choice is to keep each model doing the job it is good at: pose estimation extracts structured body data, scoring converts it into compact facts, and the LLM turns those facts into human-friendly coaching.

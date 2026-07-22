@@ -1,24 +1,11 @@
 ---
 title: Get pose landmarks from camera
+description: Connect CameraX frames to MediaPipe Pose Landmarker on Android to extract live body landmarks from the front camera.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-
-## Objective
-
-In this section, you will connect the Android camera to MediaPipe Pose Landmarker.
-
-You will:
-
-- Bind a CameraX preview to the app UI.
-- Add an `ImageAnalysis` use case for live camera frames.
-- Configure MediaPipe Pose Landmarker in live-stream mode.
-- Convert each CameraX `ImageProxy` into a MediaPipe `MPImage`.
-- Send the first detected pose landmark list to `MainViewModel`.
-
-At the end of this section, the app opens the front camera and passes live pose landmarks into the app. The score will still be incomplete until you add pose scoring in the next section.
 
 ## Configure CameraX
 
@@ -47,7 +34,7 @@ The app needs two CameraX use cases:
 - `Preview`, which displays the camera feed in the `PreviewView`.
 - `ImageAnalysis`, which receives frames for pose detection.
 
-In `MainActivity.kt`, replace the TODO at the end of `bindCameraUseCases()` with this code:
+In `MainActivity.kt`, replace the TODO at the end of `bindCameraUseCases()` with the following code:
 
 ```kotlin
 val preview = Preview.Builder()
@@ -88,7 +75,7 @@ The analyzer runs on a background executor with one worker. That keeps camera fr
 
 ## Send frames to the landmarker
 
-In `bindCameraUseCases()` we just set `ImageAnalysis` to call `detectPose()` for every analyzed frame. Now, replace the TODO in `detectPose()` with this code:
+In `bindCameraUseCases()`, you set `ImageAnalysis` to call `detectPose()` for every analyzed frame. Now, replace the TODO in `detectPose()` with the following code:
 
 ```kotlin
 private fun detectPose(imageProxy: ImageProxy) {
@@ -108,7 +95,7 @@ private fun detectPose(imageProxy: ImageProxy) {
 }
 ```
 
-This code checks that the MediaPipe helper is ready before using it. If the helper is not ready, it closes the `ImageProxy` immediately.
+The code checks that the MediaPipe helper is ready before using it. If the helper isn't ready, it closes the `ImageProxy` immediately.
 
 {{% notice Note %}}
 Every `ImageProxy` from CameraX must be closed. In this app, `PoseLandmarkerHelper.detectLiveStream()` closes the image after copying its pixels. If the frame is skipped, `detectPose()` closes it directly.
@@ -122,15 +109,15 @@ override fun onResults(landmarks: List<NormalizedLandmark>?) {
 }
 ```
 
-This is a callback from `PoseLandmarkerHelper` and sends the live landmarks onto the ViewModel. The next page will convert those landmarks into joint angles and a pose score.
+The code is a callback from `PoseLandmarkerHelper`, and it sends the live landmarks onto the ViewModel. You'll convert those landmarks into joint angles and a pose score.
 
 ## Configure MediaPipe Pose Landmarker
 
-What happens between `detectPose()` and `onResults()`? Open `ui/landmarker/PoseLandmarkerHelper.kt`.
+To configure what happens between `detectPose()` and `onResults()`, open `ui/landmarker/PoseLandmarkerHelper.kt`.
 
 The starter file already contains the MediaPipe imports, model path, confidence values, and the `LandmarkerListener` interface for the callbacks to `MainActivity`.
 
-Replace the TODO in `setupPoseLandmarker()` with this code:
+Replace the TODO in `setupPoseLandmarker()` with the following code:
 
 ```kotlin
 fun setupPoseLandmarker(context: Context) {
@@ -170,9 +157,9 @@ The `Delegate.GPU` option asks MediaPipe to use the device GPU for the pose mode
 
 ## Convert camera frames to MPImage
 
-When we call from `MainActivity`, it is with a CameraX `ImageProxy`, but the MediaPipe analyzer expects an `MPImage`.
+When you call from `MainActivity`, it's with a CameraX `ImageProxy`, but the MediaPipe analyzer expects an `MPImage`.
 
-Replace the TODO in `detectLiveStream()` with this code to convert between the two and start the Pose Landmarker analysis:
+Replace the TODO in `detectLiveStream()` with the following code to convert between the two and start the Pose Landmarker analysis:
 
 ```kotlin
 fun detectLiveStream(
@@ -220,11 +207,11 @@ The call to `imageProxy.use { ... }` closes the frame after its pixels are copie
 
 The matrix rotates the image using the camera frame metadata. For the front camera, it also mirrors the image so the detected pose matches the preview the learner sees.
 
-`SystemClock.uptimeMillis()` provides a monotonic timestamp for the frame. MediaPipe requires timestamps for video and live-stream inputs, and `detectAsync()` returns immediately; the result arrives later through the result listener configured above.
+`SystemClock.uptimeMillis()` provides a monotonic timestamp for the frame. MediaPipe requires timestamps for video and live-stream inputs, and `detectAsync()` returns immediately; the result arrives later through the result listener.
 
 ## Return the first detected pose
 
-Finally, replace the TODO in `returnLiveStreamResult()` with this code:
+Finally, replace the TODO in `returnLiveStreamResult()` with the following code:
 
 ```kotlin
 private fun returnLiveStreamResult(
@@ -235,7 +222,7 @@ private fun returnLiveStreamResult(
 }
 ```
 
-MediaPipe returns a list of detected poses. This app asks for one pose, so it forwards only the first landmark list.
+MediaPipe returns a list of detected poses. The app asks for one pose, so it forwards only the first landmark list.
 
 ## Run the app
 
@@ -243,6 +230,12 @@ Build and run the app on your Android device.
 
 When prompted, allow camera access. Expect to see the front camera preview in the right side of the app.
 
-The score will not update yet. At this point, the app is collecting pose landmarks and passing them to `MainViewModel`; the scoring logic is added in the next section.
+The score won't update yet. At this point, the app is collecting pose landmarks and passing them to `MainViewModel`.
 
 If the preview opens but no landmarks are produced later, make sure your full body is visible in the frame and check Logcat for `PoseLandmarkerHelper`.
+
+## What you've accomplished and what's next
+
+You've now connected the Android camera to the MediaPipe pose landmarker. The app opens the front camera and passes live pose landmarks into the app.
+ 
+Next, you'll add pose scoring logic to the app. 

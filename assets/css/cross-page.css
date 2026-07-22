@@ -158,10 +158,8 @@ table {
     border-color: transparent;  
 }
 table tbody td {
-    border-top: transparent;
+    border-top: transparent;  
 }
-
-
 
 /* Fix Nav Masthead Breadcrumb container */
 /*************************************/
