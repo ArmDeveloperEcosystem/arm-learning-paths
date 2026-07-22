@@ -1,5 +1,5 @@
 ---
-title: Speak corrections with Android text-to-speech
+title: Connect coaching corrections to Android text-to-speech
 description: Connect generated coaching corrections to Android TextToSpeech and synchronize each spoken phrase with its on-screen caption.
 weight: 7
 
@@ -18,7 +18,7 @@ The starter file already includes the imports, state flows, and helper functions
 - `idle`: whether Android TTS has finished speaking all queued phrases.
 - `currentCaption`: the text that should be shown at the bottom of the screen.
 
-Replace the TODO in the `init` block with this code:
+Replace the TODO in the `init` block with the following code:
 
 ```kotlin
 init {
@@ -50,11 +50,11 @@ init {
 
 The `TextToSpeech` callback sets the default device language when initialization succeeds. The `UtteranceProgressListener` is called by Android as each spoken phrase starts and finishes.
 
-The listener callbacks are not guaranteed to run on the main thread, so the provided `setCaption()` and `setIdle()` helpers update the flows through a main-thread coroutine.
+The listener callbacks aren't guaranteed to run on the main thread, so the provided `setCaption()` and `setIdle()` helpers update the flows through a main-thread coroutine.
 
 ## Queue speech
 
-Replace the TODO in `launchSpeechGenerationAndPlaybackJob()` with this code:
+Replace the TODO in `launchSpeechGenerationAndPlaybackJob()` with the following code:
 
 ```kotlin
 fun launchSpeechGenerationAndPlaybackJob(speech: String) {
@@ -93,7 +93,7 @@ private fun finishUtterance(utteranceId: String?) {
 }
 ```
 
-When Android reports that an utterance has finished, this removes it from the queue map. The same helper is used if `tts.speak()` fails to queue an utterance. If no queued utterances remain, `idle` becomes `true`.
+When Android reports that an utterance has finished, `finishUtterance()` removes it from the queue map. The same helper is used if `tts.speak()` fails to queue an utterance. If no queued utterances remain, `idle` becomes `true`.
 
 The existing `shutdown()` function stops and releases Android TTS when the activity is destroyed.
 

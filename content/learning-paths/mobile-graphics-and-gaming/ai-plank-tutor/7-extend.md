@@ -1,6 +1,5 @@
 ---
 title: Explore options for tuning and extending AI Plank Tutor
-description: Explore how to tune the AI Plank Tutor feedback loop, improve the local LLM, and extend the app to support additional poses.
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -85,7 +84,7 @@ The following is a high-level workflow:
 
 2. Define the output style.
 
-   Write rules for the coaching phrase: one short cue, no numeric angles, no diagnosis, no unsafe claims, and no correction for joints that are not in the input.
+   Write rules for the coaching phrase: one short cue, no numeric angles, no diagnosis, no unsafe claims, and no correction for joints that aren't in the input.
 
 3. Generate a seed dataset.
 
@@ -97,7 +96,7 @@ The following is a high-level workflow:
 
 5. Review and clean the generated data.
 
-   This is the most important step. Remove responses that mention numbers, give multiple corrections, sound unnatural when spoken, or make unsafe assumptions. Generated fitness cues should be reviewed by someone who understands the movement being coached. The dataset will often be too big to go through all of it, so generate a small dataset first to determine quality. Examine a significant section of it and determine if it needs re-generating with adjusted rules.
+   This is the most important step. Remove responses that mention numbers, give multiple corrections, sound unnatural when spoken, or make unsafe assumptions. Generated fitness cues should be reviewed by someone who understands the movement being coached. The dataset will often be too big to review, so generate a small dataset first to determine quality. Examine a significant section of it and determine if it needs re-generating with adjusted rules.
 
 6. Split the dataset.
 

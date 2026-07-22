@@ -225,7 +225,7 @@ val sentences: Flow<Sentence> = _tokens
     .flowOn(Dispatchers.Default)
 ```
 
-The ViewModel now exposes a `Flow<Sentence>` instead of raw tokens. In the following section, you'll collect this Flow and send each sentence to Android text-to-speech.
+The ViewModel now exposes a `Flow<Sentence>` instead of raw tokens. In the next section, you'll collect this Flow and send each sentence to Android text-to-speech.
 
 ## Release the inference engine
 
@@ -280,7 +280,7 @@ launch {
 }
 ```
 
-You'll replace this direct caption update with `SpeechManager` in the following section, so the caption stays synchronized with Android text-to-speech playback.
+You'll replace this direct caption update with `SpeechManager` when you set up Android text-to-speech, so the caption stays synchronized with text-to-speech playback.
 
 ## Run the app
 

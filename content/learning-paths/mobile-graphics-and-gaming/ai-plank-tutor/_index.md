@@ -1,6 +1,6 @@
 ---
-title: Build an on-device AI Plank Tutor on Android
-description: Build an on-device Android fitness tutor that uses CameraX and MediaPipe to score a plank pose, Arm AI Chat to generate local LLM feedback, and Android text-to-speech to speak corrections.
+title: Build an on-device AI fitness tutor app on Android
+description: Build an on-device Android fitness tutor app called AI Plank Tutor that uses CameraX and MediaPipe to score a plank pose, Arm AI Chat to generate local LLM feedback, and Android text-to-speech to speak corrections.
     
 minutes_to_complete: 90
 
@@ -10,7 +10,7 @@ learning_objectives:
     - Detect human pose landmarks from live Android camera frames with MediaPipe.
     - Structure data and build compact prompts that turn raw data into useful LLM input.
     - Run a mobile-sized LLM on-device with Arm's AI Chat library.
-    - Speak generated output with Text-To-Speech.
+    - Generate output as speech with Text-To-Speech.
 
 prerequisites:
     - A development machine with Android Studio installed.
@@ -36,7 +36,7 @@ generated_summary_faq:
     You'll build AI Plank Tutor, an on-device Android app that evaluates a static plank pose and
     delivers spoken correction. You'll configure CameraX and MediaPipe Pose Landmarker to extract
     landmarks from live camera frames, calculate joint angles, and compute a weighted score against
-    an instructor reference. You'll then turn the largest joint-angle differences into a compact
+    an instructor reference. Then, you'll turn the largest joint-angle differences into a compact
     prompt for a local LLM. Finally, you'll integrate Arm AI Chat for GGUF inference and connect
     Android text-to-speech so the app speaks each correction. By the end, you'll have a complete
     on-device pipeline from camera input to spoken feedback.

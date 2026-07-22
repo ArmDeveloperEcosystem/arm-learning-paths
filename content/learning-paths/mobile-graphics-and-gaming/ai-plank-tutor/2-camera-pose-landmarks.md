@@ -95,7 +95,7 @@ private fun detectPose(imageProxy: ImageProxy) {
 }
 ```
 
-This code checks that the MediaPipe helper is ready before using it. If the helper isn't ready, it closes the `ImageProxy` immediately.
+The code checks that the MediaPipe helper is ready before using it. If the helper isn't ready, it closes the `ImageProxy` immediately.
 
 {{% notice Note %}}
 Every `ImageProxy` from CameraX must be closed. In this app, `PoseLandmarkerHelper.detectLiveStream()` closes the image after copying its pixels. If the frame is skipped, `detectPose()` closes it directly.
@@ -109,7 +109,7 @@ override fun onResults(landmarks: List<NormalizedLandmark>?) {
 }
 ```
 
-This is a callback from `PoseLandmarkerHelper` and sends the live landmarks onto the ViewModel. You'll convert those landmarks into joint angles and a pose score.
+The code is a callback from `PoseLandmarkerHelper`, and it sends the live landmarks onto the ViewModel. You'll convert those landmarks into joint angles and a pose score.
 
 ## Configure MediaPipe Pose Landmarker
 
@@ -207,7 +207,7 @@ The call to `imageProxy.use { ... }` closes the frame after its pixels are copie
 
 The matrix rotates the image using the camera frame metadata. For the front camera, it also mirrors the image so the detected pose matches the preview the learner sees.
 
-`SystemClock.uptimeMillis()` provides a monotonic timestamp for the frame. MediaPipe requires timestamps for video and live-stream inputs, and `detectAsync()` returns immediately; the result arrives later through the result listener configured above.
+`SystemClock.uptimeMillis()` provides a monotonic timestamp for the frame. MediaPipe requires timestamps for video and live-stream inputs, and `detectAsync()` returns immediately; the result arrives later through the result listener.
 
 ## Return the first detected pose
 
@@ -222,7 +222,7 @@ private fun returnLiveStreamResult(
 }
 ```
 
-MediaPipe returns a list of detected poses. This app asks for one pose, so it forwards only the first landmark list.
+MediaPipe returns a list of detected poses. The app asks for one pose, so it forwards only the first landmark list.
 
 ## Run the app
 
@@ -230,7 +230,7 @@ Build and run the app on your Android device.
 
 When prompted, allow camera access. Expect to see the front camera preview in the right side of the app.
 
-The score won't update yet. At this point, the app is collecting pose landmarks and passing them to `MainViewModel`. You'll add the scoring logic in the following section.
+The score won't update yet. At this point, the app is collecting pose landmarks and passing them to `MainViewModel`.
 
 If the preview opens but no landmarks are produced later, make sure your full body is visible in the frame and check Logcat for `PoseLandmarkerHelper`.
 
@@ -238,4 +238,4 @@ If the preview opens but no landmarks are produced later, make sure your full bo
 
 You've now connected the Android camera to the MediaPipe pose landmarker. The app opens the front camera and passes live pose landmarks into the app.
  
-Next, you'll add pose scoring to the app. 
+Next, you'll add pose scoring logic to the app. 

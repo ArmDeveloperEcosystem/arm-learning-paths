@@ -1,5 +1,5 @@
 ---
-title: Score the plank pose
+title: Add scoring logic for the plank pose
 description: Convert MediaPipe pose landmarks into weighted joint angles and display a live plank-pose score in the Android app.
 weight: 4
 
@@ -19,7 +19,7 @@ The file provides three pieces of data:
 - `referenceLandmarks`, which stores the instructor plank pose as MediaPipe landmarks.
 - `angleWeights`, which stores the relative importance of each measured angle.
 
-You don't need to edit this file. For a larger app, you'd capture this data from an instructor image or video as a preprocessing step, and load for different poses as needed. For this app, the data is hard-coded so the Android app can stay focused on live inference and feedback.
+You don't need to edit this file. For a larger app, you'd capture this data from an instructor image or video as a preprocessing step, and load for different poses as needed. For this app, the data is hard-coded, so the Android app can stay focused on live inference and feedback.
 
 ## Extract joint angles
 
@@ -122,7 +122,7 @@ For each angle, the score starts at 100 and drops as the learner's angle differs
 The final score is the weighted average across all measured angles.
 
 {{% notice Note %}}
-This score is a simple pose-matching signal for the demo app. It's not a clinical, safety, or fitness-quality assessment.
+This score is a pose-matching signal for the app. It's not a clinical, safety, or fitness-quality assessment.
 {{% /notice %}}
 
 ## Emit score data from the ViewModel
@@ -143,7 +143,7 @@ val score = calculatePoseScore(
 UserPoseResult(referenceAngles, userAngles, score)
 ```
 
-The code calculates angles for the instructor reference and the learner's live pose. It then stores both angle lists with the score. You'll reuse the angle lists to build the LLM prompt in the following section.
+The code calculates angles for the instructor reference and the learner's live pose. It then stores both angle lists with the score. You'll reuse the angle lists when you build the LLM prompt.
 
 Now, replace the TODO in `userPoseScore` with the following code:
 
@@ -152,13 +152,13 @@ val userPoseScore: Flow<String> =
     sharedUserPoseResults.map { it.scoreVal.roundToInt().toString() }
 ```
 
-The UI wants a rounded string score. The underlying `UserPoseResult` keeps the full `Double` value for later use.
+The UI needs a rounded string score. The underlying `UserPoseResult` keeps the full `Double` value for later use.
 
 ## Display the score
 
 Open `ui/MainActivity.kt`.
 
-The starter project keeps `collectAppState()` as a safe no-op so the app can run before scoring and speech are implemented. Replace that function with the following code:
+The starter project keeps `collectAppState()` as a safe no-op so the app can run before you implement scoring and speech. Replace that function with the following code:
 
 ```kotlin
 private suspend fun collectAppState() = coroutineScope {
