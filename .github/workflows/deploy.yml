@@ -72,7 +72,7 @@ jobs:
           if [ "${{ inputs.target }}" = "dev" ]; then
             hugo --minify --config config.toml,config.internal.toml
           else
-            hugo --minify
+            hugo --minify --config config.toml,config.production.toml
           fi
         env:
           HUGO_LLM_API: ${{ secrets.HUGO_LLM_API }}

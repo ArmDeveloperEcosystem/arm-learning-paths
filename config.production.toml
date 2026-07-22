@@ -1,0 +1,4 @@
+[params]
+# Temporary production opt-in for the refreshed global navigation and footer.
+# Replace this URL when Arm publishes the refreshed stable bundle.
+global_web_components_url = "https://www.arm.com/arm-global-web-components/devhub/test.js"
