@@ -53,9 +53,11 @@ If the plugin is enabled but not working:
 - Check the emulation layer path
 - Confirm the Graph layer comes before the Tensor layer
 
-For detailed setup steps, see the [emulation layer section](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment/).
+For detailed setup steps, see [Set up the development environment](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment/).
 
 ### Software and hardware setup
+
+Version mismatches or missing dependencies cause most build or startup issues.
 
 If there are issues with software and hardware setup:
 
@@ -63,8 +65,6 @@ If there are issues with software and hardware setup:
 - Confirm your GPU driver supports Vulkan
 - Verify Visual Studio is compatible with your Unreal Engine version
 - Review build output and logs for errors
-
-Version mismatches or missing dependencies cause most build or startup issues.
 
 ## What you've accomplished and what's next
 

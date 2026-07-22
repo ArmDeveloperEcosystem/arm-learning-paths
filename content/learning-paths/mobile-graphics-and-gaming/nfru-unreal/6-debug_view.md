@@ -44,7 +44,7 @@ Depth tiles show the depth buffers for the previous and next frames. Use these t
 
 Disocclusion mask tiles highlight pixels that become visible as the camera moves. These areas often require special handling during frame generation.
 
-Motion warped color tiles display frames reprojected using engine motion vectors. Check these tiles to verify motion-vector accuracy.
+Motion-warped color tiles display frames reprojected using engine motion vectors. Check these tiles to verify motion-vector accuracy.
 
 Optical flow warped color tiles show frames warped with optical flow estimation. Compare these with the motion-warped tiles to assess optical flow quality.
 

@@ -46,6 +46,8 @@ Unreal Engine uses DirectX by default. To use NFRU, you must set Vulkan as the r
 
 ## Enable the plugin
 
+To enable the plugin, follow these steps:
+
 1. Open **Edit** in Unreal Engine and select **Plugins**.
 2. Search for **Neural Rendering** in the Plugins window.
 

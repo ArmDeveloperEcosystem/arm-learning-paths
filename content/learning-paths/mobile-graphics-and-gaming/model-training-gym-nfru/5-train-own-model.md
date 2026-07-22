@@ -50,7 +50,7 @@ Place your model file in the `src/ng_model_gym/usecases/` directory within the M
 whereis ng_model_gym
 ```
 
-This returns the directory of your `nb-env` virtual environment. 
+The command returns the directory of your `nb-env` virtual environment. 
 
 In this case, the Model Gym source code sits in the following directory:
 
@@ -167,4 +167,4 @@ You've now learned how to extend Model Gym beyond NFRU with your own models and 
 
 For more information on model registration, dataset integration, and use case development, see the [Model Gym GitHub repository](https://github.com/arm/neural-graphics-model-gym).
 
-You can now explore the Model Training Gym repository for deeper integration and to keep building your skills.
+Explore the Model Training Gym repository for deeper integration and to keep building your skills.

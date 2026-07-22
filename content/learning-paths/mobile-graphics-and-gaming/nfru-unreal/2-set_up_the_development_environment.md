@@ -14,13 +14,13 @@ To use Neural Frame Rate Upscaling (NFRU) in your Unreal Engine project, install
 Install the following:
 
 - [Vulkan SDK](https://vulkan.lunarg.com/sdk/home/) — Required for developing applications that use Vulkan. It includes the Vulkan Configurator, which you use to enable the emulation layers for running ML workloads through Vulkan ML extensions. Install the version 1.4.321.0 or newer.
-- [CMake](https://cmake.org/download/) — A build system that configures and generates project build files. You use CMake to build the Neural Graphics SDK, which compiles the components and dependencies required by the neural graphics plugins and tools. The minimum necessary CMake version is 3.21, and the maximum version is 3.31.
+- [CMake](https://cmake.org/download/) — A build system that configures and generates project build files. You use CMake to build the Neural Graphics SDK, which compiles the components and dependencies required by the neural graphics plugins and tools. The minimum supported CMake version is 3.21, and the maximum version is 3.31.
 - [`neural-graphics-for-unreal`](https://github.com/arm/neural-graphics-for-unreal/tree/main) — The Unreal Engine integration for the Neural Graphics Development Kit. The `neural-graphics-for-unreal` repository contains the NFRU plugin and resources you need to integrate neural graphics features into Unreal Engine.
 - [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan) — The `neural-graphics-for-unreal` repository includes prebuilt Vulkan ML emulation layers for supported Unreal Engine versions. If you need support for a different version, build the emulation layer from source.
 
 ## Set up the neural-graphics-for-unreal repository
 
-Clone and set up the `neural-graphics-for-unreal` repository and integrate it with your Unreal Engine project.
+To clone and set up the `neural-graphics-for-unreal` repository and integrate it with your Unreal Engine project, follow these steps:
 
 1. Clone the repository:
 
@@ -35,13 +35,13 @@ Clone and set up the `neural-graphics-for-unreal` repository and integrate it wi
      git submodule update --init
      ```
 
-3. Initialize Git LFS:
+3. Initialize Git Large File Storage (LFS):
 
      ```bash
      git lfs install
      ```
 
-4. Download the large files:
+4. Download the large files using LFS:
 
      ```bash
      git lfs pull
