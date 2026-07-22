@@ -49,7 +49,7 @@ bottleneck. Each recipe provides a different view of application performance:
 - To use the Memory Access recipe, enable the Statistical Profiling Extension
   (SPE).
 - The host machine can be macOS, Windows, or Linux on either arm64 or x86-64. The host can connect to the target locally or over SSH.
-- The Arm MCP Server is useful for agent-driven launch-mode profiling, but it doesn't expose the System Characterization recipe. To access the System Characterization recipe, use the `apx` CLI or the GUI. 
+- The skill guides AI assistants to use the `apx` CLI by default. If `apx` isn’t installed or available, it asks how you want to proceed rather than switching tools automatically. You can use the Arm MCP Server as an alternative tool. However, the MCP server doesn’t expose the System Characterization recipe.
 {{% /notice %}}
 
 ## What you've learned and what's next

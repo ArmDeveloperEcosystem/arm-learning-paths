@@ -1,5 +1,5 @@
 ---
-title: Best practices for profiling with the arm-performix skill
+title: Best practices for prompting AI assistants to use the arm-performix skill
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -10,14 +10,14 @@ layout: learningpathall
 
 The skill activates on performance and profiling intent. 
 
-The following are example prompts that work:
+The following are examples of prompts that show the expected intent:
 
 - "Profile this workload on Arm and find the hotspots."
 - "Why is this binary slow on my Arm Neoverse server?"
 - "Use Performix to check whether my hot loop uses vector instructions."
 - "Investigate cache and translation lookaside buffer stalls on my Neoverse target."
 
-Prompts that are vague or don't show the right intent won't activate the skill.
+Prompts that are vague or don't show the expected intent won't activate the skill.
 
 The following are example prompts that won't work:
 
@@ -26,8 +26,7 @@ The following are example prompts that won't work:
 
 ## Provide context up front
 
-The skill needs these details before it can profile. Supplying them in your first
-message avoids a round of back-and-forth:
+In addition to prompting with the right intent, you need to provide the following context:
 
 1. Target: a local Arm machine, or `user@host` for a remote Secure Shell (SSH) target
 2. Binary: the absolute path to the executable on the target

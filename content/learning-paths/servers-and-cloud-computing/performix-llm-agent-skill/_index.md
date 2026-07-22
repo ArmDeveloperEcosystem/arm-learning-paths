@@ -1,5 +1,5 @@
 ---
-title: Profile and improve Arm workloads with the arm-performix agent skill
+title: Get started with the arm-performix agent skill for profiling and improving Arm workloads
 
 description: Learn how to install and use the arm-performix skill so an AI coding assistant can drive Arm Performix, find code hotspots, diagnose pipeline stalls, and propose measured improvements on Arm Neoverse.
 
@@ -14,9 +14,9 @@ learning_objectives:
     - Read the analysis report the skill produces and drive the improvement loop
 
 prerequisites:
-    - An AI assistant with Agent Skills support enabled, such as GitHub Copilot in VS Code or Claude Code
-    - An Arm Neoverse-based Linux instance reachable from the assistant's environment
-    - Arm Performix installed with the `apx` command-line interface available on the host `PATH`, or the Arm Model Context Protocol (MCP) Server configured for supported launch-mode profiling recipes
+    - An AI assistant with Agent Skills support enabled, such as [GitHub Copilot in VS Code](/install-guides/github-copilot/) or [Claude Code](/install-guides/claude-code/)
+    - An Arm Neoverse-based Linux instance reachable from the assistant's environment. If you need an instance, complete the [Get started with Arm-based cloud instances Learning Path](/learning-paths/servers-and-cloud-computing/csp/)
+    - Arm Performix installed with access to a supported execution method, such as `apx` CLI, on the host `PATH`. For more information, see the [Arm Performix install guide](/install-guides/performix/). The skill guides AI assistants to use the `apx` CLI by default. 
 
 author:
     - Henry Wang
