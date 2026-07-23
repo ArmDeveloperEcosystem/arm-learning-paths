@@ -59,4 +59,4 @@ Each recipe provides a different view of application performance:
 
 You've now learned how the `arm-performix` skill can help an assistant use Performix correctly, and what Performix recipes the skill can run.
 
-Next, you'll install the skill. 
+Next, you'll install the skill and make it discoverable to your AI assistant. 
