@@ -20,7 +20,7 @@ The following are examples of prompts that show the expected intent:
 
 Prompts that are vague won't activate the skill.
 
-The following are example prompts that aren't as effective:
+The following are example vague prompts:
 
 - "Will my code build on Arm?" 
 - "Make my code faster" 
