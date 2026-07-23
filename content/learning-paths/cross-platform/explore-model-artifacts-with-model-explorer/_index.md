@@ -1,15 +1,11 @@
 ---
-title: Visualize ExecuTorch, TOSA, and VGF artifacts with Google's Model Explorer and Arm Extensions
-
-draft: true
-cascade:
-    draft: true
+title: Visualize ExecuTorch, TOSA, and VGF artifacts with Google Model Explorer and Arm Extensions
     
-description: Learn how to inspect ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump model artifacts with Google Model Explorer and Arm extensions.
+description: Inspect ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump model artifacts with Google Model Explorer and Arm extensions.
 
 minutes_to_complete: 90
 
-who_is_this_for: This learning path is for Edge AI developers who need to inspect model artifacts after backend delegation, understand graph structure and delegate coverage, and use those insights to reason about performance and behavior.
+who_is_this_for: This Learning Path is for Edge AI developers who need to inspect model artifacts after backend delegation, understand graph structure and delegate coverage, and use those insights to reason about performance and behavior.
 
 learning_objectives:
   - Explain what Google Model Explorer is and how adapters add support for Arm model artifacts
