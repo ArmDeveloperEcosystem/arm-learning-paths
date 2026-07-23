@@ -14,7 +14,7 @@ applications, libraries, runtimes, and source code.
 
 The `arm-performix` skill is a set of instructions you can add to your AI assistant so that it knows how to use Performix correctly on your behalf: which recipe to pick, how to gather context, how to read the results, and how to report findings.
 
-Without the skill, an assistant tends to guess at performance problems by reading
+Without the skill, an assistant might guess at performance problems by reading
 your source code.
 
 When the skill is active, the assistant:
@@ -23,7 +23,7 @@ When the skill is active, the assistant:
 - Chooses the narrowest Performix recipe that answers your question
 - Runs the recipe through the `apx` command-line interface (CLI), or through the
   Arm Model Context Protocol (MCP) Server
-- Returns a structured Analysis Report with a bottleneck summary, key metrics,
+- Returns a structured analysis report with a bottleneck summary, key metrics,
   hot functions, ranked recommendations, and a single next step
 
 ## What recipes the skill can run
@@ -31,7 +31,9 @@ When the skill is active, the assistant:
 Performix exposes five profiling recipes, and the skill orchestrates them as a
 workflow: it picks a starting recipe from your question, then follows the
 evidence into whichever further recipes are needed to explain and confirm the
-bottleneck. Each recipe provides a different view of application performance:
+bottleneck. 
+
+Each recipe provides a different view of application performance:
 
 | Recipe | What it shows |
 | --- | --- |
@@ -49,7 +51,7 @@ bottleneck. Each recipe provides a different view of application performance:
 - To use the Memory Access recipe, enable the Statistical Profiling Extension
   (SPE).
 - The host machine can be macOS, Windows, or Linux on either arm64 or x86-64. The host can connect to the target locally or over SSH.
-- The skill guides AI assistants to use the `apx` CLI by default. If `apx` isn’t installed or available, it asks how you want to proceed rather than switching tools automatically. You can use the Arm MCP Server as an alternative tool. However, the MCP server doesn’t expose the System Characterization recipe.
+- The skill guides AI assistants to use the `apx` CLI by default. If `apx` isn’t installed or available, it asks how you want to proceed rather than switching tools automatically. You can use the Arm MCP Server as an alternative tool. Note that the MCP server doesn’t expose the System Characterization recipe.
 {{% /notice %}}
 
 ## What you've learned and what's next

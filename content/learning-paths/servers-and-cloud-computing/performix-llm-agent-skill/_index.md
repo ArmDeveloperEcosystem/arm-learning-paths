@@ -5,10 +5,10 @@ description: Learn how to install and use the arm-performix skill so an AI codin
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an introductory topic for developers who use an AI coding assistant with Agent Skills support, such as GitHub Copilot in VS Code or Claude Code, and want the `arm-performix` skill to drive Arm Performix profiling workflows without memorizing the `apx` command-line interface.
+who_is_this_for: This is an introductory topic for developers who use an AI coding assistant with Agent Skills support, such as GitHub Copilot in VS Code or Claude Code, and want the arm-performix skill to drive Arm Performix profiling workflows without memorizing the apx command-line interface.
 
 learning_objectives:
-    - Install and enable the `arm-performix` skill in your AI assistant
+    - Install and enable the arm-performix skill in your AI assistant
     - Trigger the skill with phrasing that activates the profiling workflow
     - Provide the context the skill needs to profile (target, binary, workload)
     - Read the analysis report the skill produces and drive the improvement loop
@@ -16,7 +16,7 @@ learning_objectives:
 prerequisites:
     - An AI assistant with Agent Skills support enabled, such as [GitHub Copilot in VS Code](/install-guides/github-copilot/) or [Claude Code](/install-guides/claude-code/)
     - An Arm Neoverse-based Linux instance reachable from the assistant's environment. If you need an instance, complete the [Get started with Arm-based cloud instances Learning Path](/learning-paths/servers-and-cloud-computing/csp/)
-    - Arm Performix installed with access to a supported execution method, such as `apx` CLI, on the host `PATH`. For more information, see the [Arm Performix install guide](/install-guides/performix/). The skill guides AI assistants to use the `apx` CLI by default. 
+    - Arm Performix installed with access to a supported execution method, such as the `apx` CLI, on the host `PATH`. For more information, see the [Arm Performix install guide](/install-guides/performix/). The skill guides AI assistants to use the `apx` CLI by default. 
 
 author:
     - Henry Wang

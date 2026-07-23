@@ -49,8 +49,7 @@ skill picks Code Hotspots first, runs it, and reports back with an analysis.
 
 ## Provide absolute paths
 
-Always provide the absolute path to the binary, and use absolute paths for input
-files, output files, and other files your workload reads or writes. 
+Always provide the absolute path to the binary. Use absolute paths for all files your workload reads or writes. 
 
 If the workload must run from a specific directory, include the directory in the prompt. Performix can launch the process from a different working directory, so relative paths can resolve unexpectedly.
 
@@ -58,4 +57,4 @@ If the workload must run from a specific directory, include the directory in the
 
 You've now learned how to best structure your prompts to profile an application using the `arm-performix` skill.
 
-Next, you'll learn how to interpret and act on Performix analysis reports. 
+Next, you'll learn how to use generated reports to drive performance improvements. 

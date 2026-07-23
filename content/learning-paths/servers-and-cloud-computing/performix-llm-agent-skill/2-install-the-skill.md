@@ -71,7 +71,7 @@ In VS Code, confirm that Agent Skills are enabled in the **Configure Chat** skil
 
 A correctly installed skill is picked up automatically when your request shows profiling or performance intent. You don't need to use a specific command to invoke the skill. 
 
-For a set of prompts you can use to confirm skill discovery, see [Best practices for prompting AI assistants to use the arm-performix skill](/learning-paths/servers-and-cloud-computing/performix-llm-agent-skill/3-trigger-the-skill).
+For prompts you can use to confirm skill discovery, see [Best practices for prompting AI assistants to use the arm-performix skill](/learning-paths/servers-and-cloud-computing/performix-llm-agent-skill/3-trigger-the-skill).
 
 ## What you've accomplished and what's next
 
