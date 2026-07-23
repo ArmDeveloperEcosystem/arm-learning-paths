@@ -1,6 +1,10 @@
 ---
 title: Use Arm Performix Agentic Dynamic Insights from VS Code with Codex
 
+draft: true
+cascade:
+    draft: true
+
 description: This Learning Path shows how to configure the Arm Performix MCP server with the Codex extension in Visual Studio Code, then generate AI Insights for an existing Arm Performix profiling run.
 
 minutes_to_complete: 20
@@ -27,7 +31,7 @@ author:
     - Julie Gaskin
 
 ### Tags
-skilllevels: Beginner
+skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Neoverse
