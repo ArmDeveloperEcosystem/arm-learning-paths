@@ -3,98 +3,127 @@ title: Configure the Arm Performix MCP server in Codex
 
 weight: 3
 
+description: Add the local Arm Performix MCP server to Codex and verify that the extension can access Performix tools and profiling runs.
+
 layout: learningpathall
 ---
-There are 3 ways to configure the MCP server:
+## Choose a configuration method
 
-- Through VS Code's GUI
-- Through the Codex CLI
-- By editing the Codex configuration file: `~/.codex/config.toml`.
+Codex CLI and the Codex extension share MCP configuration on the same host. Choose one of these methods:
 
-## Configure the MCP server through VS Code
+- Use the Codex extension settings.
+- Run `codex mcp add` in a terminal.
+- Edit `~/.codex/config.toml`.
 
-Use the following procedure in Visual Studio Code:
+You only need to complete one method. The MCP server is a local standard input/output (STDIO) process started by the `apx` executable.
 
-1. Open Visual Studio Code and open the Codex sidebar.
-2. Open Codex settings.
-3. In the Codex Settings tab, select MCP servers.
-4. Click + Add server.
-5. In the Name field, enter a name such as arm-performix.
-6. In the Command to launch field, enter the path to the Arm Performix `apx` executable.
-    Default paths include:
+{{% notice Note %}}
+Configure the server on the host where Codex runs. In a local VS Code session, this is your development computer. In a remote development session, confirm which host runs the Codex extension and which Arm Performix data directory it uses.
+{{% /notice %}}
 
-    ```
+## Configure the server in the Codex extension
+
+To add the server in Visual Studio Code:
+
+1. Open the Codex sidebar and select the gear icon.
+2. Select **MCP servers**, then select **Add server**.
+3. Enter `arm-performix` for the server name.
+4. Select **STDIO** as the transport.
+5. Enter the full path to the Arm Performix `apx` executable in the command field.
+
+    On macOS:
+
+    ```text
     /Applications/Arm Performix.app/Contents/assets/apx/apx
+    ```
 
+    On Linux:
+
+    ```text
     /opt/Arm Performix/assets/apx/apx
     ```
 
-    On Windows, the default installation directory depends on whether Arm Performix was installed for one user or all users:
+    On Windows with an all-users installation:
 
-    ```
-    C:\Users\<username>\AppData\Local\Programs\Arm Performix 
-
-    C:\Program Files\Arm Performix
+    ```text
+    C:\Program Files\Arm Performix\assets\apx\apx.exe
     ```
 
-7. In the Arguments field, add:
+    On Windows with a single-user installation:
 
+    ```text
+    C:\Users\<username>\AppData\Local\Programs\Arm Performix\assets\apx\apx.exe
     ```
+
+6. Add one argument:
+
+    ```text
     mcp
     start
     ```
 
-8. Click **Save** and restart the Codex extension.
+7. Select **Save**, then select **Restart extension**.
 
-## Configure the MCP server using Codex CLI
+## Configure the MCP server with Codex CLI
 
-Alternatively, you can use Codex's CLI to add an MCP server. Replace `<path-to-apx>` with the path to the `apx` executable on your system. If the path contains spaces, put the path in double quotation marks.
+If the `codex` command is available in your terminal, add the same STDIO server from the command line. Replace `<path-to-apx>` with the full executable path for your host:
 
-```
+```bash
 codex mcp add arm-performix -- "<path-to-apx>" mcp start
 ```
 
 For example, on macOS:
 
-```
+```bash
 codex mcp add arm-performix -- "/Applications/Arm Performix.app/Contents/assets/apx/apx" mcp start
 ```
 
-## Configure the MCP server in the Codex configuration file
+Restart the Codex extension after the command completes.
 
-You can also configure the MCP server by editing the Codex configuration file directly.
+## Configure the server in `config.toml`
 
-1. Open this file in a text editor: `~/.codex/config.toml`
+For direct configuration, open `~/.codex/config.toml` and add:
 
-2. Add a server entry:
+```toml
+[mcp_servers.arm-performix]
+command = "/Applications/Arm Performix.app/Contents/assets/apx/apx"
+args = ["mcp", "start"]
+```
 
-    ```
-    [mcp_servers.arm-performix]
+Replace `command` with the full path to `apx` on your host. Save the file and restart the Codex extension.
 
-    command = "/Applications/Arm Performix.app/Contents/assets/apx/apx"
+On Windows, use a TOML literal string so backslashes in the path aren't treated as escape characters:
 
-    args = ["mcp", "start"]
-    ```
-
-3. Replace the command value with the path to the apx executable on your system.
-4. Save the file and restart the Codex extension.
+```toml
+[mcp_servers.arm-performix]
+command = 'C:\Program Files\Arm Performix\assets\apx\apx.exe'
+args = ["mcp", "start"]
+```
 
 ## Check that the MCP server is connected
 
-Before generating insights, ask Codex to confirm that it can see Arm Performix data:
+If the `codex` command is available, confirm that Codex loaded the configuration:
 
-```
-List the available Arm Performix recipes and profiling runs. If no code hotspots runs are available, tell me that the MCP server is connected but there are no supported runs to analyze.
-```
-
-If the assistant lists Arm Performix recipes or runs, the MCP server is connected.
-
-To narrow the result, include a workload name, recipe, or time period:
-
-```
-Show me a list of Arm Performix runs for which AI insights are available.
+```bash
+codex mcp list
 ```
 
-Review the returned runs and identify the run you want to analyze. Note the run name or run ID.
+Find `arm-performix` in the server list and check that its command and `mcp` argument are correct. If you don't use Codex CLI, open **MCP servers** from the Codex gear menu to review the same status.
 
-If no supported Code Hotspots runs are available, you can create one from VS Code by asking the assistant to use the Arm Performix MCP server.
+Configuration alone doesn't prove that the tools can read Performix data. In a new Codex chat, enter:
+
+```text
+Use the Arm Performix MCP server to list the available recipes and profiling runs. For each run, include its run ID, recipe, target, workload, and creation time when those fields are available.
+```
+
+If Codex returns Performix recipes or runs, the end-to-end connection works. An empty run list isn't a connection failure if recipes or targets are returned.
+
+Next, ask Codex to identify runs that support the insight workflow:
+
+```text
+List the Arm Performix Code Hotspots runs that can be used to generate an AI Insight. Include the run ID and enough workload and target details for me to choose the correct run.
+```
+
+Record the run ID you want to analyze. A run name can be changed and might not be unique, so use the run ID in later prompts.
+
+You have now configured and tested the MCP connection. If no supported run is available, create a Code Hotspots run in the next section.
