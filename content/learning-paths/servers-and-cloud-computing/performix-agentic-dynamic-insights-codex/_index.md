@@ -1,31 +1,27 @@
 ---
-title: Use Arm Performix Agentic Dynamic Insights from VS Code with Codex
+title: Generate Arm Performix AI Insights in VS Code with Codex
 
 draft: true
 cascade:
     draft: true
 
-description: This Learning Path shows how to configure the Arm Performix MCP server with the Codex extension in Visual Studio Code, then generate AI Insights for an existing Arm Performix profiling run.
+description: Configure the Arm Performix MCP server for Codex in Visual Studio Code and use profile evidence to generate and validate AI Insights.
 
 minutes_to_complete: 20
 
 who_is_this_for: This Learning Path is for software developers and performance engineers who want to optimize applications on Arm-based servers using Arm Performix.
 
 learning_objectives:
-    - Configure the Arm Performix MCP server in the Codex extension for VS Code. 
-    - Check that the assistant can see Arm Performix recipes and runs. 
-    - Ask the assistant to list available Arm Performix runs. 
-    - Generate AI Insights for a supported code hotspots run. 
-    - Use the result to decide where to inspect or optimize next. 
+    - Configure the Arm Performix MCP server for the Codex extension in VS Code.
+    - Verify that Codex can access Arm Performix recipes, targets, and runs.
+    - Create or select a supported Code Hotspots run.
+    - Generate an AI Insight and validate its recommendations against profile evidence.
 
 prerequisites:
-    - Arm Performix version 2026.2.5 or later installed. Refer to the [Install Guide](https://learn.arm.com/install-guides/performix/) for instructions. 
-    - Visual Studio Code installed with the Codex extension. 
-    - Permission to use your organization-approved AI assistant with profile data, symbols, source excerpts, disassembly excerpts, and performance metrics.
-    - For remote Linux targets, configure key-based SSH access before using the Arm Performix MCP server. 
-    - If you connect to your target as a non-root user, some recipes or target configurations might require passwordless sudo. 
-    - Make sure your SSH known_hosts file contains the target host key. 
-    - If your target configuration uses jump nodes, make sure known_hosts also contains the host key for each jump node. 
+    - Arm Performix version 2026.2.5 or later installed. See the [Arm Performix install guide](/install-guides/performix/) for installation and target setup instructions.
+    - Visual Studio Code with the Codex extension installed.
+    - Access to Codex through ChatGPT sign-in, or an organization-approved OpenAI API key provided through the `OPENAI_API_KEY` environment variable.
+    - Permission from your organization to share profile data, symbols, source excerpts, disassembly excerpts, and performance metrics with Codex.
 
 author: 
     - Julie Gaskin
@@ -39,30 +35,28 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Arm Performix
-    - C++
-    - GCC
+    - Codex
+    - Model Context Protocol
+    - Visual Studio Code
 
 further_reading:
     - resource:
-        title: Install guide
+        title: Arm Performix install guide
         link: https://learn.arm.com/install-guides/performix
         type: documentation
     - resource:
-        title: User guide
+        title: Arm Performix User Guide
         link: https://developer.arm.com/documentation/110163/latest/
         type: documentation
     - resource:
-        title: Code hotspots learning path
+        title: Find Code Hotspots with Arm Performix
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/cpu_hotspot_performix
-        type: learning path
+        type: documentation
     - resource:
-        title: CPU microarchitecture learning path
+        title: Tune application performance with Arm Performix CPU Microarchitecture
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/performix-microarchitecture
-        type: learning path
-    - resource:
-        title: Migrating applications to Arm servers
-        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/migration/
-        type: learning path
+        type: documentation
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

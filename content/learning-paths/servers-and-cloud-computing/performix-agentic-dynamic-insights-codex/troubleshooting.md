@@ -3,87 +3,104 @@ title: Troubleshooting
 
 weight: 7
 
+description: Diagnose Arm Performix MCP startup, Codex tool selection, run discovery, remote authentication, and low-quality insight problems.
+
 layout: learningpathall
 ---
-Here are some solutions to common problems you may face when using this workflow.
+## Diagnose the MCP workflow
+
+Use these checks to isolate configuration, process startup, data discovery, and profile-quality problems.
 
 ## The Codex extension does not show the Arm Performix MCP server
 
-Use Codex's `mcp list` subcommand to check if Codex has picked up the MCP server and what settings are present:
+Check whether Codex loaded the server configuration:
 
-```
+```bash
 codex mcp list
-Name                Command                 Args
-arm-performix     /Applications/Arm Performix.app/Contents/assets/apx/apx      mcp start
 ```
 
-If this is correct, check:
+Find `arm-performix` in the output. Then confirm:
 
-1. the `apx` command path is correct,
-2. the arguments are `mcp` and `start`,
-3. the server name is configured in Codex settings or `~/.codex/config.toml`,
-4. you restarted the Codex extension after saving the configuration,
-5. you are editing the Codex configuration for the same user account that runs VS Code.
+- The command is the full path to the `apx` executable, including `apx.exe` on Windows.
+- The only argument is `mcp`.
+- The server is enabled.
+- You restarted the extension after changing the configuration.
+- You edited the configuration for the same user account and Codex host that runs the extension.
 
 ## The MCP server fails to start
 
-Common causes include:
+Run the executable's built-in help from a terminal to separate an `apx` problem from a Codex configuration problem. Replace `<path-to-apx>` with the configured path:
 
-1. incorrect Arm Performix executable path,
-2. missing execute permission,
-3. incompatible Arm Performix version,
-4. missing license or environment setup,
-5. server started on the wrong machine when using remote development,
-6. SSH target configuration that does not satisfy Arm Performix requirements.
-
-## The Assistant does not use Arm Performix
-
-Try a more explicit prompt:
-
-```
-Use the Arm Performix MCP server to list the available Arm Performix runs. 
+```bash
+"<path-to-apx>" mcp --help
 ```
 
-Or:
+If the help text doesn't appear, check the executable path, file permissions, and installed Arm Performix version. If it does appear, reopen **MCP servers** in the Codex extension and check the server status.
 
-```
-Use Arm Performix to generate AI Insights for the run named "<run ID>". 
+In a remote development session, make sure `apx` is installed on the Codex host and that this installation uses the expected Performix configuration and run data.
+
+## Codex does not use Arm Performix
+
+Name the server and task explicitly:
+
+```text
+Use the Arm Performix MCP server to list the available Arm Performix runs.
 ```
 
-If you have many MCP servers installed, ambiguous prompts such as give me insights might cause the assistant to choose a different tool.
+For a specific run:
+
+```text
+Use Arm Performix to generate an AI Insight for run ID "<run-id>".
+```
+
+If you have several MCP servers, an ambiguous prompt such as `give me insights` might not select Arm Performix.
 
 ## No supported runs are found
 
 Check:
 
-1. you have created at least one supported Code Hotspots run,
-2. the MCP server is running as the same user who created the run,
-3. the run exists in the same Arm Performix data location used by the GUI and CLI,
-4. the run has enough profile data, symbols, source, or disassembly to support useful analysis,
-5. you are not connected to a remote VS Code environment that has a different home directory or Arm Performix configuration.
+- You created at least one completed Code Hotspots run.
+- The MCP server runs as the same user who created or imported the run.
+- The GUI, CLI, and MCP server use the same Arm Performix data location.
+- The selected run contains enough samples and profile data for analysis.
+- A remote VS Code environment isn't using a different home directory or Performix configuration.
+
+Compare the MCP result with the CLI:
+
+```bash
+apx run list
+```
+
+If the CLI also returns no run, create or import a run. If the CLI returns the run but Codex doesn't, recheck which host, user, and configuration start the MCP server.
 
 ## Remote target authentication fails
 
 Check:
 
-1. SSH key-based authentication is configured,
-2. passwordless sudo is configured if your recipe or target setup requires it,
-3. strict host-key checking can succeed,
-4. your known_hosts file contains the target SSH host key,
-5. your known_hosts file contains each jump-node host key, if jump nodes are used.
+- SSH key-based authentication works without an interactive password prompt.
+- The private key doesn't require an interactive passphrase.
+- Passwordless `sudo` is configured for the target user.
+- Strict host-key checking succeeds.
+- `~/.ssh/known_hosts` contains the target key and each jump-node key.
+
+Use the Arm Performix target test to check the configured connection independently of Codex:
+
+```bash
+apx target test --target <target-name>
+```
 
 ## The insight is too generic
 
-Try narrowing the request:
+Ask for one finding and its evidence:
 
-```
-Focus on the highest-impact finding in run "<run ID>" and explain the evidence. 
-```
-
-Or:
-
-```
-Explain whether <function-name> appears to be limited by scalar code, memory traffic, locking, allocation, or call overhead. Use evidence from the Performix run. 
+```text
+Focus on the highest-impact finding in run ID "<run-id>". Cite the measured evidence, distinguish hypotheses from observations, and identify the next Performix view or recipe to inspect.
 ```
 
-The more specific the question, the easier it is for the assistant to use high-signal profile evidence.
+For a known hotspot:
+
+```text
+For function "<function-name>" in run ID "<run-id>", summarize what Code Hotspots proves, what it doesn't prove, and which additional evidence is needed to identify the root cause.
+```
+
+If the response remains generic, confirm that the run has enough samples, symbols, source mapping, and disassembly. Code Hotspots locates sampled CPU time; use a more specific Performix recipe when you need evidence about microarchitecture, instruction mix, or memory access.
