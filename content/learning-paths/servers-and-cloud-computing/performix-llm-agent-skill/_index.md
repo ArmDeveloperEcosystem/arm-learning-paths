@@ -35,14 +35,14 @@ generated_summary_faq:
   summary: >-
     You’ll install the `arm-performix` skill and learn how to activate it with a performance-focused prompt. You’ll learn that you need to provide an Arm Neoverse target, an absolute binary path, a repeatable workload, and a profiling goal in your prompts. Then, you'll interpret an example structured analysis report and learn how to use a report's recommendations to guide measured improvements.
   faqs:
-  - question: How do I install the `arm-performix` skill using Git?
+  - question: How do I install the arm-performix skill using Git?
     answer: >-
       Clone the skills repository, then copy the `arm-performix` folder into your project’s skills directory.
-  - question: Do I need to run the `apx` CLI myself, or does the skill handle it?
+  - question: Do I need to run the apx CLI myself, or does the skill handle it?
     answer: >-
       You don't need to run `apx` CLI commands manually. The skill guides AI assistants to use the `apx` CLI by default. Ensure Arm Performix is installed
       and `apx` is available on the host `PATH`.
-  - question: How do I write prompts to activate the `arm-performix` skill?
+  - question: How do I write prompts to activate the arm-performix skill?
     answer: >-
       Use clear profiling intent, for example: "Profile this workload on Arm and find the hotspots",
       "Why is this binary slow on my Arm Neoverse server?", "Use Performix to check whether my
