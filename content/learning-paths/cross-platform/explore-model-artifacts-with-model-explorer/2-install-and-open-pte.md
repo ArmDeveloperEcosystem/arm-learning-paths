@@ -1,5 +1,6 @@
 ---
 title: Install Model Explorer extensions and view a Cortex-M model graph
+description: Install Model Explorer and Arm extensions, then open a Cortex-M PTE file to inspect its graph and ExecuTorch metadata.
 
 weight: 3
 

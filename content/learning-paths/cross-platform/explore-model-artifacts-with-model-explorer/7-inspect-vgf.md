@@ -1,5 +1,6 @@
 ---
 title: Inspect VGF artifacts using Model Explorer
+description: Compare VGF-backend PTE and standalone VGF artifacts in Model Explorer to understand ExecuTorch packaging and Vulkan backend graph structure.
 
 weight: 7
 

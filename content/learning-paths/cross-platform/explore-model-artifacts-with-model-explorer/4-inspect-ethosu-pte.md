@@ -1,5 +1,6 @@
 ---
 title: Inspect Ethos-U PTE delegation on Model Explorer
+description: Inspect FP32 and INT8 Ethos-U PTE files in Model Explorer to identify clean, missing, and fragmented NPU delegation.
 
 weight: 5
 

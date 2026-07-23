@@ -1,5 +1,6 @@
 ---
 title: Inspect TOSA artifacts using Model Explorer
+description: Inspect TOSA graphs in Model Explorer to compare operators, tensor metadata, quantization, and graph fragmentation before backend compilation or conversion.
 
 weight: 6
 

@@ -1,5 +1,6 @@
 ---
 title: Compare portable and XNNPACK PTE files on Model Explorer
+description: Compare portable-kernel and XNNPACK PTE files in Model Explorer to identify delegated regions and work that remains on the default Cortex-A CPU path.
 
 weight: 4
 

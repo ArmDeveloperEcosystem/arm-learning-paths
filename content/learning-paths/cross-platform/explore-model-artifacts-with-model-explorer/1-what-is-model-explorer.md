@@ -1,5 +1,6 @@
 ---
 title: Understand Model Explorer and the artifacts you will inspect
+description: Understand how Model Explorer and Arm extensions visualize PTE, TOSA, VGF, ETRecord, and ETDump artifacts across model deployment workflows.
 
 weight: 2
 

@@ -1,5 +1,6 @@
 ---
 title: Inspect ETRecord and ETDump overlays using Model Explorer
+description: Overlay ETRecord and ETDump profiling data in Model Explorer to connect ExecuTorch graph nodes and delegate regions with runtime timing.
 
 weight: 8
 
