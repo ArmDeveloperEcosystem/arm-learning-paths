@@ -16,7 +16,7 @@ Model Explorer uses adapters and data providers to load formats beyond the built
 
 ## What you will do
 
-This Learning Path is about model artifacts, not model training or export. You'll start from small pre-generated files and use each to gain an understanding of when you'd use Model Explorer, and what insights you can gain.
+This Learning Path is about model artifacts, not model training or export. You'll start from small pre-generated files and use each to understand when you'd use Model Explorer, and what insights you can gain.
 
 You'll use the following artifacts:
 
@@ -28,7 +28,7 @@ You'll use the following artifacts:
 | `.etrecord` | ETRecord adapter in the ExecuTorch extension | Export-time profiling context | Graph structure, debug handles, operator names, and delegate metadata used to map runtime events back to graph nodes |
 | `.etdp` | ETDump data provider in the ExecuTorch extension | Runtime trace overlay | Timing data from a specific execution |
 
-You'll focuses on Arm adapters and extensions for Model Explorer, but the artifacts repository also includes `.tflite` and `.pt2` files. You can optionally try these files because Model Explorer supports them without an additional adapter.
+You'll focus on Arm adapters and extensions for Model Explorer, but the artifacts repository also includes `.tflite` and `.pt2` files. You can optionally try these files because Model Explorer supports them without an additional adapter.
 
 {{% notice Note %}}
 Model Explorer visualizes the specific artifact you generated or received. Small differences in the target the model has been delegated to can result in a very different model graph. For example, delegating the same model to an Ethos-U55, might produce a very different model graph from delegating to an Ethos-U85.
@@ -101,7 +101,7 @@ The following is a glossary of different terms used in this Learning Path:
 | Compiler | A tool that transforms an intermediate representation into a lower-level target representation, such as Vela compiling TOSA for Ethos-U. |
 | Lower | To transform a model or graph from a higher-level representation into a lower-level representation closer to a target backend. |
 | Convert | To change one artifact format into another, such as TOSA to VGF. |
-| Intermediate representation | A representation between the original model and the final target artifact. TOSA is the main intermediate representation in this learning path. |
+| Intermediate representation | A representation between the original model and the final target artifact. TOSA is the main intermediate representation in this Learning Path. |
 | Delegate | A backend-specific execution path that handles supported parts of a graph. Unsupported parts can remain outside the delegate, and can run on a CPU path only when the deployed runtime includes compatible kernels. |
 | Kernel | The code that executes a model operator for a specific runtime or backend, such as a portable ExecuTorch kernel or a CMSIS-NN kernel. |
 | Flatbuffer | A compact binary serialization format. TOSA flatbuffers store TOSA graphs; `.pte` files use a FlatBuffer-based ExecuTorch program format. |

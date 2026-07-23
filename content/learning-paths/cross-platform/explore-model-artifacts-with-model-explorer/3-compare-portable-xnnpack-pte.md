@@ -1,5 +1,5 @@
 ---
-title: Compare portable and XNNPACK PTE files on Model Explorer
+title: Compare portable and XNNPACK PTE files with Model Explorer
 description: Compare portable-kernel and XNNPACK PTE files in Model Explorer to identify delegated regions and work that remains on the default Cortex-A CPU path.
 
 weight: 4
@@ -20,7 +20,7 @@ Portable kernels aren't usually the fastest CPU path. The kernels prioritize bro
 
 On Arm CPUs, XNNPACK can use Arm KleidiAI micro-kernels. [KleidiAI](https://developer.arm.com/dev2/ai/kleidi-libraries) is Arm's open-source library of optimized low-level AI routines for Arm CPUs. It provides architecture-tuned compute kernels for operations such as matrix multiplication, using Arm features such as Neon, SVE2, and SME2 where supported. You do not call KleidiAI directly in this workflow; ExecuTorch delegates to XNNPACK, and XNNPACK can use KleidiAI-optimized kernels internally when the operator, data type, and hardware are supported.
 
-If you are interested in understanding how SME2 can accelerate performance of ExecuTorch models, take a look at [Profile ExecuTorch models with SME2 on Arm](https://learn.arm.com/learning-paths/cross-platform/sme-executorch-profiling/).
+If you are interested in understanding how SME2 can accelerate performance of ExecuTorch models, see the [Profile ExecuTorch models with SME2 on Arm](https://learn.arm.com/learning-paths/cross-platform/sme-executorch-profiling/) Learning Path.
 
 To summarize the different CPU paths:
 
@@ -32,7 +32,7 @@ To summarize the different CPU paths:
 
 ## Compare CPU deployment artifacts
 
-You'll compare two `.pte` files generated from the same Open Pre-trained Transformer (OPT)model: [`facebook/opt-125m`](https://huggingface.co/facebook/opt-125m).
+You'll compare two `.pte` files generated from the same Open Pre-trained Transformer (OPT) model: [`facebook/opt-125m`](https://huggingface.co/facebook/opt-125m).
 
 OPT-125M is a 125-million-parameter, decoder-only transformer language model from Meta. The model is a small member of the OPT family, which makes it useful for demonstrations. OPT-125M is large enough to contain transformer operations such as embeddings, attention, linear layers, matrix multiplication, reshapes, and masking, but small enough to inspect and run on edge-class Arm systems.
 

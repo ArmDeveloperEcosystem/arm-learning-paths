@@ -1,5 +1,5 @@
 ---
-title: Visualize ExecuTorch, TOSA, and VGF artifacts with Google Model Explorer and Arm Extensions
+title: Visualize ExecuTorch, TOSA, and VGF artifacts with Google Model Explorer and Arm extensions
     
 description: Inspect ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump model artifacts with Google Model Explorer and Arm extensions.
 

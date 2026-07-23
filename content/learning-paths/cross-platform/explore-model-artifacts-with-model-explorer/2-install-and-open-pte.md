@@ -103,7 +103,7 @@ model-explorer
   {{< /tab >}}
 {{< /tabpane >}}
 
-Use `CTRL + C` to stop Model Explorer.
+Press `Ctrl+C` to stop Model Explorer.
 
 {{% notice Note %}}
 If you're interested in a specific model format or a particular target, skip to the appropriate section.
@@ -121,19 +121,19 @@ CMSIS-NN exists to make common ML operations such as convolutions, fully connect
 The Cortex-M backend is a work-in-progress proof of concept. It's not intended for production use, and APIs might change without notice. However, the `.pte` is pre-generated for you in the provided repository. To learn more about the Cortex-M backend, see the [Cortex-M Backend Documentation](https://docs.pytorch.org/executorch/1.2/backends/arm-cortex-m/arm-cortex-m-overview.html), which also links to a Jupyter Notebook.
 {{% /notice %}}
 
-In the Model Explorer UI, open `ml-model-artifacts/pte/mv2_cortex_m.pte`.
+In Model Explorer, open `ml-model-artifacts/pte/mv2_cortex_m.pte`.
 
 Your view in the browser should appear as follows:
 
 ![Screenshot of Model Explorer with Arm Adapters and a loaded Cortex-M PTE.#center](model_explorer.png "Model Explorer with Arm Adapters")
 
-Select `View selected models`, and your view should appear as follows:
+Select **View selected models**, and your view should appear as follows:
 
 ![Screenshot of top-level view in Model Explorer of a loaded Cortex-M PTE.#center](cortex_m_top.png "Typical top-level graph view in Model Explorer")
 
-A right-hand bar tells you the graph info, including the `op node count` and the `layer count`. The `op node count` is the number of operator nodes in the graph. The `layer count` is the number of hierarchical graph components represented in the current view, not necessarily the number of neural network layers in the original model.
+The graph information panel shows the **op node count** and **layer count**. The **op node count** is the number of operator nodes in the graph. The **layer count** is the number of hierarchical graph components represented in the current view, not necessarily the number of neural network layers in the original model.
 
-Double click the `forward` layer to see the various operators comprising the layer. Click a specific operator — for example, `cortex_m::quantize_per_tensor` — to see various attributes, as well as inputs and outputs, in the right-hand bar.
+Expand the `forward` layer to view its operators. Select an operator, such as `cortex_m::quantize_per_tensor`, to see its attributes, inputs, and outputs in the node information panel.
 
 ![Screenshot of examining a specific Cortex-M operator in Model Explorer.#center](cortex_m_inspect.png "Inspecting specific operators with Model Explorer")
 
@@ -156,7 +156,7 @@ You might also see lower-level `.pte` execution fields in the node attributes. T
 
 You don't need to memorize these internal fields. Use the fields as clues when you want to connect a visible graph node to the underlying ExecuTorch program structure.
 
-Select the `eye symbol` in the top left bar to select data to view on nodes and edges. Choose the data you want to see - for example, `op node id` and `op node attributes` — to include more data within the graph itself.
+Select the eye icon in the toolbar to open the **View on nodes** panel. Select the data you want to display, such as **Op node id** and **Op node attributes**, to show more information in the graph.
 
 ## What you've accomplished and what's next
 

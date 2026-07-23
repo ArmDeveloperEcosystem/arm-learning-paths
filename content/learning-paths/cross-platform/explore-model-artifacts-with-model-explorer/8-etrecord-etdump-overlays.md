@@ -1,5 +1,5 @@
 ---
-title: Inspect ETRecord and ETDump overlays using Model Explorer
+title: Inspect ETRecord and ETDump overlays with Model Explorer
 description: Overlay ETRecord and ETDump profiling data in Model Explorer to connect ExecuTorch graph nodes and delegate regions with runtime timing.
 
 weight: 8
@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## View ExecuTorch runtime profiling data
 
-You've inspected static artifacts. PTE, TOSA, and VGF views to learn what was exported, lowered, compiled, converted, or packaged.
+PTE, TOSA, and VGF views help you learn what was exported, lowered, compiled, converted, or packaged.
 
 Runtime profiling answers a different set of questions. With runtime profiling, you can learn what happened when the artifact ran on a specific runtime, runner, target hardware, and tracing configuration.
 

@@ -1,5 +1,5 @@
 ---
-title: Inspect Ethos-U PTE delegation on Model Explorer
+title: Inspect Ethos-U PTE delegation with Model Explorer
 description: Inspect FP32 and INT8 Ethos-U PTE files in Model Explorer to identify clean, missing, and fragmented NPU delegation.
 
 weight: 5
@@ -16,12 +16,12 @@ Model Explorer is useful because the final `.pte` shows whether the ExecuTorch p
 
 Ethos-U execution is heterogeneous: supported subgraphs are delegated to the NPU, while unsupported operators remain outside the NPU delegate. Whether that remaining work can execute on the CPU depends on the kernels included in the deployed ExecuTorch runtime. 
 
-The PyTorch blog [Efficient Edge AI on Arm CPUs and NPUs](https://pytorch.org/blog/efficient-edge-ai-on-arm-cpus-and-npus/) describes this flow as the following:
+The PyTorch blog [Efficient Edge AI on Arm CPUs and NPUs](https://pytorch.org/blog/efficient-edge-ai-on-arm-cpus-and-npus/) describes the following steps:
 
 - Quantizing the model
 - Lowering supported regions to Tensor Operator Set Architecture (TOSA)
 - Running Vela to produce an optimized Ethos-U command stream
-- Packaging the result into the final `.pte`. 
+- Packaging the result into the final `.pte`
 
 You'll inspect three MobileNetV2 artifacts in order: FP32 with no NPU delegation, INT8 with clean delegation, and INT8 with fragmented delegation.
 
@@ -56,7 +56,7 @@ Now you'll use the same MobileNetV2 model, but quantized with the `EthosUQuantiz
 
 Open `ml-model-artifacts/pte/mv2_int8_ethos_u85.pte`.
 
-Inspect the graph and look for the followiing:
+Inspect the graph and look for the following:
 
 - Whether there's an Ethos-U delegate region
 - Whether the NPU region is one large block or several smaller blocks
@@ -117,7 +117,7 @@ For example, an Ethos-U85 artifact doesn't provide full insight into Ethos-U55 b
 ## (Optional) Visualize TFLite and PT2 files
 
 <details>
-<summary>Click to reveal</summary>
+<summary>Show optional artifacts</summary>
 
 The artifacts repository also includes MobileNetV2 `.pt2` and `.tflite` files:
 ```output

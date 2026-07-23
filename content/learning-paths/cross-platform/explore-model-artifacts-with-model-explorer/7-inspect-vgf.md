@@ -1,5 +1,5 @@
 ---
-title: Inspect VGF artifacts using Model Explorer
+title: Inspect VGF artifacts with Model Explorer
 description: Compare VGF-backend PTE and standalone VGF artifacts in Model Explorer to understand ExecuTorch packaging and Vulkan backend graph structure.
 
 weight: 7
@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 VGF is the artifact used by Arm ML SDK for Vulkan workflows. It's useful in workflows using the ML extensions for Vulkan, and in neural graphics applications where you need to inspect the graph consumed by the Vulkan runtime.
 
-In the previous section, you inspected the TOSA artifacts for a small neural upscaling model, obtained from the [Quantize neural upscaling models with ExecuTorch](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/) learning path. You'll now inspect the VGF and PTE artifacts produced from that flow.
+In the previous section, you inspected the TOSA artifacts for a small neural upscaling model, obtained from the [Quantize neural upscaling models with ExecuTorch](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/) Learning Path. You'll now inspect the VGF and PTE artifacts produced from that flow.
 
 Although that flow uses ExecuTorch and generates `.pte` files as well, VGF isn't ExecuTorch-specific. If you have a `.tosa` file obtained from another flow, you can convert it to `.vgf` using the Arm ML SDK Model Converter.
 
@@ -35,7 +35,7 @@ Inspect the graph and look for the following:
 
 - Whether there's a `VgfBackend` delegate node
 - The work that happens before and after the backend call
-- Whether the top-level graph show the internal upscaler operators
+- Whether the top-level graph shows the internal upscaler operators
 - What this view tells you about the ExecuTorch runtime path
 
 ![Screenshot of examining a VGF-backed PTE in Model Explorer.#center](ptq_vgf_pte.png "Inspecting a VGF-backed PTE with Model Explorer")
@@ -50,7 +50,7 @@ Expand the `VgfBackend` delegate graph:
 
 Now, open the matched standalone VGF artifact `ml-model-artifacts/vgf/small_upscaler_ptq.vgf`.
 
-You'll see they show the same view.
+The VGF artifact shows the same view as the `VgfBackend` delegate graph.
 
 Inspect the graph and look for the following:
 

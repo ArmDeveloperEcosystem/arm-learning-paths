@@ -1,5 +1,5 @@
 ---
-title: Inspect TOSA artifacts using Model Explorer
+title: Inspect TOSA artifacts with Model Explorer
 description: Inspect TOSA graphs in Model Explorer to compare operators, tensor metadata, quantization, and graph fragmentation before backend compilation or conversion.
 
 weight: 6
@@ -12,7 +12,7 @@ layout: "learningpathall"
 
 Tensor Operator Set Architecture (TOSA) is a stable operator-level intermediate representation (IR) used between model export and backend-specific compilation or conversion.
 
-Ethos-U `.pte` files files show the final ExecuTorch program after supported regions have been delegated or left outside the NPU delegate. With TOSA, you can inspect an earlier stage: the graph representation that backend tools such as Vela or the Arm ML SDK Model Converter can consume.
+Ethos-U `.pte` files show the final ExecuTorch program after supported regions have been delegated or left outside the NPU delegate. With TOSA, you can inspect an earlier stage: the graph representation that backend tools such as Vela or the Arm ML SDK Model Converter can consume.
 
 You don't need separate TOSA artifacts for the Cortex-A portable, Cortex-A XNNPACK, or Cortex-M examples. Those routes don't need a TOSA intermediate representation: portable kernels stay in the ExecuTorch operator path, XNNPACK uses an ExecuTorch delegate for Cortex-A CPU acceleration, and Cortex-M uses its own Cortex-M/CMSIS-NN-oriented lowering path. TOSA becomes relevant for the backend routes that consume TOSA, such as Ethos-U and VGF.
 
@@ -35,7 +35,7 @@ Open the FP32 TOSA artifact `ml-model-artifacts/tosa/mv2_fp32.tosa`.
 Inspect the graph and look for the following:
 
 - Whether the input is in the right shape `[1, 3, 224, 224]`
-- Whether the output shape is `[1, 1000]`?
+- Whether the output shape is `[1, 1000]`
 - Whether the tensor types are FP32
 - What convolution, add, clamp, and pooling patterns are visible
 
