@@ -362,7 +362,10 @@ PYTHONPATH=app python3 -m unittest discover -s tests
 The output contains progress dots followed by this result:
 
 ```output
-OK
+----------------------------------------------------------------------
+Ran 121 tests in 4.256s
+
+OK (skipped=5)
 ```
 
 The number of tests and the elapsed time can change as the repository evolves. `OK` confirms that the complete suite passed.
