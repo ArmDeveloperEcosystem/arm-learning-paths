@@ -1,5 +1,6 @@
 ---
-title: Use generated analysis reports to guide improvements
+title: Use generated Arm Performix analysis reports to guide improvements
+description: Interpret Arm Performix analysis reports from the arm-performix skill and use measured findings to guide application improvements.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -73,7 +74,7 @@ Rebuild with the `sqrt` removal, re-run Code Hotspots, and confirm
 The skill doesn't let a single Code Hotspots run justify "this is as fast as it
 gets." Code Hotspots shows where time goes, never why. 
 
-When you use the skill to run the Code Hotspots recipe, expect your AI assistant to propose a second pass with a characterizing recipe to explain why the hotspot is hot. Let the assistant run that pass with the CPU Microarchitecture, Instruction Mix, or Memory Access recipe before deciding whether a cost is irreducible.
+When you use the skill to run the Code Hotspots recipe, your AI assistant might propose a second pass to explain why the hotspot is hot. Let the assistant run that pass with a characterizing recipe, such as CPU Microarchitecture, Instruction Mix, or Memory Access, before deciding whether a cost is irreducible.
 
 ## Drive improvements to your application
 

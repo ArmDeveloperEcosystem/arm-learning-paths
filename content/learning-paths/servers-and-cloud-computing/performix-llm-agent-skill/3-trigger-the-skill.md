@@ -1,5 +1,6 @@
 ---
 title: Best practices for prompting AI assistants to use the arm-performix skill
+description: Write prompts that activate the arm-performix skill by providing profiling intent, an Arm target, an absolute binary path, and a repeatable workload.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -17,9 +18,9 @@ The following are examples of prompts that show the expected intent:
 - "Use Performix to check whether my hot loop uses vector instructions."
 - "Investigate cache and translation lookaside buffer stalls on my Neoverse target."
 
-Prompts that are vague or don't show the expected intent won't activate the skill.
+Prompts that are vague won't activate the skill.
 
-The following are example prompts that won't work:
+The following are example prompts that aren't as effective:
 
 - "Will my code build on Arm?" 
 - "Make my code faster" 

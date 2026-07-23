@@ -1,5 +1,6 @@
 ---
 title: Install and enable the arm-performix skill
+description: Download and install the arm-performix skill, place it in an AI assistant's skills directory, and confirm that the assistant can discover it.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -12,7 +13,7 @@ Use one of the following options to download the skill files:
 
 ### Clone skills repository from Gitee
 
-If you prefer managing the skill source with git, clone the skill file from Gitee.  
+If you prefer managing the skill source with Git, clone the skill file from Gitee.  
 
 From the root of the project where your assistant works, clone the skills
 repository:

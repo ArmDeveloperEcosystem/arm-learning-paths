@@ -1,5 +1,6 @@
 ---
 title: Understand the arm-performix skill
+description: Understand how the arm-performix skill selects Arm Performix recipes, gathers workload context, and returns structured profiling reports.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -12,7 +13,7 @@ Arm Performix is a desktop application for hardware-specific performance
 tuning. It offers curated analysis pathways for performance-critical factors in
 applications, libraries, runtimes, and source code.
 
-The `arm-performix` skill is a set of instructions you can add to your AI assistant so that it knows how to use Performix correctly on your behalf: which recipe to pick, how to gather context, how to read the results, and how to report findings.
+The `arm-performix` skill is a set of instructions you can add to your AI assistant so that it knows how to use Performix correctly on your behalf. The skill defines which recipe to pick, how to gather context, how to read the results, and how to report findings.
 
 Without the skill, an assistant might guess at performance problems by reading
 your source code.

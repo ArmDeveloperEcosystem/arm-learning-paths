@@ -1,7 +1,7 @@
 ---
 title: Get started with the arm-performix agent skill for profiling and improving Arm workloads
 
-description: Learn how to install and use the arm-performix skill so an AI coding assistant can drive Arm Performix, find code hotspots, diagnose pipeline stalls, and propose measured improvements on Arm Neoverse.
+description: Install the arm-performix skill to provide an AI coding assistant profiling context so it can drive Arm Performix, find code hotspots, diagnose pipeline stalls, and propose measured improvements on Arm Neoverse.
 
 minutes_to_complete: 30
 
@@ -20,6 +20,10 @@ prerequisites:
 
 author:
     - Henry Wang
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
