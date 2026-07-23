@@ -203,6 +203,14 @@ OPENCLAW_CRON_CHAT_IDS=<your-telegram-chat-id>
 OPENCLAW_GATEWAY_TOKEN=<generated-random-token>
 ```
 
+Set `OPENCLAW_CRON_TIMEZONE` to your local [IANA timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). Scheduled jobs use UTC when this setting is omitted:
+
+```text
+OPENCLAW_CRON_TIMEZONE=<your-IANA-timezone>
+```
+
+For example, use `Europe/London`, `America/New_York`, or `Asia/Singapore`. Weather questions in this Learning Path name their location explicitly, so you do not need to configure `OPENCLAW_DEFAULT_WEATHER_LOCATION`.
+
 {{% notice Note %}}
 Do not share your Telegram bot token or chat ID with anyone, and do not include them in screenshots, logs, or public repositories.
 {{% /notice %}}
@@ -351,15 +359,13 @@ OPENCLAW_QDRANT_BASE_URL=http://127.0.0.1:6333 \
 PYTHONPATH=app python3 -m unittest discover -s tests
 ```
 
-The output should look similar to:
+The output contains progress dots followed by this result:
 
 ```output
-............................................................................................................
-----------------------------------------------------------------------
-Ran 119 tests in 3.213s
-
 OK
 ```
+
+The number of tests and the elapsed time can change as the repository evolves. `OK` confirms that the complete suite passed.
 
 These tests validate command routing, task dispatch, cron parsing, ingestion helpers, and failure handling. They are software behavior tests, not hardware benchmarks.
 

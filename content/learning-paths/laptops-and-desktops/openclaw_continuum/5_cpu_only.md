@@ -200,9 +200,12 @@ OPENCLAW_TELEGRAM_BOT_TOKEN=<your-telegram-bot-token>
 OPENCLAW_TELEGRAM_ALLOWED_CHAT_IDS=<first-chat-id>,<second-chat-id>
 OPENCLAW_CRON_CHAT_IDS=<first-chat-id>,<second-chat-id>
 OPENCLAW_GATEWAY_TOKEN=<generated-random-token>
+OPENCLAW_CRON_TIMEZONE=<your-IANA-timezone>
 ```
 
 Separate multiple allowlisted chat IDs with commas. Both household members can then use the same bot and shared local collections.
+
+Use the same IANA timezone convention as the DGX Spark deployment. Scheduled jobs use UTC when this setting is omitted.
 
 Confirm the inference settings:
 
