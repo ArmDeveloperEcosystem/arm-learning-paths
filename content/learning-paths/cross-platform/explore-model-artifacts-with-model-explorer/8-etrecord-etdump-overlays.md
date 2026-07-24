@@ -267,7 +267,7 @@ In this trace, non-delegated work overwhelmingly dominates. The two `EthosUBacke
 
 This is the runtime version of the fragmentation pattern in the `.pte` and TOSA sections. In this example, the performance difference is driven primarily by the large non-delegated convolution island, not by the additional delegate boundary.
 
-## What you have learned
+## What you've learned
 
 You've learned that ETRecord and ETDump add runtime context to static graphs. ETRecord gives you the graph and debug metadata, while ETDump contributes runtime timing data. Used together through the combined ExecuTorch extension, they show which parts of the graph cost time on the target.
 
