@@ -32,7 +32,7 @@
     margin-top: -1px !important;
 }
 html[theme='dark'] .tab-row {
-    background-color: var(--arm-black); /* rgba(163, 168, 174,1); #2A2B2D; */
+    background-color: var(--content-page-surface);
 }
 
 .tab-row.active {
@@ -72,7 +72,7 @@ html[theme='dark'] .tab-row.active {
 
 html[theme='dark'] .tab-right-card {
     border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
-    background-color: rgb(23,25,27);  /* CLOSE to this, but hard coded as they are close to background gradient var(--arm-color-base) at 75% transparency */
+    background-color: var(--content-page-surface);
 }
 html[theme='dark'] .tab-right-card.active {
     border-color: var(--arm-light-blue);
@@ -87,20 +87,6 @@ html[theme='dark'] .tab-right-card > h6 {
     font-size:1em;
     line-height: 1.2;
 }
-
-/* Force a 2-line clamp for masthead title */
-ads-masthead #ads-masthead-title {
-  line-height: 1.2;
-  padding-bottom: 6px;
-  box-sizing: border-box;
-  max-height: calc(1.2em * 2 + 8px); /* dyncamically calculate height depending on length of title */
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  white-space: normal;
-}
-
 
 /* hover effects */
 a:hover {
@@ -155,7 +141,7 @@ div.github-div {
 
 html[theme='dark'] div.github-div {
     border-color: rgba(163, 168, 174,0.25); /* #A3A8AE at 25% transparency */
-    background-color: rgb(23,25,27);;  /* CLOSE to this, but not due to close to gradient background. var(--arm-color-base) at 75% transparency */
+    background-color: var(--content-page-surface);
 
 }
 
@@ -185,12 +171,12 @@ ads-card.multi-install-card {
     --ads-card-box-shadow-hover: 0 3px 6px 1px rgba(0,0,0,0.16);  /* 0 1px 3px 3px rgba(0,0,0,0.25); */
 } 
 html[theme='dark'] ads-card.multi-install-card {
-    --ads-card-background-color: var(--arm-color-base);
+    --ads-card-background-color: var(--ads-ui-ink-80);
     --ads-card-border-color: #000000;
     /*--ads-card-box-shadow:  0 3px 12px rgba(0, 0, 0, 0.5);*/
 
     /* hover state */
-    --ads-card-background-color-hover: var(--arm-color-base);
+    --ads-card-background-color-hover: var(--ads-ui-ink-80);
     --ads-card-border-color-hover: transparent;
     /*--ads-card-box-shadow-hover:  0 3px 12px rgba(0, 0, 0, 0.5);*/
 

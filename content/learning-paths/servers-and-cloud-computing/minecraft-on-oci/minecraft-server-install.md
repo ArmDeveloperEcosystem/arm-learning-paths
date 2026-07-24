@@ -1,5 +1,5 @@
 ---
-title: Install the Minecraft server
+title: Install the Minecraft server on an Arm-based virtual machine
 description: Install the Java Runtime Environment, download the Minecraft server files, and launch the server application.
 weight: 3
 
@@ -7,69 +7,90 @@ weight: 3
 layout: learningpathall
 ---
 
-## Installing the Minecraft server
+## Install the Java Runtime Environment
 
-### Installing the Java Runtime Environment
+Before you install the Minecraft server, install necessary dependencies. For Minecraft 26 or earlier, you'll need to install Java 25.
 
-Before you install the Minecraft server, you need to make sure that there are some prerequisites
-installed. For the Minecraft 26 server or earlier, you will need Java 25.
-
-Connect to your instance using SSH as described in the previous step. You can install Java 25 on
-Oracle Linux with:
+After connecting to your VM instance over SSH, install Java 25:
 
 ```console
-sudo dnf install java-25-openjdk -y
+sudo dnf install java-25-openjdk.aarch64 -y
 ```
 
-and on Ubuntu or similar distributions, with
+## Create a persistent terminal session for the server
+
+The Minecraft server runs in the foreground of your terminal session. If you close your SSH
+connection, the server process will stop. To keep the server running after you disconnect, use
+`tmux` to create a persistent terminal session.
+
+Install `tmux` on the VM instance:
 
 ```console
-sudo apt install openjdk-25-jre -y
+sudo dnf install tmux -y
 ```
 
-Since the Minecraft server starts on the command line, you might also want to install the `screen` or
-`tmux` utilities which allows commands to keep running after you disconnect from the server.
-These commands are not strictly necessary, but you will need them to be running if you want to keep
-the server running when you disconnect from your SSH session. 
-
-Running the Minecraft server at start-up, or keeping it running when you are not connected, will
-not be covered in this learning path.
-
-### Downloading and installing the Minecraft server
-
-You can find the link for the latest version of the Minecraft server
-[on the Minecraft website](https://www.minecraft.net/en-us/download/server). Copy the link to
-`server.jar` from this page, and run the following command on your OCI instance to download it:
+Start a new `tmux` session named `minecraft`:
 
 ```console
+tmux new -s minecraft
+```
+
+You're now inside a `tmux` session. Any commands you run here will continue running even after you
+disconnect from SSH. You'll start the Minecraft server inside this session.
+
+When you need to disconnect, press `Ctrl+B` then `D` to detach from the session. The server
+continues running in the background.
+
+To reattach to the session later (for example, after reconnecting to the instance via SSH), run:
+
+```console
+tmux attach -t minecraft
+```
+
+## Download and install the Minecraft server
+
+For the latest version of the Minecraft server, see
+[the Minecraft website](https://www.minecraft.net/en-us/download/server). 
+
+Copy the `minecraft_server.x.x.x.jar` URL from that page. Then, run the following command on the instance to download `server.jar` from the Mojang website:
+
+```bash
 wget <paste URL to server.jar here>
 ```
 
-This will download `server.jar` from the Mojang website, and you will have a `server.jar` file on your OCI
-instance. To make it easier to keep track of different server versions, rename the `server.jar` file
-with a more meaningful name: 
+You'll have a `server.jar` file on your OCI instance. To make it easier to keep track of different server versions, rename the `server.jar` file to something more meaningful 
 
-```console
+For example:
+
+```bash
 mv server.jar minecraft_server.26.2.jar
 ```
 
+## Start the Minecraft server
+
 To start the Minecraft server, run the command:
 
-```console
+```bash
 java -Xmx8G -Xms8G -jar minecraft_server.26.2.jar nogui
 ```
 
-This runs the server withough a graphical user interface, and allocates 8GB of memory to it. If you
-allocated less than this amount of memory to your instance, set this number to 3/4 of the memory that
-you allocated to the instance - the other operating system services need some memory too.
+This runs the server without a graphical user interface, and allocates 8 GB of memory to it.
 
-The first time you do this, the start-up will fail expectedly - a file called `eula.txt` is created
-in the local folder, and before you start the server, you first need to accept its terms of use. Open
-this file and follow the instructions to accept the terms and conditions. Running the server again
-after doing this will succeed, and you should see the following messages on the terminal, showing
-that the process has completed successfully (timestamps will be different at the start of the lines):
+The first time you do this, the startup will fail and a file called `eula.txt` is created in the local folder. 
 
+Before starting the server again, accept the End User License Agreement. 
+
+Open `eula.txt` and change `eula=false` to `eula=true`, or run:
+
+```console
+sed -i 's/eula=false/eula=true/' eula.txt
 ```
+
+After accepting terms of use, you'll be able to run the server successfully with the same command as earlier.
+
+The output is similar to:
+
+```output
 [00:40:50] [Server thread/INFO]: Starting minecraft server version 26.2
 [00:40:50] [Server thread/INFO]: Loading properties
 [00:40:50] [Server thread/INFO]: Default game type: SURVIVAL
@@ -90,12 +111,8 @@ that the process has completed successfully (timestamps will be different at the
 [00:41:04] [Server thread/INFO]: ThreadedAnvilChunkStorage: All dimensions are saved
 ```
 
-### What you've accomplished
+## What you've accomplished and what's next
 
-You installed the open-source Java Runtime Environment on your instance, downloaded the Minecraft server files, accepted the End User License Agreement, and started the game server.
+You've now installed the open-source Java Runtime Environment on your instance, downloaded the Minecraft server files, accepted the End User License Agreement, and started the game server.
 
-### Next step
-
-With the server successfully running in the cloud, you will now open the necessary network ports to allow the Minecraft client to connect to your instance.
-
-
+Next, you'll connect a Minecraft client to the server.

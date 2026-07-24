@@ -1,23 +1,32 @@
 ---
 # User change
-title: "Arm CCA Boot Sync"
+title: Configure UEFI Secure Boot and disk encryption in Arm CCA Realms
+description: Configure Arm CCA BootSync on an FVP, verify UEFI Secure Boot with a signed kernel, and unlock an encrypted Realm root file system.
 
 weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify these elements
 layout: "learningpathall"
 ---
-## Overview
+## What you will configure and validate
 
-In this section you will run the **User Context** service in a docker container,
-launch a **CCA realm** on **Arm FVP** running in a separate docker container
-and see how Arm CCA BootSync can be used to define realm EFI variables and share secret data with realms.
-You will also see how the defined EFI variables can be used to enable UEFI Secure Boot and
-the shared secret data can be used for providing access to encrypted file systems.
+You'll configure and validate both failure and success cases:
+
+- First, you'll launch a Realm without injecting any boot data to see that the firmware can run successful attestation and ask for BootSync data.
+- Next, you'll add the variable data file. BootSync completes, UEFI Secure Boot is enabled, and the unsigned kernel is rejected.
+- Then, you'll sign the Realm kernel and validate Secure Boot. The Realm boots with UEFI Secure Boot enabled, and the Secure Boot UEFI variable reports `1`.
+- Finally, you'll encrypt the Realm root file system and use BootSync secret data to provide UEFI variables and the unlock passphrase during early boot. You'll unlock the encrypted file system.
+
+You'll run the User Context service in a Docker container and launch CCA Realms on an Arm Fixed Virtual Platform (FVP) in a separate Docker container.
+
+You'll use two terminals:
+
+- In the User Context terminal, you'll run the User Context service. This service represents the Realm initiator and decides whether to release BootSync data.
+- In the FVP terminal, you'll run the Arm CCA FVP and launch Realm virtual machines using `lkvm-bootsync`.
 
 ## Install dependencies
 
-Start by installing Docker. On Ubuntu 24.04 LTS, set up Docker’s APT repository:
+Set up Docker's `apt` repository so you can pull and run the pre-built containers:
 
 ```bash
 # Add Docker's official GPG key:
@@ -35,22 +44,23 @@ echo \
 sudo apt-get update
 ```
 
-Install Git and Docker packages:
-```
+Install Docker packages for the runtime used by both the User Context and FVP containers, and optionally install `git` for inspecting linked source files:
+
+```bash
 sudo apt-get install -y git docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
-Add your user name to the Docker group (open a new shell after this so the change takes effect):
-``` bash
+Add your user name to the Docker group so you can run Docker without `sudo`:
+
+```bash
 sudo usermod -aG docker $USER
 newgrp docker
 ```
+The group change applies to new shells; `newgrp docker` updates the current shell.
 
-## Start User Context service
+## Start the User Context service
 
-First, pull the docker container image with the pre-built User Context service, and then run the container.
-Running the container with specified name and network, would allow later to connect to the services running in the
-container using the container name as a host name.
+In the User Context terminal, pull the Docker image with the pre-built User Context service. Then, run the container:
 
 ```bash
 docker pull armswdev/cca-learning-path:cca-key-broker-v4
@@ -58,25 +68,27 @@ docker network create cca-trustee
 docker run --rm -it --network cca-trustee --name user-context armswdev/cca-learning-path:cca-key-broker-v4
 ```
 
-Now within your running docker container, start User Context service using `run-user-context-service.sh` script.
-The User Context service in this Learning Path is part of the [EDK2](https://gitlab.arm.com/linux-arm/edk2-cca/-/tree/cca/4441_measured_boot_v1/ArmVirtPkg/ArmCcaBootSync/UserContext) project.
-It has been created specifically for POC purposes, so is intentionally small and simple to understand, and is not designed for production use.
+The `cca-trustee` Docker network is important. It lets the FVP container resolve the User Context service by container name, `user-context`, when `lkvm-bootsync` later uses `--service-ip user-context`.
 
-When started first time the script would generate SecureBoot signing certificates and create a Provisioning Data file.
+In the User Context terminal, start the User Context service inside the running container using the `run-user-context-service.sh` script.
+The User Context service is part of the [EDK2](https://gitlab.arm.com/linux-arm/edk2-cca/-/tree/cca/4441_measured_boot_v1/ArmVirtPkg/ArmCcaBootSync/UserContext) project.
+Created specifically as a proof of concept, it's intentionally small and not designed for production use.
+
+When the script starts for the first time, it generates Secure Boot signing certificates and creates a Provisioning Data file.
 The Provisioning Data is a binary file generated by [GenPd.py](https://gitlab.arm.com/linux-arm/edk2-cca/-/blob/cca/4441_measured_boot_v1/ArmVirtPkg/ArmCcaBootSync/Scripts/GenPd.py) script.
-The file contains EFI variables defintions required for enabling SecureBoot.
+The file contains EFI variable definitions required for enabling UEFI Secure Boot.
 
-You will be asked for a passphrase which will be used for Secure boot signing certificates.
+You'll be asked for a passphrase for the Secure Boot signing certificates. Remember it because you'll use it again when signing the Realm kernel.
 
 ```bash
 ./run-user-context-service.sh
 ```
 
-## Launch a CCA Realm without SecureBoot enabled.
+## Validate BootSync failure without boot data
 
-With the User Context service running in one terminal, open up a new terminal in which you will run CCA realms.
+With the User Context service running in the User Context terminal, open the FVP terminal.
 
-Pull the Docker image with the pre-built FVP, and then run the container connected to the same Docker network:
+Pull the Docker image with the pre-built FVP and CCA reference software stack. Then, run the container connected to the same Docker network:
 
 ```bash
 docker pull armswdev/cca-learning-path:cca-simulation-v4
@@ -101,10 +113,7 @@ host login: root
 (host) #
 ```
 
-Change directory to `/cca` and use `lkvm-bootsync` to launch a guest Linux in a Realm.
-In the command line paramaters we specify "user-context" as the User Context service host name,
-its default port and Realm Personalisation value (RPV).
-RPV is a user-provided byte string (up to 64 bytes) that allows you to distinguish between Realms.
+Change directory to `/cca` and use `lkvm-bootsync` to launch a guest Linux in a Realm:
 
 ```bash
 cd /cca
@@ -116,10 +125,16 @@ cd /cca
   --service-port 1080 \
   --realm-pv ARMCCA01
 ```
+The BootSync-specific parameters are:
 
-You should see the realm boot.
+- `--service-ip user-context` points the VMM to the User Context container on the Docker network.
+- `--service-port 1080` uses the default User Context service port.
+- `--realm-pv ARMCCA01` sets the Realm Personalization Value (RPV). The User Context uses this value as a file-name prefix when looking for BootSync data, such as `ARMCCA01_VAR.dat` and `ARMCCA01_SEC.dat`.
 
-In the realm boot output you can see that UEFI Secure Boot is not mentioned in EFI messages:
+After running the command, you'll see the Realm boot.
+
+The output is similar to:
+
 ```output
 Shell> bootaa64.efi root=/dev/vda2 acpi=force ip=on
 EFI stub: Booting Linux Kernel...
@@ -127,7 +142,9 @@ EFI stub: Generating empty DTB
 EFI stub: Exiting boot services...
 ```
 
-After the realm boots, log in, using the root again as the username:
+UEFI Secure Boot isn't mentioned in the EFI messages. This is expected because you've not yet provided the UEFI variable data that enables Secure Boot.
+
+After the Realm boots, log in using the root again as the username:
 
 ```output
 Welcome to the CCA realm
@@ -135,24 +152,23 @@ realm login: root
 (realm) #
 ```
 
-Using `efivar` utility you can check EFI variables to confirm that Secure Boot is not enabled:
+Use the `efivar` utility to check the Secure Boot EFI variable. A value of `0` confirms that Secure Boot is not enabled:
 
-```bash { output_lines = "3" }
+```bash { output_lines="3" }
 mount -t efivarfs efivarfs /sys/firmware/efi/efivars
 efivar -p -d -n {global}-SecureBoot
 0
 ```
 
-Stop the realm:
+Stop the Realm:
 
 ```bash
 poweroff
 ```
 
-On the terminal with the User Context service you can see that during boot the realm firmware
-requested a Variable Data file which is missing. As a result the BootSync procedure failed.
+In the User Context terminal, you can see that the Realm firmware requested a Variable Data file, but the file is missing:
 
-``` output
+```output
 INFO: BIB Variable Data Requested
 FileName = ARMCCA01_VAR.dat
 Error: ARMCCA01_VAR.dat Not found!
@@ -161,29 +177,37 @@ Info: Session State: ConnectionEstablished
 Info: Attestation State: AttSuccess
 Info: BootSync State: BootSyncNotDone
 ```
+This is an intentional failure: BootSync completed enough of the protocol to request boot information, but the User Context had no `ARMCCA01_VAR.dat` file to release.
 
-In the next step we will fix the BootSync procedure.
+Next, you'll add the missing Boot Information Block data and repeat the launch.
 
-## Launch a CCA Realm with SecureBoot enabled.
+## Pass UEFI variable data and validate unsigned kernel rejection
 
-On the terminal with the User Context service stop the service by pressing `Ctrl-C`.
+In the User Context terminal, stop the service by pressing `Ctrl-C`.
 
-Copy the generated Provisioning Data file to a realm Variable data file with a name `<RPV>_VAR.dat`:
-``` bash
+The RPV and file names used here are details of this Learning Path's reference implementation. One User Context service can support multiple Realms by using the RPV as a file-name prefix. A Realm launched with `--realm-pv ARMCCA01` requests files that start with `ARMCCA01`. If the matching files are missing, BootSync can establish a session and complete attestation, but the User Context can't provide the requested boot information.
+
+Copy the generated Provisioning Data file to a Realm variable data file with the name `<RPV>_VAR.dat`:
+
+```bash
 cp SecureBoot/SecBootCert/pd.bin SecureBoot/ARMCCA01_VAR.dat
 ```
+Because you launched the Realm with `--realm-pv ARMCCA01`, the User Context service looks for `ARMCCA01_VAR.dat`.
 
-Create a Secret Data file with some secret data which will be shared with a realm with the same RPV:
-``` bash
+Create a Secret Data file with a test string that'll be shared with a Realm using the same RPV:
+
+```bash
 echo "My Realm secret data" > SecureBoot/ARMCCA01_SEC.dat
 ```
 
-Start User Context service:
+In the User Context terminal, relaunch the User Context service:
+
 ```bash
 ./run-user-context-service.sh
 ```
 
-On the terminal with FVP, relaunch the realm:
+In the FVP terminal, relaunch the Realm with the same RPV:
+
 ```bash
 cd /cca
 ./lkvm-bootsync run --realm --disable-sve --irqchip=gicv3-its \
@@ -195,43 +219,48 @@ cd /cca
   --realm-pv ARMCCA01
 ```
 
-On the terminal with the User Context service you can see that the attestation was successfull and
-BootSync completed:
-``` outout
+Keeping the same `--realm-pv ARMCCA01` is what links the Realm request to the files you created.
+
+In the User Context terminal, you can see that attestation succeeded and BootSync completed:
+
+```output
 Info: Received FIN. Disconnecting.
 Info: Session State: UnConnected
 Info: Attestation State: AttSuccess
 Info: BootSync State: BootSyncCompete
 ```
+This means the User Context released the Boot Information Blocks to the Realm firmware.
 
-But, the realm would fail to boot Linux kernel:
-``` output
+The Realm now fails to boot the Linux kernel:
+
+```output
 Shell> bootaa64.efi root=/dev/vda2 acpi=force ip=on
 Script Error Status: Access Denied (line number 1)
 ```
 
-Stop the realm by entering "reset" command to EFI shell prompt:
-``` bash
+This failure is expected. The same kernel booted before Secure Boot was enabled, but now the firmware enforces the Secure Boot variables injected by BootSync. The kernel image isn't signed yet, so firmware rejects it.
+
+Stop the realm by running `reset` in the EFI shell prompt:
+
+```bash
 reset
 ```
 
-Linux kernel successfully booted in the realm without SecureBoot enabled,
-but failed to boot after you enabled SecureBoot. This happened because we are using a realm file system image
-with an unsigned kernel. You will fix it in the next step.
+Next, you'll launch a Realm with a signed kernel image.
 
-## Launch a CCA Realm with SecureBoot enabled and a signed Linux kernel
+## Sign the kernel and verify Secure Boot 
 
-On the terminal with FVP use `sign_guest_kernel.sh` script to sign realm Linux kernel.
-You will be asked for the passphrase you used for Secure boot signing certificates.
+In the FVP terminal, use the `sign_guest_kernel.sh` script to sign the Realm Linux kernel with the Secure Boot certificate generated earlier by the User Context setup script. When prompted, enter the passphrase you used for the Secure Boot signing certificates:
 
-```bash { output_lines = "2-3" }
+```bash { output_lines="2-3" }
 sign_guest_kernel.sh
 Signing kernel image:
 Enter PEM pass phrase:
 Signing Unsigned original image
 ```
 
-Relaunch the realm:
+In the FVP terminal, relaunch the Realm. Use the same User Context service, service port, and RPV so the Realm receives the same Secure Boot variable data:
+
 ```bash
 cd /cca
 ./lkvm-bootsync run --realm --disable-sve --irqchip=gicv3-its \
@@ -243,9 +272,8 @@ cd /cca
   --realm-pv ARMCCA01
 ```
 
-You should see the realm boot.
+The output is similar to:
 
-In the realm boot output you can see in EFI messages that UEFI Secure Boot is enabled:
 ```output
 Shell> bootaa64.efi root=/dev/vda2 acpi=force ip=on
 EFI stub: Booting Linux Kernel...
@@ -253,8 +281,9 @@ EFI stub: UEFI Secure Boot is enabled.
 EFI stub: Generating empty DTB
 EFI stub: Exiting boot services...
 ```
+The EFI messages show that UEFI Secure Boot is enabled.
 
-After the realm boots, log in, using the root again as the username:
+After the Realm boots, log in using `root` as the username:
 
 ```output
 Welcome to the CCA realm
@@ -262,78 +291,81 @@ realm login: root
 (realm) #
 ```
 
-Using `efivar` utility you can check EFI variables to confirm that Secure Boot is enabled:
+Use `efivar` to check the Secure Boot EFI variable. A value of `1` confirms that Secure Boot is enabled:
 
-```bash { output_lines = "3" }
+```bash { output_lines="3" }
 mount -t efivarfs efivarfs /sys/firmware/efi/efivars
 efivar -p -d -n {global}-SecureBoot
 1
 ```
 
 You can also see that EFI SetupMode is disabled:
-```bash { output_lines = "2" }
+
+```bash { output_lines="2" }
 efivar -d -p -n {global}-SetupMode
 0
 ```
 
-Via [securityfs](https://www.kernel.org/doc/Documentation/ABI/testing/securityfs-secrets-coco) you can
-access the secret data which is shared with the realm using GRUB_EFI_DISKPASSWD_GUID:
+Using [securityfs](https://www.kernel.org/doc/Documentation/ABI/testing/securityfs-secrets-coco), you can
+access the secret data shared with the Realm from under the `GRUB_EFI_DISKPASSWD_GUID` entry:
 
-```bash { output_lines = "3" }
+```bash { output_lines="3" }
 mount -t securityfs none /sys/kernel/security
 cat /sys/kernel/security/secrets/coco/736869e5-84f0-4973-92ec-06879ce3da0b
 My Realm secret data
 ```
 
-Stop the realm:
+Stop the Realm:
 
 ```bash
 poweroff
 ```
 
-You have successfully started a realm with UEFI Secure Boot configured and enabled via Arm CCA BootSync.
+You've successfully started a Realm with UEFI Secure Boot configured and enabled using Arm CCA BootSync.
 
-## Launch a CCA Realm with an encrypted root file system.
+## Encrypt the root file system and update secret data for disk unlock
 
-  The secure data shared with realm via Arm CCA BootSync can also be used to provide access to encrypted file systems.
+You can use the secret data shared with a Realm using Arm CCA BootSync to provide access to encrypted file systems. You'll now encrypt the root file system, observe a failed unlock when the wrong secret is available, and update the BootSync secret so the Realm can unlock the disk during boot.
 
-{{% notice Access to encrypted partitions %}}
+### Encrypt the root partition
 
-There are different ways you can use to provide realm with access to encrypted partitions using Arm CCA Bootsync. For example:
+{{% notice Note %}}
+
+There are different ways to provide a Realm with access to encrypted partitions using Arm CCA BootSync. For example:
 
 - Use an updated version of [Grub](https://gitlab.arm.com/linux-arm/grub-cca/-/tree/cca/4441_measured_boot_v1) as a boot loader.
-This version of Grub uses the secret data to open an encrypted partition and load kernel and initrd images from it.
-This is an example grub config file:
-```output
-echo 'Mounting encrypted disk...'
-cryptomount -s efisecret (hd0,gpt2)
+  This version of Grub uses the secret data to open an encrypted partition and load kernel and `initrd` images from it.
 
-echo 'Loading Kernel...'
-linux (crypto0)/bootaa64.efi
+  The following is an example Grub config file:
+  ```output
+  echo 'Mounting encrypted disk...'
+  cryptomount -s efisecret (hd0,gpt2)
 
-echo 'Loading InitRD...'
-initrd (crypto0)/initrd.gz
+  echo 'Loading Kernel...'
+  linux (crypto0)/bootaa64.efi
 
-echo 'Booting Linux...'
-boot
-```
-Please notice that with the current Grub implementation of Arm CCA BootSync support booted OS will have access to the
-Init ramdisk only.
+  echo 'Loading InitRD...'
+  initrd (crypto0)/initrd.gz
 
-- Use an init script in an initrd image to unlock and mount the encrypted partition. You will use this approach in the next stages.
+  echo 'Booting Linux...'
+  boot
+  ```
+  With the current Grub implementation of Arm CCA BootSync support, the booted operating system has access to the `initramfs` only.
+
+- Use an init script in an `initrd` image to unlock and mount the encrypted partition. You'll use this approach in the next step.
 
 {{% /notice %}}
 
+In the FVP terminal, use the `encrypt_rootfs.sh` script to encrypt the root partition in the Realm disk image and add an `initrd` image to the kernel parameters.
 
-On the terminal with running FVP use `encrypt_rootfs.sh` script to encrypt the root partition in the realm disk image and
-add an initrd image into the kernel parameters.
-You will be asked for an passphrase which will be used for the encryption.
-You can use maximum of 512 characters of upper/lowercase, numbers and symbols.
-You can ignore the WARNING message because we're using small size paritions for this demo.
+You'll be asked for a passphrase to encrypt the root partition. Use a memorable test passphrase and keep it available, because you'll later write the same value into `ARMCCA01_SEC.dat` for BootSync to release.
 
-```bash { output_lines = "2-11" }
+You can use a maximum of 512 characters of uppercase or lowercase letters, numbers, and symbols.
+Ignore the warning message because you're using small partitions.
+
+```bash { output_lines="2-11" }
 encrypt_rootfs.sh
-Resizing root file system to accomodate minimal LUKS2 header
+Resizing root file system to accommodate minimal LUKS2 header
 resize2fs 1.47.3 (8-Jul-2025)
 Resizing the filesystem on /dev/loop0p2 to 260096 (1k) blocks.
 The filesystem on /dev/loop0p2 is now 260096 (1k) blocks long.
@@ -345,7 +377,10 @@ WARNING: keyslots area (1015808 bytes) is very small, available LUKS2 keyslot co
 Enable Initrd image
 ```
 
-Relaunch the realm:
+### Validate failed disk unlock 
+
+In the FVP terminal, relaunch the Realm. At this point, `ARMCCA01_SEC.dat` still contains the test string from the previous Secure Boot step, not the disk encryption passphrase:
+
 ```bash
 cd /cca
 ./lkvm-bootsync run --realm --disable-sve --irqchip=gicv3-its \
@@ -357,7 +392,7 @@ cd /cca
   --realm-pv ARMCCA01
 ```
 
-In the realm boot log you can see that the Init script failed to unlock the encrypted partition:
+In the Realm boot log, you can see that the init script failed to unlock the encrypted partition:
 
 ```output
 [   32.761651] Run /init as init process
@@ -372,42 +407,50 @@ can't run '/etc/init.d/rcS': No such file or directory
 Please press Enter to activate this console.
 ```
 
-Press Enter to get into the realm shell.
-In the shell you can check that only Init ramdisk is mounted and you can't mount `/dev/vda2`:
+Press `Enter` to get into the Realm shell.
 
-```bash { output_lines = "2-3" }
+In the shell, check that only `initramfs` is mounted and that you can't mount `/dev/vda2` directly:
+
+```bash { output_lines="2-3" }
 df -h
 Filesystem                Size      Used Available Use% Mounted on
 devtmpfs                174.4M         0    174.4M   0% /dev
 ```
 
-```bash { output_lines = "2" }
+```bash { output_lines="2" }
 mount -t auto /dev/vda2 /cryptroot
 mount: mounting /dev/vda2 on /cryptroot failed: Invalid argument
 ```
 
-Stop the realm:
+Stop the Realm:
 
 ```bash
 poweroff
 ```
 
-The Init script failed to unlock the encrypted partition because we have not shared the encryption passphrase with the realm.
-Let's fix that.
+The init script failed to unlock the encrypted partition because the Secret Data file doesn't contain the encryption passphrase yet. 
 
-On the terminal with the User Context service stop the service by pressing `Ctrl-C`.
+### Update the BootSync secret and validate successful disk unlock
 
-Save the encryption passpharse into the Secret Data file. Please use `-n` parameter to exclude the trailing newline character.
-``` bash
-echo -n "<encryption passpharse>" > SecureBoot/ARMCCA01_SEC.dat
+Now, update the BootSync secret.
+
+In the User Context terminal, stop the service by pressing `Ctrl-C`.
+
+Save the encryption passphrase into the Secret Data file. Use `echo -n` so the file contains only the passphrase and no trailing newline character:
+
+```bash
+ROOTFS_PASSPHRASE='replace-with-the-passphrase-you-used-for-encrypt_rootfs'
+echo -n "$ROOTFS_PASSPHRASE" > SecureBoot/ARMCCA01_SEC.dat
 ```
 
-Start User Context service:
+In the User Context terminal, relaunch the User Context service:
+
 ```bash
 ./run-user-context-service.sh
 ```
 
-On the terminal with FVP, relaunch the realm:
+In the FVP terminal, relaunch the Realm with the same RPV:
+
 ```bash
 cd /cca
 ./lkvm-bootsync run --realm --disable-sve --irqchip=gicv3-its \
@@ -419,7 +462,8 @@ cd /cca
   --realm-pv ARMCCA01
 ```
 
-In the realm boot log you can see that the Init script successfully unlocked and mounted the encrypted partition:
+In the Realm boot log, you can see that the init script successfully unlocked and mounted the encrypted partition:
+
 ```output
 [  233.501627] Run /init as init process
 Detecting LUKS containers in vda1-2
@@ -428,7 +472,7 @@ Detecting LUKS containers in vda1-2
 *** LUKS partition unlocked, switching root ***
 ```
 
-After the realm boots, log in, using the root again as the username:
+After the Realm boots, log in using `root` as the username:
 
 ```output
 Welcome to the CCA realm
@@ -436,9 +480,9 @@ realm login: root
 (realm) #
 ```
 
-You can check that the unlocked encrypted partition `/dev/mapper/cryptroot` mounted as root.
+Check that the unlocked encrypted partition `/dev/mapper/cryptroot` is mounted as root:
 
-```bash { output_lines = "2-9" }
+```bash { output_lines="2-9" }
 df -h
 Filesystem                Size      Used Available Use% Mounted on
 devtmpfs                174.4M         0    174.4M   0% /dev
@@ -450,7 +494,7 @@ tmpfs                   194.8M     32.0K    194.8M   0% /run
 cgroup                  194.8M         0    194.8M   0% /sys/fs/cgroup
 ```
 
-Stop the realm:
+Stop the Realm:
 
 ```bash
 poweroff
@@ -462,4 +506,8 @@ Stop the FVP:
 poweroff
 ```
 
-You have successfully tested launching realms with Arm CCA BootSync.
+## What you've accomplished 
+
+You’ve now used Arm CCA BootSync to enable UEFI Secure Boot and unlock an encrypted root file system for a Realm.
+
+You can extend the workflows covered in this Learning Path to provide trusted early-boot data for your own Realm workloads. 

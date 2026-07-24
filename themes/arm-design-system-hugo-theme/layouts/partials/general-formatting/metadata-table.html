@@ -98,7 +98,7 @@ Called from:
 
 
  <!-- Markdown metadata table -->
- <div class="content-box">
+ <div class="content-box{{ if $is_learning_path }} learning-path-metadata{{ end }}">
     {{- $page_h2 := printf "About this %s" $table_name -}}
     {{- $p_title := .Title -}}
     {{- range $seo_pages -}}

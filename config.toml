@@ -73,6 +73,9 @@ github_project_repo = "https://github.com/ArmDeveloperEcosystem/arm-learning-pat
 # location of assets
 assetsDir = "assets"
 
+# Optionally override the global web components bundle for a specific deployment.
+# global_web_components_url = "https://www.arm.com/arm-global-web-components/devhub/app.js"
+
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = ""
 

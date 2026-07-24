@@ -160,20 +160,20 @@ ads-expansion-panel.learning-path-filters {
 }
 
 html[theme='dark'] ads-expansion-panel.learning-path-filters {
-    --ads-expansion-panel-border-color: var(--arm-color-footing);
-    --ads-expansion-panel-content-background-color: var(--arm-color-footing);
-    --ads-expansion-panel-toggle-background-color: var(--arm-color-footing);
-    --ads-expansion-panel-toggle-background-color-hover: var(--arm-color-footing);
+    --ads-expansion-panel-border-color: var(--ads-ui-ink-90);
+    --ads-expansion-panel-content-background-color: var(--ads-ui-ink-100);
+    --ads-expansion-panel-toggle-background-color: var(--ads-ui-ink-100);
+    --ads-expansion-panel-toggle-background-color-hover: var(--ads-ui-ink-90);
 
     --ads-expansion-panel-toggle-icon-color-hover: var(--arm-green);
 }
 
 /* mobile facets styling */
 div#facets-background > ads-expansion-panel.learning-path-filters {
-    --ads-expansion-panel-border-color: var(--arm-color-base);
-    --ads-expansion-panel-content-background-color: var(--arm-color-base);
-    --ads-expansion-panel-toggle-background-color: var(--arm-color-base);
-    --ads-expansion-panel-toggle-background-color-hover: var(--arm-color-base);   
+    --ads-expansion-panel-border-color: var(--ads-ui-ink-90);
+    --ads-expansion-panel-content-background-color: var(--ads-ui-ink-90);
+    --ads-expansion-panel-toggle-background-color: var(--ads-ui-ink-90);
+    --ads-expansion-panel-toggle-background-color-hover: var(--ads-ui-ink-80);
 }
 
 
@@ -212,13 +212,13 @@ ads-card.path-card.featured-path-card {
 }
 
 html[theme='dark'] ads-card.path-card {
-    --ads-card-background-color: var(--arm-color-base);
-    --ads-card-border-color: #000000;
+    --ads-card-background-color: var(--ads-ui-ink-90);
+    --ads-card-border-color: var(--ads-ui-ink-80);
     --ads-card-box-shadow:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
     
     /* hover state */
-    --ads-card-background-color-hover: var(--arm-color-base);
-    --ads-card-border-color-hover: transparent;
+    --ads-card-background-color-hover: var(--ads-ui-ink-90);
+    --ads-card-border-color-hover: #848192;
     --ads-card-box-shadow-hover:  #000 @50%, X:0 Y: 3 B:12; /* probably not working */
 }
 
@@ -234,11 +234,7 @@ ads-card.path-card.featured-path-card ads-card-content::before {
     inset: 0;
     border-radius: 10px;
     padding: 3px;
-    background: linear-gradient(135deg,
-        var(--arm-green) 0%,
-        var(--arm-green) 50%,
-        var(--arm-web-safe-blue) 50%,
-        var(--arm-web-safe-blue) 100%);
+    background: #848192;
     -webkit-mask:
         linear-gradient(#fff 0 0) content-box,
         linear-gradient(#fff 0 0);
@@ -250,11 +246,7 @@ ads-card.path-card.featured-path-card ads-card-content::before {
 }
 
 html[theme='dark'] ads-card.path-card.featured-path-card ads-card-content::before {
-    background: linear-gradient(135deg,
-        var(--arm-green) 0%,
-        var(--arm-green) 50%,
-        var(--arm-light-blue) 50%,
-        var(--arm-light-blue) 100%);
+    background: #848192;
 }
 
 ads-card.path-card.featured-path-card:hover ads-card-content::before {
@@ -337,13 +329,20 @@ html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
 }
 .learning-path-title, .basics-title {
     color: var(--arm-light-blue);
-    /*font-weight: bold;
-    font-size:1.25rem;
-    */
     font-weight: 400;
 
     margin-top: 0px;
     margin-bottom: 4px;
+}
+
+.learning-path-title,
+.module-card-title {
+    font-size: 1.25rem!important;
+    line-height: 1.3;
+}
+
+html[theme="dark"] .learning-path-title {
+    color: #E6E6E9;
 }
 
 .basics-title {
@@ -365,25 +364,43 @@ html[theme="light"] .learning-path-title, html[theme="light"] .basics-title {
     margin-top: 0px;
     margin-bottom: 0px;
     font-size: 1.25rem!important;
+    line-height: 1.3;
 }
 
 
 ads-card.tool-card {
     height: 112px;
-    --ads-card-border-radius: 0px;
+    --ads-card-border-radius: 8px;
     --ads-card-border-width: 1px;    
 }
 
 
 html[theme='dark'] ads-card.tool-card {
-    --ads-card-background-color: var(--arm-color-base);
-    --ads-card-border-color: #000000;
-    --ads-card-box-shadow: #000 @50%, X:0 Y: 3 B:12;     /* shadow likely not working */
+    --ads-card-background-color: var(--ads-ui-ink-80);
+    --ads-card-border-color: transparent;
+    --ads-card-background-color-hover: var(--ads-ui-ink-80);
+    --ads-card-border-color-hover: #848192;
+    --ads-card-box-shadow-hover: none;
+}
 
+html[theme='dark'] .install-guide-card-wrapper {
+    border-radius: 8px;
+    position: relative;
+}
 
-    --ads-card-background-color-hover: var(--arm-color-base);
-    --ads-card-border-color-hover: transparent;
-    --ads-card-box-shadow-hover: #000 @50%, X:0 Y: 3 B:12; /* 0 3px 6px 1px rgba(0,0,0,0.16);*/
+html[theme='dark'] .install-guide-card-wrapper::after {
+    border: 1px solid transparent;
+    border-radius: 8px;
+    content: '';
+    inset: 0;
+    pointer-events: none;
+    position: absolute;
+    transition: border-color 0.2s ease-in-out;
+    z-index: 2;
+}
+
+html[theme='dark'] .install-guide-card-wrapper:hover::after {
+    border-color: #848192;
 }
 
 ads-card-content.tool-card-content {
@@ -391,47 +408,16 @@ ads-card-content.tool-card-content {
   margin-bottom: 0px;
 }
 
-ads-card-content.tool-card-content::before {
-    background-color: var(--arm-web-safe-blue);
-    content: '';
-    height: calc(100% + 2px);
-    left: -1px;
-    position: absolute;
-    top: -1px;
-    transition: background-color;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-in-out;
-    width: 12px;
-  }
-  html[theme="dark"] ads-card-content.tool-card-content::before {
-    background-color: var(--arm-blue);
-  }
-
-
-
-  ads-card.tool-card:hover ads-card-content.tool-card-content::before {
-    background-color: var(--arm-green);
-  }
-  ads-card.tool-card p {
+ads-card.tool-card p {
     color: var(--arm-web-safe-blue);
-    margin-left: 8px;
-    transition: color;
-
-    transition: margin-left;
-    transition-duration: 0.3s;
-    transition-timing-function: ease-in-out;
-  }
-  html[theme="dark"] ads-card.tool-card p {
-    color: var(--arm-light-blue);
-  }
-
-  ads-card.tool-card:hover p {
+}
+html[theme="dark"] ads-card.tool-card p {
+    color: #E6E6E9;
+}
+ads-card.tool-card:hover p,
+html[theme="dark"] ads-card.tool-card:hover p {
     color: var(--lp-hover-text);
-    margin-left: 12px;
-  }
-  html[theme="dark"]       ads-card.tool-card:hover p {
-    color: var(--lp-hover-text);
-  }
+}
 
 
 

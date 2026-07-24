@@ -18,9 +18,58 @@ prerequisites:
     - A computer with [Google Cloud CLI](/install-guides/gcloud/) and [kubectl](/install-guides/kubectl/)installed.
     - A valid GitLab account
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-02T19:00:04Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 7a84bfc0dd8ed40a760526ab220113200aa01d3e745b7dc7b77767c6258e8874
+  summary_generated_at: '2026-07-02T19:00:04Z'
+  summary_source_hash: 7a84bfc0dd8ed40a760526ab220113200aa01d3e745b7dc7b77767c6258e8874
+  faq_generated_at: '2026-07-02T19:00:04Z'
+  faq_source_hash: 7a84bfc0dd8ed40a760526ab220113200aa01d3e745b7dc7b77767c6258e8874
+  summary: >-
+    You'll create a Google Axion-based self-hosted GitLab Runner
+    and wire it into a GitLab CI/CD pipeline that produces a multi-architecture container image.
+    First, you'll register the runner, choose an executor that fits your environment, and confirm it is
+    available to your project. Then, you'll configure the pipeline to build architecture-specific images
+    on native runners for Arm and x86, push them to a container registry, and assemble a
+    single multi-architecture image using the `docker manifest` approach. You'll then trigger
+    a pipeline, see jobs land on the intended runners, and verify that the published image advertises
+    both arm64 and amd64 in its manifest.
+  faqs:
+  - question: How do I know the Axion-based runner registered correctly?
+    answer: >-
+      Check the project or group’s Runners page in GitLab and confirm the runner shows as online.
+      Run a test pipeline and verify the job log lists the expected runner and executor.
+  - question: Which executor should I use for the self-hosted runner?
+    answer: >-
+      Choose the executor that matches how you want jobs to run in your environment. For example,
+      use a Docker-based executor to run containerized jobs or a Kubernetes executor to schedule
+      jobs on a cluster.
+  - question: How are multi-architecture images built in this path?
+    answer: >-
+      You'll use `docker manifest` to join separate architecture-specific images into a single
+      multi-architecture image. You'll build images for arm64 and amd64 on native runners, then create
+      a manifest that references both.
+  - question: What result should I expect after the manifest step completes?
+    answer: >-
+      You should have a single image tag that represents a manifest list containing entries for
+      arm64 and amd64. When inspected in your registry, it shows both architectures under the
+      same tag.
+  - question: Can I mix GitLab-hosted and self-managed runners in the same pipeline?
+    answer: >-
+      Yes. You can use both types of runners and route specific jobs to the intended runner type
+      through your CI configuration so architecture-specific jobs run on the correct machines.
+# END generated_summary_faq
+
 author: Pranay Bakre
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -68,4 +117,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

@@ -55,8 +55,14 @@ Where it is used:
   integrity="sha384-caAG7P/HrHxcdQa2gTEfvZYGPLQk7yRwVdvtRn6sa3TRKzcAyY1LMvObXKGhwFNb"
   crossorigin="anonymous">
 </script>
-    <!-- Arm Header & Footer loading -->
-<script  type="text/javascript"  src="https://www.arm.com/arm-global-web-components/devhub/app.js" ></script>
+    <!-- Arm Header & Footer loading. All environments default to stable app.js;
+         deployment config can explicitly override the URL for controlled testing. -->
+{{ $globalWebComponentsURL := .Site.Params.global_web_components_url | default "https://www.arm.com/arm-global-web-components/devhub/app.js" }}
+<script
+  type="text/javascript"
+  src="{{ $globalWebComponentsURL }}"
+  defer>
+</script>
 
 
     
