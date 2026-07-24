@@ -8,12 +8,9 @@ minutes_to_complete: 90
 who_is_this_for: This Learning Path is for Edge AI developers who need to inspect model artifacts after backend delegation, understand graph structure and delegate coverage, and use those insights to reason about performance and behavior.
 
 learning_objectives:
-  - Explain what Google Model Explorer is and how adapters add support for Arm model artifacts
-  - Install the combined ExecuTorch extension and the separate TOSA and VGF adapters for Model Explorer
-  - Open ExecuTorch .pte files and compare portable CPU, XNNPACK CPU, and Ethos-U artifacts
-  - Use PTE visualization to reason about delegate regions, work outside delegates, graph fragmentation, and backend-specific changes
-  - Inspect TOSA flatbuffers as an intermediate representation used by Arm compiler and backend workflows
-  - Inspect VGF artifacts used with the ML extensions for Vulkan and neural graphics workloads
+  - Set up Google Model Explorer with the combined ExecuTorch extension and separate Tensor Operator Set Architecture (TOSA) and VGF adapters. 
+  - Open ExecuTorch deployment graphs and inspect delegate regions, work outside delegates, graph fragmentation, and backend-specific changes
+  - Trace model transformations across PTE, TOSA, and VGF artifacts
   - Use ETRecord and ETDump overlays to connect exported graph structure with runtime profiling data
 
 prerequisites:
