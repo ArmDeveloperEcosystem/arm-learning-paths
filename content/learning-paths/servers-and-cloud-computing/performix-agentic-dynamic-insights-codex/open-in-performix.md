@@ -22,4 +22,8 @@ Use the AI Insight to focus your investigation, not replace it. For example, if 
 
 For a before-and-after comparison, keep the workload, target, input, thread count, CPU affinity, and collection settings consistent. A lower sample percentage doesn't prove that a function became faster if total runtime or the surrounding workload changed.
 
-You have configured the Performix MCP server, selected or created a Code Hotspots run, generated an AI Insight, and checked its recommendation against the profile. Continue with the [Arm Performix getting-started video](https://youtu.be/_eX8ZpNT0kc) to explore the graphical workflow.
+## What you've accomplished
+
+You've now configured the Performix MCP server, selected or created a Code Hotspots run, generated an AI Insight, and checked its recommendation against the profile. 
+
+You can continue with the [Arm Performix getting-started video](https://youtu.be/_eX8ZpNT0kc) to explore the graphical workflow.

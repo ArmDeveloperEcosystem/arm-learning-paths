@@ -1,5 +1,5 @@
 ---
-title: Create a Code Hotspots run
+title: Create an Arm Performix Code Hotspots run
 
 weight: 4
 
@@ -9,16 +9,16 @@ layout: learningpathall
 ---
 ## Prepare a representative workload
 
-You can skip this section if you already selected a supported Code Hotspots run.
+If you already have a supported Code Hotspots run, skip to [Generate Arm Performix AI insights for a Code Hotspots run](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-codex/generate_ai_insights/).
 
 For a new run, choose a workload that represents the behavior you want to optimize. Specify the executable with an absolute path because Performix doesn't support relative workload paths. Build it with debug symbols when possible so Performix can attribute samples to functions and source lines. Aim for at least 20 seconds of representative activity; a very short run might not collect enough samples for useful analysis.
 
 Before profiling, make sure you know:
 
-- The Performix target name.
-- The executable path and arguments on the target.
-- The workload's working directory and required environment variables.
-- Whether running the workload has side effects.
+- the Performix target name
+- the executable path and arguments on the target
+- the workload's working directory and required environment variables
+- whether running the workload has side effects
 
 ## Create a run with Codex
 
@@ -36,8 +36,8 @@ Use Arm Performix to run the Code Hotspots recipe on target "<target-name>" with
 
 Replace:
 
-- `<target-name>` with the Performix target name returned by Codex.
-- `<command>` with the command that starts your workload on the target.
+- `<target-name>` with the Performix target name returned by Codex
+- `<command>` with the command that starts your workload on the target
 
 For example:
 
@@ -66,7 +66,9 @@ apx recipe run code_hotspots \
     --timeout 30 
 ```
 
-The `--timeout 30` option limits profiling to 30 seconds; it doesn't make a short workload run longer. Use a duration that captures representative behavior. Add `--working-dir`, `--env`, or `--source` when your workload needs a specific working directory, environment variables, or host-based source mapping. For an already-running process, replace `--workload` with `--pid <process-id>`.
+The `--timeout 30` option limits profiling to 30 seconds and doesn't make a short workload run longer. Use a duration that captures representative behavior.
+
+Add `--working-dir`, `--env`, or `--source` when your workload needs a specific working directory, environment variables, or host-based source mapping. For an already-running process, replace `--workload` with `--pid <process-id>`.
 
 When collection finishes, list the saved runs:
 
@@ -74,4 +76,26 @@ When collection finishes, list the saved runs:
 apx run list
 ```
 
-Confirm that the new run completed successfully and record its run ID. You now have the stable identifier Codex needs to analyze the intended profile.
+Confirm that the new run completed successfully and record its run ID.
+
+## Troubleshoot remote target authentication
+
+If remote target authentication fails, check that:
+
+- SSH key-based authentication works without an interactive password prompt.
+- The private key doesn't require an interactive passphrase.
+- Passwordless `sudo` is configured for the target user.
+- Strict host-key checking succeeds.
+- `~/.ssh/known_hosts` contains the target key and each jump-node key.
+
+Use the Arm Performix target test to check the configured connection independently of Codex:
+
+```bash
+apx target test --target <target-name>
+```
+
+## What you've accomplished and what's next
+
+You've now got the stable identifier Codex needs to analyze the intended profile.
+
+Next, you'll generate AI insights from a Code Hotspots run.

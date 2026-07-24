@@ -1,9 +1,5 @@
 ---
-title: Generate Arm Performix AI Insights in VS Code with Codex
-
-draft: true
-cascade:
-    draft: true
+title: Generate Arm Performix AI insights in Visual Studio Code with Codex
 
 description: Configure the Arm Performix MCP server for Codex in Visual Studio Code and use profile evidence to generate and validate AI Insights.
 
@@ -18,7 +14,7 @@ learning_objectives:
     - Generate an AI Insight and validate its recommendations against profile evidence.
 
 prerequisites:
-    - Arm Performix version 2026.2.5 or later installed. See the [Arm Performix install guide](/install-guides/performix/) for installation and target setup instructions.
+    - Arm Performix version 2026.2.5 or later installed. For installation and target setup instructions, see the [Arm Performix install guide](/install-guides/performix/).
     - Visual Studio Code with the Codex extension installed.
     - Access to Codex through ChatGPT sign-in, or an organization-approved OpenAI API key provided through the `OPENAI_API_KEY` environment variable.
     - Permission from your organization to share profile data, symbols, source excerpts, disassembly excerpts, and performance metrics with Codex.

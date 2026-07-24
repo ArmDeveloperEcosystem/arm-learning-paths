@@ -1,5 +1,5 @@
 ---
-title: Generate AI Insights
+title: Generate Arm Performix AI insights for a Code Hotspots run
 
 weight: 5
 
@@ -51,6 +51,22 @@ Which additional Performix recipe or view would distinguish between those explan
 What is the first optimization I should try, and why?
 ```
 
+## Improve a generic AI Insight
+
+Ask for one finding and its evidence:
+
+```text
+Focus on the highest-impact finding in run ID "<run-id>". Cite the measured evidence, distinguish hypotheses from observations, and identify the next Performix view or recipe to inspect.
+```
+
+For a known hotspot:
+
+```text
+For function "<function-name>" in run ID "<run-id>", summarize what Code Hotspots proves, what it doesn't prove, and which additional evidence is needed to identify the root cause.
+```
+
+If the response remains generic, confirm that the run has enough samples, symbols, source mapping, and disassembly. Code Hotspots locates sampled CPU time; use a more specific Performix recipe when you need evidence about microarchitecture, instruction mix, or memory access.
+
 ## Iterate and measure
 
 After you review the evidence, use a controlled optimization loop:
@@ -64,4 +80,8 @@ After you review the evidence, use a controlled optimization loop:
 
 Codex can help with more of this loop if your environment exposes build, deployment, remote-execution, or source-control tools. Review proposed code changes and command approvals before Codex applies or runs them.
 
-You have now generated an evidence-based hypothesis. Next, open the same run in Arm Performix to inspect the underlying profile views.
+## What you've accomplished and what's next
+
+You've now generated an evidence-based hypothesis.
+
+Next, you'll open the same run in Arm Performix to inspect the underlying profile views.
