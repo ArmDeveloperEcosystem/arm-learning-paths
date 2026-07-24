@@ -39,7 +39,7 @@ Inspect the graph and look for the following:
 - Whether the tensor types are FP32
 - What convolution, add, clamp, and pooling patterns are visible
 
-![Screenshot of examining an FP32 MobileNetV2 TOSA artifact in Model Explorer.#center](tosa_ethos_fp32.png "Inspecting FP32 TOSA with Model Explorer")
+![FP32 MobileNetV2 TOSA graph showing TRANSPOSE, FP32 CONV2D, and arithmetic operators before Ethos-U compilation.#center](tosa_ethos_fp32.png "FP32 MobileNetV2 represented in TOSA")
 
 The artifact shows that the FP32 model can be represented in TOSA. In Model Explorer, you'll see a large graph with about 800 nodes. Most of the graph is made from constants and arithmetic around the MobileNetV2 operator structure: `CONV2D`, `DEPTHWISE_CONV2D`, `MUL`, `ADD`, `SUB`, `CLAMP`, one `AVG_POOL2D`, and a final `RESHAPE`.
 
@@ -54,7 +54,7 @@ Compare it with the FP32 TOSA graph:
 - You'll see many `RESCALE` operations, which are common in quantized graphs.
 - You'll still see the core CNN structure, including `CONV2D`, `DEPTHWISE_CONV2D`, `ADD`, `AVG_POOL2D`, and `RESHAPE`.
 
-![Screenshot of examining an INT8 MobileNetV2 TOSA artifact in Model Explorer.#center](tosa_ethos_int8.png "Inspecting INT8 TOSA with Model Explorer")
+![INT8 MobileNetV2 TOSA graph showing CONV2D with INT32 accumulation followed by RESCALE, a characteristic quantized-graph pattern.#center](tosa_ethos_int8.png "Quantized MobileNetV2 TOSA graph")
 
 The INT8 graph is still a full MobileNetV2 graph, but the operator mix changes. You'll see fewer floating-point arithmetic nodes and many `RESCALE` nodes. These are used in quantized graphs to move values between quantization scales after integer operations. The convolution and depthwise convolution operators use INT32 accumulation, which is typical for INT8 convolution workloads.
 
@@ -74,9 +74,9 @@ Inspect both TOSA files and look for the following:
 - The fragment that represents the graph region after the inserted LRN-related work
 - Whether the fragment boundaries are consistent with the two `EthosUBackend` regions in the `.pte`
 
-![Screenshot of examining the first fragmented INT8 TOSA artifact in Model Explorer.#center](tosa_ethos_int8_frag_1.png "Inspecting the first fragmented INT8 TOSA artifact")
+![Smaller TOSA fragment from the LRN example showing shape transformation and rescaling operations after the unsupported graph region.#center](tosa_ethos_int8_frag_1.png "Smaller TOSA fragment after the graph split")
 
-![Screenshot of examining the second fragmented INT8 TOSA artifact in Model Explorer.#center](tosa_ethos_int8_frag_2.png "Inspecting the second fragmented INT8 TOSA artifact")
+![Larger TOSA fragment from the LRN example showing the main quantized convolution path with CONV2D and RESCALE operations.#center](tosa_ethos_int8_frag_2.png "Main MobileNetV2 TOSA fragment")
 
 The first LRN TOSA file is the smaller fragment. It has two inputs, with shapes `[1, 1280, 7, 7]` and `[1, 1, 1280, 7, 7]`, and one `[1, 1000]` output. The file contains the later part of the graph after the inserted LRN-related work, including a small number of `RESCALE`, `TABLE`, `MUL`, `AVG_POOL2D`, and `CONV2D` operations.
 
@@ -133,7 +133,7 @@ These small upscaler graphs are INT8 TOSA artifacts. In Model Explorer, look for
 - `RESCALE` operations from quantized arithmetic
 - Similarities and differences between the PTQ and QAT artifacts
 
-![Screenshot of examining a PTQ small upscaler TOSA artifact in Model Explorer.#center](tosa_ptq.png "Inspecting a PTQ small upscaler TOSA artifact with Model Explorer")
+![PTQ upscaler TOSA graph showing shape constants feeding a bilinear RESIZE, followed by RESCALE and quantized convolution operations.#center](tosa_ptq.png "PTQ neural-upscaler graph in TOSA")
 
 Don't expect a major visual difference between the PTQ and QAT TOSA graphs. They represent the same small upscaler architecture and were lowered to the same visible TOSA structure: 41 nodes, including one bilinear `RESIZE`, three `CONV2D` operations, four `RESCALE` operations, three `CONST_SHAPE` nodes, and constants for weights and quantization parameters.
 

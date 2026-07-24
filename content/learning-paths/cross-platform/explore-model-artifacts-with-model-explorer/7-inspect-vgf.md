@@ -38,7 +38,7 @@ Inspect the graph and look for the following:
 - Whether the top-level graph shows the internal upscaler operators
 - What this view tells you about the ExecuTorch runtime path
 
-![Screenshot of examining a VGF-backed PTE in Model Explorer.#center](ptq_vgf_pte.png "Inspecting a VGF-backed PTE with Model Explorer")
+![ExecuTorch PTE graph showing quantization, a single VgfBackend delegate call, and dequantization, indicating that the upscaler is delegated to the VGF backend.#center](ptq_vgf_pte.png "VGF backend packaged inside an ExecuTorch PTE")
 
 In Model Explorer, the `.pte` looks compact. You'll see a `quantized_decomposed::quantize_per_tensor` node, a single `VgfBackend` delegate node, a `quantized_decomposed::dequantize_per_tensor` node, and graph inputs and outputs.
 
@@ -46,7 +46,7 @@ This is similar to the Ethos delegation. Apart from inputs and outputs and the q
 
 Expand the `VgfBackend` delegate graph:
 
-![Screenshot of examining the VGF backend subgraph inside a PTE in Model Explorer.#center](ptq_vgf_pte_subgraph.png "Inspecting the VGF backend subgraph inside a PTE")
+![Expanded VGF backend graph showing an input tensor descriptor with shape 1 by 16 by 16 by 3 and VK_FORMAT_R8_SINT, followed by Resize and Rescale operations.#center](ptq_vgf_pte_subgraph.png "VGF tensor descriptor and backend operators")
 
 Now, open the matched standalone VGF artifact `ml-model-artifacts/vgf/small_upscaler_ptq.vgf`.
 

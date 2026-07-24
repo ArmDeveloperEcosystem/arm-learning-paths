@@ -46,7 +46,7 @@ For Ethos-U, the ExecuTorch backend uses the Ethos-U Vela compiler to compile TO
 
 TOSA is not inherently ExecuTorch-specific. TOSA is an intermediate representation (IR) that can sit between a model frontend and an Arm backend compiler or converter. ExecuTorch can lower supported graph partitions to TOSA, but another framework can also provide its own TOSA exporter and generate `.tosa` files.
 
-```output
+```text
       PyTorch model
         |
         v
@@ -62,7 +62,7 @@ TOSA is not inherently ExecuTorch-specific. TOSA is an intermediate representati
                                        |
                                        |
                                        |
-      Alternative (non PT/ET)          v
+      Alternative (non PyTorch/ExecuTorch)          v
       frontend with TOSA export ---> TOSA (.tosa)
                                       |
                                       |

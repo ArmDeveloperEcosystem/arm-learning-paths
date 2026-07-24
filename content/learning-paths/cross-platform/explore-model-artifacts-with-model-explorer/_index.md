@@ -1,5 +1,5 @@
 ---
-title: Visualize ExecuTorch, TOSA, and VGF artifacts with Google Model Explorer and Arm extensions
+title: Inspect model artifacts and runtime profiles with Google Model Explorer and Arm extensions
     
 description: Inspect ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump model artifacts with Google Model Explorer and Arm extensions.
 
@@ -16,6 +16,7 @@ learning_objectives:
 prerequisites:
   - Python 3.10, 3.11, or 3.12
   - Basic familiarity with PyTorch, ExecuTorch, or model deployment workflows
+  - Git Large File Storage (LFS)
 
 author:
   - Matt Cossins

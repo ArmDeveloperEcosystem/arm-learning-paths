@@ -191,7 +191,7 @@ Inspect the graph and profiling overlay, then look for the following:
 - Repeated operators that dominate the profile
 - How the runtime view compares with the portable `.pte` view that you inspected
 
-![Screenshot of examining portable OPT-125M ETRecord and ETDump overlays in Model Explorer.#center](portable_profile.png "Inspecting portable OPT-125M runtime overlays")
+![Portable OPT-125M ETRecord graph with ETDump timing tables. No delegate layer is present, and runtime measurements map directly to native model operators.#center](portable_profile.png "Portable OPT-125M runtime profile")
 
 This is a pure portable CPU run. The ETDump contains about 1,199 events, with `Method::execute` around 9,082 ms. There are no delegate calls. Almost all runtime is in native calls, with repeated `aten.addmm` events forming the main hotspot.
 
@@ -208,7 +208,7 @@ Compare it with the portable profile and look for the following:
 - Native operators that still run outside the delegate
 - How much faster this run is than the portable CPU baseline
 
-![Screenshot of comparing XNNPACK OPT-125M ETRecord and ETDump overlays in Model Explorer.#center](xnnpack_profile.png "Inspecting XNNPACK OPT-125M runtime overlays")
+![XNNPACK OPT-125M profile showing many executorch_call_delegate nodes and timing overlays, confirming that most model execution moved into delegate calls.#center](xnnpack_profile.png "XNNPACK delegate calls in the OPT-125M profile")
 
 The XNNPACK ETDump contains about 813 events, with `Method::execute` around 125 ms. The profile includes 98 delegate calls to `XnnpackBackend`. Delegate calls account for about 116.7 ms, while native calls account for about 8.5 ms.
 
@@ -227,7 +227,7 @@ Look for the following:
 - A large `Method::execute` total
 - Runtime behavior that matches the FP32 `.pte` view from the Ethos-U section
 
-![Screenshot of examining an FP32 MobileNetV2 ETRecord and ETDump overlay in Model Explorer.#center](fp32_profile.png "Inspecting FP32 MobileNetV2 runtime overlays")
+![FP32 MobileNetV2 profile showing native feature and classifier layers with no Ethos-U delegate region. The timing table attributes runtime to CPU operators.#center](fp32_profile.png "FP32 MobileNetV2 profile without Ethos-U delegation")
 
 The ETDump contains about 309 events, with `Method::execute` around 395 million cycles. There are no delegate calls, and the native call sum accounts for almost all of the runtime. The profile is dominated by CPU-side convolution work.
 
@@ -242,7 +242,7 @@ Inspect the overlay and look for the following:
 - Whether the largest runtime cost comes from the NPU event or from CPU-side quantization
 - How this compares with the clean INT8 `.pte` view
 
-![Screenshot of examining a clean INT8 Ethos-U ETRecord and ETDump overlay in Model Explorer.#center](ethos_int8_profile.png "Inspecting clean INT8 Ethos-U runtime overlays")
+![INT8 MobileNetV2 profile showing one EthosUBackend partition. The timing overlay shows that CPU-side quantization costs more than dequantization around the delegate.#center](ethos_int8_profile.png "Single Ethos-U partition with CPU-side quantization")
 
 This is the clean Ethos-U delegation case. The ETDump is small, with about 13 events. `Method::execute` is around 6.59 million cycles. There's one `EthosUBackend` delegate call, and only a small number of native calls.
 
@@ -259,7 +259,7 @@ Compare it with the clean INT8 profile and look for the following:
 - How large the non-delegated native cost is compared with the NPU cost
 - Whether quantize and dequantize events appear around delegate boundaries
 
-![Screenshot of examining fragmented INT8 Ethos-U ETRecord and ETDump overlays in Model Explorer.#center](ethos_lrn_profile.png "Inspecting fragmented INT8 Ethos-U runtime overlays")
+![Fragmented MobileNetV2 profile showing two Ethos-U partitions, LocalResponseNorm, and two delegate calls. The timing table exposes expensive work outside the NPU partitions.#center](ethos_lrn_profile.png "Fragmented Ethos-U profile with non-delegated work")
 
 Fragmentation can affect performance in different ways. Additional delegate boundaries can introduce data conversion, synchronization, or tensor movement. Non-delegated operators can also dominate runtime when their execution cost is much larger than the delegated work. Which effect matters most depends on the model, backend, and runtime.
 
@@ -273,4 +273,4 @@ You've learned that ETRecord and ETDump add runtime context to static graphs. ET
 
 The OPT-125M profiles made the CPU case clear: the portable run stayed on native operators, while the XNNPACK run moved most of the work into delegate calls. The MobileNetV2 profiles showed the same pattern for Ethos-U. Native CPU execution, clean Ethos-U delegation, and fragmented delegation are much easier to tell apart when the runtime data is overlaid on the exported graph.
 
-You can now explore deeper workflows for generating, running, profiling, and optimizing your own models.
+You can now explore deeper workflows for generating, running, profiling, and optimizing your own models with Model Explorer.

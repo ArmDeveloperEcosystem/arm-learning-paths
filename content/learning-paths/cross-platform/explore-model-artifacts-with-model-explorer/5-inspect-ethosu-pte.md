@@ -40,7 +40,7 @@ Inspect the graph and look for the following:
 - The input and output shapes
 - What this tells you about targeting Ethos-U without quantization
 
-![Screenshot of examining an FP32 Ethos-U PTE in Model Explorer.#center](ethos_fp32.png "Inspecting FP32 Ethos-U PTE with Model Explorer")
+![FP32 MobileNetV2 PTE graph showing ATen convolution and normalization operators with no EthosUBackend node, confirming that the FP32 workload was not delegated.#center](ethos_fp32.png "FP32 MobileNetV2 without Ethos-U delegation")
 
 Ethos-U execution expects quantized integer workloads. This artifact was generated from an FP32 MobileNetV2 model, so the graph isn't in the form Ethos-U needs for NPU execution. As a result, the work remains outside an Ethos-U delegate region.
 
@@ -65,7 +65,7 @@ Inspect the graph and look for the following:
 - Inputs and outputs that cross the delegate boundary
 - Whether any visible work remains outside the delegated region
 
-![Screenshot of examining an INT8 Ethos-U PTE in Model Explorer.#center](ethosu-int8-clean.png "Inspecting INT8 Ethos-U PTE with Model Explorer")
+![INT8 MobileNetV2 graph showing a quantize operation, one EthosUBackend delegate, and a dequantize operation, indicating clean NPU delegation.#center](ethosu-int8-clean.png "Clean INT8 Ethos-U delegation")
 
 A clean delegated example should have most supported quantized work inside the Ethos-U region. In this example, the compute-heavy quantized CNN operators are suitable for Ethos-U and appear as one large delegated region.
 
@@ -91,7 +91,7 @@ Inspect the graph and look for the following:
 - Unsupported operations or graph patterns outside the NPU delegate
 - Quantize, dequantize, or non-delegated operators between delegate regions
 
-![Screenshot of examining a fragmented INT8 Ethos-U PTE in Model Explorer.#center](ethos-u-int8-fragmented.png "Inspecting fragmented INT8 Ethos-U PTE with Model Explorer")
+![Fragmented INT8 graph showing two EthosUBackend regions separated by dequantization, aten::avg_pool3d, and requantization. The unsupported work splits the NPU path.#center](ethos-u-int8-fragmented.png "Ethos-U regions split by non-delegated work")
 
 Fragmentation often means that the model was only partly suitable for the target backend. Common causes include unsupported operators, unsupported tensor shapes, quantization issues, or target-specific compiler constraints.
 

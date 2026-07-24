@@ -57,7 +57,7 @@ Inspect the graph and look for the following:
 
 The following is a small snippet image:
 
-![Screenshot of examining a portable Cortex-A PTE in Model Explorer.#center](portable.png "Inspecting portable Cortex-A PTE with Model Explorer")
+![Portable OPT-125M PTE graph showing ATen KernelCall nodes and no XNNPACK delegate regions, establishing the default CPU execution baseline.#center](portable.png "Portable OPT-125M execution graph")
 
 In the artifact, notice the following:
 
@@ -83,7 +83,7 @@ Inspect the graph and look for the following:
 
 The backend has changed the execution plan:
 
-![Screenshot of examining an XNNPACK Cortex-A PTE in Model Explorer.#center](xnnpack.png "Inspecting XNNPACK Cortex-A PTE with Model Explorer")
+![XNNPACK OPT-125M graph showing multiple XnnpackBackend delegate calls interleaved with ATen operators, demonstrating partial and fragmented CPU delegation.#center](xnnpack.png "Fragmented XNNPACK delegation in OPT-125M")
 
 - The top-level graph is smaller than the portable graph, with about 335 operator nodes instead of about 600.
 - The graph contains many `XnnpackBackend` nodes. In this artifact, these represent the delegated regions that'll execute through XNNPACK.
@@ -92,7 +92,7 @@ The backend has changed the execution plan:
 - Some `aten::` operators still remain at the top level, including shape, masking, normalization, and elementwise operations. These are the parts of the graph that stayed on the default ExecuTorch path.
 - The graph isn't one single XNNPACK region. OPT-125M is a transformer with attention, masking, reshapes, and layout changes, so delegation is useful but fragmented into many backend regions.
 
-![Screenshot of examining an XNNPACK subgraph in Model Explorer.#center](xnnpack_subgraph.png "Inspecting XNNPACK subgraph with Model Explorer")
+![Expanded XNNPACK delegate subgraph showing backend operators that replace supported regions of the portable ExecuTorch graph.#center](xnnpack_subgraph.png "Operators inside an XNNPACK delegate region")
 
 This is the key difference to notice: XNNPACK doesn't replace the whole `.pte`. It captures supported subgraphs and leaves the rest of the program in ExecuTorch. In performance work, the balance between large delegated regions and remaining default-path operators is often more important than the raw number of delegate nodes.
 

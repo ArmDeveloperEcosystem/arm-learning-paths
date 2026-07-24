@@ -48,17 +48,17 @@ To inspect the Cortex-M PTE, follow these steps:
 
 1. In Model Explorer, open `ml-model-artifacts/pte/mv2_cortex_m.pte`.
 
-  ![Screenshot of Model Explorer with Arm Adapters and a loaded Cortex-M PTE.#center](model_explorer.png "Model Explorer with Arm Adapters")
+  ![Model Explorer Select Models screen showing the TOSA, VGF, and PTE extensions loaded and mv2_cortex_m.pte selected, ready to open with View selected models.#center](model_explorer.png "Model Explorer with the Arm adapters and Cortex-M PTE selected")
 
 2. Select **View selected models**.
 
-  ![Screenshot of top-level view in Model Explorer of a loaded Cortex-M PTE.#center](cortex_m_top.png "Typical top-level graph view in Model Explorer")
+  ![Top-level Cortex-M PTE graph showing Graph Inputs, the collapsed forward layer, and Graph Outputs. Expand forward to inspect the execution graph.#center](cortex_m_top.png "Top-level Cortex-M PTE graph")
 
   The graph information panel shows the **op node count** and **layer count**. The **op node count** is the number of operator nodes in the graph. The **layer count** is the number of hierarchical graph components represented in the current view, not necessarily the number of neural network layers in the original model.
 
 3. Expand the `forward` layer to view its operators. Select an operator, such as `cortex_m::quantize_per_tensor`, to see its attributes, inputs, and outputs in the node information panel.
 
-  ![Screenshot of examining a specific Cortex-M operator in Model Explorer.#center](cortex_m_inspect.png "Inspecting specific operators with Model Explorer")
+  ![Expanded Cortex-M graph with cortex_m::quantize_per_tensor selected. The node information and View on nodes panels expose its attributes, inputs, outputs, and KernelCall metadata.#center](cortex_m_inspect.png "Cortex-M operator metadata in Model Explorer")
 
   When you inspect a `.pte` for the first time, focus on the higher-level graph information first:
 
