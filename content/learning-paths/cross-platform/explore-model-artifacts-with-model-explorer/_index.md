@@ -18,8 +18,58 @@ prerequisites:
   - Basic familiarity with PyTorch, ExecuTorch, or model deployment workflows
   - Git Large File Storage (LFS)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-24T17:13:27Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 27a823fec7ad01beca56b6ad1d6ee8a07085686f5fbffb0b361ccb4f573ecf6e
+  summary_generated_at: '2026-07-24T17:13:27Z'
+  summary_source_hash: 27a823fec7ad01beca56b6ad1d6ee8a07085686f5fbffb0b361ccb4f573ecf6e
+  faq_generated_at: '2026-07-24T17:13:27Z'
+  faq_source_hash: 27a823fec7ad01beca56b6ad1d6ee8a07085686f5fbffb0b361ccb4f573ecf6e
+  summary: >-
+    You'll install and run Google Model Explorer with Arm extensions
+    to inspect ExecuTorch deployment artifacts and relate graph structure to runtime data. First, you'll
+    set up a clean environment, clone example models with Git LFS, and launch Model Explorer with
+    the ExecuTorch, TOSA, and VGF adapters. Then, you'll open `.pte`, `.tosa`, `.vgf`, `.etrecord`, and `.etdp` files
+    to examine delegate regions, work outside delegates, and graph fragmentation. You'll
+    compare portable-kernel and XNNPACK PTEs for Cortex-A CPU paths and inspect Ethos-U delegation and Cortex-M targets. Finally, you'll correlate model structure with observed behavior using ETRecord and ETDump overlays that connect exported graphs with collected profiling.
+  faqs:
+  - question: Which extensions should I enable to load the artifacts used here?
+    answer: >-
+      Enable the ExecuTorch extension to open `.pte` and `.etrecord` files and add `.etdp` profiling
+      overlays. Enable the TOSA adapter for `.tosa` files and the VGF adapter for `.vgf` files. By running all three, you can switch between formats in one session.
+  - question: How do I recognize delegate regions and fragmentation in a PTE?
+    answer: >-
+      Inspect the graph for a single contiguous delegate region, multiple smaller delegate regions,
+      or nodes that remain outside the delegate. Use this view to see how much of the model
+      is delegated and where non-delegated work occurs.
+  - question: What result should I expect when opening the Cortex-M .pte example?
+    answer: >-
+      The deployment graph renders in the browser with expandable nodes and metadata. Seeing
+      the graph confirms the installation and that the ExecuTorch extension is active.
+  - question: How do I compare portable and XNNPACK PTEs for Cortex-A CPU paths?
+    answer: >-
+      Open both PTE files and examine operator nodes and backend-specific changes. Look for differences
+      in how operators are implemented and where execution paths differ from portable kernels.
+  - question: How do I connect runtime data to the exported graph?
+    answer: >-
+      Open the matching `.etrecord` file and its `.etdp` profiling data with the ExecuTorch extension enabled.
+      Model Explorer overlays align these data with graph nodes so you can correlate structure
+      with runtime behavior.
+# END generated_summary_faq
+
 author:
   - Matt Cossins
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
