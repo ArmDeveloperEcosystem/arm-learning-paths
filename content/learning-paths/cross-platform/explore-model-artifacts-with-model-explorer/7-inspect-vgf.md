@@ -2,7 +2,7 @@
 title: Inspect VGF artifacts with Model Explorer
 description: Compare VGF-backend PTE and standalone VGF artifacts in Model Explorer to understand ExecuTorch packaging and Vulkan backend graph structure.
 
-weight: 7
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: "learningpathall"
@@ -20,12 +20,12 @@ Although that flow uses ExecuTorch and generates `.pte` files as well, VGF isn't
 
 There are two related but different Model Explorer views in a VGF workflow:
 
-| View | Open with | Layer inspected | What to look out for |
+| View | Open with | Layer inspected | What to look for |
 | --- | --- | --- | --- |
 | VGF-backend `.pte` | PTE adapter | ExecuTorch program and deployment container | Where the VGF backend call appears, and whether there's surrounding quantize, dequantize, or CPU work |
 | Standalone `.vgf` | VGF adapter | Backend graph for the ML extensions for Vulkan | The operators, tensors, shapes, constants, descriptors, and graph connectivity the Vulkan runtime will consume |
 
-Use the `.pte` file when you want to understand how ExecuTorch wraps and calls the VGF backend. Use the `.vgf` file when you want to inspect the VGF artifact used with the ML extensions for Vulkan. You can also open the VGF backend in Model Explorer from the `.pte` file and see the same view as opening the `.vgf` file directly.
+Use the `.pte` file when you want to understand how ExecuTorch wraps and calls the VGF backend. Use the `.vgf` file when you want to inspect the VGF artifact used with the ML extensions for Vulkan. You can also open the VGF backend in Model Explorer from the `.pte` file and see the same view as opening the file directly.
 
 ## Open the VGF-backend PTE
 
@@ -42,7 +42,7 @@ Inspect the graph and look for the following:
 
 In Model Explorer, the `.pte` looks compact. You'll see a `quantized_decomposed::quantize_per_tensor` node, a single `VgfBackend` delegate node, a `quantized_decomposed::dequantize_per_tensor` node, and graph inputs and outputs.
 
-This is a very similar view to the Ethos delegation, where aside from inputs/outputs and quantize/dequantize operators, the model is completely delegated to the backend.
+This is similar to the Ethos delegation. Apart from inputs and outputs and the quantize and dequantize operators, the model is completely delegated to the backend.
 
 Expand the `VgfBackend` delegate graph:
 
@@ -75,9 +75,12 @@ You'll also see Vulkan tensor descriptor nodes such as `VK_DESCRIPTOR_TYPE_TENSO
 
 This is the view to use when you care about integration with the ML extensions for Vulkan: tensor shapes, tensor formats, graph connectivity, quantized operators, and backend-visible layout choices.
 
-## Look at other artifacts
+## (Optional) Look at other artifacts
 
-Also provided in the repository are the quantization-aware-training version, and a toy `add_sigmoid` model (`.pte` and `.vgf`) from the [Prepare models for neural graphics](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/preparing-models-for-nt/) Learning Path.
+<details>
+<summary>Explore other VGF artifacts</summary>
+
+The repository also contains the quantization-aware-training version and a toy `add_sigmoid` model (`.pte` and `.vgf`) from the [Prepare models for neural graphics](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/preparing-models-for-nt/) Learning Path.
 
 ```output
 ml-model-artifacts/pte/small_upscaler_qat_vgf.pte
@@ -85,9 +88,12 @@ ml-model-artifacts/vgf/small_upscaler_qat.vgf
 ml-model-artifacts/pte/add_sigmoid_vgf.pte
 ml-model-artifacts/vgf/add_sigmoid.vgf
 ```
+
 You can use Model Explorer to inspect these graphs in the same way.
 
-## What you've learned and what's next
+</details>
+
+## What you've accomplished and what's next
 
 You've inspected the same VGF workflow from two angles. The `.pte` view shows the ExecuTorch program and where it calls the VGF backend. The standalone `.vgf` view shows the backend graph for the ML extensions for Vulkan: tensor descriptors, graph connectivity, operator structure, quantization-related rescale operations, and the input/output contract used by a neural graphics application.
 

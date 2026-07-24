@@ -2,7 +2,7 @@
 title: Inspect ETRecord and ETDump overlays with Model Explorer
 description: Overlay ETRecord and ETDump profiling data in Model Explorer to connect ExecuTorch graph nodes and delegate regions with runtime timing.
 
-weight: 8
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: "learningpathall"
@@ -33,6 +33,9 @@ The two artifacts are most useful together:
 With the ETRecord loaded as graph context, the ETDump timing data becomes easier to interpret. Runtime measurements are linked to the corresponding nodes in the exported graph.
 
 ## (Optional) Generate ETRecord and ETDump
+
+<details>
+<summary>Explore ETRecord and ETDump generation</summary>
 
 ETRecord and ETDump are created at different points in the ExecuTorch workflow:
 
@@ -155,6 +158,8 @@ inspector.print_data_tabular()
 
 If you pass only an ETDump to the Inspector, you still get runtime events. If you also pass the matching ETRecord, the Inspector can correlate events with graph operators and delegate metadata.
 
+</details>
+
 ## Load profiling data
 
 The combined ExecuTorch extension for Model Explorer contains an ETRecord adapter and an ETDump data provider. The ETRecord adapter opens the exported graph, and the ETDump data provider provides associated runtime timing data alongside it.
@@ -228,12 +233,7 @@ The ETDump contains about 309 events, with `Method::execute` around 395 million 
 
 ## Inspect clean Ethos-U delegation
 
-Now open the regular INT8 MobileNetV2 Ethos-U profile:
-
-```output
-ml-model-artifacts/etrecord/mobilenetv2_int8_ethosu.etrecord
-ml-model-artifacts/etdump/mobilenetv2_int8_ethosu.etdp
-```
+Now open the regular INT8 MobileNetV2 Ethos-U profile: `ml-model-artifacts/etrecord/mobilenetv2_int8_ethosu.etrecord` and `ml-model-artifacts/etdump/mobilenetv2_int8_ethosu.etdp`.
 
 Inspect the overlay and look for the following:
 
@@ -246,7 +246,7 @@ Inspect the overlay and look for the following:
 
 This is the clean Ethos-U delegation case. The ETDump is small, with about 13 events. `Method::execute` is around 6.59 million cycles. There's one `EthosUBackend` delegate call, and only a small number of native calls.
 
-The important observation is that successful delegation doesn't mean every runtime cost is inside the accelerator. In this profile, the visible `DELEGATE_CALL` is about 96.9 thousand cycles, while the non-delegated `quantize_per_tensor` operation accounts for about 6.47 million cycles. The graph is cleanly delegated, but the measured runtime is dominated by non-delegated quantization rather than the delegate call itself.
+The important observation is that successful delegation doesn't mean every runtime cost is inside the accelerator. In this profile, the visible `DELEGATE_CALL` is about 96.9 thousand cycles. The non-delegated `quantize_per_tensor` operation accounts for about 6.47 million cycles. The graph is cleanly delegated, but the measured runtime is dominated by non-delegated quantization rather than the delegate call itself.
 
 ## Inspect fragmented Ethos-U delegation
 

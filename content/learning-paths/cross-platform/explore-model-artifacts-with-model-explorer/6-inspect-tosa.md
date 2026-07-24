@@ -2,7 +2,7 @@
 title: Inspect TOSA artifacts with Model Explorer
 description: Inspect TOSA graphs in Model Explorer to compare operators, tensor metadata, quantization, and graph fragmentation before backend compilation or conversion.
 
-weight: 6
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: "learningpathall"
@@ -14,7 +14,7 @@ Tensor Operator Set Architecture (TOSA) is a stable operator-level intermediate 
 
 Ethos-U `.pte` files show the final ExecuTorch program after supported regions have been delegated or left outside the NPU delegate. With TOSA, you can inspect an earlier stage: the graph representation that backend tools such as Vela or the Arm ML SDK Model Converter can consume.
 
-You don't need separate TOSA artifacts for the Cortex-A portable, Cortex-A XNNPACK, or Cortex-M examples. Those routes don't need a TOSA intermediate representation: portable kernels stay in the ExecuTorch operator path, XNNPACK uses an ExecuTorch delegate for Cortex-A CPU acceleration, and Cortex-M uses its own Cortex-M/CMSIS-NN-oriented lowering path. TOSA becomes relevant for the backend routes that consume TOSA, such as Ethos-U and VGF.
+You don't need separate TOSA artifacts for the Cortex-A portable, Cortex-A XNNPACK, or Cortex-M examples. Those routes don't need a TOSA IR: portable kernels stay in the ExecuTorch operator path, XNNPACK uses an ExecuTorch delegate for Cortex-A CPU acceleration, and Cortex-M uses its own Cortex-M or CMSIS-NN-oriented lowering path. TOSA becomes relevant for the backend routes that consume it, such as Ethos-U and VGF.
 
 Inspecting TOSA is useful when you want to identify whether:
 
@@ -92,11 +92,11 @@ TOSA isn't limited to ExecuTorch. ExecuTorch can lower supported graph partition
 
 That makes the TOSA adapter useful even when there is no `.pte` file in the workflow. For example, you might be:
 
-- Converting from a framework, ONNX graph, or internal model dialect into TOSA.
-- Writing a compiler, graph optimizer, or Vela-like backend tool that consumes TOSA.
-- Checking whether your frontend produced the TOSA operators, tensor shapes, layouts, and quantized types you expected.
-- Looking for missed optimization opportunities, such as long chains of `ADD`, `MUL`, `RESHAPE`, or layout operations that could potentially be fused or lowered differently.
-- Comparing two frontend or compiler versions to see whether the generated TOSA graph became simpler, more fragmented, or more backend-friendly.
+- Converting from a framework, ONNX graph, or internal model dialect into TOSA
+- Writing a compiler, graph optimizer, or Vela-like backend tool that consumes TOSA
+- Checking whether your frontend produced the TOSA operators, tensor shapes, layouts, and quantized types you expected
+- Looking for missed optimization opportunities, such as long chains of `ADD`, `MUL`, `RESHAPE`, or layout operations that could potentially be fused or lowered differently
+- Comparing two frontend or compiler versions to see whether the generated TOSA graph became simpler, more fragmented, or more backend-friendly
 
 One valid artifact flow is:
 
@@ -116,7 +116,7 @@ This matters because TOSA provides a contract between the model frontend and the
 
 ## Inspect TOSA for VGF conversion
 
-TOSA can also feed workflows that use the ML extensions for Vulkan. The Arm ML SDK Model Converter takes TOSA as input, applies transforms and optimizations, lowers to SPIR-V graph IR, and packages the result into a VGF file.
+TOSA can also feed workflows that use the ML extensions for Vulkan. The Arm ML SDK Model Converter takes TOSA as input, applies transforms and optimizations, lowers to Standard Portable Intermediate Representation - Vulkan (SPIR-V) graph IR, and packages the result into a VGF file.
 
 You'll use a small neural upscaling model that takes a low-resolution image-like tensor and produces a higher-resolution output. This makes it a useful compact example for workflows using the ML extensions for Vulkan and for neural graphics.
 
@@ -143,7 +143,7 @@ In Model Explorer, that difference is not likely to appear as a different graph 
 
 These files are useful because they connect the TOSA view to the VGF view. TOSA shows the backend-neutral graph representation. In the next section, you'll see the VGF artifact produced for integration with the ML extensions for Vulkan and neural graphics.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You've inspected TOSA as the intermediate representation between model lowering and backend compilation or conversion. For Ethos-U, TOSA helps explain why FP32 doesn't delegate, why INT8 can produce a compact NPU region, and why an inserted unsupported operation can fragment the graph. You've also seen that TOSA isn't ExecuTorch-specific and can be produced by other frontends.
 

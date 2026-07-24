@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 ## Model Explorer and Arm extensions
 
-[Model Explorer](https://ai.google.dev/edge/model-explorer) is an open-source, web-based graph visualizer and debugger from Google AI Edge. The visualizer provides a hierarchical view of model graphs. You can expand and collapse layers, search for nodes, inspect metadata, highlight inputs and outputs, compare models, and add overlays to graph nodes. The default version, [contained in the Model Explorer GitHub repository](https://github.com/google-ai-edge/model-explorer/) supports TFLite, TF, TFJS, MLIR, and PyTorch (Exported Program) formats.
+[Model Explorer](https://ai.google.dev/edge/model-explorer) is an open-source, web-based graph visualizer and debugger from Google AI Edge. The visualizer provides a hierarchical view of model graphs. You can expand and collapse layers, search for nodes, inspect metadata, highlight inputs and outputs, compare models, and add overlays to graph nodes. The default version, [contained in the Model Explorer GitHub repository](https://github.com/google-ai-edge/model-explorer/), supports TFLite, TF, TFJS, MLIR, and PyTorch (Exported Program) formats.
 
 Model Explorer uses adapters and data providers to load formats beyond the built-in model types. The [ExecuTorch extension for Model Explorer](https://github.com/arm/executorch-extension-model-explorer) combines support for `.pte`, `.etrecord`, and `.etdp` files. Standalone `.tosa` and `.vgf` files use separate Tensor Operator Set Architecture (TOSA) and VGF adapters. You'll install all three packages together in the next section.
 
@@ -77,15 +77,15 @@ TOSA is not inherently ExecuTorch-specific. TOSA is an intermediate representati
                                                for workflows using the ML extensions for Vulkan
 ```
 
-For VGF, the ExecuTorch Arm VGF backend uses the [Arm ML SDK Model Converter](https://github.com/arm/ai-ml-sdk-model-converter) to produce a VGF backend payload from TOSA. But the Arm ML SDK Model Converter can be used to convert `.tosa` files generated from a different flow, so VGF is also not specific to just ExecuTorch.
+For VGF, the ExecuTorch Arm VGF backend uses the [Arm ML SDK Model Converter](https://github.com/arm/ai-ml-sdk-model-converter) to produce a VGF backend payload from TOSA. But the Arm ML SDK Model Converter can be used to convert `.tosa` files generated from a different flow, so VGF is also not specific to ExecuTorch.
 
 When ExecuTorch is used for VGF, a `.pte` is emitted as well. Use that VGF-backend `.pte` when you want to run through ExecuTorch. Use the standalone `.vgf` when you want to inspect or integrate the VGF artifact used with the ML extensions for Vulkan, such as in a neural graphics workflow.
 
 If you've used the [Arm Neural Graphics Model Gym](https://github.com/arm/neural-graphics-model-gym), then you've been using ExecuTorch to export your neural graphics model to VGF. To learn more, see the [Fine-tune neural graphics using Model Gym](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/model-training-gym/#:~:text=Upon%20completion%20of%20this%20Learning,and%20train%20neural%20graphics%20models) Learning Path, which briefly introduces Model Explorer.
 
-ETRecord and ETDump are additional ExecuTorch-specific artifacts. ETRecord is generated at export time and preserves the graph context needed for profiling attribution. ETDump is generated at runtime and records what happened when a `.pte` ran. Together, they let Model Explorer move from static inspection to runtime overlays. 
+ETRecord and ETDump are additional ExecuTorch-specific artifacts. ETRecord is generated at export time and preserves the graph context needed for profiling attribution. ETDump is generated at runtime and records what happened when a `.pte` ran. Together, these artifacts let Model Explorer move from static inspection to runtime overlays.
 
-You can connect the graph structures you saw in the `.pte`, `.tosa`, and `.vgf` sections to operator and delegate events measured during execution.
+You can connect the graph structures that you'll see in the `.pte`, `.tosa`, and `.vgf` sections to operator and delegate events measured during execution.
 
 ## Terminology
 
@@ -104,14 +104,14 @@ The following is a glossary of different terms used in this Learning Path:
 | Intermediate representation | A representation between the original model and the final target artifact. TOSA is the main intermediate representation in this Learning Path. |
 | Delegate | A backend-specific execution path that handles supported parts of a graph. Unsupported parts can remain outside the delegate, and can run on a CPU path only when the deployed runtime includes compatible kernels. |
 | Kernel | The code that executes a model operator for a specific runtime or backend, such as a portable ExecuTorch kernel or a CMSIS-NN kernel. |
-| Flatbuffer | A compact binary serialization format. TOSA flatbuffers store TOSA graphs; `.pte` files use a FlatBuffer-based ExecuTorch program format. |
-| SPIR-V | Standard Portable Intermediate Representation - Vulkan. SPIR-V modules inside VGF files describe the data graph used by the ML extensions for Vulkan. |
+| Flatbuffer | A compact binary serialization format. TOSA flatbuffers store TOSA graphs, and `.pte` files use a FlatBuffer-based ExecuTorch program format. |
+| SPIR-V | Standard Portable Intermediate Representation - Vulkan (SPIR-V) modules inside VGF files describe the data graph used by the ML extensions for Vulkan. |
 | ETRecord | An ExecuTorch export-time debug artifact that preserves graph and delegate metadata for profiling attribution. |
 | ETDump | An ExecuTorch runtime trace artifact that can record operator, delegate, backend, timing, and cycle-count events from execution. The first Model Explorer overlay used in this Learning Path focuses on timing data. |
 
 ## What models you will use
 
-The hands-on sections will use a variety of pre-provided model artifacts. These are provided purely for educational purposes.
+You'll use the following pre-provided model artifacts provided purely for educational purposes:
 
 ```output
 ml-model-artifacts/
@@ -146,8 +146,8 @@ ml-model-artifacts/
     └── mobilenetv2_lrn_int8_ethosu.etdp
 ```
 
-## What you have learned
+## What you've learned and what's next
 
 You've now learned how the combined ExecuTorch extension and the separate TOSA and VGF adapters add artifact formats to Model Explorer. You've also seen how `.pte`, `.tosa`, `.vgf`, `.etrecord`, and `.etdp` files support Cortex-A, Cortex-M, Ethos-U, the ML extensions for Vulkan, and ExecuTorch profiling workflows.
 
-Next, you'll install Model Explorer and the Arm extensions, then open the first `.pte` artifact.
+Next, you'll install Model Explorer and the Arm extensions.

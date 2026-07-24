@@ -2,7 +2,7 @@
 title: Compare portable and XNNPACK PTE files with Model Explorer
 description: Compare portable-kernel and XNNPACK PTE files in Model Explorer to identify delegated regions and work that remains on the default Cortex-A CPU path.
 
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: "learningpathall"
@@ -16,11 +16,15 @@ The portable `.pte` uses ExecuTorch portable kernels. A portable kernel is a gen
 
 Portable kernels aren't usually the fastest CPU path. The kernels prioritize broad support and a lightweight deployment model, rather than using every architecture-specific optimization available on a modern Cortex-A CPU. For transformer models such as OPT-125M, much of the runtime cost comes from linear layers and matrix multiplications. Those operations benefit strongly from optimized CPU kernels.
 
-[XNNPACK](https://github.com/google/XNNPACK) is the optimized CPU backend used by ExecuTorch for many Arm CPU deployments. During [export and lowering](https://docs.pytorch.org/executorch/stable/using-executorch-export.html), the XNNPACK partitioner finds supported parts of the graph and turns them into delegated regions. At runtime, those regions execute with XNNPACK instead of the default portable-kernel path. Operators that XNNPACK does not support, or graph sections that cannot be grouped into an XNNPACK region, remain on the default ExecuTorch path.
+[XNNPACK](https://github.com/google/XNNPACK) is the optimized CPU backend used by ExecuTorch for many Arm CPU deployments. During [export and lowering](https://docs.pytorch.org/executorch/stable/using-executorch-export.html), the XNNPACK partitioner finds supported parts of the graph and turns them into delegated regions. At runtime, those regions execute with XNNPACK instead of the default portable-kernel path. Operators that XNNPACK doesn't support, or graph sections that can't be grouped into an XNNPACK region, remain on the default ExecuTorch path.
 
-On Arm CPUs, XNNPACK can use Arm KleidiAI micro-kernels. [KleidiAI](https://developer.arm.com/dev2/ai/kleidi-libraries) is Arm's open-source library of optimized low-level AI routines for Arm CPUs. It provides architecture-tuned compute kernels for operations such as matrix multiplication, using Arm features such as Neon, SVE2, and SME2 where supported. You do not call KleidiAI directly in this workflow; ExecuTorch delegates to XNNPACK, and XNNPACK can use KleidiAI-optimized kernels internally when the operator, data type, and hardware are supported.
+On Arm CPUs, XNNPACK can use Arm KleidiAI micro-kernels. [KleidiAI](https://developer.arm.com/dev2/ai/kleidi-libraries) is Arm's open-source library of optimized low-level AI routines for Arm CPUs. The library provides architecture-tuned compute kernels for operations such as matrix multiplication, using Arm features such as Neon, SVE2, and SME2 where supported. 
 
-If you are interested in understanding how SME2 can accelerate performance of ExecuTorch models, see the [Profile ExecuTorch models with SME2 on Arm](https://learn.arm.com/learning-paths/cross-platform/sme-executorch-profiling/) Learning Path.
+You won't call KleidiAI directly in this workflow. Instead, ExecuTorch delegates to XNNPACK, and XNNPACK can use KleidiAI-optimized kernels internally when the operator, data type, and hardware are supported.
+
+{{% notice Note %}}
+If you're interested in understanding how SME2 can accelerate the performance of ExecuTorch models, see the [Profile ExecuTorch models with SME2 on Arm](https://learn.arm.com/learning-paths/cross-platform/sme-executorch-profiling/) Learning Path.
+{{% /notice %}}
 
 To summarize the different CPU paths:
 
@@ -90,7 +94,7 @@ The backend has changed the execution plan:
 
 ![Screenshot of examining an XNNPACK subgraph in Model Explorer.#center](xnnpack_subgraph.png "Inspecting XNNPACK subgraph with Model Explorer")
 
-This is the key difference to notice: XNNPACK does not replace the whole `.pte`. It captures supported subgraphs and leaves the rest of the program in ExecuTorch. In performance work, the balance between large delegated regions and remaining default-path operators is often more important than the raw number of delegate nodes.
+This is the key difference to notice: XNNPACK doesn't replace the whole `.pte`. It captures supported subgraphs and leaves the rest of the program in ExecuTorch. In performance work, the balance between large delegated regions and remaining default-path operators is often more important than the raw number of delegate nodes.
 
 ## Compare the two artifacts
 
@@ -100,10 +104,10 @@ Use the following table to guide your comparison:
 | --- | --- |
 | Did XNNPACK group expensive work? | A larger delegated region can indicate that supported transformer operations were grouped for optimized CPU execution. |
 | Did the graph fragment? | Multiple small delegate regions can indicate unsupported operators or boundaries between supported regions. |
-| What stayed on the CPU default path? | Remaining portable operators may explain residual latency or integration requirements. |
-| Did the artifact size change? | Backend delegation can improve latency but may increase the `.pte` size. |
+| What stayed on the CPU default path? | Remaining portable operators might explain residual latency or integration requirements. |
+| Did the artifact size change? | Backend delegation can improve latency but might increase the `.pte` size. |
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You've compared the same FP32 OPT-125M model exported as a portable Cortex-A `.pte` and as an XNNPACK-delegated Cortex-A `.pte`. The portable artifact shows the baseline ExecuTorch execution plan with mostly `aten::` `KernelCall` nodes. The XNNPACK artifact shows how supported CPU subgraphs are replaced by `XnnpackBackend` regions, while unsupported or awkward graph sections remain on the default ExecuTorch path.
 

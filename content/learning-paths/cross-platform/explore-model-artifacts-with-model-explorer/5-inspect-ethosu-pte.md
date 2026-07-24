@@ -2,7 +2,7 @@
 title: Inspect Ethos-U PTE delegation with Model Explorer
 description: Inspect FP32 and INT8 Ethos-U PTE files in Model Explorer to identify clean, missing, and fragmented NPU delegation.
 
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: "learningpathall"
@@ -44,6 +44,8 @@ Inspect the graph and look for the following:
 
 Ethos-U execution expects quantized integer workloads. This artifact was generated from an FP32 MobileNetV2 model, so the graph isn't in the form Ethos-U needs for NPU execution. As a result, the work remains outside an Ethos-U delegate region.
 
+Notice the following:
+
 - The graph is much larger at the top level, with many visible `aten::convolution`, `aten::_native_batch_norm_legit_no_training`, and `aten::hardtanh` nodes.
 - You shouldn't see an `EthosUBackend` delegate node.
 - The input and output shapes still match the image classification model: `[1, 3, 224, 224]` to `[1, 1000]`.
@@ -78,9 +80,9 @@ Most of the quantized MobileNetV2 compute is hidden behind one Ethos-U delegate 
 
 ## Open a fragmented Ethos-U artifact
 
-To create this example, the original MobileNetV2 graph was modified by inserting a Local Response Normalization (LRN) layer. This is a useful example because the rest of the model still looks like the clean INT8 MobileNetV2 case, but the inserted LRN operation introduces work that the Ethos-U flow cannot keep inside one contiguous delegated region.
+To create this example, the original MobileNetV2 graph was modified by inserting a Local Response Normalization (LRN) layer. This is a useful example because the rest of the model still looks like the clean INT8 MobileNetV2 case, but the inserted LRN operation introduces work that the Ethos-U flow can't keep inside one contiguous delegated region.
 
-Open `ml-model-artifacts/pte/mv2_lrn_int8_ethos_u85.pte`
+Open `ml-model-artifacts/pte/mv2_lrn_int8_ethos_u85.pte`.
 
 Inspect the graph and look for the following:
 
@@ -127,13 +129,13 @@ ml-model-artifacts/tflite/mv2_int8.tflite
 ml-model-artifacts/tflite/mv2_lrn_int8.tflite
 ```
 
-Model Explorer supports PyTorch exported programs and TensorFlow Lite files directly, so visualizing these files does not require an adapter.
+Model Explorer supports PyTorch exported programs and TensorFlow Lite files directly, so visualizing these files doesn't require an adapter.
 
 Try visualizing these files. Compare differences in the model graphs between TensorFlow Lite and ExecuTorch, and between the `.pte` stage and the `.pt2` stage.
 
 </details>
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You've inspected three Ethos-U `.pte` artifacts and seen how quantization and operator support affect NPU delegation. 
 
