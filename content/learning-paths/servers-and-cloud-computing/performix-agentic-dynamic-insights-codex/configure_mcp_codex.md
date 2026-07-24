@@ -21,15 +21,15 @@ You need to complete only one method. The MCP server is a local standard input a
 Configure the server on the host where Codex runs. In a local Visual Studio Code (VS Code) session, this is your development computer. In a remote development session, confirm which host runs the Codex extension and which Arm Performix data directory it uses.
 {{% /notice %}}
 
-## Configure the server in the Codex extension
+## Configure the MCP server in the Codex extension
 
-To add the server in VS Code:
+To add the MCP server in VS Code:
 
-1. Open the Codex sidebar and select the gear icon.
+1. Open the Codex sidebar and select the **gear icon**.
 2. Select **MCP servers**, then select **Add server**.
-3. Enter `arm-performix` for the server name.
+3. For **Server name**, enter `arm-performix`.
 4. Select **STDIO** as the transport.
-5. Enter the full path to the Arm Performix `apx` executable in the command field.
+5. For **Command**, enter the full path to the Arm Performix `apx` executable.
 
     On macOS:
 
@@ -55,7 +55,7 @@ To add the server in VS Code:
     C:\Users\<username>\AppData\Local\Programs\Arm Performix\assets\apx\apx.exe
     ```
 
-6. Add one argument:
+6. Add the following arguments:
 
     ```text
     mcp
@@ -130,7 +130,7 @@ Record the run ID you want to analyze. A run name can be changed and might not b
 
 ## Troubleshoot the MCP connection
 
-Use the following checks to troubleshoot issues with MCP connection: 
+Use the following checks to diagnore MCP connection issues: 
 
 ### The Arm Performix MCP server isn't listed
 
@@ -198,4 +198,4 @@ If the CLI also returns no run, create or import a run. If the CLI returns the r
 
 You've now configured and tested the MCP connection.
 
-Next, you'll create a Code Hotspots run if no supported run is available. If you have an available supported run, skip to [Generate Arm Performix AI insights for a Code Hotspots run](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-codex/generate_ai_insights/).
+Next, you'll create a Code Hotspots run if no supported run is available. If you already. have a supported run, skip to [Generate Arm Performix AI insights for a Code Hotspots run](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-codex/generate_ai_insights/).

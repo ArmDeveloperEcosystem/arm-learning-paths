@@ -3,13 +3,13 @@ title: Generate Arm Performix AI insights for a Code Hotspots run
 
 weight: 5
 
-description: Ask Codex for an Arm Performix AI Insight tied to a specific run and assess whether the response is supported by profile evidence.
+description: Ask Codex for an Arm Performix AI insight tied to a specific run and assess whether the response is supported by profile evidence.
 
 layout: learningpathall
 ---
 ## Select the exact run
 
-Use a run ID whenever possible. It prevents Codex from selecting a similarly named run or a more recent run from a different workload.
+Use a run ID whenever possible. A run ID prevents Codex from selecting a similarly named run or a more recent run from a different workload.
 
 If you don't have the ID, ask Codex to list supported runs:
 
@@ -35,11 +35,21 @@ Use Arm Performix to explain why function "<function-name>" is hot in run ID "<r
 
 Focused prompts usually produce more useful results than broad application-wide prompts.
 
-## Evaluate the response
+## Evaluate and refine AI insights
 
-A useful response identifies the run it analyzed and connects its conclusion to measured evidence, such as sample percentages, call paths, source attribution, or disassembly. It should also state when the available data can't establish a root cause.
+A useful AI insight identifies the run it analyzed and connects its conclusion to measured evidence, such as sample percentages, call paths, source attribution, or disassembly. It should also state when the available data can't establish a root cause.
 
-Ask follow-up questions when a recommendation isn't traceable:
+If a recommendation isn't traceable, ask for one finding and its evidence:
+
+```text
+Focus on the highest-impact finding in run ID "<run-id>". Cite the measured evidence, distinguish hypotheses from observations, and identify the next Performix view or recipe to inspect.
+```
+You can ask a similar question for a known hotspot:
+
+```text
+For function "<function-name>" in run ID "<run-id>", summarize what Code Hotspots proves, what it doesn't prove, and which additional evidence is needed to identify the root cause.
+```
+The following are some other questions that you can ask:
 
 ```text
 Which measured evidence in this Performix run supports that recommendation?
@@ -51,21 +61,7 @@ Which additional Performix recipe or view would distinguish between those explan
 What is the first optimization I should try, and why?
 ```
 
-## Improve a generic AI Insight
-
-Ask for one finding and its evidence:
-
-```text
-Focus on the highest-impact finding in run ID "<run-id>". Cite the measured evidence, distinguish hypotheses from observations, and identify the next Performix view or recipe to inspect.
-```
-
-For a known hotspot:
-
-```text
-For function "<function-name>" in run ID "<run-id>", summarize what Code Hotspots proves, what it doesn't prove, and which additional evidence is needed to identify the root cause.
-```
-
-If the response remains generic, confirm that the run has enough samples, symbols, source mapping, and disassembly. Code Hotspots locates sampled CPU time; use a more specific Performix recipe when you need evidence about microarchitecture, instruction mix, or memory access.
+Code Hotspots locates sampled CPU time. If you need evidence about microarchitecture, instruction mix, or memory access, use a more specific Performix recipe.
 
 ## Iterate and measure
 
@@ -82,6 +78,6 @@ Codex can help with more of this loop if your environment exposes build, deploym
 
 ## What you've accomplished and what's next
 
-You've now generated an evidence-based hypothesis.
+You've now generated an AI insight and reviewed its supporting evidence.
 
 Next, you'll open the same run in Arm Performix to inspect the underlying profile views.

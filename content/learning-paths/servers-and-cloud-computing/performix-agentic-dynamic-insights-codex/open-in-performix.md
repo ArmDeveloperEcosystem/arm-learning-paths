@@ -3,7 +3,7 @@ title: Open the run in Arm Performix for deeper inspection
 
 weight: 6
 
-description: Validate an AI Insight by inspecting flame graphs, functions, call paths, source, and disassembly from the same Arm Performix run.
+description: Validate an AI insight by inspecting flame graphs, functions, call paths, source, and disassembly from the same Arm Performix run.
 
 layout: learningpathall
 ---

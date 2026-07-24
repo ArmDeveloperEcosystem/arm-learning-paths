@@ -34,7 +34,7 @@ Choose the correct target, then ask Codex to run Code Hotspots. Keep collection 
 Use Arm Performix to run the Code Hotspots recipe on target "<target-name>" with workload "<command>". Before starting, repeat the target and workload and ask me to confirm them. When the run completes, return its run ID and collection status.
 ```
 
-Replace:
+Replace the following placeholders:
 
 - `<target-name>` with the Performix target name returned by Codex
 - `<command>` with the command that starts your workload on the target
@@ -45,9 +45,9 @@ For example:
 Use Arm Performix to run the Code Hotspots recipe on target "graviton-dev" with workload "/opt/myapp/bin/my_app --input /data/input.dat". Before starting, repeat the target and workload and ask me to confirm them. When the run completes, return its run ID and collection status.
 ```
 
-After you confirm, Codex uses the MCP server to start the recipe. Review any permission request before allowing the assistant to run a command on the target.
+After you confirm the target, Codex uses the MCP server to start the recipe. Review any permission request before allowing the assistant to run a command on the target.
 
-## Create a run with the Performix CLI
+## Create a run with the Arm Performix CLI
 
 If you prefer to control collection from a terminal, first check that the recipe dependencies and workload are ready:
 
@@ -96,6 +96,6 @@ apx target test --target <target-name>
 
 ## What you've accomplished and what's next
 
-You've now got the stable identifier Codex needs to analyze the intended profile.
+You now have the stable identifier Codex needs to analyze the intended profile.
 
 Next, you'll generate AI insights from a Code Hotspots run.
