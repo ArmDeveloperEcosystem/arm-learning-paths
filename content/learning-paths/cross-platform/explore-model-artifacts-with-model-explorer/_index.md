@@ -33,12 +33,17 @@ generated_summary_faq:
   faq_generated_at: '2026-07-24T17:13:27Z'
   faq_source_hash: 27a823fec7ad01beca56b6ad1d6ee8a07085686f5fbffb0b361ccb4f573ecf6e
   summary: >-
-    You'll install and run Google Model Explorer with Arm extensions
-    to inspect ExecuTorch deployment artifacts and relate graph structure to runtime data. First, you'll
-    set up a clean environment, clone example models with Git LFS, and launch Model Explorer with
-    the ExecuTorch, TOSA, and VGF adapters. Then, you'll open `.pte`, `.tosa`, `.vgf`, `.etrecord`, and `.etdp` files
-    to examine delegate regions, work outside delegates, and graph fragmentation. You'll
-    compare portable-kernel and XNNPACK PTEs for Cortex-A CPU paths and inspect Ethos-U delegation and Cortex-M targets. Finally, you'll correlate model structure with observed behavior using ETRecord and ETDump overlays that connect exported graphs with collected profiling.
+    You'll use pre-generated `.pte`, `.tosa`, `.vgf`, `.etrecord`, and `.etdp`
+    artifacts to understand how Google Model Explorer and Arm extensions expose
+    model export, lowering, backend delegation, and runtime behavior. After
+    installing the ExecuTorch extension and the TOSA and VGF adapters, you'll use
+    a Cortex-M PTE to learn graph navigation, compare portable and XNNPACK
+    Cortex-A programs, and diagnose no, clean, and fragmented Ethos-U delegation.
+    You'll then inspect TOSA intermediate graphs, relate TOSA fragments to
+    delegation boundaries, and compare a VGF-backed PTE with the standalone VGF
+    graph used by workflows with the ML extensions for Vulkan. Finally, you'll
+    open ETRecord files and load their matching ETDump data to identify whether
+    delegate calls or non-delegated operators dominate runtime.
   faqs:
   - question: Which extensions should I enable to load the artifacts used here?
     answer: >-
