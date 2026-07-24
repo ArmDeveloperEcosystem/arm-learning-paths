@@ -1,14 +1,14 @@
 ---
-title: Run Geekbench on Arm Linux systems
-description: Run Geekbench on Arm systems to benchmark CPU performance, interpret the results, and compare different Arm configurations.
+title: Benchmark Arm CPU performance with Geekbench
+description: Run Geekbench 7 on Arm Linux systems to benchmark single-core and multi-core CPU performance and compare hardware configurations.
 
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for software developers interested in comparing the performance of Arm Linux computers using Geekbench.
 
 learning_objectives:
-- Learn how to install and run Geekbench
-- Use Geekbench to help determine the appropriate hardware configuration for your workload
+- Install and run Geekbench 7 on an Arm Linux system
+- Compare Geekbench 7 scores to determine the appropriate hardware configuration for your workload
 
 prerequisites:
 - An Arm computer running Linux. You can use a cloud instance, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
@@ -40,8 +40,8 @@ further_reading:
         link: https://www.infoq.com/articles/arm-vs-x86-cloud-performance/
         type: blog
     - resource:
-        title: GCP, AWS, and Azure ARM-based server performance comparison
-        link: https://apisix.apache.org/blog/2022/08/12/arm-performance-google-aws-azure-with-apisix/
+        title: Geekbench 7 announcement
+        link: https://www.geekbench.com/blog/2026/07/geekbench-7/
         type: blog
     - resource:
         title: Geekbench How it actually works
