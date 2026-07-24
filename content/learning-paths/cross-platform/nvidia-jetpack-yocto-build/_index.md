@@ -21,7 +21,10 @@ author: Doug Anson
 
 ### Tags
 skilllevels: Advanced
-subjects: Jetpack Yocto 
+subjects: Performance and Architecture
+tools_software_languages: 
+    - Yocto
+    - C
 
 cloud_service_providers:
   - AWS
