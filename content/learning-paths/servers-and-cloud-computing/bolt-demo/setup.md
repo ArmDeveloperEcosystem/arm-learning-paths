@@ -8,6 +8,19 @@ layout: learningpathall
 
 
 ## Set up your environment
+
+This Learning Path assumes that you have installed LLVM BOLT before continuing. If BOLT is not installed, [install LLVM from a prebuilt release](/install-guides/llvm/#install-llvm-releases), or [install BOLT from your Linux distribution packages](/install-guides/llvm/#install-bolt-packages) if they provide a suitable version.
+
+This Learning Path requires LLVM BOLT 22.1.0 or later for SPE profiling and the required BOLT options. Package manager versions might be older, so [verify the BOLT tools](/install-guides/llvm/#verify-bolt-tools) before continuing.
+
+{{% notice Please Note %}}
+
+If you are using a 1st generation Arm AGI CPU, we recommend installing the latest LLVM release to ensure support for the processor. However due to backwards compatibility, LLVM BOLT 22.1.0 or later can still be used to complete this learning path.
+
+For Arm AGI CPU support, we recommend using LLVM 23 or later.
+
+{{% /notice %}}
+
 On your AArch64 Linux machine, navigate to your home directory (or another empty working directory) and download the `bsort.cpp` source file:
 
 ```bash
