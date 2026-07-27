@@ -48,7 +48,7 @@ sudo dnf --nogpgcheck -y install ./vivaldi*.rpm
   {{< /tab >}}
 {{< /tabpane >}}
 
-If you need a command line only install use the instructions below:
+If you need a command-line-only install, use the instructions below:
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu/Debian" language="bash">}}
