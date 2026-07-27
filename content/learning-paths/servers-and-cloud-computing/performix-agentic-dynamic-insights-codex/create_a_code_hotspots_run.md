@@ -45,7 +45,7 @@ For example:
 Use Arm Performix to run the Code Hotspots recipe on target "graviton-dev" with workload "/opt/myapp/bin/my_app --input /data/input.dat". Before starting, repeat the target and workload and ask me to confirm them. When the run completes, return its run ID and collection status.
 ```
 
-After you confirm the target, Codex uses the MCP server to start the recipe. Review any permission request before allowing the assistant to run a command on the target.
+After you confirm the target and workload, Codex uses the MCP server to start the recipe. Review any permission request before allowing the assistant to run a command on the target.
 
 ## Create a run with the Arm Performix CLI
 

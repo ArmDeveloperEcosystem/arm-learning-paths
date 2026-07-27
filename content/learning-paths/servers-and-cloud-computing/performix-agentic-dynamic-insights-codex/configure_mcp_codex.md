@@ -130,7 +130,7 @@ Record the run ID you want to analyze. A run name can be changed and might not b
 
 ## Troubleshoot the MCP connection
 
-Use the following checks to diagnore MCP connection issues: 
+Use the following checks to diagnose MCP connection issues: 
 
 ### The Arm Performix MCP server isn't listed
 
@@ -178,7 +178,7 @@ If you have several MCP servers, an ambiguous prompt such as `give me insights` 
 
 ### Code Hotspots runs are missing
 
-Check:
+Check for the following:
 
 - You created at least one completed Code Hotspots run.
 - The MCP server runs as the same user who created or imported the run.
@@ -198,4 +198,4 @@ If the CLI also returns no run, create or import a run. If the CLI returns the r
 
 You've now configured and tested the MCP connection.
 
-Next, you'll create a Code Hotspots run if no supported run is available. If you already. have a supported run, skip to [Generate Arm Performix AI insights for a Code Hotspots run](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-codex/generate_ai_insights/).
+Next, you'll create a Code Hotspots run if no supported run is available. If you already have a supported run, skip to [Generate Arm Performix AI insights for a Code Hotspots run](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-codex/generate_ai_insights/).

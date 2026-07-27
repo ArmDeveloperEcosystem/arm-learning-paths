@@ -11,12 +11,12 @@ layout: learningpathall
 
 A chat response helps you triage a performance problem, but the underlying profile is the source of evidence. Open the same run ID in Arm Performix and inspect the views relevant to the claim:
 
-- **Flame graph** to see where sampled CPU time accumulates across call paths.
-- **Functions** to confirm which functions account for the largest sample percentages.
-- **Call Stack** to distinguish a function's own cost from the cost of its callees.
-- **Source** to correlate samples with source lines when source mapping is available.
-- **Disassembly** to inspect generated instructions and confirm claims about the compiled code.
-- **Compare** to evaluate equivalent before-and-after runs.
+- **Flame graph** to see where sampled CPU time accumulates across call paths
+- **Functions** to confirm which functions account for the largest sample percentages
+- **Call Stack** to distinguish a function's own cost from the cost of its callees
+- **Source** to correlate samples with source lines when source mapping is available
+- **Disassembly** to inspect generated instructions and confirm claims about the compiled code
+- **Compare** to evaluate equivalent before-and-after runs
 
 Use the AI insight to focus your investigation, not replace it. For example, if the insight says a loop appears scalar, inspect its disassembly and compiler flags before changing the implementation. If Code Hotspots only shows that the loop is hot, run Instruction Mix or another appropriate recipe before concluding that scalar execution is the cause.
 
