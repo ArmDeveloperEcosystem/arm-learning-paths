@@ -17,9 +17,53 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic familiarity with Python and machine learning concepts
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-27T18:49:11Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: ee3e7ea8337b8506e30d93aaf2dbe144e5838a6740c8eff8447617f8c75629c7
+  summary_generated_at: '2026-07-27T18:49:11Z'
+  summary_source_hash: ee3e7ea8337b8506e30d93aaf2dbe144e5838a6740c8eff8447617f8c75629c7
+  faq_generated_at: '2026-07-27T18:49:11Z'
+  faq_source_hash: ee3e7ea8337b8506e30d93aaf2dbe144e5838a6740c8eff8447617f8c75629c7
+  summary: >-
+    You'll provision a Google Cloud C4A Axion Arm virtual machine running SUSE Linux, set up Python
+    3.11, and install PyTorch and DeepSpeed for CPU training and benchmarking. You'll verify the
+    `aarch64` architecture and Neoverse-V2 cores with `uname` and `lscpu`, create a dedicated virtual
+    environment, and run a baseline model followed by a larger benchmark. You'll confirm correct
+    execution from the training logs and benchmark output.
+  faqs:
+  - question: How do I know the VM is Arm64 and running on Axion cores?
+    answer: >-
+      Run `uname -m` and confirm that the output is `aarch64`. Then run `lscpu` and check that the
+      model name reports `Neoverse-V2`.
+  - question: Which Google Cloud VM configuration should I use for the steps?
+    answer: >-
+      Use the `c4a-standard-4` machine type with 4 vCPUs and 16 GB of memory. This configuration
+      hosts the PyTorch and DeepSpeed workloads.
+  - question: Which Python version do I need and what is the virtual environment called?
+    answer: >-
+      Install Python 3.11 and create a virtual environment for the project. The path uses an environment
+      named `deepspeed-env`.
+  - question: I opened a new SSH session. What should I do before running workloads?
+    answer: >-
+      Re-activate the `deepspeed-env` virtual environment and navigate to the `~/deepspeed-demo`
+      directory. This ensures the correct dependencies and paths are active.
+  - question: What result should I expect from the baseline and benchmark runs?
+    answer: >-
+      The baseline model should run without errors and print training logs, confirming that PyTorch
+      and DeepSpeed are correctly installed. The larger benchmark runs longer and lets you observe
+      CPU scaling behavior by reviewing its logs and runtime characteristics.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
