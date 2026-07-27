@@ -35,13 +35,15 @@ The cuts create a consistent development and test environment, making it easier 
 
 In the tested Moku corridor captures, the scene can run above 60 FPS and present up to 120 FPS using generated intermediate frames. Treat these numbers as empirical results from the tested device, build, scene cut, and pacing setup, not as a fixed guarantee for every configuration.
 
+
 ## The result of Moku with and without NFRU
 The animated comparison below shows the same Moku scene with NFRU disabled and enabled. Use it to observe how NFRU inserts generated intermediate frames to increase the perceived frame rate, making motion appear smoother while preserving visual detail.
 
-![Comparison of Moku without NFRU at 60 FPS and with NFRU at 120 FPS#center](./images/compare_no_nfru_60fps_vs_nfru_120fps_half_speed_first_half.gif "Comparison of Moku without NFRU at 60 FPS and with NFRU at 120 FPS")
+<video width="100%" controls muted playsinline>
+  <source src="https://raw.githubusercontent.com/powen-yang/arm_learning_path_assets/main/nfru_case_study/videos/compare_no_nfru_60fps_vs_nfru_120fps_small.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Next step
 
 Now that you have seen why Project Moku is useful for NFRU evaluation, continue by enabling the Arm Neural Graphics Plugin in the Unreal Engine project.
-
-TODO: add demo video
