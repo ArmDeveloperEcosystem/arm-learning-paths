@@ -38,7 +38,7 @@ layout: installtoolsall
 
 [Litespark-Inference](https://github.com/Mindbeam-AI/Litespark-Inference)
 is an open-source CPU inference runtime for
-[BitNet b1.58](https://arxiv.org/abs/2402.17764) ternary-weight LLMs. 
+[BitNet b1.58](https://arxiv.org/abs/2402.17764) ternary-weight Large Language Models (LLMs). 
 
 A single `pip install` reads your CPU's feature flags and compiles the
 right C++ kernel for it using Neon and SDOT on Arm. This saves you from needing to manually pick the right C++ kernel for best performance. 
@@ -55,7 +55,7 @@ Before installing Litespark-Inference, make sure your local machine has the foll
 
 To check the Python version on your machine, run `python3 --version`.
 
-The first run downloads BitNet-2B model from Hugging Face.
+The first run downloads the BitNet-2B model from Hugging Face.
 
 Install Litespark-Inference into a clean virtual environment so the
 install doesn't conflict with anything else on your machine.
@@ -168,7 +168,7 @@ litespark_inference.torchless
 If you see `OpenMP : False`, the build didn't find Homebrew's `libomp`. The
 most common cause is that Homebrew is installed under `/opt/homebrew`, which is the
 Apple silicon default, but `pip install` ran in an environment that
-hides it. 
+hides the directory. 
 
 To fix this, re-run `pip install litespark-inference` from a normal
 shell.
