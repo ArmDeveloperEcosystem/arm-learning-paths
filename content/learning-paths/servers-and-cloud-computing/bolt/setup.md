@@ -24,7 +24,7 @@ For Arm AGI CPU support, we recommend using LLVM 23 or later.
 On your AArch64 Linux machine, navigate to your home directory (or another empty working directory) and download the `bsort.cpp` source file:
 
 ```bash
-wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/servers-and-cloud-computing/bolt-demo/bsort.cpp
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/servers-and-cloud-computing/bolt/bsort.cpp
 ```
 
 The [Why Bubble Sort?](#why-bubble-sort) section explains why BubbleSort is used as the demonstration workload.
@@ -45,7 +45,8 @@ For this example, you must preserve the original function order from the source 
 Small programs like this one are simple enough that modern compilers may reorder functions automatically to improve instruction locality, even without profile data. That behavior rarely affects large real-world applications, but it can occur in this example. To ensure the program retains its intentionally poor layout, pass specific options to the compiler and linker.
 
 BOLT works with both LLVM and GNU toolchains.
-GNU (gcc) provides a flag that preserves the original order: `-fno-toplevel-reorder`.  
+For GNU toolchains, you must use `-fno-reorder-blocks-and-partition`; BOLT is not compatible with binaries built with GCC's hot/cold block partitioning.
+This example also uses `-fno-toplevel-reorder` to preserve the original function order for this example.
 LLVM Clang does not provide an equivalent flag, so it relies on a symbol ordering file that explicitly defines the initial function layout. Using a file editor of your choice copy the contents below into a file named `orderfile.txt`. 
 ```txt
 _ZL5swap1PiS_
@@ -65,7 +66,7 @@ You will look at why relocations matter [later](#why-relocations) in this Learni
 
 {{< tabpane code=true >}}
   {{< tab header="GNU" language="bash">}}
-gcc bsort.cpp -o out/bsort -O3 -Wl,--emit-relocs -fno-toplevel-reorder
+gcc bsort.cpp -o out/bsort -O3 -Wl,--emit-relocs -fno-reorder-blocks-and-partition -fno-toplevel-reorder
   {{< /tab >}}
   {{< tab header="LLVM" language="bash">}}
 clang bsort.cpp -o out/bsort -O3 -fuse-ld=lld -ffunction-sections -Wl,--emit-relocs -Wl,--symbol-ordering-file=orderfile.txt

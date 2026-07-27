@@ -11,7 +11,7 @@ layout: learningpathall
 On your AArch64 Linux machine, navigate to your home directory or another empty working directory and download the `bsort.cpp` source file:
 
 ```bash
-wget https://learn.arm.com/learning-paths/servers-and-cloud-computing/bolt-demo/bsort.cpp
+wget https://learn.arm.com/learning-paths/servers-and-cloud-computing/bolt/bsort.cpp
 ```
 
 Create the following directories to organize generated files from this example:
