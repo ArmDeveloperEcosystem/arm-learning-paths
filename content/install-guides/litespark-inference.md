@@ -1,8 +1,7 @@
 ---
 title: Litespark-Inference
-draft: true
 
-description: Install Litespark-Inference on Arm or x86 Linux and Apple silicon macOS to run BitNet ternary LLMs on the CPU.
+description: Install Litespark-Inference on Arm Linux and Apple silicon macOS to run BitNet ternary LLMs on the CPU.
 
 minutes_to_complete: 10
 
@@ -39,23 +38,29 @@ layout: installtoolsall
 
 [Litespark-Inference](https://github.com/Mindbeam-AI/Litespark-Inference)
 is an open-source CPU inference runtime for
-[BitNet b1.58](https://arxiv.org/abs/2402.17764) ternary-weight LLMs. A
-single `pip install` reads your CPU's feature flags and compiles the
-right C++ kernel for it using NEON and SDOT on Arm or AVX-512/VNNI and AVX2+FMA
-on x86. This saves you from needing to pick the right C++ kernel for best performance. 
+[BitNet b1.58](https://arxiv.org/abs/2402.17764) ternary-weight Large Language Models (LLMs). 
 
-## What do I need before installing Litespark-Inference?
+A single `pip install` reads your CPU's feature flags and compiles the
+right C++ kernel for it using Neon and SDOT on Arm. This saves you from needing to manually pick the right C++ kernel for best performance. 
 
-- Python 3.10 or newer, you can run `python3 --version` to check your version
+You can install Litespark-Inference on Linux and macOS.
+
+## Before you begin 
+
+Before installing Litespark-Inference, make sure your local machine has the following: 
+
+- Python 3.10 or later
 - A C++ toolchain such as `clang` or `g++`
 - About 5 GB of free disk
 
-The BitNet-2B model is downloaded from Hugging Face on your first run.
+To check the Python version on your machine, run `python3 --version`.
 
-It is good practice to install into a clean virtual environment so the
-install does not conflict with anything else on your machine:
+The first run downloads the BitNet-2B model from Hugging Face.
 
-If you don't have Python virtual environment support installed run:
+Install Litespark-Inference into a clean virtual environment so the
+install doesn't conflict with anything else on your machine.
+
+If you don't have Python virtual environment support installed, run:
 
 ```bash
 sudo apt update
@@ -70,16 +75,19 @@ source .venv/bin/activate
 python -m pip install --upgrade pip wheel setuptools
 ```
 
-Next, follow the section for your platform, Linux or macOS.
-
-## How do I install Litespark-Inference on Arm Linux?
+## Install Litespark-Inference on Arm Linux
 
 The released package builds the correct kernel for your CPU
-automatically. It uses NEON and 
-SDOT on Arm (Graviton 2/3/4, Ampere, Neoverse N1/N2/V1/V2, Raspberry
-Pi 5). 
+automatically. It uses Neon and SDOT on Arm. 
 
-For Ubuntu/Debian distributions, install the C++ toolchain, then the Litespark-Inference Python package:
+Supported CPUs include:
+
+- AWS Graviton 2, 3, or 4
+- Ampere family processors 
+- Neoverse N1, N2, V1, or V2
+- Raspberry Pi 5 
+
+For Ubuntu or Debian distributions, install the C++ toolchain, then the Litespark-Inference Python package:
 
 ```bash
 sudo apt-get update
@@ -87,26 +95,26 @@ sudo apt-get install -y build-essential clang ninja-build git python3-pip
 pip install litespark-inference
 ```
 
-For Red Hat, Fedora, or RHEL, install the toolchain with `dnf` instead:
+For Red Hat, Fedora, or RHEL, install the toolchain and package with `dnf` instead:
 
 ```console
 sudo dnf install -y gcc-c++ clang ninja-build git python3-pip
 pip install litespark-inference
 ```
 
-Confirm the package imports and reports the kernel selected for your CPU:
+Confirm the package imports and list the installed version of Litespark-Inference:
 
 ```bash
 python3 -c "import litespark_inference; print(litespark_inference.__version__)"
 ```
 
-The version is printed:
+The output is similar to:
 
 ```output
 1.0.3
 ```
 
-To inspect which kernel was built, run:
+Inspect which kernel was built for your CPU:
 
 ```bash
 python -m litespark_inference.torchless info
@@ -123,15 +131,14 @@ litespark_inference.torchless
   Accelerate: False
 ```
 
-## How do I install Litespark-Inference on Apple silicon macOS?
+## Install Litespark-Inference on Apple silicon macOS
 
-Apple's CPUs have NEON SDOT and Litespark-Inference uses it directly.
+Apple's CPUs have Neon SDOT, and Litespark-Inference uses it directly.
 
-The only extra step versus Linux is installing `libomp`, Apple's
-toolchain does not ship a built-in OpenMP runtime, and Litespark uses
-OpenMP for multi-threading inside the kernel.
+Litespark uses OpenMP for multi-threading inside the kernel. However, Apple's
+toolchain doesn't ship a built-in OpenMP runtime. To address this, you'll need to install `libomp`.
 
-Install Xcode command-line tools, the full Xcode is not required: 
+Install Xcode command-line tools, `libomp`, and the Litespark-Inference Python package: 
 
 ```console
 xcode-select --install
@@ -139,13 +146,13 @@ brew install libomp
 pip install litespark-inference
 ```
 
-Verify the install:
+Verify that the installation was successful:
 
 ```console
 python -m litespark_inference.torchless info
 ```
 
-The expected output includes:
+The output is similar to:
 
 ```output
 litespark_inference.torchless
@@ -156,15 +163,19 @@ litespark_inference.torchless
   Accelerate: True
 ```
 
-If you see `OpenMP : False`, the build did not find Homebrew's `libomp`. The
-most common cause is that Homebrew is installed under `/opt/homebrew`
-(the Apple Silicon default) but `pip install` ran in an environment that
-hides it. Re-run `pip install litespark-inference` from a normal
-shell to fix it.
+### Troubleshoot missing OpenMP support
 
-## How do I install from source?
+If you see `OpenMP : False`, the build didn't find Homebrew's `libomp`. The
+most common cause is that Homebrew is installed under `/opt/homebrew`, which is the
+Apple silicon default, but `pip install` ran in an environment that
+hides the directory. 
 
-To modify the runtime or kernels, install from source instead of from
+To fix this, re-run `pip install litespark-inference` from a normal
+shell.
+
+## (Optional) Install Litespark-Inference from source
+
+To modify the runtime or kernels, install Litespark-Inference from source rather than from
 PyPI:
 
 ```console
@@ -173,17 +184,20 @@ cd Litespark-Inference
 pip install -e .
 ```
 
-## Sanity-check
+## Verify the Litespark-Inference installation
 
-On all platforms, the same command can be used. 
-
-The first run downloads the model weights (around 4.5 GB into
-`~/.cache/huggingface/hub`). Subsequent runs do not need to download
-again.
+To verify that Litespark-Inference works as expected, run the following command:
 
 ```console
 litespark-inference generate "Hello, world!" --max-tokens 16
 ```
+The same command works on both Linux and macOS. 
+
+{{% notice Note %}}
+The first run downloads the model weights, around 4.5 GB, into
+`~/.cache/huggingface/hub`. Subsequent runs don't need to download
+again.
+{{% /notice %}}
 
 The output is similar to:
 
@@ -200,6 +214,8 @@ Generated 9 tokens in 0.29s (31.58 tok/s)
 Hello! How can I assist you today?
 ```
 
-You are now ready to run BitNet-2B.
+## Next steps
 
-Continue with [Accelerate LLM inference on Arm CPUs with Litespark-Inference](/learning-paths/laptops-and-desktops/litespark-inference/) to learn more. 
+You're now ready to run BitNet-2B.
+
+To learn more, see the [Accelerate LLM inference on Arm CPUs with Litespark-Inference](/learning-paths/laptops-and-desktops/litespark-inference/) Learning Path. 
