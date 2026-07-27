@@ -30,11 +30,11 @@ The Chromium browser runs on Windows on Arm as a native ARM64 application, and i
 
 [The Chromium area of woolyss.com](https://chromium.woolyss.com/) provides Chromium downloads. 
 
-{{% notice Note1%}}
-Google API keys are missing from Chromium so you will not be able to sync information with your Google account.
+{{% notice Account sync %}}
+Google API keys are missing from Chromium, so you will not be able to sync information with your Google account.
 {{% /notice %}}
 
-### How do I install Chromium on Arm Linux?
+### Linux
 
 The best way to install Chromium on Arm Linux is to use the package manager for your distribution. 
 
@@ -54,7 +54,7 @@ sudo dnf install chromium -y
 
 Depending on your version of Ubuntu, Chromium may be installed as a snap from the [Canonical Snap Store](https://snapcraft.io/). 
 
-### How do I install Chromium on Windows on Arm? 
+### Windows
 
 Chromium is available as a native ARM64 application for Windows on Arm. 
 
@@ -64,14 +64,14 @@ Chromium is available as a native ARM64 application for Windows on Arm.
 
 3. Run the downloaded `mini_installer.exe`
 
-The install is silent so you will not see anything, but Chromium will be installed. 
+The install is silent, so you will not see anything, but Chromium will be installed. 
 
 4. Find and start Chromium from the applications menu
 
-{{% notice Note2%}}
-Chromium on Windows on Arm does not update itself so you need to update manually to get new versions.
+{{% notice Automatic updates %}}
+Chromium on Windows on Arm does not update itself, so you need to update manually to get new versions.
 {{% /notice %}}
 
-{{% notice Note3%}}
+{{% notice Video playback %}}
 Certain types of videos don't play with Chromium. Video support is less than other browsers without DRM. 
 {{% /notice %}}
