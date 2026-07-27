@@ -1,7 +1,7 @@
 ---
 title: Litespark-Inference
 
-description: Install Litespark-Inference on Arm or x86 Linux and Apple silicon macOS to run BitNet ternary LLMs on the CPU.
+description: Install Litespark-Inference on Arm Linux and Apple silicon macOS to run BitNet ternary LLMs on the CPU.
 
 minutes_to_complete: 10
 
@@ -38,10 +38,10 @@ layout: installtoolsall
 
 [Litespark-Inference](https://github.com/Mindbeam-AI/Litespark-Inference)
 is an open-source CPU inference runtime for
-[BitNet b1.58](https://arxiv.org/abs/2402.17764) ternary-weight LLMs. A
-single `pip install` reads your CPU's feature flags and compiles the
-right C++ kernel for it using NEON and SDOT on Arm or AVX-512/VNNI and AVX2+FMA
-on x86. This saves you from needing to pick the right C++ kernel for best performance. 
+[BitNet b1.58](https://arxiv.org/abs/2402.17764) ternary-weight LLMs. 
+
+A single `pip install` reads your CPU's feature flags and compiles the
+right C++ kernel for it using Neon and SDOT on Arm. This saves you from needing to manually pick the right C++ kernel for best performance. 
 
 You can install Litespark-Inference on Linux and macOS.
 
@@ -55,10 +55,10 @@ Before installing Litespark-Inference, make sure your local machine has the foll
 
 To check the Python version on your machine, run `python3 --version`.
 
-The BitNet-2B model is downloaded from Hugging Face on your first run.
+The first run downloads BitNet-2B model from Hugging Face.
 
-It's a good practice to install into a clean virtual environment so the
-install doesn't conflict with anything else on your machine:
+Install Litespark-Inference into a clean virtual environment so the
+install doesn't conflict with anything else on your machine.
 
 If you don't have Python virtual environment support installed, run:
 
@@ -78,13 +78,12 @@ python -m pip install --upgrade pip wheel setuptools
 ## Install Litespark-Inference on Arm Linux
 
 The released package builds the correct kernel for your CPU
-automatically. It uses Neon and 
-SDOT on Arm. 
+automatically. It uses Neon and SDOT on Arm. 
 
 Supported CPUs include:
 
 - AWS Graviton 2, 3, or 4
-- Ampere
+- Ampere family processors 
 - Neoverse N1, N2, V1, or V2
 - Raspberry Pi 5 
 
@@ -103,7 +102,7 @@ sudo dnf install -y gcc-c++ clang ninja-build git python3-pip
 pip install litespark-inference
 ```
 
-Confirm the package imports and reports the kernel selected for your CPU:
+Confirm the package imports and list the installed version of Litespark-Inference:
 
 ```bash
 python3 -c "import litespark_inference; print(litespark_inference.__version__)"
@@ -115,7 +114,7 @@ The output is similar to:
 1.0.3
 ```
 
-To inspect which kernel was built, run:
+Inspect which kernel was built for your CPU:
 
 ```bash
 python -m litespark_inference.torchless info
@@ -139,7 +138,7 @@ Apple's CPUs have Neon SDOT, and Litespark-Inference uses it directly.
 Litespark uses OpenMP for multi-threading inside the kernel. However, Apple's
 toolchain doesn't ship a built-in OpenMP runtime. To address this, you'll need to install `libomp`.
 
-Install Xcode command-line tools, `libomp`, and the Litespark-Inference Python package. The full set of Xcode tools isn't required: 
+Install Xcode command-line tools, `libomp`, and the Litespark-Inference Python package: 
 
 ```console
 xcode-select --install
@@ -147,7 +146,7 @@ brew install libomp
 pip install litespark-inference
 ```
 
-Verify the install:
+Verify that the installation was successful:
 
 ```console
 python -m litespark_inference.torchless info
@@ -164,15 +163,19 @@ litespark_inference.torchless
   Accelerate: True
 ```
 
+### Troubleshoot missing OpenMP support
+
 If you see `OpenMP : False`, the build didn't find Homebrew's `libomp`. The
-most common cause is that Homebrew is installed under `/opt/homebrew`
-(the Apple silicon default), but `pip install` ran in an environment that
-hides it. Re-run `pip install litespark-inference` from a normal
-shell to fix it.
+most common cause is that Homebrew is installed under `/opt/homebrew`, which is the
+Apple silicon default, but `pip install` ran in an environment that
+hides it. 
 
-## Install Litespark-Inference from source
+To fix this, re-run `pip install litespark-inference` from a normal
+shell.
 
-To modify the runtime or kernels, install from source instead of from
+## (Optional) Install Litespark-Inference from source
+
+To modify the runtime or kernels, install from source rather than from
 PyPI:
 
 ```console
