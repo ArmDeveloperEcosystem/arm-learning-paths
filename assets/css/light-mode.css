@@ -115,6 +115,19 @@ html[theme='light'] #only-breadcrumb-masthead {
     background: var(--learn-surface);
 }
 
+html[theme='light'] #expanded-masthead.u-bg-color-ads-ui-violet-90 {
+    background-color: var(--learn-accent) !important;
+    background-image: none !important;
+    border-bottom-color: var(--learn-accent-hover);
+}
+
+html[theme='light'] #expanded-masthead #breadcrumb-element {
+    --ads-breadcrumbs-color: #f3f3f3 !important;
+    --ads-breadcrumbs-link-color: #f3f3f3 !important;
+    --ads-breadcrumbs-link-color-visited: #f3f3f3 !important;
+    --ads-breadcrumbs-link-color-hover: #ffffff !important;
+}
+
 html[theme='light'] div.content-box {
     position: relative;
     overflow: hidden;
