@@ -7,11 +7,11 @@ description: Learn how Codex uses the Arm Performix MCP server to turn profiling
 
 layout: learningpathall
 ---
-## Arm Performix local MCP server
+## Arm Performix MCP server
 
 [Arm Performix](https://developer.arm.com/servers-and-cloud-computing/arm-performix) is a performance toolkit designed to help developers identify bottlenecks and validate improvements on Arm-based systems. The toolkit turns low-level performance data into actionable insights through guided analysis paths called recipes. You can use these recipes to answer common performance questions and move quickly from observation to root cause.
 
-Arm Performix includes a local Model Context Protocol (MCP) server. MCP is a standard way for an AI assistant to discover and call tools. The server lets Codex query Performix recipes, targets, and runs from Visual Studio Code instead of relying on source-code analysis alone.
+Arm Performix includes a local Model Context Protocol (MCP) server. MCP is a standard way for an AI assistant to discover and call tools. AI assistants such as Codex can use the server to query Performix recipes, targets, and runs from Visual Studio Code (VS Code) instead of relying on source-code analysis alone.
 
 You'll connect the server to Codex, select or create a Code Hotspots run, and ask for an AI insight. The response should connect each recommendation to evidence from the selected run.
 
