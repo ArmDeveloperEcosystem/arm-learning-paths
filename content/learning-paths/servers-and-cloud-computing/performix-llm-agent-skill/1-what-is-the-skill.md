@@ -36,13 +36,13 @@ bottleneck.
 
 Each recipe provides a different view of application performance:
 
-| Recipe | What it shows |
-| --- | --- |
-| Code Hotspots | Hottest functions, call paths, and flame graphs to identify where time is spent |
-| CPU Microarchitecture | Front-end and back-end pipeline stalls, bad speculation, retiring |
-| Instruction Mix | Scalar versus vector instruction balance |
-| Memory Access | L1 cache hit rate, latency, translation lookaside buffer (TLB) and page-walk pressure to identify whether memory is the bottleneck |
-| System Characterization | Memory bandwidth and latency baseline per non-uniform memory access (NUMA) node to identify what the hardware can do |
+| Your question | Recipe | What it shows |
+| --- | --- | --- |
+| Where is my time spent? | Code Hotspots | Hottest functions, call paths, and flame graphs to identify where time is spent |
+| Why is the pipeline stalling? | CPU Microarchitecture | Front-end and back-end pipeline stalls, bad speculation, retiring |
+| Am I using single instruction, multiple data (SIMD), such as Neon or Scalable Vector Extension (SVE)? | Instruction Mix | Scalar versus vector instruction balance |
+| Is memory the bottleneck? | Memory Access | L1 cache hit rate, latency, translation lookaside buffer (TLB) and page-walk pressure to identify whether memory is the bottleneck |
+| What can the hardware do? | System Characterization | Memory bandwidth and latency baseline per non-uniform memory access (NUMA) node to identify what the hardware can do |
 
 {{% notice Note %}}
 - The four microarchitecture-level recipes — CPU Microarchitecture, Instruction Mix,
