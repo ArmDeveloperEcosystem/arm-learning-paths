@@ -15,10 +15,10 @@ For a new run, choose a workload that represents the behavior you want to optimi
 
 Before profiling, make sure you know:
 
-- the Performix target name
-- the executable path and arguments on the target
-- the workload's working directory and required environment variables
-- whether running the workload has side effects
+- The Performix target name
+- The executable path and arguments on the target
+- The workload's working directory and required environment variables
+- Whether running the workload has side effects
 
 ## Create a run with Codex
 

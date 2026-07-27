@@ -11,9 +11,9 @@ layout: learningpathall
 
 Codex CLI and the Codex extension share MCP configuration on the same host. Choose one of the following methods:
 
-- Use the Codex extension settings.
-- Run `codex mcp add` in a terminal.
-- Edit `~/.codex/config.toml`.
+- Use the Codex extension settings
+- Run `codex mcp add` in a terminal
+- Edit `~/.codex/config.toml`
 
 You need to complete only one method. The MCP server is a local standard input and output (STDIO) process started by the `apx` executable.
 
