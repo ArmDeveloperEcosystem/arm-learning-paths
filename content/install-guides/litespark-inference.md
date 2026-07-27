@@ -175,7 +175,7 @@ shell.
 
 ## (Optional) Install Litespark-Inference from source
 
-To modify the runtime or kernels, install from source rather than from
+To modify the runtime or kernels, install Litespark-Inference from source rather than from
 PyPI:
 
 ```console
