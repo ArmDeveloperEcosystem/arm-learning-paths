@@ -4,7 +4,7 @@ description: Learn how to use docker buildx and docker manifest to build and dep
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for software developers who want to understand how to build and deploy a multi-architecture application with x86/amd64 and arm64-based container images on Amazon EKS
+who_is_this_for: This is an advanced topic for software developers who want to understand how to build and deploy a multi-architecture application with x86/amd64 and arm64-based container images on Amazon Elastic Kubernetes Service (EKS).
 
 learning_objectives: 
     - Build x86/amd64 and arm64 container images with docker buildx and docker manifest
@@ -38,7 +38,7 @@ generated_summary_faq:
   faqs:
   - question: Which platforms should I target when I build the images?
     answer: >-
-      Build two variants: `amd64` for x86 and `arm64` for Arm-based (Graviton) nodes. These two images
+      Build two variants: `amd64` for x86 and `arm64` for Arm-based nodes powered by Graviton. These two images
       form the basis for your multi-architecture manifest.
   - question: When should I create the Docker manifest, and what should it include?
     answer: >-

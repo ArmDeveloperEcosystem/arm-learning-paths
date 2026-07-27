@@ -6,7 +6,7 @@ description: Learn how to deploy a production-grade Django REST API on Google Ku
 who_is_this_for: This is an introductory topic for DevOps engineers and software developers who want to deploy, operate, and benchmark a production-grade Django REST API on Google Kubernetes Engine (GKE) running on Arm64 Axion processors, integrated with managed Google Cloud data services
 
 learning_objectives:
-  - Provision Arm-based Axion compute on Google Cloud using virtual machines and GKE node pools
+  - Provision Arm-based Axion compute on Google Cloud using virtual machines (VMs) and GKE node pools
   - Package a Django REST API into an Arm-native Docker container
   - Push container images to Google Artifact Registry
   - Deploy Django on GKE using Kubernetes manifests (Deployment, Service, ConfigMap, Secrets)
@@ -36,7 +36,7 @@ generated_summary_faq:
   faq_generated_at: '2026-07-27T18:50:52Z'
   faq_source_hash: 6675df4c91126b157dcbf39c96a773130f1a95e2f5680913979da96f6f6c97cd
   summary: >-
-    You'll deploy a Django REST API on Google Cloud Axion C4A. You'll create a SUSE Linux Enterprise
+    You'll deploy a Django REST API on a Google Cloud Axion C4A virtual machine. You'll create a SUSE Linux Enterprise
     Server VM, install Python and Django, and verify the development server. You'll then containerize
     the application for Google Kubernetes Engine, connect Cloud SQL PostgreSQL over private IP and
     Memorystore Redis, expose the service with a LoadBalancer, and measure throughput and p95 latency
@@ -44,7 +44,7 @@ generated_summary_faq:
   faqs:
   - question: Which Axion C4A VM configuration should I use for the initial setup?
     answer: >-
-      The steps use `c4a-standard-4`, which provides four vCPUs and 16 GB of memory. Create the
+      Use `c4a-standard-4`, which provides 4 vCPUs and 16 GB of memory. Create the
       instance from Compute Engine in the Google Cloud Console.
   - question: How do I open and verify access to the Django development server?
     answer: >-
@@ -55,9 +55,9 @@ generated_summary_faq:
       You should see a `manage.py` file and a project module directory containing `settings.py`,
       `urls.py`, `asgi.py`, and `wsgi.py`. Running the development server should serve a Django page from the
       VM on port 8000.
-  - question: Which Linux distribution and Python version do the installation steps use?
+  - question: Which Linux distribution and Python version do I use?
     answer: >-
-      The steps use SUSE Linux Enterprise Server (SLES) and install Python 3.11 with zypper. Verify
+      Use SUSE Linux Enterprise Server (SLES) and install Python 3.11 with zypper. Verify
       the installation with `python3.11 --version` before creating the Django project.
   - question: How is state handled when deploying to GKE later in the path?
     answer: >-

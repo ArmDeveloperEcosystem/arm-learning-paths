@@ -33,8 +33,7 @@ generated_summary_faq:
     repository, use PyTorch 2.9.0+cpu with Arm-focused optimizations, and execute the benchmark.
     You'll then inspect the output to confirm a successful run and review the results.
   faqs:
-  - question: How do I know I’ve installed `rclone` correctly, and do I need to configure it before
-      downloading?
+  - question: How do I know I’ve installed `rclone` correctly, and do I need to configure it before downloading?
     answer: >-
       After the install script reports that `rclone` installed successfully, run `rclone config`
       before downloading the data and model weights.

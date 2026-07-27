@@ -1,14 +1,14 @@
 ---
-title: "Deploy containers on Amazon ECS with AWS Graviton processors"
-description: Learn how to create an AWS ECS cluster with Fargate and AWS Graviton processors, then create and run containerized tasks on Arm infrastructure.
+title: Deploy containers on Amazon ECS with AWS Graviton processors
+description: Learn how to create an Amazon ECS cluster with Fargate and AWS Graviton processors, then create and run containerized tasks on Arm infrastructure.
 
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers who want to use AWS Graviton processors with Amazon Elastic Container Service (ECS).
 
 learning_objectives:
-    - Create an AWS ECS cluster with Fargate and AWS Graviton processors
-    - Create and run an AWS ECS task
+    - Create an Amazon ECS cluster with Fargate and AWS Graviton processors
+    - Create and run an Amazon ECS task
     - Use Terraform to automate deployment of an ECS cluster
 
 prerequisites:
@@ -30,28 +30,27 @@ generated_summary_faq:
   faq_generated_at: '2026-07-27T18:54:28Z'
   faq_source_hash: ef5f9e7c8844b20b9044b43f4758bc1d74374521093d7738a7f8832d21f1dcac
   summary: >-
-    You'll deploy a containerized application on Amazon Elastic Container Service (ECS) with AWS
+    You'll deploy a containerized application on Amazon ECS with AWS
     Fargate and Graviton processors. You'll create an ECS cluster and task, run it on Arm-based
-    infrastructure without managing EC2 instances, and then automate the workflow with Terraform.
+    AWS Fargate infrastructure, and then automate the workflow with Terraform.
     The Terraform configuration creates an Amazon Elastic Container Registry (ECR) repository and
-    deploys an Nginx task to ECS on Graviton.
+    deploys an NGINX task to ECS on Graviton.
   faqs:
-  - question: Do I need to provision EC2 instances for this deployment?
+  - question: Do I need to manually provision EC2 instances for this deployment?
     answer: >-
-      No. Fargate is a serverless option for ECS, so you do not provision or maintain EC2 instances;
-      the tasks run on Fargate.
+      No. Fargate is a serverless option for ECS, so you don't manually provision or maintain EC2 instances.
   - question: What result should I expect after I create and run the ECS task?
     answer: >-
       The task should start on the Fargate cluster and show a running status in ECS. That confirms
       the container runs on AWS Graviton-backed infrastructure.
-  - question: Where do the container images live in this workflow?
+  - question: What is the source for container images in this workflow?
     answer: >-
-      You create an Amazon Elastic Container Registry (ECR) repository and use it as the source
+      Create an Amazon ECR repository and use it as the source
       for images referenced by your ECS task. This lets ECS pull the image when the task starts.
   - question: What does the Terraform configuration in `main.tf` create?
     answer: >-
       It automates the same deployment steps by defining AWS resources such as an ECR repository
-      and ECS components to run an Nginx task on Fargate with AWS Graviton processors.
+      and ECS components to run an NGINX task on Fargate with AWS Graviton processors.
   - question: What should I check if my ECS task stays in PENDING or fails to run?
     answer: >-
       Verify that the cluster and task definition target the Fargate launch type and that required

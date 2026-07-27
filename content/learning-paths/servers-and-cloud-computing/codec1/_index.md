@@ -18,19 +18,16 @@ generated_summary_faq:
   faq_source_hash: c0643a788cdb0b3e33fe645fbb61d99a1899806e3ee197541c1eb8134b2876c1
   summary: >-
     You'll build the AV1 and VP9 reference codecs from source on Arm Linux and run them on sample
-    videos. You'll compile libxaom and libvpx with common development tools, then vary resolution
-    and encoding settings to compare runs. The workflow covers Arm Neoverse optimizations that use
-    Neon and SVE2 and supports basic performance benchmarking.
+    videos. You'll compile libxaom and libvpx implementations — that have been optimized using Neon and SVE2 — with common development tools. Then, you'll vary resolution
+    and encoding settings to compare runs and benchmark performance.
   faqs:
   - question: Which source repositories should I use for AV1 and VP9?
     answer: >-
       For AV1, use the `libxaom` reference implementation with Arm-optimized code available on
-      Google Git. For VP9, use the `libvpx` repository from the Chromium WebM project as shown in
-      the steps.
+      Google Git. For VP9, use the `libvpx` repository from the Chromium WebM project.
   - question: Do I need to pass special flags to enable Neon or SVE2 optimizations?
     answer: >-
-      The implementations include optimizations for Arm Neoverse that use Neon and SVE2. The path
-      does not list extra flags to set; follow the build steps on an Arm Linux system and proceed
+      The implementations include optimizations for Arm Neoverse that use Neon and SVE2. You don't need to set extra flags. Follow the build steps on an Arm Linux system
       to run and benchmark.
   - question: What should I expect after a successful build?
     answer: >-
@@ -44,7 +41,7 @@ generated_summary_faq:
   - question: What should I check if the build fails early?
     answer: >-
       Verify that required development tools, including CMake and the GNU compiler, are available.
-      Ensure you can access the referenced repositories and that you are building on an Arm Linux
+      Ensure you can access the referenced repositories and that you're building on an Arm Linux
       system.
 # END generated_summary_faq
 

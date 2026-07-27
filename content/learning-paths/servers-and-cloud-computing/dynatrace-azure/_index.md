@@ -7,7 +7,7 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for developers, DevOps engineers, and platform engineers who want to implement infrastructure and application monitoring using Dynatrace on Arm-based cloud environments.
 
 learning_objectives:
-    - Deploy Dynatrace OneAgent on Azure Cobalt 100 Arm64 virtual machines
+    - Deploy Dynatrace OneAgent on Azure Cobalt 100-based Arm64 virtual machines (VMs)
     - Configure Dynatrace ActiveGate for secure monitoring communication
     - Monitor system resources, processes, and services using Dynatrace
     - Validate application monitoring using a sample NGINX workload
@@ -33,7 +33,7 @@ generated_summary_faq:
   faq_generated_at: '2026-07-27T18:53:34Z'
   faq_source_hash: 4ef29931bf19dc95bb586440796381725c271ef1b953dcf46d00ad9617eabbb1
   summary: >-
-    You'll deploy Dynatrace OneAgent on an Azure Cobalt 100 Arm64 virtual machine and configure
+    You'll deploy Dynatrace OneAgent on an Azure Cobalt 100-based Arm64 virtual machine and configure
     Dynatrace ActiveGate for secure communication with Dynatrace SaaS. You'll provision a Dpsv6 VM,
     allow TCP port 9999 in its Network Security Group, install both components on Ubuntu 24.04 LTS,
     and validate monitoring with a sample NGINX workload. By the end, you'll have host-level visibility
@@ -45,8 +45,7 @@ generated_summary_faq:
       Choose the method that best fits your workflow.
   - question: Which Azure VM series should I select for this walkthrough?
     answer: >-
-      Use a general-purpose Dpsv6 series virtual machine based on Azure Cobalt 100. The steps
-      focus on that series.
+      Use a general-purpose Dpsv6 series VM based on Azure Cobalt 100. 
   - question: Which Linux image and architecture do I need for installing OneAgent and ActiveGate?
     answer: >-
       Use Ubuntu 24.04 LTS Arm64. Both Dynatrace OneAgent and ActiveGate operate natively on Arm64

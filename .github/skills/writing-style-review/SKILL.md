@@ -77,6 +77,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use `avoid` instead of `try not to`.
 - Use `such as` instead of `like`.
 - Use `after` or `when` instead of `once`.
+- Avoid slashes unless part of a technical term. Replace slashes with "and" or "or" as adequate.
 
 ## Tone cleanup
 

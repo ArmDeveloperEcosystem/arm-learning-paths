@@ -12,10 +12,10 @@ learning_objectives:
     - Verify that the Django application is working correctly
 
 prerequisites:
-    - At least either an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, on-premises Arm server, or a Linux virtual machine on your Arm device.
-    - Sudo access to install dependencies and to modify system configuration files.
-    - Be comfortable with SSH/Linux terminal and basic system administration tasks.
-    - To install both [Nginx](/learning-paths/servers-and-cloud-computing/nginx/) and [PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/)
+    - One of either an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, an on-premises Arm server, or a Linux virtual machine on your Arm device
+    - Sudo access to install dependencies and to modify system configuration files
+    - Familiarity with SSH and Linux terminal, and basic system administration tasks
+    - Both [Nginx](/learning-paths/servers-and-cloud-computing/nginx/) and [PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/) installed
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -33,8 +33,8 @@ generated_summary_faq:
   faq_source_hash: c316c81de911ecd7f8e517f4ae5e5006d66a637199b8952fe195a74f3456a5e0
   summary: >-
     You'll create a minimal Django project on an Arm-based Linux machine and prepare it for deployment
-    with PostgreSQL and Nginx. You'll initialize the project, verify the development server, configure
-    the PostgreSQL backend and matching database user, then connect the application to Nginx. By the
+    with PostgreSQL and NGINX. You'll initialize the project, verify the development server, and configure
+    the PostgreSQL backend and matching database user. Then, you'll connect the application to NGINX. By the
     end, you'll have a working Django application backed by PostgreSQL and deployed on Ubuntu 22.04 LTS.
   faqs:
   - question: Which Linux distribution do the steps assume?
@@ -56,10 +56,10 @@ generated_summary_faq:
       Open the PostgreSQL prompt with `sudo -u postgres psql`, then create the database and user
       using the same values you set in `settings.py`. Ensure the user has the required password
       and access to the specified database.
-  - question: When should I configure Nginx in this workflow?
+  - question: When should I configure NGINX in this workflow?
     answer: >-
-      Configure Nginx after confirming the Django project runs and the PostgreSQL connection works.
-      Proceed to the deployment steps to integrate Nginx with the application.
+      Configure NGINX after confirming the Django project runs and the PostgreSQL connection works.
+      Proceed to the deployment steps to integrate NGINX with the application.
 # END generated_summary_faq
 
 author: Diego Russo

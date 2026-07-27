@@ -18,7 +18,7 @@ learning_objectives:
 
 prerequisites:
     - Docker Desktop 4.59 or later with MCP Toolkit enabled
-    - VS Code with the GitHub Copilot extension
+    - Visual Studio Code (VS Code) with the GitHub Copilot extension
     - A GitHub account with a personal access token
     - A machine with at least 8 GB RAM (16 GB recommended)
     - Basic familiarity with Docker, C++, and SIMD intrinsics concepts
@@ -47,25 +47,25 @@ generated_summary_faq:
   - question: How do I know the MCP_DOCKER server is running and connected to Copilot?
     answer: >-
       In VS Code, select **Extensions**, then **MCP_DOCKER** and **Start Server**.
-      When it is running, GitHub Copilot can invoke the configured MCP servers through the MCP
+      When it's running, GitHub Copilot can invoke the configured MCP servers through the MCP
       Gateway.
   - question: Which repository do I clone, and where should I run the commands?
     answer: >-
       Clone `https://github.com/JoeStech/docker-blog-arm-migration` and change into that directory.
-      Open it in VS Code and run the build and run commands from the repository root.
+      Open the repository in VS Code and run the build and run commands from the repository root.
   - question: What should I change in the Dockerfile for Arm64 builds?
     answer: >-
-      Update two areas for Arm compatibility, including adding Arm64 support in the base image.
-      Follow the migration steps to apply the remaining `Dockerfile` adjustments identified
-      during the review.
+      Add Arm64 support in the base image and update compiler flags. 
+      Follow the migration steps to apply `Dockerfile` adjustments identified
+      during review.
   - question: How do I trigger the migration with Copilot, and what should I expect it to do?
     answer: >-
       Open GitHub Copilot Chat in VS Code and paste the provided migration prompt. Copilot uses
-      the Arm MCP Server tools to scan for x86-specific dependencies and AVX2 intrinsics, propose
-      Neon equivalents, and can prepare a pull request via the GitHub MCP Server.
+      the Arm MCP Server tools to scan for x86-specific dependencies and AVX2 intrinsics and propose
+      Neon equivalents. Copilot can also prepare a pull request using the GitHub MCP Server.
   - question: What result should I expect when I run the Arm64 container?
     answer: >-
-      The benchmark output shows Arm64 execution with NEON optimizations and prints
+      The benchmark output shows Arm64 execution with Neon optimizations and prints
       benchmark details. Look for lines such as the architecture notice, the matrix size, and
       a result sum to confirm a successful run.
 # END generated_summary_faq

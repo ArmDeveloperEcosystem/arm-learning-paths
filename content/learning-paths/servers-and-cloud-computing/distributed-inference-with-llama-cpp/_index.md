@@ -32,7 +32,7 @@ generated_summary_faq:
   faq_generated_at: '2026-07-27T18:50:08Z'
   faq_source_hash: 3d6c5f380d7f7b4436573d6b432a42f267747d6a45c9ffca759c2048b7a94230
   summary: >-
-    You'll run distributed CPU inference with llama.cpp on AWS Graviton4 instances. You'll convert
+    You'll run distributed CPU inference with `llama.cpp` on AWS Graviton4 instances. You'll convert
     Meta's Llama 3.1 70B safetensors shards to one GGUF file, quantize the weights to 4-bit, configure
     worker RPC backends and a master through a comma-separated `worker_ips` list, and verify
     connectivity with `telnet`. You'll then launch distributed inference across the Arm servers.

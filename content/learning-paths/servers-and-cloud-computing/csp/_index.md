@@ -17,22 +17,22 @@ generated_summary_faq:
   faq_generated_at: '2026-07-27T18:47:21Z'
   faq_source_hash: 9e94b69eabf35677c48db812bb85ea9cef184efc078a826b96954f540a45e915
   summary: >-
-    You'll launch Arm-based virtual machines across major cloud providers and verify that each uses
+    You'll launch Arm-based virtual machines (VMs) across major cloud providers and verify that each uses
     an Arm processor. You'll use each provider's console to choose an appropriate family and instance
-    type, including AWS Graviton, Azure Cobalt 100 or Ampere, Google Cloud Axion C4A, Oracle Cloud
-    Ampere, and Alibaba Cloud Arm-based ECS options. By the end, you'll recognize the instance details
+    type, including Amazon Elastic Compute Cloud (EC2), Azure Cobalt 100-based VMs or Ampere, Google Cloud Axion C4A, Oracle Cloud
+    Ampere, and Alibaba Cloud Arm-based Elastic Compute Service (ECS) options. By the end, you'll recognize the instance details
     that confirm an Arm deployment.
   faqs:
   - question: Which option identifies an Arm-based VM on my cloud provider?
     answer: >-
-      On AWS, select Graviton-based EC2 instance types. On Azure, choose Cobalt 100 or Ampere
-      VMs. On Google Cloud, use the Axion C4A series; on Oracle Cloud and Alibaba Cloud, choose
+      On AWS, select Graviton-based EC2 instance types. On Azure, choose Cobalt 100-based or Ampere
+      VMs. On Google Cloud, use the Axion C4A series. On Oracle Cloud and Alibaba Cloud, choose
       Ampere- or Arm-based ECS options.
   - question: Where do I select the Arm series on Google Cloud, and which machine type does this
       guide use?
     answer: >-
       In the Google Cloud Console, select **Compute Engine**, **VM Instances**, and **Create**.
-      Set **Series** to **C4A**, then choose the `c4a-standard-4` machine type with 4 vCPUs and
+      Set **Series** to **C4A**, then choose the `c4a-standard-4` machine type with four vCPUs and
       16 GB of memory.
   - question: How do I confirm the instance is running on Arm after creation?
     answer: >-

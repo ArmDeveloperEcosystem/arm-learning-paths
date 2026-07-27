@@ -13,7 +13,7 @@ learning_objectives:
     - Evaluate the performance of different .NET versions
 
 prerequisites:
-    - A Microsoft Azure account with permissions to deploy virtual machines
+    - A Microsoft Azure account with permissions to deploy virtual machines (VMs)
     - .NET SDK 8.0 or later 
     - Basic knowledge of C and C#
     - GCC installed (Linux) or access to a cross-compiler
@@ -34,14 +34,13 @@ generated_summary_faq:
   faq_generated_at: '2026-07-27T18:52:59Z'
   faq_source_hash: 08d8f0c86625ef41476d3a8b24bad9b0a0820797022ef847bf9bb17a976726a7
   summary: >-
-    You'll migrate a .NET OrchardCore CMS application to an Azure Cobalt 100 Arm-based virtual
-    machine. You'll provision Ubuntu 24.04, build and run the application, add a native C component
+    You'll migrate a .NET OrchardCore CMS application to an Azure Cobalt 100 Arm-based VM. You'll provision Ubuntu 24.04, build and run the application, add a native C component
     that C# calls through `DllImport`, and configure an architecture-agnostic `AnyCPU` build for Arm
     and x86. You'll then review .NET version choices and confirm the expected native output.
   faqs:
   - question: Which network port should I open to reach the OrchardCore app on the VM?
     answer: >-
-      Open port 8080 to the internet as part of the VM setup. After starting the app, connect
+      Open port `8080` to the internet as part of the VM setup. After starting the app, connect
       to the VM’s public IP on port 8080.
   - question: What artifact should I get when I compile the C code into a shared library?
     answer: >-
@@ -55,10 +54,10 @@ generated_summary_faq:
     answer: >-
       Use .NET’s `AnyCPU` configuration. It provides an architecture-agnostic managed build that
       runs on both architectures.
-  - question: Which .NET versions does this path highlight for support status on Arm?
+  - question: What .NET versions should I keep track of?
     answer: >-
-      .NET 8 (current LTS, support until Nov 2026), .NET 9 (STS, support until Nov 2026), and
-      .NET 10 (next LTS, preview). These versions frame the version-by-version discussion.
+      .NET 8 is the current Long-Term Support (LTS) version until Nov 2026, .NET 9 is the Short-Term Support (STS) version until Nov 2026, and
+      .NET 10 is the next LTS in preview. .NET versions 3.1, 5, 6, and 7 have reached End-of-Life (EOL).
 # END generated_summary_faq
 
 author: Joe Stech

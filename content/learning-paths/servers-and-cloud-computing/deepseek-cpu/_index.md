@@ -29,26 +29,26 @@ generated_summary_faq:
   faq_generated_at: '2026-07-27T18:48:20Z'
   faq_source_hash: f600fcba0adea12ff1b8b092e75de553577d940dc3bf632e9a247cec22d364a4
   summary: >-
-    You'll build llama.cpp on an Arm-based Ubuntu server, download a pre-quantized DeepSeek-R1 model
-    from Hugging Face, and run it for CPU inference. You'll launch a persistent llama.cpp server with
+    You'll build `llama.cpp` on an Arm-based Ubuntu server, download a pre-quantized DeepSeek-R1 model
+    from Hugging Face, and run it for CPU inference. You'll launch a persistent `llama.cpp` server with
     an OpenAI-compatible API, deploy a chatbot with the DeepSeek-R1 671B LLM, and send requests from
-    the same or another machine. You'll confirm the setup with API responses and basic benchmarks.
+    the same or another machine. You'll then confirm the setup with API responses and basic benchmarks.
   faqs:
   - question: What do I need before running the 671B model?
     answer: >-
       Use an Arm server running Ubuntu 24.04 LTS with at least 64 cores, 512 GB of RAM, and 400
-      GB of disk space. The path uses an AWS Graviton4 r8g.24xlarge instance for testing.
+      GB of disk space. The Learning Path was tested on an AWS Graviton4 `r8g.24xlarge` instance.
   - question: Which DeepSeek-R1 model should I download?
     answer: >-
-      Download a pre-quantized DeepSeek-R1 model from Hugging Face as specified in the steps.
-      Quantization enables efficient CPU inference with llama.cpp.
+      Download a pre-quantized DeepSeek-R1 model from Hugging Face.
+      Quantization enables efficient CPU inference with `llama.cpp`.
   - question: How do I know the llama.cpp server binary is available?
     answer: >-
-      Running `make` during the build step creates the server executable. If it is missing,
+      Running `make` during the build step creates the server executable. If it's missing,
       repeat the build step before starting the server.
   - question: How do I access the model repeatedly without restarting it?
     answer: >-
-      Start the llama.cpp server and use its OpenAI-compatible API to submit multiple requests.
+      Start the `llama.cpp` server and use its OpenAI-compatible API to submit multiple requests.
       You can also send requests from another machine to the host running the server.
   - question: Why do I install jq?
     answer: >-

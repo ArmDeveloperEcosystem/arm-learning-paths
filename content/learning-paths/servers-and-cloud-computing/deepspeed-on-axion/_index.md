@@ -8,10 +8,10 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for DevOps engineers, ML engineers, and software developers who want to run AI training and benchmarking workloads using PyTorch and DeepSpeed on SUSE Linux Enterprise Server (SLES) Arm64, validate CPU-based neural network execution, and benchmark AI performance on Arm processors.
 
 learning_objectives:
-    - Install and configure PyTorch and DeepSpeed on Arm-based Google Cloud C4A Axion VMs 
-    - Create and execute neural network training workloads using PyTorch
-    - Benchmark CPU-based AI workloads on Arm64 processors
-    - Validate scalable AI execution and workload performance on Google Axion Arm VMs
+    - Install and configure PyTorch and DeepSpeed on Arm-based Google Cloud C4A Axion virtual machines (VMs). 
+    - Create and execute neural network training workloads using PyTorch.
+    - Benchmark CPU-based AI workloads on Arm64 processors.
+    - Validate scalable AI execution and workload performance on Google Axion Arm VMs.
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
@@ -32,11 +32,11 @@ generated_summary_faq:
   faq_generated_at: '2026-07-27T18:49:11Z'
   faq_source_hash: ee3e7ea8337b8506e30d93aaf2dbe144e5838a6740c8eff8447617f8c75629c7
   summary: >-
-    You'll provision a Google Cloud C4A Axion Arm virtual machine running SUSE Linux, set up Python
+    You'll provision a Google Cloud C4A Arm virtual machine running SUSE Linux, set up Python
     3.11, and install PyTorch and DeepSpeed for CPU training and benchmarking. You'll verify the
     `aarch64` architecture and Neoverse-V2 cores with `uname` and `lscpu`, create a dedicated virtual
-    environment, and run a baseline model followed by a larger benchmark. You'll confirm correct
-    execution from the training logs and benchmark output.
+    environment, and run a baseline model followed by a larger benchmark. From the training logs and benchmark output, you'll confirm correct
+    execution.
   faqs:
   - question: How do I know the VM is Arm64 and running on Axion cores?
     answer: >-

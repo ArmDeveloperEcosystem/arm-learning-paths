@@ -33,13 +33,13 @@ generated_summary_faq:
   summary: >-
     You'll build the open-source x265 (HEVC) encoder on an Arm server and run it on sample videos.
     You'll install GCC, CMake, and supporting packages, obtain the referenced Arm-optimized libx265
-    source with Neoverse NEON support, and compile it. You'll then run repeatable tests while varying
+    source with Neoverse Neon support, and compile it. You'll then run repeatable tests while varying
     the resolution and encoder preset to compare encoding behavior on Arm.
   faqs:
   - question: Which x265 source should I use to get Arm-specific optimizations?
     answer: >-
       Use the `libx265` repository referenced in the steps on Bitbucket, which includes Arm Neoverse
-      NEON support. Follow the clone or checkout instructions provided in the path to ensure you
+      Neon support. Follow the clone or checkout instructions provided in the path to ensure you
       build the optimized tree.
   - question: What should I verify after installing the required packages?
     answer: >-
@@ -53,7 +53,7 @@ generated_summary_faq:
   - question: How do I know the build used Arm NEON optimizations?
     answer: >-
       Build the Bitbucket-based source referenced in the steps on an Arm server to enable the
-      NEON-supported paths. If configuration targets a non-Arm platform, recheck that you are
+      NEON-supported paths. If configuration targets a non-Arm platform, recheck that you're
       building on the intended Arm instance.
   - question: What result should I expect when an encoding run finishes?
     answer: >-

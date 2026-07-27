@@ -11,8 +11,8 @@ learning_objectives:
     - Apply profile-guided optimization to build performance-tuned binaries.
 
 prerequisites:
-    - Basic C++ understanding.
-    - Access to an Arm-based Linux machine.
+    - Basic C++ understanding
+    - Access to an Arm-based Linux machine
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -32,8 +32,8 @@ generated_summary_faq:
     You'll apply profile-guided optimization (PGO) to a C++ microbenchmark on an Arm-based Linux
     system with Google Benchmark. You'll build an instrumented binary with `-fprofile-generate`, run
     it to create `.gcda` files, and recompile with `-fprofile-use`. You'll compare benchmark timings
-    before and after PGO, inspect the generated artifacts, and integrate PGO into a Makefile or
-    continuous integration workflow.
+    before and after PGO, inspect the generated artifacts, and integrate PGO into either a Makefile or a
+    continuous integration Github Actions workflow.
   faqs:
   - question: Which compiler flags do I use to collect and then apply profile data?
     answer: >-

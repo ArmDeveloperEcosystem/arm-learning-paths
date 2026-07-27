@@ -11,8 +11,8 @@ learning_objectives:
     - Use compiler flags to manage optimizations.
 
 prerequisites:
-    - Basic understanding of C++.
-    - Basic understanding of compilers.
+    - Basic understanding of C++
+    - Basic understanding of compilers
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -30,9 +30,9 @@ generated_summary_faq:
   faq_source_hash: 22f845b8ea4dbb9ffc63fafb76c17c79aedde14a28417d49e1ab0833bbbc1eba
   summary: >-
     You'll compile and tune a C++ application with `g++` on an Arm Neoverse-based Linux system.
-    You'll inspect the CPU with `lscpu`, choose `-march` for portability or `-mcpu` for
+    You'll inspect the CPU with `lscpu`, choose between `-march` for portability and `-mcpu` for
     processor-specific tuning, and consider size-sensitive container builds. You'll build and run
-    the example, then justify your flag choices based on portability, binary size, or performance.
+    the example, then learn to make flag choices based on portability, binary size, and performance.
   faqs:
   - question: How do I confirm the Arm CPU model on the instance before choosing flags?
     answer: >-
@@ -43,7 +43,7 @@ generated_summary_faq:
       Use `-march=` with a value that matches the lowest Arm architecture across your target
       systems for portability. Use `-mcpu=` to tune for a specific processor when you plan to run only on
       that CPU.
-  - question: Do I have to use an AWS Graviton 4 instance?
+  - question: Do I have to use an AWS Graviton 4-based instance?
     answer: >-
       No. Any Neoverse-based system running Ubuntu 24.04 LTS works, including the examples mentioned.
       The workflow assumes an Arm-native environment on such a system.
