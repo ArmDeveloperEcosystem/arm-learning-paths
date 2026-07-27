@@ -216,6 +216,6 @@ Hello! How can I assist you today?
 
 ## Next steps
 
-You are now ready to run BitNet-2B.
+You're now ready to run BitNet-2B.
 
 To learn more, see the [Accelerate LLM inference on Arm CPUs with Litespark-Inference](/learning-paths/laptops-and-desktops/litespark-inference/) Learning Path. 
