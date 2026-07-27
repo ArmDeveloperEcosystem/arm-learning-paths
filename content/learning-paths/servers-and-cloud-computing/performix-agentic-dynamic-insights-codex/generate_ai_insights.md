@@ -22,7 +22,7 @@ Use Arm Performix to list supported Code Hotspots runs. Include the run ID, targ
 Request an insight for the selected run:
 
 ```text
-Use Arm Performix to generate an AI Insight for run ID "<run-id>". Identify the highest-impact finding, cite the profile evidence that supports it, and suggest the first investigation or optimization step. State any missing evidence or uncertainty.
+Use Arm Performix to generate an AI insight for run ID "<run-id>". Identify the highest-impact finding, cite the profile evidence that supports it, and suggest the first investigation or optimization step. State any missing evidence or uncertainty.
 ```
 
 Replace `<run-id>` with the ID returned by Arm Performix.

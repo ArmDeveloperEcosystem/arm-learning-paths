@@ -123,7 +123,7 @@ If Codex returns Performix recipes or runs, the end-to-end connection works. An 
 Next, ask Codex to identify runs that support the insight workflow:
 
 ```text
-List the Arm Performix Code Hotspots runs that can be used to generate an AI Insight. Include the run ID and enough workload and target details for me to choose the correct run.
+List the Arm Performix Code Hotspots runs that can be used to generate an AI insight. Include the run ID and enough workload and target details for me to choose the correct run.
 ```
 
 Record the run ID you want to analyze. A run name can be changed and might not be unique, so use the run ID in later prompts.
@@ -171,7 +171,7 @@ Use the Arm Performix MCP server to list the available Arm Performix runs.
 For a specific run:
 
 ```text
-Use Arm Performix to generate an AI Insight for run ID "<run-id>".
+Use Arm Performix to generate an AI insight for run ID "<run-id>".
 ```
 
 If you have several MCP servers, an ambiguous prompt such as `give me insights` might not select Arm Performix.

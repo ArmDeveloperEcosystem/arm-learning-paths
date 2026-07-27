@@ -24,6 +24,6 @@ For a before-and-after comparison, keep the workload, target, input, thread coun
 
 ## What you've accomplished
 
-You've now configured the Arm Performix MCP server, selected or created a Code Hotspots run, generated an AI Insight, and checked its recommendation against the profile. 
+You've now configured the Arm Performix MCP server, selected or created a Code Hotspots run, generated an AI insight, and checked its recommendation against the profile.
 
 You can continue with the [Arm Performix getting-started video](https://youtu.be/_eX8ZpNT0kc) to explore the graphical workflow.

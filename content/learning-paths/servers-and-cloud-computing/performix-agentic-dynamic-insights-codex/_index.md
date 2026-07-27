@@ -11,7 +11,7 @@ learning_objectives:
     - Configure the Arm Performix MCP server for the Codex extension in VS Code.
     - Verify that Codex can access Arm Performix recipes, targets, and runs.
     - Create or select a supported Code Hotspots run.
-    - Generate an AI Insight and validate its recommendations against profile evidence.
+    - Generate an AI insight and validate its recommendations against profile evidence.
 
 prerequisites:
     - Arm Performix version 2026.2.5 or later installed. For installation and target setup instructions, see the [Arm Performix install guide](/install-guides/performix/).
@@ -55,10 +55,10 @@ generated_summary_faq:
       enough samples.
   - question: How do I make sure Codex uses the exact profile I want?
     answer: >-
-      Request the AI Insight using the run ID. If you don’t know it, ask Codex to list supported
+      Request the AI insight using the run ID. If you don’t know it, ask Codex to list supported
       Code Hotspots runs with IDs, targets, workloads, and creation times. Then, select the correct
       ID.
-  - question: What should I check to validate an AI Insight against the profile?
+  - question: What should I check to validate an AI insight against the profile?
     answer: >-
       Open the same run in Arm Performix and inspect the **Flame graph**, **Functions**, **Call Stack**,
       **Source**, and **Disassembly** views. Confirm that the cited functions, call paths, and sample percentages
