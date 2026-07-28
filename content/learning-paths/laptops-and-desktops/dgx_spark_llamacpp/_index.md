@@ -60,7 +60,7 @@ generated_summary_faq:
       the current kernel configuration.
   - question: Why don’t I see SVE or SVE2 instructions in my Process Watch results?
     answer: >-
-      Although the Grace CPU supports SVE and SVE2, the current kernel exposes a fixed 16-byte (128-bit) SVE vector length. The `llama.cpp` workload therefore uses Neon instructions instead.
+      Although the Grace CPU supports SVE and SVE2, the current kernel exposes a fixed 16-byte (128-bit) SVE vector length. The `llama.cpp` workload therefore uses Neon instructions instead. Future kernel updates might enable SVE2 instructions.
 # END generated_summary_faq
 
 author: Odin Shen
