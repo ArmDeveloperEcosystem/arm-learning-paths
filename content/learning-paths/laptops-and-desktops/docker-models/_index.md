@@ -16,9 +16,56 @@ prerequisites:
     - Basic understanding of Docker CLI and concepts.
     - Familiarity with LLM concepts.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-28T16:16:24Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: eae0a23635e7a025e1a73baaf5ccbd01f2c031ec76725c68893ca02190e36deb
+  summary_generated_at: '2026-07-28T16:16:24Z'
+  summary_source_hash: eae0a23635e7a025e1a73baaf5ccbd01f2c031ec76725c68893ca02190e36deb
+  faq_generated_at: '2026-07-28T16:16:24Z'
+  faq_source_hash: eae0a23635e7a025e1a73baaf5ccbd01f2c031ec76725c68893ca02190e36deb
+  summary: >-
+    This Learning Path shows how to run pre-trained large language models locally with Docker
+    Model Runner and then compose a small chat application that uses them. Learners start by using
+    the Model Runner extension, which wraps llama.cpp so no framework builds or downloads are
+    required, to execute models on Arm-based systems. They then clone an example repository and
+    use Docker Compose to bring up a Flask frontend with a backend that serves AI responses via
+    Model Runner. Along the way, learners choose a supported model such as Llama 3.2 or Gemma
+    3 and validate successful deployment by interacting with the chat UI and observing container
+    status in Docker Desktop.
+  faqs:
+  - question: Do I need to install or build any ML frameworks to run a model with Docker Model
+      Runner?
+    answer: >-
+      No. Docker Model Runner uses llama.cpp under the hood, so you do not need to download, build,
+      or install LLM frameworks.
+  - question: Which model should I choose for the example chat application?
+    answer: >-
+      The example supports local AI models such as Llama 3.2 or Gemma 3. Use a model available
+      through Docker Model Runner in your environment.
+  - question: What should I expect after starting the Docker Compose project?
+    answer: >-
+      Docker Compose brings up a Flask-based web frontend and a backend that serves AI responses
+      through Docker Model Runner. You should be able to enter a prompt and receive a generated
+      reply.
+  - question: How can I confirm that the model and services are running correctly?
+    answer: >-
+      Open the chat interface and send a prompt; a response indicates the backend is reachable
+      and the model is active. If nothing returns, check container status and logs in Docker Desktop.
+  - question: Does local inference with Docker Model Runner require a cloud service?
+    answer: >-
+      No. The models run locally without cloud dependencies.
+# END generated_summary_faq
+
 author: Jason Andrews
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

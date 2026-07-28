@@ -17,9 +17,57 @@ prerequisites:
     - Hugging Face account and access token
     - NVIDIA DGX Spark workstation
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-28T16:24:15Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: aa2a78baf3e52172e37506c3f75254968d775b4eb516f9696a0a6998aba50e97
+  summary_generated_at: '2026-07-28T16:24:15Z'
+  summary_source_hash: aa2a78baf3e52172e37506c3f75254968d775b4eb516f9696a0a6998aba50e97
+  faq_generated_at: '2026-07-28T16:24:15Z'
+  faq_source_hash: aa2a78baf3e52172e37506c3f75254968d775b4eb516f9696a0a6998aba50e97
+  summary: >-
+    This Learning Path guides you through fine-tuning a large language model on an Arm-based NVIDIA
+    DGX Spark, where the Grace CPU orchestrates data and the GPU executes training. You configure
+    Docker, pull a pre-built PyTorch container, and prepare a JSONL dataset sourced from Raspberry
+    Pi datasheet content for supervised fine-tuning with Hugging Face. The workflow uses a Llama
+    3.2 3B script to produce a fine-tuned model locally, without sending data to the cloud. Finally,
+    you serve the base and fine-tuned models with a pre-built vLLM container and compare their
+    responses to validate factual accuracy improvements, such as correctly reporting the RP2350’s
+    150 MHz maximum clock speed.
+  faqs:
+  - question: How do I know Docker on DGX Spark is ready before pulling containers?
+    answer: >-
+      After configuring permissions, pull and run the pre-built PyTorch container as shown in
+      the setup step. If it runs without permission errors, Docker is configured correctly.
+  - question: Which Llama model variant does the training script target?
+    answer: >-
+      The path fine-tunes Llama 3.2 3B using a script named Llama3_3B_full_finetuning.py. The
+      8B example is used only to illustrate why fine-tuning improves factual responses.
+  - question: What dataset format should I use for supervised fine-tuning?
+    answer: >-
+      Use a JSONL dataset prepared for supervised fine-tuning. Ensure its fields match what the
+      script loads; check the dataset loading section in the training script to align names and
+      structure.
+  - question: What output indicates the fine-tuning completed successfully?
+    answer: >-
+      The process produces a fine-tuned Llama model that the testing step can load with vLLM.
+      You should be able to serve it in the vLLM container without errors.
+  - question: What result should I expect when comparing base and fine-tuned models?
+    answer: >-
+      On Raspberry Pi datasheet questions, the fine-tuned model should answer factual queries
+      correctly. For example, it reports the RP2350 maximum clock as 150 MHz, where the base model
+      may hallucinate a higher value.
+# END generated_summary_faq
+
 author: Michael Hall
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

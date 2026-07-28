@@ -16,9 +16,57 @@ prerequisites:
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.    
     - Completion of the [Use AWS Lambda for IoT applications](/learning-paths/laptops-and-desktops/win_aws_iot_lambda/) Learning Path.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-28T16:31:56Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 32186a4879e98aa113f461d2a2c705dee099404ed2020ef6fdb981a28bb0c0c3
+  summary_generated_at: '2026-07-28T16:31:56Z'
+  summary_source_hash: 32186a4879e98aa113f461d2a2c705dee099404ed2020ef6fdb981a28bb0c0c3
+  faq_generated_at: '2026-07-28T16:31:56Z'
+  faq_source_hash: 32186a4879e98aa113f461d2a2c705dee099404ed2020ef6fdb981a28bb0c0c3
+  summary: >-
+    This Learning Path guides you through building a minimal static website on Windows on Arm,
+    connecting it to an existing AWS Lambda function, and deploying it to Amazon S3 using the
+    AWS CLI. You create an IoTPage folder with index.html, styles.css, and index.js, then update
+    the JavaScript to call the GetAverageTemperature Lambda Function URL retrieved from the AWS
+    console. After configuring AWS credentials, you deploy the site to S3. Opening the S3-hosted
+    page should load the HTML and trigger a request to the Lambda endpoint to display IoT data,
+    confirming the website-to-Lambda flow from a Windows on Arm environment.
+  faqs:
+  - question: Which files do I need for the static website and what is each one for?
+    answer: >-
+      Create index.html for the page structure, styles.css for layout and styling, and index.js
+      for fetching data from AWS Lambda and updating the page. These three files are the minimum
+      required for this path.
+  - question: I don’t see a Function URL for my Lambda function—what should I check?
+    answer: >-
+      Open the GetAverageTemperature function in the AWS Lambda console, go to the Configuration
+      tab, and create a Function URL. Make sure the function exists as prepared in the prerequisite
+      Learning Path.
+  - question: Where do I place the Lambda endpoint in my code?
+    answer: >-
+      In index.js, update the fetch logic to use the Function URL you created for GetAverageTemperature.
+      Replace any placeholder with the exact Function URL copied from the Lambda console.
+  - question: Which AWS CLI setup does this path use?
+    answer: >-
+      Use AWS CLI version 2. Run aws configure and provide your AWS Access Key ID and AWS Secret
+      Access Key as described in the AWS CLI authentication tutorial.
+  - question: What result should I expect after deploying to Amazon S3?
+    answer: >-
+      Loading the site from its S3 endpoint should display index.html and show IoT data returned
+      by the Lambda function. If data does not appear, confirm that index.js points to the correct
+      Function URL and that your three files are uploaded.
+# END generated_summary_faq
+
 author: Dawid Borycki
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

@@ -17,9 +17,55 @@ prerequisites:
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
     - Completion of the [Create IoT applications with Windows on Arm and AWS IoT Core](/learning-paths/laptops-and-desktops/win_aws_iot/) Learning Path.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-28T16:30:05Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: f25597c6c9e69e09e9a86fa7c02d0ace9c347f293a21a11c00a6d3498300052c
+  summary_generated_at: '2026-07-28T16:30:05Z'
+  summary_source_hash: f25597c6c9e69e09e9a86fa7c02d0ace9c347f293a21a11c00a6d3498300052c
+  faq_generated_at: '2026-07-28T16:30:05Z'
+  faq_source_hash: f25597c6c9e69e09e9a86fa7c02d0ace9c347f293a21a11c00a6d3498300052c
+  summary: >-
+    This Learning Path shows how to route MQTT telemetry from a Windows on Arm-based IoT application
+    into Amazon DynamoDB using AWS IoT Core rules. Starting from the weather station emulator
+    configured in the prerequisite path, you navigate to AWS IoT Core, create a rule (for example,
+    send_message_to_dynamodb), and configure it to parse incoming messages and write them to DynamoDB.
+    The workflow focuses on selecting the rule location in the console, naming and saving the
+    rule, and connecting it to the existing message stream so device data is persisted. By the
+    end, you run the emulator and see messages stored through the configured rule.
+  faqs:
+  - question: What do I need before creating the AWS IoT Core rule?
+    answer: >-
+      Complete the prerequisite path to prepare the weather station emulator and connect it to
+      AWS IoT Core. The rule relies on that running message source.
+  - question: Where do I create the rule in AWS IoT Core?
+    answer: >-
+      Open AWS IoT Core and go to Message routing, then select Rules. Click Create rule to start
+      configuring it.
+  - question: What should I name the rule?
+    answer: >-
+      Use send_message_to_dynamodb as shown in the steps. You can choose a different valid name,
+      but the suggested name keeps the walkthrough consistent.
+  - question: Which MQTT topic should the rule target?
+    answer: >-
+      Use the same topic used by the weather station emulator from the prerequisite path. The
+      exact topic is not restated here.
+  - question: How do I know the rule is writing data to DynamoDB?
+    answer: >-
+      After saving the rule and running the emulator, new items should appear in the DynamoDB
+      destination you configured. If nothing appears, confirm the emulator is connected and that
+      the rule’s configuration matches the emulator’s message topic.
+# END generated_summary_faq
+
 author: Dawid Borycki
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

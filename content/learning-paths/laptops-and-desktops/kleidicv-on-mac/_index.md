@@ -17,9 +17,56 @@ prerequisites:
 - Xcode command line tools installed
 - Basic familiarity with using the Terminal and command-line tools
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-28T16:20:10Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 3e93048b46c24514a89ccc2f277b53111a419c049b53662e1461be38a22e83f7
+  summary_generated_at: '2026-07-28T16:20:10Z'
+  summary_source_hash: 3e93048b46c24514a89ccc2f277b53111a419c049b53662e1461be38a22e83f7
+  faq_generated_at: '2026-07-28T16:20:10Z'
+  faq_source_hash: 3e93048b46c24514a89ccc2f277b53111a419c049b53662e1461be38a22e83f7
+  summary: >-
+    This Learning Path guides you through building Arm KleidiCV from source on macOS and validating
+    the build with bundled tests. Learners compile the library, then run the KleidiCV API test
+    and accompanying checks to confirm the build and exercise hardware-specific backends. The
+    steps highlight how KleidiCV automatically selects optimized implementations for Neon, SVE2,
+    or SME2 based on the Apple Silicon CPU, so no code changes are required. You review test output,
+    including reported vector length and test counts, to confirm correct operation and verify
+    SME backend support on supported systems before using the library in computer vision workloads
+    or frameworks.
+  faqs:
+  - question: Where do I find and run the KleidiCV API test after the build?
+    answer: >-
+      Run the test binary at ./build-kleidicv-benchmark-SME/test/api/kleidicv-api-test. It prints
+      the number of tests executed and their results to confirm the build works.
+  - question: What result should I expect from the API test to confirm success?
+    answer: >-
+      Expect output similar to a vector length report and a summary of tests run and passed. A
+      clean pass indicates the build and public API are functioning.
+  - question: How do I verify that the SME backend is being used?
+    answer: >-
+      KleidiCV auto-detects your CPU and selects the fastest path (Neon, SVE2, or SME2). Review
+      the test output in the SME verification step; on supported Apple Silicon, SME support is
+      exercised during the tests.
+  - question: Do I need to change my application code to target Neon, SVE2, or SME2?
+    answer: >-
+      No. KleidiCV automatically detects the hardware and chooses the optimal implementation,
+      so your code does not need to change.
+  - question: What should I check if the tests fail to run or report errors?
+    answer: >-
+      Confirm the build finished without errors and run the binary from the path shown. If issues
+      persist, ensure required tools are installed, then rebuild and re-run the tests.
+# END generated_summary_faq
+
 author: Jett Zhou
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
