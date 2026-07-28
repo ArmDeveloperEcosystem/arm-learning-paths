@@ -1,28 +1,29 @@
 ---
-title: Fine-tune SmolVLA with LeLab and LeRobot
+title: Fine-tune SmolVLA for an SO-101 pick-and-place task
 
 draft: true
 cascade:
     draft: true
 
-description: Fine-tune and evaluate a SmolVLA policy for an SO-101 pick-and-place task using LeLab and LeRobot.
+description: Record SO-101 demonstrations, fine-tune SmolVLA on an Arm-based NVIDIA DGX Spark, and evaluate the model with LeRobot.
 
-minutes_to_complete: 0 # TODO: Replace after timing the complete, validated workflow.
+minutes_to_complete: 120
 
-who_is_this_for: "TODO: Define the intended robotics and machine learning developer audience after validating the workflow."
+who_is_this_for: This is an advanced topic for robotics and AI developers who want to train a vision-language-action model from their own SO-101 demonstrations.
 
 learning_objectives:
-    - Set up LeLab and LeRobot for an SO-101 workflow.
-    - Record and inspect an SO-101 pick-and-place dataset.
-    - Upload the validated dataset to the Arm organization on Hugging Face.
-    - Fine-tune and evaluate a SmolVLA policy with LeLab.
+    - Set up a LeRobot environment for SO-101 data collection and SmolVLA training.
+    - Connect, calibrate, and teleoperate an SO-101 leader-follower pair with cameras.
+    - Record and inspect a pick-and-place dataset, then optionally upload it.
+    - Fine-tune and physically evaluate a SmolVLA model on a NVIDIA DGX Spark.
 
 prerequisites:
-    - "TODO: Document the validated host hardware, accelerator, operating system, and storage requirements."
-    - "TODO: Document the required SO-101 hardware, cameras, workspace, and pick-and-place objects."
-    - A Hugging Face account with permission to upload datasets to the Arm organization.
+    - A NVIDIA DGX Spark with at least 30 GB of free storage.
+    - An assembled SO-101 leader and follower, two USB cameras, and an unobstructed workspace.
+    - A vial or similar graspable object and a stable rack for the placement target.
+    - A [Hugging Face account](https://huggingface.co/join) if you want to upload the dataset.
 
-author: TODO
+author: Koki Mitsunami
 
 # New Learning Paths are opted in for the next manual generated summary/FAQ run.
 # The generator resets this to false after a successful write.
@@ -38,10 +39,11 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: ML
 armips:
+    - Cortex-X
     - Cortex-A
 tools_software_languages:
     - Python
-    - LeLab
+    - PyTorch
     - LeRobot
     - SmolVLA
     - Hugging Face
@@ -50,25 +52,29 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: TODO - LeLab documentation
-        link: TODO_LELAB_DOCUMENTATION_URL
+        title: LeRobot installation documentation
+        link: https://huggingface.co/docs/lerobot/installation
         type: documentation
     - resource:
-        title: TODO - LeRobot documentation
-        link: TODO_LEROBOT_DOCUMENTATION_URL
+        title: LeRobot SO-101 documentation
+        link: https://huggingface.co/docs/lerobot/so101
         type: documentation
     - resource:
-        title: TODO - SmolVLA documentation
-        link: TODO_SMOLVLA_DOCUMENTATION_URL
+        title: SmolVLA documentation
+        link: https://huggingface.co/docs/lerobot/smolvla
         type: documentation
     - resource:
-        title: TODO - Arm datasets on Hugging Face
-        link: TODO_ARM_HUGGING_FACE_DATASETS_URL
+        title: SmolVLA base model card
+        link: https://huggingface.co/lerobot/smolvla_base
+        type: documentation
+    - resource:
+        title: SmolVLA research paper
+        link: https://arxiv.org/abs/2506.01844
         type: website
     - resource:
-        title: Deploy SmolVLA with ONNX Runtime in a separate Learning Path
-        link: TODO_ONNX_RUNTIME_LEARNING_PATH_URL
-        type: website
+        title: Train an SO-101 Robot From Sim-to-Real With NVIDIA Isaac
+        link: https://docs.nvidia.com/learning/physical-ai/sim-to-real-so-101/latest/index.html
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -76,4 +82,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
