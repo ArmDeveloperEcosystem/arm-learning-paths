@@ -15,7 +15,7 @@ prerequisites:
     - One of either an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, an on-premises Arm server, or a Linux virtual machine on your Arm device
     - Sudo access to install dependencies and to modify system configuration files
     - Familiarity with SSH and Linux terminal, and basic system administration tasks
-    - Both [Nginx](/learning-paths/servers-and-cloud-computing/nginx/) and [PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/) installed
+    - Both [NGINX](/learning-paths/servers-and-cloud-computing/nginx/) and [PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/) installed
 
 # START generated_summary_faq
 generated_summary_faq:
