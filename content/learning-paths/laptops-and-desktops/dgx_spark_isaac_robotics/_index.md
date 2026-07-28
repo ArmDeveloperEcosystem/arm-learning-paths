@@ -34,15 +34,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:13:33Z'
   faq_source_hash: eda533c727ea7094202e8784bf1ed2240cfea2573cefc73aca1a86797840778c
   summary: >-
-    This Learning Path guides learners through building, configuring, and running robotics simulation
-    and reinforcement learning workflows using NVIDIA Isaac Sim and Isaac Lab on an Arm-based
-    DGX Spark system powered by the Grace–Blackwell architecture. Learners verify the platform
-    setup, install required dependencies, and build Isaac Sim before layering Isaac Lab on top
-    of that environment. A hands-on Cartpole example demonstrates how to launch a pre-built scene,
-    control it with Python, and understand the simulation loop. The path then moves to training
-    a Unitree H1 humanoid locomotion policy with Isaac Lab’s integration of RSL-RL (PPO), highlighting
-    task selection, training parameters, and evaluation so learners can recognize when a policy
-    is learning effectively on DGX Spark.
+    You'll configure NVIDIA Isaac Sim and Isaac Lab on an Arm-based NVIDIA DGX Spark with Grace–
+    Blackwell architecture. You'll verify the platform, build Isaac Sim, launch a Cartpole scene
+    with Python, and train a Unitree H1 locomotion policy through Isaac Lab's RSL-RL PPO integration.
+    You'll review training and evaluation output to recognize effective learning.
   faqs:
   - question: What should I check on my DGX Spark before starting the setup?
     answer: >-
@@ -120,4 +115,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

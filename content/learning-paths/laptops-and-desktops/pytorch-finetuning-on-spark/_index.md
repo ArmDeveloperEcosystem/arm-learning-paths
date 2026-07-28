@@ -32,14 +32,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:24:15Z'
   faq_source_hash: aa2a78baf3e52172e37506c3f75254968d775b4eb516f9696a0a6998aba50e97
   summary: >-
-    This Learning Path guides you through fine-tuning a large language model on an Arm-based NVIDIA
-    DGX Spark, where the Grace CPU orchestrates data and the GPU executes training. You configure
-    Docker, pull a pre-built PyTorch container, and prepare a JSONL dataset sourced from Raspberry
-    Pi datasheet content for supervised fine-tuning with Hugging Face. The workflow uses a Llama
-    3.2 3B script to produce a fine-tuned model locally, without sending data to the cloud. Finally,
-    you serve the base and fine-tuned models with a pre-built vLLM container and compare their
-    responses to validate factual accuracy improvements, such as correctly reporting the RP2350’s
-    150 MHz maximum clock speed.
+    You'll fine-tune a Llama 3.2 3B model on an Arm-based NVIDIA DGX Spark, using the Grace CPU for
+    orchestration and the GPU for training. You'll configure Docker, prepare a JSONL dataset from
+    Raspberry Pi datasheet content, and run supervised fine-tuning in a prebuilt PyTorch container. You'll then 
+    serve both base and fine-tuned models with vLLM to compare factual responses.
   faqs:
   - question: How do I know Docker on DGX Spark is ready before pulling containers?
     answer: >-
@@ -47,8 +43,8 @@ generated_summary_faq:
       the setup step. If it runs without permission errors, Docker is configured correctly.
   - question: Which Llama model variant does the training script target?
     answer: >-
-      The path fine-tunes Llama 3.2 3B using a script named Llama3_3B_full_finetuning.py. The
-      8B example is used only to illustrate why fine-tuning improves factual responses.
+      The path fine-tunes Llama 3.2 3B using `Llama3_3B_full_finetuning.py`. The
+      The path uses the 8B example only to illustrate why fine-tuning improves factual responses.
   - question: What dataset format should I use for supervised fine-tuning?
     answer: >-
       Use a JSONL dataset prepared for supervised fine-tuning. Ensure its fields match what the
@@ -61,7 +57,7 @@ generated_summary_faq:
   - question: What result should I expect when comparing base and fine-tuned models?
     answer: >-
       On Raspberry Pi datasheet questions, the fine-tuned model should answer factual queries
-      correctly. For example, it reports the RP2350 maximum clock as 150 MHz, where the base model
+      correctly. For example, it reports the RP2350 maximum clock as 150 MHz, while the base model
       may hallucinate a higher value.
 # END generated_summary_faq
 
@@ -117,4 +113,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

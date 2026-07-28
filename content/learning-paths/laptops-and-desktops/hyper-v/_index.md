@@ -5,10 +5,10 @@ description: Learn how to create and manage Arm-based Linux virtual machines usi
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for software developers who want to use Linux virtual machines with Windows on Arm devices. 
+who_is_this_for: This is an introductory topic for software developers who want to use Linux virtual machines (VMs) with Windows on Arm devices. 
 
 learning_objectives:
-    - Create Arm-based Linux virtual machines using Hyper-V.
+    - Create Arm-based Linux VMs using Hyper-V.
 
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 with [Hyper-V](/install-guides/hyper-v/) installed.
@@ -28,13 +28,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:18:42Z'
   faq_source_hash: 829130636ec6969f791826ef731b38f7bb87c025d910218822a113ecdef62306
   summary: >-
-    This Learning Path guides learners through creating an Arm-based Linux virtual machine on
-    a Windows on Arm device using Hyper-V. The workflow covers obtaining the Ubuntu 24.04 Arm
-    ISO, manually creating a new VM instead of using Quick Create, and attaching the ISO so the
-    VM boots the Linux installer. The steps highlight key decisions, including selecting the correct
-    architecture image and avoiding shortcuts that do not apply to Windows on Arm. After completing
-    the path, the VM starts in Hyper-V and displays the installer, enabling a standard Linux installation
-    and a repeatable process that can be adapted to other distributions.
+    You'll create an Arm-based Ubuntu 24.04 VM on a Windows on Arm device with Hyper-V.
+    You'll download the Arm ISO, create the VM manually, attach the ISO,
+    and boot the Linux installer. The workflow provides a repeatable process you can adapt to other
+    Arm Linux distributions.
   faqs:
   - question: Which Ubuntu image do I need to download?
     answer: >-
@@ -42,20 +39,19 @@ generated_summary_faq:
       and install correctly on Windows on Arm hardware.
   - question: Can I use Hyper-V Quick Create on my Windows on Arm device?
     answer: >-
-      No. Do not use Quick Create with Windows on Arm devices; create the virtual machine manually
-      following the steps.
+      No. Don't use Quick Create with Windows on Arm devices. Instead, create the VM manually.
   - question: How do I know if I’m on a Windows version that can run Linux VMs?
     answer: >-
-      You need Windows 11 version 22H2 or newer. Confirm your Windows version before you start
-      creating the virtual machine.
+      You need Windows 11 version 22H2 or later. Confirm your Windows version before you start
+      creating the VM.
   - question: What result should I expect when I start the VM from the ISO?
     answer: >-
-      The VM should boot into the Linux installer. If it does not, verify you used the Arm ISO
+      The VM should boot into the Linux installer. If it doesn't, verify you used the Arm ISO
       and created the VM manually rather than with Quick Create.
   - question: I want to use a different Linux distribution. What should I change?
     answer: >-
-      This path uses Ubuntu as an example. Follow the same approach and use that distribution’s
-      Arm ISO and documentation as you adapt the steps.
+      This path uses Ubuntu as an example. Use the same approach with the
+      Arm ISO and documentation of the distribution of your choice as you adapt the steps.
 # END generated_summary_faq
 
 author: Jason Andrews
@@ -87,4 +83,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

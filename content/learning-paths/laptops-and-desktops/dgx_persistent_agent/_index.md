@@ -32,15 +32,11 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:12:38Z'
   faq_source_hash: 27302300e57da97c399d266b83f7a4bd4791e528349406e4ab5b2e1323452537
   summary: >-
-    This Learning Path guides you through building a continuously running local AI agent on NVIDIA
-    DGX Spark that uses Arm Grace CPUs for orchestration. You prepare a GPU-enabled Docker stack
-    with a persistent workspace, then deploy Ollama for local inference, Qdrant for vector memory,
-    and Open WebUI for browser access. Hermes Agent is added to watch workspace/inbox, react to
-    file events, and coordinate actions across services. The flow is extended so Hermes routes
-    document content to a local model to generate summaries, then encodes and stores embeddings
-    in Qdrant to establish persistent semantic memory and contextual retrieval. The result is
-    a set of cooperating services that monitor, summarize, remember, and reason over a shared
-    workspace.
+    You'll build a continuously running local AI agent on NVIDIA DGX Spark using Arm Grace CPUs for
+    orchestration. You'll configure Docker services with a persistent workspace, deploy Ollama,
+    Qdrant, Open WebUI, and Hermes Agent, then connect Hermes to Ollama for document summaries and
+    Qdrant embeddings. By the end, the services will monitor files, summarize documents, and provide
+    contextual retrieval.
   faqs:
   - question: How do I know the base DGX Spark AI runtime is running correctly?
     answer: >-
@@ -49,22 +45,22 @@ generated_summary_faq:
       mounted as expected.
   - question: Where should I put documents so Hermes picks them up automatically?
     answer: >-
-      Place files in workspace/inbox/. Hermes watches that path and handles on_created() events
+      Place files in `workspace/inbox/`. Hermes watches that path and handles `on_created()` events
       to start the workflow.
-  - question: I added Hermes but I don’t see summaries yet—what should I expect at this stage?
+  - question: I added Hermes but I don’t see summaries yet — what should I expect at this stage?
     answer: >-
       That is expected. In its initial setup, Hermes acts as an orchestration and event layer,
       printing handling output but not invoking a language model until you connect it to Ollama.
   - question: After I connect Hermes to Ollama, what result should I expect to confirm inference
       is working?
     answer: >-
-      When you add a new document to workspace/inbox/, Hermes sends the content to the local model
+      When you add a new document to `workspace/inbox/`, Hermes sends the content to the local model
       and you see an AI-generated summary in the runtime output. This indicates the inference
       path is wired correctly.
   - question: How can I confirm persistent semantic memory is active in Qdrant?
     answer: >-
-      Each processed document should produce an embedding stored in Qdrant. Check that new vector
-      entries appear after files are handled and are available for contextual retrieval in the
+      Qdrant should store an embedding for each processed document. Check that new vector entries
+      appear after Hermes handles files and are available for contextual retrieval in the
       workflow.
 # END generated_summary_faq
 
@@ -110,4 +106,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

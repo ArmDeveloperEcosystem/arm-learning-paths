@@ -32,26 +32,22 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:29:16Z'
   faq_source_hash: e60ce02e9d1872da06bc5bfeb18c7ec65f2bc17defb2b75292f930fb3ad41711
   summary: >-
-    This Learning Path shows how to create, build, and run an ASP.NET Core 8 Web API on Windows
-    on Arm for a headless IoT scenario. You start a new Web API project, then build and launch
-    it with the .NET CLI. The runtime output helps you verify success by printing the hosting
-    environment and the localhost URL where the server listens. Learners add services using ASP.NET
-    Core’s built-in dependency injection and use them from controllers, then access the API from
-    a browser or HTTP client. By the end, you can recognize a successful startup from the console
-    logs and interact with a running Arm64 web server.
+    You'll build and run an ASP.NET Core 8 Web API on Windows on Arm for a headless IoT scenario.
+    You'll create the project with the .NET CLI, verify its listening URL and hosting environment,
+    add services through dependency injection, and call the API from a browser or HTTP client.
   faqs:
   - question: Which project template should I pick to start?
     answer: >-
-      Use the ASP.NET Core Web API project template. The path uses Arm64.HeadlessIoT as an example
+      Use the ASP.NET Core Web API project template. The path uses `Arm64.HeadlessIoT` as an example
       project name, but any name works.
-  - question: Where should I run dotnet run from?
+  - question: Where should I run `dotnet run` from?
     answer: >-
-      Run it from the project directory that contains the .csproj file. This ensures the CLI builds
+      Run it from the project directory that contains the `.csproj` file. This ensures the CLI builds
       and starts the correct project.
   - question: How do I know the server started correctly?
     answer: >-
-      Check the console for lines such as "Now listening on: http://localhost:PORT" and "Application
-      started. Press Ctrl+C to shut down." The output also shows the hosting environment (for
+      Check the console for lines such as `Now listening on: http://localhost:PORT` and `Application
+      started. Press Ctrl+C to shut down.` The output also shows the hosting environment (for
       example, Development).
   - question: How do I access the API endpoint locally?
     answer: >-
@@ -59,7 +55,7 @@ generated_summary_faq:
       the scheme, host, and port shown after "Now listening on:".
   - question: How do I stop the server when I’m done?
     answer: >-
-      Press Ctrl+C in the terminal where the app is running. The process exits and the server
+      Press `Ctrl+C` in the terminal where the app is running. The process exits and the server
       stops listening on the local port.
 # END generated_summary_faq
 
@@ -100,4 +96,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

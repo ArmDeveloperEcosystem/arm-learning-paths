@@ -29,22 +29,17 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:28:23Z'
   faq_source_hash: 4069c5bce1ce4b689a7a67d740fc077dc55c9b0bfbab392f5984ba0bdd9e59c3
   summary: >-
-    This Learning Path shows how to use Arm64EC with Visual Studio on Windows 11 on Arm to build
-    a simple application and explore migration from existing x86 or x64 code. Learners create
-    and build the project using Arm64EC, run the resulting binaries on a Windows on Arm device,
-    and compare results across build configurations to observe differences in behavior and execution
-    time. The path introduces Arm64EC as the application binary interface for Windows 11 on Arm
-    and highlights practical considerations that influence migration decisions, including dependency
-    integration. By the end, learners validate builds on hardware and practice a basic workflow
-    to build, run, and compare an application that targets Arm using Arm64EC.
+    You'll use Arm64EC with Visual Studio on Windows 11 on Arm to build and compare a simple
+    application. You'll create native Arm64EC binaries, run them on the device, compare build
+    configurations, and examine how the ABI supports migration from x86 or x64 code and dependencies.
   faqs:
   - question: How do I know my device is ready to build with Arm64EC?
     answer: >-
-      Use a Windows 11 on Arm computer and install Visual Studio 2022 or higher. The Lenovo Thinkpad
+      Use a Windows 11 on Arm computer. The Lenovo Thinkpad
       X13s is one example of suitable hardware.
   - question: Which Visual Studio version should I install for this path?
     answer: >-
-      Install Visual Studio 2022 or higher. Earlier versions are not listed for this workflow.
+      Install Visual Studio 2022 or later.
   - question: Which option should I choose for a new project versus migrating an existing x86/x64
       project?
     answer: >-
@@ -91,4 +86,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

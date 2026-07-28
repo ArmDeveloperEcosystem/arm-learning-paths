@@ -33,13 +33,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:31:05Z'
   faq_source_hash: f685f45be9e5fc05b278e28590f9d421a920d43cc36ccb572545de4eaf4a799a
   summary: >-
-    This Learning Path shows how to build a serverless workflow on AWS that reacts to IoT telemetry
-    published from a Windows on Arm device. You connect the existing weather-station emulator
-    to AWS IoT Core, create a rule to invoke an AWS Lambda function on the relevant topic, and
-    implement the function to evaluate incoming temperature readings against a predefined threshold.
-    The function integrates with Amazon Simple Notification Service (SNS) to send an email when
-    the condition is met. Learners configure event routing and function logic and see how IoT
-    Core messages trigger notifications end to end on Arm64.
+    You'll build an AWS serverless workflow that reacts to IoT telemetry from a Windows on Arm device.
+    You'll connect the weather-station emulator to AWS IoT Core, route a topic to Lambda, compare
+    temperature readings with a threshold, and publish an Amazon Simple Notification Service (SNS)
+    message that sends an email when the condition is met.
   faqs:
   - question: Do I need to run the same IoT emulator I used in the earlier Learning Path?
     answer: >-
@@ -55,13 +52,13 @@ generated_summary_faq:
       temperature values against this predefined value.
   - question: Which AWS service actually sends the notification email?
     answer: >-
-      Amazon Simple Notification Service (SNS) is used to send emails. The Lambda function publishes
+      Amazon Simple Notification Service (SNS) sends the emails. The Lambda function publishes
       a message to an SNS topic configured for email delivery.
   - question: What result should I expect when everything is configured correctly, and what should
       I check if no email arrives?
     answer: >-
       When a message on the configured topic exceeds your threshold, the Lambda function runs
-      and an email is sent via SNS. If no email arrives, verify the IoT rule targets your Lambda
+      and SNS sends an email. If no email arrives, verify that the IoT rule targets your Lambda
       function and that the payload temperature actually exceeds the threshold.
 # END generated_summary_faq
 
@@ -102,4 +99,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

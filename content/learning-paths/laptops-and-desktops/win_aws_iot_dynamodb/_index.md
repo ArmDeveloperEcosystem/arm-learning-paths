@@ -32,13 +32,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:30:05Z'
   faq_source_hash: f25597c6c9e69e09e9a86fa7c02d0ace9c347f293a21a11c00a6d3498300052c
   summary: >-
-    This Learning Path shows how to route MQTT telemetry from a Windows on Arm-based IoT application
-    into Amazon DynamoDB using AWS IoT Core rules. Starting from the weather station emulator
-    configured in the prerequisite path, you navigate to AWS IoT Core, create a rule (for example,
-    send_message_to_dynamodb), and configure it to parse incoming messages and write them to DynamoDB.
-    The workflow focuses on selecting the rule location in the console, naming and saving the
-    rule, and connecting it to the existing message stream so device data is persisted. By the
-    end, you run the emulator and see messages stored through the configured rule.
+    You'll route MQTT telemetry from a Windows on Arm weather-station emulator to Amazon DynamoDB
+    with an AWS IoT Core rule. You'll create and name the rule, configure it to parse incoming
+    messages and write to DynamoDB, run the emulator, and verify that the destination receives new
+    items.
   faqs:
   - question: What do I need before creating the AWS IoT Core rule?
     answer: >-
@@ -46,16 +43,15 @@ generated_summary_faq:
       AWS IoT Core. The rule relies on that running message source.
   - question: Where do I create the rule in AWS IoT Core?
     answer: >-
-      Open AWS IoT Core and go to Message routing, then select Rules. Click Create rule to start
+      Open AWS IoT Core, select **Message routing**, then select **Rules** and **Create rule** to start
       configuring it.
   - question: What should I name the rule?
     answer: >-
-      Use send_message_to_dynamodb as shown in the steps. You can choose a different valid name,
-      but the suggested name keeps the walkthrough consistent.
+      Use `send_message_to_dynamodb`. You can choose a different valid name,
+      but you should use the suggested name to stay consistent with the Learning Path.
   - question: Which MQTT topic should the rule target?
     answer: >-
-      Use the same topic used by the weather station emulator from the prerequisite path. The
-      exact topic is not restated here.
+      Use the same topic that the weather station emulator uses in the prerequisite Learning Path [Create IoT applications with Windows on Arm and AWS IoT Core](/learning-paths/laptops-and-desktops/win_aws_iot/). 
   - question: How do I know the rule is writing data to DynamoDB?
     answer: >-
       After saving the rule and running the emulator, new items should appear in the DynamoDB
@@ -100,4 +96,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

@@ -13,7 +13,7 @@ learning_objectives:
     - Send data from a device to AWS IoT Core.
 
 prerequisites:
-    - A Windows-on-Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows-on-Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - A Windows-on-Arm computer — such as the Lenovo Thinkpad X13s — running Windows 11, or a Windows-on-Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Any code editor. Visual Studio Code is suitable.
 
 # START generated_summary_faq
@@ -31,31 +31,27 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:51:54Z'
   faq_source_hash: cddfb7b83e82f0daa513558b1e7ee09b55c63e2ff95675d67be7d4408d391aa4
   summary: >-
-    This Learning Path guides you through creating a Node.js emulator on Windows on Arm that streams
-    synthesized sensor readings to AWS IoT Core over MQTT. Using the AWS IoT Core console, you
-    register and secure a device with the Connect one device wizard, verify endpoint reachability
-    with the ping command it provides, and connect the emulator to begin publishing. You then
-    validate the data flow in the MQTT test client by subscribing to the Emulators/Weather/SensorReadings
-    topic and observing incoming messages. The workflow demonstrates an end-to-end device-to-cloud
-    path on Windows on Arm, and success is clear when sensor data appears live in the AWS IoT
-    Core test client.
+    You'll create a Node.js emulator on Windows on Arm that publishes synthetic sensor readings to
+    AWS IoT Core over MQTT. You'll register and secure the device, verify endpoint reachability,
+    connect the emulator, and subscribe to `Emulators/Weather/SensorReadings` in the MQTT test client
+    to confirm the device-to-cloud stream.
   faqs:
   - question: Where do I start in the AWS Console to connect the emulator?
     answer: >-
-      Sign in to the AWS Console, search for IoT, and select IoT Core. In the IoT Core console,
-      choose Connect one device to open the setup wizard.
+      Sign in to the AWS Console, search for **IoT**, and select **IoT Core**. In the IoT Core console,
+      choose **Connect one device** to open the setup wizard.
   - question: How do I verify connectivity to the AWS IoT Core endpoint before streaming data?
     answer: >-
-      Use the ping command shown in the Register and secure your device step of the wizard. Successful
+      Use the `ping` command shown in the **Register and secure your device** step of the wizard. Successful
       replies confirm your device can reach the endpoint.
   - question: Which MQTT topic should I subscribe to when testing the stream?
     answer: >-
-      Use the MQTT test client and subscribe to Emulators/Weather/SensorReadings. You should see
+      Use the MQTT test client and subscribe to `Emulators/Weather/SensorReadings`. You should see
       the emulator’s messages appear under that topic.
   - question: I subscribed but don’t see any messages. What should I check?
     answer: >-
       Confirm the emulator is running and connected. Verify the topic filter matches exactly and
-      recheck endpoint reachability with the ping command.
+      recheck endpoint reachability with the `ping` command.
   - question: How do I know the device-to-cloud path is working end to end?
     answer: >-
       The MQTT test client will display the emulator’s data after you subscribe to the topic.
@@ -95,4 +91,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

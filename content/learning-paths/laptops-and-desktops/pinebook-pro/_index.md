@@ -31,35 +31,32 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:23:29Z'
   faq_source_hash: e1befed4cafab0eaee29a31c2f259a6a90a14d9f8230c570b6c10a9840b761d5
   summary: >-
-    This Learning Path guides learners through preparing a bootable Arch Linux microSD on a Linux
-    system, installing Arch Linux on a Pinebook Pro, and setting up the i3 window manager for
-    day-to-day Arm Linux development. Learners use a regular user account with sudo to install
-    packages and run i3, and apply a simple sysfs command to set the display to maximum brightness
-    when needed. An optional section demonstrates configuring the Neovim editor to create a lightweight,
-    extensible development environment that feels familiar to Vim users. By the end, the Pinebook
-    Pro runs Arch Linux with i3 and an editor workflow suitable for iterative development on Arm.
+    You'll create an Arch Linux bootable microSD on Linux, install Arch Linux on a Pinebook Pro, and
+    configure i3 for Arm development. You'll use a regular account with `sudo`, set display brightness
+    through sysfs, and optionally configure Neovim. By the end, you'll have an Arch Linux Pinebook Pro
+    with i3 and a lightweight development workflow.
   faqs:
   - question: Do I need a second computer to create the Arch Linux microSD, and which OS do the
       steps use?
     answer: >-
       Yes. The instructions use a Linux computer to write and partition the microSD card. You
-      can use macOS, but the required partitioning steps differ and are not covered here.
+      can use macOS, but the required partitioning steps differ and aren't covered here.
   - question: How do I know the install media worked after booting the Pinebook Pro?
     answer: >-
-      The laptop should boot Arch Linux from the microSD card. If it does not, recheck how the
-      image was written and how the card was partitioned on the second computer.
+      The laptop should boot Arch Linux from the microSD card. If it doesn't, recheck how the
+      you wrote the image and partitioned the card on the second computer.
   - question: Should I run the i3 installation commands as root or as my user?
     answer: >-
-      Use your created user account and run commands with sudo as shown in the instructions. You
+      Use your created user account and run commands with `sudo`. You
       also run the i3 window manager from your user account.
   - question: The display is too dim in i3. How can I set maximum brightness?
     answer: >-
-      Use the command: echo 4095 > /sys/class/backlight/edp-backlight/brightness. Run it with
+      Use `echo 4095 > /sys/class/backlight/edp-backlight/brightness`. Run it with
       appropriate permissions if required by your system.
   - question: Is configuring Neovim required, and what should I expect the first time it opens?
     answer: >-
-      The Neovim section is optional. On first launch, Neovim looks almost exactly like Vim, adds
-      Lua extensibility, and most Vim plugins work as expected.
+      The Neovim section is optional. On first launch, Neovim looks almost exactly like Vim and adds
+      Lua extensibility. Most Vim plugins work as expected.
 # END generated_summary_faq
 
 author: Gabriel Peterson
@@ -101,4 +98,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

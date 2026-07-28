@@ -31,34 +31,30 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:22:41Z'
   faq_source_hash: 87d4afe4ce7f0cef113cd61fd712fde073cca0eaafbe86a2066b76a117328d11
   summary: >-
-    This Learning Path shows how to integrate Arm Memory Tagging Extension (MTE) into a simple
-    dynamic memory allocator on Linux and observe how tag checks catch misuse at runtime. Learners
-    review a small C project, enable tagged addresses and synchronous checking in process initialization,
-    and use helper utilities to apply and compare tags during allocation and access. The path
-    focuses on allocator-specific changes rather than allocator design, then runs targeted examples
-    that intentionally trigger tag mismatches to demonstrate fault behavior. By the end, learners
-    can trace where tags are set and checked in heap.c and supporting code, and recognize the
-    resulting exceptions when common memory misuse occurs.
+    You'll add Arm MTE checks to a simple Linux dynamic memory allocator.
+    You'll enable tagged addresses and synchronous checking, update the allocator and tag helpers,
+    and run misuse examples that trigger mismatches. You'll trace tag setup and checks across
+    `heap.c`, `heap.h`, `mte_utils.c`, `mte_utils.h`, and `main.c`, then inspect the resulting exceptions.
   faqs:
   - question: Which files should I modify to explore allocator and tagging behavior?
     answer: >-
-      Edit heap.c and heap.h for allocator changes and mte_utils.c and mte_utils.h for tag helper
-      logic. Use main.c to exercise the allocator and drive specific scenarios.
+      Edit `heap.c` and `heap.h` for allocator changes and `mte_utils.c` and `mte_utils.h` for tag
+      helper logic. Use `main.c` to exercise the allocator and drive specific scenarios.
   - question: How do I run the example misuse cases that demonstrate tag faults?
     answer: >-
-      Add calls in main.c to the example functions described in the demo and rebuild the project.
+      Add calls in `main.c` to the example functions and rebuild the project.
       Each function triggers a scenario so you can observe how the MTE-enabled allocator responds.
   - question: What should I check if no tag faults occur when I expect them?
     answer: >-
       Verify that process and heap initialization that enables tagged addresses runs before any
-      allocations. Also confirm that the example functions are actually called from main.c.
+      allocations. Also confirm that the example functions are called from `main.c`.
   - question: What result should I expect when there is a tag mismatch?
     answer: >-
       On access, MTE compares the pointer’s logical tag with the memory’s allocation tag and raises
       an exception if they differ. The demo scenarios are designed to make this behavior visible.
   - question: Which tag checking mode does the demo configure?
     answer: >-
-      The initialization sets synchronous tag checking. This configuration is applied when enabling
+      The initialization sets synchronous tag checking. Apply this configuration when enabling
       tagged addresses for the process.
 # END generated_summary_faq
 
@@ -92,4 +88,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

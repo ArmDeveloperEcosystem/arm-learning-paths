@@ -1,5 +1,5 @@
 ---
-title: Use Self-Hosted Arm64-based runners in GitHub Actions for CI/CD
+title: Use self-hosted Arm64-based runners in GitHub Actions for CI/CD
 
 description: Learn how to create a CI/CD pipeline in GitHub using self-hosted Arm64 runners to build and push Docker images to DockerHub.
 
@@ -32,22 +32,19 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:25:40Z'
   faq_source_hash: a851b2f81b6aac54aef84acf7537a1cc6b99f66ce31ffd26631d6a966401e4ed
   summary: >-
-    This Learning Path shows how to set up a GitHub Actions CI/CD pipeline on a self-hosted Arm64
-    Linux runner to build a .NET application and publish an Arm64 Docker image to DockerHub. You
-    create a private DockerHub repository, import a prepared sample repository into GitHub, and
-    add repository secrets for DockerHub credentials. On an Arm64 machine running Ubuntu 22.04,
-    you install Docker and the .NET SDK to prepare the runner. The workflow builds the application
-    for Arm64 and pushes the resulting image to your DockerHub repository. After completing the
-    steps, you should see a successful workflow run and a new image tag in DockerHub.
+    You'll configure a GitHub Actions CI/CD pipeline on a self-hosted Arm64 Linux runner to build a
+    .NET application and publish an Arm64 Docker image to Docker Hub. You'll create the repository and
+    secrets, and install Docker and the .NET SDK on Ubuntu 22.04. You'll then run the workflow and verify the pushed
+    image tag.
   faqs:
   - question: Do I need to create any GitHub secrets for DockerHub authentication?
     answer: >-
-      Yes. Create two repository secrets: one for your DockerHub username and one for your DockerHub
+      Yes. Create two repository secrets: one for your Docker Hub username and one for your Docker Hub
       token so the workflow can log in and push the image.
-  - question: Where can I find the exact docker push command for my new DockerHub repository?
+  - question: Where can I find the exact `docker push` command for my new Docker Hub repository?
     answer: >-
-      DockerHub shows the push command after you create the repository. It looks like: docker
-      push <YOUR_ACCOUNT_NAME>/sampleapp:tagname.
+      Docker Hub shows the push command after you create the repository. It looks like:
+      `docker push <YOUR_ACCOUNT_NAME>/sampleapp:tagname`.
   - question: What software must I install on the self-hosted Arm64 runner before running the
       workflow?
     answer: >-
@@ -55,11 +52,12 @@ generated_summary_faq:
       Ubuntu 22.04.
   - question: Which project should I import into GitHub to follow the steps?
     answer: >-
-      Use GitHub’s import tool with the repository URL https://github.com/dawidborycki/arm-lp-ci-cd-net.git
+      Use GitHub’s import tool with the repository URL
+      `https://github.com/dawidborycki/arm-lp-ci-cd-net.git`
       and choose a name for your new repository.
   - question: What result should I expect when the pipeline finishes successfully?
     answer: >-
-      An Arm64 Docker image of the .NET application is built and pushed to your DockerHub repository.
+      The workflow builds and pushes an Arm64 Docker image of the .NET application to your Docker Hub repository.
       You should see a new image tag in the repository you created.
 # END generated_summary_faq
 
@@ -100,4 +98,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

@@ -1,21 +1,21 @@
 ---
-title: Port Applications to Arm64 using Arm64EC
+title: Port applications to Arm64 using Arm64EC
 
-description: Learn how to port Qt-based Python desktop applications with C/C++ dependencies to Arm64 using Arm64EC on Windows on Arm.
+description: Learn how to port Qt-based Python desktop applications with C++ dependencies to Arm64 using Arm64EC on Windows on Arm.
 
 minutes_to_complete: 90
 
 who_is_this_for: This is an introductory topic for developers who want to learn how to port their applications to Arm64 using Arm64EC. 
 
 learning_objectives:
-    - Build a Qt-based Python desktop application
-    - Create C/C++ dependencies and use them in the Qt-based Python app
-    - Learn how to port the C/C++ based dependencies to Arm64 using Arm64EC
+    - Build a Qt-based Python desktop application.
+    - Create dependencies for C++ and use them in the Qt-based Python app.
+    - Learn how to port dependencies for C++ to Arm64 using Arm64EC.
 
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
     - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
-    - Visual Studio 2022 with Arm build tools. [Refer to this guide for the installation steps](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio).
+    - Visual Studio 2022 with Arm build tools. For installation steps, see [Install Visual Studio](https://developer.arm.com/documentation/102528/0100/Install-Visual-Studio).
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -32,13 +32,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:27:42Z'
   faq_source_hash: 3b3ecd451ed8b634c7fbe194248cdf1d33432633efbcbef5de713495041ff425
   summary: >-
-    This Learning Path shows how to port a Qt-based Python desktop application with C/C++ DLL
-    dependencies to Arm64 on Windows by configuring Arm64EC. Learners build the app, then choose
-    a porting path that matches the project: update CMake by adding a statement block to CMakePresets.json,
-    or create and configure a Visual Studio MSBuild project. Arm64EC enables Arm64 binaries to
-    load existing x64 dependencies in the same process, so you can migrate components incrementally.
-    By the end, learners configure builds for Arm64EC, port DLLs, and understand how to run mixed
-    Arm64 and x64 components during the transition.
+    You'll port a Qt-based Python desktop app with C++ DLL dependencies to Arm64 on Windows using
+    Arm64EC. You'll build the app, choose a CMake or MSBuild workflow, configure `CMakePresets.json`
+    or a Visual Studio project, and port DLLs incrementally while keeping compatible x64 dependencies
+    in the same process.
   faqs:
   - question: Should I use CMake or MSBuild to port my DLLs?
     answer: >-
@@ -47,11 +44,10 @@ generated_summary_faq:
   - question: How do I know I'm targeting Arm64EC?
     answer: >-
       Verify that your preset or project configuration sets the build target to Arm64EC and matches
-      the example shown in the step. A successful build with that target confirms the configuration
-      is applied.
+      the example shown in the step. A successful build with that target confirms the configuration.
   - question: What do I change in CMake to port a DLL?
     answer: >-
-      Edit CMakePresets.json and add the final statement block so the file matches the provided
+      Edit `CMakePresets.json` and add the final statement block so the file matches the provided
       example. Rebuild to produce the Arm64EC build of the DLL.
   - question: In Visual Studio, which setting do I use to build for Arm64EC?
     answer: >-
@@ -102,4 +98,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

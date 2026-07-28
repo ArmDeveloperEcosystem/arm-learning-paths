@@ -30,22 +30,18 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:27:00Z'
   faq_source_hash: 63389742eced4df89f85bdf56a01e489e52a9702d446b557f8f55312f9d31f20
   summary: >-
-    This Learning Path shows how to build and run a Qt desktop application as a native Arm64 binary
-    on Windows on Arm. Learners configure a Qt project for an Arm64 target, compile it, and launch
-    the application to validate that it runs natively on the device. The path then guides a lightweight
-    investigation of runtime behavior to explore potential performance improvements from native
-    Arm64 execution. The focus stays on practical steps: setting the correct target, producing
-    a working executable, and observing how the application behaves once running on Windows on
-    Arm using the Qt libraries that support this platform.
+    You'll build and run a Qt desktop application as a native Arm64 binary on Windows on Arm. You'll
+    configure the project target, compile and launch the app, then observe runtime behavior to
+    investigate possible performance improvements from native execution and Qt libraries.
   faqs:
-  - question: How do I know I built a native Arm64 binary?
+  - question: How do I know if I built a native Arm64 binary?
     answer: >-
-      Confirm that your build configuration targets Arm64 for Windows on Arm and then run the
+      Confirm that your build configuration targets Arm64 for Windows on Arm, then run the
       resulting executable on the device. A successful launch without additional changes indicates
       a native build.
   - question: What should I check if my project fails to compile?
     answer: >-
-      Verify that your Qt installation supports Windows on Arm; Qt 6.2 adds native WoA support.
+      Verify that your Qt installation supports Windows on Arm; Qt 6.2 adds native Windows on Arm support.
       Also check that the required Qt modules for your project are installed.
   - question: What result should I expect when I run the application?
     answer: >-
@@ -58,7 +54,7 @@ generated_summary_faq:
   - question: Do I need to use Qt Creator to complete this Learning Path?
     answer: >-
       No. Qt Creator is available, but the workflow focuses on building and running a Qt application
-      on Windows on Arm and does not require a specific IDE.
+      on Windows on Arm and doesn't require a specific IDE.
 # END generated_summary_faq
 
 author: Dawid Borycki
@@ -95,4 +91,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

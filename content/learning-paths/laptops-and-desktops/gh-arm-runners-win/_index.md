@@ -1,5 +1,5 @@
 ---
-title: Automate Windows on Arm Builds with GitHub Arm-hosted Runners
+title: Automate Windows on Arm builds with GitHub Arm-hosted runners
 
 description: Learn how to automate Windows application builds on Arm architecture using GitHub Arm-hosted runners and GitHub Actions workflows.
 
@@ -13,8 +13,8 @@ learning_objectives:
     - Automate Windows application builds with GitHub Actions.
 
 prerequisites: 
-    - A GitHub account. 
-    - Familiarity with GitHub Actions.
+    - A GitHub account
+    - Familiarity with GitHub Actions
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -31,14 +31,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:17:49Z'
   faq_source_hash: 7e108d774eb0fd0b2b72fa8b5d65e1efec0ff4ecf3d80d4e511e82cdf3862284
   summary: >-
-    This Learning Path introduces GitHub Arm-hosted Windows runners and shows how to use them
-    to automate a Windows application build with GitHub Actions. You configure a workflow to run
-    on Arm-hosted infrastructure, understand how runners execute jobs, and make basic decisions
-    about build tooling using Visual Studio or MSBuild based on the project. The path uses a rotating
-    3D cube application as the build target and points to a related path for detailed build instructions
-    and later optimization work. After completing the steps, you trigger a workflow, confirm it
-    executed on an Arm-hosted Windows runner, review logs, and recognize the expected Windows
-    build outputs.
+    You'll use GitHub-hosted Arm Windows runners to automate a Windows application build with GitHub
+    Actions. You'll configure a workflow and choose Visual Studio or MSBuild for the rotating 3D cube
+    sample. You'll then trigger the job, inspect logs, and verify the build outputs from an Arm-hosted Windows
+    environment.
   faqs:
   - question: How do I target an Arm-hosted Windows runner in my workflow?
     answer: >-
@@ -56,9 +52,8 @@ generated_summary_faq:
       the rotating 3D cube application referenced in this path to choose the correct build step.
   - question: Where can I find the sample application and detailed build steps?
     answer: >-
-      The rotating 3D cube application and its build instructions are provided in the Optimize
-      Windows applications using Arm Performance Libraries Learning Path. Follow that resource
-      when you need step-by-step build details.
+      The [Optimize Windows applications using Arm Performance Libraries](/learning-paths/laptops-and-desktops/windows_armpl/) Learning Path provides the
+      rotating 3D cube application and its build instructions. Use that resource for detailed build steps.
   - question: What result should I expect after a successful workflow run?
     answer: >-
       The workflow shows a successful job status and the logs indicate a completed build. You
@@ -95,6 +90,10 @@ further_reading:
         title: GitHub Actions now supports Windows on Arm runners for all public repos
         link: https://blogs.windows.com/windowsdeveloper/2025/04/14/github-actions-now-supports-windows-on-arm-runners-for-all-public-repos/
         type: blog
+    - resource:
+        title: Optimize Windows applications using Arm Performance Libraries
+        link: /learning-paths/laptops-and-desktops/windows_armpl/
+        type: Learning Path
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
@@ -102,4 +101,3 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
-

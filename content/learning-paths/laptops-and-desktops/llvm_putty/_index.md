@@ -12,7 +12,7 @@ learning_objectives:
     - Build open-source PuTTY application for Windows on Arm using the native LLVM toolchain
 
 prerequisites:
-    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
+    - A Windows on Arm computer, such as the Lenovo Thinkpad X13s running Windows 11, or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -29,14 +29,9 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:21:25Z'
   faq_source_hash: 631134875aac73e168b60b86d1ca7b4e898196f98cb2825a4238f62129d2d862
   summary: >-
-    This Learning Path shows how to configure the LLVM toolchain in Visual Studio on a Windows
-    on Arm system and compile a native application with Clang. Learners enable LLVM support in
-    Visual Studio, set up required tools, and use Clang to build a CMake-based project. The hands-on
-    work focuses on compiling the open-source PuTTY client as a native Windows on Arm binary,
-    including installing the 32-bit x86 Strawberry Perl when needed. The path emphasizes choosing
-    the correct compiler and target during configuration and driving the build from Visual Studio.
-    After completing the steps, you produce a locally built PuTTY executable compiled natively
-    for Windows on Arm.
+    You'll configure LLVM in Visual Studio on Windows on Arm and compile PuTTY with Clang. You'll
+    enable LLVM support, set up the CMake-based build, and install 32-bit x86 Strawberry Perl. You'll then
+    choose the correct compiler and target, and produce a native Windows on Arm PuTTY executable.
   faqs:
   - question: Which Visual Studio setup do I need before building?
     answer: >-
@@ -44,18 +39,16 @@ generated_summary_faq:
       that configuration is in place.
   - question: Do I need an Arm build of Strawberry Perl?
     answer: >-
-      No. There is currently no Arm version of Strawberry Perl, so install the 32-bit x86 version.
+      No. There's currently no Arm version of Strawberry Perl, so install the 32-bit x86 version.
   - question: What build system do I use for PuTTY in this path?
     answer: >-
-      PuTTY is built as a CMake application. You use Clang from the LLVM toolchain to compile
-      it for Windows on Arm.
+      Build PuTTY as a CMake application with Clang from the LLVM toolchain for Windows on Arm.
   - question: Can I follow this on a Windows on Arm virtual machine?
     answer: >-
-      Yes. Any Windows on Arm computer or a Windows on Arm virtual machine can be used.
+      Yes. You can use any Windows on Arm computer or a Windows on Arm virtual machine.
   - question: What result should I expect when the build succeeds?
     answer: >-
-      A native Windows on Arm build of the PuTTY application produced by Visual Studio using the
-      LLVM toolchain.
+      Visual Studio produces a native Windows on Arm PuTTY build with the LLVM toolchain.
 # END generated_summary_faq
 
 author: Pareena Verma
@@ -91,4 +84,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

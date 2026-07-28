@@ -16,7 +16,7 @@ learning_objectives:
 prerequisites:
     - Access to an NVIDIA DGX Spark system with at least 15 GB of available disk space
     - Familiarity with command-line interfaces and basic Linux operations
-    - Understanding of CUDA programming basics and GPU/CPU compute concepts
+    - Understanding of CUDA programming basics, as well as GPU and CPU compute concepts
     - Basic knowledge of quantized large language models (LLMs) and machine learning inference
     - Experience building software from source using CMake and make
 
@@ -35,14 +35,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:14:08Z'
   faq_source_hash: ada333cc887badfd57815708ef93e172543da74f2c995b46a916817917e92394
   summary: >-
-    This Learning Path introduces NVIDIA DGX Spark with the Grace–Blackwell (GB10) Superchip and
-    guides learners to prepare the system, build llama.cpp for both GPU and CPU, and analyze Armv9
-    vector execution during quantized LLM inference. You verify Grace CPU, Blackwell GPU, and
-    CUDA readiness, then compile a CUDA-enabled llama.cpp and a CPU-only build tuned for the Grace
-    CPU. Builds are exercised on the DGX Spark, and Process Watch is used to inspect the instruction
-    mix, highlighting Neon SIMD activity while noting when SVE/SVE2 remain inactive under the
-    current kernel. Learners finish with working binaries for flexible deployment across GPU and
-    CPU execution paths.
+    You'll prepare NVIDIA DGX Spark with its Grace CPU and Blackwell GPU, build `llama.cpp` for CUDA
+    and CPU execution, and inspect Armv9 vector instructions during quantized LLM inference. You'll
+    verify CUDA, compile both variants, and use Process Watch to examine Neon activity and the
+    current lack of SVE and SVE2. You'll finish with GPU and CPU binaries.
   faqs:
   - question: How do I know my DGX Spark is ready before building?
     answer: >-
@@ -51,17 +47,17 @@ generated_summary_faq:
       check that your CUDA setup matches what the path expects before continuing.
   - question: Which build should I start with, GPU-enabled or CPU-only?
     answer: >-
-      If the Blackwell GPU and CUDA are available, start with the GPU-enabled llama.cpp build.
+      If the Blackwell GPU and CUDA are available, start with the GPU-enabled `llama.cpp` build.
       Also build the CPU-only version to run on the Grace CPU and to keep a flexible deployment
       option.
   - question: What result should I expect after a successful build?
     answer: >-
-      You should get a compiled llama.cpp binary targeting either the GPU or the CPU that runs
+      You should get a compiled `llama.cpp` binary targeting either the GPU or the CPU that runs
       quantized LLM inference. A quick test run should complete without errors on the DGX Spark.
   - question: How do I validate that the CPU-only build uses Armv9 vector features?
     answer: >-
       Run an inference with the CPU-only binary and analyze it with Process Watch to observe the
-      instruction mix. Expect to see Neon SIMD activity; SVE and SVE2 may remain inactive under
+      instruction mix. Expect to see Neon SIMD activity; SVE and SVE2 might remain inactive under
       the current kernel configuration.
   - question: Why don’t I see SVE or SVE2 instructions in my Process Watch results?
     answer: >-
@@ -113,4 +109,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

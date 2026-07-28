@@ -33,25 +33,21 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:15:38Z'
   faq_source_hash: 4ccde526ec4dd9fc18672e162e067108c7251161c1da0375a0bb0374a2f3a4ea
   summary: >-
-    This Learning Path guides learners through building a fully local voice chatbot on an Arm-based
-    DGX Spark system by combining faster-whisper for speech-to-text and vLLM for response generation.
-    You capture microphone audio with PyAudio, add voice activity detection and turn detection,
-    and iterate toward a multithreaded CPU-based STT pipeline. Segmentation parameters are then
-    tuned to match the acoustic environment and speaking style for more stable, low-latency transcriptions.
-    After validating reliable real-time STT, vLLM is deployed to generate replies using a GPU-backed
-    inference engine. By the end, learners integrate both components into a working offline assistant
-    and can recognize correct behavior from segmented transcripts followed by locally generated
-    responses.
+    You'll build a local voice chatbot on an Arm-based NVIDIA DGX Spark with `faster-whisper` for
+    speech-to-text and vLLM for response generation. You'll capture microphone audio with PyAudio,
+    add voice and turn detection, tune segmentation for stable low-latency transcription, and
+    connect the CPU STT pipeline to GPU-backed vLLM. You'll validate segmented transcripts followed
+    by local replies.
   faqs:
-  - question: What result should I expect after installing faster-whisper?
+  - question: What result should I expect after installing `faster-whisper`?
     answer: >-
       You should be able to transcribe a short audio sample or live microphone input with readable
       text and no runtime errors. Use this to confirm the installation before moving on to pipeline
       changes.
   - question: When should I upgrade the speech model in the CPU STT pipeline?
     answer: >-
-      Upgrade after you confirm baseline transcription works. The build step introduces a more
-      accurate model and adds VAD; if latency increases, proceed to segmentation tuning.
+      Upgrade after you confirm baseline transcription works. The build step adds a more accurate
+      model and VAD. If latency increases, proceed to segmentation tuning.
   - question: How do I know VAD and turn detection are working correctly?
     answer: >-
       Transcriptions should arrive as sentence-like chunks, and pauses should start new segments.
@@ -63,7 +59,7 @@ generated_summary_faq:
       text. A clean, timely text stream simplifies downstream integration with vLLM.
   - question: What behavior confirms the end-to-end offline chatbot is running?
     answer: >-
-      Speak into the microphone and watch for segmented transcriptions from faster-whisper, followed
+      Speak into the microphone and watch for segmented transcriptions from `faster-whisper`, followed
       by a locally generated reply from vLLM. Seeing this sequence consistently indicates the
       pipeline is integrated and running on the system.
 # END generated_summary_faq
@@ -109,4 +105,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
