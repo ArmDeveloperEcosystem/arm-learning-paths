@@ -34,7 +34,7 @@ generated_summary_faq:
   summary: >-
     You'll build a continuously running local AI agent on NVIDIA DGX Spark using Arm Grace CPUs for
     orchestration. You'll configure Docker services with a persistent workspace, deploy Ollama,
-    Qdrant, Open WebUI, and Hermes Agent, then connect Hermes to Ollama for document summaries and
+    Qdrant, Open WebUI, and Hermes Agent. Then, you'll connect Hermes to Ollama for document summaries and
     Qdrant embeddings. By the end, the services will monitor files, summarize documents, and provide
     contextual retrieval.
   faqs:
@@ -49,7 +49,7 @@ generated_summary_faq:
       to start the workflow.
   - question: I added Hermes but I don’t see summaries yet — what should I expect at this stage?
     answer: >-
-      That is expected. In its initial setup, Hermes acts as an orchestration and event layer,
+      Not seeing summaries is expected. In its initial setup, Hermes acts as an orchestration and event layer,
       printing handling output but not invoking a language model until you connect it to Ollama.
   - question: After I connect Hermes to Ollama, what result should I expect to confirm inference
       is working?

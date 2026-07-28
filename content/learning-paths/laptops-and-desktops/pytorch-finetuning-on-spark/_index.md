@@ -58,7 +58,7 @@ generated_summary_faq:
     answer: >-
       On Raspberry Pi datasheet questions, the fine-tuned model should answer factual queries
       correctly. For example, it reports the RP2350 maximum clock as 150 MHz, while the base model
-      may hallucinate a higher value.
+      might hallucinate a higher value.
 # END generated_summary_faq
 
 author: Michael Hall

@@ -39,8 +39,7 @@ generated_summary_faq:
   faqs:
   - question: Should I use CMake or MSBuild to port my DLLs?
     answer: >-
-      Use the build system your project already uses. This path demonstrates both approaches,
-      and if you followed earlier steps with CMake, continue with the CMake method.
+      Use the build system your project already uses. You'll learn about both approaches in the Learning Path. If you followed earlier steps with CMake, continue with the CMake method.
   - question: How do I know I'm targeting Arm64EC?
     answer: >-
       Verify that your preset or project configuration sets the build target to Arm64EC and matches
@@ -51,8 +50,7 @@ generated_summary_faq:
       example. Rebuild to produce the Arm64EC build of the DLL.
   - question: In Visual Studio, which setting do I use to build for Arm64EC?
     answer: >-
-      Create the Console Application project and set the build target to Arm64EC as described
-      in the step. Use the specified project names and confirm the platform configuration before
+      Create the Console Application project and set the build target to Arm64EC. Use the specified project names and confirm the platform configuration before
       building.
   - question: Can I keep some dependencies as x64 while I port others?
     answer: >-

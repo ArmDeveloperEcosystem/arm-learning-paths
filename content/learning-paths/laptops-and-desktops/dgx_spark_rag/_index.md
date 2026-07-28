@@ -38,7 +38,7 @@ generated_summary_faq:
   faqs:
   - question: Do I need to complete the quantized LLM Learning Path before starting this one?
     answer: >-
-      Complete the Learning Path on unlocking quantized LLM performance on Arm-based NVIDIA DGX Spark
+      Complete the Learning Path [Unlock quantized LLM performance on Arm-based NVIDIA DGX Spark](/learning-paths/laptops-and-desktops/dgx_spark_llamacpp/)
       first. That background covers CPU and GPU builds of `llama.cpp` used
       in this RAG solution.
   - question: Which models should I use for embeddings and generation in this RAG pipeline?

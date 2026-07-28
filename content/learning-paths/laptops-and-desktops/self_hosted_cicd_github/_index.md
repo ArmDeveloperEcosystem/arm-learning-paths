@@ -50,7 +50,7 @@ generated_summary_faq:
     answer: >-
       Install the .NET SDK and Docker. The Learning Path provides Docker installation steps for
       Ubuntu 22.04.
-  - question: Which project should I import into GitHub to follow the steps?
+  - question: Which project should I import into GitHub?
     answer: >-
       Use GitHub’s import tool with the repository URL
       `https://github.com/dawidborycki/arm-lp-ci-cd-net.git`

@@ -34,9 +34,8 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:13:33Z'
   faq_source_hash: eda533c727ea7094202e8784bf1ed2240cfea2573cefc73aca1a86797840778c
   summary: >-
-    You'll configure NVIDIA Isaac Sim and Isaac Lab on an Arm-based NVIDIA DGX Spark with Grace–
-    Blackwell architecture. You'll verify the platform, build Isaac Sim, launch a Cartpole scene
-    with Python, and train a Unitree H1 locomotion policy through Isaac Lab's RSL-RL PPO integration.
+    You'll configure NVIDIA Isaac Sim and Isaac Lab on an Arm-based NVIDIA DGX Spark with Grace–Blackwell architecture. You'll verify the platform, build Isaac Sim, and launch a Cartpole scene
+    with Python. Then, you'll train a Unitree H1 locomotion policy through Isaac Lab's RSL-RL PPO integration.
     You'll review training and evaluation output to recognize effective learning.
   faqs:
   - question: What should I check on my DGX Spark before starting the setup?

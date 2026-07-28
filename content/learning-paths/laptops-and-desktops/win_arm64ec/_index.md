@@ -44,7 +44,7 @@ generated_summary_faq:
       project?
     answer: >-
       For new code, build a native application targeting Arm using Arm64EC. For existing x86 or
-      x64 code, follow the steps to migrate the project using Arm64EC on Windows 11 on Arm.
+      x64 code, migrate the project using Arm64EC on Windows 11 on Arm.
   - question: What result should I expect after building and running the sample with Arm64EC?
     answer: >-
       You should get a Windows application that runs on the Arm device and produces the expected

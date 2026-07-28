@@ -53,8 +53,8 @@ generated_summary_faq:
       Record your observations to compare how the app feels when executed natively.
   - question: Do I need to use Qt Creator to complete this Learning Path?
     answer: >-
-      No. Qt Creator is available, but the workflow focuses on building and running a Qt application
-      on Windows on Arm and doesn't require a specific IDE.
+      No. Qt Creator is available, but the you'll focus on building and running a Qt application
+      on Windows on Arm. You don't need a specific IDE.
 # END generated_summary_faq
 
 author: Dawid Borycki

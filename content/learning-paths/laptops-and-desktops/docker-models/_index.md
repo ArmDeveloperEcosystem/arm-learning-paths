@@ -39,7 +39,7 @@ generated_summary_faq:
   - question: Do I need to install or build any ML frameworks to run a model with Docker Model
       Runner?
     answer: >-
-      No. Docker Model Runner uses `llama.cpp` under the hood, so you don't need to download, build,
+      No. Docker Model Runner uses `llama.cpp`, so you don't need to download, build,
       or install LLM frameworks.
   - question: Which model should I choose for the example chat application?
     answer: >-
@@ -53,7 +53,7 @@ generated_summary_faq:
   - question: How can I confirm that the model and services are running correctly?
     answer: >-
       Open the chat interface and send a prompt; a response indicates the backend is reachable
-      and the model is active. If nothing returns, check container status and logs in Docker Desktop.
+      and the model is active. If there's no response, check the status of the container and logs in Docker Desktop.
   - question: Does local inference with Docker Model Runner require a cloud service?
     answer: >-
       No. The models run locally without cloud dependencies.

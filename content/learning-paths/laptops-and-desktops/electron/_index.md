@@ -47,7 +47,7 @@ generated_summary_faq:
   - question: Where do I configure builds for Arm64 and x64?
     answer: >-
       Edit the `package.json` file in your project folder. Add or update the Electron Builder configuration
-      so it includes both Arm64 and x64 targets as described.
+      so it includes both Arm64 and x64 targets.
   - question: How do I know the build includes both architectures?
     answer: >-
       After updating `package.json`, run your build and check that artifacts are generated for both

@@ -52,14 +52,14 @@ generated_summary_faq:
       such as `terminator` from the container shell. A window should open on the ChromeOS desktop. If a window doesn't open, revisit the display configuration steps.
   - question: Which command opens a shell inside the container for installs and configuration?
     answer: >-
-      From the Termina shell, run `lxc exec <container> -- bash`, for example `lxc exec u1 -- bash`.
+      From the Termina shell, run `lxc exec <container> -- bash` (for example, `lxc exec u1 -- bash`).
       This places you in the container’s shell to install packages and run commands.
   - question: How do I stop and remove the container when I am done?
     answer: >-
       Use `lxc stop <container>` to stop the container, then `lxc delete <container>` to remove it. Deletion
       is permanent, so run the delete command only when you no longer need the container.
 # END generated_summary_faq
-
+ 
 author: Jason Andrews
 
 generate_summary_faq: false

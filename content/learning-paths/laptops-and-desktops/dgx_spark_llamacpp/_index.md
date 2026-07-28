@@ -43,8 +43,7 @@ generated_summary_faq:
   - question: How do I know my DGX Spark is ready before building?
     answer: >-
       Confirm the Grace CPU configuration, operating system, Blackwell GPU, and CUDA drivers are
-      active, and verify the CUDA toolkit is installed. The steps reference a CUDA 13 environment;
-      check that your CUDA setup matches what the path expects before continuing.
+      active, and verify the CUDA 13 toolkit is installed.
   - question: Which build should I start with, GPU-enabled or CPU-only?
     answer: >-
       If the Blackwell GPU and CUDA are available, start with the GPU-enabled `llama.cpp` build.

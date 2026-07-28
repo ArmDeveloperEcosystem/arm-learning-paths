@@ -38,7 +38,7 @@ generated_summary_faq:
   faqs:
   - question: How do I target an Arm-hosted Windows runner in my workflow?
     answer: >-
-      Configure the job to run on a GitHub Arm-hosted Windows runner as described in the steps.
+      Configure the job to run on a GitHub Arm-hosted Windows runner.
       Update the workflow so the job selects the Arm-hosted Windows environment instead of a different
       runner type.
   - question: How do I know the job actually ran on an Arm-hosted Windows runner?
@@ -48,8 +48,8 @@ generated_summary_faq:
       an Arm-hosted Windows runner.
   - question: Which build tool should I configure, Visual Studio or MSBuild?
     answer: >-
-      Use the toolchain that matches the project’s existing build files. Follow the guidance for
-      the rotating 3D cube application referenced in this path to choose the correct build step.
+      Use the toolchain that matches the project’s existing build files. To choose the correct build step, follow the guidance for
+      the rotating 3D cube application referenced in the Learning Path.
   - question: Where can I find the sample application and detailed build steps?
     answer: >-
       The [Optimize Windows applications using Arm Performance Libraries](/learning-paths/laptops-and-desktops/windows_armpl/) Learning Path provides the
