@@ -60,8 +60,7 @@ generated_summary_faq:
       the current kernel configuration.
   - question: Why don’t I see SVE or SVE2 instructions in my Process Watch results?
     answer: >-
-      Under the current kernel configuration used in this path, SVE and SVE2 remain inactive.
-      This is expected, and the analysis focuses on Neon SIMD execution on the Grace CPU.
+      Although the Grace CPU supports SVE and SVE2, the current kernel exposes a fixed 16-byte (128-bit) SVE vector length. The `llama.cpp` workload therefore uses Neon instructions instead.
 # END generated_summary_faq
 
 author: Odin Shen
