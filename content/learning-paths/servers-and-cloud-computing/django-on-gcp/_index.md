@@ -36,7 +36,7 @@ generated_summary_faq:
   faq_generated_at: '2026-07-27T18:50:52Z'
   faq_source_hash: 6675df4c91126b157dcbf39c96a773130f1a95e2f5680913979da96f6f6c97cd
   summary: >-
-    You'll deploy a Django REST API on a Google Cloud Axion C4A virtual machine. You'll create a SUSE Linux Enterprise
+    You'll deploy a Django REST API on a Google Cloud Axion C4A VM. You'll create a SUSE Linux Enterprise
     Server VM, install Python and Django, and verify the development server. You'll then containerize
     the application for Google Kubernetes Engine, connect Cloud SQL PostgreSQL over private IP and
     Memorystore Redis, expose the service with a LoadBalancer, and measure throughput and p95 latency

@@ -13,7 +13,7 @@ You can also automate the deployment of containerized applications on AWS ECS wi
 
 This section incrementally constructs a Terraform file named `main.tf` to automate the same steps for deployment of Nginx on ECS.
 
-## Create a repository in AWS ECS for container images
+## Create a repository in Amazon ECR for container images
 
 ECR is an AWS service for sharing and deploying container applications. 
 
@@ -140,7 +140,7 @@ Push the container image to the new repository using `docker push` as in the pre
 docker push [your account number].dkr.ecr.us-east-2.amazonaws.com/myapp
 ```
 
-Refresh the repository's page to verify you’ve successfully pushed the image to the AWS ECR repository.
+Refresh the repository's page to verify you’ve successfully pushed the image to the Amazon ECR repository.
 
 ![ecs34 #center](./images/ecs34.png)
 
@@ -173,7 +173,7 @@ Navigate to Amazon ECS Clusters and verify that you can see the changes:
 
 ![ecs35 #center](./images/ecs35.png)
 
-## Configure an AWS ECS task 
+## Configure an Amazon ECS task 
 
 To run the image, you can launch it as an ECS container.
 
@@ -185,8 +185,6 @@ These specifications include:
 * Application image
 * CPU and RAM resources
 * Container launch types such as EC2 or Fargate
-
-An AWS ECS workload has two main launch types: EC2 and Fargate.
 
 Fargate is an AWS orchestration tool. It allows you to give AWS the role of managing your container life cycle and the hosting infrastructure. Fargate is serverless, which means you don’t need to provision your container using EC2 instances (virtual machines). 
 

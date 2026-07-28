@@ -52,7 +52,7 @@ generated_summary_faq:
       You can also send requests from another machine to the host running the server.
   - question: Why do I install jq?
     answer: >-
-      The examples use `jq` to work with JSON. It helps format and parse responses returned
+      The examples use `jq` to work with JSON. `jq` helps format and parse responses returned
       by the OpenAI-compatible API calls.
 # END generated_summary_faq
 

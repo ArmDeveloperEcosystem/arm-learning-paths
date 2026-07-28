@@ -75,7 +75,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Terraform
-    - AWS Elastic Container Service (ECS)
+    - Amazon Elastic Container Service (ECS)
 
 # ================================================================================
 #       FIXED, DO NOT MODIFY

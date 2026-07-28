@@ -32,7 +32,7 @@ generated_summary_faq:
   faq_generated_at: '2026-07-27T18:49:11Z'
   faq_source_hash: ee3e7ea8337b8506e30d93aaf2dbe144e5838a6740c8eff8447617f8c75629c7
   summary: >-
-    You'll provision a Google Cloud C4A Arm virtual machine running SUSE Linux, set up Python
+    You'll provision a Google Cloud C4A Arm VM running SUSE Linux, set up Python
     3.11, and install PyTorch and DeepSpeed for CPU training and benchmarking. You'll verify the
     `aarch64` architecture and Neoverse-V2 cores with `uname` and `lscpu`, create a dedicated virtual
     environment, and run a baseline model followed by a larger benchmark. From the training logs and benchmark output, you'll confirm correct
