@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you will install dependencies into an Ubuntu 22.04 or later environment. You'll need Python 3.10, 3.11, or 3.12, CUDA Toolkit v13.1.1 or later, and some ML and system dependencies.
+In this section, you will install a few dependencies into your Ubuntu environment. You'll need a working Python 3.10, 3.11 or 3.12 environment with some ML and system dependencies. 
 
 Start by making sure a supported Python version is installed:
 
