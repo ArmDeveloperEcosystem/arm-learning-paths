@@ -1,5 +1,5 @@
 ---
-title: "Deploy WordPress with MySQL on Elastic Kubernetes Service (EKS)"
+title: Deploy WordPress with MySQL on Arm-based instances using Amazon EKS
 description: Learn how to provision an Amazon EKS cluster on Arm-based Graviton instances and deploy a WordPress application with MySQL database.
 
 minutes_to_complete: 60
@@ -33,8 +33,8 @@ generated_summary_faq:
   faqs:
   - question: Can I use any machine to complete the steps?
     answer: >-
-      Yes. You can use any desktop, laptop, or virtual machine that has the AWS CLI, EKS CLI,
-      and Kubernetes CLI installed and working.
+      Yes. You can use any desktop, laptop, or virtual machine that has the AWS CLI, `eksctl`,
+      and `kubectl` installed and working.
   - question: How do I confirm the CLIs and my AWS credentials are ready?
     answer: >-
       Make sure you can run the `aws`, `eksctl`, and `kubectl` commands. Configure your AWS access key
