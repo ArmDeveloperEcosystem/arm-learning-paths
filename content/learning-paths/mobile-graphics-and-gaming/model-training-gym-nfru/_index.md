@@ -1,28 +1,64 @@
 ---
-title: Fine-tune Neural Frame Rate Upscaling models using Model Gym
-description: Learn how to train, evaluate, quantize, and export Neural Frame Rate Upscaling (NFRU) models using PyTorch and Arm's Model Gym API.
-
-draft: true
-cascade:
-    draft: true
+title: Train and evaluate Neural Frame Rate Upscaling models using Model Gym
+description: Learn how to train and evaluate Neural Frame Rate Upscaling (NFRU) models using PyTorch and Arm's Model Gym API with hardware-aware optimization.
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an advanced topic for developers exploring neural graphics and interested in training and deploying frame generation models like Neural Frame Rate Upscaling (NFRU) using PyTorch and Arm's hardware-aware backend.
+who_is_this_for: This is an advanced topic for developers exploring neural graphics and interested in training and deploying frame generation models such as Neural Frame Rate Upscaling (NFRU) using PyTorch and Arm's hardware-aware backend.
 
 learning_objectives:
-    - Understand the principles of neural graphics and how it’s applied to game performance
-    - Learn how to fine-tune and evaluate a neural network for Neural Frame Rate Upscaling (NFRU)
+    - Understand the principles of neural graphics and how it's applied to game performance
+    - Fine-tune and evaluate a neural network for Neural Frame Rate Upscaling (NFRU)
     - Use the Model Gym Python API and CLI to configure and train neural graphics models
     - Fine-tune an NFRU model with quantization-aware training (QAT) and export it to .vgf
     - Inspect the graph of exported .vgf models using Model Explorer
 
 prerequisites:
     - Basic understanding of PyTorch and machine learning concepts
-    - A development machine running Ubuntu 22.04 or later, with a CUDA-capable NVIDIA® GPU
-    - CUDA Toolkit v13.1.1 or later
+    - A development machine running Ubuntu 22.04, with a CUDA-capable NVIDIA GPU
+    - CUDA Toolkit version 11.8 or later
+    - A working environment with a Python version later than 3.10
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-20T16:07:04Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: ded91359108315578a7fe3cf0a96efc6d3d55319849ddb8c636571d2e569e011
+  summary_generated_at: '2026-07-20T16:07:04Z'
+  summary_source_hash: ded91359108315578a7fe3cf0a96efc6d3d55319849ddb8c636571d2e569e011
+  faq_generated_at: '2026-07-20T16:07:04Z'
+  faq_source_hash: ded91359108315578a7fe3cf0a96efc6d3d55319849ddb8c636571d2e569e011
+  summary: >-
+    You'll set up an Ubuntu development environment, explore Arm's Neural
+    Graphics Model Gym, and fine-tune a Neural Frame Rate Upscaling (NFRU) model using PyTorch. First, you'll launch a training notebook to configure and run NFRU training. Then, you'll train and evaluate a model using PyTorch and Model Gym, fine-tune it with quantization-aware training, and export it to VGF (.vgf) for real-time deployment. You'll also visualize and inspect the model's structure using Model Explorer.
+  faqs:
+  - question: How do I confirm my Python setup is ready before opening the notebooks?
+    answer: >-
+      Run `python3 --version` and verify it reports a version later than `3.10`. Ensure the listed Ubuntu packages
+      are installed so virtual environments and builds can complete.
+  - question: Which notebook do I open to start training NFRU?
+    answer: >-
+      Open the NFRU training notebook in the examples repository you cloned. Follow the notebook
+      cells to configure training and run the workflow.
+  - question: What output should I expect after running training and export?
+    answer: >-
+      Expect an exported `.vgf` model produced by the training and export pipeline. You can open the file with Model Explorer using the VGF adapter.
+  - question: How do I know the VGF adapter is working in Model Explorer?
+    answer: >-
+      Load a `.vgf` file and check that the model graph renders with layers, tensor shapes, and
+      connectivity visible. If the graph opens without errors, the adapter is set up correctly.
+# END generated_summary_faq
 
 author: Annie Tallund
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -57,6 +93,10 @@ further_reading:
         title: Neural Frame Rate Upscaling Early Access Program
         link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics/early-access-program
         type: website
+    - resource:
+        title: Neural Frame Rate Upscaling in Unreal Engine
+        link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/
+        type: learningpath
     - resource:
         title: Vulkan Samples Learning Path
         link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/

@@ -38,7 +38,7 @@ With Model Gym, you can:
 - Take advantage of quantization-aware training (QAT) and post-training quantization (PTQ) with ExecuTorch
 - Use an optional Docker setup for reproducibility
 
-You can choose to work with Python notebooks for rapid experimentation or use the command-line interface for automation. You'll run demonstrative notebooks and prepare to start using the CLI for your own model development.
+You can use Python notebooks for rapid experimentation or the command-line interface for automation. In this Learning Path, you'll use notebooks to train, fine-tune, export, and inspect an NFRU model.
 
 ## What you've learned and what's next
 

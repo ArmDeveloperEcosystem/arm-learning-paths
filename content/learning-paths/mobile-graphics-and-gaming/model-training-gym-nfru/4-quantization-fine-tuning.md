@@ -46,4 +46,8 @@ When the notebook completes, the exported `.vgf` file is available in:
 neural-graphics-model-gym-examples/tutorials/output/vgf
 ```
 
-You now have an exported VGF model whose graph you can inspect with Model Explorer.
+## What you've accomplished and what's next
+
+You've fine-tuned the NFRU model with QAT and exported an INT8 VGF model for deployment.
+
+Next, you'll use Model Explorer to inspect the exported model's graph.
