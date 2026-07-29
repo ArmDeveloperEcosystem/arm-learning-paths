@@ -1,46 +1,34 @@
 ---
-title: What is Litespark-Inference?
+title: Understand Litespark-Inference and BitNet b1.58
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## The short version
+## Overview
 
-Litespark-Inference is an open-source runtime that runs
-ternary-weight language models - such as
-[BitNet b1.58](https://arxiv.org/abs/2402.17764) - on the CPU you
-already have.
-No GPU. No CUDA wheel. No PyTorch installation. The dependency
-footprint after `pip install` is `numpy`, `safetensors`, and
-`tokenizers`.
+Litespark-Inference is an open-source runtime designed to execute ternary-weight language models, such as [BitNet b1.58](https://arxiv.org/abs/2402.17764), directly on host CPUs. It performs inference without using a GPU or PyTorch at runtime. The PyTorch and Transformers packages are declared as dependencies for benchmarking and model-loading utilities, but the torchless inference path relies only on `numpy`, `safetensors`, and `tokenizers`.
 
 It runs on:
 
 | Platform | Kernel selected automatically |
 |---|---|
-| **Linux on x86_64** with AVX-512 (Intel Ice Lake+ / AMD Zen 4+) | AVX-512 + VNNI |
-| **Linux on x86_64**, Intel Core Ultra (no AVX-512) | AVX-VNNI (256-bit) |
-| **Linux on x86_64** without VNNI (AMD Zen 2-3, pre-Skylake-X Intel) | AVX2 + FMA fallback |
-| **Linux on Arm (Graviton 2/3/4, Ampere, etc.)** | NEON + SDOT |
-| **macOS on Apple silicon (M1/M2/M3/M4/M5)** | NEON + SDOT |
+| Linux on Arm Neoverse | NEON + SDOT |
+| macOS on Apple Silicon | NEON + SDOT |
+| Linux on x86_64 with AVX-512 | AVX-512 + VNNI |
+| Linux on x86_64 with Intel Core Ultra | AVX-VNNI (256-bit) |
+| Linux on x86_64 (no VNNI) | AVX2 + FMA fallback |
 
-A single `pip install` reads your CPU's feature flags and compiles the
-right C++ source for you. You don't pick the kernel; it picks itself.
-The [Litespark-Inference install guide](/install-guides/litespark-inference/)
-covers the install step for each platform.
+During `pip install`, the build process automatically detects your CPU's hardware feature flags and compiles the appropriate C++ kernel for your machine.
 
-## Why BitNet on the CPU
+## How BitNet Accelerates CPU Inference
 
 BitNet b1.58 stores each weight as a value in `{-1, 0, +1}` and packs
-four weights into one byte. That means:
+four weights into one byte. This provides two key benefits:
 
-- The model file is around 6x smaller than the equivalent `bfloat16`
-  model (around 497 MB packed versus around 4,600 MB unpacked).
-- Every matmul reduces to `int8` activation x ternary weight - exactly
-  what a CPU's SIMD dot-product instructions (SDOT on Arm, VNNI on
-  x86) are designed for.
+- Reduced Memory Footprint: The model file is around 6x smaller than the equivalent BF16 model (around 497 MB packed versus around 4,600 MB unpacked).
+- SIMD Compute Efficiency: Every matrix multiplication reduces to INT8 activation × ternary weight, taking direct advantage of CPU SIMD dot-product instructions, such as `SDOT` on Arm Neon and `VNNI` on x86.
 
 The net effect: a 2-billion-parameter model that fits in under 1 GB of
 RAM and generates tokens at interactive speed on a normal laptop or
@@ -55,19 +43,17 @@ on every platform tested.
 
 ![Resident memory, Litespark-Inference versus PyTorch, on Apple M5 Max, AMD Zen 4, and Intel Core Ultra 9#center](memory-comparison.png "Cross-platform memory usage comparison")
 
+## What you've learned
+
+In this section, you learned:
+- How Litespark-Inference enables fast, lightweight CPU inference without GPU or PyTorch runtime dependencies.
+- How ternary quantization (`BitNet b1.58`) compresses resident memory footprint and uses Arm Neon `SDOT` SIMD instructions.
+
 ## What you'll do in this Learning Path
 
-1. **Run BitNet-2B from the CLI in one line:**
-   `litespark-inference generate "Why is BitNet fast on CPU?" --max-tokens 64`.
+1. Run BitNet-2B from the command line interface (CLI).
+2. Execute model inference using Python and the `BitNet` API.
+3. Compare embedding dtypes (BF16, INT8, and INT4) for memory and quality trade-offs.
+4. (Optional) Benchmark Litespark-Inference performance against a PyTorch baseline.
 
-2. **Run the same model from a short Python script** using the
-   high-level `BitNet.from_pretrained(...).generate(...)` API.
-
-3. **Tune the embedding dtype** (`bf16` / `int8` / `int4`) to trade
-   memory for quality.
-
-4. **(Optional)** Run a head-to-head benchmark against `transformers`
-   with `torch.bfloat16` on the same machine, with memory, TTFT,
-   throughput, and energy-per-token numbers.
-
-The next chapter runs BitNet-2B from the CLI and from Python.
+The next section demonstrates how to run BitNet-2B from the CLI and from Python.
