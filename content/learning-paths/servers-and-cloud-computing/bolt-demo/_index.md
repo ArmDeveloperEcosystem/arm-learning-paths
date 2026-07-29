@@ -14,7 +14,7 @@ learning_objectives:
     - Evaluate the impact of BOLT optimizations using performance metrics and profiling data
 
 prerequisites:
-    - An AArch64 system running Linux with [perf](/install-guides/perf/) installed
+    - An AArch64 system running Linux with [LLVM BOLT](/install-guides/llvm/#verify-bolt-tools) and [perf](/install-guides/perf/) installed
     - Linux kernel version 6.17 or later to enable Branch Record Buffer Extension ([BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/brbe/))
     - Linux kernel version 6.14 or later for Arm Statistical Profiling Extension ([SPE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/spe/))
     - GCC version 13.3 or later to compile the example program ([GCC](/install-guides/gcc/) )
@@ -121,4 +121,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
