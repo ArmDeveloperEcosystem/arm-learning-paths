@@ -51,38 +51,7 @@ Run the following command in the terminal on your host device to confirm the ins
 topo --help
 ```
 
-The output confirms that Topo is present and describes the available commands:
-
-```output
-Topo CLI
-
-Usage:
-  topo [command]
-
-Available Commands:
-  clone       Clone a Project
-  completion  Generate the autocompletion script for the specified shell
-  configure   Configure project parameters
-  deploy      Deploy services using the compose file
-  extend      Add services from a Topo Project to the compose file
-  health      Check the target environment
-  help        Help about any command
-  init        Initialise a new project in the current directory
-  install     Install components to the target
-  projects    List available Topo Projects
-  ps          List containers on the target for the current Compose project.
-  service     Manage services in compose files
-  setup-keys  Generate SSH keys for the target and install the public key on the target
-  stop        Stop a currently running deployment
-  upgrade     Upgrade topo to the latest version
-
-Flags:
-  -h, --help            help for topo
-  -o, --output string   output format: plain or json (default "plain")
-  -v, --version         version for topo
-
-Use "topo [command] --help" for more information about a command.
-```
+If Topo is installed, the command displays the available commands and options.
 
 ## What you've accomplished and what's next
 
