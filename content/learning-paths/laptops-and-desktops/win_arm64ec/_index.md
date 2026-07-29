@@ -14,9 +14,52 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-28T16:28:23Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 4069c5bce1ce4b689a7a67d740fc077dc55c9b0bfbab392f5984ba0bdd9e59c3
+  summary_generated_at: '2026-07-28T16:28:23Z'
+  summary_source_hash: 4069c5bce1ce4b689a7a67d740fc077dc55c9b0bfbab392f5984ba0bdd9e59c3
+  faq_generated_at: '2026-07-28T16:28:23Z'
+  faq_source_hash: 4069c5bce1ce4b689a7a67d740fc077dc55c9b0bfbab392f5984ba0bdd9e59c3
+  summary: >-
+    You'll use Arm64EC with Visual Studio on Windows 11 on Arm to build and compare a simple
+    application. You'll create native Arm64EC binaries, run them on the device, compare build
+    configurations, and examine how the ABI supports migration from x86 or x64 code and dependencies.
+  faqs:
+  - question: How do I know my device is ready to build with Arm64EC?
+    answer: >-
+      Use a Windows 11 on Arm computer. The Lenovo Thinkpad
+      X13s is one example of suitable hardware.
+  - question: Which Visual Studio version should I install for this path?
+    answer: >-
+      Install Visual Studio 2022 or later.
+  - question: Which option should I choose for a new project versus migrating an existing x86/x64
+      project?
+    answer: >-
+      For new code, build a native application targeting Arm using Arm64EC. For existing x86 or
+      x64 code, migrate the project using Arm64EC on Windows 11 on Arm.
+  - question: What result should I expect after building and running the sample with Arm64EC?
+    answer: >-
+      The build produces a Windows application that runs on the Arm device and produces the expected
+      output for the simple example. Successful execution confirms the build and configuration
+      are correct.
+  - question: What should I record to compare performance across build configurations?
+    answer: >-
+      Use the same simple application, run each build on the device, and note observed runtime
+      behavior and timing. Keep the test conditions consistent so differences reflect the build
+      configuration.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -43,4 +86,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
