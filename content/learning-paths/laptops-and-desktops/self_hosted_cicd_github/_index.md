@@ -57,8 +57,8 @@ generated_summary_faq:
       and choose a name for your new repository.
   - question: What result should I expect when the pipeline finishes successfully?
     answer: >-
-      The workflow builds and pushes an Arm64 Docker image of the .NET application to your Docker Hub repository.
-      You should see a new image tag in the repository you created.
+      The runner builds and pushes an Arm64 Docker image of the .NET application to your Docker Hub repository.
+      The runner creates a new image tag in the repository you created.
 # END generated_summary_faq
 
 author: Dawid Borycki

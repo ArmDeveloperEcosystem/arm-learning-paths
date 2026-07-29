@@ -41,9 +41,9 @@ generated_summary_faq:
   faqs:
   - question: What result should I expect after installing `faster-whisper`?
     answer: >-
-      You should be able to transcribe a short audio sample or live microphone input with readable
-      text and no runtime errors. Use this to confirm the installation before moving on to pipeline
-      changes.
+      After a successful installation, you can transcribe a short audio sample or live microphone input
+      with readable text and no runtime errors. Use this to confirm the installation before moving
+      on to pipeline changes.
   - question: When should I upgrade the speech model in the CPU STT pipeline?
     answer: >-
       Upgrade after you confirm baseline transcription works. The build step adds a more accurate

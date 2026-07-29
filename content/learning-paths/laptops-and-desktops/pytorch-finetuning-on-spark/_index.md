@@ -52,8 +52,7 @@ generated_summary_faq:
       structure.
   - question: What output indicates the fine-tuning completed successfully?
     answer: >-
-      The process produces a fine-tuned Llama model that the testing step can load with vLLM.
-      You should be able to serve it in the vLLM container without errors.
+      The process produces a fine-tuned Llama model that the testing step can load with vLLM. If you're able to serve the model in the vLLM container without errors, the fine-tuning completed successfully.
   - question: What result should I expect when comparing base and fine-tuned models?
     answer: >-
       On Raspberry Pi datasheet questions, the fine-tuned model should answer factual queries

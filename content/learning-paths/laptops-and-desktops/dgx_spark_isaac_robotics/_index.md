@@ -52,8 +52,8 @@ generated_summary_faq:
       the scene runs without errors and responds to actions, the environment is ready.
   - question: What result should I expect when running the Cartpole example?
     answer: >-
-      You should see a running simulation where the cart and pole respond to actions driven by
-      your Python control loop. This validates the simulation loop and your ability to step and
+      You'll see a running simulation where the cart and pole respond to actions driven by
+      your Python control loop. The running simulation validates the simulation loop and your ability to step and
       control the environment.
   - question: How do I know the humanoid policy is training correctly with Isaac Lab and RSL-RL?
     answer: >-

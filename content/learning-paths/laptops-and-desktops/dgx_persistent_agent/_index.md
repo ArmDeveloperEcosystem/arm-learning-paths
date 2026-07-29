@@ -40,7 +40,7 @@ generated_summary_faq:
   faqs:
   - question: How do I know the base DGX Spark AI runtime is running correctly?
     answer: >-
-      You should see containers for Ollama (inference), Qdrant (vector memory), and Open WebUI
+      You'll see containers for Ollama (inference), Qdrant (vector memory), and Open WebUI
       (browser access) running and healthy. Confirm that the persistent workspace exists and is
       mounted as expected.
   - question: Where should I put documents so Hermes picks them up automatically?
@@ -59,7 +59,7 @@ generated_summary_faq:
       path is wired correctly.
   - question: How can I confirm persistent semantic memory is active in Qdrant?
     answer: >-
-      Qdrant should store an embedding for each processed document. Check that new vector entries
+      Qdrant stores an embedding for each processed document. Check that new vector entries
       appear after Hermes handles files and are available for contextual retrieval in the
       workflow.
 # END generated_summary_faq

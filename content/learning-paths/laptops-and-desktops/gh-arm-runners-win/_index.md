@@ -56,8 +56,8 @@ generated_summary_faq:
       rotating 3D cube application and its build instructions. Use that resource for detailed build steps.
   - question: What result should I expect after a successful workflow run?
     answer: >-
-      The workflow shows a successful job status and the logs indicate a completed build. You
-      should see the Windows build outputs for the sample application, and any configured artifacts
+      The workflow shows a successful job status and the logs indicate a completed build. The
+      run contains the Windows build outputs for the sample application. Any configured artifacts
       appear on the run’s summary page.
 # END generated_summary_faq
 

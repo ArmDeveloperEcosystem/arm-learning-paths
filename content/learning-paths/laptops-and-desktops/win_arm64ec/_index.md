@@ -47,7 +47,7 @@ generated_summary_faq:
       x64 code, migrate the project using Arm64EC on Windows 11 on Arm.
   - question: What result should I expect after building and running the sample with Arm64EC?
     answer: >-
-      You should get a Windows application that runs on the Arm device and produces the expected
+      The build produces a Windows application that runs on the Arm device and produces the expected
       output for the simple example. Successful execution confirms the build and configuration
       are correct.
   - question: What should I record to compare performance across build configurations?

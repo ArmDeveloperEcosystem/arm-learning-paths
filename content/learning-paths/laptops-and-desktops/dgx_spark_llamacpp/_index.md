@@ -47,11 +47,11 @@ generated_summary_faq:
   - question: Which build should I start with, GPU-enabled or CPU-only?
     answer: >-
       If the Blackwell GPU and CUDA are available, start with the GPU-enabled `llama.cpp` build.
-      Also build the CPU-only version to run on the Grace CPU and to keep a flexible deployment
+      Then, build the CPU-only version to run on the Grace CPU and to keep a flexible deployment
       option.
   - question: What result should I expect after a successful build?
     answer: >-
-      You should get a compiled `llama.cpp` binary targeting either the GPU or the CPU that runs
+      The build produces a compiled `llama.cpp` binary targeting either the GPU or the CPU that runs
       quantized LLM inference. A quick test run should complete without errors on the DGX Spark.
   - question: How do I validate that the CPU-only build uses Armv9 vector features?
     answer: >-

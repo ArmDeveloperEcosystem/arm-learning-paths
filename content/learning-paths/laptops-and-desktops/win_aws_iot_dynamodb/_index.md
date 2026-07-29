@@ -47,8 +47,7 @@ generated_summary_faq:
       configuring it.
   - question: What should I name the rule?
     answer: >-
-      Use `send_message_to_dynamodb`. You can choose a different valid name,
-      but you should use the suggested name to stay consistent with the Learning Path.
+      Use `send_message_to_dynamodb`. While you can choose a different valid name, use the suggested name to stay consistent with the Learning Path.
   - question: Which MQTT topic should the rule target?
     answer: >-
       Use the same topic that the weather station emulator uses in the prerequisite Learning Path [Create IoT applications with Windows on Arm and AWS IoT Core](/learning-paths/laptops-and-desktops/win_aws_iot/). 

@@ -48,8 +48,7 @@ generated_summary_faq:
   - question: What should I expect after starting the Docker Compose project?
     answer: >-
       Docker Compose brings up a Flask-based web frontend and a backend that serves AI responses
-      through Docker Model Runner. You should be able to enter a prompt and receive a generated
-      reply.
+      through Docker Model Runner. You can enter a prompt and receive a generated reply.
   - question: How can I confirm that the model and services are running correctly?
     answer: >-
       Open the chat interface and send a prompt; a response indicates the backend is reachable

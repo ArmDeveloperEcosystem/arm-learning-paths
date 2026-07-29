@@ -30,7 +30,7 @@ generated_summary_faq:
   summary: >-
     You'll create an Arm-based Ubuntu 24.04 VM on a Windows on Arm device with Hyper-V.
     You'll download the Arm ISO, create the VM manually, attach the ISO,
-    and boot the Linux installer. The workflow provides a repeatable process you can adapt to other
+    and boot the Linux installer. You can adapt these steps as a repeatable process for other
     Arm Linux distributions.
   faqs:
   - question: Which Ubuntu image do I need to download?
@@ -50,7 +50,7 @@ generated_summary_faq:
       and created the VM manually rather than with Quick Create.
   - question: I want to use a different Linux distribution. What should I change?
     answer: >-
-      This path uses Ubuntu as an example. Use the same approach with the
+      Ubuntu is used in the Learning Path as an example. Use the same approach with the
       Arm ISO and documentation of the distribution of your choice as you adapt the steps.
 # END generated_summary_faq
 

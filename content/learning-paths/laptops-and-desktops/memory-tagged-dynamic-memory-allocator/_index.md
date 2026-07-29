@@ -31,7 +31,7 @@ generated_summary_faq:
   faq_generated_at: '2026-07-28T16:22:41Z'
   faq_source_hash: 87d4afe4ce7f0cef113cd61fd712fde073cca0eaafbe86a2066b76a117328d11
   summary: >-
-    You'll add Arm MTE checks to a simple Linux dynamic memory allocator.
+    You'll add Arm MTE checks to a Linux dynamic memory allocator.
     You'll enable tagged addresses and synchronous checking, update the allocator and tag helpers,
     and run misuse examples that trigger mismatches. You'll trace tag setup and checks across
     `heap.c`, `heap.h`, `mte_utils.c`, `mte_utils.h`, and `main.c`, then inspect the resulting exceptions.
