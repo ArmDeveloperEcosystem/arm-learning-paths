@@ -49,17 +49,9 @@ This Learning Path uses the default personal runtime configuration, but every ex
 
 ## Trace the Application Request Path
 
-In this Learning Path, Telegram requests follow this path:
+The following architecture shows how the reference runtime routes Telegram requests to local capabilities while keeping persistent application data on hardware you control.
 
-```text
-Telegram message
-    -> Reference runtime Telegram gateway
-    -> AgentRegistry and TaskDispatcher
-        |-- Memory or RAG -> Ollama and Qdrant
-        |-- Web search    -> Playwright browser worker
-        |-- External data -> Purpose-built local skill
-        `-- General chat  -> Local LLM endpoint
-```
+![Architecture of the OpenClaw-based local-first reference runtime, including Telegram, request routing, local capabilities, persistent state, and replaceable inference engines#center](openclaw_runtime_architecture.png "OpenClaw-based local-first reference runtime")
 
 The reference runtime can also start a configured workflow automatically, without requiring a new Telegram message from the user:
 
