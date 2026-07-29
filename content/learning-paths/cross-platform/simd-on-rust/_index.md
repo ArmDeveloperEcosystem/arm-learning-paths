@@ -16,9 +16,51 @@ learning_objectives:
 prerequisites:
     - An Arm-based computer with recent versions of a C compiler (Clang or GCC) and a Rust compiler installed
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-29T16:49:55Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: a051c519c1a4969f30d5a81e46823e77f0c15f163011b3a38f4c05104d853249
+  summary_generated_at: '2026-07-29T16:49:55Z'
+  summary_source_hash: a051c519c1a4969f30d5a81e46823e77f0c15f163011b3a38f4c05104d853249
+  faq_generated_at: '2026-07-29T16:49:55Z'
+  faq_source_hash: a051c519c1a4969f30d5a81e46823e77f0c15f163011b3a38f4c05104d853249
+  summary: >-
+    Write SIMD code for Arm with Rust by translating familiar C examples into Rust. You start with
+    Arm Advanced SIMD (Neon) intrinsics in C, mirror them with `std::arch`, and explore portable SIMD
+    with `std::simd`. You implement pairwise averaging, a dot-product sum of absolute differences,
+    a 4x4 matrix transpose, and a DCT butterfly, then compare C and Rust output and disassembly.
+  faqs:
+  - question: Which Rust SIMD API should I use when porting the C Neon intrinsics examples?
+    answer: >-
+      Use `std::arch` for a one-to-one match with the C Neon intrinsics. Use `std::simd` when you
+      prefer a portable abstraction, as shown in the cross-platform SIMD steps.
+  - question: How do I know the pairwise average example produced the right result?
+    answer: >-
+      The program averages corresponding elements from two arrays. Compare its output with the
+      scalar calculation `(A[i] + B[i]) / 2` for each index.
+  - question: What output should I expect from the dot product (`vdotq_u32`) example?
+    answer: >-
+      The example prints the input arrays and then reports one sum of absolute differences (SAD)
+      value. Compare the arrays and SAD total with the expected calculation.
+  - question: What should I check if the Rust intrinsics code does not compile?
+    answer: >-
+      Confirm that the imports and architecture-specific attributes match the example, and target
+      an Arm platform that supports the intrinsics. Mismatched names or attributes can cause build errors.
+  - question: How do I compare the C and Rust implementations for the transpose or butterfly steps?
+    answer: >-
+      Build and run both versions, then compare their printed outputs. Review the disassembly to
+      see how each implementation maps to Arm Neon instructions.
+# END generated_summary_faq
+
 author: Konstantinos Margaritis
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -66,4 +108,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

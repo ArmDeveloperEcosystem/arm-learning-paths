@@ -17,10 +17,55 @@ prerequisites:
     - Access to Arm Neoverse V2 and Intel x86 Linux systems to run the code example
     - Basic understanding of CPU pipeline concepts and performance bottlenecks
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-29T16:51:46Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 5f4b05e3d962476c67c4a4400c8fa71f04412f3f0354d5c3123f38af57791304
+  summary_generated_at: '2026-07-29T16:51:46Z'
+  summary_source_hash: 5f4b05e3d962476c67c4a4400c8fa71f04412f3f0354d5c3123f38af57791304
+  faq_generated_at: '2026-07-29T16:51:46Z'
+  faq_source_hash: 5f4b05e3d962476c67c4a4400c8fa71f04412f3f0354d5c3123f38af57791304
+  summary: >-
+    Compare Intel x86 and Arm Neoverse top-down performance analysis with PMU counters. You examine
+    slot-based accounting—four issue slots per cycle on Intel and eight rename slots on Neoverse V2—
+    and interpret Retiring, Bad Speculation, Frontend Bound, and Backend Bound. You build an FP64
+    divide-chain benchmark, collect results with Linux Perf and `topdown-tool`, and compare category
+    percentages instead of raw counter names.
+  faqs:
+  - question: Which tool should I use to collect top-down metrics on each system?
+    answer: >-
+      Use Linux Perf on Intel x86 systems and `topdown-tool` on Arm systems. Both systems need Perf;
+      Arm systems also need `topdown-tool`.
+  - question: How do I build and run the example benchmark?
+    answer: >-
+      Save the code as `core-bound-div-chain.c`, compile it with GCC or Clang, and run it as
+      `./core-bound-div-chain <iterations>`.
+  - question: What result should I expect when I profile the example workload?
+    answer: >-
+      The tools report Retiring, Bad Speculation, Frontend Bound, and Backend Bound. The FP64
+      divide-chain example is designed to show a prominent Backend Bound category.
+  - question: How do I compare results across Intel and Arm given different slot definitions?
+    answer: >-
+      Compare the top-level category percentages instead of raw event counts. Intel uses four issue
+      slots per cycle, while Neoverse V2 uses eight rename slots. The accounting changes, but the
+      category meanings remain comparable.
+  - question: What should I check if my Intel and Arm breakdowns look very different?
+    answer: >-
+      Verify that you ran the same benchmark with the same iteration count, using Perf on x86 and
+      `topdown-tool` on Arm. Microarchitecture and event-formula differences are expected, so focus
+      on the relative distribution across the four categories.
+# END generated_summary_faq
+
 author:
     - Jason Andrews
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -66,4 +111,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

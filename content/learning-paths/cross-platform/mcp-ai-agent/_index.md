@@ -18,9 +18,53 @@ prerequisites:
     - Basic understanding of Large Language Models (LLMs) and how they are used in local inference.
     - Understanding of AI agents and the OpenAI Agent SDK (or similar frameworks).
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-29T16:41:23Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 39d489081bfa22125a4046c17d5c00a32c0d7b298cba7b6a12373cf3cf6bac04
+  summary_generated_at: '2026-07-29T16:41:23Z'
+  summary_source_hash: 39d489081bfa22125a4046c17d5c00a32c0d7b298cba7b6a12373cf3cf6bac04
+  faq_generated_at: '2026-07-29T16:41:23Z'
+  faq_source_hash: 39d489081bfa22125a4046c17d5c00a32c0d7b298cba7b6a12373cf3cf6bac04
+  summary: >-
+    Deploy a Model Context Protocol (MCP) server on Raspberry Pi 5 and connect it to an AI agent
+    built with the OpenAI Agent SDK. You install `uv`, bootstrap a FastMCP server with CPU-temperature
+    and weather tools, expose it through an `ngrok` tunnel, and configure an agent on a separate Arm
+    Linux machine. You then prompt the agent to retrieve live values from the Pi and external sources.
+  faqs:
+  - question: Where do I run the MCP server, and where do I run the AI agent?
+    answer: >-
+      Run the MCP server on Raspberry Pi 5. Run the AI agent on your development machine and connect
+      it to the Pi over your network or through the `ngrok` tunnel.
+  - question: Do I need `uv` installed on both my Raspberry Pi and my development machine?
+    answer: >-
+      Yes. Install `uv` on Raspberry Pi to set up the MCP server, and install it on your development
+      machine to initialize and run the agent project.
+  - question: After I run `uv init` for the agent, what files should appear?
+    answer: >-
+      `uv init` creates a `.venv` virtual environment and a `pyproject.toml` file in the project
+      directory. Both files indicate that the project environment is ready.
+  - question: How do I point the agent at the MCP server on my Raspberry Pi?
+    answer: >-
+      Add the MCP server address to the agent configuration, using either the `ngrok` HTTPS forwarding
+      URL or the Pi's reachable network address. A correct endpoint lets the agent start without
+      connection errors.
+  - question: How do I know the CPU temperature and weather tools are actually being used?
+    answer: >-
+      Prompt the agent to report Raspberry Pi's CPU temperature or look up weather data. The response
+      includes the requested values. If it does not, verify that the server is running and the
+      connection details match.
+# END generated_summary_faq
+
 author: Andrew Choi
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -57,4 +101,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

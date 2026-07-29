@@ -24,9 +24,55 @@ prerequisites:
     - Installation of Android Development Studio and adb (if you're targeting an Android phone with SME2 support)
     - Compiler support for SME2 instructions (for example, LLVM 18 or later with SME2 backend support)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-29T16:43:54Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: eb01b77f36323331c080615edcbddbf8cb56cf005f2249f1ea309ab1dbec8616
+  summary_generated_at: '2026-07-29T16:43:54Z'
+  summary_source_hash: eb01b77f36323331c080615edcbddbf8cb56cf005f2249f1ea309ab1dbec8616
+  faq_generated_at: '2026-07-29T16:43:54Z'
+  faq_source_hash: eb01b77f36323331c080615edcbddbf8cb56cf005f2249f1ea309ab1dbec8616
+  summary: >-
+    Start with a baseline C matrix-multiplication kernel, then build SME2-accelerated versions with
+    intrinsics and assembly on supported Arm hardware or an emulator. You verify the toolchain with
+    CMake, learn how SME streaming mode and ZA state work through Arm C Language Extensions, and
+    implement a row-major reference kernel. You then benchmark SME2 versions and validate them against
+    the baseline.
+  faqs:
+  - question: 'Which setup should I use: native SME2 hardware or emulation?'
+    answer: >-
+      Use native SME2 hardware if you have a supported device, such as a Mac with an M4 chip or
+      some Android phones. Otherwise, use the emulation option and check the setup section's device
+      list for native support.
+  - question: CMake is finding the wrong Clang; what should I do?
+    answer: >-
+      Point CMake to the intended Clang when configuring the project. The system default might not
+      support SME2, so select the compiler explicitly as described in the environment check.
+  - question: How do I verify the environment is ready before continuing?
+    answer: >-
+      Build the examples in `code-examples/learning-paths/cross-platform/multiplying-matrices-with-sme2`
+      using CMake. A successful build and run confirms that the toolchain, compiler, and hardware
+      or emulator are configured correctly.
+  - question: When should I enable streaming mode, and do I need to handle ZA state myself?
+    answer: >-
+      Enable streaming mode on functions that use SME features by applying the appropriate Arm C
+      Language Extensions. The compiler manages streaming transitions and ZA save and restore, so
+      you do not implement those operations manually.
+  - question: What result should I expect from the baseline C matrix multiplication?
+    answer: >-
+      The baseline row-major implementation computes the reference output matrix. Keep that result
+      and compare it with the intrinsics and assembly versions during benchmarking and validation.
+# END generated_summary_faq
+
 author: Arnaud de Grandmaison
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -106,4 +152,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

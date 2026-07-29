@@ -17,9 +17,53 @@ prerequisites:
     - Familiarity with the Linux command line, Git, and building C++ projects with CMake
     - Internet access to download source code, model assets, and sample data
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-29T16:43:21Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: bf3183bd62b590d4930f0bcf9c9dc836bbc5206a991be7bec5e18e9c20942352
+  summary_generated_at: '2026-07-29T16:43:21Z'
+  summary_source_hash: bf3183bd62b590d4930f0bcf9c9dc836bbc5206a991be7bec5e18e9c20942352
+  faq_generated_at: '2026-07-29T16:43:21Z'
+  faq_source_hash: bf3183bd62b590d4930f0bcf9c9dc836bbc5206a991be7bec5e18e9c20942352
+  summary: >-
+    Build MNN natively on Armv9 Linux, prepare a prebuilt Omni multimodal model, and validate a
+    CPU-only inference workflow. You compile MNN, use `llm_demo` to establish a text-only baseline,
+    add a vision shelf audit that identifies the sparsest priority zone, and handle unclear images
+    with `NOT_SURE`. You then convert an audio prompt into a reproducible, semicolon-separated
+    restock ticket.
+  faqs:
+  - question: How do I know the MNN build worked and the Omni model is ready?
+    answer: >-
+      Use the `llm_demo` binary to load the prebuilt Omni MNN model package. If it loads without
+      errors and a simple prompt produces tokens, continue to the next steps.
+  - question: What should I look for in the text-only baseline output?
+    answer: >-
+      The baseline produces a predictable response with visible token generation. Record the output
+      so you can compare behavior after adding vision and audio inputs.
+  - question: What output should the vision shelf audit produce?
+    answer: >-
+      The audit estimates coverage for the top, middle, and bottom shelf levels, identifies the
+      sparsest priority zone, and gives a short reason. If the image is unclear, it returns `NOT_SURE`.
+  - question: Do I need a GPU or cloud service to run these demos on Armv9?
+    answer: >-
+      No. The workflow uses a native CPU-only MNN build, and the vision reasoning runs locally
+      without cloud round trips.
+  - question: What does the audio-to-ticket result look like and how is it used?
+    answer: >-
+      The result is a single-line, semicolon-separated ticket for predictable parsing and consistent
+      terminal display. Combine it with the vision audit's priority zone to create an actionable
+      restock ticket.
+# END generated_summary_faq
+
 author: Odin Shen
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -70,4 +114,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

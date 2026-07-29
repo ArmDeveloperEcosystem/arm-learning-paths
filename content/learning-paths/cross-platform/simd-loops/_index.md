@@ -18,11 +18,56 @@ prerequisites:
     - Some familiarity with SIMD programming and Neon intrinsics
     - Recent toolchains that support SVE/SME (GCC 13+ or Clang 16+ recommended)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-29T16:49:08Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: b1c43e1bf971db4582ca358c98dab2c7e6e047d6c79bfcc0db148bc575f33679
+  summary_generated_at: '2026-07-29T16:49:08Z'
+  summary_source_hash: b1c43e1bf971db4582ca358c98dab2c7e6e047d6c79bfcc0db148bc575f33679
+  faq_generated_at: '2026-07-29T16:49:08Z'
+  faq_source_hash: b1c43e1bf971db4582ca358c98dab2c7e6e047d6c79bfcc0db148bc575f33679
+  summary: >-
+    Use the SIMD Loops project to explore Arm Neon, Scalable Vector Extension (SVE and SVE2), and
+    Scalable Matrix Extension (SME2) kernels. You clone the repository, verify the Arm environment,
+    inspect `loops.inc`, and study loop 202 and `matmul_fp32` across scalar, Neon, SVE/SVE2, and SME2
+    variants. You build selected kernels, compare them with the C reference, and examine predication,
+    vector-length-agnostic programming, gather/scatter, streaming mode, and ZA tiles.
+  faqs:
+  - question: How do I know I’m running on an Arm machine before using SIMD Loops?
+    answer: >-
+      Run `uname -m`. Expect `aarch64` on Linux or `arm64` on macOS. If you see another value, switch
+      to an Arm-based system before continuing.
+  - question: Where do I find the list of available loop kernels and their descriptions?
+    answer: >-
+      Browse the `loops` directory and open `loops.inc`. It lists the kernels with brief descriptions
+      and the identifiers used by the project.
+  - question: Which files should I open to study the matrix multiplication example?
+    answer: >-
+      Open `loops/loop_202.c` and locate `inner_loop_202()` around lines 60–70. Then open
+      `loops/matmul_fp32.c`, which implements `C[M × N] = A[M × K] × B[K × N]`.
+  - question: What SIMD features can I explore with the kernels in SIMD Loops?
+    answer: >-
+      The kernels demonstrate predication, vector-length-agnostic (VLA) programming, gather/scatter,
+      streaming mode, and ZA tiles. Implementations use C and Arm C Language Extensions (ACLE)
+      intrinsics.
+  - question: How do I validate a kernel and compare Neon, SVE/SVE2, and SME2 implementations?
+    answer: >-
+      Build and run the selected kernel with the project runner, then validate its results against
+      the C reference implementation. Choose the build target for each variant to compare scalar,
+      Neon, SVE/SVE2, and SME2 behavior.
+# END generated_summary_faq
+
 author:
     - Alejandro Martinez Vicente
     - Mohamad Najem
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -108,4 +153,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
