@@ -1,47 +1,85 @@
 ---
-title: Use BOLT with ETM
-weight: 5
+title: Optimize with ETM profiling
+weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## BOLT with ETM
+## What is ETM?
 
-The steps to optimize an executable with BOLT using Perf ETM are below.
+ETM (Embedded Trace Macrocell) is an Arm trace unit that can record instruction flow from a running program. Linux perf can collect ETM trace data and store it in a `perf.data` file, such as `prof/etm.data`.
 
-### Collect Perf data with ETM 
+For BOLT, ETM can provide detailed branch information that helps reconstruct control flow. This makes ETM useful for profile-guided code layout optimization, especially when you need richer trace information than basic PMU sampling provides.
 
-Run your executable in the normal use case and collect an ETM performance profile. This will output a `perf.data` file containing the profile and will be used to optimize the executable.
+ETM traces can be large, so this section also shows ETM AutoFDO, which uses trace strobing to collect smaller trace samples.
 
-Record ETM while running your application. Substitute the actual name of your application for `executable`:
+{{% notice Note %}}
+The ETM commands in this section require hardware, kernel, and perf support for CoreSight ETM. Validate the workflow on your ETM-capable system before using it for performance conclusions.
+{{% /notice %}}
 
-```bash { target="ubuntu:latest" }
-perf record -e cs_etm//u -o perf.data -- ./executable
+## When to use ETM
+
+Use ETM when your system exposes CoreSight ETM through Linux perf and you want detailed trace-based profile data for BOLT.
+
+ETM can provide high-quality control-flow information, but it may generate large profile files and depends on CoreSight support in the hardware, kernel, and perf tools.
+
+## Check ETM availability
+
+ETM is exposed through Linux perf as a CoreSight event. Check whether your system supports ETM by running:
+
+```bash
+perf list | grep cs_etm
 ```
 
-Perf prints the size of the `perf.data` file:
+If ETM is available, the output is similar to:
 
 ```output
-[ perf record: Woken up 10 times to write data ]
-[ perf record: Captured and wrote 1.254 MB perf.data ]
+cs_etm//           [Kernel PMU event]
+cs_etm/autofdo/    [Kernel PMU event]
 ```
 
-### Convert the Profile into BOLT format
+If `cs_etm` is not listed, your system or perf installation might not expose CoreSight ETM tracing.
+You might need to build a version of perf with Arm CoreSight enabled. For more information, see the [CoreSight perf documentation](https://docs.kernel.org/trace/coresight/coresight-perf.html).
 
-`perf2bolt` converts the profile into a BOLT data format. For the given sample data, `perf2bolt` finds all branch events in the profile, maps them back to the assembly instructions, and outputs a count of how many times each assembly branch was sampled.
+AutoFDO is an alternative way to collect ETM data with small data sizes.
+If `cs_etm/autofdo/` is not listed, update the Linux kernel and perf to 5.15 or later before using AutoFDO.
 
-If you application is named `executable`, run the command below to convert the profile data:
+To confirm AutoFDO is working, run:
 
-```bash { target="ubuntu:latest" }
-perf2bolt -p perf.data -o perf.fdata --itrace=l64i1us ./executable
+```bash
+perf record -e cs_etm/autofdo/u -- echo "Hello World"
+perf report -D | grep "CoreSight ETM"
 ```
 
-Below is example output from `perf2bolt`, it has read all samples and created the file `perf.fdata`.
+The output should contain text similar to:
+
+```output
+. ... CoreSight ETMV4I Trace data: size 0x30 bytes
+```
+
+## Optimize with ETM
+
+After confirming ETM availability, collect an ETM profile by running the workload under `perf`. Then convert the collected trace into the format that BOLT expects and run the BOLT optimizer.
+
+```bash { line_numbers=true }
+mkdir -p prof
+perf record -e cs_etm//u -o prof/etm.data -- ./out/bsort
+perf2bolt -p prof/etm.data -o prof/etm.fdata --itrace=l64i1us ./out/bsort
+llvm-bolt ./out/bsort -o ./out/bsort.opt.etm --data prof/etm.fdata \
+        -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions \
+        --dyno-stats
+```
+
+The `perf record` command collects ETM trace data while running the workload.
+The `perf2bolt` tool decodes the trace and converts it into BOLT's `.fdata` profile format.
+Finally, `llvm-bolt` uses the generated profile to produce an optimized binary named `out/bsort.opt.etm`.
+
+Example `perf2bolt` output is similar to:
 
 ```output
 BOLT-INFO: shared object or position-independent executable detected
-PERF2BOLT: Starting data aggregation job for perf.data
+PERF2BOLT: Starting data aggregation job for prof/etm.data
 PERF2BOLT: spawning perf job to read branch events with itrace
 PERF2BOLT: spawning perf job to read mem events
 PERF2BOLT: spawning perf job to read process events
@@ -71,20 +109,10 @@ PERF2BOLT: out of range traces involving unknown regions: 2325 (1.6%)
 PERF2BOLT: waiting for perf mem events collection to finish...
 PERF2BOLT: parsing memory events...
 PERF2BOLT: processing branch events...
-PERF2BOLT: wrote 401 objects and 0 memory objects to perf.fdata
+PERF2BOLT: wrote 401 objects and 0 memory objects to prof/etm.fdata
 ```
 
-### Run BOLT to generate the optimized executable
-
-The final step is to generate a new executable using the `perf.fdata`.
-
-To run BOLT use the command below and substitute the name of your application:
-
-```bash { target="ubuntu:latest" }
-llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
-```
-
-The output from `llvm-bolt` describes the executable stats before and after optimization:
+Example `llvm-bolt` output is similar to:
 
 ```output
 BOLT-INFO: shared object or position-independent executable detected
@@ -153,32 +181,34 @@ BOLT-INFO: setting __hot_end to 0x4014b0
 BOLT-INFO: patched build-id (flipped last bit)
 ```
 
-The optimized executable is now available as `new_executable`. 
+## Optimize with ETM AutoFDO
 
-### Using ETM AutoFDO
+ETM AutoFDO performs trace strobing to collect small slices of ETM trace. This reduces the amount of data recorded per second, which can make longer profile collection runs more practical.
 
-ETM AutoFDO is a Linux perf record method similar to ETM that performs trace strobing to collect small slices of trace. This reduces the amount of data recorded per second and that allows it to be run for longer periods compared to ETM and creates much smaller files. 
+Record with AutoFDO while running the workload:
 
-Record with AutoFDO while running your application. Substitute the actual name of your application for `executable`:
-
-```bash { target="ubuntu:latest" }
-perf record -e cs_etm/autofdo/u -o perf.data -- ./executable
+```bash
+perf record -e cs_etm/autofdo/u -o prof/etm-autofdo.data -- ./out/bsort
 ```
 
-Perf prints the size of the `perf.data` file:
+Perf prints the size of the `prof/etm-autofdo.data` file:
 
 ```output
 [ perf record: Woken up 1 times to write data ]
-[ perf record: Captured and wrote 0.021 MB perf.data ]
+[ perf record: Captured and wrote 0.021 MB prof/etm-autofdo.data ]
 ```
 
-The output shows that much less data was written to `perf.data` for the same executable
+The output shows that much less data was written for the same workload. The BOLT conversion and optimization steps are the same as the ETM flow:
 
-The BOLT steps are the same as ETM case shown above.
-
-```bash { target="ubuntu:latest" }
-perf2bolt -p perf.data -o perf.fdata --itrace=l64i1us ./executable
-llvm-bolt ./executable -o ./new_executable -data perf.fdata -reorder-blocks=ext-tsp -reorder-functions=hfsort -split-functions -split-all-cold -split-eh -dyno-stats
+```bash { line_numbers=true }
+perf2bolt -p prof/etm-autofdo.data -o prof/etm-autofdo.fdata --itrace=l64i1us ./out/bsort
+llvm-bolt ./out/bsort -o ./out/bsort.opt.etm-autofdo --data prof/etm-autofdo.fdata \
+        -reorder-blocks=ext-tsp -reorder-functions=cdsort -split-functions \
+        --dyno-stats
 ```
 
-The optimized executable is now available as `new_executable`. 
+## What you've learned and what's next
+
+You've collected an ETM trace and used it to optimize the binary with BOLT. ETM provides detailed trace-based profile information, while ETM AutoFDO can reduce profile data size by collecting smaller trace slices.
+
+You can explore lower-overhead sampling methods or move on to verify the optimization results.

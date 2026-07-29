@@ -1,6 +1,6 @@
 ---
 title: Verify BOLT optimization results
-weight: 10
+weight: 11
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -9,7 +9,7 @@ layout: learningpathall
 ## Verify optimization with runtime
 
 {{% notice Note %}}
-The example below uses a [BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt-demo/brbe/) optimized binary. You can apply the same verification steps to binaries optimized using the other BOLT profiling methods.
+The example below uses a [BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt/brbe/) optimized binary. You can apply the same verification steps to binaries optimized using the other BOLT profiling methods.
 {{% /notice %}}
 
 First, compare the runtime of the original and optimized BubbleSort binaries. A shorter runtime provides an initial indication that BOLT improved the code layout.
@@ -80,7 +80,7 @@ This value is unusually low because the example program intentionally creates po
 
 The Branch MPKI also decreases—from 16 to about 10—because BOLT can improve branch prediction. It uses profile data to adjust code layout and swap fall-through and taken paths when beneficial.
 
-You can also compute the MPKI values manually using `perf stat`, as described in the [Good BOLT Candidates](/learning-paths/servers-and-cloud-computing/bolt-demo/good-candidates/) section.
+You can also compute the MPKI values manually using `perf stat`, as described in the [Good BOLT Candidates](/learning-paths/servers-and-cloud-computing/bolt/good-candidates/) section.
 
 ## Summary
 

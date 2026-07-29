@@ -84,6 +84,16 @@ To compute the **L1I cache MPKI** manually from the `perf stat` output, apply th
 
 $$\frac{(\text{L1-icache-misses} \times 1000)}{\text{instructions}}$$
 
+## Use representative workloads
+
+When collecting profile data for BOLT, run the program with inputs and options that represent the workload you want to optimize. BOLT uses the recorded execution profile to reorganize the binary, so the optimized layout reflects the paths exercised during profile collection.
+
+If the program behaves differently for different inputs, collect profiles for the important cases. You can optimize separate binaries for separate workloads, or merge multiple BOLT `.fdata` profiles before running `llvm-bolt`:
+
+```bash
+merge-fdata *.fdata > combined.fdata
+```
+
 ## What you've learned and what's next
 
 You've learned how to evaluate whether a program is a good candidate for BOLT optimization by analyzing frontend stalls and L1I cache MPKI. The example program shows clear signs of poor instruction locality with 55% frontend bound and an L1I MPKI of 60.

@@ -270,7 +270,7 @@ You may have some performance analysis methodologies you already follow, continu
 Below are some additional performance analysis tips and methodologies specific to Arm-based servers:
 - [Learn the Arm Neoverse N1 performance analysis methodology](/learning-paths/servers-and-cloud-computing/top-down-n1/)
 - [Profiling for Neoverse with Streamline CLI Tools](/learning-paths/servers-and-cloud-computing/profiling-for-neoverse/)
-- [Learn how to optimize an application with BOLT](/learning-paths/servers-and-cloud-computing/bolt/)
+- [Optimize AArch64 binaries with LLVM BOLT](/learning-paths/servers-and-cloud-computing/bolt/)
 - [How to use the Arm Performance Monitoring Unit and System Counter](/learning-paths/servers-and-cloud-computing/arm_pmu/)
 - [NVIDIA Grace CPU Benchmarking Guide](https://nvidia.github.io/grace-cpu-benchmarking-guide/index.html)
 - [Learn about Large System Extensions (LSE)](/learning-paths/servers-and-cloud-computing/lse/)
