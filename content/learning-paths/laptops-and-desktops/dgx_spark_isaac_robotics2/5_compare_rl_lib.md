@@ -70,13 +70,23 @@ Most readers in this Learning Path use one GPU, and that setup is already enough
 
 If your setup includes multiple networked systems, the same pattern extends to clusters, for example Grace Hopper servers or DGX Spark systems connected over a high-speed network. In those cases, `--nnodes` and rank settings are expanded to span the full cluster.
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 \
     scripts/reinforcement_learning/rsl_rl/train.py \
     --task=<example task> \
     --headless \
     --distributed
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 \
+    scripts/reinforcement_learning/train.py \
+    --rl_library rsl_rl \
+    --task=<example task> \
+    --viz none \
+    --distributed
+{{< /tab >}}
+{{< /tabpane >}}
 
 This command defines the training entry point, worker-process count, distributed mode, and task selection in one place. In this workflow, the CPU side handles launch and orchestration while GPUs handle simulation and learning throughput.
 

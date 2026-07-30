@@ -22,12 +22,21 @@ In this task, you train the same Franka arm to reach the drawer handle, grasp it
 
 Run the training script using the `rsl_rl` library with the following command. Again this uses the proximal policy optimization (PPO) algorithm. 
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
     --task=Isaac-Open-Drawer-Franka-v0 \
     --headless \
     --num_envs=2048
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh train \
+    --rl_library rsl_rl \
+    --task=Isaac-Open-Drawer-Franka-v0 \
+    --viz none \
+    --num_envs=2048
+{{< /tab >}}
+{{< /tabpane >}}
 
 {{% notice Note %}}
 
@@ -51,12 +60,21 @@ After training, confirm the following:
 
 To view the trained policy, replace the checkpoint path with your model `.pt` file in the log directory:
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
     --task=Isaac-Open-Drawer-Franka-v0 \
     --num_envs=1 \
-    --checkpoint=<path_to_your_model.pt>
-```
+    --checkpoint=<path_to_checkpoint>
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh play \
+    --rl_library rsl_rl \
+    --task=Isaac-Open-Drawer-Franka-v0 \
+    --num_envs=1 \
+    --checkpoint=<path_to_checkpoint>
+{{< /tab >}}
+{{< /tabpane >}}
 
 ![Drawer-opening policy progression shown side by side. The left panel shows early training (iteration 50) with slow and unstable drawer motion. The right panel shows converged policy (iteration 399) with reliable contact and smooth opening along the rail.#center](./open_drawer.gif "Drawer-opening policy progression shown side by side. The left panel shows early training (iteration 50) with slow and unstable drawer motion. The right panel shows converged policy (iteration 399) with reliable contact and smooth opening along the rail")
 
@@ -67,13 +85,21 @@ To support industrial automation scenarios, Isaac Lab provides the **Factory** f
 
 ### Run
 
-Factory tasks use the `rl_games` training library instead of `rsl_rl`. Similar to the `rsl_rl` library, a convenient training script is available for the `rl_games` library with common arguments, allowing you to quickly change training library and configuration without any recompilation:
+Factory tasks use the `rl_games` training library instead of `rsl_rl`. Select the API version installed on your system:
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rl_games/train.py \
     --task=Isaac-Factory-PegInsert-Direct-v0 \
     --headless
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh train \
+    --rl_library rl_games \
+    --task=Isaac-Factory-PegInsert-Direct-v0 \
+    --viz none
+{{< /tab >}}
+{{< /tabpane >}}
 
 Training runs for the default number of epochs specified in `/source/isaaclab_tasks/isaaclab_tasks/direct/factory/agents/rl_games_ppo_cfg.yaml` under `max_epochs`. During training, you'll see output like:
 
@@ -96,9 +122,11 @@ In this output:
 
 {{% notice Please Note %}}
 
-This task can take up to 1 hour on a DGX Spark. If you want to run the model from a pre-trained checkpoint available from NVIDIA Omniverse, you can trying replacing the `--checkpoint=<path_to_your_factory_model.pth>` argument with `--use_pretrained_checkpoint` to the `play.py` script in the verify section below. 
+Training this task can take up to **1 hour** on a DGX Spark. 
 
-Please note that there may not be a model available from NVIDIAs Omniverse for your specific task and `IsaacLab` version tag. 
+To skip training and use a pre-trained checkpoint from NVIDIA Omniverse, replace `--checkpoint=<path_to_checkpoint>` with `--use_pretrained_checkpoint` in the playback command.
+
+A pre-trained model may not be available for every task and `IsaacLab` version tag.
 
 {{% /notice %}}
 
@@ -107,17 +135,31 @@ Please note that there may not be a model available from NVIDIAs Omniverse for y
 To view a trained policy in simulation, replace the checkpoint path with your log directory or pass the `--use_pretrained_checkpoint` argument. We are also adding environment parameters to minimize the time it takes to observe the peg insertion.
 
 
-```bash
+{{< tabpane code=true >}}
+{{< tab header="IsaacLab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rl_games/play.py \
   --task=Isaac-Factory-PegInsert-Direct-v0 \
-  --checkpoint=<path_to_your_factory_model.pth> \
+  --checkpoint=<path_to_checkpoint> \
   --num_envs=1 \
   --real-time \
   --seed=-1 \
   env.episode_length_s=4.0 \
   env.task.fixed_asset_init_pos_noise=[0.08,0.08,0.02] \
   env.task.hand_init_pos_noise=[0.03,0.03,0.02]
-```
+{{< /tab >}}
+{{< tab header="IsaacLab 3.0 API" >}}
+./isaaclab.sh play \
+  --rl_library rl_games \
+  --task=Isaac-Factory-PegInsert-Direct-v0 \
+  --checkpoint=<path_to_checkpoint> \
+  --num_envs=1 \
+  --real-time \
+  --seed=-1 \
+  env.episode_length_s=4.0 \
+  env.task.fixed_asset_init_pos_noise=[0.08,0.08,0.02] \
+  env.task.hand_init_pos_noise=[0.03,0.03,0.02]
+{{< /tab >}}
+{{< /tabpane >}}
 
 ![Peg insertion simulation with sub-millimeter contact control#center](./peg.gif "Simulation of sub-millimeter control of arm to insert peg into a hole. PPO model trained to 50 epochs")
 
