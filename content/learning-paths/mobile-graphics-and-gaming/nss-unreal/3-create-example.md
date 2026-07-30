@@ -13,11 +13,6 @@ The Arm Neural Graphics Plugin 1.1.0 release package contains the plugin and VGF
 
 Download the 1.1.0 release `.zip` and extract it on your Windows machine.
 
-{{% notice Unreal Engine 5.5 plugin %}}
-This version is deprecated. Refer to the repository documentation for more information.
-{{% /notice %}}
-
-
 ## Enable NSS for Unreal Engine
 
 1. Open Unreal Engine and create a new **Third Person** template project using the **C++** option.

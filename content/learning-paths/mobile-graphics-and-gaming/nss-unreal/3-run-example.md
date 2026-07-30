@@ -27,6 +27,21 @@ This will add real-time views showing the model’s processed outputs, such as p
 
 ![Debug view of Neural Super Sampling model output in Unreal Engine#center](./images/nss_debug.png "Figure 6: Visualize NSS model debug output in real time.")
 
+## NSS console variables
+
+Use these Unreal Engine console variables to configure NSS behavior, debug views, and resource lifetime. Enter a variable and value in the Unreal Engine console, for example, `r.NSS.Enable 1`.
+
+| Console variable | Default | Value range | Details |
+|------------------|---------|-------------|---------|
+| `r.NSS.Enable` | `0` | `0`, `1` | Enables NSS for Temporal Upscale. |
+| `r.NSS.EnabledInEditorViewport` | `0` | `0`, `1` | Enables NSS for Temporal Upscale in the editor viewport. |
+| `r.NSS.Debug` (UE 5.4 and UE 5.6) | `0` | `0`, `1` | Displays 16 debug outputs in a 4x4 grid. |
+| `r.NSS.Debug` (UE 4.27) | `0` | `0`, `1` | Displays 12 debug outputs in a 3x4 grid. |
+| `r.NSS.AdjustMipBias` | `1` | `0`, `1` | Allows NSS to adjust the minimum global texture mip bias: `r.ViewTextureMipBias.Min` and `r.ViewTextureMipBias.Offset`. |
+| `r.NSS.ShaderQualityMode` | `1` | `0`, `1`, `2` | Selects shader quality: `0` for quality (high), `1` for balanced (default), and `2` for performance (low). |
+| `r.NSS.UseFragmentShader` | `1` | `0`, `1` | Uses a fragment job for NSS. |
+| `r.NG.DeferDelete` | `5` | `> 0` | Sets the number of frames to defer deletion. |
+
 ## Troubleshooting tips
 
 If the example does not behave as expected, check the following common issues before continuing.
