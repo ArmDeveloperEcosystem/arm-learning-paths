@@ -1,6 +1,6 @@
 ---
 title: Occlusion Objects
-weight: 7
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

@@ -5,7 +5,7 @@ weight: 4
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-NFRU reconstructs an intermediate frame between two rendered frames to make motion feel smoother without requiring the engine to render another full frame. In the Project Moku captures, the generated output remains coherent across representative gameplay, while the most visible differences are localized to challenging conditions such as fast motion, changing visibility, particles, and dramatic lighting changes. This workflow measures the performance benefit and gives you the tools to evaluate those edge cases against your own quality target.
+NFRU reconstructs an intermediate frame between two rendered frames to make motion feel smoother without requiring the engine to render another full frame. In the Project Moku captures, the generated output remains coherent across representative gameplay, while the most visible differences are localized to challenging conditions such as changing visibility, particles, and dramatic lighting changes. This workflow measures the performance benefit and gives you the tools to evaluate those edge cases against your own quality target.
 
 Use Streamline and RenderDoc to validate NFRU from two directions:
 
@@ -60,7 +60,7 @@ As shown in the capture, counters such as Neural queue active and Neural Acceler
 
 ![Moku Streamline FPS](./images/streamline/moku_streamline_fps.png)
 
-On the timeline, the NFRU workload should complete cleanly between real rendered frames. If GPU or neural processing blocks become long, the cost of NFRU may limit the expected uplift. If the workload is light but idle gaps still appear, the limiting factor is more likely frame pacing or presentation behavior rather than NFRU execution cost. For a deeper explanation, see [NFRU performance](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/9-nfru_performance/).
+On the timeline, the NFRU workload should complete cleanly between real rendered frames. If GPU or neural processing blocks become long, the cost of NFRU may limit the expected uplift. If the workload is light but idle gaps still appear, the limiting factor is more likely frame pacing or presentation behavior rather than NFRU execution cost. For a deeper explanation, see [NFRU performance](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/7-nfru_performance/).
 
 ![Moku Streamline neural usage](./images/streamline/moku_streamline_neural_usage.png)
 
@@ -68,7 +68,7 @@ For more information on performance profiling strategies, refer to the [Streamli
 
 ## Inspect NFRU frames with RenderDoc
 
-Use RenderDoc to confirm generated-frame quality and investigate any visible differences. Capture a frame with NFRU enabled and inspect the frame generation area of the event list. Compare the real frame copies with the generated output, then review the bound frame-generation resources and debug-view tiles that expose motion, depth, disocclusion, and warped-color behavior. If the real frame inputs look correct but the generated output has artifacts, the issue is likely in frame generation, masking, disocclusion handling, or content such as fast alpha-blended effects.
+Use RenderDoc to confirm generated-frame quality and investigate any visible differences. Capture a frame with NFRU enabled and inspect the frame generation area of the event list. Compare the real frame copies with the generated output, then review the bound frame-generation resources and debug-view tiles that expose motion, depth, disocclusion, and warped-color behavior. If the real frame inputs look correct but the generated output has artifacts, the issue is likely in frame generation, masking, disocclusion handling, or content such as rapidly changing alpha-blended effects.
 
 For detailed guidance on using RenderDoc in Unreal Engine, refer to the [RenderDoc integration guide](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/7-renderdoc/).
 
@@ -108,7 +108,7 @@ Common resources to check include:
 | `r_warped_filled_motion_tp1` and `r_warped_filled_flow_tm1` | Filled warp results after the hole-filling passes. |
 | `r_in_tensor` and `r_out_params_tensor` | Neural input and output tensor resources. These may not display like normal color textures, but their bindings confirm the neural path resources are present. |
 
-This workflow is useful for the artifact scenarios in the following sections. Fast camera movement tends to expose disocclusion and edge reconstruction problems. Fast object motion stresses motion vectors and object boundaries. Occlusion changes stress depth history. Alpha-blended particles and VFX stress content that does not always have reliable depth or motion vector data.
+This workflow is useful for the artifact scenarios in the following sections. Occlusion changes stress depth history. Alpha-blended particles and VFX stress content that does not always have reliable depth or motion vector data. Lighting changes stress optical flow, blend parameters, and screen-edge reconstruction.
 
 ## What you've learned and what's next
 

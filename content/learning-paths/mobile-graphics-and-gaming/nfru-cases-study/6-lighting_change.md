@@ -1,6 +1,6 @@
 ---
 title: Lighting change
-weight: 9
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

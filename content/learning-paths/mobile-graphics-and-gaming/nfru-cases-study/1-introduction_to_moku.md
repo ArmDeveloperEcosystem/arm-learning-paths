@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## What is Project Moku?
 
-Project Moku is an Unreal Engine sample project developed by Arm that demonstrates neural rendering technologies for mobile platforms. Built on Unreal 5.6, it provides a controlled environment for testing Neural Frame Rate Upscaling (NFRU), along with complementary neural rendering techniques such as Neural Super Sampling (NSS), Neural Super Sampling and Denoising (NSSD), and Opacity Micromap (OMM). It is designed to exercise dedicated neural accelerators on GPUs with built-in neural processing support.
+Project Moku is an Unreal Engine sample project developed by Arm that demonstrates neural rendering technologies for mobile platforms. Built on Unreal 5.6, it provides a controlled environment for testing Neural Frame Rate Upscaling (NFRU), along with complementary neural rendering techniques such as Neural Super Sampling (NSS) and Neural Super Sampling and Denoising (NSSD). It is designed to exercise dedicated neural accelerators on GPUs with built-in neural processing support.
 
 {{% notice Info %}}
 To learn more about neural graphics techniques (including NFRU) and evaluate how they fit your game, see the [Neural Graphics Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/) Learning Path.
@@ -18,7 +18,7 @@ To learn more about neural graphics techniques (including NFRU) and evaluate how
 
 ## Why use Project Moku for NFRU?
 
-The Project Moku corridor level is designed to showcase NFRU in a clear, controlled scene. Its long corridor makes it easy to observe the visual improvements from higher frame rates, while the fast-moving robot highlights NFRU's ability to generate intermediate frames from consecutive frame pairs. The project also includes various lighting environments and particle VFX scenarios, which help exercise frame generation under different motion or illumination conditions.
+The Project Moku corridor level is designed to showcase NFRU in a clear, controlled scene. Its long corridor makes it easy to observe the visual improvements from higher frame rates, while occlusion interactions, lighting environments, and particle VFX scenarios help exercise frame generation under different visibility and illumination conditions.
 
 NFRU gives you a practical way to stretch an existing rendering budget. By generating an intermediate frame between rendered frames, it can increase the percieved framerate without requiring the engine to render every displayed frame or introducing a new content-authoring workflow.
 

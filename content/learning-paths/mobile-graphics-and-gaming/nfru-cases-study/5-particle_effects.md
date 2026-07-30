@@ -1,6 +1,6 @@
 ---
 title: Particle effects
-weight: 8
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

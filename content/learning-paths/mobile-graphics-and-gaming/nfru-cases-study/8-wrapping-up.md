@@ -1,6 +1,6 @@
 ---
 title: Wrapping up
-weight: 11
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -14,7 +14,7 @@ You completed a case study workflow for Neural Frame Rate Upscaling (NFRU) with 
 
 NFRU provides a practical way to stretch an existing rendering budget. Its prebuilt neural model and Unreal Engine integration let you evaluate frame generation without introducing a new content-authoring workflow or building custom machine learning infrastructure.
 
-In representative Moku gameplay, NFRU delivers a noticeable improvement in presented smoothness while maintaining good overall visual quality. The most demanding cases—newly exposed screen edges, very fast object motion, visibility changes, alpha-blended particles, and dramatic lighting transitions—can produce localized differences where the correct intermediate image is difficult to infer.
+In representative Moku gameplay, NFRU delivers a noticeable improvement in presented smoothness while maintaining good overall visual quality. The most demanding cases—visibility changes, alpha-blended particles, and dramatic lighting transitions—can produce localized differences where the correct intermediate image is difficult to infer.
 
 The visible differences remain localized, making these scenarios useful evaluation targets. Streamline, RenderDoc, and the NFRU debug views make it possible to trace a difference to motion vectors, optical flow, depth, disocclusion masks, or content that is difficult for interpolation.
 
