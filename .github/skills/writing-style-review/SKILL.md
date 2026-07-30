@@ -47,6 +47,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Flag pages over 3500 words total when prose density hurts review or learning.
 - Use visual breaks to prevent walls of text. Code blocks count as visual breaks.
 - If a section explains three or more things, suggest splitting it.
+- Ensure lists have a lead-in sentence or phrase ending with a colon. Ensure each item starts with a capitalized word unless the word is supposed to be styled differently. Ensure list items don't end with periods unless the item is one or more complete sentences.
 
 ## Arm framing and technical depth
 
@@ -76,6 +77,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use `avoid` instead of `try not to`.
 - Use `such as` instead of `like`.
 - Use `after` or `when` instead of `once`.
+- Avoid slashes unless part of a technical term. Replace slashes with "and" or "or" as adequate.
 
 ## Tone cleanup
 

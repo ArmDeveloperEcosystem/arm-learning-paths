@@ -34,17 +34,17 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Sysbox](https://github.com/nestybox/sysbox/blob/master/README.md) allows you to use Docker containers for workloads that typically require virtual machines (VMs). Containers run with Sysbox are able to run software that relies on the [systemd System and Service Manager](https://systemd.io/) that is not usually present in containers, and it does this without the need for a full virtual machine and hardware emulation.
+[Sysbox](https://github.com/nestybox/sysbox/blob/master/README.md) allows you to use Docker containers for workloads that typically require virtual machines (VMs). Containers run with Sysbox can run software that relies on the [systemd System and Service Manager](https://systemd.io/) that isn't usually present in containers, without a full virtual machine or hardware emulation.
 
 Running Docker inside Docker, and Kubernetes inside Docker, are also Sysbox use cases. Without Sysbox, these are difficult because the Docker daemon requires systemd.
 
-In summary, Sysbox is a powerful container runtime that provides many of the benefits of virtual machines without the overhead of running a full VM. It is good for workloads that require the ability to run system-level software.
+Sysbox is a container runtime that provides many of the benefits of virtual machines without the overhead of running a full VM. It's well suited for workloads that need system-level software.
 
 Sysbox runs on Linux and supports Arm.
 
 ## Before you begin
 
-Sysbox has limited support for older versions of Linux, but recent Linux versions are easily compatible. To check whether your Linux distribution and Linux kernel version are supported, see [Sysbox Distro Compatibility](https://github.com/nestybox/sysbox/blob/master/docs/distro-compat.md).
+Sysbox has limited support for older versions of Linux, but recent Linux versions are compatible. To check whether your Linux distribution and Linux kernel version are supported, see [Sysbox Distro Compatibility](https://github.com/nestybox/sysbox/blob/master/docs/distro-compat.md).
 
 Sysbox is a container runtime, so Docker is required before installing Sysbox.
 
@@ -66,28 +66,28 @@ Download the Sysbox official package from [Sysbox Releases](https://github.com/n
 You can download the Debian package for Arm from the command line:
 
 {{% notice Note %}}
-The following commands use Sysbox version 0.6.7. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Sysbox releases](https://github.com/nestybox/sysbox/releases/).
+The following commands use Sysbox version 0.7.0. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Sysbox releases](https://github.com/nestybox/sysbox/releases/).
 {{% /notice %}}
 
 ```bash
-wget https://github.com/nestybox/sysbox/releases/download/v0.6.7/sysbox-ce_0.6.7.linux_arm64.deb
+wget https://github.com/nestybox/sysbox/releases/download/v0.7.0/sysbox-ce_0.7.0.linux_arm64.deb
 ```
 
 Install the package using the `apt` command:
 
 ```bash
-sudo apt-get install ./sysbox-ce_0.6.7.linux_arm64.deb -y
+sudo apt-get install ./sysbox-ce_0.7.0.linux_arm64.deb -y
 ```
 
-If you are not using a Debian-based Linux distribution, you can use instructions to build Sysbox from the source code. For more information, see [Sysbox Developer's Guide: Building & Installing](https://github.com/nestybox/sysbox/blob/master/docs/developers-guide/build.md).
+If you aren't using a Debian-based Linux distribution, you can build Sysbox from source code. For more information, see [Sysbox Developer's Guide: Building & Installing](https://github.com/nestybox/sysbox/blob/master/docs/developers-guide/build.md).
 
-Run `systemctl` to confirm if Sysbox is running:
+Run `systemctl` to check whether Sysbox is running:
 
 ```bash
 systemctl list-units -t service --all | grep sysbox
 ```
 
-If Sysbox is running, you see the output:
+If Sysbox is running, the output is similar to:
 
 ```output
   sysbox-fs.service                              loaded    active   running sysbox-fs (part of the Sysbox container runtime)

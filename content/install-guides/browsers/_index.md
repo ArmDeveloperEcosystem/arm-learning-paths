@@ -25,7 +25,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 You may want to use web browsers on Arm platforms during development projects. 
 
-Browser support for Arm varies. Some browsers have broad operating system support and native execution on Arm while others do not. 
+Most major browsers now run natively on Arm for both Windows and Linux.
 
 The information below helps you:
 
@@ -42,7 +42,7 @@ Here is a quick summary to get you started:
 | Firefox       | native         | yes               |
 | Chromium      | native         | yes               |
 | Brave         | native         | yes               |
-| Chrome        | native         | no                |
+| Chrome        | native         | yes               |
 | Edge          | native         | no                |
 | Vivaldi       | native         | yes               |
 
@@ -50,7 +50,7 @@ Windows on Arm runs native ARM64 applications, but can also emulate 32-bit x86 a
 
 The primary functional issue for browsers on Arm is DRM (digital rights management). DRM is required to play certain video content from streaming services such as Netflix. To test if your browser has DRM check the [DRM stream test](https://bitmovin.com/demos/drm). 
 
-Edge and Firefox are good native browsers with DRM support for Windows on Arm. There are no easy DRM solutions for Arm Linux.
+All native browsers on Windows on Arm support DRM. On Arm Linux, Chrome provides DRM support for streaming services.
 
 Please share your experiences with browsers on Arm by submitting a [GitHub issue](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/issues/new) or a GitHub Pull Request to add additional browsers. 
 

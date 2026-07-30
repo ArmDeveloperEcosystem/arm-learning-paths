@@ -1,5 +1,5 @@
 ---
-title: Use Self-Hosted Arm64-based runners in GitHub Actions for CI/CD
+title: Use self-hosted Arm64-based runners in GitHub Actions for CI/CD
 
 description: Learn how to create a CI/CD pipeline in GitHub using self-hosted Arm64 runners to build and push Docker images to DockerHub.
 
@@ -17,9 +17,53 @@ prerequisites:
     - A DockerHub account. You can [set up a free DockerHub account](https://hub.docker.com/signup).
     - A GitHub account. You can [sign up for GitHub](https://github.com/signup).
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-07-28T16:25:40Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: a851b2f81b6aac54aef84acf7537a1cc6b99f66ce31ffd26631d6a966401e4ed
+  summary_generated_at: '2026-07-28T16:25:40Z'
+  summary_source_hash: a851b2f81b6aac54aef84acf7537a1cc6b99f66ce31ffd26631d6a966401e4ed
+  faq_generated_at: '2026-07-28T16:25:40Z'
+  faq_source_hash: a851b2f81b6aac54aef84acf7537a1cc6b99f66ce31ffd26631d6a966401e4ed
+  summary: >-
+    You'll configure a GitHub Actions CI/CD pipeline on a self-hosted Arm64 Linux runner to build a
+    .NET application and publish an Arm64 Docker image to Docker Hub. You'll create the repository and
+    secrets, and install Docker and the .NET SDK on Ubuntu 22.04. You'll then run the workflow and verify the pushed
+    image tag.
+  faqs:
+  - question: Do I need to create any GitHub secrets for DockerHub authentication?
+    answer: >-
+      Yes. Create two repository secrets: one for your Docker Hub username and one for your Docker Hub
+      token so the workflow can log in and push the image.
+  - question: Where can I find the exact `docker push` command for my new Docker Hub repository?
+    answer: >-
+      Docker Hub shows the push command after you create the repository. It looks like:
+      `docker push <YOUR_ACCOUNT_NAME>/sampleapp:tagname`.
+  - question: What software must I install on the self-hosted Arm64 runner before running the
+      workflow?
+    answer: >-
+      Install the .NET SDK and Docker. The Learning Path provides Docker installation steps for
+      Ubuntu 22.04.
+  - question: Which project should I import into GitHub?
+    answer: >-
+      Use GitHub’s import tool with the repository URL
+      `https://github.com/dawidborycki/arm-lp-ci-cd-net.git`
+      and choose a name for your new repository.
+  - question: What result should I expect when the pipeline finishes successfully?
+    answer: >-
+      The runner builds and pushes an Arm64 Docker image of the .NET application to your Docker Hub repository.
+      The runner creates a new image tag in the repository you created.
+# END generated_summary_faq
+
 author: Dawid Borycki
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -54,4 +98,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

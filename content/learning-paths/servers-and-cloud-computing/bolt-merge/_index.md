@@ -14,7 +14,7 @@ learning_objectives:
   - Evaluate and compare performance across baseline, isolated, and merged optimization scenarios
 
 prerequisites:
-  - An Arm-based Linux system with [BOLT](/install-guides/bolt/) and [Linux Perf](/install-guides/perf/) installed
+  - An Arm-based Linux system with [BOLT](/install-guides/llvm/#verify-bolt-tools) and [Linux Perf](/install-guides/perf/) installed
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -101,4 +101,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

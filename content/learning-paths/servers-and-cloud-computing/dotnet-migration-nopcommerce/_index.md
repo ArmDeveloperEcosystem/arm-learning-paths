@@ -38,11 +38,9 @@ generated_summary_faq:
     You'll learn how to migrate a .NET nopCommerce application to an
     Arm-based virtual machine powered by Azure Cobalt 100, create a reproducible baseline, and apply
     measured runtime tuning. First, you'll pin a specific nopCommerce release, verify a clean build,
-    and capture an endpoint baseline on Arm to control for drift. By running dependency discovery and generating SBOM, you'll surface direct, transitive, and native payloads early to reduce surprises during
-    deployment. You'll compare and choose a containerization path between a Dockerfile workflow, and a .NET
+    and capture an endpoint baseline on Arm to control for drift. By running dependency discovery and generating SBOM, you'll surface direct, transitive, and native payloads. You'll compare and choose a containerization path between a Dockerfile workflow and a .NET
     SDK publish with multi-architecture delivery guardrails. Finally, you'll apply
-    architecture-conditional runtime settings and validate them against fixed workloads so you
-    can keep or discard changes based on repeatable results.
+    architecture-conditional runtime settings and validate them against fixed workloads.
   faqs:
   - question: How should I choose the Azure VM configuration for the baseline?
     answer: >-

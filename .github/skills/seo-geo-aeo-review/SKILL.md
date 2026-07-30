@@ -50,7 +50,7 @@ On any given page:
 ## Review rules
 
 - Optimize for selection and usefulness, not ranking alone.
-- For Learning Paths, prefer verb-led titles such as `Install`, `Deploy`, `Configure`, `Analyze`, `Optimize`, or `Verify`. Install guides are named after the tool being installed and don't feature a verb because install is implied.
+- For Learning Paths, prefer verb-led titles such as `Install`, `Deploy`, `Configure`, `Analyze`, `Optimize`, or `Verify`. Install guides are named after the tool being installed and don't feature a verb because install is implied. Install guides don't have an h2 title.
 - Preserve content-type boundaries: install guides cover installation and verification; Learning Paths cover applied end-to-end tasks.
 - Use Arm-specific terminology naturally when it is supported by the content.
 - Don't add speculative keywords, unsupported performance claims, or marketing language.
