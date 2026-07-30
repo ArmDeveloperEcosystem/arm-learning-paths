@@ -35,7 +35,7 @@ jupyter lab
 In Jupyter Lab, open:
 
 ```output
-neural-graphics-model-gym-examples/tutorials/nfru/<nfru-qat-notebook>.ipynb
+neural-graphics-model-gym-examples/tutorials/nfru/nfru_qat_example.ipynb
 ```
 
 Run the notebook cells in order. The notebook starts from pretrained FP32 NFRU weights, applies QAT fine-tuning, and exports the resulting INT8 model.
