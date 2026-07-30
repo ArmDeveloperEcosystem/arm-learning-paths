@@ -2,6 +2,10 @@
 title: Build Nvidia Jetpack Yocto Images for Nvidia Orin NX/Orin Nano/Thor platforms
 minutes_to_complete: 180 
 
+draft: true
+cascade:
+    draft: true
+   
 description: Learn how to utilize the new yocto support in Nvidia Jetpack to build a custom linux image for the Jetson Orin NX, Orin Nano, and Thor platforms.
 
 who_is_this_for: This is a moderately advanced topic for engineers who want to construct a highly customizable Jetpack image for the Jetson platforms via Yocto build processes. 
