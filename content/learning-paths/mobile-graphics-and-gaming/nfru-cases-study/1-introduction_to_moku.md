@@ -44,8 +44,10 @@ The following animated comparison shows the same Moku scene with NFRU disabled a
   Your browser does not support the video tag.
 </video>
 
+In representative Moku gameplay, NFRU delivers a noticeable improvement in presented smoothness while maintaining good overall visual quality. The most demanding cases — visibility changes, alpha-blended particles, and dramatic lighting transitions — can produce localized differences where the correct intermediate image is difficult to infer.
+
 ## What you've learned and what's next
 
 You've now learned why Project Moku is useful for NFRU evaluation.
 
-Next, you'll enable the Arm Neural Graphics Plugin in the Unreal Engine project.
+Next, you'll enable the Arm Neural Graphics plugin in the Unreal Engine project.

@@ -15,7 +15,7 @@ The sustainable uplift depends on both the interpolation workload and when the r
 
 When profiling NFRU frame pacing, observe render FPS and present FPS. Check whether idle gaps are caused by pacing waits or by actual GPU workload limits. 
 
-The NFRU pace adjuster converts available headroom into a stable target by moving between sustainable FPS levels instead of chasing an unstable peak. This conversion helps NFRU deliver smoother and more consistent gameplay.
+The NFRU pace adjuster converts available GPU and neural processing budget into a stable target by moving between sustainable FPS levels instead of chasing an unstable peak. This conversion helps NFRU deliver smoother and more consistent gameplay.
 
 ## Evaluate render FPS versus present FPS
 
