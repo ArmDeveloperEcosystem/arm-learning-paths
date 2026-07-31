@@ -32,7 +32,7 @@ armips:
 
 tools_software_languages:
   - TypeScript
-  - node.js
+  - Node.js
   - npm
 
 operatingsystems:

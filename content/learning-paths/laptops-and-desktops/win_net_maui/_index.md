@@ -29,8 +29,8 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
-    - .NET    
-    - C#
+    - dotnet    
+    - csharp
     - Visual Studio
 
 further_reading:

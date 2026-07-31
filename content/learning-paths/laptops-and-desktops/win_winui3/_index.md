@@ -30,8 +30,8 @@ operatingsystems:
     - Windows
 tools_software_languages:
     - WinUI 3
-    - C#
-    - .NET
+    - csharp
+    - dotnet
     - Visual Studio
 
 further_reading:

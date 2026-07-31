@@ -81,7 +81,7 @@ armips:
 tools_software_languages:
     - Arm Performix
     - MCP
-    - C++
+    - CPP
     - GitHub Copilot
 operatingsystems:
     - Linux

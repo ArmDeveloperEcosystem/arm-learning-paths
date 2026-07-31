@@ -85,7 +85,7 @@ tools_software_languages:
   - Apache Beam
   - Google Dataflow
   - Google Cloud Pub/Sub
-  - Python 3.11
+  - Python
 
 operatingsystems:
   - Linux

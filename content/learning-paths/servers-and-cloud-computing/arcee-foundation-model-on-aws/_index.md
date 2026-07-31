@@ -83,7 +83,7 @@ tools_software_languages:
     - AWS
     - Hugging Face
     - Python
-    - Llama.cpp
+    - llama.cpp
 operatingsystems:
     - Linux
 

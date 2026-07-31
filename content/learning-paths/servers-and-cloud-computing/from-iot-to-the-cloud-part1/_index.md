@@ -37,8 +37,8 @@ armips:
     - Neoverse
 
 tools_software_languages:
-    - .NET SDK
-    - C#
+    - dotnet
+    - csharp
 
 operatingsystems:
     - Linux

@@ -71,7 +71,7 @@ armips:
     - Neoverse
 tools_software_languages:
     - Arm Performix
-    - C++
+    - CPP
     - Runbook
 operatingsystems:
     - Linux

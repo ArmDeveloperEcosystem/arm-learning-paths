@@ -76,7 +76,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - AWS CDK CLI
-    - Amazon Elastic Container Service (Amazon ECS)
+    - Amazon ECS
     - AWS CLI
     - Node.js
     - JavaScript

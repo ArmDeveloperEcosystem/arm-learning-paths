@@ -31,8 +31,8 @@ operatingsystems:
     - Windows
 tools_software_languages:
     - Xamarin Forms
-    - C#
-    - .NET
+    - csharp
+    - dotnet
     - Visual Studio
 
 further_reading:

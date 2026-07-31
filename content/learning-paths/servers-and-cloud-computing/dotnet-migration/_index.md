@@ -74,7 +74,7 @@ cloud_service_providers:
 armips:
     - Neoverse
 tools_software_languages: 
-    - .NET
+    - dotnet
     - Orchard Core
     - C
 operatingsystems:

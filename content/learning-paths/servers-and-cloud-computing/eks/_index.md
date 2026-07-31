@@ -70,7 +70,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - Amazon Elastic Kubernetes Service (EKS)
+    - Amazon EKS
     - Kubernetes
     - SQL
     - MySQL

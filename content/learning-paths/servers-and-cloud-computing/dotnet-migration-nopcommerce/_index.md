@@ -84,8 +84,8 @@ armips:
 cloud_service_providers:
   - Microsoft Azure
 tools_software_languages:
-    - .NET
-    - C#
+    - dotnet
+    - csharp
     - Docker
     - Azure CLI
     - PostgreSQL

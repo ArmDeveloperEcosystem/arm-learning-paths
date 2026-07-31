@@ -75,7 +75,7 @@ armips:
 operatingsystems:
     - Linux
 tools_software_languages:
-    - .NET
+    - dotnet
     - Visual Studio Code
 
 further_reading:

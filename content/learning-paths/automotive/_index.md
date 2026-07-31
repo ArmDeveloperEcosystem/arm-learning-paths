@@ -16,17 +16,17 @@ title: Automotive
 weight: 4
 subjects_filter:
 - Containers and Virtualization: 4
-- Performance and Architecture: 6
+- Performance and Architecture: 7
 operatingsystems_filter:
 - Baremetal: 1
-- Linux: 9
+- Linux: 10
 - macOS: 1
 - other: 1
 - RTOS: 1
 tools_software_languages_filter:
 - Arm Development Studio: 1
 - Arm Zena CSS: 1
-- C: 2
+- C: 3
 - Clang: 3
 - CPP: 1
 - DDS: 1
@@ -43,7 +43,7 @@ tools_software_languages_filter:
 - SME2: 1
 - Tinkerblox: 1
 - topdown-tool: 1
-- Yocto: 1
+- Yocto: 2
 - Zenoh: 1
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
