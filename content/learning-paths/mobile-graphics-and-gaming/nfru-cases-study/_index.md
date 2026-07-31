@@ -31,7 +31,7 @@ generated_summary_faq:
   prompt_template: summary-faq-v3
   summary: >-
     You'll use Project Moku, an Arm Unreal Engine sample, to evaluate NFRU on mobile GPUs. You'll enable the Arm Neural Graphics Plugin and create
-    repeatable reference cuts. Using the reference cuts with Streamlines and RenderDoc, you'll validate frame generation,
+    repeatable reference cuts. Using the reference cuts with Streamline and RenderDoc, you'll validate frame generation,
     inspect visual differences, and measure NFRU performance. You'll analyze occlusion, particle, and lighting-change scenarios before tuning
     NFRU for your own Unreal Engine content.
   faqs:
