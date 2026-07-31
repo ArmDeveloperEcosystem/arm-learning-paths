@@ -37,14 +37,14 @@ In the tested Moku corridor captures, the scene can run above 60 FPS and present
 
 ## Compare Moku with and without NFRU
 
-The following animated comparison shows the same Moku scene with NFRU disabled and enabled. Use the comparison to observe how NFRU inserts generated intermediate frames to increase the perceived frame rate, making motion appear smoother while preserving visual detail.
+The following animated comparison shows the same Moku scene with NFRU disabled and enabled:
 
 <video width="100%" controls muted playsinline>
   <source src="https://raw.githubusercontent.com/powen-yang/arm_learning_path_assets/main/nfru_case_study/videos/compare_no_nfru_60fps_vs_nfru_120fps_small.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
-In representative Moku gameplay, NFRU delivers a noticeable improvement in presented smoothness while maintaining good overall visual quality. The most demanding cases — visibility changes, alpha-blended particles, and dramatic lighting transitions — can produce localized differences where the correct intermediate image is difficult to infer.
+Use the comparison to observe how NFRU inserts generated intermediate frames to increase the perceived frame rate, making motion appear smoother while preserving visual detail. The most demanding cases — visibility changes, alpha-blended particles, and dramatic lighting transitions — can produce localized differences where the correct intermediate image is difficult to infer.
 
 ## What you've learned and what's next
 
