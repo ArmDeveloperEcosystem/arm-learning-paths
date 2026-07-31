@@ -20,7 +20,7 @@ MPS3 is the recommended solution for evaluating performance, but boards are in s
 
 ## Virtual Hardware
 
-Virtual implementations of the Corstone reference systems are also available for software development. These can be accessed locally or in the cloud.
+Virtual implementations of the Corstone reference systems are also available for local software development.
 
 ### Ecosystem FVPs
 
@@ -31,71 +31,6 @@ The Corstone reference systems are available on the [Arm Ecosystem FVP page](htt
 The Ecosystem FVP can be used in conjunction with [Keil MDK](https://developer.arm.com/Tools%20and%20Software/Keil%20MDK) or [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
 
 Keil MDK Professional Edition also provides these virtual platforms.
-
-### Arm Virtual Hardware
-
-[Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware/) provides two cloud-based solutions to access Corstone reference systems. These are intended for use as software test and validation environments suitable for CI/CD integration.
-
-Both versions of AVH offer FVPs. Choose the one which best matches your preferences. You can use your AWS account and pay for the compute you use or pay for the hardware-as-a-service directly using your Arm account. Both methods offer free trials.
-
-The marketing information provides more details about the similarities and differences.
-
-- [Arm Virtual Hardware Corstone and CPUs](#aws) AWS AMI (Amazon Machine Image) provides Virtual Hardware Targets (`VHT`) in a cloud instance (virtual machine). The AMI is available in the [AWS marketplace](https://aws.amazon.com/marketplace/pp/prodview-urbpq7yo5va7g/).
-
-- [Arm Virtual Hardware Third-Party Hardware](#3rdparty) uses hypervisor technology to model real hardware provided by Arm's partners. It also offers FVPs as part of the cloud service.
-
-#### Arm Virtual Hardware Corstone and CPUs (AWS AMI) {#aws}
-
-Follow the [Arm Virtual Hardware Corstone install guide](/install-guides/avh/#corstone) to get started with AVH on AWS.
-
-The following executables are provided:
-* `VHT_Corstone_SSE-300_Ethos-U55`
-* `VHT_Corstone_SSE-300_Ethos-U65`
-* `VHT_Corstone_SSE-310_Ethos-U65`
-
-When you launch a model:
-```console
-VHT_Corstone_SSE-300_Ethos-U55
-```
-It will display output similar to:
-```output
-telnetterminal0: Listening for serial connection on port 5000
-telnetterminal1: Listening for serial connection on port 5001
-telnetterminal2: Listening for serial connection on port 5002
-telnetterminal5: Listening for serial connection on port 5003
-
-    Ethos-U rev 136b7d75 --- Feb 16 2022 15:47:15
-    (C) COPYRIGHT 2019-2022
-```
-{{% notice Visualization %}}
-
-A visualization of the FVP will also be displayed on the Linux desktop.
-
-To disable this, which should allow the FVP to startup more quickly, add:
-
-`-C mps3_board.visualisation.disable-visualisation=1`
-
-to the command line.
-{{% /notice %}}
-
-Terminate the FVP with `Ctrl+C`.
-
-If you can start the FVPs you are ready for ML application development.
-
-#### Arm Virtual Hardware Third-Party Hardware {#3rdparty}
-
-Arm Virtual Hardware Third-Party Hardware is currently in public beta.
-
-[Log in to AVH](https://app.avh.arm.com/login/) using your Arm account or create a new one using the `Create an Arm account` link.
-
-After log in, you can use the AVH console to create a new device and select `Corstone-300fvp` or `Corstone-310fvp`.
-
-You can use the AVH console to upload software and control FVP execution.
-
-There is also documentation available in the console you can read to continue learning about AVH.
-
-If you are in the console and can see the FVPs, you are ready for ML application development.
-
 
 ## FVP configuration options
 
@@ -110,7 +45,7 @@ Ethos-U55 and Ethos-U65 offer a configurable number of MACs (multiply-accumulate
 | Ethos-U55   | 32, 64, 128, 256            |
 | Ethos-U65   | 256, 512                    |
 
-FVP and VHT platforms can be configured with:
+FVPs can be configured with:
 ```console
 -C ethosu.num_macs=128
 ```
@@ -144,6 +79,6 @@ Refer to the [Arm IP Explorer install guide](/install-guides/ipexplorer/) for li
 
 ## Summary
 
-You should have a general understanding of the hardware options for Corstone-300 and Corstone-310 for application development. You can use an MPS3 board or an FVP on your local machine or using one of the cloud solutions.
+You should have a general understanding of the hardware options for Corstone-300 and Corstone-310 application development. You can use an MPS3 board or an FVP on your local machine.
 
 The next section covers similar information for software, tools, and example applications.
