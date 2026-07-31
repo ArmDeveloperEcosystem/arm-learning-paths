@@ -1,5 +1,6 @@
 --- 
-title: Explore Project Moku for NFRU testing
+title: Understand Project Moku as an NFRU test environment
+description: Explore Project Moku as a controlled Unreal Engine environment for evaluating Neural Frame Rate Upscaling and related neural rendering techniques on mobile GPUs.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -20,9 +21,9 @@ To learn more about neural graphics techniques — including NFRU — and evalua
 
 The Project Moku corridor level is designed to showcase NFRU in a clear, controlled scene. Its long corridor makes it easy to observe the visual improvements from higher frame rates.  Occlusion interactions, lighting environments, and particle VFX scenarios help exercise frame generation under different visibility and illumination conditions.
 
-NFRU gives you a practical way to stretch an existing rendering budget. By generating an intermediate frame between rendered frames, NFRU can increase the percieved framerate without requiring the engine to render every displayed frame or introducing a new content-authoring workflow.
+NFRU gives you a practical way to stretch an existing rendering budget. By generating an intermediate frame between rendered frames, NFRU can increase the perceived framerate without requiring the engine to render every displayed frame or introducing a new content-authoring workflow.
 
-## The setup for the case study
+## Reference cuts from Project Moku for testing NFRU
 
 For repeatable testing, the case study uses reference cuts from Project Moku that replay the same camera paths and gameplay actions across runs. To follow along the investigation, you'll need similar reference cuts from your game.
 
@@ -34,7 +35,7 @@ The cuts create a consistent development and test environment, making it easier 
 In the tested Moku corridor captures, the scene can run above 60 FPS and present up to 120 FPS using generated intermediate frames. Treat these numbers as empirical results from the tested device, build, scene cut, and pacing setup, not as a fixed guarantee for every configuration.
 
 
-## The result of Moku with and without NFRU
+## Compare Moku with and without NFRU
 
 The following animated comparison shows the same Moku scene with NFRU disabled and enabled. Use the comparison to observe how NFRU inserts generated intermediate frames to increase the perceived frame rate, making motion appear smoother while preserving visual detail.
 

@@ -1,5 +1,6 @@
 ---
 title: Analyze lighting changes with NFRU and Project Moku
+description: Analyze NFRU frame generation during lighting changes and investigate localized artifacts caused by optical flow, depth, motion, and blend parameters.
 weight: 7
 
 ### FIXED, DO NOT MODIFY

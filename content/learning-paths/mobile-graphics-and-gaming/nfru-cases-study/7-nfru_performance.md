@@ -1,5 +1,6 @@
 ---
 title: Analyze NFRU performance
+description: Measure NFRU render FPS, present FPS, GPU and neural workload, and frame pacing, then tune the pace adjuster for a sustainable presentation rate.
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -177,11 +178,11 @@ The goal is to find a stable FPS target instead of always aiming for the highest
 
 ## FPS adjustment settings
 
-The pace adjuster moves between stable FPS levels derived from the platform frame pace, such as `30 -> 40 -> 60 -> 120`. It only changes one level at a time to avoid sudden jumps. If several frames have enough spare time, it raises the target to the next FPS level. If several frames are late, it lowers the target to the previous FPS level.
+The pace adjuster moves between stable FPS levels derived from the platform frame pace, such as `30 -> 40 -> 60 -> 120`. It changes only one level at a time to avoid sudden jumps. If several frames have enough spare time, it raises the target to the next FPS level. If several frames are late, it lowers the target to the previous FPS level.
 
 `r.NFRU.UpAdjustFrameCount` controls how many consecutive good frames are required before increasing the target FPS. Its default value is `40`, which makes the adjuster cautious before moving up. `r.NFRU.DownAdjustFrameCount` controls how many consecutive late frames are required before decreasing the target FPS. Its default value is `20`, so the adjuster reacts faster when the current target cannot be sustained. In practice, this means NFRU increases FPS slowly for stability and decreases FPS faster to reduce visible stutter.
 
-Developers can tune these two values to fit their content and target device. Lower values make the pace adjuster react faster to changing workload conditions, but can also cause more frequent FPS target changes. Higher values make the adjuster more stable, but it may take longer to move up when headroom is available or move down when the selected target becomes too expensive.
+Developers can tune these two values to fit their content and target device. Lower values make the pace adjuster react faster to changing workload conditions, but can also cause more frequent FPS target changes. Higher values make the adjuster more stable, but it might take longer to move up when headroom is available or move down when the selected target becomes too expensive.
 
 ## What you've accomplished
 

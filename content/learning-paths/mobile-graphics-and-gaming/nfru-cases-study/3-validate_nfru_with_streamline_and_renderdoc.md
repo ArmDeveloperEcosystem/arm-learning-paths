@@ -1,5 +1,6 @@
 ---
 title: Validate NFRU with Streamline and RenderDoc
+description: Use Streamline and RenderDoc to confirm NFRU activity, measure GPU and neural workload, and inspect generated-frame quality in Project Moku.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

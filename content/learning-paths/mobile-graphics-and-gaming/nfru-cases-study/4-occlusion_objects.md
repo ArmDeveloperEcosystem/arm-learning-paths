@@ -1,5 +1,6 @@
 ---
 title: Analyze occlusion with NFRU and Project Moku
+description: Analyze NFRU-generated frames during occlusion-in and occlusion-out events to identify boundary blur, distortion, and background-reconstruction artifacts.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

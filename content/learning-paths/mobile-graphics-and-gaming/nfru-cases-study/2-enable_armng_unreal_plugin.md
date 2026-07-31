@@ -1,5 +1,6 @@
 ---
 title: Enable the Arm Neural Graphics Plugin
+description: Enable the Arm Neural Graphics Plugin in an Unreal Engine project and configure the project to detect and load the plugin for NFRU testing.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

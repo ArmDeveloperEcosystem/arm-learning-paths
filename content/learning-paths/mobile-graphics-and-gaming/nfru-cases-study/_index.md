@@ -8,8 +8,7 @@ minutes_to_complete: 30
 who_is_this_for: This Learning Path is for game and graphics developers who want to evaluate Neural Frame Rate Upscaling (NFRU) in Unreal Engine using Arm ML Extensions for Vulkan.
 
 learning_objectives:
-    - Explain how NFRU generates intermediate frames for smoother motion.
-    - Enable the Arm Neural Graphics Plugin in an Unreal Engine project.
+    - Understand how NFRU generates intermediate frames for smoother motion.
     - Evaluate NFRU visual quality across occlusion, particle, and lighting-change scenarios.
     - Measure NFRU performance and tune frame pacing with Unreal Engine console variables.
     - Analyze generated frames with RenderDoc for Arm GPUs.
@@ -22,6 +21,49 @@ prerequisites:
     - Visual Studio with Desktop Development with C++ and .NET desktop build tools
     - Familiarity with Unreal Engine project setup and rendering settings
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  summary: >-
+    You will use Project Moku, an Arm Unreal Engine sample, to evaluate Neural Frame Rate
+    Upscaling (NFRU) on mobile GPUs. You will enable the Arm Neural Graphics Plugin, create
+    repeatable reference cuts, and use Streamline and RenderDoc to validate frame generation,
+    inspect visual differences, and measure render FPS, present FPS, neural workload, and frame
+    pacing. You will analyze occlusion, particle, and lighting-change scenarios before tuning
+    NFRU for your own Unreal Engine content.
+  faqs:
+  - question: What is Project Moku used for?
+    answer: >-
+      Project Moku is an Arm Unreal Engine sample that provides a controlled environment for
+      evaluating NFRU and related neural rendering techniques on supported mobile GPUs.
+  - question: How does NFRU improve perceived smoothness?
+    answer: >-
+      NFRU generates an intermediate frame between rendered frames, increasing the presentation
+      cadence without requiring the engine to render every displayed frame.
+  - question: Which tools validate NFRU?
+    answer: >-
+      Use Streamline to confirm NFRU activity and measure GPU and neural workload. Use RenderDoc
+      to inspect frame-generation events, inputs, intermediate resources, and generated output.
+  - question: Which scenes are useful for evaluating NFRU visual quality?
+    answer: >-
+      Test repeatable scenes with occlusion changes, alpha-blended particles, and lighting changes.
+      These scenarios expose differences around visibility, disocclusion, transparency, and
+      screen edges.
+  - question: How should NFRU performance be measured?
+    answer: >-
+      Compare render FPS with present FPS, then check GPU and neural workload, display limits,
+      and frame-pacing gaps. Use the pace adjuster to select a presentation target the workload
+      can sustain.
+# END generated_summary_faq
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 author: Powen Yang
 
