@@ -15,7 +15,7 @@ Project Moku is an Unreal Engine sample project developed by Arm that demonstrat
 To learn more about neural graphics techniques — including NFRU — and evaluate how they fit your game, see the [Neural Graphics Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/) Learning Path.
 {{% /notice %}}
 
-![Project Moku corridor scene#center](./images/moku_intro.jpg "Project Moku corridor scene")
+![Project Moku corridor scene used as a controlled environment for comparing NFRU-generated and rendered frames#center](./images/moku_intro.jpg "Project Moku corridor scene")
 
 ## Why use Project Moku to evaluate NFRU
 
@@ -29,7 +29,7 @@ For repeatable testing, the case study uses reference cuts from Project Moku tha
 
 The cuts create a consistent development and test environment, making it easier to compare NFRU disabled and enabled captures, inspect visual artifacts, and measure performance changes. The following screenshots show examples of the cuts from Project Moku.
 
-| ![Reference cut 02 showing a Moku lighting and corridor test view#center](./images/reference-cut-02.jpg "Reference cut 02") | ![Reference cut 03 showing a Moku scene variation for NFRU testing#center](./images/reference-cut-03.jpg "Reference cut 03") | ![Reference cut 04 showing a Moku particle VFX test view#center](./images/reference-cut-04.jpg "Reference cut 04") |
+| ![Reference cut 02 showing a Moku corridor lighting-change scenario for repeatable NFRU testing#center](./images/reference-cut-02.jpg "Reference cut 02") | ![Reference cut 03 showing a Moku scene variation used to compare NFRU output across repeatable camera actions#center](./images/reference-cut-03.jpg "Reference cut 03") | ![Reference cut 04 showing a Moku particle-effects scenario used to evaluate NFRU-generated frames#center](./images/reference-cut-04.jpg "Reference cut 04") |
 | --- | --- | --- |
 
 In the tested Moku corridor captures, the scene can run above 60 FPS and present up to 120 FPS using generated intermediate frames. Treat these numbers as empirical results from the tested device, build, scene cut, and pacing setup, not as a fixed guarantee for every configuration.
