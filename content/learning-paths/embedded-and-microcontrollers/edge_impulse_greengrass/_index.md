@@ -31,7 +31,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-cloud_service_providers:
+platforms:
     - AWS
 subjects: ML
 armips:

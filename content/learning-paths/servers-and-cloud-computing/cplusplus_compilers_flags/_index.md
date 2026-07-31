@@ -67,7 +67,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-cloud_service_providers:
+platforms:
+  - Arm AGI
   - AWS
   - Microsoft Azure
   - Google Cloud

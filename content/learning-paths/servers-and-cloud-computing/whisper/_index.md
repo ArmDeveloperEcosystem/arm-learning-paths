@@ -28,7 +28,7 @@ skilllevels: Introductory
 armips:
     - Neoverse
 subjects: ML
-cloud_service_providers:
+platforms:
   - AWS
   - Microsoft Azure
   - Google Cloud

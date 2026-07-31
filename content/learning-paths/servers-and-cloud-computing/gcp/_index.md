@@ -25,7 +25,7 @@ rerun_faqs: false
 ##### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
-cloud_service_providers:
+platforms:
   - Google Cloud
 
 armips:

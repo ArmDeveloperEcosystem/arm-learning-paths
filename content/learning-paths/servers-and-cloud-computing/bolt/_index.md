@@ -82,6 +82,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
+platforms:
+    - Arm AGI
 armips:
     - Neoverse
     - Cortex-A

@@ -70,7 +70,7 @@ rerun_faqs: false
 # Tagging metadata, see the Learning Path guide for the allowed values
 skilllevels: Introductory
 subjects: ML
-cloud_service_providers:
+platforms:
   - Google Cloud
 armips:
     - Neoverse

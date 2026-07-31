@@ -81,7 +81,7 @@ skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
     - Neoverse
-cloud_service_providers:
+platforms:
   - Microsoft Azure
 tools_software_languages:
     - dotnet
