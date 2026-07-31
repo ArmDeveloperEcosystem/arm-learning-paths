@@ -46,6 +46,6 @@ The following animated comparison shows the same Moku scene with NFRU disabled a
 
 ## What you've learned and what's next
 
-You've seen why Project Moku is useful for NFRU evaluation.
+You've now learned why Project Moku is useful for NFRU evaluation.
 
 Next, you'll enable the Arm Neural Graphics Plugin in the Unreal Engine project.

@@ -202,7 +202,7 @@ The pace adjuster moves between stable FPS levels derived from the platform fram
 
 `r.NFRU.DownAdjustFrameCount` controls how many consecutive late frames are required before decreasing the target FPS. Its default value is `20`, so the adjuster reacts faster when the current target can't be sustained. In practice, this means NFRU increases FPS slowly for stability and decreases FPS faster to reduce visible stutter.
 
-Developers can tune these two values to fit their content and target device. Lower values make the pace adjuster react faster to changing workload conditions. However, it can also cause more frequent FPS target changes. 
+You can tune these two values to fit your content and target device. Lower values make the pace adjuster react faster to changing workload conditions. However, it can also cause more frequent FPS target changes. 
 
 Higher values make the adjuster more stable. However, it might take longer to move up when headroom is available or move down when the selected target becomes too expensive.
 
