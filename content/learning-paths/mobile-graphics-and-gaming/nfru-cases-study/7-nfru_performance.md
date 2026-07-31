@@ -1,16 +1,20 @@
 ---
-title: NFRU performance
+title: Analyze NFRU performance
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# NFRU frame pacing overview
+## NFRU frame pacing
 
 NFRU increases the presentation cadence by generating an intermediate frame between valid consecutive rendered frames. When the base render rate and presentation pacing are stable, the display can receive frames more often without requiring the engine to render each one. The sustainable uplift depends on both the interpolation workload and when the real and generated frames are submitted and shown, so frame pacing is an important part of realizing the smoothness benefit.
 
-## Render FPS vs present FPS
+Render cost, NFRU overhead, display refresh rate, VSync, platform frame pacing, Android Swappy, and the selected pace-adjuster target determine the sustainable present FPS for a given workload.
+
+When profiling, observe render FPS and present FPS, and check whether idle gaps are caused by pacing waits or by actual GPU workload limits. The NFRU pace adjuster converts available headroom into a stable target by moving between sustainable FPS levels instead of chasing an unstable peak, helping NFRU deliver smoother and more consistent gameplay.
+
+## Evaluate render FPS versus present FPS
 
 To monitor NFRU performance in real-time, use the console command:
 
@@ -42,18 +46,18 @@ Present interval = 16.6 ms
 With one generated frame between two real frames, the display can receive frames twice as often:
 
 Render timeline:
-```
+```text
 R0 ---------------- R1
        33.3 ms
 ```
 
 Present timeline:
-```
+```text
 R0 -------- G0 -------- R1
    16.6 ms    16.6 ms
 ```
 
-So when NFRU is generating and presenting each intermediate frame, render FPS may stay the same, while present FPS increases.
+So when NFRU is generating and presenting each intermediate frame, render FPS might stay the same, while present FPS increases.
 
 ## Why frame pacing is needed
 
@@ -69,16 +73,16 @@ P0 ---- P1 ---- P2 ---- P3 ---- P4
 
 ### Frame pacing behavior and GPU idle time
 
-In Streamline captures, frame-pacing waits often appear as gaps between GPU workloads. These gaps can happen when real rendered frames are produced unevenly, and the pacing system waits before submitting or presenting the next real or generated frame to keep the output aligned with the target cadence. During that wait, the GPU may be idle:
+In Streamline captures, frame-pacing waits often appear as gaps between GPU workloads. These gaps can happen when real rendered frames are produced unevenly, and the pacing system waits before submitting or presenting the next real or generated frame to keep the output aligned with the target cadence. During that wait, the GPU might be idle:
 
 ![Frame Pacing Issue](./images/frame_pacing/frame_pacing_issue_1.png)
 
 These idle gaps are important to identify because they can indicate that presentation timing, rather than pure render cost, is limiting the observed FPS uplift:
 
-- **GPU idle time**: The GPU has no queued work while the pacing system waits for the next frame timing slot.
-- **Lower measured throughput**: Present FPS may be limited by pacing or display timing even when the GPU has spare capacity.
-- **Uneven workload distribution**: Bursts of rendering work followed by idle gaps can make frame delivery harder to interpret in profiling captures.
-- **Power behavior changes**: Idle periods may reduce instantaneous GPU activity, while bursts can still create short load spikes.
+- GPU idle time: The GPU has no queued work while the pacing system waits for the next frame timing slot.
+- Lower measured throughput: Present FPS might be limited by pacing or display timing even when the GPU has spare capacity.
+- Uneven workload distribution: Bursts of rendering work followed by idle gaps can make frame delivery harder to interpret in profiling captures.
+- Power behavior changes: Idle periods might reduce instantaneous GPU activity, while bursts can still create short load spikes.
 
 Proper frame pacing keeps presentation intervals stable, but it can intentionally introduce waiting. For profiling, distinguish between idle time caused by pacing and idle time caused by missing render work or synchronization problems.
 
@@ -111,7 +115,7 @@ These commands change the pacing behavior as follows:
 - `r.NFRU.PaceAdjuster 0` disables the NFRU adaptive pace adjuster.
 - `a.UseSwappyForFramePacing 0` disables Android Swappy pacing when Swappy is available.
 - `r.VSync 0` disables VSync.
-- `t.MaxFPS 0` removes Unreal's max FPS cap.
+- `t.MaxFPS 0` removes the Unreal max FPS cap.
 - `r.SetFramePace 0` attempts to clear platform frame pacing.
 
 After applying these settings, observe render FPS and present FPS again. If present FPS increases, one of the pacing systems was limiting presentation. If present FPS remains unchanged, the limit is more likely caused by render cost, NFRU processing cost, display refresh behavior, or another platform constraint.
@@ -144,7 +148,7 @@ NFRU also has its own GPU cost, including optical flow, frame interpolation, res
 
 ## How the NFRU pace adjuster works
 
-The NFRU pace adjuster is an optional adaptive frame pacing controller provided by the ArmNG Unreal plugin. It runs on the plugin's NFRU custom-present path and chooses a sustainable presentation FPS target while NFRU is running. It does not make Unreal render more real frames, and it does not change interpolation quality. Instead, it adjusts the frame pace target so real and generated frames are presented at a rate the current workload can sustain.
+The NFRU pace adjuster is an optional adaptive frame pacing controller provided by the ArmNG Unreal plugin. It runs on the NFRU custom-present path of the plugin and chooses a sustainable presentation FPS target while NFRU is running. It does not make Unreal render more real frames, and it does not change interpolation quality. Instead, it adjusts the frame pace target so real and generated frames are presented at a rate the current workload can sustain.
 
 When enabled, the NFRU custom presenter monitors frame timing during presentation. If frames consistently finish with enough spare time, the adjuster raises the target to the next available FPS level. If frames are late, it lowers the target to the previous FPS level. The selected target is applied through `r.SetFramePace`.
 
@@ -154,7 +158,7 @@ Enable it with:
 r.NFRU.PaceAdjuster 1
 ```
 
-```
+```text
 Renderer + NFRU
       |
       v
@@ -179,8 +183,12 @@ The pace adjuster moves between stable FPS levels derived from the platform fram
 
 Developers can tune these two values to fit their content and target device. Lower values make the pace adjuster react faster to changing workload conditions, but can also cause more frequent FPS target changes. Higher values make the adjuster more stable, but it may take longer to move up when headroom is available or move down when the selected target becomes too expensive.
 
-## Summary
+## What you've accomplished
 
-NFRU turns each valid pair of rendered frames into a higher presentation cadence, improving perceived smoothness without requiring the engine to render every displayed frame. Render cost, NFRU overhead, display refresh rate, VSync, platform frame pacing, Android Swappy, and the selected pace-adjuster target determine the sustainable present FPS for a given workload.
+You've now analyzed NFRU performance by comparing render FPS and present FPS. You've also learned about the NFRU pace adjuster and how it works. 
 
-When profiling, observe render FPS and present FPS, and check whether idle gaps are caused by pacing waits or by actual GPU workload limits. The NFRU pace adjuster converts available headroom into a stable target by moving between sustainable FPS levels instead of chasing an unstable peak, helping NFRU deliver smoother and more consistent gameplay.
+You've completed a case study workflow for NFRU with Project Moku.
+
+NFRU is one of the most approachable entry points into neural graphics: the model and engine integration are provided, no new content-authoring pipeline is required, and you can evaluate the benefit quickly in representative gameplay. Project Moku shows how you can use neural-accelerated hardware to present smoother motion while retaining the measurement, debugging, and pacing controls needed to meet your quality bar. Use this case study as a baseline, then bring that opportunity to your own Unreal Engine content.
+
+Start with a repeatable test scene. Then, capture runs with NFRU disabled and enabled, measure the smoothness and performance benefit, and inspect any localized differences that affect your quality target. Use Streamline to select a sustainable presentation rate for the workload.

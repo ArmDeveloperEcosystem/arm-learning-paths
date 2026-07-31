@@ -1,5 +1,5 @@
 ---
-title: NFRU Case Study - Project Moku
+title: Analyze Neural Frame Rate Upscaling using Project Moku
 
 description: Learn how Project Moku uses Neural Frame Rate Upscaling to improve presented smoothness, then enable, evaluate, and tune NFRU in Unreal Engine using Arm ML Extensions for Vulkan.
 
@@ -16,7 +16,7 @@ learning_objectives:
 
 
 prerequisites:
-    - "Recommended: complete [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/)"
+    - (Recommended) Complete [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/)
     - Windows 11
     - Unreal Engine 5.4 or 5.6 with Templates and Feature Pack enabled
     - Visual Studio with Desktop Development with C++ and .NET desktop build tools
@@ -59,6 +59,30 @@ further_reading:
         title: Streamline Performance Analyzer
         link: https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer
         type: documentation
+    - resource:
+        title: Set up the Unreal project
+        link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/3-set_up_the_unreal_project/
+        type: documentation
+    - resource:
+        title: RenderDoc integration guide
+        link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/7-renderdoc/
+        type: documentation
+    - resource:
+        title: Streamline
+        link: /learning-paths/mobile-graphics-and-gaming/ams/streamline/
+        type: documentation
+    - resource:
+        title: Neural Graphics Playbook - Evaluate
+        link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/
+        type: learning path
+    - resource:
+        title: Fine-tune neural graphics models using Model Gym
+        link: /learning-paths/mobile-graphics-and-gaming/model-training-gym/
+        type: learning path
+    - resource:
+        title: Generate neural graphics datasets with Neural Graphics Data Capture in Unreal Engine
+        link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-data-capture-unreal/
+        type: learning path
 
 
 

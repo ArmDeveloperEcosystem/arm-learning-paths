@@ -1,32 +1,30 @@
 --- 
-title: Introduction to the Moku project
+title: Explore Project Moku for NFRU testing
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is Project Moku?
+## What Project Moku is
 
-Project Moku is an Unreal Engine sample project developed by Arm that demonstrates neural rendering technologies for mobile platforms. Built on Unreal 5.6, it provides a controlled environment for testing Neural Frame Rate Upscaling (NFRU), along with complementary neural rendering techniques such as Neural Super Sampling (NSS) and Neural Super Sampling and Denoising (NSSD). It is designed to exercise dedicated neural accelerators on GPUs with built-in neural processing support.
+Project Moku is an Unreal Engine sample project developed by Arm that demonstrates neural rendering technologies for mobile platforms. Built on Unreal 5.6, the project provides a controlled environment for testing Neural Frame Rate Upscaling (NFRU), along with complementary neural rendering techniques such as Neural Super Sampling (NSS) and Neural Super Sampling and Denoising (NSSD). Project Moku is designed to exercise dedicated neural accelerators on GPUs with built-in neural processing support.
 
 {{% notice Info %}}
-To learn more about neural graphics techniques (including NFRU) and evaluate how they fit your game, see the [Neural Graphics Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/) Learning Path.
+To learn more about neural graphics techniques — including NFRU — and evaluate how they fit your game, see the [Neural Graphics Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/) Learning Path.
 {{% /notice %}}
 
 ![Project Moku corridor scene#center](./images/moku_intro.jpg "Project Moku corridor scene")
 
-## Why use Project Moku for NFRU?
+## Why use Project Moku to evaluate NFRU
 
-The Project Moku corridor level is designed to showcase NFRU in a clear, controlled scene. Its long corridor makes it easy to observe the visual improvements from higher frame rates, while occlusion interactions, lighting environments, and particle VFX scenarios help exercise frame generation under different visibility and illumination conditions.
+The Project Moku corridor level is designed to showcase NFRU in a clear, controlled scene. Its long corridor makes it easy to observe the visual improvements from higher frame rates.  Occlusion interactions, lighting environments, and particle VFX scenarios help exercise frame generation under different visibility and illumination conditions.
 
-NFRU gives you a practical way to stretch an existing rendering budget. By generating an intermediate frame between rendered frames, it can increase the percieved framerate without requiring the engine to render every displayed frame or introducing a new content-authoring workflow.
+NFRU gives you a practical way to stretch an existing rendering budget. By generating an intermediate frame between rendered frames, NFRU can increase the percieved framerate without requiring the engine to render every displayed frame or introducing a new content-authoring workflow.
 
+## The setup for the case study
 
-
-## The setup for this case study
-
-For repeatable testing, this case study uses reference cuts from Project Moku that replay the same camera paths and gameplay actions across runs. To follow along the investigation, you will need similar reference cuts from your own game.
+For repeatable testing, the case study uses reference cuts from Project Moku that replay the same camera paths and gameplay actions across runs. To follow along the investigation, you'll need similar reference cuts from your game.
 
 The cuts create a consistent development and test environment, making it easier to compare NFRU disabled and enabled captures, inspect visual artifacts, and measure performance changes. The following screenshots show examples of the cuts from Project Moku.
 
@@ -37,13 +35,16 @@ In the tested Moku corridor captures, the scene can run above 60 FPS and present
 
 
 ## The result of Moku with and without NFRU
-The animated comparison below shows the same Moku scene with NFRU disabled and enabled. Use it to observe how NFRU inserts generated intermediate frames to increase the perceived frame rate, making motion appear smoother while preserving visual detail.
+
+The following animated comparison shows the same Moku scene with NFRU disabled and enabled. Use the comparison to observe how NFRU inserts generated intermediate frames to increase the perceived frame rate, making motion appear smoother while preserving visual detail.
 
 <video width="100%" controls muted playsinline>
   <source src="https://raw.githubusercontent.com/powen-yang/arm_learning_path_assets/main/nfru_case_study/videos/compare_no_nfru_60fps_vs_nfru_120fps_small.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
-## Next step
+## What you've learned and what's next
 
-Now that you have seen why Project Moku is useful for NFRU evaluation, continue by enabling the Arm Neural Graphics Plugin in the Unreal Engine project.
+You've seen why Project Moku is useful for NFRU evaluation.
+
+Next, you'll enable the Arm Neural Graphics Plugin in the Unreal Engine project.

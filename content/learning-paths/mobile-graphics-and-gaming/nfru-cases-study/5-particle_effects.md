@@ -1,14 +1,16 @@
 ---
-title: Particle effects
+title: Analyze particle effects with NFRU
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Particle effects
+## Understand how NFRU handles particle effects
 
 Particle effects are an important test of perceived quality because their exact shape often changes from frame to frame. In Moku, NFRU preserves the overall color, brightness, and placement of these effects during motion. Translucent or alpha-blended particles may not provide stable depth or motion-vector information after composition, so localized differences can still appear in the generated frame.
+
+## Analyze the generated frame
 
 Compare the previous frame, current frame, and `InterpolatedRT` to find whether the generated frame preserves the particle shape and position.
 
@@ -16,9 +18,9 @@ Compare the previous frame, current frame, and `InterpolatedRT` to find whether 
 
 What to inspect:
 
-- **Blur or smear**: the particle color is warped using an estimated motion that does not match the actual particle movement, especially for smoke, sparks, fire, or trails.
-- **Disappear or flicker**: particles that fade in/out, spawn, die, or change opacity between real frames may not have a stable match, so the generated frame may reduce or drop them.
-- **Distortion**: optical flow may interpret changing shape, additive brightness, or overlapping particles as motion, producing stretched, bent, or duplicated particle regions.
+- Blur or smear: the particle color is warped using an estimated motion that does not match the actual particle movement, especially for smoke, sparks, fire, or trails.
+- Disappear or flicker: particles that fade in/out, spawn, die, or change opacity between real frames may not have a stable match, so the generated frame may reduce or drop them.
+- Distortion: optical flow may interpret changing shape, additive brightness, or overlapping particles as motion, producing stretched, bent, or duplicated particle regions.
 
 The highlighted blur area shows a particle ring that loses definition in the generated frame. Look for soft edges, smeared color, or a shape that no longer matches either source frame.
 
@@ -38,6 +40,6 @@ The highlighted thruster fire shows a generated particle result that still reads
 
 ## What you've learned and what's next
 
-In this section, you saw that particle effects can remain visually convincing in NFRU-generated frames even when individual shapes do not match a physically exact intermediate state. The Moku thruster example preserves the effect's expected color, brightness, and location. When alpha blending or rapidly changing opacity produces blur, distortion, flicker, or dropped detail, the differences are localized and can be evaluated against the effect in motion.
+You've now seen that particle effects can remain visually convincing in NFRU-generated frames even when individual shapes don't match a physically exact intermediate state. The Moku thruster example preserves the expected color, brightness, and location of the effect. When alpha blending or rapidly changing opacity produces blur, distortion, flicker, or dropped detail, the differences are localized and can be evaluated against the effect in motion.
 
 Next, continue evaluating how NFRU preserves complex illumination and how to diagnose localized differences around emissive surfaces, translucent lighting, and screen edges.
