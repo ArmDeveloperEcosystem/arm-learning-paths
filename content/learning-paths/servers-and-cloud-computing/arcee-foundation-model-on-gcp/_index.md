@@ -78,7 +78,7 @@ tools_software_languages:
     - Google Cloud
     - Hugging Face
     - Python
-    - Llama.cpp
+    - llama.cpp
 operatingsystems:
     - Linux
 

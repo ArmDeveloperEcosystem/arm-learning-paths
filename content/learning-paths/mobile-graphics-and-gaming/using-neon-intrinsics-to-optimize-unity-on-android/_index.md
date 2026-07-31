@@ -37,7 +37,7 @@ armips:
     - Neon
 tools_software_languages:
     - Unity
-    - C#
+    - csharp
 operatingsystems:
     - Android
 

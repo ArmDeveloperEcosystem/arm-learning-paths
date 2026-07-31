@@ -30,8 +30,8 @@ operatingsystems:
     - Windows
 tools_software_languages:
     - Windows Forms
-    - C#
-    - .NET
+    - csharp
+    - dotnet
 
 further_reading:
     - resource:

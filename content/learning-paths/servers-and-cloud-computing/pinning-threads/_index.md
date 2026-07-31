@@ -34,7 +34,7 @@ cloud_service_providers:
 armips:
     - Neoverse
 tools_software_languages:
-    - C++
+    - CPP
     - Python
     - taskset
     - perf

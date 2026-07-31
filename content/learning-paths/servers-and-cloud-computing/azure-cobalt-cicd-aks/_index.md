@@ -80,7 +80,7 @@ armips:
     - Neoverse
 
 tools_software_languages:
-    - .NET
+    - dotnet
     - Kubernetes
     - Docker
 

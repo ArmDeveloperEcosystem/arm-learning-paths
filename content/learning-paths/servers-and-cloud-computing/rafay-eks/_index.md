@@ -85,7 +85,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Kubernetes
-    - AWS Elastic Kubernetes Service (EKS)
+    - Amazon EKS
     - Rafay
     - NGINX
     - rctl

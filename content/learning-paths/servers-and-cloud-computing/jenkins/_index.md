@@ -41,7 +41,7 @@ tools_software_languages:
   - Jenkins
   - OpenJDK 17
   - Docker
-  - Groovy (Jenkins Pipeline)
+  - Groovy
 
 operatingsystems:
     - Linux

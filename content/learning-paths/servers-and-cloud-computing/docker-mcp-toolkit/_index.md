@@ -85,7 +85,7 @@ tools_software_languages:
     - Docker
     - MCP
     - GitHub Copilot
-    - C++
+    - CPP
     - VS Code
 operatingsystems:
     - Linux

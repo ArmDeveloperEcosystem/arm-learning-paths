@@ -30,7 +30,7 @@ armips:
     - Neoverse
 
 tools_software_languages:
-    - ASP.NET Core    
+    - aspnetcore    
     - Docker
     - Kubernetes
 

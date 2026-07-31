@@ -30,7 +30,7 @@ armips:
     - Cortex-A
     - Arm C1
 tools_software_languages:
-    - C++
+    - CPP
     - ONNX Runtime
     - SME2
 operatingsystems:

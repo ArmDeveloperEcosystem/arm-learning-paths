@@ -27,8 +27,8 @@ armips:
     - Cortex-A
 tools_software_languages:
     - Visual Studio
-    - C#
-    - .NET
+    - csharp
+    - dotnet
     - Arm Performance Libraries
 operatingsystems:
     - Windows

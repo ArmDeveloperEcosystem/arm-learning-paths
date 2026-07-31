@@ -13,19 +13,18 @@ pinned_learning_paths:
 operatingsystems_filter:
 - Android: 3
 - ChromeOS: 2
-- Linux: 46
-- macOS: 14
+- Linux: 49
+- macOS: 16
 - Windows: 50
 subjects_filter:
 - CI-CD: 7
 - Containers and Virtualization: 8
 - Migration to Arm: 30
-- ML: 11
+- ML: 14
 - Performance and Architecture: 30
 subtitle: Build native Windows on Arm applications that are fast and efficient.
 title: Laptops and Desktops
 tools_software_languages_filter:
-- .NET: 13
 - Alacritty: 1
 - Android Studio: 1
 - Arm Development Studio: 1
@@ -33,18 +32,20 @@ tools_software_languages_filter:
 - Arm64EC: 1
 - Assembly: 1
 - Bash: 5
-- C: 12
-- C#: 6
+- C: 13
 - CCA: 1
 - Clang: 13
 - CMake: 5
 - CPP: 13
+- csharp: 6
 - CSS: 1
-- Docker: 12
+- Docker: 13
+- dotnet: 13
 - ExecuTorch: 1
 - FastAPI: 1
 - FFmpeg: 1
 - GCC: 12
+- Generative AI: 1
 - Git: 1
 - GitHub: 3
 - GitHub Actions: 1
@@ -63,8 +64,8 @@ tools_software_languages_filter:
 - Kubernetes: 1
 - KVM: 1
 - Linux: 1
-- llama.cpp: 3
-- LLM: 1
+- llama.cpp: 4
+- LLM: 2
 - LLVM: 2
 - llvm-mca: 1
 - MCP: 1
@@ -76,14 +77,14 @@ tools_software_languages_filter:
 - Neon: 1
 - Neovim: 1
 - Node.js: 3
-- Ollama: 1
+- Ollama: 3
 - ONNX Runtime: 1
 - OpenCV: 1
 - perf: 4
 - PGO: 1
 - PowerShell: 1
 - Pytest: 1
-- Python: 16
+- Python: 19
 - PyTorch: 1
 - QEMU: 1
 - Qt: 2
@@ -104,6 +105,7 @@ tools_software_languages_filter:
 - Ubuntu: 1
 - Visual Studio: 14
 - Visual Studio Code: 14
+- vLLM: 1
 - Windows Forms: 1
 - Windows Performance Analyzer: 1
 - Windows Presentation Foundation: 1
@@ -113,7 +115,6 @@ tools_software_languages_filter:
 - WSL: 1
 - Xamarin Forms: 1
 weight: 2
-# auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit

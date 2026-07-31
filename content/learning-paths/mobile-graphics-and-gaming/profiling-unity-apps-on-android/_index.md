@@ -34,7 +34,7 @@ armips:
     - arm architecture
 tools_software_languages:
     - Unity
-    - C#
+    - csharp
 operatingsystems:
     - Android
 

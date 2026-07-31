@@ -29,7 +29,7 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
-    - .NET
+    - dotnet
     - Visual Studio
     - Windows Sandbox
 

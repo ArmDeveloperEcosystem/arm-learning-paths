@@ -32,8 +32,8 @@ armips:
     - Neoverse
 
 tools_software_languages:
-    - .NET
-    - C# 
+    - dotnet
+    - csharp 
     - Visual Studio Code
 
 operatingsystems:

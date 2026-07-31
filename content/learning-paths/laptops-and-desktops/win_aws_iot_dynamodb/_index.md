@@ -72,7 +72,7 @@ armips:
 operatingsystems:
     - Windows
 tools_software_languages:
-    - .NET    
+    - dotnet    
     - Visual Studio Code
 
 further_reading:

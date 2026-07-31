@@ -30,8 +30,8 @@ operatingsystems:
     - Windows
 tools_software_languages:
     - Windows Presentation Foundation
-    - C#
-    - .NET
+    - csharp
+    - dotnet
     - Visual Studio
 
 further_reading:
