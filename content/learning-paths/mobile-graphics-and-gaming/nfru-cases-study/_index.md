@@ -1,7 +1,7 @@
 ---
 title: Analyze Neural Frame Rate Upscaling using Project Moku
 
-description: Learn how Project Moku uses Neural Frame Rate Upscaling to improve presented smoothness, then enable, evaluate, and tune NFRU in Unreal Engine using Arm ML Extensions for Vulkan.
+description: Learn how Project Moku uses Neural Frame Rate Upscaling (NFRU) to improve presented smoothness, then enable, evaluate, and tune NFRU in Unreal Engine using Arm ML Extensions for Vulkan.
 
 minutes_to_complete: 30
 

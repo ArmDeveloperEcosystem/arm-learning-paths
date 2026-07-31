@@ -1,6 +1,6 @@
 ---
-title: Enable the Arm Neural Graphics Plugin
-description: Enable the Arm Neural Graphics Plugin in an Unreal Engine project and configure the project to detect and load the plugin for NFRU testing.
+title: Enable the Arm Neural Graphics plugin
+description: Enable the Arm Neural Graphics plugin in an Unreal Engine project and configure the project to detect and load the plugin for NFRU testing.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,10 +8,10 @@ layout: learningpathall
 ---
 ## Install the required tools and dependencies
 
-Before enabling the Arm Neural Graphics Plugin, make sure that you've installed and configured all required tools and dependencies. For complete setup instructions, see [Set up the development environment](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment/).
+Before enabling the Arm Neural Graphics plugin, make sure that you've installed and configured all required tools and dependencies. For complete setup instructions, see [Set up the development environment](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment/).
 
 
-## Set up the Arm Neural Graphics Plugin
+## Set up the Arm Neural Graphics plugin
 
 If you cloned `armng-unreal` outside your Unreal project directory, create a symbolic link in your project `Plugins` folder. The symbolic link allows Unreal Engine to detect the plugin as part of your project.
 
@@ -35,6 +35,6 @@ After regenerating the Visual Studio solution, follow [Set up the Unreal project
 
 ## What you've accomplished and what's next
 
-You've now created a symbolic link to the plugin source and regenerated the Visual Studio solution. This configuration enables Unreal Engine to detect and load the Arm Neural Graphics Plugin.
+You've now created a symbolic link to the plugin source and regenerated the Visual Studio solution. This configuration enables Unreal Engine to detect and load the Arm Neural Graphics plugin.
 
 Next, you'll confirm that NFRU is active, inspect generated frames, and start comparing visual quality and performance.
