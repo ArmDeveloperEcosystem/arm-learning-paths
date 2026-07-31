@@ -70,6 +70,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: ML
 platforms:
+  - Arm AGI
   - AWS
   - Microsoft Azure
   - Google Cloud
