@@ -30,11 +30,9 @@ generated_summary_faq:
   model: gpt-5
   prompt_template: summary-faq-v3
   summary: >-
-    You will use Project Moku, an Arm Unreal Engine sample, to evaluate Neural Frame Rate
-    Upscaling (NFRU) on mobile GPUs. You will enable the Arm Neural Graphics Plugin, create
-    repeatable reference cuts, and use Streamline and RenderDoc to validate frame generation,
-    inspect visual differences, and measure render FPS, present FPS, neural workload, and frame
-    pacing. You will analyze occlusion, particle, and lighting-change scenarios before tuning
+    You'll use Project Moku, an Arm Unreal Engine sample, to evaluate NFRU on mobile GPUs. You'll enable the Arm Neural Graphics Plugin and create
+    repeatable reference cuts. Using the reference cuts with Streamlines and RenderDoc, you'll validate frame generation,
+    inspect visual differences, and measure NFRU performance. You'll analyze occlusion, particle, and lighting-change scenarios before tuning
     NFRU for your own Unreal Engine content.
   faqs:
   - question: What is Project Moku used for?
