@@ -41,6 +41,6 @@ The highlighted thruster fire shows a generated particle result that still reads
 
 ## What you've learned and what's next
 
-You've now seen that particle effects can remain visually convincing in NFRU-generated frames even when individual shapes don't match a physically exact intermediate state. The Moku thruster example preserves the effect's expected color, brightness, and location. When alpha blending or rapidly changing opacity produces blur, distortion, flicker, or dropped detail, the differences are localized. You can evaluated the differences against the effect in motion.
+You've now seen that particle effects can remain visually convincing in NFRU-generated frames even when individual shapes don't match a physically exact intermediate state. The Moku thruster example preserves the effect's expected color, brightness, and location. When alpha blending or rapidly changing opacity produces blur, distortion, flicker, or dropped detail, the differences are localized. You can evaluate the differences against the effect in motion.
 
 Next, continue evaluating how NFRU preserves complex illumination and how to diagnose localized differences around emissive surfaces, translucent lighting, and screen edges.

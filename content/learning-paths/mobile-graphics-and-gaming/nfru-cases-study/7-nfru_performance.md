@@ -1,5 +1,5 @@
 ---
-title: Analyze NFRU performance
+title: Analyze and adjust NFRU frame pacing
 description: Measure NFRU render FPS, present FPS, GPU and neural workload, and frame pacing, then tune the pace adjuster for a sustainable presentation rate.
 weight: 8
 
@@ -9,11 +9,13 @@ layout: learningpathall
 
 ## NFRU frame pacing
 
-NFRU increases the presentation cadence by generating an intermediate frame between valid consecutive rendered frames. When the base render rate and presentation pacing are stable, the display can receive frames more often without requiring the engine to render each one. The sustainable uplift depends on both the interpolation workload and when the real and generated frames are submitted and shown, so frame pacing is an important part of realizing the smoothness benefit.
+NFRU increases the presentation cadence by generating an intermediate frame between valid consecutive rendered frames. When the base render rate and presentation pacing are stable, the display can receive frames more often without requiring the engine to render each one. 
 
-Render cost, NFRU overhead, display refresh rate, VSync, platform frame pacing, Android Swappy, and the selected pace-adjuster target determine the sustainable present FPS for a given workload.
+The sustainable uplift depends on both the interpolation workload and when the real and generated frames are submitted and shown. This makes frame pacing an important part of realizing the smoothness benefit.
 
-When profiling, observe render FPS and present FPS, and check whether idle gaps are caused by pacing waits or by actual GPU workload limits. The NFRU pace adjuster converts available headroom into a stable target by moving between sustainable FPS levels instead of chasing an unstable peak, helping NFRU deliver smoother and more consistent gameplay.
+When profiling NFRU frame pacing, observe render FPS and present FPS. Check whether idle gaps are caused by pacing waits or by actual GPU workload limits. 
+
+The NFRU pace adjuster converts available headroom into a stable target by moving between sustainable FPS levels instead of chasing an unstable peak. This conversion helps NFRU deliver smoother and more consistent gameplay.
 
 ## Evaluate render FPS versus present FPS
 
@@ -36,15 +38,17 @@ There are two FPS values to distinguish:
 | Render Interval  | Time between real rendered frames                       |
 | Present Interval | Time between displayed frames                           |
 
-Example:
+Consider the following example values:
 
+```text
 Render FPS       = 30 FPS
 Render interval  = 33.3 ms
 
 Present FPS      = 60 FPS
 Present interval = 16.6 ms
+```
 
-With one generated frame between two real frames, the display can receive frames twice as often:
+With one generated frame between two real frames, the display can receive frames twice as often.
 
 Render timeline:
 ```text
@@ -66,11 +70,14 @@ Frame pacing controls when frames are submitted or presented. High FPS alone doe
 
 Bad pacing:
 
+```text
 P0 -- P1 -------- P2 - P3 ---------- P4
-
+```
 Good pacing:
 
+```text
 P0 ---- P1 ---- P2 ---- P3 ---- P4
+```
 
 ### Frame pacing behavior and GPU idle time
 
@@ -91,7 +98,9 @@ Proper frame pacing keeps presentation intervals stable, but it can intentionall
 
 This is especially important for NFRU because the output alternates between real and generated frames:
 
+```text
 R0 ---- G0 ---- R1 ---- G1 ---- R2
+```
 
 If these frames aren't presented at regular intervals, the motion might look uneven even though more frames are being produced.
 
@@ -128,17 +137,21 @@ After applying these settings, observe render FPS and present FPS again. If pres
 
 A common target is:
 
+```text
 60 render FPS + NFRU = 120 present FPS
+```
 
 A workload with a lower base render rate can still increase its presentation rate:
 
+```text
 45 render FPS + NFRU = 90 present FPS
-
+```
 The displayed result can also be capped by the display:
 
+```text
 45 render FPS + NFRU = 90 possible present FPS
 60 Hz display cap     = 60 actual present FPS
-
+```
 This can happen because NFRU output is still constrained by:
 
 - Display refresh rate
