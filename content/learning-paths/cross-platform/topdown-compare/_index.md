@@ -27,6 +27,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
+platforms:
+    - Arm AGI
 armips:
     - Neoverse
 operatingsystems:
