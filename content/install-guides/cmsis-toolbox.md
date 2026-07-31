@@ -17,12 +17,12 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 15
 
-description: Install CMSIS-Toolbox on Arm Linux, Windows, and macOS to create, build, and manage embedded projects based on CMSIS Software Packs.
+description: Install CMSIS-Toolbox on Linux, Windows, and macOS to create, build, and manage embedded projects based on CMSIS-Packs.
 
-author: Ronan Synnott
+author: Christopher Seidl
 
 ### Link to official documentation
-official_docs: https://github.com/Open-CMSIS-Pack/cmsis-toolbox/blob/main/docs/README.md
+official_docs: https://open-cmsis-pack.github.io/cmsis-toolbox/
 
 
 ### PAGE SETUP
@@ -32,12 +32,12 @@ multi_install: false            # Set to true if first page of multi-page articl
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
-The [CMSIS-Toolbox](https://github.com/Open-CMSIS-Pack/cmsis-toolbox) is a suite of utilities for creating, building, and managing projects based on CMSIS Software Packs. It is also used for creating and maintaining Software Packs.
+The [CMSIS-Toolbox](https://github.com/Open-CMSIS-Pack/cmsis-toolbox) is a suite of utilities for creating, building, and managing projects based on CMSIS-Packs. It is also used for creating and maintaining Software Packs.
 
-`CMSIS-Toolbox` is part of the [Open-CMSIS-Pack project](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html). It is supported on Windows, Linux, and macOS host platforms. 
+`CMSIS-Toolbox` is part of the [Open-CMSIS-Pack project](https://open-cmsis-pack.github.io/Open-CMSIS-Pack-Spec/main/html/index.html). It is supported on Windows, Linux, and macOS host platforms.
 
 {{% notice Note %}}
-The following install guide is for manual installation of `CMSIS-Toolbox`.
+The following install guide is for manual installation of `CMSIS-Toolbox`. An in-depth installation guide is available on [GitHub](https://open-cmsis-pack.github.io/cmsis-toolbox/installation/).
 
 For automation instructions using `vcpkg`, see [Install tools on the command line using vcpkg](/learning-paths/embedded-and-microcontrollers/vcpkg-tool-installation/).
 
@@ -46,7 +46,7 @@ For automation instructions using `vcpkg`, see [Install tools on the command lin
 
 ## Before you begin
 
-You'll need to install `CMake` and `Ninja`. For steps to install `CMake`, see the [CMake install guide](/install-guides/cmake/).
+On Linux, you'll need to install `CMake` and `Ninja`. For steps to install `CMake`, see the [CMake install guide](/install-guides/cmake/).
 
 To install `Ninja`, run:
 
@@ -54,14 +54,18 @@ To install `Ninja`, run:
 sudo apt update
 sudo apt install ninja-build -y
 ```
+
 Check the versions of each tool:
+
 ```command
 cmake --version
 ninja --version
 ```
+
 Ensure that the version of `CMake` is at least `3.25.2`, and `Ninja` is at least `1.10.2`.
 
 You can also download installers for all supported hosts:
+
 * [CMake](https://cmake.org/download/)
 * [Ninja](https://github.com/ninja-build/ninja/releases)
 
@@ -114,9 +118,9 @@ tar -xf cmsis-toolbox-darwin-amd64.tar.gz
 Projects can be built with Arm Compiler for Embedded 6, Arm GNU Toolchain, LLVM Embedded Toolchain, or IAR tools.
 
 For further setup instructions, see the following Install Guides:
+
 * [Arm Compiler for Embedded](/install-guides/armclang/)
 * [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/)
-* [LLVM Embedded Toolchain for Arm](/install-guides/llvm-embedded/)
 
 This Install Guide uses `Arm Compiler for Embedded`, which is supported on Windows and Linux.
 
@@ -157,6 +161,7 @@ Exact paths will depend on the versions and locations of installed tools.
 ## Initialize the CMSIS-Pack directory
 
 Run the following command to initialize the directory specified by `CMSIS_PACK_ROOT`:
+
 ```command
 cpackget init https://www.keil.com/pack/index.pidx
 ```
@@ -168,11 +173,13 @@ cpackget init https://www.keil.com/pack/index.pidx
 You can find example projects on [GitHub](https://github.com/Open-CMSIS-Pack/csolution-examples).
 
 Clone the repository to your build machine:
+
 ```command
 git clone https://github.com/Open-CMSIS-Pack/csolution-examples
 ```
 
 Navigate to the `Hello` example:
+
 ```command
 cd csolution-examples/Hello
 ```
@@ -216,4 +223,5 @@ Program Size: Code=17664 RO-data=988 RW-data=196 ZI-data=37112
 Build summary: 2 succeeded, 0 failed - Time Elapsed: 00:00:03
 +============================================================
 ```
+
 You are now ready to use CMSIS-Toolbox.

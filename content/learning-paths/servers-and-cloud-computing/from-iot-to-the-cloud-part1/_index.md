@@ -30,15 +30,15 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
-cloud_service_providers:
+platforms:
   - Microsoft Azure
 
 armips:
     - Neoverse
 
 tools_software_languages:
-    - .NET SDK
-    - C#
+    - dotnet
+    - csharp
 
 operatingsystems:
     - Linux

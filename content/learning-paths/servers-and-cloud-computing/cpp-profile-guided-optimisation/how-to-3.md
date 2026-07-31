@@ -14,7 +14,7 @@ Integer division is ideal for benchmarking because it's significantly more expen
 
 ## What tools are needed to run a Google Benchmark example?
 
-For this example, you can use any Arm Linux computer. For example, an AWS EC2 `c7g.xlarge` instance running Ubuntu 24.04 LTS can be used.
+For this example, you can use any Arm Linux computer. For example, the 1st generation Arm AGI CPU running Ubuntu 24.04 LTS.
 
 Run the following commands to install the prerequisite packages:
 
@@ -57,15 +57,19 @@ Compile with the command:
 g++ -O3 -std=c++17 div_bench.cpp -lbenchmark -lpthread -o div_bench.base
 ```
 
+{{% notice Please Note %}}
+
+Since the command above does not specify `-mcpu` or `-march`, GCC targets a generic baseline architecture. If you want to apply PGO specifically targeting the 1st generation Arm AGI CPU, the `-mcpu=armagicpu` was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, it enables the same architectural features as `-march=neoverse-v3ae` from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html). However in the future there may be differences.
+
+As such, we recommend installing the latest version of GCC/G++ if you are targeting the Arm AGI CPU. Use the `-mcpu=native` flag if compiling on the target machine or `-mcpu=armagicpu` if cross compiling.
+
+{{% /notice %}}
+
 Run the program:
 
-```bash
-./div_bench.base
-```
-
-### Example output
-
-```output
+```bash { command_line="user@localhost | 2-16" }
+./div_bench.base 
+2026-05-21T08:12:08+00:00
 Running ./div_bench.base
 Run on (4 X 2100 MHz CPU s)
 CPU Caches:
@@ -80,6 +84,13 @@ Benchmark             Time             CPU   Iterations
 -------------------------------------------------------
 baseDiv/1500       7.90 us         7.90 us        88512
 ```
+The exact timing will vary between systems. The important result is the relative performance difference before and after applying PGO, rather than the absolute execution time.
+
+{{% notice Please Note%}}
+
+If you see warnings about CPU scaling or library debug mode, they can be safely ignored. Our focus is on relative performance changes rather than exact timings, and the expected speedup from PGO should be well beyond the margin of error introduced by these effects.
+
+{{% /notice %}}
 
 ### Inspect assembly
 
@@ -101,4 +112,3 @@ sudo perf report --input=perf-division-base
 As the `perf report` graphic below shows, the program spends a significant amount of time in the short loops with no loop unrolling. There is also an expensive `sdiv` operation, and most of the execution time is spent storing the result of the operation.
 
 ![before-pgo](./before-pgo.gif)
-

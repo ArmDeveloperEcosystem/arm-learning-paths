@@ -28,7 +28,7 @@ armips:
     - Cortex
 tools_software_languages:
     - Unity
-    - C#
+    - csharp
 operatingsystems:
     - Android
 

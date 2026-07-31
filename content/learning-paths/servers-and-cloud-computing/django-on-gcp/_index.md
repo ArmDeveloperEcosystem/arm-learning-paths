@@ -75,7 +75,7 @@ rerun_faqs: false
 ##### Tags
 skilllevels: Introductory
 subjects: Web
-cloud_service_providers:
+platforms:
   - Google Cloud
 
 armips:
@@ -86,8 +86,8 @@ tools_software_languages:
   - Docker
   - Kubernetes
   - Google Artifact Registry
-  - Cloud SQL (PostgreSQL)
-  - Memorystore (Redis)
+  - Cloud SQL
+  - Memorystore
 
 operatingsystems:
   - Linux

@@ -15,17 +15,17 @@ pinned_learning_paths:
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30
-- Linux: 48
-- macOS: 18
+- Linux: 51
+- macOS: 20
 - RTOS: 12
-- Windows: 10
+- Windows: 11
 subjects_filter:
 - CI-CD: 7
 - Containers and Virtualization: 9
 - Embedded Linux: 6
 - Libraries: 5
-- ML: 23
-- Performance and Architecture: 21
+- ML: 25
+- Performance and Architecture: 22
 - RTOS Fundamentals: 7
 - Security: 3
 - Virtual Hardware: 2
@@ -49,7 +49,7 @@ tools_software_languages_filter:
 - BalenaOS: 1
 - Baremetal: 1
 - Bash: 1
-- C: 10
+- C: 11
 - ChatGPT: 1
 - Clang: 1
 - CMSIS: 4
@@ -65,12 +65,14 @@ tools_software_languages_filter:
 - DSTREAM: 2
 - Edge AI: 2
 - Edge Impulse: 2
-- ExecuTorch: 7
+- ETDump: 1
+- ETRecord: 1
+- ExecuTorch: 8
 - FastAPI: 2
 - Fusion 360: 1
 - FVP: 10
 - GCC: 12
-- Generative AI: 2
+- Generative AI: 3
 - GitHub: 4
 - GitLab: 2
 - GStreamer: 1
@@ -84,24 +86,25 @@ tools_software_languages_filter:
 - Keil RTX RTOS: 2
 - Kubernetes: 1
 - Linux kernel: 1
-- LLM: 2
+- LLM: 3
 - Matter: 1
 - MCP: 1
 - MediaPipe: 1
+- Model Explorer: 1
 - MPS3: 1
 - MQTT: 1
 - MuJoCo: 1
 - MXNet: 1
 - Neon: 1
 - NumPy: 1
-- Ollama: 1
+- Ollama: 2
 - OpenSSH: 1
 - Paddle: 1
 - Performance analysis: 1
 - picocom: 1
 - Porcupine: 1
-- Python: 17
-- PyTorch: 5
+- Python: 19
+- PyTorch: 6
 - QEMU: 2
 - Raspberry Pi: 10
 - Reachy Mini: 1
@@ -117,12 +120,15 @@ tools_software_languages_filter:
 - TensorRT: 1
 - tinyML: 2
 - Topo: 3
+- TOSA: 1
 - Trusted Firmware: 2
 - TrustZone: 2
 - TVMC: 1
 - vcpkg: 1
+- VGF: 1
 - Visual Studio Code: 2
 - YAML: 1
+- Yocto: 1
 - Yocto Project: 1
 - Zephyr: 4
 weight: 5

@@ -30,7 +30,7 @@ armips:
     - Arm C1
 tools_software_languages:
     - SME2
-    - C++
+    - CPP
     - llama.cpp
 operatingsystems:
     - Android

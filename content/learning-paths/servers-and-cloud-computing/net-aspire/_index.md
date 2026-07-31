@@ -24,7 +24,7 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
-cloud_service_providers:
+platforms:
   - AWS
   - Google Cloud
 
@@ -32,8 +32,8 @@ armips:
     - Neoverse
 
 tools_software_languages:
-    - .NET
-    - C# 
+    - dotnet
+    - csharp 
     - Visual Studio Code
 
 operatingsystems:

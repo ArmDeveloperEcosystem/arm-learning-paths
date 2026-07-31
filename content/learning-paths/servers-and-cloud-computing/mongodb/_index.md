@@ -31,7 +31,7 @@ layout: learningpathall
 learning_path_main_page: 'yes'
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers:
+platforms:
   - AWS
   - Microsoft Azure
   - Google Cloud

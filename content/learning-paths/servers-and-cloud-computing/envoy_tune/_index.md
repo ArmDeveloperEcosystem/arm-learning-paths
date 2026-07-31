@@ -25,7 +25,7 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Web
-cloud_service_providers:
+platforms:
   - AWS
   - Microsoft Azure
   - Google Cloud

@@ -70,7 +70,7 @@ rerun_faqs: false
 # Tagging metadata, see the Learning Path guide for the allowed values
 skilllevels: Introductory
 subjects: ML
-cloud_service_providers:
+platforms:
   - Google Cloud
 armips:
     - Neoverse
@@ -78,7 +78,7 @@ tools_software_languages:
     - Google Cloud
     - Hugging Face
     - Python
-    - Llama.cpp
+    - llama.cpp
 operatingsystems:
     - Linux
 

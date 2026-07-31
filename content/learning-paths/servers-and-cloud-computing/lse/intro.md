@@ -55,9 +55,13 @@ Announced at re:Invent 2019, Graviton2 processors provide a significant performa
 
 Graviton3 was announced at re:Invent 2021 and instance types include M7g, C7g, R7g. Graviton3 offers up to 2x better floating-point performance, up to 2x faster crypto performance, and up to 3x better ML performance compared to Graviton2. Graviton3 uses Arm Neoverse V1 cores.
 
-Announced at re:Invent 2023, Graviton4 is based on Neoverse V2 cores. Graviton4 increases core count to 96 and is first available in the R8g instance type. Graviton4 provides 30% better compute performance, 50% more cores, and 75% more memory bandwidth than Graviton3.
+Announced at re:Invent 2023, Graviton4 is based on Neoverse V2 cores. Graviton4 increases core count to 96 per chip and is first available in the R8g instance type. Graviton4 provides 30% better compute performance, 50% more cores, and 75% more memory bandwidth than Graviton3.
 
-AWS A1 instances are based on the Cortex-A72 processor. The Cortex-A72 implements the Armv8.0-A architecture and does NOT include the atomic instructions. All of the AWS EC2 instances based on the Neoverse N1, Neoverse V1, and Neoverse V2 processors include the atomic instructions. 
+Announced at re:Invent 2025, Graviton5 is based on Neoverse V3 cores. Graviton5 increases core count to 192 cores per chip and as of June 2026 is available in preview. Graviton5 provides 25% better compute performance and 2.6x more per-core L3 cache than Graviton4
+
+The 1st generation Arm AGI CPU was annouced at Arm Everywhere 2026 and uses Arm Neoverse V3 cores. Based on estimates, Arm AGI CPU is capable of delivering more than 2x the performance per rack compared to the latest x86 systems. As of June 2026, AGI CPU is available to order for enterprise customers.
+
+AWS A1 instances are based on the Cortex-A72 processor. The Cortex-A72 implements the Armv8.0-A architecture and does NOT include the atomic instructions. All of the AWS EC2 instances based on the Neoverse N1, Neoverse V1, Neoverse V2 and Neoverse V3 processors include the atomic instructions. 
 
 Other cloud service providers such as Oracle Cloud, Microsoft Azure, and Google Cloud offer instances based on Neoverse processors, and support the atomic instructions.
 
@@ -79,86 +83,43 @@ If LSE is present, the output from the command will look like:
 [    0.001296] CPU features: detected: LSE atomic instructions
 ```
 
-Another check is to use the lscpu command to print the processor information:
-
-```bash
-lscpu
-```
+Another check is to use the lscpu command to print the processor information and look specifically at the Flags field:
 
 Here is the output from running `lscpu` an AWS A1 instance:
 
-```output
-Architecture:                    aarch64
-CPU op-mode(s):                  32-bit, 64-bit
-Byte Order:                      Little Endian
-CPU(s):                          1
-On-line CPU(s) list:             0
-Thread(s) per core:              1
-Core(s) per socket:              1
-Socket(s):                       1
-NUMA node(s):                    1
-Vendor ID:                       ARM
-Model:                           3
-Model name:                      Cortex-A72
-Stepping:                        r0p3
-BogoMIPS:                        166.66
-L1d cache:                       32 KiB
-L1i cache:                       48 KiB
-L2 cache:                        2 MiB
-NUMA node0 CPU(s):               0
-Vulnerability Itlb multihit:     Not affected
-Vulnerability L1tf:              Not affected
-Vulnerability Mds:               Not affected
-Vulnerability Meltdown:          Not affected
-Vulnerability Spec store bypass: Not affected
-Vulnerability Spectre v1:        Mitigation; __user pointer sanitization
-Vulnerability Spectre v2:        Mitigation; Branch predictor hardening
-Vulnerability Srbds:             Not affected
-Vulnerability Tsx async abort:   Not affected
-Flags:                           fp asimd evtstrm aes pmull sha1 sha2 crc32 cpuid
+```bash { command_line="user@localhost | 2-4"}
+lscpu | grep Flags
+Flags:                                   fp asimd evtstrm aes pmull sha1 sha2 crc32 cpuid
 ```
-Look specifically at the flags printed at the end.
 
 Here is the output from running `lscpu` on an AWS T4g instance:
 
-```output
-Architecture:                    aarch64
-CPU op-mode(s):                  32-bit, 64-bit
-Byte Order:                      Little Endian
-CPU(s):                          2
-On-line CPU(s) list:             0,1
-Thread(s) per core:              1
-Core(s) per socket:              2
-Socket(s):                       1
-NUMA node(s):                    1
-Vendor ID:                       ARM
-Model:                           1
-Model name:                      Neoverse-N1
-Stepping:                        r3p1
-BogoMIPS:                        243.75
-L1d cache:                       128 KiB
-L1i cache:                       128 KiB
-L2 cache:                        2 MiB
-L3 cache:                        32 MiB
-NUMA node0 CPU(s):               0,1
-Vulnerability Itlb multihit:     Not affected
-Vulnerability L1tf:              Not affected
-Vulnerability Mds:               Not affected
-Vulnerability Meltdown:          Not affected
-Vulnerability Spec store bypass: Mitigation; Speculative Store Bypass disabled via prctl
-Vulnerability Spectre v1:        Mitigation; __user pointer sanitization
-Vulnerability Spectre v2:        Not affected
-Vulnerability Srbds:             Not affected
-Vulnerability Tsx async abort:   Not affected
+```bash { command_line="user@localhost | 2-4"}
+lscpu | grep Flags
 Flags:                           fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpu
                                  id asimdrdm lrcpc dcpop asimddp ssbs
 ```
 
-For Neoverse N1 the “atomics” flag is listed indicating LSE support.
+Here is the output from running `lscpu` on the 1st generation AGI CPU:
+
+```bash { command_line="user@localhost | 2-6"}
+lscpu | grep Flags
+Flags:                                   fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh rng bti ecv afp wfxt ls64
+```
+
+For Neoverse N1 and the Arm AGI CPU the “atomics” flag is listed indicating LSE support.
 
 **Which versions of the GCC compiler support LSE?**
 
 LSE support started in GCC 6, but GCC 10 and GCC 11 are good to use.
+
+{{% notice Please Note %}}
+
+If you are specifically targeting the 1st generation Arm AGI CPU on your own workload, the `-mcpu=armagicpu` was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, it enables the same architectural features as `-march=neoverse-v3ae` from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html). However in the future there may be differences.
+
+As such if you are targeting the Arm AGI CPU for your own workload, we recommend installing the latest version of GCC. **However, older versions of GCC are sufficient for running the examples in this learning path.**
+
+{{% /notice %}}
 
 **What are out-of-line atomics?**
 
@@ -185,6 +146,5 @@ Yes, if you are using any of the operating systems below. Only Ubuntu 18.04 requ
 - Ubuntu 18.04 (needs `apt install libc6-lse`)
 - Ubuntu 20.04
 - Ubuntu 22.04
-
-
-
+- Ubuntu 24.04 LTS
+- Ubuntu 26.04 LTS

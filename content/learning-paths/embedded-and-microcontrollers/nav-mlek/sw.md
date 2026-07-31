@@ -26,8 +26,6 @@ Use the install guides to install the compilers on your computer:
 - [Arm Compiler for Embedded](/install-guides/armclang/)
 - [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/)
 
-Both compilers are pre-installed in Arm Virtual Hardware. 
-
 ## Integrated Development Environments (IDE)
 
 Use the [Arm Development Studio install guide](/install-guides/armds/) to set up Arm DS on Linux or Windows. 
@@ -35,8 +33,6 @@ Use the [Arm Development Studio install guide](/install-guides/armds/) to set up
 [Keil MDK](/install-guides/mdk/) is a popular microcontroller development toolkit on Windows.
 
 Both IDEs contain `Arm Compiler for Embedded` to build applications, and can connect to the Ecosystem FVPs for software debug and test.
-
-[Arm Keil Studio Cloud](/install-guides/keilstudiocloud/) also offers the ability to run software on the `Corstone-300 FVP`. A [list of software projects](https://www.keil.arm.com/boards/arm-v2m-mps3-sse-300-fvp-610bb98/projects/) is available for you to browse.
 
 ## Other tools
 
@@ -101,45 +97,11 @@ The [MLEK](https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-ev
 
 [The Quick Start Guide](https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit/-/blob/main/docs/quick_start.md) guides you through running an example application.
 
-### Micro speech
-
-The [Micro speech example for TensorFlow Lite](https://github.com/ARM-software/AVH-TFLmicrospeech/) is a good way to get started learning ML applications. 
- 
-Refer to the information included in the [AVH documentation](https://arm-software.github.io/AVH/main/examples/html/MicroSpeech.html) for more details. 
-
-You can run micro speech in a few steps on the AVH AMI:
-
-```console
-git clone https://github.com/ARM-software/AVH-TFLmicrospeech.git
-cd AVH-TFLmicrospeech/Platform_FVP_Corstone_SSE-300_Ethos-U55​
-cbuild.sh --packs microspeech.Example.cprj
-./run_example.sh
-```
-
-The micro speech application will print the `Heard yes` and `Heard no` ML inferences from the audio samples, similar to:
-
-```output
-telnetterminal0: Listening for serial connection on port 5000
-telnetterminal1: Listening for serial connection on port 5001
-telnetterminal2: Listening for serial connection on port 5002
-telnetterminal5: Listening for serial connection on port 5003
-
-    Ethos-U rev 136b7d75 --- Feb 16 2022 15:47:15
-    (C) COPYRIGHT 2019-2022 Arm Limited
-    ALL RIGHTS RESERVED
-
-Heard yes (146) @1000ms
-Heard no (145) @5600ms
-Heard yes (143) @9100ms
-Heard no (145) @13600ms
-...
-```
-
 ### Open-IoT-SDK
 
 The Open-IoT-SDK includes a number of ML applications and demonstrates concepts such as how to integrate Arm Trusted Firmware for Cortex-M with an ML application. 
 
-Refer to [Build and run Open-IoT-SDK examples](/learning-paths/embedded-and-microcontrollers/iot-sdk/) to learn how to use the SDK.
+Refer to the [Open-IoT-SDK repository](https://github.com/ARM-software/open-iot-sdk) to learn how to use the SDK.
 
 
 ### TVM example

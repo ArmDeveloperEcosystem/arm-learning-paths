@@ -33,7 +33,7 @@ armips:
 tools_software_languages:
   - Arm Performix
   - MCP
-  - C++
+  - CPP
   - CMake
   - Python
   - perf

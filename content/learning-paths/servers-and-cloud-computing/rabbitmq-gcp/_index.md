@@ -28,7 +28,7 @@ rerun_faqs: false
 ##### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers:
+platforms:
   - Microsoft Azure
   - Google Cloud
 

@@ -29,7 +29,7 @@ test_maintenance: true
 ### Tags
 skilllevels: Introductory
 subjects: ML
-cloud_service_providers:
+platforms:
   - AWS
   - Oracle
 armips:

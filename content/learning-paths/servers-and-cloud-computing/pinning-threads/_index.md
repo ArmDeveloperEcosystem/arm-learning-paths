@@ -26,7 +26,7 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
-cloud_service_providers:
+platforms:
   - AWS
   - Microsoft Azure
   - Google Cloud
@@ -34,7 +34,7 @@ cloud_service_providers:
 armips:
     - Neoverse
 tools_software_languages:
-    - C++
+    - CPP
     - Python
     - taskset
     - perf

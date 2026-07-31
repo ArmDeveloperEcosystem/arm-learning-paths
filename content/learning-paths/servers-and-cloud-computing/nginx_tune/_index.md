@@ -73,7 +73,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Web
-cloud_service_providers:
+platforms:
+  - Arm AGI
   - AWS
   - Microsoft Azure
   - Google Cloud

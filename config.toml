@@ -39,13 +39,13 @@ operatingsystem = "operatingsystems"
 skilllevel = "skilllevels"
 tool_software_language = "tools_software_languages"
 armip = "armips"
-cloud_service_provider = "cloud_service_providers"
+platform = "platforms"
 
 [permalinks]
 tools_software_languages = "/tag/:slug/"
 operatingsystems = "/tag/:slug/"
 subjects = "/tag/:slug/"
-cloud_service_providers = "/tag/:slug/"
+platforms = "/tag/:slug/"
 armips = "/tag/:slug/"
 
 [related]
@@ -54,7 +54,7 @@ includeNewer = true
 toLower = false
 
 [[related.indices]]
-name = "cloud_service_providers"
+name = "platforms"
 weight = 100
 
 [[related.indices]]

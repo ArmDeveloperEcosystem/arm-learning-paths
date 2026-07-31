@@ -3,6 +3,10 @@ title: Navigate Machine Learning development with Ethos-U processors
 
 description: Learn how to understand and select physical and virtual hardware targets for ML application development with Cortex-M and Ethos-U, identify software tools, and find example applications.
 
+draft: true
+cascade:
+    draft: true
+
 armips:
 - Cortex-M
 - Ethos-U
@@ -37,7 +41,6 @@ test_maintenance: false
 
 tools_software_languages:
     - FVP
-    - Arm Virtual Hardware
     - GCC
     - Arm Compiler for Embedded
     - MPS3

@@ -28,7 +28,7 @@ subjects: ML
 armips:
     - Arm C1
 tools_software_languages:
-    - C++
+    - CPP
     - KleidiAI
     - llama.cpp
     - SME2

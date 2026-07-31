@@ -30,7 +30,7 @@ rerun_faqs: false
 ##### Tags
 skilllevels: Advanced
 subjects: CI-CD
-cloud_service_providers:
+platforms:
   - Microsoft Azure
   - Google Cloud
 
@@ -41,7 +41,7 @@ tools_software_languages:
   - Jenkins
   - OpenJDK 17
   - Docker
-  - Groovy (Jenkins Pipeline)
+  - Groovy
 
 operatingsystems:
     - Linux

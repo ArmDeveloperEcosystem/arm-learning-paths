@@ -69,12 +69,12 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
-cloud_service_providers:
+platforms:
   - Microsoft Azure
 armips:
     - Neoverse
 tools_software_languages: 
-    - .NET
+    - dotnet
     - Orchard Core
     - C
 operatingsystems:

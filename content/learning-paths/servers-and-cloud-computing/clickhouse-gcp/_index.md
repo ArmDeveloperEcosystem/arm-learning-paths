@@ -74,7 +74,7 @@ rerun_faqs: false
 ##### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers:
+platforms:
   - Google Cloud
 
 armips:
@@ -85,7 +85,7 @@ tools_software_languages:
   - Apache Beam
   - Google Dataflow
   - Google Cloud Pub/Sub
-  - Python 3.11
+  - Python
 
 operatingsystems:
   - Linux
