@@ -39,7 +39,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: OpenRNG project repository
-        link: https://gitlab.arm.com/libraries/openrng
+        link: https://github.com/arm/openrng
         type: documentation
     - resource:
         title: Find code hotspots with Arm Performix
