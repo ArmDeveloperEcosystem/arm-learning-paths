@@ -29,7 +29,7 @@ description: Deploy PostgreSQL on Azure Cobalt 100 Arm64 virtual machines, load 
 ### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers:
+platforms:
   - Microsoft Azure
 
 armips:

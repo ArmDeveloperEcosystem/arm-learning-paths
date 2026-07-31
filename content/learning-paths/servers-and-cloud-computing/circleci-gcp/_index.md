@@ -80,7 +80,7 @@ rerun_faqs: false
 ##### Tags
 skilllevels: Introductory
 subjects: CI-CD
-cloud_service_providers:
+platforms:
   - Google Cloud
 
 armips:

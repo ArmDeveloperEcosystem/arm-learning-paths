@@ -30,7 +30,7 @@ rerun_faqs: false
 ##### Tags
 skilllevels: Advanced
 subjects: CI-CD
-cloud_service_providers:
+platforms:
   - Microsoft Azure
   - Google Cloud
 

@@ -337,7 +337,8 @@ tools_software_languages_filter:
 - zlib: 1
 - ZooKeeper: 1
 weight: 1
-cloud_service_providers_filter:
+platforms_filter:
+- Arm AGI: 4
 - AWS: 95
 - Google Cloud: 117
 - Microsoft Azure: 102

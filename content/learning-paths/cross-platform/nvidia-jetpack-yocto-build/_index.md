@@ -30,7 +30,7 @@ tools_software_languages:
     - Yocto
     - C
 
-cloud_service_providers:
+platforms:
   - AWS
 
 armips:

@@ -30,7 +30,7 @@ subjects: Containers and Virtualization
 tools_software_languages:
   - Tinkerblox
 
-cloud_service_providers:
+platforms:
   - Google Cloud
 
 armips:

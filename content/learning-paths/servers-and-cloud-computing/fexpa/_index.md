@@ -40,7 +40,7 @@ further_reading:
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-cloud_service_providers:
+platforms:
   - AWS
   - Microsoft Azure
   - Google Cloud

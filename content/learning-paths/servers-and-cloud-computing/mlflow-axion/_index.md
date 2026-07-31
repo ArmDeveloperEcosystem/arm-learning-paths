@@ -26,7 +26,7 @@ rerun_faqs: false
 ##### Tags
 skilllevels: Introductory
 subjects: ML
-cloud_service_providers:
+platforms:
   - Google Cloud
 
 armips:
