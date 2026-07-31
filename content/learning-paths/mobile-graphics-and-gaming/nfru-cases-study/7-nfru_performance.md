@@ -194,7 +194,7 @@ r.SetFramePace <CustomFPS>
 
 The goal is to find a stable FPS target instead of always aiming for the highest possible value.
 
-## FPS adjustment settings
+### FPS adjustment settings
 
 The pace adjuster moves between stable FPS levels derived from the platform frame pace, such as `30 -> 40 -> 60 -> 120`. It changes only one level at a time to avoid sudden jumps. If several frames have enough spare time, it raises the target to the next FPS level. If several frames are late, it lowers the target to the previous FPS level.
 
