@@ -85,7 +85,7 @@ def main():
     arg_parser.add_argument('-d', '--debug', action='store_true', help='Enable debugging messages')
     arg_parser.add_argument('-l', '--link', metavar='URL', action='store', type=str, help='Specify URL to github actions report. Added when patching sources files with --instructions')
     arg_parser.add_argument('-p', '--patch', action='store_true', help='Patch categories _index.md with results when using --filter-checker')
-    arg_parser.add_argument('-t', '--type', metavar='REPORT', action='store', default='all', type=str, help='Specify report type detailing the closed filter status when using --filter-checker. Can be either \'all\', \'subjects\', \'softwares\', \'oses\', \'tools\'')
+    arg_parser.add_argument('-t', '--type', metavar='REPORT', action='store', default='all', type=str, help='Specify report type detailing the closed filter status when using --filter-checker. Can be either \'all\', \'subjects\', \'platforms\', \'oses\', or \'tools-software-languages\'')
 
     arg_group = arg_parser.add_mutually_exclusive_group()
     arg_group.add_argument('-f', '--filter-checker', action='store_true', help='Validates the correct closed schema filters are being used, reports any errors, and optionally updates _index.md files for each learning path category to reflect the currently supported filters.')
