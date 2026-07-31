@@ -56,10 +56,10 @@ The PMUv3 plugin requires two Linux Perf related libraries.
 
 The easiest way to get them is to build them from the Linux source tree.
 
-Download the Linux source using the `git` command as follows:
+Download the Linux source using the following `git` command. Replace the branch with the major and minor number for the running kernel. This can be found with the `uname -r` command:
 
 ```console
-git clone git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
+git clone --depth=1 --branch v6.19 git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git
 ```
 
 The Linux kernel repository is large so it will take some time to download. 
@@ -69,6 +69,14 @@ Install the GNU compiler. If you are running on Ubuntu, you can run the followin
 ```console
 sudo apt install build-essential -y
 ```
+
+{{% notice Please Note %}}
+
+If you want to instrument your own application optimized for the 1st-generation Arm AGI CPU, we recommend using the latest version of GCC. 
+
+For the GNU toolchain, the `-mcpu=armagicpu` defintion was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, this is the same as the `-march=neoverse-v3ae` option available from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html) onwards. However, in the future there may be differences between `neoverse-v3ae` and `armagicpu`.
+
+{{% /notice %}}
 
 When the Linux source download is complete, build the Perf libraries `libperf.a` and `libapi.a`:
 
@@ -102,7 +110,6 @@ gcc -c pmuv3_plugin_bundle.c -I ../linux/tools/lib/perf/include -o pmuv3_plugin_
 g++ -c processing.cpp -I ../linux/tools/lib/perf/include -o processing.o
 gcc -c processing.c -I ../linux/tools/lib/perf/include -o processing_c.o
 ar rcs libpmuv3_plugin.a pmuv3_plugin.o
-ar rcs libpmuv3_plugin_bundle.a pmuv3_plugin_bundle.o processing.o
 ar rcs libpmuv3_plugin_bundle.a pmuv3_plugin_bundle.o  processing_c.o
 ```
 
