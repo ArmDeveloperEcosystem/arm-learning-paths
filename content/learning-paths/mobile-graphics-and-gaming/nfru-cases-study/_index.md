@@ -102,18 +102,6 @@ further_reading:
         link: https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer
         type: documentation
     - resource:
-        title: Set up the Unreal project
-        link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/3-set_up_the_unreal_project/
-        type: documentation
-    - resource:
-        title: RenderDoc integration guide
-        link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/7-renderdoc/
-        type: documentation
-    - resource:
-        title: Streamline
-        link: /learning-paths/mobile-graphics-and-gaming/ams/streamline/
-        type: documentation
-    - resource:
         title: Neural Graphics Playbook - Evaluate
         link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/
         type: learning path

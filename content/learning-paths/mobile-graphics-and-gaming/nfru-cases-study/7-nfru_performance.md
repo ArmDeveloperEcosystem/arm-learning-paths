@@ -25,7 +25,7 @@ stat framegen
 
 This command displays four key counters that provide insights into NFRU operation:
 
-![NFRU stat framegen counters](./images/moku_stat_framegen.png)
+![Unreal stat framegen overlay showing render FPS, present FPS, render interval, and present interval for NFRU performance analysis#center](./images/moku_stat_framegen.png)
 
 There are two FPS values to distinguish:
 
@@ -74,9 +74,11 @@ P0 ---- P1 ---- P2 ---- P3 ---- P4
 
 ### Frame pacing behavior and GPU idle time
 
-In Streamline captures, frame-pacing waits often appear as gaps between GPU workloads. These gaps can happen when real rendered frames are produced unevenly, and the pacing system waits before submitting or presenting the next real or generated frame to keep the output aligned with the target cadence. During that wait, the GPU might be idle:
+In Streamline captures, frame-pacing waits often appear as gaps between GPU workloads. These gaps can happen when real rendered frames are produced unevenly. The pacing system waits before submitting or presenting the next real or generated frame to keep the output aligned with the target cadence. 
 
-![Frame Pacing Issue](./images/frame_pacing/frame_pacing_issue_1.png)
+During that wait, the GPU might be idle:
+
+![Streamline capture showing GPU idle gaps caused by frame-pacing waits, which can limit present FPS despite available capacity#center](./images/frame_pacing/frame_pacing_issue_1.png)
 
 These idle gaps are important to identify because they can indicate that presentation timing, rather than pure render cost, is limiting the observed FPS uplift:
 
@@ -91,17 +93,17 @@ This is especially important for NFRU because the output alternates between real
 
 R0 ---- G0 ---- R1 ---- G1 ---- R2
 
-If these frames are not presented at regular intervals, the motion may look uneven even though more frames are being produced.
+If these frames aren't presented at regular intervals, the motion might look uneven even though more frames are being produced.
 
 ## Remove common pacing limits for profiling
 
 When you want to measure the maximum present FPS that NFRU can reach, disable the pacing systems that might cap or smooth presentation timing. Use this setup for profiling and investigation only. For normal gameplay testing, frame pacing is still important because it keeps presentation intervals stable and reduces visible stutter.
 
-The capture shows a frame-pacing issue where a large idle gap appears before the next submitted frame. Removing pacing caps can help you check whether the workload can produce higher present FPS when the platform is not intentionally delaying presentation.
+The capture shows a frame-pacing issue where a large idle gap appears before the next submitted frame. Removing pacing caps can help you check whether the workload can produce higher present FPS when the platform isn't intentionally delaying presentation.
 
 ![Streamline capture showing a frame-pacing gap with GPU idle time before the next submitted frame, highlighting why pacing caps can limit measured present FPS#center](./images/frame_pacing/frame_pacing_issue_2.png "Frame-pacing gap before the next submitted frame")
 
-To remove common software pacing limits for profiling, run the following console commands. Some commands are platform-specific, and the display refresh rate or compositor may still cap the final present FPS.
+To remove common software pacing limits for profiling, run the following console commands:
 
 ```console
 r.NFRU.PaceAdjuster 0
@@ -110,6 +112,7 @@ r.VSync 0
 t.MaxFPS 0
 r.SetFramePace 0
 ```
+Some commands are platform-specific, and the display refresh rate or compositor might still cap the final present FPS.
 
 These commands change the pacing behavior as follows:
 
@@ -140,16 +143,18 @@ This can happen because NFRU output is still constrained by:
 
 - Display refresh rate
 - VSync
-- Hardware/platform frame pacing
+- Hardware or platform frame pacing
 - Swappy pacing on Android
 - NFRU processing cost
 - The selected custom frame pace target
 
-NFRU also has its own GPU cost, including optical flow, frame interpolation, resource copies, and presentation handling. Therefore, the actual uplift reflects the complete workload rather than a fixed 2x guarantee. Even when the theoretical maximum is not reached, generated intermediate frames can still provide a noticeable improvement in presentation smoothness.
+NFRU also has its own GPU cost, including optical flow, frame interpolation, resource copies, and presentation handling. Therefore, the actual uplift reflects the complete workload rather than a fixed 2x guarantee. Even when the theoretical maximum isn't reached, generated intermediate frames can still provide a noticeable improvement in presentation smoothness.
 
 ## How the NFRU pace adjuster works
 
-The NFRU pace adjuster is an optional adaptive frame pacing controller provided by the ArmNG Unreal plugin. It runs on the NFRU custom-present path of the plugin and chooses a sustainable presentation FPS target while NFRU is running. It does not make Unreal render more real frames, and it does not change interpolation quality. Instead, it adjusts the frame pace target so real and generated frames are presented at a rate the current workload can sustain.
+The NFRU pace adjuster is an optional adaptive frame pacing controller provided by the ArmNG Unreal plugin. It runs on the NFRU custom-present path of the plugin and chooses a sustainable presentation FPS target while NFRU is running. 
+
+The pace adjuster doesn't make Unreal render more real frames, and it doesn't change interpolation quality. Instead, it adjusts the frame pace target so real and generated frames are presented at a rate the current workload can sustain.
 
 When enabled, the NFRU custom presenter monitors frame timing during presentation. If frames consistently finish with enough spare time, the adjuster raises the target to the next available FPS level. If frames are late, it lowers the target to the previous FPS level. The selected target is applied through `r.SetFramePace`.
 
@@ -180,9 +185,13 @@ The goal is to find a stable FPS target instead of always aiming for the highest
 
 The pace adjuster moves between stable FPS levels derived from the platform frame pace, such as `30 -> 40 -> 60 -> 120`. It changes only one level at a time to avoid sudden jumps. If several frames have enough spare time, it raises the target to the next FPS level. If several frames are late, it lowers the target to the previous FPS level.
 
-`r.NFRU.UpAdjustFrameCount` controls how many consecutive good frames are required before increasing the target FPS. Its default value is `40`, which makes the adjuster cautious before moving up. `r.NFRU.DownAdjustFrameCount` controls how many consecutive late frames are required before decreasing the target FPS. Its default value is `20`, so the adjuster reacts faster when the current target cannot be sustained. In practice, this means NFRU increases FPS slowly for stability and decreases FPS faster to reduce visible stutter.
+`r.NFRU.UpAdjustFrameCount` controls how many consecutive good frames are required before increasing the target FPS. Its default value is `40`, which makes the adjuster cautious before moving up. 
 
-Developers can tune these two values to fit their content and target device. Lower values make the pace adjuster react faster to changing workload conditions, but can also cause more frequent FPS target changes. Higher values make the adjuster more stable, but it might take longer to move up when headroom is available or move down when the selected target becomes too expensive.
+`r.NFRU.DownAdjustFrameCount` controls how many consecutive late frames are required before decreasing the target FPS. Its default value is `20`, so the adjuster reacts faster when the current target cannot be sustained. In practice, this means NFRU increases FPS slowly for stability and decreases FPS faster to reduce visible stutter.
+
+Developers can tune these two values to fit their content and target device. Lower values make the pace adjuster react faster to changing workload conditions. However, it can also cause more frequent FPS target changes. 
+
+Higher values make the adjuster more stable. However, it might take longer to move up when headroom is available or move down when the selected target becomes too expensive.
 
 ## What you've accomplished
 
@@ -190,6 +199,6 @@ You've now analyzed NFRU performance by comparing render FPS and present FPS. Yo
 
 You've completed a case study workflow for NFRU with Project Moku.
 
-NFRU is one of the most approachable entry points into neural graphics: the model and engine integration are provided, no new content-authoring pipeline is required, and you can evaluate the benefit quickly in representative gameplay. Project Moku shows how you can use neural-accelerated hardware to present smoother motion while retaining the measurement, debugging, and pacing controls needed to meet your quality bar. Use this case study as a baseline, then bring that opportunity to your own Unreal Engine content.
+NFRU is one of the most approachable entry points into neural graphics: the model and engine integration are provided, no new content-authoring pipeline is required, and you can evaluate the benefit quickly in representative gameplay. Project Moku shows how you can use neural-accelerated hardware to present smoother motion while retaining the measurement, debugging, and pacing controls needed to meet your quality bar. 
 
-Start with a repeatable test scene. Then, capture runs with NFRU disabled and enabled, measure the smoothness and performance benefit, and inspect any localized differences that affect your quality target. Use Streamline to select a sustainable presentation rate for the workload.
+Use this case study as a baseline, then bring that opportunity to your own Unreal Engine content. Start with a repeatable test scene. Then, capture runs with NFRU disabled and enabled, measure the smoothness and performance benefit, and inspect any localized differences that affect your quality target. Use Streamline to select a sustainable presentation rate for the workload.

@@ -19,7 +19,7 @@ First, compare the two rendered source frames with the generated intermediate fr
 
 | Previous source | Current source | Generated area | Final `InterpolatedRT` |
 | --- | --- | --- | --- |
-| ![Previous interpolation source](./images/lighting_change/interpolated_rt_generation_steps_no_text/01_previous_interpolation_source.png "Previous interpolation source") | ![Current interpolation source](./images/lighting_change/interpolated_rt_generation_steps_no_text/03_current_interpolation_source.png "Current interpolation source") | ![Dynamic area selected for generated content](./images/lighting_change/interpolated_rt_generation_steps_no_text/05_generated_area_selected_by_mask.png "Generated area selected by mask") | ![Final InterpolatedRT with generated area highlighted](./images/lighting_change/interpolated_rt_generation_steps_no_text/07_final_interpolated_rt_highlighted.png "Final InterpolatedRT") |
+| ![Previous rendered source frame used as an input to NFRU interpolation#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/01_previous_interpolation_source.png "Previous interpolation source") | ![Current rendered source frame used as an input to NFRU interpolation#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/03_current_interpolation_source.png "Current interpolation source") | ![Dynamic region selected by the mask for generated content#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/05_generated_area_selected_by_mask.png "Generated area selected by mask") | ![Final InterpolatedRT showing the generated region highlighted#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/07_final_interpolated_rt_highlighted.png "Final InterpolatedRT") |
 
 Lighting changes matter because optical flow is estimated from image changes. If color changes because geometry moved, optical flow can help interpolation.
 
@@ -33,9 +33,9 @@ Not every lighting-heavy region produces a visible artifact. The moving characte
 
 This result is acceptable because the important visual structure remains stable. The generated frame doesn't need to reproduce a physically exact lighting state for every pixel; it needs to preserve perceived shape, brightness, and motion without drawing attention to ghosting or edge breakup.
 
-## Inspect a lower-right corner artifact
+## Inspect a screen corner artifact
 
-The lower-right corner is a more difficult case because it sits at the edge of the screen. When NFRU warps pixels from the previous and current frames, some samples in this area can point outside the valid image. The inputs also contain high-contrast light strips, dark foreground geometry, haze, and a large brightness change between source frames. The generated frame is mostly close to the current frame, but unstable edge samples can leave a semi-transparent remnant from the previous frame. This appears as ghosting or smearing in the highlighted area.
+The screen corner is a more difficult case because it sits at the edge of the screen. When NFRU warps pixels from the previous and current frames, some samples in this area can point outside the valid image. The inputs also contain high-contrast light strips, dark foreground geometry, haze, and a large brightness change between source frames. The generated frame is mostly close to the current frame, but unstable edge samples can leave a semi-transparent remnant from the previous frame. This appears as ghosting or smearing in the highlighted area.
 
 ![Generated NFRU frame with the lower-right lighting-change artifact marked by a green rectangle#center](./images/lighting_change/focus_area_highlight.png "Lower-right lighting-change artifact")
 
@@ -45,7 +45,7 @@ The artifact might be related to unstable blend parameters, rather than optical 
 
 ![Debug view of r_out_params_tensor showing unstable parameter detail near the lower-right area#center](./images/lighting_change/r_out_params_tensor.png "r_out_params_tensor debug view")
 
-Near the lower-right screen edge, warped samples can point outside the valid image. These edge cases, together with strong lighting changes, can make the blend parameters less reliable. The final frame can then keep too much contribution from the previous source frame, so old lighting information remains visible in the corner.
+Near the screen edge, warped samples can point outside the valid image. These edge cases, together with strong lighting changes, can make the blend parameters less reliable. The final frame can then keep too much contribution from the previous source frame, so old lighting information remains visible in the corner.
 
 ## Investigate lighting-change artifacts
 
@@ -59,6 +59,6 @@ When this type of artifact appears, inspect the image inputs as well as the moti
 
 ## What you've learned and what's next
 
-You've now seen NFRU preserve a natural-looking moving character across bright emissive detail, translucent effects, and fine edges. The lower-right example showed how a dramatic lighting transition can produce localized ghosting when optical flow, depth, motion, and blend parameters do not fully agree. Together, the examples show that the overall generated frame can remain coherent while RenderDoc exposes the specific inputs behind a difficult edge case.
+You've now seen NFRU preserve a natural-looking moving character across bright emissive detail, translucent effects, and fine edges. The screen edge example showed how a dramatic lighting transition can produce localized ghosting when optical flow, depth, motion, and blend parameters do not fully agree. Together, the examples show that the overall generated frame can remain coherent while RenderDoc exposes the specific inputs behind a difficult edge case.
 
 Next, continue with NFRU performance analysis to understand how frame generation affects render FPS, present FPS, and frame pacing during gameplay.

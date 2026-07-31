@@ -22,7 +22,7 @@ Before collecting data, choose a short camera path or gameplay action that can b
 
 For Moku, multiple sequences are prepared for demonstration, including 30-second, 5-second, and fixed-camera sequences. Additional test sequences are also created for specific scenarios. Each sequence is treated as a reference cut so that the same content can be replayed consistently across test runs.
 
-![Sample test sequence](./images/sample_test_sequence.gif)
+![Animated sample test sequence showing the Moku camera path replayed for repeatable NFRU comparisons#center](./images/sample_test_sequence.gif)
 
 Different device profiles are configured to control whether NFRU is enabled, disabled, or running in debug mode. For example:
 ```ini
@@ -62,11 +62,11 @@ Use Streamline to compare the same scene with NFRU disabled and enabled. In the 
 
 As shown in the capture, counters such as **Neural queue active** and **Neural Accelerator Unit Usage** are active. This indicates neural accelerator activity during the NFRU workload. You can use the measured active time from these counters to evaluate the performance cost of NFRU. Moku also integrates the Streamline API, so Streamline captures can record both render FPS and present FPS at the same time.
 
-![Moku Streamline FPS](./images/streamline/moku_streamline_fps.png)
+![Streamline capture showing render FPS and present FPS for Moku with NFRU enabled, so you can compare rendered and displayed frame rates#center](./images/streamline/moku_streamline_fps.png)
 
 On the timeline, the NFRU workload should complete cleanly between real rendered frames. If GPU or neural processing blocks become long, the cost of NFRU might limit the expected uplift. If the workload is light but idle gaps still appear, the limiting factor is more likely frame pacing or presentation behavior rather than NFRU execution cost. For a deeper explanation, see [NFRU performance](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/7-nfru_performance/).
 
-![Moku Streamline neural usage](./images/streamline/moku_streamline_neural_usage.png)
+![Streamline capture showing neural queue activity and Neural Accelerator Unit Usage during NFRU frame generation#center](./images/streamline/moku_streamline_neural_usage.png)
 
 For more information on performance profiling strategies, see [Use Arm Streamline to capture data for your application](/learning-paths/mobile-graphics-and-gaming/ams/streamline/).
 
@@ -78,7 +78,7 @@ Compare the real frame copies with the generated output, then review the bound f
 
 For detailed guidance on using RenderDoc in Unreal Engine, see [Use RenderDoc for Arm GPUs with NFRU for debugging and analysis](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/7-renderdoc/).
 
-![Moku RenderDoc NFRU inspection](./images/moku_renderdoc.png)
+![RenderDoc capture showing NFRU frame-generation events and resources to inspect the generated frame#center](./images/moku_renderdoc.png)
 
 Use the following steps to inspect the Arm Frame Interpolation pipelines in RenderDoc:
 
@@ -97,7 +97,7 @@ Use the following steps to inspect the Arm Frame Interpolation pipelines in Rend
 
 You can open the bound textures from the RenderDoc **Pipeline State** view or **Resource Inspector**, then view them in the **Texture Viewer**. For masks, depth, motion, and flow textures, select individual channels or adjust the range in the **Texture Viewer** to make the data easier to inspect. Some names in the list are shader binding names rather than texture allocation names. In those cases, open the texture bound to that shader input or output.
 
-![RenderDoc resource check](./images/nfru_renderdoc/renderdoc_resource_check.png)
+![RenderDoc resource inspection showing bound NFRU textures and tensor resources used to verify frame-generation inputs and outputs#center](./images/nfru_renderdoc/renderdoc_resource_check.png)
 
 Common resources to check include:
 
