@@ -78,6 +78,7 @@ armips:
     - Mali
     - Immortalis
 tools_software_languages:
+    - NX
     - Unreal Engine
     - Vulkan SDK
     - Visual Studio

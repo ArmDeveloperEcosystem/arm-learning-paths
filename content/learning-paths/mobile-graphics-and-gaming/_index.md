@@ -10,8 +10,8 @@ key_ip:
 maintopic: true
 pinned_learning_paths:
 - voice-assistant
-- nss-unreal
-- vulkan-ml-sample
+- nfru-unreal
+- model-training-gym-nfru
 operatingsystems_filter:
 - Android: 42
 - Linux: 45
