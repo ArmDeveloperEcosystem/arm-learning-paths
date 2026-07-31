@@ -1,5 +1,6 @@
 ---
-cloud_service_providers:
+platforms:
+  - Arm AGI
   - AWS
   - Google Cloud
   - Microsoft Azure
