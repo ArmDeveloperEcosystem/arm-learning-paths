@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Understand how NFRU handles particle effects
 
-Particle effects are an important test of perceived quality because their exact shape often changes from frame to frame. In Moku, NFRU preserves the overall color, brightness, and placement of these effects during motion. Translucent or alpha-blended particles may not provide stable depth or motion-vector information after composition, so localized differences can still appear in the generated frame.
+Particle effects are an important test of perceived quality because their exact shape often changes from frame to frame. In Moku, NFRU preserves the overall color, brightness, and placement of these effects during motion. Translucent or alpha-blended particles might not provide stable depth or motion-vector information after composition, so localized differences can still appear in the generated frame.
 
 ## Analyze the generated frame
 
@@ -19,9 +19,9 @@ Compare the previous frame, current frame, and `InterpolatedRT` to find whether 
 
 What to inspect:
 
-- Blur or smear: the particle color is warped using an estimated motion that does not match the actual particle movement, especially for smoke, sparks, fire, or trails.
-- Disappear or flicker: particles that fade in/out, spawn, die, or change opacity between real frames may not have a stable match, so the generated frame may reduce or drop them.
-- Distortion: optical flow may interpret changing shape, additive brightness, or overlapping particles as motion, producing stretched, bent, or duplicated particle regions.
+- Blur or smear: The particle color is warped using an estimated motion that doesn't match the actual particle movement, especially for smoke, sparks, fire, or trails.
+- Disappear or flicker: Particles that fade in or out, spawn, die, or change opacity between real frames might not have a stable match, so the generated frame might reduce or drop them.
+- Distortion: Optical flow might interpret changing shape, additive brightness, or overlapping particles as motion, producing stretched, bent, or duplicated particle regions.
 
 The highlighted blur area shows a particle ring that loses definition in the generated frame. Look for soft edges, smeared color, or a shape that no longer matches either source frame.
 

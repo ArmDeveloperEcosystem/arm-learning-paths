@@ -31,11 +31,13 @@ Not every lighting-heavy region produces a visible artifact. The moving characte
 
 ![Marked moving character lighting area in the generated frame, with a zoomed inset showing a natural interpolated result#center](./images/lighting_change/zoom_in_marked_issue_generated_1.png "Natural-looking generated moving character")
 
-This result is acceptable because the important visual structure remains stable. The generated frame doesn't need to reproduce a physically exact lighting state for every pixel; it needs to preserve perceived shape, brightness, and motion without drawing attention to ghosting or edge breakup.
+This result is acceptable because the important visual structure remains stable. The generated frame doesn't need to reproduce a physically exact lighting state for every pixel. Instead, it needs to preserve perceived shape, brightness, and motion without drawing attention to ghosting or edge breakup.
 
 ## Inspect a screen corner artifact
 
-The screen corner is a more difficult case because it sits at the edge of the screen. When NFRU warps pixels from the previous and current frames, some samples in this area can point outside the valid image. The inputs also contain high-contrast light strips, dark foreground geometry, haze, and a large brightness change between source frames. The generated frame is mostly close to the current frame, but unstable edge samples can leave a semi-transparent remnant from the previous frame. This appears as ghosting or smearing in the highlighted area.
+The screen corner is a more difficult case because it sits at the edge of the screen. When NFRU warps pixels from the previous and current frames, some samples in this area can point outside the valid image. The inputs also contain high-contrast light strips, dark foreground geometry, haze, and a large brightness change between source frames. 
+
+The generated frame is mostly close to the current frame. However, unstable edge samples can leave a semi-transparent remnant from the previous frame. This appears as ghosting or smearing in the highlighted area.
 
 ![Generated NFRU frame with the lower-right lighting-change artifact marked by a green rectangle#center](./images/lighting_change/focus_area_highlight.png "Lower-right lighting-change artifact")
 
@@ -55,7 +57,7 @@ When this type of artifact appears, inspect the image inputs as well as the moti
 - Check whether the affected region contains dramatic lighting changes, newly visible pixels, screen-edge content, translucent materials, bloom, particles, or emissive lighting.
 - Inspect motion-vector and optical-flow debug views. Look for signals that do not line up near silhouettes, screen edges, and bright alpha-blended effects.
 - Inspect `r_out_params_tensor` to see whether the blend parameters are noisy or unstable in the affected region.
-- Inspect depth around the affected pixels. Lighting, translucency, or post-process effects may be visible in color but missing from depth.
+- Inspect depth around the affected pixels. Lighting, translucency, or post-process effects might be visible in color but missing from depth.
 
 ## What you've learned and what's next
 

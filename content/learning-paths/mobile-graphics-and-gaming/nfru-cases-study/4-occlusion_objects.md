@@ -11,9 +11,18 @@ layout: learningpathall
 
 When an object moves in front of another surface, NFRU has to generate an intermediate frame where part of the background is being covered (occlusion-in) or revealed (occlusion-out). These regions are challenging because foreground and background samples can change visibility between the two rendered frames.
 
-In the Moku occlusion examples, NFRU handles most of the occluded and newly revealed areas cleanly. The generated frames preserve the main foreground shape and background region well. This is expected because NFRU uses motion vectors, optical flow, depth-aware warping, disocclusion masks, hole filling, and neural frame generation to choose and combine source information for the intermediate frame.
+In the Moku occlusion examples, NFRU handles most of the occluded and newly revealed areas cleanly. The generated frames preserve the main foreground shape and background region well. 
 
-The remaining artifacts are mostly localized near object boundaries. At those edges, foreground and background pixels may both be plausible candidates for the same intermediate pixel. If the depth, motion-vector, and optical-flow signals point to slightly different source locations, the generated frame can show mild blur, edge distortion, or a small amount of background color bleeding into the foreground edge.
+This is expected because NFRU uses the following to choose and combine source information for the intermediate frame:
+
+- Motion vectors
+- Optical flow
+- Depth-aware warping
+- Disocclusion masks
+- Hole filling
+- Neural frame generation
+
+The remaining artifacts are mostly localized near object boundaries. At those edges, foreground and background pixels might both be plausible candidates for the same intermediate pixel. If the depth, motion-vector, and optical-flow signals point to slightly different source locations, the generated frame can show mild blur, edge distortion, or a small amount of background color bleeding into the foreground edge.
 
 ## Analyze occlusion-in artifacts
 
@@ -27,7 +36,7 @@ The marked close-up highlights a small boundary artifact in the generated frame.
 
 ## Analyze occlusion-out artifacts
 
-In an occlusion-out case, newly revealed background may be missing from one of the source frames. NFRU uses the available color, depth, motion, and optical-flow information to reconstruct the revealed region. In this example, the revealed area is mostly clean; the remaining artifact appears as a small amount of blur or distortion near the moving edge.
+In an occlusion-out case, newly revealed background might be missing from one of the source frames. NFRU uses the available color, depth, motion, and optical-flow information to reconstruct the revealed region. In the example, the revealed area is mostly clean. The remaining artifact appears as a small amount of blur or distortion near the moving edge.
 
 The occlusion-out generation sequence shows how the interpolated frame handles background pixels that become visible as the foreground object moves away.
 

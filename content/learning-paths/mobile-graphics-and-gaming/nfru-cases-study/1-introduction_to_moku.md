@@ -25,7 +25,7 @@ NFRU gives you a practical way to stretch an existing rendering budget. By gener
 
 ## Reference cuts from Project Moku for testing NFRU
 
-For repeatable testing, the case study uses reference cuts from Project Moku that replay the same camera paths and gameplay actions across runs. To follow along the investigation, you'll need similar reference cuts from your game.
+For repeatable testing, the case study uses reference cuts from Project Moku that replay the same camera paths and gameplay actions across runs. To follow along, you'll need similar reference cuts from your game.
 
 The cuts create a consistent development and test environment, making it easier to compare NFRU disabled and enabled captures, inspect visual artifacts, and measure performance changes. The following screenshots show examples of the cuts from Project Moku.
 
