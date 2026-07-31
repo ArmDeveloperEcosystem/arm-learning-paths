@@ -14,9 +14,18 @@ Select **Dynamic** for the **Analysis Mode**.
 
 ![Arm Performix Instruction Mix configuration screen#center](instruction-mix-config.webp "Instruction Mix Configuration")
 
-The results below confirm a high number of integer and floating-point operations, with no SIMD operations. The **Insights** panel suggests vectorization as a path forward, lists possible root causes, and links to related Learning Paths.
+The results below confirm a high number of integer and floating-point operations at double precision, with no SIMD operations. The **Insights** panel suggests vectorization as a path forward, lists possible root causes, and links to related Learning Paths.
+
 
 ![Arm Performix Instruction Mix results showing high integer and floating point operations#center](instruction-mix-results.webp "Instruction Mix Results")
+
+{{% notice Please Note %}}
+
+As of Performix 2026.2.2, instruction mix percentages might not total exactly 100%. Totals can be higher or lower depending on category overlap and sampling size or duration. This is expected behavior for the Mandelbrot workload on some systems. 
+
+For example, the image above was run on a 1st generation Arm AGI CPU, `Double Precision floating point` overlaps with `Floating Point Operations`, which causes double counting. Additionally, depending on the CPU you are running on, you may observe fewer or more labels depending on the instruction groups available. 
+
+{{% /notice %}}
 
 ## Vectorize the application
 
@@ -35,7 +44,7 @@ cd $HOME/mandelbrot-example
 
 The Neon executable is `builds/mandelbrot-neon`
 
-Run the Instruction Mix recipe again with the Neon executable. Integer and floating-point operations are greatly reduced and replaced by a smaller set of SIMD instructions.
+Run the Instruction Mix recipe again with the Neon executable. Integer operations are greatly reduced and replaced by SIMD instructions.
 
 ![Arm Performix Instruction Mix results after vectorization showing increased SIMD operations#center](instruction-mix-simd-results.webp "SIMD Instruction Mix Results")
 
@@ -92,7 +101,7 @@ sys	0m0.027s
 The CPU Microarchitecture recipe also supports a **Compare** view that shows percentage-point changes in each stage and instruction type.
 ![Arm Performix CPU Microarchitecture comparison showing changes in each stage#center](cpu-uarch-simd-results-diff.webp "CPU Microarchitecture Difference View")
 
-You can see the relative differences in backend stalls between the baseline version and the Neon version. The Insights panel offers additional explanation. 
+You can see the relative differences in speculative operation mix between the baseline version and the Neon version. The Insights panel offers additional explanation. 
 
 In this section:
 - You used the Instruction Mix recipe to confirm a lack of SIMD operations.
