@@ -10,7 +10,7 @@ layout: learningpathall
 
 This is a common question from both software developers and performance engineers working with multiple architectures.
 
-Both Intel x86 and Arm Neoverse CPUs provide sophisticated Performance Monitoring Units (PMUs) with hundreds of hardware counters. Instead of trying to list all available counters and compare microarchitectures, it makes more sense to focus on the performance methodologies they enable and the calculations used for performance metrics. 
+Both Intel x86 and Arm Neoverse CPUs provide sophisticated Performance Monitoring Units (PMUs) with hardware counters to measure hundreds of events. Instead of trying to list all available events and compare microarchitectures, it makes more sense to focus on the performance methodologies they enable and the calculations used for performance metrics. 
 
 Although counter names and formulas differ, both Intel x86 and Arm Neoverse classify performance bottlenecks into the same four top-level categories:
 
@@ -44,7 +44,7 @@ The methodology allows you to focus on the dominant bottleneck category, avoidin
 The next sections compare the Intel x86 methodology with the Arm top-down methodology. 
 
 {{% notice Notes %}}
-This Learning Path uses the Arm Neoverse V2 when specific details are required, and some things will be different from other Neoverse N and Neoverse V processors. 
+This Learning Path uses the Arm Neoverse V3AE architecture, as implemented in the 1st generation AGI CPU, when architecture-specific details are required. Some of these details differ from those of other Neoverse N-series and Neoverse V-series processors.
 
 AMD also has an equivalent top-down methodology which is similar to Intel, but uses different counters and calculations. 
 {{% /notice %}}
