@@ -25,7 +25,7 @@ Lighting changes matter because optical flow is estimated from image changes. If
 
 If color changes mainly because illumination changed, optical flow might interpret that lighting change as motion. This can fail to line up with depth and motion vectors, which describe geometry movement. Dramatic changes, such as one source frame being dark and the next being bright, are more likely to produce ghosting, flicker, or stale bright and dark remnants.
 
-## Natural moving character result
+## Inspect a natural-moving character
 
 Not every lighting-heavy region produces a visible artifact. The moving character in this example is interpolated naturally even though it contains bright emissive detail, translucent effects, and fine edges. The core glow stays centered, the ring keeps a plausible shape, and the surrounding lighting remains coherent. Minor softness around the character reads as motion blur or glow during playback.
 
@@ -49,7 +49,7 @@ The artifact might be related to unstable blend parameters, rather than optical 
 
 Near the screen edge, warped samples can point outside the valid image. These edge cases, together with strong lighting changes, can make the blend parameters less reliable. The final frame can then keep too much contribution from the previous source frame, so old lighting information remains visible in the corner.
 
-## Investigate lighting-change artifacts
+## Inspect lighting-change artifacts
 
 When lighting-change artifacts appear, inspect the image inputs as well as the motion and depth inputs:
 
