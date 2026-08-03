@@ -23,12 +23,6 @@ The Project Moku corridor level is designed to showcase NFRU in a clear, control
 
 NFRU gives you a practical way to stretch an existing rendering budget. By generating an intermediate frame between rendered frames, NFRU can increase the perceived framerate without requiring the engine to render every displayed frame or introducing a new content-authoring workflow.
 
-### Watch the NFRU explainer
-
-Watch this explainer for an overview of how Neural Frame Rate Upscaling generates intermediate frames to improve perceived smoothness:
-
-{{< youtube-nocookie id="7PWe4g0RY8A" title="Neural Frame Rate Upscaling explainer" >}}
-
 ## Reference cuts from Project Moku for testing NFRU
 
 For repeatable testing, the case study uses reference cuts from Project Moku that replay the same camera paths and gameplay actions across runs. To follow along, you'll need similar reference cuts from your game.
@@ -45,10 +39,7 @@ In the tested Moku corridor captures, the scene can run above 60 FPS and present
 
 The following animated comparison shows the same Moku scene with NFRU disabled and enabled:
 
-<video width="100%" controls muted playsinline>
-  <source src="https://raw.githubusercontent.com/powen-yang/arm_learning_path_assets/main/nfru_case_study/videos/compare_no_nfru_60fps_vs_nfru_120fps_small.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![Animated comparison of the same Moku scene with NFRU disabled and enabled, showing smoother motion with generated intermediate frames#center](./images/compare_no_nfru_60fps_vs_nfru_120fps_half_speed_first_half.gif "Moku with NFRU disabled and enabled")
 
 Use the comparison to observe how NFRU inserts generated intermediate frames to increase the perceived frame rate, making motion appear smoother while preserving visual detail. The most demanding cases — visibility changes, alpha-blended particles, and dramatic lighting transitions — can produce localized differences where the correct intermediate image is difficult to infer.
 
