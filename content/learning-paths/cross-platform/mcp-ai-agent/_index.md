@@ -35,8 +35,8 @@ generated_summary_faq:
   summary: >-
     You'll deploy a Model Context Protocol (MCP) server on Raspberry Pi 5 and connect it to an AI agent
     built with the OpenAI Agent SDK. You'll install `uv` and bootstrap a FastMCP server with CPU-temperature
-    and weather tools. You'll expose the server through an `ngrok` tunnel, and configure an agent on a separate Arm
-    Linux machine. Then, you'll prompt the agent to retrieve live values from the Pi and external sources.
+    and weather tools. Then, you'll expose the server through an `ngrok` tunnel and configure an agent on a separate Arm
+    Linux machine. Finally, you'll connect the server to the agent and prompt to retrieve live values from the Pi and external sources.
   faqs:
   - question: Where do I run the MCP server, and where do I run the AI agent?
     answer: >-

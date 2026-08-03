@@ -33,8 +33,8 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:49:08Z'
   faq_source_hash: b1c43e1bf971db4582ca358c98dab2c7e6e047d6c79bfcc0db148bc575f33679
   summary: >-
-    You'll use the SIMD Loops project to explore Arm Neon, Scalable Vector Extension (SVE and SVE2), and
-    Scalable Matrix Extension (SME2) kernels. First, you'll clone the repository, verify the Arm environment, and
+    You'll use the SIMD Loops project to explore Arm Neon, SVE and SVE2, and
+    SME2 kernels. First, you'll clone the repository, verify the Arm environment, and
     inspect `loops.inc`. You'll study loop 202 and `matmul_fp32` across scalar, Neon, SVE and SVE2, and SME2
     variants. Then, you'll build selected kernels, compare them with the C reference, and examine predication,
     vector-length-agnostic programming, gather/scatter, streaming mode, and ZA tiles.
@@ -56,7 +56,7 @@ generated_summary_faq:
       You can explore predication, vector-length-agnostic (VLA) programming, gather/scatter,
       streaming mode, and ZA tiles. Implementations use C and Arm C Language Extensions (ACLE)
       intrinsics.
-  - question: How do I validate a kernel and compare Neon, SVE/SVE2, and SME2 implementations?
+  - question: How do I validate a kernel and compare Neon, SVE and SVE2, and SME2 implementations?
     answer: >-
       Build and run the selected kernel with the project runner, then validate its results against
       the C reference implementation. Choose the build target for each variant to compare scalar,

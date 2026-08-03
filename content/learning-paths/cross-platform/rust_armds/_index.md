@@ -30,7 +30,7 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:47:33Z'
   faq_source_hash: f237cd239e5886b21bd5bee88dcd9f95d88eda9a5c2eea363cc9db252e0c6e9f
   summary: >-
-    You'll build a bare-metal Rust example for Armv7-M, run it on an Arm Fixed Virtual Platform (FVP), and
+    You'll build a bare-metal Rust example for Armv7-M, run it on an Arm FVP, and
     prepare to debug it with Arm Development Studio. You'll install the tools, compile for the
     `thumbv7m-none-eabi` target, and launch `FVP_MPS2_Cortex-M3` with the binary. Optionally, you can disable
     visualization to shorten startup. You'll verify the calculation from console output, then load the

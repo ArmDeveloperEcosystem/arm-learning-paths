@@ -28,7 +28,7 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:42:44Z'
   faq_source_hash: 72e5ffe5091311850d17f30ed3ab4bd7487cbbd862d0d8751cc73bd91fff00e2
   summary: >-
-    You'll explore memory latency with a small C workload on Arm Linux. You'll modify the application in stages:
+    You'll explore memory latency with a small C workload on Arm Linux. First, you'll modify the application in stages:
     add an allocator for locality, adjust structure layout and cache alignment, and add prefetching
     to bring data closer to the CPU. Then, you'll build and run each version. You'll compare relative runtime trends,
     choose an effective alignment, and tune the prefetch distance to overlap memory access with
