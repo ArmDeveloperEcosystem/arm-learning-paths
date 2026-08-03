@@ -17,15 +17,15 @@ Our particular Yocto build makes use of the matchbox window manager by default w
 
 Once the Nvidia Jetson device boots, a desktop similar to the following will be presented:
 
-![Yocto Desktop with matchbox window manager instance#center](images/desktop-image.png "Yocto desktop with matchbox window manager")
+![Yocto Desktop with matchbox window manager instance#center](images/desktop-image.webp "Yocto desktop with matchbox window manager")
 
 Clicking on the "Terminal" icon will bring up a simple shell into our Yocto instance:
 
-![Desktop Shell instance#center](images/terminal-image.png "Desktop Shell")
+![Desktop Shell instance#center](images/terminal-image.webp "Desktop Shell")
 
 Additionally, applications and simple games can be viewed and selected if desired:
 
-![Desktop Applications instance#center](images/yocto-apps.png "Desktop Applications")
+![Desktop Applications instance#center](images/yocto-apps.webp "Desktop Applications")
 
 Explore your newly created and highly customized linux distribution for your Nvidia Jetson device.  You will find that the complete Nvidia GPU driver set is available as is a fully functional nvidia-optimized Docker runtime in your image. Explore!
 

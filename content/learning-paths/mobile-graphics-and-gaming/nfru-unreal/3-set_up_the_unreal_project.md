@@ -11,7 +11,7 @@ layout: learningpathall
 
 1. Open Unreal Engine 5.4 or 5.6 and create a new **Third Person** template project using the **C++** option.
 
-    ![Unreal Engine project selection screen showing a C++ Third Person template#center](./images/unreal_startup.png "Create a C++ project in a supported Unreal Engine version")
+    ![Unreal Engine project selection screen showing a C++ Third Person template#center](./images/unreal_startup.webp "Create a C++ project in a supported Unreal Engine version")
 
 2. Close Unreal Editor.
 
