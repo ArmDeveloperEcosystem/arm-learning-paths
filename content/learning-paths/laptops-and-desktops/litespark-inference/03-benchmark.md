@@ -6,16 +6,18 @@ weight: 4
 layout: learningpathall
 ---
 
+## Record your benchmark configuration
+
 The `litespark-benchmark` command measures memory use, time to first token
 (TTFT), prompt prefill throughput, and token-generation throughput. Use it
 to establish a performance baseline on Arm Linux or macOS on Apple silicon.
 
+{{% notice Note %}}
 By default, the inference benchmark uses the torchless Litespark-Inference
-runtime. It does not run a PyTorch baseline unless you add `--pytorch`.
+runtime. It doesn't run a PyTorch baseline unless you add the `--pytorch` flag.
+{{% /notice %}}
 
-## Record your benchmark configuration
-
-Run the following commands from the virtual environment you created in the
+Run the following commands from the virtual environment you created by following the
 [Litespark-Inference install guide](/install-guides/litespark-inference/):
 
 ```bash
@@ -61,9 +63,8 @@ throughput. The JSON file preserves the configuration and detailed results.
 
 ## Compare with a PyTorch baseline
 
-PyTorch is only needed when you add `--pytorch`. The benchmark command does
-not install PyTorch. The current PyPI package declares PyTorch and Transformers
-as dependencies, so they are already present after you follow the install
+PyTorch is needed only when you add the `--pytorch` flag. The benchmark command doesn't install PyTorch. The current PyPI package declares PyTorch and Transformers
+as dependencies, so they're already present after you follow the install
 guide.
 
 Verify that both packages are available in your virtual environment:
@@ -115,20 +116,23 @@ Throughput (tok/s)             1.83        17.75         9.7x
 
 ## Understand the benchmark flags
 
+The following are the benchmark flags and the purpose they serve:
+
 | Flag | Purpose |
 |---|---|
-| `--inference` | Run the BitNet `pp128` and `tg128` inference workload. |
-| `--no-matrix` | Skip the separate raw matrix-shape benchmark. |
-| `--threads N` | Set the OpenMP thread count so runs use the same CPU resources. |
-| `--embed-dtype bf16`, `int8`, or `int4` | Select the token-embedding data type. The default is `int4`. |
-| `--pytorch` | Add the Hugging Face and PyTorch baseline. PyTorch is not used when you omit this flag. |
-| `--output FILE` | Save the configuration and results as JSON. |
+| `--inference` | To run the BitNet `pp128` and `tg128` inference workload |
+| `--no-matrix` | To skip the separate raw matrix-shape benchmark |
+| `--threads N` | To set the OpenMP thread count so runs use the same CPU resources |
+| `--embed-dtype bf16`, `int8`, or `int4` | To select the token-embedding data type. The default is `int4`. |
+| `--pytorch` | To add the Hugging Face and PyTorch baseline. PyTorch isn't used when you omit this flag. |
+| `--output FILE` | To save the configuration and results as JSON |
 
 ## Measure thread scaling
 
 Run the same benchmark with several fixed thread counts to see how prefill and
-token generation scale. Change only `--threads` between runs. Copy and paste the
-following loop directly into your terminal:
+token generation scale. Change only `--threads` between runs. 
+
+Copy and paste the following loop directly into your terminal:
 
 ```bash
 for threads in 1 2 4 8 16; do
@@ -152,8 +156,8 @@ The following chart illustrates this behavior on an Apple M5 Max.
 
 The `--power` flag adds energy and joules-per-token measurements when the
 platform exposes readable power counters. Energy measurement is available on
-macOS through `powermetrics`. It is not available on Arm Linux because
-Arm-based systems do not expose powercap energy counters.
+macOS through `powermetrics`. It isn't available on Arm Linux because
+Arm-based systems don't expose powercap energy counters.
 
 On macOS, refresh your `sudo` credentials so the benchmark can run
 `powermetrics`, then start the measurement:
@@ -169,7 +173,7 @@ litespark-benchmark \
     --output energy-macos.json
 ```
 
-If the results report `available: false`, the platform does not expose a
+If the results report `available: false`, the platform doesn't expose a
 supported counter. The memory and throughput results remain valid.
 
 ## Inspect the JSON results
@@ -191,12 +195,7 @@ should match the value passed with `--threads`.
 
 ## What you've accomplished
 
-You have:
-
-- Benchmarked Litespark-Inference on an Arm system with a controlled thread count.
-- Saved memory, TTFT, throughput, kernel, and system information as JSON.
-- Measured how throughput changes with thread count.
-- Identified when PyTorch and hardware energy counters are needed.
+You've now benchmarked Litespark-Inference on an Arm system with a controlled thread count. You've saved memory, TTFT, throughput, kernel, and system information as JSON, and measured how throughput changes with thread count. You've also dentified when PyTorch and hardware energy counters are needed.
 
 Use the saved JSON files to compare embedding data types or repeat the same
 workload on another Arm system.

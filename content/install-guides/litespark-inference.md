@@ -1,9 +1,5 @@
 ---
 title: Litespark-Inference
-
-draft: true
-cascade:
-    draft: true
     
 description: Install Litespark-Inference on Arm Linux and Apple silicon macOS to run BitNet ternary LLMs on the CPU.
 
