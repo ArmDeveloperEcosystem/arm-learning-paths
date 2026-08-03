@@ -14,7 +14,7 @@ learning_objectives:
 
 prerequisites:
     - Familiarity with performance analysis on Linux systems using Perf and PMU counters
-    - Access to Arm Neoverse V2 and Intel x86 Linux systems to run the code example
+    - Access to an Arm Neoverse V3 system, such as the Arm AGI CPU platform, and an Intel x86 Linux system to run the comparative code examples
     - Basic understanding of CPU pipeline concepts and performance bottlenecks
 
 author:

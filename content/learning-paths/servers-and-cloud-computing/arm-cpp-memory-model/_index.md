@@ -12,7 +12,7 @@ learning_objectives:
     - Employ best practices for writing C++ on Arm to avoid race conditions.
 
 prerequisites:
-    - Access to an x86 and an Arm cloud instance (virtual machine).
+    - Access to an x86 Linux system and an Arm Linux system, such as a cloud instance or an AGI CPU platform.
     - Proficiency in C++ programming.
 
 # START generated_summary_faq

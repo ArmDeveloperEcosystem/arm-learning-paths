@@ -17,7 +17,7 @@ learning_objectives:
     - Evaluate the impact of BOLT optimizations using performance metrics and profiling data
 
 prerequisites:
-    - An AArch64 system running Linux with [LLVM BOLT](/install-guides/llvm/#verify-bolt-tools) and [perf](/install-guides/perf/) installed
+    - An AArch64 system running Linux, such as an AGI CPU platform, with [LLVM BOLT](/install-guides/llvm/#verify-bolt-tools) and [perf](/install-guides/perf/) installed
     - Linux kernel version 6.17 or later to enable Branch Record Buffer Extension ([BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt/brbe/))
     - Linux kernel version 6.14 or later for Arm Statistical Profiling Extension ([SPE profiling](/learning-paths/servers-and-cloud-computing/bolt/spe/))
     - Linux kernel with Arm CoreSight enabled for Embedded Trace Macrocell ([ETM profiling](/learning-paths/servers-and-cloud-computing/bolt/etm/))

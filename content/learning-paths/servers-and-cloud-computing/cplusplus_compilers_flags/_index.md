@@ -13,6 +13,7 @@ learning_objectives:
 prerequisites:
     - Basic understanding of C++
     - Basic understanding of compilers
+    - Access to a Neoverse-based system running Ubuntu 24.04 LTS, such as an AWS Graviton-based instance or an AGI CPU platform
 
 # START generated_summary_faq
 generated_summary_faq:
