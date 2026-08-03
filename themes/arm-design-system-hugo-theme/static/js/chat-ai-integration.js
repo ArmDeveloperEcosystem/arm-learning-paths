@@ -10,6 +10,7 @@
       // Create and append chat-ai element only after successful auth
       const chatAi = document.createElement("chat-ai");
       chatAi.id = "chat-ai";
+      chatAi.setAttribute("theme", "dark");
       chatAi.setAttribute("app-name", "IPExplorer");
       chatAi.setAttribute("api-url", "http://localhost:5001");
       chatAi.setAttribute("tnc-url", "https://ipuser.dev.bespin.arm.com/vfae-terms-and-conditions");
