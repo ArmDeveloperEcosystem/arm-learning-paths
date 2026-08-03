@@ -12,7 +12,7 @@ learning_objectives:
     - Find out if an application uses Large System Extensions
 
 prerequisites:
-    - An [AWS account](/learning-paths/servers-and-cloud-computing/csp/aws/) to access instance types with different AWS Graviton processors. If you don't have an AWS account, you can substitute other Arm Linux computers.
+    - Access to an AWS Graviton-based instance or an Arm AGI CPU platform running Linux. Other Arm Linux computers with LSE support can also be used.
 
 author: Jason Andrews
 

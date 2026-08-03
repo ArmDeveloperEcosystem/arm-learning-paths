@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - Basic C++ understanding
-    - Access to an Arm-based Linux machine
+    - Access to an Arm-based Linux machine, such as an AWS Graviton-based instance or an Arm AGI CPU platform
 
 # START generated_summary_faq
 generated_summary_faq:

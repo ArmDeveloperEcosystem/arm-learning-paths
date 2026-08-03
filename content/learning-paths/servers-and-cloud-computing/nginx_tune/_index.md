@@ -13,7 +13,7 @@ learning_objectives:
     - Measure NGINX performance before and after tuning.
 
 prerequisites:
-    - A cloud or bare-metal installation of an NGINX file server, reverse proxy, or API gateway.
+    - An NGINX file server, reverse proxy, or API gateway running on a cloud instance, bare-metal server, or Arm AGI CPU platform.
     - A repeatable HTTP workload or load test that you can run before and after tuning.
     - If you don't already have an NGINX setup, see [Learn how to deploy NGINX](/learning-paths/servers-and-cloud-computing/nginx/).
 
