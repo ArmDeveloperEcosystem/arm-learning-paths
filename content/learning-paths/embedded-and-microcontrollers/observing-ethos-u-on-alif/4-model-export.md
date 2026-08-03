@@ -123,7 +123,7 @@ Argument definitions:
 - `--system_config` and `--memory_mode`: selects the Vela memory configuration used when compiling the NPU command stream.
 - `--output`: writes the exported ExecuTorch program.
 
-Vela is Arm’s compiler for Ethos-U NPUs. During export, it prints information about the selected Ethos-U target, memory use, and NPU performance estimates to the terminal. Review this output to confirm that the model was compiled for the expected `ethos-u85-256` target. At the end, you should see confirmation of the saved `.pte` file:
+Vela is Arm’s compiler for Ethos-U NPUs. During export, it prints information about the selected Ethos-U target, memory use, and NPU performance estimates. Review this output to confirm that the model was compiled for the expected `ethos-u85-256` target. At the end, you should see confirmation of the saved `.pte` file:
 
 ```output
 PTE file saved as /home/developer/output/mnist_ethos_u85.pte
