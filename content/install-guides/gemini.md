@@ -2,11 +2,13 @@
 title: Gemini CLI
 description: Install Gemini CLI on macOS or Arm Linux and configure authentication so you can use Google's command-line AI assistant for development tasks.
 
+draft: true
+
 author: Jason Andrews
 minutes_to_complete: 15
 official_docs: https://geminicli.com/docs/
 
-test_maintenance: true
+test_maintenance: false
 test_images:
 - ubuntu:latest
 
@@ -16,6 +18,10 @@ multitool_install_part: false
 tool_install: true
 weight: 1
 ---
+
+{{% notice Note %}}
+Gemini CLI was deprecated on June 18, 2026 and no longer serves requests for individual accounts. Google replaced it with [Antigravity CLI](/install-guides/antigravity/). Use the Antigravity CLI install guide instead.
+{{% /notice %}}
 
 Gemini CLI is Google's command-line interface for interacting with the Gemini AI assistant. You can use it to ask questions about software development, architecture, and general programming tasks with advanced AI capabilities.
 
