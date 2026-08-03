@@ -1,5 +1,5 @@
 ---
-title: Introduction to SIMD.info
+title: Use SIMD.info to port SIMD intrinsics across Arm architectures
 
 minutes_to_complete: 30
 
@@ -29,9 +29,9 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:48:34Z'
   faq_source_hash: 7a40efa6d83b4629888f9622260e6e9aa9192db836b203fa4bf388cbe636b7e6
   summary: >-
-    Use SIMD.info to port SIMD intrinsics from a concise SSE4.2 C example to Arm Neon/ASIMD. You
-    search and compare intrinsic pages, map comparison, addition, multiplication, and square-root
-    operations, then adapt vector initialization and storage. You replace the SSE calls with Neon
+    You'll use SIMD.info to port SIMD intrinsics from a concise SSE4.2 C example to Arm Neon/ASIMD. You'll
+    search and compare intrinsic pages, and map comparison, addition, multiplication, and square-root
+    operations. Then, you'll adapt vector initialization and storage. You'll replace the SSE calls with Neon
     constructs and compare the results with the original behavior, prioritizing correctness over
     performance.
   faqs:

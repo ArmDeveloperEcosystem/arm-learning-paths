@@ -28,9 +28,9 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:37:05Z'
   faq_source_hash: 1895767d551ba0fa249c5002d3e2e471acacdec06ddb7c2f5314a2fa0df94f2e
   summary: >-
-    Explore how C and C++ convert integers and floating-point values on Arm Linux, and how those
-    conversions affect correctness. You review numeric ranges, compare explicit and implicit conversions,
-    and run short programs that expose integer-division and narrowing pitfalls. You also compare C++
+    You'll explore how C and C++ convert integers and floating-point values on Arm Linux, and how those
+    conversions affect correctness. You'll review numeric ranges, compare explicit and implicit conversions,
+    and run short programs that expose integer-division and narrowing pitfalls. You'll also compare C++
     list-initialization diagnostics with C's permissive behavior, then adjust types or add explicit casts
     to produce the intended results.
   faqs:

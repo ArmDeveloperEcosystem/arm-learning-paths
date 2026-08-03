@@ -32,15 +32,15 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:51:46Z'
   faq_source_hash: 5f4b05e3d962476c67c4a4400c8fa71f04412f3f0354d5c3123f38af57791304
   summary: >-
-    Compare Intel x86 and Arm Neoverse top-down performance analysis with PMU counters. You examine
+    You'll compare Intel x86 and Arm Neoverse top-down performance analysis with PMU counters. You'll examine
     slot-based accounting—four issue slots per cycle on Intel and eight rename slots on Neoverse V2—
-    and interpret Retiring, Bad Speculation, Frontend Bound, and Backend Bound. You build an FP64
+    and interpret Retiring, Bad Speculation, Frontend Bound, and Backend Bound. Then, you'll build an FP64
     divide-chain benchmark, collect results with Linux Perf and `topdown-tool`, and compare category
     percentages instead of raw counter names.
   faqs:
   - question: Which tool should I use to collect top-down metrics on each system?
     answer: >-
-      Use Linux Perf on Intel x86 systems and `topdown-tool` on Arm systems. Both systems need Perf;
+      Use Linux Perf on Intel x86 systems and `topdown-tool` on Arm systems. Both systems need Perf.
       Arm systems also need `topdown-tool`.
   - question: How do I build and run the example benchmark?
     answer: >-

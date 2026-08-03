@@ -1,5 +1,5 @@
 ---
-title: Learn about Autovectorization
+title: Optimize C and C++ code using compiler autovectorization techniques
 description: Learn how to optimize C/C++ code using compiler autovectorization techniques including loop modifications, restrict qualifiers, and conditional handling for Arm processors.
 
 minutes_to_complete: 45
@@ -27,20 +27,20 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:39:29Z'
   faq_source_hash: 4218b8b0c1dee3862bb9765a83dfed0cb38555d1da7425e791c5c16b17f98c21
   summary: >-
-    Enable and inspect compiler autovectorization for C and C++ loops on Arm Linux with GCC or Clang.
-    You build focused examples, apply the C99 `restrict` qualifier, and inspect assembly to verify
-    vectorization. You then examine countable loops and branches, refactor conditionals when needed,
+    You'll enable and inspect compiler autovectorization for C and C++ loops on Arm Linux with GCC or Clang.
+    You'll build focused examples, apply the C99 `restrict` qualifier, and inspect assembly to verify
+    vectorization. Then, you'll examine countable loops and branches, refactor conditionals when needed,
     and use an integer dot product to recognize Arm SIMD instructions in generated code.
   faqs:
   - question: How do I know if the compiler vectorized my loop?
     answer: >-
-      Compile with optimization as shown, then disassemble the binary with `objdump -D`. In the
+      Compile with optimization, then disassemble the binary with `objdump -D`. In the
       target function, look for wide loads, stores, and arithmetic that process multiple elements
       per iteration instead of scalar steps.
   - question: I added `restrict` but my loop still doesn’t vectorize. What should I check next?
     answer: >-
-      Confirm that the loop is countable and free of loop-carried dependencies or branches. If it
-      includes conditionals, restructure them or move them so the hot path is branch-free.
+      Confirm that the loop is countable and free of loop-carried dependencies or branches. If the loop
+      includes conditionals, restructure or move the conditionals so the hot path is branch-free.
   - question: Can I use Clang instead of GCC for the steps?
     answer: >-
       Yes. The examples use `gcc`, but Clang can compile the same sources and generate assembly for

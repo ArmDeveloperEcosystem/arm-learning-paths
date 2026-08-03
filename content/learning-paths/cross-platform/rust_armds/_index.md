@@ -1,5 +1,5 @@
 ---
-title: Build an Embedded Application with Rust and Debug with Arm Development Studio
+title: Build an embedded application with Rust and debug with Arm Development Studio
 minutes_to_complete: 60
 
 description: Learn how to build an embedded Rust application for Arm processors, run it on a Fixed Virtual Platform, and debug it using Arm Development Studio.
@@ -30,10 +30,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:47:33Z'
   faq_source_hash: f237cd239e5886b21bd5bee88dcd9f95d88eda9a5c2eea363cc9db252e0c6e9f
   summary: >-
-    Build a bare-metal Rust example for Armv7-M, run it on an Arm Fixed Virtual Platform (FVP), and
-    prepare to debug it with Arm Development Studio. You install the tools, compile for the
-    `thumbv7m-none-eabi` target, launch `FVP_MPS2_Cortex-M3` with the binary, and optionally disable
-    visualization to shorten startup. You verify the calculation from console output, then load the
+    You'll build a bare-metal Rust example for Armv7-M, run it on an Arm Fixed Virtual Platform (FVP), and
+    prepare to debug it with Arm Development Studio. You'll install the tools, compile for the
+    `thumbv7m-none-eabi` target, and launch `FVP_MPS2_Cortex-M3` with the binary. Optionally, you can disable
+    visualization to shorten startup. You'll verify the calculation from console output, then load the
     same example in Arm Debugger.
   faqs:
   - question: Which Rust target do I build for this example?
@@ -50,8 +50,8 @@ generated_summary_faq:
       that the path matches your build output directory and example name.
   - question: How do I start the FVP without visualization to reduce startup time?
     answer: >-
-      Add `-C fvp_mps2.mps2_visualisation.disable-visualisation=1` to the FVP command. This only
-      affects visualization and does not change FVP behavior.
+      Add `-C fvp_mps2.mps2_visualisation.disable-visualisation=1` to the FVP command. This
+      affects only visualization and doesn't change FVP behavior.
   - question: What output should I expect to verify the run completed?
     answer: >-
       The console shows output similar to “Total sum to 1 is 1” and “Calculated sum is 1.” The

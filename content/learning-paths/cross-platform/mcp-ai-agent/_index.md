@@ -1,5 +1,5 @@
 ---
-title: Deploy an MCP Server on Raspberry Pi 5 for AI Agent Interaction using OpenAI SDK
+title: Deploy an MCP Server on Raspberry Pi 5 for AI agent interaction using OpenAI SDK
 description: Learn how to deploy a Model Context Protocol server on Raspberry Pi 5 and use the OpenAI Agent SDK to create AI agents with custom tools for local inference.
 
 minutes_to_complete: 30
@@ -33,10 +33,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:41:23Z'
   faq_source_hash: 39d489081bfa22125a4046c17d5c00a32c0d7b298cba7b6a12373cf3cf6bac04
   summary: >-
-    Deploy a Model Context Protocol (MCP) server on Raspberry Pi 5 and connect it to an AI agent
-    built with the OpenAI Agent SDK. You install `uv`, bootstrap a FastMCP server with CPU-temperature
-    and weather tools, expose it through an `ngrok` tunnel, and configure an agent on a separate Arm
-    Linux machine. You then prompt the agent to retrieve live values from the Pi and external sources.
+    You'll deploy a Model Context Protocol (MCP) server on Raspberry Pi 5 and connect it to an AI agent
+    built with the OpenAI Agent SDK. You'll install `uv` and bootstrap a FastMCP server with CPU-temperature
+    and weather tools. You'll expose the server through an `ngrok` tunnel, and configure an agent on a separate Arm
+    Linux machine. Then, you'll prompt the agent to retrieve live values from the Pi and external sources.
   faqs:
   - question: Where do I run the MCP server, and where do I run the AI agent?
     answer: >-
@@ -58,7 +58,7 @@ generated_summary_faq:
   - question: How do I know the CPU temperature and weather tools are actually being used?
     answer: >-
       Prompt the agent to report Raspberry Pi's CPU temperature or look up weather data. The response
-      includes the requested values. If it does not, verify that the server is running and the
+      includes the requested values. If it doesn't, verify that the server is running and the
       connection details match.
 # END generated_summary_faq
 

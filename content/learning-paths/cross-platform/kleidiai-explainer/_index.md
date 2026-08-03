@@ -29,10 +29,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:38:55Z'
   faq_source_hash: 907255b3c2c1086b421abe4a1e378b68533de4524a4f4dd81138545a2ff1a5b5
   summary: >-
-    Explore KleidiAI micro-kernels on Arm CPUs and see how matrix multiplication supports generative
-    AI workloads. You locate the `matmul` kernels and packing and quantization routines in the KleidiAI
+    You'll explore KleidiAI micro-kernels on Arm CPUs and see how matrix multiplication supports generative
+    AI workloads. You'll locate the `matmul` kernels and packing and quantization routines in the KleidiAI
     GitLab repository, review the architecture, and identify when a framework can invoke i8mm kernels.
-    You then run a C++ example that exercises the i8mm kernel and its supporting data path, so you can
+    Then, you'll run a C++ example that exercises the i8mm kernel and its supporting data path, so you can
     trace the optimized execution directly.
   faqs:
   - question: How do I know if my ML framework will use KleidiAI automatically?
@@ -43,7 +43,7 @@ generated_summary_faq:
   - question: Where in the KleidiAI repository are the relevant micro-kernels?
     answer: >-
       Open `/kai/ukernels/matmul` in the KleidiAI GitLab repository. The `pack` directory contains
-      quantization and packing routines; adjacent directories contain the matrix multiplication
+      quantization and packing routines. Adjacent directories contain the matrix multiplication
       routines.
   - question: Which example should I review to understand the i8mm execution path?
     answer: >-
@@ -57,7 +57,7 @@ generated_summary_faq:
     answer: >-
       Verify that your hardware implements the required Arm instructions, such as i8mm, and that
       your software selects the optimized kernels. If you use a framework, confirm that it integrates
-      KleidiAI; otherwise, run the standalone example to validate the micro-kernel path.
+      KleidiAI. Otherwise, run the standalone example to validate the micro-kernel path.
 # END generated_summary_faq
 
 author: Zach Lasiuk

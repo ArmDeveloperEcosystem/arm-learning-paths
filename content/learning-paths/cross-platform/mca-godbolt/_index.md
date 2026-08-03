@@ -1,5 +1,5 @@
 ---
-title: Learn about LLVM Machine Code Analyzer
+title: Use LLVM Machine Code Analyzer to analyze assembly performance on Arm
 description: Learn how to use llvm-mca with Compiler Explorer to analyze Arm assembly performance, estimate hardware resource pressure, and diagnose performance issues.
 
 minutes_to_complete: 60
@@ -30,9 +30,9 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:40:47Z'
   faq_source_hash: c86322d497541344f92907315793ab990669aa08bef994b0ce9ff1e32a5ba055
   summary: >-
-    Use LLVM Machine Code Analyzer (`llvm-mca`) to reason about Arm assembly performance. You analyze
+    You'll use LLVM Machine Code Analyzer (`llvm-mca`) to reason about Arm assembly performance. You'll analyze
     a short six-value sum to estimate cycles and resource pressure, identify bottlenecks, and relate
-    the report to pipeline behavior. You also run `llvm-mca` in Compiler Explorer to compare compiler
+    the report to pipeline behavior. You'll also run `llvm-mca` in Compiler Explorer to compare compiler
     versions and apply the workflow to other Arm assembly fragments.
   faqs:
   - question: What result should I expect when I run `llvm-mca` on the `sum_test1.s` example?
@@ -46,7 +46,7 @@ generated_summary_faq:
   - question: How do I know `llvm-mca` executed correctly on my snippet?
     answer: >-
       The report includes an estimated cycle count and a resource-usage breakdown without errors.
-      If it is missing or incomplete, verify that the input matches the example and rerun the analysis.
+      If it's missing or incomplete, verify that the input matches the example and rerun the analysis.
   - question: What should I check before analyzing the Arm assembly example?
     answer: >-
       Save the provided instructions exactly as shown in `sum_test1.s`. Make sure the registers
@@ -54,7 +54,7 @@ generated_summary_faq:
   - question: Can I follow this path without installing LLVM locally?
     answer: >-
       Yes. Compiler Explorer includes `llvm-mca` and lets you try compiler versions in the browser.
-      For Neoverse V2 support, use LLVM 16 or newer.
+      For Neoverse V2 support, use LLVM 16 or later.
 # END generated_summary_faq
 
 author: Asher Dobrescu

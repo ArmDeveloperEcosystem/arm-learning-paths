@@ -32,10 +32,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:46:14Z'
   faq_source_hash: 927cfebb8ebf9595922dad115c9a8d10900e43c4f80e73e6102a71e3e4ca2da1
   summary: >-
-    Install the Remote.It device package on a target system and establish private access to services
-    such as SSH. You use the Remote.It Web Dashboard to create proxy connections, compare them with
+    You'll install the Remote.It device package on a target system and establish private access to services
+    such as SSH. You'll use the Remote.It Web Dashboard to create proxy connections, compare them with
     peer-to-peer connections, and route traffic through either a Remote.It server or a direct path.
-    You also use the Remote.It CLI for headless or scripted initiators, then verify SSH access and
+    You'll also use the Remote.It CLI for headless or scripted initiators. Then, you'll verify SSH access and
     choose the connection method that fits your requirements.
   faqs:
   - question: What result should I expect after installing the Remote.It device package on the
@@ -49,13 +49,13 @@ generated_summary_faq:
       additional software. Install the Remote.It CLI only for a headless or scripted workflow.
   - question: Which connection type should I use for my first test, proxy or peer-to-peer?
     answer: >-
-      Use a proxy connection for the simplest setup: only the target needs Remote.It, and traffic
-      goes through a Remote.It server. Use peer-to-peer when you need a direct path between the
-      initiator and target.
+      Use peer-to-peer when you need a direct path between the
+      initiator and target. Otherwise, use a proxy connection. Only the target needs Remote.It, and traffic
+      goes through a Remote.It server.
   - question: How do I run the Remote.It CLI on Linux without a desktop environment?
     answer: >-
       Download the CLI binary for your platform, rename it if needed, and make it executable. Use
-      it to create connections from the initiator without installing the Desktop app.
+      the CLI to create connections from the initiator without installing the Desktop app.
   - question: What should I check if SSH fails after I start a connection?
     answer: >-
       Verify that SSH is installed and configured on the target. Confirm that the device is visible

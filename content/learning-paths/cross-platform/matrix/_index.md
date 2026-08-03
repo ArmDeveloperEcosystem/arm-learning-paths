@@ -34,10 +34,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:40:06Z'
   faq_source_hash: 5611b6d1eebbea167d1860e3ac7f4f7910584561cbb18c3ed696aa27215edce9
   summary: >-
-    Build and test a modern C++ matrix library on an Arm-based machine with CMake and GoogleTest.
-    You configure a C++17 toolchain, add unit tests, and implement matrix construction, assignment,
-    addition, subtraction, and multiplication. You keep traversal separate from data processing,
-    choose a build system, and balance error checking with performance before validating the library
+    You'll build and test a modern C++ matrix library on an Arm-based machine with CMake and GoogleTest.
+    You'll configure a C++17 toolchain and add unit tests. You'll implement matrix construction, assignment,
+    addition, subtraction, and multiplication, keeping traversal separate from data processing.
+    You'll choose a build system and balance error checking with performance before validating the library
     with consistent builds and passing tests.
   faqs:
   - question: Which C++ compiler should I use and which standard is required?

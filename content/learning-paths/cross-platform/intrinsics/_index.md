@@ -33,15 +33,15 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:37:37Z'
   faq_source_hash: ecf51d9a9085f95dedda9c0cfbfa4d6350d0f68d81b61f9461bc51070abd0b69
   summary: >-
-    Port x64 SIMD code to Arm by identifying architecture-specific intrinsics and mapping them to
-    Arm equivalents. You use `sse2neon` for SSE or MMX code, or SIMD Everywhere (SIMDe) when a project
-    also contains AVX. You adjust headers, add the required shim or macros, rebuild on Arm, and use
+    You'll port x64 SIMD code to Arm by identifying architecture-specific intrinsics and mapping them to
+    Arm equivalents. You'll use `sse2neon` for SSE or MMX code, or SIMD Everywhere (SIMDe) when a project
+    also contains AVX. You'll adjust headers, add the required shim or macros, rebuild on Arm, and use
     Porting Advisor for Graviton to locate intrinsics in larger repositories.
   faqs:
   - question: How do I know if my code uses architecture-specific intrinsics?
     answer: >-
       Look for function-like calls from SIMD headers tied to a specific instruction set architecture
-      (ISA), such as SSE, MMX, or AVX on x64. These compiler-provided functions are not standard
+      (ISA), such as SSE, MMX, or AVX on x64. These compiler-provided functions aren't standard
       library APIs.
   - question: Which option should I use if my codebase mixes SSE and AVX?
     answer: >-
@@ -50,7 +50,7 @@ generated_summary_faq:
   - question: What changes do I need when applying `sse2neon`?
     answer: >-
       Adjust the SSE-specific headers for Arm, include `sse2neon.h`, and update the compiler flags
-      for the Arm target. Then rebuild on an Arm-based platform.
+      for the Arm target. Then, rebuild on an Arm-based platform.
   - question: What do I configure when using SIMDe?
     answer: >-
       Select the SIMDe header that matches your intrinsics, define the macro shown in the project

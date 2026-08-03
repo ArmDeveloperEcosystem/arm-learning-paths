@@ -36,9 +36,9 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:44:40Z'
   faq_source_hash: 1251465f13b67ee80292b66ef22069a1b6cc2ca67bb602cdd5e393a278576ec8
   summary: >-
-    Build and train a PyTorch feedforward neural network for MNIST digit classification, then use it
-    for inference and Android deployment. You set up Python, prepare the dataset, train the model,
-    reload its saved parameters, and apply the same preprocessing to new images. You then quantize
+    You'll build and train a PyTorch feedforward neural network for MNIST digit classification, then use it
+    for inference and Android deployment. You'll set up Python, prepare the dataset, and train the model. Then, you'll
+    reload the model's saved parameters and apply the same preprocessing to new images. You'll quantize
     and fuse an optimized variant, integrate it into an Android application, and compare inference
     times before deployment.
   faqs:
@@ -58,7 +58,7 @@ generated_summary_faq:
   - question: How do I validate that inference works on new images?
     answer: >-
       Apply the training preprocessing, including normalization and tensor conversion, then run a
-      prediction. The output maps to a digit from 0–9; compare it with a known test-set label.
+      prediction. The output maps to a digit from 0–9. Compare it with a known test-set label.
   - question: How do I compare unoptimized and optimized models after quantization and fusing?
     answer: >-
       Measure inference time with the original model, then repeat the measurement after quantization

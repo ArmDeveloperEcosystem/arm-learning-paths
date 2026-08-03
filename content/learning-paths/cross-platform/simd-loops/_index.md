@@ -16,7 +16,7 @@ learning_objectives:
 prerequisites:
     - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers
     - Some familiarity with SIMD programming and Neon intrinsics
-    - Recent toolchains that support SVE/SME (GCC 13+ or Clang 16+ recommended)
+    - Recent toolchains that support SVE and SME (GCC 13+ or Clang 16+ recommended)
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -33,10 +33,10 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:49:08Z'
   faq_source_hash: b1c43e1bf971db4582ca358c98dab2c7e6e047d6c79bfcc0db148bc575f33679
   summary: >-
-    Use the SIMD Loops project to explore Arm Neon, Scalable Vector Extension (SVE and SVE2), and
-    Scalable Matrix Extension (SME2) kernels. You clone the repository, verify the Arm environment,
-    inspect `loops.inc`, and study loop 202 and `matmul_fp32` across scalar, Neon, SVE/SVE2, and SME2
-    variants. You build selected kernels, compare them with the C reference, and examine predication,
+    You'll use the SIMD Loops project to explore Arm Neon, Scalable Vector Extension (SVE and SVE2), and
+    Scalable Matrix Extension (SME2) kernels. First, you'll clone the repository, verify the Arm environment, and
+    inspect `loops.inc`. You'll study loop 202 and `matmul_fp32` across scalar, Neon, SVE and SVE2, and SME2
+    variants. Then, you'll build selected kernels, compare them with the C reference, and examine predication,
     vector-length-agnostic programming, gather/scatter, streaming mode, and ZA tiles.
   faqs:
   - question: How do I know I’m running on an Arm machine before using SIMD Loops?
@@ -53,14 +53,14 @@ generated_summary_faq:
       `loops/matmul_fp32.c`, which implements `C[M × N] = A[M × K] × B[K × N]`.
   - question: What SIMD features can I explore with the kernels in SIMD Loops?
     answer: >-
-      The kernels demonstrate predication, vector-length-agnostic (VLA) programming, gather/scatter,
+      You can explore predication, vector-length-agnostic (VLA) programming, gather/scatter,
       streaming mode, and ZA tiles. Implementations use C and Arm C Language Extensions (ACLE)
       intrinsics.
   - question: How do I validate a kernel and compare Neon, SVE/SVE2, and SME2 implementations?
     answer: >-
       Build and run the selected kernel with the project runner, then validate its results against
       the C reference implementation. Choose the build target for each variant to compare scalar,
-      Neon, SVE/SVE2, and SME2 behavior.
+      Neon, SVE and SVE2, and SME2 behavior.
 # END generated_summary_faq
 
 author:

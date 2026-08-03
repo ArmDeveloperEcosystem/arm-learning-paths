@@ -31,15 +31,15 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:49:55Z'
   faq_source_hash: a051c519c1a4969f30d5a81e46823e77f0c15f163011b3a38f4c05104d853249
   summary: >-
-    Write SIMD code for Arm with Rust by translating familiar C examples into Rust. You start with
-    Arm Advanced SIMD (Neon) intrinsics in C, mirror them with `std::arch`, and explore portable SIMD
-    with `std::simd`. You implement pairwise averaging, a dot-product sum of absolute differences,
-    a 4x4 matrix transpose, and a DCT butterfly, then compare C and Rust output and disassembly.
+    You'll write SIMD code for Arm with Rust by translating familiar C examples into Rust. Starting with
+    Arm Advanced SIMD (Neon) intrinsics in C, you'll mirror them in Rust with `std::arch` and explore portable SIMD
+    with `std::simd`. You'll implement pairwise averaging, a dot-product sum of absolute differences,
+    a 4x4 matrix transpose, and a DCT butterfly. Then, you'll compare C and Rust output and disassembly.
   faqs:
   - question: Which Rust SIMD API should I use when porting the C Neon intrinsics examples?
     answer: >-
       Use `std::arch` for a one-to-one match with the C Neon intrinsics. Use `std::simd` when you
-      prefer a portable abstraction, as shown in the cross-platform SIMD steps.
+      prefer a portable abstraction.
   - question: How do I know the pairwise average example produced the right result?
     answer: >-
       The program averages corresponding elements from two arrays. Compare its output with the

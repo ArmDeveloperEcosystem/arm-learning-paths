@@ -34,11 +34,11 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:50:36Z'
   faq_source_hash: 36f7dfe13c8c940abbaad2b61620b3b1c6d97f580de15e573b45ef7760753797
   summary: >-
-    Profile ExecuTorch models on Arm with SME2 acceleration using a repeatable workflow. You set up
-    macOS, build SME2-enabled and SME2-disabled runner binaries, and export a model to `.pte`. You
+    You'll profile ExecuTorch models on Arm with SME2 acceleration using a repeatable workflow. You'll set up
+    macOS, build SME2-enabled and SME2-disabled runner binaries, and export a model to `.pte`. You'll
     run timing-only and trace-enabled passes to capture operator and category breakdowns for convolution,
-    GEMM, and data movement. You compare the profiles to identify SME2 gains and new bottlenecks,
-    then use structured agent skills to automate and validate the workflow.
+    GEMM, and data movement. Then, you'll compare the profiles to identify SME2 gains and new bottlenecks,
+    and use structured agent skills to automate and validate the workflow.
   faqs:
   - question: How do I know SME2 acceleration is active in my run?
     answer: >-

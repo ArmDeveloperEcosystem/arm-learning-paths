@@ -28,19 +28,19 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:46:57Z'
   faq_source_hash: 9825df99004e981fadce5884b40b2152f4e43064cbba2cd2129fd90006090678
   summary: >-
-    Use the C99 `restrict` qualifier to describe non-overlapping pointer regions and enable compiler
-    vectorization on Arm. You first examine how aliasing inhibits optimization, then add `restrict`
+    You'll use the C99 `restrict` qualifier to describe non-overlapping pointer regions and enable compiler
+    vectorization on Arm. First, you'll examine how aliasing inhibits optimization. Then, you'll add `restrict`
     where its contract is safe and inspect the generated assembly. The examples highlight SVE2 code
-    for a byte-processing loop on Armv9-A and help you recognize when `restrict` is valid or unsafe.
+    for a byte-processing loop on Armv9-A. You'll use the examples to recognize when `restrict` is valid or unsafe.
   faqs:
   - question: How do I know if I can mark these pointers as `restrict`?
     answer: >-
-      Use `restrict` when the memory regions referenced by the pointer parameters do not overlap
+      Use `restrict` when the memory regions referenced by the pointer parameters don't overlap
       and the function has no other access path to those regions. If any argument can alias another,
-      do not use `restrict`.
+      don't use `restrict`.
   - question: What result should I expect after I add `restrict` to a loop?
     answer: >-
-      The compiler can assume no aliasing and may generate vectorized code. On Arm with SVE2, look
+      The compiler can assume no aliasing and might generate vectorized code. On Arm with SVE2, look
       for vector registers (`z0`–`z31`) and predicated operations in the assembly.
   - question: How do I spot an overlap that would invalidate my use of `restrict`?
     answer: >-

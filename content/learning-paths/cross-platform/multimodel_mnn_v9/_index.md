@@ -1,5 +1,5 @@
 ---
-title: Build a Multimodal Retail Restocking Assistant on Armv9 With MNN
+title: Build a multimodal retail restocking assistant on Armv9 with MNN
 
 minutes_to_complete: 90
 
@@ -32,15 +32,15 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:43:21Z'
   faq_source_hash: bf3183bd62b590d4930f0bcf9c9dc836bbc5206a991be7bec5e18e9c20942352
   summary: >-
-    Build MNN natively on Armv9 Linux, prepare a prebuilt Omni multimodal model, and validate a
-    CPU-only inference workflow. You compile MNN, use `llm_demo` to establish a text-only baseline,
+    You'll build MNN natively on Armv9 Linux, prepare a prebuilt Omni multimodal model, and validate a
+    CPU-only inference workflow. You'll compile MNN and use `llm_demo` to establish a text-only baseline. Then, you'll
     add a vision shelf audit that identifies the sparsest priority zone, and handle unclear images
-    with `NOT_SURE`. You then convert an audio prompt into a reproducible, semicolon-separated
+    with `NOT_SURE`. Finally, you'll convert an audio prompt into a reproducible, semicolon-separated
     restock ticket.
   faqs:
   - question: How do I know the MNN build worked and the Omni model is ready?
     answer: >-
-      Use the `llm_demo` binary to load the prebuilt Omni MNN model package. If it loads without
+      Use the `llm_demo` binary to load the prebuilt Omni MNN model package. If the package loads without
       errors and a simple prompt produces tokens, continue to the next steps.
   - question: What should I look for in the text-only baseline output?
     answer: >-
@@ -48,8 +48,8 @@ generated_summary_faq:
       so you can compare behavior after adding vision and audio inputs.
   - question: What output should the vision shelf audit produce?
     answer: >-
-      The audit estimates coverage for the top, middle, and bottom shelf levels, identifies the
-      sparsest priority zone, and gives a short reason. If the image is unclear, it returns `NOT_SURE`.
+      The audit estimates coverage for the top, middle, and bottom shelf levels. It identifies the
+      sparsest priority zone and gives a short reason. If the image is unclear, it returns `NOT_SURE`.
   - question: Do I need a GPU or cloud service to run these demos on Armv9?
     answer: >-
       No. The workflow uses a native CPU-only MNN build, and the vision reasoning runs locally

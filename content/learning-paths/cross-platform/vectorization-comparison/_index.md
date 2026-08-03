@@ -30,10 +30,9 @@ generated_summary_faq:
   faq_generated_at: '2026-07-29T16:52:20Z'
   faq_source_hash: 26450ae17f7ed4242c52456c2780ffce5fad36b56dfc4a8482e8f236f855e134
   summary: >-
-    Migrate vectorized code from x86-64 (SSE and AVX) to Arm by mapping features to Neon, Scalable
-    Vector Extension (SVE), and Scalable Matrix Extension (SME). You compare autovectorization,
-    intrinsics, and library substitution, then build a SAXPY kernel in plain C and with vector
-    extensions on Arm and x86. You compare each result with a scalar reference and use vector width
+    You'll migrate vectorized code from x86-64 (SSE and AVX) to Arm by mapping features to Neon, SVE, and SME. You'll compare autovectorization,
+    intrinsics, and library substitution. Then, you'll build a SAXPY kernel in plain C and with vector
+    extensions on Arm and x86. You'll compare each result with a scalar reference and use vector width
     and throughput to choose an approach for your codebase.
   faqs:
   - question: 'Which migration approach should I pick: autovectorization, intrinsics, or a library?'
@@ -45,7 +44,7 @@ generated_summary_faq:
       Build and run the plain C and vectorized versions, then compare them across instruction sets.
       Their outputs match the scalar reference, and the measurements show how vector width affects
       throughput. Use those observations to inform your migration plan.
-  - question: What should I do if my Arm hardware does not support SVE or SME?
+  - question: What should I do if my Arm hardware doesn't support SVE or SME?
     answer: >-
       Run the plain C and Neon versions supported by your hardware. SVE and SME sections need
       compatible systems, but the conceptual mapping still informs portability decisions.
@@ -55,7 +54,7 @@ generated_summary_faq:
       vector length and matrix operations to guide code adaptation.
   - question: Can I use GCC or Clang to build the examples?
     answer: >-
-      Yes. The examples list GCC and Clang, and either compiler can build them as shown.
+      Yes. You can use either GCC or Clang to build the examples.
 # END generated_summary_faq
 
 author:
