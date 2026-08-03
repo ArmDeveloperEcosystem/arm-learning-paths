@@ -1,5 +1,6 @@
 ---
 title: Run BitNet-2B with Litespark-Inference
+description: Run BitNet-2B on Arm CPUs from the Litespark-Inference CLI and Python API, then compare BF16 and INT4 embedding memory use.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -36,9 +37,9 @@ The exact answer and timing vary by system. The key indicators are that prefill 
 
 When executed, Litespark-Inference:
 
-1. Downloads and loads the `microsoft/bitnet-b1.58-2B-4T-bf16` model from Hugging Face on first run (around 4.5 GB)
-2. Tokenizes the input prompt and processes it in a single batched prefill call
-3. Decodes up to 64 new tokens sequentially, streaming each token directly to your terminal
+1. Downloads and loads the `microsoft/bitnet-b1.58-2B-4T-bf16` model from Hugging Face on first run (around 4.5 GB).
+2. Tokenizes the input prompt and processes it in a single batched prefill call.
+3. Decodes up to 64 new tokens sequentially, streaming each token directly to your terminal.
 
 You can also inspect system hardware detection or launch an interactive session using additional CLI commands:
 
@@ -192,6 +193,6 @@ The program prints approximately 157 MB of embedding tensor storage for INT4, co
 
 ## What you've accomplished
 
-You've now generated text using BitNet-2B from the command line and integrated `litespark-inference` into Python using the `BitNet` API. You've also configured BF16 and INT4 embeddings and compared their memory and quality trade-offs with INT8.
+You've now generated text using BitNet-2B from the command line and integrated `litespark-inference` into Python using the `BitNet` API. You've also configured BF16 and INT4 embeddings and compared their memory and quality trade-offs.
 
 Next, you'll compare performance against a PyTorch baseline.

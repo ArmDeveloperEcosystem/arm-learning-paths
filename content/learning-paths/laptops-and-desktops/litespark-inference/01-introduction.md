@@ -1,5 +1,6 @@
 ---
 title: Understand Litespark-Inference and BitNet b1.58
+description: Understand how packed ternary weights and Arm Neon SDOT kernels enable Litespark-Inference to run BitNet b1.58 directly on CPUs.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +11,7 @@ layout: learningpathall
 
 Litespark-Inference is an open-source runtime designed to execute ternary-weight language models, such as [BitNet b1.58](https://arxiv.org/abs/2402.17764), directly on host CPUs. It performs inference without using a GPU or PyTorch at runtime. The PyTorch and Transformers packages are declared as dependencies for benchmarking and model-loading utilities, but the torchless inference path relies only on `numpy`, `safetensors`, and `tokenizers`.
 
-It runs on:
+Litespark-Inference runs on the following platforms:
 
 | Platform | Kernel selected automatically |
 |---|---|
@@ -27,14 +28,14 @@ During `pip install`, the build process automatically detects your CPU's hardwar
 BitNet b1.58 stores each weight as a value in `{-1, 0, +1}` and packs
 four weights into one byte. This provides two key benefits:
 
-- Reduced Memory Footprint: The model file is around 6x smaller than the equivalent BF16 model (around 497 MB packed versus around 4,600 MB unpacked).
-- SIMD Compute Efficiency: Every matrix multiplication reduces to INT8 activation × ternary weight, taking direct advantage of CPU SIMD dot-product instructions, such as `SDOT` on Arm Neon and `VNNI` on x86.
+- Reduced memory footprint: The model file is around 6x smaller than the equivalent BF16 model (around 497 MB packed versus around 4,600 MB unpacked).
+- SIMD compute efficiency: Every matrix multiplication reduces to INT8 activation × ternary weight, taking direct advantage of CPU SIMD dot-product instructions, such as `SDOT` on Arm Neon and `VNNI` on x86.
 
-The net effect: a 2-billion-parameter model that fits in under 1 GB of
-RAM and generates tokens at interactive speed on a normal laptop or
+The net effect is that a 2-billion-parameter model fits in under 1 GB of
+RAM and generates tokens at interactive speed on a laptop or
 cloud CPU instance.
 
-The charts below show Litespark-Inference against a PyTorch baseline
+The following charts show Litespark-Inference against a PyTorch baseline
 across several Arm and x86 CPUs. Token-generation throughput is roughly
 an order of magnitude higher, and resident memory is around 6x smaller,
 on every platform tested.

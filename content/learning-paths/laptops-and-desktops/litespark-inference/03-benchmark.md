@@ -1,5 +1,6 @@
 ---
 title: Benchmark Litespark-Inference on Arm
+description: Benchmark Litespark-Inference on Arm Linux and Apple silicon, compare memory and throughput with PyTorch, and measure thread scaling and macOS energy use.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -152,7 +153,7 @@ The following chart illustrates this behavior on an Apple M5 Max.
 
 ![Two line charts showing Litespark-Inference prefill and token-generation throughput as thread count increases on an Apple M5 Max. Prefill continues rising through 16 threads, while token generation levels off after the initial gains.#center](thread-scaling-apple-m5.png "Thread scaling on Apple M5 Max")
 
-## Measure energy use
+## Measure energy use on macOS
 
 The `--power` flag adds energy and joules-per-token measurements when the
 platform exposes readable power counters. Energy measurement is available on
@@ -195,7 +196,7 @@ should match the value passed with `--threads`.
 
 ## What you've accomplished
 
-You've now benchmarked Litespark-Inference on an Arm system with a controlled thread count. You've saved memory, TTFT, throughput, kernel, and system information as JSON, and measured how throughput changes with thread count. You've also dentified when PyTorch and hardware energy counters are needed.
+You've now benchmarked Litespark-Inference on an Arm system with a controlled thread count. You've saved memory, TTFT, throughput, kernel, and system information as JSON, and measured how throughput changes with thread count. You've also identified when PyTorch and hardware energy counters are needed.
 
 Use the saved JSON files to compare embedding data types or repeat the same
 workload on another Arm system.

@@ -1,19 +1,19 @@
 ---
-title: Accelerate LLM inference on Arm CPUs with Litespark-Inference
-description: Run and benchmark the BitNet-2B ternary LLM on Arm CPUs using Litespark-Inference without a GPU, then compare memory usage, throughput, and energy consumption against a PyTorch baseline.
+title: Run and benchmark BitNet-2B inference on Arm CPUs with Litespark-Inference
+description: Run and benchmark BitNet-2B on Arm CPUs with Litespark-Inference, compare memory use and performance with PyTorch, and measure energy per token on Apple silicon.
 
 minutes_to_complete: 25
 
-who_is_this_for: This is an introductory topic for developers who want to run a Large Language Model (LLM) on a CPU without a GPU by using Litespark-Inference.
+who_is_this_for: This is an introductory topic for developers who want to run a large language model (LLM) on a CPU without a GPU using Litespark-Inference.
 
 learning_objectives:
     - Run BitNet-2B from the Litespark-Inference CLI or
       from Python using the high-level BitNet API.
     - Pick the right embed dtype (BF16, INT8, or INT4) for the
       memory versus quality trade-off you want.
-    - Benchmark Litespark-Inference against PyTorch Transformers and
-      interpret memory, time-to-first-token, throughput, and
-      energy-per-token results.
+    - Compare Litespark-Inference with PyTorch Transformers for memory,
+      time to first token, and throughput.
+    - Measure energy per token on Apple silicon.
 
 prerequisites:
     - An Arm Linux machine or macOS machine with Apple Silicon,
@@ -44,7 +44,6 @@ operatingsystems:
     - macOS
 tools_software_languages:
     - Python
-    - C
 
 further_reading:
     - resource:
