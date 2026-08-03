@@ -103,9 +103,9 @@ cat a1.dis | grep -i "++acnt" -A 12
  99c:   b90023e0        str     w0, [sp, #32]
 ```
 
-### 1st Generation Arm AGI CPU
+### Arm AGI CPU
 
-This example is run on a 1st generation Arm AGI CPU **with LSE**. You can also use another Neoverse N1 or later system, such as an AWS T4g instance.
+This example is run on an Arm AGI CPU **with LSE**. You can also use another Neoverse N1 or later system, such as an AWS T4g instance.
 
 Compile the same application:
  
@@ -148,7 +148,7 @@ Review the file outline.dis and see that the instruction to increment acnt is no
  a04:	9400005f 	bl	b80 <__aarch64_ldadd4_acq_rel>
  ```
 
-The code for both the load exclusive sequence and the atomic instruction are present as shown in the disassembly snippet below. The section of instructions before the first ret instruction is run on the agi and the following instructions are run on the A1. This binary will run on both instances with no changes. In exchange for this flexibility there is the overhead to take a branch and run the correct code path.
+The code for both the load exclusive sequence and the atomic instruction are present as shown in the disassembly snippet below. The section of instructions before the first ret instruction is run on the AGI CPU and the following instructions are run on the A1. This binary will run on both instances with no changes. In exchange for this flexibility there is the overhead to take a branch and run the correct code path.
 
 ```console
 0000000000000b80 <__aarch64_ldadd4_acq_rel>:
