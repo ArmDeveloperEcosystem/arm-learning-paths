@@ -130,5 +130,3 @@ You've now learned how to validate NFRU using Streamline and RenderDoc. Streamli
 Together, these tools make smoother NFRU presentation measurable and its edge cases actionable.
 
 Next, you'll evaluate NFRU performance and visual quality in representative gameplay scenarios.
-
-TODO: ask RD/Streamline team to verify
