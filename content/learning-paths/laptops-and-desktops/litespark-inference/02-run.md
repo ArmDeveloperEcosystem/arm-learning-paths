@@ -9,7 +9,9 @@ layout: learningpathall
 
 ## Run inference from the command line
 
-You can generate text directly from your terminal using the `litespark-inference generate` command. Use BF16 embeddings as the reference case and limit the response to 64 new tokens:
+You can generate text directly from your terminal using the `litespark-inference generate` command. 
+
+Use BF16 embeddings as the reference case and limit the response to 64 new tokens:
 
 ```bash
 litespark-inference generate "Why is BitNet fast on CPU?" --embed-dtype bf16 --max-tokens 64

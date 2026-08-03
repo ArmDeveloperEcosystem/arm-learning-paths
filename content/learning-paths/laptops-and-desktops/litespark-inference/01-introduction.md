@@ -23,7 +23,7 @@ Litespark-Inference runs on the following platforms:
 
 During `pip install`, the build process automatically detects your CPU's hardware feature flags and compiles the appropriate C++ kernel for your machine.
 
-## How BitNet accelerates CPU inference
+## How BitNet b1.58 accelerates CPU inference
 
 BitNet b1.58 stores each weight as a value in `{-1, 0, +1}` and packs
 four weights into one byte. This provides two key benefits:
