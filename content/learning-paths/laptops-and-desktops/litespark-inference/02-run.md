@@ -1,16 +1,17 @@
 ---
 title: Run BitNet-2B with Litespark-Inference
+description: Run BitNet-2B on Arm CPUs from the Litespark-Inference CLI and Python API, then compare BF16 and INT4 embedding memory use.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-With Litespark-Inference installed, you can start generating text.
-
 ## Run inference from the command line
 
-You can generate text directly from your terminal using the `litespark-inference generate` command. Use BF16 embeddings as the reference case and limit the response to 64 new tokens:
+You can generate text directly from your terminal using the `litespark-inference generate` command. 
+
+Use BF16 embeddings as the reference case and limit the response to 64 new tokens:
 
 ```bash
 litespark-inference generate "Why is BitNet fast on CPU?" --embed-dtype bf16 --max-tokens 64
@@ -32,7 +33,9 @@ data processing and communication...
 Generated 64 tokens in 3.46s (18.51 tok/s)
 ```
 
+{{% notice Note %}}
 The exact answer and timing vary by system. The key indicators are that prefill and generation both complete successfully with reported throughput.
+{{% /notice %}}
 
 When executed, Litespark-Inference:
 
@@ -88,7 +91,9 @@ Confirm that the kernel name contains `neon` on Arm and that `OpenMP` is `True`.
 
 ## Run inference from Python
 
-The [Litespark-Inference install guide](/install-guides/litespark-inference/) creates a Python virtual environment named `.venv` and installs Litespark-Inference in it. If you opened a new terminal after completing the install guide, return to the directory that contains `.venv` and activate the virtual environment again:
+By completing the [Litespark-Inference install guide](/install-guides/litespark-inference/), you created a Python virtual environment named `.venv` and installed Litespark-Inference in it. 
+
+If you opened a new terminal after completing the install guide, return to the directory that contains `.venv` and activate the virtual environment again:
 
 ```bash
 source .venv/bin/activate
@@ -130,19 +135,23 @@ data processing and communication...
 
 The `BitNet` class handles model loading, KV cache management, and autoregressive token generation without needing PyTorch at inference. The program first prints the memory used to store the embedding and all model tensors, followed by the generated answer. With BF16 embeddings, the embedding tensor storage is approximately 626 MB.
 
-The values returned by `memory_bytes()` account for model tensor storage. They do not include Python, native-library, or KV-cache overhead, so they differ from the resident-memory values in the following table.
+The values returned by `memory_bytes()` account for model tensor storage. They don't include Python, native-library, or KV-cache overhead, so they differ from the resident-memory values in the following table.
 
 ## Configure token embedding dtypes
 
-BitNet b1.58 model weights are stored in 2-bit packed format. You can configure the token-embedding table's data type to optimize memory usage versus output quality.
+BitNet b1.58 model weights are stored in 2-bit packed format. You can configure the data type of the token-embedding table to optimize memory usage versus output quality.
 
-The following resident-memory values are illustrative. Actual usage varies with the operating system, package version, runtime configuration, and workload. The optional benchmarking section shows you how to measure resident memory on your system.
+Consider the following resident-memory values:
 
 | Embed Dtype | Illustrative Resident Memory | Quality | Recommendation |
 |---|---|---|---|
 | BF16 | ~813 MB | Reference | Use for high-accuracy workloads |
 | INT8 | ~656 MB | Reduced embedding precision | Balance memory use and output quality; validate your workload |
 | INT4 | ~573 MB | Lowest embedding precision | Default; smallest memory footprint; validate your workload |
+
+{{% notice Note %}}
+These resident-memory values are illustrative. Actual usage varies with the operating system, package version, runtime configuration, and workload. The benchmarking section shows how you can measure resident memory on your system.
+{{% /notice %}}
 
 Set the embedding dtype from the CLI:
 
@@ -186,10 +195,6 @@ The program prints approximately 157 MB of embedding tensor storage for INT4, co
 
 ## What you've accomplished
 
-In this section, you:
+You've now generated text using BitNet-2B from the command line and integrated `litespark-inference` into Python using the `BitNet` API. You've also configured BF16 and INT4 embeddings and compared their memory and quality trade-offs.
 
-- Generated text using BitNet-2B from the command line.
-- Integrated `litespark-inference` into Python using the `BitNet` API.
-- Configured BF16 and INT4 embeddings and compared their memory and quality trade-offs with INT8.
-
-Next, continue to the benchmarking section to compare performance against a PyTorch baseline.
+Next, you'll compare performance against a PyTorch baseline.

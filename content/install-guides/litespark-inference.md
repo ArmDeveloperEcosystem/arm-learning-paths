@@ -1,9 +1,5 @@
 ---
 title: Litespark-Inference
-
-draft: true
-cascade:
-    draft: true
     
 description: Install Litespark-Inference on Arm Linux and Apple silicon macOS to run BitNet ternary LLMs on the CPU.
 
@@ -222,4 +218,4 @@ Hello! How can I assist you today?
 
 You're now ready to run BitNet-2B.
 
-To learn more, see the [Accelerate LLM inference on Arm CPUs with Litespark-Inference](/learning-paths/laptops-and-desktops/litespark-inference/) Learning Path. 
+To learn more, see the [Run and benchmark BitNet-2B inference on Arm CPUs with Litespark-Inference](/learning-paths/laptops-and-desktops/litespark-inference/) Learning Path. 
