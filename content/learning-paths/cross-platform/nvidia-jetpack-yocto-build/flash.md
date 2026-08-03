@@ -1,5 +1,5 @@
 ---
-title: Flashing the Yocto image onto Nvidia Jetson
+title: Flash the Yocto image onto the NVIDIA Jetson device
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,106 +8,113 @@ layout: learningpathall
 
 ## Overview
 
-In this section, we'll prepare a local linux host, running Ubuntu 22.04 or greater, download the completed yocto build artifact file, and use the Nvidia supplied instructions for flashing our Nvidia Jetson device with the newly created yocto image. 
+This section covers preparing a local Ubuntu host, transferring the completed Yocto build artifact from the Google Cloud VM, and flashing the NVIDIA Jetson device.
 
-### Prepare a local ubuntu host
+## Prepare a local Ubuntu host
 
-Ubuntu will be used locally to connect to and flash the Nvidia Jetson device. Ubuntu 22.04 or later is recommended. The following pre-requisites should also be installed:
+The flashing process requires a physical Ubuntu machine with USB access to the NVIDIA Jetson device. Ubuntu 22.04 or later is recommended.
+
+Install the required packages:
 
 ```bash
 sudo apt update
-sudo apt upgrade
-sudo apt install -y dtc build-essential gdisk gptfdisk udisks2 bmap-tools libxml2-utils
-sudo apt-get install -y zstd tar usbutils
+sudo apt upgrade -y
+sudo apt install -y dtc build-essential gdisk gptfdisk udisks2 bmap-tools libxml2-utils zstd tar usbutils
 ```
 
-### Install the Google Cloud SDK
+## Install the Google Cloud CLI
 
-Please following the instructions here: https://docs.cloud.google.com/sdk/docs/install-sdk to install the google cloud SDK on your local Ubuntu host. 
+You need the Google Cloud CLI to transfer the build artifact from the C4A instance to your local machine.
 
-Once installed, you must first login in with the SDK CLI:
+Follow the [Google Cloud CLI installation instructions](https://docs.cloud.google.com/sdk/docs/install-sdk) to install the CLI on your Ubuntu host.
+
+After installation, authenticate with your Google Cloud account:
 
 ```bash
 gcloud auth login
 ```
 
-From your localh ubuntu host, you can confirm that SSH works by logging into your C4A cloud instance:
+## Verify SSH access to the C4A instance
 
-From your Google cloud console, please note down:
+Before transferring files, confirm that you can reach the C4A instance from your local machine. Collect the following values from the Google Cloud Console:
 
-        - your C4A instance name
-        - your Google Cloud project name
-        - the zone your C4A instance is currently executing in
+- Your C4A instance name
+- Your Google Cloud project name
+- The zone where the C4A instance is running
 
-Once these are acquired, you can log into your C4A instance via SSH in the google cloud SDK CLI:
+Test SSH connectivity:
 
 ```bash
 gcloud compute ssh C4A_INSTANCE_NAME --project GOOGLE_CLOUD_PROJECT_NAME --ssh-flag="-o ServerAliveInterval=60 -o ServerAliveCountMax=9999" --zone=C4A_CURRENT_ZONE
 ```
 
-### Download the completed Yocto build artifacts
+Replace `C4A_INSTANCE_NAME`, `GOOGLE_CLOUD_PROJECT_NAME`, and `C4A_CURRENT_ZONE` with your values.
 
-Once confirmed that SSH works above, with the SSH session above, note the location of your bundled artifact file... it should be in $HOME/jetpack-yocto-builder within the C4A instance.  
+## Transfer the build artifact to your local host
 
-In the SSH shell to your C4A host:
+On the C4A instance, confirm the location of the bundled archive:
 
 ```bash
 cd $HOME/jetpack-yocto-builder
 ls -al *.tar.gz
-pwd
 ```
 
-Back on your local Ubuntu host, type:
+The output shows one or more `.tar.gz` files. Note the filename.
+
+On your local Ubuntu host, create a working directory and download the archive:
 
 ```bash
-mkdir $HOME/flashing
+mkdir -p $HOME/flashing
 cd $HOME/flashing
 gcloud compute scp C4A_INSTANCE_NAME:~/jetpack-yocto-builder/demo*tar.gz ./yocto_image.tar.gz --project GOOGLE_CLOUD_PROJECT_NAME --zone=C4A_CURRENT_ZONE
 ```
 
-You should now see a 3-4GB file on your local Ubuntu host:
+Verify the downloaded file size is approximately 3–4 GB:
 
 ```bash
-cd $HOME/flashing
-ls -al yocto_image.tar.gz
+ls -lh $HOME/flashing/yocto_image.tar.gz
 ```
 
-Next, extract the contents of this file to acquire the "zst" file (which will be used for flashing):
+## Extract the flashing image
+
+Extract the outer archive and then the inner `.zst` archive to produce the flashing tools:
 
 ```bash
 cd $HOME/flashing
 tar xzpf yocto_image.tar.gz
-mkdir $HOME/flashing/image
+mkdir -p $HOME/flashing/image
 cd $HOME/flashing/image
-tar xzpf ../*.zst
+tar xpf ../*.zst
 ```
 
-You should now have an "initrd_flash" executable in your current directory:
+Confirm the `initrd_flash` executable is present:
 
 ```bash
-ls -al ./initrd_flash
+ls -l ./initrd_flash
 ```
 
-You are now ready to flash.  Please keep this shell (on your local Ubuntu host where ./initrd_flash is located) active as you'll use it in the next section. 
+The output is similar to:
 
-### Peforming the flash to the Nvidia Jetson device. 
+```output
+-rwxr-xr-x 1 user user 12345 Aug  1 12:00 ./initrd_flash
+```
 
-At this point, the instructions for flashing a Nvidia Jetson device varies slightly by device. 
+Keep this terminal session open. You use this directory for the flashing step.
 
-Please follow the Nvidia instructions located here: https://oe4t.github.io/master/Flashing.html starting with **Step 2**. Your open shell on youir Ubuntu host (where ./initrd_flash is located) effectively completes your **Step 1** in the Nvidia instructions.  
+## Flash the NVIDIA Jetson device
 
-The Nvidia instructions will outline:
+The flashing procedure varies by NVIDIA Jetson model. Follow the [OE4T flashing instructions](https://oe4t.github.io/master/Flashing.html) starting from **Step 2**. The extracted `initrd_flash` directory on your local host satisfies Step 1.
 
-        - Placing your specific Nvidia Jetson device into "recovery mode"
-        - Connecting the appropriate USB port from your Nvidia Jetson device to your local Ubuntu host
-        - Initiating the flashing process by executing "./initrd_flash" on your local Ubuntu host
+The flashing process involves three actions:
 
-After completing the above Nvidia flashing instructions on your Ubuntu host, your Nvidia Jetson device is now ready to run your custom Yocto image!  
+1. Place the NVIDIA Jetson device into recovery mode using the hardware button sequence for your model.
+2. Connect the NVIDIA Jetson device to your Ubuntu host with the appropriate USB cable.
+3. Run `./initrd_flash` from the extracted image directory on your Ubuntu host.
 
-You will need to now connect your Nvidia Jetson device to a monitor and keyboard and optional wired ethernet connection and power it up. 
+After the flash completes, disconnect the USB cable. Connect a monitor, keyboard, and optional wired Ethernet connection to the NVIDIA Jetson device, then power it on.
 
-## What we've learned and what's next
+## What you've accomplished and what's next
 
-In this section we downloaded and flashed our custom Yocto image for our Nvidia Jetson device. Then we followed the specific Nvidia Jetson device instructions to place our device into "recovery mode" followed by fully flashing the device with our custom Yocto image. 
+You transferred the Yocto build artifact to a local Ubuntu host, extracted the flashing tools, and flashed the custom Yocto image onto the NVIDIA Jetson device.
 
-In the next section, we'll look at what our Nvidia Jetson device looks and feels like running our custom Yocto image!
+Next, boot the device and explore the running Yocto image.

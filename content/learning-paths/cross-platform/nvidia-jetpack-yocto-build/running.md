@@ -1,34 +1,40 @@
 ---
-title: Running the Yocto image on Nvidia Jetson
+title: Run the Yocto image on the NVIDIA Jetson device
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
+## Boot the NVIDIA Jetson device
 
-Now that our Nvidia Jetson device has been successfully flashed with our newly created Yocto image, lets run the Nvidia Jetson device with the new image. 
+After flashing completes and you connect a monitor, keyboard, and power supply, the NVIDIA Jetson device boots into the custom Yocto image.
 
+## Explore the Yocto desktop
 
-## Yocto Desktop
+The default Yocto build uses the Matchbox window manager. After the device boots, a desktop similar to the following appears:
 
-Our particular Yocto build makes use of the matchbox window manager by default when launched.  Other recipes can be integrated with our install that can change the default window manager if desired. 
+![Yocto desktop showing the Matchbox window manager with a taskbar and application launcher#center](images/desktop-image.webp "Yocto desktop with Matchbox window manager")
 
-Once the Nvidia Jetson device boots, a desktop similar to the following will be presented:
+Select the **Terminal** icon to open a shell session:
 
-![Yocto Desktop with matchbox window manager instance#center](images/desktop-image.webp "Yocto desktop with matchbox window manager")
+![Terminal window open on the Yocto desktop#center](images/terminal-image.webp "Terminal session on the Yocto desktop")
 
-Clicking on the "Terminal" icon will bring up a simple shell into our Yocto instance:
+Select the application menu to browse installed applications and sample programs:
 
-![Desktop Shell instance#center](images/terminal-image.webp "Desktop Shell")
+![Application menu listing installed programs on the Yocto desktop#center](images/yocto-apps.webp "Application menu on the Yocto desktop")
 
-Additionally, applications and simple games can be viewed and selected if desired:
+## Verify the image
 
-![Desktop Applications instance#center](images/yocto-apps.webp "Desktop Applications")
+Confirm that the NVIDIA GPU drivers are loaded and the Docker runtime is available:
 
-Explore your newly created and highly customized linux distribution for your Nvidia Jetson device.  You will find that the complete Nvidia GPU driver set is available as is a fully functional nvidia-optimized Docker runtime in your image. Explore!
+```bash
+nvidia-smi
+docker --version
+```
 
-## What we've learned
+The image includes the full NVIDIA Board Support Package (BSP): GPU drivers, the NVIDIA-optimized container runtime, networking support, and Wi-Fi support.
 
-We have completely created, from source, a fully customized linux distribution for our Nvidia Jetson device. Once created, the created distribution was flashed onto the Nvidia device and run.  The custom distribution contains the entire BSP (Board Support Package) that Nvidia has created to fully enable all hardware features on our Nvidia Jetson platform including: Full GPU support, Full nvidia-container Docker support, Networking support, as well as WiFi support.
+## What you've accomplished
+
+You built a custom Yocto-based Linux distribution from source, flashed it onto an NVIDIA Jetson device, and confirmed it boots with GPU and Docker support. The image is ready for application development, container workloads, or further customization through additional Yocto layers and recipes.
