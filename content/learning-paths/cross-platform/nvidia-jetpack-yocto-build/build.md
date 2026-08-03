@@ -1,100 +1,103 @@
 ---
-title: Yocto image build on Arm for Nvidia Jetson
+title: Build a Yocto image for NVIDIA Jetson on a Google Axion VM
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
+## Build and bundle a Yocto image
 
-In this section, the configured C4A instance will now get further configured to execute a yocto build process to produce a custom linux distribution image for a given Nvidia Jetson platform. 
+Use the Google Axion C4A VM you provisioned to build and bundle a Yocto image for a supported NVIDIA Jetson platform. The bundled archive contains the files needed for flashing in the next section.
 
-## Initial Setup
+## Clone the build scripts
 
-Within the SSH shell to your C4A instance, clone this repo:
+Within the SSH shell to your C4A instance, clone the build scripts repository:
 
 ```bash
 cd $HOME
 git clone https://github.com/DougAnsonAustinTx/jetpack-yocto-builder
 ```
 
-## Invoke the build
+## Start the Yocto build
 
-After cloning the above repo, lets explore the repo contents:  
+Change to the cloned repository and ensure the scripts are executable:
 
 ```bash
 cd $HOME/jetpack-yocto-builder
 chmod 755 *.sh
-ls
 ```
 
-These scripts support building a yocto image for Jetson Thor, Jetson Orin NX, and Jetson Orin Nano/Super Nano:
+The repository provides wrapper scripts for each supported target:
 
-        ./build-thor.sh:  The build script for Nvidia Jetson Thor
-        ./build-orinnx.sh: The build script for Nvidia Jetson Orin NX
-        ./build-orin-super-nano.sh: The build script for Nvidia Jetson Orin Nano and Super Nano
-        ./build-all.sh: Builds all 3 platforms as 3 independent builds
+| Target | Build script |
+|---|---|
+| NVIDIA Jetson AGX Thor | `./build-thor.sh` |
+| NVIDIA Jetson Orin NX | `./build-orinnx.sh` |
+| NVIDIA Jetson Orin Nano Super | `./build-orin-super-nano.sh` |
+| All three targets | `./build-all.sh` |
 
-The primary "build" script is: ./build_oe4t_jetson_multi_platform.sh. 
+Each wrapper calls `build_oe4t_jetson_multi_platform.sh`. Pass `--bundle` to create the flashing archive used later.
 
-A single argument, "--bundle" is available to collect up into an archive file all of the required contents needed to flash the device later. 
-
-Lets initiate the build for the Jetson Thor:
+The build takes several hours. Start a `tmux` session so the build survives SSH disconnections:
 
 ```bash
-cd $HOME/jetpack-yocto-builder
-./build-thor.sh --bundle 2>&1 1>$HOME/build.log &
+sudo apt install -y tmux
+tmux new -s yocto-build
 ```
 
-The script will first install all of the necessary pre-requisites needed for yocto builds
+If your SSH connection drops during the build, reconnect and reattach:
 
-{{% notice Note %}}
-You may be prompted initially to restart things during the initial prerequisite installation process... just press "tab" and "Ok" for any of them that are presented. 
+```bash
+tmux attach -s yocto-build
+```
+
+Inside the tmux session, start the NVIDIA Jetson AGX Thor build and create a flashing archive. 
+
+```bash
+./build-thor.sh --bundle 2>&1 | tee "$HOME/build.log"
+```
+
+The script installs the required host packages before starting the Yocto build.
+
+{{% notice Package installation prompts %}}
+If Ubuntu displays a service-restart dialog during package installation, press Tab to select **OK**, then press Enter to continue.
 {{% /notice %}}
 
-Eventually the core "yocto" build process (via Yocto "bitbake") will start:
+After installing the host packages, the script starts BitBake to build the image:
 
-![Yocto "bitbake" build processor working highlighted#center](images/yocto-build.webp "Yocto bitbake creating the Nvidia Thor yocto image")
+![BitBake building the Yocto image for NVIDIA Jetson AGX Thor#center](images/yocto-build.webp "BitBake building the Yocto image")
 
-This script will continue building until the yocto image for Thor is ready.
+The script runs until the Yocto image and flashing archive are ready.
 
-{{% notice Note %}}
-This invocation will take a few hours to complete (sometimes more than 3 hours in fact).
+## Restart a failed Yocto build
+
+Source downloads can fail temporarily even when alternate mirrors are available. If a download error stops the build, rerun the same build command.
+
+{{% notice Clean rebuild behavior %}}
+The wrapper script removes the previous OE4T workspace before rebuilding. A restarted build begins from a clean workspace rather than resuming from the failure point.
 {{% /notice %}}
 
-## Yocto build process - some caveats
+## Verify the build output
 
-#### Building Yocto images takes time
+When the build completes, the script prints a summary containing the workspace, deploy directory, primary flashing image, and bundle archive path:
 
-The yocto build process constructs an entire linux distribution by pulling down source code from numerous repos and configuring, compiling, and installing thousands of applications. This takes some time.
+![Build completion summary for an NVIDIA Jetson Yocto image#center](images/completed-build.png "Yocto build completion summary")
 
-{{% notice Note %}}
-This invocation will take a few hours to complete (sometimes more than 3 hours.... please be patient).
-{{% /notice %}}
+The `--bundle` option creates a compressed flashing archive in the cloned repository:
 
-#### Yocto builds can occasionally fail
+![Bundled NVIDIA Jetson flashing archive in the build directory#center](images/created-image.png "Bundled Yocto flashing archive")
 
-While alternate source code mirrors are checked if needed, occasionally a given source code package is simply not downloadable at a given point in time. This will cause the yocto build process to fail. 
+Verify that the script created the bundled flashing archive:
 
-{{% notice Note %}}
-If the script detects failure, just re-run the script... to ensure the greatest "repeatable" outcome, "re-builds" with this script start from scratch... not from their last build point. 
-{{% /notice %}}
+```bash
+ls -lh $HOME/jetpack-yocto-builder/demo-image-full-*-tegraflash-*.tar.gz
+```
 
-## Examining the built result
+Record the displayed path. You’ll transfer this archive to the Ubuntu flashing host in the next section.
 
-Once the Yocto build is complete, depending on which platform you built (Orin Super Nano, Orin NX, Thor), you should see something similar to this:
+## What you've accomplished and what's next
 
-![Completed yocto build with bundled package created instance#center](images/completed-build.png "Completed yocto build with bundled result artifact file")
+You’ve built and bundled a Yocto image for an NVIDIA Jetson platform on a Google Axion VM.
 
-With the "--bundle" option having been supplied to the build script, the following file (again, depending onthe specific platform you compiled for...) is the primary file that will be used to flash our Nvidia device:
-
-![Yocto build result file instance#center](images/created-image.png "Yocto build result file")
-
-Please record the full path of the this file as the file will need to be downloaded in order to be flashed.
-
-## What we learned
-
-In this section, we configured and built out our yocto-based custom linux distribution for a selected Nvidia Jetson platform.  
-
-Next, lets flash the created image onto our Nvidia Jetson platform and run the image. 
+Next, transfer the archive to your Ubuntu host and flash the image to the Jetson platform.
