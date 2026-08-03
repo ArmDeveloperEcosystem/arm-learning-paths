@@ -55,7 +55,7 @@ You may be prompted initially to restart things during the initial prerequisite 
 
 Eventually the core "yocto" build process (via Yocto "bitbake") will start:
 
-![Yocto "bitbake" build processor working highlighted#center](images/yocto-build.png "Yocto bitbake creating the Nvidia Thor yocto image")
+![Yocto "bitbake" build processor working highlighted#center](images/yocto-build.webp "Yocto bitbake creating the Nvidia Thor yocto image")
 
 This script will continue building until the yocto image for Thor is ready.
 
