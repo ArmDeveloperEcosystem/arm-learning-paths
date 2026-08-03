@@ -73,7 +73,7 @@ You can also use Clang by substituting `clang` instead of `gcc` in the command a
 
 {{% notice Please Note %}}
 
-If you are targeting the 1st generation Arm AGI CPU, the `-mcpu=armagicpu` was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, it enables the same architectural features as `-march=neoverse-v3ae` from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html). However in the future there may be differences. Likewise for `LLVM` and the `clang` front end, we expect Arm AGI CPU support to be introduced from `LLVM 23.0` onwards. 
+If you are targeting the Arm AGI CPU, the `-mcpu=armagicpu` was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, it enables the same architectural features as `-march=neoverse-v3ae` from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html). However in the future there may be differences. Likewise for `LLVM` and the `clang` front end, we expect Arm AGI CPU support to be introduced from `LLVM 23.0` onwards.
 
 As such, we recommend installing the latest version of GCC/G++ or Clang if you are targeting the Arm AGI CPU. Use the `-mcpu=native` flag if compiling on the target machine or `-mcpu=armagicpu` if cross compiling. 
 
@@ -98,7 +98,7 @@ You can now try top-down on Intel x86 and Arm Neoverse V3.
 
 {{% notice AArch64 support %}}
 
-Linux Perf added `--topdown` support for multiple platforms from the 6.1 kernel onwards, as long as the platform provides the required `TopdownL1` metric group ([see the Linux Arm kernel patch discussion](https://lists.infradead.org/pipermail/linux-arm-kernel/2023-February/812686.html?)). On Arm, this also requires a Neoverse architecture that supports top-down analysis, such as the 1st generation Arm AGI CPU.
+Linux Perf added `--topdown` support for multiple platforms from the 6.1 kernel onwards, as long as the platform provides the required `TopdownL1` metric group ([see the Linux Arm kernel patch discussion](https://lists.infradead.org/pipermail/linux-arm-kernel/2023-February/812686.html?)). On Arm, this also requires a Neoverse architecture that supports top-down analysis, such as the Arm AGI CPU.
 
 {{% /notice %}}
 

@@ -23,7 +23,7 @@ The results below confirm a high number of integer and floating-point operations
 
 As of Performix 2026.2.2, instruction mix percentages might not total exactly 100%. Totals can be higher or lower depending on category overlap and sampling size or duration. This is expected behavior for the Mandelbrot workload on some systems. 
 
-For example, the image above was run on a 1st generation Arm AGI CPU, `Double Precision floating point` overlaps with `Floating Point Operations`, which causes double counting. Additionally, depending on the CPU you are running on, you may observe fewer or more labels depending on the instruction groups available. 
+For example, the image above was run on an Arm AGI CPU, `Double Precision floating point` overlaps with `Floating Point Operations`, which causes double counting. Additionally, depending on the CPU you are running on, you may observe fewer or more labels depending on the instruction groups available.
 
 {{% /notice %}}
 

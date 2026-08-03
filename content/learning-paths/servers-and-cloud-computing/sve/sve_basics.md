@@ -54,7 +54,7 @@ Run the program:
 ./sve
 ```
 
-On the 1st generation AGI CPU processors the output is:
+On the AGI CPU, the output is:
 
 ```output
 SVE vector length is: 16 bytes

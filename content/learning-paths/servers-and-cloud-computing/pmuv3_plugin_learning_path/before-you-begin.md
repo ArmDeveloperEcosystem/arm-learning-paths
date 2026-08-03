@@ -72,7 +72,7 @@ sudo apt install build-essential -y
 
 {{% notice Please Note %}}
 
-If you want to instrument your own application optimized for the 1st-generation Arm AGI CPU, we recommend using the latest version of GCC. 
+If you want to instrument your own application optimized for the Arm AGI CPU, we recommend using the latest version of GCC.
 
 For the GNU toolchain, the `-mcpu=armagicpu` defintion was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, this is the same as the `-march=neoverse-v3ae` option available from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html) onwards. However, in the future there may be differences between `neoverse-v3ae` and `armagicpu`.
 
