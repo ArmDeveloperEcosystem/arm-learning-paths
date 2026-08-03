@@ -24,7 +24,7 @@ git clone https://github.com/DougAnsonAustinTx/jetpack-yocto-builder
 Change to the cloned repository and ensure the scripts are executable:
 
 ```bash
-cd "$HOME/jetpack-yocto-builder"
+cd $HOME/jetpack-yocto-builder
 chmod 755 *.sh
 ```
 
@@ -52,11 +52,7 @@ If your SSH connection drops during the build, reconnect and reattach:
 tmux attach -s yocto-build
 ```
 
-Inside the tmux session, start the NVIDIA Jetson AGX Thor build and create a flashing archive:
-
-{{% notice Build duration %}}
-The build can take more than three hours to complete.
-{{% /notice %}}
+Inside the tmux session, start the NVIDIA Jetson AGX Thor build and create a flashing archive. 
 
 ```bash
 ./build-thor.sh --bundle 2>&1 | tee "$HOME/build.log"
@@ -95,7 +91,7 @@ The `--bundle` option creates a compressed flashing archive in the cloned reposi
 Verify that the script created the bundled flashing archive:
 
 ```bash
-ls -lh "$HOME"/jetpack-yocto-builder/demo-image-full-*-tegraflash-*.tar.gz
+ls -lh $HOME/jetpack-yocto-builder/demo-image-full-*-tegraflash-*.tar.gz
 ```
 
 Record the displayed path. You’ll transfer this archive to the Ubuntu flashing host in the next section.
