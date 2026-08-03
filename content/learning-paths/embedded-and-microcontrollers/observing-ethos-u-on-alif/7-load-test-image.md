@@ -69,8 +69,12 @@ Download `prepare_mnist_image.py` into the image directory:
 cd ~/mnist_alif/image
 curl -o prepare_mnist_image.py https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/main/prepare_mnist_image.py
 ```
+Before moving on, open `prepare_mnist_image.py` and inspect.
 
-The script converts the image to 28 x 28 grayscale pixels, scales each pixel into the int8 range used by the firmware input, then writes the values as a C array:
+The script defines command-line arguments, checks that the input image exists, then converts the image to 28 x 28 grayscale pixels. 
+It also handles image inversion so black-on-white images can be converted to the white-on-black style used by MNIST.
+
+The key conversion step scales each pixel into a value within the non-negative int8 range (0 to 127) and flattens the output into a one-dimensional array:
 ```python
 pixels = np.clip(np.rint(pixels * 127.0 / 255.0), 0, 127).astype(np.int8)
 flat = pixels.reshape(-1)

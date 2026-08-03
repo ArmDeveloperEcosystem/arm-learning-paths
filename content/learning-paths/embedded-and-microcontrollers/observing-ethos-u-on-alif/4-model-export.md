@@ -13,22 +13,6 @@ This section exports an MNIST PyTorch model to ExecuTorch `.pte` format for the 
 If you are using the provided `.pte` file, you can skip this section.
 {{% /notice %}}
 
-## Start your container
-
-Ensure you are inside your container and load up the Executorch environment:
-
-```bash
-# Inside Docker container
-source ~/executorch-venv/bin/activate
-source $ET_HOME/setup_arm_env.sh
-```
-
-Verify the tools:
-```bash
-vela --version
-python3 -c "from executorch.exir import to_edge; print('ExecuTorch OK')"
-```
-
 ## Download the model files
 
 From inside your container, create the model and output directories:
@@ -126,6 +110,9 @@ Export the trained model to `.pte` format for Ethos-U85:
 cd $ET_HOME
 MNIST_LOAD_CHECKPOINT=1 python3 -m examples.arm.aot_arm_compiler --model_name=/home/developer/models/mnist_model.py --delegate --quantize --target=ethos-u85-256 --system_config=Ethos_U85_SYS_DRAM_Mid --memory_mode=Shared_Sram --output=/home/developer/output/mnist_ethos_u85.pte
 ```
+{{% notice Important %}}
+Use full paths such as `/home/developer/models/mnist_model.py`. Do not use `~` in the export command.
+{{% /notice %}}
 
 Argument definitions:
 - `MNIST_LOAD_CHECKPOINT=1`: loads the trained weights from /home/developer/models/mnist_model.pth.
@@ -136,9 +123,11 @@ Argument definitions:
 - `--system_config` and `--memory_mode`: selects the Vela memory configuration used when compiling the NPU command stream.
 - `--output`: writes the exported ExecuTorch program.
 
-{{% notice Important %}}
-Use full paths such as `/home/developer/models/mnist_model.py`. Do not use `~` in the export command.
-{{% /notice %}}
+Vela is Arm’s compiler for Ethos-U NPUs. During export, it prints information about the selected Ethos-U target, memory use, and NPU performance estimates to the terminal. Review this output to confirm that the model was compiled for the expected `ethos-u85-256` target. At the end, you should see confirmation of the saved `.pte` file:
+
+```output
+PTE file saved as /home/developer/output/mnist_ethos_u85.pte
+```
 
 ## Build ExecuTorch static libraries
 
