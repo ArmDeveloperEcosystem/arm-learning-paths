@@ -12,7 +12,7 @@ learning_objectives:
     - Find out if an application uses Large System Extensions
 
 prerequisites:
-    - Access to an AWS Graviton-based instance or an AGI CPU platform running Linux. Other Arm Linux computers with LSE support can also be used.
+    - Access to an AWS Graviton-based instance or an Arm AGI CPU platform running Linux. Other Arm Linux computers with LSE support can also be used.
 
 author: Jason Andrews
 
