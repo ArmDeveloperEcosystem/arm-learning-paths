@@ -48,7 +48,7 @@ generated_summary_faq:
       Either GNU Make or Ninja works with CMake. Choose one and use it consistently across builds.
   - question: What result should I expect after the first build and test run?
     answer: >-
-      The project builds successfully, and the unit tests run without failures. At this stage, you
+      Expect the project to build successfully, and the unit tests to run without failures. At this stage, you
       can construct, assign, and print `Matrix` objects.
   - question: Which matrix operations do I implement and how should I structure them?
     answer: >-
