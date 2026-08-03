@@ -90,6 +90,11 @@ operatingsystems:
 tools_software_languages:
     - Python
 
+shared_path: true
+shared_between:
+    - laptops-and-desktops
+    - servers-and-cloud-computing
+
 further_reading:
     - resource:
         title: "Litespark-Inference GitHub repository"
