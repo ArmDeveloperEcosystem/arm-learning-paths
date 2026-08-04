@@ -55,7 +55,7 @@ To install curl, for example on ubuntu:
 sudo apt install -y curl
 ```
 
-Download and install the latest version of `kubctl`. There is just 1 executable to copy to the desired location.
+Download and install the latest version of `kubectl`. There is just 1 executable to copy to the desired location.
 
 ```bash { target="ubuntu:latest" }
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"

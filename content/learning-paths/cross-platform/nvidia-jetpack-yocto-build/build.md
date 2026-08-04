@@ -1,5 +1,6 @@
 ---
 title: Build a Yocto image for NVIDIA Jetson on a Google Axion VM
+description: Use target-specific wrapper scripts on a Google Axion C4A virtual machine to build and bundle a Yocto flashing image for NVIDIA Jetson.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -12,7 +13,7 @@ Use the Google Axion C4A VM you provisioned to build and bundle a Yocto image fo
 
 ## Clone the build scripts
 
-Within the SSH shell to your C4A instance, clone the build scripts repository:
+In the SSH session connected to your C4A instance, clone the build scripts repository:
 
 ```bash
 cd $HOME
@@ -37,6 +38,10 @@ The repository provides wrapper scripts for each supported target:
 | NVIDIA Jetson Orin Nano Super | `./build-orin-super-nano.sh` |
 | All three targets | `./build-all.sh` |
 
+{{% notice Note %}}
+For demonstration purposes, the steps in the Learning Path are focused on NVIDIA Jetson AGX Thor. To flash the other targets or all three targets, use the appropriate wrapper script.
+{{% /notice %}}
+
 Each wrapper calls `build_oe4t_jetson_multi_platform.sh`. Pass `--bundle` to create the flashing archive used later.
 
 The build takes several hours. Start a `tmux` session so the build survives SSH disconnections:
@@ -52,7 +57,7 @@ If your SSH connection drops during the build, reconnect and reattach:
 tmux attach -s yocto-build
 ```
 
-Inside the tmux session, start the NVIDIA Jetson AGX Thor build and create a flashing archive. 
+Inside the `tmux` session, start the NVIDIA Jetson AGX Thor build and create a flashing archive:
 
 ```bash
 ./build-thor.sh --bundle 2>&1 | tee "$HOME/build.log"
@@ -60,13 +65,13 @@ Inside the tmux session, start the NVIDIA Jetson AGX Thor build and create a fla
 
 The script installs the required host packages before starting the Yocto build.
 
-{{% notice Package installation prompts %}}
-If Ubuntu displays a service-restart dialog during package installation, press Tab to select **OK**, then press Enter to continue.
+{{% notice Note %}}
+If Ubuntu displays a service-restart dialog during package installation, press the **Tab** key to select **OK**, then press the **Enter** key to continue.
 {{% /notice %}}
 
 After installing the host packages, the script starts BitBake to build the image:
 
-![BitBake building the Yocto image for NVIDIA Jetson AGX Thor#center](images/yocto-build.webp "BitBake building the Yocto image")
+![Google Cloud SSH terminal showing BitBake building the Yocto image for the jetson-agx-thor-devkit target with tasks in progress#center](images/yocto-build.webp "BitBake building the Yocto image")
 
 The script runs until the Yocto image and flashing archive are ready.
 
@@ -74,7 +79,7 @@ The script runs until the Yocto image and flashing archive are ready.
 
 Source downloads can fail temporarily even when alternate mirrors are available. If a download error stops the build, rerun the same build command.
 
-{{% notice Clean rebuild behavior %}}
+{{% notice Note %}}
 The wrapper script removes the previous OE4T workspace before rebuilding. A restarted build begins from a clean workspace rather than resuming from the failure point.
 {{% /notice %}}
 
@@ -82,11 +87,11 @@ The wrapper script removes the previous OE4T workspace before rebuilding. A rest
 
 When the build completes, the script prints a summary containing the workspace, deploy directory, primary flashing image, and bundle archive path:
 
-![Build completion summary for an NVIDIA Jetson Yocto image#center](images/completed-build.png "Yocto build completion summary")
+![Terminal output showing a completed Thor build and listing the deploy directory, primary flashing image, and bundle archive paths#center](images/completed-build.png "Yocto build completion summary")
 
 The `--bundle` option creates a compressed flashing archive in the cloned repository:
 
-![Bundled NVIDIA Jetson flashing archive in the build directory#center](images/created-image.png "Bundled Yocto flashing archive")
+![Terminal listing with the generated Thor tegraflash archive highlighted, confirming that the flashing bundle was created#center](images/created-image.png "Bundled Yocto flashing archive")
 
 Verify that the script created the bundled flashing archive:
 
@@ -98,6 +103,6 @@ Record the displayed path. You’ll transfer this archive to the Ubuntu flashing
 
 ## What you've accomplished and what's next
 
-You’ve built and bundled a Yocto image for an NVIDIA Jetson platform on a Google Axion VM.
+You’ve now built and bundled a Yocto image for an NVIDIA Jetson platform on a Google Axion VM.
 
 Next, transfer the archive to your Ubuntu host and flash the image to the Jetson platform.
