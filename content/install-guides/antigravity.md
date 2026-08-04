@@ -114,7 +114,7 @@ agy --version
 The output is similar to:
 
 ```output
-1.0.1
+1.1.10
 ```
 
 Start an interactive session to authenticate and test basic functionality:
