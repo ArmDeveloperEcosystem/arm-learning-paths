@@ -1,6 +1,10 @@
 ---
 title: Run OCR (MNIST) on Alif E8 Ensemble DevKit using ExecuTorch and Ethos-U85
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for embedded developers and ML engineers who want to run TinyML inference on physical hardware with Arm Ethos-U85 NPU acceleration.
