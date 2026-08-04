@@ -14,9 +14,58 @@ learning_objectives:
 prerequisites:
     - A computer running Arm Linux or macOS with Docker installed
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-04T22:09:54Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 9fa0855615bffa32d54a2e4ec9cf61883d938b205a359e2a5d363d98412583eb
+  summary_generated_at: '2026-08-04T22:09:54Z'
+  summary_source_hash: 9fa0855615bffa32d54a2e4ec9cf61883d938b205a359e2a5d363d98412583eb
+  faq_generated_at: '2026-08-04T22:09:54Z'
+  faq_source_hash: 9fa0855615bffa32d54a2e4ec9cf61883d938b205a359e2a5d363d98412583eb
+  summary: >-
+    You build and run AI-powered camera pipelines that
+    apply background blur, low-light enhancement, and temporal denoising on Arm systems with SME2.
+    You clone the AI camera pipelines repository with Git and Git LFS, create a Docker-based build
+    environment, and compile the applications. You then run the provided binaries to transform
+    sample images and frames, producing output artifacts that can be inspected to validate each
+    effect. You can run a benchmark mode for each pipeline to exercise the core processing loop and
+    observe how KleidiCV and KleidiAI integrate on Arm while SME2 accelerates matrix-intensive
+    operations common in real-time camera workloads.
+  faqs:
+  - question: What should I check before building the container?
+    answer: >-
+      Confirm you are on an Arm64 machine with SME2 support and that Git, Git LFS, and Docker
+      are installed. The instructions have been tested on Ubuntu 24.04.
+  - question: The repository path differs between steps. Which directory should I use?
+    answer: >-
+      Use the directory created by your git clone command. If a later command references a different
+      path, adjust it to match your local clone location.
+  - question: Where do I run the build versus the pipelines?
+    answer: >-
+      Build the applications inside the Docker container created from the provided Dockerfile.
+      Then run the pipelines from the project directory as shown when applying transformations
+      and benchmarks.
+  - question: What result should I expect after running the background blur example?
+    answer: >-
+      The command writes a transformed image, such as test_output_cinematic_mode.png, based on
+      the sample input in the resources directory. Verify the file is created and that the background
+      is blurred in the output.
+  - question: Which executables provide benchmark mode, and when should I use them?
+    answer: >-
+      Use the binaries cinematic_mode_benchmark, low_light_image_enhancement_benchmark, and neural_denoiser_temporal_benchmark_4K.
+      They run the core processing loop in a hot loop to measure performance characteristics with
+      KleidiCV and KleidiAI on Arm.
+# END generated_summary_faq
+
 author: Arnaud de Grandmaison
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -78,4 +127,3 @@ weight: 1                       # _index.md always has a weight of 1 to order co
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
