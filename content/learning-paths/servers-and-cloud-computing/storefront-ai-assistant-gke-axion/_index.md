@@ -78,8 +78,7 @@ subjects: Containers and Virtualization
 platforms:
   - Google Cloud
 armips:
-    - Neoverse-N3
-    - Neoverse-V2
+    - Neoverse
 operatingsystems:
     - Linux
 tools_software_languages:

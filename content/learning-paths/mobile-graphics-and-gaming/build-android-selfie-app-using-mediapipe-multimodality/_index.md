@@ -31,7 +31,7 @@ skilllevels: Advanced
 subjects: ML
 armips:
     - Cortex-A
-    - Mali GPU
+    - Mali
 tools_software_languages:
     - Android Studio
     - Kotlin

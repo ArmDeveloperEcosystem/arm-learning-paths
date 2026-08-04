@@ -20,6 +20,19 @@ Called from:
 {{$is_learning_path := false}}
 {{$table_name := "Install Guide"}}
 
+{{/* Map Arm IP families to their product categories on the Arm support site. */}}
+{{$arm_ip_urls := dict
+    "Neoverse" "https://support.arm.com/?tab=compute-ip&Product%20Type=Infrastructure%20Processors"
+    "Corstone" "https://support.arm.com/?tab=compute-ip&Product%20Type=Subsystem%20Products"
+    "Cortex-A" "https://support.arm.com/?tab=compute-ip&Product%20Type=Application%20Processors"
+    "Arm C1" "https://support.arm.com/?tab=compute-ip&Product%20Type=Application%20Processors"
+    "Cortex-M" "https://support.arm.com/?tab=compute-ip&Product%20Type=Microcontrollers"
+    "Cortex-R" "https://support.arm.com/?tab=compute-ip&Product%20Type=Real-Time%20Processors"
+    "Ethos-U" "https://support.arm.com/?tab=compute-ip&Product%20Type=Neural%20Processing%20Units"
+    "Mali" "https://support.arm.com/?tab=compute-ip&Product%20Type=Graphics%20Processors"
+    "Immortalis" "https://support.arm.com/?tab=compute-ip&Product%20Type=Graphics%20Processors"
+}}
+
 <!-- Trial new IG title structure for SEO optimization -->
 {{$seo_pages := slice "AWS CLI" "Anaconda" "Chromium" "CMake" "Docker Desktop" "Docker for Windows on Arm" "AWS EKS CLI (eksctl)" "Google Cloud Platform (GCP) CLI" "Hyper-V on Arm" "Kubectl" "NoMachine" "Ansible" "AWS Credentials"}}
 
@@ -259,7 +272,11 @@ Called from:
                                 Arm IP:
                             </td>
                             <td class="td-metadata-value">
-                                {{- range .Params.armips -}}<a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>{{- end -}}
+                                {{- range .Params.armips -}}
+                                    {{- $arm_ip_url := printf "https://developer.arm.com/Processors#q=%s" . -}}
+                                    {{- with index $arm_ip_urls . -}}{{- $arm_ip_url = . -}}{{- end -}}
+                                    <a href="{{ $arm_ip_url }}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>
+                                {{- end -}}
                             </td>
                         </tr>
                     {{else}}
@@ -384,7 +401,9 @@ Called from:
                         <tr>
                             <td class="td-metadata-value margin-l-24">
                                 {{- range .Params.armips -}}
-                                    <a href="https://developer.arm.com/Processors#q={{.}}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>
+                                    {{- $arm_ip_url := printf "https://developer.arm.com/Processors#q=%s" . -}}
+                                    {{- with index $arm_ip_urls . -}}{{- $arm_ip_url = . -}}{{- end -}}
+                                    <a href="{{ $arm_ip_url }}" target="_blank" style="margin-right: 16px;">{{.}}{{ partial "general-formatting/external-link.html"}}</a>
                                 {{- end -}}
                             </td>
                         </tr>

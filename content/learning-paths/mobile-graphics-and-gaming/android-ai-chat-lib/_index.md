@@ -25,7 +25,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: ML
 armips:
-    - Arm AI Chat library
+    - Cortex-A
 tools_software_languages:
     - Kotlin
     - Neon

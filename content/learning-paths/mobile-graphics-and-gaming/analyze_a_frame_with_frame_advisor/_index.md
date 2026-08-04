@@ -27,8 +27,8 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
-    - Mali GPUs
-    - Immortalis GPUs
+    - Mali
+    - Immortalis
 tools_software_languages:
     - Frame Advisor
 operatingsystems:

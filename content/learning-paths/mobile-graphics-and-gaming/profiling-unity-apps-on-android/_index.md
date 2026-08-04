@@ -27,11 +27,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
-    - armv8
-    - aarch32
-    - aarch64
-    - arm64
-    - arm architecture
+    - Cortex-A
 tools_software_languages:
     - Unity
     - csharp
