@@ -6741,8 +6741,8 @@ tosa
 tp
 tts
 vectorizes
-Makefile’s
-SDK’s
+Makefile's
+SDK's
 aes
 agi
 annouced
@@ -6752,8 +6752,9 @@ cbnz
 cpuid
 evtstrm
 ffffa
-hotspot’s
+hotspot's
 ldaxr
 nondeterministically
 pmull
 stlxr
+
