@@ -1,5 +1,5 @@
 ---
-title: Build JetPack Yocto images for NVIDIA Jetson Orin NX, Orin Nano, and Thor platforms
+title: Build NVIDIA JetPack Yocto images for Jetson Orin NX, Orin Nano, and Thor platforms
 minutes_to_complete: 180 
    
 description: Build a custom Yocto-based NVIDIA JetPack image on a Google Axion C4A virtual machine, then flash and run it on an NVIDIA Jetson Orin NX, Orin Nano, or Thor platform.
