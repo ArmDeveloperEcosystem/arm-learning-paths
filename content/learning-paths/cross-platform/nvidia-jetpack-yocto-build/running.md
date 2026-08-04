@@ -37,4 +37,6 @@ The image includes the full NVIDIA Board Support Package (BSP): GPU drivers, the
 
 ## What you've accomplished
 
-You built a custom Yocto-based Linux distribution from source, flashed it onto an NVIDIA Jetson device, and confirmed it boots with GPU and Docker support. The image is ready for application development, container workloads, or further customization through additional Yocto layers and recipes.
+You've now built a custom Yocto-based Linux distribution from source, flashed it onto an NVIDIA Jetson device, and confirmed it boots with GPU and Docker support. 
+
+You can use the image for application development, container workloads, or further customization through additional Yocto layers and recipes.

@@ -74,7 +74,7 @@ The script runs until the Yocto image and flashing archive are ready.
 
 Source downloads can fail temporarily even when alternate mirrors are available. If a download error stops the build, rerun the same build command.
 
-{{% notice Clean rebuild behavior %}}
+{{% notice Note %}}
 The wrapper script removes the previous OE4T workspace before rebuilding. A restarted build begins from a clean workspace rather than resuming from the failure point.
 {{% /notice %}}
 
@@ -98,6 +98,6 @@ Record the displayed path. You’ll transfer this archive to the Ubuntu flashing
 
 ## What you've accomplished and what's next
 
-You’ve built and bundled a Yocto image for an NVIDIA Jetson platform on a Google Axion VM.
+You’ve now built and bundled a Yocto image for an NVIDIA Jetson platform on a Google Axion VM.
 
 Next, transfer the archive to your Ubuntu host and flash the image to the Jetson platform.

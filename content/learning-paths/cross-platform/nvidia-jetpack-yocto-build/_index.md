@@ -1,10 +1,6 @@
 ---
 title: Build NVIDIA JetPack Yocto images for NVIDIA Jetson Orin NX, Orin Nano, and Thor platforms
 minutes_to_complete: 180 
-
-draft: true
-cascade:
-    draft: true
    
 description: Build a custom Yocto-based NVIDIA JetPack image on a Google Axion C4A virtual machine, then flash and run it on an NVIDIA Jetson Orin NX, Orin Nano, or Thor platform.
 
@@ -21,11 +17,11 @@ prerequisites:
   - Basic proficiency with Linux shell commands, SSH, and file transfers
   - A Google Cloud account with permission and quota to create a `c4a-standard-32` virtual machine
   - A supported NVIDIA Jetson platform
-  - An Ubuntu 22.04 or later computer with USB access for flashing the image
+  - An computer running Ubuntu 22.04 or later with USB access for flashing the image
 
 author: Doug Anson
 
-generate_summary_faq: false
+generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
