@@ -19,9 +19,53 @@ prerequisites:
     - An installation of [Visual Studio](/install-guides/vs-woa/).
     - An installation of [Git](/install-guides/git-woa/).
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-04T20:54:25Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 39be992807e2925699e242a6995fa2d782afaa32ce083e51399ac64066b8f0a4
+  summary_generated_at: '2026-08-04T20:54:25Z'
+  summary_source_hash: 39be992807e2925699e242a6995fa2d782afaa32ce083e51399ac64066b8f0a4
+  faq_generated_at: '2026-08-04T20:54:25Z'
+  faq_source_hash: 39be992807e2925699e242a6995fa2d782afaa32ce083e51399ac64066b8f0a4
+  summary: >-
+    This Learning Path shows you how to sample and profile CPU instructions on Windows on Arm using
+    WindowsPerf with the Arm Statistical Profiling Extension (SPE). You build a debug CPython for
+    AArch64, pin the Python process to a specific core, and run a compute-heavy expression to
+    generate activity. You use `wperf sample` with an SPE event while the process is pinned, then
+    use `wperf record` to spawn the workload and capture events. You also select the SPE-enabled
+    WindowsPerf build and review samples with annotation and disassembly.
+  faqs:
+  - question: Which WindowsPerf build should I use to profile with Arm SPE?
+    answer: >-
+      Use the SPE-enabled build included in WindowsPerf release 3.8.0. Download the release asset
+      and select the WindowsPerf build in the `SPE/` subdirectory.
+  - question: Do I need a debug build of CPython for this path?
+    answer: >-
+      Yes. The examples use `python_d.exe`, which you build from CPython sources in debug mode for
+      Windows on Arm (AArch64).
+  - question: How do I pass Python arguments without wperf parsing them?
+    answer: >-
+      Use `--` to separate `wperf` options from the arguments passed to `python_d.exe`. Everything
+      after `--` is forwarded to the Python process.
+  - question: Why pin the CPython process to one CPU core, and which core is used?
+    answer: >-
+      Pinning keeps the workload on a known CPU so collected samples map to that core consistently.
+      The steps pin the process to core 1.
+  - question: What result should I expect after running wperf record with an SPE event?
+    answer: >-
+      WindowsPerf records SPE load events for the run. Use the `--annotate` and `--disassemble`
+      options to review where sampled instructions map to source code and assembly.
+# END generated_summary_faq
+
 author: Przemyslaw Wirkus
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -104,4 +148,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
