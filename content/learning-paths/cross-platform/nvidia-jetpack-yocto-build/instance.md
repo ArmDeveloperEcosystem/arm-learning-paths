@@ -33,7 +33,7 @@ To create a virtual machine using the C4A instance type:
 
 5. Under **OS and storage**, select **Change**, then choose an Arm-based operating system image.
     - For this Learning Path, select **Ubuntu 22.04 LTS** (Arm64).
-    - To allocate sufficient disk space, ncrease **Size (GB)** from **10** to **500**.
+    - To allocate sufficient disk space, increase **Size (GB)** from **10** to **500**.
 6. To apply the image changes, select **Choose**.
 
 ![Google Cloud Boot disk panel with Ubuntu 22.04 LTS Arm64 selected and the disk size set to 500 GB#center](images/gcp-ubuntu.png "Ubuntu 22.04 LTS Arm64 boot disk configured with 500 GB")
