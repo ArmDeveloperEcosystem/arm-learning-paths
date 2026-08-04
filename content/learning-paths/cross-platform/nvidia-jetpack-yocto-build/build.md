@@ -66,7 +66,7 @@ Inside the `tmux` session, start the NVIDIA Jetson AGX Thor build and create a f
 The script installs the required host packages before starting the Yocto build.
 
 {{% notice Note %}}
-If Ubuntu displays a service-restart dialog during package installation, press Tab to select **OK**, then press Enter to continue.
+If Ubuntu displays a service-restart dialog during package installation, press the **Tab** key to select **OK**, then press **Enter** to continue.
 {{% /notice %}}
 
 After installing the host packages, the script starts BitBake to build the image:
