@@ -5,17 +5,13 @@ td.nowrap {
     white-space: nowrap;
 }
 
-.learning-path-metadata .td-metadata-key,
-.learning-path-metadata .td-metadata-value {
-    border-top: 0;
-    border-bottom: 0;
-}
-
 .td-metadata-key {
     height: fit-content;
     padding: 0px;
     margin: 0px;
     vertical-align:top;
+    border-top: 0;
+    border-bottom: 0;
 }
 
 .td-metadata-value {
@@ -24,6 +20,8 @@ td.nowrap {
     padding: 0px; 
     margin: 0px; 
     padding-left: 8px;
+    border-top: 0;
+    border-bottom: 0;
 }
 
 .margin-l-0 {
