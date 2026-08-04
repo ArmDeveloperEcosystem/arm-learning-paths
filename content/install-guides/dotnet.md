@@ -119,7 +119,7 @@ dotnet --list-sdks
 The output is similar to:
 
 ```output
-10.0.103 [/usr/lib/dotnet/sdk]
+10.0.110 [/usr/lib/dotnet/sdk]
 ```
 
 For more detailed information about your installation, run:
@@ -132,17 +132,17 @@ The output is similar to:
 
 ```output
 .NET SDK:
- Version:           10.0.103
- Commit:            c2435c3e0f
- Workload version:  10.0.100-manifests.a62d7899
- MSBuild version:   18.0.11+c2435c3e0
+ Version:           10.0.110
+ Commit:            f7d90799ce
+ Workload version:  10.0.100-manifests.1641d827
+ MSBuild version:   18.0.11+f7d90799c
 
 Runtime Environment:
  OS Name:     ubuntu
  OS Version:  24.04
  OS Platform: Linux
  RID:         linux-arm64
- Base Path:   /home/ubuntu/.dotnet/sdk/10.0.103/
+ Base Path:   /home/ubuntu/.dotnet/sdk/10.0.110/
 
 .NET workloads installed:
 There are no installed workloads to display.
@@ -150,16 +150,16 @@ Configured to use workload sets when installing new manifests.
 No workload sets are installed. Run "dotnet workload restore" to install a workload set.
 
 Host:
-  Version:      10.0.3
+  Version:      10.0.7
   Architecture: arm64
-  Commit:       c2435c3e0f
+  Commit:       f7d90799ce
 
 .NET SDKs installed:
-  10.0.103 [/home/ubuntu/.dotnet/sdk]
+  10.0.110 [/home/ubuntu/.dotnet/sdk]
 
 .NET runtimes installed:
-  Microsoft.AspNetCore.App 10.0.3 [/home/ubuntu/.dotnet/shared/Microsoft.AspNetCore.App]
-  Microsoft.NETCore.App 10.0.3 [/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.AspNetCore.App 10.0.7 [/home/ubuntu/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 10.0.7 [/home/ubuntu/.dotnet/shared/Microsoft.NETCore.App]
 
 Other architectures found:
   None
