@@ -13,7 +13,7 @@ After flashing completes and you connect a monitor, keyboard, and power supply, 
 
 ## Explore the Yocto desktop
 
-The default Yocto build uses the Matchbox window manager. After the device boots, a desktop similar to the following appears:
+The default Yocto build uses the Matchbox window manager. After the device boots, a desktop appears as follows:
 
 ![Yocto desktop showing the Matchbox window manager with a taskbar and application launcher#center](images/desktop-image.webp "Yocto desktop with Matchbox window manager")
 
