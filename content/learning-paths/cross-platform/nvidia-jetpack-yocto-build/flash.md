@@ -102,9 +102,9 @@ Keep this terminal session open for the flashing step.
 
 The flashing procedure varies by NVIDIA Jetson model and involves three actions:
 
-1. Place the NVIDIA Jetson device into recovery mode using the hardware button sequence for your model.
-2. Connect the device to your Ubuntu host with the appropriate USB cable.
-3. Run `./initrd_flash` from the extracted image directory on your Ubuntu host.
+1. Placing the NVIDIA Jetson device into recovery mode using the hardware button sequence for your model.
+2. Connecting the device to your Ubuntu host with the appropriate USB cable.
+3. Running `./initrd_flash` from the extracted image directory on your Ubuntu host.
 
 Follow the [OE4T flashing instructions](https://oe4t.github.io/master/Flashing.html) starting from **step 2**. The extracted `initrd_flash` directory on your local host satisfies step 1.
 
