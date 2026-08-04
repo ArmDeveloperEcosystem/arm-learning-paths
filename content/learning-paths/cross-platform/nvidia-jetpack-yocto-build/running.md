@@ -1,5 +1,6 @@
 ---
 title: Run the Yocto image on the NVIDIA Jetson device
+description: Boot the custom Yocto image on NVIDIA Jetson and verify that the NVIDIA GPU drivers and Docker runtime are available.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,6 @@
 ---
 title: Flash the Yocto image onto the NVIDIA Jetson device
+description: Transfer a bundled Yocto image from Google Cloud to an Ubuntu host, extract the flashing tools, and flash an NVIDIA Jetson device over USB.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

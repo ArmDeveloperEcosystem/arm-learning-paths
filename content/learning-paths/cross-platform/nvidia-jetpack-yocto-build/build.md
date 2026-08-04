@@ -1,5 +1,6 @@
 ---
 title: Build a Yocto image for NVIDIA Jetson on a Google Axion VM
+description: Use target-specific wrapper scripts on a Google Axion C4A virtual machine to build and bundle a Yocto flashing image for NVIDIA Jetson.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

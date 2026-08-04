@@ -1,5 +1,6 @@
 ---
 title: Understand Yocto image builds for NVIDIA Jetson
+description: Understand how Yocto, OpenEmbedded, BitBake, and the OE4T meta-tegra layer create tailored NVIDIA JetPack images for Jetson platforms.
 
 weight: 2
 
