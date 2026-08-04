@@ -1,10 +1,6 @@
 ---
-title: Build NVIDIA JetPack Yocto images for NVIDIA Jetson Orin NX, Orin Nano, and Thor platforms
+title: Build NVIDIA JetPack Yocto images for Jetson Orin NX, Orin Nano, and Thor platforms
 minutes_to_complete: 180 
-
-draft: true
-cascade:
-    draft: true
    
 description: Build a custom Yocto-based NVIDIA JetPack image on a Google Axion C4A virtual machine, then flash and run it on an NVIDIA Jetson Orin NX, Orin Nano, or Thor platform.
 
@@ -21,7 +17,54 @@ prerequisites:
   - Basic proficiency with Linux shell commands, SSH, and file transfers
   - A Google Cloud account with permission and quota to create a `c4a-standard-32` virtual machine
   - A supported NVIDIA Jetson platform
-  - An Ubuntu 22.04 or later computer with USB access for flashing the image
+  - A computer running Ubuntu 22.04 or later with USB access for flashing the image
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-04T16:40:49Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: f4648abe855b5a0c8e0ac0fc8c0b8ca1e0b90b474556e34d8e0bd17eca429fa7
+  summary_generated_at: '2026-08-04T16:40:49Z'
+  summary_source_hash: f4648abe855b5a0c8e0ac0fc8c0b8ca1e0b90b474556e34d8e0bd17eca429fa7
+  faq_generated_at: '2026-08-04T16:40:49Z'
+  faq_source_hash: f4648abe855b5a0c8e0ac0fc8c0b8ca1e0b90b474556e34d8e0bd17eca429fa7
+  summary: >-
+    You'll use a Google Cloud C4A virtual machine powered by Google Axion to build a custom
+    Yocto-based NVIDIA JetPack image. You'll configure the build with OpenEmbedded, BitBake, and
+    target layers, then create a bundled flashing archive. Then, you'll transfer the archive to a
+    local Ubuntu host and flash it to a supported NVIDIA Jetson platform. After the device boots,
+    you'll explore the Matchbox desktop and verify the NVIDIA GPU drivers and Docker runtime.
+  faqs:
+  - question: Which Google Cloud machine type should I use, and how do I verify it?
+    answer: >-
+      Use the `c4a-standard-32` machine type, which provides 32 vCPUs and 128 GB of memory. In the
+      Google Cloud console, confirm that **Series** is set to **C4A** and **Machine type** is set to
+      **c4a-standard-32**.
+  - question: What output should I expect after the Yocto build completes?
+    answer: >-
+      The build summary reports `BUILD COMPLETE` and lists the workspace, deploy directory,
+      primary flashing image, and bundle archive paths. Confirm that the generated `.tar.gz`
+      archive exists before continuing.
+  - question: How do I transfer the build artifact from the C4A VM to my Ubuntu host?
+    answer: >-
+      Install the Google Cloud CLI on your Ubuntu host and authenticate with `gcloud auth login`.
+      Then use `gcloud compute scp` to copy the bundled archive from the C4A VM to your host.
+  - question: What do I need to install on my Ubuntu host before flashing?
+    answer: >-
+      Use Ubuntu 22.04 or later with USB access to the Jetson device. Install `dtc`,
+      `build-essential`, `gdisk`, `gptfdisk`, `udisks2`, `bmap-tools`, `libxml2-utils`, `zstd`,
+      `tar`, and `usbutils` before extracting and flashing the image.
+  - question: How do I verify that the flashed Yocto image is working?
+    answer: >-
+      After the Matchbox desktop appears, open a terminal and run `nvidia-smi` and
+      `docker --version`. Successful output confirms that the NVIDIA GPU drivers and Docker runtime
+      are available.
+# END generated_summary_faq
 
 author: Doug Anson
 
@@ -64,6 +107,10 @@ further_reading:
   - resource:
       title: BitBake User Manual
       link: https://docs.yoctoproject.org/bitbake/index.html
+      type: documentation
+  - resource:
+      title: Yocto on Jetson Platforms
+      link: https://docs.nvidia.com/jetson/archives/r39.2/DeveloperGuide/AR/YoctoOnJetson.html
       type: documentation
 
 

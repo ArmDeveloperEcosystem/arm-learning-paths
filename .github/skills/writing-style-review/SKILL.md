@@ -98,7 +98,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use `keyboard shortcut` instead of `key combination`.
 - Use `Ctrl key`.
 - Use `double-tap` instead of `double-click` for touch interfaces.
-- Use **bold** for UI elements.
+- Use **bold** for UI elements and keyboard keys.
 - Use *italics* for emphasis and new terms.
 - Use `code formatting` for file names, commands, package names, flags, paths, and environment variables.
 
