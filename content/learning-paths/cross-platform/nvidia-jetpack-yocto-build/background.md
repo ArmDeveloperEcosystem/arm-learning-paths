@@ -18,7 +18,7 @@ Unlike a general-purpose Linux distribution with predefined packages and default
 
 [NVIDIA JetPack](https://docs.nvidia.com/jetson/jetpack/introduction/index.html) provides the Jetson Linux board support package alongside accelerated libraries and developer tools for NVIDIA Jetson platforms.
 
-The [OE4T `meta-tegra` layer](https://github.com/OE4T/meta-tegra) brings NVIDIA Jetson hardware support into the OpenEmbedded and Yocto build environment. `meta-tegra` enables a Yocto image to use the Jetson kernel, boot components, drivers, and deployment artifacts while managing the root file system through Yocto metadata.
+The [OpenEmbedded for Tegra (OE4T) `meta-tegra` layer](https://github.com/OE4T/meta-tegra) brings NVIDIA Jetson hardware support into the OpenEmbedded and Yocto build environment. `meta-tegra` enables a Yocto image to use the Jetson kernel, boot components, drivers, and deployment artifacts while managing the root file system through Yocto metadata.
 
 You'll use scripts built around `meta-tegra` to complete the following workflow:
 
@@ -27,7 +27,7 @@ You'll use scripts built around `meta-tegra` to complete the following workflow:
 3. Bundle the deployment artifacts and transfer them to an Ubuntu host.
 4. Flash the image to the Jetson platform and confirm that it boots.
 
-Compared with a preconfigured Jetson Linux image, a tailored Yocto image can omit unnecessary packages and services. This omission can reduce storage use, limit the attack surface, and improve boot time. Layer-based configuration also helps teams reproduce, maintain, and audit product images.
+Compared with a preconfigured Jetson Linux image, a tailored Yocto image omits unnecessary packages and services. This omission reduces storage use, limits the attack surface, and improves boot time. Layer-based configuration also helps teams reproduce, maintain, and audit product images.
 
 The tradeoff is additional build and maintenance work. Builds can take several hours, and teams must keep JetPack, Jetson Linux, and `meta-tegra` versions aligned while managing layer compatibility, licenses, proprietary components, and device-specific flashing. 
 
