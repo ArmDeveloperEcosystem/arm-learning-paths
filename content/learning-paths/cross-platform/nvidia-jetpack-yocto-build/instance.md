@@ -21,25 +21,25 @@ For general guidance on setting up a Google Cloud account and project, see the L
 
 To create a virtual machine using the C4A instance type:
 
-- Open the [Google Cloud Console](https://console.cloud.google.com/).
-- Go to **Compute Engine** > **VM instances**.
-- Select **Create instance**.
-- Under **Machine configuration**:
-  - Specify an **Instance name**, **Region**, and **Zone**.
-  - Set **Series** to **C4A**.
-  - Select **c4a-standard-32** as the machine type.
+1. Open the [Google Cloud Console](https://console.cloud.google.com/).
+2. Go to **Compute Engine** > **VM instances**.
+3. Select **Create instance**.
+4. Under **Machine configuration**:
+    - Specify an **Instance name**, **Region**, and **Zone**.
+    - Set **Series** to **C4A**.
+    - Select **c4a-standard-32** as the machine type.
 
 ![Google Cloud Console VM creation page with the C4A machine series selected and the c4a-standard-32 machine type highlighted#center](images/gcp-vm.png "Creating a Google Axion C4A virtual machine in the Google Cloud Console")
 
-- Under **OS and storage**, select **Change**, then choose an Arm-based operating system image.
-  - For this Learning Path, select **Ubuntu 22.04 LTS** (Arm64).
-  - Increase **Size (GB)** from **10** to **500** to allocate sufficient disk space.
-- Select **Choose** to apply the image changes.
+5. Under **OS and storage**, select **Change**, then choose an Arm-based operating system image.
+    - For this Learning Path, select **Ubuntu 22.04 LTS** (Arm64).
+    - Increase **Size (GB)** from **10** to **500** to allocate sufficient disk space.
+6. Select **Choose** to apply the image changes.
 
 ![Google Cloud Boot disk panel with Ubuntu 22.04 LTS Arm64 selected and the disk size set to 500 GB#center](images/gcp-ubuntu.png "Ubuntu 22.04 LTS Arm64 boot disk configured with 500 GB")
 
-- Under **Networking**, keep the default settings. Browser-based SSH access works without additional firewall rules.
-- Select **Create** to launch the virtual machine.
+7. Under **Networking**, keep the default settings. Browser-based SSH access works without additional firewall rules.
+8. Select **Create** to launch the virtual machine.
 
 After the instance starts, select **SSH** next to the VM in the instance list to open a browser-based terminal session.
 

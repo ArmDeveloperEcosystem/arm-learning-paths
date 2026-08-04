@@ -36,6 +36,6 @@ Before changing versions or adding another Jetson platform, see the [`meta-tegra
 
 ## What you've learned and what's next
 
-You’ve learned how Yocto and `meta-tegra` work together to create tailored NVIDIA Jetson images, including the benefits and maintenance tradeoffs.
+You’ve now learned how Yocto and `meta-tegra` work together to create tailored NVIDIA Jetson images, including the benefits and maintenance tradeoffs.
 
 Next, provision a Google Axion C4A virtual machine to build the image.
