@@ -84,7 +84,7 @@ sam --version
 The version should be printed on screen:
 
 ```output
-SAM CLI, version 1.125.0
+SAM CLI, version 1.165.0
 ```
 
 ## How do I create an example application with the AWS SAM CLI?
