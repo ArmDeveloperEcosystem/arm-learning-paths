@@ -28,30 +28,27 @@ generated_summary_faq:
   faq_generated_at: '2026-08-04T20:53:47Z'
   faq_source_hash: b9aaf0eafd5333e78f15993bada3ac33ddb55f72af0b773a970ab71a392ab8b5
   summary: >-
-    This Learning Path guides you through redesigning data layouts to make SIMD vectorization on Arm
-    more effective. Starting from an Array-of-Structures model that groups x, y, and z triplets, you
-    analyze how 12-byte groupings and strided access hinder 4-wide floating-point operations. You
-    refactor the data, add boundary checks, and create a hand-optimized variant with Arm NEON
-    intrinsics when auto-vectorization is insufficient. The path concludes with a Structure-of-Arrays
-    version that uses contiguous per-component arrays. By working through `simulation1.c` to
-    `simulation4.c`, you compare layouts and observe how each choice affects SIMD execution.
+    You'll learn how data layout affects SIMD vectorization on Arm. Starting with an Array-of-Structures
+    model that stores x, y, and z values in 12-byte triplets, you'll examine how strided access limits
+    four-wide floating-point operations. You'll add padding for four-element vectors, handle boundary
+    checks, and write a hand-optimized Arm NEON version when auto-vectorization is insufficient. Then, you'll compare a Structure-of-Arrays layout with contiguous component arrays and explore an SVE
+    implementation using the simulation examples.
   faqs:
   - question: How do I know the current data layout is blocking SIMD vectorization?
     answer: >-
       If your structure stores 3-element vectors (x, y, and z), the 12-byte grouping creates
-      strided access that can make 4-wide SIMD vectorization of 32-bit floats difficult. The path
-      uses compiler output and the example programs to show how this layout affects vectorization.
-  - question: What should I change in the object struct to improve alignment and access patterns?
+      strided access that can make 4-wide SIMD vectorization of 32-bit floats difficult. Use compiler output and the example programs to see how this layout affects vectorization.
+  - question: What should I change in the object struct to improve SIMD access?
     answer: >-
-      Avoid 3-element groupings and reorganize the fields to support 4-wide operations, or use a
-      Structure-of-Arrays layout so each component is stored contiguously. This reduces strided
-      access and makes it easier for the compiler or intrinsics to operate on four elements at a time.
+      Replace the three-element `vec3` fields with four-element `vec4` fields and initialize the
+      additional element as padding. The 16-byte layout makes four-wide operations easier for the
+      compiler. The later Structure-of-Arrays example stores each component contiguously instead.
   - question: Which files do I modify as complexity increases?
     answer: >-
       Copy `simulation1.c` to `simulation2.c` to add bounding-box logic, including the updated
       `simulate_objects()` function, the `ctr4` structure, and the `box` constant. Then copy
-      `simulation2.c` to `simulation3.c` for the hand-written SIMD version, and create the provided
-      `simulation4.c` example for the Structure-of-Arrays approach.
+      `simulation2.c` to `simulation3.c` for the hand-written NEON version. Create `simulation4.c`
+      for the Structure-of-Arrays approach, or `simulation4_sve.c` for the SVE example.
   - question: What should I expect to see in the hand-optimized SIMD version?
     answer: >-
       `simulation3.c` includes `arm_neon.h` and uses types such as `float32x4_t` to process data in
@@ -59,7 +56,7 @@ generated_summary_faq:
       in the source.
   - question: How does the Structure-of-Arrays version change the way the code runs?
     answer: >-
-      It stores each component, such as all x values, in its own contiguous array. This improves
+      The Structure-of-Arrays version stores each component, such as all x values, in its own contiguous array. This improves
       sequential access and makes 4-wide operations straightforward, reducing the penalties of
       interleaved fields.
 # END generated_summary_faq

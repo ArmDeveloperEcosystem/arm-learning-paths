@@ -31,13 +31,11 @@ generated_summary_faq:
   faq_generated_at: '2026-08-04T20:55:36Z'
   faq_source_hash: d196e9204523c1aea84c1e6a60060a83480ec929edc31b1b50cca43b2e305739
   summary: >-
-    This Learning Path guides you through building and deploying Eclipse Zenoh on Arm-based Linux
-    devices, including Raspberry Pi, to create a multi-node communication system for robotics and
-    IoT. You build Zenoh from source, then distribute it across multiple devices by copying release
-    binaries or using Docker for consistent multi-node testing. You explore three communication
-    patterns: real-time publish/subscribe messaging, in-memory storage and queries, and a queryable
-    node that computes results on demand. You validate cross-device messaging and retrieve published
-    values through queries.
+    You'll build a multi-node Eclipse Zenoh system on Arm-based Linux devices such as Raspberry Pi. First, you'll
+    compile Zenoh from source. Then, you'll distribute either the release binaries or a Docker image and run the nodes
+    across multiple devices. You'll test publish/subscribe messaging, in-memory storage and queries, and
+    queryable nodes that compute results on demand. Finally, you'll complete examples to see how to exchange messages across
+    devices, retrieve stored values, and return calculated results through Zenoh queries.
   faqs:
   - question: How do I know my Zenoh build is ready to deploy to other devices?
     answer: >-
@@ -59,9 +57,10 @@ generated_summary_faq:
       to distribute Zenoh and provide a consistent multi-node test environment.
   - question: What should I check if a z_get query returns no data in the storage example?
     answer: >-
-      Confirm that the Zenoh daemon is running and that `z_put` and `z_get` use the same key. This
-      example uses in-memory storage, so only values published after the daemon starts are available
-      to query.
+      Confirm that the Zenoh daemon is running and that `z_put` and `z_get` use the same key. If
+      port `7447` is already in use, stop the previous Zenoh process or configure another listener
+      port. This example uses in-memory storage, so only values published after the daemon starts
+      are available for you to query.
 # END generated_summary_faq
 
 author: 

@@ -33,26 +33,23 @@ generated_summary_faq:
   faq_generated_at: '2026-08-04T21:10:00Z'
   faq_source_hash: 5e3e7ecd4c814788ad8a58d3019e0838c61acde90e56172965aa3bcda65b74e1
   summary: >-
-    This Learning Path introduces Tinkerblox UltraEdge as an edge-native execution fabric
-    for AI and mixed workloads on Arm platforms. You review the UltraEdge architecture,
-    provision a Google Axion C4A virtual machine for arm64 Yocto builds, and install the UltraEdge
-    agent and MicroPac tooling on Debian or Ubuntu. You then build and deploy MicroPac workloads,
-    create a Yocto image for an NXP S32G-VNP-GLDBOX3 board, and use the Tinkerblox CLI to install,
-    monitor, and troubleshoot services. The path covers both Linux package-based and Yocto-based
-    deployment workflows.
+    You'll explore Tinkerblox UltraEdge, an edge-native execution fabric for AI and mixed workloads on Arm
+    platforms. You'll review the UltraEdge architecture, provision a Google Axion C4A virtual machine for an
+    arm64 Yocto build, and install the UltraEdge agent and MicroPac tooling on Debian or Ubuntu. Then, you'll build and deploy MicroPac workloads, create a Yocto image for an NXP S32G-VNP-GLDBOX3 board,
+    and manage services with the Tinkerblox and MicroBoost CLIs. The workflows cover both package-based
+    Linux installations and Yocto-based device deployments.
   faqs:
   - question: What is the purpose of UltraEdge in this Learning Path?
     answer: >-
-      UltraEdge provides an edge-native execution fabric for AI and mixed workloads. You review
+      UltraEdge provides an edge-native execution fabric for AI and mixed workloads. Review
       its layered architecture and see how MicroStack and MicroPac support workload packaging and
       deployment on Arm-based systems.
   - question: Why is a Google Axion C4A virtual machine used for the Yocto build?
     answer: >-
-      The workflow provisions a C4A VM with 16 vCPUs and 128 GB of memory. It runs Ubuntu 22.04
-      and provides the environment for building the image for the target NXP board.
+      The C4A virtual machine provides the environment for building the image for the target NXP board.
   - question: Can UltraEdge be installed on Debian or Ubuntu?
     answer: >-
-      Yes. You install and activate the UltraEdge agent on Debian or Ubuntu, then use MicroPac
+      Yes. Install and activate the UltraEdge agent on Debian or Ubuntu, then use MicroPac
       tooling to define, build, validate, and install workloads.
   - question: What is required to build the Yocto image for the NXP board?
     answer: >-
@@ -61,9 +58,9 @@ generated_summary_faq:
       Yocto builds can take several hours depending on the available resources.
   - question: How do I manage workloads after installing UltraEdge?
     answer: >-
-      Use the Tinkerblox CLI or MicroBoost CLI to install, start, stop, monitor, and diagnose
-      MicroPac-based workloads on the UltraEdge-enabled device. You also inspect system state and
-      troubleshoot common connection and architecture issues.
+      Use the Tinkerblox CLI on Debian or Ubuntu, or the MicroBoost CLI on the Yocto-based device,
+      to install, start, stop, monitor, and diagnose MicroPac-based workloads. You can also use the CLIs to inspect
+      system state and troubleshoot common connection and architecture issues.
 # END generated_summary_faq
 
 author: Tinkerblox

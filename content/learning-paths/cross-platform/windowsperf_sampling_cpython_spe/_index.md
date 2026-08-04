@@ -34,12 +34,11 @@ generated_summary_faq:
   faq_generated_at: '2026-08-04T20:54:25Z'
   faq_source_hash: 39be992807e2925699e242a6995fa2d782afaa32ce083e51399ac64066b8f0a4
   summary: >-
-    This Learning Path shows you how to sample and profile CPU instructions on Windows on Arm using
-    WindowsPerf with the Arm Statistical Profiling Extension (SPE). You build a debug CPython for
-    AArch64, pin the Python process to a specific core, and run a compute-heavy expression to
-    generate activity. You use `wperf sample` with an SPE event while the process is pinned, then
-    use `wperf record` to spawn the workload and capture events. You also select the SPE-enabled
-    WindowsPerf build and review samples with annotation and disassembly.
+    You'll use WindowsPerf and the Arm Statistical Profiling Extension (SPE) to sample CPU instructions on
+    Windows on Arm. First, you'll check SPE support in the CPU and WindowsPerf binaries, build a debug CPython
+    for AArch64, and run a compute-heavy expression. Then, you'll use `wperf sample` with a load filter while
+    the process is pinned, and use `wperf record` to start the workload and capture samples. Finally,
+    you'll review the results with source annotation and disassembly.
   faqs:
   - question: Which WindowsPerf build should I use to profile with Arm SPE?
     answer: >-
@@ -56,7 +55,7 @@ generated_summary_faq:
   - question: Why pin the CPython process to one CPU core, and which core is used?
     answer: >-
       Pinning keeps the workload on a known CPU so collected samples map to that core consistently.
-      The steps pin the process to core 1.
+      Pin the process to core 1.
   - question: What result should I expect after running wperf record with an SPE event?
     answer: >-
       WindowsPerf records SPE load events for the run. Use the `--annotate` and `--disassemble`

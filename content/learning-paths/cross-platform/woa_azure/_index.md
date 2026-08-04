@@ -30,12 +30,11 @@ generated_summary_faq:
   faq_generated_at: '2026-08-04T20:55:10Z'
   faq_source_hash: ffcb7c740ebfdacb47349150c321972b9cf0a9b43e36592da833a588b65293f6
   summary: >-
-    This Learning Path shows you how to deploy a Windows on Arm virtual machine on Microsoft Azure
-    using the Azure Marketplace and connect to it with Remote Desktop Protocol (RDP). You sign in
-    to the Azure portal, open the Virtual Machines service, and choose a Windows on Arm image from
-    the Marketplace. You discover Arm-based image offerings, configure the essential VM settings,
-    and use an RDP client to connect to the deployed instance. You can use the same flow to launch
-    a Linux image by selecting a Linux distribution instead of Windows.
+    You'll deploy a Windows on Arm virtual machine in Microsoft Azure using the Azure Marketplace. First, you'll sign
+    in to the Azure portal, open Virtual Machines, filter the available images for Arm64, and choose
+    a Windows image. Then, you'll configure the VM, allow Remote Desktop Protocol (RDP) access, and connect
+    with an RDP client after deployment. You can use the same workflow to launch a Linux image when you select a
+    Linux distribution instead of Windows.
   faqs:
   - question: Which Azure subscription should I use to create the VM?
     answer: >-
@@ -48,15 +47,16 @@ generated_summary_faq:
   - question: How do I pick a Windows on Arm image from the Marketplace?
     answer: >-
       During VM creation, select **See all images**, search for a Windows image, and use the
-      **Arm64** filter to find an Arm-based offering. Select the image you want to deploy.
+      **Arm64** filter to find an Arm-based offering. For the Learning Path, select **Windows 11 Professional
+      24H2 - Arm64**.
   - question: Can I use these steps to deploy a Linux image on an Arm-based VM?
     answer: >-
       Yes. Use the same process and select a Linux distribution instead of Windows during image
       selection.
   - question: How do I connect to the VM after it is created?
     answer: >-
-      Copy the VM's public IP address and enter it in an RDP client. Provide the username and
-      password you configured during VM creation to connect to the Windows on Arm desktop.
+      Copy the VM's public IP address and enter it in an RDP client. Use the username and password
+      configured during VM creation. For the Learning Path, allow RDP traffic on port `3389`.
 # END generated_summary_faq
 
 author: Pareena Verma
