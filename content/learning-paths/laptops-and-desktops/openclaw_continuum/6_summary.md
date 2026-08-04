@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Compare Arm Deployment Architectures
 
-In this Learning Path, you built a local-first household assistant and used Telegram to validate persistent memory, document RAG, browser search, and scheduled notifications. You first ran these workflows with local vLLM inference on NVIDIA DGX Spark, then moved the same application experience to llama.cpp on the Armv9 CPU of a Radxa Orion O6.
+You built a local-first household assistant with memory, document RAG, browser search, and scheduled notifications. You ran it with vLLM on NVIDIA DGX Spark, then moved it to llama.cpp on Radxa Orion O6.
 
 The following comparison shows what stayed the same across the two Arm-based implementations and what changed with the local generation backend:
 
@@ -23,38 +23,19 @@ The following comparison shows what stayed the same across the two Arm-based imp
 | Generation engine | vLLM | llama.cpp |
 | Inference compute | Arm CPU + NVIDIA GPU | Arm CPU |
 
-The exercise demonstrates software portability across different compute configurations. Each platform can use model and context settings appropriate to its available compute while preserving the same application-level contract.
+Each platform uses model and context settings suited to its compute while preserving the same application contract.
 
 ## Review Data Privacy Boundaries
 
-The runtime keeps the following state under your control:
+The runtime keeps inference requests, generated context, Qdrant collections, uploaded files, cron history, OpenClaw tasks, and Gateway state under your control.
 
-- Model inference requests and generated context
-- Qdrant memory and RAG collections
-- Uploaded document files
-- Cron definitions and run history
-- OpenClaw task history
-- Gateway state
-
-External boundaries remain visible:
-
-- Telegram transports messages and uploaded files.
-- Weather and browser-search tasks contact public network services.
-- Model and container downloads contact external registries during setup.
+Telegram still transports messages and uploads. Weather and browser searches contact public services, while setup downloads models and containers from external registries.
 
 For sensitive deployments, you should review network exposure, Telegram suitability, host access, backups, model provenance, and the contents of every enabled tool.
 
 ## Identify Current System Scope
 
-This Learning Path uses a text-first architecture with deterministic skill routing and one configured local LLM endpoint.
-
-It does not implement:
-
-- Dynamic routing across multiple local LLMs
-- Multi-agent collaboration or autonomous agent handoffs
-- Hardware performance benchmarking
-
-The thin AgentRegistry and TaskDispatcher route explicit skills and preserve predictable command behavior within this scope.
+This Learning Path uses a text-first architecture, fixed skill routes, and one local LLM endpoint. It does not cover multi-model routing, multi-agent handoffs, or hardware benchmarking. The AgentRegistry and TaskDispatcher keep command behavior predictable within this scope.
 
 ## Explore Other Arm Deployment Topologies
 

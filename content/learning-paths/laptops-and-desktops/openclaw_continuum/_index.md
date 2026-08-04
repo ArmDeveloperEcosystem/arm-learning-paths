@@ -19,10 +19,11 @@ learning_objectives:
 
 prerequisites:
     - An NVIDIA DGX Spark system with NVIDIA drivers, Docker, and NVIDIA Container Toolkit
-    - A CPU-only Armv9 system such as Radxa Orion O6 with at least 30 GB of memory
     - Administrative access to install Ollama and run Qdrant containers on both systems
-    - A Telegram bot token and chat ID for the tutorial
+    - A Telegram account with a bot token and chat ID
     - Familiarity with Linux, Docker Compose, and command-line tools
+    - (Optional) A CPU-only Armv9 system such as Radxa Orion O6 with at least 30 GB of memory
+
 
 author: Odin Shen
 
