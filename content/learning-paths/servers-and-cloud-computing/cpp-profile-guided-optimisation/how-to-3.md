@@ -14,7 +14,7 @@ Integer division is ideal for benchmarking because it's significantly more expen
 
 ## What tools are needed to run a Google Benchmark example?
 
-For this example, you can use any Arm Linux computer. For example, the 1st generation Arm AGI CPU running Ubuntu 24.04 LTS.
+For this example, you can use any Arm Linux computer. For example, the Arm AGI CPU running Ubuntu 24.04 LTS.
 
 Run the following commands to install the prerequisite packages:
 
@@ -59,7 +59,7 @@ g++ -O3 -std=c++17 div_bench.cpp -lbenchmark -lpthread -o div_bench.base
 
 {{% notice Please Note %}}
 
-Since the command above does not specify `-mcpu` or `-march`, GCC targets a generic baseline architecture. If you want to apply PGO specifically targeting the 1st generation Arm AGI CPU, the `-mcpu=armagicpu` was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, it enables the same architectural features as `-march=neoverse-v3ae` from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html). However in the future there may be differences.
+Since the command above does not specify `-mcpu` or `-march`, GCC targets a generic baseline architecture. If you want to apply PGO specifically targeting the Arm AGI CPU, the `-mcpu=armagicpu` was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, it enables the same architectural features as `-march=neoverse-v3ae` from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html). However in the future there may be differences.
 
 As such, we recommend installing the latest version of GCC/G++ if you are targeting the Arm AGI CPU. Use the `-mcpu=native` flag if compiling on the target machine or `-mcpu=armagicpu` if cross compiling.
 

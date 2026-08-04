@@ -32,7 +32,7 @@ The events in each bundle and the derived performance metrics are shown in the t
 
 {{% notice Note %}}
 
-If you are running the PMUv3 plugin on a Neoverse V3-based system, such as AWS Graviton5 or the first-generation AGI CPU, be aware that, as of July 2026, Bundle 6 produces inaccurate results because the required L3D cache events are not available. All other bundles are expected to function correctly.
+If you are running the PMUv3 plugin on a Neoverse V3-based system, such as AWS Graviton5 or the AGI CPU, be aware that, as of July 2026, Bundle 6 produces inaccurate results because the required L3D cache events are not available. All other bundles are expected to function correctly.
 
 {{% /notice %}}
 

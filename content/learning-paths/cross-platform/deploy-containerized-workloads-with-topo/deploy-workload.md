@@ -138,7 +138,7 @@ If you don't already have a CLI agent installed, see one of these install guides
 
 - [Install Claude Code](/install-guides/claude-code/)
 - [Install Codex CLI](/install-guides/codex-cli/)
-- [Install Gemini CLI](/install-guides/gemini/)
+- [Install Antigravity CLI](/install-guides/antigravity/)
 
 With your agent ready, you can delegate the full workflow using a prompt. For example:
 

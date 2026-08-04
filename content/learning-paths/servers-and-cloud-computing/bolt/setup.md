@@ -15,7 +15,7 @@ This Learning Path requires LLVM BOLT 22.1.0 or later for SPE profiling and the 
 
 {{% notice Please Note %}}
 
-If you are using a 1st generation Arm AGI CPU, we recommend installing the latest LLVM release to ensure support for the processor. However due to backwards compatibility, LLVM BOLT 22.1.0 or later can still be used to complete this learning path.
+If you are using the Arm AGI CPU, we recommend installing the latest LLVM release to ensure support for the processor. However due to backwards compatibility, LLVM BOLT 22.1.0 or later can still be used to complete this learning path.
 
 For Arm AGI CPU support, we recommend using LLVM 23 or later.
 
@@ -75,7 +75,7 @@ clang bsort.cpp -o out/bsort -O3 -fuse-ld=lld -ffunction-sections -Wl,--emit-rel
 
 {{% notice Please Note %}}
 
-If you want to use BOLT with your own application running on the 1st-generation Arm AGI CPU, we recommend using the latest version of GCC/LLVM. 
+If you want to use BOLT with your own application running on the Arm AGI CPU, we recommend using the latest version of GCC/LLVM.
 
 For the GNU toolchain, the `-mcpu=armagicpu` defintion was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, this is the same as the `-march=neoverse-v3ae` option available from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html) onwards. However, in the future there may be differences between `neoverse-v3ae` and `armagicpu`. Similarly for LLVM, Arm AGI CPU support is expected to be introduced no earlier than LLVM 23.
 

@@ -74,7 +74,7 @@ You can now analyze the rendering pipeline, inspect Vulkan API calls, and debug 
 
 After capturing a frame, use the RenderDoc event browser to review the sequence of Vulkan API calls and draw events. Select individual events to inspect their details, view associated resources, and debug specific pipeline stages.
 
-![RenderDoc event browser displaying a list of Vulkan API calls and draw events. This helps you trace rendering operations and debug pipeline stages#center](./images/renderdoc_event.png "Inspect NFRU rendering events in RenderDoc")
+![RenderDoc event browser displaying a list of Vulkan API calls and draw events. This helps you trace rendering operations and debug pipeline stages#center](./images/renderdoc_event.webp "Inspect NFRU rendering events in RenderDoc")
 
 With RenderDoc, you can:
 

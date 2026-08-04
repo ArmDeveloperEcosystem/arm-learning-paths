@@ -44,7 +44,7 @@ The methodology allows you to focus on the dominant bottleneck category, avoidin
 The next sections compare the Intel x86 methodology with the Arm top-down methodology. 
 
 {{% notice Notes %}}
-This Learning Path uses the Arm Neoverse V3AE architecture, as implemented in the 1st generation AGI CPU, when architecture-specific details are required. Some of these details differ from those of other Neoverse N-series and Neoverse V-series processors.
+This Learning Path uses the Arm Neoverse V3AE architecture, as implemented in the AGI CPU, when architecture-specific details are required. Some of these details differ from those of other Neoverse N-series and Neoverse V-series processors.
 
 AMD also has an equivalent top-down methodology which is similar to Intel, but uses different counters and calculations. 
 {{% /notice %}}

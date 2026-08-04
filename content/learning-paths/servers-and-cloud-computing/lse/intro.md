@@ -59,7 +59,7 @@ Announced at re:Invent 2023, Graviton4 is based on Neoverse V2 cores. Graviton4 
 
 Announced at re:Invent 2025, Graviton5 is based on Neoverse V3 cores. Graviton5 increases core count to 192 cores per chip and as of June 2026 is available in preview. Graviton5 provides 25% better compute performance and 2.6x more per-core L3 cache than Graviton4
 
-The 1st generation Arm AGI CPU was annouced at Arm Everywhere 2026 and uses Arm Neoverse V3 cores. Based on estimates, Arm AGI CPU is capable of delivering more than 2x the performance per rack compared to the latest x86 systems. As of June 2026, AGI CPU is available to order for enterprise customers.
+The Arm AGI CPU was annouced at Arm Everywhere 2026 and uses Arm Neoverse V3 cores. Based on estimates, Arm AGI CPU is capable of delivering more than 2x the performance per rack compared to the latest x86 systems. As of June 2026, AGI CPU is available to order for enterprise customers.
 
 AWS A1 instances are based on the Cortex-A72 processor. The Cortex-A72 implements the Armv8.0-A architecture and does NOT include the atomic instructions. All of the AWS EC2 instances based on the Neoverse N1, Neoverse V1, Neoverse V2 and Neoverse V3 processors include the atomic instructions. 
 
@@ -100,7 +100,7 @@ Flags:                           fp asimd evtstrm aes pmull sha1 sha2 crc32 atom
                                  id asimdrdm lrcpc dcpop asimddp ssbs
 ```
 
-Here is the output from running `lscpu` on the 1st generation AGI CPU:
+Here is the output from running `lscpu` on the AGI CPU:
 
 ```bash { command_line="user@localhost | 2-6"}
 lscpu | grep Flags
@@ -115,7 +115,7 @@ LSE support started in GCC 6, but GCC 10 and GCC 11 are good to use.
 
 {{% notice Please Note %}}
 
-If you are specifically targeting the 1st generation Arm AGI CPU on your own workload, the `-mcpu=armagicpu` was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, it enables the same architectural features as `-march=neoverse-v3ae` from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html). However in the future there may be differences.
+If you are specifically targeting the Arm AGI CPU on your own workload, the `-mcpu=armagicpu` was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, it enables the same architectural features as `-march=neoverse-v3ae` from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html). However in the future there may be differences.
 
 As such if you are targeting the Arm AGI CPU for your own workload, we recommend installing the latest version of GCC. **However, older versions of GCC are sufficient for running the examples in this learning path.**
 

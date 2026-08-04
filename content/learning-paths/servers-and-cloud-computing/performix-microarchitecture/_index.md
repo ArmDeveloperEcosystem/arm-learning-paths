@@ -12,7 +12,8 @@ learning_objectives:
     - Compare performance profiles to measure execution improvements
 
 prerequisites:
-    - An Arm Neoverse-based server running Linux (bare-metal or cloud bare-metal instance preferred for access to hardware performance counters)
+    - An Arm Neoverse-based server running Linux, such as an Arm AGI CPU platform.
+    - Bare-metal server or cloud bare-metal access is preferred for hardware performance counters
     - Familiarity with Linux command line
     - Basic understanding of CPU performance concepts
 
