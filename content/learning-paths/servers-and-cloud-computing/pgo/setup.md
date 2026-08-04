@@ -8,43 +8,67 @@ layout: learningpathall
 
 ## Set up your environment
 
-On your AArch64 Linux machine, navigate to your home directory or another empty working directory and download the `bsort.cpp` source file:
+On your AArch64 Linux machine, create a working directory and enter it:
 
 ```bash
-wget https://learn.arm.com/learning-paths/servers-and-cloud-computing/bolt/bsort.cpp
+mkdir pgo-example
+cd pgo-example
 ```
 
-Create the following directories to organize generated files from this example:
+Download the `bsort.cpp` source file from the Arm Learning Paths repository:
+
+```bash
+wget https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/servers-and-cloud-computing/bolt/bsort.cpp
+```
+
+Create directories for the generated files:
 
 ```bash
 mkdir -p out prof
 ```
 
-- **out**: Stores output binaries
-- **prof**: Stores profile data
+- `out`: Stores object files and binaries
+- `prof`: Stores raw and converted profile data
 
 If LLVM is not already installed, follow the [LLVM toolchain for Linux on Arm](/install-guides/llvm/) install guide before continuing.
 
 
 ## Verify tool availability
 
-Check that the LLVM tools are available:
+Confirm that the machine uses the AArch64 architecture:
+
+```bash
+uname -m
+```
+
+The expected output is:
+
+```output
+aarch64
+```
+
+Check that the required LLVM tools are available:
 
 ```bash { line_numbers=true }
 clang++ --version
 ld.lld --version
+llvm-bcanalyzer --version
 llvm-profdata --version
 llvm-profgen --version
+llvm-readelf --version
 ```
 
-For S-PGO, also check that perf is available. The BRBE-based S-PGO workflow in this guide requires a perf binary from Linux kernel 6.17.
+For sample-based PGO (S-PGO), also check that `perf` is available. The S-PGO workflow uses the Arm Branch Record Buffer Extension (BRBE) and needs Linux kernel 6.17 or later.
 
 ```bash
 perf --version
+uname -r
 ```
 
-## What you've learned and what's next
+The version commands confirm that the programs are in your `PATH`. They do not confirm that the processor implements BRBE or that you have permission to access performance events. The profile collection step checks those requirements when it runs `perf record`.
 
-You've created the working directory, verified that the LLVM tools are available, and downloaded the example source.
+## What you've accomplished and what's next
+
+You've created the working directory, downloaded the example source, and verified that the required tools are available.
 
 Next, you'll build the example with Thin-LTO and Full-LTO.

@@ -5,23 +5,22 @@ draft: true
 cascade:
     draft: true
     
-description: Learn how to use LLVM Link-Time Optimization and Profile-Guided Optimization on AArch64 Linux.
+description: Learn how to build and optimize a C++ application with LLVM Link-Time Optimization and Profile-Guided Optimization on AArch64 Linux.
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers who compile C or C++ applications on AArch64 Linux and want to use Link-Time Optimization (LTO) with Profile-Guided Optimization (PGO).
 
 
 learning_objectives:
-    - Understand the basics of Link-Time Optimization (LTO) and Profile-Guided Optimization (PGO)
-    - Build Thin-LTO and Full-LTO binaries with Clang on AArch64
-    - Generate instrumentation-based profile data with Clang on AArch64
-    - Generate sample-based profile data with Clang on AArch64
-    - Use generated profile data to optimize a small example application
+    - Explain how Link-Time Optimization (LTO) and Profile-Guided Optimization (PGO) guide LLVM optimizations
+    - Build and verify Full-LTO and Thin-LTO binaries with Clang on AArch64
+    - Generate and inspect sample-based and instrumentation-based profiles
+    - Use each profile type to build and run an optimized example application
 
 
 prerequisites:
-    - LLVM installed with Clang, LLD, `llvm-profdata`, and `llvm-profgen` available in your `PATH`. For setup instructions, see [LLVM toolchain for Linux on Arm](/install-guides/llvm/).
-    - Linux kernel version 6.17 or later for the Branch Record Buffer Extension (BRBE) profile-guided optimization workflow
+    - An AArch64 Linux system with LLVM installed. You need Clang, LLD, `llvm-bcanalyzer`, `llvm-profdata`, `llvm-profgen`, and `llvm-readelf` in your `PATH`. For setup instructions, see [LLVM toolchain for Linux on Arm](/install-guides/llvm/).
+    - For the optional sample-based PGO workflow, a processor that implements the Branch Record Buffer Extension (BRBE), Linux kernel 6.17 or later, and Linux `perf`
 
 
 author: Paschalis Mpeis
