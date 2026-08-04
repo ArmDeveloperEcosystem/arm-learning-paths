@@ -28,9 +28,9 @@ You'll use scripts built around `meta-tegra` to complete the following workflow:
 3. Bundle the deployment artifacts and transfer them to an Ubuntu host.
 4. Flash the image to the Jetson platform and confirm that it boots.
 
-Compared with a preconfigured Jetson Linux image, a tailored Yocto image omits unnecessary packages and services. This omission reduces storage use, limits the attack surface, and improves boot time. Layer-based configuration also helps teams reproduce, maintain, and audit product images.
+Compared with a preconfigured Jetson Linux image, a tailored Yocto image omits unnecessary packages and services. This omission reduces storage use, limits the attack surface, and improves boot time. With layer-based configuration, you can reproduce, maintain, and audit product images.
 
-The tradeoff is additional build and maintenance work. Builds can take several hours, and teams must keep JetPack, Jetson Linux, and `meta-tegra` versions aligned while managing layer compatibility, licenses, proprietary components, and device-specific flashing. 
+The tradeoff is additional build and maintenance work. Builds can take several hours. You'll need to align the JetPack, Jetson Linux, and meta-tegra versions. You'll also need to manage layer compatibility, licensing, proprietary components, and device-specific flashing.
 
 Before changing versions or adding another Jetson platform, see the [`meta-tegra` documentation](https://oe4t.github.io/master/).
 
