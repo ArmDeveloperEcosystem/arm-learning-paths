@@ -34,8 +34,8 @@ generated_summary_faq:
   faq_source_hash: 5e3e7ecd4c814788ad8a58d3019e0838c61acde90e56172965aa3bcda65b74e1
   summary: >-
     You'll explore Tinkerblox UltraEdge, an edge-native execution fabric for AI and mixed workloads on Arm
-    platforms. You'll review the UltraEdge architecture, provision a Google Axion C4A virtual machine for an
-    arm64 Yocto build, and install the UltraEdge agent and MicroPac tooling on Debian or Ubuntu. Then, you'll build and deploy MicroPac workloads, create a Yocto image for an NXP S32G-VNP-GLDBOX3 board,
+    platforms. First, you'll review the UltraEdge architecture, provision a Google Axion C4A virtual machine for an
+    `arm64` Yocto build, and install the UltraEdge agent and MicroPac tooling on Debian or Ubuntu. Then, you'll build and deploy MicroPac workloads, create a Yocto image for an `NXP S32G-VNP-GLDBOX3` board,
     and manage services with the Tinkerblox and MicroBoost CLIs. The workflows cover both package-based
     Linux installations and Yocto-based device deployments.
   faqs:
@@ -53,7 +53,7 @@ generated_summary_faq:
       tooling to define, build, validate, and install workloads.
   - question: What is required to build the Yocto image for the NXP board?
     answer: >-
-      Use the NXP S32G-VNP-GLDBOX3 platform with BSP 38.0, an AArch64 Ubuntu build host, the
+      Use the `NXP S32G-VNP-GLDBOX3` platform with BSP `38.0`, an AArch64 Ubuntu build host, the
       required Yocto layers, and the `meta-edgeblox.zip` layer requested from Tinkerblox support.
       Yocto builds can take several hours depending on the available resources.
   - question: How do I manage workloads after installing UltraEdge?

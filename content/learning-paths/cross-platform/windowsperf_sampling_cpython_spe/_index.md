@@ -34,10 +34,9 @@ generated_summary_faq:
   faq_generated_at: '2026-08-04T20:54:25Z'
   faq_source_hash: 39be992807e2925699e242a6995fa2d782afaa32ce083e51399ac64066b8f0a4
   summary: >-
-    You'll use WindowsPerf and the Arm Statistical Profiling Extension (SPE) to sample CPU instructions on
+    You'll use WindowsPerf and the Arm SPE to sample CPU instructions on
     Windows on Arm. First, you'll check SPE support in the CPU and WindowsPerf binaries, build a debug CPython
-    for AArch64, and run a compute-heavy expression. Then, you'll use `wperf sample` with a load filter while
-    the process is pinned, and use `wperf record` to start the workload and capture samples. Finally,
+    for AArch64, and run a compute-heavy expression. Then, you'll use `wperf sample` and `wperf record` to start the workload and capture samples. Finally,
     you'll review the results with source annotation and disassembly.
   faqs:
   - question: Which WindowsPerf build should I use to profile with Arm SPE?
