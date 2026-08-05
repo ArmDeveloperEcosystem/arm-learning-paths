@@ -437,7 +437,7 @@ You can now compile a binary that is portable across Armv9-A systems with SVE2, 
 
 {{%notice Please Note%}}
 
-If building a binary tuned for a Neoverse V3-based systems such as AWS Graviton 5 or the 1st generation AGI CPU, you will need `gcc` version 15 or greater to use the `-mtune=neoverse-v3` option. If you are targeting the 1st generation AGI CPU, we recommend GCC 16.1.0 or later for explicit support. However, as of August 2026, many Linux distributions do not yet provide prebuilt GCC 16.1 packages and compiling from source will take considerable time. Since this small C example does not benefit from the improvements in GCC 16.1, using the more widely available GCC 15 is sufficient.
+If building a binary tuned for a Neoverse V3-based systems such as AWS Graviton 5, you will need `gcc` version 15 or greater to use the `-mtune=neoverse-v3` option.
 
 {{%/notice%}}
 
