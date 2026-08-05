@@ -56,7 +56,7 @@ generated_summary_faq:
   - question: Which commit of the demo app repository should I check out in Android Studio?
     answer: >-
       Check out commit `7a635daae48450ff142e5c0848a564b245f04112`.
-      You might be able to use a later commit, but the Learning Path was tested with `7a635daae48450ff142e5c0848a564b245f04112`.
+      You might be able to use a later commit, but the Learning Path was tested with that specific commit.
 # END generated_summary_faq
 
 author: Koki Mitsunami

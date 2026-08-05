@@ -36,14 +36,12 @@ generated_summary_faq:
   summary: >-
     You'll capture and analyze a representative frame with Frame Advisor in Arm Performance Studio.
     First, you'll choose the graphics API, record a problem area, and inspect render passes and draw calls
-    in the Analysis view. Then, you'll use the Render Graph to find unnecessary work and Content Metrics to
-    locate complex geometry, and navigate to its draw call in the framebuffer.
+    in the Analysis view. Then, you'll use the Render Graph view to find unnecessary work. Finally, you'll use the Content Metrics view to
+    locate complex geometry and navigate to its draw call in the framebuffer.
   faqs:
   - question: How do I confirm Frame Advisor sees my device and app before capturing?
     answer: >-
       Open **New Trace** and check that your device and the target application appear in the lists.
-      If they don't appear, verify the adb connection and that you are using a debuggable build of the
-      app.
   - question: Which API setting should I choose for my application?
     answer: >-
       Select **Vulkan** for Vulkan applications and **OpenGL ES** for OpenGL ES applications. Set this

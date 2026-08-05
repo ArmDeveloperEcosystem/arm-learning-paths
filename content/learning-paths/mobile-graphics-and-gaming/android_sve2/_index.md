@@ -46,11 +46,9 @@ generated_summary_faq:
     answer: >-
       Your project should compile SVE2 intrinsics without errors and build successfully for your
       target. After you rebuild, run the app to execute both code paths and obtain timing results.
-  - question: What result should I expect from the two FMA implementations?
+  - question: What result should I expect from the two fused multiply-add (FMA) implementations?
     answer: >-
-      Given the same input vectors, both implementations should produce numerically equivalent
-      outputs. If they differ, confirm both paths receive identical data and use the same vector
-      length and data types.
+      Both FMA implementations should return the same output. The FMA implementation with SVE2 should compute the result 3 to 4 times faster than the FMA without SVE2, depending on vector length.
   - question: How many iterations should I pass to `measureExecutionTime`?
     answer: >-
       Choose a value large enough to get stable timings on your device, then keep it the same
@@ -59,7 +57,7 @@ generated_summary_faq:
   - question: What should I check if the project fails to build after enabling SVE2?
     answer: >-
       Verify you edited the correct source file and included the headers listed in the steps.
-      Then sync and rebuild the project to apply the configuration changes.
+      Then, sync and rebuild the project to apply the configuration changes.
 # END generated_summary_faq
 
 author: Dawid Borycki

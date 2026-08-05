@@ -33,8 +33,7 @@ generated_summary_faq:
   summary: >-
     You'll clone the AI camera pipelines repository, fetch assets with Git Large File System (LFS), and build the projects
     in Docker. You'll compile SME2-enabled pipelines with KleidiCV and KleidiAI, then run background
-    blur, low-light enhancement, and temporal denoising on sample inputs. Using a Python virtual
-    environment to run the applications and benchmark binaries, you'll verify that expected output
+    blur, low-light enhancement, and temporal denoising on sample inputs. Finally, you'll run the applications and benchmark binaries, and verify that expected output
     images are generated.
   faqs:
   - question: Where should I run the Docker build and which files does it use?

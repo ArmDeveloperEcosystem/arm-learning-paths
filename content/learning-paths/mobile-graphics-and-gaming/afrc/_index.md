@@ -48,10 +48,10 @@ generated_summary_faq:
       Swapchain images also require `VK_EXT_image_compression_control_swapchain`. Enable this extension
       in addition to `VK_EXT_image_compression_control` if you want fixed-rate compression on swapchain
       images.
-  - question: Can I follow this path without creating a new Vulkan sample?
+  - question: Can I follow this Learning Path without creating a new Vulkan sample?
     answer: >-
       Yes. You can use your own Vulkan application and refer to the Khronos Vulkan Samples code
-      as a reference for the steps shown.
+      as a reference.
   - question: How do I know if a specific image configuration supports fixed-rate compression?
     answer: >-
       Populate `VkImageCreateInfo` with your format, image type, tiling, and usage, then use these

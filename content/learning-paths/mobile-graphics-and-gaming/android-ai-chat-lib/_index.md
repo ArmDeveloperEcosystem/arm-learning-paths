@@ -32,9 +32,9 @@ generated_summary_faq:
   faq_generated_at: '2026-08-05T14:51:09Z'
   faq_source_hash: f9af4e5e63763a06e375e9f1d3198a4dd613f236d3cda874e7422899b73a262e
   summary: >-
-    You'll build a minimal Android chatbot that runs a local GGUF model with Arm’s AI Chat library.
+    You'll build a minimal Android chatbot that runs a local `GGUF` model with Arm’s AI Chat library.
     First, you'll configure the Android Studio project, add the Maven dependency, and create a chat
-    UI. Then, you'll connect MainActivity to load a mobile-friendly model and stream responses. Finally, you'll download
+    UI. Then, you'll connect the `MainActivity` class to load a mobile-friendly model and stream responses. Finally, you'll download
     a `GGUF` model file on the device and run the app to verify on-device output.
   faqs:
   - question: Which Gradle file should I edit to add the AI Chat dependency?

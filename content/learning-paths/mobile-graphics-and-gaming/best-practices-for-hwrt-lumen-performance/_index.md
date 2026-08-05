@@ -34,9 +34,9 @@ generated_summary_faq:
   faq_source_hash: 51b4879c8a82a6af42bc7f5d5e96a8d6fbcac673a409a8ad25c4912435791aef
   summary: >-
     You'll improve Lumen hardware ray tracing on Android devices with Arm Mali-based GPUs by refining
-    acceleration-structure contents and organization. First, you'll choose which actors to include, exclude
-    small contributors, inspect instancing with Unreal’s Ray Tracing Debug picker, and convert
-    repeated objects to instanced actors. Then, you'll check **Instance Overlap** to reduce traversal work
+    acceleration-structure contents and organization. First, you'll choose which actors to include and exclude
+    small contributors. Then, you'll inspect instancing with Unreal’s Ray Tracing Debug picker, and convert
+    repeated objects to instanced actors. Finally, you'll check **Instance Overlap** to reduce traversal work
     while preserving the intended lighting.
   faqs:
   - question: What do I need to check before applying these optimizations?

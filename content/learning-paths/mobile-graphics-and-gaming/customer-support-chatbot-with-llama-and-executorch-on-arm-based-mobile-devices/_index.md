@@ -40,9 +40,9 @@ generated_summary_faq:
   faq_source_hash: eedf979d466cc9fbcfd891c42fa892aee3f5fdfba92558849b506e282edf573e
   summary: >-
     You'll build and deploy an on-device Android customer support chatbot with Meta’s Llama 3.2,
-    ExecuTorch, and KleidiAI. First, you'll set up the environment, choose a model and quantization approach,
-    obtain Llama 3.2 1B Instruct weights, and export them to `.pte`. Then, you'll cross-compile the runner with
-    the Android NDK and enable KleidiAI through XNNPACK. Finally, you'll deploy to an Arm phone and run inference.
+    ExecuTorch, and KleidiAI. First, you'll set up the environment and choose a model and quantization approach. Then, you'll
+    obtain Llama 3.2 1B Instruct weights and export them to `.pte`. Finally, you'll cross-compile the runner with
+    the Android NDK and enable KleidiAI through XNNPACK, then deploy to an Arm phone and run inference.
   faqs:
   - question: Which Llama model variant should I download, and can I use a different one?
     answer: >-

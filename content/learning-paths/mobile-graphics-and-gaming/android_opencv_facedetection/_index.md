@@ -36,7 +36,7 @@ generated_summary_faq:
   summary: >-
     You'll build an Android app that performs face detection with OpenCV and a Haar cascade classifier.
     First, you'll configure the project, add OpenCV, retrieve camera frames, and load the pre-trained cascade.
-    Then, you'll apply the classifier to live input, deploy the app to a connected smartphone, and exercise
+    Then, you'll apply the classifier to live input. Finally, you'll deploy the app to a connected smartphone and exercise
     the detection pipeline.
   faqs:
   - question: Which Android Studio project template should I choose to follow the steps?
