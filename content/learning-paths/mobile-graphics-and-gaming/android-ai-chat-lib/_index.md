@@ -17,9 +17,53 @@ prerequisites:
 
 # START generated_summary_faq
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-05T14:51:09Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: f9af4e5e63763a06e375e9f1d3198a4dd613f236d3cda874e7422899b73a262e
+  summary_generated_at: '2026-08-05T14:51:09Z'
+  summary_source_hash: f9af4e5e63763a06e375e9f1d3198a4dd613f236d3cda874e7422899b73a262e
+  faq_generated_at: '2026-08-05T14:51:09Z'
+  faq_source_hash: f9af4e5e63763a06e375e9f1d3198a4dd613f236d3cda874e7422899b73a262e
+  summary: >-
+    You'll build a minimal Android chatbot that runs a local GGUF model with Arm’s AI Chat library.
+    First, you'll configure the Android Studio project, add the Maven dependency, and create a chat
+    UI. Then, you'll connect MainActivity to load a mobile-friendly model and stream responses. Finally, you'll download
+    a `GGUF` model file on the device and run the app to verify on-device output.
+  faqs:
+  - question: Which Gradle file should I edit to add the AI Chat dependency?
+    answer: >-
+      Add the dependency in the app module’s `build.gradle.kts`, not the project-level `build.gradle.kts`.
+      Place the implementation for `com.arm:ai-chat:0.1.0` in the dependencies block.
+  - question: How do I check my repository configuration so the library resolves?
+    answer: >-
+      Open `settings.gradle.kts` and confirm the top-level repositories include `google()` and `mavenCentral()`.
+      With both present, you can resolve the AI Chat library from Maven Central.
+  - question: Which layout file do I replace for the chat UI?
+    answer: >-
+      Replace `activity_main.xml` in `app/src/main/res/layout` with the provided XML. The XML defines a
+      status area, a message list, and a text input with a send button.
+  - question: How do I choose a GGUF model that fits my device?
+    answer: >-
+      Select a model that is significantly smaller than your phone’s available RAM. A mobile-friendly
+      example is `google_gemma-3-4b-it-Q4_0.gguf`, a Q4_0‑quantized Gemma 3 4B model that works
+      well with Arm’s KleidiAI and benefits devices with SME2, SVE2, or Neon capabilities.
+  - question: What result should I expect when I run the app?
+    answer: >-
+      After you provide the `GGUF` file on the device, you should see the app load the model and stream
+      chat responses into the message list. Check the status area during generation to confirm
+      progress.
+# END generated_summary_faq
+
 author: Ben Clark
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

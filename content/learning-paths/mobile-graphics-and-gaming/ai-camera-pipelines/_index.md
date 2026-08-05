@@ -16,9 +16,55 @@ prerequisites:
 
 # START generated_summary_faq
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-05T14:50:01Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 9fa0855615bffa32d54a2e4ec9cf61883d938b205a359e2a5d363d98412583eb
+  summary_generated_at: '2026-08-05T14:50:01Z'
+  summary_source_hash: 9fa0855615bffa32d54a2e4ec9cf61883d938b205a359e2a5d363d98412583eb
+  faq_generated_at: '2026-08-05T14:50:01Z'
+  faq_source_hash: 9fa0855615bffa32d54a2e4ec9cf61883d938b205a359e2a5d363d98412583eb
+  summary: >-
+    You'll clone the AI camera pipelines repository, fetch assets with Git Large File System (LFS), and build the projects
+    in Docker. You'll compile SME2-enabled pipelines with KleidiCV and KleidiAI, then run background
+    blur, low-light enhancement, and temporal denoising on sample inputs. Using a Python virtual
+    environment to run the applications and benchmark binaries, you'll verify that expected output
+    images are generated.
+  faqs:
+  - question: Where should I run the Docker build and which files does it use?
+    answer: >-
+      Run `docker build` from the repository root, specifying `-f docker/Dockerfile` with the build
+      context set to `docker/`. The build uses the provided Dockerfile and scripts under the `docker/`
+      directory.
+  - question: How do I fetch the large files after cloning the repository?
+    answer: >-
+      From inside the cloned repository, run `git lfs install` followed by `git lfs pull`. The commands download
+      the required large assets referenced by Git LFS.
+  - question: Where do I build the pipelines and where are the binaries placed?
+    answer: >-
+      Start a shell in the Docker container and build the pipelines there. You can find the compiled
+      executables in the project’s `bin/` directory.
+  - question: What result should I expect after running the background blur pipeline?
+    answer: >-
+      The pipeline reads the specified input image and writes a transformed image to the output
+      path you provide, for example test_output_cinematic_mode.png. Verify that the output file
+      is created without errors.
+  - question: How do I use the benchmark mode and what indicates it worked?
+    answer: >-
+      Run the provided benchmark executables in `bin/`: `cinematic_mode_benchmark`,
+      `low_light_image_enhancement_benchmark`, and `neural_denoiser_temporal_benchmark_4K`. The executables run the core loop multiple times. A
+      successful run completes without errors and allows you to observe behavior on your system.
+# END generated_summary_faq
+
 author: Arnaud de Grandmaison
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

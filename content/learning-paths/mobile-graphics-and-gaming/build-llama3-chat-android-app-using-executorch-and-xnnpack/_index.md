@@ -23,11 +23,54 @@ prerequisites:
 
 # START generated_summary_faq
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-05T14:58:01Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: a67074a2109bf0e98428dda0b2c4134bdb03aa16229cc09b899b5906f98c2ec9
+  summary_generated_at: '2026-08-05T14:58:01Z'
+  summary_source_hash: a67074a2109bf0e98428dda0b2c4134bdb03aa16229cc09b899b5906f98c2ec9
+  faq_generated_at: '2026-08-05T14:58:01Z'
+  faq_source_hash: a67074a2109bf0e98428dda0b2c4134bdb03aa16229cc09b899b5906f98c2ec9
+  summary: >-
+    You'll build and deploy an Android LLM chat app with ExecuTorch, XNNPACK, and KleidiAI on an Arm
+    smartphone. First, you'll set up an isolated Python environment, prepare a Llama 3.2 1B Instruct model,
+    and enable KleidiAI through XNNPACK for supported Arm chips. Then, you'll cross-compile the runner and
+    JNI libraries with the Android NDK, integrate them, deploy the app, and run benchmarks.
+  faqs:
+  - question: Which Python environment should I use to install ExecuTorch dependencies?
+    answer: >-
+      Use an isolated environment. You can choose either a Python virtual environment or a Conda
+      environment. You need only one environment.
+  - question: How do I obtain and prepare the Llama 3.2 1B Instruct model for ExecuTorch?
+    answer: >-
+      Request access on Meta’s Llama Downloads page and use
+      the time-limited download link you receive. Install the `llama-stack` package from `pip`, then
+      run the provided command to download the model using your download link.
+  - question: How do I know my Android NDK is set correctly before cross-compiling?
+    answer: >-
+      Set the `ANDROID_NDK` environment variable to your NDK path. Confirm that `$ANDROID_NDK/build/cmake/android.toolchain.cmake`
+      exists so CMake can locate the Android toolchain.
+  - question: What gets built when I compile for Android with KleidiAI enabled?
+    answer: >-
+      You'll build the ExecuTorch runtime and a Llama runner binary for Android, along with JNI libraries
+      for the app. Use these artifacts to run the model and execute benchmarks on the Android
+      device.
+  - question: Can I use a different Llama model instead of 3.2 1B Instruct?
+    answer: >-
+      Yes. The same instructions apply to other Llama options with minimal modification.
+# END generated_summary_faq
+
 author: 
     - Varun Chari
     - Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

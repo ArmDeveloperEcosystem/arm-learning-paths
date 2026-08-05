@@ -22,9 +22,55 @@ prerequisites:
 
 # START generated_summary_faq
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-05T14:56:50Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 3345140b8b2864925454eeaafb7f4f114893258cbac48fbc92a59da08e47fc0b
+  summary_generated_at: '2026-08-05T14:56:50Z'
+  summary_source_hash: 3345140b8b2864925454eeaafb7f4f114893258cbac48fbc92a59da08e47fc0b
+  faq_generated_at: '2026-08-05T14:56:50Z'
+  faq_source_hash: 3345140b8b2864925454eeaafb7f4f114893258cbac48fbc92a59da08e47fc0b
+  summary: >-
+    You'll build the core of a hands-free selfie Android app with MediaPipe, Kotlin Flow, CameraX, and
+    MVVM. First, you'll configure Android Studio, connect a physical device, and handle camera permissions.
+    Then, you'll add MediaPipe Tasks through a version catalog, structure UI state with ViewModel and Jetpack
+    Lifecycle, and connect asynchronous events with `SharedFlow` and `StateFlow`.
+  faqs:
+  - question: Where do I add MediaPipe versions and dependencies?
+    answer: >-
+      Add the version entry in `libs.versions.toml`. After updating the
+      catalog and syncing, Android Studio should resolve the MediaPipe artifacts so you can import
+      the corresponding classes in your code.
+  - question: How do I know my device is correctly set up for debugging?
+    answer: >-
+      Enable USB debugging on the phone, then confirm the **Allow USB debugging** dialog by selecting **Always allow from this computer** and tapping the 
+      **OK** button. If you don't see the dialog, review
+      the Android Developer guidance for setting up a device for development.
+  - question: When should I handle camera permissions in this project?
+    answer: >-
+      Handle camera permissions immediately after connecting your device and before integrating
+      AI features to avoid runtime blockers
+      when accessing the camera with CameraX later.
+  - question: How do I verify that ViewModel is preserving UI state?
+    answer: >-
+      Populate state through the `ViewModel` class, then rotate the device or trigger a configuration
+      change. The screen-level state should persist without refetching, indicating the `ViewModel`
+      is working as intended.
+  - question: Which Kotlin Flow type should I use for events versus state?
+    answer: >-
+      Use `SharedFlow` for one-time UI events that multiple subscribers may observe. Use `StateFlow`
+      for observable, current UI state that the View needs to render and react to over time.
+# END generated_summary_faq
+
 author: Han Yin
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

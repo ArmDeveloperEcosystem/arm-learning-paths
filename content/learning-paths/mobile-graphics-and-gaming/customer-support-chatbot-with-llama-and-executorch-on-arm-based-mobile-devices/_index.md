@@ -24,9 +24,50 @@ prerequisites:
 
 # START generated_summary_faq
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-05T14:58:35Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: eedf979d466cc9fbcfd891c42fa892aee3f5fdfba92558849b506e282edf573e
+  summary_generated_at: '2026-08-05T14:58:35Z'
+  summary_source_hash: eedf979d466cc9fbcfd891c42fa892aee3f5fdfba92558849b506e282edf573e
+  faq_generated_at: '2026-08-05T14:58:35Z'
+  faq_source_hash: eedf979d466cc9fbcfd891c42fa892aee3f5fdfba92558849b506e282edf573e
+  summary: >-
+    You'll build and deploy an on-device Android customer support chatbot with Meta’s Llama 3.2,
+    ExecuTorch, and KleidiAI. First, you'll set up the environment, choose a model and quantization approach,
+    obtain Llama 3.2 1B Instruct weights, and export them to `.pte`. Then, you'll cross-compile the runner with
+    the Android NDK and enable KleidiAI through XNNPACK. Finally, you'll deploy to an Arm phone and run inference.
+  faqs:
+  - question: Which Llama model variant should I download, and can I use a different one?
+    answer: >-
+      You should use the Llama 3.2 1B Instruct model. If you want to use a different model, you can adapt the same steps to other
+      variants with minimal modification.
+  - question: What output should I have after exporting the model for ExecuTorch?
+    answer: >-
+      You should produce a `.pte` file. This format is optimized for on-device inference and is
+      loadable by the ExecuTorch runtime.
+  - question: What should I check if the Android cross-compile step fails to find the toolchain?
+    answer: >-
+      Verify that `ANDROID_NDK` is set to the correct path and that `build/cmake/android.toolchain.cmake`
+      exists there. Also confirm your ExecuTorch dependencies are installed in the Python environment.
+  - question: How do I make sure KleidiAI acceleration is included in my Android build?
+    answer: >-
+      Build ExecuTorch and its libraries for Android with KleidiAI kernels enabled through XNNPACK. Use the provided CMake configuration to include these kernels.
+  - question: What result should I expect when I run the chatbot on the phone?
+    answer: >-
+      The Llama runner or chat app should load the exported model and generate responses to prompts
+      on the device.
+# END generated_summary_faq
+
 author: Parichay Das
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

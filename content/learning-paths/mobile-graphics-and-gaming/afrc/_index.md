@@ -19,9 +19,54 @@ prerequisites:
 
 # START generated_summary_faq
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-05T14:49:39Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 5c865102481efdcedc651da28eaae1e2ee3e491eb5e075a260d91065c157f44c
+  summary_generated_at: '2026-08-05T14:49:39Z'
+  summary_source_hash: 5c865102481efdcedc651da28eaae1e2ee3e491eb5e075a260d91065c157f44c
+  faq_generated_at: '2026-08-05T14:49:39Z'
+  faq_source_hash: 5c865102481efdcedc651da28eaae1e2ee3e491eb5e075a260d91065c157f44c
+  summary: >-
+    You'll enable and verify Arm Fixed Rate Compression for Vulkan images on Android. You'll confirm the
+    required Vulkan extensions, define image settings, query fixed-rate support, and request
+    compression with the appropriate `pNext` structure. Then, you'll inspect the compression state to
+    validate the setting for your images, including swapchain-specific extension requirements.
+  faqs:
+  - question: How do I check whether my device supports the required Vulkan extensions?
+    answer: >-
+      Call `vkEnumerateDeviceExtensionProperties` and look for `VK_EXT_image_compression_control`.
+      If present, add it to `VkDeviceCreateInfo.ppEnabledExtensionNames` before `vkCreateDevice`.
+  - question: What should I do differently for swapchain images?
+    answer: >-
+      Swapchain images also require `VK_EXT_image_compression_control_swapchain`. Enable this extension
+      in addition to `VK_EXT_image_compression_control` if you want fixed-rate compression on swapchain
+      images.
+  - question: Can I follow this path without creating a new Vulkan sample?
+    answer: >-
+      Yes. You can use your own Vulkan application and refer to the Khronos Vulkan Samples code
+      as a reference for the steps shown.
+  - question: How do I know if a specific image configuration supports fixed-rate compression?
+    answer: >-
+      Populate `VkImageCreateInfo` with your format, image type, tiling, and usage, then use these
+      properties to query support before creating the image. If supported, proceed to request
+      fixed-rate compression.
+  - question: How do I request and verify that fixed-rate compression is applied?
+    answer: >-
+      Provide a `VkImageCompressionControlEXT` with `VK_IMAGE_COMPRESSION_FIXED_RATE_DEFAULT_EXT`
+      in the `pNext` chain of `VkImageCreateInfo` when creating the image. Use `VK_EXT_image_compression_control`
+      to inspect the compression state and confirm that fixed-rate compression is active.
+# END generated_summary_faq
+
 author: Jose-Emilio Munoz-Lopez
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
