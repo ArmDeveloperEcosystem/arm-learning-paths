@@ -31,7 +31,7 @@ generated_summary_faq:
   faq_generated_at: '2026-08-05T14:50:01Z'
   faq_source_hash: 9fa0855615bffa32d54a2e4ec9cf61883d938b205a359e2a5d363d98412583eb
   summary: >-
-    You'll clone the AI camera pipelines repository, fetch assets with Git Large File System (LFS), and build the projects
+    You'll clone the AI camera pipelines repository, fetch assets with Git Large File Storage (LFS), and build the projects
     in Docker. You'll compile SME2-enabled pipelines with KleidiCV and KleidiAI, then run background
     blur, low-light enhancement, and temporal denoising on sample inputs. Finally, you'll run the applications and benchmark binaries, and verify that expected output
     images are generated.
