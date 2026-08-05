@@ -8,7 +8,8 @@ layout: learningpathall
 
 ## What is CSIR-PGO?
 
-Context-sensitive IR PGO (CSIR-PGO) extends IR-PGO with a second instrumented build and training run. Clang adds the second set of counters after inlining. The resulting profile can distinguish the behavior of an inlined function in different calling contexts.
+Context-sensitive IR PGO (CSIR-PGO) extends IR-PGO by adding a second, context-sensitive profiling pass.
+The first pass is the standard IR-PGO instrumentation pass. The second pass instruments the program after inlining, which enables LLVM to distinguish execution counts from different calling contexts.
 
 The additional context can improve optimization when a function's behavior depends on its call site. It does not guarantee better performance for every program.
 
