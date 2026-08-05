@@ -64,7 +64,7 @@ generated_summary_faq:
       is working as intended.
   - question: Which Kotlin Flow type should I use for events versus state?
     answer: >-
-      Use `SharedFlow` for one-time UI events that multiple subscribers may observe. Use `StateFlow`
+      Use `SharedFlow` for one-time UI events that multiple subscribers might observe. Use `StateFlow`
       for observable, current UI state that the View needs to render and react to over time.
 # END generated_summary_faq
 

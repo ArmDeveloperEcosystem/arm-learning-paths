@@ -52,7 +52,7 @@ generated_summary_faq:
   - question: What result should I expect after running the background blur pipeline?
     answer: >-
       The pipeline reads the specified input image and writes a transformed image to the output
-      path you provide, for example test_output_cinematic_mode.png. Verify that the output file
+      path you provide, for example `test_output_cinematic_mode.png`. Verify that the output file
       is created without errors.
   - question: How do I use the benchmark mode and what indicates it worked?
     answer: >-

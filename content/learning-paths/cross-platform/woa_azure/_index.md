@@ -30,8 +30,8 @@ generated_summary_faq:
   faq_generated_at: '2026-08-04T20:55:10Z'
   faq_source_hash: ffcb7c740ebfdacb47349150c321972b9cf0a9b43e36592da833a588b65293f6
   summary: >-
-    You'll deploy a Windows on Arm VM in Microsoft Azure using the Azure Marketplace. First, you'll configure a VM using Azure portal, allowing Remote Desktop Protocol (RDP) access. After deployment, you'll connect the VM
-    with an RDP client. You can use the same workflow to launch a Linux image when you select a
+    You'll deploy a Windows on Arm VM in Microsoft Azure using the Azure Marketplace. First, you'll configure and deploy a VM using Azure portal. After deployment, you'll connect the VM
+    with a Remote Desktop Protocol (RDP) client. You can use the same workflow to launch a Linux image when you select a
     Linux distribution instead of Windows.
   faqs:
   - question: Which Azure subscription should I use to create the VM?

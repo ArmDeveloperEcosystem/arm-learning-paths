@@ -41,7 +41,7 @@ generated_summary_faq:
   faqs:
   - question: Which WindowsPerf build should I use to profile with Arm SPE?
     answer: >-
-      Use the SPE-enabled build included in WindowsPerf release 3.8.0. Download the release asset
+      Use the SPE-enabled build included in WindowsPerf release `3.8.0`. Download the release asset
       and select the WindowsPerf build in the `SPE/` subdirectory.
   - question: Do I need a debug build of CPython for this path?
     answer: >-

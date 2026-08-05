@@ -114,8 +114,7 @@ preserve the generated metadata, source hashes, timestamps, control flags, and
 body content.
 
 Do not invent commands, compatibility claims, performance results, tools, or
-prerequisites. Always rely on the Learning Path for information. If the source is ambiguous, preserve the narrower claim and
-report the uncertainty. 
+prerequisites. Unless there is a glaring technical issue, focus entirely on editorial fixes. Rely on the Learning Path as the source of technical truth. 
 
 ## Validation
 
