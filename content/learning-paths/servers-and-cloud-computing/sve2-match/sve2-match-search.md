@@ -433,11 +433,22 @@ int main(int argc, char **argv) {
 
 ## Compiling and Running
 
-You can now compile the different search implementations:
+You can now compile a binary that is portable across Armv9-A systems with SVE2, while tuning it for a specific Neoverse version:
 
-```bash
-gcc -O3 -march=armv9-a+sve2 -mcpu=neoverse-v2 sve2_match_demo.c -o sve2_match_demo
-```
+{{%notice Please Note%}}
+
+If building a binary tuned for a Neoverse V3-based systems such as AWS Graviton 5 or the 1st generation AGI CPU, you will need `gcc` version 15 or greater to use the `-mtune=neoverse-v3` option. If you are targeting the 1st generation AGI CPU, we recommend GCC 16.1.0 or later for explicit support. However, as of August 2026, many Linux distributions do not yet provide prebuilt GCC 16.1 packages and compiling from source will take considerable time. Since this small C example does not benefit from the improvements in GCC 16.1, using the more widely available GCC 15 is sufficient.
+
+{{%/notice%}}
+
+{{< tabpane code=true >}}
+{{< tab header="tune for Neoverse V2" >}}
+gcc -O3 -march=armv9-a+sve2 -mtune=neoverse-v2 sve2_match_demo.c -o sve2_match_demo
+{{< /tab >}}
+{{< tab header="tune for Neoverse V3" >}}
+gcc -O3 -march=armv9-a+sve2 -mtune=neoverse-v3 sve2_match_demo.c -o sve2_match_demo
+{{< /tab >}}
+{{< /tabpane >}}
 
 Run the benchmark on a dataset of 65,536 elements (2^16) with a 0.001% hit rate:
 
@@ -582,4 +593,3 @@ For image processing, MATCH can accelerate:
 ## Conclusion
 
 The SVE2 MATCH instruction provides a powerful way to accelerate search operations in byte and half word arrays. By implementing these optimizations on cloud instances with SVE2, you can achieve significant performance improvements for your applications.
-
