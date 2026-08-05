@@ -450,10 +450,10 @@ gcc -O3 -march=armv9-a+sve2 -mtune=neoverse-v3 sve2_match_demo.c -o sve2_match_d
 {{< /tab >}}
 {{< /tabpane >}}
 
-Run the benchmark on a dataset of 65,536 elements (2^16) with a 0.001% hit rate:
+Run the benchmark on a dataset of 65,536 elements (2^16) with a 0.001% hit rate for 10,000 iterations:
 
 ```bash
-./sve2_match_demo $((1<<16)) 3 0.00001
+./sve2_match_demo $((1<<16)) 10000 0.00001
 ```
 
 The output is similar to:
