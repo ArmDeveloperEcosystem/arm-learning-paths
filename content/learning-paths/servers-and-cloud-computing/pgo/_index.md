@@ -13,7 +13,7 @@ who_is_this_for: This is an introductory topic for developers who compile C or C
 
 learning_objectives:
     - Explain how Link-Time Optimization (LTO) and Profile-Guided Optimization (PGO) guide LLVM optimizations
-    - Build and verify Full-LTO and Thin-LTO binaries with Clang on AArch64
+    - Build Full-LTO and Thin-LTO binaries with Clang on AArch64
     - Generate and inspect sample-based and instrumentation-based profiles
     - Use each profile type to build and run an optimized example application
 
