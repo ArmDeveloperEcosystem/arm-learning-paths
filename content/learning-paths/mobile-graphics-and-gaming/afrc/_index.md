@@ -18,56 +18,10 @@ prerequisites:
     - A Vulkan application that creates and uses images. This Learning Path shows how to use an API Sample in the [Khronos Vulkan Samples repository](https://github.com/KhronosGroup/Vulkan-Samples/blob/main/scripts/README.adoc#generate-api-sample) as an example.
 
 # START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-08-04T22:09:18Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 5c865102481efdcedc651da28eaae1e2ee3e491eb5e075a260d91065c157f44c
-  summary_generated_at: '2026-08-04T22:09:18Z'
-  summary_source_hash: 5c865102481efdcedc651da28eaae1e2ee3e491eb5e075a260d91065c157f44c
-  faq_generated_at: '2026-08-04T22:09:18Z'
-  faq_source_hash: 5c865102481efdcedc651da28eaae1e2ee3e491eb5e075a260d91065c157f44c
-  summary: >-
-    You enable and use Arm Fixed Rate Compression (AFRC) in Vulkan
-    on Android. You start by enabling the required Vulkan extensions, using VK_EXT_image_compression_control
-    to verify default compression and request fixed-rate compression, and adding VK_EXT_image_compression_control_swapchain
-    for swapchain images. You then use intended VkImageCreateInfo properties to query whether
-    a given image configuration supports fixed-rate compression. With support confirmed, you request
-    AFRC by chaining VkImageCompressionControlEXT to VkImageCreateInfo and setting the fixed-rate
-    default flag before creating the image. You use a Vulkan API Sample as a reference so
-    you can experiment and validate that compression settings are applied on a supported device.
-  faqs:
-  - question: Which Vulkan extensions should I enable for fixed-rate compression?
-    answer: >-
-      Enable VK_EXT_image_compression_control to verify compression and request fixed-rate compression.
-      For swapchain images, also enable VK_EXT_image_compression_control_swapchain.
-  - question: How do I check if my device supports the required extensions?
-    answer: >-
-      Call vkEnumerateDeviceExtensionProperties and look for the needed extension names. If present,
-      add them to VkDeviceCreateInfo.ppEnabledExtensionNames before calling vkCreateDevice.
-  - question: How do I know if a specific image configuration supports fixed-rate compression?
-    answer: >-
-      Define the image’s intended VkImageCreateInfo properties and use them to query for fixed-rate
-      compression support on your platform. Continue only if the query indicates support for that
-      configuration.
-  - question: Where do I request AFRC during image creation?
-    answer: >-
-      Provide a VkImageCompressionControlEXT in the pNext chain of VkImageCreateInfo and set flags
-      to VK_IMAGE_COMPRESSION_FIXED_RATE_DEFAULT_EXT. Then create the image with vkCreateImage.
-  - question: How can I verify that compression was applied?
-    answer: >-
-      Use VK_EXT_image_compression_control to check whether compression (including default or
-      requested fixed-rate) was applied. Inspect the reported compression information to confirm
-      your request was honored.
-# END generated_summary_faq
 
 author: Jose-Emilio Munoz-Lopez
 
-generate_summary_faq: false
+generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
