@@ -95,8 +95,8 @@ eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
 Before you can install packages from the default Anaconda channels, accept the Terms of Service:
 
 ```bash
-conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
-conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
+$HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+$HOME/anaconda3/bin/conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 ```
 
 ## Get started with Anaconda 
