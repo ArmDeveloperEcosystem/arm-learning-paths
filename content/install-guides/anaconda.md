@@ -61,11 +61,11 @@ sudo amazon-linux-extras install mate-desktop1.x
 To download Anaconda Distribution, run:
 
 {{% notice Note %}}
-The following commands use Anaconda version 2025.12.2. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Anaconda Distribution release notes](https://www.anaconda.com/docs/getting-started/anaconda/release-notes).
+The following commands use Anaconda version 2026.07-1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Anaconda Distribution release notes](https://www.anaconda.com/docs/getting-started/anaconda/release-notes).
 {{% /notice %}}
 
 ```bash
-curl -O https://repo.anaconda.com/archive/Anaconda3-2025.12-2-Linux-aarch64.sh
+curl -O https://repo.anaconda.com/archive/Anaconda3-2026.07-1-Linux-aarch64.sh
 ```
 
 Depending on the version, the downloaded filename will be of the form `Anaconda3-20XX.YY-Linux-aarch64.sh` where the `XX` and `YY` values represent the year and month of the latest release. 
@@ -79,7 +79,7 @@ The default installation directory is `$HOME/anaconda3`. Change the installation
 To review the license terms before accepting, remove `-b`.
 
 ```bash
-sh ./Anaconda3-2025.12-2-Linux-aarch64.sh -b
+sh ./Anaconda3-2026.07-1-Linux-aarch64.sh -b
 ```
 
 The install takes a couple of minutes to complete.
@@ -88,6 +88,15 @@ The batch installation won't set up the shell. To set up the shell, run:
 
 ```bash
 eval "$($HOME/anaconda3/bin/conda shell.bash hook)"
+```
+
+### Accept the Anaconda Terms of Service
+
+Before you can install packages from the default Anaconda channels, accept the Terms of Service:
+
+```bash
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
+conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
 ```
 
 ## Get started with Anaconda 
@@ -170,7 +179,7 @@ python ./pytorch.py
 The output is similar to:
 
 ```output
-2.1.0
+2.12.0
 tensor([[0.9287, 0.5931, 0.0239],
         [0.3402, 0.9447, 0.8897],
         [0.3161, 0.3749, 0.6848],

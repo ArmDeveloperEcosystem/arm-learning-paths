@@ -2,7 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Docker Desktop for Arm Linux
-description: Install Docker Desktop on Arm Linux and verify the setup so you can run container workflows with the Docker Desktop environment.
+description: Install Docker Desktop on arm64 Arm Linux and verify the setup so you can run container workflows with the Docker Desktop graphical environment.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -27,7 +27,7 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 ## Install Docker Desktop for Arm Linux
 
-Docker Desktop is available for Arm Linux, but not yet documented.
+Docker Desktop provides a graphical interface for managing containers, images, and volumes. It bundles Docker Engine, Docker CLI, Docker Compose, and Kubernetes into a single install. On Arm Linux, Docker Desktop runs a lightweight VM using KVM, giving you the same container development experience available on macOS and Windows.
 
 To make sure you are on an Arm Linux computer, run:
 
@@ -50,14 +50,10 @@ sudo usermod -aG docker $USER ; newgrp docker
 
 After installing Docker Engine, you can download and install Docker Desktop on Ubuntu and Debian distributions. 
 
-{{% notice Note %}}
-The following command uses Docker Desktop version 4.70.0 for Debian. The same command works with other versions. Replace the download link used in this step with the link for your version of choice. To find the latest version, see [Docker Desktop release notes](https://docs.docker.com/desktop/release-notes/). Replace the instances of `amd64` in the download URL with `arm64`.
-{{% /notice %}}
-
-For example:
+Download Docker Desktop:
 
 ```console
-wget https://desktop.docker.com/linux/main/arm64/224270/docker-desktop-arm64.deb
+wget https://desktop.docker.com/linux/main/arm64/docker-desktop-arm64.deb
 ```
 
 Install Docker Desktop using:
@@ -70,6 +66,8 @@ The Docker icon is now available to start Docker Desktop.
 
 ![A screenshot of applications on a Linux desktop with an icon for Docker Desktop #center](/install-guides/_images/docker-icon.png)
 
+## Verify Docker Desktop is installed
+
 To print the Docker Desktop version, run:
 
 ```console
@@ -79,21 +77,21 @@ docker version
 The output depends on your version and is similar to:
 
 ```output
-Server: Docker Desktop 4.70.0 (224270)
+Server: Docker Desktop 4.85.0 (235549)
  Engine:
-  Version:          29.4.0
-  API version:      1.54 (minimum version 1.40)
-  Go version:       go1.26.1
-  Git commit:       daa0cb7
-  Built:            Tue Apr  7 08:36:25 2026
+  Version:          29.7.1
+  API version:      1.55 (minimum version 1.40)
+  Go version:       go1.26.5
+  Git commit:       c5b8ce9
+  Built:            Fri Jul 31 17:07:22 2026
   OS/Arch:          linux/arm64
   Experimental:     false
  containerd:
-  Version:          v2.2.1
-  GitCommit:        dea7da592f5d1d2b7755e3a161be07f43fad8f75
+  Version:          v2.2.6
+  GitCommit:        11ce9d5f3c68c941867e82890e93e815c1304f1b
  runc:
-  Version:          1.3.4
-  GitCommit:        v1.3.4-0-gd6d73eb8
+  Version:          1.3.6
+  GitCommit:        v1.3.6-0-g491b69ba
  docker-init:
   Version:          0.19.0
   GitCommit:        de40ad0
