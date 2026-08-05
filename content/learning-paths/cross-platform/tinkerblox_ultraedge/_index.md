@@ -51,7 +51,7 @@ generated_summary_faq:
     answer: >-
       Yes. Install and activate the UltraEdge agent on Debian or Ubuntu, then use MicroPac
       tooling to define, build, validate, and install workloads.
-  - question: What is required to build the Yocto image for the NXP board?
+  - question: What are the requirements for building the Yocto image for the NXP board?
     answer: >-
       Use the `NXP S32G-VNP-GLDBOX3` platform with BSP `38.0`, an AArch64 Ubuntu build host, the
       required Yocto layers, and the `meta-edgeblox.zip` layer requested from Tinkerblox support.
