@@ -15,7 +15,7 @@ To connect to the Alif Ensemble E8 DevKit:
 
 3. Connect a USB-C cable from your computer to the PRG USB port on the bottom edge of the DevKit.
 
-![PRG USB Port Location alt-text#center](prg-usb-port.png "Connect USB-C cable to the PRG USB port")
+![Close-up of the Alif Ensemble E8 DevKit showing a USB-C cable connected to the PRG USB port; the separate MCU USB port is visible below#center](prg-usb-port.png "USB-C cable connected to the PRG USB port")
 
 4. Confirm that a green LED illuminates near the E1 device and the UART switch (SW4).
 

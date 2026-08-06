@@ -22,10 +22,62 @@ prerequisites:
 
 author_primary: Waheed Brown
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-06T16:38:27Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: a8c3641566a9b8fc3c599a6ea72b54b311f6822f9e761b7de834c37b9a57540b
+  summary_generated_at: '2026-08-06T16:38:27Z'
+  summary_source_hash: a8c3641566a9b8fc3c599a6ea72b54b311f6822f9e761b7de834c37b9a57540b
+  faq_generated_at: '2026-08-06T16:38:27Z'
+  faq_source_hash: a8c3641566a9b8fc3c599a6ea72b54b311f6822f9e761b7de834c37b9a57540b
+  summary: >-
+    You'll run MNIST digit classification on an Alif Ensemble E8 DevKit with ExecuTorch and Ethos-U85
+    acceleration. First, you'll connect and configure the board, optionally use Docker to train and export a
+    PyTorch model to ExecuTorch `.pte`, and prepare the firmware artifacts. Then, you'll configure CMSIS
+    project files, memory layout, and linker scripts, and build and flash the firmware. Finally, you'll
+    run inference on the Ethos-U85 NPU and monitor the results with SEGGER Real-Time Transfer.
+  faqs:
+  - question: What should I check on the DevKit before connecting it to my computer?
+    answer: >-
+      Before you connect the DevKit, unplug all USB cables before changing any jumpers.  Verify
+      that the jumpers match the factory defaults documented in the DK-E8 User Guide. This helps
+      you avoid power or boot issues during setup.
+  - question: Which USB port do I use for programming, and how do I confirm the board is powered?
+    answer: >-
+      Connect a USB-C cable to the PRG USB port on the bottom edge of the DevKit. You can confirm
+      that the board has power when a green LED illuminates near the E1 device.
+  - question: Do I need to set up Docker for this workflow?
+    answer: >-
+      Use Docker only if you plan to train and export the MNIST model to ExecuTorch format yourself.
+      If you use the provided `.pte` file, skip the Docker setup and model export, and proceed to preparing the
+      firmware artifacts.
+  - question: What files must be ready before building the firmware, and where do they come from?
+    answer: >-
+      You need `mnist_ethos_u85.pte` and `et_bundle.tar.gz`. If you completed the optional export,
+      you can find them in `~/mnist_alif/executorch-alif/output/`. Otherwise, download the provided
+      artifacts into your output directory.
+  - question: How do I verify that inference is running as expected on the NPU?
+    answer: >-
+      Run the firmware and monitor its output with SEGGER Real-Time Transfer. You should see the
+      firmware load `mnist_ethos_u85.pte`, execute inference on the Ethos-U85 NPU, and report a
+      predicted digit in the RTT console.
+# END generated_summary_faq
+
 author:
     - Waheed Brown
     - Fidel Makatia Omusilibwa
     - Kwashie Andoh
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
+
 
 ### Tags
 skilllevels: Introductory
