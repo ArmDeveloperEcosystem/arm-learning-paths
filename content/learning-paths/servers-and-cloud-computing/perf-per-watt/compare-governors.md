@@ -50,9 +50,7 @@ Configure the `powersave` governor and verify that all policies changed:
 
 ```bash
 sudo ./set-governor.sh powersave
-
-grep -h . /sys/devices/system/cpu/cpufreq/policy*/scaling_governor \
-    | sort -u
+grep -h . /sys/devices/system/cpu/cpufreq/policy*/scaling_governor | sort -u
 ```
 
 The expected output is:

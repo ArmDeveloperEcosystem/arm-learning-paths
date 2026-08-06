@@ -9,11 +9,11 @@ layout: learningpathall
 
 ## Understand the measurement boundary
 
-This Learning Path measures power reported by the processor's Linux hwmon driver. On the System76 Thelio Astra, the `apm_xgene` driver exposes separate CPU and I/O power channels.
+This Learning Path measures power reported by the processor's Linux hwmon driver. On the [System76 Thelio Astra](https://system76.com/desktops/thelio-astra), the `apm_xgene` driver exposes separate CPU and I/O power channels. The same process can be applied to other Arm Linux systems. 
 
 Adding these channels gives an estimate of system-on-chip (SoC) power. It does not include all power drawn by the workstation. Memory, storage, fans, voltage-conversion losses, and the power supply can consume additional power.
 
-Use the results to compare configurations on the same system. Don't compare the values directly with wall-power measurements or published server power figures.
+Use the results to compare configurations on the same system. 
 
 ## Install the required software
 
@@ -41,7 +41,7 @@ If a binary is found, create a symlink so that it is available on the PATH:
 sudo ln -sf $(find /usr/lib/linux-*tools* -name cpupower | head -1) /usr/local/bin/cpupower
 ```
 
-This situation is common on systems with custom kernels, such as System76 machines, where the kernel version does not match an available `linux-tools` package. See the [Perf install guide](/install-guides/perf/) for more details on kernel-tools version mismatches.
+This situation is common on systems with custom kernels, where the kernel version does not match an available `linux-tools` package. See the [Perf install guide](/install-guides/perf/) for more details on kernel-tools version mismatches.
 {{% /notice %}}
 
 Confirm that OpenSSL, Python 3, and `cpupower` are available:
@@ -58,6 +58,7 @@ The output is similar to:
 OpenSSL 3.0.13 30 Jan 2024 (Library: OpenSSL 3.0.13 30 Jan 2024)
 Python 3.12.3
 cpupower 7.0.12
+Report errors and bugs to linux-pm@vger.kernel.org, please.
 ```
 
 Record the complete OpenSSL build information with the benchmark results:

@@ -141,11 +141,15 @@ Inspect the first records:
 head telemetry-test.csv
 ```
 
-The output uses this format:
+The output is similar to:
 
 ```output
 timestamp,epoch_seconds,avg_freq_khz,cpu_power_w,io_power_w,soc_power_w,soc_temp_c,cpu_fan_rpm,intake_fan_rpm
-<ISO timestamp>,<epoch seconds>,<average frequency>,<CPU power>,<I/O power>,<SoC power>,<SoC temperature>,<CPU fan>,<intake fan>
+2026-08-06T09:47:56-05:00,1786027676.633482916,1109099,12.240000,8.025000,20.265000,36.000,1065,720
+2026-08-06T09:47:57-05:00,1786027677.708797530,1031262,12.280000,8.024000,20.304000,36.000,1065,735
+2026-08-06T09:47:58-05:00,1786027678.783871620,1018438,12.360000,8.024000,20.384000,36.000,1065,735
+2026-08-06T09:47:59-05:00,1786027679.863988207,1025325,12.360000,8.025000,20.385000,36.000,1065,720
+2026-08-06T09:48:00-05:00,1786027680.940551795,1006262,12.360000,8.025000,20.385000,36.000,1065,735
 ```
 
 Your values will differ. Confirm that each row has nine fields and that power, temperature, and fan readings are nonzero.
@@ -172,7 +176,7 @@ The logger records these values:
 | `cpu_fan_rpm` | CPU fan speed |
 | `intake_fan_rpm` | Chassis intake fan speed |
 
-The average frequency is a system-wide summary. It doesn't show whether individual CPUs ran at different frequencies, but it is sufficient for comparing all-core OpenSSL runs.
+The average frequency is a system-wide summary. It doesn't show whether individual CPUs ran at different frequencies, but it is sufficient for comparing OpenSSL runs using all cores.
 
 ## What you've accomplished
 

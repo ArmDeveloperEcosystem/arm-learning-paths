@@ -58,7 +58,7 @@ The Thelio Astra example uses the `cppc_cpufreq` driver. It exposes a range from
 conservative ondemand userspace powersave performance schedutil
 ```
 
-The `userspace` governor isn't useful when `scaling_setspeed` reports `unsupported`. This Learning Path uses `powersave`, `schedutil`, and `performance`.
+This Learning Path uses `powersave`, `schedutil`, and `performance`.
 
 The `boost` attribute reports `0` because Arm Neoverse server CPUs maintain sustained performance across the full frequency range rather than using a temporary boost mode above the configured maximum.
 
@@ -72,7 +72,7 @@ Display the frequency information for the current CPU:
 cpupower frequency-info
 ```
 
-The output summarizes the driver, governor, frequency range, and hardware limits in one view:
+The output summarizes the driver, governor, frequency range, and hardware limits in one view. The CPU number in the first line depends on which CPU the `cpupower` process was scheduled on and varies between runs:
 
 ```output
 analyzing CPU 43:
@@ -100,6 +100,8 @@ The rest of this Learning Path reads and writes sysfs files directly because the
 
 ## Locate the hwmon devices
 
+The Linux hardware monitoring (hwmon) subsystem exposes sensor data such as power, temperature, and fan speed through sysfs. Each hardware monitoring chip or driver registers as a separate hwmon device.
+
 The hwmon directory numbers can change after a kernel update or reboot. Identify devices by reading their `name` files instead of assuming fixed numbers:
 
 ```bash
@@ -117,6 +119,17 @@ The output on a Thelio Astra includes:
 /sys/class/hwmon/hwmon2: system76_thelio_io
 /sys/class/hwmon/hwmon3: hidpp_battery_0
 ```
+
+Each device provides different sensor data:
+
+| Device | Description |
+| --- | --- |
+| `nvme` | NVMe storage drive temperature |
+| `apm_xgene` | Ampere processor power and temperature sensors |
+| `system76_thelio_io` | System76 chassis controller for fan speed and PWM |
+| `hidpp_battery_0` | Logitech wireless peripheral battery level |
+
+This Learning Path uses `apm_xgene` for SoC power and temperature, and `system76_thelio_io` for fan speed.
 
 Find the directory that contains the Ampere processor sensors:
 
@@ -150,11 +163,17 @@ The output is similar to:
 /sys/class/hwmon/hwmon1/temp1_input:37000
 ```
 
-The hwmon subsystem reports power in microwatts and temperature in millidegrees Celsius. For the sample values:
+Each sensor has a `_label` file that describes what it measures and a corresponding `_input` file that holds the current reading. The naming convention uses a type prefix (`power` or `temp`) followed by a channel number. The hwmon subsystem reports power in microwatts and temperature in millidegrees Celsius.
 
-- CPU power is 12.2 W
-- I/O power is 8.025 W
-- SoC temperature is 37°C
+For the sample values:
+
+| File | Raw value | Converted |
+| --- | ---: | --- |
+| `power1_input` (CPU power) | 12200000 µW | 12.2 W |
+| `power2_input` (I/O power) | 8025000 µW | 8.025 W |
+| `temp1_input` (SoC Temperature) | 37000 m°C | 37°C |
+
+SoC power is the sum of CPU and I/O power. It doesn't represent total system or wall power because it excludes memory, storage, fans, and power-supply losses.
 
 ## Inspect fan telemetry
 
@@ -185,6 +204,12 @@ The output is similar to:
 /sys/class/hwmon/hwmon2/pwm4:85
 ```
 
+The `fan*_label` files identify each fan header on the chassis. The `fan*_input` files report the current speed in RPM. A value of `0` means the fan is either not connected or not spinning.
+
+The `pwm*` files control fan duty cycle on a scale from 0 (off) to 255 (full speed). A value of `85` corresponds to about 33% duty cycle. The chassis firmware manages PWM automatically based on temperature.
+
+This Learning Path records CPU fan and intake fan RPM as secondary telemetry. The GPU and auxiliary fans aren't connected on this system.
+
 Record fan speed during each experiment, but leave the fan policy unchanged. Changing frequency and fan control at the same time makes it difficult to identify which setting caused a temperature or performance difference.
 
 ## Check whether the sensors update
@@ -199,11 +224,21 @@ sensor_dir=$(for device in /sys/class/hwmon/hwmon*; do
     fi
 done)
 
+printf '%s %s %s %s\n' "timestamp" "cpu_power_uw" "io_power_uw" "soc_temp_mc"
 for sample in $(seq 1 10); do
     printf '%s ' "$(date --iso-8601=seconds)"
     grep -h . "$sensor_dir"/power*_input "$sensor_dir"/temp*_input | xargs
     sleep 1
 done
+```
+
+Each row prints a timestamp followed by three raw sensor values: CPU power in microwatts, I/O power in microwatts, and SoC temperature in millidegrees Celsius. The output is similar to:
+
+```output
+timestamp cpu_power_uw io_power_uw soc_temp_mc
+2025-06-15T10:30:01+00:00 12200000 8025000 37000
+2025-06-15T10:30:02+00:00 12350000 8010000 37000
+2025-06-15T10:30:03+00:00 12180000 8030000 37500
 ```
 
 The values should change as background activity changes. A sensor that never updates isn't suitable for measuring workload energy.

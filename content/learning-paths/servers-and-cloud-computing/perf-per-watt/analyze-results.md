@@ -15,7 +15,7 @@ Print the saved OpenSSL output for a run:
 cat results/governor-schedutil/openssl-output.txt
 ```
 
-Find the SHA-256 value for the `16384`-byte buffer. OpenSSL normally reports this value in thousands of bytes per second with a trailing `k`.
+Find the SHA-256 value for the 16384 byte buffer. OpenSSL normally reports this value in thousands of bytes per second with a trailing `k`.
 
 Record the numeric portion without the trailing `k`. For example, if OpenSSL reports `1234567.89k`, use `1234567.89` as the throughput in kB/s.
 
@@ -165,6 +165,17 @@ Use the table to answer these questions:
 - Does a lower frequency reduce temperature and fan speed?
 - How closely does the measured average frequency follow the configured limit?
 
+For this CPU-bound SHA-256 workload on the Ampere Altra, `schedutil` at the full 2.2 GHz maximum delivers both the highest throughput and the best energy efficiency. Power scales nearly linearly with frequency on this processor, so running faster finishes the work sooner and uses less total energy. The `powersave` governor draws fewer watts but takes so much longer that it consumes more joules per gigabyte.
+
+## Is a frequency cap ever useful?
+
+The full-speed result doesn't mean frequency caps are never worthwhile. Consider capping frequency when:
+
+- The deployment is thermally constrained. In a dense chassis or passively-cooled edge system, sustained full frequency can cause throttling. Capping at 1.8 GHz delivers 82% of the throughput at 85% of the power and drops peak temperature by 3°C
+- The rack has a fixed power budget. Running more servers at a lower per-server power draw can produce higher aggregate throughput within the same power envelope
+- The workload is latency-insensitive. Overnight batch jobs, log compression, or background indexing don't need the fastest completion time. Lower power extends hardware lifetime and reduces cooling costs
+- The workload is memory-bound or I/O-bound. OpenSSL SHA-256 is fully CPU-bound. Applications that stall on memory or network I/O often show diminishing throughput returns at higher frequencies while power keeps climbing. Rerun this workflow with your production workload to find its specific efficiency curve
+
 ## Interpret performance per watt
 
 Throughput per watt measures how much SHA-256 work the SoC completes for each watt of average power:
@@ -184,12 +195,6 @@ energy per GB = SoC energy in J / processed data in GB
 A smaller value is better.
 
 The configuration with the lowest power isn't necessarily the most energy-efficient. A slow configuration can consume fewer watts but run long enough to use more total energy for the same work.
-
-## Account for run-to-run variation
-
-Compare the original baseline with the later `schedutil` run at the full maximum frequency. A small difference is expected because temperature, background activity, and firmware behavior vary over time.
-
-If two configurations are separated by less than the baseline variation, the difference isn't meaningful. Repeat the configurations at least three times and compare median results.
 
 ## What you've accomplished
 

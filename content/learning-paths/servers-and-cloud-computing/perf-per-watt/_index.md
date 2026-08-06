@@ -13,7 +13,7 @@ who_is_this_for: This is an advanced topic for software developers and performan
 
 learning_objectives:
     - Discover CPU frequency controls and power, temperature, and fan sensors on an Arm Linux system
-    - Collect synchronized CPU frequency, SoC power, temperature, and fan telemetry during a workload
+    - Collect synchronized CPU frequency, power, temperature, and fan telemetry during a workload
     - Compare Linux CPUFreq governors and maximum-frequency limits using a repeatable OpenSSL workload
     - Calculate throughput per watt and energy consumed per unit of work
 

@@ -11,7 +11,7 @@ layout: learningpathall
 
 The OpenSSL `speed` command measures cryptographic throughput without downloading a dataset or building an application. SHA-256 provides a CPU-intensive server workload with a direct result in bytes processed per second.
 
-Use a fixed `16384`-byte buffer so every run performs the same operation. Use one OpenSSL worker per online CPU to load the full processor.
+Use a fixed 16384 byte buffer so every run performs the same operation. Use one OpenSSL worker per online CPU to load the full processor.
 
 ## Create the workload runner
 
@@ -88,12 +88,6 @@ scaling_min_freq:1000000
 scaling_max_freq:2200000
 ```
 
-If the values differ, restore the saved settings:
-
-```bash
-./restore-cpufreq.sh
-```
-
 ## Run the baseline workload
 
 Allow the system to remain idle for 60 seconds before the run:
@@ -103,7 +97,7 @@ sleep 60
 sudo ./run-openssl.sh baseline-schedutil 90
 ```
 
-The final OpenSSL table contains the aggregate SHA-256 throughput for the `16384`-byte buffer size. Keep the complete output file because OpenSSL output formatting can vary between versions.
+The final OpenSSL table contains the aggregate SHA-256 throughput for the 16384 byte buffer size. Keep the complete output file because OpenSSL output formatting can vary between versions.
 
 List the files captured for the run:
 
