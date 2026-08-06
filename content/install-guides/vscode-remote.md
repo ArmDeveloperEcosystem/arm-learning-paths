@@ -1,7 +1,7 @@
 ---
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
-title: VS Code Server
+title: Visual Studio Code Server
 
 draft: true
 
@@ -34,7 +34,10 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-VS Code Server is a built-in feature of VS Code that runs a web-based instance on a remote machine, accessible from any browser. You start it with the `code serve-web` command. Unlike [VS Code Tunnels](/install-guides/vscode-tunnels/), VS Code Server doesn't need a GitHub account or a connection to Microsoft's tunnel service. All traffic stays between your local machine and the remote server.
+Visual Studio Code (VS Code) Server is a built-in feature of VS Code that runs a web-based instance on a remote machine, accessible from any browser.  
+
+Unlike [VS Code Tunnels](/install-guides/vscode-tunnels/), VS Code Server doesn't need a GitHub account or a connection to Microsoft's tunnel service. All traffic stays between your local machine and the remote server.
+
 
 Use cases for VS Code Server include:
 - Remote Arm Linux servers, including cloud instances, with no Linux desktop installed
@@ -58,13 +61,13 @@ The output should be:
 aarch64
 ```
 
-If you see a different result, you are not using an Arm computer running 64-bit Linux.
+If you see a different result, you're not using an Arm computer running 64-bit Linux.
 
 You also need SSH access to the remote machine.
 
-## How do I download VS Code?
+## Download VS Code CLI
 
-The VS Code CLI is a small standalone binary that includes `serve-web` support. It's the best choice for running VS Code Server on a headless remote machine.
+The VS Code CLI is a small standalone binary that includes `serve-web` support. Use it to run VS Code Server on a headless remote machine.
 
 Download the CLI for Arm (aarch64):
 
@@ -72,7 +75,7 @@ Download the CLI for Arm (aarch64):
 wget -O vscode-cli.tgz 'https://code.visualstudio.com/sha/download?build=stable&os=cli-alpine-arm64'
 ```
 
-## How do I install VS Code?
+## Install VS Code CLI
 
 Extract the CLI archive:
 
@@ -96,7 +99,7 @@ The output prints the VS Code version:
 code 1.132.0 (commit df53daabb18cd157bdb08c7f01c34df936cf12f4)
 ```
 
-## How do I start VS Code Server?
+## Start VS Code Server
 
 Start VS Code Server on the remote machine:
 
@@ -118,16 +121,16 @@ Web UI available at http://0.0.0.0:8000
 ```
 
 {{% notice Note %}}
-The `--without-connection-token` flag disables the authentication token. This is convenient for local and private networks. If your remote machine is on a public network, omit this flag and use the token-based URL for security, or use SSH port forwarding as described in the next section.
+The `--without-connection-token` flag disables the authentication token. This is convenient for local and private networks. If your remote machine is on a public network, omit this flag and use the token-based URL for security, or use SSH port forwarding.
 {{% /notice %}}
 
-## How do I connect to VS Code Server from a browser?
+## Connect to VS Code Server from a browser
 
-If the remote machine isn't directly accessible in a browser (for example, a cloud instance or headless server), there are two ways to connect.
+If the remote machine isn't directly accessible in a browser — for example, a cloud instance or headless server — there are two ways to connect.
 
 ### Connect using SSH port forwarding
 
-For more information about SSH, see [SSH](/install-guides/ssh/).
+For more information about SSH, see the [SSH install guide](/install-guides/ssh/).
 
 Use SSH port forwarding to securely access VS Code Server. Bind to `localhost` instead of `0.0.0.0` when using this approach:
 
@@ -159,7 +162,7 @@ You can also open port `8000` on the remote machine for direct access. On a clou
 For best security, open the port only for your IP address. Don't open the port to all IP addresses unless you also use token-based authentication.
 {{% /notice %}}
 
-Each cloud provider has instructions on how to configure security groups. For an example, see the [AWS documentation](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/working-with-security-groups.html#adding-security-group-rule).
+Each cloud provider has instructions on how to configure security groups. For an example, see the [AWS documentation to configure security group rules](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/changing-security-group.html#add-remove-security-group-rules).
 
 With the port open, start the server. Use `hostname -I` to pass the machine's IP address directly so the generated link is ready to use:
 
@@ -167,7 +170,9 @@ With the port open, start the server. Use `hostname -I` to pass the machine's IP
 ./code serve-web --host $(hostname -I | awk '{print $1}') --port 8000 --without-connection-token
 ```
 
-Without the `--without-connection-token` flag, the server generates a token URL. The output includes a clickable URL with the IP address:
+Without the `--without-connection-token` flag, the server generates a token URL. 
+
+The output includes a clickable URL with the IP address:
 
 ```output
 Web UI available at http://10.7.43.188:8000
@@ -175,7 +180,7 @@ Web UI available at http://10.7.43.188:8000
 
 Open this URL in your browser to access VS Code.
 
-## What are the common configuration options?
+## Common VS Code Server configuration options
 
 The `code serve-web` command accepts several options. View all options with:
 
@@ -189,14 +194,14 @@ Common options include:
 |--------|-------------|
 | `--host` | The host interface to bind to. Defaults to `localhost`. Use `0.0.0.0` for all interfaces. |
 | `--port` | The port to listen on. Defaults to `8000`. If `0` is passed, a random free port is picked. |
-| `--without-connection-token` | Disable token authentication. Only use this if the connection is secured by other means. |
-| `--connection-token` | Specify a fixed secret that must be included with all requests. |
+| `--without-connection-token` | Disables token authentication. Use this option only if the connection is secured by other means. |
+| `--connection-token` | Specifies a fixed secret that must be included with all requests. |
 | `--default-folder` | The workspace folder to open when no input is specified in the browser URL. |
-| `--disable-telemetry` | Disable telemetry reporting. |
+| `--disable-telemetry` | Disables telemetry reporting. |
 
-## How do I keep VS Code Server running?
+## Troubleshoot stopped VS Code Server processes
 
-If you start VS Code Server in an SSH session and the session disconnects or times out, the server process stops. You would then need to SSH back in and start the server again.
+If you start VS Code Server in an SSH session and the session disconnects or times out, the server process stops. You'd then need to SSH back in and start the server again.
 
 To avoid this, use `nohup` or a terminal multiplexer such as `tmux` or `screen` to keep the server running independently of your SSH session:
 
@@ -216,13 +221,6 @@ To stop the server:
 kill $(pgrep -f "code serve-web")
 ```
 
-## What are the key differences between VS Code Server and tunnels?
-
-| Feature | VS Code Server | VS Code Tunnels |
-|---------|----------------|-----------------|
-| GitHub account required | No | Yes |
-| External service dependency | None | Microsoft tunnel service |
-| Authentication | Token or none | GitHub |
-| Network requirements | Direct access or SSH | Outbound internet |
+## Next steps
 
 You're now ready to use VS Code in the browser on your remote Arm machine. You can install extensions, select a color theme, and develop with the full VS Code experience.
