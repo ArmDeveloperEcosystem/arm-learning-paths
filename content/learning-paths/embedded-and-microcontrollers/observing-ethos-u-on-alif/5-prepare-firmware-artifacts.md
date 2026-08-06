@@ -11,7 +11,7 @@ The firmware project needs two artifacts:
 - `mnist_ethos_u85.pte`: the ExecuTorch model compiled for Ethos-U85
 - `et_bundle.tar.gz`: ExecuTorch headers and static libraries for the bare-metal Cortex-M build
 
-If you completed the optional sections to train and export the model yourself, these files are already in `~/mnist_alif/executorch-alif/output/`
+If you completed the optional sections to train and export the model yourself, these files are already in `~/mnist_alif/executorch-alif/output/`.
 
 <!-- This is if we provide it as a package instead of separate files -->
 
@@ -74,7 +74,7 @@ const uint8_t __attribute__((aligned(16))) mnist_ethos_u85_pte[] = {
 The `aligned(16)` attribute is required because the Ethos-U85 needs the Vela command stream data aligned to 16 bytes. Without `aligned(16)`, the NPU driver will report an alignment error at runtime.
 {{% /notice %}}
 
-## Extract the Executorch bundle
+## Extract the ExecuTorch bundle
 
 Extract the ExecuTorch headers (from `et_bundle.tar.gz`) into the VS Code template project:
 
@@ -93,6 +93,7 @@ tar -C .\third_party\executorch -xzf "$HOME\mnist_alif\executorch-alif\output\et
 {{< /tabpane >}}
 
 Verify the headers are in place:
+
 ```bash
 ls third_party/executorch/et_bundle/include/executorch/
 ```
@@ -102,6 +103,6 @@ You're now ready to integrate the model into the VS Code project.
 
 ## What you've accomplished and what's next
 
-You've now prepared the embedded Executorch model (`mnist_model_data.h`), ExecuTorch headers (`third_party/executorch/et_bundle/include`), and the static libraries used by the firmware build (`third_party/executorch/et_bundle/lib`).
+You've now prepared the embedded ExecuTorch model (`mnist_model_data.h`), ExecuTorch headers (`third_party/executorch/et_bundle/include`), and the static libraries used by the firmware build (`third_party/executorch/et_bundle/lib`).
 
 Next, you'll create the MNIST firmware project by duplicating the Blinky example and replacing relevant files to fit the application.

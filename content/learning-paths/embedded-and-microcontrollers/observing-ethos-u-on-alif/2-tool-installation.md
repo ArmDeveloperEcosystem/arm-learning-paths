@@ -6,7 +6,7 @@ layout: learningpathall
 
 ## Connect to the Alif Ensemble E8 DevKit
 
-To connect to the Alif Ensemble E8 DevKit, follow these steps:
+To connect to the Alif Ensemble E8 DevKit:
 
 1. Unplug all USB cables from the DevKit before changing any jumpers.
 
@@ -15,6 +15,7 @@ To connect to the Alif Ensemble E8 DevKit, follow these steps:
 3. Connect a USB-C cable from your computer to the PRG USB port on the bottom edge of the DevKit.
 
 ![PRG USB Port Location alt-text#center](prg-usb-port.png "Connect USB-C cable to the PRG USB port")
+
 4. Confirm that a green LED illuminates near the E1 device and the UART switch (SW4).
 
 Leave SW4 in its default position. This routes the on-board USB UART to SEUART, which the Alif Security Toolkit (SETOOLS) uses for programming.
@@ -41,11 +42,11 @@ Get-CimInstance Win32_SerialPort | Select-Object DeviceID,Name,Description
 Close any terminal application that’s connected to SEUART, such as PuTTY, minicom, or screen, before you use the Security Toolkit (SETOOLS). The DevKit exposes only one SEUART interface, so SETOOLS can’t access the port if another application is already using it.
 {{% /notice %}}
 
-You should see a SEGGER J-Link device. If you're unsure which entry belongs to the DevKit, run the command before and after connecting the board and compare the output. In the case where no device appears, check that the USB cable is connected to the **PRG USB** port and that the cable supports data, not only charging.
+You should see a SEGGER J-Link device. If you're unsure which entry belongs to the DevKit, run the command before and after connecting the board and compare the output. If no device appears, check that the USB cable is connected to the **PRG USB** port and that the cable supports data, not only charging.
 
-## Create a project directory on the DevKit
+## Create a project directory for the DevKit
 
-Before installing all required tools for ExecuTorch development on the Alif Ensemble E8 DevKit, create a project directory:
+Before installing all required tools for ExecuTorch development, create a project directory:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS / Linux" language="bash" >}}
@@ -134,7 +135,7 @@ JLinkExe --version
 
 Next, you'll need to set up the Alif Visual Studio Code (VS Code) template.
 
-To start, clone the Alif VS Code template repository and checkout to a known-working commit: 
+To start, clone the Alif VS Code template repository and check out a known-working commit: 
 
 ```bash
 cd ~/mnist_alif
@@ -171,7 +172,7 @@ Restart VS Code if prompted.
 Common Microcontroller Software Interface Standard (CMSIS) is a set of APIs, software components, and metadata that simplifies development on Arm Cortex-M processors. 
 Installing the CMSIS pack will provide the device definitions, startup files, drivers, and middleware components you'll need for the Alif E8 target. 
 
-To install, follow these steps:
+To install CMSIS packs:
 
 1. In VS Code, open the Command Palette using **Ctrl+Shift+P** on Windows and Linux, or **Command+Shift+P** on macOS.
 2. Select **Tasks: Run Task**.
@@ -184,14 +185,16 @@ If the installation task doesn't appear, run **Developer: Reload Window** from t
 
 ## Configure VS Code settings
 
-VS Code need to know where the external Alif SETOOLS and SEGGER J-Link tools are installed. To configure the settings, follow these steps:
+VS Code needs to know where the external Alif SETOOLS and SEGGER J-Link tools are installed. 
+
+To configure the settings on VS Code:
 
 1. Open the Command Palette and run **Preferences: Open User Settings (JSON)**.
 2. Add the following settings, updating the paths for your operating system:
 
   ```json
   {
-   "alif.setools.root": "path/to/your/setools-folder",
+    "alif.setools.root": "path/to/your/setools-folder",
     "cortex-debug.JLinkGDBServerPath": "/Applications/SEGGER/JLink/JLinkGDBServerCLExe"
   }
   ```
@@ -214,6 +217,6 @@ If the RGB LED blinks, your VS Code setup, CMSIS packs, SETOOLS configuration, a
 
 ## What you've accomplished and what's next
 
-You've now connected the Alif Ensemble E8 DevKit to your computer and installed required tools on the DevKit. The tools include SETOOLS for flashing firmware to MRAM, J-Link for programming and debugging, required VS Code extensions, and CMSIS packs.
+You've now connected the Alif Ensemble E8 DevKit to your computer and installed required tools for the DevKit. The tools include SETOOLS for flashing firmware to MRAM, J-Link for programming and debugging, required VS Code extensions, and CMSIS packs.
 
 Next, if you're using the provided `.pte` model, skip to [Prepare firmware artifacts](/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/5-prepare-firmware-artifacts/). If you want to train and export the model yourself, see [(Optional) Set up a Docker development environment](/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/3-docker-executorch-setup/).

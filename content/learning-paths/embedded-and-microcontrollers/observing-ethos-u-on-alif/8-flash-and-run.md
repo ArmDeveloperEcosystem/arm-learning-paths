@@ -4,7 +4,7 @@ weight: 9
 layout: learningpathall
 ---
 
-## Build the project using VS Code CMSIS Extension
+## Build the project using the VS Code CMSIS Extension
 
 First, clear any cached build files present from previous runs:
 
@@ -22,7 +22,7 @@ Remove-Item -Recurse -Force .\tmp, .\out -ErrorAction SilentlyContinue
 
 CMSIS Toolbox caches aggressively and won’t pick up YAML configuration changes unless you clean first.
 
-Next, follow these steps in VS Code to build:
+Next, to build the project in VS Code:
 
 1. Select the **CMSIS** icon in the left sidebar.
 2. Select the gear icon.

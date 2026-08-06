@@ -6,12 +6,11 @@ minutes_to_complete: 45
 who_is_this_for: This is an introductory topic for embedded developers and ML engineers who want to run TinyML inference on physical hardware with Arm Ethos-U85 NPU acceleration.
 
 learning_objectives:
-    - Set up the Alif Ensemble E8 development kit for ML applications
-    - (Optional) Train, compile and export an MNIST PyTorch model to ExecuTorch .pte format using a Docker container
-    - Configure CMSIS project files, memory layout, and linker scripts for an ML workload on the Alif Ensemble E8
-    - Build and flash firmware to the Alif Ensemble E8 DevKit
-    - Run MNIST digit classification on Ethos-U85 NPU
-    - Monitor inference results via SEGGER Real-Time Transfer (RTT)
+    - Set up the Alif Ensemble E8 development kit for ML applications.
+    - (Optional) Train, compile and export an MNIST PyTorch model to ExecuTorch .pte format using a Docker container.
+    - Configure CMSIS project files, memory layout, and linker scripts for an ML workload on the Alif Ensemble E8.
+    - Build and flash firmware to the Alif Ensemble E8 DevKit.
+    - Run MNIST digit classification on the Ethos-U85 NPU, and monitor inference results through SEGGER Real-Time Transfer (RTT).
 
 prerequisites:
     - Experience with C or C++ and embedded development concepts
@@ -42,7 +41,6 @@ operatingsystems:
 tools_software_languages:
     - C
     - CMSIS
-    - TensorFlow Lite
     - SEGGER JLink
     - SEGGER RTT
     - GCC

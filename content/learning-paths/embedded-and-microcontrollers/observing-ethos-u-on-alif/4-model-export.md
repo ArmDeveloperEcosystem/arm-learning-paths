@@ -28,7 +28,7 @@ curl -L -o /home/developer/models/mnist_model.py https://raw.githubusercontent.c
 curl -L -o /home/developer/models/train_mnist.py https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/main/train_mnist.py
 ```
 
-The model script (`mnist_model.py`) defines a small convolutional network for 28 x 28 grayscale MNIST images. It has two convolution blocks followed by two fully connected layers:
+The model script (`mnist_model.py`) defines a small convolutional network for 28 × 28 grayscale MNIST images. It has two convolution blocks followed by two fully connected layers:
 ```python
 def __init__(self):
         super().__init__()
@@ -72,7 +72,7 @@ curl -L -o /home/developer/output/sample_one.pt https://raw.githubusercontent.co
 The downloaded sample contains one normalized MNIST-style grayscale image, saved as a PyTorch tensor (`.pt`) with shape `[1, 1, 28, 28]` and type `float32`. 
 This allows `mnist_model.py` to load the exact format it needs without any image preprocessing step.
 
-For production-quality quantization, you'd normally calibrate with a larger and more diverse set of representative inputs. To keep the export flow small and reproducible, you'll use one sample for completing the Learning Path.
+For production-quality quantization, you'd normally calibrate with a larger and more diverse set of representative inputs. To keep the export flow small and reproducible, you'll use one sample.
 
 ## Train the model
 
@@ -111,12 +111,12 @@ Use full paths such as `/home/developer/models/mnist_model.py`. Don't use `~` in
 {{% /notice %}}
 
 The following are the arguments passed in the export command:
-- `MNIST_LOAD_CHECKPOINT=1`: loads the trained weights from /home/developer/models/mnist_model.pth.
+- `MNIST_LOAD_CHECKPOINT=1`: loads the trained weights from `/home/developer/models/mnist_model.pth`.
 - `--model_name`: points to the PyTorch model definition.
 - `--delegate`: partitions supported operators for execution on the Ethos-U NPU.
 - `--quantize`: converts the model for int8 inference.
 - `--target=ethos-u85-256`: targets an Ethos-U85 configuration with 256 MACs per cycle.
-- `--system_config` and `--memory_mode`: selects the Vela memory configuration used when compiling the NPU command stream.
+- `--system_config` and `--memory_mode`: select the Vela memory configuration used when compiling the NPU command stream.
 - `--output`: writes the exported ExecuTorch program.
 
 Vela is Arm’s compiler for Ethos-U NPUs. During export, it prints information about the selected Ethos-U target, memory use, and NPU performance estimates. Review this output to confirm that the model was compiled for the expected `ethos-u85-256` target. 

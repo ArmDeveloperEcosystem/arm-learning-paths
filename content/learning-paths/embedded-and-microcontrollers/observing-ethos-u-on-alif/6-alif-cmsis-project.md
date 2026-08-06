@@ -35,7 +35,7 @@ Get-ChildItem .\mnist_executorch -Recurse -File | Where-Object { Select-String -
 
 ## Rename main.c to main.cpp
 
-ExecuTorch is a C++ library, so the source file needs a `.cpp` extension
+ExecuTorch is a C++ library, so the source file needs a `.cpp` extension.
 
 Update the extension of `main.c`:
 
@@ -135,7 +135,7 @@ Add `mnist_executorch` to the projects list at the end of the file:
 
 ## Configure the project file
 
-The `mnist_executorch/mnist_executorch.cproject.yml` file describes our MNIST application: its source files, components, include paths, and build options.
+The `mnist_executorch/mnist_executorch.cproject.yml` file describes the MNIST application: its source files, components, include paths, and build options.
 
 Locate this file and replace the contents with the following configuration:
 
@@ -229,7 +229,7 @@ There are several important details in this configuration:
 
 ## Add the source files
 
-The application code is split across three source files:
+The application code is split across three files:
 
 - `main.cpp` is the firmware entry point. It initializes the board, loads the embedded model from `mnist_model_data.h`, passes the MNIST input image to the runner, and prints the predicted digit and output scores.
 - `executorch_runner.h` declares the small C-style interface used by `main.cpp` to initialize ExecuTorch and run inference.

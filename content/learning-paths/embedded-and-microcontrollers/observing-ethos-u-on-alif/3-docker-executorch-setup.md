@@ -9,7 +9,7 @@ layout: learningpathall
 To train and export an MNIST model to ExecuTorch `.pte` format, you'll need to create a Docker environment.
 
 {{% notice Note %}}
-If you're using the provided `.pte` file, skip the entire Docker setup section and proceed with [Prepare firmware artifacts](/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/5-prepare-firmware-artifacts/). Complete Docker setup section only if you want to train and export the model yourself.
+If you're using the provided `.pte` file, skip the entire Docker setup section and proceed with [Prepare firmware artifacts](/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/5-prepare-firmware-artifacts/). Complete the Docker setup only if you want to train and export the model yourself.
 {{% /notice %}}
 
 Docker provides an isolated environment with all the build dependencies needed. 
@@ -180,7 +180,7 @@ You're now inside the Docker container.
 
 ## Clone ExecuTorch in the container
 
-Inside the Docker container, clone and install ExecuTorch v1.0.0:
+Inside the Docker container, clone ExecuTorch v1.0.0:
 
 ```bash
 cd /home/developer
@@ -205,7 +205,7 @@ export ET_HOME=/home/developer/executorch
 echo 'export ET_HOME=/home/developer/executorch' >> ~/.bashrc
 ```
 
-### Install Python dependencies
+## Install Python dependencies
 
 Activate the Python environment and run the installer script:
 
@@ -222,7 +222,7 @@ pip install --upgrade pip
 pip install 'lxml>=4.7.1,<6.0.1'
 ```
 
-### Install ExecuTorch
+## Install ExecuTorch
 
 After activating the environment, install ExecuTorch:
 
@@ -343,52 +343,52 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ``` -->
 
-Check Vela compiler
+1. Check Vela compiler
 
-```bash
-vela --version
-```
+  ```bash
+  vela --version
+  ```
 
-The output is similar to:
+  The output is similar to:
 
-```output
-4.4.1
-```
-Check ExecuTorch:
+  ```output
+  4.4.1
+  ```
+2. Check ExecuTorch:
 
-```bash
-python3 -c "from executorch.exir import to_edge; print('ExecuTorch OK')"
-```
+  ```bash
+  python3 -c "from executorch.exir import to_edge; print('ExecuTorch OK')"
+  ```
 
-The output is similar to:
+  The output is similar to:
 
-```output
-ExecuTorch OK
-```
+  ```output
+  ExecuTorch OK
+  ```
 
-Run a minimal export test to verify the complete setup:
+3. Then, run a minimal export test to verify the complete setup:
 
-```bash
-cd $ET_HOME
-python3 -m examples.arm.aot_arm_compiler --model_name=add --delegate --quantize --target=ethos-u85-256 --output=/home/developer/output/add_ethos_u85.pte
-```
+  ```bash
+  cd $ET_HOME
+  python3 -m examples.arm.aot_arm_compiler --model_name=add --delegate --quantize --target=ethos-u85-256 --output=/home/developer/output/add_ethos_u85.pte
+  ```
 
-The output is similar to:
-```output
-Exporting model add...
-Lowering to TOSA...
-Compiling with Vela...
-PTE file saved as add_arm_delegate_ethos-u55-128.pte
-```
+  The output is similar to:
+  ```output
+  Exporting model add...
+  Lowering to TOSA...
+  Compiling with Vela...
+  PTE file saved as add_arm_delegate_ethos-u55-128.pte
+  ```
 
-Verify the `.pte` file was created:
+  Verify the `.pte` file was created:
 
-```bash
-ls -lh /home/developer/output/add_ethos_u85.pte
-```
+  ```bash
+  ls -lh /home/developer/output/add_ethos_u85.pte
+  ```
 
-The `output` directory is mounted from your host machine, so the file is also available at
-`~/mnist_alif/executorch-alif/output/`.
+  The `output` directory is mounted from your host machine, so the file is also available at
+  `~/mnist_alif/executorch-alif/output/`.
 
 ## (Optional) Save container state 
 

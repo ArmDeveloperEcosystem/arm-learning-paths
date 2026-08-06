@@ -6,7 +6,7 @@ layout: learningpathall
 
 ## What MNIST is
 
-[MNIST](https://en.wikipedia.org/wiki/MNIST_database), widely classified as the "Hello World" of machine learning, is a dataset containing 70,000 28x28 pixel grayscale images of handwritten digits 0 to 9. The dataset is commonly used for training image processing systems.
+[MNIST](https://en.wikipedia.org/wiki/MNIST_database), widely classified as the "Hello World" of machine learning, is a dataset containing 70,000 28 × 28 pixel grayscale images of handwritten digits 0 to 9. The dataset is commonly used for training image processing systems.
 
 ## What the Alif Ensemble E8 DevKit is
 
@@ -21,6 +21,6 @@ You'll run an MNIST digit-classification model on the Arm Ethos-U85 NPU. You can
 
 ## What you've learned and what's next
 
-You've now learned what MNIST is and what the Alif Ensemble E8 development kit comprises of.
+You've now learned what MNIST is and what the Alif Ensemble E8 DevKit includes.
 
-Next, you'll set up the development kit.
+Next, you'll connect to the DevKit and install dependencies.

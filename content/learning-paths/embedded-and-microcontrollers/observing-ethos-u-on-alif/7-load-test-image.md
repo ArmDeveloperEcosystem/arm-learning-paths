@@ -49,13 +49,12 @@ Place a PNG or JPEG image of a handwritten digit in the directory and name it `m
 {{% notice Note %}}
 Use a simple, centered, high-contrast digit image. The script supports black-on-white and white-on-black images, and automatically converts black-on-white images to MNIST-style white-on-black format.
 
-
-Feel free to use any of the images within this dataset: https://huggingface.co/datasets/ylecun/mnist.
+You can use any of the images within the [MNIST dataset on Hugging Face](https://huggingface.co/datasets/ylecun/mnist).
 {{% /notice %}}
 
 ## Download the preprocessing script
 
-The MNIST model expects one grayscale 28 x 28 image. You'll use a preprocessing script to resize the image, convert it to grayscale, scale pixel values to the range 0 to 127, and write the result to `input_mnist.h`.
+The MNIST model expects one grayscale 28 × 28 image. You'll use a preprocessing script to resize the image, convert it to grayscale, scale pixel values to the range 0 to 127, and write the result to `input_mnist.h`.
 
 Download `prepare_mnist_image.py` into the image directory:
 
@@ -65,14 +64,14 @@ curl -o prepare_mnist_image.py https://raw.githubusercontent.com/arm-education/a
 ```
 Open `prepare_mnist_image.py` and inspect.
 
-The script defines command-line arguments, checks that the input image exists, then converts the image to 28 x 28 grayscale pixels. It also handles image inversion so black-on-white images can be converted to the white-on-black style used by MNIST.
+The script defines command-line arguments, checks that the input image exists, then converts the image to 28 × 28 grayscale pixels. It also handles image inversion so black-on-white images can be converted to the white-on-black style used by MNIST.
 
 The key conversion step scales each pixel into a value within the non-negative int8 range (0 to 127) and flattens the output into a one-dimensional array:
 ```python
 pixels = np.clip(np.rint(pixels * 127.0 / 255.0), 0, 127).astype(np.int8)
 flat = pixels.reshape(-1)
 ```
-The generated header will contain a total of 784 values, one for each pixel in the 28 x 28 input image.
+The generated header will contain a total of 784 values, one for each pixel in the 28 × 28 input image.
 
 ## Generate the input header
 
@@ -144,4 +143,3 @@ mnist_model_data.h
 You've now converted a test digit image into `input_mnist.h` and copied it into the firmware project. 
 
 Next, you'll build and flash the application to the Alif Ensemble E8 DevKit.
-
