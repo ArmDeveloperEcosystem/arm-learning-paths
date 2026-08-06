@@ -11,13 +11,13 @@ First, clear any cached build files present from previous runs:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS and Linux" language="bash" >}}
-cd ~/mnist_alif/alif_vscode-template
-rm -rf tmp/ out/
+  cd ~/mnist_alif/alif_vscode-template
+  rm -rf tmp/ out/
   {{< /tab >}}
 
   {{< tab header="Windows (PowerShell)" language="powershell" >}}
-cd "$HOME\mnist_alif\alif_vscode-template"
-Remove-Item -Recurse -Force .\tmp, .\out -ErrorAction SilentlyContinue
+  cd "$HOME\mnist_alif\alif_vscode-template"
+  Remove-Item -Recurse -Force .\tmp, .\out -ErrorAction SilentlyContinue
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -110,6 +110,6 @@ The predicted digit depends on the image you converted in the previous section.
 
 ## What you've accomplished
 
-You have built and flashed a CMSIS-based firmware application that embeds an ExecuTorch `.pte` model, runs MNIST inference on the Ethos-U85 NPU, and reports the result through SEGGER RTT.
+You've now built and flashed a CMSIS-based firmware application that embeds an ExecuTorch `.pte` model, runs MNIST inference on the Ethos-U85 NPU, and reports the result through SEGGER RTT.
 
 You can extend this project by trying different MNIST images, retraining the model, or replacing MNIST with a different model, such as one trained to classify handwritten letters instead of digits.

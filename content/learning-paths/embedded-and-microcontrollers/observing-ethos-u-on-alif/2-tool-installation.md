@@ -63,8 +63,7 @@ New-Item -ItemType Directory -Force -Path ~\mnist_alif
 
 Secure Enclave Tools (SETOOLS) is Alif's toolset for flashing firmware to MRAM through the Secure Enclave.
 
-1. Download the SETOOLS package from the [Alif Ensemble E8 DevKit support page](https://alifsemi.com/support/kits/ensemble-e8devkit/) and extract it to `~/mnist_alif`.
-  Make sure to edit the following command with the name of your `.tar` or `.zip` file.
+1. Download the SETOOLS package from the [Alif Ensemble E8 DevKit support page](https://alifsemi.com/support/kits/ensemble-e8devkit/) and extract it to `~/mnist_alif`, editing the command with the name of your `.tar` or `.zip` file:
   {{< tabpane code=true >}}
     {{< tab header="macOS and Linux" language="bash" >}}
   cd ~/Downloads
@@ -77,8 +76,7 @@ Secure Enclave Tools (SETOOLS) is Alif's toolset for flashing firmware to MRAM t
     {{< /tab >}}
   {{< /tabpane >}}
 
-2. Verify the installation. The extracted folder name can vary by SETOOLS release. The following commands assume the package extracts to `app-release-exec-*`.
-  Each command should print a `usage:` message. If either command fails, check that you're in the extracted SETOOLS directory for your operating system.
+2. Verify the installation: 
   {{< tabpane code=true >}}
     {{< tab header="macOS" language="bash" >}}
     cd ~/mnist_alif/app-release-exec-macos
@@ -96,16 +94,17 @@ Secure Enclave Tools (SETOOLS) is Alif's toolset for flashing firmware to MRAM t
     .\app-gen-toc.exe -h
   {{< /tab >}}
   {{< /tabpane >}}
+  The extracted folder name can vary by SETOOLS release. The commands assume the package extracts to `app-release-exec-*`. Each command should print a `usage:` message. If either command fails, check that you're in the extracted SETOOLS directory for your operating system.
 
-{{% notice Important %}}
-On macOS, the system might block the unsigned binary the first time you run it. If this happens, do the following:
+  {{% notice Important %}}
+  On macOS, the system might block the unsigned binary the first time you run it. If this happens, do the following:
 
-  1. Open **System Settings** or **System Preferences**.
-  2. Navigate to **Privacy & Security**.
-  3. Select **Allow Anyway**. 
+      1. Open **System Settings** or **System Preferences**.
+      2. Navigate to **Privacy & Security**.
+      3. Select **Allow Anyway**. 
 
-Then, run the command again. You might need to reapprove for both `./app-*` commands.
-{{% /notice %}}
+  Then, run the command again. You might need to reapprove for both `./app-*` commands.
+  {{% /notice %}}
 
 
 ## Install J-Link
@@ -220,4 +219,4 @@ If the RGB LED blinks, your VS Code setup, CMSIS packs, SETOOLS configuration, a
 
 You've now connected the Alif Ensemble E8 DevKit to your computer and installed required tools for the DevKit. The tools include SETOOLS for flashing firmware to MRAM, J-Link for programming and debugging, required VS Code extensions, and CMSIS packs.
 
-Next, if you're using the provided `.pte` model, skip to [Prepare firmware artifacts](/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/5-prepare-firmware-artifacts/). If you want to train and export the model yourself, see [(Optional) Set up a Docker development environment](/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/3-docker-executorch-setup/).
+Next, if you're using the provided `.pte` model, skip to [Prepare the ExecuTorch model and static libraries for the Alif E8 CMSIS project](/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/5-prepare-firmware-artifacts/). If you want to train and export the model yourself, see [(Optional) Set up a Docker development environment](/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/3-docker-executorch-setup/).

@@ -13,19 +13,19 @@ To start, create a Python virtual environment for image preprocessing:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS and Linux" language="bash" >}}
-cd ~/mnist_alif
-python3 -m venv venv_image_prep
-source venv_image_prep/bin/activate
-python -m pip install --upgrade pip
-python -m pip install numpy pillow
+  cd ~/mnist_alif
+  python3 -m venv venv_image_prep
+  source venv_image_prep/bin/activate
+  python -m pip install --upgrade pip
+  python -m pip install numpy pillow
   {{< /tab >}}
 
   {{< tab header="Windows (PowerShell)" language="powershell" >}}
-cd ~\mnist_alif
-py -m venv venv_image_prep
-.\venv_image_prep\Scripts\Activate.ps1
-python -m pip install --upgrade pip
-python -m pip install numpy pillow
+  cd ~\mnist_alif
+  py -m venv venv_image_prep
+  .\venv_image_prep\Scripts\Activate.ps1
+  python -m pip install --upgrade pip
+  python -m pip install numpy pillow
   {{< /tab >}}
 {{< /tabpane >}}
 

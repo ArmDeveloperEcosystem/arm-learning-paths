@@ -106,9 +106,7 @@ Add the required packs under the `packs:` section:
     - pack: ARM::ethos-u-core-driver
 ```
 
-Add a `target-set` block to the `E8-HP` target type so the Security Toolkit knows which binary to flash.
-
-Find the `type: E8-HP` section and add the following:
+Add a `target-set` block to the `E8-HP` target type so the Security Toolkit knows which binary to flash. Find the `type: E8-HP` section and add the following:
 
 ```yaml
     - type: E8-HP
@@ -222,7 +220,7 @@ Update the `-L` path to match the absolute path to your `third_party/executorch/
 
 There are several important details in this configuration:
 
-- `--whole-archive` is required for `libexecutorch`, `libexecutorch_core`, `libexecutorch_delegate_ethos_u`, and `libcortex_m_ops_lib`. These libraries contain static registration constructors (for operator registration and PAL symbols) that the linker would otherwise discard as unused.
+- `--whole-archive` is required for `libexecutorch`, `libexecutorch_core`, `libexecutorch_delegate_ethos_u`, and `libcortex_m_ops_lib`. These libraries contain static registration constructors — for operator registration and PAL symbols — that the linker would otherwise discard as unused.
 - Don't add `portable_ops_lib` or `quantized_ops_lib` to `--whole-archive`. They are large and will overflow the microcontroller's ITCM or MRAM.
 - `--start-group` and `--end-group` resolve circular dependencies among the remaining libraries.
 - `C10_USING_CUSTOM_GENERATED_MACROS` tells ExecuTorch to skip looking for a `cmake_macros.h` header that doesn't exist in the bare-metal build.
