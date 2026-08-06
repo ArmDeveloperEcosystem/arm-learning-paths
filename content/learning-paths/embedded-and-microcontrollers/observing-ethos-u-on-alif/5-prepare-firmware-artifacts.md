@@ -54,14 +54,14 @@ The firmware embeds the `.pte` model as a byte array in flash memory. Use `xxd` 
 
 {{< tabpane code=true >}}
   {{< tab header="macOS and Linux" language="bash" >}}
-cd ~/mnist_alif/executorch-alif/output
-xxd -i mnist_ethos_u85.pte > mnist_model_data.h
+  cd ~/mnist_alif/executorch-alif/output
+  xxd -i mnist_ethos_u85.pte > mnist_model_data.h
   {{< /tab >}}
 
-{{< tab header="Windows (PowerShell)" language="powershell" >}}
-cd ~\mnist_alif\executorch-alif\output
-& "$env:ProgramFiles\Git\usr\bin\xxd.exe" -i mnist_ethos_u85.pte | Set-Content -Encoding ascii mnist_model_data.h
-{{< /tab >}}
+  {{< tab header="Windows (PowerShell)" language="powershell" >}}
+  cd ~\mnist_alif\executorch-alif\output
+  & "$env:ProgramFiles\Git\usr\bin\xxd.exe" -i mnist_ethos_u85.pte | Set-Content -Encoding ascii mnist_model_data.h
+  {{< /tab >}}
 {{< /tabpane >}}
 
 Open the generated header (`mnist_model_data.h`) and change the first array declaration to the following:
