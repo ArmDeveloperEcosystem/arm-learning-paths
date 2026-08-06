@@ -2,6 +2,9 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: VS Code Server
+
+draft: true
+
 description: Install VS Code Server on a remote Arm Linux machine and access the full VS Code experience from a browser without tunnels or third-party services.
 
 ### Optional additional search terms (one per line) to assist in finding the article
