@@ -1,5 +1,6 @@
 ---
 title: Set up the Alif Ensemble E8 DevKit
+description: Connect an Alif Ensemble E8 DevKit and install SETOOLS, J-Link, VS Code extensions, and CMSIS packs for ExecuTorch development.
 weight: 3
 layout: learningpathall
 ---

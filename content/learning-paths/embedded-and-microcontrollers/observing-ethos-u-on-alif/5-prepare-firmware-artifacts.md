@@ -1,5 +1,6 @@
 ---
 title: Prepare the ExecuTorch model and static libraries for the Alif E8 CMSIS project
+description: Prepare the ExecuTorch `.pte` model, C header, and static libraries for integration into an Alif E8 CMSIS project.
 weight: 6
 layout: learningpathall
 ---

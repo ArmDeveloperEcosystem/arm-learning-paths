@@ -1,5 +1,6 @@
 ---
 title: Create Alif E8 CMSIS project
+description: Create an Alif E8 CMSIS firmware project, integrate ExecuTorch and Ethos-U85 libraries, and configure memory placement for inference.
 weight: 7
 layout: learningpathall
 ---

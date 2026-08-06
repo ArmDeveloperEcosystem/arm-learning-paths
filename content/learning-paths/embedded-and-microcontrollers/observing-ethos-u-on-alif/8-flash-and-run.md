@@ -1,5 +1,6 @@
 ---
 title: Flash and run the project on the Alif Ensemble E8 DevKit
+description: Build and flash the Alif E8 CMSIS firmware, then run MNIST inference on the Ethos-U85 NPU and view results with SEGGER RTT.
 weight: 9
 layout: learningpathall
 ---

@@ -1,5 +1,6 @@
 ---
 title: Learn about MNIST and the Alif Ensemble E8 DevKit 
+description: Explore MNIST and the Alif Ensemble E8 DevKit before running digit classification with an Ethos-U85 NPU.
 weight: 2
 layout: learningpathall
 ---

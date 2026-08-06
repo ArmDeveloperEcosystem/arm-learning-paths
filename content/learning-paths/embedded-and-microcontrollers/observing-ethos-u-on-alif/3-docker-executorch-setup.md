@@ -1,5 +1,6 @@
 ---
 title: (Optional) Set up a Docker development environment
+description: Set up a Docker environment with ExecuTorch, PyTorch, and Arm Ethos-U dependencies for exporting an MNIST model to `.pte` format.
 weight: 4
 layout: learningpathall
 ---

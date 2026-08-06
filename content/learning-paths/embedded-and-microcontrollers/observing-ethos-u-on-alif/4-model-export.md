@@ -1,5 +1,6 @@
 ---
 title: (Optional) Export PyTorch model to ExecuTorch format
+description: Train an MNIST PyTorch model, export it to an Ethos-U85-compatible ExecuTorch `.pte` file, and build the required runtime libraries.
 weight: 5
 layout: learningpathall
 ---

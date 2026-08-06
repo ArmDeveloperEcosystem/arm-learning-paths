@@ -1,5 +1,6 @@
 ---
 title: Process and copy a sample image into the Alif E8 CMSIS project
+description: Convert a handwritten digit image into a C header and copy it into the Alif E8 CMSIS project for MNIST inference.
 weight: 8
 layout: learningpathall
 ---
