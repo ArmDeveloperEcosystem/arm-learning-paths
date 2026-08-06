@@ -38,7 +38,6 @@ Visual Studio Code (VS Code) Server is a built-in feature of VS Code that runs a
 
 Unlike [VS Code Tunnels](/install-guides/vscode-tunnels/), VS Code Server doesn't need a GitHub account or a connection to Microsoft's tunnel service. All traffic stays between your local machine and the remote server.
 
-
 Use cases for VS Code Server include:
 - Remote Arm Linux servers, including cloud instances, with no Linux desktop installed
 - Developer virtual machines such as Multipass
@@ -63,7 +62,7 @@ aarch64
 
 If you see a different result, you're not using an Arm computer running 64-bit Linux.
 
-You also need SSH access to the remote machine.
+You also need SSH access to the remote machine. For more information about SSH, see the [SSH install guide](/install-guides/ssh/).
 
 ## Download VS Code CLI
 
@@ -93,11 +92,29 @@ Verify the installation:
 ./code --version
 ```
 
-The output prints the VS Code version:
+The output prints the VS Code version, and is similar to:
 
 ```output
 code 1.132.0 (commit df53daabb18cd157bdb08c7f01c34df936cf12f4)
 ```
+## Common VS Code Server configuration options
+
+The `code serve-web` command accepts several options. View all options with:
+
+```bash
+./code serve-web --help
+```
+
+Common options include:
+
+| Option | Description |
+|--------|-------------|
+| `--host` | The host interface to bind to. Defaults to `localhost`. Use `0.0.0.0` for all interfaces. |
+| `--port` | The port to listen on. Defaults to `8000`. If `0` is passed, a random free port is picked. |
+| `--without-connection-token` | Disables token authentication. Use this option only if the connection is secured by other means. |
+| `--connection-token` | Specifies a fixed secret that must be included with all requests. |
+| `--default-folder` | The workspace folder to open when no input is specified in the browser URL. |
+| `--disable-telemetry` | Disables telemetry reporting. |
 
 ## Start VS Code Server
 
@@ -130,9 +147,7 @@ If the remote machine isn't directly accessible in a browser — for example, a 
 
 ### Connect using SSH port forwarding
 
-For more information about SSH, see the [SSH install guide](/install-guides/ssh/).
-
-Use SSH port forwarding to securely access VS Code Server. Bind to `localhost` instead of `0.0.0.0` when using this approach:
+Use SSH port forwarding to securely access VS Code Server. Bind to `localhost` instead of `0.0.0.0` when using this approach.
 
 Start the server on the remote machine:
 
@@ -156,13 +171,13 @@ VS Code appears in the browser, connected to the remote machine.
 
 ### Connect by opening a port on the remote machine
 
-You can also open port `8000` on the remote machine for direct access. On a cloud instance, this involves modifying the security group to allow inbound TCP traffic on port 8000.
+You can also open port `8000` on the remote machine for direct access. On a cloud instance, opening the port involves modifying the security group to allow inbound TCP traffic on port `8000`.
 
 {{% notice Warning %}}
 For best security, open the port only for your IP address. Don't open the port to all IP addresses unless you also use token-based authentication.
 {{% /notice %}}
 
-Each cloud provider has instructions on how to configure security groups. For an example, see the [AWS documentation to configure security group rules](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/changing-security-group.html#add-remove-security-group-rules).
+Every cloud provider has instructions on how to configure security groups. For an example, see the [AWS documentation to configure security group rules](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/changing-security-group.html#add-remove-security-group-rules).
 
 With the port open, start the server. Use `hostname -I` to pass the machine's IP address directly so the generated link is ready to use:
 
@@ -180,30 +195,11 @@ Web UI available at http://10.7.43.188:8000
 
 Open this URL in your browser to access VS Code.
 
-## Common VS Code Server configuration options
-
-The `code serve-web` command accepts several options. View all options with:
-
-```bash
-./code serve-web --help
-```
-
-Common options include:
-
-| Option | Description |
-|--------|-------------|
-| `--host` | The host interface to bind to. Defaults to `localhost`. Use `0.0.0.0` for all interfaces. |
-| `--port` | The port to listen on. Defaults to `8000`. If `0` is passed, a random free port is picked. |
-| `--without-connection-token` | Disables token authentication. Use this option only if the connection is secured by other means. |
-| `--connection-token` | Specifies a fixed secret that must be included with all requests. |
-| `--default-folder` | The workspace folder to open when no input is specified in the browser URL. |
-| `--disable-telemetry` | Disables telemetry reporting. |
-
-## Troubleshoot stopped VS Code Server processes
+## Keep VS Code Server running after a disconnected SSH session
 
 If you start VS Code Server in an SSH session and the session disconnects or times out, the server process stops. You'd then need to SSH back in and start the server again.
 
-To avoid this, use `nohup` or a terminal multiplexer such as `tmux` or `screen` to keep the server running independently of your SSH session:
+To avoid having to restart the server, use `nohup` or a terminal multiplexer such as `tmux` or `screen` to keep the server running independently of your SSH session:
 
 ```bash
 nohup ./code serve-web --host 127.0.0.1 --port 8000 --without-connection-token > vscode-serve.log 2>&1 &
@@ -214,6 +210,8 @@ Check the log to verify it started:
 ```bash
 cat vscode-serve.log
 ```
+
+## Stop VS Code Server
 
 To stop the server:
 
