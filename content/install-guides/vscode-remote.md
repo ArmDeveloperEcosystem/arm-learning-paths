@@ -40,11 +40,11 @@ Unlike [VS Code Tunnels](/install-guides/vscode-tunnels/), VS Code Server doesn'
 
 Use cases for VS Code Server include:
 - Remote Arm Linux servers, including cloud instances, with no Linux desktop installed
-- Developer virtual machines such as Multipass
+- Developer virtual machines, such as Multipass
 - Arm single board computers running Linux
 - Air-gapped or restricted environments where external tunnel services aren't available
 
-You'll learn how to install VS Code on a remote Arm Linux machine and use VS Code Server to access it from a browser.
+You'll learn how to install VS Code CLI on a remote Arm Linux machine and use VS Code Server to access it from a browser.
 
 ## Before you begin
 
@@ -82,9 +82,7 @@ Extract the CLI archive:
 tar xvf vscode-cli.tgz
 ```
 
-The archive file contains a single executable named `code`. 
-
-The `code` binary is placed in your current directory.
+The archive file contains a single executable named `code`. The `code` binary is placed in your current directory.
 
 Verify the installation:
 
