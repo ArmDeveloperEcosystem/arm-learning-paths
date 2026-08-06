@@ -346,51 +346,50 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
 1. Check Vela compiler
 
-  ```bash
-  vela --version
-  ```
+    ```bash
+    vela --version
+    ```
 
-  The output is similar to:
+    The output is similar to:
 
-  ```output
-  4.4.1
-  ```
+    ```output
+    4.4.1
+    ```
 2. Check ExecuTorch:
 
-  ```bash
-  python3 -c "from executorch.exir import to_edge; print('ExecuTorch OK')"
-  ```
+    ```bash
+    python3 -c "from executorch.exir import to_edge; print('ExecuTorch OK')"
+    ```
 
-  The output is similar to:
+    The output is similar to:
 
-  ```output
-  ExecuTorch OK
-  ```
+    ```output
+    ExecuTorch OK
+    ```
 
 3. Then, run a minimal export test to verify the complete setup:
 
-  ```bash
-  cd $ET_HOME
-  python3 -m examples.arm.aot_arm_compiler --model_name=add --delegate --quantize --target=ethos-u85-256 --output=/home/developer/output/add_ethos_u85.pte
-  ```
+    ```bash
+    cd $ET_HOME
+    python3 -m examples.arm.aot_arm_compiler --model_name=add --delegate --quantize   --target=ethos-u85-256 --output=/home/developer/output/add_ethos_u85.pte
+    ```
 
-  The output is similar to:
+    The output is similar to:
 
-  ```output
-  Exporting model add...
-  Lowering to TOSA...
-  Compiling with Vela...
-  PTE file saved as add_ethos_u85.pte
-  ```
+    ```output
+    Exporting model add...
+    Lowering to TOSA...
+    Compiling with Vela...
+    PTE file saved as add_ethos_u85.pte
+    ```
 
-  Verify the `.pte` file was created:
+    Verify the `.pte` file was created:
 
-  ```bash
-  ls -lh /home/developer/output/add_ethos_u85.pte
-  ```
+    ```bash
+    ls -lh /home/developer/output/add_ethos_u85.pte
+    ```
 
-  The `output` directory is mounted from your host machine, so the file is also available at
-  `~/mnist_alif/executorch-alif/output/`.
+    The `output` directory is mounted from your host machine, so the file is also available at `~/mnist_alif/executorch-alif/output/`.
 
 ## (Optional) Save container state 
 
