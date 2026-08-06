@@ -3,8 +3,6 @@
 ### Include vendor name where appropriate
 title: Visual Studio Code Server
 
-draft: true
-
 description: Install VS Code Server on a remote Arm Linux machine and access the full VS Code experience from a browser without tunnels or third-party services.
 
 ### Optional additional search terms (one per line) to assist in finding the article
