@@ -9,15 +9,15 @@ layout: learningpathall
 
 ## Understand the measurement boundary
 
-This Learning Path measures power reported by the processor's Linux hwmon driver. On the [System76 Thelio Astra](https://system76.com/desktops/thelio-astra), the `apm_xgene` driver exposes separate CPU and I/O power channels. The same process can be applied to other Arm Linux systems. 
+You'll measure power reported by the Linux hwmon driver of your machine's processor. On the [System76 Thelio Astra](https://system76.com/desktops/thelio-astra), the `apm_xgene` driver exposes separate CPU and I/O power channels. You can apply the same process to other Arm Linux systems. 
 
-Adding these channels gives an estimate of system-on-chip (SoC) power. It does not include all power drawn by the workstation. Memory, storage, fans, voltage-conversion losses, and the power supply can consume additional power.
+Adding these channels gives an estimate of system-on-chip (SoC) power. The estimate doesn't include all power drawn by the workstation. Memory, storage, fans, voltage-conversion losses, and the power supply can consume additional power.
 
-Use the results to compare configurations on the same system. 
+Use the results to compare different CPU frequency configurations on the same system. 
 
 ## Install the required software
 
-The workload uses OpenSSL, and the analysis script uses Python 3. The commands in this Learning Path were tested on Ubuntu 24.04. Other Linux distributions work if OpenSSL, Python 3, and `cpupower` are installed.
+The workload uses OpenSSL, and the analysis script uses Python 3. The Learning Path was tested on a Thelio Astra running Ubuntu 24.04. You can test other Linux distributions as long as you install OpenSSL, Python 3, and `cpupower`.
 
 Install OpenSSL and `cpupower`:
 
@@ -27,21 +27,21 @@ sudo apt install -y openssl linux-tools-common linux-tools-$(uname -r)
 ```
 
 {{% notice Note %}}
-The `cpupower` utility is used for a quick summary view in the next section, but the workload and telemetry scripts read and write CPUFreq sysfs files directly. If `cpupower` is difficult to install on your system, you can skip it without affecting the main workflow.
+You'll use the `cpupower` utility for a summary view in the next section, but the workload and telemetry scripts read and write CPUFreq sysfs files directly. If `cpupower` is difficult to install on your system, you can skip it without affecting the main workflow.
 
-If the `linux-tools-$(uname -r)` package is not available for your kernel version, look for an existing `cpupower` binary from another installed `linux-tools` package:
+If the `linux-tools-$(uname -r)` package isn't available for your kernel version, look for an existing `cpupower` binary from another installed `linux-tools` package:
 
 ```bash
 find /usr/lib/linux-*tools* -name cpupower 2>/dev/null
 ```
 
-If a binary is found, create a symlink so that it is available on the PATH:
+If a binary is found, create a symlink so that it's available on the PATH:
 
 ```bash
 sudo ln -sf $(find /usr/lib/linux-*tools* -name cpupower | head -1) /usr/local/bin/cpupower
 ```
 
-This situation is common on systems with custom kernels, where the kernel version does not match an available `linux-tools` package. See the [Perf install guide](/install-guides/perf/) for more details on kernel-tools version mismatches.
+This situation is common on systems with custom kernels, where the kernel version doesn't match an available `linux-tools` package. For more details on kernel-tools version mismatches, see the [Perf install guide](/install-guides/perf/).
 {{% /notice %}}
 
 Confirm that OpenSSL, Python 3, and `cpupower` are available:
@@ -97,7 +97,7 @@ cd ~/perf-per-watt
 
 CPU frequency changes apply immediately. Save the current governor and frequency limits before running any experiments.
 
-{{% notice Caution %}}
+{{% notice Warning %}}
 Run the frequency-control commands only on a system you administer. Changing every CPUFreq policy can affect interactive applications and other users until you restore the original settings or reboot.
 {{% /notice %}}
 
@@ -138,7 +138,7 @@ The output is similar to:
 Saved CPUFreq settings in cpufreq-state
 ```
 
-The script saves the current governor and frequency range for each CPUFreq policy. The next section inspects these settings in detail.
+The script saves the current governor and frequency range for each CPUFreq policy. 
 
 Create a second script named `restore-cpufreq.sh`:
 
@@ -186,6 +186,6 @@ You can restore the original settings at any time:
 
 CPUFreq settings also return to the platform defaults after a reboot unless another service reapplies them.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You installed the required tools and saved the original CPUFreq settings. Next, inspect the controls and sensors that Linux exposes on the system.
+You've now installed the required tools and saved the original CPUFreq settings. Next, you'll inspect the controls and sensors that Linux exposes on the system.

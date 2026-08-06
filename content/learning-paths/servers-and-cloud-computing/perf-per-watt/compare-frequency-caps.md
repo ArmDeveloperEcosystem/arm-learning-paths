@@ -51,7 +51,7 @@ EOF
 chmod +x set-frequency-cap.sh
 ```
 
-The Thelio Astra used for this Learning Path accepts maximum limits between `1000000` kHz and `2200000` kHz. Other systems can expose a different range.
+The Thelio Astra example accepts maximum limits between `1000000` kHz and `2200000` kHz. Other systems can expose a different range.
 
 ## Verify an intermediate limit
 
@@ -118,7 +118,7 @@ For best results, repeat each configuration at least three times and report the 
 
 ## Restore the original settings
 
-Restore the CPUFreq settings saved at the beginning:
+Restore the CPUFreq settings that you saved when you prepared the system:
 
 ```bash
 ./restore-cpufreq.sh
@@ -138,7 +138,9 @@ The output is similar to:
 /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq:2200000
 ```
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You collected OpenSSL and telemetry results under three maximum-frequency limits while keeping the governor fixed. The final page calculates average power, energy, throughput per watt, and joules per gigabyte.
+You've now collected OpenSSL and telemetry results under three maximum-frequency limits while keeping the governor fixed. 
+
+Next, you'll calculates average power, energy, throughput per watt, and joules per gigabyte.
 

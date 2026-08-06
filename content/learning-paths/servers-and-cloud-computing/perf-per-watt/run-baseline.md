@@ -119,15 +119,17 @@ telemetry.csv
 
 ## Check the telemetry duration
 
-The logger should contain about one sample per second. Count the samples:
+The logger contains about one sample per second. Count the samples:
 
 ```bash
 awk 'END { print NR - 1, "telemetry samples" }' results/baseline-schedutil/telemetry.csv
 ```
 
-A 90-second run should produce approximately 90 samples. A small difference is normal because process startup and shutdown don't align exactly with the sampling interval.
+A 90-second run produces approximately 90 samples. A small difference is normal because process startup and shutdown don't align exactly with the sampling interval.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You collected a baseline OpenSSL throughput result and synchronized telemetry using the default CPUFreq configuration. Next, change only the governor and compare its effect.
+You've now collected a baseline OpenSSL throughput result and synchronized telemetry using the default CPUFreq configuration. 
+
+Next, you'll change only the governor and compare its effect.
 

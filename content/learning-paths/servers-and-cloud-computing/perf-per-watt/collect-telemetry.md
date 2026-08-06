@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Create the telemetry logger
 
-The logger finds hwmon devices and channels by name and label. This keeps the script working if Linux assigns different `hwmon` directory numbers after a reboot.
+The logger finds hwmon devices and channels by name and label. The use of both name and label keeps the script working if Linux assigns different `hwmon` directory numbers after a reboot.
 
 Create `collect-telemetry.sh` in `~/perf-per-watt`:
 
@@ -164,7 +164,7 @@ No output means every row has the expected number of fields.
 
 ## Interpret the recorded values
 
-The logger records these values:
+The logger records the following values:
 
 | Column | Meaning |
 | --- | --- |
@@ -176,8 +176,10 @@ The logger records these values:
 | `cpu_fan_rpm` | CPU fan speed |
 | `intake_fan_rpm` | Chassis intake fan speed |
 
-The average frequency is a system-wide summary. It doesn't show whether individual CPUs ran at different frequencies, but it is sufficient for comparing OpenSSL runs using all cores.
+The average frequency is a system-wide summary. It doesn't show whether individual CPUs ran at different frequencies, but it's sufficient for comparing OpenSSL runs using all cores.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You created and tested a CSV telemetry logger. Next, run OpenSSL while the logger records frequency, power, temperature, and fan speed.
+You've now created and tested a CSV telemetry logger. 
+
+Next, run OpenSSL while the logger records frequency, power, temperature, and fan speed.

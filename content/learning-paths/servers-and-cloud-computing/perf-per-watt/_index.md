@@ -1,10 +1,6 @@
 ---
 title: Measure and compare performance per watt on an Arm Linux system
 
-draft: true
-cascade:
-    draft: true
-
 description: Use Linux CPUFreq, hwmon, and OpenSSL to measure and compare how CPU governors and frequency limits affect throughput, SoC power, temperature, and energy efficiency on an Arm system.
 
 minutes_to_complete: 60

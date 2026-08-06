@@ -121,7 +121,9 @@ Return to the original settings after the governor tests:
 ./restore-cpufreq.sh
 ```
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You collected equivalent workload and telemetry data for three governors while preserving the full frequency range. Next, keep `schedutil` fixed and change only the maximum permitted frequency.
+You've now collected equivalent workload and telemetry data for three governors while preserving the full frequency range.
+
+Next, you'll keep `schedutil` fixed and change only the maximum permitted frequency.
 
