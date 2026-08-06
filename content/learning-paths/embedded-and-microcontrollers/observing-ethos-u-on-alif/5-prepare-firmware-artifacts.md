@@ -19,7 +19,7 @@ If you completed the optional sections to train and export the model yourself, t
 If you skipped the optional sections and are using the provided `.pte` file, create the output directory and download the provided artifacts:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 mkdir -p ~/mnist_alif/executorch-alif/output
 cd ~/mnist_alif/executorch-alif/output
 curl -L -o et_bundle.tar.gz https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/main/et_bundle.tar.gz
@@ -37,7 +37,7 @@ curl.exe -L -o mnist_ethos_u85.pte https://raw.githubusercontent.com/arm-educati
 Verify all artifacts are present:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 ls -lh ~/mnist_alif/executorch-alif/output/mnist_ethos_u85.pte
 ls -lh ~/mnist_alif/executorch-alif/output/et_bundle.tar.gz
   {{< /tab >}}
@@ -53,7 +53,7 @@ Get-Item ~\mnist_alif\executorch-alif\output\et_bundle.tar.gz
 The firmware embeds the `.pte` model as a byte array in flash memory. Use `xxd` to generate a C header:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 cd ~/mnist_alif/executorch-alif/output
 xxd -i mnist_ethos_u85.pte > mnist_model_data.h
   {{< /tab >}}
@@ -80,7 +80,7 @@ The `aligned(16)` attribute is required because the Ethos-U85 needs the Vela com
 Extract the ExecuTorch headers (from `et_bundle.tar.gz`) into the VS Code template project:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 cd ~/mnist_alif/alif_vscode-template
 mkdir -p third_party/executorch
 tar -C third_party/executorch -xzf ~/mnist_alif/executorch-alif/output/et_bundle.tar.gz

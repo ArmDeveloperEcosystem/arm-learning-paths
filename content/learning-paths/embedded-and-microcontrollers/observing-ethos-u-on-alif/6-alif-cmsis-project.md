@@ -1,5 +1,5 @@
 ---
-title: Create Alif E8 CMSIS project
+title: Create the Alif E8 CMSIS project
 description: Create an Alif E8 CMSIS firmware project, integrate ExecuTorch and Ethos-U85 libraries, and configure memory placement for inference.
 weight: 7
 layout: learningpathall
@@ -10,7 +10,7 @@ layout: learningpathall
 Start by copying a working Blinky project as a template, and renaming the project file inside the new directory:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 cd ~/mnist_alif/alif_vscode-template
 cp -R blinky/ mnist_executorch
 mv mnist_executorch/blinky.cproject.yml mnist_executorch/mnist_executorch.cproject.yml
@@ -25,7 +25,7 @@ Rename-Item .\mnist_executorch\blinky.cproject.yml mnist_executorch.cproject.yml
 
 Next, replace all internal references from `blinky` to `mnist_executorch`:
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 perl -pi -e 's/\bblinky\b/mnist_executorch/g' $(grep -RIl "blinky" mnist_executorch)
   {{< /tab >}}
 
@@ -41,7 +41,7 @@ ExecuTorch is a C++ library, so the source file needs a `.cpp` extension.
 Update the extension of `main.c`:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 mv mnist_executorch/main.c mnist_executorch/main.cpp
   {{< /tab >}}
   {{< tab header="Windows (PowerShell)" language="powershell" >}}
@@ -54,7 +54,7 @@ Rename-Item .\mnist_executorch\main.c main.cpp
 Create an assets directory and copy the model header into the project:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 mkdir -p mnist_executorch/assets
 cp ~/mnist_alif/executorch-alif/output/mnist_model_data.h mnist_executorch/assets/
   {{< /tab >}}

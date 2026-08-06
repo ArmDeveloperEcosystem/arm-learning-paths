@@ -10,7 +10,7 @@ layout: learningpathall
 First, clear any cached build files present from previous runs:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 cd ~/mnist_alif/alif_vscode-template
 rm -rf tmp/ out/
   {{< /tab >}}
@@ -59,7 +59,7 @@ Open a new terminal and start J-Link Commander:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS and Linux" language="bash" >}}
-JLinkExe -device AE822FA0E5597LS0_M55_HE -if SWD -speed 4000
+JLinkExe -device AE822FA0E5597LS0_M55_HP -if SWD -speed 4000
   {{< /tab >}}
 
   {{< tab header="Windows (PowerShell)" language="powershell" >}}

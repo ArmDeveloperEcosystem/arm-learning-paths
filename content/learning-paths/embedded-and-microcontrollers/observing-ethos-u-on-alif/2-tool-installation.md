@@ -50,7 +50,7 @@ You should see a SEGGER J-Link device. If you're unsure which entry belongs to t
 Before installing all required tools for ExecuTorch development, create a project directory:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 mkdir -p ~/mnist_alif
   {{< /tab >}}
 
@@ -66,7 +66,7 @@ Secure Enclave Tools (SETOOLS) is Alif's toolset for flashing firmware to MRAM t
 1. Download the SETOOLS package from the [Alif Ensemble E8 DevKit support page](https://alifsemi.com/support/kits/ensemble-e8devkit/) and extract it to `~/mnist_alif`.
   Make sure to edit the following command with the name of your `.tar` or `.zip` file.
   {{< tabpane code=true >}}
-    {{< tab header="macOS / Linux" language="bash" >}}
+    {{< tab header="macOS and Linux" language="bash" >}}
   cd ~/Downloads
   tar xvf <replace_with_your_alif_security_toolkit_download.tar> -C ~/mnist_alif
     {{< /tab >}}
@@ -125,9 +125,9 @@ sudo dpkg -i JLink_Linux_x86_64.deb
 JLinkExe --version
   {{< /tab >}}
   {{< tab header="Windows" language="text">}}
-1. Download installer from https://www.segger.com/downloads/jlink/
-2. Run the installer and follow prompts
-3. Verify in Command Prompt: JLink.exe --version
+1. Download the J-Link installer from the [SEGGER website](https://www.segger.com/downloads/jlink/).
+2. Run the installer and follow prompts.
+3. Verify in Command Prompt: `JLink.exe --version`.
   {{< /tab >}}
 {{< /tabpane >}}
 

@@ -11,7 +11,7 @@ layout: learningpathall
 
 ## What the Alif Ensemble E8 DevKit is
 
-The Alif Ensemble E8 DevKit features two dual-core Arm processors (Cortex-A32 and Cortex-M55) and three neural processing units (NPUs): two Ethos-U55 and one Ethos-U85.
+The Alif Ensemble E8 DevKit features two dual-core Arm processors (Cortex-A32 and Cortex-M55) and three neural processing units (NPUs): two Ethos-U55s and one Ethos-U85.
 
 <div style="text-align:center;">
   <img src="/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/alif-ensemble-e8-board-soc-highlighted.jpg" alt="Alif Ensemble E8 DevKit with a red box highlighting the application processor SoC. The overlay identifies two Cortex-A32 cores, two Cortex-M55 cores, one Ethos-U85 NPU, and two Ethos-U55 NPUs." title="Alif Ensemble E8 application processor SoC and integrated Arm cores and NPUs" style="max-width:800px; width:100%;" />

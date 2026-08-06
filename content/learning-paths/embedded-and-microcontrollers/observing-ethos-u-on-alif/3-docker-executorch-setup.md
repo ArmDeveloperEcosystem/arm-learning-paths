@@ -47,7 +47,7 @@ This message shows that your installation appears to be working correctly.
 Create a folder for the Docker files, model scripts, and generated output:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 cd ~/mnist_alif
 mkdir -p executorch-alif/models executorch-alif/output
 cd executorch-alif
@@ -76,7 +76,7 @@ executorch-alif/
 Create a file named `Dockerfile`:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 touch Dockerfile
 code Dockerfile
   {{< /tab >}}
@@ -141,7 +141,7 @@ executorch-alif    latest
 After building the image, create the container startup script:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 cat > start-dev.sh << 'EOF'
 #!/bin/bash
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -163,10 +163,10 @@ docker run -it --rm --name executorch-alif-dev -v "${ScriptDir}/models:/home/dev
 Run the script to start the container:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash">}}
+  {{< tab header="macOS and Linux" language="bash">}}
 ./start-dev.sh
   {{< /tab >}}
-  {{< tab header="Windows" language="powershell">}}
+  {{< tab header="Windows (PowerShell)" language="powershell">}}
 .\start-dev.ps1
   {{< /tab >}}
 {{< /tabpane >}}
@@ -375,11 +375,12 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   ```
 
   The output is similar to:
+
   ```output
   Exporting model add...
   Lowering to TOSA...
   Compiling with Vela...
-  PTE file saved as add_arm_delegate_ethos-u55-128.pte
+  PTE file saved as add_ethos_u85.pte
   ```
 
   Verify the `.pte` file was created:

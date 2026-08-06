@@ -12,7 +12,7 @@ You'll convert a handwritten digit image into a C header that the firmware can i
 To start, create a Python virtual environment for image preprocessing:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 cd ~/mnist_alif
 python3 -m venv venv_image_prep
 source venv_image_prep/bin/activate
@@ -34,7 +34,7 @@ python -m pip install numpy pillow
 Create a directory for the input image and preprocessing script:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 mkdir -p ~/mnist_alif/image
 cd ~/mnist_alif/image
   {{< /tab >}}
@@ -79,7 +79,7 @@ The generated header will contain a total of 784 values, one for each pixel in t
 Run the preprocessing script:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 cd ~/mnist_alif/image
 python prepare_mnist_image.py mnist_image.jpg --output input_mnist.h
   {{< /tab >}}
@@ -93,7 +93,7 @@ python .\prepare_mnist_image.py .\mnist_image.jpg --output .\input_mnist.h
 Verify the generated file:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 ls -lh input_mnist.h
 head -n 8 input_mnist.h
   {{< /tab >}}
@@ -111,7 +111,7 @@ Open `input_mnist.h` and look at the generated `input_mnist` array. This is the 
 Copy `input_mnist.h` into the application assets directory:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 cp ~/mnist_alif/image/input_mnist.h ~/mnist_alif/alif_vscode-template/mnist_executorch/assets/
   {{< /tab >}}
 
@@ -123,7 +123,7 @@ Copy-Item "$HOME\mnist_alif\image\input_mnist.h" "$HOME\mnist_alif\alif_vscode-t
 Verify that both firmware assets are present:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 ls -lh ~/mnist_alif/alif_vscode-template/mnist_executorch/assets/
   {{< /tab >}}
 
