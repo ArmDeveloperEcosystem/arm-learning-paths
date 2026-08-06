@@ -1,31 +1,33 @@
 ---
-title: (Optional) Set up Docker development environment
+title: (Optional) Set up a Docker development environment
 weight: 4
 layout: learningpathall
 ---
 
-## Overview
-
-This section creates the Docker environment used to train and export the MNIST model to ExecuTorch `.pte` format.
-
-{{% notice Note %}}
-If you are using the provided `.pte` file, you can skip this section. Complete this section only if you want to train and export the model yourself.
-{{% /notice %}}
-
 ## Install Docker Desktop
 
-Docker provides an isolated environment with all the build dependencies needed. Download Docker Desktop from [docker.com](https://www.docker.com/products/docker-desktop), run the installer for your operating system, and follow the setup prompts.
+To train and export an MNIST model to ExecuTorch `.pte` format, you'll need to create a Docker environment.
+
+{{% notice Note %}}
+If you're using the provided `.pte` file, skip the entire Docker setup section and proceed with [Prepare firmware artifacts](/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/5-prepare-firmware-artifacts/). Complete Docker setup section only if you want to train and export the model yourself.
+{{% /notice %}}
+
+Docker provides an isolated environment with all the build dependencies needed. 
+
+Start by downloading and installing Docker Desktop. For more information, see the [Docker Desktop install guide](/install-guides/docker/docker-desktop/).
+
+## Verify Docker installation
 
 After installation, start Docker Desktop and verify that Docker is available from your terminal:
+
 ```bash
 docker --version
 ```
-Expected output (or similar):
+The output is similar to:
+
 ```output
 Docker version 24.0.7, build afdd53b
 ```
-
-### Verify Docker Installation
 
 Test Docker is working:
 
@@ -57,7 +59,8 @@ cd .\executorch-alif
   {{< /tab >}}
 {{< /tabpane >}}
 
-The directory will be used like this:
+The directory will be used as follows:
+
 ```text
 executorch-alif/
 ├── Dockerfile
@@ -69,7 +72,8 @@ executorch-alif/
 
 ## Create the Dockerfile
 
-Create a file named `Dockerfile` 
+Create a file named `Dockerfile`:
+
 {{< tabpane code=true >}}
   {{< tab header="macOS / Linux" language="bash" >}}
 touch Dockerfile
@@ -82,7 +86,7 @@ notepad .\Dockerfile
   {{< /tab >}}
 {{< /tabpane >}}
 
-and paste this in:
+Paste the following in the `Dockerfile`:
 
 ```dockerfile
 FROM ubuntu:22.04
@@ -98,15 +102,19 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 CMD ["/bin/bash"]
 ```
 
-## Build the Docker Image
+## Build the Docker image
 
-Build the image from the `executorch-alif` directory (this takes 5-10 minutes):
+Build the image from the `executorch-alif` directory:
 
 ```bash
 docker build -t executorch-alif:latest .
 ```
 
-The output shows:
+{{% notice Note %}}
+The build can take 5 to 10 minutes.
+{{% /notice %}}
+
+The output is similar to:
 ```output
 [+] Building 320.5s (12/12) FINISHED
  => [internal] load build definition from Dockerfile
@@ -122,12 +130,14 @@ Verify the image:
 docker images
 ```
 
-The output should include:
+The output is similar to:
 ```output
 executorch-alif    latest
 ```
 
 ## Create the container startup script
+
+After building the image, create the container startup script:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS / Linux" language="bash" >}}
@@ -147,7 +157,9 @@ docker run -it --rm --name executorch-alif-dev -v "${ScriptDir}/models:/home/dev
   {{< /tab >}}
 {{< /tabpane >}}
 
-## Start the Development Container
+## Start the development container
+
+Run the script to start the container:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS / Linux" language="bash">}}
@@ -158,15 +170,15 @@ docker run -it --rm --name executorch-alif-dev -v "${ScriptDir}/models:/home/dev
   {{< /tab >}}
 {{< /tabpane >}}
 
-You should see the following prompt:
+You'll see the following command prompt:
 
 ```output
 developer@container_ID:~$
 ```
 
-You are now inside the Docker container.
+You're now inside the Docker container.
 
-## Clone ExecuTorch
+## Clone ExecuTorch in the container
 
 Inside the Docker container, clone and install ExecuTorch v1.0.0:
 
@@ -183,17 +195,19 @@ git submodule update --init --recursive
 ```
 
 {{% notice Note %}}
-Submodule initialization may take 5-10 minutes depending on your connection.
+Submodule initialization might take 5-10 minutes depending on your connection.
 {{% /notice %}}
 
-Set Environment Variable (`ET_HOME`):
+Set the environment variable `ET_HOME`:
+
 ```bash
 export ET_HOME=/home/developer/executorch
 echo 'export ET_HOME=/home/developer/executorch' >> ~/.bashrc
 ```
 
-### Install Python Dependencies
-Activate the Python environment and run the installer script.
+### Install Python dependencies
+
+Activate the Python environment and run the installer script:
 
 ```bash
 # Ensure virtual environment is active
@@ -210,6 +224,8 @@ pip install 'lxml>=4.7.1,<6.0.1'
 
 ### Install ExecuTorch
 
+After activating the environment, install ExecuTorch:
+
 ```bash
 cd $ET_HOME
 # Install ExecuTorch in editable mode
@@ -219,7 +235,7 @@ CMAKE_BUILD_PARALLEL_LEVEL=2 pip install --no-build-isolation -e .
 {{% notice Note %}}
 The `--no-build-isolation` flag is required so ExecuTorch finds the PyTorch installation from `install_requirements.sh`. 
 
-`CMAKE_BUILD_PARALLEL_LEVEL=2` limits the number of parallel CMake build jobs during installation. This reduces peak memory usage and helps avoid out-of-memory failures.
+`CMAKE_BUILD_PARALLEL_LEVEL=2` limits the number of parallel CMake build jobs during installation. This limit reduces peak memory usage and helps avoid out-of-memory failures.
 {{% /notice %}}
 
 Verify the installation:
@@ -228,12 +244,14 @@ Verify the installation:
 python3 -c "from executorch.exir import to_edge; print('ExecuTorch installed successfully')"
 ```
 
-Expected output:
+The output is similar to:
+
 ```output
 ExecuTorch installed successfully
 ```
 
-## Set Up Arm Ethos-U Dependencies
+## Set up Arm Ethos-U dependencies
+
 Run the ExecuTorch Arm setup script:
 ```bash
 cd $ET_HOME
@@ -241,7 +259,7 @@ cd $ET_HOME
 ./examples/arm/setup.sh --i-agree-to-the-contained-eula
 ```
 
-This script sets up:
+This script sets up the following dependencies:
 - TOSA Libraries
 - Ethos-U SDK structure
 - CMake toolchain files
@@ -277,7 +295,7 @@ echo "export PATH=\"$(pwd)/$TOOLCHAIN_DIR/bin:\$PATH\"" >> ~/.bashrc
 The toolchain download is approximately 139 MB and may take 10-30 minutes depending on your connection speed.
 {{% /notice %}} -->
 
-### Create Environment Setup Script
+## Create an environment setup script
 
 Create a reusable environment script for future sessions:
 
@@ -307,7 +325,7 @@ echo 'source $ET_HOME/setup_arm_env.sh' >> ~/.bashrc
 source $ET_HOME/setup_arm_env.sh
 ```
 
-## Verify Complete Installation
+## Verify complete installation
 
 Run all verification checks:
 
@@ -325,28 +343,28 @@ This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ``` -->
 
-Check Vela Compiler
+Check Vela compiler
 
 ```bash
 vela --version
 ```
 
-Expected output:
+The output is similar to:
+
 ```output
 4.4.1
 ```
-Check ExecuTorch
+Check ExecuTorch:
 
 ```bash
 python3 -c "from executorch.exir import to_edge; print('ExecuTorch OK')"
 ```
 
-Expected output:
+The output is similar to:
+
 ```output
 ExecuTorch OK
 ```
-
-## Quick Verification Test
 
 Run a minimal export test to verify the complete setup:
 
@@ -355,7 +373,7 @@ cd $ET_HOME
 python3 -m examples.arm.aot_arm_compiler --model_name=add --delegate --quantize --target=ethos-u85-256 --output=/home/developer/output/add_ethos_u85.pte
 ```
 
-Expected output:
+The output is similar to:
 ```output
 Exporting model add...
 Lowering to TOSA...
@@ -369,12 +387,10 @@ Verify the `.pte` file was created:
 ls -lh /home/developer/output/add_ethos_u85.pte
 ```
 
-The `output` directory is mounted from your host machine, so the file is also available at:
-```bash
-~/mnist_alif/executorch-alif/output/
-```
+The `output` directory is mounted from your host machine, so the file is also available at
+`~/mnist_alif/executorch-alif/output/`.
 
-## Save Container State (Optional)
+## (Optional) Save container state 
 
 To preserve your work, you can commit the container to a new image:
 
@@ -383,12 +399,8 @@ To preserve your work, you can commit the container to a new image:
 docker commit executorch-alif-dev executorch-alif:configured
 ```
 
-## Summary
+## What you've accomplished and what's next
 
-You have created a Docker environment for model export. The container has:
-- Python and PyTorch
-- ExecuTorch
-- Ethos-U Vela
-- Mounted models and output directories for sharing files with the host
+You've now created a Docker environment for model export. The container has Python and PyTorch, ExecuTorch, and Ethos-U Vela installed. You've also mounted models and output directories on the container for sharing files with the host.
 
-In the next section, you'll export a PyTorch model to ExecuTorch `.pte` format.
+Next, you'll export a PyTorch model to ExecuTorch `.pte` format.

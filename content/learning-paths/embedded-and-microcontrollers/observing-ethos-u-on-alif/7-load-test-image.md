@@ -1,18 +1,14 @@
 ---
-title: Load test sample
+title: Process and copy a sample image into the Alif E8 CMSIS project
 weight: 8
 layout: learningpathall
 ---
 
-## Overview
-
-This section converts a handwritten digit image into a C header that the firmware can include at build time.
-
-The MNIST model expects one grayscale 28 x 28 image. The script in this section resizes the image, converts it to grayscale, scales pixel values to the range 0 to 127, and writes the result to `input_mnist.h`.
-
 ## Set up Python image tools
 
-Create a Python virtual environment for image preprocessing:
+You'll convert a handwritten digit image into a C header that the firmware can include at build time.
+
+To start, create a Python virtual environment for image preprocessing:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS / Linux" language="bash" >}}
@@ -48,11 +44,7 @@ cd ~\mnist_alif\image
   {{< /tab >}}
 {{< /tabpane >}}
 
-Place a PNG or JPEG image of a handwritten digit in this directory and name it:
-
-```text
-mnist_image.jpg
-```
+Place a PNG or JPEG image of a handwritten digit in the directory and name it `mnist_image.jpg`.
 
 {{% notice Note %}}
 Use a simple, centered, high-contrast digit image. The script supports black-on-white and white-on-black images, and automatically converts black-on-white images to MNIST-style white-on-black format.
@@ -63,16 +55,17 @@ Feel free to use any of the images within this dataset: https://huggingface.co/d
 
 ## Download the preprocessing script
 
+The MNIST model expects one grayscale 28 x 28 image. You'll use a preprocessing script to resize the image, convert it to grayscale, scale pixel values to the range 0 to 127, and write the result to `input_mnist.h`.
+
 Download `prepare_mnist_image.py` into the image directory:
 
 ```bash
 cd ~/mnist_alif/image
 curl -o prepare_mnist_image.py https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/main/prepare_mnist_image.py
 ```
-Before moving on, open `prepare_mnist_image.py` and inspect.
+Open `prepare_mnist_image.py` and inspect.
 
-The script defines command-line arguments, checks that the input image exists, then converts the image to 28 x 28 grayscale pixels. 
-It also handles image inversion so black-on-white images can be converted to the white-on-black style used by MNIST.
+The script defines command-line arguments, checks that the input image exists, then converts the image to 28 x 28 grayscale pixels. It also handles image inversion so black-on-white images can be converted to the white-on-black style used by MNIST.
 
 The key conversion step scales each pixel into a value within the non-negative int8 range (0 to 127) and flattens the output into a one-dimensional array:
 ```python
@@ -139,14 +132,16 @@ Get-ChildItem "$HOME\mnist_alif\alif_vscode-template\mnist_executorch\assets"
   {{< /tab >}}
 {{< /tabpane >}}
 
-You should see:
+The output is similar to:
 
 ```output
 input_mnist.h
 mnist_model_data.h
 ```
 
-## Summary
+## What you've accomplished and what's next
 
-You converted a test digit image into `input_mnist.h` and copied it into the firmware project. The next section builds and flashes the application to the Alif Ensemble E8 DevKit.
+You've now converted a test digit image into `input_mnist.h` and copied it into the firmware project. 
+
+Next, you'll build and flash the application to the Alif Ensemble E8 DevKit.
 

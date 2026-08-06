@@ -4,16 +4,14 @@ weight: 5
 layout: learningpathall
 ---
 
-## Overview
-
-This section exports an MNIST PyTorch model to ExecuTorch `.pte` format for the Arm Ethos-U85 NPU on the Alif Ensemble E8 DevKit.
-
-
-{{% notice Note %}}
-If you are using the provided `.pte` file, you can skip this section.
-{{% /notice %}}
 
 ## Download the model files
+
+To export an MNIST PyTorch model to ExecuTorch `.pte` format, start by downloading the model files. 
+
+{{% notice Note %}}
+If you're using the provided `.pte` file instead, skip the entire model export section and proceed with [Prepare firmware artifacts](/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-alif/5-prepare-firmware-artifacts/).
+{{% /notice %}}
 
 From inside your container, create the model and output directories:
 
@@ -45,9 +43,9 @@ def __init__(self):
         self.relu3 = nn.ReLU()
         self.fc2 = nn.Linear(64, 10)
 ```
-The convolution layers extract image features such as strokes, edges, and digit shapes. Each output channel from a convolution is called a **feature map**.
-Layer 1 (`fc1`) takes in 32 feature maps of size 7 x 7 each, and reduces those values to 64 features. 
-The final layer (`fc2`) then maps those 64 features to 10 digit scores (0 to 9).
+The convolution layers extract image features such as strokes, edges, and digit shapes. Each output channel from a convolution is called a feature map.
+
+Layer 1 (`fc1`) takes in 32 feature maps of size 7 x 7 each, and reduces those values to 64 features. The final layer (`fc2`) then maps those 64 features to 10 digit scores (0 to 9).
 
 The same file also exposes the objects expected by the ExecuTorch ahead-of-time compiler:
 ```python
@@ -55,10 +53,7 @@ ModelUnderTest = MNISTModel() # PyTorch model to export
 ModelInputs = (load_calibration_input(),) 
 ```
 
-The training script, however, downloads the [MNIST dataset](https://datasetsearch.research.google.com/search?query=mnist&docid=L2cvMTF0ZGh0cHRmMA%3D%3D), normalizes the images, trains the model, and saves the trained weights to:
-```text
-/home/developer/models/mnist_model.pth
-```
+The training script, however, downloads the [MNIST dataset](https://datasetsearch.research.google.com/search?query=mnist&docid=L2cvMTF0ZGh0cHRmMA%3D%3D), normalizes the images, trains the model, and saves the trained weights to `/home/developer/models/mnist_model.pth`.
 <!-- {{% notice Note %}}
 The model input is a normalized float32 tensor with shape [1, 1, 28, 28]. The output is 10 logits, one for each digit from 0 to 9.
 {{% /notice %}} -->
@@ -66,17 +61,18 @@ The model input is a normalized float32 tensor with shape [1, 1, 28, 28]. The ou
 ## Add calibration input
 
 The model is exported with int8 quantization, so the compiler needs a representative MNIST input during export. 
-This input is not the image that runs on the board. It is only used to set quantization ranges when generating the `.pte` file.
+
+This input is not the image that runs on the board. It's used only to set quantization ranges when generating the `.pte` file.
 
 Download the calibration sample:
 ```bash
 curl -L -o /home/developer/output/sample_one.pt https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/main/sample_one.pt
 ```
 
-The file downloaded contains one normalized MNIST-style grayscale image, saved as a PyTorch tensor (`.pt`) with shape `[1, 1, 28, 28]` and type `float32`. 
+The downloaded sample contains one normalized MNIST-style grayscale image, saved as a PyTorch tensor (`.pt`) with shape `[1, 1, 28, 28]` and type `float32`. 
 This allows `mnist_model.py` to load the exact format it needs without any image preprocessing step.
 
-For production-quality quantization, you would normally calibrate with a larger and more diverse set of representative inputs. This Learning Path uses one sample to keep the export flow small and reproducible.
+For production-quality quantization, you'd normally calibrate with a larger and more diverse set of representative inputs. To keep the export flow small and reproducible, you'll use one sample for completing the Learning Path.
 
 ## Train the model
 
@@ -111,10 +107,10 @@ cd $ET_HOME
 MNIST_LOAD_CHECKPOINT=1 python3 -m examples.arm.aot_arm_compiler --model_name=/home/developer/models/mnist_model.py --delegate --quantize --target=ethos-u85-256 --system_config=Ethos_U85_SYS_DRAM_Mid --memory_mode=Shared_Sram --output=/home/developer/output/mnist_ethos_u85.pte
 ```
 {{% notice Important %}}
-Use full paths such as `/home/developer/models/mnist_model.py`. Do not use `~` in the export command.
+Use full paths such as `/home/developer/models/mnist_model.py`. Don't use `~` in the export command.
 {{% /notice %}}
 
-Argument definitions:
+The following are the arguments passed in the export command:
 - `MNIST_LOAD_CHECKPOINT=1`: loads the trained weights from /home/developer/models/mnist_model.pth.
 - `--model_name`: points to the PyTorch model definition.
 - `--delegate`: partitions supported operators for execution on the Ethos-U NPU.
@@ -123,7 +119,9 @@ Argument definitions:
 - `--system_config` and `--memory_mode`: selects the Vela memory configuration used when compiling the NPU command stream.
 - `--output`: writes the exported ExecuTorch program.
 
-Vela is Arm’s compiler for Ethos-U NPUs. During export, it prints information about the selected Ethos-U target, memory use, and NPU performance estimates. Review this output to confirm that the model was compiled for the expected `ethos-u85-256` target. At the end, you should see confirmation of the saved `.pte` file:
+Vela is Arm’s compiler for Ethos-U NPUs. During export, it prints information about the selected Ethos-U target, memory use, and NPU performance estimates. Review this output to confirm that the model was compiled for the expected `ethos-u85-256` target. 
+
+At the end, you should see confirmation of the saved `.pte` file as follows:
 
 ```output
 PTE file saved as /home/developer/output/mnist_ethos_u85.pte
@@ -140,7 +138,9 @@ rm -rf arm_test/cmake-out
 bash backends/arm/scripts/build_executorch.sh
 ```
 
+{{% notice Note %}}
 This step can take several minutes.
+{{% /notice %}}
 
 When the build finishes, list the generated static libraries:
 
@@ -148,7 +148,7 @@ When the build finishes, list the generated static libraries:
 find arm_test/cmake-out -type f -name "*.a" | sort
 ```
 
-You should see libraries including:
+The output is similar to:
 
 ```output
 libexecutorch.a
@@ -172,13 +172,16 @@ cp "$CMSIS_NN_LIB" /home/developer/output/et_bundle/lib/
 tar -C /home/developer/output -czf /home/developer/output/et_bundle.tar.gz et_bundle
 ```
 
-Because `/home/developer/output` is mounted from your host machine, `et_bundle.tar.gz` is now available on your host at:
+Because `/home/developer/output` is mounted from your host machine, `et_bundle.tar.gz` is now available on your host at `~/mnist_alif/executorch-alif/output/et_bundle.tar.gz`.
 
-```text
-~/mnist_alif/executorch-alif/output/et_bundle.tar.gz
-```
+Exit Docker:
 
-You may now exit Docker:
 ```bash
 exit
 ```
+
+## What you've accomplished and what's next
+
+You've now downloaded and trained the MNIST model and exported an int8 ExecuTorch `.pte` file for the Ethos-U85 NPU. You've also built the bare-metal ExecuTorch libraries and packaged the required headers and libraries into `et_bundle.tar.gz`.
+
+Next, you'll prepare the model and runtime artifacts for the Alif firmware project.

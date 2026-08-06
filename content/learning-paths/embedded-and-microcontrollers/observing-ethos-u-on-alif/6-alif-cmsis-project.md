@@ -4,13 +4,9 @@ weight: 7
 layout: learningpathall
 ---
 
-## Overview
+## Duplicate an existing Blinky project
 
-In this section, you duplicate the existing Blinky example to create a new CMSIS project called mnist_executorch, configured to include ExecuTorch libraries, the compiled model, and SEGGER RTT for debug output.
-
-## Duplicate the Blinky project
-
-Start by copying the working Blinky project as a template, and renaming the project file inside the new directory:
+Start by copying a working Blinky project as a template, and renaming the project file inside the new directory:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS / Linux" language="bash" >}}
@@ -39,7 +35,10 @@ Get-ChildItem .\mnist_executorch -Recurse -File | Where-Object { Select-String -
 
 ## Rename main.c to main.cpp
 
-ExecuTorch is a C++ library, so the source file needs a `.cpp` extension:
+ExecuTorch is a C++ library, so the source file needs a `.cpp` extension
+
+Update the extension of `main.c`:
+
 {{< tabpane code=true >}}
   {{< tab header="macOS / Linux" language="bash" >}}
 mv mnist_executorch/main.c mnist_executorch/main.cpp
@@ -52,6 +51,7 @@ Rename-Item .\mnist_executorch\main.c main.cpp
 ## Copy model assets
 
 Create an assets directory and copy the model header into the project:
+
 {{< tabpane code=true >}}
   {{< tab header="macOS / Linux" language="bash" >}}
 mkdir -p mnist_executorch/assets
@@ -66,7 +66,9 @@ Copy-Item ~\mnist_alif\executorch-alif\output\mnist_model_data.h .\mnist_executo
 
 ## Create the SEGGER RTT configuration
 
-RTT (Real-Time Transfer) works through the J-Link debug probe, reading and writing a memory buffer through the debug interface. It's faster than UART and doesn't require extra wiring. Within `mnist_executorch/`, create the configuration file `SEGGER_RTT_Conf.h`:
+Real-Time Transfer (RTT) works through the J-Link debug probe, reading and writing a memory buffer through the debug interface. It's faster than UART and doesn't require extra wiring. 
+
+Within `mnist_executorch/`, create the configuration file `SEGGER_RTT_Conf.h`:
 
 ```c
 #ifndef SEGGER_RTT_CONF_H
@@ -84,7 +86,7 @@ RTT (Real-Time Transfer) works through the J-Link debug probe, reading and writi
 
 The `alif.csolution.yml` file describes the whole CMSIS workspace: available projects, targets, devices, packs, and flash settings.
 
-Open it and make the following changes.
+Open the file and make the following changes.
 
 Update the `created-for` field to match your CMSIS Toolbox version:
 
@@ -103,7 +105,9 @@ Add the required packs under the `packs:` section:
     - pack: ARM::ethos-u-core-driver
 ```
 
-Add a `target-set` block to the `E8-HP` target type so the Security Toolkit knows which binary to flash. Find the `type: E8-HP` section and add:
+Add a `target-set` block to the `E8-HP` target type so the Security Toolkit knows which binary to flash.
+
+Find the `type: E8-HP` section and add the following:
 
 ```yaml
     - type: E8-HP
@@ -119,7 +123,7 @@ Add a `target-set` block to the `E8-HP` target type so the Security Toolkit know
 
 For all other target types (E7-HE, E7-HP, E1C-HE, E8-HE), add a `target-set` pointing to `blinky.debug` instead.
 
-Add `mnist_executorch` to the projects list. It's at the bottom of the file:
+Add `mnist_executorch` to the projects list at the end of the file:
 
 ```yaml
   projects:
@@ -132,6 +136,7 @@ Add `mnist_executorch` to the projects list. It's at the bottom of the file:
 ## Configure the project file
 
 The `mnist_executorch/mnist_executorch.cproject.yml` file describes our MNIST application: its source files, components, include paths, and build options.
+
 Locate this file and replace the contents with the following configuration:
 
 ```yaml
@@ -216,11 +221,11 @@ Update the `-L` path to match the absolute path to your `third_party/executorch/
 
 There are several important details in this configuration:
 
-- **`--whole-archive`** is required for `libexecutorch`, `libexecutorch_core`, `libexecutorch_delegate_ethos_u`, and `libcortex_m_ops_lib`. These libraries contain static registration constructors (for operator registration and PAL symbols) that the linker would otherwise discard as unused.
-- **Don't add** `portable_ops_lib` or `quantized_ops_lib` to `--whole-archive`. They are large and will overflow the microcontroller's ITCM/MRAM.
-- **`--start-group`/`--end-group`** resolves circular dependencies among the remaining libraries.
-- **`C10_USING_CUSTOM_GENERATED_MACROS`** tells ExecuTorch to skip looking for a `cmake_macros.h` header that doesn't exist in the bare-metal build.
-- The **c10 include path** provides the tensor type definitions that ExecuTorch's headers depend on.
+- `--whole-archive` is required for `libexecutorch`, `libexecutorch_core`, `libexecutorch_delegate_ethos_u`, and `libcortex_m_ops_lib`. These libraries contain static registration constructors (for operator registration and PAL symbols) that the linker would otherwise discard as unused.
+- Don't add `portable_ops_lib` or `quantized_ops_lib` to `--whole-archive`. They are large and will overflow the microcontroller's ITCM or MRAM.
+- `--start-group` and `--end-group` resolve circular dependencies among the remaining libraries.
+- `C10_USING_CUSTOM_GENERATED_MACROS` tells ExecuTorch to skip looking for a `cmake_macros.h` header that doesn't exist in the bare-metal build.
+- The c10 include path provides the tensor type definitions that ExecuTorch's headers depend on.
 
 ## Add the source files
 
@@ -228,7 +233,7 @@ The application code is split across three source files:
 
 - `main.cpp` is the firmware entry point. It initializes the board, loads the embedded model from `mnist_model_data.h`, passes the MNIST input image to the runner, and prints the predicted digit and output scores.
 - `executorch_runner.h` declares the small C-style interface used by `main.cpp` to initialize ExecuTorch and run inference.
-- `executorch_runner.cpp` implements the ExecuTorch integration. It initializes the Ethos-U NPU driver, loads the `.pte` program, prepares input and output tensors, allocates runtime buffers, and executes the model.
+- `executorch_runner.cpp` implements the ExecuTorch integration. It initializes the Ethos-U NPU driver and loads the `.pte` program. It also prepares input and output tensors, allocates runtime buffers, and executes the model.
 
 Run these commands to download the source files and place them in `mnist_executorch/`:
 
@@ -238,17 +243,13 @@ curl -o main.cpp https://raw.githubusercontent.com/arm-education/alif-ethos-u85-
 curl -o executorch_runner.cpp  https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/refs/heads/main/mnist_executorch/executorch_runner.cpp
 curl -o executorch_runner.h https://raw.githubusercontent.com/arm-education/alif-ethos-u85-npu-mnist/refs/heads/main/mnist_executorch/executorch_runner.h
 ```
-After downloading the files, open them in VS Code and briefly review how `main.cpp` calls into `executorch_runner.cpp` to initialize ExecuTorch, pass in the MNIST input tensor, and read back the model output.
+After downloading the files, open them in VS Code. Briefly review how `main.cpp` calls into `executorch_runner.cpp` to initialize ExecuTorch, pass in the MNIST input tensor, and read back the model output.
 
 ## Update the linker script
 
-Open:
+Open `device/ensemble/RTE/Device/AE822FA0E5597LS0_M55_HP/linker_gnu_mram.ld.src`.
 
-```text
-device/ensemble/RTE/Device/AE822FA0E5597LS0_M55_HP/linker_gnu_mram.ld.src
-```
-
-On Cortex-M systems, the **DTCM (Data Tightly Coupled Memory)** is a small, fast RAM region connected closely to the CPU. By default, the linker script sends most `.bss` data to DTCM. 
+On Cortex-M systems, the Data Tightly Coupled Memory (DTCM) is a small, fast RAM region connected closely to the CPU. By default, the linker script sends most `.bss` data to DTCM. 
 
 ExecuTorch uses large memory pools, so this data must be routed to SRAM0 and SRAM1 instead. Without this change, the linker reports that `.bss` does not fit in DTCM.
 
@@ -256,7 +257,7 @@ Make the following changes.
 
 ### Add SRAM1 to the zero-initialization table
 
-Find this block in `.zero.table`:
+Find the following block in `.zero.table`:
 
 ```ld
 #if __HAS_BULK_SRAM
@@ -265,7 +266,7 @@ Find this block in `.zero.table`:
 #endif
 ```
 
-Replace it with:
+Replace it with the following:
 
 ```ld
 #if __HAS_BULK_SRAM
@@ -276,18 +277,18 @@ Replace it with:
 #endif
 ```
 
-This tells the startup code to clear both SRAM0 and SRAM1 `.bss` sections before `main()` runs.
+This block tells the startup code to clear both SRAM0 and SRAM1 `.bss` sections before `main()` runs.
 
-### Add GOT sections to `.data.at_dtcm`
+### Add GOT sections to .data.at_dtcm
 
-Find this part of `.data.at_dtcm`:
+Find the following block in `.data.at_dtcm`:
 
 ```ld
     KEEP(*(.jcr*))
     . = ALIGN(8);
 ```
 
-Replace it with:
+Replace it with the following:
 
 ```ld
     KEEP(*(.jcr*))
@@ -296,11 +297,11 @@ Replace it with:
     . = ALIGN(8);
 ```
 
-The ExecuTorch C++ libraries can use a Global Offset Table (GOT). These entries must be copied into RAM at startup.
+The ExecuTorch C++ libraries can use a GOT (Global Offset Table). These entries must be copied into RAM at startup.
 
 ### Route ExecuTorch buffers to SRAM0 and SRAM1
 
-Find this existing block:
+Find the following existing block:
 
 ```ld
 #if __HAS_BULK_SRAM
@@ -314,7 +315,7 @@ Find this existing block:
 #endif
 ```
 
-Replace it with:
+Replace it with the following:
 
 ```ld
 #if __HAS_BULK_SRAM
@@ -335,12 +336,14 @@ Replace it with:
 #endif
 ```
 
-This must appear before the generic `.bss` section. Otherwise, sections such as `.bss.at_sram0` and `.bss.at_sram1` are caught by `*(.bss.*)` and placed in DTCM.
+This block must appear before the generic `.bss` section. Otherwise, sections such as `.bss.at_sram0` and `.bss.at_sram1` are caught by `*(.bss.*)` and placed in DTCM.
 
-The project structure is ready. The next sections cover image preparation before you build and flash.
+The project structure is ready. 
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
-You've created the mnist_executorch firmware project, configured CMSIS packs, and set up the linker to include ExecuTorch libraries with the correct archive flags.
+You've now created the mnist_executorch firmware project, configured CMSIS packs, and set up the linker to include ExecuTorch libraries with the correct archive flags.
 
 You've also added the application code that loads the model and runs inference on the Ethos-U85 NPU.
+
+Next, you'll load and prepare a test image before you build and flash.

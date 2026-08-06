@@ -1,9 +1,5 @@
 ---
-title: Run OCR (MNIST) on Alif E8 Ensemble DevKit using ExecuTorch and Ethos-U85
-
-draft: true
-cascade:
-    draft: true
+title: Run MNIST on an Alif E8 Ensemble developer kit using ExecuTorch and Ethos-U85
 
 minutes_to_complete: 45
 
@@ -18,10 +14,10 @@ learning_objectives:
     - Monitor inference results via SEGGER Real-Time Transfer (RTT)
 
 prerequisites:
-    - Experience with C/C++ and embedded development concepts
+    - Experience with C or C++ and embedded development concepts
     - Alif [Ensemble E8 Series Development Kit](https://alifsemi.com/ensemble-e8-series/) (contact [Alif Sales](https://alifsemi.com/support/sales-support/))
     - USB Type-C cable for programming
-    - A SEGGER J-Link debug probe (included in the DevKit)
+    - A SEGGER J-Link debug probe, included in the DevKit
     - A development machine running Windows, Linux, or macOS with Visual Studio Code installed
 
 author_primary: Waheed Brown
