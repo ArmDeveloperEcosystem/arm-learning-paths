@@ -339,12 +339,12 @@ Replace it with the following:
 
 This block must appear before the generic `.bss` section. Otherwise, sections such as `.bss.at_sram0` and `.bss.at_sram1` are caught by `*(.bss.*)` and placed in DTCM.
 
-The project structure is ready. 
+The project structure is now ready. 
 
 ## What you've accomplished and what's next
 
-You've now created the mnist_executorch firmware project, configured CMSIS packs, and set up the linker to include ExecuTorch libraries with the correct archive flags.
+You've now created the `mnist_executorch` firmware project, configured CMSIS packs, and set up the linker to include ExecuTorch libraries with the correct archive flags.
 
 You've also added the application code that loads the model and runs inference on the Ethos-U85 NPU.
 
-Next, you'll load and prepare a test image before you build and flash.
+Next, you'll load and prepare a test image to copy into the firmware project.

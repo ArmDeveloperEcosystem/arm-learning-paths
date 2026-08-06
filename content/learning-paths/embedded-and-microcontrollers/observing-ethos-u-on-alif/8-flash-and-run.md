@@ -5,7 +5,7 @@ weight: 9
 layout: learningpathall
 ---
 
-## Build the project using the VS Code CMSIS Extension
+## Build the project using the VS Code CMSIS extension
 
 First, clear any cached build files present from previous runs:
 
@@ -58,7 +58,7 @@ Flashing takes about 30 seconds.
 Open a new terminal and start J-Link Commander:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 JLinkExe -device AE822FA0E5597LS0_M55_HE -if SWD -speed 4000
   {{< /tab >}}
 
@@ -82,7 +82,7 @@ Leave this terminal open. It acts as the RTT server.
 Open a second terminal and start the RTT client:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS / Linux" language="bash" >}}
+  {{< tab header="macOS and Linux" language="bash" >}}
 JLinkRTTClient
   {{< /tab >}}
 
