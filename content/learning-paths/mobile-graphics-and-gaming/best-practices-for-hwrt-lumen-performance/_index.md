@@ -16,9 +16,58 @@ prerequisites:
 - An Android mobile device that has a Mali GPU with hardware ray tracing support.
 - A USB cable to connect the mobile device to your computer.
 
+# START generated_summary_faq
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-05T14:55:51Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 51b4879c8a82a6af42bc7f5d5e96a8d6fbcac673a409a8ad25c4912435791aef
+  summary_generated_at: '2026-08-05T14:55:51Z'
+  summary_source_hash: 51b4879c8a82a6af42bc7f5d5e96a8d6fbcac673a409a8ad25c4912435791aef
+  faq_generated_at: '2026-08-05T14:55:51Z'
+  faq_source_hash: 51b4879c8a82a6af42bc7f5d5e96a8d6fbcac673a409a8ad25c4912435791aef
+  summary: >-
+    You'll improve Lumen hardware ray tracing on Android devices with Arm Mali-based GPUs by refining
+    acceleration-structure contents and organization. First, you'll choose which actors to include and exclude
+    small contributors. Then, you'll inspect instancing with Unreal’s Ray Tracing Debug picker, and convert
+    repeated objects to instanced actors. Finally, you'll check **Instance Overlap** to reduce traversal work
+    while preserving the intended lighting.
+  faqs:
+  - question: What do I need to check before applying these optimizations?
+    answer: >-
+      Enable hardware ray tracing for Lumen on the target Android device as referenced in the
+      prerequisite guidance. Open the Unreal Engine project and the level you plan to optimize.
+  - question: How do I exclude nonessential actors from ray tracing?
+    answer: >-
+      Use the actor details panel and turn off ray tracing visibility for objects that do not
+      affect lighting or are very small. Preview the scene to confirm that lighting quality remains
+      acceptable.
+  - question: How can I confirm whether repeated objects are instanced?
+    answer: >-
+      Run the command `r.RayTracing.Debug.PickerDomain 1` to set the picker to instance mode, then
+      use **Ray Tracing Debug** and select **Picker**. Click scene elements to inspect their instancing
+      status and convert repeated objects to instanced actors when possible.
+  - question: What should I look for in the Instance Overlap view?
+    answer: >-
+      Open the **Instance Overlap** view under **Ray Tracing Debug** and look for areas showing high overlap.
+      Adjust meshes and actor bounds so each bounding box contains minimal empty space and overlaps
+      less with neighbors.
+  - question: Why does removing small or overlapping geometry help?
+    answer: >-
+      You reduce hit tests because the acceleration structure stores scene geometry in a hierarchy.
+      Fewer, less-overlapping bounds lower traversal work, which can improve hardware ray tracing
+      efficiency.
+# END generated_summary_faq
+
 author: Owen Wu
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -26,8 +75,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Gaming
 armips:
-    - Immortalis-G715
-    - Immortalis-G720
+    - Immortalis
 operatingsystems:
     - Android
 tools_software_languages:
@@ -53,4 +101,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

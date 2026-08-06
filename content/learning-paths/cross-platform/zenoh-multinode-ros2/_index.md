@@ -16,12 +16,59 @@ prerequisites:
     - At least two local Cortex-A devices running Linux, such as Raspberry Pi 4 or Pi 5. You can also use Arm servers or cloud instances
     - Experience with ROS 2 applications
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-04T20:55:36Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: d196e9204523c1aea84c1e6a60060a83480ec929edc31b1b50cca43b2e305739
+  summary_generated_at: '2026-08-04T20:55:36Z'
+  summary_source_hash: d196e9204523c1aea84c1e6a60060a83480ec929edc31b1b50cca43b2e305739
+  faq_generated_at: '2026-08-04T20:55:36Z'
+  faq_source_hash: d196e9204523c1aea84c1e6a60060a83480ec929edc31b1b50cca43b2e305739
+  summary: >-
+    You'll build a multi-node Eclipse Zenoh system on Arm-based Linux devices such as Raspberry Pi. First, you'll
+    compile Zenoh from source. Then, you'll distribute either the release binaries or a Docker image and run the nodes
+    across multiple devices. You'll test publish/subscribe messaging, in-memory storage and queries, and
+    queryable nodes that compute results on demand. Finally, you'll complete examples to see how to exchange messages across
+    devices, retrieve stored values, and return calculated results through Zenoh queries.
+  faqs:
+  - question: How do I know my Zenoh build is ready to deploy to other devices?
+    answer: >-
+      After building, check for compiled binaries under `~/zenoh/target/release`. If the Zenoh
+      examples run locally, you can copy the release binaries to your other Arm devices.
+  - question: Which files do I need to copy when deploying binaries to additional Raspberry Pi
+      boards?
+    answer: >-
+      Copy the compiled Zenoh binaries from `~/zenoh/target/release` to each target device. Keep
+      the files together so you can run the same examples across all nodes.
+  - question: What result should I expect when I run the pub/sub example on two devices?
+    answer: >-
+      The subscriber should receive updates for keys that match the `demo/example/**` expression.
+      When the publisher sends messages under matching keys, the subscriber observes those updates
+      in real time over the local network.
+  - question: Should I run Zenoh directly on the host or use Docker for multi-node tests?
+    answer: >-
+      Both approaches are supported. Run the release binaries directly on each device, or use Docker
+      to distribute Zenoh and provide a consistent multi-node test environment.
+  - question: What should I check if a z_get query returns no data in the storage example?
+    answer: >-
+      Confirm that the Zenoh daemon is running and that `z_put` and `z_get` use the same key. If
+      port `7447` is already in use, stop the previous Zenoh process or configure another listener
+      port. This example uses in-memory storage, so only values published after the daemon starts
+      are available for you to query.
+# END generated_summary_faq
+
 author: 
     - Odin Shen
     - William Liang
     - ChenYing Kuo
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -64,4 +111,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

@@ -70,9 +70,8 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Performance and Architecture
 armips:
-    - Aarch64
-    - Armv8-a
-    - Armv9-a
+    - Neoverse
+    - Cortex-A
 tools_software_languages:
     - GCC
     - Clang
