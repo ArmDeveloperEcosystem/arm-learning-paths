@@ -29,9 +29,9 @@ printf 'Online CPUs: '
 nproc
 ```
 
-On the Thelio Astra used for this Learning Path, each CPU has its own policy. Other Arm systems can group several CPUs into one frequency domain.
+On the Thelio Astra used to test the Learning Path, each CPU has its own policy. Other Arm systems can group several CPUs into one frequency domain.
 
-Display the controls for the first policy:
+Display the controls for the first policy in your list:
 
 ```bash
 for attribute in \
@@ -52,19 +52,19 @@ for attribute in \
 done
 ```
 
-The Thelio Astra example uses the `cppc_cpufreq` driver. It exposes a range from `1000000` kHz to `2200000` kHz and supports these governors:
+A Thelio Astra uses the `cppc_cpufreq` driver. It exposes a range from `1000000` kHz to `2200000` kHz and supports the following governors:
 
 ```output
 conservative ondemand userspace powersave performance schedutil
 ```
 
-This Learning Path uses `powersave`, `schedutil`, and `performance`.
+You'll compare the `powersave`, `schedutil`, and `performance` governors.
 
 The `boost` attribute reports `0` because Arm Neoverse server CPUs maintain sustained performance across the full frequency range rather than using a temporary boost mode above the configured maximum.
 
 ## View a summary with cpupower
 
-The `cpupower` utility provides a concise view of the same CPUFreq information. It was installed in the previous section.
+The `cpupower` utility provides a concise view of the same CPUFreq information. 
 
 Display the frequency information for the current CPU:
 
@@ -72,7 +72,7 @@ Display the frequency information for the current CPU:
 cpupower frequency-info
 ```
 
-The output summarizes the driver, governor, frequency range, and hardware limits in one view. The CPU number in the first line depends on which CPU the `cpupower` process was scheduled on and varies between runs:
+The output summarizes the driver, governor, frequency range, and hardware limits in one view:
 
 ```output
 analyzing CPU 43:
@@ -89,6 +89,7 @@ analyzing CPU 43:
   boost state support:
     Active: no
 ```
+The CPU number in the first line depends on which CPU the `cpupower` process was scheduled on. The number varies between runs.
 
 Show the same summary for all CPUs:
 
@@ -96,13 +97,13 @@ Show the same summary for all CPUs:
 cpupower -c all frequency-info
 ```
 
-The rest of this Learning Path reads and writes sysfs files directly because the telemetry scripts need programmatic access. The `cpupower` output is useful for quick checks between experiments.
+The workload and telemetry scripts read and write sysfs files directly. The `cpupower` output is useful for quick checks between experiments.
 
 ## Locate the hwmon devices
 
-The Linux hardware monitoring (hwmon) subsystem exposes sensor data such as power, temperature, and fan speed through sysfs. Each hardware monitoring chip or driver registers as a separate hwmon device.
+The Linux hardware monitoring subsystem (`hwmon`) exposes sensor data such as power, temperature, and fan speed through `sysfs`. Each hardware monitoring chip or driver registers as a separate `hwmon` device.
 
-The hwmon directory numbers can change after a kernel update or reboot. Identify devices by reading their `name` files instead of assuming fixed numbers:
+The `hwmon` directory numbers can change after a kernel update or reboot. Identify devices by reading their `name` files:
 
 ```bash
 for device in /sys/class/hwmon/hwmon*; do
@@ -120,26 +121,14 @@ The output on a Thelio Astra includes:
 /sys/class/hwmon/hwmon3: hidpp_battery_0
 ```
 
-Each device provides different sensor data:
+The device names might vary on your system. Each device provides different sensor data:
 
 | Device | Description |
 | --- | --- |
 | `nvme` | NVMe storage drive temperature |
-| `apm_xgene` | Ampere processor power and temperature sensors |
-| `system76_thelio_io` | System76 chassis controller for fan speed and PWM |
+| `apm_xgene` | Processor power and temperature sensors |
+| `system76_thelio_io` | System76 chassis controller for fan speed and pulse-width modulation |
 | `hidpp_battery_0` | Logitech wireless peripheral battery level |
-
-This Learning Path uses `apm_xgene` for SoC power and temperature, and `system76_thelio_io` for fan speed.
-
-Find the directory that contains the Ampere processor sensors:
-
-```bash
-for device in /sys/class/hwmon/hwmon*; do
-    if [ "$(cat "$device/name" 2>/dev/null)" = "apm_xgene" ]; then
-        echo "$device"
-    fi
-done
-```
 
 Print the available labels and values:
 
@@ -152,7 +141,7 @@ for device in /sys/class/hwmon/hwmon*; do
 done
 ```
 
-The output is similar to:
+The output on a Thelio Astra includes:
 
 ```output
 /sys/class/hwmon/hwmon1/power1_label:CPU power
@@ -163,11 +152,11 @@ The output is similar to:
 /sys/class/hwmon/hwmon1/temp1_input:37000
 ```
 
-Each sensor has a `_label` file that describes what it measures and a corresponding `_input` file that holds the current reading. The naming convention uses a type prefix (`power` or `temp`) followed by a channel number. The hwmon subsystem reports power in microwatts and temperature in millidegrees Celsius.
+Each sensor has a `_label` file that describes what it measures, and a corresponding `_input` file that holds the current reading. The naming convention uses a type prefix (`power` or `temp`) followed by a channel number. The `hwmon` subsystem reports power in microwatts and temperature in millidegrees Celsius.
 
-For the sample values:
+The sample values can be converted to watts and Celsius as follows:
 
-| File | Raw value | Converted |
+| File | Raw value | Converted value |
 | --- | ---: | --- |
 | `power1_input` (CPU power) | 12200000 µW | 12.2 W |
 | `power2_input` (I/O power) | 8025000 µW | 8.025 W |
@@ -177,7 +166,9 @@ SoC power is the sum of CPU and I/O power. It doesn't represent total system or 
 
 ## Inspect fan telemetry
 
-The System76 Thelio I/O controller exposes fan speed and pulse-width modulation (PWM) values. Print the labels and current readings:
+The System76 Thelio I/O controller on a Thelio Astra exposes fan speed and pulse-width modulation (PWM) values. 
+
+The following loop prints the labels and current readings for fan telemetry. Replace `system76_thelio_io` with the controller that exposes fan telemetry on your system:
 
 ```bash
 for device in /sys/class/hwmon/hwmon*; do
@@ -208,7 +199,7 @@ The `fan*_label` files identify each fan header on the chassis. The `fan*_input`
 
 The `pwm*` files control fan duty cycle on a scale from 0 (off) to 255 (full speed). A value of `85` corresponds to about 33% duty cycle. The chassis firmware manages PWM automatically based on temperature.
 
-This Learning Path records CPU fan and intake fan RPM as secondary telemetry. The GPU and auxiliary fans aren't connected on this system.
+CPU fan and intake fan RPM are recorded as secondary telemetry. The GPU and auxiliary fans aren't connected on this system.
 
 Record fan speed during each experiment, but leave the fan policy unchanged. Changing frequency and fan control at the same time makes it difficult to identify which setting caused a temperature or performance difference.
 
@@ -232,7 +223,9 @@ for sample in $(seq 1 10); do
 done
 ```
 
-Each row prints a timestamp followed by three raw sensor values: CPU power in microwatts, I/O power in microwatts, and SoC temperature in millidegrees Celsius. The output is similar to:
+Each row prints a timestamp followed by three raw sensor values: CPU power in microwatts, I/O power in microwatts, and SoC temperature in millidegrees Celsius. 
+
+The output is similar to:
 
 ```output
 timestamp cpu_power_uw io_power_uw soc_temp_mc
@@ -243,6 +236,8 @@ timestamp cpu_power_uw io_power_uw soc_temp_mc
 
 The values should change as background activity changes. A sensor that never updates isn't suitable for measuring workload energy.
 
-## What you've learned
+## What you've accomplished and what's next
 
-You identified the CPU frequency policies and the CPU power, I/O power, SoC temperature, and fan sensors. The next page creates a logger that reads these values while OpenSSL runs.
+You've now identified the CPU frequency policies and the CPU power, I/O power, SoC temperature, and fan sensors.
+
+Next, you'll create a logger that reads these values while OpenSSL runs.

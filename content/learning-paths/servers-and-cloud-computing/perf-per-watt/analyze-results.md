@@ -122,7 +122,7 @@ The script integrates each pair of consecutive power samples using the trapezoid
 
 ## Analyze one run
 
-Run the script with the label, telemetry file, and measured OpenSSL throughput:
+Run the script with the label, telemetry file, and measured OpenSSL throughput, replacing `THROUGHPUT_KB_PER_SECOND` with the numeric OpenSSL value:
 
 ```bash
 python3 analyze-telemetry.py \
@@ -131,9 +131,9 @@ python3 analyze-telemetry.py \
     THROUGHPUT_KB_PER_SECOND
 ```
 
-Replace `THROUGHPUT_KB_PER_SECOND` with the numeric OpenSSL value.
+The script prints a CSV header followed by one result row. 
 
-The script prints a CSV header followed by one result row. Save the output:
+Save the output:
 
 ```bash
 python3 analyze-telemetry.py \
@@ -145,9 +145,9 @@ python3 analyze-telemetry.py \
 
 ## Build the comparison table
 
-Repeat the analysis for every run and collect these fields:
+Repeat the analysis for every run and collect the following fields:
 
-| Configuration | Average frequency | SHA-256 throughput | Average SoC power | SoC energy | Throughput per watt | Energy per GB | Peak temperature |
+| Configuration | Average frequency (MHz) | SHA-256 throughput | Average SoC power | SoC energy | Throughput per watt | Energy per GB | Peak temperature (°C) |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | `powersave` | 1000 MHz | 39.6 GB/s | 31.7 W | 2837 J | 1.248 GB/s/W | 0.801 J/GB | 41°C |
 | `schedutil` | 2199 MHz | 87.4 GB/s | 48.2 W | 4327 J | 1.811 GB/s/W | 0.552 J/GB | 47°C |
@@ -156,25 +156,25 @@ Repeat the analysis for every run and collect these fields:
 | `schedutil`, 1.8 GHz cap | 1799 MHz | 71.4 GB/s | 40.8 W | 3631 J | 1.750 GB/s/W | 0.571 J/GB | 44°C |
 | `schedutil`, 2.2 GHz cap | 2200 MHz | 87.3 GB/s | 48.3 W | 4338 J | 1.807 GB/s/W | 0.553 J/GB | 47°C |
 
-Use the table to answer these questions:
+Use the table to identify the following:
 
-- Which configuration produces the highest SHA-256 throughput?
-- Which configuration produces the highest throughput per watt?
-- Which configuration consumes the fewest joules per gigabyte?
-- Does the fastest configuration also use energy most efficiently?
-- Does a lower frequency reduce temperature and fan speed?
-- How closely does the measured average frequency follow the configured limit?
+- The configuration that produces the highest SHA-256 throughput
+- The configuration that produces the highest throughput per watt
+- The configuration that consumes the fewest joules per gigabyte
+- Whether the fastest configuration also uses energy the most efficiently
+- Whether a lower frequency reduces temperature and fan speed
+- How closely the measured average frequency follows the configured limit
 
-For this CPU-bound SHA-256 workload on the Ampere Altra, `schedutil` at the full 2.2 GHz maximum delivers both the highest throughput and the best energy efficiency. Power scales nearly linearly with frequency on this processor, so running faster finishes the work sooner and uses less total energy. The `powersave` governor draws fewer watts but takes so much longer that it consumes more joules per gigabyte.
+For this CPU-bound SHA-256 workload on the Ampere Altra, `schedutil` at the full 2.2 GHz maximum delivers both the highest throughput and the best energy efficiency. Power scales nearly linearly with frequency on this processor. This means running faster finishes the work sooner and uses less total energy. The `powersave` governor draws fewer watts but takes so much longer that it consumes more joules per gigabyte.
 
-## Is a frequency cap ever useful?
+## When a frequency cap is useful
 
 The full-speed result doesn't mean frequency caps are never worthwhile. Consider capping frequency when:
 
-- The deployment is thermally constrained. In a dense chassis or passively-cooled edge system, sustained full frequency can cause throttling. Capping at 1.8 GHz delivers 82% of the throughput at 85% of the power and drops peak temperature by 3°C
-- The rack has a fixed power budget. Running more servers at a lower per-server power draw can produce higher aggregate throughput within the same power envelope
-- The workload is latency-insensitive. Overnight batch jobs, log compression, or background indexing don't need the fastest completion time. Lower power extends hardware lifetime and reduces cooling costs
-- The workload is memory-bound or I/O-bound. OpenSSL SHA-256 is fully CPU-bound. Applications that stall on memory or network I/O often show diminishing throughput returns at higher frequencies while power keeps climbing. Rerun this workflow with your production workload to find its specific efficiency curve
+- The deployment is thermally constrained: In a dense chassis or passively-cooled edge system, sustained full frequency can cause throttling. Capping at 1.8 GHz delivers 82% of the throughput at 85% of the power and drops peak temperature by 3°C.
+- The rack has a fixed power budget: Running more servers at a lower per-server power draw can produce higher aggregate throughput within the same power envelope.
+- The workload is latency-insensitive: Overnight batch jobs, log compression, or background indexing don't need the fastest completion time. Lower power extends hardware lifetime and reduces cooling costs.
+- The workload is memory-bound or I/O-bound: OpenSSL SHA-256 is fully CPU-bound. Applications that stall on memory or network I/O often show diminishing throughput returns at higher frequencies, while power keeps climbing. Rerun this workflow with your production workload to find its specific efficiency curve.
 
 ## Interpret performance per watt
 
@@ -198,7 +198,6 @@ The configuration with the lowest power isn't necessarily the most energy-effici
 
 ## What you've accomplished
 
-You used standard Linux CPUFreq and hwmon interfaces to measure an Arm workload under different power-management configurations. You collected synchronized frequency, CPU power, I/O power, temperature, and fan telemetry, then calculated throughput per watt and joules per gigabyte.
+You've now used standard Linux CPUFreq and `hwmon` interfaces to measure an Arm workload under different power-management configurations. You've collected synchronized frequency, CPU power, I/O power, temperature, and fan telemetry, then calculated throughput per watt and joules per gigabyte.
 
 You can reuse the workflow with another sustained workload by replacing the OpenSSL command and providing a meaningful throughput value to the analysis script.
-
