@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Understand the measurement boundary
 
-You'll measure power reported by the Linux hwmon driver of your machine's processor. On the [System76 Thelio Astra](https://system76.com/desktops/thelio-astra) that the Learning Path was tested on, the `apm_xgene` driver exposes separate CPU and I/O power channels. You can apply the same process to other Arm Linux systems. 
+You'll measure power reported by the Linux `hwmon` driver of your machine's processor. On the [System76 Thelio Astra](https://system76.com/desktops/thelio-astra) that the Learning Path was tested on, the `apm_xgene` driver exposes separate CPU and I/O power channels. You can apply the same process to other Arm Linux systems.
 
 Adding these channels gives an estimate of system-on-chip (SoC) power. The estimate doesn't include all power drawn by the workstation. Memory, storage, fans, voltage-conversion losses, and the power supply can consume additional power.
 

@@ -1,6 +1,6 @@
 ---
 title: Discover CPU frequency and power controls
-description: Identify the Linux CPUFreq policies and hwmon channels used to control frequency and measure SoC power and temperature.
+description: Identify the Linux CPUFreq policies and `hwmon` channels used to control frequency and measure SoC power and temperature.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -99,11 +99,11 @@ cpupower -c all frequency-info
 
 The workload and telemetry scripts read and write sysfs files directly. The `cpupower` output is useful for quick checks between experiments.
 
-## Locate the hwmon devices
+## Locate the `hwmon` devices
 
-The Linux hardware monitoring (hwmon) subsystem exposes sensor data such as power, temperature, and fan speed through `sysfs`. Each hardware monitoring chip or driver registers as a separate hwmon device.
+The Linux hardware monitoring (`hwmon`) subsystem exposes sensor data such as power, temperature, and fan speed through `sysfs`. Each hardware monitoring chip or driver registers as a separate `hwmon` device.
 
-The hwmon directory numbers can change after a kernel update or reboot. Identify devices by reading their `name` files:
+The `hwmon` directory numbers can change after a kernel update or reboot. Identify devices by reading their `name` files:
 
 ```bash
 for device in /sys/class/hwmon/hwmon*; do
@@ -152,7 +152,7 @@ The output on a Thelio Astra includes:
 /sys/class/hwmon/hwmon1/temp1_input:37000
 ```
 
-Each sensor has a `_label` file that describes what it measures, and a corresponding `_input` file that holds the current reading. The naming convention uses a type prefix (`power` or `temp`) followed by a channel number. The hwmon subsystem reports power in microwatts and temperature in millidegrees Celsius.
+Each sensor has a `_label` file that describes what it measures, and a corresponding `_input` file that holds the current reading. The naming convention uses a type prefix (`power` or `temp`) followed by a channel number. The `hwmon` subsystem reports power in microwatts and temperature in millidegrees Celsius.
 
 The sample values can be converted to watts and Celsius as follows:
 

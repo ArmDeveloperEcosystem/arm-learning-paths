@@ -198,7 +198,6 @@ The configuration with the lowest power isn't necessarily the most energy-effici
 
 ## What you've accomplished
 
-You've now used standard Linux CPUFreq and hwmon interfaces to measure an Arm workload under different power-management configurations. You've collected synchronized frequency, CPU power, I/O power, temperature, and fan telemetry, then calculated throughput per watt and joules per gigabyte.
+You've now used standard Linux CPUFreq and `hwmon` interfaces to measure an Arm workload under different power-management configurations. You've collected synchronized frequency, CPU power, I/O power, temperature, and fan telemetry, then calculated throughput per watt and joules per gigabyte.
 
 You can reuse the workflow with another sustained workload by replacing the OpenSSL command and providing a meaningful throughput value to the analysis script.
-

@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Create the telemetry logger
 
-The logger finds hwmon devices and channels by name and label. The use of both name and label keeps the script working if Linux assigns different `hwmon` directory numbers after a reboot.
+The logger finds `hwmon` devices and channels by name and label. The use of both name and label keeps the script working if Linux assigns different `hwmon` directory numbers after a reboot.
 
-Create `collect-telemetry.sh` in `~/perf-per-watt`, replacing `amprere_hwmon` and `thelio_hwmon` with the devices for your system:
+Create `collect-telemetry.sh` in `~/perf-per-watt`, replacing `ampere_hwmon` and `thelio_hwmon` with the devices for your system:
 
 ```bash
 cat > collect-telemetry.sh <<'EOF'

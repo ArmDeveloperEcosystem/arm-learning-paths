@@ -38,7 +38,7 @@ generated_summary_faq:
     frequency policies and sensors, create a synchronized telemetry logger, and establish a baseline. Then, you'll
     compare governors and frequency caps, and calculate throughput per watt and energy per gigabyte.
   faqs:
-  - question: How do I choose which `hwmon` power channels to include in SoC power?
+  - question: How do I choose which hwmon power channels to include in SoC power?
     answer: >-
       Use the CPU and I/O power channels exposed by your platform's `hwmon` driver. On the example
       Thelio Astra, `apm_xgene` provides those channels. On another system, identify the equivalent
@@ -49,12 +49,11 @@ generated_summary_faq:
       List the policy directories under `/sys/devices/system/cpu/cpufreq/` and compare their count
       with `nproc`. If the counts differ, your system might group multiple CPUs into one policy. Use
       this layout to understand which CPUs change together before you run experiments.
-  - question: What do I need to edit in `collect-telemetry.sh` for my machine?
+  - question: What do I need to edit in collect-telemetry.sh for my machine?
     answer: >-
       Replace `apm_xgene` and `system76_thelio_io` with the device names reported by
       `/sys/class/hwmon/hwmon*/name`, then update sensor labels if your drivers use different labels.
       The logger accepts an output filename and sampling interval as its first and second arguments.
-      If your system has no matching fan controller, make those channels optional before you run it.
   - question: How do I run the OpenSSL workload and know it exercised all CPUs?
     answer: >-
       Run `sudo ./run-openssl.sh LABEL SECONDS`. The script uses `openssl speed` with SHA-256, a
