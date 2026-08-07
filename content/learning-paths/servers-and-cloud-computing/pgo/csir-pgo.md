@@ -20,7 +20,7 @@ Use CSIR-PGO when you want to provide LLVM with more detailed profile informatio
 First, generate `prof/ir.profdata` by completing the [IR-PGO workflow](/learning-paths/servers-and-cloud-computing/pgo/ir-pgo/). Use that profile to guide inlining while Clang builds a second instrumented binary. The `-fcs-profile-generate` option adds context-sensitive counters after inlining:
 
 ```bash
-clang++ -O3 -flto=thin -fuse-ld=lld \
+clang++ -O3 -flto -fuse-ld=lld \
     -fprofile-use=prof/ir.profdata \
     -fcs-profile-generate=prof/csir \
     bsort.cpp -o out/bsort.csirpgo.instr
@@ -77,7 +77,7 @@ Build the optimized binary using the merged CS-IR profile:
 
 
 ```bash
-clang++ -O3 -flto=thin -fuse-ld=lld \
+clang++ -O3 -flto -fuse-ld=lld \
     -fprofile-use=prof/csir.profdata \
     bsort.cpp -o out/bsort.csirpgo.opt
 ```

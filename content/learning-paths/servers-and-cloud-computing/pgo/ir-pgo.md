@@ -17,7 +17,7 @@ Compared with FE-PGO, IR-PGO usually has lower instrumentation overhead, creates
 Build an instrumented binary. The `-fprofile-generate` option tells LLVM to add IR-level counters and write raw profiles to the specified directory.
 
 ```bash
-clang++ -O3 -flto=thin -fuse-ld=lld \
+clang++ -O3 -flto -fuse-ld=lld \
     -fprofile-generate=prof/ir \
     bsort.cpp -o out/bsort.irpgo.instr
 ```
@@ -75,7 +75,7 @@ The profile contains six IR-level counters for `sort_array`. Exact hashes and co
 Build the optimized binary using the merged profile:
 
 ```bash
-clang++ -O3 -flto=thin -fuse-ld=lld \
+clang++ -O3 -flto -fuse-ld=lld \
     -fprofile-use=prof/ir.profdata \
     bsort.cpp -o out/bsort.irpgo.opt
 ```
@@ -91,6 +91,6 @@ Run the optimized binary:
 
 ## What you've accomplished and what's next
 
-You've collected an IR-PGO profile, merged it with `llvm-profdata`, and used it with Thin-LTO to build an optimized binary.
+You've collected an IR-PGO profile, merged it with `llvm-profdata`, and used it with LTO to build an optimized binary.
 
 Next, you'll extend the IR-PGO workflow with a context-sensitive profiling pass.

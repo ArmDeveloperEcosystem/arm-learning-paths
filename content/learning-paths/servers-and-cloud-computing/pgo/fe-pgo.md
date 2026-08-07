@@ -17,7 +17,7 @@ Use FE-PGO when source-level profile information is important. For performance-f
 Build an instrumented binary. The `-fprofile-instr-generate` option tells Clang to add frontend counters and write the raw profile to `prof/fe.profraw`:
 
 ```bash
-clang++ -O3 -flto=thin -fuse-ld=lld \
+clang++ -O3 -flto -fuse-ld=lld \
     -fprofile-instr-generate=prof/fe.profraw \
     bsort.cpp -o out/bsort.fepgo.instr
 ```
@@ -74,7 +74,7 @@ The profile contains two frontend counters for `sort_array`. Exact hashes and co
 Build the optimized binary using the converted profile:
 
 ```bash
-clang++ -O3 -flto=thin -fuse-ld=lld \
+clang++ -O3 -flto -fuse-ld=lld \
     -fprofile-instr-use=prof/fe.profdata \
     bsort.cpp -o out/bsort.fepgo.opt
 ```
@@ -89,6 +89,6 @@ Run the optimized binary:
 
 ## What you've accomplished and what's next
 
-You've collected an FE-PGO profile, converted it with `llvm-profdata`, and used it with Thin-LTO to build an optimized binary.
+You've collected an FE-PGO profile, converted it with `llvm-profdata`, and used it with LTO to build an optimized binary.
 
-Next, you'll build the same example with IR-PGO and Thin-LTO.
+Next, you'll build the same example with IR-PGO and LTO.
