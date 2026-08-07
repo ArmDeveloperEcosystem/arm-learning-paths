@@ -180,10 +180,10 @@ See the official [Telegram Bot tutorial](https://core.telegram.org/bots/tutorial
 Next, obtain the chat ID for your Telegram account:
 
 1. Open a chat with the bot that you created and send a test message, such as `Hello`. This creates an update that the Telegram Bot API can return.
-2. Open a terminal on your local machine and query the updates. Replace `<TOKEN>` with the HTTP API token from BotFather:
+2. Open a terminal on your local machine and query the updates. Replace `<your-telegram-bot-token>` with the HTTP API token from BotFather:
 
     ```bash
-    curl "https://api.telegram.org/bot<TOKEN>/getUpdates"
+    curl "https://api.telegram.org/bot<your-telegram-bot-token>/getUpdates"
     ```
 
 The output is similar to:
@@ -193,21 +193,14 @@ The output is similar to:
   "ok": true,
   "result": [
     {
-      "update_id": 78772718,
+      "update_id": (...),
       "message": {
-        "message_id": 2,
-        "from": {
-          "id": 8974517049,
-          "is_bot": false,
-          "first_name": "Example",
-          "language_code": "en"
+        (...)
         },
         "chat": {
-          "id": 8974517049,
-          "first_name": "Example",
-          "type": "private"
+          (...)
         },
-        "date": 1785762058,
+        "date": (...),
         "text": "Hello"
       }
     }
@@ -347,7 +340,7 @@ An HTTP `200` response confirms that the Gateway dashboard is reachable.
 
 Creating the bot with BotFather registers its name and username in Telegram. The `openclaw-telegram` container uses the token in `.env` to connect the Telegram bot to the local Gateway and AI services on DGX Spark.
 
-Find the bot in Telegram by searching for the username that you chose in BotFather, or open `https://t.me/<your-bot-username>`. Select **Start** to open a chat. The bot does not start a chat with you or automatically appear in your chat list.
+Find the bot in Telegram by searching for the username that you chose in BotFather. You can also replace `<your-bot-username>` in `https://t.me/<your-bot-username>` with that username and open the URL. Select **Start** to open a chat. The bot does not start a chat with you or automatically appear in your chat list.
 
 Messages then follow this path:
 

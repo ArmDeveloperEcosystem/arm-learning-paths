@@ -175,6 +175,8 @@ If DGX Spark is remote, create an SSH tunnel from your laptop:
 ssh -L 18789:127.0.0.1:18789 <user>@<dgx-spark-host>
 ```
 
+Replace `<user>` with your DGX Spark user name and `<dgx-spark-host>` with its host name or IP address.
+
 Then open `http://127.0.0.1:18789/` locally and enter the `OPENCLAW_GATEWAY_TOKEN` stored in the private `.env` file.
 
 Confirm that the dashboard and Telegram show the same cron job and run history.

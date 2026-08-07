@@ -185,7 +185,7 @@ git checkout v1.2
 cp .env.arm-cpu-only.example .env
 ```
 
-Create a separate bot for this runtime with the [Telegram Bot tutorial](https://core.telegram.org/bots/tutorial). Do not reuse the DGX Spark bot token because two polling runtimes can compete for its updates.
+Create a separate bot for this runtime with the [Telegram Bot tutorial](https://core.telegram.org/bots/tutorial). Do not reuse the DGX Spark bot token because two polling runtimes can compete for its updates. Have each account send a message to the new bot, then repeat the `getUpdates` process from the DGX Spark setup to obtain each `message.chat.id` value.
 
 Generate a new Gateway token:
 
@@ -197,9 +197,9 @@ Set the new bot and private tokens in `.env`:
 
 ```text
 OPENCLAW_TELEGRAM_BOT_TOKEN=<your-telegram-bot-token>
-OPENCLAW_TELEGRAM_ALLOWED_CHAT_IDS=<first-chat-id>,<second-chat-id>
-OPENCLAW_CRON_CHAT_IDS=<first-chat-id>,<second-chat-id>
-OPENCLAW_GATEWAY_TOKEN=<generated-random-token>
+OPENCLAW_TELEGRAM_ALLOWED_CHAT_IDS=<first-telegram-chat-id>,<second-telegram-chat-id>
+OPENCLAW_CRON_CHAT_IDS=<first-telegram-chat-id>,<second-telegram-chat-id>
+OPENCLAW_GATEWAY_TOKEN=<generated-gateway-token>
 OPENCLAW_CRON_TIMEZONE=<your-IANA-timezone>
 ```
 
@@ -271,7 +271,7 @@ Create a file named `budget.txt` on the device where you use Telegram:
 Shared household weekly budget: £120.
 ```
 
-Upload the file with the `/knowledge` caption. Each allowlisted household member can then add a synthetic expense from their own chat:
+Upload the file with the `/knowledge` caption and copy the filename returned by the bot. Each allowlisted household member can then add a synthetic expense from their own chat:
 
 ```text
 /mem #budget Groceries: £45.
@@ -283,6 +283,8 @@ After both entries are saved, either member can ask:
 ```text
 /rag <returned-file-name> Based on the shared budget and the saved budget entries, how much remains?
 ```
+
+Replace `<returned-file-name>` with the filename returned when you uploaded `budget.txt`.
 
 The response should report that £55 remains. Both members use the same local collection, without separate per-member access controls.
 
