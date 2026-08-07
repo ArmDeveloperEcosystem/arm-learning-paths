@@ -337,7 +337,7 @@ Telegram still transports messages and uploads. Weather and browser searches con
 
 For sensitive deployments, review network exposure, Telegram suitability, host access, backups, model provenance, and the contents of every enabled tool.
 
-## What you've learned and what's next
+## What you've accomplished
 
 You've now moved the OpenClaw-based runtime from DGX Spark to a CPU-only Armv9 system by replacing the inference endpoint.
 
