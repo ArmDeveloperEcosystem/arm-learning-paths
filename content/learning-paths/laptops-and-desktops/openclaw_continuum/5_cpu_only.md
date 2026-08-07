@@ -323,7 +323,15 @@ Each platform uses model and context settings suited to its compute while preser
 
 ## Review data privacy boundaries
 
-The runtime keeps inference requests, generated context, Qdrant collections, uploaded files, cron history, OpenClaw tasks, and Gateway state under your control.
+The runtime keeps the following under your control:
+
+- Inference requests
+- Generated context
+- Qdrant collections
+- Uploaded files
+- Cron history
+- OpenClaw tasks
+- Gateway state
 
 Telegram still transports messages and uploads. Weather and browser searches contact public services, while setup downloads models and containers from external registries.
 
