@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## Define the Household Test Scenario
 
-The project provides a customizable runtime for use cases that need private, local-first AI processing. You can adapt its skills, data sources, workflows, and schedules to match your own requirements. To make these capabilities concrete, this chapter uses a shared household assistant as an example rather than prescribing a fixed application. You will save synthetic maintenance information and retrieve it later without sending the memory to a public cloud LLM. You can apply the same architecture to other scenarios that need locally controlled inference, memory, and retrieval.
+In this section, you will create a shared household assistant to test local memory. You will save and retrieve a synthetic maintenance reminder without sending it to a public cloud LLM.
 
-Telegram transports the original messages between you and the runtime. After the messages reach your host, Ollama, Qdrant, and the local LLM process the memory workflow without using a public cloud LLM API.
+Telegram transports the messages. Ollama, Qdrant, and the local LLM process them on your host.
 
 This tutorial treats household data as shared. It does not implement separate access control for each family member.
 
@@ -22,7 +22,7 @@ Send this command to the Telegram bot:
 /mem #home The boiler should be inspected every October.
 ```
 
-The reference runtime performs the following operations:
+The runtime stores the reminder through this path:
 
 ```text
 Telegram / Mem command
@@ -61,63 +61,29 @@ Confirm that the personal memory collection exists:
 curl http://127.0.0.1:6333/collections/personal_tracker_memory
 ```
 
-The output is similar to:
+The relevant fields are similar to:
 
 ```output
 {
   "result": {
     "status": "green",
     "optimizer_status": "ok",
-    "indexed_vectors_count": 0,
     "points_count": 102,
-    "segments_count": 8,
     "config": {
       "params": {
         "vectors": {
           "size": 768,
           "distance": "Cosine"
         },
-        "shard_number": 1,
-        "replication_factor": 1,
-        "write_consistency_factor": 1,
         "on_disk_payload": true
-      },
-      "hnsw_config": {
-        "m": 16,
-        "ef_construct": 100,
-        "full_scan_threshold": 10000,
-        "max_indexing_threads": 0,
-        "on_disk": false
-      },
-      "optimizer_config": {
-        "deleted_threshold": 0.2,
-        "vacuum_min_vector_number": 1000,
-        "default_segment_number": 0,
-        "max_segment_size": null,
-        "memmap_threshold": null,
-        "indexing_threshold": 10000,
-        "flush_interval_sec": 5,
-        "max_optimization_threads": null,
-        "prevent_unoptimized": null
-      },
-      "wal_config": {
-        "wal_capacity_mb": 32,
-        "wal_segments_ahead": 0,
-        "wal_retain_closed": 1
-      },
-      "quantization_config": null
-    },
-    "payload_schema": {},
-    "update_queue": {
-      "length": 0
+      }
     }
   },
-  "status": "ok",
-  "time": 0.000305601
+  "status": "ok"
 }
 ```
 
-The point count, segment count, and response time depend on the existing data and Qdrant state. A `green` collection with `optimizer_status` set to `ok` confirms that the collection is healthy. The vector size of `768` matches the `nomic-embed-text` embedding configuration.
+The point count depends on existing data. A `green` status with `optimizer_status` set to `ok` confirms collection health. The vector size of `768` matches `nomic-embed-text`.
 
 The collection metadata does not prove that the boiler reminder was stored. Query the point payload directly to verify the synthetic record:
 
@@ -142,9 +108,7 @@ curl -sS -X POST \
   }'
 ```
 
-Look for the synthetic boiler memory in the returned payload. This second check verifies the stored content rather than only the health and configuration of the collection. The filter is necessary because a personal collection can already contain other records, so scrolling only the first few points might not return the new reminder.
-
-This check is important. It verifies the storage location from the data layer instead of trusting the assistant to describe its own architecture.
+Look for the boiler reminder in the returned payload. The filter finds it even when the personal collection contains other records. This verifies the stored data directly instead of relying on the assistant's response.
 
 ## Inspect Active Agents and Task Execution
 
@@ -162,7 +126,7 @@ To inspect recent tasks, send this command to the Telegram bot:
 /tasks last 5
 ```
 
-Task history records which agent handled the request, its status, and runtime duration. The dispatcher selects skills and agents while using one configured LLM endpoint. Dynamic routing between multiple models is a possible direction for future development.
+Task history shows which agent handled the request, its status, and its runtime. All routes use the configured LLM endpoint.
 
 ## Test External Skill Integration
 
@@ -172,9 +136,9 @@ Send a weather question in plain language:
 Cambridge weather tomorrow
 ```
 
-The reference runtime routes the request to the weather skill. Do not add `/search` to this question. An explicit `/search` command selects the general browser worker instead of the dedicated weather route.
+The runtime sends this question to the weather skill. Do not add `/search`, which selects the general browser worker instead.
 
-This request crosses the local data boundary because the skill contacts the public [wttr.in](https://wttr.in/) weather service. The local model API is still not replaced by a cloud LLM API.
+This request contacts the public [wttr.in](https://wttr.in/) weather service, but generation still uses the local model.
 
 ## Check your work
 

@@ -18,11 +18,12 @@ learning_objectives:
     - Move the same application workflows to a CPU-only Armv9 system through an OpenAI-compatible llama.cpp endpoint
 
 prerequisites:
-    - An NVIDIA DGX Spark system with NVIDIA drivers, Docker, and NVIDIA Container Toolkit
-    - A CPU-only Armv9 system such as Radxa Orion O6 with at least 30 GB of memory
-    - Administrative access to install Ollama and run Qdrant containers on both systems
-    - A Telegram bot token and chat ID for the tutorial
+    - An NVIDIA DGX Spark system with NVIDIA drivers, Docker and NVIDIA Container Toolkit
+    - Administrative access on DGX Spark
+    - Access to Telegram through a mobile, desktop, or web client
     - Familiarity with Linux, Docker Compose, and command-line tools
+    - (Optional) A Radxa Orion O6 or comparable CPU-only Armv9 system running Debian 12, Docker, and at least 30 GB of memory
+
 
 author: Odin Shen
 

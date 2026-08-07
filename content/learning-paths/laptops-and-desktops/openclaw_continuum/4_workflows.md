@@ -8,7 +8,14 @@ layout: learningpathall
 
 ## Ingest and Query Document RAG
 
-Create a small text file on the device where you use Telegram. The source file can be in any directory that your Telegram client can access. Use the following synthetic tutorial content:
+Create a small text file on the device where you use Telegram.
+
+{{% notice Note %}}
+Telegram uploads files from the device running the client, not from DGX Spark unless Telegram runs there. Common locations are `Downloads`, `Documents`, or `Desktop` on a computer and `Downloads` in the Files app on a phone or tablet.
+{{% /notice %}}
+
+
+Use the following synthetic tutorial content:
 
 ```text
 Household heating maintenance notes
@@ -18,7 +25,7 @@ Clean the heating filter on the first Saturday of every third month.
 Keep the service reference number with the maintenance record.
 ```
 
-Save the file as `household-maintenance.txt`. In Telegram, upload the file to your bot. Any caption other than `/tracker` or `/mem` routes the upload to knowledge indexing by default, so use this caption to make the destination explicit:
+Save the file as `household-maintenance.txt`, then upload it to your bot with this caption:
 
 ```text
 /knowledge
@@ -34,15 +41,11 @@ File on the Telegram client device
     -> Qdrant collection: personal_knowledge_base
 ```
 
-Telegram transports the uploaded file to the bot. The reference runtime then downloads it to `openclaw-arm-continuum/workspace/inbox/knowledge/telegram/` on DGX Spark. The memory watcher indexes the local copy and writes its chunks to `personal_knowledge_base`.
-
-{{% notice Note %}}
-In this Learning Path, supported Telegram uploads are indexed after they are saved. The review-first upload workflow is planned but is not part of this release.
-{{% /notice %}}
+The `/knowledge` caption explicitly routes the file to document indexing. The runtime stores it under `workspace/inbox/knowledge/telegram/`, creates embeddings, and writes the chunks to `personal_knowledge_base`.
 
 The bot reports the stored filename with a timestamp prefix, similar to `20260717-180500-household-maintenance.txt`. Copy the filename from the response.
 
-Indexing runs asynchronously. Wait a few seconds, then confirm that the memory watcher processed the file:
+Indexing runs in the background. Wait a few seconds, then check the memory watcher:
 
 ```bash
 docker logs --tail 30 openclaw-memory-watcher
@@ -54,15 +57,13 @@ In Telegram, ask a question using the returned filename. Replace `<returned-file
 /rag <returned-file-name> When should the heating filter be cleaned?
 ```
 
-The filename is optional for general RAG queries. Without a filename, the reference runtime performs semantic search across its configured memory and knowledge collections. Including the returned filename adds document-specific chunks to the retrieved context and helps scope the answer to this upload. This Learning Path uses the filename so that existing records in the personal collections do not affect the validation result.
-
-The following screenshot demonstrates the optional general RAG query without a filename. For the reproducible validation in this chapter, use the filename-specific command above.
+The filename limits retrieval to this upload, so existing records do not affect the result. A general `/rag` query without a filename searches all configured memory and knowledge collections. The screenshot shows this general query, but use the filename-specific command for this test.
 
 ![Telegram conversation showing household-maintenance.txt uploaded with the knowledge caption, saved to personal_knowledge_base, and retrieved with a general rag question#center](openclaw_telegram_3.jpg "Uploading and querying a household document in Telegram")
 
 The answer should mention the first Saturday of every third month.
 
-The answer verifies retrieval through the application. To verify the stored document directly in Qdrant, filter the collection by the returned filename:
+To verify the stored document directly in Qdrant, filter the collection by the returned filename:
 
 ```bash
 curl -sS -X POST \
@@ -85,11 +86,11 @@ curl -sS -X POST \
   }'
 ```
 
-The returned payload should contain chunks from `household-maintenance.txt`. This confirms that the uploaded file is stored and indexed locally rather than relying only on the assistant's answer.
+The payload should contain chunks from `household-maintenance.txt`, confirming that Qdrant stored and indexed the upload.
 
 ## Execute Deterministic Web Search
 
-Use the browser agent when you intentionally need current public information that is not stored in local memory. Send this command to the Telegram bot:
+Use the browser agent for current public information. Send this command to the bot:
 
 ```text
 /search Arm Learning Paths local AI development
@@ -106,7 +107,7 @@ Telegram /search command
     -> Telegram answer
 ```
 
-The search query and page requests cross the local data boundary. The Playwright worker saves the retrieved public content as Markdown under `workspace/inbox/tracker/web/`, and the local vLLM produces the answer without using a cloud LLM API.
+The query and page requests leave the local network. Playwright saves the retrieved content under `workspace/inbox/tracker/web/`, and local vLLM generates the answer.
 
 Confirm that the browser worker handled the request:
 
@@ -122,11 +123,11 @@ Finally, send this command in Telegram:
 /tasks last 5
 ```
 
-Confirm that the search task reports `browser_search_agent`. This verifies the selected agent as well as the external request path.
+Confirm that the search task reports `browser_search_agent`.
 
 ## Schedule Proactive Cron Tasks
 
-Choose a time a few minutes in the future using the runtime timezone configured by `OPENCLAW_CRON_TIMEZONE`. Send this command to the Telegram bot to create a daily tutorial reminder:
+Choose a time a few minutes in the future, using `OPENCLAW_CRON_TIMEZONE`. Create a daily reminder:
 
 ```text
 /cron add daily 21:15 Heating check :: Remind the household to review the heating maintenance notes.
@@ -138,11 +139,11 @@ Replace `21:15` with your test time. Then list the job in Telegram:
 /cron list
 ```
 
-The bot returns a job ID, and `/cron list` shows the schedule as `[on]`. At the configured time, the bot starts a new Heating check message for the scheduled task.
+The bot returns a job ID, and `/cron list` shows the schedule as `[on]`.
 
 ![Telegram conversation showing a daily Heating check cron job created, listed as enabled, and triggered at the configured time#center](openclaw_telegram_4.jpg "Creating and triggering a scheduled reminder in Telegram")
 
-The job runs only inside the configured due-time window. Creating the job must not execute it immediately.
+Creating the job does not run it immediately. At the configured time, the bot sends the Heating check message.
 
 After the configured time, verify that the cron worker delivered the scheduled job:
 
@@ -174,6 +175,8 @@ If DGX Spark is remote, create an SSH tunnel from your laptop:
 ssh -L 18789:127.0.0.1:18789 <user>@<dgx-spark-host>
 ```
 
+Replace `<user>` with your DGX Spark user name and `<dgx-spark-host>` with its host name or IP address.
+
 Then open `http://127.0.0.1:18789/` locally and enter the `OPENCLAW_GATEWAY_TOKEN` stored in the private `.env` file.
 
 Confirm that the dashboard and Telegram show the same cron job and run history.
@@ -184,13 +187,7 @@ Keep the Gateway and its admin RPC endpoint behind localhost, an SSH tunnel, or 
 
 ## Check your work
 
-You have now validated three runtime paths:
-
-| User goal | Reference runtime path |
-|---|---|
-| Answer from a household document | Telegram -> RAG skill -> Qdrant -> local LLM |
-| Retrieve current public information | Telegram -> browser-search agent -> Playwright -> local LLM |
-| Send a proactive reminder | Cron worker -> configured skill -> Telegram push |
+You have now validated three runtime paths. Document questions use the RAG skill, Qdrant, and the local LLM. Current public queries use the browser-search agent and Playwright. Proactive reminders run through the cron worker and arrive as Telegram messages.
 
 The LLM is one replaceable part of the application. The local memory, tools, schedules, and interaction paths remain available around it.
 

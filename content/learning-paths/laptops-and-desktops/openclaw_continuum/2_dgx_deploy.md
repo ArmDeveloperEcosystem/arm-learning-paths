@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Prepare the DGX Spark Host Environment
 
-This section assumes Docker Engine, the Docker Compose plugin, the NVIDIA driver, and NVIDIA Container Toolkit are installed on DGX Spark. Cloning the project later in this Learning Path downloads the reference runtime source and configuration, but it does not install Ollama or Qdrant. Prepare these host services before you start the project containers.
+DGX Spark needs Docker Engine, the Docker Compose plugin, the NVIDIA driver, and NVIDIA Container Toolkit for this section. The repository supplies the runtime and vLLM container, but you will install Ollama and Qdrant separately.
 
 Confirm that the Arm CPU and NVIDIA GPU are visible:
 
@@ -87,34 +87,18 @@ Confirm that Ollama lists the model:
 curl http://127.0.0.1:11434/api/tags
 ```
 
-The response should list `nomic-embed-text:latest` with the `embedding` capability:
+The response should include these fields:
 
 ```output
 {
   "models": [
     {
       "name": "nomic-embed-text:latest",
-      "model": "nomic-embed-text:latest",
-      "modified_at": "2026-07-15T16:58:41.999102452+01:00",
-      "size": 274302450,
-      "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
-      "details": {
-        "parent_model": "",
-        "format": "gguf",
-        "family": "nomic-bert",
-        "families": ["nomic-bert"],
-        "parameter_size": "137M",
-        "quantization_level": "F16",
-        "context_length": 2048,
-        "embedding_length": 768
-      },
       "capabilities": ["embedding"]
     }
   ]
 }
 ```
-
-The modification time, size, and digest can differ with the installed model version.
 
 ## Start Qdrant for Persistent Vector Storage
 
@@ -152,18 +136,15 @@ Before the reference runtime creates its collections, the response is similar to
 
 ```output
 {
-  "result": {
-    "collections": []
-  },
-  "status": "ok",
-  "time": 0.000064224
+  "result": {"collections": []},
+  "status": "ok"
 }
 ```
 
-The response time can differ. The empty collection list is expected at this stage; the runtime creates the tutorial collections when you save or ingest content.
+The empty list is expected. The runtime creates collections when you save or ingest content.
 
 {{% notice Warning %}}
-Ollama and Qdrant must be reachable from the project containers, but they should not be exposed to an untrusted network. Use the DGX Spark firewall or another host-level access control to restrict ports `11434`, `6333`, and `6334` to the local host and its Docker networks.
+The project containers need access to Ollama and Qdrant. Restrict ports `11434`, `6333`, and `6334` to the host and its Docker networks.
 {{% /notice %}}
 
 ## Clone the Reference Repository
@@ -176,9 +157,58 @@ cd openclaw-arm-continuum
 git checkout v1.2
 ```
 
-The checked-out tag fixes the source used by this Learning Path even when development continues on `main`. Container images and model artifacts that do not have an explicit version are resolved when you download them and can change independently of the source tag.
+The tag fixes the tutorial source version. Unversioned container images and model artifacts can still change when downloaded.
 
-## Configure Private Environment Variables
+## Configure the Telegram bot environment variables
+
+You need a Telegram account, a bot token, and the numeric chat ID for the account that will use the bot. Create a Telegram account if you do not already have one. You can use the Telegram desktop, mobile, or web client for the following steps.
+
+To create a bot and obtain its token:
+
+1. Open Telegram and start a chat with **BotFather**.
+2. Send the following command:
+
+    ```text
+    /newbot
+    ```
+
+3. Follow BotFather's prompts to name the bot and choose a username.
+4. Copy the HTTP API token that BotFather returns. You will add it to the `.env` file later.
+
+See the official [Telegram Bot tutorial](https://core.telegram.org/bots/tutorial) for more information about creating and managing bots.
+
+Next, obtain the chat ID for your Telegram account:
+
+1. Open a chat with the bot that you created and send a test message, such as `Hello`. This creates an update that the Telegram Bot API can return.
+2. Open a terminal on your local machine and query the updates. Replace `<your-telegram-bot-token>` with the HTTP API token from BotFather:
+
+    ```bash
+    curl "https://api.telegram.org/bot<your-telegram-bot-token>/getUpdates"
+    ```
+
+The output is similar to:
+
+```output
+{
+  "ok": true,
+  "result": [
+    {
+      "update_id": (...),
+      "message": {
+        (...)
+        },
+        "chat": {
+          (...)
+        },
+        "date": (...),
+        "text": "Hello"
+      }
+    }
+  ]
+}
+```
+
+Copy the `message.chat.id` value. You will use this value for `<your-telegram-chat-id>` in the `.env` file. If the `result` array is empty, send another message to the bot and run the command again.
 
 Copy the DGX Spark environment template:
 
@@ -186,13 +216,15 @@ Copy the DGX Spark environment template:
 cp .env.example .env
 ```
 
-Generate a Gateway token:
+Keep `.env` in the `openclaw-arm-continuum` repository root, alongside `.env.example`. The deployment command reads it from this location.
+
+
+Then, generate a Gateway token:
 
 ```bash
 openssl rand -hex 32
 ```
 
-If you do not already have a Telegram bot, follow the official [Telegram Bot tutorial](https://core.telegram.org/bots/tutorial) to create one before continuing.
 
 Edit `.env` and set the four private values:
 
@@ -200,7 +232,7 @@ Edit `.env` and set the four private values:
 OPENCLAW_TELEGRAM_BOT_TOKEN=<your-telegram-bot-token>
 OPENCLAW_TELEGRAM_ALLOWED_CHAT_IDS=<your-telegram-chat-id>
 OPENCLAW_CRON_CHAT_IDS=<your-telegram-chat-id>
-OPENCLAW_GATEWAY_TOKEN=<generated-random-token>
+OPENCLAW_GATEWAY_TOKEN=<generated-gateway-token>
 ```
 
 Set `OPENCLAW_CRON_TIMEZONE` to your local [IANA timezone](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones). Scheduled jobs use UTC when this setting is omitted:
@@ -244,9 +276,6 @@ The DGX model used in this Learning Path is text-first. Disable experimental vis
 OPENCLAW_VISION_ENABLED=false
 ```
 
-{{% notice Warning %}}
-Never commit `.env`. It contains the Telegram bot token and Gateway authentication token. The repository ignores this file, but you should still verify `git status` before publishing changes.
-{{% /notice %}}
 
 ## Initialize and Start the Runtime Stack
 
@@ -264,9 +293,9 @@ Start the complete DGX Spark stack:
 docker compose --env-file .env -f compose.yaml up -d
 ```
 
-The first start can take several minutes while Docker images and model weights are downloaded and vLLM loads and compiles the model. A running container does not yet mean that its API is ready.
+The first start takes longer than subsequent starts because vLLM downloads the approximately 30 GiB Qwen model before loading it. The download time depends on your network connection and can make the initial startup longer. Subsequent starts use the cached model. A running container does not mean that its API is ready.
 
-Verify Service Status and API Readiness:
+Check service status and API readiness:
 
 ```bash
 docker compose --env-file .env -f compose.yaml ps -a
@@ -282,7 +311,7 @@ Follow the vLLM log during the first startup:
 docker logs -f openclaw-vllm
 ```
 
-Wait until the log includes `Application startup complete`. Model download and compilation messages before this point are expected. Press `Ctrl+C` to stop following the log; this does not stop the container.
+Wait for `Application startup complete`. Press `Ctrl+C` to leave the log view without stopping the container.
 
 Confirm that the model API is ready:
 
@@ -309,7 +338,18 @@ An HTTP `200` response confirms that the Gateway dashboard is reachable.
 
 ## Run the First Telegram Test
 
-Open your bot in Telegram and send:
+Creating the bot with BotFather registers its name and username in Telegram. The `openclaw-telegram` container uses the token in `.env` to connect the Telegram bot to the local Gateway and AI services on DGX Spark.
+
+Find the bot in Telegram by searching for the username that you chose in BotFather. You can also replace `<your-bot-username>` in `https://t.me/<your-bot-username>` with that username and open the URL. Select **Start** to open a chat. The bot does not start a chat with you or automatically appear in your chat list.
+
+Messages then follow this path:
+
+```text
+Telegram client -> Telegram Bot API -> openclaw-telegram container on DGX Spark
+    -> local Gateway and AI services -> openclaw-telegram container -> Telegram client
+```
+
+After the containers are running and you have started the Telegram chat, send:
 
 ```text
 /help
@@ -359,18 +399,14 @@ OPENCLAW_QDRANT_BASE_URL=http://127.0.0.1:6333 \
 PYTHONPATH=app python3 -m unittest discover -s tests
 ```
 
-The output contains progress dots followed by this result:
+The final lines are similar to:
 
 ```output
-----------------------------------------------------------------------
 Ran 121 tests in 4.256s
-
 OK (skipped=5)
 ```
 
-The number of tests and the elapsed time can change as the repository evolves. `OK` confirms that the complete suite passed.
-
-These tests validate command routing, task dispatch, cron parsing, ingestion helpers, and failure handling. They are software behavior tests, not hardware benchmarks.
+The count and time can change. `OK` confirms that the software behavior tests passed; these are not hardware benchmarks.
 
 ## What you've learned and what's next
 

@@ -1,5 +1,5 @@
 ---
-title: Port the Application Workflow to a CPU-Only Armv9 System
+title: (Optional) Port the App to a CPU-Only Armv9 System
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Overview of Cross-Platform Portability
 
-This runtime architecture is designed to work across Arm systems with different compute configurations. In the previous sections, you deployed it on NVIDIA DGX Spark, a heterogeneous CPU-GPU platform using vLLM for local generation. In this section, you will move the same application workflows to a CIX-based Radxa Orion O6 running Debian 12, with llama.cpp providing local generation on the Armv9 CPU.
+As an optional step, you will now move the runtime from NVIDIA DGX Spark to a CIX-based Radxa Orion O6 running Debian 12. llama.cpp provides local generation on the Armv9 CPU.
 
 The Telegram interface, local memory and RAG, browser search, scheduled workflows, and deterministic routing remain unchanged. Only the local generation backend changes:
 
@@ -18,7 +18,7 @@ The Telegram interface, local memory and RAG, browser search, scheduled workflow
 | Radxa Orion O6 | llama.cpp | OpenAI-compatible API |
 
 {{% notice Note %}}
-These backends were selected to build on the environments used in the earlier chapters and in [Run ERNIE-4.5 Mixture of Experts model on Armv9 with llama.cpp](/learning-paths/cross-platform/ernie_moe_v9/). They are not fixed architecture requirements. You can use another local inference backend that provides a compatible OpenAI chat-completions API.
+These backends match the environments used in this Learning Path and [Run ERNIE-4.5 Mixture of Experts model on Armv9 with llama.cpp](/learning-paths/cross-platform/ernie_moe_v9/). You can use another local backend with a compatible OpenAI chat-completions API.
 {{% /notice %}}
 
 ## Verify System Requirements on Armv9 Host
@@ -37,9 +37,9 @@ Confirm that the host reports `aarch64` and has enough available memory and stor
 
 ## Prepare llama.cpp and the ERNIE model
 
-Follow [Set up llama.cpp on an Armv9 development board](/learning-paths/cross-platform/ernie_moe_v9/2_llamacpp_installation/) to install the build dependencies, compile llama.cpp, download the ERNIE-4.5 Thinking Q4 GGUF model, and run the basic inference test on Orion O6.
+Follow [Set up llama.cpp on an Armv9 development board](/learning-paths/cross-platform/ernie_moe_v9/2_llamacpp_installation/). Install the dependencies, compile llama.cpp, download the ERNIE-4.5 Thinking Q4 GGUF model, and run its basic inference test.
 
-After you complete the setup in that Learning Path, continue with the steps below. They use the following installation paths:
+The following commands use these installation paths:
 
 ```text
 $HOME/llama.cpp/build/bin/llama-server
@@ -185,7 +185,7 @@ git checkout v1.2
 cp .env.arm-cpu-only.example .env
 ```
 
-Create a separate Telegram bot for the CPU-only runtime by following the [Telegram Bot tutorial](https://core.telegram.org/bots/tutorial). Do not reuse the bot token from the running DGX Spark deployment because two polling runtimes using the same bot can compete for Telegram updates.
+Create a separate bot for this runtime with the [Telegram Bot tutorial](https://core.telegram.org/bots/tutorial). Do not reuse the DGX Spark bot token because two polling runtimes can compete for its updates. Have each account send a message to the new bot, then repeat the `getUpdates` process from the DGX Spark setup to obtain each `message.chat.id` value.
 
 Generate a new Gateway token:
 
@@ -197,15 +197,13 @@ Set the new bot and private tokens in `.env`:
 
 ```text
 OPENCLAW_TELEGRAM_BOT_TOKEN=<your-telegram-bot-token>
-OPENCLAW_TELEGRAM_ALLOWED_CHAT_IDS=<first-chat-id>,<second-chat-id>
-OPENCLAW_CRON_CHAT_IDS=<first-chat-id>,<second-chat-id>
-OPENCLAW_GATEWAY_TOKEN=<generated-random-token>
+OPENCLAW_TELEGRAM_ALLOWED_CHAT_IDS=<first-telegram-chat-id>,<second-telegram-chat-id>
+OPENCLAW_CRON_CHAT_IDS=<first-telegram-chat-id>,<second-telegram-chat-id>
+OPENCLAW_GATEWAY_TOKEN=<generated-gateway-token>
 OPENCLAW_CRON_TIMEZONE=<your-IANA-timezone>
 ```
 
-Separate multiple allowlisted chat IDs with commas. Both household members can then use the same bot and shared local collections.
-
-Use the same IANA timezone convention as the DGX Spark deployment. Scheduled jobs use UTC when this setting is omitted.
+Separate multiple chat IDs with commas. Use the same IANA timezone format as before; scheduled jobs use UTC if you omit it.
 
 Confirm the inference settings:
 
@@ -217,26 +215,21 @@ OPENCLAW_TRACKER_COLLECTION=personal_tracker_memory
 OPENCLAW_KNOWLEDGE_COLLECTION=personal_knowledge_base
 ```
 
-Although the environment variable retains the `VLLM` name for compatibility, it represents the configured generation endpoint and can point to llama.cpp.
+The `VLLM` variable name is retained for compatibility, but it can point to llama.cpp.
 
-Using the same collection names preserves the application contract, but it does not copy Qdrant data from DGX Spark to Orion O6. Each host keeps its own local collection data unless you migrate it separately.
+Using the same collection names keeps the configuration consistent, but it does not copy Qdrant data from DGX Spark. Each host keeps its own data.
 
-For a smaller CPU-only context budget, keep search and retrieval compact:
+Keep the CPU-only context small and disable unused voice transcription:
 
 ```text
 OPENCLAW_MAX_TOKENS=128
 OPENCLAW_RETRIEVAL_LIMIT=3
 OPENCLAW_SCRAPER_LIMIT=2
 OPENCLAW_WEB_CONTEXT_CHARS=1800
+OPENCLAW_WHISPER_ENABLED=false
 ```
 
 ## Launch the CPU-Only Application Stack
-
-Voice transcription is not used in this Learning Path. Keep it disabled in `.env`:
-
-```text
-OPENCLAW_WHISPER_ENABLED=false
-```
 
 Start the full tutorial stack:
 
@@ -270,7 +263,7 @@ If this command cannot resolve the hostname, inspect the Orion host DNS configur
 
 ## Validate Shared Workflows on CPU
 
-The previous chapters used a household assistant to validate memory, document retrieval, browser search, and scheduled reminders. In this section, you continue the household scenario on the CPU-only deployment by creating a simple budget assistant that two household members can share.
+Test the CPU-only deployment with a simple budget assistant shared by two household members.
 
 Create a file named `budget.txt` on the device where you use Telegram:
 
@@ -278,7 +271,7 @@ Create a file named `budget.txt` on the device where you use Telegram:
 Shared household weekly budget: £120.
 ```
 
-Upload the file to the bot. Any caption other than `/tracker` or `/mem` routes the upload to knowledge indexing by default, so use `/knowledge` as the caption to make the destination explicit. Each allowlisted household member can then add a synthetic expense from their own Telegram chat:
+Upload the file with the `/knowledge` caption and copy the filename returned by the bot. Each allowlisted household member can then add a synthetic expense from their own chat:
 
 ```text
 /mem #budget Groceries: £45.
@@ -291,7 +284,9 @@ After both entries are saved, either member can ask:
 /rag <returned-file-name> Based on the shared budget and the saved budget entries, how much remains?
 ```
 
-The response should report that £55 remains. This simple example demonstrates how allowlisted household members can contribute to and query the same local collection. The reference runtime treats this as shared household data and does not provide separate per-member access controls.
+Replace `<returned-file-name>` with the filename returned when you uploaded `budget.txt`.
+
+The response should report that £55 remains. Both members use the same local collection, without separate per-member access controls.
 
 The response alone does not prove which inference backend generated it. Inspect the Telegram runtime log:
 
@@ -306,8 +301,6 @@ journalctl --user -u openclaw-llama.service -n 30 --no-pager
 ```
 
 Look for a successful request to `/v1/chat/completions`. The Telegram response and both log entries confirm that the OpenClaw-based workflow is now using llama.cpp for local generation on the Armv9 CPU.
-
-This simplified example does not reset the budget at the start of each week. You can extend the runtime with a dedicated budget agent and scheduled workflow to manage weekly periods and resets.
 
 ## What you've learned and what's next
 
