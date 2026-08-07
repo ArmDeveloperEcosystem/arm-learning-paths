@@ -24,7 +24,7 @@ author: Sue Wu
 
 ### Tags
 skilllevels: Introductory
-subjects: IOT
+subjects: embedded-and-microcontrollers
 armips:
   - Cortex-M
   - Ethos-U
