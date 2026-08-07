@@ -8,16 +8,16 @@ layout: learningpathall
 
 ## What is CSIR-PGO?
 
-CSIR-PGO extends IR-PGO by adding a second, context-sensitive profiling pass.
+Context-sensitive IR PGO (CSIR-PGO) extends IR-PGO by adding a second, context-sensitive profiling pass.
 The first pass is the standard IR-PGO instrumentation pass. The second pass instruments the program after inlining, which enables LLVM to distinguish execution counts from different calling contexts.
-The additional context can improve optimization when function behavior depends on the call site, but it does not guarantee better performance for every program.
+
+The additional context can improve optimization when a function's behavior depends on its call site. It does not guarantee better performance for every program.
 
 Use CSIR-PGO when you want to provide LLVM with more detailed profile information and can afford an extra build and training run.
 
 ## Build the context-sensitive instrumented binary
 
-First, generate a standard IR-PGO profile as described in the [previous section](/learning-paths/servers-and-cloud-computing/pgo/ir-pgo/).
-We reuse the resulting `prof/ir.profdata` profile to build a second instrumented binary with `-fcs-profile-generate`, which adds context-sensitive instrumentation after inlining.
+First, generate `prof/ir.profdata` by completing the [IR-PGO workflow](/learning-paths/servers-and-cloud-computing/pgo/ir-pgo/). Use that profile to guide Clang's usual PGO-driven optimization decisions while it builds a second instrumented binary. The `-fcs-profile-generate` option then adds context-sensitive counters after inlining:
 
 ```bash
 clang++ -O3 -flto -fuse-ld=lld \
@@ -32,25 +32,29 @@ Run the context-sensitive instrumented binary:
 ./out/bsort.csirpgo.instr
 ```
 
-After the program exits, the raw profiles are written to:
+Confirm that the training run created at least one context-sensitive raw profile:
 
 ```bash
 ls prof/csir/*.profraw
 ```
 
-## Merge, Convert, and Inspect the profile
+## Merge and inspect the profiles
 
-As with IR-PGO, the context-sensitive training run can produce one or more raw `.profraw` files. Merge those files together with the existing `prof/ir.profdata` profile using `llvm-profdata` before using the merged profile during the final optimized build.
-
+Merge the context-sensitive raw profiles with the existing `prof/ir.profdata` profile. Do not merge only the `.profraw` files: the final CSIR-PGO profile needs counts from both instrumentation passes.
 
 ```bash
 llvm-profdata merge prof/ir.profdata prof/csir -output=prof/csir.profdata
 ```
 
-You can inspect the merged profile to see block counts. In the example below, the function `sort_array` has 6 context-sensitive counters with several recorded hits. You can inspect all functions with `--all-functions`, but the output can be extensive for large applications.
+Inspect the context-sensitive execution counts recorded for `sort_array`. For this example, `sort_array` should have six context-sensitive counters:
 
-```bash { command_line="user@host | 2-13" }
+```bash
 llvm-profdata show --showcs --counts --function=sort_array prof/csir.profdata
+```
+
+The output is similar to:
+
+```output
 Counters:
   ld-temp.o;_Z10sort_arrayPi:
     Hash: 0x18c2aba34f0cfff9
@@ -65,22 +69,27 @@ Total number of blocks: 32
 Total count: 75242276
 ```
 
+The `--showcs` option selects context-sensitive records from the merged profile. Exact hashes and individual counter values can vary with the LLVM version and training workload.
+
 ## Build with CSIR-PGO and LTO
 
 Build the optimized binary using the merged CS-IR profile:
 
 
 ```bash
-clang++ -O3 -flto -fuse-ld=lld -fprofile-use=prof/csir.profdata \
-        bsort.cpp -o out/bsort.csirpgo.opt
+clang++ -O3 -flto -fuse-ld=lld \
+    -fprofile-use=prof/csir.profdata \
+    bsort.cpp -o out/bsort.csirpgo.opt
 ```
 
 Run the optimized binary:
 
-```bash { command_line="user@host | 2-3" }
-./out/bsort.opt.csir
+```bash
+./out/bsort.csirpgo.opt
 ```
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You've added a second context-sensitive profiling pass on top of IR-PGO and built a CSIR-PGO optimized binary with LTO.
+
+You can now apply the workflow that best matches your profiling environment to a representative workload from your own application.

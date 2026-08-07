@@ -8,14 +8,13 @@ layout: learningpathall
 
 ## What is FE-PGO?
 
-FE-PGO uses Clang frontend instrumentation to collect execution counts while the program runs. Clang adds the counters before lowering the program to LLVM IR, so the profile data maps closely to the source code. After the training run, Clang uses the collected profile during an optimized build.
+Frontend PGO (FE-PGO) adds counters before Clang lowers the source code to LLVM intermediate representation (IR). The counters collect execution frequencies while the instrumented program runs, and the resulting profile maps closely to source-level constructs.
 
 Use FE-PGO when source-level profile information is important. For performance-focused PGO, IR-PGO and CSIR-PGO are usually better defaults and are covered next.
 
 ## Build the instrumented binary
 
-Build an instrumented binary. The `-fprofile-instr-generate` option tells Clang to add frontend counters and write the raw profile.
-
+Build an instrumented binary. The `-fprofile-instr-generate` option tells Clang to add frontend counters. The `=prof/fe.profraw` value configures the instrumented program to write its raw profile to that path when it exits:
 
 ```bash
 clang++ -O3 -flto -fuse-ld=lld \
@@ -29,24 +28,30 @@ Run the instrumented binary:
 ./out/bsort.fepgo.instr
 ```
 
-After the program exits, the raw profile should be written to:
+Let the training run complete and exit normally so the profiling runtime can finish writing the raw profile. Then confirm that it created `prof/fe.profraw`:
 
 ```bash
 ls prof/fe.profraw
 ```
 
 
-## Convert and Inspect the profile data
+## Convert and inspect the profile data
 
 Before Clang can use the profile during an optimized build, convert it to the `.profdata` format.
 
 ```bash
 llvm-profdata merge prof/fe.profraw -output=prof/fe.profdata
 ```
-You can inspect the merged profile to see block counts. In the example below we see that the function `sort_array` had 2 counters with hits matching our problem size. You can observe every function using `--all-functions` but can generate a large output on big binaries.
 
-```bash { command_line="user@host | 2-14" }
+Inspect the execution counts recorded for `sort_array`:
+
+```bash
 llvm-profdata show --counts --function=sort_array prof/fe.profdata
+```
+
+The output is similar to:
+
+```output
 Counters:
   _Z10sort_arrayPi:
     Hash: 0x00000000000046d1
@@ -62,6 +67,8 @@ Total number of blocks: 39
 Total count: 100476579
 ```
 
+The profile contains two frontend counters for `sort_array`. Exact hashes and counts can vary with the LLVM version and training workload. Use `--all-functions` to inspect the complete profile, but expect much more output for a large application.
+
 ## Build with FE-PGO and LTO
 
 Build the optimized binary using the converted profile:
@@ -74,13 +81,12 @@ clang++ -O3 -flto -fuse-ld=lld \
 
 Run the optimized binary:
 
-```bash { command_line="user@host | 2-3" }
+```bash
 ./out/bsort.fepgo.opt
 ```
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
+You've collected an FE-PGO profile, converted it with `llvm-profdata`, and used it with LTO to build an optimized binary.
 
-You've collected an FE-PGO profile, converted it with `llvm-profdata`, and used it with Thin-LTO to build an optimized binary.
-
-Next, you'll build the same example with IR-PGO and Thin-LTO.
+Next, you'll build the same example with IR-PGO and LTO.
