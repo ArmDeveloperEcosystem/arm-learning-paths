@@ -63,9 +63,9 @@ The group change applies to new shells; `newgrp docker` updates the current shel
 In the User Context terminal, pull the Docker image with the pre-built User Context service. Then, run the container:
 
 ```bash
-docker pull armswdev/cca-learning-path:cca-key-broker-v4
+docker pull armlimited/cca-learning-path:cca-key-broker-v4
 docker network create cca-trustee
-docker run --rm -it --network cca-trustee --name user-context armswdev/cca-learning-path:cca-key-broker-v4
+docker run --rm -it --network cca-trustee --name user-context armlimited/cca-learning-path:cca-key-broker-v4
 ```
 
 The `cca-trustee` Docker network is important. It lets the FVP container resolve the User Context service by container name, `user-context`, when `lkvm-bootsync` later uses `--service-ip user-context`.
@@ -91,8 +91,8 @@ With the User Context service running in the User Context terminal, open the FVP
 Pull the Docker image with the pre-built FVP and CCA reference software stack. Then, run the container connected to the same Docker network:
 
 ```bash
-docker pull armswdev/cca-learning-path:cca-simulation-v4
-docker run --rm -it --network cca-trustee armswdev/cca-learning-path:cca-simulation-v4
+docker pull armlimited/cca-learning-path:cca-simulation-v4
+docker run --rm -it --network cca-trustee armlimited/cca-learning-path:cca-simulation-v4
 ```
 
 Within your running container, launch the `run-cca-fvp.sh` script to run the Arm CCA pre-built binaries on the FVP:
