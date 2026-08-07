@@ -10,7 +10,7 @@ layout: learningpathall
 
 IR-level PGO (IR-PGO) adds counters to LLVM intermediate representation before LLVM runs its optimization passes. The counters collect execution frequencies during the training run.
 
-Compared with FE-PGO, IR-PGO usually has lower instrumentation overhead, creates smaller raw profiles, and produces faster optimized code. Use it as the default instrumentation-based workflow when your goal is performance rather than source-based coverage.
+Compared with FE-PGO, IR-PGO usually has lower instrumentation overhead and creates smaller raw profiles. It is generally the better instrumentation-based choice for optimization.
 
 ## Build the instrumented binary
 
@@ -79,8 +79,6 @@ clang++ -O3 -flto -fuse-ld=lld \
     -fprofile-use=prof/ir.profdata \
     bsort.cpp -o out/bsort.irpgo.opt
 ```
-
-If the profile doesn't match the source or build configuration, Clang emits a profile mismatch warning. A build without that warning confirms that Clang accepted the profile.
 
 Run the optimized binary:
 

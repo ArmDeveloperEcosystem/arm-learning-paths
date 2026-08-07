@@ -17,7 +17,7 @@ Use CSIR-PGO when you want to provide LLVM with more detailed profile informatio
 
 ## Build the context-sensitive instrumented binary
 
-First, generate `prof/ir.profdata` by completing the [IR-PGO workflow](/learning-paths/servers-and-cloud-computing/pgo/ir-pgo/). Use that profile to guide inlining while Clang builds a second instrumented binary. The `-fcs-profile-generate` option adds context-sensitive counters after inlining:
+First, generate `prof/ir.profdata` by completing the [IR-PGO workflow](/learning-paths/servers-and-cloud-computing/pgo/ir-pgo/). Use that profile to guide Clang's usual PGO-driven optimization decisions while it builds a second instrumented binary. The `-fcs-profile-generate` option then adds context-sensitive counters after inlining:
 
 ```bash
 clang++ -O3 -flto -fuse-ld=lld \
@@ -40,13 +40,13 @@ ls prof/csir/*.profraw
 
 ## Merge and inspect the profiles
 
-Merge the context-sensitive raw profiles with the original IR-PGO profile. The result contains counts from both instrumentation passes:
+Merge the context-sensitive raw profiles with the existing `prof/ir.profdata` profile. Do not merge only the `.profraw` files: the final CSIR-PGO profile needs counts from both instrumentation passes.
 
 ```bash
 llvm-profdata merge prof/ir.profdata prof/csir -output=prof/csir.profdata
 ```
 
-Inspect the context-sensitive execution counts recorded for `sort_array`:
+Inspect the context-sensitive execution counts recorded for `sort_array`. For this example, `sort_array` should have six context-sensitive counters:
 
 ```bash
 llvm-profdata show --showcs --counts --function=sort_array prof/csir.profdata
@@ -69,7 +69,7 @@ Total number of blocks: 32
 Total count: 75242276
 ```
 
-The `--showcs` option selects context-sensitive records from the merged profile. Exact hashes and counts can vary with the LLVM version and training workload.
+The `--showcs` option selects context-sensitive records from the merged profile. Exact hashes and individual counter values can vary with the LLVM version and training workload.
 
 ## Build with CSIR-PGO and LTO
 
@@ -81,8 +81,6 @@ clang++ -O3 -flto -fuse-ld=lld \
     -fprofile-use=prof/csir.profdata \
     bsort.cpp -o out/bsort.csirpgo.opt
 ```
-
-If the profile doesn't match the source or build configuration, Clang emits a profile mismatch warning. A build without that warning confirms that Clang accepted the merged profile.
 
 Run the optimized binary:
 

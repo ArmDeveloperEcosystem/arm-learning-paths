@@ -14,7 +14,7 @@ Use FE-PGO when source-level profile information is important. For performance-f
 
 ## Build the instrumented binary
 
-Build an instrumented binary. The `-fprofile-instr-generate` option tells Clang to add frontend counters and write the raw profile to `prof/fe.profraw`:
+Build an instrumented binary. The `-fprofile-instr-generate` option tells Clang to add frontend counters. The `=prof/fe.profraw` value configures the instrumented program to write its raw profile to that path when it exits:
 
 ```bash
 clang++ -O3 -flto -fuse-ld=lld \
@@ -28,7 +28,7 @@ Run the instrumented binary:
 ./out/bsort.fepgo.instr
 ```
 
-Confirm that the training run created the raw profile:
+Let the training run complete and exit normally so the profiling runtime can finish writing the raw profile. Then confirm that it created `prof/fe.profraw`:
 
 ```bash
 ls prof/fe.profraw
@@ -78,8 +78,6 @@ clang++ -O3 -flto -fuse-ld=lld \
     -fprofile-instr-use=prof/fe.profdata \
     bsort.cpp -o out/bsort.fepgo.opt
 ```
-
-If the profile doesn't match the source or build configuration, Clang emits a profile mismatch warning. A build without that warning confirms that Clang accepted the profile.
 
 Run the optimized binary:
 

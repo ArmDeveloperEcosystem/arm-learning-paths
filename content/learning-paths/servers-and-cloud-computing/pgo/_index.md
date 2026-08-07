@@ -20,7 +20,7 @@ learning_objectives:
 
 prerequisites:
     - An AArch64 Linux system with LLVM installed. You need Clang, LLD, `llvm-bcanalyzer`, `llvm-profdata`, `llvm-profgen`, and `llvm-readelf` in your `PATH`. For setup instructions, see [LLVM toolchain for Linux on Arm](/install-guides/llvm/).
-    - For the optional sample-based PGO workflow, a processor that implements the Branch Record Buffer Extension (BRBE), Linux kernel 6.17 or later, and Linux `perf`
+    - For the BRBE-based sample PGO workflow demonstrated here, a processor that implements the Branch Record Buffer Extension (BRBE), Linux kernel 6.17 or later, and Linux `perf`. Other sample-based PGO workflows can use sources such as Statistical Profiling Extension (SPE) or Performance Monitoring Unit (PMU) events and have different requirements.
 
 
 author: Paschalis Mpeis
