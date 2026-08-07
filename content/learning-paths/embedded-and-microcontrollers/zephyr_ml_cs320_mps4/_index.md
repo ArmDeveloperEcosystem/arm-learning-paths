@@ -24,7 +24,7 @@ author: Sue Wu
 
 ### Tags
 skilllevels: Introductory
-subjects: embedded-and-microcontrollers
+subjects: RTOS Fundamentals
 armips:
   - Cortex-M
   - Ethos-U
