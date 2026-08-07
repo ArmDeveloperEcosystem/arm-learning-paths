@@ -16,6 +16,7 @@ author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://support.brave.com/hc/en-us/categories/360001053032-Desktop-Browser
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/windows?package=Brave
 
 weight: 2                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: false             # Set to true to be listed in main selection page, else false
