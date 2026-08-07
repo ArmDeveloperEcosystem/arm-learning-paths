@@ -11,7 +11,7 @@ layout: learningpathall
 
 The logger finds hwmon devices and channels by name and label. The use of both name and label keeps the script working if Linux assigns different `hwmon` directory numbers after a reboot.
 
-Create `collect-telemetry.sh` in `~/perf-per-watt`:
+Create `collect-telemetry.sh` in `~/perf-per-watt`, replacing `amprere_hwmon` and `thelio_hwmon` with the devices for your system:
 
 ```bash
 cat > collect-telemetry.sh <<'EOF'
@@ -176,7 +176,7 @@ The logger records the following values:
 | `cpu_fan_rpm` | CPU fan speed |
 | `intake_fan_rpm` | Chassis intake fan speed |
 
-The average frequency is a system-wide summary. It doesn't show whether individual CPUs ran at different frequencies, but it's sufficient for comparing OpenSSL runs using all cores.
+The average frequency is a system-wide summary. It doesn't show whether individual CPUs run at different frequencies, but it's sufficient for comparing OpenSSL runs using all cores.
 
 ## What you've accomplished and what's next
 

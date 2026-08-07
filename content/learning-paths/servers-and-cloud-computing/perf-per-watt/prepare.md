@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Understand the measurement boundary
 
-You'll measure power reported by the Linux hwmon driver of your machine's processor. On the [System76 Thelio Astra](https://system76.com/desktops/thelio-astra), the `apm_xgene` driver exposes separate CPU and I/O power channels. You can apply the same process to other Arm Linux systems. 
+You'll measure power reported by the Linux hwmon driver of your machine's processor. On the [System76 Thelio Astra](https://system76.com/desktops/thelio-astra) that the Learning Path was tested on, the `apm_xgene` driver exposes separate CPU and I/O power channels. You can apply the same process to other Arm Linux systems. 
 
 Adding these channels gives an estimate of system-on-chip (SoC) power. The estimate doesn't include all power drawn by the workstation. Memory, storage, fans, voltage-conversion losses, and the power supply can consume additional power.
 
@@ -17,7 +17,7 @@ Use the results to compare different CPU frequency configurations on the same sy
 
 ## Install the required software
 
-The workload uses OpenSSL, and the analysis script uses Python 3. The Learning Path was tested on a Thelio Astra running Ubuntu 24.04. You can test other Linux distributions as long as you install OpenSSL, Python 3, and `cpupower`.
+The workload uses OpenSSL, and the analysis script uses Python 3. The Learning Path was tested on Ubuntu 24.04. You can test other Linux distributions as long as you install OpenSSL, Python 3, and `cpupower`.
 
 Install OpenSSL and `cpupower`:
 
@@ -41,7 +41,7 @@ If a binary is found, create a symlink so that it's available on the PATH:
 sudo ln -sf $(find /usr/lib/linux-*tools* -name cpupower | head -1) /usr/local/bin/cpupower
 ```
 
-This situation is common on systems with custom kernels, where the kernel version doesn't match an available `linux-tools` package. For more details on kernel-tools version mismatches, see the [Perf install guide](/install-guides/perf/).
+This situation is common on systems with custom kernels, where the kernel version doesn't match an available `linux-tools` package. For more information about kernel-tools version mismatches, see the [Perf install guide](/install-guides/perf/).
 {{% /notice %}}
 
 Confirm that OpenSSL, Python 3, and `cpupower` are available:

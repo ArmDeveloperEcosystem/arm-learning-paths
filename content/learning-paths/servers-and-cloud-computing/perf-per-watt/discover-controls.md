@@ -29,9 +29,9 @@ printf 'Online CPUs: '
 nproc
 ```
 
-On the Thelio Astra used for this Learning Path, each CPU has its own policy. Other Arm systems can group several CPUs into one frequency domain.
+On the Thelio Astra used to test the Learning Path, each CPU has its own policy. Other Arm systems can group several CPUs into one frequency domain.
 
-Display the controls for the first policy:
+Display the controls for the first policy in your list:
 
 ```bash
 for attribute in \
@@ -52,13 +52,13 @@ for attribute in \
 done
 ```
 
-The Thelio Astra example uses the `cppc_cpufreq` driver. It exposes a range from `1000000` kHz to `2200000` kHz and supports the following governors:
+A Thelio Astra uses the `cppc_cpufreq` driver. It exposes a range from `1000000` kHz to `2200000` kHz and supports the following governors:
 
 ```output
 conservative ondemand userspace powersave performance schedutil
 ```
 
-You'll use the `powersave`, `schedutil`, and `performance` governors.
+You'll compare the `powersave`, `schedutil`, and `performance` governors.
 
 The `boost` attribute reports `0` because Arm Neoverse server CPUs maintain sustained performance across the full frequency range rather than using a temporary boost mode above the configured maximum.
 
@@ -89,7 +89,7 @@ analyzing CPU 43:
   boost state support:
     Active: no
 ```
-The CPU number in the first line depends on which CPU the `cpupower` process was scheduled on and varies between runs.
+The CPU number in the first line depends on which CPU the `cpupower` process was scheduled on. The number varies between runs.
 
 Show the same summary for all CPUs:
 
@@ -121,26 +121,14 @@ The output on a Thelio Astra includes:
 /sys/class/hwmon/hwmon3: hidpp_battery_0
 ```
 
-Each device provides different sensor data:
+The device names might vary on your system. Each device provides different sensor data:
 
 | Device | Description |
 | --- | --- |
 | `nvme` | NVMe storage drive temperature |
-| `apm_xgene` | Ampere processor power and temperature sensors |
-| `system76_thelio_io` | System76 chassis controller for fan speed and PWM |
+| `apm_xgene` | Processor power and temperature sensors |
+| `system76_thelio_io` | System76 chassis controller for fan speed and pulse-width modulation |
 | `hidpp_battery_0` | Logitech wireless peripheral battery level |
-
-Refer to `apm_xgene` for SoC power and temperature, and `system76_thelio_io` for fan speed.
-
-Find the directory that contains the Ampere processor sensors:
-
-```bash
-for device in /sys/class/hwmon/hwmon*; do
-    if [ "$(cat "$device/name" 2>/dev/null)" = "apm_xgene" ]; then
-        echo "$device"
-    fi
-done
-```
 
 Print the available labels and values:
 
@@ -153,7 +141,7 @@ for device in /sys/class/hwmon/hwmon*; do
 done
 ```
 
-The output is similar to:
+The output on a Thelio Astra includes:
 
 ```output
 /sys/class/hwmon/hwmon1/power1_label:CPU power
@@ -164,11 +152,11 @@ The output is similar to:
 /sys/class/hwmon/hwmon1/temp1_input:37000
 ```
 
-Each sensor has a `_label` file that describes what it measures and a corresponding `_input` file that holds the current reading. The naming convention uses a type prefix (`power` or `temp`) followed by a channel number. The hwmon subsystem reports power in microwatts and temperature in millidegrees Celsius.
+Each sensor has a `_label` file that describes what it measures, and a corresponding `_input` file that holds the current reading. The naming convention uses a type prefix (`power` or `temp`) followed by a channel number. The hwmon subsystem reports power in microwatts and temperature in millidegrees Celsius.
 
 The sample values can be converted to watts and Celsius as follows:
 
-| File | Raw value | Converted |
+| File | Raw value | Converted value |
 | --- | ---: | --- |
 | `power1_input` (CPU power) | 12200000 µW | 12.2 W |
 | `power2_input` (I/O power) | 8025000 µW | 8.025 W |
@@ -178,7 +166,9 @@ SoC power is the sum of CPU and I/O power. It doesn't represent total system or 
 
 ## Inspect fan telemetry
 
-The System76 Thelio I/O controller exposes fan speed and pulse-width modulation (PWM) values. Print the labels and current readings:
+The System76 Thelio I/O controller on a Thelio Astra exposes fan speed and pulse-width modulation (PWM) values. 
+
+The following loop prints the labels and current readings for fan telemetry. Replace `system76_thelio_io` with the controller that exposes fan telemetry on your system:
 
 ```bash
 for device in /sys/class/hwmon/hwmon*; do
@@ -246,7 +236,7 @@ timestamp cpu_power_uw io_power_uw soc_temp_mc
 
 The values should change as background activity changes. A sensor that never updates isn't suitable for measuring workload energy.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You've now identified the CPU frequency policies and the CPU power, I/O power, SoC temperature, and fan sensors.
 

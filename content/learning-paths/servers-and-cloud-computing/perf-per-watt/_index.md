@@ -14,9 +14,9 @@ learning_objectives:
     - Calculate throughput per watt and energy consumed per unit of work
 
 prerequisites:
-    - An Arm Linux system with root or sudo access
+    - An Arm Linux system with root or sudo access and Python 3 installed
     - CPU frequency policies available under `/sys/devices/system/cpu/cpufreq/`
-    - CPU and I/O power sensors exposed through Linux hwmon
+    - CPU and I/O power sensors exposed through Linux hwmon 
 
 author: Jason Andrews
 

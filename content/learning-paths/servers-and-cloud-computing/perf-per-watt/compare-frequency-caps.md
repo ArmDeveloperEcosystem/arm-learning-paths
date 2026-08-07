@@ -142,5 +142,5 @@ The output is similar to:
 
 You've now collected OpenSSL and telemetry results under three maximum-frequency limits while keeping the governor fixed. 
 
-Next, you'll calculates average power, energy, throughput per watt, and joules per gigabyte.
+Next, you'll calculate average power, energy, throughput per watt, and joules per gigabyte.
 
