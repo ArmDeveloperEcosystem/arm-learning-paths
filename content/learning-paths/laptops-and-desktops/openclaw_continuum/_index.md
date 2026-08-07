@@ -1,5 +1,5 @@
 ---
-title: Extend OpenClaw for a Local-First AI Assistant Across Arm Platforms
+title: Extend OpenClaw for a local-first AI assistant across Arm platforms
 
 draft: true
 cascade:
@@ -9,7 +9,7 @@ description: Extend OpenClaw with local memory, document RAG, browser search, de
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an advanced topic for developers who want to extend OpenClaw into a customizable local-first assistant with persistent memory, document RAG, explicit browser search, deterministic routing, and proactive scheduling. You will deploy the reference runtime on NVIDIA DGX Spark with vLLM, then move the same workflows to a CPU-only Armv9 system with llama.cpp.
+who_is_this_for: This is an advanced topic for developers who want to extend OpenClaw into a customizable local-first assistant with persistent memory, document RAG, explicit browser search, deterministic routing, and proactive scheduling. You'll deploy the reference runtime on NVIDIA DGX Spark with vLLM, then move the same workflows to a CPU-only Armv9 system with llama.cpp.
 
 learning_objectives:
     - Explain the local and external data boundaries of an OpenClaw-based runtime

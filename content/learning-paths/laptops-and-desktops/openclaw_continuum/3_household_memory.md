@@ -1,28 +1,30 @@
 ---
-title: Validate Memory Persistence and Routing with Telegram and Qdrant
+title: Validate memory persistence and routing with Telegram and Qdrant
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Define the Household Test Scenario
+## Define the household test scenario
 
-In this section, you will create a shared household assistant to test local memory. You will save and retrieve a synthetic maintenance reminder without sending it to a public cloud LLM.
+You'll create a shared household assistant to test local memory. You'll save and retrieve a synthetic maintenance reminder without sending it to a public cloud LLM.
 
 Telegram transports the messages. Ollama, Qdrant, and the local LLM process them on your host.
 
-This tutorial treats household data as shared. It does not implement separate access control for each family member.
+{{% notice Note %}}
+Household data is treated as shared data. You won't implement separate access control for each family member.
+{{% /notice %}}
 
-## Store and Query Local Memory
+## Store and query local memory
 
-Send this command to the Telegram bot:
+Send the following command to the Telegram bot:
 
 ```text
 /mem #home The boiler should be inspected every October.
 ```
 
-The runtime stores the reminder through this path:
+The runtime stores the reminder through the following path:
 
 ```text
 Telegram / Mem command
@@ -42,7 +44,7 @@ The response should mention October.
 ![Telegram conversation showing the boiler reminder saved with the mem command and retrieved with the rag memory query#center](openclaw_telegram_2.jpg "Saving and retrieving a household memory in Telegram")
 
 
-The retrieval request follows this local path:
+The retrieval request follows the following local path:
 
 ```text
 Telegram question
@@ -53,7 +55,7 @@ Telegram question
     -> Telegram answer
 ```
 
-## Verify Qdrant Vector Collections
+## Verify Qdrant vector collections
 
 Confirm that the personal memory collection exists:
 
@@ -85,7 +87,7 @@ The relevant fields are similar to:
 
 The point count depends on existing data. A `green` status with `optimizer_status` set to `ok` confirms collection health. The vector size of `768` matches `nomic-embed-text`.
 
-The collection metadata does not prove that the boiler reminder was stored. Query the point payload directly to verify the synthetic record:
+The collection metadata doesn't prove that the boiler reminder was stored. Query the point payload directly to verify the synthetic record:
 
 ```bash
 curl -sS -X POST \
@@ -110,7 +112,7 @@ curl -sS -X POST \
 
 Look for the boiler reminder in the returned payload. The filter finds it even when the personal collection contains other records. This verifies the stored data directly instead of relying on the assistant's response.
 
-## Inspect Active Agents and Task Execution
+## Inspect active agents and task execution
 
 Send the following command to the Telegram bot:
 
@@ -120,7 +122,7 @@ Send the following command to the Telegram bot:
 
 The response lists the thin agents registered by the reference runtime, including memory, RAG, browser search, weather, and chat routes.
 
-To inspect recent tasks, send this command to the Telegram bot:
+To inspect recent tasks, send the following command to the Telegram bot:
 
 ```text
 /tasks last 5
@@ -128,7 +130,7 @@ To inspect recent tasks, send this command to the Telegram bot:
 
 Task history shows which agent handled the request, its status, and its runtime. All routes use the configured LLM endpoint.
 
-## Test External Skill Integration
+## Test external skill integration
 
 Send a weather question in plain language:
 
@@ -136,11 +138,9 @@ Send a weather question in plain language:
 Cambridge weather tomorrow
 ```
 
-The runtime sends this question to the weather skill. Do not add `/search`, which selects the general browser worker instead.
+The runtime sends this question to the weather skill. Don't add `/search`, which selects the general browser worker instead.
 
 This request contacts the public [wttr.in](https://wttr.in/) weather service, but generation still uses the local model.
-
-## Check your work
 
 Your household assistant should now:
 
@@ -149,6 +149,8 @@ Your household assistant should now:
 3. Show the selected agent in `/agents` and `/tasks last 5`.
 4. Return weather data through the external weather skill.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
-You saved and retrieved a synthetic household memory, verified it in Qdrant, and inspected both local and external request paths. Next, you will add document RAG, browser search, and a proactive cron reminder.
+You've now saved and retrieved a synthetic household memory, verified it in Qdrant, and inspected both local and external request paths.
+
+ Next, you'll add document RAG, browser search, and a proactive cron reminder.
