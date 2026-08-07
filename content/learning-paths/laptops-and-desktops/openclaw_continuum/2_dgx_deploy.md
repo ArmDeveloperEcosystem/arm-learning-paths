@@ -159,9 +159,63 @@ git checkout v1.2
 
 The tag fixes the tutorial source version. Unversioned container images and model artifacts can still change when downloaded.
 
-## Configure the Telegram bot Environment Variables
+## Configure the Telegram bot environment variables
 
-If you do not already have a Telegram bot, follow the official [Telegram Bot tutorial](https://core.telegram.org/bots/tutorial) to create one before continuing. BotFather's `/newbot` flow gives you the bot token. You also need the numeric chat ID for the account that will use the bot.
+You need a Telegram account, a bot token, and the numeric chat ID for the account that will use the bot. Create a Telegram account if you do not already have one. You can use the Telegram desktop, mobile, or web client for the following steps.
+
+To create a bot and obtain its token:
+
+1. Open Telegram and start a chat with **BotFather**.
+2. Send the following command:
+
+    ```text
+    /newbot
+    ```
+
+3. Follow BotFather's prompts to name the bot and choose a username.
+4. Copy the HTTP API token that BotFather returns. You will add it to the `.env` file later.
+
+See the official [Telegram Bot tutorial](https://core.telegram.org/bots/tutorial) for more information about creating and managing bots.
+
+Next, obtain the chat ID for your Telegram account:
+
+1. Open a chat with the bot that you created and send a test message, such as `Hello`. This creates an update that the Telegram Bot API can return.
+2. Open a terminal on your local machine and query the updates. Replace `<TOKEN>` with the HTTP API token from BotFather:
+
+    ```bash
+    curl "https://api.telegram.org/bot<TOKEN>/getUpdates"
+    ```
+
+The output is similar to:
+
+```output
+{
+  "ok": true,
+  "result": [
+    {
+      "update_id": 78772718,
+      "message": {
+        "message_id": 2,
+        "from": {
+          "id": 8974517049,
+          "is_bot": false,
+          "first_name": "Example",
+          "language_code": "en"
+        },
+        "chat": {
+          "id": 8974517049,
+          "first_name": "Example",
+          "type": "private"
+        },
+        "date": 1785762058,
+        "text": "Hello"
+      }
+    }
+  ]
+}
+```
+
+Copy the `message.chat.id` value. You will use this value for `<your-telegram-chat-id>` in the `.env` file. If the `result` array is empty, send another message to the bot and run the command again.
 
 Copy the DGX Spark environment template:
 
@@ -246,7 +300,7 @@ Start the complete DGX Spark stack:
 docker compose --env-file .env -f compose.yaml up -d
 ```
 
-The first start can take several minutes while Docker downloads images and model weights and vLLM loads the model. A running container does not mean its API is ready yet.
+The first start takes longer than subsequent starts because vLLM downloads the approximately 30 GiB Qwen model before loading it. The download time depends on your network connection and can make the initial startup longer. Subsequent starts use the cached model. A running container does not mean that its API is ready.
 
 Check service status and API readiness:
 
