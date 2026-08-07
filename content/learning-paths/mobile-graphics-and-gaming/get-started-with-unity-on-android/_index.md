@@ -25,7 +25,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Gaming
 armips:
-    - Cortex
+    - Cortex-A
 tools_software_languages:
     - Unity
     - csharp

@@ -109,7 +109,25 @@ kiro-cli version
 The output shows the version, and is similar to:
 
 ```output
-kiro-cli 1.28.1
+kiro-cli 2.16.1
+```
+
+## Log in with your Builder ID
+
+Before you can use Kiro CLI features, you need to log in with your AWS Builder ID.
+
+Run the login command:
+
+```console
+kiro-cli login
+```
+
+Follow the prompts to authenticate. The CLI opens a browser window (or provides a URL for remote sessions) where you sign in with your Builder ID credentials.
+
+After a successful login, you can start using Kiro CLI:
+
+```console
+kiro-cli chat
 ```
 
 ## Configure your AWS account to get the most from Kiro CLI
@@ -135,16 +153,30 @@ Use the `/context` command to see the possible locations to store your context.
 The output is similar to:
 
 ```output
-
-Agent (kiro_default)
-  - AmazonQ.md (no matches)
-  - AGENTS.md (no matches)
-  - README.md (no matches)
-
-Session (temporary)
-  <none>
-
-No files in the current directory matched the rules above.
+Active agent context: kiro_default
+ 
+   – AGENTS.md 0.0% (no matches)
+   – README.md 0.1%
+ 
+ Session (temporary)
+   <none>
+ 
+ Tools
+   Built-in 3.5% · 14 tools
+     · code 0.3%
+     · glob 0.1%
+     · goal 0.3%
+     · grep 0.2%
+     · introspect 0.2%
+     · knowledge 0.6%
+     · read 0.3%
+     · shell 0.2%
+     · subagent 0.3%
+     · todo_list 0.4%
+     · use_aws 0.2%
+     · web_fetch 0.1%
+     · web_search 0.1%
+     · write 0.2%
 ```
 
 For example, you can create a new file to store your context as follows:
@@ -170,9 +202,14 @@ did you read my context information?
 The response confirms the context file was read, and is similar to:
 
 ```output
-Yes, I read your context information. You're an Arm Linux developer who prefers Ubuntu and other Debian-based
-distributions, and you don't use x86 computers. You also sometimes use macOS and Windows on Arm, but only want
-information about those when you specifically ask for them.
+Yes, I read your context information. Here's what I picked up:
+  
+  - You're an Arm Linux developer who prefers Ubuntu/Debian-based distributions.
+  - You don't use x86 computers, so I'll default to aarch64/arm64 for any architecture-specific
+  guidance.
+  - I'll only bring up macOS or Windows on Arm if you specifically ask about them.
+  
+  Let me know how I can help!
 ```
 
 Ask questions like "How do I install the AWS CLI?" to verify that the answers match the provided context.
@@ -194,11 +231,15 @@ Use the `/model` command to list other available models:
 The output is similar to:
 
 ```output
- Press (↑↓) to navigate · Enter(⏎) to select model
-❯ Auto (current) | 1x credit | Models chosen by task for optimal usage and consistent quality
-  claude-sonnet-4.5 | 1.3x credit | The latest Claude Sonnet model
-  claude-sonnet-4 | 1.3x credit | Hybrid reasoning and coding for regular use
-  claude-haiku-4.5 | 0.4x credit | The latest Claude Haiku model
+❯ auto                 1.00x credits    Models chosen by task for optimal usage and consistent q...
+  claude-sonnet-4.6    1.30x credits    Claude Sonnet 4.6 model with 1M context window
+  claude-opus-4.5      2.20x credits    Claude Opus 4.5 model
+  claude-sonnet-4.5    1.30x credits    Claude Sonnet 4.5 model
+  claude-sonnet-4      1.30x credits    Hybrid reasoning and coding for regular use
+  claude-haiku-4.5     0.40x credits    The latest Claude Haiku model
+  deepseek-3.2         0.25x credits    Experimental preview of DeepSeek V3.2
+  minimax-m2.5         0.25x credits    MiniMax M2.5 model
+(+3 more)
 ```
 
 Use the arrow keys to select the model you want to use. 

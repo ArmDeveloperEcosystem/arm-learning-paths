@@ -69,8 +69,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Migration to Arm
 armips:
-    - Cortex-A72
-    - Cortex-A53
+    - Cortex-A
 operatingsystems:
     - Linux
 tools_software_languages:

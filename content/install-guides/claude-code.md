@@ -5,6 +5,7 @@ description: Install Claude Code on Arm Linux, Apple Silicon macOS, or Windows o
 author: Pareena Verma
 minutes_to_complete: 10
 official_docs: https://code.claude.com/docs
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/windows?package=Claude%20Code
 
 layout: installtoolsall
 multi_install: false

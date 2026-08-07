@@ -20,6 +20,7 @@ test_images:
 
 ### Link to official documentation
 official_docs: https://developer.arm.com/documentation/101004
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/windows?package=Arm%20Performance%20Libraries
 description: Install Arm Performance Libraries on Windows on Arm, macOS, and Linux AArch64 to access optimized BLAS, LAPACK, FFT, and math functions for high-performance computing on Arm.
 author: Pareena Verma
 

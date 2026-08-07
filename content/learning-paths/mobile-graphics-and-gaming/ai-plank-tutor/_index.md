@@ -80,7 +80,6 @@ skilllevels: Introductory
 subjects: ML
 armips:
     - Cortex-A
-    - Arm AI Chat library
 tools_software_languages:
     - Android Studio
     - Kotlin
