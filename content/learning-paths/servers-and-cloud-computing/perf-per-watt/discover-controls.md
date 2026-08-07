@@ -1,6 +1,6 @@
 ---
 title: Discover CPU frequency and power controls
-description: Identify the Linux CPUFreq policies and `hwmon` channels used to control frequency and measure SoC power and temperature.
+description: Identify the Linux CPUFreq policies and hwmon channels used to control frequency and measure SoC power and temperature.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

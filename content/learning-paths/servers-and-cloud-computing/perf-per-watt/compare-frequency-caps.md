@@ -114,7 +114,7 @@ Use the same conditions for every run:
 - Allow the same idle period before every run
 - Keep the system connected to the same power and cooling environment
 
-For best results, repeat each configuration at least three times and report the median. A single run is sufficient to complete the workflow and check whether the efficiency curves differ.
+A single run is sufficient to complete the workflow and check whether the efficiency curves differ. For best results, repeat each configuration at least three times and note the median.
 
 ## Restore the original settings
 
