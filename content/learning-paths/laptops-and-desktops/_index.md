@@ -32,7 +32,7 @@ tools_software_languages_filter:
 - Arm64EC: 1
 - Assembly: 1
 - Bash: 5
-- C: 13
+- C: 12
 - CCA: 1
 - Clang: 13
 - CMake: 5

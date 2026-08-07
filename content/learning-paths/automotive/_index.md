@@ -26,7 +26,8 @@ operatingsystems_filter:
 tools_software_languages_filter:
 - Arm Development Studio: 1
 - Arm Zena CSS: 1
-- C: 3
+- BitBake: 1
+- C: 2
 - Clang: 3
 - CPP: 1
 - DDS: 1

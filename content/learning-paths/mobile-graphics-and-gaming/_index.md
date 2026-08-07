@@ -16,11 +16,11 @@ operatingsystems_filter:
 - Android: 42
 - Linux: 45
 - macOS: 23
-- Windows: 21
+- Windows: 22
 subjects_filter:
 - Gaming: 6
 - Graphics: 8
-- ML: 32
+- ML: 33
 - Performance and Architecture: 36
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech.
 title: Mobile, Graphics, and Gaming
@@ -33,7 +33,7 @@ tools_software_languages_filter:
 - Android Studio: 14
 - Arm Development Studio: 1
 - Arm Mobile Studio: 1
-- Arm Performance Studio: 4
+- Arm Performance Studio: 5
 - Assembly: 1
 - Bash: 2
 - Bazel: 2
@@ -70,8 +70,8 @@ tools_software_languages_filter:
 - MediaPipe: 3
 - Model Explorer: 2
 - MTE: 2
-- Neon: 3
-- NX: 8
+- Neon: 4
+- NX: 10
 - ONNX: 1
 - ONNX Runtime: 3
 - OpenGL ES: 1
@@ -91,12 +91,12 @@ tools_software_languages_filter:
 - Transformers: 1
 - Trusted Firmware: 1
 - Unity: 6
-- Unreal Engine: 7
+- Unreal Engine: 8
 - VGF: 1
-- Visual Studio: 3
+- Visual Studio: 4
 - Visual Studio Code: 1
 - Vulkan: 9
-- Vulkan SDK: 2
+- Vulkan SDK: 3
 - XNNPACK: 3
 weight: 3
 # auto-generated padding to avoid Hugo YAML alias limit
