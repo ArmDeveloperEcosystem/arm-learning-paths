@@ -7,7 +7,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## Understand the measurement boundary
+## What you will measure
 
 You'll measure power reported by the Linux `hwmon` driver of your machine's processor. On the [System76 Thelio Astra](https://system76.com/desktops/thelio-astra) that the Learning Path was tested on, the `apm_xgene` driver exposes separate CPU and I/O power channels. You can apply the same process to other Arm Linux systems.
 
@@ -15,7 +15,7 @@ Adding these channels gives an estimate of system-on-chip (SoC) power. The estim
 
 Use the results to compare different CPU frequency configurations on the same system. 
 
-## Install the required software
+## Install the required software on the system
 
 The workload uses OpenSSL, and the analysis script uses Python 3. The Learning Path was tested on Ubuntu 24.04. You can test other Linux distributions as long as you install OpenSSL, Python 3, and `cpupower`.
 
@@ -188,4 +188,6 @@ CPUFreq settings also return to the platform defaults after a reboot unless anot
 
 ## What you've accomplished and what's next
 
-You've now installed the required tools and saved the original CPUFreq settings. Next, you'll inspect the controls and sensors that Linux exposes on the system.
+You've now installed the required tools and saved the original CPUFreq settings. 
+
+Next, you'll inspect the controls and sensors that Linux exposes on the system.

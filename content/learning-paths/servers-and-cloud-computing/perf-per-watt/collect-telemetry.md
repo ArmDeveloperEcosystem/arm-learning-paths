@@ -169,8 +169,8 @@ The logger records the following values:
 | Column | Meaning |
 | --- | --- |
 | `avg_freq_khz` | Mean current frequency across CPUFreq policies |
-| `cpu_power_w` | CPU-domain power reported by `apm_xgene` |
-| `io_power_w` | I/O-domain power reported by `apm_xgene` |
+| `cpu_power_w` | CPU-domain power reported by temperature and power sensors |
+| `io_power_w` | I/O-domain power reported by temperature and power sensors |
 | `soc_power_w` | Sum of CPU and I/O power |
 | `soc_temp_c` | SoC temperature |
 | `cpu_fan_rpm` | CPU fan speed |

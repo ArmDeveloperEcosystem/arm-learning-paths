@@ -99,9 +99,9 @@ cpupower -c all frequency-info
 
 The workload and telemetry scripts read and write sysfs files directly. The `cpupower` output is useful for quick checks between experiments.
 
-## Locate the `hwmon` devices
+## Locate the hwmon devices
 
-The Linux hardware monitoring (`hwmon`) subsystem exposes sensor data such as power, temperature, and fan speed through `sysfs`. Each hardware monitoring chip or driver registers as a separate `hwmon` device.
+The Linux hardware monitoring subsystem (`hwmon`) exposes sensor data such as power, temperature, and fan speed through `sysfs`. Each hardware monitoring chip or driver registers as a separate `hwmon` device.
 
 The `hwmon` directory numbers can change after a kernel update or reboot. Identify devices by reading their `name` files:
 
