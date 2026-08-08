@@ -6,22 +6,23 @@ weight: 2
 layout: learningpathall
 ---
 
-## Overview
+## Combine LTO and PGO
 
-This Learning Path demonstrates how to use LLVM Link-Time Optimization (LTO) and Profile-Guided Optimization (PGO) together on AArch64 Linux.
+You will use LLVM Link-Time Optimization (LTO) and Profile-Guided Optimization (PGO) together on AArch64 Linux.
 
-LTO gives the compiler visibility of the entire program during the link stage. Instead of optimizing each source file independently, LLVM performs additional whole-program optimizations across source file boundaries. PGO uses runtime behavior to guide compiler decisions. When the compiler knows which functions and branches are frequently executed, it can make better decisions about function inlining, branch prediction, code layout, and other optimizations.
+LTO gives the compiler visibility across source-file boundaries during the link stage. Without LTO, LLVM optimizes each translation unit separately before linking it into the application. PGO adds information about runtime behavior. LLVM can use function frequencies and branch counts to guide inlining, code layout, and other optimization decisions.
 
 LTO and PGO are complementary. LTO enables whole-program optimizations, while PGO provides runtime profile data that guides optimization decisions.
 
-This guide focuses on using LLVM LTO and PGO.
-The example application and build configuration are intentionally simple to demonstrate the LLVM workflows and compiler options. Real-world applications are typically more complex and might require different build configurations and optimization strategies.
+The example is a deliberately small C++ application. It demonstrates the LLVM workflow and compiler options, but its single source file does not show the cross-module optimization opportunities that LTO provides in a larger application.
+
+For useful PGO results, train the instrumented or sampled binary with inputs that represent your production workload. LLVM can optimize code that the profile identifies as hot and reduce optimization of unexecuted code. An unrepresentative profile can therefore reduce performance for important use cases.
 
 The following sections cover LLVM LTO and several LLVM PGO workflows, each with different trade-offs:
 
 - [LLVM LTO](/learning-paths/servers-and-cloud-computing/pgo/lto/) gives the compiler visibility across source file boundaries at link time. This provides the baseline for the later profile-guided workflows.
 
-- [LLVM S-PGO](/learning-paths/servers-and-cloud-computing/pgo/s-pgo/) uses sampled execution data, usually collected with `perf`, instead of compiler-inserted instrumentation. It has much lower profiling overhead than instrumentation, but it requires hardware and operating system support.
+- [LLVM S-PGO](/learning-paths/servers-and-cloud-computing/pgo/s-pgo/) uses sampled execution data collected with `perf` instead of compiler-inserted instrumentation. It has lower profiling overhead, but the BRBE workflow requires supported Arm hardware and Linux kernel 6.17 or later.
 
 - [LLVM FE-PGO](/learning-paths/servers-and-cloud-computing/pgo/fe-pgo/) instruments the program in the Clang frontend to record execution counts. It can be useful when profile data needs to map closely to the source code, but IR-PGO is usually the better starting point for optimization.
 
@@ -31,6 +32,6 @@ The following sections cover LLVM LTO and several LLVM PGO workflows, each with 
 
 ## What you've learned and what's next
 
-You’ve now seen an overview of LLVM LTO, PGO, and the optimization workflows covered in this guide.
+You now understand how LTO expands the scope of LLVM optimization and how the available PGO workflows collect runtime behavior.
 
 In the next section, you'll prepare the test directory and verify the LLVM tools.

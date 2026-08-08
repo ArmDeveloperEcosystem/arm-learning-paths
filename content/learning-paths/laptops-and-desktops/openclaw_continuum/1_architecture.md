@@ -8,28 +8,17 @@ layout: learningpathall
 
 ## Transition from Inference to an Assistant
 
-Running a local LLM gives you a private way to generate text, but it does not yet give you an assistant you can use throughout the day. You still need a convenient way to ask questions, save information, search your documents, retrieve current information, and receive reminders without returning to a terminal each time.
+Running a local LLM gives you private text generation, but not a complete assistant. You still need an interface for questions, saved information, document searches, and reminders.
 
-In this Learning Path, you will deploy [OpenClaw Arm Continuum](https://github.com/odincodeshen/openclaw-arm-continuum) and interact with it from Telegram. This learning path uses a private household AI assistant as an example: you will save a household note, retrieve it later, ask questions about a local document, run an explicit web search, and schedule a proactive notification. The inference, embeddings, documents, vector memory, and task state remain on hardware you control. You can apply the same project architecture to other use cases that require private, locally controlled AI processing.
+In this Learning Path, you will deploy [OpenClaw Arm Continuum](https://github.com/odincodeshen/openclaw-arm-continuum) and use it from Telegram. You will save a household note, query a local document, search the web, and schedule a notification. Inference, embeddings, documents, vector memory, and task state remain on hardware you control.
 
-This reference implementation uses Telegram as its messaging interface, but the runtime architecture is not limited to Telegram. You can integrate another messaging platform by implementing a gateway that translates its messages and events into the runtime request flow.
+Telegram is the messaging interface for this tutorial. The runtime can support another platform through a gateway that translates its messages and events.
 
-The reference runtime extends OpenClaw by bringing the interaction channel, local AI services, persistent memory, tools, and scheduled tasks together. It provides:
-
-- **Mobile access through Telegram** for conversations, document uploads, and notifications
-- **Local generation through vLLM or llama.cpp**, allowing the inference backend to match the Arm system
-- **Persistent local memory and document retrieval** through Ollama embeddings and Qdrant
-- **Tool-driven and proactive workflows** through explicit web search, scheduled tasks, and Telegram notifications
-
-The reference runtime routes each request to the appropriate local model, data source, or tool while keeping persistent AI data under your control.
-
-{{% notice Note %}}
-**OpenClaw provides the foundation for the assistant.** This reference implementation adds vLLM or llama.cpp for local generation and integrates Ollama, Qdrant, browser search, and cron services for memory, tools, and proactive workflows.
-{{% /notice %}}
+OpenClaw provides the foundation for the assistant. The reference runtime connects it to Telegram, local generation through vLLM or llama.cpp, Ollama embeddings, Qdrant memory, browser search, and scheduled tasks. It routes each request to the relevant local service or tool.
 
 ## Understand the data boundary
 
-Local-first does not mean that every byte stays offline. Telegram and web search are external network interactions. The important property is that the boundary is explicit and that the core AI data remains under your control.
+Local-first does not mean that every byte stays offline. Telegram and web search use external services, while the core AI data remains under your control.
 
 | Data or operation | Location | External interaction |
 |---|---|---|
@@ -41,15 +30,15 @@ Local-first does not mean that every byte stays offline. Telegram and web search
 | External data lookup | Local skill | Public data service selected by the skill |
 | Browser search | Local Playwright worker | Search engine and selected public pages |
 
-The runtime does not require a public cloud LLM API. However, content sent through Telegram is transported by Telegram, and explicit browser searches reveal the search request to external websites.
+The runtime does not use a public cloud LLM API. Telegram transports bot messages, and browser searches send requests to external websites.
 
 {{% notice Note %}}
-This Learning Path uses the default personal runtime configuration, but every exercise uses synthetic or public data. Do not enter real personal, household, or organizational information while following the tutorial. If the host already contains personal runtime data, use the optional demo isolation settings introduced in the next chapter.
+This Learning Path uses synthetic or public data. Do not enter real personal, household, or organizational information. If the host already contains personal runtime data, set the environment variables in the next chapter.
 {{% /notice %}}
 
 ## Trace the Application Request Path
 
-The following architecture shows how the reference runtime routes Telegram requests to local capabilities while keeping persistent application data on hardware you control.
+The architecture shows how Telegram requests reach local services and persistent data:
 
 ![Architecture of the OpenClaw-based local-first reference runtime, including Telegram, request routing, local capabilities, persistent state, and replaceable inference engines#center](openclaw_runtime_architecture.png "OpenClaw-based local-first reference runtime")
 
@@ -62,23 +51,21 @@ Cron schedule
     -> Telegram push notification
 ```
 
-Explicit slash commands remain deterministic. For example, `/search` always selects the browser-search workflow, while a plain-language weather question selects the weather skill. The local model is not allowed to reinterpret an explicit command and silently change its route.
+Slash commands follow fixed routes. For example, `/search` always selects browser search, while a plain-language weather question selects the weather skill.
 
 ## Understand the shared API contract across Arm platforms
 
-To demonstrate that the same project can run across systems with different hardware capabilities, this Learning Path uses an inference engine suited to each platform:
+The same workflow uses an inference engine suited to each platform:
 
 | Platform | Inference engine |
 |---|---|
 | NVIDIA DGX Spark | vLLM server |
 | Radxa Orion O6 | llama.cpp server |
 
-Both expose an OpenAI-compatible chat-completions API. The project therefore keeps the same upper-layer workflow on both platforms; only the configured endpoint and model name change.
-
-This demonstrates the portability of the project architecture: the same local-first workflow can run across different Arm compute configurations by selecting a compatible inference backend.
+Both expose an OpenAI-compatible chat-completions API, so only the configured endpoint and model name change.
 
 ## What you've learned and what's next
 
-You now understand why a local-first assistant is more than a local model, which data remains local, which operations cross the network boundary, and how an OpenAI-compatible endpoint separates the upper-layer runtime from the underlying inference engine.
+You now understand the runtime components, data boundary, and shared inference API.
 
 Next, you will deploy the baseline runtime on NVIDIA DGX Spark.

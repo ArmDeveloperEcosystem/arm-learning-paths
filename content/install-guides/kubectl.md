@@ -13,6 +13,7 @@ author: Jason Andrews
 multi_install: false
 multitool_install_part: false
 official_docs: https://kubernetes.io/docs/reference/kubectl
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=Kubernetes
 test_images:
 - ubuntu:latest
 test_link: null
@@ -55,7 +56,7 @@ To install curl, for example on ubuntu:
 sudo apt install -y curl
 ```
 
-Download and install the latest version of `kubctl`. There is just 1 executable to copy to the desired location.
+Download and install the latest version of `kubectl`. There is just 1 executable to copy to the desired location.
 
 ```bash { target="ubuntu:latest" }
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/arm64/kubectl"

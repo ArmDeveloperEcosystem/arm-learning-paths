@@ -30,14 +30,11 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Gaming
 armips:
-    - armv8
-    - aarch64
-    - arm64
-    - arm architecture
-    - Neon
+    - Cortex-A
 tools_software_languages:
     - Unity
     - csharp
+    - Neon
 operatingsystems:
     - Android
 

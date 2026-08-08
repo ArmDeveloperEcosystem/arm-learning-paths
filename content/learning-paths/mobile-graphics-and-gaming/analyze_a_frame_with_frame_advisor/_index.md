@@ -17,9 +17,54 @@ prerequisites:
     - Download and install Arm Performance Studio from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It is supported on Windows, Linux, and macOS host platforms.
     - Download and install [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html). Required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb).
 
+# START generated_summary_faq
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-05T14:50:36Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: c09f19098244d58cf869b79e004ff834bb88afb08dfdeb3ebda30aab64f7b481
+  summary_generated_at: '2026-08-05T14:50:36Z'
+  summary_source_hash: c09f19098244d58cf869b79e004ff834bb88afb08dfdeb3ebda30aab64f7b481
+  faq_generated_at: '2026-08-05T14:50:36Z'
+  faq_source_hash: c09f19098244d58cf869b79e004ff834bb88afb08dfdeb3ebda30aab64f7b481
+  summary: >-
+    You'll capture and analyze a representative frame with Frame Advisor in Arm Performance Studio.
+    First, you'll choose the graphics API, record a problem area, and inspect render passes and draw calls
+    in the Analysis view. Then, you'll use the Render Graph view to find unnecessary work. Finally, you'll use the Content Metrics view to
+    locate complex geometry and navigate to its draw call in the framebuffer.
+  faqs:
+  - question: How do I confirm Frame Advisor sees my device and app before capturing?
+    answer: >-
+      Open **New Trace** and check that your device and the target application appear in the lists.
+  - question: Which API setting should I choose for my application?
+    answer: >-
+      Select **Vulkan** for Vulkan applications and **OpenGL ES** for OpenGL ES applications. Set this
+      under **API settings** before starting the capture session.
+  - question: What result should I expect after I start the capture session?
+    answer: >-
+      After you start the session, you can play to the problem area while the application launches
+      automatically on the device and captures. When analysis completes, you'll see the Frame hierarchy
+      with frames, render passes, and draw calls.
+  - question: How do I know which render pass produces the on-screen image?
+    answer: >-
+      In the **Render Graph**, follow the flow from left to right and look for the pass that outputs
+      to the swapchain. That pass is the final stage that renders to the screen.
+  - question: How can I find and inspect expensive geometry?
+    answer: >-
+      Open **Content Metrics**, choose **Draws**, and sort by the highest number of primitives to surface
+      complex objects. Right-click a candidate and select **Navigate to call** to highlight it in
+      the Frame hierarchy and view it in the framebuffer.
+# END generated_summary_faq
+
 author: Julie Gaskin
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -27,8 +72,8 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
-    - Mali GPUs
-    - Immortalis GPUs
+    - Mali
+    - Immortalis
 tools_software_languages:
     - Frame Advisor
 operatingsystems:
@@ -54,4 +99,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

@@ -53,7 +53,9 @@ sudo apt-get install environment-modules -y
 
 ## Download Arm Instruction Emulator
 
-For Ubuntu Linux, download the installer package from [Arm Instruction Emulator downloads](https://developer.arm.com/downloads/-/arm-instruction-emulator).
+You need an Arm account to download the Arm Instruction Emulator. If you don't have one, you can create one for free at [developer.arm.com](https://developer.arm.com/).
+
+Log in and download the installer package for Ubuntu Linux from [Arm Instruction Emulator downloads](https://support.arm.com/downloads/view/ARMIE).
 
 
 ## Install Arm Instruction Emulator
@@ -86,10 +88,10 @@ List available modules:
 module avail
 ```
 
-Configure Arm Compiler for Linux:
+Configure Arm Instruction Emulator:
 
 ```console
-module load armie22/22.0
+module load armie25/25.0
 ```
 
 To confirm `armie` is installed, print the version:
@@ -100,6 +102,6 @@ armie --version
 
 ## Get started with Arm Instruction Emulator
 
-To verify everything is working after installation, see [Get started with Arm Instruction Emulator](https://developer.arm.com/documentation/102190/latest/Get-started/Get-started-with-Arm-Instruction-Emulator) for instructions on how to compile and run examples with `armie`. The examples demonstrate how to compile Scalable Vector Extension (SVE) code and run the resulting binary with Arm Instruction Emulator.
+To verify everything is working after installation, see [Get started with Arm Instruction Emulator](https://support.arm.com/documentation/102190/25-0/Get-started/Get-started-with-Arm-IE) for instructions on how to compile and run examples with `armie`. The examples demonstrate how to compile Scalable Vector Extension (SVE) code and run the resulting binary with Arm Instruction Emulator.
 
 You are now ready to use the Arm Instruction Emulator.

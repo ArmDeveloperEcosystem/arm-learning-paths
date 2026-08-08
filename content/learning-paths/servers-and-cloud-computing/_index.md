@@ -12,8 +12,8 @@ pinned_learning_paths:
 - performix-microarchitecture
 operatingsystems_filter:
 - Android: 3
-- Linux: 267
-- macOS: 18
+- Linux: 270
+- macOS: 19
 - other: 1
 - Windows: 17
 pinned_modules:
@@ -27,8 +27,8 @@ subjects_filter:
 - Containers and Virtualization: 50
 - Databases: 29
 - Libraries: 9
-- ML: 41
-- Performance and Architecture: 107
+- ML: 42
+- Performance and Architecture: 109
 - Storage: 2
 - Web: 19
 subtitle: Migrate and optimize cloud native apps on Arm-based servers.
@@ -83,6 +83,7 @@ tools_software_languages_filter:
 - bash: 2
 - Bastion: 3
 - Benchstat: 1
+- BitBake: 1
 - BOLT: 2
 - boto3: 1
 - bpftool: 1
@@ -105,6 +106,8 @@ tools_software_languages_filter:
 - Confidential Containers: 1
 - Couchbase: 1
 - CPP: 21
+- CPUFreq: 1
+- cpupower: 1
 - cqlsh: 1
 - Criterion: 1
 - Cryptsetup: 1
@@ -169,6 +172,7 @@ tools_software_languages_filter:
 - Hiera: 1
 - Hive: 1
 - Hugging Face: 13
+- hwmon: 1
 - InnoDB: 1
 - Intrinsics: 1
 - iPerf3: 1
@@ -245,6 +249,7 @@ tools_software_languages_filter:
 - OpenJDK 21: 2
 - OpenRNG: 1
 - OpenShift: 1
+- OpenSSL: 1
 - OpenStack: 1
 - OpenStack CLI: 1
 - Orchard Core: 1
@@ -262,7 +267,7 @@ tools_software_languages_filter:
 - psycopg2: 1
 - Puppet: 1
 - Pytest: 1
-- Python: 54
+- Python: 56
 - PyTorch: 13
 - Qdrant: 1
 - QEMU: 1
@@ -333,6 +338,7 @@ tools_software_languages_filter:
 - XGBoost: 1
 - YAML: 2
 - YCSB: 1
+- Yocto: 1
 - Yocto/BitBake: 1
 - zlib: 1
 - ZooKeeper: 1
@@ -340,7 +346,7 @@ weight: 1
 platforms_filter:
 - Arm AGI: 11
 - AWS: 95
-- Google Cloud: 117
+- Google Cloud: 118
 - Microsoft Azure: 102
 - Oracle: 61
 ---

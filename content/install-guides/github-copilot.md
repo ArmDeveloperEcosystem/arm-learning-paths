@@ -5,6 +5,7 @@ description: Install GitHub Copilot in Visual Studio Code on Arm systems and con
 author: Pareena Verma
 minutes_to_complete: 10
 official_docs: https://docs.github.com/en/copilot
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/windows?package=GitHub%20Copilot
 
 layout: installtoolsall
 multi_install: false

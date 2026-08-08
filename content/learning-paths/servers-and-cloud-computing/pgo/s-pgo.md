@@ -9,31 +9,27 @@ layout: learningpathall
 ## What is S-PGO?
 
 {{% notice Note %}}
-S-PGO is also called Sample-PGO, AFDO, or AutoFDO in LLVM documentation and related tools.
+Sample-based PGO (S-PGO) is also called SamplePGO, AutoFDO, or AFDO in LLVM documentation and related tools.
 {{% /notice %}}
 
-S-PGO is sample-based profile-guided optimization.
-Instead of adding software counters to the program, you run an optimized binary with a profiler such as Linux `perf`, which records hardware events while the program executes.
-`llvm-profgen` converts the raw sample data into an LLVM sample profile. Clang then uses that profile during an optimized build with `-fprofile-sample-use`.
+Instead of adding software counters, S-PGO records hardware events while an optimized binary runs. This workflow uses Linux `perf` to collect branch-stack samples from the Arm Branch Record Buffer Extension (BRBE). The `llvm-profgen` tool converts the raw `perf` data into an LLVM sample profile. Clang then consumes that profile through `-fprofile-sample-use` during another optimized build.
 
-S-PGO requires hardware and operating system support for sampling.
-It also uses debug information to map the collected samples back to functions and source locations.
+This workflow needs a processor that implements BRBE and Linux kernel 6.17 or later. It also uses debug information and pseudo-probes to map sampled instructions back to functions and source locations.
 
 ## When to use S-PGO
 
-Use S-PGO when you want lower profiling overhead than instrumentation-based PGO. A typical use case is collecting profile data in production environments, where instrumentation-based profiling can introduce too much overhead.
+Use S-PGO when you need lower profiling overhead than instrumentation-based PGO. It is suitable for long-running or production-like workloads where an instrumented binary would add too much overhead. Sample accuracy depends on collecting enough data from representative inputs.
 
 
 ## Build a binary for sampling
 
 
-Build the binary with optimization enabled and add the information needed to match the collected samples to the program.
-This guide uses line-table debug information, profiling-specific debug information, unique internal names, and pseudo-probes.
+Build the binary with optimization enabled and add the metadata that LLVM needs to map samples back to the program. This example uses DWARF line tables, profiling-specific debug information, unique names for internal-linkage functions, and pseudo-probes.
 For more information about these options, see the [Clang profile-guided optimization guide](https://clang.llvm.org/docs/UsersManual.html#profile-guided-optimization).
 
-To generate the binary for sampling, run:
+Build the binary for sampling:
 
-```
+```bash
 clang++ -O3 -flto=thin -fuse-ld=lld \
   -gline-tables-only \
   -fdebug-info-for-profiling \
@@ -42,12 +38,17 @@ clang++ -O3 -flto=thin -fuse-ld=lld \
   bsort.cpp -o out/bsort.spgo
 ```
 
-If your build system changes source paths between the profiling build and the optimized build, omit `-funique-internal-linkage-names` from both builds.
+Clang derives unique internal-linkage names from the source path. If your build system uses an absolute source path that changes between the profiling and optimized builds, omit `-funique-internal-linkage-names` from both builds. Otherwise, the generated function names won't match the profile.
 
 Check that the binary contains line-table information and pseudo-probe sections:
 
-```bash { command_line="user@host | 2-5" }
+```bash
 llvm-readelf --sections out/bsort.spgo | grep -E 'debug_line|pseudo_probe'
+```
+
+The output is similar to:
+
+```output
   [28] .pseudo_probe_desc PROGBITS       0000000000000000 01cdce 000464 00      0   0  1
   [35] .debug_line       PROGBITS        0000000000000000 01da48 00049d 00      0   0  1
   [36] .debug_line_str   PROGBITS        0000000000000000 01dee5 000043 01  MS  0   0  1
@@ -57,22 +58,29 @@ llvm-readelf --sections out/bsort.spgo | grep -E 'debug_line|pseudo_probe'
 
 ## Collect a sampling profile
 
-Collect a `perf` profile with branch stack data:
+Collect a `perf` profile with user-space branch-stack data. The `-j any,u` option requests any branch type at privilege level `u`, which means user space:
 
-```bash { command_line="user@host | 2-5" }
+```bash
 perf record -j any,u -o prof/brbe.data -- ./out/bsort.spgo
+```
+
+The output is similar to:
+
+```output
 Bubble sorting 10000 elements
 140 ms (first=100669 last=2147469841)
 [ perf record: Woken up 2 times to write data ]
 [ perf record: Captured and wrote 0.438 MB prof/brbe.data (566 samples) ]
 ```
 
+The sample count and runtime are illustrative. They depend on the processor, sampling configuration, system load, and LLVM build. If `perf` reports that branch-stack sampling isn't supported or permitted, confirm that your processor implements BRBE, the kernel is version 6.17 or later, and your account can access performance events.
+
 ## Convert the sampling profile
 
 Convert the raw `perf` data into an LLVM sample profile:
 
 
-```
+```bash
 llvm-profgen \
     --binary=out/bsort.spgo \
     --perfdata=prof/brbe.data \
@@ -81,8 +89,13 @@ llvm-profgen \
 
 Inspect the generated sample profile:
 
-```bash { command_line="user@host | 2-12" }
+```bash
 llvm-profdata show --sample --all-functions prof/brbe.data.prof | grep -E 'Function:|inlined callee:'
+```
+
+The output is similar to:
+
+```output
 Function: main: CFG checksum 1688854155231231
   4: inlined callee: _ZL11start_timerv.__uniq.184325335692493633500970462303439801414: CFG checksum 281479271677951
   5: inlined callee: _Z10sort_arrayPi: CFG checksum 563057241526008
@@ -96,15 +109,12 @@ Function: _ZL5swap2PiS_.__uniq.184325335692493633500970462303439801414: CFG chec
 Function: _ZL5swap5PiS_.__uniq.184325335692493633500970462303439801414: CFG checksum 844617033839767
 ```
 
-The output should show sample data for the workload. For large applications, the output can be extensive.
+The output lists functions and inlined call sites that received samples. Exact names, checksums, and counts can vary with the LLVM version and training workload. For large applications, the complete output can be extensive.
 
 
 ## Build with S-PGO and LTO
 
-Build the optimized binary using the sample profile.
-
-The `-fsample-profile-use-profi` option infers missing block and edge counts to improve profile quality.
-
+Build the optimized binary using the sample profile. Use the same pseudo-probe and internal-linkage-name options as the profiling build so Clang can correlate the profile with the program. The `-fsample-profile-use-profi` option infers missing block and edge counts:
 
 ```bash
 clang++ -O3 -flto=thin -fuse-ld=lld \
@@ -116,26 +126,27 @@ clang++ -O3 -flto=thin -fuse-ld=lld \
     bsort.cpp -o out/bsort.spgo.opt
 ```
 
-Use `-Rpass=sample-profile-inline` and `-fdiagnostics-show-hotness` to emit optimization remarks and verify that Clang used the sample profile during optimization.
+The `-Rpass=sample-profile-inline` and `-fdiagnostics-show-hotness` options emit optimization remarks. These remarks verify that Clang used the sample profile for inlining decisions.
 
-Example output:
+The output is similar to:
 
-```
+```output
 bsort.cpp:107:5: remark: '_ZL11start_timerv.__uniq.184325335692493633500970462303439801414' inlined into 'main' to match profiling context with (cost=-14990, threshold=45)
       at callsite main:5:5; [-Rpass=sample-profile-inline]
   107 |     start_timer();
       |     ^
 
-bsort.cpp:108:5: '_Z10sort_arrayPi' inlined into 'main' to match profiling context with (cost=-14945, threshold=45) at callsite main:6:5; (hotness: 1)
+bsort.cpp:108:5: remark: '_Z10sort_arrayPi' inlined into 'main' to match profiling context with (cost=-14945, threshold=45) at callsite main:6:5; (hotness: 1)
 ```
 
-Finally, run the optimized binary:
-```
+Run the optimized binary to confirm that it completes successfully:
+
+```bash
 ./out/bsort.spgo.opt
 ```
 
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You've collected a sampled profile, converted it with `llvm-profgen`, and used it with Thin-LTO to build an optimized binary.
 

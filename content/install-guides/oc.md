@@ -4,7 +4,7 @@ description: Install the OpenShift CLI on Ubuntu for Arm or Apple Silicon macOS 
 
 author: Jason Andrews
 
-official_docs: https://docs.redhat.com/en/documentation/openshift_container_platform/4.18/html/cli_tools/openshift-cli-oc#cli-getting-started
+official_docs: https://docs.redhat.com/en/documentation/openshift_container_platform/4.22/html/cli_tools/openshift-cli-oc#cli-getting-started
 ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=OpenShift
 minutes_to_complete: 10
 
@@ -91,8 +91,8 @@ oc version --client
 The output shows the client version information and is similar to:
 
 ```output
-Client Version: 4.19.3
-Kustomize Version: v5.5.0
+Client Version: 4.22.7
+Kustomize Version: v5.7.1
 ```
 
 You can also verify that `kubectl` is available and shows the same version (because it's the same binary):
@@ -104,7 +104,7 @@ kubectl version --client
 The output shows the kubectl client version and is similar to:
 
 ```output
-Client Version: v1.32.1
+Client Version: v1.35.2
 Kustomize Version: v5.5.0
 ```
 
