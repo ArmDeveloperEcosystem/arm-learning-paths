@@ -15,16 +15,16 @@ pinned_learning_paths:
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30
-- Linux: 51
-- macOS: 20
+- Linux: 52
+- macOS: 21
 - RTOS: 12
-- Windows: 11
+- Windows: 12
 subjects_filter:
 - CI-CD: 7
 - Containers and Virtualization: 9
 - Embedded Linux: 6
 - Libraries: 5
-- ML: 25
+- ML: 26
 - Performance and Architecture: 22
 - RTOS Fundamentals: 7
 - Security: 3
@@ -34,6 +34,7 @@ title: Embedded and Microcontrollers
 tools_software_languages_filter:
 - AI: 1
 - Arduino: 2
+- Arm Compiler: 1
 - Arm Compiler for Embedded: 8
 - Arm Compiler for Linux: 1
 - Arm Compute Library: 3
@@ -41,7 +42,7 @@ tools_software_languages_filter:
 - Arm Fast Models: 4
 - Arm Performance Studio: 1
 - Arm Streamline: 1
-- Arm Virtual Hardware: 16
+- Arm Virtual Hardware: 15
 - Assembly: 1
 - AWS IoT Greengrass: 3
 - Azure: 1
@@ -49,10 +50,11 @@ tools_software_languages_filter:
 - BalenaOS: 1
 - Baremetal: 1
 - Bash: 1
+- BitBake: 1
 - C: 11
 - ChatGPT: 1
 - Clang: 1
-- CMSIS: 4
+- CMSIS: 5
 - CMSIS-DSP: 1
 - CMSIS-Toolbox: 4
 - CNN: 1
@@ -71,7 +73,7 @@ tools_software_languages_filter:
 - FastAPI: 2
 - Fusion 360: 1
 - FVP: 10
-- GCC: 12
+- GCC: 13
 - Generative AI: 3
 - GitHub: 4
 - GitLab: 2
@@ -111,12 +113,15 @@ tools_software_languages_filter:
 - Remote.It: 1
 - remoteproc-runtime: 1
 - Runbook: 4
+- SEGGER JLink: 1
+- SEGGER RTT: 1
 - SSH: 3
 - stlink: 1
 - STM32: 2
 - strands-agents: 1
 - systemd: 1
 - TensorFlow: 3
+- TensorFlow Lite: 1
 - TensorRT: 1
 - tinyML: 2
 - Topo: 3
