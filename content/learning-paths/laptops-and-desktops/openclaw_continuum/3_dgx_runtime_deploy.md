@@ -144,7 +144,9 @@ Start the complete DGX Spark stack:
 docker compose --env-file .env -f compose.yaml up -d
 ```
 
+{{% notice Note %}}
 The first start takes longer than subsequent starts because vLLM downloads the approximately 30 GiB Qwen model before loading it. The download time depends on your network connection and can make the initial startup longer. Subsequent starts use the cached model. A running container doesn't mean that its API is ready.
+{{% /notice %}}
 
 Check service status and API readiness:
 
