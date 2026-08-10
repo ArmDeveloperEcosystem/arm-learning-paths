@@ -35,7 +35,7 @@ weight: 1
 
 The LLVM toolchain includes Clang, LLD, BOLT, and other utilities for compiling, linking, profiling, and optimizing applications on Arm Linux.
 
-In this guide, you’ll learn how to install LLVM from a prebuilt release or from source, install BOLT from Linux distribution packages, and verify the installed tools.
+You’ll learn how to install LLVM from a prebuilt release or from source, install BOLT from Linux distribution packages, and verify the installed tools.
 
 {{% notice Note %}}
 BOLT is provided as a built-in, ready-to-use component of the [Arm Toolchain for Linux](https://developer.arm.com/documentation/110477) suite. For more
@@ -58,15 +58,15 @@ The output is similar to:
 aarch64
 ```
 
-If you see a different result, you are not using an Arm computer running 64-bit Linux.
+If you see a different result, you're not using an Arm computer running 64-bit Linux.
 
-There are three ways to install the LLVM tools covered in this guide:
+There are three ways to install LLVM tools:
 
 - [Install LLVM from a prebuilt release](#install-llvm-releases) to install Clang, LLD, BOLT, and the LLVM profiling tools.
 - [Build LLVM from source](#build-llvm-source) if you need to build the LLVM toolchain yourself.
-- [Install BOLT using a package manager](#install-bolt-packages) if you only need the BOLT tools and your Linux distribution provides a suitable version.
+- [Install BOLT using a package manager](#install-bolt-packages) if you need only the BOLT tools, and your Linux distribution provides a suitable version.
 
-## Install from LLVM Releases {#install-llvm-releases}
+## Install from LLVM releases {#install-llvm-releases}
 
 You can install LLVM by downloading a prebuilt binary release from GitHub.
 
@@ -78,14 +78,13 @@ sudo apt update
 sudo apt install wget xz-utils -y
 ```
 
+{{% notice Note %}}
 The following commands use LLVM version 22.1.8. To install a different version, replace the filename in the commands below. For the latest releases, see [LLVM Project releases](https://github.com/llvm/llvm-project/releases).
+{{% /notice %}}
 
 The commands extract LLVM to `$HOME/toolchain`. To install LLVM in a different location, adjust the extraction path and update the PATH environment variable accordingly.
 
-1. Download a binary release
-
-For Arm Linux, use the archive with `Linux-ARM64` in its filename:
-
+1. Download a binary release. For Arm Linux, use the archive with `Linux-ARM64` in its filename:
 
 ```bash
 mkdir -p $HOME/toolchain
@@ -93,41 +92,37 @@ cd $HOME/toolchain
 wget https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.8/LLVM-22.1.8-Linux-ARM64.tar.xz
 ```
 
-2. Extract the downloaded file
+2. Extract the downloaded file:
 
 ```bash
 tar -xvf LLVM-22.1.8-Linux-ARM64.tar.xz
 ```
 
-3. Add the LLVM `bin` directory to your `PATH`
+3. Add the LLVM `bin` directory to your `PATH` to run LLVM tools, such as `clang` and `lld`, from any directory.
 
-This enables you to run LLVM tools such as `clang` and `lld` from any directory.
-The command updates `PATH` for your current terminal session.
-To make the change persistent, add the same command to your shell profile, such as `~/.bashrc`.
+The command updates `PATH` for your current terminal session. To make the change persistent, add the same command to your shell profile, such as `~/.bashrc`.
 
 ```bash
 export PATH="$HOME/toolchain/LLVM-22.1.8-Linux-ARM64/bin:$PATH"
 ```
 
-## Install from Sources {#build-llvm-source}
+## Install from sources {#build-llvm-source}
+
+To install LLVM from source, follow these steps:
 
 ### Install source build dependencies
 
-Before building LLVM from source, install the required build tools.
+Start by installing the required build tools.
 
-1. Install Git
+1. Install [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) for your operating system. Many Linux distributions include Git, so you might not need to install it.
 
-[Install Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) for your operating system.
-
-Many Linux distributions include Git so you may not need to install it.
-
-2. Install CMake
+2. Install CMake:
 
 ```bash { target="ubuntu:latest" }
 sudo apt install cmake -y
 ```
 
-Check it is installed:
+Check that CMake is installed:
 
 ```bash { target="ubuntu:latest" }
 cmake --version
@@ -141,15 +136,15 @@ cmake version 3.28.3
 CMake suite maintained and supported by Kitware (kitware.com/cmake).
 ```
 
-For more information, see [CMake install guide.](/install-guides/cmake/)
+For more information, see the [CMake install guide](/install-guides/cmake/).
 
-3. Install Ninja
+3. Install Ninja:
 
 ```bash { target="ubuntu:latest" }
 sudo apt install ninja-build -y
 ```
 
-Check it is installed:
+Check that Ninja is installed:
 
 ```bash { target="ubuntu:latest" }
 ninja --version
@@ -161,13 +156,13 @@ The output is similar to:
 1.11.1
 ```
 
-4. Install Clang
+4. Install Clang:
 
 ```bash { target="ubuntu:latest" }
 sudo apt install clang -y
 ```
 
-Check it is installed:
+Check that Clang is installed:
 
 ```bash { target="ubuntu:latest" }
 clang --version
@@ -186,13 +181,13 @@ InstalledDir: /usr/bin
 
 To build and install BOLT from source code, follow these steps:
 
-1. Clone the repository
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/llvm/llvm-project.git
 ```
 
-2. Build BOLT and run it
+2. Build BOLT:
 
 ```bash
 cd llvm-project
@@ -201,14 +196,16 @@ cd build
 cmake -G Ninja ../llvm -DLLVM_TARGETS_TO_BUILD="X86;AArch64" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_PROJECTS="bolt;clang;lld"
 ```
 
+Run BOLT:
+
 ```console
 ninja bolt
 ```
 {{% notice Note %}}
-The build time depends on your machine configuration and may take several minutes to complete.
+The build time depends on your machine configuration and might take several minutes to complete.
 {{% /notice %}}
 
-3. Add the path to BOLT in your `.bashrc` file
+3. Add the path to BOLT in your `.bashrc` file:
 
 ```bash
 echo 'export PATH="$PATH:$HOME/llvm-project/build/bin"' >> ~/.bashrc
@@ -294,13 +291,11 @@ Run the example:
 ./hello
 ```
 
-The output is:
+The output is similar to:
 
 ```output
 Hello, LLVM on Arm
 ```
-
-You are now ready to use LLVM on your Arm Linux system.
 
 
 ## Verify the PGO profiling tools {#verify-pgo-tools}
@@ -332,3 +327,9 @@ LLVM (http://llvm.org/):
 ```
 
 Each command should print LLVM version information.
+
+## Next steps
+
+You're now ready to use LLVM on your Arm Linux system.
+
+To learn how to use the LLVM toolchain, see the [LLVM Learning Paths](/learning-paths/servers-and-cloud-computing/?tools-software-and-languages=llvm%2Cllvm-mca/).
