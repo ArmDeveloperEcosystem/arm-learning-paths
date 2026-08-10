@@ -1,26 +1,27 @@
 ---
-title: Optimize with FE-PGO
+title: Optimize AArch64 code with FE-PGO
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is FE-PGO?
+## What FE-PGO is
 
-Frontend PGO (FE-PGO) adds counters before Clang lowers the source code to LLVM intermediate representation (IR). The counters collect execution frequencies while the instrumented program runs, and the resulting profile maps closely to source-level constructs.
+Frontend Profile-Guided Optimization (FE-PGO) adds counters before Clang lowers the source code to LLVM intermediate representation (IR). The counters collect execution frequencies while the instrumented program runs, and the resulting profile maps closely to source-level constructs.
 
 Use FE-PGO when source-level profile information is important. For performance-focused PGO, IR-PGO and CSIR-PGO are usually better defaults and are covered next.
 
 ## Build the instrumented binary
 
-Build an instrumented binary. The `-fprofile-instr-generate` option tells Clang to add frontend counters. The `=prof/fe.profraw` value configures the instrumented program to write its raw profile to that path when it exits:
+Build an instrumented binary:
 
 ```bash
 clang++ -O3 -flto -fuse-ld=lld \
     -fprofile-instr-generate=prof/fe.profraw \
     bsort.cpp -o out/bsort.fepgo.instr
 ```
+The `-fprofile-instr-generate` option tells Clang to add frontend counters. The `=prof/fe.profraw` value configures the instrumented program to write its raw profile to that path when it exits.
 
 Run the instrumented binary:
 
@@ -28,7 +29,7 @@ Run the instrumented binary:
 ./out/bsort.fepgo.instr
 ```
 
-Let the training run complete and exit normally so the profiling runtime can finish writing the raw profile. Then confirm that it created `prof/fe.profraw`:
+Let the training run complete and exit normally so the profiling runtime can finish writing the raw profile. Then, confirm that it created `prof/fe.profraw`:
 
 ```bash
 ls prof/fe.profraw
@@ -89,4 +90,4 @@ Run the optimized binary:
 
 You've collected an FE-PGO profile, converted it with `llvm-profdata`, and used it with LTO to build an optimized binary.
 
-Next, you'll build the same example with IR-PGO and LTO.
+Next, you'll build the same example with IR-level PGO (IR-PGO) and LTO.

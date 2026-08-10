@@ -1,5 +1,5 @@
 ---
-title: Prepare your environment
+title: Prepare your AArch64 environment and verify LLVM tool availability
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -30,10 +30,10 @@ mkdir -p out prof
 - `out`: Stores object files and binaries
 - `prof`: Stores raw and converted profile data
 
-If LLVM is not already installed, follow the [LLVM toolchain for Linux on Arm](/install-guides/llvm/) install guide before continuing.
+If LLVM isn't already installed, follow the [LLVM toolchain for Linux on Arm](/install-guides/llvm/) install guide before continuing.
 
 
-## Verify tool availability
+## Verify LLVM tool availability
 
 Confirm that the machine uses the AArch64 architecture:
 
@@ -58,14 +58,14 @@ llvm-profgen --version
 llvm-readelf --version
 ```
 
-For sample-based PGO (S-PGO), also check that `perf` is available. The S-PGO workflow uses the Arm Branch Record Buffer Extension (BRBE) and needs Linux kernel 6.17 or later.
+For sample-based Profile-Guided Optimization (S-PGO), also check that `perf` is available. The S-PGO workflow uses the Arm Branch Record Buffer Extension (BRBE) and needs Linux kernel 6.17 or later.
 
 ```bash
 perf --version
 uname -r
 ```
 
-The version commands confirm that the programs are in your `PATH`. They do not confirm that the processor implements BRBE or that you have permission to access performance events. The profile collection step checks those requirements when it runs `perf record`.
+The version commands confirm that the programs are in your `PATH`. They don't confirm that the processor implements BRBE or that you have permission to access performance events. The profile collection step checks those requirements when it runs `perf record`.
 
 ## What you've accomplished and what's next
 

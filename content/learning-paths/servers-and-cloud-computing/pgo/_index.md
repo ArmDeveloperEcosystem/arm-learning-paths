@@ -1,9 +1,5 @@
 ---
-title: "Optimize AArch64 code with LLVM LTO and PGO"
-
-draft: true
-cascade:
-    draft: true
+title: Optimize AArch64 code with LLVM Link-Time Optimization and Profile-Guided Optimization
     
 description: Learn how to use LLVM Link-Time Optimization and Profile-Guided Optimization on AArch64 Linux.
 minutes_to_complete: 45
@@ -12,18 +8,22 @@ who_is_this_for: This is an introductory topic for developers who compile C or C
 
 
 learning_objectives:
-    - Explain how Link-Time Optimization (LTO) and Profile-Guided Optimization (PGO) guide LLVM optimizations
-    - Build Full-LTO and Thin-LTO binaries with Clang on AArch64
-    - Generate and inspect sample-based and instrumentation-based profiles
-    - Use each profile type to build and run an optimized example application
+    - Understand how LTO and PGO guide LLVM optimizations.
+    - Build Full-LTO and Thin-LTO binaries with Clang on AArch64.
+    - Generate and inspect sample-based and instrumentation-based profiles.
+    - Use each profile type to build and run an optimized example application.
 
 
 prerequisites:
     - An AArch64 Linux system with LLVM installed. You need Clang, LLD, `llvm-bcanalyzer`, `llvm-profdata`, `llvm-profgen`, and `llvm-readelf` in your `PATH`. For setup instructions, see [LLVM toolchain for Linux on Arm](/install-guides/llvm/).
-    - For the BRBE-based sample PGO workflow demonstrated here, a processor that implements the Branch Record Buffer Extension (BRBE), Linux kernel 6.17 or later, and Linux `perf`. Other sample-based PGO workflows can use sources such as Statistical Profiling Extension (SPE) or Performance Monitoring Unit (PMU) events and have different requirements.
+    - For the sample PGO workflow based on Branch Record Buffer Extension (BRBE), a processor that implements the BRBE, Linux kernel 6.17 or later, and Linux `perf`. Other sample-based PGO workflows can use sources such as Statistical Profiling Extension (SPE) or Performance Monitoring Unit (PMU) events and have different requirements.
 
 
 author: Paschalis Mpeis
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
