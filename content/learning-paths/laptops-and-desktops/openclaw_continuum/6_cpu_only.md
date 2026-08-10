@@ -47,7 +47,7 @@ $HOME/llama.cpp/build/bin/llama-server
 $HOME/models/ernie-4.5/ERNIE-4.5-21B-A3B-Thinking-Q4_0.gguf
 ```
 
-## Deploy llama.cpp OpenAI-compatible server
+## Deploy a llama.cpp OpenAI-compatible server
 
 Start the server on the host:
 

@@ -23,7 +23,7 @@ aarch64
 ```
 
 {{% notice Note %}}
-You'll use Docker Engine and Docker Compose to run services on your DGX Spark. For Docker installation steps, see the [Install Docker Engine](https://learn.arm.com/install-guides/docker/docker-engine/).
+You'll use Docker Engine and Docker Compose to run services on your DGX Spark. For Docker installation steps, see the [Docker Engine install guide](https://learn.arm.com/install-guides/docker/docker-engine/).
 {{% /notice %}}
 
 Confirm Docker GPU access:
@@ -32,9 +32,9 @@ Confirm Docker GPU access:
 docker run --rm --gpus all ubuntu nvidia-smi
 ```
 
-You don't need to install the vLLM Python package or start a vLLM server directly on the DGX Spark host. The project's `compose.yaml` pulls a container image that already includes vLLM and starts the local inference server for you.
+Install the NVIDIA driver and NVIDIA Container Toolkit so that this container can access the GPU.
 
-You need to install the NVIDIA driver and NVIDIA Container Toolkit so that this container can access the GPU.
+You don't need to install the vLLM Python package or start a vLLM server directly on the DGX Spark host. The project's `compose.yaml` pulls a container image that already includes vLLM and starts the local inference server for you.
 
 ## Configure Ollama for local embeddings
 

@@ -196,4 +196,6 @@ The LLM is one replaceable part of the application. The local memory, tools, sch
 
 You've now validated document RAG, explicit browser search, and a proactive reminder for the household assistant. 
 
-You can optionally extend the same workflow to a CPU-only Armv9 system. For more information, see [(Optional) Port the app to a CPU-only Armv9 system](/learning-paths/laptops-and-desktops/openclaw_continuum/6_cpu_only/). You've moved beyond a local-model demo and built a self-managed OpenClaw-based runtime that you can adapt to different Arm compute configurations.
+You can optionally extend the same workflow to a CPU-only Armv9 system. For more information, see [(Optional) Port the app to a CPU-only Armv9 system](/learning-paths/laptops-and-desktops/openclaw_continuum/6_cpu_only/). 
+
+You've moved beyond a local-model demo and built a self-managed OpenClaw-based runtime that you can adapt to different Arm compute configurations.

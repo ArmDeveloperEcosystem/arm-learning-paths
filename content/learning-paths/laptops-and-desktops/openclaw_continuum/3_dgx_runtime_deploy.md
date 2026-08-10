@@ -29,7 +29,7 @@ For more information about creating and managing bots, see the official [Telegra
 
 Next, obtain the chat ID for your Telegram account:
 
-1. Open a chat with the bot that you created and send a test message, such as `Hello`. This creates an update that the Telegram Bot API can return.
+1. Open a chat with the bot that you created and send a test message, such as `Hello`. The message creates an update that the Telegram Bot API can return.
 2. Open a terminal on your local machine and query the updates. Replace `<your-telegram-bot-token>` with the HTTP API token from BotFather:
 
     ```bash
