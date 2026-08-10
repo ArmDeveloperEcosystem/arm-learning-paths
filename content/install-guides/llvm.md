@@ -96,13 +96,15 @@ wget https://github.com/llvm/llvm-project/releases/download/llvmorg-22.1.8/LLVM-
 tar -xvf LLVM-22.1.8-Linux-ARM64.tar.xz
 ```
 
-3. Add the LLVM `bin` directory to your `PATH` to run LLVM tools, such as `clang` and `lld`, from any directory.
-
-The command updates `PATH` for your current terminal session. To make the change persistent, add the same command to your shell profile, such as `~/.bashrc`.
+3. Add the LLVM `bin` directory to your `PATH` to run LLVM tools, such as `clang` and `lld`, from any directory:
 
 ```bash
 export PATH="$HOME/toolchain/LLVM-22.1.8-Linux-ARM64/bin:$PATH"
 ```
+
+{{% notice Note %}}
+The command updates `PATH` for your current terminal session. To make the change persistent, add the same command to your shell profile, such as `~/.bashrc`.
+{{% /notice %}}
 
 ## Install from source {#build-llvm-source}
 
