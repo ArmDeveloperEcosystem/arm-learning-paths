@@ -11,7 +11,7 @@ learning_objectives:
     - Explain the local and external data boundaries of an OpenClaw-based runtime
     - Deploy and validate the reference runtime with local vLLM inference on NVIDIA DGX Spark
     - Verify persistent memory, document RAG, explicit browser search, deterministic routing, and proactive scheduling with Telegram and Qdrant
-    - (Optional) Move the same application workflows to a CPU-only Armv9 system through an OpenAI-compatible llama.cpp endpoint
+    - Optionally move the same application workflows to a CPU-only Armv9 system through an OpenAI-compatible llama.cpp endpoint
 
 prerequisites:
     - An NVIDIA DGX Spark system with NVIDIA drivers, Docker and NVIDIA Container Toolkit
