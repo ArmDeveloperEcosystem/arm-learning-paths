@@ -45,7 +45,7 @@ The response should mention October.
 ![Telegram conversation showing the boiler reminder saved with the mem command and retrieved with the rag memory query#center](openclaw_telegram_2.jpg "Saving and retrieving a household memory in Telegram")
 
 
-The retrieval request follows the following local path:
+The retrieval request uses the following local path:
 
 ```text
 Telegram question
