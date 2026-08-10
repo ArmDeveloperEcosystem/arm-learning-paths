@@ -1,5 +1,6 @@
 ---
 title: Understand the architecture and local data boundaries
+description: Map OpenClaw Arm Continuum's Telegram request flow, local data boundaries, and shared inference API across NVIDIA DGX Spark and CPU-only Arm systems.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -54,7 +55,7 @@ Cron schedule
 Slash commands follow fixed routes. For example, `/search` always selects browser search, while a plain-language weather question selects the weather skill.
 
 {{% notice Note %}}
-The runtime uses a text-first architecture, fixed skill routes, and one local LLM endpoint. `AgentRegistry` and `TaskDispatcher` keep command behavior predictable. This Learning Path doesn't cover multi-model routing, multi-agent handoffs, or hardware benchmarking.
+The runtime uses a text-first architecture, fixed skill routes, and one local LLM endpoint. This Learning Path doesn't cover multi-model routing, multi-agent handoffs, or hardware benchmarking.
 {{% /notice %}}
 
 ## Understand the shared API contract across Arm platforms
