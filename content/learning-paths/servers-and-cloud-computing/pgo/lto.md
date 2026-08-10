@@ -1,5 +1,6 @@
 ---
 title: Build AArch64 code with LTO
+description: Build and verify Full-LTO and Thin-LTO AArch64 binaries with Clang, then inspect their LLVM bitcode.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

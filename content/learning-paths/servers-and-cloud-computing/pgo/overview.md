@@ -1,5 +1,6 @@
 ---
 title: Understand PGO and LTO for AArch64 code
+description: Compare LLVM LTO and sample-based, frontend, IR-level, and context-sensitive PGO workflows for optimizing AArch64 code with Clang.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,6 @@
 ---
 title: Prepare your AArch64 environment and verify LLVM tool availability
+description: Prepare an AArch64 Linux environment, download the example C++ source, and verify the LLVM tools required for LTO and PGO workflows.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

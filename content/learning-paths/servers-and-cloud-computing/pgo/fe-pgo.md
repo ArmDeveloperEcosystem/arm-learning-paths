@@ -1,5 +1,6 @@
 ---
 title: Optimize AArch64 code with FE-PGO
+description: Instrument an AArch64 binary with Clang frontend PGO, merge and inspect its profile, and build an optimized binary with LTO.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,6 @@
 ---
 title: Optimize AArch64 code with S-PGO
+description: Build an AArch64 binary with Arm Branch Record Buffer Extension (BRBE) sampling, collect a perf profile, and apply S-PGO with LLVM.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

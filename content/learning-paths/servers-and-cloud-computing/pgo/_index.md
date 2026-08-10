@@ -1,7 +1,7 @@
 ---
 title: Optimize AArch64 code with LLVM Link-Time Optimization and Profile-Guided Optimization
     
-description: Learn how to use LLVM Link-Time Optimization and Profile-Guided Optimization on AArch64 Linux.
+description: Build and apply LLVM LTO, sample-based PGO, frontend PGO, IR-PGO, and CSIR-PGO workflows with Clang to optimize an AArch64 C++ application.
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for developers who compile C or C++ applications on AArch64 Linux and want to use Link-Time Optimization (LTO) with Profile-Guided Optimization (PGO).

@@ -1,5 +1,6 @@
 ---
 title: Optimize AArch64 code with IR-PGO
+description: Instrument an AArch64 binary at the LLVM IR level, merge and inspect its profile, and build an optimized binary with IR-PGO and LTO.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
