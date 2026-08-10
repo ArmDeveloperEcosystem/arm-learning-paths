@@ -32,7 +32,7 @@ Save the file as `household-maintenance.txt`, then upload it to your bot with th
 /knowledge
 ```
 
-The document follows the following path:
+The document uses the following path:
 
 ```text
 File on the Telegram client device
