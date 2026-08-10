@@ -44,9 +44,7 @@ information, see [How to use BOLT with our toolchain](https://developer.arm.com/
 
 ## Before you begin {#before-you-begin}
 
-Confirm you are using an Arm machine by running:
-
-Run:
+Confirm you are using an Arm machine:
 
 ```bash
 uname -m
@@ -79,7 +77,7 @@ sudo apt install wget xz-utils -y
 ```
 
 {{% notice Note %}}
-The following commands use LLVM version 22.1.8. To install a different version, replace the filename in the commands below. For the latest releases, see [LLVM Project releases](https://github.com/llvm/llvm-project/releases).
+The following commands for installing from a release use LLVM version 22.1.8. To install a different version, replace the filename in the commands below. For the latest releases, see [LLVM Project releases](https://github.com/llvm/llvm-project/releases).
 {{% /notice %}}
 
 The commands extract LLVM to `$HOME/toolchain`. To install LLVM in a different location, adjust the extraction path and update the PATH environment variable accordingly.
@@ -106,7 +104,7 @@ The command updates `PATH` for your current terminal session. To make the change
 export PATH="$HOME/toolchain/LLVM-22.1.8-Linux-ARM64/bin:$PATH"
 ```
 
-## Install from sources {#build-llvm-source}
+## Install from source {#build-llvm-source}
 
 To install LLVM from source, follow these steps:
 
@@ -177,7 +175,7 @@ Thread model: posix
 InstalledDir: /usr/bin
 ```
 
-### Build BOLT from source {#build-bolt-source}
+### Build from source {#build-bolt-source}
 
 To build and install BOLT from source code, follow these steps:
 
@@ -216,7 +214,7 @@ After the build completes, continue to [verify the BOLT tools](#verify-bolt-tool
 
 ## Install BOLT using a package manager {#install-bolt-packages}
 
-Use a package manager if you prefer a system-managed installation. Package versions depend on your Linux distribution.
+Use a package manager if you prefer only a system-managed installation of BOLT. Package versions depend on your Linux distribution.
 
 {{< tabpane code=true >}}
 
@@ -235,7 +233,9 @@ sudo zypper install llvm-bolt
 
 {{< /tabpane >}}
 
-BOLT is available on Ubuntu 25.04 and later, Debian 13 and later, Fedora 42 and later, and on openSUSE Tumbleweed
+BOLT is available on Ubuntu 25.04 and later, Debian 13 and later, Fedora 42 and later, and on openSUSE Tumbleweed.
+
+Next, [verify the BOLT tools](#verify-bolt-tools).
 
 ## Verify Clang compiler and LLD linker tools {#verify-compiler-tools}
 
@@ -296,7 +296,6 @@ The output is similar to:
 ```output
 Hello, LLVM on Arm
 ```
-
 
 ## Verify the PGO profiling tools {#verify-pgo-tools}
 
