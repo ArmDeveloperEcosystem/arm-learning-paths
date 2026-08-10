@@ -15,7 +15,7 @@ You need a Telegram account, a bot token, and the numeric chat ID for the accoun
 
 To create a bot and obtain its token:
 
-1. Open Telegram and start a chat with **BotFather**.
+1. Open Telegram and start a chat with BotFather.
 2. Send the following command:
 
     ```text
@@ -92,7 +92,7 @@ OPENCLAW_CRON_TIMEZONE=<your-IANA-timezone>
 
 Scheduled jobs use UTC when this setting is omitted.
 
-You'll name the location explicitly when asking weather-related, so you don't need to configure `OPENCLAW_DEFAULT_WEATHER_LOCATION`.
+You'll name the location explicitly when asking weather-related questions, so you don't need to configure `OPENCLAW_DEFAULT_WEATHER_LOCATION`.
 
 {{% notice Note %}}
 Don't share your Telegram bot token or chat ID with anyone, and don't include them in screenshots, logs, or public repositories.

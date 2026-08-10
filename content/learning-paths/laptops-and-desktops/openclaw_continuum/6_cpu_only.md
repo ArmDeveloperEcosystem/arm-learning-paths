@@ -121,7 +121,7 @@ Confirm that the managed endpoint responds:
 curl http://127.0.0.1:8080/v1/models
 ```
 
-## Provision supporting local services
+## Provision Ollama and Qdrant
 
 Install Ollama on the Orion O6 host:
 

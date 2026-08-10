@@ -34,7 +34,7 @@ Local-first doesn't mean that every byte stays offline. Telegram and web search 
 The runtime doesn't use a public cloud LLM API. Telegram transports bot messages, and browser searches send requests to external websites.
 
 {{% notice Note %}}
-Don't enter real personal, household, or organizational information. Instead, use synthetic or public data. If the host already contains personal runtime data, set the environment variables in the next section.
+Don't enter real personal, household, or organizational information. Instead, use synthetic or public data. If the host already contains personal runtime data, set environment variables by following the instructions in [Configure and start the OpenClaw runtime on DGX Spark](/learning-paths/laptops-and-desktops/openclaw_continuum/3_dgx_runtime_deploy/).
 {{% /notice %}}
 
 ## Trace the application request path
@@ -73,4 +73,4 @@ Both expose an OpenAI-compatible chat-completions API, so only the configured en
 
 You now understand the runtime components, data boundary, and shared inference API.
 
-Next, you'll deploy the baseline runtime on NVIDIA DGX Spark.
+Next, you'll prepare the NVIDIA DGX Spark and configure Ollama and Qdrant.

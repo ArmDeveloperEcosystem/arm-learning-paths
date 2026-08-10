@@ -58,11 +58,14 @@ In Telegram, ask a question using the returned filename. Replace `<returned-file
 /rag <returned-file-name> When should the heating filter be cleaned?
 ```
 
-The filename limits retrieval to this upload, so existing records don't affect the result. A general `/rag` query without a filename searches all configured memory and knowledge collections. The screenshot shows a general query, but use the filename-specific command for this test.
+The filename limits retrieval to this upload, so existing records don't affect the result. A general `/rag` query without a filename searches all configured memory and knowledge collections. 
+
+The following screenshot shows a general query:
 
 ![Telegram conversation showing household-maintenance.txt uploaded with the knowledge caption, saved to personal_knowledge_base, and retrieved with a general rag question#center](openclaw_telegram_3.jpg "Uploading and querying a household document in Telegram")
 
-The answer should mention the first Saturday of every third month.
+
+Use the command with the filename for this test. The answer should mention the first Saturday of every third month.
 
 To verify the stored document directly in Qdrant, filter the collection by the returned filename:
 
@@ -142,7 +145,7 @@ Then, list the job in Telegram:
 /cron list
 ```
 
-The bot returns a job ID, and `/cron list` shows the schedule as `[on]`.
+The bot returns a job ID, and `/cron list` shows the schedule as `[on]`:
 
 ![Telegram conversation showing a daily Heating check cron job created, listed as enabled, and triggered at the configured time#center](openclaw_telegram_4.jpg "Creating and triggering a scheduled reminder in Telegram")
 
