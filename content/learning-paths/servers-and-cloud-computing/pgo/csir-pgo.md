@@ -78,9 +78,7 @@ Total number of blocks: 32
 Total count: 75242276
 ```
 
-{{% notice Note %}}
 The `--showcs` option selects context-sensitive records from the merged profile. Exact hashes and individual counter values can vary with the LLVM version and training workload.
-{{% /notice %}}
 
 ## Build with CSIR-PGO and LTO
 
@@ -98,7 +96,7 @@ Run the optimized binary:
 ./out/bsort.csirpgo.opt
 ```
 
-## What you've accomplished and what's next
+## What you've accomplished 
 
 You've added a second context-sensitive profiling pass on top of IR-PGO and built a CSIR-PGO optimized binary with LTO.
 

@@ -33,7 +33,7 @@ generated_summary_faq:
   faq_generated_at: '2026-08-10T19:36:13Z'
   faq_source_hash: 43fec438e2d594603903bb8e8f98f9e2766bc385851ec8d292c090a82e42761f
   summary: >-
-    You'll combine LLVM Link-Time Optimization (LTO) with Profile-Guided Optimization (PGO) to guide
+    You'll combine LLVM LTO with PGO to guide
     Clang optimization of an AArch64 C++ application on Linux. First, you'll prepare the toolchain and example. Then, you'll build Full-LTO and Thin-LTO variants and collect sample profiles with `perf`. You'll create frontend, IR-level, and context-sensitive profiles,
     merge and inspect profiles with LLVM tools, and apply each profile in optimized LTO builds.
   faqs:

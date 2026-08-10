@@ -28,8 +28,7 @@ Create directories for the generated files:
 mkdir -p out prof
 ```
 
-- `out`: Stores object files and binaries
-- `prof`: Stores raw and converted profile data
+The `out` directory stores object files and binaries. The `prof` directory stores raw and converted profile data.
 
 If LLVM isn't already installed, follow the [LLVM toolchain for Linux on Arm](/install-guides/llvm/) install guide before continuing.
 
@@ -59,12 +58,13 @@ llvm-profgen --version
 llvm-readelf --version
 ```
 
-For sample-based Profile-Guided Optimization (S-PGO), also check that `perf` is available. The S-PGO workflow uses the Arm Branch Record Buffer Extension (BRBE) and needs Linux kernel 6.17 or later.
+For sample-based Profile-Guided Optimization (S-PGO), also check that `perf` is available:
 
 ```bash
 perf --version
 uname -r
 ```
+The S-PGO workflow uses the Arm Branch Record Buffer Extension (BRBE) and needs Linux kernel 6.17 or later.
 
 The version commands confirm that the programs are in your `PATH`. They don't confirm that the processor implements BRBE or that you have permission to access performance events. The profile collection step checks those requirements when it runs `perf record`.
 

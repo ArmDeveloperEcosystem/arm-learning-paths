@@ -13,7 +13,7 @@ layout: learningpathall
 Sample-based Profile-Guided Optimization (S-PGO) is also called SamplePGO, AutoFDO, or AFDO in LLVM documentation and related tools.
 {{% /notice %}}
 
-Instead of adding software counters, S-PGO records hardware events while an optimized binary runs. This workflow uses Linux `perf` to collect branch-stack samples from the Arm Branch Record Buffer Extension (BRBE). The `llvm-profgen` tool converts the raw `perf` data into an LLVM sample profile. Clang then consumes that profile through `-fprofile-sample-use` during another optimized build.
+Instead of adding software counters, S-PGO records hardware events while an optimized binary runs. The S-PGO workflow uses Linux `perf` to collect branch-stack samples from the Arm Branch Record Buffer Extension (BRBE). The `llvm-profgen` tool converts the raw `perf` data into an LLVM sample profile. Clang then consumes that profile through `-fprofile-sample-use` during another optimized build.
 
 This workflow needs a processor that implements BRBE and Linux kernel 6.17 or later. It also uses debug information and pseudo-probes to map sampled instructions back to functions and source locations.
 
@@ -60,11 +60,12 @@ The output is similar to:
 
 ## Collect a sampling profile
 
-Collect a `perf` profile with user-space branch-stack data. The `-j any,u` option requests any branch type at privilege level `u`, which means user space:
+Collect a `perf` profile with user-space branch-stack data:
 
 ```bash
 perf record -j any,u -o prof/brbe.data -- ./out/bsort.spgo
 ```
+The `-j any,u` option requests any branch type at privilege level `u`, which means user space.
 
 The output is similar to:
 

@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## What FE-PGO is
 
-Frontend Profile-Guided Optimization (FE-PGO) adds counters before Clang lowers the source code to LLVM intermediate representation (IR). The counters collect execution frequencies while the instrumented program runs, and the resulting profile maps closely to source-level constructs.
+Frontend Profile-Guided Optimization (FE-PGO) adds counters before Clang lowers the source code to LLVM intermediate representation (IR). The counters collect execution frequencies while the instrumented program runs. The resulting profile maps closely to source-level constructs.
 
 Use FE-PGO when source-level profile information is important. For performance-focused PGO, IR-PGO and CSIR-PGO are usually better defaults and are covered next.
 
@@ -39,7 +39,7 @@ ls prof/fe.profraw
 
 ## Convert and inspect the profile data
 
-Before Clang can use the profile during an optimized build, convert it to the `.profdata` format.
+Before Clang can use the profile during an optimized build, convert it to the `.profdata` format:
 
 ```bash
 llvm-profdata merge prof/fe.profraw -output=prof/fe.profdata
@@ -91,4 +91,4 @@ Run the optimized binary:
 
 You've collected an FE-PGO profile, converted it with `llvm-profdata`, and used it with LTO to build an optimized binary.
 
-Next, you'll build the same example with IR-level PGO (IR-PGO) and LTO.
+Next, you'll build the same example with IR-PGO and LTO.

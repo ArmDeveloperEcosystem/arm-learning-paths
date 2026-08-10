@@ -28,7 +28,7 @@ Thin-LTO also supports incremental builds by caching compilation results and reb
 
 LTO is disabled by default. Use `-flto=full` to enable Full-LTO or `-flto=thin` to enable Thin-LTO. If you specify `-flto` without a value, Clang uses Full-LTO.
 
-Build the example in each mode. Pass the same LTO option during compilation and linking. The `-fuse-ld=lld` option selects the LLVM linker:
+Build the example in each mode. Pass the same LTO option during compilation and linking:
 
 {{< tabpane code=true >}}
   {{< tab header="Full-LTO" language="bash">}}
@@ -41,6 +41,7 @@ clang++ -O3 -flto=thin -fuse-ld=lld out/bsort.lto.thin.o -o out/bsort.lto.thin
   {{< /tab >}}
 {{< /tabpane >}}
 
+The `-fuse-ld=lld` option selects the LLVM linker.
 
 ## Verify the LTO object files
 
