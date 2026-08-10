@@ -85,7 +85,7 @@ If the real frame inputs look correct but the generated output has artifacts, th
 
 For detailed guidance on using RenderDoc in Unreal Engine, see [Use RenderDoc for Arm GPUs with NFRU for debugging and analysis](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/7-renderdoc/).
 
-![RenderDoc capture showing NFRU frame-generation events and resources to inspect the generated frame#center](./images/moku_renderdoc.png)
+![RenderDoc capture showing NFRU frame-generation events and resources to inspect the generated frame#center](./images/moku_renderdoc.webp)
 
 Use the following steps to inspect the Arm Frame Interpolation pipelines in RenderDoc:
 
