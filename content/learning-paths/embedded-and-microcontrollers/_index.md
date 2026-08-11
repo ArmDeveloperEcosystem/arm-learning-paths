@@ -121,7 +121,6 @@ tools_software_languages_filter:
 - strands-agents: 1
 - systemd: 1
 - TensorFlow: 3
-- TensorFlow Lite: 1
 - TensorRT: 1
 - tinyML: 2
 - Topo: 3

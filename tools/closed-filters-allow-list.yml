@@ -1,6 +1,6 @@
 ---
 platforms:
-  - Arm AGI
+  - Arm AGI CPU
   - AWS
   - Google Cloud
   - Microsoft Azure
