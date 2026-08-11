@@ -29,7 +29,7 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:27:59Z'
   faq_source_hash: 61b40f83405e1a04315a61c2dd66a56e6604d3fee26d833039cf392f479b884f
   summary: >-
-    You'll import WindowsPerf data into Windows Performance Analyzer (WPA) on Windows on Arm. You'll
+    You'll import WindowsPerf data into WPA on Windows on Arm. First, you'll
     use `wperf stat` to capture data and save it as a `.json` file with `--output`, then open it
     in WPA. You'll inspect the plugin's timeline and telemetry views to verify recorded events and
     visualize the resulting data.

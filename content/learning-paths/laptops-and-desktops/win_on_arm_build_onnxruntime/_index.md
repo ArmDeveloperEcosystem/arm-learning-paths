@@ -29,8 +29,8 @@ generated_summary_faq:
   faq_source_hash: d2843e64b8d2ade9644f494a35c60bdf690b5718e2d395d8842b4eb65ade36ad
   summary: >-
     You'll build ONNX Runtime and the `Generate()` API from source on Windows on Arm, then run Phi-3
-    Mini inference with KleidiAI acceleration. You'll configure the development environment, compile
-    the inference engine, and add the generation loop. You'll download the short-context ONNX model
+    Mini inference with KleidiAI acceleration. First, you'll configure the development environment, compile
+    the inference engine, and add the generation loop. Then, you'll download the short-context ONNX model
     and run it to produce text and performance metrics.
   faqs:
   - question: Which Phi-3 model variant should I use for this path?

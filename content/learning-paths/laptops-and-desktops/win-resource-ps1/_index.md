@@ -32,7 +32,7 @@ generated_summary_faq:
   faq_source_hash: 8b3ee8a0d24866ac73b60bf91b7414d8d73046ff37e89d9f34a2b17e8986b6e0
   summary: >-
     You'll use FFmpeg and PowerShell on Windows on Arm to compare native Arm64 and emulated x86_64
-    video workloads. You'll encode a test video, then run scripts that sample CPU, memory, and
+    video workloads. First, you'll encode a test video, then run scripts that sample CPU, memory, and
     battery data during decoding. You'll save the measurements to CSV files and repeat the runs
     with each FFmpeg build to make side-by-side comparisons.
   faqs:

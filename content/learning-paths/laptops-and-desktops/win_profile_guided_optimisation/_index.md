@@ -32,7 +32,7 @@ generated_summary_faq:
   faq_source_hash: 55e17aeab68897d633eade0c99fa59b122004ab94bc02f0a72efb3dc3aea9787
   summary: >-
     You'll measure the impact of profile-guided optimization (PGO) on C++ code for Windows on Arm
-    using MSVC and Google Benchmark. You'll create a division microbenchmark and record a baseline,
+    using MSVC and Google Benchmark. First, you'll create a division microbenchmark and record a baseline,
     then build and run an instrumented binary to collect profiles. You'll rebuild with those profiles,
     rerun the benchmark, and compare results to identify gains in hot paths.
   faqs:

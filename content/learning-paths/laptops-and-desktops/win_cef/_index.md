@@ -31,9 +31,8 @@ generated_summary_faq:
   faq_source_hash: 995ccce630912ea85925d7b3e6ad9191bbfcbd76f31186f68a579b4ced21d522
   summary: >-
     You'll create a Chromium Embedded Framework (CEF) desktop application on Windows on Arm using
-    CMake and C++. You'll configure the project for Visual Studio 2022, build it, and launch a
-    Chromium-based window. You'll then integrate local HTML, CSS, and JavaScript assets, allowing
-    you to iterate on the application's UI with familiar web technologies.
+    CMake and C++. First, you'll configure the project for Visual Studio 2022, build it, and launch a
+    Chromium-based window. Then, you'll then integrate local HTML, CSS, and JavaScript assets to build a project that you can iterate on with familiar web technologies.
   faqs:
   - question: Which CMake generator should I pick in Visual Studio on Windows on Arm?
     answer: >-

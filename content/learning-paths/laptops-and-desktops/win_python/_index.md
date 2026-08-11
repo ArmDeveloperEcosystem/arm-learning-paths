@@ -32,8 +32,8 @@ generated_summary_faq:
   faq_source_hash: c3de02d2b903cb1c32f5c8a2baa828a650563c310289fc86ccd10d4ccb7f4ca9
   summary: >-
     You'll use platform-specific Python packages on Windows on Arm to build an Arm64-native application
-    with NumPy. You'll create a `sample.py` script that generates noisy sine waves, computes fast
-    Fourier transforms, and records timings for multiple input sizes. You'll run it with Arm64 tooling
+    with NumPy. First, you'll create a `sample.py` script that generates noisy sine waves, computes fast
+    Fourier transforms, and records timings for multiple input sizes. Then, you'll run the script with Arm64 tooling
     and use the results to understand how package choice and input size affect performance.
   faqs:
   - question: What result should I expect when I run the sample application?

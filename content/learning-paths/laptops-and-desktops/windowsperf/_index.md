@@ -30,7 +30,7 @@ generated_summary_faq:
   faq_source_hash: b03c7d15729468a2c3a4e5fa7f6c6cec49c940e9f02c5f4330a832524ef7db8b
   summary: >-
     You'll install WindowsPerf on Windows on Arm and use `wperf` to generate performance reports.
-    You'll collect aggregate Arm PMU event counts with `wperf stat`, then use `wperf sample` or
+    First, you'll collect aggregate Arm PMU event counts with `wperf stat`, then use `wperf sample` or
     `wperf record` to attribute activity to functions, basic blocks, or instructions. You'll select
     events, pin measurements to a core, and interpret the resulting profiling data.
   faqs:

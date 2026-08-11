@@ -32,8 +32,8 @@ generated_summary_faq:
   faq_source_hash: e9ee967b66e4ee21d2de58923e1049cd0e28ed055297e96f8811ede5af6f6daf
   summary: >-
     You'll create a C++ Win32 dynamic-link library (DLL) and use it from a Windows console application.
-    You'll configure both projects for Arm64, rebuild them, and verify that the console app loads
-    and calls the DLL successfully. You'll also switch between x64 and Arm64 builds to compare
+    First, you'll configure both projects for Arm64, rebuild them, and verify that the console app loads
+    and calls the DLL successfully. Then, you'll switch between x64 and Arm64 builds to compare
     execution time on Windows on Arm.
   faqs:
   - question: Which projects do I need to create to follow this path?

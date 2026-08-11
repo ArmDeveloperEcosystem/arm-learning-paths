@@ -31,8 +31,8 @@ generated_summary_faq:
   faq_source_hash: 90f59c8b118f49161d34026d10ccb4bd036753cd1f44fc443b6fb74138cb1850
   summary: >-
     You'll create a Windows Presentation Foundation (WPF) desktop application and build it for multiple
-    architectures on Windows on Arm. You'll use **Configuration Manager** to add an ARM64 target alongside
-    x86_64, then build and run each configuration. You'll compare computation times and learn how WPF
+    architectures on Windows on Arm. First, you'll use **Configuration Manager** to add an ARM64 target alongside
+    x86_64. Then, you'll build and run each configuration. You'll compare computation times and learn how WPF
     uses XAML to separate the UI from business logic.
   faqs:
   - question: How do I add an ARM64 target to my WPF project?

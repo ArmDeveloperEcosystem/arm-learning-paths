@@ -30,7 +30,7 @@ generated_summary_faq:
   faq_source_hash: d0fa006b55c54487c17ad6081cc8764b837b5ec0e52ab646c8a8aa5a3836cad4
   summary: >-
     You'll set up Visual Studio 2022 on Windows on Arm, create a starter console app, and profile
-    the `SpinTheCubeInGDI` example. You'll capture a baseline while it runs a rotating 3D shape,
+    the `SpinTheCubeInGDI` example. First, you'll capture a baseline while it runs a rotating 3D shape,
     then install Arm Performance Libraries and profile again. You'll compare the results to assess
     how library integration and programming options affect execution.
   faqs:

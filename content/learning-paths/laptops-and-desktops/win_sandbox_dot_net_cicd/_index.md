@@ -31,8 +31,8 @@ generated_summary_faq:
   faq_source_hash: 53127ee82aeebbb8df3feb552bc5b0e5200aeeed6d37f191ab2ce0888f3748ed
   summary: >-
     You'll configure Windows Sandbox on a Windows on Arm device as a self-hosted Arm64 GitHub Actions
-    runner. You'll prepare the sandbox, register the runner, and use a repository workflow to build
-    and publish a .NET 8 WPF sample. You'll trigger the pipeline and verify that jobs run in the
+    runner. First, you'll prepare the sandbox, register the runner, and use a repository workflow to build
+    and publish a .NET 8 WPF sample. Then, you'll trigger the pipeline and verify that jobs run in the
     sandboxed environment and produce the expected outputs.
   faqs:
   - question: Where is the workflow defined and how is it triggered?

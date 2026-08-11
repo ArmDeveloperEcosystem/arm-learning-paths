@@ -33,8 +33,8 @@ generated_summary_faq:
   faq_source_hash: 0e48c317780ed95597f29059d547529b970df736a019653d499c4e2fe45cf2ce
   summary: >-
     You'll build and run a .NET 8 console application on Windows on Arm, then add targeted benchmarks.
-    You'll clone a sample repository and use `System.Diagnostics.Stopwatch` with the `PerformanceTests`
-    class to time focused code paths. You'll review the output, compare results across builds, and
+    First, you'll clone a sample repository and use `System.Diagnostics.Stopwatch` with the `PerformanceTests`
+    class to time focused code paths. Then, you'll review the output, compare results across builds, and
     develop a repeatable approach for measuring your own .NET benchmarks.
   faqs:
   - question: How do I know .NET 8 is installed correctly before starting?

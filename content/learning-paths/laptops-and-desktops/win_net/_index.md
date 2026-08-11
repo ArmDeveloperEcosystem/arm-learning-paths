@@ -28,9 +28,9 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:19:17Z'
   faq_source_hash: d25d6adb2606d2be5ff6fa0e8b5d65f83d67c14bd8fa12b86b014c41bad8cb77
   summary: >-
-    You'll build and run a native .NET 6 Windows Presentation Foundation (WPF) application on Windows
-    on Arm. You'll configure Visual Studio 2022 with the .NET desktop development workload, create a
-    project that targets .NET 6, and launch it on a device or virtual machine. You'll also validate
+    You'll build and run a native .NET 6 WPF application on Windows
+    on Arm. First, you'll configure Visual Studio 2022 with the .NET desktop development workload, create a
+    project that targets .NET 6, and launch it on a device or virtual machine. Then, you'll validate
     the target framework in project settings.
   faqs:
   - question: Where do I enable the .NET desktop development workload?

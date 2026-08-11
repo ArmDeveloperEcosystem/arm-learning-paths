@@ -31,8 +31,8 @@ generated_summary_faq:
   faq_source_hash: 4e0750e0bc7a01fbac8d76b22f311cbff4bf5e216db682f8607939d17454f779
   summary: >-
     You'll create a .NET MAUI project in Visual Studio on Windows on Arm and add a compute workload
-    to measure execution time on Arm64. You'll implement helpers that generate vectors, calculate
-    `a*b+c`, and time execution. You'll update the UI with a **list view**, run the workload, and
+    to measure execution time on Arm64. First, you'll implement helpers that generate vectors, calculate
+    `a*b+c`, and time execution. Then, you'll update the UI with a **list view**, run the workload, and
     review its processing results and timings.
   faqs:
   - question: I don’t see the .NET MAUI project template in Visual Studio. What should I check?

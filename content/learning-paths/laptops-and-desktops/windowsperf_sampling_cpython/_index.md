@@ -33,8 +33,8 @@ generated_summary_faq:
   faq_source_hash: f20e21b475671828f98ca275e54e3f3b35b717bf40d17e67756ae42184071b9d
   summary: >-
     You'll build a debug CPython for Windows on Arm, then use WindowsPerf to measure a Python workload.
-    You'll pin `python_d.exe` to one core, run counting and sampling, and locate hot runtime code.
-    You'll also use `record` and `-c` to launch the interpreter with arguments, creating repeatable
+    First, you'll pin `python_d.exe` to one core, run counting and sampling, and locate hot runtime code.
+    Then, you'll also use `record` and `-c` to launch the interpreter with arguments, creating repeatable
     measurements that distinguish aggregate counts from sampled locations.
   faqs:
   - question: What result should I expect from counting versus sampling?

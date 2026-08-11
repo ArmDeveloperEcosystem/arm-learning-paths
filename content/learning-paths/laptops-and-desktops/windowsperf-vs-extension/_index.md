@@ -15,7 +15,7 @@ learning_objectives:
 
 prerequisites:
   - A desktop or laptop running Windows on Arm.
-  - Visual Studio 2022 Community Edition, WindowsPerf, WindowsPerf Visual Studio extension, and Windows Performance Analyzer (WPA) installed.
+  - Visual Studio 2022 Community Edition, WindowsPerf, WindowsPerf Visual Studio extension, and WPA installed.
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -33,8 +33,8 @@ generated_summary_faq:
   faq_source_hash: 4b88beee8d8aa7ec61969d8a7278dd37f65c97562c7db0a514819b2c56a3561b
   summary: >-
     You'll integrate WindowsPerf into Visual Studio 2022 on Windows on Arm to collect and review
-    performance data. You'll configure the required tools, run counting sessions from **View** >
-    **Counting Settings**, and inspect the results. You'll then use **View** > **Sampling Explorer**
+    performance data. First, you'll configure the required tools, run counting sessions from **View** >
+    **Counting Settings**, and inspect the results. Then, you'll use **View** > **Sampling Explorer**
     to analyze samples and use the Arm Statistical Profiling Extension when supported.
   faqs:
   - question: How do I know the WindowsPerf Visual Studio extension is installed correctly?
