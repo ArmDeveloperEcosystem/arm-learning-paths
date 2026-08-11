@@ -90,7 +90,7 @@ Use `you` or `your` when describing what the reader does, learns, configures,
 or verifies. Do not accept passive or third-person language such as `This Learning Path`,
 `Learners`, `the path`, `the implementation`, `the steps`, `the result`, or
 `they` when those phrases describe the reader's work. Rewrite those sentences
-to address the reader directly. To avoid sounding robotic, vary the phrases in length and phrasing without losing technical accuracy. Keep summaries concise; about 50-60 words long. 
+to address the reader directly. To avoid sounding robotic, vary the phrases in length and phrasing without losing technical accuracy. Keep summaries concise; about 50-75 words long. 
 
 FAQ answers must follow the same second-person
 voice. FAQ questions may use first person when phrased from the reader's
