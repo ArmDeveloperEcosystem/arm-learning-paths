@@ -31,12 +31,9 @@ generated_summary_faq:
   faq_source_hash: 53127ee82aeebbb8df3feb552bc5b0e5200aeeed6d37f191ab2ce0888f3748ed
   summary: >-
     You'll configure Windows Sandbox on a Windows on Arm device as a self-hosted Arm64 GitHub Actions
-    runner and use it to build and publish a .NET 8 Windows Presentation Foundation (WPF) sample
-    that solves the Traveling Salesman Problem. First, you'll prepare the sandboxed
-    environment, register it as a runner, and execute a CI/CD workflow defined in the repository
-    to build and run the application. Then, you'll trigger the pipeline and verify that the job executes
-    on the sandboxed runner. By the end, you'll be able to confirm successful builds and published
-    outputs produced by the workflow configuration.
+    runner. You'll prepare the sandbox, register the runner, and use a repository workflow to build
+    and publish a .NET 8 WPF sample. You'll trigger the pipeline and verify that jobs run in the
+    sandboxed environment and produce the expected outputs.
   faqs:
   - question: Where is the workflow defined and how is it triggered?
     answer: >-

@@ -31,13 +31,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:16:08Z'
   faq_source_hash: 8b3ee8a0d24866ac73b60bf91b7414d8d73046ff37e89d9f34a2b17e8986b6e0
   summary: >-
-    You'll use FFmpeg and PowerShell on Windows on Arm to generate a test encode and then collect
-    system metrics during a controlled video decode workload. First, you'll configure FFmpeg for both
-    Arm64-native and x86_64 (running under Windows instruction emulation) and encode a test video, and compare encoding between the two architectures.
-    Then, you'll launch a PowerShell script that starts the decode
-    process, samples CPU and memory usage at intervals, and writes the data to CSV for later analysis.
-    You'll launch a second script that queries battery status during the same workload to record power-related data. By repeating runs with different FFmpeg builds, you'll gather side-by-side
-    metrics suitable for comparison.
+    You'll use FFmpeg and PowerShell on Windows on Arm to compare native Arm64 and emulated x86_64
+    video workloads. You'll encode a test video, then run scripts that sample CPU, memory, and
+    battery data during decoding. You'll save the measurements to CSV files and repeat the runs
+    with each FFmpeg build to make side-by-side comparisons.
   faqs:
   - question: Which FFmpeg executable should I pass to the scripts for Arm64 versus x86_64?
     answer: >-

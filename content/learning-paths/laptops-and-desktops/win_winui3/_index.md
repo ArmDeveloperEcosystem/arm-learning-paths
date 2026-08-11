@@ -31,13 +31,9 @@ generated_summary_faq:
   faq_source_hash: 8726f05daf1b14dd97adaceabb57c5bafece7cfd323b38a4a87bad3c1b51d0da
   summary: >-
     You'll create a WinUI 3 application in Visual Studio on Windows on Arm and build it in **Release**
-    for both x64 and Arm64. First, you'll configure the
-    startup selection, choose the target architecture from Visual Studio’s dropdowns, and run
-    the packaged app (`Arm64.WinUIApp (Package)`) to execute a matrix multiplication. By
-    repeating the run for x64 and ARM64, you'll capture the computation times shown by the app
-    and compare results across architectures. The workflow keeps code changes minimal and focuses
-    on build configuration, launch choices, and reading application output to understand execution
-    behavior on Arm64 versus x64.
+    for x64 and Arm64. You'll select each architecture, launch `Arm64.WinUIApp (Package)`, and run
+    its matrix multiplication workload. You'll capture the reported computation times, compare the
+    architectures, and understand how build and launch settings affect execution.
   faqs:
   - question: Which Visual Studio settings should I use before running the app for timing?
     answer: >-

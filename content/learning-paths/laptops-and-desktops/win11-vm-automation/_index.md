@@ -32,13 +32,9 @@ generated_summary_faq:
   faq_source_hash: 7b07079ab99196550519000fee60228333cc2ac721cd68b0ef2ecf411e69c08e
   summary: >-
     You'll automate a Windows 11 on Arm virtual machine on an Arm Linux host using QEMU, KVM, and
-    two Bash scripts. After cloning the GitHub project, you'll review the script structure to
-    understand configurable options. Then, you'll create a VM
-    with a single command that applies default settings and stores data in a chosen directory.
-    When installation completes, you'll run a unified run script to check the VM state, start it in headless
-    mode if needed, and open an RDP session using Remmina. You'll then be able to reliably
-    create, launch, and reuse Windows on Arm VMs for development and testing, and know where to
-    adjust configuration in the scripts.
+    Bash scripts. You'll review configurable options, create a VM with default settings, and store
+    it in your chosen directory. After installation, you'll use a single run script to check its
+    state, start it if needed, and open an RDP session with Remmina.
   faqs:
   - question: Which command should I use to create a Windows on Arm VM with default settings?
     answer: >-

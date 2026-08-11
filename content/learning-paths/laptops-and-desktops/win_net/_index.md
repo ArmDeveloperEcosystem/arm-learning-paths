@@ -28,12 +28,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:19:17Z'
   faq_source_hash: d25d6adb2606d2be5ff6fa0e8b5d65f83d67c14bd8fa12b86b014c41bad8cb77
   summary: >-
-    You'll build and run a native .NET 6 WPF application on Windows
-    on Arm. First, you'll configure Visual Studio
-    2022 by adding the .NET desktop development workload and create a WPF project that targets .NET 6. Then, you'll build and launch it on a Windows on Arm device or virtual machine. You'll make the required
-    setup decisions in the Visual Studio Installer and validate the target framework in project
-    settings. You'll finish with a WPF application that runs natively on Windows on Arm,
-    demonstrating the end-to-end workflow with .NET and Visual Studio.
+    You'll build and run a native .NET 6 Windows Presentation Foundation (WPF) application on Windows
+    on Arm. You'll configure Visual Studio 2022 with the .NET desktop development workload, create a
+    project that targets .NET 6, and launch it on a device or virtual machine. You'll also validate
+    the target framework in project settings.
   faqs:
   - question: Where do I enable the .NET desktop development workload?
     answer: >-

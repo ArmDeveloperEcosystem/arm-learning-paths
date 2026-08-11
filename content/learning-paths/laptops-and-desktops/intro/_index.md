@@ -29,15 +29,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:15:16Z'
   faq_source_hash: 3089d209c97b666d637dea9b45264ca33c378056329685d2898f6dd7e9c33385
   summary: >-
-    You'll learn where Arm processors appear in modern laptops and desktops and select hardware for
-    software development. You'll compare options across Windows,
-    Linux, and ChromeOS, recognize common Arm processor vendors such as Qualcomm, MediaTek, and
-    Rockchip, and consider when to match local devices to Arm-based server and cloud environments.
-    You'll review example Chromebooks, including the Lenovo Chromebook Plus 14 with a MediaTek
-    Kompanio Ultra processor and the detachable Lenovo Duet Gen 9, and notes that Windows on Arm
-    systems are available from multiple vendors. Afterward, you can identify
-    suitable Arm-based laptops or desktops and make an informed choice aligned with their target
-    platforms.
+    You'll identify Arm-based laptops and desktops for software development. You'll compare Windows,
+    Linux, and ChromeOS options; review hardware from Qualcomm, MediaTek, and Rockchip; and consider
+    alignment with Arm-based servers and cloud environments. You'll also examine example Chromebooks
+    and Windows on Arm systems, then select a device that suits your target platform.
   faqs:
   - question: How do I know if a laptop or desktop uses an Arm processor?
     answer: >-

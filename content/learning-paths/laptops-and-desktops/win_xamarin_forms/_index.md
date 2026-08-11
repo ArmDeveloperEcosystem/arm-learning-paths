@@ -31,12 +31,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:24:22Z'
   faq_source_hash: b35d2f5ce175f39a45b3ff44ff41737094e4848cdecd62451a03a957780e4aaf
   summary: >-
-    You'll create a Xamarin Forms application on Windows on Arm and organize it with the
-    Model-View-ViewModel (MVVM) pattern. You'll add a model
-    class to represent XY data, structure the project in Visual Studio, and build and run the
-    app to validate the setup. Then, you'll time a chosen code path to observe execution-time
-    behavior on Arm64. By the end, you'll have a working solution to capture basic performance measurements on an Arm-based Windows
-    system.
+    You'll create a Xamarin Forms application on Windows on Arm using the Model-View-ViewModel (MVVM)
+    pattern. You'll add a model for XY data, organize the project in Visual Studio, and connect the
+    view model to the main page. You'll build and run the app, then time a chosen code path to
+    measure execution on Arm64.
   faqs:
   - question: Where do I add the DataPoint2d model class?
     answer: >-

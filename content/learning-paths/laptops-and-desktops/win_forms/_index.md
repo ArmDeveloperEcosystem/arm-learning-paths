@@ -30,13 +30,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:18:29Z'
   faq_source_hash: b3265b8bdc6a015b440b0a2fc040375cd4cb4a8b12f8717f955849e76ce0e4ec
   summary: >-
-    You'll create and build a Windows Forms desktop application on Windows on Arm using Visual Studio,
-    then compare execution times by switching build configurations. First, you'll create a WinForms project,
-    assemble the UI, and build the app. Next, you'll
-    through opening **Configuration Manager** from the **target platform** dropdown, adding an ARM64 solution
-    platform, and launching the application under different settings. By running the same matrix
-    multiplication workload across configurations, you'll observe the reported computation times
-    and see how the selected target platform influences code execution on Arm64.
+    You'll create a Windows Forms desktop application on Windows on Arm using Visual Studio. You'll
+    assemble the UI, build the app, and add an ARM64 solution platform in **Configuration Manager**.
+    You'll run the same matrix multiplication workload across configurations, compare computation
+    times, and see how the selected target platform affects execution on Arm64.
   faqs:
   - question: How do I add the ARM64 build configuration in Visual Studio?
     answer: >-

@@ -29,13 +29,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:25:07Z'
   faq_source_hash: d0fa006b55c54487c17ad6081cc8764b837b5ec0e52ab646c8a8aa5a3836cad4
   summary: >-
-    You'll set up Visual Studio 2022 on a Windows on Arm device, create and run a starter console
-    app, and then build and profile a real example. First, you'll clone the `SpinTheCubeInGDI` project and open
-    the solution in Visual Studio. You'll use profiling to capture a baseline while the application animates a rotating 3D shape
-    and exercises different programming options, including multithreading. Then, you'll install
-    Arm Performance Libraries before rebuilding and profiling
-    again to explore differences. By the end, you'll recognize success by a responsive spinning-cube
-    window and comparative profile results that document the impact of your changes.
+    You'll set up Visual Studio 2022 on Windows on Arm, create a starter console app, and profile
+    the `SpinTheCubeInGDI` example. You'll capture a baseline while it runs a rotating 3D shape,
+    then install Arm Performance Libraries and profile again. You'll compare the results to assess
+    how library integration and programming options affect execution.
   faqs:
   - question: Which Visual Studio 2022 edition should I use for this path?
     answer: >-

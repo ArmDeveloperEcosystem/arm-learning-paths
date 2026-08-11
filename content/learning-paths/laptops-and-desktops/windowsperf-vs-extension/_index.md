@@ -32,12 +32,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:25:59Z'
   faq_source_hash: 4b88beee8d8aa7ec61969d8a7278dd37f65c97562c7db0a514819b2c56a3561b
   summary: >-
-    You'll integrate WindowsPerf into a Visual Studio 2022 workflow on Windows on Arm to collect and
-    review performance data. First, you'll configure the required tools. Then, you'll use the extension to run counting and sampling sessions from within Visual Studio. Using
-    **View** > **Counting Settings**, you'll select parameters, collect data, and examine the resulting report. Next,
-    you'll open **View** > **Sampling Explorer** to configure and run sampling, analyze results, and implement
-    changes. You can also optionally use the Arm Statistical Profiling Extension
-    (SPE) when supported hardware is available.
+    You'll integrate WindowsPerf into Visual Studio 2022 on Windows on Arm to collect and review
+    performance data. You'll configure the required tools, run counting sessions from **View** >
+    **Counting Settings**, and inspect the results. You'll then use **View** > **Sampling Explorer**
+    to analyze samples and use the Arm Statistical Profiling Extension when supported.
   faqs:
   - question: How do I know the WindowsPerf Visual Studio extension is installed correctly?
     answer: >-

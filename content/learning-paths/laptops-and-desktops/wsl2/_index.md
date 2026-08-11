@@ -34,15 +34,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:28:59Z'
   faq_source_hash: 04f6894d6d9a1637e06aaa48321c09b918e80343d670cc5dd062179d9452486c
   summary: >-
-    You'll configure WSL on Windows on Arm, select and run a Linux
-    distribution, and enable `systemd` so common services start automatically. First, you'll install and
-    launch graphical Linux applications from
-    the Linux shell. Then, you'll learn when to
-    use SSH versus the built-in Windows drive mount for file transfer. You'll also set up
-    up an XFCE4 desktop in WSL with the `xrdp` server, restarting it after configuration changes,
-    and checking its status. You'll be able to restart a distribution cleanly,
-    validate that `systemd` and `xrdp` are active, and recognize how WSL integrates Linux GUI apps
-    with Windows.
+    You'll configure Windows Subsystem for Linux (WSL) on Windows on Arm, select a Linux distribution,
+    and enable `systemd`. You'll launch graphical Linux apps, decide when to use SSH or the Windows
+    drive mount for file transfer, and set up an XFCE4 desktop with `xrdp`. You'll also restart
+    the distribution and verify that `systemd` and `xrdp` are active.
   faqs:
   - question: How do I enable systemd in my WSL distribution and confirm it’s running?
     answer: >-

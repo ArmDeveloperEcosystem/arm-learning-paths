@@ -30,14 +30,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:23:51Z'
   faq_source_hash: 90f59c8b118f49161d34026d10ccb4bd036753cd1f44fc443b6fb74138cb1850
   summary: >-
-    You'll create a basic WPF desktop application and build it
-    for multiple architectures on Windows on Arm. Using Visual Studio, you'll configure solution
-    platforms with **Configuration Manager**, add an ARM64
-    target alongside x86_64, and switch between them to build and run the app. You'll focus
-    on launching the application under each configuration and comparing computation times, so
-    you can observe any differences in execution on Arm64. Along the way, you'll learn how WPF uses
-    XAML for UI and separates presentation from business logic, so you can structure a project
-    to compile and evaluate across platforms.
+    You'll create a Windows Presentation Foundation (WPF) desktop application and build it for multiple
+    architectures on Windows on Arm. You'll use **Configuration Manager** to add an ARM64 target alongside
+    x86_64, then build and run each configuration. You'll compare computation times and learn how WPF
+    uses XAML to separate the UI from business logic.
   faqs:
   - question: How do I add an ARM64 target to my WPF project?
     answer: >-

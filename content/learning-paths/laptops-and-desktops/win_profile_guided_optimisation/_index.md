@@ -31,12 +31,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:21:12Z'
   faq_source_hash: 55e17aeab68897d633eade0c99fa59b122004ab94bc02f0a72efb3dc3aea9787
   summary: >-
-    You'll measure the impact of PGO on C++ code for Windows on Arm
-    using MSVC and Google Benchmark. First, you'll review PGO concepts,
-    create a microbenchmark, and record a baseline for an integer division routine. Then, you'll build an instrumented binary, run the binary to collect execution profiles, and rebuild with
-    those profiles applied. Finally, you'll rerun the benchmark and compare results to the baseline
-    to validate the effect of PGO and understand where hot paths benefit. By then end, you'll have
-    a repeatable process that you can apply to similar C++ code on Windows on Arm.
+    You'll measure the impact of profile-guided optimization (PGO) on C++ code for Windows on Arm
+    using MSVC and Google Benchmark. You'll create a division microbenchmark and record a baseline,
+    then build and run an instrumented binary to collect profiles. You'll rebuild with those profiles,
+    rerun the benchmark, and compare results to identify gains in hot paths.
   faqs:
   - question: Which command prompt should I use to run the build steps on Windows on Arm?
     answer: >-

@@ -31,12 +31,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:25:57Z'
   faq_source_hash: cbf7645f312a08a1400d74f819be3655369d835d037ffff69aac29b2119df899
   summary: >-
-    You'll configure a GitHub Actions CI/CD flow that runs on a Windows on Arm host. You'll create
-    a fresh repository to isolate test changes, prepare a
-    self-hosted runner on a Windows on Arm machine or cloud instance, and add a minimal workflow
-    using the **Simple workflow** template. When executed, the GitHub Actions workflow runs a hello world task, providing
-    a quick check that jobs execute on the self-hosted runner. You'll finish with a working
-    pipeline anchored to a Windows on Arm environment that can support subsequent projects.
+    You'll configure a GitHub Actions CI/CD flow on a Windows on Arm host. You'll create a repository,
+    set up a self-hosted runner on a device or cloud instance, and add a minimal workflow from the
+    **Simple workflow** template. You'll run a hello world task to verify that jobs execute on your
+    Windows on Arm runner.
   faqs:
   - question: Why should I create a new GitHub repository for this exercise?
     answer: >-

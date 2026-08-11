@@ -29,13 +29,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:27:03Z'
   faq_source_hash: b03c7d15729468a2c3a4e5fa7f6c6cec49c940e9f02c5f4330a832524ef7db8b
   summary: >-
-    You'll install WindowsPerf on Windows on Arm and use the `wperf` command-line interface to generate
-    a performance report. You'll use two profiling models: counting with `wperf stat` to capture
-    aggregate occurrences
-    of Arm PMU events, and sampling with `wperf sample` or `wperf record` to attribute event frequencies
-    to functions, basic blocks, or instructions. You'll select events (for example,
-    `inst_spec`, `vfp_spec`, `ase_spec`, and `ld_spec`), pinning to a core and running for a defined
-    interval. Then, you'll interpret counters and sampling output so you can recognize a successful run.
+    You'll install WindowsPerf on Windows on Arm and use `wperf` to generate performance reports.
+    You'll collect aggregate Arm PMU event counts with `wperf stat`, then use `wperf sample` or
+    `wperf record` to attribute activity to functions, basic blocks, or instructions. You'll select
+    events, pin measurements to a core, and interpret the resulting profiling data.
   faqs:
   - question: Which command should I run first to verify that WindowsPerf is working?
     answer: >-
