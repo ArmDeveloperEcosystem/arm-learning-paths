@@ -31,7 +31,7 @@ generated_summary_faq:
   summary: >-
     You'll build OpenCV from source on Windows on Arm and create a minimal C++ application. First, you'll
     clone the OpenCV repository, check out the validated `4.10.0` tag, and configure CMake with
-    either MSVC or Clang. The, you'll compile OpenCV and a test program that links against its
+    either MSVC or Clang. Then, you'll compile OpenCV and a test program that links against its
     generated libraries to validate your toolchain and environment.
   faqs:
   - question: How do I prepare the OpenCV DLLs before running the test application?
