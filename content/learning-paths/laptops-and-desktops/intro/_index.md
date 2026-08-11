@@ -14,49 +14,6 @@ learning_objectives:
 prerequisites:
     - Nothing
 
-# START generated_summary_faq
-generated_summary_faq:
-  template_version: summary-faq-v3
-  generated_at: '2026-08-11T16:15:16Z'
-  generator: ai
-  ai_assisted: true
-  ai_review_required: true
-  model: gpt-5
-  prompt_template: summary-faq-v3
-  source_hash: 3089d209c97b666d637dea9b45264ca33c378056329685d2898f6dd7e9c33385
-  summary_generated_at: '2026-08-11T16:15:16Z'
-  summary_source_hash: 3089d209c97b666d637dea9b45264ca33c378056329685d2898f6dd7e9c33385
-  faq_generated_at: '2026-08-11T16:15:16Z'
-  faq_source_hash: 3089d209c97b666d637dea9b45264ca33c378056329685d2898f6dd7e9c33385
-  summary: >-
-    You'll identify Arm-based laptops and desktops for software development. You'll compare Windows,
-    Linux, and ChromeOS options; review hardware from Qualcomm, MediaTek, and Rockchip; and consider
-    alignment with Arm-based servers and cloud environments. You'll also examine example Chromebooks
-    and Windows on Arm systems, then select a device that suits your target platform.
-  faqs:
-  - question: How do I know if a laptop or desktop uses an Arm processor?
-    answer: >-
-      Check the device specifications for the processor brand and model. Systems built with processors
-      from Qualcomm, MediaTek, or Rockchip indicate Arm-based platforms.
-  - question: Which operating system should I use for Arm software development on a laptop or
-      desktop?
-    answer: >-
-      Choose the operating system that matches where your software will run. You'll compare options
-      on Windows, ChromeOS, and Linux so you can align development with your target environment.
-  - question: Can I use a Chromebook for Arm-based development, and which models are mentioned?
-    answer: >-
-      Yes. The Lenovo Chromebook Plus 14, powered by the MediaTek Kompanio Ultra processor, and
-      the Lenovo Duet Gen 9 are highlighted as examples.
-  - question: Are Windows on Arm laptops suitable for development work?
-    answer: >-
-      Yes. Windows on Arm laptops are available for software development from a variety of vendors.
-  - question: Why should I match my local machine’s architecture with servers and cloud instances?
-    answer: >-
-      Using the same architecture across local machines and server or cloud instances makes it
-      easier to build and test your software consistently. This reduces differences between development
-      and deployment environments.
-# END generated_summary_faq
-
 author: Jason Andrews
 
 generate_summary_faq: false
