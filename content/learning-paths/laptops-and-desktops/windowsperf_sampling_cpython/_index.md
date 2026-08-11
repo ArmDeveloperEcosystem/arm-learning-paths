@@ -20,8 +20,8 @@ prerequisites:
 author: Przemyslaw Wirkus
 
 generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 ### Tags
 skilllevels: Introductory
