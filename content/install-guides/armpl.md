@@ -83,33 +83,33 @@ For more information, see [Get started with Arm Performance Libraries](https://d
 [Download](https://developer.arm.com/downloads/-/arm-performance-libraries) the appropriate package for your macOS distribution.
 
 {{% notice Note %}}
-The following commands use Arm Performance Libraries version 26.01.1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm Performance Libraries downloads](https://developer.arm.com/downloads/-/arm-performance-libraries).
+The following commands use Arm Performance Libraries version 26.07. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm Performance Libraries downloads](https://developer.arm.com/downloads/-/arm-performance-libraries).
 {{% /notice %}}
 
 In a terminal, run the following command to download the macOS package:
 ```console
-wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_26.01.1/arm-performance-libraries_26.01.1_macOS.tgz
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_26.07/arm-performance-libraries_26.07_macOS.tgz
 ```
 
 Use tar to extract the file:
 ```console
-tar zxvf arm-performance-libraries_26.01.1_macOS.tgz
+tar zxvf arm-performance-libraries_26.07_macOS.tgz
 ```
 
 The output is similar to:
 ```console
-armpl_26.01.1_flang-21.dmg
+armpl_26.07_flang-22.dmg
 ```
 
 Mount the disk image by running the following command from a terminal:
 ```console
-hdiutil attach armpl_26.01.1_flang-21.dmg
+hdiutil attach armpl_26.07_flang-22.dmg
 ```
 
 Now run the installation script as a superuser:
 
 ```console
-/Volumes/armpl_26.01.1_flang-21_installer/armpl_26.01.1_flang-21_install.sh -y
+/Volumes/armpl_26.07_flang-22_installer/armpl_26.07_flang-22_install.sh -y
 ```
 
 Using this command, you automatically accept the End User License Agreement and install packages to the `/opt/arm` directory. If you want to change the installation directory location, use the `--install_dir=` option with the script and provide the desired directory location.
@@ -128,38 +128,38 @@ For more information, see [Get started with Arm Performance Libraries](https://d
 
 ## Install Arm Performance Libraries on Linux {#linux}
 
-Arm Performance Libraries are supported on most Linux distributions such as Ubuntu, RHEL, SLES, and Amazon Linux on an `AArch64` host. The libraries are compatible with various versions of GCC, LLVM, and NVHPC. The GCC-compatible releases are built with GCC 14 and tested with GCC versions 7 to 14. The LLVM-compatible releases are tested with LLVM 21.1. The NVHPC-compatible releases are tested with NVHPC 25.11.
+Arm Performance Libraries are supported on most Linux distributions such as Ubuntu, RHEL, SLES, and Amazon Linux on an `AArch64` host. The libraries are compatible with various versions of GCC, LLVM, and NVHPC. The GCC-compatible releases are built with GCC 14 and tested with GCC versions 7 to 15. The LLVM-compatible releases are tested with LLVM 22.1. The NVHPC-compatible releases are tested with NVHPC 26.3.
 
 ### Manually download and install Arm Performance Libraries
 
 Download the appropriate package for your Linux distribution. The `deb`-based installers can be used on Ubuntu 22 and Ubuntu 24. The RPM-based installers can be used on the following supported distributions:
 
-- Amazon Linux 2, Amazon Linux 2023
+- Amazon Linux 2023
 - RHEL-8, RHEL-9, RHEL-10
 - SLES-15 Service Packs 6 and 7
 
 The following instructions are for `deb`-based installers for GCC users.
 
 {{% notice Note %}}
-The following commands use Arm Performance Libraries version 26.01.1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm Performance Libraries downloads](https://developer.arm.com/downloads/-/arm-performance-libraries).
+The following commands use Arm Performance Libraries version 26.07. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm Performance Libraries downloads](https://developer.arm.com/downloads/-/arm-performance-libraries).
 {{% /notice %}}
 
 In a terminal, run the following command to download the Debian package:
 
 ```console
-wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_26.01.1/arm-performance-libraries_26.01.1_deb_gcc.tar
+wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Performance-Libraries/Version_26.07/arm-performance-libraries_26.07_deb_gcc.tar
 ```
 
 Use `tar` to extract the file and then change directory:
 
 ```console
-tar xf arm-performance-libraries_26.01.1_deb_gcc.tar
+tar xf arm-performance-libraries_26.07_deb_gcc.tar
 ```
 
 Run the installation script as a super user:
 
 ```console
-sudo ./arm-performance-libraries_26.01.1_deb/arm-performance-libraries_26.01.1_deb.sh --accept
+sudo ./arm-performance-libraries_26.07_deb/arm-performance-libraries_26.07_deb.sh --accept
 ```
 
 Using the `--accept` switch, you automatically accept the End User License Agreement and the packages are installed to the `/opt/arm` directory.
@@ -170,11 +170,19 @@ If you want to change the installation directory location, use the `--install-to
 
 Arm Performance Libraries are available to install using Linux system package managers. The following instructions are for the Ubuntu 24.04 system package manager `apt` command.
 
+{{% notice Note %}}
+Arm has recently reviewed and strengthened our repository management processes.
+As a consequence we have revoked and replaced the Arm Toolchains repository signing key used up to July 2026.
+Current installations of Arm Performance Libraries continue to work although package manager update or upgrade operations may fail.
+Existing package users will need to install the latest arm-toolchains-repository package for their distribution as shown below.
+For more information see [the Arm Toolchains Repository installation guide](https://learn.arm.com/install-guides/arm-toolchains-repository).
+{{% /notice %}}
+
 Add the Arm Toolchains `apt` package repository to your system:
 
 ```bash
-curl -O https://developer.arm.com/packages/arm-toolchains/ubuntu/pool/arm-toolchains-repository_2-1~noble_all.deb
-sudo dpkg -i arm-toolchains-repository_2-1~noble_all.deb
+curl -O https://developer.arm.com/packages/arm-toolchains/ubuntu/pool/arm-toolchains-repository_2-2~noble_all.deb
+sudo dpkg -i arm-toolchains-repository_2-2~noble_all.deb
 sudo apt update
 ```
 For more information about setting up the Arm Toolchains repository, see [Arm Toolchains](/install-guides/arm-toolchains-repository/).
@@ -214,15 +222,15 @@ module avail
 The output is similar to:
 
 ```output
-armpl/26.01.1_gcc
+armpl/26.07_gcc
 ```
 
 Load the appropriate module:
 
 ```console
-module load armpl/26.01.1_gcc
+module load armpl/26.07_gcc
 ```
 
 To get started with Arm Performance Libraries on Linux, compile and test the examples in the `/opt/arm/<armpl_dir>/examples/` directory, or `<install_dir>/<armpl_dir>/examples/` if you installed to a different location.
 
-For more information, see [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/109362).
+For more information, see [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/102620).
