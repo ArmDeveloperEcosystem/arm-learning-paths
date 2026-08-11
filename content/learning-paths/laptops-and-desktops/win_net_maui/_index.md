@@ -43,9 +43,9 @@ generated_summary_faq:
     answer: >-
       Add both classes to the .NET MAUI project so both are accessible from the application code
       that triggers the computation and updates the UI.
-  - question: What does the `AdditionOfProduct` method compute and with which data types?
+  - question: What does the AdditionOfProduct method compute and with which data types?
     answer: >-
-      It computes a*b+c over pseudo-randomly generated vectors of double-precision values. The
+      It computes `a*b+c` over pseudo-randomly generated vectors of double-precision values. The
       operation produces results that are then used for timing and display.
   - question: How do I know the performance measurement is working?
     answer: >-

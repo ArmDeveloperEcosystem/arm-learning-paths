@@ -35,7 +35,7 @@ generated_summary_faq:
   faqs:
   - question: Where do I enable the .NET desktop development workload?
     answer: >-
-      Open the Windows **Start** menu, launch Visual Studio Installer, and select **Modify**. On the
+      Open the Windows **Start** menu, launch **Visual Studio Installer**, and select **Modify**. On the
       **Workloads** tab, select **.NET desktop development** and apply the changes.
   - question: Which version of Visual Studio should I use?
     answer: >-
@@ -43,7 +43,7 @@ generated_summary_faq:
       before creating the project.
   - question: Can I complete this on a virtual machine instead of physical hardware?
     answer: >-
-      Yes. You can use a Windows on Arm virtual machine for this guide.
+      Yes. You can use a Windows on Arm virtual machine.
   - question: How do I confirm the project targets .NET 6?
     answer: >-
       Open the project properties in Visual Studio and check **Target Framework**. It should list

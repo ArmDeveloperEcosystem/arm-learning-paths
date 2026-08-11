@@ -8,7 +8,7 @@ minutes_to_complete: 30
 who_is_this_for: This learning path is for developers who want to learn how to use web technologies for developing Desktop apps on Windows on Arm (WoA).
 
 learning_objectives:
-    - Create and build a Chromium Embedded Framework project using CMake
+    - Create and build a Chromium Embedded Framework (CEF) project using CMake
     - Modify and style the application
 
 prerequisites:
@@ -30,9 +30,9 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:17:56Z'
   faq_source_hash: 995ccce630912ea85925d7b3e6ad9191bbfcbd76f31186f68a579b4ced21d522
   summary: >-
-    You'll create a Chromium Embedded Framework (CEF) desktop application on Windows on Arm using
+    You'll create a CEF desktop application on Windows on Arm using
     CMake and C++. First, you'll configure the project for Visual Studio 2022, build it, and launch a
-    Chromium-based window. Then, you'll then integrate local HTML, CSS, and JavaScript assets to build a project that you can iterate on with familiar web technologies.
+    Chromium-based window. Then, you'll integrate local HTML, CSS, and JavaScript assets to build a project that you can iterate on with familiar web technologies.
   faqs:
   - question: Which CMake generator should I pick in Visual Studio on Windows on Arm?
     answer: >-
