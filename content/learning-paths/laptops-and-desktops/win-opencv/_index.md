@@ -29,26 +29,25 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:16:06Z'
   faq_source_hash: 25b6e3d5781c748e1bc8ab40039ab47f63e062592b5a282e2f9327479f1bdce9
   summary: >-
-    This Learning Path guides learners through building OpenCV from source on Windows on Arm and
-    creating a minimal C++ application that uses the library. Starting in Windows PowerShell,
-    you clone the OpenCV repository and check out the validated 4.10.0 tag, then configure and
-    compile the project with CMake using either MSVC or Clang. The path separates the workflows
-    so you pick a compiler and follow the corresponding configuration and build steps. After the
-    build completes, you compile a small test program that links against the generated OpenCV
-    libraries to validate the environment. By the end, you have a working local build of OpenCV
+    You'll build OpenCV from source on Windows on Arm and create a minimal C++ application that uses
+    the library. Starting in Windows PowerShell, you'll clone the OpenCV repository and check out
+    the validated `4.10.0` tag, then configure and
+    compile the project with CMake using either MSVC or Clang. After the
+    build completes, you'll compile a small test program that links against the generated OpenCV
+    libraries to validate the environment. You'll finish with a working local build of OpenCV
     and a compiled example that confirms the toolchain and libraries function on Windows on Arm.
   faqs:
-  - question: How do I choose between MSVC and Clang for my build?
+  - question: How do I prepare the OpenCV DLLs before running the test application?
     answer: >-
-      Both compilers are supported. Pick one workflow and follow its dedicated section so CMake
-      configures, builds OpenCV, and compiles the test application with the correct toolchain.
+      Add the directory containing the OpenCV DLLs to your `PATH`, or place the DLLs beside the
+      executable. This lets the test application find the required libraries at runtime.
   - question: Which OpenCV version should I check out for this path?
     answer: >-
-      Use tag 4.10.0 as shown in the steps. You might be able to use a later version, but if you
-      run into issues, switch back to 4.10.0.
+      Use tag `4.10.0`. You might be able to use a later version, but if you
+      run into issues, switch back to `4.10.0`.
   - question: Do I need a specific CMake version, and where should I run the commands?
     answer: >-
-      The steps were tested with CMake 3.28.1. Run the commands from Windows PowerShell using
+      Use CMake `3.28.1` and run the commands from Windows PowerShell using
       the CMake command-line interface.
   - question: How do I know my build worked, and where are the outputs?
     answer: >-
@@ -57,7 +56,7 @@ generated_summary_faq:
       the test program against OpenCV confirms the environment is set up correctly.
   - question: If I follow the MSVC path, do I need Visual Studio installed?
     answer: >-
-      Yes. Use Visual Studio 2022 or higher for the MSVC flow; the instructions were tested with
+      Yes. Use Visual Studio 2022 or later for the MSVC flow; the instructions were tested with
       Visual Studio 2022. If you choose Clang, follow the Clang section and its tool setup.
 # END generated_summary_faq
 
@@ -100,4 +99,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

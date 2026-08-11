@@ -29,13 +29,13 @@ generated_summary_faq:
   faq_generated_at: '2026-08-11T16:15:16Z'
   faq_source_hash: 3089d209c97b666d637dea9b45264ca33c378056329685d2898f6dd7e9c33385
   summary: >-
-    This Learning Path introduces where Arm processors appear in modern laptops and desktops and
-    guides hardware selection for software development. Learners compare options across Windows,
+    You'll learn where Arm processors appear in modern laptops and desktops and select hardware for
+    software development. You'll compare options across Windows,
     Linux, and ChromeOS, recognize common Arm processor vendors such as Qualcomm, MediaTek, and
     Rockchip, and consider when to match local devices to Arm-based server and cloud environments.
-    The path highlights example Chromebooks, including the Lenovo Chromebook Plus 14 with a MediaTek
+    You'll review example Chromebooks, including the Lenovo Chromebook Plus 14 with a MediaTek
     Kompanio Ultra processor and the detachable Lenovo Duet Gen 9, and notes that Windows on Arm
-    systems are available from multiple vendors. After completing the steps, learners can identify
+    systems are available from multiple vendors. Afterward, you can identify
     suitable Arm-based laptops or desktops and make an informed choice aligned with their target
     platforms.
   faqs:
@@ -46,7 +46,7 @@ generated_summary_faq:
   - question: Which operating system should I use for Arm software development on a laptop or
       desktop?
     answer: >-
-      Choose the operating system that matches where your software will run. The path covers options
+      Choose the operating system that matches where your software will run. You'll compare options
       on Windows, ChromeOS, and Linux so you can align development with your target environment.
   - question: Can I use a Chromebook for Arm-based development, and which models are mentioned?
     answer: >-
@@ -90,4 +90,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

@@ -13,11 +13,54 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-11T16:19:17Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: d25d6adb2606d2be5ff6fa0e8b5d65f83d67c14bd8fa12b86b014c41bad8cb77
+  summary_generated_at: '2026-08-11T16:19:17Z'
+  summary_source_hash: d25d6adb2606d2be5ff6fa0e8b5d65f83d67c14bd8fa12b86b014c41bad8cb77
+  faq_generated_at: '2026-08-11T16:19:17Z'
+  faq_source_hash: d25d6adb2606d2be5ff6fa0e8b5d65f83d67c14bd8fa12b86b014c41bad8cb77
+  summary: >-
+    You'll build and run a native .NET 6 WPF application on Windows
+    on Arm. First, you'll configure Visual Studio
+    2022 by adding the .NET desktop development workload and create a WPF project that targets .NET 6. Then, you'll build and launch it on a Windows on Arm device or virtual machine. You'll make the required
+    setup decisions in the Visual Studio Installer and validate the target framework in project
+    settings. You'll finish with a WPF application that runs natively on Windows on Arm,
+    demonstrating the end-to-end workflow with .NET and Visual Studio.
+  faqs:
+  - question: Where do I enable the .NET desktop development workload?
+    answer: >-
+      Open the Windows **Start** menu, launch Visual Studio Installer, and select **Modify**. On the
+      **Workloads** tab, select **.NET desktop development** and apply the changes.
+  - question: Which version of Visual Studio should I use?
+    answer: >-
+      Use Visual Studio 2022 or higher. Make sure the .NET desktop development workload is installed
+      before creating the project.
+  - question: Can I complete this on a virtual machine instead of physical hardware?
+    answer: >-
+      Yes. You can use a Windows on Arm virtual machine for this guide.
+  - question: How do I confirm the project targets .NET 6?
+    answer: >-
+      Open the project properties in Visual Studio and check **Target Framework**. It should list
+      `.NET 6`.
+  - question: What result should I expect after building and running the WPF app?
+    answer: >-
+      The solution builds successfully and the WPF application launches on your Windows on Arm
+      system. You should see the app start without build errors.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
-rerun_summary: true
-rerun_faqs: true
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -46,4 +89,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

@@ -14,11 +14,56 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm laptop with WindowsPerf, Windows Performance Analyzer (WPA), and the WPA plugin installed.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-11T16:27:59Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 61b40f83405e1a04315a61c2dd66a56e6604d3fee26d833039cf392f479b884f
+  summary_generated_at: '2026-08-11T16:27:59Z'
+  summary_source_hash: 61b40f83405e1a04315a61c2dd66a56e6604d3fee26d833039cf392f479b884f
+  faq_generated_at: '2026-08-11T16:27:59Z'
+  faq_source_hash: 61b40f83405e1a04315a61c2dd66a56e6604d3fee26d833039cf392f479b884f
+  summary: >-
+    You'll move WindowsPerf data into WPA using the dedicated WPA
+    plugin on a Windows on Arm system. First, you'll run `wperf stat` to capture
+    data and save the results to a `.json` file with the `--output` option. Then, you'll import that file
+    into WPA. The plugin enables timeline and telemetry visualizations, making it easier
+    to inspect what was recorded and verify that the dataset loads as expected. By the end,you'll
+    understand the workflow from data capture to visualization in WPA and recognize the views
+    provided by the plugin for WindowsPerf data.
+  faqs:
+  - question: How do I generate the `.json` file to import into WPA?
+    answer: >-
+      Run WindowsPerf with the `wperf stat` command on a Windows on Arm system and save the output
+      as a `.json` file using the `--output` option.
+  - question: How do I confirm the WPA plugin is installed correctly?
+    answer: >-
+      Open the WindowsPerf `.json` file in WPA. If the plugin is installed correctly, WPA loads the data and
+      exposes the plugin’s timeline and telemetry visualizations.
+  - question: What result should I expect after I import the JSON into WPA?
+    answer: >-
+      You should see timeline and telemetry data corresponding to the WindowsPerf run. The plugin
+      presents these views inside WPA for inspection.
+  - question: What should I check if WPA fails to open my JSON file?
+    answer: >-
+      Verify the file was created by `wperf stat` on a Windows on Arm machine and saved as `.json`
+      with the `--output` option. Also confirm the WPA plugin is installed using its install guide.
+  - question: How do I view counting timeline data in WPA?
+    answer: >-
+      Collect data with `wperf stat` using the `-t` option, then open the generated `.json` file in
+      WPA. In Graph Explorer, expand **Counting timeline** to view the recorded events by core or event.
+# END generated_summary_faq
+
 author: Alaaeddine Chakroun
 
-generate_summary_faq: true
-rerun_summary: true
-rerun_faqs: true
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -69,4 +114,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
