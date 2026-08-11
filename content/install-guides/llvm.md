@@ -179,7 +179,7 @@ InstalledDir: /usr/bin
 
 ### Build from source {#build-bolt-source}
 
-To build and install BOLT from source code, follow these steps:
+To build and install from source code, follow these steps:
 
 1. Clone the repository:
 
@@ -187,7 +187,7 @@ To build and install BOLT from source code, follow these steps:
 git clone https://github.com/llvm/llvm-project.git
 ```
 
-2. Build BOLT:
+2. Configure a build:
 
 ```bash
 cd llvm-project
@@ -196,7 +196,7 @@ cd build
 cmake -G Ninja ../llvm -DLLVM_TARGETS_TO_BUILD="X86;AArch64" -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_ASSERTIONS=ON -DLLVM_ENABLE_PROJECTS="bolt;clang;lld"
 ```
 
-Run BOLT:
+Build a tool. For example, BOLT:
 
 ```console
 ninja bolt
@@ -205,14 +205,14 @@ ninja bolt
 The build time depends on your machine configuration and might take several minutes to complete.
 {{% /notice %}}
 
-3. Add the path to BOLT in your `.bashrc` file:
+3. Add the path to the build directory in your `.bashrc` file:
 
 ```bash
 echo 'export PATH="$PATH:$HOME/llvm-project/build/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-After the build completes, continue to [verify the BOLT tools](#verify-bolt-tools).
+After the build completes, verify that the tools work as expected. To verify BOLT, continue to [verify the BOLT tools](#verify-bolt-tools).
 
 ## Install BOLT using a package manager {#install-bolt-packages}
 
