@@ -15,11 +15,11 @@ The following sequence shows the process. The previous source and current source
 
 First, compare the two rendered source frames with the generated intermediate frame:
 
-![Previous, current, and InterpolatedRT comparison#center](./images/lighting_change/previous_current_interpolated_row.png "Previous, current, and InterpolatedRT")
+![Previous, current, and InterpolatedRT comparison#center](./images/lighting_change/previous_current_interpolated_row.webp "Previous, current, and InterpolatedRT")
 
 | Previous source | Current source | Generated area | Final `InterpolatedRT` |
 | --- | --- | --- | --- |
-| ![Previous rendered source frame used as an input to NFRU interpolation#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/01_previous_interpolation_source.png "Previous interpolation source") | ![Current rendered source frame used as an input to NFRU interpolation#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/03_current_interpolation_source.png "Current interpolation source") | ![Dynamic region selected by the mask for generated content#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/05_generated_area_selected_by_mask.png "Generated area selected by mask") | ![Final InterpolatedRT showing the generated region highlighted#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/07_final_interpolated_rt_highlighted.png "Final InterpolatedRT") |
+| ![Previous rendered source frame used as an input to NFRU interpolation#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/01_previous_interpolation_source.webp "Previous interpolation source") | ![Current rendered source frame used as an input to NFRU interpolation#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/03_current_interpolation_source.webp "Current interpolation source") | ![Dynamic region selected by the mask for generated content#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/05_generated_area_selected_by_mask.webp "Generated area selected by mask") | ![Final InterpolatedRT showing the generated region highlighted#center](./images/lighting_change/interpolated_rt_generation_steps_no_text/07_final_interpolated_rt_highlighted.webp "Final InterpolatedRT") |
 
 Lighting changes matter because optical flow is estimated from image changes. If color changes because geometry moved, optical flow can help interpolation.
 
@@ -29,7 +29,7 @@ If color changes mainly because illumination changed, optical flow might interpr
 
 Not every lighting-heavy region produces a visible artifact. The moving character in this example is interpolated naturally even though it contains bright emissive detail, translucent effects, and fine edges. The core glow stays centered, the ring keeps a plausible shape, and the surrounding lighting remains coherent. Minor softness around the character reads as motion blur or glow during playback.
 
-![Marked moving character lighting area in the generated frame, with a zoomed inset showing a natural interpolated result#center](./images/lighting_change/zoom_in_marked_issue_generated_1.png "Natural-looking generated moving character")
+![Marked moving character lighting area in the generated frame, with a zoomed inset showing a natural interpolated result#center](./images/lighting_change/zoom_in_marked_issue_generated_1.webp "Natural-looking generated moving character")
 
 This result is acceptable because the important visual structure remains stable. The generated frame doesn't need to reproduce a physically exact lighting state for every pixel. Instead, it needs to preserve perceived shape, brightness, and motion without drawing attention to ghosting or edge breakup.
 
@@ -39,9 +39,9 @@ The screen corner is a more difficult case because it sits at the edge of the sc
 
 The generated frame is mostly close to the current frame. However, unstable edge samples can leave a semi-transparent remnant from the previous frame. This appears as ghosting or smearing in the highlighted area.
 
-![Generated NFRU frame with the lower-right lighting-change artifact marked by a green rectangle#center](./images/lighting_change/focus_area_highlight.png "Lower-right lighting-change artifact")
+![Generated NFRU frame with the lower-right lighting-change artifact marked by a green rectangle#center](./images/lighting_change/focus_area_highlight.webp "Lower-right lighting-change artifact")
 
-![Zoomed comparison of the lower-right lighting-change region, showing previous, current, InterpolatedRT, and difference views#center](./images/lighting_change/right_bottom_crop_analysis.png "Lighting-change crop comparison")
+![Zoomed comparison of the lower-right lighting-change region, showing previous, current, InterpolatedRT, and difference views#center](./images/lighting_change/right_bottom_crop_analysis.webp "Lighting-change crop comparison")
 
 The artifact might be related to unstable blend parameters, rather than optical flow alone. NFRU creates an intermediate parameter resource, `r_out_params_tensor`, that stores per-pixel values. The postprocess pass converts these values into blend weights that control how much each warped source sample contributes to the final `InterpolatedRT`.
 

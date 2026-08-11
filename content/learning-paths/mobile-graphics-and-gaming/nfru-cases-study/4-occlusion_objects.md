@@ -32,7 +32,7 @@ The occlusion-in generation sequence shows how the previous and current interpol
 
 The marked close-up highlights a small boundary artifact in the generated frame. The main occluded area remains stable, while the visible issue is limited to slight blending and softness along the foreground edge.
 
-![Close-up of the occlusion-in artifact with the problem area marked, showing blended pixels along the foreground edge in the generated frame#center](./images/occlusion_in/zoom_in_marked_issue_generated.png "Marked occlusion-in artifact")
+![Close-up of the occlusion-in artifact with the problem area marked, showing blended pixels along the foreground edge in the generated frame#center](./images/occlusion_in/zoom_in_marked_issue_generated.webp "Marked occlusion-in artifact")
 
 ## Analyze occlusion-out artifacts
 
@@ -44,7 +44,7 @@ The occlusion-out generation sequence shows how the interpolated frame handles b
 
 The marked close-up shows mild softness at the boundary. The background reconstruction is generally clean, with minor smearing limited to the edge where the foreground object uncovers the background.
 
-![Close-up of the occlusion-out boundary artifact with the problem area marked, showing slight smearing where background is revealed#center](./images/occlusion_out/zoom_in_marked_issue_generated.png "Marked occlusion-out artifact")
+![Close-up of the occlusion-out boundary artifact with the problem area marked, showing slight smearing where background is revealed#center](./images/occlusion_out/zoom_in_marked_issue_generated.webp "Marked occlusion-out artifact")
 
 ## What you've learned and what's next
 

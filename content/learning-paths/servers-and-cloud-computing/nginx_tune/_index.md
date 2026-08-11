@@ -74,7 +74,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Web
 platforms:
-  - Arm AGI
+  - Arm AGI CPU
   - AWS
   - Microsoft Azure
   - Google Cloud

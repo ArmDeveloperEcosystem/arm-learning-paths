@@ -24,7 +24,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Performance and Architecture
 platforms:
-  - Arm AGI
+  - Arm AGI CPU
   - AWS
   - Microsoft Azure
   - Google Cloud

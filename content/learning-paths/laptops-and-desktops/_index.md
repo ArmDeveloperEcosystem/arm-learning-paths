@@ -13,14 +13,14 @@ pinned_learning_paths:
 operatingsystems_filter:
 - Android: 3
 - ChromeOS: 2
-- Linux: 49
+- Linux: 50
 - macOS: 16
 - Windows: 50
 subjects_filter:
 - CI-CD: 7
 - Containers and Virtualization: 8
 - Migration to Arm: 30
-- ML: 14
+- ML: 15
 - Performance and Architecture: 30
 subtitle: Build native Windows on Arm applications that are fast and efficient.
 title: Laptops and Desktops
@@ -31,7 +31,7 @@ tools_software_languages_filter:
 - Arm Performance Libraries: 2
 - Arm64EC: 1
 - Assembly: 1
-- Bash: 5
+- Bash: 6
 - C: 12
 - CCA: 1
 - Clang: 13
@@ -57,8 +57,8 @@ tools_software_languages_filter:
 - Hyper-V: 1
 - i3: 1
 - Intrinsics: 1
-- IsaacLab: 1
-- IsaacSim: 1
+- IsaacLab: 2
+- IsaacSim: 2
 - JavaScript: 2
 - KleidiCV: 1
 - Kubernetes: 1
@@ -84,7 +84,7 @@ tools_software_languages_filter:
 - PGO: 1
 - PowerShell: 1
 - Pytest: 1
-- Python: 19
+- Python: 20
 - PyTorch: 1
 - QEMU: 1
 - Qt: 2
