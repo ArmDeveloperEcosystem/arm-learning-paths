@@ -77,7 +77,7 @@ sudo apt install wget xz-utils -y
 ```
 
 {{% notice Note %}}
-The following commands for installing from a release use LLVM version 22.1.8. To install a different version, replace the filename in the commands below. For the latest releases, see [LLVM Project releases](https://github.com/llvm/llvm-project/releases).
+The following commands for installing from a release use LLVM version 22.1.8. To install a different version, replace the filename in the commands. For the latest releases, see [LLVM Project releases](https://github.com/llvm/llvm-project/releases).
 {{% /notice %}}
 
 The commands extract LLVM to `$HOME/toolchain`. To install LLVM in a different location, adjust the extraction path and update the PATH environment variable accordingly.

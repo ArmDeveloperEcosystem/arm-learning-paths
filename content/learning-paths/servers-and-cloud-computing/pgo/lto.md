@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## What LTO is
 
-Link-Time Optimization (LTO) enables optimization across source file boundaries during the link stage. Without LTO, the compiler optimizes each source file independently before the linker combines the resulting object files. As a result, the optimizer can't make optimization decisions based on the whole program.
+Link-time optimization (LTO) enables optimization across source file boundaries during the link stage. Without LTO, the compiler optimizes each source file independently before the linker combines the resulting object files. As a result, the optimizer can't make optimization decisions based on the whole program.
 
 For more information, see the [LLVM Link Time Optimization](https://llvm.org/docs/LinkTimeOptimization.html) design documentation.
 

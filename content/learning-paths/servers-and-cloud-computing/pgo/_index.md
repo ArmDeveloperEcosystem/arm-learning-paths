@@ -1,11 +1,10 @@
 ---
-title: Optimize AArch64 code with LLVM Link-Time Optimization and Profile-Guided Optimization
+title: Optimize AArch64 code with LLVM link-time optimization and profile-guided optimization
     
 description: Build and apply LLVM LTO, sample-based PGO, frontend PGO, IR-PGO, and CSIR-PGO workflows with Clang to optimize an AArch64 C++ application.
 minutes_to_complete: 45
 
-who_is_this_for: This is an introductory topic for developers who compile C or C++ applications on AArch64 Linux and want to use Link-Time Optimization (LTO) with Profile-Guided Optimization (PGO).
-
+who_is_this_for: This is an introductory topic for developers who compile C or C++ applications on AArch64 Linux and want to use link-time optimization (LTO) with profile-guided optimization (PGO).
 
 learning_objectives:
     - Understand how LTO and PGO guide LLVM optimizations.
@@ -15,7 +14,7 @@ learning_objectives:
 
 
 prerequisites:
-    - An AArch64 Linux system with LLVM installed. You need Clang, LLD, `llvm-bcanalyzer`, `llvm-profdata`, `llvm-profgen`, and `llvm-readelf` in your `PATH`. For setup instructions, see [LLVM toolchain for Linux on Arm](/install-guides/llvm/).
+    - An AArch64 Linux system with LLVM installed. You need Clang, LLD, `llvm-bcanalyzer`, `llvm-profdata`, `llvm-profgen`, and `llvm-readelf` in your `PATH`. For setup instructions, see the [LLVM toolchain for Linux on Arm](/install-guides/llvm/) install guide.
     - For the sample PGO workflow based on Branch Record Buffer Extension (BRBE), a processor that implements the BRBE, Linux kernel 6.17 or later, and Linux `perf`. Other sample-based PGO workflows can use sources such as Statistical Profiling Extension (SPE) or Performance Monitoring Unit (PMU) events and have different requirements.
 
 # START generated_summary_faq

@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## What IR-PGO is
 
-Intermediate Representation-level Profile-Guided Optimization (IR-PGO) adds counters to LLVM IR before LLVM runs its optimization passes. The counters collect execution frequencies during the training run.
+Intermediate representation-level profile-guided optimization (IR-PGO) adds counters to LLVM IR before LLVM runs its optimization passes. The counters collect execution frequencies during the training run.
 
-Compared with FE-PGO, IR-PGO usually has lower instrumentation overhead and creates smaller raw profiles. IR-PGO is generally the better instrumentation-based choice for optimization.
+Compared with frontend PGO (FE-PGO), IR-PGO usually has lower instrumentation overhead and creates smaller raw profiles. IR-PGO is generally the better instrumentation-based choice for optimization.
 
 ## Build the instrumented binary
 

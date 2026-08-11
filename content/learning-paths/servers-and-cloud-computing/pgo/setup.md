@@ -58,7 +58,7 @@ llvm-profgen --version
 llvm-readelf --version
 ```
 
-For sample-based Profile-Guided Optimization (S-PGO), also check that `perf` is available:
+For sample-based profile-guided optimization (S-PGO), also check that `perf` is available:
 
 ```bash
 perf --version

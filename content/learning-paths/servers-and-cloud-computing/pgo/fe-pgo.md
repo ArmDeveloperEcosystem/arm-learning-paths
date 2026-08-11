@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## What FE-PGO is
 
-Frontend Profile-Guided Optimization (FE-PGO) adds counters before Clang lowers the source code to LLVM intermediate representation (IR). The counters collect execution frequencies while the instrumented program runs. The resulting profile maps closely to source-level constructs.
+Frontend profile-guided optimization (FE-PGO) adds counters before Clang lowers the source code to LLVM intermediate representation (IR). The counters collect execution frequencies while the instrumented program runs. The resulting profile maps closely to source-level constructs.
 
-Use FE-PGO when source-level profile information is important. For performance-focused PGO, IR-PGO and CSIR-PGO are usually better defaults and are covered next.
+Use FE-PGO when source-level profile information is important. For performance-focused PGO, IR-PGO and context-sensitive IR-PGO (CSIR-PGO) are usually better defaults.
 
 ## Build the instrumented binary
 

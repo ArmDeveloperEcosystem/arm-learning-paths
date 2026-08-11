@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## What CSIR-PGO is
 
-Context-sensitive Intermediate Representation-level Profile-Guided Optimization (CSIR-PGO) extends IR-PGO by adding a second, context-sensitive profiling pass.
+After an initial intermediate representation-level profile-guided optimization (IR-PGO) build, context-sensitive IR-PGO (CSIR-PGO) adds a second, context-sensitive profiling pass.
 
 The first pass is the standard IR-PGO instrumentation pass. The second pass instruments the program after inlining, enabling LLVM to distinguish execution counts from different calling contexts.
 
