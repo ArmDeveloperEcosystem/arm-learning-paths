@@ -1,16 +1,17 @@
 ---
-title: Optimize with IR-PGO
+title: Optimize AArch64 code with IR-PGO
+description: Instrument an AArch64 binary at the LLVM IR level, merge and inspect its profile, and build an optimized binary with IR-PGO and LTO.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is IR-PGO?
+## What IR-PGO is
 
-IR-level PGO (IR-PGO) adds counters to LLVM intermediate representation before LLVM runs its optimization passes. The counters collect execution frequencies during the training run.
+Intermediate representation-level profile-guided optimization (IR-PGO) adds counters to LLVM IR before LLVM runs its optimization passes. The counters collect execution frequencies during the training run.
 
-Compared with FE-PGO, IR-PGO usually has lower instrumentation overhead and creates smaller raw profiles. It is generally the better instrumentation-based choice for optimization.
+Compared with frontend PGO (FE-PGO), IR-PGO usually has lower instrumentation overhead and creates smaller raw profiles. IR-PGO is generally the better instrumentation-based choice for optimization.
 
 ## Build the instrumented binary
 
@@ -38,12 +39,12 @@ ls prof/ir/*.profraw
 
 With `-fprofile-generate=prof/ir`, Clang writes a uniquely named raw profile in the specified directory. Multiple training runs or processes can create or update profiles there without clobbering unrelated profile data. For more information, see [Clang profile filename patterns](https://clang.llvm.org/docs/UsersManual.html#profiling-with-instrumentation).
 
-Before Clang can use the profile during an optimized build, merge the raw profiles with `llvm-profdata`. This step also converts them to the `.profdata` format used during optimization.
-
+Before Clang can use the profile during an optimized build, merge the raw profiles with `llvm-profdata`:
 
 ```bash
 llvm-profdata merge prof/ir -output=prof/ir.profdata
 ```
+The merge step also converts the profiles to the `.profdata` format used during optimization.
 
 Inspect the execution counts recorded for `sort_array`:
 
@@ -85,7 +86,6 @@ Run the optimized binary:
 ```bash
 ./out/bsort.irpgo.opt
 ```
-
 
 ## What you've accomplished and what's next
 
