@@ -7,11 +7,13 @@ minutes_to_complete: 10
 who_is_this_for: Android application developers who want to learn how to use Frame Advisor.
 
 learning_objectives: 
-    - Capture data from a significant frame in your application
-    - Find inefficiencies in the application with Frame Advisor
+    - Capture data from a significant frame in your Android application
+    - Inspect draw calls for rendering inefficiencies
+    - Use the Render Graph to analyze how the frame is constructed
+    - Analyze mesh geometry for inefficiencies
 
 prerequisites:
-    - An Android device. These [devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) have been tested internally within Arm and confirmed to work with Arm Performance Studio.
+    - An Android device. These [Arm Performance Studio supported devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) have been tested internally within Arm and confirmed to work with Arm Performance Studio.
     - Arm Performance Studio supports applications built with OpenGL ES versions 2.0 to 3.2 or Vulkan versions 1.0 to 1.2. For OpenGL ES applications, your device must be running Android 10 or later. For Vulkan applications, your device must be running Android 9 or later.
     - A debuggable build of your application. 
     - Download and install Arm Performance Studio from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It is supported on Windows, Linux, and macOS host platforms.
