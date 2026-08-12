@@ -8,7 +8,7 @@ layout: learningpathall
 ---
 ## Inspect the Render Graph
 
-The **Render Graph** in Frame Advisor shows a visualization of the rendering operations that make up the frame. It shows how data flows between render passes as well as how resources such as textures are produced and consumed. Use the **Render Graph** to find render passes, input or output attachments that are not used in the final output, and which could be removed.
+The **Render Graph** in Frame Advisor shows a visualization of the rendering operations that make up the frame. It shows how data flows between render passes as well as how resources such as textures are produced and consumed. Use the **Render Graph** to find render passes, input or output attachments that are not used in the final output, and which can be removed.
 
 Render passes flow from left to right. The render pass that outputs to the swapchain is the final render pass that outputs to the screen.
 

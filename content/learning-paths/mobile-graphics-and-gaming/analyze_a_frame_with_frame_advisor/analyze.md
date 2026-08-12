@@ -20,9 +20,9 @@ When the analysis completes, you'll see Frame Advisor's **Analysis** screen. To 
 
     ![Framebuffer changes as draw calls are stepped through#center](fa_step_drawcalls.gif "Stepping through draw calls in Frame Advisor")
 
-    Draw calls are expensive for the CPU to process, so reduce their number where possible. Look for draw calls that don't render visible changes to the framebuffer. A draw that makes no visible change could be outside the frustum or behind another object. Use software culling techniques to eliminate these draws.
+    Draw calls are expensive for the CPU to process, so reduce their number where possible. Look for draw calls that don't render visible changes to the framebuffer. A draw that makes no visible change can be outside the frustum or behind another object. Use software culling techniques to eliminate these draws.
 
-    Some objects might be drawn with a large number of primitives. As an object is drawn, compare its level of detail with its size and position on screen. Using simpler meshes, particularly for objects far from the camera, could significantly increase performance.
+    Some objects might be drawn with a large number of primitives. As an object is drawn, compare its level of detail with its size and position on screen. Using simpler meshes, particularly for objects far from the camera, can significantly increase performance.
     
 1. Look for many identical objects being drawn individually, such as these pillars. To reduce the number of draw calls, consider batching multiple objects into a single combined mesh or using an instanced draw call.
 
