@@ -48,7 +48,7 @@ generated_summary_faq:
       The workflow run shows a success status, and the logs for the build and run steps complete
       without errors. If the workflow includes a publish step, you'll also see published outputs
       listed in the run summary.
-  - question: What should I check if the workflow does not start after pushing?
+  - question: What should I check if the workflow doesn't start after pushing?
     answer: >-
       Confirm you pushed to the main branch and that `.github/workflows/dotnet_sandbox.yml` exists
       in the repository. If needed, start the workflow manually from the **Actions** tab.

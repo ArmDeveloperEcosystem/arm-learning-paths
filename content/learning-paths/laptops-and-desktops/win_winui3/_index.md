@@ -54,7 +54,7 @@ generated_summary_faq:
       Compare the displayed times between the x64 and ARM64 runs.
   - question: I don’t see ARM64 in the architecture list. What should I check?
     answer: >-
-      Confirm you are using a Windows on Arm device or a supported Windows on Arm virtual machine
+      Confirm you're using a Windows on Arm device or a supported Windows on Arm virtual machine
       and that the required Visual Studio workloads from the prerequisites are installed.
 # END generated_summary_faq
 

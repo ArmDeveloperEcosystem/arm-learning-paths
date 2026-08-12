@@ -40,7 +40,7 @@ generated_summary_faq:
   - question: How do I know the WindowsPerf Visual Studio extension is installed correctly?
     answer: >-
       In Visual Studio 2022, the **View** menu should include **Counting Settings** and **Sampling Explorer**.
-      If these entries are missing, check that the extension is installed and that you are running
+      If these entries are missing, check that the extension is installed and that you're running
       Visual Studio 2022 on Windows on Arm.
   - question: Where do I configure which events are counted before collecting data?
     answer: >-

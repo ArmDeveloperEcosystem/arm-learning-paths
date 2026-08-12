@@ -48,12 +48,12 @@ generated_summary_faq:
       values.
   - question: What should I check if FFmpeg fails to encode or decode the sample video?
     answer: >-
-      Verify the input and output file paths and confirm the arguments match the media you are
+      Verify the input and output file paths and confirm the arguments match the media you're
       using. Ensure `exePath` points to a valid FFmpeg or FFplay binary and review the console output
       for specific errors.
   - question: Where does the script save the CSV files and what should be in them?
     answer: >-
-      The output file name and path are defined in each script; open the script to confirm or
+      The output file name and path are defined in each script. Open the script to confirm or
       change the location. Expect timestamped rows with the recorded metrics, such as CPU and
       memory for resource sampling, or battery-related fields for power sampling.
   - question: How do I run a like-for-like comparison between the Arm64 and x86_64 builds?

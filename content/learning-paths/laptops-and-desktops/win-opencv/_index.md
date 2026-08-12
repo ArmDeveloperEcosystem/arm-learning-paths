@@ -48,12 +48,12 @@ generated_summary_faq:
       the CMake command-line interface.
   - question: How do I know my build worked, and where are the outputs?
     answer: >-
-      A successful run shows CMake configuration and compilation completing without errors and
-      produces OpenCV libraries plus a test application in the build directory you created. Building
+      A successful run shows CMake configuration and compilation completing without errors. The build
+      produces OpenCV libraries and a test application in the build directory that you created. Building
       the test program against OpenCV confirms the environment is set up correctly.
   - question: If I follow the MSVC path, do I need Visual Studio installed?
     answer: >-
-      Yes. Use Visual Studio 2022 or later for the MSVC flow; the instructions were tested with
+      Yes. Use Visual Studio 2022 or later for the MSVC flow. The instructions were tested with
       Visual Studio 2022. If you choose Clang, follow the Clang section and its tool setup.
 # END generated_summary_faq
 

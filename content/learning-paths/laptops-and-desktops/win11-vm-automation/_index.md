@@ -52,7 +52,7 @@ generated_summary_faq:
     answer: >-
       Run `./run-win11-vm.sh <vm-directory>`. The script checks if the VM is running, starts it
       in headless mode if needed, and connects over RDP using Remmina.
-  - question: What should I check if the run script does not open an RDP session?
+  - question: What should I check if the run script doesn't open an RDP session?
     answer: >-
       Confirm you used the same VM directory you created earlier and that the VM files exist there.
       Re-run the launch script; it detects if the VM is already running and will reconnect if

@@ -45,7 +45,7 @@ generated_summary_faq:
       Build the projects with an Arm64 target and run the resulting console app on Windows on
       Arm. If the app starts and calls into the DLL without loader errors, the artifacts match
       the expected architecture.
-  - question: What should I check if the console app cannot load the DLL after retargeting?
+  - question: What should I check if the console app can't load the DLL after retargeting?
     answer: >-
       Verify that both the DLL and console app are built for the same architecture (Arm64). Also
       confirm the DLL is in the app’s runtime search path when you launch the executable.
