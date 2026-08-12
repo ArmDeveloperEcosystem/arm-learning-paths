@@ -20,8 +20,6 @@ prerequisites:
     - Download and install [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html). Required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb).
 
 # START generated_summary_faq
-
-# START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
   generated_at: '2026-08-05T14:50:36Z'
