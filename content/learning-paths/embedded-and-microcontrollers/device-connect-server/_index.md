@@ -20,11 +20,56 @@ prerequisites:
     - A development machine for the secondary device and Python client
     - Basic familiarity with Python and the command line
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-12T20:03:14Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: ff80157611a84755964dc9809f497b46bdb352ffeb5f99b0df5bd97ce8ae4f76
+  summary_generated_at: '2026-08-12T20:03:14Z'
+  summary_source_hash: ff80157611a84755964dc9809f497b46bdb352ffeb5f99b0df5bd97ce8ae4f76
+  faq_generated_at: '2026-08-12T20:03:14Z'
+  faq_source_hash: ff80157611a84755964dc9809f497b46bdb352ffeb5f99b0df5bd97ce8ae4f76
+  summary: >-
+    You'll extend a Device Connect mesh across networks with a server and NATS authentication.
+    You'll provision a private tenant, download device credentials, and commission primary and
+    secondary devices. You'll discover devices and invoke RPCs from Python to verify reachability,
+    then connect a Strands AI agent so devices and agents share one authenticated registry.
+  faqs:
+  - question: How do I know my tenant is ready before I commission devices?
+    answer: >-
+      After you sign in to the Device Connect portal, a private tenant is created. You should
+      be able to download per-device NATS credentials and use them to commission a device. If
+      the Python client can discover that device, your tenant is ready.
+  - question: Which credentials should I use on the primary and secondary devices?
+    answer: >-
+      Use the per-device NATS credentials you download from the portal for each specific device.
+      Don't reuse a single credential across multiple devices.
+  - question: What result should I expect when discovery works from the Python client?
+    answer: >-
+      The client lists commissioned devices in your tenant and can invoke their RPCs. Successful
+      calls confirm that routing over the Device Connect server and NATS is working across networks.
+  - question: What should I check if the client cannot discover a commissioned device?
+    answer: >-
+      Verify the device was commissioned to the same tenant and is running with the correct NATS
+      credentials. Also confirm the client is targeting that tenant and repeat discovery after
+      the device is online.
+  - question: How do I connect a Strands AI agent to the same tenant?
+    answer: >-
+      Configure the agent with the tenant details and portal-issued credentials, then start it.
+      It should appear under the tenant’s namespace and be able to discover and invoke commissioned
+      devices like the Python client.
+# END generated_summary_faq
+
 author:
     - Kavya Sri Chennoju
     - Annie Tallund
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

@@ -19,9 +19,52 @@ prerequisites:
   - The [Arduino IDE](/install-guides/arduino-pico/) with the RP2040 board support package installed on your computer.
   - An [Arduino Nano RP2040 Connect board](https://store.arduino.cc/products/arduino-nano-rp2040-connect-with-headers).
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-12T20:04:39Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 5462e69e9e1289cb61815d66c308a94cfae0bbfa690aca19adf07290c6f24e9d
+  summary_generated_at: '2026-08-12T20:04:39Z'
+  summary_source_hash: 5462e69e9e1289cb61815d66c308a94cfae0bbfa690aca19adf07290c6f24e9d
+  faq_generated_at: '2026-08-12T20:04:39Z'
+  faq_source_hash: 5462e69e9e1289cb61815d66c308a94cfae0bbfa690aca19adf07290c6f24e9d
+  summary: >-
+    You'll move from Edge AI and TinyML concepts to a voice-command prototype on an Arduino Nano
+    RP2040 Connect. You'll collect audio, train a classifier in Edge Impulse, and export its Arduino
+    library. You'll add the library to a sketch, flash the board, and validate on-device inference
+    by speaking commands that control an LED.
+  faqs:
+  - question: Which Edge Impulse project type should I choose for voice commands?
+    answer: >-
+      Create an audio classification project in Edge Impulse. Define classes for the words you
+      plan to recognize, such as “on” and “off,” and apply preprocessing before training.
+  - question: What do I need to download from Edge Impulse for the Arduino sketch?
+    answer: >-
+      Download the Arduino library generated from your Edge Impulse project. Add this library
+      to your sketch so the trained model and processing steps are available on the device.
+  - question: Do I need an internet connection on the board while the model runs?
+    answer: >-
+      No. Inference runs locally on the device, which is a core principle of Edge AI. You only
+      need connectivity when using Edge Impulse Studio to build and export the model.
+  - question: What result should I expect after flashing the sketch?
+    answer: >-
+      The board performs real-time audio inference and controls an LED. When it recognizes the
+      trained words “on” and “off,” the LED changes state.
+  - question: The LED does not change when I say the command—what should I check?
+    answer: >-
+      Verify that the correct Edge Impulse library is included, the build succeeds, and the uploaded
+      firmware matches your project. Confirm the labels used in the sketch match the classes you
+      trained, then rebuild and reflash.
+# END generated_summary_faq
+
 author: Bright Edudzi Gershon Kordorwu
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -58,4 +101,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

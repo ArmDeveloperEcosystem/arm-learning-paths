@@ -16,9 +16,51 @@ prerequisites:
     - Familiarity with C programming on microcontrollers
     - STM32 B-L475E-IOT01A2 board
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-12T20:05:24Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: d2b95465621235e0a43ded6268ba954cc32865c4a53c89667881ccfbe4139074
+  summary_generated_at: '2026-08-12T20:05:24Z'
+  summary_source_hash: d2b95465621235e0a43ded6268ba954cc32865c4a53c89667881ccfbe4139074
+  faq_generated_at: '2026-08-12T20:05:24Z'
+  faq_source_hash: d2b95465621235e0a43ded6268ba954cc32865c4a53c89667881ccfbe4139074
+  summary: >-
+    You'll build a CIFAR-10 convolutional neural network in Jupyter and deploy it to an STM32
+    B-L475E-IOT01A2 board. You'll prepare an Anaconda environment, train the model, and import it
+    into STM32Cube.AI within STM32CubeMX. You'll deploy the generated project and use a Python
+    utility to send images to the board and exercise the classifier.
+  faqs:
+  - question: How do I launch the Jupyter Notebook used for training?
+    answer: >-
+      Open **Anaconda Prompt** and run `jupyter notebook`. In the browser, navigate to the extracted
+      project files and open `lab.ipynb`.
+  - question: How do I know a notebook cell has finished running?
+    answer: >-
+      Check the indicator to the left of the cell: `In[]` before running, `In[*]` while running,
+      and `In[N]` (a number) when complete.
+  - question: Which STM32Cube.AI version should I select in STM32CubeMX?
+    answer: >-
+      Select **X-CUBE-AI 7.0.0**, which matches the version used by the provided testing tool. Later
+      versions may not connect successfully.
+  - question: What should I do before running the Python test tool against the board?
+    answer: >-
+      Activate the Conda environment with `conda activate ml_lab` and install `opencv-python`,
+      `protobuf==3.20`, and `tqdm==4.50.2`. Then go to the working folder's `Misc` directory.
+  - question: How do I start the test tool and what if the board is not detected?
+    answer: >-
+      From the `Misc` folder, run `python ui_python_ai_runner.py`. If the board isn't detected,
+      press the black button on the board to reset and try again.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -49,4 +91,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
