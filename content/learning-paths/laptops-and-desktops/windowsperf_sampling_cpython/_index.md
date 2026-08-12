@@ -44,7 +44,7 @@ generated_summary_faq:
       is concentrated.
   - question: Which CPU core should I pin `python_d.exe` to?
     answer: >-
-      Any single core is acceptable; choose one and use it consistently across runs. Pinning reduces
+      Any single core is acceptable. Choose one and use it consistently across runs. Pinning reduces
       variability and makes results easier to compare.
   - question: How do I launch CPython with WindowsPerf without starting it first?
     answer: >-
@@ -58,7 +58,7 @@ generated_summary_faq:
   - question: What should I look for after running the Googolplex calculation?
     answer: >-
       Expect a sustained workload that exercises integer computation in CPython. Sampling output
-      should attribute activity to hot locations in the CPython runtime image; if you see only
+      should attribute activity to hot locations in the CPython runtime image. If you see only
       totals, you ran counting instead of sampling.
 # END generated_summary_faq
 

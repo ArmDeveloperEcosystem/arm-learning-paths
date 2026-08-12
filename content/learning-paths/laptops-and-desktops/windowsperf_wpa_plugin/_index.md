@@ -1,5 +1,5 @@
 ---
-title: Get started with the Windows Performance Analyzer (WPA) plugin for WindowsPerf
+title: Get started with the Windows Performance Analyzer plugin for WindowsPerf
 
 description: Learn how to import WindowsPerf data in Windows Performance Analyzer (WPA) and visualize timeline and telemetry data using the WPA plugin.
 
@@ -53,7 +53,7 @@ generated_summary_faq:
   - question: How do I view counting timeline data in WPA?
     answer: >-
       Collect data with `wperf stat` using the `-t` option, then open the generated `.json` file in
-      WPA. In Graph Explorer, expand **Counting timeline** to view the recorded events by core or event.
+      WPA. In the Graph Explorer section, expand **Counting timeline** to view the recorded events by core or event.
 # END generated_summary_faq
 
 author: Alaaeddine Chakroun

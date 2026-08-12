@@ -54,13 +54,13 @@ generated_summary_faq:
       `cp /mnt/c/Users/<username>/Downloads/<filename>`. Use SSH only when connecting to WSL from a different machine.
   - question: How do I set XFCE4 as the default desktop for RDP and check that xrdp is ready?
     answer: >-
-      Set the session with `echo xfce4-session > ~/.xsession` and then restart the service with
-      `sudo service xrdp restart`. Check status with `systemctl status xrdp`, and start it if it's not
+      Set the session with `echo xfce4-session > ~/.xsession`, then restart the service with
+      `sudo service xrdp restart`. Check status with `systemctl status xrdp`, and start the service if it's not
       running.
   - question: Which distribution name should I use when restarting WSL after enabling systemd?
     answer: >-
       Use the registered distribution name shown in WSL, such as `Ubuntu-22.04`. Run
-      `wsl --terminate Ubuntu-22.04` followed by `wsl -d Ubuntu-22.04` to restart it with systemd enabled.
+      `wsl --terminate Ubuntu-22.04` followed by `wsl -d Ubuntu-22.04` to restart it with `systemd` enabled.
 # END generated_summary_faq
 
 author: Jason Andrews

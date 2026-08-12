@@ -56,7 +56,7 @@ generated_summary_faq:
   - question: What result should I expect when I run the app under different settings?
     answer: >-
       The **Windows Forms** app launches normally, and the code reports matrix multiplication computation
-      times. Expect timing values you can compare across the configurations you selected.
+      times. Expect timing values that you can compare across the configurations you selected.
 # END generated_summary_faq
 
 author: Dawid Borycki

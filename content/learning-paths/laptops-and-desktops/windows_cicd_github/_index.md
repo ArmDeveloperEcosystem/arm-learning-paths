@@ -38,7 +38,7 @@ generated_summary_faq:
   faqs:
   - question: Why should I create a new GitHub repository for this exercise?
     answer: >-
-      A new repository provides a clean space to test a simple hello world command with GitHub
+      A new repository provides a clean space to test a hello world command with GitHub
       Actions without impacting existing code or workflows.
   - question: Which option should I choose in the repository to start the minimal workflow?
     answer: >-
