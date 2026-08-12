@@ -8,6 +8,8 @@ layout: learningpathall
 ---
 ## Capture a frame for analysis
 
+To capture a frame from your application for analysis, follow these steps:
+
 1. Open Frame Advisor and select **New Trace**.
 
     ![Frame Advisor launch screen with the New Trace control#center](fa_launch_screen.png "Frame Advisor's launch screen")
