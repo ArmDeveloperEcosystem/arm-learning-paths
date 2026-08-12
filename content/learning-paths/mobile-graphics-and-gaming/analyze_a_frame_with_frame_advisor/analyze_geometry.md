@@ -16,7 +16,9 @@ To find geometry-related problems using the view, follow these steps:
 
     ![Content Metrics sorted by descending primitive count#center](fa_content_metrics.png "Sorting Content Metrics view by primitives")
     
-2. Right-click the draw call at the top of the list and choose **Navigate to call**. The complex object is now selected in the **Frame Hierarchy** view and visible in the **Framebuffers** view. The object in the example is the Sphinx model, built using almost 23,000 primitives. This is a high number for a game object on mobile. When you encounter a high number, first determine whether the model can be simplified. Fewer primitives reduce GPU processing cost and memory bandwidth.
+2. Right-click the draw call at the top of the list and choose **Navigate to call**. The complex object is now selected in the **Frame Hierarchy** view and visible in the **Framebuffers** view. 
+
+    The object in the example is the Sphinx model, built using almost 23,000 primitives. This is a high number for a game object on mobile. If you encounter a high number, first determine whether the model can be simplified. Fewer primitives reduce GPU processing cost and memory bandwidth.
 
     ![Selected Sphinx draw call shown in the Frame hierarchy and Framebuffers views#center](fa_sphinx.png "The Sphinx model shown in the Framebuffers view")
 
@@ -48,7 +50,7 @@ To see full descriptions of all the metrics in the **Detailed Metrics** view, us
 
     The report also shows that the temporal and spatial locality figures for the example are very high.  
  
-    Temporal locality shows that, on average, there are over 4000 indices between reuse of an index value. This is much larger than the post-transform cache on many mainstream Arm GPUs, which can store 1024 indices. This means that vertices are likely to be evicted from the cache before an index is reused, resulting in reshading.
+    Temporal locality shows that, on average, there are over 4000 indices between reuse of an index value. This number of indices is much larger than the post-transform cache on many mainstream Arm GPUs, which can store 1024 indices. This means that vertices are likely to be evicted from the cache before an index is reused, resulting in reshading.
     
     Ideally, index temporal locality should be under 500 to maximize the chance of post-transform cache hits. To reduce temporal locality, try reordering the data to move reuses closer together in the index buffer.
 
@@ -60,4 +62,4 @@ To see full descriptions of all the metrics in the **Detailed Metrics** view, us
 
 You've used the Content Metrics view in Frame Advisor to identify inefficient geometry in the captured frame. 
 
-You've learned how to use Frame Advisor to analyze a captured frame. You can use these steps to capture and analyze more frames of your applications.  
+You've learned how to use Frame Advisor to analyze a captured frame. You can use these steps to capture and analyze more frames from your applications.  

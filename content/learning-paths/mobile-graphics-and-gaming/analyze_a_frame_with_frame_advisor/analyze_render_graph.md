@@ -24,7 +24,7 @@ In this example, some render passes have no consumers and don't contribute to th
 
 ![Render Graph highlighting a redundant render pass group with no consumers#center](render_graph_egypt_redundant_rps.webp "Redundant render passes")
 
-These render passes could be removed without affecting the output, saving processing power and bandwidth.
+These render passes can be removed without affecting the output, saving processing power and bandwidth.
 
 ## What you've accomplished and what's next
 
