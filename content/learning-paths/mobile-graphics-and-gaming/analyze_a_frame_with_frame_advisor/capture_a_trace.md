@@ -1,5 +1,5 @@
 ---
-title: Capture a trace
+title: Capture a trace in Frame Advisor
 description: Capture a representative frame from your Android application with Frame Advisor and open it for analysis.
 weight: 3
 
@@ -32,6 +32,8 @@ layout: learningpathall
 
 1. Select **Analyze** to see the results. This might take a few minutes, depending on your content and how many frames you captured.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You've captured a representative frame and opened it for analysis. Next, inspect its draw calls and framebuffer changes.
+You've captured a representative frame and opened it for analysis.
+
+Next, you'll inspect its draw calls and framebuffer changes.

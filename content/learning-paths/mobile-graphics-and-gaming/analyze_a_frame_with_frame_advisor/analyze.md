@@ -1,5 +1,5 @@
 ---
-title: Analyze draw calls
+title: Analyze draw calls in Frame Advisor
 description: Inspect the Frame Advisor hierarchy and framebuffer to identify inefficient draw calls and geometry use.
 weight: 4
 
@@ -8,11 +8,11 @@ layout: learningpathall
 ---
 ## Inspect draw calls
 
-When the analysis completes, you will see Frame Advisor's **Analysis** screen.
+When the analysis completes, you'll see Frame Advisor's **Analysis** screen. To inspect draw calls, follow these steps:
 
 ![Frame Advisor Analysis screen with Frame hierarchy, framebuffer, and metrics panels#center](fa_analysis.webp "Frame Advisor's Analysis screen")
 
-1. Captured frames are listed in the **Frame hierarchy** view. This frame draws over 657,000 primitives using 426 draw calls within 16 render passes.
+1. To view a list of captured frames, expand the **Frame hierarchy** view. The example frame draws over 657,000 primitives using 426 draw calls within 16 render passes.
 
     ![Frame hierarchy showing 16 render passes, 426 draw calls, and 657,414 primitives#center](fa_frame_hierarchy.png "The Frame Hierarchy view in Frame Advisor")
 
@@ -28,6 +28,8 @@ When the analysis completes, you will see Frame Advisor's **Analysis** screen.
 
     ![Repeated pillars appearing through individual draw calls#center](pillars.gif "Framebuffers view in Frame Advisor")
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You've inspected draw calls and framebuffer changes for inefficient rendering behavior. Next, use the Render Graph to analyze frame construction.
+You've inspected draw calls and framebuffer changes for inefficient rendering behavior. 
+
+Next, you'll use the Render Graph to analyze frame construction.

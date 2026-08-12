@@ -1,5 +1,5 @@
 ---
-title: Analyze frame construction with the Render Graph
+title: Analyze frame construction with the Render Graph in Frame Advisor
 description: Use the Render Graph to trace frame construction and locate work that does not contribute to the final output.
 weight: 5
 
@@ -14,18 +14,20 @@ Render passes flow from left to right. The render pass that outputs to the swapc
 
 ![Render Graph showing left-to-right relationships between render passes and resources#center](fa_render_graph_1.1.gif "The Render Graph view")
 
-1. Some output attachments are not used in a future render pass.
+In this example, some output attachments aren't used in a future render pass.
 
-    ![Render Graph showing unused RB1, RB2, RB5, and RB6 output attachments#center](render_graph_egypt_redundant_attachments.png "Redundant output attachments")
+![Render Graph showing unused RB1, RB2, RB5, and RB6 output attachments#center](render_graph_egypt_redundant_attachments.png "Redundant output attachments")
 
-    You should clear or invalidate input and output attachments that are not used to avoid unnecessary memory accesses. If clear or invalidate calls are present within a render pass, they are shown in the **Frame Hierarchy** view.
+You should clear or invalidate input and output attachments that aren't used to avoid unnecessary memory accesses. If clear or invalidate calls are present within a render pass, they are shown in the **Frame Hierarchy** view.
 
-1. In this example, some render passes have no consumers and don't contribute to the final rendered output.
+In this example, some render passes have no consumers and don't contribute to the final rendered output.
 
-    ![Render Graph highlighting a redundant render pass group with no consumers#center](render_graph_egypt_redundant_rps.webp "Redundant render passes")
+![Render Graph highlighting a redundant render pass group with no consumers#center](render_graph_egypt_redundant_rps.webp "Redundant render passes")
 
-    These render passes could therefore be removed, without affecting the output, saving processing power and bandwidth.
+These render passes could be removed without affecting the output, saving processing power and bandwidth.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You've used the Render Graph to identify attachments and render passes that don't contribute to the final output. Next, use Content Metrics to analyze mesh geometry.
+You've used the Render Graph to identify attachments and render passes that don't contribute to the final output. 
+
+Next, you'll use Content Metrics to analyze mesh geometry.
