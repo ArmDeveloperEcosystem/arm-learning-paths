@@ -14,7 +14,7 @@ learning_objectives:
 
 prerequisites:
     - An Android device in developer mode with USB debugging enabled. These [Arm Performance Studio supported devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) have been tested internally within Arm and confirmed to work with Arm Performance Studio.
-    - A debuggable build of your application built with OpenGL ES versions 2.0 to 3.2 or Vulkan versions 1.0 to 1.2 and installed on your device. For OpenGL ES applications, your device must be running Android 10 or later. For Vulkan applications, your device must be running Android 9 or later. 
+    - A debuggable build of your application. The application must be installed on your device and built with OpenGL ES versions 2.0 to 3.2 or Vulkan versions 1.0 to 1.2. For OpenGL ES applications, your device must be running Android 10 or later. For Vulkan applications, your device must be running Android 9 or later. 
     - Arm Performance Studio downloaded and installed from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It's supported on Windows, Linux, and macOS host platforms. For installation instructions, see the [Arm Performance Studio install guide](/install-guides/ams/).
     - Android SDK Platform tools [downloaded and installed](https://developer.android.com/studio/releases/platform-tools.html). SDK Platform tools is required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb). Add the path to ADB to your `PATH` environment variable.
     - The device connected through USB and accessible through ADB. To test the connection, open a command prompt and enter the `adb devices` command.
