@@ -344,7 +344,7 @@ tools_software_languages_filter:
 - ZooKeeper: 1
 weight: 1
 platforms_filter:
-- Arm AGI: 11
+- Arm AGI CPU: 11
 - AWS: 95
 - Google Cloud: 118
 - Microsoft Azure: 102

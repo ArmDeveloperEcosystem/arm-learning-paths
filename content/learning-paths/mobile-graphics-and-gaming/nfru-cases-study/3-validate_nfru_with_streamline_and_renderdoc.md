@@ -62,11 +62,11 @@ Use Streamline to compare the same scene with NFRU disabled and enabled. In the 
 
 As shown in the capture, counters such as **Neural queue active** and **Neural Accelerator Unit Usage** are active. The active counters indicate neural accelerator activity during the NFRU workload. You can use the measured active time from these counters to evaluate the performance cost of NFRU. Moku also integrates the Streamline API, so Streamline captures can record both render FPS and present FPS at the same time.
 
-![Streamline capture showing render FPS and present FPS for Moku with NFRU enabled, so you can compare rendered and displayed frame rates#center](./images/streamline/moku_streamline_fps.png)
+![Streamline capture showing render FPS and present FPS for Moku with NFRU enabled, so you can compare rendered and displayed frame rates#center](./images/streamline/moku_streamline_fps.webp)
 
 On the timeline, the NFRU workload should complete cleanly between real rendered frames. If GPU or neural processing blocks become long, the cost of NFRU might limit the expected uplift. If the workload is light but idle gaps still appear, the limiting factor is more likely frame pacing or presentation behavior rather than NFRU execution cost. For more information, see [NFRU performance](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/7-nfru_performance/).
 
-![Streamline capture showing neural queue activity and Neural Accelerator Unit Usage during NFRU frame generation#center](./images/streamline/moku_streamline_neural_usage.png)
+![Streamline capture showing neural queue activity and Neural Accelerator Unit Usage during NFRU frame generation#center](./images/streamline/moku_streamline_neural_usage.webp)
 
 For more information on performance profiling strategies, see [Use Arm Streamline to capture data for your application](/learning-paths/mobile-graphics-and-gaming/ams/streamline/).
 
@@ -85,7 +85,7 @@ If the real frame inputs look correct but the generated output has artifacts, th
 
 For detailed guidance on using RenderDoc in Unreal Engine, see [Use RenderDoc for Arm GPUs with NFRU for debugging and analysis](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/7-renderdoc/).
 
-![RenderDoc capture showing NFRU frame-generation events and resources to inspect the generated frame#center](./images/moku_renderdoc.png)
+![RenderDoc capture showing NFRU frame-generation events and resources to inspect the generated frame#center](./images/moku_renderdoc.webp)
 
 Use the following steps to inspect the Arm Frame Interpolation pipelines in RenderDoc:
 

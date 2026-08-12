@@ -1,28 +1,27 @@
 ---
-title: Optimize with S-PGO (AFDO)
+title: Optimize AArch64 code with S-PGO
+description: Build an AArch64 binary with Arm Branch Record Buffer Extension (BRBE) sampling, collect a perf profile, and apply S-PGO with LLVM.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is S-PGO?
+## What S-PGO is
 
 {{% notice Note %}}
-Sample-based PGO (S-PGO) is also called SamplePGO, AutoFDO, or AFDO in LLVM documentation and related tools.
+Sample-based profile-guided optimization (S-PGO) is also called SamplePGO, AutoFDO, or AFDO in LLVM documentation and related tools.
 {{% /notice %}}
 
-Instead of adding software counters, S-PGO records hardware events while an optimized binary runs. This workflow uses Linux `perf` to collect branch-stack samples from the Arm Branch Record Buffer Extension (BRBE). The `llvm-profgen` tool converts the raw `perf` data into an LLVM sample profile. Clang then consumes that profile through `-fprofile-sample-use` during another optimized build.
+Instead of adding software counters, S-PGO records hardware events while an optimized binary runs. The S-PGO workflow uses Linux `perf` to collect branch-stack samples from the Arm Branch Record Buffer Extension (BRBE). The `llvm-profgen` tool converts the raw `perf` data into an LLVM sample profile. Clang then consumes that profile through `-fprofile-sample-use` during another optimized build.
 
-This workflow needs a processor that implements BRBE and Linux kernel 6.17 or later. It also uses debug information and pseudo-probes to map sampled instructions back to functions and source locations.
+To complete this workflow, you need a processor that implements BRBE and Linux kernel 6.17 or later. The workflow also uses debug information and pseudo-probes to map sampled instructions back to functions and source locations.
 
 ## When to use S-PGO
 
-Use S-PGO when you need lower profiling overhead than instrumentation-based PGO. It is suitable for long-running or production-like workloads where an instrumented binary would add too much overhead. Sample accuracy depends on collecting enough data from representative inputs.
-
+Use S-PGO when you need lower profiling overhead than instrumentation-based PGO. It's suitable for long-running or production-like workloads where an instrumented binary would add too much overhead. Sample accuracy depends on collecting enough data from representative inputs.
 
 ## Build a binary for sampling
-
 
 Build the binary with optimization enabled and add the metadata that LLVM needs to map samples back to the program. This example uses DWARF line tables, profiling-specific debug information, unique names for internal-linkage functions, and pseudo-probes.
 For more information about these options, see the [Clang profile-guided optimization guide](https://clang.llvm.org/docs/UsersManual.html#profile-guided-optimization).
@@ -38,7 +37,9 @@ clang++ -O3 -flto=thin -fuse-ld=lld \
   bsort.cpp -o out/bsort.spgo
 ```
 
+{{% notice Note %}}
 Clang derives unique internal-linkage names from the source path. If your build system uses an absolute source path that changes between the profiling and optimized builds, omit `-funique-internal-linkage-names` from both builds. Otherwise, the generated function names won't match the profile.
+{{% /notice %}}
 
 Check that the binary contains line-table information and pseudo-probe sections:
 
@@ -58,11 +59,12 @@ The output is similar to:
 
 ## Collect a sampling profile
 
-Collect a `perf` profile with user-space branch-stack data. The `-j any,u` option requests any branch type at privilege level `u`, which means user space:
+Collect a `perf` profile with user-space branch-stack data:
 
 ```bash
 perf record -j any,u -o prof/brbe.data -- ./out/bsort.spgo
 ```
+The `-j any,u` option requests any branch type at privilege level `u`, which means user space.
 
 The output is similar to:
 
@@ -73,7 +75,15 @@ Bubble sorting 10000 elements
 [ perf record: Captured and wrote 0.438 MB prof/brbe.data (566 samples) ]
 ```
 
-The sample count and runtime are illustrative. They depend on the processor, sampling configuration, system load, and LLVM build. If `perf` reports that branch-stack sampling isn't supported or permitted, confirm that your processor implements BRBE, the kernel is version 6.17 or later, and your account can access performance events.
+The sample count and runtime are illustrative. They depend on the processor, sampling configuration, system load, and LLVM build.
+
+{{% notice Note %}}
+If `perf` reports that branch-stack sampling isn't supported or permitted, confirm the following:
+ 
+  - Your processor implements BRBE
+  - The kernel is version 6.17 or later
+  - Your account can access performance events
+{{% /notice %}}
 
 ## Convert the sampling profile
 
@@ -111,10 +121,9 @@ Function: _ZL5swap5PiS_.__uniq.184325335692493633500970462303439801414: CFG chec
 
 The output lists functions and inlined call sites that received samples. Exact names, checksums, and counts can vary with the LLVM version and training workload. For large applications, the complete output can be extensive.
 
-
 ## Build with S-PGO and LTO
 
-Build the optimized binary using the sample profile. Use the same pseudo-probe and internal-linkage-name options as the profiling build so Clang can correlate the profile with the program. The `-fsample-profile-use-profi` option infers missing block and edge counts:
+Build the optimized binary using the sample profile. Use the same pseudo-probe and internal-linkage-name options as the profiling build so Clang can correlate the profile with the program:
 
 ```bash
 clang++ -O3 -flto=thin -fuse-ld=lld \
@@ -125,6 +134,7 @@ clang++ -O3 -flto=thin -fuse-ld=lld \
     -Rpass=sample-profile-inline -fdiagnostics-show-hotness \
     bsort.cpp -o out/bsort.spgo.opt
 ```
+The `-fsample-profile-use-profi` option infers missing block and edge counts.
 
 The `-Rpass=sample-profile-inline` and `-fdiagnostics-show-hotness` options emit optimization remarks. These remarks verify that Clang used the sample profile for inlining decisions.
 

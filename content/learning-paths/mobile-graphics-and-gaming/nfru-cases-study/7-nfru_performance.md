@@ -85,7 +85,7 @@ In Streamline captures, frame-pacing waits often appear as gaps between GPU work
 
 During that wait, the GPU might be idle:
 
-![Streamline capture showing GPU idle gaps caused by frame-pacing waits, which can limit present FPS despite available capacity#center](./images/frame_pacing/frame_pacing_issue_1.png)
+![Streamline capture showing GPU idle gaps caused by frame-pacing waits, which can limit present FPS despite available capacity#center](./images/frame_pacing/frame_pacing_issue_1.webp)
 
 These idle gaps are important to identify because they can indicate that presentation timing, rather than pure render cost, is limiting the observed FPS uplift:
 

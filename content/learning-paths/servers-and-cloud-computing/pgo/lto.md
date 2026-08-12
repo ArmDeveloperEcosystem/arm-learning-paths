@@ -1,14 +1,15 @@
 ---
-title: Build with LTO
+title: Build AArch64 code with LTO
+description: Build and verify Full-LTO and Thin-LTO AArch64 binaries with Clang, then inspect their LLVM bitcode.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is LTO?
+## What LTO is
 
-Link-Time Optimization (LTO) enables optimization across source file boundaries during the link stage. Without LTO, the compiler optimizes each source file independently before the linker combines the resulting object files. As a result, the optimizer cannot make optimization decisions based on the whole program.
+Link-time optimization (LTO) enables optimization across source file boundaries during the link stage. Without LTO, the compiler optimizes each source file independently before the linker combines the resulting object files. As a result, the optimizer can't make optimization decisions based on the whole program.
 
 For more information, see the [LLVM Link Time Optimization](https://llvm.org/docs/LinkTimeOptimization.html) design documentation.
 
@@ -20,14 +21,14 @@ Both modes make Clang emit LLVM bitcode during compilation. The difference is ho
 
 Full-LTO merges all input bitcode into a single LLVM module. LLVM then optimizes the program as one unit before generating native code. This gives the optimizer a complete view of the program, but it can increase link time and memory usage.
 
-Thin-LTO keeps the build more scalable. Each compiled module includes a compact summary. During the link stage, LLVM combines these summaries into a global index, determines which functions to import across module boundaries, and then optimizes each module in parallel.
+Thin-LTO keeps the build more scalable. Each compiled module includes a compact summary. During the link stage, LLVM combines these summaries into a global index and determines which functions to import across module boundaries. LLVM then optimizes each module in parallel.
 Thin-LTO also supports incremental builds by caching compilation results and rebuilding only the modules whose generated code changes.
 
 ## Build with LTO
 
 LTO is disabled by default. Use `-flto=full` to enable Full-LTO or `-flto=thin` to enable Thin-LTO. If you specify `-flto` without a value, Clang uses Full-LTO.
 
-Build the example in each mode. Pass the same LTO option during compilation and linking. The `-fuse-ld=lld` option selects the LLVM linker:
+Build the example in each mode. Pass the same LTO option during compilation and linking:
 
 {{< tabpane code=true >}}
   {{< tab header="Full-LTO" language="bash">}}
@@ -40,6 +41,7 @@ clang++ -O3 -flto=thin -fuse-ld=lld out/bsort.lto.thin.o -o out/bsort.lto.thin
   {{< /tab >}}
 {{< /tabpane >}}
 
+The `-fuse-ld=lld` option selects the LLVM linker.
 
 ## Verify the LTO object files
 
@@ -69,6 +71,6 @@ The block names confirm that Clang created the expected type of LTO bitcode. Run
 
 ## What you've accomplished and what's next
 
-You've built and run the example with Full-LTO and Thin-LTO. You've also inspected the object files to verify each LTO mode.
+You've now built and run the example with Full-LTO and Thin-LTO. You've also inspected the object files to verify each LTO mode.
 
 Next, you'll collect sampled profile data and use it to build the application with S-PGO and Thin-LTO.

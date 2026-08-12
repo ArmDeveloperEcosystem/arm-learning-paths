@@ -71,7 +71,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Performance and Architecture
 platforms:
-    - Arm AGI
+    - Arm AGI CPU
 armips:
     - Neoverse
 tools_software_languages:
