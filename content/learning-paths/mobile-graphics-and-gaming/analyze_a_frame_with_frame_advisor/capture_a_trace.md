@@ -28,7 +28,7 @@ To capture a frame from your application for analysis, follow these steps:
 
 1. You can currently capture a frame burst of up to three consecutive frames. For this example, capture one frame. Select **Capture**, and Frame Advisor captures the next frame.
 
-    By default, Frame Advisor captures only the color attachment. Change **Capture mode** to **All attachments** to also include any depth and stencil attachments as well as any attachments from multiple render targets. You can instead capture the overdraw in the scene.
+    By default, Frame Advisor captures only the color attachment. Change **Capture mode** to **All attachments** to also include any depth and stencil attachments as well as any attachments from multiple render targets. Alternatively, you can capture the overdraw in the scene.
 
     When the capture completes, the frame is shown in the **Captured frames** list.
 
