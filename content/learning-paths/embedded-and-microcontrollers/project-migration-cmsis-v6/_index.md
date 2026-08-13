@@ -32,16 +32,15 @@ generated_summary_faq:
   faq_source_hash: 5130291152d14cd1883221f160de8ef3a3295872220a7d1f985ba032011eeaf5
   summary: >-
     You'll migrate an existing CMSIS v5 project to CMSIS v6 by aligning its toolchain, packs, and
-    device selection. You'll replace deprecated packs, map generic devices to Cortex_DFP equivalents,
-    and convert Keil MDK `uvprojx` projects to Open-CMSIS-Pack `csolution` format. You'll also diagnose
+    device selection. First, you'll replace deprecated packs, map generic devices to Cortex_DFP equivalents,
+    and convert Keil MDK `uvprojx` projects to Open-CMSIS-Pack `csolution` format. Then, you'll diagnose
     missing devices, unresolved RTE components, and linker warnings during migration.
   faqs:
   - question: How do I confirm my toolchain is supported?
     answer: >-
-      Check your versions against the supported list: Arm Compiler for Embedded v6 and above,
-      Arm GNU Toolchain v12 and above, LLVM v16 and above, or IAR Embedded Workbench for Arm v9.30
-      and above. Arm Compiler v5 isn't supported; use the Arm Compiler for Embedded Migration
-      and Compatibility Guide to move to v6.
+      Check your versions against the supported list: Arm Compiler for Embedded v6 and later,
+      Arm GNU Toolchain v12 and later, LLVM v16 and later, or IAR Embedded Workbench for Arm v9.30
+      and later. Use the [Arm Compiler for Embedded Migration and Compatibility Guide](https://developer.arm.com/documentation/100068/latest/Migrating-from-Arm-Compiler-5-to-Arm-Compiler-for-Embedded-6) to move from v5 to v6.
   - question: Which CMSIS-Packs do I need when migrating from CMSIS v5?
     answer: >-
       Install `ARM.CMSIS.6.0.0.pack`, `ARM.Cortex_DFP.1.0.0.pack`, and `ARM.CMSIS-RTX.5.8.0.pack`.
@@ -55,11 +54,11 @@ generated_summary_faq:
       Change the device selection from the CMSIS v5 generic device to the corresponding device
       in the `Cortex_DFP` pack. Use the included device mapping table to select the matching
       `ARMCMx` variant and features.
-  - question: I work with Keil MDK v5 `uvprojx` projects—how do I convert them?
+  - question: Where can I find instructions for converting a `uvprojx` project?
     answer: >-
-      Convert `uvprojx`-based projects to the Open-CMSIS-Pack `csolution` format as described in
-      **Project format conversion**. You can then build in Keil Studio for VS Code or on the
-      command line.
+      For instructions, see the [Convert uvprojx-based projects to csolution](/learning-paths/embedded-and-microcontrollers/uvprojx-conversion/) Learning Path. It covers
+      importing, converting, and building `uvprojx` projects in Keil Studio for VS Code and on
+      the command line.
 # END generated_summary_faq
 
 author: Christopher Seidl

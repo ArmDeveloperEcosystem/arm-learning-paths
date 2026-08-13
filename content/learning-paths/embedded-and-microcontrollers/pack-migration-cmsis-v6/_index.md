@@ -30,14 +30,14 @@ generated_summary_faq:
   faq_generated_at: '2026-08-12T20:13:57Z'
   faq_source_hash: 14883fd881c70754e80ea15e09499621c644079f52f28831f07376621e841228
   summary: >-
-    You'll migrate a CMSIS v5-based CMSIS-Pack with device support to CMSIS v6. You'll confirm the
-    toolchain, replace assembly startup code with C files, and create scatter files. You'll update
-    example projects from Arm Compiler 5 to version 6 in µVision, then convert them to the
+    You'll migrate a CMSIS v5-based CMSIS-Pack with device support to CMSIS v6. First, you'll confirm the
+    toolchain, replace assembly startup code with C files, and create scatter files. Then, you'll update
+    example projects from Arm Compiler 5 to version 6 in µVision and convert them to the
     CMSIS-Toolbox `csolution` and `cproject` formats.
   faqs:
   - question: Which toolchain should I use for this migration?
     answer: >-
-      You use Arm Compiler for Embedded v6. CMSIS v6 also supports Arm GNU Toolchain
+      Use Arm Compiler for Embedded v6. CMSIS v6 also supports Arm GNU Toolchain
       v12 and above, LLVM v16 and above, and IAR Embedded Workbench for Arm v9.30 and above.
   - question: How do I update device support for CMSIS v6?
     answer: >-
@@ -46,7 +46,7 @@ generated_summary_faq:
   - question: How do I switch my example project from Arm Compiler 5 to 6 in µVision?
     answer: >-
       Install the newly created device family pack, open **Options for Target - Target**, and set
-      **Use default compiler version 6**. Then open the **C/C++ [AC6]** tab and set the appropriate defines.
+      **Use default compiler version 6**. Then, open the **C/C++ [AC6]** tab and set the appropriate defines.
   - question: When should I convert my project to the CMSIS-Toolbox format, and what files appear?
     answer: >-
       Convert to the new standard after migrating to Arm Compiler 6. The conversion targets the

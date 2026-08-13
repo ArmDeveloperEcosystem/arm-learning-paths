@@ -34,8 +34,8 @@ generated_summary_faq:
   faq_generated_at: '2026-08-12T20:15:37Z'
   faq_source_hash: f0788b1a8fefc43d93ddf80c76daba575f91c93f8ec2ce9a04b04108254fa5c4
   summary: >-
-    You'll build a local, privacy-first smart home assistant on a Raspberry Pi 5. You'll install
-    Python and Ollama, wire an LED to GPIO 17, and verify GPIO access. You'll run
+    You'll build a local, privacy-first smart home assistant on a Raspberry Pi 5. First, you'll install
+    Python and Ollama, wire an LED to GPIO 17, and verify GPIO access. Then, you'll run
     `smart_home_assistant.py`, interact through a terminal or browser, and use natural-language
     requests that the local model converts into actions for configured devices.
   faqs:
@@ -50,13 +50,13 @@ generated_summary_faq:
   - question: How do I access the assistant’s web interface and know it started correctly?
     answer: >-
       The script starts a local web server and prints the address and port in the terminal. Open
-      a browser to your Raspberry Pi’s IP at that port; a responsive page indicates the server
+      a browser to your Raspberry Pi’s IP at that port. A responsive page indicates the server
       is running.
   - question: After cloning the assistant code, where should I run it and what should I see?
     answer: >-
       Change into the cloned project directory before launching `smart_home_assistant.py`. On start,
       it initializes the configured GPIO devices and brings up the local web server.
-  - question: What should I check if natural‑language commands do not control the LED or other
+  - question: What should I check if natural language commands don't control the LED or other
       device?
     answer: >-
       Verify the wiring to GPIO 17 and GND, and ensure the script's pin assignments match your

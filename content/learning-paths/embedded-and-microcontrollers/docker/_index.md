@@ -29,9 +29,8 @@ generated_summary_faq:
   faq_generated_at: '2026-08-12T20:04:05Z'
   faq_source_hash: 34fd1ff3ec46b494a04dfb3e842ed4258153fabbed658eba77db0e3aeea3a25f
   summary: >-
-    You'll create a containerized Arm embedded development environment with Docker. You'll prepare
-    an Ubuntu-based Dockerfile containing Arm Compiler for Embedded and Fixed Virtual Platforms,
-    then build the image and verify that the tools launch. You'll finish with a reusable environment
+    You'll create a containerized Arm embedded development environment with Docker. First, you'll prepare
+    an Ubuntu-based Dockerfile containing Arm Compiler for Embedded and Fixed Virtual Platforms (FVPs). Then, you'll build the image and verify that the tools launch. You'll finish with a reusable environment
     for compiling Arm applications and running targets on FVPs without installing tools directly
     on the host.
   faqs:
@@ -45,8 +44,7 @@ generated_summary_faq:
       error, prepend `sudo` to the Docker command.
   - question: What files do I need to copy into the image before building?
     answer: >-
-      Copy the installation packages you downloaded for Arm Compiler for Embedded and the Fixed
-      Virtual Platforms (FVPs). Make sure the Dockerfile `COPY` paths match where those files are
+      Copy the installation packages you downloaded for Arm Compiler for Embedded and the FVPs. Make sure the Dockerfile `COPY` paths match where those files are
       located.
   - question: How do I know the image is ready to use?
     answer: >-

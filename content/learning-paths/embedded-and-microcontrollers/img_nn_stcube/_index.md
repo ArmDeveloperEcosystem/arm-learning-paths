@@ -32,8 +32,8 @@ generated_summary_faq:
   faq_source_hash: d2b95465621235e0a43ded6268ba954cc32865c4a53c89667881ccfbe4139074
   summary: >-
     You'll build a CIFAR-10 convolutional neural network in Jupyter and deploy it to an STM32
-    B-L475E-IOT01A2 board. You'll prepare an Anaconda environment, train the model, and import it
-    into STM32Cube.AI within STM32CubeMX. You'll deploy the generated project and use a Python
+    B-L475E-IOT01A2 board. First, you'll prepare an Anaconda environment, train the model, and import it
+    into STM32Cube.AI within STM32CubeMX. Then, you'll deploy the generated project and use a Python
     utility to send images to the board and exercise the classifier.
   faqs:
   - question: How do I launch the Jupyter Notebook used for training?
@@ -47,11 +47,11 @@ generated_summary_faq:
   - question: Which STM32Cube.AI version should I select in STM32CubeMX?
     answer: >-
       Select **X-CUBE-AI 7.0.0**, which matches the version used by the provided testing tool. Later
-      versions may not connect successfully.
+      versions might not connect successfully.
   - question: What should I do before running the Python test tool against the board?
     answer: >-
       Activate the Conda environment with `conda activate ml_lab` and install `opencv-python`,
-      `protobuf==3.20`, and `tqdm==4.50.2`. Then go to the working folder's `Misc` directory.
+      `protobuf==3.20`, and `tqdm==4.50.2`. Then, go to the working folder's `Misc` directory.
   - question: How do I start the test tool and what if the board is not detected?
     answer: >-
       From the `Misc` folder, run `python ui_python_ai_runner.py`. If the board isn't detected,

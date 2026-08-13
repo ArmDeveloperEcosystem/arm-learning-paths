@@ -32,14 +32,14 @@ generated_summary_faq:
   faq_generated_at: '2026-08-12T20:07:04Z'
   faq_source_hash: bf9cd7acd601825e582670b60c243799df8a93d3580834ca1126db15abd5540e
   summary: >-
-    You'll learn TinyML on Arm with ExecuTorch and the Corstone-320 Fixed Virtual Platform. You'll
+    You'll learn TinyML on Arm with ExecuTorch and the Corstone-320 FVP. First, you'll
     install ExecuTorch, configure the FVP, and compare resource-constrained edge inference with
-    cloud machine learning. You'll implement a small PyTorch network and export it through ExecuTorch,
+    cloud machine learning. Then, you'll implement a small PyTorch network and export it through ExecuTorch,
     creating an edge-ready artifact for a virtual target supporting Cortex-M and Arm Ethos-U.
   faqs:
   - question: How do I know the Corstone-320 FVP setup worked?
     answer: >-
-      The setup scripts should complete without errors and the reference package should be available
+      The setup is successful when the setup scripts complete without errors and the reference package is available
       for use. At that point, the FVP is ready for software development and validation without
       a physical board.
   - question: What does installing ExecuTorch enable in this workflow?
@@ -49,16 +49,16 @@ generated_summary_faq:
       form.
   - question: What file do I create for the example model, and what does it include?
     answer: >-
-      You create `simple_nn.py`, which defines a small feedforward network with two linear layers
+      Create `simple_nn.py`, which defines a small feedforward network with two linear layers
       and a ReLU activation for a classification task. The script also uses `torch.export` and ExecuTorch
       conversion to generate an edge representation.
-  - question: Do I need a physical development board to complete the example?
+  - question: Do I need a physical development board?
     answer: >-
-      No. The Corstone-320 Fixed Virtual Platform provides a pre-silicon environment to build
+      No. The Corstone-320 FVP provides a pre-silicon environment to build
       and test software before hardware is available.
-  - question: Which Arm components does the Corstone-320 FVP support in this path?
+  - question: Which Arm components does the Corstone-320 FVP support?
     answer: >-
-      The FVP includes support for Arm Ethos-U NPUs and Cortex-M processors. It is designed for
+      The FVP includes support for Arm Ethos-U NPUs and Cortex-M processors. It's designed for
       AI and machine learning workloads on microcontrollers.
 # END generated_summary_faq
 

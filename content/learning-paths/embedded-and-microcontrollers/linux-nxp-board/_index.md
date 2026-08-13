@@ -36,14 +36,14 @@ generated_summary_faq:
   faq_source_hash: 75fdc487feb016b4d628382b41518290b53626675c4f9fda6ee5e85bb8681bf6
   summary: >-
     You'll configure an NXP FRDM i.MX 93 board for Linux development. Through a serial console,
-    you'll create a non-root user with `sudo` privileges and connect to Wi-Fi with ConnMan. You'll
+    you'll create a non-root user with `sudo` privileges and connect to Wi-Fi with ConnMan. Then, you'll
     find the board's IP address, transfer files with `scp` or USB, and optionally load the Wi-Fi
     driver at startup for automatic reconnection.
   faqs:
   - question: Which USB-C port do I use for serial and power?
     answer: >-
-      Use the DBG port for the serial connection and the POWER port for board power. Connect both
-      if your workflow needs console access while powering the board.
+      Use the DBG port for the serial connection and the POWER port for board power. Connect both ports
+      if you need console access while powering the board.
   - question: How do I know the board has booted and I’m on the right console?
     answer: >-
       You should see Linux boot messages followed by a login prompt on the serial console. Log

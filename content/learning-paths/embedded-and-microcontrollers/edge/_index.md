@@ -35,8 +35,8 @@ generated_summary_faq:
   faq_source_hash: 5462e69e9e1289cb61815d66c308a94cfae0bbfa690aca19adf07290c6f24e9d
   summary: >-
     You'll move from Edge AI and TinyML concepts to a voice-command prototype on an Arduino Nano
-    RP2040 Connect. You'll collect audio, train a classifier in Edge Impulse, and export its Arduino
-    library. You'll add the library to a sketch, flash the board, and validate on-device inference
+    RP2040 Connect. First, you'll collect audio, train a classifier in Edge Impulse, and export its Arduino
+    library. Then, you'll add the library to a sketch, flash the board, and validate on-device inference
     by speaking commands that control an LED.
   faqs:
   - question: Which Edge Impulse project type should I choose for voice commands?
@@ -49,8 +49,8 @@ generated_summary_faq:
       to your sketch so the trained model and processing steps are available on the device.
   - question: Do I need an internet connection on the board while the model runs?
     answer: >-
-      No. Inference runs locally on the device, which is a core principle of Edge AI. You only
-      need connectivity when using Edge Impulse Studio to build and export the model.
+      No. Inference runs locally on the device, which is a core principle of Edge AI. You
+      need connectivity only when using Edge Impulse Studio to build and export the model.
   - question: What result should I expect after flashing the sketch?
     answer: >-
       The board performs real-time audio inference and controls an LED. When it recognizes the

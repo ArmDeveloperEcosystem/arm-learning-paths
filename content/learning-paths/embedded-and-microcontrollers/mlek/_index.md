@@ -9,7 +9,7 @@ who_is_this_for: This is an introductory topic for embedded software developers 
 
 learning_objectives:
     - Build examples from Machine Learning Evaluation Kit (MLEK)
-    - Run the examples on Arm Ecosystem FVP
+    - Run the examples on Arm Ecosystem Fixed Virtual Platform (FVP)
 
 prerequisites:
     - Some familiarity with embedded programming
@@ -31,7 +31,7 @@ generated_summary_faq:
   faq_source_hash: 16d20cd59e8460c16434ea01a11f40aa68724347e32ae407cebdad051a3ebfa7
   summary: >-
     You'll build machine learning examples from the Arm Machine Learning Evaluation Kit and run
-    them on the Corstone-320 Fixed Virtual Platform. You'll locate generated AXF images, prepare
+    them on the Corstone-320 FVP. You'll locate generated AXF images, prepare
     the FVP, and launch an image with `-a`. You'll configure the Ethos-U MAC count to match the
     build and verify that the application starts successfully.
   faqs:
@@ -42,7 +42,7 @@ generated_summary_faq:
   - question: Which FVP should I install to run these examples?
     answer: >-
       Install the Corstone-320 Ecosystem FVP on your local machine. Download it from the Arm Developer
-      website and follow the referenced Fast Model and FVP install guide.
+      website and follow the referenced [Fast Model and FVP install guide](/install-guides/fm_fvp/). 
   - question: How can I shorten a long FVP command line?
     answer: >-
       Put the model configuration options in a file such as `config.txt`. Remove `-C` from each

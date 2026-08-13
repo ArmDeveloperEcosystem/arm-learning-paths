@@ -34,8 +34,8 @@ generated_summary_faq:
   faq_source_hash: 9164ae64b157c5326c835b1a260eec0819b19633adb573bc158a41b337b9d388
   summary: >-
     You'll run an ExecuTorch model on the FRDM i.MX 93 Cortex-M33 with Ethos-U65 acceleration.
-    You'll prepare a build environment, compile `executor_runner` firmware and a U65-targeted `.pte`
-    model, then transfer both artifacts to the board. You'll start the firmware from Linux with
+    First, you'll prepare a build environment, compile `executor_runner` firmware and a U65-targeted `.pte`
+    model. Then, you'll transfer both artifacts to the board. You'll start the firmware from Linux with
     RemoteProc and observe inference across the Cortex-M33 and NPU.
   faqs:
   - question: Which USB connector should I use for the serial console, and what do I need on macOS?
@@ -44,9 +44,9 @@ generated_summary_faq:
       driver and a serial terminal such as `picocom` (for example, install it with `brew install picocom`).
   - question: Why build ExecuTorch inside a Docker container on macOS?
     answer: >-
-      It provides an Ubuntu build environment that matches the toolchains used in this path and
+      Building inside a Docker container provides an Ubuntu build environment that matches the toolchains used in this Learning Path, and
       avoids gaps in macOS-native cross-compilers. The container is only for building and produces
-      prebuilt ExecuTorch libraries and `.pte` files you later copy to the FRDM i.MX 93.
+      prebuilt ExecuTorch libraries and `.pte` files that you'll copy to the FRDM i.MX 93.
   - question: After installing ExecuTorch, how do I confirm the package is available?
     answer: >-
       Run `pip list | grep executorch` and check that `executorch` appears in the output.
@@ -54,11 +54,10 @@ generated_summary_faq:
     answer: >-
       Copy the U65-compiled `.pte` model and the `executor_runner` ELF to the board. The runner loads
       the `.pte`, prepares buffers, and invokes the NPU or CPU backend on the Cortex-M33.
-  - question: How do I confirm that inference uses the Ethos-U65 NPU?
+  - question: What output should I expect when the MobileNet V2 model compiles successfully?
     answer: >-
-      Ensure the `.pte` model was compiled for Ethos-U65, then deploy it with `executor_runner`. When
-      the model targets U65, the runtime uses the NPU backend; the instructions don't list a separate
-      validation step.
+      The compilation output reports the number of NPU operators and their coverage. For the example
+      MobileNet V2 model, expect an output reporting 100% NPU utilization.
 # END generated_summary_faq
 
 author:

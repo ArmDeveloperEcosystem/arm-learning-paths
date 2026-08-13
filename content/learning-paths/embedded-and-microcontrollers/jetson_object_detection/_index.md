@@ -32,8 +32,8 @@ generated_summary_faq:
   faq_source_hash: 7fb5ed9785035997a9f31381c71fd8b02dd3c4b4afb1e9e5c0989b41a0034aa9
   summary: >-
     You'll prepare a Jetson Orin Nano for object detection with a microSD image and MIPI CSI-2
-    camera. You'll clone `jetson-inference`, launch its Docker container, and run TensorRT-accelerated
-    DetectNet on live camera input and image files. You'll adjust the detection threshold and
+    camera. First, you'll clone `jetson-inference`, launch its Docker container, and run TensorRT-accelerated
+    DetectNet on live camera input and image files. Then, you'll adjust the detection threshold and
     verify labeled objects in the resulting video and images.
   faqs:
   - question: Which image should I download for the microSD card?
@@ -43,7 +43,7 @@ generated_summary_faq:
       image.
   - question: Where should I run the Docker commands, and how do I get the container ID?
     answer: >-
-      Run the listed Docker commands in a terminal on the host, not from inside the running container.
+      Run the Docker commands in a terminal on the host, not from inside the running container.
       To print the container ID, use `sudo docker ps -q`.
   - question: How do I start DetectNet on the live camera, and from which directory?
     answer: >-
@@ -51,12 +51,13 @@ generated_summary_faq:
       with `./detectnet csi://0`.
   - question: How can I adjust detection sensitivity, and what is the default?
     answer: >-
-      Use the `--threshold` option to change sensitivity; the default is `0.5`. For example, run
-      `./detectnet csi://0 --threshold=0.25`.
-  - question: Why does DetectNet take longer to start the first time I run a model?
+      Use the `--threshold` option to change sensitivity. For example, run
+      `./detectnet csi://0 --threshold=0.25`. The default is `0.5`.
+  - question: How do I run DetectNet on an image and save the annotated output?
     answer: >-
-      The first time you run a new model, it takes additional time to start up. Subsequent launches
-      are faster.
+      From `build/aarch64/bin`, run `./detectnet --network=ssd-mobilenet-v2 images/peds_0.jpg`
+      followed by your output path, such as `images/test/output.jpg`. The `--network` option is
+      optional, and you can use `docker cp` to add your own images to the container.
 # END generated_summary_faq
 
 author: Gabriel Peterson

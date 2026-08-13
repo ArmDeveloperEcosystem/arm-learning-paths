@@ -31,15 +31,15 @@ generated_summary_faq:
   faq_generated_at: '2026-08-12T20:10:40Z'
   faq_source_hash: 30b304e77487fc1e8ac6fc5baaee6d8e4cf2c27898b319f230ca425994313645
   summary: >-
-    You'll run a local chatbot on a Raspberry Pi 5 with 64-bit Raspberry Pi OS. You'll install
+    You'll run a local chatbot on a Raspberry Pi 5 with 64-bit Raspberry Pi OS. First, you'll install
     the Python bindings for `llama.cpp`, choose a model that fits available memory, and download
-    it from Hugging Face. You'll load the model, generate responses, and verify interactive inference
+    it from Hugging Face. Then, you'll load the model, generate responses, and verify interactive inference
     directly on the Arm Linux device.
   faqs:
   - question: Which Raspberry Pi 5 model should I use for this chatbot?
     answer: >-
       The 8 GB RAM Raspberry Pi 5 model is preferred for exploring an LLM. Smaller memory configurations
-      may restrict which model you can run.
+      might restrict the model that you can run.
   - question: How do I know my Raspberry Pi OS installation is 64-bit?
     answer: >-
       Check your system information to confirm the operating system and kernel report a 64-bit

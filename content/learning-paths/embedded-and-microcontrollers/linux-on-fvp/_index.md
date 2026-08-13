@@ -29,15 +29,15 @@ generated_summary_faq:
   faq_generated_at: '2026-08-12T20:10:11Z'
   faq_source_hash: 701a686840371c020ddcdd1b763b27b6c3954317318ec2cb67e0cd9b00ed0f5f
   summary: >-
-    You'll boot a Linux software stack on an Arm Fixed Virtual Platform and debug it with Arm
-    Development Studio. You'll configure Trusted Firmware-A for the target CPU, adjust the device
-    tree, and verify build outputs. You'll launch the FVP, capture UART logs, create a debug
+    You'll boot a Linux software stack on an Arm FVP and debug it with Arm
+    Development Studio. First, you'll configure Trusted Firmware-A for the target CPU, adjust the device
+    tree, and verify build outputs. Then, you'll launch the FVP, capture UART logs, create a debug
     configuration, and step through Trusted Firmware-A and the Linux kernel.
   faqs:
   - question: How do I know my Trusted Firmware-A build includes the correct `cpu_ops` support?
     answer: >-
       Enable the `cpu_ops` framework for your target CPU when building TF-A. If `cpu_ops` is missing,
-      Linux may fail to start. Confirm that the build selects the CPU-specific implementation
+      Linux might fail to start. Confirm that the build selects the CPU-specific implementation
       (for example, `cortex_a55` or `cortex_a53`) from `lib/cpus/aarch64`.
   - question: What should I change in the device tree for an Arm CPU FVP?
     answer: >-
@@ -54,7 +54,7 @@ generated_summary_faq:
       normal Linux boot messages and confirm there are no PCI or SMMU-related panics.
   - question: Which Arm Development Studio version should I use, and how do I start it?
     answer: >-
-      Arm DS v2022.2 or later is recommended to support DWARF 5 debug information used by GCC
+      Arm DS `v2022.2` or later is recommended to support DWARF 5 debug information used by GCC
       11 and later. Start it with `/opt/arm/developmentstudio-2022.2/bin/armds_ide`, then create
       a debug configuration to step through Trusted Firmware-A and the Linux kernel.
 # END generated_summary_faq

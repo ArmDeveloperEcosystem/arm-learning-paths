@@ -35,28 +35,28 @@ generated_summary_faq:
   faq_generated_at: '2026-08-12T20:16:07Z'
   faq_source_hash: 0f9a4995777d0a7b7acf2cda2fec211ac3c4a99c2ace7334a7eba9e7a702cb5e
   summary: >-
-    You'll build a voice-driven assistant on Raspberry Pi. You'll install 64-bit Raspberry Pi OS,
-    configure USB audio, and create a Python virtual environment. You'll run a script that detects
+    You'll build a voice-driven assistant on Raspberry Pi. First, you'll install 64-bit Raspberry Pi OS,
+    configure USB audio, and create a Python virtual environment. Then, you'll run a script that detects
     the “computer” wake word, transcribes speech, sends text to ChatGPT, and plays the reply. You'll
     validate audio recording and output before running the assistant continuously.
   faqs:
   - question: How do I know the microphone recording worked?
     answer: >-
-      After running `arecord -d 5 test.wav`, a file named `test.wav` should appear in your current
-      directory. Its size should be non-zero; the following step shows how to play it back.
+      After recording by running `arecord -d 5 test.wav`, a file named `test.wav` should appear in your current
+      directory. Its size should be non-zero.
   - question: Which wake word should I use, and how do I know the bot is listening?
     answer: >-
       Say "computer", pause for about a second, then ask your question. The terminal displays
-      output indicating it is waiting for the keyword before it detects the wake word.
+      output indicating it's waiting for the keyword before it detects the wake word.
   - question: How do I re-activate the Python virtual environment in a new terminal?
     answer: >-
       Run `cd $HOME/assistant` followed by `source env/bin/activate`. Then run `python main.py` to start
       the assistant.
-  - question: What should I check if I don’t hear any audio playback?
+  - question: How do I find the card and device numbers for my USB audio hardware?
     answer: >-
-      Use the speaker icon on Raspberry Pi OS to select your USB speakers as the output device.
-      Re-run the short record/playback test from the audio section to confirm sound works before
-      continuing.
+      Run `arecord -l` to list recording devices and `aplay -l` to list playback devices. Use
+      the card and device numbers in commands such as `arecord -D plughw:3,0 -d 5 test.wav` and
+      `aplay -D plughw:2,0 test.wav`, replacing the values with your hardware's numbers.
   - question: How do I stop the application when I am done testing?
     answer: >-
       Press **Ctrl+C** in the terminal where `python main.py` is running. The process exits and the

@@ -36,9 +36,9 @@ generated_summary_faq:
   faq_source_hash: ff80157611a84755964dc9809f497b46bdb352ffeb5f99b0df5bd97ce8ae4f76
   summary: >-
     You'll extend a Device Connect mesh across networks with a server and NATS authentication.
-    You'll provision a private tenant, download device credentials, and commission primary and
-    secondary devices. You'll discover devices and invoke RPCs from Python to verify reachability,
-    then connect a Strands AI agent so devices and agents share one authenticated registry.
+    First, you'll provision a private tenant, download device credentials, and commission primary and
+    secondary devices. Then, you'll discover devices and invoke RPCs from Python to verify reachability,
+    and connect a Strands AI agent so devices and agents share one authenticated registry.
   faqs:
   - question: How do I know my tenant is ready before I commission devices?
     answer: >-

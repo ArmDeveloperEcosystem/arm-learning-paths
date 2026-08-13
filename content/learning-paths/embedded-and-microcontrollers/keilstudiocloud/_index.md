@@ -1,5 +1,5 @@
 ---
-title: Get Started with Keil Studio Cloud
+title: Get started with Keil Studio Cloud
 
 description: Learn how to import, build, and debug your first Keil Studio Cloud project
 
@@ -31,8 +31,8 @@ generated_summary_faq:
   faq_source_hash: 6886b053c7235a267ce497bdf21ce08143e3aea8b8262ee27587a100252f1955
   summary: >-
     You'll use Keil Studio Cloud to build and debug a CMSIS-based example on Arm Virtual Hardware.
-    You'll browse supported hardware, import a ready-to-build project, and compile it with Arm
-    Compiler for Embedded. You'll select a virtual target, launch a run or debug session, and
+    First, you'll browse supported hardware, import a ready-to-build project, and compile it with Arm
+    Compiler for Embedded. Then, you'll select a virtual target, launch a run or debug session, and
     verify that the application executes without a physical board.
   faqs:
   - question: How do I sign in to Keil Studio Cloud?
@@ -43,9 +43,11 @@ generated_summary_faq:
     answer: >-
       Use Google Chrome or Microsoft Edge (Chromium) because both browsers support the WebUSB standard.
       Other features work in the latest Chrome, Edge, Opera, Safari, and Firefox.
-  - question: Do I need a physical board to run the example?
+  - question: How do I select the virtual target before building the example?
     answer: >-
-      No. You run the example on Arm Virtual Hardware as part of the Learning Path.
+      In the top-left corner, select **Connected device**, then choose **Virtual Device -
+      SSE-300-MPS3**. Build the project after selecting this target, then use the play button
+      to run it on Arm Virtual Hardware in your browser.
   - question: How do I check whether my hardware is supported?
     answer: >-
       Open Keil Studio Cloud and select the **Hardware** menu to view the supported hardware.
@@ -53,7 +55,7 @@ generated_summary_faq:
   - question: What result should I expect after building the example project?
     answer: >-
       A successful build finishes without errors in the IDE. You can then run or debug the project
-      on Arm Virtual Hardware as shown in the instructions.
+      on Arm Virtual Hardware.
 # END generated_summary_faq
 
 author: Christopher Seidl 

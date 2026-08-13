@@ -29,8 +29,8 @@ generated_summary_faq:
   faq_generated_at: '2026-08-12T20:12:33Z'
   faq_source_hash: c4d4ba17dc9308f8a35e5cc8490ce2c385d3a850c5468689d1bc02c2bd91db7d
   summary: >-
-    You'll add virtual and hardware debug targets in Arm Development Studio. You'll configure a
-    connection to an Arm Fast Models platform, then create a board target using an Arm DSTREAM
+    You'll add virtual and hardware debug targets in Arm Development Studio. First, you'll configure a
+    connection to an Arm Fast Models platform. Then, you'll create a board target using an Arm DSTREAM
     probe. You'll choose a DSTREAM model based on trace needs, select USB or Ethernet transport,
     define connection details, and verify both debug configurations.
   faqs:
