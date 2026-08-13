@@ -52,7 +52,7 @@ generated_summary_faq:
     answer: >-
       Activate the Conda environment with `conda activate ml_lab` and install `opencv-python`,
       `protobuf==3.20`, and `tqdm==4.50.2`. Then, go to the working folder's `Misc` directory.
-  - question: How do I start the test tool and what if the board is not detected?
+  - question: How do I start the test tool, and what if the board is not detected?
     answer: >-
       From the `Misc` folder, run `python ui_python_ai_runner.py`. If the board isn't detected,
       press the black button on the board to reset and try again.

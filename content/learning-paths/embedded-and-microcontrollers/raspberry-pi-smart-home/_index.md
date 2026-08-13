@@ -52,7 +52,7 @@ generated_summary_faq:
       The script starts a local web server and prints the address and port in the terminal. Open
       a browser to your Raspberry Pi’s IP at that port. A responsive page indicates the server
       is running.
-  - question: After cloning the assistant code, where should I run it and what should I see?
+  - question: Where should I run the assistant code after cloning it, and what should I see?
     answer: >-
       Change into the cloned project directory before launching `smart_home_assistant.py`. On start,
       it initializes the configured GPIO devices and brings up the local web server.

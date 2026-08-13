@@ -35,7 +35,7 @@ generated_summary_faq:
     the FVP, and launch an image with `-a`. You'll configure the Ethos-U MAC count to match the
     build and verify that the application starts successfully.
   faqs:
-  - question: How do I know the build succeeded and where are the output binaries?
+  - question: How do I know the build succeeded, and where are the output binaries?
     answer: >-
       The build produces `.axf` images in a `cmake-*/bin` directory that reflects your configuration.
       List the files with `ls *.axf` to confirm the outputs exist.

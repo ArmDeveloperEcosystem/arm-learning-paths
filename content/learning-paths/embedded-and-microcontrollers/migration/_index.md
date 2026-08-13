@@ -41,7 +41,7 @@ generated_summary_faq:
     answer: >-
       Use an `aarch64` GCC development container on your `x86_64` machine. Aim to match the original
       GCC version when possible, and run the build steps inside that container.
-  - question: Where do I get the example application and from which directory do I build?
+  - question: Where do I get the example application, and from which directory do I build?
     answer: >-
       Clone the [GitHub repository](https://github.com/m3y54m/sobel-simd-opencv.git) and change into
       that directory. Follow the provided CMake commands to configure `src` into a build directory
