@@ -1,6 +1,10 @@
 ---
 title: Get started with Arm Performix on Arm-based Servers
 
+draft: true
+cascade:
+  draft: true
+
 description: This Learning Path guides you through using Arm Performix to analyze and optimize applications running on Arm-based servers. You'll learn how to use recipes and runs for performance analysis, profile workloads, and optimize code using Arm NEON intrinsics.
 
 minutes_to_complete: 120
