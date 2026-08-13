@@ -77,6 +77,7 @@ jobs:
           HUGO_AUDIO_API: ${{ secrets.HUGO_AUDIO_API }}
           HUGO_PHI_ONNX_LLM_API: ${{ secrets.HUGO_PHI_ONNX_LLM_API }}
           HUGO_CHATBOT_API: ${{ secrets.HUGO_CHATBOT_API }}
+          HUGO_CHATBOT_ENABLED: ${{ inputs.target == 'dev' }}
           HUGO_DEV_PROG_SIGNIUP_FORM_MUNCHKIN_ID: ${{ secrets.HUGO_DEV_PROG_SIGNIUP_FORM_MUNCHKIN_ID }}
           HUGO_FORM_ID_FOR_PROGRAM_SIGNUP: ${{ secrets.HUGO_FORM_ID_FOR_PROGRAM_SIGNUP }}
 
