@@ -60,7 +60,7 @@ generated_summary_faq:
   - question: How do I connect a Strands AI agent to the same tenant?
     answer: >-
       Configure the agent with the tenant details and portal-issued credentials, then start it.
-      The agent should appear under the tenant’s namespace and be able to discover and invoke commissioned
+      The agent should appear under the tenant’s namespace and discover and invoke commissioned
       devices such as the Python client.
 # END generated_summary_faq
 
