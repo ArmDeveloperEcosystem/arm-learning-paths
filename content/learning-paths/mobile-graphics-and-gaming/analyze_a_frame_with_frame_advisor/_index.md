@@ -1,23 +1,23 @@
 ---
-title: Analyze a frame with Frame Advisor
+title: Analyze a frame from an Android application with Frame Advisor
 description: Learn how to capture frame data from Android applications and analyze performance inefficiencies using Frame Advisor in Arm Performance Studio.
 
 minutes_to_complete: 10
 
-who_is_this_for: Android application developers who want to learn how to use Frame Advisor.
+who_is_this_for: This Learning Path is for Android application developers who want to learn how to use Frame Advisor.
 
 learning_objectives: 
-    - Capture data from a significant frame in your application
-    - Find inefficiencies in the application with Frame Advisor
+    - Capture data from a significant frame in your Android application
+    - Inspect draw calls for rendering inefficiencies
+    - Use the Render Graph to analyze how the frame is constructed
+    - Analyze mesh geometry for inefficiencies
 
 prerequisites:
-    - An Android device. These [devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) have been tested internally within Arm and confirmed to work with Arm Performance Studio.
-    - Arm Performance Studio supports applications built with OpenGL ES versions 2.0 to 3.2 or Vulkan versions 1.0 to 1.2. For OpenGL ES applications, your device must be running Android 10 or later. For Vulkan applications, your device must be running Android 9 or later.
-    - A debuggable build of your application. 
-    - Download and install Arm Performance Studio from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It is supported on Windows, Linux, and macOS host platforms.
-    - Download and install [Android SDK Platform tools](https://developer.android.com/studio/releases/platform-tools.html). Required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb).
-
-# START generated_summary_faq
+    - An Android device in developer mode with USB debugging enabled. These [Arm Performance Studio supported devices](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices) have been tested internally within Arm and confirmed to work with Arm Performance Studio.
+    - A debuggable build of your application. The application must be installed on your device and built with OpenGL ES versions 2.0 to 3.2 or Vulkan versions 1.0 to 1.2. For OpenGL ES applications, your device must be running Android 10 or later. For Vulkan applications, your device must be running Android 9 or later. 
+    - Arm Performance Studio downloaded and installed from [Product Download Hub](https://developer.arm.com/downloads/view/MOBST-PRO0). It's supported on Windows, Linux, and macOS host platforms. For installation instructions, see the [Arm Performance Studio install guide](/install-guides/ams/).
+    - Android SDK Platform tools [downloaded and installed](https://developer.android.com/studio/releases/platform-tools.html). SDK Platform tools is required for [Android Debug bridge (adb)](https://developer.android.com/studio/command-line/adb). Add the path to ADB to your `PATH` environment variable.
+    - The device connected through USB and accessible through ADB. To test the connection, open a command prompt and enter the `adb devices` command.
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -92,6 +92,7 @@ further_reading:
         title: Arm Performance Studio for Mobile 
         link: https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio%20for%20Mobile
         type: website
+
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

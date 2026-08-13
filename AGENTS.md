@@ -20,6 +20,7 @@ Use skills for repeatable workflows such as image audits, metadata description u
 
 Current shared skills:
 
+- Editorial-only Learning Path refactoring orchestration: `.github/skills/refactor-learning-path-editorial/SKILL.md`
 - Learning Path structure review: `.github/skills/learning-path-structure-review/SKILL.md`
 - Install guide structure review: `.github/skills/install-guide-structure-review/SKILL.md`
 - Writing style and voice review: `.github/skills/writing-style-review/SKILL.md`
