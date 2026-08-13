@@ -46,7 +46,7 @@ generated_summary_faq:
       and `In[N]` (a number) when complete.
   - question: Which STM32Cube.AI version should I select in STM32CubeMX?
     answer: >-
-      Select **X-CUBE-AI 7.0.0**, which matches the version used by the provided testing tool. Later
+      Select **X-CUBE-AI 7.0.0**. Later
       versions might not connect successfully.
   - question: What should I do before running the Python test tool against the board?
     answer: >-

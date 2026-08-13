@@ -54,8 +54,7 @@ generated_summary_faq:
       and run a command with `sudo`. If the command runs successfully, the configuration is correct.
   - question: Which IP address should I use for `scp`, and how do I find it?
     answer: >-
-      Run the provided `ifconfig` command and look for the Wi-Fi interface, often named `mlan0`,
-      then note its `inet` address. Use that IP in the `scp` target path.
+      Run the provided `ifconfig` command and look for the Wi-Fi interface, often named `mlan0`. Then, note its `inet` address. Use that IP in the `scp` target path.
   - question: What should I check if WiFi doesn’t reconnect after a reboot?
     answer: >-
       Load the Wi-Fi driver with the provided `modprobe` command so ConnMan can reconnect to the

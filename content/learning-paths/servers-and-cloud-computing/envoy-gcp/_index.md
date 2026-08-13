@@ -33,7 +33,7 @@ generated_summary_faq:
   summary: >-
     You'll deploy and benchmark Envoy Proxy on a Google Cloud Axion C4A VM running
     RHEL 9. First, you'll install the static Arm64 binary, configure a listener that forwards to
-    `httpbin.org`, and verify responses on port 10000. Then, you'll build and run Siege to measure
+    `httpbin.org`, and verify responses on port `10000`. Then, you'll build and run Siege to measure
     availability, throughput, response time, and failures.
   faqs:
   - question: Which Google Cloud machine type should I choose for the example VM?
@@ -46,12 +46,12 @@ generated_summary_faq:
       configuration before continuing.
   - question: What result should I expect from the baseline Envoy test?
     answer: >-
-      Requests to the listener on port 10000 should be proxied to `httpbin.org` and return HTTP
+      Requests to the listener on port `10000` should be proxied to `httpbin.org` and return HTTP
       `200 OK`. The response confirms the listener is active and routing works as configured.
   - question: When I run Siege, which endpoint should I target?
     answer: >-
       Target the Envoy listener defined in your configuration, typically the VM’s address on port
-      10000 or `localhost:10000`. Keep the same target across runs to compare results consistently.
+      `10000` or `localhost:10000`. Keep the same target across runs to compare results consistently.
   - question: How do I compare results between Arm64 C4A and x86_64?
     answer: >-
       Use the same Envoy version, configuration, and Siege workload on both instance types. Compare

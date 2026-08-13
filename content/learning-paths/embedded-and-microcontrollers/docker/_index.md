@@ -36,7 +36,7 @@ generated_summary_faq:
   faqs:
   - question: Which base operating system should the Dockerfile use?
     answer: >-
-      Use Ubuntu as the base for the Docker image, as specified in the instructions. The host can be
+      Use Ubuntu as the base for the Docker image. The host can be
       Windows or a different Linux distribution.
   - question: Do I need to use sudo for Docker commands on Linux?
     answer: >-

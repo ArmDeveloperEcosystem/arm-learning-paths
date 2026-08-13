@@ -42,7 +42,7 @@ generated_summary_faq:
   - question: What result should I expect when I run the GPIO test script?
     answer: >-
       The LED connected to GPIO 17 should turn on and off as coded without GPIO-related errors.
-      If nothing changes, recheck the wiring and pin selection in the script.
+      If nothing changes, check the wiring and pin selection in the script.
   - question: Which GPIO pin and resistor value does the LED example use?
     answer: >-
       Use GPIO 17 (physical pin 11) with a 220Ω series resistor. Connect the LED anode (long leg)

@@ -32,7 +32,7 @@ generated_summary_faq:
     You'll boot a Linux software stack on an Arm FVP and debug it with Arm
     Development Studio. First, you'll configure Trusted Firmware-A for the target CPU, adjust the device
     tree, and verify build outputs. Then, you'll launch the FVP, capture UART logs, create a debug
-    configuration, and step through Trusted Firmware-A and the Linux kernel.
+    configuration, and debug Trusted Firmware-A and the Linux kernel.
   faqs:
   - question: How do I know my Trusted Firmware-A build includes the correct `cpu_ops` support?
     answer: >-
@@ -56,7 +56,7 @@ generated_summary_faq:
     answer: >-
       Arm DS `v2022.2` or later is recommended to support DWARF 5 debug information used by GCC
       11 and later. Start it with `/opt/arm/developmentstudio-2022.2/bin/armds_ide`, then create
-      a debug configuration to step through Trusted Firmware-A and the Linux kernel.
+      a debug configuration to debug Trusted Firmware-A and the Linux kernel.
 # END generated_summary_faq
 
 author: Qixiang Xu

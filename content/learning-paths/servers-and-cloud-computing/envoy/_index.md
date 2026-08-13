@@ -32,7 +32,7 @@ generated_summary_faq:
   summary: >-
     You'll build, install, and run Envoy on an Arm-based Linux server in the cloud or on premises.
     First, you'll review installation and connection options, then create a minimal YAML configuration
-    with an HTTP listener on `0.0.0.0:80`. You'll run Envoy as a service, open SSH and HTTP access,
+    with an HTTP listener on `0.0.0.0:80`. Then, you'll run Envoy as a service, open SSH and HTTP access,
     and verify traffic on port 80.
   faqs:
   - question: How do I know Envoy started with my configuration?
@@ -51,10 +51,11 @@ generated_summary_faq:
     answer: >-
       Confirm that firewalls and security groups allow inbound HTTP on port 80. Also
       verify the YAML listener uses `0.0.0.0:80` and that Envoy is running.
-  - question: Can I skip the build and install steps if Envoy is already present?
+  - question: What command runs Envoy with the sample configuration?
     answer: >-
-      Yes. Use the provided configuration to run Envoy as a service and proceed to verifying HTTP
-      access on port 80.
+      Run `sudo bazel-bin/source/exe/envoy-static.stripped -c configs/config-http.yaml --concurrency 16 &`.
+      The `-c` option selects the configuration file, and `--concurrency 16` sets the worker-thread
+      count.
 # END generated_summary_faq
 
 author: Zhengjun Xing

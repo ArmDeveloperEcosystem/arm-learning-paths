@@ -41,8 +41,7 @@ generated_summary_faq:
       you can use it to access Keil Studio Cloud.
   - question: Which browser should I use if I want to connect my board over USB?
     answer: >-
-      Use Google Chrome or Microsoft Edge (Chromium) because both browsers support the WebUSB standard.
-      Other features work in the latest Chrome, Edge, Opera, Safari, and Firefox.
+      To work with a board connected over USB, use browsers such as Google Chrome or Microsoft Edge (Chromium) that support the WebUSB standard.
   - question: How do I select the virtual target before building the example?
     answer: >-
       In the top-left corner, select **Connected device**, then choose **Virtual Device -
@@ -51,7 +50,7 @@ generated_summary_faq:
   - question: How do I check whether my hardware is supported?
     answer: >-
       Open Keil Studio Cloud and select the **Hardware** menu to view the supported hardware.
-      Verify your exact board appears before attempting to connect it.
+      Verify that your exact board appears before attempting to connect it.
   - question: What result should I expect after building the example project?
     answer: >-
       A successful build finishes without errors in the IDE. You can then run or debug the project

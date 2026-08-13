@@ -38,7 +38,7 @@ generated_summary_faq:
   - question: Which toolchain should I use for this migration?
     answer: >-
       Use Arm Compiler for Embedded v6. CMSIS v6 also supports Arm GNU Toolchain
-      v12 and above, LLVM v16 and above, and IAR Embedded Workbench for Arm v9.30 and above.
+      v12 and later, LLVM v16 and later, and IAR Embedded Workbench for Arm v9.30 and later.
   - question: How do I update device support for CMSIS v6?
     answer: >-
       Replace assembly-based startup code with C-based startup files and create scatter files.

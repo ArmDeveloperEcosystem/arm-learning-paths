@@ -8,7 +8,7 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for embedded software developers interested in machine learning applications.
 
 learning_objectives:
-    - Build examples from Machine Learning Evaluation Kit (MLEK)
+    - Build examples from the Arm Machine Learning Evaluation Kit (MLEK)
     - Run the examples on Arm Ecosystem Fixed Virtual Platform (FVP)
 
 prerequisites:
@@ -30,7 +30,7 @@ generated_summary_faq:
   faq_generated_at: '2026-08-12T20:11:50Z'
   faq_source_hash: 16d20cd59e8460c16434ea01a11f40aa68724347e32ae407cebdad051a3ebfa7
   summary: >-
-    You'll build machine learning examples from the Arm Machine Learning Evaluation Kit and run
+    You'll build machine learning examples from MLEK and run
     them on the Corstone-320 FVP. You'll locate generated AXF images, prepare
     the FVP, and launch an image with `-a`. You'll configure the Ethos-U MAC count to match the
     build and verify that the application starts successfully.

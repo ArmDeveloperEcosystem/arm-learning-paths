@@ -44,14 +44,13 @@ generated_summary_faq:
   - question: Do I need an existing Envoy deployment before running these tuning steps?
     answer: >-
       Yes. You need a cloud or bare-metal Envoy service in place. If you don't already have Envoy
-      set up, see the [Learn how to deploy Envoy](/learning-paths/servers-and-cloud-computing/envoy/) Learning Path.
+      set up, complete the [Learn how to deploy Envoy](/learning-paths/servers-and-cloud-computing/envoy/) Learning Path.
   - question: Which compiler should I use when building Envoy with PGO?
     answer: >-
-      Use LLVM and Clang when building Envoy with Bazel. The guidance recommends using the latest
-      available compiler version.
+      Use the latest available version of LLVM and Clang when building Envoy with Bazel. 
   - question: Should I build Bazel from source for the PGO workflow?
     answer: >-
-      Build Bazel from the most recent source code. This helps align your build
+      Build Bazel from the most recent source code. Doing so aligns your build
       with the latest LLVM and Clang toolchains.
   - question: What result should I expect after enabling THP or applying PGO?
     answer: >-

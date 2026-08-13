@@ -44,8 +44,8 @@ generated_summary_faq:
   - question: Which CMSIS-Packs do I need when migrating from CMSIS v5?
     answer: >-
       Install `ARM.CMSIS.6.0.0.pack`, `ARM.Cortex_DFP.1.0.0.pack`, and `ARM.CMSIS-RTX.5.8.0.pack`.
-      These replace the `ARM.CMSIS.5.x.x` pack during migration to CMSIS v6.
-  - question: I used the Keil.ARM_Compiler pack—what should I install now?
+      These packs replace the `ARM.CMSIS.5.x.x` pack during migration to CMSIS v6.
+  - question: I used the Keil.ARM_Compiler pack — what should I install now?
     answer: >-
       Install `ARM.CMSIS-View.1.1.0.pack` and `ARM.CMSIS_Compiler.2.0`. These packs contain the content
       that moved from the deprecated `Keil.ARM_Compiler` pack.
