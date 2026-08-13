@@ -15,9 +15,50 @@ prerequisites:
 - Some familiarity with embedded C programming
 - A Linux machine running Ubuntu, or an AWS account to use [Arm Virtual Hardware](https://www.arm.com/products/development-tools/simulation/virtual-hardware)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-13T19:01:39Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 0fc448627f05a68c8b785f8ca0cb2b7e8c7c0fb5a9686140bcbbb3dd9f24b061
+  summary_generated_at: '2026-08-13T19:01:39Z'
+  summary_source_hash: 0fc448627f05a68c8b785f8ca0cb2b7e8c7c0fb5a9686140bcbbb3dd9f24b061
+  faq_generated_at: '2026-08-13T19:01:39Z'
+  faq_source_hash: 0fc448627f05a68c8b785f8ca0cb2b7e8c7c0fb5a9686140bcbbb3dd9f24b061
+  summary: >-
+    You'll prepare a Zephyr workspace, install the Zephyr SDK, and build samples for a Cortex-M-based
+    Corstone-300 target. First, you'll obtain the Zephyr source and configure your development environment.
+    Then, you'll build the application and run its binary on the Corstone-300 Fixed Virtual Platform (FVP)
+    through Arm Virtual Hardware, locally or in the cloud.
+  faqs:
+  - question: Can I complete the Learning Path without physical hardware?
+    answer: >-
+      Yes. You build Zephyr sample applications and run them on the Arm Corstone-300 FVP provided by Arm Virtual Hardware.
+  - question: Which environment should I use to run the simulator?
+    answer: >-
+      Use a Linux machine or Arm Virtual Hardware on AWS, depending on what you have access to.
+      Follow the same build steps and run the Corstone-300 FVP in the chosen environment.
+  - question: How do I know the Zephyr build worked?
+    answer: >-
+      The build completes without errors and generates the application artifacts for the Corstone-300
+      target. Proceed when the build finishes cleanly.
+  - question: What should I check if the application does not appear to run on the FVP?
+    answer: >-
+      Confirm that the Zephyr SDK is installed, the Zephyr source was retrieved, and the FVP is
+      launched with the image you built. Ensure the selected platform matches Corstone-300.
+  - question: Where can I find the built Zephyr application?
+    answer: >-
+      You'll find the application binaries in `~/zephyrproject/zephyr/build/zephyr/`. Use the
+      `zephyr.elf` file from this directory when you run the application on the Corstone-300 FVP.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -58,4 +99,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

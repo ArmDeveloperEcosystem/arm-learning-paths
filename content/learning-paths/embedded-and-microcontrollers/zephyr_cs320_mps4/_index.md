@@ -18,9 +18,51 @@ prerequisites:
   - A Linux development environment, for example Ubuntu 22.04 or later
   - Git and Python
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-13T19:02:39Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 6b08ed7a12b4f4ff6283dc5423ccd2f6a1fcca6535a3a2f67039a63d9623d457
+  summary_generated_at: '2026-08-13T19:02:39Z'
+  summary_source_hash: 6b08ed7a12b4f4ff6283dc5423ccd2f6a1fcca6535a3a2f67039a63d9623d457
+  faq_generated_at: '2026-08-13T19:02:39Z'
+  faq_source_hash: 6b08ed7a12b4f4ff6283dc5423ccd2f6a1fcca6535a3a2f67039a63d9623d457
+  summary: >-
+    You'll add Zephyr board support for the Arm Corstone-320 MPS4 FPGA platform on Linux. First,
+    you'll prepare a Zephyr workspace, configure the Arm GNU Toolchain, and review the FPGA image
+    documentation. Then, you'll create the device tree, Kconfig, and board metadata, build `hello_world`,
+    and confirm its console output on the MPS4 board.
+  faqs:
+  - question: Which Corstone-320 FPGA image should I use with the MPS4 board?
+    answer: >-
+      Use the Arm Corstone SSE-320 FPGA Image for MPS4 (FI101). Follow
+      the platform documentation to obtain and prepare the image.
+  - question: Where can I find the output image after I build `hello_world`?
+    answer: >-
+      You'll find the ELF image at `build/zephyr/zephyr.elf`. Use this file to create the images
+      that you load onto the MPS4 board.
+  - question: Which option enables ROM-start relocation for the MPS4 FPGA build?
+    answer: >-
+      Add `-- -DCONFIG_ROMSTART_RELOCATION_ROM=y` to the `west build` command. This enables
+      the ROM-start relocation configuration used for the Corstone-320 FPGA variant.
+  - question: What output should I expect when the hello_world sample runs correctly?
+    answer: >-
+      The program prints `Hello World` to the console on the Arm Corstone-320 MPS4 board. Seeing
+      this output confirms that your board support and toolchain configuration work.
+  - question: What should I check if the build fails after adding board support files?
+    answer: >-
+      Verify your Python virtual environment is active, the toolchain environment variables are
+      set, and the device tree, Kconfig, and board metadata files are in the expected locations. Correct any path or naming issues and retry the build.
+# END generated_summary_faq
+
 author: Sue Wu
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
