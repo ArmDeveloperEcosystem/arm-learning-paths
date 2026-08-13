@@ -25,7 +25,7 @@ author:
     - Julie Gaskin
 
 ### Tags
-skilllevels: Beginner
+skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Neoverse
