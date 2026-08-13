@@ -1,4 +1,5 @@
 
+import os
 import torch
 import torch.nn as nn
 class DemoConv2dModel(torch.nn.Module):
@@ -36,9 +37,8 @@ from executorch.backends.xnnpack.quantizer.xnnpack_quantizer import (
 )
 
 def export_int8_quantize_conv2d_model(model_name: str):
-    mode_file_name = "model/" + model_name
-    pte_file = mode_file_name + ".pte"
-    etr_file = mode_file_name + ".etrecord"
+    pte_file = os.path.join("model", "qint8_conv2d_pqs8_qc8w_gemm.pte")
+    etr_file = os.path.join("model", "qint8_conv2d_pqs8_qc8w_gemm.etrecord")
     
     model = DemoQInt8Conv2dModel().eval().to(torch.float32)
     example_inputs = model.get_example_inputs(torch.float32)
@@ -79,9 +79,8 @@ export_int8_quantize_conv2d_model("qint8_conv2d_pqs8_qc8w_gemm");
 
 
 def export_pointwise_model(model_name: str):
-    mode_file_name = "model/" + model_name
-    pte_file = mode_file_name + ".pte"
-    etr_file = mode_file_name + ".etrecord"
+    pte_file = os.path.join("model", "pointwise_conv2d_pf32_gemm.pte")
+    etr_file = os.path.join("model", "pointwise_conv2d_pf32_gemm.etrecord")
     
     model = DemoConv2dModel().eval().to(torch.float32)
     example_inputs = model.get_example_inputs(torch.float32)
