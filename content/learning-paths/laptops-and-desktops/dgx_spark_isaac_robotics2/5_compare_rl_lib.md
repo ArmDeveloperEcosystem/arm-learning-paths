@@ -1,5 +1,5 @@
 ---
-title: Choosing RL Libraries
+title: Choose an RL library
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -8,16 +8,12 @@ layout: learningpathall
 
 ## From task runner to workflow architect
 
-In the previous sections, you used an Arm-based Isaac Sim / Isaac Lab environment for manipulation, contact-rich interaction, multi-agent training, and AMP-based motion. Now move from running tasks to designing the workflow.
-
-**Given your task characteristics, which RL library should you choose, and how should you scale the workflow from one platform?**
+You have used RSL-RL for manipulation, RL Games for Factory, and skrl for multi-agent and AMP tasks. Now compare why each task uses a different library.
 
 
 ## Choosing your technical toolkit
 
-One of Isaac Lab's main strengths is that it is not tied to a single RL framework. Instead, it provides an open and extensible ecosystem, allowing you to choose different RL libraries and training entry points depending on the problem you want to solve.
-
-For an architect, this choice is mostly about tradeoffs. Different tasks impose different requirements for throughput, observation complexity, algorithm features, debugging convenience, and extensibility. It directly affects how fast you can iterate and how well the workflow scales for your specific use case. Choose an RL library for an Isaac Lab workflow based on task type and development goals.
+Isaac Lab integrates several RL libraries. Start with a library that has an upstream agent configuration for your task, then consider algorithm support and workflow needs.
 
 
 ## Library tradeoffs and decision guidance
@@ -26,21 +22,21 @@ The following table summarizes four commonly used RL libraries in Isaac Lab, wit
 
 | Library | Core strength | Best fit |
 |---|---|---|
-| [**RSL-RL**](https://github.com/leggedrobotics/rsl_rl) | Lightweight, fast, memory-efficient | Locomotion, fast iteration, large parallel training |
-| [**rl_games**](https://github.com/Denys88/rl_games) | Supports LSTM and visual encoders | Complex observation spaces, contact-rich manipulation, Factory tasks |
-| [**skrl**](https://github.com/Toni-SM/skrl) | Modular design with MARL and AMP support | Multi-agent training, natural-motion imitation, flexible workflow extension |
-| [**Stable Baselines3**](https://github.com/DLR-RM/stable-baselines3) | Strong documentation and standardized API | Teaching, prototyping, baseline comparison |
+| [**RSL-RL**](https://github.com/leggedrobotics/rsl_rl) | Efficient on-policy training | Locomotion and many manager-based tasks |
+| [**RL Games**](https://github.com/Denys88/rl_games) | Recurrent-policy support | Factory tasks and other registered RL Games configurations |
+| [**skrl**](https://github.com/Toni-SM/skrl) | MAPPO, IPPO, and AMP support | Multi-agent and motion-prior tasks |
+| [**Stable Baselines3**](https://github.com/DLR-RM/stable-baselines3) | Standardized algorithms and API | Supported baselines and prototyping |
 
 ### Choose based on task and workflow needs
 
 Use a first-pass mapping from task needs to library behavior:
 
-* For maximum training speed and throughput, start with **RSL-RL**.
-* For complex observations or recurrent policies, use **rl_games**.
-* For multi-agent workflows or AMP-style training, use **skrl**.
-* For educational baselines and standardized comparisons, use **Stable Baselines3**.
+* Use **RSL-RL** for the Franka and locomotion configurations used in these Learning Paths.
+* Use **RL Games** for the upstream Factory configurations.
+* Use **skrl** for MAPPO, IPPO, or AMP.
+* Use **Stable Baselines3** when the task provides an SB3 configuration and you want its standard API.
 
-In Isaac Lab, this choice also affects scripts, configuration style, and experiment structure. On Arm-based systems, this workflow is practical because you can switch stacks through script entry points and CLI flags. Unified memory also helps startup because simulation and learning can avoid host-to-device transfers. Because CPU and GPU share one memory pool, each side can use more or less memory as needed for better throughput, instead of hitting bottlenecks from fixed per-device limits. Environment count can then scale to use much of the available 128 GB memory.
+Library choice affects the agent configuration, checkpoint format, and available algorithms. Use the configuration registered for the selected task rather than assuming every library supports every environment.
 
 
 ## Mapping libraries to task types
@@ -49,11 +45,11 @@ To make the decision more concrete, the following table maps the task categories
 
 | Task type | Suggested library | Why |
 |---|---|---|
-| Franka Reach / Lift and other basic manipulation tasks | **RSL-RL** | Simple setup and good for fast baselines with large parallel rollout |
-| Drawer / Factory and other contact-rich tasks | **rl_games** | Better suited for more complex observation and policy structures |
-| Multi-agent object handover | **skrl** | A more natural fit for MARL workflows |
-| Humanoid AMP Walk / Run / Dance | **skrl** | Direct fit for AMP-style algorithms and natural-motion tasks |
-| Educational examples and standard RL baselines | **Stable Baselines3** | Standardized API and easy comparison workflow |
+| Franka Reach, Lift, and Open-Drawer | **RSL-RL** | Upstream PPO configurations are registered for these tasks |
+| Factory peg insertion | **RL Games** | The Factory task registers an RL Games PPO configuration |
+| Multi-agent object handover | **skrl** | The task registers MAPPO and IPPO configurations |
+| Humanoid AMP Walk, Run, and Dance | **skrl** | These tasks register skrl AMP configurations |
+| Supported baseline comparisons | **Stable Baselines3** | Use only when the environment registers an SB3 configuration |
 
 {{% notice Tip %}}
 No single library is the best choice for every task. A practical strategy is to start with the tool that helps you establish a baseline quickly, then move to a more specialized training stack when the task requires it.
@@ -62,23 +58,21 @@ No single library is the best choice for every task. A practical strategy is to 
 
 ## Scaling up: multi-GPU distributed training
 
-Most readers in this Learning Path use one GPU, and that setup is already enough for many manipulation and locomotion tasks. If you later move to multi-GPU systems, distributed training can improve throughput for very large workloads.
+DGX Spark has one GPU, so run the earlier tasks as single-GPU jobs. If you move the same checkout to a system with two GPUs, Isaac Lab supports distributed training.
 
 ### Run
 
-`torch.distributed.run` is PyTorch's distributed launcher. It creates one process per GPU and coordinates rank-to-rank communication so all workers train synchronously. The following example is for one node with two GPUs:
-
-If your setup includes multiple networked systems, the same pattern extends to clusters, for example Grace Hopper servers or DGX Spark systems connected over a high-speed network. In those cases, `--nnodes` and rank settings are expanded to span the full cluster.
+PyTorch's distributed launcher creates one process per GPU. Replace `<example task>` with the task to train on a two-GPU system:
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 \
     scripts/reinforcement_learning/rsl_rl/train.py \
     --task=<example task> \
     --headless \
     --distributed
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 \
     scripts/reinforcement_learning/train.py \
     --rl_library rsl_rl \
@@ -88,7 +82,7 @@ python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 \
 {{< /tab >}}
 {{< /tabpane >}}
 
-This command defines the training entry point, worker-process count, distributed mode, and task selection in one place. In this workflow, the CPU side handles launch and orchestration while GPUs handle simulation and learning throughput.
+For multi-node options and NCCL troubleshooting, use the guide for [Isaac Lab 2.3.2](https://isaac-sim.github.io/IsaacLab/v2.3.2/source/features/multi_gpu.html) or [Isaac Lab 3.0 Beta 2](https://isaac-sim.github.io/IsaacLab/release/3.0.0-beta2/source/features/multi_gpu.html).
 
 
 

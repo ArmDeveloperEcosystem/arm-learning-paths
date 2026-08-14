@@ -1,5 +1,5 @@
 ---
-title: Reproducing Natural Motion with Adversarial Motion Priors (AMP)
+title: Reproduce natural motion with Adversarial Motion Priors
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -28,17 +28,17 @@ Use human walking reference data to train a humanoid robot to produce stable and
 
 ### Run
 
-Use the **skrl** library together with `--algorithm AMP` to launch training:
+From `~/IsaacLab`, launch skrl training with `--algorithm AMP`:
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
   --task=Isaac-Humanoid-AMP-Walk-Direct-v0 \
   --headless \
   --algorithm AMP \
   --max_iterations=1000
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh train \
   --rl_library skrl \
   --task=Isaac-Humanoid-AMP-Walk-Direct-v0 \
@@ -47,6 +47,8 @@ Use the **skrl** library together with `--algorithm AMP` to launch training:
   --max_iterations=1000
 {{< /tab >}}
 {{< /tabpane >}}
+
+These commands use 1,000 iterations for a short baseline. The upstream task configuration defaults to 5,000 iterations; resume training to compare with the later examples.
 
 ### Verify
 
@@ -57,7 +59,7 @@ After training, look for the following behaviors:
 * The left and right leg timing resembles a more natural walking pattern.
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/play.py \
   --task=Isaac-Humanoid-AMP-Walk-Direct-v0 \
   --algorithm=AMP \
@@ -65,7 +67,7 @@ After training, look for the following behaviors:
   --checkpoint=logs/skrl/humanoid_amp_walk/<run_timestamp>/checkpoints/best_agent.pt \
   --real-time
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh play \
   --rl_library skrl \
   --task=Isaac-Humanoid-AMP-Walk-Direct-v0 \
@@ -90,14 +92,14 @@ Use human running reference data to train a humanoid robot to maintain a natural
 ### Run
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
     --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
     --headless \
     --algorithm AMP \
     --max_iterations=1000 
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh train \
     --rl_library skrl \
     --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
@@ -109,7 +111,7 @@ Use human running reference data to train a humanoid robot to maintain a natural
 
 ### What changes in the workflow
 
-Compared with the walking task, you do not need to change platforms or rebuild the project. You only switch the task to enter another motion-prior-driven scenario. This is a clear example of workflow control: the same Python entry point, toolchain, and development environment can be reused while exploring different natural-motion tasks.
+Keep the same entry point and AMP algorithm. Change only `--task` to select running instead of walking.
 
 ### Verify
 
@@ -117,10 +119,10 @@ After training, confirm the following:
 
 * As forward speed increases, the robot remains stable rather than falling immediately.
 * Arm swing, leg lift, and landing timing become more coordinated.
-* The motion looks like a recognizable running pattern rather than just aggressive forward movement.
+* The motion looks like a recognizable running pattern rather than uncontrolled forward movement.
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/play.py \
   --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
   --algorithm=AMP \
@@ -128,7 +130,7 @@ After training, confirm the following:
   --checkpoint=logs/skrl/humanoid_amp_run/<run_timestamp>/checkpoints/best_agent.pt \
   --real-time
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh play \
   --rl_library skrl \
   --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
@@ -141,10 +143,10 @@ After training, confirm the following:
 
 {{% notice Tip %}}
 
-If the performance is not enough, run the following command to to resume from a specific checkpoint.
+To continue training from a checkpoint, run:
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
     --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
     --headless \
@@ -152,7 +154,7 @@ If the performance is not enough, run the following command to to resume from a 
     --max_iterations=<number of additional iterations (Epochs)> \
     --checkpoint=<path_to_checkpoint>
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh train \
     --rl_library skrl \
     --task=Isaac-Humanoid-AMP-Run-Direct-v0 \
@@ -165,7 +167,7 @@ If the performance is not enough, run the following command to to resume from a 
 
 {{% /notice %}}
 
-![img8 alt-text#center](./amp_running.gif "Humanoid trained with AMP with 3000 epochs (left) and 26000 epochs (right). Left shows humanoid immediately stumbling where as at only 26,000 iterations the humanoid begins a skipping like gate to try and match the target velocity of running")
+![Humanoid AMP running comparison. At 3,000 iterations, the humanoid stumbles immediately. At 26,000 iterations, it uses a skipping gait while attempting to match the target running velocity.#center](./amp_running.gif "Humanoid AMP running at 3,000 and 26,000 iterations")
 
 Try training the model further to see if the skipping-like motion evolves into a run.
 
@@ -174,13 +176,13 @@ Try training the model further to see if the skipping-like motion evolves into a
 To optionally test style-heavy motion generation, run this AMP dance task:
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
     --task=Isaac-Humanoid-AMP-Dance-Direct-v0 \
     --headless \
     --algorithm AMP
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh train \
     --rl_library skrl \
     --task=Isaac-Humanoid-AMP-Dance-Direct-v0 \
@@ -189,7 +191,7 @@ To optionally test style-heavy motion generation, run this AMP dance task:
 {{< /tab >}}
 {{< /tabpane >}}
 
-{{% notice Please note %}}
+{{% notice Note %}}
 
 As of May 2026, training this model with the default number of iterations typically takes several hours on a DGX Spark. A pre-trained checkpoint for this task is not available at this time, so you will need to train the model from scratch.
 
@@ -204,7 +206,7 @@ As of May 2026, training this model with the default number of iterations typica
 | Isaac-Humanoid-AMP-Run-Direct-v0 | Human running capture data | Smoother high-speed running behavior |
 | Isaac-Humanoid-AMP-Dance-Direct-v0 | Human dance capture data | Rhythmic and expressive dance motion |
 
-For humanoid robots that must coexist with people, the value of AMP is not only that the motion looks more human. It can also improve center-of-mass transfer and dynamic stability, which may improve behavior quality in more complex environments.
+AMP combines the task reward with a learned motion-style reward from the reference data.
 
 
 ## Next up
