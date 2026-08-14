@@ -31,7 +31,7 @@ generated_summary_faq:
     answer: >-
       Select **Build (F7)** and verify it completes without errors. When the build succeeds, select
       **Start a Debug Session (Ctrl+F5)** and **Run (F5)** the application.
-  - question: I don’t see any SWV data — what should I check?
+  - question: What should I check if I don't see any SWV data?
     answer: >-
       SWV isn't supported in simulation mode. Connect a debug adapter to real target hardware
       and use SWV there.

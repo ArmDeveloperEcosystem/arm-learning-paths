@@ -52,7 +52,7 @@ generated_summary_faq:
       elapsed build time on both systems to understand the relative difference.
   - question: How do I choose a cloud instance for this comparison?
     answer: >-
-      Use an Arm-based instance from a cloud service provider. For instructions to select and provision an instance, follow the [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/).
+      Use an Arm-based instance from a cloud service provider. For instructions to select and provision an instance, follow the [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) Learning Path.
 # END generated_summary_faq
 
 author: Jason Andrews

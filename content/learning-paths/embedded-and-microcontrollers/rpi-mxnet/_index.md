@@ -55,7 +55,7 @@ generated_summary_faq:
   - question: Can I complete this Learning Path without a physical Raspberry Pi?
     answer: >-
       Yes. The Raspberry Pi deployment step is optional, so you can stop after producing the Raspberry
-      Pi OS image with MXNet built on the Arm server.
+      Pi OS image.
 # END generated_summary_faq
 
 author: Jason Andrews

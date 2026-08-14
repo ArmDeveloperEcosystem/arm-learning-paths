@@ -54,7 +54,7 @@ generated_summary_faq:
       memory access patterns.
   - question: Do I need to install the Buildroot dependencies on an AArch64 host?
     answer: >-
-      Yes. The steps specify running the package installation on an AArch64-based Linux system
+      Yes. Run the package installation on an AArch64-based Linux system
       before building.
   - question: When should I enable SPE in this workflow?
     answer: >-

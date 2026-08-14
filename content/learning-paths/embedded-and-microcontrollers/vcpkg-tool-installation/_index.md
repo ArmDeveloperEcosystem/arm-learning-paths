@@ -34,16 +34,16 @@ generated_summary_faq:
   faq_generated_at: '2026-08-13T18:58:09Z'
   faq_source_hash: 9570302d161023bafe287a823c5268cc92a08d59399124d28b7288cf3bbfd806
   summary: >-
-    You'll install and initialize vcpkg on Linux, Windows, or macOS for reproducible command-line tool
+    You'll install and initialize `vcpkg` on Linux, Windows, or macOS for reproducible command-line tool
     setup for projects. First, you'll run the shell-specific initialization script and create `vcpkg-configuration.json`
     for your host. Then, you'll run `vcpkg-shell activate`, inspect installed artifacts, and activate
     a Keil MDK Community license with `armlm` for Arm tooling.
   faqs:
   - question: Do I need to run the vcpkg init script every time I open a new terminal?
     answer: >-
-      Yes. Run the appropriate script from ~/.vcpkg for your shell (vcpkg-init.cmd on Windows
-      cmd, vcpkg-init.ps1 in PowerShell, or vcpkg-init on Linux/macOS). Initialization is required
-      in every new terminal window before using vcpkg.
+      Yes. Run the appropriate script from `~/.vcpkg` for your shell (`vcpkg-init.cmd` on Windows
+      cmd, `vcpkg-init.ps1` in PowerShell, or `vcpkg-init` on Linux and macOS). Initialization is required
+      in every new terminal window before using `vcpkg`.
   - question: What does my vcpkg-configuration.json control, and why create it before activation?
     answer: >-
       The configuration ensures consistent installation across platforms and selects the correct
@@ -51,18 +51,18 @@ generated_summary_faq:
       the tools defined for your environment.
   - question: How do I know that vcpkg activation worked?
     answer: >-
-      After running vcpkg-shell activate, you should see a summary of artifacts with their Version
-      and Status, such as installed. The listed tools come from your vcpkg-configuration.json.
-  - question: I see a warning that vcpkg-artifacts is experimental. Should I worry?
+      After running `vcpkg-shell activate`, you should see a summary of artifacts with their `Version`
+      and `Status`, such as `installed`. The listed tools come from your `vcpkg-configuration.json`.
+  - question: What should I do if I see a warning that vcpkg-artifacts is experimental?
     answer: >-
-      The activation output can include a warning that vcpkg-artifacts is experimental and may
-      change at any time. This is expected; continue with the steps as shown.
+      The activation output can include a warning that `vcpkg-artifacts` is experimental and might
+      change at any time. This is expected, and no action is necessary.
   - question: How do I activate and verify the Keil MDK Community license for Arm Compiler for
       Embedded?
     answer: >-
-      Activate it using armlm activate -product KEMDK-COM0 -server https://mdk-preview.keil.arm.com,
-      then optionally run armlm inspect to confirm an active product entry such as Keil MDK Community.
-      Use of Arm tools is subject to the End User License Agreement located in the license_terms
+      Activate it using `armlm activate -product KEMDK-COM0 -server https://mdk-preview.keil.arm.com`,
+      then optionally run `armlm inspect` to confirm an active product entry such as Keil MDK Community.
+      Use of Arm tools is subject to the End User License Agreement located in the `license_terms`
       folder of the downloaded archive.
 # END generated_summary_faq
 

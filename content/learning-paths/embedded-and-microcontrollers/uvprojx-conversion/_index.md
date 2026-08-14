@@ -44,20 +44,20 @@ generated_summary_faq:
       related files in the same workspace.
   - question: What result should I expect after a successful conversion?
     answer: >-
-      You should see files such as <project>.csolution.yaml, <project>.cproject.yaml, and vcpkg-configuration.json.
-      In Keil Studio, the Output window reports success and the vcpkg configuration is activated.
+      You should see files such as `<project>.csolution.yaml`, `<project>.cproject.yaml`, and `vcpkg-configuration.json`.
+      In Keil Studio, the **Output** window reports success and the `vcpkg` configuration is activated.
   - question: How do I verify the export from µVision worked?
     answer: >-
-      Check the Build Output window for a successful conversion message. The generated csolution
+      Check the **Build Output** window for a successful conversion message. The generated `csolution`
       files appear alongside your project and can be opened by CMSIS-Toolbox or Keil Studio.
   - question: What should I check if the conversion option is missing or fails?
     answer: >-
       Confirm the µVision project uses Arm Compiler 6 as the default toolchain. Projects that
-      use Arm Compiler 5 are not supported for conversion.
+      use Arm Compiler 5 aren't supported for conversion.
   - question: Can I convert from the command line and what should I do next?
     answer: >-
-      Yes. Install the uv2csolution tool and follow its command-line usage; it is available for
-      macOS, Linux, and Windows. After conversion, use the generated csolution with CMSIS-Toolbox
+      Yes. Install the `uv2csolution` tool and follow its command-line usage. The tool is available for
+      macOS, Linux, and Windows. After conversion, use the generated `csolution` with CMSIS-Toolbox
       or open it in Keil Studio.
 # END generated_summary_faq
 
