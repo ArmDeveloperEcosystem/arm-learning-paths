@@ -49,18 +49,18 @@ generated_summary_faq:
     answer: >-
       Choose your Zephyr-supported Arm Cortex-M board. NXP FRDM-MCXN947 is used as an
       example, and you can confirm other options in the [Zephyr Supported Boards list](https://docs.zephyrproject.org/latest/boards/#).
-  - question: What should I check if building works but debugging doesn't start?
+  - question: Where do I configure a debug runner that Workbench for Zephyr doesn't detect?
     answer: >-
-      Verify the selected debug runner matches your board’s requirements. If the board needs a
-      different runner, switch to the recommended option for that target and try again.
+      Open the **Debug Manager** from the sidebar, locate your board profile, and enter the full
+      path to the runner executable.
   - question: What result should I expect after a successful build?
     answer: >-
       Expect build artifacts for your application and a generated memory usage report from Workbench
       for Zephyr. These outputs indicate the project is ready for debugging on the selected board.
-  - question: How should I use the memory usage report in this workflow?
+  - question: How do I open the memory reports after a successful build?
     answer: >-
-      Review the report to see how code and data are allocated and identify areas to reduce usage.
-      Apply basic adjustments, rebuild, and compare reports to validate improvements before debugging.
+      In the **Workbench for Zephyr** panel, select **Memory Analysis**. You can then review RAM
+      usage, ROM usage, and **Puncover** analysis.
 # END generated_summary_faq
 
 author: 

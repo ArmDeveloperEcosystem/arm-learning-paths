@@ -52,12 +52,11 @@ generated_summary_faq:
       the ROM-start relocation configuration used for the Corstone-320 FPGA variant.
   - question: What output should I expect when the hello_world sample runs correctly?
     answer: >-
-      The program prints `Hello World` to the console on the Arm Corstone-320 MPS4 board. Seeing
-      this output confirms that your board support and toolchain configuration work.
-  - question: What should I check if the build fails after adding board support files?
+      The program prints `Hello World` to the console on the Arm Corstone-320 MPS4 board.
+  - question: Which files do I copy to the MPS4 SD card?
     answer: >-
-      Verify your Python virtual environment is active, the toolchain environment variables are
-      set, and the device tree, Kconfig, and board metadata files are in the expected locations. Correct any path or naming issues and retry the build.
+      Copy `vector.bin` and `app.bin` to the `\SOFTWARE\` folder. You'll create both files from
+      `build/zephyr/zephyr.elf` with `arm-none-eabi-objcopy`.
 # END generated_summary_faq
 
 author: Sue Wu

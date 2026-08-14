@@ -40,16 +40,15 @@ generated_summary_faq:
       Yes. You build Zephyr sample applications and run them on the Arm Corstone-300 FVP provided by Arm Virtual Hardware.
   - question: Which environment should I use to run the simulator?
     answer: >-
-      Use a Linux machine or Arm Virtual Hardware on AWS, depending on what you have access to.
-      Follow the same build steps and run the Corstone-300 FVP in the chosen environment.
+      Use a Linux machine or Linux-based Arm Virtual Hardware.
   - question: How do I know the Zephyr build worked?
     answer: >-
       The build completes without errors and generates the application artifacts for the Corstone-300
       target. Proceed when the build finishes cleanly.
-  - question: What should I check if the application does not appear to run on the FVP?
+  - question: What console output should I expect from the Corstone-300 FVP?
     answer: >-
-      Confirm that the Zephyr SDK is installed, the Zephyr source was retrieved, and the FVP is
-      launched with the image you built. Ensure the selected platform matches Corstone-300.
+      The FVP opens telnet terminal windows that show a Zephyr boot message followed by
+      `Hello World! mps3_an547`.
   - question: Where can I find the built Zephyr application?
     answer: >-
       You'll find the application binaries in `~/zephyrproject/zephyr/build/zephyr/`. Use the

@@ -47,14 +47,13 @@ generated_summary_faq:
     answer: >-
       You'll know the build finished correctly when you have a generated image, and the
       build completes without errors.
-  - question: What should I check if QEMU doesn't boot my image?
+  - question: Where can I find the images after the build completes?
     answer: >-
-      Verify that the build targeted a 64-bit Arm machine and that you're launching QEMU with
-      the image produced by the build.
-  - question: Can I add packages or customize recipes beyond the minimal image?
+      You'll find the images in `build-qemu-arm64/tmp/deploy/images/qemuarm64`.
+  - question: Which command launches the image in QEMU without graphics?
     answer: >-
-      The steps in the Learning Path are focused on producing a minimal image and don't cover customization.
-      You can extend the build later by modifying Yocto recipes.
+      Run `runqemu qemuarm64 nographic`. Linux boots in your console, where you can log in as
+      `root`.
 # END generated_summary_faq
 
 author: Pareena Verma

@@ -40,8 +40,7 @@ generated_summary_faq:
   faqs:
   - question: Which Raspberry Pi OS image should I install on the Raspberry Pi 5?
     answer: >-
-      Install the 64-bit version of Raspberry Pi OS. Use Raspberry Pi Imager as recommended in
-      the Raspberry Pi documentation to prepare the SD card.
+      Install the 64-bit version of Raspberry Pi OS. Use Raspberry Pi Imager to prepare the SD card.
   - question: Should I set up ExecuTorch on the development host or directly on the Raspberry
       Pi?
     answer: >-
@@ -52,11 +51,10 @@ generated_summary_faq:
     answer: >-
       Quantization is often used to reduce the memory footprint of large models for memory-constrained
       devices. Choose an approach that fits your device constraints.
-  - question: How do I verify that the model is running correctly on the Raspberry Pi 5?
+  - question: How can I experiment with the model on the Raspberry Pi 5?
     answer: >-
-      After deploying the build artifacts, run prompts and confirm the model returns coherent
-      responses. If you see errors or no output, check that the device uses the 64-bit Raspberry
-      Pi OS and that the built binaries were transferred correctly.
+      Run `llama_main` with a prompt, then try different prompts and command-line options. You
+      can adjust the prompt and the number of CPU threads to explore the model's behavior.
   - question: Are there usage restrictions for Llama 3?
     answer: >-
       Yes. Llama models are subject to an acceptable use policy and a responsible use guide. Review
