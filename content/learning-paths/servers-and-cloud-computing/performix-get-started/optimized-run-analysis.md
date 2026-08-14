@@ -1,52 +1,52 @@
 ---
-title: Analyze the optimized code
+title: Validate the optimization
 
 weight: 8
 
 layout: learningpathall
 ---
-In this section, you'll compare the performance of the scalar and NEON-optimized versions of your workload using Arm Performix. This comparison will help you validate changes in runtime, instruction mix, and bottleneck behavior.
 
-## Running the Optimized Workload
+You can now compare the scalar and NEON-optimized versions using Arm Performix to validate changes in runtime, instruction mix, and bottleneck behavior.
 
-1. In Arm Performix, select the Code Hotspots, CPU Microarchitecture, and Instruction Mix recipes.
+## Run the recipes on the optimized binary
 
-2. Specify the path to your optimized workload and run it with the same parameters as before:
+1. In Performix, select the **Code Hotspots**, **CPU Microarchitecture**, and **Instruction Mix** recipes.
+
+1. Specify the path to the optimized binary and run it with the same parameters as before:
 
     ```bash
-    ./dot_neon 16777216 2000
+    performix-analysis/dot_neon 16777216 2000
     ```
 
-3. Start the analysis for each recipe.
+1. Select **Run Recipe** for each recipe to collect fresh profiling data.
 
-## Comparing Results
-When we run the same recipes with the optimized version, the most obvious improvement is wall-clock time and total cycle count. This comes from processing four elements per loop iteration using SIMD. The flame graph shows the same dominant function, but the sample count has reduced significantly.
+## Compare Code Hotspots results
 
-![Viewing the flame graph for the NEON-optimized code #center](images/neon_cpu_hotspots_flame_graph.png "Viewing the flame graph for the NEON-optimized code")
+The most visible improvement is wall-clock time and total cycle count. Processing four elements per loop iteration using SIMD reduces the total number of instructions executed. The flame graph shows the same dominant function (`dot_neon`), but the sample count is significantly lower.
 
-Re-running the Instruction Mix recipe, we should see:
+![Flame graph showing dot_neon with a reduced sample count compared to the scalar version#center](images/neon_cpu_hotspots_flame_graph.png "Code Hotspots flame graph for the NEON-optimized binary")
 
-- Increased percentage of Advanced SIMD instructions
-- Reduced proportion of scalar floating-point operations
-- Fewer loop-control instructions relative to work done
+## Compare Instruction Mix results
 
-We can compare the new Instruction Mix data with the scalar version, by selecting the previous Instruction Mix run:
+Select the previous scalar Instruction Mix run to compare it with the optimized version side by side:
 
-![Comparing Instruction Mix results with the previous run #center](images/comparison.png "Comparing Instruction Mix results with the previous run")
+![Side-by-side comparison showing increased SIMD instructions and decreased scalar operations#center](images/comparison.png "Instruction Mix comparison between scalar and NEON versions")
 
-Being able to overlay runs directly makes it easy to see how instruction usage changes after optimization. Here, it shows SIMD instructions in the optimized version, while scalar operations decrease, indicating more work done per instruction.
+The overlay shows Advanced SIMD instructions appearing in the optimized version while scalar operations decrease, confirming more work is done per instruction.
 
-![Viewing Instruction Mix for the NEON-optimized code #center](images/neon_instruction_mix.png "Viewing Instruction Mix for the NEON-optimized code")
+![Instruction Mix breakdown for the NEON-optimized binary showing Advanced SIMD usage#center](images/neon_instruction_mix.png "Instruction Mix for the NEON-optimized binary")
 
-While the scalar version is dominated by integer, FP and load operations, the NEON version introduces vectorization with Advanced SIMD, reducing the number of instructions required per element and directly relieving frontend pressure.
+The scalar version is dominated by integer, floating-point, and load operations. The NEON version introduces Advanced SIMD, reducing the number of instructions required per element and directly relieving frontend pressure.
 
-### Validating Improvements
+## Compare CPU Microarchitecture results
 
-Re-running the CPU microarchitecture recipe shows that after vectorization, frontend stalls drop significantly, and backend effects become dominant. The change is dramatic:
+The CPU Microarchitecture recipe confirms the bottleneck has shifted. After vectorization, frontend stalls drop and backend effects become dominant:
 
-- **Frontend Bound**: Drops from ~60% to ~11%.
-- **Backend Bound**: Increases to ~63%.
+- **Frontend Bound:** drops from ~60% to ~11%
+- **Backend Bound:** increases to ~63%
 
-![Viewing CPU microarchitecture results for the NEON-optimized code #center](images/neon_cpu_ma_summary.png "Viewing CPU microarchitecture results for the NEON-optimized code")
+![Topdown summary showing the bottleneck shifted from frontend bound to backend bound after NEON optimization#center](images/neon_cpu_ma_summary.png "CPU Microarchitecture results for the NEON-optimized binary")
 
-This example demonstrates a common pattern in modern performance optimization: Improving one part of the pipeline increases pressure elsewhere. With the bottleneck shifted from the frontend to the backend, the CPU executes more efficiently, and demand shifts to execution units and memory. This iterative investigation (measure, change, validate) is exactly what Arm Performix is designed to support.
+This demonstrates a common pattern in performance optimization: improving one part of the pipeline shifts pressure elsewhere. With the bottleneck moved from the frontend to the backend, the CPU executes more efficiently, and demand shifts to execution units and memory. This iterative cycle of measure, change, and validate is exactly what Performix is designed to support.
+
+Now that you've completed a full optimization cycle, you can explore how to integrate Performix into broader development workflows.
