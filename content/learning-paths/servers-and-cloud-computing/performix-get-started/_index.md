@@ -1,9 +1,5 @@
 ---
-title: Get started with Arm Performix on Arm-based Servers
-
-draft: true
-cascade:
-  draft: true
+title: Get started with Arm Performix on Arm-based servers
 
 description: Profile and optimize a C++ application on Arm-based servers using Arm Performix recipes, CPU microarchitecture analysis, and NEON intrinsics.
 
