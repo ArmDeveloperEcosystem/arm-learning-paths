@@ -145,8 +145,8 @@ The output shows the installed version number:
 
 ```output
 Daemon process started; to stop call `apx daemon stop`.
-Arm Performix CLI version: 1.0.0
-Arm Performix daemon version: 1.0.0
+Arm Performix CLI version: 1.20.0
+Arm Performix daemon version: 1.20.0
 ```
 
 ### How do I install Arm Performix on a macOS host?
@@ -160,7 +160,7 @@ Alternatively, download using `curl`:
 curl -Lo ArmPerformix-darwin-arm64.pkg https://artifacts.tools.arm.com/arm-performix/app/latest/darwin/arm64/ArmPerformix-darwin-arm64.pkg
 {{< /tab >}}
 {{< tab header="x64" >}}
-curl -Lo ArmPerformix-darwin-arm64.pkg https://artifacts.tools.arm.com/arm-performix/app/latest/darwin/x64/ArmPerformix-darwin-x64.pkg
+curl -Lo ArmPerformix-darwin-x64.pkg https://artifacts.tools.arm.com/arm-performix/app/latest/darwin/x64/ArmPerformix-darwin-x64.pkg
 {{< /tab >}}
 {{< /tabpane >}}
 
@@ -239,7 +239,7 @@ apx --help
 
 ## What comes next after installing Arm Performix?
 
-After completing these installation steps, you can simply launch the GUI or CLI to get started.
+After completing these installation steps, you can launch the GUI or CLI to get started.
 
 For further guidance on using Arm Performix, including connecting to your target for the first time or setting up the MCP server to use Arm Performix with an AI agent, please refer to the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/latest/).
 
