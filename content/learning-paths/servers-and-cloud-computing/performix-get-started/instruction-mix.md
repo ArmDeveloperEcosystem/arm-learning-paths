@@ -28,9 +28,7 @@ The Instruction Mix recipe in Arm Performix shows how your code uses different i
 
 The Instruction Mix analysis shows the distribution of instruction types used by your application. The results confirm that the code is dominated by scalar operations with no SIMD usage. Each loop iteration performs only a small amount of work but still consumes instruction bandwidth. This creates sustained pressure on the frontend because too many instructions are required per unit of useful computation.
 
-The insights panel identifies the root cause: the application is not using SIMD and is missing vectorization opportunities. Vectorization reduces the number of instructions required per element by performing multiple operations per instruction, directly relieving frontend pressure.
-
-The next step is to optimize the scalar dot-product loop using Arm NEON intrinsics to improve instruction efficiency.
+The **Insights** panel identifies the root cause: the application is not using SIMD and is missing vectorization opportunities. Vectorization reduces the number of instructions required per element by performing multiple operations per instruction, directly relieving frontend pressure.
 
 ## What you've learned
 

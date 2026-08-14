@@ -8,7 +8,7 @@ weight: 5
 layout: learningpathall
 ---
 
-The CPU Microarchitecture recipe in Arm Performix provides a [Topdown analysis](https://developer.arm.com/documentation/109542/0100/Arm-Topdown-methodology) breakdown of how CPU execution capacity is used. This helps you identify where performance is lost due to stalls or inefficiencies, and whether your application is limited by frontend, backend, memory, or other CPU pipeline effects.
+The CPU Microarchitecture recipe in Arm Performix provides a [Topdown analysis](https://developer.arm.com/documentation/109542/0100/Arm-Topdown-methodology) breakdown of how CPU execution capacity is used. This analysis helps you identify where performance is lost due to stalls or inefficiencies. It also shows whether your application is limited by frontend, backend, memory, or other CPU pipeline effects.
 
 ## Run the CPU Microarchitecture recipe
 
@@ -28,7 +28,7 @@ The CPU Microarchitecture recipe in Arm Performix provides a [Topdown analysis](
 
 The analysis shows that the application is over 60% frontend bound. This means the CPU frequently stalls while fetching or decoding instructions, even though backend resources are available. The CPU isn't compute-bound; it's waiting for instructions.
 
-Performix provides guidance in the Insights panel to help you understand these results.
+Performix provides guidance in the **Insights** panel to help you understand these results.
 
 ![Insights panel recommending investigation of instruction fetch and decode bottlenecks#center](images/cpu_ma_insights.png "CPU Microarchitecture insights")
 

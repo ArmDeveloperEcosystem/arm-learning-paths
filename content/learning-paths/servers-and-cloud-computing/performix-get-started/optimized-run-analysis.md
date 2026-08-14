@@ -32,7 +32,7 @@ The most visible improvement is wall-clock time and total cycle count. Processin
 
 Select the previous scalar Instruction Mix run to compare it with the optimized version side by side:
 
-![Side-by-side comparison showing increased SIMD instructions and decreased scalar operations#center](images/comparison.png "Instruction Mix comparison between scalar and NEON versions")
+![Compare with selector showing the instruction_mix_scalar run selected for comparison with the optimized Instruction Mix run#center](images/comparison.png "Selecting the scalar Instruction Mix run from the Compare with control")
 
 The overlay shows Advanced SIMD instructions appearing in the optimized version while scalar operations decrease, confirming more work is done per instruction.
 

@@ -12,9 +12,9 @@ The Instruction Mix analysis showed that the application processes one element p
 
 The key changes in the optimized version are:
 
-- **Data-level parallelism:** processes 4 elements per instruction using Advanced SIMD
+- **Data-level parallelism:** processes four elements per instruction using Advanced SIMD
 - **Fused multiply-add:** combines multiplication and addition into a single instruction (`vfmaq_f32`)
-- **SIMD vector loads:** loads 4 floats at once (`vld1q_f32`) instead of one at a time
+- **SIMD vector loads:** loads four floats at once (`vld1q_f32`) instead of one at a time
 
 The memory access pattern, branch structure, and working set size remain unchanged, so any performance difference comes directly from improved instruction efficiency.
 
@@ -135,7 +135,7 @@ Run the optimized binary to confirm it works:
 ./dot_neon
 ```
 
-The output looks similar to:
+The output is similar to:
 
 ```output
 neon time=0.456s (sink=1.67772e+07)

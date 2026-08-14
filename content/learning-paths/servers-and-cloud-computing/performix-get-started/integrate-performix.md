@@ -23,8 +23,10 @@ If you're familiar with tools such as Perf, you recognize the value of hardware 
 
 ## CI/CD and AI-assisted workflows
 
-Performix can be driven entirely from the command line and results can be exported in machine-readable formats. Results can be compared across runs, making it easier to detect regressions and track performance changes over time. This makes Performix suitable for CI/CD pipelines where performance regressions need to be detected early.
+Performix can be driven entirely from the command line and results can be exported in machine-readable formats. Results can be compared across runs, making it easier to detect regressions and track performance changes over time. This makes Performix suitable for continuous integration and continuous delivery (CI/CD) pipelines where performance regressions need to be detected early.
 
-Performix can also be integrated into AI-assisted workflows using the [Arm MCP Server](https://developer.arm.com/servers-and-cloud-computing/arm-mcp-server), which implements the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) to expose system and performance tooling through a structured interface. This allows AI assistants such as GitHub Copilot or Codex to invoke Performix analysis workflows, query profiling data, and retrieve insights programmatically.
+You can also integrate Performix into AI-assisted workflows using the [Arm MCP Server](https://developer.arm.com/servers-and-cloud-computing/arm-mcp-server). The server implements the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) to expose system and performance tooling through a structured interface.
+
+Through this interface, AI assistants such as GitHub Copilot or Codex can invoke Performix analysis workflows, query profiling data, and retrieve insights programmatically.
 
 For a walkthrough of the Performix GUI and setup process, see this video on [getting started with Arm Performix](https://youtu.be/_eX8ZpNT0kc?si=WrQg5daHxUc0MFbR).

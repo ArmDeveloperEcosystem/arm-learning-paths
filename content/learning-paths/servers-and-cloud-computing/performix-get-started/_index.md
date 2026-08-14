@@ -8,7 +8,7 @@ minutes_to_complete: 120
 who_is_this_for: This Learning Path is for software developers and performance engineers who want to optimize applications on Arm-based servers using Arm Performix.
 
 learning_objectives:
-    - Install Arm Performix and use its recipes to guide performance analysis on Arm-based systems
+    - Configure Arm Performix and use its recipes to guide performance analysis on Arm-based systems
     - Profile a C++ application with the Code Hotspots recipe to identify functions consuming the most CPU time
     - Use CPU Microarchitecture and Instruction Mix recipes to pinpoint pipeline bottlenecks and missed SIMD opportunities
     - Optimize the application with Arm NEON intrinsics and compare Performix runs to validate changes in runtime and bottleneck behavior
@@ -43,7 +43,7 @@ further_reading:
         link: https://learn.arm.com/install-guides/performix
         type: documentation
     - resource:
-        title: User guide
+        title: Arm Performix User Guide
         link: https://developer.arm.com/documentation/110163/latest/
         type: documentation
     - resource:

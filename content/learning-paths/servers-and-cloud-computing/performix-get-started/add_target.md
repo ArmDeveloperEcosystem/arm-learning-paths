@@ -81,8 +81,10 @@ When you launch Arm Performix, the Welcome screen appears. From this screen, you
    - **Name:** a descriptive name for the target, such as **dot-product-profile**
    - **Port:** the SSH port number (the default port is 22)
    - **User:** the username for SSH connection, which must be a valid user on the target machine
-   - **Authentication method:** your private SSH key, stored locally (usually at `~/.ssh/id_rsa` or `~/.ssh/id_ed25519`)
-   - For authentication, you can select **Automatically Detect Key** to let Performix find your private key, **Select Key Manually** to provide the path to a specific key, or **Username and password** to be prompted for a password on connection.
+   - **Authentication method:** select one of the following:
+      - **Automatically Detect Key:** let Performix find your private SSH key, stored locally (usually at `~/.ssh/id_rsa` or `~/.ssh/id_ed25519`)
+      - **Select Key Manually:** provide the path to a specific private key
+      - **Username and password:** be prompted for a password on connection
 
 1. If you need to route your connection through intermediate hosts, select **Add Jump Node** to add one or more jump nodes. Specify them in the order your connection should use them.
 1. Select **Test Connection** to verify your target is reachable. If any required tools are missing, Performix installs them for you.
@@ -90,6 +92,6 @@ When you launch Arm Performix, the Welcome screen appears. From this screen, you
 
 ![Configure Target form with Host, Name, Port, User, and Authentication fields filled in#center](images/add_target.png "Adding a target in Performix")
 
-You should see your target listed in the Targets view with a connected status, confirming Performix can reach your server.
+You should see your target listed in the **Targets** view with a connected status, confirming Performix can reach your server.
 
 With your target connected, you can now build an example application to profile.

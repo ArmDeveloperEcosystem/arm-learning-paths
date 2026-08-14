@@ -34,18 +34,18 @@ The `dot_scalar` function dominates the flame graph, indicating it accounts for 
 
 ![Flame graph showing dot_scalar as the widest block, consuming nearly all CPU samples#center](images/code_hotspots_flame_graph.png "Code Hotspots flame graph")
 
-The insights panel shows that this function accounts for 99.96% of samples. Hover over the function in the flame graph to see the sample count.
+The **Insights** panel shows that this function accounts for 99.96% of samples. Hover over the function in the flame graph to see the sample count.
 
 ![Tooltip showing sample count when hovering over the dot_scalar function in the flame graph#center](images/flame_graph_sample_count.png "Sample count for dot_scalar")
 
-Switch to the Call Stack view to see how the hotspot function is reached and whether its cost comes from the function itself or its callees.
+Switch to the **Call Stack** view to see how the hotspot function is reached and whether its cost comes from the function itself or its callees.
 
-![Call Stacks view showing the path from main to run_bench to dot_scalar#center](images/code_hotspots_call_stacks.png "Call Stacks view")
+![Call Stack view showing the path from main to run_bench to dot_scalar#center](images/code_hotspots_call_stacks.png "Call Stack view")
 
-Double-click the hotspot function to open the source code viewer and inspect the exact lines of code associated with high CPU usage. When you open the Source Code Viewer for the first time, you need to specify the root directory of your source code so Performix can map profiling data to the correct files.
+Double-click the hotspot function to open the **Source Code Viewer** and inspect the exact lines of code associated with high CPU usage. When you open the **Source Code Viewer** for the first time, you need to specify the root directory of your source code so Performix can map profiling data to the correct files.
 
 {{% notice Note %}}
-The source code viewer runs on your local machine. Copy `scalar_dot_product.cpp` from the target to your local machine so Performix can display annotated source. For example: `scp username@your-server:~/performix-analysis/scalar_dot_product.cpp .`
+The **Source Code Viewer** runs on your local machine. Copy `scalar_dot_product.cpp` from the target to your local machine so Performix can display annotated source. For example: `scp username@your-server:~/performix-analysis/scalar_dot_product.cpp .`
 {{% /notice %}}
 
 ![Source code viewer highlighting the hot loop inside dot_scalar with per-line sample counts#center](images/code_hotspots_source.png "Source code viewer for dot_scalar")

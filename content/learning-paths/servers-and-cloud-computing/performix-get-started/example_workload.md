@@ -140,7 +140,7 @@ Run the program to confirm it executes correctly:
 ./dot_scalar
 ```
 
-The output looks similar to:
+The output is similar to:
 
 ```output
 scalar time=1.234s (sink=1.67772e+07)
