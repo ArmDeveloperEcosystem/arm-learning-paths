@@ -1,46 +1,53 @@
 ---
-title: Analyze code hotspots
+title: Find code hotspots
 
-weight: 5
+weight: 4
 
 layout: learningpathall
 ---
-Let's use the Code Hotspots recipe in Arm Performix to identify which functions in the example workload consume the most CPU time. This analysis helps to identify areas of the code that may benefit from optimization.
+
+The Code Hotspots recipe in Arm Performix identifies which functions in your application consume the most CPU time. This analysis helps identify areas of code that can benefit from optimization.
 
 ## Run the Code Hotspots recipe
 
-1. In Performix, select the Code Hotspots recipe from the list of available recipes.
+1. In Performix, select the **Code Hotspots** recipe from the list of available recipes.
 
-    ![Run the Code Hotspots recipe in Arm Performix #center](images/code_hotspots_run_recipe.png "Run the Code Hotspots recipe in Arm Performix")
+    ![Performix recipe list with Code Hotspots selected, showing the recipe description and target configuration#center](images/code_hotspots_run_recipe.png "Selecting the Code Hotspots recipe")
 
-1. Specify the path to your compiled workload and any necessary parameters. For this example, run the workload with 16M floats and an iteration count of 2000 to ensure a runtime of around 30 seconds:
+1. Specify the path to your compiled binary and any necessary parameters. Performix assumes the home directory as the base path, so use the relative path from `$HOME`. For this example, run the program with 16M floats and an iteration count of 2000 to ensure sufficient runtime for meaningful sampling:
 
     ```bash
-    ./dot_scalar 16777216 2000
+    performix-analysis/dot_scalar 16777216 2000
     ```
 
-    Arm recommends collecting at least 20 seconds of profiling data to ensure statistically meaningful sampling. 
+    Arm recommends collecting at least 20 seconds of profiling data to ensure statistically meaningful sampling. Adjust the iteration count if needed for your hardware.
 
-1. Select **Run Recipe** to start the analysis. Arm Performix will launch the workload and collect periodic samples during execution.
+1. Select **Run Recipe** to start the analysis. Performix launches the program on the target and collects periodic samples during execution.
 
 ## Interpret the results
 
-Once the run completes, Arm Performix will display the results, including a flame graph that highlights where the CPU spends most of its time. Each box represents a function, and its width indicates how frequently it appears in the samples. The stacked layout shows call paths, helping you see how each function is reached. In practice, you can quickly identify optimization opportunities by focusing on the widest blocks, which represent the most significant contributors to runtime.
+After the run completes, Performix displays the results, including a flame graph that highlights where the CPU spends most of its time. Each box represents a function, and its width indicates how frequently it appears in the samples. The stacked layout shows call paths, helping you see how each function is reached. You can identify optimization opportunities by focusing on the widest blocks, which represent the most significant contributors to runtime.
 
-In this example, the `dot_scalar` function dominates the flame graph, indicating it accounts for a large proportion of total CPU cycles.
+The `dot_scalar` function dominates the flame graph, indicating it accounts for a large proportion of total CPU cycles.
 
- ![The flame graph in Arm Performix #center](images/code_hotspots_flame_graph.png "The flame graph in Arm Performix")
+![Flame graph showing dot_scalar as the widest block, consuming nearly all CPU samples#center](images/code_hotspots_flame_graph.png "Code Hotspots flame graph")
 
- The insights panel shows that this function accounts for 99.96% of samples. If we hover over this function in the flame graph, we see the sample count.
+The insights panel shows that this function accounts for 99.96% of samples. Hover over the function in the flame graph to see the sample count.
 
- ![Show the sample count by hovering over a function in the flame graph #center](images/flame_graph_sample_count.png "Show the sample count by hovering over a function in the flame graph")
+![Tooltip showing sample count when hovering over the dot_scalar function in the flame graph#center](images/flame_graph_sample_count.png "Sample count for dot_scalar")
 
 Switch to the Call Stack view to see how the hotspot function is reached and whether its cost comes from the function itself or its callees.
 
- ![The call stacks view in Arm Performix #center](images/code_hotspots_call_stacks.png "Viewing call stacks in Arm Performix")
+![Call Stacks view showing the path from main to run_bench to dot_scalar#center](images/code_hotspots_call_stacks.png "Call Stacks view")
 
-Double-click the hotspot function to open the source code viewer and inspect the exact lines of code associated with high CPU usage. When you open the Source Code Viewer for the first time, you may need to specify the root directory of your source code so Performix can map profiling data to the correct files.
+Double-click the hotspot function to open the source code viewer and inspect the exact lines of code associated with high CPU usage. When you open the Source Code Viewer for the first time, you need to specify the root directory of your source code so Performix can map profiling data to the correct files.
 
-![Viewing source code in Arm Performix #center](images/code_hotspots_source.png "Viewing source code in Arm Performix")
+{{% notice Note %}}
+The source code viewer runs on your local machine. Copy `scalar_dot_product.cpp` from the target to your local machine so Performix can display annotated source. For example: `scp username@your-server:~/performix-analysis/scalar_dot_product.cpp .`
+{{% /notice %}}
 
-With the Code Hotspots analysis complete, you have identified the `dot_scalar` function as a key area for optimization. We might expect this function to be hot, as it is handling all the computation for the workload. But let’s look closer to check if this time is being spent efficiently. Next, let's use the CPU Microarchitecture recipe to understand why this function is a bottleneck.
+![Source code viewer highlighting the hot loop inside dot_scalar with per-line sample counts#center](images/code_hotspots_source.png "Source code viewer for dot_scalar")
+
+## What you've accomplished
+
+You identified the `dot_scalar` function as the dominant hotspot in the application. This is expected because it handles all the computation, but knowing it's hot doesn't tell you whether the time is being spent efficiently. The next step is to use the CPU Microarchitecture recipe to understand why this function is a bottleneck.

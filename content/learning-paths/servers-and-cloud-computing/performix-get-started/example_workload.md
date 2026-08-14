@@ -1,131 +1,149 @@
 ---
-title: Example workload
+title: Build the example application
 
-weight: 4
+weight: 3
 
 layout: learningpathall
 ---
-To demonstrate how Performix helps uncover real performance issues, we’ll use a deliberately simple workload: a vector dot product. The benchmark computes the dot product of two large floating-point arrays:
 
-```
+To explore Performix, you can build and profile a small C++ program that computes the dot product of two large floating-point arrays:
+
+```cpp
 sum += a[i] * b[i];
 ```
 
-It performs one multiply and one add per loop iteration, simple, predictable, and seemingly efficient. This pattern appears in real-world applications everywhere:
+This performs one multiply and one add per loop iteration. The dot product pattern is common in machine learning inference, signal processing, and linear algebra, making it a good candidate for performance analysis.
 
-* Machine learning inference
-* Signal processing
-* Linear algebra
-* Analytics pipelines
+## Create the source file
 
-## Prepare the workload
+SSH into your target:
 
-1. Create a new directory for your project and navigate to it:
+```bash
+ssh username@your-server
+```
 
-  ```bash
-  mkdir performix-analysis
-  cd performix-analysis
-  ```
+Create a new directory for your project and navigate to it:
 
-2. Create a C++ source file named `dot_scalar_problem.cpp` and copy the following code into it:
+```bash
+mkdir performix-analysis
+cd performix-analysis
+```
 
-  ```cpp
-  #include <algorithm>
-  #include <chrono>
-  #include <cstdint>
-  #include <cstdlib>
-  #include <iostream>
-  #include <random>
+Use a text editor to create a C++ source file named `scalar_dot_product.cpp` with the following content:
 
-  #if defined (__GNUC__) || defined (__clang__)
-  #define NOINLINE __attribute__ ((noinline))
-  #else
-  #define NOINLINE
-  #endif
+```cpp
+#include <algorithm>
+#include <chrono>
+#include <cstdint>
+#include <cstdlib>
+#include <iostream>
+#include <random>
 
-  #if defined (__GNUC__) || defined (__clang__)
-  #define RESTRICT __restrict__
-  #else
-  #define RESTRICT
-  #endif
+#if defined (__GNUC__) || defined (__clang__)
+#define NOINLINE __attribute__ ((noinline))
+#else
+#define NOINLINE
+#endif
 
-  static void* aligned_malloc(std::size_t alignment, std::size_t size) {
-  #if (__cplusplus >= 201703L)
-    std::size_t padded = (size + alignment - 1) / alignment * alignment;
-    return std::aligned_alloc(alignment, padded);
-  #else
-    void* p = nullptr;
-    if (posix_memalign(&p, alignment, size) != 0) return nullptr;
-    return p;
-  #endif
-  }
+#if defined (__GNUC__) || defined (__clang__)
+#define RESTRICT __restrict__
+#else
+#define RESTRICT
+#endif
 
-  NOINLINE float dot_scalar(const float* RESTRICT a, const float* RESTRICT b, std::size_t n) {
-   float sum = 0.0f;
-   for (std::size_t i = 0; i < n; ++i) {
-     sum += a[i] * b[i];
-   }
-   return sum;
-  }
+static void* aligned_malloc(std::size_t alignment, std::size_t size) {
+#if (__cplusplus >= 201703L)
+  std::size_t padded = (size + alignment - 1) / alignment * alignment;
+  return std::aligned_alloc(alignment, padded);
+#else
+  void* p = nullptr;
+  if (posix_memalign(&p, alignment, size) != 0) return nullptr;
+  return p;
+#endif
+}
 
-  static NOINLINE float run_bench(const float* a, const float* b, std::size_t n, int iters) {
-   volatile float sink = 0.0f;
-   for (int i = 0; i < iters; ++i) {
-     sink += dot_scalar(a, b, n);
-   }
-   return sink;
-  }
+NOINLINE float dot_scalar(const float* RESTRICT a, const float* RESTRICT b, std::size_t n) {
+ float sum = 0.0f;
+ for (std::size_t i = 0; i < n; ++i) {
+   sum += a[i] * b[i];
+ }
+ return sum;
+}
 
-  int main(int argc, char** argv) {
-   std::size_t n = (argc > 1) ? std::stoull(argv[1]) : (64ull * 1024ull * 1024ull);
-   int iters = (argc > 2) ? std::stoi(argv[2]) : 10; 
+static NOINLINE float run_bench(const float* a, const float* b, std::size_t n, int iters) {
+ volatile float sink = 0.0f;
+ for (int i = 0; i < iters; ++i) {
+   sink += dot_scalar(a, b, n);
+ }
+ return sink;
+}
 
-   float* a = static_cast<float*>(aligned_malloc(64, n * sizeof(float)));
-   float* b = static_cast<float*>(aligned_malloc(64, n * sizeof(float)));
-   if (!a || !b) {
-     std::cerr << "Allocation failed\n";
-     return 1;
-   }
+int main(int argc, char** argv) {
+ std::size_t n = (argc > 1) ? std::stoull(argv[1]) : (64ull * 1024ull * 1024ull);
+ int iters = (argc > 2) ? std::stoi(argv[2]) : 10; 
 
-   std::mt19937 rng(123);
-   std::uniform_real_distribution<float> dist(0.0f, 1.0f);
-   for (std::size_t i = 0; i < n; ++i) {
-     a[i] = dist(rng);
-     b[i] = dist(rng);
-   }
+ float* a = static_cast<float*>(aligned_malloc(64, n * sizeof(float)));
+ float* b = static_cast<float*>(aligned_malloc(64, n * sizeof(float)));
+ if (!a || !b) {
+   std::cerr << "Allocation failed\n";
+   return 1;
+ }
 
-   (void)run_bench(a, b, std::min<std::size_t>(n, 1ull * 1024ull * 1024ull), 2);
-   auto t0 = std::chrono::high_resolution_clock::now();
-   float r = run_bench(a, b, n, iters);
-   auto t1 = std::chrono::high_resolution_clock::now();
-   std::chrono::duration<double> dt = t1 - t0;
+ std::mt19937 rng(123);
+ std::uniform_real_distribution<float> dist(0.0f, 1.0f);
+ for (std::size_t i = 0; i < n; ++i) {
+   a[i] = dist(rng);
+   b[i] = dist(rng);
+ }
 
-   std::cout << "scalar time=" << dt.count() << "s (sink=" << r << ")\n";
+ (void)run_bench(a, b, std::min<std::size_t>(n, 1ull * 1024ull * 1024ull), 2);
+ auto t0 = std::chrono::high_resolution_clock::now();
+ float r = run_bench(a, b, n, iters);
+ auto t1 = std::chrono::high_resolution_clock::now();
+ std::chrono::duration<double> dt = t1 - t0;
 
-   std::free(a);
-   std::free(b);
-   return 0;
-  }
-  ```
+ std::cout << "scalar time=" << dt.count() << "s (sink=" << r << ")\n";
 
-3. Compile the C++ workload with the following command to ensure it remains purely scalar:
+ std::free(a);
+ std::free(b);
+ return 0;
+}
+```
 
-  ```bash
-  g++ -O3 -g -fno-omit-frame-pointer -fno-tree-vectorize -mcpu=native -std=c++17 dot_scalar_problem.cpp -o dot_scalar
-  ```
+## Compile the program
 
-  Key Compiler Flags
+Compile with the following flags to keep the code purely scalar and enable profiling support:
 
-  - `-O3`: Enables high-level optimizations.
-  - `-g`: Includes debug symbols for source-level attribution.
-  - `-fno-omit-frame-pointer`: Preserves call stacks for profiling.
-  - `-fno-tree-vectorize`: Prevents compiler auto-vectorization.
-  - `-mcpu=native`: Tunes the code for the target CPU.
+```bash
+g++ -O3 -g -fno-omit-frame-pointer -fno-tree-vectorize -mcpu=native -std=c++17 scalar_dot_product.cpp -o dot_scalar
+```
 
-4. Copy the compiled file to the target machine.
+The flags do the following:
 
-  ```bash
-  scp dot_scalar <target_machine_location>
-  ```
+- `-O3`: enables high-level optimizations
+- `-g`: includes debug symbols for source-level attribution
+- `-fno-omit-frame-pointer`: preserves call stacks for profiling
+- `-fno-tree-vectorize`: prevents compiler auto-vectorization
+- `-mcpu=native`: tunes the code for the target CPU
 
-Now you're ready to start analyzing the workload using Arm Performix.
+{{% notice Note %}}
+The `-fno-tree-vectorize` flag is used here for learning purposes only. It forces the compiler to produce scalar code so you can observe the performance difference when you manually optimize with NEON intrinsics later. In most cases, you would let the compiler auto-vectorize.
+{{% /notice %}}
+
+## Verify the program runs
+
+Run the program to confirm it executes correctly:
+
+```bash
+./dot_scalar
+```
+
+The output looks similar to:
+
+```output
+scalar time=1.234s (sink=1.67772e+07)
+```
+
+The exact values depend on your hardware, but you should see a time and sink value printed without errors.
+
+You now have a working C++ application on your target. The next step is to use the Code Hotspots recipe in Performix to identify which functions consume the most CPU time.
