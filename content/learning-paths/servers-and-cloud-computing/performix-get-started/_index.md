@@ -1,5 +1,5 @@
 ---
-title: Get started with Arm Performix on Arm-based servers
+title: Optimize a sample C++ application on an Arm-based server with Arm Performix
 
 description: Profile and optimize a C++ application on Arm-based servers using Arm Performix recipes, CPU microarchitecture analysis, and NEON intrinsics.
 
@@ -8,21 +8,20 @@ minutes_to_complete: 120
 who_is_this_for: This Learning Path is for software developers and performance engineers who want to optimize applications on Arm-based servers using Arm Performix.
 
 learning_objectives:
-    - Install Arm Performix and understand how recipes and runs guide performance analysis on Arm-based systems
+    - Install Arm Performix and use its recipes to guide performance analysis on Arm-based systems
     - Profile a C++ application with the Code Hotspots recipe to identify functions consuming the most CPU time
     - Use CPU Microarchitecture and Instruction Mix recipes to pinpoint pipeline bottlenecks and missed SIMD opportunities
-    - Optimize the application using Arm NEON intrinsics to improve instruction efficiency
-    - Compare Performix runs before and after optimization to validate changes in runtime and bottleneck behavior
+    - Optimize the application with Arm NEON intrinsics and compare Performix runs to validate changes in runtime and bottleneck behavior
 
 prerequisites:
-    - SSH access to an Arm Linux server
-    - "[Arm Performix](/install-guides/performix) installed"
-    - A C++ compiler such as GCC or Clang
+    - SSH access to an Arm Linux server as the target
+    - Arm Performix installed on your local machine. For installation instructions, see the [Arm Performix install guide](/install-guides/performix).
+    - A C++ compiler such as GCC or Clang installed on the target Linux server
 
 author: 
     - Julie Gaskin
 
-generate_summary_faq: false
+generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
@@ -40,7 +39,7 @@ tools_software_languages:
 
 further_reading:
     - resource:
-        title: Install guide
+        title: Install Arm Performix
         link: https://learn.arm.com/install-guides/performix
         type: documentation
     - resource:

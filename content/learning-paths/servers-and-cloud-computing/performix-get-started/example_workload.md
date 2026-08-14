@@ -1,6 +1,8 @@
 ---
 title: Build the example application
 
+description: Build and run a scalar C++ dot-product application on an Arm Linux server for profiling with Arm Performix.
+
 weight: 3
 
 layout: learningpathall

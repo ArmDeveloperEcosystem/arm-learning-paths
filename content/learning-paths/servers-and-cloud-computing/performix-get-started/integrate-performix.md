@@ -1,6 +1,8 @@
 ---
 title: Integrate Arm Performix into your workflow
 
+description: Explore ways to use Arm Performix in CI/CD and AI-assisted performance analysis workflows.
+
 weight: 20
 
 layout: learningpathall

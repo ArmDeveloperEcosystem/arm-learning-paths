@@ -1,6 +1,8 @@
 ---
 title: Validate the optimization
 
+description: Compare scalar and NEON runs in Arm Performix to validate changes in runtime, instruction mix, and CPU bottlenecks.
+
 weight: 8
 
 layout: learningpathall

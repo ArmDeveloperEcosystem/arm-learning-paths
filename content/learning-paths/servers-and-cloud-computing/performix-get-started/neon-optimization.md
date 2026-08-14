@@ -1,6 +1,8 @@
 ---
 title: Optimize with NEON intrinsics
 
+description: Rewrite a scalar dot-product loop with Arm NEON intrinsics, then build and run the optimized C++ application.
+
 weight: 7
 
 layout: learningpathall

@@ -1,6 +1,8 @@
 ---
 title: Identify CPU pipeline bottlenecks
 
+description: Use Arm Performix CPU Microarchitecture analysis to identify frontend and backend pipeline bottlenecks in a sample C++ application.
+
 weight: 5
 
 layout: learningpathall
@@ -18,7 +20,7 @@ The CPU Microarchitecture recipe in Arm Performix provides a [Topdown analysis](
     performix-analysis/dot_scalar 16777216 2000
     ```
 
-1. Select **Run Recipe** to start the analysis. Performix collects data and presents the results using Topdown analysis.
+1. Leaving all other values as defaults, select **Run Recipe** to start the analysis. Performix collects data and presents the results using Topdown analysis.
 
     ![Topdown summary showing over 60% frontend bound classification for the dot_scalar function#center](images/cpu_ma_summary.png "CPU Microarchitecture Topdown summary")
 

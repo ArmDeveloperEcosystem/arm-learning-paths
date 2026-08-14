@@ -1,6 +1,8 @@
 ---
 title: Examine the Instruction Mix
 
+description: Use Arm Performix Instruction Mix to identify scalar and SIMD instruction patterns in a sample C++ application.
+
 weight: 6
 
 layout: learningpathall
@@ -18,7 +20,7 @@ The Instruction Mix recipe in Arm Performix shows how your code uses different i
     performix-analysis/dot_scalar 16777216 2000
     ```
 
-1. Select **Run Recipe** to start the analysis. Performix collects data and presents the results.
+1. Leaving all other fields as defaults, select **Run Recipe** to start the analysis. Performix collects data and presents the results.
 
     ![Instruction Mix results showing the application is dominated by scalar operations with no SIMD usage#center](images/instruction_mix_scalar.png "Instruction Mix results for the scalar application")
 
@@ -29,3 +31,7 @@ The Instruction Mix analysis shows the distribution of instruction types used by
 The insights panel identifies the root cause: the application is not using SIMD and is missing vectorization opportunities. Vectorization reduces the number of instructions required per element by performing multiple operations per instruction, directly relieving frontend pressure.
 
 The next step is to optimize the scalar dot-product loop using Arm NEON intrinsics to improve instruction efficiency.
+
+## What you've learned
+
+The scalar application is frontend bound because it performs too many instructions per unit of useful work. Instruction Mix confirms that it misses SIMD opportunities, which the NEON optimization addresses next.

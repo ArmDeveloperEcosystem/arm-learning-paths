@@ -1,6 +1,8 @@
 ---
 title: Find code hotspots
 
+description: Use Arm Performix Code Hotspots to identify functions that consume the most CPU time in a sample C++ application.
+
 weight: 4
 
 layout: learningpathall
