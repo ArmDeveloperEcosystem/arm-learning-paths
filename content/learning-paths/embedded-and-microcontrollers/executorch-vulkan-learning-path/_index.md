@@ -25,11 +25,9 @@ prerequisites:
 
 author: Ash Naik
 
-skilllevels:
-  - Advanced
+skilllevels: Advanced
 
-subjects:
-  - ML
+subjects: ML
 
 operatingsystems:
   - Linux
