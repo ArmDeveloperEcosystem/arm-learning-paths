@@ -141,8 +141,6 @@ After training, confirm the following:
 {{< /tab >}}
 {{< /tabpane >}}
 
-{{% notice Tip %}}
-
 To continue training from a checkpoint, run:
 
 {{< tabpane code=true >}}
@@ -164,8 +162,6 @@ To continue training from a checkpoint, run:
     --checkpoint=<path_to_checkpoint>
 {{< /tab >}}
 {{< /tabpane >}}
-
-{{% /notice %}}
 
 ![Humanoid AMP running comparison. At 3,000 iterations, the humanoid stumbles immediately. At 26,000 iterations, it uses a skipping gait while attempting to match the target running velocity.#center](./amp_running.gif "Humanoid AMP running at 3,000 and 26,000 iterations")
 
