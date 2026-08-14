@@ -25,6 +25,8 @@ prerequisites:
 
 author: Ash Naik
 
+test_maintenance: false
+
 skilllevels: Advanced
 
 subjects: ML
@@ -66,30 +68,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
-## About this Learning Path
-
-This Learning Path turns the material from `ExecuTorch_Llama32_Vivo_X300Pro_End_to_End_Guide.docx` into an Arm-style walkthrough. It keeps the exact versions, commands, and measured results from the successful run, while reorganizing them into a sequence you can follow from environment setup through validation.
-
-### Who is this for?
-
-This topic is for developers targeting Android Arm64 devices who want to run an LLM locally with ExecuTorch and the Vulkan backend instead of CPU-only inference.
-
-### What will you learn?
-
-Upon completion of this Learning Path, you will be able to:
-
-- Prepare the Android SDK, NDK, ADB, and host Vulkan toolchain required for cross-compiling ExecuTorch.
-- Fix the PyTorch version mismatch that can break ExecuTorch 1.4 builds on the host.
-- Export Llama 3.2 1B Instruct to a Vulkan-ready `.pte` using the same `8da4w` and KV-cache settings as the measured run.
-- Build the Android runtime and `llama_main`, deploy them to the phone, and confirm Vulkan-backed execution.
-
-### Prerequisites
-
-Before starting, you will need the following:
-
-- A Linux machine that can build native and Android targets.
-- Android Studio or an equivalent Android SDK and NDK installation path.
-- A phone connected over USB with developer mode and USB debugging enabled.
-- Hugging Face access to download `meta-llama/Llama-3.2-1B-Instruct`.
-- Sufficient storage for a multi-gigabyte checkpoint and exported `.pte`.
