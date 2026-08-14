@@ -25,6 +25,8 @@ prerequisites:
 
 author: Ash Naik
 
+test_maintenance: false
+
 skilllevels: Advanced
 
 subjects: ML
