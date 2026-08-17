@@ -12,7 +12,7 @@ layout: learningpathall
 
 You can now compare the scalar and Neon-optimized versions using Arm Performix to validate changes in runtime, instruction mix, and bottleneck behavior.
 
-Run each recipe one at a time by specifying the path to the optimized binary `performix-analysis/dot_neon 16777216 2000` and the same parameters as before. 
+Run each recipe one at a time by specifying the path to the optimized binary and the same parameters as before: `performix-analysis/dot_neon 16777216 2000`.
 
 ## Compare Code Hotspots results
 
