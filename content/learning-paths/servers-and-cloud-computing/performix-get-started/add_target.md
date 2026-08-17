@@ -51,7 +51,7 @@ For more information, see the [SSH install guide](/install-guides/ssh/).
 
 Performix installs profiling tools on the target and requires root privileges.
 
-To avoid interactive prompts during analysis, configure passwordless `sudo` for your user.
+If your target prompts for a password to perform root-level operations, configure passwordless `sudo` for your user. By configuring passwordless `sudo`, you'll avoid interactive prompts during analysis.
 
 On the target, create a sudoers drop-in file for your user, replacing `username` with your username:
 
@@ -60,7 +60,7 @@ echo "username ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/username
 sudo chmod 440 /etc/sudoers.d/username
 ```
 
-Verify it works by running:
+Verify passwordless `sudo` works by running:
 
 ```bash
 sudo whoami
@@ -74,7 +74,7 @@ root
 
 ## Add a new target in Arm Performix
 
-When you launch Arm Performix, the Welcome screen appears. From this screen, you can connect to a target.
+When you launch Arm Performix, the **Welcome** screen appears. From this screen, you can connect to a target as follows:
 
 ![Arm Performix Welcome screen with the Connect a Target button and activity bar, which you use to open the target configuration view#center](images/welcome.png "Performix welcome screen")
 
