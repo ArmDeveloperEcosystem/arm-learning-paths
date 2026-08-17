@@ -1,10 +1,14 @@
 ---
-title: Build the example application
+title: Build a sample C++ dot-product application
+
+description: Build and run a scalar C++ dot-product application on an Arm Linux server for profiling with Arm Performix.
 
 weight: 3
 
 layout: learningpathall
 ---
+
+## Create the source file
 
 To explore Performix, you can build and profile a small C++ program that computes the dot product of two large floating-point arrays:
 
@@ -14,15 +18,13 @@ sum += a[i] * b[i];
 
 This performs one multiply and one add per loop iteration. The dot product pattern is common in machine learning inference, signal processing, and linear algebra, making it a good candidate for performance analysis.
 
-## Create the source file
-
 SSH into your target:
 
 ```bash
 ssh username@your-server
 ```
 
-Create a new directory for your project and navigate to it:
+On the target, create a new directory for your project and navigate to it:
 
 ```bash
 mkdir performix-analysis
@@ -112,7 +114,7 @@ int main(int argc, char** argv) {
 
 ## Compile the program
 
-Compile with the following flags to keep the code purely scalar and enable profiling support:
+Compile the program with the following flags to keep the code purely scalar and enable profiling support:
 
 ```bash
 g++ -O3 -g -fno-omit-frame-pointer -fno-tree-vectorize -mcpu=native -std=c++17 scalar_dot_product.cpp -o dot_scalar
@@ -127,7 +129,7 @@ The flags do the following:
 - `-mcpu=native`: tunes the code for the target CPU
 
 {{% notice Note %}}
-The `-fno-tree-vectorize` flag is used here for learning purposes only. It forces the compiler to produce scalar code so you can observe the performance difference when you manually optimize with NEON intrinsics later. In most cases, you would let the compiler auto-vectorize.
+`-fno-tree-vectorize` is used here for learning purposes only. The flag forces the compiler to produce scalar code, so you can observe the performance difference when you manually optimize with Neon intrinsics later. In most cases, you'd let the compiler auto-vectorize.
 {{% /notice %}}
 
 ## Verify the program runs
@@ -138,7 +140,7 @@ Run the program to confirm it executes correctly:
 ./dot_scalar
 ```
 
-The output looks similar to:
+The output is similar to:
 
 ```output
 scalar time=1.234s (sink=1.67772e+07)
@@ -146,4 +148,8 @@ scalar time=1.234s (sink=1.67772e+07)
 
 The exact values depend on your hardware, but you should see a time and sink value printed without errors.
 
-You now have a working C++ application on your target. The next step is to use the Code Hotspots recipe in Performix to identify which functions consume the most CPU time.
+## What you've accomplished and what's next
+
+You now have a working C++ application on your target.
+
+Next, you'll use the Code Hotspots recipe in Arm Performix to identify which functions consume the most CPU time.
