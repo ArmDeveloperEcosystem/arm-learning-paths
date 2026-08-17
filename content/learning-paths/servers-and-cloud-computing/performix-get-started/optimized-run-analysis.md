@@ -36,7 +36,7 @@ The scalar version is dominated by floating-point and load operations. The Neon 
 
 The CPU Microarchitecture recipe confirms the bottleneck has shifted. After vectorization, frontend stalled cycles drop and backend effects become dominant. 
 
-Frontend stalls drop to zero, while backend stalls increase to ~47%. 
+The exact results depend on your hardware. In this case, frontend stalls drop to zero, while backend stalls increase to ~47%. 
 
 ![Arm Performix CPU Microarchitecture Topdown summary showing frontend bound falling to about 11% and backend bound rising to about 63% after NEON optimization#center](images/neon_cpu_ma_summary.png "CPU Microarchitecture results for the Neon-optimized binary")
 
