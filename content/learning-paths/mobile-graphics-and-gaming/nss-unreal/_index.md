@@ -32,14 +32,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:11:27Z'
   faq_source_hash: f9e794dcaca9f4845b360594acd511726093e26f1f8a6f62b86f3fe2559ec8f0
   summary: >-
-    This Learning Path guides you through enabling Arm Neural Super Sampling (NSS) in Unreal Engine
-    using ML extensions for Vulkan on Windows. Learners install the Vulkan SDK and set up the
-    ML emulation layers with Vulkan Configurator, then download the Arm Neural Graphics Plugin
-    1.1.0 and its VGF model. A C++ Third Person project is created and built in Visual Studio
-    to integrate and run NSS. The path shows how to verify that NSS is active using ShowFlag.VisualizeTemporalUpscaler
-    1 and how to visualize model outputs with r.NSS.Debug 1. It also introduces using RenderDoc
-    for frame capture and analysis when investigating visual results or stepping through Vulkan
-    calls.
+    You'll enable Arm Neural Super Sampling (NSS) in Unreal Engine with Vulkan ML extensions on
+    Windows. Install the Vulkan SDK and emulation layers, then add the Arm Neural Graphics Plugin
+    and its VGF model to a C++ Third Person project. Verify NSS, visualize model output, and use
+    RenderDoc to investigate frames and Vulkan calls.
   faqs:
   - question: How do I know NSS is active in my level?
     answer: >-
@@ -109,4 +105,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

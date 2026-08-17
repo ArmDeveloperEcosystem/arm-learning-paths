@@ -33,14 +33,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:08:29Z'
   faq_source_hash: 9c6d2ad9f52170a4d0f12a41623a62fb73973dc4f74ce9c09b8f5230f90a3b14
   summary: >-
-    This Learning Path guides you to set up a Python environment on Ubuntu, obtain the Model Gym
-    neural graphics examples, and use Jupyter notebooks to train and evaluate a Neural Super Sampling
-    (NSS) model in PyTorch. You configure training with the Model Gym workflow, produce and inspect
-    checkpoints, and choose between post-training quantization for a quick baseline or quantization-aware
-    training to prepare an INT8 export. The path then shows how to export the fine-tuned model
-    to a .vgf package and validate the export by loading the graph in Model Explorer using the
-    VGF adapter. A successful outcome is a generated .vgf file and an inspectable graph showing
-    layers, tensor shapes, and connectivity.
+    You'll use Model Gym notebooks on Ubuntu to train and evaluate a Neural Super Sampling model
+    in PyTorch. Inspect checkpoints, choose post-training or quantization-aware training, and prepare
+    an INT8 export. Then export the fine-tuned model as a `.vgf` package and validate it in Model
+    Explorer with the VGF adapter.
   faqs:
   - question: What should I verify before creating the Python environment?
     answer: >-
@@ -116,4 +112,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

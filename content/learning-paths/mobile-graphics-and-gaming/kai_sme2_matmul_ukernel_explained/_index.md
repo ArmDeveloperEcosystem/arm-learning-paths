@@ -31,14 +31,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:05:12Z'
   faq_source_hash: 3a0a9c01e8e7fb6ccb1df84d3f131679987196fb5b94a2ad22731c5ba5bfd90f
   summary: >-
-    This Learning Path examines how a KleidiAI SME2 INT8 MOPA microkernel executes quantized matrix
-    multiplication on Arm CPUs. It introduces the kernel’s tiling model, shows how mr, nr, bl,
-    and kr drive packing, and pinpoints where outer product accumulate operations update ZA in
-    the inner loop. You decode a specific kernel name and interpret the 1vlx4vl work unit relative
-    to the SME2 streaming vector length. A focused example repacks GGML Q4_0 weights for a [16,
-    64] × [64, 64] multiply, assuming a 512-bit SVL, to illustrate data flow into the kernel.
-    Learners validate understanding through source inspection and optional disassembly to see
-    where SME2 instructions appear.
+    You'll examine how a KleidiAI SME2 INT8 MOPA microkernel performs quantized matrix multiplication
+    on Arm CPUs. Learn how tiling and packing parameters control the kernel, decode its name, and
+    interpret its work unit. Then follow a GGML Q4_0 example and inspect source or disassembly to
+    identify the SME2 instructions.
   faqs:
   - question: Do I need an SME2-capable Arm CPU to complete this?
     answer: >-
@@ -108,4 +104,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

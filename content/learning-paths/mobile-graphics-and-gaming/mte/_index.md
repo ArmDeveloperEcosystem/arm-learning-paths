@@ -27,13 +27,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:09:08Z'
   faq_source_hash: cdf48a76a0d88e2c7756eb01c48aa81b341366bcb5d224ba710e74c15d5b1f21
   summary: >-
-    This Learning Path introduces the Arm Memory Tagging Extension (MTE), a hardware feature in
-    Armv8.5-A and Armv9-A that detects buffer overflows and use-after-free errors. You build and
-    run a small C program on AArch64 Linux to exercise tagged memory and observe how MTE surfaces
-    these common issues. The steps focus on running the example on a recent Arm system or an Arm-based
-    cloud instance so you can see how faults or diagnostics correlate with buggy memory access
-    patterns. After completing the path, learners can recognize the observable behavior that indicates
-    MTE intervention during erroneous memory operations.
+    You'll explore Arm Memory Tagging Extension (MTE) on an `aarch64` Linux system. Build and run
+    a small C program that triggers buffer-overflow and use-after-free errors, then observe the
+    resulting faults or diagnostics. Use a recent Arm system or supported Arm-based cloud instance
+    to relate MTE behavior to invalid memory accesses.
   faqs:
   - question: How do I know if my system can demonstrate MTE?
     answer: >-
@@ -100,4 +97,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

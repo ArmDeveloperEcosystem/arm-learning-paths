@@ -29,14 +29,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:12:48Z'
   faq_source_hash: b18020b78a210a88a3fb6e958110d6a5544976eeb593abfa94318126277fb946
   summary: >-
-    This Learning Path guides Android graphics developers through diagnosing and improving vertex
-    data efficiency on Arm GPUs using Arm Frame Advisor. You profile a frame, inspect the Vertex
-    Memory Efficiency metric per draw—such as the shadow map pass in the example—and isolate draws
-    with low efficiency. The path then focuses on evaluating and refining vertex representations
-    in C/C++ to address the identified bottleneck, followed by re-profiling to validate the effect.
-    By iterating on the representation and checking the reported VME for the same draws, you confirm
-    whether the change helps and decide where to focus next. The result is a clear, tool-driven
-    process to identify inefficient vertex usage and measure improvements.
+    You'll use Arm Frame Advisor to diagnose vertex-data efficiency on Arm GPUs. Profile a frame,
+    inspect Vertex Memory Efficiency for each draw, and identify inefficient passes. Refine the
+    affected vertex representation in C or C++, then profile the same scene again to compare VME
+    and validate the improvement.
   faqs:
   - question: How do I find low Vertex Memory Efficiency in Arm Frame Advisor?
     answer: >-
@@ -110,4 +106,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

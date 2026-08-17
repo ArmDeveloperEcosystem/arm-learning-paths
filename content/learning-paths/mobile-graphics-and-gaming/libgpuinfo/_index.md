@@ -29,12 +29,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:06:59Z'
   faq_source_hash: eb2e5e1a9169679ea5398b97026829f8747778cd097701a3ebd7e7be9ef961a1
   summary: >-
-    This Learning Path shows how to build the libGPUInfo C++ library with the Android NDK and
-    run an example on an Android device to query Arm GPU configuration. You compile on the development
-    machine and use adb to deploy and execute the sample on hardware with a Mali or Immortalis
-    GPU. The application retrieves configuration details that reveal available features and indicative
-    performance levels, enabling data-driven runtime decisions for graphics or compute paths.
-    Success is verified by viewing the GPU attributes printed by the example on the device.
+    You'll build the libGPUInfo C++ library with the Android NDK and run its example on an Android
+    device. Use `adb` to deploy the sample to hardware with a Mali or Immortalis GPU, then inspect
+    the reported configuration, features, and performance levels. Use these attributes to inform
+    graphics or compute paths at runtime.
   faqs:
   - question: How do I confirm the Android device is ready before running the example?
     answer: >-
@@ -99,4 +97,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

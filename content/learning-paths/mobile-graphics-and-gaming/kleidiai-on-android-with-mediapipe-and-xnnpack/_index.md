@@ -30,13 +30,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:05:45Z'
   faq_source_hash: d2559b0bde2b716640df74ca831be6736a77417de5ce0e641f1e43a267e8f58b
   summary: >-
-    This Learning Path shows how to prepare a Linux or Docker-based toolchain, cross-compile MediaPipe’s
-    CPU inference engine with XNNPACK for Android arm64, and run the Gemma 2B model on a device
-    that supports Arm i8mm. The workflow builds the binary with Bazel, verifies the output in
-    the Bazel bin directory, and runs inference to produce a response to a prompt. It then creates
-    a second build without the i8mm path and benchmarks both variants to assess the effect of
-    the KleidiAI integration. By the end, you can compare runs and recognize the impact of enabling
-    i8mm and KleidiAI in the MediaPipe stack on supported Android hardware.
+    You'll cross-compile MediaPipe with XNNPACK for Android `arm64` and run Gemma 2B on an i8mm-capable
+    device. Build and verify the binary with Bazel, then run inference. Create a second build without
+    i8mm and benchmark both variants to assess the effect of KleidiAI integration on supported Android
+    hardware.
   faqs:
   - question: Which installation option should I choose for dependencies?
     answer: >-
@@ -109,4 +106,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

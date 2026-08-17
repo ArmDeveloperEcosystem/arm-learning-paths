@@ -32,13 +32,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:13:18Z'
   faq_source_hash: 9e7bf9a27908bce1b6c3af5262ecc9b529426b8fdb575af08d8683389ef5c7e7
   summary: >-
-    This Learning Path shows how to build llama.cpp with KleidiAI and SME2 and measure the impact
-    on LLM inference on Android. You cross-compile a statically linked llama-cli for aarch64 using
-    the Linux-hosted Arm GNU Toolchain with GCC 14.2 or later and transfer the binary to an SME2-capable
-    device using ADB. On the device, you run the Llama-3.2-3B-Instruct-Q4_0.gguf model with SME2
-    enabled and disabled to compare results. Along the way, you trace how acceleration flows from
-    llama.cpp through the ggml-cpu backend into KleidiAI microkernels and verify that SME2 microkernels
-    are active before interpreting the reported performance.
+    You'll build `llama.cpp` with KleidiAI and SME2, then measure LLM inference on Android. Cross-compile
+    `llama-cli` for `aarch64`, deploy it with ADB, and run the Llama-3.2-3B-Instruct-Q4_0 model with
+    SME2 enabled and disabled. Trace acceleration through `ggml-cpu` into KleidiAI, then verify that
+    SME2 microkernels are active before comparing the reported performance.
   faqs:
   - question: Which compiler and toolchain should I use to build with SME2?
     answer: >-
@@ -106,4 +103,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

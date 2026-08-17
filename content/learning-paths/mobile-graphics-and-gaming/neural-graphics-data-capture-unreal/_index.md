@@ -33,14 +33,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:10:28Z'
   faq_source_hash: 0ccaf9c5b055c63e74c2e7ae4c6dc8f5c45f7b1eb3687e9174fae23d45dfaf78
   summary: >-
-    This Learning Path shows how to add the Neural Graphics Data Capture plugin to a C++ Unreal
-    Engine 5.5 project, connect simple Level Blueprint controls, and export a structured frame
-    dataset from real gameplay. You clone the repository, place it in the project Plugins folder,
-    enable and build it, then bind hotkeys to start and stop capture. Capture runs in Standalone
-    Game to preserve expected frame dimensions. After recording, learners verify outputs in the
-    configured directory and tune NGDCRenderingSettings and NGDCExportSettings—such as UpscalingRatio,
-    SupersamplingRatio, FixedFrameRate, and DatasetDir/CaptureName—to prepare datasets for training
-    or evaluating neural upscalers like Neural Super Sampling.
+    You'll add Neural Graphics Data Capture to a C++ Unreal Engine 5.5 project and export gameplay
+    frames as a structured dataset. Build the plugin, bind capture controls, and record in Standalone
+    Game. Then verify the output and tune rendering and export settings to prepare data for training
+    or evaluating neural upscalers.
   faqs:
   - question: Do I need a C++ Unreal project to build the plugin?
     answer: >-
@@ -114,4 +110,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

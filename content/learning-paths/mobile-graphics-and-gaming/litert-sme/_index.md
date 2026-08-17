@@ -31,14 +31,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:07:01Z'
   faq_source_hash: 189bd4833fcaafbad5fe84bd2ddee1e6006eb59afd3c2e90b1bbcd985719ee14
   summary: >-
-    This Learning Path shows how to accelerate LiteRT model inference on Android by enabling KleidiAI
-    SME2 micro-kernels through XNNPACK and validating results with the LiteRT benchmark_model
-    tool. You review how LiteRT, XNNPACK, KleidiAI, and SME2 interact, create LiteRT models that
-    match the subset of operators and data types integrated with SME2, and build two benchmark
-    binaries: one with KleidiAI/SME2 and one baseline. After verifying SME2 support on a compatible
-    Android device, you run both binaries on the same model and compare results to confirm when
-    SME2 acceleration is exercised; unsupported operators fall back to XNNPACK’s default implementations
-    during inference.
+    You'll accelerate LiteRT inference on Android with KleidiAI SME2 microkernels through XNNPACK.
+    Create models using supported operators and data types, then build a KleidiAI-enabled benchmark
+    and a baseline. After verifying SME2 support, run both on the same model and compare results,
+    including fallback behavior for unsupported operators.
   faqs:
   - question: What do I need on the Android device before running benchmarks?
     answer: >-
@@ -106,4 +102,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

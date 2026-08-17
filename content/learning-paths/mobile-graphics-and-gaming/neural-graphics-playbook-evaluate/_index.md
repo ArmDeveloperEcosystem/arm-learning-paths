@@ -30,15 +30,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:11:02Z'
   faq_source_hash: 2448b0a37ba988434f97fe500681e7660cd9c2ad470c61a930e8c5a6f092f03d
   summary: >-
-    This Learning Path guides developers through evaluating Arm Neural Technology for mobile games,
-    with a focus on Neural Frame Rate Upscaling (NFRU) and Neural Screen Space Denoising (NSSD).
-    It explains why neural techniques matter now, highlights the NX accelerators announced for
-    future Arm GPUs, and uses the Neural Dawn project to illustrate what a pipeline designed around
-    neural graphics can achieve. Learners review the core building blocks—Unreal Engine plugins,
-    an SDK, prebuilt models, and a Vulkan-centered runtime on Arm platforms—packaged in the Neural
-    Graphics Development Kit. The path then helps determine fit based on content type, camera
-    behavior, and performance targets, and shows how to begin hands-on trials by enabling the
-    NFRU plugin when available and running NSSD today.
+    You'll evaluate Arm Neural Technology for mobile games, focusing on Neural Frame Rate Upscaling
+    and Neural Screen Space Denoising. Review the Neural Graphics Development Kit, including Unreal
+    Engine plugins, models, and its Vulkan runtime. Then assess fit for your content, camera behavior,
+    and performance targets, and begin hands-on trials with the available components.
   faqs:
   - question: How do I know if NFRU or NSSD fits my game?
     answer: >-
@@ -116,4 +111,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

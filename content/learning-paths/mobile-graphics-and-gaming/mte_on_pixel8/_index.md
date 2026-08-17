@@ -33,14 +33,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:10:02Z'
   faq_source_hash: 91c91c4f9261ad235fe22d6b03fbe967cdf536da79d67aba41e5ad12105122f9
   summary: >-
-    This Learning Path shows how to enable Arm Memory Tagging Extension (MTE) on a Google Pixel
-    8, exercise it with a purpose-built test app, and read the resulting diagnostics. Learners
-    enable Developer options and turn on MTE, then install the MTE_test.apk to trigger representative
-    memory bugs from the app’s UI. When MTE is active, the app deliberately crashes on violations
-    so you can capture a system bug report from Developer options. You then copy the generated
-    zip to a desktop machine, decompress it, and examine both the main bugreport text file and
-    the tombstone under FS/data/tombstones. The path explains the lock-and-key principle behind
-    MTE and highlights what to look for in the report to understand the fault.
+    You'll enable Arm Memory Tagging Extension (MTE) on a Google Pixel 8 and exercise it with
+    a test app. Turn on MTE in Developer options, install `MTE_test.apk`, and capture a bug report
+    after a deliberate memory violation. Then inspect the bug report and tombstone to understand
+    the fault and MTE's lock-and-key model.
   faqs:
   - question: What result should I expect when I press a button in the test app?
     answer: >-
@@ -107,4 +103,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

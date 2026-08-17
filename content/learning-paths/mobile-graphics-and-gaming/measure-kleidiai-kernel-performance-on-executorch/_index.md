@@ -31,14 +31,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:07:35Z'
   faq_source_hash: 0db365140107125f0dd330363a00a5790214a12c859fb5cd573a8d66af4293c3
   summary: >-
-    This Learning Path guides learners through setting up an isolated Python environment and cross-compiling
-    ExecuTorch for AArch64 with XNNPACK and KleidiAI enabled to target SME/SME2-capable Arm systems.
-    Learners review how KleidiAI micro-kernels integrate through XNNPACK and then create quantized
-    benchmark models for Fully Connected and Conv2d layers, selecting GEMM variants intended to
-    trigger KleidiAI acceleration. Using executor_runner on the Arm64 target, they run workloads
-    to gather throughput, latency, and ETDump traces. Finally, they inspect ETRecord and ETDump
-    with the ExecuTorch Inspector API to validate kernel selection and interpret kernel-level
-    behavior across model variants.
+    You'll cross-compile ExecuTorch with XNNPACK and KleidiAI for an `aarch64` SME or SME2 system.
+    Create quantized Fully Connected and Conv2d benchmark models that can use KleidiAI, then run
+    them with `executor_runner`. Inspect ETRecord and ETDump traces with the ExecuTorch Inspector API
+    to validate kernel selection and compare behavior across variants.
   faqs:
   - question: Do I need to keep my Python virtual environment active while building and exporting
       models?
@@ -102,4 +98,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

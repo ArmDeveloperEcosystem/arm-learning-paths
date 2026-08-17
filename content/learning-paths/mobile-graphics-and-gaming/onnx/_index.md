@@ -34,15 +34,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:11:59Z'
   faq_source_hash: 4f34e1982fb812f3ea7352ce4c628d1fe449ba625da430ec7d25d968efc83601
   summary: >-
-    This Learning Path walks through an end-to-end workflow for exporting and deploying a compact
-    digit recognizer with ONNX Runtime on Arm64 platforms. You generate a synthetic Sudoku dataset,
-    train a small CNN in Python, and export the best checkpoint to ONNX using PyTorch’s Dynamo-based
-    exporter. The steps then validate numerical parity between PyTorch and ONNX Runtime, analyze
-    results with a confusion matrix, and apply targeted optimizations such as layer fusion. Guidance
-    on execution provider choices helps you verify runtime configuration on edge devices and Android
-    (for example, NNAPI). The path concludes by preparing the optimized ONNX model for Android
-    integration, while keeping the broader Sudoku pipeline deterministic and lightweight around
-    the model.
+    You'll train a compact digit recognizer, export it to ONNX, and deploy it with ONNX Runtime
+    on Arm platforms. Generate a synthetic Sudoku dataset, validate PyTorch and ONNX Runtime results,
+    and apply optimizations such as layer fusion. Then select and verify execution providers for
+    edge devices and Android, including NNAPI when available.
   faqs:
   - question: How do I know ONNX Runtime is using the right execution provider on my device?
     answer: >-
@@ -118,4 +113,3 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
-

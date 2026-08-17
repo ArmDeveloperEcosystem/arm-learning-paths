@@ -32,14 +32,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:13:41Z'
   faq_source_hash: 2f249bc941318c8900cc74e846036643d5250a2dc0309228a5d839006c7bdb25
   summary: >-
-    This Learning Path guides you through building ONNX Runtime for Android with KleidiAI micro-kernels
-    enabled for Arm Scalable Matrix Extension 2 (SME2), then profiling an ONNX model to compare
-    execution paths. Learners cross-compile ONNX Runtime with the Android NDK, deploy the binaries
-    and model assets to an Android device, and use onnxruntime_perf_test to capture measurements.
-    MLAS detects SME2 at runtime and dispatches GEMM and convolution operators to KleidiAI kernels
-    when available, replacing the default paths. Using a ResNet‑50 v2 example, you gather baseline
-    and SME2-accelerated results to see where SME2-backed KleidiAI dispatch changes operator execution
-    and affects end-to-end inference time.
+    You'll build ONNX Runtime for Android with KleidiAI SME2 microkernels and profile a model on
+    a device. Cross-compile with the Android NDK, deploy the binaries and model, and use
+    `onnxruntime_perf_test` to capture baseline and SME2 results. Then compare KleidiAI dispatch,
+    operator execution, and end-to-end inference time with ResNet-50 v2.
   faqs:
   - question: How do I confirm that KleidiAI is actually used at runtime?
     answer: >-
@@ -105,4 +101,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
