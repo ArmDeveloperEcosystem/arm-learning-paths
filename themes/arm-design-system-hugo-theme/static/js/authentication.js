@@ -260,8 +260,10 @@ document.addEventListener('arm-account-signout', (event) => {
     }
 
   clearDigitalDataUser();
-    
+
   const account = getAccount();
+  window.dispatchEvent(new Event('VFAE-logout'));
+
   msalInstance.logoutRedirect({
     account,
     authority: AUTHORITY,
