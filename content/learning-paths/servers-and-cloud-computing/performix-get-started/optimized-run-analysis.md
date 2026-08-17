@@ -18,7 +18,7 @@ Run each recipe one at a time by specifying the path to the optimized binary `pe
 
 The exact results depend on your hardware, but the most visible improvement is wall-clock time and total cycle count. Processing four elements per loop iteration using SIMD reduces the total number of instructions executed. The flame graph shows the same dominant function (`dot_neon`), but the sample count is significantly lower.
 
-![Arm Performix Code Hotspots flame graph for dot_neon with fewer samples than the scalar version, showing that the optimized function takes less time to execute#center](images/neon_cpu_hotspots_flame_graph.png "Code Hotspots flame graph for the Neon-optimized binary")
+![Arm Performix Code Hotspots Flame Graph view for dot_neon showing the function rows and an Insights panel reporting 99.98% of samples for dot_neon, confirming it is the dominant function in the optimized run#center](images/neon_cpu_hotspots_flame_graph.png "Code Hotspots flame graph for the Neon-optimized binary")
 
 ## Compare Instruction Mix results
 
@@ -38,7 +38,7 @@ The CPU Microarchitecture recipe confirms the bottleneck has shifted. After vect
 
 The exact results depend on your hardware. In this case, frontend stalls drop to zero, while backend stalls increase to ~47%. 
 
-![Arm Performix CPU Microarchitecture Cycle Accounting comparison showing Frontend Stalled Cycles at 0% versus a 0.34% baseline and Backend Stalled Cycles at 46.76% versus a 0.042% baseline after Neon optimization#center](images/neon_cpu_ma_summary2.png "CPU Microarchitecture results for the Neon-optimized binary")
+![Arm Performix CPU Microarchitecture Cycle Accounting comparison showing Frontend Stalled Cycles at 0% versus a 0.34% baseline and Backend Stalled Cycles at 46.76% versus a 0.042% baseline after Neon optimization#center](images/neon_cpu_ma_summary.png "CPU Microarchitecture results for the Neon-optimized binary")
 
 The exact results depend on your hardware, but this demonstrates a common pattern in performance optimization: improving one part of the pipeline shifts pressure elsewhere. With the bottleneck moved from the frontend to the backend, the CPU executes more efficiently, and demand shifts to execution units and memory. This iterative cycle of measure, change, and validate is what Performix is designed to support.
 

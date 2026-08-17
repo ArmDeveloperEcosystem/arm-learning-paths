@@ -16,7 +16,7 @@ To run the recipe:
 
 1. In Performix, select the **Code Hotspots** recipe from the list of available recipes.
 
-    ![Arm Performix recipe list with Code Hotspots selected, its description visible, and the target configuration ready for the profiling run#center](images/code_hotspots_run_recipe.png "Selecting the Code Hotspots recipe")
+    ![Arm Performix Code Hotspots setup form with a ready target, the scalar workload and profiling options configured, a passing pre-run check, and the Run Recipe button#center](images/code_hotspots_run_recipe.png "Selecting the Code Hotspots recipe")
 
 1. Specify the path to your compiled binary and any necessary parameters. Performix assumes the home directory as the base path, so use the relative path from `$HOME`. For this example, run the program with 16M floats and an iteration count of 2000 to ensure sufficient runtime for meaningful sampling:
 
@@ -36,7 +36,7 @@ You can identify optimization opportunities by focusing on the widest blocks, wh
 
 The `dot_scalar` function dominates the flame graph, indicating it accounts for a large proportion of total CPU cycles.
 
-![Arm Performix Code Hotspots flame graph with dot_scalar as the widest block, showing that this function accounts for most CPU samples and is the main optimization target#center](images/code_hotspots_flame_graph.png "Code Hotspots flame graph")
+![Arm Performix Code Hotspots Flame Graph view showing dot_scalar as the hottest function and the Insights panel reporting that it accounts for 99.99% of samples, identifying it as the main optimization target#center](images/code_hotspots_flame_graph.png "Code Hotspots flame graph")
 
 The **Insights** panel shows the sample count. This function accounts for 99.47% of samples.
 
