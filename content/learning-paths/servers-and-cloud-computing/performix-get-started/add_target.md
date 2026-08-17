@@ -21,7 +21,7 @@ In addition to the GUI, you can use Arm Performix through the command line. You 
 
 ## Configure SSH key-based authentication
 
-Arm Performix connects to your target over SSH. After installing Performix, to set it up for profiling, configure SSH key-based authentication.
+Arm Performix connects to your target over SSH. After installing Performix, set it up for profiling by configuring SSH key-based authentication.
 
 If you don't already have an SSH key pair, generate one on your local machine:
 
@@ -76,14 +76,14 @@ root
 
 When you launch Arm Performix, the Welcome screen appears. From this screen, you can connect to a target.
 
-![Arm Performix welcome screen showing the Connect a target button and activity bar#center](images/welcome.png "Performix welcome screen")
+![Arm Performix Welcome screen with the Connect a Target button and activity bar, which you use to open the target configuration view#center](images/welcome.png "Performix welcome screen")
 
 1. Select **Connect a Target** to open the **Targets** view.
 1. Select **Add Target**.
 1. Fill in the **Configure Target** form with the following details:
 
    - **Host:** the hostname or IP address of the Arm Linux server
-   - **Name:** a descriptive name for the target, such as **dot-product-profile**
+   - **Name:** a descriptive name for the target
    - **Port:** the SSH port number (the default port is 22)
    - **User:** the username for SSH connection, which must be a valid user on the target machine
    - **Authentication method:** select one of the following:
@@ -95,7 +95,7 @@ When you launch Arm Performix, the Welcome screen appears. From this screen, you
 1. Select **Test Connection** to verify your target is reachable. If any required tools are missing, Performix installs them for you.
 1. After validating the connection, select **Add Target**. The target appears in the list and is ready for profiling.
 
-![Configure Target form with Host, Name, Port, User, and Authentication fields filled in#center](images/add_target.png "Adding a target in Performix")
+![Arm Performix Configure Target form with the Host, Name, Port, User, and Authentication fields filled in before testing the SSH connection#center](images/add_target.png "Adding a target in Performix")
 
 You should see your target listed in the **Targets** view with a connected status, confirming Performix can reach your server.
 

@@ -16,7 +16,7 @@ To run the recipe:
 
 1. In Performix, select the **Code Hotspots** recipe from the list of available recipes.
 
-    ![Performix recipe list with Code Hotspots selected, showing the recipe description and target configuration#center](images/code_hotspots_run_recipe.png "Selecting the Code Hotspots recipe")
+    ![Arm Performix recipe list with Code Hotspots selected, its description visible, and the target configuration ready for the profiling run#center](images/code_hotspots_run_recipe.png "Selecting the Code Hotspots recipe")
 
 1. Specify the path to your compiled binary and any necessary parameters. Performix assumes the home directory as the base path, so use the relative path from `$HOME`. For this example, run the program with 16M floats and an iteration count of 2000 to ensure sufficient runtime for meaningful sampling:
 
@@ -36,13 +36,13 @@ You can identify optimization opportunities by focusing on the widest blocks, wh
 
 The `dot_scalar` function dominates the flame graph, indicating it accounts for a large proportion of total CPU cycles.
 
-![Flame graph showing dot_scalar as the widest block, consuming nearly all CPU samples#center](images/code_hotspots_flame_graph.png "Code Hotspots flame graph")
+![Arm Performix Code Hotspots flame graph with dot_scalar as the widest block, showing that this function accounts for most CPU samples and is the main optimization target#center](images/code_hotspots_flame_graph.png "Code Hotspots flame graph")
 
 The **Insights** panel shows the sample count. This function accounts for 99.47% of samples.
 
 Switch to the **Call Stack** view to see how the hotspot function is reached and whether its cost comes from the function itself or its callees.
 
-![Call Stack view showing the path from main to run_bench to dot_scalar#center](images/code_hotspots_call_stacks.png "Call Stack view")
+![Arm Performix Call Stack view tracing execution from main through run_bench to dot_scalar, which helps identify how the hotspot is reached#center](images/code_hotspots_call_stacks.png "Call Stack view")
 
 Double-click the hotspot function to open the **Source Code Viewer** and inspect the exact lines of code associated with high CPU usage. When you open the **Source Code Viewer** for the first time, you need to specify the root directory of your source code so Performix can map profiling data to the correct files.
 
@@ -54,7 +54,7 @@ The **Source Code Viewer** runs on your local machine. To view annotated source 
  ```
 {{% /notice %}}
 
-![Source code viewer highlighting the hot loop inside dot_scalar with per-line sample counts#center](images/code_hotspots_source.png "Source code viewer for dot_scalar")
+![Arm Performix Source Code Viewer highlighting the hot loop inside dot_scalar with per-line sample counts, showing where the function spends its time#center](images/code_hotspots_source.png "Source code viewer for dot_scalar")
 
 ## What you've accomplished and what's next
 

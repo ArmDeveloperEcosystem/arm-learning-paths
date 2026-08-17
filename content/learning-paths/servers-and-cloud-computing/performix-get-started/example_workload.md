@@ -129,7 +129,7 @@ The flags do the following:
 - `-mcpu=native`: tunes the code for the target CPU
 
 {{% notice Note %}}
-The `-fno-tree-vectorize` flag is used here for learning purposes only. It forces the compiler to produce scalar code, so you can observe the performance difference when you manually optimize with Neon intrinsics later. In most cases, you'd let the compiler auto-vectorize.
+`-fno-tree-vectorize` is used here for learning purposes only. The flag forces the compiler to produce scalar code, so you can observe the performance difference when you manually optimize with Neon intrinsics later. In most cases, you'd let the compiler auto-vectorize.
 {{% /notice %}}
 
 ## Verify the program runs

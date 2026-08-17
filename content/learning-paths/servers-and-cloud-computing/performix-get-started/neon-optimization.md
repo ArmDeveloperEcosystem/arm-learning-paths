@@ -8,7 +8,7 @@ weight: 7
 layout: learningpathall
 ---
 
-## What you will optimize
+## Create the optimized source file
 
 The Instruction Mix analysis showed that the application processes one element per loop iteration using scalar instructions. You can reduce the number of instructions per element by rewriting the hot loop with Arm Neon intrinsics, which process four floating-point elements per instruction.
 
@@ -19,8 +19,6 @@ The key changes in the optimized version are:
 - SIMD vector loads: Loads four floats at once (`vld1q_f32`) instead of one at a time
 
 The memory access pattern, branch structure, and working set size remain unchanged. Any performance difference comes directly from improved instruction efficiency.
-
-## Create the optimized source file
 
 On your target, create a new C++ source file named `dot_neon_optimized.cpp` in the same `performix-analysis` directory:
 
@@ -125,7 +123,7 @@ int main(int argc, char** argv) {
 
 ## Compile and verify the optimized program
 
-Compile the optimized version. Notice that `-fno-tree-vectorize` is no longer used because you want the compiler to recognize and support the Neon intrinsics:
+Compile the optimized version without the `-fno-tree-vectorize` flag so that the compiler recognizes and supports the Neon intrinsics:
 
 ```bash
 g++ -O3 -g -fno-omit-frame-pointer -mcpu=native -std=c++17 dot_neon_optimized.cpp -o dot_neon

@@ -22,13 +22,15 @@ The Instruction Mix recipe in Arm Performix shows how your code uses different i
 
 1. Leaving all other fields as defaults, select **Run Recipe** to start the analysis. Performix collects data and presents the results.
 
-    ![Instruction Mix results showing the application is dominated by scalar operations with no SIMD usage#center](images/instruction_mix_scalar.png "Instruction Mix results for the scalar application")
+    ![Arm Performix Instruction Mix results dominated by scalar operations with no SIMD usage, showing that the application misses vectorization opportunities#center](images/instruction_mix_scalar.png "Instruction Mix results for the scalar application")
 
 ## Interpret the results
 
-The Instruction Mix analysis shows the distribution of instruction types used by your application. The results confirm that the code is dominated by scalar operations with no SIMD usage. Each loop iteration performs only a small amount of work but still consumes instruction bandwidth. This creates sustained pressure on the frontend because too many instructions are required per unit of useful computation.
+The Instruction Mix analysis shows the distribution of instruction types used by your application. The exact results depend on your hardware but confirm that the code is dominated by scalar operations with no SIMD usage.
+ 
+Each loop iteration performs only a small amount of work but still consumes instruction bandwidth. This creates sustained pressure on the frontend because too many instructions are required per unit of useful computation.
 
-The **Insights** panel identifies the root cause: the application is not using SIMD and is missing vectorization opportunities. Vectorization reduces the number of instructions required per element by performing multiple operations per instruction, directly relieving frontend pressure.
+The **Insights** panel identifies the root cause: the application isn't using SIMD and is missing vectorization opportunities. Vectorization reduces the number of instructions required per element by performing multiple operations per instruction, directly relieving frontend pressure.
 
 The scalar application is frontend bound because it performs too many instructions per unit of useful work. Instruction Mix confirms that it misses SIMD opportunities.
 

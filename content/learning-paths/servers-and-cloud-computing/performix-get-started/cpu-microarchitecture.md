@@ -24,15 +24,17 @@ To run the recipe:
 
 1. Leaving all other values as defaults, select **Run Recipe** to start the analysis. Performix collects data and presents the results using Topdown analysis.
 
-    ![Topdown summary showing over 60% frontend bound classification for the dot_scalar function#center](images/cpu_ma_summary.png "CPU Microarchitecture Topdown summary")
-
 ## Interpret the results
 
-The analysis shows that the application is 0.34% frontend stalled. This means the CPU frequently stalls while fetching or decoding instructions, even though backend resources are available. The CPU isn't compute-bound. Instead, it's waiting for instructions.
+The analysis shows that the application is 0.34% frontend stalled compared to 0.042% backend stalled. The exact values depend on your hardware.
+
+This difference between frontend and backend stalls means the CPU stalls while fetching or decoding instructions, even though backend resources are available. The CPU isn't compute-bound. Instead, it's waiting for instructions.
+
+![Arm Performix CPU Microarchitecture summary for dot_scalar showing Cycle Accounting with Frontend Stalled Cycles at 0.34% and Backend Stalled Cycles at 0.042%, followed by cache and branch efficiency metrics#center](images/cpu_ma_summary.png "CPU Microarchitecture Topdown summary")
 
 Performix provides guidance in the **Insights** panel to help you understand these results.
 
-![Insights panel recommending investigation of instruction fetch and decode bottlenecks#center](images/cpu_ma_insights.png "CPU Microarchitecture insights")
+![Arm Performix Insights panel recommending investigation of instruction fetch and decode bottlenecks, which explains the frontend-bound result#center](images/cpu_ma_insights.png "CPU Microarchitecture insights")
 
 ## What you've accomplished and what's next
 
