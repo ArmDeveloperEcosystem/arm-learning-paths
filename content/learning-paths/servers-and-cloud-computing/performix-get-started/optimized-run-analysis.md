@@ -40,7 +40,7 @@ The exact results depend on your hardware. In this case, frontend stalls drop to
 
 ![Arm Performix CPU Microarchitecture Cycle Accounting comparison showing Frontend Stalled Cycles at 0% versus a 0.34% baseline and Backend Stalled Cycles at 46.76% versus a 0.042% baseline after Neon optimization#center](images/neon_cpu_ma_summary.png "CPU Microarchitecture results for the Neon-optimized binary")
 
-The exact results depend on your hardware, but this demonstrates a common pattern in performance optimization: improving one part of the pipeline shifts pressure elsewhere. With the bottleneck moved from the frontend to the backend, the CPU executes more efficiently, and demand shifts to execution units and memory. This iterative cycle of measure, change, and validate is what Performix is designed to support.
+The exact results depend on your hardware, but this demonstrates a common pattern in performance optimization: improving one part of the pipeline shifts pressure elsewhere. With the bottleneck moved from the frontend to the backend, the CPU executes more efficiently. Demand shifts to execution units and memory. This iterative cycle of measure, change, and validate is what Performix is designed to support.
 
 ## What you've accomplished
 
