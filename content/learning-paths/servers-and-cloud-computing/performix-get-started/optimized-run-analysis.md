@@ -26,7 +26,7 @@ Select the previous scalar Instruction Mix run to compare it with the optimized 
 
 ![Arm Performix Instruction Mix comparison with the scalar instruction_mix_scalar run selected in the Compare with control, preparing a side-by-side comparison with the optimized run#center](images/comparison.png "Selecting the scalar Instruction Mix run from the Compare with control")
 
-The exact results depend on your hardware, but the overlay shows Advanced SIMD instructions appearing in the optimized version while scalar operations decrease. This confirms more work is done per instruction.
+The exact results depend on your hardware, but the overlay shows Advanced SIMD instructions appearing in the optimized version while scalar operations generally decrease. This confirms more work is done per instruction.
 
 ![Arm Performix Instruction Mix breakdown for the Neon-optimized binary showing Advanced SIMD instructions, which confirms that vector operations are executing#center](images/neon_instruction_mix.png "Instruction Mix for the Neon-optimized binary")
 
