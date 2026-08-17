@@ -14,9 +14,51 @@ prerequisites:
     - A game project that uses advanced rendering features (such as hardware ray tracing) that stretch the performance capabilities of everyday smartphones.
     - A development machine with Git installed.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-17T22:02:37Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 2424d8faebea11359ea0330d94698187b9305dde158d5761f9942eb33e711583
+  summary_generated_at: '2026-08-17T22:02:37Z'
+  summary_source_hash: 2424d8faebea11359ea0330d94698187b9305dde158d5761f9942eb33e711583
+  faq_generated_at: '2026-08-17T22:02:37Z'
+  faq_source_hash: 2424d8faebea11359ea0330d94698187b9305dde158d5761f9942eb33e711583
+  summary: >-
+    You'll add Arm Accuracy Super Resolution (Arm ASR) to an Unreal Engine project or custom engine.
+    Use the plugin with supported Unreal Engine versions, or choose a Quick or Tight integration
+    for the generic library. Then configure quality presets, shaders, extensions, and input resources
+    to evaluate image quality and performance trade-offs on mobile devices.
+  faqs:
+  - question: Which Unreal Engine versions should I use for the Arm ASR plugin?
+    answer: >-
+      Use Unreal Engine 5.3, 5.4, or 5.5. The tutorial recommends these versions and the plugin
+      is available for them.
+  - question: Can I use Arm ASR without Unreal Engine?
+    answer: >-
+      Yes. You can integrate Arm ASR into a custom engine using the generic library.
+  - question: Which integration method should I choose with the generic library?
+    answer: >-
+      Arm ASR offers two methods: Quick Integration uses the standalone backend, and Tight Integration
+      uses your engine’s backend/renderer. Choose the approach that aligns with how you manage
+      rendering in your engine.
+  - question: What configuration areas do I set up when using the generic library?
+    answer: >-
+      You configure quality presets, shader variants and extensions, and input resources. These
+      settings control how ASR processes and upscales your content.
+  - question: Is a Unity plugin available for Arm ASR?
+    answer: >-
+      A Unity plugin is coming soon. Until then, use the Unreal Engine plugin or integrate the
+      generic library into your engine.
+# END generated_summary_faq
+
 author: Julie Gaskin
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -59,4 +101,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

@@ -12,9 +12,56 @@ learning_objectives:
 prerequisites:
     - An AArch64 Linux development machine. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-17T22:09:08Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: cdf48a76a0d88e2c7756eb01c48aa81b341366bcb5d224ba710e74c15d5b1f21
+  summary_generated_at: '2026-08-17T22:09:08Z'
+  summary_source_hash: cdf48a76a0d88e2c7756eb01c48aa81b341366bcb5d224ba710e74c15d5b1f21
+  faq_generated_at: '2026-08-17T22:09:08Z'
+  faq_source_hash: cdf48a76a0d88e2c7756eb01c48aa81b341366bcb5d224ba710e74c15d5b1f21
+  summary: >-
+    This Learning Path introduces the Arm Memory Tagging Extension (MTE), a hardware feature in
+    Armv8.5-A and Armv9-A that detects buffer overflows and use-after-free errors. You build and
+    run a small C program on AArch64 Linux to exercise tagged memory and observe how MTE surfaces
+    these common issues. The steps focus on running the example on a recent Arm system or an Arm-based
+    cloud instance so you can see how faults or diagnostics correlate with buggy memory access
+    patterns. After completing the path, learners can recognize the observable behavior that indicates
+    MTE intervention during erroneous memory operations.
+  faqs:
+  - question: How do I know if my system can demonstrate MTE?
+    answer: >-
+      MTE is implemented in Armv8.5-A and Armv9-A processors. Verify that you are using an AArch64
+      Linux system with hardware that supports MTE; otherwise, the example may not show tagging-related
+      behavior.
+  - question: What result should I expect when running the example program?
+    answer: >-
+      Expect behavior that illustrates MTE catching memory safety issues, such as a fault or diagnostic
+      triggered by an invalid access. The outcome should align with the bug the program intentionally
+      exercises.
+  - question: Can I run the example on an Arm-based cloud instance?
+    answer: >-
+      Yes. The prerequisites allow using Arm-based cloud instances; see the list of Arm cloud
+      service providers linked from the Learning Path.
+  - question: What should I check if the program runs without showing any MTE effects?
+    answer: >-
+      Confirm you are on AArch64 Linux and that the processor implements MTE (Armv8.5-A or Armv9-A).
+      If the platform lacks MTE support, the example will not demonstrate tagging behavior.
+  - question: Which memory errors does the example focus on?
+    answer: >-
+      The example targets buffer overflow and use-after-free errors. These are common sources
+      of vulnerabilities that MTE is designed to detect.
+# END generated_summary_faq
+
 author: Jason Andrews
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

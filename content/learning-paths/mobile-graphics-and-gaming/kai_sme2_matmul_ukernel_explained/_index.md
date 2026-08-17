@@ -16,9 +16,57 @@ prerequisites:
     - Basic understanding of quantization concepts for neural networks
     - (Optional) Access to an Arm CPU with SME2 support (Linux or Android) for hands-on verification steps
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-17T22:05:12Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 3a0a9c01e8e7fb6ccb1df84d3f131679987196fb5b94a2ad22731c5ba5bfd90f
+  summary_generated_at: '2026-08-17T22:05:12Z'
+  summary_source_hash: 3a0a9c01e8e7fb6ccb1df84d3f131679987196fb5b94a2ad22731c5ba5bfd90f
+  faq_generated_at: '2026-08-17T22:05:12Z'
+  faq_source_hash: 3a0a9c01e8e7fb6ccb1df84d3f131679987196fb5b94a2ad22731c5ba5bfd90f
+  summary: >-
+    This Learning Path examines how a KleidiAI SME2 INT8 MOPA microkernel executes quantized matrix
+    multiplication on Arm CPUs. It introduces the kernel’s tiling model, shows how mr, nr, bl,
+    and kr drive packing, and pinpoints where outer product accumulate operations update ZA in
+    the inner loop. You decode a specific kernel name and interpret the 1vlx4vl work unit relative
+    to the SME2 streaming vector length. A focused example repacks GGML Q4_0 weights for a [16,
+    64] × [64, 64] multiply, assuming a 512-bit SVL, to illustrate data flow into the kernel.
+    Learners validate understanding through source inspection and optional disassembly to see
+    where SME2 instructions appear.
+  faqs:
+  - question: Do I need an SME2-capable Arm CPU to complete this?
+    answer: >-
+      No. SME2 hardware is only required for the optional hands-on verification steps; you can
+      still follow the concepts and source walkthrough without it.
+  - question: How do I know the microkernel is using SME2 INT8 MOPA in the inner loop?
+    answer: >-
+      Inspect the microkernel’s inner loop for SME2 outer product accumulate instructions that
+      update the ZA storage. Optional disassembly can also confirm where these instructions appear.
+  - question: What do mr, nr, bl, and kr affect when preparing inputs?
+    answer: >-
+      These tiling and block parameters define the output tile shape and how many K elements are
+      processed per step. Pack A and B so their layouts align with these increments and the kernel’s
+      access pattern.
+  - question: What does 1vlx4vl indicate in the kernel name?
+    answer: >-
+      It indicates that one inner-loop iteration computes an intermediate 1VL by 4VL submatrix
+      of the output. The actual element counts depend on the device’s SME2 streaming vector length.
+  - question: What should I expect after repacking GGML Q4_0 weights for the example matmul?
+    answer: >-
+      The RHS buffer layout changes to the format expected by the SME2 microkernel so the inner
+      loop can stream data efficiently. The kernel then consumes the packed weights without additional
+      rearrangement.
+# END generated_summary_faq
+
 author: Zenon Zhilong Xiu
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

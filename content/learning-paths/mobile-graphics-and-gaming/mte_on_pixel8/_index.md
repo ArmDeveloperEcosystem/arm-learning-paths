@@ -18,9 +18,56 @@ prerequisites:
     - A USB cable to connect your Google Pixel 8 to your desktop machine
     - Android Debug Bridge (adb) installed on your device. Follow the steps in https://developer.android.com/tools/adb to install Android SDK Platform Tools. The adb tool is included in this package.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-17T22:10:02Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 91c91c4f9261ad235fe22d6b03fbe967cdf536da79d67aba41e5ad12105122f9
+  summary_generated_at: '2026-08-17T22:10:02Z'
+  summary_source_hash: 91c91c4f9261ad235fe22d6b03fbe967cdf536da79d67aba41e5ad12105122f9
+  faq_generated_at: '2026-08-17T22:10:02Z'
+  faq_source_hash: 91c91c4f9261ad235fe22d6b03fbe967cdf536da79d67aba41e5ad12105122f9
+  summary: >-
+    This Learning Path shows how to enable Arm Memory Tagging Extension (MTE) on a Google Pixel
+    8, exercise it with a purpose-built test app, and read the resulting diagnostics. Learners
+    enable Developer options and turn on MTE, then install the MTE_test.apk to trigger representative
+    memory bugs from the app’s UI. When MTE is active, the app deliberately crashes on violations
+    so you can capture a system bug report from Developer options. You then copy the generated
+    zip to a desktop machine, decompress it, and examine both the main bugreport text file and
+    the tombstone under FS/data/tombstones. The path explains the lock-and-key principle behind
+    MTE and highlights what to look for in the report to understand the fault.
+  faqs:
+  - question: What result should I expect when I press a button in the test app?
+    answer: >-
+      With MTE enabled, the app triggers a memory violation and crashes. This lets you capture
+      a bug report that includes MTE-specific details about the fault.
+  - question: How do I capture a bug report after the crash?
+    answer: >-
+      Open Developer options and select Bug report, then tap Report to start generation. Wait
+      for the progress indicator to complete, then use the resulting zip file for analysis.
+  - question: Where in the bug report do I find detailed MTE diagnostics?
+    answer: >-
+      The zip contains a primary bugreport text file, and more detailed information is written
+      to a tombstone file. Look under FS/data/tombstones in the unzipped folder.
+  - question: My bug report filename includes “Husky.” Is that expected?
+    answer: >-
+      Yes. Husky is the code name for Google Pixel 8 Pro and can appear in the generated bug report
+      filename.
+  - question: What should I check if the test app doesn’t crash?
+    answer: >-
+      Verify that MTE is enabled in Developer options before running the app’s tests. Also confirm
+      that MTE_test.apk installed correctly and that you are invoking one of the buttons designed
+      to trigger a memory bug.
+# END generated_summary_faq
+
 author: Roberto Lopez Mendez
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

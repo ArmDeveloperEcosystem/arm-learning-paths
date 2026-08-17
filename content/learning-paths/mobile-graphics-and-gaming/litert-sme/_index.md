@@ -16,9 +16,59 @@ prerequisites:
 - An Arm64 Linux development machine 
 - An Android device that supports Arm SME2 architecture features - see this [list of devices with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-17T22:07:01Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 189bd4833fcaafbad5fe84bd2ddee1e6006eb59afd3c2e90b1bbcd985719ee14
+  summary_generated_at: '2026-08-17T22:07:01Z'
+  summary_source_hash: 189bd4833fcaafbad5fe84bd2ddee1e6006eb59afd3c2e90b1bbcd985719ee14
+  faq_generated_at: '2026-08-17T22:07:01Z'
+  faq_source_hash: 189bd4833fcaafbad5fe84bd2ddee1e6006eb59afd3c2e90b1bbcd985719ee14
+  summary: >-
+    This Learning Path shows how to accelerate LiteRT model inference on Android by enabling KleidiAI
+    SME2 micro-kernels through XNNPACK and validating results with the LiteRT benchmark_model
+    tool. You review how LiteRT, XNNPACK, KleidiAI, and SME2 interact, create LiteRT models that
+    match the subset of operators and data types integrated with SME2, and build two benchmark
+    binaries: one with KleidiAI/SME2 and one baseline. After verifying SME2 support on a compatible
+    Android device, you run both binaries on the same model and compare results to confirm when
+    SME2 acceleration is exercised; unsupported operators fall back to XNNPACK’s default implementations
+    during inference.
+  faqs:
+  - question: What do I need on the Android device before running benchmarks?
+    answer: >-
+      Copy your LiteRT model file and two benchmark_model binaries to the device: one built with
+      KleidiAI and SME2 enabled and one baseline build. Run both against the same model on the
+      same device.
+  - question: How do I know if my Android device supports SME2?
+    answer: >-
+      From an ADB shell, inspect /proc/cpuinfo and look for an entry that indicates SME2 support.
+      If you do not see SME2 listed, use a device from the provided SME2-capable list.
+  - question: Which LiteRT operators are accelerated by SME2 through KleidiAI?
+    answer: >-
+      Only the subset of KleidiAI SME2 micro-kernels integrated into XNNPACK are accelerated.
+      Operators outside the supported data types and quantization configurations use XNNPACK’s
+      default implementation.
+  - question: What result should I expect when comparing the two benchmark binaries?
+    answer: >-
+      The SME2-enabled binary demonstrates performance gains for models that use supported operators
+      and data types. Both runs should complete successfully so you can compare their reported
+      measurements.
+  - question: What should I check if I don’t see an improvement with the SME2-enabled build?
+    answer: >-
+      Verify the device reports SME2 support, and confirm your model uses the supported operator
+      configurations listed in the path. Also ensure you ran the SME2-enabled binary under the
+      same conditions as the baseline.
+# END generated_summary_faq
+
 author: Jiaming Guo
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

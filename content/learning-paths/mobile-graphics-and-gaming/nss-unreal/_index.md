@@ -17,9 +17,57 @@ prerequisites:
     - Unreal Engine 4.27 or 5.4 or 5.6 (with the Templates and Feature Pack enabled)
     - Visual Studio (with Desktop Development with C++ and .NET desktop build tools)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-17T22:11:27Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: f9e794dcaca9f4845b360594acd511726093e26f1f8a6f62b86f3fe2559ec8f0
+  summary_generated_at: '2026-08-17T22:11:27Z'
+  summary_source_hash: f9e794dcaca9f4845b360594acd511726093e26f1f8a6f62b86f3fe2559ec8f0
+  faq_generated_at: '2026-08-17T22:11:27Z'
+  faq_source_hash: f9e794dcaca9f4845b360594acd511726093e26f1f8a6f62b86f3fe2559ec8f0
+  summary: >-
+    This Learning Path guides you through enabling Arm Neural Super Sampling (NSS) in Unreal Engine
+    using ML extensions for Vulkan on Windows. Learners install the Vulkan SDK and set up the
+    ML emulation layers with Vulkan Configurator, then download the Arm Neural Graphics Plugin
+    1.1.0 and its VGF model. A C++ Third Person project is created and built in Visual Studio
+    to integrate and run NSS. The path shows how to verify that NSS is active using ShowFlag.VisualizeTemporalUpscaler
+    1 and how to visualize model outputs with r.NSS.Debug 1. It also introduces using RenderDoc
+    for frame capture and analysis when investigating visual results or stepping through Vulkan
+    calls.
+  faqs:
+  - question: How do I know NSS is active in my level?
+    answer: >-
+      Run ShowFlag.VisualizeTemporalUpscaler 1 in Unreal and check the rendering summary. You
+      should see NSS listed. To hide the overview, run ShowFlag.VisualizeTemporalUpscaler 0.
+  - question: Which Unreal Engine project template should I use for the example?
+    answer: >-
+      Create a new Third Person template project using the C++ option. Open it in Visual Studio
+      and build from source before enabling and running NSS.
+  - question: How do I set up the ML emulation layers for Vulkan?
+    answer: >-
+      Install Vulkan SDK version 1.4.321.0 or later and the ML Emulation Layer for Vulkan version
+      0.10.0 or later. Use Vulkan Configurator to set up the emulation layers used for ML extensions
+      workloads.
+  - question: How can I visualize the NSS model output while the game runs?
+    answer: >-
+      Run the command r.NSS.Debug 1 in Unreal. This adds real-time views showing the model output
+      to help you inspect results.
+  - question: When should I use RenderDoc in this workflow?
+    answer: >-
+      Use RenderDoc when you see unexpected visual output or need to analyze a frame in detail.
+      It lets you step through a capture, inspect Vulkan API calls, and review shader inputs and
+      outputs, with additional features available for Arm GPUs.
+# END generated_summary_faq
+
 author: Annie Tallund
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
