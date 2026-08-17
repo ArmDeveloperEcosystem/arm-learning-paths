@@ -1,5 +1,5 @@
 ---
-title: Find code hotspots in the scalar sample C++ application
+title: Find code hotspots in the scalar dot-product application
 
 description: Use Arm Performix Code Hotspots to identify functions that consume the most CPU time in a sample C++ application.
 
