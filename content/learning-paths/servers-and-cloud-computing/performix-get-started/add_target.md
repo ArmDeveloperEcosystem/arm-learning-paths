@@ -16,7 +16,7 @@ Performix runs on your local machine (Windows, macOS, or Linux). The tool connec
 
 For a walkthrough of the Performix GUI and setup process, see this video on [getting started with Arm Performix](https://youtu.be/_eX8ZpNT0kc?si=WrQg5daHxUc0MFbR).
 
-In addition to the GUI, you can use Arm Performix through the command line. You can also use the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) to integrate Performix into AI-assisted workflows with the [Arm MCP Server](https://developer.arm.com/servers-and-cloud-computing/arm-mcp-server).
+In addition to the GUI, you can use Arm Performix through the command line. You can also use [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) to integrate Performix into AI-assisted workflows with the [Arm MCP Server](https://developer.arm.com/servers-and-cloud-computing/arm-mcp-server).
 
 
 ## Configure SSH key-based authentication
