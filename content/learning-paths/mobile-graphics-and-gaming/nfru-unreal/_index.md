@@ -87,24 +87,29 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Neural Graphics Development Kit
-        link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics
-        type: website
+        title: Arm Neural Technology Playbook - Evaluate
+        link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/
+        type: learningpath
     - resource:
-        title: RenderDoc for Arm GPUs
-        link: https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs
-        type: documentation
-    - resource:
-        title: Get started with neural graphics using ML extensions for Vulkan
-        link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
+        title: Analyze Neural Frame Rate Upscaling using Project Moku
+        link: /learning-paths/mobile-graphics-and-gaming/nfru-cases-study/
         type: learningpath
     - resource:
         title: Train and evaluate Neural Frame Rate Upscaling models using Model Gym
         link: /learning-paths/mobile-graphics-and-gaming/model-training-gym-nfru/
         type: learningpath
-
-
-
+    - resource:
+        title: Neural Graphics Development Kit
+        link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics
+        type: website
+    - resource:
+        title: Arm Neural Frame Rate Upscaling model on Hugging Face
+        link: https://huggingface.co/Arm/neural-frame-rate-upscaling
+        type: code
+    - resource:
+        title: Get started with neural graphics using ML extensions for Vulkan
+        link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
+        type: learningpath
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
