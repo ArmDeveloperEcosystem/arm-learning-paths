@@ -28,7 +28,7 @@ Select the previous scalar Instruction Mix run to compare it with the optimized 
 
 The exact results depend on your hardware, but the overlay shows Advanced SIMD instructions appearing in the optimized version while scalar operations decrease. This confirms more work is done per instruction.
 
-![Arm Performix Instruction Mix breakdown for the NEON-optimized binary showing Advanced SIMD instructions, which confirms that vector operations are executing#center](images/neon_instruction_mix.png "Instruction Mix for the Neon-optimized binary")
+![Arm Performix Instruction Mix breakdown for the Neon-optimized binary showing Advanced SIMD instructions, which confirms that vector operations are executing#center](images/neon_instruction_mix.png "Instruction Mix for the Neon-optimized binary")
 
 The scalar version is dominated by floating-point and load operations. The Neon version introduces Advanced SIMD, reducing the number of instructions required per element and directly relieving frontend pressure.
 
