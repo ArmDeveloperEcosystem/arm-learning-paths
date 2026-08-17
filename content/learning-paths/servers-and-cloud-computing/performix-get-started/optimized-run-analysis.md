@@ -40,7 +40,7 @@ The overlay shows Advanced SIMD instructions appearing in the optimized version 
 
 ![Instruction Mix breakdown for the Neon-optimized binary showing Advanced SIMD usage#center](images/neon_instruction_mix.png "Instruction Mix for the Neon-optimized binary")
 
-The scalar version is dominated by integer, floating-point, and load operations. The Neon version introduces Advanced SIMD, reducing the number of instructions required per element and directly relieving frontend pressure.
+The scalar version is dominated by floating-point, and load operations. The Neon version introduces Advanced SIMD, reducing the number of instructions required per element and directly relieving frontend pressure.
 
 ## Compare CPU Microarchitecture results
 
