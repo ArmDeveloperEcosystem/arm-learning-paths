@@ -16,6 +16,14 @@
       const chatAi = document.createElement("chat-ai");
       chatAi.id = "chat-ai";
       chatAi.setAttribute("theme", "dark");
+      chatAi.setAttribute("title", "Arm Virtual Assistant");
+      chatAi.setAttribute("current-page", "false");
+      chatAi.setAttribute(
+        "content",
+        `<strong>Discover the right technical content faster</strong><br><br>
+         Arm Virtual Assistant helps developers find relevant Learning Paths, tools, and implementation guidance across AI, cloud, and multi-architecture development.<br><br>
+         Use of the ARM Virtual FAE is subject to the terms of the <a href="https://ipuser.dev.bespin.arm.com/vfae-terms-and-conditions" target="_blank" rel="noopener noreferrer"><strong>ARM Virtual FAE Terms and Conditions of Use</strong></a>.`
+      );
       chatAi.setAttribute("app-name", "learning-paths");
       chatAi.setAttribute("api-url", chatbotApiUrl);
       chatAi.setAttribute("tnc-url", "https://ipuser.dev.bespin.arm.com/vfae-terms-and-conditions");
