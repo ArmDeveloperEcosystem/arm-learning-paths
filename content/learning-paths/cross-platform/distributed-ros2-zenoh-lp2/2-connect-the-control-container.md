@@ -103,7 +103,7 @@ RViz now subscribes to the map, transforms, laser scans, costmaps, and robot sta
 
 <!-- IMAGE PLACEHOLDER: Add a screenshot of RViz running in the control container and displaying the simulated ROX robot, map, and laser scan. Suggested filename: control-container-rviz.png -->
 <div style="text-align:center;">
-  <img src="/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/control-container-rviz1.png" alt="" style="max-width:800px; width:100%;" />
+  <img src="/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/control-container-rviz1.webp" alt="" style="max-width:800px; width:100%;" />
   <div style="font-style:italic;">RViz window opened from the control terminal</div>
 </div>
 

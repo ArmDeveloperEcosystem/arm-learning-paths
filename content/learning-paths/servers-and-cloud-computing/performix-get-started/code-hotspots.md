@@ -30,7 +30,7 @@ After the run completes, Performix displays the results, including a flame graph
 
 The `dot_scalar` function dominates the flame graph, indicating it accounts for a large proportion of total CPU cycles.
 
-![Flame graph showing dot_scalar as the widest block, consuming nearly all CPU samples#center](images/code_hotspots_flame_graph.png "Code Hotspots flame graph")
+![Flame graph showing dot_scalar as the widest block, consuming nearly all CPU samples#center](images/code_hotspots_flame_graph.webp "Code Hotspots flame graph")
 
 The insights panel shows that this function accounts for 99.96% of samples. Hover over the function in the flame graph to see the sample count.
 
