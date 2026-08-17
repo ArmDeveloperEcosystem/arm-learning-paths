@@ -38,9 +38,7 @@ The `dot_scalar` function dominates the flame graph, indicating it accounts for 
 
 ![Flame graph showing dot_scalar as the widest block, consuming nearly all CPU samples#center](images/code_hotspots_flame_graph.png "Code Hotspots flame graph")
 
-The **Insights** panel shows that this function accounts for 99.96% of samples. Hover over the function in the flame graph to see the sample count.
-
-![Tooltip showing sample count when hovering over the dot_scalar function in the flame graph#center](images/flame_graph_sample_count.png "Sample count for dot_scalar")
+The **Insights** panel shows the sample count. This function accounts for 99.47% of samples.
 
 Switch to the **Call Stack** view to see how the hotspot function is reached and whether its cost comes from the function itself or its callees.
 

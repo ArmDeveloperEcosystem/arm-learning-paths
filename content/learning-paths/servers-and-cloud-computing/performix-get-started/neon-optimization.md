@@ -1,5 +1,5 @@
 ---
-title: Optimize with Arm Neon intrinsics
+title: Optimize the dot-product application with Arm Neon intrinsics
 
 description: Rewrite a scalar dot-product loop with Arm Neon intrinsics, then build and run the optimized C++ application.
 

@@ -1,5 +1,5 @@
 ---
-title: Identify CPU pipeline bottlenecks
+title: Identify CPU pipeline bottlenecks in the scalar dot-product application
 
 description: Use Arm Performix CPU Microarchitecture analysis to identify frontend and backend pipeline bottlenecks in a sample C++ application.
 
@@ -28,7 +28,7 @@ To run the recipe:
 
 ## Interpret the results
 
-The analysis shows that the application is over 60% frontend bound. This means the CPU frequently stalls while fetching or decoding instructions, even though backend resources are available. The CPU isn't compute-bound; it's waiting for instructions.
+The analysis shows that the application is 0.34% frontend stalled. This means the CPU frequently stalls while fetching or decoding instructions, even though backend resources are available. The CPU isn't compute-bound. Instead, it's waiting for instructions.
 
 Performix provides guidance in the **Insights** panel to help you understand these results.
 

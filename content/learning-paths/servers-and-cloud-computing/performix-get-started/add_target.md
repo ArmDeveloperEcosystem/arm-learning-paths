@@ -76,7 +76,7 @@ root
 
 When you launch Arm Performix, the Welcome screen appears. From this screen, you can connect to a target.
 
-![Arm Performix Welcome screen showing the Connect a Target button and activity bar#center](images/welcome.png "Performix Welcome screen")
+![Arm Performix welcome screen showing the Connect a target button and activity bar#center](images/welcome.png "Performix welcome screen")
 
 1. Select **Connect a Target** to open the **Targets** view.
 1. Select **Add Target**.

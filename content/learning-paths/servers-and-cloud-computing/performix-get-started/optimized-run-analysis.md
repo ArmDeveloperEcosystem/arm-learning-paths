@@ -1,5 +1,5 @@
 ---
-title: Validate the optimization
+title: Validate the optimized dot-product application
 
 description: Compare scalar and Neon runs in Arm Performix to validate changes in runtime, instruction mix, and CPU bottlenecks.
 
@@ -34,7 +34,7 @@ The most visible improvement is wall-clock time and total cycle count. Processin
 
 Select the previous scalar Instruction Mix run to compare it with the optimized version side by side:
 
-![Compare with selector showing the instruction_mix_scalar run selected for comparison with the optimized Instruction Mix run#center](images/comparison.png "Selecting the scalar Instruction Mix run from the Compare with control")
+![Compare with selector showing the instruction_mix_scalar run selected for comparison with the optimized Instruction Mix run#center](images/comparison2.png "Selecting the scalar Instruction Mix run from the Compare with control")
 
 The overlay shows Advanced SIMD instructions appearing in the optimized version while scalar operations decrease, confirming more work is done per instruction.
 
@@ -44,14 +44,13 @@ The scalar version is dominated by integer, floating-point, and load operations.
 
 ## Compare CPU Microarchitecture results
 
-The CPU Microarchitecture recipe confirms the bottleneck has shifted. After vectorization, frontend stalls drop and backend effects become dominant:
+The CPU Microarchitecture recipe confirms the bottleneck has shifted. After vectorization, frontend stalled cycles drop and backend effects become dominant. 
 
-- **Frontend Bound:** drops from ~60% to ~11%
-- **Backend Bound:** increases to ~63%
+Frontend stalls drop to zero, while backend stalls increase to ~47%.s
 
 ![Topdown summary showing the bottleneck shifted from frontend bound to backend bound after Neon optimization#center](images/neon_cpu_ma_summary.png "CPU Microarchitecture results for the Neon-optimized binary")
 
-This demonstrates a common pattern in performance optimization: improving one part of the pipeline shifts pressure elsewhere. With the bottleneck moved from the frontend to the backend, the CPU executes more efficiently, and demand shifts to execution units and memory. This iterative cycle of measure, change, and validate is exactly what Performix is designed to support.
+This demonstrates a common pattern in performance optimization: improving one part of the pipeline shifts pressure elsewhere. With the bottleneck moved from the frontend to the backend, the CPU executes more efficiently, and demand shifts to execution units and memory. This iterative cycle of measure, change, and validate is what Performix is designed to support.
 
 ## What you've accomplished
 

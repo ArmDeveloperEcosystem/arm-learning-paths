@@ -1,5 +1,5 @@
 ---
-title: Build the example application
+title: Build a sample C++ dot-product application
 
 description: Build and run a scalar C++ dot-product application on an Arm Linux server for profiling with Arm Performix.
 
