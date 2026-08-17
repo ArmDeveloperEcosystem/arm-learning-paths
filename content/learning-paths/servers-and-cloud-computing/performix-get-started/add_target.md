@@ -10,17 +10,20 @@ layout: learningpathall
 
 ## What Arm Performix is
 
-Arm Performix is a performance analysis toolkit that uses guided recipes to turn hardware performance counter data into actionable insights on Arm-based systems. Unlike command-line tools such as Perf, Performix attributes metrics directly to functions, applies Arm's standardized performance methodologies, and presents results with context and suggested next steps. You don't need to be a performance expert to get useful results.
+Arm Performix is a performance analysis toolkit that uses guided recipes to turn hardware performance counter data into actionable insights on Arm-based systems. Unlike command-line tools such as Perf, Performix attributes metrics directly to functions. It applies Arm's standardized performance methodologies, and presents results with context and suggested next steps.
 
-Performix runs on your local machine (Windows, macOS, or Linux) and connects over SSH to a remote Arm Linux server, referred to as the target, where it collects performance data.
+Performix runs on your local machine (Windows, macOS, or Linux). The tool connects over SSH to a remote Arm Linux server, referred to as the target, where it collects performance data.
 
-## Before you begin
+For a walkthrough of the Performix GUI and setup process, see this video on [getting started with Arm Performix](https://youtu.be/_eX8ZpNT0kc?si=WrQg5daHxUc0MFbR).
 
-Follow the [Arm Performix install guide](/install-guides/performix/) to download and install Performix on your local machine. The toolkit is available for Windows, macOS, and Linux on Arm64 or x64 architecture.
+In addition to the GUI, you can use Arm Performix through the command line. You can also use the [Model Context Protocol (MCP)](https://modelcontextprotocol.io/) to integrate Performix into AI-assisted workflows with the [Arm MCP Server](https://developer.arm.com/servers-and-cloud-computing/arm-mcp-server).
+
 
 ## Configure SSH key-based authentication
 
-Performix connects to your target over SSH. If you don't already have an SSH key pair, generate one on your local machine:
+Arm Performix connects to your target over SSH. After installing Performix, to set it up for profiling, configure SSH key-based authentication.
+
+If you don't already have an SSH key pair, generate one on your local machine:
 
 ```bash
 ssh-keygen -t ed25519
@@ -46,9 +49,11 @@ For more information, see the [SSH install guide](/install-guides/ssh/).
 
 ## Enable passwordless sudo on the server
 
-Performix installs profiling tools on the target and requires root privileges. Configure passwordless `sudo` for your user to avoid interactive prompts during analysis.
+Performix installs profiling tools on the target and requires root privileges.
 
-On the target, create a sudoers drop-in file for your user, replacing `username` with your actual username:
+To avoid interactive prompts during analysis, configure passwordless `sudo` for your user.
+
+On the target, create a sudoers drop-in file for your user, replacing `username` with your username:
 
 ```bash
 echo "username ALL=(ALL) NOPASSWD:ALL" | sudo tee /etc/sudoers.d/username
@@ -86,12 +91,16 @@ When you launch Arm Performix, the Welcome screen appears. From this screen, you
       - **Select Key Manually:** provide the path to a specific private key
       - **Username and password:** be prompted for a password on connection
 
-1. If you need to route your connection through intermediate hosts, select **Add Jump Node** to add one or more jump nodes. Specify them in the order your connection should use them.
+   - If you need to route your connection through intermediate hosts, select **Add Jump Node** to add one or more jump nodes. Specify them in the order your connection should use them.
 1. Select **Test Connection** to verify your target is reachable. If any required tools are missing, Performix installs them for you.
-1. Select **Add Target**. The target appears in the list and is ready for profiling.
+1. After validating the connection, select **Add Target**. The target appears in the list and is ready for profiling.
 
 ![Configure Target form with Host, Name, Port, User, and Authentication fields filled in#center](images/add_target.png "Adding a target in Performix")
 
 You should see your target listed in the **Targets** view with a connected status, confirming Performix can reach your server.
 
-With your target connected, you can now build an example application to profile.
+## What you've accomplished and what's next
+
+You've set up Arm Performix and prepared your local machine and target for profiling a sample application.
+
+Next, you'll build an example application to profile.

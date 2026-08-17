@@ -8,9 +8,9 @@ weight: 6
 layout: learningpathall
 ---
 
-The Instruction Mix recipe in Arm Performix shows how your code uses different instruction types and Arm architectural features.
-
 ## Run the Instruction Mix recipe
+
+The Instruction Mix recipe in Arm Performix shows how your code uses different instruction types and Arm architectural features.
 
 1. In Performix, select the **Instruction Mix** recipe.
 
@@ -30,6 +30,6 @@ The Instruction Mix analysis shows the distribution of instruction types used by
 
 The **Insights** panel identifies the root cause: the application is not using SIMD and is missing vectorization opportunities. Vectorization reduces the number of instructions required per element by performing multiple operations per instruction, directly relieving frontend pressure.
 
-## What you've learned
+## What you've accomplished and what's next
 
-The scalar application is frontend bound because it performs too many instructions per unit of useful work. Instruction Mix confirms that it misses SIMD opportunities, which the NEON optimization addresses next.
+The scalar application is frontend bound because it performs too many instructions per unit of useful work. Instruction Mix confirms that it misses SIMD opportunities, which the Neon optimization addresses next.

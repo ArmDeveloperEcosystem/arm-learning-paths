@@ -8,9 +8,11 @@ weight: 5
 layout: learningpathall
 ---
 
-The CPU Microarchitecture recipe in Arm Performix provides a [Topdown analysis](https://developer.arm.com/documentation/109542/0100/Arm-Topdown-methodology) breakdown of how CPU execution capacity is used. This analysis helps you identify where performance is lost due to stalls or inefficiencies. It also shows whether your application is limited by frontend, backend, memory, or other CPU pipeline effects.
-
 ## Run the CPU Microarchitecture recipe
+
+The CPU Microarchitecture recipe in Arm Performix provides a [Topdown analysis](https://developer.arm.com/documentation/109542/0100/Arm-Topdown-methodology) breakdown of how CPU execution capacity is used. You can use this analysis to identify where performance is lost due to stalls or inefficiencies. It also shows whether your application is limited by frontend, backend, memory, or other CPU pipeline effects.
+
+To run the recipe:
 
 1. In Performix, select the **CPU Microarchitecture** recipe.
 
@@ -32,6 +34,8 @@ Performix provides guidance in the **Insights** panel to help you understand the
 
 ![Insights panel recommending investigation of instruction fetch and decode bottlenecks#center](images/cpu_ma_insights.png "CPU Microarchitecture insights")
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You now know the application is frontend bound, but this is a tight loop with predictable control flow. Frontend stalls in this context often indicate that the CPU is processing too many instructions per unit of work. The Instruction Mix recipe helps you confirm this by showing exactly what types of instructions the CPU executes.
+You now know the application is frontend bound, but this is a tight loop with predictable control flow. Frontend stalls in this context often indicate that the CPU is processing too many instructions per unit of work.
+
+Next, you'll run the Instruction Mix recipe to confirm this by seeing what types of instructions the CPU executes.

@@ -1,22 +1,24 @@
 ---
-title: Optimize with NEON intrinsics
+title: Optimize with Arm Neon intrinsics
 
-description: Rewrite a scalar dot-product loop with Arm NEON intrinsics, then build and run the optimized C++ application.
+description: Rewrite a scalar dot-product loop with Arm Neon intrinsics, then build and run the optimized C++ application.
 
 weight: 7
 
 layout: learningpathall
 ---
 
-The Instruction Mix analysis showed that the application processes one element per loop iteration using scalar instructions. You can reduce the number of instructions per element by rewriting the hot loop with Arm NEON intrinsics, which process four floating-point elements per instruction.
+## What you will optimize
+
+The Instruction Mix analysis showed that the application processes one element per loop iteration using scalar instructions. You can reduce the number of instructions per element by rewriting the hot loop with Arm Neon intrinsics, which process four floating-point elements per instruction.
 
 The key changes in the optimized version are:
 
-- **Data-level parallelism:** processes four elements per instruction using Advanced SIMD
-- **Fused multiply-add:** combines multiplication and addition into a single instruction (`vfmaq_f32`)
-- **SIMD vector loads:** loads four floats at once (`vld1q_f32`) instead of one at a time
+- Data-level parallelism: Processes four elements per instruction using Advanced SIMD
+- Fused multiply-add: Combines multiplication and addition into a single instruction (`vfmaq_f32`)
+- SIMD vector loads: Loads four floats at once (`vld1q_f32`) instead of one at a time
 
-The memory access pattern, branch structure, and working set size remain unchanged, so any performance difference comes directly from improved instruction efficiency.
+The memory access pattern, branch structure, and working set size remain unchanged. Any performance difference comes directly from improved instruction efficiency.
 
 ## Create the optimized source file
 
@@ -123,7 +125,7 @@ int main(int argc, char** argv) {
 
 ## Compile and verify the optimized program
 
-Compile the optimized version. Notice that `-fno-tree-vectorize` is no longer used because you want the compiler to recognize and support the NEON intrinsics:
+Compile the optimized version. Notice that `-fno-tree-vectorize` is no longer used because you want the compiler to recognize and support the Neon intrinsics:
 
 ```bash
 g++ -O3 -g -fno-omit-frame-pointer -mcpu=native -std=c++17 dot_neon_optimized.cpp -o dot_neon
@@ -141,6 +143,10 @@ The output is similar to:
 neon time=0.456s (sink=1.67772e+07)
 ```
 
-The NEON version runs significantly faster than the scalar version. The sink value may differ slightly due to floating-point rounding differences when accumulating values in a different order, which is expected.
+The Neon version runs significantly faster than the scalar version. The sink value may differ slightly due to floating-point rounding differences when accumulating values in a different order, which is expected.
 
-With the NEON optimization implemented, you're ready to compare the performance of the scalar and optimized versions using Arm Performix.
+## What you've accomplished and what's next
+
+You've optimized the C++ dot product application using Neon intrinsics.
+
+Next, you'll compare the performance of the scalar and optimized versions using Arm Performix.
