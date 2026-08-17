@@ -141,7 +141,9 @@ The output is similar to:
 neon time=0.456s (sink=1.67772e+07)
 ```
 
-The Neon version runs significantly faster than the scalar version. The sink value may differ slightly due to floating-point rounding differences when accumulating values in a different order, which is expected.
+The Neon version runs significantly faster than the scalar version. The exact values depend on your hardware.
+ 
+The sink value might differ slightly from the scalar version due to floating-point rounding differences when accumulating values in a different order. This is expected.
 
 ## What you've accomplished and what's next
 
