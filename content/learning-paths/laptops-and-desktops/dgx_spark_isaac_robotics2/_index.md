@@ -15,7 +15,7 @@ learning_objectives:
 
 prerequisites:
     - Access to an NVIDIA DGX Spark system with at least 50 GB of free disk space
-    - Completion of the previous [Isaac Sim and Isaac Lab Learning Path](/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics/) on DGX Spark
+    - Completion of the previous [Isaac Sim and Isaac Lab Learning Path](/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics/) on the DGX Spark system
     - Experience with Python scripting
     - Basic understanding of reinforcement learning concepts such as rewards and policies
 
