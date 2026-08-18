@@ -19,7 +19,7 @@ Start with an articulated drawer, then move to a factory peg-insertion environme
 
 ## Train the Franka arm to open a drawer
 
-In this task, you'll train the same Franka arm to reach the drawer handle, grasp it, and pull the drawer open along its rail.
+In this task, you'll train the same Franka 7-DOF arm to reach the drawer handle, grasp it, and pull the drawer open along its rail.
 
 Unlike the lift task, a drawer is an articulated object: it's made of linked parts connected by a joint, so it can move only along a defined path (the rail). A drawer doesn't move freely in any direction.
 

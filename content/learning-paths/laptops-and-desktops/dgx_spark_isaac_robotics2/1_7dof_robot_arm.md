@@ -1,5 +1,5 @@
 ---
-title: Manipulate objects with a 7-DOF robot arm
+title: Manipulate objects with a Franka 7-DOF robot arm
 description: Train and evaluate Franka reach and lift policies with Isaac Lab on an Arm-based DGX Spark.
 weight: 2
 
@@ -76,7 +76,7 @@ For multi-node options and troubleshooting, use the guide for [Isaac Lab 2.3.2](
 
 ## Build spatial control
 
-The reach task trains the Franka arm to move its end-effector to a randomly sampled target pose. This is your first manipulation baseline because it teaches position control before adding grasping.
+The reach task trains the Franka 7-DOF arm to move its end-effector to a randomly sampled target pose. This is your first manipulation baseline because it teaches position control before adding grasping.
 
 ### Run the reach task
 
@@ -148,7 +148,7 @@ Set `--checkpoint` to the model file that you want to evaluate. Two environments
 
 {{% notice Tip %}}
 
-To inspect the Franka arm, right-click in the viewport and use **W**, **A**, **S**, and **D** keys to fly the camera. These are standard industry viewport navigation controls used in many 3D tools.
+To inspect the Franka arm, right-click in the viewport and use the **W**, **A**, **S**, and **D** keys to fly the camera. These are standard industry viewport navigation controls used in many 3D tools.
 
 {{% /notice %}}
 
@@ -162,10 +162,11 @@ Observe the following:
 
 The coherent unified memory lets you quickly start and stop training with little data transfer overhead and flexibly scale memory for large environments. The Arm CPU orchestrates training, enabling rapid experimentation and iteration.
 
-
-## Run the lift task
+## Add physical interaction
 
 After the robot can reach reliably, the next step is physical interaction. In the lift task, you'll train the arm to grasp a cube on the table and lift it to a target height. The policy must coordinate approach, alignment, gripper closure, and stable lifting under contact and gravity.
+
+### Run the lift task
 
 Run the following command to train the `Isaac-Lift-Cube-Franka-v0` task with the PPO algorithm from the `rsl_rl` library:
 
