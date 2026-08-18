@@ -1,16 +1,18 @@
 ---
-title: Explore Arm Memory Tagging Extension with example programs
-description: Learn how to run example C programs on AArch64 Linux to gain an introductory understanding of the Arm Memory Tagging Extension (MTE).
+title: Explore Arm Memory Tagging Extension with an example program
+description: Learn how to run an example C program on AArch64 Linux to gain an introductory understanding of the Arm Memory Tagging Extension (MTE).
 
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for developers who want to gain some experience with the Arm Memory Tagging Extension (MTE).
 
-learning_objectives: 
-    - Run an example C program to gain an introductory understanding of MTE
+learning_objectives:
+    - Build an MTE-enabled C program on AArch64 Linux
+    - Run the program to observe MTE detecting an invalid memory access
+    - Use QEMU to run the example when MTE hardware is unavailable
 
 prerequisites:
-    - An AArch64 Linux development machine. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+    - Use an AArch64 Linux development machine. You can also use a cloud instance; refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -27,29 +29,30 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:09:08Z'
   faq_source_hash: cdf48a76a0d88e2c7756eb01c48aa81b341366bcb5d224ba710e74c15d5b1f21
   summary: >-
-    You'll explore Arm Memory Tagging Extension (MTE) on an `aarch64` Linux system. Build and run
+    You'll explore Arm MTE on an `aarch64` Linux system. First, you'll build and run
     a small C program that triggers buffer-overflow and use-after-free errors, then observe the
-    resulting faults or diagnostics. Use a recent Arm system or supported Arm-based cloud instance
+    resulting faults or diagnostics. You'll use a recent Arm system or supported Arm-based cloud instance
     to relate MTE behavior to invalid memory accesses.
   faqs:
   - question: How do I know if my system can demonstrate MTE?
     answer: >-
-      MTE is implemented in Armv8.5-A and Armv9-A processors. Verify that you are using an AArch64
-      Linux system with hardware that supports MTE; otherwise, the example may not show tagging-related
+      MTE is implemented in Armv8.5-A and Armv9-A processors. Verify that you're using an AArch64
+      Linux system with hardware that supports MTE. Otherwise, the example might not show tagging-related
       behavior.
   - question: What result should I expect when running the example program?
     answer: >-
       Expect behavior that illustrates MTE catching memory safety issues, such as a fault or diagnostic
       triggered by an invalid access. The outcome should align with the bug the program intentionally
       exercises.
-  - question: Can I run the example on an Arm-based cloud instance?
+  - question: Can I run the example without MTE hardware?
     answer: >-
-      Yes. The prerequisites allow using Arm-based cloud instances; see the list of Arm cloud
-      service providers linked from the Learning Path.
+      Yes. Install `qemu-user` and run the example with `qemu-aarch64 ./mte-example`. This lets
+      you exercise MTE behavior when the processor doesn't implement MTE.
   - question: What should I check if the program runs without showing any MTE effects?
     answer: >-
-      Confirm you are on AArch64 Linux and that the processor implements MTE (Armv8.5-A or Armv9-A).
-      If the platform lacks MTE support, the example will not demonstrate tagging behavior.
+      Confirm you're on AArch64 Linux and that the processor implements MTE (Armv8.5-A or Armv9-A).
+      If the processor lacks MTE support, install `qemu-user` and run `qemu-aarch64 ./mte-example`
+      to exercise the MTE behavior through emulation.
   - question: Which memory errors does the example focus on?
     answer: >-
       The example targets buffer overflow and use-after-free errors. These are common sources

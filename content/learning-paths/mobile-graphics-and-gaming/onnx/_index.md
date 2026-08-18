@@ -35,8 +35,8 @@ generated_summary_faq:
   faq_source_hash: 4f34e1982fb812f3ea7352ce4c628d1fe449ba625da430ec7d25d968efc83601
   summary: >-
     You'll train a compact digit recognizer, export it to ONNX, and deploy it with ONNX Runtime
-    on Arm platforms. Generate a synthetic Sudoku dataset, validate PyTorch and ONNX Runtime results,
-    and apply optimizations such as layer fusion. Then select and verify execution providers for
+    on Arm platforms. First, you'll generate a synthetic Sudoku dataset, validate PyTorch and ONNX Runtime results,
+    and apply optimizations such as layer fusion. Then, you'll select and verify execution providers for
     edge devices and Android, including NNAPI when available.
   faqs:
   - question: How do I know ONNX Runtime is using the right execution provider on my device?
@@ -45,22 +45,21 @@ generated_summary_faq:
       on Arm64 systems and NNAPI on Android when available before proceeding.
   - question: What artifacts should I expect after exporting the trained model to ONNX?
     answer: >-
-      You will have an ONNX model file produced by the Dynamo-based exporter and your original
+      You'll have an ONNX model file produced by the Dynamo-based exporter and your original
       PyTorch checkpoint. Use both to run inference and compare results across frameworks.
   - question: What should I check if ONNX Runtime predictions do not match PyTorch?
     answer: >-
       Confirm that preprocessing matches training: 28×28 grayscale inputs and consistent label
       mapping (0 = blank, 1–9 = digits). Re-run the validation and compare predictions and the
       confusion matrix to identify where outputs diverge.
-  - question: I’m using Python 3.12. Can I follow the steps?
+  - question: Can I follow the steps if I'm using Python 3.12?
     answer: >-
-      Prebuilt ONNX Runtime packages for Arm platforms don’t yet support Python 3.12, so use Python
+      Prebuilt ONNX Runtime packages for Arm platforms don’t support Python 3.12 yet, so use Python
       3.10 or 3.11.
   - question: How do I decide which execution provider to use for deployment?
     answer: >-
       Use the CPU execution provider for Arm64 development and edge devices, and NNAPI on Android
-      when it is available. The setup step includes verifying which providers are detected on
-      your target.
+      when it's available.
 # END generated_summary_faq
 
 author: Dawid Borycki

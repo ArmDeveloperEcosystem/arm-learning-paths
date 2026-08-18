@@ -58,7 +58,7 @@ generated_summary_faq:
   - question: What should I check if I don’t see an improvement with the SME2-enabled build?
     answer: >-
       Verify the device reports SME2 support, and confirm your model uses the supported operator
-      configurations listed in the path. Also ensure you ran the SME2-enabled binary under the
+      configurations. Also ensure you ran the SME2-enabled binary under the
       same conditions as the baseline.
 # END generated_summary_faq
 

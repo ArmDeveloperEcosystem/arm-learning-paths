@@ -34,8 +34,8 @@ generated_summary_faq:
   faq_source_hash: 0ccaf9c5b055c63e74c2e7ae4c6dc8f5c45f7b1eb3687e9174fae23d45dfaf78
   summary: >-
     You'll add Neural Graphics Data Capture to a C++ Unreal Engine 5.5 project and export gameplay
-    frames as a structured dataset. Build the plugin, bind capture controls, and record in Standalone
-    Game. Then verify the output and tune rendering and export settings to prepare data for training
+    frames as a structured dataset. First, you'll build the plugin, bind capture controls, and record in **Standalone
+    Game**. Then, you'll verify the output and tune rendering and export settings to prepare data for training
     or evaluating neural upscalers.
   faqs:
   - question: Do I need a C++ Unreal project to build the plugin?
@@ -45,7 +45,7 @@ generated_summary_faq:
   - question: Which play mode should I use for capture, and where do I change it?
     answer: >-
       Use **Standalone Game**. Open the menu next to the **Play** button and select **Standalone Game**
-      to avoid Play-in-Editor resizing and preserve expected frame dimensions.
+      to avoid play-in-editor resizing and preserve expected frame dimensions.
   - question: How do I start and stop a capture during gameplay?
     answer: >-
       Press **Play**, then press the **C** key to start capture and the **V** key to stop capture. Move through the level

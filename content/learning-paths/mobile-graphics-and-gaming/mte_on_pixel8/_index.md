@@ -33,9 +33,9 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:10:02Z'
   faq_source_hash: 91c91c4f9261ad235fe22d6b03fbe967cdf536da79d67aba41e5ad12105122f9
   summary: >-
-    You'll enable Arm Memory Tagging Extension (MTE) on a Google Pixel 8 and exercise it with
-    a test app. Turn on MTE in Developer options, install `MTE_test.apk`, and capture a bug report
-    after a deliberate memory violation. Then inspect the bug report and tombstone to understand
+    You'll enable Arm MTE on a Google Pixel 8 and exercise it with
+    a test app. First, you'll turn on MTE in **Developer options**, install `MTE_test.apk`, and capture a bug report
+    after a deliberate memory violation. Then, you'll inspect the bug report and tombstone to understand
     the fault and MTE's lock-and-key model.
   faqs:
   - question: What result should I expect when I press a button in the test app?
@@ -57,7 +57,7 @@ generated_summary_faq:
   - question: What should I check if the test app doesn’t crash?
     answer: >-
       Verify that MTE is enabled in **Developer options** before running the app’s tests. Also confirm
-      that `MTE_test.apk` installed correctly and that you are invoking one of the buttons designed
+      that `MTE_test.apk` installed correctly and that you're invoking one of the buttons designed
       to trigger a memory bug.
 # END generated_summary_faq
 

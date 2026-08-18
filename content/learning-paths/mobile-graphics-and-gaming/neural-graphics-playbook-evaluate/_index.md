@@ -8,7 +8,7 @@ who_is_this_for: This Learning Path is for game developers and graphics engineer
 learning_objectives:
     - Understand why Arm Neural Technology matters for mobile games
     - Learn what Arm built with Neural Dawn
-    - Evaluate whether NFRU and NSSD are a fit for your game
+    - Evaluate whether Neural Frame Rate Upscaling (NFRU) and Neural Screen Space Denoising (NSSD) are a fit for your game
 
 prerequisites:
     - Familiarity with game development in Unreal Engine
@@ -30,15 +30,15 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:11:02Z'
   faq_source_hash: 2448b0a37ba988434f97fe500681e7660cd9c2ad470c61a930e8c5a6f092f03d
   summary: >-
-    You'll evaluate Arm Neural Technology for mobile games, focusing on Neural Frame Rate Upscaling
-    and Neural Screen Space Denoising. Review the Neural Graphics Development Kit, including Unreal
-    Engine plugins, models, and its Vulkan runtime. Then assess fit for your content, camera behavior,
+    You'll evaluate Arm Neural Technology for mobile games, focusing on NFRU
+    and NSSD. First, you'll review the Neural Graphics Development Kit, including Unreal
+    Engine plugins, models, and its Vulkan runtime. Then, you'll learn to assess fit for your content, camera behavior,
     and performance targets, and begin hands-on trials with the available components.
   faqs:
   - question: How do I know if NFRU or NSSD fits my game?
     answer: >-
       Evaluate your content type, camera behavior, and performance targets. These neural techniques
-      are not equally useful everywhere, so weigh visual goals and runtime constraints specific
+      aren't equally useful everywhere, so weigh visual goals and runtime constraints specific
       to your project.
   - question: Which component should I try first when starting hands-on?
     answer: >-
@@ -53,7 +53,7 @@ generated_summary_faq:
       Arm provides Unreal Engine plugins, an SDK, prebuilt models, and tooling, along with reference
       implementations and sample content in the Neural Graphics Development Kit. Use them to integrate
       and assess the techniques in your project.
-  - question: Why does the path reference Neural Dawn?
+  - question: What is Neural Dawn?
     answer: >-
       Neural Dawn is a mobile game built with Sumo Digital that showcases a rendering pipeline
       designed around neural graphics. It demonstrates high-fidelity visuals on mobile with a
