@@ -17,7 +17,7 @@
       chatAi.id = "chat-ai";
       chatAi.setAttribute("theme", "dark");
       chatAi.setAttribute("title", "Arm Virtual Assistant");
-      chatAi.setAttribute("current-page", "false");
+      chatAi.setAttribute("current-page", "true");
       chatAi.setAttribute(
         "content",
         `<strong>Discover the right technical content faster</strong><br><br>
