@@ -1,9 +1,7 @@
 ---
-title: Advance Robotics Reinforcement Learning with Isaac Lab on DGX Spark
+title: Advance robotics reinforcement learning with Isaac Lab on DGX Spark
 
-draft: true
-cascade:
-    draft: true
+description: Extend an Isaac Lab setup on an Arm-based DGX Spark by training manipulation, multi-agent, and natural-motion reinforcement learning policies.
     
 minutes_to_complete: 120
 
@@ -17,7 +15,7 @@ learning_objectives:
 
 prerequisites:
     - Access to an NVIDIA DGX Spark system with at least 50 GB of free disk space
-    - Completion of the previous Isaac Sim and Isaac Lab Learning Path on DGX Spark
+    - Completion of the previous [Isaac Sim and Isaac Lab Learning Path](/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics/) on DGX Spark
     - Experience with Python scripting
     - Basic understanding of reinforcement learning concepts such as rewards and policies
 
@@ -25,6 +23,10 @@ author:
     - Johnny Nunez
     - Kieran Hejmadi
     - Odin Shen
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 
 ### Tags

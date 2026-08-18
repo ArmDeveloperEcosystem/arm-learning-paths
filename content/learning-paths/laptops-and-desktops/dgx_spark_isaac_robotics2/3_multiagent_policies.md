@@ -1,5 +1,6 @@
 ---
-title: Train multiple agents
+title: Train multiple agents to coordinate two Shadow Hands in one simulation
+description: Train and compare MAPPO and IPPO policies for coordinated Shadow Hand object transfer with Isaac Lab on DGX Spark.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,68 +9,70 @@ layout: learningpathall
 
 ## Coordinate two agents with MAPPO
 
-The previous sections used one policy to control one robot. You will now use multi-agent reinforcement learning (MARL) to coordinate two Shadow Hands in one simulation.
+You'll now use multi-agent reinforcement learning (MARL) to coordinate two Shadow Hands in one simulation.
 
 Multi-agent tasks add coordination and shared success criteria to the control problem.
 
-You will use the skrl library with Multi-Agent Proximal Policy Optimization (MAPPO). MAPPO uses shared state for its critic during training, while each hand acts from its own observations.
+You'll use the `skrl` library with Multi-Agent Proximal Policy Optimization (MAPPO). MAPPO uses shared state for its critic during training, while each hand acts from its own observations.
 
 Isaac Lab also provides Independent PPO (IPPO), where each agent learns independently. The [Isaac Lab environment list](https://isaac-sim.github.io/IsaacLab/v2.3.2/source/overview/environments.html#comprehensive-list-of-environments) shows supported task and library combinations.
 
-## Shadow Hand Over — coordinated transfer between hands
+## Coordinate transfer between Shadow Hands
 
-In this task, the policy must solve a classic cooperation scenario. One Shadow Hand holds an object and transfers it to the other hand. Each agent controls only its own motion but must learn to anticipate the other agent's behavior and timing from partial local observations. MAPPO is well suited for this task because the shared critic can encourage coordinated behavior during training, even though each hand uses only local observations during execution.
+In this task, the policy must solve a classic cooperation scenario. One Shadow Hand holds an object and transfers it to the other hand. Each agent controls only its own motion but must learn to anticipate the other agent's behavior and timing from partial local observations.
 
-### Run
+MAPPO is well suited for this task because the shared critic can encourage coordinated behavior during training, even though each hand uses only local observations during execution.
 
-From `~/IsaacLab`, use skrl and select MAPPO with `--algorithm`:
+### Run the transfer task
+
+From `~/IsaacLab`, use `skrl` and select MAPPO with `--algorithm`:
 
 {{< tabpane code=true >}}
-{{< tab header="Isaac Lab 2.3 API" >}}
+  {{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
     --task=Isaac-Shadow-Hand-Over-Direct-v0 \
     --headless \
     --algorithm MAPPO
-{{< /tab >}}
-{{< tab header="Isaac Lab 3.0 API" >}}
+  {{< /tab >}}
+  {{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh train \
     --rl_library skrl \
     --task=Isaac-Shadow-Hand-Over-Direct-v0 \
     --viz none \
     --algorithm MAPPO
-{{< /tab >}}
+  {{< /tab >}}
 {{< /tabpane >}}
 
 The command loads the task, selects MAPPO, and disables visualization during training.
 
 {{% notice Note %}}
 
-Training this task can take up to **30 minutes** on a DGX Spark. 
+Training this task can take up to 30 minutes on a DGX Spark.
 
 To try a published checkpoint, skip training and add `--use_pretrained_checkpoint` to the play command. A checkpoint might not be available for every task and Isaac Lab version.
 {{% /notice %}}
 
 
-### Verify
+### Verify the transfer task
 
 After training, look for the following behaviors:
 
-* The two hands coordinate rather than moving independently.
-* The hand holding the object adjusts its pose to create a feasible transfer path.
-* Drops, collisions, and action conflicts decrease as training progresses.
+- The two hands coordinate rather than moving independently.
+- The hand holding the object adjusts its pose to create a feasible transfer path.
+- Drops, collisions, and action conflicts decrease as training progresses.
 
 Set `--checkpoint` to the trained MAPPO model you want to evaluate:
 
 {{< tabpane code=true >}}
-{{< tab header="Isaac Lab 2.3 API" >}}
+  {{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/play.py \
     --task=Isaac-Shadow-Hand-Over-Direct-v0 \
     --num_envs=1 \
     --algorithm=MAPPO \
     --real-time \
     --checkpoint=<path_to_checkpoint>
-{{< /tab >}}
-{{< tab header="Isaac Lab 3.0 API" >}}
+  {{< /tab >}}
+  {{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh play \
     --rl_library skrl \
     --task=Isaac-Shadow-Hand-Over-Direct-v0 \
@@ -77,36 +80,38 @@ Set `--checkpoint` to the trained MAPPO model you want to evaluate:
     --algorithm=MAPPO \
     --real-time \
     --checkpoint=<path_to_checkpoint>
-{{< /tab >}}
+  {{< /tab >}}
 {{< /tabpane >}}
 
-![Shadow Hand Over training progress showing two dexterous hands coordinating an object transfer. The left panel shows early training (iteration 3600) where motion is uncoordinated and the object is still held. The right panel shows the policy at convergence using the best_agent.pt checkpoint identified by skrl, where the hands smoothly coordinate the handover.#center](./multi_agent_hand.gif "Shadow Hand Over training progression. Left: iteration 3600. Right: best_agent.pt.")
+![Shadow Hand Over training progress showing two hands coordinating an object transfer.#center](./multi_agent_hand.gif "Shadow Hand Over training progression. Left: iteration 3600. Right: best_agent.pt.")
 
-### Optional: try IPPO
+### (Optional) Train an example using IPPO
 
-You can also try training an example using the IPPO (Independent Proximal Policy Optimization) algorithm. To do this, change the `--algorithm` flag to `IPPO` in your training command:
+You can also try training an example using the Independent Proximal Policy Optimization (IPPO) algorithm.
+
+To do this, change the `--algorithm` flag to `IPPO` in your training command:
 
 {{< tabpane code=true >}}
-{{< tab header="Isaac Lab 2.3 API" >}}
+  {{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/skrl/train.py \
     --task=Isaac-Shadow-Hand-Over-Direct-v0 \
     --headless \
     --algorithm IPPO
-{{< /tab >}}
-{{< tab header="Isaac Lab 3.0 API" >}}
+  {{< /tab >}}
+  {{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh train \
     --rl_library skrl \
     --task=Isaac-Shadow-Hand-Over-Direct-v0 \
     --viz none \
     --algorithm IPPO
-{{< /tab >}}
+  {{< /tab >}}
 {{< /tabpane >}}
 
 IPPO treats each agent independently. Compare its coordination and convergence with the MAPPO run.
 
 For more environments and supported algorithms, see the [comprehensive list of Isaac Lab environments](https://isaac-sim.github.io/IsaacLab/v2.3.2/source/overview/environments.html#comprehensive-list-of-environments).
 
-## Core comparison: single-agent vs multi-agent training
+## Compare single-agent and multi-agent training
 
 When you move from single-agent tasks to multi-agent training, the change is not just about adding more controllers. The problem definition itself becomes different.
 
@@ -119,17 +124,13 @@ When you move from single-agent tasks to multi-agent training, the change is not
 | Algorithm flag | Usually not required | Selected with `--algorithm MAPPO` or optionally `--algorithm IPPO` |
 
 {{% notice Note %}}
-Isaac Lab's skrl integration supports MAPPO and IPPO directly. Workflows without multi-agent support convert the environment to a single-agent interface.
+Isaac Lab's `skrl` integration supports MAPPO and IPPO directly. Workflows without multi-agent support convert the environment to a single-agent interface.
 {{% /notice %}}
 
-## Wrap-up
+## What you've accomplished and what's next
 
-This section showed the main shift from single-agent control to multi-agent cooperation in Isaac Lab. Instead of focusing only on whether one robot moves correctly, you now have to think about how multiple agents form a coordinated strategy under partial information.
+You've now configured multiple agents to coordinate two Shadow Hands. Instead of focusing only on whether one robot moves correctly, you now have to think about how multiple agents form a coordinated strategy under partial information.
 
-On an Arm-based system, the key value in this section is not raw CPU performance. It is the ability of the **Arm CPU to control the overall simulation workflow**. Through Python scripts, task options, and algorithm flags, you can switch multi-agent scenarios quickly and continue developing, training, and comparing workflows on the same platform.
+Your robots can now perform precise actions and even cooperate, but the resulting motion might still look rigid. For humanoid robots that must coexist with people, moving in a more natural way is another important challenge.
 
-## Next up
-
-Your robots can now perform precise actions and even cooperate, but the resulting motion may still look rigid. For humanoid robots that must coexist with people, moving in a more natural way is another important challenge.
-
-In the next section, you will explore **AMP (Adversarial Motion Priors)** and learn how robots can use reference motion data to produce more natural and fluent behavior.
+Next, you'll explore Adversarial Motion Priors (AMP) and learn how robots can use reference motion data to produce more natural and fluent behavior.
