@@ -47,7 +47,7 @@ adb shell 'cd /data/local/tmp/llama && \
   --warmup=1'
 ```
 
-The successful run reported:
+In the output, you should be able to confirm performance metrics similar to:
 
 | Metric | Observed value |
 |---|---|
@@ -82,3 +82,31 @@ adb shell /data/local/tmp/llama/llama_main \
 ```
 
 If the runner warns that `max_new_tokens` was not provided and it is falling back to `seq_len`, update the command. For instruct models, `max_new_tokens` is the clearer control for generation length.
+
+## Confirm that Vulkan is in use
+
+While an inference is running, open a second terminal on the host and inspect the libraries mapped into the `llama_main` process:
+
+```bash
+PID=$(adb shell pidof llama_main | tr -d '\r')
+adb shell "cat /proc/$PID/maps | grep -Ei 'vulkan|mali'"
+```
+
+Seeing `libvulkan` and the Mali driver libraries confirms that the process loaded the Vulkan stack. 
+
+{{% notice Stronger backend evidence %}}
+For stronger evidence, rebuild with tracing enabled:
+
+```text
+-DEXECUTORCH_BUILD_DEVTOOLS=ON
+-DEXECUTORCH_ENABLE_EVENT_TRACER=ON
+```
+
+Then capture ETDump data from the runner and inspect it with [ExecuTorch Inspector](https://docs.pytorch.org/executorch/stable/model-inspector.html) to see delegated regions and delegate-call timings.
+{{% /notice %}}
+
+## Wrap up
+
+You have built Llama 3.2 1B Instruct for the ExecuTorch Vulkan backend, compiled the standalone Android runner, deployed the required artifacts, and measured an on-device inference baseline. 
+
+You can now repeat the measured run with different prompts and generation settings, using the same metrics to compare performance while keeping the model, device, and runtime configuration consistent.

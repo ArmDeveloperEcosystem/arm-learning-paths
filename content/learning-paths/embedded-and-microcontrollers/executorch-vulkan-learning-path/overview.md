@@ -23,33 +23,18 @@ The Linux host does not need CUDA, ROCm, or a working Vulkan GPU.
 
 ## Linux host architecture
 
-![Diagram showing the Linux host architecture for the ExecuTorch Vulkan workflow, including PyTorch and ExecuTorch 1.4, export and quantization stages, and the generated Vulkan-enabled program artifact#center](linux-host-architecture.svg "Linux host architecture for the ExecuTorch Vulkan workflow")
+![Diagram showing the Linux host architecture for the ExecuTorch Vulkan workflow, including PyTorch and ExecuTorch 1.4, export and quantization stages, and the generated Vulkan-enabled program artifact#center](linux-host-architecture.png "Linux host architecture for the ExecuTorch Vulkan workflow")
 
 ## Android device architecture
 
-![Diagram showing the Android device architecture for the ExecuTorch Vulkan workflow, with llama_main calling the ExecuTorch runtime, which uses the Vulkan backend on the Mali GPU inside the Vivo X300 Pro#center](android-device-architecture.svg "Android device architecture for the ExecuTorch Vulkan workflow")
-
-## Measured result
-
-The successful measured run produced the following values:
-
-| Metric | Observed value |
-|---|---|
-| Model load time | 3.033 s |
-| Prompt tokens | 7 |
-| Generated tokens | 112 |
-| Prompt evaluation | 0.157 s / 44.586 tokens/s |
-| Decode | 112 tokens in 3.760 s / 29.787 tokens/s |
-| Total measured inference | 3.917 s / 28.593 tokens/s overall |
-| Time to first token | 0.157 s |
-| RSS after model load, prefill, and generation | about 2404.8 MiB |
+![Diagram showing the Android device architecture for the ExecuTorch Vulkan workflow, with llama_main calling the ExecuTorch runtime, which uses the Vulkan backend on the Mali GPU inside the Vivo X300 Pro#center](android-device-architecture.png "Android device architecture for the ExecuTorch Vulkan workflow")
 
 ## What you will build
 
 By the end of this Learning Path you will have:
 
-- an ExecuTorch 1.4 host environment with the correct PyTorch pin
-- a Vulkan-enabled Llama `.pte`
-- an Android `llama_main` binary for `arm64-v8a`
-- the model, tokenizer, and runner deployed under `/data/local/tmp/llama`
+- a working ExecuTorch host environment
+- a Vulkan-enabled Llama `.pte` model
+- an Android `llama_main` binary
+- the model, tokenizer, and runner deployed under `/data/local/tmp/llama` on your Android device
 - a reproducible validation flow for checking that Vulkan is actually in use

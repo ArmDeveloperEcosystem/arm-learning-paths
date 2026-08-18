@@ -12,7 +12,7 @@ layout: learningpathall
 Keep a source checkout because you will cross-compile the Android runtime and the standalone Llama runner:
 
 ```bash
-cd ~
+cd $HOME
 git clone --branch release/1.4 --recursive https://github.com/pytorch/executorch.git
 cd executorch
 git submodule update --init --recursive
@@ -64,26 +64,54 @@ export CMAKE_BUILD_PARALLEL_LEVEL=2
 
 The important lesson is to verify `torch.__version__` before you start a long native build.
 
-## Download Llama 3.2 1B Instruct
+## Request access to Llama 3.2 1B Instruct
 
-The model used in this workflow came from the gated Hugging Face repository `meta-llama/Llama-3.2-1B-Instruct`.
+The model used in this workflow comes from the gated Hugging Face repository [`meta-llama/Llama-3.2-1B-Instruct`](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct).
+
+To request access:
+
+1. Sign in to your Hugging Face account.
+2. Open the Llama 3.2 1B Instruct model page.
+3. Review and accept the Meta Llama license, then submit the access request.
+4. Wait until Hugging Face confirms that your account can access the repository before continuing.
+
+Access approval is associated with the Hugging Face account that submitted the request. Authenticate the CLI with the same account.
+
+## Install and authenticate the Hugging Face CLI
+
+Install the Hugging Face Hub CLI in the active Python virtual environment:
+
+```bash
+python -m pip install --upgrade huggingface_hub
+hf version
+```
+
+Sign in. The command prompts you to authenticate through a browser or with a Hugging Face user access token:
+
+```bash
+hf auth login
+hf auth whoami
+```
+
+Confirm that `hf auth whoami` displays the account that has access to the gated model.
+
+## Download Llama 3.2 1B Instruct
 
 Keep the model outside the source tree:
 
 ```bash
-hf auth login
 hf download \
   meta-llama/Llama-3.2-1B-Instruct \
   --include "original/*" \
   --local-dir ~/Llama-3.2-1B-Instruct
 ```
 
-You need these files:
+Verify that the three files required by the export are present:
 
-```text
-~/Llama-3.2-1B-Instruct/original/consolidated.00.pth
-~/Llama-3.2-1B-Instruct/original/params.json
-~/Llama-3.2-1B-Instruct/original/tokenizer.model
+```bash
+test -f ~/Llama-3.2-1B-Instruct/original/consolidated.00.pth && echo "Checkpoint OK"
+test -f ~/Llama-3.2-1B-Instruct/original/params.json && echo "Parameters OK"
+test -f ~/Llama-3.2-1B-Instruct/original/tokenizer.model && echo "Tokenizer OK"
 ```
 
 The measured run used:
@@ -91,3 +119,7 @@ The measured run used:
 - `consolidated.00.pth` at about 2.4 GB
 - `params.json`
 - `tokenizer.model` at about 2.1 MB
+
+{{% notice Access errors %}}
+If the download returns `401 Unauthorized` or `403 Forbidden`, run `hf auth whoami` and confirm that you authenticated with the account approved for the gated repository. If access is still pending, return to the model page and check the request status.
+{{% /notice %}}

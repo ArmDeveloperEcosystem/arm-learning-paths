@@ -7,20 +7,19 @@ cascade:
 
 description: Learn how to export Llama 3.2 1B Instruct with ExecuTorch, build the Android Vulkan runtime, and run the model on a Vivo X300 Pro.
 
-minutes_to_complete: 120
+minutes_to_complete: 60
 
 who_is_this_for: This Learning Path is for developers who want to export a Llama 3.2 model with ExecuTorch and run it on an Android phone through the Vulkan backend.
 
 learning_objectives:
   - Set up a Linux host for Android cross-compilation, ADB deployment, and Vulkan-backed ExecuTorch builds.
-  - Pin the host Python and PyTorch environment required by the ExecuTorch 1.4 release branch.
   - Export Meta Llama 3.2 1B Instruct to a Vulkan-enabled `.pte` with the exact quantization settings used in the guide.
   - Build, deploy, validate, and troubleshoot the Android `llama_main` runner on a Vivo X300 Pro.
 
 prerequisites:
   - A Linux host with enough disk space for the ExecuTorch source tree, Android SDK and NDK, Vulkan SDK, and the Llama checkpoint.
   - A Vivo X300 Pro or a similar Android phone with USB debugging enabled.
-  - Access to the gated Hugging Face repository `meta-llama/Llama-3.2-1B-Instruct`.
+  - A Hugging Face account.
   - Working familiarity with the shell, Python virtual environments, and Android ADB workflows.
 
 author: Ash Naik
@@ -39,14 +38,11 @@ tools_software_languages:
   - ExecuTorch
   - PyTorch
   - Python
-  - Android SDK
-  - Android NDK
-  - ADB
+  - Android
   - Vulkan
   - glslc
   - Hugging Face
 armips:
-  - Cortex-A
   - Mali
 
 further_reading:

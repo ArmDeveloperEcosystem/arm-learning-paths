@@ -12,8 +12,7 @@ layout: learningpathall
 From the ExecuTorch checkout:
 
 ```bash
-cd ~/executorch
-source .venv/bin/activate
+cd $HOME/executorch
 
 export MODEL_DIR="$HOME/Llama-3.2-1B-Instruct/original"
 export QUANT="8da4w"
