@@ -48,7 +48,7 @@ These tasks continue the same source-built Isaac Sim and Isaac Lab workflow from
 
 {{% notice Note %}}
 
-DGX Spark has one GPU, so run the tasks in the Learning Path as single-GPU jobs. If you move the same checkout to a system with two GPUs, Isaac Lab supports distributed training.
+DGX Spark has one GPU, so run the tasks in this Learning Path as single-GPU jobs. If you move the same checkout to a system with two GPUs, Isaac Lab supports distributed training.
 
 PyTorch's distributed launcher creates one process per GPU. Replace `<example task>` with the task to train on a two-GPU system:
 
