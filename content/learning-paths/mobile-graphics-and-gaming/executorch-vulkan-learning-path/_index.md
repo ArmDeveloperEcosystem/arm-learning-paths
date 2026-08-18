@@ -14,7 +14,7 @@ who_is_this_for: This Learning Path is for developers who want to export a Llama
 learning_objectives:
   - Set up a Linux host for Android cross-compilation, ADB deployment, and Vulkan-backed ExecuTorch builds.
   - Export Meta Llama 3.2 1B Instruct to a Vulkan-enabled `.pte` with the exact quantization settings used in the guide.
-  - Build, deploy, validate, and troubleshoot the Android `llama_main` runner on a Vivo X300 Pro.
+  - Build, deploy, measure, and validate the Android `llama_main` runner on a Vivo X300 Pro.
 
 prerequisites:
   - A Linux host with enough disk space for the ExecuTorch source tree, Android SDK and NDK, Vulkan SDK, and the Llama checkpoint.
