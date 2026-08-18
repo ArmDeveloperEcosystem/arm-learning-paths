@@ -1,5 +1,5 @@
 ---
-title: Advance Robotics Reinforcement Learning Workflows to Manipulation and Multi-Agent Tasks with IsaacLab
+title: Advance Robotics Reinforcement Learning with Isaac Lab on DGX Spark
 
 draft: true
 cascade:
@@ -7,19 +7,19 @@ cascade:
     
 minutes_to_complete: 120
 
-who_is_this_for: This advanced topic is intended for robotics software architects, simulation engineers, and AI researchers who want to orchestrate high-fidelity robotic simulations and reinforcement learning (RL) pipelines. It specifically targets those leveraging Isaac Sim and Isaac Lab on Arm-based NVIDIA DGX Spark systems powered by the Grace–Blackwell (GB10) architecture.
+who_is_this_for: This advanced topic is for robotics developers and AI researchers who want to extend an existing Isaac Sim and Isaac Lab setup on DGX Spark to manipulation, multi-agent training, and motion imitation.
 
 learning_objectives:
-    - Describe the roles of Isaac Sim and Isaac Lab.
-    - Train a reinforcement learning policy for simulations of the Franka robotic arm and Unitree H1 humanoid robot using the RSL-RL and skrl interface.
-    - Train reinforcement learning policies in multi-agent environments for cooperative robotic systems.
-    - Use Adversarial Motion Priors (AMP) to enable natural humanoid locomotion.
+    - Train Franka manipulation policies with RSL-RL and RL Games
+    - Compare MAPPO and IPPO in a two-agent Shadow Hand task
+    - Train humanoid motion policies with Adversarial Motion Priors
+    - Select an RL library that has a registered configuration for a task
 
 prerequisites:
     - Access to an NVIDIA DGX Spark system with at least 50 GB of free disk space
-    - Completion of the previous Isaac Sim / Isaac Lab setup on Arm-based systems
+    - Completion of the previous Isaac Sim and Isaac Lab Learning Path on DGX Spark
     - Experience with Python scripting
-    - Basic understanding of reinforcement learning concepts (rewards, policies, etc.)
+    - Basic understanding of reinforcement learning concepts such as rewards and policies
 
 author:
     - Johnny Nunez
@@ -47,8 +47,12 @@ further_reading:
         link: https://docs.isaacsim.omniverse.nvidia.com/latest/index.html
         type: documentation
     - resource:
-        title: Isaac Lab Documentation
-        link: https://isaac-sim.github.io/IsaacLab/main/index.html
+        title: Isaac Lab 2.3.2 Documentation
+        link: https://isaac-sim.github.io/IsaacLab/v2.3.2/index.html
+        type: documentation
+    - resource:
+        title: Isaac Lab 3.0 Beta 2 Documentation
+        link: https://isaac-sim.github.io/IsaacLab/release/3.0.0-beta2/index.html
         type: documentation
     - resource:
         title: Isaac Sim and Isaac Lab learning path
