@@ -20,7 +20,7 @@ Use one compatible Isaac Lab API version set when completing this Learning Path:
 | Isaac Lab 2.3 API | `v2.3.2` | 5.1.0 | 3.11 |
 | Isaac Lab 3.0 API | `v3.0.0-beta2.patch1` | 6.0.0 or 6.0.1 | 3.12 |
 
-For a direct continuation from the previous Learning Path, use the 2.3 version set. Use the 3.0 version set only if you installed the [3.0 Beta 2 release](https://isaac-sim.github.io/IsaacLab/release/3.0.0-beta2/source/setup/installation/index.html).
+For a direct continuation from the previous Learning Path, use the 2.3 version set. Use the 3.0 version set only if you've installed the [3.0 Beta 2 release](https://isaac-sim.github.io/IsaacLab/release/3.0.0-beta2/source/setup/installation/index.html).
 
 By completing the previous Learning Path, you'll install packages into the Isaac Sim Python environment. There's no virtual environment to activate.
 
