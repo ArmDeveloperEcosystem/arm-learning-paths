@@ -31,6 +31,8 @@ Arm Neural Technology answers that question. It includes a set of Vulkan-based t
 
 | Resource |
 |----------|
+| [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/) |
+| [Arm Neural Frame Rate Upscaling model on Hugging Face](https://huggingface.co/Arm/neural-frame-rate-upscaling) |
 | [Arm Neural Technology landing page](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics) |
 | [Enable Neural Super Sampling in Unreal Engine with ML Extensions](/learning-paths/mobile-graphics-and-gaming/nss-unreal/) |
 | [ML SDK for Vulkan](https://github.com/arm/ai-ml-sdk-for-vulkan) |
@@ -40,7 +42,7 @@ Arm Neural Technology answers that question. It includes a set of Vulkan-based t
 
 The development kit, Unreal plugin, and sample content let you get started with minimal effort and validate how these techniques behave with your own content. Seeing a clean before-and-after in a controlled scene is one thing. Testing with dynamic lighting, fast camera movement, complex materials, and all the edge cases that come with real production conditions is another. That's where you learn whether a technique is actually useful.
 
-Arm Neural Technology use cases now extend beyond NSS into frame generation and ray denoising. This playbook focuses on those newer techniques, but NSS remains the most straightforward entry point for evaluating neural graphics in your project.
+Arm Neural Technology use cases now extend beyond NSS into frame generation and ray denoising. This playbook focuses on those newer techniques. For a practical first evaluation, start with the NFRU Unreal Engine Learning Path and test frame generation with your own content.
 
 ## Why this matters now
 

@@ -36,29 +36,29 @@ operatingsystems:
 
 further_reading:
     - resource:
+        title: Enable Neural Frame Rate Upscaling in Unreal Engine
+        link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/
+        type: learningpath
+    - resource:
+        title: Analyze Neural Frame Rate Upscaling using Project Moku
+        link: /learning-paths/mobile-graphics-and-gaming/nfru-cases-study/
+        type: learningpath
+    - resource:
+        title: Train and evaluate Neural Frame Rate Upscaling models using Model Gym
+        link: /learning-paths/mobile-graphics-and-gaming/model-training-gym-nfru/
+        type: learningpath
+    - resource:
         title: Arm Neural Technology for Mobile Games
         link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics
         type: website
     - resource:
+        title: Arm Neural Frame Rate Upscaling model on Hugging Face
+        link: https://huggingface.co/Arm/neural-frame-rate-upscaling
+        type: code
+    - resource:
         title: Enable Neural Super Sampling in Unreal Engine with ML Extensions
         link: /learning-paths/mobile-graphics-and-gaming/nss-unreal/
         type: documentation
-    - resource:
-        title: Arm Neural Technology Delivers Smarter, Sharper, More Efficient Mobile Graphics for Developers 
-        link: https://newsroom.arm.com/news/arm-announces-arm-neural-technology
-        type: blog
-    - resource:
-        title: Start experimenting with Neural Super Sampling for mobile graphics today
-        link: https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/how-to-access-arm-neural-super-sampling
-        type: blog
-    - resource:
-        title: New neural technologies set to join the Neural Graphics Development Kit
-        link: https://developer.arm.com/community/arm-community-blogs/b/mobile-graphics-and-gaming-blog/posts/new-neural-technologies-set-to-join-the-neural-graphics-development-kit
-        type: blog
-    - resource:
-        title: How Neural Graphics, AI, and Arm Tools Are Shaping Mobile Game Development
-        link: https://newsroom.arm.com/blog/takeaways-from-gdc-festival-of-gaming-2026
-        type: blog
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

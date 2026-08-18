@@ -9,17 +9,17 @@ layout: learningpathall
 
 ## Overview 
 
-If you've determined Arm Neural Technology is worth exploring for your game, you can start with NSSD and the Neural Graphics Development Kit today. This section covers the first steps into the latest developments.
+If you've determined Arm Neural Technology is worth exploring for your game, start by evaluating NFRU in Unreal Engine. You can then use the lower-level Vulkan and model-development resources when you need more control.
 
 ## NFRU
 
-NFRU is a good entry point for evaluating Arm Neural Technology. The setup is designed to feel familiar. You integrate the plugin, enable it in your project, and evaluate it the way you would any other rendering feature.
-
-The NFRU plugin will be available publicly in the coming weeks. For early access, sign up for the Early Access Program to start experimenting.
-
-[Sign up to the NFRU Early Access Program](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics/early-access-program)
+Start with [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/). This Learning Path guides you through building the Neural Graphics SDK, enabling the ML emulation layers for Vulkan, adding the Unreal Engine plugin, and validating frame generation. It also shows you how to tune NFRU with console variables, inspect intermediate buffers, and analyze a packaged application with RenderDoc for Arm GPUs.
 
 Test it in a representative scene, observe how it behaves with your content, and understand the tradeoffs—especially around motion, UI, and responsiveness.
+
+Next, use [Analyze Neural Frame Rate Upscaling using Project Moku](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/) to study a complete NFRU case study. It shows how to evaluate occlusion, particle effects, lighting changes, frame pacing, and performance with repeatable scenes, Streamline, and RenderDoc for Arm GPUs.
+
+Arm publishes the [Neural Frame Rate Upscaling model on Hugging Face](https://huggingface.co/Arm/neural-frame-rate-upscaling). To understand the Vulkan execution path behind the plugin, continue with [Get started with neural graphics using ML extensions for Vulkan](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/). If you need to fine-tune, evaluate, quantize, or export the model, use [Train and evaluate Neural Frame Rate Upscaling models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym-nfru/).
 
 ## NSSD
 

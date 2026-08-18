@@ -74,6 +74,18 @@ operatingsystems:
     - Linux
 further_reading:
     - resource:
+        title: Arm Neural Technology Playbook - Evaluate
+        link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/
+        type: learningpath
+    - resource:
+        title: Enable Neural Frame Rate Upscaling in Unreal Engine
+        link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/
+        type: learningpath
+    - resource:
+        title: Analyze Neural Frame Rate Upscaling using Project Moku
+        link: /learning-paths/mobile-graphics-and-gaming/nfru-cases-study/
+        type: learningpath
+    - resource:
         title: Model Gym GitHub Repository
         link: https://github.com/arm/neural-graphics-model-gym
         type: code
@@ -82,27 +94,9 @@ further_reading:
         link: https://github.com/arm/neural-graphics-model-gym-examples
         type: code
     - resource:
-        title: Quantize neural upscaling models with ExecuTorch
-        link: /learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/
-        type: learningpath
-    - resource:
-        title: Neural Graphics Development Kit
-        link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics
-        type: website
-    - resource:
-        title: Neural Frame Rate Upscaling Early Access Program
-        link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics/early-access-program
-        type: website
-    - resource:
-        title: Neural Frame Rate Upscaling in Unreal Engine
-        link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/
-        type: learningpath
-    - resource:
-        title: Vulkan Samples Learning Path
-        link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
-        type: learningpath
-
-
+        title: Arm Neural Frame Rate Upscaling model on Hugging Face
+        link: https://huggingface.co/Arm/neural-frame-rate-upscaling
+        type: code
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
