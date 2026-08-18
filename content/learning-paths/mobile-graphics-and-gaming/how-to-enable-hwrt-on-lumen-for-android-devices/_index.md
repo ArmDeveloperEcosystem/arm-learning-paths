@@ -1,5 +1,5 @@
 ---
-title: How to Enable Hardware Ray Tracing on Lumen for Android Devices
+title: Enable hardware ray tracing on Lumen for Android devices
 
 minutes_to_complete: 10
 
@@ -10,7 +10,7 @@ learning_objectives:
     - Enable hardware ray tracing on Lumen for Arm devices.
 
 prerequisites:
-- A computer capable of running [Unreal Engine 5.3 or later version](https://www.unrealengine.com/en-US/download).
+- A computer capable of running [Unreal Engine version 5.3 or later](https://www.unrealengine.com/en-US/download).
 - An Android mobile device that has a Mali GPU with hardware ray tracing support.
 - A USB cable to connect the mobile device to your computer.
 
@@ -29,31 +29,30 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:04:33Z'
   faq_source_hash: edbabf8c8f6e7feb8df5a6e818febd4027876aca00e33215b20b19c71d285c0b
   summary: >-
-    You'll enable Unreal Engine Lumen with hardware ray tracing on supported Android devices. Configure
+    You'll enable Unreal Engine Lumen with hardware ray tracing on supported Android devices. You'll configure
     Lumen for global illumination and reflections, enable the SM5 shader format through Vulkan Desktop,
-    and use deferred shading. Then toggle Lumen in the project or a Post Process Volume and compare
-    its lighting and reflections with non-Lumen rendering.
+    and use deferred shading. Then, you'll learn to enable Lumen in your project and by creating a Post Process Volume, and configure setting to use ray tracing.
   faqs:
   - question: Do I need to set Lumen for both Global Illumination and Reflections?
     answer: >-
-      Yes. Open Project Settings > Engine - Rendering and select Lumen in the Global Illumination
-      section and again in the Reflections section.
+      Yes. Open **Project Settings** > **Engine - Rendering** and select **Lumen** in the **Global Illumination**
+      section and again in the **Reflections** section.
   - question: On Android, which option enables the SM5 shader format required by Lumen?
     answer: >-
-      In Project Settings under Platforms - Android, enable Support Vulkan Desktop [Experimental].
+      In **Project Settings** under **Platforms - Android**, enable **Support Vulkan Desktop [Experimental]**.
       This activates SM5 for the Android target.
   - question: Which shading mode should I use with Lumen?
     answer: >-
-      Use deferred shading. Go to Project Settings > Engine - Rendering and select deferred shading;
-      ensure non-deferred options are not active.
+      Use deferred shading. Go to **Project Settings** > **Engine - Rendering** and uncheck **Forward Shading**.
   - question: Can I enable Lumen per scene instead of project-wide?
     answer: >-
-      Yes. Add a Post Process Volume actor and choose Lumen in the Global Illumination sections
-      in its Details panel.
-  - question: What should I check if my Android build looks unchanged after enabling Lumen?
+      Yes. Add a **Post Process Volume** actor and choose **Lumen** in the **Global Illumination** sections
+      in its **Details** panel.
+  - question: What happens if hardware ray tracing is unavailable on the device?
     answer: >-
-      Confirm SM5 is enabled by turning on Support Vulkan Desktop [Experimental] and that deferred
-      shading is selected. Also verify the device has a Mali GPU with hardware ray tracing support.
+      Lumen can fall back to software ray tracing. Select **Use Hardware Ray Tracing when available**
+      under **Project Settings** > **Engine - Rendering** to prioritize hardware acceleration when
+      the device supports it.
 # END generated_summary_faq
 
 author: Owen Wu

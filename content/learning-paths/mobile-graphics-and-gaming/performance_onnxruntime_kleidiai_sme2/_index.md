@@ -52,8 +52,8 @@ generated_summary_faq:
       support.
   - question: Where should I place the ResNet-50 v2 model files on the device?
     answer: >-
-      Copy the archive to /data/local/tmp and extract it there. The example uses adb to push the
-      file and tar to unpack it under that directory.
+      Copy the archive to `/data/local/tmp` and extract it there. The example uses `adb` to push the
+      file and `tar` to unpack it under that directory.
   - question: What should I check if SME2 acceleration doesn’t appear to be used?
     answer: >-
       Verify the Android device supports SME2, since MLAS enables KleidiAI only when SME2 is detected.

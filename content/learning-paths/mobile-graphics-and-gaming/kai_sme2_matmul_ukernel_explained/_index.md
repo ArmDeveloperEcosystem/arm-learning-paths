@@ -32,14 +32,13 @@ generated_summary_faq:
   faq_source_hash: 3a0a9c01e8e7fb6ccb1df84d3f131679987196fb5b94a2ad22731c5ba5bfd90f
   summary: >-
     You'll examine how a KleidiAI SME2 INT8 MOPA microkernel performs quantized matrix multiplication
-    on Arm CPUs. Learn how tiling and packing parameters control the kernel, decode its name, and
-    interpret its work unit. Then follow a GGML Q4_0 example and inspect source or disassembly to
+    on Arm CPUs. First, you'll learn how tiling and packing parameters control the kernel, decode its name, and
+    interpret its work unit. Then, you'll follow a `GGML Q4_0` example and inspect source or disassembly to
     identify the SME2 instructions.
   faqs:
-  - question: Do I need an SME2-capable Arm CPU to complete this?
+  - question: Do I need an SME2-capable Arm CPU to complete the Learning Path?
     answer: >-
-      No. SME2 hardware is only required for the optional hands-on verification steps; you can
-      still follow the concepts and source walkthrough without it.
+      No. SME2 hardware is only required for the optional hands-on verification steps. 
   - question: How do I know the microkernel is using SME2 INT8 MOPA in the inner loop?
     answer: >-
       Inspect the microkernel’s inner loop for SME2 outer product accumulate instructions that

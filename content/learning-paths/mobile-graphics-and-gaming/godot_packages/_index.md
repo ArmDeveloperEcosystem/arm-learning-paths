@@ -29,8 +29,8 @@ generated_summary_faq:
   faq_source_hash: c655d84430d943ba1b103d12cd81cb831032d6897d1471264c2a832c17728a90
   summary: >-
     You'll instrument a Godot project with Arm Performance Studio Integration and profile it on
-    an Arm-based Android device. Add event markers, regions, and channels to capture work across
-    threads. Then inspect annotations in Streamline and use Performance Advisor charts to investigate
+    an Arm-based Android device. First, you'll add event markers, regions, and channels to capture work across
+    threads. Then, you'll inspect annotations in Streamline and use Performance Advisor charts to investigate
     frame rate, CPU, and GPU bottlenecks.
   faqs:
   - question: Which Godot versions does the Arm Performance Studio extension support?
@@ -38,15 +38,15 @@ generated_summary_faq:
       The extension is compatible with Godot 4.3 and later.
   - question: How do I confirm the extension installed correctly in my project?
     answer: >-
-      Add a script that creates PerformanceStudio.new() and call marker("Test"). If the project
+      Add a script that creates `PerformanceStudio.new()` and call `marker("Test")`. If the project
       runs without script errors, the extension is available and your annotations can be captured.
-  - question: What is the simplest way to add a point-in-time annotation?
+  - question: How do I add a point-in-time annotation?
     answer: >-
-      Create a PerformanceStudio instance and call marker("Game Started") to emit a timestamped
+      Create a PerformanceStudio instance and call `marker("Game Started")` to emit a timestamped
       label. This appears in the Streamline timeline for correlation with performance data.
-  - question: How do I define a region and where will it appear in reports?
+  - question: How do I define a region, and where will it appear in reports?
     answer: >-
-      Emit a pair of markers prefixed with "Region Start <name>" and "Region End <name>" around
+      Emit a pair of markers prefixed with `Region Start <name>` and `Region End <name>` around
       the code of interest. Performance Advisor shows these regions on the frame rate analysis
       chart and in dedicated per‑region charts.
   - question: When should I use channels instead of single markers?

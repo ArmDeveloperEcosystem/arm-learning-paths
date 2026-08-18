@@ -40,12 +40,12 @@ generated_summary_faq:
   faqs:
   - question: What should I verify before creating the Python environment?
     answer: >-
-      Check that python3 reports a supported version (3.10, 3.11, or 3.12). Then install the listed
+      Check that `python3` reports a supported version (3.10, 3.11, or 3.12). Then install the listed
       system packages before setting up the examples.
   - question: Which notebook should I use to export a deployable model?
     answer: >-
-      Use the model_qat_example.ipynb notebook. It is the only example notebook that includes
-      the export step to produce a .vgf file.
+      Use the `model_qat_example.ipynb` notebook. It is the only example notebook that includes
+      the export step to produce a `.vgf` file.
   - question: When should I choose PTQ versus QAT for NSS?
     answer: >-
       Post-training quantization (PTQ) is faster to try because it calibrates an already-trained
@@ -53,7 +53,7 @@ generated_summary_faq:
       help preserve accuracy when exporting an INT8 model.
   - question: How do I confirm that the export completed correctly?
     answer: >-
-      Expect a .vgf model produced by the export pipeline. Open it in Model Explorer with the
+      Expect a `.vgf` model produced by the export pipeline. Open it in Model Explorer with the
       VGF adapter; a valid graph with layers, tensor shapes, and connectivity indicates a successful
       export.
   - question: Can Model Explorer show image quality or frame comparisons?

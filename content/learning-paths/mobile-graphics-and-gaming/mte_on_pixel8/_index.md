@@ -44,20 +44,20 @@ generated_summary_faq:
       a bug report that includes MTE-specific details about the fault.
   - question: How do I capture a bug report after the crash?
     answer: >-
-      Open Developer options and select Bug report, then tap Report to start generation. Wait
+      Open **Developer options** and select **Bug report**, then tap **Report** to start generation. Wait
       for the progress indicator to complete, then use the resulting zip file for analysis.
   - question: Where in the bug report do I find detailed MTE diagnostics?
     answer: >-
       The zip contains a primary bugreport text file, and more detailed information is written
-      to a tombstone file. Look under FS/data/tombstones in the unzipped folder.
+      to a tombstone file. Look under `FS/data/tombstones` in the unzipped folder.
   - question: My bug report filename includes “Husky.” Is that expected?
     answer: >-
       Yes. Husky is the code name for Google Pixel 8 Pro and can appear in the generated bug report
       filename.
   - question: What should I check if the test app doesn’t crash?
     answer: >-
-      Verify that MTE is enabled in Developer options before running the app’s tests. Also confirm
-      that MTE_test.apk installed correctly and that you are invoking one of the buttons designed
+      Verify that MTE is enabled in **Developer options** before running the app’s tests. Also confirm
+      that `MTE_test.apk` installed correctly and that you are invoking one of the buttons designed
       to trigger a memory bug.
 # END generated_summary_faq
 

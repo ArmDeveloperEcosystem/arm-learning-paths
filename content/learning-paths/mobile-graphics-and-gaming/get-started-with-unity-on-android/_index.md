@@ -31,26 +31,26 @@ generated_summary_faq:
   faq_source_hash: ab180c95be30dd0a07915d4294aa8b1373361f81fe13cee10b158876c93e2f55
   summary: >-
     You'll set up Unity with Android support, deploy a sample project, and profile it on a device.
-    Switch the target platform, build the scene containing `Spin.cs`, and verify the app runs.
-    Then use the Unity Profiler in the editor and on-device to compare CPU, rendering, and memory
+    First, you'll switch the target platform, build the scene containing `Spin.cs`, and verify the app runs.
+    Then, you'll use the **Profiler** on Unity in the editor and on-device to compare CPU, rendering, and memory
     activity across frames on Arm Cortex-A systems.
   faqs:
   - question: How do I know if I installed Android Build Support correctly?
     answer: >-
-      Open the Build Settings window and check that Android appears as a selectable platform.
+      Open the **Build Settings** window and check that Android appears as a selectable platform.
       If you can switch the project’s active platform to Android, the support is installed.
   - question: What should I see in the sample scene before building?
     answer: >-
-      The scene contains a Main Camera, a Directional Light, and a Cube with a Spin.cs script
+      The scene contains a **Main Camera**, a **Directional Light**, and a **Cube** with a `Spin.cs` script
       attached. When you run the scene, the cube rotates.
   - question: Which platform should I make active before I build the project?
     answer: >-
-      Set Android as the active platform in the Build Settings window. Building with the correct
+      Set Android as the active platform in the **Build Settings** window. Building with the correct
       active platform ensures the output targets your Android device.
   - question: How do I confirm the Profiler is collecting data?
     answer: >-
-      Open the Unity Profiler and watch for the timeline to populate with frame samples. CPU,
-      Rendering, and Memory charts should update as the app runs.
+      Open the **Profiler** on Unity and watch for the timeline to populate with frame samples. **CPU**,
+      **Rendering**, and **Memory** charts should update as the app runs.
   - question: Should I profile in the editor or on my device first?
     answer: >-
       Start profiling in the Unity Editor for quick checks, then profile on your Android device

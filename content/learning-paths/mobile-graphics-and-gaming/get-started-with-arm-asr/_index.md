@@ -1,12 +1,12 @@
 ---
-title: Get started with Arm Accuracy Super Resolution (Arm ASR)
+title: Get started with Arm Accuracy Super Resolution 
 
 minutes_to_complete: 40
 
 who_is_this_for: This Learning Path is for mobile, gaming, and graphics developers who want to install and configure Arm Accuracy Super Resolution (Arm ASR) to enhance performance on complex game content without sacrificing image quality.
 
 learning_objectives:
-    - Describe Arm Accuracy Super Resolution.
+    - Understand what Arm Accuracy Super Resolution (Arm ASR) is.
     - Integrate Arm ASR into your game project.
     - Manage how Arm ASR upscales content.
 
@@ -29,31 +29,27 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:02:37Z'
   faq_source_hash: 2424d8faebea11359ea0330d94698187b9305dde158d5761f9942eb33e711583
   summary: >-
-    You'll add Arm Accuracy Super Resolution (Arm ASR) to an Unreal Engine project or custom engine.
-    Use the plugin with supported Unreal Engine versions, or choose a Quick or Tight integration
-    for the generic library. Then configure quality presets, shaders, extensions, and input resources
+    You'll add Arm ASR to an Unreal Engine project or custom engine.
+    You'll learn about Unreal Engine plugin and how to integrate Arm ASR with a custom engine using the standalone backend or your engine's backend. For both options, you'll learn to configure settings such as quality presets, shaders, extensions, and input resources
     to evaluate image quality and performance trade-offs on mobile devices.
   faqs:
   - question: Which Unreal Engine versions should I use for the Arm ASR plugin?
     answer: >-
-      Use Unreal Engine 5.3, 5.4, or 5.5. The tutorial recommends these versions and the plugin
-      is available for them.
+      Use Unreal Engine 5.3, 5.4, or 5.5. 
   - question: Can I use Arm ASR without Unreal Engine?
     answer: >-
       Yes. You can integrate Arm ASR into a custom engine using the generic library.
   - question: Which integration method should I choose with the generic library?
     answer: >-
-      Arm ASR offers two methods: Quick Integration uses the standalone backend, and Tight Integration
-      uses your engine’s backend/renderer. Choose the approach that aligns with how you manage
-      rendering in your engine.
+      You can integrate Arm ASR using the standalone backend, or your engine’s backend or renderer. 
   - question: What configuration areas do I set up when using the generic library?
     answer: >-
-      You configure quality presets, shader variants and extensions, and input resources. These
+      Configure quality presets, shader variants and extensions, and input resources. These
       settings control how ASR processes and upscales your content.
-  - question: Is a Unity plugin available for Arm ASR?
+  - question: How do I balance image quality and performance in a custom-engine integration?
     answer: >-
-      A Unity plugin is coming soon. Until then, use the Unreal Engine plugin or integrate the
-      generic library into your engine.
+      Select a shader quality preset and an upscaling ratio. Use `FfxmFsr2ShaderQualityMode` and
+      `FfxmFsr2UpscalingRatio` together to choose the balance that suits your application.
 # END generated_summary_faq
 
 author: Julie Gaskin

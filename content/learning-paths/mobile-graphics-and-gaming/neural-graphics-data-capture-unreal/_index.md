@@ -44,20 +44,20 @@ generated_summary_faq:
       compiles through Visual Studio. Open a C++ project before adding the plugin files.
   - question: Which play mode should I use for capture, and where do I change it?
     answer: >-
-      Use Standalone Game. Open the menu next to the Play button and select Standalone Game to
-      avoid Play-in-Editor resizing and preserve expected frame dimensions.
+      Use **Standalone Game**. Open the menu next to the **Play** button and select **Standalone Game**
+      to avoid Play-in-Editor resizing and preserve expected frame dimensions.
   - question: How do I start and stop a capture during gameplay?
     answer: >-
-      Press Play, then press C to start capture and V to stop capture. Move through the level
+      Press **Play**, then press the **C** key to start capture and the **V** key to stop capture. Move through the level
       while recording to gather frames.
   - question: Where are the exported datasets saved, and how do I verify the capture finished?
     answer: >-
-      The output directory and capture name come from NGDCExportSettings (DatasetDir and CaptureName).
+      The output directory and capture name come from `NGDCExportSettings` (`DatasetDir` and `CaptureName`).
       After stopping capture, check that directory for the exported capture folder and files.
   - question: How can I adjust capture quality, scaling, or lock the frame rate?
     answer: >-
-      Use NGDCRenderingSettings and NGDCExportSettings. Set UpscalingRatio and SupersamplingRatio
-      for input/output scaling and quality, and set FixedFrameRate to a value greater than 0 to
+      Use `NGDCRenderingSettings` and `NGDCExportSettings`. Set `UpscalingRatio` and `SupersamplingRatio`
+      for input and output scaling and quality, and set `FixedFrameRate` to a value greater than 0 to
       lock the frame rate.
 # END generated_summary_faq
 

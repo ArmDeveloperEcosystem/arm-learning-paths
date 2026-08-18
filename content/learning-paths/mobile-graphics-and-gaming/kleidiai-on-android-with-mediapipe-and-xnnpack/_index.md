@@ -31,7 +31,7 @@ generated_summary_faq:
   faq_source_hash: d2559b0bde2b716640df74ca831be6736a77417de5ce0e641f1e43a267e8f58b
   summary: >-
     You'll cross-compile MediaPipe with XNNPACK for Android `arm64` and run Gemma 2B on an i8mm-capable
-    device. Build and verify the binary with Bazel, then run inference. Create a second build without
+    device. First, you'll build and verify the binary with Bazel, then run inference. After running inference, you'll create a second build without
     i8mm and benchmark both variants to assess the effect of KleidiAI integration on supported Android
     hardware.
   faqs:
@@ -39,20 +39,20 @@ generated_summary_faq:
     answer: >-
       Use the Docker option if you have a working Docker daemon and prefer an isolated, reproducible
       environment. Choose the native Ubuntu option if you want to install dependencies directly
-      on your x86_64 Linux host.
+      on your `x86_64` Linux host.
   - question: How do I confirm the Bazel build created the Android CPU inference binary?
     answer: >-
-      List the Bazel output directory shown in the steps. You should see llm_inference_engine_cpu_main
-      under bazel-bin/mediapipe/tasks/cc/genai/inference/c/.
+      List the Bazel output directory. You should see `llm_inference_engine_cpu_main`
+      under `bazel-bin/mediapipe/tasks/cc/genai/inference/c/`.
   - question: Which Bazel options enable the i8mm path with KleidiAI for Android arm64?
     answer: >-
-      Build the target mediapipe/tasks/cc/genai/inference/c:llm_inference_engine_cpu_main with
-      --config=android_arm64 and --define=xnn_enable_arm_i8mm=true. These options select the Android
-      arm64 build and enable the i8mm path integrated through XNNPACK.
+      Build the target `mediapipe/tasks/cc/genai/inference/c:llm_inference_engine_cpu_main` with
+      `--config=android_arm64` and `--define=xnn_enable_arm_i8mm=true`. These options select the Android
+      `arm64` build and enable the i8mm path integrated through XNNPACK.
   - question: How do I build a comparison binary without i8mm?
     answer: >-
-      Re-run the same Bazel build for the target but omit --define=xnn_enable_arm_i8mm=true. Use
-      the two binaries (with and without the flag) for the benchmarking step.
+      Re-run the same Bazel build for the target but omit `--define=xnn_enable_arm_i8mm=true`. Use
+      the two binaries with and without the flag for the benchmarking step.
   - question: What result should I expect from the benchmark runs?
     answer: >-
       You should obtain measurements for both builds to compare the effect of enabling i8mm and

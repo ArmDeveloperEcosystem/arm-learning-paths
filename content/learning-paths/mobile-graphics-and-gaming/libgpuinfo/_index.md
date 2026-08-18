@@ -30,31 +30,30 @@ generated_summary_faq:
   faq_source_hash: eb2e5e1a9169679ea5398b97026829f8747778cd097701a3ebd7e7be9ef961a1
   summary: >-
     You'll build the libGPUInfo C++ library with the Android NDK and run its example on an Android
-    device. Use `adb` to deploy the sample to hardware with a Mali or Immortalis GPU, then inspect
-    the reported configuration, features, and performance levels. Use these attributes to inform
+    device. First, you'll use `adb` to deploy the sample to hardware with a Mali or Immortalis GPU. Then, you'll inspect
+    the reported configuration, features, and performance levels to inform
     graphics or compute paths at runtime.
   faqs:
   - question: How do I confirm the Android device is ready before running the example?
     answer: >-
-      Make sure the device is connected and visible to adb. If the device is not discoverable
-      by adb, reconnect it and try again.
+      Make sure the device is connected and visible to `adb`. If the device isn't discoverable
+      by `adb`, reconnect it and try again.
   - question: What result should I expect when the example runs on the device?
     answer: >-
       The application queries the Arm GPU and prints configuration information that highlights
       available features and indicative performance levels. Use this output to confirm the device’s
       reported GPU capabilities.
-  - question: Where do the build and run steps happen in this path?
+  - question: Where do the build and run steps happen in this Learning Path?
     answer: >-
-      You build libGPUInfo and the example with the Android NDK on the development machine. You
-      then use adb to deploy and run the example on the Android device.
+      You'll build `libGPUInfo` and the example with the Android NDK on the development machine. Then, you'll use `adb` to deploy and run the example on the Android device.
   - question: Can I integrate libGPUInfo into my own Android app after trying the example?
     answer: >-
-      Yes. libGPUInfo is a C++ library that can be integrated into applications to gather Arm
+      Yes. `libGPUInfo` is a C++ library that you can integrate into applications to gather Arm
       GPU hardware information on the device.
   - question: What should I check if the example fails to retrieve GPU information?
     answer: >-
       Verify the app is running on an Android device with an Arm GPU and that the device is accessible
-      via adb. Re-deploy the example to the connected device and run it again.
+      through `adb`. Re-deploy the example to the connected device and run it again.
 # END generated_summary_faq
 
 author: Jason Andrews

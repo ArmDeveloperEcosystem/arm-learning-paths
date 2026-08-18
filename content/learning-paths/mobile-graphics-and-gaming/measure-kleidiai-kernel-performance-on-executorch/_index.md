@@ -51,18 +51,18 @@ generated_summary_faq:
       Use operator data types and quantization settings that match KleidiAI-supported paths in
       XNNPACK. The benchmark models focus on Fully Connected and INT8 Conv2d (including 1×1) with
       GEMM variants designed to exercise KleidiAI micro-kernels.
-  - question: What output should I expect from executor_runner, and how do I confirm it captured
+  - question: What output should I expect from `executor_runner`, and how do I confirm it captured
       profiling data?
     answer: >-
-      executor_runner produces performance measurements such as throughput and latency and writes
-      ETDump/ETRecord profiling data. Use the ExecuTorch Inspector API to open those files and
+      `executor_runner` produces performance measurements such as throughput and latency and writes
+      `ETDump` and `ETRecord` profiling data. Use the ExecuTorch Inspector API to open those files and
       verify which kernels executed and their behavior.
   - question: I tested multiple GEMM variants but see little difference. What should I review
       before rerunning?
     answer: >-
       Confirm you are running on SME/SME2-capable hardware and that your build enables XNNPACK
       and KleidiAI with SME/SME2. Ensure the models are quantized and use operator configurations
-      that map to KleidiAI micro-kernels, then re-run and compare ETDump traces.
+      that map to KleidiAI micro-kernels, then re-run and compare `ETDump` traces.
 # END generated_summary_faq
 
 author: Qixiang Xu

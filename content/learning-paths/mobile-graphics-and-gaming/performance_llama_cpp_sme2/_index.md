@@ -39,7 +39,7 @@ generated_summary_faq:
   faqs:
   - question: Which compiler and toolchain should I use to build with SME2?
     answer: >-
-      Use the aarch64 GCC cross-compile toolchain with the aarch64-none-linux-gnu- prefix from
+      Use the `aarch64` GCC cross-compile toolchain with the `aarch64-none-linux-gnu-` prefix from
       the Linux-hosted Arm GNU Toolchain. GCC version 14.2 or later is required to enable SME2.
   - question: I'm on macOS or Windows—how do I follow the build steps?
     answer: >-
@@ -47,17 +47,17 @@ generated_summary_faq:
       machine. The build uses the Linux-hosted Arm GNU Toolchain.
   - question: What files must be on the Android device before measuring performance?
     answer: >-
-      Place the built llama-cli executable and the Llama-3.2-3B-Instruct-Q4_0.gguf model on the
+      Place the built `llama-cli` executable and the `Llama-3.2-3B-Instruct-Q4_0.gguf` model on the
       device. Using Android Debug Bridge (ADB) is the recommended way to transfer files and open
       a shell.
   - question: How do I verify that the SME2 path is actually used during inference?
     answer: >-
-      Follow the verification step that confirms SME2 microkernels are active. The ggml-cpu backend
+      Follow the verification step that confirms SME2 microkernels are active. The `ggml-cpu` backend
       selects KleidiAI SME2 microkernels when the hardware supports them.
   - question: How should I compare runs with SME2 enabled and disabled?
     answer: >-
       Run the model on the Android device twice as shown—once with SME2 enabled and once with
-      it disabled. Compare the performance reported by llama.cpp from both runs.
+      it disabled. Compare the performance reported by `llama.cpp` from both runs.
 # END generated_summary_faq
 
 author: Zenon Zhilong Xiu

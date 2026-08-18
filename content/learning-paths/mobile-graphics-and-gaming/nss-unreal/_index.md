@@ -39,8 +39,8 @@ generated_summary_faq:
   faqs:
   - question: How do I know NSS is active in my level?
     answer: >-
-      Run ShowFlag.VisualizeTemporalUpscaler 1 in Unreal and check the rendering summary. You
-      should see NSS listed. To hide the overview, run ShowFlag.VisualizeTemporalUpscaler 0.
+      Run `ShowFlag.VisualizeTemporalUpscaler 1` in Unreal and check the rendering summary. You
+      should see NSS listed. To hide the overview, run `ShowFlag.VisualizeTemporalUpscaler 0`.
   - question: Which Unreal Engine project template should I use for the example?
     answer: >-
       Create a new Third Person template project using the C++ option. Open it in Visual Studio
@@ -52,7 +52,7 @@ generated_summary_faq:
       workloads.
   - question: How can I visualize the NSS model output while the game runs?
     answer: >-
-      Run the command r.NSS.Debug 1 in Unreal. This adds real-time views showing the model output
+      Run the command `r.NSS.Debug 1` in Unreal. This adds real-time views showing the model output
       to help you inspect results.
   - question: When should I use RenderDoc in this workflow?
     answer: >-

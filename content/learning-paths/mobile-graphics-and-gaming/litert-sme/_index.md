@@ -32,19 +32,19 @@ generated_summary_faq:
   faq_source_hash: 189bd4833fcaafbad5fe84bd2ddee1e6006eb59afd3c2e90b1bbcd985719ee14
   summary: >-
     You'll accelerate LiteRT inference on Android with KleidiAI SME2 microkernels through XNNPACK.
-    Create models using supported operators and data types, then build a KleidiAI-enabled benchmark
-    and a baseline. After verifying SME2 support, run both on the same model and compare results,
+    First, you'll create models using supported operators and data types, then build a KleidiAI-enabled benchmark
+    and a baseline. After verifying SME2 support, you'll run both on the same model and compare results,
     including fallback behavior for unsupported operators.
   faqs:
   - question: What do I need on the Android device before running benchmarks?
     answer: >-
-      Copy your LiteRT model file and two benchmark_model binaries to the device: one built with
+      Copy your LiteRT model file and two `benchmark_model` binaries to the device: one built with
       KleidiAI and SME2 enabled and one baseline build. Run both against the same model on the
       same device.
   - question: How do I know if my Android device supports SME2?
     answer: >-
-      From an ADB shell, inspect /proc/cpuinfo and look for an entry that indicates SME2 support.
-      If you do not see SME2 listed, use a device from the provided SME2-capable list.
+      From an `adb` shell, inspect `/proc/cpuinfo` and look for an entry that indicates SME2 support.
+      If you don't see SME2 listed, use a device from the provided SME2-capable list.
   - question: Which LiteRT operators are accelerated by SME2 through KleidiAI?
     answer: >-
       Only the subset of KleidiAI SME2 micro-kernels integrated into XNNPACK are accelerated.

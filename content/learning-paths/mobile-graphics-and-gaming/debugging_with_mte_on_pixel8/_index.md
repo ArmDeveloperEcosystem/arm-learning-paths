@@ -34,30 +34,29 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:02:08Z'
   faq_source_hash: 4a6a656497613a34dd17e6afbdd31e7a491b75e6ecb1befaee650a4d02fd6976
   summary: >-
-    You'll use Arm Memory Tagging Extension (MTE) on a Google Pixel 8 to find memory-safety bugs
-    in an Android app. Clone and open the MTE Test app in Android Studio, edit `AndroidManifest.xml`
-    to control MTE, and start a debug session on the connected device. Then exercise built-in
+    You'll use Arm MTE on a Google Pixel 8 to find memory-safety bugs
+    in an Android app. First, you'll clone and open the MTE Test app in Android Studio, edit `AndroidManifest.xml`
+    to control MTE, and start a debug session on the connected device. Then, you'll exercise built-in
     memory-bug scenarios and investigate them with MTE.
   faqs:
   - question: How do I get the MTE Test app into Android Studio?
     answer: >-
-      Clone the repository with git clone https://github.com/rlopez3d/mte_test_app, then open
+      Clone the repository with `git clone https://github.com/rlopez3d/mte_test_app`, then open
       the cloned Android project in Android Studio. The project opens in the default Android view.
   - question: Which project view helps me find AndroidManifest.xml to enable MTE?
     answer: >-
-      Switch to the Project Files view. Expand app -> src -> main -> res and open AndroidManifest.xml.
+      Switch to the **Project Files** view. Expand `app/src/main/res` and open `AndroidManifest.xml`.
   - question: How do I confirm Android Studio is targeting my Google Pixel 8 before debugging?
     answer: >-
-      Check that your device name appears in the device selector next to the Run/Debug controls.
-      If it isn’t listed, ensure the phone is connected over USB and the project is open.
+      Check that your device name appears in the device selector next to the **Run/Debug** controls.
+      If your device isn’t listed, ensure the phone is connected over USB and the project is open.
   - question: What should I expect on the phone when I start debugging the app?
     answer: >-
       The app shows a message on the screen when it starts. Wait until the application interface
       appears before proceeding.
   - question: Where do I enable or disable MTE for this app?
     answer: >-
-      Use the application manifest to control MTE. The steps show how to edit AndroidManifest.xml
-      to enable or disable MTE for the project.
+      Edit the application manifest `AndroidManifest.xml` to control MTE.
 # END generated_summary_faq
 
 author: Roberto Lopez Mendez
