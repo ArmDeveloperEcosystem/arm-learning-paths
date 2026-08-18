@@ -83,7 +83,7 @@ Set `--checkpoint` to the trained MAPPO model you want to evaluate:
   {{< /tab >}}
 {{< /tabpane >}}
 
-![Shadow Hand Over training progress showing two hands coordinating an object transfer.#center](./multi_agent_hand.gif "Shadow Hand Over training progression. Left: iteration 3600. Right: best_agent.pt.")
+![Side-by-side Isaac Lab simulations of two Shadow Hands transferring an object. The early policy shows uncoordinated hand positions, while the trained policy brings both hands together to complete the handover.#center](./multi_agent_hand.gif "Shadow handover training progression. Left: iteration 3600. Right: best_agent.pt.")
 
 ### (Optional) Train an example using IPPO
 
@@ -113,7 +113,7 @@ For more environments and supported algorithms, see the [comprehensive list of I
 
 ## Compare single-agent and multi-agent training
 
-When you move from single-agent tasks to multi-agent training, the change is not just about adding more controllers. The problem definition itself becomes different.
+When you move from single-agent tasks to multi-agent training, the change isn't just about adding more controllers. The problem definition itself becomes different.
 
 | Feature | Single-agent | Multi-agent (MAPPO and IPPO) |
 | --- | --- | --- |

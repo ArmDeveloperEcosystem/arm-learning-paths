@@ -257,7 +257,7 @@ Set `--checkpoint` to the model file that you want to evaluate:
 {{< /tab >}}
 {{< /tabpane >}}
 
-![Franka 7-DOF arm progressing through Reach and Lift. The left panel shows iteration 150, where grasp stability is still developing. The right panel shows around iteration 900, where the policy keeps the end-effector inverted to reduce cube drops during lifting.#center](./reach_and_lift.gif "Franka 7-DOF arm progressing through Reach and Lift. The left panel shows iteration 150, where grasp stability is still developing. The right panel shows around iteration 900, where the policy keeps the end-effector inverted to reduce cube drops during lifting")
+![Side-by-side Isaac Lab simulations of the Franka lift task. The early policy has not established a stable grasp, while the later policy holds the cube securely as it lifts it from the table, showing improved contact control.#center](./reach_and_lift.gif "Franka 7-DOF arm progressing through Reach and Lift. The left panel shows iteration 150, where grasp stability is still developing. The right panel shows around iteration 900, where the policy keeps the end-effector inverted to reduce cube drops during lifting")
 
 
 ## What you've accomplished and what's next

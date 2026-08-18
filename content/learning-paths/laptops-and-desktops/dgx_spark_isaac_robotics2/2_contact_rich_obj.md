@@ -161,7 +161,7 @@ Set `--checkpoint` to a local checkpoint, or replace it with `--use_pretrained_c
 {{< /tab >}}
 {{< /tabpane >}}
 
-![Franka arm inserting a peg into a tight-clearance socket after 50 PPO training epochs.#center](./peg.gif "Peg insertion after 50 PPO training epochs")
+![Isaac Lab simulation of a Franka arm aligning and inserting a yellow peg into a tight-clearance socket. The placement shows the contact-rich task that the policy learns after 50 PPO training epochs.#center](./peg.gif "Peg insertion after 50 PPO training epochs")
 
 
 ## What you've accomplished and what's next
