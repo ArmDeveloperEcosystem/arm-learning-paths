@@ -15,7 +15,7 @@ In industrial environments, a robot does more than pick up free objects. Drawers
 
 For example, peg insertion requires stable alignment before insertion, while nut threading adds even more demanding pose control and rotational behavior. These tasks are usually much more sensitive to small errors than reach, lift, or drawer interaction.
 
-Start with an articulated drawer, then move to a Factory peg-insertion environment.
+Start with an articulated drawer, then move to a factory peg-insertion environment.
 
 ## Train the Franka arm to open a drawer
 
@@ -27,7 +27,7 @@ The policy must handle stable contact, constrained motion, and contact forces th
 
 ### Run the training command
 
-From the Isaac Lab directory, run the RSL-RL training command:
+From the Isaac Lab directory, run the Robotic Systems Lab Reinforcement Learning (RSL-RL) training command:
 
 ```console
 cd ~/IsaacLab
@@ -62,10 +62,10 @@ Training will take approximately 25 minutes on a DGX Spark.
 After training, confirm the following:
 
 - The robotic arm approaches and aligns with the handle instead of stopping in front of the drawer.
-- Once contact is established, the drawer moves along the rail direction.
+- After contact is established, the drawer moves along the rail direction.
 - The opening motion remains stable without slipping, shaking, or applying force in the wrong direction.
 
-Set `--checkpoint` to the model file you want to evaluate:
+Set `--checkpoint` to the model file that you want to evaluate:
 
 {{< tabpane code=true >}}
 {{< tab header="Isaac Lab 2.3 API" >}}
@@ -88,7 +88,7 @@ Set `--checkpoint` to the model file you want to evaluate:
 
 ## Perform peg insertion to simulate a factory environment
 
-Isaac Lab's factory environments cover peg insertion, gear meshing, and nut threading. Here, you'll train peg insertion with RL Games. The task uses tight-clearance geometry and contact simulation, so small pose errors can prevent insertion.
+Isaac Lab's factory environments cover peg insertion, gear meshing, and nut threading. You'll train peg insertion with RL Games. The task uses tight-clearance geometry and contact simulation, so small pose errors can prevent insertion.
 
 ### Run the peg insertion task
 
@@ -130,7 +130,7 @@ A checkpoint might not be available for every task and Isaac Lab version.
 
 {{% /notice %}}
 
-## Verify the peg insertion task
+### Verify the peg insertion task
 
 Set `--checkpoint` to a local checkpoint, or replace it with `--use_pretrained_checkpoint`. The additional environment parameters make the peg insertion quicker to observe:
 

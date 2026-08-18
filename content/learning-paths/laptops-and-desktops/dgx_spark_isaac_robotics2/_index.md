@@ -9,8 +9,8 @@ who_is_this_for: This advanced topic is for robotics developers and AI researche
 
 learning_objectives:
     - Train Franka manipulation policies with RSL-RL and RL Games
-    - Compare MAPPO and IPPO in a two-agent Shadow Hand task
-    - Train humanoid motion policies with Adversarial Motion Priors
+    - Compare Multi-Agent Proximal Policy Optimization (MAPPO) and Independent PPO (IPPO) in a two-agent Shadow Hand task
+    - Train humanoid motion policies with Adversarial Motion Priors (AMP)
     - Select an RL library that has a registered configuration for a task
 
 prerequisites:
@@ -24,7 +24,7 @@ author:
     - Kieran Hejmadi
     - Odin Shen
 
-generate_summary_faq: false
+generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 

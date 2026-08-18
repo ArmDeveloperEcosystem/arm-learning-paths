@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Move from locomotion to interaction
 
-Before continuing, complete the previous [Isaac Sim and Isaac Lab Learning Path](/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics/). By completing the Learning Path, you'll build Isaac Sim, install Isaac Lab, and configure both on an Arm-based [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) system.
+Before continuing, complete the previous [Isaac Sim and Isaac Lab Learning Path](/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics/). By completing the Learning Path, you'll build Isaac Sim and install Isaac Lab. You'll configure both Isaac Sim and Isaac Lab on an Arm-based [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) system.
 
 {{% notice Note %}}
 
@@ -46,8 +46,6 @@ You'll start by training policies for a seven-degree-of-freedom Franka arm on tw
 
 These tasks continue the same source-built Isaac Sim and Isaac Lab workflow from the previous Learning Path.
 
-By the end of this section, you'll have evaluated policies for reaching a target pose and lifting a cube.
-
 {{% notice Note %}}
 
 DGX Spark has one GPU, so run the tasks in the Learning Path as single-GPU jobs. If you move the same checkout to a system with two GPUs, Isaac Lab supports distributed training.
@@ -72,7 +70,7 @@ python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 \
 {{< /tab >}}
 {{< /tabpane >}}
 
-For multi-node options and NCCL troubleshooting, use the guide for [Isaac Lab 2.3.2](https://isaac-sim.github.io/IsaacLab/v2.3.2/source/features/multi_gpu.html) or [Isaac Lab 3.0 Beta 2](https://isaac-sim.github.io/IsaacLab/release/3.0.0-beta2/source/features/multi_gpu.html).
+For multi-node options and troubleshooting, use the guide for [Isaac Lab 2.3.2](https://isaac-sim.github.io/IsaacLab/v2.3.2/source/features/multi_gpu.html) or [Isaac Lab 3.0 Beta 2](https://isaac-sim.github.io/IsaacLab/release/3.0.0-beta2/source/features/multi_gpu.html).
 
 {{% /notice %}}
 
@@ -263,6 +261,6 @@ Set `--checkpoint` to the model file that you want to evaluate:
 
 ## What you've accomplished and what's next
 
-You've trained the Franka robotic to complete reach and lift tasks. The arm now has basic grasping ability. However, objects in the real world often introduce more complex mechanical constraints.
+You've evaluated policies for reaching a target pose and lifting a cube, and trained the Franka robotic to complete reach and lift tasks. The arm now has basic grasping ability. However, objects in the real world often introduce more complex mechanical constraints.
 
 Next, you'll explore how a robot can interact with joint-constrained objects such as drawers, and move one step closer to high-precision industrial manipulation tasks.

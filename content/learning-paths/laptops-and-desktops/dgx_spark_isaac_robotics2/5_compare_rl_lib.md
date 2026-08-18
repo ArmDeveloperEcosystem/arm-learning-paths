@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Choose your technical toolkit
 
-You've used RSL-RL for manipulation, RL Games for Factory, and `skrl` for Multi-Agent Proximal Policy Optimization (MAPPO) and Adversarial Motion Priors (AMP) tasks. Now, you'll compare why each task uses a different library.
+You've used Robotic Systems Lab Reinforcement Learning (RSL-RL) for manipulation, RL Games for factory, and `skrl` for Multi-Agent Proximal Policy Optimization (MAPPO) and Adversarial Motion Priors (AMP) tasks. Now, you'll compare why each task uses a different library.
 
 Isaac Lab integrates several reinforcement learning libraries. Library choice affects the agent configuration, checkpoint format, and available algorithms.  Start with a library that has an upstream agent configuration for your task, then consider algorithm support and workflow needs. 
 
