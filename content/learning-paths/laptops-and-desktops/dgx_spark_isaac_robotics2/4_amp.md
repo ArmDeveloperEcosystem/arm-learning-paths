@@ -74,7 +74,9 @@ After training, look for the following behaviors:
 {{< /tab >}}
 {{< /tabpane >}}
 
-![Humanoid AMP walk training comparison. The left panel at iteration 3200 shows less stable gait timing and more rigid motion. The right panel at iteration 11600 shows smoother center-of-mass transfer, better leg coordination, and more natural walking behavior.#center](./walking_humanoid.gif "Humanoid AMP walk progression. Left: iteration 3200. Right: iteration 11600.")
+The following is an illustrative comparison:
+
+![Humanoid AMP walk training comparison. The left panel at iteration 3200 shows less stable gait timing and more rigid motion. The right panel at iteration 11600 shows smoother center-of-mass transfer, better leg coordination, and more natural walking behavior.#center](./walking_humanoid.gif "Humanoid AMP walking at 3,200 and 11,600 iterations.")
 
 
 ## Train a humanoid robot to run with speed and coordination
@@ -132,6 +134,8 @@ After training, confirm the following:
   --real-time
 {{< /tab >}}
 {{< /tabpane >}}
+
+The following is an illustrative comparison:
 
 ![Humanoid AMP running comparison. At 3,000 iterations, the humanoid stumbles immediately. At 26,000 iterations, it uses a skipping gait while attempting to match the target running velocity.#center](./amp_running.gif "Humanoid AMP running at 3,000 and 26,000 iterations")
 

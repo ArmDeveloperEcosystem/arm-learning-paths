@@ -262,6 +262,6 @@ Set `--checkpoint` to the model file that you want to evaluate:
 
 ## What you've accomplished and what's next
 
-You've evaluated policies for reaching a target pose and lifting a cube, and trained the Franka robotic to complete reach and lift tasks. The arm now has basic grasping ability. However, objects in the real world often introduce more complex mechanical constraints.
+You've evaluated policies for reaching a target pose and lifting a cube, and trained the Franka robot to complete reach and lift tasks. The arm now has basic grasping ability. However, objects in the real world often introduce more complex mechanical constraints.
 
 Next, you'll explore how a robot can interact with joint-constrained objects such as drawers, and move one step closer to high-precision industrial manipulation tasks.
