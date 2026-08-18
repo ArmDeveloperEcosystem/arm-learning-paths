@@ -154,7 +154,7 @@ To inspect the Franka arm, right-click in the viewport and use the **W**, **A**,
 
 ![Franka Reach training comparison that shows early and late policy behavior. The left side shows less stable motion around iteration 100, and the right side shows improved target tracking near iteration 999.#center](./reach.gif "Franka reach training comparison that shows early and late policy behavior. The left side shows less stable motion around iteration 100, and the right side shows improved target tracking near iteration 999")
 
-Observe the following:
+After training, confirm the following:
 
 - The robotic arm can consistently move its end-effector to the target position.
 - Multiple environments execute the reaching behavior in parallel.
