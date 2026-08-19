@@ -41,10 +41,10 @@ generated_summary_faq:
     answer: >-
       Use the `aarch64` GCC cross-compile toolchain with the `aarch64-none-linux-gnu-` prefix from
       the Linux-hosted Arm GNU Toolchain. You need GCC version 14.2 or later to enable SME2.
-  - question: How do I follow the build steps if I'm on macOS or Windows?
+  - question: Why do I need a Linux host to build llama.cpp?
     answer: >-
-      Run the commands in a Linux environment, such as a Linux VM, container, or a Linux development
-      machine. The build uses the Linux-hosted Arm GNU Toolchain.
+      The build uses the Linux-hosted Arm GNU Toolchain. If you work on macOS or Windows, run the
+      commands in a Linux VM, container, or development machine.
   - question: What files must be on the Android device before measuring performance?
     answer: >-
       Place the built `llama-cli` executable and the `Llama-3.2-3B-Instruct-Q4_0.gguf` model on the
