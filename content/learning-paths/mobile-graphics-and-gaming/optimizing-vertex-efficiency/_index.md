@@ -8,7 +8,7 @@ who_is_this_for: This is an advanced topic for Android graphics application deve
 
 learning_objectives:
     - Optimize vertex representations on Arm GPUs.
-    - Analyze Vertex Memory Efficiency using Arm Frame Advisor.
+    - Analyze Vertex Memory Efficiency (VME) using Arm Frame Advisor.
 
 prerequisites:
     - Understanding of vertex attributes.
@@ -29,15 +29,15 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:12:48Z'
   faq_source_hash: b18020b78a210a88a3fb6e958110d6a5544976eeb593abfa94318126277fb946
   summary: >-
-    You'll use Arm Frame Advisor to diagnose vertex-data efficiency on Arm GPUs. Profile a frame,
-    inspect Vertex Memory Efficiency for each draw, and identify inefficient passes. Refine the
-    affected vertex representation in C or C++, then profile the same scene again to compare VME
+    You'll use Arm Frame Advisor to diagnose vertex-data efficiency on Arm GPUs. First, you'll profile a frame,
+    inspect VME for each draw, and identify inefficient passes. Then, you'll refine the
+    affected vertex representation in C or C++, and profile the same scene again to compare VME
     and validate the improvement.
   faqs:
-  - question: How do I find low Vertex Memory Efficiency in Arm Frame Advisor?
+  - question: How do I find low VME in Arm Frame Advisor?
     answer: >-
-      Open the frame analysis and review the Vertex Memory Efficiency reported for each draw call.
-      Draws with low VME are the priority for investigation, as shown by the shadow map example.
+      Open the frame analysis and review the VME reported for each draw call.
+      Draws with low VME are the priority for investigation.
   - question: Which draws should I optimize first if several show low VME?
     answer: >-
       Start with the draws that contribute to the observed performance issue in your profiling
@@ -46,7 +46,7 @@ generated_summary_faq:
   - question: What changes do I make to improve VME?
     answer: >-
       Adjust the vertex representation used by the affected draws based on your understanding
-      of the attributes. Then re-run Arm Frame Advisor to see whether VME increases for those
+      of the attributes. Then, re-run Arm Frame Advisor to see whether VME increases for those
       draws.
   - question: How do I verify that a change helped?
     answer: >-
@@ -54,7 +54,7 @@ generated_summary_faq:
       in VME indicates the change improved vertex efficiency.
   - question: Which tool should I use to analyze Vertex Memory Efficiency on Android?
     answer: >-
-      Use Arm Frame Advisor, which reports Vertex Memory Efficiency and is part of Arm Performance
+      Use Arm Frame Advisor, which reports VME and is part of Arm Performance
       Studio.
 # END generated_summary_faq
 

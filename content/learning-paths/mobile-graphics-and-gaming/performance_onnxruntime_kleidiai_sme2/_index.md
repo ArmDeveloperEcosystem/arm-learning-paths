@@ -33,22 +33,21 @@ generated_summary_faq:
   faq_source_hash: 2f249bc941318c8900cc74e846036643d5250a2dc0309228a5d839006c7bdb25
   summary: >-
     You'll build ONNX Runtime for Android with KleidiAI SME2 microkernels and profile a model on
-    a device. Cross-compile with the Android NDK, deploy the binaries and model, and use
-    `onnxruntime_perf_test` to capture baseline and SME2 results. Then compare KleidiAI dispatch,
-    operator execution, and end-to-end inference time with ResNet-50 v2.
+    a device. First, you'll cross-compile with the Android NDK, deploy the binaries and model, and use
+    `onnxruntime_perf_test` to capture baseline and SME2 results. Then, you'll compare KleidiAI dispatch,
+    operator execution and end-to-end inference time with ResNet-50 v2.
   faqs:
-  - question: How do I confirm that KleidiAI is actually used at runtime?
+  - question: How do I confirm that KleidiAI is used at runtime?
     answer: >-
       MLAS checks CPU capabilities at runtime and dispatches to KleidiAI when SME2 is present.
       When enabled, GEMM and convolution operators use ArmKleidiAI kernels instead of the default
       MLAS paths.
-  - question: Which ONNX Runtime version do the steps use?
+  - question: Which ONNX Runtime version should I use?
     answer: >-
-      The build instructions use ONNX Runtime v1.23.2. Follow the checkout step to match this
-      version before building.
+      Use ONNX Runtime v1.23.2.
   - question: Which Android NDK version should I use for the build?
     answer: >-
-      Use Android NDK r26b or newer. NDK r27 or later is recommended for the latest SME2 toolchain
+      Use Android NDK r26b or later. NDK r27 or later is recommended for the latest SME2 toolchain
       support.
   - question: Where should I place the ResNet-50 v2 model files on the device?
     answer: >-
@@ -56,7 +55,7 @@ generated_summary_faq:
       file and `tar` to unpack it under that directory.
   - question: What should I check if SME2 acceleration doesn’t appear to be used?
     answer: >-
-      Verify the Android device supports SME2, since MLAS enables KleidiAI only when SME2 is detected.
+      Verify the Android device supports SME2, because MLAS enables KleidiAI only when SME2 is detected.
       If SME2 is unavailable, MLAS falls back to its default kernels (for example, Neon), and
       you can still profile that baseline.
 # END generated_summary_faq
