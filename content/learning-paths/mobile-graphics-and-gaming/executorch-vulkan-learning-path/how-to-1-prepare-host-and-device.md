@@ -1,5 +1,5 @@
 ---
-title: Prepare the host and device
+title: Prepare a Linux host and Android device for ExecuTorch Vulkan
 description: Install the Android toolchain, configure ADB access, and verify Vulkan support on the target phone.
 weight: 3
 
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Install Android SDK and NDK
 
-You can install the Android tools entirely from the Linux command line using Google's [Android command-line tools](https://developer.android.com/studio#command-line-tools-only) and [`sdkmanager`](https://developer.android.com/tools/sdkmanager). This workflow uses:
+You can install the Android tools entirely from the Linux command line. Use Google's [Android command-line tools](https://developer.android.com/studio#command-line-tools-only) and [`sdkmanager`](https://developer.android.com/tools/sdkmanager) to install these components:
 
 - Android SDK Platform-Tools
 - Android SDK Command-line Tools
@@ -99,7 +99,7 @@ export PATH="$ANDROID_HOME/cmake/3.31.6/bin:$PATH"
 These variables remain set until you close the terminal.
 
 {{% notice Optional persistence %}}
-To make the configuration available in future terminal sessions, add the same five `export` commands to your shell startup file. For Bash, use `~/.bashrc`. Check the file first so that you do not add duplicate entries, then run `source ~/.bashrc`.
+To make the configuration available in future terminal sessions, add the same five `export` commands to your shell startup file. For Bash, use `~/.bashrc`. Check the file first to avoid duplicate entries. Then run `source ~/.bashrc`.
 {{% /notice %}}
 
 The SDK and NDK are now located at:
@@ -159,9 +159,9 @@ adb start-server
 adb devices
 ```
 
-Expected final state:
+The expected output is:
 
-```text
+```output
 10AFB40J6Q0031C    device
 ```
 
@@ -185,9 +185,9 @@ Then verify the relevant Android features:
 adb shell pm list features | grep -i vulkan
 ```
 
-Expected features include:
+The expected output is:
 
-```text
+```output
 feature:android.hardware.vulkan.compute
 feature:android.hardware.vulkan.level=1
 feature:android.hardware.vulkan.version=4206592
@@ -195,3 +195,7 @@ feature:android.software.vulkan.deqp.level=132711169
 ```
 
 `vulkan_renderengine: false` from SurfaceFlinger does not block application-side Vulkan compute. The more important signal is that the device advertises `android.hardware.vulkan.compute`.
+
+## What you've accomplished and what's next
+
+The Linux host and Android device are prepared. Next, install ExecuTorch and download the model.

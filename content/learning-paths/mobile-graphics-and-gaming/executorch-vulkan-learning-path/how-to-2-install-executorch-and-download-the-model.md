@@ -48,9 +48,9 @@ python -m pip install "torch==2.13.0+cpu" --index-url https://download.pytorch.o
 python -c "import torch; print(torch.__version__)"
 ```
 
-Expected output:
+The expected output is:
 
-```text
+```output
 2.13.0+cpu
 ```
 
@@ -121,5 +121,11 @@ The measured run used:
 - `tokenizer.model` at about 2.1 MB
 
 {{% notice Access errors %}}
-If the download returns `401 Unauthorized` or `403 Forbidden`, run `hf auth whoami` and confirm that you authenticated with the account approved for the gated repository. If access is still pending, return to the model page and check the request status.
+If the download returns `401 Unauthorized` or `403 Forbidden`, run `hf auth whoami` and confirm that you authenticated with the account approved for the gated repository.
+
+If access is still pending, return to the model page and check the request status.
 {{% /notice %}}
+
+## What you've accomplished and what's next
+
+The ExecuTorch source, Python environment, and model access are prepared. Next, export the Vulkan PTE.

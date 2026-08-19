@@ -1,10 +1,6 @@
 ---
 title: Run ExecuTorch Llama 3.2 1B Instruct on a Vivo X300 Pro with Vulkan
 
-draft: true
-cascade:
-    draft: true
-
 description: Learn how to export Llama 3.2 1B Instruct with ExecuTorch, build the Android Vulkan runtime, and run the model on a Vivo X300 Pro.
 
 minutes_to_complete: 60

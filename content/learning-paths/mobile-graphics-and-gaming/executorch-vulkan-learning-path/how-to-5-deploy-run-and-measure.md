@@ -1,6 +1,6 @@
 ---
-title: Deploy, run, and measure
-description: Push the runtime artifacts to the Android phone, run the model, and capture baseline performance output.
+title: Deploy and measure Llama 3.2 with ExecuTorch Vulkan on Android
+description: Deploy the ExecuTorch Vulkan runtime and Llama 3.2 model to an Android phone, then validate Vulkan use and capture on-device performance.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -63,7 +63,7 @@ In the output, you should be able to confirm performance metrics similar to:
 
 The runtime also emitted a `PyTorchObserver` summary with:
 
-```text
+```output
 prefill_token_per_sec = 44.586
 decode_token_per_sec = 29.7872
 ```
@@ -92,7 +92,7 @@ PID=$(adb shell pidof llama_main | tr -d '\r')
 adb shell "cat /proc/$PID/maps | grep -Ei 'vulkan|mali'"
 ```
 
-Seeing `libvulkan` and the Mali driver libraries confirms that the process loaded the Vulkan stack. 
+Seeing `libvulkan` and the Mali driver libraries confirms that the process loaded the Vulkan stack.
 
 {{% notice Stronger backend evidence %}}
 For stronger evidence, rebuild with tracing enabled:
@@ -107,6 +107,6 @@ Then capture ETDump data from the runner and inspect it with [ExecuTorch Inspect
 
 ## Wrap up
 
-You have built Llama 3.2 1B Instruct for the ExecuTorch Vulkan backend, compiled the standalone Android runner, deployed the required artifacts, and measured an on-device inference baseline. 
+You have built Llama 3.2 1B Instruct for the ExecuTorch Vulkan backend, compiled the standalone Android runner, deployed the required artifacts, and measured an on-device inference baseline.
 
 You can now repeat the measured run with different prompts and generation settings, using the same metrics to compare performance while keeping the model, device, and runtime configuration consistent.

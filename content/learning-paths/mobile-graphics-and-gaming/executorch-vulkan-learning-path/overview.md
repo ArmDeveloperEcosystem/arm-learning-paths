@@ -1,5 +1,5 @@
 ---
-title: Overview
+title: Understand the ExecuTorch Vulkan workflow on Android
 description: Review the target architecture, host responsibilities, and end-to-end flow for running ExecuTorch with Vulkan on Android.
 weight: 2
 
@@ -13,9 +13,9 @@ The goal is to run Meta Llama 3.2 1B Instruct directly on a Vivo X300 Pro with E
 
 The Linux host is used for:
 
-- model export
-- quantization
-- graph lowering and partitioning
+- Model export
+- Quantization
+- Graph lowering and partitioning
 - Android cross-compilation
 - ADB deployment
 
@@ -33,8 +33,8 @@ The Linux host does not need CUDA, ROCm, or a working Vulkan GPU.
 
 By the end of this Learning Path you will have:
 
-- a working ExecuTorch host environment
-- a Vulkan-enabled Llama `.pte` model
-- an Android `llama_main` binary
-- the model, tokenizer, and runner deployed under `/data/local/tmp/llama` on your Android device
-- a reproducible validation flow for checking that Vulkan is actually in use
+- A working ExecuTorch host environment
+- A Vulkan-enabled Llama `.pte` model
+- An Android `llama_main` binary
+- The model, tokenizer, and runner deployed under `/data/local/tmp/llama` on your Android device
+- A reproducible validation flow for checking that Vulkan is actually in use

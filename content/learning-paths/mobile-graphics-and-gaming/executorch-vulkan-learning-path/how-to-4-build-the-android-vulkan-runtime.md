@@ -65,7 +65,7 @@ cmake --build cmake-out-android-so \
   --config Release
 ```
 
-## Build the Android `llama_main` runner
+## Build the Android llama_main runner
 
 Build the example runner against the installed Android runtime:
 
@@ -92,8 +92,12 @@ Verify the output binary:
 file cmake-out-android-so/examples/models/llama/llama_main
 ```
 
-Expected shape:
+The expected output is:
 
-```text
+```output
 ELF 64-bit LSB pie executable, ARM aarch64, ... interpreter /system/bin/linker64
 ```
+
+## What you've accomplished and what's next
+
+The Android runtime and `llama_main` runner are built. Next, deploy the build artifacts.
