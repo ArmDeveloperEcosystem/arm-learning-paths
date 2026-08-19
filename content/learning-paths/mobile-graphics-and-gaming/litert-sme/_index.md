@@ -41,10 +41,10 @@ generated_summary_faq:
       Copy your LiteRT model file and two `benchmark_model` binaries to the device: one built with
       KleidiAI and SME2 enabled and one baseline build. Run both against the same model on the
       same device.
-  - question: How do I know if my Android device supports SME2?
+  - question: How do I check whether my Android device supports SME2?
     answer: >-
-      From an `adb` shell, inspect `/proc/cpuinfo` and look for an entry that indicates SME2 support.
-      If you don't see SME2 listed, use a device from the provided SME2-capable list.
+      From an `adb` shell, run `cat /proc/cpuinfo` and look for `sme2` in the `Features` line.
+      If it is present, the CPU supports SME2.
   - question: Which LiteRT operators are accelerated by SME2 through KleidiAI?
     answer: >-
       Only the subset of KleidiAI SME2 micro-kernels integrated into XNNPACK are accelerated.

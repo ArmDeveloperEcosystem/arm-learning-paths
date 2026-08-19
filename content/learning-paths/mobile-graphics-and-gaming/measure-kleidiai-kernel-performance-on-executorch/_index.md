@@ -45,11 +45,10 @@ generated_summary_faq:
     answer: >-
       Verify the device supports SME or SME2. Also confirm that you deploy the AArch64 ExecuTorch binaries and libraries produced
       by cross-compilation.
-  - question: Which configurations will make my operators use KleidiAI micro-kernels?
+  - question: Which Conv2d variants does the guide benchmark with KleidiAI?
     answer: >-
-      Use operator data types and quantization settings that match KleidiAI-supported paths in
-      XNNPACK. The benchmark models focus on fully connected and INT8 Conv2d (including 1×1) with
-      GEMM variants designed to exercise KleidiAI micro-kernels.
+      The guide benchmarks an INT8-quantized Conv2d variant using `pqs8_qc8w_gemm`. It also
+      benchmarks a FP32 pointwise (1×1) Conv2d variant using `pf32_gemm`.
   - question: Which profiling files do I use with the ExecuTorch Inspector API?
     answer: >-
       Model export creates an `ETRecord` file alongside the `.pte` model. `executor_runner` writes an

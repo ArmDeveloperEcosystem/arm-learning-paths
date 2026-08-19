@@ -53,10 +53,10 @@ generated_summary_faq:
       Confirm you're on AArch64 Linux and that the processor implements MTE (Armv8.5-A or Armv9-A).
       If the processor lacks MTE support, install `qemu-user` and run `qemu-aarch64 ./mte-example`
       to exercise the MTE behavior through emulation.
-  - question: Which memory errors does the example focus on?
+  - question: What invalid memory access does the example demonstrate?
     answer: >-
-      The example targets buffer overflow and use-after-free errors. These are common sources
-      of vulnerabilities that MTE is designed to detect.
+      The example writes beyond a 16-byte allocation granule at offset `0x10`. MTE detects the
+      tag mismatch and should generate an exception.
 # END generated_summary_faq
 
 author: Jason Andrews
