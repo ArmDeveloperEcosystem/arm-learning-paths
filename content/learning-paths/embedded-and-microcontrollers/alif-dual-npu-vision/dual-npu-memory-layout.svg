@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="690" viewBox="0 0 1200 690" role="img" aria-labelledby="title desc">
+  <title id="title">Memory layout for the dual-NPU live vision application</title>
+  <desc id="desc">Four columns show MRAM, high-performance Cortex-M55 DTCM, shared SRAM0 and shared SRAM1. MRAM stores the two PTE models, startup image and Zephyr firmware. DTCM stores the U55 pools and runtime state. SRAM0 stores the display framebuffer and video heap. SRAM1 stores U85 command and weight mirrors and U85 allocator pools.</desc>
+  <defs>
+    <style>
+      .title { font: 700 28px Arial, sans-serif; fill: #17252a; }
+      .heading { font: 700 18px Arial, sans-serif; fill: #17252a; }
+      .label { font: 700 14px Arial, sans-serif; fill: #17252a; }
+      .body { font: 13px Arial, sans-serif; fill: #263238; }
+      .small { font: 12px Arial, sans-serif; fill: #37474f; }
+      .region { stroke: #263238; stroke-width: 2; }
+    </style>
+  </defs>
+  <rect width="1200" height="690" fill="#ffffff"/>
+  <text x="600" y="40" text-anchor="middle" class="title">Dual-NPU application memory layout</text>
+
+  <text x="160" y="82" text-anchor="middle" class="heading">MRAM</text>
+  <text x="160" y="103" text-anchor="middle" class="small">persistent across reset</text>
+  <rect x="35" y="120" width="250" height="500" fill="#fff8e1" class="region"/>
+  <rect x="35" y="120" width="250" height="110" fill="#ffe082" class="region"/>
+  <text x="160" y="150" text-anchor="middle" class="label">Model payload, 959,286 bytes</text>
+  <text x="50" y="178" class="body">0x80008000  U85 VWW PTE</text>
+  <text x="50" y="200" class="body">0x8007CD60  U55 YOLO PTE</text>
+  <text x="50" y="222" class="body">0x800D7300  startup BMP</text>
+  <rect x="35" y="350" width="250" height="82" fill="#ffcc80" class="region"/>
+  <text x="160" y="382" text-anchor="middle" class="label">Zephyr firmware</text>
+  <text x="160" y="406" text-anchor="middle" class="body">0x80200000, RTSS-HP</text>
+  <text x="160" y="590" text-anchor="middle" class="small">unused gaps are not to scale</text>
+
+  <text x="455" y="82" text-anchor="middle" class="heading">HP DTCM</text>
+  <text x="455" y="103" text-anchor="middle" class="small">0x20000000, 1 MiB private RAM</text>
+  <rect x="330" y="120" width="250" height="500" fill="#e3f2fd" class="region"/>
+  <rect x="330" y="120" width="250" height="190" fill="#90caf9" class="region"/>
+  <text x="455" y="152" text-anchor="middle" class="label">U55 inference state</text>
+  <text x="350" y="181" class="body">384 KiB temporary pool</text>
+  <text x="350" y="205" class="body">192 KiB method pool</text>
+  <text x="350" y="229" class="body">4 KiB metadata pool</text>
+  <text x="350" y="253" class="body">1.5 KiB fast scratch</text>
+  <rect x="330" y="310" width="250" height="145" fill="#bbdefb" class="region"/>
+  <text x="455" y="342" text-anchor="middle" class="label">Zephyr and ExecuTorch</text>
+  <text x="350" y="371" class="body">worker stacks and semaphores</text>
+  <text x="350" y="395" class="body">two driver objects and IRQ state</text>
+  <text x="350" y="419" class="body">U85 metadata and fast scratch</text>
+  <text x="455" y="590" text-anchor="middle" class="small">CPU-local addresses require global aliases</text>
+
+  <text x="750" y="82" text-anchor="middle" class="heading">Shared SRAM0</text>
+  <text x="750" y="103" text-anchor="middle" class="small">0x02000000-0x023FFFFF, 4 MiB</text>
+  <rect x="625" y="120" width="250" height="500" fill="#e8f5e9" class="region"/>
+  <rect x="625" y="120" width="250" height="110" fill="#81c784" class="region"/>
+  <text x="750" y="153" text-anchor="middle" class="label">MW405 framebuffer</text>
+  <text x="750" y="178" text-anchor="middle" class="body">0x02000000, 768,000 bytes</text>
+  <text x="750" y="201" text-anchor="middle" class="small">480 x 800 RGB565</text>
+  <rect x="625" y="230" width="250" height="330" fill="#a5d6a7" class="region"/>
+  <text x="750" y="263" text-anchor="middle" class="label">Zephyr video-buffer heap</text>
+  <text x="750" y="288" text-anchor="middle" class="body">0x020BB800-0x023D4F4F</text>
+  <text x="750" y="312" text-anchor="middle" class="body">3,250,000 bytes reserved</text>
+  <text x="750" y="343" text-anchor="middle" class="small">five RGB888 capture buffers</text>
+  <text x="750" y="365" text-anchor="middle" class="small">192 x 192 x 3 bytes each</text>
+  <text x="750" y="590" text-anchor="middle" class="small">visible to CPU and display/video DMA</text>
+
+  <text x="1045" y="82" text-anchor="middle" class="heading">Shared SRAM1</text>
+  <text x="1045" y="103" text-anchor="middle" class="small">0x02400000-0x027FFFFF, 4 MiB</text>
+  <rect x="920" y="120" width="250" height="500" fill="#f3e5f5" class="region"/>
+  <rect x="920" y="120" width="250" height="90" fill="#ce93d8" class="region"/>
+  <text x="1045" y="150" text-anchor="middle" class="label">U85 weight mirror</text>
+  <text x="1045" y="175" text-anchor="middle" class="body">0x02400000, 512 KiB</text>
+  <rect x="920" y="210" width="250" height="55" fill="#ba68c8" class="region"/>
+  <text x="1045" y="234" text-anchor="middle" class="label">command mirror, 16 KiB</text>
+  <text x="1045" y="253" text-anchor="middle" class="small">0x02480000</text>
+  <rect x="920" y="265" width="250" height="230" fill="#e1bee7" class="region"/>
+  <text x="1045" y="298" text-anchor="middle" class="label">U85 temporary pool</text>
+  <text x="1045" y="323" text-anchor="middle" class="body">0x02484000, 2 MiB</text>
+  <rect x="920" y="495" width="250" height="70" fill="#d1c4e9" class="region"/>
+  <text x="1045" y="522" text-anchor="middle" class="label">U85 method pool</text>
+  <text x="1045" y="546" text-anchor="middle" class="body">0x02684000, 256 KiB</text>
+  <text x="1045" y="590" text-anchor="middle" class="small">NPU-visible command, weight and arena data</text>
+
+  <text x="600" y="660" text-anchor="middle" class="small">Addresses and sizes are taken from the validated build; linked DTCM symbol addresses can move when the application changes.</text>
+</svg>
