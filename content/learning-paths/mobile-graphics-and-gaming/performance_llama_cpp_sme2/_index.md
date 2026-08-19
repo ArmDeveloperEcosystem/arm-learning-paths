@@ -14,7 +14,7 @@ learning_objectives:
 prerequisites:
     - Knowledge of KleidiAI and SME2
     - A Linux host machine (x86_64 or aarch64) for building `llama.cpp` with the Arm GNU Toolchain
-    - Git, CMake, and Android Debug Bridge (ADB) installed on your host machine
+    - Git, CMake, and Android Debug Bridge (`adb`) installed on your host machine
     - An Android device with Arm SME2 support for running and profiling the executable
 
 # START generated_summary_faq
@@ -33,7 +33,7 @@ generated_summary_faq:
   faq_source_hash: 9e7bf9a27908bce1b6c3af5262ecc9b529426b8fdb575af08d8683389ef5c7e7
   summary: >-
     You'll build `llama.cpp` with KleidiAI and SME2, then measure LLM inference on Android. First, you'll cross-compile
-    `llama-cli` for `aarch64`, deploy it with ADB, and run the Llama-3.2-3B-Instruct-Q4_0 model with
+    `llama-cli` for `aarch64`, deploy it with `adb`, and run the Llama-3.2-3B-Instruct-Q4_0 model with
     SME2 enabled and disabled. Then, you'll trace acceleration through `ggml-cpu` into KleidiAI, and verify that
     SME2 microkernels are active before comparing the reported performance.
   faqs:
