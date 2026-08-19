@@ -44,7 +44,7 @@ generated_summary_faq:
   - question: Why do I need a Linux host to build llama.cpp?
     answer: >-
       The build uses the Linux-hosted Arm GNU Toolchain. If you work on macOS or Windows, run the
-      commands in a Linux VM, container, or development machine.
+      commands in a Linux virtual machine, container, or development machine.
   - question: What files must be on the Android device before measuring performance?
     answer: >-
       Place the built `llama-cli` executable and the `Llama-3.2-3B-Instruct-Q4_0.gguf` model on the
