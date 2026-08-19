@@ -317,9 +317,10 @@ These Android phones support SME2 natively.
 
 | Device                              | Release Date | Chip Options              |
 |-------------------------------------|--------------|---------------------------|
+| Google Pixel 11                  | 2026         | Google Tensor G6 featuring a 7-core Arm C1 CPU cluster
+| Samsung Galaxy S26                  | 2026         | Exynos 2600 variant |
 | Vivo X300                           | 2025         | MediaTek Dimensity 9500 featuring an 8-core Arm C1 CPU cluster and Arm G1-Ultra GPU |
 | OPPO Find X9                        | 2025         | MediaTek Dimensity 9500 featuring an 8-core Arm C1 CPU cluster and Arm G1-Ultra GPU |
-| Samsung Galaxy S26                  | 2026         | Exynos 2600 variant |
 
 These Apple devices support SME2 natively.
 
