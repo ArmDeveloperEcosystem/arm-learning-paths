@@ -118,7 +118,7 @@ export PATH="$ANDROID_HOME/cmake/3.31.6/bin:$PATH"
 These variables remain set until you close the terminal.
 
 {{% notice Note %}}
-To make the configuration available in future terminal sessions, add the same five `export` commands to your shell startup file. For Bash, use `~/.bashrc`. Check the file first to avoid duplicate entries. Then run `source ~/.bashrc`.
+To make the configuration available in future terminal sessions, add the same five `export` commands to your shell startup file. For Bash, use `~/.bashrc`. Check the file first to avoid duplicate entries. Then, run `source ~/.bashrc`.
 {{% /notice %}}
 
 The SDK and NDK are now located at:
