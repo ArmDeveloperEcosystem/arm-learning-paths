@@ -41,8 +41,7 @@ The important requirement is that `which glslc` resolves to the host SDK, not to
 From the ExecuTorch checkout:
 
 ```bash
-cd ~/executorch
-source .venv/bin/activate
+cd $HOME/executorch
 rm -rf cmake-out-android-so
 
 cmake . \
@@ -65,15 +64,6 @@ cmake --build cmake-out-android-so \
   --target install \
   --config Release
 ```
-
-`EXECUTORCH_BUILD_LLAMA_JNI=OFF` is intentional. The first attempt failed in the JNI target with:
-
-```text
-ld.lld: error: unable to find library -lextension_asr_runner
-clang++: error: linker command failed with exit code 1
-```
-
-That failure came from `executorch_jni`, not from the Vulkan runtime itself. For the standalone `adb` plus `llama_main` flow, disabling JNI is the simpler fix.
 
 ## Build the Android `llama_main` runner
 
