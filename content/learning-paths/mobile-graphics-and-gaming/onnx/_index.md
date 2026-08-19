@@ -47,7 +47,7 @@ generated_summary_faq:
     answer: >-
       You'll have an ONNX model file produced by the Dynamo-based exporter and your original
       PyTorch checkpoint. Use both to run inference and compare results across frameworks.
-  - question: What should I check if ONNX Runtime predictions do not match PyTorch?
+  - question: What should I check if ONNX Runtime predictions don't match PyTorch?
     answer: >-
       Confirm that preprocessing matches training: 28×28 grayscale inputs and consistent label
       mapping (0 = blank, 1–9 = digits). Re-run the validation and compare predictions and the

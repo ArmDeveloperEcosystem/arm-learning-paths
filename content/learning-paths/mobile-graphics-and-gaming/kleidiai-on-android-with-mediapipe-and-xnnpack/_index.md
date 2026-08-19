@@ -49,10 +49,11 @@ generated_summary_faq:
       Build the target `mediapipe/tasks/cc/genai/inference/c:llm_inference_engine_cpu_main` with
       `--config=android_arm64` and `--define=xnn_enable_arm_i8mm=true`. These options select the Android
       `arm64` build and enable the i8mm path integrated through XNNPACK.
-  - question: How do I build a comparison binary without i8mm?
+  - question: How do I build `llm_test` with i8mm but without KleidiAI?
     answer: >-
-      Re-run the same Bazel build for the target but omit `--define=xnn_enable_arm_i8mm=true`. Use
-      the two binaries with and without the flag for the benchmarking step.
+      Build `llm_test` with `--define=xnn_enable_arm_i8mm=true` and
+      `--define=xnn_enable_kleidiai=false`. This keeps i8mm enabled while disabling KleidiAI micro-kernels
+      for the comparison run.
   - question: What result should I expect from the benchmark runs?
     answer: >-
       You should obtain measurements for both builds to compare the effect of enabling i8mm and

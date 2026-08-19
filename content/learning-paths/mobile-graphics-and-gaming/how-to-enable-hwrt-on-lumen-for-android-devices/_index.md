@@ -29,9 +29,9 @@ generated_summary_faq:
   faq_generated_at: '2026-08-17T22:04:33Z'
   faq_source_hash: edbabf8c8f6e7feb8df5a6e818febd4027876aca00e33215b20b19c71d285c0b
   summary: >-
-    You'll enable Unreal Engine Lumen with hardware ray tracing on supported Android devices. You'll configure
+    You'll enable Unreal Engine Lumen with hardware ray tracing on supported Android devices. First, you'll configure
     Lumen for global illumination and reflections, enable the SM5 shader format through Vulkan Desktop,
-    and use deferred shading. Then, you'll learn to enable Lumen in your project and by creating a Post Process Volume, and configure setting to use ray tracing.
+    and use deferred shading. Then, you'll learn to enable Lumen in your project and by creating a Post Process Volume, and configure settings to use ray tracing.
   faqs:
   - question: Do I need to set Lumen for both Global Illumination and Reflections?
     answer: >-

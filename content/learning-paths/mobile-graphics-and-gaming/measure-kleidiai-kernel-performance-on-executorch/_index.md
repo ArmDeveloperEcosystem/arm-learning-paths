@@ -50,18 +50,14 @@ generated_summary_faq:
       Use operator data types and quantization settings that match KleidiAI-supported paths in
       XNNPACK. The benchmark models focus on fully connected and INT8 Conv2d (including 1×1) with
       GEMM variants designed to exercise KleidiAI micro-kernels.
-  - question: What output should I expect from executor_runner, and how do I confirm it captured
-      profiling data?
+  - question: Which profiling files do I use with the ExecuTorch Inspector API?
     answer: >-
-      `executor_runner` produces performance measurements such as throughput and latency and writes
-      `ETDump` and `ETRecord` profiling data. Use the ExecuTorch Inspector API to open those files and
-      verify which kernels executed and their behavior.
-  - question: I tested multiple GEMM variants but see little difference. What should I review
-      before rerunning?
+      Model export creates an `ETRecord` file alongside the `.pte` model. `executor_runner` writes an
+      `ETDump` file. Use the matching files with the ExecuTorch Inspector API to analyze kernel behavior.
+  - question: Which GEMM benchmark variants does the guide export?
     answer: >-
-      Confirm you are running on hardware that supports SME or SME2 and that your build enables XNNPACK
-      and KleidiAI with SME or SME2. Ensure the models are quantized and use operator configurations
-      that map to KleidiAI micro-kernels, then re-run and compare `ETDump` traces.
+      The guide exports FP16, FP32, INT8, and INT4 linear-model variants. It also exports FP16 and FP32
+      matrix-multiply models for comparison.
 # END generated_summary_faq
 
 author: Qixiang Xu

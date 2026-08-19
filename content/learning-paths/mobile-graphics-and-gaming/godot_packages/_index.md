@@ -43,7 +43,7 @@ generated_summary_faq:
   - question: How do I add a point-in-time annotation?
     answer: >-
       Create a PerformanceStudio instance and call `marker("Game Started")` to emit a timestamped
-      label. This appears in the Streamline timeline for correlation with performance data.
+      label. This label appears in the Streamline timeline for correlation with performance data.
   - question: How do I define a region, and where will it appear in reports?
     answer: >-
       Emit a pair of markers prefixed with `Region Start <name>` and `Region End <name>` around
