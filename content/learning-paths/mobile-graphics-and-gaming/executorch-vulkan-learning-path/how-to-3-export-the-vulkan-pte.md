@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Configure export variables
 
-From the ExecuTorch checkout:
+From the ExecuTorch checkout, configure the following variables:
 
 ```bash
 cd $HOME/executorch
@@ -41,17 +41,17 @@ python -m examples.models.llama.export_llama \
   --output_name "$MODEL_DIR/Llama3.2-1B-Instruct_vulkan_8da4w_g64_c2048.pte"
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 Llama3.2-1B-Instruct_vulkan_8da4w_g64_c2048.pte
 ```
 
-The exported file was about `1.8 GB`.
+The exported file is about `1.8 GB`.
 
-## Understand the export choices
+### Understand the export choices
 
-These options matter for reproducing the measured run:
+The following options matter for reproducing the measured run:
 
 - `8da4w` uses dynamic 8-bit activations and 4-bit weights on the relevant quantized paths.
 - `-G 64` sets the weight group size to `64`.
@@ -63,4 +63,6 @@ If you change the quantization mode, group size, or context length, expect file 
 
 ## What you've accomplished and what's next
 
-The Vulkan-enabled PTE is exported. Next, build the Android Vulkan runtime.
+You've now exported the Vulkan-enabled PTE. 
+
+Next, you'll build the Android Vulkan runtime.

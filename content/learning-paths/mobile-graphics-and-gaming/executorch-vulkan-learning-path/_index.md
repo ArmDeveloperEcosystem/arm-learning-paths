@@ -20,6 +20,10 @@ prerequisites:
 
 author: Ash Naik
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 test_maintenance: false
 
 skilllevels: Advanced

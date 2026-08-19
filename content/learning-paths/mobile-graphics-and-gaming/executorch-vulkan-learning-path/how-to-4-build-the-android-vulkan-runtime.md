@@ -34,11 +34,11 @@ glslc --version
 echo "$VULKAN_SDK"
 ```
 
-The important requirement is that `which glslc` resolves to the host SDK, not to an incompatible Android NDK copy.
+Ensure that `which glslc` resolves to the host SDK, not to an incompatible Android NDK copy.
 
 ## Configure and build ExecuTorch for Android plus Vulkan
 
-From the ExecuTorch checkout:
+From the ExecuTorch checkout, run the following commands:
 
 ```bash
 cd $HOME/executorch
@@ -92,7 +92,7 @@ Verify the output binary:
 file cmake-out-android-so/examples/models/llama/llama_main
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 ELF 64-bit LSB pie executable, ARM aarch64, ... interpreter /system/bin/linker64
@@ -100,4 +100,6 @@ ELF 64-bit LSB pie executable, ARM aarch64, ... interpreter /system/bin/linker64
 
 ## What you've accomplished and what's next
 
-The Android runtime and `llama_main` runner are built. Next, deploy the build artifacts.
+You've now built the Android runtime and `llama_main` runner.
+
+Next, you'll deploy the build artifacts on the Android device.

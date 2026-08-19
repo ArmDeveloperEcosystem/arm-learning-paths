@@ -6,10 +6,25 @@ weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Linux host architecture
 
-## Install Android SDK and NDK
+You'll use a Linux host for the following:
 
-You can install the Android tools entirely from the Linux command line. Use Google's [Android command-line tools](https://developer.android.com/studio#command-line-tools-only) and [`sdkmanager`](https://developer.android.com/tools/sdkmanager) to install these components:
+- Model export
+- Quantization
+- Graph lowering and partitioning
+- Android cross-compilation
+- `adb` deployment
+
+The Linux host doesn't need CUDA, ROCm, or a working Vulkan GPU.
+
+The following diagram shows what you'll run on the Linux host:
+
+![Diagram showing the Linux host architecture for the ExecuTorch Vulkan workflow, including PyTorch and ExecuTorch 1.4, export and quantization stages, and the generated Vulkan-enabled program artifact#center](linux-host-architecture.png "Linux host architecture for the ExecuTorch Vulkan workflow")
+
+## Install Android SDK and NDK on the host
+
+You can install the Android tools entirely from the Linux command line. Use Google's [Android command-line tools](https://developer.android.com/studio#command-line-tools-only) and [`sdkmanager`](https://developer.android.com/tools/sdkmanager) to install the following components:
 
 - Android SDK Platform-Tools
 - Android SDK Command-line Tools
@@ -80,8 +95,8 @@ sdkmanager --sdk_root="$ANDROID_HOME" \
 
 The NDK supplies the Android cross-compilation toolchain. The Android SDK CMake package also includes Ninja and keeps both build tools under the SDK directory.
 
-{{% notice Android Studio alternative %}}
-You can instead use Android Studio's SDK Manager to install **Android SDK Platform-Tools**, **Android SDK Command-line Tools**, **CMake 3.31.6**, and **NDK (Side by side) 28.2.13676358**.
+{{% notice Note %}}
+You can instead use Android Studio's SDK Manager to install Android SDK Platform-Tools, Android SDK Command-line Tools, Make 3.31.6**, and NDK (Side by side) 28.2.13676358.
 {{% /notice %}}
 
 ## Set Android environment variables
@@ -98,7 +113,7 @@ export PATH="$ANDROID_HOME/cmake/3.31.6/bin:$PATH"
 
 These variables remain set until you close the terminal.
 
-{{% notice Optional persistence %}}
+{{% notice Note %}}
 To make the configuration available in future terminal sessions, add the same five `export` commands to your shell startup file. For Bash, use `~/.bashrc`. Check the file first to avoid duplicate entries. Then run `source ~/.bashrc`.
 {{% /notice %}}
 
@@ -121,7 +136,7 @@ test -f "$ANDROID_NDK/NOTICE" && echo "NDK OK"
 test -f "$ANDROID_NDK/build/cmake/android.toolchain.cmake" && echo "Toolchain OK"
 ```
 
-## Connect the Vivo over ADB
+## Connect to the Android device over ADB
 
 If `adb devices` shows `no permissions`, add the user to `plugdev`, install the generic Android udev helpers, and reload the rules:
 
@@ -139,7 +154,7 @@ The tested device reported this USB ID:
 Bus 002 Device 002: ID 2d95:6001 vivo vivo X300 Pro
 ```
 
-Add a Vivo-specific rule if the default rules are not enough:
+If the default rules aren't enough, add a rule specific to your device. The following rule is specific to Vivo:
 
 ```bash
 sudo tee /etc/udev/rules.d/51-vivo-android.rules >/dev/null <<'EOF'
@@ -151,7 +166,7 @@ sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
-Then restart ADB and accept the RSA prompt on the phone:
+Then, restart `adb` and accept the RSA prompt on the phone:
 
 ```bash
 adb kill-server
@@ -159,13 +174,13 @@ adb start-server
 adb devices
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 10AFB40J6Q0031C    device
 ```
 
-## Verify Vulkan support on the phone
+## Verify Vulkan support on the Android device
 
 Check the Vulkan implementation:
 
@@ -173,19 +188,19 @@ Check the Vulkan implementation:
 adb shell getprop ro.hardware.vulkan
 ```
 
-The measured device returned:
+The output is similar to:
 
 ```text
 mali
 ```
 
-Then verify the relevant Android features:
+Then, verify the relevant Android features:
 
 ```bash
 adb shell pm list features | grep -i vulkan
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 feature:android.hardware.vulkan.compute
@@ -198,4 +213,6 @@ feature:android.software.vulkan.deqp.level=132711169
 
 ## What you've accomplished and what's next
 
-The Linux host and Android device are prepared. Next, install ExecuTorch and download the model.
+You've now prepared the Linux host and connected to the Android device. 
+
+Next, you'll install ExecuTorch and download the model on the host.
