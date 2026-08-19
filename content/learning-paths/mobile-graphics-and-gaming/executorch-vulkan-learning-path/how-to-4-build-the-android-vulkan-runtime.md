@@ -7,7 +7,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Install the host Vulkan SDK
+## Install the Vulkan SDK on the Linux host
 
 The Android Vulkan build needs a host `glslc` to compile GLSL shaders to SPIR-V.
 
