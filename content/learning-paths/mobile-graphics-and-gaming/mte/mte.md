@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build an Arm Memory Tagging Extension example on AArch64 Linux"
+title: Create and compile an Arm MTE example on AArch64 Linux
 description: "Create and compile a C example on AArch64 Linux to prepare for exploring Arm Memory Tagging Extension (MTE)."
 
 weight: 2 # 1 is first, 2 is second, etc.
@@ -9,29 +9,29 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Introduction
+## What Arm MTE is
 
 The Arm Memory Tagging Extension (MTE) is a security feature built into Armv8.5-A and Armv9-A processors. MTE detects buffer overflow errors and use-after-free errors in software. These memory safety issues are the primary source of vulnerabilities.
 
-To learn more about MTE, read the article [Memory safety: How Arm Memory Tagging Extension addresses this industry-wide security challenge](https://www.arm.com/blogs/blueprint/memory-safety-arm-memory-tagging-extension).
-
 MTE is helpful for many types of software. It improves the Linux kernel as well as Linux and Android applications.
 
-If you have a recent AArch64 Linux machine, you can run a small application to see how it works.
+To learn more about MTE, read the article [Memory safety: How Arm Memory Tagging Extension addresses this industry-wide security challenge](https://www.arm.com/blogs/blueprint/memory-safety-arm-memory-tagging-extension).
 
-Hardware availability for MTE is limited, but you can run the example application using [QEMU](https://www.qemu.org/).
-
-The example uses Ubuntu 22.04, but other recent versions of Linux can work.
+The example uses Ubuntu 22.04. You can use other recent versions of Linux.
 
 ## Before you begin
 
-Install the metapackage that includes software tools for building the example C program:
+Ensure you have an AArch64 Linux machine.
+
+On the machine, install the metapackage that includes software tools for building the example C program:
 
 ```console
 sudo apt install build-essential -y
 ```
 
-Install `qemu-user` to run the example on processors which do not support MTE:
+Hardware availability for MTE is limited. If your processor doesn't support MTE, you can run the example application using [QEMU](https://www.qemu.org/). 
+
+Install `qemu-user` if your processor doesn't support MTE:
 
 ```console
 sudo apt install qemu-user -y
@@ -50,6 +50,8 @@ The code demonstrates how to:
 - Generate a random tag and use it for the lock on the memory and the key on the pointer
 - Access memory with the generated tag
 - Access memory beyond the 16-byte granule and confirm MTE detects a mismatch
+
+To create and build the example, follow these steps:
 
 1. Use a text editor to copy and paste the following C code into a file named `mte-example.c`:
 
@@ -194,6 +196,8 @@ gcc mte-example.c -o mte-example -march=armv8.5-a+memtag
 
 The executable `mte-example` is now ready to run.
 
-You have created and compiled the `mte-example` executable.
+## What you've accomplished and what's next
 
-Next, run the executable to observe the example's behavior.
+You've created and compiled the `mte-example` executable.
+
+Next, you'll run the executable to observe the example's behavior.

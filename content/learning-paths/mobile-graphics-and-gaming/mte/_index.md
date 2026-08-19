@@ -1,10 +1,10 @@
 ---
-title: Explore Arm Memory Tagging Extension with an example program
+title: Explore Arm Memory Tagging Extension with an example C program
 description: Learn how to run an example C program on AArch64 Linux to gain an introductory understanding of the Arm Memory Tagging Extension (MTE).
 
 minutes_to_complete: 20
 
-who_is_this_for: This is an introductory topic for developers who want to gain some experience with the Arm Memory Tagging Extension (MTE).
+who_is_this_for: This is an introductory topic for developers who want to gain experience with the Arm Memory Tagging Extension (MTE).
 
 learning_objectives:
     - Build an MTE-enabled C program on AArch64 Linux
@@ -12,7 +12,7 @@ learning_objectives:
     - Use QEMU to run the example when MTE hardware is unavailable
 
 prerequisites:
-    - Use an AArch64 Linux development machine. You can also use a cloud instance; refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+    - An AArch64 Linux development machine. You can also use a cloud instance. For more information, see the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
 
 # START generated_summary_faq
 generated_summary_faq:
