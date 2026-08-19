@@ -8,6 +8,8 @@ layout: learningpathall
 ---
 ## Linux host architecture
 
+You'll run Meta Llama 3.2 1B Instruct directly on a Vivo X300 Pro or similar Android phone with ExecuTorch, using the phone GPU through the Vulkan backend.
+
 You'll use a Linux host for the following:
 
 - Model export
@@ -35,7 +37,7 @@ If you already installed these components with Android Studio, skip to [Set Andr
 
 ### Install the command-line tools
 
-Install the host packages needed:
+Install the host packages:
 
 ```bash
 sudo apt update
@@ -66,7 +68,9 @@ printf '%s  %s\n' \
   "$ANDROID_CLI_TOOLS_ARCHIVE" | sha256sum --check
 ```
 
-The checksum command should report `OK`. Extract the tools into the directory layout expected by `sdkmanager`:
+The checksum command should report `OK`. 
+
+Extract the tools into the directory layout expected by `sdkmanager`:
 
 ```bash
 unzip -q "$ANDROID_CLI_TOOLS_ARCHIVE" -d "$ANDROID_CLI_TOOLS_TMP"
@@ -84,7 +88,7 @@ Review and accept the Android SDK licenses:
 sdkmanager --sdk_root="$ANDROID_HOME" --licenses
 ```
 
-Install the package versions used by this Learning Path:
+Install the package versions that you'll use:
 
 ```bash
 sdkmanager --sdk_root="$ANDROID_HOME" \
@@ -96,7 +100,7 @@ sdkmanager --sdk_root="$ANDROID_HOME" \
 The NDK supplies the Android cross-compilation toolchain. The Android SDK CMake package also includes Ninja and keeps both build tools under the SDK directory.
 
 {{% notice Note %}}
-You can instead use Android Studio's SDK Manager to install Android SDK Platform-Tools, Android SDK Command-line Tools, Make 3.31.6**, and NDK (Side by side) 28.2.13676358.
+You can instead use Android Studio's SDK Manager to install Android SDK Platform-Tools, Android SDK Command-line Tools, Make 3.31.6, and NDK (Side by side) 28.2.13676358.
 {{% /notice %}}
 
 ## Set Android environment variables
@@ -209,7 +213,9 @@ feature:android.hardware.vulkan.version=4206592
 feature:android.software.vulkan.deqp.level=132711169
 ```
 
-`vulkan_renderengine: false` from SurfaceFlinger does not block application-side Vulkan compute. The more important signal is that the device advertises `android.hardware.vulkan.compute`.
+Ensure that the device advertises `android.hardware.vulkan.compute`.
+
+`vulkan_renderengine: false` from SurfaceFlinger doesn't block application-side Vulkan compute. 
 
 ## What you've accomplished and what's next
 

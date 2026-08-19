@@ -49,8 +49,6 @@ Llama3.2-1B-Instruct_vulkan_8da4w_g64_c2048.pte
 
 The exported file is about `1.8 GB`.
 
-### Understand the export choices
-
 The following options matter for reproducing the measured run:
 
 - `8da4w` uses dynamic 8-bit activations and 4-bit weights on the relevant quantized paths.

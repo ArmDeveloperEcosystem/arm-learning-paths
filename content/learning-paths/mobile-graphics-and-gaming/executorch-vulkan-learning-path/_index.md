@@ -52,7 +52,7 @@ generated_summary_faq:
   - question: How large is the exported Vulkan .pte file?
     answer: >-
       The exported Vulkan `.pte` file is about 1.8 GB.
-  - question: How do I verify the Android Vulkan build can find `glslc`?
+  - question: How do I verify the Android Vulkan build can find glslc?
     answer: >-
       Install the LunarG Vulkan SDK on the host and source its `setup-env.sh` script. Run
       `which glslc` and `glslc --version` to confirm that the compiler is available to the build.

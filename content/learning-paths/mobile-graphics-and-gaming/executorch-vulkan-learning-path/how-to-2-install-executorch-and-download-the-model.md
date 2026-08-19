@@ -34,7 +34,9 @@ export CMAKE_BUILD_PARALLEL_LEVEL=2
 
 ## Fix the PyTorch version mismatch
 
-On the tested `release/1.4` branch, a host environment with PyTorch `2.14.0+cpu` broke the build with:
+Always verify `torch.__version__` before you start a long native build.
+
+If you build the host envionment with PyTorch `2.14.0+cpu` on the `release/1.4` branch, the build breaks with the following message:
 
 ```text
 ATen/core/Tensor.h:70:37: error: 'C10_LIFETIMEBOUND' does not name a type
@@ -61,8 +63,6 @@ python install_executorch.py --clean
 export CMAKE_BUILD_PARALLEL_LEVEL=2
 ./install_executorch.sh --use-pt-pinned-commit
 ```
-
-The important lesson is to verify `torch.__version__` before you start a long native build.
 
 ## Request access to Llama 3.2 1B Instruct
 
@@ -114,7 +114,7 @@ test -f ~/Llama-3.2-1B-Instruct/original/params.json && echo "Parameters OK"
 test -f ~/Llama-3.2-1B-Instruct/original/tokenizer.model && echo "Tokenizer OK"
 ```
 
-The measured run used:
+The example measured run used:
 
 - `consolidated.00.pth` at about 2.4 GB
 - `params.json`
