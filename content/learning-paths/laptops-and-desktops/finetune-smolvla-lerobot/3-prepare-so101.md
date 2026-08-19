@@ -121,7 +121,7 @@ Open the images in `outputs/captured_images/` and match each `Id` to its view.
 
 | Gripper camera view | Workspace camera view |
 | --- | --- |
-| ![LeRobot camera-discovery frame showing the orange gripper tips and pickup surface. Use this view for the `gripper_cam` role.#center](images/3-lerobot-gripper-camera.png "Gripper camera role") | ![LeRobot camera-discovery frame showing the follower, vial, yellow rack, and full range of arm movement. Use this view for the `workspace_cam` role.#center](images/3-lerobot-workspace-camera.png "Workspace camera role") |
+| ![LeRobot camera-discovery frame showing the orange gripper tips and pickup surface. Use this view for the `gripper_cam` role.#center](images/3-lerobot-gripper-camera.png "Gripper camera view") | ![LeRobot camera-discovery frame showing the follower, vial, yellow rack, and full range of arm movement. Use this view for the `workspace_cam` role.#center](images/3-lerobot-workspace-camera.png "Workspace camera view") |
 
 Camera numbers and device paths can differ on your host. Use each camera's `Id` value, not `Camera #0` or `Camera #1`. Assign the camera showing the gripper to `GRIPPER_CAMERA_ID`, and assign the camera covering the complete task to `WORKSPACE_CAMERA_ID`.
 

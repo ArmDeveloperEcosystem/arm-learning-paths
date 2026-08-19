@@ -7,7 +7,7 @@ cascade:
 
 description: Record SO-101 demonstrations, fine-tune SmolVLA on an Arm-based NVIDIA DGX Spark, and evaluate the model with LeRobot.
 
-minutes_to_complete: 120
+minutes_to_complete: 1920
 
 who_is_this_for: This is an advanced topic for robotics and AI developers who want to train a vision-language-action model from their own SO-101 demonstrations.
 
