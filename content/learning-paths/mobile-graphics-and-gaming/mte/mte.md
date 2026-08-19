@@ -1,6 +1,6 @@
 ---
 # User change
-title: Create and compile an Arm MTE example on AArch64 Linux
+title: Create and compile an example C application to explore Arm MTE 
 description: "Create and compile a C example on AArch64 Linux to prepare for exploring Arm Memory Tagging Extension (MTE)."
 
 weight: 2 # 1 is first, 2 is second, etc.
