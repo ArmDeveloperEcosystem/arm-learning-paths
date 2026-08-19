@@ -35,7 +35,7 @@ generated_summary_faq:
     You'll build ONNX Runtime for Android with KleidiAI SME2 microkernels and profile a model on
     a device. First, you'll cross-compile with the Android NDK, deploy the binaries and model, and use
     `onnxruntime_perf_test` to capture baseline and SME2 results. Then, you'll compare KleidiAI dispatch,
-    operator execution and end-to-end inference time with ResNet-50 v2.
+    operator execution, and end-to-end inference time with ResNet-50 v2.
   faqs:
   - question: How do I confirm that KleidiAI is used at runtime?
     answer: >-
