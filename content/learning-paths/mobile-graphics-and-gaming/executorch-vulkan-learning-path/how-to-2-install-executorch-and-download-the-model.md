@@ -1,5 +1,5 @@
 ---
-title: Install ExecuTorch and download the model
+title: Install ExecuTorch and download the model on the Linux host
 description: Clone the ExecuTorch release branch, create the Python environment, and fetch the gated Llama 3.2 model files.
 weight: 4
 
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Clone ExecuTorch 1.4
 
-Keep a source checkout because you will cross-compile the Android runtime and the standalone Llama runner:
+Keep a source checkout because you'll cross-compile the Android runtime and the standalone Llama runner:
 
 ```bash
 cd $HOME
@@ -26,7 +26,7 @@ source .venv/bin/activate
 python -m pip install --upgrade pip setuptools wheel
 ```
 
-To reduce memory pressure during builds:
+To reduce memory pressure during builds, set the following variable:
 
 ```bash
 export CMAKE_BUILD_PARALLEL_LEVEL=2
@@ -34,13 +34,15 @@ export CMAKE_BUILD_PARALLEL_LEVEL=2
 
 ## Fix the PyTorch version mismatch
 
-On the tested `release/1.4` branch, a host environment with PyTorch `2.14.0+cpu` broke the build with:
+Always verify `torch.__version__` before you start a long native build.
+
+If you build the host envionment with PyTorch `2.14.0+cpu` on the `release/1.4` branch, the build breaks with the following message:
 
 ```text
 ATen/core/Tensor.h:70:37: error: 'C10_LIFETIMEBOUND' does not name a type
 ```
 
-Pin the expected version explicitly:
+To avoid this, pin the expected version:
 
 ```bash
 python -m pip uninstall -y torch
@@ -48,13 +50,13 @@ python -m pip install "torch==2.13.0+cpu" --index-url https://download.pytorch.o
 python -c "import torch; print(torch.__version__)"
 ```
 
-Expected output:
+The output is similar to:
 
-```text
+```output
 2.13.0+cpu
 ```
 
-Then clean and rebuild the host package:
+Then, clean and rebuild the host package:
 
 ```bash
 python install_executorch.py --clean
@@ -62,11 +64,9 @@ export CMAKE_BUILD_PARALLEL_LEVEL=2
 ./install_executorch.sh --use-pt-pinned-commit
 ```
 
-The important lesson is to verify `torch.__version__` before you start a long native build.
-
 ## Request access to Llama 3.2 1B Instruct
 
-The model used in this workflow comes from the gated Hugging Face repository [`meta-llama/Llama-3.2-1B-Instruct`](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct).
+The model that you'll use in this workflow comes from the gated Hugging Face repository [`meta-llama/Llama-3.2-1B-Instruct`](https://huggingface.co/meta-llama/Llama-3.2-1B-Instruct).
 
 To request access:
 
@@ -75,7 +75,7 @@ To request access:
 3. Review and accept the Meta Llama license, then submit the access request.
 4. Wait until Hugging Face confirms that your account can access the repository before continuing.
 
-Access approval is associated with the Hugging Face account that submitted the request. Authenticate the CLI with the same account.
+Access approval is associated with the Hugging Face account that submitted the request. 
 
 ## Install and authenticate the Hugging Face CLI
 
@@ -86,7 +86,7 @@ python -m pip install --upgrade huggingface_hub
 hf version
 ```
 
-Sign in. The command prompts you to authenticate through a browser or with a Hugging Face user access token:
+Sign in with the same account that you used to access the model. The command prompts you to authenticate through a browser or with a Hugging Face user access token:
 
 ```bash
 hf auth login
@@ -114,12 +114,20 @@ test -f ~/Llama-3.2-1B-Instruct/original/params.json && echo "Parameters OK"
 test -f ~/Llama-3.2-1B-Instruct/original/tokenizer.model && echo "Tokenizer OK"
 ```
 
-The measured run used:
+The example measured run used:
 
 - `consolidated.00.pth` at about 2.4 GB
 - `params.json`
 - `tokenizer.model` at about 2.1 MB
 
-{{% notice Access errors %}}
-If the download returns `401 Unauthorized` or `403 Forbidden`, run `hf auth whoami` and confirm that you authenticated with the account approved for the gated repository. If access is still pending, return to the model page and check the request status.
+{{% notice Note %}}
+If the download returns `401 Unauthorized` or `403 Forbidden`, run `hf auth whoami` and confirm that you authenticated with the account approved for the gated repository.
+
+If access is still pending, return to the model page and check the request status.
 {{% /notice %}}
+
+## What you've accomplished and what's next
+
+You've now prepared the ExecuTorch source and Python environment. You've also requested and gained access to the Llama 3.2 1B Instruct model. 
+
+Next, you'll export the Vulkan PTE.
