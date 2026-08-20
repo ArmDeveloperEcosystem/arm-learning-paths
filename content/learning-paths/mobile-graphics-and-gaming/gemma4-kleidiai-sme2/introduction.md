@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Why this benchmark matters
 
-This Learning Path gives you a reproducible process to evaluate Gemma prefill performance improvements when using SME2-optimized paths across LiteRT-LM, KleidiAI, and XNNPACK.
+This Learning Path gives you a reproducible process to evaluate Gemma 4 prefill performance improvements when using SME2-optimized paths across LiteRT-LM, KleidiAI, and XNNPACK.
 
 The flow in this guide is based on a pinned set of repository commits and a local benchmark command (`litert_lm_advanced_main --benchmark`) so your numbers are comparable across runs.
 
@@ -18,8 +18,8 @@ You will complete the workflow in this order:
 
 1. Create a local workspace and clone LiteRT-LM, KleidiAI, and XNNPACK at tested commits.
 2. Install macOS prerequisites and Bazelisk, then pin Bazel to version `7.6.1`.
-3. Prepare a LiteRT-LM-compatible `.litertlm` model in `LiteRT-LM/models`.
-4. Build LiteRT-LM and run benchmark and sample prompts.
+3. Prepare a LiteRT-LM-compatible Gemma 4 `.litertlm` model in `LiteRT-LM/models`.
+4. Build LiteRT-LM with SME2 enabled and disabled, then compare benchmark results.
 
 In the next section, you will set up the workspace with pinned repository commits.
 
