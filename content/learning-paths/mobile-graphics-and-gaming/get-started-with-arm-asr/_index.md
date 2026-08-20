@@ -1,12 +1,12 @@
 ---
-title: Get started with Arm Accuracy Super Resolution (Arm ASR)
+title: Get started with Arm Accuracy Super Resolution 
 
 minutes_to_complete: 40
 
 who_is_this_for: This Learning Path is for mobile, gaming, and graphics developers who want to install and configure Arm Accuracy Super Resolution (Arm ASR) to enhance performance on complex game content without sacrificing image quality.
 
 learning_objectives:
-    - Describe Arm Accuracy Super Resolution.
+    - Understand what Arm Accuracy Super Resolution (Arm ASR) is.
     - Integrate Arm ASR into your game project.
     - Manage how Arm ASR upscales content.
 
@@ -14,9 +14,47 @@ prerequisites:
     - A game project that uses advanced rendering features (such as hardware ray tracing) that stretch the performance capabilities of everyday smartphones.
     - A development machine with Git installed.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-17T22:02:37Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 2424d8faebea11359ea0330d94698187b9305dde158d5761f9942eb33e711583
+  summary_generated_at: '2026-08-17T22:02:37Z'
+  summary_source_hash: 2424d8faebea11359ea0330d94698187b9305dde158d5761f9942eb33e711583
+  faq_generated_at: '2026-08-17T22:02:37Z'
+  faq_source_hash: 2424d8faebea11359ea0330d94698187b9305dde158d5761f9942eb33e711583
+  summary: >-
+    You'll add Arm ASR to an Unreal Engine project or a custom engine.
+    You'll learn about the Unreal Engine plugin and how to integrate ASR with a custom engine using the standalone backend or your engine's backend. For both Unreal Engine and custom engine, you'll learn to configure settings such as quality presets, shaders, extensions, and input resources
+    to evaluate image quality and performance trade-offs on mobile devices.
+  faqs:
+  - question: Which Unreal Engine versions should I use for the Arm ASR plugin?
+    answer: >-
+      Use Unreal Engine 5.3, 5.4, or 5.5. 
+  - question: Can I use Arm ASR without Unreal Engine?
+    answer: >-
+      Yes. You can integrate Arm ASR into a custom engine using the generic library.
+  - question: Which integration method should I choose with the generic library?
+    answer: >-
+      You can integrate Arm ASR using the standalone backend, or your engine’s backend or renderer. 
+  - question: What configuration areas do I set up when using the generic library?
+    answer: >-
+      Configure quality presets, shader variants and extensions, and input resources. These
+      settings control how ASR processes and upscales your content.
+  - question: How do I balance image quality and performance in a custom-engine integration?
+    answer: >-
+      Select a shader quality preset and an upscaling ratio. Use `FfxmFsr2ShaderQualityMode` and
+      `FfxmFsr2UpscalingRatio` together to choose the balance that suits your application.
+# END generated_summary_faq
+
 author: Julie Gaskin
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -59,4 +97,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
