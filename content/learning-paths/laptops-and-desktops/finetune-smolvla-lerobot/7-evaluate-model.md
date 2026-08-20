@@ -37,7 +37,7 @@ Keep the following settings consistent with data collection:
 
 Place the vial and rack within the range of positions represented in the training dataset. A fine-tuned model is less likely to succeed when the starting layout is significantly different from its demonstrations.
 
-Set `<MODEL_CHECKPOINT>` to the checkpoint created during fine-tuning.
+Set `MODEL_CHECKPOINT` to the checkpoint created during fine-tuning.
 
 ## Run the model
 
@@ -53,7 +53,7 @@ Run the following command:
 lerobot-rollout \
   --strategy.type=base \
   --inference.type=rtc \
-  --policy.path=<MODEL_CHECKPOINT> \
+  --policy.path="$MODEL_CHECKPOINT" \
   --device=cuda \
   --robot.type=so101_follower \
   --robot.port="$ROBOT_PORT" \
@@ -72,7 +72,7 @@ The command runs the model for up to 30 seconds. During this time, observe how t
 
 The key options are:
 
-- `--policy.path=<MODEL_CHECKPOINT>` loads the fine-tuned model checkpoint.
+- `--policy.path="$MODEL_CHECKPOINT"` loads the fine-tuned model checkpoint.
 - `--robot.type=so101_follower` selects the SO-101 follower implementation.
 - `--robot.id=smolvla_follower` selects the calibration associated with this robot identifier.
 - `--rename_map` maps the live camera feature names to the input names expected by the model. This mapping must match the mapping used during fine-tuning:

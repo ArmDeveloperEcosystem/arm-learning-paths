@@ -67,6 +67,19 @@ lerobot-teleoperate \
   --display_data=false
 ```
 
+{{% notice Note about some USB cameras %}}
+Some USB cameras may require specific settings in order to operate properly within OpenCV. For example, your workspace USB camera may require a specific resolution and "fourcc" encoding type while the gripper USB camera requires its own configuration:
+
+
+        --robot.cameras="{gripper_cam: {type: opencv, index_or_path: $GRIPPER_CAMERA_ID, width: 640, height: 480, fps: 30, fourcc: YUYV, backend: V4L2}, workspace_cam: {type: opencv, index_or_path: $WORKSPACE_CAMERA_ID, width: 1280, height: 720, fps: 30, fourcc: MJPG, backend: V4L2}}"
+
+
+
+
+If not properly configured, OpenCV can often crash with exceptions while its trying to open a given camera. 
+
+{{% /notice %}}
+
 Move one joint at a time at first. Confirm that the follower mirrors each movement correctly and that its gripper opens and closes. Stop the test if the follower moves unexpectedly.
 
 The animation shows the follower mirroring the leader’s arm pose and gripper movement.

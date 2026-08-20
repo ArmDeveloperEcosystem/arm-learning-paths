@@ -39,12 +39,12 @@ Use these acceptance rules:
 
 ## Configure the recording session
 
-Choose a repository identifier (ID) owned by your Hugging Face account, even when recording locally. Use the form `<HF_USERNAME>/<DATASET_NAME>` for `<DATASET_REPO_ID>`. Choose an empty local path for `<LOCAL_DATASET_ROOT>`.
+Choose a repository identifier (ID) owned by your Hugging Face account, even when recording locally. Use the form `HF_USERNAME/DATASET_NAME` for `DATASET_REPO_ID`. Choose an empty local path for `LOCAL_DATASET_ROOT`.
 
 The following command records 50 episodes, each followed by a 15-second reset period:
 
 ```bash
-test ! -e <LOCAL_DATASET_ROOT> && \
+test ! -e $LOCAL_DATASET_ROOT && \
 lerobot-record \
   --robot.type=so101_follower \
   --robot.port="$ROBOT_PORT" \
@@ -53,8 +53,8 @@ lerobot-record \
   --teleop.type=so101_leader \
   --teleop.port="$LEADER_PORT" \
   --teleop.id=smolvla_leader \
-  --dataset.repo_id=<DATASET_REPO_ID> \
-  --dataset.root=<LOCAL_DATASET_ROOT> \
+  --dataset.repo_id="$DATASET_REPO_ID" \
+  --dataset.root="$LOCAL_DATASET_ROOT" \
   --dataset.single_task="Pick up the vial and place it in the yellow rack" \
   --dataset.num_episodes=50 \
   --dataset.episode_time_s=30 \
@@ -69,6 +69,10 @@ lerobot-record \
 ```
 
 {{% notice Note %}}
+Some users may need to adjust the "dataset.reset_time_s" value depending on how long it takes to reset the workspace for another run. 15 seconds may be too short a time to get everything reset and get back to the leader arm for the next episode recording.
+{{% /notice %}}
+
+{{% notice Note %}}
 LeRobot provides keyboard controls to end an episode or reset period early, or to cancel the current episode. These controls can be useful when you need to discard a demonstration. In the tested LeRobot 0.6.0 setup, however, using them occasionally caused the recording process to stop with an error. Behavior might differ with other versions or systems. To reduce the risk of an interrupted session, let the configured episode and reset timers expire whenever possible. If you use a keyboard control, confirm that the recorder remains active before starting the next episode.
 {{% /notice %}}
 
@@ -77,15 +81,17 @@ After the recorder exits, read the finalized summary:
 ```bash
 python - <<'PY'
 import json
+import os
 from pathlib import Path
 
-info = json.loads((Path("<LOCAL_DATASET_ROOT>") / "meta/info.json").read_text())
+info = json.loads((Path(os.environ.get("LOCAL_DATASET_ROOT")) / "meta/info.json").read_text())
 print({
     "episodes": info["total_episodes"],
     "frames": info["total_frames"],
     "fps": info["fps"],
     "splits": info["splits"],
 })
+
 PY
 ```
 
@@ -105,8 +111,8 @@ The `lerobot-dataset-viz` command launches Rerun with the recorded camera, state
 
 ```bash
 lerobot-dataset-viz \
-  --repo-id <DATASET_REPO_ID> \
-  --root <LOCAL_DATASET_ROOT> \
+  --repo-id $DATASET_REPO_ID \
+  --root $LOCAL_DATASET_ROOT \
   --episode-index 15 \
   --mode distant \
   --host 127.0.0.1 \
@@ -115,9 +121,22 @@ lerobot-dataset-viz \
   --display-compressed-images
 ```
 
-Open `http://127.0.0.1:9090` while the command is running. Use `--display-compressed-images` for image datasets because uncompressed frames can exceed Rerun's distant-mode memory buffer and make early images appear blank. Press `Ctrl+C` after review.
+{{% notice Note %}}
+The option `--display-compressed-images` is used for image datasets because uncompressed frames can exceed Rerun's distant-mode memory buffer and make early images appear blank. Press `Ctrl+C` after review.
+{{% /notice %}}
 
-The animation shows the Rerun view while episode 15 is scrubbed. Both camera panes update with the task, and the action and state plots update as the arm moves.
+Open `http://127.0.0.1:9090` using your DGX Sparc desktop browser while the above command is running and then:
+  - Once open, click on the "+" on the upper left hand section of the UI
+  - Choose "Open from URL..."
+  - Enter the following URL: ***"rerun+http://127.0.0.1:9876/proxy"***
+  - Press "Open"
+
+
+{{% notice Note %}}
+The browser on the DGX Sparc must be used as the browser to view the UI. Typically CORS errors will occur if a browser on a different/remote desktop is attempted in leu of the browser on the DGX Sparc.
+{{% /notice %}}
+
+You should now see the following console including your USB camera images as well as data. Press the play button in the lower left-hand portion of the console to "Play" your animation. The animation shows the Rerun view while episode 15 is scrubbed. Both camera panes update with the task, and the action and state plots update as the arm moves.
 
 ![Rerun Viewer animation showing episode 15 being scrubbed with the gripper and workspace camera panes, action and state plots, and image timelines visible together.#center](images/5-lerobot-dataset-viz.gif "Inspecting an episode with LeRobot and Rerun")
 
@@ -153,16 +172,17 @@ Use a repository ID under your own account. Choose a license that covers the dem
 
 ```bash
 python - <<'PY'
+import os
 from pathlib import Path
 from lerobot.datasets.lerobot_dataset import LeRobotDataset
 
 dataset = LeRobotDataset(
-    repo_id="<DATASET_REPO_ID>",
-    root=Path("<LOCAL_DATASET_ROOT>"),
+    repo_id=os.environ.get("DATASET_REPO_ID"),
+    root=Path(os.environ.get("LOCAL_DATASET_ROOT")),
 )
 dataset.push_to_hub(
     tags=["lerobot", "so101", "smolvla"],
-    license="<DATASET_LICENSE>",
+    license=os.environ.get("DATASET_LICENSE"),
     private=False,
     push_videos=True,
 )
@@ -173,4 +193,4 @@ Set `private=True` if the data shouldn't be public. The `push_to_hub()` method c
 
 ## What you've accomplished
 
-You recorded and validated a pick-and-place dataset with synchronized camera, state, and action features. You can train directly from the local dataset or use the optional Hub upload for sharing and remote access. Next, fine-tune SmolVLA from `<LOCAL_DATASET_ROOT>` on the DGX Spark GPU.
+You recorded and validated a pick-and-place dataset with synchronized camera, state, and action features. You can train directly from the local dataset or use the optional Hub upload for sharing and remote access. Next, fine-tune SmolVLA from `LOCAL_DATASET_ROOT` on the DGX Spark GPU.

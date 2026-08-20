@@ -11,27 +11,27 @@ layout: learningpathall
 
 You will fine-tune the SmolVLA model with the SO-101 demonstrations you recorded. Fine-tuning adapts the model to your two camera views, robot joint layout, and pick-and-place task. Training runs locally on the DGX Spark GPU and produces a model checkpoint for physical evaluation.
 
-Use the same LeRobot environment as the previous pages. Keep the values of `<DATASET_REPO_ID>` and `<LOCAL_DATASET_ROOT>` from the recording step.
+Use the same LeRobot environment as the previous pages. Keep the values of `DATASET_REPO_ID` and `LOCAL_DATASET_ROOT` from the recording step.
 
 ## Run fine-tuning
 
-Choose unused paths for `<LOCAL_TRAIN_OUTPUT_DIR>` and `<LOCAL_TRAIN_LOG>`. The output directory stores checkpoints and training metadata, while the log file stores the terminal output. The command stops instead of overwriting either path if it already exists.
+Choose unused paths for `LOCAL_TRAIN_OUTPUT_DIR` and `LOCAL_TRAIN_LOG`. The output directory stores checkpoints and training metadata, while the log file stores the terminal output. The command stops instead of overwriting either path if it already exists.
 
 Replace the placeholders, then run:
 
 ```bash
 set -o pipefail
-test ! -e <LOCAL_TRAIN_OUTPUT_DIR> && \
-test ! -e <LOCAL_TRAIN_LOG> && \
+test ! -e $LOCAL_TRAIN_OUTPUT_DIR && \
+test ! -e $LOCAL_TRAIN_LOG && \
 PYTHONUNBUFFERED=1 lerobot-train \
   --policy.path=lerobot/smolvla_base \
   --policy.device=cuda \
   --policy.push_to_hub=false \
   --policy.empty_cameras=1 \
   --rename_map='{"observation.images.gripper_cam":"observation.images.camera1","observation.images.workspace_cam":"observation.images.camera2"}' \
-  --dataset.repo_id=<DATASET_REPO_ID> \
-  --dataset.root=<LOCAL_DATASET_ROOT> \
-  --output_dir=<LOCAL_TRAIN_OUTPUT_DIR> \
+  --dataset.repo_id="$DATASET_REPO_ID" \
+  --dataset.root="$LOCAL_DATASET_ROOT" \
+  --output_dir="$LOCAL_TRAIN_OUTPUT_DIR" \
   --job_name=smolvla-so101-pick-place \
   --batch_size=64 \
   --steps=20000 \
@@ -39,7 +39,7 @@ PYTHONUNBUFFERED=1 lerobot-train \
   --save_freq=20000 \
   --log_freq=200 \
   --wandb.enable=false \
-  2>&1 | tee -a <LOCAL_TRAIN_LOG>
+  2>&1 | tee -a $LOCAL_TRAIN_LOG
 ```
 
 The command loads the local dataset, fine-tunes the model, and saves the final checkpoint.
@@ -56,7 +56,7 @@ The key options are:
 - `--save_checkpoint=true` enables checkpoint saving, while `--save_freq=20000` saves a checkpoint after 20,000 steps. Because the training run is also 20,000 steps long, this configuration saves the final checkpoint without creating intermediate checkpoints.
 - `--policy.push_to_hub=false` prevents the trained model from being uploaded automatically to the Hugging Face Hub.
 - `PYTHONUNBUFFERED=1` makes Python write log messages immediately instead of buffering them. This allows `tee` to display and save the training output in real time.
-- `2>&1 | tee -a <LOCAL_TRAIN_LOG>` displays both standard output and error messages in the terminal and appends them to the specified log file.
+- `2>&1 | tee -a $LOCAL_TRAIN_LOG` displays both standard output and error messages in the terminal and appends them to the specified log file.
 
 ## Monitor training
 
@@ -64,15 +64,15 @@ Open another terminal and run:
 
 ```bash
 nvidia-smi
-tail -f <LOCAL_TRAIN_LOG>
+tail -f $LOCAL_TRAIN_LOG
 ```
 
 `nvidia-smi` confirms that the training process is using the CUDA-enabled GPU. The log shows the current step, loss, learning rate, and timing information. Press `Ctrl+C` to stop following the log; this doesn't stop training in the original terminal.
 
-After training finishes, set `<MODEL_CHECKPOINT>` to the saved model directory:
+After training finishes, set `MODEL_CHECKPOINT` to the saved model directory:
 
-```text
-<LOCAL_TRAIN_OUTPUT_DIR>/checkpoints/020000/pretrained_model
+```bash
+export MODEL_CHECKPOINT=$LOCAL_TRAIN_OUTPUT_DIR/checkpoints/last/pretrained_model
 ```
 
 Verify that the required model, configuration, and processor files exist and aren't empty:
@@ -80,7 +80,7 @@ Verify that the required model, configuration, and processor files exist and are
 ```bash
 for file in config.json model.safetensors train_config.json \
             policy_preprocessor.json policy_postprocessor.json; do
-    test -s "<MODEL_CHECKPOINT>/$file" || {
+    test -s "$MODEL_CHECKPOINT/$file" || {
         echo "Missing or empty: $file" >&2
         exit 1
     }
