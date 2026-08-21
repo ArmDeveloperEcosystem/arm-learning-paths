@@ -1,6 +1,10 @@
 ---
 title: Build a ROS 2 and Zenoh simulation environment on an Arm server
 
+draft: true
+cascade:
+    draft: true
+    
 description: Set up ROS 2 Jazzy with rmw_zenoh in Docker, then run and evaluate a Neobotix ROX simulation on an Arm server.
 
 minutes_to_complete: 60
