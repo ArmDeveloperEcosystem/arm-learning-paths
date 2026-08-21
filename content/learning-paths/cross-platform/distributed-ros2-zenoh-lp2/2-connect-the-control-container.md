@@ -10,6 +10,10 @@ layout: learningpathall
 
 The control container needs its own session configuration, set to client mode and pointed at the robot's router.
 
+{{% notice Warning %}}
+Remember: Do not expose ports `6080`, `6081`, or `7447` directly to the public internet. Use a private network or VPN, access ports `6080` and `6081` through an SSH tunnel, and restrict port `7447` to trusted IP addresses or subnets using firewall rules.
+{{% /notice %}}
+
 Open the control desktop at `http://<server_ip>:6081/`. The password is `ubuntu`.
 
 In a **control** container terminal, copy the installed `rmw_zenoh` session template into the persistent volume:
