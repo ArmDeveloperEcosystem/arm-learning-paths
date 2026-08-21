@@ -42,8 +42,8 @@ generated_summary_faq:
   faqs:
   - question: What should I check before I run the notebooks on Ubuntu?
     answer: >-
-      Confirm that Python is later than `3.10` with `python3 --version`. Then, install the required
-      dependency packages.
+      Use Ubuntu 22.04 with a CUDA-capable NVIDIA GPU, CUDA Toolkit 11.8 or later, and Python later
+      than `3.10`. Then, install the required dependency packages.
   - question: Where do I start the training after cloning the examples repository?
     answer: >-
       From `neural-graphics-model-gym-examples`, run `jupyter lab`. Then open

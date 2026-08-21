@@ -41,23 +41,22 @@ generated_summary_faq:
     answer: >-
       Yes. In Unity Hub, select **New Project**, select the **3D (URP) Core** template, and create
       a blank project before you import the sample.
-  - question: 'Which tool should I use to examine results: the Profiler or the Analyzer?'
+  - question: Which tool should I use to examine results?
     answer: >-
-      Use the Profiler to collect data over a series of frames and drill into specific frames.
-      Use the Profile Analyzer to load one or more recorded datasets and visualize and compare
-      aggregated results.
+      Use the Profiler to collect data and inspect specific frames. To use Profile Analyzer, open
+      the Profiler window, load the recording there, then select **Pull Data** to analyze or
+      compare datasets.
   - question: Which sample modes should I record for comparison?
     answer: >-
       Record the unoptimized `Plain` mode and the optimized `Neon` mode. You can also inspect
       `Burst` mode to see how its auto-vectorized code differs.
-  - question: How do I compare the `Plain` and `Neon` recordings?
+  - question: How do I compare the Plain and Neon recordings?
     answer: >-
       Compare recordings from the unoptimized `Plain` mode and the optimized `Neon` mode. Use the
       Profiler and Profile Analyzer to examine differences in frame timing and function execution.
   - question: What should I check if the Android device or app doesn't appear for profiling?
     answer: >-
-      Confirm the app builds and deploys to the Android device using the steps from the Get started
-      with Unity on Android Learning Path, then run the app on the device before recording. If
+      Confirm the app builds and deploys to the Android device using the steps from the [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android) Learning Path, then run the app on the device before recording. If
       no data appears, re-verify deployment and that the device is actively running the sample.
 # END generated_summary_faq
 

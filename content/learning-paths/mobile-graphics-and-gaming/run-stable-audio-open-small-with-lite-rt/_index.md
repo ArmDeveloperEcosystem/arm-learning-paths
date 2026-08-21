@@ -46,14 +46,14 @@ generated_summary_faq:
   - question: Where do I run CMake to build the Android app?
     answer: >-
       From your workspace, navigate to `ML-examples/kleidiai-examples/audiogen/app` and create a
-      build directory. Run CMake from that build directory as shown in the steps.
+      build directory. Run CMake from that build directory.
   - question: Which Android ABI should I use for Arm targets?
     answer: >-
       Set `ANDROID_ABI=arm64-v8a` in the CMake command for the Android build.
-  - question: How do I confirm LiteRT built correctly before linking the app?
+  - question: What paths do I pass to CMake after building LiteRT?
     answer: >-
-      Build LiteRT with Bazel, then run CMake with `TF_INCLUDE_PATH=$TF_SRC_PATH` and
-      `TF_LIB_PATH=$TF_SRC_PATH/bazel-bin/tensorflow/lite`.
+      Build LiteRT and FlatBuffers, then configure CMake with `TF_INCLUDE_PATH`, `TF_LIB_PATH`, and
+      `FLATBUFFER_INCLUDE_PATH`.
   - question: What result should I expect when running the program on the device?
     answer: >-
       Run `audiogen` on the device with a text prompt. After inference, pull

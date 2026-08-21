@@ -40,7 +40,7 @@ generated_summary_faq:
   - question: Which ExecuTorch installation option should I use?
     answer: >-
       Install `executorch==1.0.0` with `pip`. Alternatively, clone ExecuTorch, check out `v1.0.0`,
-      and run `./install_executorch.sh`.
+      and run `bash ./install_executorch.sh`.
   - question: How do I know the model conversion to ExecuTorch worked?
     answer: >-
       After conversion, verify that `conditioners_model.pte`, `dit_model.pte`, and

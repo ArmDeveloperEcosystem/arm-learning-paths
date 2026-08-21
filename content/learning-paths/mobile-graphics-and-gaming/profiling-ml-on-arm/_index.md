@@ -31,11 +31,11 @@ generated_summary_faq:
   faq_generated_at: '2026-08-21T17:25:11Z'
   faq_source_hash: e6ab6eb40ee7bed0aa103d317e7bfed612abe7e36a7fe0118371ae3ec89f4d0c
   summary: >-
-    Profile the performance of an ML application on an Arm-powered Android device. You use
+    You'll profile the performance of an ML application on an Arm-powered Android device. First, you'll use
     Streamline to sample system performance metrics and view them on a timeline, then use Android
-    Studio Profiler to investigate memory use and leaks. You also use Arm NN `ExecuteNetwork` to
+    Studio Profiler to investigate memory use and leaks. You'll also use Arm NN `ExecuteNetwork` to
     run a LiteRT model outside your app, examine its layer timings, and identify model bottlenecks.
-    Finally, you adapt ExecuTorch profiling tools for Android.
+    Finally, you'll adapt ExecuTorch profiling tools for Android.
   faqs:
   - question: How do I know Android Studio is profiling the correct app process?
     answer: >-
@@ -46,17 +46,17 @@ generated_summary_faq:
       Streamline is a sampling profiler, which provides a statistical view with lower overhead
       than instrumentation. Use it to capture system counters and timeline data while the app
       runs.
-  - question: What results should I expect from `ExecuteNetwork` with a LiteRT model?
+  - question: Why does the ExecuteNetwork command run the model twice?
     answer: >-
-      `ExecuteNetwork` runs the model without the rest of your app and outputs layer timings and
-      other information that can help identify bottlenecks. If you use LiteRT without Arm NN,
-      treat the output as indicative rather than definitive.
+      Running the ExecuteNetwork command runs the model twice because of the `--iterations 2` flag. The first run includes startup costs and one-off
+      optimizations, so a second run is useful as the more representative performance measurement. The
+      command writes layer timings to `modelout.txt`.
   - question: How do I check whether inference is the main bottleneck?
     answer: >-
       Use Streamline annotations to mark inference, preprocessing, and postprocessing in the
-      timeline. You can then see where your app spends time and how hard the CPU or GPU is working
-      during each part. For a LiteRT model, use `ExecuteNetwork` to identify bottlenecks within
-      the model.
+      timeline. You can then see where your app spends time and how busy the CPU or GPU is during
+      each part. For LiteRT with Arm NN, use `ExecuteNetwork` for layer timings; without
+      Arm NN, treat its results as indicative.
   - question: Can I profile a PyTorch model with ExecuTorch on Android?
     answer: >-
       Yes. ExecuTorch provides profiling tools for PyTorch models. The tools target Linux, but you

@@ -41,9 +41,8 @@ generated_summary_faq:
   faqs:
   - question: How do I know the baseline voice-to-LLM pipeline is working?
     answer: >-
-      Record audio through the microphone and confirm that you see a transcript followed by the
-      local LLM’s response in the interface. Seeing a transcript confirms that Whisper transcription and the local
-      LLM request are working.
+      Record audio and confirm that the interface displays both a transcript and the local LLM
+      response. This verifies that Whisper transcription and the LLM request are working.
   - question: Do I need `ffmpeg` installed before using Whisper?
     answer: >-
       Yes. Install `ffmpeg` before running the transcription step because Whisper needs it to decode audio.
