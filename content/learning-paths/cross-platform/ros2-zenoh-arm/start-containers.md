@@ -15,6 +15,8 @@ You use two Docker containers built from the same image:
 
 Each container provides an Ubuntu desktop that you can access in a web browser. This Learning Path uses only the `robot` container, but starting both containers prepares the environment for the rest of the series.
 
+This setup is more than a container exercise. Gazebo, simulated camera and LiDAR data, Navigation2, RViz, and `rmw_zenoh` run together as a representative Physical AI robotics workload on Arm.
+
 The environment uses official `arm64` binaries without architecture-specific modifications.
 
 Run the host commands on your Arm server. After you open the browser desktop, run commands with an `ubuntu@robot` prompt in the `robot` container.
@@ -71,6 +73,10 @@ Open the browser desktops and sign in with the password `ubuntu`:
 
 - Robot container: `http://<server_ip>:6080/`
 - Control container: `http://<server_ip>:6081/`
+
+{{% notice Important %}}
+Do not expose ports `6080`, `6081`, or `7447` directly to the public internet. Use a private network, VPN, SSH tunnel, or restrictive firewall or security-group rules so that only trusted clients can reach these services.
+{{% /notice %}}
 
 ![Browser showing the Ubuntu desktop running inside the robot container through noVNC.](images/robot-desktop.png)
 

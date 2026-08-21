@@ -32,13 +32,19 @@ Use the key bindings displayed in the terminal to drive the robot while you obse
 
 ## Publish a velocity command
 
-You can also publish a single command that sets the forward velocity to `0.2 m/s`:
+You can also publish forward velocity at `0.2 m/s` and a fixed rate of 10 Hz:
 
 ```bash
-ros2 topic pub --once /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.2}}"
+ros2 topic pub --rate 10 /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.2}}"
 ```
 
-The command uses the same `/cmd_vel` interface as teleoperation and Navigation2.
+Let the command run for approximately three seconds, then press `Ctrl+C` to stop the publisher. Explicitly stop the robot by publishing a zero-velocity command:
+
+```bash
+ros2 topic pub --once /cmd_vel geometry_msgs/msg/Twist "{}"
+```
+
+These commands use the same `/cmd_vel` interface as teleoperation and Navigation2.
 
 ## Verify movement with odometry
 

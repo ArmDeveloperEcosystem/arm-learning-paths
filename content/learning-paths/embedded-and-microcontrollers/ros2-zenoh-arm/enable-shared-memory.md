@@ -93,6 +93,33 @@ just iftop_lo
 
 `.zenoh` files should appear under `/dev/shm` for Zenoh processes using shared memory. The large loopback flows should also disappear because the data now moves through memory.
 
+## Restore the environment for the next Learning Path
+
+Keep the shared-memory configuration enabled. In Terminal 2, press `Ctrl+C` to stop the temporary wall-time simulation if it is still running.
+
+Keep the Zenoh router running in Terminal 1. If it has stopped, restart it from a sourced terminal:
+
+```bash
+source ~/workshop_env.bash
+just router
+```
+
+In Terminal 2, source the environment if needed and start the normal headless simulation:
+
+```bash
+source ~/workshop_env.bash
+just rox_simu no_gui
+```
+
+In Terminal 3, source the environment if needed and restart Navigation2:
+
+```bash
+source ~/workshop_env.bash
+just rox_nav2
+```
+
+Confirm that the router is running, the simulation starts without errors, and Navigation2 reports `Managed nodes are active`. Leave these three processes running for the next Learning Path.
+
 ## Verify the complete Learning Path
 
 Use this checklist to confirm the final environment:
