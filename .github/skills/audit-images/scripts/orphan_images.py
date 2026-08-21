@@ -581,7 +581,7 @@ def generated_site_references(
     found_html = False
     files_seen = 0
     text_files_scanned = 0
-    for path in sorted(site_root.rglob("*")):
+    for path in site_root.rglob("*"):
         if not path.is_file():
             continue
         files_seen += 1
@@ -1196,7 +1196,7 @@ def github_file_link(
     if not repository_url or not revision:
         return f"`{label}`"
     url = (
-        f"{repository_url.rstrip('/')}/blob/{quote(revision, safe='')}/"
+        f"{repository_url.rstrip('/')}/blob/{quote(revision, safe='/')}/"
         f"{quote(path, safe='/')}"
     )
     if line:

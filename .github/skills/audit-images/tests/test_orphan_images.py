@@ -332,6 +332,22 @@ diagram: frontmatter.png
         )
         self.assertIn("Current images needing review (1)", report)
 
+    def test_github_file_link_preserves_branch_name_slashes(self) -> None:
+        link = orphan_images.github_file_link(
+            "https://github.com/owner/repository",
+            "automation/image-integrity-cleanup",
+            "content/learning-paths/category/example/guide.md",
+            7,
+        )
+
+        self.assertEqual(
+            link,
+            "[`content/learning-paths/category/example/guide.md:7`]"
+            "(https://github.com/owner/repository/blob/"
+            "automation/image-integrity-cleanup/"
+            "content/learning-paths/category/example/guide.md#L7)",
+        )
+
     def test_generated_site_reference_marks_asset_used(self) -> None:
         image = "content/learning-paths/category/example/rendered.png"
         absolute = "content/learning-paths/category/example/absolute.webp"
