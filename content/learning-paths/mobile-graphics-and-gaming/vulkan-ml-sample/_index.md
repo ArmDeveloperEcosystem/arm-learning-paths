@@ -18,11 +18,61 @@ prerequisites:
     - Visual Studio workload - .NET desktop build tools
     - Visual Studio Code
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-21T17:33:57Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 789ae18c87f9bf1d4171117d7f45b54440d9ab81bc42f85ce6418b9fc4f78962
+  summary_generated_at: '2026-08-21T17:33:57Z'
+  summary_source_hash: 789ae18c87f9bf1d4171117d7f45b54440d9ab81bc42f85ce6418b9fc4f78962
+  faq_generated_at: '2026-08-21T17:33:57Z'
+  faq_source_hash: 789ae18c87f9bf1d4171117d7f45b54440d9ab81bc42f85ce6418b9fc4f78962
+  summary: >-
+    You'll enable neural graphics workloads with ML Extensions for Vulkan by setting up the ML Emulation
+    Layers and running Vulkan Samples. First, you'll install development tools and configure the
+    layers. You'll build the Simple Tensor and Data Graph sample which runs a 2D average pooling
+    operation through a data graph pipeline. Then, you'll review the Scenario Runner assets for an
+    inference workflow and use RenderDoc to capture frames and inspect Vulkan calls, shaders, tensors,
+    and resource states.
+  faqs:
+  - question: Do I need native driver support for VK_ARM_data_graph and VK_ARM_tensors to run
+      the samples?
+    answer: >-
+      No. The ML Emulation Layers for Vulkan simulate these extensions so you can build and run
+      the samples during development.
+  - question: How do I run the Simple Tensor and Data Graph sample after building it?
+    answer: >-
+      Run `build\windows\app\bin\Release\AMD64\vulkan_samples.exe sample simple_tensor_and_data_graph`
+      from the `Vulkan-Samples` repository. A new window opens and visualizes the operation.
+  - question: What does the first sample demonstrate and how is it used in this path?
+    answer: >-
+      Run the Simple Tensor and Data Graph sample to execute a 2D average pooling operation through
+      a data graph pipeline. Create input and output tensors, bind them with descriptor sets
+      and pipeline layouts, and dispatch the SPIR-V-defined network.
+  - question: What do I need before running the Scenario Runner?
+    answer: >-
+      Use the Scenario Runner from Arm’s ML SDK for Vulkan together with the downloadable binaries
+      and assets referenced on Arm’s Hugging Face page. These resources let you run a complete
+      inference test that exercises the extensions.
+  - question: When should I capture a frame with RenderDoc, and what should I look for?
+    answer: >-
+      Use RenderDoc when you need to diagnose unexpected visual output, examine Vulkan API calls,
+      inspect resource states, or validate data graph pipeline execution. In **Launch Application**,
+      set the **Executable Path**, **Working Directory**, and **Command-line Arguments**, select
+      **Launch**, then press the **F12** key while the sample is active. In the capture, inspect Vulkan API
+      calls, shader inputs and outputs, and resource states.
+# END generated_summary_faq
+
 author:
     - Annie Tallund
     - Joshua Marshall-Law
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

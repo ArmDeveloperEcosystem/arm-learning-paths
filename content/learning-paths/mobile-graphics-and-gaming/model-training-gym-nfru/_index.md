@@ -22,36 +22,48 @@ prerequisites:
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-07-20T16:07:04Z'
+  generated_at: '2026-08-21T17:24:25Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
-  source_hash: ded91359108315578a7fe3cf0a96efc6d3d55319849ddb8c636571d2e569e011
-  summary_generated_at: '2026-07-20T16:07:04Z'
-  summary_source_hash: ded91359108315578a7fe3cf0a96efc6d3d55319849ddb8c636571d2e569e011
-  faq_generated_at: '2026-07-20T16:07:04Z'
-  faq_source_hash: ded91359108315578a7fe3cf0a96efc6d3d55319849ddb8c636571d2e569e011
+  source_hash: 766071e129870615cdc37f1766bb720bb7085d0464c4f0dcdc64a96ea8efee29
+  summary_generated_at: '2026-08-21T17:24:25Z'
+  summary_source_hash: 766071e129870615cdc37f1766bb720bb7085d0464c4f0dcdc64a96ea8efee29
+  faq_generated_at: '2026-08-21T17:24:25Z'
+  faq_source_hash: 766071e129870615cdc37f1766bb720bb7085d0464c4f0dcdc64a96ea8efee29
   summary: >-
-    You'll set up an Ubuntu development environment, explore Arm's Neural
-    Graphics Model Gym, and fine-tune a Neural Frame Rate Upscaling (NFRU) model using PyTorch. First, you'll launch a training notebook to configure and run NFRU training. Then, you'll train and evaluate a model using PyTorch and Model Gym, fine-tune it with quantization-aware training, and export it to VGF (.vgf) for real-time deployment. You'll also visualize and inspect the model's structure using Model Explorer.
+    You'll explore neural graphics and use Arm Neural Graphics Model Gym to train and evaluate an
+    NFRU model. First, you'll set up Ubuntu, clone the examples repository, and use Jupyter notebooks to train,
+    evaluate, and compare checkpoints. Then, you'll fine-tune pretrained FP32 weights with QAT and export an
+    INT8 `.vgf` model. Finally, you'll use Model Explorer and the VGF adapter to inspect the model's
+    architecture, tensor shapes, and graph connectivity.
   faqs:
-  - question: How do I confirm my Python setup is ready before opening the notebooks?
+  - question: What should I check before I run the notebooks on Ubuntu?
     answer: >-
-      Run `python3 --version` and verify it reports a version later than `3.10`. Ensure the listed Ubuntu packages
-      are installed so virtual environments and builds can complete.
-  - question: Which notebook do I open to start training NFRU?
+      Confirm that Python is later than `3.10` with `python3 --version`. Then, install the required
+      dependency packages.
+  - question: Where do I start the training after cloning the examples repository?
     answer: >-
-      Open the NFRU training notebook in the examples repository you cloned. Follow the notebook
-      cells to configure training and run the workflow.
-  - question: What output should I expect after running training and export?
+      From `neural-graphics-model-gym-examples`, run `jupyter lab`. Then open
+      `tutorials/nfru/nfru_training_example.ipynb` and step through the notebook for training.
+  - question: How do I know the initial training produced usable artifacts?
     answer: >-
-      Expect an exported `.vgf` model produced by the training and export pipeline. You can open the file with Model Explorer using the VGF adapter.
-  - question: How do I know the VGF adapter is working in Model Explorer?
+      Create and inspect PyTorch checkpoints in the training and evaluation notebooks. In the
+      evaluation notebook, you can measure accuracy, compare checkpoints, and see a visual comparison
+      of the generated NFRU frame with the ground truth frame.
+  - question: Which should I use for deployment, QAT or PTQ?
     answer: >-
-      Load a `.vgf` file and check that the model graph renders with layers, tensor shapes, and
-      connectivity visible. If the graph opens without errors, the adapter is set up correctly.
+      Start with PTQ if you want a faster trial because it calibrates an already-trained model
+      without another training phase. Use QAT when PTQ causes unacceptable accuracy or visual-quality
+      regressions; QAT simulates lower-precision inference during fine-tuning and helps preserve
+      accuracy when you quantize the model to INT8.
+  - question: How do I export and inspect the deployable model?
+    answer: >-
+      Use the QAT notebook from the dedicated NFRU examples tag. The notebook includes the export step to
+      produce a `.vgf` file. Then, open the `.vgf` file in Model Explorer with the VGF adapter to
+      inspect architecture, tensor shapes, and graph connectivity.
 # END generated_summary_faq
 
 author: Annie Tallund
