@@ -15,12 +15,58 @@ prerequisites:
     - An x86_64 Linux machine running Ubuntu with approximately 500 MB of free space, or a docker daemon that can build and run a provided x86_64 Dockerfile.
     - An Android phone with support for i8mm (tested on Google Pixel 8 Pro).
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-17T22:05:45Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: d2559b0bde2b716640df74ca831be6736a77417de5ce0e641f1e43a267e8f58b
+  summary_generated_at: '2026-08-17T22:05:45Z'
+  summary_source_hash: d2559b0bde2b716640df74ca831be6736a77417de5ce0e641f1e43a267e8f58b
+  faq_generated_at: '2026-08-17T22:05:45Z'
+  faq_source_hash: d2559b0bde2b716640df74ca831be6736a77417de5ce0e641f1e43a267e8f58b
+  summary: >-
+    You'll cross-compile MediaPipe with XNNPACK for Android `arm64` and run Gemma 2B on an i8mm-capable
+    device. First, you'll build and verify the binary with Bazel, then run inference. After running inference, you'll create a second build without
+    i8mm and benchmark both variants to assess the effect of KleidiAI integration on supported Android
+    hardware.
+  faqs:
+  - question: Which installation option should I choose for dependencies?
+    answer: >-
+      Use the Docker option if you have a working Docker daemon and prefer an isolated, reproducible
+      environment. Choose the native Ubuntu option if you want to install dependencies directly
+      on your `x86_64` Linux host.
+  - question: How do I confirm the Bazel build created the Android CPU inference binary?
+    answer: >-
+      List the Bazel output directory. You should see `llm_inference_engine_cpu_main`
+      under `bazel-bin/mediapipe/tasks/cc/genai/inference/c/`.
+  - question: Which Bazel options enable the i8mm path with KleidiAI for Android arm64?
+    answer: >-
+      Build the target `mediapipe/tasks/cc/genai/inference/c:llm_inference_engine_cpu_main` with
+      `--config=android_arm64` and `--define=xnn_enable_arm_i8mm=true`. These options select the Android
+      `arm64` build and enable the i8mm path integrated through XNNPACK.
+  - question: Which options build `llm_test` with i8mm but without KleidiAI?
+    answer: >-
+      In the `llm_test` Bazel command, use `--define=xnn_enable_arm_i8mm=true` with
+      `--define=xnn_enable_kleidiai=false`. Retain `-c opt`, `--config=android_arm64`,
+      `--dynamic_mode=off`, and the `mediapipe/tasks/cc/genai/inference/utils/xnn_utils:llm_test`
+      target.
+  - question: What do the two `llm_test` benchmark runs compare?
+    answer: >-
+      Both builds enable i8mm. The first disables KleidiAI micro-kernels, while the second enables
+      them by default, so you can compare the effect of KleidiAI on your device.
+# END generated_summary_faq
+
 author: 
     - Pareena Verma
     - Joe Stech
     - Adnan AlSinan
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -61,4 +107,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

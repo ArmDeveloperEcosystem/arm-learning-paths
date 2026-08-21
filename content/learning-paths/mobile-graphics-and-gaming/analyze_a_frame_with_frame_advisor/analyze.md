@@ -1,26 +1,35 @@
 ---
-title: Analyze draw calls
+title: Analyze draw calls in Frame Advisor
+description: Inspect the Frame Advisor hierarchy and framebuffer to identify inefficient draw calls and geometry use.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-When the analysis completes, you will see Frame Advisor's `Analysis` screen.
+## Inspect draw calls
 
-![Frame Advisor's Analysis screen alt-text#center](fa_analysis.webp "Figure 1. Frame Advisor's Analysis screen")
+When the analysis completes, you'll see Frame Advisor's **Analysis** screen. To inspect draw calls, follow these steps:
 
-1. Captured frames are listed in the Frame hierarchy view. Here, we can see that this frame draws over 657,000 primitives using 426 draw calls within 16 render passes.
+![Frame Advisor Analysis screen with Frame hierarchy, framebuffer, and metrics panels#center](fa_analysis.webp "Frame Advisor's Analysis screen")
 
-    ![Frame Hierarchy view alt-text#center](fa_frame_hierarchy.png "Figure 1. The Frame Hierarchy view in Frame Advisor")
+1. To view a list of captured frames, expand the **Frame hierarchy** view. The example frame draws over 657,000 primitives using 426 draw calls within 16 render passes.
 
-1. You can see all the render passes that make up the frame. Expand a render pass to see the draw calls within it. Step through the draw calls to see how the scene is built.
+    ![Frame hierarchy showing 16 render passes, 426 draw calls, and 657,414 primitives#center](fa_frame_hierarchy.png "The Frame Hierarchy view in Frame Advisor")
 
-    ![Stepping through draw calls alt-text#center](fa_step_drawcalls.gif "Figure 1. Stepping through draw calls in Frame Advisor")
+1. The **Frame hierarchy** shows all the render passes that make up the frame. Expand a render pass to inspect its draw calls. Step through the draw calls and observe how each one changes the framebuffer to see how the scene is built.
 
-    Draw calls are expensive for the CPU to process, so it is important to reduce the number of them where possible. Look for draw calls that don’t render visible changes to the framebuffer. If you don’t see any change, draws could be outside of the frustum or behind other objects. Use software culling techniques to eliminate them.
+    ![Framebuffer changes as draw calls are stepped through#center](fa_step_drawcalls.gif "Stepping through draw calls in Frame Advisor")
 
-    You might notice that some objects are drawn with a large number of primitives. As you see the object being drawn, decide whether its size and position on screen requires such a high level of detail. Using simpler meshes particularly when objects are far away from the camera could significantly increase performance.
+    Draw calls are expensive for the CPU to process, so reduce their number where possible. Look for draw calls that don't render visible changes to the framebuffer. A draw that makes no visible change can be outside the frustum or behind another object. Use software culling techniques to eliminate these draws.
+
+    Some objects might be drawn with a large number of primitives. As an object is drawn, compare its level of detail with its size and position on screen. Using simpler meshes, particularly for objects far from the camera, can significantly increase performance.
     
-1. Look for instances where many identical objects are being drawn individually, like these pillars. There could be an opportunity to reduce the number of draw calls by batching multiple objects into a single combined mesh or by using an instanced draw call.
+1. Look for many identical objects being drawn individually, such as these pillars. To reduce the number of draw calls, consider batching multiple objects into a single combined mesh or using an instanced draw call.
 
-    ![Framebuffers view alt-text#center](pillars.gif "Figure 1. Framebuffers view in Frame Advisor")
+    ![Repeated pillars appearing through individual draw calls#center](pillars.gif "Framebuffers view in Frame Advisor")
+
+## What you've accomplished and what's next
+
+You've inspected draw calls and framebuffer changes for inefficient rendering behavior. 
+
+Next, you'll use the Render Graph to analyze frame construction.

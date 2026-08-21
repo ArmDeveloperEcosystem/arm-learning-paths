@@ -18,7 +18,7 @@ Arm Neural Technology is a set of tools that work best when applied to the right
 
 ## Is NFRU right for me?
 
-For most teams, NFRU is the easiest place to start. It's available as an Unreal Engine plugin, with more developer tools coming soon.
+For most teams, NFRU is the easiest place to start. Arm provides an Unreal Engine plugin and a Learning Path that guides you through setup, validation, tuning, and debugging.
 
 It behaves in a familiar way. You enable the plugin and evaluate how it looks in your own project. There's no need to train or customize anything, and no major changes to your content pipeline. It feels closer to a traditional engine feature than something experimental.
 

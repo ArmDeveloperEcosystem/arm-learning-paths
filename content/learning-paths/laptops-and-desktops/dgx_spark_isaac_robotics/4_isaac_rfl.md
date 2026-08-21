@@ -299,3 +299,5 @@ In this section, you've:
 - Evaluated the trained policy through interactive visualization and behavior analysis
 
 You've now completed the end-to-end workflow of training and validating a reinforcement learning policy for humanoid locomotion on DGX Spark.
+
+To extend this setup for manipulation, multi-agent training, and motion imitation, continue to the [advanced Isaac Lab reinforcement learning](/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics2/) Learning Path.

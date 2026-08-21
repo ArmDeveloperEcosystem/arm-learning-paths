@@ -1,0 +1,138 @@
+---
+title: Enable Zenoh shared-memory transport
+description: Enable shared memory in the Zenoh router and session configurations, then compare point-cloud latency and loopback traffic.
+weight: 9
+
+layout: "learningpathall"
+---
+
+## Understand the shared-memory experiment
+
+By default, processes on the same machine exchange data over TCP loopback. Zenoh shared-memory transport places large messages in `/dev/shm` and avoids the network stack. Applications don't need code changes or loaned buffers, and Zenoh falls back to TCP if shared memory is unavailable.
+
+You first measure the default TCP-loopback latency. You then enable shared memory in both Zenoh configuration files, restart the relevant processes, and repeat the measurement.
+
+## Measure the TCP-loopback baseline
+
+Stop Navigation2 in Terminal 3. The latency measurement needs wall-clock timestamps, and Navigation2 doesn't operate in this mode.
+
+Stop the current simulation. Restart it in Terminal 2 with wall-clock time and without the Gazebo viewer:
+
+```bash
+just rox_simu use_wall_time:=True no_gui
+```
+
+Open a new terminal, source the environment, and measure the point-cloud latency:
+
+```bash
+source ~/workshop_env.bash
+just cam_latency
+```
+
+On the supplied reference system, the point-cloud latency is around `9–10 ms`:
+
+```output
+Mean : 9.40 ms | Std : 0.82 ms | Min : 7.91 ms | Max : 12.15 ms
+```
+
+Record the mean for comparison.
+
+## Enable shared memory in both configurations
+
+Open both of these working files:
+
+- `~/container_data/ROUTER_CONFIG.json5`
+- `~/container_data/SESSION_CONFIG.json5`
+
+In each file, find the `transport/shared_memory` block and change its `enabled` value to:
+
+```json5
+enabled: true,
+```
+
+{{% notice Important %}}
+Both files contain multiple `enabled` fields. In both `ROUTER_CONFIG.json5` and `SESSION_CONFIG.json5`, change only the `enabled` value inside the `shared_memory` block.
+{{% /notice %}}
+
+The router and ROS 2 sessions read these files when their processes start. Stop the router and simulation processes with `Ctrl+C`, then restart them so they load the updated setting:
+
+```bash
+# Router terminal
+just router
+```
+
+```bash
+# Simulation terminal
+just rox_simu use_wall_time:=True no_gui
+```
+
+Run the latency measurement again from a sourced terminal:
+
+```bash
+just cam_latency
+```
+
+The supplied reference system produced these results:
+
+| Measurement | TCP loopback (default) | Shared memory |
+|---|---|---|
+| Mean latency | `9.3–10.2 ms` | `6.3–7.4 ms` |
+| Standard deviation | Approximately `1.0 ms` | Approximately `0.65 ms` |
+| `/dev/shm` usage | `8 KB` | `247 MB` |
+
+The reference mean latency improves by approximately 30%, with lower jitter. Your result depends on the server, workload, and run conditions; compare the two measurements from your own system.
+
+## Verify the transport change
+
+Check the shared-memory directory and loopback traffic:
+
+```bash
+ls /dev/shm
+just iftop_lo
+```
+
+`.zenoh` files should appear under `/dev/shm` for Zenoh processes using shared memory. The large loopback flows should also disappear because the data now moves through memory.
+
+## Restore the environment for the next Learning Path
+
+Keep the shared-memory configuration enabled. In Terminal 2, press `Ctrl+C` to stop the temporary wall-time simulation if it is still running.
+
+Keep the Zenoh router running in Terminal 1. If it has stopped, restart it from a sourced terminal:
+
+```bash
+source ~/workshop_env.bash
+just router
+```
+
+In Terminal 2, source the environment if needed and start the normal headless simulation:
+
+```bash
+source ~/workshop_env.bash
+just rox_simu no_gui
+```
+
+In Terminal 3, source the environment if needed and restart Navigation2:
+
+```bash
+source ~/workshop_env.bash
+just rox_nav2
+```
+
+Confirm that the router is running, the simulation starts without errors, and Navigation2 reports `Managed nodes are active`. Leave these three processes running for the next Learning Path.
+
+## Verify the complete Learning Path
+
+Use this checklist to confirm the final environment:
+
+- [ ] Both Docker containers show `Up`, and their browser desktops are accessible
+- [ ] The talker and listener continue exchanging messages after the router stops
+- [ ] `just rox_simu no_gui` and `just rox_nav2` start without errors, and Navigation2 reports `Managed nodes are active`
+- [ ] `/scan` arrives at approximately 8 Hz
+- [ ] RViz reports `Feedback: reached` after the robot navigates to a valid goal
+- [ ] The robot moves through teleoperation or a `/cmd_vel` publication, and `/odom` confirms the movement
+- [ ] `just top`, `just rt_factor`, and `just iftop_lo` produce output
+- [ ] You recorded both latency measurements, and `.zenoh` files appear under `/dev/shm`; the supplied reference system shows lower shared-memory latency
+
+## What you've accomplished
+
+You've built a ROS 2 Jazzy simulation environment on an Arm server, observed Zenoh discovery behaviour, navigated and controlled a Neobotix ROX robot, measured resource use, and compared TCP-loopback communication with shared-memory transport.

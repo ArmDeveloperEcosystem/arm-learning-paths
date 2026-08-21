@@ -1,35 +1,46 @@
 ---
-title: Fine Manipulation and Contact-Rich Interaction
+title: Train contact-rich manipulation policies with Isaac Lab on DGX Spark
+description: Train and evaluate drawer-opening and peg-insertion policies with Isaac Lab on an Arm-based DGX Spark.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Fine Manipulation and Contact-Rich Interaction
+## Move from grasping to constrained motion
 
-In the previous section, you trained the Franka arm on the basic Reach and Lift tasks. This section continues the same Arm-based Isaac Sim / Isaac Lab workflow and moves into contact-rich manipulation: interacting with objects that include mechanical constraints, contact forces, and high precision requirements.
+You'll now use the same Isaac Sim and Isaac Lab setup for constrained, contact-rich tasks.
 
-In real industrial environments, a robot does more than pick up free objects. Drawers move along rails, pegs must be inserted into tight sockets, and nuts must align with bolts before threading can begin. These tasks require a policy to understand contact, constrained motion, and failure modes caused by small errors.
+In industrial environments, a robot does more than pick up free objects. Drawers move along rails, pegs fit into tight sockets, and nuts must align with bolts. These tasks add contact, constrained motion, and failure modes caused by small errors.
 
-This section starts with the Open-Drawer task to introduce interaction with articulated objects, and then moves into Isaac Lab's Factory environments, where you explore higher-precision industrial assembly workflows.
+For example, peg insertion requires stable alignment before insertion, while nut threading adds even more demanding pose control and rotational behavior. These tasks are usually much more sensitive to small errors than reach, lift, or drawer interaction.
 
-## Task 1: Open-Drawer
+Start with an articulated drawer, then move to a factory peg-insertion environment.
 
-In this task, you train the same Franka arm to reach the drawer handle, grasp it, and pull the drawer open along its rail. Unlike the Lift task from the previous section, a drawer is an articulated object: it is made of linked parts connected by a joint, so it can move only along a defined path (the rail) instead of moving freely in any direction. The policy must handle stable contact, constrained motion, and contact forces throughout the interaction.
+## Train the Franka arm to open a drawer
 
-### Run
+In this task, you'll train the same Franka 7-DOF arm to reach the drawer handle, grasp it, and pull the drawer open along its rail.
 
-Run the training script using the `rsl_rl` library with the following command. Again this uses the proximal policy optimization (PPO) algorithm. 
+Unlike the lift task, a drawer is an articulated object: it's made of linked parts connected by a joint, so it can move only along a defined path (the rail). A drawer doesn't move freely in any direction.
+
+The policy must handle stable contact, constrained motion, and contact forces throughout the interaction.
+
+### Run the training command
+
+From the Isaac Lab directory, run the Robotic Systems Lab Reinforcement Learning (RSL-RL) training command:
+
+```console
+cd ~/IsaacLab
+```
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
     --task=Isaac-Open-Drawer-Franka-v0 \
     --headless \
     --num_envs=2048
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh train \
     --rl_library rsl_rl \
     --task=Isaac-Open-Drawer-Franka-v0 \
@@ -40,34 +51,30 @@ Run the training script using the `rsl_rl` library with the following command. A
 
 {{% notice Note %}}
 
-Training takes longer than Reach and Lift because the drawer is an articulated object with joint constraints and contact forces. The PPO config uses a larger network (`[256, 128, 64]`), collects 96 steps per environment per iteration versus 24 for Reach. 
+The Open-Drawer PPO configuration uses `[256, 128, 64]` actor and critic networks and collects 96 steps per environment per iteration. The reach task, by contrast, collects 24.
 
 Training will take approximately 25 minutes on a DGX Spark. 
 
 {{% /notice %}}
 
-### What makes this task harder
-
-The Open-Drawer task is more complex than Reach and Lift because the policy must handle multiple challenges simultaneously: stable contact between the gripper and the handle, constrained motion imposed by the drawer rail, and friction or collision errors during pulling. Unlike pure reaching, the robot must establish contact and then maintain correct interaction throughout the motion. This requires the policy to understand both position control and force feedback.
-
-### Verify
+### Verify that the arm opens the drawer
 
 After training, confirm the following:
 
-* The robotic arm approaches and aligns with the handle instead of stopping in front of the drawer.
-* Once contact is established, the drawer moves along the rail direction.
-* The opening motion remains stable without slipping, shaking, or applying force in the wrong direction.
+- The robotic arm approaches and aligns with the handle instead of stopping in front of the drawer.
+- After contact is established, the drawer moves along the rail direction.
+- The opening motion remains stable without slipping, shaking, or applying force in the wrong direction.
 
-To view the trained policy, replace the checkpoint path with your model `.pt` file in the log directory:
+Set `--checkpoint` to the model file that you want to evaluate:
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
     --task=Isaac-Open-Drawer-Franka-v0 \
     --num_envs=1 \
     --checkpoint=<path_to_checkpoint>
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh play \
     --rl_library rsl_rl \
     --task=Isaac-Open-Drawer-Franka-v0 \
@@ -79,21 +86,21 @@ To view the trained policy, replace the checkpoint path with your model `.pt` fi
 ![Drawer-opening policy progression shown side by side. The left panel shows early training (iteration 50) with slow and unstable drawer motion. The right panel shows converged policy (iteration 399) with reliable contact and smooth opening along the rail.#center](./open_drawer.gif "Drawer-opening policy progression shown side by side. The left panel shows early training (iteration 50) with slow and unstable drawer motion. The right panel shows converged policy (iteration 399) with reliable contact and smooth opening along the rail")
 
 
-## Task 2: Factory environments — moving toward sub-millimeter precision
+## Perform peg insertion to simulate a factory environment
 
-To support industrial automation scenarios, Isaac Lab provides the **Factory** family of environments. In this task, you will explore high-precision assembly tasks such as peg insertion, which require sub-millimeter contact control and careful force feedback. These tasks emphasize high-fidelity contact simulation and show how precision assembly differs from general manipulation. The Factory environments use the same PPO algorithm as earlier tasks, but with hyperparameters tuned for precision control in the `rl_games` training library instead of `rsl_rl`.
+Isaac Lab's factory environments cover peg insertion, gear meshing, and nut threading. You'll train peg insertion with RL Games. The task uses tight-clearance geometry and contact simulation, so small pose errors can prevent insertion.
 
-### Run
+### Run the peg insertion task
 
-Factory tasks use the `rl_games` training library instead of `rsl_rl`. Select the API version installed on your system:
+Run one of the following commands to train the arm to perform the peg insertion task:
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rl_games/train.py \
     --task=Isaac-Factory-PegInsert-Direct-v0 \
     --headless
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh train \
     --rl_library rl_games \
     --task=Isaac-Factory-PegInsert-Direct-v0 \
@@ -101,42 +108,35 @@ Factory tasks use the `rl_games` training library instead of `rsl_rl`. Select th
 {{< /tab >}}
 {{< /tabpane >}}
 
-Training runs for the default number of epochs specified in `/source/isaaclab_tasks/isaaclab_tasks/direct/factory/agents/rl_games_ppo_cfg.yaml` under `max_epochs`. During training, you'll see output like:
+Training runs for the `max_epochs` value in `source/isaaclab_tasks/isaaclab_tasks/direct/factory/agents/rl_games_ppo_cfg.yaml`.
+
+The output is similar to:
 
 ```output
-fps step: 416 fps step and policy inference: 409 fps total: 337 epoch: 32/200 frames: 507904
 fps step: 408 fps step and policy inference: 401 fps total: 332 epoch: 33/200 frames: 524288
-saving next best rewards:  [300.05377]
-=> saving checkpoint '/home/kieran/IsaacLab/logs/rl_games/Factory/test/nn/Factory.pth'
+saving next best rewards: [300.05377]
+=> saving checkpoint '<checkpoint_path>'
 ```
 
-In this output:
+`fps total` reports overall throughput, `epoch` shows training progress, and `frames` counts environment transitions processed.
 
-* **fps step**: Simulation speed (steps per second) without inference.
-* **fps step and policy inference**: Speed including policy execution overhead.
-* **fps total**: Overall throughput including collection and learning.
-* **epoch**: One full pass over the collected rollout batch to update the policy.
-* **frames**: Cumulative transitions (state, action, reward tuples) experienced across all parallel environments. A frame represents one timestep in one environment instance, so higher frame counts mean more data for learning.
+{{% notice Note %}}
 
+When tested, this task took up to one hour on a DGX Spark.
 
+To try a published checkpoint, add `--use_pretrained_checkpoint` to the play command instead of training first.
 
-{{% notice Please Note %}}
-
-Training this task can take up to **1 hour** on a DGX Spark. 
-
-To skip training and use a pre-trained checkpoint from NVIDIA Omniverse, replace `--checkpoint=<path_to_checkpoint>` with `--use_pretrained_checkpoint` in the playback command.
-
-A pre-trained model may not be available for every task and `IsaacLab` version tag.
+A checkpoint might not be available for every task and Isaac Lab version.
 
 {{% /notice %}}
 
-## Verify
+### Verify the peg insertion task
 
-To view a trained policy in simulation, replace the checkpoint path with your log directory or pass the `--use_pretrained_checkpoint` argument. We are also adding environment parameters to minimize the time it takes to observe the peg insertion.
+Set `--checkpoint` to a local checkpoint, or replace it with `--use_pretrained_checkpoint`. The additional environment parameters make the peg insertion quicker to observe:
 
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rl_games/play.py \
   --task=Isaac-Factory-PegInsert-Direct-v0 \
   --checkpoint=<path_to_checkpoint> \
@@ -147,7 +147,7 @@ To view a trained policy in simulation, replace the checkpoint path with your lo
   env.task.fixed_asset_init_pos_noise=[0.08,0.08,0.02] \
   env.task.hand_init_pos_noise=[0.03,0.03,0.02]
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh play \
   --rl_library rl_games \
   --task=Isaac-Factory-PegInsert-Direct-v0 \
@@ -161,49 +161,11 @@ To view a trained policy in simulation, replace the checkpoint path with your lo
 {{< /tab >}}
 {{< /tabpane >}}
 
-![Peg insertion simulation with sub-millimeter contact control#center](./peg.gif "Simulation of sub-millimeter control of arm to insert peg into a hole. PPO model trained to 50 epochs")
+![Isaac Lab simulation of a Franka arm aligning and inserting a yellow peg into a tight-clearance socket. The placement shows the contact-rich task that the policy learns after 50 PPO training epochs.#center](./peg.gif "Peg insertion after 50 PPO training epochs")
 
 
-### What changes in the workflow
+## What you've accomplished and what's next
 
-You switched both the task and the training library quickly using the open source IsaacLab framework. This rapid iteration capability is valuable on any platform, but especially on Arm-based systems where the CPU handles orchestration while the GPU runs simulation.
+You've compared constrained drawer motion with tight-clearance peg insertion. A single robotic arm can already complete more precise interactions, but more complex automation scenarios often require multiple agents working together.
 
-{{% notice Please Note %}}
-
-You can override the default behavior and run the physics engine on the CPU with `--device=cpu`. This is useful when the GPU is already heavily used or temporarily unavailable, for example when training is still running and you want to run `play.py` at the same time. GPU execution is typically faster when it is available.
-
-{{% /notice %}}
-
-
-### Why these tasks matter
-
-Factory tasks are common in industrial automation and assembly scenarios. They are challenging because:
-
-* alignment tolerances are very small
-* physical feedback after contact is highly sensitive
-* position, orientation, and force control become tightly coupled
-
-For example, peg insertion requires stable alignment before insertion, while nut threading adds even more demanding pose control and rotational behavior. These tasks are usually much more sensitive to small errors than Reach, Lift, or drawer interaction.
-
-{{% notice Note %}}
-For Factory tasks, high-fidelity contact-force simulation is essential. Whether the agent can respond to sub-millimeter physical feedback directly affects the success rate of insertion, threading, and assembly tasks.
-{{% /notice %}}
-
-## Comparing manipulation task depth
-
-As tasks evolve from simple reaching to precision assembly, the technical demands increase significantly.
-
-| Environment | Task | Difficulty to train | Key challenge |
-|---|---|---|---|
-| Isaac-Reach-Franka-v0 | Reach a target pose | Easy | Learn basic inverse control through RL |
-| Isaac-Open-Drawer-Franka-v0 | Open a drawer | Medium | Contact-rich manipulation with mechanical constraints |
-| Isaac-Factory-NutThread-Direct-v0 | Thread a nut onto a bolt | Hard | Precise torque and pose control |
-
-This comparison also helps show that not all manipulation tasks are simple object relocation problems. Once a workflow includes articulated object interaction and industrial assembly, the importance of contact stability, precision, and experiment control rises quickly.
-
-
-## Next up
-
-A single robotic arm can already complete more precise interactions, but more complex automation scenarios often require multiple agents working together.
-
-In the next section, you will move beyond single-robot operation and explore how multiple robotic agents can cooperate to complete a task.
+Next, you'll move beyond single-robot operation and explore how multiple robotic agents can cooperate to complete a task.

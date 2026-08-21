@@ -11,12 +11,12 @@ learning_objectives:
     - Describe the roles of Isaac Sim and Isaac Lab within a robotics simulation and RL pipeline
     - Build and configure Isaac Sim and Isaac Lab on an Arm-based DGX Spark system
     - Launch and control a robot simulation in Isaac Sim using Python
-    - rain and evaluate a reinforcement learning policy for the Unitree H1 humanoid robot using Isaac Lab and RSL-RL
+    - Train and evaluate a reinforcement learning policy for the Unitree H1 humanoid robot using Isaac Lab and RSL-RL
 
 prerequisites:
     - A NVIDIA DGX Spark system with at least 50 GB of free disk space
     - Familiarity with Linux command-line tools
-    - Experience with Python scripting and virtual environments
+    - Experience with Python scripting
     - Basic understanding of reinforcement learning concepts (rewards, policies, episodes)
 
 # START generated_summary_faq

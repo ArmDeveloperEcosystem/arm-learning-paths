@@ -84,13 +84,21 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Enable NFRU in Unreal Engine
+        title: Enable Neural Frame Rate Upscaling in Unreal Engine
         link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/
-        type: learning path
+        type: learningpath
     - resource:
-        title: Neural Graphics Development Kit
-        link: https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics
-        type: website
+        title: Arm Neural Technology Playbook - Evaluate
+        link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/
+        type: learningpath
+    - resource:
+        title: Train and evaluate Neural Frame Rate Upscaling models using Model Gym
+        link: /learning-paths/mobile-graphics-and-gaming/model-training-gym-nfru/
+        type: learningpath
+    - resource:
+        title: Arm Neural Frame Rate Upscaling model on Hugging Face
+        link: https://huggingface.co/Arm/neural-frame-rate-upscaling
+        type: code
     - resource:
         title: RenderDoc for Arm GPUs
         link: https://developer.arm.com/Tools%20and%20Software/RenderDoc%20for%20Arm%20GPUs
@@ -99,21 +107,6 @@ further_reading:
         title: Streamline Performance Analyzer
         link: https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer
         type: documentation
-    - resource:
-        title: Neural Graphics Playbook - Evaluate
-        link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/
-        type: learning path
-    - resource:
-        title: Fine-tune neural graphics models using Model Gym
-        link: /learning-paths/mobile-graphics-and-gaming/model-training-gym/
-        type: learning path
-    - resource:
-        title: Generate neural graphics datasets with Neural Graphics Data Capture in Unreal Engine
-        link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-data-capture-unreal/
-        type: learning path
-
-
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly

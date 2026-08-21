@@ -15,9 +15,53 @@ prerequisites:
     - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 Version 22H2 which has [Windows Sandbox enabled](/install-guides/windows-sandbox-woa/).
     - A valid [GitHub account](https://github.com/) to complete this Learning Path.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-11T16:22:15Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 53127ee82aeebbb8df3feb552bc5b0e5200aeeed6d37f191ab2ce0888f3748ed
+  summary_generated_at: '2026-08-11T16:22:15Z'
+  summary_source_hash: 53127ee82aeebbb8df3feb552bc5b0e5200aeeed6d37f191ab2ce0888f3748ed
+  faq_generated_at: '2026-08-11T16:22:15Z'
+  faq_source_hash: 53127ee82aeebbb8df3feb552bc5b0e5200aeeed6d37f191ab2ce0888f3748ed
+  summary: >-
+    You'll configure Windows Sandbox on a Windows on Arm device as a self-hosted Arm64 GitHub Actions
+    runner. First, you'll prepare the sandbox, register the runner, and use a repository workflow to build
+    and publish a .NET 8 WPF sample. Then, you'll trigger the pipeline and verify that jobs run in the
+    sandboxed environment and produce the expected outputs.
+  faqs:
+  - question: Where is the workflow defined and how is it triggered?
+    answer: >-
+      The workflow is defined at `.github/workflows/dotnet_sandbox.yml`. It triggers on pushes to
+      the main branch and can also be started manually from the **Actions** tab.
+  - question: How do I know the job ran on my Windows Sandbox self-hosted runner?
+    answer: >-
+      Open the workflow run details and check the job’s runner information. It should indicate
+      that a self-hosted runner executed the job from your sandboxed environment.
+  - question: What result should I expect when the .NET WPF build and run steps succeed?
+    answer: >-
+      The workflow run shows a success status, and the logs for the build and run steps complete
+      without errors. If the workflow includes a publish step, you'll also see published outputs
+      listed in the run summary.
+  - question: What should I check if the workflow doesn't start after pushing?
+    answer: >-
+      Confirm you pushed to the main branch and that `.github/workflows/dotnet_sandbox.yml` exists
+      in the repository. If needed, start the workflow manually from the **Actions** tab.
+  - question: What do I need to confirm before configuring the self-hosted runner in Windows Sandbox?
+    answer: >-
+      Verify that Windows Sandbox is enabled on your Windows 11 device as described in the [Windows
+      Sandbox install guide](/install-guides/windows-sandbox-woa/). This ensures the sandbox environment is available to register as
+      a runner.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -49,4 +93,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

@@ -1,46 +1,89 @@
 ---
-title: Manipulate Objects with a 7-DOF Robot Arm
+title: Manipulate objects with a Franka 7-DOF robot arm
+description: Train and evaluate Franka reach and lift policies with Isaac Lab on an Arm-based DGX Spark.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## From locomotion to interaction
+## Move from locomotion to interaction
 
-Use the installation instructions in the previous [Learning Path](https://learn.arm.com/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics/)to  installed and run [Isaac Sim](https://developer.nvidia.com/isaac/sim) and [Isaac Lab](https://developer.nvidia.com/isaac/lab) on an Arm-based [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) system. 
+Before continuing, complete the previous [Isaac Sim and Isaac Lab Learning Path](/learning-paths/laptops-and-desktops/dgx_spark_isaac_robotics/). By completing the Learning Path, you'll build Isaac Sim and install Isaac Lab. You'll configure both Isaac Sim and Isaac Lab on an Arm-based [DGX Spark](https://www.nvidia.com/en-gb/products/workstations/dgx-spark/) system.
 
-{{% notice IsaacLab API versions %}}
+{{% notice Note %}}
 
-As of July 2026, support for **IsaacSim 6.0.0 and later** through IsaacLab is still in beta. For the most stable experience with this learning path, use **IsaacLab 2.3.2** with **IsaacSim 5.1.0**.
+Use one compatible Isaac Lab API version set when completing this Learning Path:
 
-Before installing, verify that your chosen **IsaacLab** version is compatible with **IsaacSim** using the version compatibility table in the IsaacLab [README.md](https://github.com/isaac-sim/IsaacLab/blob/main/README.md). If you choose different versions, follow the compatibility table rather than assuming that the latest IsaacLab and IsaacSim releases work together.
+| Command tab | Isaac Lab | Isaac Sim | Python |
+|---|---|---|---|
+| Isaac Lab 2.3 API | `v2.3.2` | 5.1.0 | 3.11 |
+| Isaac Lab 3.0 API | `v3.0.0-beta2.patch1` | 6.0.0 or 6.0.1 | 3.12 |
 
-The command examples provide tabs for both the **IsaacLab 2.3 API** and the **IsaacLab 3.0 API**. The IsaacLab 3.0 commands are included for future-proofing as support for IsaacSim 6.0.0 and later matures. They use the use the unified `train` and `play` entry points described in the [IsaacLab 3.0 Migration Guide](https://isaac-sim.github.io/IsaacLab/develop/source/migration/migrating_to_isaaclab_3-0.html).
+For a direct continuation from the previous Learning Path, use the 2.3 version set. Use the 3.0 version set only if you've installed the [3.0 Beta 2 release](https://isaac-sim.github.io/IsaacLab/release/3.0.0-beta2/source/setup/installation/index.html).
 
-Additionally, IsaacLab 3.0.0 and newer require **Python 3.12 or later** to build and install all required Python packages. You may need to upgrade your system Python version before continuing.
+By completing the previous Learning Path, you'll install packages into the Isaac Sim Python environment. There's no virtual environment to activate.
+
+Restore the environment variables and check the installed versions before selecting a tab:
+
+```console
+source ~/.bashrc
+cd ~/IsaacLab
+git describe --tags --always
+head -n 1 "${ISAACSIM_PATH}/VERSION"
+"${ISAACSIM_PYTHON_EXE}" --version
+```
+
+If the versions don't match, follow the documentation for your installed release before continuing. Isaac Lab 3.0 uses the unified `train` and `play` commands.
 
 {{% /notice %}}
 
 
-In this section, you move from locomotion to manipulation. You will train a simulation model of the [Franka 3](https://franka.de/franka-research-3) robotic arm with 7 Degrees-of-freedom (DOF) on two tasks:
+You'll start by training policies for a seven-degree-of-freedom Franka arm on two tasks:
 
-* **Reach** - to build spatial control of the arm's end effector, the part that interacts with the environment.
-* **Lift** - to further add contact, grasping, and stable object motion.
+- Reach: Move the arm's end effector to a target pose
+- Lift: Grasp a cube and move it to a target position
 
-This workflow also shows how DGX Spark maps work across CPU and GPU resources. DGX Spark provides 128 GB of coherent unified LPDDR5X memory shared by the Arm CPUs (10 Cortex-X925 and 10 Cortex-A725 cores) and the Blackwell GPU, so CPU and GPU can work on the same data without separate host-to-device copies. That can reduce startup overhead, and the unified memory pool can scale to whichever side of the workload needs more memory at a given point.
+These tasks continue the same source-built Isaac Sim and Isaac Lab workflow from the previous Learning Path.
 
+{{% notice Note %}}
 
-## Task 1: Reach — Building Spatial Awareness
+DGX Spark has one GPU, so run the tasks in this Learning Path as single-GPU jobs. If you move the same checkout to a system with two GPUs, Isaac Lab supports distributed training.
 
-The Reach task trains the Franka arm to move its end-effector to a randomly sampled target pose. This is your first manipulation baseline because it teaches position control before adding grasping.
-
-### Run
-
-Use your existing Isaac Lab setup from the previous Learning Path, then run:
+PyTorch's distributed launcher creates one process per GPU. Replace `<example task>` with the task to train on a two-GPU system:
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
+python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 \
+    scripts/reinforcement_learning/rsl_rl/train.py \
+    --task=<example task> \
+    --headless \
+    --distributed
+{{< /tab >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
+python -m torch.distributed.run --nnodes=1 --nproc_per_node=2 \
+    scripts/reinforcement_learning/train.py \
+    --rl_library rsl_rl \
+    --task=<example task> \
+    --viz none \
+    --distributed
+{{< /tab >}}
+{{< /tabpane >}}
+
+For multi-node options and troubleshooting, use the guide for [Isaac Lab 2.3.2](https://isaac-sim.github.io/IsaacLab/v2.3.2/source/features/multi_gpu.html) or [Isaac Lab 3.0 Beta 2](https://isaac-sim.github.io/IsaacLab/release/3.0.0-beta2/source/features/multi_gpu.html).
+
+{{% /notice %}}
+
+## Build spatial control
+
+The reach task trains the Franka 7-DOF arm to move its end-effector to a randomly sampled target pose. This is your first manipulation baseline because it teaches position control before adding grasping.
+
+### Run the reach task
+
+Use your existing Isaac Lab setup from the previous Learning Path. Run the following command to train the `Isaac-Reach-Franka-v0` task from the `rsl_rl` library:
+
+{{< tabpane code=true >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 cd ~/IsaacLab
 
 # Improve runtime compatibility on aarch64 systems
@@ -51,7 +94,7 @@ export LD_PRELOAD="$LD_PRELOAD:/lib/aarch64-linux-gnu/libgomp.so.1"
     --headless \
     --num_envs=2048
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 cd ~/IsaacLab
 
 # Improve runtime compatibility on aarch64 systems
@@ -65,9 +108,7 @@ export LD_PRELOAD="$LD_PRELOAD:/lib/aarch64-linux-gnu/libgomp.so.1"
 {{< /tab >}}
 {{< /tabpane >}}
 
-
-
-This training flow uses the **RSL-RL PPO** algorithm. The PPO hyperparameters and actor/critic network sizes are defined in the task config file at `source/isaaclab_tasks/isaaclab_tasks/manager_based/manipulation/<task>/config/franka/agents/rsl_rl_ppo_cfg.py`.
+This training flow uses the RSL-RL implementation of proximal policy optimization (PPO). Its hyperparameters and actor-critic network sizes are defined in `source/isaaclab_tasks/isaaclab_tasks/manager_based/manipulation/<task>/config/franka/agents/rsl_rl_ppo_cfg.py`.
 
 In these config files, the example PPO model sizes are:
 
@@ -79,38 +120,24 @@ The default training iterations are:
 * Reach: `1000` iterations
 * Lift: `1500` iterations
 
-Training the simple reach task on the DGX Spark will take approximately 10 minutes. 
+Training the reach task on the DGX Spark will take approximately 10 minutes.
 
+The entry point controls the task configuration, the RL library, and runtime options such as visualization and environment count.
 
-### What this script controls
+An environment is one simulated task instance. With `--num_envs=2048`, Isaac Lab runs 2048 Franka arms and targets in parallel. PPO uses their combined trajectories to update the actor and critic each iteration.
 
-This command does more than start training. The Python entry point controls:
+### Verify the reach task
 
-* which task configuration is loaded
-* which RL training entry point is used
-* runtime behavior such as headless execution and the number of environments
-
-In Isaac Lab, an **environment** is one simulated instance of the task. For example, one environment includes one Franka arm, one target, and one physics rollout. When you set `--num_envs=2048`, Isaac Lab runs 2048 instances in parallel to scale to the GPU capacity available. Proximal policy optimization (PPO) then uses trajectories from all environments to update the actor and critic networks each iteration converging quicker to an optimal solution compared to a single environment.
-
-
-### Task structure
-
-* **Goal**: Move the end-effector of the Franka 7-DOF arm to a randomly sampled target pose.
-* **Observation space**: Joint positions, joint velocities, and target position.
-* **Action space**: Joint position targets.
-
-### Verify
-
-After training, run the following command to observe the learned policy in simulation, replace the `--checkpoint` with the PyTorch model file for your desired iteration. We are limiting the number of environments to 2 simply to allow the simulation to load faster but you can increase to observe multiple instances:
+Set `--checkpoint` to the model file that you want to evaluate. Two environments keep the simulation quick to load:
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
     --task=Isaac-Reach-Franka-Play-v0 \
     --num_envs=2 \
     --checkpoint=logs/rsl_rl/franka_reach/<run_timestamp>/model_<iteration>.pt
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh play \
     --rl_library rsl_rl \
     --task=Isaac-Reach-Franka-Play-v0 \
@@ -121,35 +148,36 @@ After training, run the following command to observe the learned policy in simul
 
 {{% notice Tip %}}
 
-To inspect the Franka arm, right-click in the viewport and use `W`, `A`, `S`, and `D` to fly the camera. These are standard industry viewport navigation controls used in many 3D tools.
+To inspect the Franka arm, right-click in the viewport and use the **W**, **A**, **S**, and **D** keys to fly the camera. These are standard industry viewport navigation controls used in many 3D tools.
 
 {{% /notice %}}
 
 ![Franka Reach training comparison that shows early and late policy behavior. The left side shows less stable motion around iteration 100, and the right side shows improved target tracking near iteration 999.#center](./reach.gif "Franka reach training comparison that shows early and late policy behavior. The left side shows less stable motion around iteration 100, and the right side shows improved target tracking near iteration 999")
 
-You should observe the following:
+After training, confirm the following:
 
-* The robotic arm can consistently move its end-effector to the target position.
-* Multiple environments execute the reaching behavior in parallel.
-* The policy no longer shows obvious random oscillation or unstable motion.
-
-### Why it matters on Arm
+- The robotic arm can consistently move its end-effector to the target position.
+- Multiple environments execute the reaching behavior in parallel.
+- The policy no longer shows obvious random oscillation or unstable motion.
 
 The coherent unified memory lets you quickly start and stop training with little data transfer overhead and flexibly scale memory for large environments. The Arm CPU orchestrates training, enabling rapid experimentation and iteration.
 
+## Add physical interaction
 
-## Task 2: Lift — balancing force and precision
+After the robot can reach reliably, the next step is physical interaction. In the lift task, you'll train the arm to grasp a cube on the table and lift it to a target height. The policy must coordinate approach, alignment, gripper closure, and stable lifting under contact and gravity.
 
-Once the robot can reach reliably, the next step is physical interaction. In the Lift task, you train the arm to grasp a cube on the table and lift it to a target height. The policy must coordinate approach, alignment, gripper closure, and stable lifting under contact and gravity. Run the following command to train the `Isaac-Lift-Cube-Franka-v0` task with the PPO algorithm from the `rsl_rl` library.
+### Run the lift task
+
+Run the following command to train the `Isaac-Lift-Cube-Franka-v0` task with the PPO algorithm from the `rsl_rl` library:
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
     --task=Isaac-Lift-Cube-Franka-v0 \
     --headless \
     --num_envs=2048
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh train \
     --rl_library rsl_rl \
     --task=Isaac-Lift-Cube-Franka-v0 \
@@ -158,12 +186,12 @@ Once the robot can reach reliably, the next step is physical interaction. In the
 {{< /tab >}}
 {{< /tabpane >}}
 
-{{% notice Please Note %}}
+{{% notice Note %}}
 
-After an initial run, the end-effector might still fail to lift consistently. To continue training from a checkpoint rerun with the additional arguments shown below:
+After an initial run, the end-effector might still fail to lift consistently. To continue training from a checkpoint, rerun with the following additional arguments:
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/train.py \
   --task=Isaac-Lift-Cube-Franka-v0 \
   --headless \
@@ -174,7 +202,7 @@ After an initial run, the end-effector might still fail to lift consistently. To
   --checkpoint=model_<iteration>.pt \
   --max_iterations=<additional_iterations>
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh train \
   --rl_library rsl_rl \
   --task=Isaac-Lift-Cube-Franka-v0 \
@@ -188,68 +216,39 @@ After an initial run, the end-effector might still fail to lift consistently. To
 {{< /tab >}}
 {{< /tabpane >}}
 
-Use the run folder format `YYYY-MM-DD_HH-MM-SS` for `--load_run` (note the underscore between date and time), for example `2026-05-15_09-24-13`.
+Use the run folder format `YYYY-MM-DD_HH-MM-SS` for `--load_run`. Note the underscore between date and time, for example `2026-05-15_09-24-13`.
 
 {{% /notice %}}
 
-The training log prints a **learning-iteration summary** each cycle. Watch `Episode_Reward/lifting_object` to assess whether the policy is learning to lift the cube without the needing to explicitly run a visual simulation of the model. You can see jumps and plateaus during PPO training, so short flat periods are normal. Use the broader trend across many iterations, together with ETA, to decide whether to keep training.
+The output is similar to:
 
 ```output
-################################################################################
-                          Learning iteration 902/2650                            
-
-                            Total steps: 37011456 
-                       Steps per second: 68548 
-                        Collection time: 0.600s 
-                          Learning time: 0.117s 
-                        Mean value loss: 2.1550
-                    Mean surrogate loss: -0.0023
-                      Mean entropy loss: 7.1831
-                            Mean reward: 79.76
-                    Mean episode length: 246.64
-                        Mean action std: 0.64
-         Episode_Reward/reaching_object: 0.7022
-          Episode_Reward/lifting_object: 11.2984
-    Episode_Reward/object_goal_tracking: 5.6466
-Episode_Reward/object_goal_tracking_fine_grained: 0.0891
-             Episode_Reward/action_rate: -0.7642
-               Episode_Reward/joint_vel: -1.4792
-                 Curriculum/action_rate: -0.1000
-                   Curriculum/joint_vel: -0.1000
-     Metrics/object_pose/position_error: 0.2638
-  Metrics/object_pose/orientation_error: 0.8218
-           Episode_Termination/time_out: 0.9782
-    Episode_Termination/object_dropping: 0.0218
---------------------------------------------------------------------------------
-                         Iteration time: 0.72s
-                           Time elapsed: 00:09:59
-                                    ETA: 00:23:11
+Learning iteration 902/2650
+Episode_Reward/lifting_object: 11.2984
+ETA: 00:23:11
 ```
 
+Watch `Episode_Reward/lifting_object` to assess whether the policy is learning to lift the cube without explicitly running a visual simulation of the model. You can see jumps and plateaus during PPO training, so short flat periods are normal. Use the broader trend across many iterations, together with ETA, to decide whether to keep training.
 
-### What changes in the workflow
-
-Compared with Reach, you do not rebuild the project or switch platforms. You keep the same training entry point and environment, and only change `--task`. That lets you move quickly between manipulation scenarios while keeping the same workflow.
-
-### Verify
+### Verify the lift task
 
 After training, confirm the following:
 
-* The robotic arm can approach the cube and adjust its gripper position.
-* The gripper closes at an appropriate time.
-* The cube is lifted off the table rather than slipping away or bouncing after collision.
+- The robotic arm can approach the cube and adjust its gripper position.
+- The gripper closes at an appropriate time.
+- The cube is lifted off the table rather than slipping away or bouncing after collision.
 
 
-You can use the command below to verify the result.
+Set `--checkpoint` to the model file that you want to evaluate:
 
 {{< tabpane code=true >}}
-{{< tab header="IsaacLab 2.3 API" >}}
+{{< tab header="Isaac Lab 2.3 API" >}}
 ./isaaclab.sh -p scripts/reinforcement_learning/rsl_rl/play.py \
     --task=Isaac-Lift-Cube-Franka-v0 \
     --num_envs=2 \
     --checkpoint=<path_to_checkpoint>
 {{< /tab >}}
-{{< tab header="IsaacLab 3.0 API" >}}
+{{< tab header="Isaac Lab 3.0 API" >}}
 ./isaaclab.sh play \
     --rl_library rsl_rl \
     --task=Isaac-Lift-Cube-Franka-v0 \
@@ -258,22 +257,11 @@ You can use the command below to verify the result.
 {{< /tab >}}
 {{< /tabpane >}}
 
-![Franka 7-DOF arm progressing through Reach and Lift. The left panel shows iteration 150, where grasp stability is still developing. The right panel shows around iteration 900, where the policy keeps the end-effector inverted to reduce cube drops during lifting.#center](./reach_and_lift.gif "Franka 7-DOF arm progressing through Reach and Lift. The left panel shows iteration 150, where grasp stability is still developing. The right panel shows around iteration 900, where the policy keeps the end-effector inverted to reduce cube drops during lifting")
+![Side-by-side Isaac Lab simulations of the Franka lift task. The early policy has not established a stable grasp, while the later policy holds the cube securely as it lifts it from the table, showing improved contact control.#center](./reach_and_lift.gif "Franka 7-DOF arm progressing through Reach and Lift. The left panel shows iteration 150, where grasp stability is still developing. The right panel shows around iteration 900, where the policy keeps the end-effector inverted to reduce cube drops during lifting")
 
 
-## Extended exploration: comparing different locomotion robots
+## What you've accomplished and what's next
 
-Isaac Lab also includes locomotion environments you can switch to with the same script pattern. If you want a quick comparison, run one quadruped task and one biped task to observe convergence differences.
+You've evaluated policies for reaching a target pose and lifting a cube, and trained the Franka robot to complete reach and lift tasks. The arm now has basic grasping ability. However, objects in the real world often introduce more complex mechanical constraints.
 
-| Environment | Robot | Type | Terrain | Training difficulty |
-|---|---|---|---|---|
-| Isaac-Velocity-Flat-Unitree-Go2-v0 | Unitree Go2 | Quadruped | Flat | Easy |
-| Isaac-Velocity-Rough-H1-v0 | Unitree H1 | Biped humanoid | Rough | Hard |
-
-Quadrupeds often converge faster because they are more statically stable. Bipeds usually need longer training because balance is harder to learn.
-
-## Next up
-
-The Franka robotic arm now has basic grasping ability. However, objects in the real world often introduce more complex mechanical constraints.
-
-In the next section, you will explore how a robot can interact with joint-constrained objects such as drawers, and move one step closer to high-precision industrial manipulation tasks.
+Next, you'll explore how a robot can interact with joint-constrained objects such as drawers, and move one step closer to high-precision industrial manipulation tasks.
