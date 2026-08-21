@@ -42,7 +42,7 @@ The client and server sections should both report `linux/arm64`.
 The `<server_ip>` used on this page must identify the Arm server from the Raspberry Pi's network. It is not automatically the same address used by your laptop.
 
 - Use a private or LAN address when the Raspberry Pi has a route to that network.
-- Use a public address only when the server is reachable through the internet and its firewall permits the connection.
+- Use a public address only when a private route or VPN is unavailable, and restrict TCP port `7447` to the Raspberry Pi's address or trusted network using firewall rules.
 - Do not use `172.x`. Those are internal Docker addresses.
 
 On the Arm server, display the available addresses and select the server's IP:
@@ -60,7 +60,7 @@ python3 -c "import socket; socket.create_connection(('<server_ip>',7447),5); pri
 Do not leave the angle brackets in the command.
 
 {{% notice Note %}}
-If this test times out, fix the network path before starting ROS 2. In the case of an EC2 server, permit inbound **TCP 7447** from the Raspberry Pi's network in the instance security group.
+If this test times out, fix the network path before starting ROS 2. For an EC2 server, permit inbound TCP port `7447` only from the Raspberry Pi's public egress address or trusted network in the instance security group. Do not allow access from `0.0.0.0/0`.
 {{% /notice %}} 
 
 <!-- ## Synchronize the clocks
