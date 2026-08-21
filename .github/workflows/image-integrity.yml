@@ -1,0 +1,231 @@
+name: Orphaned images cleanup
+
+on:
+  schedule:
+    - cron: "0 9 1 1,5,9 *"
+  workflow_dispatch:
+    inputs:
+      create_cleanup_pr:
+        description: "Create or update the safe-deletion PR after the full audit"
+        required: true
+        default: false
+        type: boolean
+
+concurrency:
+  group: image-integrity-${{ github.workflow }}
+  cancel-in-progress: true
+
+env:
+  HUGO_VERSION: 0.130.0
+  CLEANUP_BRANCH: automation/image-integrity-cleanup
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check-image-integrity:
+    if: >-
+      github.event_name != 'schedule' ||
+      github.repository == 'ArmDeveloperEcosystem/arm-learning-paths'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run image-integrity unit tests
+        run: python3 -m unittest discover -s .github/skills/audit-images/tests -v
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: Render the site
+        run: hugo --destination "$RUNNER_TEMP/image-integrity-site"
+
+      - name: Run full rendered audit
+        run: |
+          set -o pipefail
+          python3 .github/skills/audit-images/scripts/orphan_images.py \
+            --generated-site "$RUNNER_TEMP/image-integrity-site" \
+            --format markdown \
+            --json-output "$RUNNER_TEMP/image-integrity-before-cleanup.json" \
+            --repository-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
+            --revision "$GITHUB_SHA" | \
+            tee image-integrity-report.md
+
+      - name: Decide whether to propose cleanup
+        id: cleanup
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          EVENT_NAME: ${{ github.event_name }}
+          MANUAL_CREATE_PR: ${{ inputs.create_cleanup_pr }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          enabled=false
+          if [ "$EVENT_NAME" = "schedule" ] || [ "$MANUAL_CREATE_PR" = "true" ]; then
+            if [ "$REF_NAME" != "$DEFAULT_BRANCH" ]; then
+              echo "::error::Cleanup PRs must be generated from the default branch."
+              exit 1
+            fi
+            enabled=true
+          fi
+          echo "enabled=$enabled" >> "$GITHUB_OUTPUT"
+
+      - name: Apply the rendered-safe cleanup manifest
+        if: steps.cleanup.outputs.enabled == 'true'
+        id: cleanup-changes
+        run: |
+          set -o pipefail
+          git switch -c "$CLEANUP_BRANCH"
+          python3 .github/skills/audit-images/scripts/orphan_images.py \
+            --apply-cleanup "$RUNNER_TEMP/image-integrity-before-cleanup.json" \
+            --format markdown \
+            --repository-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
+            --revision "$GITHUB_SHA" | \
+            tee "$RUNNER_TEMP/image-cleanup-changes.md"
+          if git diff --cached --quiet; then
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Rebuild the site after proposed deletions
+        if: steps.cleanup-changes.outputs.has_changes == 'true'
+        run: hugo --destination "$RUNNER_TEMP/image-integrity-cleaned-site"
+
+      - name: Verify the proposed deletion set
+        if: steps.cleanup-changes.outputs.has_changes == 'true'
+        run: |
+          set -o pipefail
+          python3 .github/skills/audit-images/scripts/orphan_images.py \
+            --generated-site "$RUNNER_TEMP/image-integrity-cleaned-site" \
+            --verify-cleanup "$RUNNER_TEMP/image-integrity-before-cleanup.json" \
+            --format markdown \
+            --repository-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY" \
+            --revision "$CLEANUP_BRANCH" | \
+            tee "$RUNNER_TEMP/image-integrity-after-cleanup.md"
+
+      - name: Prepare the cleanup pull request
+        if: steps.cleanup-changes.outputs.has_changes == 'true'
+        env:
+          REPORT_JSON: ${{ runner.temp }}/image-integrity-before-cleanup.json
+          PR_BODY: ${{ runner.temp }}/image-cleanup-pr-body.md
+        run: |
+          safe_count=$(jq '.safe_deletions | length' "$REPORT_JSON")
+          review_count=$(jq '.needs_review | length' "$REPORT_JSON")
+          {
+            echo "## Automated image cleanup proposal"
+            echo ""
+            echo "This PR deletes **$safe_count** images that have no tracked source reference, no rendered Hugo reference, and no unresolved nearby reference."
+            echo ""
+            echo "It leaves **$review_count** ambiguous images untouched for human review. It never writes directly to the default branch and is not configured for auto-merge."
+            echo ""
+            echo "### Verification"
+            echo ""
+            echo "- Full Hugo site built before deletion"
+            echo "- Deleted paths exactly matched the rendered dry-run manifest"
+            echo "- Full Hugo site rebuilt after deletion"
+            echo "- No new non-orphan image-integrity problems were introduced"
+            echo "- Source workflow run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo ""
+            echo "<details>"
+            echo "<summary>Proposed deletions ($safe_count)</summary>"
+            echo ""
+            jq -r --arg base "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/$GITHUB_SHA/" \
+              '.safe_deletions[] | "- [`\(.)`](\($base)\(.))"' "$REPORT_JSON"
+            echo ""
+            echo "</details>"
+            echo ""
+            echo "<details>"
+            echo "<summary>Protected images needing review ($review_count)</summary>"
+            echo ""
+            jq -r --arg base "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/$GITHUB_SHA/" \
+              '.needs_review[].path | "- [`\(.)`](\($base)\(.))"' "$REPORT_JSON"
+            echo ""
+            echo "</details>"
+          } > "$PR_BODY"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Delete images unused by the rendered site"
+          git fetch --no-tags origin \
+            "refs/heads/$CLEANUP_BRANCH:refs/remotes/origin/$CLEANUP_BRANCH" || true
+          git push --force-with-lease origin "HEAD:refs/heads/$CLEANUP_BRANCH"
+
+      - name: Create or update the cleanup pull request
+        if: steps.cleanup-changes.outputs.has_changes == 'true'
+        env:
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          GH_TOKEN: ${{ github.token }}
+          PR_BODY: ${{ runner.temp }}/image-cleanup-pr-body.md
+        run: |
+          title="Delete images unused by the rendered site"
+          pr_number=$(gh pr list \
+            --base "$DEFAULT_BRANCH" \
+            --head "$CLEANUP_BRANCH" \
+            --state open \
+            --json number \
+            --jq '.[0].number')
+          if [ -n "$pr_number" ]; then
+            jq -n \
+              --arg title "$title" \
+              --rawfile body "$PR_BODY" \
+              '{title: $title, body: $body}' > "$RUNNER_TEMP/pull-request.json"
+            gh api \
+              --method PATCH \
+              "repos/$GITHUB_REPOSITORY/pulls/$pr_number" \
+              --input "$RUNNER_TEMP/pull-request.json" > /dev/null
+          else
+            gh pr create \
+              --base "$DEFAULT_BRANCH" \
+              --head "$CLEANUP_BRANCH" \
+              --title "$title" \
+              --body-file "$PR_BODY"
+          fi
+          pr_url=$(gh pr view "$CLEANUP_BRANCH" --json url --jq '.url')
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Cleanup PR:** $pr_url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publish image-integrity summary
+        if: always()
+        run: |
+          echo "## Image integrity" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Mode:** Full rendered audit" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ -f image-integrity-report.md ]; then
+            sed -n '1,200p' image-integrity-report.md >> "$GITHUB_STEP_SUMMARY"
+            if [ "$(wc -l < image-integrity-report.md)" -gt 200 ]; then
+              echo "Report truncated to 200 lines. Download the artifact for the complete report." >> "$GITHUB_STEP_SUMMARY"
+            fi
+          else
+            echo "No report was produced. Review the failed step above." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ "${{ steps.cleanup.outputs.enabled }}" = "true" ] && \
+             [ "${{ steps.cleanup-changes.outputs.has_changes }}" != "true" ]; then
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "No safe deletion changes were available for a cleanup PR." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Upload image-integrity report
+        if: always() && hashFiles('image-integrity-report.md') != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: image-integrity-report
+          path: |
+            image-integrity-report.md
+            ${{ runner.temp }}/image-integrity-before-cleanup.json
+            ${{ runner.temp }}/image-cleanup-changes.md
+            ${{ runner.temp }}/image-integrity-after-cleanup.md
+          retention-days: 14

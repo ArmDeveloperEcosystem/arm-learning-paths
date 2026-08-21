@@ -91,3 +91,10 @@ Preferred example:
 - Keep the repository-specific `#center` syntax when fixing alt text
 - Do not remove valid alignment syntax during cleanup
 - For bulk cleanup, update the guidance first, then fix content by category or directory in manageable batches
+- Repair malformed, missing, and case-mismatched references before classifying files as orphaned
+- Combine tracked source references with rendered Hugo output before deleting unique files
+- Automatically delete only candidates classified as safe; review the smaller ambiguous group
+- Use `orphan_images.py --fix-references` for deterministic bulk repairs; leave ambiguous matches for review
+- Use `orphan_images.py --delete-safe` to remove only confidence-qualified candidates
+- Run the full Hugo-backed audit on the workflow schedule (currently January, May, and September at 09:00 UTC), or start it manually when an up-to-date report is needed
+- Put automated deletions on a bot-owned branch, rebuild and verify the site, and require human review through a non-auto-merged PR
