@@ -17,12 +17,25 @@ Use the same LeRobot environment as the previous pages. Keep the values of `DATA
 
 Choose unused paths for `LOCAL_TRAIN_OUTPUT_DIR` and `LOCAL_TRAIN_LOG`. The output directory stores checkpoints and training metadata, while the log file stores the terminal output. The command stops instead of overwriting either path if it already exists.
 
-Replace the placeholders, then run:
+Export both paths and confirm that the dataset variables from the recording step are still set:
+
+```bash
+export LOCAL_TRAIN_OUTPUT_DIR="$PWD/outputs/train/smolvla-so101-pick-place"
+export LOCAL_TRAIN_LOG="$PWD/outputs/logs/smolvla-so101-pick-place.log"
+mkdir -p "$PWD/outputs/logs"
+
+: "${DATASET_REPO_ID:?Set DATASET_REPO_ID before training}"
+: "${LOCAL_DATASET_ROOT:?Set LOCAL_DATASET_ROOT before training}"
+: "${LOCAL_TRAIN_OUTPUT_DIR:?Set LOCAL_TRAIN_OUTPUT_DIR before training}"
+: "${LOCAL_TRAIN_LOG:?Set LOCAL_TRAIN_LOG before training}"
+```
+
+The validation commands exit with an error if any required value is empty. Then run:
 
 ```bash
 set -o pipefail
-test ! -e $LOCAL_TRAIN_OUTPUT_DIR && \
-test ! -e $LOCAL_TRAIN_LOG && \
+test ! -e "$LOCAL_TRAIN_OUTPUT_DIR" && \
+test ! -e "$LOCAL_TRAIN_LOG" && \
 PYTHONUNBUFFERED=1 lerobot-train \
   --policy.path=lerobot/smolvla_base \
   --policy.device=cuda \
@@ -39,7 +52,7 @@ PYTHONUNBUFFERED=1 lerobot-train \
   --save_freq=20000 \
   --log_freq=200 \
   --wandb.enable=false \
-  2>&1 | tee -a $LOCAL_TRAIN_LOG
+  2>&1 | tee -a "$LOCAL_TRAIN_LOG"
 ```
 
 The command loads the local dataset, fine-tunes the model, and saves the final checkpoint.
@@ -56,15 +69,16 @@ The key options are:
 - `--save_checkpoint=true` enables checkpoint saving, while `--save_freq=20000` saves a checkpoint after 20,000 steps. Because the training run is also 20,000 steps long, this configuration saves the final checkpoint without creating intermediate checkpoints.
 - `--policy.push_to_hub=false` prevents the trained model from being uploaded automatically to the Hugging Face Hub.
 - `PYTHONUNBUFFERED=1` makes Python write log messages immediately instead of buffering them. This allows `tee` to display and save the training output in real time.
-- `2>&1 | tee -a $LOCAL_TRAIN_LOG` displays both standard output and error messages in the terminal and appends them to the specified log file.
+- `2>&1 | tee -a "$LOCAL_TRAIN_LOG"` displays both standard output and error messages in the terminal and appends them to the specified log file.
 
 ## Monitor training
 
-Open another terminal and run:
+Open another terminal and return to the cloned LeRobot directory. Environment variables aren't inherited by a new terminal, so export the same log path before monitoring the run:
 
 ```bash
+export LOCAL_TRAIN_LOG="$PWD/outputs/logs/smolvla-so101-pick-place.log"
 nvidia-smi
-tail -f $LOCAL_TRAIN_LOG
+tail -f "$LOCAL_TRAIN_LOG"
 ```
 
 `nvidia-smi` confirms that the training process is using the CUDA-enabled GPU. The log shows the current step, loss, learning rate, and timing information. Press `Ctrl+C` to stop following the log; this doesn't stop training in the original terminal.
@@ -72,7 +86,7 @@ tail -f $LOCAL_TRAIN_LOG
 After training finishes, set `MODEL_CHECKPOINT` to the saved model directory:
 
 ```bash
-export MODEL_CHECKPOINT=$LOCAL_TRAIN_OUTPUT_DIR/checkpoints/last/pretrained_model
+export MODEL_CHECKPOINT="$LOCAL_TRAIN_OUTPUT_DIR/checkpoints/last/pretrained_model"
 ```
 
 Verify that the required model, configuration, and processor files exist and aren't empty:

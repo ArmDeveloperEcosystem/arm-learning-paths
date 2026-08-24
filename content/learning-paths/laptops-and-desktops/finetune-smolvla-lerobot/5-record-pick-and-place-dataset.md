@@ -41,15 +41,28 @@ Use these acceptance rules:
 
 Choose a repository identifier (ID) owned by your Hugging Face account, even when recording locally. Use the form `HF_USERNAME/DATASET_NAME` for `DATASET_REPO_ID`. Choose an empty local path for `LOCAL_DATASET_ROOT`.
 
+Replace `your-hf-username` with your Hugging Face username, then export both values:
+
+```bash
+export DATASET_REPO_ID="your-hf-username/smolvla-vial-pick-place"
+export LOCAL_DATASET_ROOT="$PWD/data/smolvla-vial-pick-place"
+
+: "${DATASET_REPO_ID:?Set DATASET_REPO_ID before recording}"
+: "${LOCAL_DATASET_ROOT:?Set LOCAL_DATASET_ROOT before recording}"
+: "${ROBOT_CAMERAS:?Set ROBOT_CAMERAS to the working teleoperation configuration}"
+```
+
+The validation commands exit with an error if a required value is empty. `ROBOT_CAMERAS` retains the camera resolutions, frame rates, encodings, and backends that worked during teleoperation.
+
 The following command records 50 episodes, each followed by a 15-second reset period:
 
 ```bash
-test ! -e $LOCAL_DATASET_ROOT && \
+test ! -e "$LOCAL_DATASET_ROOT" && \
 lerobot-record \
   --robot.type=so101_follower \
   --robot.port="$ROBOT_PORT" \
   --robot.id=smolvla_follower \
-  --robot.cameras="{gripper_cam: {type: opencv, index_or_path: $GRIPPER_CAMERA_ID, width: 640, height: 480, fps: 30}, workspace_cam: {type: opencv, index_or_path: $WORKSPACE_CAMERA_ID, width: 640, height: 480, fps: 30}}" \
+  --robot.cameras="$ROBOT_CAMERAS" \
   --teleop.type=so101_leader \
   --teleop.port="$LEADER_PORT" \
   --teleop.id=smolvla_leader \
