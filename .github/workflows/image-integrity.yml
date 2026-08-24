@@ -2,7 +2,7 @@ name: Orphaned images cleanup
 
 on:
   schedule:
-    - cron: "0 9 1 1,5,9 *"
+    - cron: "0 9 1 3,9 *"
   workflow_dispatch:
     inputs:
       create_cleanup_pr:

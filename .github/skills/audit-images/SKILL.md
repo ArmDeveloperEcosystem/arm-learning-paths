@@ -89,8 +89,8 @@ findings do not block image-integrity checks.
 Case-colliding duplicate paths are removed from the Git index without deleting
 the shared worktree file on case-insensitive systems. GitHub Actions never
 writes deletions directly to the default branch. The Orphaned images cleanup
-workflow performs one full, Hugo-rendered audit at 09:00 UTC on January 1,
-May 1, and September 1 and creates or updates a bot-owned cleanup PR when safe
+workflow performs one full, Hugo-rendered audit at 09:00 UTC on March 1
+and September 1 and creates or updates a bot-owned cleanup PR when safe
 candidates exist. Scheduled runs are restricted to the canonical Arm
 repository; forks can still start manual runs. The workflow rebuilds Hugo and
 verifies the staged deletion set before pushing that proposal branch. It writes
@@ -168,7 +168,7 @@ python3 .github/skills/audit-images/scripts/orphan_images.py \
 ```
 
 Use the **Orphaned images cleanup** workflow's **Run workflow** control to start
-the same full Hugo-backed audit without waiting for the four-month schedule.
+the same full Hugo-backed audit without waiting for the six-month schedule.
 Select **Create cleanup PR** to propose verified safe deletions, or leave it
 clear for a report-only run. Scheduled canonical-repository runs automatically
 create or update the proposal. Pushes and pull requests do not trigger this
