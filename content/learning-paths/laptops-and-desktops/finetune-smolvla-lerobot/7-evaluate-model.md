@@ -1,5 +1,5 @@
 ---
-title: Evaluate the fine-tuned model
+title: Evaluate the fine-tuned SmolVLA model
 description: Load the fine-tuned SmolVLA model, run an SO-101 trial, and evaluate the task outcomes.
 weight: 8
 
@@ -46,7 +46,7 @@ Place the vial and rack within the range of positions represented in the trainin
 
 Set `MODEL_CHECKPOINT` to the checkpoint created during fine-tuning.
 
-## Run the model
+## Run the SmolVLA model
 
 {{% notice Warning %}}
 The follower might begin moving as soon as model initialization finishes. Keep your hands and other objects outside the robot workspace, and keep the emergency stop within reach.
