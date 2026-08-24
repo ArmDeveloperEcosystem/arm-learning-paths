@@ -37,56 +37,6 @@ class OrphanImagesTests(unittest.TestCase):
 
         self.assertEqual(args.format, "markdown")
 
-    def test_snapshot_excludes_entire_draft_learning_path(self) -> None:
-        draft_root = "content/learning-paths/category/draft-example"
-        published_root = "content/learning-paths/category/published-example"
-        tracked = {
-            f"{draft_root}/_index.md": "draft-index",
-            f"{draft_root}/guide.md": "draft-guide",
-            f"{draft_root}/planned.png": "draft-image",
-            f"{published_root}/_index.md": "published-index",
-            f"{published_root}/guide.md": "published-guide",
-            f"{published_root}/used.png": "published-image",
-        }
-
-        with tempfile.TemporaryDirectory() as directory:
-            repository = Path(directory)
-            text_files = {
-                f"{draft_root}/_index.md": "---\ndraft: true\ncascade:\n    draft: true\n---\n",
-                f"{draft_root}/guide.md": "![Incomplete](missing.png)\n",
-                f"{published_root}/_index.md": "---\ndraft: false\n---\n",
-                f"{published_root}/guide.md": "![Published](used.png)\n",
-            }
-            for path, content in text_files.items():
-                destination = repository / path
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                destination.write_text(content, encoding="utf-8")
-
-            with mock.patch.object(
-                orphan_images,
-                "tracked_file_oids",
-                return_value=tracked,
-            ):
-                state = orphan_images.current_snapshot(
-                    repository,
-                    orphan_images.DEFAULT_PATHS,
-                )
-                install_guide_state = orphan_images.current_snapshot(
-                    repository,
-                    ("content/install-guides",),
-                )
-
-        self.assertEqual(state.excluded_draft_learning_paths, (draft_root,))
-        self.assertEqual(install_guide_state.excluded_draft_learning_paths, ())
-        self.assertNotIn(f"{draft_root}/planned.png", state.files)
-        self.assertNotIn(f"{draft_root}/guide.md", state.text)
-        analysis = orphan_images.analyze(state, set())
-        self.assertEqual(analysis.tracked_images, 1)
-        self.assertEqual(analysis.referenced_images, 1)
-        self.assertEqual(analysis.orphan_images, [])
-        self.assertEqual(analysis.problems, [])
-        self.assertEqual(analysis.excluded_draft_learning_paths, 1)
-
     def test_recognizes_repository_reference_formats(self) -> None:
         guide = """---
 diagram: frontmatter.png
@@ -344,30 +294,6 @@ diagram: "quoted-frontmatter.png"
                     baseline,
                     changed,
                     orphan_images.DEFAULT_PATHS,
-                )
-
-    def test_cleanup_manifest_rejects_a_newly_drafted_path(self) -> None:
-        draft_root = "content/learning-paths/category/draft-example"
-        image = f"{draft_root}/unused.png"
-        state = snapshot({image: b"unused"})
-        analysis = orphan_images.analyze(state, set())
-
-        with tempfile.TemporaryDirectory() as directory:
-            baseline = Path(directory) / "before.json"
-            baseline.write_text(
-                orphan_images.analysis_json(
-                    analysis,
-                    analysis.all_problems(),
-                    file_oids=state.files,
-                ),
-                encoding="utf-8",
-            )
-            with self.assertRaisesRegex(SystemExit, "excluded draft Learning Path"):
-                orphan_images.cleanup_manifest_paths(
-                    baseline,
-                    state.files,
-                    orphan_images.DEFAULT_PATHS,
-                    (draft_root,),
                 )
 
     def test_cleanup_verification_accepts_exact_staged_deletions(self) -> None:

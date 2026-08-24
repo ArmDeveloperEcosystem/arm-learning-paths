@@ -104,10 +104,6 @@ Git blob IDs still match the audited snapshot. The PR is never auto-merged, and
 Markdown is the default human-readable report format and provides clickable
 GitHub source links. JSON is the machine-readable cleanup manifest used by the
 workflow; the checker does not maintain a duplicate plain-text report.
-Learning Paths whose `_index.md` has top-level `draft: true` are excluded as
-complete directories, so neither unfinished references nor planned draft assets
-can enter an audit or automated deletion proposal. They become eligible for the
-next scheduled or manual audit after the draft flag is removed.
 
 ## Validation rules
 

@@ -3,8 +3,8 @@
 
 The checker deliberately uses Git's tracked paths as the source of truth so
 filename comparisons remain case-sensitive on every operating system.
-It excludes draft Learning Paths, combines source and rendered-site evidence,
-and produces reviewable candidates rather than making semantic decisions.
+It combines source and rendered-site evidence and produces reviewable
+candidates rather than making semantic decisions.
 """
 
 from __future__ import annotations
@@ -76,7 +76,6 @@ class Snapshot:
     files: dict[str, str]
     text: dict[str, str]
     scopes: tuple[str, ...] = DEFAULT_PATHS
-    excluded_draft_learning_paths: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -133,7 +132,6 @@ class Analysis:
     duplicate_orphans: dict[str, tuple[str, ...]]
     generated_site_checked: bool
     problems: list[Problem]
-    excluded_draft_learning_paths: int = 0
 
     def all_problems(self) -> list[Problem]:
         safe = set(self.safe_delete_images)
@@ -195,43 +193,9 @@ def tracked_file_oids(repo_root: Path) -> dict[str, str]:
     return tracked
 
 
-def draft_learning_path_roots(text_files: Mapping[str, str]) -> tuple[str, ...]:
-    """Return Learning Path directories whose top-level front matter is draft."""
-    roots: set[str] = set()
-    for path, text in text_files.items():
-        if not (
-            path.startswith("content/learning-paths/") and path.endswith("/_index.md")
-        ):
-            continue
-        for line in extract_front_matter(text).splitlines():
-            if not line or line[0].isspace():
-                continue
-            key, separator, value = line.partition(":")
-            if (
-                separator
-                and key.strip().lower() == "draft"
-                and value.split("#", 1)[0].strip().lower() == "true"
-            ):
-                roots.add(posixpath.dirname(path))
-                break
-    return tuple(sorted(roots))
-
-
-def path_in_directories(path: str, directories: Sequence[str]) -> bool:
-    return any(
-        path == directory or path.startswith(directory + "/")
-        for directory in directories
-    )
-
-
-def path_intersects_scopes(path: str, scopes: Sequence[str]) -> bool:
-    return path_in_scopes(path, scopes) or any(
-        scope.startswith(path.rstrip("/") + "/") for scope in scopes
-    )
-
-
 def current_snapshot(repo_root: Path, scopes: Sequence[str]) -> Snapshot:
     tracked = tracked_file_oids(repo_root)
+    files = {path: oid for path, oid in tracked.items() if path_in_scopes(path, scopes)}
     text_entries = [
         (path, oid) for path, oid in tracked.items() if not is_image_path(path)
     ]
@@ -248,27 +212,10 @@ def current_snapshot(repo_root: Path, scopes: Sequence[str]) -> Snapshot:
         if is_probably_text(data):
             text_files[path] = data.decode("utf-8", errors="replace")
 
-    all_draft_roots = draft_learning_path_roots(text_files)
-    draft_roots = tuple(
-        root for root in all_draft_roots if path_intersects_scopes(root, scopes)
-    )
-    files = {
-        path: oid
-        for path, oid in tracked.items()
-        if path_in_scopes(path, scopes)
-        and not path_in_directories(path, all_draft_roots)
-    }
-    text_files = {
-        path: text
-        for path, text in text_files.items()
-        if not path_in_directories(path, all_draft_roots)
-    }
-
     return Snapshot(
         files=files,
         text=text_files,
         scopes=tuple(scopes),
-        excluded_draft_learning_paths=draft_roots,
     )
 
 
@@ -720,7 +667,6 @@ def analyze(
         duplicate_orphans=duplicate_orphans,
         generated_site_checked=generated_used is not None,
         problems=sorted(problems, key=problem_sort_key),
-        excluded_draft_learning_paths=len(snapshot.excluded_draft_learning_paths),
     )
 
 
@@ -908,7 +854,6 @@ def analysis_json(
                 "needs_review_images": len(analysis.needs_review_images),
                 "duplicate_orphans": len(analysis.duplicate_orphans),
                 "generated_site_checked": analysis.generated_site_checked,
-                "excluded_draft_learning_paths": analysis.excluded_draft_learning_paths,
                 "reported_problems": len(problems),
             },
             "safe_deletions": analysis.safe_delete_images,
@@ -926,7 +871,6 @@ def cleanup_manifest_paths(
     baseline_path: Path,
     tracked_files: Mapping[str, str],
     scopes: Sequence[str],
-    excluded_directories: Sequence[str] = (),
 ) -> list[str]:
     """Validate and return rendered-safe paths whose image blobs are unchanged."""
     try:
@@ -969,10 +913,6 @@ def cleanup_manifest_paths(
 
         if not path_in_scopes(normalized, scopes):
             errors.append(f"cleanup path is outside the requested scopes: {normalized}")
-        if path_in_directories(normalized, excluded_directories):
-            errors.append(
-                f"cleanup path is inside an excluded draft Learning Path: {normalized}"
-            )
         if not is_image_path(normalized):
             errors.append(f"cleanup path is not a supported image: {normalized}")
         actual_oid = tracked_files.get(normalized)
@@ -1096,7 +1036,6 @@ def analysis_markdown(
         f"| Safe-deletion candidates | {len(analysis.safe_delete_images)} |",
         f"| Requires review | {len(analysis.needs_review_images)} |",
         f"| Exact duplicate orphans | {len(analysis.duplicate_orphans)} |",
-        f"| Draft Learning Paths excluded | {analysis.excluded_draft_learning_paths} |",
         "| Generated site checked | "
         + ("yes" if analysis.generated_site_checked else "no")
         + " |",
@@ -1332,12 +1271,10 @@ def main() -> int:
         if not baseline_path.is_absolute():
             baseline_path = repo_root / baseline_path
         tracked_files = tracked_file_oids(repo_root)
-        snapshot = current_snapshot(repo_root, scopes)
         paths = cleanup_manifest_paths(
             baseline_path.resolve(),
             tracked_files,
             scopes,
-            snapshot.excluded_draft_learning_paths,
         )
         progress(f"Applying {len(paths)} blob-verified deletion(s) from the manifest.")
         changes = delete_safe_images(repo_root, paths, tuple(tracked_files))
