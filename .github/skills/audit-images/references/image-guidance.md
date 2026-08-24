@@ -92,9 +92,9 @@ Preferred example:
 - Do not remove valid alignment syntax during cleanup
 - For bulk cleanup, update the guidance first, then fix content by category or directory in manageable batches
 - Repair malformed, missing, and case-mismatched references before classifying files as orphaned
-- Combine tracked source references with rendered Hugo output before deleting unique files
-- Automatically delete only candidates classified as safe; review the smaller ambiguous group
-- Use `orphan_images.py --fix-references` for deterministic bulk repairs; leave ambiguous matches for review
-- Use `orphan_images.py --delete-safe` to remove only confidence-qualified candidates
+- Combine tracked source references with rendered Hugo output in every full audit before deleting unique files
+- Review every candidate; fix `requires review` cases manually and use the workflow to propose `safe-deletion candidate` paths in a reviewable PR
+- Run `orphan_images.py --fix-references` separately because it changes Markdown; review those repairs, rerun the full audit, and leave ambiguous matches for manual review
 - Run the full Hugo-backed audit on the workflow schedule (currently March and September at 09:00 UTC), or start it manually when an up-to-date report is needed
+- Exclude complete Learning Path directories marked with top-level `draft: true`; audit them after publication instead of treating unfinished assets as deletable
 - Put automated deletions on a bot-owned branch, rebuild and verify the site, and require human review through a non-auto-merged PR

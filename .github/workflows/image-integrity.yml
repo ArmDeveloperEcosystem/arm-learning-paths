@@ -127,7 +127,7 @@ jobs:
           {
             echo "## Automated image cleanup proposal"
             echo ""
-            echo "This PR deletes **$safe_count** images that have no tracked source reference, no rendered Hugo reference, and no unresolved nearby reference."
+            echo "This PR proposes deleting **$safe_count** safe-deletion candidates. Review every path before merging."
             echo ""
             echo "It leaves **$review_count** ambiguous images untouched for human review. It never writes directly to the default branch and is not configured for auto-merge."
             echo ""
@@ -148,7 +148,7 @@ jobs:
             echo "</details>"
             echo ""
             echo "<details>"
-            echo "<summary>Protected images needing review ($review_count)</summary>"
+            echo "<summary>Images requiring review ($review_count)</summary>"
             echo ""
             jq -r --arg base "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/blob/$GITHUB_SHA/" \
               '.needs_review[].path | "- [`\(.)`](\($base)\(.))"' "$REPORT_JSON"
@@ -215,7 +215,7 @@ jobs:
           if [ "${{ steps.cleanup.outputs.enabled }}" = "true" ] && \
              [ "${{ steps.cleanup-changes.outputs.has_changes }}" != "true" ]; then
             echo "" >> "$GITHUB_STEP_SUMMARY"
-            echo "No safe deletion changes were available for a cleanup PR." >> "$GITHUB_STEP_SUMMARY"
+            echo "No safe-deletion candidates were available for a cleanup PR." >> "$GITHUB_STEP_SUMMARY"
           fi
 
       - name: Upload image-integrity report

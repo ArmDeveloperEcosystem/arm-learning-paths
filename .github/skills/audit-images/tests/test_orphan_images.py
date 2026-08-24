@@ -31,13 +31,68 @@ def snapshot(files: dict[str, str | bytes]) -> orphan_images.Snapshot:
 
 
 class OrphanImagesTests(unittest.TestCase):
-    def test_recognizes_supported_reference_formats(self) -> None:
+    def test_cli_defaults_to_markdown_output(self) -> None:
+        with mock.patch.object(sys, "argv", [str(SCRIPT_PATH)]):
+            args = orphan_images.parse_args()
+
+        self.assertEqual(args.format, "markdown")
+
+    def test_snapshot_excludes_entire_draft_learning_path(self) -> None:
+        draft_root = "content/learning-paths/category/draft-example"
+        published_root = "content/learning-paths/category/published-example"
+        tracked = {
+            f"{draft_root}/_index.md": "draft-index",
+            f"{draft_root}/guide.md": "draft-guide",
+            f"{draft_root}/planned.png": "draft-image",
+            f"{published_root}/_index.md": "published-index",
+            f"{published_root}/guide.md": "published-guide",
+            f"{published_root}/used.png": "published-image",
+        }
+
+        with tempfile.TemporaryDirectory() as directory:
+            repository = Path(directory)
+            text_files = {
+                f"{draft_root}/_index.md": "---\ndraft: true\ncascade:\n    draft: true\n---\n",
+                f"{draft_root}/guide.md": "![Incomplete](missing.png)\n",
+                f"{published_root}/_index.md": "---\ndraft: false\n---\n",
+                f"{published_root}/guide.md": "![Published](used.png)\n",
+            }
+            for path, content in text_files.items():
+                destination = repository / path
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_text(content, encoding="utf-8")
+
+            with mock.patch.object(
+                orphan_images,
+                "tracked_file_oids",
+                return_value=tracked,
+            ):
+                state = orphan_images.current_snapshot(
+                    repository,
+                    orphan_images.DEFAULT_PATHS,
+                )
+                install_guide_state = orphan_images.current_snapshot(
+                    repository,
+                    ("content/install-guides",),
+                )
+
+        self.assertEqual(state.excluded_draft_learning_paths, (draft_root,))
+        self.assertEqual(install_guide_state.excluded_draft_learning_paths, ())
+        self.assertNotIn(f"{draft_root}/planned.png", state.files)
+        self.assertNotIn(f"{draft_root}/guide.md", state.text)
+        analysis = orphan_images.analyze(state, set())
+        self.assertEqual(analysis.tracked_images, 1)
+        self.assertEqual(analysis.referenced_images, 1)
+        self.assertEqual(analysis.orphan_images, [])
+        self.assertEqual(analysis.problems, [])
+        self.assertEqual(analysis.excluded_draft_learning_paths, 1)
+
+    def test_recognizes_repository_reference_formats(self) -> None:
         guide = """---
 diagram: frontmatter.png
 ---
 
 ![Convolution diagram#center](images/conv.jpg "Example of a (7,7) Conv node")
-<img src="images/html.png" alt="HTML example">
 {{< tab img_src="/learning-paths/category/example/images/hugo.webp">}}
 """
         analysis = orphan_images.analyze(
@@ -46,7 +101,6 @@ diagram: frontmatter.png
                     "content/learning-paths/category/example/guide.md": guide,
                     "content/learning-paths/category/example/frontmatter.png": b"frontmatter",
                     "content/learning-paths/category/example/images/conv.jpg": b"markdown",
-                    "content/learning-paths/category/example/images/html.png": b"html",
                     "content/learning-paths/category/example/images/hugo.webp": b"hugo",
                 }
             )
@@ -54,7 +108,20 @@ diagram: frontmatter.png
 
         self.assertEqual(analysis.orphan_images, [])
         self.assertEqual(analysis.problems, [])
-        self.assertEqual(analysis.referenced_images, 4)
+        self.assertEqual(analysis.referenced_images, 3)
+
+    def test_does_not_parse_unused_reference_formats(self) -> None:
+        references, problems = orphan_images.extract_markdown_references(
+            "content/learning-paths/category/example/guide.md",
+            """![Reference style][diagram]
+[diagram]: reference.png
+![Angle destination](<angle.png>)
+<img data-src="lazy.png" alt="Lazy image">
+""",
+        )
+
+        self.assertEqual(references, [])
+        self.assertEqual([problem.kind for problem in problems], ["malformed_markdown"])
 
     def test_malformed_reference_reserves_the_probable_image(self) -> None:
         malformed = (
@@ -112,9 +179,9 @@ diagram: frontmatter.png
         self.assertEqual(analysis.orphan_images, [image])
         self.assertEqual(analysis.safe_delete_images, [])
         self.assertEqual(analysis.needs_review_images, [image])
-        report = orphan_images.analysis_text(analysis, [])
-        self.assertIn("Awaiting full rendered classification: 1", report)
-        self.assertNotIn(f"- {image}", report)
+        report = orphan_images.analysis_markdown(analysis, [])
+        self.assertIn("| Requires review |", report)
+        self.assertIn(image, report)
 
     def test_exact_duplicate_orphan_is_safe_without_generated_site(self) -> None:
         source = "content/learning-paths/category/example/guide.md"
@@ -137,8 +204,8 @@ diagram: frontmatter.png
             analysis,
             analysis.all_problems(),
         )
-        self.assertIn("referenced byte-identical copies kept", report)
-        self.assertIn("delete only this unreferenced path", report)
+        self.assertIn("| Safe-deletion candidate |", report)
+        self.assertIn(duplicate, report)
         self.assertEqual(
             json.loads(
                 orphan_images.analysis_json(analysis, analysis.all_problems())
@@ -186,16 +253,22 @@ diagram: frontmatter.png
             set(),
         )
 
-        report = orphan_images.analysis_text(analysis, [])
+        report = orphan_images.analysis_markdown(analysis, [])
         structured = json.loads(orphan_images.analysis_json(analysis, []))
 
-        self.assertIn("Current images needing review (1)", report)
+        self.assertIn("| Requires review |", report)
         self.assertIn(image, report)
-        self.assertIn(f"{source}:1 -> screenshot.png", report)
-        self.assertIn("No actionable image-integrity problems found.", report)
+        self.assertIn(f"{source}:1", report)
+        self.assertIn("No malformed, missing, or case-mismatched references found.", report)
         self.assertEqual(structured["needs_review"][0]["path"], image)
         self.assertEqual(
-            structured["needs_review"][0]["related_references"][0]["source"],
+            structured["needs_review"][0]["category"],
+            "requires_review",
+        )
+        self.assertNotIn("reason", structured["needs_review"][0])
+        self.assertNotIn("recommendation", structured["needs_review"][0])
+        self.assertEqual(
+            structured["needs_review"][0]["related_sources"][0]["source"],
             source,
         )
 
@@ -259,6 +332,30 @@ diagram: frontmatter.png
                     baseline,
                     changed,
                     orphan_images.DEFAULT_PATHS,
+                )
+
+    def test_cleanup_manifest_rejects_a_newly_drafted_path(self) -> None:
+        draft_root = "content/learning-paths/category/draft-example"
+        image = f"{draft_root}/unused.png"
+        state = snapshot({image: b"unused"})
+        analysis = orphan_images.analyze(state, set())
+
+        with tempfile.TemporaryDirectory() as directory:
+            baseline = Path(directory) / "before.json"
+            baseline.write_text(
+                orphan_images.analysis_json(
+                    analysis,
+                    analysis.all_problems(),
+                    file_oids=state.files,
+                ),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(SystemExit, "excluded draft Learning Path"):
+                orphan_images.cleanup_manifest_paths(
+                    baseline,
+                    state.files,
+                    orphan_images.DEFAULT_PATHS,
+                    (draft_root,),
                 )
 
     def test_cleanup_verification_accepts_exact_staged_deletions(self) -> None:
@@ -330,7 +427,7 @@ diagram: frontmatter.png
             "https://github.com/owner/repository/blob/abc123/" + source + "#L1",
             report,
         )
-        self.assertIn("Current images needing review (1)", report)
+        self.assertIn("| Requires review |", report)
 
     def test_github_file_link_preserves_branch_name_slashes(self) -> None:
         link = orphan_images.github_file_link(
@@ -544,7 +641,7 @@ diagram: frontmatter.png
 
             structured = json.loads(json_report.read_text(encoding="utf-8"))
             self.assertEqual(structured["safe_deletions"], [image])
-            self.assertIn("Safe automatic deletions | 1", markdown_report.read_text())
+            self.assertIn("Safe-deletion candidates | 1", markdown_report.read_text())
 
             changes_report = temporary / "changes.md"
             with mock.patch.object(

@@ -74,17 +74,20 @@ destinations. This is separate from the alt-text audit so existing editorial
 findings do not block image-integrity checks.
 
 1. Run the checker in report mode before deleting anything.
-2. Run `scripts/orphan_images.py --fix-references` to repair deterministic
-   malformed, missing, and case-mismatched references. Review any ambiguous
-   references that remain instead of guessing.
-3. Render the site with Hugo and pass the output to `--generated-site`. The
-   checker combines tracked source references, rendered references, exact Git
-   blob matches, and unresolved-reference proximity to classify candidates.
-4. Run `--delete-safe` to remove only high-confidence candidates. Without a
-   rendered site, only byte-identical duplicates of referenced images qualify.
-5. Review only the smaller `needs review` group. Do not maintain a repository-wide
-   keep-list for historical candidates.
-6. Re-run the checker and Hugo build after cleanup.
+2. When reference repairs are needed, run
+   `scripts/orphan_images.py --fix-references` separately because it changes
+   Learning Path Markdown. Review those changes and any ambiguous references
+   instead of guessing.
+3. Run every full audit with a Hugo render passed to `--generated-site`. The
+   checker always combines tracked source references, rendered references,
+   exact Git blob matches, and unresolved-reference proximity before cleanup.
+4. Inspect every candidate in the report. Handle `requires review` candidates
+   manually outside the checker.
+5. Use the workflow's **Create cleanup PR** option to propose blob-verified
+   deletions for `safe-deletion candidate` paths.
+6. Review every proposed deletion before merging. The classification is audit
+   evidence, not a semantic decision. The workflow rebuilds Hugo and verifies
+   the staged deletion set automatically.
 
 Case-colliding duplicate paths are removed from the Git index without deleting
 the shared worktree file on case-insensitive systems. GitHub Actions never
@@ -96,7 +99,15 @@ repository; forks can still start manual runs. The workflow rebuilds Hugo and
 verifies the staged deletion set before pushing that proposal branch. It writes
 Markdown and JSON from one audit pass, then applies only manifest paths whose
 Git blob IDs still match the audited snapshot. The PR is never auto-merged, and
-`needs review` images remain untouched.
+`requires review` images remain untouched.
+
+Markdown is the default human-readable report format and provides clickable
+GitHub source links. JSON is the machine-readable cleanup manifest used by the
+workflow; the checker does not maintain a duplicate plain-text report.
+Learning Paths whose `_index.md` has top-level `draft: true` are excluded as
+complete directories, so neither unfinished references nor planned draft assets
+can enter an audit or automated deletion proposal. They become eligible for the
+next scheduled or manual audit after the draft flag is removed.
 
 ## Validation rules
 
@@ -159,17 +170,9 @@ python3 .github/skills/audit-images/scripts/orphan_images.py \
   --generated-site /tmp/arm-learning-paths-image-integrity
 ```
 
-Delete only candidates supported by the available confidence evidence:
-
-```bash
-python3 .github/skills/audit-images/scripts/orphan_images.py \
-  --generated-site /tmp/arm-learning-paths-image-integrity \
-  --delete-safe
-```
-
 Use the **Orphaned images cleanup** workflow's **Run workflow** control to start
 the same full Hugo-backed audit without waiting for the six-month schedule.
-Select **Create cleanup PR** to propose verified safe deletions, or leave it
+Select **Create cleanup PR** to propose verified safe-deletion candidates, or leave it
 clear for a report-only run. Scheduled canonical-repository runs automatically
 create or update the proposal. Pushes and pull requests do not trigger this
 workflow.
@@ -177,11 +180,12 @@ The repository's Actions settings must grant the workflow token read/write
 access and allow GitHub Actions to create pull requests. If those permissions
 are disabled, the audit report still completes before the proposal step fails.
 
-Every workflow report lists the actionable `needs review` group even when those
-images are historical. Markdown reports link each protected image and related
-source line, explain why automatic deletion was blocked, and recommend the next
-review action. The full audit uses both source references and the rendered Hugo
-site to avoid treating images used by published pages as safe to delete.
+Every workflow report lists both `requires review` and `safe-deletion candidate`
+groups for manual inspection. Records contain the image path, a high-level
+category, and any related source file and line; they do not attempt to infer the
+author's intent. Review every candidate during the initial cleanup and each
+six-month report. The full audit uses both source references and the rendered
+Hugo site to avoid treating images used by published pages as deletion candidates.
 The cleanup PR contains deletion-only content changes, links every proposed
 deletion at the audited commit, and links the protected review group. Before
 opening the PR, the workflow requires the staged deletions to exactly match the
@@ -189,18 +193,7 @@ JSON dry-run manifest, rebuilds the complete site, and rejects any newly
 introduced non-orphan problem. Rendered-site scans skip copied raster images
 before reading file contents while retaining text-based SVG reference checks.
 
-For a manual Git cleanup, build Hugo first and let the checker stage only the
-safe deletion set:
-
-```bash
-hugo --destination /tmp/arm-learning-paths-image-integrity
-python3 .github/skills/audit-images/scripts/orphan_images.py \
-  --generated-site /tmp/arm-learning-paths-image-integrity \
-  --delete-safe
-git diff --cached --name-status
-git diff --cached --stat
-```
-
-Review the staged deletion list before committing. The automated workflow uses
-the same `safe_delete_images` list and adds the post-deletion verification and
-pull-request boundary.
+Do not delete reported candidates directly through the checker. Fix protected
+`requires review` cases manually, and use the workflow-generated cleanup PR for
+safe-deletion candidates. The workflow applies the `safe_delete_images` list,
+verifies the manifest and rebuilt site, and leaves the proposal for human review.

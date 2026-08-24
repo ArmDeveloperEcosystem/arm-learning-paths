@@ -3,6 +3,8 @@
 
 The checker deliberately uses Git's tracked paths as the source of truth so
 filename comparisons remain case-sensitive on every operating system.
+It excludes draft Learning Paths, combines source and rendered-site evidence,
+and produces reviewable candidates rather than making semantic decisions.
 """
 
 from __future__ import annotations
@@ -36,23 +38,17 @@ IMAGE_EXTENSIONS = {
 }
 GENERATED_BINARY_IMAGE_EXTENSIONS = IMAGE_EXTENSIONS - {".svg"}
 
+# Find inline Markdown links and images; destination parsing happens separately.
 MARKDOWN_LINK_START_RE = re.compile(r"(!?)\[([^\]]*)\]\(")
-REFERENCE_DEFINITION_RE = re.compile(
-    r"^\s*\[([^\]]+)\]:\s*(?:<([^>]+)>|(\S+))", re.MULTILINE
-)
-REFERENCE_IMAGE_RE = re.compile(r"!\[([^\]]*)\]\[([^\]]*)\]")
-HTML_IMAGE_RE = re.compile(
-    r"<img\b[^>]*?\b(?:src|data-src)\s*=\s*([\"'])(.*?)\1[^>]*>",
-    re.IGNORECASE | re.DOTALL,
-)
-HUGO_IMAGE_RE = re.compile(
-    r"\b(?:img_src|image|src)\s*=\s*([\"'])(.*?)\1", re.IGNORECASE
-)
+# Find image paths in the repository's tab shortcode.
+HUGO_IMG_SRC_RE = re.compile(r"\bimg_src\s*=\s*([\"'])(.*?)\1", re.IGNORECASE)
+# Find the image fields currently used by demo front matter.
 FRONT_MATTER_IMAGE_RE = re.compile(
-    r"^\s*(?:cover|diagram|diagram_blowup|image|thumbnail)\s*:\s*"
+    r"^\s*(?:diagram|diagram_blowup)\s*:\s*"
     r"(?:[\"']([^\"']+)[\"']|(\S+))\s*$",
     re.IGNORECASE | re.MULTILINE,
 )
+# Protect exact local image paths mentioned outside rendered Markdown.
 LOCAL_IMAGE_TOKEN_RE = re.compile(
     r"(?<![A-Za-z0-9_.-])"
     r"((?:/|\./|\.\./)?[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)*"
@@ -60,6 +56,7 @@ LOCAL_IMAGE_TOKEN_RE = re.compile(
     r"(?:[?#][^\s\"'<>)]*)?",
     re.IGNORECASE,
 )
+# Find image URLs and paths in Hugo's generated text output.
 GENERATED_IMAGE_TOKEN_RE = re.compile(
     r"(?P<target>"
     r"(?:(?:https?:)?//[^\s\"'<>]+?\.(?:avif|bmp|gif|jpe?g|png|svg|tiff?|webp)"
@@ -68,8 +65,10 @@ GENERATED_IMAGE_TOKEN_RE = re.compile(
     r"(?:[?#][^\s\"'<>)]*)?)",
     re.IGNORECASE,
 )
+# Mask code examples so sample image syntax is not treated as page content.
 FENCE_RE = re.compile(r"^\s*(`{3,}|~{3,})")
 INLINE_CODE_RE = re.compile(r"(`+)(.+?)\1")
+# Reject external URI schemes before resolving repository-relative paths.
 URL_SCHEME_RE = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:")
 
 
@@ -78,6 +77,7 @@ class Snapshot:
     files: dict[str, str]
     text: dict[str, str]
     scopes: tuple[str, ...] = DEFAULT_PATHS
+    excluded_draft_learning_paths: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -134,6 +134,7 @@ class Analysis:
     duplicate_orphans: dict[str, tuple[str, ...]]
     generated_site_checked: bool
     problems: list[Problem]
+    excluded_draft_learning_paths: int = 0
 
     def all_problems(self) -> list[Problem]:
         safe = set(self.safe_delete_images)
@@ -141,17 +142,9 @@ class Analysis:
         for path in self.orphan_images:
             matches = self.duplicate_orphans.get(path, ())
             if path not in safe:
-                detail = "needs review because evidence is incomplete or ambiguous"
-            elif matches:
-                detail = (
-                    "delete only this unreferenced path; byte-identical referenced "
-                    "copies are kept"
-                )
+                detail = "requires_review"
             else:
-                detail = (
-                    "not referenced in tracked source or the rendered site; "
-                    "safe deletion proposal"
-                )
+                detail = "safe_deletion_candidate"
             orphan_problems.append(
                 Problem(
                     kind="orphan",
@@ -203,9 +196,43 @@ def tracked_file_oids(repo_root: Path) -> dict[str, str]:
     return tracked
 
 
+def draft_learning_path_roots(text_files: Mapping[str, str]) -> tuple[str, ...]:
+    """Return Learning Path directories whose top-level front matter is draft."""
+    roots: set[str] = set()
+    for path, text in text_files.items():
+        if not (
+            path.startswith("content/learning-paths/") and path.endswith("/_index.md")
+        ):
+            continue
+        for line in extract_front_matter(text).splitlines():
+            if not line or line[0].isspace():
+                continue
+            key, separator, value = line.partition(":")
+            if (
+                separator
+                and key.strip().lower() == "draft"
+                and value.split("#", 1)[0].strip().lower() == "true"
+            ):
+                roots.add(posixpath.dirname(path))
+                break
+    return tuple(sorted(roots))
+
+
+def path_in_directories(path: str, directories: Sequence[str]) -> bool:
+    return any(
+        path == directory or path.startswith(directory + "/")
+        for directory in directories
+    )
+
+
+def path_intersects_scopes(path: str, scopes: Sequence[str]) -> bool:
+    return path_in_scopes(path, scopes) or any(
+        scope.startswith(path.rstrip("/") + "/") for scope in scopes
+    )
+
+
 def current_snapshot(repo_root: Path, scopes: Sequence[str]) -> Snapshot:
     tracked = tracked_file_oids(repo_root)
-    files = {path: oid for path, oid in tracked.items() if path_in_scopes(path, scopes)}
     text_entries = [
         (path, oid) for path, oid in tracked.items() if not is_image_path(path)
     ]
@@ -222,7 +249,28 @@ def current_snapshot(repo_root: Path, scopes: Sequence[str]) -> Snapshot:
         if is_probably_text(data):
             text_files[path] = data.decode("utf-8", errors="replace")
 
-    return Snapshot(files=files, text=text_files, scopes=tuple(scopes))
+    all_draft_roots = draft_learning_path_roots(text_files)
+    draft_roots = tuple(
+        root for root in all_draft_roots if path_intersects_scopes(root, scopes)
+    )
+    files = {
+        path: oid
+        for path, oid in tracked.items()
+        if path_in_scopes(path, scopes)
+        and not path_in_directories(path, all_draft_roots)
+    }
+    text_files = {
+        path: text
+        for path, text in text_files.items()
+        if not path_in_directories(path, all_draft_roots)
+    }
+
+    return Snapshot(
+        files=files,
+        text=text_files,
+        scopes=tuple(scopes),
+        excluded_draft_learning_paths=draft_roots,
+    )
 
 
 def mask_fenced_code(text: str) -> str:
@@ -249,10 +297,12 @@ def mask_fenced_code(text: str) -> str:
 
 
 def line_number(text: str, offset: int) -> int:
+    """Return the one-based line containing a character offset."""
     return text.count("\n", 0, offset) + 1
 
 
 def find_closing_parenthesis(text: str, start: int) -> int | None:
+    """Find the closing parenthesis for an inline Markdown destination."""
     depth = 1
     quote = ""
     escaped = False
@@ -281,22 +331,16 @@ def find_closing_parenthesis(text: str, start: int) -> int | None:
 
 
 def parse_markdown_destination(value: str) -> tuple[str, str | None]:
+    """Parse a repository-style destination and optional Markdown title."""
     content = value.strip()
     if not content:
         return "", "missing image destination"
 
-    if content.startswith("<"):
-        closing = content.find(">")
-        if closing < 0:
-            return "", "unterminated angle-bracket destination"
-        target = content[1:closing]
-        remainder = content[closing + 1 :].strip()
-    else:
-        match = re.match(r"(?:\\.|\S)+", content)
-        if not match:
-            return "", "missing image destination"
-        target = match.group(0)
-        remainder = content[match.end() :].strip()
+    match = re.match(r"(?:\\.|[^\s<>])+", content)
+    if not match:
+        return "", "missing image destination"
+    target = match.group(0)
+    remainder = content[match.end() :].strip()
 
     if not remainder:
         return target, None
@@ -314,6 +358,7 @@ def parse_markdown_destination(value: str) -> tuple[str, str | None]:
 
 
 def extract_markdown_references(source: str, text: str) -> tuple[list[Reference], list[Problem]]:
+    """Extract supported source references and malformed image findings."""
     visible_text = mask_fenced_code(text)
     references: list[Reference] = []
     problems: list[Problem] = []
@@ -364,37 +409,7 @@ def extract_markdown_references(source: str, text: str) -> tuple[list[Reference]
                 )
             )
 
-    definitions: dict[str, tuple[str, int]] = {}
-    for match in REFERENCE_DEFINITION_RE.finditer(visible_text):
-        target = match.group(2) or match.group(3) or ""
-        definitions[match.group(1).strip().lower()] = (
-            target,
-            line_number(visible_text, match.start()),
-        )
-    for match in REFERENCE_IMAGE_RE.finditer(visible_text):
-        label = (match.group(2) or match.group(1)).strip().lower()
-        if label in definitions:
-            target, _definition_line = definitions[label]
-            references.append(
-                Reference(
-                    source=source,
-                    line=line_number(visible_text, match.start()),
-                    target=target,
-                    kind="markdown_reference_image",
-                )
-            )
-
-    for match in HTML_IMAGE_RE.finditer(visible_text):
-        references.append(
-            Reference(
-                source=source,
-                line=line_number(visible_text, match.start()),
-                target=match.group(2),
-                kind="html_image",
-            )
-        )
-
-    for match in HUGO_IMAGE_RE.finditer(visible_text):
+    for match in HUGO_IMG_SRC_RE.finditer(visible_text):
         references.append(
             Reference(
                 source=source,
@@ -449,8 +464,6 @@ def extract_conservative_references(source: str, text: str) -> list[Reference]:
 
 def normalize_target(source: str, target: str) -> str | None:
     value = target.strip().replace("\\ ", " ")
-    if value.startswith("<") and value.endswith(">"):
-        value = value[1:-1]
     parsed = urlparse(value)
     if parsed.scheme or value.startswith(("#", "$", "~")) or URL_SCHEME_RE.match(value):
         return None
@@ -519,9 +532,10 @@ def target_for_asset(
     return rendered + suffix
 
 
+# Repair only the duplicated image corruption already present in this repository.
 MALFORMED_DUPLICATE_IMAGE_RE = re.compile(
     r"^(?P<indent>\s*)!\[(?P<alt>[^\]]+)\]\("
-    r"(?P<target><[^>]+>|\S+)\s+"
+    r"(?P<target>\S+)\s+"
     r"(?P<quote>[\"'])(?P<title>.*?)(?P=quote)"
     r"(?P<duplicated>.+)\]\((?P=target)\s+"
     r"(?P=quote)(?P=title)(?P=quote)\)(?P<trailing>\s*)$"
@@ -624,6 +638,7 @@ def analyze(
     snapshot: Snapshot,
     generated_used: set[str] | None = None,
 ) -> Analysis:
+    """Classify tracked images from source and optional rendered-site evidence."""
     assets = {path for path in snapshot.files if is_image_path(path)}
     by_casefold: dict[str, list[str]] = defaultdict(list)
     for asset in assets:
@@ -728,6 +743,7 @@ def analyze(
         duplicate_orphans=duplicate_orphans,
         generated_site_checked=generated_used is not None,
         problems=sorted(problems, key=problem_sort_key),
+        excluded_draft_learning_paths=len(snapshot.excluded_draft_learning_paths),
     )
 
 
@@ -864,62 +880,34 @@ def problem_sort_key(problem: Problem) -> tuple:
 
 
 def needs_review_records(analysis: Analysis) -> list[dict[str, object]]:
-    """Describe why each protected orphan needs human review."""
+    """Return protected image paths and their related Markdown locations."""
     records: list[dict[str, object]] = []
     missing = [problem for problem in analysis.problems if problem.kind == "missing_image"]
 
     for path in analysis.needs_review_images:
-        related: list[dict[str, object]] = []
+        related_sources: list[dict[str, object]] = []
         for problem in missing:
             source_directory = posixpath.dirname(problem.path).rstrip("/") + "/"
-            if problem.replacement == path:
-                relationship = "unique nearby replacement"
-            elif not problem.replacement and path.startswith(source_directory):
-                relationship = "unresolved image in the same content directory"
-            else:
+            if not (
+                problem.replacement == path
+                or (not problem.replacement and path.startswith(source_directory))
+            ):
                 continue
-            related.append(
+            related_sources.append(
                 {
                     "source": problem.path,
                     "line": problem.line,
-                    "target": problem.target,
-                    "relationship": relationship,
                 }
             )
-
-        if any(item["relationship"] == "unique nearby replacement" for item in related):
-            reason = "A missing image reference uniquely points to this nearby asset."
-            recommendation = "Fix the related reference before considering deletion."
-        elif related:
-            reason = "An unresolved missing reference exists in the same content directory."
-            recommendation = "Inspect the image and article to decide whether to link or delete it."
-        elif not analysis.generated_site_checked:
-            reason = "Rendered-site evidence is unavailable and this is not an exact duplicate."
-            recommendation = "Run the full rendered audit before making a deletion decision."
-        else:
-            reason = "Available evidence is incomplete or ambiguous."
-            recommendation = "Inspect the image and nearby content before changing it."
 
         records.append(
             {
                 "path": path,
-                "reason": reason,
-                "recommendation": recommendation,
-                "related_references": related,
+                "category": "requires_review",
+                "related_sources": related_sources,
             }
         )
     return records
-
-
-def displayed_review_records(
-    analysis: Analysis,
-    records: Sequence[dict[str, object]],
-) -> tuple[list[dict[str, object]], int]:
-    """Separate actionable review details from candidates awaiting a full audit."""
-    if analysis.generated_site_checked:
-        return list(records), 0
-    displayed = [record for record in records if record["related_references"]]
-    return displayed, len(records) - len(displayed)
 
 
 def analysis_json(
@@ -943,6 +931,7 @@ def analysis_json(
                 "needs_review_images": len(analysis.needs_review_images),
                 "duplicate_orphans": len(analysis.duplicate_orphans),
                 "generated_site_checked": analysis.generated_site_checked,
+                "excluded_draft_learning_paths": analysis.excluded_draft_learning_paths,
                 "reported_problems": len(problems),
             },
             "safe_deletions": analysis.safe_delete_images,
@@ -960,6 +949,7 @@ def cleanup_manifest_paths(
     baseline_path: Path,
     tracked_files: Mapping[str, str],
     scopes: Sequence[str],
+    excluded_directories: Sequence[str] = (),
 ) -> list[str]:
     """Validate and return rendered-safe paths whose image blobs are unchanged."""
     try:
@@ -1002,6 +992,10 @@ def cleanup_manifest_paths(
 
         if not path_in_scopes(normalized, scopes):
             errors.append(f"cleanup path is outside the requested scopes: {normalized}")
+        if path_in_directories(normalized, excluded_directories):
+            errors.append(
+                f"cleanup path is inside an excluded draft Learning Path: {normalized}"
+            )
         if not is_image_path(normalized):
             errors.append(f"cleanup path is not a supported image: {normalized}")
         actual_oid = tracked_files.get(normalized)
@@ -1087,104 +1081,6 @@ def verify_cleanup(
     return errors
 
 
-def analysis_text(
-    analysis: Analysis,
-    problems: Sequence[Problem],
-    changes: Sequence[Change] = (),
-) -> str:
-    lines: list[str] = []
-    if changes:
-        lines.extend(["Applied changes", ""])
-        for change in changes:
-            location = change.path + (f":{change.line}" if change.line else "")
-            message = f"- {change.kind}: {location}"
-            if change.before or change.after:
-                message += f" ({change.before} -> {change.after})"
-            lines.append(message)
-        lines.append("")
-
-    lines.extend(
-        [
-            "Image integrity report",
-            "",
-            f"Tracked images: {analysis.tracked_images}",
-            f"Referenced images: {analysis.referenced_images}",
-            f"Current orphan candidates: {len(analysis.orphan_images)}",
-            f"Safe automatic deletions: {len(analysis.safe_delete_images)}",
-            f"Needs review: {len(analysis.needs_review_images)}",
-            f"Exact duplicate orphans: {len(analysis.duplicate_orphans)}",
-            "Generated site checked: "
-            + ("yes" if analysis.generated_site_checked else "no"),
-            f"All detected problems: {len(problems)}",
-        ]
-    )
-
-    review_records = needs_review_records(analysis)
-    displayed_records, awaiting_render = displayed_review_records(
-        analysis,
-        review_records,
-    )
-    if displayed_records:
-        lines.extend(["", f"Current images needing review ({len(displayed_records)})"])
-        for record in displayed_records:
-            lines.append(f"- {record['path']}")
-            lines.append(f"  Reason: {record['reason']}")
-            for related in record["related_references"]:
-                source = related["source"]
-                line = related["line"]
-                target = related["target"]
-                relationship = related["relationship"]
-                lines.append(
-                    f"  Related reference: {source}:{line} -> {target} "
-                    f"({relationship})"
-                )
-            lines.append(f"  Recommended action: {record['recommendation']}")
-    if awaiting_render:
-        lines.extend(
-            [
-                "",
-                f"Awaiting full rendered classification: {awaiting_render}",
-                "Run the full audit before reviewing these candidates individually.",
-            ]
-        )
-
-    if not problems:
-        lines.extend(["", "No actionable image-integrity problems found."])
-        return "\n".join(lines) + "\n"
-
-    grouped: dict[str, list[Problem]] = defaultdict(list)
-    for problem in problems:
-        grouped[problem.kind].append(problem)
-
-    labels = {
-        "case_mismatch": "Filename case mismatches",
-        "malformed_markdown": "Malformed Markdown image references",
-        "missing_image": "Missing referenced images",
-        "orphan": "Unreferenced image candidates",
-    }
-    for kind in sorted(grouped):
-        lines.extend(["", labels.get(kind, kind.replace("_", " ").title())])
-        for problem in grouped[kind]:
-            location = problem.path + (f":{problem.line}" if problem.line else "")
-            message = location
-            if problem.target:
-                message += f" -> {problem.target}"
-            if problem.matches:
-                relationship = (
-                    "referenced byte-identical copies kept"
-                    if problem.kind == "orphan"
-                    else "tracked as"
-                )
-                message += f" ({relationship} {', '.join(problem.matches)})"
-            if problem.replacement:
-                message += f" (safe replacement: {problem.replacement})"
-            if problem.detail:
-                message += f" ({problem.detail})"
-            lines.append(f"- {message}")
-
-    return "\n".join(lines) + "\n"
-
-
 def github_file_link(
     repository_url: str,
     revision: str,
@@ -1220,9 +1116,10 @@ def analysis_markdown(
         f"| Tracked images | {analysis.tracked_images} |",
         f"| Referenced images | {analysis.referenced_images} |",
         f"| Current orphan candidates | {len(analysis.orphan_images)} |",
-        f"| Safe automatic deletions | {len(analysis.safe_delete_images)} |",
-        f"| Needs review | {len(analysis.needs_review_images)} |",
+        f"| Safe-deletion candidates | {len(analysis.safe_delete_images)} |",
+        f"| Requires review | {len(analysis.needs_review_images)} |",
         f"| Exact duplicate orphans | {len(analysis.duplicate_orphans)} |",
+        f"| Draft Learning Paths excluded | {analysis.excluded_draft_learning_paths} |",
         "| Generated site checked | "
         + ("yes" if analysis.generated_site_checked else "no")
         + " |",
@@ -1230,48 +1127,38 @@ def analysis_markdown(
     ]
 
     review_records = needs_review_records(analysis)
-    displayed_records, awaiting_render = displayed_review_records(
-        analysis,
-        review_records,
-    )
-    if awaiting_render:
-        lines.append(f"| Awaiting full rendered classification | {awaiting_render} |")
-    if displayed_records:
+    if analysis.orphan_images:
         lines.extend(
             [
                 "",
-                f"### Current images needing review ({len(displayed_records)})",
+                "### Candidate review",
                 "",
+                "| Category | Image | Related Markdown |",
+                "| --- | --- | --- |",
             ]
         )
-        for record in displayed_records:
+        for path in analysis.safe_delete_images:
+            lines.append(
+                "| Safe-deletion candidate | "
+                f"{github_file_link(repository_url, revision, path)} | — |"
+            )
+        for record in review_records:
             path = str(record["path"])
-            lines.append(f"- {github_file_link(repository_url, revision, path)}")
-            lines.append(f"  - **Why:** {record['reason']}")
-            for related in record["related_references"]:
-                source = str(related["source"])
-                line = int(related["line"])
-                target = related["target"]
-                relationship = related["relationship"]
-                source_link = github_file_link(
+            related_links = [
+                github_file_link(
                     repository_url,
                     revision,
-                    source,
-                    line,
+                    str(related["source"]),
+                    int(related["line"]),
                 )
-                lines.append(
-                    f"  - **Related reference:** {source_link} requests `{target}` "
-                    f"({relationship})."
-                )
-            lines.append(f"  - **Recommended action:** {record['recommendation']}")
-    if awaiting_render:
-        lines.extend(
-            [
-                "",
-                f"> **{awaiting_render} additional candidates** are awaiting rendered-site "
-                "evidence. Run the full audit before reviewing them individually.",
+                for related in record["related_sources"]
             ]
-        )
+            related_markdown = "<br>".join(related_links) if related_links else "—"
+            lines.append(
+                "| Requires review | "
+                f"{github_file_link(repository_url, revision, path)} | "
+                f"{related_markdown} |"
+            )
 
     if changes:
         lines.extend(["", "### Applied changes", ""])
@@ -1284,45 +1171,42 @@ def analysis_markdown(
             )
             lines.append(f"- `{change.kind}`: {link}")
 
-    lines.extend(["", "### All detected problems", ""])
-    if not problems:
-        lines.append("No actionable image-integrity problems found.")
+    lines.extend(["", "### Reference problems", ""])
+    reference_problems = [problem for problem in problems if problem.kind != "orphan"]
+    if not reference_problems:
+        lines.append("No malformed, missing, or case-mismatched references found.")
         return "\n".join(lines) + "\n"
 
-    grouped: dict[str, list[Problem]] = defaultdict(list)
-    for problem in problems:
-        grouped[problem.kind].append(problem)
     labels = {
-        "case_mismatch": "Filename case mismatches",
-        "malformed_markdown": "Malformed Markdown image references",
-        "missing_image": "Missing referenced images",
-        "orphan": "Unreferenced image candidates",
+        "case_mismatch": "Filename case mismatch",
+        "malformed_markdown": "Malformed image reference",
+        "missing_image": "Missing image reference",
     }
-    for kind in sorted(grouped):
-        lines.extend(["", f"#### {labels.get(kind, kind.replace('_', ' ').title())}", ""])
-        for problem in grouped[kind]:
-            link = github_file_link(
-                repository_url,
-                revision,
-                problem.path,
-                problem.line,
+    lines.extend(
+        [
+            "| Category | Image | Markdown |",
+            "| --- | --- | --- |",
+        ]
+    )
+    for problem in reference_problems:
+        markdown_link = github_file_link(
+            repository_url,
+            revision,
+            problem.path,
+            problem.line,
+        )
+        image_paths = list(problem.matches)
+        if problem.replacement:
+            image_paths.append(problem.replacement)
+        if image_paths:
+            image = "<br>".join(
+                github_file_link(repository_url, revision, path)
+                for path in image_paths
             )
-            message = f"- {link}"
-            if problem.target:
-                message += f" requests `{problem.target}`"
-            if problem.matches:
-                relationship = (
-                    "referenced byte-identical copies kept"
-                    if kind == "orphan"
-                    else "tracked as"
-                )
-                matches = ", ".join(f"`{match}`" for match in problem.matches)
-                message += f" ({relationship} {matches})"
-            if problem.replacement:
-                message += f" (safe replacement: `{problem.replacement}`)"
-            if problem.detail:
-                message += f" — {problem.detail}"
-            lines.append(message)
+        else:
+            image = f"`{problem.target}`" if problem.target else "—"
+        category = labels.get(problem.kind, problem.kind.replace("_", " ").title())
+        lines.append(f"| {category} | {image} | {markdown_link} |")
     return "\n".join(lines) + "\n"
 
 
@@ -1340,28 +1224,23 @@ def cleanup_changes_report(
             sort_keys=True,
         ) + "\n"
 
-    if output_format == "markdown":
-        lines = ["### Applied cleanup manifest", ""]
-        if not changes:
-            lines.append("The verified manifest contained no safe deletions.")
-        else:
-            lines.append(f"Staged {len(changes)} verified image deletion(s).")
-            lines.append("")
-            for change in changes:
-                link = github_file_link(
-                    repository_url,
-                    revision,
-                    change.path,
-                    change.line,
-                )
-                lines.append(f"- `{change.kind}`: {link}")
-        return "\n".join(lines) + "\n"
+    if output_format != "markdown":
+        raise ValueError(f"Unsupported report format: {output_format}")
 
-    lines = ["Applied cleanup manifest", ""]
+    lines = ["### Applied cleanup manifest", ""]
     if not changes:
-        lines.append("No safe deletions were present.")
+        lines.append("The verified manifest contained no safe deletions.")
     else:
-        lines.extend(f"- {change.kind}: {change.path}" for change in changes)
+        lines.append(f"Staged {len(changes)} verified image deletion(s).")
+        lines.append("")
+        for change in changes:
+            link = github_file_link(
+                repository_url,
+                revision,
+                change.path,
+                change.line,
+            )
+            lines.append(f"- `{change.kind}`: {link}")
     return "\n".join(lines) + "\n"
 
 
@@ -1404,14 +1283,6 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     parser.add_argument(
-        "--delete-safe",
-        action="store_true",
-        help=(
-            "Remove only high-confidence orphan candidates. Without rendered-site "
-            "evidence, only exact duplicates of referenced images qualify."
-        ),
-    )
-    parser.add_argument(
         "--apply-cleanup",
         metavar="BASELINE_JSON",
         help=(
@@ -1429,8 +1300,9 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--format",
-        choices=("text", "json", "markdown"),
-        default="text",
+        choices=("json", "markdown"),
+        default="markdown",
+        help="Write human-readable Markdown (default) or machine-readable JSON.",
     )
     parser.add_argument(
         "--repository-url",
@@ -1450,12 +1322,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--repo-root", default=".")
     args = parser.parse_args()
     changing_modes = sum(
-        bool(mode) for mode in (args.fix_references, args.delete_safe, args.apply_cleanup)
+        bool(mode) for mode in (args.fix_references, args.apply_cleanup)
     )
     if changing_modes > 1:
-        parser.error(
-            "--fix-references, --delete-safe, and --apply-cleanup are mutually exclusive"
-        )
+        parser.error("--fix-references and --apply-cleanup are mutually exclusive")
     if args.verify_cleanup and changing_modes:
         parser.error("--verify-cleanup cannot be combined with file-changing modes")
     if args.apply_cleanup and args.generated_site:
@@ -1485,10 +1355,12 @@ def main() -> int:
         if not baseline_path.is_absolute():
             baseline_path = repo_root / baseline_path
         tracked_files = tracked_file_oids(repo_root)
+        snapshot = current_snapshot(repo_root, scopes)
         paths = cleanup_manifest_paths(
             baseline_path.resolve(),
             tracked_files,
             scopes,
+            snapshot.excluded_draft_learning_paths,
         )
         progress(f"Applying {len(paths)} blob-verified deletion(s) from the manifest.")
         changes = delete_safe_images(repo_root, paths, tuple(tracked_files))
@@ -1541,16 +1413,6 @@ def main() -> int:
         changes.extend(apply_safe_reference_fixes(repo_root, current))
         current_snapshot_value, current = analyze_current()
 
-    if args.delete_safe:
-        changes.extend(
-            delete_safe_images(
-                repo_root,
-                current.safe_delete_images,
-                tuple(current_snapshot_value.files),
-            )
-        )
-        current_snapshot_value, current = analyze_current()
-
     reported = current.all_problems()
     verification_errors: list[str] = []
     if args.verify_cleanup:
@@ -1571,7 +1433,7 @@ def main() -> int:
     )
     if args.format == "json":
         output = json_output
-    elif args.format == "markdown":
+    else:
         output = analysis_markdown(
             current,
             reported,
@@ -1579,9 +1441,6 @@ def main() -> int:
             args.repository_url,
             args.revision,
         )
-    else:
-        output = analysis_text(current, reported, changes)
-
     if args.output:
         write_cli_output(repo_root, args.output, output)
     else:
