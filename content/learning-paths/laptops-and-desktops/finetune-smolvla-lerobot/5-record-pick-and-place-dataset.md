@@ -138,7 +138,7 @@ lerobot-dataset-viz \
 The option `--display-compressed-images` is used for image datasets because uncompressed frames can exceed Rerun's distant-mode memory buffer and make early images appear blank. Press `Ctrl+C` after review.
 {{% /notice %}}
 
-Open `http://127.0.0.1:9090` in the DGX Spark desktop browser while the `lerobot-dataset-viz` command is running, then complete these steps:
+Open `http://127.0.0.1:9090` in the DGX Spark desktop browser while the `lerobot-dataset-viz` command is running, then complete the following steps:
   1. When the browser window opens, select **+** in the upper-left corner.
   2. Select **Open from URL...**.
   3. Enter `rerun+http://127.0.0.1:9876/proxy`.
@@ -146,7 +146,7 @@ Open `http://127.0.0.1:9090` in the DGX Spark desktop browser while the `lerobot
 
 
 {{% notice Note %}}
-The browser on the DGX Spark must be used as the browser to view the UI. Typically, CORS errors will occur if a browser on a different or remote desktop is attempted instead of the browser on the DGX Spark.
+You have to use the browser on the DGX Spark to view the UI. Typically, CORS errors will occur if you try to use a browser on a different or remote desktop instead of the browser on the DGX Spark.
 {{% /notice %}}
 
 You should now see the following console including your USB camera images as well as data:
@@ -210,6 +210,6 @@ Set `private=True` if the data shouldn't be public. The `push_to_hub()` method c
 
 ## What you've accomplished and what's next
 
-You've now recorded and validated a pick-and-place dataset with synchronized camera, state, and action features. You can train directly from the local dataset or use the optional Hub upload for sharing and remote access. 
+You've now recorded and validated a pick-and-place dataset with synchronized camera, state, and action features. You can train directly from the local dataset or optionally upload to a Hugging Face Hub repository for sharing and remote access. 
 
 Next, you'll fine-tune SmolVLA from `LOCAL_DATASET_ROOT` on the DGX Spark GPU.

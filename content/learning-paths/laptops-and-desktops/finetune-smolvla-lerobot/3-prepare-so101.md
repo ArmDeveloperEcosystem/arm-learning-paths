@@ -131,7 +131,9 @@ export WORKSPACE_CAMERA_ID="/dev/video2"
 ```
 Your device paths might differ.
 
+{{% notice Note %}}
 Device paths can change after reconnection, so don't assume that a previous device path still identifies the same arm or camera.
+{{% /notice %}}
 
 ## What you've accomplished and what's next
 

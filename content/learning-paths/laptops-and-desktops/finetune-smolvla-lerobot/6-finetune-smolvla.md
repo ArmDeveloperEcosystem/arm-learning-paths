@@ -1,19 +1,16 @@
 ---
-title: Fine-tune SmolVLA
+title: Fine-tune SmolVLA with the recorded SO-101 demonstrations
 description: Fine-tune SmolVLA with the recorded SO-101 dataset, monitor training, and validate the saved model.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Run fine-tuning
 
-## Fine-tune SmolVLA with your dataset
-
-You will fine-tune the SmolVLA model with the SO-101 demonstrations that you recorded. Fine-tuning adapts the model to your two camera views, robot joint layout, and pick-and-place task. Training runs locally on the DGX Spark GPU and produces a model checkpoint for physical evaluation.
+You'll fine-tune the SmolVLA model with the SO-101 demonstrations that you recorded. Fine-tuning adapts the model to your two camera views, robot joint layout, and pick-and-place task. Training runs locally on the DGX Spark GPU and produces a model checkpoint for physical evaluation.
 
 Use the same LeRobot environment as earlier. Keep the values of `DATASET_REPO_ID` and `LOCAL_DATASET_ROOT` from the recording step.
-
-## Run fine-tuning
 
 Choose unused paths for `LOCAL_TRAIN_OUTPUT_DIR` and `LOCAL_TRAIN_LOG`. The output directory stores checkpoints and training metadata, while the log file stores the terminal output. The command stops instead of overwriting either path if it already exists.
 
@@ -30,7 +27,9 @@ mkdir -p "$PWD/outputs/logs"
 : "${LOCAL_TRAIN_LOG:?Set LOCAL_TRAIN_LOG before training}"
 ```
 
-The validation commands exit with an error if any required value is empty. Then run:
+The validation commands exit with an error if any required value is empty. 
+
+After confirming, load the local dataset, fine-tune the model, and save the final checkpoint:
 
 ```bash
 set -o pipefail
@@ -54,9 +53,6 @@ PYTHONUNBUFFERED=1 lerobot-train \
   --wandb.enable=false \
   2>&1 | tee -a "$LOCAL_TRAIN_LOG"
 ```
-
-The command loads the local dataset, fine-tunes the model, and saves the final checkpoint.
-
 The key options are:
 
 - `--policy.path=lerobot/smolvla_base` selects the pretrained SmolVLA model to fine-tune. In robotics, a policy is a model that converts observations, such as camera images and joint positions, into actions that control the robot.

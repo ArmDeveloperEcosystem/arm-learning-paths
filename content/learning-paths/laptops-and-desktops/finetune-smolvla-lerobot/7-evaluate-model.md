@@ -87,7 +87,7 @@ The key options are:
   - `gripper_cam` becomes `camera1`
   - `workspace_cam` becomes `camera2`
 - `--task` provides the language instruction to the model. Use the same wording that was used when recording the dataset.
-- `--inference.type=rtc` enables Real-Time Chunking. RTC allows the model to update its planned action sequence when new observations become available while the robot-control loop continues running.
+- `--inference.type=rtc` enables Real-Time Chunking (RTC). RTC allows the model to update its planned action sequence when new observations become available while the robot-control loop continues running.
 - `--fps=30` sets the target robot-control frequency to 30 updates per second.
 - `--duration=30` stops model control after 30 seconds.
 - `--return_to_initial_position=false` prevents the follower from automatically moving back to its initial pose after the rollout.
