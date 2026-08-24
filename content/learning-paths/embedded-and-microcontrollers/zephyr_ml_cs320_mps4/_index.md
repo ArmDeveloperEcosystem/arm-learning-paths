@@ -1,6 +1,10 @@
 ---
 title: Deploying a Zephyr-Based ML Application on the Arm Corstone-320 MPS4 Platform with ExecuTorch
 
+draft: true
+cascade: 
+    draft: true
+
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for embedded software developers who want to deploy a Zephyr-based ML Application on the Arm Corstone-320 MPS4 Platform with ExecuTorch.
