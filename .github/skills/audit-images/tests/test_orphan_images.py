@@ -113,15 +113,27 @@ diagram: frontmatter.png
     def test_does_not_parse_unused_reference_formats(self) -> None:
         references, problems = orphan_images.extract_markdown_references(
             "content/learning-paths/category/example/guide.md",
-            """![Reference style][diagram]
+            r"""---
+diagram: "quoted-frontmatter.png"
+---
+
+![Reference style][diagram]
 [diagram]: reference.png
 ![Angle destination](<angle.png>)
 <img data-src="lazy.png" alt="Lazy image">
+[Image download](linked.png)
+{{< tab img_src='single-quoted-shortcode.png' >}}
+![Single-quoted title](single-title.png 'Title')
+![Parenthesized title](parenthesized-title.png (Title))
+![Escaped space](escaped\ path.png)
 """,
         )
 
         self.assertEqual(references, [])
-        self.assertEqual([problem.kind for problem in problems], ["malformed_markdown"])
+        self.assertEqual(
+            [problem.kind for problem in problems],
+            ["malformed_markdown"] * 4,
+        )
 
     def test_malformed_reference_reserves_the_probable_image(self) -> None:
         malformed = (

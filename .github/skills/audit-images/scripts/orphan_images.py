@@ -38,14 +38,13 @@ IMAGE_EXTENSIONS = {
 }
 GENERATED_BINARY_IMAGE_EXTENSIONS = IMAGE_EXTENSIONS - {".svg"}
 
-# Find inline Markdown links and images; destination parsing happens separately.
-MARKDOWN_LINK_START_RE = re.compile(r"(!?)\[([^\]]*)\]\(")
-# Find image paths in the repository's tab shortcode.
-HUGO_IMG_SRC_RE = re.compile(r"\bimg_src\s*=\s*([\"'])(.*?)\1", re.IGNORECASE)
-# Find the image fields currently used by demo front matter.
+# Find inline Markdown images; destination parsing happens separately.
+MARKDOWN_IMAGE_START_RE = re.compile(r"!\[([^\]]*)\]\(")
+# Find double-quoted image paths in the repository's tab shortcode.
+HUGO_IMG_SRC_RE = re.compile(r'\bimg_src\s*=\s*"([^"]*)"', re.IGNORECASE)
+# Find the unquoted image fields currently used by demo front matter.
 FRONT_MATTER_IMAGE_RE = re.compile(
-    r"^\s*(?:diagram|diagram_blowup)\s*:\s*"
-    r"(?:[\"']([^\"']+)[\"']|(\S+))\s*$",
+    r"^\s*(?:diagram|diagram_blowup)\s*:\s*([^\s\"']+)\s*$",
     re.IGNORECASE | re.MULTILINE,
 )
 # Protect exact local image paths mentioned outside rendered Markdown.
@@ -302,41 +301,31 @@ def line_number(text: str, offset: int) -> int:
 
 
 def find_closing_parenthesis(text: str, start: int) -> int | None:
-    """Find the closing parenthesis for an inline Markdown destination."""
+    """Find the balanced closing parenthesis outside a double-quoted title."""
     depth = 1
-    quote = ""
-    escaped = False
+    in_title = False
 
     for index in range(start, len(text)):
         char = text[index]
-        if escaped:
-            escaped = False
-            continue
-        if char == "\\":
-            escaped = True
-            continue
-        if quote:
-            if char == quote:
-                quote = ""
-            continue
-        if char in {'"', "'"}:
-            quote = char
-        elif char == "(":
-            depth += 1
-        elif char == ")":
-            depth -= 1
-            if depth == 0:
-                return index
+        if char == '"':
+            in_title = not in_title
+        elif not in_title:
+            if char == "(":
+                depth += 1
+            elif char == ")":
+                depth -= 1
+                if depth == 0:
+                    return index
     return None
 
 
 def parse_markdown_destination(value: str) -> tuple[str, str | None]:
-    """Parse a repository-style destination and optional Markdown title."""
+    """Parse a repository-style destination and optional double-quoted title."""
     content = value.strip()
     if not content:
         return "", "missing image destination"
 
-    match = re.match(r"(?:\\.|[^\s<>])+", content)
+    match = re.match(r"[^\s<>()]+", content)
     if not match:
         return "", "missing image destination"
     target = match.group(0)
@@ -345,13 +334,7 @@ def parse_markdown_destination(value: str) -> tuple[str, str | None]:
     if not remainder:
         return target, None
 
-    valid_title = (
-        len(remainder) >= 2
-        and (
-            (remainder[0] == remainder[-1] and remainder[0] in {'"', "'"})
-            or (remainder[0] == "(" and remainder[-1] == ")")
-        )
-    )
+    valid_title = len(remainder) >= 2 and remainder[0] == remainder[-1] == '"'
     if not valid_title:
         return target, "invalid text after the image destination"
     return target, None
@@ -363,33 +346,32 @@ def extract_markdown_references(source: str, text: str) -> tuple[list[Reference]
     references: list[Reference] = []
     problems: list[Problem] = []
 
-    for match in MARKDOWN_LINK_START_RE.finditer(visible_text):
+    for match in MARKDOWN_IMAGE_START_RE.finditer(visible_text):
         closing = find_closing_parenthesis(visible_text, match.end())
         source_line = line_number(visible_text, match.start())
         if closing is None:
-            if match.group(1):
-                line_end = visible_text.find("\n", match.end())
-                if line_end < 0:
-                    line_end = len(visible_text)
-                probable_target, _error = parse_markdown_destination(
-                    visible_text[match.end() : line_end]
+            line_end = visible_text.find("\n", match.end())
+            if line_end < 0:
+                line_end = len(visible_text)
+            probable_target, _error = parse_markdown_destination(
+                visible_text[match.end() : line_end]
+            )
+            problems.append(
+                Problem(
+                    kind="malformed_markdown",
+                    path=source,
+                    line=source_line,
+                    target=probable_target,
+                    detail="image destination is not closed",
                 )
-                problems.append(
-                    Problem(
-                        kind="malformed_markdown",
-                        path=source,
-                        line=source_line,
-                        target=probable_target,
-                        detail="image destination is not closed",
-                    )
-                )
+            )
             continue
 
         target, error = parse_markdown_destination(visible_text[match.end() : closing])
         target_is_image = bool(
             target and is_image_path(target.split("?", 1)[0].split("#", 1)[0])
         )
-        if error and (match.group(1) or target_is_image):
+        if error:
             problems.append(
                 Problem(
                     kind="malformed_markdown",
@@ -399,13 +381,13 @@ def extract_markdown_references(source: str, text: str) -> tuple[list[Reference]
                     detail=error,
                 )
             )
-        if target_is_image:
+        if target_is_image and not error:
             references.append(
                 Reference(
                     source=source,
                     line=source_line,
                     target=target,
-                    kind="markdown_image" if match.group(1) else "markdown_link",
+                    kind="markdown_image",
                 )
             )
 
@@ -414,7 +396,7 @@ def extract_markdown_references(source: str, text: str) -> tuple[list[Reference]
             Reference(
                 source=source,
                 line=line_number(visible_text, match.start()),
-                target=match.group(2),
+                target=match.group(1),
                 kind="hugo_image",
             )
         )
@@ -426,7 +408,7 @@ def extract_markdown_references(source: str, text: str) -> tuple[list[Reference]
                 Reference(
                     source=source,
                     line=line_number(front_matter, match.start()) + 1,
-                    target=match.group(1) or match.group(2),
+                    target=match.group(1),
                     kind="front_matter_image",
                 )
             )
@@ -463,7 +445,7 @@ def extract_conservative_references(source: str, text: str) -> list[Reference]:
 
 
 def normalize_target(source: str, target: str) -> str | None:
-    value = target.strip().replace("\\ ", " ")
+    value = target.strip()
     parsed = urlparse(value)
     if parsed.scheme or value.startswith(("#", "$", "~")) or URL_SCHEME_RE.match(value):
         return None
@@ -519,26 +501,22 @@ def target_for_asset(
     preserve_site_root: bool = False,
 ) -> str:
     """Format a tracked asset path for use from a source Markdown file."""
-    suffix_match = re.search(r"[?#]", original)
-    suffix = original[suffix_match.start() :] if suffix_match else ""
-    original_path = original[: suffix_match.start()] if suffix_match else original
-
-    if preserve_site_root and original_path.startswith("/") and asset.startswith("content/"):
+    if preserve_site_root and original.startswith("/") and asset.startswith("content/"):
         rendered = "/" + asset.removeprefix("content/")
     else:
         rendered = posixpath.relpath(asset, posixpath.dirname(source))
-        if original_path.startswith(("./", "/")) and not rendered.startswith("."):
+        if original.startswith(("./", "/")) and not rendered.startswith("."):
             rendered = "./" + rendered
-    return rendered + suffix
+    return rendered
 
 
 # Repair only the duplicated image corruption already present in this repository.
 MALFORMED_DUPLICATE_IMAGE_RE = re.compile(
     r"^(?P<indent>\s*)!\[(?P<alt>[^\]]+)\]\("
     r"(?P<target>\S+)\s+"
-    r"(?P<quote>[\"'])(?P<title>.*?)(?P=quote)"
+    r'"(?P<title>.*?)"'
     r"(?P<duplicated>.+)\]\((?P=target)\s+"
-    r"(?P=quote)(?P=title)(?P=quote)\)(?P<trailing>\s*)$"
+    r'"(?P=title)"\)(?P<trailing>\s*)$'
 )
 
 
@@ -549,10 +527,9 @@ def repair_duplicated_image_line(line: str) -> str | None:
     match = MALFORMED_DUPLICATE_IMAGE_RE.fullmatch(value)
     if not match:
         return None
-    quote = match.group("quote")
     return (
         f'{match.group("indent")}![{match.group("alt")}]'
-        f'({match.group("target")} {quote}{match.group("title")}{quote})'
+        f'({match.group("target")} "{match.group("title")}")'
         f'{match.group("trailing")}{newline}'
     )
 
