@@ -37,13 +37,13 @@ generated_summary_faq:
     You'll collect SO-101 pick-and-place demonstrations, fine-tune SmolVLA with LeRobot, and
     evaluate the resulting policy on an Arm-based NVIDIA DGX Spark. First, you'll set up Python,
     identify the USB devices, calibrate the leader-follower pair, and verify teleoperation. Next,
-    you'll record and review multi-camera episodes, optionally upload the dataset, fine-tune the
+    you'll record and review multi-camera episodes and fine-tune the
     model, then assess its control of the physical pick-and-place task.
   faqs:
   - question: How do I know the robot and cameras are mapped to the right devices before calibration?
     answer: >-
       Set `ROBOT_PORT`, `LEADER_PORT`, `GRIPPER_CAMERA_ID`, and `WORKSPACE_CAMERA_ID` in the
-      terminal you will use for calibration. If you reconnect a USB device or open a new terminal,
+      terminal that you'll use for calibration. If you reconnect a USB device or open a new terminal,
       repeat device discovery and export the current paths before proceeding.
   - question: Which components do I connect where when wiring the setup?
     answer: >-
@@ -61,7 +61,7 @@ generated_summary_faq:
       and leave enough space between them for grasping and movement.
   - question: What result should I expect after fine-tuning SmolVLA with my demonstrations?
     answer: >-
-      You get a SmolVLA model adapted to your demonstrations. Evaluate it with LeRobot on the
+      You'll get a SmolVLA model adapted to your demonstrations. Evaluate it with LeRobot on the
       Arm-based NVIDIA DGX Spark, then use it to control the robot on the vial-to-rack pick-and-place
       task under the recorded conditions.
 # END generated_summary_faq
