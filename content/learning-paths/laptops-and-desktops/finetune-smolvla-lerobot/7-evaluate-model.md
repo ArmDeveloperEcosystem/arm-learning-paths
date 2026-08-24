@@ -29,6 +29,15 @@ Confirm that the following environment variables still identify the correct devi
 
 USB device identifiers can change when a device is disconnected or the computer is restarted. If a device is no longer detected correctly, repeat the device-discovery steps from the hardware setup section.
 
+After confirming the current camera IDs, rebuild `ROBOT_CAMERAS` with the exact resolutions, frame rates, `fourcc` encodings, and backends used during recording. If you used the default profiles, run:
+
+```bash
+export ROBOT_CAMERAS="{gripper_cam: {type: opencv, index_or_path: $GRIPPER_CAMERA_ID, width: 640, height: 480, fps: 30}, workspace_cam: {type: opencv, index_or_path: $WORKSPACE_CAMERA_ID, width: 640, height: 480, fps: 30}}"
+: "${ROBOT_CAMERAS:?Set ROBOT_CAMERAS before evaluation}"
+```
+
+If you used the camera-specific replacement from the teleoperation page, repeat that export instead. Rebuilding the value incorporates the current device IDs while preserving the profiles used to collect the training images.
+
 Keep the following settings consistent with data collection:
 
 - Camera positions and mounting angles
@@ -58,7 +67,7 @@ lerobot-rollout \
   --robot.type=so101_follower \
   --robot.port="$ROBOT_PORT" \
   --robot.id=smolvla_follower \
-  --robot.cameras="{gripper_cam: {type: opencv, index_or_path: $GRIPPER_CAMERA_ID, width: 640, height: 480, fps: 30}, workspace_cam: {type: opencv, index_or_path: $WORKSPACE_CAMERA_ID, width: 640, height: 480, fps: 30}}" \
+  --robot.cameras="$ROBOT_CAMERAS" \
   --rename_map="{observation.images.gripper_cam: observation.images.camera1, observation.images.workspace_cam: observation.images.camera2}" \
   --task="Pick up the vial and place it in the yellow rack" \
   --fps=30 \
@@ -75,6 +84,7 @@ The key options are:
 - `--policy.path="$MODEL_CHECKPOINT"` loads the fine-tuned model checkpoint.
 - `--robot.type=so101_follower` selects the SO-101 follower implementation.
 - `--robot.id=smolvla_follower` selects the calibration associated with this robot identifier.
+- `--robot.cameras="$ROBOT_CAMERAS"` reuses the camera profiles selected during teleoperation and recording.
 - `--rename_map` maps the live camera feature names to the input names expected by the model. This mapping must match the mapping used during fine-tuning:
   - `gripper_cam` becomes `camera1`
   - `workspace_cam` becomes `camera2`

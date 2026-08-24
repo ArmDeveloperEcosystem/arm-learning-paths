@@ -51,14 +51,21 @@ If LeRobot finds an existing calibration, follow the prompt to reuse it or press
 
 Teleoperation uses the leader arm to control the follower in real time.
 
-Place both arms in similar stable poses and clear the follower workspace. Run a 60-second test:
+Store the camera configuration in `ROBOT_CAMERAS` so you can reuse the same OpenCV settings during teleoperation, data recording, and model evaluation. Start with the profiles reported by camera discovery:
+
+```bash
+export ROBOT_CAMERAS="{gripper_cam: {type: opencv, index_or_path: $GRIPPER_CAMERA_ID, width: 640, height: 480, fps: 30}, workspace_cam: {type: opencv, index_or_path: $WORKSPACE_CAMERA_ID, width: 640, height: 480, fps: 30}}"
+: "${ROBOT_CAMERAS:?Set ROBOT_CAMERAS before teleoperation}"
+```
+
+Place both arms in similar stable poses and clear the follower workspace. Run a 60-second test with that configuration:
 
 ```bash
 lerobot-teleoperate \
   --robot.type=so101_follower \
   --robot.port="$ROBOT_PORT" \
   --robot.id=smolvla_follower \
-  --robot.cameras="{gripper_cam: {type: opencv, index_or_path: $GRIPPER_CAMERA_ID, width: 640, height: 480, fps: 30}, workspace_cam: {type: opencv, index_or_path: $WORKSPACE_CAMERA_ID, width: 640, height: 480, fps: 30}}" \
+  --robot.cameras="$ROBOT_CAMERAS" \
   --teleop.type=so101_leader \
   --teleop.port="$LEADER_PORT" \
   --teleop.id=smolvla_leader \
@@ -67,17 +74,14 @@ lerobot-teleoperate \
   --display_data=false
 ```
 
-{{% notice Note about some USB cameras %}}
-Some USB cameras may require specific settings in order to operate properly within OpenCV. For example, your workspace USB camera may require a specific resolution and "fourcc" encoding type while the gripper USB camera requires its own configuration:
+{{% notice Camera-specific OpenCV settings %}}
+Some USB cameras require an explicit resolution, `fourcc` encoding, or backend. If the default configuration fails, replace `ROBOT_CAMERAS` with settings supported by both cameras. For example, the following configuration uses `YUYV` for the gripper camera and `MJPG` for the workspace camera:
 
+```bash
+export ROBOT_CAMERAS="{gripper_cam: {type: opencv, index_or_path: $GRIPPER_CAMERA_ID, width: 640, height: 480, fps: 30, fourcc: YUYV, backend: V4L2}, workspace_cam: {type: opencv, index_or_path: $WORKSPACE_CAMERA_ID, width: 1280, height: 720, fps: 30, fourcc: MJPG, backend: V4L2}}"
+```
 
-        --robot.cameras="{gripper_cam: {type: opencv, index_or_path: $GRIPPER_CAMERA_ID, width: 640, height: 480, fps: 30, fourcc: YUYV, backend: V4L2}, workspace_cam: {type: opencv, index_or_path: $WORKSPACE_CAMERA_ID, width: 1280, height: 720, fps: 30, fourcc: MJPG, backend: V4L2}}"
-
-
-
-
-If not properly configured, OpenCV can often crash with exceptions while its trying to open a given camera. 
-
+Run the complete `lerobot-teleoperate` command again after changing the value. Once both streams work, keep the exact `ROBOT_CAMERAS` configuration for recording and evaluation. Returning to the generic profiles later can cause the same OpenCV error or change the images supplied to the model.
 {{% /notice %}}
 
 Move one joint at a time at first. Confirm that the follower mirrors each movement correctly and that its gripper opens and closes. Stop the test if the follower moves unexpectedly.
