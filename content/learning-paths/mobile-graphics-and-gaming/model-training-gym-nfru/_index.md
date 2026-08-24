@@ -53,7 +53,7 @@ generated_summary_faq:
       Create and inspect PyTorch checkpoints in the training and evaluation notebooks. In the
       evaluation notebook, you can measure accuracy, compare checkpoints, and see a visual comparison
       of the generated NFRU frame with the ground truth frame.
-  - question: Which should I use for deployment, QAT or Post-training quantization (PTQ)?
+  - question: Should I use QAT or Post-training quantization (PTQ) for deployment?
     answer: >-
       Start with PTQ if you want a faster trial because it calibrates an already-trained model
       without another training phase. Use QAT when PTQ causes unacceptable accuracy or visual-quality
