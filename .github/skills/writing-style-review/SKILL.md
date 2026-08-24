@@ -48,6 +48,8 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use visual breaks to prevent walls of text. Code blocks count as visual breaks.
 - If a section explains three or more things, suggest splitting it.
 - Ensure lists have a lead-in sentence or phrase ending with a colon. Ensure each item starts with a capitalized word unless the word is supposed to be styled differently. Ensure list items don't end with periods unless the item is one or more complete sentences.
+- Avoid back-to-back notices. Condense consecutive notices into a single notice with bullet list items.
+- Limit lists in paragraph to four items. Favor splitting sentences with more than four list items, or using bullets.
 
 ## Arm framing and technical depth
 
@@ -81,7 +83,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 
 ## Tone cleanup
 
-- Avoid `simply`, `just`, `obviously`, and `clearly`.
+- Avoid `simply`, `just`, `obviously`, and `clearly`. Any terms that could be condescending
 - Avoid `above`, `below`, `left`, `right`, `top`, and `bottom` when referring to content.
 - Acknowledge difficulty naturally, such as `this step can be confusing at first`.
 - Normalize errors, such as `if you see this error, here's how to fix it`.

@@ -1,10 +1,6 @@
 ---
 title: Fine-tune SmolVLA for an SO-101 pick-and-place task
 
-draft: true
-cascade:
-    draft: true
-
 description: Record SO-101 demonstrations, fine-tune SmolVLA on an Arm-based NVIDIA DGX Spark, and evaluate the model with LeRobot.
 
 minutes_to_complete: 1920

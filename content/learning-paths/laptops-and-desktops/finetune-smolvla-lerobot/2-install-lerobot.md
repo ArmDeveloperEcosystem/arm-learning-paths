@@ -1,5 +1,5 @@
 ---
-title: Install LeRobot
+title: Install LeRobot and prepare a Python environment
 description: Prepare and verify a LeRobot environment for SO-101 data collection and SmolVLA fine-tuning.
 weight: 3
 
@@ -19,11 +19,11 @@ ffmpeg -version
 uv --version
 ```
 
-Use the [LeRobot installation documentation](https://huggingface.co/docs/lerobot/installation) if one of these tools is missing.
+If one of these tools is missing, follow the [LeRobot installation documentation](https://huggingface.co/docs/lerobot/installation).
 
 ## Create an isolated environment
 
-Clone the official LeRobot repository and check out the tested revision.
+Clone the official LeRobot repository and check out the tested revision:
 
 ```bash
 git clone https://github.com/huggingface/lerobot.git
@@ -45,7 +45,7 @@ Print the core versions and confirm that PyTorch can see CUDA:
 python -c "import platform, torch; from importlib.metadata import version; print({'python': platform.python_version(), 'lerobot': version('lerobot'), 'torch': torch.__version__, 'cuda': torch.cuda.is_available()})"
 ```
 
-The output from the DGX Spark should be similar to:
+The output from the DGX Spark is similar to:
 
 ```output
 {'python': '3.12.3', 'lerobot': '0.6.0', 'torch': '2.11.0+cu128', 'cuda': True}
@@ -64,7 +64,7 @@ The loop exits without output when all commands are available.
 
 ## Authenticate with Hugging Face
 
-Sign into Hugging Face interactively:
+Sign in to Hugging Face interactively:
 
 ```bash
 hf auth login
@@ -73,6 +73,8 @@ hf auth whoami
 
 Follow the browser or terminal prompt.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You now have a Python environment with CUDA, LeRobot's SO-101 tools, and SmolVLA dependencies. Keep this terminal active. Next, connect the two arms and cameras to the DGX Spark and identify their device paths.
+You now have a Python environment with CUDA, LeRobot's SO-101 tools, and SmolVLA dependencies. Keep this terminal active. 
+
+Next, you'll connect the two arms and cameras to the DGX Spark and identify their device paths.

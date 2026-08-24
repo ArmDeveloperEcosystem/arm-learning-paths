@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Fine-tune SmolVLA with your dataset
 
-You will fine-tune the SmolVLA model with the SO-101 demonstrations you recorded. Fine-tuning adapts the model to your two camera views, robot joint layout, and pick-and-place task. Training runs locally on the DGX Spark GPU and produces a model checkpoint for physical evaluation.
+You will fine-tune the SmolVLA model with the SO-101 demonstrations that you recorded. Fine-tuning adapts the model to your two camera views, robot joint layout, and pick-and-place task. Training runs locally on the DGX Spark GPU and produces a model checkpoint for physical evaluation.
 
-Use the same LeRobot environment as the previous pages. Keep the values of `DATASET_REPO_ID` and `LOCAL_DATASET_ROOT` from the recording step.
+Use the same LeRobot environment as earlier. Keep the values of `DATASET_REPO_ID` and `LOCAL_DATASET_ROOT` from the recording step.
 
 ## Run fine-tuning
 
@@ -65,7 +65,7 @@ The key options are:
   - `workspace_cam` to `camera2`
 - `--policy.empty_cameras=1` allows one expected camera input to be absent. The model's third camera input, `camera3`, is left empty.
 - `--steps=20000` sets a fine-tuning baseline of 20,000 optimization steps. The SmolVLA documentation uses this value as a starting point.
-- `--batch_size=64` follows the documented starting configuration and fits within the memory available on the DGX Spark used for this Learning Path.
+- `--batch_size=64` follows the documented starting configuration and fits within the memory available on the DGX Spark.
 - `--save_checkpoint=true` enables checkpoint saving, while `--save_freq=20000` saves a checkpoint after 20,000 steps. Because the training run is also 20,000 steps long, this configuration saves the final checkpoint without creating intermediate checkpoints.
 - `--policy.push_to_hub=false` prevents the trained model from being uploaded automatically to the Hugging Face Hub.
 - `PYTHONUNBUFFERED=1` makes Python write log messages immediately instead of buffering them. This allows `tee` to display and save the training output in real time.
@@ -102,7 +102,7 @@ done
 echo "Checkpoint files verified."
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 Checkpoint files verified.
@@ -117,7 +117,7 @@ Checkpoint files verified.
 3. A flow-matching action expert generates a chunk of continuous future joint commands.
 4. During evaluation, LeRobot executes commands from the chunk and requests updated chunks as new observations arrive.
 
-An *action chunk* is a short sequence of commands rather than one command.
+An action chunk is a short sequence of commands rather than one command.
 
 - During training, flow matching adds noise to demonstrated action chunks and learns how to recover the demonstrated actions.
 - During evaluation, the model starts from noise and iteratively produces a chunk conditioned on the live observations and instruction.
@@ -128,7 +128,7 @@ Fine-tuning adapts the model to the SO-101 geometry, camera viewpoints, and demo
 
 ## Review results from the example experiment
 
-The following results come from the experiment performed while creating this Learning Path. They show what happened with this dataset on the DGX Spark; they aren't expected values for every training run.
+The following results come from the experiment performed while creating this Learning Path. The results show what happened with this dataset on the DGX Spark, and they aren't expected values for every training run.
 
 The example run completed 20,000 steps in about 30 hours. Mean loss decreased across successive 4,000-step windows:
 
@@ -140,8 +140,10 @@ The example run completed 20,000 steps in about 30 hours. Mean loss decreased ac
 | 12,200–16,000 | 0.0204 |
 | 16,200–20,000 | 0.0175 |
 
-The final logged loss was 0.017, and the last 2,000 steps stayed between 0.017 and 0.018. These values show stable optimization for this example. These values don’t measure physical task success.
+The final logged loss was 0.017, and the last 2,000 steps stayed between 0.017 and 0.018. These values show stable optimization for this example but don’t measure physical task success.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You fine-tuned SmolVLA with the recorded SO-101 dataset. Next, connect the follower and cameras to run controlled physical evaluations.
+You've now fine-tuned SmolVLA with the recorded SO-101 dataset. 
+
+Next, you'll connect the follower and cameras to run controlled physical evaluations.

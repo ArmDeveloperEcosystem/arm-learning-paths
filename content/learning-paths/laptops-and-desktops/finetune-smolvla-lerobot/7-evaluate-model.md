@@ -7,19 +7,17 @@ weight: 8
 layout: learningpathall
 ---
 
-## Evaluate the fine-tuned model
+## Prepare the evaluation
 
-You will load the model checkpoint from the previous page and use it to control the SO-101 follower for one pick-and-place attempt.
+You'll load the model checkpoint from earlier and use it to control the SO-101 follower for one pick-and-place attempt.
 
-During evaluation, the leader arm is not used. The model receives:
+During evaluation, the leader arm isn't used. The model receives:
 
 - Images from the gripper and workspace cameras
 - The current joint positions of the follower
 - The task instruction
 
-## Prepare the evaluation
-
-Reconnect the follower and both cameras.
+Start by reconnecting the follower and both cameras.
 
 Confirm that the following environment variables still identify the correct devices:
 
@@ -36,7 +34,7 @@ export ROBOT_CAMERAS="{gripper_cam: {type: opencv, index_or_path: $GRIPPER_CAMER
 : "${ROBOT_CAMERAS:?Set ROBOT_CAMERAS before evaluation}"
 ```
 
-If you used the camera-specific replacement from the teleoperation page, repeat that export instead. Rebuilding the value incorporates the current device IDs while preserving the profiles used to collect the training images.
+If you used the camera-specific replacement from the teleoperation section, repeat that export instead. Rebuilding the value incorporates the current device IDs while preserving the profiles used to collect the training images.
 
 Keep the following settings consistent with data collection:
 
@@ -51,7 +49,7 @@ Set `MODEL_CHECKPOINT` to the checkpoint created during fine-tuning.
 ## Run the model
 
 {{% notice Warning %}}
-The follower may begin moving as soon as model initialization finishes. Keep your hands and other objects outside the robot workspace, and keep the emergency stop within reach.
+The follower might begin moving as soon as model initialization finishes. Keep your hands and other objects outside the robot workspace, and keep the emergency stop within reach.
 {{% /notice %}}
 
 In robotics, one complete execution of a trained model is called a rollout.
@@ -114,14 +112,14 @@ A successful rollout should complete the requested task without human interventi
 
 A rollout is unsuccessful if:
 
-- The follower does not grasp the vial
+- The follower doesn't grasp the vial
 - The vial is dropped
 - The vial is released outside a rack hole
-- The task is not completed before the time limit
+- The task isn't completed before the time limit
 - You need to stop or assist the robot
 
-A failed rollout does not necessarily indicate a problem with the command. It may indicate that the starting layout is outside the demonstrated range, the demonstrations were inconsistent, or the model needs additional training.
+A failed rollout doesn't necessarily indicate a problem with the command. It might indicate that the starting layout is outside the demonstrated range, the demonstrations were inconsistent, or the model needs additional training.
 
 ## What you've accomplished
 
-You loaded a fine-tuned SmolVLA checkpoint and used it to control the SO-101 follower. You also observed the model's behavior during a physical pick-and-place attempt.
+You've now loaded a fine-tuned SmolVLA checkpoint and used it to control the SO-101 follower. You also observed the model's behavior during a physical pick-and-place attempt.
