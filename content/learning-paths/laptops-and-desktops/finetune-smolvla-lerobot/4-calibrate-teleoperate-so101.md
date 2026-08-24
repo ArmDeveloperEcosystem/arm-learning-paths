@@ -45,7 +45,7 @@ Place the follower in the middle-range pose shown in the following image. Then, 
 
 ![Follower SO-101 supported in the middle-range starting pose before calibration begins. The shoulder, elbow, wrist, and gripper all have room to move in both directions.#center](images/4-lerobot-follower-calibration.png "Follower calibration starting pose")
 
-If LeRobot finds an existing calibration, follow the prompt to reuse it or press the **c** key to recalibrate. Here, the **c** key belongs to the calibration prompt. It isn't a dataset-recording control.
+If LeRobot finds an existing calibration, follow the prompt to reuse it or press the **c** key to recalibrate. The c key applies to the calibration prompt, not dataset recording.
 
 ## Verify teleoperation
 

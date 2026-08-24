@@ -46,7 +46,7 @@ A useful way to understand a vision-language-action (VLA) model is as a progress
 2. A vision-language model (VLM) adds images to the text context. It can describe a scene or answer questions about it, but its normal output is still language.
 3. A VLA adds robot state and an action-generation component. Instead of producing only text, it produces numerical actions that can control a robot.
 
-A VLA receives one or more camera images, a natural-language task instruction, and the robot's current joint state. For the SO-101, the state includes the measured joint positions. The output is a continuous robot action containing targets for the shoulder, elbow, wrist, and gripper joints. The model repeatedly observes the updated scene and state, predicts the next actions, and forms a closed control loop with the robot.
+A VLA receives one or more camera images and a natural-language task instruction. It also receives the robot's current joint state. For the SO-101, the state includes the measured joint positions. The output is a continuous robot action containing targets for the shoulder, elbow, wrist, and gripper joints. The model repeatedly observes the updated scene and state, predicts the next actions, and forms a closed control loop with the robot.
 
 [SmolVLA](https://huggingface.co/docs/lerobot/smolvla) is Hugging Face's lightweight foundation model for robot control. Its pretrained representations provide a starting point for understanding images and instructions, but you fine-tune it on your own demonstrations so it learns the robot geometry, camera viewpoints, and task behavior.
 

@@ -123,3 +123,5 @@ A failed rollout doesn't necessarily indicate a problem with the command. It mig
 ## What you've accomplished
 
 You've now loaded a fine-tuned SmolVLA checkpoint and used it to control the SO-101 follower. You also observed the model's behavior during a physical pick-and-place attempt.
+
+From here, you can use this workflow as a starting point for future robot-learning experiments.

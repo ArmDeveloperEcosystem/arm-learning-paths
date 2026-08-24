@@ -82,6 +82,7 @@ lerobot-record \
 ```
 
 {{% notice Note %}}
+Keep these points in mind:
 - Some users might need to adjust the `dataset.reset_time_s` value depending on how long it takes to reset the workspace for another run. 15 seconds might be too short a time to get everything reset and get back to the leader arm for the next episode recording.
 - LeRobot provides keyboard controls to end an episode or reset period early, or to cancel the current episode. These controls can be useful when you need to discard a demonstration. In the tested LeRobot 0.6.0 setup, however, using them occasionally caused the recording process to stop with an error. Behavior might differ with other versions or systems. 
 
@@ -137,11 +138,11 @@ lerobot-dataset-viz \
 The option `--display-compressed-images` is used for image datasets because uncompressed frames can exceed Rerun's distant-mode memory buffer and make early images appear blank. Press `Ctrl+C` after review.
 {{% /notice %}}
 
-Open `http://127.0.0.1:9090` using your DGX Spark desktop browser while the `lerobot-dataset-viz` command is running and then:
-  - When the browser window opens, click on the **+** on the upper left hand section of the UI
-  - Select **Open from URL...**
-  - Enter the following URL: **"rerun+http://127.0.0.1:9876/proxy"**
-  - Select **Open**
+Open `http://127.0.0.1:9090` in the DGX Spark desktop browser while the `lerobot-dataset-viz` command is running, then complete these steps:
+  - When the browser window opens, select **+** in the upper-left corner.
+  - Select **Open from URL...**.
+  - Enter `rerun+http://127.0.0.1:9876/proxy`.
+  - Select **Open**.
 
 
 {{% notice Note %}}
