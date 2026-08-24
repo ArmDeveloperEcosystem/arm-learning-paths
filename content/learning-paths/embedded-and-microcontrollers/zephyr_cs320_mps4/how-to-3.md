@@ -21,7 +21,7 @@ If you haven't set the toolchain environment variables in your current terminal,
 
 ```bash
 export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
-export GNUARMEMB_TOOLCHAIN_PATH=$HOME/arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi
+export GNUARMEMB_TOOLCHAIN_PATH=$HOME/arm-gnu-toolchain-13.2.Rel1-aarch64-arm-none-eabi
 ```
 
 Replace the path with the path to your toolchain directory. On x86_64, the directory name starts with `x86_64` instead of `aarch64`.

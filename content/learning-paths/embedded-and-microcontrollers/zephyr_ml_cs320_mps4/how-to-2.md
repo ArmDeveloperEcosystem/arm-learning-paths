@@ -96,11 +96,11 @@ CONFIG_FAULT_DUMP=2
 Build the `hello-executorch` application by following these steps:
 
 1. Activate the Python virtual environment for Zephyr.
-2. Set the toolchain environment variables. Replace `<toolchain_install_path>` with the directory where you installed the Arm GNU Toolchain.
+2. Set the toolchain environment variables. The path should match where you installed the Arm GNU Toolchain in the prerequisite Learning Path. On aarch64, replace `x86_64` with `aarch64` in the directory name.
 
 ```bash
 	export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
-	export GNUARMEMB_TOOLCHAIN_PATH=<toolchain_install_path>/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi
+	export GNUARMEMB_TOOLCHAIN_PATH=$HOME/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi
 ```
 3. Build the sample application for the Corstone-320 FPGA variant:
 
