@@ -41,10 +41,10 @@ generated_summary_faq:
       Confirm that the device exposes the required Vulkan ray tracing extensions. Immortalis GPUs
       such as Immortalis‑G715, Immortalis‑G720, and Immortalis‑G925 support ray tracing, while
       some Mali G7‑series GPUs after Mali‑G715 might or might not depending on the phone model.
-  - question: 'Which ray traversal option should I use: ray tracing pipeline or ray query?'
+  - question: Should I use ray tracing pipeline or ray query as the ray traversal option?
     answer: >-
       Use `VK_KHR_ray_query` for most simple effects because it lets you add traversal to existing
-      shaders, and the source recommends it for simple examples. Use `VK_KHR_ray_tracing_pipeline`
+      shaders. Use `VK_KHR_ray_tracing_pipeline`
       when you need its dedicated ray-tracing shader stages and driver-managed traversal.
   - question: What should exist after I build the acceleration structure?
     answer: >-
@@ -55,11 +55,11 @@ generated_summary_faq:
     answer: >-
       No. `VK_EXT_descriptor_indexing` is independent of ray tracing. Use it when you need shaders
       to dynamically index arrays of buffers and textures, such as when accessing material data for ray hits.
-  - question: Can I prototype the effects on a PC and then deploy to Android?
+  - question: Which build preference should I use for acceleration structures?
     answer: >-
-      Yes. Vulkan uses the same API for ray tracing on PC and mobile, making it straightforward
-      to implement and test effects on desktop and deploy them to supported Android devices. Porting
-      existing ray tracing effects from PC to mobile should also be simple.
+      For static Bottom-Level Acceleration Structures (BLASes), use `VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR`. For
+      Top-Level Accelerations Structures (TLASes) and dynamic BLASes, use `VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR`,
+      usually with `VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR`.
 # END generated_summary_faq
 
 author: Iago Calvo Lista

@@ -49,17 +49,17 @@ generated_summary_faq:
     answer: >-
       Run `build\windows\app\bin\Release\AMD64\vulkan_samples.exe sample simple_tensor_and_data_graph`
       from the `Vulkan-Samples` repository. A new window opens and visualizes the operation.
-  - question: What does the first sample demonstrate and how is it used in this path?
+  - question: How do I run a 2D average pooling operation?
     answer: >-
       Run the Simple Tensor and Data Graph sample to execute a 2D average pooling operation through
       a data graph pipeline. Create input and output tensors, bind them with descriptor sets
       and pipeline layouts, and dispatch the SPIR-V-defined network.
-  - question: What do I need before running the Scenario Runner?
+  - question: What does the NSS Scenario Runner download include?
     answer: >-
-      Use the Scenario Runner from Arm’s ML SDK for Vulkan together with the downloadable binaries
-      and assets referenced on Arm’s Hugging Face page. These resources let you run a complete
-      inference test that exercises the extensions.
-  - question: When should I capture a frame with RenderDoc, and what should I look for?
+      The NSS model release includes a Windows-compatible Scenario Runner binary, the VGF model,
+      and one input frame with expected output data. You can use these assets to run an end-to-end
+      workflow and examine the VGF model.
+  - question: How do I capture a Vulkan Samples frame in RenderDoc?
     answer: >-
       Use RenderDoc when you need to diagnose unexpected visual output, examine Vulkan API calls,
       inspect resource states, or validate data graph pipeline execution. In **Launch Application**,

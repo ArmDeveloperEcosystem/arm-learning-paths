@@ -7,7 +7,7 @@ minutes_to_complete: 60
 who_is_this_for: This is an advanced topic for ML developers who want to reduce latency and memory bandwidth by exporting INT8 models to the `.vgf` file format using the ExecuTorch Arm backend.
 
 learning_objectives:
-    - Explain when to use post-training quantization (PTQ) vs quantization-aware training (QAT)
+    - Explain when to use post-training quantization (PTQ) versus quantization-aware training (QAT)
     - Prepare and quantize a PyTorch model using TorchAO PT2E quantization APIs
     - Export the quantized model to TOSA and generate a model artifact with the ExecuTorch Arm backend
     - Validate the exported graph by visualizing it using Google's Model Explorer
@@ -38,7 +38,7 @@ generated_summary_faq:
   faqs:
   - question: How do I know the Arm backend export path worked?
     answer: >-
-      Run the PTQ example and check `./output/` for an exported `.vgf` artifact. Then, open it in
+      Run the PTQ example and check `./output/` for an exported `.vgf` artifact. Open the artifact in
       Model Explorer with the VGF adapter and inspect the graph.
   - question: Where should the exported .vgf files appear?
     answer: >-

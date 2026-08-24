@@ -33,7 +33,7 @@ generated_summary_faq:
   faq_generated_at: '2026-08-21T17:30:49Z'
   faq_source_hash: 283e3c9b4dc599acb533237ea9147f206198e4ce4ddf78aabcb6fd5039fd141d
   summary: >-
-    You'll optimize Unity collision detection for Android by comparing plain, Burst, and hand-written
+    You'll optimize Unity collision detection for Android by comparing Plain, Burst, and hand-written
     Arm Neon implementations. First, you'll set up Unity and the collision sample, review character-wall
     and character-character detection, and apply Burst and Neon changes. You'll build and profile
     each mode on your Android device, then use Unity Profile Analyzer to compare the captured data
@@ -50,16 +50,17 @@ generated_summary_faq:
       Registry**, search for **Burst**, select it, and select **Install** if it's not already ticked.
   - question: Which Unity and Burst versions should I use?
     answer: >-
-      To match the environment used here, use Unity v6.3 and Burst 1.8.28. 
+      To match the environment used in the Learning Path, use Unity v6.3 and Burst 1.8.28.
   - question: Which parts of the sample are affected by the optimization steps?
     answer: >-
       Review the character-wall and character-character collision functions. In Plain mode,
       `DoWallsPlain()` loops through all characters and walls, while `DoCharactersPlain()` checks
       each character against the others; the code assumes a character can hit up to two walls.
-  - question: What should I check if the Neon version doesn't run on my computer?
+  - question: Why should I compare Burst and Neon performance?
     answer: >-
-      If your computer doesn't support Neon, don't run the Neon version. In your own code, use
-      `if (IsNeonSupported)` to fall back to non-Neon code.
+      Burst can auto-vectorize your code efficiently, so hand-written Neon doesn't always improve
+      performance. Profile your app before and after adding Neon. If performance doesn't improve,
+      Burst might produce better-optimized code.
 # END generated_summary_faq
 
 author:

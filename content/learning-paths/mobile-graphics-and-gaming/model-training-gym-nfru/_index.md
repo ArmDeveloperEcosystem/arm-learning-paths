@@ -46,18 +46,18 @@ generated_summary_faq:
       than `3.10`. Then, install the required dependency packages.
   - question: Where do I start the training after cloning the examples repository?
     answer: >-
-      From `neural-graphics-model-gym-examples`, run `jupyter lab`. Then open
+      From `neural-graphics-model-gym-examples`, run `jupyter lab`. Open
       `tutorials/nfru/nfru_training_example.ipynb` and step through the notebook for training.
   - question: How do I know the initial training produced usable artifacts?
     answer: >-
       Create and inspect PyTorch checkpoints in the training and evaluation notebooks. In the
       evaluation notebook, you can measure accuracy, compare checkpoints, and see a visual comparison
       of the generated NFRU frame with the ground truth frame.
-  - question: Which should I use for deployment, QAT or PTQ?
+  - question: Which should I use for deployment, QAT or Post-training quantization (PTQ)?
     answer: >-
       Start with PTQ if you want a faster trial because it calibrates an already-trained model
       without another training phase. Use QAT when PTQ causes unacceptable accuracy or visual-quality
-      regressions; QAT simulates lower-precision inference during fine-tuning and helps preserve
+      regressions. QAT simulates lower-precision inference during fine-tuning and helps preserve
       accuracy when you quantize the model to INT8.
   - question: How do I export and inspect the deployable model?
     answer: >-

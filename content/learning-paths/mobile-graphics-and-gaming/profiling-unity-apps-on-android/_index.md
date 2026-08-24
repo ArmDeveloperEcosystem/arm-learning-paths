@@ -44,7 +44,7 @@ generated_summary_faq:
   - question: Which tool should I use to examine results?
     answer: >-
       Use the Profiler to collect data and inspect specific frames. To use Profile Analyzer, open
-      the Profiler window, load the recording there, then select **Pull Data** to analyze or
+      the Profiler window, load the recording there, and select **Pull Data** to analyze or
       compare datasets.
   - question: Which sample modes should I record for comparison?
     answer: >-
@@ -56,7 +56,7 @@ generated_summary_faq:
       Profiler and Profile Analyzer to examine differences in frame timing and function execution.
   - question: What should I check if the Android device or app doesn't appear for profiling?
     answer: >-
-      Confirm the app builds and deploys to the Android device using the steps from the [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android) Learning Path, then run the app on the device before recording. If
+      Confirm the app builds and deploys to the Android device using the steps from the [Get started with Unity on Android](/learning-paths/mobile-graphics-and-gaming/get-started-with-unity-on-android) Learning Path. After confirming, run the app on the device before recording. If
       no data appears, re-verify deployment and that the device is actively running the sample.
 # END generated_summary_faq
 

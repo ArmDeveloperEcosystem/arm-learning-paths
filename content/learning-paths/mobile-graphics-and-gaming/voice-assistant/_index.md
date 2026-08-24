@@ -45,11 +45,10 @@ generated_summary_faq:
       Enable developer mode, connect your phone with USB, and confirm that it appears as a running
       device in the Android Studio toolbar. Select the device, then select **Run** to install and
       launch the Voice Assistant.
-  - question: What should I check if the build
-      fails?
+  - question: What should I check if the build fails?
     answer: >-
       If the build fails while downloading, verify that `python3` version 3.9 or later and `git`
-      are installed, then try the Android Studio build again. The first build might take longer
+      are installed, and try the Android Studio build again. The first build might take longer
       while it downloads additional dependencies.
   - question: What result should I expect when I run the Voice Assistant?
     answer: >-

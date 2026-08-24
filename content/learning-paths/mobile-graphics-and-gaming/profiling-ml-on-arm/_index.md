@@ -41,11 +41,10 @@ generated_summary_faq:
     answer: >-
       Open the **Profiler** window, attach your device in **Developer Mode** with a USB cable, and
       select your app's process.
-  - question: Which profiling approach should I use in Streamline?
+  - question: What timeline scale should I use to see the example app's annotations?
     answer: >-
-      Streamline is a sampling profiler, which provides a statistical view with lower overhead
-      than instrumentation. Use it to capture system counters and timeline data while the app
-      runs.
+      Set the Streamline timeline view scale to 10 µs. The example app's inference is fast, so
+      this scale makes its Custom Activity Map annotations easier to see.
   - question: Why does the ExecuteNetwork command run the model twice?
     answer: >-
       Running the ExecuteNetwork command runs the model twice because of the `--iterations 2` flag. The first run includes startup costs and one-off
@@ -55,8 +54,8 @@ generated_summary_faq:
     answer: >-
       Use Streamline annotations to mark inference, preprocessing, and postprocessing in the
       timeline. You can then see where your app spends time and how busy the CPU or GPU is during
-      each part. For LiteRT with Arm NN, use `ExecuteNetwork` for layer timings; without
-      Arm NN, treat its results as indicative.
+      each part. For LiteRT with Arm NN, use `ExecuteNetwork` for layer timings. Without
+      Arm NN, treat `ExecuteNetwork` results as indicative rather than definitive.
   - question: Can I profile a PyTorch model with ExecuTorch on Android?
     answer: >-
       Yes. ExecuTorch provides profiling tools for PyTorch models. The tools target Linux, but you

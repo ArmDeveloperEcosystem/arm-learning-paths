@@ -36,7 +36,7 @@ generated_summary_faq:
     You'll build a sentiment-aware voice assistant that runs on-device on Arm. First, you'll prepare a UV-managed
     Python environment, build `llama.cpp`, and create a Gradio pipeline that transcribes microphone
     audio with Whisper and sends it to a local LLM. You'll train a HuBERT classifier on selected
-    RAVDESS sentiments, export and quantize it to ONNX, then add its prediction to the LLM prompt
+    RAVDESS sentiments, export and quantize it to ONNX, and add its prediction to the LLM prompt
     and user interface.
   faqs:
   - question: How do I know the baseline voice-to-LLM pipeline is working?
@@ -49,18 +49,16 @@ generated_summary_faq:
   - question: Where do I save the trained HuBERT model and feature extractor?
     answer: >-
       After training, save the HuBERT model and its feature extractor in `models/hubert_vsa_ravdess`.
-      Train it on the selected RAVDESS classes: neutral, happy, and angry. You use those files
-      in the ONNX export step.
-  - question: How is sentiment used with the LLM, and how can I verify it’s included?
+      Train it on the selected RAVDESS classes: neutral, happy, and angry.
+  - question: How do I include the predicted sentiment in the LLM prompt and verify it?
     answer: >-
       Add the predicted sentiment to the prompt in `handle_audio` before sending it to the local
       LLM. To verify the integration, run `app.py` and confirm that you see a transcript, predicted
       sentiment, and LLM response.
-  - question: What should I check if ONNX export or quantization fails?
+  - question: Which ONNX model does the final voice assistant load?
     answer: >-
-      Ensure the trained model from the previous step exists and loads correctly; ONNX export
-      can take a few seconds. After success, you should have an exported ONNX model and a quantized
-      version ready for on-device inference.
+      Set `ONNX_PATH` to `models/hubert_vsa_ravdess_onnx/hubert_vsa_ravdess_int8.onnx`. The final
+      app loads this quantized model with the CPU execution provider.
 # END generated_summary_faq
 
 author: Bhanu Arya
