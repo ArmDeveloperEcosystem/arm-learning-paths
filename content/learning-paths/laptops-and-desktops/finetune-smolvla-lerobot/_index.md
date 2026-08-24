@@ -17,6 +17,7 @@ prerequisites:
     - An NVIDIA DGX Spark with at least 30 GB of free storage.
     - An assembled SO-101 leader and follower, two USB cameras, and an unobstructed workspace.
     - A vial or similar graspable object and a stable rack for the placement target.
+    - A black task mat or similarly high-contrast pickup surface.
     - A [Hugging Face account](https://huggingface.co/join) if you want to upload the dataset.
 
 # START generated_summary_faq
