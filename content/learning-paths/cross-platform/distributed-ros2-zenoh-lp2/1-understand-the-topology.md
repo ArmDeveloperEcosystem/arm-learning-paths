@@ -8,18 +8,17 @@ layout: learningpathall
 
 ## Introduction
 
-The [first Learning Path](LP1_URL) in this series placed the complete ROS 2 system on one server. In real robot deployments, the setup is much different : the operator station sits elsewhere, sensor nodes run on separate devices, and the monitoring display is on someone's laptop. This learning path distributes that single-machine system across multiple Arm devices. 
+The [first Learning Path](LP1_URL) in this series placed the complete ROS 2 system on one server. In real robot deployments, the setup is much different : the operator station sits elsewhere, sensor nodes run on separate devices, and the monitoring display is on someone's laptop.
 
-Two remote nodes are connected in turn. The `control` container joins over the Docker network and runs RViz to visualise the robot remotely. A Raspberry Pi joins over the physical network using Docker and a single environment variable — no OS reinstallation, no inbound ports, and no configuration files on the device.
+This Learning Path distributes the system in three stages:
 
-The mechanism behind both is Zenoh's client mode, and the reason it is needed rather than peer mode is worth understanding before the hands-on steps — the first section covers it.
+1. Connect the `control` container to the robot over the Docker network and run RViz remotely.
+2. Connect a Raspberry Pi to the Arm server over the physical network.
+3. Extend the design to multiple robots using ROS namespaces and domain IDs to prevent communication conflicts.
+
+The first two stages use Zenoh client mode to coordinate communication across containers and physical devices. The final stage introduces a practical approach toward preventing communication conflicts when multiple robots share the same infrastructure.
 
 Both the server and the Pi run the same arm64 ROS 2 packages. The development machine and the deployment target share one instruction set, so there is no cross-compilation step between them.
-
-<!-- IMAGE PLACEHOLDER: Add an architecture diagram showing the Arm server, robot container, control container, Docker bridge network, TCP port 7447, and Raspberry Pi. Suggested filename: ros2-zenoh-distributed-topology.png -->
-<!-- The completed topology is:
-![Topology #center](./ros2-zenoh-distributed-topology.png)
--->
 
 ## Understand the router and client mode
 
