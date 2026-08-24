@@ -1,5 +1,5 @@
 ---
-title: Set up the platform and software
+title: Set up the Zephyr and ExecuTorch development environment
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -57,7 +57,7 @@ Run the following commands to download, install, and configure these tools on yo
 
 ```bash
 ./examples/arm/setup.sh --i-agree-to-the-contained-eula
-source modules/lib/executorch/examples/arm/arm-scratch/setup_path.sh
+source examples/arm/arm-scratch/setup_path.sh
 ```
 
 ## Pre-process the PyTorch Model for NPU delegation 
@@ -81,7 +81,7 @@ class myModelAdd(torch.nn.Module):
 ModelUnderTest = myModelAdd()
 ModelInputs = (torch.ones(5),)
 ```
-Run the following commands to quantize the model and export it through the Ahead-of-Time (AOT) flow using the Ethos-U backend.
+Run the following commands from the `modules/lib/executorch` directory to quantize the model and export it through the Ahead-of-Time (AOT) flow using the Ethos-U backend.
 
 ```bash
 source ~/zephyrproject/.venv/bin/activate
@@ -107,4 +107,12 @@ python3 -m executorch.backends.arm.scripts.aot_arm_compiler \
 
 The `add_u85_1024_sram_only.pte` file contains the model graph, quantized weights, and a Vela-compiled command stream. The Ethos-U85 executes the command stream directly.
 
+Verify the model file was created:
 
+```bash
+ls -la add_u85_1024_sram_only.pte
+```
+
+
+
+You now have a quantized `.pte` model file ready for deployment. In the next section, you will port the `hello-executorch` sample application to the Corstone-320 MPS4 platform and run inference on the Ethos-U85 NPU.

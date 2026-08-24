@@ -1,5 +1,5 @@
 ---
-title: Deploying a Zephyr-Based ML Application on the Arm Corstone-320 MPS4 Platform with ExecuTorch
+title: Deploy a Zephyr-based ML application on Arm Corstone-320 MPS4 with ExecuTorch
 
 draft: true
 cascade: 
@@ -10,18 +10,17 @@ minutes_to_complete: 45
 who_is_this_for: This is an introductory topic for embedded software developers who want to deploy a Zephyr-based ML Application on the Arm Corstone-320 MPS4 Platform with ExecuTorch.
 
 learning_objectives: 
-    - Set up a Zephyr ML application development environment for Corstone-320 MPS4.
-    - Pre-process the model for NPU delegate.
-    - Create and build Zephyr ML applications.
-    - Run ML inference on the Corstone-320 MPS4 platform.
+    - Set up a Zephyr and ExecuTorch development environment for Corstone-320 MPS4.
+    - Quantize and export a PyTorch model for Ethos-U85 NPU delegation.
+    - Configure and build the Zephyr `hello-executorch` application for Corstone-320 MPS4.
+    - Run the application on the MPS4 board and verify ML inference through UART output.
     
 prerequisites:
     - Basic familiarity with embedded C programming
-    - Refer to [Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/) to get knowledge of Zephyr RTOS in Arm Corstone-320 MPS4 Platform.
-    - Familiarity with basic machine learning concepts
+    - Basic familiarity with machine learning concepts
+    - Complete [Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/) to prepare the Zephyr workspace and board target
     - A Corstone-320 MPS4 FPGA development board
-    - A Linux development environment, for example Ubuntu 22.04 or later
-    - Git and Python
+    - A Linux development environment, such as Ubuntu 22.04 or later
 
 
 author: Sue Wu
@@ -34,7 +33,7 @@ armips:
   - Ethos-U
 tools_software_languages:
   - Zephyr
-  - Executorch
+  - ExecuTorch
   - GCC
   - C
 operatingsystems:

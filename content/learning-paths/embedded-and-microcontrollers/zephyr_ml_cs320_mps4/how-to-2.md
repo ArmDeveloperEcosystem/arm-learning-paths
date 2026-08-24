@@ -1,5 +1,5 @@
 ---
-title: Deoploy ML applicaton in the Corstone-320 MPS4 platform
+title: Deploy an ML application on the Corstone-320 MPS4 platform
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -36,7 +36,7 @@ unsigned int ethosu_config_select(uint64_t address, int index)
         
     case 1:
       /* REGIONCFG_1: scratch/input/output buffer uses SRAM via MEM_ATTR[0]. */
-        return 0；
+        return 0;
     case 2:
      /* REGIONCFG_2: fast scratch uses SRAM via MEM_ATTR[0]. */
         return 0;
@@ -55,7 +55,7 @@ unsigned int ethosu_config_select(uint64_t address, int index)
 }
 ```
 
-add the `ethosu_config_corstone320.c` in the CMakeLists.txt as follows
+Add `ethosu_config_corstone320.c` to the `app_sources` list in `modules/lib/executorch/zephyr/samples/hello-executorch/CMakeLists.txt`:
 
 ```makefile
 set(app_sources
@@ -68,7 +68,7 @@ set(app_sources
 
 ### Add the zephyr configuration files for MPS4 CS320 platform
 
-Create the board-specific Kconfig file `boards/mps4_corstone320_fpga.conf` and add the following content:
+Create the board-specific Kconfig file `boards/mps4_corstone320_fpga.conf` in the `hello-executorch` sample directory and add the following content:
 
 ```
 CONFIG_ETHOS_U=y
@@ -96,11 +96,11 @@ CONFIG_FAULT_DUMP=2
 Build the `hello-executorch` application by following these steps:
 
 1. Activate the Python virtual environment for Zephyr.
-2. Set the toolchain environment variables. Replace `<toolchain_install_path>` with the directory where you installed the Arm GNU Toolchain.
+2. Set the toolchain environment variables. The path should match where you installed the Arm GNU Toolchain in the prerequisite Learning Path. On aarch64, replace `x86_64` with `aarch64` in the directory name.
 
 ```bash
 	export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
-	export GNUARMEMB_TOOLCHAIN_PATH=arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi install path/
+	export GNUARMEMB_TOOLCHAIN_PATH=$HOME/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi
 ```
 3. Build the sample application for the Corstone-320 FPGA variant:
 
@@ -109,12 +109,18 @@ west build -p always \
   -b mps4/corstone320/fpga \
   -d build_hello_et_fpga \
   modules/lib/executorch/zephyr/samples/hello-executorch \
-  -- -DET_PTE_FILE_PATH=add_u85_1024_sram_only.pte
+  -- -DET_PTE_FILE_PATH=add_u85_1024_sram_only.pte \
   -DSYSTEM_CONFIG=Ethos_U85_SYS_DRAM_Mid \
   -DMEMORY_MODE=Sram_Only
 ```
 
 After a successful build, the output file `zephyr.elf` is available in `build_hello_et_fpga/zephyr/`.
+
+Verify the build output exists:
+
+```bash
+ls -la build_hello_et_fpga/zephyr/zephyr.elf
+```
 The ELF image contains the Zephyr kernel, the Ethos-U driver, the ExecuTorch runtime, the generated `.pte` file, and the ML application.
 
 
@@ -142,7 +148,7 @@ IMAGE1FILE: \SOFTWARE\app.bin           ; Image/data to be loaded
 Copy vector.bin and app.bin to \SOFTWARE, then power on the board.
 If the setup is correct, the UART console prints the model delegate flow, similar to the following example:
 
- ![alt text](image.png)   
+![UART console output showing ExecuTorch model inference results on the MPS4 board](image.png)
 
 ## What you accomplished
 In this Learning Path, you learned how to deploy a Zephyr-based ML application on the Arm Corstone-320 MPS4 platform using ExecuTorch. You learned how to preprocess a model for Ethos-U NPU delegation, develop a Zephyr-based ML application, and integrate the ExecuTorch runtime.
