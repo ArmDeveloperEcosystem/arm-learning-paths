@@ -34,11 +34,11 @@ generated_summary_faq:
   faq_generated_at: '2026-08-25T16:07:56Z'
   faq_source_hash: 16519943fad3f5bcecb2c1f8101f4ebc9bfd44b3f0f5bb19fd7e74d66ce82060
   summary: >-
-    You deploy a Zephyr machine learning application on the Arm Corstone-320 MPS4 with ExecuTorch.
-    First, you download the FI101 FPGA image, review the platform documentation, and set up the
-    Zephyr and ExecuTorch environment. Next, you quantize and export a PyTorch model as a `.pte`
-    file for Ethos-U85 delegation. Then, you port `hello-executorch`, configure SRAM-only NPU
-    regions, build the application, run it on the MPS4, and verify inference over UART.
+    You'll deploy a Zephyr machine learning application on the Arm Corstone-320 MPS4 with ExecuTorch.
+    First, you'll download the FI101 FPGA image and set up the
+    Zephyr and ExecuTorch environment. Next, you'll quantize and export a PyTorch model as a `.pte`
+    file for Ethos-U85 delegation. Finally, you'll port `hello-executorch`, configure SRAM-only NPU
+    regions, build the application and run it on the MPS4, and verify inference over UART.
   faqs:
   - question: How do I know the MPS4 is using the correct Corstone-320 FPGA image before I build?
     answer: >-
@@ -47,7 +47,7 @@ generated_summary_faq:
       only after verifying the image matches the FI101 release you downloaded.
   - question: Which Zephyr board target should I use when configuring the build?
     answer: >-
-      Use the `mps4/corstone320/fpga` board target with Zephyr `V4.3.0`.
+      Use the `mps4/corstone320/fpga` board target with Zephyr version `V4.3.0`.
   - question: What code change enables the Ethos-U85 NPU region configuration for this application?
     answer: >-
       Override the weak `ethosu_config_select()` function in `ethosu_device_u85.c` to set the
