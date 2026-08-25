@@ -1,9 +1,9 @@
 ---
 title: Tune Zenoh for ROS 2 traffic over wireless networks
 
-# draft: true
-# cascade:
-#     draft: true
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 120
 
