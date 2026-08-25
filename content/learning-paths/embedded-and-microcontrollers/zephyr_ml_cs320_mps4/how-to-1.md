@@ -21,7 +21,7 @@ Download the latest Corstone-320 FPGA image and review the platform documentatio
 
 ### Set up a Zephyr workspace and board target
 
-To set up the Zephyr workspace for the Arm Corstone-320 MPS4 platform, see [Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform](/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/how-to-1/). Use Zephyr version V4.3.0.
+To set up the Zephyr workspace for the Arm Corstone-320 MPS4 platform, complete the steps in [Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform](/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/how-to-1/). Use Zephyr version V4.3.0.
 
 ### ExecuTorch integration in the Zephyr tree
 
@@ -51,9 +51,10 @@ git submodule update --init --recursive
 
 ### Set up the Arm and Ethos-U toolchain
 
-ExecuTorch includes a setup script that downloads the Arm GNU Toolchain, the TOSA Serialization Library, the Ethos-U Vela graph compiler, and other utilities.
+ExecuTorch includes a setup script that downloads the Arm GNU Toolchain, the Tensor Operator Set Architecture (TOSA) Serialization Library, the Ethos-U Vela graph compiler, and other utilities.
  
-Run the following commands to download, install, and configure these tools on your system.
+
+Run the following commands to download, install, and configure these tools on your system:
 
 ```bash
 ./examples/arm/setup.sh --i-agree-to-the-contained-eula
@@ -66,7 +67,7 @@ With the development environment and toolchain configured, prepare the model for
 
 The ExecuTorch [Ahead-of-Time (AOT)](https://github.com/pytorch/executorch/blob/main/examples/arm/aot_arm_compiler.py) pipeline takes a PyTorch model (a `torch.nn.Module`) and produces a `.pte` binary file. The ExecuTorch runtime uses this file for inference.
 
-The following example shows a simple PyTorch model, `add.py`, that performs a single addition:
+The following example shows a PyTorch model, `add.py`, that performs a single addition:
 
 ```python
 import torch

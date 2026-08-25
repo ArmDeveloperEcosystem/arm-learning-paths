@@ -133,7 +133,7 @@ To run the application:
 1. Download the board files from [FI101 board files](https://developer.arm.com/downloads/view/FI101?sortBy=availableBy&revision=r1p0-00eac0-2).
 2. Set up the MPS4 platform. For instructions, see [Using the FI101 on MPS4 board](https://developer.arm.com/documentation/109762/0100/?lang=en).
 
-For the `hello-executorch` application, place the vector table in the FPGA boot ROM at address `0x11000000`, and place the remaining code and data in SRAM at address `0x31000000`. Create `vector.bin` and `app.bin` from `zephyr.elf` by using `arm-none-eabi-objcopy`.
+For the `hello-executorch` application, place the vector table in the FPGA boot ROM at address `0x11000000`. Place the remaining code and data in SRAM at address `0x31000000`. Create `vector.bin` and `app.bin` from `zephyr.elf` by using `arm-none-eabi-objcopy`.
 
 Update `images.txt` under `/MB/HBI0376B/FI101` to load the two images:
 
