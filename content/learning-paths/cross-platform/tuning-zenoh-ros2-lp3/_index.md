@@ -33,7 +33,7 @@ generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
-skilllevels: Intermediate
+skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-A
