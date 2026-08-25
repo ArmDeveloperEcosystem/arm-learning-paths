@@ -1,5 +1,5 @@
 ---
-title: Deploy a Zephyr-based ML application on Arm Corstone-320 MPS4 with ExecuTorch
+title: Deploy a Zephyr-based machine learning application on Arm Corstone-320 MPS4 with ExecuTorch
 description: Deploy a quantized PyTorch model with ExecuTorch in a Zephyr application on Corstone-320 MPS4 and verify inference.
 
 minutes_to_complete: 45
