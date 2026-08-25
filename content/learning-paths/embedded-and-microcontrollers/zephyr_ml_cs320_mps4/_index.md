@@ -19,9 +19,53 @@ prerequisites:
     - A Corstone-320 MPS4 FPGA development board
     - A Linux development environment, such as Ubuntu 22.04 or later
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-25T16:07:56Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 16519943fad3f5bcecb2c1f8101f4ebc9bfd44b3f0f5bb19fd7e74d66ce82060
+  summary_generated_at: '2026-08-25T16:07:56Z'
+  summary_source_hash: 16519943fad3f5bcecb2c1f8101f4ebc9bfd44b3f0f5bb19fd7e74d66ce82060
+  faq_generated_at: '2026-08-25T16:07:56Z'
+  faq_source_hash: 16519943fad3f5bcecb2c1f8101f4ebc9bfd44b3f0f5bb19fd7e74d66ce82060
+  summary: >-
+    You deploy a Zephyr machine learning application on the Arm Corstone-320 MPS4 with ExecuTorch.
+    First, you download the FI101 FPGA image, review the platform documentation, and set up the
+    Zephyr and ExecuTorch environment. Next, you quantize and export a PyTorch model as a `.pte`
+    file for Ethos-U85 delegation. Then, you port `hello-executorch`, configure SRAM-only NPU
+    regions, build the application, run it on the MPS4, and verify inference over UART.
+  faqs:
+  - question: How do I know the MPS4 is using the correct Corstone-320 FPGA image before I build?
+    answer: >-
+      Confirm the board is running the SSE-320 FI101 image that includes Cortex-M85 and Ethos-U85
+      by following the application note and board documentation. Proceed
+      only after verifying the image matches the FI101 release you downloaded.
+  - question: Which Zephyr board target should I use when configuring the build?
+    answer: >-
+      Use the `mps4/corstone320/fpga` board target with Zephyr `V4.3.0`.
+  - question: What code change enables the Ethos-U85 NPU region configuration for this application?
+    answer: >-
+      Override the weak `ethosu_config_select()` function in `ethosu_device_u85.c` to set the
+      `QCONFIG` and `REGIONCFG` registers for Ethos-U85. Your override must keep the command stream,
+      weights, and scratch data in SRAM for the SRAM-only model.
+  - question: What model artifact should I have after quantizing and exporting with ExecuTorch?
+    answer: >-
+      After quantization and export, you should have the `.pte` model artifact
+      `add_u85_1024_sram_only.pte`. Pass it to the Zephyr build with the `-DET_PTE_FILE_PATH` flag,
+      as shown in the build command.
+  - question: What result should I expect over UART to confirm inference ran?
+    answer: >-
+      You should see the `hello-executorch` model delegate flow and inference output over UART,
+      followed by `SUCCESS: Program complete, exiting`.
+# END generated_summary_faq
 
 author: Sue Wu
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
