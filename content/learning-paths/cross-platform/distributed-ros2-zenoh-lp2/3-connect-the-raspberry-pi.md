@@ -1,5 +1,6 @@
 ---
 title: Connect the Raspberry Pi
+description: Connect a 64-bit Raspberry Pi to the Zenoh router on an Arm server and start the edge container.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -16,9 +17,9 @@ Connect to the Raspberry Pi over SSH or open a terminal on an attached display. 
 uname -m
 ```
 
-Expected output:
+The expected output is:
 
-```text
+```output
 aarch64
 ```
 
@@ -39,29 +40,29 @@ The client and server sections should both report `linux/arm64`.
 
 ## Select an address the Raspberry Pi can reach
 
-The `<server_ip>` used on this page must identify the Arm server from the Raspberry Pi's network. It is not automatically the same address used by your laptop.
+The `<your_arm_server_ip>` used on this page must identify the selected Arm server that the Raspberry Pi can reach. It is not automatically the same address used by your laptop.
 
 - Use a private or LAN address when the Raspberry Pi has a route to that network.
 - Use a public address only when a private route or VPN is unavailable, and restrict TCP port `7447` to the Raspberry Pi's address or trusted network using firewall rules.
 - Do not use `172.x`. Those are internal Docker addresses.
 
-On the Arm server, display the available addresses and select the server's IP:
+On the selected Arm server, display the available addresses and select the server's IP:
 
 ```bash
 hostname -I
 ```
 
-On the Raspberry Pi, replace `<server_ip>` with the selected address and test the actual Zenoh TCP port:
+On the Raspberry Pi, replace `<your_arm_server_ip>` with the selected address and test the actual Zenoh TCP port:
 
 ```bash
-python3 -c "import socket; socket.create_connection(('<server_ip>',7447),5); print('router reachable')"
+python3 -c "import socket; socket.create_connection(('<your_arm_server_ip>',7447),5); print('router reachable')"
 ```
 
 Do not leave the angle brackets in the command.
 
 {{% notice Note %}}
 If this test times out, fix the network path before starting ROS 2. For an EC2 server, permit inbound TCP port `7447` only from the Raspberry Pi's public egress address or trusted network in the instance security group. Do not allow access from `0.0.0.0/0`.
-{{% /notice %}} 
+{{% /notice %}}
 
 <!-- ## Synchronize the clocks
 
@@ -79,7 +80,7 @@ The synchronization command should eventually return `yes`, and the UTC times sh
 
 ## Start the edge container
 
-On the Raspberry Pi, replace `<server_ip>` and create the edge container:
+On the Raspberry Pi, replace `<your_arm_server_ip>` and create the edge container:
 
 ```bash
 docker run -d --name pi_edge --net=host \
@@ -90,10 +91,28 @@ docker run -d --name pi_edge --net=host \
 
 `--net=host` gives the container direct access to the Raspberry Pi's network interfaces. The configuration override makes every `rmw_zenoh` session in the container connect to the server router as a client.
 
-Enter the container and load ROS 2:
+First, get the container ID for the `control` container. From an SSH session on the Arm server, run:
 
 ```bash
-docker exec -it pi_edge bash
+docker ps
+```
+
+The output is similar to:
+
+```output
+CONTAINER ID   IMAGE                                  COMMAND                  CREATED      STATUS      PORTS     NAMES
+c0b8da0d49d4   odinlmshen/ros2-zenoh-arm:jazzy-edge   "/ros_entrypoint.sh …"   4 days ago   Up 4 days             pi_edge
+```
+
+Use the container ID to open a bash shell in the running container on your Raspberry Pi:
+
+```bash
+docker exec -it c0b8da0d49d4 /bin/bash
+```
+
+Next, load ROS 2 in the bash shell:
+
+```bash
 source /opt/ros/jazzy/setup.bash
 ```
 
@@ -104,12 +123,15 @@ echo $RMW_IMPLEMENTATION
 echo $ZENOH_CONFIG_OVERRIDE
 ```
 
-Expected output resembles:
+The output is similar to the following, where `<your_arm_server_ip>` is the actual IP address of your selected Arm server:
 
-```text
+```output
 rmw_zenoh_cpp
-mode="client";connect/endpoints=["tcp/192.168.1.24:7447"]
+mode="client";connect/endpoints=["tcp/<your_arm_server_ip>:7447"]
 ```
 
-Run `source /opt/ros/jazzy/setup.bash` in every new `docker exec` shell. 
+Run `source /opt/ros/jazzy/setup.bash` in every new `docker exec` shell on your Raspberry Pi.
 
+## What you've accomplished and what's next
+
+You started the edge container on the Raspberry Pi and configured it as a client of the Zenoh router. Next, verify the ROS 2 graph, sensor data, and bidirectional messages across the devices.
