@@ -32,7 +32,7 @@ Each command provides a different view of the workload:
 - In `just rt_factor`, a value near `1.0` means simulation time keeps pace with wall-clock time. A substantially lower value indicates that other workloads or the simulation are constraining the available CPU.
 - In `just iftop_lo`, the reference system carries several hundred Mbps over TCP loopback, dominated by point-cloud data.
 
-![Top output showing CPU and memory usage for the ROS 2 simulation, RViz, and Navigation2 processes.](images/just-top.png)
+![Top output showing CPU and memory usage for the ROS 2 simulation, RViz, and Navigation2 processes.](images/just-top.webp)
 
 {{% notice Important %}}
 CPU load, real-time factor, and traffic levels depend on your Arm server and other running workloads. Treat the supplied figures as reference observations, not guaranteed results.
