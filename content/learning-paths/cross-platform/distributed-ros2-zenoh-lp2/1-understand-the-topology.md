@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Introduction
 
-The [prerequisite Learning Path](https://learn.arm.com/learning-paths/cross-platform/ros2-zenoh-arm/) in this series placed the complete ROS 2 system on one server. A real robot deployment is different: the operator station can be elsewhere, sensor nodes can run on separate devices, and the monitoring display can be on a laptop.
+The [prerequisite Learning Path](/learning-paths/cross-platform/ros2-zenoh-arm/) in this series placed the complete ROS 2 system on one server. A real robot deployment is different: the operator station can be elsewhere, sensor nodhes can run on separate devices, and the monitoring display can be on a laptop.
 
 This Learning Path distributes the system in three stages:
 
@@ -26,7 +26,7 @@ Both the server and the Pi run the same arm64 ROS 2 packages. The development ma
 ### The Zenoh router has four roles
 
 1. **Configuration entry point** — it reads `ROUTER_CONFIG.json5` once at startup. Any configuration change requires a router restart.
-2. **Discovery service for local peers** — it introduces nodes to each other, after which they communicate directly. Step 3 of the [prerequisite Learning Path](https://learn.arm.com/learning-paths/cross-platform/ros2-zenoh-arm/) demonstrated this: stopping the router did not interrupt an established conversation.
+2. **Discovery service for local peers** — it introduces nodes to each other, after which they communicate directly. Step 3 of the [prerequisite Learning Path](/learning-paths/cross-platform/ros2-zenoh-arm/) demonstrated this: stopping the router did not interrupt an established conversation.
 3. **Relay for client-mode nodes** — a client holds a single connection to the router, and every message it sends or receives passes through that connection.
 4. **Traffic policy enforcement point** — compression, access control, downsampling, and QoS rules all apply here. A later Learning Path covers these policies.
 
@@ -41,7 +41,7 @@ Router count follows subsystems, not machines. A remote side running only a few 
 You can read more about the topology in the [`rmw_zenoh` documentation](https://github.com/ros2/rmw_zenoh#connecting-multiple-hosts).
 
 {{% notice Warning %}}
-This Learning Path begins with the completed environment from the [prerequisite Learning Path](https://learn.arm.com/learning-paths/cross-platform/ros2-zenoh-arm/). Before you continue, ensure both containers are still running and `/scan` delivers messages at a stable non-zero rate.
+This Learning Path begins with the completed environment from the [prerequisite Learning Path](/learning-paths/cross-platform/ros2-zenoh-arm/). Before you continue, ensure both containers are still running and `/scan` delivers messages at a stable non-zero rate.
 {{% /notice %}}
 
 ## What you've learned and what's next
