@@ -22,7 +22,7 @@
         "content",
         `<strong>Discover the right technical content faster</strong><br><br>
          Arm Virtual Assistant helps developers find relevant Learning Paths, tools, and implementation guidance across AI, cloud, and multi-architecture development.<br><br>
-         Use of the ARM Virtual FAE is subject to the terms of the <a href="https://ipuser.dev.bespin.arm.com/vfae-terms-and-conditions" target="_blank" rel="noopener noreferrer"><strong>ARM Virtual FAE Terms and Conditions of Use</strong></a>.`
+         Use of the Arm Virtual Assistant is subject to the terms of the <a href="https://ipuser.dev.bespin.arm.com/vfae-terms-and-conditions" target="_blank" rel="noopener noreferrer"><strong>Arm Virtual Assistant Terms and Conditions of Use</strong></a>.`
       );
       chatAi.setAttribute("app-name", "learning-paths");
       chatAi.setAttribute("api-url", chatbotApiUrl);
