@@ -8,28 +8,26 @@ layout: learningpathall
 
 ## Verify extension-specific code in a final binary
 
-An arm64 binary can contain code for optional Arm architecture extensions such as Scalable Matrix Extension 2 (SME2), Scalable Vector Extension 2 (SVE2), Dot Product, or cryptographic instructions. The architecture name alone doesn't tell you which extension-specific instructions made it into the final artifact.
+An arm64 binary can contain code for optional Arm architecture extensions such as Scalable Matrix Extension 2 (SME2), Scalable Vector Extension 2 (SVE2), Dot Product, or cryptographic instructions. Specific code or libraries, like Kleidi for SME2, can be used to implement their associated functionality.  But just because you've imported the supporting source code doesn't mean the extension logic actually made it into the compiled binary.
 
-In this Learning Path, you build a small Mach-O executable and inspect its final machine code. SME2 provides the worked example because it includes distinctive state-control, matrix, and predicate instructions. You will correlate each finding with its exact four bytes, decoded mnemonic, operands, static program counter (PC), symbol, and surrounding code.
+In this Learning Path, you build a small Mach-O executable and inspect its final machine code. SME2 is used as just one of the many Arm extensions to verify existence of. SME2 has distinctive instructions, such as state-control, matrix, and predicate instructions. You will identify, and then correlate each finding with its exact four bytes, decoded mnemonic, operands, static program counter (PC), symbol, and surrounding code.
 
-{{% notice Static evidence only %}}
-Disassembly proves that instruction bytes are present in executable code. It doesn't prove that the instructions ran, that runtime dispatch selected them, or that they improved performance. Those claims need runtime analysis on a suitable target.
-{{% /notice %}}
-
-The same evidence model helps you inspect Arm architecture extension optimizations in release artifacts for Cortex-A and Neoverse systems. The commands in this Learning Path inspect macOS Mach-O files. Neoverse Linux release artifacts are normally Executable and Linkable Format (ELF) files and need the corresponding ELF section-selection and disassembly commands.
+The evidence model you'll be introduced to with SME2 can help you inspect other Arm architecture extension inclusion 
 
 ## Create a traceable SME2 fixture
 
-Start with source you can trace through the compiler and linker into a final executable. The fixture contains an SME2 function, a normal C entry point that keeps the function in the link, and a feature-name string. You will compile the code but never run it, so the Mac doesn't need SME2 hardware.
+You will begin by creating an SME2-based executable from source code. This fixture will contain an SME2 function, a normal C entry point, and a feature-name string. You will compile the code but never run it, so the Mac you develop this on doesn't need SME2 hardware. 
 
-Create a working directory and move into it:
+Keep in mind the you will be writing is Arm-specific, and will not work on any x86-based systems.
+
+To begin, create a working directory and move into it:
 
 ```bash
 mkdir arm64-extension-inspection
 cd arm64-extension-inspection
 ```
 
-Create `sme2-main.c` with the following content. The volatile function pointer keeps the assembly symbol referenced without calling it.
+Create `sme2-main.c` with the following content.
 
 ```c { file_name="sme2-main.c" }
 #include <stddef.h>
@@ -46,7 +44,7 @@ int main(void) {
 }
 ```
 
-Create `sme2-kernel.S` with the following content. The function contains ordinary SVE predicate setup and strict SME2 predicate forms, so you can see why operands matter during classification.
+Next, create `sme2-kernel.S` with the following content. 
 
 ```asm { file_name="sme2-kernel.S" }
 .text
@@ -64,18 +62,18 @@ _sme2_fixture_kernel:
     ret
 ```
 
-Build the final Mach-O executable with SME2 enabled in the compiler target. The `-march=armv9-a+sme2` option makes the compile-time intent explicit, but you will verify the linked output rather than treating this flag as proof.
+Build the final SME2-Mach-O executable. The `-march=armv9-a+sme2` option makes the compile-time intent explicit, but you will verify the linked output rather than treating this flag as proof.
 
 ```bash
 xcrun clang -arch arm64 -O2 -march=armv9-a+sme2 \
   sme2-main.c sme2-kernel.S -o sme2-positive
 ```
 
-Don't run `sme2-positive`. Building and disassembling it is safe on an Apple silicon Mac that doesn't implement SME2 because the processor never fetches its instructions.
+Congrats, you now have an SME2-enabled binary!
 
 ## Create negative controls
 
-A useful predicate must reject feature-related words stored as data. Create `string-only-control.c` with a feature string and SME2-like symbol name, but no SME2 assembly:
+You just created a file which will be used as an SME2 true positive control. Next, create `string-only-control.c` with a feature string and SME2-like symbol name, but no actual SME2 instructions.  This is an example of a true negative control fixture:
 
 ```c { file_name="string-only-control.c" }
 __attribute__((used))
@@ -91,7 +89,7 @@ int main(void) {
 }
 ```
 
-Create `plain-arm64-control.c` without extension-specific source, names, or strings:
+Create another true-negative fixture, `plain-arm64-control.c` without extension-specific source, names, or strings:
 
 ```c { file_name="plain-arm64-control.c" }
 __attribute__((noinline))
@@ -113,7 +111,11 @@ xcrun clang -arch arm64 -O2 plain-arm64-control.c -o plain-arm64-control
 
 ## Confirm the final architecture slice
 
-A thin Mach-O file contains one architecture slice. A universal Mach-O file can contain several slices, such as arm64 and x86_64. The `file` and `lipo` tools identify those slices, but they don't enumerate optional Arm architecture extensions.
+With our controls built, you can begin inspecting them.  The most simple methods will be introduced first, building up to more complex detection methods.
+
+A *thin* Mach-O file contains one architecture slice. A universal, or *fat* Mach-O file can contain several slices, such as arm64 and x86_64. This would allow for both x86 andd Arm executable code to co-exist in the same file together.
+
+The `file` and `lipo` tools are used to help identify the file type and slices.
 
 Inspect the three final linked executables:
 
@@ -131,10 +133,14 @@ plain-arm64-control: Mach-O 64-bit executable arm64
 Non-fat file: sme2-positive is architecture: arm64
 ```
 
-For a universal binary, `lipo -info` might report both `x86_64` and `arm64`. The later `-arch arm64` options select the slice to inspect. Neither output would tell you whether SME2 instructions exist.
+For a universal (fat) binary, `lipo -info` might report both `x86_64` and `arm64`. The later `-arch arm64` options select the slice to inspect.
 
-Always point the workflow at the shipped executable. For a macOS application bundle, that file is normally under `MyApp.app/Contents/MacOS/`. An object file, source file, or build log doesn't establish what survived packaging and linking.
+If in the future you apply this same procedure to identify Arm extensions in files outside of this learning path, it may be a fat binary.  If it is, you'd need to be sure you are working with the Mach-O slice.  
+
+For the source code provided in this learning path, you don't need to worry too much about that, as its a thin, Mach-O-only binary.
+
+
 
 ## What you've learned and what's next
 
-You built one positive fixture and two controls as final arm64 Mach-O executables without running them. Next, you will use strings and symbols to collect attribution hints while keeping them separate from instruction proof.
+You built one true positive fixture and two true negative fixtures.  Next, you will use strings and symbols to collect attribution hints while keeping them separate from instruction proof.
