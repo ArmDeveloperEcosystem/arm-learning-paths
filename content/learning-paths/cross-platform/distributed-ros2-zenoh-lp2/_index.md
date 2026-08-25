@@ -18,7 +18,7 @@ learning_objectives:
     - Verify ROS 2 sensor data and messages flowing in both directions between the server and Raspberry Pi
 
 prerequisites:
-    - Complete the [containerized ROS 2 and Zenoh Learning Path](https://learn.arm.com/learning-paths/cross-platform/ros2-zenoh-arm/), with the `robot` container running the Zenoh router and ROX simulation
+    - Complete the [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/) learning path, with the `robot` container running the Zenoh router and ROX simulation
     - A Raspberry Pi 4 or Raspberry Pi 5 (16 GB SD card or larger), aarch64, on the same network as the server
     - Familiarity with ROS 2 topics, Docker, and basic Linux command-line operations
 
