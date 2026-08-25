@@ -45,7 +45,7 @@ Wait for Navigation2 to activate its managed nodes.
 
 It is normal for output to stop after its active. Navigation2 remains idle until it receives a navigation goal.
 
-![Navigation2 terminal output showing managed nodes active while the navigation stack starts in the robot container.](images/nav2-successfully-running.png)
+![Navigation2 terminal output showing managed nodes active while the navigation stack starts in the robot container.](images/nav2-successfully-running.webp)
 
 ## Verify the simulated sensors
 

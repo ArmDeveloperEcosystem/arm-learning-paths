@@ -107,10 +107,7 @@ ros2 topic hz /camera/image_raw
 
 Collect several samples and press **Ctrl+C**. The rate should be close to the rate measured in the robot container because the Docker network is not a bottleneck.
 
-<div style="text-align:center;">
-  <img src="/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/ros2-topic-rates.png" alt="Control terminal showing /scan near 8.7 Hz and /camera/image_raw near 13.2 Hz, confirming that robot data arrives in the control container." style="max-width:600px; width:100%;" />
-  <div style="font-style:italic;">ROS 2 topic-rate measurements in the control container</div>
-</div>
+![Control terminal showing data transfer rates in Hz#center](./ros2-topic-rates.png "Control terminal showing data transfer rates in Hz")
 
 {{% notice Note %}}
 This example uses an NVIDIA DGX Spark as the Arm server for this Learning Path and the prerequisite Learning Path. Topic rates can vary on other Arm servers, such as AWS Graviton-based instances.
@@ -132,13 +129,6 @@ just rviz_nav2
 
 RViz now subscribes to the map, transforms, laser scans, costmaps, and robot state across the client connection. The simulation and Navigation2 remain in the robot container.
 
-<div style="text-align:center;">
-  <img src="/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/control-container-rviz1.png" alt="RViz in the control container showing the robot, map, costmaps, and active Navigation and Localization, confirming remote visualization." style="max-width:800px; width:100%;" />
-  <div style="font-style:italic;">RViz window opened from the control terminal</div>
-</div>
+![RViz window opened from the control terminal showing the simulated robot, map, and laser scan#center](./control-container-rviz1.png "RViz window opened from the control terminal")
 
-This demonstrates the first distributed boundary: the visualization process and the simulated robot are in separate container network namespaces, while ROS 2 communication continues through `rmw_zenoh`.
-
-## What you've accomplished and what's next
-
-You configured the control container as a Zenoh client, verified that robot topics and data arrive, and displayed the remote robot in RViz. Next, connect the Raspberry Pi to the Zenoh router.
+This demonstrates the first distributed boundary: the visualisation process and the simulated robot are in separate container network namespaces, while ROS 2 communication continues through `rmw_zenoh`.

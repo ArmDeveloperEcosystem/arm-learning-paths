@@ -43,8 +43,6 @@ dialout
 ```
 {{% /notice %}}
 
-Hardware commands in this and later pages use environment variables named `ROBOT_PORT`, `LEADER_PORT`, `GRIPPER_CAMERA_ID`, and `WORKSPACE_CAMERA_ID`. Set them to the device paths reported by LeRobot's discovery tools.
-
 ## Identify the robot arm ports
 
 Run the port finder:
@@ -87,7 +85,7 @@ Discover the OpenCV streams and save a diagnostic image from each camera:
 lerobot-find-cameras opencv --output-dir outputs/captured_images
 ```
 
-An abbreviated output looks like:
+An abbreviated output is similar to:
 
 ```output
 --- Detected Cameras ---
@@ -123,17 +121,22 @@ Open the images in `outputs/captured_images/` and match each `Id` to its view.
 | --- | --- |
 | ![LeRobot camera-discovery frame showing the orange gripper tips and pickup surface. Use this view for the `gripper_cam` role.#center](images/3-lerobot-gripper-camera.png "Gripper camera view") | ![LeRobot camera-discovery frame showing the follower, vial, yellow rack, and full range of arm movement. Use this view for the `workspace_cam` role.#center](images/3-lerobot-workspace-camera.png "Workspace camera view") |
 
-Camera numbers and device paths can differ on your host. Use each camera's `Id` value, not `Camera #0` or `Camera #1`. Assign the camera showing the gripper to `GRIPPER_CAMERA_ID`, and assign the camera covering the complete task to `WORKSPACE_CAMERA_ID`.
+Camera numbers and device paths can differ on your host. Use each camera's `Id` value, not `Camera #0` or `Camera #1`. Assign the camera showing the gripper to `GRIPPER_CAMERA_ID`. Assign the camera covering the complete task to `WORKSPACE_CAMERA_ID`.
 
-The tested setup used the following mapping, but your device paths might differ:
+The tested setup used the following mapping:
 
 ```bash
 export GRIPPER_CAMERA_ID="/dev/video0"
 export WORKSPACE_CAMERA_ID="/dev/video2"
 ```
+Your device paths might differ.
 
+{{% notice Note %}}
 Device paths can change after reconnection, so don't assume that a previous device path still identifies the same arm or camera.
+{{% /notice %}}
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You connected and identified both SO-101 arms and assigned the gripper and workspace camera roles. Keep the hardware connected and the camera mounts fixed. Next, calibrate both arms and verify teleoperation before recording demonstrations.
+You've now connected and identified both SO-101 arms and assigned the gripper and workspace camera roles. Keep the hardware connected and the camera mounts fixed. 
+
+Next, you'll calibrate both arms and verify teleoperation before recording demonstrations.
