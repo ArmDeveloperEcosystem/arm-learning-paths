@@ -17,7 +17,10 @@ prerequisites:
     - Familiarity with Linux, Python, PyTorch, and reinforcement learning concepts such as observations, actions, rewards, and policies.
     - A local checkout of the companion MARL GUI containing `tools/deploy_checkpoint.py` and `tools/inspect_checkpoint.py` if you want to complete the GUI deployment section.
 
-author: Sagar Surendran, Na Li, Masoud Koleini
+author:
+    - Sagar Surendran
+    - Na Li
+    - Masoud Koleini
 
 generate_summary_faq: true
 rerun_summary: false
