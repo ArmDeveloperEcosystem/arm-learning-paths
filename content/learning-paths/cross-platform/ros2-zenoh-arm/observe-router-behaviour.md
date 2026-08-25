@@ -12,7 +12,7 @@ The Zenoh router helps ROS 2 nodes discover each other. When nodes start, they c
 
 You can examine this behaviour by stopping the router after a talker and listener have connected. If their established communication continues, the router isn't carrying the messages between these two processes.
 
-Open three terminals in the `robot` container. Source the environment in each terminal:
+Open three bash shells in the `robot` container. Source the environment in each shell:
 
 ```bash
 source ~/workshop_env.bash
@@ -20,7 +20,7 @@ source ~/workshop_env.bash
 
 ## Start the router
 
-In Terminal 1, start the Zenoh router:
+In shell #1, start the Zenoh router:
 
 ```bash
 just router
@@ -36,13 +36,13 @@ The router ID can differ on your system.
 
 ## Start the ROS 2 nodes
 
-In Terminal 2, start the talker:
+In shell #2, start the talker:
 
 ```bash
 ros2 run demo_nodes_cpp talker
 ```
 
-In Terminal 3, start the listener:
+In shell #3, start the listener:
 
 ```bash
 ros2 run demo_nodes_cpp listener
@@ -57,13 +57,13 @@ The listener should receive every message published by the talker:
 
 ## Stop the router and observe the result
 
-Press `Ctrl+C` in Terminal 1 to stop the router. Keep watching the talker and listener.
+Press `Ctrl+C` in shell #1 to stop the router. Keep watching the talker and listener.
 
 The message exchange should continue without interruption. The two nodes already established a direct peer-to-peer connection, so the router isn't in this data path. This result demonstrates the router's discovery role for this established local connection; it doesn't imply that every Zenoh topology can operate without a router.
 
 Nodes can also start before the router because each node periodically retries the router connection.
 
-Restart the router in Terminal 1 before continuing:
+Restart the router in shell #1 before continuing:
 
 ```bash
 just router
