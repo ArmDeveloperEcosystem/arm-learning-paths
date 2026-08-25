@@ -1,5 +1,6 @@
 ---
 title: Deploy a Zephyr-based ML application on Arm Corstone-320 MPS4 with ExecuTorch
+description: Deploy a quantized PyTorch model with ExecuTorch in a Zephyr application on Corstone-320 MPS4 and verify inference.
 
 minutes_to_complete: 45
 
@@ -7,19 +8,22 @@ who_is_this_for: This is an introductory topic for embedded software developers 
 
 learning_objectives: 
     - Set up a Zephyr and ExecuTorch development environment for Corstone-320 MPS4.
-    - Quantize and export a PyTorch model for Ethos-U85 NPU delegation.
+    - Quantize and export a PyTorch model for Ethos-U85 neural processing unit (NPU) delegation.
     - Configure and build the Zephyr `hello-executorch` application for Corstone-320 MPS4.
-    - Run the application on the MPS4 board and verify ML inference through UART output.
+    - Run the application on the MPS4 board and verify machine learning (ML) inference through UART output.
     
 prerequisites:
     - Basic familiarity with embedded C programming
     - Basic familiarity with machine learning concepts
-    - Complete [Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform](/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/) to prepare the Zephyr workspace and board target
+    - A Zephyr workspace and board target using Zephyr version V4.3.0 that you prepared by completing the [Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform](/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/) Learning Path
     - A Corstone-320 MPS4 FPGA development board
     - A Linux development environment, such as Ubuntu 22.04 or later
 
 
 author: Sue Wu
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory

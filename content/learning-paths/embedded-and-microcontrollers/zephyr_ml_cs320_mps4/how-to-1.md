@@ -1,12 +1,13 @@
 ---
 title: Set up the Zephyr and ExecuTorch development environment
+description: Set up Zephyr and ExecuTorch on Corstone-320 MPS4 and prepare a quantized PyTorch model for NPU delegation.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Platform and software setup
+## Set up the platform and software
 
 The Arm Corstone SSE-320 FPGA image for MPS4 (FI101) is an FPGA implementation that runs on the MPS4 board. The image includes an Arm Cortex-M85 processor, an Arm Ethos-U85 NPU, and a range of peripheral components. It provides a practical hardware platform for developing and evaluating machine learning applications.
 
@@ -18,9 +19,9 @@ Download the latest Corstone-320 FPGA image and review the platform documentatio
 - [Arm Corstone SSE-320 Example Subsystem Software Programmers Guide](https://developer.arm.com/documentation/109759/latest/)
 
 
-### Zephyr workspace and board target set up
+### Set up a Zephyr workspace and board target
 
-To set up the Zephyr workspace for the Arm Corstone-320 MPS4 platform, follow the steps in [Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform ](/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/how-to-1/). Use Zephyr version V4.3.0.
+To set up the Zephyr workspace for the Arm Corstone-320 MPS4 platform, see [Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform](/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/how-to-1/). Use Zephyr version V4.3.0.
 
 ### ExecuTorch integration in the Zephyr tree
 
@@ -59,8 +60,11 @@ Run the following commands to download, install, and configure these tools on yo
 source examples/arm/arm-scratch/setup_path.sh
 ```
 
-## Pre-process the PyTorch Model for NPU delegation 
-The ExecuTorch [Ahead-of-Time (AOT)](https://github.com/pytorch/executorch/blob/main/examples/arm/aot_arm_compiler.py) pipeline takes a PyTorch Model (a `torch.nn.Module`) and produces a `.pte` binary file. The ExecuTorch runtime uses this file for inference.
+With the development environment and toolchain configured, prepare the model for deployment.
+
+## Pre-process the PyTorch model for NPU delegation
+
+The ExecuTorch [Ahead-of-Time (AOT)](https://github.com/pytorch/executorch/blob/main/examples/arm/aot_arm_compiler.py) pipeline takes a PyTorch model (a `torch.nn.Module`) and produces a `.pte` binary file. The ExecuTorch runtime uses this file for inference.
 
 The following example shows a simple PyTorch model, `add.py`, that performs a single addition:
 
