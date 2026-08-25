@@ -1,10 +1,6 @@
 ---
 title: Deploy a Zephyr-based ML application on Arm Corstone-320 MPS4 with ExecuTorch
 
-draft: true
-cascade: 
-    draft: true
-
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for embedded software developers who want to deploy a Zephyr-based ML Application on the Arm Corstone-320 MPS4 Platform with ExecuTorch.
@@ -18,7 +14,7 @@ learning_objectives:
 prerequisites:
     - Basic familiarity with embedded C programming
     - Basic familiarity with machine learning concepts
-    - Complete [Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/) to prepare the Zephyr workspace and board target
+    - Complete [Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform](/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/) to prepare the Zephyr workspace and board target
     - A Corstone-320 MPS4 FPGA development board
     - A Linux development environment, such as Ubuntu 22.04 or later
 

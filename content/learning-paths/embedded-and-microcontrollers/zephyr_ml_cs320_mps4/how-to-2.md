@@ -1,19 +1,20 @@
 ---
-title: Deploy an ML application on the Corstone-320 MPS4 platform
+title: Deploy a machine learning application on the Corstone-320 MPS4 platform
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Port hello-executorch for mps4/corstone320/fpga platform
+## Port hello-executorch for the Corstone-320 MPS4 platform
 
-[hello-executorch](https://github.com/pytorch/executorch/tree/main/zephyr/samples/hello-executorch) is a ML sample application in ExecuTorch. It deploys a model using the ExecuTorch runtime. We port the application to the Corstone-320 MPS4 platform to validate the ML application workflow on this platform.
+[`hello-executorch`](https://github.com/pytorch/executorch/tree/main/zephyr/samples/hello-executorch) is a ML sample application in ExecuTorch. The application deploys a model using the ExecuTorch runtime. You'll port the application to the Corstone-320 MPS4 platform to validate the ML application workflow on this platform.
 
 ### Change NPU region configuration settings for the project
-The `ethosu_config_select()` function is a weak function defined in the Ethos-U driver file `ethosu_device_u85.c`. It configures the `QCONFIG` and `REGIONCFG` registers for the Ethos-U85.
 
-Because the model is preprocessed in SRAM-only mode, all command streams, weights, and scratch data must reside in SRAM on the Corstone-320 platform. Therefore, we override `ethosu_config_select()` in the application to configure the AXI regions for the command stream and memory regions required by SRAM-only mode.
+`ethosu_config_select()` is a weak function defined in the Ethos-U driver file `ethosu_device_u85.c`. The function configures the `QCONFIG` and `REGIONCFG` registers for the Ethos-U85.
+
+Because the model is preprocessed in SRAM-only mode, all command streams, weights, and scratch data must reside in SRAM on the Corstone-320 platform. Therefore, you'll override `ethosu_config_select()` in the application to configure the AXI regions for the command stream and memory regions required by SRAM-only mode.
 
 Create a new file, `ethosu_config_corstone320.c`, in the `hello-executorch/src` directory with the following content:
 
@@ -66,7 +67,7 @@ set(app_sources
 ```
 
 
-### Add the zephyr configuration files for MPS4 CS320 platform
+### Add the zephyr configuration files for the Corstone-320 MPS4 platform
 
 Create the board-specific Kconfig file `boards/mps4_corstone320_fpga.conf` in the `hello-executorch` sample directory and add the following content:
 
@@ -96,7 +97,7 @@ CONFIG_FAULT_DUMP=2
 Build the `hello-executorch` application by following these steps:
 
 1. Activate the Python virtual environment for Zephyr.
-2. Set the toolchain environment variables. The path should match where you installed the Arm GNU Toolchain in the prerequisite Learning Path. On aarch64, replace `x86_64` with `aarch64` in the directory name.
+2. Set the toolchain environment variables. The path should match where you installed the Arm GNU Toolchain while completing [Port Zephyr RTOS and run applications on the Arm Corstone-320 MPS4 platform](/learning-paths/embedded-and-microcontrollers/zephyr_cs320_mps4/). On aarch64, replace `x86_64` with `aarch64` in the directory name.
 
 ```bash
 	export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
@@ -125,12 +126,12 @@ The ELF image contains the Zephyr kernel, the Ethos-U driver, the ExecuTorch run
 
 
 ### Run the application on the MPS4 board
-1. Download the board files from [FI101](https://developer.arm.com/downloads/view/FI101?sortBy=availableBy&revision=r1p0-00eac0-2), 
-2. Set up the MPS4 platform according to the [Using the FI101 on MPS4 board](https://developer.arm.com/documentation/109762/0100/?lang=en).
+1. Download the board files from [FI101](https://developer.arm.com/downloads/view/FI101?sortBy=availableBy&revision=r1p0-00eac0-2).
+2. Set up the MPS4 platform. For instructions, see [Using the FI101 on MPS4 board](https://developer.arm.com/documentation/109762/0100/?lang=en).
 
-For the `hello-executorch` application, place the vector table in the FPGA boot ROM at address 0x11000000, and place the remaining code and data in SRAM at address 0x31000000. Create vector.bin and app.bin from zephyr.elf by using arm-none-eabi-objcopy.
+For the `hello-executorch` application, place the vector table in the FPGA boot ROM at address `0x11000000`, and place the remaining code and data in SRAM at address `0x31000000`. Create `vector.bin` and `app.bin` from `zephyr.elf` by using `arm-none-eabi-objcopy`.
 
-Update images.txt under /MB/HBI0376B/FI101 to load the two images:
+Update `images.txt` under `/MB/HBI0376B/FI101` to load the two images:
 
 ```
 IMAGE0PORT: 2
@@ -145,12 +146,13 @@ IMAGE1FILE: \SOFTWARE\app.bin           ; Image/data to be loaded
 
 ```
 
-Copy vector.bin and app.bin to \SOFTWARE, then power on the board.
+Copy `vector.bin` and `app.bin` to `\SOFTWARE`, then power on the board.
 If the setup is correct, the UART console prints the model delegate flow, similar to the following example:
 
 ![UART console output showing ExecuTorch model inference results on the MPS4 board](image.png)
 
-## What you accomplished
-In this Learning Path, you learned how to deploy a Zephyr-based ML application on the Arm Corstone-320 MPS4 platform using ExecuTorch. You learned how to preprocess a model for Ethos-U NPU delegation, develop a Zephyr-based ML application, and integrate the ExecuTorch runtime.
+## What you've accomplished
 
-These steps help you validate ML applications on the platform and provide a foundation for developing more advanced ML workloads.
+You've learned how to deploy a Zephyr-based ML application on the Arm Corstone-320 MPS4 platform using ExecuTorch. You've learned how to preprocess a model for Ethos-U NPU delegation, develop a Zephyr-based ML application, and integrate the ExecuTorch runtime.
+
+You can use these steps to validate ML applications on the platform and develop more advanced ML workloads.
