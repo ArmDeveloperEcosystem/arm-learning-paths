@@ -37,7 +37,7 @@ generated_summary_faq:
     You'll deploy a Zephyr machine learning application on the Arm Corstone-320 MPS4 with ExecuTorch.
     First, you'll download the FI101 FPGA image and set up the
     Zephyr and ExecuTorch environment. Next, you'll quantize and export a PyTorch model as a `.pte`
-    file for Ethos-U85 delegation. Finally, you'll port `hello-executorch`, configure SRAM-only NPU
+    file for Ethos-U85 delegation. Finally, you'll port a sample application, configure SRAM-only NPU
     regions, build the application and run it on the MPS4, and verify inference over UART.
   faqs:
   - question: How do I know the MPS4 is using the correct Corstone-320 FPGA image before I build?
