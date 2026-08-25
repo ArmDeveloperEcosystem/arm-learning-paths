@@ -9,15 +9,15 @@ layout: learningpathall
 
 ## Prepare the recording workspace
 
-After calibrating and verifying teleoperation, record demonstrations that provide the camera images, robot state, and actions used to fine-tune SmolVLA. You will then inspect the recorded episodes and optionally upload the validated dataset to Hugging Face.
+After calibrating and verifying teleoperation, record demonstrations that provide the camera images, robot state, and actions used to fine-tune SmolVLA. You'll then inspect the recorded episodes and optionally upload the validated dataset to Hugging Face.
 
-Use the two-camera workspace prepared during hardware setup. Lay the vial on the black mat and place the rack beside it, within the follower's calibrated reach. The mat provides a consistent task area and visual contrast. Leave enough space between the vial and rack for the follower to grasp and move the vial without colliding with the rack.
+Use the two-camera workspace that you prepared during hardware setup. Lay the vial on the black mat and place the rack beside it, within the follower's calibrated reach. The mat provides a consistent task area and visual contrast. Leave enough space between the vial and rack for the follower to grasp and move the vial without colliding with the rack.
 
 ![SO-101 follower workspace with one camera mounted near the gripper and a second camera fixed above the table. The fixed camera covers the vial, yellow rack, follower, and motion area while the gripper camera provides the close manipulation view.#center](images/5-so101-workspace-2cameras.jpg "Two-camera SO-101 workspace")
 
 ## Define a consistent demonstration
 
-Use this task instruction for every episode:
+Use the following task instruction for every episode:
 
 ```text
 Pick up the vial and place it in the yellow rack
@@ -25,11 +25,11 @@ Pick up the vial and place it in the yellow rack
 
 Start each episode with the vial lying on the pickup surface, the rack within the follower's safe reach, and both objects visible in the workspace camera.
 
-Move the leader smoothly, grasp the vial, place it into the rack, release it, and return to a stable pose.
+Move the leader smoothly and grasp the vial. Place it into the rack, release it, and return to a stable pose.
 
 Vary the vial and rack positions or orientations slightly between episodes, but stay inside the camera views and calibrated motion range.
 
-Use these acceptance rules:
+Use the following acceptance rules:
 
 - The gripper closes around the vial rather than pushing it.
 - The vial finishes inside the intended rack hole and is released.
@@ -82,11 +82,11 @@ lerobot-record \
 ```
 
 {{% notice Note %}}
-Some users may need to adjust the "dataset.reset_time_s" value depending on how long it takes to reset the workspace for another run. 15 seconds may be too short a time to get everything reset and get back to the leader arm for the next episode recording.
-{{% /notice %}}
+Consider the following:
+- Some users might need to adjust the `dataset.reset_time_s` value depending on how long it takes to reset the workspace for another run. 15 seconds might be too short a time to get everything reset and get back to the leader arm for the next episode recording.
+- LeRobot provides keyboard controls to end an episode or reset period early, or to cancel the current episode. These controls can be useful when you need to discard a demonstration. In the tested LeRobot 0.6.0 setup, however, using them occasionally caused the recording process to stop with an error. Behavior might differ with other versions or systems. 
 
-{{% notice Note %}}
-LeRobot provides keyboard controls to end an episode or reset period early, or to cancel the current episode. These controls can be useful when you need to discard a demonstration. In the tested LeRobot 0.6.0 setup, however, using them occasionally caused the recording process to stop with an error. Behavior might differ with other versions or systems. To reduce the risk of an interrupted session, let the configured episode and reset timers expire whenever possible. If you use a keyboard control, confirm that the recorder remains active before starting the next episode.
+  To reduce the risk of an interrupted session, let the configured episode and reset timers expire whenever possible. If you use a keyboard control, confirm that the recorder remains active before starting the next episode.
 {{% /notice %}}
 
 After the recorder exits, read the finalized summary:
@@ -118,7 +118,7 @@ This summary confirms that the recorder finalized the requested episodes and tra
 
 ## Review an episode with Rerun
 
-[Rerun](https://rerun.io/docs/getting-started/what-is-rerun) is a visualization toolkit for time-aligned multimodal data. It lets you scrub camera frames alongside robot state and action plots, making it easier to spot missing images, timing gaps, or unexpected motion.
+[Rerun](https://rerun.io/docs/getting-started/what-is-rerun) is a visualization toolkit for time-aligned multimodal data. You can use Rerun to scrub camera frames alongside robot state and action plots, making it easier to spot missing images, timing gaps, or unexpected motion.
 
 The `lerobot-dataset-viz` command launches Rerun with the recorded camera, state, and action data:
 
@@ -138,20 +138,22 @@ lerobot-dataset-viz \
 The option `--display-compressed-images` is used for image datasets because uncompressed frames can exceed Rerun's distant-mode memory buffer and make early images appear blank. Press `Ctrl+C` after review.
 {{% /notice %}}
 
-Open `http://127.0.0.1:9090` using your DGX Sparc desktop browser while the above command is running and then:
-  - Once open, click on the "+" on the upper left hand section of the UI
-  - Choose "Open from URL..."
-  - Enter the following URL: ***"rerun+http://127.0.0.1:9876/proxy"***
-  - Press "Open"
+Open `http://127.0.0.1:9090` in the DGX Spark desktop browser while the `lerobot-dataset-viz` command is running, then complete the following steps:
+  1. When the browser window opens, select **+** in the upper-left corner.
+  2. Select **Open from URL...**.
+  3. Enter `rerun+http://127.0.0.1:9876/proxy`.
+  4. Select **Open**.
 
 
 {{% notice Note %}}
-The browser on the DGX Sparc must be used as the browser to view the UI. Typically CORS errors will occur if a browser on a different/remote desktop is attempted in leu of the browser on the DGX Sparc.
+You have to use the browser on the DGX Spark to view the UI. Typically, CORS errors will occur if you try to use a browser on a different or remote desktop instead of the browser on the DGX Spark.
 {{% /notice %}}
 
-You should now see the following console including your USB camera images as well as data. Press the play button in the lower left-hand portion of the console to "Play" your animation. The animation shows the Rerun view while episode 15 is scrubbed. Both camera panes update with the task, and the action and state plots update as the arm moves.
+You should now see the following console including your USB camera images as well as data:
 
 ![Rerun Viewer animation showing episode 15 being scrubbed with the gripper and workspace camera panes, action and state plots, and image timelines visible together.#center](images/5-lerobot-dataset-viz.gif "Inspecting an episode with LeRobot and Rerun")
+
+Press the **play button** in the lower left-hand portion of the console to play your animation. The animation shows the **Rerun** view while episode 15 is scrubbed. Both camera panes update with the task, and the action and state plots update as the arm moves.
 
 Scrub from the first frame to the last. Check that the approach, grasp, lift, placement, release, and final pose before the reset period are visible. Reject a dataset with missing camera intervals, abrupt unexplained actions, unsafe motion, or inconsistent task order.
 
@@ -175,13 +177,15 @@ For the tested SO-101, vector indices map to joints as follows:
 
 LeRobot reads the follower state before sending the current action. The curves don't need to overlap exactly because one is a measured position and the other is a target at a slightly different point in the control loop. Motor response time, load, and mechanical compliance add further delay.
 
-During fine-tuning, SmolVLA learns to predict actions from camera observations, task text, and robot state. The action is the behavior to reproduce; the state describes the pose from which the model acts.
+During fine-tuning, SmolVLA learns to predict actions from camera observations, task text, and robot state. The action is the behavior to reproduce. The state describes the pose from which the model acts.
 
-## Optionally upload to Hugging Face
+## (Optional) Upload to Hugging Face
 
-Uploading isn't needed when training on the same machine that stores the dataset. A Hub repository is useful when you want versioned sharing, the hosted dataset viewer, or access from a cloud GPU job. Uploading stores the dataset; it doesn't provision GPU compute.
+You don't need to upload when training on the same machine that stores the dataset. A Hub repository is useful when you want versioned sharing, the hosted dataset viewer, or access from a cloud GPU job. Uploading stores the dataset and doesn't provision GPU compute.
 
-Use a repository ID under your own account. Choose a license that covers the demonstrations and video, and decide whether the repository should be public or private. Then run:
+Use a repository ID under your own account. Choose a license that covers the demonstrations and video, and decide whether the repository should be public or private. 
+
+Then, run the following script:
 
 ```bash
 python - <<'PY'
@@ -204,6 +208,8 @@ PY
 
 Set `private=True` if the data shouldn't be public. The `push_to_hub()` method creates the repository, uploads the dataset and videos, generates a dataset card, and tags the revision with the LeRobot version.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You recorded and validated a pick-and-place dataset with synchronized camera, state, and action features. You can train directly from the local dataset or use the optional Hub upload for sharing and remote access. Next, fine-tune SmolVLA from `LOCAL_DATASET_ROOT` on the DGX Spark GPU.
+You've now recorded and validated a pick-and-place dataset with synchronized camera, state, and action features. You can train directly from the local dataset or optionally upload to a Hugging Face Hub repository for sharing and remote access. 
+
+Next, you'll fine-tune SmolVLA from `LOCAL_DATASET_ROOT` on the DGX Spark GPU.
