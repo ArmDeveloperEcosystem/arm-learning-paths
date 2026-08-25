@@ -18,7 +18,7 @@ These measurements establish a baseline before you enable shared-memory transpor
 
 ## Run the monitoring commands
 
-Run the following commands in a sourced `robot` container terminal:
+Run each command in turn. Press **Ctrl+C** to stop the current command before starting the next one.
 
 ```bash
 just top

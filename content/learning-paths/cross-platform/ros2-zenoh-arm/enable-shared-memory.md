@@ -14,18 +14,17 @@ You first measure the default TCP-loopback latency. You then enable shared memor
 
 ## Measure the TCP-loopback baseline
 
-Stop Navigation2 in Terminal 3. The latency measurement needs wall-clock timestamps, and Navigation2 doesn't operate in this mode.
+Stop Navigation2 in bash shell #3 in the `robot` container. The latency measurement needs wall-clock timestamps, and Navigation2 doesn't operate in this mode.
 
-Stop the current simulation. Restart it in Terminal 2 with wall-clock time and without the Gazebo viewer:
+Stop the current simulation. Restart it in bash shell #2 with wall-clock time and without the Gazebo viewer:
 
 ```bash
 just rox_simu use_wall_time:=True no_gui
 ```
 
-Open a new terminal, source the environment, and measure the point-cloud latency:
+Open a new bash shell in the `robot` container and measure the point-cloud latency:
 
 ```bash
-source ~/workshop_env.bash
 just cam_latency
 ```
 
@@ -39,7 +38,7 @@ Record the mean for comparison.
 
 ## Enable shared memory in both configurations
 
-Open both of these working files:
+Open both of these working files using your choice of editor in one of the `robot` bash shells:
 
 - `~/container_data/ROUTER_CONFIG.json5`
 - `~/container_data/SESSION_CONFIG.json5`
@@ -57,16 +56,16 @@ Both files contain multiple `enabled` fields. In both `ROUTER_CONFIG.json5` and 
 The router and ROS 2 sessions read these files when their processes start. Stop the router and simulation processes with `Ctrl+C`, then restart them so they load the updated setting:
 
 ```bash
-# Router terminal
+# Router bash shell
 just router
 ```
 
 ```bash
-# Simulation terminal
+# Simulation bash shell
 just rox_simu use_wall_time:=True no_gui
 ```
 
-Run the latency measurement again from a sourced terminal:
+Run the latency measurement again from another bash shell in the `robot` container:
 
 ```bash
 just cam_latency
@@ -95,23 +94,23 @@ just iftop_lo
 
 ## Restore the environment for the next Learning Path
 
-Keep the shared-memory configuration enabled. In Terminal 2, press `Ctrl+C` to stop the temporary wall-time simulation if it is still running.
+Keep the shared-memory configuration enabled. In bash shell #2, press `Ctrl+C` to stop the temporary wall-time simulation if it is still running.
 
-Keep the Zenoh router running in Terminal 1. If it has stopped, restart it from a sourced terminal:
+Keep the Zenoh router running in bash shell #1. If it has stopped, restart it after re-sourcing the environment:
 
 ```bash
 source ~/workshop_env.bash
 just router
 ```
 
-In Terminal 2, source the environment if needed and start the normal headless simulation:
+In bash shell #2, source the environment if needed and start the normal headless simulation:
 
 ```bash
 source ~/workshop_env.bash
 just rox_simu no_gui
 ```
 
-In Terminal 3, source the environment if needed and restart Navigation2:
+In bash shell #3, source the environment if needed and restart Navigation2:
 
 ```bash
 source ~/workshop_env.bash

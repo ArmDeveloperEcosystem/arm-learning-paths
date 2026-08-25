@@ -19,7 +19,7 @@ The navigation view contains several layers:
 
 ## Start RViz
 
-Open a new terminal in the `robot` container, source the environment, and start the Navigation2 RViz configuration:
+Open a new bash shell in the `robot` container, source the environment, and start the Navigation2 RViz configuration:
 
 ```bash
 source ~/workshop_env.bash
@@ -30,23 +30,21 @@ Wait for the map and costmaps to render. The light blue area represents free spa
 
 ## Send a navigation goal
 
-1. Click Nav2 Goal in the top toolbar.
-2. Move your mouse onto the mapped area in the centre.
-- Click and hold somewhere in the free/light-blue area.
-- While holding the mouse button, drag a short distance. You'll see an arrow appear.
-3. Where you first clicked = where you want the robot to go.
-4. Direction of the arrow = direction you want the robot facing when it arrives.
+1. Select **Nav2 Goal** in the toolbar.
+2. Move your pointer onto the mapped area in the centre.
+3. Select and hold a position in the free, light-blue area where you want the robot to go.
+4. While holding the mouse button, drag a short distance in the direction you want the robot to face. An arrow appears.
 5. Release the mouse button.
 
 Nav2 should then calculate a path and the robot should begin moving.
 
 Goals outside the mapped costmap don't have a valid planned path, so the robot won't move toward them.
 
-![RViz showing the Neobotix ROX robot, navigation map, costmaps, and Navigation2 panel.](images/rviz-navigation-goal.png)
+![RViz showing the Neobotix ROX robot with the map, local and global costmaps, and active Navigation2 panel. The light-blue free space identifies where you can set a valid navigation goal.#center](images/rviz-navigation-goal.png)
 
 ## Verify the navigation result
 
-The robot should plan a path, drive to the goal, and report `Feedback: reached`. A successful reference result is:
+The robot should plan a path, drive to the goal, and report `Feedback: reached`. On the supplied reference system, the output is similar to:
 
 ```output
 Navigation: active

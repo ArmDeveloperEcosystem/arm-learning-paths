@@ -1,6 +1,10 @@
 ---
 title: Build a ROS 2 and Zenoh simulation environment on an Arm server
 
+draft: true
+cascade:
+    draft: true
+
 description: Set up ROS 2 Jazzy with rmw_zenoh in Docker, then run and evaluate a Neobotix ROX simulation on an Arm server.
 
 minutes_to_complete: 60
@@ -17,7 +21,8 @@ prerequisites:
     - An Arm server running Linux with at least 8 CPU cores, 16 GB of RAM, and 30 GB of free disk space
     - Docker and Docker Compose installed
     - Network access to ports 6080 and 6081 on the Arm server
-    - Basic familiarity with Linux terminal commands
+    - Familiarity with launching bash shells within a running Docker container
+    - Basic familiarity with Linux terminal commands within bash shells
 
 author:
     - Odin Shen

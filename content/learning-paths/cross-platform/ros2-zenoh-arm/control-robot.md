@@ -12,7 +12,7 @@ The ROX base subscribes to the `/cmd_vel` topic using the `geometry_msgs/Twist` 
 
 Any process that publishes to `/cmd_vel` can control the base. Navigation2 uses this same interface, so it is one publisher to the robot rather than a privileged control path.
 
-Open a sourced terminal in the `robot` container:
+Open a sourced bash shell in the `robot` container:
 
 ```bash
 source ~/workshop_env.bash
@@ -28,7 +28,7 @@ just teleop
 
 Use the key bindings displayed in the terminal to drive the robot while you observe its movement in RViz.
 
-![Keyboard teleoperation terminal showing the movement key bindings for controlling the robot.](images/robot-teleoperation.png)
+![Keyboard teleoperation terminal showing the movement key bindings for controlling the robot.#center](images/robot-teleoperation.png)
 
 ## Publish a velocity command
 
@@ -54,13 +54,13 @@ Read one odometry message and display the robot position:
 ros2 topic echo /odom --once | grep -A2 position
 ```
 
-The `x` position should advance when the robot moves. On the supplied reference system, a 3-second command at `0.2 m/s` moved the robot from approximately `x = 0` to `x = 0.39 m`:
+The `x` position should advance when the robot moves. The output is similar to:
 
 ```output
       x: 0.3899999883542309
 ```
 
-This value is an example, not an exact target. Acceleration behaviour and the robot's starting position affect the result.
+On the supplied reference system, a 3-second command at `0.2 m/s` moved the robot from approximately `x = 0` to `x = 0.39 m`. This value is an example, not an exact target. Acceleration behaviour and the robot's starting position affect the result.
 
 {{% notice Note %}}
 The UR10 arm on the ROX uses a `JointTrajectory` action rather than `Twist`. Publishing `Twist` to the base and `JointTrajectory` to the arm follows the standard ROS interface for each mechanism.
