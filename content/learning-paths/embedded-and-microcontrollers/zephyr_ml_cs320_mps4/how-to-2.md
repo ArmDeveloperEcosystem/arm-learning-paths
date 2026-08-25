@@ -157,6 +157,6 @@ If the setup is correct, the UART console prints the model delegate flow, simila
 
 ## What you've accomplished
 
-You've learned how to deploy a Zephyr-based ML application on the Arm Corstone-320 MPS4 platform using ExecuTorch, preprocess a model for Ethos-U NPU delegation, develop a Zephyr-based ML application, and integrate the ExecuTorch runtime.
+You've learned how to develop and deploy a Zephyr-based machine learning application on the Arm Corstone-320 MPS4 platform using ExecuTorch, preprocess a model for Ethos-U NPU delegation, and integrate the ExecuTorch runtime.
 
-You can use these steps to validate ML applications on the platform and develop more advanced ML workloads.
+You can use these steps to validate machine learning applications on the platform and develop more advanced ML workloads.
