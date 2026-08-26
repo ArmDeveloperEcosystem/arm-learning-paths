@@ -23,7 +23,9 @@ draft: true
 cascade:
   draft: true
 
-author: Julien Jayat
+author:
+    - Julien Jayat
+    - Jaxson Han
 
 generate_summary_faq: true
 rerun_summary: false

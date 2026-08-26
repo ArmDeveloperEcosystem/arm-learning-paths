@@ -1,7 +1,7 @@
 ---
 title: Integrate the FreeRTOS image with Yocto
 description: Define a Yocto recipe and image-selection flow that builds, signs, and packages FreeRTOS as the Zena CSS Safety Island firmware.
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
