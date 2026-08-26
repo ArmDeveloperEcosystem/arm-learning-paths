@@ -2,6 +2,8 @@
 title: Tune Zenoh on an emulated wireless link
 weight: 4
 
+description: Emulate a constrained wireless link and measure how Zenoh traffic-control policies affect ROS 2 sensor delivery.
+
 layout: learningpathall
 ---
 
@@ -9,13 +11,14 @@ layout: learningpathall
 
 Linux traffic control (`tc`) decides how packets leave a network interface. Its network emulator (`netem`) can add delay, loss, duplication, corruption, and reordering. Together they let you reproduce a difficult network without moving the containers to Wi-Fi.
 
-In a `robot` terminal:
+In a terminal within the `robot` container desktop:
 
 ```bash
+source ~/workshop_env.bash
 just network_limit
 ```
 
-**Expected result:** the script reports the emulated link parameters.
+The expected output shows the emulated link parameters:
 
 ```output
 WiFi medium connection simulation applied to 172.1.0.3:
@@ -42,9 +45,9 @@ Stop all four measurement commands with **Ctrl+C**.
 
 ## Apply compression (A2)
 
-Zenoh uses [LZ4 compression](https://lz4.org/) to reduce the bytes sent over a unicast connection. LZ4 was chosen for speed rather than ratio, since compression must not become a latency source. Compression is negotiated when a client connects, so the router and the client must both enable it.
+Zenoh uses [LZ4 compression](https://lz4.org/) to reduce the bytes sent over a unicast connection. LZ4 was chosen for speed rather than ratio, because compression must not become a latency source. Compression is negotiated when a client connects, so the router and the client must both enable it.
 
-In a `robot` terminal, open the router configuration:
+In a terminal on the `robot` container desktop, open the router configuration:
 
 ```bash
 nano ~/container_data/ROUTER_CONFIG.json5
@@ -60,7 +63,7 @@ compression: {
 
 Do not add a second `transport` block. Edit the active value rather than a commented example.
 
-In a `control` terminal, open the client configuration:
+In a terminal on the `control` container desktop, open the client configuration:
 
 ```bash
 nano ~/container_data/SESSION_CONFIG.json5
@@ -70,7 +73,7 @@ Find the same compression setting and set it to `true`.
 
 Save each file with **Ctrl+O** and **Enter**, then exit Nano with **Ctrl+X**.
 
-The router reads its configuration only at startup. In the `robot` desktop, find the terminal running the router, press Ctrl+C, then restart it:
+The router reads its configuration only at startup. In the `robot` container desktop, find the terminal running the router, press **Ctrl+C**, then restart it:
 
 ```bash
 just router
@@ -82,7 +85,7 @@ Restart the four measurements and record:
 |---|---|---|---|---|
 | **A2** | **7.95 Hz** (link traffic ~380 Kbps → ~200 Kbps) | **0.5–2.8 Hz, drifting** | **still nothing** | **~23.5 Mbps, still at the cap** |
 
-The scan's rate is unchanged but its bytes on the link roughly halve — LZ4 achieving about 1.8× on this data. The image improves, but the reading drifts between measurements, while the point cloud's doomed fragments still compete for the link. An unstable reading here is the expected result, not a mistake.
+The scan's rate is unchanged but its bytes on the link roughly halve — LZ4 achieving about 1.8× on this data. The image improves, but the reading drifts between measurements, while incomplete point-cloud fragments still compete for the link. An unstable reading here is the expected result, not a mistake.
 
 The total TX rate (Link traffic) can remain close to the constrained link’s capacity. Compression reduces individual messages, but publishers continue supplying more data than the link can carry.
 
@@ -92,7 +95,7 @@ Stop all four measurement commands with **Ctrl+C**. Keep compression enabled and
 
 A monitoring station does not always need the point cloud. Zenoh access control can stop that topic at the router while local robot nodes continue to use it.
 
-Open the router configuration in `robot`:
+Open the router configuration in the `robot` container desktop:
 
 ```bash
 nano ~/container_data/ROUTER_CONFIG.json5
@@ -135,7 +138,7 @@ access_control: {
 
 The first key expression matches the point-cloud data. The `@adv` form matches the additional keys used to advertise topics with transient-local durability.
 
-Save the file, stop the router with **Ctrl+C**, and restart it:
+Save the file, stop the router with **Ctrl+C**, and restart it on the `robot` container desktop:
 
 ```bash
 just router
@@ -165,9 +168,9 @@ Stop all measurement commands with **Ctrl+C**. Keep compression, access control,
 
 ## Downsample the image (A4)
 
-Downsampling drops publications on the egress path to a target frequency. 
+Downsampling drops publications on the egress path to a target frequency.
 
-Keep the A3 access-control block active. Open the router configuration in `robot`:
+Keep the A3 access-control block active. Open the router configuration in `robot` container desktop:
 
 ```bash
 nano ~/container_data/ROUTER_CONFIG.json5
@@ -187,9 +190,11 @@ downsampling: [
   },
 ],
 ```
+
 The rule sets a maximum egress rate of 3 Hz for the image and its transient-local advertisement keys.
 
-Save the file, stop the router, and restart it:
+Save the file, stop the router, and restart it on the `robot` container desktop:
+
 ```bash
 just router
 ```
@@ -208,9 +213,9 @@ Stop all measurement commands with **Ctrl+C**.
 
 ## Apply priority and congestion control (A5)
 
-The remaining problem is the point cloud, which so far has only ever been blocked, never delivered. This step restores point-cloud traffic and changes the congestion policy.
+The remaining problem is the point cloud, which has only been blocked and never delivered. Restore the point-cloud traffic. Then change the congestion policy.
 
-Open `~/container_data/ROUTER_CONFIG.json5` in robot. Comment out the `access_control` and `downsampling` blocks — keep them in the file, Experiment B needs them again. Add this `qos` block at the top level:
+Open `~/container_data/ROUTER_CONFIG.json5` in the `robot` container desktop. Comment out the `access_control` and `downsampling` blocks — keep them in the file, Experiment B needs them again. Add this `qos` block at the top level:
 
 ```json5
 qos: {
@@ -250,11 +255,12 @@ qos: {
 ```
 
 Verify the state of all three blocks before restarting:
+
 ```bash
 grep -n "access_control\|downsampling\|qos\|block_first" ~/container_data/ROUTER_CONFIG.json5
 ```
 
-Restart the router and the measurements.
+Restart the router on the `robot` container desktop and the measurements.
 
 | Scenario | `/scan` | `/camera/image_raw` | `/camera/points` | Link traffic |
 |---|---|---|---|---|
@@ -264,7 +270,7 @@ For the first time under the constrained link, `ros2 topic bw /camera/points` sh
 
 When the queue is full, `block_first` waits for the first matching message to progress and can drop later matching messages. This favors complete point-cloud frames over fragments from several competing frames, so fewer frames arrive, but the received frames are usable.
 
-Stop the measurements with **Ctrl+C**. Restore the normal Docker network in `robot`:
+Stop the measurements with **Ctrl+C**. Restore the normal Docker network in the `robot` container desktop:
 
 ```bash
 just network_normal
