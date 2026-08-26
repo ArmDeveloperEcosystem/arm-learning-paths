@@ -1,6 +1,6 @@
 ---
 title: Set up the SmolVLA environment
-description: Create a Python environment and download the pinned SmolVLA model and LeRobot source.
+description: Set up an Arm Linux environment with the pinned SmolVLA model and LeRobot source for ONNX export and validation.
 weight: 2
 layout: learningpathall
 ---
@@ -21,7 +21,7 @@ cd ..
 
 ## Check the system requirements
 
-You'll run the exported models on an Arm Linux CPU. 
+You'll run the exported models on an Arm Linux CPU.
 
 Review the processor, Python version, and available space on the system you'll use to run the project:
 
@@ -48,7 +48,7 @@ bash scripts/setup.sh
 ```
 
 The script downloads model weights, clones the LeRobot source, and installs
-PyTorch and other Python dependencies. 
+PyTorch and other Python dependencies.
 
 {{% notice Note %}}
 The setup might take 30 minutes or more, depending on your network speed.
@@ -56,7 +56,7 @@ The setup might take 30 minutes or more, depending on your network speed.
 
 The script:
 
-- Creates `work/venv` 
+- Creates `work/venv`
 - Checks out the pinned LeRobot source
 - Installs the conversion and runtime dependencies
 - Downloads the SmolVLA policy and its SmolVLM2 dependency
@@ -77,7 +77,7 @@ Check the downloaded files and revisions:
 python scripts/check_assets.py
 ```
 
-The expected output ends with:
+The output is similar to:
 
 ```output
 PASS: public policy, base model, LeRobot source, and environment are ready
@@ -86,6 +86,6 @@ PASS: public policy, base model, LeRobot source, and environment are ready
 ## What you've accomplished and what's next
 
 You've prepared an Arm Linux environment with the pinned SmolVLA checkpoint,
-source, and Python dependencies. 
+source, and Python dependencies.
 
 Next, you'll export SmolVLA as an FP32 ONNX model and validate it with ONNX Runtime.

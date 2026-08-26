@@ -15,6 +15,8 @@ This is weight-only quantization, not an entirely INT4 graph.
 
 On supported Arm CPUs, ONNX Runtime can use optimized kernels such as KleidiAI.
 
+With the quantization scope established, convert the eligible linear weights to a packed INT4 ONNX model.
+
 ## Create the packed INT4 model
 
 Run the TorchAO converter:
@@ -49,7 +51,7 @@ python scripts/compare_onnx_outputs.py \
 The script runs both models with ONNX Runtime `CPUExecutionProvider` and
 creates `work/comparison/smolvla-action-comparison.png` and `work/comparison/smolvla-action-comparison.json`.
 
-## Review the Orion O6 result
+## Interpret the FP32 and INT4 comparison
 
 The figure compares all seven normalized output channels and median latency.
 The JSON file records the latency and overall output error.

@@ -15,6 +15,8 @@ actions.
 
 Image source: [SmolVLA paper](https://arxiv.org/pdf/2506.01844).
 
+Now that you understand the model inputs and outputs, export the SmolVLA policy to ONNX and validate it with ONNX Runtime.
+
 ## Export SmolVLA to ONNX
 
 The checkpoint includes the SmolVLA policy and the LeRobot processors used
@@ -39,7 +41,7 @@ The exporter creates a fixed-shape model and a deterministic reference batch.
 The batch includes an explicit flow-matching noise tensor, so the PyTorch and
 ONNX Runtime paths receive the same inputs.
 
-The expected output ends with:
+The output is similar to:
 
 ```output
 PASS: ONNX Runtime matches PyTorch within atol=0.001 and rtol=0.001
@@ -89,6 +91,6 @@ of `[1, 50, 7]`, and passes validation.
 ## What you've accomplished and what's next
 
 You've exported SmolVLA to FP32 ONNX and validated its action output
-with ONNX Runtime on an Arm CPU. 
+with ONNX Runtime on an Arm CPU.
 
 Next, you'll quantize the eligible linear weights to packed INT4 and run the resulting model through the same interface.
