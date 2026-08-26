@@ -5,13 +5,18 @@ weight: 2
 layout: learningpathall
 ---
 
-## Get the companion files
+## Get the scripts
 
-Clone the Arm Learning Paths repository and open this Learning Path directory:
+Download the scripts for this Learning Path by copying and pasting the following commands into your terminal:
 
 ```bash
-git clone https://github.com/ArmDeveloperEcosystem/arm-learning-paths.git
-cd arm-learning-paths/content/learning-paths/cross-platform/smolvla-onnx-conversion
+mkdir -p scripts
+cd scripts
+base_url="https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/cross-platform/smolvla-onnx-conversion/scripts"
+for f in check_assets.py compare_onnx_outputs.py export_onnx.py quantize_onnx_torchao.py setup.sh workspace.py; do
+    wget -q "$base_url/$f"
+done
+cd ..
 ```
 
 ## Check the system requirements
