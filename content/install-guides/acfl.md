@@ -168,7 +168,7 @@ sudo apt install -y environment-modules
 
 Set up your shell to use modules and load ATfL:
 
-```bash
+```bash { pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles" }
 echo '. /usr/share/modules/init/bash' >> $HOME/.bashrc
 echo 'module use /opt/arm/modulefiles' >> $HOME/.bashrc
 source $HOME/.bashrc
@@ -177,7 +177,7 @@ module load atfl/22.1
 
 To see all available modules, run:
 
-```bash
+```bash { pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles" }
 module avail
 ```
 
@@ -185,7 +185,7 @@ module avail
 
 After setting up the environment, verify the compiler versions:
 
-```bash
+```bash { env_source="/opt/arm/arm-toolchain-for-linux/env.bash" }
 armclang --version
 ```
 
@@ -202,7 +202,7 @@ Arm Toolchain ID: L0054 (b1c6e086)
 
 Also verify the Fortran compiler:
 
-```bash
+```bash { env_source="/opt/arm/arm-toolchain-for-linux/env.bash" }
 armflang --version
 ```
 
@@ -233,7 +233,7 @@ int main()
 
 Build and run the application:
 
-```bash
+```bash { env_source="/opt/arm/arm-toolchain-for-linux/env.bash" }
 armclang hello.c -o hello
 ./hello
 ```
@@ -256,7 +256,7 @@ end program hello
 
 Build and run the application:
 
-```bash
+```bash { env_source="/opt/arm/arm-toolchain-for-linux/env.bash" }
 armflang hello.f90 -o hello
 ./hello
 ```
@@ -273,7 +273,7 @@ ATfL automatically installs [Arm Performance Libraries](/install-guides/armpl/) 
 
 To load the ArmPL environment module:
 
-```bash
+```bash { pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles" }
 module load arm-performance-libraries
 ```
 
