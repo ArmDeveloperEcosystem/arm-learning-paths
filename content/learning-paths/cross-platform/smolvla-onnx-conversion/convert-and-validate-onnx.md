@@ -18,7 +18,7 @@ Image source: [SmolVLA paper](https://arxiv.org/pdf/2506.01844).
 ## Export SmolVLA to ONNX
 
 The checkpoint includes the SmolVLA policy and the LeRobot processors used
-before and after inference. The exporter writes the policy to an ONNX graph;
+before and after inference. The exporter writes the policy to an ONNX graph, and
 the processors remain outside it.
 
 Run the exporter:
@@ -30,8 +30,10 @@ python scripts/export_onnx.py \
   --reference-dir work/onnx/fp32/reference
 ```
 
-The export may take several minutes while it loads the checkpoint, traces the
+{{% notice Note %}}
+The export might take several minutes while it loads the checkpoint, traces the
 model graph, and validates the output with ONNX Runtime.
+{{% /notice %}}
 
 The exporter creates a fixed-shape model and a deterministic reference batch.
 The batch includes an explicit flow-matching noise tensor, so the PyTorch and
@@ -86,6 +88,7 @@ of `[1, 50, 7]`, and passes validation.
 
 ## What you've accomplished and what's next
 
-You have exported SmolVLA to FP32 ONNX and validated its action output
-with ONNX Runtime on an Arm CPU. Next, you will quantize the eligible linear
-weights to packed INT4 and run the resulting model through the same interface.
+You've exported SmolVLA to FP32 ONNX and validated its action output
+with ONNX Runtime on an Arm CPU. 
+
+Next, you'll quantize the eligible linear weights to packed INT4 and run the resulting model through the same interface.

@@ -5,7 +5,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## INT4 quantization scope
+## Scope of INT4 quantization
 
 TorchAO quantizes eligible constant linear weights across the exported SmolVLA
 model. The converter replaces supported ONNX `MatMul` and `Gemm` operations
@@ -25,8 +25,10 @@ python scripts/quantize_onnx_torchao.py \
   --output work/onnx/int4/smolvla-int4.onnx
 ```
 
-The quantization processes each eligible weight individually and may take
+{{% notice Note %}}
+The quantization processes each eligible weight individually and might take
 several minutes on an embedded system.
+{{% /notice %}}
 
 The command creates a packed ONNX file and reports how many eligible linear
 operations were converted. Dynamic or unsupported matrix multiplications
@@ -45,19 +47,14 @@ python scripts/compare_onnx_outputs.py \
 ```
 
 The script runs both models with ONNX Runtime `CPUExecutionProvider` and
-creates:
+creates `work/comparison/smolvla-action-comparison.png` and `work/comparison/smolvla-action-comparison.json`.
 
-```text
-work/comparison/smolvla-action-comparison.png
-work/comparison/smolvla-action-comparison.json
-```
+## Review the Orion O6 result
 
 The figure compares all seven normalized output channels and median latency.
 The JSON file records the latency and overall output error.
 
-## Review the Orion O6 result
-
-![Seven plots compare FP32 and TorchAO INT4 normalized SmolVLA outputs across all 50 predicted steps for each of seven channels. A latency panel compares median ONNX Runtime latency on a Radxa Orion O6.#center](smolvla-action-comparison.png "SmolVLA Action Comparison")
+![Seven plots compare FP32 and TorchAO INT4 normalized SmolVLA outputs across all 50 predicted steps for each of seven channels. A latency panel compares median ONNX Runtime latency on a Radxa Orion O6.#center](smolvla-action-comparison.png "SmolVLA action comparison")
 
 On the Radxa Orion O6, INT4 reduced median ONNX Runtime latency from 3.33 seconds to 2.06
 seconds, a 1.61x speedup. The normalized outputs had an MAE of 0.153.
@@ -67,9 +64,9 @@ bandwidth available.
 
 ## What you've accomplished
 
-You have converted eligible SmolVLA linear weights to packed INT4 in an ONNX
+You've converted eligible SmolVLA linear weights to packed INT4 in an ONNX
 model, run FP32 and INT4 with identical inputs on an Arm CPU, and compared all
 seven normalized output channels and ONNX Runtime latency.
 
-From here you can integrate the ONNX model into a robotics pipeline, experiment
+From here, you can integrate the ONNX model into a robotics pipeline, experiment
 with different quantization group sizes, or benchmark on other Arm platforms.
