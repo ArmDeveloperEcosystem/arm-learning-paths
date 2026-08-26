@@ -1,127 +1,131 @@
 ---
-title: Build and run benchmarks
+title: Build and compare benchmarks
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## Build and benchmark one XNNPACK variant
 
-## Build LiteRT-LM with local XNNPACK and KleidiAI
-
-Build the SME2-enabled benchmark binary from the LiteRT-LM repository:
+Create directories for the shared Bazel output and benchmark results:
 
 ```bash
-cd $HOME/gemma4-prefill-bench/LiteRT-LM
-bazel build \
-    --config=macos_arm64 \
-    --define=xnn_enable_arm_sme=true \
-    --define=xnn_enable_arm_sme2=true \
-    --define=xnn_enable_kleidiai=true \
-    --macos_sdk_version="$(xcrun --sdk macosx --show-sdk-version)" \
-    --override_repository=XNNPACK=../xnnpack \
-    --override_repository=KleidiAI=../kleidiai \
-    //runtime/engine:litert_lm_advanced_main
-
-cp bazel-bin/runtime/engine/litert_lm_advanced_main \
-   ./litert_lm_advanced_main_sme2_on
+cd $HOME/gemma4-prefill-bench
+mkdir -p bazel-output-base results
 ```
 
-Build a second binary with KleidiAI SME and SME2 paths disabled so you can compare the same workload against the XNNPACK fallback on the same machine:
+Define a shell function that builds one XNNPACK tree and immediately runs the
+same three-iteration benchmark:
 
 ```bash
-bazel build \
+set -o pipefail
+
+run_variant() {
+  local variant="$1"
+  local xnnpack_dir="$2"
+  local root="$HOME/gemma4-prefill-bench"
+  local output_base="$root/bazel-output-base/ab"
+  local model="$root/models/gemma-4-E2B-it-litert-lm/gemma-4-E2B-it.litertlm"
+  local sdk_version
+  local binary
+
+  sdk_version="$(xcrun --sdk macosx --show-sdk-version)"
+
+  cd "$root/LiteRT-LM"
+  bazelisk --output_base="$output_base" build \
     --config=macos_arm64 \
-    --define=xnn_enable_arm_sme=false \
-    --define=xnn_enable_arm_sme2=false \
-    --define=xnn_enable_kleidiai=false \
-    --macos_sdk_version="$(xcrun --sdk macosx --show-sdk-version)" \
-    --override_repository=XNNPACK=../xnnpack \
-    --override_repository=KleidiAI=../kleidiai \
+    --macos_sdk_version="$sdk_version" \
+    --override_repository=XNNPACK="$xnnpack_dir" \
+    --override_repository=KleidiAI="$root/kleidiai" \
     //runtime/engine:litert_lm_advanced_main
 
-cp bazel-bin/runtime/engine/litert_lm_advanced_main \
-   ./litert_lm_advanced_main_sme2_off
+  binary="$(bazelisk --output_base="$output_base" info bazel-bin)/runtime/engine/litert_lm_advanced_main"
+
+  "$binary" \
+    --backend=cpu \
+    --model_path="$model" \
+    --benchmark \
+    --benchmark_prefill_tokens=512 \
+    --benchmark_decode_tokens=128 \
+    --num_cpu_threads=4 \
+    --disable_cache=true \
+    --async=false \
+    --num_iterations=3 \
+    --report_peak_memory_footprint \
+    --metric_proto_file_path="$root/results/${variant}.pb" \
+    2>&1 | tee "$root/results/${variant}.log"
+}
+```
+
+The first build compiles the full LiteRT-LM dependency graph. Reusing one
+Bazel output base means that changing the XNNPACK override rebuilds only the
+affected actions for later variants.
+
+Run the historical baseline and the upstream-optimized variant:
+
+```bash
+run_variant baseline "$HOME/gemma4-prefill-bench/xnnpack-baseline"
+run_variant optimized "$HOME/gemma4-prefill-bench/xnnpack"
 ```
 
 {{% notice Note %}}
-TODO before publication: rerun both binaries on the final pinned upstream XNNPACK and KleidiAI commits, then replace the sample benchmark output with measured Gemma 4 numbers from the same SME2-capable macOS system.
+Use `--disable_cache=true` for the A/B comparison. The tested Gemma 4 artifact
+contains XNNPACK weight-cache fingerprints that are recognized by the upstream
+optimized tree but not by the historical baseline. Enabling caches therefore
+makes initialization time and memory use non-comparable.
 {{% /notice %}}
 
-## Run benchmarks with and without SME2
+## Read the benchmark output
 
-Run the SME2-enabled benchmark:
+Each iteration prints output similar to:
 
-```bash
-./litert_lm_advanced_main_sme2_on \
-  --backend=cpu \
-  --model_path=models/gemma-4-E4B-it.litertlm \
-  --benchmark \
-  --benchmark_prefill_tokens=512 \
-  --benchmark_decode_tokens=128 \
-  --num_cpu_threads=4 \
-  --disable_cache=false | tee benchmark-sme2-on.txt
-```
-
-Run the SME2-disabled benchmark:
-
-```bash
-./litert_lm_advanced_main_sme2_off \
-  --backend=cpu \
-  --model_path=models/gemma-4-E4B-it.litertlm \
-  --benchmark \
-  --benchmark_prefill_tokens=512 \
-  --benchmark_decode_tokens=128 \
-  --num_cpu_threads=4 \
-  --disable_cache=false | tee benchmark-sme2-off.txt
-```
-
-Example output pattern:
-
-```text
+```output
 --------------------------------------------------
-  Time to first token: 0.51 s
+  Time to first token: 0.43 s
 --------------------------------------------------
   Prefill Turns (Total 1 turns):
-    Prefill Turn 1: Processed 512 tokens in 477.85ms duration.
-      Prefill Speed: 1071.47 tokens/sec.
+    Prefill Turn 1: Processed 512 tokens in 399.049292ms duration.
+      Prefill Speed: 1283.05 tokens/sec.
 --------------------------------------------------
   Decode Turns (Total 1 turns):
-    Decode Turn 1: Processed 128 tokens in 3.917262s duration.
-      Decode Speed: 32.68 tokens/sec.
+    Decode Turn 1: Processed 128 tokens in 4.037520542s duration.
+      Decode Speed: 31.70 tokens/sec.
 --------------------------------------------------
 ```
 
-## Verify the SME2 performance uplift
+Treat iteration 1 as a warm-up and compare the mean of iterations 2 and 3.
 
-Compare the prefill throughput from both runs:
+## Tested results on Apple M4 Pro
+
+The following results were measured on a 12-core Apple M4 Pro with 24 GB of
+RAM, macOS SDK 26.5, four CPU threads, and caches disabled. Frequency and
+thermal state were not fixed, so use the values as a functional comparison.
+
+| XNNPACK variant | Prefill tokens/s | Change | Decode tokens/s | Change |
+| --- | ---: | ---: | ---: | ---: |
+| Historical baseline | 930.57 | - | 54.78 | - |
+| Upstream SME2 Int4 and Int2 | 1263.22 | +35.7% | 29.76 | -45.7% |
+
+On this system, the upstream SME2 paths provide a clear prefill improvement but
+regress decode for the four-thread workload. Results can differ by model
+signature, thread count, SoC, operating system, and thermal state. Measure
+prefill and decode separately for your target workload.
+
+## Run a prompt sanity check
+
+After building a variant, use its generated binary for a short prompt:
 
 ```bash
-SME2_ON=$(awk '/Prefill Speed/ {print $3; exit}' benchmark-sme2-on.txt)
-SME2_OFF=$(awk '/Prefill Speed/ {print $3; exit}' benchmark-sme2-off.txt)
+binary="$(bazelisk --output_base="$HOME/gemma4-prefill-bench/bazel-output-base/ab" info bazel-bin)/runtime/engine/litert_lm_advanced_main"
 
-SME2_ON="$SME2_ON" SME2_OFF="$SME2_OFF" \
-python3 -c 'import os; on=float(os.environ["SME2_ON"]); off=float(os.environ["SME2_OFF"]); print(f"SME2 prefill uplift: {on/off:.2f}x ({off:.2f} -> {on:.2f} tokens/sec)")'
+"$binary" \
+  --backend=cpu \
+  --model_path="$HOME/gemma4-prefill-bench/models/gemma-4-E2B-it-litert-lm/gemma-4-E2B-it.litertlm" \
+  --input_prompt="What is the capital of France?" \
+  --max_output_tokens=16 \
+  --num_cpu_threads=4 \
+  --async=false
 ```
 
-For a reliable comparison:
-
-- Use the same model, token counts, thread count, power state, and terminal session for both runs.
-- Run each binary at least three times and compare the median `Prefill Speed`.
-- Treat decode throughput separately. This Learning Path focuses on prefill because the SME2-optimized matrix multiplication path has the clearest effect during the prompt-processing phase.
-
-## Run sample prompts
-
-Run quick output sanity checks:
-
-```bash
-./litert_lm_advanced_main_sme2_on \
-  --backend=cpu \
-  --model_path=models/gemma-4-E4B-it.litertlm \
-  --input_prompt="What is the capital of France?"
-
-./litert_lm_advanced_main_sme2_on \
-  --backend=cpu \
-  --model_path=models/gemma-4-E4B-it.litertlm \
-  --input_prompt="What is the most difficult winter Olympic sport?"
-```
+The tested model answers that the capital of France is Paris.
