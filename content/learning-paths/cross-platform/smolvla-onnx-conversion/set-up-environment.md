@@ -11,7 +11,7 @@ Clone the Arm Learning Paths repository and open this Learning Path directory:
 
 ```bash
 git clone https://github.com/ArmDeveloperEcosystem/arm-learning-paths.git
-cd arm-learning-paths/content/learning-paths/embedded-and-microcontrollers/smolvla-onnx-conversion
+cd arm-learning-paths/content/learning-paths/cross-platform/smolvla-onnx-conversion
 ```
 
 ## Check the system requirements

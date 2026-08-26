@@ -38,6 +38,12 @@ tools_software_languages:
   - ONNX
   - ONNX Runtime
   - LeRobot
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - servers-and-cloud-computing
+    - embedded-and-microcontrollers
+
 further_reading:
   - resource:
       title: PyTorch ONNX exporter documentation
