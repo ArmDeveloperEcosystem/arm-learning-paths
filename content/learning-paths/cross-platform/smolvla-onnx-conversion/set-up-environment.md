@@ -77,7 +77,7 @@ Check the downloaded files and revisions:
 python scripts/check_assets.py
 ```
 
-The output is similar to:
+The expected output ends with:
 
 ```output
 PASS: public policy, base model, LeRobot source, and environment are ready

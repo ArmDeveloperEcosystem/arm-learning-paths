@@ -41,7 +41,7 @@ The exporter creates a fixed-shape model and a deterministic reference batch.
 The batch includes an explicit flow-matching noise tensor, so the PyTorch and
 ONNX Runtime paths receive the same inputs.
 
-The output is similar to:
+The expected output ends with:
 
 ```output
 PASS: ONNX Runtime matches PyTorch within atol=0.001 and rtol=0.001
