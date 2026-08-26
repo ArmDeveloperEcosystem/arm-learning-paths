@@ -24,11 +24,14 @@ the processors remain outside it.
 Run the exporter:
 
 ```bash
-work/venv/bin/python scripts/export_onnx.py \
+python scripts/export_onnx.py \
   --checkpoint work/artifacts/smolvla_libero \
   --output work/onnx/fp32/model.onnx \
   --reference-dir work/onnx/fp32/reference
 ```
+
+The export may take several minutes while it loads the checkpoint, traces the
+model graph, and validates the output with ONNX Runtime.
 
 The exporter creates a fixed-shape model and a deterministic reference batch.
 The batch includes an explicit flow-matching noise tensor, so the PyTorch and
@@ -75,7 +78,7 @@ normalization, and action conversion expected by the policy.
 View the report written by the exporter:
 
 ```bash
-work/venv/bin/python -m json.tool work/onnx/fp32/validation.json
+python -m json.tool work/onnx/fp32/validation.json
 ```
 
 Confirm that the report lists `CPUExecutionProvider`, reports an output shape
