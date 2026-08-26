@@ -1,5 +1,10 @@
 ---
 title: Convert SmolVLA to ONNX for Arm CPUs
+
+draft: true
+cascade:
+    draft: true
+  
 description: Export SmolVLA from PyTorch to ONNX, create a packed INT4 weight-only model with TorchAO quantization, and run both models with ONNX Runtime on an Arm CPU.
 minutes_to_complete: 180
 who_is_this_for: Machine learning developers who want to deploy a vision-language-action policy with ONNX Runtime on an Arm CPU.
