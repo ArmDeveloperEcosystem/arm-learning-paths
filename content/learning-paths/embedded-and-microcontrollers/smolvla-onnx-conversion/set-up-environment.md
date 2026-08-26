@@ -16,7 +16,7 @@ cd arm-learning-paths/content/learning-paths/embedded-and-microcontrollers/smolv
 
 ## Check the system requirements
 
-This Learning Path runs the exported models on an aarch64 Linux CPU. Review the
+This Learning Path runs the exported models on an Arm Linux CPU. Review the
 processor, Python version, and available space on the filesystem where you will
 keep the project:
 
@@ -26,8 +26,11 @@ python3 --version
 df -h .
 ```
 
-Use Python 3.12. Make sure the filesystem can hold the model data, checkpoint
-weights, Python environment, and generated FP32 and INT4 ONNX models.
+Use Python 3.12 and confirm at least 50 GB of free storage. Install Git and
+Python 3.12 if they are not already available on your system.
+
+If `python3 -m venv` fails, install the venv module for your distribution. On
+Ubuntu or Debian, run `sudo apt install python3.12-venv`.
 
 ## Create the environment
 
@@ -37,18 +40,29 @@ Run the setup script:
 bash scripts/setup.sh
 ```
 
+The script downloads model weights, clones the LeRobot source, and installs
+PyTorch and other Python dependencies. It may take 30 minutes or more depending
+on your network speed.
+
 The script creates `work/venv`, checks out the pinned LeRobot source, installs
 the conversion and runtime dependencies, and downloads the SmolVLA policy and
 its SmolVLM2 dependency. It records the installed Python packages in
 `work/environment.freeze.txt` and the source and model revisions in
 `work/revisions.json`.
 
+Activate the virtual environment so you can use `python` directly in later
+commands:
+
+```bash
+source work/venv/bin/activate
+```
+
 ## Verify the downloaded assets
 
 Check the downloaded files and revisions:
 
 ```bash
-work/venv/bin/python scripts/check_assets.py
+python scripts/check_assets.py
 ```
 
 The expected output ends with:

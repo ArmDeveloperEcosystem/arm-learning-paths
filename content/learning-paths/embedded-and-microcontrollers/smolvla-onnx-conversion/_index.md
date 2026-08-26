@@ -1,24 +1,26 @@
 ---
-title: Convert SmolVLA to ONNX for Arm CPUs
+title: Export and Quantize SmolVLA for ONNX Runtime on Arm
 
 draft: true
 cascade:
     draft: true
   
-description: Export SmolVLA from PyTorch to ONNX, create a packed INT4 weight-only model with TorchAO quantization, and run both models with ONNX Runtime on an Arm CPU.
-minutes_to_complete: 180
-who_is_this_for: Machine learning developers who want to deploy a vision-language-action policy with ONNX Runtime on an Arm CPU.
+description: Export SmolVLA from PyTorch to ONNX, quantize linear weights to INT4 with TorchAO, and compare action accuracy and ONNX Runtime latency on an Arm CPU.
+
+minutes_to_complete: 60
+
+who_is_this_for: This is an advanced topic for machine learning developers who want to export and quantize a vision-language-action model for ONNX Runtime on Arm.
 learning_objectives:
-  - Export SmolVLA from PyTorch as an ONNX model.
-  - Run and validate the FP32 ONNX model with ONNX Runtime on an Arm CPU.
-  - Quantize eligible linear weights to INT4 and store them in a packed ONNX model.
-  - Run the FP32 and INT4 models with identical inputs and compare their action outputs and ONNX Runtime latency.
+  - Export SmolVLA from PyTorch as an ONNX model
+  - Run and validate the FP32 ONNX model with ONNX Runtime on an Arm CPU
+  - Quantize eligible linear weights to INT4 and store them in a packed ONNX model
+  - Run the FP32 and INT4 models with identical inputs and compare their action outputs and ONNX Runtime latency
+
 prerequisites:
-  - An aarch64 Linux system, such as the Radxa Orion O6.
-  - Enough free storage for the model data, checkpoint weights, Python environment, and generated ONNX files.
-  - Git and Python 3.12.
-  - Familiarity with Python, PyTorch, and Linux command-line tools.
-author: ""
+  - An Arm Linux system, such as an Arm cloud instance or Radxa Orion O6
+  - Familiarity with Python, PyTorch, and Linux command-line tools
+
+author: Tirui Wu
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
@@ -26,6 +28,7 @@ skilllevels: Advanced
 subjects: ML
 armips:
   - Cortex-A
+  - Neoverse
 operatingsystems:
   - Linux
 tools_software_languages:
