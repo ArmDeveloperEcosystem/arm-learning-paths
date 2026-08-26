@@ -14,7 +14,7 @@ learning_objectives:
   - Run the FP32 and INT4 models with identical inputs and compare their action outputs and ONNX Runtime latency
 
 prerequisites:
-  - An Arm Linux system, such as an Arm cloud instance or Radxa Orion O6 with Python 3.12 installed and at least 50 GB of free storage
+  - An Arm Linux system, such as an Arm cloud instance or Radxa Orion O6, with Python 3.12 installed and at least 50 GB of free storage
   - Familiarity with Python, PyTorch, and Linux command-line tools
 
 # START generated_summary_faq
