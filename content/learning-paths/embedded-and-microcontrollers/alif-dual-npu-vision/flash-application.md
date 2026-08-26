@@ -17,11 +17,23 @@ export ALIF_SE_TOOLS_DIR=$HOME/Alif/alif_se_toolkit_110/app-release-exec-macos
 APP=$PWD/sdk-alif/samples/modules/executorch/dual_npu_vision
 ```
 
+Confirm that SEToolkit and the support objects referenced by the sample's package configuration are present:
+
+```bash
+test -x "$ALIF_SE_TOOLS_DIR/app-gen-toc"
+test -x "$ALIF_SE_TOOLS_DIR/app-write-mram"
+test -f "$ALIF_SE_TOOLS_DIR/build/config/app-device-config.json"
+test -f "$ALIF_SE_TOOLS_DIR/build/images/a32_stub_0.bin"
+test -f "$ALIF_SE_TOOLS_DIR/build/images/m55_stub_he.bin"
+```
+
+Each command completes without output when the file is present. Obtain the validated SEToolkit and firmware updates through the [Alif E8 DevKit support page](https://alifsemi.com/support/kits/ensemble-e8devkit/) if any check fails.
+
 Copy the images and package configuration into SEToolkit:
 
 ```bash
 cp build-dual-npu-vision/zephyr/zephyr.bin \
-  build-dual-npu-vision/u85_model.bin \
+  build-dual-npu-vision/model_assets.bin \
   "$ALIF_SE_TOOLS_DIR/build/images/"
 cp "$APP/flash/dual-npu-vision.json" \
   "$ALIF_SE_TOOLS_DIR/build/config/"
@@ -46,7 +58,7 @@ Move the switch from SE to U4. Open the U4 serial port at 115200 baud, 8 data bi
 The secure-enclave log shows entries for `HP_APP` and `U85MOD`. The U4 log starts with the Zephyr boot banner and the application name:
 
 ```output
-*** dual ExecuTorch parallel YOLO(U55) + VWW(U85) ***
+*** dual ExecuTorch parallel SSD(U55) + MobileNetV2(U85) ***
 ```
 
 The application is now ready to run the startup test and live camera pipeline.

@@ -53,4 +53,14 @@ dual-et: live dual-NPU pipeline started
 
 Then confirm that live-frame messages and NPU interrupt counters continue to increase. If capture errors repeat, power-cycle the board, flash the package again, and recheck the camera connector and overlay order.
 
+## The log reports an invalid MRAM payload
+
+The firmware contains offsets derived from the exact PTE, image, and label sizes used by CMake. Do not combine `zephyr.bin` from one build with `model_assets.bin` from another build.
+
+Remove the old build output, rebuild with `--pristine`, and copy both newly generated files into SEToolkit before running `app-gen-toc` again.
+
+## Model preparation reports an allocation failure
+
+An allocation failure usually means that the PTE files do not match the memory-pool sizes in the checked-out sample. Confirm that the SDK is at the validated commit from the workspace section and run a pristine build. If you regenerated the PTE files, confirm that you used the supplied scripts, model inputs, and `ensemble_vela.ini` file.
+
 These checks cover the failures most likely to affect this exact hardware and software configuration.

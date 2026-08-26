@@ -9,8 +9,8 @@ The Alif Ensemble E8 combines two Arm Cortex-M55 cores with two different Ethos-
 
 | Workload | NPU | Input tensor | Output |
 | --- | --- | --- | --- |
-| YOLO-Fastest face detection | Ethos-U55-256 | 1 x 1 x 192 x 192 int8 grayscale | Two detection heads and decoded face boxes |
-| Visual Wake Words | Ethos-U85-256 | 1 x 1 x 128 x 128 int8 RGB | Person and no-person scores |
+| SSD-Slim face detection | Ethos-U55-256 | 1 x 1 x 120 x 160 int8 grayscale | 1,118 box regressions and face/background logits |
+| MobileNetV2 image classification | Ethos-U85-256 | 1 x 3 x 224 x 224 int8 RGB | 1,000 ImageNet class scores |
 
 ## Reduce the system power cost
 
@@ -44,9 +44,9 @@ One Zephyr application owns two driver objects, two register windows, two interr
 | MMIO base | `0x400E1000` | `0x49042000` |
 | NVIC interrupt | 55 | 366 |
 | Worker priority | 5 | 4 |
-| Primary workload | YOLO-Fastest | Visual Wake Words |
-| Method pool | 192 KiB in HP DTCM | 256 KiB in SRAM1 |
-| Temporary pool | 384 KiB in HP DTCM | 2 MiB in SRAM1 |
+| Primary workload | SSD-Slim | MobileNetV2 |
+| Method pool | 640 KiB in HP DTCM | 304 KiB in SRAM1 |
+| Temporary pool | 3,686,400 bytes in SRAM0 | 1,509,968 bytes in SRAM1 |
 
 The two interrupt service routines call `ethosu_irq_handler()` with the matching driver. A U85 completion therefore cannot release the U55 wait object, and a U55 completion cannot change the U85 timing record.
 
@@ -82,11 +82,11 @@ For every live frame, the application performs these steps:
 1. The MT9M114 sends 1288 x 728 RAW10 data over MIPI CSI-2.
 2. The hardware ISP crops and demosaics the image into a 192 x 192 planar RGB888 buffer.
 3. Zephyr maintains five video buffers so capture continues while one frame is processed.
-4. The coordinator creates a 192 x 192 grayscale YOLO tensor and a 128 x 128 RGB Visual Wake Words tensor.
+4. The coordinator creates a 120 x 160 grayscale SSD tensor and a 224 x 224 RGB MobileNetV2 tensor.
 5. The coordinator releases both persistent worker threads through separate semaphores.
 6. Each worker copies its input into its prepared ExecuTorch method and submits the delegated command stream.
 7. The coordinator waits for both completion semaphores, records timing, and returns the captured buffer to the ISP queue.
-8. The UI compositor draws a 352 x 352 RGB565 preview, face boxes, result indicators, and rolling timing values in the 480 x 800 framebuffer.
+8. The UI compositor draws a 480 x 352 RGB565 preview, face boxes, the classification result, and rolling timing values in the 480 x 800 framebuffer.
 
 ExecuTorch program and method construction is serialized because that setup path contains shared runtime state. After setup, each worker retains an independent immutable `Method`, allocator set, and NPU backend. Only prepared model execution runs in parallel; camera capture, preprocessing, result fusion, and display updates remain coordinated by the Cortex-M55.
 
@@ -115,48 +115,49 @@ These measurements isolate delegated execution from camera capture and UART outp
 
 The application separates persistent artifacts, CPU-private state, display and video buffers, and U85-visible working memory.
 
-![Memory diagram showing the model and firmware regions in MRAM, U55 state in HP DTCM, display and camera buffers in SRAM0, and U85 mirrors and allocator pools in SRAM1.](dual-npu-memory-layout.svg)
+![Memory diagram showing models and firmware in MRAM, U55 state in HP DTCM, U55 temporary storage in SRAM0, and the display, U85 working memory, and camera buffers in SRAM1.](dual-npu-memory-layout.svg)
 
 ### Persistent MRAM payload
 
-SEToolKit writes the compact model payload at `0x80008000` and the Zephyr image at `0x80200000`:
+SEToolKit writes `model_assets.bin` at `0x80008000` and the execute-in-place Zephyr image at `0x80400000`:
 
 | Address range | Size | Contents |
 | --- | ---: | --- |
-| `0x80008000`-`0x8007CD5F` | 478,560 bytes | Ethos-U85 Visual Wake Words PTE |
-| `0x8007CD60`-`0x800D72FF` | 370,080 bytes | Ethos-U55 YOLO-Fastest PTE |
-| `0x800D7300`-`0x800F2335` | 110,646 bytes | Startup test image |
-| From `0x80200000` | Build-dependent | RTSS-HP Zephyr firmware |
+| `0x80008000`-`0x8035751F` | 3,470,624 bytes | Ethos-U85 MobileNetV2 PTE |
+| `0x80357520`-`0x8039FCDF` | 296,896 bytes | Ethos-U55 SSD-Slim PTE |
+| `0x8039FCE0`-`0x803BAD15` | 110,646 bytes | Grace Hopper startup image |
+| `0x803BAD16`-`0x803BD60D` | 10,488 bytes | ImageNet class labels |
+| From `0x80400000` | Build-dependent | RTSS-HP Zephyr firmware |
 
-The combined `u85_model.bin` payload is 959,286 bytes. Its name reflects the flash package object retained during development, but it contains both NPU models and the startup image.
+The combined `model_assets.bin` payload is 3,888,654 bytes. CMake packs both PTE files, the startup image, and the labels in this order, then generates a header containing the artifact sizes. Changing a model causes CMake to reconfigure so the compiled offsets cannot silently disagree with the payload.
 
 ### HP DTCM
 
-The 1 MiB HP DTCM region starts at `0x20000000`. It contains the U55 method and temporary pools, both 4 KiB metadata pools, the fast-scratch arrays, Zephyr worker stacks, semaphores, driver objects, and ISP library state. The linker can move individual symbols as code changes, so the application fixes their sizes rather than their exact DTCM addresses.
+The 1 MiB HP DTCM region starts at `0x20000000`. It contains the 640 KiB U55 method pool, both 4 KiB metadata pools, the fast-scratch arrays, Zephyr worker stacks, semaphores, driver objects, and ISP library state. The larger U55 temporary arena is placed in SRAM0. The linker can move individual DTCM symbols as code changes, so the application fixes their sizes rather than their exact addresses.
 
 ### Shared SRAM0
 
-SRAM0 spans `0x02000000`-`0x023FFFFF`:
+SRAM0 spans `0x02000000`-`0x023FFFFF`. The validated build dedicates most of it to the U55 delegate scratch arena:
 
 | Address range | Reserved size | Use |
 | --- | ---: | --- |
-| `0x02000000`-`0x020BB7FF` | 768,000 bytes | CDC200 480 x 800 RGB565 framebuffer |
-| `0x020BB800`-`0x023D4F4F` | 3,250,000 bytes | Zephyr video-buffer heap |
+| `0x02000000`-`0x02383FFF` | 3,686,400 bytes | U55 temporary allocator pool |
 
-The configured video heap can hold five buffers of up to 650,000 bytes. The active ISP output uses five 192 x 192 x 3-byte RGB888 buffers, so each captured frame occupies 110,592 bytes. The larger reservation leaves room for the Alif video allocator and alternative formats.
+SSD-Slim requires a larger delegated scratch plan than the earlier face detector. Keeping this arena outside HP DTCM leaves enough private memory for the method pool and Zephyr runtime.
 
 ### Shared SRAM1
 
-SRAM1 spans `0x02400000`-`0x027FFFFF` and holds the U85-visible working set:
+SRAM1 spans `0x02400000`-`0x027FFFFF` and holds the display, U85-visible working set, and camera buffers:
 
 | Address range | Size | Use |
 | --- | ---: | --- |
-| `0x02400000`-`0x0247FFFF` | 512 KiB | U85 weight mirror |
-| `0x02480000`-`0x02483FFF` | 16 KiB | U85 command-stream mirror |
-| `0x02484000`-`0x02683FFF` | 2 MiB | U85 temporary allocator pool |
-| `0x02684000`-`0x026C3FFF` | 256 KiB | U85 ExecuTorch method pool |
+| `0x02400000`-`0x024BB7FF` | 768,000 bytes | CDC200 480 x 800 RGB565 framebuffer |
+| `0x024BB800`-`0x025437FF` | 557,056 bytes | U85 command and weight mirror reservation |
+| `0x02543800`-`0x026B424F` | 1,509,968 bytes | U85 temporary allocator pool |
+| `0x026B4250`-`0x026F024F` | 304 KiB | U85 ExecuTorch method pool |
+| `0x02700250`-`0x0278C24F` | 560 KiB | Five-buffer Zephyr video heap |
 
-The backend copies delegated command or weight data into the mirrors when its original address is not directly usable by U85. Shared SRAM also avoids consuming the limited HP DTCM with the larger U85 working set.
+The active ISP output uses five 192 x 192 x 3-byte RGB888 buffers of 110,592 bytes each. The heap allows up to 114,688 bytes per buffer. The backend copies delegated command or weight data into the mirror reservation when its original address is not directly usable by U85. Shared SRAM also avoids consuming the limited HP DTCM with the U85 working set.
 
 ## Maintain cache and address visibility
 

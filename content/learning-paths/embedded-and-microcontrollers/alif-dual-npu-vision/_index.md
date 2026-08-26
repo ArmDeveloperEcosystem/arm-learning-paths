@@ -15,9 +15,9 @@ learning_objectives:
 
 prerequisites:
     - Experience with C/C++, embedded systems, and Zephyr build concepts
-    - A development machine running macOS on Apple Silicon with Git, CMake, Ninja, and Python 3 installed
+    - A development machine running macOS on Apple Silicon with Homebrew and the Xcode Command Line Tools installed
     - An [Alif Ensemble E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) with an MT9M114 camera connected to J16 and an MW405 display
-    - Alif SERAM 1.110.0 installed on the board
+    - Alif SEROM 1.105.65 and SERAM 1.110.0 installed on the board
     - Alif SEToolkit 1.10 installed on the development machine
 
 author: Varun Chari

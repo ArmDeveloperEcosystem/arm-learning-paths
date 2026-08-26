@@ -12,7 +12,7 @@ Power off the E8 DevKit before changing camera or display connections.
 1. Connect the MT9M114 camera module to the bottom-side J16 connector.
 2. Connect the MW405 display to the display connector.
 3. Connect the board's USB ports for power, SE UART, and U4 UART.
-4. Confirm that the board runs SERAM 1.110.0.
+4. Confirm that the board runs SEROM 1.105.65 and SERAM 1.110.0.
 5. Move the boot switch to the SE position before flashing.
 
 {{% notice Note %}}
@@ -21,13 +21,25 @@ The supplied overlay targets the J16 selfie-camera connection. J22 uses a differ
 
 ## Install the host tools
 
-Install Git and CMake with Homebrew, then install Ninja in the Python environment. Run:
+Confirm that the Xcode Command Line Tools are installed:
 
 ```bash
-brew install git cmake
+xcode-select -p
+```
+
+If the command reports that the tools are missing, install them before you continue:
+
+```bash
+xcode-select --install
+```
+
+Install Git, CMake, and Python 3.12 with Homebrew. Then create the west Python environment:
+
+```bash
+brew install git cmake python@3.12
 mkdir -p $HOME/alif-dual-npu
 cd $HOME/alif-dual-npu
-python3 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 python -m pip install west pyelftools fdt ninja
@@ -44,7 +56,8 @@ Both commands print a version number.
 
 ## Create the west workspace
 
-Initialize the workspace from the SDK fork that contains the dual-NPU sample.
+Clone the SDK fork that contains the dual-NPU sample at the validated revision,
+then initialize a local west workspace from that checkout.
 The fork's ``main`` branch stays synchronized with the Alif SDK ``main``
 branch. The dual-NPU application is maintained separately on the
 ``dual-npu-main-integration`` branch, which also includes the merged MT9M114,
@@ -53,8 +66,10 @@ ISP, and MW405 changes from pull request 879:
 ```bash
 cd $HOME/alif-dual-npu
 source .venv/bin/activate
-west init -m https://github.com/varunchariArm/sdk-alif.git \
-  --mr dual-npu-main-integration
+git clone --branch dual-npu-main-integration --single-branch \
+  https://github.com/varunchariArm/sdk-alif.git sdk-alif
+git -C sdk-alif checkout fb6d0e61ebcad3098dc6298bc40386cacc4ad38a
+west init -l sdk-alif
 west config manifest.project-filter +executorch
 west update
 python -m pip install -r zephyr/scripts/requirements.txt
@@ -64,10 +79,11 @@ west sdk install
 The manifest project appears at `sdk-alif`, and the remaining projects appear under `modules`, `bootloader`, `tools`, and `zephyr`.
 
 {{% notice Note %}}
-The ``dual-npu-main-integration`` branch contains everything required for this
+Commit ``fb6d0e61ebcad3098dc6298bc40386cacc4ad38a`` on the
+``dual-npu-main-integration`` branch contains everything required for this
 Learning Path: the camera and display support from the upstream Alif SDK
 ``main`` branch, plus the ``dual_npu_vision`` application. Use the fork and
-branch shown in the command above. Do not initialize from
+revision shown in the command. Do not initialize from
 ``alifsemi/sdk-alif`` directly because the dual-NPU application has not yet
 been merged there. The fork's ``main`` branch remains synchronized with the
 upstream Alif SDK and does not contain the application.
@@ -136,6 +152,7 @@ You see output similar to:
 
 ```output
 Applied ExecuTorch dual-NPU patch.
+Ethos-U core driver main: ...
 Workspace dependencies are ready.
 ```
 
