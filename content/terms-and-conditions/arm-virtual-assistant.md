@@ -2,7 +2,6 @@
 title: "Arm Virtual Assistant Terms and Conditions of Use"
 description: "Terms and conditions governing use of the Arm Virtual Assistant."
 ---
-
 <style>
   .chatbot-terms { max-width: 960px; margin: 0 auto; padding: 2rem 0 4rem; }
   .chatbot-terms h1 { margin-bottom: 2rem; }
@@ -46,7 +45,6 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
           "WE", OR "US"). ARM MAY REVISE THESE TERMS AT ANY TIME.
         </p>
       </div>
-
       <div class="c-row u-padding-top-1">
         <p class=""><strong>"Affiliate"</strong> means any person, partnership, joint venture,
           corporation or other form of enterprise, domestic or foreign, including but not limited to subsidiaries, that
@@ -87,7 +85,6 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
           feedback, ideas, or know-how (whether in oral or written form) relating to Arm Technology, but expressly
           excluding Service Feedback.</p>
       </div>
-
       <div class="c-row u-padding-top-1">
         <p class="section-5 u-padding-bottom-1/2"><strong>1. <u>YOUR USE OF THE SERVICE</u></strong></p>
         <p class="section-5">1.1 You may use the Service solely internally for informational purposes, on a
@@ -102,7 +99,6 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
           (b) you are responsible for independently verifying any Service Output before relying on it.</p>
         <p class="section-5">1.4 Arm shall operate the Service in accordance with applicable laws.</p>
       </div>
-
       <div class="c-row u-padding-top-1">
         <p class="section-5 u-padding-bottom-1/2"><strong>2. <u>SERVICE OUTPUT AND INTELLECTUAL PROPERTY</u></strong>
         </p>
@@ -137,7 +133,6 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
           granted in Clause 2.2 be construed as granting You, expressly, or by implication, estoppel or otherwise,
           licenses to any Arm technology or Arm information other than internal evaluation of the Service Output.</p>
       </div>
-
       <div class="c-row u-padding-top-1">
         <p class="section-5 u-padding-bottom-1/2"><strong>3. <u>RESTRICTIONS ON USE</u></strong></p>
         <p class="section-5">3.1 You shall comply with all obligations in these Terms with respect to your Service
@@ -161,7 +156,6 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
         <p class="section-6">(iii) use the Service to create products and technology based on the Service Output and/or
           Arm Technology.</p>
       </div>
-
       <div class="c-row u-padding-top-1">
         <p class="section-5 u-padding-bottom-1/2"><strong>4. <u>CONFIDENTIALITY</u></strong></p>
         <p class="section-5">4.1 Except as expressly provided by Clauses 4.2 and 4.4 below, each party shall maintain in
@@ -232,7 +226,6 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
           that such
           information is not subject to any continuing obligations of confidentiality.</p>
       </div>
-
       <div class="c-row u-padding-top-1">
         <p class="section-5 u-padding-bottom-1/2"><strong>5. <u>FEEDBACK</u></strong></p>
         <p class="section-5">5.1 You may, at your sole discretion, deliver Feedback to Arm. Notwithstanding the
@@ -267,7 +260,6 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
           provisions relating
           to Feedback contained in these Terms.</p>
       </div>
-
       <div class="c-row u-padding-top-1">
         <p class="section-5 u-padding-bottom-1/2"><strong>6. <u>WARRANTIES</u></strong></p>
         <p class="section-5">6.1 Arm strives for accuracy of the Service and Service Output but you acknowledge that
@@ -298,7 +290,6 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
           FROM YOUR USE OF THE THIRD PARTY WEBSITES AND RESOURCES. IF YOU DECIDE TO ACCESS ANY OF THE THIRD PARTY
           WEBSITES OR RESOURCES, YOU DO SO AT YOUR OWN RISK.</p>
       </div>
-
       <div class="c-row u-padding-top-1">
         <p class="section-5 u-padding-bottom-1/2"><strong>7. <u>INDEMNITY AND LIMITATION OF LIABILITY</u></strong></p>
         <p class="section-5">7.1 You shall indemnify and hold Arm, its affiliates, officers, and employees, harmless
@@ -319,7 +310,6 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
         <p class="section-5">7.4 NOTHING IN THESE TERMS SHALL OPERATE TO LIMIT OR EXCLUDE LIABILITY FOR DEATH OR
           PERSONAL INJURY ARISING FROM EITHER PARTY'S NEGLIGENCE OR FRAUD.</p>
       </div>
-
       <div class="c-row u-padding-top-1">
         <p class="section-5 u-padding-bottom-1/2"><strong>8. <u>SUSPENSION AND TERMINATION</u></strong></p>
         <p class="section-5">8.1 Arm may update, modify (which, for the avoidance of doubt, includes the removal of
@@ -330,7 +320,6 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
           this Agreement, upon termination
           the provisions of Clauses 1 (except 1.1), 2, 3, 4, 5, 6, 7, 8, 9 and 10 shall survive.</p>
       </div>
-
       <div class="c-row u-padding-top-1">
         <p class="section-5 u-padding-bottom-1/2"><strong>9. <u>USE OF CONVERSATION HISTORY AND MEMORY</u></strong></p>
         <p class="section-5">9.1 The Service is only available to users who are logged into their Arm account. As part
@@ -339,13 +328,11 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
           stores information you provide during interactions as metadata and uses this information to maintain context
           within a
           session and across future sessions.
-
           This means that your previous interactions with the Service may be used to inform and improve responses in
           later
           conversations, and conversation history is associated with your Arm account and enables a more context-aware
           experience
           when using the Service.
-
         </p>
         <p class="section-5">9.2 Arm does not intend for the Service to be used to process personal data or personal
           information, and pursuant to
@@ -362,10 +349,8 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
         <p class="section-5">9.4 For further information on how Arm processes data, please refer to Arm’s Privacy
           Policy:
           <a href="https://www.arm.com/company/policies/privacy">https://www.arm.com/company/policies/privacy</a>
-
         </p>
       </div>
-
       <div class="c-row u-padding-top-1">
         <p class="section-5 u-padding-bottom-1/2"><strong>10. <u>GENERAL</u></strong></p>
         <p class="section-5">10.1 The Service and Service Output provided under these Terms may be subject to U.K.,
@@ -431,6 +416,5 @@ description: "Terms and conditions governing use of the Arm Virtual Assistant."
       </div>
     </div>
   </div>
-
 
 </div>
