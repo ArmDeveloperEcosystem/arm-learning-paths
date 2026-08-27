@@ -56,6 +56,14 @@ The launcher deliberately leaves motion disabled. The simulated device is suffic
 
 On your local computer, open [the forwarded Device Connect dashboard](http://127.0.0.1:8080/) in a browser.
 
+The following screenshot shows the dashboard's complete multi-robot layout. Use it to locate the **Fleet**, **Checkpoints on the robot**, and **Load from Cloud AI** panels. It was captured from a different, motion-enabled demonstration, so its header states **MOTION ENABLED** and **MESH DOWN**.
+
+![Arm Device Connect dashboard showing the robot fleet, motion controls, camera feed, installed MAPPO checkpoints, and Cloud AI model source. Use the Fleet and checkpoint panels as interface landmarks; this screenshot comes from a different demonstration with motion enabled and the mesh disconnected.#center](images/device-connect-dashboard.webp "Arm Device Connect dashboard interface reference")
+
+{{% notice Warning %}}
+Don't reproduce the motion state shown in the screenshot. Your simulation-only session must show **MESH UP** and **MOTION DISABLED** before you continue.
+{{% /notice %}}
+
 Confirm that the interface shows:
 
 - **MESH UP** in the header
