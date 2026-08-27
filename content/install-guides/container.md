@@ -35,7 +35,7 @@ The expected output is:
 arm64
 ```
 
-{{% notice Note %}}
+{{% notice Supported hardware %}}
 Container CLI supports only Apple silicon Macs (M1, M2, M3, and M4).
 {{% /notice %}}
 
@@ -57,7 +57,7 @@ You need macOS 15.0 or later to use the Container CLI.
 
 To install Container CLI, go to the [GitHub Releases page](https://github.com/apple/container/releases) and download the latest signed `.pkg` installer.
 
-{{% notice Note %}}
+{{% notice Version %}}
 The following commands use Container CLI version 1.3.0. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [GitHub Releases](https://github.com/apple/container/releases).
 {{% /notice %}}
 
@@ -141,7 +141,7 @@ The `--rm` flag cleans up the container after it exits.
 
 After the image is built and tested locally, you can push it to a container registry such as Docker Hub. This allows the image to be reused across machines or shared with others.
 
-{{% notice Note %}}
+{{% notice Other registries %}}
 The following commands are for Docker Hub. The same commands work with any other OCI-compliant registry such as GitHub Container Registry (ghcr.io). Replace `docker.io` with the appropriate registry hostname.
 {{% /notice %}}
 
