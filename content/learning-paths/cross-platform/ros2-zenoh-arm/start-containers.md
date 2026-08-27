@@ -8,12 +8,12 @@ layout: "learningpathall"
 
 ## Understand the container environment
 
-You create and use two Docker containers built from the same image:
+You'll create and use two Docker containers built from the same image:
 
 - The `robot` container runs the ROS 2 simulation, Zenoh router, and Gazebo environment used in this Learning Path
 - The `control` container acts as a remote operator station for later Learning Paths
 
-Each container provides an Ubuntu desktop that you can access in a web browser. This Learning Path uses only the `robot` container, but starting both containers prepares the environment for the rest of the series.
+Each container provides an Ubuntu desktop that you can access in a web browser. You'll use only the `robot` container to complete this Learning Path, but starting both containers prepares the environment for the rest of the series.
 
 This setup is more than a container exercise. Gazebo, simulated camera and LiDAR data, Navigation2, RViz, and `rmw_zenoh` run together as a representative Physical AI robotics workload on Arm.
 
@@ -21,7 +21,7 @@ The environment uses official `arm64` binaries without architecture-specific mod
 
 Run the provided commands on your selected Arm server. After the browser-based VNC desktop opens, run commands with an `ubuntu@robot` prompt in the `robot` container.
 
-## Get the Docker Compose configuration
+## Download the Docker Compose configuration
 
 Create a working directory:
 
@@ -47,7 +47,7 @@ The configuration includes settings used later in this Learning Path and the wid
 - `memlock` removes the default memory-lock limit so Zenoh can allocate shared-memory regions
 - `NET_ADMIN` lets later Learning Paths apply network shaping inside the containers
 
-You don't need to change these settings.
+Don't change these settings.
 
 ## Start and verify the containers
 
@@ -75,7 +75,7 @@ Open the browser desktops and sign in with the password `ubuntu`:
 - Control container: `http://<server_ip>:6081/`
 
 {{% notice Important %}}
-Do not expose ports `6080`, `6081`, or `7447` directly to the public internet from your Arm server. Use a private network, VPN, SSH tunnel, or restrictive firewall or security-group rules so that only trusted clients can reach these services.
+Don't expose ports `6080`, `6081`, or `7447` directly to the public internet from your Arm server. Use a private network, VPN, SSH tunnel, or restrictive firewall or security-group rules so that only trusted clients can reach these services.
 {{% /notice %}}
 
 ![Browser showing the Ubuntu desktop running inside the robot container through noVNC.](images/robot-desktop.webp)
@@ -89,4 +89,6 @@ The container network uses the following addresses:
 
 ## What you've accomplished and what's next
 
-You've started the browser-accessible ROS 2 environment and verified that both containers are running. Next, you'll configure the router and session files that `rmw_zenoh` uses inside the `robot` container.
+You've started the browser-accessible ROS 2 environment and verified that both containers are running.
+
+Next, you'll configure the router and session files that `rmw_zenoh` uses inside the `robot` container.

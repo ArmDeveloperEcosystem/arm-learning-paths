@@ -18,7 +18,7 @@ These measurements establish a baseline before you enable shared-memory transpor
 
 ## Run the monitoring commands
 
-Run each command in turn. Press **Ctrl+C** to stop the current command before starting the next one.
+Run each command in turn. Press **Ctrl+C** to stop the current command before starting the next one:
 
 ```bash
 just top
@@ -42,4 +42,6 @@ Confirm that all three commands produce output. Record the loopback traffic show
 
 ## What you've learned and what's next
 
-You've measured process load, simulation speed, and internal TCP traffic. Next, you'll move large local messages to Zenoh shared memory and repeat the latency and traffic observations.
+You've measured process load, simulation speed, and internal TCP traffic. 
+
+Next, you'll move large local messages to Zenoh shared memory and repeat the latency and traffic observations.

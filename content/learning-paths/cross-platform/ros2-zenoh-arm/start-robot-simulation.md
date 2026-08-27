@@ -43,7 +43,7 @@ just rox_nav2
 
 Wait for Navigation2 to activate its managed nodes.
 
-It is normal for output to stop after it's active. Navigation2 remains idle until it receives a navigation goal.
+It's normal for output to stop after it's active. Navigation2 remains idle until it receives a navigation goal.
 
 ![Navigation2 terminal output showing managed nodes active while the navigation stack starts in the robot container.](images/nav2-successfully-running.webp)
 
@@ -55,7 +55,7 @@ In a third sourced bash shell, check the laser scan frequency:
 ros2 topic hz /scan
 ```
 
-The `/scan` topic should arrive at approximately 8 Hz. This rate is an expected operating observation, so small variations are normal. Press `Ctrl+C` in this shell to stop the scan.
+The `/scan` topic should arrive at approximately 8 Hz. This rate is an expected operating observation, so small variations are normal. Press **Ctrl+C** in this shell to stop the scan.
 
 Next, list the camera topics to confirm that they are present:
 
@@ -67,4 +67,6 @@ The output should include `/camera/image_raw`, `/camera/points`, and `/camera/de
 
 ## What you've accomplished and what's next
 
-You've started the headless Gazebo simulation, activated Navigation2, and verified that laser and camera sensor data is available. Next, you'll use RViz to inspect the navigation data and send the robot a goal.
+You've started the headless Gazebo simulation, activated Navigation2, and verified that laser and camera sensor data is available. 
+
+Next, you'll use RViz to inspect the navigation data and send the robot a goal.

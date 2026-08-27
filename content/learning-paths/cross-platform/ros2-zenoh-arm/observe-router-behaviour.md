@@ -20,7 +20,7 @@ source ~/workshop_env.bash
 
 ## Start the router
 
-In shell #1, start the Zenoh router:
+In the first shell, start the Zenoh router:
 
 ```bash
 just router
@@ -36,13 +36,13 @@ The router ID can differ on your system.
 
 ## Start the ROS 2 nodes
 
-In shell #2, start the talker:
+In the second shell, start the talker:
 
 ```bash
 ros2 run demo_nodes_cpp talker
 ```
 
-In shell #3, start the listener:
+In the third shell, start the listener:
 
 ```bash
 ros2 run demo_nodes_cpp listener
@@ -57,18 +57,20 @@ The listener should receive every message published by the talker:
 
 ## Stop the router and observe the result
 
-Press `Ctrl+C` in shell #1 to stop the router. Keep watching the talker and listener.
+Press **Ctrl+C** in the first shell to stop the router. Keep watching the talker and listener.
 
-The message exchange should continue without interruption. The two nodes already established a direct peer-to-peer connection, so the router isn't in this data path. This result demonstrates the router's discovery role for this established local connection; it doesn't imply that every Zenoh topology can operate without a router.
+The message exchange should continue without interruption. The two nodes already established a direct peer-to-peer connection, so the router isn't in this data path. This result demonstrates the router's discovery role for this established local connection. However, it doesn't imply that every Zenoh topology can operate without a router.
 
 Nodes can also start before the router because each node periodically retries the router connection.
 
-Restart the router in shell #1 before continuing:
+Restart the router in the first shell before continuing:
 
 ```bash
 just router
 ```
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
-You've observed that the router enables discovery while an established talker and listener continue to communicate directly after it stops. Next, you'll replace the demonstration nodes with the Neobotix ROX simulation and Navigation2.
+You've observed that the router enables discovery while an established talker and listener continue to communicate directly after it stops. 
+
+Next, you'll replace the demonstration nodes with the Neobotix ROX simulation and Navigation2.

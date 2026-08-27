@@ -14,9 +14,9 @@ You first measure the default TCP-loopback latency. You then enable shared memor
 
 ## Measure the TCP-loopback baseline
 
-Stop Navigation2 in bash shell #3 in the `robot` container. The latency measurement needs wall-clock timestamps, and Navigation2 doesn't operate in this mode.
+Stop Navigation2 in the third bash shell in the `robot` container. The latency measurement needs wall-clock timestamps, and Navigation2 doesn't operate in this mode.
 
-Stop the current simulation. Restart it in bash shell #2 with wall-clock time and without the Gazebo viewer:
+Stop the current simulation. Restart it in second bash shell with wall-clock time and without the Gazebo viewer:
 
 ```bash
 just rox_simu use_wall_time:=True no_gui
@@ -79,7 +79,7 @@ The supplied reference system produced these results:
 | Standard deviation | Approximately `1.0 ms` | Approximately `0.65 ms` |
 | `/dev/shm` usage | `8 KB` | `247 MB` |
 
-The reference mean latency improves by approximately 30%, with lower jitter. Your result depends on the server, workload, and run conditions; compare the two measurements from your own system.
+The reference mean latency improves by approximately 30%, with lower jitter. Your result depends on the server, workload, and run conditions. Compare the two measurements from your own system.
 
 ## Verify the transport change
 
@@ -94,23 +94,23 @@ just iftop_lo
 
 ## Restore the environment for the next Learning Path
 
-Keep the shared-memory configuration enabled. In bash shell #2, press `Ctrl+C` to stop the temporary wall-time simulation if it is still running.
+Keep the shared-memory configuration enabled. In the second bash shell, press **Ctrl+C** to stop the temporary wall-time simulation if it is still running.
 
-Keep the Zenoh router running in bash shell #1. If it has stopped, restart it after re-sourcing the environment:
+Keep the Zenoh router running in the first bash shell. If it has stopped, restart it after re-sourcing the environment:
 
 ```bash
 source ~/workshop_env.bash
 just router
 ```
 
-In bash shell #2, source the environment if needed and start the normal headless simulation:
+In the second bash shell, source the environment if needed and start the normal headless simulation:
 
 ```bash
 source ~/workshop_env.bash
 just rox_simu no_gui
 ```
 
-In bash shell #3, source the environment if needed and restart Navigation2:
+In the third bash shell, source the environment if needed and restart Navigation2:
 
 ```bash
 source ~/workshop_env.bash
@@ -121,7 +121,7 @@ Confirm that the router is running, the simulation starts without errors, and Na
 
 ## Verify the complete Learning Path
 
-Use this checklist to confirm the final environment:
+Use the following checklist to confirm the final environment:
 
 - [ ] Both Docker containers show `Up`, and their browser desktops are accessible
 - [ ] The talker and listener continue exchanging messages after the router stops
@@ -135,3 +135,5 @@ Use this checklist to confirm the final environment:
 ## What you've accomplished
 
 You've built a ROS 2 Jazzy simulation environment on an Arm server, observed Zenoh discovery behaviour, navigated and controlled a Neobotix ROX robot, measured resource use, and compared TCP-loopback communication with shared-memory transport.
+
+Next, complete the [Distribute a ROS 2 robotic system across Arm devices with Zenoh](learning-paths/cross-platform/distributed-ros2-zenoh-lp2/) Learning Path.

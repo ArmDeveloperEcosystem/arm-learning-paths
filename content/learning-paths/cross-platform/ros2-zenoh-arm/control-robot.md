@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 The ROX base subscribes to the `/cmd_vel` topic using the `geometry_msgs/Twist` message type. The message carries linear and angular velocity commands.
 
-Any process that publishes to `/cmd_vel` can control the base. Navigation2 uses this same interface, so it is one publisher to the robot rather than a privileged control path.
+Any process that publishes to `/cmd_vel` can control the base. Navigation2 uses this same interface, so it's one publisher to the robot rather than a privileged control path.
 
 Open a sourced bash shell in the `robot` container:
 
@@ -38,7 +38,7 @@ You can also publish forward velocity at `0.2 m/s` and a fixed rate of 10 Hz:
 ros2 topic pub --rate 10 /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.2}}"
 ```
 
-Let the command run for approximately three seconds, then press `Ctrl+C` to stop the publisher. Explicitly stop the robot by publishing a zero-velocity command:
+Let the command run for approximately three seconds, then press **Ctrl+C** to stop the publisher. Stop the robot by publishing a zero-velocity command:
 
 ```bash
 ros2 topic pub --once /cmd_vel geometry_msgs/msg/Twist "{}"
@@ -68,4 +68,6 @@ The UR10 arm on the ROX uses a `JointTrajectory` action rather than `Twist`. Pub
 
 ## What you've learned and what's next
 
-You've controlled the robot through the same velocity interface used by Navigation2 and confirmed its movement through `/odom`. Next, you'll inspect the CPU cost, simulation speed, and internal traffic of the running system.
+You've controlled the robot through the same velocity interface used by Navigation2 and confirmed its movement through `/odom`. 
+
+Next, you'll inspect the CPU cost, simulation speed, and internal traffic of the running system.

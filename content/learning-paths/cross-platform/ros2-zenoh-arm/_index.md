@@ -1,15 +1,11 @@
 ---
 title: Build a ROS 2 and Zenoh simulation environment on an Arm server
 
-draft: true
-cascade:
-    draft: true
-
 description: Set up ROS 2 Jazzy with rmw_zenoh in Docker, then run and evaluate a Neobotix ROX simulation on an Arm server.
 
 minutes_to_complete: 60
 
-who_is_this_for: Developers who want to build and examine a containerized ROS 2 robotics simulation on an Arm server.
+who_is_this_for: This Learning Path is for developers who want to build and examine a containerized ROS 2 robotics simulation on an Arm server.
 
 learning_objectives:
     - Set up a Docker-based ROS 2 Jazzy development and simulation environment on an Arm server
@@ -29,7 +25,7 @@ author:
     - Kwashie Andoh
     - Habib Ogunbanwo
 
-generate_summary_faq: false
+generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 

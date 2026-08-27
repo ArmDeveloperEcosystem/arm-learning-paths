@@ -12,10 +12,10 @@ RViz subscribes to ROS 2 topics and displays the robot model, laser scans, camer
 
 The navigation view contains several layers:
 
-- The *map* shows the known environment
-- The *global costmap* combines the static map with navigation costs across the mapped area
-- The *local costmap* moves with the robot and reflects live sensor data nearby
-- The *inflation layer* creates the red-to-blue gradient near walls, increasing the cost of paths that pass close to obstacles
+- The map shows the known environment
+- The global costmap combines the static map with navigation costs across the mapped area
+- The local costmap moves with the robot and reflects live sensor data nearby
+- The inflation layer creates the red-to-blue gradient near walls, increasing the cost of paths that pass close to obstacles
 
 ## Start RViz
 
@@ -29,6 +29,8 @@ just rviz_nav2
 Wait for the map and costmaps to render. The light blue area represents free space. The small window that follows the robot is the local costmap, while the fixed background is the global costmap.
 
 ## Send a navigation goal
+
+To send a navigation goal:
 
 1. Select **Nav2 Goal** in the toolbar.
 2. Move your pointer onto the mapped area in the centre.
@@ -57,4 +59,6 @@ The final remaining distance can vary with the selected goal and simulation run.
 
 ## What you've accomplished and what's next
 
-You've interpreted the map, costmaps, and inflation layer, then set a goal position and orientation with RViz. Next, you'll bypass Navigation2's planner and publish velocity commands directly to the robot base.
+You've interpreted the map, costmaps, and inflation layer, then set a goal position and orientation with RViz.
+
+Next, you'll bypass Navigation2's planner and publish velocity commands directly to the robot base.
