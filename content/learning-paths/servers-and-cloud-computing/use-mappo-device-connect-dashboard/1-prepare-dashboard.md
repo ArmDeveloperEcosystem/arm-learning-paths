@@ -25,10 +25,10 @@ You will run every service on the Arm cloud instance. The dashboard uses a simul
 
 ## Locate the exported actor
 
-Set `ACTOR_OUTPUT` to the artifact printed by `export_mappo_actor.py` in the training Learning Path. Replace the example filename if your agent count or training-frame count is different:
+Set `ACTOR_OUTPUT` to the artifact printed by `export_mappo_actor.py` in the training Learning Path. Replace the example filename with the frame count and source-checksum suffix from your export:
 
 ```bash
-export ACTOR_OUTPUT="$HOME/mappo_actor_exports/mappo_actor_3agent_1910000.npz"
+export ACTOR_OUTPUT="$HOME/mappo_actor_exports/mappo_actor_3agent_1910000_a1b2c3d4e5f6.npz"
 test -f "$ACTOR_OUTPUT" && echo "Actor found: $ACTOR_OUTPUT"
 ```
 
@@ -113,7 +113,7 @@ A compatible actor reports values similar to:
 
 ```output
 {
-  "name": "mappo_actor_3agent_1910000.npz",
+  "name": "mappo_actor_3agent_1910000_a1b2c3d4e5f6.npz",
   "loadable": true,
   "problems": [],
   "trained_lidar_range_vmas": 0.35,

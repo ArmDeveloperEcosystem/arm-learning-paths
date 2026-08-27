@@ -15,7 +15,7 @@ learning_objectives:
     - Load, arm, and validate the selected actor without connecting physical hardware.
 
 prerequisites:
-    - An Arm-based Ubuntu cloud instance with SSH access, `sudo` privileges, and internet access.
+    - An Arm-based Ubuntu 24.04 cloud instance with SSH access, `sudo` privileges, and internet access.
     - The actor-only `.npz` artifact created in the [MAPPO training Learning Path](/learning-paths/servers-and-cloud-computing/train-mappo-navigation-arm-cloud/).
     - A local browser and permission to forward port 8080 through SSH.
 
