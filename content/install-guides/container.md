@@ -19,7 +19,7 @@ Container CLI is an open-source command-line tool from Apple for building and ru
 
 The CLI supports the full Open Container Initiative (OCI) workflow: building, running, tagging, and pushing container images.
 
-In this guide, you'll learn how to install and verify the Container CLI to run Arm Linux containers natively on Apple silicon Macs.
+Use this guide to install and verify the Container CLI for running Arm Linux containers natively on Apple silicon Macs.
 
 ## Before you begin
 
@@ -48,30 +48,30 @@ sw_vers -productVersion
 The output is similar to:
 
 ```output
-26.5.1
+26.6.1
 ```
 
-You must run macOS 15.0 or later to use the Container CLI.
+You need macOS 15.0 or later to use the Container CLI.
 
 ## Install Container CLI
 
 To install Container CLI, go to the [GitHub Releases page](https://github.com/apple/container/releases) and download the latest signed `.pkg` installer.
 
 {{% notice Note %}}
-The following commands use Container CLI version 1.0.0. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [GitHub Releases](https://github.com/apple/container/releases).
+The following commands use Container CLI version 1.3.0. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [GitHub Releases](https://github.com/apple/container/releases).
 {{% /notice %}}
 
 ```bash
-wget https://github.com/apple/container/releases/download/1.0.0/container-1.0.0-installer-signed.pkg
+wget https://github.com/apple/container/releases/download/1.3.0/container-1.3.0-installer-signed.pkg
 ```
 
 Install the package:
 
 ```bash
-sudo installer -pkg container-1.0.0-installer-signed.pkg -target /
+sudo installer -pkg container-1.3.0-installer-signed.pkg -target /
 ```
 
-This installs the Container binary at `/usr/local/bin/container`.
+The installer places the `container` binary at `/usr/local/bin/container`.
 
 Start the container system service:
 
@@ -79,9 +79,9 @@ Start the container system service:
 container system start
 ```
 
-You must start the service to use commands like `build`, `run`, or `push`. It may need to be restarted after rebooting.
+You need to start the service before using commands such as `build`, `run`, or `push`. You might need to restart it after rebooting.
 
-The background server process is now running. 
+The service now runs in the background.
 
 Verify the CLI version:
 
@@ -92,11 +92,10 @@ container --version
 The output is similar to:
 
 ```output
-container CLI version 1.0.0 (build: release, commit: ee848e3)
+container CLI version 1.3.0 (build: release, commit: d6de569)
 ```
 
 ## Verify installation by building and running a container
-
 
 In a working directory, create a file named `Dockerfile`:
 
@@ -105,7 +104,7 @@ FROM ubuntu:latest
 CMD echo -n "Architecture is " && uname -m
 ```
 
-This image prints the system architecture when executed.
+The image prints the system architecture when executed.
 
 ### Build the image
 
@@ -118,7 +117,7 @@ container build -t uname .
 The output is similar to:
 
 ```output
-[+] Building 2.7s (5/5) FINISHED
+[+] Building (5/5) FINISHED
 uname:latest
 ```
 
@@ -143,7 +142,7 @@ The `--rm` flag cleans up the container after it exits.
 After the image is built and tested locally, you can push it to a container registry such as Docker Hub. This allows the image to be reused across machines or shared with others.
 
 {{% notice Note %}}
-The following commands are for Docker Hub. The same commands work with any other OCI-compliant registry such as GitHub Container Registry (ghcr.io) or any OCI-compliant registry. Replace `docker.io` with the appropriate registry hostname.
+The following commands are for Docker Hub. The same commands work with any other OCI-compliant registry such as GitHub Container Registry (ghcr.io). Replace `docker.io` with the appropriate registry hostname.
 {{% /notice %}}
 
 Tag the image with a registry-compatible name:
@@ -191,7 +190,7 @@ To uninstall and retain user data (images and containers):
 ```bash
 uninstall-container.sh -k
 ```
-The command is useful if you plan to reinstall Container CLI later and want to keep your local container data.
+Use this option if you plan to reinstall Container CLI later and want to keep your local container data.
 
 Otherwise, to uninstall and delete all user data:
 
@@ -199,6 +198,6 @@ Otherwise, to uninstall and delete all user data:
 uninstall-container.sh -d
 ```
 
-This removes the CLI and all related images, logs, and metadata.
+The script removes the CLI and all related images, logs, and metadata.
 
-You’ve now ready to use Container CLI.  
+You're now ready to use Container CLI.
