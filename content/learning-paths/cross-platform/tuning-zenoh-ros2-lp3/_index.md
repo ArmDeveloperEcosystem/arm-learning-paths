@@ -7,7 +7,7 @@ cascade:
 
 minutes_to_complete: 120
 
-description: Measure ROS 2 sensor traffic, reproduce a constrained wireless link, and tune Zenoh with compression, access control, downsampling, and QoS.
+description: Measure ROS 2 sensor traffic, tune Zenoh with compression, access control, downsampling, and QoS, and select a suitable wireless deployment policy.
 
 who_is_this_for: This Learning Path is for robotics developers who want to understand how Zenoh manages ROS 2 sensor traffic over Wi-Fi. You should already have basic experience setting up and distributing a ROS 2 Jazzy system with rmw_zenoh, as covered in the previous Learning Paths in this series.
 
@@ -21,7 +21,7 @@ prerequisites:
     - The ROS 2 simulation environment from Learning Path 1, with the `robot` and `control` containers available
     - The distributed Zenoh configuration from Learning Path 2, with the `control` container connected in client mode
     - An **Arm server** with the Docker Compose configuration used in Learning Paths 1 and 2
-    - A **Raspberry Pi** connected over Wi-Fi 
+    - A **Raspberry Pi** connected over Wi-Fi
     - Familiarity with ROS 2 topics, Docker, and basic Linux commands
 
 author:

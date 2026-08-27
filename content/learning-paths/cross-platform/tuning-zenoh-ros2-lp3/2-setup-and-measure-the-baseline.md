@@ -2,16 +2,18 @@
 title: Prepare the system and measure the baseline
 weight: 3
 
+description: Start the ROS 2 and Zenoh environment and measure baseline sensor rates, bandwidth, and link traffic.
+
 layout: learningpathall
 ---
 
-## Setup
+## Start the ROS 2 and Zenoh environment
 
 {{% notice Important %}}
-Complete [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/) and [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/) before you continue. This Learning Path tunes that working system; it does not repeat its installation and network configuration.
+Please complete both LP1 ([Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/)) and LP2 ([Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/)) before you continue. This Learning Path tunes that working system; it does not repeat its installation and network configuration.
 {{% /notice %}}
 
-If the containers are stopped, start them from the Arm server host. Use the LP1 working directory if you selected a different location:
+If the containers are stopped, start them from the Arm server host. Use the same working directory you set up in the first Learning Path:
 
 ```bash
 cd ~/ros_zenoh
@@ -32,7 +34,13 @@ The commands that ran in interactive terminals from the previous Learning Paths 
 <details>
 <summary>Restart the robot stack</summary>
 
-Open the robot container desktop.
+Each running container provides a browser-accessible desktop (sign in with the password `ubuntu` if needed):
+
+- `Robot` container desktop: `http://<your_arm_server_ip_address>:6080/`
+- `Control` container desktop: `http://<your_arm_server_ip_address>:6081/`
+
+Open the `robot` container desktop and launch three terminals.
+
 Run the router in the first terminal:
 
 ```bash
@@ -56,7 +64,9 @@ just rox_nav2
 
 </details>
 
-Open another `robot` terminal and remove any network limit left by an earlier test:
+Next, open the [robot container desktop](http://<your_arm_server_ip_address>:6080/) in another browser tab or window.
+
+Once in the `robot` container desktop, open a terminal and remove any network limit left by an earlier test:
 
 ```bash
 source ~/workshop_env.bash
@@ -75,9 +85,10 @@ Using three separate terminals in the `control` container, run the following com
 | Control 2 | `ros2 topic hz /camera/image_raw` | Average rate and standard deviation |
 | Control 3 | `ros2 topic bw /camera/points` | Average bandwidth and message size |
 
-Run the fourth measurement in a `robot` terminal:
+Run the fourth measurement in an additional terminal within the `robot` container:
 
 ```bash
+source ~/workshop_env.bash
 just iftop_router
 ```
 
@@ -89,7 +100,7 @@ At the end of the display, `iftop` reports three TX rates:
 TX:  rates: 813Mb  819Mb  832Mb
 ```
 
-This shows the 2 s / 10 s / 40 s moving averages of traffic respectively sent by the robot. Record the **middle** value. 
+These values show the 2-second, 10-second, and 40-second moving averages of traffic sent by the robot. Record the **middle** value, which is the 10-second average.
 
 ![iftop display monitoring Zenoh router traffic. A red circle marks 819 Mb in the middle TX column, the 10-second average to record as the link traffic.#center](a0-iftop-baseline.png "The circled middle TX value is the 10-second link rate")
 

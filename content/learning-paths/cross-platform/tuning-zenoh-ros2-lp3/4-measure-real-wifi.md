@@ -2,6 +2,8 @@
 title: Measure with real Wi-Fi
 weight: 5
 
+description: Measure Zenoh policy effects on ROS 2 sensor traffic between an Arm server and a Raspberry Pi over Wi-Fi.
+
 layout: learningpathall
 ---
 
@@ -14,16 +16,16 @@ Experiment A: robot container ── Docker network ── control container
 Experiment B: robot container ── Arm server ── Wi-Fi ── Raspberry Pi
 ```
 
-Put the Raspberry Pi on Wi-Fi (2.4 GHz makes the effects clearer). Connect it as a Zenoh client, just as was done in the [previous Learning Path](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/3-connect-the-raspberry-pi/). 
+Configure your Raspberry Pi to connect to an existing Wi-Fi network that also contains the Arm server. Using 2.4 GHz makes the effects clearer. Follow the [Raspberry Pi connection procedure from the preceding Learning Path](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/3-connect-the-raspberry-pi/) to connect it as a Zenoh client.
 
 ## Restore the B0 router configuration
 
-Before starting, return the router configuration to a clean state. Open `~/container_data/ROUTER_CONFIG.json5` in `robot` and ensure the following:
+Before starting, return the router configuration to a clean state. Open `~/container_data/ROUTER_CONFIG.json5` in a terminal within the `robot` container desktop and ensure the following:
 
 - Set `transport/unicast/compression/enabled` to `false`
 - Keep `access_control`, `downsampling`, and `qos` commented out
 
-Restart the router after saving the file. Confirm that the emulated link is no longer active:
+Restart the router on the `robot` container desktop after saving the file. Confirm that the emulated link is no longer active:
 
 ```bash
 just network_normal
@@ -33,14 +35,14 @@ Experiment B uses the physical wireless link. Do not run `just network_limit` du
 
 ## Record scenario B0
 
-Open three SSH sessions to the Raspberry Pi. In each session, enter `pi_edge` and source ROS 2:
+Open three SSH sessions to the Raspberry Pi. In each session, open a bash shell in the `pi_edge` container and source ROS 2:
 
 ```bash
-docker exec -it pi_edge bash
+docker exec -it pi_edge /bin/bash
 source /opt/ros/jazzy/setup.bash
 ```
 
-Run one receiver command in each container shell:
+Run one receiver command in each bash shell that has been opened in the `pi_edge` container:
 
 ```bash
 ros2 topic hz /scan
@@ -54,7 +56,7 @@ ros2 topic hz /camera/image_raw
 ros2 topic bw /camera/points
 ```
 
-Run `just iftop_router` in `robot`. Wait 60–90 seconds and complete the B0 row:
+Run `just iftop_router` in a terminal within the `robot` container desktop. Wait 60–90 seconds and complete the B0 row:
 
 | Scenario | `/scan` | `/camera/image_raw` | `/camera/points` | Link traffic |
 |---|---|---|---|---|
@@ -68,7 +70,7 @@ Stop the three measurements and `iftop` with **Ctrl+C**.
 
 ## Enable compression (B1)
 
-Keep the three Pi shells open after stopping the B0 measurements. In `robot`, enable compression in `~/container_data/ROUTER_CONFIG.json5`. Keep `access_control`, `downsampling`, and `qos` commented out.
+Keep the three bash shells in the `pi_edge` container on the Raspberry Pi open after stopping the B0 measurements. In the `robot` container desktop, enable compression in `~/container_data/ROUTER_CONFIG.json5`. Keep `access_control`, `downsampling`, and `qos` commented out.
 
 Enable compression in each Pi shell:
 
@@ -82,7 +84,7 @@ Confirm that the override includes compression:
 echo $ZENOH_CONFIG_OVERRIDE
 ```
 
-Stop and restart the router so that it reads the new configuration. Restart the same three Pi measurements used for B0, run `just iftop_router` in `robot`, and collect data for 60–90 seconds.
+Stop and restart the router on the `robot` container desktop so that it reads the new configuration. Restart the same three measurements in the Raspberry Pi `pi_edge` container used for B0. Run `just iftop_router` in the `robot` container desktop. Collect data for 60–90 seconds.
 
 Record your measurements and compare them with the reference result:
 
@@ -96,15 +98,15 @@ Compression allows the camera images to fit the real Wi-Fi link, restoring the s
 
 Stop the B1 measurements and `iftop`. In the router configuration, disable compression and enable only the `downsampling` block from A4. Keep `access_control` and `qos` commented out.
 
-The current Pi shells still contain the compression override from B1. Exit each container shell, open a fresh one, and source ROS 2:
+The current Pi shells still contain the compression override from B1. Exit each of the three container shells into `pi_edge` and open fresh ones. Then source ROS 2:
 
 ```bash
 exit
-docker exec -it pi_edge bash
+docker exec -it pi_edge /bin/bash
 source /opt/ros/jazzy/setup.bash
 ```
 
-Do not enable compression in these new shells. Stop and restart the router, restart the three Pi measurements, run `just iftop_router` in `robot`, and collect data for 60–90 seconds.
+Do not enable compression in these new shells. Stop and restart the router on the `robot` container desktop. Restart the measurements in the three `pi_edge` shells. Run `just iftop_router` in the `robot` container desktop. Collect data for 60–90 seconds.
 
 Record your measurements and compare them with the reference result:
 
@@ -124,7 +126,7 @@ Enable compression in each Pi shell:
 export ZENOH_CONFIG_OVERRIDE="${ZENOH_CONFIG_OVERRIDE};transport/unicast/compression/enabled=true"
 ```
 
-Stop and restart the router, restart the three Pi measurements, run `just iftop_router` in `robot`, and collect data for 60–90 seconds.
+Stop and restart the router on the `robot` container desktop. Restart the measurements in the three `pi_edge` shells. Run `just iftop_router` in the `robot` container desktop. Collect data for 60–90 seconds.
 
 Record your measurements and compare them with the reference result:
 
@@ -138,7 +140,7 @@ The point cloud now consumes no link bandwidth, while the camera and scan remain
 
 Stop the B3 measurements and `iftop`. In the router configuration, comment out the access-control block, keep compression enabled, and enable the `qos` block from A5. Keep downsampling disabled.
 
-The Pi shells already have compression enabled, so no client-side change is needed. Stop and restart the router, restart the three Pi measurements, run `just iftop_router` in `robot`, and collect data for 60–90 seconds.
+The Pi shells already have compression enabled, so no client-side change is needed. Stop and restart the router on the `robot` container desktop. Restart the measurements in the three `pi_edge` shells. Run `just iftop_router` in the `robot` container desktop. Collect data for 60–90 seconds.
 
 Record your measurements and compare them with the reference result:
 
