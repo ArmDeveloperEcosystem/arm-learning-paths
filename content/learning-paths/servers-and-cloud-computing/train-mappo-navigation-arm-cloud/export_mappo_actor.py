@@ -3,7 +3,9 @@
 import argparse
 import hashlib
 import json
+import os
 import pickle
+import tempfile
 from pathlib import Path
 
 import numpy as np
@@ -32,6 +34,14 @@ def cfg_get(cfg, key, default=None):
         except (TypeError, AttributeError):
             pass
     return getattr(cfg, key, default)
+
+
+def cfg_require(cfg, key):
+    """Return a deployment-critical setting, or stop if it was not recorded."""
+    value = cfg_get(cfg, key)
+    if value is None:
+        raise SystemExit(f"Task configuration does not contain {key}")
+    return value
 
 
 def class_name(value) -> str:
@@ -81,6 +91,33 @@ def fail_if(condition, message):
         raise SystemExit(message)
 
 
+def write_atomic_npz(output, arrays, metadata, torch_weights, scale_mapping):
+    """Write, validate, and atomically install an actor archive."""
+    output.parent.mkdir(parents=True, exist_ok=True)
+    descriptor, temporary_name = tempfile.mkstemp(
+        dir=output.parent,
+        prefix=f".{output.name}.",
+        suffix=".tmp",
+    )
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "wb") as file:
+            np.savez_compressed(
+                file,
+                **arrays,
+                metadata_json=np.array(json.dumps(metadata)),
+            )
+            file.flush()
+            os.fsync(file.fileno())
+
+        errors = validate_numpy_export(temporary, torch_weights, scale_mapping)
+        os.replace(temporary, output)
+        return errors
+    except BaseException:
+        temporary.unlink(missing_ok=True)
+        raise
+
+
 def validate_numpy_export(output, torch_weights, scale_mapping):
     """Validate tensor serialization and deterministic TanhNormal semantics."""
     generator = torch.Generator(device="cpu").manual_seed(1234)
@@ -116,9 +153,7 @@ def validate_numpy_export(output, torch_weights, scale_mapping):
     max_action_error = float(
         torch.max(torch.abs(torchrl_action - lightweight_action)).item()
     )
-    if not torch.allclose(
-        torchrl_action, lightweight_action, rtol=1e-5, atol=1e-6
-    ):
+    if not torch.allclose(torchrl_action, lightweight_action, rtol=1e-5, atol=1e-6):
         raise RuntimeError(
             "tanh(loc) does not match TorchRL TanhNormal deterministic_sample. "
             f"Maximum action error: {max_action_error}"
@@ -137,6 +172,11 @@ def main():
     parser.add_argument("--checkpoint", required=True)
     parser.add_argument("--output", help="Exact .npz output path")
     parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Atomically replace an existing output file",
+    )
+    parser.add_argument(
         "--output-dir",
         default=str(Path.home() / "mappo_actor_exports"),
         help="Output directory used when --output is omitted",
@@ -144,9 +184,7 @@ def main():
     args = parser.parse_args()
 
     checkpoint = Path(args.checkpoint).expanduser().resolve()
-    requested_output = (
-        Path(args.output).expanduser().resolve() if args.output else None
-    )
+    requested_output = Path(args.output).expanduser().resolve() if args.output else None
     output_dir = Path(args.output_dir).expanduser().resolve()
 
     fail_if(not checkpoint.is_file(), f"Checkpoint not found: {checkpoint}")
@@ -164,24 +202,18 @@ def main():
         _seed = pickle.load(file)
         experiment_config = pickle.load(file)
 
-    n_agents_value = cfg_get(task_config, "n_agents")
-    fail_if(n_agents_value is None, "Task configuration does not contain n_agents")
-    n_agents = int(n_agents_value)
-
-    collisions = bool(cfg_get(task_config, "collisions", True))
-    observe_all_goals = bool(cfg_get(task_config, "observe_all_goals", False))
-    n_lidar_rays = int(cfg_get(task_config, "n_lidar_rays", 12))
+    n_agents = int(cfg_require(task_config, "n_agents"))
+    collisions = bool(cfg_require(task_config, "collisions"))
+    observe_all_goals = bool(cfg_require(task_config, "observe_all_goals"))
+    lidar_range = float(cfg_require(task_config, "lidar_range"))
+    agent_radius = float(cfg_require(task_config, "agent_radius"))
+    max_steps = int(cfg_require(task_config, "max_steps"))
 
     fail_if(not collisions, "This exporter expects navigation collisions=true")
     fail_if(
         observe_all_goals,
         "This exporter expects observe_all_goals=false; the observation layout would differ",
     )
-    fail_if(
-        n_lidar_rays != 12,
-        f"This exporter expects 12 LiDAR rays; found {n_lidar_rays}",
-    )
-
     fail_if(
         not bool(getattr(experiment_config, "share_policy_params", False)),
         "This exporter expects share_policy_params=true",
@@ -191,9 +223,12 @@ def main():
         "This exporter expects MAPPO use_tanh_normal=true",
     )
 
-    scale_mapping = str(
-        getattr(algorithm_config, "scale_mapping", "biased_softplus_1.0")
+    scale_mapping_value = getattr(algorithm_config, "scale_mapping", None)
+    fail_if(
+        scale_mapping_value is None,
+        "Algorithm configuration does not contain scale_mapping",
     )
+    scale_mapping = str(scale_mapping_value)
 
     num_cells = list(getattr(model_config, "num_cells", []))
     activation_class = getattr(model_config, "activation_class", None)
@@ -229,6 +264,12 @@ def main():
     W3_t = find_actor_tensor(actor_state, "mlp.params.4.weight")
     b3_t = find_actor_tensor(actor_state, "mlp.params.4.bias")
 
+    n_lidar_rays = int(W1_t.shape[1]) - 6
+    fail_if(
+        n_lidar_rays != 12,
+        f"This exporter expects 12 LiDAR inputs; actor implies {n_lidar_rays}",
+    )
+
     expected_shapes = {
         "W1": (256, 18),
         "b1": (256,),
@@ -252,26 +293,39 @@ def main():
         f"Expected {expected_shapes}, found {actual_shapes}",
     )
 
-    training_frames = int(state.get("state", {}).get("total_frames", 0))
+    training_state = state.get("state")
+    fail_if(
+        not hasattr(training_state, "get"),
+        "Checkpoint does not contain a readable training state",
+    )
+    training_frames_value = training_state.get("total_frames")
+    fail_if(
+        training_frames_value is None,
+        "Checkpoint training state does not contain total_frames",
+    )
+    training_frames = int(training_frames_value)
+    fail_if(training_frames <= 0, f"Invalid training frame count: {training_frames}")
     agent_group = loss_group_name.removeprefix("loss_")
+
+    checkpoint_sha256 = sha256_file(checkpoint)
 
     output = (
         requested_output
         if requested_output is not None
-        else output_dir / f"mappo_actor_{n_agents}agent_{training_frames}.npz"
+        else output_dir
+        / f"mappo_actor_{n_agents}agent_{training_frames}_{checkpoint_sha256[:12]}.npz"
     )
     fail_if(output.suffix != ".npz", "Actor output file must use the .npz suffix")
-
-    lidar_range = cfg_get(task_config, "lidar_range", 0.35)
-    agent_radius = cfg_get(task_config, "agent_radius", 0.1)
-    max_steps = cfg_get(task_config, "max_steps")
+    fail_if(
+        output.exists() and not args.force,
+        f"Output already exists: {output}. Choose another path or pass --force.",
+    )
 
     metadata = {
         "format": "mappo_shared_actor_numpy_v2",
         "source_checkpoint_name": checkpoint.name,
-        "source_checkpoint_path": str(checkpoint),
-        "source_checkpoint_sha256": sha256_file(checkpoint),
-        "source_config_path": str(config_file),
+        "source_checkpoint_sha256": checkpoint_sha256,
+        "source_config_name": config_file.name,
         "training_frames": training_frames,
         "training_n_agents": n_agents,
         "agent_group": agent_group,
@@ -314,25 +368,23 @@ def main():
         "training_observe_all_goals": observe_all_goals,
     }
 
-    output.parent.mkdir(parents=True, exist_ok=True)
-    np.savez_compressed(
+    max_raw_error, max_action_error = write_atomic_npz(
         output,
-        W1=W1_t.numpy(),
-        b1=b1_t.numpy(),
-        W2=W2_t.numpy(),
-        b2=b2_t.numpy(),
-        W3=W3_t.numpy(),
-        b3=b3_t.numpy(),
-        metadata_json=np.array(json.dumps(metadata)),
-    )
-
-    max_raw_error, max_action_error = validate_numpy_export(
-        output,
+        {
+            "W1": W1_t.numpy(),
+            "b1": b1_t.numpy(),
+            "W2": W2_t.numpy(),
+            "b2": b2_t.numpy(),
+            "W3": W3_t.numpy(),
+            "b3": b3_t.numpy(),
+        },
+        metadata,
         (W1_t, b1_t, W2_t, b2_t, W3_t, b3_t),
         scale_mapping,
     )
 
     print(f"Actor export:              {output}")
+    print(f"Source SHA-256:            {checkpoint_sha256}")
     print(f"Agents:                    {n_agents}")
     print(f"Frames:                    {training_frames}")
     print(f"Actor group:               {agent_group}")

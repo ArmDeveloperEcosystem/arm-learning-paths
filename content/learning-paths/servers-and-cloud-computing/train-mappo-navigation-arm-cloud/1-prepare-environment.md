@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Inspect the Arm cloud instance
 
-Confirm that the instance uses the Arm64 architecture:
+Confirm that the instance reports the `aarch64` architecture:
 
 ```bash
 uname -m
@@ -36,9 +36,10 @@ lscpu
 Save the CPU count and reserve one CPU for operating-system and runtime activity:
 
 ```bash
-export CORE_COUNT=$(nproc)
+CORE_COUNT="$(nproc)"
+export CORE_COUNT
 export RESERVED_CPUS=1
-export WORKLOAD_CPUS=$((CORE_COUNT - RESERVED_CPUS))
+export WORKLOAD_CPUS=$((CORE_COUNT > RESERVED_CPUS ? CORE_COUNT - RESERVED_CPUS : 1))
 ```
 
 Verify the values:
@@ -56,14 +57,14 @@ The agent count and vectorized environment count control different parts of the 
 
 For example, three agents and 191 environments means that VMAS simulates 191 navigation worlds concurrently, with three agents in each world.
 
-For CPU sampling in this Learning Path, use one VMAS environment for each workload CPU:
+For the reference run, start with one VMAS environment for each workload CPU:
 
 ```bash
-export N_ENVS=$WORKLOAD_CPUS
+export N_ENVS="$WORKLOAD_CPUS"
 ```
 
 {{% notice Note %}}
-This is a workload-sizing policy. VMAS uses vectorized PyTorch operations, so an environment is not permanently mapped to one operating-system thread.
+This is a starting point, not a claim that one environment maps to one operating-system thread. VMAS applies vectorized PyTorch operations across the environment batch. Reduce `N_ENVS` if memory pressure causes swapping, and compare throughput before increasing it.
 {{% /notice %}}
 
 ## Install system packages
@@ -89,13 +90,13 @@ sudo apt-get install -y git build-essential python3-pip python3-dev pkg-config c
 Create a Python environment:
 
 ```bash
-python3.12 -m venv $HOME/venvs/mappo
+python3.12 -m venv "$HOME/venvs/mappo"
 ```
 
 Activate it:
 
 ```bash
-source $HOME/venvs/mappo/bin/activate
+source "$HOME/venvs/mappo/bin/activate"
 ```
 
 Confirm the active Python interpreter:
@@ -110,10 +111,16 @@ Upgrade the Python packaging tools:
 python -m pip install --upgrade pip setuptools wheel packaging
 ```
 
-Install PyTorch:
+Install pinned PyTorch, TorchRL, TensorDict, and VMAS versions:
 
 ```bash
-python -m pip install torch torchvision torchaudio
+python -m pip install \
+    "torch==2.8.0" \
+    "torchvision==0.23.0" \
+    "torchaudio==2.8.0" \
+    "torchrl==0.10.1" \
+    "tensordict==0.10.0" \
+    "vmas==1.5.2"
 ```
 
 Verify the installation:
@@ -124,25 +131,35 @@ python -c 'import platform, torch; print("Architecture:", platform.machine()); p
 
 ## Install BenchMARL and VMAS
 
-Clone BenchMARL:
+Clone the pinned BenchMARL revision:
 
 ```bash
-cd $HOME
-git clone https://github.com/facebookresearch/BenchMARL.git
-cd $HOME/BenchMARL
+export BENCHMARL_ROOT="$HOME/BenchMARL"
+git clone --filter=blob:none --no-checkout --depth 1 \
+    https://github.com/facebookresearch/BenchMARL.git \
+    "$BENCHMARL_ROOT"
+git -C "$BENCHMARL_ROOT" fetch --depth 1 origin \
+    65d649d80e0bdcbdbe2c5d6a3f02dbfed8f0bec1
+git -C "$BENCHMARL_ROOT" checkout --detach \
+    65d649d80e0bdcbdbe2c5d6a3f02dbfed8f0bec1
+cd "$BENCHMARL_ROOT"
 ```
 
-Install BenchMARL and VMAS:
+Install BenchMARL and its remaining dependencies:
 
 ```bash
-python -m pip install -e .
-python -m pip install vmas
+python -m pip install -e ".[vmas]"
 ```
 
 Verify the software stack:
 
 ```bash
-python -c 'import torch, torchrl, benchmarl, vmas; print("PyTorch:", torch.__version__); print("TorchRL: OK"); print("BenchMARL: OK"); print("VMAS: OK")'
+python - <<'PY'
+from importlib.metadata import version
+
+for package in ("torch", "torchrl", "tensordict", "vmas", "benchmarl"):
+    print(f"{package}: {version(package)}")
+PY
 ```
 
 Record the BenchMARL revision used for the experiment:
@@ -151,4 +168,8 @@ Record the BenchMARL revision used for the experiment:
 git rev-parse HEAD
 ```
 
-Keep this revision with your experiment notes so you can reproduce the software environment later.
+The revision must be `65d649d80e0bdcbdbe2c5d6a3f02dbfed8f0bec1`. The version pins and revision keep the checkpoint layout and exporter assumptions reproducible.
+
+## What you've accomplished
+
+You have validated the Arm cloud instance, selected an explicit workload size, and installed a pinned training stack. Next, you will configure and run the MAPPO experiment.

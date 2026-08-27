@@ -1,25 +1,23 @@
 ---
-title: Train Multi-Agent Reinforcement Learning policies with MAPPO on Arm cloud
+title: Train and export a MAPPO navigation policy on Arm cloud
 
 draft: true
 cascade:
     draft: true
     
-description: Train a MAPPO navigation policy with BenchMARL and VMAS on an Arm cloud instance, deploy the checkpoint to a visualization GUI, and export an actor-only inference artifact.
+description: Train a MAPPO navigation policy with BenchMARL and VMAS on an Arm cloud instance, evaluate it, and export an actor-only inference artifact.
 
 minutes_to_complete: 330
 
 who_is_this_for: This Learning Path is for cloud and machine learning developers who want to train and package multi-agent reinforcement learning navigation policies on Arm-based servers.
 learning_objectives:
-    - Configure a vectorized BenchMARL and VMAS workload for an Arm cloud instance.
-    - Train and evaluate a multi-agent navigation policy with MAPPO.
-    - Package and validate the trained BenchMARL checkpoint for a cloud visualization GUI.
-    - Extract and validate the shared actor as a smaller inference-only artifact.
+    - Configure a reproducible BenchMARL and VMAS workload for an Arm cloud instance.
+    - Train and quantitatively evaluate a multi-agent navigation policy with MAPPO.
+    - Export and validate the shared actor as a smaller inference-only artifact.
 
 prerequisites:
-    - An Arm64 Ubuntu cloud instance with SSH access, `sudo` privileges, and internet access.
+    - An Arm-based Ubuntu 24.04 cloud instance with SSH access, `sudo` privileges, and internet access.
     - Familiarity with Linux, Python, PyTorch, and reinforcement learning concepts such as observations, actions, rewards, and policies.
-    - A local checkout of the companion MARL GUI containing `tools/deploy_checkpoint.py` and `tools/inspect_checkpoint.py` if you want to complete the GUI deployment section.
 
 author:
     - Sagar Surendran
@@ -49,6 +47,10 @@ operatingsystems:
     - Linux
 further_reading:
     - resource:
+        title: Load a MAPPO policy with the Arm Device Connect dashboard
+        link: /learning-paths/servers-and-cloud-computing/use-mappo-device-connect-dashboard/
+        type: website
+    - resource:
         title: BenchMARL repository
         link: https://github.com/facebookresearch/BenchMARL
         type: website
@@ -60,6 +62,10 @@ further_reading:
         title: The Surprising Effectiveness of PPO in Cooperative Multi-Agent Games
         link: https://arxiv.org/abs/2103.01955
         type: website
+    - resource:
+        title: TorchRL documentation
+        link: https://docs.pytorch.org/rl/stable/
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
