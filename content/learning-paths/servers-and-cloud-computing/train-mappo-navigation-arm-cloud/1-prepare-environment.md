@@ -7,6 +7,32 @@ weight: 2
 layout: learningpathall
 ---
 
+## Understand the reference environment
+
+This Learning Path trains a multi-agent proximal policy optimization (MAPPO) policy entirely on Arm CPUs. It does not need a GPU.
+
+BenchMARL defines and runs the experiment, TorchRL provides the reinforcement-learning components, and VMAS simulates many navigation worlds in a vectorized PyTorch batch. MAPPO trains an actor that selects each agent's actions and a centralized critic used only during training. The reference configuration shares one actor across all three agents, which makes the later actor-only export possible.
+
+The reference experiment was tested on this AWS configuration:
+
+| Component | Tested configuration |
+| --- | --- |
+| Instance | `m9g.48xlarge` |
+| Processor | AWS Graviton5 |
+| Architecture | `aarch64` |
+| vCPUs | 192 |
+| Memory | 768 GiB |
+| Operating system | Ubuntu 24.04 |
+| Storage | 512 GB EBS volume |
+
+The M9g instance is EBS-only, so the storage volume is provisioned separately from the instance. The workflow does not depend on an AWS-specific API and can run on other Arm-based cloud instances. A smaller instance uses fewer vectorized environments and takes longer to process the same training-frame budget.
+
+AWS Graviton5 provides one hardware thread per core on this instance. The one-environment-per-workload-CPU rule is still a starting point rather than a fixed mapping, because VMAS processes the environments as tensor batches.
+
+{{% notice Note %}}
+The tested configuration is a reproducibility reference, not a measured minimum requirement. Package installation, training logs, and checkpoints need persistent storage, but this Learning Path does not establish 512 GB as the minimum capacity.
+{{% /notice %}}
+
 ## Inspect the Arm cloud instance
 
 Confirm that the instance uses the Arm64 architecture:
@@ -33,12 +59,13 @@ You can also inspect the processor topology:
 lscpu
 ```
 
-Save the CPU count and reserve one CPU for operating-system and runtime activity:
+Save the CPU count and leave one CPU out of the workload calculation:
 
 ```bash
 export CORE_COUNT=$(nproc)
 export RESERVED_CPUS=1
 export WORKLOAD_CPUS=$((CORE_COUNT - RESERVED_CPUS))
+test "$WORKLOAD_CPUS" -ge 1 || { echo "This sizing policy needs at least 2 CPUs" >&2; exit 1; }
 ```
 
 Verify the values:
@@ -46,6 +73,8 @@ Verify the values:
 ```bash
 echo "TotalCPUs=$CORE_COUNT ReservedCPUs=$RESERVED_CPUS WorkloadCPUs=$WORKLOAD_CPUS"
 ```
+
+This calculation reduces the size of the PyTorch thread pools and the VMAS batch. It does not pin the workload to specific CPUs or prevent the operating system from scheduling work on them.
 
 ## Understand agents and vectorized environments
 
@@ -121,6 +150,16 @@ Verify the installation:
 ```bash
 python -c 'import platform, torch; print("Architecture:", platform.machine()); print("PyTorch:", torch.__version__); print("CUDA available:", torch.cuda.is_available()); print("CUDA device:", torch.cuda.get_device_name(0) if torch.cuda.is_available() else "N/A")'
 ```
+On the tested system, the output was:
+
+```output
+Architecture: aarch64
+PyTorch: 2.13.0+cu130
+CUDA available: False
+CUDA device: N/A
+```
+
+The PyTorch version can differ when you run an unpinned `pip` installation. `CUDA available: False` is expected on the CPU-only M9g instance, even if the wheel version contains a CUDA suffix.
 
 ## Install BenchMARL and VMAS
 
@@ -145,6 +184,15 @@ Verify the software stack:
 python -c 'import torch, torchrl, benchmarl, vmas; print("PyTorch:", torch.__version__); print("TorchRL: OK"); print("BenchMARL: OK"); print("VMAS: OK")'
 ```
 
+On the tested system, the output was:
+
+```output
+PyTorch: 2.13.0+cu130
+TorchRL: OK
+BenchMARL: OK
+VMAS: OK
+```
+
 Record the BenchMARL revision used for the experiment:
 
 ```bash
@@ -152,3 +200,7 @@ git rev-parse HEAD
 ```
 
 Keep this revision with your experiment notes so you can reproduce the software environment later.
+
+## What you've accomplished
+
+You have verified the `aarch64` environment, sized the initial VMAS workload, and installed the training stack. Next, you will keep the training-frame budget consistent while adapting the vectorized environment count to the available CPUs.
