@@ -43,7 +43,7 @@ The published metrics include:
 - **standard_deviation**: Running standard deviation of confidence scores.
 - **confidence_trend**: Direction the confidence is trending (`incr` or `decr`).
 
-Example metrics output:
+The output is similar to:
 
 ```json
 {
@@ -100,7 +100,7 @@ Enables the confidence threshold filter. When enabled, only inference results th
 }
 ```
 
-**Result:**
+The output is similar to:
 
 ```json
 {
@@ -126,7 +126,7 @@ Disables the confidence threshold filter. All inference results are published to
 }
 ```
 
-**Result:**
+The output is similar to:
 
 ```json
 {
@@ -161,7 +161,7 @@ Sets the comparison operator for the confidence threshold filter. The available 
 }
 ```
 
-**Result:**
+The output is similar to:
 
 ```json
 {
@@ -183,7 +183,7 @@ Retrieves the currently configured threshold filter criteria.
 }
 ```
 
-**Result:**
+The output is similar to:
 
 ```json
 {
@@ -206,7 +206,7 @@ Sets the confidence threshold value. Inference results are filtered against this
 }
 ```
 
-**Result:**
+The output is similar to:
 
 ```json
 {
@@ -228,7 +228,7 @@ Retrieves the currently configured confidence threshold value.
 }
 ```
 
-**Result:**
+The output is similar to:
 
 ```json
 {
@@ -250,7 +250,7 @@ Retrieves the complete threshold filter configuration, including enabled state, 
 }
 ```
 
-**Result:**
+The output is similar to:
 
 ```json
 {
@@ -276,7 +276,7 @@ Retrieves information about the currently running model, including its name, ver
 }
 ```
 
-**Result:**
+The output is similar to:
 
 ```json
 {
@@ -324,7 +324,7 @@ Resets the accumulated model metrics counters to zero.
 }
 ```
 
-**Result:**
+The output is similar to:
 
 ```json
 {

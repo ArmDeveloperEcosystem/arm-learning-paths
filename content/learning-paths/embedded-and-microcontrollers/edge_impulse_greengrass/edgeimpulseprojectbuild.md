@@ -35,9 +35,7 @@ Now that your account is ready, clone an existing project that already has a tra
 
 ## Clone the project into your account
 
-Navigate to this public project:
-
-https://studio.edgeimpulse.com/studio/524106
+Open the [Cat and Dog Detector public project](https://studio.edgeimpulse.com/studio/524106).
 
 ![Edge Impulse public project page for the Cat and Dog Detector model#center](./images/ei_clone_1.png "Public project page")
 

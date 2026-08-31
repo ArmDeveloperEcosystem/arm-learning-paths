@@ -121,7 +121,7 @@ From the last section, lets finish the installation of the Edge Impulse model `e
 ls -al /tmp/currentModel.eim
 ```
 
-Output should be:
+The expected output is:
 
 ```output
 /tmp/currentModel.eim

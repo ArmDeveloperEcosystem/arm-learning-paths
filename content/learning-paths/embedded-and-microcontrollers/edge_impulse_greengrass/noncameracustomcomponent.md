@@ -13,26 +13,32 @@ For those edge devices that do not contain a camera, the following component wil
 
 ### Clone the component repository
 
-Clone this [repo](https://github.com/edgeimpulse/aws-greengrass-workshop-supplemental). You'll find the following files: 
+Clone the [Edge Impulse AWS Greengrass workshop supplemental repository](https://github.com/edgeimpulse/aws-greengrass-workshop-supplemental). You'll find the following files:
 
-		EdgeImpulseRunnerRuntimeInstallerComponent.yaml
-		artifacts/EdgeImpulseRunnerRuntime/1.0.0/install.sh
-		artifacts/EdgeImpulseRunnerRuntime/1.0.0/models.tar.gz
-		artifacts/EdgeImpulseRunnerRuntime/1.0.0/samples.tar.gz
-		
+```text
+EdgeImpulseRunnerRuntimeInstallerComponent.yaml
+artifacts/EdgeImpulseRunnerRuntime/1.0.0/install.sh
+artifacts/EdgeImpulseRunnerRuntime/1.0.0/models.tar.gz
+artifacts/EdgeImpulseRunnerRuntime/1.0.0/samples.tar.gz
+```
+
 ### Copy the artifact files to Amazon S3
 
 From the AWS dashboard, select the S3 dashboard and navigate to the same bucket you created for the "Runner" custom component. 
 
-In that bucket, please create the following directory structure:
+In that bucket, create the following directory structure:
 
-		artifacts/EdgeImpulseRunnerRuntime/1.0.0
-		
+```text
+artifacts/EdgeImpulseRunnerRuntime/1.0.0
+```
+
 Within the 1.0.0 directory in S3, upload these files to S3 from your cloned repo (located in ./artifacts/EdgeImpulseRunnerRuntime/1.0.0 within your cloned repo):
 
-		install.sh
-		models.tar.gz
-		samples.tar.gz
+```text
+install.sh
+models.tar.gz
+samples.tar.gz
+```
 
 Next, edit the `EdgeImpulseRunnerRuntimeInstallerComponent.yaml` and change the artifact location from "YOUR\_S3\_ARTIFACT\_BUCKET" to the actual name of your S3 bucket name (you'll see "YOUR\_S3\_ARTIFACT\_BUCKET" near the bottom of the yaml file). Save the file. 
 
@@ -40,17 +46,17 @@ Next, edit the `EdgeImpulseRunnerRuntimeInstallerComponent.yaml` and change the 
 
 Within the AWS dashboard, go to the IoTCore dashboard, then navigate to "Components" under the "Greengrass devices" drop-down on the left hand side. 
 
-![CreateComponent](./images/GG_Create_NC_Component_1.png)
+![AWS IoT Greengrass components page with the Create component button available#center](./images/gg_create_nc_component_1.png)
 
 Press "Create Component" and select "YAML" as the recipe format type. 
 
 Copy and paste the contents of your updated/modified file `EdgeImpulseRunnerRuntimeInstallerComponent.yaml` into the text window after clearing the initial contents:
 
-![CreateComponent](./images/GG_Create_NC_Component_2.png)
+![AWS IoT Greengrass component creation page with the YAML recipe editor ready for the component recipe#center](./images/gg_create_nc_component_2.png)
 
 Finally, press "Create Component" and you should now have 2 custom components registered:
 
-![CreateComponent](./images/GG_Create_NC_Component_3.png)
+![AWS IoT Greengrass registered component list showing the two custom components#center](./images/gg_create_nc_component_3.png)
 
 ## What you've accomplished
 
