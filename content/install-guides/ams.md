@@ -34,9 +34,7 @@ tool_install: true              # Set to true to be listed in main selection pag
 multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
-test_maintenance: true
-test_images:
-  - ubuntu:latest
+test_maintenance: false
 ---
 [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) is a performance analysis tool suite for Android and Linux application developers. It shows you how well your game or app performs on production devices, so that you can identify problems that might cause slow performance, overheat the device, or drain the battery.
 
