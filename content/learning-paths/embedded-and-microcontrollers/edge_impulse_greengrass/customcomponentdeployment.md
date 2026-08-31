@@ -9,14 +9,14 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you create a Greengrass deployment that downloads, installs, and runs the Edge Impulse Runner service on your edge device. When the Runner starts, it connects to your Edge Impulse project using the API key stored in AWS Secrets Manager, downloads your trained ML model, and begins running inference.
+Create a Greengrass deployment that downloads, installs, and runs the Edge Impulse Runner service on your edge device. When the Runner starts, it connects to your Edge Impulse project using the API key stored in AWS Secrets Manager, downloads your trained ML model, and begins running inference.
 
-{{% notice IMPORTANT - Additional required step for non-Camera edge devices %}}
-If your edge device doesn't have a camera (for example, an EC2 instance), before you start the deployment, you need to deploy an additional custom greengrass component first. 
+{{% notice IMPORTANT - Additional required step for non-camera edge devices %}}
+If your edge device doesn't have a camera, for example an EC2 instance, deploy the additional custom Greengrass component before you start the deployment.
 
-Follow the [non-camera additional component setup steps](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/noncameracustomcomponent/) before continuing. 
+Follow the [non-camera additional component setup steps](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/noncameracustomcomponent/) before continuing.
 
-NOTE\: `You'll select that additional component ALONG WITH the Edge Impulse Runner component during deployment below.`
+During deployment, select both the additional component and the Edge Impulse Runner component.
 {{% /notice %}}
 
 ## Create a Greengrass deployment

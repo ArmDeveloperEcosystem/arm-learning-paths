@@ -20,7 +20,7 @@ learning_objectives:
 prerequisites:
     - An [Edge Impulse Studio](https://studio.edgeimpulse.com/signup) account
     - An [AWS account](https://aws.amazon.com/) with administrator access
-    - A supported Arm-based edge device (Raspberry Pi 5, Nvidia Jetson, Qualcomm Dragonwing QC6490) or an AWS EC2 Arm instance
+    - A supported Arm-based edge device (Raspberry Pi 5, NVIDIA Jetson, Qualcomm Dragonwing QC6490) or an AWS EC2 Arm instance
     - An SSH client and familiarity with the Linux command line
     - Basic understanding of ML concepts
 author: Doug Anson

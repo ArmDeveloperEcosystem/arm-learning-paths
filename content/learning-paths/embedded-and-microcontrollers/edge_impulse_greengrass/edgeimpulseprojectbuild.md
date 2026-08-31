@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Create an Edge Impulse account
 
-Edge Impulse is an ML platform that lets you build, train, optimize, and deploy models for edge devices. In this section, you create an account, clone a pre-built project, build a deployment for your Arm device, and generate an API key.
+Create an Edge Impulse account, clone a pre-built project, build a deployment for your Arm device, and generate an API key. Edge Impulse is an ML platform for building, training, optimizing, and deploying models for edge devices.
 
-Navigate to [Edge Impulse Studio](https://studio.edgeimpulse.com) and select **Sign Up** in the upper-right corner:
+Navigate to [Edge Impulse Studio](https://studio.edgeimpulse.com) and select **Sign Up**:
 
 ![Edge Impulse Studio login page with the Sign Up button in the upper-right corner#center](./images/ei_signup_1.png "Edge Impulse sign-up page")
 
@@ -27,7 +27,7 @@ A wizard appears to help you create a default project:
 
 ![Edge Impulse new project wizard showing initial setup options#center](./images/ei_signup_4.png "New project wizard")
 
-You can dismiss the wizard by selecting the **-** button in the upper-right corner. This reveals your new default project:
+Dismiss the wizard by selecting the **-** button. This reveals your new default project:
 
 ![Edge Impulse dashboard showing a newly created default project#center](./images/ei_signup_5.png "New default project")
 
@@ -39,11 +39,11 @@ Open the [Cat and Dog Detector public project](https://studio.edgeimpulse.com/st
 
 ![Edge Impulse public project page for the Cat and Dog Detector model#center](./images/ei_clone_1.png "Public project page")
 
-Select the **Clone this project** button in the upper-right corner. A dialog appears to confirm the clone:
+Select **Clone this project**. A dialog appears to confirm the clone:
 
 ![Clone project dialog with default settings and a Clone Project button#center](./images/ei_clone_2.png "Clone project dialog")
 
-Leave the default settings and select **Clone Project** in the lower-right corner. The cloning process starts:
+Leave the default settings and select **Clone Project**. The cloning process starts:
 
 ![Progress indicator showing the project clone in progress#center](./images/ei_clone_3.png "Cloning in progress")
 
@@ -63,11 +63,11 @@ Edge Impulse Studio provides a workflow to build, train, optimize, and deploy ML
 
 ![Edge Impulse Studio dashboard showing the project overview with data, impulse, and deployment sections#center](./images/ei_project_1.png "Project dashboard overview")
 
-Central to Edge Impulse is the concept of an *Impulse*, which is a pipeline that defines how sensor data is processed, what model runs on it, and how results are interpreted. Your cloned project already has an Impulse called "Cat and Dog Detector". Select **Create Impulse** on the left sidebar to see the three main parts: the pre-processing block, the model block, and the post-processing block:
+Central to Edge Impulse is the concept of an *Impulse*, which is a pipeline that defines how sensor data is processed, what model runs on it, and how results are interpreted. Your cloned project already has an Impulse called "Cat and Dog Detector". Select **Create Impulse** to see the three main parts: the pre-processing block, the model block, and the post-processing block:
 
 ![Create Impulse view showing the three pipeline blocks: pre-processing, model, and post-processing#center](./images/ei_project_2.webp "Impulse pipeline structure")
 
-Select **Object Detection** on the left sidebar to see details about the model used in the Impulse:
+Select **Object Detection** to see details about the model used in the Impulse:
 
 ![Object Detection page showing the model architecture and training results#center](./images/ei_project_3.webp "Object Detection model details")
 
@@ -87,26 +87,26 @@ Select the appropriate target for your device and select **Build**. For example,
 For these edge device targets, select the **int8** quantization option before selecting **Build**. The **Linux (AARCH64)** target is suitable for many Linux-class Arm-based 64-bit devices where the CPU runs the model.
 {{% /notice %}}
 
-When thd deployment build completes, the browser will automatically download your "eim" file into your ~/Downloads directory. On your desktop copy the "eim" file to your edge device. For example, if the name of your "eim" file is "pet_detection-linux-aarch64-v137-cat-and-dog-detector.eim", the command will be:
+When the deployment build completes, the browser automatically downloads your `.eim` file to `~/Downloads`. From your desktop, copy the `.eim` file to your edge device. For example, if the file is named `pet_detection-linux-aarch64-v137-cat-and-dog-detector.eim`, run:
 
 ```bash
 scp  pet_detection-linux-aarch64-v137-cat-and-dog-detector.eim <username_on_edge_device>@<edge_device_ip_address>:.
 ```
 
-Next, open a SSH shell into your edge device:
+Next, open an SSH session on your edge device:
 
 ```bash
 ssh <username_on_edge_device>@<edge_device_ip_address>
 mv *.eim /tmp/currentModel.eim
 ```
 
-You should see `/tmp/currentModel.eim` on your edge device. We will use this in the next section. 
+You should see `/tmp/currentModel.eim` on your edge device. You'll use this file in the next section.
 
 The next step is to create an API key that connects the Greengrass component to your Edge Impulse project.
 
 ## Create your project API key
 
-The Edge Impulse Runner on your device uses an API key to authenticate with your project and download the model. Select **Dashboard** on the left sidebar:
+The Edge Impulse Runner on your device uses an API key to authenticate with your project and download the model. Select **Dashboard**:
 
 ![Edge Impulse project dashboard with the Dashboard link highlighted in the left sidebar#center](./images/ei_key_1.webp "Project dashboard")
 
@@ -114,7 +114,7 @@ Select **Keys**:
 
 ![Dashboard view with the Keys tab visible in the project settings area#center](./images/ei_key_2.webp "Keys tab")
 
-Select **Add new API key** in the upper-right corner. Enter a name for the key, set the role to **admin**, and confirm that **Set as development key** is selected. Then select **Create API key**:
+Select **Add new API key**. Enter a name for the key, set the role to **admin**, and confirm that **Set as development key** is selected. Then select **Create API key**:
 
 ![API key creation dialog with fields for name, role set to admin, and the development key checkbox selected#center](./images/ei_key_3.webp "Create API key")
 

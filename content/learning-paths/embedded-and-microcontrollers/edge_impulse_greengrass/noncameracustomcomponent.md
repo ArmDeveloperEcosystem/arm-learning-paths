@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Create the non-camera custom component
 
-For those edge devices that do not contain a camera, the following component will prepare the edge device with some sample images that can be referenced by the Edge Impulse "Runner" component's JSON configuration (via "gst\_args" settings) to direct the running model to pull its image data from the file (vs. camera). 
+For edge devices without a camera, this component provides sample images for the Edge Impulse Runner. Configure `gst_args` in the Runner component's JSON to use image data from a file instead of a camera.
 
 ### Clone the component repository
 
@@ -24,7 +24,7 @@ artifacts/EdgeImpulseRunnerRuntime/1.0.0/samples.tar.gz
 
 ### Copy the artifact files to Amazon S3
 
-From the AWS dashboard, select the S3 dashboard and navigate to the same bucket you created for the "Runner" custom component. 
+In the AWS Console, open Amazon S3 and navigate to the bucket you created for the Runner custom component.
 
 In that bucket, create the following directory structure:
 
@@ -32,7 +32,7 @@ In that bucket, create the following directory structure:
 artifacts/EdgeImpulseRunnerRuntime/1.0.0
 ```
 
-Within the 1.0.0 directory in S3, upload these files to S3 from your cloned repo (located in ./artifacts/EdgeImpulseRunnerRuntime/1.0.0 within your cloned repo):
+In the `1.0.0` directory in S3, upload these files from `./artifacts/EdgeImpulseRunnerRuntime/1.0.0` in your cloned repository:
 
 ```text
 install.sh
@@ -40,21 +40,21 @@ models.tar.gz
 samples.tar.gz
 ```
 
-Next, edit the `EdgeImpulseRunnerRuntimeInstallerComponent.yaml` and change the artifact location from "YOUR\_S3\_ARTIFACT\_BUCKET" to the actual name of your S3 bucket name (you'll see "YOUR\_S3\_ARTIFACT\_BUCKET" near the bottom of the yaml file). Save the file. 
+Edit `EdgeImpulseRunnerRuntimeInstallerComponent.yaml` and change the artifact location from "YOUR\_S3\_ARTIFACT\_BUCKET" to your S3 bucket name. You'll find "YOUR\_S3\_ARTIFACT\_BUCKET" near the end of the YAML file. Save the file.
 
 ### Register the custom component
 
-Within the AWS dashboard, go to the IoTCore dashboard, then navigate to "Components" under the "Greengrass devices" drop-down on the left hand side. 
+In the AWS Console, open **AWS IoT Core**. Under **Greengrass devices**, select **Components**.
 
 ![AWS IoT Greengrass components page with the Create component button available#center](./images/gg_create_nc_component_1.png)
 
-Press "Create Component" and select "YAML" as the recipe format type. 
+Select **Create component**, then select **YAML** as the recipe format.
 
-Copy and paste the contents of your updated/modified file `EdgeImpulseRunnerRuntimeInstallerComponent.yaml` into the text window after clearing the initial contents:
+Clear the initial contents of the recipe editor, then paste the contents of your updated `EdgeImpulseRunnerRuntimeInstallerComponent.yaml` file:
 
 ![AWS IoT Greengrass component creation page with the YAML recipe editor ready for the component recipe#center](./images/gg_create_nc_component_2.png)
 
-Finally, press "Create Component" and you should now have 2 custom components registered:
+Select **Create component**. The registered component list now contains two custom components:
 
 ![AWS IoT Greengrass registered component list showing the two custom components#center](./images/gg_create_nc_component_3.png)
 
@@ -62,6 +62,4 @@ Finally, press "Create Component" and you should now have 2 custom components re
 
 You've created the non-camera support component and registered it in AWS IoT Greengrass.
 
-Now that the non-camera support component is created, return to the deployment steps and continue with deploying these components to your edge device via the AWS IoT Greengrass deployment mechanism.
-
-Return to the [component deployment steps](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/customcomponentdeployment/) to continue.
+Return to the [component deployment steps](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/customcomponentdeployment/) to deploy these components to your edge device through AWS IoT Greengrass.

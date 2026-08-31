@@ -7,28 +7,28 @@ description: Prepare an NVIDIA Jetson device with JetPack and the dependencies r
 layout: learningpathall
 ---
 
-## Set up an Nvidia Jetson with Jetpack
+## Set up an NVIDIA Jetson with JetPack
 
-Nvidia Jetson boards (Nano, Xavier, Orin) provide GPU-accelerated inference for Edge Impulse models. This section covers prerequisites, dependency installation, and the component configuration for running the Edge Impulse Runner on a Jetson device with AWS IoT Greengrass.
+NVIDIA Jetson boards (Nano, Xavier, Orin) provide GPU-accelerated inference for Edge Impulse models. This section covers prerequisites, dependency installation, and the component configuration for running the Edge Impulse Runner on a Jetson device with AWS IoT Greengrass.
 
 ### Prerequisites
 
 Before you begin, make sure you have:
 
-- An Nvidia Jetson board with a power supply.
-- Jetpack 5.x or 6.0 already flashed onto the device. If you haven't done this yet, follow the [Nvidia Jetson flashing instructions](https://docs.nvidia.com/jetson/archives/r34.1/DeveloperGuide/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/flashing.html).
-- A network connection (Ethernet or Wi-Fi) and SSH access to the device.
-- Optional: a USB camera for live inference. Without a camera, the Runner uses a sample video file instead.
+- NVIDIA Jetson board with a power supply
+- JetPack 5.x or 6.0 already flashed onto the device; if needed, follow the [NVIDIA Jetson flashing instructions](https://docs.nvidia.com/jetson/archives/r34.1/DeveloperGuide/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/flashing.html)
+- Network connection (Ethernet or Wi-Fi) and SSH access to the device
+- Optional USB camera for live inference; without a camera, the Runner uses a sample video file
 
-### Verify Jetpack version
+### Verify JetPack version
 
-After booting the Jetson, confirm which Jetpack version is installed:
+After booting the Jetson, confirm which JetPack version is installed:
 
 ```bash
 cat /etc/nv_tegra_release
 ```
 
-You should see output that indicates L4T (Linux for Tegra) version 34.x or later for Jetpack 5.x, or version 36.x for Jetpack 6.0.
+The expected result indicates L4T (Linux for Tegra) version 34.x or later for JetPack 5.x, or version 36.x for JetPack 6.0.
 
 ### Connect over SSH
 
@@ -70,11 +70,17 @@ If you have a USB camera connected, confirm the system detects it:
 ls /dev/video*
 ```
 
-You should see at least `/dev/video0` in the output. If nothing appears, check that the camera is plugged in securely and try a different USB port.
+The output is similar to:
 
-### Jetpack 6.x note on GPU access
+```output
+/dev/video0
+```
 
-If your device is running Jetpack 6.x or later, the `render` group is required for the Greengrass service user to access the GPU. Both JSON configurations below already include `render` in the `ei_ggc_user_groups` field. If you're running Jetpack 5.x, you can remove `render` from that field, though leaving it in place doesn't cause issues.
+If nothing appears, check that the camera is plugged in securely and try a different USB port.
+
+### JetPack 6.x note on GPU access
+
+If your device is running JetPack 6.x or later, the `render` group is required for the Greengrass service user to access the GPU. Both JSON configurations already include `render` in the `ei_ggc_user_groups` field. If you're running JetPack 5.x, you can remove `render` from that field, though leaving it in place doesn't cause issues.
 
 ### Save the component configuration
 
@@ -82,7 +88,7 @@ The JSON configurations below set up the Edge Impulse Greengrass component for t
 
 #### With a USB camera
 
-This configuration captures live video from `/dev/video0` at 640x480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Runner runs as a background service.
+This configuration captures live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Runner runs as a background service.
 
 ```json
 {

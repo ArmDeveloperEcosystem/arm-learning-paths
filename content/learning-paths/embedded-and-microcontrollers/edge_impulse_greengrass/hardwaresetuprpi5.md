@@ -13,11 +13,11 @@ The Raspberry Pi 5 is a widely available Arm-based board with full support for b
 
 ### What you need
 
-- A Raspberry Pi 5 board with a power supply (USB-C, 5V/5A recommended).
-- A microSD card, 16 GB minimum (32 GB recommended for comfortable headroom).
-- A computer with an SD card reader to flash the OS image.
-- A network connection (Ethernet or Wi-Fi) for the Raspberry Pi 5.
-- Optional: a USB camera if you want to run live inference. Without a camera, the Runner uses a sample video file instead.
+- Raspberry Pi 5 board with a power supply (USB-C, 5 V and 5 A recommended)
+- microSD card, 16 GB minimum (32 GB recommended for comfortable headroom)
+- Computer with an SD card reader to flash the OS image
+- Network connection (Ethernet or Wi-Fi) for the Raspberry Pi 5
+- Optional USB camera for live inference; without a camera, the Runner uses a sample video file
 
 ### Flash Raspberry Pi OS
 
@@ -73,7 +73,7 @@ Greengrass Nucleus Classic is Java-based, so you also need a JDK:
 sudo apt install -y default-jdk
 ```
 
-It's also a good idea to install any available security patches:
+Install available security updates:
 
 ```bash
 sudo apt upgrade -y
@@ -87,7 +87,13 @@ If you have a USB camera connected, confirm the system detects it:
 ls /dev/video*
 ```
 
-You should see at least `/dev/video0` in the output. If nothing appears, check that the camera is plugged in securely and try a different USB port.
+The output is similar to:
+
+```output
+/dev/video0
+```
+
+If nothing appears, check that the camera is plugged in securely and try a different USB port.
 
 ### Save the component configuration
 
@@ -95,7 +101,7 @@ The JSON configurations below set up the Edge Impulse Greengrass component for t
 
 #### With a USB camera
 
-This configuration uses `gst_args` to capture live video from `/dev/video0` at 640x480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Runner runs as a background service.
+This configuration uses `gst_args` to capture live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Runner runs as a background service.
 
 ```json
 {

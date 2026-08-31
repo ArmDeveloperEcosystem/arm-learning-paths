@@ -39,13 +39,13 @@ If your device doesn't have a camera, the component plays a pre-installed 90-sec
 
 ![Browser view showing inference results from a video file with a cat detected#center](./images/cats_expected.png "Expected inference results without camera")
 
-If the image appears frozen, the Edge Impulse Linux Runner has finished playing the video. The Edge Impulse Linux Runner is waiting for a `restart` command to replay the video file. The section below explains how to send this command through AWS IoT Core.
+If the image appears frozen, the Runner has finished playing the video and is waiting for a `restart` command. The **Send commands through AWS IoT Core** task explains how to replay the video.
 
 ## View inference output in AWS IoT Core
 
 The Edge Impulse Linux Runner publishes inference results and model metrics to AWS IoT Core MQTT topics. You can view these messages in the AWS Console.
 
-Open the AWS Console and navigate to **AWS IoT Core**. Select **MQTT test client** from the left sidebar.
+Open the AWS Console and navigate to **AWS IoT Core**. Select **MQTT test client**.
 
 In the **Subscribe to a topic** section, enter the following topic filter and select **Subscribe**:
 
@@ -53,7 +53,7 @@ In the **Subscribe to a topic** section, enter the following topic filter and se
 /edgeimpulse/device/#
 ```
 
-For devices with cameras, inference results appear whenever the model identifies an object. The output looks similar to this:
+For devices with cameras, inference results appear whenever the model identifies an object. The output is similar to:
 
 ![MQTT test client showing JSON inference output with bounding box coordinates, labels, and confidence scores#center](./images/ei_inference_output.png "Inference output in MQTT test client")
 
@@ -63,7 +63,7 @@ Model metrics are published periodically (controlled by the `metrics_sleeptime_m
 
 ## Send commands through AWS IoT Core
 
-The Edge Impulse Greengrass component supports commands sent through MQTT topics. One common command is `restart`, which restarts the Edge Impulse Linux Runner service. This is especially useful for devices without cameras, where the Edge Impulse Linux Runner pauses after the video ends.
+The Edge Impulse Greengrass component supports commands sent through MQTT topics. The `restart` command restarts the Runner service. This is especially useful for devices without cameras, where it pauses after the video ends.
 
 ### Find your device name
 
@@ -111,14 +111,14 @@ After publishing, you should see a response on the command output topic:
 The response confirms that the Edge Impulse Linux Runner has restarted. Navigate back to `http://<your-edge-device-ip>:4912` in your browser to confirm inference has resumed. You should also see new inference results appearing in the MQTT test client.
 
 {{% notice Note %}}
-For devices without cameras, the Edge Impulse Linux Runner reads the sample video file and reports inferences until the video ends. After that, the Edge Impulse Linux Runner waits for a `restart` command to replay the video. Sending the restart command causes the Edge Impulse Linux Runner to start the video from the beginning.
+For devices without cameras, the Runner reads the sample video file and reports inferences until the video ends. It then waits for a `restart` command to replay the video from the beginning.
 {{% /notice %}}
 
 ## Troubleshooting
 
 If the Edge Impulse Linux Runner doesn't start or the browser page doesn't load, check the following:
 
-**First deployment takes time**: On the first deployment, the component installs all prerequisites (Node.js, libvips, Edge Impulse CLI). `This can take 5–10 minutes.` Monitor progress by tailing the component log on your device:
+**First deployment takes time**: On the first deployment, the component installs all prerequisites (Node.js, libvips, Edge Impulse CLI). This can take 5–10 minutes. Monitor progress by tailing the component log on your device:
 
 ```bash
 sudo tail -f /greengrass/v2/logs/EdgeImpulseLinuxRunnerServiceComponent.log
@@ -130,7 +130,7 @@ sudo tail -f /greengrass/v2/logs/EdgeImpulseLinuxRunnerServiceComponent.log
 sudo tail -f /tmp/ei_lockfile_runner_*.log
 ```
 
-**Jetson GPU model loading**: On Jetson devices where the model is compiled for GPU acceleration, `expect a 2–3 minute delay` the first time the model loads into GPU memory. Subsequent starts are much faster.
+**Jetson GPU model loading**: On Jetson devices where the model is compiled for GPU acceleration, expect a 2–3 minute delay the first time the model loads into GPU memory. Subsequent starts are much faster.
 
 ## What you've accomplished
 

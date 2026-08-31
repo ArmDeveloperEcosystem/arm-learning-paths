@@ -15,10 +15,10 @@ The Qualcomm Dragonwing QC6490 is an Arm-based platform that supports both the o
 
 Before you begin, make sure you have:
 
-- A Qualcomm Dragonwing QC6490 development board with a power supply.
-- Ubuntu flashed onto the device per the [Qualcomm QC6490 quick start guide](https://docs.qualcomm.com/doc/80-90441-1/topic/qsg-landing-page.html).
-- A network connection (Ethernet or Wi-Fi) and SSH access to the device.
-- Optional: the on-board Qualcomm camera module or a USB camera for live inference. Without a camera, the Runner uses a sample video file instead.
+- Qualcomm Dragonwing QC6490 development board with a power supply
+- Ubuntu flashed onto the device according to the [Qualcomm QC6490 quick start guide](https://docs.qualcomm.com/doc/80-90441-1/topic/qsg-landing-page.html)
+- Network connection (Ethernet or Wi-Fi) and SSH access to the device
+- Optional on-board Qualcomm camera module or USB camera for live inference; without a camera, the Runner uses a sample video file
 
 ### Connect over SSH
 
@@ -38,7 +38,7 @@ Confirm the device is running Ubuntu on aarch64:
 uname -a
 ```
 
-The output should show `aarch64` as the architecture and an Ubuntu kernel version.
+The expected result shows `aarch64` as the architecture and an Ubuntu kernel version.
 
 ### Install dependencies
 
@@ -74,7 +74,13 @@ The QC6490 supports two types of cameras. The type you have determines which JSO
 ls /dev/video*
 ```
 
-You should see at least `/dev/video0` in the output. If nothing appears, check that the camera is plugged in securely and try a different USB port.
+The output is similar to:
+
+```output
+/dev/video0
+```
+
+If nothing appears, check that the camera is plugged in securely and try a different USB port.
 
 ### Save the component configuration
 
@@ -82,7 +88,7 @@ The JSON configurations below set up the Edge Impulse Greengrass component for t
 
 #### With the on-board Qualcomm camera
 
-This configuration uses the `qtiqmmfsrc` GStreamer element to capture video from the on-board camera at 1280x720 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Runner runs as a background service.
+This configuration uses the `qtiqmmfsrc` GStreamer element to capture video from the on-board camera at 1280 × 720 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Runner runs as a background service.
 
 ```json
 {
@@ -120,7 +126,7 @@ This configuration uses the `qtiqmmfsrc` GStreamer element to capture video from
 
 #### With a USB-attached camera
 
-This configuration uses the standard `v4l2src` GStreamer element to capture video from a USB camera at 640x480 resolution. Use this if your QC6490 board doesn't have a built-in camera module, or if you prefer to use an external USB camera.
+This configuration uses the standard `v4l2src` GStreamer element to capture video from a USB camera at 640 × 480 resolution. Use this if your QC6490 board doesn't have a built-in camera module, or if you prefer to use an external USB camera.
 
 ```json
 {

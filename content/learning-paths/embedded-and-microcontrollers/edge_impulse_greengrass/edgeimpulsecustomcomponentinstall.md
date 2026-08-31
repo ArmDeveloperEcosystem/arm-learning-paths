@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Overview
 
-AWS IoT Greengrass uses *custom components* to package and deploy software to edge devices. In this section, you create a custom component that installs and runs the Edge Impulse Runner service on your device. The component handles all prerequisites (Node.js, libvips) and manages the Runner lifecycle — install, run, and shutdown.
+Create an AWS IoT Greengrass custom component that installs and runs the Edge Impulse Runner service on your device. The component handles the Node.js and libvips prerequisites and manages the Runner lifecycle: install, run, and shutdown.
 
 The component consists of two parts:
 - **Artifacts**: Shell scripts (stored in S3) that install dependencies and launch the Runner.
@@ -94,7 +94,7 @@ The recipe file includes a default configuration JSON block. You don't need to m
 
 ### Configuration field reference
 
-The table below describes each configuration field:
+The following table describes each configuration field:
 
 | Field | Description |
 |---|---|
@@ -109,15 +109,15 @@ The table below describes each configuration field:
 | `iotcore_backoff` | Number of inference results to skip between MQTT publications. Controls publication frequency and cost. Set to `-1` to publish every result, or a positive number to throttle. |
 | `iotcore_qos` | MQTT Quality of Service level. Leave as `1`. |
 | `ei_bindir` | Installation directory for the Edge Impulse CLI tools. Leave as default. |
-| `ei_sm_secret_id` | Secret ID in AWS Secrets Manager that holds the Edge Impulse API key. Must match the secret name you created (`EI_API_KEY`). |
-| `ei_sm_secret_name` | Key name within the Secrets Manager secret. Must match the key you created (`ei_api_key`). |
-| `ei_ggc_user_groups` | Linux groups the Greengrass service user (`ggc_user`) is added to. For Jetpack 6.x and later, add `render` to this list for GPU access. |
+| `ei_sm_secret_id` | Secret ID in AWS Secrets Manager that holds the Edge Impulse API key. It must match the secret name you created, `EI_API_KEY`. |
+| `ei_sm_secret_name` | Key name within the Secrets Manager secret. It must match the key you created, `ei_api_key`. |
+| `ei_ggc_user_groups` | Linux groups that include the Greengrass service user, `ggc_user`. For JetPack 6.x and later, add `render` to this list for GPU access. |
 | `install_kvssink` | Set to `yes` to build and install the KVS sink GStreamer plugin. Default: `no`. |
 | `publish_inference_base64_image` | Set to `yes` to include a base64-encoded image with each inference result published to MQTT. Default: `no`. |
 | `enable_cache_to_file` | Set to `yes` to write inference results and associated images to a local directory as paired files (`<guid>.json` and `<guid>.img`). Default: `no`. |
 | `cache_file_directory` | Local directory path for cached files when `enable_cache_to_file` is `yes`. Default: `__none__`. |
 | `ei_poll_sleeptime_ms` | Polling interval in milliseconds for the long-polling message processor. Leave as default. |
-| `ei_local_model_file` | Path to a previously downloaded local model file (`.eim`). Set to `__none__` to download the model from Edge Impulse at runtime. In this learning path, we will set it to (`/home/ggc_user/data/currentModel.eim`) |
+| `ei_local_model_file` | Path to a previously downloaded local model file, `.eim`. Set to `__none__` to download the model from Edge Impulse at runtime. In this Learning Path, you set it to `/home/ggc_user/data/currentModel.eim`. |
 | `ei_shutdown_behavior` | Controls Runner behavior after the model finishes. Set to `wait_on_restart` to pause after a video file ends and wait for a restart command. Default: `__none__`. |
 | `enable_threshold_limit` | Set to `yes` to enable the confidence threshold filter. Default: `no`. |
 | `metrics_sleeptime_ms` | Interval in milliseconds between model metrics publications. Default: `30000`. |

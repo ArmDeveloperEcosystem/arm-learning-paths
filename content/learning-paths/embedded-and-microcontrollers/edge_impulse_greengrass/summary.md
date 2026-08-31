@@ -346,7 +346,7 @@ Clears all inference image caches. This command respects the component configura
 }
 ```
 
-**Result:**
+The output is similar to:
 
 ```json
 {
@@ -372,7 +372,7 @@ Removes a specific cached inference result by its UUID. Like `clear_cache`, this
 }
 ```
 
-**Result:**
+The output is similar to:
 
 ```json
 {
