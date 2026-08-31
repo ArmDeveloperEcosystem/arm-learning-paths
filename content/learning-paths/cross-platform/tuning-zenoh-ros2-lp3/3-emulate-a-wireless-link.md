@@ -20,7 +20,7 @@ source ~/workshop_env.bash
 just network_limit
 ```
 
-The output shows the emulated link parameters:
+The output is similar to:
 
 ```output
 WiFi medium connection simulation applied to 172.1.0.3:

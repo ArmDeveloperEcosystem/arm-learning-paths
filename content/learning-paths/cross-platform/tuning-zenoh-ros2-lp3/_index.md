@@ -16,7 +16,7 @@ learning_objectives:
 prerequisites:
     - The ROS 2 simulation environment from [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/), with the `robot` and `control` containers available
     - The distributed Zenoh configuration from [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/), with the `control` container connected in client mode
-    - An **Arm server** with the Docker Compose configuration used in Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/) and [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/)
+    - An **Arm server** with the Docker Compose configuration used in [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/) and [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/)
     - A **Raspberry Pi** connected over Wi-Fi
     - Familiarity with ROS 2 topics, Docker, and basic Linux commands
 

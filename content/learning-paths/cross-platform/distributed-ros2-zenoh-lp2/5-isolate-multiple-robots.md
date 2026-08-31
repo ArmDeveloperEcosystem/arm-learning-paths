@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Why isolation is required
 
-After verifying cross-device communication, you'll learn why you need to analyze ROS 2 robots that share the same Zenoh router and optionally resolve collision.
+After verifying cross-device communication, isolate multiple ROS 2 robots that share a Zenoh router and resolve a collision with a second edge device.
 
 If two robots publish and subscribe with the same names, their ROS 2 graphs overlap. For example, a velocity command published on `/cmd_vel` could be received by both robots.
 There are three ways to separate them, at different layers:
@@ -43,7 +43,7 @@ ros2 node list
 ros2 topic info /chatter
 ```
 
-You should see two nodes sharing the name `/talker`, and `/chatter` reports two publishers:
+You should see two nodes sharing the name `/talker`, and `/chatter` reports two publishers. The expected output is:
 
 
 ```output
@@ -60,7 +60,7 @@ export ROS_DOMAIN_ID=42
 ros2 run demo_nodes_cpp talker
 ```
 
-The robot container, still on the default ROS domain, sees a single `/talker` and one publisher:
+The robot container, still on the default ROS domain, sees a single `/talker` and one publisher. The expected output is:
 
 ```output
 Type: std_msgs/msg/String

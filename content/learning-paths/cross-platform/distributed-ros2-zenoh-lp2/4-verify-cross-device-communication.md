@@ -18,7 +18,7 @@ ros2 daemon stop
 ros2 topic list
 ```
 
-The output is a full topic list with roughly 80 entries, including:
+The command lists roughly 80 topics, including these examples. The output is similar to:
 
 ```output
 /camera/image_raw
@@ -65,7 +65,7 @@ source ~/workshop_env.bash
 ros2 run demo_nodes_cpp listener
 ```
 
-The listener running in the robot container should receive messages published by the talker running in the Raspberry Pi container:
+The listener running in the robot container should receive messages published by the talker running in the Raspberry Pi container. The output is similar to:
 
 ```output
 [INFO] [listener]: I heard: [Hello World: 1]

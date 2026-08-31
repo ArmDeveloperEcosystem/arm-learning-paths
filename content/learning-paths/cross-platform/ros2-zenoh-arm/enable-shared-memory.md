@@ -53,12 +53,16 @@ Both files contain multiple `enabled` fields. In both `ROUTER_CONFIG.json5` and 
 
 The router and ROS 2 sessions read these files when their processes start. 
 
-Stop the router and simulation processes with **Ctrl+C**, then restart them so they load the updated setting:
+Stop the router and simulation processes with **Ctrl+C**, then restart them so they load the updated setting.
+
+Restart the router in the first bash shell:
 
 ```bash
 # Router bash shell
 just router
 ```
+
+Restart the simulation in the second bash shell:
 
 ```bash
 # Simulation bash shell
@@ -121,6 +125,6 @@ Confirm that the router is running, the simulation starts without errors, and Na
 
 ## What you've accomplished
 
-You've built a ROS 2 Jazzy simulation environment on an Arm server, observed Zenoh discovery behaviour, navigated and controlled a Neobotix ROX robot, measured resource use, and compared TCP-loopback communication with shared-memory transport.
+You've built a ROS 2 Jazzy simulation environment on an Arm server, observed Zenoh discovery behavior, navigated and controlled a Neobotix ROX robot, measured resource use, and compared TCP-loopback communication with shared-memory transport.
 
 Next, complete the [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/) Learning Path.

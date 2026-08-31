@@ -100,7 +100,7 @@ just iftop_router
 
 The command monitors traffic leaving the Zenoh router on TCP port `7447`. Each remote `ros2 topic` process creates a separate connection, so you should see three active connections.
 
-At the end of the display, `iftop` reports three TX rates:
+At the end of the display, `iftop` reports three TX rates. The output is similar to:
 
 ```output
 TX:  rates: 813Mb  819Mb  832Mb

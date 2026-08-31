@@ -48,7 +48,7 @@ In the third shell, start the listener:
 ros2 run demo_nodes_cpp listener
 ```
 
-The listener should receive every message published by the talker:
+The listener should receive every message published by the talker. The output is similar to:
 
 ```output
 [INFO] [listener]: I heard: [Hello World: 9]

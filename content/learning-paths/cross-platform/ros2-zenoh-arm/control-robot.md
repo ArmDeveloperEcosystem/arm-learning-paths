@@ -1,5 +1,5 @@
 ---
-title: Control the robot directly
+title: Control the Neobotix ROX robot with ROS 2
 description: Publish velocity commands to the Neobotix ROX base with teleoperation or ROS 2, then verify movement through odometry.
 weight: 7
 
@@ -62,7 +62,7 @@ The `x` position should advance when the robot moves. The output is similar to:
       x: 0.3899999883542309
 ```
 
-On the supplied reference system, a 3-second command at `0.2 m/s` moved the robot from approximately `x = 0` to `x = 0.39 m`. This value is an example, not an exact target. Acceleration behaviour and the robot's starting position affect the result.
+On the supplied reference system, a 3-second command at `0.2 m/s` moved the robot from approximately `x = 0` to `x = 0.39 m`. This value is an example, not an exact target. Acceleration behavior and the robot's starting position affect the result.
 
 {{% notice Note %}}
 The UR10 arm on the ROX uses a `JointTrajectory` action rather than `Twist`. Publishing `Twist` to the base and `JointTrajectory` to the arm follows the standard ROS interface for each mechanism.

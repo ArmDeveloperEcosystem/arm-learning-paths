@@ -11,7 +11,7 @@ learning_objectives:
     - Set up a Docker-based ROS 2 Jazzy development and simulation environment on an Arm server
     - Configure rmw_zenoh as the ROS 2 middleware and explore communication between ROS 2 nodes
     - Launch and interact with a Neobotix ROX robot simulation using Gazebo, Navigation2, and RViz
-    - Evaluate Zenoh router behaviour and the effect of shared-memory transport
+    - Evaluate Zenoh router behavior and the effect of shared-memory transport
 
 prerequisites:
     - An Arm server running Linux with at least 8 CPU cores, 16 GB of RAM, and 30 GB of free disk space

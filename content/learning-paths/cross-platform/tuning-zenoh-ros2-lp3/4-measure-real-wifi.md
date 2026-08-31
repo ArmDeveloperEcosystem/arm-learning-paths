@@ -7,7 +7,7 @@ description: Measure Zenoh policy effects on ROS 2 sensor traffic between an Arm
 layout: learningpathall
 ---
 
-## Connect Raspberry Pi over Wi-Fi
+## Connect the Raspberry Pi over Wi-Fi
 
 In the first experiment, you used the Docker network and the `robot` and `control` containers to emulate a wireless link. You'll now connect your Raspberry Pi to the same Wi-Fi network as the Arm server. You'll use the real Wi-Fi connection to test the same policy changes as the first experiment.
 
@@ -43,9 +43,13 @@ Run one receiver command in each bash shell that has been opened in the `pi_edge
 ros2 topic hz /scan
 ```
 
+Measure the camera image rate in the second shell:
+
 ```bash
 ros2 topic hz /camera/image_raw
 ```
+
+Measure the point-cloud bandwidth in the third shell:
 
 ```bash
 ros2 topic bw /camera/points
@@ -93,7 +97,7 @@ Compression allows the camera images to fit the real Wi-Fi link, restoring the s
 
 Stop the compression measurements and `iftop`. In the router configuration, disable compression and enable only the `downsampling` block. Keep `access_control` and `qos` commented out.
 
-The current Pi shells still contain the compression override. Exit each of the three container shells into `pi_edge` and open fresh ones. Then, source ROS 2:
+Exit the current three `pi_edge` container shells. Open fresh `pi_edge` shells, then source ROS 2 in each one:
 
 ```bash
 exit

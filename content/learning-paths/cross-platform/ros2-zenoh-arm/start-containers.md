@@ -80,7 +80,7 @@ Open the browser desktops and sign in with the password `ubuntu`:
 Don't expose ports `6080`, `6081`, or `7447` directly to the public internet from your Arm server. Use a private network, VPN, SSH tunnel, or restrictive firewall or security-group rules so that only trusted clients can reach these services.
 {{% /notice %}}
 
-![Browser showing the Ubuntu desktop running inside the robot container through noVNC.](images/robot-desktop.webp)
+![Browser showing the Ubuntu desktop running inside the robot container through noVNC. Use this desktop to run the ROS 2 and Zenoh commands in the robot container#center](images/robot-desktop.webp)
 
 The container network uses the following addresses:
 

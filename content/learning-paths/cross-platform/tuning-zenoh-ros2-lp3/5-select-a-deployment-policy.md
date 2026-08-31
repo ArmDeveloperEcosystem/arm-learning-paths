@@ -1,5 +1,5 @@
 ---
-title: Select a deployment policy
+title: Select a Zenoh deployment policy for ROS 2 over Wi-Fi
 weight: 6
 
 description: Select a Zenoh deployment policy for remote monitoring, large-message delivery, or constrained camera traffic.
@@ -35,6 +35,6 @@ Set the forwarded image rate less than the sustained capacity of the link. This 
 
 ## What you've accomplished
 
-You've learned what Zenoh deployment policy you should select depending on your application requirements. 
+Choose the Zenoh deployment policy that matches your application requirements.
 
 Apply the policy that matches your deployment, then use this measurement workflow to validate its results.

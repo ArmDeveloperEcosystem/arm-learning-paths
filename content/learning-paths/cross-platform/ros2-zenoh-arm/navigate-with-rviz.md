@@ -35,7 +35,7 @@ Wait for the map and costmaps to render. The light blue area represents free spa
 To send a navigation goal:
 
 1. Select **Nav2 Goal** in the toolbar.
-2. Move your pointer onto the mapped area in the centre.
+2. Move your pointer onto the mapped area in the center.
 3. Select and hold a position in the free, light-blue area where you want the robot to go.
 4. While holding the mouse button, drag a short distance in the direction you want the robot to face. An arrow appears.
 5. Release the mouse button.
