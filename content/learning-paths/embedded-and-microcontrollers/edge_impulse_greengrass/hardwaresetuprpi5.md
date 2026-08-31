@@ -23,7 +23,7 @@ The Raspberry Pi 5 is a widely available Arm-based board with full support for b
 
 Download and install the [Raspberry Pi Imager](https://www.raspberrypi.com/software/) on your computer.
 
-![Raspberry Pi Imager application showing the main screen with device, OS, and storage selection fields#center](./images/RPi_Imager.png "Raspberry Pi Imager")
+![Raspberry Pi Imager application showing the main screen with device, OS, and storage selection fields#center](./images/rpi_imager.png "Raspberry Pi Imager")
 
 Open the Imager and configure the following:
 

@@ -41,7 +41,7 @@ In each case, Edge Impulse handles the ML model, Greengrass handles deployment a
 
 The Edge Impulse integration with AWS IoT Core and AWS IoT Greengrass is structured as follows:
 
-![Architecture diagram showing the Edge Impulse Runner on an Arm edge device publishing inference results and model metrics to AWS IoT Core through the Greengrass integration#center](images/Architecture.png "Edge Impulse and AWS IoT Greengrass architecture")
+![Architecture diagram showing the Edge Impulse Runner on an Arm edge device publishing inference results and model metrics to AWS IoT Core through the Greengrass integration#center](images/architecture.png "Edge Impulse and AWS IoT Greengrass architecture")
 
 The key elements of this architecture are:
 
