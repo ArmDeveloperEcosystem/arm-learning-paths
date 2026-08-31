@@ -32,6 +32,7 @@ rerun_faqs: false
 shared_path: true
 shared_between:
     - automotive
+    - embedded-and-microcontrollers
 
 ### Tags
 skilllevels: Introductory
