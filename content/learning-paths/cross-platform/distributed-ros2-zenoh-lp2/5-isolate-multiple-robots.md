@@ -9,8 +9,6 @@ layout: learningpathall
 
 ## Why isolation is required
 
-After verifying cross-device communication, isolate multiple ROS 2 robots that share a Zenoh router and resolve a collision with a second edge device.
-
 If two robots publish and subscribe with the same names, their ROS 2 graphs overlap. For example, a velocity command published on `/cmd_vel` could be received by both robots.
 There are three ways to separate them, at different layers:
 

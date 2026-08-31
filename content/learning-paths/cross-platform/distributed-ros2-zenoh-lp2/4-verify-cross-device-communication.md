@@ -18,7 +18,7 @@ ros2 daemon stop
 ros2 topic list
 ```
 
-The command lists roughly 80 topics, including these examples. The output is similar to:
+The command lists roughly 80 topics, including the following:
 
 ```output
 /camera/image_raw

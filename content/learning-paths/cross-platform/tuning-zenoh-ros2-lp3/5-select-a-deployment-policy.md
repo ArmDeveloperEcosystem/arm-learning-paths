@@ -35,6 +35,6 @@ Set the forwarded image rate less than the sustained capacity of the link. This 
 
 ## What you've accomplished
 
-Choose the Zenoh deployment policy that matches your application requirements.
+You've learned what Zenoh deployment policy you should select depending on your application requirements.
 
 Apply the policy that matches your deployment, then use this measurement workflow to validate its results.

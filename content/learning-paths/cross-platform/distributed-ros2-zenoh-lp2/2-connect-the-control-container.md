@@ -74,7 +74,7 @@ echo $RMW_IMPLEMENTATION
 echo $ZENOH_SESSION_CONFIG_URI
 ```
 
-The expected output is:
+The expected output includes:
 
 ```output
 rmw_zenoh_cpp
