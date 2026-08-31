@@ -5,7 +5,7 @@ minutes_to_complete: 120
 
 description: Measure ROS 2 sensor traffic, tune Zenoh with compression, access control, downsampling, and QoS, and select a suitable wireless deployment policy.
 
-who_is_this_for: This Learning Path is for robotics developers who want to understand how Zenoh manages ROS 2 sensor traffic over Wi-Fi. You should already have basic experience setting up and distributing a ROS 2 Jazzy system with rmw_zenoh, as covered in the previous Learning Paths in this series.
+who_is_this_for: This Learning Path is for robotics developers who want to understand how Zenoh manages ROS 2 sensor traffic over Wi-Fi. 
 
 learning_objectives:
     - Measure the rate, bandwidth, and regularity of ROS 2 sensor data at a remote receiver
@@ -16,7 +16,7 @@ learning_objectives:
 prerequisites:
     - The ROS 2 simulation environment from [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/), with the `robot` and `control` containers available
     - The distributed Zenoh configuration from [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/), with the `control` container connected in client mode
-    - An **Arm server** with the Docker Compose configuration used in Learning Paths 1 and 2
+    - An **Arm server** with the Docker Compose configuration used in Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/) and [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/)
     - A **Raspberry Pi** connected over Wi-Fi
     - Familiarity with ROS 2 topics, Docker, and basic Linux commands
 
@@ -35,10 +35,10 @@ generated_summary_faq:
   faq_generated_at: '2026-08-31T16:20:42Z'
   faq_source_hash: fceb2d9bb41f1efe4abf9c5c797503597be212dbf55059b06506247a9f1990c3
   summary: >-
-    You measure ROS 2 sensor traffic, emulate a constrained wireless link, and tune Zenoh policies
-    to manage ROS 2 traffic over Wi-Fi. You first record baseline rates for `/scan`,
-    `/camera/image_raw`, and `/camera/points`. You then apply `tc` and `netem`, test compression,
-    access control, downsampling, and QoS, and compare the results. Finally, you repeat the policy
+    You'll measure ROS 2 sensor traffic, emulate a constrained wireless link, and tune Zenoh policies
+    to manage ROS 2 traffic over Wi-Fi. First, you'll record baseline rates for `/scan`,
+    `/camera/image_raw`, and `/camera/points` in a wireless emulation. Then, you'll apply `tc` and `netem`, test compression,
+    access control, downsampling, and quality of service (QoS), and compare the results. Finally, you'll repeat the policy
     tests with a Raspberry Pi over real Wi-Fi and choose a deployment policy.
   faqs:
   - question: How do I start and verify the ROS 2 and Zenoh environment before measuring?
@@ -48,7 +48,7 @@ generated_summary_faq:
   - question: Where do I run the network emulation command?
     answer: >-
       Open a terminal in the `robot` container desktop and run `source ~/workshop_env.bash`, followed
-      by `just network_limit`. You apply the `tc`/`netem` limits from within the container environment
+      by `just network_limit`. Apply the `tc`/`netem` limits from within the container environment
       used for the experiments.
   - question: How do I know the emulated wireless limits are active?
     answer: >-
@@ -61,8 +61,8 @@ generated_summary_faq:
       small. Prioritize compression or access control for the camera and point-cloud streams.
   - question: If I only need remote monitoring, which Zenoh settings should I use?
     answer: >-
-      Use compression for the camera stream. If you do not need point-cloud data, use access control
-      to block it; if you need complete point-cloud frames, use compression with the QoS `block_first`
+      Use compression for the camera stream. If you don't need point-cloud data, use access control
+      to block it. If you need complete point-cloud frames, use compression with the QoS `block_first`
       policy.
 # END generated_summary_faq
 
