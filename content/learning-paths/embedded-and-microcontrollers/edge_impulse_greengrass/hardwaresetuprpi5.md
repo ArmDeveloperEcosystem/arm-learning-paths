@@ -17,7 +17,7 @@ The Raspberry Pi 5 is a widely available Arm-based board with full support for b
 - microSD card, 16 GB minimum (32 GB recommended for comfortable headroom)
 - Computer with an SD card reader to flash the OS image
 - Network connection (Ethernet or Wi-Fi) for the Raspberry Pi 5
-- Optional USB camera for live inference; without a camera, the Runner uses a sample video file
+- Optional USB camera for live inference; without a camera, the Edge Impulse Linux Runner uses a sample video file
 
 ### Flash Raspberry Pi OS
 
@@ -59,7 +59,7 @@ ssh your-username@<your-rpi5-ip-address>
 
 ### Install dependencies
 
-Update the package list and install the build tools, Node.js, and GStreamer plugins that the Edge Impulse Runner requires:
+Update the package list and install the build tools, Node.js, and GStreamer plugins that the Edge Impulse Linux Runner requires:
 
 ```bash
 sudo apt update
@@ -101,7 +101,7 @@ The JSON configurations below set up the Edge Impulse Greengrass component for t
 
 #### With a USB camera
 
-This configuration uses `gst_args` to capture live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Runner runs as a background service.
+This configuration uses `gst_args` to capture live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Edge Impulse Linux Runner runs as a background service.
 
 ```json
 {
@@ -139,7 +139,7 @@ This configuration uses `gst_args` to capture live video from `/dev/video0` at 6
 
 #### Without a camera
 
-This configuration reads inference input from a local sample video file instead of a live camera feed. The `ei_local_model_file` field points to a pre-downloaded model, and `ei_shutdown_behavior` is set to `wait_on_restart` so the Runner pauses after the video ends and waits for a restart command.
+This configuration reads inference input from a local sample video file instead of a live camera feed. The `ei_local_model_file` field points to a pre-downloaded model, and `ei_shutdown_behavior` is set to `wait_on_restart` so the Edge Impulse Linux Runner pauses after the video ends and waits for a restart command.
 
 ```json
 {

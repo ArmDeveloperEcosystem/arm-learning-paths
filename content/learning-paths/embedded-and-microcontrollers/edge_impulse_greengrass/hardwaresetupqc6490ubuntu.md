@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Set up a Qualcomm Dragonwing QC6490 with Ubuntu
 
-The Qualcomm Dragonwing QC6490 is an Arm-based platform that supports both the on-board Qualcomm camera module and USB-attached cameras for live inference with Edge Impulse. This section covers prerequisites, dependency installation, and the component configuration for running the Edge Impulse Runner on a QC6490 device with AWS IoT Greengrass.
+The Qualcomm Dragonwing QC6490 is an Arm-based platform that supports both the on-board Qualcomm camera module and USB-attached cameras for live inference with Edge Impulse. This section covers prerequisites, dependency installation, and the component configuration for running the Edge Impulse Linux Runner on a QC6490 device with AWS IoT Greengrass.
 
 ### Prerequisites
 
@@ -18,7 +18,7 @@ Before you begin, make sure you have:
 - Qualcomm Dragonwing QC6490 development board with a power supply
 - Ubuntu flashed onto the device according to the [Qualcomm QC6490 quick start guide](https://docs.qualcomm.com/doc/80-90441-1/topic/qsg-landing-page.html)
 - Network connection (Ethernet or Wi-Fi) and SSH access to the device
-- Optional on-board Qualcomm camera module or USB camera for live inference; without a camera, the Runner uses a sample video file
+- Optional on-board Qualcomm camera module or USB camera for live inference; without a camera, the Edge Impulse Linux Runner uses a sample video file
 
 ### Connect over SSH
 
@@ -42,7 +42,7 @@ The expected result shows `aarch64` as the architecture and an Ubuntu kernel ver
 
 ### Install dependencies
 
-Update the package list and install the build tools, Node.js, and GStreamer plugins that the Edge Impulse Runner requires:
+Update the package list and install the build tools, Node.js, and GStreamer plugins that the Edge Impulse Linux Runner requires:
 
 ```bash
 sudo apt update
@@ -88,7 +88,7 @@ The JSON configurations below set up the Edge Impulse Greengrass component for t
 
 #### With the on-board Qualcomm camera
 
-This configuration uses the `qtiqmmfsrc` GStreamer element to capture video from the on-board camera at 1280 × 720 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Runner runs as a background service.
+This configuration uses the `qtiqmmfsrc` GStreamer element to capture video from the on-board camera at 1280 × 720 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Edge Impulse Linux Runner runs as a background service.
 
 ```json
 {
@@ -164,7 +164,7 @@ This configuration uses the standard `v4l2src` GStreamer element to capture vide
 
 #### Without a camera
 
-This configuration reads inference input from a local sample video file. The `ei_local_model_file` field points to a pre-downloaded model, and `ei_shutdown_behavior` is set to `wait_on_restart` so the Runner pauses after the video ends and waits for a restart command.
+This configuration reads inference input from a local sample video file. The `ei_local_model_file` field points to a pre-downloaded model, and `ei_shutdown_behavior` is set to `wait_on_restart` so the Edge Impulse Linux Runner pauses after the video ends and waits for a restart command.
 
 ```json
 {

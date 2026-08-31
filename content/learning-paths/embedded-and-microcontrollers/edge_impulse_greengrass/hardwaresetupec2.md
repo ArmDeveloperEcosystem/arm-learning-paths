@@ -46,7 +46,7 @@ Scroll down to **Network Settings** and select **Edit**:
 
 ![Network settings section of the EC2 launch wizard with an Edit button#center](./images/ec2_setup_4_ns.png "Edit network settings")
 
-Select **Add security group rule** and add a rule to allow inbound TCP traffic on port 4912. The Edge Impulse Runner serves a web-based inference viewer on this port, which you use later to confirm the model is running.
+Select **Add security group rule** and add a rule to allow inbound TCP traffic on port 4912. The Edge Impulse Linux Runner serves a web-based inference viewer on this port, which you use later to confirm the model is running.
 
 For both the SSH rule (port 22) and the port 4912 rule, restrict the source to your own IP address rather than allowing access from anywhere. To find your current public IP, run:
 
@@ -93,7 +93,7 @@ Keep this shell open. You'll use it in the following steps.
 
 ### Install dependencies
 
-The Edge Impulse Runner and AWS IoT Greengrass require several system packages. Update the package list and install the build tools, Node.js, and GStreamer plugins:
+The Edge Impulse Linux Runner and AWS IoT Greengrass require several system packages. Update the package list and install the build tools, Node.js, and GStreamer plugins:
 
 ```bash
 sudo apt update

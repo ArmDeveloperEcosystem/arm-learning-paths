@@ -106,7 +106,7 @@ The next step is to create an API key that connects the Greengrass component to 
 
 ## Create your project API key
 
-The Edge Impulse Runner on your device uses an API key to authenticate with your project and download the model. Select **Dashboard**:
+The Edge Impulse Linux Runner on your device uses an API key to authenticate with your project and download the model. Select **Dashboard**:
 
 ![Edge Impulse project dashboard with the Dashboard link highlighted in the left sidebar#center](./images/ei_key_1.webp "Project dashboard")
 

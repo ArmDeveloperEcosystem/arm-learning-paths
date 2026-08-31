@@ -1,4 +1,5 @@
 ---
+hide_from_navpane: true
 title: Command and metrics reference
 description: Review the MQTT commands and model metrics used to monitor and control the Edge Impulse Greengrass deployment.
 weight: 10
@@ -20,7 +21,7 @@ Commands are sent as JSON messages to the device's command input topic and resul
 
 All commands use the following JSON structure:
 
-```json
+```output
 {
    "cmd": "<command-verb>",
    "value": "<optional-value>"
@@ -31,7 +32,7 @@ The `value` field is only required for commands that set a value.
 
 ## Model metrics
 
-The Runner accumulates and publishes model metrics to IoT Core at the interval specified by the `metrics_sleeptime_ms` configuration parameter. Metrics are published to:
+The Edge Impulse Linux Runner accumulates and publishes model metrics to IoT Core at the interval specified by the `metrics_sleeptime_ms` configuration parameter. Metrics are published to:
 
 ```text
 /edgeimpulse/device/<device-name>/model/metrics
@@ -45,7 +46,7 @@ The published metrics include:
 
 The output is similar to:
 
-```json
+```output
 {
    "mean_confidence": 0.696142,
    "standard_deviation": 0.095282,
@@ -62,9 +63,9 @@ The output is similar to:
 
 ## Startup notification
 
-When the Runner starts or restarts, it publishes the following JSON to the command output topic:
+When the Edge Impulse Linux Runner starts or restarts, it publishes the following JSON to the command output topic:
 
-```json
+```output
 {
    "result": {
       "status": "started",
@@ -78,7 +79,7 @@ You can use this message to detect service restarts and re-apply any runtime cha
 
 ## `restart`
 
-Restarts the Edge Impulse Runner process. When used with the `ei_shutdown_behavior` option set to `wait_on_restart`, the Edge Impulse Linux Runner pauses after the model completes and waits for this command before restarting.
+Restarts the Edge Impulse Linux Runner process. When used with the `ei_shutdown_behavior` option set to `wait_on_restart`, the Edge Impulse Linux Runner pauses after the model completes and waits for this command before restarting.
 
 **Command:**
 
@@ -102,7 +103,7 @@ Enables the confidence threshold filter. When enabled, only inference results th
 
 The output is similar to:
 
-```json
+```output
 {
    "result": {
       "threshold_filter_config": {
@@ -128,7 +129,7 @@ Disables the confidence threshold filter. All inference results are published to
 
 The output is similar to:
 
-```json
+```output
 {
    "result": {
       "threshold_filter_config": {
@@ -163,7 +164,7 @@ Sets the comparison operator for the confidence threshold filter. The available 
 
 The output is similar to:
 
-```json
+```output
 {
    "result": {
       "criteria": "gt"
@@ -185,7 +186,7 @@ Retrieves the currently configured threshold filter criteria.
 
 The output is similar to:
 
-```json
+```output
 {
    "result": {
       "criteria": "gt"
@@ -208,7 +209,7 @@ Sets the confidence threshold value. Inference results are filtered against this
 
 The output is similar to:
 
-```json
+```output
 {
    "result": {
       "confidence_threshold": "0.756"
@@ -230,7 +231,7 @@ Retrieves the currently configured confidence threshold value.
 
 The output is similar to:
 
-```json
+```output
 {
    "result": {
       "confidence_threshold": "0.756"
@@ -252,7 +253,7 @@ Retrieves the complete threshold filter configuration, including enabled state, 
 
 The output is similar to:
 
-```json
+```output
 {
    "result": {
       "threshold_filter_config": {
@@ -278,7 +279,7 @@ Retrieves information about the currently running model, including its name, ver
 
 The output is similar to:
 
-```json
+```output
 {
    "result": {
       "model_info": {
@@ -326,7 +327,7 @@ Resets the accumulated model metrics counters to zero.
 
 The output is similar to:
 
-```json
+```output
 {
    "result": {
       "metrics_reset": "OK"
@@ -348,7 +349,7 @@ Clears all inference image caches. This command respects the component configura
 
 The output is similar to:
 
-```json
+```output
 {
    "result": {
       "clear_cache": {
@@ -374,7 +375,7 @@ Removes a specific cached inference result by its UUID. Like `clear_cache`, this
 
 The output is similar to:
 
-```json
+```output
 {
    "result": {
       "clear_cache_file": {
@@ -389,3 +390,5 @@ The output is similar to:
 ## What you've learned
 
 You can now use MQTT commands through AWS IoT Core to control the Edge Impulse Linux Runner in real time and interpret its model metrics.
+
+You can continue back to the [Completion](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/running) step of this Learning Path. 

@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Set up an NVIDIA Jetson with JetPack
 
-NVIDIA Jetson boards (Nano, Xavier, Orin) provide GPU-accelerated inference for Edge Impulse models. This section covers prerequisites, dependency installation, and the component configuration for running the Edge Impulse Runner on a Jetson device with AWS IoT Greengrass.
+NVIDIA Jetson boards (Nano, Xavier, Orin) provide GPU-accelerated inference for Edge Impulse models. This section covers prerequisites, dependency installation, and the component configuration for running the Edge Impulse Linux Runner on a Jetson device with AWS IoT Greengrass.
 
 ### Prerequisites
 
@@ -18,7 +18,7 @@ Before you begin, make sure you have:
 - NVIDIA Jetson board with a power supply
 - JetPack 5.x or 6.0 already flashed onto the device; if needed, follow the [NVIDIA Jetson flashing instructions](https://docs.nvidia.com/jetson/archives/r34.1/DeveloperGuide/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/flashing.html)
 - Network connection (Ethernet or Wi-Fi) and SSH access to the device
-- Optional USB camera for live inference; without a camera, the Runner uses a sample video file
+- Optional USB camera for live inference; without a camera, the Edge Impulse Linux Runner uses a sample video file
 
 ### Verify JetPack version
 
@@ -42,7 +42,7 @@ If you're not sure of the IP address, you can check your router's admin page for
 
 ### Install dependencies
 
-Update the package list and install the build tools, Node.js, and GStreamer plugins that the Edge Impulse Runner requires:
+Update the package list and install the build tools, Node.js, and GStreamer plugins that the Edge Impulse Linux Runner requires:
 
 ```bash
 sudo apt update
@@ -88,7 +88,7 @@ The JSON configurations below set up the Edge Impulse Greengrass component for t
 
 #### With a USB camera
 
-This configuration captures live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Runner runs as a background service.
+This configuration captures live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Edge Impulse Linux Runner runs as a background service.
 
 ```json
 {
@@ -126,7 +126,7 @@ This configuration captures live video from `/dev/video0` at 640 × 480 resoluti
 
 #### Without a camera
 
-This configuration reads inference input from a local sample video file. The `ei_local_model_file` field points to a pre-downloaded model, and `ei_shutdown_behavior` is set to `wait_on_restart` so the Runner pauses after the video ends and waits for a restart command.
+This configuration reads inference input from a local sample video file. The `ei_local_model_file` field points to a pre-downloaded model, and `ei_shutdown_behavior` is set to `wait_on_restart` so the Edge Impulse Linux Runner pauses after the video ends and waits for a restart command.
 
 ```json
 {
