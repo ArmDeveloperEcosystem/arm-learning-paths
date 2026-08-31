@@ -18,6 +18,54 @@ prerequisites:
     - A Raspberry Pi 4 or Raspberry Pi 5 (16 GB SD card or larger), aarch64, on the same network as the server
     - Familiarity with ROS 2 topics, Docker, and basic Linux command-line operations
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-31T16:18:50Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: e57d5914984dfe1275e9c9b22f373ae45646cc168eca88ebfe369f6eba6b421d
+  summary_generated_at: '2026-08-31T16:18:50Z'
+  summary_source_hash: e57d5914984dfe1275e9c9b22f373ae45646cc168eca88ebfe369f6eba6b421d
+  faq_generated_at: '2026-08-31T16:18:50Z'
+  faq_source_hash: e57d5914984dfe1275e9c9b22f373ae45646cc168eca88ebfe369f6eba6b421d
+  summary: >-
+    You extend a single-server ROS 2 system across an Arm server, a control container, and a
+    Raspberry Pi. You first understand Zenoh router and client roles, then configure the control
+    container and verify remote RViz communication. Next, you connect a 64-bit Raspberry Pi, start
+    its edge container, and verify graph discovery, sensor data, and bidirectional messages. You
+    finish by comparing ROS namespaces, `ROS_DOMAIN_ID`, and Zenoh namespaces for separating
+    multiple robots.
+  faqs:
+  - question: Which Zenoh roles do the server, control container, and Raspberry Pi use?
+    answer: >-
+      You use the Zenoh router in the `robot` container on the Arm server. You use a Zenoh client
+      session in the `control` container and another on the Raspberry Pi; both connect to that
+      router.
+  - question: How do I get the control container ID before configuring its Zenoh client session?
+    answer: >-
+      Run `docker ps` on the Arm server, find `ros_zenoh-control-1`, copy its `CONTAINER ID`, and
+      run `docker exec -it <container_id> /bin/bash` before editing the session configuration.
+  - question: Do I need to log out and back in after installing Docker on the Raspberry Pi?
+    answer: >-
+      Yes. After adding your user to the docker group, log out and log back in so the new group
+      membership takes effect.
+  - question: What result should I expect when I run `ros2 topic list` on the Raspberry Pi, and
+      what does it confirm?
+    answer: >-
+      Expect a full list of topics, roughly 80 entries, including `/camera/image_raw`, `/cmd_vel`,
+      `/map`, and `/scan`. This confirms that you have ROS 2 graph discovery through the Zenoh
+      client, but it doesn't by itself prove that message data is arriving.
+  - question: Which option should I use to prevent crosstalk when adding multiple robots?
+    answer: >-
+      Use ROS namespaces to keep robots distinguishable on a shared graph, separate `ROS_DOMAIN_ID`
+      values for complete isolation between groups, or a Zenoh namespace in the session configuration
+      to partition at the transport layer.
+# END generated_summary_faq
+
 author:
     - Odin Shen
     - Kwashie Andoh

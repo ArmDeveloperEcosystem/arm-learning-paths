@@ -1,10 +1,6 @@
 ---
 title: Tune Zenoh for ROS 2 traffic over wireless networks
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 120
 
 description: Measure ROS 2 sensor traffic, tune Zenoh with compression, access control, downsampling, and QoS, and select a suitable wireless deployment policy.
@@ -23,6 +19,52 @@ prerequisites:
     - An **Arm server** with the Docker Compose configuration used in Learning Paths 1 and 2
     - A **Raspberry Pi** connected over Wi-Fi
     - Familiarity with ROS 2 topics, Docker, and basic Linux commands
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-31T16:20:42Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: fceb2d9bb41f1efe4abf9c5c797503597be212dbf55059b06506247a9f1990c3
+  summary_generated_at: '2026-08-31T16:20:42Z'
+  summary_source_hash: fceb2d9bb41f1efe4abf9c5c797503597be212dbf55059b06506247a9f1990c3
+  faq_generated_at: '2026-08-31T16:20:42Z'
+  faq_source_hash: fceb2d9bb41f1efe4abf9c5c797503597be212dbf55059b06506247a9f1990c3
+  summary: >-
+    You measure ROS 2 sensor traffic, emulate a constrained wireless link, and tune Zenoh policies
+    to manage ROS 2 traffic over Wi-Fi. You first record baseline rates for `/scan`,
+    `/camera/image_raw`, and `/camera/points`. You then apply `tc` and `netem`, test compression,
+    access control, downsampling, and QoS, and compare the results. Finally, you repeat the policy
+    tests with a Raspberry Pi over real Wi-Fi and choose a deployment policy.
+  faqs:
+  - question: How do I start and verify the ROS 2 and Zenoh environment before measuring?
+    answer: >-
+      From the Arm server host, run `docker compose up -d` in `~/ros_zenoh`, then use `docker compose
+      ps`. Both services should report `Up` before you proceed.
+  - question: Where do I run the network emulation command?
+    answer: >-
+      Open a terminal in the `robot` container desktop and run `source ~/workshop_env.bash`, followed
+      by `just network_limit`. You apply the `tc`/`netem` limits from within the container environment
+      used for the experiments.
+  - question: How do I know the emulated wireless limits are active?
+    answer: >-
+      `just network_limit` prints the applied parameters, including rate, latency variation, loss,
+      and reordering. Look for output that states the simulation is applied with values such as a
+      `25mbit` rate and nonzero latency and loss.
+  - question: Which ROS 2 topics should I target first when the link is constrained?
+    answer: >-
+      The `/camera/image_raw` and `/camera/points` streams dominate bandwidth, while `/scan` is
+      small. Prioritize compression or access control for the camera and point-cloud streams.
+  - question: If I only need remote monitoring, which Zenoh settings should I use?
+    answer: >-
+      Use compression for the camera stream. If you do not need point-cloud data, use access control
+      to block it; if you need complete point-cloud frames, use compression with the QoS `block_first`
+      policy.
+# END generated_summary_faq
 
 author:
     - Kwashie Andoh
