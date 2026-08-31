@@ -74,9 +74,9 @@ sudo apt install -y \
 
 There are three LTS releases of ROS 2 that you can install based on your Ubuntu version.
 
-- For Ubuntu Linux 26.04, install Lyrical Luthenium.
-- For Ubuntu Linux 24.04, install Jazzy Jalisco.
-- For Ubuntu Linux 22.04, install Humble Hawksbill.
+- For Ubuntu Linux 26.04, install Lyrical Luth
+- For Ubuntu Linux 24.04, install Jazzy Jalisco
+- For Ubuntu Linux 22.04, install Humble Hawksbill
 
 ## How can I install ROS 2?
 

@@ -48,6 +48,10 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
+shared_between:
+    - embedded-and-microcontrollers
+    - automotive
+
 further_reading:
     - resource:
         title: ROS 2 Jazzy RMW implementations
