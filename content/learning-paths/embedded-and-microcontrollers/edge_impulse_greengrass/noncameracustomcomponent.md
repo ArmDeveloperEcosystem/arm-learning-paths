@@ -1,16 +1,17 @@
 ---
 hide_from_navpane: true
+title: Create the non-camera Greengrass support component
 description: Create a non-camera Greengrass component that provides sample images to the Edge Impulse runner on devices without cameras.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Non-Camera Custom Component
+## Create the non-camera custom component
 
 For those edge devices that do not contain a camera, the following component will prepare the edge device with some sample images that can be referenced by the Edge Impulse "Runner" component's JSON configuration (via "gst\_args" settings) to direct the running model to pull its image data from the file (vs. camera). 
 
-### 1. Clone the component repo
+### Clone the component repository
 
 Clone this [repo](https://github.com/edgeimpulse/aws-greengrass-workshop-supplemental). You'll find the following files: 
 
@@ -19,7 +20,7 @@ Clone this [repo](https://github.com/edgeimpulse/aws-greengrass-workshop-supplem
 		artifacts/EdgeImpulseRunnerRuntime/1.0.0/models.tar.gz
 		artifacts/EdgeImpulseRunnerRuntime/1.0.0/samples.tar.gz
 		
-### 2. Copy the artifacts files to AWS S3
+### Copy the artifact files to Amazon S3
 
 From the AWS dashboard, select the S3 dashboard and navigate to the same bucket you created for the "Runner" custom component. 
 
@@ -35,7 +36,7 @@ Within the 1.0.0 directory in S3, upload these files to S3 from your cloned repo
 
 Next, edit the `EdgeImpulseRunnerRuntimeInstallerComponent.yaml` and change the artifact location from "YOUR\_S3\_ARTIFACT\_BUCKET" to the actual name of your S3 bucket name (you'll see "YOUR\_S3\_ARTIFACT\_BUCKET" near the bottom of the yaml file). Save the file. 
 
-### 3. Create the custom component
+### Register the custom component
 
 Within the AWS dashboard, go to the IoTCore dashboard, then navigate to "Components" under the "Greengrass devices" drop-down on the left hand side. 
 
@@ -51,6 +52,10 @@ Finally, press "Create Component" and you should now have 2 custom components re
 
 ![CreateComponent](./images/GG_Create_NC_Component_3.png)
 
-Now that the non-camera support component is created, return to the deployment steps and continue with deploying these components to your edge device via the AWS IoT Greengrass deployment mechanism. Select "Return to Deployment Steps" below to continue.
+## What you've accomplished
 
-### [Return to Deployment Steps](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/customcomponentdeployment/)
+You've created the non-camera support component and registered it in AWS IoT Greengrass.
+
+Now that the non-camera support component is created, return to the deployment steps and continue with deploying these components to your edge device via the AWS IoT Greengrass deployment mechanism.
+
+Return to the [component deployment steps](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/customcomponentdeployment/) to continue.

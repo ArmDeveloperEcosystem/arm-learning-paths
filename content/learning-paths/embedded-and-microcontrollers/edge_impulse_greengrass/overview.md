@@ -1,5 +1,5 @@
 ---
-title: Overview of Edge Impulse and AWS IoT Greengrass
+title: Understand the Edge Impulse and AWS IoT Greengrass deployment architecture
 description: Understand how Edge Impulse models are packaged as AWS IoT Greengrass components for deployment to Arm-based edge devices.
 weight: 2
 
@@ -98,5 +98,9 @@ In this Learning Path, you:
 5. Create and deploy a Greengrass custom component that runs the Edge Impulse Runner.
 6. Verify inference results streaming to AWS IoT Core through the MQTT test client.
 7. Issue remote commands to the Runner service through IoT Core.
+
+## What you've learned
+
+You now understand how Edge Impulse, AWS IoT Greengrass, AWS IoT Core, and AWS Secrets Manager work together to deploy and manage ML inference on Arm edge devices.
 
 The next section walks you through setting up your edge device hardware.

@@ -1,6 +1,6 @@
 ---
 title: Command and metrics reference
-description: Review the commands, metrics, and configuration values used throughout the Edge Impulse Greengrass deployment.
+description: Review the MQTT commands and model metrics used to monitor and control the Edge Impulse Greengrass deployment.
 weight: 10
 
 ### FIXED, DO NOT MODIFY
@@ -76,7 +76,7 @@ When the Runner starts or restarts, it publishes the following JSON to the comma
 
 You can use this message to detect service restarts and re-apply any runtime changes (for example, confidence filter settings) to the newly started Edge Impulse Linux Runner.
 
-## restart
+## `restart`
 
 Restarts the Edge Impulse Runner process. When used with the `ei_shutdown_behavior` option set to `wait_on_restart`, the Edge Impulse Linux Runner pauses after the model completes and waits for this command before restarting.
 
@@ -88,7 +88,7 @@ Restarts the Edge Impulse Runner process. When used with the `ei_shutdown_behavi
 }
 ```
 
-## enable_threshold_filter
+## `enable_threshold_filter`
 
 Enables the confidence threshold filter. When enabled, only inference results that meet the threshold criteria are published to IoT Core. By default, the filter is disabled and all results are published.
 
@@ -114,7 +114,7 @@ Enables the confidence threshold filter. When enabled, only inference results th
 }
 ```
 
-## disable_threshold_filter
+## `disable_threshold_filter`
 
 Disables the confidence threshold filter. All inference results are published to IoT Core regardless of confidence score.
 
@@ -140,7 +140,7 @@ Disables the confidence threshold filter. All inference results are published to
 }
 ```
 
-## set_threshold_filter_criteria
+## `set_threshold_filter_criteria`
 
 Sets the comparison operator for the confidence threshold filter. The available criteria are:
 
@@ -171,7 +171,7 @@ Sets the comparison operator for the confidence threshold filter. The available 
 }
 ```
 
-## get_threshold_filter_criteria
+## `get_threshold_filter_criteria`
 
 Retrieves the currently configured threshold filter criteria.
 
@@ -193,7 +193,7 @@ Retrieves the currently configured threshold filter criteria.
 }
 ```
 
-## set_threshold_filter_confidence
+## `set_threshold_filter_confidence`
 
 Sets the confidence threshold value. Inference results are filtered against this value using the configured criteria. The value must be between 0 and 100.
 
@@ -216,7 +216,7 @@ Sets the confidence threshold value. Inference results are filtered against this
 }
 ```
 
-## get_threshold_filter_confidence
+## `get_threshold_filter_confidence`
 
 Retrieves the currently configured confidence threshold value.
 
@@ -238,7 +238,7 @@ Retrieves the currently configured confidence threshold value.
 }
 ```
 
-## get_threshold_filter_config
+## `get_threshold_filter_config`
 
 Retrieves the complete threshold filter configuration, including enabled state, confidence value, and criteria.
 
@@ -264,7 +264,7 @@ Retrieves the complete threshold filter configuration, including enabled state, 
 }
 ```
 
-## get_model_info
+## `get_model_info`
 
 Retrieves information about the currently running model, including its name, version, input dimensions, labels, and detection type.
 
@@ -312,7 +312,7 @@ Retrieves information about the currently running model, including its name, ver
 }
 ```
 
-## reset_metrics
+## `reset_metrics`
 
 Resets the accumulated model metrics counters to zero.
 
@@ -334,7 +334,7 @@ Resets the accumulated model metrics counters to zero.
 }
 ```
 
-## clear_cache
+## `clear_cache`
 
 Clears all inference image caches. This command respects the component configuration — it clears all caches that are currently enabled (local file cache, S3 cache, or both).
 
@@ -359,7 +359,7 @@ Clears all inference image caches. This command respects the component configura
 }
 ```
 
-## clear_cache_file
+## `clear_cache_file`
 
 Removes a specific cached inference result by its UUID. Like `clear_cache`, this command clears the file from all enabled caches.
 
@@ -386,6 +386,6 @@ Removes a specific cached inference result by its UUID. Like `clear_cache`, this
 }
 ```
 
-## What you've accomplished
+## What you've learned
 
-In this section, you have learned more about the various commands that are available, via AWS IoT Core, to the Edge Impulse Linux Runner to interact, customize, and fine-tune the Edge Impulse Linux Runner service realtime on your edge device. 
+You can now use MQTT commands through AWS IoT Core to control the Edge Impulse Linux Runner in real time and interpret its model metrics.

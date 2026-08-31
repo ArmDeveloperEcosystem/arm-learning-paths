@@ -1,5 +1,6 @@
 ---
 hide_from_navpane: true
+title: Set up a Raspberry Pi 5
 description: Configure a Raspberry Pi 5 with Raspberry Pi OS and install the dependencies needed for Edge Impulse Greengrass deployment.
 
 ### FIXED, DO NOT MODIFY
@@ -167,5 +168,9 @@ This configuration reads inference input from a local sample video file instead 
    }
 }
 ```
+
+## What you've accomplished
+
+You've set up your Raspberry Pi 5, installed its dependencies, and saved the component configuration for your selected input source.
 
 Your Raspberry Pi 5 is ready. Return to the [hardware setup page](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/hardwaresetup/) and continue to the next section to set up your Edge Impulse project.

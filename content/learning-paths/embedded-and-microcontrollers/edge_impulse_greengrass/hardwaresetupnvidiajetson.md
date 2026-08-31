@@ -1,6 +1,7 @@
 ---
 hide_from_navpane: true
-description: Prepare an Nvidia Jetson device with JetPack and the dependencies required for Edge Impulse and AWS IoT Greengrass.
+title: Set up an NVIDIA Jetson
+description: Prepare an NVIDIA Jetson device with JetPack and the dependencies required for Edge Impulse and AWS IoT Greengrass.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -159,4 +160,8 @@ This configuration reads inference input from a local sample video file. The `ei
 When running a model compiled specifically for a Jetson GPU, the first invocation can take 2-3 minutes while the model loads into GPU memory. Subsequent invocations are much faster.
 {{% /notice %}}
 
-Your Nvidia Jetson is ready. Return to the [hardware setup page](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/hardwaresetup/) and continue to the next section to set up your Edge Impulse project.
+## What you've accomplished
+
+You've prepared your NVIDIA Jetson, installed its dependencies, and saved the component configuration for your selected input source.
+
+Your NVIDIA Jetson is ready. Return to the [hardware setup page](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/hardwaresetup/) and continue to the next section to set up your Edge Impulse project.

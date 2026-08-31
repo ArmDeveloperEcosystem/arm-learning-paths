@@ -1,6 +1,6 @@
 ---
 title: Verify inference and view results
-description: Verify that the deployed Edge Impulse model runs on the edge device and view live inference results in the browser.
+description: Verify Edge Impulse inference in a browser and AWS IoT Core, then control the Runner through MQTT commands.
 weight: 9
 
 ### FIXED, DO NOT MODIFY

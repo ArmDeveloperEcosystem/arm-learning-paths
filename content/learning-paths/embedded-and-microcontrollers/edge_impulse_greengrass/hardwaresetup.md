@@ -41,4 +41,8 @@ For Qualcomm QC6490-based development boards running Ubuntu, this option support
 
 ## After setup
 
-Once you finish the setup for your chosen platform, continue to the next page to create your Edge Impulse project and build a model deployment.
+## What you've accomplished
+
+You've selected an Arm edge platform, completed its setup, and saved the device-specific component configuration.
+
+After you finish the setup for your chosen platform, continue to the next page to create your Edge Impulse project and build a model deployment.

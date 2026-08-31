@@ -113,7 +113,7 @@ To add these permissions, navigate to **IAM** > **Roles** in the AWS Console and
 
 After updating, your `GreengrassV2TokenExchangeRole` should show all three policies attached.
 
-## Finalize the installation/placement of the Edge Impulse model 
+## Place the Edge Impulse model
 
 From the last section, lets finish the installation of the Edge Impulse model `eim` file:
 

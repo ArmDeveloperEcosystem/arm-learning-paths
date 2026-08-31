@@ -1,5 +1,6 @@
 ---
 hide_from_navpane: true
+title: Set up an Ubuntu EC2 Arm instance
 description: Launch an Ubuntu AWS EC2 Arm instance and install the dependencies needed to simulate an Edge Impulse Greengrass device.
 
 ### FIXED, DO NOT MODIFY
@@ -145,5 +146,9 @@ Save this JSON to a text file on your local machine. You'll paste it into the Gr
    }
 }
 ```
+
+## What you've accomplished
+
+You've set up an Ubuntu EC2 Arm instance, installed its dependencies, and saved its component configuration.
 
 Your EC2 instance is ready. Return to the [hardware setup page](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/hardwaresetup/) and continue to the next section to set up your Edge Impulse project.

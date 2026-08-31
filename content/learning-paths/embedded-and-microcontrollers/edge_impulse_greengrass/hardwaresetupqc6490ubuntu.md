@@ -1,5 +1,6 @@
 ---
 hide_from_navpane: true
+title: Set up a Qualcomm Dragonwing QC6490 with Ubuntu
 description: Set up a Qualcomm Dragonwing QC6490 board with Ubuntu and install the packages needed for Edge Impulse Greengrass.
 
 ### FIXED, DO NOT MODIFY
@@ -192,5 +193,9 @@ This configuration reads inference input from a local sample video file. The `ei
    }
 }
 ```
+
+## What you've accomplished
+
+You've prepared your Qualcomm Dragonwing QC6490, installed its dependencies, and saved the component configuration for your selected input source.
 
 Your Qualcomm Dragonwing QC6490 is ready. Return to the [hardware setup page](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/hardwaresetup/) and continue to the next section to set up your Edge Impulse project.
