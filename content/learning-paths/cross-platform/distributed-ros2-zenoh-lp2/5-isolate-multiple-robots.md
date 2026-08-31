@@ -34,14 +34,14 @@ On both devices, run a talker using bash shells in their running containers:
 ros2 run demo_nodes_cpp talker
 ```
 
-In the bash shell in the robot container, run:
+In the bash shell in the `robot` container, run:
 
 ```bash
 ros2 node list
 ros2 topic info /chatter
 ```
 
-You should see two nodes sharing the name `/talker`, and `/chatter` reports two publishers. The expected output is:
+You should see two nodes sharing the name `/talker`, and `/chatter` reports two publishers. The output is similar to:
 
 
 ```output
@@ -49,7 +49,7 @@ Type: std_msgs/msg/String
 Publisher count: 2
 Subscription count: 0
 ```
-Duplicate node names aren't valid in ROS 2 — the graph is now ambiguous, and a subscriber can't tell the two apart.
+Duplicate node names aren't valid in ROS 2. The graph is now ambiguous, and a subscriber can't tell the two apart.
 
 Now, isolate them. On the second edge device only, set a different ROS domain before starting the talker:
 
@@ -58,7 +58,7 @@ export ROS_DOMAIN_ID=42
 ros2 run demo_nodes_cpp talker
 ```
 
-The robot container, still on the default ROS domain, sees a single `/talker` and one publisher. The expected output is:
+The robot container, still on the default ROS domain, sees a single `/talker` and one publisher. The output is similar to:
 
 ```output
 Type: std_msgs/msg/String
@@ -71,9 +71,9 @@ This is the `ROS_DOMAIN_ID` row in the isolation-options table and the same mech
 
 ## What you've accomplished
 
-You've learned why isolating robots that share the same router is necessary. You've also optionally isolated a collision with a second device.
+You've learned why isolating robots that share the same router is necessary and the methods you can use for isolation. You've also optionally isolated a collision with a second device. 
 
-The ROS 2 applications remained unchanged, while `rmw_zenoh` handled communication across the distributed system.
+If you resolved a collision, you observed that the ROS 2 applications remained unchanged, while `rmw_zenoh` handled communication across the distributed system. 
 
 You can apply this isolation approach when designing distributed ROS 2 deployments in which multiple robots share Zenoh infrastructure.
 

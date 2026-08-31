@@ -59,7 +59,7 @@ generated_summary_faq:
     answer: >-
       The `/camera/image_raw` and `/camera/points` streams dominate bandwidth, while `/scan` is
       small. Prioritize compression or access control for the camera and point-cloud streams.
-  - question: If I only need remote monitoring, which Zenoh settings should I use?
+  - question: Which Zenoh settings should I use if I need only remote monitoring?
     answer: >-
       Use compression for the camera stream. If you don't need point-cloud data, use access control
       to block it. If you need complete point-cloud frames, use compression with the QoS `block_first`

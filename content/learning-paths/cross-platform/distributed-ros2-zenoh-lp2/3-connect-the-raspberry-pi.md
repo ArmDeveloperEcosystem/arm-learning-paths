@@ -9,9 +9,11 @@ layout: learningpathall
 
 ## Set up the edge device
 
-After connecting the control container, you'll connect a Raspberry Pi to the Zenoh router.
+After connecting the `control` container, you'll connect a Raspberry Pi to the Zenoh router.
 
-This Learning Path was validated with a Raspberry Pi 5 running 64-bit Raspberry Pi OS. You can also use a Raspberry Pi 4 or another Linux-based Arm device.
+{{% notice Note %}}
+A Raspberry Pi 5 running 64-bit Raspberry Pi OS was used for validating the Learning Path. You can also use a Raspberry Pi 4 or another Linux-based Arm device.
+{{% /notice %}}
 
 Connect to the Raspberry Pi over SSH or open a terminal on an attached display. Confirm that the operating system is 64-bit:
 
@@ -32,7 +34,7 @@ curl -fsSL https://get.docker.com | sudo sh
 sudo usermod -aG docker $USER
 ```
 
-Log out and log back in so that the new group membership takes effect, and then verify Docker:
+Log out and log back in so that the new group membership takes effect, then verify Docker:
 
 ```bash
 docker version
@@ -62,10 +64,8 @@ On the Raspberry Pi, replace `<your_arm_server_ip>` with your selected IP addres
 python3 -c "import socket; socket.create_connection(('<your_arm_server_ip>',7447),5); print('router reachable')"
 ```
 
-Don't leave the angle brackets in the command.
-
 {{% notice Note %}}
-If this test times out, fix the network path before starting ROS 2. For an EC2 server, permit inbound TCP port `7447` only from the Raspberry Pi's public egress address or trusted network in the instance security group. Don't allow access from `0.0.0.0/0`.
+If this test times out, fix the network path before starting ROS 2. For an Amazon EC2 server, permit inbound TCP port `7447` only from the Raspberry Pi's public egress address or trusted network in the instance security group. Don't allow access from `0.0.0.0/0`.
 {{% /notice %}}
 
 <!-- ## Synchronize the clocks
@@ -127,7 +127,7 @@ echo $RMW_IMPLEMENTATION
 echo $ZENOH_CONFIG_OVERRIDE
 ```
 
-The output is similar to the following, where `<your_arm_server_ip>` is the actual IP address of your selected Arm server:
+The output is similar to the following, where `<your_arm_server_ip>` is the IP address of your selected Arm server:
 
 ```output
 rmw_zenoh_cpp

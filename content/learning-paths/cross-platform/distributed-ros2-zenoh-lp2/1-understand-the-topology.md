@@ -25,14 +25,14 @@ Both the server and the Pi run the same `arm64` ROS 2 packages. The development 
 
 The Zenoh router has four roles:
 
-1. Configuration entry point: It reads `ROUTER_CONFIG.json5` once at startup. Any configuration change requires a router restart.
-2. Discovery service for local peers: It introduces nodes to each other, after which they communicate directly. You saw this when you [observed Zenoh router discovery behavior](/learning-paths/cross-platform/ros2-zenoh-arm/observe-router-behaviour/) while completing the prerequisite Learning Path. Stopping the router didn't interrupt an established conversation.
-3. Relay for client-mode nodes: A client holds a single connection to the router. Every message it sends or receives passes through that connection.
-4. Traffic policy enforcement point: Compression, access control, downsampling, and QoS rules all apply here. For more information, see the next Learning Path in the series [Tune Zenoh for ROS 2 traffic over wireless networks](/learning-paths/cross-platform/tuning-zenoh-ros2-lp3/).
+- Configuration entry point: It reads `ROUTER_CONFIG.json5` once at startup. Any configuration change requires a router restart.
+- Discovery service for local peers: It introduces nodes to each other, after which they communicate directly. You saw this when you [observed Zenoh router discovery behavior](/learning-paths/cross-platform/ros2-zenoh-arm/observe-router-behaviour/) while completing the prerequisite Learning Path. Stopping the router didn't interrupt an established conversation.
+- Relay for client-mode nodes: A client holds a single connection to the router. Every message it sends or receives passes through that connection.
+- Traffic policy enforcement point: Compression, access control, downsampling, and QoS rules all apply here. For more information, see the next Learning Path in the series [Tune Zenoh for ROS 2 traffic over wireless networks](/learning-paths/cross-platform/tuning-zenoh-ros2-lp3/).
 
 ### Why cross-device nodes use client mode
 
-Nodes inside the robot container listen on loopback only. A peer on another container or host learns their addresses through the router, tries to connect directly, and fails — producing a state where `ros2 topic list` shows every topic but no data arrives. A client makes one outbound connection to the router and lets the router relay in both directions, which also suits NAT and firewalled networks because no inbound port is needed.
+Nodes inside the robot container listen on loopback only. A peer on another container or host learns their addresses through the router, tries to connect directly, and fails. In failing, the peer produces a state where `ros2 topic list` shows every topic but no data arrives. A client makes one outbound connection to the router and lets the router relay in both directions, which also suits NAT and firewalled networks because no inbound port is needed.
 
 ### Router count
 

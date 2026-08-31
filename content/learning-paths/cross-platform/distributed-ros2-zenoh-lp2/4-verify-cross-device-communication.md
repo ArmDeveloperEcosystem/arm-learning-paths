@@ -40,7 +40,7 @@ ros2 topic hz /scan
 
 Let the command collect several samples, record the approximate average, and press **Ctrl+C**.
 
-Now run the same command in the container shell on your Raspberry Pi:
+Now, run the same command in the container shell on your Raspberry Pi:
 
 ```bash
 ros2 topic hz /scan

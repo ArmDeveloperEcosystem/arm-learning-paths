@@ -12,7 +12,7 @@ layout: learningpathall
 
 A robot can work correctly in a controlled test environment and still fail when you move its ROS 2 traffic over to Wi-Fi. This is sometimes described as a robot that works on the bench.
 
-The simulation from the [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/) and [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/) published three sensor streams:
+The simulation from [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/) and [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/) published three sensor streams:
 
 | Topic | What it contains | Approximate source traffic |
 |---|---|---:|
@@ -33,4 +33,4 @@ The work is done in two series:
 
 You've learned that the combined sensor traffic exceeds the capacity of the wireless link. 
 
-Next, you'll start the environment you completed in the preceding two Learning Paths and record an unconstrained baseline.
+Next, you'll set up the environment and record an unconstrained baseline.

@@ -35,7 +35,7 @@ Each command provides a different view of the workload:
 ![Top output showing CPU and memory usage for the ROS 2 simulation, RViz, and Navigation2 processes. Use these process values as the resource baseline before enabling shared-memory transport#center](images/just-top.webp)
 
 {{% notice Important %}}
-CPU load, real-time factor, and traffic levels depend on your Arm server and other running workloads. Treat the supplied figures as reference observations, not guaranteed results.
+CPU load, real-time factor, and traffic levels depend on your Arm server and other running workloads. Treat the supplied figures as reference observations rather than guaranteed results.
 {{% /notice %}}
 
 Confirm that all three commands produce output. Record the loopback traffic shown by `just iftop_lo` so you can compare it with the shared-memory run.

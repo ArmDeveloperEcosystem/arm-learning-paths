@@ -9,7 +9,7 @@ layout: "learningpathall"
 ## Open a bash shell in the robot container
 
 After starting the browser-accessible ROS 2 environment, configure Zenoh for the environment.
-Start by opening a bash shell in the robot container.
+Start by opening a bash shell in the `robot` container.
 
 First, get the container ID for the `robot` container. From an SSH session on the Arm server, run:
 

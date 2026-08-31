@@ -13,9 +13,7 @@ layout: learningpathall
 You'll tune the working system from [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/) and [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/). Ensure that you've completed installation and network configuration steps as described in these Learning Paths.
 {{% /notice %}}
 
-If the containers are stopped, start them from the Arm server host. 
-
-Use the same working directory that you set up while completing [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/):
+If the `control` and `robot` containers are stopped, start them from the Arm server host. Use the same working directory that you set up while completing [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/):
 
 ```bash
 cd ~/ros_zenoh
@@ -122,7 +120,7 @@ Expected result:
 
 | Scenario | `/scan` | `/camera/image_raw` | `/camera/points` | Link traffic |
 |---|---|---|---|---|
-| A0: Baseline | 7.97 Hz (std 0.115 s) | 11.85 Hz (std 0.035 s) | ~88 MB/s (7.37 MB per frame) | ~810 Mbps |
+| Baseline | 7.97 Hz (std 0.115 s) | 11.85 Hz (std 0.035 s) | ~88 MB/s (7.37 MB per frame) | ~810 Mbps |
 
 A typical baseline is approximately 8 Hz for `/scan`, 12 Hz for the image, 88–98 MB/s for the point cloud, and 800–820 Mbps of link traffic. Treat these as reference observations rather than pass or fail limits. Simulation speed and host performance affect the exact values.
 

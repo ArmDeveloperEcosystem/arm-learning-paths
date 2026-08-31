@@ -11,7 +11,7 @@ layout: learningpathall
 
 In the first experiment, you used the Docker network and the `robot` and `control` containers to emulate a wireless link. You'll now connect your Raspberry Pi to the same Wi-Fi network as the Arm server. You'll use the real Wi-Fi connection to test the same policy changes as the first experiment.
 
-Using 2.4 GHz makes the effects clearer. To connect your Raspberry Pi as a Zenoh client, follow the Raspberry Pi connection procedure in [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/3-connect-the-raspberry-pi/).
+Using a 2.4 GHz Wi-Fi connection makes the effects clearer. To connect your Raspberry Pi as a Zenoh client, follow the Raspberry Pi connection procedure in [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/3-connect-the-raspberry-pi/).
 
 ## Restore the router configuration
 

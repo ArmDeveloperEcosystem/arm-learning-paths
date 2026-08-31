@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Apply network constraints 
 
-After measuring a baseline, emulate a wireless link and tune Zenoh. 
+After measuring a baseline, emulate a wireless link and tune Zenoh. Start by applying network constraints.
 
-Linux traffic control (`tc`) decides how packets leave a network interface. Its network emulator (`netem`) can add delay, loss, duplication, corruption, and reordering. Together, they let you reproduce a difficult network without moving the containers to Wi-Fi.
+Linux traffic control (`tc`) decides how packets leave a network interface. Its network emulator (`netem`) can add delay, loss, duplication, corruption, and reordering. You can use `tc` and `netem` together to reproduce a difficult network without moving the containers to Wi-Fi.
 
 In a terminal within the `robot` container desktop, run:
 
@@ -47,7 +47,7 @@ Stop all four measurement commands with **Ctrl+C**.
 
 ## Apply compression
 
-Zenoh uses [LZ4 compression](https://lz4.org/) to reduce the bytes sent over a unicast connection. LZ4 was chosen for speed rather than ratio, because compression must not become a latency source. Compression is negotiated when a client connects, so the router and the client must both enable it.
+Zenoh uses [LZ4 compression](https://lz4.org/) to reduce the bytes sent over a unicast connection. LZ4 was chosen for speed rather than ratio to avoid compression becoming a latency source. Compression is negotiated when a client connects, so the router and the client must both enable it.
 
 In a terminal on the `robot` container desktop, open the router configuration:
 
@@ -77,7 +77,7 @@ Save each file with **Ctrl+O** and **Enter**, then exit Nano with **Ctrl+X**.
 
 The router reads its configuration only at startup. 
 
-In the `robot` container desktop, find the terminal running the router, press **Ctrl+C**, then restart it:
+In the `robot` container desktop, find the terminal running the router. Press **Ctrl+C**, then restart it:
 
 ```bash
 just router
@@ -165,7 +165,7 @@ ros2 topic bw /camera/points
 ros2 topic hz /camera/points
 ```
 
-The control container receives nothing while the robot's own nodes still exchange the point cloud at about 12 Hz. The rule governs what crosses the router, not what happens inside the robot.
+The control container receives nothing while the robot's own nodes still exchange the point cloud at about 12 Hz. The rule governs what crosses the router rather than what happens inside the robot.
 
 Note that `/camera/points` still appears in the remote `ros2 topic list` even though no data arrives. The block stops the data.
 
@@ -271,7 +271,7 @@ Restart the router on the `robot` container desktop and the measurements.
 
 | Scenario | `/scan` | `/camera/image_raw` | `/camera/points` | Link traffic |
 |---|---|---|---|---|
-| Compression and QoS | 7.9 Hz | 4.4 Hz, std dev 0.08 s | Delivered: 2.0–3.0 MB/s, a complete 7.37 MB frame every ~3 s | ~17.2 Mbps, all of it useful|
+| Compression and QoS | 7.9 Hz | 4.4 Hz, std dev 0.08 s | Delivered: 2.0–3.0 MB/s, a complete 7.37 MB frame every ~3 s | ~17.2 Mbps, all of it usable|
 
 For the first time under the constrained link, `ros2 topic bw /camera/points` should report complete 7.37 MB messages. The average bandwidth will be much lower than the baseline because a complete frame can take several seconds to arrive.
 

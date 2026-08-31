@@ -45,7 +45,7 @@ The configuration includes settings used later in this Learning Path and the wid
 
 - `shm_size` reserves space for Zenoh shared-memory transport
 - `memlock` removes the default memory-lock limit so Zenoh can allocate shared-memory regions
-- `NET_ADMIN` lets later Learning Paths apply network shaping inside the containers
+- `NET_ADMIN` applies network shaping inside the containers
 
 Don't change these settings.
 
@@ -73,8 +73,8 @@ The status of both containers should be `Up`.
 
 Open the browser desktops and sign in with the password `ubuntu`:
 
-- Robot container: `http://<server_ip>:6080/`
-- Control container: `http://<server_ip>:6081/`
+- `robot` container: `http://<server_ip>:6080/`
+- `control` container: `http://<server_ip>:6081/`
 
 {{% notice Important %}}
 Don't expose ports `6080`, `6081`, or `7447` directly to the public internet from your Arm server. Use a private network, VPN, SSH tunnel, or restrictive firewall or security-group rules so that only trusted clients can reach these services.
