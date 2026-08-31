@@ -11,6 +11,8 @@ layout: learningpathall
 
 The MARL GUI used in this stage is a separate application from BenchMARL and VMAS. It is not created automatically by the training workflow.
 
+The GUI source and helper scripts are not included in the Arm Learning Paths repository. Treat this stage as optional unless you have the companion checkout described in the prerequisites. Checkpoint validation and actor export do not depend on the GUI.
+
 If you already have the companion GUI code, use that checkout and continue with the steps below.
 
 If you do not have the GUI code, you can either skip this stage and continue to the actor-export section, or create an equivalent visualization application. A compatible GUI should be able to:
@@ -48,7 +50,11 @@ The GUI reloads the full BenchMARL experiment, so use the same Python environmen
 
 ```bash
 source $HOME/venvs/mappo/bin/activate
+export RUN_DIR=$HOME/mappo_navigation_runs/latest
+source "$RUN_DIR/run.env"
 ```
+
+Sourcing `run.env` restores `CHECKPOINT`, `SOURCE_EXPERIMENT_DIR`, the agent count, and the device labels saved in the previous section.
 
 Set the GUI root to your local checkout:
 
@@ -197,15 +203,27 @@ Confirm that the output again contains:
 
 ## Start the GUI
 
-Start the application:
+Start the application on the cloud instance. Bind it to the loopback interface so it is not exposed directly through the instance network:
 
 ```bash
 cd "$GUI_ROOT"
 ```
 
 ```bash
-./run_demo.sh --host 0.0.0.0 --port 8045
+./run_demo.sh --host 127.0.0.1 --port 8045
 ```
+
+From your local workstation, open an SSH tunnel to the instance:
+
+```bash
+ssh -L 8045:127.0.0.1:8045 ubuntu@INSTANCE_PUBLIC_IP
+```
+
+Keep the SSH connection open and visit `http://127.0.0.1:8045` in your local browser. Replace `ubuntu` and `INSTANCE_PUBLIC_IP` with the SSH user and address for your instance.
+
+{{% notice Security %}}
+The SSH tunnel avoids opening TCP port 8045 to the internet. If you intentionally bind the GUI to `0.0.0.0`, restrict the cloud firewall or security-group rule to a trusted source address and confirm that the GUI's authentication is suitable for your environment.
+{{% /notice %}}
 
 Refresh the browser after registration. Select the model in this order:
 
@@ -237,3 +255,7 @@ The GUI uses a single VMAS environment for interactive playback. This is indepen
 | GUI registry | `$GUI_ROOT/configs/models.yaml` | Drives model selection |
 
 The full BenchMARL checkpoint is the correct artifact for the GUI. For a downstream inference runtime, you can export only the actor parameters, as shown in the next section.
+
+## What you've accomplished
+
+You have preserved the BenchMARL directory layout, registered the checkpoint with the companion GUI, reloaded the deployed model, and accessed interactive playback through a secure tunnel. Next, you will extract the shared actor for a runtime that does not include BenchMARL.

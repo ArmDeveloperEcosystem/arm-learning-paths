@@ -7,6 +7,19 @@ weight: 4
 layout: learningpathall
 ---
 
+## Restore the run configuration
+
+Activate the training environment and recover the saved variables. The `latest` link was created when you configured the run:
+
+```bash
+source $HOME/venvs/mappo/bin/activate
+export RUN_DIR=$HOME/mappo_navigation_runs/latest
+source "$RUN_DIR/run.env"
+cd $HOME/BenchMARL
+```
+
+If you want to validate an older run, set `RUN_DIR` to that run directory before you source `run.env`.
+
 ## Find the checkpoint
 
 BenchMARL creates an experiment directory below `RUN_DIR` with a structure similar to:
@@ -36,8 +49,11 @@ Display and verify the path:
 
 ```bash
 echo "$CHECKPOINT"
-test -f "$CHECKPOINT" && echo "Checkpoint found: $CHECKPOINT"
+test -n "$CHECKPOINT" && test -f "$CHECKPOINT" || { echo "No checkpoint found under $RUN_DIR" >&2; exit 1; }
+echo "Checkpoint found: $CHECKPOINT"
 ```
+
+The command stops the shell if no checkpoint exists, which prevents later commands from deriving paths from an empty value.
 
 ## Keep `config.pkl` with the checkpoint
 
@@ -86,6 +102,34 @@ python -c "import pickle; f=open('$SOURCE_EXPERIMENT_DIR/config.pkl','rb'); task
 
 This value comes from the trained experiment and prevents a checkpoint from being registered with a stale shell value for the agent count.
 
+Save the checkpoint variables so later sections can restore them after a new SSH login:
+
+```bash
+declare -px CHECKPOINT SOURCE_EXPERIMENT_DIR CHECKPOINT_AGENTS >> "$RUN_DIR/run.env"
+```
+
+## Evaluate the reloaded policy
+
+Run BenchMARL's evaluation entry point against the selected checkpoint:
+
+```bash
+python benchmarl/evaluate.py "$CHECKPOINT"
+```
+
+This command reconstructs the experiment from `config.pkl`, loads the trained state, and runs the saved evaluation configuration. A successful run proves that BenchMARL can execute the policy, while the earlier file checks prove only that the artifacts exist.
+
+List the CSV logs produced by the experiment:
+
+```bash
+find "$SOURCE_EXPERIMENT_DIR" -type f -name '*.csv' -print
+```
+
+Compare the first and final evaluation returns in these logs. Returns vary with the random seed and package versions, so this Learning Path does not use an unverified numeric threshold. A flat or falling return means that checkpoint creation succeeded but the policy did not demonstrate learning.
+
 {{% notice Security %}}
 Only load `config.pkl` from a training run you trust. Python pickle files can execute code when loaded.
 {{% /notice %}}
+
+## What you've accomplished
+
+You have selected a valid checkpoint, confirmed that its matching configuration is present, recovered deployment metadata, and reloaded the policy for evaluation. The checkpoint and `config.pkl` now form the portable BenchMARL experiment used by the optional GUI stage.

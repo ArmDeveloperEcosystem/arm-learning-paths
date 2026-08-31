@@ -47,7 +47,7 @@ lidar_range - measured_range
 ```
 
 {{% notice Note %}}
-The exporter in this section is intentionally specific to the validated shared MAPPO actor. It verifies the task configuration, parameter sharing, MLP layer sizes, activation type, absence of normalization layers, LiDAR-ray count, and actor tensor shapes before it creates an artifact. If any of these assumptions change, the exporter stops rather than silently creating an incompatible model.
+The exporter in this section is intentionally specific to the validated shared MAPPO actor. It verifies the task configuration, parameter sharing, MLP layer sizes, activation type, absence of normalization layers, and actor tensor shapes before it creates an artifact. The tested BenchMARL task configuration does not store the VMAS LiDAR-ray default, so the exporter uses 12 when that field is absent and verifies the resulting 18-input actor shape.
 {{% /notice %}}
 
 ## Create the actor exporter
@@ -55,8 +55,13 @@ The exporter in this section is intentionally specific to the validated shared M
 Move to the BenchMARL directory:
 
 ```bash
+source $HOME/venvs/mappo/bin/activate
+export RUN_DIR=$HOME/mappo_navigation_runs/latest
+source "$RUN_DIR/run.env"
 cd $HOME/BenchMARL
 ```
+
+This restores the original checkpoint path and activates the packages used to create it. If you copied the experiment to another system, update `CHECKPOINT` before you run the exporter.
 
 Create `export_mappo_actor.py` with the following code:
 
@@ -577,6 +582,8 @@ Finite: True
 Within [-1,1]: True
 ```
 
+This is an interface smoke test. It checks tensor shapes, finite arithmetic, and action bounds, but it does not show that the policy navigates successfully. Use the BenchMARL evaluation and GUI playback checks for behavioral validation.
+
 You now have two forms of the trained policy:
 
 ```text
@@ -592,3 +599,7 @@ Downstream inference runtime
 ```
 
 The downstream runtime must reproduce the observation ordering and action interpretation recorded in `metadata_json`. The actor-only artifact does not contain the VMAS environment, critic, or robot-specific sensor and control integration.
+
+## What you've accomplished
+
+You have extracted the validated shared MAPPO actor into a portable NumPy artifact and confirmed that its deterministic output matches the trained TorchRL policy. You also recorded the observation layout and action semantics needed to integrate the actor with a downstream runtime.
