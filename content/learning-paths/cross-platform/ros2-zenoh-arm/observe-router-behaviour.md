@@ -1,5 +1,5 @@
 ---
-title: Observe Zenoh router discovery behaviour
+title: Observe Zenoh router discovery behavior
 description: Run ROS 2 talker and listener nodes through Zenoh, then stop the router to examine how established communication behaves.
 weight: 4
 
@@ -10,9 +10,9 @@ layout: "learningpathall"
 
 The Zenoh router helps ROS 2 nodes discover each other. When nodes start, they connect to the router, exchange locator information, and establish direct peer-to-peer links.
 
-You can examine this behaviour by stopping the router after a talker and listener have connected. If their established communication continues, the router isn't carrying the messages between these two processes.
+You can examine this behavior by stopping the router after a talker and listener have connected. If their established communication continues, the router isn't carrying the messages between these two processes.
 
-Open three bash shells in the `robot` container. Source the environment in each shell:
+Open three bash shells in the `robot` container to observe router discovery behavior. Source the environment in each shell:
 
 ```bash
 source ~/workshop_env.bash

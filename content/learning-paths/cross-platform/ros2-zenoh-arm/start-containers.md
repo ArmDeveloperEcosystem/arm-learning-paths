@@ -61,13 +61,15 @@ docker compose ps
 
 Docker creates the `container_volumes/` directories when it first starts the containers. Compose derives the container-name prefix from the `ros_zenoh` working directory.
 
-The output should show both containers as `Up`:
+The output is similar to:
 
 ```output
 NAME                  STATUS
 ros_zenoh-control-1   Up
 ros_zenoh-robot-1     Up
 ```
+
+The status of both containers should be `Up`.
 
 Open the browser desktops and sign in with the password `ubuntu`:
 
@@ -82,7 +84,7 @@ Don't expose ports `6080`, `6081`, or `7447` directly to the public internet fro
 
 The container network uses the following addresses:
 
-| Container | Purpose in the series | Internal IP | Browser port | Zenoh port `7447` exposed to host |
+| Container | Purpose in the series | Internal IP | Browser port | Zenoh port 7447 exposed to host |
 |---|---|---|---|---|
 | `robot` | Simulation and robot services | `172.1.0.2` | `6080` | Yes |
 | `control` | Remote operator station | `172.1.0.3` | `6081` | No |

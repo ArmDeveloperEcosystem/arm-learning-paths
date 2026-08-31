@@ -8,11 +8,13 @@ layout: "learningpathall"
 
 ## Understand the shared-memory experiment
 
+After observing simulation resource usage, enable shared memory in both Zenoh configuration files. Then, restart the relevant processes and repeat the measurement.
+
 By default, processes on the same machine exchange data over TCP loopback. Zenoh shared-memory transport places large messages in `/dev/shm` and avoids the network stack. Applications don't need code changes or loaned buffers, and Zenoh falls back to TCP if shared memory is unavailable.
 
-You first measure the default TCP-loopback latency. You then enable shared memory in both Zenoh configuration files, restart the relevant processes, and repeat the measurement.
-
 ## Measure the TCP-loopback baseline
+
+Before enabling shared memory, measure the default TCP-loopback baseline.
 
 Stop Navigation2 in the third bash shell in the `robot` container. The latency measurement needs wall-clock timestamps, and Navigation2 doesn't operate in this mode.
 
@@ -38,22 +40,20 @@ Record the mean for comparison.
 
 ## Enable shared memory in both configurations
 
-Open both of these working files using your choice of editor in one of the `robot` bash shells:
+Open the following working files using your choice of editor in one of the `robot` bash shells:
 
 - `~/container_data/ROUTER_CONFIG.json5`
 - `~/container_data/SESSION_CONFIG.json5`
 
-In each file, find the `transport/shared_memory` block and change its `enabled` value to:
-
-```json5
-enabled: true,
-```
+In each file, find the `transport/shared_memory` block and change its `enabled` value to `true`.
 
 {{% notice Important %}}
 Both files contain multiple `enabled` fields. In both `ROUTER_CONFIG.json5` and `SESSION_CONFIG.json5`, change only the `enabled` value inside the `shared_memory` block.
 {{% /notice %}}
 
-The router and ROS 2 sessions read these files when their processes start. Stop the router and simulation processes with `Ctrl+C`, then restart them so they load the updated setting:
+The router and ROS 2 sessions read these files when their processes start. 
+
+Stop the router and simulation processes with **Ctrl+C**, then restart them so they load the updated setting:
 
 ```bash
 # Router bash shell
@@ -90,11 +90,11 @@ ls /dev/shm
 just iftop_lo
 ```
 
-`.zenoh` files should appear under `/dev/shm` for Zenoh processes using shared memory. The large loopback flows should also disappear because the data now moves through memory.
+`.zenoh` files appear under `/dev/shm` for Zenoh processes using shared memory. The large loopback flows should also disappear because the data now moves through memory.
 
 ## Restore the environment for the next Learning Path
 
-Keep the shared-memory configuration enabled. In the second bash shell, press **Ctrl+C** to stop the temporary wall-time simulation if it is still running.
+Keep the shared-memory configuration enabled. In the second bash shell, press **Ctrl+C** to stop the temporary wall-time simulation if it's still running.
 
 Keep the Zenoh router running in the first bash shell. If it has stopped, restart it after re-sourcing the environment:
 
@@ -119,21 +119,8 @@ just rox_nav2
 
 Confirm that the router is running, the simulation starts without errors, and Navigation2 reports `Managed nodes are active`. Leave these three processes running for the next Learning Path.
 
-## Verify the complete Learning Path
-
-Use the following checklist to confirm the final environment:
-
-- [ ] Both Docker containers show `Up`, and their browser desktops are accessible
-- [ ] The talker and listener continue exchanging messages after the router stops
-- [ ] `just rox_simu no_gui` and `just rox_nav2` start without errors, and Navigation2 reports `Managed nodes are active`
-- [ ] `/scan` arrives at approximately 8 Hz
-- [ ] RViz reports `Feedback: reached` after the robot navigates to a valid goal
-- [ ] The robot moves through teleoperation or a `/cmd_vel` publication, and `/odom` confirms the movement
-- [ ] `just top`, `just rt_factor`, and `just iftop_lo` produce output
-- [ ] You recorded both latency measurements, and `.zenoh` files appear under `/dev/shm`; the supplied reference system shows lower shared-memory latency
-
 ## What you've accomplished
 
 You've built a ROS 2 Jazzy simulation environment on an Arm server, observed Zenoh discovery behaviour, navigated and controlled a Neobotix ROX robot, measured resource use, and compared TCP-loopback communication with shared-memory transport.
 
-Next, complete the [Distribute a ROS 2 robotic system across Arm devices with Zenoh](learning-paths/cross-platform/distributed-ros2-zenoh-lp2/) Learning Path.
+Next, complete the [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/) Learning Path.

@@ -8,6 +8,8 @@ layout: "learningpathall"
 
 ## Understand the simulation stack
 
+After observing router discovery behavior, start the robot simulation.
+
 The running robot uses two components:
 
 - `rox_simu` loads the Neobotix ROX model into Gazebo, simulates its sensors and motors, and publishes laser scan, camera, and odometry data
@@ -23,7 +25,7 @@ Open two new bash shells in the `robot` container and source the environment in 
 source ~/workshop_env.bash
 ```
 
-## Start the headless simulation
+## Start the headless Gazebo simulation
 
 In the first shell, start the simulation:
 

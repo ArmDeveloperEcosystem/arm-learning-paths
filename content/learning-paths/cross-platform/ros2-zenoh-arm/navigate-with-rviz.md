@@ -8,6 +8,8 @@ layout: "learningpathall"
 
 ## Understand the RViz navigation view
 
+After starting the headless Gazebo simulation, visualize and navigate the robot with RViz.
+
 RViz subscribes to ROS 2 topics and displays the robot model, laser scans, camera data, map, and Navigation2 costmaps. It also provides tools that publish messages, including the goal tool used here.
 
 The navigation view contains several layers:
@@ -38,7 +40,7 @@ To send a navigation goal:
 4. While holding the mouse button, drag a short distance in the direction you want the robot to face. An arrow appears.
 5. Release the mouse button.
 
-Nav2 should then calculate a path and the robot should begin moving.
+Nav2 calculates a path and the robot begins moving.
 
 Goals outside the mapped costmap don't have a valid planned path, so the robot won't move toward them.
 
@@ -55,7 +57,7 @@ Distance remaining: 0.03 m
 Recoveries: 0
 ```
 
-The final remaining distance can vary with the selected goal and simulation run. Reaching the goal without recovery behaviour is the success criterion.
+The final remaining distance can vary with the selected goal and simulation run. Reaching the goal without recovery behavior is the success criterion.
 
 ## What you've accomplished and what's next
 

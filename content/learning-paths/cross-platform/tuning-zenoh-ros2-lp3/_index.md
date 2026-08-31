@@ -51,6 +51,7 @@ operatingsystems:
 shared_path: true
 shared_between:
     - automotive
+    - embedded-and-microcontrollers
 
 further_reading:
     - resource:

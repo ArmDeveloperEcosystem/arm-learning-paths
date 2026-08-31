@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Understand the measurements
 
-The simulation runs Gazebo, Navigation2, Zenoh, and sensor-processing nodes in one container. Three workshop commands show how this workload uses the Arm server:
+The simulation runs Gazebo, Navigation2, Zenoh, and sensor-processing nodes in one container. You'll use the following three workshop commands to see how this workload uses the Arm server:
 
 - `just top` displays CPU usage per workshop-user process with full command lines
 - `just rt_factor` reports Gazebo's real-time factor, which is simulated time divided by wall-clock time

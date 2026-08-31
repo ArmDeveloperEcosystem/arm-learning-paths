@@ -8,6 +8,8 @@ layout: "learningpathall"
 
 ## Understand the velocity interface
 
+After visualizing and navigating the robot with RViz, control the robot directly using the velocity interface.
+
 The ROX base subscribes to the `/cmd_vel` topic using the `geometry_msgs/Twist` message type. The message carries linear and angular velocity commands.
 
 Any process that publishes to `/cmd_vel` can control the base. Navigation2 uses this same interface, so it's one publisher to the robot rather than a privileged control path.

@@ -1,10 +1,6 @@
 ---
 title: Distribute a ROS 2 robotic system across Arm devices with Zenoh
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 60
 
 description: Learn how to use rmw_zenoh to extend a containerized ROS 2 robotic simulation from an Arm server to a remote control environment and a Raspberry Pi.
@@ -49,6 +45,7 @@ operatingsystems:
 shared_path: true
 shared_between:
     - automotive
+    - embedded-and-microcontrollers
 
 further_reading:
     - resource:
