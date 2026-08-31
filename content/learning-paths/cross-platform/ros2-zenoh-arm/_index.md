@@ -9,7 +9,7 @@ who_is_this_for: This Learning Path is for developers who want to build and exam
 
 learning_objectives:
     - Set up a Docker-based ROS 2 Jazzy development and simulation environment on an Arm server
-    - Configure `rmw_zenoh` as the ROS 2 middleware and explore communication between ROS 2 nodes
+    - Configure rmw_zenoh as the ROS 2 middleware and explore communication between ROS 2 nodes
     - Launch and interact with a Neobotix ROX robot simulation using Gazebo, Navigation2, and RViz
     - Evaluate Zenoh router behaviour and the effect of shared-memory transport
 
@@ -28,6 +28,10 @@ author:
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
+
+shared_path: true
+shared_between:
+    - automotive
 
 ### Tags
 skilllevels: Introductory
