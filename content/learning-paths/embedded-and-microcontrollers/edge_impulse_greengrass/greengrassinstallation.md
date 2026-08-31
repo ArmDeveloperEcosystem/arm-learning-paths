@@ -113,6 +113,40 @@ To add these permissions, navigate to **IAM** > **Roles** in the AWS Console and
 
 After updating, your `GreengrassV2TokenExchangeRole` should show all three policies attached.
 
+## Finalize the installation/placement of the Edge Impulse model 
+
+From the last section, lets finish the installation of the Edge Impulse model `eim` file:
+
+```bash
+ls -al /tmp/currentModel.eim
+```
+
+Output should be:
+
+```output
+/tmp/currentModel.eim
+```
+
+Lets copy the `eim` file over to the Greengrass service user just created. In a SSH shell on your edge device:
+
+```bash
+sudo su - 
+su - ggc_user
+mkdir $HOME/data
+cd $HOME/data
+cp /tmp/currentModel.eim .
+chmod 755 currentModel.eim
+ls -al /home/ggc_user/data/currentModel.eim
+```
+
+You should see `/home/ggc_user/data/currentModel.eim` listed as output in your SSH shell. 
+
+{{% notice Note %}}
+Typically in a production deployment, the "eim" file is distributed down to the edge devices through the edge device's systems management mechanism. In this learning path, a manual copy and placement (above...) replaces that mechanism. 
+{{% /notice %}}
+
+With the deployment built and the `eim` file placed appropriately onto your edge device, we are ready to proceed!
+
 ## What you've accomplished
 
 In this section, you created AWS access credentials, installed Greengrass Nucleus Classic on your edge device, and configured the token exchange role with the permissions that the Edge Impulse component requires. In the next section, you store your Edge Impulse API key in AWS Secrets Manager.

@@ -27,13 +27,13 @@ In that bucket, please create the following directory structure:
 
 		artifacts/EdgeImpulseRunnerRuntime/1.0.0
 		
-Within the 1.0.0 directory in S3, upload these files from your cloned repo (located in ./artifacts/EdgeImpulseRunnerRuntime/1.0.0 within your cloned repo):
+Within the 1.0.0 directory in S3, upload these files to S3 from your cloned repo (located in ./artifacts/EdgeImpulseRunnerRuntime/1.0.0 within your cloned repo):
 
 		install.sh
 		models.tar.gz
 		samples.tar.gz
 
-Next, edit the EdgeImpulseRunnerRuntimeInstallerComponent.yaml and change the artifact location from "YOUR\_S3\_ARTIFACT\_BUCKET" to the actual name of your S3 bucket name (you'll see "YOUR\_S3\_ARTIFACT\_BUCKET" near the bottom of the yaml file). Save the file. 
+Next, edit the `EdgeImpulseRunnerRuntimeInstallerComponent.yaml` and change the artifact location from "YOUR\_S3\_ARTIFACT\_BUCKET" to the actual name of your S3 bucket name (you'll see "YOUR\_S3\_ARTIFACT\_BUCKET" near the bottom of the yaml file). Save the file. 
 
 ### 3. Create the custom component
 
@@ -41,7 +41,9 @@ Within the AWS dashboard, go to the IoTCore dashboard, then navigate to "Compone
 
 ![CreateComponent](./images/GG_Create_NC_Component_1.png)
 
-Press "Create Component" and select "YAML" as the recipe format type. Copy and paste the contents of your updated/modified file EdgeImpulseRunnerRuntimeInstallerComponent.yaml into the text window after clearing the initial contents:
+Press "Create Component" and select "YAML" as the recipe format type. 
+
+Copy and paste the contents of your updated/modified file `EdgeImpulseRunnerRuntimeInstallerComponent.yaml` into the text window after clearing the initial contents:
 
 ![CreateComponent](./images/GG_Create_NC_Component_2.png)
 

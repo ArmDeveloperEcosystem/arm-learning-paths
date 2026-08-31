@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Overview
 
-This page is a reference for the MQTT commands and model metrics available in the Edge Impulse Greengrass integration. Use these commands to control the Runner service, manage the confidence threshold filter, retrieve model information, and manage the inference cache — all through AWS IoT Core MQTT topics.
+This page is a reference for the MQTT commands and model metrics available in the Edge Impulse Greengrass integration. Use these commands to control the Edge Impulse Linux Runner service, manage the confidence threshold filter, retrieve model information, and manage the inference cache — all through AWS IoT Core MQTT topics.
 
 Commands are sent as JSON messages to the device's command input topic and results are published to the command output topic:
 
@@ -74,11 +74,11 @@ When the Runner starts or restarts, it publishes the following JSON to the comma
 }
 ```
 
-You can use this message to detect service restarts and re-apply any runtime changes (for example, confidence filter settings) to the newly started Runner.
+You can use this message to detect service restarts and re-apply any runtime changes (for example, confidence filter settings) to the newly started Edge Impulse Linux Runner.
 
 ## restart
 
-Restarts the Edge Impulse Runner process. When used with the `ei_shutdown_behavior` option set to `wait_on_restart`, the Runner pauses after the model completes and waits for this command before restarting.
+Restarts the Edge Impulse Runner process. When used with the `ei_shutdown_behavior` option set to `wait_on_restart`, the Edge Impulse Linux Runner pauses after the model completes and waits for this command before restarting.
 
 **Command:**
 
@@ -385,3 +385,7 @@ Removes a specific cached inference result by its UUID. Like `clear_cache`, this
    }
 }
 ```
+
+## What you've accomplished
+
+In this section, you have learned more about the various commands that are available, via AWS IoT Core, to the Edge Impulse Linux Runner to interact, customize, and fine-tune the Edge Impulse Linux Runner service realtime on your edge device. 

@@ -60,7 +60,7 @@ Open `EdgeImpulseLinuxRunnerServiceComponent.yaml` from the cloned repository an
 
 The recipe file includes a default configuration JSON block. You don't need to modify these defaults for this Learning Path — they're overridden at deployment time by the device-specific JSON you saved during hardware setup. However, understanding each field is useful for troubleshooting and customization.
 
-```json
+```output
 {
    "node_version": "20.12.1",
    "vips_version": "8.12.1",
@@ -80,7 +80,7 @@ The recipe file includes a default configuration JSON block. You don't need to m
    "publish_inference_base64_image": "no",
    "enable_cache_to_file": "no",
    "ei_poll_sleeptime_ms": 2500,
-   "ei_local_model_file": "__none__",
+   "ei_local_model_file": "/home/ggc_user/data/currentModel.eim",
    "ei_shutdown_behavior": "__none__",
    "cache_file_directory": "__none__",
    "enable_threshold_limit": "no",
@@ -117,7 +117,7 @@ The table below describes each configuration field:
 | `enable_cache_to_file` | Set to `yes` to write inference results and associated images to a local directory as paired files (`<guid>.json` and `<guid>.img`). Default: `no`. |
 | `cache_file_directory` | Local directory path for cached files when `enable_cache_to_file` is `yes`. Default: `__none__`. |
 | `ei_poll_sleeptime_ms` | Polling interval in milliseconds for the long-polling message processor. Leave as default. |
-| `ei_local_model_file` | Path to a previously downloaded local model file (`.eim`). Set to `__none__` to download the model from Edge Impulse at runtime. |
+| `ei_local_model_file` | Path to a previously downloaded local model file (`.eim`). Set to `__none__` to download the model from Edge Impulse at runtime. In this learning path, we will set it to (`/home/ggc_user/data/currentModel.eim`) |
 | `ei_shutdown_behavior` | Controls Runner behavior after the model finishes. Set to `wait_on_restart` to pause after a video file ends and wait for a restart command. Default: `__none__`. |
 | `enable_threshold_limit` | Set to `yes` to enable the confidence threshold filter. Default: `no`. |
 | `metrics_sleeptime_ms` | Interval in milliseconds between model metrics publications. Default: `30000`. |

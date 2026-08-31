@@ -89,7 +89,22 @@ Select the appropriate target for your device and select **Build**. For example,
 For these edge device targets, select the **int8** quantization option before selecting **Build**. The **Linux (AARCH64)** target is suitable for many Linux-class Arm-based 64-bit devices where the CPU runs the model.
 {{% /notice %}}
 
-With the deployment built, the next step is to create an API key that connects the Greengrass component to your Edge Impulse project.
+When thd deployment build completes, the browser will automatically download your "eim" file into your ~/Downloads directory. On your desktop copy the "eim" file to your edge device. For example, if the name of your "eim" file is "pet_detection-linux-aarch64-v137-cat-and-dog-detector.eim", the command will be:
+
+```bash
+scp  pet_detection-linux-aarch64-v137-cat-and-dog-detector.eim <username_on_edge_device>@<edge_device_ip_address>:.
+```
+
+Next, open a SSH shell into your edge device:
+
+```bash
+ssh <username_on_edge_device>@<edge_device_ip_address>
+mv *.eim /tmp/currentModel.eim
+```
+
+You should see `/tmp/currentModel.eim` on your edge device. We will use this in the next section. 
+
+The next step is to create an API key that connects the Greengrass component to your Edge Impulse project.
 
 ## Create your project API key
 
