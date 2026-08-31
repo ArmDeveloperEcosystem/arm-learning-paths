@@ -71,7 +71,7 @@ This is the `ROS_DOMAIN_ID` row in the isolation-options table and the same mech
 
 ## What you've accomplished
 
-You've learned why isolating robots that share the same router is necessary and the methods you can use for isolation. You've also optionally isolated a collision with a second device. 
+You've learned why isolating robots that share the same router is necessary and what methods you can use for isolation. You've also optionally resolved a collision with a second device. 
 
 If you resolved a collision, you observed that the ROS 2 applications remained unchanged, while `rmw_zenoh` handled communication across the distributed system. 
 
