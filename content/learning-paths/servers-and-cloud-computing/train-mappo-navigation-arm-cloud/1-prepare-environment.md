@@ -25,7 +25,7 @@ The reference experiment was tested on this AWS configuration:
 | Operating system | Ubuntu 24.04 |
 | Storage | 512 GB EBS volume |
 
-The M9g instance is EBS-only, so the storage volume is provisioned separately from the instance. The workflow does not depend on an AWS-specific API and can run on other Arm-based cloud instances. A smaller instance uses fewer vectorized environments and takes longer to process the same training-frame budget.
+The M9g instance is EBS-only, so the storage volume is provisioned separately from the instance. The workflow does not depend on an AWS-specific API and can run on other Arm-based cloud instances. A smaller instance uses fewer vectorized environments. The training section explains how to keep the tested 100-batch budget or use an alternative fixed-total-frame budget.
 
 AWS Graviton5 provides one hardware thread per core on this instance. The one-environment-per-workload-CPU rule is still a starting point rather than a fixed mapping, because VMAS processes the environments as tensor batches.
 
@@ -203,4 +203,4 @@ Keep this revision with your experiment notes so you can reproduce the software 
 
 ## What you've accomplished
 
-You have verified the `aarch64` environment, sized the initial VMAS workload, and installed the training stack. Next, you will keep the training-frame budget consistent while adapting the vectorized environment count to the available CPUs.
+You have verified the `aarch64` environment, sized the initial VMAS workload, and installed the training stack. Next, you will choose a frame-budgeting method and adapt the vectorized environment count to the available CPUs.

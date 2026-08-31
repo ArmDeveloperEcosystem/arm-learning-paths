@@ -52,16 +52,6 @@ export FRAMES_PER_ENV_PER_BATCH=100
 export FRAMES_PER_BATCH=$((N_ENVS * FRAMES_PER_ENV_PER_BATCH))
 ```
 
-Use 1,910,000 frames as the target training budget. Calculate enough complete batches to meet or slightly exceed that target:
-
-```bash
-export TARGET_MAX_FRAMES=1910000
-export TRAINING_BATCHES=$(((TARGET_MAX_FRAMES + FRAMES_PER_BATCH - 1) / FRAMES_PER_BATCH))
-export MAX_FRAMES=$((FRAMES_PER_BATCH * TRAINING_BATCHES))
-```
-
-BenchMARL collects complete batches. `MAX_FRAMES` therefore equals the target on the 192-vCPU reference system and can be up to one batch larger on another instance. Keeping the target fixed prevents CPU count from reducing the amount of training.
-
 Evaluate every 20 batches using ten evaluation episodes:
 
 ```bash
@@ -70,12 +60,47 @@ export EVAL_INTERVAL=$((FRAMES_PER_BATCH * EVAL_EVERY_BATCHES))
 export EVAL_EPISODES=10
 ```
 
-The reference sizing gives:
+Choose one of the following budgeting options. Option 1 reproduces the tested configuration. Option 2 keeps the total number of collected frames approximately constant when the CPU-sized environment count changes.
+
+### Option 1: Keep 100 training batches
+
+Use this option to reproduce the reference experiment. The number of environments scales with the workload CPUs, each environment contributes 100 frames per batch, and the run always performs 100 training batches:
+
+```bash
+export FRAME_BUDGET_MODE=fixed_batches
+unset TARGET_MAX_FRAMES
+export TRAINING_BATCHES=100
+export MAX_FRAMES=$((FRAMES_PER_BATCH * TRAINING_BATCHES))
+```
+
+The primary configuration gives:
+
+| Total CPUs | Environments | Frames per batch | Training batches | Total frames | Evaluation interval |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 64 | 63 | 6,300 | 100 | 630,000 | 126,000 |
+| 192 | 191 | 19,100 | 100 | 1,910,000 | 382,000 |
+
+The 64-vCPU example processes fewer total frames because it keeps both 100 frames per environment and 100 training batches. This is intentional for the original CPU-scaled benchmark configuration.
+
+### Option 2: Keep approximately 1,910,000 total frames
+
+Use this alternative when you want different CPU-sized runs to collect approximately the same number of frames. Calculate enough complete batches to meet or exceed the target:
+
+```bash
+export FRAME_BUDGET_MODE=fixed_total_frames
+export TARGET_MAX_FRAMES=1910000
+export TRAINING_BATCHES=$(((TARGET_MAX_FRAMES + FRAMES_PER_BATCH - 1) / FRAMES_PER_BATCH))
+export MAX_FRAMES=$((FRAMES_PER_BATCH * TRAINING_BATCHES))
+```
+
+The fixed-total-frame alternative gives:
 
 | Total CPUs | Environments | Frames per batch | Training batches | Target frames | Actual frames | Evaluation interval |
 | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | 64 | 63 | 6,300 | 304 | 1,910,000 | 1,915,200 | 126,000 |
 | 192 | 191 | 19,100 | 100 | 1,910,000 | 1,910,000 | 382,000 |
+
+BenchMARL collects complete batches, so the actual frame count can exceed the target by less than one batch. This option also changes the number of MAPPO update and evaluation cycles on smaller instances. It preserves the approximate sample budget, not an identical optimization trajectory.
 
 {{% notice Note %}}
 When VMAS sampling runs on CUDA, tune `N_ENVS` for the GPU instead of deriving it from the CPU count.
@@ -90,10 +115,10 @@ export OUTPUT_ROOT=$HOME/mappo_navigation_runs
 mkdir -p "$OUTPUT_ROOT"
 ```
 
-Name the run so that the agent count, environment count, sampling device, and training device are visible:
+Name the run so that the agent count, environment count, devices, and budgeting option are visible:
 
 ```bash
-export RUN_NAME="agents_${AGENTS}__envs_${N_ENVS}__sampling_${SAMPLING_DEVICE}__train_${TRAIN_DEVICE}"
+export RUN_NAME="agents_${AGENTS}__envs_${N_ENVS}__sampling_${SAMPLING_DEVICE}__train_${TRAIN_DEVICE}__budget_${FRAME_BUDGET_MODE}"
 export RUN_DIR="$OUTPUT_ROOT/$RUN_NAME"
 mkdir -p "$RUN_DIR"
 ln -sfn "$RUN_DIR" "$OUTPUT_ROOT/latest"
@@ -122,11 +147,14 @@ python -m pip freeze > "$RUN_DIR/software-versions.txt"
 declare -px \
   AGENTS SAMPLING_DEVICE TRAIN_DEVICE \
   CORE_COUNT RESERVED_CPUS WORKLOAD_CPUS N_ENVS \
-  FRAMES_PER_ENV_PER_BATCH FRAMES_PER_BATCH TARGET_MAX_FRAMES \
+  FRAMES_PER_ENV_PER_BATCH FRAMES_PER_BATCH FRAME_BUDGET_MODE \
   TRAINING_BATCHES MAX_FRAMES EVAL_EVERY_BATCHES EVAL_INTERVAL EVAL_EPISODES \
   OUTPUT_ROOT RUN_NAME RUN_DIR \
   OMP_NUM_THREADS MKL_NUM_THREADS OPENBLAS_NUM_THREADS NUMEXPR_MAX_THREADS \
   BENCHMARL_REVISION > "$RUN_DIR/run.env"
+if [ -n "${TARGET_MAX_FRAMES:-}" ]; then
+  declare -px TARGET_MAX_FRAMES >> "$RUN_DIR/run.env"
+fi
 ```
 
 `run.env` contains only the variables listed in the command. It does not copy credentials or the rest of your shell environment.
@@ -136,13 +164,13 @@ declare -px \
 Print the complete configuration before training:
 
 ```bash
-echo "Agents=$AGENTS TotalCPUs=$CORE_COUNT ReservedCPUs=$RESERVED_CPUS WorkloadCPUs=$WORKLOAD_CPUS Environments=$N_ENVS FramesPerBatch=$FRAMES_PER_BATCH TrainingBatches=$TRAINING_BATCHES MaxFrames=$MAX_FRAMES EvalInterval=$EVAL_INTERVAL EvalEpisodes=$EVAL_EPISODES Sampling=$SAMPLING_DEVICE Training=$TRAIN_DEVICE"
+echo "BudgetMode=$FRAME_BUDGET_MODE Agents=$AGENTS TotalCPUs=$CORE_COUNT ReservedCPUs=$RESERVED_CPUS WorkloadCPUs=$WORKLOAD_CPUS Environments=$N_ENVS FramesPerBatch=$FRAMES_PER_BATCH TrainingBatches=$TRAINING_BATCHES MaxFrames=$MAX_FRAMES EvalInterval=$EVAL_INTERVAL EvalEpisodes=$EVAL_EPISODES Sampling=$SAMPLING_DEVICE Training=$TRAIN_DEVICE"
 ```
 
-For a 192-CPU system, the reference values are:
+For a 192-CPU system using the primary configuration, the reference values are:
 
 ```output
-Agents=3 TotalCPUs=192 ReservedCPUs=1 WorkloadCPUs=191 Environments=191 FramesPerBatch=19100 TrainingBatches=100 MaxFrames=1910000 EvalInterval=382000 EvalEpisodes=10 Sampling=cpu Training=cpu
+BudgetMode=fixed_batches Agents=3 TotalCPUs=192 ReservedCPUs=1 WorkloadCPUs=191 Environments=191 FramesPerBatch=19100 TrainingBatches=100 MaxFrames=1910000 EvalInterval=382000 EvalEpisodes=10 Sampling=cpu Training=cpu
 ```
 
 Do not start training if a required field is blank.
@@ -179,4 +207,4 @@ Training takes several hours on the reference system. Run the command in a persi
 
 ## What you've accomplished
 
-You have configured a CPU-sized VMAS batch without changing the target training budget. BenchMARL now evaluates the policy periodically and saves the final checkpoint with the package versions, BenchMARL revision, and workload variables recorded alongside the run.
+You have configured a CPU-sized VMAS batch using either the tested fixed-batch budget or the alternative fixed-total-frame budget. BenchMARL now evaluates the policy periodically and saves the final checkpoint with the package versions, BenchMARL revision, budgeting mode, and workload variables recorded alongside the run.
