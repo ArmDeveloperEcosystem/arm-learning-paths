@@ -125,6 +125,6 @@ Confirm that the router is running, the simulation starts without errors, and Na
 
 ## What you've accomplished
 
-You've built a ROS 2 Jazzy simulation environment on an Arm server, observed Zenoh discovery behavior, navigated and controlled a Neobotix ROX robot, measured resource use, and compared TCP-loopback communication with shared-memory transport.
+You've completed the Learning Path by comparing TCP-loopback communication with shared-memory transport.
 
 Next, complete the [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/) Learning Path.
