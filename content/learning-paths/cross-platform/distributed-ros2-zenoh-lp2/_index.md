@@ -59,11 +59,11 @@ generated_summary_faq:
       Expect a full list of topics, roughly 80 entries, including `/camera/image_raw`, `/cmd_vel`,
       `/map`, and `/scan`. This confirms that you have ROS 2 graph discovery through the Zenoh
       client, but it doesn't by itself prove that message data is arriving.
-  - question: Which option should I use to prevent crosstalk when adding multiple robots?
+  - question: How do I isolate multiple robots that share a Zenoh router?
     answer: >-
-      Use ROS namespaces to keep robots distinguishable on a shared graph. Use separate `ROS_DOMAIN_ID`
-      values for complete isolation between groups. Use a Zenoh namespace in the session configuration
-      to partition at the transport layer.
+      Use ROS namespaces when you want one station to supervise several robots while keeping their
+      topics distinguishable. Use separate `ROS_DOMAIN_ID` values when independent groups must not see
+      one another. Use a Zenoh namespace when you want isolation without changing ROS-side names.
 # END generated_summary_faq
 
 author:

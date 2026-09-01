@@ -67,7 +67,7 @@ Subscription count: 0
 ```
 The second device's traffic is invisible to it because `rmw_zenoh` encodes the ROS domain ID into every key expression.
 
-This is the `ROS_DOMAIN_ID` row in the isolation-options table and the same mechanism that keeps several groups from interfering when they share one Zenoh router.
+This is the same mechanism that keeps several groups from interfering when they share one Zenoh router.
 
 ## What you've accomplished
 

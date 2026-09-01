@@ -44,7 +44,9 @@ generated_summary_faq:
   - question: How do I start and verify the ROS 2 and Zenoh environment before measuring?
     answer: >-
       From the Arm server host, run `docker compose up -d` in `~/ros_zenoh`, then use `docker compose
-      ps`. Both services should report `Up` before you proceed.
+      ps`. Both services should report `Up`. Then, open the `robot` container desktop and confirm that
+      the Zenoh router, simulation, and Navigation2 processes are running. Restart any process that
+      stopped.
   - question: Where do I run the network emulation command?
     answer: >-
       Open a terminal in the `robot` container desktop and run `source ~/workshop_env.bash`, followed
@@ -58,12 +60,14 @@ generated_summary_faq:
   - question: Which ROS 2 topics should I target first when the link is constrained?
     answer: >-
       The `/camera/image_raw` and `/camera/points` streams dominate bandwidth, while `/scan` is
-      small. Prioritize compression or access control for the camera and point-cloud streams.
-  - question: Which Zenoh settings should I use if I need only remote monitoring?
+      small. Compress the streams when you need to preserve them. If you don't need point-cloud data,
+      use access control to block `/camera/points`. If you need complete point-cloud frames, use
+      compression with the QoS `block_first` policy.
+  - question: When should I use downsampling instead of compression?
     answer: >-
-      Use compression for the camera stream. If you don't need point-cloud data, use access control
-      to block it. If you need complete point-cloud frames, use compression with the QoS `block_first`
-      policy.
+      Use downsampling when the compressed camera stream still exceeds the available link capacity.
+      Set the forwarded image rate less than the sustained capacity of the link to trade frame rate
+      for steadier delivery and lower jitter.
 # END generated_summary_faq
 
 author:
