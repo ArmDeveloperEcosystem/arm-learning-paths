@@ -17,7 +17,7 @@ The simulation and navigation stack run as separate processes so you can start, 
 
 Stop the talker and listener from the router experiment. Keep the router running.
 
-Open two new terminals in the `robot` container and source the environment in each one:
+Open two new bash shells in the `robot` container and source the environment in each one:
 
 ```bash
 source ~/workshop_env.bash
@@ -25,7 +25,7 @@ source ~/workshop_env.bash
 
 ## Start the headless simulation
 
-In one of the new Terminals, start the simulation:
+In the first shell, start the simulation:
 
 ```bash
 just rox_simu no_gui
@@ -35,7 +35,7 @@ The `no_gui` argument disables the Gazebo 3D viewer, not the simulation. Gazebo 
 
 ## Start Navigation2
 
-In the other Terminal, start the navigation stack:
+In the second shell, start the navigation stack:
 
 ```bash
 just rox_nav2
@@ -43,21 +43,21 @@ just rox_nav2
 
 Wait for Navigation2 to activate its managed nodes.
 
-It is normal for output to stop after its active. Navigation2 remains idle until it receives a navigation goal.
+It is normal for output to stop after it's active. Navigation2 remains idle until it receives a navigation goal.
 
-![Navigation2 terminal output showing managed nodes active while the navigation stack starts in the robot container.](images/nav2-successfully-running.png)
+![Navigation2 terminal output showing managed nodes active while the navigation stack starts in the robot container.](images/nav2-successfully-running.webp)
 
 ## Verify the simulated sensors
 
-In another sourced terminal, check the laser scan frequency:
+In a third sourced bash shell, check the laser scan frequency:
 
 ```bash
 ros2 topic hz /scan
 ```
 
-The `/scan` topic should arrive at approximately 8 Hz. This rate is an expected operating observation, so small variations are normal.
+The `/scan` topic should arrive at approximately 8 Hz. This rate is an expected operating observation, so small variations are normal. Press `Ctrl+C` in this shell to stop the scan.
 
-List the camera topics using a new terminal:
+Next, list the camera topics to confirm that they are present:
 
 ```bash
 ros2 topic list | grep camera

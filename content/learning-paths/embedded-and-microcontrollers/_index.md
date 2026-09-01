@@ -15,18 +15,18 @@ pinned_learning_paths:
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 30
-- Linux: 52
+- Linux: 56
 - macOS: 21
 - RTOS: 12
 - Windows: 12
 subjects_filter:
 - CI-CD: 7
-- Containers and Virtualization: 9
+- Containers and Virtualization: 11
 - Embedded Linux: 6
 - Libraries: 5
-- ML: 26
+- ML: 27
 - Performance and Architecture: 22
-- RTOS Fundamentals: 7
+- RTOS Fundamentals: 8
 - Security: 3
 - Virtual Hardware: 2
 subtitle: Learn best practices for IoT, embedded, and microcontroller development.
@@ -51,7 +51,7 @@ tools_software_languages_filter:
 - Baremetal: 1
 - Bash: 1
 - BitBake: 1
-- C: 11
+- C: 12
 - ChatGPT: 1
 - Clang: 1
 - CMSIS: 5
@@ -63,17 +63,18 @@ tools_software_languages_filter:
 - Containerd: 1
 - CPP: 1
 - DetectNet: 1
-- Docker: 16
+- Docker: 18
 - DSTREAM: 2
 - Edge AI: 2
 - Edge Impulse: 2
 - ETDump: 1
 - ETRecord: 1
-- ExecuTorch: 8
+- ExecuTorch: 9
 - FastAPI: 2
 - Fusion 360: 1
 - FVP: 10
-- GCC: 13
+- Gazebo: 2
+- GCC: 14
 - Generative AI: 3
 - GitHub: 4
 - GitLab: 2
@@ -87,6 +88,7 @@ tools_software_languages_filter:
 - Keil MDK: 7
 - Keil RTX RTOS: 2
 - Kubernetes: 1
+- LeRobot: 1
 - Linux kernel: 1
 - LLM: 3
 - Matter: 1
@@ -97,22 +99,28 @@ tools_software_languages_filter:
 - MQTT: 1
 - MuJoCo: 1
 - MXNet: 1
+- Navigation2: 2
 - Neon: 1
 - NumPy: 1
 - Ollama: 2
+- ONNX: 1
+- ONNX Runtime: 1
 - OpenSSH: 1
 - Paddle: 1
 - Performance analysis: 1
 - picocom: 1
 - Porcupine: 1
-- Python: 19
-- PyTorch: 6
+- Python: 20
+- PyTorch: 7
 - QEMU: 2
 - Raspberry Pi: 10
 - Reachy Mini: 1
 - Remote.It: 1
 - remoteproc-runtime: 1
+- rmw_zenoh: 2
+- ROS 2: 2
 - Runbook: 4
+- RViz: 2
 - SEGGER JLink: 1
 - SEGGER RTT: 1
 - SSH: 3
@@ -124,6 +132,7 @@ tools_software_languages_filter:
 - TensorRT: 1
 - tinyML: 2
 - Topo: 3
+- TorchAO: 1
 - TOSA: 1
 - Trusted Firmware: 2
 - TrustZone: 2
@@ -134,6 +143,6 @@ tools_software_languages_filter:
 - YAML: 1
 - Yocto: 1
 - Yocto Project: 1
-- Zephyr: 4
+- Zephyr: 5
 weight: 5
 ---

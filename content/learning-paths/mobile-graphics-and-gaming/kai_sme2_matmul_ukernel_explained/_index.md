@@ -41,7 +41,7 @@ generated_summary_faq:
       No. SME2 hardware is only required for the optional hands-on verification steps. 
   - question: How do I know the microkernel is using SME2 INT8 MOPA in the inner loop?
     answer: >-
-      Inspect the microkernel’s inner loop for SME2 outer product accumulate instructions that
+      Inspect the microkernel's inner loop for SME2 outer product accumulate instructions that
       update the ZA storage. Optional disassembly can also confirm where these instructions appear.
   - question: What do mr, nr, bl, and kr affect when preparing inputs?
     answer: >-

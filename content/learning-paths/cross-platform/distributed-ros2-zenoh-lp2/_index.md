@@ -16,10 +16,9 @@ learning_objectives:
     - Configure a remote control container to connect to a ROS 2 simulation through rmw_zenoh
     - Connect a Raspberry Pi to the Zenoh router running on an Arm server
     - Verify ROS 2 sensor data and messages flowing in both directions between the server and Raspberry Pi
-    - Diagnose routing, port, configuration, and clock-synchronization problems in a distributed ROS 2 system
 
 prerequisites:
-    - Learning Path 1 completed; `robot` container running the Zenoh router and ROX simulation
+    - Complete the [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/) learning path, with the `robot` container running the Zenoh router and ROX simulation
     - A Raspberry Pi 4 or Raspberry Pi 5 (16 GB SD card or larger), aarch64, on the same network as the server
     - Familiarity with ROS 2 topics, Docker, and basic Linux command-line operations
 
@@ -27,6 +26,10 @@ author:
     - Odin Shen
     - Kwashie Andoh
     - Habib Ogunbanwo
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 skilllevels: Introductory
 subjects: Performance and Architecture

@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Understand the container environment
 
-You use two Docker containers built from the same image:
+You create and use two Docker containers built from the same image:
 
 - The `robot` container runs the ROS 2 simulation, Zenoh router, and Gazebo environment used in this Learning Path
 - The `control` container acts as a remote operator station for later Learning Paths
@@ -19,7 +19,7 @@ This setup is more than a container exercise. Gazebo, simulated camera and LiDAR
 
 The environment uses official `arm64` binaries without architecture-specific modifications.
 
-Run the host commands on your Arm server. After you open the browser desktop, run commands with an `ubuntu@robot` prompt in the `robot` container.
+Run the provided commands on your selected Arm server. After the browser-based VNC desktop opens, run commands with an `ubuntu@robot` prompt in the `robot` container.
 
 ## Get the Docker Compose configuration
 
@@ -75,10 +75,10 @@ Open the browser desktops and sign in with the password `ubuntu`:
 - Control container: `http://<server_ip>:6081/`
 
 {{% notice Important %}}
-Do not expose ports `6080`, `6081`, or `7447` directly to the public internet. Use a private network, VPN, SSH tunnel, or restrictive firewall or security-group rules so that only trusted clients can reach these services.
+Do not expose ports `6080`, `6081`, or `7447` directly to the public internet from your Arm server. Use a private network, VPN, SSH tunnel, or restrictive firewall or security-group rules so that only trusted clients can reach these services.
 {{% /notice %}}
 
-![Browser showing the Ubuntu desktop running inside the robot container through noVNC.](images/robot-desktop.png)
+![Browser showing the Ubuntu desktop running inside the robot container through noVNC.](images/robot-desktop.webp)
 
 The container network uses the following addresses:
 
