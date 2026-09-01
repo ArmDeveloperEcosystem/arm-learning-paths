@@ -1,6 +1,6 @@
 ---
 title: Verify inference and view results
-description: Verify that the deployed Edge Impulse model runs on the edge device and view live inference results in the browser.
+description: Verify Edge Impulse inference in a browser and AWS IoT Core, then control the Edge Impulse Linux Runner through MQTT commands.
 weight: 9
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## View live inference in the browser
 
-After the deployment completes and the Runner starts, it hosts a local web interface on port 4912. This page shows the live video input (from a camera or a file) alongside real-time inference results and timing information.
+After the deployment completes and the Edge Impulse Linux Runner starts, it hosts a local web interface on port 4912. This page shows the live video input (from a camera or a file) alongside real-time inference results and timing information.
 
 Open a browser and navigate to:
 
@@ -39,13 +39,13 @@ If your device doesn't have a camera, the component plays a pre-installed 90-sec
 
 ![Browser view showing inference results from a video file with a cat detected#center](./images/cats_expected.png "Expected inference results without camera")
 
-If the image appears frozen, the Runner has finished playing the video. The Runner is waiting for a `restart` command to replay the video file. The section below explains how to send this command through AWS IoT Core.
+If the image appears frozen, the Edge Impulse Linux Runner has finished playing the video and is waiting for a `restart` command. The **Send commands through AWS IoT Core** task explains how to replay the video.
 
 ## View inference output in AWS IoT Core
 
-The Runner publishes inference results and model metrics to AWS IoT Core MQTT topics. You can view these messages in the AWS Console.
+The Edge Impulse Linux Runner publishes inference results and model metrics to AWS IoT Core MQTT topics. You can view these messages in the AWS Console.
 
-Open the AWS Console and navigate to **AWS IoT Core**. Select **MQTT test client** from the left sidebar.
+Open the AWS Console and navigate to **AWS IoT Core**. Select **MQTT test client**.
 
 In the **Subscribe to a topic** section, enter the following topic filter and select **Subscribe**:
 
@@ -53,7 +53,7 @@ In the **Subscribe to a topic** section, enter the following topic filter and se
 /edgeimpulse/device/#
 ```
 
-For devices with cameras, inference results appear whenever the model identifies an object. The output looks similar to this:
+For devices with cameras, inference results appear whenever the model identifies an object. The output is similar to:
 
 ![MQTT test client showing JSON inference output with bounding box coordinates, labels, and confidence scores#center](./images/ei_inference_output.png "Inference output in MQTT test client")
 
@@ -63,11 +63,11 @@ Model metrics are published periodically (controlled by the `metrics_sleeptime_m
 
 ## Send commands through AWS IoT Core
 
-The Edge Impulse Greengrass component supports commands sent through MQTT topics. One common command is `restart`, which restarts the Runner service. This is especially useful for devices without cameras, where the Runner pauses after the video ends.
+The Edge Impulse Greengrass component supports commands sent through MQTT topics. The `restart` command restarts the Edge Impulse Linux Runner service. This is especially useful for devices without cameras, where it pauses after the video ends.
 
 ### Find your device name
 
-To send a command, you need the device name that the Runner registered in IoT Core. Look at the inference output in the MQTT test client. Each message is published to a topic with this structure:
+To send a command, you need the device name that the Edge Impulse Linux Runner registered in IoT Core. Look at the inference output in the MQTT test client. Each message is published to a topic with this structure:
 
 ```text
 /edgeimpulse/devices/<device-name>/inference/output
@@ -75,7 +75,7 @@ To send a command, you need the device name that the Runner registered in IoT Co
 
 Copy the `<device-name>` portion from the topic. You'll use it in the next step.
 
-The Runner uses four MQTT topics per device:
+The Edge Impulse Linux Runner uses four MQTT topics per device:
 
 ```text
 /edgeimpulse/devices/<device-name>/inference/output
@@ -108,23 +108,23 @@ After publishing, you should see a response on the command output topic:
 /edgeimpulse/devices/<device-name>/command/output
 ```
 
-The response confirms that the Runner has restarted. Navigate back to `http://<your-edge-device-ip>:4912` in your browser to confirm inference has resumed. You should also see new inference results appearing in the MQTT test client.
+The response confirms that the Edge Impulse Linux Runner has restarted. Navigate back to `http://<your-edge-device-ip>:4912` in your browser to confirm inference has resumed. You should also see new inference results appearing in the MQTT test client.
 
 {{% notice Note %}}
-For devices without cameras, the Runner reads the sample video file and reports inferences until the video ends. After that, the Runner waits for a `restart` command to replay the video. Sending the restart command causes the Runner to start the video from the beginning.
+For devices without cameras, the Edge Impulse Linux Runner reads the sample video file and reports inferences until the video ends. It then waits for a `restart` command to replay the video from the beginning.
 {{% /notice %}}
 
 ## Troubleshooting
 
-If the Runner doesn't start or the browser page doesn't load, check the following:
+If the Edge Impulse Linux Runner doesn't start or the browser page doesn't load, check the following:
 
 **First deployment takes time**: On the first deployment, the component installs all prerequisites (Node.js, libvips, Edge Impulse CLI). This can take 5–10 minutes. Monitor progress by tailing the component log on your device:
 
 ```bash
-sudo tail -f /greengrass/v2/logs/EdgeImpulseLinuxRunnerServiceComponent.log
+sudo tail -f /greengrass/v2/logs/EdgeImpulseLinuxEdge Impulse Linux RunnerServiceComponent.log
 ```
 
-**Runtime logs**: While the component is running, the Runner writes a separate log file in `/tmp`. The filename follows the pattern `ei_lockfile_runner_<device-name>.log`. Tail this file to watch live inference activity:
+**Runtime logs**: While the component is running, the Edge Impulse Linux Runner writes a separate log file in `/tmp`. The filename follows the pattern `ei_lockfile_runner_<device-name>.log`. Tail this file to watch live inference activity:
 
 ```bash
 sudo tail -f /tmp/ei_lockfile_runner_*.log
@@ -132,6 +132,18 @@ sudo tail -f /tmp/ei_lockfile_runner_*.log
 
 **Jetson GPU model loading**: On Jetson devices where the model is compiled for GPU acceleration, expect a 2–3 minute delay the first time the model loads into GPU memory. Subsequent starts are much faster.
 
+## Additional Information on the Edge Impulse AWS IoT Greengrass Integration
+
+You can now use MQTT commands through AWS IoT Core to control the Edge Impulse Linux Runner in real time and interpret its model metrics. The following [command reference](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/summary/) can be consulted for additional details on the available command set and metrics features of the Edge Impulse Linux Runner AWS IoT Greengrass integration. 
+
 ## What you've accomplished
 
-In this section, you verified that the Edge Impulse Runner is running inference on your edge device, viewed results in the browser and AWS IoT Core MQTT topics, and sent a restart command through IoT Core. In the next section, you'll find a complete command and configuration reference.
+In this section, you verified that the Edge Impulse Linux Runner is running inference on your edge device, viewed results in the browser and AWS IoT Core MQTT topics, and sent a restart command through IoT Core.
+
+## Cleaning up AWS Resources
+
+To clean up AWS resources used in this Learning Path to help minimize costs, please review [Cleaning Up AWS Resources](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/cleanup/). 
+
+## Congratulations
+
+You've completed this Learning Path. You set up an Arm-based edge device, built and deployed an Edge Impulse ML model through AWS IoT Greengrass, verified live inference, and used MQTT commands to control the Edge Impulse Linux Runner service remotely.

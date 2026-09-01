@@ -1,5 +1,6 @@
 ---
 hide_from_navpane: true
+title: Set up an Ubuntu EC2 Arm instance
 description: Launch an Ubuntu AWS EC2 Arm instance and install the dependencies needed to simulate an Edge Impulse Greengrass device.
 
 ### FIXED, DO NOT MODIFY
@@ -14,11 +15,11 @@ If you don't have a physical edge device, you can use an AWS EC2 instance with a
 
 Open the AWS Console and search for **EC2**:
 
-![AWS Console search bar with EC2 typed in the search field#center](./images/EC2_Setup_1.png "Search for EC2 in the AWS Console")
+![AWS Console search bar with EC2 typed in the search field#center](./images/ec2_setup_1.png "Search for EC2 in the AWS Console")
 
 Open the EC2 console page:
 
-![EC2 dashboard showing the main console page with instance summary#center](./images/EC2_Setup_2.png "EC2 console page")
+![EC2 dashboard showing the main console page with instance summary#center](./images/ec2_setup_2.png "EC2 console page")
 
 Select **Launch instance** and configure the following settings:
 
@@ -27,13 +28,13 @@ Select **Launch instance** and configure the following settings:
 - Set the architecture to **64-bit (Arm)**.
 - Set the instance type to **t4g.large**.
 
-![EC2 instance creation form showing Ubuntu selected with 64-bit Arm architecture and t4g.large instance type#center](./images/EC2_Setup_3.png "EC2 instance configuration")
+![EC2 instance creation form showing Ubuntu selected with 64-bit Arm architecture and t4g.large instance type#center](./images/ec2_setup_3.png "EC2 instance configuration")
 
 ### Create an SSH key pair
 
 Select **Create new Key Pair** and provide a name for the key pair. Select **Create key pair**:
 
-![Key pair creation dialog with a name field and Create key pair button#center](./images/EC2_Setup_4.png "Create a new SSH key pair")
+![Key pair creation dialog with a name field and Create key pair button#center](./images/ec2_setup_4.png "Create a new SSH key pair")
 
 {{% notice Note %}}
 Your browser downloads a `.pem` file automatically. Save this file in a known location because you need it to SSH into the instance.
@@ -43,9 +44,9 @@ Your browser downloads a `.pem` file automatically. Save this file in a known lo
 
 Scroll down to **Network Settings** and select **Edit**:
 
-![Network settings section of the EC2 launch wizard with an Edit button#center](./images/EC2_Setup_4_ns.png "Edit network settings")
+![Network settings section of the EC2 launch wizard with an Edit button#center](./images/ec2_setup_4_ns.png "Edit network settings")
 
-Select **Add security group rule** and add a rule to allow inbound TCP traffic on port 4912. The Edge Impulse Runner serves a web-based inference viewer on this port, which you use later to confirm the model is running.
+Select **Add security group rule** and add a rule to allow inbound TCP traffic on port 4912. The Edge Impulse Linux Runner serves a web-based inference viewer on this port, which you use later to confirm the model is running.
 
 For both the SSH rule (port 22) and the port 4912 rule, restrict the source to your own IP address rather than allowing access from anywhere. To find your current public IP, run:
 
@@ -55,23 +56,23 @@ curl http://checkip.amazonaws.com
 
 Enter the returned IP address with a `/32` suffix (for example, `203.0.113.10/32`) in the **Source** field for each security group rule. This limits access to your machine only.
 
-![Security group rule showing TCP port 4912 allowed for inbound traffic#center](./images/EC2_Setup_4_4912.png "Add security group rule for port 4912")
+![Security group rule showing TCP port 4912 allowed for inbound traffic#center](./images/ec2_setup_4_4912.png "Add security group rule for port 4912")
 
 ### Increase disk space
 
 The default 8 GB root volume isn't enough for the dependencies and model files. Under **Configure storage**, change the root volume size from `8` to `28` GB:
 
-![Storage configuration showing the root volume size set to 28 GB#center](./images/EC2_Setup_5.png "Increase root volume to 28 GB")
+![Storage configuration showing the root volume size set to 28 GB#center](./images/ec2_setup_5.png "Increase root volume to 28 GB")
 
 ### Launch and verify the instance
 
 Select **Launch instance**. You should see a confirmation that the instance is being created:
 
-![Launch confirmation screen showing the instance is being created#center](./images/EC2_Setup_6.png "Instance launch confirmation")
+![Launch confirmation screen showing the instance is being created#center](./images/ec2_setup_6.png "Instance launch confirmation")
 
 Select **View all instances** and refresh the page. Your instance should show a **Running** state:
 
-![EC2 instances list showing the new instance in Running state with a public IP address#center](./images/EC2_Setup_7.png "Running EC2 instance")
+![EC2 instances list showing the new instance in Running state with a public IP address#center](./images/ec2_setup_7.png "Running EC2 instance")
 
 Copy the **Public IPv4 address** from the instance details. You need this to connect over SSH.
 
@@ -86,13 +87,13 @@ ssh -i ./your-key-pair.pem ubuntu@<your-ec2-public-ip>
 
 You should see a login shell for your EC2 instance:
 
-![Terminal showing a successful SSH login to the Ubuntu EC2 instance#center](./images/EC2_Setup_8.png "SSH login shell")
+![Terminal showing a successful SSH login to the Ubuntu EC2 instance#center](./images/ec2_setup_8.png "SSH login shell")
 
 Keep this shell open. You'll use it in the following steps.
 
 ### Install dependencies
 
-The Edge Impulse Runner and AWS IoT Greengrass require several system packages. Update the package list and install the build tools, Node.js, and GStreamer plugins:
+The Edge Impulse Linux Runner and AWS IoT Greengrass require several system packages. Update the package list and install the build tools, Node.js, and GStreamer plugins:
 
 ```bash
 sudo apt update
@@ -145,5 +146,9 @@ Save this JSON to a text file on your local machine. You'll paste it into the Gr
    }
 }
 ```
+
+## What you've accomplished
+
+You've set up an Ubuntu EC2 Arm instance, installed its dependencies, and saved its component configuration.
 
 Your EC2 instance is ready. Return to the [hardware setup page](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/hardwaresetup/) and continue to the next section to set up your Edge Impulse project.

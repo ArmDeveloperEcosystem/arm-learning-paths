@@ -22,7 +22,7 @@ export AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
 If you already have credentials, skip ahead to [Install Greengrass Nucleus Classic](#install-greengrass-nucleus-classic).
 {{% /notice %}}
 
-If you're using a personal AWS account and don't have access credentials yet, follow the steps below to create them.
+If you're using a personal AWS account and don't have access credentials yet, create them as follows.
 
 ### Create access credentials for a personal AWS account
 
@@ -34,7 +34,7 @@ Open the IAM Dashboard:
 
 ![IAM Dashboard showing the main overview with users, roles, and policies sections#center](./images/gg_install_iam_dashboard.png "IAM Dashboard")
 
-Select **Users** from the left sidebar:
+Select **Users**:
 
 ![IAM Users list showing available user accounts#center](./images/gg_install_iam_2.png "IAM Users list")
 
@@ -61,7 +61,7 @@ export AWS_ACCESS_KEY_ID=<your-access-key-id>
 export AWS_SECRET_ACCESS_KEY=<your-secret-access-key>
 ```
 
-You'll paste these into your SSH session during the Greengrass installation.
+You'll paste these into an SSH session during the Greengrass installation.
 
 ## Install Greengrass Nucleus Classic
 
@@ -73,7 +73,7 @@ Select **Linux** as the device type. The console generates download and install 
 
 ![Greengrass core device setup page showing the Linux device type selected and the Nucleus Classic option#center](./images/gg_install_device.png "Set up core device")
 
-Scroll down to see the install steps. The console provides commands tailored to your account. Follow these steps in an SSH session on your edge device:
+The console provides installation commands tailored to your account. Run them in an SSH session on your edge device:
 
 1. Export your AWS credentials in the terminal:
 
@@ -88,7 +88,7 @@ Scroll down to see the install steps. The console provides commands tailored to 
 
 4. Wait for the installer to finish. A successful installation displays a confirmation message.
 
-The screenshot below shows where to find these commands in the console:
+The screenshot shows where to find these commands in the console:
 
 ![Greengrass setup page showing the Download the installer and Run the installer sections with copy buttons#center](./images/gg_install_device2.png "Installer commands")
 
@@ -112,6 +112,40 @@ To add these permissions, navigate to **IAM** > **Roles** in the AWS Console and
 ![GreengrassV2TokenExchangeRole permissions page showing the three newly attached policies#center](./images/iam_ter_update.webp "Updated token exchange role permissions")
 
 After updating, your `GreengrassV2TokenExchangeRole` should show all three policies attached.
+
+## Place the Edge Impulse model
+
+Verify the Edge Impulse `.eim` model file that you copied in the previous task:
+
+```bash
+ls -al /tmp/currentModel.eim
+```
+
+The expected output is:
+
+```output
+/tmp/currentModel.eim
+```
+
+Copy the `.eim` file to the Greengrass service user. In an SSH session on your edge device, run:
+
+```bash
+sudo su - 
+su - ggc_user
+mkdir $HOME/data
+cd $HOME/data
+cp /tmp/currentModel.eim .
+chmod 755 currentModel.eim
+ls -al /home/ggc_user/data/currentModel.eim
+```
+
+The expected result lists `/home/ggc_user/data/currentModel.eim` in your SSH session.
+
+{{% notice Note %}}
+In a production deployment, the `.eim` file is typically distributed to edge devices through the device management system. In this Learning Path, you copy and place the file manually instead.
+{{% /notice %}}
+
+With the deployment built and the `.eim` file placed on your edge device, continue to store your API key.
 
 ## What you've accomplished
 
