@@ -1,13 +1,13 @@
 ---
-title: Validate FreeRTOS in Zena CSS
+title: Add FreeRTOS to the Zena CSS SW stack boot flow
 description: Replace the default Zephyr Cluster 1 firmware with a FreeRTOS Multi View 2 image and verify that it runs correctly through the standard Zena CSS secure boot flow.
-weight: 4
+weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Validate FreeRTOS in Zena CSS
+# Run FreeRTOS in Zena CSS SW stack
 
 ## Objective
 
@@ -50,35 +50,45 @@ The full-stack validation flow is different. In the standard Zena CSS boot proce
 
 To validate FreeRTOS as a drop-in replacement for the Cluster 1 Zephyr image, FreeRTOS must use the same GIC view and redistributor addresses as the original firmware. Otherwise, interrupt configuration no longer matches the platform state.
 
-For more background on the Zena CSS Safety Island GIC multi-view, refer to the [Arm Zena CSS documentation -> System Management Block -> GIC Multiple Views](https://arm-zena-css.docs.arm.com/en/latest/design/components.html#gic-multiple-views).
+For more background, see [GIC Multiple Views in the Arm Zena CSS documentation](https://arm-zena-css.docs.arm.com/en/latest/design/components.html#gic-multiple-views).
 
-Update the GIC base addresses in the FreeRTOS configuration from View 0 to View 2:
+The published demo already defines both configurations. Selecting `zena_css_fvp` activates the View 2 block in `FreeRTOSConfig.h`:
 
-```diff
-#if defined( R82AE_PLATFORM_ZENA_CSS )
--    #define configINTERRUPT_CONTROLLER_BASE_ADDRESS    0x30000000UL
--    #define configGIC_REDISTRIBUTOR_BASE_ADDRESS       0x30060000UL
-+    #define configINTERRUPT_CONTROLLER_BASE_ADDRESS    0x30200000UL
-+    #define configGIC_REDISTRIBUTOR_BASE_ADDRESS       0x30260000UL
-     #define configINTERRUPT_PRIORITY_REGISTER_ADDRESS  ( configGIC_REDISTRIBUTOR_BASE_ADDRESS + 0x10400UL )
-     #define configPL011_UART0_BASE_ADDRESS             0x2A410000UL
-     #define configGIC_SGI_AFF2                         1U
+```c
+#elif defined( R82AE_PLATFORM_ZENA_CSS_FVP )
+    #define configINTERRUPT_CONTROLLER_BASE_ADDRESS    0x30200000UL
+    #define configGIC_REDISTRIBUTOR_BASE_ADDRESS       0x30260000UL
+    #define configINTERRUPT_PRIORITY_REGISTER_ADDRESS  ( configGIC_REDISTRIBUTOR_BASE_ADDRESS + 0x10400UL )
+    #define configPL011_UART0_BASE_ADDRESS             0x2A410000UL
+    #define configGIC_SGI_AFF2                         1U
 ```
 
 
-## Build the FreeRTOS Application
+## Build the FreeRTOS application
+
+Configure the exact full-stack platform target, `zena_css_fvp`:
 
 ```bash
-./scripts/build-r82ae.sh gcc debug zena-css
+cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
+cmake -S . -B build/zena_css \
+  -DCMAKE_TOOLCHAIN_FILE=gnu_toolchain.cmake \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DKERNEL_DIR_PATH=../../FreeRTOS-Kernel \
+  -DR82AE_PLATFORM=zena_css_fvp
+cmake --build build/zena_css --parallel
+aarch64-none-elf-objcopy -O binary \
+  build/zena_css/r82ae_smp_fvp_gcc_armclang.elf \
+  build/zena_css/r82ae_smp_fvp_gcc_armclang.bin
 ```
 
 The generated binary will be located in:
 
-```text
-build/fvp_r82ae/r82ae_smp_ping_pong_fvp_gcc_armclang.bin
+```output
+build/zena_css/r82ae_smp_fvp_gcc_armclang.bin
 ```
 
 Record the full path to this file.
+
 
 ## Understand how the firmware is packaged
 
@@ -228,7 +238,7 @@ For an initial platform validation, none of that is required.
 The FreeRTOS binary has already been built externally:
 
 ```text
-build/fvp_r82ae/r82ae_smp_ping_pong_fvp_gcc_armclang.bin
+build/zena_css/r82ae_smp_fvp_gcc_armclang.bin
 ```
 
 The quickest way to validate functionality is therefore to replace the SI CL1 payload at the image-packaging stage.
@@ -255,7 +265,7 @@ cp ${RECIPE_SYSROOT}/firmware/${SI_CL1_FIRMWARE_BINARY} \
 Replace it with:
 
 ```bash
-cp /path/to/r82ae_smp_ping_pong_fvp_gcc_armclang.bin \
+cp /absolute/path/to/build/zena_css/r82ae_smp_fvp_gcc_armclang.bin \
    ${B}/safety_island_cl1.bin
 ```
 
@@ -269,7 +279,7 @@ cp ${RECIPE_SYSROOT}/firmware/${SI_CL1_FIRMWARE_BINARY} \
 Replace it with:
 
 ```bash
-cp /path/to/r82ae_smp_ping_pong_fvp_gcc_armclang.bin \
+cp /absolute/path/to/build/zena_css/r82ae_smp_fvp_gcc_armclang.bin \
    ${B}/capsule_safety_island_cl1.bin
 ```
 
@@ -341,4 +351,3 @@ You have validated a FreeRTOS Multi View 2 image in the complete Zena CSS softwa
 By manually replacing the default Zephyr Cluster 1 firmware, you verified that the application works correctly with the standard secure boot, image signing, and firmware packaging flow.
 
 The next Learning Path shows how to automate this process using Yocto integration.
-

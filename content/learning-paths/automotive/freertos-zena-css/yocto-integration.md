@@ -1,7 +1,7 @@
 ---
 title: Integrate the FreeRTOS image with Yocto
 description: Define a Yocto recipe and image-selection flow that builds, signs, and packages FreeRTOS as the Zena CSS Safety Island firmware.
-weight: 5
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -23,7 +23,7 @@ First, create a recipe that installs the binary validated in the previous part. 
 
 The initial recipe must:
 
-- Take the known-good `r82ae_smp_ping_pong_fvp_gcc_armclang.bin` as an input artifact
+- Take the known-good `r82ae_smp_fvp_gcc_armclang.bin` as an input artifact
 - Install it into the recipe deploy directory
 - Expose the file under the name expected by the Safety Island image packaging
 - Replace the Zephyr payload only when the FreeRTOS selection is enabled

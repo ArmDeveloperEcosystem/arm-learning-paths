@@ -1,13 +1,30 @@
 ---
 title: Direct loading FreeRTOS on the Zena CSS Safety Island Cluster 1
 description: Adapt the Cortex-R82AE FreeRTOS port to the Zena CSS memory map and load it directly into the Safety Island cluster on the FVP.
-weight: 3
+weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Establish the Zena CSS baseline
+# Direct load FreeRTOS on the Zena CSS FVP
+
+## Objective
+
+In the previous chapter, FreeRTOS ran on `FVP_BaseR_Cortex-R82AE`. In this chapter, you will investigate the changes required to run the same software on the R82AE cores in Safety Island Cluster 1 of `FVP_Zena_CSS_Cfg2`.
+You will learn how to retrieve information from the Zena CSS software stack and identify the additional porting requirements, particularly the differences in peripheral base addresses.
+For the initial bring-up, you will boot only the software for Safety Island Cluster 1. Keeping the other platform cores inactive shortens the development cycle and simplifies debugging.
+
+After completing this section, you will have verified that:
+
+- The UART and GIC base addresses are correctly configured for Zena CSS, using GIC Multi-View 0 during initial bring-up.
+- The FreeRTOS raw binary can be loaded directly into Safety Island Cluster 1 LLRAM.
+- Safety Island Cluster 1 can be started independently of the standard Zena CSS secure boot flow.
+- FreeRTOS starts successfully on all four R82AE cores in Safety Island Cluster 1 of FVP_Zena_CSS_Cfg2.
+- UART output, SMP scheduling, core affinity, shared memory, and interprocessor interrupts operate correctly.
+
+
+## Building the Zena CSS SW stack
 
 Build and run the Arm Zena CSS Reference Software Stack before you replace its Safety Island software. Follow the [build instructions in the Zena CSS user guide](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html).
 
@@ -76,7 +93,7 @@ Don't use `GICR_TYPER.Last` to discover all Cluster 1 redistributors. In GIC vie
 
 To inspect the GIC address map exposed by the model, run:
 
-```console
+```bash
 build/tmp/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.gic.print-memory-map=1
 ```
@@ -133,11 +150,31 @@ Start with a single-core application that prints a banner. This reduces the init
 
 Build the Zena CSS target to produce a raw binary. Record the linked load address because the `--data` offset and the image's link address must describe the same memory layout.
 
+
+### Compile
+
+Return to the Cortex-R82AE demo directory used in the previous section. Configure the exact direct-load platform target, `zena_css_fvp_direct_load`, and use the adjacent kernel clone:
+
+```bash
+cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
+cmake -S . -B build/zena_css_direct_load \
+  -DCMAKE_TOOLCHAIN_FILE=gnu_toolchain.cmake \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DKERNEL_DIR_PATH=../../FreeRTOS-Kernel \
+  -DR82AE_PLATFORM=zena_css_fvp_direct_load
+cmake --build build/zena_css_direct_load --parallel
+aarch64-none-elf-objcopy -O binary \
+  build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.elf \
+  build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.bin
+```
+
+
+
 ### Load the binary into Cluster 1 LLRAM
 
 From the Zena CSS `yocto_project` directory, start the Safety Island cluster and load a binary directly. First, check the workflow with the stack's `si-hello-world.bin`:
 
-```console
+```bash
 build/tmp/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.cluster1.core_power_on_by_default=1 \
   --data "css.smb.si.cluster1_llram=build/tmp/deploy/images/aspen/si-hello-world.bin@0x0000"
@@ -152,7 +189,7 @@ build/tmp/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspe
   -C css.smb.si.cluster1.core_power_on_by_default=1 \
   -C css.smb.si.CL1_LLRAM_config=15 \
   -C css.smb.smd.ref_counter.non_arch_start_at_default=1 \
-  --data "css.smb.si.cluster1_llram=/absolute/path/to/build/fvp_r82ae/r82ae_smp_ping_pong_fvp_gcc_armclang.bin@0x0000"
+  --data "css.smb.si.cluster1_llram=/absolute/path/to/FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.bin@0x0000"
 ```
 
 Each `-C component.parameter=value` argument overrides an FVP model parameter. In this command, the value `1` enables a Boolean option. The three overrides change the FVP startup behavior as follows:
