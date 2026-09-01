@@ -7,7 +7,7 @@ layout: learningpathall
 
 ## Download the scripts
 
-Download the scripts for this Learning Path by copying and pasting the following commands into your terminal:
+Download the scripts for this Learning Path by running the following commands in your terminal:
 
 ```bash
 mkdir -p scripts
@@ -23,7 +23,7 @@ cd ..
 
 You'll run the exported models on an Arm Linux CPU.
 
-Review the processor, Python version, and available space on the system you'll use to run the project:
+Review the processor, Python version, and available space on the system that you'll use to run the project:
 
 ```bash
 lscpu
