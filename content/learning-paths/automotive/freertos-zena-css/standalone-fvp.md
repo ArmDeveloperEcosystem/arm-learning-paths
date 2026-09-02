@@ -141,12 +141,33 @@ FVP_BaseR_Cortex-R82AE \
   --application build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf
 ```
 
-Because the software will not be loaded from an ELF file on the target platform, create a raw binary and load it directly at the appropriate FVP memory address:
+### Create and load a raw binary
+
+The target platform loads a raw binary rather than an ELF file. Use the conversion tool supplied with the compiler that produced the ELF file. GNU and ArmClang handle this image layout differently.
+
+For an ELF file built with the GNU toolchain, use `aarch64-none-elf-objcopy`:
 
 ```bash
 aarch64-none-elf-objcopy -O binary \
   build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf \
   build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.bin
+```
+
+For an ELF file built with ArmClang, use `fromelf` from Arm Compiler for Embedded instead of GNU `objcopy`:
+
+```bash
+fromelf --bin \
+  --output build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.bin \
+  build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf
+```
+
+The ArmClang linker uses a scatter-loading description with separate load and runtime addresses. For this application, `fromelf` places the table's load image at offset `0x1ef60`. The startup code then copies the table to its runtime address at `0x1404004e0`.
+
+Using GNU `objcopy` on the ArmClang ELF file does not preserve this load-image layout correctly. It produces a binary of approximately 4.3 MB, while `fromelf` produces the expected binary of approximately 262 KB. A large difference in file size is therefore an indication that the wrong conversion tool was used.
+
+After generating the binary with the appropriate tool, load it at the Cluster 0 LLRAM base address:
+
+```bash
 FVP_BaseR_Cortex-R82AE \
   --config fvp_R82AE_config.txt \
   --data build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.bin@0x140000000

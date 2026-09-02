@@ -1,0 +1,199 @@
+From 85fb0ef3afcf17b7c67b08e73fbb75bfc4c8188f Mon Sep 17 00:00:00 2001
+From: Julien Jayat <julien.jayat@arm.com>
+Date: Wed, 2 Sep 2026 17:02:46 +0200
+Subject: [PATCH] Add recipe for building and deploying FreeRTOS.
+
+It targets the Zena CSS safety Island Cluster 1 or Cortex-R82AE.
+---
+ .../include/fvp/fvp-rd-aspen-extras.inc       |  3 +
+ .../include/fvp/fvp-rd-aspen-freertos.inc     | 11 +++
+ ...toolchain-use-gcc-13-cortex-r82-name.patch | 49 +++++++++++++
+ .../recipes-kernel/freertos/files/REUSE.toml  | 11 +++
+ .../freertos/freertos-demos-cl1.bb            | 72 +++++++++++++++++++
+ 5 files changed, 146 insertions(+)
+ create mode 100644 yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc
+ create mode 100644 yocto/meta-zena-css-safety-island/recipes-kernel/freertos/files/0001-toolchain-use-gcc-13-cortex-r82-name.patch
+ create mode 100644 yocto/meta-zena-css-safety-island/recipes-kernel/freertos/files/REUSE.toml
+ create mode 100644 yocto/meta-zena-css-safety-island/recipes-kernel/freertos/freertos-demos-cl1.bb
+
+diff --git a/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc b/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc
+index e0f3a249..831a156d 100644
+--- a/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc
++++ b/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc
+@@ -6,3 +6,6 @@
+ 
+ require ${@bb.utils.contains('DISTRO_FEATURES', 'zephyr', \
+     'conf/machine/include/fvp/fvp-rd-aspen-zephyr.inc', '', d)}
++
++require ${@bb.utils.contains('DISTRO_FEATURES', 'freertos', \
++    'conf/machine/include/fvp/fvp-rd-aspen-freertos.inc', '', d)}
+diff --git a/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc b/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc
+new file mode 100644
+index 00000000..a5b122f5
+--- /dev/null
++++ b/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc
+@@ -0,0 +1,11 @@
++#
++# SPDX-FileCopyrightText: <text>Copyright 2026 Arm Limited and/or its
++# affiliates <open-source-office@arm.com></text>
++#
++# SPDX-License-Identifier: MIT
++
++# Safety Island FreeRTOS defaults. This file is included only when
++# DISTRO_FEATURES contains "freertos".
++
++SAFETY_ISLAND_CL1_RECIPE ??= "freertos-demos-cl1"
++SAFETY_ISLAND_CL1_IMAGE ??= "${SAFETY_ISLAND_CL1_RECIPE}"
+diff --git a/yocto/meta-zena-css-safety-island/recipes-kernel/freertos/files/0001-toolchain-use-gcc-13-cortex-r82-name.patch b/yocto/meta-zena-css-safety-island/recipes-kernel/freertos/files/0001-toolchain-use-gcc-13-cortex-r82-name.patch
+new file mode 100644
+index 00000000..f5ed55f4
+--- /dev/null
++++ b/yocto/meta-zena-css-safety-island/recipes-kernel/freertos/files/0001-toolchain-use-gcc-13-cortex-r82-name.patch
+@@ -0,0 +1,49 @@
++From 20f4b6dd508128439f746af770753fab8174924b Mon Sep 17 00:00:00 2001
++From: Julien Jayat <julien.jayat@arm.com>
++Date: Wed, 2 Sep 2026 10:00:00 +0200
++Subject: [PATCH] build: support the GCC 13 toolchain
++
++Adapt the demo to build correctly with the aarch64-none-elf GCC 13.3
++toolchain supplied by meta-arm.
++
++GCC 13 does not recognise cortex-r82ae, so use its equivalent cortex-r82
++CPU name. Also compile crt_replacements.c with -fno-builtin-memset to stop
++GCC 13 optimizing the replacement memset implementation into a recursive
++call to itself.
++
++Also allow the recipe to supply a source-prefix map. This prevents absolute
++Yocto build paths used by FreeRTOS assertions from entering the raw firmware.
++
++Upstream-Status: Inappropriate [Yocto toolchain compatibility]
++Signed-off-by: Julien Jayat <julien.jayat@arm.com>
++---
++ CMakeLists.txt      | 4 ++++
++ gnu_toolchain.cmake | 4 ++--
++ 2 files changed, 6 insertions(+), 2 deletions(-)
++
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index 9e48e8d..e36555f 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -79,6 +79,10 @@ target_sources(${DEMO_TARGET_NAME}
++ 	    ${DEMO_SOURCE_DIR}/crt_replacements.c
++ )
++ 
+++set_source_files_properties(crt_replacements.c PROPERTIES
+++    COMPILE_OPTIONS "$<$<C_COMPILER_ID:GNU>:-fno-builtin-memset>"
+++)
+++
++ target_include_directories(${DEMO_TARGET_NAME}
++ 	PRIVATE
++ 	    ${DEMO_SOURCE_DIR}
++diff --git a/gnu_toolchain.cmake b/gnu_toolchain.cmake
++index b8a5144..72c9775 100644
++--- a/gnu_toolchain.cmake
+++++ b/gnu_toolchain.cmake
++@@ -16,2 +16,2 @@
++-set(CMAKE_C_FLAGS "-mcpu=cortex-r82ae -mabi=lp64 -mlittle-endian -Wall -Wextra -mstrict-align -Wno-return-type -Wno-unused-parameter -Wno-attributes -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast")
++-set(CMAKE_ASM_FLAGS "-mcpu=cortex-r82ae -mabi=lp64 -Wall")
+++set(CMAKE_C_FLAGS "-mcpu=cortex-r82 -mabi=lp64 -mlittle-endian -Wall -Wextra -mstrict-align -Wno-return-type -Wno-unused-parameter -Wno-attributes -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast ${FREERTOS_SOURCE_PREFIX_MAP}")
+++set(CMAKE_ASM_FLAGS "-mcpu=cortex-r82 -mabi=lp64 -Wall ${FREERTOS_SOURCE_PREFIX_MAP}")
++-- 
++2.43.0
+diff --git a/yocto/meta-zena-css-safety-island/recipes-kernel/freertos/files/REUSE.toml b/yocto/meta-zena-css-safety-island/recipes-kernel/freertos/files/REUSE.toml
+new file mode 100644
+index 00000000..1b331dd7
+--- /dev/null
++++ b/yocto/meta-zena-css-safety-island/recipes-kernel/freertos/files/REUSE.toml
+@@ -0,0 +1,11 @@
++# SPDX-FileCopyrightText: <text>Copyright 2026 Arm Limited and/or its
++# affiliates <open-source-office@arm.com></text>
++#
++# SPDX-License-Identifier: MIT
++
++version = 1
++
++[[annotations]]
++path = ["*.patch"]
++SPDX-FileCopyrightText = "Copyright 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>."
++SPDX-License-Identifier = "MIT"
+diff --git a/yocto/meta-zena-css-safety-island/recipes-kernel/freertos/freertos-demos-cl1.bb b/yocto/meta-zena-css-safety-island/recipes-kernel/freertos/freertos-demos-cl1.bb
+new file mode 100644
+index 00000000..75469c8d
+--- /dev/null
++++ b/yocto/meta-zena-css-safety-island/recipes-kernel/freertos/freertos-demos-cl1.bb
+@@ -0,0 +1,72 @@
++# SPDX-FileCopyrightText: <text>Copyright 2026 Arm Limited and/or its
++# affiliates <open-source-office@arm.com></text>
++#
++# SPDX-License-Identifier: MIT
++
++SUMMARY = "FreeRTOS application for Safety Island Cluster 1"
++DESCRIPTION = "Builds and stages the FreeRTOS demo firmware used on RD-Aspen Safety Island Cluster 1."
++HOMEPAGE = "https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = " \
++    file://LICENSE.md;md5=5d1c92c2ddf8acf8480e3c18f3ab890b \
++    file://${FREERTOS_KERNEL_DIR}/LICENSE.md;md5=7ae2be7fb1637141840314b51970a9f7 \
++"
++
++SRC_URI = " \
++    git://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos.git;protocol=https;branch=R82AE-demo;name=demos;destsuffix=demos \
++    git://github.com/JulienJayat-Arm/FreeRTOS-Kernel.git;protocol=https;branch=R82AE-demo;name=kernel;destsuffix=kernel \
++    file://0001-toolchain-use-gcc-13-cortex-r82-name.patch \
++"
++SRCREV_demos = "27962d523fa4d96e643e4f225dd3cd49bb7829de"
++SRCREV_kernel = "def452c440997856806ed9a20058bd3c4acde315"
++SRCREV_FORMAT = "demos_kernel"
++
++S = "${UNPACKDIR}/demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG"
++FREERTOS_KERNEL_DIR = "${UNPACKDIR}/kernel"
++
++COMPATIBLE_MACHINE = "fvp-rd-aspen"
++
++inherit cmake deploy
++inherit pv_tracker
++
++DEPENDS += "gcc-aarch64-none-elf-native"
++
++# Describe the Safety Island target and bare-metal OS in the work directory
++MULTIMACH_TARGET_SYS = "${MACHINE}_safety_island_c1-freertos"
++
++CMAKE_BUILD_TYPE = "Debug"
++OECMAKE_BUILD_TYPE = "${CMAKE_BUILD_TYPE}"
++EXTRA_OECMAKE = " \
++    -DCMAKE_TOOLCHAIN_FILE=${S}/gnu_toolchain.cmake \
++    -DKERNEL_DIR_PATH=${FREERTOS_KERNEL_DIR} \
++    -DR82AE_PLATFORM=zena_css_fvp \
++    -DFREERTOS_SOURCE_PREFIX_MAP=-ffile-prefix-map=${UNPACKDIR}=/usr/src/debug/${PN}/${PV} \
++"
++
++FREERTOS_ELF = "${B}/r82ae_smp_fvp_gcc_armclang.elf"
++FREERTOS_BINARY = "${B}/r82ae_smp_fvp_gcc_armclang.bin"
++
++do_compile:append() {
++    ${STAGING_BINDIR_NATIVE}/aarch64-none-elf-objcopy -O binary \
++        "${FREERTOS_ELF}" "${FREERTOS_BINARY}"
++}
++
++do_install() {
++    if [ ! -f "${FREERTOS_BINARY}" ]; then
++        bbfatal "FreeRTOS firmware binary not found: ${FREERTOS_BINARY}"
++    fi
++
++    install -d "${D}/firmware"
++    install -m 0644 "${FREERTOS_BINARY}" "${D}/firmware/${PN}.bin"
++}
++
++# The firmware is consumed through the recipe sysroot and deploy directory;
++# it must not be installed into a Linux root filesystem.
++PACKAGES = ""
++SYSROOT_DIRS += "/firmware"
++
++do_deploy() {
++    install -m 0644 "${D}/firmware/${PN}.bin" "${DEPLOYDIR}/${PN}.bin"
++}
++addtask deploy after do_install
+-- 
+2.34.1
+

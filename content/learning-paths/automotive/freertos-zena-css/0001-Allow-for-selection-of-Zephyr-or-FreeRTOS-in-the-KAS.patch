@@ -1,0 +1,102 @@
+From 473a761ce46d8b8c40d9ab3047c5f189af202e24 Mon Sep 17 00:00:00 2001
+From: Julien Jayat <julien.jayat@arm.com>
+Date: Wed, 2 Sep 2026 14:59:35 +0200
+Subject: [PATCH] Allow for selection of Zephyr or FreeRTOS in the KAS menu.
+
+---
+ extension.Kconfig                | 18 ++++++++++++++++++
+ yocto/kas/arm-auto-solutions.yml |  2 +-
+ yocto/kas/si-cl1-freertos.yml    | 14 ++++++++++++++
+ yocto/kas/si-cl1-zephyr.yml      | 14 ++++++++++++++
+ 4 files changed, 47 insertions(+), 1 deletion(-)
+ create mode 100644 yocto/kas/si-cl1-freertos.yml
+ create mode 100644 yocto/kas/si-cl1-zephyr.yml
+
+diff --git a/extension.Kconfig b/extension.Kconfig
+index 039a2ca5..1d1ad43f 100644
+--- a/extension.Kconfig
++++ b/extension.Kconfig
+@@ -27,11 +27,29 @@ config ARCHITECTURE_VIRTUALIZATION
+ 
+ endchoice
+ 
++choice
++    prompt "*** Safety Island Cluster 1 RTOS ***"
++    depends on RD_ASPEN_CFG2
++    default SI_CL1_RTOS_ZEPHYR
++
++config SI_CL1_RTOS_ZEPHYR
++    bool "Zephyr"
++
++config SI_CL1_RTOS_FREERTOS
++    bool "FreeRTOS"
++
++endchoice
++
+ config KAS_INCLUDE_DEMOS_ARCHITECTURE
+     string
+     default "../sw-ref-stack/yocto/kas/baremetal.yml" if ARCHITECTURE_BAREMETAL
+     default "../sw-ref-stack/yocto/kas/virtualization.yml" if ARCHITECTURE_VIRTUALIZATION
+ 
++config KAS_INCLUDE_SI_CL1_RTOS
++    string
++    default "../sw-ref-stack/yocto/kas/si-cl1-zephyr.yml" if SI_CL1_RTOS_ZEPHYR
++    default "../sw-ref-stack/yocto/kas/si-cl1-freertos.yml" if SI_CL1_RTOS_FREERTOS
++
+ config KAS_INCLUDE_APPLICATION
+     string
+     default "../sw-ref-stack/yocto/kas/demos.yml" if USE_CASE_DEMOS
+diff --git a/yocto/kas/arm-auto-solutions.yml b/yocto/kas/arm-auto-solutions.yml
+index e71cc429..c0bf6a48 100644
+--- a/yocto/kas/arm-auto-solutions.yml
++++ b/yocto/kas/arm-auto-solutions.yml
+@@ -70,5 +70,5 @@ local_conf_header:
+   cassini: |
+     CASSINI_GENERIC_ARM64_FILESYSTEM = "0"
+     DISTRO_FEATURES:remove = "cassini-security cassini-ota cassini-parsec"
+-    DISTRO_FEATURES:append = " cassini-dev zephyr"
++    DISTRO_FEATURES:append = " cassini-dev"
+     KERNEL_CLASSES:remove = "containers_kernelcfg_check"
+diff --git a/yocto/kas/si-cl1-freertos.yml b/yocto/kas/si-cl1-freertos.yml
+new file mode 100644
+index 00000000..dfca574d
+--- /dev/null
++++ b/yocto/kas/si-cl1-freertos.yml
+@@ -0,0 +1,14 @@
++#
++# SPDX-FileCopyrightText: <text>Copyright 2026 Arm Limited and/or its
++# affiliates <open-source-office@arm.com></text>
++#
++# SPDX-License-Identifier: MIT
++
++---
++header:
++  version: 16
++
++local_conf_header:
++  si-cl1-freertos: |
++    DISTRO_FEATURES:remove = "zephyr"
++    DISTRO_FEATURES:append = " freertos"
+diff --git a/yocto/kas/si-cl1-zephyr.yml b/yocto/kas/si-cl1-zephyr.yml
+new file mode 100644
+index 00000000..3cd62552
+--- /dev/null
++++ b/yocto/kas/si-cl1-zephyr.yml
+@@ -0,0 +1,14 @@
++#
++# SPDX-FileCopyrightText: <text>Copyright 2026 Arm Limited and/or its
++# affiliates <open-source-office@arm.com></text>
++#
++# SPDX-License-Identifier: MIT
++
++---
++header:
++  version: 16
++
++local_conf_header:
++  si-cl1-zephyr: |
++    DISTRO_FEATURES:remove = "freertos"
++    DISTRO_FEATURES:append = " zephyr"
+-- 
+2.34.1
+
