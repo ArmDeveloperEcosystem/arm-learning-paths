@@ -32,7 +32,6 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: ML
 armips:
-    - Cortex-M
     - Ethos-U
 tools_software_languages:
     - ExecuTorch
