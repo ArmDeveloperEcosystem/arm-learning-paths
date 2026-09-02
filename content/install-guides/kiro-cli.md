@@ -278,10 +278,6 @@ Replace the path `/path/to/your/workspace` with the path to your local codebase:
         "--pull=always",
         "-v",
         "/path/to/your/workspace:/workspace",
-        "-v",
-        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v",
-        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -290,8 +286,6 @@ Replace the path `/path/to/your/workspace` with the path to your local codebase:
   }
 }
 ```
-
-To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
 
 ### (Optional) Use an alternative containerization tool
 
@@ -318,8 +312,6 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -349,8 +341,6 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -382,8 +372,6 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -415,8 +403,6 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},

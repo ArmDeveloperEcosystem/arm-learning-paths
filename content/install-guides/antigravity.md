@@ -389,7 +389,7 @@ MCP Servers
 
 Plugins (~/.gemini/antigravity-cli/plugins)
 >  ✓ arm_mcp_server  Tools: knowledge_base_search, check_image, sysreport_instructions,
-                     migrate_ease_scan, apx_recipe_run, +2 more
+                     migrate_ease_scan, +2 more
 ```
 
 
