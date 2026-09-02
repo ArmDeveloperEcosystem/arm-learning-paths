@@ -1,5 +1,6 @@
 ---
 title: Optimize the application manually and with the Arm Performix MCP server
+description: Use Arm Performix profile evidence and its standalone MCP server to optimize the particle layout and validate the improvement.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -58,17 +59,31 @@ The MCP server uses the targets configured in Arm Performix. For remote Linux ta
 Restart Codex and ask it to inspect the Memory Access recipe before running it on the configured target. Replace the target name and workload path in this example:
 
 ```text
-Use the Arm Performix MCP server to inspect the parameters, target support, and
-MCP guidance for the Memory Access recipe. Run the recipe on target
-"<target-name>" with workload
-"/home/<username>/Orbiting-Galaxy-Example/build/baseline". Before starting, repeat the target
-and workload and ask me to confirm them. When the run completes, return its run
-ID and summarize the measured L1 cache, latency, and TLB evidence.
+Use the Arm Performix MCP server to inspect the parameters and target support
+for the Memory Access recipe. Run the recipe on target "<target-name>" with
+workload "/home/<username>/Orbiting-Galaxy-Example/build/baseline". Before
+starting, repeat the target and workload and ask me to confirm them. When the
+run completes, return its run ID and summarize the measured L1 cache, latency,
+and TLB evidence.
 ```
 
 {{% notice Note %}}
-The Arm Performix MCP server can run any recipe available in Performix. Dynamic Insights are currently available only for successful Code Hotspots and System Utilization runs. For a Memory Access run, use the available metrics as evidence and validate the findings in the Performix GUI.
+Dynamic Insights aren't available for Memory Access runs. The MCP server can still run the recipe and query its measured data. Validate the L1 cache, latency, and TLB findings in the Performix GUI.
 {{% /notice %}}
+
+The Arm Performix MCP server manages targets, recipes, and run data. It doesn't provide remote source-file access by itself. To use Codex for the code changes, make the `Orbiting-Galaxy-Example` checkout available in the Codex workspace.
+
+After the run completes, replace `<run-id>` and ask Codex to connect the measurements to the source before proposing a change:
+
+```text
+Use the Arm Performix MCP server to query Memory Access run "<run-id>". Report
+the L1C load hit rate, average L1C load latency, L2C load percentage, and TLB
+walk evidence for update_positions(). Then inspect src/users_solution in the
+current workspace and propose a minimal data-layout optimization based on the
+measurements and source. Do not edit any files until I approve the proposal.
+```
+
+After you approve the proposal, ask Codex to update `src/users_solution`. Rebuild the binary on the target, rerun Memory Access against `build/users_solution`, and compare the same metrics with the baseline run. If Codex can't access the target checkout, apply the proposed patch on the target and continue to use the MCP server for collection and analysis.
 
 For more prompt patterns, see [Example prompts for dynamic agentic insights](https://developer.arm.com/documentation/110163/latest/Gather-performance-insights-with-AI-coding-agents/Example-prompts-for-dynamic-agentic-insights).
 
@@ -110,7 +125,7 @@ The following diagram compares the baseline and optimized layouts. Even though e
 
 To see what fully optimized results look like, run the Performix Memory Access recipe against the pre-built reference binary. In the Performix GUI, rerun the recipe and change the binary path from `~/Orbiting-Galaxy-Example/build/baseline` to `~/Orbiting-Galaxy-Example/build/optimized`.
 
-![Performix Memory Access results for the optimized binary showing 100 percent L1C load hits for the selected function and lower average L1C latency, confirming improved memory locality after the data layout change.#center](./performix_after_optimization.webp "Memory access results after the Structure of Arrays optimization")
+![Performix Memory Access results for the optimized binary showing 99.99 percent L1C load hits and 10.89-cycle average L1C latency for update_positions(), confirming improved memory locality after the data layout change.#center](./performix_after_optimization.webp "Memory access results after the Structure of Arrays optimization")
 
 The optimized result shows much stronger L1 cache behavior. The hot update path now has `100%` L1C loads in the captured result and a lower average L1C latency than the baseline. This confirms that the data layout change improved locality, not just wall-clock time.
 
@@ -124,6 +139,8 @@ Run the binaries directly on the remote machine without Performix to compare bot
 ```
 
 The hot loop is also instrumented with `scopedTimer`, so you can directly observe the speedup from the change.
+
+The output is similar to:
 
 ```output
 Baseline took 571 milliseconds
@@ -163,8 +180,8 @@ Optimized took 279 milliseconds
 | Wall time (ms)        | 571          | 279          | The optimized layout improves cache usage and removes pointer chasing, roughly halving execution time. |
 | Max RSS (KB)          | 92,720       | 64,044       | Structure of Arrays reduces memory footprint by removing per-object overhead and cold fields.   |
 | Minor page faults     | 22,655       | 15,500       | Fewer pages are touched due to more compact, contiguous storage of only needed data fields.  |
-| L1 cache hit rate (%) | 66.3         | 99.3         | Hot data is now accessed in a cache-friendly pattern, maximizing L1 cache effectiveness.      |
-| L1 avg latency (cycles)| 26.2         | 11.7         | Each L1 load takes fewer cycles because pointer chasing is removed. |
+| L1 cache hit rate (%) | 66.32        | 99.99        | Hot data is now accessed in a cache-friendly pattern, maximizing L1 cache effectiveness.      |
+| L1 avg latency (cycles)| 26.15        | 10.89        | Each L1 load takes fewer cycles because pointer chasing is removed. |
 
 
 ## What you've accomplished

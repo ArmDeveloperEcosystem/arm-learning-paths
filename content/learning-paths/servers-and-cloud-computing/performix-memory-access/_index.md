@@ -18,6 +18,7 @@ prerequisites:
   - Basic understanding of memory hierarchy within a CPU.
   - Basic C++ development experience.
   - Familiarity with the Linux command line.
+  - An MCP-compatible coding assistant. The example uses OpenAI Codex, which requires an OpenAI account.
 
 author: Kieran Hejmadi
 
@@ -54,8 +55,8 @@ further_reading:
       link: /learning-paths/servers-and-cloud-computing/performix-microarchitecture/
       type: learning-path
   - resource:
-      title: Automate x86-to-Arm application migration using Arm MCP Server
-      link: /learning-paths/servers-and-cloud-computing/arm-mcp-server/
+      title: Generate Arm Performix AI insights in Visual Studio Code with Codex
+      link: /learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-codex/
       type: learning-path
   - resource:
       title: Arm Performix
