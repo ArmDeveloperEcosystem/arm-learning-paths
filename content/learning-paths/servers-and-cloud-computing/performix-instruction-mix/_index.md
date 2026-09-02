@@ -96,13 +96,9 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/
         type: learning-path
     - resource:
-        title: Identify code hotspots using Arm Performix through the Arm MCP Server
-        link: /learning-paths/servers-and-cloud-computing/performix-mcp-agent/
+        title: Generate Arm Performix AI insights in Visual Studio Code with Codex
+        link: /learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-codex/
         type: learning-path
-    - resource:
-        title: Arm MCP Server GitHub Repository
-        link: https://github.com/arm/mcp
-        type: website
     - resource:
         title: KleidiAI GitHub Repository
         link: https://gitlab.arm.com/kleidi/kleidiai

@@ -1,6 +1,6 @@
 ---
 title: (Optional) Optimize matmul with vector intrinsics
-description: Optionally implement a custom Neon or SVE matrix multiplication kernel and profile it with Arm Performix or the Arm MCP Server.
+description: Optionally implement a custom Neon or SVE matrix multiplication kernel and profile it using the Arm Performix GUI or the Arm Performix MCP server.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -35,37 +35,28 @@ Example solutions are available in:
 
 You can use `AGENTS.md` in the GPT-2 example repository for guided learning support.
 
-### Use the Arm MCP Server with Performix 
+### Use the Arm Performix MCP server
 
-You can also use an MCP-compatible coding assistant, such as GitHub Copilot or Codex, with the Arm MCP Server. This gives the assistant direct tool access to run Performix recipes on your remote Arm target and create a faster feedback loop while you iterate on `matmul_user`.
+You can also use an MCP-compatible coding assistant, such as GitHub Copilot or Codex, with the Arm Performix MCP server. This gives the assistant access to Performix tools so it can run recipes on your configured remote Arm target and help you iterate on `matmul_user`.
 
-For setup details, see [Automate x86-to-Arm application migration using Arm MCP Server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/).
+For setup instructions, see [Configure the Arm Performix MCP server in Codex](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-codex/configure_mcp_codex/).
 
-Install Docker if needed, then pull the MCP server image:
+After you confirm that the MCP server is connected, use a focused prompt:
 
-```bash
-docker pull armlimited/arm-mcp:latest
+```text
+Use the Arm Performix MCP server to list the available recipes and targets.
+
+For the target named "<target-name>", run the Instruction Mix recipe with this workload:
+"/home/ubuntu/GPT-2-Example/build/gpt2_user --model gpt2-medium \"Once upon a time\" -n 150"
+
+Before starting, inspect the recipe parameters, target support, and MCP guidance. Repeat the target and workload, and ask me to confirm them. When the run completes, summarize the Instruction Mix results for `matmul_user` and suggest Neon or SVE improvements.
 ```
 
-To allow Performix access to remote targets from inside the container, mount your workspace plus SSH key and known hosts in your Codex MCP configuration (example `~/.codex/config.toml`):
+{{% notice Note %}}
 
-```output
-[mcp_servers.arm-mcp]
-command = "docker"
-args = [
-	"run",
-	"--rm",
-	"-i",
-	"-v", "/path/to/your/workspace:/workspace",
-	"-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-	"-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
-	"armlimited/arm-mcp"
-]
-```
+The Arm Performix MCP server can run Instruction Mix, but Dynamic Insights are available only for successful Code Hotspots and System Utilization runs.
 
-Restart your coding assistant, then prompt it to run Performix Instruction Mix and Code Hotspots on your `gpt2_user` binary and suggest Arm intrinsics improvements.
-
-![Screenshot of a coding assistant prompt configured to use Arm MCP Server tools for running Performix recipes and analyzing `matmul_user` optimization opportunities in the GPT-2 workload.#center](./mcp-performix-prompt.webp "Coding assistant prompt for Performix analysis through Arm MCP Server")
+{{% /notice %}}
 
 ## What you've accomplished and what's next
 
