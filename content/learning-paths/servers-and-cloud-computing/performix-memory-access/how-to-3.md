@@ -1,5 +1,5 @@
 ---
-title: Optimize the application manually and with the Arm MCP Server
+title: Optimize the application manually and with the Arm Performix MCP server
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -33,9 +33,9 @@ To measure wall time and compare it against the baseline, run:
 
 The hot loop is instrumented with `scopedTimer`, so you'll also see the loop duration printed directly to the terminal. Compare it with the baseline result of 571 milliseconds shown at the end of the section.
 
-## Optimize with an AI agent and the Arm MCP Server
+## Optimize with an AI agent and the Arm Performix MCP server
 
-You can use the Arm Model Context Protocol (MCP) Server with a code assistant such as Kiro, Gemini, Codex, or GitHub Copilot to optimize the application. The MCP server includes direct tool support to invoke Performix on a remote target. It integrates with MCP-compatible coding assistants and can provide performance insights to create a useful feedback loop. The following example shows how to connect to OpenAI Codex. For other tools, see [your preferred coding assistant](/learning-paths/servers-and-cloud-computing/arm-mcp-server/1-overview/).
+Arm Performix includes a local Model Context Protocol (MCP) server that you can use with an MCP-compatible coding assistant. The server can list Performix targets and runs, run recipes, and make profiling evidence available to the assistant. The following example shows how to connect the Arm Performix MCP server to OpenAI Codex. For other supported coding assistants, see [Configure the Arm Performix MCP server](https://developer.arm.com/documentation/110163/latest/Gather-performance-insights-with-AI-coding-agents/Configure-the-Arm-Performix-MCP-server).
 
 {{% notice Note %}}
 
@@ -43,33 +43,34 @@ You need an OpenAI account to use the Codex CLI.
 
 {{% /notice  %}}
 
-[Install Docker](/install-guides/docker/) and pull the MCP server image.
-
-```bash
-docker pull armlimited/arm-mcp:latest
-```
-
-To ensure the MCP server can invoke `performix` on remote machines, pass optional Docker arguments for your SSH private key and known hosts file. For example, use this TOML format for the Codex CLI by adding the following to `~/.codex/config.toml`:
+Arm Performix is already installed from the setup earlier in this Learning Path. Configure Codex to start the local MCP server through the Arm Performix `apx` executable. Add the following to `~/.codex/config.toml`, replacing `<path-to-apx>` with the full path for your host operating system:
 
 ```toml
-[mcp_servers.arm-mcp]
-command = "docker"
-args = [
-  "run",
-  "--rm",
-  "-i",
-  "-v", "/path/to/your/workspace:/workspace",
-  "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-  "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
-  "armlimited/arm-mcp"
-]
+[mcp_servers.arm-performix]
+command = "<path-to-apx>"
+args = ["mcp", "start"]
 ```
 
-Restart Codex and ask your coding assistant to run the `memory access` recipe, interpret the results, and inspect the relevant source code. Your prompt can include the remote target, workload binary, and source directory:
+For default `apx` paths and configuration through the Codex interface, see [Configure the Arm Performix MCP server in Codex](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-codex/configure_mcp_codex/).
 
-![Codex prompt requesting the Arm MCP server to run memory access and code hotspot recipes on the remote baseline workload, showing how to pass target, binary path, and source directory details.#center](./codex_prompt.webp "Prompting Codex to analyze the baseline workload with Arm MCP")
+The MCP server uses the targets configured in Arm Performix. For remote Linux targets, configure key-based SSH access and make sure your `known_hosts` file contains the target host key.
 
-Alternatively, you can use the curated [arm-full-optimization.md](https://github.com/arm/mcp/blob/main/agent-integrations/codex/arm-full-optimization.md) prompt file.
+Restart Codex and ask it to inspect the Memory Access recipe before running it on the configured target. Replace the target name and workload path in this example:
+
+```text
+Use the Arm Performix MCP server to inspect the parameters, target support, and
+MCP guidance for the Memory Access recipe. Run the recipe on target
+"<target-name>" with workload
+"/home/<username>/Orbiting-Galaxy-Example/build/baseline". Before starting, repeat the target
+and workload and ask me to confirm them. When the run completes, return its run
+ID and summarize the measured L1 cache, latency, and TLB evidence.
+```
+
+{{% notice Note %}}
+The Arm Performix MCP server can run any recipe available in Performix. Dynamic Insights are currently available only for successful Code Hotspots and System Utilization runs. For a Memory Access run, use the available metrics as evidence and validate the findings in the Performix GUI.
+{{% /notice %}}
+
+For more prompt patterns, see [Example prompts for dynamic agentic insights](https://developer.arm.com/documentation/110163/latest/Gather-performance-insights-with-AI-coding-agents/Example-prompts-for-dynamic-agentic-insights).
 
 ## Review the optimized solution
 
@@ -168,6 +169,6 @@ Optimized took 279 milliseconds
 
 ## What you've accomplished
 
-You used Arm Performix and the Arm MCP Server to identify a memory access bottleneck in a C++ particle simulation. You then connected the profile data to source code, found that the hot loop suffered from poor data layout and unnecessary pointer chasing, and improved the implementation with a Structure of Arrays layout. You validated the change with direct wall-time measurements and a second Performix run.
+You used Arm Performix manually and through the Arm Performix MCP server to identify a memory access bottleneck in a C++ particle simulation. You then connected the profile data to source code, found that the hot loop suffered from poor data layout and unnecessary pointer chasing, and improved the implementation with a Structure of Arrays layout. You validated the change with direct wall-time measurements and a second Performix run.
 
 This approach combines measurement tools, code context, and focused prompts to iterate on real bottlenecks.
