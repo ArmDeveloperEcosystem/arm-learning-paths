@@ -34,7 +34,6 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: ML
 armips:
-    - Cortex-M
     - Ethos-U
 tools_software_languages:
     - ExecuTorch
