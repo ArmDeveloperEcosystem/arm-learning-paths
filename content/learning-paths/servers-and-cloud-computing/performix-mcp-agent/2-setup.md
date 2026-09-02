@@ -1,6 +1,6 @@
 ---
 title: Build the Mandelbrot example on Arm Neoverse
-description: Build the Mandelbrot C++ example on an Arm Neoverse target and confirm the binary path that Performix will profile through the Arm MCP Server.
+description: Build the Mandelbrot C++ example on an Arm Neoverse target and confirm that the dedicated Arm Performix MCP server can use the configured target.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -17,13 +17,21 @@ The application generates a 1920×1080 bitmap of the Mandelbrot set by iterating
 
 You don't need to understand the Mandelbrot algorithm to follow the Learning Path.
 
-## Connect to your Arm target
+## Confirm your Arm Performix target
 
 For profiling, you'll target an AWS Graviton3-based metal instance (`m7g.metal`) with 64 Neoverse V1 cores. Any Arm Linux server with multiple cores works, but a metal instance gives you direct access to all hardware threads without the overhead of virtualization.
 
-Connect to the remote target via SSH through the Arm MCP Server. The `apx_recipe_run` tool accepts the target host IP address and SSH username directly as parameters, so there's no separate target configuration step required.
+The dedicated Arm Performix MCP server uses targets that are already configured in Performix. Record the friendly target name because you'll give it to your AI assistant in the next section.
 
-Ensure your remote Arm server is reachable over SSH from the machine running your AI coding assistant, and follow the [Configure your MCP client](https://github.com/arm/mcp?tab=readme-ov-file#2-configure-your-mcp-client) instructions in the Arm MCP Server repository before continuing.
+If you haven't added the target, follow [Set up Arm Performix](/learning-paths/servers-and-cloud-computing/performix-get-started/add_target/). Remote authentication uses SSH keys, and strict host-key checking requires the target and any jump-node keys in `known_hosts`.
+
+Test the configured connection from the host running Arm Performix. Replace `<target-name>` with the friendly target name:
+
+```bash
+apx target test --target <target-name>
+```
+
+Continue when the test confirms that Performix can reach the intended target.
 
 ## Build the application on the remote server
 
@@ -63,4 +71,4 @@ Note the absolute path to the binary on the remote server. You'll need this when
 
 You've now got everything in place for profiling: a compiled, debug-enabled binary on an Arm Neoverse target that Performix can reach.
 
-Next, you'll create a GitHub Copilot prompt file to drive the Code Hotspots recipe through the Arm MCP Server.
+Next, you'll ask your AI assistant to run the Code Hotspots recipe through the Arm Performix MCP server.
