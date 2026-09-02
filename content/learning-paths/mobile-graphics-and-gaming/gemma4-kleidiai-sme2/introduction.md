@@ -25,7 +25,7 @@ You will complete the workflow in this order:
 2. Create a historical XNNPACK baseline worktree from before the SME2 support.
 3. Download the Gemma 4 E2B `.litertlm` model from Hugging Face.
 4. Build and benchmark the baseline and upstream-optimized variants with
-   identical settings.
+   identical settings at one and four CPU threads.
 5. Compare steady-state prefill and decode throughput.
 
 ## Find out if your device supports SME2

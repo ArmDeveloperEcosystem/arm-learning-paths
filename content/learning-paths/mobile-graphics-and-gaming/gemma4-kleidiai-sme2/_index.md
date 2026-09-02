@@ -13,7 +13,7 @@ learning_objectives:
     - Create a workspace with pinned LiteRT-LM and KleidiAI versions
     - Create upstream-optimized and historical-baseline XNNPACK worktrees
     - Download a LiteRT-LM-compatible Gemma 4 model from Hugging Face
-    - Compare baseline and upstream SME2 benchmark results with a cache-neutral workflow
+    - Compare baseline and upstream SME2 benchmark results
 
 prerequisites:
     - An SME2 device (this tutorial uses macOS on Apple M4)

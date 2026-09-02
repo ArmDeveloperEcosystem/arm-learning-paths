@@ -16,7 +16,7 @@ mkdir -p bazel-output-base results
 ```
 
 Define a shell function that builds one XNNPACK tree and immediately runs the
-same three-iteration benchmark:
+same three-iteration benchmark at one and four CPU threads:
 
 ```bash
 set -o pipefail
@@ -29,6 +29,8 @@ run_variant() {
   local model="$root/models/gemma-4-E2B-it-litert-lm/gemma-4-E2B-it.litertlm"
   local sdk_version
   local binary
+  local threads
+  local result
 
   sdk_version="$(xcrun --sdk macosx --show-sdk-version)"
 
@@ -42,19 +44,24 @@ run_variant() {
 
   binary="$(bazelisk --output_base="$output_base" info bazel-bin)/runtime/engine/litert_lm_advanced_main"
 
-  "$binary" \
-    --backend=cpu \
-    --model_path="$model" \
-    --benchmark \
-    --benchmark_prefill_tokens=512 \
-    --benchmark_decode_tokens=128 \
-    --num_cpu_threads=4 \
-    --disable_cache=true \
-    --async=false \
-    --num_iterations=3 \
-    --report_peak_memory_footprint \
-    --metric_proto_file_path="$root/results/${variant}.pb" \
-    2>&1 | tee "$root/results/${variant}.log"
+  for threads in 1 4; do
+    result="${variant}-${threads}t"
+
+    "$binary" \
+      --backend=cpu \
+      --model_path="$model" \
+      --benchmark \
+      --benchmark_prefill_tokens=1024 \
+      --benchmark_decode_tokens=256 \
+      --max_num_tokens=4096 \
+      --num_cpu_threads="$threads" \
+      --disable_cache=true \
+      --async=false \
+      --num_iterations=3 \
+      --report_peak_memory_footprint \
+      --metric_proto_file_path="$root/results/${result}.pb" \
+      2>&1 | tee "$root/results/${result}.log"
+  done
 }
 ```
 
@@ -69,6 +76,9 @@ run_variant baseline "$HOME/gemma4-prefill-bench/xnnpack-baseline"
 run_variant optimized "$HOME/gemma4-prefill-bench/xnnpack"
 ```
 
+The commands create separate logs and metric files for `baseline-1t`,
+`baseline-4t`, `optimized-1t`, and `optimized-4t`.
+
 {{% notice Note %}}
 Use `--disable_cache=true` for the A/B comparison. The tested Gemma 4 artifact
 contains XNNPACK weight-cache fingerprints that are recognized by the upstream
@@ -82,35 +92,57 @@ Each iteration prints output similar to:
 
 ```output
 --------------------------------------------------
-  Time to first token: 0.43 s
+  Time to first token: 7.14 s
 --------------------------------------------------
   Prefill Turns (Total 1 turns):
-    Prefill Turn 1: Processed 512 tokens in 399.049292ms duration.
-      Prefill Speed: 1283.05 tokens/sec.
+    Prefill Turn 1: Processed 1024 tokens in 7.044162s duration.
+      Prefill Speed: 145.37 tokens/sec.
 --------------------------------------------------
   Decode Turns (Total 1 turns):
-    Decode Turn 1: Processed 128 tokens in 4.037520542s duration.
-      Decode Speed: 31.70 tokens/sec.
+    Decode Turn 1: Processed 256 tokens in 23.268829s duration.
+      Decode Speed: 11.00 tokens/sec.
 --------------------------------------------------
 ```
 
-Treat iteration 1 as a warm-up and compare the mean of iterations 2 and 3.
+Treat iteration 1 as a warm-up and compare the mean of iterations 2 and 3 for
+each variant and thread count.
 
-## Tested results on Apple M4 Pro
+## Tested results on Apple M4
 
-The following results were measured on a 12-core Apple M4 Pro with 24 GB of
-RAM, macOS SDK 26.5, four CPU threads, and caches disabled. Frequency and
-thermal state were not fixed, so use the values as a functional comparison.
+The following representative results use 1024 prefill tokens, 256 decode
+tokens, and disabled caches. Frequency and thermal state were not fixed, so use
+the values as a functional comparison.
 
-| XNNPACK variant | Prefill tokens/s | Change | Decode tokens/s | Change |
-| --- | ---: | ---: | ---: | ---: |
-| Historical baseline | 930.57 | - | 54.78 | - |
-| Upstream SME2 Int4 and Int2 | 1263.22 | +35.7% | 29.76 | -45.7% |
+| CPU threads | XNNPACK variant | Prefill tokens/s | Change | Decode tokens/s | Change |
+| ---: | --- | ---: | ---: | ---: | ---: |
+| 1 | No SME2 kernels | 142.60 | - | 15.79 | - |
+| 1 | SME2 Int4 and Int2 | 215.93 | +51.4% | 23.89 | +51.3% |
+| 4 | No SME2 kernels | 411.70 | - | 37.04 | - |
+| 4 | SME2 Int4 and Int2 | 562.92 | +36.7% | 30.28 | -18.3% |
 
-On this system, the upstream SME2 paths provide a clear prefill improvement but
-regress decode for the four-thread workload. Results can differ by model
-signature, thread count, SoC, operating system, and thermal state. Measure
-prefill and decode separately for your target workload.
+### Interpret thread scaling
+
+Prefill and decode expose different amounts of parallel work. Prefill processes
+many prompt tokens together, so additional CPU threads can improve throughput.
+Autoregressive decode generates one token at a time, and each token depends on
+the preceding output. This dependency limits the work available to parallelize
+within each decode step.
+
+Decode also reads model weights and key-value (KV) cache data for every token.
+As the thread count increases, threads compete for memory bandwidth and add
+scheduling overhead. These costs can outweigh the available parallel work,
+especially when the system exposes one matrix engine, known as a 1xCME
+configuration.
+
+The results illustrate this difference. SME2 improves prefill at both thread
+counts. For decode, SME2 throughput increases from 23.89 tokens/s with one
+thread to 30.28 tokens/s with four threads, but it scales less than the
+non-SME2 path. The one-thread SME2 advantage of 51.3% therefore becomes an
+18.3% deficit at four threads.
+
+Results can
+differ by model signature, SoC, operating system, memory conditions, and
+thermal state.
 
 ## Run a prompt sanity check
 
