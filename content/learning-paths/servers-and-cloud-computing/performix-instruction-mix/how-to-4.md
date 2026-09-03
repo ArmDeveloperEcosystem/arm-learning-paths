@@ -49,12 +49,12 @@ Use the Arm Performix MCP server to list the available recipes and targets.
 For the target named "<target-name>", run the Instruction Mix recipe with this workload:
 "/home/ubuntu/GPT-2-Example/build/gpt2_user --model gpt2-medium \"Once upon a time\" -n 150"
 
-Before starting, inspect the recipe parameters, target support, and MCP guidance. Repeat the target and workload, and ask me to confirm them. When the run completes, summarize the Instruction Mix results for `matmul_user` and suggest Neon or SVE improvements.
+Before starting, inspect the recipe parameters, target support, and MCP guidance. Repeat the target and workload, and ask me to confirm them. If target preparation or collection fails, stop and report the error and suggested remediation. When the run succeeds, summarize the Instruction Mix results for `matmul_user` and suggest Neon or SVE improvements.
 ```
 
 {{% notice Note %}}
 
-The Arm Performix MCP server can run Instruction Mix, but Dynamic Insights are available only for successful Code Hotspots and System Utilization runs.
+The Arm Performix MCP server can run Instruction Mix and generate Dynamic Insights for successful Instruction Mix runs.
 
 {{% /notice %}}
 
