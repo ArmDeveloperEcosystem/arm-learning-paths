@@ -553,14 +553,13 @@ The Arm MCP server tools are listed in the output:
 ```output
 Configured MCP servers:
 
-🟢 arm_mcp_server - Ready (6 tools)
+🟢 arm_mcp_server - Ready (5 tools)
   Tools:
   - check_image
   - knowledge_base_search
   - mca
   - migrate_ease_scan
   - skopeo
-  - sysreport_instructions
 ```
 
 ### Use Arm prompt files with the MCP Server

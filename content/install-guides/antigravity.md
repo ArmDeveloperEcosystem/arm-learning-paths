@@ -368,8 +368,8 @@ The output lists the Arm MCP Server tools and is similar to:
 MCP Servers
 
 Plugins (~/.gemini/antigravity-cli/plugins)
->  ✓ arm_mcp_server  Tools: knowledge_base_search, check_image, sysreport_instructions,
-                     migrate_ease_scan, +2 more
+>  ✓ arm_mcp_server  Tools: knowledge_base_search, migrate_ease_scan, check_image,
+                     skopeo, mca
 ```
 
 
