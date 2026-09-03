@@ -38,16 +38,15 @@ Search for **Arm** in the catalog and add the [Arm MCP Server](https://hub.docke
 
 Configure it by setting the directory path to your local code. This allows the `migrate_ease_scan` and `mca` tools to access your source files. Click **Save** after setting the path.
 
-The Arm MCP Server provides six tools:
+The Arm MCP Server provides five tools:
 
 | Tool | Description |
 |------|-------------|
-| `knowledge_base_search` | Semantic search of Arm learning resources, intrinsics documentation, and software compatibility |
+| `knowledge_base_search` | Semantic search of Arm learning resources, intrinsics documentation, software compatibility, and host hardware information |
 | `migrate_ease_scan` | Code scanner for C++, Python, Go, JavaScript, and Java Arm compatibility analysis |
 | `check_image` | Docker image architecture verification for Arm64 support |
 | `skopeo` | Remote container image inspection without downloading |
 | `mca` | Machine Code Analyzer for assembly performance and IPC predictions |
-| `sysreport_instructions` | System architecture information gathering |
 
 ### GitHub Official MCP Server
 
