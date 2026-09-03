@@ -5,7 +5,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-## Connect the hardware
+## Connect the hardware on target device
 
 Power off the E8 DevKit before changing camera or display connections.
 
@@ -21,7 +21,7 @@ The supplied overlay targets the J16 selfie-camera connection. J22 uses a differ
 
 ## Install the host tools
 
-Confirm that the Xcode Command Line Tools are installed:
+Confirm that the Xcode Command Line Tools are installed on your host machine:
 
 ```bash
 xcode-select -p
@@ -42,7 +42,11 @@ cd $HOME/alif-dual-npu
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install west pyelftools fdt ninja
+python -m pip install \
+  west==1.5.0 \
+  pyelftools==0.33 \
+  fdt==0.3.3 \
+  ninja==1.13.2
 ```
 
 Confirm that west and Ninja are available:
@@ -60,8 +64,8 @@ Clone the SDK fork that contains the dual-NPU sample at the validated revision,
 then initialize a local west workspace from that checkout.
 The fork's ``main`` branch stays synchronized with the Alif SDK ``main``
 branch. The dual-NPU application is maintained separately on the
-``dual-npu-main-integration`` branch, which also includes the merged MT9M114,
-ISP, and MW405 changes from pull request 879:
+``dual-npu-main-integration`` branch, which also includes the support for MT9M114,
+ISP, and MW405:
 
 ```bash
 cd $HOME/alif-dual-npu
@@ -71,22 +75,16 @@ git clone --branch dual-npu-main-integration --single-branch \
 git -C sdk-alif checkout fb6d0e61ebcad3098dc6298bc40386cacc4ad38a
 west init -l sdk-alif
 west config manifest.project-filter +executorch
-west update
+west update --narrow
 python -m pip install -r zephyr/scripts/requirements.txt
-west sdk install
+west sdk install --toolchains arm-zephyr-eabi
 ```
 
 The manifest project appears at `sdk-alif`, and the remaining projects appear under `modules`, `bootloader`, `tools`, and `zephyr`.
 
 {{% notice Note %}}
-Commit ``fb6d0e61ebcad3098dc6298bc40386cacc4ad38a`` on the
-``dual-npu-main-integration`` branch contains everything required for this
-Learning Path: the camera and display support from the upstream Alif SDK
-``main`` branch, plus the ``dual_npu_vision`` application. Use the fork and
-revision shown in the command. Do not initialize from
-``alifsemi/sdk-alif`` directly because the dual-NPU application has not yet
-been merged there. The fork's ``main`` branch remains synchronized with the
-upstream Alif SDK and does not contain the application.
+Do not initialize from ``alifsemi/sdk-alif`` directly. The dual-NPU application has not yet
+been merged there. Use the fork's ``dual-npu-main-integration`` branch which contains the application.
 {{% /notice %}}
 
 Initialize the ExecuTorch submodules:
@@ -130,17 +128,24 @@ Create the Python environment used by the ExecuTorch CMake integration:
 
 ```bash
 python3.12 -m venv .venv-executorch
+source .venv-executorch/bin/activate
+python -m pip install --upgrade pip
+python -m pip install \
+  -r modules/lib/executorch/requirements-examples.txt
+python -m pip install \
+  west==1.5.0 \
+  -r zephyr/scripts/requirements-base.txt
 cd modules/lib/executorch
-../../../.venv-executorch/bin/python -m pip install \
-  -r requirements-examples.txt
-env -u DEBUG ./install_executorch.sh
+env -u DEBUG CMAKE_ARGS="-DEXECUTORCH_BUILD_MLX=OFF" \
+  ./install_executorch.sh
 cd ../../..
+deactivate
 ```
 
 Python 3.12 is used for compatibility with the pinned ExecuTorch revision.
-Removing a host `DEBUG` variable prevents ExecuTorch from interpreting a
-non-numeric shell value as its numeric build option. You do not need the
-optional `ethos_u` Python dependency group for the firmware build.
+
+Removing a host `DEBUG` variable prevents ExecuTorch from
+interpreting a non-numeric shell value as its numeric build option. You do not need the optional `ethos_u` Python dependency group for the firmware build.
 
 Apply the sample's ExecuTorch integration patch and check the dependencies:
 

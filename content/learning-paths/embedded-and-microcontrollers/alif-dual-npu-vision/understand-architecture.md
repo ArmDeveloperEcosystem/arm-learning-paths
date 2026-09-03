@@ -33,7 +33,7 @@ the MT9M114, ISP, and MW405 changes were merged through pull request 879. The
 following diagram extends the original multi-NPU prototype with the live
 camera, ISP, and display pipeline used by this demo.
 
-![System diagram showing the MT9M114 camera and ISP feeding parallel U55 and U85 ExecuTorch workers before results are composed on the MW405 display.](dual-npu-system.svg)
+![System diagram showing the MT9M114 camera and ISP feeding parallel U55 and U85 ExecuTorch workers before results are composed on the MW405 display.#center](dual-npu-system.svg "Dual-NPU live vision data flow")
 
 ## Separate the hardware responsibilities
 
@@ -115,7 +115,7 @@ These measurements isolate delegated execution from camera capture and UART outp
 
 The application separates persistent artifacts, CPU-private state, display and video buffers, and U85-visible working memory.
 
-![Memory diagram showing models and firmware in MRAM, U55 state in HP DTCM, U55 temporary storage in SRAM0, and the display, U85 working memory, and camera buffers in SRAM1.](dual-npu-memory-layout.svg)
+![Memory diagram showing models and firmware in MRAM, U55 state in HP DTCM, U55 temporary storage in SRAM0, and the display, U85 working memory, and camera buffers in SRAM1.#center](dual-npu-memory-layout.svg "Memory placement for the dual-NPU application")
 
 ### Persistent MRAM payload
 
