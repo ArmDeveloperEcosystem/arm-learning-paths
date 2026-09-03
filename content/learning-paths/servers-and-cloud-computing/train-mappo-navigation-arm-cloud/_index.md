@@ -45,8 +45,8 @@ generated_summary_faq:
       observations.
   - question: How do I restore a previous run’s configuration before validating the checkpoint?
     answer: >-
-      Activate the training environment, set `RUN_DIR` to the run directory you want to validate,
-      and source `"$RUN_DIR/run.env"`. Then change to the `BenchMARL` repository to continue
+      Activate the training environment, set `RUN_DIR` to the run directory that you want to validate,
+      and source `"$RUN_DIR/run.env"`. Then, change to the `BenchMARL` repository to continue
       validation.
   - question: How do I make sure sampling and training run on the CPU?
     answer: >-
@@ -60,9 +60,9 @@ generated_summary_faq:
       256-unit `Tanh` layers, and four outputs for a two-dimensional action.
   - question: Do I need the GUI to verify the checkpoint or export the actor?
     answer: >-
-      No. You can validate the checkpoint and export the actor without the GUI. Use the optional
-      GUI only when you have the companion checkout described in the prerequisites; otherwise,
-      skip that stage and continue.
+      No. You can validate the checkpoint and export the actor without the GUI. Use the
+      GUI only when you have the companion checkout described in the prerequisites. Otherwise,
+      skip that stage and continue with exporting the actor.
 # END generated_summary_faq
 
 author:
