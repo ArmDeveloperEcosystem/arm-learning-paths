@@ -35,7 +35,7 @@ BenchMARL configures sampling and training devices independently. You can also t
 
 ## Size the CPU sampling workload
 
-Recreate the CPU sizing variables so the configuration works after a new SSH login:
+Recreate the CPU sizing variables so that the configuration works after a new SSH login:
 
 ```bash
 export CORE_COUNT=$(nproc)
@@ -60,11 +60,11 @@ export EVAL_INTERVAL=$((FRAMES_PER_BATCH * EVAL_EVERY_BATCHES))
 export EVAL_EPISODES=10
 ```
 
-Choose one of the following budgeting options. Option 1 reproduces the tested configuration. Option 2 keeps the total number of collected frames approximately constant when the CPU-sized environment count changes.
+Choose one of the following budgeting options. Keeping 100 training batches reproduces the tested configuration. Keeping approximately 1,910,000 total frames keeps the total number of collected frames approximately constant when the CPU-sized environment count changes.
 
-### Option 1: Keep 100 training batches
+### Keep 100 training batches
 
-Use this option to reproduce the reference experiment. The number of environments scales with the workload CPUs, each environment contributes 100 frames per batch, and the run always performs 100 training batches:
+Use this option to reproduce the reference experiment. The number of environments scales with the workload CPUs. Each environment contributes 100 frames per batch, and the run always performs 100 training batches:
 
 ```bash
 export FRAME_BUDGET_MODE=fixed_batches
@@ -82,7 +82,7 @@ The primary configuration gives:
 
 The 64-vCPU example processes fewer total frames because it keeps both 100 frames per environment and 100 training batches. This is intentional for the original CPU-scaled benchmark configuration.
 
-### Option 2: Keep approximately 1,910,000 total frames
+### Keep approximately 1,910,000 total frames
 
 Use this alternative when you want different CPU-sized runs to collect approximately the same number of frames. Calculate enough complete batches to meet or exceed the target:
 
@@ -100,7 +100,7 @@ The fixed-total-frame alternative gives:
 | 64 | 63 | 6,300 | 304 | 1,910,000 | 1,915,200 | 126,000 |
 | 192 | 191 | 19,100 | 100 | 1,910,000 | 1,910,000 | 382,000 |
 
-BenchMARL collects complete batches, so the actual frame count can exceed the target by less than one batch. This option also changes the number of MAPPO update and evaluation cycles on smaller instances. It preserves the approximate sample budget, not an identical optimization trajectory.
+BenchMARL collects complete batches, so the actual frame count can exceed the target by less than one batch. This option also changes the number of MAPPO update and evaluation cycles on smaller instances. It preserves the approximate sample budget rather than an identical optimization trajectory.
 
 {{% notice Note %}}
 When VMAS sampling runs on CUDA, tune `N_ENVS` for the GPU instead of deriving it from the CPU count.
@@ -137,7 +137,7 @@ export OPENBLAS_NUM_THREADS=$WORKLOAD_CPUS
 export NUMEXPR_MAX_THREADS=$WORKLOAD_CPUS
 ```
 
-This avoids library thread pools using more CPU threads than the workload allocation.
+Capping the thread pools avoids library thread pools using more CPU threads than the workload allocation.
 
 Record the software revision, installed packages, and shell configuration with the run:
 
@@ -157,7 +157,7 @@ if [ -n "${TARGET_MAX_FRAMES:-}" ]; then
 fi
 ```
 
-`run.env` contains only the variables listed in the command. It does not copy credentials or the rest of your shell environment.
+`run.env` contains only the variables listed in the command. It doesn't copy credentials or the rest of your shell environment.
 
 ## Validate the configuration
 
@@ -173,7 +173,7 @@ For a 192-CPU system using the primary configuration, the reference values are:
 BudgetMode=fixed_batches Agents=3 TotalCPUs=192 ReservedCPUs=1 WorkloadCPUs=191 Environments=191 FramesPerBatch=19100 TrainingBatches=100 MaxFrames=1910000 EvalInterval=382000 EvalEpisodes=10 Sampling=cpu Training=cpu
 ```
 
-Do not start training if a required field is blank.
+Don't start training if a required field is blank.
 
 ## Train the policy
 
@@ -202,9 +202,11 @@ python benchmarl/run.py \
 This is the argument set used for the reference experiment. The tested BenchMARL and VMAS defaults define the 18-value observation and `256, 256` actor architecture checked by the exporter. BenchMARL saves a checkpoint when training completes.
 
 {{% notice Important %}}
-Training takes several hours on the reference system. Run the command in a persistent terminal session, such as `tmux`, so an SSH disconnection does not terminate the process. This tested command saves its checkpoint at the end of training.
+Training takes several hours on the reference system. Run the command in a persistent terminal session, such as `tmux`, so that an SSH disconnection doesn't terminate the process. The tested command saves its checkpoint at the end of training.
 {{% /notice %}}
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You have configured a CPU-sized VMAS batch using either the tested fixed-batch budget or the alternative fixed-total-frame budget. BenchMARL now evaluates the policy periodically and saves the final checkpoint with the package versions, BenchMARL revision, budgeting mode, and workload variables recorded alongside the run.
+You've configured a CPU-sized VMAS batch using either the tested fixed-batch budget or the alternative fixed-total-frame budget. BenchMARL now evaluates the policy periodically and saves the final checkpoint with the package versions, BenchMARL revision, budgeting mode, and workload variables recorded alongside the run.
+
+Next, you'll locate and validate the training checkpoint.
