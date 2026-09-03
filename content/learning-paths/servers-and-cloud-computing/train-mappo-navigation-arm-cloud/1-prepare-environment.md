@@ -9,11 +9,11 @@ layout: learningpathall
 
 ## Understand the reference environment
 
-This Learning Path trains a multi-agent proximal policy optimization (MAPPO) policy entirely on Arm CPUs. It does not need a GPU.
+You'll train a multi-agent proximal policy optimization (MAPPO) policy entirely on Arm CPUs.
 
-BenchMARL defines and runs the experiment, TorchRL provides the reinforcement-learning components, and VMAS simulates many navigation worlds in a vectorized PyTorch batch. MAPPO trains an actor that selects each agent's actions and a centralized critic used only during training. The reference configuration shares one actor across all three agents, which makes the later actor-only export possible.
+BenchMARL defines and runs the experiment, and TorchRL provides the reinforcement-learning components. VMAS simulates many navigation worlds in a vectorized PyTorch batch. MAPPO trains an actor that selects each agent's actions and a centralized critic used only during training. The reference configuration shares one actor across all three agents, which makes an actor-only export possible.
 
-The reference experiment was tested on this AWS configuration:
+The reference experiment was tested on the following AWS configuration:
 
 | Component | Tested configuration |
 | --- | --- |
@@ -25,12 +25,18 @@ The reference experiment was tested on this AWS configuration:
 | Operating system | Ubuntu 24.04 |
 | Storage | 512 GB EBS volume |
 
-The M9g instance is EBS-only, so the storage volume is provisioned separately from the instance. The workflow does not depend on an AWS-specific API and can run on other Arm-based cloud instances. A smaller instance uses fewer vectorized environments. The training section explains how to keep the tested 100-batch budget or use an alternative fixed-total-frame budget.
-
-AWS Graviton5 provides one hardware thread per core on this instance. The one-environment-per-workload-CPU rule is still a starting point rather than a fixed mapping, because VMAS processes the environments as tensor batches.
+The M9g instance is EBS-only, so the storage volume is provisioned separately from the instance.
 
 {{% notice Note %}}
-The tested configuration is a reproducibility reference, not a measured minimum requirement. Package installation, training logs, and checkpoints need persistent storage, but this Learning Path does not establish 512 GB as the minimum capacity.
+The workflow doesn't depend on an AWS-specific API, so you can run it on other Arm-based cloud instances. If you use a different instance, training time and the effective environment count will differ.
+{{% /notice %}}
+
+A smaller instance uses fewer vectorized environments. For more information on keeping the tested 100-batch budget or using an alternative fixed-total-frame budget, see [Configure and train MAPPO](/learning-paths/servers-and-cloud-computing/train-mappo-navigation-arm-cloud/2-configure-training/).
+
+AWS Graviton5 provides one hardware thread per core on the instance. The one-environment-per-workload-CPU rule is still a starting point rather than a fixed mapping, because VMAS processes the environments as tensor batches.
+
+{{% notice Note %}}
+The tested configuration is a reproducibility reference rather than a measured minimum requirement. Package installation, training logs, and checkpoints need persistent storage, but you don't necessarily need 512 GB capacity.
 {{% /notice %}}
 
 ## Inspect the Arm cloud instance
@@ -47,7 +53,7 @@ The expected output is:
 aarch64
 ```
 
-Display the number of available CPUs:
+List the number of available CPUs:
 
 ```bash
 nproc
@@ -74,25 +80,25 @@ Verify the values:
 echo "TotalCPUs=$CORE_COUNT ReservedCPUs=$RESERVED_CPUS WorkloadCPUs=$WORKLOAD_CPUS"
 ```
 
-This calculation reduces the size of the PyTorch thread pools and the VMAS batch. It does not pin the workload to specific CPUs or prevent the operating system from scheduling work on them.
+The calculation reduces the size of the PyTorch thread pools and the VMAS batch. It doesn't pin the workload to specific CPUs or prevent the operating system from scheduling work on them.
 
 ## Understand agents and vectorized environments
 
 The agent count and vectorized environment count control different parts of the workload:
 
-- **Agents** are the entities that learn to navigate in one VMAS world.
-- **Vectorized environments** are independent copies of that world simulated in parallel.
+- Agents are the entities that learn to navigate in one VMAS world.
+- Vectorized environments are independent copies of that world simulated in parallel.
 
 For example, three agents and 191 environments means that VMAS simulates 191 navigation worlds concurrently, with three agents in each world.
 
-For CPU sampling in this Learning Path, use one VMAS environment for each workload CPU:
+For CPU sampling, use one VMAS environment for each workload CPU:
 
 ```bash
 export N_ENVS=$WORKLOAD_CPUS
 ```
 
 {{% notice Note %}}
-This is a workload-sizing policy. VMAS uses vectorized PyTorch operations, so an environment is not permanently mapped to one operating-system thread.
+This is a workload-sizing policy. VMAS uses vectorized PyTorch operations, so an environment isn't permanently mapped to one operating-system thread.
 {{% /notice %}}
 
 ## Install system packages
@@ -103,7 +109,7 @@ Update the package index:
 sudo apt-get update
 ```
 
-Install Python virtual-environment support:
+Install Python virtual environment support:
 
 ```bash
 sudo apt-get install -y python3.12-venv
@@ -121,7 +127,7 @@ Create a Python environment:
 python3.12 -m venv $HOME/venvs/mappo
 ```
 
-Activate it:
+Activate the environment:
 
 ```bash
 source $HOME/venvs/mappo/bin/activate
@@ -199,8 +205,8 @@ Record the BenchMARL revision used for the experiment:
 git rev-parse HEAD
 ```
 
-Keep this revision with your experiment notes so you can reproduce the software environment later.
+Keep the revision with your experiment notes so you can reproduce the software environment later.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You have verified the `aarch64` environment, sized the initial VMAS workload, and installed the training stack. Next, you will choose a frame-budgeting method and adapt the vectorized environment count to the available CPUs.
+You've verified the `aarch64` environment, sized the initial VMAS workload, and installed the training stack. Next, you'll choose a frame-budgeting method and adapt the vectorized environment count to the available CPUs.

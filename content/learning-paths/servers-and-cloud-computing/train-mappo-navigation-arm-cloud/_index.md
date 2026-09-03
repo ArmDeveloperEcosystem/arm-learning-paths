@@ -1,11 +1,7 @@
 ---
-title: Train Multi-Agent Reinforcement Learning policies with MAPPO on Arm cloud
-
-draft: true
-cascade:
-    draft: true
+title: Train multi-agent reinforcement earning policies with MAPPO on an Arm-based cloud instance
     
-description: Train a MAPPO navigation policy with BenchMARL and VMAS on an Arm cloud instance, deploy the checkpoint to a visualization GUI, and export an actor-only inference artifact.
+description: Train a MAPPO navigation policy with BenchMARL and VMAS on an Arm-based cloud instance, deploy the checkpoint to a visualization GUI, and export an actor-only inference artifact.
 
 minutes_to_complete: 330
 
@@ -17,7 +13,7 @@ learning_objectives:
     - Extract and validate the shared actor as a smaller inference-only artifact.
 
 prerequisites:
-    - An `aarch64` cloud instance running Ubuntu 24.04 with SSH access, `sudo` privileges, and internet access. The reference experiment was tested on an AWS Graviton5 `m9g.48xlarge` instance with 192 vCPUs, 768 GiB of memory, and 512 GB of EBS storage. You can use another Arm-based cloud instance, but training time and the effective environment count will differ.
+    - An `aarch64` cloud instance running Ubuntu 24.04 with SSH access, `sudo` privileges, and internet access. 
     - Familiarity with Linux, Python, PyTorch, and reinforcement learning concepts such as observations, actions, rewards, and policies.
     - A local checkout of the companion MARL GUI containing `tools/deploy_checkpoint.py` and `tools/inspect_checkpoint.py` if you want to complete the GUI deployment section.
 
