@@ -54,7 +54,7 @@ export RUN_DIR=$HOME/mappo_navigation_runs/latest
 source "$RUN_DIR/run.env"
 ```
 
-Sourcing `run.env` restores `CHECKPOINT`, `SOURCE_EXPERIMENT_DIR`, the agent count, and the device labels saved in the previous section.
+Sourcing `run.env` restores `CHECKPOINT`, `SOURCE_EXPERIMENT_DIR`, the agent count, and the device labels that you saved earlier.
 
 Set the GUI root to your local checkout:
 
@@ -80,7 +80,7 @@ python -m pip install -r "$GUI_ROOT/requirements.txt"
 
 ## Move training artifacts when the GUI is on another system
 
-The GUI import requires both of these training artifacts:
+The GUI import requires both of the following training artifacts:
 
 ```text
 $SOURCE_EXPERIMENT_DIR/config.pkl
@@ -195,7 +195,7 @@ Validate the deployed checkpoint:
 python tools/inspect_checkpoint.py "$GUI_CHECKPOINT" --device cpu
 ```
 
-Confirm that the output again contains:
+Confirm that the output again contains the following:
 
 ```output
 "reload": "success"
@@ -221,7 +221,7 @@ ssh -L 8045:127.0.0.1:8045 ubuntu@INSTANCE_PUBLIC_IP
 
 Keep the SSH connection open and visit `http://127.0.0.1:8045` in your local browser. Replace `ubuntu` and `INSTANCE_PUBLIC_IP` with the SSH user and address for your instance.
 
-{{% notice Security %}}
+{{% notice Important %}}
 The SSH tunnel avoids opening TCP port `8045` to the internet. If you intentionally bind the GUI to `0.0.0.0`, restrict the cloud firewall or security-group rule to a trusted source address and confirm that the GUI's authentication is suitable for your environment.
 {{% /notice %}}
 
@@ -240,7 +240,7 @@ Checkpoint
 Select **Start** to run interactive VMAS playback with the trained MAPPO policy.
 
 {{% notice Note %}}
-The GUI uses a single VMAS environment for interactive playback. This is independent of the number of vectorized environments used during training.
+The GUI uses a single VMAS environment for interactive playback, independent of the number of vectorized environments used during training.
 {{% /notice %}}
 
 ## Know which artifacts the GUI uses

@@ -29,7 +29,7 @@ Linear 256 → 256
 Linear 256 → 4
 ```
 
-For continuous MAPPO, the four raw outputs are split into two location values and two scale values for a two-dimensional action distribution. The validated configuration uses `TanhNormal` and VMAS navigation uses the default action range `[-1, 1]`. For deterministic inference, TorchRL's `TanhNormal.deterministic_sample` therefore corresponds to applying `tanh()` to the two location values.
+For continuous MAPPO, the four raw outputs are split into two location values and two scale values for a two-dimensional action distribution. The validated configuration uses `TanhNormal`. VMAS navigation uses the default action range `[-1, 1]`. For deterministic inference, TorchRL's `TanhNormal.deterministic_sample` therefore corresponds to applying `tanh()` to the two location values.
 
 The 18-value VMAS navigation observation is as follows:
 
@@ -613,6 +613,7 @@ The downstream runtime must reproduce the observation ordering and action interp
 
 ## What you've accomplished
 
-You've extracted the validated shared MAPPO actor into a portable NumPy artifact and confirmed that its deterministic output matches the trained TorchRL policy. You also recorded the observation layout and action semantics needed to integrate the actor with a downstream runtime.
+You've extracted the validated shared MAPPO actor into a portable NumPy artifact and confirmed that its deterministic output matches the trained TorchRL policy. 
 
-Next, use the recorded observation layout and action semantics to integrate the actor-only artifact with a downstream runtime.
+You can now use the observation layout and action semantics that you recorded to integrate the actor with a downstream runtime.
+

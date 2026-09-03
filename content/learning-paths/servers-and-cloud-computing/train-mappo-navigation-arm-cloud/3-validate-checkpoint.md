@@ -22,7 +22,7 @@ If you want to validate an older run, set `RUN_DIR` to that run directory before
 
 ## Find the checkpoint
 
-BenchMARL creates an experiment directory below `RUN_DIR` with a structure similar to:
+BenchMARL creates an experiment directory under `RUN_DIR` with a structure similar to:
 
 ```text
 $RUN_DIR/
@@ -124,7 +124,7 @@ List the CSV logs produced by the experiment:
 find "$SOURCE_EXPERIMENT_DIR" -type f -name '*.csv' -print
 ```
 
-Compare the first and final evaluation returns in these logs. Returns vary with the random seed and package versions, so this Learning Path doesn't use an unverified numeric threshold. A flat or falling return means that checkpoint creation succeeded but the policy didn't demonstrate learning.
+Compare the first and final evaluation returns in the logs. Returns vary with the random seed and package versions, so don't use an unverified numeric threshold. A flat or falling return means that checkpoint creation succeeded but the policy didn't demonstrate learning.
 
 {{% notice Important %}}
 Load `config.pkl` only from a training run that you trust. Python pickle files can execute code when loaded.
@@ -134,4 +134,4 @@ Load `config.pkl` only from a training run that you trust. Python pickle files c
 
 You've selected a valid checkpoint, confirmed that its matching configuration is present, recovered deployment metadata, and reloaded the policy for evaluation. The checkpoint and `config.pkl` now form the portable BenchMARL experiment.
 
-Next, you can [optionally deploy the experiment to a GUI](/learning-paths/servers-and-cloud-computing/train-mappo-navigation-arm-cloud/4-deploy-gui/). If you don't have companion GUI code, skip to [export the MAPPO actor for inference](/learning-paths/servers-and-cloud-computing/train-mappo-navigation-arm-cloud/5-export-actor/).
+Next, you can [optionally deploy the experiment to a GUI](/learning-paths/servers-and-cloud-computing/train-mappo-navigation-arm-cloud/4-deploy-gui/). If you don't have the companion GUI code, skip to [export the MAPPO actor for inference](/learning-paths/servers-and-cloud-computing/train-mappo-navigation-arm-cloud/5-export-actor/).

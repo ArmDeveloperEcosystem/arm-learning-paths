@@ -137,7 +137,7 @@ export OPENBLAS_NUM_THREADS=$WORKLOAD_CPUS
 export NUMEXPR_MAX_THREADS=$WORKLOAD_CPUS
 ```
 
-This avoids library thread pools using more CPU threads than the workload allocation.
+Capping the thread pools avoids library thread pools using more CPU threads than the workload allocation.
 
 Record the software revision, installed packages, and shell configuration with the run:
 
