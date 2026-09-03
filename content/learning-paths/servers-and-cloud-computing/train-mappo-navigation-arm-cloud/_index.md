@@ -33,9 +33,9 @@ generated_summary_faq:
   faq_generated_at: '2026-09-03T15:27:34Z'
   faq_source_hash: 0633ae9c265fb42853371d59189d721c34e923ba9d337349c41dedcf8fec9923
   summary: >-
-    You configure and run a vectorized MAPPO navigation workload on an Arm-based cloud instance
-    with BenchMARL, VMAS, and TorchRL. You select the agent count and CPU devices for shared-actor
-    training with a centralized critic. You then restore the run configuration, locate and validate
+    You'll configure and run a vectorized MAPPO navigation workload on an Arm-based cloud instance
+    with BenchMARL, VMAS, and TorchRL. First, you'll select the agent count and CPU devices for shared-actor
+    training with a centralized critic. Then, you'll restore the run configuration, locate and validate
     the checkpoint, optionally deploy it to a companion GUI, and export the actor for inference.
   faqs:
   - question: How many agents should I use for the reference MAPPO run?
