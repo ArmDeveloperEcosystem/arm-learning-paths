@@ -81,7 +81,7 @@ These settings raise connection queue limits so the kernel is less likely to be 
 
 ## Compiler Considerations
 
-If you build Redis from source, use a recent GCC version from your Linux distribution. Compiler flags such as `-mcpu` and `-flto` can change performance, but they should be tested against your workload before use. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c/) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
+If you build Redis from source, use a recent GCC version from your Linux distribution. If building from source to specifically target the Arm AGI CPU, test with GCC version 16.1.0 or later to include optimizations specific to the AGI CPU. Compiler flags such as `-mcpu` and `-flto` can change performance, but different compilers and compiler flags should be tested against your workload before use as they may introduce regressions for your workload. Usage of these flags is explained in the [Migrating C/C++ applications](/learning-paths/servers-and-cloud-computing/migration/c/) section of the [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) learning path.
 
 For Redis build instructions, review the [build Redis from source](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-from-source/) documentation.
 
