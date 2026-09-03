@@ -260,6 +260,6 @@ The full BenchMARL checkpoint is the correct artifact for the GUI. For a downstr
 
 ## What you've accomplished
 
-You've preserved the BenchMARL directory layout, registered the checkpoint with the companion GUI, reloaded the deployed model, and accessed interactive playback through a secure tunnel. 
+You've preserved the BenchMARL directory layout, registered the checkpoint with the companion GUI, reloaded the deployed model, and accessed interactive playback through a secure tunnel.
 
 Next, you'll extract the shared actor for a runtime that doesn't include BenchMARL.

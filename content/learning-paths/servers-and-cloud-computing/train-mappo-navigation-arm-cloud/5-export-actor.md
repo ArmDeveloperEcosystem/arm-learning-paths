@@ -615,3 +615,4 @@ The downstream runtime must reproduce the observation ordering and action interp
 
 You've extracted the validated shared MAPPO actor into a portable NumPy artifact and confirmed that its deterministic output matches the trained TorchRL policy. You also recorded the observation layout and action semantics needed to integrate the actor with a downstream runtime.
 
+Next, use the recorded observation layout and action semantics to integrate the actor-only artifact with a downstream runtime.

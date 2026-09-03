@@ -11,7 +11,9 @@ layout: learningpathall
 
 You'll train a multi-agent proximal policy optimization (MAPPO) policy entirely on Arm CPUs.
 
-BenchMARL defines and runs the experiment, and TorchRL provides the reinforcement-learning components. VMAS simulates many navigation worlds in a vectorized PyTorch batch. MAPPO trains an actor that selects each agent's actions and a centralized critic used only during training. The reference configuration shares one actor across all three agents, which makes an actor-only export possible.
+BenchMARL defines and runs the experiment, and TorchRL provides the reinforcement-learning components. VMAS simulates many navigation worlds in a vectorized PyTorch batch.
+
+MAPPO trains an actor that selects each agent's actions and a centralized critic used only during training. The reference configuration shares one actor across all three agents, which makes an actor-only export possible.
 
 The reference experiment was tested on the following AWS configuration:
 
@@ -156,7 +158,7 @@ Verify the installation:
 ```bash
 python -c 'import platform, torch; print("Architecture:", platform.machine()); print("PyTorch:", torch.__version__); print("CUDA available:", torch.cuda.is_available()); print("CUDA device:", torch.cuda.get_device_name(0) if torch.cuda.is_available() else "N/A")'
 ```
-On the tested system, the output was:
+On the tested system, the output is:
 
 ```output
 Architecture: aarch64
@@ -190,7 +192,7 @@ Verify the software stack:
 python -c 'import torch, torchrl, benchmarl, vmas; print("PyTorch:", torch.__version__); print("TorchRL: OK"); print("BenchMARL: OK"); print("VMAS: OK")'
 ```
 
-On the tested system, the output was:
+On the tested system, the output is:
 
 ```output
 PyTorch: 2.13.0+cu130
