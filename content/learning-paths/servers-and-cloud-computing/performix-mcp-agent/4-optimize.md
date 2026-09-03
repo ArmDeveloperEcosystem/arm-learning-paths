@@ -15,9 +15,7 @@ In the previous section, the agent identified three optimization opportunities:
 2. Replace `std::complex<double>` with raw `double` arithmetic to remove all complex operator overhead
 3. Build with `-O3` to enable inlining, loop unrolling, and auto-vectorization
 
-You can ask the agent to apply each change when it has access to your source and build environment. Otherwise, apply and rebuild the change through your normal remote development workflow. The Arm Performix MCP server profiles the configured target and analyzes saved runs; it doesn't by itself provide remote source-editing or deployment tools.
-
-After each change, use the agent to rerun Code Hotspots against the same target and workload. Compare the new profile evidence and elapsed time with the previous run before continuing.
+You can ask the agent to apply each change when it has access to your source and build environment. Otherwise, apply and rebuild the change through your normal remote development workflow. The Arm Performix MCP server profiles the configured target and analyzes saved runs; it doesn't by itself provide remote source-editing or deployment tools. You'll validate each change by asking the agent to compare the new profiling results against the previous run before moving on.
 
 {{% notice Note %}}
 The agent will typically surface these optimizations itself based on the profiling results, without you needing to prompt it explicitly. The following prompts are for explicit reference. You can use them if the agent hasn't already proposed the change, or to direct it to a specific optimization.
@@ -40,7 +38,7 @@ Generate an AI insight for the new run and compare it with run ID "<previous-run
 Has the proportion of samples in __complex_abs and hypotf64 changed?
 ```
 
-Replace `<target-name>` and `<previous-run-id>` before sending the prompt. The agent creates a new run, generates an AI insight for its run ID, and compares the evidence. In the example results, the `std::__complex_abs` and `hypotf64` symbols disappear from the hotspot list because the squared-magnitude check doesn't call them.
+Replace `<target-name>` and `<previous-run-id>` before sending the prompt. The agent runs the Code Hotspots recipe again and returns the comparison. The `std::__complex_abs` and `hypotf64` symbols disappear from the hotspot list entirely. Both functions are gone because the squared-magnitude check never calls them.
 
 The hotspot distribution shifts: `getIterations` drops from 28.5% to 18.4% self-time, and the freed CPU budget is now visible in `std::complex` operator symbols. The overall sample count is slightly lower, but the profile structure reveals that `std::complex` operator overhead is now the next bottleneck to address.
 
@@ -66,9 +64,9 @@ run and compare it with run ID "<previous-run-id>". Have the std::complex
 operator symbols disappeared from the hotspot list?
 ```
 
-Replace the placeholders with the target name and the run ID from the previous step. In the example results, the `std::complex` functions—`__muldc3`, `operator*=`, `operator+=`, `operator+`, `operator*`, and `__rep`—disappear from the profile.
+Replace the placeholders with the target name and the run ID from the previous step. The agent runs the Code Hotspots recipe and returns the comparison. Every `std::complex` function—`__muldc3`, `operator*=`, `operator+=`, `operator+`, `operator*`, `__rep`—is gone from the profile.
 
-The example profile sample count drops from approximately 48,750 at baseline to approximately 11,457, a reduction of about 76%. With the same collection interval and workload, this suggests a shorter runtime. Confirm the improvement with an elapsed-time measurement.
+Total profile sample count drops from approximately 48,750 (baseline) to approximately 11,457, a reduction of ~76% and a measured ~4x speedup.
 
 ### Enable compiler optimizations with `-O3`
 
@@ -84,25 +82,24 @@ Rebuild the application without the DEBUG flag using
 target "<target-name>" with workload
 "/home/ec2-user/Mandelbrot-Example/build/mandelbrot_single_thread". Generate
 an AI insight for the new run and compare it with run ID "<previous-run-id>".
-How has the hotspot distribution changed, and what does the elapsed-time
-measurement show?
+How has the hotspot distribution changed and what is the runtime improvement?
 ```
 
-Replace the placeholders before sending the prompt. In the example profile, the `getIterations` function no longer appears as a separate hotspot because the compiler has inlined it into `draw`. The sample count drops to approximately 3,997, about 12 times fewer samples than the baseline. Treat this as profile evidence and use elapsed time to confirm the runtime improvement.
+Replace the placeholders before sending the prompt. The agent runs the Code Hotspots recipe on the new binary path and returns the result. The `getIterations` function no longer appears as a separate hotspot because the compiler has inlined it completely into `draw`. Total profile sample count drops to approximately 3,997 — roughly 12x fewer samples than the original baseline of ~48,750, indicating a ~12x speedup.
 
 The only remaining hotspot is `Mandelbrot::draw` itself at ~98.6% of samples, which now includes both the iteration and colorizing passes. The colorizing pass calls `pow(255, hue)` per pixel — visible as `powf64` at ~0.7% — but this is a small fraction of total time at this scale.
 
 ## What you've accomplished
 
-You've applied AI-suggested optimizations such as replacing `std::complex<double>` with plain `double` arithmetic, enabling `-O3`, and eliminating the square root in the escape check.
+You've now applied AI-suggested optimizations — such as replacing `std::complex<double>` with plain `double` arithmetic, enabling `-O3` for compiler optimizations, and eliminating sqrt in the escape check — to the Mandelbrot application.
 
-In the example profiles, the cumulative result is a reduction from approximately 48,750 baseline samples to approximately 3,997. The table summarizes the relative sample-count reduction across three changes. Your values will vary, and you should use elapsed time to measure speedup.
+The cumulative result, measured by profile sample counts, was a reduction from approximately 48,750 baseline samples to approximately 3,997 — a ~12x speedup — through three rounds of code changes, each validated by a re-profile before moving to the next.
 
-| Step | Profile samples | Sample-count reduction vs baseline |
+| Step | Profile samples | Speedup vs baseline |
 |---|---|---|
-| Baseline (`-O0`, `std::complex`, `abs` check) | ~48,750 | Baseline |
-| After squared-magnitude check | ~47,535 | About 3% fewer |
-| After raw double arithmetic | ~11,457 | About 76% fewer |
-| After `-O3` | ~3,997 | About 92% fewer |
+| Baseline (`-O0`, `std::complex`, `abs` check) | ~48,750 | 1× |
+| After squared-magnitude check | ~47,535 | ~1× |
+| After raw double arithmetic | ~11,457 | ~4× |
+| After `-O3` | ~3,997 | ~12× |
 
-You can apply the same evidence-driven loop to other C++ applications on Arm Neoverse. Run Code Hotspots to locate the hottest functions, use the agent to relate evidence to source code, apply one change, and re-profile the same workload. Compare profile evidence and elapsed time before accepting the optimization.
+The same pattern applies to any C++ application on Arm Neoverse. Run the Code Hotspots recipe to locate the hottest functions, let the agent cross-reference the source, apply the suggested changes, and re-profile to confirm. This evidence-driven loop is faster and less error-prone than manual profiling because the AI maintains context across all steps and keeps the profiling data visible alongside the code throughout.

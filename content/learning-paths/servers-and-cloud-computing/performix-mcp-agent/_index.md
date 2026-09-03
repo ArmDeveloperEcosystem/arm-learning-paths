@@ -34,36 +34,39 @@ generated_summary_faq:
   faq_generated_at: '2026-07-07T16:22:08Z'
   faq_source_hash: a81d31a804debf71196a478bdf388c9e58b6dab67a9e881b916f3d0169d9555d
   summary: >-
-    You'll use the dedicated Arm Performix MCP server with an AI coding assistant to profile an
-    unoptimized Mandelbrot C++ application on an Arm Neoverse target. You'll select a configured
-    Performix target, run Code Hotspots, record the run ID, and request evidence-backed AI insights.
-    Then you'll apply focused changes, rebuild, rerun the same workload, and compare elapsed time
-    and profile evidence after each change.
+    You'll combine the dedicated Arm Performix MCP server with an AI agent to run the complete Code
+    Hotspots workflow on an Arm Neoverse target. First, you'll build an intentionally unoptimized Mandelbrot
+    C++ application on a remote Arm Linux target, then use an AI agent to run the Performix Code Hotspots
+    recipe. The agent confirms the configured target, executes collection, and returns a run ID. You'll use
+    that run ID to generate AI insights with structured hotspot data to pinpoint the hottest functions.
+    Guided by the agent, you'll apply concrete code changes, such as math simplifications and enabling
+    a higher optimization level, through your source and build environment. Then, you'll re-run the recipe
+    to compare results. The end-to-end flow keeps profiling, interpretation, and edits within a single
+    AI-assisted loop.
   faqs:
   - question: How do I configure the Arm Performix MCP server?
     answer: >-
-      Follow the dedicated Arm Performix MCP Learning Path to start the installed `apx` executable
-      with the `mcp start` arguments and verify that your AI coding assistant can list Performix targets
-      and recipes.
+      Follow the [Generate Arm Performix AI insights in Visual Studio Code with Codex](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-codex/)
+      Learning Path to start the installed `apx` executable with the `mcp start` arguments and verify that
+      your AI coding assistant can list Performix recipes and configured targets.
   - question: What result should I expect after the profiling run completes?
     answer: >-
-      Expect a completed run status and a run ID. Use that run ID to request an AI insight that connects
-      its findings to measured evidence such as sample percentages, call paths, source attribution, or
-      disassembly.
+      Expect a completed run status and a run ID. Use that run ID to request an AI insight with a hotspot
+      summary that highlights the hottest functions in the Mandelbrot application. Use this output to guide
+      which code changes to apply first.
   - question: Should I compile the Mandelbrot example with optimizations before profiling?
     answer: >-
       No. The single-threaded, unoptimized build is intentional so the hotspot analysis produces
       a clear signal. The agent later proposes enabling `-O3` as part of the optimization pass.
   - question: How do I know the agent is targeting the correct machine?
     answer: >-
-      Ask the agent to list configured Performix targets, select the target by its friendly name, and
-      require the agent to repeat the target and workload before collection. Continue only when both
-      values match your intended run.
+      The agent explicitly confirms your configured Performix target name and workload before running the
+      Code Hotspots recipe. Review this confirmation and proceed only if it matches your intended Arm target.
   - question: What should I check if the Code Hotspots run fails to start?
     answer: >-
-      Confirm that the target exists in Arm Performix, SSH key authentication and host-key checking
-      succeed, the workload path is absolute, and the Mandelbrot application builds on the target.
-      You can also test the connection with `apx target test --target <target-name>`.
+      Confirm that Arm Performix is configured with your remote Arm target and that the target connection
+      succeeds. Also verify that the Mandelbrot application builds on the target system. You can test the
+      connection with `apx target test --target <target-name>`.
 # END generated_summary_faq
 
 author: Pareena Verma
@@ -81,7 +84,7 @@ tools_software_languages:
     - Arm Performix
     - MCP
     - CPP
-    - Codex
+    - GitHub Copilot
 operatingsystems:
     - Linux
 
