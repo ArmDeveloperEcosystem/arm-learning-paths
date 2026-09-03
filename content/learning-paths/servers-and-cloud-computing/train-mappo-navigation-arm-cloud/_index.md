@@ -16,7 +16,7 @@ learning_objectives:
 prerequisites:
     - An `aarch64` cloud instance running Ubuntu 24.04 with SSH access, `sudo` privileges, and internet access
     - Familiarity with Linux, Python, PyTorch, and reinforcement learning concepts such as observations, actions, rewards, and policies
-    - A local checkout of the companion MARL GUI containing `tools/deploy_checkpoint.py` and `tools/inspect_checkpoint.py` if you want to complete the GUI deployment section
+    - A local checkout of the companion MARL GUI containing `tools/deploy_checkpoint.py` and `tools/inspect_checkpoint.py` if you want to deploy the BenchMARL checkpoint to a GUI
 
 # START generated_summary_faq
 generated_summary_faq:
