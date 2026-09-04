@@ -72,7 +72,7 @@ cd $HOME/alif-dual-npu
 source .venv/bin/activate
 git clone --branch dual-npu-main-integration --single-branch \
   https://github.com/varunchariArm/sdk-alif.git sdk-alif
-git -C sdk-alif checkout fb6d0e61ebcad3098dc6298bc40386cacc4ad38a
+git -C sdk-alif checkout d194c62d41422ccae9355637d91c4344e0d55d24
 west init -l sdk-alif
 west config manifest.project-filter +executorch
 west update --narrow
@@ -147,7 +147,8 @@ Python 3.12 is used for compatibility with the pinned ExecuTorch revision.
 Removing a host `DEBUG` variable prevents ExecuTorch from
 interpreting a non-numeric shell value as its numeric build option. You do not need the optional `ethos_u` Python dependency group for the firmware build.
 
-Apply the sample's ExecuTorch integration patch and check the dependencies:
+Apply the sample's ExecuTorch integration and Zephyr SRAM placement patches,
+then check the dependencies:
 
 ```bash
 ./sdk-alif/samples/modules/executorch/dual_npu_vision/setup_workspace.sh
@@ -157,9 +158,11 @@ You see output similar to:
 
 ```output
 Applied ExecuTorch dual-NPU patch.
+Applied Zephyr SRAM1 placement patch.
 Ethos-U core driver main: ...
 Workspace dependencies are ready.
 ```
 
-If you run the script again, it reports that the patch is already applied. You
+If you run the script again, it reports that both patches are already applied.
+Run it again after `west update`, which can restore either module checkout. You
 now have the sources and dependencies required for the build.
