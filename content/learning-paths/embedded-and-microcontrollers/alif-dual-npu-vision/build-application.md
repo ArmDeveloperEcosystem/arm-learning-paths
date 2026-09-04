@@ -57,7 +57,17 @@ The files have these roles:
 | `zephyr.elf` | Symbols and debug information |
 | `model_assets.bin` | U85 PTE, U55 PTE, startup image, and ImageNet labels |
 
-The checked-in PTE files let you build this Learning Path without regenerating models. The original artifacts were generated on a Linux development host, but the model inputs are public and do not depend on that host.
+The checked-in PTE files let you build and flash this Learning Path without installing TensorFlow, TOSA Tools, or Vela. CMake packages those files directly into `model_assets.bin`.
+
+## Optional: regenerate the PTE models
+
+You can skip this section unless you want to reproduce or modify the model artifacts. Use a Linux development host for the optional model-generation flow.
+
+The pinned Vela 5.0.0 and TOSA Tools 2026.2.1 packages declare different FlatBuffers versions. Install the validated combination with the supplied helper. It keeps Vela's FlatBuffers 24.3.25 and installs TOSA Tools without resolving its conflicting FlatBuffers dependency:
+
+```bash
+"$APP/tools/install_model_export_deps.sh"
+```
 
 Create a directory for the source weights:
 
@@ -84,10 +94,9 @@ echo "64fcc31aa517798d0e798551418c85bc0a5ed03a75c45c4e47fc7ee41e5ea51f  model-we
 echo "7ebf99e03e254b273379b23edca7ec0da9f48273b23a332b93c1c99d49e86e8f  model-weights/mobilenet_v2-7ebf99e0.pth" | shasum -a 256 -c -
 ```
 
-The SSD source repository does not publish a PyTorch checkpoint. Install TensorFlow in the ExecuTorch Python environment, then use the sample's importer to convert the trained, quantized constants into the common PyTorch checkpoint:
+The SSD source repository does not publish a PyTorch checkpoint. Use the sample's importer to convert the trained, quantized constants into the common PyTorch checkpoint:
 
 ```bash
-.venv-executorch/bin/python -m pip install tensorflow==2.20.0
 .venv-executorch/bin/python \
   "$APP/tools/import_ssd_slim_tflite.py" \
   --source model-weights/ssd_slim_120x160x1_v1_int8.tflite \
