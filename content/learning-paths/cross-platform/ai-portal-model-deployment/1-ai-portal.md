@@ -10,9 +10,7 @@ layout: learningpathall
 
 ## Browse models on the Arm AI Portal
 
-<section>
-<div class="clearfix">
-<img style="float: right; margin-left: 20px;" alt="Arm AI Portal filters for device, task, and runtime, including AWS Graviton G4 and Text Generation options for narrowing model results" src="/learning-paths/cross-platform/ai-portal-model-deployment/images/filters.png">
+![Arm AI Portal filters for device, task, and runtime, including AWS Graviton G4 and Text Generation options for narrowing model results#center](images/filters.png "AI Portal Filter")
 
 The Arm AI Portal brings together AI models optimized for Arm platforms and provides:
 
@@ -37,9 +35,6 @@ The detail page shows the following information about the model:
   - Platform details that the model is optimized for
   - Benchmarking details
   - A **Use this Model** button that downloads the model, opens its page on Hugging Face, and — for selected models — offers Topo deployment options
-
-</div>
-</section>
 
 ## Compare models on the Arm AI Portal
 
