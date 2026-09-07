@@ -4,302 +4,363 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/*
+ * Learning Path exercise: from shifts and masks to SME2 LUTI2.
+ *
+ * Every implementation computes the same matrix multiplication:
+ *   DST[M, N] = LHS[M, K] x RHS[K, N]
+ *
+ * The LHS contains signed 8-bit values. The RHS uses the prepared format expected
+ * by this example: each byte contains four 2-bit lookup table indices.
+ * Creating the prepared RHS format is outside the scope of the example.
+ *
+ * The example starts with the packed indices and compares how plain C and SME2 decode
+ * them for matrix multiplication.
+ *
+ * The implementations progress from explicit operations to LUTI2:
+ *   1. plain C: shift, mask, scalar lookup, then matmul.
+ *   2. SME2: LUTI2 written with inline assembly.
+ *
+ * M and N depend on the streaming vector length (SVL). K is fixed at 4 so
+ * that four signed 8-bit products accumulate into one signed 32-bit result.
+ *
+ * SVL is the streaming vector length in bits.
+ * svcntb() returns the number of bytes in one streaming vector.
+ * svcntw() returns the number of 32-bit words in one streaming vector.
+ *
+ *
+ * The code is not restricted to 512-bit SVL. It derives these dimensions from
+ * svcntw() at runtime and uses the same relationships for other valid SVLs.
+ *
+ * Vector terminology used below:
+ * lane:    one element position in a vector. At 512-bit SVL, z0.b has 64
+ *          byte lanes, z0.h has 32 halfword lanes, and z0.s has 16 word
+ *          lanes. A lane number identifies one of those element positions.
+ *
+ * segment: a region of a packed LUTI source register containing enough
+ *          indices to fill the requested destination vector group. A
+ *          segment contains many indices and is not the same as one lane.
+ */
+
+// Arm SME intrinsics
 #include <arm_sme.h>
+#include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include <time.h>
 
-// This example assumes it runs on an SME2-compatible system. It deliberately
-// performs no runtime capability check.
 #if !defined(__ARM_FEATURE_SME2)
 #error "Compile with SME2 enabled, for example -march=armv9.2-a+sme2+nosve2+nosve"
 #endif
 
-__arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemm_luti4(
-    const float16_t* lhs, const uint8_t* rhs_indices, float32_t* out, const uint32_t* zt0_lut);
+enum {
+    K = 4,
+    LUT_INDICES_PER_BYTE = 4,
+};
 
-__arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemv_luti2_luti4(
-    const int8_t* lhs, const uint8_t* rhs_indices, int32_t* out, const uint32_t* zt0_luti4, const uint32_t* zt0_luti2);
+// Lookup table that expands 2-bit indices into signed 8-bit values.
+// A 2-bit index selects only entries 0-3. The remaining entries are zero.
+static const int8_t lut_i8_i2[16] = {
+    -3, -1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+};
 
-int ex1_luti_test(void);
+// Physical image for the fixed 64-byte ZT0 register. LUTI2 selects entries
+// 0-3 and returns the low byte of each selected 32-bit entry.
+static const int32_t zt0_table[16] __attribute__((aligned(64))) = {
+    -3, -1, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+};
 
-__arm_locally_streaming static size_t get_streaming_vector_bytes(void) {
-    return svcntb();
-}
-
-__arm_locally_streaming static uint32_t get_streaming_vl_words(void) {
+// Return the number of 32-bit lanes in the current streaming vector.
+// An SVL of 512 bits contains 16 32-bit lanes.
+__arm_locally_streaming static size_t streaming_vector_words(void) {
     return svcntw();
 }
 
-static int compare_outputs_i32(
-    const int32_t* actual, const int32_t* expected, size_t rows, size_t columns, const char* test_name) {
-    for (size_t row = 0; row < rows; ++row)
-        for (size_t column = 0; column < columns; ++column) {
-            size_t index = row * columns + column;
-            if (actual[index] != expected[index]) {
+// Use a fixed seed to keep the test repeatable.
+static uint32_t next_random(uint32_t* state) {
+    *state = *state * 1664525U + 1013904223U;
+    return *state;
+}
+
+// Fill LHS (-8 to 7) and RHS_PACKED (0-255) with random data.
+// Every uint8_t value is valid because it contains four 2-bit codes.
+static void fill_random(int8_t* lhs, uint8_t* rhs_packed, size_t m, size_t n) {
+    uint32_t random_state = 1;
+
+    // Fill LHS with signed 8-bit values.
+    for (size_t row = 0; row < m; ++row) {
+        for (size_t k = 0; k < K; ++k) {
+            const uint32_t random_value = next_random(&random_state);
+            const uint8_t high_nibble = (uint8_t)((random_value >> 28) & 0xFU);
+            lhs[row * K + k] = (int8_t)high_nibble - 8;
+        }
+    }
+
+    // Fill each RHS column with four random 2-bit lookup table indices.
+    for (size_t col = 0; col < n; ++col) {
+        const uint32_t random_value = next_random(&random_state);
+        rhs_packed[col] = (uint8_t)(random_value >> 24);
+    }
+}
+
+/* --------------------------------------------------------------------------- */
+/* 1. Plain C: Decode packed RHS indices with shifts and masks, then multiply. */
+/* --------------------------------------------------------------------------- */
+
+/*
+ * Each packed RHS byte contains four 2-bit lookup table indices and represents one
+ * output column:
+ *
+ *   bits [1:0]  bits [3:2]  bits [5:4]  bits [7:6]
+ *    lut_idx 0   lut_idx 1   lut_idx 2   lut_idx 3
+ *       k=0         k=1         k=2          k=3
+ *
+ * For example: 0xE4 = binary 11_10_01_00
+ *
+ * Reading from the least-significant bits gives lookup indices {0, 1, 2, 3}.
+ * The lookup table converts these to {-3, -1, 1, 3}.
+ *
+ * Therefore: rhs_packed[col]
+ *                 |
+ *                 +-- bits [1:0] --> RHS[0, col]
+ *                 +-- bits [3:2] --> RHS[1, col]
+ *                 +-- bits [5:4] --> RHS[2, col]
+ *                 +-- bits [7:6] --> RHS[3, col]
+ *
+ * For each output element, the function computes:
+ *
+ *   dst[row, col] = sum(k=0..3) LHS[row, k] * RHS[k, col]
+ *
+ * The function decodes each RHS value from rhs_packed[col] inside the K=4 dot
+ * product.
+ */
+
+static void plain_c_matmul(
+    const int8_t* lhs,
+    const uint8_t* rhs_packed,
+    int32_t* dst,
+    size_t m,
+    size_t n) {
+
+    // Iterate over the output rows and columns.
+    for (size_t row = 0; row < m; ++row) {
+        for (size_t col = 0; col < n; ++col) {
+
+            // Read the packed byte for this output column.
+            const uint8_t packed_byte = rhs_packed[col];
+
+            // Initialize the accumulator for this output element.
+            int32_t acc_sum = 0;
+
+            for (size_t k_idx = 0; k_idx < K; ++k_idx) {
+                // Extract the 2-bit lookup table index for this k position.
+                const unsigned bit_shift = 2U * (unsigned)k_idx;
+                const uint8_t lut_idx = (uint8_t)((packed_byte >> bit_shift) & 0x3U);
+                const int8_t expanded_byte = lut_i8_i2[lut_idx];
+
+                // Widen the LHS and RHS values before multiplication.
+                const int32_t lhs_value = (int32_t)lhs[row * K + k_idx];
+                const int32_t expanded_rhs_value = (int32_t)expanded_byte;
+
+                acc_sum += lhs_value * expanded_rhs_value;
+            }
+
+            // Store the accumulator in the corresponding output element.
+            dst[row * n + col] = acc_sum;
+        }
+    }
+}
+
+/* ------------------------------------------------------------------------- */
+/* 2. SME2: LUTI2 and SMOPA written with inline assembly.                    */
+/* ------------------------------------------------------------------------- */
+
+/*
+ * LUTI2 expands one streaming vector of packed RHS indices into four vectors
+ * of signed 8-bit values. Each SMOPA combines the LHS vector with one expanded
+ * RHS vector and accumulates an M-by-M output panel in a ZA.S tile.
+ *
+ *   z0.b: M rows of LHS values, with K=4 values per row.
+ *   z4.b: M columns of expanded RHS values for output panel 0.
+ *   z5.b: M columns of expanded RHS values for output panel 1.
+ *   z6.b: M columns of expanded RHS values for output panel 2.
+ *   z7.b: M columns of expanded RHS values for output panel 3.
+ */
+
+__arm_new("za", "zt0") __arm_locally_streaming
+static void luti2_sme2_asm_matmul(const int8_t *lhs,
+                                  const uint8_t *rhs_packed,
+                                  int32_t *dst, size_t m, size_t n) {
+    __asm__ volatile(
+        "ptrue p0.b\n"
+        "ldr zt0, [%[table]]\n"     // Load the lookup table into ZT0
+        "zero {za}\n"               // Clear all ZA accumulator state
+
+        // Load one streaming vector from each input.
+        "ld1b {z0.b}, p0/z, [%[lhs]]\n"
+        "ld1b {z1.b}, p0/z, [%[rhs]]\n"
+
+        // Expand one packed source vector into four signed 8-bit vectors.
+        "luti2 {z4.b-z7.b}, zt0, z1[0]\n"
+
+        // Accumulate four adjacent M-by-M output panels in ZA0-ZA3.
+        "smopa za0.s, p0/m, p0/m, z0.b, z4.b\n"
+        "smopa za1.s, p0/m, p0/m, z0.b, z5.b\n"
+        "smopa za2.s, p0/m, p0/m, z0.b, z6.b\n"
+        "smopa za3.s, p0/m, p0/m, z0.b, z7.b\n"
+        :
+        : [lhs] "r"(lhs),
+          [rhs] "r"(rhs_packed),
+          [table] "r"(zt0_table)
+        : "p0", "z0", "z1", "z4", "z5", "z6", "z7",
+          "za", "zt0", "memory");
+
+    // Read four vectors from ZA and store them.
+    for (uint32_t row = 0; row < m; ++row) {
+        svint8x4_t read_tiles = svread_hor_za8_s8_vg4(0, 4 * row);
+        svint32x4_t output_tiles = svreinterpret_s32_s8_x4(read_tiles);
+        svst1_s32_x4(
+            svptrue_c32(),
+            dst + (size_t)row * n,
+            output_tiles);
+    }
+}
+
+/* ------------------------------------------------------------------------- */
+/* Validation and output.                                                    */
+/* ------------------------------------------------------------------------- */
+
+static void require_matrices_equal(
+    const char* name, const int32_t* expected, const int32_t* actual, size_t m, size_t n) {
+    for (size_t row = 0; row < m; ++row) {
+        for (size_t col = 0; col < n; ++col) {
+            const size_t idx = row * n + col;
+
+            if (actual[idx] != expected[idx]) {
                 fprintf(
-                    stderr, "%s: FAIL at row %zu, column %zu: got %d, expected %d\n", test_name, row, column,
-                    actual[index], expected[index]);
-                return 1;
+                    stderr, "FAIL: %s C[%zu, %zu]: expected %d, obtained %d\n", name, row, col, expected[idx],
+                    actual[idx]);
+                exit(EXIT_FAILURE);
             }
         }
-    return 0;
-}
-
-/* -------------------------------------------------------------------------- */
-/* Reference matrix multiplication                                            */
-/* -------------------------------------------------------------------------- */
-
-// Fixed GEMV shape: M = 1 and K = N = VL_b. The RHS is packed as
-// (VL_b / 4) rows of 4 * VL_b bytes, one row for each four-element K group.
-static void arm_lp_gemv_luti2_luti4_ref(const int8_t* lhs, const int8_t* rhs, int32_t* out) {
-    const size_t vl_b = get_streaming_vector_bytes();
-
-    for (size_t n = 0; n < vl_b; ++n) {
-        int32_t sum = 0;
-        for (size_t k = 0; k < vl_b; ++k) sum += (int32_t)lhs[k] * (int32_t)rhs[k * vl_b + n];
-        out[n] = sum;
     }
 }
 
-// SME2 SDOT reference implementation using already-unpacked RHS weights.
-__arm_new("za") __arm_locally_streaming static void arm_lp_matmul_s8_s8_dotprod(
-    const int8_t* lhs, const int8_t* rhs_packed, int32_t* out) {
-    const size_t vl_b = svcntb();
-    const size_t lhs_blocks = vl_b / 16;  // 16 bytes in a 128-bit LHS block.
-    const svbool_t pg8 = svptrue_b8();
-    const svcount_t pn8 = svptrue_c8();
+static void print_matrix_preview(const int32_t* matrix, size_t m, size_t n) {
+    const size_t rows_to_print = m < 4 ? m : 4;
+    const size_t cols_to_print = n < 8 ? n : 8;
 
-    svzero_za();
-    for (size_t i_k = 0; i_k < lhs_blocks; ++i_k) {
-        svint8_t lhs_vec = svld1rq_s8(pg8, lhs);
-        lhs += 16;
+    printf("\nC matrix preview (%zux%zu of %zux%zu):\n", rows_to_print, cols_to_print, m, n);
 
-        svint8x4_t rhs_vec = svld1_s8_x4(pn8, rhs_packed);
-        rhs_packed += 4 * vl_b;
-        svdot_lane_za32_s8_vg1x4(0, rhs_vec, lhs_vec, 0);
-
-        rhs_vec = svld1_s8_x4(pn8, rhs_packed);
-        rhs_packed += 4 * vl_b;
-        svdot_lane_za32_s8_vg1x4(0, rhs_vec, lhs_vec, 1);
-
-        rhs_vec = svld1_s8_x4(pn8, rhs_packed);
-        rhs_packed += 4 * vl_b;
-        svdot_lane_za32_s8_vg1x4(0, rhs_vec, lhs_vec, 2);
-
-        rhs_vec = svld1_s8_x4(pn8, rhs_packed);
-        rhs_packed += 4 * vl_b;
-        svdot_lane_za32_s8_vg1x4(0, rhs_vec, lhs_vec, 3);
-    }
-
-    svint32x4_t result = svread_za32_s32_vg1x4(0);
-    svst1_s32_x4(svptrue_c32(), out, result);
-}
-
-/* -------------------------------------------------------------------------- */
-/* Reference packing                                                          */
-/* -------------------------------------------------------------------------- */
-
-// Pack dense int8 RHS weights for the SME2 SDOT reference implementation.
-__arm_locally_streaming static void arm_lp_matmul_s8_s8_dotprod_rhs_pack_ref(const int8_t* rhs, int8_t* rhs_packed) {
-    const size_t kr = 4;
-    const size_t vl_b = get_streaming_vector_bytes();
-    const size_t columns_per_vector = svcntw();
-
-    for (size_t k_group = 0; k_group < vl_b / kr; ++k_group)
-        for (size_t vector = 0; vector < 4; ++vector) {
-            int8_t* packed_vector = rhs_packed + (k_group * 4 + vector) * vl_b;
-
-            for (size_t column = 0; column < columns_per_vector; ++column)
-                for (size_t k_lane = 0; k_lane < kr; ++k_lane)
-                    packed_vector[column * kr + k_lane] =
-                        rhs[(k_group * kr + k_lane) * vl_b + vector * columns_per_vector + column];
+    for (size_t row = 0; row < rows_to_print; ++row) {
+        for (size_t col = 0; col < cols_to_print; ++col) {
+            printf("%6d", matrix[row * n + col]);
         }
+        putchar('\n');
+    }
 }
 
-// Pack a dense M=1, K=N=VL_b RHS matrix for the LUTI4 -> LUTI2 SDOT kernel.
-// Return zero on success, or nonzero when a weight or four-weight pattern is
-// not representable by the supplied table register contents.
-__arm_locally_streaming static int arm_lp_gemv_luti2_luti4_rhs_pack_ref(
-    const int8_t* rhs, uint8_t* rhs_indices, const uint32_t* zt0_luti4, const uint32_t* zt0_luti2) {
-    const size_t vl_b = svcntb();
-    const size_t packed_bytes = vl_b * vl_b / 8;
-
-    if (rhs == NULL || rhs_indices == NULL || zt0_luti4 == NULL || zt0_luti2 == NULL || vl_b % 16 != 0) return 1;
-
-    for (size_t offset = 0; offset < packed_bytes; offset += vl_b)
-        svst1_u8(svptrue_b8(), rhs_indices + offset, svdup_n_u8(0));
-    for (size_t k_group = 0; k_group < vl_b / 4; ++k_group) {
-        const size_t block = k_group / 4;
-        const size_t lane = k_group % 4;
-        const size_t source_vector = 2 * block + lane / 2;
-        const size_t source_segment = lane % 2;
-        const size_t packed_base = source_vector * vl_b + source_segment * (vl_b / 2);
-
-        for (size_t column = 0; column < vl_b; ++column) {
-            uint8_t packed_levels = 0;
-            for (size_t k_lane = 0; k_lane < 4; ++k_lane) {
-                const int8_t weight = rhs[(4 * k_group + k_lane) * vl_b + column];
-                size_t level_code;
-
-                for (level_code = 0; level_code < 4; ++level_code)
-                    if (weight == (int8_t)zt0_luti2[level_code]) break;
-                if (level_code == 4) return 1;
-
-                packed_levels |= (uint8_t)(level_code << (2 * k_lane));
-            }
-
-            size_t pattern_id;
-            for (pattern_id = 0; pattern_id < 16; ++pattern_id)
-                if (packed_levels == (uint8_t)zt0_luti4[pattern_id]) break;
-            if (pattern_id == 16) return 1;
-
-            rhs_indices[packed_base + column / 2] |= (uint8_t)(pattern_id << (4 * (column & 1)));
+static void print_binary_byte(uint8_t value) {
+    for (int bit = 7; bit >= 0; --bit) {
+        putchar(((value >> (unsigned)bit) & 1U) != 0U ? '1' : '0');
+        if (bit == 6 || bit == 4 || bit == 2) {
+            putchar(' ');
         }
     }
-
-    return 0;
 }
 
-static int run_arm_lp_gemm_luti4_test(void) {
-    enum { K = 2 };
-    uint32_t lut[16];
-    uint32_t m = get_streaming_vl_words();
-    uint32_t n = 4 * m;
-    size_t vl_bytes = (size_t)4 * m;
-    float16_t* lhs = malloc((size_t)K * m * sizeof(*lhs));
-    uint8_t* rhs_indices = calloc(vl_bytes, sizeof(*rhs_indices));
-    float32_t* actual = malloc((size_t)m * n * sizeof(*actual));
-    int result = 1;
+/* Print the logical 2-bit lookup table independently of any packed RHS byte. */
+static void print_lookup_table(void) {
+    puts("2-bit LUT mapping:");
+    puts("bits  idx  signed  raw byte");
 
-    if (lhs == NULL || rhs_indices == NULL || actual == NULL) {
-        fputs("failed to allocate FP16 LUTI4 test data\n", stderr);
-        goto cleanup;
+    for (uint8_t index = 0; index < LUT_INDICES_PER_BYTE; ++index) {
+        const int8_t value = lut_i8_i2[index];
+
+        printf(
+            " %u%u   %u    %4d    0x%02X\n", (unsigned)((index >> 1) & 1U), (unsigned)(index & 1U),
+            (unsigned)index, (int)value, (unsigned)(uint8_t)value);
     }
+}
 
-    // LUTI4 .H reads the low 16 bits of each 32-bit ZT0 entry. 0x3c00 is 1.0
-    // in the IEEE 754 binary16 format.
-    for (uint32_t entry = 0; entry < 16; ++entry) lut[entry] = 0x00003c00U;
-    for (uint32_t element = 0; element < K * m; ++element) lhs[element] = (float16_t)1.0F;
+/* Show how the first packed RHS bytes become indices and signed 8-bit values. */
+static void print_rhs_decoding_preview(const uint8_t* rhs_packed, size_t n) {
+    const size_t cols_to_print = n < 8 ? n : 8;
 
-    arm_lp_gemm_luti4(lhs, rhs_indices, actual, lut);
-    puts("FP16 LUTI4 + FMOPA test (M = VL_s, K = 2, N = 4 * VL_s)");
+    printf("\nRHS decoding preview (%zu of %zu columns):\n", cols_to_print, n);
+    puts("  col byte   2-bit[k3k2k1k0]  lut_idx[k0k1k2k3]  signed values    raw bytes");
 
-    result = 0;
-    for (uint32_t row = 0; row < m; ++row)
-        for (uint32_t column = 0; column < n; ++column) {
-            size_t index = (size_t)row * n + column;
-            if (actual[index] != (float32_t)K) {
-                fprintf(
-                    stderr, "FAIL: row %u, column %u: got %g, expected %d\n", row, column, (double)actual[index], K);
-                result = 1;
-                goto cleanup;
-            }
+    for (size_t col = 0; col < cols_to_print; ++col) {
+        const uint8_t packed_byte = rhs_packed[col];
+        uint8_t lut_indices[K];
+        int8_t s8_values[K];
+
+        // Decode the four 2-bit indices once.
+        for (size_t k = 0; k < K; ++k) {
+            const unsigned shift = 2U * (unsigned)k;
+            lut_indices[k] = (uint8_t)((packed_byte >> shift) & 0x3U);
+            s8_values[k] = lut_i8_i2[lut_indices[k]];
         }
-    puts("PASS");
 
-cleanup:
+        printf("%4zu  0x%02X   ", col, (unsigned)packed_byte);
+        print_binary_byte(packed_byte);
+
+        printf("        [");
+        for (size_t k = 0; k < K; ++k) {
+            printf("%u%s", (unsigned)lut_indices[k], k + 1 == K ? "" : " ");
+        }
+        printf("]        [");
+
+        for (size_t k = 0; k < K; ++k) {
+            printf("%2d%s", (int)s8_values[k], k + 1 == K ? "" : " ");
+        }
+        printf("]    [");
+
+        for (size_t k = 0; k < K; ++k) {
+            printf("0x%02X%s", (unsigned)(uint8_t)s8_values[k], k + 1 == K ? "" : " ");
+        }
+        puts("]");
+    }
+}
+
+int main(void) {
+    const size_t m = streaming_vector_words();
+    const size_t n = 4 * m;
+
+    // Calculate storage sizes and allocate one result for each implementation.
+    const size_t lhs_bytes = m * K * sizeof(int8_t);
+    const size_t rhs_packed_bytes = n * sizeof(uint8_t);
+    const size_t dst_bytes = m * n * sizeof(int32_t);
+
+    // Allocate memory.
+    int8_t* lhs = malloc(lhs_bytes);
+    uint8_t* rhs_packed = malloc(rhs_packed_bytes);
+    int32_t* plain_c_result = malloc(dst_bytes);
+    int32_t* sme2_result = malloc(dst_bytes);
+
+    // Fill the LHS and packed RHS with random values.
+    fill_random(lhs, rhs_packed, m, n);
+
+    // Use plain C as the reference result.
+    plain_c_matmul(lhs, rhs_packed, plain_c_result, m, n);
+
+    // Run the SME2 LUTI2 implementation.
+    luti2_sme2_asm_matmul(lhs, rhs_packed, sme2_result, m, n);
+    require_matrices_equal("LUTI2 + SMOPA", plain_c_result, sme2_result, m, n);
+
+    // Print a small part of the matrix rather than the complete scalable result.
+    printf("SVL = %zu bits; matrix shape M=%zu, K=%d, N=%zu\n", m * 32, m, K, n);
+    print_lookup_table();
+    print_rhs_decoding_preview(rhs_packed, n);
+    print_matrix_preview(plain_c_result, m, n);
+
+    puts("PASS: LUTI2 SME2 matches plain C matmul.");
+
+    // Free memory.
     free(lhs);
-    free(rhs_indices);
-    free(actual);
-    return result;
-}
-
-static int run_arm_lp_gemv_luti2_luti4_test(void) {
-    const size_t vl_b = get_streaming_vector_bytes();
-    const size_t matrix_bytes = vl_b * vl_b;
-    const size_t luti_packed_bytes = matrix_bytes / 8;
-    uint32_t luti4_table[16];
-    uint32_t luti2_table[16] = {0};
-    int8_t levels[4] = {-3, -1, 1, 3};
-    uint8_t codewords[16] = {
-        0x00, 0x01, 0x12, 0x23, 0x34, 0x45, 0x56, 0x67, 0x78, 0x89, 0x9a, 0xab, 0xbc, 0xcd, 0xde, 0xe7,
-    };
-    int8_t* lhs = malloc(vl_b * sizeof(*lhs));
-    int8_t* rhs = malloc(matrix_bytes * sizeof(*rhs));
-    int8_t* rhs_sdot_packed = malloc(matrix_bytes * sizeof(*rhs_sdot_packed));
-    uint8_t* rhs_luti_packed = calloc(luti_packed_bytes, sizeof(*rhs_luti_packed));
-    int32_t* reference = malloc(vl_b * sizeof(*reference));
-    int32_t* sdot_actual = malloc(vl_b * sizeof(*sdot_actual));
-    int32_t* luti_actual = malloc(vl_b * sizeof(*luti_actual));
-    int result = 1;
-
-    if (lhs == NULL || rhs == NULL || rhs_sdot_packed == NULL || rhs_luti_packed == NULL || reference == NULL ||
-        sdot_actual == NULL || luti_actual == NULL) {
-        fputs("failed to allocate LUTI4 -> LUTI2 -> SDOT test data\n", stderr);
-        goto cleanup;
-    }
-    if (vl_b % 16 != 0) {
-        fputs("LUTI4 -> LUTI2 -> SDOT requires VL_b divisible by 16\n", stderr);
-        goto cleanup;
-    }
-
-    for (uint32_t entry = 0; entry < 16; ++entry) luti4_table[entry] = (uint8_t)codewords[entry] * 0x01010101U;
-    for (uint32_t entry = 0; entry < 4; ++entry) luti2_table[entry] = (uint8_t)levels[entry] * 0x01010101U;
-
-    for (size_t k = 0; k < vl_b; ++k) lhs[k] = (int8_t)(((5 * k + 3) % 9) - 4);
-    for (size_t k_group = 0; k_group < vl_b / 4; ++k_group)
-        for (size_t column = 0; column < vl_b; ++column) {
-            uint8_t id = (uint8_t)((5 * k_group + 3 * column + 1) & 0xf);
-            uint8_t packed_levels = codewords[id];
-            for (size_t k_lane = 0; k_lane < 4; ++k_lane) {
-                uint8_t level_code = (packed_levels >> (2 * k_lane)) & 0x3;
-                rhs[(4 * k_group + k_lane) * vl_b + column] = levels[level_code];
-            }
-        }
-
-    arm_lp_matmul_s8_s8_dotprod_rhs_pack_ref(rhs, rhs_sdot_packed);
-    if (arm_lp_gemv_luti2_luti4_rhs_pack_ref(rhs, rhs_luti_packed, luti4_table, luti2_table) != 0) {
-        fputs("failed to pack representable RHS for LUTI4 -> LUTI2 -> SDOT\n", stderr);
-        goto cleanup;
-    }
-
-    arm_lp_gemv_luti2_luti4_ref(lhs, rhs, reference);
-    arm_lp_matmul_s8_s8_dotprod(lhs, rhs_sdot_packed, sdot_actual);
-    arm_lp_gemv_luti2_luti4(lhs, rhs_luti_packed, luti_actual, luti4_table, luti2_table);
-    if (compare_outputs_i32(sdot_actual, reference, 1, vl_b, "arm_lp_matmul_s8_s8_dotprod") != 0 ||
-        compare_outputs_i32(luti_actual, reference, 1, vl_b, "arm_lp_gemv_luti2_luti4") != 0)
-        goto cleanup;
-
-    const int8_t saved_weight = rhs[0];
-    rhs[0] = 99;
-    if (arm_lp_gemv_luti2_luti4_rhs_pack_ref(rhs, rhs_luti_packed, luti4_table, luti2_table) == 0) {
-        fputs("LUTI packer accepted an unsupported scalar level\n", stderr);
-        goto cleanup;
-    }
-    rhs[0] = saved_weight;
-
-    for (size_t k_lane = 0; k_lane < 4; ++k_lane) rhs[k_lane * vl_b] = levels[3];
-    if (arm_lp_gemv_luti2_luti4_rhs_pack_ref(rhs, rhs_luti_packed, luti4_table, luti2_table) == 0) {
-        fputs("LUTI packer accepted an unsupported four-weight pattern\n", stderr);
-        goto cleanup;
-    }
-
-    puts("LUTI4 -> LUTI2 -> SDOT test (M = 1, K = N = VL_b)");
-    puts("PASS");
-    result = 0;
-
-cleanup:
-    free(lhs);
-    free(rhs);
-    free(rhs_sdot_packed);
-    free(rhs_luti_packed);
-    free(reference);
-    free(sdot_actual);
-    free(luti_actual);
-    return result;
-}
-
-int main(int argc, char** argv) {
-    if (argc == 1) return ex1_luti_test();
-
-    if (argc != 2 || strcmp(argv[1], "--learning") != 0) {
-        fprintf(stderr, "Usage: %s [--learning]\n", argv[0]);
-        return 2;
-    }
-
-    if (run_arm_lp_gemm_luti4_test() != 0) return 1;
-    if (run_arm_lp_gemv_luti2_luti4_test() != 0) return 1;
-    return 0;
+    free(rhs_packed);
+    free(plain_c_result);
+    free(sme2_result);
+    return EXIT_SUCCESS;
 }

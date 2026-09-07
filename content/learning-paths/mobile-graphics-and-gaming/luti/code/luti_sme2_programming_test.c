@@ -10,11 +10,33 @@
 #include <stdlib.h>
 #include <string.h>
 
-// This example assumes it runs on an SME2-compatible system. It deliberately
-// performs no runtime capability check.
+#if defined(__APPLE__)
+#include <sys/types.h>
+#include <sys/sysctl.h>
+#elif defined(__linux__)
+#include <sys/auxv.h>
+#include <asm/hwcap.h>
+// Older Linux and Android headers might not define the SME2 capability bit.
+#ifndef HWCAP2_SME2
+#define HWCAP2_SME2 (1UL << 37)
+#endif
+#endif
+
 #if !defined(__ARM_FEATURE_SME2)
 #error "Compile with SME2 enabled, for example -march=armv9.2-a+sme2+nosve2+nosve"
 #endif
+
+static int has_sme2(void) {
+#if defined(__APPLE__)
+    int supported = 0;
+    size_t size = sizeof(supported);
+    return sysctlbyname("hw.optional.arm.FEAT_SME2", &supported, &size, NULL, 0) == 0 && supported;
+#elif defined(__linux__)
+    return (getauxval(AT_HWCAP2) & HWCAP2_SME2) != 0;
+#else
+    return 0;
+#endif
+}
 
 __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemm_luti4(
     const float16_t* lhs, const uint8_t* rhs_indices, float32_t* out, const uint32_t* zt0_lut);
@@ -292,12 +314,17 @@ cleanup:
 }
 
 int main(int argc, char** argv) {
-    if (argc == 1) return ex1_luti_test();
-
-    if (argc != 2 || strcmp(argv[1], "--learning") != 0) {
+    if (argc != 1 && (argc != 2 || strcmp(argv[1], "--learning") != 0)) {
         fprintf(stderr, "Usage: %s [--learning]\n", argv[0]);
         return 2;
     }
+
+    if (!has_sme2()) {
+        puts("SKIP: No support for SME2 on this device.");
+        return 0;
+    }
+
+    if (argc == 1) return ex1_luti_test();
 
     if (run_arm_lp_gemm_luti4_test() != 0) return 1;
     if (run_arm_lp_gemv_luti2_luti4_test() != 0) return 1;

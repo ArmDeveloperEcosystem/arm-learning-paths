@@ -7,9 +7,8 @@ weight: 7
 layout: learningpathall
 ---
 
-The earlier examples use the original SME2 lookup path: a table in `ZT0`,
-packed indices in Z registers, and one or more Z-register results. Other
-architectural features use a different table source or add specialized forms.
+The earlier examples use the original SME2 lookup path: a table in `ZT0`, packed indices in Z registers, and one or more Z-register results.
+Other architectural features use a different table source or add specialized forms.
 
 ## Compare the feature paths
 
@@ -21,7 +20,7 @@ architectural features use a different table source or add specialized forms.
 
 ## Use Z-register tables with FEAT_LUT
 
-`FEAT_LUT` expand the functionality of `FEAT_SME2` allowing to use scalable Z registers as the lookup-table source. This provide an alternative to using the `ZT0` register. 
+`FEAT_LUT` expands the functionality of `FEAT_SME2` allowing to use of scalable Z registers as the lookup-table source. This provides an alternative to using the `ZT0` register. 
 
 ```text
 table Z register(s) + packed-index Z register
@@ -31,40 +30,39 @@ table Z register(s) + packed-index Z register
              one result Z register
 ```
 
-Use this form for vector kernels that do not need  `ZT0` register and where multiple LUT are
-required by the algorithm.
+Use this form for vector kernels that do not need `ZT0` register and where multiple LUTs are required by the algorithm.
 
-For example, the two-stage vector decode loop in section 5 reloads `ZT0` for its LUTI4 and
-LUTI2 tables. With `FEAT_LUT`, load separate Z-register tables once before
-the loop with the appropriate predicate. For the byte forms shown here, the
-LUTI4 load needs 16 active lanes and the LUTI2 load needs 4.
+For example, the two-stage vector decode loop in section 5 reloads `ZT0` using `svldr_zt()` for its LUTI4 and LUTI2 tables.
+With `FEAT_LUT`, both lookup tables are kept in separate Z registers and loaded once before the loop with the appropriate predicate.
+This removes the need to call `svldr_zt()` inside the loop.
+
+The following excerpt illustrates one segment of the two-stage decode.
 
 ```c
+// Load 16-entries LUTI4-Table and 4-entries LUTI2-Table before the loop.
 const svuint8_t luti4_table_z = svld1_u8(pg_1, luti4_table_storage);
 const svuint8_t luti2_table_z = svld1_u8(pg_2, luti2_table_storage);
 
 for (size_t i_k = 0; i_k < lhs_blocks; ++i_k) {
     svuint8_t packed_indices = svld1_u8(pg8, rhs_indices);
     rhs_indices += vl_b;
-```
-<del><code>    svldr_zt(0, zt0_luti4);</code></del>
-```c
-    svuint8_t codewords =
-        svluti4_lane_u8(luti4_table_z, packed_indices, /* segment */ 0);
-    ..
-```
-<del><code>    svldr_zt(0, zt0_luti2);</code></del>
-```c
+
+    // First stage: Look up the codewords using the LUTI4 table. 
+    // No need to call svldr_zt(). 
+    svuint8_t codewords = svluti4_lane_u8(
+        luti4_table_z, packed_indices, /* segment */ 0);
+
+    // Second stage: Decode signed values using the LUTI2 table. 
+    // No need to call svldr_zt(). 
     svint8_t values = svreinterpret_s8_u8(
         svluti2_lane_u8(luti2_table_z, codewords, /* segment */ 0));
+
     // Consume values, then continue with the next input block.
     ..
-}
 ```
 
 Each Z-register-table LUTI instruction produces one destination Z register.
-The table entries are the one or two SVL-sized Z register. The logical LUT is still the four entries for LUTI2
-or sixteen entries for LUTI4.
+The table entries are the one or two SVL-sized Z register. The logical LUT is still the four entries for LUTI2 or sixteen entries for LUTI4.
 
 ## Place results with FEAT_SME2p1
 

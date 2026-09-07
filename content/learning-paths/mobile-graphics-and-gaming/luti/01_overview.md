@@ -25,9 +25,9 @@ Physical packing is the storage layout that places several low-bit codes into ea
 
 <p align="center">
   <img
-    src="../images/luti_datatypes.png"
+    src="images/luti_datatypes.png"
     alt="Data Type Storage in Vector Register"
-    width="85%"
+    width="95%"
   />
 </p>
 
@@ -36,7 +36,7 @@ Physical packing is the storage layout that places several low-bit codes into ea
 </em>
 </p>
 
-This approach trades reconstruction accuracy for lower memory use. Its value also depends on decoding the packed codes efficiently. LUTI addresses that work by expanding low-bit codes directly into arithmetic-ready vector values.
+This approach trades reconstruction accuracy for lower memory use. Its value also depends on decoding the packed codes efficiently. LUTI achieves that by expanding low-bit codes directly into arithmetic-ready vector values.
 
 ## Understand the LUTI operation
 
@@ -75,9 +75,9 @@ For 2-bit codes, LUTI uses the packed indices in a source vector to select looku
 
 <p align="center">
   <img
-    src="../images/luti_flow_overview.png"
+    src="images/luti_flow_overview.png"
     alt="Lookup-Table Overview"
-    width="90%"
+    width="95%"
   />
 </p>
 
@@ -88,7 +88,7 @@ For 2-bit codes, LUTI uses the packed indices in a source vector to select looku
 
 ## Identify LUTI responsibilities
 
-Keep these boundaries in mind when using LUTI:
+Keep these points in mind when using LUTI:
 
 - The lookup table defines the meaning of each packed code
 - LUTI2 and LUTI4 expand indices; they don't calculate quantization metadata

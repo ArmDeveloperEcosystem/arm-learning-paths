@@ -9,14 +9,14 @@ layout: learningpathall
 
 ## Choose an SME2 execution environment
 
-You can run the examples using one of the following route:
+You can run the examples using one of the following routes:
 
 - Build and run natively on an arm64 macOS® device with an M4 processor or later
 - Cross-compile on macOS or Linux and run on an Android™ phone with SME2 support
 
 See the [list of devices with native SME2 support](https://learn.arm.com/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices) before selecting a target device.
 
-The examples prefer LLVM Clang 22 or later because they use recent Arm C Language Extensions (ACLE) intrinsics and SME2 assembly syntax. The Makefile checks the appropriate compiler version before building.
+The examples use recent Arm C Language Extensions (ACLE) intrinsics and SME2 assembly syntax. Use Homebrew LLVM Clang 22 or later for native macOS builds. Android builds use the Clang 21 toolchain supplied with NDK r29, or native Clang 21 on an AArch64 Linux host.
 
 ## Set up native macOS development
 
@@ -48,32 +48,47 @@ brew install llvm
 /opt/homebrew/opt/llvm/bin/clang --version
 ```
 
-The Makefile selects Homebrew LLVM when it is installed. Otherwise, it falls
-back to Apple Clang from the active Xcode Command Line Tools.
+The Makefile selects Homebrew LLVM at `/opt/homebrew/opt/llvm` when it is installed.
+Otherwise, it falls back to Apple Clang from the active Xcode Command Line Tools.
 
 ## Set up Android cross-compilation
-To run the LUTI examples codes on Android, install Android Native Development Kit (Android NDK):
+
+The build host does not need SME2 support. The Android device that runs the
+LUTI examples does. Install the compiler tools on your macOS or Linux host.
+
+The Makefile selects the compiler and linker automatically, so the same
+build commands work on AArch64 and x86-64 Linux.
+
+To run the LUTI examples codes install Android Native Development Kit (Android NDK):
+Install Android Native Development Kit (Android NDK) r29:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS host" language="bash">}}
+brew install wget
+mkdir -p "$HOME/Library/Android"
+cd "$HOME/Library/Android"
 wget https://dl.google.com/android/repository/android-ndk-r29-darwin.zip
 unzip android-ndk-r29-darwin.zip
   {{< /tab >}}
   {{< tab header="Linux host" language="bash">}}
+sudo apt update
+sudo apt install build-essential wget unzip
+cd "$HOME"
 wget https://dl.google.com/android/repository/android-ndk-r29-linux.zip
-unzip android-ndk-r29-darwin.zip
+unzip android-ndk-r29-linux.zip
   {{< /tab >}}
 {{< /tabpane >}}
 
-For easier access and execution of Android NDK tools, add these to the PATH and set the NDK_PATH variable:
+Set `NDK_PATH` and `ANDROID_NDK_HOME` so the Makefile can locate the NDK:
+
 {{< tabpane code=true >}}
   {{< tab header="macOS host" language="bash">}}
-export NDK_PATH=$HOME/Library/Android/android-ndk-r29/
-export ANDROID_NDK_HOME=$NDK_PATH
+export NDK_PATH="$HOME/Library/Android/android-ndk-r29"
+export ANDROID_NDK_HOME="$NDK_PATH"
   {{< /tab >}}
   {{< tab header="Linux host" language="bash">}}
-export NDK_PATH=$HOME/Android/android-ndk-r29/
-export ANDROID_NDK_HOME=$NDK_PATH
+export NDK_PATH="$HOME/android-ndk-r29"
+export ANDROID_NDK_HOME="$NDK_PATH"
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -84,7 +99,6 @@ Install Android Debug Bridge (`adb`) if it isn't already available:
 brew install android-platform-tools
   {{< /tab >}}
   {{< tab header="Linux host" language="bash">}}
-sudo apt update
 sudo apt install adb
   {{< /tab >}}
 {{< /tabpane >}}
@@ -113,13 +127,25 @@ You can also inspect the CPU feature list:
 adb shell "grep -m1 '^Features' /proc/cpuinfo"
 ```
 
-The executable performs the definitive runtime check. If SME2 isn't available to Android applications, it prints `SKIP: No support for SME2 on this device; SME2 tests were not run.`
+The executable performs the definitive runtime check. If SME2 isn't available to Android applications, it prints `SKIP: No support for SME2 on this device.` The program exits successfully without running either set of examples. You can still disassemble the executable on the build host.
 
 ## Download and explore the code examples
 
-__[!REVIEW - ADD THE PUBLIC CODE-EXAMPLE ARCHIVE URL BEFORE PUBLISHING]__
+Download the source and build files into a new `code` directory:
 
-Download and extract the published code-example archive, then change to its `code` directory.
+```bash
+BASE_URL=https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/mobile-graphics-and-gaming/luti
+
+mkdir code
+cd code
+for FILE in \
+  Makefile \
+  example_1_luti_sme2.c \
+  luti_sme2_programming.c \
+  luti_sme2_programming_test.c; do
+  wget -q "$BASE_URL/code/$FILE" -O "$FILE"
+done
+```
 
 The directory contains these source and build files:
 
@@ -159,30 +185,35 @@ Run the additional LUTI programming examples:
 
 ## Build and run on Android
 
-From the same `code` directory, cross-compile for Android:
+From the `code` directory, prepare the tools and cross-compile for Android.
+Use the same commands on macOS and Linux:
+
+Run `make setup-android` once after installing the NDK. On macOS and x86-64 Linux, this checks the installed NDK compiler. On AArch64 Linux, it also installs any missing LLVM tools. Then build the executable:
 
 ```bash
+make setup-android
 make clean
 make android
 ```
-Connect your Android device to your development machine using a cable. 
-Approve the connection on your phone and use adb to copies the executable to `/data/local/tmp/sme2_luti_android`:
+
+Connect your Android device to your development machine using a cable.
+Approve the connection on your phone and use `adb` to copy the executable to `/data/local/tmp/sme2_luti_android`:
 
 ```bash
 adb push sme2_luti_android /data/local/tmp/sme2_luti_android
 ```
 
-Start a new shell to access the device’s system from your development machine and runs the executable:
+Make the executable runnable and start it from the host:
 
-```
-adb shell
-./data/local/tmp/sme2_luti_android
+```bash
+adb shell chmod 755 /data/local/tmp/sme2_luti_android
+adb shell /data/local/tmp/sme2_luti_android
 ```
 
 Run the additional LUTI programming examples with:
 
 ```bash
-./data/local/tmp/sme2_luti_android --learning
+adb shell /data/local/tmp/sme2_luti_android --learning
 ```
 
 ## What you've accomplished and what's next

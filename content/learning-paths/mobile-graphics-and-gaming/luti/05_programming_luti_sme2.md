@@ -10,13 +10,12 @@ layout: learningpathall
 The examples in `luti_sme2_programming.c` show a recipe-based approach to programming
 with LUTI instructions.
 
-The examples cover the following combinations and have their base
-in KleidiAI's matrix multiplication micro-kernels:
+The examples cover the following combinations and have their base in KleidiAI's matrix multiplication micro-kernels:
 
 | Example | Decode | Arithmetic | Main concept |
 |---|---|---|---|
-| One | LUTI4 to `float16` | GEMM using FMOPA | Use LUTI and source segments |
-| Two | LUTI4, then LUTI2 to `int8` | GEMV using SDOT | Use multiple LUTs and source segments |
+| (1) FP16 LUTI4 + FMOPA | LUTI4 to `float16` | GEMM using FMOPA | Use LUTI and source segments |
+| (2) LUTI4 -> LUTI2 -> SDOT | LUTI4, then LUTI2 to `int8` | GEMV using SDOT | Use multiple LUTs and source segments |
 
 ## Run the learning tests
 
@@ -81,8 +80,8 @@ __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemm_luti4(
      * +------+---------------------------+----------------------------------------+
      */
 
-    // There are more than one ways to reason about the number of input segment. Here, we go
-    // about it from the source register as the reference point.
+    // There are more than one ways to reason about the number of input segment. 
+    // Here, we go about it from the source register as the reference point.
 
     // Load the LUT
     svldr_zt(0, zt0_lut);
@@ -99,12 +98,10 @@ __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemm_luti4(
 
     //  Step 4 : Number of input segments for x1
     // --------------------------------------------
-    //   one byte of index produces two half words after the look up.
-    //   VL_b bytes of indices from a source register produces 2 * VL_h half-word elements or
-    //                                                          4 * VL_b bytes.
+    //   One byte of index produces two half words after the look up.
+    //   VL_b bytes of indices from a source register produces 2 * VL_h half-word elements or 4 * VL_b bytes.
     //   In other words, to fill VL_b bytes of destination, VL_b / 4 bytes
-    //   is needed =>  4 input segments with values 0, 1, 2 and 3
-
+    //   is needed => 4 input segments with values 0, 1, 2 and 3
     //
     //                source z register: Packed indices
     //   +-------------+-------------+-------------+-------------+
@@ -157,7 +154,7 @@ __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemm_luti4(
     }
 }
 ```
-## Two-stage LUTI4 and LUTI2 for GEMV using SDOT
+## Example 2: Two-stage LUTI4 and LUTI2 for GEMV using SDOT
 
 The SDOT micro-kernel and block size are similar to the KleidiAI's
 [SDOT micro-kernel](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp/kai_matmul_clamp_f32_qai8dxp1x4_qsi4cxp4vlx4_1x4vl_sme2_sdot.c),

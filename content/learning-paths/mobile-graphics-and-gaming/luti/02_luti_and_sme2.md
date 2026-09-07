@@ -23,12 +23,12 @@ SME2 provides a fixed 512-bit architectural register named `ZT0`. It contains 64
 
 <p align="center">
   <img
-    src="../images/luti2.png"
+    src="images/luti2.png"
     alt="SME2 ZT0 Lookup-Table Register"
     width="100%"
   />
     <img
-    src="../images/luti4.png"
+    src="images/luti4.png"
     alt="SME2 ZT0 Lookup-Table Register"
     width="100%"
   />
@@ -106,7 +106,7 @@ Enter streaming mode, initialize ZA, and load ZT0. The lookup table does not cha
 ```asm
 smstart                   // Enable Streaming SVE mode and ZA/ZT0 state
 zero    {za}              // Zero initialize accumulators for this output tile
-ldr     zt0, [x_lut]      // load LUT into fixed 512-bit ZT0 table
+ldr     zt0, [lut_i8_i2]      // load LUT into fixed 512-bit ZT0 table
 ```
 
 __3. Load LHS and packed RHS__
@@ -126,7 +126,6 @@ __4. LUTI2 expands the packed indices__
 ```asm
 luti2   { z24.b - z27.b }, zt0, z16[0]     // unpack 2-bit indices
 luti2   { z4.b  - z7.b  }, zt0, z17[0]
-
 luti2   { z8.b  - z11.b }, zt0, z18[0]
 luti2   { z12.b - z15.b }, zt0, z19[0]
 ```

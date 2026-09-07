@@ -16,7 +16,8 @@ prerequisites:
     - Understanding of SME2 streaming mode and ZA storage; see [Accelerate matrix multiplication performance with SME2](/learning-paths/cross-platform/multiplying-matrices-with-sme2/)
     - A Mac system with Apple silicon (M4 or later), or an Android device with SME2 support
     - Git and LLVM Clang 22 or later for native macOS builds; Apple Clang 21 or later is supported as a fallback
-    - Android NDK with LLVM Clang 21 or later for Android builds
+    - For Android builds, a macOS or Linux build host and Android NDK r29
+    - For Android execution, an Android 15 or later device with SME2
 
 
 author:

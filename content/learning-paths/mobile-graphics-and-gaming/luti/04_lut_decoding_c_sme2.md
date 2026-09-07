@@ -37,7 +37,15 @@ Use these relationships when reasoning about the dimensions:
 - `svcntw()` returns the number of 32-bit words in one streaming vector.
 - One 32-bit word contains four bytes, so `svcntb() = 4 * svcntw()`
 
-The example uses those values to define the matrix shape:
+The helper enters streaming mode to query the vector length:
+
+```c
+__arm_locally_streaming static size_t streaming_vector_words(void) {
+    return svcntw();
+}
+```
+
+The example uses that value to define the matrix shape:
 
 ```c
 const size_t m = streaming_vector_words();  // svcntw()
@@ -72,6 +80,20 @@ For an SVL of 512 bits:
 
 The complete LHS block and packed RHS block each fit in one streaming Z register.
 
+<p align="center">
+  <img
+    src="images/luti_svl_512.png"
+    alt="SME2 ZT0 Lookup-Table Register"
+    width="95%"
+  />
+</p>
+
+<p align="left">
+  <em>Figure 4. A 512-bit streaming Z register can be viewed as 16x 32-bit elements, 64x 8-bit elements, or 256x packed 2-bit indices. The word and byte counts define M = svcntw() = 16 and N = svcntb() = 64.
+  Each 16-byte segment holds 64 2-bit indices, so the complete packed RHS of 256x 2-bit indices fits in one Z-register.
+</em>
+</p>
+
 ### Low-bit packed format
 
 For each output column, the packed RHS stores the four `K` dimension RHS values in one byte: rhs_packed[col].
@@ -81,7 +103,7 @@ Each group selects the lookup-table value for one RHS element, RHS[k, col].
 ```text
 rhs_packed[col]
 bits         [7:6] |    [5:4] |    [3:2] |    [1:0]
-RHS:      [k3,col] | [k2,col] | [k1,col] | [0k,col]
+RHS:      [k3,col] | [k2,col] | [k1,col] | [k0,col]
 ```
 
 The example reads the 2-bit groups from the least-significant bits first. For example:
@@ -269,58 +291,83 @@ until the matrix kernel needs it. The expanded values then pass directly from
 Z registers to SME2 matrix instructions.
 
 To see the same instruction pattern in production code, inspect the
-[`qai8dxp_qsu2csp` Arm® KleidiAI™ micro-kernel source](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsu2cxp/kai_matmul_clamp_f32_qai8dxp1vlx4_qsu2cxp4vlx4_1vlx4vl_sme2_mopa_asm.S).
+[`qai8dxp_qsu2cxp` Arm® KleidiAI™ micro-kernel source](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsu2cxp/kai_matmul_clamp_f32_qai8dxp1vlx4_qsu2cxp4vlx4_1vlx4vl_sme2_mopa_asm.S).
 
 ## Build and validate the example
 
-From the `code` directory, compile `example_1_luti_sme2.c` with SME2 enabled:
+Complete the [environment setup](/learning-paths/mobile-graphics-and-gaming/luti/03_environment_setup/) and run these commands from the `code` directory.
 
+### Build and run on macOS
 ```bash
-/opt/homebrew/opt/llvm/bin/clang \
-  -O2 -Wall -Wextra -Werror \
-  -march=native+sme2 \
-  -isysroot "$(xcrun --show-sdk-path)" \
-  example_1_luti_sme2.c \
-  -o example_1_luti_sme2
-```
-
-Run the example:
-
-```bash
+make example_1_luti_sme2
 ./example_1_luti_sme2
 ```
 
-The program first prints the logical lookup table:
+### Cross-compile and run on Android
 
-```text
-bits  idx  signed  raw byte
- 00   0      -3    0xFD
- 01   1      -1    0xFF
- 10   2       1    0x01
- 11   3       3    0x03
+On macOS or Linux, use the NDK r29 installation selected by `ANDROID_NDK_HOME`. The build host does not need SME2 support.
+
+After completing `make setup-android` during environment setup, build the standalone Android executable:
+
+```bash
+make example_1_luti_sme2_android
 ```
 
-It then prints sample packed bytes, their indices in `k0` to `k3` order, and
-the signed and hexadecimal decoded values.
+With an Android device connected through ADB, copy and run the executable:
 
-After showing a preview of the result matrix, the program reports:
+```bash
+adb push example_1_luti_sme2_android /data/local/tmp/example_1_luti_sme2_android
+adb shell chmod 755 /data/local/tmp/example_1_luti_sme2_android
+adb shell /data/local/tmp/example_1_luti_sme2_android
+```
 
-```text
+### Check the result
+
+On an SME2-capable device, the program prints the matrix shape, lookup table, decoded RHS samples, and a result preview. For a 512-bit SVL, the shape is:
+
+```output
+SVL = 512 bits; matrix shape M=16, K=4, N=64
+```
+
+After comparing every SME2 output element with the plain C result, the expected final line is:
+
+```output
 PASS: LUTI2 SME2 matches plain C matmul.
 ```
 
-The program produces this message only after comparing every SME2 result
-against the corresponding plain C result.
+If SME2 is unavailable, the runner exits without performing the calculations:
+
+```output
+SKIP: No support for SME2 on this device.
+```
+
+A `SKIP` result does not validate the calculation. You can still inspect the generated instructions on the build host.
 
 ## Inspect the generated SME2 instructions
 
-Disassemble the executable and confirm that the SME2 function contains
-`LUTI2` followed by four `SMOPA` instructions.
+For the native macOS executable, run:
 
 ```bash
-/opt/homebrew/opt/llvm/bin/llvm-objdump -d example_1_luti_sme2 | \
-  grep -E "luti2|smopa"
+make disassemble-example-1
 ```
+
+For the Android executable, run this command on the macOS or Linux build host:
+
+```bash
+make disassemble-example-1-android
+```
+
+The Makefile selects the host's LLVM disassembler and displays only `LUTI2` and `SMOPA` instructions. Disassembly does not require SME2 hardware. The output is similar to:
+
+```output
+100000cec: c08c8024     luti2 { z4.b - z7.b }, zt0, z1[0]
+100000cf0: a0840000     smopa za0.s, p0/m, p0/m, z0.b, z4.b
+100000cf4: a0850001     smopa za1.s, p0/m, p0/m, z0.b, z5.b
+100000cf8: a0860002     smopa za2.s, p0/m, p0/m, z0.b, z6.b
+100000cfc: a0870003     smopa za3.s, p0/m, p0/m, z0.b, z7.b
+```
+
+Addresses vary by build. Confirm that one `LUTI2` is followed by four `SMOPA` instructions targeting `ZA0` through `ZA3`.
 
 ## Check your understanding
 
