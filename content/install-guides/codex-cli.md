@@ -94,7 +94,7 @@ node --version
 The output should show version 18 or higher:
 
 ```output
-v22.21.0
+v22.23.2
 ```
 
 Verify npm is available:
@@ -106,7 +106,7 @@ npm --version
 The output shows the npm version:
 
 ```output
-10.9.4
+10.9.8
 ```
 
 ### Install Codex CLI using npm on Arm Linux
@@ -134,7 +134,7 @@ codex --version
 The output shows the version:
 
 ```output
-@openai/codex, 0.122.0
+codex-cli 0.153.4
 ```
 
 ## Authenticate with OpenAI
