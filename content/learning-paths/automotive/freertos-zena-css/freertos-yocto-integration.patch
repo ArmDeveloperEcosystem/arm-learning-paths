@@ -1,53 +1,36 @@
-diff --git a/Kconfig b/Kconfig
-index f823ec2897809ae13b5d27c19538cb90995c477a..32d07eec7e685c6887b5eede2675b3569520e1e3 100644
---- a/Kconfig
-+++ b/Kconfig
-@@ -40,6 +40,27 @@ config RD_ASPEN_CFG1
+diff --git a/arm-zena-css/Kconfig b/arm-zena-css/Kconfig
+index f823ec28..14421e81 100644
+--- a/arm-zena-css/Kconfig
++++ b/arm-zena-css/Kconfig
+@@ -40,6 +40,24 @@ config RD_ASPEN_CFG1
  config RD_ASPEN_CFG2
      bool "RD-Aspen Cfg2"
  
-+if RD_ASPEN_CFG2
-+
 +choice
 +    prompt "Safety Island RTOS"
-+    default SAFETY_ISLAND_ZEPHYR
++    depends on RD_ASPEN_CFG2 && USE_CASE_DEMOS
++    default SI_CL1_RTOS_ZEPHYR
 +
-+config SAFETY_ISLAND_ZEPHYR
++config SI_CL1_RTOS_ZEPHYR
 +    bool "Zephyr"
 +
-+config SAFETY_ISLAND_FREERTOS
++config SI_CL1_RTOS_FREERTOS
 +    bool "FreeRTOS"
 +
 +endchoice
 +
-+config SAFETY_ISLAND_OS_OPTION
++config KAS_INCLUDE_SI_CL1_RTOS
 +    string
-+    default "option_freertos" if SAFETY_ISLAND_FREERTOS
-+    default "option_zephyr"
-+
-+endif # RD_ASPEN_CFG2
++    default "../sw-ref-stack/yocto/kas/si-cl1-zephyr.yml" if SI_CL1_RTOS_ZEPHYR
++    default "../sw-ref-stack/yocto/kas/si-cl1-freertos.yml" if SI_CL1_RTOS_FREERTOS
 +
  config RD_ASPEN_RTL
      bool "RD-Aspen RTL"
  
-diff --git a/yocto/kas/zena-css-bsp.yml b/yocto/kas/zena-css-bsp.yml
-index a3091a708af68db9229e0e0d392a49efe9713c1f..1e0427ee0e524025a2b21704e25266627a402815 100644
---- a/yocto/kas/zena-css-bsp.yml
-+++ b/yocto/kas/zena-css-bsp.yml
-@@ -231,6 +231,9 @@ local_conf_header:
-   bsp-uninative: |
-     INHERIT += "uninative"
-     require ${COREBASE}/meta/conf/distro/include/yocto-uninative.inc
-+  freertos: |
-+    DISTRO_FEATURES:remove = "${@oe.utils.conditional('SAFETY_ISLAND_OS_OPTION', 'option_freertos', 'zephyr', '', d)}"
-+    DISTRO_FEATURES:append = "${@oe.utils.conditional('SAFETY_ISLAND_OS_OPTION', 'option_freertos', ' freertos', '', d)}"
- 
- machine: fvp-rd-aspen
- distro: nodistro
-diff --git a/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc b/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc
-index e0f3a2492cf89a7566b9f791f52bcd3c59b54c36..831a156dfac36c78d2905b91763851bc8cf4838f 100644
---- a/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc
-+++ b/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc
+diff --git a/arm-zena-css/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc b/arm-zena-css/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc
+index e0f3a249..831a156d 100644
+--- a/arm-zena-css/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc
++++ b/arm-zena-css/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc
 @@ -6,3 +6,6 @@
  
  require ${@bb.utils.contains('DISTRO_FEATURES', 'zephyr', \
@@ -55,11 +38,11 @@ index e0f3a2492cf89a7566b9f791f52bcd3c59b54c36..831a156dfac36c78d2905b91763851bc
 +
 +require ${@bb.utils.contains('DISTRO_FEATURES', 'freertos', \
 +    'conf/machine/include/fvp/fvp-rd-aspen-freertos.inc', '', d)}
-diff --git a/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc b/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc
+diff --git a/arm-zena-css/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc b/arm-zena-css/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc
 new file mode 100644
-index 0000000000000000000000000000000000000000..85858146a455a07a42f9a56cdf18c32091f94732
+index 00000000..c36c78f0
 --- /dev/null
-+++ b/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc
++++ b/arm-zena-css/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc
 @@ -0,0 +1,12 @@
 +#
 +# SPDX-FileCopyrightText: <text>Copyright 2025-2026 Arm Limited and/or its
@@ -73,11 +56,11 @@ index 0000000000000000000000000000000000000000..85858146a455a07a42f9a56cdf18c320
 +
 +SAFETY_ISLAND_CL1_RECIPE ??= "freertos-demos-cl1"
 +SAFETY_ISLAND_CL1_IMAGE ??= "${SAFETY_ISLAND_CL1_RECIPE}"
-diff --git a/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/files/0001-toolchain-use-gcc-13-cortex-r82-name.patch b/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/files/0001-toolchain-use-gcc-13-cortex-r82-name.patch
+diff --git a/arm-zena-css/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/files/0001-toolchain-use-gcc-13-cortex-r82-name.patch b/arm-zena-css/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/files/0001-toolchain-use-gcc-13-cortex-r82-name.patch
 new file mode 100644
-index 0000000000000000000000000000000000000000..4586d0fdd142b077d392103f62aacec47ea9cc53
+index 00000000..4586d0fd
 --- /dev/null
-+++ b/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/files/0001-toolchain-use-gcc-13-cortex-r82-name.patch
++++ b/arm-zena-css/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/files/0001-toolchain-use-gcc-13-cortex-r82-name.patch
 @@ -0,0 +1,41 @@
 +From 20f4b6dd508128439f746af770753fab8174924b Mon Sep 17 00:00:00 2001
 +From: Julien Jayat <julien.jayat@arm.com>
@@ -120,11 +103,11 @@ index 0000000000000000000000000000000000000000..4586d0fdd142b077d392103f62aacec4
 +-set(CMAKE_ASM_FLAGS "-mcpu=cortex-r82ae -mabi=lp64 -Wall")
 ++set(CMAKE_C_FLAGS "-mcpu=cortex-r82 -mabi=lp64 -mlittle-endian -Wall -Wextra -mstrict-align -Wno-return-type -Wno-unused-parameter -Wno-attributes -Wno-pointer-to-int-cast -Wno-int-to-pointer-cast ${FREERTOS_SOURCE_PREFIX_MAP}")
 ++set(CMAKE_ASM_FLAGS "-mcpu=cortex-r82 -mabi=lp64 -Wall ${FREERTOS_SOURCE_PREFIX_MAP}")
-diff --git a/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/freertos-demos-cl1.bb b/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/freertos-demos-cl1.bb
+diff --git a/arm-zena-css/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/freertos-demos-cl1.bb b/arm-zena-css/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/freertos-demos-cl1.bb
 new file mode 100644
-index 0000000000000000000000000000000000000000..d6a3e2fb5fc6d6a1b2548edc5a1ed898ce156e27
+index 00000000..d6a3e2fb
 --- /dev/null
-+++ b/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/freertos-demos-cl1.bb
++++ b/arm-zena-css/yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/freertos-demos-cl1.bb
 @@ -0,0 +1,59 @@
 +# SPDX-License-Identifier: MIT
 +
@@ -185,3 +168,53 @@ index 0000000000000000000000000000000000000000..d6a3e2fb5fc6d6a1b2548edc5a1ed898
 +    install -m 0644 "${D}/firmware/${PN}.bin" "${DEPLOYDIR}/${PN}.bin"
 +}
 +addtask deploy after do_install
+diff --git a/sw-ref-stack/yocto/kas/arm-auto-solutions.yml b/sw-ref-stack/yocto/kas/arm-auto-solutions.yml
+index e71cc429..c0bf6a48 100644
+--- a/sw-ref-stack/yocto/kas/arm-auto-solutions.yml
++++ b/sw-ref-stack/yocto/kas/arm-auto-solutions.yml
+@@ -70,5 +70,5 @@ local_conf_header:
+   cassini: |
+     CASSINI_GENERIC_ARM64_FILESYSTEM = "0"
+     DISTRO_FEATURES:remove = "cassini-security cassini-ota cassini-parsec"
+-    DISTRO_FEATURES:append = " cassini-dev zephyr"
++    DISTRO_FEATURES:append = " cassini-dev"
+     KERNEL_CLASSES:remove = "containers_kernelcfg_check"
+diff --git a/sw-ref-stack/yocto/kas/si-cl1-freertos.yml b/sw-ref-stack/yocto/kas/si-cl1-freertos.yml
+new file mode 100644
+index 00000000..5cc49c9d
+--- /dev/null
++++ b/sw-ref-stack/yocto/kas/si-cl1-freertos.yml
+@@ -0,0 +1,13 @@
++#
++# SPDX-FileCopyrightText: <text>Copyright 2026 Arm Limited and/or its
++# affiliates <open-source-office@arm.com></text>
++#
++# SPDX-License-Identifier: MIT
++
++---
++header:
++  version: 16
++
++local_conf_header:
++  si-cl1-freertos: |
++    DISTRO_FEATURES:append = " freertos"
+diff --git a/sw-ref-stack/yocto/kas/si-cl1-zephyr.yml b/sw-ref-stack/yocto/kas/si-cl1-zephyr.yml
+new file mode 100644
+index 00000000..67b76ee6
+--- /dev/null
++++ b/sw-ref-stack/yocto/kas/si-cl1-zephyr.yml
+@@ -0,0 +1,13 @@
++#
++# SPDX-FileCopyrightText: <text>Copyright 2026 Arm Limited and/or its
++# affiliates <open-source-office@arm.com></text>
++#
++# SPDX-License-Identifier: MIT
++
++---
++header:
++  version: 16
++
++local_conf_header:
++  si-cl1-zephyr: |
++    DISTRO_FEATURES:append = " zephyr"
+
