@@ -1,15 +1,11 @@
 ---
 title: Tune Zenoh for ROS 2 traffic over wireless networks
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 120
 
 description: Measure ROS 2 sensor traffic, tune Zenoh with compression, access control, downsampling, and QoS, and select a suitable wireless deployment policy.
 
-who_is_this_for: This Learning Path is for robotics developers who want to understand how Zenoh manages ROS 2 sensor traffic over Wi-Fi. You should already have basic experience setting up and distributing a ROS 2 Jazzy system with rmw_zenoh, as covered in the previous Learning Paths in this series.
+who_is_this_for: This Learning Path is for robotics developers who want to understand how Zenoh manages ROS 2 sensor traffic over Wi-Fi. 
 
 learning_objectives:
     - Measure the rate, bandwidth, and regularity of ROS 2 sensor data at a remote receiver
@@ -18,11 +14,61 @@ learning_objectives:
     - Validate the policies over real Wi-Fi and select a suitable deployment configuration
 
 prerequisites:
-    - The ROS 2 simulation environment from Learning Path 1, with the `robot` and `control` containers available
-    - The distributed Zenoh configuration from Learning Path 2, with the `control` container connected in client mode
-    - An **Arm server** with the Docker Compose configuration used in Learning Paths 1 and 2
+    - The ROS 2 simulation environment from [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/), with the `robot` and `control` containers available
+    - The distributed Zenoh configuration from [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/), with the `control` container connected in client mode
+    - An **Arm server** with the Docker Compose configuration used in [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/) and [Distribute a ROS 2 robotic system across Arm devices with Zenoh](/learning-paths/cross-platform/distributed-ros2-zenoh-lp2/)
     - A **Raspberry Pi** connected over Wi-Fi
     - Familiarity with ROS 2 topics, Docker, and basic Linux commands
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-31T16:20:42Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: fceb2d9bb41f1efe4abf9c5c797503597be212dbf55059b06506247a9f1990c3
+  summary_generated_at: '2026-08-31T16:20:42Z'
+  summary_source_hash: fceb2d9bb41f1efe4abf9c5c797503597be212dbf55059b06506247a9f1990c3
+  faq_generated_at: '2026-08-31T16:20:42Z'
+  faq_source_hash: fceb2d9bb41f1efe4abf9c5c797503597be212dbf55059b06506247a9f1990c3
+  summary: >-
+    You'll measure ROS 2 sensor traffic, emulate a constrained wireless link, and tune Zenoh policies
+    to manage ROS 2 traffic over Wi-Fi. First, you'll record baseline rates for `/scan`,
+    `/camera/image_raw`, and `/camera/points` in a wireless emulation. Then, you'll apply `tc` and `netem`, test compression,
+    access control, downsampling, and quality of service (QoS), and compare the results. Finally, you'll repeat the policy
+    tests with a Raspberry Pi over real Wi-Fi and choose a deployment policy.
+  faqs:
+  - question: How do I start and verify the ROS 2 and Zenoh environment before measuring?
+    answer: >-
+      From the Arm server host, run `docker compose up -d` in `~/ros_zenoh`, then use `docker compose
+      ps`. Both services should report `Up`. Then, open the `robot` container desktop and confirm that
+      the Zenoh router, simulation, and Navigation2 processes are running. Restart any process that
+      stopped.
+  - question: Where do I run the network emulation command?
+    answer: >-
+      Open a terminal in the `robot` container desktop and run `source ~/workshop_env.bash`, followed
+      by `just network_limit`. Apply the `tc`/`netem` limits from within the container environment
+      used for the experiments.
+  - question: How do I know the emulated wireless limits are active?
+    answer: >-
+      `just network_limit` prints the applied parameters, including rate, latency variation, loss,
+      and reordering. Look for output that states the simulation is applied with values such as a
+      `25mbit` rate and nonzero latency and loss.
+  - question: Which ROS 2 topics should I target first when the link is constrained?
+    answer: >-
+      The `/camera/image_raw` and `/camera/points` streams dominate bandwidth, while `/scan` is
+      small. Compress the streams when you need to preserve them. If you don't need point-cloud data,
+      use access control to block `/camera/points`. If you need complete point-cloud frames, use
+      compression with the QoS `block_first` policy.
+  - question: When should I use downsampling instead of compression?
+    answer: >-
+      Use downsampling when the compressed camera stream still exceeds the available link capacity.
+      Set the forwarded image rate less than the sustained capacity of the link to trade frame rate
+      for steadier delivery and lower jitter.
+# END generated_summary_faq
 
 author:
     - Kwashie Andoh
@@ -51,6 +97,7 @@ operatingsystems:
 shared_path: true
 shared_between:
     - automotive
+    - embedded-and-microcontrollers
 
 further_reading:
     - resource:

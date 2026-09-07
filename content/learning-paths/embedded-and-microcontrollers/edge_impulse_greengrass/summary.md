@@ -1,6 +1,7 @@
 ---
+hide_from_navpane: true
 title: Command and metrics reference
-description: Review the commands, metrics, and configuration values used throughout the Edge Impulse Greengrass deployment.
+description: Review the MQTT commands and model metrics used to monitor and control the Edge Impulse Greengrass deployment.
 weight: 10
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +10,7 @@ layout: learningpathall
 
 ## Overview
 
-This page is a reference for the MQTT commands and model metrics available in the Edge Impulse Greengrass integration. Use these commands to control the Runner service, manage the confidence threshold filter, retrieve model information, and manage the inference cache — all through AWS IoT Core MQTT topics.
+This page is a reference for the MQTT commands and model metrics available in the Edge Impulse Greengrass integration. Use these commands to control the Edge Impulse Linux Runner service, manage the confidence threshold filter, retrieve model information, and manage the inference cache — all through AWS IoT Core MQTT topics.
 
 Commands are sent as JSON messages to the device's command input topic and results are published to the command output topic:
 
@@ -20,7 +21,7 @@ Commands are sent as JSON messages to the device's command input topic and resul
 
 All commands use the following JSON structure:
 
-```json
+```output
 {
    "cmd": "<command-verb>",
    "value": "<optional-value>"
@@ -31,7 +32,7 @@ The `value` field is only required for commands that set a value.
 
 ## Model metrics
 
-The Runner accumulates and publishes model metrics to IoT Core at the interval specified by the `metrics_sleeptime_ms` configuration parameter. Metrics are published to:
+The Edge Impulse Linux Runner accumulates and publishes model metrics to IoT Core at the interval specified by the `metrics_sleeptime_ms` configuration parameter. Metrics are published to:
 
 ```text
 /edgeimpulse/device/<device-name>/model/metrics
@@ -43,9 +44,9 @@ The published metrics include:
 - **standard_deviation**: Running standard deviation of confidence scores.
 - **confidence_trend**: Direction the confidence is trending (`incr` or `decr`).
 
-Example metrics output:
+The output is similar to:
 
-```json
+```output
 {
    "mean_confidence": 0.696142,
    "standard_deviation": 0.095282,
@@ -62,9 +63,9 @@ Example metrics output:
 
 ## Startup notification
 
-When the Runner starts or restarts, it publishes the following JSON to the command output topic:
+When the Edge Impulse Linux Runner starts or restarts, it publishes the following JSON to the command output topic:
 
-```json
+```output
 {
    "result": {
       "status": "started",
@@ -74,11 +75,11 @@ When the Runner starts or restarts, it publishes the following JSON to the comma
 }
 ```
 
-You can use this message to detect service restarts and re-apply any runtime changes (for example, confidence filter settings) to the newly started Runner.
+You can use this message to detect service restarts and re-apply any runtime changes (for example, confidence filter settings) to the newly started Edge Impulse Linux Runner.
 
-## restart
+## `restart`
 
-Restarts the Edge Impulse Runner process. When used with the `ei_shutdown_behavior` option set to `wait_on_restart`, the Runner pauses after the model completes and waits for this command before restarting.
+Restarts the Edge Impulse Linux Runner process. When used with the `ei_shutdown_behavior` option set to `wait_on_restart`, the Edge Impulse Linux Runner pauses after the model completes and waits for this command before restarting.
 
 **Command:**
 
@@ -88,7 +89,7 @@ Restarts the Edge Impulse Runner process. When used with the `ei_shutdown_behavi
 }
 ```
 
-## enable_threshold_filter
+## `enable_threshold_filter`
 
 Enables the confidence threshold filter. When enabled, only inference results that meet the threshold criteria are published to IoT Core. By default, the filter is disabled and all results are published.
 
@@ -100,9 +101,9 @@ Enables the confidence threshold filter. When enabled, only inference results th
 }
 ```
 
-**Result:**
+The output is similar to:
 
-```json
+```output
 {
    "result": {
       "threshold_filter_config": {
@@ -114,7 +115,7 @@ Enables the confidence threshold filter. When enabled, only inference results th
 }
 ```
 
-## disable_threshold_filter
+## `disable_threshold_filter`
 
 Disables the confidence threshold filter. All inference results are published to IoT Core regardless of confidence score.
 
@@ -126,9 +127,9 @@ Disables the confidence threshold filter. All inference results are published to
 }
 ```
 
-**Result:**
+The output is similar to:
 
-```json
+```output
 {
    "result": {
       "threshold_filter_config": {
@@ -140,7 +141,7 @@ Disables the confidence threshold filter. All inference results are published to
 }
 ```
 
-## set_threshold_filter_criteria
+## `set_threshold_filter_criteria`
 
 Sets the comparison operator for the confidence threshold filter. The available criteria are:
 
@@ -161,9 +162,9 @@ Sets the comparison operator for the confidence threshold filter. The available 
 }
 ```
 
-**Result:**
+The output is similar to:
 
-```json
+```output
 {
    "result": {
       "criteria": "gt"
@@ -171,7 +172,7 @@ Sets the comparison operator for the confidence threshold filter. The available 
 }
 ```
 
-## get_threshold_filter_criteria
+## `get_threshold_filter_criteria`
 
 Retrieves the currently configured threshold filter criteria.
 
@@ -183,9 +184,9 @@ Retrieves the currently configured threshold filter criteria.
 }
 ```
 
-**Result:**
+The output is similar to:
 
-```json
+```output
 {
    "result": {
       "criteria": "gt"
@@ -193,7 +194,7 @@ Retrieves the currently configured threshold filter criteria.
 }
 ```
 
-## set_threshold_filter_confidence
+## `set_threshold_filter_confidence`
 
 Sets the confidence threshold value. Inference results are filtered against this value using the configured criteria. The value must be between 0 and 100.
 
@@ -206,9 +207,9 @@ Sets the confidence threshold value. Inference results are filtered against this
 }
 ```
 
-**Result:**
+The output is similar to:
 
-```json
+```output
 {
    "result": {
       "confidence_threshold": "0.756"
@@ -216,7 +217,7 @@ Sets the confidence threshold value. Inference results are filtered against this
 }
 ```
 
-## get_threshold_filter_confidence
+## `get_threshold_filter_confidence`
 
 Retrieves the currently configured confidence threshold value.
 
@@ -228,9 +229,9 @@ Retrieves the currently configured confidence threshold value.
 }
 ```
 
-**Result:**
+The output is similar to:
 
-```json
+```output
 {
    "result": {
       "confidence_threshold": "0.756"
@@ -238,7 +239,7 @@ Retrieves the currently configured confidence threshold value.
 }
 ```
 
-## get_threshold_filter_config
+## `get_threshold_filter_config`
 
 Retrieves the complete threshold filter configuration, including enabled state, confidence value, and criteria.
 
@@ -250,9 +251,9 @@ Retrieves the complete threshold filter configuration, including enabled state, 
 }
 ```
 
-**Result:**
+The output is similar to:
 
-```json
+```output
 {
    "result": {
       "threshold_filter_config": {
@@ -264,7 +265,7 @@ Retrieves the complete threshold filter configuration, including enabled state, 
 }
 ```
 
-## get_model_info
+## `get_model_info`
 
 Retrieves information about the currently running model, including its name, version, input dimensions, labels, and detection type.
 
@@ -276,9 +277,9 @@ Retrieves information about the currently running model, including its name, ver
 }
 ```
 
-**Result:**
+The output is similar to:
 
-```json
+```output
 {
    "result": {
       "model_info": {
@@ -312,7 +313,7 @@ Retrieves information about the currently running model, including its name, ver
 }
 ```
 
-## reset_metrics
+## `reset_metrics`
 
 Resets the accumulated model metrics counters to zero.
 
@@ -324,9 +325,9 @@ Resets the accumulated model metrics counters to zero.
 }
 ```
 
-**Result:**
+The output is similar to:
 
-```json
+```output
 {
    "result": {
       "metrics_reset": "OK"
@@ -334,7 +335,7 @@ Resets the accumulated model metrics counters to zero.
 }
 ```
 
-## clear_cache
+## `clear_cache`
 
 Clears all inference image caches. This command respects the component configuration — it clears all caches that are currently enabled (local file cache, S3 cache, or both).
 
@@ -346,9 +347,9 @@ Clears all inference image caches. This command respects the component configura
 }
 ```
 
-**Result:**
+The output is similar to:
 
-```json
+```output
 {
    "result": {
       "clear_cache": {
@@ -359,7 +360,7 @@ Clears all inference image caches. This command respects the component configura
 }
 ```
 
-## clear_cache_file
+## `clear_cache_file`
 
 Removes a specific cached inference result by its UUID. Like `clear_cache`, this command clears the file from all enabled caches.
 
@@ -372,9 +373,9 @@ Removes a specific cached inference result by its UUID. Like `clear_cache`, this
 }
 ```
 
-**Result:**
+The output is similar to:
 
-```json
+```output
 {
    "result": {
       "clear_cache_file": {
@@ -385,3 +386,9 @@ Removes a specific cached inference result by its UUID. Like `clear_cache`, this
    }
 }
 ```
+
+## What you've learned
+
+You can now use MQTT commands through AWS IoT Core to control the Edge Impulse Linux Runner in real time and interpret its model metrics.
+
+You can continue back to the [Completion](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/running) step of this Learning Path. 
