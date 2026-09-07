@@ -18,9 +18,52 @@ prerequisites:
     - A working microphone for voice input.
     - Basic Python and command-line knowledge.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-21T17:33:32Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 4c689371fcca5a0bdf2d9750733f6c8f70e73ddaee8d26c612d5534e3b37618d
+  summary_generated_at: '2026-08-21T17:33:32Z'
+  summary_source_hash: 4c689371fcca5a0bdf2d9750733f6c8f70e73ddaee8d26c612d5534e3b37618d
+  faq_generated_at: '2026-08-21T17:33:32Z'
+  faq_source_hash: 4c689371fcca5a0bdf2d9750733f6c8f70e73ddaee8d26c612d5534e3b37618d
+  summary: >-
+    You'll build a sentiment-aware voice assistant that runs on-device on Arm. First, you'll prepare a UV-managed
+    Python environment, build `llama.cpp`, and create a Gradio pipeline that transcribes microphone
+    audio with Whisper and sends it to a local LLM. You'll train a HuBERT classifier on selected
+    RAVDESS sentiments, export and quantize it to ONNX, and add its prediction to the LLM prompt
+    and user interface.
+  faqs:
+  - question: How do I know the baseline voice-to-LLM pipeline is working?
+    answer: >-
+      Record audio and confirm that the interface displays both a transcript and the local LLM
+      response. This verifies that Whisper transcription and the LLM request are working.
+  - question: Do I need `ffmpeg` installed before using Whisper?
+    answer: >-
+      Yes. Install `ffmpeg` before running the transcription step because Whisper needs it to decode audio.
+  - question: Where do I save the trained HuBERT model and feature extractor?
+    answer: >-
+      After training, save the HuBERT model and its feature extractor in `models/hubert_vsa_ravdess`.
+      Train it on the selected RAVDESS classes: neutral, happy, and angry.
+  - question: How do I include the predicted sentiment in the LLM prompt and verify it?
+    answer: >-
+      Add the predicted sentiment to the prompt in `handle_audio` before sending it to the local
+      LLM. To verify the integration, run `app.py` and confirm that you see a transcript, predicted
+      sentiment, and LLM response.
+  - question: Which ONNX model does the final voice assistant load?
+    answer: >-
+      Set `ONNX_PATH` to `models/hubert_vsa_ravdess_onnx/hubert_vsa_ravdess_int8.onnx`. The final
+      app loads this quantized model with the CPU execution provider.
+# END generated_summary_faq
+
 author: Bhanu Arya
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -64,4 +107,3 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
-

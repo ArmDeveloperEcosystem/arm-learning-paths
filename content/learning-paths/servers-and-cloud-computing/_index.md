@@ -12,7 +12,7 @@ pinned_learning_paths:
 - performix-microarchitecture
 operatingsystems_filter:
 - Android: 3
-- Linux: 270
+- Linux: 273
 - macOS: 19
 - other: 1
 - Windows: 17
@@ -27,8 +27,8 @@ subjects_filter:
 - Containers and Virtualization: 50
 - Databases: 29
 - Libraries: 9
-- ML: 42
-- Performance and Architecture: 109
+- ML: 44
+- Performance and Architecture: 110
 - Storage: 2
 - Web: 19
 subtitle: Migrate and optimize cloud native apps on Arm-based servers.
@@ -55,7 +55,7 @@ tools_software_languages_filter:
 - Arm Development Studio: 3
 - Arm ISA: 1
 - Arm Performance Libraries: 3
-- Arm Performix: 10
+- Arm Performix: 11
 - Arm Streamline: 1
 - Arm System Characterization Tool: 1
 - armclang: 1
@@ -82,6 +82,7 @@ tools_software_languages_filter:
 - Bash: 8
 - bash: 2
 - Bastion: 3
+- BenchMARL: 1
 - Benchstat: 1
 - BitBake: 1
 - BOLT: 2
@@ -89,6 +90,7 @@ tools_software_languages_filter:
 - bpftool: 1
 - Buildkite: 1
 - C: 16
+- C++: 1
 - Capstone: 1
 - Cargo: 1
 - cassandra-stress: 1
@@ -138,7 +140,7 @@ tools_software_languages_filter:
 - FunASR: 1
 - FVP: 9
 - Gardener: 1
-- GCC: 30
+- GCC: 31
 - gdb: 1
 - Geekbench: 1
 - Gemma: 1
@@ -198,6 +200,7 @@ tools_software_languages_filter:
 - kubectl: 2
 - Kubernetes: 21
 - Kustomize: 1
+- LeRobot: 1
 - Libamath: 2
 - libbpf: 1
 - Linaro Forge: 1
@@ -213,6 +216,7 @@ tools_software_languages_filter:
 - Longhorn: 1
 - LSE: 1
 - LTO: 1
+- MAPPO: 1
 - MariaDB: 1
 - Maven: 1
 - MCP: 7
@@ -229,6 +233,7 @@ tools_software_languages_filter:
 - mongotop: 1
 - mpi: 1
 - MQTT: 1
+- Multi-Agent Reinforcement Learning: 1
 - MySQL: 11
 - Neon: 8
 - Networking: 1
@@ -239,7 +244,8 @@ tools_software_languages_filter:
 - npm: 3
 - NumPy: 1
 - Ollama: 3
-- ONNX Runtime: 2
+- ONNX: 1
+- ONNX Runtime: 3
 - OpenBLAS: 1
 - OpenBMC: 1
 - OpenCV: 1
@@ -267,8 +273,8 @@ tools_software_languages_filter:
 - psycopg2: 1
 - Puppet: 1
 - Pytest: 1
-- Python: 56
-- PyTorch: 13
+- Python: 58
+- PyTorch: 15
 - Qdrant: 1
 - QEMU: 1
 - QuantLib: 1
@@ -280,6 +286,7 @@ tools_software_languages_filter:
 - rctl: 1
 - Redis: 6
 - redis-benchmark: 1
+- Reinforcement Learning: 1
 - Remote.It: 2
 - RME: 10
 - Ruby: 2
@@ -314,6 +321,8 @@ tools_software_languages_filter:
 - Tinkerblox: 1
 - topdown-tool: 1
 - Topo: 2
+- TorchAO: 1
+- TorchRL: 1
 - Trivy: 1
 - Trusted Firmware: 1
 - Trustee: 2
@@ -327,6 +336,7 @@ tools_software_languages_filter:
 - Veraison: 3
 - Visual Studio Code: 7
 - vLLM: 4
+- VMAS: 1
 - VS Code: 1
 - vvenc: 1
 - Web Server: 1

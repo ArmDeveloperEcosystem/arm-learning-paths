@@ -17,16 +17,16 @@ test_maintenance: true
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
-multi_install: FALSE            # Set to true if first page of multi-page article, else false
+multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
 [Rust](https://www.rust-lang.org/) is an open source programming language.
 
-This install guide is for Linux application developers wishing to use Rust.
+This install guide is for Linux application developers who use Rust.
 
-If you wish to use Rust to build embedded applications for Arm, refer to [Rust for Embedded Applications](/install-guides/rust_embedded/) instead.
+If you want to use Rust for embedded applications on Arm, see [Rust for Embedded Applications](/install-guides/rust_embedded/) instead.
 
 ## What are the prerequisites before installing Rust on Arm Linux?
 
@@ -78,62 +78,52 @@ Run the following command to download and install Rust:
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ```
 
-The installer output will be similar to:
+The installer output is similar to:
 
 ```output
 info: downloading installer
-info: profile set to 'default'
+info: profile set to default
 info: default host triple is aarch64-unknown-linux-gnu
-info: syncing channel updates for 'stable-aarch64-unknown-linux-gnu'
-info: latest update on 2023-12-07, rust version 1.74.1 (a28077b28 2023-12-04)
-info: downloading component 'cargo'
-info: downloading component 'clippy'
-info: downloading component 'rust-docs'
-info: downloading component 'rust-std'
-info: downloading component 'rustc'
-info: downloading component 'rustfmt'
-info: installing component 'cargo'
-info: installing component 'clippy'
-info: installing component 'rust-docs'
- 13.6 MiB /  13.6 MiB (100 %)   8.2 MiB/s in  1s ETA:  0s
-info: installing component 'rust-std'
- 32.8 MiB /  32.8 MiB (100 %)  12.6 MiB/s in  2s ETA:  0s
-info: installing component 'rustc'
- 75.5 MiB /  75.5 MiB (100 %)  17.7 MiB/s in  4s ETA:  0s
-info: installing component 'rustfmt'
-info: default toolchain set to 'stable-aarch64-unknown-linux-gnu'
+info: syncing channel updates for stable-aarch64-unknown-linux-gnu
+info: latest update on 2026-08-20 for version 1.98.0 (88d9e12ae 2026-08-18)
+info: downloading 6 components
+info: default toolchain set to stable-aarch64-unknown-linux-gnu
 
-  stable-aarch64-unknown-linux-gnu installed - rustc 1.70.0 (90c541806 2023-05-31)
+  stable-aarch64-unknown-linux-gnu installed - rustc 1.98.0 (88d9e12ae 2026-08-18)
 
 
 Rust is installed now. Great!
 
-To get started, you may need to restart your current shell.
-This reloads your PATH environment variable to include
+To get started you may need to restart your current shell.
+This would reload your PATH environment variable to include
 Cargo's bin directory ($HOME/.cargo/bin).
 
-To configure your current shell, run:
-source "$HOME/.cargo/env"
+To configure your current shell, you need to source
+the corresponding env file under $HOME/.cargo.
+
+This is usually done by running one of the following (note the leading DOT):
+. "$HOME/.cargo/env"            # For sh/bash/zsh/ash/dash/pdksh
+source "$HOME/.cargo/env.fish"  # For fish
 ```
 
 The latest version of Rust is now installed.
 
-The installer updates `$HOME/.bashrc` and `SHOME/.profile` to set up the environment. Start a new shell or run the following command to continue:
+The installer updates `$HOME/.bashrc` and `$HOME/.profile` to set up the environment. Start a new shell or run the following command to continue:
 
 ```bash
 source "$HOME/.cargo/env"
 ```
 
-To confirm the installation is complete run `cargo version` (`cargo` is the Rust package manager):
+To confirm the installation is complete, run `cargo version` (`cargo` is the Rust package manager):
 
 ```bash { env_source="~/.bashrc" }
 cargo version
 ```
 
-This command will print the version:
+The output is similar to:
 
 ```output
-cargo 1.93.0 (083ac5135 2025-12-15)
+cargo 1.98.0 (797e8a9bc 2026-08-05)
 ```
 
 You are ready to use the Rust programming language on your Arm Linux machine.
@@ -151,7 +141,8 @@ cargo run
 The `cargo run` command outputs:
 
 ```output
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
+   Compiling hello v0.1.0 (/home/user/hello)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.54s
      Running `target/debug/hello`
 Hello, world!
 ```

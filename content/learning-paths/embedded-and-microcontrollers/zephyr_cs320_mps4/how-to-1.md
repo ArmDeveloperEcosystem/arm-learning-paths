@@ -21,7 +21,7 @@ Update your package list and install the packages that Zephyr requires. Select t
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y --no-install-recommends git cmake ninja-build gperf \
   ccache dfu-util device-tree-compiler wget python3-dev python3-venv python3-tk \
-  xz-utils file make gcc libsdl2-dev libmagic1
+  xz-utils file make gcc g++ libsdl2-dev libmagic1
 ```
   {{< /tab >}}
   {{< tab header="x86_64" >}}
@@ -60,9 +60,15 @@ Install `west` and download the Zephyr source code:
 
 ```bash
 pip install west
-west init ~/zephyrproject
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.3.0 ~/zephyrproject
 cd ~/zephyrproject
 west update
+```
+
+Install the Python packages that Zephyr requires:
+
+```bash
+pip install -r zephyr/scripts/requirements.txt
 ```
 
 Export the Zephyr CMake package so that CMake can automatically load the boilerplate required for Zephyr builds:
@@ -71,18 +77,12 @@ Export the Zephyr CMake package so that CMake can automatically load the boilerp
 west zephyr-export
 ```
 
-Install the Python packages that Zephyr requires:
-
-```bash
-west packages pip --install
-```
-
 ### Install the Arm GNU Toolchain
 
 The Corstone-320 target uses the Cortex-M85 processor, so you need the `arm-none-eabi` bare-metal toolchain from the Arm GNU Toolchain. For a detailed installation guide covering all platforms, see the [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/) install guide.
 
 {{% notice Note %}}
-The following commands use Arm GNU Toolchain version 15.2.Rel1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm GNU Toolchain downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
+The following commands use Arm GNU Toolchain version 13.2.Rel1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Arm GNU Toolchain downloads](https://developer.arm.com/downloads/-/arm-gnu-toolchain-downloads).
 {{% /notice %}}
 
 Download, unpack, and add the Arm GNU Toolchain to your `PATH` for your host architecture:
@@ -91,18 +91,18 @@ Download, unpack, and add the Arm GNU Toolchain to your `PATH` for your host arc
   {{< tab header="aarch64" >}}
 
 ```bash
-wget https://developer.arm.com/-/media/Files/downloads/gnu/15.2.rel1/binrel/arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi.tar.xz
-tar xJf arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi.tar.xz -C $HOME
-echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi/bin"' >> ~/.bashrc
+wget https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-eabi.tar.xz
+tar xJf arm-gnu-toolchain-13.2.rel1-aarch64-arm-none-eabi.tar.xz -C $HOME
+echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-13.2.Rel1-aarch64-arm-none-eabi/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
   {{< /tab >}}
   {{< tab header="x86_64" >}}
 
 ```bash
-wget https://developer.arm.com/-/media/Files/downloads/gnu/15.2.rel1/binrel/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi.tar.xz
-tar xJf arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi.tar.xz -C $HOME
-echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi/bin"' >> ~/.bashrc
+wget https://developer.arm.com/-/media/Files/downloads/gnu/13.2.rel1/binrel/arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi.tar.xz
+tar xJf arm-gnu-toolchain-13.2.rel1-x86_64-arm-none-eabi.tar.xz -C $HOME
+echo 'export PATH="$PATH:$HOME/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
   {{< /tab >}}
@@ -117,8 +117,8 @@ arm-none-eabi-gcc --version
 The output is similar to:
 
 ```output
-arm-none-eabi-gcc (Arm GNU Toolchain 15.2.Rel1 (Build arm-15.86)) 15.2.1 20251203
-Copyright (C) 2025 Free Software Foundation, Inc.
+arm-none-eabi-gcc (Arm GNU Toolchain 13.2.Rel1 (Build arm-13.7)) 13.2.1 20231009
+Copyright (C) 2023 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
@@ -132,14 +132,14 @@ Zephyr uses two environment variables to locate the Arm GNU Toolchain. Set these
 
 ```bash
 export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
-export GNUARMEMB_TOOLCHAIN_PATH=$HOME/arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi
+export GNUARMEMB_TOOLCHAIN_PATH=$HOME/arm-gnu-toolchain-13.2.Rel1-aarch64-arm-none-eabi
 ```
   {{< /tab >}}
   {{< tab header="x86_64" >}}
 
 ```bash
 export ZEPHYR_TOOLCHAIN_VARIANT=gnuarmemb
-export GNUARMEMB_TOOLCHAIN_PATH=$HOME/arm-gnu-toolchain-15.2.rel1-x86_64-arm-none-eabi
+export GNUARMEMB_TOOLCHAIN_PATH=$HOME/arm-gnu-toolchain-13.2.Rel1-x86_64-arm-none-eabi
 ```
   {{< /tab >}}
 {{< /tabpane-normal >}}

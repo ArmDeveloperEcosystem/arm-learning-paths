@@ -12,6 +12,7 @@ enableRobotsTXT = true
 name = "dev"
 URL = "s3://arm-learning-paths-dev?region=us-east-1"
 cloudFrontDistributionID = "EAMKPMDBM18II"
+exclude = "courses/**"
 
 [[deployment.targets]]
 name = "prod"

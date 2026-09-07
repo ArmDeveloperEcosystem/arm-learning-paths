@@ -53,6 +53,6 @@ Servers typically run the Linux operating system. Popular distributions for serv
 
 If the GNU compiler is not pre-installed with your distribution, you can [install it using a package manager](/install-guides/gcc/native/).
 
-You can also install [Arm Compiler for Linux](/install-guides/acfl/) for HPC applications.
+You can also install [Arm Toolchain for Linux](/install-guides/acfl/) for HPC applications.
 
 [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/) is a good place to start analyzing existing applications and reviewing guidance for developers interested in trying Arm hardware. 

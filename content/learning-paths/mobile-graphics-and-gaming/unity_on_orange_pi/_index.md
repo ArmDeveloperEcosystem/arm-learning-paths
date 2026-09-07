@@ -17,9 +17,53 @@ prerequisites:
     - An ethernet connection
     - A mouse and keyboard connected to the Orange Pi
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-21T17:29:17Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 01e106be6f9e1748ae217eed10b16a972fef98a05effd3e41db0f46d3a40ebb6
+  summary_generated_at: '2026-08-21T17:29:17Z'
+  summary_source_hash: 01e106be6f9e1748ae217eed10b16a972fef98a05effd3e41db0f46d3a40ebb6
+  faq_generated_at: '2026-08-21T17:29:17Z'
+  faq_source_hash: 01e106be6f9e1748ae217eed10b16a972fef98a05effd3e41db0f46d3a40ebb6
+  summary: >-
+    You'll prepare an Orange Pi 5 to run a Unity game on Droid OS, then create and install the game’s
+    Android APK. First, you'll download the Droid OS image and the required `SDDiskTool_v1.72` on Windows,
+    write the image to a microSD card, and start the board. Then, you'll configure Unity for Android, build
+    the APK, transfer it to the board, and install it from Droid OS.
+  faqs:
+  - question: Where do I get the Droid OS image for Orange Pi 5?
+    answer: >-
+      Go to the Orange Pi 5 support page and select **Orange Pi OS(Droid) > TF Card Image**. In
+      Google Drive, download the latest image for Orange Pi 5.
+  - question: How do I write the Droid OS image to the microSD card?
+    answer: >-
+      On Windows, extract the downloaded `.tar.gz`, then the resulting `.tar`, to produce a `.img`
+      file. Use `SDDiskTool_v1.72` to write the `.img` file to the microSD card.
+  - question: What should I check if Android isn't available in Unity Build Settings?
+    answer: >-
+      In Unity Hub, select **Installs**, find the Unity version for your project, select its three-dot
+      menu, then select **Add Modules**. Select **Android Build Support** and all its sub-items.
+      In Unity, select **File > Build Settings**, choose **Android**, and restart Unity when prompted.
+  - question: What output file should I expect from the Unity build?
+    answer: >-
+      When you build for Android, choose a folder for the generated APK file. Transfer that APK
+      to the Orange Pi 5 and install it on Droid OS.
+  - question: How can I transfer the APK to the Orange Pi 5?
+    answer: >-
+      Use a USB thumb drive if its file system is compatible with Droid OS, copy the file onto
+      the microSD card if formats are compatible, or upload it to a cloud drive and download it
+      on the Orange Pi. If you use a cloud service, ensure the board has network access.
+# END generated_summary_faq
+
 author: Gabriel Peterson
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

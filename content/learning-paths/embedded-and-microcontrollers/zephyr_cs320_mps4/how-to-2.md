@@ -191,7 +191,7 @@ Create `boards/arm/mps4/mps4_corstone320_fpga.dts` with the following content:
 
 This file defines the SoC peripherals for the MPS4 FPGA build and is included by `mps4_corstone320_fpga.dts`. It's not a standalone file — the `.dts` file pulls it in during compilation with `#include`.
 
-The `boards/arm/mps4/mps4_common_soc_peripheral_fpga.dtsi` file is used to configure the 50 MHz peripheral clock and two UART instances using the MPS4 peripheral addresses from the [SSE-320 FPGA Image for MPS4 Application Note](https://developer.arm.com/documentation/109762/0100/?lang=en). Create the file with the following content:
+The `boards/arm/mps4/mps4_common_soc_peripheral_fpga.dtsi` file is used to configure the 50 MHz peripheral clock, two UART instances, GPIO controllers, and pin control using the MPS4 peripheral addresses from the [SSE-320 FPGA Image for MPS4 Application Note](https://developer.arm.com/documentation/109762/0100/?lang=en). Create the file with the following content:
 
 ```dts
 sysclk: system-clock {
@@ -216,6 +216,39 @@ uart1: uart@9304000 {
         interrupt-names = "tx", "rx";
         clocks = <&sysclk>;
         current-speed = <115200>;
+};
+
+gpio0: gpio@1100000 {
+	compatible = "arm,cmsdk-gpio";
+	reg = <0x1100000 0x1000>;
+	interrupts = <69 3>;
+	gpio-controller;
+	#gpio-cells = <2>;
+};
+
+gpio1: gpio@1101000 {
+	compatible = "arm,cmsdk-gpio";
+	reg = <0x1101000 0x1000>;
+	interrupts = <70 3>;
+	gpio-controller;
+	#gpio-cells = <2>;
+};
+
+gpio_led0: mps4_fpgaio@9302000 {
+	compatible = "arm,mmio32-gpio";
+	reg = <0x9302000 0x4>;
+	gpio-controller;
+	#gpio-cells = <1>;
+	ngpios = <8>;
+};
+
+gpio_button: mps4_fpgaio@9302008 {
+	compatible = "arm,mmio32-gpio";
+	reg = <0x9302008 0x4>;
+	gpio-controller;
+	#gpio-cells = <1>;
+	ngpios = <2>;
+	direction-input;
 };
 
 pinctrl: pinctrl {

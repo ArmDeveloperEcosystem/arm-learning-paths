@@ -13,14 +13,14 @@ pinned_learning_paths:
 operatingsystems_filter:
 - Android: 3
 - ChromeOS: 2
-- Linux: 50
+- Linux: 51
 - macOS: 16
 - Windows: 50
 subjects_filter:
 - CI-CD: 7
 - Containers and Virtualization: 8
 - Migration to Arm: 30
-- ML: 15
+- ML: 16
 - Performance and Architecture: 30
 subtitle: Build native Windows on Arm applications that are fast and efficient.
 title: Laptops and Desktops
@@ -53,7 +53,7 @@ tools_software_languages_filter:
 - Google Benchmark: 1
 - Google Test: 1
 - HTML: 2
-- Hugging Face: 2
+- Hugging Face: 3
 - Hyper-V: 1
 - i3: 1
 - Intrinsics: 1
@@ -63,6 +63,7 @@ tools_software_languages_filter:
 - KleidiCV: 1
 - Kubernetes: 1
 - KVM: 1
+- LeRobot: 1
 - Linux: 1
 - llama.cpp: 4
 - LLM: 2
@@ -84,8 +85,8 @@ tools_software_languages_filter:
 - PGO: 1
 - PowerShell: 1
 - Pytest: 1
-- Python: 20
-- PyTorch: 1
+- Python: 21
+- PyTorch: 2
 - QEMU: 1
 - Qt: 2
 - Raspberry Pi: 1
@@ -96,6 +97,7 @@ tools_software_languages_filter:
 - Runbook: 17
 - Rust: 2
 - SME2: 3
+- SmolVLA: 1
 - SSH: 2
 - SVE: 1
 - SVE2: 1

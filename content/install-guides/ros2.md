@@ -24,9 +24,9 @@ ROS 2 is the latest version, designed to enhance security, improve distributed s
 
 ## What do I need before installing ROS 2?
 
-ROS 2 is available for Ubuntu Linux 22.04, 24.04, and Windows.
+ROS 2 is available for Ubuntu Linux 22.04, 24.04, 26.04, and Windows.
 
-This article provides a quick solution to install ROS 2 for Ubuntu on Arm. You can use Ubuntu 22.04 LTS or Ubuntu 24.04 LTS. 
+This article provides a quick solution to install ROS 2 for Ubuntu on Arm. You can use Ubuntu 22.04 LTS, Ubuntu 24.04 LTS, or Ubuntu 26.04 LTS. 
 
 Confirm you are using an Arm machine by running:
 
@@ -72,16 +72,24 @@ sudo apt install -y \
         python3-colcon-common-extensions
 ```
 
-There are two LTS releases of ROS 2, Jazzy Jalisco and Humble Hawksbill, which you can install based on your Ubuntu version.
+There are three LTS releases of ROS 2 that you can install based on your Ubuntu version.
 
-- For Ubuntu Linux 24.04, you should install Jazzy Jalisco.
-- For Ubuntu Linux 22.04, you should install Humble Hawksbill.
+- For Ubuntu Linux 26.04, install Lyrical Luth
+- For Ubuntu Linux 24.04, install Jazzy Jalisco
+- For Ubuntu Linux 22.04, install Humble Hawksbill
 
 ## How can I install ROS 2?
 
 Install ROS 2 based on your Ubuntu version:
 
 {{< tabpane code=true >}}
+  {{< tab header="Ubuntu 26.04" language="bash">}}
+    # Install ROS2 packages
+    sudo apt install -y ros-lyrical-desktop
+    # Initialize rosdep
+    sudo rosdep init
+    rosdep update
+  {{< /tab >}}
   {{< tab header="Ubuntu 24.04" language="bash">}}
     # Install ROS2 packages
     sudo apt install -y ros-jazzy-desktop
@@ -103,6 +111,10 @@ Install ROS 2 based on your Ubuntu version:
 Add ROS 2 setup to your shell startup script:
 
 {{< tabpane code=true >}}
+  {{< tab header="Ubuntu 26.04" language="bash">}}
+    echo "source /opt/ros/lyrical/setup.bash" >> ~/.bashrc
+    source ~/.bashrc
+  {{< /tab >}}
   {{< tab header="Ubuntu 24.04" language="bash">}}
     echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
     source ~/.bashrc
@@ -118,7 +130,7 @@ Confirm ROS 2 is installed by using printenv:
 ```console
 printenv ROS_DISTRO
 ```
-The output should print either `jazzy` or `humble`, depending on your Ubuntu version.
+The output should print `lyrical`, `jazzy`, or `humble`, depending on your Ubuntu version.
 
 ## How can I test the ROS 2 installation? 
 
@@ -128,7 +140,7 @@ In one terminal run a `talker`:
 ros2 run demo_nodes_cpp talker
 ```
 
-The output is similar to the messages shown below, indicating that ROS 2 is publishing the "hello world" string along with a sequence number.
+The output is similar to the following, indicating that ROS 2 is publishing the "hello world" string along with a sequence number.
 
 ```output
 [INFO] [1741389626.338343545] [talker]: Publishing: 'Hello World: 1'
@@ -150,7 +162,7 @@ Then, open another terminal and run the `listener`:
 ros2 run demo_nodes_cpp listener
 ```
 
-If you see "I heard [Hello World: ]" in the second terminal as shown below, it means ROS 2 has been successfully installed.
+If you see "I heard [Hello World: ]" in the second terminal, ROS 2 is successfully installed.
 
 ```output
 [INFO] [1741389927.137762134] [listener]: I heard: [Hello World: 1]
@@ -169,5 +181,5 @@ You are now ready to use ROS 2.
 
 ## Where can I learn more about ROS 2?
 
-- Explore the [ROS 2 Tutorials](https://docs.ros.org/en/jazzy/Tutorials.html)
-- Learn about [ROS 2 Command Line Tools](https://docs.ros.org/en/jazzy/Concepts/About-Command-Line-Tools.html)
+- Explore the [ROS 2 Tutorials](https://docs.ros.org/en/lyrical/Tutorials.html)
+- Learn about [ROS 2 Command Line Tools](https://docs.ros.org/en/lyrical/Concepts/About-Command-Line-Tools.html)

@@ -26,7 +26,7 @@ DCPerf is an open-source benchmarking and microbenchmarking suite originally dev
 
 You can use DCPerf to generate performance data to inform procurement decisions and for regression testing to detect changes in the environment, such as kernel and compiler changes.
 
-DCPerf runs on Arm-based servers. The following examples have been tested on an Amazon EC2 `c7g.metal` instance running Ubuntu 22.04 LTS.
+DCPerf runs on Arm-based servers. The following examples have been tested on an Amazon EC2 `c7g.metal` instance running Ubuntu 24.04 LTS.
 
 {{% notice Note %}}
 When running on a server provided by a cloud service, you have limited access to some parameters such as UEFI settings, which can affect performance.
@@ -41,20 +41,10 @@ sudo apt update
 sudo apt install -y python-is-python3 python3-pip python3-venv git
 ```
 
-We recommend that you install Python packages in a Python virtual environment.
-
-Set up your virtual environment:
+Install the required Python packages. DCPerf runs benchmark installations as root, so install the packages system-wide:
 
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-If requested, restart the recommended services.
-
-Install the required packages:
-
-```bash
-pip3 install click pyyaml tabulate pandas
+sudo pip3 install click pyyaml tabulate pandas --break-system-packages
 ```
 
 Clone the repository:
@@ -64,7 +54,7 @@ git clone https://github.com/facebookresearch/DCPerf.git
 cd DCPerf
 ```
 
-## Run the MediaWiki benchmark
+## Install the MediaWiki benchmark
 
 DCPerf offers many benchmarks. To find a benchmark of your choice, see the [official documentation](https://github.com/facebookresearch/DCPerf?tab=readme-ov-file#install-and-run-benchmarks). 
 
@@ -92,8 +82,8 @@ The output is similar to:
 
 ```output
 HipHop VM 3.30.12 (rel)
-Compiler: 1704922878_080332982
-Repo schema: 4239d11395efb06bee3ab2923797fedfee64738e
+Compiler: heads/main-0-g9308c3e3c404e0466f0a2929f15ddcf62b2215f6
+Repo schema: da39a3ee5e6b4b0d3255bfef95601890afd80709
 ```
 
 Confirm security-enhanced Linux (SELinux) is not enabled with the following commands:
@@ -117,7 +107,7 @@ You can automatically install all dependencies for each benchmark using the `ins
 sudo ./benchpress_cli.py install oss_performance_mediawiki_mlp
 ```
 
-This step may take several minutes to complete, depending on your system's download and setup speed.
+This step can take several minutes to complete, depending on your system's download and setup speed.
 
 ## Run the MediaWiki benchmark
 
