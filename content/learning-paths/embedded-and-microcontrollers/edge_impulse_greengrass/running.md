@@ -72,7 +72,7 @@ The Edge Impulse Greengrass component supports commands sent through MQTT topics
 To send a command, you need the device name that the Edge Impulse Linux Runner registered in IoT Core. Look at the inference output in the MQTT test client. Each message is published to a topic with the following structure:
 
 ```text
-/edgeimpulse/devices/<device-name>/inference/output
+/edgeimpulse/device/<device-name>/inference/output
 ```
 
 Copy the `<device-name>` portion from the topic to use in the next step.
@@ -80,10 +80,10 @@ Copy the `<device-name>` portion from the topic to use in the next step.
 The Edge Impulse Linux Runner uses four MQTT topics per device:
 
 ```text
-/edgeimpulse/devices/<device-name>/inference/output
-/edgeimpulse/devices/<device-name>/model/metrics
-/edgeimpulse/devices/<device-name>/command/input
-/edgeimpulse/devices/<device-name>/command/output
+/edgeimpulse/device/<device-name>/inference/output
+/edgeimpulse/device/<device-name>/model/metrics
+/edgeimpulse/device/<device-name>/command/input
+/edgeimpulse/device/<device-name>/command/output
 ```
 
 ### Send the restart command
@@ -94,7 +94,7 @@ To send a restart command, complete the following steps:
 2. Enter the following topic, replacing `<device-name>` with the name of your device:
 
    ```text
-   /edgeimpulse/devices/<device-name>/command/input
+   /edgeimpulse/device/<device-name>/command/input
    ```
 
 3. Clear the message body and enter the following JSON:
@@ -108,10 +108,10 @@ To send a restart command, complete the following steps:
 4. Select **Additional configuration** and enable the **Retain message on this topic** checkbox.
 5. Select **Publish**.
 
-After publishing, you should see a response on the command output topic:
+After publishing, you should see a response on the command output topic similar to:
 
 ```text
-/edgeimpulse/devices/<device-name>/command/output
+/edgeimpulse/device/<device-name>/command/output
 ```
 
 The response confirms that the Edge Impulse Linux Runner has restarted. Navigate back to `http://<your-edge-device-ip>:4912` in your browser to confirm that inference has resumed. You should also see new inference results appearing in the MQTT test client.

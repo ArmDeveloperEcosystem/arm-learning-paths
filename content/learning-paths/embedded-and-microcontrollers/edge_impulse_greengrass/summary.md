@@ -77,6 +77,10 @@ When the Edge Impulse Linux Runner starts or restarts, it publishes the followin
 
 You can use this message to detect service restarts and re-apply any runtime changes (for example, confidence filter settings) to the newly started Edge Impulse Linux Runner.
 
+## MQTT commands
+
+The following MQTT commands are available in the Edge Impulse Greengrass integration:
+
 ### `restart`
 
 The command restarts the Edge Impulse Linux Runner process:
@@ -89,7 +93,7 @@ The command restarts the Edge Impulse Linux Runner process:
 When used with the `ei_shutdown_behavior` option set to `wait_on_restart`, the Edge Impulse Linux Runner pauses after the model completes and waits for this command before restarting.
 
 
-## `enable_threshold_filter`
+### `enable_threshold_filter`
 
 The command enables the confidence threshold filter:
 
@@ -115,7 +119,7 @@ The output is similar to:
 }
 ```
 
-## `disable_threshold_filter`
+### `disable_threshold_filter`
 
 The command disables the confidence threshold filter:
 
@@ -140,7 +144,7 @@ The output is similar to:
 }
 ```
 
-## `set_threshold_filter_criteria`
+### `set_threshold_filter_criteria`
 
 The command sets the comparison operator for the confidence threshold filter:
 
@@ -171,7 +175,7 @@ The output is similar to:
 }
 ```
 
-## `get_threshold_filter_criteria`
+### `get_threshold_filter_criteria`
 
 The command etrieves the currently configured threshold filter criteria:
 
@@ -191,7 +195,7 @@ The output is similar to:
 }
 ```
 
-## `set_threshold_filter_confidence`
+### `set_threshold_filter_confidence`
 
 The command sets the confidence threshold value between 0 and 100:
 
@@ -214,7 +218,7 @@ The output is similar to:
 }
 ```
 
-## `get_threshold_filter_confidence`
+### `get_threshold_filter_confidence`
 
 The command the currently configured confidence threshold value:
 
@@ -234,7 +238,7 @@ The output is similar to:
 }
 ```
 
-## `get_threshold_filter_config`
+### `get_threshold_filter_config`
 
 The command retrieves the complete threshold filter configuration, including enabled state, confidence value, and criteria:
 
@@ -258,7 +262,7 @@ The output is similar to:
 }
 ```
 
-## `get_model_info`
+### `get_model_info`
 
 The command retrieves information about the currently running model, including its name, version, input dimensions, labels, and detection type:
 
@@ -304,7 +308,7 @@ The output is similar to:
 }
 ```
 
-## `reset_metrics`
+### `reset_metrics`
 
 The command rsets the accumulated model metrics counters to zero:
 
@@ -324,7 +328,7 @@ The output is similar to:
 }
 ```
 
-## `clear_cache`
+### `clear_cache`
 
 The command clears all inference image caches. It command respects the component configuration — it clears all caches that are currently enabled (local file cache, S3 cache, or both):
 
@@ -347,7 +351,7 @@ The output is similar to:
 }
 ```
 
-## `clear_cache_file`
+### `clear_cache_file`
 
 The command clears a specific cached inference result by its UUID:
 
