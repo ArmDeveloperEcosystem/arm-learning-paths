@@ -1,6 +1,10 @@
 ---
 title: Detect and resolve false sharing in Java
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 30
 
 who_is_this_for: Java developers who need to understand sub-optimal multithreaded scaling caused by cache-line contention on multi-core Arm servers.
