@@ -19,10 +19,7 @@ learning_objectives:
 
 prerequisites:
     - A Linux development machine or an Apple silicon Mac
-    - Python 3.12, Git, CMake, and a C++ build tool such as Ninja
     - Familiarity with PyTorch model export and embedded cross-compilation
-    - Internet access to download ExecuTorch dependencies, Arm development tools, the pinned MobileSAM source, and its checkpoint
-    - On macOS, Docker Desktop and the [FVPs-on-Mac wrapper](https://github.com/Arm-Examples/FVPs-on-Mac)
 
 author: Usamah Zaheer
 

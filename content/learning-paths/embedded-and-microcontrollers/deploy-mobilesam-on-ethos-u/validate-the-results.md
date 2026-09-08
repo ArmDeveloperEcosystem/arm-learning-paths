@@ -22,6 +22,13 @@ python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/visual
 
 The command reports the number of foreground pixels and the agreement between the FVP and host masks. It exits with an error if the mask is empty, full, or below `0.9` IoU.
 
+For the tested revision, the output is similar to:
+
+```output
+FVP mask: 3234 foreground pixels, artifacts saved to arm_test/mobilesam_manual/fvp_visual
+FVP/reference IoU=0.9809 agreement=0.9951
+```
+
 ## Inspect the metrics
 
 Display the target comparison metrics:
@@ -39,7 +46,7 @@ python -m json.tool \
   arm_test/mobilesam_manual/export/mobilesam_point_ethos_u85_448_metrics.json
 ```
 
-The `fp32_quantized_iou` value must also be at least `0.9`.
+The `fp32_quantized_mean_iou` value must also be at least `0.9`.
 
 ## Confirm Ethos-U delegation
 
@@ -50,7 +57,15 @@ sed -n '1,120p' \
   arm_test/mobilesam_manual/export/mobilesam_point_ethos_u85_448_delegation.txt
 ```
 
-Confirm that the graph is represented by one Ethos-U delegate and that no operators remain for CPU execution.
+The tested revision reports:
+
+```output
+Total delegated subgraphs: 1
+Number of delegated nodes: 5096
+Number of non-delegated nodes: 3
+```
+
+Confirm that the graph is represented by one Ethos-U delegate. The three non-delegated graph nodes are expected at the delegate boundary; this count does not mean that three model operators execute on the CPU.
 
 ## Inspect the visual result
 

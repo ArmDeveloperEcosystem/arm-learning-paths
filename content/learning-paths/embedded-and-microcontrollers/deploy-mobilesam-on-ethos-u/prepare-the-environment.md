@@ -6,6 +6,41 @@ weight: 3
 layout: "learningpathall"
 ---
 
+## Check your development machine
+
+Run this preflight check before downloading the source:
+
+```bash
+case "$(uname -s)/$(uname -m)" in
+  Linux/x86_64|Linux/aarch64|Linux/arm64|Darwin/arm64)
+    echo "Supported host: $(uname -s)/$(uname -m)"
+    ;;
+  *)
+    echo "Unsupported host: $(uname -s)/$(uname -m)" >&2
+    exit 1
+    ;;
+esac
+
+for tool in python3.12 git cmake c++; do
+  command -v "$tool" >/dev/null || {
+    echo "Missing required tool: $tool" >&2
+    exit 1
+  }
+done
+
+if ! command -v ninja >/dev/null && ! command -v make >/dev/null; then
+  echo "Install Ninja or Make before continuing." >&2
+  exit 1
+fi
+
+python3.12 --version
+git --version
+cmake --version | head -n 1
+c++ --version | head -n 1
+```
+
+The check confirms that you are using a supported Linux host or Apple silicon Mac and that Python 3.12, Git, CMake, a host C++ compiler, and Ninja or Make are available.
+
 ## Get the ExecuTorch source
 
 Clone ExecuTorch and initialize its submodules:
@@ -13,6 +48,7 @@ Clone ExecuTorch and initialize its submodules:
 ```bash
 git clone https://github.com/pytorch/executorch.git
 cd executorch
+git checkout 4fd161058ebe2b9d80d11242a9d21811c0e92dac
 git submodule sync
 git submodule update --init --recursive
 ```
@@ -33,6 +69,8 @@ Install the current ExecuTorch checkout with its Ethos-U dependencies:
 
 ```bash
 ./install_executorch.sh --optional-dependency ethos_u
+python -m pip install -r \
+  examples/arm/mobilesam_prompt_segmentation_example_ethos_u/requirements.txt
 ```
 
 Using the checkout's installer keeps the Python package aligned with the example source.
@@ -40,7 +78,12 @@ Using the checkout's installer keeps the Python package aligned with the example
 ## Install the Arm development tools
 
 {{% notice macOS %}}
-Before you run the Arm setup command on macOS, install the [FVPs-on-Mac wrapper](https://github.com/Arm-Examples/FVPs-on-Mac) and add its `bin` directory to `PATH`. The wrapper runs the Linux Corstone-320 FVP in a container. Make sure `FVP_Corstone_SSE-320` resolves to the wrapper before you continue.
+Before you run the Arm setup command on macOS, install Docker Desktop and follow the [AVH FVPs on macOS install guide](/install-guides/fvps-on-macos/). Add the FVPs-on-Mac `bin` directory to `PATH`. The wrapper runs the Linux Corstone-320 FVP in a container. Confirm that Docker is running and that `FVP_Corstone_SSE-320` resolves to the wrapper:
+
+```bash
+docker info >/dev/null
+command -v FVP_Corstone_SSE-320
+```
 {{% /notice %}}
 
 The Arm setup script installs the pinned GNU bare-metal toolchain, Ethos-U Vela compiler, and Corstone FVP used by the example. Read the End User License Agreements presented by the tooling before you accept them, then run:
