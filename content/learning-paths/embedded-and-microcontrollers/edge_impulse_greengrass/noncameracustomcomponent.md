@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Create the non-camera custom component
 
-For edge devices without a camera, this component provides sample images for the Edge Impulse Linux Runner. Configure `gst_args` in the Edge Impulse Linux Runner component's JSON to use image data from a file instead of a camera.
+For edge devices without a camera, the non-camera custom component provides sample images for the Edge Impulse Linux Runner. Configure `gst_args` in the Edge Impulse Linux Runner component's JSON to use image data from a file instead of a camera.
 
 ### Clone the component repository
 
@@ -24,7 +24,7 @@ artifacts/EdgeImpulseEdge Impulse Linux RunnerRuntime/1.0.0/samples.tar.gz
 
 ### Copy the artifact files to Amazon S3
 
-In the AWS Console, open Amazon S3 and navigate to the bucket you created for the Edge Impulse Linux Runner custom component.
+In the AWS Console, open Amazon S3 and navigate to the bucket that you created for the Edge Impulse Linux Runner custom component.
 
 In that bucket, create the following directory structure:
 
@@ -32,7 +32,7 @@ In that bucket, create the following directory structure:
 artifacts/EdgeImpulseEdge Impulse Linux RunnerRuntime/1.0.0
 ```
 
-In the `1.0.0` directory in S3, upload these files from `./artifacts/EdgeImpulseEdge Impulse Linux RunnerRuntime/1.0.0` in your cloned repository:
+In the `1.0.0` directory in S3, upload the following files from `./artifacts/EdgeImpulseEdge Impulse Linux RunnerRuntime/1.0.0` in your cloned repository:
 
 ```text
 install.sh
@@ -40,25 +40,27 @@ models.tar.gz
 samples.tar.gz
 ```
 
-Edit `EdgeImpulseEdge Impulse Linux RunnerRuntimeInstallerComponent.yaml` and change the artifact location from "YOUR\_S3\_ARTIFACT\_BUCKET" to your S3 bucket name. You'll find "YOUR\_S3\_ARTIFACT\_BUCKET" near the end of the YAML file. Save the file.
+Edit `EdgeImpulseEdge Impulse Linux RunnerRuntimeInstallerComponent.yaml` and change the artifact location from `YOUR\_S3\_ARTIFACT\_BUCKET` to your S3 bucket name. You'll find `YOUR\_S3\_ARTIFACT\_BUCKET` near the end of the YAML file. Save the file.
 
 ### Register the custom component
 
-In the AWS Console, open **AWS IoT Core**. Under **Greengrass devices**, select **Components**.
+To registter the custom component, complete the following steps:
+
+1. In the AWS Console, open **AWS IoT Core**. Under **Greengrass devices**, select **Components**.
 
 ![AWS IoT Greengrass components page with the Create component button available#center](./images/gg_create_nc_component_1.png)
 
-Select **Create component**, then select **YAML** as the recipe format.
+2. Select **Create component**, then select **YAML** as the recipe format.
 
-Clear the initial contents of the recipe editor, then paste the contents of your updated `EdgeImpulseEdge Impulse Linux RunnerRuntimeInstallerComponent.yaml` file:
+3. Clear the initial contents of the recipe editor, then paste the contents of your updated `EdgeImpulseEdge Impulse Linux RunnerRuntimeInstallerComponent.yaml` file:
 
 ![AWS IoT Greengrass component creation page with the YAML recipe editor ready for the component recipe#center](./images/gg_create_nc_component_2.png)
 
-Select **Create component**. The registered component list now contains two custom components:
+4. Select **Create component**. The registered component list now contains two custom components:
 
 ![AWS IoT Greengrass registered component list showing the two custom components#center](./images/gg_create_nc_component_3.png)
 
-## What you've accomplished
+## What you've accomplished and what's next
 
 You've created the non-camera support component and registered it in AWS IoT Greengrass.
 
