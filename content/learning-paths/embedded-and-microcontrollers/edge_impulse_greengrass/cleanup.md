@@ -1,4 +1,5 @@
 ---
+hide_from_navpane: true
 title: Clean up AWS resources
 description: Remove AWS IoT Greengrass and related cloud resources created for the Edge Impulse deployment when the project is complete.
 weight: 11
@@ -13,7 +14,7 @@ After completing this Learning Path, clean up the AWS resources you created to a
 
 ### Remove the Greengrass deployment
 
-Navigate to **AWS IoT Core** > **Greengrass** > **Deployments**. Select your deployment and revise it to remove the Edge Impulse custom component. Redeploy the updated configuration. This shuts down the Runner service on your edge device and stops MQTT messages from being published to IoT Core.
+Navigate to **AWS IoT Core** > **Greengrass** > **Deployments**. Select your deployment and revise it to remove the Edge Impulse custom component. Redeploy the updated configuration. This shuts down the Edge Impulse Linux Runner service on your edge device and stops MQTT messages from being published to IoT Core.
 
 ### Delete the Greengrass core device
 
@@ -31,6 +32,4 @@ Navigate to **Secrets Manager** in the AWS Console. Select the **EI_API_KEY** se
 
 If you used an EC2 instance as your edge device, navigate to the **EC2** dashboard. Select your instance, then choose **Instance state** > **Terminate instance**.
 
-## Congratulations
-
-You've completed this Learning Path. You set up an Arm-based edge device, built and deployed an Edge Impulse ML model through AWS IoT Greengrass, verified live inference, and used MQTT commands to control the Runner service remotely.
+You can continue back to the [Completion](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/running) step of this Learning Path. 

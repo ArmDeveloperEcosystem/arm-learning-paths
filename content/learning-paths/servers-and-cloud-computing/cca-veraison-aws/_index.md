@@ -94,6 +94,10 @@ further_reading:
         link: https://developer.arm.com/documentation/den0137/latest/
         type: documentation
     - resource:
+        title: The Role of Attestation in Arm CCA
+        link: https://support.arm.com/documentation/111146/latest/
+        type: documentation
+    - resource:
         title: The Attestation Results for Secure Interactions (AR4SI) 
         link: https://datatracker.ietf.org/doc/draft-ietf-rats-ar4si/
         type: documentation

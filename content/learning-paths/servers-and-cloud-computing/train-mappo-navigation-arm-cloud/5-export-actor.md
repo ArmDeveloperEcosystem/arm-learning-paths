@@ -13,7 +13,7 @@ The full BenchMARL checkpoint contains the actor together with state used for tr
 
 A downstream inference runtime normally needs only the actor policy.
 
-For the VMAS navigation configuration used in this Learning Path, the shared actor has this structure:
+For the VMAS navigation configuration, the shared actor has the following structure:
 
 ```text
 18 observation values
@@ -29,9 +29,9 @@ Linear 256 → 256
 Linear 256 → 4
 ```
 
-For continuous MAPPO, the four raw outputs are split into two location values and two scale values for a two-dimensional action distribution. The validated configuration uses `TanhNormal` and VMAS navigation uses the default action range `[-1, 1]`. For deterministic inference, TorchRL's `TanhNormal.deterministic_sample` therefore corresponds to applying `tanh()` to the two location values.
+For continuous MAPPO, the four raw outputs are split into two location values and two scale values for a two-dimensional action distribution. The validated configuration uses `TanhNormal`. VMAS navigation uses the default action range `[-1, 1]`. For deterministic inference, TorchRL's `TanhNormal.deterministic_sample` therefore corresponds to applying `tanh()` to the two location values.
 
-The 18-value VMAS navigation observation is:
+The 18-value VMAS navigation observation is as follows:
 
 ```text
 2 agent-position values
@@ -47,7 +47,9 @@ lidar_range - measured_range
 ```
 
 {{% notice Note %}}
-The exporter in this section is intentionally specific to the validated shared MAPPO actor. It verifies the task configuration, parameter sharing, MLP layer sizes, activation type, absence of normalization layers, and actor tensor shapes before it creates an artifact. The tested BenchMARL task configuration does not store the VMAS LiDAR-ray default, so the exporter uses 12 when that field is absent and verifies the resulting 18-input actor shape.
+The exporter is intentionally specific to the validated shared MAPPO actor. It verifies the task configuration, parameter sharing, and MLP layer sizes. It also verifies the activation type, absence of normalization layers, and actor tensor shapes before it creates an artifact.
+
+The tested BenchMARL task configuration doesn't store the VMAS LiDAR-ray default, so the exporter uses 12 when that field is absent and verifies the resulting 18-input actor shape.
 {{% /notice %}}
 
 ## Create the actor exporter
@@ -417,7 +419,7 @@ if __name__ == "__main__":
     main()
 ```
 
-{{% notice Security %}}
+{{% notice Important %}}
 `config.pkl` uses Python pickle serialization. Run the exporter only on `config.pkl` and checkpoint files produced by training runs that you trust.
 {{% /notice %}}
 
@@ -429,7 +431,7 @@ chmod +x export_mappo_actor.py
 
 ## Export the actor
 
-Make sure `CHECKPOINT` still points to the BenchMARL training checkpoint selected in the previous section:
+Make sure `CHECKPOINT` still points to the BenchMARL training checkpoint that you selected earlier:
 
 ```bash
 echo "$CHECKPOINT"
@@ -500,13 +502,13 @@ b3    (4,)
 metadata_json
 ```
 
-The critic and the remaining BenchMARL training state are not included.
+The critic and the remaining BenchMARL training state aren't included.
 
 ## Understand the exporter validation
 
 The exporter performs several checks before and after writing the `.npz` file.
 
-It verifies the training configuration includes:
+It verifies that the training configuration includes the following:
 
 ```text
 share_policy_params = true
@@ -519,7 +521,7 @@ hidden activation = torch.nn.Tanh
 no normalization layer
 ```
 
-It also checks that the checkpoint contains exactly one actor parameter group with these tensor shapes:
+It also checks that the checkpoint contains exactly one actor parameter group with the following tensor shapes:
 
 ```text
 mlp.params.0.weight  -> (256, 18)
@@ -533,7 +535,7 @@ mlp.params.4.bias    -> (4,)
 After saving the actor, the exporter performs two numerical parity checks:
 
 1. It runs the same test observations through the checkpoint tensors in PyTorch and through the saved NumPy actor, and checks that their raw outputs match.
-2. It passes the raw outputs through the same `NormalParamExtractor` and `TanhNormal` deterministic-action semantics used by the MAPPO policy, and checks that the lightweight `tanh(loc)` action matches `TanhNormal.deterministic_sample` for the `[-1, 1]` VMAS action range.
+2. It passes the raw outputs through the same `NormalParamExtractor` and `TanhNormal` deterministic-action semantics used by the MAPPO policy. It checks that the lightweight `tanh(loc)` action matches `TanhNormal.deterministic_sample` for the `[-1, 1]` VMAS action range.
 
 These checks validate both the weight extraction and the deterministic action interpretation used by the lightweight actor.
 
@@ -564,11 +566,20 @@ Inspect the embedded metadata:
 python -c "import numpy as np, json; d=np.load('$ACTOR_OUTPUT', allow_pickle=False); print(json.dumps(json.loads(str(d['metadata_json'])), indent=2))"
 ```
 
-The metadata records the source checkpoint name and full path, SHA-256 checksum, training frames, training agent count, model dimensions, action interpretation, observation ordering, LiDAR configuration, and other settings needed to identify the policy interface.
+The metadata records settings needed to identify the policy interface, including:
+
+- The source checkpoint name and full path
+- SHA-256 checksum
+- Training frames
+- Training agent count
+- Model dimensions
+- Action interpretation
+- Observation ordering
+- LiDAR configuration
 
 ## Run a standalone inference check
 
-You can also run the exported MLP without BenchMARL or TorchRL. Use an all-zero 18-value observation as a basic smoke test:
+You can also run the exported MLP without BenchMARL or TorchRL. Use an all-zero 18-value observation as a smoke test:
 
 ```bash
 python -c "import numpy as np; d=np.load('$ACTOR_OUTPUT', allow_pickle=False); obs=np.zeros(18,dtype=np.float32); x=np.tanh(d['W1']@obs+d['b1']); x=np.tanh(d['W2']@x+d['b2']); raw=d['W3']@x+d['b3']; action=np.tanh(raw[:2]); print('Action:',action); print('Shape:',action.shape); print('Finite:',np.all(np.isfinite(action))); print('Within [-1,1]:',np.all(np.abs(action)<=1.0))"
@@ -582,7 +593,7 @@ Finite: True
 Within [-1,1]: True
 ```
 
-This is an interface smoke test. It checks tensor shapes, finite arithmetic, and action bounds, but it does not show that the policy navigates successfully. Use the BenchMARL evaluation and GUI playback checks for behavioral validation.
+This is an interface smoke test. It checks tensor shapes, finite arithmetic, and action bounds, but it doesn't show that the policy navigates successfully. Use the BenchMARL evaluation and GUI playback checks for behavioral validation.
 
 You now have two forms of the trained policy:
 
@@ -598,8 +609,11 @@ mappo_actor_<agents>agent_<frames>.npz
 Downstream inference runtime
 ```
 
-The downstream runtime must reproduce the observation ordering and action interpretation recorded in `metadata_json`. The actor-only artifact does not contain the VMAS environment, critic, or robot-specific sensor and control integration.
+The downstream runtime must reproduce the observation ordering and action interpretation recorded in `metadata_json`. The actor-only artifact doesn't contain the VMAS environment, critic, or robot-specific sensor and control integration.
 
 ## What you've accomplished
 
-You have extracted the validated shared MAPPO actor into a portable NumPy artifact and confirmed that its deterministic output matches the trained TorchRL policy. You also recorded the observation layout and action semantics needed to integrate the actor with a downstream runtime.
+You've extracted the validated shared MAPPO actor into a portable NumPy artifact and confirmed that its deterministic output matches the trained TorchRL policy. 
+
+You can now use the observation layout and action semantics that you recorded to integrate the actor with a downstream runtime.
+

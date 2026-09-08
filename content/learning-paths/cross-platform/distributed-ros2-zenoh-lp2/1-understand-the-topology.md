@@ -7,43 +7,45 @@ weight: 2
 layout: learningpathall
 ---
 
-## Introduction
+## Understand how the ROS 2 system is distributed
 
-The [prerequisite Learning Path](/learning-paths/cross-platform/ros2-zenoh-arm/) in this series placed the complete ROS 2 system on one server. A real robot deployment is different: the operator station can be elsewhere, sensor nodhes can run on separate devices, and the monitoring display can be on a laptop.
+By completing the prerequisite Learning Path [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/), you placed the complete ROS 2 system on one server. A real robot deployment is different: the operator station can be elsewhere, sensor nodes can run on separate devices, and the monitoring display can be on a laptop.
 
-This Learning Path distributes the system in three stages:
+You'll distribute the system in three stages:
 
 1. Connect the `control` container to the robot over the Docker network and run RViz remotely.
 2. Connect a Raspberry Pi to the Arm server over the physical network.
 3. Extend the design to multiple robots using ROS namespaces and domain IDs to prevent communication conflicts.
 
-The first two stages use Zenoh client mode to coordinate communication across containers and physical devices. The final stage introduces a practical approach toward preventing communication conflicts when multiple robots share the same infrastructure.
+In the first two stages, you'll use Zenoh client mode to coordinate communication across containers and physical devices. The final stage introduces a practical approach toward preventing communication conflicts when multiple robots share the same infrastructure.
 
-Both the server and the Pi run the same arm64 ROS 2 packages. The development machine and the deployment target share one instruction set, so there is no cross-compilation step between them.
+Both the server and the Pi run the same `arm64` ROS 2 packages. The development machine and the deployment target share one instruction set, so there's no cross-compilation step between them.
 
 ## Understand the router and client mode
 
-### The Zenoh router has four roles
+The Zenoh router has four roles:
 
-1. **Configuration entry point** — it reads `ROUTER_CONFIG.json5` once at startup. Any configuration change requires a router restart.
-2. **Discovery service for local peers** — it introduces nodes to each other, after which they communicate directly. Step 3 of the [prerequisite Learning Path](/learning-paths/cross-platform/ros2-zenoh-arm/) demonstrated this: stopping the router did not interrupt an established conversation.
-3. **Relay for client-mode nodes** — a client holds a single connection to the router, and every message it sends or receives passes through that connection.
-4. **Traffic policy enforcement point** — compression, access control, downsampling, and QoS rules all apply here. A later Learning Path covers these policies.
+- Configuration entry point: It reads `ROUTER_CONFIG.json5` once at startup. Any configuration change requires a router restart.
+- Discovery service for local peers: It introduces nodes to each other, after which they communicate directly. You saw this when you [observed Zenoh router discovery behavior](/learning-paths/cross-platform/ros2-zenoh-arm/observe-router-behaviour/) while completing the prerequisite Learning Path. Stopping the router didn't interrupt an established conversation.
+- Relay for client-mode nodes: A client holds a single connection to the router. Every message it sends or receives passes through that connection.
+- Traffic policy enforcement point: Compression, access control, downsampling, and QoS rules all apply here. For more information, see the next Learning Path in the series [Tune Zenoh for ROS 2 traffic over wireless networks](/learning-paths/cross-platform/tuning-zenoh-ros2-lp3/).
 
 ### Why cross-device nodes use client mode
 
-Nodes inside the robot container listen on loopback only. A peer on another container or host learns their addresses through the router, tries to connect directly, and fails — producing a state where `ros2 topic list` shows every topic but no data arrives. A client makes one outbound connection to the router and lets the router relay in both directions, which also suits NAT and firewalled networks because no inbound port is needed.
+Nodes inside the robot container listen on loopback only. A peer on another container or host learns their addresses through the router, tries to connect directly, and fails. In failing, the peer produces a state where `ros2 topic list` shows every topic but no data arrives. A client makes one outbound connection to the router and lets the router relay in both directions, which also suits NAT and firewalled networks because no inbound port is needed.
 
-### How many routers?
+### Router count
 
-Router count follows subsystems, not machines. A remote side running only a few nodes connects them as clients — the approach used here. A remote side that is a multi-node subsystem of its own runs a router locally and links the two routers, so its internal traffic stays local and only cross-system traffic crosses the link.
+Router count follows subsystems instead of machines. A remote side running only a few nodes connects them as clients. A remote side that's a multi-node subsystem of its own runs a router locally and links the two routers, so its internal traffic stays local and only cross-system traffic crosses the link.
 
-You can read more about the topology in the [`rmw_zenoh` documentation](https://github.com/ros2/rmw_zenoh#connecting-multiple-hosts).
+For more information about the topology, see the [`rmw_zenoh` documentation](https://github.com/ros2/rmw_zenoh#connecting-multiple-hosts).
 
 {{% notice Warning %}}
-This Learning Path begins with the completed environment from the [prerequisite Learning Path](/learning-paths/cross-platform/ros2-zenoh-arm/). Before you continue, ensure both containers are still running and `/scan` delivers messages at a stable non-zero rate.
+You'll start with the completed environment from [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/). Before you continue with this Learning Path, ensure both containers are still running and `/scan` delivers messages at a stable non-zero rate.
 {{% /notice %}}
 
 ## What you've learned and what's next
 
-You now understand how the Zenoh router coordinates communication and why nodes across containers and Arm devices use client mode. Next, configure the control container as a Zenoh client.
+You now understand how the Zenoh router coordinates communication and why nodes across containers and Arm devices use client mode. 
+
+Next, you'll configure the control container as a Zenoh client.

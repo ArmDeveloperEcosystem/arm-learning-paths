@@ -1,0 +1,5 @@
+onnxruntime==1.27.0
+onnxruntime-genai==0.14.1
+transformers>=4.51,<5
+huggingface_hub>=0.33,<1
+jinja2>=3.1,<4

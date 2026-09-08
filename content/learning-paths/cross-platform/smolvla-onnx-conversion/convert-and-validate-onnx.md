@@ -15,8 +15,6 @@ actions.
 
 Image source: [SmolVLA paper](https://arxiv.org/pdf/2506.01844).
 
-Now that you understand the model inputs and outputs, export the SmolVLA policy to ONNX and validate it with ONNX Runtime.
-
 ## Export SmolVLA to ONNX
 
 The checkpoint includes the SmolVLA policy and the LeRobot processors used

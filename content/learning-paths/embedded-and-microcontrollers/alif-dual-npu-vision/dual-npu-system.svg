@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">Alif Ensemble E8 dual-NPU live vision architecture</title>
+  <desc id="desc">An MT9M114 camera feeds the CSI-2 camera interface and ISP. A Cortex-M55 coordinator sends each frame to parallel Zephyr workers. One worker runs SSD-Slim on Ethos-U55 and the other runs MobileNetV2 on Ethos-U85. Results are composed and sent through CDC200 and MIPI DSI to the MW405 display.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#263238"/>
+    </marker>
+    <style>
+      .title { font: 700 28px Arial, sans-serif; fill: #17252a; }
+      .section { font: 700 19px Arial, sans-serif; fill: #17252a; }
+      .label { font: 700 16px Arial, sans-serif; fill: #17252a; }
+      .body { font: 14px Arial, sans-serif; fill: #263238; }
+      .small { font: 12px Arial, sans-serif; fill: #37474f; }
+      .box { stroke: #263238; stroke-width: 2; rx: 10; }
+      .flow { stroke: #263238; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .control { stroke: #6a1b9a; stroke-width: 2.5; stroke-dasharray: 8 5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="760" fill="#ffffff"/>
+  <text x="600" y="40" text-anchor="middle" class="title">Alif Ensemble E8 dual-NPU live vision</text>
+
+  <rect x="35" y="85" width="170" height="90" class="box" fill="#e3f2fd"/>
+  <text x="120" y="116" text-anchor="middle" class="label">MT9M114</text>
+  <text x="120" y="140" text-anchor="middle" class="body">camera on J16</text>
+  <text x="120" y="161" text-anchor="middle" class="small">MIPI CSI-2, D-PHY 0</text>
+
+  <rect x="255" y="85" width="200" height="90" class="box" fill="#e8f5e9"/>
+  <text x="355" y="115" text-anchor="middle" class="label">CSI-2 + CPI</text>
+  <text x="355" y="140" text-anchor="middle" class="body">1288 x 728 RAW10</text>
+  <text x="355" y="161" text-anchor="middle" class="small">native Zephyr video drivers</text>
+
+  <rect x="505" y="85" width="200" height="90" class="box" fill="#e8f5e9"/>
+  <text x="605" y="115" text-anchor="middle" class="label">Hardware ISP</text>
+  <text x="605" y="140" text-anchor="middle" class="body">crop and demosaic</text>
+  <text x="605" y="161" text-anchor="middle" class="small">192 x 192 planar RGB888</text>
+
+  <rect x="755" y="85" width="190" height="90" class="box" fill="#fff8e1"/>
+  <text x="850" y="115" text-anchor="middle" class="label">Video buffer pool</text>
+  <text x="850" y="140" text-anchor="middle" class="body">five queued buffers</text>
+  <text x="850" y="161" text-anchor="middle" class="small">SRAM0, cache managed</text>
+
+  <path d="M205 130 H255" class="flow"/>
+  <path d="M455 130 H505" class="flow"/>
+  <path d="M705 130 H755" class="flow"/>
+
+  <rect x="280" y="225" width="640" height="445" rx="18" fill="#f5f7fa" stroke="#546e7a" stroke-width="2.5"/>
+  <text x="600" y="256" text-anchor="middle" class="section">Zephyr on the RTSS-HP Cortex-M55</text>
+
+  <rect x="450" y="280" width="300" height="82" class="box" fill="#ede7f6"/>
+  <text x="600" y="309" text-anchor="middle" class="label">Frame coordinator</text>
+  <text x="600" y="333" text-anchor="middle" class="body">capture, preprocess, barriers</text>
+  <text x="600" y="353" text-anchor="middle" class="small">timestamps start, completion and overlap</text>
+  <path d="M850 175 V202 H600 V280" class="flow"/>
+
+  <rect x="315" y="400" width="250" height="100" class="box" fill="#e3f2fd"/>
+  <text x="440" y="429" text-anchor="middle" class="label">U55 worker, priority 5</text>
+  <text x="440" y="454" text-anchor="middle" class="body">ExecuTorch SSD-Slim</text>
+  <text x="440" y="476" text-anchor="middle" class="small">120 x 160 grayscale input</text>
+
+  <rect x="635" y="400" width="250" height="100" class="box" fill="#f3e5f5"/>
+  <text x="760" y="429" text-anchor="middle" class="label">U85 worker, priority 4</text>
+  <text x="760" y="454" text-anchor="middle" class="body">ExecuTorch MobileNetV2</text>
+  <text x="760" y="476" text-anchor="middle" class="small">224 x 224 RGB input</text>
+
+  <path d="M530 362 L455 400" class="control"/>
+  <path d="M670 362 L745 400" class="control"/>
+
+  <rect x="430" y="535" width="340" height="74" class="box" fill="#fff3e0"/>
+  <text x="600" y="563" text-anchor="middle" class="label">Multi-variant driver registry</text>
+  <text x="600" y="587" text-anchor="middle" class="body">reserve(product, 256 MACs)</text>
+  <path d="M440 500 L520 535" class="flow"/>
+  <path d="M760 500 L680 535" class="flow"/>
+
+  <rect x="315" y="625" width="250" height="92" class="box" fill="#d7ecff"/>
+  <text x="440" y="653" text-anchor="middle" class="label">Ethos-U55</text>
+  <text x="440" y="677" text-anchor="middle" class="body">MMIO 0x400E1000</text>
+  <text x="440" y="699" text-anchor="middle" class="small">IRQ 55, independent driver</text>
+
+  <rect x="635" y="625" width="250" height="92" class="box" fill="#ead7f5"/>
+  <text x="760" y="653" text-anchor="middle" class="label">Ethos-U85</text>
+  <text x="760" y="677" text-anchor="middle" class="body">MMIO 0x49042000</text>
+  <text x="760" y="699" text-anchor="middle" class="small">IRQ 366, independent driver</text>
+
+  <path d="M520 609 L455 625" class="flow"/>
+  <path d="M680 609 L745 625" class="flow"/>
+
+  <rect x="965" y="300" width="200" height="98" class="box" fill="#e8f5e9"/>
+  <text x="1065" y="330" text-anchor="middle" class="label">UI compositor</text>
+  <text x="1065" y="354" text-anchor="middle" class="body">preview, boxes, class</text>
+  <text x="1065" y="376" text-anchor="middle" class="small">rolling U55/U85 timing</text>
+
+  <rect x="965" y="450" width="200" height="98" class="box" fill="#e3f2fd"/>
+  <text x="1065" y="480" text-anchor="middle" class="label">CDC200 + DSI</text>
+  <text x="1065" y="504" text-anchor="middle" class="body">480 x 800 RGB565</text>
+  <text x="1065" y="526" text-anchor="middle" class="small">MW405, D-PHY 1</text>
+
+  <path d="M920 321 H965" class="flow"/>
+  <path d="M920 450 H945 V349 H965" class="control"/>
+  <path d="M1065 398 V450" class="flow"/>
+</svg>

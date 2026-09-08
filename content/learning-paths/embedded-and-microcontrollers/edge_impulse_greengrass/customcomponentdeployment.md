@@ -9,10 +9,14 @@ layout: learningpathall
 
 ## Overview
 
-In this section, you create a Greengrass deployment that downloads, installs, and runs the Edge Impulse Runner service on your edge device. When the Runner starts, it connects to your Edge Impulse project using the API key stored in AWS Secrets Manager, downloads your trained ML model, and begins running inference.
+Create a Greengrass deployment that downloads, installs, and runs the Edge Impulse Linux Runner service on your edge device. When the Edge Impulse Linux Runner starts, it connects to your Edge Impulse project using the API key stored in AWS Secrets Manager, downloads your trained ML model, and begins running inference.
 
-{{% notice Note %}}
-If your edge device doesn't have a camera (for example, an EC2 instance), you need to deploy an additional custom component first. Follow the [non-camera component setup](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/noncameracustomcomponent/) before continuing. You'll select that component alongside the Edge Impulse Runner component during deployment.
+{{% notice IMPORTANT - Additional required step for non-camera edge devices %}}
+If your edge device doesn't have a camera, for example an EC2 instance, deploy the additional custom Greengrass component before you start the deployment.
+
+Follow the [non-camera additional component setup steps](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/noncameracustomcomponent/) before continuing.
+
+During deployment, select both the additional component and the Edge Impulse Linux Runner component.
 {{% /notice %}}
 
 ## Create a Greengrass deployment
@@ -27,29 +31,29 @@ To deploy to a specific device (for example, your EC2 edge device), select a sin
 
 ![Greengrass deployment page showing the option to deploy to a single core device#center](./images/gg_create_deployment_2.png "Deploy to a single device")
 
-After choosing your target, select **Next**. On the components page, select your **EdgeImpulseLinuxRunnerServiceComponent** custom component:
+After choosing your target, select **Next**. On the components page, select your **EdgeImpulseLinuxEdge Impulse Linux RunnerServiceComponent** custom component:
 
-![Component selection page with the EdgeImpulseLinuxRunnerServiceComponent checkbox selected#center](./images/gg_create_deployment_3.png "Select the custom component")
+![Component selection page with the EdgeImpulseLinuxEdge Impulse Linux RunnerServiceComponent checkbox selected#center](./images/gg_create_deployment_3.png "Select the custom component")
 
 {{% notice Note %}}
-If your edge device doesn't have a camera, also select the **EdgeImpulseRunnerRuntimeInstallerComponent** that you created in the non-camera component setup step:
+If your edge device doesn't have a camera, also select the **EdgeImpulseEdge Impulse Linux RunnerRuntimeInstallerComponent** that you created in the non-camera component setup step:
 
-![Component selection page with both the Runner and RuntimeInstaller components selected#center](./images/gg_create_deployment_3a.png "Select both components for non-camera devices")
+![Component selection page with both the Edge Impulse Linux Runner and RuntimeInstaller components selected#center](./images/gg_create_deployment_3a.png "Select both components for non-camera devices")
 {{% /notice %}}
 
-Select **Next** again. Select the **EdgeImpulseLinuxRunnerServiceComponent** and select **Configure component** to customize it for your device:
+Select **Next** again. Select the **EdgeImpulseLinuxEdge Impulse Linux RunnerServiceComponent** and select **Configure component** to customize it for your device:
 
-![Component configuration page with the EdgeImpulseLinuxRunnerServiceComponent selected and the Configure component button visible#center](./images/gg_create_deployment_4.png "Configure the component")
+![Component configuration page with the EdgeImpulseLinuxEdge Impulse Linux RunnerServiceComponent selected and the Configure component button visible#center](./images/gg_create_deployment_4.png "Configure the component")
 
 {{% notice Note %}}
-If you also have the non-camera component, it doesn't need configuration. Only configure the **EdgeImpulseLinuxRunnerServiceComponent**.
+If you also have the non-camera component, it doesn't need configuration. Only configure the **EdgeImpulseLinuxEdge Impulse Linux RunnerServiceComponent**.
 {{% /notice %}}
 
 ## Apply the device-specific configuration
 
 The component has a default configuration from the recipe, but you can override it for this specific deployment. This is where you use the device-specific JSON you saved during hardware setup.
 
-Clear the **Configuration to merge** text box, paste your saved JSON, and select **Confirm**:
+Clear the **Configuration to merge** text box, paste your saved JSON (from your edge device hardware setup section), and select **Confirm**:
 
 ![Configuration to merge dialog showing the JSON configuration pasted into the text box#center](./images/gg_create_deployment_5.png "Paste the device-specific configuration")
 
@@ -61,15 +65,15 @@ Continue selecting **Next** through the remaining pages until you reach the revi
 
 ## Monitor the deployment
 
-The deployment can take several minutes depending on network speed. The component downloads and installs all prerequisites (Node.js, libvips, the Edge Impulse CLI) before starting the Runner.
+The deployment can take several minutes depending on network speed. The component downloads and installs all prerequisites (Node.js, libvips, the Edge Impulse CLI) before starting the Edge Impulse Linux Runner.
 
 To monitor progress, SSH into your edge device and tail the component logs:
 
 ```bash
-sudo tail -f /greengrass/v2/logs/EdgeImpulseLinuxRunnerServiceComponent.log
+sudo tail -f /greengrass/v2/logs/EdgeImpulseLinuxEdge Impulse Linux RunnerServiceComponent.log
 ```
 
-This log shows the installation activity during the component setup phase. After the install completes, the Runner writes its own log file. To watch running inference output:
+This log shows the installation activity during the component setup phase. After the install completes, the Edge Impulse Linux Runner writes its own log file. To watch running inference output:
 
 ```bash
 sudo tail -f /tmp/ei*log
@@ -79,4 +83,4 @@ Both log files are essential for debugging deployment or configuration issues. I
 
 ## What you've accomplished
 
-In this section, you created a Greengrass deployment, applied your device-specific configuration, and deployed the Edge Impulse Runner component to your edge device. The Runner is now downloading your ML model and starting inference. In the next section, you verify that the model is running and view inference results.
+In this section, you created a Greengrass deployment, applied your device-specific configuration, and deployed the Edge Impulse Linux Runner component to your edge device. The Edge Impulse Linux Runner is now downloading your ML model and starting inference. In the next section, you verify that the model is running and view inference results.
