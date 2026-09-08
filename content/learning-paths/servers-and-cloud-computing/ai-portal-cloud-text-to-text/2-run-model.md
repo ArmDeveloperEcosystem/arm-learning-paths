@@ -166,7 +166,7 @@ For details about base-model prompts, chat templates, the Qwen2.5 fallback, and 
 You can optionally serve the models through a browser interface.
 
 {{% notice Note %}}
-If your Arm Neoverse-based machine is remote, create an additional new terminal and create an SSH tunnel from your local computer. Make sure to add any path to your key, if required, using `-i path-to-key`:
+If your Arm Neoverse-based machine is remote, open another terminal and create an SSH tunnel from your local computer. Make sure to add any path to your key, if required, using `-i path-to-key`:
 
 ```bash
 ssh -L 8000:127.0.0.1:8000 user@remotehost
@@ -179,7 +179,7 @@ On your original terminal, with the virtual environment activated, install the w
 python -m pip install "fastapi>=0.116,<1" "uvicorn>=0.35,<1"
 ```
 
-Choose the tab that matches your model type. Start the server, leave it running, and open [the webpage](http://127.0.0.1:8000/) in your local browser.
+Choose the tab that matches your model type. Start the server, leave it running, and open the local web interface (`http://127.0.0.1:8000/`) in your local browser.
 
 {{< tabpane-normal >}}
   {{< tab header="Instruction-tuned or chat model">}}
@@ -214,6 +214,6 @@ The example server processes one generation request at a time. It's intended for
 
 ## What you've accomplished and what's next
 
-You've downloaded an ONNX Runtime GenAI model and generated text through the shared terminal application. If you completed the optional section, you also used the same adapter through a browser interface. 
+You've downloaded an ONNX Runtime GenAI model and generated text through the shared terminal application. If you completed the optional section, you also used the same adapter through a browser interface.
 
 Next, you'll inspect the boundary between the shared applications and the supplied ONNX adapter.

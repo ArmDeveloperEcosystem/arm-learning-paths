@@ -1,5 +1,5 @@
 ---
-title: Understand how the runner scripts works
+title: Understand how the runner scripts work
 description: Review how the shared terminal and browser interfaces call the supplied ONNX Runtime GenAI adapter.
 weight: 4
 
@@ -27,7 +27,7 @@ def model_directory(model_id: str) -> Path:
 ```
 
 The `download_model.py`, `run_model.py`, `genai_web.py`, and `validate_adapter.py` scripts use this same mapping. The downloader retrieves the complete repository, and the ONNX adapter decides which files it needs.
- 
+
 ### How the adapter contract is defined
 
 `adapter_contract.py` defines the operations used by the terminal and browser applications:
@@ -77,7 +77,7 @@ required_files = [
 `validate_adapter.py` constructs the active adapter and calls `validate_model_directory()`. This keeps package validation beside the runtime implementation rather than hard-coding ONNX filenames in the downloader.
 
 ### How the adapter detects base and instruction-tuned models
- 
+
 `model_adapter.py` detects three prompt-format cases:
 
 ```python
@@ -190,6 +190,6 @@ for chunk in adapter.stream(
 
 You've seen how the terminal and browser applications call the supplied adapter contract. The adapter validates an ONNX Runtime GenAI package and handles base and instruction-tuned prompts. It configures CPU inference, allows supported operations to use KleidiAI, and streams decoded tokens.
 
-You can extend the supplied adapter to your own use case. 
+You can extend the supplied adapter to your own use case.
 
 Next, if the supplied adapter doesn't meet your needs, you can learn about other cloud large language model (LLM) deployment options.

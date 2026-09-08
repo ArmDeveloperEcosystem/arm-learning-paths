@@ -136,7 +136,7 @@ Download the complete package:
 python download_model.py --repo-id "$MODEL_ID"
 ```
 
-Create a summary of the package files and configuration for the coding assistant:
+Create a summary of the package files and configuration for the coding agent:
 
 ```bash
 python inspect_model.py \
@@ -209,6 +209,6 @@ done
 
 ## What you've accomplished and what's next
 
-You've created an isolated Python environment and downloaded the shared applications. You've also installed the dependencies for the supplied ONNX adapter or a generated replacement. 
+You've created an isolated Python environment and downloaded the shared applications. You've also installed the dependencies for the supplied ONNX adapter or a generated replacement.
 
 Next, you'll select, download, and run a model from the Arm AI Portal.
