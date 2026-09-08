@@ -14,7 +14,7 @@ After completing this Learning Path, clean up the AWS resources you created to a
 
 ### Remove the Greengrass deployment
 
-To remove the Greengrass deployment, complete the following steps:
+To remove the Greengrass deployment:
 
 1. Navigate to **AWS IoT Core** > **Greengrass** > **Deployments**. 
 2. Select your deployment and revise it to remove the Edge Impulse custom component. 
@@ -24,7 +24,7 @@ This shuts down the Edge Impulse Linux Runner service on your edge device and st
 
 ### Delete the Greengrass core device
 
-To delete the Greengrass core device, complete the following steps:
+To delete the Greengrass core device:
 
 1. Navigate to **AWS IoT Core** > **Greengrass** > **Core devices**. 
 2. Select the core device that you created and delete it. 
@@ -33,7 +33,7 @@ To delete the Greengrass core device, complete the following steps:
 
 ### Delete the S3 bucket
 
-To delete the S3 bucket, complete the following steps:
+To delete the S3 bucket:
 
 1. Navigate to **S3** in the AWS Console. 
 2. Select the bucket you created for the component artifacts
@@ -42,7 +42,7 @@ To delete the S3 bucket, complete the following steps:
 
 ### Delete the Secrets Manager secret
 
-To delete the Secrets Manager secret, complete the following steps:
+To delete the Secrets Manager secret:
 
 1. Navigate to **Secrets Manager** in the AWS Console.
 2. Select the **EI_API_KEY** secret and delete it. 
@@ -51,7 +51,7 @@ By default, Secrets Manager schedules deletion after a waiting period.
 
 ### Terminate the EC2 instance
 
-To terminate the EC2 instance, complete the following steps:
+To terminate the EC2 instance:
 
 1. Navigate to the **EC2** dashboard. 
 2. Select your instance

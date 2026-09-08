@@ -44,7 +44,7 @@ Edit `EdgeImpulseEdge Impulse Linux RunnerRuntimeInstallerComponent.yaml` and ch
 
 ### Register the custom component
 
-To registter the custom component, complete the following steps:
+To register the custom component:
 
 1. In the AWS Console, open **AWS IoT Core**. Under **Greengrass devices**, select **Components**.
 

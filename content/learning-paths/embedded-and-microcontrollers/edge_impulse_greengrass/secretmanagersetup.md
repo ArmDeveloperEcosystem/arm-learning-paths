@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Why you'll use AWS Secrets Manager
 
-The Edge Impulse Greengrass component needs your Edge Impulse API key to download and run your ML model. Rather than hard-coding the key in the component configuration, you'll store the component in AWS Secrets Manager. The component retrieves the key securely at runtime, which keeps it out of configuration files and makes rotation straightforward.
+The Edge Impulse Greengrass component needs your Edge Impulse API key to download and run your ML model. Rather than hard-coding the key in the component configuration, you'll store the API key in AWS Secrets Manager. The component retrieves the key securely at runtime, which keeps it out of configuration files and makes rotation straightforward.
 
 The component expects two specific values:
 - A secret with the ID `EI_API_KEY` (the name that you give the secret in Secrets Manager).
@@ -21,7 +21,7 @@ These names must match the `ei_sm_secret_id` and `ei_sm_secret_name` fields in t
 
 Earlier, you generated an API key in Edge Impulse Studio and saved it. Now, store that key in AWS Secrets Manager.
 
-To save the API key as a secret, complete the following steps:
+To save the API key as a secret:
 
 1. Open the AWS Console and navigate to **Secrets Manager**. 
 2. Select **Store a new secret**.

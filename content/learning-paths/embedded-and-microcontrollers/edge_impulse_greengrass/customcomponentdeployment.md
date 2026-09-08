@@ -58,7 +58,7 @@ If you also have the non-camera component, it doesn't need configuration. Config
 
 The component has a default configuration from the recipe, but you can override the configuration for this specific deployment. Use the device-specific JSON that you saved during hardware setup.
 
-To apply the device-specific configuration, complete the following steps:
+To apply the device-specific configuration:
 
 1. Clear the **Configuration to merge** text box, paste the JSON that you saved from edge device hardware setup, and select **Confirm**:
 

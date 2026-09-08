@@ -69,7 +69,7 @@ sudo apt install -y curl unzip
 sudo apt install -y gcc g++ make build-essential nodejs sox gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-base gstreamer1.0-plugins-base-apps
 ```
 
-Greengrass Nucleus Classic is Java-based, so you also to install a JDK:
+Greengrass Nucleus Classic is Java-based, so you also need to install a JDK:
 
 ```bash
 sudo apt install -y default-jdk
@@ -103,7 +103,7 @@ The following JSON configurations set up the Edge Impulse Greengrass component f
 
 #### With a USB camera
 
-This configuration uses `gst_args` to capture live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output becuase the Edge Impulse Linux Runner runs as a background service:
+This configuration uses `gst_args` to capture live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output because the Edge Impulse Linux Runner runs as a background service:
 
 ```json
 {

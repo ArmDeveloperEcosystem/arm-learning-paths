@@ -21,7 +21,7 @@ Commands are sent as JSON messages to the device's command input topic and resul
 
 All commands use the following JSON structure:
 
-```output
+```json
 {
    "cmd": "<command-verb>",
    "value": "<optional-value>"
@@ -177,7 +177,7 @@ The output is similar to:
 
 ### `get_threshold_filter_criteria`
 
-The command etrieves the currently configured threshold filter criteria:
+The command retrieves the currently configured threshold filter criteria:
 
 ```json
 {
@@ -220,7 +220,7 @@ The output is similar to:
 
 ### `get_threshold_filter_confidence`
 
-The command the currently configured confidence threshold value:
+The command retrieves the currently configured confidence threshold value:
 
 ```json
 {
@@ -310,7 +310,7 @@ The output is similar to:
 
 ### `reset_metrics`
 
-The command rsets the accumulated model metrics counters to zero:
+The command resets the accumulated model metrics counters to zero:
 
 ```json
 {
@@ -330,7 +330,7 @@ The output is similar to:
 
 ### `clear_cache`
 
-The command clears all inference image caches. It command respects the component configuration — it clears all caches that are currently enabled (local file cache, S3 cache, or both):
+The command clears all inference image caches. It respects the component configuration — it clears all caches that are currently enabled (local file cache, S3 cache, or both):
 
 ```json
 {

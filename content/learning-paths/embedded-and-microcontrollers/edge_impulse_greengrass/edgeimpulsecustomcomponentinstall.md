@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## What you'll create
 
-You'll create an AWS IoT Greengrass custom component that installs and runs the Edge Impulse Linux Runner service on your device. The component handles the Node.js and `libvips ` prerequisites and manages the Edge Impulse Linux Runner lifecycle: install, run, and shutdown.
+You'll create an AWS IoT Greengrass custom component that installs and runs the Edge Impulse Linux Runner service on your device. The component handles the Node.js and `libvips` prerequisites and manages the Edge Impulse Linux Runner lifecycle: install, run, and shutdown.
 
 The component consists of two parts:
 
@@ -30,7 +30,7 @@ The repository contains the YAML recipe file and the shell script artifacts that
 
 The Greengrass component downloads its artifacts from an S3 bucket at deployment time. You need to create a bucket and upload the shell scripts.
 
-To upload artifacts to a bucket, complete the following steps:
+To upload artifacts to a bucket:
 
 1. Open the AWS Console and navigate to **S3**. 
 2. Select **Create bucket** and give it a name (for example, `my-ei-greengrass-artifacts`):
@@ -64,7 +64,7 @@ Open `EdgeImpulseLinuxEdge Impulse Linux RunnerServiceComponent.yaml` from the c
 
 The recipe file includes a default configuration JSON block. You don't need to modify these defaults for the Learning Path — they're overridden at deployment time by the device-specific JSON you saved during hardware setup. However, understanding each field is useful for troubleshooting and customization.
 
-```output
+```json
 {
    "node_version": "20.12.1",
    "vips_version": "8.12.1",
@@ -134,7 +134,7 @@ The following table describes each configuration field:
 
 With the artifacts in S3 and the recipe updated, register the component in the AWS Console.
 
-To register the component, complete the following steps:
+To register the component:
 
 1. Navigate to **AWS IoT Core** > **Greengrass** > **Components**.
 2. Select **Create component**. 

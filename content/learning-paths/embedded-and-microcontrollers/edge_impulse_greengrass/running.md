@@ -45,7 +45,7 @@ If the image appears frozen, the Edge Impulse Linux Runner has finished playing 
 
 The Edge Impulse Linux Runner publishes inference results and model metrics to AWS IoT Core MQTT topics. You can view these messages in the AWS Console.
 
-To view the message, complete the following steps:
+To view the message:
 
 1. Open the AWS Console and navigate to **AWS IoT Core**. 
 2. Select **MQTT test client**.
@@ -88,7 +88,7 @@ The Edge Impulse Linux Runner uses four MQTT topics per device:
 
 ### Send the restart command
 
-To send a restart command, complete the following steps:
+To send a restart command:
 
 1. In the MQTT test client, select the **Publish to a topic** tab. 
 2. Enter the following topic, replacing `<device-name>` with the name of your device:
@@ -138,7 +138,7 @@ If the Edge Impulse Linux Runner doesn't start or the browser page doesn't load,
 
 - Jetson GPU model loading delay: On Jetson devices where the model is compiled for GPU acceleration, expect a 2–3 minute delay the first time the model loads into GPU memory. Subsequent starts are much faster.
 
-## Clean up AWS Resources
+## Clean up AWS resources
 
 To clean up AWS resources and minimize costs, see [Cleaning up AWS resources](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/cleanup/). 
 

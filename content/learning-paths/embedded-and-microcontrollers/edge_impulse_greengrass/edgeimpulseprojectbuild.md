@@ -11,7 +11,7 @@ layout: learningpathall
 
 Create an Edge Impulse account, clone a pre-built project, build a deployment for your Arm device, and generate an API key. Edge Impulse is an ML platform for building, training, optimizing, and deploying models for edge devices.
 
-To create an account, complete the following steps:
+To create an account:
 
 1. Navigate to [Edge Impulse Studio](https://studio.edgeimpulse.com) and select **Sign Up**:
 
@@ -37,7 +37,7 @@ Now that your account is ready, clone an existing project that already has a tra
 
 ## Clone the project into your account
 
-To clone a pre-built project into your Edge Impulse account, complete the following steps:
+To clone a pre-built project into your Edge Impulse account:
 
 1. Open the [Cat and Dog Detector public project](https://studio.edgeimpulse.com/studio/524106).
 
@@ -111,7 +111,7 @@ You'll see `/tmp/currentModel.eim` on your edge device and use this file later.
 
 The Edge Impulse Linux Runner on your device uses an API key to authenticate with your project and download the model. The key connects the Greengrass component to your Edge Impulse project.
 
-To create the key, complete the following steps:
+To create the key:
 
 1. Select **Dashboard**:
 
