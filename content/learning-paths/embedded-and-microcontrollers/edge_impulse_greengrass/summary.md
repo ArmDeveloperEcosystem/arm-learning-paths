@@ -377,5 +377,3 @@ The output is similar to:
 ## What you've learned 
 
 You can now use MQTT commands through AWS IoT Core to control the Edge Impulse Linux Runner in real time and interpret its model metrics.
-
-You can continue back to the [Vverify inference and view results](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/running). 
