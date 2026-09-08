@@ -19,7 +19,9 @@ Continue from the ExecuTorch repository root. Activate the environment and build
 source .venv/bin/activate
 source examples/arm/arm-scratch/setup_path.sh
 
-cmake --preset arm-baremetal -B cmake-out-arm
+cmake --preset arm-baremetal \
+  -DCMAKE_BUILD_TYPE=Release \
+  -B cmake-out-arm
 cmake --build cmake-out-arm --target install --parallel
 ```
 
@@ -35,21 +37,25 @@ cmake \
   -S examples/arm/silero_vad_example_ethos_u/runtime \
   -B silero-vad-work/app \
   -DCMAKE_TOOLCHAIN_FILE="$PWD/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake" \
+  -DET_BUILD_DIR_PATH="$PWD/cmake-out-arm" \
   -DTARGET_CPU=cortex-m85 \
   -DET_PTE_FILE_PATH="$PWD/silero-vad-work/export/silero_vad_ethos_u.pte" \
   -DAUDIO_PATH="$PWD/silero-vad-work/assets/validation.wav" \
-  -DVAD_THRESHOLD=0.55
+  -DVAD_THRESHOLD=0.55 \
+  -DPYTHON_EXECUTABLE="$(command -v python)"
   {{< /tab >}}
   {{< tab header="macOS" language="shell" >}}
 cmake \
   -S examples/arm/silero_vad_example_ethos_u/runtime \
   -B silero-vad-work/app \
   -DCMAKE_TOOLCHAIN_FILE="$PWD/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake" \
+  -DET_BUILD_DIR_PATH="$PWD/cmake-out-arm" \
   -DTARGET_CPU=cortex-m85 \
   -DET_PTE_FILE_PATH="$PWD/silero-vad-work/export/silero_vad_ethos_u.pte" \
   -DAUDIO_PATH="$PWD/silero-vad-work/assets/validation.wav" \
   -DVAD_THRESHOLD=0.55 \
-  -DUART0_BASE=0x49303000
+  -DUART0_BASE=0x49303000 \
+  -DPYTHON_EXECUTABLE="$(command -v python)"
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -68,6 +74,7 @@ Run the application and save its simulated UART output to `fvp.log`:
 
 ```bash
 mkdir -p silero-vad-work/fvp
+set -o pipefail
 bash backends/arm/scripts/run_fvp.sh \
   --elf=silero-vad-work/app/silero_vad_ethos_u \
   --target=ethos-u85-256 \
@@ -88,9 +95,16 @@ No problems found!
 Confirm that the application and its serial log exist:
 
 ```bash
-ls -lh \
+for artifact in \
   silero-vad-work/app/silero_vad_ethos_u \
-  silero-vad-work/fvp/fvp.log
+  silero-vad-work/fvp/fvp.log; do
+  test -s "$artifact" || {
+    echo "Missing target artifact: $artifact" >&2
+    exit 1
+  }
+done
+
+echo "Target artifacts verified."
 ```
 
 ## What you've accomplished and what's next

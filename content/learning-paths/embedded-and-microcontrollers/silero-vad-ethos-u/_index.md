@@ -6,20 +6,18 @@ draft: true
 cascade:
     draft: true
 
-minutes_to_complete: 90
+minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for embedded machine learning developers who want to evaluate streaming audio inference with ExecuTorch on Arm Ethos-U.
 
 learning_objectives:
     - Set up ExecuTorch and the Arm development tools for Corstone-320 and Ethos-U85
-    - Export and quantize a stateful Silero VAD model as a `.pte` file
+    - Export and quantize a stateful Silero VAD model as a .pte file
     - Build and run a bare-metal voice activity detection application on a Corstone-320 Fixed Virtual Platform
     - Validate simulated speech probabilities against a host-generated reference
 
 prerequisites:
     - A Linux host using x86_64 or arm64, or an Apple Silicon macOS host
-    - Python 3.10 through 3.13, Git, CMake 3.24 or later, and a C++17 compiler
-    - An internet connection for downloading ExecuTorch dependencies, the Silero VAD model, Arm tools, and the Fixed Virtual Platform
     - Basic familiarity with PyTorch models and command-line development tools
 
 author: Usamah Zaheer
@@ -57,8 +55,8 @@ further_reading:
         type: documentation
     - resource:
         title: Silero VAD Ethos-U example source
-        link: https://github.com/usamahz/executorch/tree/4af907b2192d89369440a1dc0488c1792781a82d/examples/arm/silero_vad_example_ethos_u
-        type: website
+        link: https://github.com/pytorch/executorch/tree/main/examples/arm/silero_vad_example_ethos_u
+        type: repository
     - resource:
         title: Silero VAD project
         link: https://github.com/snakers4/silero-vad
