@@ -54,7 +54,7 @@ Before starting, inspect the recipe parameters, target support, and MCP guidance
 
 {{% notice Note %}}
 
-The Arm Performix MCP server can run Instruction Mix and generate Dynamic Insights for successful Instruction Mix runs.
+The Arm Performix MCP server can run Instruction Mix. Dynamic Insights are currently available only for successful Code Hotspots and System Utilization runs.
 
 {{% /notice %}}
 
