@@ -1,27 +1,29 @@
 ---
 hide_from_navpane: true
-title: Set up an Ubuntu EC2 Arm instance
-description: Launch an Ubuntu AWS EC2 Arm instance and install the dependencies needed to simulate an Edge Impulse Greengrass device.
+title: Set up an Amazon EC2 instance to simulate an Edge Impulse Greengrass device
+description: Launch an Arm-based Amazon EC2 instance running Ubuntu and install the dependencies needed to simulate an Edge Impulse Greengrass device.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up an Ubuntu EC2 Arm instance
+## Prepare an Arm-based Amazon EC2 instance
 
-If you don't have a physical edge device, you can use an AWS EC2 instance with an Arm-based Graviton processor to simulate one. This section walks you through creating the instance, connecting over SSH, and installing the dependencies needed for AWS IoT Greengrass and Edge Impulse.
+If you don't have a physical edge device, you can use an Arm-based Amazon EC2 instance with an AWS Graviton processor to simulate one. Create an instance, then connect to it over SSH, and install the dependencies needed for AWS IoT Greengrass and Edge Impulse.
 
 ### Create the EC2 instance
 
-Open the AWS Console and search for **EC2**:
+To create an instance, follow these steps:
+
+1. Open the AWS Console and search for **EC2**:
 
 ![AWS Console search bar with EC2 typed in the search field#center](./images/ec2_setup_1.png "Search for EC2 in the AWS Console")
 
-Open the EC2 console page:
+2. Open the EC2 console page:
 
 ![EC2 dashboard showing the main console page with instance summary#center](./images/ec2_setup_2.png "EC2 console page")
 
-Select **Launch instance** and configure the following settings:
+3. Select **Launch instance** and configure the following settings:
 
 - Provide a name for the instance (for example, `EdgeDeviceSimulator`).
 - Under **Quick Start**, select **Ubuntu**.
@@ -42,39 +44,46 @@ Your browser downloads a `.pem` file automatically. Save this file in a known lo
 
 ### Configure network settings
 
-Scroll down to **Network Settings** and select **Edit**:
+To configure network settings:
+
+1. Scroll down to **Network Settings** and select **Edit**:
 
 ![Network settings section of the EC2 launch wizard with an Edit button#center](./images/ec2_setup_4_ns.png "Edit network settings")
 
-Select **Add security group rule** and add a rule to allow inbound TCP traffic on port 4912. The Edge Impulse Linux Runner serves a web-based inference viewer on this port, which you use later to confirm the model is running.
+2. Select **Add security group rule** and add a rule to allow inbound TCP traffic on port `4912`. 
 
-For both the SSH rule (port 22) and the port 4912 rule, restrict the source to your own IP address rather than allowing access from anywhere. To find your current public IP, run:
+   The Edge Impulse Linux Runner serves a web-based inference viewer on this port, which you'll use later to confirm the model is running.
 
-```bash
-curl http://checkip.amazonaws.com
-```
+3. For both the SSH rule (port 22) and the port 4912 rule, restrict the source to your own IP address rather than allowing access from anywhere. To find your current public IP, run:
 
-Enter the returned IP address with a `/32` suffix (for example, `203.0.113.10/32`) in the **Source** field for each security group rule. This limits access to your machine only.
+   ```bash
+   curl http://checkip.amazonaws.com
+   ```
+   Enter the returned IP address with a `/32` suffix (for example, `203.0.113.10/32`) in the **Source** field for each security group rule. This limits access to your machine only.
 
 ![Security group rule showing TCP port 4912 allowed for inbound traffic#center](./images/ec2_setup_4_4912.png "Add security group rule for port 4912")
 
 ### Increase disk space
 
-The default 8 GB root volume isn't enough for the dependencies and model files. Under **Configure storage**, change the root volume size from `8` to `28` GB:
+The default 8 GB root volume isn't enough for the project dependencies and model files. 
+
+To update the disk space, under **Configure storage**, change the root volume size from `8` to `28` GB:
 
 ![Storage configuration showing the root volume size set to 28 GB#center](./images/ec2_setup_5.png "Increase root volume to 28 GB")
 
 ### Launch and verify the instance
 
-Select **Launch instance**. You should see a confirmation that the instance is being created:
+To launch the instance and verify that the launch was successful:
+
+1. Select **Launch instance**. You should see a confirmation that the instance is being created:
 
 ![Launch confirmation screen showing the instance is being created#center](./images/ec2_setup_6.png "Instance launch confirmation")
 
-Select **View all instances** and refresh the page. Your instance should show a **Running** state:
+2. Select **View all instances** and refresh the page. Your instance should show a **Running** state:
 
 ![EC2 instances list showing the new instance in Running state with a public IP address#center](./images/ec2_setup_7.png "Running EC2 instance")
 
-Copy the **Public IPv4 address** from the instance details. You need this to connect over SSH.
+Copy the **Public IPv4 address** from the instance details. You need the address to connect over SSH.
 
 ### Connect over SSH
 
@@ -85,15 +94,15 @@ chmod 600 your-key-pair.pem
 ssh -i ./your-key-pair.pem ubuntu@<your-ec2-public-ip>
 ```
 
-You should see a login shell for your EC2 instance:
+You'll see a login shell for your EC2 instance:
 
 ![Terminal showing a successful SSH login to the Ubuntu EC2 instance#center](./images/ec2_setup_8.png "SSH login shell")
 
-Keep this shell open. You'll use it in the following steps.
+Keep the shell open. 
 
 ### Install dependencies
 
-The Edge Impulse Linux Runner and AWS IoT Greengrass require several system packages. Update the package list and install the build tools, Node.js, and GStreamer plugins:
+The Edge Impulse Linux Runner and AWS IoT Greengrass require several system packages. Update the package list and install the build tools, Node.js, and GStreamer plugins on the instance:
 
 ```bash
 sudo apt update
@@ -101,7 +110,9 @@ sudo apt install -y curl unzip
 sudo apt install -y gcc g++ make build-essential nodejs sox gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-base gstreamer1.0-plugins-base-apps
 ```
 
-Greengrass Nucleus Classic is Java-based, so you also need a JDK:
+Greengrass Nucleus Classic is Java-based, so you also need a JDK.
+
+Install a JDK:
 
 ```bash
 sudo apt install -y default-jdk
@@ -109,9 +120,9 @@ sudo apt install -y default-jdk
 
 ### Save the component configuration
 
-The JSON below configures the Edge Impulse Greengrass component for this EC2 instance. Because the instance has no camera, the configuration uses `gst_args` to read inference input from a local video file instead.
+The following JSON configures the Edge Impulse Greengrass component for the instance. Because the instance has no camera, the configuration uses `gst_args` to read inference input from a local video file instead.
 
-Save this JSON to a text file on your local machine. You'll paste it into the Greengrass deployment configuration in a later step.
+Save the JSON to a text file on your local machine:
 
 ```json
 {
@@ -146,9 +157,10 @@ Save this JSON to a text file on your local machine. You'll paste it into the Gr
    }
 }
 ```
+You'll paste it into the Greengrass deployment configuration in a later step.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You've set up an Ubuntu EC2 Arm instance, installed its dependencies, and saved its component configuration.
+You've set up an Arm-based Amazon EC2 instance running Ubuntu, installed its dependencies, and saved its component configuration.
 
-Your EC2 instance is ready. Return to the [hardware setup page](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/hardwaresetup/) and continue to the next section to set up your Edge Impulse project.
+Next, you'll [set up the Edge Impulse project](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/edgeimpulseprojectbuild/). 

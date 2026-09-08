@@ -1,13 +1,13 @@
 ---
 hide_from_navpane: true
-title: Set up an NVIDIA Jetson
+title: Set up an NVIDIA Jetson with JetPack
 description: Prepare an NVIDIA Jetson device with JetPack and the dependencies required for Edge Impulse and AWS IoT Greengrass.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up an NVIDIA Jetson with JetPack
+## Prepare an NVIDIA Jetson board
 
 NVIDIA Jetson boards (Nano, Xavier, Orin) provide GPU-accelerated inference for Edge Impulse models. This section covers prerequisites, dependency installation, and the component configuration for running the Edge Impulse Linux Runner on a Jetson device with AWS IoT Greengrass.
 

@@ -1,10 +1,6 @@
 ---
 title: Deploy ML models to Arm edge devices using Edge Impulse and AWS IoT Greengrass
 
-draft: true
-cascade:
-    draft: true
-
 description: Learn how to deploy Edge Impulse ML models to Arm-based Linux edge devices using AWS IoT Greengrass custom components.
 
 minutes_to_complete: 180
@@ -12,15 +8,15 @@ minutes_to_complete: 180
 who_is_this_for: This Learning Path is for embedded and IoT engineers who want to deploy Edge Impulse ML models to Arm-based edge devices at scale using AWS IoT Greengrass.
 
 learning_objectives:
-    - Set up an Arm-based edge device for ML inference with Edge Impulse
-    - Install and configure AWS IoT Greengrass on the edge device
-    - Deploy an Edge Impulse ML model as a Greengrass custom component
-    - Verify model inference results through AWS IoT Core
+    - Set up an Arm-based edge device for ML inference with Edge Impulse.
+    - Install and configure AWS IoT Greengrass on the edge device.
+    - Deploy an Edge Impulse ML model as a Greengrass custom component.
+    - Verify model inference results through AWS IoT Core.
 
 prerequisites:
     - An [Edge Impulse Studio](https://studio.edgeimpulse.com/signup) account
     - An [AWS account](https://aws.amazon.com/) with administrator access
-    - A supported Arm-based edge device (Raspberry Pi 5, NVIDIA Jetson, Qualcomm Dragonwing QC6490) or an AWS EC2 Arm instance
+    - A supported Arm-based edge device such as a Raspberry Pi 5, NVIDIA Jetson, Qualcomm Dragonwing QC6490, or an Arm-based Amazon EC2 instance
     - An SSH client and familiarity with the Linux command line
     - Basic understanding of ML concepts
 author: Doug Anson
