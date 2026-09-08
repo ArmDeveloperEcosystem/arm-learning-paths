@@ -7,7 +7,7 @@ cascade:
 
 description: Export, deploy, and validate a quantized MobileSAM prompt segmentation model on an Arm Ethos-U85 Fixed Virtual Platform using ExecuTorch.
 
-minutes_to_complete: 90
+minutes_to_complete: 45
 
 who_is_this_for: This Learning Path is for embedded machine learning developers who want to evaluate transformer-based image segmentation on an Arm Ethos-U85 NPU with ExecuTorch.
 
@@ -28,7 +28,7 @@ rerun_summary: false
 rerun_faqs: false
 
 ### Tags
-skilllevels: Advanced
+skilllevels: Introductory
 subjects: ML
 armips:
     - Ethos-U
