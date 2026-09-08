@@ -190,4 +190,6 @@ for chunk in adapter.stream(
 
 You've seen how the terminal and browser applications call the supplied adapter contract. The adapter validates an ONNX Runtime GenAI package and handles base and instruction-tuned prompts. It configures CPU inference, allows supported operations to use KleidiAI, and streams decoded tokens.
 
-Next, you'll learn how to optionally generate a replacement adapter using an AI coding agent.
+You can extend the supplied adapter to your own use case. 
+
+Next, if the supplied adapter doesn't meet your needs, you can learn about other cloud large language model (LLM) deployment options.
