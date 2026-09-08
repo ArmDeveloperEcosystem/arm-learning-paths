@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for developers and ML engineers running A
 learning_objectives:
     - Prepare an Arm Neoverse Linux machine and download a model from the Arm AI Portal.
     - Generate text from the terminal and optionally serve the model through a local web application.
-    - Explain how the shared application calls the supplied ONNX Runtime GenAI adapter.
+    - Identify how the shared application calls the supplied ONNX Runtime GenAI adapter.
     - Compare runtime and model-format choices, and optionally use a coding agent to replace the supplied adapter for another compatible text-to-text package.
 
 prerequisites:
