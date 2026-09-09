@@ -53,10 +53,10 @@ generated_summary_faq:
     answer: >-
       Store your Edge Impulse API key in AWS Secrets Manager with the secret ID `EI_API_KEY`. Set
       its key to `ei_api_key`.
-  - question: What should I check if the Greengrass component can’t download my Edge Impulse model?
+  - question: Why does the Greengrass component need an Edge Impulse API key?
     answer: >-
-      Check that your secret ID is `EI_API_KEY` and its key is `ei_api_key`. Fix any mismatch and
-      redeploy the component.
+      The component uses your API key to authenticate with your Edge Impulse project and download
+      the model.
   - question: What result should I expect after deploying the custom component?
     answer: >-
       You can verify that your model runs on your Arm-based device and view its inference results
