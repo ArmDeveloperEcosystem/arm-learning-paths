@@ -21,17 +21,66 @@ The validation clip follows two paths. The host uses it to generate reference pr
 
 Use the FVP for functional validation. Its Ethos-U model is cycle accurate, but don't use its Cortex-M CPU model for CPU performance measurements.
 
-## 1. Create an isolated ExecuTorch environment
+## Check your development machine
 
-The public development branch contains the Silero VAD Ethos-U example while maintainers upstream it. Use the tested commit so that the commands and generated artifacts match this Learning Path.
-
-Clone the ExecuTorch fork and check out the tested revision:
+Run this preflight check before downloading the source:
 
 ```bash
-git clone --branch codex/mletorch-2112-silero-vad-ethos-u \
-  --single-branch https://github.com/usamahz/executorch.git
+case "$(uname -s)/$(uname -m)" in
+  Linux/x86_64|Linux/aarch64|Linux/arm64|Darwin/arm64)
+    echo "Supported host: $(uname -s)/$(uname -m)"
+    ;;
+  *)
+    echo "Unsupported host: $(uname -s)/$(uname -m)" >&2
+    exit 1
+    ;;
+esac
+
+for tool in python3 git cmake c++ curl; do
+  command -v "$tool" >/dev/null || {
+    echo "Missing required tool: $tool" >&2
+    exit 1
+  }
+done
+
+if ! command -v ninja >/dev/null && ! command -v make >/dev/null; then
+  echo "Install Ninja or Make before continuing." >&2
+  exit 1
+fi
+
+printf 'int main() { return 0; }\n' | \
+  c++ -std=c++17 -x c++ -fsyntax-only -
+
+python3 - <<'PY'
+import re
+import subprocess
+import sys
+
+if not (3, 10) <= sys.version_info[:2] <= (3, 13):
+    raise SystemExit("Python 3.10 through 3.13 is required")
+
+output = subprocess.check_output(["cmake", "--version"], text=True)
+version = tuple(map(int, re.search(r"\d+(?:\.\d+)+", output).group().split(".")[:2]))
+if version < (3, 24):
+    raise SystemExit("CMake 3.24 or later is required")
+
+print(f"Python {sys.version.split()[0]}")
+print(output.splitlines()[0])
+PY
+```
+
+## 1. Create an isolated ExecuTorch environment
+
+The Silero VAD Ethos-U example is available in the upstream ExecuTorch repository. Use the tested main-branch commit so that the commands and generated artifacts match this Learning Path.
+
+Clone ExecuTorch and check out the tested revision:
+
+```bash
+git clone https://github.com/pytorch/executorch.git
 cd executorch
-git checkout 4af907b2192d89369440a1dc0488c1792781a82d
+git checkout 4fd161058ebe2b9d80d11242a9d21811c0e92dac
+git submodule sync --recursive
+git submodule update --init --recursive
 ```
 
 Confirm the checked-out revision:
@@ -43,7 +92,7 @@ git rev-parse --short=12 HEAD
 The expected output is:
 
 ```output
-4af907b2192d
+4fd161058ebe
 ```
 
 Create and activate a Python virtual environment:
@@ -57,14 +106,33 @@ python -m pip install --upgrade pip
 Install ExecuTorch and its Python dependencies:
 
 ```bash
-./install_executorch.sh
+CMAKE_ARGS="-DEXECUTORCH_BUILD_MLX=OFF" \
+  env -u DEBUG ./install_executorch.sh \
+  --minimal --optional-dependency ethos_u
+
+python - <<'PY'
+import executorch.codegen.tools.selective_build
+from executorch.backends.arm.ethosu import EthosUPartitioner
+from executorch.backends.arm.quantizer import EthosUQuantizer
+
+print("ExecuTorch installation verified")
+PY
 ```
 
-The installation script initializes the Git submodules needed by the build and installs the matching PyTorch and ExecuTorch packages.
+The installation script initializes the Git submodules needed by the build and installs the matching PyTorch and ExecuTorch packages. The command omits the unrelated MLX backend and optional packages used by other examples.
 
 ## 2. Install the Arm backend tools
 
-The Arm setup script downloads the Arm GNU Toolchain, Ethos-U Vela compiler, Corstone FVPs, and supporting Python packages. Review the license terms presented by the script before using its EULA acceptance option.
+The Arm setup script downloads the Arm GNU Toolchain, Ethos-U Vela compiler, and supporting Python packages. On Linux it also installs the Corstone FVPs. Review the license terms presented by the script before using its EULA acceptance option.
+
+{{% notice macOS %}}
+Before you run the Arm setup command on macOS, install Docker Desktop and follow the [AVH FVPs on macOS install guide](/install-guides/fvps-on-macos/). Add the FVPs-on-Mac `bin` directory to `PATH`. Confirm that Docker is running and that `FVP_Corstone_SSE-320` resolves to the wrapper:
+
+```bash
+docker info >/dev/null
+command -v FVP_Corstone_SSE-320
+```
+{{% /notice %}}
 
 Run the setup script from the ExecuTorch repository root:
 
@@ -73,7 +141,7 @@ Run the setup script from the ExecuTorch repository root:
 source examples/arm/arm-scratch/setup_path.sh
 ```
 
-The second command adds the downloaded cross-compiler and FVP binaries to the current shell environment. Run it again when you start a new shell.
+The second command adds the downloaded cross-compiler and, on Linux, FVP binaries to the current shell environment. Run it again when you start a new shell.
 
 Check that the two target tools are available:
 
@@ -82,7 +150,7 @@ command -v arm-none-eabi-g++
 command -v FVP_Corstone_SSE-320
 ```
 
-Each command prints an executable under `examples/arm/arm-scratch/`. If either command produces no path, source `examples/arm/arm-scratch/setup_path.sh` again.
+The compiler resolves under `examples/arm/arm-scratch/`. On Linux, the FVP does too; on macOS, it resolves under the FVPs-on-Mac wrapper directory. If the compiler is missing, source `examples/arm/arm-scratch/setup_path.sh` again. If the FVP is missing on macOS, add the wrapper directory to `PATH`.
 
 ## 3. Download the model and sample audio
 
@@ -118,9 +186,20 @@ clips = (("calibration.wav", 0.0), ("validation.wav", 2.5))
 
 with wave.open(str(source_path), "rb") as source:
     parameters = source.getparams()
+    if (
+        parameters.nchannels,
+        parameters.sampwidth,
+        parameters.framerate,
+        parameters.comptype,
+    ) != (1, 2, 16000, "NONE"):
+        raise SystemExit("test.wav must be mono, 16 kHz, 16-bit PCM")
+    if source.getnframes() < 5 * parameters.framerate:
+        raise SystemExit("test.wav does not contain five seconds of audio")
     for name, start_seconds in clips:
         source.setpos(int(start_seconds * parameters.framerate))
         frames = source.readframes(int(2.5 * parameters.framerate))
+        if len(frames) != 40000 * parameters.sampwidth:
+            raise SystemExit(f"Could not create a 2.5-second {name} clip")
         with wave.open(str(source_path.with_name(name)), "wb") as target:
             target.setparams(parameters)
             target.writeframes(frames)
