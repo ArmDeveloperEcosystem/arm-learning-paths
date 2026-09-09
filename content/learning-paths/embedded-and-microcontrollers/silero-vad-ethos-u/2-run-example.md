@@ -7,7 +7,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Export the model
+## Prepare to export the model
 
 You prepared the model and two audio clips earlier. Now, use the calibration clip to quantize Silero VAD and the validation clip to create a host reference.
 
@@ -59,7 +59,7 @@ python3 examples/arm/silero_vad_example_ethos_u/model_export/export_silero_vad_e
   tee silero-vad-work/export/export.log
 ```
 
-The final messages are similar to:
+The output is similar to:
 
 ```output
 Wrote expected probabilities to silero-vad-work/export/expected_probs.bin

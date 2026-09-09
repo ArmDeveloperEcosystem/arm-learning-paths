@@ -15,7 +15,7 @@ You'll deploy the 16 kHz Silero VAD model with ExecuTorch. The workflow quantize
 
 The application processes 512 audio samples every 32 ms. It keeps the long short-term memory (LSTM) hidden and cell state inside the ExecuTorch program between frames, then produces one speech probability for each frame.
 
-The validation clip follows two paths. The host uses it to generate reference probabilities, while the bare-metal application processes the same clip on the FVP. The final comparison verifies that both paths produce the same speech decisions.
+The host uses the validation clip to generate reference probabilities. The bare-metal application processes the same clip on the FVP. The final comparison verifies that both paths produce the same speech decisions.
 
 ![Three-lane workflow showing host preparation from the Silero model and source audio to a stateful PTE, virtual target execution from the embedded PTE and validation audio to an FVP log, and host verification that compares reference probabilities with the FVP result.#center](silero-vad-deployment-lanes.svg "Silero VAD workflow separated into prepare, run, and verify lanes")
 

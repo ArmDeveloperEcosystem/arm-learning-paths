@@ -32,7 +32,7 @@ The installed libraries provide the ExecuTorch runtime, portable operators, and 
 Configure the application with the exported model, validation audio, and a speech threshold of `0.55`. Select your host operating system:
 
 {{< tabpane code=true >}}
-  {{< tab header="Linux" language="shell" >}}
+  {{< tab header="Linux" language="bash" >}}
 cmake \
   -S examples/arm/silero_vad_example_ethos_u/runtime \
   -B silero-vad-work/app \
@@ -44,7 +44,7 @@ cmake \
   -DVAD_THRESHOLD=0.55 \
   -DPYTHON_EXECUTABLE="$(command -v python)"
   {{< /tab >}}
-  {{< tab header="macOS" language="shell" >}}
+  {{< tab header="macOS" language="bash" >}}
 cmake \
   -S examples/arm/silero_vad_example_ethos_u/runtime \
   -B silero-vad-work/app \
@@ -82,6 +82,8 @@ bash backends/arm/scripts/run_fvp.sh \
 ```
 
 The application prints one speech probability every 32 ms. Near the end, it reports a summary and stops the simulation:
+
+The output is similar to:
 
 ```output
 1 segments, 79 frames, 2.5s
