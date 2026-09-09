@@ -46,7 +46,7 @@ You need to install the following before building Cyclone DDS:
 
 - C and C++ compilers (such as GCC).
 - Git.
-- CMake see [How do I install CMake?](/install-guides/cmake/)). 
+- CMake, see the [CMake install guide](/install-guides/cmake/).
 - OpenSSL.
 
 For Ubuntu Linux, run the commands below. For other Linux distributions, use the package manager to install the software listed above.
@@ -60,11 +60,15 @@ sudo apt install -y gcc g++ git cmake libssl-dev
 
 You can install Cyclone DDS by building the source code.
 
-Clone the GitHub repository to create a build folder:
+{{% notice Note %}}
+The following commands use Cyclone DDS version 11.0.1. The same commands work with other versions. Replace the version in the `git clone` command with the tag for your version of choice. To find the latest version, see the [Cyclone DDS releases page](https://github.com/eclipse-cyclonedds/cyclonedds/releases).
+{{% /notice %}}
+
+Clone the GitHub repository at the tagged release to create a build folder:
 
 ```bash
 cd $HOME
-git clone https://github.com/eclipse-cyclonedds/cyclonedds.git
+git clone --branch 11.0.1 https://github.com/eclipse-cyclonedds/cyclonedds.git
 ```
 
 Once downloaded, you can build and install Cyclone DDS.
@@ -94,7 +98,7 @@ To verify the installation, you can run the `Hello World` example from the build
 
 Open two terminals and navigate to the `bin/` directory in each. 
 
-Run the commands shown below in each tab in each of your two terminals:
+Run the following commands, one set in each terminal:
 
 {{< tabpane code=true >}}
   {{< tab header="Publisher" language="bash">}}
