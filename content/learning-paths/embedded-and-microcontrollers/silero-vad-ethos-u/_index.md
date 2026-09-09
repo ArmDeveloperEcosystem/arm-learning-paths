@@ -13,7 +13,7 @@ learning_objectives:
     - Validate simulated speech probabilities against a host-generated reference.
 
 prerequisites:
-    - A Linux host using `x86_64` or `arm64`, or an Apple Silicon macOS host
+    - A Linux host using `x86_64` or `arm64`, or an Apple silicon macOS host
     - Basic familiarity with PyTorch models and command-line development tools
 
 # START generated_summary_faq
