@@ -42,7 +42,7 @@ dual-et: live dual-NPU pipeline started
 ```
 
 {{% notice Note %}}
-If the preview is grainy or monochrome, rebuild with both ISP overlays and the `isp@49046000` video endpoint, as described in [Build the dual-NPU application](/learning-paths/embedded-and-microcontrollers/alif-dual-npu-vision/build-application/).
+If the preview is grainy or monochrome, the application is displaying packed sensor data as RGB565. Confirm that the build includes both ISP overlays and that the selected video endpoint is `isp@49046000`. The native pipeline requests planar RGB888 output from the ISP before it creates the display preview and model inputs. 
 {{% /notice %}}
 
 ## Confirm both NPUs execute for each frame
