@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Build ExecuTorch for Cortex-M85
 
-You already have the exported model and validation audio. You'll package both into a bare-metal application and run it on a virtual Cortex-M85 and Ethos-U85 system.
+You already have the exported model and validation audio. You'll package both the model and audio into a bare-metal application and run the application on a virtual Cortex-M85 and Ethos-U85 system.
 
 Start by building ExecuTorch for Cortex-M85.
 
@@ -29,7 +29,9 @@ The installed libraries provide the ExecuTorch runtime, portable operators, and 
 
 ## Build the Silero VAD application
 
-Configure the application with the exported model, validation audio, and a speech threshold of `0.55`. Select your host operating system:
+Configure the application with the exported model, validation audio, and a speech threshold of `0.55`. 
+
+Select your host operating system:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux" language="bash" >}}
@@ -113,4 +115,4 @@ echo "Target artifacts verified."
 
 You've run the stateful Silero VAD model on a virtual Cortex-M85 and Ethos-U85 target.
 
-Next, inspect the speech decisions and compare them with the host reference.
+Next, you'll inspect the speech decisions and compare them with the host reference.

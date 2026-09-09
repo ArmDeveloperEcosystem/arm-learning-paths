@@ -105,4 +105,4 @@ The Vela output contains two subgraphs with no CPU operators: the main VAD netwo
 
 You've exported Silero VAD as a stateful ExecuTorch program and saved the host reference output.
 
-Next, build the bare-metal application and run it on the Corstone-320 FVP.
+Next, you'll build the bare-metal application and run it on the Corstone-320 FVP.

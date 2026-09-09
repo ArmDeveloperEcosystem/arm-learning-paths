@@ -19,7 +19,7 @@ The host uses the validation clip to generate reference probabilities. The bare-
 
 ![Three-lane workflow showing host preparation from the Silero model and source audio to a stateful PTE, virtual target execution from the embedded PTE and validation audio to an FVP log, and host verification that compares reference probabilities with the FVP result.#center](silero-vad-deployment-lanes.svg "Silero VAD workflow separated into prepare, run, and verify lanes")
 
-Use the FVP for functional validation. Its Ethos-U model is cycle accurate, but don't use its Cortex-M CPU model for CPU performance measurements.
+Use the FVP for functional validation. The FVP's Ethos-U model is cycle accurate, but don't use its Cortex-M CPU model for CPU performance measurements.
 
 ## Check your development machine
 
@@ -150,7 +150,7 @@ command -v arm-none-eabi-g++
 command -v FVP_Corstone_SSE-320
 ```
 
-The compiler resolves under `examples/arm/arm-scratch/`. On Linux, the FVP does too; on macOS, it resolves under the FVPs-on-Mac wrapper directory. If the compiler is missing, source `examples/arm/arm-scratch/setup_path.sh` again. If the FVP is missing on macOS, add the wrapper directory to `PATH`.
+The compiler resolves under `examples/arm/arm-scratch/`. On Linux, the FVP also resolves under this directory. On macOS, the FVP resolves under the FVPs-on-Mac wrapper directory. If the compiler is missing, source `examples/arm/arm-scratch/setup_path.sh` again. If the FVP is missing on macOS, add the wrapper directory to `PATH`.
 
 ## Download the model and sample audio
 
@@ -212,4 +212,4 @@ Use `calibration.wav` to calibrate quantization. The FVP will process the separa
 
 You've installed the pinned ExecuTorch source, prepared the Arm tools, and created the model inputs.
 
-Next, export the model as a quantized ExecuTorch program for Ethos-U85.
+Next, you'll export the model as a quantized ExecuTorch program for Ethos-U85.
