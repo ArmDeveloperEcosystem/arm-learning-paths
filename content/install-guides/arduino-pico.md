@@ -9,7 +9,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 15
-official_docs: https://docs.aws.amazon.com/greengrass/v2/developerguide/quick-installation.html
+official_docs: https://docs.arduino.cc/software/ide-v2
 prerequisites: Arduino IDE
 test_maintenance: true
 test_images:
