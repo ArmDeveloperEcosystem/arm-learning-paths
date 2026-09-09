@@ -1,24 +1,24 @@
 ---
 hide_from_navpane: true
-title: Set up an NVIDIA Jetson
+title: Set up an NVIDIA Jetson board with JetPack
 description: Prepare an NVIDIA Jetson device with JetPack and the dependencies required for Edge Impulse and AWS IoT Greengrass.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Set up an NVIDIA Jetson with JetPack
+## Prepare an NVIDIA Jetson board
 
-NVIDIA Jetson boards (Nano, Xavier, Orin) provide GPU-accelerated inference for Edge Impulse models. This section covers prerequisites, dependency installation, and the component configuration for running the Edge Impulse Linux Runner on a Jetson device with AWS IoT Greengrass.
+NVIDIA Jetson boards such as Nano, Xavier, and Orin provide GPU-accelerated inference for Edge Impulse models. You'll complete prerequisites, dependency installation, and the component configuration for running the Edge Impulse Linux Runner on a Jetson device with AWS IoT Greengrass.
 
 ### Prerequisites
 
 Before you begin, make sure you have:
 
-- NVIDIA Jetson board with a power supply
-- JetPack 5.x or 6.0 already flashed onto the device; if needed, follow the [NVIDIA Jetson flashing instructions](https://docs.nvidia.com/jetson/archives/r34.1/DeveloperGuide/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/flashing.html)
-- Network connection (Ethernet or Wi-Fi) and SSH access to the device
-- Optional USB camera for live inference; without a camera, the Edge Impulse Linux Runner uses a sample video file
+- An NVIDIA Jetson board with a power supply
+- JetPack 5.x or 6.0 [already flashed onto the device](https://docs.nvidia.com/jetson/archives/r34.1/DeveloperGuide/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/flashing.html)
+- A Network connection (Ethernet or Wi-Fi) and SSH access to the device
+- (Optional) A USB camera for live inference; without a camera, the Edge Impulse Linux Runner uses a sample video file
 
 ### Verify JetPack version
 
@@ -28,17 +28,17 @@ After booting the Jetson, confirm which JetPack version is installed:
 cat /etc/nv_tegra_release
 ```
 
-The expected result indicates L4T (Linux for Tegra) version 34.x or later for JetPack 5.x, or version 36.x for JetPack 6.0.
+The output should indicate L4T (Linux for Tegra) version 34.x or later for JetPack 5.x, or version 36.x for JetPack 6.0.
 
 ### Connect over SSH
 
-If you haven't already, connect to the Jetson from your computer. Replace the placeholder with the device's IP address:
+If you haven't already, connect to the Jetson from your local machine. Replace the placeholder with the device's IP address:
 
 ```bash
 ssh your-username@<your-jetson-ip-address>
 ```
 
-If you're not sure of the IP address, you can check your router's admin page for connected devices, or run `hostname -I` on the Jetson if you have a monitor connected.
+If you're not sure of the IP address, check your router's admin page for connected devices. If you have a monitor connected, run `hostname -I` on the Jetson.
 
 ### Install dependencies
 
@@ -50,7 +50,7 @@ sudo apt install -y curl unzip
 sudo apt install -y gcc g++ make build-essential nodejs sox gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-base gstreamer1.0-plugins-base-apps
 ```
 
-Greengrass Nucleus Classic is Java-based, so you also need a JDK:
+Greengrass Nucleus Classic is Java-based, so you also need to install a JDK:
 
 ```bash
 sudo apt install -y default-jdk
@@ -62,9 +62,9 @@ Install any available security updates:
 sudo apt upgrade -y
 ```
 
-### Verify the camera (optional)
+### (Optional) Verify the camera 
 
-If you have a USB camera connected, confirm the system detects it:
+If you have a USB camera connected, confirm that the system detects it:
 
 ```bash
 ls /dev/video*
@@ -78,17 +78,17 @@ The output is similar to:
 
 If nothing appears, check that the camera is plugged in securely and try a different USB port.
 
-### JetPack 6.x note on GPU access
-
-If your device is running JetPack 6.x or later, the `render` group is required for the Greengrass service user to access the GPU. Both JSON configurations already include `render` in the `ei_ggc_user_groups` field. If you're running JetPack 5.x, you can remove `render` from that field, though leaving it in place doesn't cause issues.
-
 ### Save the component configuration
 
-The JSON configurations below set up the Edge Impulse Greengrass component for the Jetson. Choose the configuration that matches your setup and save it to a text file on your local machine. You'll paste it into the Greengrass deployment configuration in a later step.
+The following JSON configurations set up the Edge Impulse Greengrass component for the Jetson. Choose the configuration that matches your setup and save it to a text file on your local machine. You'll paste it into the Greengrass deployment configuration in a later step.
+
+{{% notice Note %}}
+If your device is running JetPack 6.x or later, the `render` group is required for the Greengrass service user to access the GPU. Both JSON configurations already include `render` in the `ei_ggc_user_groups` field. If you're running JetPack 5.x, you can remove `render` from that field, though leaving it in place doesn't cause issues.
+{{% /notice %}}
 
 #### With a USB camera
 
-This configuration captures live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Edge Impulse Linux Runner runs as a background service.
+This configuration captures live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant. `--silent` suppresses console output because the Edge Impulse Linux Runner runs as a background service:
 
 ```json
 {
@@ -126,7 +126,7 @@ This configuration captures live video from `/dev/video0` at 640 × 480 resoluti
 
 #### Without a camera
 
-This configuration reads inference input from a local sample video file. The `ei_local_model_file` field points to a pre-downloaded model, and `ei_shutdown_behavior` is set to `wait_on_restart` so the Edge Impulse Linux Runner pauses after the video ends and waits for a restart command.
+This configuration reads inference input from a local sample video file. The `ei_local_model_file` field points to a pre-downloaded model. `ei_shutdown_behavior` is set to `wait_on_restart` so that the Edge Impulse Linux Runner pauses after the video ends and waits for a restart command:
 
 ```json
 {
@@ -166,8 +166,8 @@ This configuration reads inference input from a local sample video file. The `ei
 When running a model compiled specifically for a Jetson GPU, the first invocation can take 2-3 minutes while the model loads into GPU memory. Subsequent invocations are much faster.
 {{% /notice %}}
 
-## What you've accomplished
+## What you've accomplished and what's next
 
 You've prepared your NVIDIA Jetson, installed its dependencies, and saved the component configuration for your selected input source.
 
-Your NVIDIA Jetson is ready. Return to the [hardware setup page](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/hardwaresetup/) and continue to the next section to set up your Edge Impulse project.
+Your NVIDIA Jetson is ready. Next, you'll [set up the Edge Impulse project](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/edgeimpulseprojectbuild/). 
