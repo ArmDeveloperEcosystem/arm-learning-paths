@@ -16,7 +16,8 @@ Power off the E8 DevKit before changing camera or display connections. Then, to 
 5. Move the boot switch to the SE position before flashing.
 
 {{% notice Note %}}
-The supplied overlay targets the J16 selfie-camera connection. J22 uses a different I2C address and device-tree route.
+- The supplied overlay targets the J16 selfie-camera connection. J22 uses a different I2C address and device-tree route. Don't combine a J16 overlay with a camera connected to J22.
+- If the camera reports chip ID `0000` or I2C error `-5`, power off the board and check the camera connection. The supplied overlay expects the MT9M114 on J16 at the selfie-camera I2C address. Reseat the flex cable and confirm that its contacts face the correct direction.
 {{% /notice %}}
 
 ## Install the host tools
@@ -57,6 +58,24 @@ ninja --version
 ```
 
 If available, both commands print a version number.
+
+{{% notice Note %}}
+
+- If CMake reports that it can't find `ninja`, install it in the active virtual environment:
+
+  ```bash
+  source $HOME/alif-dual-npu/.venv/bin/activate
+  python -m pip install ninja
+  ```
+  Run the build again with `--pristine`.
+
+- If the Alif flash runner can't import `fdt`, activate the same environment and install the missing module:
+
+  ```bash
+  source $HOME/alif-dual-npu/.venv/bin/activate
+  python -m pip install fdt
+  ```
+{{% /notice %}}
 
 ## Create the west workspace
 

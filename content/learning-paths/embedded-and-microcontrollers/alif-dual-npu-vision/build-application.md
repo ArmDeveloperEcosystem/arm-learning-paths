@@ -24,6 +24,10 @@ MODULES="$MODULES;$PWD/modules/lib/executorch;$PWD/modules/ethos-u-core-driver-s
 
 The overlay order is important. The final `isp_route.overlay` file disables the CPI memory endpoint and routes camera frames exclusively through the ISP.
 
+{{% notice Note %}}
+A missing board overlay can prevent the display power and clock configuration from being applied before the Zephyr display driver starts. Keep `isp_route.overlay` last in the device-tree overlay list, and keep the ISP configuration fragments in `vision.conf`. Otherwise, the ISP can report that it has no empty video buffer.
+{{% /notice %}}
+
 ## Build the firmware
 
 Run the complete build command:
@@ -60,6 +64,8 @@ The files have the following roles:
 | `model_assets.bin` | U85 PTE, U55 PTE, startup image, and ImageNet labels |
 
 You can use the checked-in PTE files to build and flash the application without installing TensorFlow, TOSA Tools, or Vela. CMake packages those files directly into `model_assets.bin`.
+
+If model preparation reports an allocation failure, confirm that the workspace is at the validated SDK revision and run a pristine build. If you regenerated the PTE files, use the supplied scripts, model inputs, and `ensemble_vela.ini` file; otherwise, restore the checked-in PTE files.
 
 ## (Optional) Regenerate the PTE models
 

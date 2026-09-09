@@ -41,6 +41,10 @@ The log confirms the transition:
 dual-et: live dual-NPU pipeline started
 ```
 
+{{% notice Note %}}
+If the preview is grainy or monochrome, rebuild with both ISP overlays and the `isp@49046000` video endpoint, as described in [Build the dual-NPU application](/learning-paths/embedded-and-microcontrollers/alif-dual-npu-vision/build-application/).
+{{% /notice %}}
+
 ## Confirm both NPUs execute for each frame
 
 The coordinator wakes both Zephyr worker threads before waiting for their completion. Every tenth frame, the application prints the current and average timing values:
@@ -65,6 +69,12 @@ dual-et: live frame=30 IRQs=.../...
 ```
 
 Changing the scene changes the preview, tensor checksums, and detection results. If the image and results remain fixed, the application is still using the startup test input instead of live frames.
+
+{{% notice Note %}}
+If the startup test completes but the live result doesn't change, confirm that `dual-et: live dual-NPU pipeline started` appears and that the live-frame messages and NPU interrupt counters continue to increase. 
+
+If capture errors repeat, power-cycle the board, flash the package again, and recheck the camera connector and overlay order.
+{{% /notice %}}
 
 ## What you've accomplished
 
