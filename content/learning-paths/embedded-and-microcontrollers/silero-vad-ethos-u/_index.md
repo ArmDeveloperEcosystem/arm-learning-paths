@@ -7,13 +7,13 @@ minutes_to_complete: 45
 who_is_this_for: This is an introductory topic for embedded machine learning developers who want to evaluate streaming audio inference with ExecuTorch on Arm Ethos-U.
 
 learning_objectives:
-    - Set up ExecuTorch and the Arm development tools for Corstone-320 and Ethos-U85
-    - Export and quantize a stateful Silero VAD model as a .pte file
-    - Build and run a bare-metal voice activity detection application on a Corstone-320 Fixed Virtual Platform
-    - Validate simulated speech probabilities against a host-generated reference
+    - Set up ExecuTorch and the Arm development tools for Corstone-320 and Ethos-U85.
+    - Export and quantize a stateful Silero VAD model as a .pte file.
+    - Build and run a bare-metal voice activity detection application on a Corstone-320 Fixed Virtual Platform.
+    - Validate simulated speech probabilities against a host-generated reference.
 
 prerequisites:
-    - A Linux host using x86_64 or arm64, or an Apple Silicon macOS host
+    - A Linux host using `x86_64` or `arm64`, or an Apple Silicon macOS host
     - Basic familiarity with PyTorch models and command-line development tools
 
 # START generated_summary_faq
