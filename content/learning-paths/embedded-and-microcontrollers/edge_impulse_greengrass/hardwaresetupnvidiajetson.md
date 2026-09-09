@@ -1,6 +1,6 @@
 ---
 hide_from_navpane: true
-title: Set up an NVIDIA Jetson with JetPack
+title: Set up an NVIDIA Jetson board with JetPack
 description: Prepare an NVIDIA Jetson device with JetPack and the dependencies required for Edge Impulse and AWS IoT Greengrass.
 
 ### FIXED, DO NOT MODIFY
