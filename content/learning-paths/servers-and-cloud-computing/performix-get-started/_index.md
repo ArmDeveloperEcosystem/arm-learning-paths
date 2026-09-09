@@ -78,7 +78,7 @@ operatingsystems:
     - Linux
 tools_software_languages:
     - Arm Performix
-    - C++
+    - CPP
     - GCC
 
 further_reading:
