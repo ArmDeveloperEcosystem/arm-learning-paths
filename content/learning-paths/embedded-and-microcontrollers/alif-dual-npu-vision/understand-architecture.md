@@ -31,7 +31,7 @@ idle or lower-power state earlier. Measure energy on the final hardware to
 quantify the saving for a specific duty cycle.
 
 The application uses the native Zephyr drivers in the Alif SDK `main` branch.
-The MT9M114, ISP, and MW405 changes were merged through pull request 879. The
+The MT9M114, image signal processor (ISP), and MW405 changes were merged through pull request 879. The
 following diagram extends the original multi-NPU prototype with the live
 camera, ISP, and display pipeline used by this demo.
 

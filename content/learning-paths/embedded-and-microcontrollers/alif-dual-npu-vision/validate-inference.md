@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Check the startup test
 
-The application validates the inference path before it consumes camera frames. This separates model or NPU failures from camera and ISP failures.
+The application validates the inference path before it consumes camera frames. This separates model or NPU failures from camera and image signal processor (ISP) failures.
 
 After reset, the display shows the bundled Grace Hopper image. The U55 model draws one green face box. The U85 result identifies an ImageNet class such as `ACADEMIC GOWN`.
 

@@ -86,7 +86,7 @@ branch.
 
 The dual-NPU application is maintained separately on the
 `dual-npu-main-integration` branch, which also includes the support for MT9M114,
-ISP, and MW405:
+image signal processor, and MW405:
 
 ```bash
 cd $HOME/alif-dual-npu
@@ -119,7 +119,7 @@ git -C modules/lib/executorch submodule update --init --recursive
 You'll use the multi-variant support merged into the Ethos-U core driver
 `main` branch. This support allows one Cortex-M55 to manage the U55 and U85
 through one driver registry, avoiding the system power overhead of assigning
-each NPU to a separate MCU. 
+each NPU to a separate microcontroller unit. 
 
 Clone the current `main` branch:
 
