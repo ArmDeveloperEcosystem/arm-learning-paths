@@ -2,10 +2,6 @@
 title: Deploy Silero VAD on Arm Ethos-U with ExecuTorch
 description: Export a stateful Silero voice activity detection model with ExecuTorch, run it on an Arm Ethos-U85 Fixed Virtual Platform, and validate its output.
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 45
 
 who_is_this_for: This is an introductory topic for embedded machine learning developers who want to evaluate streaming audio inference with ExecuTorch on Arm Ethos-U.

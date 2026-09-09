@@ -7,7 +7,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## 1. Inspect the streaming decisions
+## Inspect the streaming decisions
 
 The application sends one `PROB` line over the simulated UART for every 512-sample frame. It also merges consecutive speech frames into `SEGMENT` lines.
 
@@ -33,11 +33,11 @@ SEGMENT 0.224 2.048 speech
 
 Each `PROB` line contains the frame timestamp in seconds, the probability of speech, and the decision produced with a threshold of `0.55`. Your probability values and speech segments depend on the validation audio.
 
-The validation question is simple: did the host and FVP label every frame the same way? In this run, both found one speech segment from `0.224` to `2.048` seconds, with no decision mismatches.
+The validation question is: Did the host and FVP label every frame the same way? In this run, both the host and the FVP found one speech segment from `0.224` to `2.048` seconds, with no decision mismatches.
 
 ![Two matching timelines for the same 2.5-second audio clip. The host reference and FVP output both show silence, speech from 0.224 to 2.048 seconds, then silence. All 79 frame decisions match.#center](silero-vad-validation-result.svg "Host and FVP produce the same speech decisions")
 
-## 2. Compare the host and FVP results
+## Compare the host and FVP results
 
 Compare the saved host reference with the probabilities in the FVP serial log:
 
@@ -51,7 +51,7 @@ python3 examples/arm/silero_vad_example_ethos_u/runtime/compare_vad_probs.py \
   --mean-atol 0.02
 ```
 
-The expected output is similar to:
+The output is similar to:
 
 ```output
 Compared 79 probability values
@@ -60,10 +60,10 @@ Mean abs error: 0.018459
 Threshold mismatches at 0.550: 0
 ```
 
-The comparison confirms that the host and FVP produced the same number of finite probabilities, the numerical differences stay within tolerance, and every frame has the same speech or silence decision.
+The comparison confirms that the host and FVP produced the same number of finite probabilities, and the numerical differences stay within tolerance. It also confirms that every frame has the same speech or silence decision.
 
 ## What you've accomplished
 
-You have completed an end-to-end streaming audio workflow for Arm Ethos-U. You exported Silero VAD with model-owned recurrent state, built a bare-metal Cortex-M85 application, ran it on the Corstone-320 FVP, and validated its speech decisions against a host reference.
+You've completed an end-to-end streaming audio workflow for Arm Ethos-U. You exported Silero VAD with model-owned recurrent state and built a bare-metal Cortex-M85 application. You ran the application on the Corstone-320 FVP, and validated its speech decisions against a host reference.
 
-You can now replace the example audio with another 16 kHz mono, 16-bit PCM WAV file or use the runtime integration as a starting point for an Ethos-U85 device.
+You can now replace the example audio with another 16 kHz mono, 16-bit PCM WAV file, or use the runtime integration as a starting point for an Ethos-U85 device.
