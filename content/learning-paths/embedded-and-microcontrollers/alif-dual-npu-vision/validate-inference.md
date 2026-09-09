@@ -5,11 +5,11 @@ weight: 6
 layout: "learningpathall"
 ---
 
-The application validates the inference path before it consumes camera frames. This separates model or NPU failures from camera and ISP failures.
-
 ## Check the startup test
 
-After reset, the display shows the bundled Grace Hopper image. The U55 model draws one green face box, and the U85 result identifies an ImageNet class such as `ACADEMIC GOWN`.
+The application validates the inference path before it consumes camera frames. This separates model or NPU failures from camera and ISP failures.
+
+After reset, the display shows the bundled Grace Hopper image. The U55 model draws one green face box. The U85 result identifies an ImageNet class such as `ACADEMIC GOWN`.
 
 The U4 log includes model preparation and isolated preflight messages similar to:
 
@@ -26,7 +26,7 @@ The exact inference times and memory addresses vary between builds.
 
 ## Check the live camera UI
 
-After five seconds, the application clears the test image and starts the MT9M114 stream. Confirm these results:
+After five seconds, the application clears the test image and starts the MT9M114 stream. Confirm the following results:
 
 - The 480 x 352 live preview appears near the center of the MW405 display.
 - The preview is in color and updates when you move the camera.
@@ -66,7 +66,9 @@ dual-et: live frame=30 IRQs=.../...
 
 Changing the scene changes the preview, tensor checksums, and detection results. If the image and results remain fixed, the application is still using the startup test input instead of live frames.
 
-You have now built, flashed, and validated a Zephyr application that drives
+## What you've accomplished
+
+You've now built, flashed, and validated a Zephyr application that drives
 two Ethos-U NPUs with separate persistent worker threads on one Cortex-M55.
-This design runs both ML workloads without adding a second MCU and its
+This design runs both ML workloads without adding a second microcontroller unit and its
 associated system power overhead.

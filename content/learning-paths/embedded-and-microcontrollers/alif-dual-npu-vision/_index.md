@@ -1,9 +1,5 @@
 ---
 title: Run parallel vision inference on an Alif Ensemble E8 with Zephyr
-
-draft: true
-cascade:
-    draft: true
     
 description: Build a power-conscious live camera demo that drives Ethos-U55 and Ethos-U85 from one Cortex-M55 MCU.
 
@@ -12,14 +8,14 @@ minutes_to_complete: 90
 who_is_this_for: This is an advanced topic for embedded ML developers who want to run two ExecuTorch models concurrently on separate Ethos-U NPUs under Zephyr.
 
 learning_objectives:
-    - Explain how one MCU can coordinate two NPUs while avoiding the power and system cost of a second MCU or application processor
-    - Configure an Alif Ensemble E8 DevKit for native Zephyr camera, ISP, display, and dual-NPU operation
-    - Build, package, and flash an ExecuTorch application that targets Ethos-U55 and Ethos-U85
-    - Validate live camera capture, model results, and parallel inference timing
+    - Identify how one MCU can coordinate two NPUs while avoiding the power and system cost of a second MCU or application processor.
+    - Configure an Alif Ensemble E8 DevKit for native Zephyr camera, ISP, display, and dual-NPU operation.
+    - Build, package, and flash an ExecuTorch application that targets Ethos-U55 and Ethos-U85.
+    - Validate live camera capture, model results, and parallel inference timing.
 
 prerequisites:
-    - Experience with C/C++, embedded systems, and Zephyr build concepts
-    - A development machine running macOS on Apple Silicon with Homebrew and the Xcode Command Line Tools installed
+    - Experience with C or C++, embedded systems, and Zephyr build concepts
+    - A development machine running macOS on Apple silicon with Homebrew and the Xcode Command Line Tools installed
     - An [Alif Ensemble E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) with an MT9M114 camera connected to J16 and an MW405 display
     - Alif SEROM 1.105.65 and SERAM 1.110.0 installed on the board
     - Alif SEToolkit 1.10 installed on the development machine

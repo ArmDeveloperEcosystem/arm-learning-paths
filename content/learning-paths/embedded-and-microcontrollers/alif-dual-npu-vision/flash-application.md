@@ -5,9 +5,9 @@ weight: 5
 layout: "learningpathall"
 ---
 
-The Alif boot flow uses a table of contents to load and start each processor image. The sample provides a SEToolkit JSON file that assigns the application and model payload to their validated MRAM addresses.
-
 ## Stage the images
+
+The Alif boot flow uses a table of contents to load and start each processor image. The sample provides a SEToolkit JSON file that assigns the application and model payload to their validated MRAM addresses.
 
 Set `ALIF_SE_TOOLS_DIR` to your SEToolkit 1.10 application directory. This example uses the macOS package name:
 
@@ -49,7 +49,7 @@ cd "$ALIF_SE_TOOLS_DIR"
 ./app-write-mram -p
 ```
 
-Wait until `app-write-mram` reports that the write completed. Do not reset or disconnect the board during this operation.
+Wait until `app-write-mram` reports that the write completed. Don't reset or disconnect the board during this operation.
 
 ## Boot the application
 
@@ -60,5 +60,8 @@ The secure-enclave log shows entries for `HP_APP` and `U85MOD`. The U4 log start
 ```output
 *** dual ExecuTorch parallel SSD(U55) + MobileNetV2(U85) ***
 ```
+## What you've accomplished and what's next
 
-The application is now ready to run the startup test and live camera pipeline.
+You've packaged and flashed the dual-NPU application. 
+
+Next, you'll run the startup test and live camera pipeline.
