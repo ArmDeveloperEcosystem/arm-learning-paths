@@ -69,8 +69,8 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Performance and Architecture
 platforms:
-  - AWS
-  - Google Cloud
+  - AWS Graviton
+  - Google Axion
 armips:
     - Neoverse
 tools_software_languages:

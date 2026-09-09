@@ -70,7 +70,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Performance and Architecture
 platforms:
-  - Microsoft Azure
+  - Microsoft Azure Cobalt
 armips:
     - Neoverse
 tools_software_languages: 

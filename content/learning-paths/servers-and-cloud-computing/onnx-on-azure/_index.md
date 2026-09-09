@@ -24,7 +24,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: ML
 platforms:
-  - Microsoft Azure
+  - Microsoft Azure Cobalt
 
 armips:
     - Neoverse

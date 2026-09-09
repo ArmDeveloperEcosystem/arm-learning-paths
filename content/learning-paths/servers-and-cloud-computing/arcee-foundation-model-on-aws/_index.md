@@ -76,7 +76,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: ML
 platforms:
-  - AWS
+  - AWS Graviton
 armips:
     - Neoverse
 tools_software_languages:
