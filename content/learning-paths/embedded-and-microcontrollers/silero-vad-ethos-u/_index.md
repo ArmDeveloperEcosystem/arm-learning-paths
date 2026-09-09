@@ -8,8 +8,8 @@ who_is_this_for: This is an introductory topic for embedded machine learning dev
 
 learning_objectives:
     - Set up ExecuTorch and the Arm development tools for Corstone-320 and Ethos-U85.
-    - Export and quantize a stateful Silero VAD model as a .pte file.
-    - Build and run a bare-metal voice activity detection application on a Corstone-320 Fixed Virtual Platform.
+    - Export and quantize a stateful Silero voice activity detection (VAD) model as a .pte file.
+    - Build and run a bare-metal voice activity detection application on a Corstone-320 Fixed Virtual Platform (FVP).
     - Validate simulated speech probabilities against a host-generated reference.
 
 prerequisites:
@@ -31,7 +31,7 @@ generated_summary_faq:
   faq_generated_at: '2026-09-09T16:42:25Z'
   faq_source_hash: f56e6a716c01c38d2eb7f19f379804a0bf8d1f3faac81c75121ddb3470cfb799
   summary: >-
-    You'll deploy the stateful Silero voice activity detection model on an Arm Ethos-U85 virtual target.
+    You'll deploy the stateful Silero VAD model on an Arm Ethos-U85 virtual target.
     First, you'll prepare ExecuTorch, the model, and audio clips. Then, you'll build host quantized operators,
     export a `.pte` model, and create a host reference. Finally, you'll package the model and validation clip
     into a Cortex-M85 application, run it on the Corstone-320 FVP, and compare its speech decisions with
