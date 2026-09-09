@@ -33,7 +33,7 @@ the MT9M114, ISP, and MW405 changes were merged through pull request 879. The
 following diagram extends the original multi-NPU prototype with the live
 camera, ISP, and display pipeline used by this demo.
 
-![System diagram showing the MT9M114 camera and ISP feeding parallel U55 and U85 ExecuTorch workers before results are composed on the MW405 display.](dual-npu-system.svg)
+![System diagram showing the MT9M114 camera and ISP feeding parallel U55 and U85 ExecuTorch workers before results are composed on the MW405 display.#center](dual-npu-system.svg "Dual-NPU live vision data flow")
 
 ## Separate the hardware responsibilities
 
@@ -115,7 +115,7 @@ These measurements isolate delegated execution from camera capture and UART outp
 
 The application separates persistent artifacts, CPU-private state, display and video buffers, and U85-visible working memory.
 
-![Memory diagram showing models and firmware in MRAM, U55 state in HP DTCM, U55 temporary storage in SRAM0, and the display, U85 working memory, and camera buffers in SRAM1.](dual-npu-memory-layout.svg)
+![Memory diagram showing models and firmware in MRAM, U55 state in HP DTCM, U55 temporary storage in SRAM0, and the display, U85 working memory, and camera buffers in SRAM1.#center](dual-npu-memory-layout.svg "Memory placement for the dual-NPU application")
 
 ### Persistent MRAM payload
 
@@ -123,13 +123,13 @@ SEToolKit writes `model_assets.bin` at `0x80008000` and the execute-in-place Zep
 
 | Address range | Size | Contents |
 | --- | ---: | --- |
-| `0x80008000`-`0x8035751F` | 3,470,624 bytes | Ethos-U85 MobileNetV2 PTE |
-| `0x80357520`-`0x8039FCDF` | 296,896 bytes | Ethos-U55 SSD-Slim PTE |
-| `0x8039FCE0`-`0x803BAD15` | 110,646 bytes | Grace Hopper startup image |
-| `0x803BAD16`-`0x803BD60D` | 10,488 bytes | ImageNet class labels |
+| `0x80008000`-`0x8035816F` | 3,473,776 bytes | Ethos-U85 MobileNetV2 PTE |
+| `0x80358170`-`0x803A1ACF` | 301,408 bytes | Ethos-U55 SSD-Slim PTE |
+| `0x803A1AD0`-`0x803BCB05` | 110,646 bytes | Grace Hopper startup image |
+| `0x803BCB06`-`0x803BF3FD` | 10,488 bytes | ImageNet class labels |
 | From `0x80400000` | Build-dependent | RTSS-HP Zephyr firmware |
 
-The combined `model_assets.bin` payload is 3,888,654 bytes. CMake packs both PTE files, the startup image, and the labels in this order, then generates a header containing the artifact sizes. Changing a model causes CMake to reconfigure so the compiled offsets cannot silently disagree with the payload.
+The combined `model_assets.bin` payload is 3,896,318 bytes. CMake packs both PTE files, the startup image, and the labels in this order, then generates a header containing the artifact sizes. Changing a model causes CMake to reconfigure so the compiled offsets cannot silently disagree with the payload.
 
 ### HP DTCM
 
