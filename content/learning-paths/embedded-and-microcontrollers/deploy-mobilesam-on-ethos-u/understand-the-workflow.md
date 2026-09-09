@@ -27,7 +27,7 @@ The default image tensor has shape `[1, 3, 448, 448]`. The model produces one ma
 
 ## Understand the fixed-prompt contract
 
-The exported `.pte` accepts an image tensor as its only runtime input. The point prompt is part of the exported graph, so changing the image doesn't require another export. Changing the point coordinates does require another export.
+The exported `.pte` accepts an image tensor as its only runtime input. The point prompt is part of the exported graph, so changing the image doesn't require another export, but it does require rebuilding the bare-metal application. The fixed coordinates must still identify the intended object in the resized and padded image. Changing the point coordinates requires another export.
 
 The example uses `multimask_output=False` and keeps mask thresholding outside the model. This arrangement focuses the target graph on the MobileSAM image encoder and mask decoder while keeping target-side post-processing small.
 

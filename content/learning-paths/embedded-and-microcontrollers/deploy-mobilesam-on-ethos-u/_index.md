@@ -7,7 +7,7 @@ cascade:
 
 description: Export, deploy, and validate a quantized MobileSAM prompt segmentation model on an Arm Ethos-U85 Fixed Virtual Platform using ExecuTorch.
 
-minutes_to_complete: 90
+minutes_to_complete: 45
 
 who_is_this_for: This Learning Path is for embedded machine learning developers who want to evaluate transformer-based image segmentation on an Arm Ethos-U85 NPU with ExecuTorch.
 
@@ -19,10 +19,7 @@ learning_objectives:
 
 prerequisites:
     - A Linux development machine or an Apple silicon Mac
-    - Python 3.12, Git, CMake, and a C++ build tool such as Ninja
     - Familiarity with PyTorch model export and embedded cross-compilation
-    - Internet access to download ExecuTorch dependencies, Arm development tools, the pinned MobileSAM source, and its checkpoint
-    - On macOS, Docker Desktop and the [FVPs-on-Mac wrapper](https://github.com/Arm-Examples/FVPs-on-Mac)
 
 author: Usamah Zaheer
 
@@ -31,7 +28,7 @@ rerun_summary: false
 rerun_faqs: false
 
 ### Tags
-skilllevels: Advanced
+skilllevels: Introductory
 subjects: ML
 armips:
     - Ethos-U
