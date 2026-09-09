@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Prepare an NVIDIA Jetson board
 
-NVIDIA Jetson boards (Nano, Xavier, Orin) provide GPU-accelerated inference for Edge Impulse models. You'll complete prerequisites, dependency installation, and the component configuration for running the Edge Impulse Linux Runner on a Jetson device with AWS IoT Greengrass.
+NVIDIA Jetson boards such as Nano, Xavier, and Orin provide GPU-accelerated inference for Edge Impulse models. You'll complete prerequisites, dependency installation, and the component configuration for running the Edge Impulse Linux Runner on a Jetson device with AWS IoT Greengrass.
 
 ### Prerequisites
 
@@ -17,8 +17,8 @@ Before you begin, make sure you have:
 
 - An NVIDIA Jetson board with a power supply
 - JetPack 5.x or 6.0 [already flashed onto the device](https://docs.nvidia.com/jetson/archives/r34.1/DeveloperGuide/index.html#page/Tegra%20Linux%20Driver%20Package%20Development%20Guide/flashing.html)
-- Network connection (Ethernet or Wi-Fi) and SSH access to the device
-- Optional USB camera for live inference; without a camera, the Edge Impulse Linux Runner uses a sample video file
+- A Network connection (Ethernet or Wi-Fi) and SSH access to the device
+- (Optional) A USB camera for live inference; without a camera, the Edge Impulse Linux Runner uses a sample video file
 
 ### Verify JetPack version
 
@@ -88,7 +88,7 @@ If your device is running JetPack 6.x or later, the `render` group is required f
 
 #### With a USB camera
 
-This configuration captures live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output because the Edge Impulse Linux Runner runs as a background service:
+This configuration captures live video from `/dev/video0` at 640 × 480 resolution. The `--force-variant float32` flag selects the float32 model variant. `--silent` suppresses console output because the Edge Impulse Linux Runner runs as a background service:
 
 ```json
 {

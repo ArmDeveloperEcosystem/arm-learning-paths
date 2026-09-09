@@ -64,7 +64,7 @@ To apply the device-specific configuration:
 
     ![Configuration to merge dialog showing the JSON configuration pasted into the text box#center](./images/gg_create_deployment_5.png "Paste the device-specific configuration")
 
-    The ability to customize the configuration per deployment is one of the key benefits of Greengrass components. You can deploy the same component to different devices while adjusting settings like `device_name` or `gst_args` for each target's specific hardware.
+    The ability to customize the configuration per deployment is one of the key benefits of Greengrass components. You can deploy the same component to different devices while adjusting settings such as `device_name` or `gst_args` for each target's specific hardware.
 
 2. Continue selecting **Next** through the remaining pages until you reach the review page.
 3. Select **Deploy**:
@@ -81,7 +81,9 @@ To monitor progress, SSH into your edge device and tail the component logs:
 sudo tail -f /greengrass/v2/logs/EdgeImpulseLinuxEdge Impulse Linux RunnerServiceComponent.log
 ```
 
-The log shows the installation activity during the component setup phase. After the install completes, the Edge Impulse Linux Runner writes its own log file. To watch running inference output, run:
+The log shows the installation activity during the component setup phase. After the install completes, the Edge Impulse Linux Runner writes its own log file. 
+
+To watch running inference output, run:
 
 ```bash
 sudo tail -f /tmp/ei*log

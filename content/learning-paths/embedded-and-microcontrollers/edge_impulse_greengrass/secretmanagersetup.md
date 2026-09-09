@@ -15,7 +15,7 @@ The component expects two specific values:
 - A secret with the ID `EI_API_KEY` (the name that you give the secret in Secrets Manager).
 - A key-value pair inside that secret where the key is `ei_api_key` and the value is your actual API key.
 
-These names must match the `ei_sm_secret_id` and `ei_sm_secret_name` fields in the component configuration JSON you saved during hardware setup.
+These names must match the `ei_sm_secret_id` and `ei_sm_secret_name` fields in the component configuration JSON that you saved during hardware setup.
 
 ## Create the secret
 

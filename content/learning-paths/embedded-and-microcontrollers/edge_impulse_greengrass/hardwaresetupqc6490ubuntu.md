@@ -15,10 +15,10 @@ The Qualcomm Dragonwing QC6490 is an Arm-based platform that supports both the o
 
 Before you begin, make sure you have:
 
-- Qualcomm Dragonwing QC6490 development board with a power supply
+- A Qualcomm Dragonwing QC6490 development board with a power supply
 - Ubuntu flashed onto the device according to the [Qualcomm QC6490 quick start guide](https://docs.qualcomm.com/doc/80-90441-1/topic/qsg-landing-page.html)
-- Network connection (Ethernet or Wi-Fi) and SSH access to the device
-- Optional on-board Qualcomm camera module or USB camera for live inference; without a camera, the Edge Impulse Linux Runner uses a sample video file
+- A Network connection (Ethernet or Wi-Fi) and SSH access to the device
+- (Optional) An on-board Qualcomm camera module or USB camera for live inference; without a camera, the Edge Impulse Linux Runner uses a sample video file
 
 ### Connect over SSH
 
@@ -88,7 +88,7 @@ The following JSON configurations set up the Edge Impulse Greengrass component f
 
 #### With the on-board Qualcomm camera
 
-This configuration uses the `qtiqmmfsrc` GStreamer element to capture video from the on-board camera at 1280 × 720 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output because the Edge Impulse Linux Runner runs as a background service:
+This configuration uses the `qtiqmmfsrc` GStreamer element to capture video from the on-board camera at 1280 × 720 resolution. The `--force-variant float32` flag selects the float32 model variant. `--silent` suppresses console output because the Edge Impulse Linux Runner runs as a background service:
 
 ```json
 {

@@ -62,7 +62,7 @@ Open `EdgeImpulseLinuxEdge Impulse Linux RunnerServiceComponent.yaml` from the c
 
 ### Default configuration reference
 
-The recipe file includes a default configuration JSON block. You don't need to modify these defaults for the Learning Path — they're overridden at deployment time by the device-specific JSON you saved during hardware setup. However, understanding each field is useful for troubleshooting and customization.
+The recipe file includes a default configuration JSON block. You don't need to modify these defaults for the Learning Path — they're overridden at deployment time by the device-specific JSON that you saved during hardware setup. However, understanding each field is useful for troubleshooting and customization.
 
 ```json
 {
@@ -96,8 +96,6 @@ The recipe file includes a default configuration JSON block. You don't need to m
 }
 ```
 
-### Configuration field reference
-
 The following table describes each configuration field:
 
 | Field | Description |
@@ -113,7 +111,7 @@ The following table describes each configuration field:
 | `iotcore_backoff` | Number of inference results to skip between MQTT publications. Controls publication frequency and cost. Set to `-1` to publish every result, or a positive number to throttle. |
 | `iotcore_qos` | MQTT Quality of Service level. Leave as `1`. |
 | `ei_bindir` | Installation directory for the Edge Impulse CLI tools. Leave as default. |
-| `ei_sm_secret_id` | Secret ID in AWS Secrets Manager that holds the Edge Impulse API key. The ID must match the secret name you created, `EI_API_KEY`. |
+| `ei_sm_secret_id` | ID of the secret in AWS Secrets Manager that holds the Edge Impulse API key. The ID must match the secret name that you created, `EI_API_KEY`. |
 | `ei_sm_secret_name` | Key name within the Secrets Manager secret. The name must match the key you created, `ei_api_key`. |
 | `ei_ggc_user_groups` | Linux groups that include the Greengrass service user, `ggc_user`. For JetPack 6.x and later, add `render` to the list for GPU access. |
 | `install_kvssink` | Set to `yes` to build and install the KVS sink GStreamer plugin. The default is `no`. |
@@ -139,7 +137,7 @@ To register the component:
 1. Navigate to **AWS IoT Core** > **Greengrass** > **Components**.
 2. Select **Create component**. 
 3. Select **Enter recipe as YAML** as the input method.
-4. Clear the default "hello world" YAML from the text box.
+4. Clear the default `hello world` YAML from the text box.
 5. Copy and paste the entire contents of your edited `EdgeImpulseLinuxEdge Impulse Linux RunnerServiceComponent.yaml` file.
 6. Select **Create component**.
 

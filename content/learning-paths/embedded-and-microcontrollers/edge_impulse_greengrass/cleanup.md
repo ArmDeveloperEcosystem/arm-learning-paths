@@ -10,7 +10,7 @@ layout: learningpathall
 
 ## Clean up AWS resources that you've finished using
 
-After completing this Learning Path, clean up the AWS resources you created to avoid ongoing costs. 
+After completing this Learning Path, clean up the AWS resources that you created to avoid ongoing costs. 
 
 ### Remove the Greengrass deployment
 
@@ -36,8 +36,8 @@ To delete the Greengrass core device:
 To delete the S3 bucket:
 
 1. Navigate to **S3** in the AWS Console. 
-2. Select the bucket you created for the component artifacts
-3. Empty the S3 bucket
+2. Select the bucket that you created for the component artifacts.
+3. Empty the S3 bucket.
 4. Delete the bucket.
 
 ### Delete the Secrets Manager secret
@@ -45,7 +45,8 @@ To delete the S3 bucket:
 To delete the Secrets Manager secret:
 
 1. Navigate to **Secrets Manager** in the AWS Console.
-2. Select the **EI_API_KEY** secret and delete it. 
+2. Select the **EI_API_KEY** secret.
+3. Delete the selected secret. 
 
 By default, Secrets Manager schedules deletion after a waiting period.
 
@@ -54,7 +55,7 @@ By default, Secrets Manager schedules deletion after a waiting period.
 To terminate the EC2 instance:
 
 1. Navigate to the **EC2** dashboard. 
-2. Select your instance
+2. Select your instance.
 3. Choose **Instance state** > **Terminate instance**.
 
 ## What you've accomplished

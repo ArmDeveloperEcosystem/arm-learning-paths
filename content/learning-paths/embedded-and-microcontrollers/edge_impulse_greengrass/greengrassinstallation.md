@@ -28,11 +28,11 @@ If you're using a personal AWS account and don't have access credentials yet, cr
 
 To create access credentials for a personal AWS account:
 
-1. Open the AWS Console and search for **IAM**:
+1. Open the AWS Console and search for `IAM`:
 
    ![AWS Console search bar with IAM entered as the search term#center](./images/gg_install_iam.png "Search for IAM")
 
-2. Open the IAM Dashboard:
+2. Open the **IAM Dashboard**:
 
    ![IAM Dashboard showing the main overview with users, roles, and policies sections#center](./images/gg_install_iam_dashboard.png "IAM Dashboard")
 
@@ -48,15 +48,15 @@ To create access credentials for a personal AWS account:
 
    ![Security credentials section with the Create access key button#center](./images/gg_install_iam_4.png "Create access key")
 
-6. Choose **Other** as the use case and select **Next**:
+6. Choose **Other** as the use case, and select **Next**:
 
    ![Access key use case selection with the Other option highlighted#center](./images/gg_install_iam_5.png "Select use case")
 
-7. Enter a description for the access key — for example, "Greengrass installer" — and select **Create access key**:
+7. Enter a description for the access key — for example, `Greengrass installer` — and select **Create access key**:
 
    ![Access key description field with the Create access key button#center](./images/gg_install_iam_6.png "Create access key")
 
-This is the only time you can view the full credentials. Copy the credentials and save them to a temporary file in the following format:
+This is the only time that you can view the full credentials. Copy the credentials and save them to a temporary file in the following format:
 
 ```bash
 export AWS_ACCESS_KEY_ID=<your-access-key-id>
@@ -67,14 +67,12 @@ You'll paste the credentials into an SSH session during the Greengrass installat
 
 ## Install Greengrass Nucleus Classic
 
-AWS IoT Greengrass has two versions: Nucleus Classic, which is Java-based, and Nucleus Lite, which is a native implementation typically used with Yocto-based images. Use Nucleus Classic because it runs on standard Linux distributions that your edge device is already running.
+AWS IoT Greengrass has two versions: Nucleus Classic, which is Java-based, and Nucleus Lite, which is a native implementation that's typically used with Yocto-based images. Use Nucleus Classic because it runs on standard Linux distributions that your edge device is already running.
 
 To install Nucleus Classic:
 
 1. In the AWS Console, navigate to **AWS IoT Core** > **Greengrass** > **Core devices**.
- 
 2. Select **Set up one core device**.
-
 3. Select **Linux** as the device type. The console generates download and install commands customized for your account:
 
 ![Greengrass core device setup page showing the Linux device type selected and the Nucleus Classic option#center](./images/gg_install_device.png "Set up core device")
@@ -100,9 +98,9 @@ The following screenshot shows where to find these commands in the console:
 
 ## Add permissions to the Greengrass token exchange role
 
-When Greengrass runs a component, it uses a Linux service user called `ggc_user` on Nucleus Classic installations to start the process. AWS credentials are passed to the component through its environment at launch time, and the component's AWS SDK uses those credentials to connect to AWS services. The permissions available to the component are controlled by an IAM role called `GreengrassV2TokenExchangeRole`.
+When Greengrass runs a component, it uses a Linux service user called `ggc_user` on Nucleus Classic installations to start the process. AWS credentials are passed to the component through its environment at launch time. The component's AWS SDK uses those credentials to connect to AWS services. The permissions available to the component are controlled by an IAM role called `GreengrassV2TokenExchangeRole`.
 
-By default, this role doesn't include the permissions that the Edge Impulse component needs. You need to add three policies:
+By default, `GreengrassV2TokenExchangeRole` doesn't include the permissions that the Edge Impulse component needs. You need to add three policies to the role:
 
 - `AWSIoTFullAccess` — allows the component to publish inference results and receive commands through AWS IoT Core MQTT topics.
 - `AmazonS3FullAccess` — allows access to S3 buckets where component artifacts are stored.
@@ -112,8 +110,8 @@ To add these permissions, navigate to **IAM** > **Roles** in the AWS Console and
 
 1. Select **GreengrassV2TokenExchangeRole** from the search results.
 2. Select **Add permissions** > **Attach policies**.
-3. Search for **AWSIoTFullAccess**, select it, and select **Add permissions**.
-4. Repeat step 3 for **AmazonS3FullAccess** and **SecretsManagerReadWrite**.
+3. Search for `AWSIoTFullAccess`, select it, and select **Add permissions**.
+4. Repeat step 3 for `AmazonS3FullAccess` and `SecretsManagerReadWrite`.
 
 ![GreengrassV2TokenExchangeRole permissions page showing the three newly attached policies#center](./images/iam_ter_update.webp "Updated token exchange role permissions")
 

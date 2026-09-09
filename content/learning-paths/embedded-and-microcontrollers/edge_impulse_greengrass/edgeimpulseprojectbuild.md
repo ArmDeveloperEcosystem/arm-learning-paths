@@ -51,15 +51,14 @@ To clone a pre-built project into your Edge Impulse account:
 
     ![Progress indicator showing the project clone in progress#center](./images/ei_clone_3.png "Cloning in progress")
 
-4. The cloning process takes about 12 minutes to complete. When it finishes, a completion message appears:
+4. The cloning process takes about 12 minutes to complete. When cloning finishes, a completion message appears:
 
     ![Completion message indicating the project clone finished successfully#center](./images/ei_clone_4.webp "Clone complete")
 
-    Select **Dashboard** to view the cloned project. It should look similar to the following:
+    Select **Dashboard** to view the cloned project. The project should look similar to the following:
 
     ![Edge Impulse dashboard showing the cloned Cat and Dog Detector project with model details#center](./images/ei_clone_5.webp "Cloned project dashboard")
 
-You've now cloned the project that you'll use.
 
 ## Build your project deployment
 
@@ -67,7 +66,9 @@ Edge Impulse Studio provides a workflow to build, train, optimize, and deploy ML
 
 ![Edge Impulse Studio dashboard showing the project overview with data, impulse, and deployment sections#center](./images/ei_project_1.png "Project dashboard overview")
 
-Central to Edge Impulse is the concept of an Impulse. An Impulse is a pipeline that defines how sensor data is processed, what model runs on it, and how results are interpreted. Your cloned project already has an Impulse called **Cat and Dog Detector**. Select **Create Impulse** to see the three main parts: the pre-processing block, the model block, and the post-processing block:
+Central to Edge Impulse is the concept of an Impulse. An Impulse is a pipeline that defines how sensor data is processed, what model runs on it, and how results are interpreted.
+
+Your cloned project already has an Impulse called **Cat and Dog Detector**. Select **Create Impulse** to see the three main parts: the pre-processing block, the model block, and the post-processing block:
 
 ![Create Impulse view showing the three pipeline blocks: pre-processing, model, and post-processing#center](./images/ei_project_2.webp "Impulse pipeline structure")
 
@@ -127,7 +128,7 @@ To create the key:
 
 ![API key creation dialog with fields for name, role set to admin, and the development key checkbox selected#center](./images/ei_key_3.webp "Create API key")
 
-The API key appears on the screen. Copy and save it immediately — this is the only time that the full key is visible. You'll store this key later in AWS Secrets Manager.
+The API key appears on the screen. Copy and save the key immediately — this is the only time that the full key is visible. You'll store this key later in AWS Secrets Manager.
 
 ## What you've accomplished and what's next
 

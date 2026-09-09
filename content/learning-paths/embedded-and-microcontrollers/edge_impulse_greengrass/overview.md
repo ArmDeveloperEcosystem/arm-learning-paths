@@ -24,7 +24,7 @@ This approach solves several real-world challenges for edge AI deployments:
 - Remote management: Issue commands to the Edge Impulse Linux Runner service through IoT Core MQTT topics. You can restart inference, adjust confidence thresholds, or retrieve model information without SSH access to the device.
 - Secure credential handling: Store the Edge Impulse API key in AWS Secrets Manager rather than passing it on the command line.
 
-## Example applications
+## Example use cases
 
 This integration is well suited for scenarios where ML inference runs on edge hardware, but results need to flow back to the cloud for action or analysis:
 

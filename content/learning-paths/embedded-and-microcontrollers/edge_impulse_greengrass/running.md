@@ -96,7 +96,6 @@ To send a restart command:
    ```text
    /edgeimpulse/device/<device-name>/command/input
    ```
-
 3. Clear the message body and enter the following JSON:
 
    ```json
@@ -104,7 +103,6 @@ To send a restart command:
       "cmd": "restart"
    }
    ```
-
 4. Select **Additional configuration** and enable the **Retain message on this topic** checkbox.
 5. Select **Publish**.
 
@@ -146,6 +144,6 @@ To clean up AWS resources and minimize costs, see [Cleaning up AWS resources](/l
 
 You've verified that the Edge Impulse Linux Runner is running inference on your edge device. You viewed results in the browser and AWS IoT Core MQTT topics, and sent a restart command through IoT Core.
 
-You can now use MQTT commands through AWS IoT Core to control the Edge Impulse Linux Runner in real time and interpret its model metrics. For more information about the available command set and metrics features of the Edge Impulse Linux Runner AWS IoT Greengrass integration, see the following [command reference](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/summary/).
+You can now use MQTT commands through AWS IoT Core to control the Edge Impulse Linux Runner in real time and interpret its model metrics. For more information about the available command set and metrics features of the Edge Impulse Linux Runner AWS IoT Greengrass integration, see the [MQTT command and metrics reference](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/summary/).
 
 

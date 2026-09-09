@@ -15,7 +15,7 @@ If you don't have a physical edge device, you can use an Arm-based Amazon EC2 in
 
 To create an instance, follow these steps:
 
-1. Open the AWS Console and search for **EC2**:
+1. Open the AWS Console and search for `EC2`:
 
 ![AWS Console search bar with EC2 typed in the search field#center](./images/ec2_setup_1.png "Search for EC2 in the AWS Console")
 
@@ -54,7 +54,7 @@ To configure network settings:
 
    The Edge Impulse Linux Runner serves a web-based inference viewer on this port, which you'll use later to confirm the model is running.
 
-3. For both the SSH rule (port 22) and the port 4912 rule, restrict the source to your own IP address rather than allowing access from anywhere. To find your current public IP, run:
+3. For both the SSH rule (port `22`) and the port `4912` rule, restrict the source to your own IP address rather than allowing access from anywhere. To find your current public IP, run:
 
    ```bash
    curl http://checkip.amazonaws.com
@@ -67,7 +67,7 @@ To configure network settings:
 
 The default 8 GB root volume isn't enough for the project dependencies and model files. 
 
-To update the disk space, under **Configure storage**, change the root volume size from `8` to `28` GB:
+To update the disk space, under **Configure storage**, increase the root volume size to **28 GiB**:
 
 ![Storage configuration showing the root volume size set to 28 GB#center](./images/ec2_setup_5.png "Increase root volume to 28 GB")
 
@@ -87,7 +87,7 @@ Copy the **Public IPv4 address** from the instance details. You need the address
 
 ### Connect over SSH
 
-Open a terminal and connect to the instance using your `.pem` file and the public IP address. Replace the placeholders with your actual file name and IP:
+Open a terminal and connect to the instance using your `.pem` file and the public IP address. Replace the placeholders with your file name and IP address:
 
 ```bash
 chmod 600 your-key-pair.pem

@@ -10,7 +10,14 @@ layout: learningpathall
 
 ## MQTT commands and model metrics
 
-The following is a reference for the MQTT commands and model metrics available in the Edge Impulse Greengrass integration. Use the commands to control the Edge Impulse Linux Runner service, manage the confidence threshold filter, retrieve model information, and manage the inference cache — all through AWS IoT Core MQTT topics.
+The following is a reference for the MQTT commands and model metrics that are available in the Edge Impulse Greengrass integration. 
+
+Use the commands to do the following through AWS IoT Core MQTT topics:
+
+- Control the Edge Impulse Linux Runner service
+- Manage the confidence threshold filter
+- Retrieve model information
+- Manage the inference cache 
 
 Commands are sent as JSON messages to the device's command input topic and results are published to the command output topic:
 
@@ -157,7 +164,7 @@ The command sets the comparison operator for the confidence threshold filter:
 
 The available criteria are:
 
-| Criteria | Description |
+| Criterion | Description |
 |---|---|
 | `gt` | Publish if confidence is greater than the threshold |
 | `ge` | Publish if confidence is greater than or equal to the threshold |
