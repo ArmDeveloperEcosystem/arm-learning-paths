@@ -20,6 +20,53 @@ prerequisites:
     - Alif SEROM 1.105.65 and SERAM 1.110.0 installed on the board
     - Alif SEToolkit 1.10 installed on the development machine
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-09-09T22:20:41Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: de9068955d4f9025bb184aa8176f28ac38d452ad8d2768518c921a7c07d87743
+  summary_generated_at: '2026-09-09T22:20:41Z'
+  summary_source_hash: de9068955d4f9025bb184aa8176f28ac38d452ad8d2768518c921a7c07d87743
+  faq_generated_at: '2026-09-09T22:20:41Z'
+  faq_source_hash: de9068955d4f9025bb184aa8176f28ac38d452ad8d2768518c921a7c07d87743
+  summary: >-
+    You'll build and validate a Zephyr camera application that runs face detection on Ethos-U55 and
+    image classification on Ethos-U85 from one Cortex-M55. First, you'll connect the camera and
+    display, configure the board, and set up a `west` workspace. Next, you'll build, package, and
+    flash the application and model payloads. Finally, you'll reset the board and verify the startup
+    test, live camera preview, NPU logs, and parallel timing.
+  faqs:
+  - question: What should I check on the board before flashing?
+    answer: >-
+      Connect the USB ports for power, SE UART, and U4 UART. Confirm that your board has SEROM
+      1.105.65 and SERAM 1.110.0 installed, and set the boot switch to the SE position.
+  - question: Which camera connector should I use for the MT9M114 module?
+    answer: >-
+      Use the bottom-side J16 connector. The supplied overlay targets J16.
+  - question: Where should I run the build from and what inputs are expected?
+    answer: >-
+      Run from the `west` workspace root with your Python virtual environment activated. Define
+      `APP` for the dual-NPU sample, `OD` for the object-detection module, and `MODULES` for the
+      Zephyr module list. The sample includes compiled `PTE` models for Ethos-U55 and Ethos-U85
+      and a startup image.
+  - question: How do I point the packaging step to my Alif SEToolkit installation?
+    answer: >-
+      Set `ALIF_SE_TOOLS_DIR` to your SEToolkit 1.10 application directory, such as
+      `app-release-exec-macos` on macOS. The sample’s JSON assigns application and model payloads
+      to validated MRAM addresses. Confirm that the toolkit and referenced support objects are available.
+  - question: What results indicate both NPUs are working before live camera starts?
+    answer: >-
+      After you reset the board, the display shows the bundled Grace Hopper image with a green
+      face box from the U55 model. The U85 model identifies an ImageNet class such as
+      ACADEMIC GOWN. The U4 log reports model preparation, isolated preflight messages, and
+      starting parallel worker threads.
+# END generated_summary_faq
+
 author: Varun Chari
 
 generate_summary_faq: false
