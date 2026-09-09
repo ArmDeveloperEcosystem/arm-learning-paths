@@ -78,7 +78,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Containers and Virtualization
 platforms:
-    - AWS
+    - AWS Graviton
 armips:
     - Neoverse
 operatingsystems:

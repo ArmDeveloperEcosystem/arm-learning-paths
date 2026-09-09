@@ -24,7 +24,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: CI-CD
 platforms:
-  - AWS
+  - AWS Graviton
 
 armips:
     - Neoverse

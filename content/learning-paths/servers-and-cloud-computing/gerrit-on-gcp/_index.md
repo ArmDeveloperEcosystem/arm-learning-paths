@@ -73,7 +73,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: CI-CD
 platforms:
-  - Google Cloud
+  - Google Axion
 
 armips:
   - Neoverse

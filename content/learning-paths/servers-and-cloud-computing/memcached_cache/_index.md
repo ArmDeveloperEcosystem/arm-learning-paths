@@ -32,9 +32,9 @@ test_maintenance: true
 skilllevels: Advanced
 subjects: Web
 platforms:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
 armips:
 - Neoverse
 tools_software_languages:
