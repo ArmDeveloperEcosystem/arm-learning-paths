@@ -22,10 +22,10 @@ MODULES=$(west list -f '{abspath}' | grep -v '/modules/lib/executorch$' | paste 
 MODULES="$MODULES;$PWD/modules/lib/executorch;$PWD/modules/ethos-u-core-driver-src"
 ```
 
-The overlay order is important. The final `isp_route.overlay` file disables the CPI memory endpoint and routes camera frames exclusively through the ISP.
+The overlay order is important. The final `isp_route.overlay` file disables the CPI memory endpoint and routes camera frames exclusively through the image signal processor (ISP).
 
 {{% notice Note %}}
-If the image signal processor (ISP) reports that it has no empty video buffer, confirm that `isp_route.overlay` is the final device-tree overlay in the build command. The application circulates five buffers and must return each processed buffer to the ISP queue. Don't remove the ISP configuration fragments from `vision.conf`.
+If the ISP reports that it has no empty video buffer, confirm that `isp_route.overlay` is the final device-tree overlay in the build command. The application circulates five buffers and must return each processed buffer to the ISP queue. Don't remove the ISP configuration fragments from `vision.conf`.
 {{% /notice %}}
 
 ## Build the firmware

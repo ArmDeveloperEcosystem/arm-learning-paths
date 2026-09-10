@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## What models you'll run
 
-The Alif Ensemble E8 combines two Arm Cortex-M55 cores with two different Ethos-U NPUs. You'll run the workloads on the high-performance Cortex-M55 core. One model is assigned to each NPU:
+The Alif Ensemble E8 combines two Arm Cortex-M55 cores with two different Ethos-U NPUs. You'll run the workloads on the high-performance Cortex-M55 core. One model is assigned to each neural processing unit (NPU):
 
 | Workload | NPU | Input tensor | Output |
 | --- | --- | --- | --- |
