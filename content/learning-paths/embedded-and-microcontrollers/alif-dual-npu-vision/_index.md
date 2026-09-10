@@ -8,7 +8,7 @@ minutes_to_complete: 90
 who_is_this_for: This is an advanced topic for embedded ML developers who want to run two ExecuTorch models concurrently on separate Ethos-U NPUs under Zephyr.
 
 learning_objectives:
-    - Identify how one microcontroller unit (MCU) can coordinate two NPUs while avoiding the power and system cost of a second MCU or application processor.
+    - Identify how one microcontroller unit (MCU) can coordinate two neural processing units (NPUs) while avoiding the power and system cost of a second MCU or application processor.
     - Configure an Alif Ensemble E8 DevKit for native Zephyr camera, image signal processor (ISP), display, and dual-NPU operation.
     - Build, package, and flash an ExecuTorch application that targets Ethos-U55 and Ethos-U85.
     - Validate live camera capture, model results, and parallel inference timing.
