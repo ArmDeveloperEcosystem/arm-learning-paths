@@ -28,7 +28,7 @@ The exact inference times and memory addresses vary between builds.
 
 After five seconds, the application clears the test image and starts the MT9M114 stream. Confirm the following results:
 
-- The 480 x 352 live preview appears near the center of the MW405 display.
+- The MW405 display shows a 480 x 352 live preview.
 - The preview is in color and updates when you move the camera.
 - Green boxes track faces in the live frame.
 - The classification label and confidence change with the scene.
@@ -42,7 +42,7 @@ dual-et: live dual-NPU pipeline started
 ```
 
 {{% notice Note %}}
-If the preview is grainy or monochrome, the application is displaying packed sensor data as RGB565. Confirm that the build includes both ISP overlays and that the selected video endpoint is `isp@49046000`. The native pipeline requests planar RGB888 output from the ISP before it creates the display preview and model inputs. 
+If the preview is grainy or monochrome, the application is displaying packed sensor data as RGB565. Confirm that the build includes both ISP overlays and that the selected video endpoint is `isp@49046000`. The native pipeline requests planar RGB888 output from the ISP before it creates the display preview and model inputs.
 {{% /notice %}}
 
 ## Confirm both NPUs execute for each frame
@@ -71,7 +71,7 @@ dual-et: live frame=30 IRQs=.../...
 Changing the scene changes the preview, tensor checksums, and detection results. If the image and results remain fixed, the application is still using the startup test input instead of live frames.
 
 {{% notice Note %}}
-If the startup test completes but the live result doesn't change, confirm that `dual-et: live dual-NPU pipeline started` appears and that the live-frame messages and NPU interrupt counters continue to increase. 
+If the startup test completes but the live result doesn't change, confirm that `dual-et: live dual-NPU pipeline started` appears and that the live-frame messages and NPU interrupt counters continue to increase.
 
 If capture errors repeat, power-cycle the board, flash the package again, and recheck the camera connector and overlay order.
 {{% /notice %}}

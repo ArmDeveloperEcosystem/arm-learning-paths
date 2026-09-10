@@ -5,7 +5,7 @@ weight: 3
 layout: "learningpathall"
 ---
 
-## Connect the hardware on target device
+## Connect the target hardware
 
 Power off the E8 DevKit before changing camera or display connections. Then, to connect the hardware:
 
@@ -82,7 +82,7 @@ If available, both commands print a version number.
 Clone the SDK fork that contains the dual-NPU sample at the validated revision,
 then initialize a local `west` workspace from that checkout.
 The fork's `main` branch stays synchronized with the Alif SDK `main`
-branch. 
+branch.
 
 The dual-NPU application is maintained separately on the
 `dual-npu-main-integration` branch, which also includes the support for MT9M114,
@@ -119,7 +119,7 @@ git -C modules/lib/executorch submodule update --init --recursive
 You'll use the multi-variant support merged into the Ethos-U core driver
 `main` branch. This support allows one Cortex-M55 to manage the U55 and U85
 through one driver registry, avoiding the system power overhead of assigning
-each NPU to a separate microcontroller unit. 
+each NPU to a separate microcontroller unit.
 
 Clone the current `main` branch:
 
@@ -187,7 +187,7 @@ Workspace dependencies are ready.
 ```
 
 If you run the script again, it reports that both patches are already applied.
-Run it again after `west update`, which can restore either module checkout. 
+Run it again after `west update`, which can restore either module checkout.
 
 ## What you've accomplished and what's next
 

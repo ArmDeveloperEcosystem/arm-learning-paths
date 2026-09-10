@@ -66,7 +66,7 @@ The files have the following roles:
 You can use the checked-in PTE files to build and flash the application without installing TensorFlow, TOSA Tools, or Vela. CMake packages those files directly into `model_assets.bin`.
 
 {{% notice Note %}}
-If model preparation reports an allocation failure, the PTE files don't match the memory-pool sizes in the checked-out sample. Confirm that the workspace is at the validated SDK revision and run a pristine build. 
+If model preparation reports an allocation failure, the PTE files don't match the memory-pool sizes in the checked-out sample. Confirm that the workspace is at the validated SDK revision and run a pristine build.
 
 If you regenerated the PTE files, use the supplied scripts, model inputs, and `ensemble_vela.ini` file.
 {{% /notice %}}

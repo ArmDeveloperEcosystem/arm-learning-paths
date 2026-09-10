@@ -1,6 +1,6 @@
 ---
 title: Run parallel vision inference on an Alif Ensemble E8 with Zephyr
-    
+
 description: Build a power-conscious live camera demo that drives Ethos-U55 and Ethos-U85 from one Cortex-M55 MCU.
 
 minutes_to_complete: 90

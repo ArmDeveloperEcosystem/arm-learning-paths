@@ -131,7 +131,7 @@ SEToolKit writes `model_assets.bin` at `0x80008000` and the execute-in-place Zep
 | `0x803BCB06`-`0x803BF3FD` | 10,488 bytes | ImageNet class labels |
 | From `0x80400000` | Build-dependent | RTSS-HP Zephyr firmware |
 
-The combined `model_assets.bin` payload is 3,896,318 bytes. CMake packs the files in this order: both PTE files, the startup image, and the labels. CMake then generates a header containing the artifact sizes. Changing a model causes CMake to reconfigure so the compiled offsets can't silently disagree with the payload.
+The combined `model_assets.bin` payload is 3,896,318 bytes. CMake packs both PTE files first, followed by the startup image and the labels. CMake then generates a header containing the artifact sizes. Changing a model causes CMake to reconfigure so the compiled offsets can't silently disagree with the payload.
 
 ### HP DTCM
 
@@ -169,7 +169,7 @@ SRAM1 spans from `0x02400000` to `0x027FFFFF` and holds the display, U85-visible
 | `0x026B4250`-`0x026F024F` | 304 KiB | U85 ExecuTorch method pool |
 | `0x02700250`-`0x0278C24F` | 560 KiB | Five-buffer Zephyr video heap |
 
-The active ISP output uses five 192 x 192 x 3-byte RGB888 buffers of 110,592 bytes each. The heap allows up to 114,688 bytes per buffer. The backend copies delegated command or weight data into the mirror reservation when its original address isn't directly usable by U85. Shared SRAM also avoids consuming the limited HP DTCM with the U85 working set.
+The active ISP output uses five 192 x 192 x 3-byte RGB888 buffers. Each buffer is 110,592 bytes. The heap allows up to 114,688 bytes per buffer. When its original address isn't directly usable by U85, the backend copies delegated command or weight data into the mirror reservation. Shared SRAM also avoids consuming the limited HP DTCM with the U85 working set.
 
 ## How the application maintains cache and address visibility
 

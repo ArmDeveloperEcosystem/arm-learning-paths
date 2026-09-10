@@ -70,6 +70,6 @@ The secure-enclave log shows entries for `HP_APP` and `U85MOD`. The U4 log start
 ```
 ## What you've accomplished and what's next
 
-You've packaged and flashed the dual-NPU application. 
+You've packaged and flashed the dual-NPU application.
 
 Next, you'll run the startup test and live camera pipeline.
