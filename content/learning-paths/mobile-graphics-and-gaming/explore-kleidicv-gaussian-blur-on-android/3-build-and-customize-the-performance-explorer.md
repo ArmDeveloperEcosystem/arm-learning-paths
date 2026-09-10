@@ -31,7 +31,7 @@ decoding, memory transfers, rendering, and other processing stages.
 
 ## Create the performance explorer
 
-The `26.06` release you used earlier doesn't include the Gaussian
+The `26.06` release that you used earlier doesn't include the Gaussian
 blur performance explorer. Add the following changes to the
 `examples/extract_one_operation` project in your local KleidiCV checkout.
 
@@ -342,7 +342,7 @@ cmake --build build/extract-android-benchmark \
 ## Use the command-line parameters
 
 The default run measures a 5x5 binomial kernel over 1000 calls. Use `tee` to
-display the results and save them to a CSV file on the Linux development
+display the results and save them to a CSV file on the development
 machine:
 
 ```bash
@@ -365,7 +365,7 @@ adb shell 'taskset 80 /data/local/tmp/gaussian_blur_benchmark \
 Supported kernel sizes are 3, 5, 7, 9, and 15. The 3x3 through 9x9 kernels
 use the fixed binomial variants. The 15x15 kernel uses the fixed Gaussian
 variant and matches the kernel size in the standalone SME example. Keeping
-the CPU affinity fixed is important: it prevents the operating system from
+the CPU affinity fixed is important to prevent the operating system from
 migrating a process between cores with different performance characteristics.
 
 ## Interpret the CSV output
@@ -379,7 +379,7 @@ head gaussian_blur_cpu7_kernel15.csv
 ```
 
 For readability, the following table summarizes the 15x15 CSV results from
-CPU 7. Every row uses one image channel, 100 warm-up calls, and 3000 measured
+CPU 7. Each row uses one image channel, 100 warm-up calls, and 3000 measured
 calls:
 
 | Backend | Image resolution | Kernel | Iterations | Mean latency (ns) | p50 latency (ns) |
@@ -429,7 +429,7 @@ Compared with Neon, SME is 1.45x faster at 640x640, 1.74x faster at
 kernel sizes and identify how workload size can change the performance
 behavior.
 
-## Code changes behind the parameters
+## How the command-line options work
 
 The performance explorer stores its settings in `BenchmarkOptions`. The
 default values are a 5x5 kernel and 1000 measured calls. The
@@ -438,7 +438,7 @@ accepts `--iterations <count>` and `--kernel <3|5|7|9|15>`. The selected kernel
 size is passed as both the kernel width and height to every backend. This makes
 it possible to compare implementations without recompiling the program.
 
-The program intentionally does not choose a CPU or read CPU capacity. CPU
+The program intentionally doesn't choose a CPU or read CPU capacity. CPU
 selection belongs outside the performance explorer and is controlled with
 `taskset`.
 

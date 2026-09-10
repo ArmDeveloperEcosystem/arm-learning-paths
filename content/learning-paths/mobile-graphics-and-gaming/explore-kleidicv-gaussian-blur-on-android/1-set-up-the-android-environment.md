@@ -19,7 +19,7 @@ example and a performance explorer that calls the Neon, SVE2, and SME
 implementations directly. You can verify their output and compare
 performance under controlled conditions.
 
-## Get KleidiCV
+## Clone KleidiCV
 
 Clone KleidiCV and check out the 26.06 release:
 

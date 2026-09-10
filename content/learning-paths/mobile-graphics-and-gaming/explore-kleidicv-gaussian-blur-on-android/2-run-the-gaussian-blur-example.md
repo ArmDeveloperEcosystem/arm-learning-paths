@@ -38,7 +38,8 @@ three rows are as follows:
 0  0  0  0  0  0  0  0  0  0  255  0  0  0  0  0  0  0  0  0
 ```
 
-The program prints 20 identical pixel rows. Partial output is similar to:
+The program prints 20 identical pixel rows. The first
+three rows of the output are similar to:
 
 ```output
 Raw pixel values for the blurred output:
