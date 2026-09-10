@@ -112,10 +112,10 @@ at r29 or later from
 The output is similar to:
 
 ```output
-Using NDK: /home/user/android-sdk/ndk/29.0.14206865
+Using NDK: /home/ubuntu/android-sdk/ndk/29.0.14206865
 Android Debug Bridge version 1.0.41
 Version 37.0.1-15733141
-Installed as /home/user/android-sdk/platform-tools/adb
+Installed as /home/ubuntu/android-sdk/platform-tools/adb
 Running on Linux 6.8.0-137-generic (x86_64)
 ```
 
