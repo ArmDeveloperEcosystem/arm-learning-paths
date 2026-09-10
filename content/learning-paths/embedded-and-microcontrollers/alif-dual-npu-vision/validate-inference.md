@@ -83,4 +83,4 @@ two Ethos-U NPUs with separate persistent worker threads on one Cortex-M55.
 This design runs both ML workloads without adding a second microcontroller unit and its
 associated system power overhead.
 
-You can now use the workflow to run your own ExecuTorch models concurrently on separate Ethos-U NPUs under Zephyr.
+You can now use the workflow to run ExecuTorch models for your own use cases concurrently on separate Ethos-U NPUs under Zephyr.
