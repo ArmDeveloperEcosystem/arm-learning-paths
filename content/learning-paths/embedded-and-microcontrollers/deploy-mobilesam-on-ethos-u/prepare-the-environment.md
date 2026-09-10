@@ -83,7 +83,7 @@ Using the checkout's installer keeps the Python package aligned with the example
 
 ## Install the Arm development tools
 
-{{% notice macOS %}}
+{{% notice Note %}}
 Before you run the Arm setup command on macOS, install [Docker Desktop](/install-guides/docker/docker-desktop/) and follow the [AVH FVPs on macOS install guide](/install-guides/fvps-on-macos/). Add the FVPs-on-Mac `bin` directory to `PATH`. The wrapper runs the Linux Corstone-320 FVP in a container. Confirm that Docker is running and that `FVP_Corstone_SSE-320` resolves to the wrapper:
 
 ```bash

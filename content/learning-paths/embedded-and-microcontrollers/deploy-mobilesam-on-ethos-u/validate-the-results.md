@@ -80,3 +80,5 @@ Compare the object boundaries in the two mask overlays. The FVP mask should sele
 ## What you've accomplished
 
 You've completed the MobileSAM deployment flow from PyTorch export to bare-metal execution on Ethos-U85. You also confirmed that the target produces a non-degenerate mask that agrees with the host quantized reference.
+
+You can now use this workflow to export, deploy, and validate quantized MobileSAM prompt segmentation models on Arm Ethos-U85 for your own use cases.

@@ -94,7 +94,7 @@ find "$export_dir/artifacts" -type f -print -quit | grep -q . || {
 }
 ```
 
-The point prompt is embedded in the `.pte`. The image remains a runtime input and is compiled into the bare-metal application in the next step.
+The point prompt is embedded in the `.pte`. The image remains a runtime input and is compiled into the bare-metal application.
 
 ## What you've accomplished and what's next
 
