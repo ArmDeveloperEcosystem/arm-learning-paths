@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Build ExecuTorch for Arm
 
-Run the remaining commands from the ExecuTorch repository root. 
+Run the remaining commands from the ExecuTorch repository root.
 
 Load the Arm tools installed during environment setup:
 
@@ -75,6 +75,6 @@ A successful run ends with `Model executed successfully.`, followed by `No probl
 
 ## What you've accomplished and what's next
 
-You've built the MobileSAM bare-metal application and run it on a virtual Cortex-M85 and Ethos-U85 system. 
+You've built the MobileSAM bare-metal application and run it on a virtual Cortex-M85 and Ethos-U85 system.
 
 Next, you'll reconstruct the target mask and compare it with the host result.

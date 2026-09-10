@@ -42,6 +42,6 @@ Both comparisons enforce a minimum intersection over union (IoU) of `0.9`. Expor
 
 ## What you've learned and what's next
 
-You now know what the example deploys, why the point prompt is fixed, and how the host and target checks cover different stages of the pipeline. 
+You now know what the example deploys, why the point prompt is fixed, and how the host and target checks cover different stages of the pipeline.
 
 Next, you'll prepare ExecuTorch and the Arm development tools.

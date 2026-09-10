@@ -1,6 +1,6 @@
 ---
 title: Prepare the ExecuTorch and Arm environment
-description: Install ExecuTorch, the Ethos-U Python dependencies, the Arm GNU Toolchain, and the Corstone-320 FVP.
+description: Set up ExecuTorch, Ethos-U dependencies, the Arm GNU Toolchain, and the Corstone-320 FVP to build and run the MobileSAM example.
 weight: 3
 
 layout: "learningpathall"
@@ -39,13 +39,13 @@ cmake --version | head -n 1
 c++ --version | head -n 1
 ```
 
-The check confirms that you are using a supported Linux host or Apple silicon Mac. It also checks for the availability of the following: 
+The check confirms that you are using a supported Linux host or Apple silicon Mac. It also checks for the availability of the following:
 
 - Python 3.12
 - Git
 - CMake
 - A host C++ compiler
-- Ninja or Make 
+- Ninja or Make
 
 ## Clone the ExecuTorch source
 
@@ -130,6 +130,6 @@ The second command prints the path to the Corstone-320 FVP. On macOS, confirm th
 
 ## What you've accomplished and what's next
 
-You've installed the Python, compiler, Vela, and virtual-platform dependencies used by the example. 
+You've installed the Python, compiler, Vela, and virtual-platform dependencies used by the example.
 
 Next, you'll prepare and export MobileSAM for Ethos-U85.
