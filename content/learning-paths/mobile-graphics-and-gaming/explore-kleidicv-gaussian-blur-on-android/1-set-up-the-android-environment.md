@@ -7,6 +7,8 @@ weight: 2
 layout: learningpathall
 ---
 
+## What you'll build
+
 KleidiCV is Arm's high-performance image-processing library for AArch64. It
 provides a C API for operations such as color conversion, filtering, morphology,
 resizing, and geometric transforms. Optimized implementations target Neon, SVE2,
@@ -27,8 +29,8 @@ cd kleidicv
 git checkout --detach refs/tags/26.06
 ```
 
-Steps 1 and 2 use the standalone Gaussian blur example in
-`examples/extract_one_operation` from the 26.06 release. Step 3 introduces
+You'll use the standalone Gaussian blur example in
+`examples/extract_one_operation` from the 26.06 release, then use
 a performance explorer for comparing the implementations.
 
 ## Configure the Android SDK and NDK
@@ -39,7 +41,7 @@ Google distributes the Android SDK command-line tools and NDK only as x86_64
 Linux builds, so they don't run on an Arm-based Linux machine.
 {{% /notice %}}
 
-Install the host packages needed to build the examples:
+Install the host packages that are needed to build the examples:
 
 ```bash
 sudo apt update
@@ -47,7 +49,7 @@ sudo apt install openjdk-17-jdk openjdk-17-jre cmake ninja-build unzip
 ```
 
 Download the Linux command line tools package and install Android SDK
-Platform-Tools and Build Tools. The commands below query the current package
+Platform-Tools and Build Tools. The following commands query the current package
 name from the [Android Studio downloads](https://developer.android.com/studio)
 page, so they keep working as Google publishes new command-line tools:
 
@@ -71,7 +73,7 @@ $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
   "platform-tools" "build-tools;36.0.0"
 ```
 
-The archive contains a top-level `cmdline-tools` directory. Extract it into
+The archive contains a top-level `cmdline-tools` directory. Extract the directory into
 `$ANDROID_HOME/cmdline-tools` and rename it to `latest` so that `sdkmanager`
 resolves to `$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager`, the path the
 following commands expect.
@@ -79,11 +81,12 @@ following commands expect.
 If you prefer to choose a version manually, you can instead download the
 command line tools package from the
 [Android Studio downloads](https://developer.android.com/studio) page in a
-browser and extract it with the same `mkdir`, `unzip`, and `mv` steps.
+browser and extract the package with the same `mkdir`, `unzip`, and `mv` steps.
 
 Accept the SDK license prompts. Next, install Android NDK r29, which is the
 first NDK release with SME support. Installing the NDK with `sdkmanager` places
 it under `$ANDROID_HOME/ndk/<version>` and avoids a separate manual download.
+
 List the available `ndk;` packages, then install an r29 (or later) build:
 
 ```bash
@@ -93,9 +96,8 @@ $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
   --sdk_root=$ANDROID_HOME "ndk;29.0.14206865"
 ```
 
-The `platform-tools` package installed above provides `adb`. Set
-`ANDROID_NDK_HOME` to the installed NDK directory and add `adb` to your path.
-Resolving the directory with a glob avoids hard-coding the exact build number:
+The installed `platform-tools` package provides `adb`. Set
+`ANDROID_NDK_HOME` to the installed NDK directory and add `adb` to your path:
 
 ```bash
 export ANDROID_NDK_HOME="$(ls -d "$ANDROID_HOME"/ndk/* | sort -V | tail -1)"
@@ -103,6 +105,7 @@ export PATH="$ANDROID_HOME/platform-tools:$PATH"
 echo "Using NDK: $ANDROID_NDK_HOME"
 adb version
 ```
+Resolving the directory with a glob avoids hard-coding the exact build number. 
 
 If you prefer a standalone archive, you can instead download and unzip an NDK
 at r29 or later from
@@ -128,9 +131,9 @@ Confirm that ADB can see the target device:
 adb devices
 ```
 
-## Reference test device
+## Verify support for SVE2 and SME2
 
-The performance results in this Learning Path were collected on a
+The test performance results in this Learning Path were collected on a
 [vivo X300](https://www.vivo.com.cn/vivo/x300/) powered by the
 [MediaTek Dimensity 9500](https://www.mediatek.com/products/smartphones/mediatek-dimensity-9500).
 
@@ -151,7 +154,7 @@ Features    : fp asimd aes pmull sha1 sha2 crc32 atomics sve sve2 sme
 
 Feature lists differ between devices, but this line must include both `sve2`
 and `sme`. The performance explorer selects implementations explicitly, so
-it does not use KleidiCV runtime dispatch. Run the SME binary only on a CPU
+it doesn't use KleidiCV runtime dispatch. Run the SME binary only on a CPU
 that supports SME.
 
 ## Build the Android targets
@@ -172,4 +175,8 @@ cmake --build build/extract-android --target example_usage -j"$(nproc)"
 
 The output is `build/extract-android/example_usage`.
 
-Next, run the minimal Gaussian blur example on the device.
+## What you've accomplished and what's next
+
+You've created the Android environment and built a KleidiCV Gaussian blur example. 
+
+Next, you'll run the minimal Gaussian blur example on the device.
