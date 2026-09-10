@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Reconstruct the target mask
 
-Run the visualization tool from the ExecuTorch repository root. It decodes the mask from the FVP log and compares it with the host quantized mask:
+Run the visualization tool from the ExecuTorch repository root. The tool decodes the mask from the Fixed Virtual Platform (FVP) log and compares it with the host quantized mask:
 
 ```bash
 python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/visualize_fvp_output.py \
@@ -20,7 +20,7 @@ python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/visual
   --output-dir=arm_test/mobilesam_manual/fvp_visual
 ```
 
-The command reports the number of foreground pixels and the agreement between the FVP and host masks. It exits with an error if the mask is empty, full, or below `0.9` IoU.
+The command reports the number of foreground pixels and the agreement between the FVP and host masks. It exits with an error if the mask is empty, full, or below `0.9` intersection over union (IoU).
 
 For the tested revision, the output is similar to:
 
@@ -57,7 +57,7 @@ sed -n '1,120p' \
   arm_test/mobilesam_manual/export/mobilesam_point_ethos_u85_448_delegation.txt
 ```
 
-The tested revision reports:
+The tested revision report is similar to:
 
 ```output
 Total delegated subgraphs: 1
@@ -65,7 +65,7 @@ Number of delegated nodes: 5096
 Number of non-delegated nodes: 3
 ```
 
-Confirm that the graph is represented by one Ethos-U delegate. The three non-delegated graph nodes are expected at the delegate boundary; this count does not mean that three model operators execute on the CPU.
+Confirm that the graph is represented by one Ethos-U delegate. The three non-delegated graph nodes are expected at the delegate boundary. This count doesn't mean that three model operators execute on the CPU.
 
 ## Inspect the visual result
 
@@ -79,4 +79,4 @@ Compare the object boundaries in the two mask overlays. The FVP mask should sele
 
 ## What you've accomplished
 
-You have completed the MobileSAM deployment flow from PyTorch export to bare-metal execution on Ethos-U85. You also confirmed that the target produces a non-degenerate mask that agrees with the host quantized reference.
+You've completed the MobileSAM deployment flow from PyTorch export to bare-metal execution on Ethos-U85. You also confirmed that the target produces a non-degenerate mask that agrees with the host quantized reference.

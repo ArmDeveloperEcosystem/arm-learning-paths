@@ -14,7 +14,7 @@ You'll run the ExecuTorch MobileSAM example on a Corstone-320 Fixed Virtual Plat
 
 ## Follow the model from PyTorch to the target
 
-The example performs the following sequence:
+You'll run an ExecuTorch MobileSAM example that performs the following sequence:
 
 1. Downloads the pinned MobileSAM `vit_t` source and checkpoint.
 2. Embeds the positive point `(219, 193)` into the exported model.
@@ -27,7 +27,7 @@ The default image tensor has shape `[1, 3, 448, 448]`. The model produces one ma
 
 ## Understand the fixed-prompt contract
 
-The exported `.pte` accepts an image tensor as its only runtime input. The point prompt is part of the exported graph, so changing the image doesn't require another export, but it does require rebuilding the bare-metal application. The fixed coordinates must still identify the intended object in the resized and padded image. Changing the point coordinates requires another export.
+The exported `.pte` accepts an image tensor as its only runtime input. The point prompt is part of the exported graph, so changing the image doesn't require another export. Changing the image does require rebuilding the bare-metal application. The fixed coordinates must still identify the intended object in the resized and padded image. Changing the point coordinates requires another export.
 
 The example uses `multimask_output=False` and keeps mask thresholding outside the model. This arrangement focuses the target graph on the MobileSAM image encoder and mask decoder while keeping target-side post-processing small.
 
@@ -42,4 +42,6 @@ Both comparisons enforce a minimum intersection over union (IoU) of `0.9`. Expor
 
 ## What you've learned and what's next
 
-You now know what the example deploys, why the point prompt is fixed, and how the host and target checks cover different stages of the pipeline. Next, you will prepare ExecuTorch and the Arm development tools.
+You now know what the example deploys, why the point prompt is fixed, and how the host and target checks cover different stages of the pipeline. 
+
+Next, you'll prepare ExecuTorch and the Arm development tools.

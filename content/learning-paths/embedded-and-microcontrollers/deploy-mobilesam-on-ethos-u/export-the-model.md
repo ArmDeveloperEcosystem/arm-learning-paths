@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Prepare the MobileSAM source
 
-Run all commands from the ExecuTorch repository root. Confirm that your Python environment is active and that you have sourced `examples/arm/arm-scratch/setup_path.sh` in the current shell.
+Run all commands from the ExecuTorch repository root. Confirm that your Python environment is active and that you've sourced `examples/arm/arm-scratch/setup_path.sh` in the current shell.
 
 Prepare the pinned MobileSAM source in a separate working directory:
 
@@ -21,7 +21,7 @@ The script downloads the pinned MobileSAM revision and applies the patch needed 
 
 ## Build the host quantized operators
 
-The exporter requires the host shared library that registers the quantized operator out variants. Build it before exporting the model:
+The exporter requires the host shared library that registers the quantized operator out variants. Build the operators before exporting the model:
 
 ```bash
 cmake \
@@ -65,7 +65,7 @@ python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/e
   --debug-output-dir arm_test/mobilesam_manual/export/debug
 ```
 
-The first export downloads the pinned MobileSAM checkpoint. The exporter calibrates post-training quantization with the example image, checks the quantized mask against the floating-point mask, and lowers the graph to Ethos-U85.
+The first export downloads the pinned MobileSAM checkpoint. The exporter calibrates post-training quantization with the example image. It checks the quantized mask against the floating-point mask, and lowers the graph to Ethos-U85.
 
 Export succeeds when the host mask intersection over union (IoU) is at least `0.9` and the `.pte` is written to `arm_test/mobilesam_manual/export/`.
 
@@ -96,6 +96,8 @@ find "$export_dir/artifacts" -type f -print -quit | grep -q . || {
 
 The point prompt is embedded in the `.pte`. The image remains a runtime input and is compiled into the bare-metal application in the next step.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You have prepared MobileSAM and exported a quantized ExecuTorch program for Ethos-U85. Next, you will build the bare-metal application and run it on the Corstone-320 FVP.
+You've prepared MobileSAM and exported a quantized ExecuTorch program for Ethos-U85.
+
+Next, you'll build the bare-metal application and run it on the Corstone-320 FVP.

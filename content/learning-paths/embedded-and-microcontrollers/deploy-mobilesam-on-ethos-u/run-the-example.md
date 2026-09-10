@@ -8,7 +8,9 @@ layout: "learningpathall"
 
 ## Build ExecuTorch for Arm
 
-Run the remaining commands from the ExecuTorch repository root. Load the Arm tools installed during environment setup:
+Run the remaining commands from the ExecuTorch repository root. 
+
+Load the Arm tools installed during environment setup:
 
 ```bash
 source examples/arm/arm-scratch/setup_path.sh
@@ -69,8 +71,10 @@ backends/arm/scripts/run_fvp.sh \
   --fast 2>&1 | tee arm_test/mobilesam_manual/fvp.log
 ```
 
-A successful run ends with `Model executed successfully.` followed by `No problems found!` and writes the complete target output to `arm_test/mobilesam_manual/fvp.log`.
+A successful run ends with `Model executed successfully.`, followed by `No problems found!`. The run writes the complete target output to `arm_test/mobilesam_manual/fvp.log`.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You have built the MobileSAM bare-metal application and run it on a virtual Cortex-M85 and Ethos-U85 system. Next, you will reconstruct the target mask and compare it with the host result.
+You've built the MobileSAM bare-metal application and run it on a virtual Cortex-M85 and Ethos-U85 system. 
+
+Next, you'll reconstruct the target mask and compare it with the host result.

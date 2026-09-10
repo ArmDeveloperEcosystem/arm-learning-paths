@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for embedded machine learning developers 
 learning_objectives:
     - Explain how the MobileSAM example turns a fixed point prompt and an image into a quantized segmentation mask
     - Set up ExecuTorch and the Arm Ethos-U development tools
-    - Export, build, and run the MobileSAM example on a Corstone-320 Fixed Virtual Platform
+    - Export, build, and run the MobileSAM example on a Corstone-320 Fixed Virtual Platform (FVP)
     - Validate quantization quality, Ethos-U delegation, and target mask agreement
 
 prerequisites:
