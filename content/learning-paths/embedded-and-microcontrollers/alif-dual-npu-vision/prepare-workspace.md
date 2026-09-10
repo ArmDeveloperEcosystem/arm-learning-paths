@@ -131,8 +131,8 @@ git -C modules/ethos-u-core-driver-src merge-base --is-ancestor \
   b7cd193afde80afe8bbae9a26d2ca6586554f054 HEAD
 ```
 
-The Alif west manifest also downloads Zephyr's `hal_ethos_u` module. That
-module is a separately maintained snapshot, and its manifest revision doesn't
+The Alif `west` manifest also downloads Zephyr's `hal_ethos_u` module. That
+module is a separately maintained snapshot. Its manifest revision doesn't
 yet contain the merged multi-variant implementation. The explicit clone
 therefore remains necessary. The ancestor test is a guard rather than a pin:
 it permits newer `main` revisions while rejecting an old or stale checkout
@@ -167,8 +167,10 @@ deactivate
 
 Python 3.12 is used for compatibility with the pinned ExecuTorch revision.
 
+{{% notice Note %}}
 Removing a host `DEBUG` variable prevents ExecuTorch from
-interpreting a non-numeric shell value as its numeric build option. You do not need the optional `ethos_u` Python dependency group for the firmware build.
+interpreting a non-numeric shell value as its numeric build option. You don't need the optional `ethos_u` Python dependency group for the firmware build.
+{{% /notice %}}
 
 Apply the sample's ExecuTorch integration and Zephyr SRAM placement patches,
 then check the dependencies:
@@ -187,10 +189,10 @@ Workspace dependencies are ready.
 ```
 
 If you run the script again, it reports that both patches are already applied.
-Run it again after `west update`, which can restore either module checkout.
+Run the script again after `west update`, which can restore either module checkout.
 
 ## What you've accomplished and what's next
 
-You now have prepared the required sources and dependencies.
+You've now prepared the required sources and dependencies.
 
 Next, you'll build the dual-NPU application.

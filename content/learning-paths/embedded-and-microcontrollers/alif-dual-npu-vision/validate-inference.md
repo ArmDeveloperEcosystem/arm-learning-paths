@@ -26,7 +26,7 @@ The exact inference times and memory addresses vary between builds.
 
 ## Check the live camera UI
 
-After five seconds, the application clears the test image and starts the MT9M114 stream. Confirm the following results:
+After 5 seconds, the application clears the test image and starts the MT9M114 stream. Confirm the following results:
 
 - The MW405 display shows a 480 x 352 live preview.
 - The preview is in color and updates when you move the camera.
@@ -62,7 +62,7 @@ Use the fields as follows:
 | `span` | Time from the first worker starting to the last worker finishing |
 | `overlap` | Time during which both model executions overlap |
 
-These are Cortex-M cycle-counter wall-time measurements around delegated `Method::execute()`, not NPU PMU active-cycle counts. Input preparation and result decoding are outside these intervals. The two NPU interrupt counters also increase during live operation:
+These are Cortex-M cycle-counter wall-time measurements around delegated `Method::execute()` rather than NPU PMU active-cycle counts. Input preparation and result decoding are outside these intervals. The two NPU interrupt counters also increase during live operation:
 
 ```output
 dual-et: live frame=30 IRQs=.../...
@@ -82,3 +82,5 @@ You've now built, flashed, and validated a Zephyr application that drives
 two Ethos-U NPUs with separate persistent worker threads on one Cortex-M55.
 This design runs both ML workloads without adding a second microcontroller unit and its
 associated system power overhead.
+
+You can now use the workflow to run your own ExecuTorch models concurrently on separate Ethos-U NPUs under Zephyr.

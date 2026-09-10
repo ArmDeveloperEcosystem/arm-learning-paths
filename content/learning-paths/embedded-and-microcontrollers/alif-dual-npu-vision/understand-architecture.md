@@ -184,4 +184,4 @@ The U55 and U85 also require system-visible addresses. The platform layer transl
 
 You've learned how the application's dual-NPU architecture works and understood the application's memory layout.
 
-Next, you'll prepare the board and a clean west workspace for this architecture.
+Next, you'll prepare the board and a clean `west` workspace for this architecture.
