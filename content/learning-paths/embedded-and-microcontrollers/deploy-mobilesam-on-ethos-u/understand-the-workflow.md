@@ -6,11 +6,11 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Understand the MobileSAM deployment workflow
+## What you'll run
 
 MobileSAM is a compact variant of the Segment Anything Model. It takes an image and point prompts, then predicts a binary mask for the object selected by those points.
 
-You will run the ExecuTorch MobileSAM example on a Corstone-320 Fixed Virtual Platform (FVP). The system combines a Cortex-M85 processor with an Ethos-U85 neural processing unit (NPU). This lets you test the complete bare-metal deployment without a physical board.
+You'll run the ExecuTorch MobileSAM example on a Corstone-320 Fixed Virtual Platform (FVP). The system combines a Cortex-M85 processor with an Ethos-U85 neural processing unit (NPU). This lets you test the complete bare-metal deployment without a physical board.
 
 ## Follow the model from PyTorch to the target
 
@@ -40,6 +40,6 @@ The workflow performs two comparisons:
 
 Both comparisons enforce a minimum intersection over union (IoU) of `0.9`. Export stops if the host comparison falls below that threshold. The visualization step stops if the target comparison fails or produces a degenerate mask.
 
-## What you've learned
+## What you've learned and what's next
 
 You now know what the example deploys, why the point prompt is fixed, and how the host and target checks cover different stages of the pipeline. Next, you will prepare ExecuTorch and the Arm development tools.

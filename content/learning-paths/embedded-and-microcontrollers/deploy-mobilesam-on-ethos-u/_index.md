@@ -1,10 +1,6 @@
 ---
 title: Run MobileSAM prompt segmentation on Arm Ethos-U85 with ExecuTorch
 
-draft: true
-cascade:
-    draft: true
-
 description: Export, deploy, and validate a quantized MobileSAM prompt segmentation model on an Arm Ethos-U85 Fixed Virtual Platform using ExecuTorch.
 
 minutes_to_complete: 45
