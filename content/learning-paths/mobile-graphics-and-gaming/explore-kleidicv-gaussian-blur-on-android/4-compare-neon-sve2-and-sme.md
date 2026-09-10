@@ -68,7 +68,7 @@ benefit is at 3840x2160 on CPU 7, where SME is 2.01x faster than Neon.
 This doesn't imply a fixed speedup for every device or image. The separable
 filter writes and reads an intermediate `uint16_t` buffer. Cache capacity,
 memory bandwidth, streaming vector length, frequency scaling, and thermal
-state all affect the result. 
+state all affect the result.
 
 Don't compare absolute times across CPU clusters. Compare Neon and SME within the same process, CPU affinity, kernel, and device
 state. For more confidence, run several independent processes and take the median of their p50 values.
@@ -79,3 +79,5 @@ You've built a standalone KleidiCV Gaussian blur example, measured explicit Neon
 SVE2, and SME implementations, and used CPU affinity to make comparisons more
 repeatable. You also saw that a larger kernel can expose more of the benefit
 of SME on an Arm-based Android device.
+
+See the Further reading section on the Learning Path homepage.

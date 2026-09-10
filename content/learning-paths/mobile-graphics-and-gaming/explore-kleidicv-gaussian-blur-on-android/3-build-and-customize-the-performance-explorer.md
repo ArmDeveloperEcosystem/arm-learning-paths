@@ -31,7 +31,7 @@ decoding, memory transfers, rendering, and other processing stages.
 
 ## Create the performance explorer
 
-The `26.06` release used that you used earlier doesn't include the Gaussian
+The `26.06` release you used earlier doesn't include the Gaussian
 blur performance explorer. Add the following changes to the
 `examples/extract_one_operation` project in your local KleidiCV checkout.
 
@@ -444,6 +444,6 @@ selection belongs outside the performance explorer and is controlled with
 
 ## What you've accomplished and what's next
 
-You've now built a performance explorer for KleidiCV Gaussian blur implementations
+You've now built a performance explorer for KleidiCV Gaussian blur implementations.
 
 Next, you'll run a controlled comparison and interpret the results.

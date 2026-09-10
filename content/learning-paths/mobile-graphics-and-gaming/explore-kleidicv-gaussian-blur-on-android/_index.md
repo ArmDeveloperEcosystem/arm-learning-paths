@@ -14,7 +14,6 @@ learning_objectives:
 
 prerequisites:
     - A Ubuntu or Debian x86_64 Linux development machine with Git, CMake, Python 3, and Android Debug Bridge (`adb`) installed
-    - Android SDK Platform-Tools and Android NDK r29 or later
     - A 64-bit Arm Android device with SVE2 and SME support
     - Basic familiarity with C++, CMake, and `adb`
 

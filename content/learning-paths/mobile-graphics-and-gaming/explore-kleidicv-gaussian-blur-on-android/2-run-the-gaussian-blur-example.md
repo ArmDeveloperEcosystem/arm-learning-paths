@@ -38,7 +38,7 @@ three rows are as follows:
 0  0  0  0  0  0  0  0  0  0  255  0  0  0  0  0  0  0  0  0
 ```
 
-The program prints 20 identical pixel rows. The first three rows of the output are similar to:
+The program prints 20 identical pixel rows. Partial output is similar to:
 
 ```output
 Raw pixel values for the blurred output:
@@ -65,7 +65,7 @@ device when choosing an affinity mask.
 ## What you've accomplished and what's next
 
 You've run the standalone SME Gaussian blur example and confirmed the filter
-output. 
+output.
 
 Next, you'll build a performance explorer that controls the example's kernel size and
 measurement count from the command line.

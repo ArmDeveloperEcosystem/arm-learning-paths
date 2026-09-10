@@ -105,7 +105,7 @@ export PATH="$ANDROID_HOME/platform-tools:$PATH"
 echo "Using NDK: $ANDROID_NDK_HOME"
 adb version
 ```
-Resolving the directory with a glob avoids hard-coding the exact build number. 
+Resolving the directory with a glob avoids hard-coding the exact build number.
 
 If you prefer a standalone archive, you can instead download and unzip an NDK
 at r29 or later from
@@ -177,6 +177,6 @@ The output is `build/extract-android/example_usage`.
 
 ## What you've accomplished and what's next
 
-You've created the Android environment and built a KleidiCV Gaussian blur example. 
+You've created the Android environment and built a KleidiCV Gaussian blur example.
 
 Next, you'll run the minimal Gaussian blur example on the device.
