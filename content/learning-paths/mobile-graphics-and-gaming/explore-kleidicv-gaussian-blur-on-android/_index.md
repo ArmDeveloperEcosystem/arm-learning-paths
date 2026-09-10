@@ -1,6 +1,10 @@
 ---
-title: Explore KleidiCV Gaussian blur with SVE2 and SME on Android
-description: Explore KleidiCV Gaussian blur on Android by building and comparing NEON, SVE2, and SME streaming-SVE implementations.
+title: Compare KleidiCV Gaussian blur performance across Neon, SVE2, and SME on Android
+description: Build a KleidiCV Gaussian blur benchmark for Android and evaluate how Neon, SVE2, and SME performance changes with image resolution and kernel size.
+
+draft: true
+cascade:
+    draft: true
 
 minutes_to_complete: 45
 
@@ -9,11 +13,11 @@ who_is_this_for: This is an advanced topic for C and C++ developers who want to 
 learning_objectives:
     - Build KleidiCV Gaussian blur examples with the Android NDK.
     - Run a minimal SME Gaussian blur example on an Android device.
-    - Explore the performance of NEON, SVE2, and SME implementations with controlled CPU affinity.
+    - Explore the performance of Neon, SVE2, and SME implementations with controlled CPU affinity.
     - Interpret how kernel size and image resolution affect SME speedup.
 
 prerequisites:
-    - A Linux development machine with Git, CMake, Python 3, and ADB installed.
+    - A Ubuntu/Debian x86_64 Linux development machine with Git, CMake, Python 3, and ADB installed.
     - Android SDK Platform-Tools and Android NDK r29 or later.
     - A 64-bit Arm Android device with SVE2 and SME support.
     - Basic familiarity with C++, CMake, and Android Debug Bridge (ADB).
@@ -35,24 +39,29 @@ operatingsystems:
 tools_software_languages:
     - ADB
     - C
-    - C++
+    - CPP
     - CMake
     - Android NDK
+    - Neon
     - SVE2
     - SME
 
 further_reading:
+    - resource:
+        title: Android NDK guides
+        link: https://developer.android.com/ndk/guides
+        type: documentation
     - resource:
         title: KleidiCV
         link: https://gitlab.arm.com/kleidi/kleidicv
         type: documentation
     - resource:
         title: Arm Scalable Vector Extension
-        link: https://developer.arm.com/documentation/101726/latest
+        link: https://support.arm.com/documentation/102340/latest/
         type: documentation
     - resource:
         title: Arm Scalable Matrix Extension
-        link: https://developer.arm.com/documentation/109383/latest
+        link: https://support.arm.com/documentation/110636/latest/
         type: documentation
 
 ### FIXED, DO NOT MODIFY
