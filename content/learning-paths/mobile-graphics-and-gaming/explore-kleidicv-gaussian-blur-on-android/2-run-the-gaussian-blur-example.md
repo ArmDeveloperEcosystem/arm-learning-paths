@@ -1,12 +1,13 @@
 ---
 title: Run the standalone SME Gaussian blur example
+description: Push and run the standalone SME Gaussian blur example on an Android device and confirm the filter output with Android Debug Bridge.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Understand `example_usage.c`
+## Understand the Gaussian blur example
 
 `examples/extract_one_operation/example_usage.c` creates a 20x20,
 single-channel image containing a white vertical line on a black background.
@@ -62,5 +63,6 @@ adb shell 'taskset 80 /data/local/tmp/example_usage'
 The hexadecimal mask is device-specific. Use the CPU topology of your own
 device when choosing an affinity mask.
 
-Next, build a performance explorer that controls its kernel size and
+You've run the standalone SME Gaussian blur example and confirmed the filter
+output. Next, build a performance explorer that controls its kernel size and
 measurement count from the command line.

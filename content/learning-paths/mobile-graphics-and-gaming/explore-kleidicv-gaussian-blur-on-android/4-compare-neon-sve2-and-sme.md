@@ -1,5 +1,6 @@
 ---
-title: Compare NEON, SVE2, and SME performance
+title: Compare Neon, SVE2, and SME performance
+description: Run a controlled Neon, SVE2, and SME comparison across kernel sizes and resolutions, and interpret how workload size affects SME speedup.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -28,7 +29,7 @@ interrupts or frequency changes create occasional long calls.
 
 ## Results from an SME-capable device
 
-The table shows NEON p50 divided by SME p50. A value above 1.00x means SME is
+The table shows Neon p50 divided by SME p50. A value above 1.00x means SME is
 faster. Each result is from one process with a fixed CPU affinity and 3000
 measured calls.
 
@@ -62,19 +63,19 @@ of the total execution time. The highest measured speedup is 2.87x for the
 The 15x15 results show an SME speedup for every tested CPU and resolution,
 ranging from 1.13x to 2.01x. Unlike the 3x3 through 9x9 fixed kernels, the
 15x15 implementation does not use a binomial variant. Its largest measured
-benefit is at 3840x2160 on CPU 7, where SME is 2.01x faster than NEON.
+benefit is at 3840x2160 on CPU 7, where SME is 2.01x faster than Neon.
 
 This does not imply a fixed speedup for every device or image. The separable
 filter writes and reads an intermediate `uint16_t` buffer, so cache capacity,
 memory bandwidth, streaming vector length, frequency scaling, and thermal
 state all affect the result. Do not compare absolute times across CPU clusters.
-Compare NEON and SME within the same process, CPU affinity, kernel, and device
+Compare Neon and SME within the same process, CPU affinity, kernel, and device
 state. For more confidence, run several independent processes and take the
 median of their p50 values.
 
-## What you have learned
+## What you've accomplished
 
-You built a standalone KleidiCV Gaussian blur example, measured explicit NEON,
+You built a standalone KleidiCV Gaussian blur example, measured explicit Neon,
 SVE2, and SME implementations, and used CPU affinity to make comparisons more
 repeatable. You also saw that a larger kernel can expose more of the benefit
 of SME on an Arm-based Android device.

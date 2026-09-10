@@ -1,14 +1,25 @@
 ---
 title: Set up the Android build environment
+description: Set up the Android SDK and NDK, verify SVE2 and SME support, and build a KleidiCV Gaussian blur example for an Arm-based Android device.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+KleidiCV is Arm's high-performance image-processing library for AArch64. It
+provides a C API for operations such as color conversion, filtering, morphology,
+resizing, and geometric transforms. Optimized implementations target Neon, SVE2,
+SME, and SME2.
+
+You'll explore KleidiCV's Gaussian blur filter by building a standalone SME
+example and a performance explorer that calls the Neon, SVE2, and SME
+implementations directly. You can verify their output and compare
+performance under controlled conditions.
+
 ## Get KleidiCV
 
-Clone KleidiCV and check out the `26.06` release:
+Clone KleidiCV and check out the 26.06 release:
 
 ```bash
 git clone https://gitlab.arm.com/kleidi/kleidicv.git
@@ -17,10 +28,16 @@ git checkout --detach refs/tags/26.06
 ```
 
 Steps 1 and 2 use the standalone Gaussian blur example in
-`examples/extract_one_operation` from the `26.06` release. Step 3 introduces
+`examples/extract_one_operation` from the 26.06 release. Step 3 introduces
 a performance explorer for comparing the implementations.
 
 ## Configure the Android SDK and NDK
+
+{{% notice Note %}}
+Use an x86_64 (Intel or AMD) Ubuntu or Debian host.
+Google distributes the Android SDK command-line tools and NDK only as x86_64
+Linux builds, so they don't run on an Arm-based Linux machine.
+{{% /notice %}}
 
 Install the host packages needed to build the examples:
 
@@ -29,40 +46,76 @@ sudo apt update
 sudo apt install openjdk-17-jdk openjdk-17-jre cmake ninja-build unzip
 ```
 
-Download the Linux *Command line tools* package from
-[Android Studio downloads](https://developer.android.com/studio), then extract
-it and install Android SDK Platform-Tools and Build Tools:
+Download the Linux command line tools package and install Android SDK
+Platform-Tools and Build Tools. The commands below query the current package
+name from the [Android Studio downloads](https://developer.android.com/studio)
+page, so they keep working as Google publishes new command-line tools:
 
 ```bash
 export ANDROID_HOME="$HOME/android-sdk"
-mkdir -p "$ANDROID_HOME/cmdline-tools/latest"
-unzip commandlinetools-linux-*.zip -d "$ANDROID_HOME/cmdline-tools/latest"
 
-"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
-  --sdk_root="$ANDROID_HOME" --licenses
-"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
-  --sdk_root="$ANDROID_HOME" \
+# Find the current Linux command-line tools package name, then download it
+CLT_ZIP=$(curl -s https://developer.android.com/studio \
+  | grep -oE 'commandlinetools-linux-[0-9]+_latest.zip' | head -1)
+wget "https://dl.google.com/android/repository/$CLT_ZIP"
+
+# Extract, then move the archive's cmdline-tools directory into place as "latest"
+mkdir -p "$ANDROID_HOME/cmdline-tools"
+unzip -q "$CLT_ZIP" -d "$ANDROID_HOME/cmdline-tools"
+mv "$ANDROID_HOME/cmdline-tools/cmdline-tools" "$ANDROID_HOME/cmdline-tools/latest"
+
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
+  --sdk_root=$ANDROID_HOME --licenses
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
+  --sdk_root=$ANDROID_HOME \
   "platform-tools" "build-tools;36.0.0"
 ```
 
-Accept the SDK license prompts. Download and extract Android NDK r29, or a
-later NDK with SME support, from
-[Android NDK downloads](https://developer.android.com/ndk/downloads/).
-The `platform-tools` package installed above provides `adb`. Set
-`ANDROID_NDK_HOME` to the extracted NDK directory and add `adb` to your path:
+The archive contains a top-level `cmdline-tools` directory. Extract it into
+`$ANDROID_HOME/cmdline-tools` and rename it to `latest` so that `sdkmanager`
+resolves to `$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager`, the path the
+following commands expect.
+
+If you prefer to choose a version manually, you can instead download the
+command line tools package from the
+[Android Studio downloads](https://developer.android.com/studio) page in a
+browser and extract it with the same `mkdir`, `unzip`, and `mv` steps.
+
+Accept the SDK license prompts. Next, install Android NDK r29, which is the
+first NDK release with SME support. Installing the NDK with `sdkmanager` places
+it under `$ANDROID_HOME/ndk/<version>` and avoids a separate manual download.
+List the available `ndk;` packages, then install an r29 (or later) build:
 
 ```bash
-export ANDROID_NDK_HOME=/path/to/android-ndk-r29
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=$ANDROID_HOME --list \
+  | grep 'ndk;'
+$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager \
+  --sdk_root=$ANDROID_HOME "ndk;29.0.14206865"
+```
+
+The `platform-tools` package installed above provides `adb`. Set
+`ANDROID_NDK_HOME` to the installed NDK directory and add `adb` to your path.
+Resolving the directory with a glob avoids hard-coding the exact build number:
+
+```bash
+export ANDROID_NDK_HOME="$(ls -d "$ANDROID_HOME"/ndk/* | sort -V | tail -1)"
 export PATH="$ANDROID_HOME/platform-tools:$PATH"
+echo "Using NDK: $ANDROID_NDK_HOME"
 adb version
 ```
+
+If you prefer a standalone archive, you can instead download and unzip an NDK
+at r29 or later from
+[Android NDK downloads](https://developer.android.com/ndk/downloads/) and point
+`ANDROID_NDK_HOME` at the extracted `android-ndk-<version>` directory.
 
 The output is similar to:
 
 ```output
+Using NDK: /home/ubuntu/android-sdk/ndk/29.0.14206865
 Android Debug Bridge version 1.0.41
-Version 34.0.4-debian
-Installed as /usr/lib/android-sdk/platform-tools/adb
+Version 37.0.1-15733141
+Installed as /home/ubuntu/android-sdk/platform-tools/adb
 Running on Linux 6.8.0-137-generic (x86_64)
 ```
 
@@ -80,6 +133,7 @@ adb devices
 The performance results in this Learning Path were collected on a
 [vivo X300](https://www.vivo.com.cn/vivo/x300/) powered by the
 [MediaTek Dimensity 9500](https://www.mediatek.com/products/smartphones/mediatek-dimensity-9500).
+
 This Armv9.3 processor supports SVE2, SME, and SME2. You can use another
 Arm-based Android device if it supports SVE2 and SME.
 
@@ -102,7 +156,7 @@ that supports SME.
 
 ## Build the Android targets
 
-Configure CMake for 64-bit Arm Android and build both example targets:
+Configure CMake for 64-bit Arm Android and build the example target:
 
 ```bash
 cmake -S examples/extract_one_operation \

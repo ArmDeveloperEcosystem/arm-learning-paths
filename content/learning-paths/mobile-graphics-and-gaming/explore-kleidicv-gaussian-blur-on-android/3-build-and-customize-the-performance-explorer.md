@@ -1,5 +1,6 @@
 ---
 title: Build and customize the Gaussian blur performance explorer
+description: Add and build a KleidiCV Gaussian blur performance explorer that benchmarks the Neon, SVE2, and SME backends and reports latency as CSV.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -10,11 +11,11 @@ layout: learningpathall
 
 The performance explorer is a standalone microbenchmark for comparing
 KleidiCV Gaussian blur implementations on an Arm-based Android device. It
-invokes the NEON, SVE2, and SME fixed-stripe functions directly instead of
+invokes the Neon, SVE2, and SME fixed-stripe functions directly instead of
 using KleidiCV runtime dispatch.
 
 For each implementation, the program processes deterministic single-channel
-images at 640x640, 1920x1080, and 3840x2160. It creates a NEON reference image
+images at 640x640, 1920x1080, and 3840x2160. It creates a Neon reference image
 and checks the SVE2 and SME results byte-for-byte against that reference
 before reporting performance.
 
@@ -34,7 +35,7 @@ The `26.06` release used in the previous steps does not include the Gaussian
 blur performance explorer. Add the following changes to the
 `examples/extract_one_operation` project in your local KleidiCV checkout.
 
-### Update `CMakeLists.txt`
+### Update the build configuration
 
 Append this configuration to
 `examples/extract_one_operation/CMakeLists.txt`. It builds the complete
@@ -68,7 +69,7 @@ target_link_libraries(
 )
 ```
 
-### Create `gaussian_blur_benchmark.cpp`
+### Create the example source code
 
 Create `examples/extract_one_operation/gaussian_blur_benchmark.cpp` with the
 following source:
@@ -383,13 +384,13 @@ calls.
 
 | Backend | Image resolution | Kernel | Iterations | Mean latency (ns) | p50 latency (ns) |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| NEON | 640x640 | 15x15 | 3000 | 1,006,594.304 | 986,112 |
+| Neon | 640x640 | 15x15 | 3000 | 1,006,594.304 | 986,112 |
 | SVE2 | 640x640 | 15x15 | 3000 | 838,039.808 | 819,840 |
 | SME | 640x640 | 15x15 | 3000 | 695,746.901 | 679,424 |
-| NEON | 1920x1080 | 15x15 | 3000 | 4,284,394.496 | 4,226,560 |
+| Neon | 1920x1080 | 15x15 | 3000 | 4,284,394.496 | 4,226,560 |
 | SVE2 | 1920x1080 | 15x15 | 3000 | 3,421,537.920 | 3,384,320 |
 | SME | 1920x1080 | 15x15 | 3000 | 2,464,050.517 | 2,424,064 |
-| NEON | 3840x2160 | 15x15 | 3000 | 16,678,738.261 | 16,471,040 |
+| Neon | 3840x2160 | 15x15 | 3000 | 16,678,738.261 | 16,471,040 |
 | SVE2 | 3840x2160 | 15x15 | 3000 | 13,267,384.789 | 13,089,920 |
 | SME | 3840x2160 | 15x15 | 3000 | 8,382,547.243 | 8,199,552 |
 
@@ -417,7 +418,7 @@ implementation. Compare rows with the same image dimensions, kernel size,
 CPU affinity, and iteration count.
 
 In this 15x15 example, SME has the lowest p50 latency at all three resolutions.
-Compared with NEON, SME is 1.45x faster at 640x640, 1.74x faster at
+Compared with Neon, SME is 1.45x faster at 640x640, 1.74x faster at
 1920x1080, and 2.01x faster at 3840x2160. The next step compares multiple
 kernel sizes and explains how workload size can change the performance
 behavior.
@@ -425,11 +426,11 @@ behavior.
 ## Code changes behind the parameters
 
 The performance explorer stores its settings in `BenchmarkOptions`. The
-default values are a 5x5 kernel and 1000 measured calls. The source above
-includes the complete option parser, which accepts `--iterations <count>` and
-`--kernel <3|5|7|9|15>`. The selected kernel size is passed as both
-`kernel_width` and `kernel_height` to every backend. This makes it possible
-to compare implementations without recompiling the program.
+default values are a 5x5 kernel and 1000 measured calls. The
+`gaussian_blur_benchmark.cpp` source includes the complete option parser, which
+accepts `--iterations <count>` and `--kernel <3|5|7|9|15>`. The selected kernel
+size is passed as both the kernel width and height to every backend. This makes
+it possible to compare implementations without recompiling the program.
 
 The program intentionally does not choose a CPU or read CPU capacity. CPU
 selection belongs outside the performance explorer and is controlled with
