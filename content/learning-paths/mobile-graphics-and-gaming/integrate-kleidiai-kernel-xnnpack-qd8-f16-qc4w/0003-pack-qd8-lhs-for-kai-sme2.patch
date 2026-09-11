@@ -1,0 +1,71 @@
+From 4bd031ce80a01e353b28b76fc9c7bf1f8c9aa690 Mon Sep 17 00:00:00 2001
+From: Qxiang Xu <Qixiang.Xu@arm.com>
+Date: Tue, 25 Aug 2026 10:05:08 +0800
+Subject: [PATCH 3/4] Pack QD8 LHS for KAI SME2
+
+---
+ ...d8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c | 45 +++++++++++++++++++
+ 1 file changed, 45 insertions(+)
+
+diff --git a/src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c b/src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c
+index 9999026148..951ff1c994 100644
+--- a/src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c
++++ b/src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c
+@@ -4,6 +4,10 @@
+ // LICENSE file in the root directory of this source tree.
+ 
+ #include <stddef.h>
++#include <stdint.h>
++
++#include "src/xnnpack/math.h"
++#include "src/xnnpack/microparams.h"
+ 
+ #if XNN_ENABLE_KLEIDIAI
+ #include "kai/ukernels/matmul/matmul_clamp_f16_qai8dxp_qsi4cxp/kai_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa.h"
+@@ -16,3 +20,44 @@ size_t xnn_qd8_f16_qc4w_gemm_minmax_ukernel_16x64c4__neonsme2_get_nr(void) {
+   return kai_get_nr_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa();
+ }
+ #endif  // XNN_ENABLE_KLEIDIAI
++
++static size_t lhs_packed_size(
++    size_t m, size_t k, size_t mr) {
++  const size_t k_padded = round_up(k, 32);
++  return round_up(m, mr) *
++      (k_padded * sizeof(int8_t) + sizeof(int32_t) + sizeof(float));
++}
++
++static void pack_lhs(
++    size_t m, size_t k, size_t mr, size_t kr, const int8_t* input, size_t input_stride,
++    const struct xnn_qd8_quantization_params* quantization_params,
++    void* packed_lhs) {
++  const size_t k_padded = round_up(k, 32);
++  const size_t packed_row_size =
++      k_padded * sizeof(int8_t) + sizeof(int32_t) + sizeof(float);
++  int8_t* packed = packed_lhs;
++
++  for (size_t m_start = 0; m_start < m; m_start += mr) {
++    const size_t rows = min(mr, m - m_start);
++    int8_t* values = packed;
++    int32_t* offsets = (int32_t*) (values + mr * k_padded);
++    float* scales = (float*) (offsets + mr);
++
++    for (size_t row = 0; row < mr; row++) {
++      const size_t source_row = m_start + min(row, rows - 1);
++      const int8_t* source = input + source_row * input_stride;
++      const struct xnn_qd8_quantization_params qparams =
++          quantization_params[source_row];
++      for (size_t k_start = 0; k_start < k_padded; k_start += kr) {
++        for (size_t k_offset = 0; k_offset < kr; k_offset++) {
++          values[(k_start / kr) * mr * kr + row * kr + k_offset] =
++              k_start + k_offset < k ? source[k_start + k_offset]
++                                   : (int8_t) qparams.zero_point;
++        }
++      }
++      offsets[row] = -qparams.zero_point;
++      scales[row] = qparams.inv_scale;
++    }
++    packed += mr * packed_row_size;
++  }
++}
+-- 
+2.43.0
