@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Install the required tools
 
-We'll need `git` to clone the ExecuTorch repository, `curl` to fetch the conversion scripts, a C++ build toolchain, and a Python3.12 virtual environment:
+We'll need `git` to clone the ExecuTorch repository, `curl` to fetch the project archive, a C++ build toolchain, and a Python3.12 virtual environment:
 
 ```bash
 sudo apt update
@@ -27,14 +27,17 @@ Create a working directory and download the project files for this Learning
 Path:
 
 ```bash
-mkdir smolvla-executorch-work
-cd smolvla-executorch-work
-curl -fsSLO https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/laptops-and-desktops/smolvla-executorch-conversion/download-project.sh
-bash download-project.sh
-cd smolvla-executorch-arm
+mkdir smolvla-executorch-conversion-work
+cd smolvla-executorch-conversion-work
+curl -fL --retry 3 \
+    -o smolvla-executorch-conversion.tar.gz \
+    'https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/laptops-and-desktops/smolvla-executorch-conversion'
+mkdir smolvla-executorch-conversion
+tar xfz smolvla-executorch-conversion.tar.gz \
+    --strip-components=4 \
+    -C smolvla-executorch-conversion
+cd smolvla-executorch-conversion
 ```
-
-The `download-project.sh` script fetches the project directory and configures its scripts to be executable.
 
 
 ## Set up the software environment
@@ -65,10 +68,10 @@ A successful check looks like:
 
 ```output
 Environment OK: aarch64, ExecuTorch e4d02f41
-  Python: /path/to/smolvla-executorch-arm/.venv/bin/python
-  ExecuTorch: /path/to/smolvla-executorch-arm/toolchain/executorch
-  Runtime: /path/to/smolvla-executorch-arm/toolchain/executorch/cmake-out-xnnpack
-  Checkpoint: /path/to/smolvla-executorch-arm/checkpoints/smolvla_base
+  Python: /path/to/smolvla-executorch-conversion/.venv/bin/python
+  ExecuTorch: /path/to/smolvla-executorch-conversion/toolchain/executorch
+  Runtime: /path/to/smolvla-executorch-conversion/toolchain/executorch/cmake-out-xnnpack
+  Checkpoint: /path/to/smolvla-executorch-conversion/checkpoints/smolvla_base
 ```
 
 
