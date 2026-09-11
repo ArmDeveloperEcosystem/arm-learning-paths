@@ -73,7 +73,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Performance and Architecture
 platforms:
-  - AWS
+  - AWS Graviton
 armips:
     - Neoverse
     - Cortex-A

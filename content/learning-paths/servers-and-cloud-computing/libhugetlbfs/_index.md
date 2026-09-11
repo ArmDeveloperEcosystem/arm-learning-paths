@@ -24,10 +24,10 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Databases
 platforms:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
     - Neoverse
 operatingsystems:

@@ -27,10 +27,10 @@ operatingsystems:
 skilllevels: Introductory
 subjects: Libraries
 platforms:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 
 tools_software_languages:
 - vvenc

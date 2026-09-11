@@ -29,8 +29,8 @@ test_maintenance: true
 skilllevels: Introductory
 subjects: Web
 platforms:
-  - AWS
-  - Oracle
+  - AWS Graviton
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
 - Neoverse
 operatingsystems:

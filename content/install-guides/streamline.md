@@ -29,7 +29,7 @@ minutes_to_complete: 10
 author: Ronan Synnott
 
 ### Link to official documentation
-official_docs: https://developer.arm.com/documentation/101816
+official_docs: https://support.arm.com/documentation/101816
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -40,18 +40,18 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 ---
 [Arm Streamline Performance Analyzer](https://developer.arm.com/Tools%20and%20Software/Streamline%20Performance%20Analyzer) is an application profiler for Android, Linux and bare-metal applications.
 
-Streamline is available as a component of [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio) or [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
+Streamline is available as a component of [Arm Performance Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio) or [Arm Development Studio](https://developer.arm.com/Tools%20and%20Software/Arm%20Development%20Studio).
 
-The version of Streamline provided with Performance Studio supports [certain Android targets](https://developer.arm.com/Tools%20and%20Software/Arm%20Mobile%20Studio#Supported-Devices), as well as Linux user-space code.
+The version of Streamline provided with Performance Studio supports certain Android targets, as well as Linux user-space code. For the current list of supported target operating systems, see the [Arm Performance Studio Release Notes](https://support.arm.com/documentation/107649).
 
 For other use cases, use Arm Streamline as provided with Arm Development Studio.
 
 ## How do I download Streamline installation packages?
 
-Download the appropriate package from the [Product Download Hub](https://developer.arm.com/downloads).
+Download the appropriate package from the [Product Download Hub](https://support.arm.com/downloads).
 
- - [Arm Performance Studio](https://developer.arm.com/downloads/view/MOBST-PRO0)
- - [Arm Development Studio](https://developer.arm.com/downloads/view/DEVST-GLD0)
+ - [Arm Performance Studio](https://support.arm.com/downloads/view/MOBST-PRO0)
+ - [Arm Development Studio](https://support.arm.com/downloads/view/DEVST-GLD0)
 
 Arm Performance Studio supports Windows, Linux, and macOS hosts.
 
@@ -61,7 +61,7 @@ Arm Development Studio supports Windows and Linux hosts.
 
 ### How do I install Streamline with Arm Performance Studio?
 
-Full install instructions are given in section 3 of the Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
+Full install instructions are given in section 3 of the Performance Studio [Release Notes](https://support.arm.com/documentation/107649).
 
 See also the Arm Performance Studio [install guide](/install-guides/ams/).
 
@@ -71,7 +71,7 @@ Add the Android SDK platform tools directory to your `PATH` environment variable
 
 ### How do I install Streamline with Arm Development Studio?
 
-Install Arm Development Studio using the instructions in the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio).
+Install Arm Development Studio using the instructions in the [Arm Development Studio Getting Started Guide](https://support.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio).
 
 See also the Arm Development Studio [install guide](/install-guides/armds/).
 
@@ -83,18 +83,18 @@ Arm Performance Studio is free of charge and is not license managed.
 
 ## How do I get started with Streamline?
 
-To configure your target and/or application for Streamline, follow the appropriate instructions below depending on your use case:
+To configure your target or application for Streamline, follow the instructions for your use case:
 
- - [Android](https://developer.arm.com/documentation/101813)
- - [Linux](https://developer.arm.com/documentation/101814)
- - [Bare-metal (and RTOS)](https://developer.arm.com/documentation/101815)
+ - [Android](https://support.arm.com/documentation/101813)
+ - [Linux](https://support.arm.com/documentation/101814)
+ - [Bare-metal (and RTOS)](https://support.arm.com/documentation/101815)
 
-Depending on your type of application, choose the appropriate guide below to get started with profiling your application using Streamline.
+Depending on your type of application, choose the appropriate guide to get started with profiling your application using Streamline.
 
-- [Profile your Android Application](https://developer.arm.com/documentation/101816/latest/Getting-started-with-Streamline/Profile-your-Android-application)
-- [Profile your Linux Application](https://developer.arm.com/documentation/101816/latest/Getting-started-with-Streamline/Profile-your-Linux-application)
-- [Profile your bare-metal Application](https://developer.arm.com/documentation/101816/latest/Getting-started-with-Streamline/Profile-your-bare-metal-application)
+- [Profile your Android Application](https://support.arm.com/documentation/101816/latest/Getting-started-with-Streamline/Profile-your-Android-application)
+- [Profile your Linux Application](https://support.arm.com/documentation/101816/latest/Getting-started-with-Streamline/Profile-your-Linux-application)
+- [Profile your bare-metal Application](https://support.arm.com/documentation/101816/latest/Getting-started-with-Streamline/Profile-your-bare-metal-application)
 
-For Android users, a thorough [tutorial](https://developer.arm.com/documentation/102477) is also available.
+For Android users, a thorough [tutorial](https://support.arm.com/documentation/102477) is also available.
 
 See also the [Get started with Arm Performance Studio](/learning-paths/mobile-graphics-and-gaming/ams/) learning path.

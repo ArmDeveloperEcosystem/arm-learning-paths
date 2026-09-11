@@ -23,7 +23,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Containers and Virtualization
 platforms:
-  - AWS
+  - AWS Graviton
 
 armips:
     - Neoverse

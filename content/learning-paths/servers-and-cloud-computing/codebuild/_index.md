@@ -66,7 +66,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: CI-CD
 platforms:
-  - AWS
+  - AWS Graviton
 
 armips:
     - Neoverse
