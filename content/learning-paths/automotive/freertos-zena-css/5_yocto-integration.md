@@ -245,6 +245,10 @@ set_source_files_properties(crt_replacements.c PROPERTIES
 
 After applying the packaging, version-tracking, and compiler fixes, the completed `freertos-demos-cl1.bb` recipe is:
 
+<details>
+
+<summary>expend freertos-demos-cl1.bb</summary>
+
 ```bitbake
 # SPDX-License-Identifier: MIT
 
@@ -308,8 +312,10 @@ addtask deploy after do_install
 ```
 
 {{% notice Warning %}}
-Both `SRCREV` values must remain pinned to tested commits. `${AUTOREV}` isn't suitable for a reproducible integration because it can change the source without changing the recipe.
+Both `SRCREV` values are pinned to commits that have been tested with this integration. To test the latest commits from each branch instead, replace the commit hashes with `${AUTOREV}`.   
+Note that `${AUTOREV}` does not provide a reproducible build because the selected source can change over time
 {{% /notice %}}
+</details>
 
 Rebuild the recipe after each change:
 
