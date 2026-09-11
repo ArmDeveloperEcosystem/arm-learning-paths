@@ -5,9 +5,9 @@ weight: 3
 layout: "learningpathall"
 ---
 
-## Connect the hardware on target device
+## Connect the target hardware
 
-Power off the E8 DevKit before changing camera or display connections.
+Power off the E8 DevKit before changing camera or display connections. Then, to connect the hardware:
 
 1. Connect the MT9M114 camera module to the bottom-side J16 connector.
 2. Connect the MW405 display to the display connector.
@@ -16,7 +16,8 @@ Power off the E8 DevKit before changing camera or display connections.
 5. Move the boot switch to the SE position before flashing.
 
 {{% notice Note %}}
-The supplied overlay targets the J16 selfie-camera connection. J22 uses a different I2C address and device-tree route.
+- The supplied overlay targets the J16 selfie-camera connection. J22 uses a different I2C address and device-tree route. Don't combine a J16 overlay with a camera connected to J22.
+- If the camera reports chip ID `0000` or I2C error `-5`, power off the board and check the camera connection. The supplied overlay expects the MT9M114 on J16 at the selfie-camera I2C address. Reseat the flex cable and confirm that its contacts face the correct direction.
 {{% /notice %}}
 
 ## Install the host tools
@@ -33,7 +34,7 @@ If the command reports that the tools are missing, install them before you conti
 xcode-select --install
 ```
 
-Install Git, CMake, and Python 3.12 with Homebrew. Then create the west Python environment:
+Install Git, CMake, and Python 3.12 with Homebrew. Then, create the `west` Python environment:
 
 ```bash
 brew install git cmake python@3.12
@@ -49,23 +50,43 @@ python -m pip install \
   ninja==1.13.2
 ```
 
-Confirm that west and Ninja are available:
+Confirm that `west` and `ninja` are available:
 
 ```bash
 west --version
 ninja --version
 ```
 
-Both commands print a version number.
+If available, both commands print a version number.
+
+{{% notice Note %}}
+
+- If CMake reports that it can't find `ninja`, install it in the active virtual environment:
+
+  ```bash
+  source $HOME/alif-dual-npu/.venv/bin/activate
+  python -m pip install ninja
+  ```
+  Run the build again with `--pristine`.
+
+- If the Alif flash runner can't import `fdt`, activate the same environment and install the missing module:
+
+  ```bash
+  source $HOME/alif-dual-npu/.venv/bin/activate
+  python -m pip install fdt
+  ```
+{{% /notice %}}
 
 ## Create the west workspace
 
 Clone the SDK fork that contains the dual-NPU sample at the validated revision,
-then initialize a local west workspace from that checkout.
-The fork's ``main`` branch stays synchronized with the Alif SDK ``main``
-branch. The dual-NPU application is maintained separately on the
-``dual-npu-main-integration`` branch, which also includes the support for MT9M114,
-ISP, and MW405:
+then initialize a local `west` workspace from that checkout.
+The fork's `main` branch stays synchronized with the Alif SDK `main`
+branch.
+
+The dual-NPU application is maintained separately on the
+`dual-npu-main-integration` branch, which also includes the support for MT9M114,
+image signal processor, and MW405:
 
 ```bash
 cd $HOME/alif-dual-npu
@@ -80,11 +101,11 @@ python -m pip install -r zephyr/scripts/requirements.txt
 west sdk install --toolchains arm-zephyr-eabi
 ```
 
-The manifest project appears at `sdk-alif`, and the remaining projects appear under `modules`, `bootloader`, `tools`, and `zephyr`.
+The manifest project appears at `sdk-alif`. The remaining projects appear under `modules`, `bootloader`, `tools`, and `zephyr`.
 
 {{% notice Note %}}
-Do not initialize from ``alifsemi/sdk-alif`` directly. The dual-NPU application has not yet
-been merged there. Use the fork's ``dual-npu-main-integration`` branch which contains the application.
+Don't initialize from `alifsemi/sdk-alif` directly. The dual-NPU application hasn't yet
+been merged there. Use the fork's `dual-npu-main-integration` branch which contains the application.
 {{% /notice %}}
 
 Initialize the ExecuTorch submodules:
@@ -95,10 +116,12 @@ git -C modules/lib/executorch submodule update --init --recursive
 
 ## Add the multi-variant dependencies
 
-The demo uses the multi-variant support merged into the Ethos-U core driver
-``main`` branch. This support allows one Cortex-M55 to manage the U55 and U85
+You'll use the multi-variant support merged into the Ethos-U core driver
+`main` branch. This support allows one Cortex-M55 to manage the U55 and U85
 through one driver registry, avoiding the system power overhead of assigning
-each NPU to a separate MCU. Clone the current ``main`` branch:
+each NPU to a separate microcontroller unit.
+
+Clone the current `main` branch:
 
 ```bash
 git clone --branch main \
@@ -108,12 +131,12 @@ git -C modules/ethos-u-core-driver-src merge-base --is-ancestor \
   b7cd193afde80afe8bbae9a26d2ca6586554f054 HEAD
 ```
 
-The Alif west manifest also downloads Zephyr's `hal_ethos_u` module. That
-module is a separately maintained snapshot and its manifest revision does not
-yet contain the merged multi-variant implementation. The explicit clone above
+The Alif `west` manifest also downloads Zephyr's `hal_ethos_u` module. That
+module is a separately maintained snapshot. Its manifest revision doesn't
+yet contain the merged multi-variant implementation. The explicit clone
 therefore remains necessary. The ancestor test is a guard rather than a pin:
 it permits newer `main` revisions while rejecting an old or stale checkout
-that cannot run U55 and U85 through the same driver registry.
+that can't run U55 and U85 through the same driver registry.
 
 Clone and pin CMSIS-NN:
 
@@ -124,7 +147,7 @@ git -C modules/cmsis-nn-src checkout \
   d933672e7ca97eec70ef43230baee7b20c2a28ae
 ```
 
-Create the Python environment used by the ExecuTorch CMake integration:
+Create the Python environment that's used by the ExecuTorch CMake integration:
 
 ```bash
 python3.12 -m venv .venv-executorch
@@ -144,8 +167,10 @@ deactivate
 
 Python 3.12 is used for compatibility with the pinned ExecuTorch revision.
 
+{{% notice Note %}}
 Removing a host `DEBUG` variable prevents ExecuTorch from
-interpreting a non-numeric shell value as its numeric build option. You do not need the optional `ethos_u` Python dependency group for the firmware build.
+interpreting a non-numeric shell value as its numeric build option. You don't need the optional `ethos_u` Python dependency group for the firmware build.
+{{% /notice %}}
 
 Apply the sample's ExecuTorch integration and Zephyr SRAM placement patches,
 then check the dependencies:
@@ -154,7 +179,7 @@ then check the dependencies:
 ./sdk-alif/samples/modules/executorch/dual_npu_vision/setup_workspace.sh
 ```
 
-You see output similar to:
+The output is similar to:
 
 ```output
 Applied ExecuTorch dual-NPU patch.
@@ -164,5 +189,10 @@ Workspace dependencies are ready.
 ```
 
 If you run the script again, it reports that both patches are already applied.
-Run it again after `west update`, which can restore either module checkout. You
-now have the sources and dependencies required for the build.
+Run the script again after `west update`, which can restore either module checkout.
+
+## What you've accomplished and what's next
+
+You've now prepared the required sources and dependencies.
+
+Next, you'll build the dual-NPU application.
