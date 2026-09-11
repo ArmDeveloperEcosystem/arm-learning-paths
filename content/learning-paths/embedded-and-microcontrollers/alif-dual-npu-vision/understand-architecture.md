@@ -121,7 +121,7 @@ The application separates persistent artifacts, CPU-private state, display and v
 
 ### Persistent MRAM payload
 
-SEToolKit writes `model_assets.bin` at `0x80008000` and the execute-in-place Zephyr image at `0x80400000`:
+SETOOLS writes `model_assets.bin` at `0x80008000` and the execute-in-place Zephyr image at `0x80400000`:
 
 | Address range | Size | Contents |
 | --- | ---: | --- |
