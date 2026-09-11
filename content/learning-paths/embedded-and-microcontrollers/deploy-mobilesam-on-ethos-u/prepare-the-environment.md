@@ -1,6 +1,6 @@
 ---
 title: Prepare the ExecuTorch and Arm environment
-description: Install ExecuTorch, the Ethos-U Python dependencies, the Arm GNU Toolchain, and the Corstone-320 FVP.
+description: Set up ExecuTorch, Ethos-U dependencies, the Arm GNU Toolchain, and the Corstone-320 FVP to build and run the MobileSAM example.
 weight: 3
 
 layout: "learningpathall"
@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Check your development machine
 
-Run this preflight check before downloading the source:
+Run the following preflight check before downloading the source:
 
 ```bash
 case "$(uname -s)/$(uname -m)" in
@@ -39,9 +39,15 @@ cmake --version | head -n 1
 c++ --version | head -n 1
 ```
 
-The check confirms that you are using a supported Linux host or Apple silicon Mac and that Python 3.12, Git, CMake, a host C++ compiler, and Ninja or Make are available.
+The check confirms that you are using a supported Linux host or Apple silicon Mac. It also checks for the availability of the following:
 
-## Get the ExecuTorch source
+- Python 3.12
+- Git
+- CMake
+- A host C++ compiler
+- Ninja or Make
+
+## Clone the ExecuTorch source
 
 Clone ExecuTorch and initialize its submodules:
 
@@ -77,8 +83,8 @@ Using the checkout's installer keeps the Python package aligned with the example
 
 ## Install the Arm development tools
 
-{{% notice macOS %}}
-Before you run the Arm setup command on macOS, install Docker Desktop and follow the [AVH FVPs on macOS install guide](/install-guides/fvps-on-macos/). Add the FVPs-on-Mac `bin` directory to `PATH`. The wrapper runs the Linux Corstone-320 FVP in a container. Confirm that Docker is running and that `FVP_Corstone_SSE-320` resolves to the wrapper:
+{{% notice Note %}}
+Before you run the Arm setup command on macOS, install [Docker Desktop](/install-guides/docker/docker-desktop/) and follow the [AVH FVPs on macOS install guide](/install-guides/fvps-on-macos/). Add the FVPs-on-Mac `bin` directory to `PATH`. The wrapper runs the Linux Corstone-320 FVP in a container. Confirm that Docker is running and that `FVP_Corstone_SSE-320` resolves to the wrapper:
 
 ```bash
 docker info >/dev/null
@@ -101,7 +107,7 @@ Confirm that Python imports ExecuTorch:
 python -c "import executorch; print('ExecuTorch import succeeded')"
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 ExecuTorch import succeeded
@@ -114,7 +120,7 @@ arm-none-eabi-gcc -dumpmachine
 command -v FVP_Corstone_SSE-320
 ```
 
-The first command must print:
+The output of the first command is similar to:
 
 ```output
 arm-none-eabi
@@ -122,6 +128,8 @@ arm-none-eabi
 
 The second command prints the path to the Corstone-320 FVP. On macOS, confirm that this path is inside the FVPs-on-Mac `bin` directory.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You have installed the Python, compiler, Vela, and virtual-platform dependencies used by the example. Next, you will prepare and export MobileSAM for Ethos-U85.
+You've installed the Python, compiler, Vela, and virtual-platform dependencies used by the example.
+
+Next, you'll prepare and export MobileSAM for Ethos-U85.
