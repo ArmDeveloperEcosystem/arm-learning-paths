@@ -31,7 +31,7 @@ The agent uses separate Performix tools for collection and analysis:
 
 The agent uses this data to cross-reference hotspot function names against the source files in your workspace, reason about why those functions are expensive, and propose specific code changes. Because the AI can see both the profiling output and the source code simultaneously, it avoids the guesswork that's common in manual profiling workflows.
 
-You'll use the Arm Performix MCP server in the following sections to automate the Code Hotspots recipe on a C++ application running on an Arm Neoverse target and identify and fix the most CPU-intensive functions. The agent will drive three successive optimization passes — each validated by a re-profile before moving to the next — to achieve a measured ~12x runtime improvement.
+You'll use the Arm Performix MCP server in the following sections to automate the Code Hotspots recipe on a C++ application running on an Arm Neoverse target and identify and fix the most CPU-intensive functions. The agent will drive three successive optimization passes — each validated by a re-profile before moving to the next — that reduce the profile sample count by approximately 92% in the example results.
 
 ## How to interact with the Arm Performix MCP server for profiling
 
