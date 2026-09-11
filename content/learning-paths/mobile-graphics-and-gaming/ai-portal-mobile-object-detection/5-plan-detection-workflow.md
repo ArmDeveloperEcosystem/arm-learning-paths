@@ -35,7 +35,7 @@ Record the following information for the model and compare them with the supplie
 | Matches a supplied strategy's methods, tensors, preprocessing, labels, box format, and postprocessing | Register another compatible model |
 | Differs in any of those areas | Generate another adapter using a coding agent |
 
-Sharing a runtime doesn't make detector packages interchangeable. Two ExecuTorch detector packages can expose different tensors, box formats, preprocessing, and output decoding.
+Sharing a runtime doesn't make detector packages interchangeable. ExecuTorch or LiteRT detector packages can expose different tensors, box formats, preprocessing, and output decoding.
 
 ### Register another compatible model
 
@@ -62,7 +62,7 @@ $MODEL_FILE = .\.hf-venv\Scripts\python.exe download_model.py `
   {{< /tab >}}
 {{< /tabpane >}}
 
-If the repository contains more than one `.pte` file, rerun the downloader with `--filename` followed by the exact model filename.
+If the repository contains more than one `.pte` or `.tflite` file, rerun the downloader with `--filename` followed by the exact model filename.
 
 Add one descriptor to the list returned by `CompatibleModelRegistry.models()`. This example registers another detector that matches the supplied YOLOv8 strategy:
 
@@ -88,9 +88,9 @@ Don't register a detector based only on its `.pte` extension or family name. A d
 
 ### Determine when the supplied adapter doesn't fit
 
-Add a strategy inside the supplied ExecuTorch adapter when the model keeps the same single-image or camera workflow but needs different preprocessing or output decoding.
+Add a strategy inside the matching supplied adapter when the model keeps the same single-image or camera workflow and runtime but needs different preprocessing or output decoding.
 
-The strategy must validate the model methods and tensor shapes and prepare the `640 × 640` input expected by the package. It must also decode boxes and class scores, scale coordinates back to the source image, and apply the documented confidence filtering and non-maximum suppression. Add a configuration constant to `ExecuTorchObjectDetectionAdapter.java` and reference it from the model descriptor.
+The strategy must validate the model methods or tensor shapes and prepare the input expected by the package. It must also decode boxes and class scores, scale coordinates back to the source image, and apply the documented confidence filtering and non-maximum suppression. Add a configuration constant to the matching adapter and reference it from the model descriptor.
 
 Use the model package as the source of truth. A detector can load and execute while producing misplaced boxes or incorrect labels because any of the following are wrong:
 
@@ -102,7 +102,7 @@ Use the model package as the source of truth. A detector can load and execute wh
 
 Use a separate adapter when the runtime or callable methods change but the model still performs independent object detection on one bitmap at a time. The adapter can reuse the supplied confidence control and return bounding boxes through `DetectionResult`.
 
-For example, a LiteRT object detector could use the same `DetectionAdapter` interface and reuse the supplied image input, camera input, confidence control, and overlay UI. Implement it as a separate LiteRT adapter with the LiteRT dependency, `.tflite` validation, preprocessing, model runner, and output decoder. The supplied application doesn't include a tested LiteRT adapter, and you shouldn't pass a `.tflite` model to its ExecuTorch adapter.
+The supplied LiteRT adapter supports the registered YOLO11 and YOLO26 contracts. Add another LiteRT profile only when a model matches the same per-image workflow and `DetectionResult` output but needs different tensor handling or decoding. Use a separate adapter when the runtime or callable interface changes.
 
 A separate adapter isn't enough when the workflow no longer fits those shared interfaces. Tracking needs persistent state across frames. A multi-frame model needs frame scheduling and model inputs that preserve temporal order. Instance segmentation, pose estimation, or another task can need different result types, controls, and overlays. Extend `DetectionAdapter.java`, `DetectionRunner.java`, and `MainActivity.java` before adding such a workflow.
 
