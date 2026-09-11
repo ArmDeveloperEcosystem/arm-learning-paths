@@ -7,27 +7,26 @@ layout: learningpathall
 ---
 
 ## Review the SmolVLA architecture
-[SmolVLA](https://arxiv.org/pdf/2506.01844) is a lightweight vision-language-action model with around 450 million parameters. \
-It takes camera images, a language instruction, and the robot state as inputs, and outputs a sequence of robot actions.
+[SmolVLA](https://arxiv.org/pdf/2506.01844) is a lightweight vision-language-action model with around 450 million parameters. It takes camera images, a language instruction, and the robot state as inputs. It then outputs a sequence of robot actions.
 
-![SmolVLA Architecture#center](smolvla_architecture.png "Architecture diagram from the SmolVLA paper.")
+![SmolVLA uses a vision-language model to combine camera images, a task instruction, and robot state. An action expert then denoises an action sequence for the robot to execute.#center](smolvla_architecture.png "SmolVLA architecture from the research paper")
 
-{{% notice Note%}}
-The embedded Vision-Language model processes and concatenates the inputs into a multimodal sequence of context tokens known as the **prefix**, which is passed to the action expert.
+{{% notice Note %}}
+The embedded vision-language model processes and concatenates the inputs into a multimodal sequence of context tokens known as the **prefix**. It then passes the prefix to the action expert.
 {{% /notice %}}
 
 LeRobot's provided SmolVLA checkpoint is configured with:
-- 3 camera image inputs.
-- 48-language-token instruction padding.
-- 10 iterations of flow matching in the action expert.
 
-After denoising, the action expert outputs a clean robot action chunk of shape `[1, 50, 32]`. The provided checkpoint only uses 6 real action dimensions, so padding is removed, leaving a `[1, 50, 6]` tensor. This represents a 50-step action trajectory for each action dimension.
+- Three camera image inputs
+- 48-token instruction padding
+- Ten iterations of flow matching in the action expert
+
+After denoising, the action expert outputs a robot action chunk with shape `[1, 50, 32]`. The checkpoint uses six action dimensions. Removing the padding leaves a `[1, 50, 6]` tensor that represents a 50-step trajectory for each action dimension.
 
 ## Learn the ExecuTorch workflow
 ExecuTorch provides a common platform for edge AI inference deployment.
 
-On a high level, you first export your PyTorch model to a hardware-unspecific ExecuTorch intermediate representation (IR). \
-Next, you use a suitable backend to "lower" your model to an optimized state for your target hardware. We will use the [XNNPACK backend](https://github.com/google/XNNPACK), which enables highly-optimized inference on Arm CPUs.
+At a high level, you first export your PyTorch model to a hardware-independent ExecuTorch intermediate representation (IR). Next, you use a suitable backend to *lower* the model into an optimized form for your target hardware. You'll use the [XNNPACK backend](https://github.com/google/XNNPACK), which enables optimized inference on Arm CPUs.
 
 The model stages in the ExecuTorch conversion pipeline are:
 ```output
@@ -61,31 +60,31 @@ ExecuTorch runtime
 Arm CPU
 ```
 
-#### Partitioning and lowering
+### Partition and lower the model
 After `torch.export`, the model is represented as a graph of ATen operations.
 
 The XNNPACK partitioner inspects this graph and groups the operations that
 XNNPACK can execute. These supported regions are replaced with delegate calls
 that will be handled by the XNNPACK backend at runtime.
 
-During backend lowering, XNNPACK-supported subgraphs are converted into delegate data and replaced in the Edge graph with **XNNPACK delegate calls**. Operations that XNNPACK cannot execute remain in the Edge graph, provided that the ExecuTorch runtime has suitable **fallback kernels** for them.
+During backend lowering, XNNPACK-supported subgraphs are converted into delegate data and replaced in the Edge graph with **XNNPACK delegate calls**. Operations that XNNPACK cannot execute remain in the Edge graph when the ExecuTorch runtime has suitable **fallback kernels** for them.
 
-Where possible, higher-level operations may also be **decomposed** into simpler
-ATen operations that can be backend-delegated. If an operation is supported by neither the backend nor fallback, you can manually implement a decomposition into backend/fallback-supported ops.
+Where possible, higher-level operations can also be **decomposed** into simpler
+ATen operations that can be delegated to the backend. If neither the backend nor the runtime supports an operation, you can implement a decomposition into supported operations.
 
 Finally, `to_executorch()` applies runtime-specific transformations, including memory planning, and produces the ExecuTorch program that is serialized as a `.pte` file.
 
 ### Split architecture
-We will separately apply exportation and lowering three times: once for each of the **vision encoder**, **prefix forward pass**, and **denoising step**.
+You'll export and lower three separate components: the **vision encoder**, **prefix forward pass**, and **denoising step**.
 
-There are multiple reasons why this decoupling is beneficial compared to a whole-model export:
-- The pinned ExecuTorch exports the whole denoising for-loop by copying the single-step graph 10 times in the export. This prolongs lowering and introduces unnecessary memory overhead. Instead, we run one exported iteration 10 times.
-- We will utilise different numbers of CPU cores to independently optimize the `vision`, `prefix` and `denoise` latencies.
-- The latency overhead introduced by wiring the I/O of the three components is negligible, and far outweighed by the above optimization.
-- It is a standard [LeRobot SmolVLA](https://huggingface.co/lerobot/smolvla_base) development split because it provides immediate access to denoising without needing to re-run the vision and prefix stages, which are more costly than one denoising step.
+This split has several benefits compared with exporting the whole model:
 
+- The pinned ExecuTorch version unrolls the whole denoising loop by copying the single-step graph ten times. Exporting one iteration and running it ten times reduces lowering time and memory overhead.
+- You can use different numbers of CPU cores to optimize the `vision`, `prefix`, and `denoise` latencies independently.
+- The latency added by connecting the three components is negligible compared with the benefit of the split.
+- This [LeRobot SmolVLA](https://huggingface.co/lerobot/smolvla_base) development split gives you direct access to denoising without rerunning the more expensive vision and prefix stages.
 
 ## What you've learned and what's next
-You now have an understanding of the SmolVLA architecture, and a mental image of the model's progression through the ExecuTorch pipeline.
+You now understand the SmolVLA architecture and how the model progresses through the ExecuTorch pipeline.
 
-Next, you will set up your environment and obtain necessary resources for your own conversion.
+Next, you'll set up your environment and obtain the resources for your own conversion.

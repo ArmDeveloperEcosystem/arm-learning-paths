@@ -7,21 +7,26 @@ layout: learningpathall
 ---
 
 ## Quantize and export the INT8 model
-You have seen each stage of the pipeline. Using it, you'll now export an INT8 quantization of the model using TorchAO.
 
-First, change the artifact output directory:
-```bash
-export SMOLVLA_ARTIFACTS_DIR=$PWD/artifacts/int8
-```
+You have seen each stage of the pipeline. You'll now use TorchAO to quantize eligible parts of the model to INT8 and run the complete conversion pipeline.
 
-Now, use the prepared `pipeline.sh` script to run through the whole pipeline with INT8 quantization:
+Run `pipeline.sh` with INT8 quantization and save the results to `artifacts/int8`:
+
 ```bash
 ./scripts/pipeline.sh \
     --variant int8 \
     --input-suite "$SMOLVLA_INPUT_SUITE" \
     --output-dir artifacts/int8
 ```
-{{% notice Note%}}
+
+The pipeline runs eight stages. A successful run ends with:
+
+```output
+[8/8] Native accuracy gate passed
+Artifacts: artifacts/int8
+```
+
+{{% notice Note %}}
 The `--variant int8` option applies dynamic per-channel INT8 quantization to eligible linear operations in `vision_encoder` and `denoise_step`: weights use per-channel INT8 quantization, while activations are quantized dynamically at runtime. `prefix_forward` remains FP32 to preserve accuracy.
 
 Quantization occurs immediately after loading the model, before splitting and exporting.
@@ -32,12 +37,15 @@ Different SmolVLA configurations can benefit from different quantizations. In pa
 ## Compare the FP32 and INT8 executions
 
 ### Inspect the CPU layout and usage
-We can explicitly provide CPU cores to the native runner rather than rely on non-deterministic allocation in the two executions for the FP32 and INT8 models. This ensures consistent performance and a fair comparison. It also lets us optimize the different components' executions. Inspect your CPU core layout with:
+
+You can assign CPU cores to the native runner to keep the FP32 and INT8 configurations consistent. CPU affinity also lets you tune each component on systems with different core types. Inspect your CPU layout:
+
 ```bash
 lscpu -e=CPU,ONLINE,MAXMHZ,MODELNAME
 ```
 
-For example, the layout on an NVIDIA DGX Spark:
+For example, an NVIDIA DGX Spark has the following layout:
+
 ```output
 CPU ONLINE    MAXMHZ MODELNAME
   0    yes 2808.0000 Cortex-A725
@@ -62,48 +70,55 @@ CPU ONLINE    MAXMHZ MODELNAME
  19    yes 3900.0000 Cortex-X925
 ```
 
-You'll be provided with the *option* to allocate a group of cores to `vision` and a group of cores to both `prefix` and `denoise`, which you can experiment with. Decide on a group of CPU cores that is favourable for execution. The recommended configuration is eight to ten cores for `vision` and five to eight cores for the other components.
+The runner lets you allocate one group of cores to `vision` and another group to `prefix` and `denoise`. On the DGX Spark, cores `5-9` and `15-19` are the faster Cortex-X925 cores. If your system has enough cores, a useful starting point is eight to ten cores for `vision` and five to eight cores for the other components.
 
-In the above case, cores `5-9` and `15-19` are faster Cortex-X cores, and will be provided as examples in the section below.
+Only use CPU IDs that are online on your system. You can also omit affinity options, which is useful on smaller systems or CPUs with one core type.
 
-Additionally, if your machine has resource-intensive processes running, this will affect inference latency. You might want to consider this. Inspect the live CPU load with:
+Other resource-intensive processes affect inference latency. Inspect the live CPU load with `top`, and press `q` to exit:
+
 ```bash
 top
 ```
 
 ### Run benchmarks
-Modify and run this command to do a small benchmark of the FP32 model, and then re-run it with `--artifacts-dir artifacts/int8` for the INT8 model:
+
+First, benchmark both models without CPU affinity. Using `nproc` gives each run the number of processing units available to the current environment:
 
 ```bash
 python scripts/benchmark.py \
     --artifacts-dir artifacts/fp32 \
     --warmup-runs 3 \
     --benchmark-runs 10 \
-    --cpu-threads 5 \
-    --cpu-affinity 15-19 \
-    --vision-cpu-threads 8 \
-    --vision-cpu-affinity 5-9,15-19
-```
-{{% notice Experiment with these options to suit your system.%}}
-Change any arguments. In particular:
-- `cpu-affinity` specifies the cores allocated for the process.
-- `cpu-threads` specifies the ExecuTorch/XNNPACK thread pool size.\
-Recommended: match the number of cores used in your `cpu-affinity`.
-- `vision-*` options allow you to specify separate worker thread and core allocations to the vision encoder.
+    --cpu-threads "$(nproc)"
 
-Exclude the vision options to run the vision encoder with the base thread pool and CPU affinity. \
-Exclude all `[...]cpu-affinity` and `[...]cpu-threads` options to use unregulated core allocations.
+python scripts/benchmark.py \
+    --artifacts-dir artifacts/int8 \
+    --warmup-runs 3 \
+    --benchmark-runs 10 \
+    --cpu-threads "$(nproc)"
+```
+
+{{% notice Tip %}}
+Experiment with these options to suit your system:
+
+- `--cpu-affinity` specifies the cores allocated to `prefix` and `denoise`
+- `--cpu-threads` specifies the ExecuTorch and XNNPACK thread pool size; match it to the number of cores in `--cpu-affinity`
+- `--vision-cpu-affinity` and `--vision-cpu-threads` set a separate core allocation and thread pool size for the vision encoder
+
+For example, the DGX Spark configuration shown previously uses `--cpu-threads 5 --cpu-affinity 15-19 --vision-cpu-threads 8 --vision-cpu-affinity 5-9,15-19`. Apply identical options to the FP32 and INT8 benchmark commands for a fair comparison.
 {{% /notice %}}
 
 ### Compare benchmark results
-Compare the latency and output accuracy to the PyTorch reference, and visualise the six action-dimension output values:
+Compare the latency and output accuracy to the PyTorch reference, and visualize the six action-dimension output values:
+
 ```bash
 python scripts/compare.py \
     --fp32 artifacts/fp32 \
     --int8 artifacts/int8
 ```
 
-Example output from running on a DGX spark:
+The output from the DGX Spark configuration is similar to:
+
 ```output
 variant  median_ms  PTE_MB  cosine      MAE       SQNR_dB
 FP32       1443.36  1611.7  0.999995944  0.000982  49.34
@@ -111,10 +126,12 @@ INT8        720.74  1022.9  0.999376578  0.010765  28.86
 INT8 speedup: 2.00x
 ```
 
-![action dimension comparison](action_dimension_comparison.png)
+For this run, INT8 reduces median latency by about 50%, giving a 2.00x speedup. It also reduces the combined `.pte` size while keeping the action trajectories close to the FP32 reference. Your results depend on the CPU and core allocation.
+
+![Six line charts compare FP32 and INT8 values across the 50-step trajectory for each action dimension. The lines closely overlap, with mean absolute error values from 0.0033 to 0.0227.#center](action_dimension_comparison.png "FP32 and INT8 action trajectories")
 
 ## What you've accomplished
 
-You've converted a SmolVLA model to ExecuTorch with an INT8 quantization, run FP32 and INT8 models using identical inputs on an Arm CPU, and compared their output error and native runtime latency.
+You've converted selected SmolVLA operations to INT8, run the FP32 and INT8 models with identical inputs on an Arm CPU, and compared their output error and native runtime latency.
 
 From here, you can integrate the ExecuTorch model into a robotics pipeline, experiment with more quantizations and SmolVLA configurations, or optimize for other Arm CPU layouts.
