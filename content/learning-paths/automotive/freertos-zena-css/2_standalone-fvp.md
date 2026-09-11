@@ -32,7 +32,7 @@ Begin with the partner-supported Cortex-R82 SMP demo. It provides the Armv8-R Fr
 The Zena CSS FVP provides a configuration that adds a second cluster containing four Cortex-R82AE cores.
 The objective is to run FreeRTOS on this R82AE cluster.
 
-Begin by running FreeRTOS on the standalone `FVP_BaseR_Cortex-R82AE`, which is available with Arm Development Studio. You can configure this FVP to closely match the Cortex-R82AE cluster in the Zena CSS FVP.
+Begin by running FreeRTOS on the standalone `FVP_BaseR_Cortex-R82AE`, which is available with *Arm Development Studio*. You can configure this FVP to closely match the Cortex-R82AE cluster from the Zena CSS FVP.
 
 The demo provides the board support code for `FVP_BaseR_Cortex-R82AE` and a four-task command-line application. Each task has a fixed core affinity, which makes scheduler and coherency problems visible during bring-up.
 
@@ -58,13 +58,12 @@ The demo repository does not include the kernel as a submodule. The CMake config
 
 The [Zena CSS boot-flow documentation](https://arm-zena-css.docs.arm.com/en/v2.2/design/boot_process.html#boot-flow) explains that Safety Island Cluster 1 boots from LLRAM:
 
-```RSE BL2:
-    If CFG2, copies the encrypted SI CL1 image from the RSE flash to SI LLRAM, decrypts and authenticates the image
-```
+*RSE BL2 : If CFG2, copies the encrypted SI CL1 image from the RSE flash to SI LLRAM, decrypts and authenticates the image*
+
 
 The [Zephyr board description for Safety Island Cluster 1](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/components/safety_island/zephyr/src/boards/arm/fvp_rd_aspen_safety_island/fvp_rd_aspen_safety_island_c1.dts?ref_type=heads#L109) defines 8 MiB of SRAM at `0x140000000`.
 
-The FVP_BaseR_Cortex-R82AE can be configured to expose the same amount of LLRAM at the same base address. The Reset vector Address (RVBAR) can be configured to boot from this address. 
+With the configuration file [fvp_R82AE_config.txt](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/fvp_R82AE_config.txt), the FVP_BaseR_Cortex-R82AE can be configured to expose the same amount of LLRAM at the same base address. The Reset vector Address (RVBAR) can be configured to boot from this address.
 
 ```
 cluster0.memory.has_llram=1
@@ -83,6 +82,7 @@ Other configurations:
 - Enable the automatically starts refcounter
 - Model architectural cache state
 - Disable semihosting
+- Enable UART
 
 ```
 cluster0.VMSA_supported=0
@@ -90,6 +90,11 @@ cluster0.NUM_CORES=4
 bp.refcounter.non_arch_start_at_default=1
 cache_state_modelled=1
 semihosting-enable=0
+bp.pl011_uart0.uart_enable=1
+bp.pl011_uart0.clock_rate=24000000
+bp.pl011_uart0.baud_rate=115200
+bp.pl011_uart0.untimed_fifos=1
+bp.pl011_uart0.unbuffered_output=1
 ```
 
 ### Code adaptation 
@@ -102,17 +107,58 @@ The generic demo isn't sufficient for the Cortex-R82AE FVP. Check that the port 
 - MPU programming needs the required data and instruction synchronization barriers
 - The application uses a PL011 UART instead of semihosting
 - The FVP protected MPU and shared low-latency RAM (LLRAM) need explicit configuration
+- The image entry point must be set to the first address of the code section
 
-The reference FVP configuration uses four cores and an 8 MiB LLRAM window. It divides that window into code and data regions:
+The reference FVP configuration uses four cores and an 8 MiB LLRAM window. The address range is divided into separate code and data regions:
 
 | Region | Address | Size |
 | --- | ---: | ---: |
 | Code | `0x140000000` | 4 MiB |
 | Data | `0x140400000` | 4 MiB |
 
-All four reset vector base address registers (RVBARs) point to `0x140000000`. Keep the linker scripts, binary load address, and FVP configuration consistent.
+All four reset vector base address registers (RVBARs) point to `0x140000000`.
 
 
+For a GCC build, update the [GNU linker script](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/gnu_linker_script.ld#L20) to divide the 8 MiB LLRAM into separate 4 MiB code and data regions:
+
+```text
+MEMORY
+{
+    ROM (rwx) : ORIGIN = 0x140000000, LENGTH = 4M
+    RAM (rwx) : ORIGIN = 0x140400000, LENGTH = 4M
+}
+```
+
+<details>
+<summary>Configure the Arm Compiler scatter file</summary>
+
+For an Arm Compiler build, make the equivalent changes in the [scatter file](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/armclang_linker_script.sct#L18):
+
+```text
+#define __ROM_START (0x140000000)
+#define __RAM_START (0x140400000)
+
+LOAD_REGION __ROM_START
+{
+    ER_ROM_BOOT __ROM_START ALIGN 64
+    {
+        *.o (.boot +First)
+    }
+
+    ;-- VBAR_EL1 requires the vector table to be 2 KiB aligned. ----------------
+    ER_ROM_CODE +0 ALIGN 2048
+    {
+        *.o (.vectors +First)
+        *(privileged_functions)
+    }
+
+}
+```
+
+The `.boot +First` selector places the reset code first, at `0x140000000`. The data sections begin at `0x140400000`.
+
+
+</details>
 
 ## Compile and run the standalone platform
 
@@ -122,7 +168,9 @@ Enter the Cortex-R82AE demo directory:
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
 ```
 
-Configure and build the target. The exact CMake platform name is `standalone_R82AE_fvp`:
+### Build with GCC
+
+Configure a debug build with the GNU toolchain. The `R82AE_PLATFORM` setting selects the standalone Cortex-R82AE FVP memory and peripheral map:
 
 ```bash
 cmake -S . -B build/standalone_R82AE \
@@ -133,19 +181,9 @@ cmake -S . -B build/standalone_R82AE \
 cmake --build build/standalone_R82AE --parallel
 ```
 
-Load the generated ELF file directly. The FVP uses the load addresses recorded in the ELF file and retains its debug symbols:
+The build creates `r82ae_smp_fvp_gcc_armclang.elf` in `build/standalone_R82AE`.
 
-```bash
-FVP_BaseR_Cortex-R82AE \
-  --config fvp_R82AE_config.txt \
-  --application build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf
-```
-
-### Create and load a raw binary
-
-The target platform loads a raw binary rather than an ELF file. Use the conversion tool supplied with the compiler that produced the ELF file. GNU and ArmClang handle this image layout differently.
-
-For an ELF file built with the GNU toolchain, use `aarch64-none-elf-objcopy`:
+To create a raw binary from the GNU ELF file, use `aarch64-none-elf-objcopy`:
 
 ```bash
 aarch64-none-elf-objcopy -O binary \
@@ -153,25 +191,72 @@ aarch64-none-elf-objcopy -O binary \
   build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.bin
 ```
 
-For an ELF file built with ArmClang, use `fromelf` from Arm Compiler for Embedded instead of GNU `objcopy`:
+
+### Build with armclang
+
+Similar instruction for Arm Compiler for Embedded
+
+<details>
+<summary>Build with Arm Compiler for Embedded</summary>
+
+Configure a separate debug build with the Arm Compiler toolchain:
 
 ```bash
-fromelf --bin \
-  --output build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.bin \
-  build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf
+cmake -S . -B build/standalone_R82AE_armclang \
+  -DCMAKE_TOOLCHAIN_FILE=armclang_toolchain.cmake \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DKERNEL_DIR_PATH=../../FreeRTOS-Kernel \
+  -DR82AE_PLATFORM=standalone_R82AE_fvp
+cmake --build build/standalone_R82AE_armclang --parallel
 ```
 
-The ArmClang linker uses a scatter-loading description with separate load and runtime addresses. For this application, `fromelf` places the table's load image at offset `0x1ef60`. The startup code then copies the table to its runtime address at `0x1404004e0`.
+The build creates `r82ae_smp_fvp_gcc_armclang.elf` in `build/standalone_R82AE_armclang`.
 
-Using GNU `objcopy` on the ArmClang ELF file does not preserve this load-image layout correctly. It produces a binary of approximately 4.3 MB, while `fromelf` produces the expected binary of approximately 262 KB. A large difference in file size is therefore an indication that the wrong conversion tool was used.
-
-After generating the binary with the appropriate tool, load it at the Cluster 0 LLRAM base address:
+Load the Arm Compiler ELF file directly with the FVP:
 
 ```bash
 FVP_BaseR_Cortex-R82AE \
   --config fvp_R82AE_config.txt \
-  --data build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.bin@0x140000000
+  --application build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.elf
 ```
+
+Although ELF is a standard format, embedded toolchains encode load and execution addresses differently. Binary conversion is not merely removal of ELF metadata: the converter must understand the linker’s memory layout and startup-copy model. A converter from another toolchain may accept the ELF without errors but silently produce an incorrect image.
+
+To create a single raw binary, use `fromelf --bincombined`. The Arm Compiler linker uses a scatter-loading description, so GNU `objcopy` should not be used to convert this ELF file. The `--bincombined` option preserves the relative load addresses in one output file:
+
+
+```bash
+fromelf --bincombined \
+  --output=build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.bin \
+  build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.elf
+```
+
+Using `fromelf --bin` can create an output directory containing one file for each load region. Use `--bincombined` when the FVP requires one binary file.
+
+</details>
+
+### Run the application
+
+#### Start the FVP 
+
+You can load the ELF file directly. The FVP uses the addresses recorded in the ELF file, and the image retains the symbols required for source-level debugging:
+```bash
+FVP_BaseR_Cortex-R82AE \
+  --config fvp_R82AE_config.txt \
+  --application build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.elf
+```
+
+Or you can oad the binary at the Cluster 0 LLRAM base address, `0x140000000`:
+
+```bash
+FVP_BaseR_Cortex-R82AE \
+  --config fvp_R82AE_config.txt \
+  --data build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.bin@0x140000000
+```
+
+The Zena CSS will use the raw-binary loading method. Validate it here first, where the standalone FVP provides a simpler environment for troubleshooting.
+
+#### Interact with the demo though UART
 
 At the application prompt, enter `ping`. The four tasks exchange a message in a cycle across the four cores, as shown in the terminal output:
 
@@ -226,7 +311,7 @@ FVP_BaseR_Cortex-R82AE \
   -C TRACE.TarmacTrace.trace-file=tarmac.log
 ```
 
-Tracing generates a large amount of data and slows the FVP, so stop the model soon after the failure occurs. You can then search the trace for a synchronous exception event:
+Tracing generates a large amount of data and slows the FVP, so stop the model soon after the failure occurs. To identify the instruction that caused the failure, search the trace for a synchronous exception event:
 
 ```text
 grep -B 6 -A 4 'CoreEvent_CURRENT_SPx_SYNC' tarmac.log
