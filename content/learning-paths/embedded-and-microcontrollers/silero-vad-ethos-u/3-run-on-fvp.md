@@ -7,11 +7,11 @@ weight: 4
 layout: learningpathall
 ---
 
-## Understand this stage
+## Build ExecuTorch for Cortex-M85
 
-You already have the exported model and validation audio. This stage packages both into a bare-metal application and runs it on a virtual Cortex-M85 and Ethos-U85 system.
+You already have the exported model and validation audio. You'll package both the model and audio into a bare-metal application and run the application on a virtual Cortex-M85 and Ethos-U85 system.
 
-## 1. Build ExecuTorch for Cortex-M85
+Start by building ExecuTorch for Cortex-M85.
 
 Continue from the ExecuTorch repository root. Activate the environment and build the target libraries:
 
@@ -27,12 +27,14 @@ cmake --build cmake-out-arm --target install --parallel
 
 The installed libraries provide the ExecuTorch runtime, portable operators, and Ethos-U backend used by the application.
 
-## 2. Build the Silero VAD application
+## Build the Silero VAD application
 
-Configure the application with the exported model, validation audio, and a speech threshold of `0.55`. Select your host operating system:
+Configure the application with the exported model, validation audio, and a speech threshold of `0.55`. 
+
+Select your host operating system:
 
 {{< tabpane code=true >}}
-  {{< tab header="Linux" language="shell" >}}
+  {{< tab header="Linux" language="bash" >}}
 cmake \
   -S examples/arm/silero_vad_example_ethos_u/runtime \
   -B silero-vad-work/app \
@@ -44,7 +46,7 @@ cmake \
   -DVAD_THRESHOLD=0.55 \
   -DPYTHON_EXECUTABLE="$(command -v python)"
   {{< /tab >}}
-  {{< tab header="macOS" language="shell" >}}
+  {{< tab header="macOS" language="bash" >}}
 cmake \
   -S examples/arm/silero_vad_example_ethos_u/runtime \
   -B silero-vad-work/app \
@@ -68,7 +70,7 @@ cmake --build silero-vad-work/app \
 
 The build creates `silero-vad-work/app/silero_vad_ethos_u`. This ELF image contains both the `.pte` model and the 2.5-second validation clip.
 
-## 3. Run Silero VAD on the FVP
+## Run Silero VAD on the FVP
 
 Run the application and save its simulated UART output to `fvp.log`:
 
@@ -82,6 +84,8 @@ bash backends/arm/scripts/run_fvp.sh \
 ```
 
 The application prints one speech probability every 32 ms. Near the end, it reports a summary and stops the simulation:
+
+The output is similar to:
 
 ```output
 1 segments, 79 frames, 2.5s
@@ -109,6 +113,6 @@ echo "Target artifacts verified."
 
 ## What you've accomplished and what's next
 
-You have run the stateful Silero VAD model on a virtual Cortex-M85 and Ethos-U85 target.
+You've run the stateful Silero VAD model on a virtual Cortex-M85 and Ethos-U85 target.
 
-Next, inspect the speech decisions and compare them with the host reference.
+Next, you'll inspect the speech decisions and compare them with the host reference.
