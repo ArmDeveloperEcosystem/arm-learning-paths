@@ -29,8 +29,8 @@ adb shell /data/local/tmp/example_usage
 ```
 
 Before the filter runs, every input row contains one white pixel, `255`, at
-column 10 and zeros elsewhere. The 20 input rows are identical; the first
-three are:
+column 10 and zeros elsewhere. The 20 input rows are identical. The first
+three rows are as follows:
 
 ```output
 0  0  0  0  0  0  0  0  0  0  255  0  0  0  0  0  0  0  0  0
@@ -38,7 +38,8 @@ three are:
 0  0  0  0  0  0  0  0  0  0  255  0  0  0  0  0  0  0  0  0
 ```
 
-The output is similar to:
+The program prints 20 identical pixel rows. The first
+three rows of the output are similar to:
 
 ```output
 Raw pixel values for the blurred output:
@@ -47,7 +48,6 @@ Raw pixel values for the blurred output:
 0  0  0  1  3  6  12  20  30  36  40  36  30  20  12  6  3  1  0  0
 ```
 
-The program prints 20 identical pixel rows; only the first three are shown.
 The original white line is at column 10. The 15x15 Gaussian kernel spreads it
 from columns 3 through 17, with the highest value, `40`, remaining at the
 center. Every row is identical because the input is a vertical line and the
@@ -63,6 +63,10 @@ adb shell 'taskset 80 /data/local/tmp/example_usage'
 The hexadecimal mask is device-specific. Use the CPU topology of your own
 device when choosing an affinity mask.
 
+## What you've accomplished and what's next
+
 You've run the standalone SME Gaussian blur example and confirmed the filter
-output. Next, build a performance explorer that controls its kernel size and
+output.
+
+Next, you'll build a performance explorer that controls the example's kernel size and
 measurement count from the command line.

@@ -10,7 +10,7 @@ layout: learningpathall
 ## Understand the performance explorer
 
 The performance explorer is a standalone microbenchmark for comparing
-KleidiCV Gaussian blur implementations on an Arm-based Android device. It
+KleidiCV Gaussian blur implementations on an Arm-based Android device. The explorer
 invokes the Neon, SVE2, and SME fixed-stripe functions directly instead of
 using KleidiCV runtime dispatch.
 
@@ -25,19 +25,19 @@ You can select a 3x3, 5x5, 7x7, 9x9, or 15x15 kernel and control the
 measurement count from the command line. CPU affinity is set separately with
 `taskset` so you can compare implementations on the same CPU.
 
-This microbenchmark measures individual Gaussian blur calls. It does not
+This microbenchmark measures individual Gaussian blur calls. It doesn't
 represent complete application performance, which can also include image
 decoding, memory transfers, rendering, and other processing stages.
 
 ## Create the performance explorer
 
-The `26.06` release used in the previous steps does not include the Gaussian
+The `26.06` release that you used earlier doesn't include the Gaussian
 blur performance explorer. Add the following changes to the
 `examples/extract_one_operation` project in your local KleidiCV checkout.
 
 ### Update the build configuration
 
-Append this configuration to
+Append the following configuration to
 `examples/extract_one_operation/CMakeLists.txt`. It builds the complete
 KleidiCV library with the SVE2 and SME backends enabled, then adds and links
 the standalone performance comparison target:
@@ -342,7 +342,7 @@ cmake --build build/extract-android-benchmark \
 ## Use the command-line parameters
 
 The default run measures a 5x5 binomial kernel over 1000 calls. Use `tee` to
-display the results and save them to a CSV file on the Linux development
+display the results and save them to a CSV file on the development
 machine:
 
 ```bash
@@ -354,7 +354,7 @@ adb shell 'taskset 80 /data/local/tmp/gaussian_blur_benchmark' \
 
 Use `--iterations` to change the number of measured calls and `--kernel` to
 select a supported fixed kernel size. Give each configuration a descriptive
-file name so you can identify it during analysis:
+file name so that you can identify it during analysis:
 
 ```bash
 adb shell 'taskset 80 /data/local/tmp/gaussian_blur_benchmark \
@@ -365,7 +365,7 @@ adb shell 'taskset 80 /data/local/tmp/gaussian_blur_benchmark \
 Supported kernel sizes are 3, 5, 7, 9, and 15. The 3x3 through 9x9 kernels
 use the fixed binomial variants. The 15x15 kernel uses the fixed Gaussian
 variant and matches the kernel size in the standalone SME example. Keeping
-the CPU affinity fixed is important: it prevents the operating system from
+the CPU affinity fixed is important to prevent the operating system from
 migrating a process between cores with different performance characteristics.
 
 ## Interpret the CSV output
@@ -379,8 +379,8 @@ head gaussian_blur_cpu7_kernel15.csv
 ```
 
 For readability, the following table summarizes the 15x15 CSV results from
-CPU 7. Every row uses one image channel, 100 warm-up calls, and 3000 measured
-calls.
+CPU 7. Each row uses one image channel, 100 warm-up calls, and 3000 measured
+calls:
 
 | Backend | Image resolution | Kernel | Iterations | Mean latency (ns) | p50 latency (ns) |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -395,8 +395,14 @@ calls.
 | SME | 3840x2160 | 15x15 | 3000 | 8,382,547.243 | 8,199,552 |
 
 These values were collected from an SME-capable Android device with the
-process pinned to CPU 7. Your results will differ with the processor, CPU
-affinity, vector length, frequency, thermal state, and background activity.
+process pinned to CPU 7. Your results will differ depending on the following factors:
+
+- The processor
+- CPU affinity
+- Vector length
+- Frequency
+- Thermal state
+- Background activity
 
 The CSV contains the following fields:
 
@@ -412,18 +418,18 @@ The CSV contains the following fields:
 | `mean_ns` | Mean latency per Gaussian blur call in nanoseconds |
 | `p50_ns` | Median latency per Gaussian blur call in nanoseconds |
 
-Use `p50_ns` as the primary comparison metric because it is less sensitive to
+Use `p50_ns` as the primary comparison metric because it's less sensitive to
 occasional interruptions than the mean. A lower value indicates a faster
 implementation. Compare rows with the same image dimensions, kernel size,
 CPU affinity, and iteration count.
 
 In this 15x15 example, SME has the lowest p50 latency at all three resolutions.
 Compared with Neon, SME is 1.45x faster at 640x640, 1.74x faster at
-1920x1080, and 2.01x faster at 3840x2160. The next step compares multiple
-kernel sizes and explains how workload size can change the performance
+1920x1080, and 2.01x faster at 3840x2160. You'll compare multiple
+kernel sizes and identify how workload size can change the performance
 behavior.
 
-## Code changes behind the parameters
+## How the command-line options work
 
 The performance explorer stores its settings in `BenchmarkOptions`. The
 default values are a 5x5 kernel and 1000 measured calls. The
@@ -432,8 +438,12 @@ accepts `--iterations <count>` and `--kernel <3|5|7|9|15>`. The selected kernel
 size is passed as both the kernel width and height to every backend. This makes
 it possible to compare implementations without recompiling the program.
 
-The program intentionally does not choose a CPU or read CPU capacity. CPU
+The program intentionally doesn't choose a CPU or read CPU capacity. CPU
 selection belongs outside the performance explorer and is controlled with
 `taskset`.
 
-Next, run a controlled comparison and interpret the results.
+## What you've accomplished and what's next
+
+You've now built a performance explorer for KleidiCV Gaussian blur implementations.
+
+Next, you'll run a controlled comparison and interpret the results.

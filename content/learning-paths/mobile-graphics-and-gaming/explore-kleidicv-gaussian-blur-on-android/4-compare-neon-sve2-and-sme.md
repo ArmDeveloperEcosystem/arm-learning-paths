@@ -10,9 +10,7 @@ layout: learningpathall
 ## Run a comparison matrix
 
 The following commands run 3000 measurements for 5x5, 7x7, 9x9, and 15x15
-Gaussian blur on CPUs 0, 4, and 7. The masks `1`, `10`, and `80` select those
-individual CPUs on the test device; replace them with masks appropriate for
-your device.
+Gaussian blur on CPUs 0, 4, and 7:
 
 ```bash
 for cpu_mask in 1 10 80; do
@@ -22,8 +20,10 @@ for cpu_mask in 1 10 80; do
   done
 done
 ```
+The masks `1`, `10`, and `80` select the individual CPUs 0, 4, and 7 on the test device. Replace them with masks appropriate for
+your device.
 
-Use p50 as the primary comparison metric. It is the median of all measured
+Use p50 as the primary comparison metric. It's the median of all measured
 calls, so it better represents typical per-call time than the mean when
 interrupts or frequency changes create occasional long calls.
 
@@ -31,7 +31,7 @@ interrupts or frequency changes create occasional long calls.
 
 The table shows Neon p50 divided by SME p50. A value above 1.00x means SME is
 faster. Each result is from one process with a fixed CPU affinity and 3000
-measured calls.
+measured calls:
 
 | Kernel | CPU | 640x640 | 1920x1080 | 3840x2160 |
 |---|---:|---:|---:|---:|
@@ -48,10 +48,10 @@ measured calls.
 | 15x15 | 4 | 1.29x | 1.14x | 1.13x |
 | 15x15 | 7 | 1.45x | 1.74x | 2.01x |
 
-## Explain the performance behavior
+## Understand the performance behavior
 
 The 5x5 blur has inconsistent SME benefit. At 640x640, SME is slower on all
-three tested CPUs. The smaller workload does not sufficiently amortize
+three tested CPUs. The smaller workload doesn't sufficiently amortize
 streaming-mode setup, loop overhead, border processing, and intermediate
 buffer management.
 
@@ -62,20 +62,28 @@ of the total execution time. The highest measured speedup is 2.87x for the
 
 The 15x15 results show an SME speedup for every tested CPU and resolution,
 ranging from 1.13x to 2.01x. Unlike the 3x3 through 9x9 fixed kernels, the
-15x15 implementation does not use a binomial variant. Its largest measured
+15x15 implementation doesn't use a binomial variant. Its largest measured
 benefit is at 3840x2160 on CPU 7, where SME is 2.01x faster than Neon.
 
-This does not imply a fixed speedup for every device or image. The separable
-filter writes and reads an intermediate `uint16_t` buffer, so cache capacity,
-memory bandwidth, streaming vector length, frequency scaling, and thermal
-state all affect the result. Do not compare absolute times across CPU clusters.
-Compare Neon and SME within the same process, CPU affinity, kernel, and device
-state. For more confidence, run several independent processes and take the
-median of their p50 values.
+This doesn't imply a fixed speedup for every device or image. The separable
+filter writes and reads an intermediate `uint16_t` buffer. 
+
+The following factors all affect the result:
+
+- Cache capacity
+- Memory bandwidth
+- Streaming vector length
+- Frequency scaling
+- Thermal state 
+
+Don't compare absolute times across CPU clusters. Compare Neon and SME within the same process, CPU affinity, kernel, and device
+state. For more confidence, run several independent processes and take the median of their p50 values.
 
 ## What you've accomplished
 
-You built a standalone KleidiCV Gaussian blur example, measured explicit Neon,
-SVE2, and SME implementations, and used CPU affinity to make comparisons more
-repeatable. You also saw that a larger kernel can expose more of the benefit
+You've built a standalone KleidiCV Gaussian blur example and measured explicit Neon,
+SVE2, and SME implementations. You've used CPU affinity to make comparisons more
+repeatable. You also identified that a larger kernel can expose more of the benefit
 of SME on an Arm-based Android device.
+
+
