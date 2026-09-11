@@ -1,6 +1,6 @@
 ---
 title: Import and run an Arm AI Portal object-detection model
-description: Run an Arm-optimized YOLOv8s model on a saved image, then use the same detector with a live camera feed.
+description: Run Arm-optimized YOLO models with ExecuTorch and LiteRT on a saved image and live camera feed.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Scene Detector adapters
 
-An adapter is application code that connects the shared Android interface to a model task and runtime. Scene Detector uses one ExecuTorch adapter for supported YOLO object-detection models. The adapter selects the preprocessing and output decoder associated with the imported filename.
+An adapter is application code that connects the shared Android interface to a model task and runtime. Scene Detector supplies separate ExecuTorch and LiteRT adapters. Each adapter selects the preprocessing, precision settings, and output decoder associated with the imported filename.
 
 The model runs locally on the Android CPU. The application doesn't upload the selected image or camera frames to a server.
 
@@ -119,20 +119,71 @@ The live-camera view draws each retained label, confidence score, and bounding b
 
 Camera behavior on an emulator depends on its configured front and back camera sources. Use the saved-image workflow when the emulator doesn't expose a useful camera feed.
 
+## Run YOLO26n FP16 with LiteRT
+
+The supplied LiteRT adapter supports the additional `.tflite` YOLO models from the Arm AI Portal. Start with YOLO26n FP16 to use the XNNPACK FP16 execution path selected by the model profile.
+
+Set `MODEL_ID` to the YOLO26n FP16 repository ID:
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS or Linux" language="bash" >}}
+export MODEL_ID="Arm/yolo26n-fp16-litert"
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell" >}}
+$MODEL_ID = "Arm/yolo26n-fp16-litert"
+  {{< /tab >}}
+{{< /tabpane >}}
+
+Download and copy the model to the phone:
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS or Linux" language="bash" >}}
+export MODEL_FILE="$(.hf-venv/bin/python download_model.py \
+  --repo-id "$MODEL_ID" \
+  --print-path)"
+
+adb push "$MODEL_FILE" /sdcard/Download/
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell" >}}
+$MODEL_FILE = .\.hf-venv\Scripts\python.exe download_model.py `
+  --repo-id "$MODEL_ID" `
+  --print-path
+
+adb push "$MODEL_FILE" /sdcard/Download/
+  {{< /tab >}}
+{{< /tabpane >}}
+
+The downloader selects `yolo26n_conv2d_f16_weights.tflite`. Keep the filename unchanged so Scene Detector can select the YOLO26 FP16 profile.
+
+In Scene Detector:
+
+1. Select **LiteRT detection**.
+2. Select **Add or change model** and choose `yolo26n_conv2d_f16_weights.tflite`.
+3. Select **Choose saved image** and choose `street-scene.jpg`.
+4. Keep the default `25%` confidence threshold.
+5. Select **Detect objects**.
+
+The Java adapter configures LiteRT CPU execution with XNNPACK's force-FP16 flag. It letterboxes the image to `640 × 640`, runs the model, decodes `[x1, y1, x2, y2, confidence, class]` rows, and applies class-aware non-maximum suppression.
+
+![Scene Detector running YOLO26n FP16 with LiteRT at a 25% confidence threshold. The image contains aligned boxes around people, a motorcycle, a car, a backpack, and a potted plant, while the summary reports eight detections and a 96 ms processing time from this functional test.#center](scene-detector-litert.png "YOLO26n FP16 LiteRT detection on the sample street image")
+
 ## Use another supported model
 
-YOLOv8s keeps the main workflow predictable. Scene Detector also supports the following Arm AI Portal model packages:
+Scene Detector also supports the following Arm AI Portal model packages:
 
-| Model | Repository ID | Import this file | Detector strategy |
-| --- | --- | --- | --- |
-| [YOLOv5s INT8](https://huggingface.co/Arm/yolov5s-int8-xnnpack-executorch) | `Arm/yolov5s-int8-xnnpack-executorch` | `yolov5s_raspberry_executorch_optimized.pte` | YOLOv5 objectness and class scores |
-| [YOLOv8s INT8](https://huggingface.co/Arm/yolov8s-int8-xnnpack-executorch) (default) | `Arm/yolov8s-int8-xnnpack-executorch` | `yolov8s_raspberry_executorch_optimized.pte` | YOLOv8 candidate decoding |
-| [YOLOv9s INT8](https://huggingface.co/Arm/yolov9s-int8-xnnpack-executorch) | `Arm/yolov9s-int8-xnnpack-executorch` | `yolov9s_raspberry_executorch_optimized.pte` | Letterboxing and multi-label decoding |
+| Model | Runtime | Repository ID | Import this file | Detector strategy |
+| --- | --- | --- | --- | --- |
+| [YOLOv5s INT8](https://huggingface.co/Arm/yolov5s-int8-xnnpack-executorch) | ExecuTorch | `Arm/yolov5s-int8-xnnpack-executorch` | `yolov5s_raspberry_executorch_optimized.pte` | YOLOv5 objectness and class scores |
+| [YOLOv8s INT8](https://huggingface.co/Arm/yolov8s-int8-xnnpack-executorch) (default) | ExecuTorch | `Arm/yolov8s-int8-xnnpack-executorch` | `yolov8s_raspberry_executorch_optimized.pte` | YOLOv8 candidate decoding |
+| [YOLOv9s INT8](https://huggingface.co/Arm/yolov9s-int8-xnnpack-executorch) | ExecuTorch | `Arm/yolov9s-int8-xnnpack-executorch` | `yolov9s_raspberry_executorch_optimized.pte` | Letterboxing and multi-label decoding |
+| [YOLO26n FP16](https://huggingface.co/Arm/yolo26n-fp16-litert) | LiteRT | `Arm/yolo26n-fp16-litert` | `yolo26n_conv2d_f16_weights.tflite` | Forced FP16 execution and six-value detection rows |
+| [YOLO26n INT8 weight-only](https://huggingface.co/Arm/yolo26n-int8w-litert) | LiteRT | `Arm/yolo26n-int8w-litert` | `yolo26n_conv_fc_f16_int8w.tflite` | INT8 weights, FP16 execution, and six-value detection rows |
+| [YOLO11n INT8](https://huggingface.co/Arm/yolo11n-int8-litert-vivo-x300) | LiteRT | `Arm/yolo11n-int8-litert-vivo-x300` | `yolo11n_android_litert_optimized.tflite` | INT8 input and `[1, 84, 8400]` multi-label decoding |
 
 To use one of these models, set `MODEL_ID` to a repository ID from the table and repeat the download and import workflow.
 
 ## What you've accomplished and what's next
 
-You've imported an optimized ExecuTorch detector, analyzed a saved image locally on Android, and used the same detector with a live camera feed.
+You've run optimized ExecuTorch and LiteRT detectors locally on Android and used the same detection interface with a saved image and live camera feed.
 
 Next, you'll understand how Scene Detector works.

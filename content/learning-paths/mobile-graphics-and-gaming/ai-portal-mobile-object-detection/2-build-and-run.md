@@ -78,9 +78,9 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 adb shell am start -n org.arm.learningpath.objectdetection/.MainActivity
 ```
 
-Scene Detector opens without a model. You can choose a saved image or open the live camera, but detection remains unavailable until you import a supported `.pte` file. 
+Scene Detector opens without a model. The **Choose a detector** section provides separate ExecuTorch and LiteRT modes. You can choose a saved image or open the live camera, but detection remains unavailable until you import a supported `.pte` or `.tflite` file.
 
-![Scene Detector first-launch screen with ExecuTorch detection selected. The empty image area and Model setup needed message show that no model or image has been imported yet.#center](scene-detector-startup.png "Scene Detector before a model or image is added")
+![Scene Detector first-launch screen showing separate ExecuTorch detection and LiteRT detection cards above the empty image area. The detector choices confirm that you select the runtime before importing a model.#center](scene-detector-startup.png "Scene Detector with ExecuTorch and LiteRT detector modes")
 
 ## What you've accomplished and what's next
 
