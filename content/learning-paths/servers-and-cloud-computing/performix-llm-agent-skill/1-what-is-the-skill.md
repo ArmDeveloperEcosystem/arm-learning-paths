@@ -22,8 +22,7 @@ When the skill is active, the assistant:
 
 - Asks for the target, binary path, and workload command before profiling
 - Chooses the narrowest Performix recipe that answers your question
-- Runs the recipe through the `apx` command-line interface (CLI), or through the
-  Arm Model Context Protocol (MCP) Server
+- Runs the recipe through the Arm Performix `apx` command-line interface (CLI)
 - Returns a structured analysis report with a bottleneck summary, key metrics,
   hot functions, ranked recommendations, and a single next step
 
@@ -52,7 +51,7 @@ Each recipe provides a different view of application performance:
 - To use the Memory Access recipe, enable the Statistical Profiling Extension
   (SPE).
 - The host machine can be macOS, Windows, or Linux on either arm64 or x86-64. The host can connect to the target locally or over SSH.
-- The skill guides AI assistants to use the `apx` CLI by default. If `apx` isn’t installed or available, it asks how you want to proceed rather than switching tools automatically. You can use the Arm MCP Server as an alternative tool, especially if you want fully agent-driven launch-mode profiling. Note that the MCP server doesn’t expose the System Characterization recipe.
+- The skill guides AI assistants to use the `apx` CLI by default. If `apx` isn’t installed or available, it asks how you want to proceed rather than switching tools automatically.
 {{% /notice %}}
 
 ## What you've learned and what's next

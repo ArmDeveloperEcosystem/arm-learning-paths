@@ -1,70 +1,74 @@
 ---
 title: Run Code Hotspots with an AI agent
-description: Use a GitHub Copilot prompt file to run the Arm Performix Code Hotspots recipe through the Arm MCP Server and review structured hotspot output.
+description: Use an AI agent and the dedicated Arm Performix MCP server to run Code Hotspots and review evidence tied to a specific run ID.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Execute profiling through the Arm MCP Server
+## Execute profiling through the Arm Performix MCP server
 
-You'll use a GitHub Copilot prompt file to drive the Code Hotspots recipe through the Arm MCP Server. The agent confirms your target details, runs the recipe autonomously, and returns structured profiling results.
-
-## Use the Arm MCP arm-hotspots-optimization prompt file
+You'll keep collection and analysis as separate requests. This lets you confirm the target and workload before remote execution and use the resulting run ID for analysis.
 
 {{% notice Note %}}
-If you prefer a different AI assistant than Visual Studio Code with GitHub Copilot, see [Configure other AI agents](#optional-configure-other-ai-agents) at the end of this section for equivalent configurations for Kiro and OpenAI Codex.
+The prompts use natural language instead of internal MCP tool names. This makes them suitable for compatible AI coding assistants that are connected to the dedicated Arm Performix MCP server. For a tested setup, see [Configure the Arm Performix MCP server in Codex](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-codex/configure_mcp_codex/).
 {{% /notice %}}
 
-The Arm MCP Server repository includes a ready-made prompt file called `arm-hotspots-optimization` that guides an AI agent through the full Code Hotspots workflow: baseline profiling, hotspot identification, targeted code changes, and re-profiling to confirm the improvement. You don't need to write this file yourself. You can copy it from the repository.
+## Verify the recipe and target
 
-Open the Mandelbrot-Example repository in Visual Studio Code on your local machine. Create the directory `.github/prompts/` if it doesn't already exist:
-
-```bash
-mkdir -p .github/prompts
-```
-
-Download the prompt file from the Arm MCP repository and place it in that directory:
-
-```bash
-curl -o .github/prompts/arm-hotspots-optimization.prompt.md \
-  https://raw.githubusercontent.com/arm/mcp/main/agent-integrations/vs-code/arm-hotspots-optimization.prompt.md
-```
-
-You can also view the full prompt at [github.com/arm/mcp](https://github.com/arm/mcp/blob/main/agent-integrations/vs-code/arm-hotspots-optimization.prompt.md). It instructs the agent to confirm the workload command and target details with you before running, follow the loop of baseline profile → one focused code change → re-profile → compare delta, and report results in concrete numbers at each step.
-
-## Invoke the prompt file
-
-With GitHub Copilot connected to the Arm MCP Server, open Copilot Chat in Agent Mode and invoke the prompt with the slash command:
+Ask your AI assistant to list the available recipes and configured targets:
 
 ```text
-/arm-hotspots-optimization
+Use the Arm Performix MCP server to list the available recipes and configured
+targets. Confirm that Code Hotspots is available. For each target, include its
+name, connection type, and whether it is the default.
 ```
 
-Copilot reads the prompt file and walks you through a series of confirmation questions before running anything. Answer each question in turn:
+Choose the friendly target name that you verified in the previous section. You don't need to provide its SSH username or IP address again because those details belong to the Performix target configuration.
 
-First, select where the workload is running — choose **Remote machine (SSH)** for an Arm cloud instance.
+Before collection, ask the assistant to check the recipe against that target:
 
-![GitHub Copilot agent chat asking where the workload is running, with menu choices for localhost or remote machine (SSH)#center](images/mcp-performix-setup1.png "Agent prompt: select workload location")
+```text
+Use the Arm Performix MCP server to check whether Code Hotspots supports target
+"<target-name>". Summarize the recipe parameters and their default values. Do
+not start a run.
+```
 
-Next, enter the absolute path to the binary on the remote server.
+Replace `<target-name>` and continue only when the recipe is available and the target is supported.
 
-![GitHub Copilot agent chat prompting the user to enter the absolute path to the executable or workload command#center](images/mcp-performix-setup2.png "Agent prompt: enter binary path")
+## Run the Code Hotspots recipe
 
-Then, enter the SSH username used to connect to the target machine.
+Replace `<target-name>` in this prompt, then send it to your AI assistant:
 
-![GitHub Copilot agent chat asking what SSH username should be used to connect to the target machine#center](images/mcp-performix-setup3.png "Agent prompt: enter SSH username")
+```text
+Use Arm Performix to run the Code Hotspots recipe on target "<target-name>"
+with workload
+"/home/ec2-user/Mandelbrot-Example/build/mandelbrot_single_thread_debug".
+Before starting, repeat the target and workload and ask me to confirm them.
+When the run completes, return its run ID and collection status.
+```
 
-Finally, enter the IP address or hostname of your remote Arm machine.
+Review the target and workload before approving collection. The dedicated server runs the recipe, waits for it to finish, and returns a stable run ID with the collection status.
 
-![GitHub Copilot agent chat asking for the IP address of the remote Arm machine#center](images/mcp-performix-setup4.png "Agent prompt: enter remote IP address")
+{{% notice Note %}}
+The single-threaded workload can take one to two minutes on the example system. Runtime and sample counts vary with the target, workload build, and Performix version.
+{{% /notice %}}
 
-After you've answered all four questions, the agent calls `arm-mcp/apx_recipe_run` to start the Code Hotspots recipe and waits for the Mandelbrot binary to finish. The single-threaded build takes approximately one to two minutes to run.
+## Generate an AI insight
 
-## Read the agent output
+Use the returned run ID to request evidence for that exact profile:
 
-After the profiling run completes, the agent returns a structured summary.
+```text
+Use Arm Performix to generate an AI insight for run ID "<run-id>".
+Identify the highest-impact findings, cite the profile evidence that supports them,
+and suggest investigation or optimization steps. State any missing
+evidence or uncertainty.
+```
+
+Replace `<run-id>` with the ID from the completed Code Hotspots run.
+
+After the agent generates the AI insight, it returns a structured summary.
 
 The output is similar to:
 
@@ -99,11 +103,6 @@ key observation: the inner loop in getIterations spends more than 60% of total
 CPU time in the escape condition check and std::complex arithmetic machinery,
 not in the Mandelbrot iteration itself.
 
-knowledge_base_search result for "optimizing hypot libm Arm Neoverse":
-  - Arm Performance Libraries vector math functions provide optimized implementations
-    for Neoverse targets.
-    Link: https://developer.arm.com/documentation/101004/latest
-
 Proposed optimizations (not yet applied):
   1. Replace abs(z) > THRESHOLD with a squared-magnitude check:
      (z.real()*z.real() + z.imag()*z.imag()) > THRESHOLD*THRESHOLD
@@ -120,42 +119,14 @@ Proposed optimizations (not yet applied):
 
 The agent has surfaced the same hotspots that a manual Performix session would identify: `__complex_abs` and `hypotf64` dominating through the inner loop in `Mandelbrot::getIterations`, plus significant `std::complex` operator overhead from the debug build. You don't need to open the Performix GUI, configure the recipe, or manually inspect the flame graph.
 
-## (Optional) Configure other AI agents
+The following flame graph from the same single-threaded Mandelbrot workload shows `std::__complex_abs` as the dominant sampled function.
 
-The same profiling workflow works with other agentic AI assistants. The core prompt logic is identical across tools; only the file location and invocation format changes.
-
-### Kiro steering document
-
-The Arm MCP repository includes a ready-made Kiro steering document for this workflow. Create the `.kiro/steering/` directory if it doesn't already exist, then download the file:
-
-```bash
-mkdir -p .kiro/steering
-curl -o .kiro/steering/arm-hotspots-optimization.md \
-  https://raw.githubusercontent.com/arm/mcp/main/agent-integrations/kiro/arm-hotspots-optimization.md
-```
-
-You can view the full steering document at [github.com/arm/mcp](https://github.com/arm/mcp/blob/main/agent-integrations/kiro/arm-hotspots-optimization.md). It uses `inclusion: always`, so Kiro loads it automatically for every session in the workspace. Reference it explicitly in chat by typing `#arm-hotspots-optimization`.
-
-### OpenAI Codex prompt file
-
-The Arm MCP repository also includes a ready-made Codex prompt file. Create the prompts directory if it doesn't already exist, then download the file:
-
-```bash
-mkdir -p ~/.codex/prompts
-curl -o ~/.codex/prompts/arm-hotspots-optimization \
-  https://raw.githubusercontent.com/arm/mcp/main/agent-integrations/codex/arm-hotspots-optimization.md
-```
-
-You can view the full prompt at [github.com/arm/mcp](https://github.com/arm/mcp/blob/main/agent-integrations/codex/arm-hotspots-optimization.md). Invoke it with:
-
-```bash
-codex /prompts:arm-hotspots-optimization
-```
+![Arm Performix flame graph for the single-threaded Mandelbrot workload showing std::__complex_abs as the dominant hotspot, which confirms the square-root-based escape check is a candidate for investigation#center](../cpu_hotspot_performix/single-thread-flame-graph.jpg "Single-threaded Mandelbrot flame graph in Arm Performix")
 
 ## What you've accomplished and what's next
 
-You've now used the Arm MCP `arm-hotspots-optimization` prompt file — invoked with `/arm-hotspots-optimization` — to drive the Arm Performix Code Hotspots recipe end-to-end through the Arm MCP Server.
+You've now used the dedicated Arm Performix MCP server to select a configured target, run Code Hotspots, and generate an AI insight for a specific run ID.
 
-The agent confirmed your target details, ran the recipe autonomously, and identified `getIterations` as the dominant hotspot. It found that ~33% of total CPU time is spent inside the sqrt-based escape condition check (`__complex_abs` and `hypotf64`), and noted significant `std::complex` operator overhead from the debug build. It proposed three targeted optimizations: eliminating the sqrt, replacing `std::complex` with raw double arithmetic, and enabling compiler optimizations.
+The agent identified `getIterations` as the dominant hotspot. It found that ~33% of total CPU time is spent inside the sqrt-based escape condition check (`__complex_abs` and `hypotf64`), and noted significant `std::complex` operator overhead from the debug build. It proposed three targeted optimizations: eliminating the sqrt, replacing `std::complex` with raw double arithmetic, and enabling compiler optimizations.
 
 Next, you'll apply those optimizations one at a time, rebuilding and re-profiling after each change to confirm the improvement with real data.

@@ -209,10 +209,6 @@ Add the following JSON configuration to `~/.gemini/antigravity-cli/mcp_config.js
         "--pull=always",
         "-v",
         "/path/to/your/workspace:/workspace",
-        "-v",
-        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v",
-        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {}
@@ -221,7 +217,7 @@ Add the following JSON configuration to `~/.gemini/antigravity-cli/mcp_config.js
 }
 ```
 
-Replace `/path/to/your/workspace`, `/path/to/your/ssh/private_key`, and `/path/to/your/ssh/known_hosts` with your workspace directory, SSH private key, and `known_hosts` file to enable remote testing features on your target device.
+Replace `/path/to/your/workspace` with your workspace directory.
 
 ### (Optional) Use alternative container tools
 
@@ -251,10 +247,6 @@ Add the following configuration to `~/.gemini/antigravity-cli/mcp_config.json`:
         "--pull=always",
         "-v",
         "/path/to/your/workspace:/workspace",
-        "-v",
-        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v",
-        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {}
@@ -284,10 +276,6 @@ Add the following configuration to `~/.gemini/antigravity-cli/mcp_config.json`:
         "--pull=always",
         "-v",
         "/path/to/your/workspace:/workspace",
-        "-v",
-        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v",
-        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {}
@@ -319,10 +307,6 @@ Add the following configuration to `~/.gemini/antigravity-cli/mcp_config.json`:
         "--pull=always",
         "-v",
         "/path/to/your/workspace:/workspace",
-        "-v",
-        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v",
-        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {}
@@ -354,10 +338,6 @@ Add the following configuration to `~/.gemini/antigravity-cli/mcp_config.json`:
         "--pull=always",
         "-v",
         "/path/to/your/workspace:/workspace",
-        "-v",
-        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v",
-        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {}
@@ -388,8 +368,8 @@ The output lists the Arm MCP Server tools and is similar to:
 MCP Servers
 
 Plugins (~/.gemini/antigravity-cli/plugins)
->  ✓ arm_mcp_server  Tools: knowledge_base_search, check_image, sysreport_instructions,
-                     migrate_ease_scan, apx_recipe_run, +2 more
+>  ✓ arm_mcp_server  Tools: knowledge_base_search, migrate_ease_scan, check_image,
+                     skopeo, mca
 ```
 
 
@@ -406,4 +386,3 @@ If you are facing issues or have questions, reach out to mcpserver@arm.com.
 You're now ready to use Antigravity CLI for Arm architecture development, migration, and optimization.
 
 To test a workflow for migrating an application from x86 to Arm, see the Learning Path [Automate x86-to-Arm application migration using the Arm MCP server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/).
-
