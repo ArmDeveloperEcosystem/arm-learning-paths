@@ -1,6 +1,10 @@
 ---
 title: Convert SmolVLA to ExecuTorch for Arm CPU
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for machine learning developers who want to export a vision-language-action model to ExecuTorch for Arm CPU inference.
