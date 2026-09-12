@@ -41,9 +41,9 @@ further_reading:
 skilllevels: Introductory
 subjects: Performance and Architecture
 platforms:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
 armips:
     - Neoverse
 operatingsystems:

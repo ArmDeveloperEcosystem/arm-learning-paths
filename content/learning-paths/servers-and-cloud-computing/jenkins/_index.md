@@ -31,8 +31,8 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: CI-CD
 platforms:
-  - Microsoft Azure
-  - Google Cloud
+  - Microsoft Azure Cobalt
+  - Google Axion
 
 armips:
     - Neoverse

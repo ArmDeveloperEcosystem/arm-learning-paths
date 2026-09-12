@@ -95,7 +95,7 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/performix-microarchitecture/
         type: learning-path
     - resource:
-        title: Optimize memory access behavior using Arm Performix and the Arm MCP Server
+        title: Optimize memory access behavior using the Arm Performix MCP server
         link: /learning-paths/servers-and-cloud-computing/performix-memory-access/
         type: learning-path
 
@@ -105,4 +105,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

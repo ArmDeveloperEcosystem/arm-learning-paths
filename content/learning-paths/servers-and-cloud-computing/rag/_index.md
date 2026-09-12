@@ -31,7 +31,7 @@ armips:
     - Neoverse
 subjects: ML
 platforms:
-  - Google Cloud
+  - Google Axion
 operatingsystems:
     - Linux
 tools_software_languages:

@@ -13,56 +13,58 @@ pinned_learning_paths:
 - nfru-unreal
 - model-training-gym-nfru
 operatingsystems_filter:
-- Android: 43
-- Linux: 46
-- macOS: 23
-- Windows: 22
+- Android: 50
+- Linux: 49
+- macOS: 25
+- Windows: 24
 subjects_filter:
 - Gaming: 6
 - Graphics: 8
-- ML: 34
-- Performance and Architecture: 36
+- ML: 41
+- Performance and Architecture: 37
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech.
 title: Mobile, Graphics, and Gaming
 tools_software_languages_filter:
 - 7-Zip: 1
+- ADB: 1
 - adb: 2
 - Android: 6
-- Android NDK: 2
+- Android NDK: 3
 - Android SDK: 1
-- Android Studio: 14
+- Android Studio: 19
+- Arm AI Portal: 6
 - Arm Development Studio: 1
 - Arm Mobile Studio: 1
 - Arm Performance Studio: 5
 - Assembly: 1
 - Bash: 2
 - Bazel: 2
-- C: 5
+- C: 6
 - CameraX: 1
 - CCA: 1
 - Clang: 12
-- CMake: 4
-- CPP: 19
+- CMake: 5
+- CPP: 20
 - csharp: 3
-- Docker: 1
+- Docker: 2
 - ETDump: 1
 - ETRecord: 1
-- ExecuTorch: 10
+- ExecuTorch: 16
 - Frame Advisor: 1
 - GCC: 12
-- Generative AI: 2
+- Generative AI: 3
 - glslc: 1
 - Godot: 1
 - Google Pixel 8: 1
 - Google Test: 1
 - Gradio: 1
 - Halide: 1
-- Hugging Face: 7
-- Java: 7
+- Hugging Face: 12
+- Java: 12
 - Jupyter Notebook: 3
-- KleidiAI: 4
-- Kotlin: 11
-- LiteRT: 1
+- KleidiAI: 8
+- Kotlin: 13
+- LiteRT: 4
 - LiteRT-LM: 1
 - llama.cpp: 4
 - LLM: 3
@@ -71,12 +73,12 @@ tools_software_languages_filter:
 - MediaPipe: 3
 - Model Explorer: 2
 - MTE: 2
-- Neon: 4
+- Neon: 5
 - NX: 10
 - ONNX: 1
-- ONNX Runtime: 3
+- ONNX Runtime: 4
 - OpenGL ES: 1
-- Python: 14
+- Python: 17
 - PyTorch: 7
 - QEMU: 1
 - RenderDoc: 1
@@ -84,8 +86,9 @@ tools_software_languages_filter:
 - Runbook: 14
 - Rust: 2
 - SDDiskTool: 1
+- SME: 1
 - SME2: 12
-- SVE2: 3
+- SVE2: 4
 - TensorFlow: 1
 - TorchAO: 1
 - TOSA: 3
@@ -98,9 +101,8 @@ tools_software_languages_filter:
 - Visual Studio Code: 1
 - Vulkan: 10
 - Vulkan SDK: 3
-- XNNPACK: 3
+- XNNPACK: 8
 weight: 3
-# auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit

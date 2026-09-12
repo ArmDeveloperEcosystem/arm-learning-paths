@@ -49,7 +49,7 @@ You don't need all of these tools immediately. You'll start by using image inspe
 
 ### knowledge_base_search
 
-Searches an Arm knowledge base of learning resources, Arm intrinsics, and software version compatibility using semantic similarity. Given a natural language query, it returns matching resources with URLs, titles, and content snippets ranked by relevance.
+Searches an Arm knowledge base of learning resources, Arm intrinsics, software version compatibility, and guidance for collecting system architecture, CPU, memory, and other host hardware details using semantic similarity, returning matching resources with URLs, titles, and content snippets ranked by relevance.
 
 **Use case:** Finding documentation, tutorials, or version compatibility information for Arm migration.
 
@@ -76,12 +76,6 @@ Runs a migrate-ease scan against a workspace or remote Git repository. Supported
 An assembly code performance analyzer that predicts performance on different CPU architectures and identifies bottlenecks. It estimates Instructions Per Cycle (IPC), execution time, and resource usage.
 
 **Use case:** Analyzing and optimizing performance-critical assembly code when migrating between processor types.
-
-### sysreport_instructions
-
-Provides instructions for installing and using sysreport, a tool that obtains system information related to system architecture, CPU, memory, and other hardware details.
-
-**Use case:** Understanding the target Arm system's capabilities before deployment.
 
 ## Setting up the Arm MCP Server
 

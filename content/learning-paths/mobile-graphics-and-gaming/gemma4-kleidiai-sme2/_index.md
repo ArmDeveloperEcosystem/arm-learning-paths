@@ -1,5 +1,5 @@
 ---
-title: Benchmark Gemma LiteRT-LM prefill performance with KleidiAI and SME2 on macOS
+title: Benchmark Gemma 4 LiteRT-LM prefill performance with KleidiAI and SME2 on macOS
 
 minutes_to_complete: 45
 
@@ -7,17 +7,18 @@ draft: true
 cascade:
     draft: true
 
-who_is_this_for: This is an advanced topic for software developers and performance engineers who want a reproducible Gemma prefill benchmark workflow using LiteRT-LM, KleidiAI, and XNNPACK on macOS.
+who_is_this_for: This is an advanced topic for software developers and performance engineers who want a reproducible Gemma 4 prefill benchmark workflow using LiteRT-LM, KleidiAI, and XNNPACK on macOS.
 
 learning_objectives:
-    - Create a pinned workspace with LiteRT-LM, KleidiAI, and XNNPACK
-    - Install Bazelisk and required macOS prerequisites for LiteRT-LM builds
-    - Prepare a LiteRT-LM compatible `.litertlm` Gemma model from Hugging Face
-    - Run LiteRT-LM benchmark commands and measure prefill throughput on a reproducible setup
+    - Create a workspace with pinned LiteRT-LM and KleidiAI versions
+    - Create upstream-optimized and historical-baseline XNNPACK worktrees
+    - Download a LiteRT-LM-compatible Gemma 4 model from Hugging Face
+    - Compare baseline and upstream SME2 benchmark results
 
 prerequisites:
-    - A SME2 device (macOS M4 on Apple Silicon)
+    - An SME2 device (this tutorial uses macOS on Apple M4)
     - Git, Homebrew, and Xcode Command Line Tools
+    - At least 25 GB of free disk space for model files and local builds
 author: Annie Tallund
 
 generate_summary_faq: true
@@ -61,19 +62,11 @@ further_reading:
         type: website
     - resource:
         title: XNNPACK repository
-        link: https://github.com/google/xnnpack
+        link: https://github.com/google/XNNPACK
         type: website
     - resource:
-        title: google/gemma-3n-E4B-it-litert-lm on Hugging Face
-        link: https://huggingface.co/google/gemma-3n-E4B-it-litert-lm
-        type: website
-    - resource:
-        title: google/gemma-3-4b-it on Hugging Face
-        link: https://huggingface.co/google/gemma-3-4b-it
-        type: website
-    - resource:
-        title: litert-community/Gemma3-4B-IT on Hugging Face
-        link: https://huggingface.co/litert-community/Gemma3-4B-IT
+        title: Gemma 4 E2B for LiteRT-LM on Hugging Face
+        link: https://huggingface.co/litert-community/gemma-4-E2B-it-litert-lm
         type: website
 
 ### FIXED, DO NOT MODIFY

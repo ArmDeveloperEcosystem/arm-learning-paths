@@ -76,8 +76,8 @@ test_maintenance: true
 skilllevels: Introductory
 subjects: Libraries
 platforms:
-  - AWS
-  - Oracle
+  - AWS Graviton
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
 - Neoverse
 tools_software_languages:

@@ -27,7 +27,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Storage
 platforms:
-  - Microsoft Azure
+  - Microsoft Azure Cobalt
 
 armips:
     - Neoverse

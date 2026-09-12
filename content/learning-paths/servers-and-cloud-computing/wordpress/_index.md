@@ -22,7 +22,7 @@ learning_objectives:
 skilllevels: Introductory
 subjects: Databases
 platforms:
-  - Oracle
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 
 armips:
     - Neoverse
