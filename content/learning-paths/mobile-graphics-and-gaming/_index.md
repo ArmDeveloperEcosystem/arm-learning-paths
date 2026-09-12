@@ -26,8 +26,8 @@ subtitle: Optimize Android apps and build faster games using cutting-edge Arm te
 title: Mobile, Graphics, and Gaming
 tools_software_languages_filter:
 - 7-Zip: 1
-- adb: 2
 - ADB: 1
+- adb: 2
 - Android: 6
 - Android NDK: 3
 - Android SDK: 1
@@ -40,12 +40,11 @@ tools_software_languages_filter:
 - Bash: 2
 - Bazel: 2
 - C: 6
-- C++: 1
 - CameraX: 1
 - CCA: 1
 - Clang: 12
 - CMake: 5
-- CPP: 19
+- CPP: 20
 - csharp: 3
 - Docker: 2
 - ETDump: 1
@@ -74,7 +73,7 @@ tools_software_languages_filter:
 - MediaPipe: 3
 - Model Explorer: 2
 - MTE: 2
-- Neon: 4
+- Neon: 5
 - NX: 10
 - ONNX: 1
 - ONNX Runtime: 4

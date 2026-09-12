@@ -18,7 +18,7 @@ prerequisites:
     - A development machine running macOS on Apple silicon with Homebrew and the Xcode Command Line Tools installed
     - An [Alif Ensemble E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) with an MT9M114 camera connected to J16 and an MW405 display
     - Alif SEROM 1.105.65 and SERAM 1.110.0 installed on the board
-    - Alif SEToolkit 1.10 installed on the development machine
+    - Alif Security Toolkit (SETOOLS) 1.10 installed on the development machine
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -54,9 +54,9 @@ generated_summary_faq:
       `APP` for the dual-NPU sample, `OD` for the object-detection module, and `MODULES` for the
       Zephyr module list. The sample includes compiled `PTE` models for Ethos-U55 and Ethos-U85
       and a startup image.
-  - question: How do I point the packaging step to my Alif SEToolkit installation?
+  - question: How do I point the packaging step to my Alif Security Toolkit (SETOOLS) installation?
     answer: >-
-      Set `ALIF_SE_TOOLS_DIR` to your SEToolkit 1.10 application directory, such as
+      Set `ALIF_SE_TOOLS_DIR` to your SETOOLS 1.10 application directory, such as
       `app-release-exec-macos` on macOS. The sample’s JSON assigns application and model payloads
       to validated MRAM addresses. Confirm that the toolkit and referenced support objects are available.
   - question: What results indicate both NPUs are working before live camera starts?
