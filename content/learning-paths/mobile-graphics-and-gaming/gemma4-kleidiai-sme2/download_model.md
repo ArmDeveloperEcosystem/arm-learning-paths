@@ -1,18 +1,14 @@
 ---
-title: Install prerequisites and download the model
+title: Install prerequisites and download Gemma 4
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview
-
-In this section, you install the macOS dependencies required to build LiteRT-LM and prepare a Gemma model in LiteRT-LM `.litertlm` format.
-
 ## Install prerequisites on macOS
 
-Install Xcode Command Line Tools (if needed):
+Install Xcode Command Line Tools if they are not already available:
 
 ```bash
 xcode-select --install
@@ -27,65 +23,55 @@ brew install bazelisk
 Install the Hugging Face Hub CLI:
 
 ```bash
-python3 -m pip install -U "huggingface_hub[cli]"
+python3 -m pip install -U huggingface_hub
 ```
 
-Pin Bazel version `7.6.1` from the LiteRT-LM root:
+Confirm that LiteRT-LM pins Bazel `7.6.1`:
 
 ```bash
 cd $HOME/gemma4-prefill-bench/LiteRT-LM
-echo "7.6.1" > .bazelversion
+cat .bazelversion
 bazelisk version
 ```
 
-## Create model directory
+## Download Gemma 4 from Hugging Face
+
+Create a shared model directory in the workspace:
 
 ```bash
-mkdir -p $HOME/gemma4-prefill-bench/LiteRT-LM/models
+mkdir -p $HOME/gemma4-prefill-bench/models
+cd $HOME/gemma4-prefill-bench
+```
+
+Download the CPU-compatible Gemma 4 E2B LiteRT-LM artifact:
+
+```bash
+hf download litert-community/gemma-4-E2B-it-litert-lm \
+  gemma-4-E2B-it.litertlm \
+  --local-dir models/gemma-4-E2B-it-litert-lm
+```
+
+The model repository is public. If Hugging Face asks for credentials, run
+`hf auth login` and repeat the download.
+
+Verify the downloaded file:
+
+```bash
+shasum -a 256 \
+  models/gemma-4-E2B-it-litert-lm/gemma-4-E2B-it.litertlm
+ls -lh models/gemma-4-E2B-it-litert-lm/gemma-4-E2B-it.litertlm
+```
+
+The expected SHA-256 checksum is:
+
+```output
+181938105e0eefd105961417e8da75903eacda102c4fce9ce90f50b97139a63c  models/gemma-4-E2B-it-litert-lm/gemma-4-E2B-it.litertlm
 ```
 
 {{% notice Note %}}
-The benchmark commands in this Learning Path assume your model directory is under `LiteRT-LM/models/`.
+The file is about 2.6 GB. LiteRT-LM requires the `.litertlm` artifact; a
+Transformers repository containing only `safetensors` files is not a direct
+replacement.
 {{% /notice %}}
 
-## Prepare a LiteRT-LM-compatible model
-
-LiteRT-LM benchmark commands in this Learning Path use `litert_lm_advanced_main`, which expects a LiteRT-LM model artifact (`.litertlm`) for `--model_path`.
-
-The `google/gemma-3-4b-it` repository on Hugging Face follows the Transformers layout (multiple `safetensors` files), so it is not directly consumable by `litert_lm_advanced_main`.
-
-Use a prebuilt LiteRT-LM model artifact instead:
-
-```bash
-cd $HOME/gemma4-prefill-bench/LiteRT-LM/models
-hf auth login
-hf download google/gemma-3n-E4B-it-litert-lm \
-  --include "gemma-3n-E4B-it-int4.litertlm" \
-  --local-dir ./gemma-3n-E4B-it-litert-lm
-
-cp ./gemma-3n-E4B-it-litert-lm/gemma-3n-E4B-it-int4.litertlm \
-   ./gemma-3n-E4B-it-int4.litertlm
-
-ls -lh ./gemma-3n-E4B-it-int4.litertlm
-```
-
-{{% notice Note %}}
-The model repository is gated. Make sure your Hugging Face account has accepted the model terms before downloading.
-{{% /notice %}}
-
-Expected layout:
-
-```text
-LiteRT-LM/models/
-├── gemma-3n-E4B-it-int4.litertlm
-└── gemma-3n-E4B-it-litert-lm/
-    └── gemma-3n-E4B-it-int4.litertlm
-```
-
-## What you've accomplished and what's next
-
-In this section:
-- You installed macOS prerequisites and pinned Bazel for LiteRT-LM
-- You created the local model directory and prepared a LiteRT-LM-compatible `.litertlm` Gemma model
-
-In the next section, you will build and run the benchmark workflow.
+In the next section, you will build each XNNPACK variant and run the benchmark.
