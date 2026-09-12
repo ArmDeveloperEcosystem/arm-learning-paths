@@ -27,8 +27,8 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Storage
 platforms:
-  - AWS
-  - Google Cloud
+  - AWS Graviton
+  - Google Axion
 armips:
     - Neoverse
 operatingsystems:

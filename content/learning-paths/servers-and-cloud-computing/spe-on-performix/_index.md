@@ -29,9 +29,9 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 platforms:
     - Arm AGI CPU
-    - AWS
-    - Google Cloud
-    - Microsoft Azure
+    - AWS Graviton
+    - Google Axion
+    - Microsoft Azure Cobalt
 armips:
     - Neoverse
 tools_software_languages:

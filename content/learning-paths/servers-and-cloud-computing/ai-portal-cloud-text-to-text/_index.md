@@ -1,27 +1,75 @@
 ---
-title: Run Optimized LLMs from the Arm AI Portal on Arm Neoverse Cloud Instances
+title: Run optimized LLMs from the Arm AI Portal on Arm Neoverse-based instances
 
 description: Download and run an Arm-optimized LLM using the supplied ONNX Runtime GenAI workflow, or use a coding agent to adapt the application for a compatible alternative model runtime or format.
 
 minutes_to_complete: 35
 
-who_is_this_for: This Learning Path is for developers and ML engineers running Arm-optimized LLMs on Arm Neoverse Linux machines. It provides a tested ONNX Runtime GenAI workflow and an optional coding-agent workflow for compatible text-to-text packages that use alternative runtimes or formats.
+who_is_this_for: This Learning Path is for developers and ML engineers running Arm-optimized Large Language Models (LLMs) on Arm Neoverse-based Linux machines. It provides a tested ONNX Runtime GenAI workflow and an optional AI coding agent workflow for compatible text-to-text packages that use alternative runtimes or formats.
 
 learning_objectives:
     - Prepare an Arm Neoverse Linux machine and download a model from the Arm AI Portal.
     - Generate text from the terminal and optionally serve the model through a local web application.
-    - Explain how the shared application calls the supplied ONNX Runtime GenAI adapter.
+    - Identify how the shared application calls the supplied ONNX Runtime GenAI adapter.
     - Compare runtime and model-format choices, and optionally use a coding agent to replace the supplied adapter for another compatible text-to-text package.
 
 prerequisites:
-    - An Arm Neoverse Linux machine running Ubuntu 24.04 LTS, with Python 3.11 or later, for example an AWS m8g.xlarge instance
+    - An Arm Neoverse-based Linux machine running Ubuntu 24.04 LTS, with Python 3.11 or later, for example an AWS `m8g.xlarge` instance
     - At least 16 GB of memory if you plan to use one of the 8B models
     - Basic familiarity with Linux command-line tools and Python
     - (Optional) Access to a coding agent if you want to generate an adapter for another runtime
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-09-08T16:22:31Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 3499e744ac80b0e88701b9e2249f8ee9e103f66a8f0fc49996412c8cb81bcbee
+  summary_generated_at: '2026-09-08T16:22:31Z'
+  summary_source_hash: 3499e744ac80b0e88701b9e2249f8ee9e103f66a8f0fc49996412c8cb81bcbee
+  faq_generated_at: '2026-09-08T16:22:31Z'
+  faq_source_hash: 3499e744ac80b0e88701b9e2249f8ee9e103f66a8f0fc49996412c8cb81bcbee
+  summary: >-
+    You'll run optimized LLMs from the Arm AI Portal on an Arm Neoverse-based Linux machine.
+    First, you'll create a Python environment, download the shared application files, and either use the supplied
+    ONNX Runtime GenAI adapter or generate a compatible replacement. You'll select and run a model and
+    optionally start its web interface. Then, you'll examine how the runner scripts call the adapter. You'll optionally learn to compare
+    alternative runtimes and formats for replacement if the supplied adapter doesn't suit your needs.
+  faqs:
+  - question: Which script should I run to generate text in the terminal or browser?
+    answer: >-
+      Use `run_model.py` for terminal generation and `genai_web.py` for an optional local browser
+      interface. Both entry points call the shared adapter, which uses the supplied ONNX Runtime
+      GenAI implementation.
+  - question: How do I choose and set the correct ID for a model from the Arm AI Portal?
+    answer: >-
+      Select your model in the Arm AI Portal and copy its Hugging Face repository ID in the form
+      `Arm/<model-repository-name>`. When you use the supplied adapter, choose an ID from the
+      confirmed models table. If you generated an adapter for another runtime, keep your existing
+      `MODEL_ID` and follow that package’s model-type and prompt guidance.
+  - question: How do I verify my adapter before I run a model?
+    answer: >-
+      Use `validate_adapter.py` to check the adapter contract and required package files. If the
+      check fails, align your implementation with the interface defined in `adapter_contract.py`.
+  - question: What do I see after a successful terminal run?
+    answer: >-
+      You'll see generated text in the terminal. `run_model.py` reports time to first token and decode
+      throughput.
+  - question: Which components change if I switch to another runtime or model format?
+    answer: >-
+      Implement the adapter defined in `adapter_contract.py` for the target package, replacing
+      the supplied ONNX Runtime GenAI implementation in `model_adapter.py`. You can retain the
+      terminal and web runners and follow the alternative package’s guidance for model type and
+      prompting.
+# END generated_summary_faq
+
 author: Matt Cossins
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

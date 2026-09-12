@@ -80,7 +80,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Performance and Architecture
 platforms:
-    - AWS
+    - AWS Graviton
 
 armips:
     - Cortex-A

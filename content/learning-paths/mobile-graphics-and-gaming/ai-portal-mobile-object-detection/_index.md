@@ -1,16 +1,16 @@
 ---
 title: Run optimized object-detection models from the Arm AI Portal on Android
 
-description: Run Arm-optimized YOLOv5s, YOLOv8s, and YOLOv9s models on Android to detect objects in saved images or a live camera feed.
+description: Run Arm-optimized YOLO models with ExecuTorch or LiteRT on Android to detect objects in saved images or a live camera feed.
 
-minutes_to_complete: 35
+minutes_to_complete: 40
 
-who_is_this_for: This Learning Path is for Android and machine learning developers who want to run optimized object detection locally on an Arm-based Android device. It demonstrates an ExecuTorch adapter that selects the preprocessing and output decoding required by supported YOLO models.
+who_is_this_for: This Learning Path is for Android and machine learning developers who want to run optimized object detection locally on an Arm-based Android device. It demonsytrates ExecuTorch and LiteRT adapters that select the runtime, preprocessing, precision settings, and output decoding required by supported YOLO models.
 
 learning_objectives:
     - Prepare the Android command-line tools and connect an Arm-based Android phone
     - Download and run a supported object-detection model from the Arm AI Portal
-    - Explain how the supplied adapter selects version-specific preprocessing and output decoding for supported YOLO models
+    - Explain how the supplied adapters select runtime-specific preprocessing, precision settings, and output decoding for supported YOLO models
     - Register another compatible detector or optionally generate and validate a separate adapter
 
 prerequisites:
@@ -42,8 +42,8 @@ generated_summary_faq:
   summary: >-
     You'll build and run an application called Scene Detector on an Arm-based Android phone. First, you'll install the Android
     command-line tools, connect a device with `adb`, and build the application with Gradle. Next, you'll start with the Arm AI
-    Portal YOLOv8s model in ExecuTorch. You'll analyze a saved image and a live camera feed, then learn how to
-    register a compatible detector or create and validate an adapter for an unsupported model.
+    Portal YOLOv8s model in ExecuTorch. You'll analyze a saved image and a live camera feed, then try a
+    LiteRT model and learn how to register a compatible detector or create and validate an adapter for an unsupported model.
   faqs:
   - question: How do I verify that my Android phone is connected to adb?
     answer: >-
@@ -53,14 +53,10 @@ generated_summary_faq:
     answer: >-
       Ensure Android `udev` rules are installed and that your user belongs to the `plugdev` group.
       Reconnect the device after updating the rules or group membership.
-  - question: Do I need network access during setup?
-    answer: >-
-      Yes. The first Gradle build downloads dependencies, and the model downloader retrieves model files
-      from Hugging Face.
   - question: How does the confidence threshold affect object detection?
     answer: >-
-      A higher confidence threshold removes more lower-scoring detections. Reduce the default `75%`
-      threshold if the model doesn't display expected objects, but be aware that lower thresholds can
+      A higher confidence threshold removes more lower-scoring detections. Reduce the model's default
+      threshold if it doesn't display expected objects, but be aware that lower thresholds can
       increase false positives and the amount of work passed to non-maximum suppression.
   - question: How do I add a detector that Scene Detector doesn't support?
     answer: >-
@@ -68,7 +64,7 @@ generated_summary_faq:
       agent workflow to generate another adapter.
   - question: How do I run detection on a saved image?
     answer: >-
-      Import a supported `.pte` model, select **Choose saved image**, choose an image, and select **Detect objects**.
+      Import a supported `.pte` or `.tflite` model, select **Choose saved image**, choose an image, and select **Detect objects**.
       The application displays the annotated image, detected objects, confidence scores, and processing time.
 # END generated_summary_faq
 
@@ -87,6 +83,7 @@ tools_software_languages:
     - Android Studio
     - Java
     - ExecuTorch
+    - LiteRT
     - XNNPACK
     - KleidiAI
     - Arm AI Portal
