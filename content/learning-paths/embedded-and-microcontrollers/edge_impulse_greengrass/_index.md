@@ -72,7 +72,7 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 platforms:
-    - AWS
+    - AWS Graviton
 subjects: ML
 armips:
     - Cortex-M
