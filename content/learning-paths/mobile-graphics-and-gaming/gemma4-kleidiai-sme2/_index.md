@@ -10,15 +10,16 @@ cascade:
 who_is_this_for: This is an advanced topic for software developers and performance engineers who want a reproducible Gemma 4 prefill benchmark workflow using LiteRT-LM, KleidiAI, and XNNPACK on macOS.
 
 learning_objectives:
-    - Create a workspace with pinned LiteRT-LM and KleidiAI versions
-    - Create upstream-optimized and historical-baseline XNNPACK worktrees
-    - Download a LiteRT-LM-compatible Gemma 4 model from Hugging Face
-    - Compare baseline and upstream SME2 benchmark results
+    - Create a workspace with pinned LiteRT-LM and KleidiAI versions.
+    - Create upstream-optimized and historical-baseline XNNPACK worktrees.
+    - Download a LiteRT-LM-compatible Gemma 4 model from Hugging Face.
+    - Compare baseline and upstream SME2 benchmark results.
 
 prerequisites:
-    - An SME2 device (this tutorial uses macOS on Apple M4)
+    - An SME2 device (macOS on Apple M4 is used in this Learning Path for demonstrative purposes)
     - Git, Homebrew, and Xcode Command Line Tools
     - At least 25 GB of free disk space for model files and local builds
+    
 author: Annie Tallund
 
 generate_summary_faq: true

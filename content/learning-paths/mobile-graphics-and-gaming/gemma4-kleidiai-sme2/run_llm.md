@@ -1,12 +1,14 @@
 ---
-title: Build and compare benchmarks
+title: Build and compare Gemma4 benchmarks
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Build and benchmark one XNNPACK variant
+## Build and benchmark XNNPACK variants
+
+After downloading Gemma4, build and benchmark the baseline and upstream-optimized variants with identical settings at one and four CPU threads.
 
 Create directories for the shared Bazel output and benchmark results:
 
@@ -109,9 +111,10 @@ each variant and thread count.
 
 ## Tested results on Apple M4
 
-The following representative results use 1024 prefill tokens, 256 decode
-tokens, and disabled caches. Frequency and thermal state were not fixed, so use
-the values as a functional comparison.
+After running the benchmark, compare steady-state prefill and decode throughput.
+
+The following representative results tested on Apple M4 use 1024 prefill tokens, 256 decode
+tokens, and disabled caches:
 
 | CPU threads | XNNPACK variant | Prefill tokens/s | Change | Decode tokens/s | Change |
 | ---: | --- | ---: | ---: | ---: | ---: |
@@ -119,6 +122,8 @@ the values as a functional comparison.
 | 1 | SME2 Int4 and Int2 | 215.93 | +51.4% | 23.89 | +51.3% |
 | 4 | No SME2 kernels | 411.70 | - | 37.04 | - |
 | 4 | SME2 Int4 and Int2 | 562.92 | +36.7% | 30.28 | -18.3% |
+
+Frequency and thermal state weren't fixed, so use the values as a functional comparison.
 
 ### Interpret thread scaling
 
@@ -128,7 +133,7 @@ Autoregressive decode generates one token at a time, and each token depends on
 the preceding output. This dependency limits the work available to parallelize
 within each decode step.
 
-Decode also reads model weights and key-value (KV) cache data for every token.
+Decode also reads model weights and key-value cache data for every token.
 As the thread count increases, threads compete for memory bandwidth and add
 scheduling overhead. These costs can outweigh the available parallel work,
 especially when the system exposes one matrix engine, known as a 1xCME
@@ -140,11 +145,10 @@ thread to 30.28 tokens/s with four threads, but it scales less than the
 non-SME2 path. The one-thread SME2 advantage of 51.3% therefore becomes an
 18.3% deficit at four threads.
 
-Results can
-differ by model signature, SoC, operating system, memory conditions, and
+Results can differ by model signature, SoC, operating system, memory conditions, and
 thermal state.
 
-## Run a prompt sanity check
+## Verify with a prompt 
 
 After building a variant, use its generated binary for a short prompt:
 
@@ -161,3 +165,9 @@ binary="$(bazelisk --output_base="$HOME/gemma4-prefill-bench/bazel-output-base/a
 ```
 
 The tested model answers that the capital of France is Paris.
+
+## What you've accomplished 
+
+You've run a benchmark to compare baseline and upstream-optimized XNNPACK variants and learned how to interpret benchmarking results. You've also verified variants using prompts. 
+
+You can reproduce this workflow to benchmark Gemma 4 LiteRT-LM prefill performance.

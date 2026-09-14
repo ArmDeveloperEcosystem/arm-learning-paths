@@ -1,18 +1,14 @@
 ---
-title: Install prerequisites and download Gemma 4
+title: Install prerequisites on macOS and download Gemma 4
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install prerequisites on macOS
+## Install Bazelisk and Hugging Face Hub CLI 
 
-Install Xcode Command Line Tools if they are not already available:
-
-```bash
-xcode-select --install
-```
+After creating the workspace for the benchmark, install prerequisite software. 
 
 Install Bazelisk:
 
@@ -35,6 +31,8 @@ bazelisk version
 ```
 
 ## Download Gemma 4 from Hugging Face
+
+After installing prerequisites, download the Gemma 4 E2B `.litertlm` model from Hugging Face.
 
 Create a shared model directory in the workspace:
 
@@ -69,9 +67,13 @@ The expected SHA-256 checksum is:
 ```
 
 {{% notice Note %}}
-The file is about 2.6 GB. LiteRT-LM requires the `.litertlm` artifact; a
-Transformers repository containing only `safetensors` files is not a direct
+The file is about 2.6 GB. LiteRT-LM requires the `.litertlm` artifact. A
+Transformers repository containing only `safetensors` files isn't a direct
 replacement.
 {{% /notice %}}
 
-In the next section, you will build each XNNPACK variant and run the benchmark.
+## What you've accomplished and what's next
+
+You've installed prerequisite software on your macOS device and downloaded Gemma4 from Hugging Face.
+
+Next, you'll build each XNNPACK variant and run the benchmark.

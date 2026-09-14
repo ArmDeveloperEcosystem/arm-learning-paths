@@ -1,24 +1,16 @@
 ---
-title: Overview and benchmark workflow
+title: Understand the benchmark workflow
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Why this benchmark matters
 
-This Learning Path gives you a reproducible process to evaluate Gemma 4 CPU
-performance with the upstream XNNPACK SME2 Int4 and Int2 paths used through
-LiteRT-LM and KleidiAI.
 
-The workflow records the repository revisions and uses the
-`litert_lm_advanced_main --benchmark` command so that you can compare results
-across XNNPACK variants.
+You'll complete the workflow in the following order:
 
-## What you will do
-
-You will complete the workflow in this order:
+Start by creating a workspace and cloning LiteRT-LM `v0.16.1`, KleidiAI `v1.30.0`, and upstream XNNPACK with the SME2 Int4 and Int2 support. 
 
 1. Create a workspace and clone LiteRT-LM `v0.16.1`, KleidiAI `v1.30.0`, and
    upstream XNNPACK with the SME2 Int4 and Int2 support.
@@ -28,28 +20,10 @@ You will complete the workflow in this order:
    identical settings at one and four CPU threads.
 5. Compare steady-state prefill and decode throughput.
 
-## Find out if your device supports SME2
 
-Confirm the architecture and macOS SME feature flags:
 
-```bash
-uname -m
-sysctl hw.optional.arm.FEAT_SME
-sysctl hw.optional.arm.FEAT_SME2
-```
+## What you've accomplished and what's next
 
-The expected output on a supported Apple M4 system is:
+You've learned about the benchmark workflow and confirmed that your device supports SME2. 
 
-```output
-arm64
-hw.optional.arm.FEAT_SME: 1
-hw.optional.arm.FEAT_SME2: 1
-```
-
-If either feature reports `0`, XNNPACK cannot dispatch the SME2 kernels and the
-performance comparison is not valid.
-
-For a deeper validation, see [Test your SME2 development
-environment](./learning-paths/cross-platform/multiplying-matrices-with-sme2/2-check-your-environment).
-
-In the next section, you will set up the benchmark workspace.
+Next, you'll set up the benchmark workspace.
