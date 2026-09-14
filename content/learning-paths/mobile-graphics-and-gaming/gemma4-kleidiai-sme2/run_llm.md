@@ -175,4 +175,4 @@ The tested model answers that the capital of France is Paris.
 
 You've run a benchmark to compare baseline and upstream-optimized XNNPACK variants and learned how to interpret the results. You've also verified the variants with prompts.
 
-You can reproduce this workflow to benchmark Gemma 4 LiteRT-LM prefill performance.
+You now have a reproducible baseline for Gemma 4 LiteRT-LM prefill performance.

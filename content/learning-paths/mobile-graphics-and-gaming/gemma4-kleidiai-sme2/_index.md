@@ -42,7 +42,7 @@ generated_summary_faq:
     a LiteRT-LM-compatible Gemma 4 E2B `.litertlm` model. You'll build both XNNPACK variants with
     identical settings, then compare three-iteration results at one and four CPU threads.
   faqs:
-  - question: How do I check that my Mac supports SME2 before running the benchmarks?
+  - question: How do I check that my device supports SME2 before running the benchmarks?
     answer: >-
       Run `uname -m` and the `sysctl` checks for `hw.optional.arm.FEAT_SME` and
       `hw.optional.arm.FEAT_SME2`. Proceed when the architecture is `arm64` and both feature flags
@@ -53,7 +53,7 @@ generated_summary_faq:
       Face. Place it in the shared model directory at `$HOME/gemma4-prefill-bench/models`.
   - question: How do I confirm that Bazel is the version expected by LiteRT-LM?
     answer: >-
-      From the LiteRT-LM repository, you can check `.bazelversion` and run `bazelisk version`. Confirm that the Bazel version is `7.6.1`.
+      From the LiteRT-LM repository, check `.bazelversion` and run `bazelisk version`. Confirm that the Bazel version is `7.6.1`.
   - question: Why should I create separate baseline and upstream XNNPACK trees?
     answer: >-
       You'll use separate trees to build and benchmark both variants with identical settings while

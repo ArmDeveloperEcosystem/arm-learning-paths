@@ -33,17 +33,17 @@ hw.optional.arm.FEAT_SME: 1
 hw.optional.arm.FEAT_SME2: 1
 ```
 
-If either feature reports `0`, XNNPACK can't dispatch the SME2 kernels and the
+If either feature reports `0`, XNNPACK can't dispatch the SME2 kernels, and the
 performance comparison isn't valid.
 
 For a deeper validation, see [Test your SME2 development
 environment](/learning-paths/cross-platform/multiplying-matrices-with-sme2/2-check-your-environment).
 
-After confirming SME2 support on your device, create a workspace. Clone LiteRT-LM `v0.16.1`, KleidiAI `v1.30.0`, and upstream XNNPACK with SME2 Int4 and Int2 support.
+After confirming SME2 support on your device, create a workspace. Then, clone LiteRT-LM `v0.16.1`, KleidiAI `v1.30.0`, and upstream XNNPACK with SME2 Int4 and Int2 support.
 
 ## Create a workspace directory
 
-Create a working directory outside the Learning Paths repository:
+Create a working directory outside the Learning Paths repository and navigate to it:
 
 ```bash
 mkdir -p $HOME/gemma4-prefill-bench
@@ -69,13 +69,13 @@ git -C kleidiai checkout 74b1a12d3620c89dae4766de640e064952000f4d
 
 ## Create the XNNPACK variants
 
-Clone upstream XNNPACK. The default XNNPACK branch contains the merged SME2 Int4 and
-Int2 support, and is the optimized tree:
+Clone upstream XNNPACK using the default XNNPACK branch:
 
 ```bash
 git clone https://github.com/google/XNNPACK.git xnnpack
 git -C xnnpack log -1 --oneline
 ```
+The default XNNPACK branch contains the merged SME2 Int4 and Int2 support, and is the optimized tree.
 
 Record the commit printed by the command so that you can identify the exact upstream
 revision used for your results.
