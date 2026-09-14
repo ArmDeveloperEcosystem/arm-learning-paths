@@ -1,6 +1,6 @@
 ---
 title: Set up the SME2 environment
-description: Build and run the SME2 LUTI examples natively on macOS or cross-compile them for an Android device with SME2 support.
+description: Set up the macOS or Android toolchain to build and run LUTI SME2 examples and verify that your device supports SME2.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -16,7 +16,7 @@ You can run the examples using one of the following routes:
 
 See the [list of devices with native SME2 support](https://learn.arm.com/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices) before selecting a target device.
 
-The examples use recent Arm C Language Extensions (ACLE) intrinsics and SME2 assembly syntax. Use Homebrew LLVM Clang 22 or later for native macOS builds. Android builds use the Clang 21 toolchain supplied with NDK r29, or native Clang 21 on an AArch64 Linux host.
+The examples use recent Arm C Language Extensions (ACLE) intrinsics and SME2 assembly syntax. Use Homebrew LLVM Clang 22 or later for native macOS builds. Android cross-compilation requires host LLVM Clang 22 and Android NDK r29.
 
 ## Set up native macOS development
 
@@ -48,18 +48,32 @@ brew install llvm
 /opt/homebrew/opt/llvm/bin/clang --version
 ```
 
-The Makefile selects Homebrew LLVM at `/opt/homebrew/opt/llvm` when it is installed.
-Otherwise, it falls back to Apple Clang from the active Xcode Command Line Tools.
+The Makefile uses Homebrew LLVM at `/opt/homebrew/opt/llvm`.
 
 ## Set up Android cross-compilation
 
 The build host does not need SME2 support. The Android device that runs the
 LUTI examples does. Install the compiler tools on your macOS or Linux host.
 
-The Makefile selects the compiler and linker automatically, so the same
-build commands work on AArch64 and x86-64 Linux.
+Install LLVM 22 on the build host. On macOS, use Homebrew LLVM. The Linux commands below target Ubuntu 24.04 LTS on either x86-64 or AArch64 and use the [LLVM APT packages](https://apt.llvm.org/).
 
-To run the LUTI examples codes install Android Native Development Kit (Android NDK):
+{{< tabpane code=true >}}
+  {{< tab header="macOS host" language="bash">}}
+brew install llvm
+"$(brew --prefix llvm)/bin/clang" --version
+  {{< /tab >}}
+  {{< tab header="Ubuntu 24.04 host" language="bash">}}
+sudo apt update
+sudo apt install ca-certificates wget lsb-release software-properties-common gnupg
+wget -O llvm.sh https://apt.llvm.org/llvm.sh
+sudo bash llvm.sh 22
+sudo apt install llvm-22
+clang-22 --version
+  {{< /tab >}}
+{{< /tabpane >}}
+
+Check that Clang reports version `22.x`.
+
 Install Android Native Development Kit (Android NDK) r29:
 
 {{< tabpane code=true >}}
@@ -140,10 +154,11 @@ mkdir code
 cd code
 for FILE in \
   Makefile \
-  example_1_luti_sme2.c \
-  luti_sme2_programming.c \
-  luti_sme2_programming_test.c; do
-  wget -q "$BASE_URL/code/$FILE" -O "$FILE"
+  example_1_luti_decoding.c \
+  example_1_luti_decoding_runner.c \
+  example_2_luti_programming.c \
+  example_2_luti_programming_test.c; do
+  wget "$BASE_URL/code/$FILE" -O "$FILE" || exit 1
 done
 ```
 
@@ -152,73 +167,15 @@ The directory contains these source and build files:
 ```text
 code/
 ├── Makefile
-├── example_1_luti_sme2.c
-├── luti_sme2_programming.c
-└── luti_sme2_programming_test.c
-```
-
-## Build and run on macOS
-
-From the `code` directory, clean previous outputs and build the native executable:
-
-```bash
-make clean
-make
-```
-
-Running `make macos` performs the same native build explicitly. Both commands
-use `-march=native+sme2+nosve2+nosve`. The `+nosve2+nosve` modifiers prevent
-the compiler from emitting non-streaming SVE or SVE2 instructions in the
-macOS executable.
-
-Run the introductory plain C and SME2 comparison:
-
-```bash
-./sme2_luti
-```
-
-Run the additional LUTI programming examples:
-
-```bash
-./sme2_luti --learning
-```
-
-## Build and run on Android
-
-From the `code` directory, prepare the tools and cross-compile for Android.
-Use the same commands on macOS and Linux:
-
-Run `make setup-android` once after installing the NDK. On macOS and x86-64 Linux, this checks the installed NDK compiler. On AArch64 Linux, it also installs any missing LLVM tools. Then build the executable:
-
-```bash
-make setup-android
-make clean
-make android
-```
-
-Connect your Android device to your development machine using a cable.
-Approve the connection on your phone and use `adb` to copy the executable to `/data/local/tmp/sme2_luti_android`:
-
-```bash
-adb push sme2_luti_android /data/local/tmp/sme2_luti_android
-```
-
-Make the executable runnable and start it from the host:
-
-```bash
-adb shell chmod 755 /data/local/tmp/sme2_luti_android
-adb shell /data/local/tmp/sme2_luti_android
-```
-
-Run the additional LUTI programming examples with:
-
-```bash
-adb shell /data/local/tmp/sme2_luti_android --learning
+├── example_1_luti_decoding.c
+├── example_1_luti_decoding_runner.c
+├── example_2_luti_programming.c
+└── example_2_luti_programming_test.c
 ```
 
 ## What you've accomplished and what's next
 
 You've prepared a compatible Clang compiler, verified an SME2-capable target,
-and built the same executable for native macOS or AArch64 Android.
+and downloaded the source files for the standalone examples.
 
-Next, you'll use `example_1_luti_sme2.c` to compare plain C shifts, masks, and scalar lookups with SME2 `LUTI2` expansion and matrix accumulation.
+Next, you'll use `example_1_luti_decoding.c` to compare plain C shifts, masks, and scalar lookups with SME2 `LUTI2` expansion and matrix accumulation.

@@ -7,38 +7,15 @@ weight: 6
 layout: learningpathall
 ---
 
-The examples in `luti_sme2_programming.c` show a recipe-based approach to programming
-with LUTI instructions.
+The examples in `example_2_luti_programming.c` show a recipe-based approach to programming with LUTI instructions.
 
 The examples cover the following combinations and have their base in KleidiAI's matrix multiplication micro-kernels:
 
 | Example | Decode | Arithmetic | Main concept |
 |---|---|---|---|
-| (1) FP16 LUTI4 + FMOPA | LUTI4 to `float16` | GEMM using FMOPA | Use LUTI and source segments |
-| (2) LUTI4 -> LUTI2 -> SDOT | LUTI4, then LUTI2 to `int8` | GEMV using SDOT | Use multiple LUTs and source segments |
+| 2.A FP16 LUTI4 + FMOPA | LUTI4 to `float16` | GEMM using FMOPA | Use LUTI and source segments |
+| 2.B LUTI4 -> LUTI2 -> SDOT | LUTI4, then LUTI2 to `int8` | GEMV using SDOT | Use multiple LUTs and source segments |
 
-## Run the learning tests
-
-From the `code` directory, run:
-
-```bash
-./sme2_luti --learning
-```
-
-In the output, `SVL` is the streaming vector length in bits. `VL_b` is the
-number of byte elements (`SVL / 8`), `VL_h` is the number of half-word
-elements (`SVL / 16`), and `VL_s` is the number of 32-bit word elements
-(`SVL / 32`).
-
-With a 512-bit SVL, the expected output is:
-```output
-FP16 LUTI4 + FMOPA test (M = VL_s, K = 2, N = 4 * VL_s)
-PASS
-LUTI4 -> LUTI2 -> SDOT test (M = 1, K = N = VL_b)
-PASS
-```
-
-Each `PASS` confirms that the kernel matches the reference result.
 
 ## The four-step LUTI recipe
 
@@ -56,7 +33,7 @@ Its selector is relative to the destination-group size.</br>
 The examples use several source-segment cases to help you develop intuition for selecting the correct segment.
 
 
-## Example 1: LUTI4 for FP16 GEMM using FMOPA
+## Example 2.A: LUTI4 for FP16 GEMM using FMOPA
 
 This example is a focused extraction from KleidiAI's
 [FP16 LUTI4 FMOPA micro-kernel](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_f16p_qsi4c32p/kai_matmul_clamp_f32_f16p1vlx2_qsi4c32p4vlx2_1vlx4vl_sme2_mopa.c).
@@ -154,7 +131,7 @@ __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemm_luti4(
     }
 }
 ```
-## Example 2: Two-stage LUTI4 and LUTI2 for GEMV using SDOT
+## Example 2.B: Two-stage LUTI4 and LUTI2 for GEMV using SDOT
 
 The SDOT micro-kernel and block size are similar to the KleidiAI's
 [SDOT micro-kernel](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp/kai_matmul_clamp_f32_qai8dxp1x4_qsi4cxp4vlx4_1x4vl_sme2_sdot.c),
@@ -296,6 +273,63 @@ __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemv_luti2_luti4(
     svst1_s32_x4(svptrue_c32(), out, result);
 }
 ```
+
+## Build and validate Example 2
+
+### Build and run on macOS
+
+Build and run the executable on an SME2 supported device.
+
+```bash
+make example_2_luti_programming
+./example_2_luti_programming
+```
+
+### Cross-compile and run on Android
+
+On macOS or Linux, build the AArch64 Android executable with LLVM 22 and the NDK r29 installation selected by `ANDROID_NDK_HOME`:
+
+```bash
+make example_2_luti_programming_android
+```
+
+With an Android device connected through ADB, push the executable to the device:
+
+```bash
+adb push example_2_luti_programming_android /data/local/tmp/example_2_luti_programming_android
+```
+
+Open an ADB shell, make the file executable, and run it:
+
+```bash
+adb shell
+cd /data/local/tmp
+chmod 755 example_2_luti_programming_android
+./example_2_luti_programming_android
+```
+
+After it finishes, enter `exit` to return to the build host's shell.
+
+The executable performs the definitive runtime check. If SME2 isn't available, it prints `SKIP: No support for SME2 on this device.`
+The program exits successfully without running either set of examples.
+You can still disassemble the executable on the build host.
+
+### Check the result
+
+In the output, `SVL` is the streaming vector length in bits. `VL_b` is the
+number of byte elements (`SVL / 8`), `VL_h` is the number of half-word
+elements (`SVL / 16`), and `VL_s` is the number of 32-bit word elements
+(`SVL / 32`).
+
+With a 512-bit SVL, the expected output is:
+```output
+FP16 LUTI4 + FMOPA test (M = VL_s, K = 2, N = 4 * VL_s)
+PASS
+LUTI4 -> LUTI2 -> SDOT test (M = 1, K = N = VL_b)
+PASS
+```
+
+Each `PASS` confirms that the kernel matches the reference result.
 
 ## What you've learned in this section
 

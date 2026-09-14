@@ -8,7 +8,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 #if defined(__APPLE__)
 #include <sys/types.h>
@@ -43,8 +42,6 @@ __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemm_luti4(
 
 __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemv_luti2_luti4(
     const int8_t* lhs, const uint8_t* rhs_indices, int32_t* out, const uint32_t* zt0_luti4, const uint32_t* zt0_luti2);
-
-int ex1_luti_test(void);
 
 __arm_locally_streaming static size_t get_streaming_vector_bytes(void) {
     return svcntb();
@@ -313,18 +310,11 @@ cleanup:
     return result;
 }
 
-int main(int argc, char** argv) {
-    if (argc != 1 && (argc != 2 || strcmp(argv[1], "--learning") != 0)) {
-        fprintf(stderr, "Usage: %s [--learning]\n", argv[0]);
-        return 2;
-    }
-
+int main(void) {
     if (!has_sme2()) {
         puts("SKIP: No support for SME2 on this device.");
         return 0;
     }
-
-    if (argc == 1) return ex1_luti_test();
 
     if (run_arm_lp_gemm_luti4_test() != 0) return 1;
     if (run_arm_lp_gemv_luti2_luti4_test() != 0) return 1;

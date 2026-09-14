@@ -324,7 +324,7 @@ static void print_rhs_decoding_preview(const uint8_t* rhs_packed, size_t n) {
     }
 }
 
-int main(void) {
+int example_1_luti_decoding_test(void) {
     const size_t m = streaming_vector_words();
     const size_t n = 4 * m;
 

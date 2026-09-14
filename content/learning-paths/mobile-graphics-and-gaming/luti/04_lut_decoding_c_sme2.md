@@ -22,7 +22,7 @@ lookup table. The program compares their output matrices element by element.
 
 ## Set up the example
 
-Open `code/example_1_luti_sme2.c`. The file contains both implementations and
+Open `code/example_1_luti_decoding.c`. The file contains both implementations and
 the validation code. The following snippets highlight the sections to inspect
 before you build the complete example.
 
@@ -37,7 +37,7 @@ Use these relationships when reasoning about the dimensions:
 - `svcntw()` returns the number of 32-bit words in one streaming vector.
 - One 32-bit word contains four bytes, so `svcntb() = 4 * svcntw()`
 
-The helper enters streaming mode to query the vector length:
+The helper uses `__arm_locally_streaming` to query the streaming vector length.
 
 ```c
 __arm_locally_streaming static size_t streaming_vector_words(void) {
@@ -293,33 +293,45 @@ Z registers to SME2 matrix instructions.
 To see the same instruction pattern in production code, inspect the
 [`qai8dxp_qsu2cxp` Arm® KleidiAI™ micro-kernel source](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsu2cxp/kai_matmul_clamp_f32_qai8dxp1vlx4_qsu2cxp4vlx4_1vlx4vl_sme2_mopa_asm.S).
 
-## Build and validate the example
+## Build and validate Example 1
 
 Complete the [environment setup](/learning-paths/mobile-graphics-and-gaming/luti/03_environment_setup/) and run these commands from the `code` directory.
 
 ### Build and run on macOS
+
+Build and run the executable on an SME2 supported device.
+
 ```bash
-make example_1_luti_sme2
-./example_1_luti_sme2
+make example_1_luti_decoding
+./example_1_luti_decoding
 ```
 
 ### Cross-compile and run on Android
 
-On macOS or Linux, use the NDK r29 installation selected by `ANDROID_NDK_HOME`. The build host does not need SME2 support.
+On macOS or Linux, use LLVM 22 and the NDK r29 installation selected by `ANDROID_NDK_HOME`. The build host does not need SME2 support.
 
-After completing `make setup-android` during environment setup, build the standalone Android executable:
-
-```bash
-make example_1_luti_sme2_android
-```
-
-With an Android device connected through ADB, copy and run the executable:
+Build the standalone Android executable:
 
 ```bash
-adb push example_1_luti_sme2_android /data/local/tmp/example_1_luti_sme2_android
-adb shell chmod 755 /data/local/tmp/example_1_luti_sme2_android
-adb shell /data/local/tmp/example_1_luti_sme2_android
+make example_1_luti_decoding_android
 ```
+
+With an Android device connected through ADB, push the executable to the device:
+
+```bash
+adb push example_1_luti_decoding_android /data/local/tmp/example_1_luti_decoding_android
+```
+
+Open an ADB shell, make the file executable, and run it:
+
+```bash
+adb shell
+cd /data/local/tmp
+chmod 755 example_1_luti_decoding_android
+./example_1_luti_decoding_android
+```
+
+After it finishes, enter `exit` to return to the build host's shell.
 
 ### Check the result
 
