@@ -38,17 +38,18 @@ generated_summary_faq:
     answer: >-
       Set `gcp_project_id`, `gcp_region`, and `gcp_cluster_name` in `terraform.tfvars`. The
       `providers.tf` and `main.tf` files read these values when Terraform creates the cluster.
-  - question: What should I check if the apply step fails with project or permission errors?
+  - question: Which tools do I need before running the Terraform configuration?
     answer: >-
-      Verify that the Google Cloud project exists and is specified in your Terraform configuration.
-      Ensure the Google Cloud CLI is installed and authenticated for that project.
+      Install Terraform, `kubectl`, and the Google Cloud CLI on the computer where you run the
+      configuration. You also need a Google Cloud project, user credentials for Terraform, and the
+      Compute Engine and Kubernetes Engine APIs enabled for that project.
   - question: How do I verify that kubectl is pointing to the new cluster?
     answer: >-
       Configure `kubectl` for the cluster created by Terraform, then list the cluster nodes to confirm
       connectivity. If listing nodes fails, recheck your current `kubectl` context.
   - question: Can I run Terraform from my local workstation?
     answer: >-
-      Yes. You can use any computer that has Terraform, `kubectl`, and the Google Cloud CLI installed.
+      Yes. You can use any computer that has Terraform, `kubectl`, and the Google Cloud CLI.
 # END generated_summary_faq
 
 author: Jason Andrews

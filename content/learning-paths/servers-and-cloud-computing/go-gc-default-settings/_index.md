@@ -45,9 +45,8 @@ generated_summary_faq:
       Confirm that `GOGC`, `GOMEMLIMIT`, `GODEBUG`, and `GOMAXPROCS` aren't set. Use `env | grep -E '^(GOGC|GOMEMLIMIT|GODEBUG|GOMAXPROCS)=' || true` and unset any variables that appear.
   - question: What result should I expect after the baseline benchmark run?
     answer: >-
-      You should have a snapshot of the runtime environment (Go version, `GOOS/GOARCH`, CPU count,
-      and memory) and raw benchmark output. A Benchstat summary is produced to compare and interpret
-      the baseline metrics.
+      You should have a runtime snapshot (Go version, `GOOS/GOARCH`, CPU count, and memory) and raw
+      benchmark output in `default_gc_benchmark.txt`. Run `benchstat default_gc_benchmark.txt` next to create the summary used to compare and interpret the baseline metrics.
   - question: How do I interpret the Benchstat metrics related to GC?
     answer: >-
       `ns/op` shows time per operation (lower is faster), `B/op` shows bytes allocated per operation,

@@ -1,5 +1,5 @@
 ---
-title: Managed, self-hosted Arm runners for GitHub Actions
+title: Use RunsOn to deploy managed, self-hosted Arm runners for GitHub Actions 
 description: Learn how to install RunsOn self-hosted runner manager in your AWS account to execute GitHub Actions workflows on Arm runners.
 
 minutes_to_complete: 15
@@ -11,8 +11,8 @@ learning_objectives:
     - Execute GitHub Actions workflows on Arm runners.
 
 prerequisites:
-    - An [Amazon Web Services account](/learning-paths/servers-and-cloud-computing/csp/aws/).
-    - A GitHub account (personal or organizational).
+    - An [Amazon Web Services account](/learning-paths/servers-and-cloud-computing/csp/aws/)
+    - A GitHub account (personal or organizational)
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -29,7 +29,7 @@ generated_summary_faq:
   faq_generated_at: '2026-09-10T22:06:17Z'
   faq_source_hash: 966ea2cad187300a8768f94009ab1da042a8e51b48fcec32e646697d9265bc56
   summary: >-
-    You'll deploy RunsOn in AWS with CloudFormation and use it to run GitHub Actions on Arm-based runners. First, you'll connect the AWS account, configure the GitHub app and license, and target an Arm64 runner with `runs-on`. RunsOn provisions a Graviton-based EC2 instance, so you can verify an on-demand self-hosted runner.
+    You'll deploy RunsOn in AWS with CloudFormation and use it to run GitHub Actions on Arm-based runners. First, you'll connect the AWS account, configure the GitHub app and license, and target an Arm64 runner with `runs-on`. RunsOn provisions a Graviton-based EC2 instance, so that you can verify an on-demand self-hosted runner.
   faqs:
   - question: How do I trigger a test workflow in a new repository?
     answer: >-
@@ -48,12 +48,13 @@ generated_summary_faq:
   - question: What result should I expect to confirm that RunsOn is working?
     answer: >-
       After pushing a workflow with the updated `runs-on` value, the job should start in about 30
-      seconds. In the Actions UI, the job runs on an Arm-basd Amazon EC2 instance. 
-  - question: What should I check if my workflow doesn't start a runner?
+      seconds. In the Actions UI, the job runs on an Arm-based Amazon EC2 instance.
+  - question: How do I customize the Arm runner's EC2 instance type?
     answer: >-
-      Verify that the CloudFormation stack finished successfully and that the RunsOn GitHub app
-      was installed. Then, confirm that the workflow uses the exact `runs-on` values shown, and targets
-      an Arm64 runner.
+      Update the `runs-on` labels to select the required runner size, such as
+      `runner=2cpu-linux-arm64`. Add a `family` label, such as `family=r8g`, when you want to select
+      a specific Graviton family. Use the [RunsOn job-label documentation](https://runs-on.com/configuration/job-labels/)
+      for additional CPU, memory, and disk customization options.
 # END generated_summary_faq
 
 author: Cyril Rohr

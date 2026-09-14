@@ -37,9 +37,9 @@ generated_summary_faq:
       Use an SVE-capable Arm processor to execute the SVE implementation.
   - question: Which floating-point precision am I building with in this example?
     answer: >-
-      The provided implementation uses single-precision (float) coefficients. Adapting to half
-      or double precision requires changing the data types and recalculating coefficients for
-      that format.
+      The provided implementation uses single precision: its coefficients are `float` values and
+      its SVE vectors use `svfloat32_t`. The example therefore builds the FP32 version described in
+      the precision table.
   - question: When should I switch my code from the polynomial-only version to the FEXPA-optimized
       version?
     answer: >-

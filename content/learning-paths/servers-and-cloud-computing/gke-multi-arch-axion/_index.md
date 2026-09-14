@@ -38,7 +38,7 @@ generated_summary_faq:
     answer: >-
       For the native GKE Buildx workflow, list your GKE nodes and check the architecture labels to
       confirm both amd64 and arm64 node pools are present and ready. You can then run each BuildKit
-      pod on the matching architecture. If you choose Cloud Build, you use its own runner with QEMU instead.
+      pod on the matching architecture. If you choose Cloud Build, use its own runner with QEMU instead.
   - question: Which services need Dockerfile updates for multi-architecture builds?
     answer: >-
       Four services require small changes: `emailservice`, `recommendationservice`, `loadgenerator`,

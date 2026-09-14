@@ -49,8 +49,9 @@ generated_summary_faq:
       In Azure Cloud Shell, run `az acr list -o table` and check the `ADMIN ENABLED` column. If it's not enabled, turn on the admin account in the registry settings before deploying to ACI.
   - question: Can I deploy an arm64 container image to ACI?
     answer: >-
-      ACI isn't currently compatible with arm64 Docker containers. Expect issues
-      with arm64 images and use the provided sample image to validate the workflow. For more information, see [Frequently asked questions about Azure Container Instances](https://learn.microsoft.com/en-us/azure/container-instances/container-instances-faq).
+      At the time covered by this Learning Path, ACI is described as incompatible with `arm64`
+      Docker containers. Use the provided Microsoft sample image to validate the ACI workflow, and
+      check the current Azure documentation if you need to confirm the service's present capabilities.
 # END generated_summary_faq
 
 author: Dawid Borycki

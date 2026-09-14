@@ -33,16 +33,16 @@ generated_summary_faq:
   faq_generated_at: '2026-09-10T22:05:08Z'
   faq_source_hash: 9921be6d22cb7753386f413c84cbb616dc59c8e32c22f03ca3c78d1c7d654d5e
   summary: >-
-    You'll automate an MLOps workflow on Arm-hosted GitHub runners with GitHub Actions. First, you'll train and test a PyTorch model, compare OpenBLAS and oneDNN with ACL and capture workflow artifacts. Then, you'll containerize the application and push it to DockerHub, deploy the application, and access the model through API calls. You can compare the resulting workflows using repeatable runs.
+    You'll automate an MLOps workflow on Arm-hosted GitHub runners with GitHub Actions. First, you'll train and test a PyTorch model, compare OpenBLAS and oneDNN with ACL, and capture workflow artifacts. Then, you'll containerize the application and push it to DockerHub, deploy the application, and access the model through API calls. You can compare the resulting workflows using repeatable runs.
   faqs:
   - question: Where should I fork the repository to use Arm-hosted GitHub runners?
     answer: >-
       Fork the example into a GitHub Organization or Team that has access to Arm-hosted GitHub
-      runners. If a repository with the same name already exists there, change the repository
+      runners. If a repository with the same name already exists, change the repository
       name when you fork.
   - question: How do I know that the training workflow finished successfully and produced a model?
     answer: >-
-      Check the Actions tab for a successful run of `.github/workflows/train-model.yml` and verify
+      Check the **Actions** tab for a successful run of `.github/workflows/train-model.yml` and verify
       that a model artifact was created. The workflow trains inside a PyTorch 2.3.0 Docker image
       compiled with OpenBLAS and saves the trained model for later steps.
   - question: How do I switch the PyTorch backend for inference testing?
@@ -54,13 +54,11 @@ generated_summary_faq:
       Review the workflow run logs and any artifacts produced by the testing workflow. The artifacts and logs report
       the model’s inference time. Compare outputs from the OpenBLAS and oneDNN+ACL runs to see
       differences.
-  - question: How do I verify the deployment image uses the expected base and includes the trained
-      model?
+  - question: Which Docker Hub secrets does the deployment workflow require?
     answer: >-
-      Open the `Dockerfile` in the repository and confirm that it starts from
-      `armswdev/pytorch-arm-neoverse:r24.07-torch-2.3.0-onednn-acl`
-      and packages the model with the deployment scripts. During build, check the logs for the
-      base image tag, then push to DockerHub and verify the image and tag in your repository.
+      Add `DOCKER_USERNAME` with your Docker Hub username and `DOCKER_PASSWORD` with your Docker
+      Hub Personal Access Token as repository secrets under **Settings** > **Secrets and variables**
+      > **Actions**. 
 # END generated_summary_faq
 
 author:

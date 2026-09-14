@@ -33,10 +33,11 @@ generated_summary_faq:
   - question: Which Geekbench 7 build should I download for an Arm Linux system?
     answer: >-
       Download the Linux on Arm preview build. 
-  - question: What result should I expect after running Geekbench?
+  - question: How do I save Geekbench results for later comparison?
     answer: >-
-      A successful run reports a single-core score and a multi-core score. Use these values to
-      compare systems or configurations.
+      Create an account in the Geekbench Browser and use the claim link from the run output to add
+      the result to your profile. Add notes about the system or instance so that you can compare runs
+      across hardware configurations later.
   - question: What should I check if the run finishes without showing scores?
     answer: >-
       Confirm that you downloaded the Linux on Arm preview build from the Geekbench downloads
@@ -44,11 +45,11 @@ generated_summary_faq:
   - question: How should I record results so I can compare hardware configurations later?
     answer: >-
       Note the single-core and multi-core scores together with the system or instance that you tested.
-      Keep the scores for each system in the same format so you can compare them directly.
+      Keep the scores for each system in the same format so that you can compare them directly.
   - question: How do I verify that a Geekbench run completed successfully?
     answer: >-
       Open the results URL in a browser and confirm that it shows your system information, a
-      single-core score, and a multi-core score. If both scores appear, Geekbench ran successfully.
+      single-core score, and a multi-core score.
 # END generated_summary_faq
 
 author: Jason Andrews

@@ -45,12 +45,12 @@ generated_summary_faq:
   - question: When should I apply taints and tolerations?
     answer: >-
       Apply taints to architecture-specific nodes when you need to control where pods schedule.
-      Add matching tolerations to pod specs so workloads can target Arm or x86 nodes as intended.
+      Add matching tolerations to pod specs so that workloads can target Arm or x86 nodes as intended.
   - question: Which image does each architecture-specific overlay deploy?
     answer: >-
       Apply the x86 overlay with the `x86-hello:v0.0.1` image or the Arm overlay with
       `arm-hello:v0.0.1`. Check the pod output to verify the reported CPU platform.
-  - question: What should I check if pods do not schedule on the Arm nodes?
+  - question: What should I check if pods don't schedule on the Arm nodes?
     answer: >-
       Verify that Arm-based C4A nodes are part of the cluster. Ensure taints and tolerations match,
       and confirm the image includes an Arm build. Resolve any mismatch before redeploying.

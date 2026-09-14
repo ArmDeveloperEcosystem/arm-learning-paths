@@ -1,5 +1,5 @@
 ---
-title: Deploy GitHub Actions Self-Hosted Runner on Google Axion C4A virtual machine
+title: Deploy a GitHub Actions self-hosted runner on a Google Axion C4A virtual machine
 description: Learn how to provision a Google Axion C4A Arm virtual machine and set up a GitHub Actions self-hosted runner for CI/CD workflows.
 
 minutes_to_complete: 15
@@ -45,13 +45,14 @@ generated_summary_faq:
       the main branch.
   - question: How do I know the job executed on the Arm self-hosted runner?
     answer: >-
-      Treat `runs-on: self-hosted` as a match for any eligible self-hosted runner; it does not select
+      Treat `runs-on: self-hosted` as a match for any eligible self-hosted runner. It doesn't select
       the C4A VM by architecture alone. Check the workflow logs and registered runner details to
       confirm that the job ran on the C4A instance.
-  - question: What should I check if the workflow is queued or NGINX was not installed?
+  - question: How do I verify that the NGINX deployment completes?
     answer: >-
-      Verify that the self-hosted runner is registered and running on your C4A instance. Confirm that
-      you pushed to the main branch with the workflow file in place.
+      Open the VM's external IP address in a browser after the workflow completes. The NGINX welcome
+      page should load, confirming that the workflow installed and started NGINX on the self-hosted
+      Arm runner.
 # END generated_summary_faq
 
 author: Annie Tallund
