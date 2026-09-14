@@ -1,6 +1,6 @@
 ---
 title: Set up the Gemma4 benchmark workspace
-weight: 3
+weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
