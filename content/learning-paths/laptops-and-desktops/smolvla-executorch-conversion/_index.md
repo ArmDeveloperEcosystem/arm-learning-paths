@@ -16,7 +16,7 @@ learning_objectives:
     - Compare outputs and latency between the FP32 and INT8 models running on the Arm CPU.
 
 prerequisites:
-    - An AArch64 Linux system with at least 20 GB of free storage.
+    - An AArch64 Ubuntu system with at least 20 GB of free storage. This Learning Path was tasted on Nvidia's DGX Spark.
     - Familiarity with Python, PyTorch, and the Linux command-line.
 
 author: William Watson

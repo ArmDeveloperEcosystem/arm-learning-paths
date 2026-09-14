@@ -8,17 +8,34 @@ layout: learningpathall
 
 ## Install the required tools
 
-We'll need `git` to clone the ExecuTorch repository, `curl` to fetch the project archive, a C++ build toolchain, and a Python3.12 virtual environment:
+You need `git` to clone the ExecuTorch repository, `curl` to fetch project files, and a C++ build toolchain:
 
 ```bash
 sudo apt update
 sudo apt install -y \
     git \
     curl \
-    build-essential \
-    python3.12 \
-    python3.12-dev \
-    python3.12-venv
+    build-essential
+```
+
+The project uses Python 3.12. Install [uv](https://docs.astral.sh/uv/) and use it to install Python 3.12 independently of the Python version provided by your Ubuntu release:
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source "$HOME/.local/bin/env"
+uv python install 3.12
+```
+
+Confirm that Python 3.12 is available:
+
+```bash
+python3.12 --version
+```
+
+The output is similar to:
+
+```output
+Python 3.12.14
 ```
 
 ## Download the project files
@@ -27,38 +44,45 @@ Create a working directory and download the project files for this Learning
 Path:
 
 ```bash
-mkdir smolvla-executorch-conversion-work
+mkdir -p smolvla-executorch-conversion-work
 cd smolvla-executorch-conversion-work
 curl -fL --retry 3 \
     -o smolvla-executorch-conversion.tar.gz \
     'https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/main/code-examples-main.tar.gz?path=learning-paths/laptops-and-desktops/smolvla-executorch-conversion'
-mkdir smolvla-executorch-conversion
+mkdir -p smolvla-executorch-conversion
 tar xfz smolvla-executorch-conversion.tar.gz \
     --strip-components=4 \
     -C smolvla-executorch-conversion
 cd smolvla-executorch-conversion
 ```
 
-
 ## Set up the software environment
+
 The `setup.sh` script:
-- Pins ExecuTorch v1.4.1 at commit `e4d02f41f7909e8ed5bf4a14ffc520d733453d9f`.
-- Builds the ExecuTorch and XNNPACK + KleidiAI runtime libraries and Python bindings.
-- Installs relevant Python packages.
-- Downloads the pinned SmolVLA checkpoint from Hugging Face.
-- Creates a project-local virtual environment `.venv`.
+
+- Creates a project-local virtual environment in `.venv`
+- Pins ExecuTorch v1.4.1 at commit `e4d02f41f7909e8ed5bf4a14ffc520d733453d9f`
+- Builds the ExecuTorch and XNNPACK runtime libraries with KleidiAI support and builds the Python bindings
+- Installs the required Python packages
+- Downloads the pinned SmolVLA checkpoint from Hugging Face
+
+Run the setup script:
 
 ```bash
 ./scripts/setup.sh
 ```
+
+The script downloads several gigabytes and compiles native libraries. It can take 30 minutes or longer on systems with a small number of CPU cores.
+
 Activate the virtual environment and resolve repository-local path variables with:
+
 ```bash
 source env.sh
 ```
 
 ## Verify the resources
 
-Verify the pinned packages, ExecuTorch revision and Python binding, XNNPACK and KleidiAI runtime build, and SmolVLA checkpoint files:
+Verify the pinned packages, ExecuTorch revision and Python binding, XNNPACK runtime build with KleidiAI support, and SmolVLA checkpoint files:
 
 ```bash
 python scripts/check_environment.py
@@ -74,8 +98,7 @@ Environment OK: aarch64, ExecuTorch e4d02f41
   Checkpoint: /path/to/smolvla-executorch-conversion/checkpoints/smolvla_base
 ```
 
-
 ## What you've accomplished and what's next
-You have obtained the scripts to convert the model, built the ExecuTorch runtime and configured your environment.
+You have obtained the scripts to convert the model, built the ExecuTorch runtime, and configured your environment.
 
-Next, you'll work through the ExecuTorch pipeline to export and lower the FP32 SmolVLA for Arm CPU, and validate the converted model against the PyTorch reference.
+Next, you'll export and lower the FP32 SmolVLA for an Arm CPU and validate the converted model against the PyTorch reference.
