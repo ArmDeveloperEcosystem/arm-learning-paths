@@ -21,15 +21,19 @@ You'll run an ExecuTorch MobileSAM example that performs the following sequence:
 3. Calibrates post-training quantization with the example dog image.
 4. Uses 8-bit activations and weights for most of the graph, with 16-bit activations and 8-bit weights for TinyViT attention.
 5. Lowers the quantized graph to an Ethos-U85-256 delegate and writes an ExecuTorch `.pte` program.
-6. Builds a bare-metal runtime, runs it on the Corstone-320 FVP, and compares its mask with the host quantized mask.
+6. Builds the standard Arm ExecuTorch runner, runs it on the Corstone-320 FVP, and compares its mask with the host quantized mask.
 
 The default image tensor has shape `[1, 3, 448, 448]`. The model produces one mask-logit tensor with shape `[1, 1, 112, 112]`.
 
 ## Understand the fixed-prompt contract
 
-The exported `.pte` accepts an image tensor as its only runtime input. The point prompt is part of the exported graph, so changing the image doesn't require another export. Changing the image does require rebuilding the bare-metal application. The fixed coordinates must still identify the intended object in the resized and padded image. Changing the point coordinates requires another export.
+The exported `.pte` accepts an image tensor as its only runtime input. The runner embeds the `.pte` and reads the preprocessed image from `input.bin` through semihosting, which lets the FVP access files on your host. It writes the output tensor to `output-0.bin` through the same mechanism.
 
-The example uses `multimask_output=False` and keeps mask thresholding outside the model. This arrangement focuses the target graph on the MobileSAM image encoder and mask decoder while keeping target-side post-processing small.
+You can supply a different image tensor with the same shape and preprocessing without exporting again or rebuilding the runner. The fixed point coordinates must still identify the intended object in the resized and padded image. Validation also needs the host quantized mask and visualization image for that same input. Changing the point coordinates requires a new export and a rebuild of the runner that embeds the program.
+
+The example provides one tested configuration: MobileSAM `vit_t`, a `448x448` image, point `(219, 193)`, and Ethos-U85-256. The MobileSAM preparation, export, and visualization scripts use fixed settings and paths, so you invoke them without configuration arguments.
+
+The example uses `multimask_output=False`. The target returns low-resolution mask logits; the host thresholds them at zero and resizes the binary mask for visualization.
 
 ## Know what the validation proves
 
@@ -38,7 +42,9 @@ The workflow performs two comparisons:
 - Host validation compares the floating-point mask with the quantized mask before lowering.
 - Target validation compares the mask produced by the FVP with the host quantized mask.
 
-Both comparisons enforce a minimum intersection over union (IoU) of `0.9`. Export stops if the host comparison falls below that threshold. The visualization step stops if the target comparison fails or produces a degenerate mask.
+Both comparisons enforce a minimum intersection over union (IoU) of `0.9`. Export stops if the host comparison falls below that threshold. The visualization step checks the output tensor size and stops if the target comparison falls below `0.9`.
+
+These checks validate agreement across the deployment stages for the example image. The same dog image is used for calibration and evaluation. For an application, use a representative calibration set and labeled test images to assess segmentation quality. The fast FVP mode used here validates correctness; use hardware measurements to assess real-device latency.
 
 ## What you've learned and what's next
 

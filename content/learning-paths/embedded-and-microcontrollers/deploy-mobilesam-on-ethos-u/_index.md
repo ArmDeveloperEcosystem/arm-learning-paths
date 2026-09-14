@@ -14,7 +14,7 @@ learning_objectives:
     - Validate quantization quality, Ethos-U delegation, and target mask agreement
 
 prerequisites:
-    - A Linux development machine or an Apple silicon Mac
+    - A Linux development machine with glibc 2.28 or later, or an Apple silicon Mac running macOS 15 or later
     - Familiarity with PyTorch model export and embedded cross-compilation
 
 # START generated_summary_faq
@@ -32,35 +32,37 @@ generated_summary_faq:
   faq_generated_at: '2026-09-10T17:01:35Z'
   faq_source_hash: f366e4394846f04a17753ebfb0a8d89686fd53890e83ca73953598e49c33da9e
   summary: >-
-    You'll prepare MobileSAM, export a quantized fixed-prompt model for Ethos-U85, and build a bare-metal
-    ExecuTorch application. Then, you'll run prompt segmentation on the Corstone-320 FVP
-    and save the target output. Finally, you'll reconstruct the target mask and compare it with the host quantized
-    mask. You'll confirm that both validation stages meet the required intersection over union (IoU) threshold.
+    You'll deploy MobileSAM prompt segmentation on Ethos-U85 with ExecuTorch and validate its output on the
+    Corstone-320 FVP. First, you'll prepare the model and export a quantized program with a fixed point prompt.
+    Then, you'll build the standard Arm runner and pass image tensors through semihosting. Finally, you'll
+    compare the host and target masks and confirm both intersection over union (IoU) checks reach `0.9`.
   faqs:
   - question: How do I know my host is supported before I start?
     answer: >-
-      Run the preflight check to verify supported platforms and required
-      tools, including `python3.12`, `git`, `cmake`, `c++`, and either `Ninja` or `Make`.
+      Run the preflight check to verify macOS 15 or later on Apple silicon, or glibc 2.28 or later on Linux.
+      You'll also check the required tools, including `python3.12`, `git`, `cmake`, `c++`, and either `Ninja` or `Make`.
   - question: Which directory should I run commands from during export and build?
     answer: >-
       Run commands from the `ExecuTorch` repository root. Activate your Python environment and source
-      `examples/arm/arm-scratch/setup_path.sh` in the current shell.
+      `setup_path.sh` from the `examples/arm/arm-scratch/` directory in the current shell.
   - question: What should I expect after running the MobileSAM export step?
     answer: >-
-      The script downloads the pinned MobileSAM revision, applies the patch for a configurable image size, and keeps
-      the external source in a separate working directory. You should see exported assets referenced
-      later, such as metadata under `arm_test/mobilesam_manual/export/` and a reference quantized
-      mask image.
+      Prepare the pinned source and checkpoint first with `prepare_mobilesam.py`. After running
+      `export_mobilesam.py` without arguments, you'll find `mobilesam.pte`, `input.bin`, host mask images,
+      `metrics.json`, and `delegation.txt` under `arm_test/mobilesam/export/`. Check that
+      `fp32_quantized_iou` in the metrics is at least `0.9`.
   - question: What confirms that the FVP execution worked?
     answer: >-
-      The example runs on the Corstone-320 FVP and produces a log file used for validation (for
-      example, `arm_test/mobilesam_manual/fvp.log`). That log contains the encoded segmentation
-      mask for the visualization tool to decode.
+      Confirm successful runner execution in `arm_test/mobilesam/fvp.log` and check that
+      `output-0.bin` under `arm_test/mobilesam/io/` contains the target output tensor. Then run the visualization
+      step to compare the target mask with your host quantized mask. If you use the complete `run.sh`
+      workflow, you'll see `MobileSAM example: PASS` after validation succeeds.
   - question: How do I validate the segmentation quality and target agreement?
     answer: >-
-      Run the visualization tool with the FVP log, the example input image, the exported metadata
-      JSON, and the reference quantized mask. The tool reconstructs the target mask and checks
-      that the IoU meets the specified threshold, such as `--minimum-iou=0.9`.
+      Run the MobileSAM example's `visualize_fvp_output.py` without arguments, as shown in the validation
+      step. Under `arm_test/mobilesam/result/`, check `fvp_reference_iou` in `metrics.json` and inspect
+      `fvp_comparison.png`. You need an IoU of at least `0.9`.
+      This comparison checks agreement with your host mask on the example image.
 # END generated_summary_faq
 
 author: Usamah Zaheer
