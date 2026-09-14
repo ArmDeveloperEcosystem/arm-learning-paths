@@ -1,14 +1,15 @@
 ---
 title: Install prerequisites on macOS and download Gemma 4
+description: Install Bazelisk and the Hugging Face Hub CLI on macOS, then download the Gemma 4 LiteRT-LM model artifact for benchmarking.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install Bazelisk and Hugging Face Hub CLI 
+## Install Bazelisk and the Hugging Face Hub CLI
 
-After creating the workspace for the benchmark, install prerequisite software. 
+Install the prerequisite software for the benchmark.
 
 Install Bazelisk:
 
@@ -32,7 +33,7 @@ bazelisk version
 
 ## Download Gemma 4 from Hugging Face
 
-After installing prerequisites, download the Gemma 4 E2B `.litertlm` model from Hugging Face.
+With the prerequisites installed, download the Gemma 4 E2B `.litertlm` model from Hugging Face.
 
 Create a shared model directory in the workspace:
 
@@ -74,6 +75,6 @@ replacement.
 
 ## What you've accomplished and what's next
 
-You've installed prerequisite software on your macOS device and downloaded Gemma4 from Hugging Face.
+You've installed prerequisite software on your macOS device and downloaded Gemma 4 from Hugging Face.
 
 Next, you'll build each XNNPACK variant and run the benchmark.

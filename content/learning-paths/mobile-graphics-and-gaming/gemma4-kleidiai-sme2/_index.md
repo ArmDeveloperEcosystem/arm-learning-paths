@@ -1,5 +1,6 @@
 ---
 title: Benchmark Gemma 4 LiteRT-LM prefill performance with KleidiAI and SME2 on macOS
+description: Benchmark Gemma 4 prefill performance on macOS by comparing baseline and SME2-optimized XNNPACK paths in LiteRT-LM with KleidiAI.
 
 minutes_to_complete: 45
 
@@ -19,7 +20,7 @@ prerequisites:
     - An SME2 device (macOS on Apple M4 is used in this Learning Path for demonstrative purposes)
     - Git, Homebrew, and Xcode Command Line Tools
     - At least 25 GB of free disk space for model files and local builds
-    
+
 author: Annie Tallund
 
 generate_summary_faq: true

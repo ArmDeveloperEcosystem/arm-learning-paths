@@ -1,5 +1,6 @@
 ---
-title: Build and compare Gemma4 benchmarks
+title: Build and compare Gemma 4 benchmarks
+description: Build baseline and SME2-optimized XNNPACK variants, compare Gemma 4 prefill and decode throughput, and verify the model with a prompt.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +9,7 @@ layout: learningpathall
 
 ## Build and benchmark XNNPACK variants
 
-After downloading Gemma4, build and benchmark the baseline and upstream-optimized variants with identical settings at one and four CPU threads.
+After downloading Gemma 4, build and benchmark the baseline and upstream-optimized variants with identical settings at one and four CPU threads.
 
 Create directories for the shared Bazel output and benchmark results:
 
@@ -90,7 +91,7 @@ makes initialization time and memory use non-comparable.
 
 ## Read the benchmark output
 
-Each iteration prints output similar to:
+Each iteration prints output similar to the following:
 
 ```output
 --------------------------------------------------
@@ -152,7 +153,7 @@ Results can differ by the following:
 - Memory conditions
 - Thermal state
 
-## Verify with a prompt 
+## Verify the model with a prompt
 
 After building a variant, use its generated binary for a short prompt:
 
@@ -170,8 +171,8 @@ binary="$(bazelisk --output_base="$HOME/gemma4-prefill-bench/bazel-output-base/a
 
 The tested model answers that the capital of France is Paris.
 
-## What you've accomplished 
+## What you've accomplished
 
-You've run a benchmark to compare baseline and upstream-optimized XNNPACK variants and learned how to interpret benchmarking results. You've also verified variants using prompts. 
+You've run a benchmark to compare baseline and upstream-optimized XNNPACK variants and learned how to interpret the results. You've also verified the variants with prompts.
 
 You can reproduce this workflow to benchmark Gemma 4 LiteRT-LM prefill performance.

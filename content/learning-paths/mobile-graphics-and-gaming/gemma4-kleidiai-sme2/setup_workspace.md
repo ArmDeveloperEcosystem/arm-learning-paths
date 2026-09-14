@@ -1,5 +1,6 @@
 ---
-title: Set up the Gemma4 benchmark workspace
+title: Set up the Gemma 4 benchmark workspace
+description: Prepare a reproducible macOS workspace for comparing Gemma 4 LiteRT-LM performance with baseline and SME2-optimized XNNPACK variants.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +9,7 @@ layout: learningpathall
 
 ## What you'll build
 
-You'll evaluate Gemma 4 CPU performance with the upstream XNNPACK SME2 Int4 and Int2 paths used through LiteRT-LM and KleidiAI.
+You'll build a workflow for comparing Gemma 4 CPU performance with the upstream XNNPACK SME2 Int4 and Int2 paths used through LiteRT-LM and KleidiAI.
 
 The workflow records the repository revisions and uses the
 `litert_lm_advanced_main --benchmark` command so that you can compare results
@@ -38,7 +39,7 @@ performance comparison isn't valid.
 For a deeper validation, see [Test your SME2 development
 environment](/learning-paths/cross-platform/multiplying-matrices-with-sme2/2-check-your-environment).
 
-After confirming SME2 support on your device, create a workspace and clone LiteRT-LM `v0.16.1`, KleidiAI `v1.30.0`, and upstream XNNPACK with the SME2 Int4 and Int2 support.
+After confirming SME2 support on your device, create a workspace. Clone LiteRT-LM `v0.16.1`, KleidiAI `v1.30.0`, and upstream XNNPACK with SME2 Int4 and Int2 support.
 
 ## Create a workspace directory
 
@@ -111,6 +112,6 @@ gemma4-prefill-bench/
 
 ## What you've accomplished and what's next
 
-You've now created a workspace for the Gemma4 benchmark.
+You now have a workspace for the Gemma 4 benchmark.
 
 Next, you'll install the prerequisites and download the Gemma 4 model.
