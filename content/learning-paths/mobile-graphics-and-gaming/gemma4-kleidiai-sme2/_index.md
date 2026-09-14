@@ -21,9 +21,54 @@ prerequisites:
     - Git, Homebrew, and Xcode Command Line Tools
     - At least 25 GB of free disk space for model files and local builds
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-09-14T20:55:19Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 87d7867854c80eb5b1a520c8958d4251d51e5e33c98f4d7b1890431ca82cfe8b
+  summary_generated_at: '2026-09-14T20:55:19Z'
+  summary_source_hash: 87d7867854c80eb5b1a520c8958d4251d51e5e33c98f4d7b1890431ca82cfe8b
+  faq_generated_at: '2026-09-14T20:55:19Z'
+  faq_source_hash: 87d7867854c80eb5b1a520c8958d4251d51e5e33c98f4d7b1890431ca82cfe8b
+  summary: >-
+    You'll benchmark Gemma 4 prefill performance on macOS by comparing an upstream SME2-optimized
+    XNNPACK path with a historical baseline in LiteRT-LM and KleidiAI. First, you'll set up a workspace and
+    verify SME and SME2 availability. Then, you'll install Bazelisk and the Hugging Face Hub CLI, and download
+    a LiteRT-LM-compatible Gemma 4 E2B `.litertlm` model. You'll build both XNNPACK variants with
+    identical settings, then compare three-iteration results at one and four CPU threads.
+  faqs:
+  - question: How do I check that my Mac supports SME2 before running the benchmarks?
+    answer: >-
+      Run `uname -m` and the `sysctl` checks for `hw.optional.arm.FEAT_SME` and
+      `hw.optional.arm.FEAT_SME2`. Proceed when the architecture is `arm64` and both feature flags
+      report `1`.
+  - question: Which Gemma 4 model should I download?
+    answer: >-
+     Download the Gemma 4 E2B `.litertlm` model from Hugging
+      Face. Place it in the shared model directory at `$HOME/gemma4-prefill-bench/models`.
+  - question: How do I confirm that Bazel is the version expected by LiteRT-LM?
+    answer: >-
+      From the LiteRT-LM repository, you can check `.bazelversion` and run `bazelisk version`. Confirm that the Bazel version is `7.6.1`.
+  - question: Why should I create separate baseline and upstream XNNPACK trees?
+    answer: >-
+      You'll use separate trees to build and benchmark both variants with identical settings while
+      recording the exact repository revisions. This enables a clean side-by-side comparison through
+      the same LiteRT-LM entrypoint.
+  - question: What does the benchmark function run, and where are the results saved?
+    answer: >-
+      When you run the benchmark function, it builds the selected XNNPACK variant and runs
+      three-iteration prefill benchmarks at one and four CPU threads. Results are written under the
+      workspace results directory, so you can compare baseline and SME2-optimized runs.
+# END generated_summary_faq
+
 author: Annie Tallund
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
