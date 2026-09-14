@@ -61,12 +61,15 @@ The published demo already defines both configurations. Selecting `zena_css_fvp`
     #define configINTERRUPT_PRIORITY_REGISTER_ADDRESS  ( configGIC_REDISTRIBUTOR_BASE_ADDRESS + 0x10400UL )
     #define configPL011_UART0_BASE_ADDRESS             0x2A410000UL
     #define configGIC_SGI_AFF2                         1U
+    #define configGENERIC_TIMER_INTERRUPT_ID           29U
 ```
 
 
 ## Build the FreeRTOS application
 
 Configure the exact full-stack platform target, `zena_css_fvp`:
+
+Build with gcc
 
 ```bash
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
@@ -80,6 +83,26 @@ aarch64-none-elf-objcopy -O binary \
   build/zena_css/r82ae_smp_fvp_gcc_armclang.elf \
   build/zena_css/r82ae_smp_fvp_gcc_armclang.bin
 ```
+
+<details>
+<summary>Build with Arm Compiler for Embedded</summary>
+
+Configure a separate debug build with the Arm Compiler toolchain:
+
+```bash
+cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
+cmake -S . -B build/zena_css \
+  -DCMAKE_TOOLCHAIN_FILE=armclang_toolchain.cmake \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DKERNEL_DIR_PATH=../../FreeRTOS-Kernel \
+  -DR82AE_PLATFORM=zena_css_fvp
+cmake --build build/zena_css --parallel
+fromelf --bincombined \
+  --output=build/zena_css/r82ae_smp_fvp_gcc_armclang.bin \
+  build/zena_css/r82ae_smp_fvp_gcc_armclang.elf
+```
+</details>
+
 
 The generated binary will be located in:
 
@@ -119,7 +142,7 @@ The Zena CSS documnetation indicates that the SI CL1 firmware is loaded by the R
 
 The Zena CSS RSE image layout described in the [image layout](https://arm-zena-css.docs.arm.com/en/v2.2.1/design/boot_process.html#images-layout) indicate where SI CL1 image is packaged.
 
-It should be noted that the SI CL1 the image in `rse-flash-image.img` is signed and encrypted, so simply updating the image in the binary won't be enough.
+It should be noted that the SI CL1 the image in `rse-flash-image.img` is signed, so simply updating the image in the binary won't be enough.
 
 So The next step is to identify which Yocto recipe is responsible for creating this image.
 
@@ -133,7 +156,7 @@ From the `arm-zena-css` directory, find the RSE image definition:
 grep -nr "rse-flash-image" yocto/
 ```
 
-The result identifies `firmware.cfg`:
+The result identifies [`firmware.cfg`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-bsp/recipes-bsp/images/files/fvp-rd-aspen/firmware.cfg?ref_type=heads#L31):
 
 ```text
 yocto/meta-zena-css-bsp/recipes-bsp/images/files/fvp-rd-aspen/firmware.cfg:31:image rse-flash-image.img {
@@ -145,7 +168,7 @@ Find the recipe that uses this configuration:
 grep -nr "firmware.cfg" yocto/
 ```
 
-The result links it to the image recipe:
+The result links it to the image recipe :
 
 ```text
 yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb:40:GENIMAGE_CONFIG = "firmware.cfg"
@@ -153,7 +176,7 @@ yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb:40:GENIMAGE_
 
 This establishes the link between the image definition and the recipe that generates it.
 
-Open firmware-fvp-rd-aspen.bb and inspect its tasks. In the next section, you'll modify this recipe to replace the default Cluster 1 firmware with the FreeRTOS image while preserving the normal Zena CSS boot flow.
+Open [firmware-fvp-rd-aspen.bb](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb?ref_type=heads#L40) and inspect its tasks. In the next section, you'll modify this recipe to replace the default Cluster 1 firmware with the FreeRTOS image while preserving the normal Zena CSS boot flow.
 
 ### Identify where the SI CL1 firmware enters the image
 

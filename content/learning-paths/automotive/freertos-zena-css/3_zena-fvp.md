@@ -30,20 +30,17 @@ Build and run the Arm Zena CSS Reference Software Stack before you replace its S
 
 Verify that the unmodified stack boots. This baseline separates FreeRTOS porting errors from build or FVP installation errors.
 
-The Zena CSS Runtime Security Engine (RSE) normally authenticates, decrypts, loads, and starts the Safety Island image. During initial porting, bypass this flow and load the FreeRTOS binary directly into Safety Island Cluster 1 low-latency RAM (LLRAM). Direct loading shortens the debug cycle before you add image signing and flash-image packaging.
+The Zena CSS Runtime Security Engine (RSE) authenticates, loads, and starts the Safety Island image. During initial porting, bypass this flow and load the FreeRTOS binary directly into Safety Island Cluster 1 low-latency RAM (LLRAM). Direct loading shortens the debug cycle before you add image signing and flash-image packaging.
 
-{{% notice Warning %}}
-The executable and image paths in this direct-load workflow were recorded during bring-up. Confirm their names and locations in your Zena CSS release before running the commands.
-{{% /notice %}}
 
 ## Adapt the platform configuration
 
 ### Identify the platform-specific configuration
 
-The binary built for the standalone Fixed Virtual Platform (FVP) doesn't use the Zena CSS memory map. Create a Zena CSS target in the port and update these platform-dependent elements:
+The binary built for the standalone `FVP_BaseR_Cortex-R82AE` doesn't use the Zena CSS memory map. Create a Zena CSS target in the port and update these platform-dependent elements:
 
 1. Set the linker code and data regions to the Safety Island cluster 1 LLRAM addresses.
-2. Make the startup code enter Exception Level 1 (EL1) in the execution state expected by the FreeRTOS Cortex-R82 port.
+2. Make the startup code boot from Exception Level 2 (EL2) and trasition to EL1 for FreeRTOS execution.
 3. Configure the Cluster 1 Generic Interrupt Controller (GIC) interfaces and interprocessor interrupt IDs.
 4. Update the core-affinity decoding for the Safety Island cluster.
 5. Set the PL011 base address to the Zena CSS Safety Island UART.
@@ -58,6 +55,11 @@ Safety Island Cluster 1 is available only in FVP Configuration 2. Its registers 
 The [Cluster 1 Zephyr device tree](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/components/safety_island/zephyr/src/boards/arm/fvp_rd_aspen_safety_island/fvp_rd_aspen_safety_island_c1.dts) contains the following definitions:
 
 ```dts
+sram0: memory@140000000 {
+			compatible = "mmio-sram";
+			reg = <0x1 0x40000000 DT_SIZE_M(8)>;
+		};
+
 gic: interrupt-controller@30200000 {
     compatible = "arm,gic-v3", "arm,gic";
     redistributor-regions = <4>;
@@ -82,6 +84,8 @@ uart0: uart@2a410000 {
 ```
 
 ### Adapt the FreeRTOS code
+
+The Zephyr image is loaded at 0x140000000, the base address of LLRAM. As in the previous section, configure the FreeRTOS and its linker script to link and load the binary at this address, then execute it from there.
 
 Set the PL011 UART base address to `0x2a410000`.
 
@@ -146,14 +150,15 @@ In the normal boot flow, the System Control Processor (SCP) firmware on Safety I
 
 ## Run FreeRTOS on the Zena CSS FVP
 
-Start with a single-core application that prints a banner. This reduces the initial validation surface to reset, exception-level transition, memory, and UART. Enable the other cores and the ping/pong tasks only after the banner works.
+Begin with a single-core application that prints a startup banner. This limits initial validation to reset handling, the exception-level transition, memory setup, and UART output. After the banner appears, enable the remaining cores and the ping/pong tasks.
 
-Build the Zena CSS target to produce a raw binary. Record the linked load address because the `--data` offset and the image's link address must describe the same memory layout.
-
+Build the Zena CSS target as a raw binary and note its linked load address. The address specified with the FVP `--data` option must match the address used to link the image.
 
 ### Compile
 
 Return to the Cortex-R82AE demo directory used in the previous section. Configure the exact direct-load platform target, `zena_css_fvp_direct_load`, and use the adjacent kernel clone:
+
+Build with GCC
 
 ```bash
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
@@ -168,14 +173,43 @@ aarch64-none-elf-objcopy -O binary \
   build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.bin
 ```
 
+<details>
+<summary>Build with Arm Compiler for Embedded</summary>
 
+Configure a separate debug build with the Arm Compiler toolchain:
+
+```bash
+cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
+cmake -S . -B build/zena_css_direct_load \
+  -DCMAKE_TOOLCHAIN_FILE=armclang_toolchain.cmake \
+  -DCMAKE_BUILD_TYPE=Debug \
+  -DKERNEL_DIR_PATH=../../FreeRTOS-Kernel \
+  -DR82AE_PLATFORM=zena_css_fvp_direct_load
+cmake --build build/zena_css_direct_load --parallel
+fromelf --bincombined \
+  --output=build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.bin \
+  build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.elf
+```
+</details>
+
+
+Selecting the plaftorm `zena_css_fvp_direct_load` will configure the following element
+```c
+#elif defined( R82AE_PLATFORM_ZENA_CSS_FVP_DIRECT_LOAD )
+    #define configGIC_SGI_CORE_AFFINITY_LEVEL          1U
+    #define configINTERRUPT_CONTROLLER_BASE_ADDRESS    0x30000000UL
+    #define configGIC_REDISTRIBUTOR_BASE_ADDRESS       0x30060000UL
+    #define configPL011_UART0_BASE_ADDRESS             0x2A410000UL
+    #define configGIC_SGI_AFF2                         1U
+    #define configGENERIC_TIMER_INTERRUPT_ID           29UL
+```
 
 ### Load the binary into Cluster 1 LLRAM
 
 From the Zena CSS `yocto_project` directory, start the Safety Island cluster and load a binary directly. First, check the workflow with the stack's `si-hello-world.bin`:
 
 ```bash
-build/tmp/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+<yocto project>/build/tmp-<baremetal|virtualization>/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.cluster1.core_power_on_by_default=1 \
   --data "css.smb.si.cluster1_llram=build/tmp/deploy/images/aspen/si-hello-world.bin@0x0000"
 ```
@@ -185,7 +219,7 @@ The `core_power_on_by_default` parameter starts Cluster 1 without waiting for th
 After the baseline binary boots, run the FreeRTOS image with the additional model configuration needed for the FreeRTOS timer and SMP operation:
 
 ```console
-build/tmp/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+<yocto project>/build/tmp-<baremetal|virtualization>/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.cluster1.core_power_on_by_default=1 \
   -C css.smb.si.CL1_LLRAM_config=15 \
   -C css.smb.smd.ref_counter.non_arch_start_at_default=1 \
