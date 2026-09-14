@@ -84,7 +84,7 @@ The commands create separate logs and metric files for `baseline-1t`,
 {{% notice Note %}}
 Use `--disable_cache=true` for the A/B comparison. The tested Gemma 4 artifact
 contains XNNPACK weight-cache fingerprints that are recognized by the upstream
-optimized tree but not by the historical baseline. Enabling caches therefore
+optimized tree but not by the historical baseline. Enabling caches
 makes initialization time and memory use non-comparable.
 {{% /notice %}}
 
@@ -113,7 +113,7 @@ each variant and thread count.
 
 After running the benchmark, compare steady-state prefill and decode throughput.
 
-The following representative results tested on Apple M4 use 1024 prefill tokens, 256 decode
+The following representative results use 1024 prefill tokens, 256 decode
 tokens, and disabled caches:
 
 | CPU threads | XNNPACK variant | Prefill tokens/s | Change | Decode tokens/s | Change |
@@ -142,11 +142,15 @@ configuration.
 The results illustrate this difference. SME2 improves prefill at both thread
 counts. For decode, SME2 throughput increases from 23.89 tokens/s with one
 thread to 30.28 tokens/s with four threads, but it scales less than the
-non-SME2 path. The one-thread SME2 advantage of 51.3% therefore becomes an
+non-SME2 path. The one-thread SME2 advantage of 51.3% becomes an
 18.3% deficit at four threads.
 
-Results can differ by model signature, SoC, operating system, memory conditions, and
-thermal state.
+Results can differ by the following:
+- Model signature
+- SoC
+- Operating system
+- Memory conditions
+- Thermal state
 
 ## Verify with a prompt 
 

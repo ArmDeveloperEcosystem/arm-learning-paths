@@ -14,9 +14,9 @@ The workflow records the repository revisions and uses the
 `litert_lm_advanced_main --benchmark` command so that you can compare results
 across XNNPACK variants.
 
-## Before you begin
+## Confirm SME2 support on your device
 
-Confirm the architecture and macOS SME feature flags:
+Confirm the architecture and SME feature flags:
 
 ```bash
 uname -m
@@ -37,6 +37,8 @@ performance comparison isn't valid.
 
 For a deeper validation, see [Test your SME2 development
 environment](/learning-paths/cross-platform/multiplying-matrices-with-sme2/2-check-your-environment).
+
+After confirming SME2 support on your device, create a workspace and clone LiteRT-LM `v0.16.1`, KleidiAI `v1.30.0`, and upstream XNNPACK with the SME2 Int4 and Int2 support.
 
 ## Create a workspace directory
 
