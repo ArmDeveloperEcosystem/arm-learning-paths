@@ -16,11 +16,58 @@ prerequisites:
     - An AArch64 Ubuntu system with at least 20 GB of free storage. This Learning Path was tested on NVIDIA's DGX Spark
     - Familiarity with Python, PyTorch, and the Linux command-line
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-09-15T18:21:16Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 81462250cc3d5d0876affd8f4bf8b54f95da4f30b276d1ca0a5713fd99b1ed09
+  summary_generated_at: '2026-09-15T18:21:16Z'
+  summary_source_hash: 81462250cc3d5d0876affd8f4bf8b54f95da4f30b276d1ca0a5713fd99b1ed09
+  faq_generated_at: '2026-09-15T18:21:16Z'
+  faq_source_hash: 81462250cc3d5d0876affd8f4bf8b54f95da4f30b276d1ca0a5713fd99b1ed09
+  summary: >-
+    You'll convert the SmolVLA vision-language-action model from PyTorch to ExecuTorch, lower it to XNNPACK
+    for Arm CPU inference, and validate the FP32 result against the original model. First, you'll generate
+    deterministic inputs, export the FP32 components, and run them through a native orchestrator.
+    Then, you'll quantize eligible operations to INT8 with TorchAO and reuse the same inputs to compare
+    model outputs, latency, and `.pte` sizes.
+  faqs:
+  - question: How do I know that the FP32 export and run completed correctly?
+    answer: >-
+      Run the conversion and execution commands, then confirm that validation reports
+      the ExecuTorch FP32 output matches the PyTorch reference. Review the artifacts in the FP32 output
+      directory.
+  - question: Where are the FP32 artifacts saved, and how can I change the location?
+    answer: >-
+      Find the artifacts in `artifacts/fp32` when you use the default configuration. To change the
+      location, set `SMOLVLA_ARTIFACTS_DIR` to an absolute path and use the same location for the FP32
+      benchmark.
+  - question: How do I reuse the same inputs for both FP32 and INT8 comparisons?
+    answer: >-
+      Generate deterministic inputs with the provided script and note the saved input-suite path. Pass
+      that path to the INT8 pipeline with `--input-suite`, or set the `SMOLVLA_INPUT_SUITE` environment
+      variable to use it.
+  - question: What should I look for to confirm the INT8 pipeline succeeded?
+    answer: >-
+      Run the pipeline command and confirm that it ends with `[8/8] Native accuracy gate passed`. The
+      command shown stores the artifacts in `artifacts/int8`. Use `--output-dir` to choose another
+      location.
+  - question: How do I validate the native runner against the PyTorch model?
+    answer: >-
+      Run `./scripts/run_runner.sh`, then run `python scripts/validate_runner.py`. Confirm that the
+      output says `Native split orchestrator output matches the full PyTorch reference.`
+# END generated_summary_faq
+
 author: William Watson
 
 # New Learning Paths are opted in for the next manual generated summary/FAQ run.
 # The generator resets this to false after a successful write.
-generate_summary_faq: true
+generate_summary_faq: false
 
 # Optional one-shot controls: set either field to true to regenerate just that
 # generated section the next time the summary/FAQ tool runs. The tool resets
