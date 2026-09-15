@@ -1,6 +1,6 @@
 ---
 title: Prepare the SD card and boot the board
-description: Build a bootable SD card image with mtools, set the AM62L EVM boot switches, and watch U-Boot start the signed Zephyr image and refuse the wrong-key and tampered ones.
+description: Build a bootable SD card image with mtools, set the AM62L EVM boot switches, and watch U-Boot verify the signed Zephyr image and start it on the board.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -43,7 +43,7 @@ M=$WORK/sdcard.img@@1048576
 mdeltree -i $M ::EFI
 mdel -i $M ::Image ::uEnv.txt
 mcopy -o -i $M $UBOOT_OUT/tiboot3.bin $UBOOT_OUT/tispl.bin $UBOOT_OUT/u-boot.img ::
-mcopy -o -i $M $FIT/zephyr-a.itb $FIT/zephyr-b.itb $FIT/zephyr-tampered.itb ::
+mcopy -o -i $M $FIT/zephyr-a.itb ::
 ```
 
 `-i` names the image. `mdeltree` removes a directory and everything in it, `mdel` removes single files, and `mcopy -o` copies files in and overwrites any that already exist.
@@ -63,20 +63,18 @@ The output is similar to:
  Volume Serial Number is 40D2-DF89
 Directory for ::/
 
-tiboot3  bin    216538 2026-09-11  18:14
-tispl    bin   1467919 2026-09-11  18:14
-u-boot   img   1422787 2026-09-11  18:14
-zephyr-a itb     60198 2026-09-11  18:14
-zephyr-b itb     60198 2026-09-11  18:14
-ZEPHYR~1 ITB     60198 2026-09-11  18:14  zephyr-tampered.itb
-        6 files           3 287 838 bytes
-                        130 643 968 bytes free
+tiboot3  bin    216538 2026-09-15  16:49
+tispl    bin   1467919 2026-09-15  16:49
+u-boot   img   1422787 2026-09-15  16:49
+zephyr-a itb     60198 2026-09-15  16:49
+        4 files           3 167 442 bytes
+                        130 766 848 bytes free
 ```
 
-`mdir` shows the long name `zephyr-tampered.itb` at the end of its line and the FAT short name `ZEPHYR~1.ITB` in front; U-Boot's `fatload` finds it by the long name. Six files: the three boot stages you built and the three FITs you signed. Nothing else goes on the card; the boot commands are compiled into `u-boot.img`.
+Four files: the three boot stages you built and the FIT you signed. Nothing else is needed on the card; the boot commands are compiled into `u-boot.img`, and the optional test page adds only its two FITs.
 
 {{% notice Note %}}
-If you prefer not to edit the image on the host, flash TI's `.wic.xz` to the card unchanged. balenaEtcher reads `.wic.xz` directly, and on Linux `xz -dc $WORK/tisdk-default-image.wic.xz | sudo dd of=/dev/sdX bs=4M status=progress` does the same. Then open the first partition on any PC, delete `Image`, `uEnv.txt` and the `EFI` directory, and copy the same six files in.
+If you prefer not to edit the image on the host, flash TI's `.wic.xz` to the card unchanged. balenaEtcher reads `.wic.xz` directly, and on Linux `xz -dc $WORK/tisdk-default-image.wic.xz | sudo dd of=/dev/sdX bs=4M status=progress` does the same. Then open the first partition on any PC, delete `Image`, `uEnv.txt` and the `EFI` directory, and copy the same four files in.
 {{% /notice %}}
 
 ## Write the card
@@ -131,11 +129,11 @@ Move the SD card from the host to the board, then power the board through a USB-
 SoC:   AM62LX SR1.0 HS-FS
 ```
 
-`HS-FS` means no customer key is fused in this device yet; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-production/) explains what that leaves unverified. The check you watch next, U-Boot verifying Zephyr, doesn't depend on it.
+`HS-FS` means no customer key is fused in this device yet; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) explains what that leaves unverified. The check you watch next, U-Boot verifying Zephyr, doesn't depend on it.
 
 ## Watch the trusted image boot
 
-U-Boot counts down for three seconds and then runs `bootcmd` on its own. That automatic run is called autoboot, and `bootcmd` is `run a`, the command you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). It loads `zephyr-a.itb`, verifies it, copies Zephyr to `0x82000000` and jumps there.
+U-Boot counts down for three seconds and then autoboot runs `bootcmd`, which is `run a`, the command you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). It loads `zephyr-a.itb`, verifies it, copies Zephyr to `0x82000000` and jumps there.
 
 Your `Created` time, `Hash value` and read time differ; the lines that matter are the same. The output is similar to:
 
@@ -175,59 +173,9 @@ started by       : U-Boot 'go' after FIT signature verification
 this image was verified by U-Boot before it ran.
 ```
 
-Three lines carry the proof. `sha256,rsa2048:key-a+ OK` is `bootm start` verifying the RSA signature of `conf-1` with the `key-a` public key compiled into U-Boot. `sha256+ OK` is the same step checking that the image bytes match the signed hash. `Loading Kernel Image to 82000000` is `bootm loados` copying the verified payload to Zephyr's link address. The `+` after a key name or hash algorithm is U-Boot's shorthand for a pass. A failed signature check prints `-` instead, and you'll see one in the next run.
+Three lines carry the proof. `sha256,rsa2048:key-a+ OK` is `bootm start` verifying the RSA signature of `conf-1` with the `key-a` public key compiled into U-Boot. `sha256+ OK` is the same step checking that the image bytes match the signed hash. `Loading Kernel Image to 82000000` is `bootm loados` copying the verified payload to Zephyr's link address. The `+` after a key name or hash algorithm is U-Boot's shorthand for a pass. A failed signature check prints `-` instead; [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) shows one.
 
 `go`, not `bootm`, prints `## Starting application at 0x82000000 ...`. It is the last line from U-Boot. The program that U-Boot verified a moment earlier prints everything after it, starting with the Zephyr banner.
-
-## Refuse the wrong key
-
-Zephyr is now running and U-Boot is gone, so power the board off and on. This time press a key during the countdown to stop autoboot. At the prompt, run the wrong-key test:
-
-```console
-=> run b
-```
-
-The expected output is:
-
-```output
-...
-   Verifying Hash Integrity ... sha256,rsa2048:key-b-  error!
-Verification failed for '<NULL>' hash node in 'conf-1' config node
-Failed to verify required signature 'key-key-a'
-Bad Data Hash
-ERROR -2: can't get kernel image!
-*** REFUSED: Zephyr was NOT started ***
-```
-
-U-Boot reports two separate failures, the same two that `fit_check_sign` reports on the host. The first line says it found a signature naming `key-b` and has no such key; U-Boot doesn't have the public half of `key-b`. The `Failed to verify required signature 'key-key-a'` line is the `required = "conf"` rule you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). It says every configuration must carry a valid signature by `key-a`, and this one doesn't. An image with no signature node at all fails that second check in the same way.
-
-Because `bootm start` returns an error, the `&&` chain stops there. `bootm loados` and `go` never run, and the `echo` after the `;` prints the `REFUSED` line. You are back at the U-Boot prompt; image B never ran.
-
-## Refuse the tampered image
-
-You are still at the prompt. Run the tampered test:
-
-```console
-=> run t
-```
-
-The expected output is:
-
-```output
-...
-   Verifying Hash Integrity ... sha256,rsa2048:key-a+ OK
-   Trying 'kernel-1' kernel subimage
-     ...
-   Verifying Hash Integrity ... sha256 error!
-Bad hash value for 'hash-1' hash node in 'kernel-1' image node
-Bad Data Hash
-ERROR -2: can't get kernel image!
-*** REFUSED: Zephyr was NOT started ***
-```
-
-This time the signature check passes and the hash check fails. That surprises people at first, and it is exactly what the FIT diagram in [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/) shows. `mkimage` signed the configuration node and the `hash-1` node of the image, and neither has changed. The byte you flipped when you [signed the images](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/4-sign-zephyr/) is in the payload, so the payload no longer matches that signed hash. The signature makes the hash trustworthy, and the hash catches the change. U-Boot stops before `bootm loados` again.
-
-To boot the trusted image again, type `run a` at the prompt.
 
 ## If nothing prints
 
@@ -243,6 +191,6 @@ If U-Boot starts Zephyr but the banner is the last line you see, `CONFIG_ARMV8_A
 
 ## What you've accomplished and what's next
 
-You built a bootable SD card from TI's own boot partition and set the switches. Then you watched U-Boot on real silicon accept the FIT signed with `key-a`, refuse the one signed with `key-b`, and refuse the one changed after signing. U-Boot now enforces the U-Boot to Zephyr link of the boot chain, from an unmodified source tree.
+You built a bootable SD card from TI's own boot partition and set the switches. Then you watched U-Boot on real silicon verify the FIT signed with `key-a`, accept it, and start Zephyr. U-Boot now enforces the U-Boot to Zephyr link of the boot chain, from an unmodified source tree.
 
-Next, [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-production/) covers what this proves and what it doesn't, and lists what a production device needs on top of it: a fused key, a locked console, and no other boot path.
+A verifier you've only seen accept an image isn't proven yet. Next, [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) signs an image with a key U-Boot doesn't have, tampers with a copy of the trusted one, and watches U-Boot refuse both. That page is optional. After it, [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) covers what the checks prove and lists what a production device needs on top of them: a fused key, a locked console, and no other boot path.

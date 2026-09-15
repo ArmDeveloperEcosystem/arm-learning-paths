@@ -1,7 +1,7 @@
 ---
 title: Review what is verified and what production needs
-description: Separate what the three board runs proved from what they did not, then list the changes a production device needs before the whole chain can be trusted.
-weight: 8
+description: Separate what the trusted boot proved, and what the optional refusal tests add, from what neither proved, then list the changes a production device needs before the whole chain can be trusted.
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -9,9 +9,13 @@ layout: learningpathall
 
 ## What you've proved
 
-You ran three images through the same boot command on real silicon. `a`, `b` and `t` only set the file name and then run the same `zboot`, so the result depends on the signature and the hash, not on the file name or on which of the three you typed.
+Two pages gave you the evidence, and each proved a different thing.
 
-The three runs on the [previous page](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-board/) gave these results:
+The boot in [Prepare the SD card and boot the board](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-board/) proved that Zephyr runs only after `bootm start` has verified the signature and the hash. The `## Starting application at 0x82000000` line came from `go`, and `go` sits behind `&&`, so it never runs unless `bootm start` says yes.
+
+The [previous page](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/), if you ran it, proved the two refusals: U-Boot rejects an image signed with a valid key it doesn't have, and it rejects an image changed after signing. All three images went through the same `zboot` command. `a`, `b` and `t` only set the file name, so the result depends on the signature and the hash, not on which of the three you typed.
+
+Put together, the three runs give these results; the first row comes from the boot page and the other two from the test page:
 
 | Command | Image | What is different | Result |
 |---|---|---|---|
@@ -19,7 +23,7 @@ The three runs on the [previous page](/learning-paths/embedded-and-microcontroll
 | `run b` | `zephyr-b.itb` | Signed with `key-b`, a key U-Boot doesn't have | Refused: `Failed to verify required signature 'key-key-a'` |
 | `run t` | `zephyr-tampered.itb` | Signed with `key-a`, one payload byte changed after signing | Refused: `Bad hash value for 'hash-1' hash node in 'kernel-1' image node` |
 
-So on the AM62L EVM, Zephyr runs only if its FIT is signed by the key compiled into U-Boot, and any change to the image after signing is caught. `go` never runs unless `bootm start` says yes.
+So on the AM62L EVM, Zephyr runs only if its FIT is signed by the key compiled into U-Boot, and any change to the image after signing is caught.
 
 You did this without changing a line of U-Boot source. The public key went into the control device tree through `CONFIG_DEVICE_TREE_INCLUDES`, and the boot commands went in through `CONFIG_PREBOOT`. Both are build configuration, so you can carry them to a newer TI U-Boot without maintaining a patch.
 
@@ -29,9 +33,9 @@ Most of what you built is not tied to TI. The section *Take it to another Cortex
 
 Each stage checks the next, so the whole chain is only as trustworthy as the stage that checked U-Boot. Your check lives in U-Boot; the question is who checked U-Boot.
 
-TI K3 devices come in two security states, which you met in [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/). On an HS-SE (High Security, Security Enforced) device the customer's key is burned into eFuses, and the device refuses any boot file that isn't signed with it.
+TI K3 devices come in two security states, which you met in [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/). On an HS-SE device the customer's key is burned into eFuses, and the device refuses any boot file that isn't signed with it.
 
-An HS-FS (High Security, Field Securable) device is the same silicon before the key is burned. The check still runs, but there is no customer key to compare against, so a file signed with any key passes.
+An HS-FS device is the same silicon before the key is burned. The check still runs, but there is no customer key to compare against, so a file signed with any key passes.
 
 The EVM ships as HS-FS. The SPL banner told you so: `SoC:   AM62LX SR1.0 HS-FS`. TI signs `tiboot3.bin`, `tispl.bin` and `u-boot.img` with a development key that ships in the U-Boot source. On HS-FS, the ROM and TIFS accept it.
 
@@ -95,3 +99,5 @@ What doesn't change is the `.its` file apart from the addresses, the keys, and t
 ## What you've accomplished
 
 You can now say what your board verifies and what it doesn't, and you have a checklist of the changes between a working demo and a production device. The signing flow, the way the public key goes into U-Boot, and the boot command are generic. Point `data` in `zephyr-a.its` at your own application's `zephyr.bin`, sign it again with `mkimage`, and watch U-Boot refuse anything else. When you move to your own hardware, change the three board-specific items and keep the rest.
+
+To go further with a trainer, Ac6 runs courses on [Zephyr RTOS programming](https://www.ac6-training.com/en/rt5/zephyr-rtos-programming) and on [building a secured embedded Linux platform](https://www.ac6-training.com/en/sec8/secured-embedded-linux-platform-build), which covers the U-Boot and TF-A side of this chain. There is also a course on [AI-assisted embedded development](https://www.ac6-training.com/en/ai1/ai-assisted-embedded-development).

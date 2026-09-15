@@ -16,7 +16,7 @@ learning_objectives:
 prerequisites:
     - A TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with a micro-SD card, a micro-USB cable for the console, and a USB-C PD power supply
     - An x86_64 Linux host running Ubuntu 22.04 or 24.04, with about 20 GB of free disk space
-    - A Zephyr workspace with Zephyr 4.4 or later and the Zephyr SDK, set up as described in the [Zephyr Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html)
+    - Visual Studio Code with the Workbench for Zephyr extension and its host tools installed, as in the first steps of [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/)
     - Basic knowledge of U-Boot and the Linux command line
 
 author: Roy Jamil
@@ -38,6 +38,8 @@ armips:
     - Cortex-A
 tools_software_languages:
     - Zephyr
+    - Workbench for Zephyr
+    - Visual Studio Code
     - U-Boot
     - OpenSSL
     - GCC
@@ -60,16 +62,20 @@ further_reading:
         link: https://docs.zephyrproject.org/latest/boards/ti/am62l_evm/doc/index.html
         type: documentation
     - resource:
-        title: TI Processor SDK Linux for AM62Lx 12.01.00.05.03
-        link: https://www.ti.com/tool/download/AM62L-LINUX-SDK/12.01.00.05.03
+        title: Workbench for Zephyr
+        link: https://z-workbench.com/
         type: website
     - resource:
-        title: AM62L EVM User's Guide
-        link: https://www.ti.com/lit/pdf/SPRUJG8
-        type: documentation
+        title: Ac6 training, Zephyr RTOS programming
+        link: https://www.ac6-training.com/en/rt5/zephyr-rtos-programming
+        type: website
     - resource:
-        title: AC6 Zephyr Training
-        link: https://www.ac6-training.com/en/cours.php/cat_oRT/ref_oRT5/zephyr-rtos-programming
+        title: Ac6 training, Secured embedded Linux platform build
+        link: https://www.ac6-training.com/en/sec8/secured-embedded-linux-platform-build
+        type: website
+    - resource:
+        title: Ac6 training, AI-assisted embedded development
+        link: https://www.ac6-training.com/en/ai1/ai-assisted-embedded-development
         type: website
 
 ### FIXED, DO NOT MODIFY

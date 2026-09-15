@@ -1,6 +1,6 @@
 ---
 title: Build U-Boot with the public key and a boot command that fails closed
-description: Compile the public half of key-a into U-Boot's own device tree through Kconfig, add a boot command that starts Zephyr only after bootm verifies it, and prove on the host with fit_check_sign that only the trusted FIT verifies.
+description: Compile the public half of key-a into U-Boot's own device tree through Kconfig, add a boot command that starts Zephyr only after bootm verifies it, and prove on the host with fit_check_sign that the trusted FIT verifies against that key.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -52,7 +52,7 @@ CONFIG_RSA=y
 
 `CONFIG_FIT_SIGNATURE` and `CONFIG_RSA` are the verifier. `CONFIG_OF_SEPARATE` means the control DTB is built from source into a separate `u-boot.dtb`, which binman, U-Boot's image packaging tool, packs into `u-boot.img`, so you can add a node to it at build time.
 
-Legacy image support is off: that older single-file format (uImage) carries no signature, so `bootm` has nothing unsigned to fall back to. Other boot commands still exist; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-production/) covers them.
+Legacy image support is off: that older single-file format (uImage) carries no signature, so `bootm` has nothing unsigned to fall back to. Other boot commands still exist; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) covers them.
 
 The only things missing are the key and the boot command. Both are build configuration, so the U-Boot source stays untouched.
 
@@ -156,7 +156,7 @@ Why not a plain `bootm`? A full `bootm` runs a sequence of named steps and conti
 
 Why `&&` and not `;`? In U-Boot's shell, `a && b` runs `b` only if `a` succeeded; `a; b` runs `b` either way, so a failed check would fall through to `go` and boot the image anyway. The `&&` is what makes it fail closed. `go` never returns, so the `echo` after the final `;` prints only when a step failed.
 
-That chain becomes the environment variable `zboot`, and three one-line wrappers pick the image to test:
+That chain becomes the environment variable `zboot`, and three one-line wrappers pick the file it loads:
 
 | Variable | Definition |
 |---|---|
@@ -165,7 +165,7 @@ That chain becomes the environment variable `zboot`, and three one-line wrappers
 | `b` | `setenv fit zephyr-b.itb; run zboot` |
 | `t` | `setenv fit zephyr-tampered.itb; run zboot` |
 
-`CONFIG_PREBOOT` defines all four: it's a command string U-Boot runs before the autoboot countdown, so the variables exist even after you stop autoboot. `CONFIG_BOOTCOMMAND="run a"` makes the trusted image the default and `CONFIG_BOOTDELAY=3` gives you three seconds to stop it.
+`a` boots the trusted image. `b` and `t` name two images that don't exist yet; they are for the tests on [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/), and they are harmless until then. `CONFIG_PREBOOT` defines all four: it's a command string U-Boot runs before the autoboot countdown (autoboot is U-Boot running `bootcmd` on its own after a countdown), so the variables exist even after you stop it. `CONFIG_BOOTCOMMAND="run a"` makes the trusted image the default and `CONFIG_BOOTDELAY=3` gives you three seconds to stop it.
 
 You compile them into U-Boot rather than store them on the card, on purpose: anyone with the card could edit a boot script or environment file on the unprotected FAT partition to skip the check. TI's default `CONFIG_ENV_IS_NOWHERE=y` gives the environment no storage, so nothing on the card can override them.
 
@@ -254,7 +254,7 @@ With the long values shortened, the output is similar to:
 	};
 ```
 
-Now verify the three FITs on the host against that DTB. `fit_check_sign` runs the same verification code as U-Boot, so its verdict predicts the board's, and a mistake shows up now rather than at the serial console. `-f` names the FIT and `-k` the DTB that holds the keys. Start with the trusted image:
+Now verify the trusted FIT on the host against that DTB. `fit_check_sign` runs the same verification code as U-Boot, so its verdict predicts the board's, and a mistake shows up now rather than at the serial console. `-f` names the FIT and `-k` the DTB that holds the keys:
 
 ```bash
 $UBOOT_OUT/tools/fit_check_sign -f $FIT/zephyr-a.itb -k $UBOOT_OUT/u-boot.dtb
@@ -271,47 +271,10 @@ Signature check OK
 
 The lines cut with `...` list `kernel-1`, check its hash (`sha256+ OK`), print `Loading Kernel Image to 0` (the host tool loads nothing) and report that the FIT has no `fdt` and no `ramdisk`. That's correct: it holds Zephyr and nothing else. The exit code is 0.
 
-Next, check the wrong-key image:
-
-```bash
-$UBOOT_OUT/tools/fit_check_sign -f $FIT/zephyr-b.itb -k $UBOOT_OUT/u-boot.dtb
-```
-
-The output is similar to:
-
-```output
-Verifying Hash Integrity for node 'conf-1'... sha256,rsa2048:key-b-
- error!
-Verification failed for '(null)' hash node in 'conf-1' config node
-Failed to verify required signature 'key-key-a'
-Signature check bad (error 1)
-```
-
-Two checks fail: the DTB has no `key-b`, and `required = "conf"` demands a `key-a` signature on every configuration.
-
-Finally, check the tampered image:
-
-```bash
-$UBOOT_OUT/tools/fit_check_sign -f $FIT/zephyr-tampered.itb -k $UBOOT_OUT/u-boot.dtb
-```
-
-The output is similar to:
-
-```output
-Verifying Hash Integrity for node 'conf-1'... sha256,rsa2048:key-a+
-Verified OK, loading images
-...
-sha256 error!
-Bad hash value for 'hash-1' hash node in 'kernel-1' image node
-Bad Data Hash
-...
-Signature check bad (error 1)
-```
-
-The signature still passes and only the hash fails, as you expected when you [made the tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/4-sign-zephyr/). You'll see the same two lines on the board.
+The optional page [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) runs the same tool on an image signed with `key-b` and on a tampered copy of this one, and expects it to refuse both.
 
 ## What you've accomplished and what's next
 
-You built TI's U-Boot with the public half of `key-a` compiled into its control device tree. Its boot command starts Zephyr only after `bootm` has verified the signature and the hash. The U-Boot source is unchanged: the key is a `.dtsi` and the commands are a `.config` fragment. `fit_check_sign` has shown on the host that the trusted FIT verifies and that it refuses the other two.
+You built TI's U-Boot with the public half of `key-a` compiled into its control device tree. Its boot command starts Zephyr only after `bootm` has verified the signature and the hash. The U-Boot source is unchanged: the key is a `.dtsi` and the commands are a `.config` fragment. `fit_check_sign` has shown on the host that the trusted FIT verifies against the key you compiled in.
 
-Next, you [put the boot files and the three FITs on an SD card](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-board/) and watch U-Boot make the same decisions on the board.
+Next, you [put the boot files and the trusted FIT on an SD card](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-board/) and watch U-Boot make the same decisions on the board.

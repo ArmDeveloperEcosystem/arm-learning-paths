@@ -11,23 +11,9 @@ layout: learningpathall
 
 The board is the TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM). It boots from a micro-SD card, so you need one and a way to write it from your host. The micro-USB connector **J7** is the serial console. It shows up on the host as four serial ports, and the console is the one named SoC UART0, which is usually, but not always, the first. You open it when you boot the board. Power comes from a USB-C supply that supports Power Delivery (PD), on **J17** or **J19**.
 
-The host is an x86_64 PC running Ubuntu 22.04 or 24.04 with at least 20 GB of free disk space. TI ships the SDK installer and its cross compiler as x86_64 binaries, so an Arm host doesn't work here. The TI SDK download alone is 4.5 GB, and it unpacks to 11 GB of U-Boot source, Linux toolchain and prebuilt images. You can delete the installer after the install.
+The host is an x86_64 PC running Ubuntu 22.04 or 24.04 with about 20 GB of free disk space. TI ships the SDK installer and its cross compiler as x86_64 binaries, so an Arm host doesn't work here. The TI SDK download alone is 4.5 GB, and it unpacks to 11 GB of U-Boot source, Linux toolchain and prebuilt images. You can delete the installer after the install.
 
-You also need a Zephyr workspace with Zephyr 4.4 or later and the Zephyr SDK. Set both up as described in the [Zephyr Getting Started Guide](https://docs.zephyrproject.org/latest/develop/getting_started/index.html). This page doesn't repeat those steps.
-
-From inside your Zephyr workspace (for example `cd ~/zephyrproject`, with its Python virtual environment active if you use one), check that the tree knows the board:
-
-```bash
-west boards | grep am62l
-```
-
-The expected output is:
-
-```output
-am62l_evm
-```
-
-If nothing prints, your Zephyr checkout doesn't have the board yet. Update it to 4.4 or later before you continue, because the board files set the address Zephyr is built to run at, and every later page uses that address.
+You build Zephyr with Workbench for Zephyr, an open-source Visual Studio Code extension by Ac6 that installs the Zephyr host tools, imports toolchains and manages West workspaces for you. Follow [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) up to and including its section *Install the required host tools*, then come back here. Skip its toolchain and workspace steps: the AM62L needs Zephyr 4.4 or later and an AArch64 toolchain, and you add both from Workbench when you [build the Zephyr image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/3-build-zephyr/).
 
 ## Install the host packages
 
@@ -70,7 +56,7 @@ Load the file and create the directories the later pages write into:
 
 ```bash
 source $HOME/zephyr-secure-boot/env.sh
-mkdir -p $KEYS $FIT $WORK/app
+mkdir -p $KEYS $FIT
 ```
 
 The first group of variables points into the TI SDK, which you install next. `UBOOT_SRC` is the U-Boot source, `PREBUILT` holds the firmware that runs before U-Boot, and `CROSS` is the cross compiler prefix. `SYSROOT` is there because the SDK's compiler can't find its own libraries without `--sysroot`; the U-Boot pages pass it through the `CC` variable of `make`. `UBOOT_OUT` receives the U-Boot build, `KEYS` holds the signing keys, and `FIT` holds the signed images.

@@ -15,7 +15,7 @@ A Cortex-A processor boots differently. The processor starts in a ROM (read-only
 
 That order is what makes verification possible. The stage that runs before Zephyr can check Zephyr before it starts it. On a Cortex-A board, that stage is usually U-Boot, the open-source bootloader that many Arm boards use to load an operating system from storage and start it.
 
-U-Boot packs a program and its signature into a FIT (Flattened Image Tree) image; a later section on this page explains what one contains. Everyone documents signed FIT for Linux, and secure boot for Zephyr on Cortex-M. Nobody documents the one you actually need: Zephyr, signed, on a Cortex-A. This Learning Path covers that combination on real hardware, the TI AM62L EVM (TI's evaluation board for the AM62L). The FIT, the keys, the way the key goes into U-Boot and the boot command are generic, so you can move them to any Cortex-A board that runs U-Boot. The SDK, the SD card layout and the boot switches are specific to TI.
+A U-Boot host tool packs a program and its signature into a FIT (Flattened Image Tree) image, and U-Boot checks it; a later section on this page explains what one contains. Everyone documents signed FIT for Linux, and secure boot for Zephyr on Cortex-M. Nobody documents the one you actually need: Zephyr, signed, on a Cortex-A. This Learning Path covers that combination on real hardware, the TI AM62L EVM (TI's evaluation board for the AM62L). The FIT, the keys, the way the key goes into U-Boot and the boot command are generic, so you can move them to any Cortex-A board that runs U-Boot. The SDK, the SD card layout and the boot switches are specific to TI.
 
 ## The boot chain on a Cortex-A board
 
@@ -26,6 +26,10 @@ The early firmware is usually three things. The SPL (Secondary Program Loader) i
 You build the SPL as part of U-Boot on a later page. TF-A and OP-TEE come prebuilt in the TI SDK, as `bl1.bin`, `bl31.bin` and `bl32.bin`.
 
 Each stage loads the next one into memory and jumps to it. Secure boot means each stage checks the next one before it jumps. A check is a signature verification: the stage holds a public key, and it refuses to run anything that isn't signed by the matching private key. If one link skips the check, everything after that link runs unverified.
+
+![Diagram of a generic Cortex-A boot chain in four boxes: the boot ROM, the vendor's early boot stages, U-Boot, and Zephyr inside a FIT image. The first two arrows are checked by the vendor's ROM and firmware; the last arrow, from U-Boot to Zephyr, is checked by U-Boot with your key and is the link this Learning Path adds.#center](images/boot-chain-generic.svg "A Cortex-A boot chain, and the link this Learning Path adds")
+
+The first three boxes differ from one silicon vendor to the next, in names, file formats and signing tools. The last arrow is the same everywhere, because it's U-Boot's own FIT verification.
 
 On the AM62L, which has only Cortex-A53 cores, the chain that TI's U-Boot documentation for the K3 family describes has four steps. One TI name appears in it: TIFS (TI Foundational Security) is TI's security firmware, and it checks the boot files that the ROM doesn't. The four steps are:
 
@@ -38,7 +42,7 @@ On the AM62L, which has only Cortex-A53 cores, the chain that TI's U-Boot docume
 
 In plain words: TI's chip checks the first three files itself, and U-Boot checks the fourth. That fourth check is the one you set up, and Zephyr is the file it checks. You build `tiboot3.bin`, `tispl.bin` and `u-boot.img` when you [build U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/) and copy them to the card when you [prepare the SD card](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-board/).
 
-![Diagram of the AM62L boot chain from the boot ROM through tiboot3.bin, tispl.bin and u-boot.img to the Zephyr FIT image, with an arrow at each step showing which stage checks the next one. Notice that the last arrow, from U-Boot to Zephyr, is the check this Learning Path adds.#center](images/boot-chain.svg "The AM62L boot chain and the check at each step")
+![Diagram of the AM62L boot chain from the boot ROM through tiboot3.bin, tispl.bin and u-boot.img to the Zephyr FIT image. Under each file the diagram names who checks it: the ROM checks tiboot3.bin, TIFS checks tispl.bin and u-boot.img, and U-Boot checks the FIT signature before it starts Zephyr with go.#center](images/boot-chain.svg "The same chain on the AM62L, with TI's file names")
 
 ## What a FIT image is
 
@@ -56,22 +60,22 @@ The configuration is the node U-Boot boots from: it names the image (`kernel = "
 
 The signature uses RSA (Rivest-Shamir-Adleman), the public and private key pair described earlier. This Learning Path uses `sha256,rsa2048`: a SHA-256 hash of the data, signed with a 2048-bit RSA key.
 
-The public key lives inside U-Boot's own device tree, called the control device tree, under a `/signature` node, with one subnode per key. One property of that key node matters most: `required = "conf"`, where `conf` is short for configuration. It means every configuration in every FIT must carry a valid signature by this key, or U-Boot refuses to load it. That property is what makes the check fail closed: when U-Boot can't verify a FIT, nothing boots. Without `required`, the check fails open: a FIT with no signature at all still boots, as if no check existed.
+The public key lives inside U-Boot's own device tree, called the control device tree, under a `/signature` node, with one subnode per key. One property of that key node matters most: `required = "conf"`, where `conf` is short for configuration. It means every configuration in every FIT must carry a valid signature by this key, or U-Boot refuses to load it. That property is the fail-closed rule: when U-Boot can't verify a FIT, nothing boots. Without `required`, the check fails open: a FIT with no signature at all still boots, as if no check existed.
 
 ![Diagram of a signed FIT image next to U-Boot's control device tree. The FIT contains an images node with the Zephyr binary and its hash, and a configurations node with a signature. The control device tree contains a /signature node holding the public key with required set to conf. Arrows show the signature covering the configuration and the hash node, and the hash covering the image bytes.#center](images/fit-signature.svg "What the signature and the hash each cover in a FIT image")
 
-The diagram shows one detail that matters later. The signature does not cover the bytes; it covers the hash of the bytes. `mkimage` signs the configuration node plus the hash node of each image the configuration lists. The hash node covers the image bytes. The signature is what makes that hash trustworthy, so between them they cover everything. So if someone flips a byte in the image after signing, the signature still verifies, and the hash check is what fails. You'll see exactly that on the board when you boot a tampered image.
+The diagram shows one detail that matters later. The signature does not cover the bytes; it covers the hash of the bytes. `mkimage` signs the configuration node plus the hash node of each image the configuration lists. The hash node covers the image bytes. The signature is what makes that hash trustworthy, so between them they cover everything. The optional page [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) shows what that split means in practice: a tampered image passes the signature check and fails the hash check.
 
 ## What this Learning Path adds
 
-What this Learning Path adds is the last link of the chain: U-Boot verifies the Zephyr FIT and only then jumps to Zephyr with `go`, U-Boot's plain jump-to-an-address command. You don't change a line of U-Boot source. Both the public key and the boot command go in as Kconfig options when you build U-Boot, so you can carry them to a newer U-Boot without a patch. U-Boot's job here is to check Zephyr, not to boot an operating system; the page [Build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/) shows how the boot command does that.
+This Learning Path adds the last link of the chain: U-Boot verifies the Zephyr FIT and only then jumps to Zephyr with `go`, U-Boot's plain jump-to-an-address command. You don't change a line of U-Boot source. Both the public key and the boot command go in as Kconfig options when you build U-Boot, so you can carry them to a newer U-Boot without a patch. U-Boot's job here is to check Zephyr, not to boot an operating system; the page [Build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/) shows how the boot command does that.
 
 What this Learning Path doesn't do is put your key into the chip. TI devices hold the owner's key in eFuses, one-time-programmable bits in silicon. A chip with that key fused is called HS-SE (High Security, Security Enforced): it refuses any boot file not signed with the owner's key. A chip without it yet is HS-FS (High Security, Field Securable): the check still runs, but with no key to compare against, any key passes.
 
 The EVM ships as HS-FS, and its first three boot files are signed with TI's development key. So on this board the first three checks run but can't refuse anything, while the fourth, U-Boot checking Zephyr, refuses on HS-FS and HS-SE alike. You see the device type on the serial console when you boot the board.
 
 {{% notice Note %}}
-Moving a device to HS-SE, fusing your own key and re-signing the boot files with it, is a separate TI procedure and out of scope here. The page [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-production/) lists what that step changes and what else production needs.
+Moving a device to HS-SE, fusing your own key and re-signing the boot files with it, is a separate TI procedure and out of scope here. The page [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) lists what that step changes and what else production needs.
 {{% /notice %}}
 
 ## What you've learned and what's next

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="260" viewBox="0 0 960 260" font-family="Arial, Helvetica, sans-serif" font-size="14">
+  <title>Generic Cortex-A boot chain with U-Boot verifying the Zephyr FIT image</title>
+  <defs>
+    <marker id="ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555"/>
+    </marker>
+    <marker id="gb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b5fa5"/>
+    </marker>
+  </defs>
+  <rect width="960" height="260" fill="#ffffff"/>
+
+  <!-- brackets: vendor checks cover early stages and U-Boot; the last arrow is ours -->
+  <text x="430" y="30" text-anchor="middle" fill="#555" font-size="13">Checked by the silicon vendor's ROM and firmware, with the vendor's or your fused key</text>
+  <path d="M 250 42 L 250 52 L 720 52 L 720 42" fill="none" stroke="#999" stroke-width="1"/>
+  <text x="840" y="30" text-anchor="middle" fill="#0b5fa5" font-size="13" font-weight="bold">Checked by U-Boot with your key</text>
+  <path d="M 745 42 L 745 52 L 940 52 L 940 42" fill="none" stroke="#0b5fa5" stroke-width="1.5"/>
+
+  <!-- boxes -->
+  <rect x="20" y="80" width="150" height="90" rx="6" fill="#f4f4f4" stroke="#888"/>
+  <text x="95" y="112" text-anchor="middle" font-weight="bold">Boot ROM</text>
+  <text x="95" y="134" text-anchor="middle" fill="#555" font-size="12">inside the SoC</text>
+  <text x="95" y="152" text-anchor="middle" fill="#555" font-size="12">runs first, cannot change</text>
+
+  <rect x="250" y="80" width="230" height="90" rx="6" fill="#f4f4f4" stroke="#888"/>
+  <text x="365" y="112" text-anchor="middle" font-weight="bold">Vendor early boot stages</text>
+  <text x="365" y="134" text-anchor="middle" fill="#555" font-size="12">SPL, TF-A, OP-TEE, security firmware</text>
+  <text x="365" y="152" text-anchor="middle" fill="#555" font-size="12">bring up DRAM and the Secure world</text>
+
+  <rect x="560" y="80" width="160" height="90" rx="6" fill="#e8f1fa" stroke="#0b5fa5" stroke-width="1.5"/>
+  <text x="640" y="112" text-anchor="middle" font-weight="bold">U-Boot</text>
+  <text x="640" y="134" text-anchor="middle" fill="#333" font-size="12">holds your public key</text>
+  <text x="640" y="152" text-anchor="middle" fill="#333" font-size="12">in its device tree</text>
+
+  <rect x="790" y="80" width="150" height="90" rx="6" fill="#e8f1fa" stroke="#0b5fa5" stroke-width="1.5"/>
+  <text x="865" y="112" text-anchor="middle" font-weight="bold">Zephyr</text>
+  <text x="865" y="134" text-anchor="middle" fill="#333" font-size="12">inside a FIT image</text>
+  <text x="865" y="152" text-anchor="middle" fill="#333" font-size="12">signed with your key</text>
+
+  <!-- arrows -->
+  <line x1="170" y1="125" x2="248" y2="125" stroke="#555" stroke-width="2" marker-end="url(#ga)"/>
+  <line x1="480" y1="125" x2="558" y2="125" stroke="#555" stroke-width="2" marker-end="url(#ga)"/>
+  <line x1="720" y1="125" x2="788" y2="125" stroke="#0b5fa5" stroke-width="2.5" marker-end="url(#gb)"/>
+
+  <!-- what each arrow means -->
+  <text x="209" y="200" text-anchor="middle" fill="#555" font-size="12">ROM loads and checks</text>
+  <text x="519" y="200" text-anchor="middle" fill="#555" font-size="12">firmware loads and checks</text>
+  <text x="754" y="200" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="bold">U-Boot verifies the</text>
+  <text x="754" y="216" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="bold">FIT signature, then go</text>
+</svg>

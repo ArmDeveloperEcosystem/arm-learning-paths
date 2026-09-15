@@ -1,6 +1,6 @@
 ---
 title: Create signing keys and sign the Zephyr image into a FIT
-description: Build mkimage from the TI U-Boot tree, generate two RSA keys with OpenSSL, and sign the Zephyr binary into a FIT image, plus the wrong-key and tampered images that U-Boot must refuse.
+description: Build mkimage from the TI U-Boot tree, generate two RSA keys with OpenSSL, and sign the Zephyr binary into a FIT image that U-Boot can verify.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -49,7 +49,7 @@ If the `tools` build stops early, the fix depends on where it stops:
 
 RSA is the public-key algorithm U-Boot's FIT code verifies with. An RSA key pair has a private half that signs and a public half that verifies. The private key stays on the host. Only the public key goes into U-Boot, on the next page.
 
-You create two pairs. `key-a` is the key U-Boot trusts. `key-b` exists only to be rejected: it's a real, valid key, but U-Boot never sees its public half. A key U-Boot doesn't know must fail exactly like no signature at all, and `key-b` is how you prove that on the board.
+You create two pairs. `key-a` is the key U-Boot trusts. `key-b` exists only to be rejected: it's a real, valid key, but U-Boot never sees its public half. You use `key-b` on the optional test page, [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/), to prove that U-Boot refuses a key it doesn't know.
 
 Generate both pairs with OpenSSL:
 
@@ -74,7 +74,7 @@ key-a.crt  key-a.key  key-b.crt  key-b.key
 The algorithm here is `sha256,rsa2048`, which is enough for a demo. The production page covers stronger keys and where to keep them.
 
 {{% notice Warning %}}
-These are throwaway development keys, generated on the build machine. Production keys are generated and kept elsewhere. See [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-production/).
+These are throwaway development keys, generated on the build machine. Production keys are generated and kept elsewhere. See [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/).
 {{% /notice %}}
 
 ## Write the FIT source
@@ -92,7 +92,7 @@ cat > $FIT/zephyr-a.its <<EOF
 	images {
 		kernel-1 {
 			description = "Zephyr RTOS image";
-			data = /incbin/("$WORK/build/hello/zephyr/zephyr.bin");
+			data = /incbin/("$WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin");
 			type = "kernel";
 			arch = "arm64";
 			os = "u-boot";
@@ -120,7 +120,7 @@ EOF
 
 A few properties decide how U-Boot treats this image.
 
-`bootm` is the U-Boot command that verifies and unpacks a FIT. It accepts two labels for the main image, `kernel` and `kernel_noload`, and `type = "kernel"` is the plain one. Zephyr is the kernel here, so the label is right.
+`bootm`, the command you met on the boot-chain page, accepts two labels for the main image, `kernel` and `kernel_noload`, and `type = "kernel"` is the plain one. Zephyr is the kernel here, so the label is right.
 
 `os = "u-boot"` is the property that makes this work. U-Boot has no `zephyr` value for `os`. With `os = "linux"`, U-Boot would treat the payload as a Linux kernel: look for a device tree in the FIT, patch it, and parse the kernel header. `u-boot` is U-Boot's slot for a standalone program: the payload is verified and copied, nothing else. That's why the FIT needs no device tree and Zephyr needs no Linux boot protocol.
 
@@ -165,48 +165,8 @@ $UBOOT_OUT/tools/mkimage -l $FIT/zephyr-a.itb
 
 The listing is the same one `mkimage` printed when it signed the file.
 
-## Make the two images that must fail
-
-A verifier you've only seen accept images isn't proven. You need two images it must refuse: one signed with the wrong key, and one changed after signing.
-
-For the wrong-key image, copy the source with `sed`, swapping `key-a` for `key-b` and the `hello` binary for `hello_b`, then sign it the same way:
-
-```bash
-sed 's/key-a/key-b/g; s#/hello/#/hello_b/#' $FIT/zephyr-a.its > $FIT/zephyr-b.its
-$UBOOT_OUT/tools/mkimage -f $FIT/zephyr-b.its -k $KEYS $FIT/zephyr-b.itb
-```
-
-The listing now shows `Sign algo:    sha256,rsa2048:key-b`. This image proves that a valid signature isn't enough: U-Boot must refuse a key it doesn't have. The payload is the `IMAGE B` program, so if it ever ran, the console would say so.
-
-For the tampered image, copy the trusted `.itb` and overwrite one byte inside the payload:
-
-```bash
-cp $FIT/zephyr-a.itb $FIT/zephyr-tampered.itb
-printf '\xff' | dd of=$FIT/zephyr-tampered.itb bs=1 seek=32768 conv=notrunc 2>/dev/null
-```
-
-`bs=1` makes `dd` count in bytes, `seek=32768` skips to that offset, and `conv=notrunc` keeps the rest of the file intact. The first `0xe8` bytes of the file belong to the FIT itself, and the 58340-byte Zephyr binary follows; you'll see that as `Data Start: 0x900000e8` on the board's console. So offset 32768 (`0x8000`) lands inside Zephyr's code, not in the FIT's own nodes.
-
-Check that the copy now differs from the original:
-
-```bash
-cmp $FIT/zephyr-a.itb $FIT/zephyr-tampered.itb
-```
-
-The output is similar to:
-
-```output
-/home/user/zephyr-secure-boot/fit/zephyr-a.itb /home/user/zephyr-secure-boot/fit/zephyr-tampered.itb differ: byte 32769, line 94
-```
-
-`cmp` counts bytes from 1, and the line number varies with the build. If `cmp` prints nothing, that byte was already `0xff` in your build; pick another offset inside the payload, for example `seek=32800`, and run the `dd` and `cmp` commands again.
-
-This image proves that U-Boot catches a change made after signing. The signature still verifies and the hash fails, for the reason the boot-chain page gave: the signature covers the hash of the bytes, not the bytes. You'll watch both steps on the board.
-
-All three `.itb` files are the same size, 60198 bytes in this build. Size tells you nothing; only verification does.
-
 ## What you've accomplished and what's next
 
-You've built `mkimage` and `fit_check_sign` from the TI U-Boot tree, created two RSA key pairs, and signed Zephyr into `$FIT/zephyr-a.itb`. You've also made the two images that must fail, `zephyr-b.itb` and `zephyr-tampered.itb`.
+You've built `mkimage` and `fit_check_sign` from the TI U-Boot tree, created two RSA key pairs, and signed Zephyr into `$FIT/zephyr-a.itb`.
 
-You can't verify any of them yet: U-Boot doesn't have the key. On the next page, [Build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), you compile `key-a`'s public half into U-Boot's device tree and write the boot command. You then check all three images offline with `fit_check_sign` before touching the board.
+You can't verify it yet: U-Boot doesn't have the key. On the next page, [Build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), you compile `key-a`'s public half into U-Boot's device tree and write the boot command. You then check the image offline with `fit_check_sign` before touching the board.
