@@ -1,5 +1,5 @@
 ---
-title: Convert SmolVLA to ExecuTorch for Arm CPU
+title: Convert SmolVLA to ExecuTorch for inference on Arm CPUs
 description: Convert the SmolVLA vision-language-action model from PyTorch to ExecuTorch, run FP32 and INT8 variants on an Arm CPU, and compare their outputs and latency.
 
 minutes_to_complete: 60
