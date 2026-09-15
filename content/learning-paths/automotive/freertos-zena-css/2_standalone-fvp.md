@@ -65,7 +65,7 @@ The [Zephyr board description for Safety Island Cluster 1](https://gitlab.arm.co
 
 With the configuration file [fvp_R82AE_config.txt](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/fvp_R82AE_config.txt), the FVP_BaseR_Cortex-R82AE can be configured to expose the same amount of LLRAM at the same base address. The Reset vector Address (RVBAR) can be configured to boot from this address.
 
-```ini
+```text
 cluster0.memory.has_llram=1
 cluster0.memory.llram_base=0x140000000
 cluster0.memory.llram_enable_at_reset=1
@@ -79,12 +79,12 @@ cluster0.cpu3.RVBAR=0x140000000
 Other configurations:
 - Use MPU mode for the Cortex R82AE.
 - Configure 4 cores.
-- Enable the automatically starts refcounter.
+- Start the reference counter automatically.
 - Model architectural cache state.
 - Disable semihosting.
 - Enable UART.
 
-```ini
+```text
 cluster0.VMSA_supported=0
 cluster0.NUM_CORES=4
 bp.refcounter.non_arch_start_at_default=1
@@ -108,7 +108,7 @@ The generic demo isn't sufficient for the Cortex-R82AE FVP. Check that the port 
 - The application uses a PL011 UART instead of semihosting.
 - The FVP protected MPU and shared low-latency RAM (LLRAM) need explicit configuration.
 - The image entry point must be set to the first address of the code section.
-- Configure the timer frequency in the highest exception Level.
+- Configure the timer frequency at the highest Exception Level.
 
 The reference FVP configuration uses four cores and an 8 MiB LLRAM window. The address range is divided into separate code and data regions:
 
@@ -120,25 +120,47 @@ The reference FVP configuration uses four cores and an 8 MiB LLRAM window. The a
 All four reset vector base address registers (RVBAR) point to `0x140000000`.
 
 
-For a GCC build, update the [GNU linker script](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/gnu_linker_script.ld#L20) to divide the 8 MiB LLRAM into separate 4 MiB code and data regions:
+Update the linker description for your selected compiler. For GCC, modify the [GNU linker script](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/gnu_linker_script.ld#L20). For Arm Compiler for Embedded, make the equivalent changes in the [scatter file](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/armclang_linker_script.sct#L18):
 
-```text
+{{< tabpane code=true >}}
+  {{< tab header="GCC" language="text" >}}
 MEMORY
 {
     ROM (rwx) : ORIGIN = 0x140000000, LENGTH = 4M
     RAM (rwx) : ORIGIN = 0x140400000, LENGTH = 4M
 }
-```
 
-<details>
-<summary>Configure the Arm Compiler scatter file</summary>
+/* Sections */
+SECTIONS
+{
+    . = ORIGIN(ROM);  /* Place the reset entry at the LLRAM base. */
 
-For an Arm Compiler build, make the equivalent changes in the [scatter file](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/armclang_linker_script.sct#L18):
-
-```text
+    /* Code section */
+    . = ALIGN(64);
+    .privileged_functions : ALIGN(64)
+    {
+        __privileged_functions_start__ = .;
+        /* RVBAR points here, so the reset entry must be the first ROM bytes. */
+        KEEP(*(.boot))
+        /* VBAR_EL1 ignores bits [10:0], so vector tables must be 2 KiB aligned. */
+        . = ALIGN(0x800);
+        KEEP(*(.vectors))  /* Vector table */
+        KEEP(*(.init))
+        KEEP(*(.fini))
+        *(privileged_functions)
+        . = ALIGN(64);
+        __privileged_functions_end__ = . - 1;
+    } > ROM
+[...]
+}
+  {{< /tab >}}
+  {{< tab header="Arm Compiler for Embedded" language="text" >}}
 #define __ROM_START (0x140000000)
 #define __RAM_START (0x140400000)
 
+;===============================================================================
+;  LOAD REGION:  first 4 MB of the 8 MB LLRAM window
+;===============================================================================
 LOAD_REGION __ROM_START
 {
     ER_ROM_BOOT __ROM_START ALIGN 64
@@ -152,14 +174,12 @@ LOAD_REGION __ROM_START
         *.o (.vectors +First)
         *(privileged_functions)
     }
-
+[...]
 }
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
-The `.boot +First` selector places the reset code first, at `0x140000000`. The data sections begin at `0x140400000`.
-
-
-</details>
+Both linker descriptions place the reset code first at `0x140000000` and the data sections at `0x140400000`.
 
 ## Compile and run the standalone platform
 
@@ -240,7 +260,7 @@ FVP_BaseR_Cortex-R82AE \
 
 The Zena CSS will use the raw-binary loading method. Validate it here first, where the standalone FVP provides a simpler environment for troubleshooting.
 
-#### Interact with the demo though UART
+#### Interact with the demo through UART
 
 At the application prompt, enter `ping`. The four tasks exchange a message in a cycle across the four cores, as shown in the terminal output:
 
@@ -337,9 +357,10 @@ The lines before `CoreEvent_CURRENT_SPx_SYNC` show the execution leading to the 
 - `FAR_EL1` contains the address associated with an instruction or data access fault, when valid for that exception.
 - `SPSR_EL1` captures the processor state at the time of the exception.
 
-Together, this information can reveal an incorrect branch target, an invalid memory access, a stack error, or an unexpected exception-level transition. For an SMP failure, compare the trace events from all four cores. This can show whether a core failed to start, did not receive an interprocessor interrupt, or accessed shared state in an unexpected order. arm also provides Arm also provides Tarmac Trace Utilities for indexing and browsing large trace files.
+Together, this information can reveal an incorrect branch target, an invalid memory access, a stack error, or an unexpected exception-level transition. For an SMP failure, compare the trace events from all four cores. This can show whether a core failed to start, did not receive an interprocessor interrupt, or accessed shared state in an unexpected order. Arm also provides Tarmac Trace Utilities for indexing and browsing large trace files.
 
-In this example, we can retrieve the relevant information from the the tarmac trace.
+Retrieve the relevant information from the Tarmac trace:
+
 ```output
 X0 = 0x016E3600, or 24 MHz
 ELR_EL1 = 0x8000F040, the address of the failing MSR

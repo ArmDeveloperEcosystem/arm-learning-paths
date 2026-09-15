@@ -7226,5 +7226,13 @@ GICR
 Jaxson
 zena
 DKERNEL
-AERM
+AEMR
 mpu
+rwx
+smb
+smd
+sysroots
+llram
+buildlist
+pn
+rse

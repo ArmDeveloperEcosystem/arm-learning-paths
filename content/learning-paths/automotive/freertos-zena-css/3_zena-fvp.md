@@ -97,10 +97,16 @@ Don't use `GICR_TYPER.Last` to discover all Cluster 1 redistributors. In GIC vie
 
 To inspect the GIC address map exposed by the model, run:
 
-```bash
-build/tmp/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+{{< tabpane code=true >}}
+  {{< tab header="Baremetal" language="bash" >}}
+build/tmp_baremetal/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.gic.print-memory-map=1
-```
+  {{< /tab >}}
+  {{< tab header="Virtualization" language="bash" >}}
+build/tmp_virtualization/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+  -C css.smb.si.gic.print-memory-map=1
+  {{< /tab >}}
+{{< /tabpane >}}
 
 The output includes the distributor and redistributor regions for each view:
 
@@ -201,23 +207,39 @@ Selecting the platform `zena_css_fvp_direct_load` configures the following eleme
 
 From the Zena CSS `yocto_project` directory, start the Safety Island cluster and load a binary directly. First, check the workflow with the stack's `si-hello-world.bin`:
 
-```bash
-<yocto project>/build/tmp-<baremetal|virtualization>/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+{{< tabpane code=true >}}
+  {{< tab header="Baremetal" language="bash" >}}
+<yocto project>/build/tmp_baremetal/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.cluster1.core_power_on_by_default=1 \
   --data "css.smb.si.cluster1_llram=build/tmp/deploy/images/aspen/si-hello-world.bin@0x0000"
-```
+  {{< /tab >}}
+  {{< tab header="Virtualization" language="bash" >}}
+<yocto project>/build/tmp_virtualization/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+  -C css.smb.si.cluster1.core_power_on_by_default=1 \
+  --data "css.smb.si.cluster1_llram=build/tmp/deploy/images/aspen/si-hello-world.bin@0x0000"
+  {{< /tab >}}
+{{< /tabpane >}}
 
 The `core_power_on_by_default` parameter starts Cluster 1 without waiting for the normal RSE release sequence. The `--data` parameter writes the binary at offset `0x0000` in Cluster 1 LLRAM.
 
 After the baseline binary boots, run the FreeRTOS image with the additional model configuration needed for the FreeRTOS timer and SMP operation:
 
-```bash
-<yocto project>/build/tmp-<baremetal|virtualization>/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+{{< tabpane code=true >}}
+  {{< tab header="Baremetal" language="bash" >}}
+<yocto project>/build/tmp_baremetal/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.cluster1.core_power_on_by_default=1 \
   -C css.smb.si.CL1_LLRAM_config=15 \
   -C css.smb.smd.ref_counter.non_arch_start_at_default=1 \
   --data "css.smb.si.cluster1_llram=/absolute/path/to/FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.bin@0x0000"
-```
+  {{< /tab >}}
+  {{< tab header="Virtualization" language="bash" >}}
+<yocto project>/build/tmp_virtualization/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+  -C css.smb.si.cluster1.core_power_on_by_default=1 \
+  -C css.smb.si.CL1_LLRAM_config=15 \
+  -C css.smb.smd.ref_counter.non_arch_start_at_default=1 \
+  --data "css.smb.si.cluster1_llram=/absolute/path/to/FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.bin@0x0000"
+  {{< /tab >}}
+{{< /tabpane >}}
 
 Each `-C component.parameter=value` argument overrides an FVP model parameter. In this command, the value `1` enables a Boolean option. The three overrides change the FVP startup behavior as follows:
 

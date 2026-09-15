@@ -50,9 +50,9 @@ In the standard Zena CSS boot process, SCP firmware configures the GIC multi-vie
 
 To validate FreeRTOS as a drop-in replacement for the Cluster 1 Zephyr image, FreeRTOS must use the same GIC view and redistributor addresses as the original firmware. Otherwise, interrupt configuration no longer matches the platform state.
 
-For more background about, see [GIC Multiple Views in the Arm Zena CSS documentation](https://arm-zena-css.docs.arm.com/en/latest/design/components.html#gic-multiple-views).
+For more information, see [GIC Multiple Views in the Arm Zena CSS documentation](https://arm-zena-css.docs.arm.com/en/latest/design/components.html#gic-multiple-views).
 
-The published demo already defines both configurations. Selecting `zena_css_fvp` configures in `FreeRTOSConfig.h` the GIC distributor and redistributor base addresses to the GIC View 2:
+The published demo already defines both configurations. Selecting `zena_css_fvp` configures the GIC distributor and redistributor base addresses for GIC View 2 in `FreeRTOSConfig.h`:
 
 ```c
 #elif defined( R82AE_PLATFORM_ZENA_CSS_FVP )
@@ -133,15 +133,15 @@ The goal of this exercise is to replace the SI CL1 Zephyr image with a FreeRTOS 
 
 The Zena CSS documentation indicates that the SI CL1 firmware is loaded by the RSE [boot flow](https://arm-zena-css.docs.arm.com/en/v2.2.1/design/boot_process.html#boot-flow).
 
-The Zena CSS RSE image layout described in the [image layout](https://arm-zena-css.docs.arm.com/en/v2.2.1/design/boot_process.html#images-layout) indicate where SI CL1 image is packaged.
+The [Zena CSS RSE image layout](https://arm-zena-css.docs.arm.com/en/v2.2.1/design/boot_process.html#images-layout) indicates where the SI CL1 image is packaged.
 
-It should be noted that the SI CL1 the image in `rse-flash-image.img` is signed, so simply updating the image in the binary won't be enough.
+The SI CL1 image in `rse-flash-image.img` is signed, so replacing the image within the binary is not sufficient.
 
-So The next step is to identify which Yocto recipe is responsible for creating this image.
+The next step is to identify the Yocto recipe responsible for creating this image.
 
 ### Locate the recipe responsible for the RSE image
 
-Since the zephyr image are in `rse-flash-image.img`, search for recipes related to firmware image generation.
+Because the Zephyr image is packaged in `rse-flash-image.img`, search for recipes related to firmware image generation.
 
 From the `arm-zena-css` directory, find the RSE image definition:
 
@@ -175,7 +175,7 @@ Open [firmware-fvp-rd-aspen.bb](https://gitlab.arm.com/automotive-and-industrial
 
 The objective is to determine where the Zephyr SI CL1 firmware is added to the image packaging flow.
 
-Since the target component is SI CL1, search the recipe for terms such as `cl1`and `safety_insland`:
+Because the target component is SI CL1, search the recipe for terms such as `cl1` and `safety_island`:
 
 Inside the image-signing logic you will find commands similar to:
 
@@ -274,7 +274,7 @@ Launch the Zena CSS FVP in a tmux session:
 kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
 ```
 
-Wait for the platform to complete boot and access the the Safety Island Cluster 1 console.
+Wait for the platform to complete boot, and then access the Safety Island Cluster 1 console.
 
 Execute:
 
@@ -299,7 +299,7 @@ Successful execution confirms that:
 - GIC Multi View 2 has been configured by the Safety Island CL0 (SCP).
 - FreeRTOS can replace Zephyr in the complete Zena CSS software stack.
 
-## What you have learned
+## What you've accomplished and what's next
 
 You have validated a FreeRTOS image in the complete Zena CSS software stack.
 

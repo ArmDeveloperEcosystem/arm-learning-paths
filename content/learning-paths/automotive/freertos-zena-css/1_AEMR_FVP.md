@@ -1,5 +1,5 @@
 ---
-title: Build the Cortex-R82  FreeRTOS demo
+title: Build the Cortex-R82 FreeRTOS demo
 description: Build and run the existing FreeRTOS SMP MPU demo on the Cortex-R82 AEM FVP before adapting it for Cortex-R82AE.
 weight: 2
 
@@ -81,7 +81,7 @@ Unlike the application used later in this Learning Path, this example does not p
 
 ### Understand the baseline limitations
 
-The example is a useful starting point, but its startup and core-identification code depend on behavior provided by `FVP_BaseR_AEMv8R` configured for `aarch64` but is not strictly following the Cortex-R82 and Cortex-R82AE specification.
+The example is a useful starting point, but its startup and core-identification code depend on behavior provided by `FVP_BaseR_AEMv8R` configured for `aarch64`. This behavior does not strictly follow the Cortex-R82 and Cortex-R82AE specifications.
 
 1. The example supports entry at Exception Level 1 (EL1) only. Its `fvp_config.txt` file sets `cluster0.has_pl2=0`, so the AEM FVP starts the application without EL2. The boot code reads `CurrentEL` and enters an error loop unless the value indicates EL1. A platform that starts the cores at EL2 therefore cannot use this startup path unchanged.
 

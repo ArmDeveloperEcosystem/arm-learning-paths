@@ -24,8 +24,6 @@ This section explains how to:
 The steps also demonstrate a reusable Yocto investigation method: start from a known build output, trace its dependencies, identify the interface between recipes, implement a compatible replacement, and validate the complete path.
 
 
-# Detailed integration walkthrough
-
 ## Investigate how Yocto selects the SI CL1 image
 
 The rest of this section explains how the integration was derived and how to validate each boundary independently.
@@ -135,7 +133,7 @@ Create `sw-ref-stack/yocto/kas/si-cl1-zephyr.yml` and add the following content:
 ```
 
 
-In (`yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc`)(https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc), add a conditional include for the `freertos` distro feature:
+In [`yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc), add a conditional include for the `freertos` distro feature:
 
 ```diff
  require ${@bb.utils.contains('DISTRO_FEATURES', 'zephyr', \
@@ -164,7 +162,7 @@ The remaining task is to make `freertos-demos-cl1.bb` build the FreeRTOS applica
 
 Use `yocto/meta-zena-css-bsp/recipes-bsp/si-hello-world/si-hello-world.bb` as a bare-metal example. Inspect `zephyr-environment.txt` to understand the expanded `do_install` and `do_deploy` behavior. Build the recipe after each meaningful addition so BitBake can report any missing requirements.
 
-Create the recipe directory in arm-zena-css/:
+Create the recipe directory in `arm-zena-css/`:
 
 ```bash
 mkdir -p yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel
@@ -248,7 +246,7 @@ After applying the packaging, version-tracking, and compiler fixes, the complete
 
 <summary>Show the complete freertos-demos-cl1.bb recipe.</summary>
 
-```bitbake { line_numbers = true }
+```bitbake 
 # SPDX-License-Identifier: MIT
 
 SUMMARY = "FreeRTOS Demo on Safety Island Cluster 1"
@@ -349,21 +347,35 @@ Build either the baremetal or virtualization stack with the FreeRTOS selection:
 kas build
 ```
 
-This example builds `baremetal-image` and its firmware dependencies. A successful build ends with a task summary reporting that all tasks succeeded.
+Depending on the selected configuration, this builds `baremetal-image` or `virtualization-image` and its firmware dependencies. A successful build ends with a task summary reporting that all tasks succeeded.
 
 Check the recipe dependency graph. `pn-buildlist` must contain `freertos-demos-cl1` instead of `zephyr-demos-cl1`:
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Baremetal" language="bash" >}}
+```
 kas shell -c 'bitbake -g baremetal-image'
 grep -E 'freertos-demos-cl1|zephyr-demos-cl1' build/pn-buildlist
 ```
+  {{< /tab >}}
+  {{< tab header="Virtualization" language="bash" >}}
+kas shell -c 'bitbake -g virtualization-image'
+grep -E 'freertos-demos-cl1|zephyr-demos-cl1' build/pn-buildlist
+  {{< /tab >}}
+{{< /tabpane >}}
 
 The dependency graph proves that BitBake selected the FreeRTOS producer. Next, inspect the deployed FreeRTOS artifacts and final RSE flash image:
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Baremetal" language="bash" >}}
 ls build/tmp_baremetal/deploy/images/fvp-rd-aspen/freertos-demos-cl1.bin
 ls build/tmp_baremetal/deploy/images/fvp-rd-aspen/rse-flash-image.img
-```
+  {{< /tab >}}
+  {{< tab header="Virtualization" language="bash" >}}
+ls build/tmp_virtualization/deploy/images/fvp-rd-aspen/freertos-demos-cl1.bin
+ls build/tmp_virtualization/deploy/images/fvp-rd-aspen/rse-flash-image.img
+  {{< /tab >}}
+{{< /tabpane >}}
 
 Old artifacts can remain in the deploy directory, so file presence alone doesn't prove which recipe was selected. Use the resolved `DISTRO_FEATURES` and `pn-buildlist` checks as the authoritative evidence.
 
@@ -392,7 +404,7 @@ The CLI also accepts `pong`, `pang`, and `pung`. Each command starts the same fo
 
 Finally, return to `kas menu`, select Zephyr, and rebuild. Verify that the original SI CL1 firmware still boots. This last check matters because the integration adds a choice to an existing product configuration. Testing both branches confirms that FreeRTOS works without regressing the default Zephyr path.
 
-# Reproduce the integration
+## Reproduce the integration
 
 The [`freertos-yocto-integration.patch`](freertos-yocto-integration.patch) file combines the FreeRTOS recipe, GCC 13 compatibility patch, machine configuration, and Kconfig selection changes described later in this section. It applies to a clean [`Zena CSS v2.2`](https://arm-zena-css.docs.arm.com/en/v2.2/user_guide/reproduce.html#download) folder.
 
@@ -432,12 +444,10 @@ At the SI CL1 console, enter `ping`. A successful four-core exchange confirms th
 
 
 
-## What was accomplished
+## What you've accomplished and what's next
 
 The Cortex-R82AE FreeRTOS port is now integrated as a reproducible Yocto recipe and selectable as the Zena CSS SI CL1 firmware. The implementation was derived by tracing the working Zephyr flow, identifying the interface between its producer and consumer recipes, and implementing FreeRTOS against the same interface.
 
 Each boundary was verified separately: menu selection, distro features, recipe dependency, deployed artifact, signed flash image, and runtime output. The same investigation pattern can be used to replace or add other firmware components without manually modifying their consuming image recipes.
-
-## Next steps
 
 The next platform-integration step is to add Message Handling Unit (MHU) communication backed by a shared-memory buffer. This provides communication between the FreeRTOS Safety Island application and the primary compute domain, replacing the equivalent inter-processor communication path used by the Zephyr application.
