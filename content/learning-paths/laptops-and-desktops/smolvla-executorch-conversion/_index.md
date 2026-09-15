@@ -37,13 +37,13 @@ generated_summary_faq:
     Then, you'll quantize eligible operations to INT8 with TorchAO and reuse the same inputs to compare
     model outputs, latency, and `.pte` sizes.
   faqs:
-  - question: Which commands validate the exported FP32 model?
+  - question: How do I validate the exported FP32 model?
     answer: >-
       Run `python scripts/prepare_inputs.py` and `python scripts/validate_pte.py`. Confirm that the
       output reports `Accuracy gate passed` and points to the FP32 validation report.
   - question: Where are the FP32 artifacts saved, and how can I change the location?
     answer: >-
-      Find the artifacts in `artifacts/fp32` when you use the default configuration. To change the
+      The artifacts are saved under `artifacts/fp32` when you use the default configuration. To change the
       location, set `SMOLVLA_ARTIFACTS_DIR` to an absolute path and use the same location for the FP32
       benchmark.
   - question: How do I reuse the same inputs for both FP32 and INT8 comparisons?
@@ -51,10 +51,10 @@ generated_summary_faq:
       Generate deterministic inputs with the provided script and note the saved input-suite path. Pass
       that path to the INT8 pipeline with `--input-suite`, or set the `SMOLVLA_INPUT_SUITE` environment
       variable to use it.
-  - question: What should I look for to confirm the INT8 pipeline succeeded?
+  - question: How do I confirm that the INT8 pipeline succeeded?
     answer: >-
-      Run the pipeline command and confirm that it ends with `[8/8] Native accuracy gate passed`. The
-      command shown stores the artifacts in `artifacts/int8`. Use `--output-dir` to choose another
+      Run the pipeline script and confirm that it ends with `[8/8] Native accuracy gate passed`. The
+      script stores the artifacts in `artifacts/int8`. Use `--output-dir` to choose another
       location.
   - question: How do I validate the native runner against the PyTorch model?
     answer: >-
