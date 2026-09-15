@@ -353,10 +353,8 @@ Check the recipe dependency graph. `pn-buildlist` must contain `freertos-demos-c
 
 {{< tabpane code=true >}}
   {{< tab header="Baremetal" language="bash" >}}
-```
 kas shell -c 'bitbake -g baremetal-image'
 grep -E 'freertos-demos-cl1|zephyr-demos-cl1' build/pn-buildlist
-```
   {{< /tab >}}
   {{< tab header="Virtualization" language="bash" >}}
 kas shell -c 'bitbake -g virtualization-image'
