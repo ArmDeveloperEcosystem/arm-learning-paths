@@ -250,7 +250,7 @@ With the long values shortened, the output is similar to:
 	};
 ```
 
-Now verify the trusted FIT on the host against that DTB. `fit_check_sign` runs the same verification code as U-Boot, so its verdict predicts the board's:
+Now verify the trusted FIT on the host against that DTB. `fit_check_sign` runs the same verification code as U-Boot, so its verdict predicts the board's, and a mistake shows up now rather than at the serial console. `-f` names the FIT and `-k` the DTB that holds the keys:
 
 ```bash
 $UBOOT_OUT/tools/fit_check_sign -f $FIT/zephyr-a.itb -k $UBOOT_OUT/u-boot.dtb
@@ -261,11 +261,52 @@ The output is similar to:
 ```output
 Verifying Hash Integrity for node 'conf-1'... sha256,rsa2048:key-a+
 Verified OK, loading images
-...
+## Loading kernel (any) from FIT Image at 7a44a7686000 ...
+   Using 'conf-1' configuration
+   Verifying Hash Integrity ...
+sha256,rsa2048:key-a+
+OK
+
+   Trying 'kernel-1' kernel subimage
+     Description:  Zephyr RTOS image
+     Created:      Fri Sep 11 19:14:00 2026
+     Type:         Kernel Image
+     Compression:  uncompressed
+     Data Size:    58340 Bytes = 56.97 KiB = 0.06 MiB
+     Architecture: AArch64
+     OS:           U-Boot
+     Load Address: 0x82000000
+     Entry Point:  0x82000000
+     Hash algo:    sha256
+     Hash value:   1d1d375f14c3354579e9e5310986a69b831bcd1944cd6b35aa8e83632b658166
+   Verifying Hash Integrity ...
+sha256+
+OK
+
+   Decrypting Data ...
+OK
+
+   Loading Kernel Image to 0
+## Loading fdt (any) from FIT Image at 7a44a7686000 ...
+   Using 'conf-1' configuration
+   Verifying Hash Integrity ...
+sha256,rsa2048:key-a+
+OK
+
+Could not find subimage node type 'fdt'
+## Loading ramdisk (any) from FIT Image at 7a44a7686000 ...
+   Using 'conf-1' configuration
+   Verifying Hash Integrity ...
+sha256,rsa2048:key-a+
+OK
+
+Could not find subimage node type 'ramdisk'
 Signature check OK
 ```
 
-The lines cut with `...` check the `kernel-1` hash (`sha256+ OK`) and report no `fdt` and no `ramdisk`, which is correct. The exit code is 0.
+**Lines to look for:** the first line, `sha256,rsa2048:key-a+`, is the signature of `conf-1` verified with `key-a`, the `+` being the pass mark, and the last line, `Signature check OK`, is the verdict. The exit code is 0.
+
+Between them the tool walks the FIT the way `bootm` will on the board: it lists `kernel-1`, checks its hash (`sha256+` then `OK`), prints `Loading Kernel Image to 0` (the host tool loads nothing), and reports that the FIT has no `fdt` and no `ramdisk`. That's correct: it holds Zephyr and nothing else. The `FIT Image at` address is the tool's buffer on the host and changes every run, and the host tool breaks `sha256,rsa2048:key-a+ OK` over two lines where the board prints one.
 
 [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) runs the same tool on an image signed with `key-b` and on a tampered copy, and expects it to refuse both.
 

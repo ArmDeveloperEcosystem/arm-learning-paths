@@ -140,18 +140,34 @@ Compile and sign the FIT. `-k $KEYS` tells `mkimage` where the private key is:
 $UBOOT_OUT/tools/mkimage -f $FIT/zephyr-a.its -k $KEYS $FIT/zephyr-a.itb
 ```
 
-`mkimage` prints the image contents. Trimmed, the output is similar to:
+`mkimage` prints the image contents. Your timestamps, `Hash value` and `Sign value` differ, and the `Sign value` is shortened here. The output is similar to:
 
 ```output
+FIT description: Zephyr RTOS for AM62L Cortex-A53, signed with key-a
+Created:         Tue Sep 15 18:52:31 2026
+ Image 0 (kernel-1)
+  Description:  Zephyr RTOS image
+  Created:      Tue Sep 15 18:52:31 2026
   Type:         Kernel Image
-  ...
+  Compression:  uncompressed
+  Data Size:    58340 Bytes = 56.97 KiB = 0.06 MiB
+  Architecture: AArch64
   OS:           U-Boot
   Load Address: 0x82000000
   Entry Point:  0x82000000
   Hash algo:    sha256
-  ...
+  Hash value:   1d1d375f14c3354579e9e5310986a69b831bcd1944cd6b35aa8e83632b658166
+ Default Configuration: 'conf-1'
+ Configuration 0 (conf-1)
+  Description:  Zephyr on AM62L Cortex-A53
+  Kernel:       kernel-1
   Sign algo:    sha256,rsa2048:key-a
+  Sign value:   6d5f9933722189a0dcee58791243429d0bf28fe0dce96ac093da23c1f24ead70...
+  Timestamp:    Tue Sep 15 18:52:31 2026
+Signature written to '/home/user/zephyr-secure-boot/fit/zephyr-a.itb', node '/configurations/conf-1/signature-1'
 ```
+
+**Lines to look for:** `Sign algo:    sha256,rsa2048:key-a` and the last line say that `mkimage` found `key-a` in `$KEYS` and wrote its signature into `conf-1`. `OS: U-Boot` and `Load Address: 0x82000000` are the FIT source as you wrote it, and `Hash value` is the SHA-256 of `zephyr.bin`, which U-Boot recomputes on the board.
 
 Don't use the `mkimage -K` option here: the public key goes into U-Boot's own device tree at build time, on the next page.
 

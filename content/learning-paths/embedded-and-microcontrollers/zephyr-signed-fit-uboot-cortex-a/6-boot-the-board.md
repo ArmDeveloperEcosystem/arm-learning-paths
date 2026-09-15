@@ -123,13 +123,13 @@ Move the SD card to the board, then power the board through a USB-C PD supply on
 SoC:   AM62LX SR1.0 HS-FS
 ```
 
-`HS-FS` means no customer key is fused in this device yet; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) explains what that leaves unverified.
+`HS-FS` means no customer key is fused in this device yet; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) explains what that leaves unverified. The check you watch next, U-Boot verifying Zephyr, doesn't depend on it.
 
 ## Watch the trusted image boot
 
-After a three-second countdown, autoboot runs `bootcmd`, which is `run a`, the command you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/).
+U-Boot counts down for three seconds and then autoboot runs `bootcmd`, which is `run a`, the command you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). It loads `zephyr-a.itb`, verifies it, copies Zephyr to `0x82000000` and jumps there.
 
-Your `Created` time, `Hash value` and read time differ. The output is similar to:
+Your `Created` time, `Hash value` and read time differ; the lines that matter are the same. The output is similar to:
 
 ```output
 60198 bytes read in 7 ms (8.2 MiB/s)
@@ -167,9 +167,11 @@ started by       : U-Boot 'go' after FIT signature verification
 this image was verified by U-Boot before it ran.
 ```
 
-Three lines carry the proof. `sha256,rsa2048:key-a+ OK` is the RSA signature of `conf-1` verified with the `key-a` public key compiled into U-Boot. `sha256+ OK` is the image bytes matching the signed hash. `Loading Kernel Image to 82000000` is the verified payload copied to Zephyr's link address. The `+` marks a pass; a failed check prints `-` instead, as [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) shows.
+**Lines to look for:** `sha256,rsa2048:key-a+ OK`, `sha256+ OK` and `Loading Kernel Image to 82000000` are the verification; `## Starting application at 0x82000000 ...` is the jump; `Hello from ZEPHYR IMAGE A` is the verified program running.
 
-`## Starting application at 0x82000000 ...` is printed by `go` and is the last line from U-Boot; everything after it comes from the program U-Boot verified.
+Three lines carry the proof. `sha256,rsa2048:key-a+ OK` is `bootm start` verifying the RSA signature of `conf-1` with the `key-a` public key compiled into U-Boot. `sha256+ OK` is the same step checking that the image bytes match the signed hash. `Loading Kernel Image to 82000000` is `bootm loados` copying the verified payload to Zephyr's link address. The `+` after a key name or hash algorithm is U-Boot's shorthand for a pass. A failed signature check prints `-` instead, and [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) shows one.
+
+`go`, not `bootm`, prints `## Starting application at 0x82000000 ...`. It is the last line from U-Boot. The program that U-Boot verified a moment earlier prints everything after it, starting with the Zephyr banner.
 
 ## If nothing prints
 

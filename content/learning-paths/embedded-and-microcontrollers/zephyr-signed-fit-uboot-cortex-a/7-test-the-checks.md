@@ -37,7 +37,7 @@ sed 's/key-a/key-b/g; s#/hello/#/hello_b/#' $FIT/zephyr-a.its > $FIT/zephyr-b.it
 $UBOOT_OUT/tools/mkimage -f $FIT/zephyr-b.its -k $KEYS $FIT/zephyr-b.itb
 ```
 
-The line to check in the `mkimage` summary is `Sign algo:    sha256,rsa2048:key-b`.
+`mkimage` prints the same summary as for the trusted image. **Lines to look for:** `Sign algo:    sha256,rsa2048:key-b`, and a `Hash value` that differs from image A's, because `hello_b` is a different binary. This image proves that a valid signature isn't enough: U-Boot must refuse a key it doesn't have.
 
 ## Make a tampered copy of the trusted image
 
@@ -64,7 +64,7 @@ The output is similar to:
 
 If `cmp` prints nothing, that byte was already `0xff` in your build; pick another offset inside the payload, for example `seek=32800`, and run the `dd` and `cmp` commands again.
 
-Expect the signature check to pass and the hash check to fail: the signature covers the configuration node and the `hash-1` node, and `hash-1` covers the payload bytes you changed.
+This image proves that U-Boot catches a change made after signing. Expect the signature check to pass and the hash check to fail. `mkimage` signed the configuration node and the `hash-1` node of the image, and the byte you changed is in neither, so the RSA signature still verifies. The payload bytes are covered by `hash-1`, and they no longer match it, so the hash check fails. The signature makes the hash trustworthy, and the hash catches the change.
 
 All three `.itb` files are the same size, 60198 bytes in this build; only verification tells them apart.
 
@@ -86,7 +86,9 @@ Failed to verify required signature 'key-key-a'
 Signature check bad (error 1)
 ```
 
-Two checks fail: the DTB has no `key-b`, and `required = "conf"` demands a `key-a` signature on every configuration.
+**Lines to look for:** `sha256,rsa2048:key-b-` followed by `error!`, then `Failed to verify required signature 'key-key-a'`, then `Signature check bad (error 1)`. The exit code is 1.
+
+Two checks fail. The `-` after the key name is the failed signature: the DTB has no `key-b`. The `Failed to verify required signature` line is the `required = "conf"` rule, which demands a `key-a` signature on every configuration, and this FIT has none.
 
 Then check the tampered image:
 
@@ -99,15 +101,49 @@ The output is similar to:
 ```output
 Verifying Hash Integrity for node 'conf-1'... sha256,rsa2048:key-a+
 Verified OK, loading images
-...
+## Loading kernel (any) from FIT Image at 7ae29b84a000 ...
+   Using 'conf-1' configuration
+   Verifying Hash Integrity ...
+sha256,rsa2048:key-a+
+OK
+
+   Trying 'kernel-1' kernel subimage
+     Description:  Zephyr RTOS image
+     Created:      Fri Sep 11 19:14:00 2026
+     Type:         Kernel Image
+     Compression:  uncompressed
+     Data Size:    58340 Bytes = 56.97 KiB = 0.06 MiB
+     Architecture: AArch64
+     OS:           U-Boot
+     Load Address: 0x82000000
+     Entry Point:  0x82000000
+     Hash algo:    sha256
+     Hash value:   1d1d375f14c3354579e9e5310986a69b831bcd1944cd6b35aa8e83632b658166
+   Verifying Hash Integrity ...
 sha256 error!
 Bad hash value for 'hash-1' hash node in 'kernel-1' image node
 Bad Data Hash
-...
+
+## Loading fdt (any) from FIT Image at 7ae29b84a000 ...
+   Using 'conf-1' configuration
+   Verifying Hash Integrity ...
+sha256,rsa2048:key-a+
+OK
+
+Could not find subimage node type 'fdt'
+## Loading ramdisk (any) from FIT Image at 7ae29b84a000 ...
+   Using 'conf-1' configuration
+   Verifying Hash Integrity ...
+sha256,rsa2048:key-a+
+OK
+
+Could not find subimage node type 'ramdisk'
 Signature check bad (error 1)
 ```
 
-The signature passes and only the hash fails.
+**Lines to look for:** `sha256,rsa2048:key-a+` on the first line, then `sha256 error!` and `Bad hash value for 'hash-1' hash node in 'kernel-1' image node`, then `Signature check bad (error 1)`. The exit code is 1.
+
+The signature still passes and only the hash fails, as you expected when you made the tampered image. The `Hash value` line is the hash `mkimage` stored; the bytes no longer produce it. You'll see the same `sha256 error!` and `Bad hash value for 'hash-1'` lines on the board.
 
 ## Add the two images to the card
 
@@ -155,18 +191,23 @@ Move the card to the board, open the console with `picocom` as on the previous p
 The expected output is:
 
 ```output
-...
+60198 bytes read in 7 ms (8.2 MiB/s)
+## Loading kernel (any) from FIT Image at 90000000 ...
+   Using 'conf-1' configuration
    Verifying Hash Integrity ... sha256,rsa2048:key-b-  error!
 Verification failed for '<NULL>' hash node in 'conf-1' config node
 Failed to verify required signature 'key-key-a'
 Bad Data Hash
 ERROR -2: can't get kernel image!
+
 *** REFUSED: Zephyr was NOT started ***
 ```
 
-These are the same two failures as on the host: U-Boot found a signature naming `key-b` and has no such key, and the `required = "conf"` rule you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/) demands a valid `key-a` signature on every configuration. `Bad Data Hash` and `ERROR -2: can't get kernel image!` close both refusals on this page; the lines before them name the failed check.
+**Lines to look for:** `sha256,rsa2048:key-b-  error!`, then `Failed to verify required signature 'key-key-a'`, and last `*** REFUSED: Zephyr was NOT started ***`. No `Loading Kernel Image` line and no Zephyr banner.
 
-Because `bootm start` returns an error, the `&&` chain stops there: `bootm loados` and `go` never run, and the `echo` after the `;` prints the `REFUSED` line.
+U-Boot reports two separate failures, the same two that `fit_check_sign` reports on the host. The first line says it found a signature naming `key-b` and has no such key; U-Boot doesn't have the public half of `key-b`. The `Failed to verify required signature 'key-key-a'` line is the `required = "conf"` rule you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). It says every configuration must carry a valid signature by `key-a`, and this one doesn't. An image with no signature node at all fails that second check in the same way. `Bad Data Hash` and `ERROR -2: can't get kernel image!` close both refusals on this page, so the lines before them are the ones that name the failed check.
+
+Because `bootm start` returns an error, the `&&` chain stops there. `bootm loados` and `go` never run, and the `echo` after the `;` prints the `REFUSED` line. You're back at the U-Boot prompt; image B never ran.
 
 ## Run the tampered test
 
@@ -179,27 +220,43 @@ Still at the prompt, run the tampered test:
 The expected output is:
 
 ```output
-...
+60198 bytes read in 7 ms (8.2 MiB/s)
+## Loading kernel (any) from FIT Image at 90000000 ...
+   Using 'conf-1' configuration
    Verifying Hash Integrity ... sha256,rsa2048:key-a+ OK
    Trying 'kernel-1' kernel subimage
-     ...
+     Description:  Zephyr RTOS image
+     Created:      2026-09-11  14:40:50 UTC
+     Type:         Kernel Image
+     Compression:  uncompressed
+     Data Start:   0x900000e8
+     Data Size:    58340 Bytes = 57 KiB
+     Architecture: AArch64
+     OS:           U-Boot
+     Load Address: 0x82000000
+     Entry Point:  0x82000000
+     Hash algo:    sha256
+     Hash value:   1d1d375f14c3354579e9e5310986a69b831bcd1944cd6b35aa8e83632b658166
    Verifying Hash Integrity ... sha256 error!
 Bad hash value for 'hash-1' hash node in 'kernel-1' image node
 Bad Data Hash
 ERROR -2: can't get kernel image!
+
 *** REFUSED: Zephyr was NOT started ***
 ```
 
-This time the signature check passes and the hash check fails, as you expected when you made the tampered image and as the FIT diagram in [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/) shows.
+**Lines to look for:** `sha256,rsa2048:key-a+ OK` (the signature passes), then `sha256 error!` and `Bad hash value for 'hash-1' hash node in 'kernel-1' image node` (the hash fails), then `*** REFUSED: Zephyr was NOT started ***`.
+
+This time the signature check passes and the hash check fails. That surprises people at first, and it's exactly what the FIT diagram in [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/) shows. The byte you flipped is in the payload, which the signed `hash-1` node covers, not in the nodes the signature covers, as you saw when you made the tampered image. The `Hash value` line is the hash `mkimage` stored, and the bytes U-Boot just read no longer produce it. U-Boot stops before `bootm loados` again.
 
 {{% notice Note %}}
 If `run b` or `run t` ends with a Zephyr banner instead of the `REFUSED` line, the check isn't failing closed. The two causes seen in practice are a `;` where `&&` belongs in the `zboot` chain of `CONFIG_PREBOOT`, and a `signature.dtsi` without `required = "conf"`. Check both against [Build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), rebuild, and write the card again.
 {{% /notice %}}
 
-To boot the trusted image again, type `run a` at the prompt.
+To boot the trusted image again, type `run a` at the prompt. The output is the same as on the previous page: the `IMAGE A` banner, then the four lines Zephyr prints after it.
 
 ## What you've accomplished and what's next
 
-`zephyr-a.itb`, signed with the key compiled into U-Boot, runs; `zephyr-b.itb`, signed with a valid key U-Boot doesn't have, is refused at the signature step; `zephyr-tampered.itb`, changed after signing, passes the signature step and is refused at the hash step. In every case the refusal stops the `&&` chain before `go`, so a rejected image never runs.
+You've watched the three results that make the check credible. `zephyr-a.itb`, signed with the key compiled into U-Boot, verifies and runs. `zephyr-b.itb`, signed with a valid key U-Boot doesn't have, is refused at the signature step. `zephyr-tampered.itb`, signed with the right key and changed afterwards, passes the signature step and is refused at the hash step. In every case a refusal stops the `&&` chain before `go`, so a rejected image never runs.
 
 Next, [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) separates what these runs proved from what they didn't, and what still stands between this setup and a production device.
