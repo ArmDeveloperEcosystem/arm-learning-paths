@@ -1,6 +1,6 @@
 ---
 title: Port FreeRTOS to the Cortex-R82AE FVP
-description: Build the FreeRTOS SMP port with GCC or ArmClang and validate four-core task execution on the Cortex-R82AE FVP.
+description: Build the FreeRTOS SMP port with GCC or armclang and validate four-core task execution on the Cortex-R82AE FVP.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -102,12 +102,13 @@ bp.pl011_uart0.unbuffered_output=1
 The generic demo isn't sufficient for the Cortex-R82AE FVP. Check that the port handles these platform differences:
 
 - The processors start at Exception Level 2 (EL2), while the FreeRTOS port runs at EL1. The original Cortex-R82 example boots directly at EL1, which is not possible with this Cortex-R82AE configuration.
-- The Cortex-R82AE affinity layout differs from the layout assumed by the original interprocessor interrupt code
-- The GIC uses the architectural affinity layout and must be configured separately from task affinity
-- MPU programming needs the required data and instruction synchronization barriers
-- The application uses a PL011 UART instead of semihosting
-- The FVP protected MPU and shared low-latency RAM (LLRAM) need explicit configuration
-- The image entry point must be set to the first address of the code section
+- The Cortex-R82AE affinity layout differs from the layout assumed by the original interprocessor interrupt code.
+- The GIC uses the architectural affinity layout and must be configured separately from task affinity.
+- MPU programming needs the required data and instruction synchronization barriers.
+- The application uses a PL011 UART instead of semihosting.
+- The FVP protected MPU and shared low-latency RAM (LLRAM) need explicit configuration.
+- The image entry point must be set to the first address of the code section.
+- Configure the timer frequency in the highest exception Level.
 
 The reference FVP configuration uses four cores and an 8 MiB LLRAM window. The address range is divided into separate code and data regions:
 
@@ -116,7 +117,7 @@ The reference FVP configuration uses four cores and an 8 MiB LLRAM window. The a
 | Code | `0x140000000` | 4 MiB |
 | Data | `0x140400000` | 4 MiB |
 
-All four reset vector base address registers (RVBARs) point to `0x140000000`.
+All four reset vector base address registers (RVBAR) point to `0x140000000`.
 
 
 For a GCC build, update the [GNU linker script](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/gnu_linker_script.ld#L20) to divide the 8 MiB LLRAM into separate 4 MiB code and data regions:
@@ -220,7 +221,7 @@ FVP_BaseR_Cortex-R82AE \
   --application build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.elf
 ```
 
-Although ELF is a standard format, embedded toolchains encode load and execution addresses differently. Binary conversion is not merely removal of ELF metadata: the converter must understand the linker’s memory layout and startup-copy model. A converter from another toolchain may accept the ELF without errors but silently produce an incorrect image.
+Although ELF is a standard format, embedded toolchains encode load and execution addresses differently. Binary conversion is not merely removal of ELF metadata: The converter must understand the memory layout and startup-copy model defined by the linker. A converter from another toolchain may accept the ELF without errors but silently produce an incorrect image.
 
 To create a single raw binary, use `fromelf --bincombined`. The Arm Compiler linker uses a scatter-loading description, so GNU `objcopy` should not be used to convert this ELF file. The `--bincombined` option preserves the relative load addresses in one output file:
 
@@ -237,7 +238,7 @@ Using `fromelf --bin` can create an output directory containing one file for eac
 
 ### Run the application
 
-#### Start the FVP 
+#### Start the FVP
 
 You can load the ELF file directly. The FVP uses the addresses recorded in the ELF file, and the image retains the symbols required for source-level debugging:
 ```bash
@@ -246,7 +247,7 @@ FVP_BaseR_Cortex-R82AE \
   --application build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.elf
 ```
 
-Or you can oad the binary at the Cluster 0 LLRAM base address, `0x140000000`:
+Or you can load the binary at the Cluster 0 LLRAM base address, `0x140000000`:
 
 ```bash
 FVP_BaseR_Cortex-R82AE \
@@ -260,7 +261,7 @@ The Zena CSS will use the raw-binary loading method. Validate it here first, whe
 
 At the application prompt, enter `ping`. The four tasks exchange a message in a cycle across the four cores, as shown in the terminal output:
 
-![FVP terminal showing the FreeRTOS four-core Ping, Pong, Pang, and Pung commands completing on cores 0 through 3. The output confirms that all four SMP tasks are running.#center](terminal.png "FreeRTOS four-core command output")
+![FVP terminal showing the FreeRTOS four-core ping, pong, pang, and pung commands completing on cores 0 through 3. The output confirms that all four SMP tasks are running.#center](terminal.png "FreeRTOS four-core command output")
 
 This output validates UART access, SMP scheduling, core affinity, interprocessor interrupts, and visibility of shared task state.
 
@@ -275,7 +276,7 @@ FVP_BaseR_Cortex-R82AE \
   --application build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf \
   -I -p
 ```
-Load the debug image symbols in Arm Development Studio, then set breakpoints on `main`, `FreeRTOS_Abort`, and `App_Fault_Handler`. Load symbols in the EL1 Secure address space if the debugger doesn't resolve the running code automatically.
+Load the debug image symbols in Arm Development Studio, then set breakpoints on `main` and `FreeRTOS_Abort`. Load symbols in the EL1 Secure address space if the debugger doesn't resolve the running code automatically.
 
 
 ```text
@@ -307,11 +308,13 @@ Enable the Tarmac Trace plugin and write the trace to `tarmac.log`:
 FVP_BaseR_Cortex-R82AE \
   --config fvp_R82AE_config.txt \
   --application build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf \
-  --plugin=/opt/arm/developmentstudio_platinum-2025.a/sw/models/bin/TarmacTrace.so \
+  --plugin=/opt/arm/developmentstudio_<version>/sw/models/bin/TarmacTrace.so \
   -C TRACE.TarmacTrace.trace-file=tarmac.log
 ```
 
-Tracing generates a large amount of data and slows the FVP, so stop the model soon after the failure occurs. To identify the instruction that caused the failure, search the trace for a synchronous exception event:
+Tracing generates a large amount of data and slows the FVP, so stop the model soon after the failure occurs.
+
+You can then search the trace for a synchronous exception event:
 
 ```text
 grep -B 6 -A 4 'CoreEvent_CURRENT_SPx_SYNC' tarmac.log
@@ -330,13 +333,13 @@ grep -B 6 -A 4 'CoreEvent_CURRENT_SPx_SYNC' tarmac.log
 The lines before `CoreEvent_CURRENT_SPx_SYNC` show the execution leading to the exception. Identify the core that generated the event and inspect the last executed instruction. Use the trace alongside these exception registers:
 
 - `ELR_EL1` contains the address to which the processor returns after handling the exception. For a synchronous exception, it identifies the instruction associated with the failure.
-- `ESR_EL1` describes the exception class and provides information about its cause.
+- `ESR_EL1` describes the exception class and provides information about its cause. For quickly interpreting the syndrome register you can use [ESR.arm64](https://esr.arm64.dev/).
 - `FAR_EL1` contains the address associated with an instruction or data access fault, when valid for that exception.
 - `SPSR_EL1` captures the processor state at the time of the exception.
 
 Together, this information can reveal an incorrect branch target, an invalid memory access, a stack error, or an unexpected exception-level transition. For an SMP failure, compare the trace events from all four cores. This can show whether a core failed to start, did not receive an interprocessor interrupt, or accessed shared state in an unexpected order. arm also provides Arm also provides Tarmac Trace Utilities for indexing and browsing large trace files.
 
-In this example, we can retrive the relevant information from the the tarmac trace.
+In this example, we can retrieve the relevant information from the the tarmac trace.
 ``` text
 X0 = 0x016E3600, or 24 MHz
 ELR_EL1 = 0x8000F040, the address of the failing MSR

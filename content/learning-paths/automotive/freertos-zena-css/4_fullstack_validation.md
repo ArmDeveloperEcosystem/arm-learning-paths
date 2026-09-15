@@ -138,7 +138,7 @@ The goal of this exercise is to replace the SI CL1 Zephyr image with a FreeRTOS 
 
 ### Safety Island CL1 firmware loading.
 
-The Zena CSS documnetation indicates that the SI CL1 firmware is loaded by the RSE [boot flow](https://arm-zena-css.docs.arm.com/en/v2.2.1/design/boot_process.html#boot-flow).
+The Zena CSS documentation indicates that the SI CL1 firmware is loaded by the RSE [boot flow](https://arm-zena-css.docs.arm.com/en/v2.2.1/design/boot_process.html#boot-flow).
 
 The Zena CSS RSE image layout described in the [image layout](https://arm-zena-css.docs.arm.com/en/v2.2.1/design/boot_process.html#images-layout) indicate where SI CL1 image is packaged.
 
@@ -303,7 +303,7 @@ Successful execution confirms that:
 - The FreeRTOS image was authenticated and loaded by RSE.
 - The image packaging process completed successfully.
 - SCP firmware initialized the platform correctly.
-- GIC Multi View 2 has been configued by the Safety Island CL0 (SCP).
+- GIC Multi View 2 has been configured by the Safety Island CL0 (SCP).
 - FreeRTOS can replace Zephyr in the complete Zena CSS software stack.
 
 ## What you have learned

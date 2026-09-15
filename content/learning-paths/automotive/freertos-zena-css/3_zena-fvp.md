@@ -40,7 +40,7 @@ The Zena CSS Runtime Security Engine (RSE) authenticates, loads, and starts the 
 The binary built for the standalone `FVP_BaseR_Cortex-R82AE` doesn't use the Zena CSS memory map. Create a Zena CSS target in the port and update these platform-dependent elements:
 
 1. Set the linker code and data regions to the Safety Island cluster 1 LLRAM addresses.
-2. Make the startup code boot from Exception Level 2 (EL2) and trasition to EL1 for FreeRTOS execution.
+2. Make the startup code boot from Exception Level 2 (EL2) and transition to EL1 for FreeRTOS execution.
 3. Configure the Cluster 1 Generic Interrupt Controller (GIC) interfaces and interprocessor interrupt IDs.
 4. Update the core-affinity decoding for the Safety Island cluster.
 5. Set the PL011 base address to the Zena CSS Safety Island UART.
@@ -193,7 +193,7 @@ fromelf --bincombined \
 </details>
 
 
-Selecting the plaftorm `zena_css_fvp_direct_load` will configure the following element
+Selecting the platform `zena_css_fvp_direct_load` will configure the following element
 ```c
 #elif defined( R82AE_PLATFORM_ZENA_CSS_FVP_DIRECT_LOAD )
     #define configGIC_SGI_CORE_AFFINITY_LEVEL          1U
