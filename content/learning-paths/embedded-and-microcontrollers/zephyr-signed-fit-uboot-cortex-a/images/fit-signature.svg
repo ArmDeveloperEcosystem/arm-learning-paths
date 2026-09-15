@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="400" viewBox="0 0 960 400" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14">
+  <title>What the FIT signature covers and how U-Boot checks it</title>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b5fa5"/>
+    </marker>
+    <marker id="arr-grey" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#777"/>
+    </marker>
+  </defs>
+  <rect width="960" height="400" fill="#ffffff"/>
+
+  <!-- FIT container -->
+  <rect x="20" y="20" width="580" height="300" rx="8" fill="#fafafa" stroke="#888"/>
+  <text x="36" y="46" font-weight="600">zephyr-a.itb (the FIT image, a device tree blob)</text>
+
+  <!-- images -->
+  <rect x="40" y="66" width="260" height="234" rx="6" fill="#f2f2f2" stroke="#888"/>
+  <text x="52" y="90" font-weight="600" font-size="13">images / kernel-1</text>
+  <text x="52" y="112" font-size="12" fill="#333">type = "kernel", os = "u-boot"</text>
+  <text x="52" y="130" font-size="12" fill="#333">load = entry = 0x82000000</text>
+
+  <rect x="52" y="146" width="236" height="52" rx="4" fill="#ffffff" stroke="#0b5fa5" stroke-width="1.5"/>
+  <text x="64" y="168" font-size="12" font-weight="600" fill="#333">hash-1</text>
+  <text x="64" y="186" font-size="12" fill="#333">sha256 of the Zephyr bytes</text>
+
+  <line x1="80" y1="198" x2="80" y2="212" stroke="#777" stroke-width="2" marker-end="url(#arr-grey)"/>
+  <text x="94" y="210" font-size="12" fill="#555">the hash covers the bytes</text>
+
+  <rect x="52" y="214" width="236" height="72" rx="4" fill="#ffffff" stroke="#888"/>
+  <text x="64" y="236" font-size="12" font-weight="600" fill="#333">data</text>
+  <text x="64" y="254" font-size="12" fill="#333">zephyr.bin, about 58 KB</text>
+  <text x="64" y="272" font-size="12" fill="#333">the bytes that run</text>
+
+  <!-- configurations -->
+  <rect x="330" y="66" width="250" height="110" rx="6" fill="#e8f1fa" stroke="#0b5fa5" stroke-width="1.5"/>
+  <text x="342" y="90" font-weight="600" font-size="13">configurations / conf-1</text>
+  <text x="342" y="112" font-size="12" fill="#333">kernel = "kernel-1"</text>
+  <text x="342" y="134" font-size="12" fill="#333" font-weight="600">signature-1</text>
+  <text x="342" y="152" font-size="12" fill="#333">sha256,rsa2048 with key-a</text>
+  <text x="342" y="168" font-size="12" fill="#333">signs conf-1 and hash-1</text>
+
+  <!-- signature -> hash node -->
+  <line x1="328" y1="156" x2="292" y2="170" stroke="#0b5fa5" stroke-width="2" marker-end="url(#arr)"/>
+  <text x="342" y="202" font-size="12" fill="#0b5fa5" font-weight="600">the signature covers</text>
+  <text x="342" y="218" font-size="12" fill="#0b5fa5" font-weight="600">the hash node, not the bytes</text>
+
+  <!-- U-Boot side -->
+  <rect x="640" y="20" width="300" height="140" rx="8" fill="#fafafa" stroke="#888"/>
+  <text x="656" y="46" font-weight="600">u-boot.img (control device tree)</text>
+  <rect x="656" y="62" width="268" height="84" rx="6" fill="#e8f1fa" stroke="#0b5fa5" stroke-width="1.5"/>
+  <text x="668" y="86" font-size="13" font-weight="600">/signature/key-key-a</text>
+  <text x="668" y="106" font-size="12" fill="#333">rsa,modulus, rsa,exponent (public key)</text>
+  <text x="668" y="126" font-size="12" fill="#333">required = "conf"</text>
+
+  <!-- key -> signature check -->
+  <line x1="654" y1="104" x2="584" y2="104" stroke="#0b5fa5" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- what U-Boot does -->
+  <rect x="640" y="180" width="300" height="140" rx="8" fill="#fbfbfb" stroke="#ddd"/>
+  <text x="656" y="204" font-weight="600" font-size="13">bootm start, then bootm loados</text>
+  <text x="656" y="228" font-size="12" fill="#333">1. Verify signature-1 with key-a</text>
+  <text x="656" y="248" font-size="12" fill="#333">2. Verify hash-1 against the bytes</text>
+  <text x="656" y="268" font-size="12" fill="#333">3. Copy the bytes to 0x82000000</text>
+  <text x="656" y="292" font-size="12" fill="#333">Then: go 0x82000000</text>
+
+  <!-- failure modes -->
+  <rect x="20" y="336" width="920" height="50" rx="6" fill="#fff7e6" stroke="#e0a800"/>
+  <text x="34" y="357" font-size="13" fill="#333">Signed with another key: step 1 fails, "Failed to verify required signature 'key-key-a'".</text>
+  <text x="34" y="376" font-size="13" fill="#333">One byte changed after signing: step 1 still passes, step 2 fails, "Bad hash value for 'hash-1'". Zephyr never starts in either case.</text>
+</svg>

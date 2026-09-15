@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="330" viewBox="0 0 960 330" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" font-size="14">
+  <title>AM62L boot chain with the U-Boot to Zephyr verification added</title>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#555"/>
+    </marker>
+    <marker id="arrow-hl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b5fa5"/>
+    </marker>
+  </defs>
+  <rect width="960" height="330" fill="#ffffff"/>
+
+  <!-- brace labels on top -->
+  <text x="330" y="34" text-anchor="middle" fill="#666" font-size="13">Checked by TI's ROM and security firmware. On an HS-FS device, TI's development key is accepted.</text>
+  <line x1="60" y1="46" x2="600" y2="46" stroke="#999" stroke-width="1"/>
+  <line x1="60" y1="46" x2="60" y2="56" stroke="#999" stroke-width="1"/>
+  <line x1="600" y1="46" x2="600" y2="56" stroke="#999" stroke-width="1"/>
+
+  <text x="790" y="34" text-anchor="middle" fill="#0b5fa5" font-size="13" font-weight="600">Checked by U-Boot with your key. This Learning Path.</text>
+  <line x1="640" y1="46" x2="940" y2="46" stroke="#0b5fa5" stroke-width="1.5"/>
+  <line x1="640" y1="46" x2="640" y2="56" stroke="#0b5fa5" stroke-width="1.5"/>
+  <line x1="940" y1="46" x2="940" y2="56" stroke="#0b5fa5" stroke-width="1.5"/>
+
+  <!-- stage boxes -->
+  <g>
+    <rect x="20" y="90" width="150" height="90" rx="6" fill="#f4f4f4" stroke="#888"/>
+    <text x="95" y="120" text-anchor="middle" font-weight="600">Boot ROM</text>
+    <text x="95" y="142" text-anchor="middle" fill="#555" font-size="12">inside the SoC</text>
+    <text x="95" y="160" text-anchor="middle" fill="#555" font-size="12">loads tiboot3.bin</text>
+  </g>
+  <g>
+    <rect x="210" y="90" width="150" height="90" rx="6" fill="#f4f4f4" stroke="#888"/>
+    <text x="285" y="120" text-anchor="middle" font-weight="600">tiboot3.bin</text>
+    <text x="285" y="142" text-anchor="middle" fill="#555" font-size="12">TF-A BL1 + TIFS firmware</text>
+    <text x="285" y="160" text-anchor="middle" fill="#555" font-size="12">loads tispl.bin</text>
+  </g>
+  <g>
+    <rect x="400" y="90" width="150" height="90" rx="6" fill="#f4f4f4" stroke="#888"/>
+    <text x="475" y="120" text-anchor="middle" font-weight="600">tispl.bin</text>
+    <text x="475" y="142" text-anchor="middle" fill="#555" font-size="12">TF-A BL31, OP-TEE, SPL</text>
+    <text x="475" y="160" text-anchor="middle" fill="#555" font-size="12">loads u-boot.img</text>
+  </g>
+  <g>
+    <rect x="590" y="90" width="150" height="90" rx="6" fill="#e8f1fa" stroke="#0b5fa5" stroke-width="1.5"/>
+    <text x="665" y="120" text-anchor="middle" font-weight="600">u-boot.img</text>
+    <text x="665" y="142" text-anchor="middle" fill="#333" font-size="12">U-Boot, with key-a's</text>
+    <text x="665" y="160" text-anchor="middle" fill="#333" font-size="12">public key inside</text>
+  </g>
+  <g>
+    <rect x="780" y="90" width="160" height="90" rx="6" fill="#e8f1fa" stroke="#0b5fa5" stroke-width="1.5"/>
+    <text x="860" y="120" text-anchor="middle" font-weight="600">zephyr-a.itb</text>
+    <text x="860" y="142" text-anchor="middle" fill="#333" font-size="12">FIT image: Zephyr,</text>
+    <text x="860" y="160" text-anchor="middle" fill="#333" font-size="12">signed with key-a</text>
+  </g>
+
+  <!-- arrows -->
+  <line x1="170" y1="135" x2="208" y2="135" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="360" y1="135" x2="398" y2="135" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="550" y1="135" x2="588" y2="135" stroke="#555" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="740" y1="135" x2="778" y2="135" stroke="#0b5fa5" stroke-width="2.5" marker-end="url(#arrow-hl)"/>
+
+  <!-- what each stage checks -->
+  <text x="189" y="205" text-anchor="middle" fill="#666" font-size="12">ROM checks</text>
+  <text x="379" y="205" text-anchor="middle" fill="#666" font-size="12">TIFS checks</text>
+  <text x="569" y="205" text-anchor="middle" fill="#666" font-size="12">TIFS checks</text>
+  <text x="759" y="205" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="600">U-Boot checks</text>
+  <text x="759" y="221" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="600">the FIT signature</text>
+
+  <!-- bottom note -->
+  <rect x="20" y="248" width="920" height="62" rx="6" fill="#fbfbfb" stroke="#ddd"/>
+  <text x="34" y="272" fill="#333" font-size="13">Each stage loads the next one and checks it before running it. The last link is new: U-Boot verifies the RSA signature and the</text>
+  <text x="34" y="292" fill="#333" font-size="13">SHA-256 hash inside zephyr-a.itb, copies Zephyr to 0x82000000, and starts it with go. Anything that fails a check never runs.</text>
+</svg>
