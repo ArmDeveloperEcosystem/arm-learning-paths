@@ -1,5 +1,6 @@
 ---
 title: Quantize SmolVLA to INT8 and compare it to FP32
+description: Quantize eligible SmolVLA operations to INT8 and compare the converted model's outputs and latency with the FP32 model on an Arm CPU.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -40,7 +41,7 @@ To compare the FP32 and INT8 executions, complete the following steps:
 
 ### Inspect the CPU layout and usage
 
-You can assign CPU cores to the native runner to keep the FP32 and INT8 configurations consistent. CPU affinity also lets you tune each component on systems with different core types. 
+You can assign CPU cores to the native runner to keep the FP32 and INT8 configurations consistent. CPU affinity also lets you tune each component on systems with different core types.
 
 Inspect your CPU layout:
 

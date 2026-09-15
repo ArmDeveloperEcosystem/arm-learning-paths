@@ -1,5 +1,6 @@
 ---
-title: Set up the environment
+title: Set up the SmolVLA ExecuTorch environment
+description: Set up Python, ExecuTorch, XNNPACK, and the SmolVLA resources needed to convert and run the model on an Arm CPU.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -62,7 +63,7 @@ The `setup.sh` script does the following:
 
 - Creates a project-local virtual environment in `.venv`
 - Pins ExecuTorch v1.4.1 at commit `e4d02f41f7909e8ed5bf4a14ffc520d733453d9f`
-- Builds the ExecuTorch and XNNPACK runtime libraries with KleidiAI support and builds the Python bindings
+- Builds the ExecuTorch and XNNPACK runtime libraries with KleidiAI support and the Python bindings
 - Installs the required Python packages
 - Downloads the pinned SmolVLA checkpoint from Hugging Face
 

@@ -1,5 +1,6 @@
 ---
 title: Export, lower, and run the FP32 SmolVLA
+description: Export, lower, and validate the FP32 SmolVLA components with ExecuTorch, then run them through a native Arm CPU orchestrator.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -65,7 +66,7 @@ python scripts/prepare_inputs.py
 python scripts/validate_pte.py
 ```
 
-The validation ends with output similar to:
+The expected output is similar to:
 
 ```output
 Accuracy gate passed; report: /path/to/artifacts/fp32/validation.json
@@ -77,7 +78,7 @@ The setup built the ExecuTorch runtime with the XNNPACK backend and KleidiAI sup
 
 ExecuTorch's generic runner executes a single `.pte` program. Invoking the program separately for each stage would write and transfer intermediate tensors between processes. Repeatedly launching the program for ten denoising steps would also reload it each time, adding runtime overhead.
 
-Build the provided C++ orchestrator linked against the ExecuTorch runtime. It loads the three exported `.pte` programs, keeps intermediate tensors in memory, connects their I/O, and invokes `denoising_step` ten times in the same process:
+Build the provided C++ orchestrator and link it against the ExecuTorch runtime. The orchestrator loads the three exported `.pte` programs and keeps intermediate tensors in memory. It connects their inputs and outputs, then invokes `denoising_step` ten times in the same process:
 
 ```bash
 ./scripts/build_runner.sh
