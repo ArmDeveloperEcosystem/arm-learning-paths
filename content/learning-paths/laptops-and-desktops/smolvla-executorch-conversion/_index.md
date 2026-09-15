@@ -4,7 +4,7 @@ description: Convert the SmolVLA vision-language-action model from PyTorch to Ex
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for machine learning developers who want to export a vision-language-action model to ExecuTorch for Arm CPU inference.
+who_is_this_for: This is an advanced topic for machine learning developers who want to export a vision-language-action model to ExecuTorch for inference on an Arm CPU.
 
 learning_objectives:
     - Export SmolVLA from PyTorch to ExecuTorch, and lower the model to run on Arm CPU using the XNNPACK backend.
