@@ -16,11 +16,11 @@ The scripts place the artifacts in `artifacts/fp32` by default. To use a differe
 export SMOLVLA_ARTIFACTS_DIR="/path/to/artifacts/dir"
 ```
 
-If you override the path, use the same location in the FP32 benchmark command later in this Learning Path.
+If you override the path, use the same location in the FP32 benchmark command later.
 
 ### Generate inputs
 
-First, generate and save deterministic tensor inputs. You'll reuse these inputs when you compare the FP32 and INT8 models:
+First, generate and save deterministic tensor inputs. You'll reuse the inputs when you compare the FP32 and INT8 models:
 
 ```bash
 python scripts/generate_inputs.py \
@@ -31,7 +31,7 @@ python scripts/generate_inputs.py \
     --language-length 48
 ```
 
-The `env.sh` file sets default paths for `SMOLVLA_CHECKPOINT` and `SMOLVLA_INPUT_SUITE`. You can override them in the same way.
+The `env.sh` file sets default paths for `SMOLVLA_CHECKPOINT` and `SMOLVLA_INPUT_SUITE`. You can override the paths in the same way.
 
 ### Export the model graph
 
@@ -48,7 +48,7 @@ python scripts/export.py \
 
 ### Partition and lower the model
 
-Convert each graph to ExecuTorch Edge IR, partition supported operators for XNNPACK, lower the graphs and convert them to an ExecuTorch runtime `.pte` format:
+Convert each graph to ExecuTorch Edge IR, partition supported operators for XNNPACK, lower the graphs, and convert them to an ExecuTorch runtime `.pte` format:
 
 ```bash
 python scripts/lower.py
@@ -58,7 +58,7 @@ python scripts/lower.py
 
 Check that the model converted correctly with ExecuTorch's portable Python runtime binding.
 
-Convert the input tensors into the serialized format used by the three exports. Then check that the exports collectively reproduce the PyTorch reference output:
+Convert the input tensors into the serialized format used by the three exports. After conversion, check that the exports collectively reproduce the PyTorch reference output:
 
 ```bash
 python scripts/prepare_inputs.py
@@ -75,7 +75,7 @@ Accuracy gate passed; report: /path/to/artifacts/fp32/validation.json
 
 The setup built the ExecuTorch runtime with the XNNPACK backend and KleidiAI support.
 
-ExecuTorch's generic runner executes a single `.pte` program. Invoking it separately for each stage would write and transfer intermediate tensors between processes. Repeatedly launching it for ten denoising steps would also reload the program each time, adding runtime overhead.
+ExecuTorch's generic runner executes a single `.pte` program. Invoking the program separately for each stage would write and transfer intermediate tensors between processes. Repeatedly launching the program for ten denoising steps would also reload it each time, adding runtime overhead.
 
 Build the provided C++ orchestrator linked against the ExecuTorch runtime. It loads the three exported `.pte` programs, keeps intermediate tensors in memory, connects their I/O, and invokes `denoising_step` ten times in the same process:
 
@@ -83,7 +83,7 @@ Build the provided C++ orchestrator linked against the ExecuTorch runtime. It lo
 ./scripts/build_runner.sh
 ```
 
-### Run the model on the target CPU
+## Run the model on the target CPU
 
 Run the model on the target Arm CPU with the native runner:
 
@@ -105,6 +105,6 @@ Native split orchestrator output matches the full PyTorch reference.
 
 ## What you've accomplished and what's next
 
-You have exported the FP32 SmolVLA, built a native runner for the target Arm CPU, and validated its output.
+You've exported the FP32 SmolVLA, built a native runner for the target Arm CPU, and validated its output.
 
-Next, you'll quantize part of the model to INT8, convert that model to ExecuTorch using this pipeline, and compare it to the FP32 variant through the same native runner.
+Next, you'll quantize part of the model to INT8 and convert that model to ExecuTorch using the pipeline. You'll then compare it to the FP32 variant through the same native runner.

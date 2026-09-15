@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Install the required tools
 
-You need `git` to clone the ExecuTorch repository, `curl` to fetch project files, and a C++ build toolchain:
+Install `git` to clone the ExecuTorch repository, `curl` to fetch project files, and a C++ build toolchain:
 
 ```bash
 sudo apt update
@@ -58,7 +58,7 @@ cd smolvla-executorch-conversion
 
 ## Set up the software environment
 
-The `setup.sh` script:
+The `setup.sh` script does the following:
 
 - Creates a project-local virtual environment in `.venv`
 - Pins ExecuTorch v1.4.1 at commit `e4d02f41f7909e8ed5bf4a14ffc520d733453d9f`
@@ -74,7 +74,7 @@ Run the setup script:
 
 The script downloads several gigabytes and compiles native libraries. It can take 30 minutes or longer on systems with a small number of CPU cores.
 
-Activate the virtual environment and resolve repository-local path variables with:
+Activate the virtual environment and resolve repository-local path variables:
 
 ```bash
 source env.sh
@@ -88,7 +88,7 @@ Verify the pinned packages, ExecuTorch revision and Python binding, XNNPACK runt
 python scripts/check_environment.py
 ```
 
-A successful check looks like:
+The output of a successful check is similar to:
 
 ```output
 Environment OK: aarch64, ExecuTorch e4d02f41
@@ -99,6 +99,7 @@ Environment OK: aarch64, ExecuTorch e4d02f41
 ```
 
 ## What you've accomplished and what's next
-You have obtained the scripts to convert the model, built the ExecuTorch runtime, and configured your environment.
+
+You've obtained the scripts to convert the model, built the ExecuTorch runtime, and configured your environment.
 
 Next, you'll export and lower the FP32 SmolVLA for an Arm CPU and validate the converted model against the PyTorch reference.

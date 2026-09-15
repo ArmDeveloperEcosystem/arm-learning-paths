@@ -1,10 +1,6 @@
 ---
 title: Convert SmolVLA to ExecuTorch for Arm CPU
 
-draft: true
-cascade:
-    draft: true
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for machine learning developers who want to export a vision-language-action model to ExecuTorch for Arm CPU inference.
@@ -16,8 +12,8 @@ learning_objectives:
     - Compare outputs and latency between the FP32 and INT8 models running on the Arm CPU.
 
 prerequisites:
-    - An AArch64 Ubuntu system with at least 20 GB of free storage. This Learning Path was tasted on Nvidia's DGX Spark.
-    - Familiarity with Python, PyTorch, and the Linux command-line.
+    - An AArch64 Ubuntu system with at least 20 GB of free storage. This Learning Path was tested on Nvidia's DGX Spark
+    - Familiarity with Python, PyTorch, and the Linux command-line
 
 author: William Watson
 
