@@ -100,61 +100,43 @@ If the original `MPIDR_EL1 & 0xFF` calculation is used with this layout, every c
 
 3. The example does not use the PL011 UART interface. Instead, it sets `semihosting-enable=1` to print output to the console through semihosting.
 
-## Build with the GNU toolchain
+## Build the example
 
-Enter the demo directory:
+Enter the demo directory and build the example with either GCC or Arm Compiler for Embedded. Each compiler uses a separate build directory, which prevents CMake from reusing settings from the other toolchain.
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="GCC" language="bash" >}}
 cd FreeRTOS/Demo/ThirdParty/Partner-Supported-Demos/CORTEX_R82_SMP_MPU_FVP_GCC_ARMCLANG
-```
-
-Configure a GNU build. The supplied toolchain file selects `aarch64-none-elf-gcc`, enables Cortex-R82 code generation and build the executable:
-
-```bash
 cmake -S . -B build_AEMR \
   -DCMAKE_TOOLCHAIN_FILE=gnu_toolchain.cmake
 cmake --build build_AEMR --parallel
-```
-
-The generated executable is:
-
-```output
-build_AEMR/cortex_r82_smp_mpu_fvp_example.axf
-```
-
-## Build with Arm Compiler for Embedded
-
-If you want to validate the Arm Compiler toolchain as well, configure a separate build directory. Keeping separate directories prevents CMake from reusing settings from another compiler.
-
-```bash
+  {{< /tab >}}
+  {{< tab header="Arm Compiler for Embedded" language="bash" >}}
+cd FreeRTOS/Demo/ThirdParty/Partner-Supported-Demos/CORTEX_R82_SMP_MPU_FVP_GCC_ARMCLANG
 cmake -S . -B build_AEMR_armclang \
   -DCMAKE_TOOLCHAIN_FILE=armclang_toolchain.cmake
 cmake --build build_AEMR_armclang --parallel
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
-The Arm Compiler build creates:
-
-```output
-build_AEMR_armclang/cortex_r82_smp_mpu_fvp_example.axf
-```
+The generated executable is in `build_AEMR` for GCC or `build_AEMR_armclang` for Arm Compiler for Embedded.
 
 ## Run the demo on the AEM FVP
 
-The upstream `run.sh` script expects its default output-directory name. Because this Learning Path uses `build_AEMR`, launch the GNU executable directly:
+The upstream `run.sh` script expects its default output-directory name. Because this Learning Path uses different build-directory names, launch the executable directly:
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="GCC" language="bash" >}}
 FVP_BaseR_AEMv8R \
   --application build_AEMR/cortex_r82_smp_mpu_fvp_example.axf \
   --config fvp_config.txt
-```
-
-To run the Arm Compiler build, specify its executable directly:
-
-```bash
+  {{< /tab >}}
+  {{< tab header="Arm Compiler for Embedded" language="bash" >}}
 FVP_BaseR_AEMv8R \
   --application build_AEMR_armclang/cortex_r82_smp_mpu_fvp_example.axf \
   --config fvp_config.txt
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
 The FVP starts the application and displays sender and receiver activity in the semihosting console. The core numbers depend on how the SMP scheduler assigns the tasks. The output is similar to:
 

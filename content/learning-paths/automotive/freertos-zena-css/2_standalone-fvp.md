@@ -169,91 +169,74 @@ Enter the Cortex-R82AE demo directory:
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
 ```
 
-### Build with GCC
+### Build the application
 
-Configure a debug build with the GNU toolchain. The `R82AE_PLATFORM` setting selects the standalone Cortex-R82AE FVP memory and peripheral map:
+Configure a debug build with either GCC or Arm Compiler for Embedded. The `R82AE_PLATFORM` setting selects the standalone Cortex-R82AE FVP memory and peripheral map. Each tab builds the ELF file and converts it to a raw binary using the matching toolchain utility.
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="GCC" language="bash" >}}
 cmake -S . -B build/standalone_R82AE \
   -DCMAKE_TOOLCHAIN_FILE=gnu_toolchain.cmake \
   -DCMAKE_BUILD_TYPE=Debug \
   -DKERNEL_DIR_PATH=../../FreeRTOS-Kernel \
   -DR82AE_PLATFORM=standalone_R82AE_fvp
 cmake --build build/standalone_R82AE --parallel
-```
-
-The build creates `r82ae_smp_fvp_gcc_armclang.elf` in `build/standalone_R82AE`.
-
-To create a raw binary from the GNU ELF file, use `aarch64-none-elf-objcopy`:
-
-```bash
 aarch64-none-elf-objcopy -O binary \
   build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf \
   build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.bin
-```
-
-
-### Build with armclang
-
-Follow similar instructions for Arm Compiler for Embedded:
-
-<details>
-<summary>Build with Arm Compiler for Embedded</summary>
-
-Configure a separate debug build with the Arm Compiler toolchain:
-
-```bash
+  {{< /tab >}}
+  {{< tab header="Arm Compiler for Embedded" language="bash" >}}
 cmake -S . -B build/standalone_R82AE_armclang \
   -DCMAKE_TOOLCHAIN_FILE=armclang_toolchain.cmake \
   -DCMAKE_BUILD_TYPE=Debug \
   -DKERNEL_DIR_PATH=../../FreeRTOS-Kernel \
   -DR82AE_PLATFORM=standalone_R82AE_fvp
 cmake --build build/standalone_R82AE_armclang --parallel
-```
-
-The build creates `r82ae_smp_fvp_gcc_armclang.elf` in `build/standalone_R82AE_armclang`.
-
-Load the Arm Compiler ELF file directly with the FVP:
-
-```bash
-FVP_BaseR_Cortex-R82AE \
-  --config fvp_R82AE_config.txt \
-  --application build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.elf
-```
-
-Although ELF is a standard format, embedded toolchains encode load and execution addresses differently. Binary conversion is not merely removal of ELF metadata: The converter must understand the memory layout and startup-copy model defined by the linker. A converter from another toolchain may accept the ELF without errors but silently produce an incorrect image.
-
-To create a single raw binary, use `fromelf --bincombined`. The Arm Compiler linker uses a scatter-loading description, so GNU `objcopy` should not be used to convert this ELF file. The `--bincombined` option preserves the relative load addresses in one output file:
-
-
-```bash
 fromelf --bincombined \
   --output=build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.bin \
   build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.elf
-```
+  {{< /tab >}}
+{{< /tabpane >}}
+
+The build creates `r82ae_smp_fvp_gcc_armclang.elf` and `r82ae_smp_fvp_gcc_armclang.bin` in the selected build directory.
+
+Although ELF is a standard format, embedded toolchains encode load and execution addresses differently. Binary conversion is not merely removal of ELF metadata: The converter must understand the memory layout and startup-copy model defined by the linker. A converter from another toolchain may accept the ELF without errors but silently produce an incorrect image. For this reason, use `aarch64-none-elf-objcopy` for the GCC build and `fromelf --bincombined` for the Arm Compiler build.
 
 Using `fromelf --bin` can create an output directory containing one file for each load region. Use `--bincombined` when the FVP requires one binary file.
-
-</details>
 
 ### Run the application
 
 #### Start the FVP
 
 You can load the ELF file directly. The FVP uses the addresses recorded in the ELF file, and the image retains the symbols required for source-level debugging:
-```bash
+
+{{< tabpane code=true >}}
+  {{< tab header="GCC" language="bash" >}}
+FVP_BaseR_Cortex-R82AE \
+  --config fvp_R82AE_config.txt \
+  --application build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf
+  {{< /tab >}}
+  {{< tab header="Arm Compiler for Embedded" language="bash" >}}
 FVP_BaseR_Cortex-R82AE \
   --config fvp_R82AE_config.txt \
   --application build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.elf
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
 Or you can load the binary at the Cluster 0 LLRAM base address, `0x140000000`:
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="GCC" language="bash" >}}
+FVP_BaseR_Cortex-R82AE \
+  --config fvp_R82AE_config.txt \
+  --data build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.bin@0x140000000
+  {{< /tab >}}
+  {{< tab header="Arm Compiler for Embedded" language="bash" >}}
 FVP_BaseR_Cortex-R82AE \
   --config fvp_R82AE_config.txt \
   --data build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.bin@0x140000000
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
 The Zena CSS will use the raw-binary loading method. Validate it here first, where the standalone FVP provides a simpler environment for troubleshooting.
 
@@ -268,24 +251,41 @@ This output validates UART access, SMP scheduling, core affinity, interprocessor
 ## Debug early port failures
 
 ### Use the Arm Development Studio debugger
-Start the FVP with its debug server enabled when the application doesn't reach the prompt:
+Start the FVP with its debug server enabled when the application doesn't reach the prompt. Select the tab that matches your compiler:
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="GCC" language="bash" >}}
 FVP_BaseR_Cortex-R82AE \
   --config fvp_R82AE_config.txt \
   --application build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf \
   -I -p
-```
+  {{< /tab >}}
+  {{< tab header="Arm Compiler for Embedded" language="bash" >}}
+FVP_BaseR_Cortex-R82AE \
+  --config fvp_R82AE_config.txt \
+  --application build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.elf \
+  -I -p
+  {{< /tab >}}
+{{< /tabpane >}}
+
 Load the debug image symbols in Arm Development Studio, then set breakpoints on `main` and `FreeRTOS_Abort`. Load symbols in the EL1 Secure address space if the debugger doesn't resolve the running code automatically.
 
-
-```text
+{{< tabpane code=true >}}
+  {{< tab header="GCC" language="text" >}}
 add-symbol-file build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf
 add-symbol-file build/standalone_R82AE/r82ae_smp_fvp_gcc_armclang.elf EL1S:0
 delete breakpoints
 b main
 b FreeRTOS_Abort
-```
+  {{< /tab >}}
+  {{< tab header="Arm Compiler for Embedded" language="text" >}}
+add-symbol-file build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.elf
+add-symbol-file build/standalone_R82AE_armclang/r82ae_smp_fvp_gcc_armclang.elf EL1S:0
+delete breakpoints
+b main
+b FreeRTOS_Abort
+  {{< /tab >}}
+{{< /tabpane >}}
 
 ### Use Tarmac Trace
 

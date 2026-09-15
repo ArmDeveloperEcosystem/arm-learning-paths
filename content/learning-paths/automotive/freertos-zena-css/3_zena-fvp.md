@@ -156,11 +156,10 @@ Build the Zena CSS target as a raw binary and note its linked load address. The 
 
 ### Compile
 
-Return to the Cortex-R82AE demo directory used in the previous section. Configure the exact direct-load platform target, `zena_css_fvp_direct_load`, and use the adjacent kernel clone:
+Return to the Cortex-R82AE demo directory used in the previous section. Build with either GCC or Arm Compiler for Embedded, configure the exact direct-load platform target, `zena_css_fvp_direct_load`, and use the adjacent kernel clone:
 
-Build with GCC:
-
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="GCC" language="bash" >}}
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
 cmake -S . -B build/zena_css_direct_load \
   -DCMAKE_TOOLCHAIN_FILE=gnu_toolchain.cmake \
@@ -171,14 +170,8 @@ cmake --build build/zena_css_direct_load --parallel
 aarch64-none-elf-objcopy -O binary \
   build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.elf \
   build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.bin
-```
-
-<details>
-<summary>Build with Arm Compiler for Embedded</summary>
-
-Configure a separate debug build with the Arm Compiler toolchain:
-
-```bash
+  {{< /tab >}}
+  {{< tab header="Arm Compiler for Embedded" language="bash" >}}
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
 cmake -S . -B build/zena_css_direct_load \
   -DCMAKE_TOOLCHAIN_FILE=armclang_toolchain.cmake \
@@ -189,8 +182,8 @@ cmake --build build/zena_css_direct_load --parallel
 fromelf --bincombined \
   --output=build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.bin \
   build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.elf
-```
-</details>
+  {{< /tab >}}
+{{< /tabpane >}}
 
 
 Selecting the platform `zena_css_fvp_direct_load` configures the following elements:

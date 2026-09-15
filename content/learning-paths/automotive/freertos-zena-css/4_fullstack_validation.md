@@ -67,11 +67,10 @@ The published demo already defines both configurations. Selecting `zena_css_fvp`
 
 ## Build the FreeRTOS application
 
-Configure the exact full-stack platform target, `zena_css_fvp`:
+Build with either GCC or Arm Compiler for Embedded and configure the exact full-stack platform target, `zena_css_fvp`:
 
-Build with GCC:
-
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="GCC" language="bash" >}}
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
 cmake -S . -B build/zena_css \
   -DCMAKE_TOOLCHAIN_FILE=gnu_toolchain.cmake \
@@ -82,14 +81,8 @@ cmake --build build/zena_css --parallel
 aarch64-none-elf-objcopy -O binary \
   build/zena_css/r82ae_smp_fvp_gcc_armclang.elf \
   build/zena_css/r82ae_smp_fvp_gcc_armclang.bin
-```
-
-<details>
-<summary>Build with Arm Compiler for Embedded</summary>
-
-Configure a separate debug build with the Arm Compiler toolchain:
-
-```bash
+  {{< /tab >}}
+  {{< tab header="Arm Compiler for Embedded" language="bash" >}}
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
 cmake -S . -B build/zena_css \
   -DCMAKE_TOOLCHAIN_FILE=armclang_toolchain.cmake \
@@ -100,8 +93,8 @@ cmake --build build/zena_css --parallel
 fromelf --bincombined \
   --output=build/zena_css/r82ae_smp_fvp_gcc_armclang.bin \
   build/zena_css/r82ae_smp_fvp_gcc_armclang.elf
-```
-</details>
+  {{< /tab >}}
+{{< /tabpane >}}
 
 
 The generated binary will be located in:
