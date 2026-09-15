@@ -14,9 +14,54 @@ learning_objectives:
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-09-15T21:18:20Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 762f1a48dc462eaf80807f8247b3970888f01762b4e55e84f0a9f1449b4944f4
+  summary_generated_at: '2026-09-15T21:18:20Z'
+  summary_source_hash: 762f1a48dc462eaf80807f8247b3970888f01762b4e55e84f0a9f1449b4944f4
+  faq_generated_at: '2026-09-15T21:18:20Z'
+  faq_source_hash: 762f1a48dc462eaf80807f8247b3970888f01762b4e55e84f0a9f1449b4944f4
+  summary: >-
+    You provision an Azure Cobalt 100 Arm64 VM with Ubuntu Pro 24.04 LTS, install OpenJDK,
+    and verify the Java runtime and compiler. You run a simple Java baseline to separate JVM
+    execution from framework overhead, then use JMH to measure throughput or timing while
+    accounting for warmup and JIT effects. You finish with benchmark results that provide a
+    baseline for further experiments.
+  faqs:
+  - question: I don’t see any Cobalt 100 VM sizes in the Azure portal. What should I check?
+    answer: >-
+      Confirm that your Azure account has access to Cobalt 100 based instances (Dpsv6). If you
+      do not have access, request it before continuing.
+  - question: Which OS image and architecture should I select when creating the VM?
+    answer: >-
+      Choose Ubuntu Pro 24.04 LTS on Arm64. This matches the target environment for the steps
+      that follow.
+  - question: Does installing default-jdk give me everything I need to run and build Java code?
+    answer: >-
+      Yes. The default-jdk package installs both the Java Runtime Environment (JRE) and the Java
+      Development Kit (JDK) compiler.
+  - question: How do I verify that Java is installed correctly on Arm64 before running tests?
+    answer: >-
+      Confirm the VM reports an Arm64 architecture and that the installed Java versions are present.
+      Ensure both the runtime and compiler are available before proceeding.
+  - question: Why run a Tomcat-like baseline before using a full server, and what should I look
+      for in JMH output?
+    answer: >-
+      The baseline isolates raw Java execution without framework overhead, giving you a clean
+      reference point. In JMH, focus on throughput or timing metrics that stabilize after warmup
+      to establish a reliable baseline.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -60,4 +105,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

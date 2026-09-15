@@ -21,9 +21,55 @@ prerequisites:
   - Basic understanding of [Helm](https://helm.sh/docs/topics/architecture/) and Kubernetes manifests
   - Familiarity with basic Linux command-line usage
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-09-15T21:15:22Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 68dd3fded09896a3b3ced1a118adeeaad8494c1b14693988e61e377f52bad76a
+  summary_generated_at: '2026-09-15T21:15:22Z'
+  summary_source_hash: 68dd3fded09896a3b3ced1a118adeeaad8494c1b14693988e61e377f52bad76a
+  faq_generated_at: '2026-09-15T21:15:22Z'
+  faq_source_hash: 68dd3fded09896a3b3ced1a118adeeaad8494c1b14693988e61e377f52bad76a
+  summary: >-
+    You install and validate Helm on an Arm-based Google Axion C4A virtual machine running
+    SUSE Linux, then deploy charts to GKE. You prepare the SUSE environment and use a local
+    KinD cluster to practice adding repositories, installing, upgrading, rolling back, and
+    uninstalling charts. You then deploy PostgreSQL, Redis, and NGINX on GKE and verify that
+    the pods and services respond as configured.
+  faqs:
+  - question: Which C4A machine type is used in the example VM setup?
+    answer: >-
+      The example uses the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory.
+      Select this configuration when creating the instance in the Google Cloud Console.
+  - question: How do I verify `kubectl` is installed correctly before working with GKE?
+    answer: >-
+      Run `kubectl version --client` to confirm the client is available and can report version information.
+      If a cluster is connected, the server version also appears.
+  - question: What output should I expect after adding the Bitnami Helm repository?
+    answer: >-
+      After running `helm repo add bitnami` and `helm repo update`, expect to see messages like
+      `"bitnami" has been added to your repositories` and `Successfully got an update from the
+      "bitnami" chart repository`. This confirms your local index is updated.
+  - question: When should I use the local KinD cluster versus GKE in this workflow?
+    answer: >-
+      Use the KinD-based local cluster to validate Helm installation and core workflows on the
+      SUSE VM. Move to GKE to deploy PostgreSQL, Redis, and NGINX as services on a managed Kubernetes
+      environment.
+  - question: How do I know the Helm deployments on GKE are ready to use?
+    answer: >-
+      Check that the deployed pods report Ready status and that services are reachable according
+      to the configured service type. If pods are not Ready, review the release status and pod
+      logs before continuing.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

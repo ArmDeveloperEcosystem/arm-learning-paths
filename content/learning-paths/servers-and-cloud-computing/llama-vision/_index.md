@@ -19,9 +19,55 @@ prerequisites:
     - A basic understanding of Streamlit.
     - A basic understanding of LLM fundamentals.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-09-15T21:26:34Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: acd41945ae84be42f98fbc61a4e1f153067d53e3d3992c38825b78b381d1d568
+  summary_generated_at: '2026-09-15T21:26:34Z'
+  summary_source_hash: acd41945ae84be42f98fbc61a4e1f153067d53e3d3992c38825b78b381d1d568
+  faq_generated_at: '2026-09-15T21:26:34Z'
+  faq_source_hash: acd41945ae84be42f98fbc61a4e1f153067d53e3d3992c38825b78b381d1d568
+  summary: >-
+    You build and deploy a vision-enabled chatbot on a Google Axion Arm instance with
+    PyTorch, Transformers, and Streamlit. You run a Flask backend that downloads and serves
+    a quantized Llama 3.2-Vision model, then create a Streamlit frontend for image uploads
+    and prompts. You configure firewall access, start both services on Ubuntu, and verify
+    image-plus-text responses in the web app.
+  faqs:
+  - question: What result should I expect when both the backend and frontend are running?
+    answer: >-
+      Open the browser to the app and you should see the title "LLM Vision Chatbot on Arm" with
+      controls to upload an image and enter a prompt. After submitting, the page displays a generated
+      text response that uses the image as context.
+  - question: Which address should I use to open the web app?
+    answer: >-
+      Use `http://[your instance ip]:8501` in your browser. If the page does not load, allow inbound
+      TCP traffic to port 8501 in your instance’s security rules as noted in the steps.
+  - question: How do I run the backend and frontend at the same time?
+    answer: >-
+      Start the backend script in one terminal with the virtual environment activated. Open a
+      new terminal, activate the same environment, and then start the Streamlit frontend.
+  - question: What should I check if the frontend cannot reach the backend?
+    answer: >-
+      Verify the backend process is running without errors and listening. Confirm the backend
+      URL configured in `frontend.py` matches the backend host and port, and open that port in your
+      firewall if you are connecting remotely.
+  - question: How do I know the model download and 4-bit quantization completed?
+    answer: >-
+      Watch the backend terminal; it downloads the Llama 3.2‑Vision model and performs 4‑bit quantization
+      before serving. Continue once you see the load steps finish and the server reports it is
+      ready.
+# END generated_summary_faq
+
 author: Nobel Chowdary Mandepudi
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -60,4 +106,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

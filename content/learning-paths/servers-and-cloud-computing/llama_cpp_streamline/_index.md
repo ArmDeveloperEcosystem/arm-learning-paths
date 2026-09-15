@@ -20,11 +20,57 @@ prerequisites:
     - Knowledge of Arm Streamline usage
     - An Arm Neoverse or Cortex-A hardware platform running Linux or Android
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-09-15T21:27:17Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 49b58c9124cc76e2d884f0c0e95bffd2d7a9b4300f8ae9e31b362499bc95cc8f
+  summary_generated_at: '2026-09-15T21:27:17Z'
+  summary_source_hash: 49b58c9124cc76e2d884f0c0e95bffd2d7a9b4300f8ae9e31b362499bc95cc8f
+  faq_generated_at: '2026-09-15T21:27:17Z'
+  faq_source_hash: 49b58c9124cc76e2d884f0c0e95bffd2d7a9b4300f8ae9e31b362499bc95cc8f
+  summary: >-
+    You profile `llama.cpp` on Arm CPUs with Arm Streamline, including runs that use KleidiAI
+    LLM kernels. You add annotations for Prefill and Decode, build `llama-cli`, prepare the
+    model files and `gator` daemon, and capture traces. You then inspect annotation channels
+    and operator timing to distinguish pipeline stages and assess multi-core and
+    multi-thread behavior during token generation.
+  faqs:
+  - question: How do I know the annotation markers are working in Streamline?
+    answer: >-
+      During capture, look for labeled markers that bracket the Prefill and Decode phases on the
+      timeline. If they do not appear, rebuild `llama.cpp` with the annotation changes and run the
+      annotated `llama-cli`.
+  - question: What do I need on the Arm target before starting a profiling capture?
+    answer: >-
+      Ensure the `gator` daemon is configured and running on the Arm system. Place the built `llama-cli`
+      and the required model files on the target so Streamline can capture a representative run.
+  - question: How do I differentiate Prefill and Decode in the results?
+    answer: >-
+      Use the inserted markers to identify each stage in the Streamline timeline. Prefill is compute-intensive
+      and Decode is memory-bound, so compare their annotated ranges to understand where time is
+      spent.
+  - question: How can I analyze operator-level performance with Annotation Channels?
+    answer: >-
+      Enable channels in the annotation integration so Streamline displays separate lanes for
+      grouped operations. Inspect the channel lanes to see operator timing and overlaps during
+      token generation.
+  - question: How do I evaluate multi-core or multi-thread execution with this setup?
+    answer: >-
+      Capture a token generation run and use the markers and channels to correlate work across
+      cores and threads. Compare behavior during Prefill and Decode to see how execution is distributed.
+# END generated_summary_faq
+
 author: 
     - Zenon Zhilong Xiu
     - Odin Shen
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -71,4 +117,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

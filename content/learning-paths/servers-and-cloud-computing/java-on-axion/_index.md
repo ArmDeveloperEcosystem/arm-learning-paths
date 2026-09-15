@@ -14,9 +14,54 @@ learning_objectives:
 prerequisites:
     - A [Google Cloud](https://cloud.google.com/) account with access to Axion based instances (C4A).
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-09-15T21:17:46Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 6a44ac216373b4d69cf72962caf6a255b06b062e2e665a11af9cd8638ec7be1c
+  summary_generated_at: '2026-09-15T21:17:46Z'
+  summary_source_hash: 6a44ac216373b4d69cf72962caf6a255b06b062e2e665a11af9cd8638ec7be1c
+  faq_generated_at: '2026-09-15T21:17:46Z'
+  faq_source_hash: 6a44ac216373b4d69cf72962caf6a255b06b062e2e665a11af9cd8638ec7be1c
+  summary: >-
+    You provision an Arm-based Google Axion VM with `gcloud`, install Java on Ubuntu 24.04,
+    and deploy Spring Petclinic. You verify the runtime, drive load with JMeter and the
+    included JMX plan, and experiment with JVM optimization flags. You can repeat the
+    workload on an earlier-generation Arm instance to compare Java behavior on Axion’s Armv9
+    Neoverse V2 CPU.
+  faqs:
+  - question: How do I connect to the Axion instance to start installing Java?
+    answer: >-
+      Use the Google Cloud console SSH button for your VM. It opens a browser-based shell connected
+      to the instance.
+  - question: What output should I expect after installing Java to confirm it worked?
+    answer: >-
+      Running `java -version` should print an OpenJDK 21.x release similar to: `openjdk version "21.0.3"`
+      `2024-04-16`. If the command is not found, recheck that `default-jre` installed successfully.
+  - question: Why open a new SSH terminal before running JMeter?
+    answer: >-
+      Running JMeter in a separate terminal avoids interrupting the Spring Petclinic process.
+      Keep the terminal that started the application open so the service stays available during
+      the test.
+  - question: Which test plan do I use with JMeter for Spring Petclinic?
+    answer: >-
+      Use the `.jmx` file provided in the `spring-petclinic` repository. It defines a workload that
+      exercises the application endpoints for the performance tests.
+  - question: How should I compare configurations or instance generations fairly?
+    answer: >-
+      Keep the workload, application build, and test plan identical and change only one variable
+      at a time, such as a JVM flag or instance type. Run the JMeter plan for each
+      case and compare the resulting metrics.
+# END generated_summary_faq
+
 author: Joe Stech
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
