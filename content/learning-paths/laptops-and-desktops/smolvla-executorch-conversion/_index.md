@@ -37,11 +37,10 @@ generated_summary_faq:
     Then, you'll quantize eligible operations to INT8 with TorchAO and reuse the same inputs to compare
     model outputs, latency, and `.pte` sizes.
   faqs:
-  - question: How do I know that the FP32 export and run completed correctly?
+  - question: Which commands validate the exported FP32 model?
     answer: >-
-      Run the conversion and execution commands, then confirm that validation reports
-      the ExecuTorch FP32 output matches the PyTorch reference. Review the artifacts in the FP32 output
-      directory.
+      Run `python scripts/prepare_inputs.py` and `python scripts/validate_pte.py`. Confirm that the
+      output reports `Accuracy gate passed` and points to the FP32 validation report.
   - question: Where are the FP32 artifacts saved, and how can I change the location?
     answer: >-
       Find the artifacts in `artifacts/fp32` when you use the default configuration. To change the

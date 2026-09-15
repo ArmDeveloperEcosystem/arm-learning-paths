@@ -30,7 +30,7 @@ ExecuTorch provides a common platform for edge AI inference deployment.
 
 You'll first export your PyTorch model to a hardware-independent ExecuTorch intermediate representation (IR). Next, you'll use a suitable backend to lower the model into an optimized form for your target hardware. You'll use the [XNNPACK backend](https://github.com/google/XNNPACK), which enables optimized inference on Arm CPUs.
 
-The ExecuTorch conversion pipeline has these stages:
+The ExecuTorch conversion pipeline has the following stages:
 
 ```output
 PyTorch model (SmolVLA)
@@ -69,7 +69,7 @@ After `torch.export`, the model is represented as a graph of ATen operations.
 
 The XNNPACK partitioner inspects this graph and groups the operations that
 XNNPACK can execute. These supported regions are replaced with delegate calls
-that will be handled by the XNNPACK backend at runtime.
+that the XNNPACK backend will handle at runtime.
 
 During backend lowering, XNNPACK-supported subgraphs are converted into delegate data and replaced in the Edge graph with XNNPACK delegate calls. Operations that XNNPACK can't execute remain in the Edge graph when the ExecuTorch runtime has suitable fallback kernels for them.
 
@@ -93,4 +93,4 @@ This split has several benefits compared with exporting the whole model:
 
 You now understand the SmolVLA architecture and how the model progresses through the ExecuTorch pipeline.
 
-Next, you'll set up your environment and obtain the resources for your own conversion.
+Next, you'll set up your environment and the resources for your own conversion.

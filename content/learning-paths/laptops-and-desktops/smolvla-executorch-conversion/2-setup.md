@@ -73,7 +73,7 @@ Run the setup script:
 ./scripts/setup.sh
 ```
 
-The script downloads several gigabytes and compiles native libraries. It can take 30 minutes or longer on systems with a small number of CPU cores.
+The script downloads several gigabytes and compiles native libraries. The download can take 30 minutes or longer on systems with a small number of CPU cores.
 
 Activate the virtual environment and resolve repository-local path variables:
 
@@ -101,6 +101,6 @@ Environment OK: aarch64, ExecuTorch e4d02f41
 
 ## What you've accomplished and what's next
 
-You've obtained the scripts to convert the model, built the ExecuTorch runtime, and configured your environment.
+You've downloaded the scripts to convert the model, built the ExecuTorch runtime, and configured your environment.
 
 Next, you'll export and lower the FP32 SmolVLA for an Arm CPU and validate the converted model against the PyTorch reference.

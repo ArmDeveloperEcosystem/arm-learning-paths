@@ -79,11 +79,12 @@ The runner lets you allocate one group of cores to `vision` and another group to
 
 Use only the CPU IDs that are online on your system. You can also omit affinity options, which is useful on smaller systems or CPUs with one core type.
 
-Other resource-intensive processes affect inference latency. Inspect the live CPU load with `top`, and press `q` to exit:
+Other resource-intensive processes affect inference latency. Inspect the live CPU load with `top`:
 
 ```bash
 top
 ```
+Press `q` to exit. 
 
 ### Run benchmarks
 
@@ -110,7 +111,7 @@ Experiment with the following options to suit your system:
 - `--cpu-threads` specifies the ExecuTorch and XNNPACK thread pool size; match the thread pool size to the number of cores in `--cpu-affinity`
 - `--vision-cpu-affinity` and `--vision-cpu-threads` set a separate core allocation and thread pool size for the vision encoder
 
-For example, the DGX Spark configuration shown previously uses `--cpu-threads 5 --cpu-affinity 15-19 --vision-cpu-threads 8 --vision-cpu-affinity 5-9,15-19`. Apply identical options to the FP32 and INT8 benchmark commands for a fair comparison.
+For example, the DGX Spark configuration uses `--cpu-threads 5 --cpu-affinity 15-19 --vision-cpu-threads 8 --vision-cpu-affinity 5-9,15-19`. Apply identical options to the FP32 and INT8 benchmark commands for a fair comparison.
 {{% /notice %}}
 
 ### Compare benchmark results

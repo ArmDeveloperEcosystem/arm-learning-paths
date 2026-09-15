@@ -59,12 +59,14 @@ python scripts/lower.py
 
 Check that the model converted correctly with ExecuTorch's portable Python runtime binding.
 
-Convert the input tensors into the serialized format used by the three exports. After conversion, check that the exports collectively reproduce the PyTorch reference output:
+Convert the input tensors into the serialized format used by the three exports:
 
 ```bash
 python scripts/prepare_inputs.py
 python scripts/validate_pte.py
 ```
+
+After conversion, check that the exports collectively reproduce the PyTorch reference output.
 
 The expected output is similar to:
 
@@ -78,11 +80,12 @@ The setup built the ExecuTorch runtime with the XNNPACK backend and KleidiAI sup
 
 ExecuTorch's generic runner executes a single `.pte` program. Invoking the program separately for each stage would write and transfer intermediate tensors between processes. Repeatedly launching the program for ten denoising steps would also reload it each time, adding runtime overhead.
 
-Build the provided C++ orchestrator and link it against the ExecuTorch runtime. The orchestrator loads the three exported `.pte` programs and keeps intermediate tensors in memory. It connects their inputs and outputs, then invokes `denoising_step` ten times in the same process:
+Build the provided C++ orchestrator and link it against the ExecuTorch runtime:
 
 ```bash
 ./scripts/build_runner.sh
 ```
+The orchestrator loads the three exported `.pte` programs and keeps intermediate tensors in memory. It connects their inputs and outputs, then invokes `denoising_step` ten times in the same process.
 
 ## Run the model on the target CPU
 
