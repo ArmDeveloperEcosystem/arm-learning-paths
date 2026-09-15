@@ -218,7 +218,7 @@ Move the card to the board, open the console with `picocom` as on the previous p
 The expected output is:
 
 ```output
-60198 bytes read in 7 ms (8.2 MiB/s)
+60198 bytes read in 1 ms (57.4 MiB/s)
 ## Loading kernel (any) from FIT Image at 90000000 ...
    Using 'conf-1' configuration
    Verifying Hash Integrity ... sha256,rsa2048:key-b-  error!
@@ -226,11 +226,10 @@ Verification failed for '<NULL>' hash node in 'conf-1' config node
 Failed to verify required signature 'key-key-a'
 Bad Data Hash
 ERROR -2: can't get kernel image!
-
 *** REFUSED: Zephyr was NOT started ***
 ```
 
-**Lines to look for:** `sha256,rsa2048:key-b-  error!`, then `Failed to verify required signature 'key-key-a'`, and last `*** REFUSED: Zephyr was NOT started ***`. No `Loading Kernel Image` line and no Zephyr banner.
+**Lines to look for:** `sha256,rsa2048:key-b-  error!`, then `Failed to verify required signature 'key-key-a'`, and last `*** REFUSED: Zephyr was NOT started ***`, printed by the `echo` in your boot command. No `Loading Kernel Image` line and no Zephyr banner.
 
 U-Boot reports two separate failures, the same two that `fit_check_sign` reports on the host. The `sha256,rsa2048:key-b-  error!` line says U-Boot found a signature naming `key-b` and has no such key; U-Boot doesn't have the public half of `key-b`. The `Failed to verify required signature 'key-key-a'` line is the `required = "conf"` rule you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). It says every configuration must carry a valid signature by `key-a`, and this one doesn't. An image with no signature node at all fails that second check in the same way. `Bad Data Hash` and `ERROR -2: can't get kernel image!` end both refusals on this page and don't say which check failed; the lines before them do.
 
@@ -247,13 +246,13 @@ Still at the prompt, run the tampered test:
 The expected output is:
 
 ```output
-60198 bytes read in 7 ms (8.2 MiB/s)
+60198 bytes read in 2 ms (28.7 MiB/s)
 ## Loading kernel (any) from FIT Image at 90000000 ...
    Using 'conf-1' configuration
    Verifying Hash Integrity ... sha256,rsa2048:key-a+ OK
    Trying 'kernel-1' kernel subimage
      Description:  Zephyr RTOS image
-     Created:      2026-09-11  17:14:00 UTC
+     Created:      2026-09-11  16:14:00 UTC
      Type:         Kernel Image
      Compression:  uncompressed
      Data Start:   0x900000e8
@@ -268,7 +267,6 @@ The expected output is:
 Bad hash value for 'hash-1' hash node in 'kernel-1' image node
 Bad Data Hash
 ERROR -2: can't get kernel image!
-
 *** REFUSED: Zephyr was NOT started ***
 ```
 

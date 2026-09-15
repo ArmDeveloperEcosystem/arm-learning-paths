@@ -27,7 +27,7 @@ You did this without changing a line of U-Boot source: the public key went in th
 
 Each stage checks the next, so the chain is only as trustworthy as the stage that checked U-Boot.
 
-Most Cortex-A SoCs have the two security states you met in [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/): the production state, with the customer's key in eFuses, and the development state, where any key passes. The SPL banner told you this EVM is in the development state, HS-FS in TI's words: `SoC:   AM62LX SR1.0 HS-FS`. On the AM62L EVM, TI's development key signs the three boot files, so the ROM and security-firmware checks run but can't refuse anything, and U-Boot enforces only the last link, U-Boot to Zephyr.
+Most Cortex-A SoCs have the two security states you met in [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/): the production state, with the customer's key in eFuses, and the development state, where any key passes. U-Boot's banner told you this EVM is in the development state, HS-FS in TI's words: `SoC:   AM62LX SR1.1 HS-FS`. On the AM62L EVM, TI's development key signs the three boot files, so the ROM and security-firmware checks run but can't refuse anything, and U-Boot enforces only the last link, U-Boot to Zephyr.
 
 The public half of `key-a` lives inside `u-boot.img`, on an unprotected FAT partition, so anyone who can write the card can replace it with one that carries their own key. The root of trust is in a file on the card, not in silicon.
 

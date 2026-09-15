@@ -119,13 +119,48 @@ picocom -b 115200 /dev/ttyUSB0
 
 If `picocom` reports a permission error, add your user to the `dialout` group with `sudo usermod -aG dialout $USER`, then log out and back in. To leave `picocom` later, press **Ctrl+A**, then **Ctrl+X**.
 
-Move the SD card to the board, then power the board through a USB-C PD supply on **J17** or **J19**. The console starts printing at once. Early in the log, the SPL shows the SoC's security state:
+Move the SD card to the board, then power the board through a USB-C PD supply on **J17** or **J19**. The console starts printing at once. Your dates, version strings and countdown differ. The log up to the countdown is similar to:
 
 ```output
-SoC:   AM62LX SR1.0 HS-FS
+NOTICE:  Booting Trusted Firmware
+NOTICE:  BL1: v2.14.0(release):12.00.00.06-28-gb54338ab6
+NOTICE:  BL1: Built : 09:15:06, Jul  8 2026
+NOTICE:  BL1: dram_class: 11
+NOTICE:  BL1: dram_size: 0x80000000
+NOTICE:  DDR init done
+NOTICE:  ENTERING WFI - end of bl1
+NOTICE:  BL31: v2.14.0(release):12.00.00.06-28-gb54338ab6
+NOTICE:  BL31: Built : 09:15:06, Jul  8 2026
+NOTICE:  SYSFW ABI: 4.0 (firmware rev 0x000c '12.1.2--v12.01.02 (Clever Cat)')
+ERROR:   Agent 0 Protocol 0x10 Message 0x7: not supported
+
+U-Boot SPL 2026.01-ti-g5fb294342321 (Jul 09 2026 - 22:23:09 +0000)
+SPL initial stack usage: 1920 bytes
+Trying to boot from MMC2
+Authentication passed
+Authentication passed
+ERROR:   Agent 0 Protocol 0x10 Message 0x7: not supported
+
+
+U-Boot 2026.01-g5fb294342321 (Sep 11 2026 - 18:13:32 +0200)
+
+SoC:   AM62LX SR1.1 HS-FS
+Model: Texas Instruments AM62L3 Evaluation Module
+DRAM:  2 GiB
+ERROR:   Agent 0 Protocol 0x10 Message 0x7: not supported
+Core:  89 devices, 34 uclasses, devicetree: separate
+MMC:   mmc@fa10000: 0, mmc@fa00000: 1
+Loading Environment from nowhere... OK
+In:    serial@2800000
+Out:   serial@2800000
+Err:   serial@2800000
+Net:   eth0: ethernet@8000000port@1, eth1: ethernet@8000000port@2
+Hit any key to stop autoboot:  3
 ```
 
-`HS-FS` is TI's name for the development state: no customer key is fused in this device yet; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) explains what that leaves unverified. The check you watch next, U-Boot verifying Zephyr, doesn't depend on it.
+**Lines to look for:** the `NOTICE:  BL1:` and `BL31:` lines are TF-A, from `tiboot3.bin` and `tispl.bin`; `Authentication passed` is TIFS accepting what the SPL loads, `u-boot.img`; `SoC:   AM62LX SR1.1 HS-FS` is U-Boot's banner naming the SoC's security state; `MMC:` lists `mmc 0`, the eMMC, and `mmc 1`, the SD card in `BOOT_DEV`.
+
+`HS-FS` is TI's name for the development state: no customer key is fused in this device yet; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) explains what that leaves unverified. The check you watch next, U-Boot verifying Zephyr, doesn't depend on it. The three `ERROR:   Agent 0 Protocol 0x10 Message 0x7: not supported` lines come from TI's firmware, and the boot continues past them. In this log the first two stages are TI's prebuilt files, so the `U-Boot SPL` line carries TI's build date; with the files you built it carries yours.
 
 ## Watch the trusted image boot
 
@@ -134,13 +169,13 @@ U-Boot counts down for three seconds and then autoboot runs `bootcmd`, which is 
 Your `Created` time, `Hash value` and read time differ. The lines that matter are the same on any board; only the two addresses, `FIT_ADDR` and `ZEPHYR_ADDR` from `env.sh`, change. The output is similar to:
 
 ```output
-60198 bytes read in 7 ms (8.2 MiB/s)
+60198 bytes read in 1 ms (57.4 MiB/s)
 ## Loading kernel (any) from FIT Image at 90000000 ...
    Using 'conf-1' configuration
    Verifying Hash Integrity ... sha256,rsa2048:key-a+ OK
    Trying 'kernel-1' kernel subimage
      Description:  Zephyr RTOS image
-     Created:      2026-09-11  17:14:00 UTC
+     Created:      2026-09-11  16:14:00 UTC
      Type:         Kernel Image
      Compression:  uncompressed
      Data Start:   0x900000e8
@@ -155,6 +190,7 @@ Your `Created` time, `Hash value` and read time differ. The lines that matter ar
    Loading Kernel Image to 82000000
 ## Starting application at 0x82000000 ...
 *** Booting Zephyr OS build 4.4.2 ***
+Secondary CPU core 1 (MPID:0x1) is up
 
 ################################################
 #                                              #
@@ -173,7 +209,7 @@ this image was verified by U-Boot before it ran.
 
 `sha256,rsa2048:key-a+ OK` is `bootm start` verifying the RSA signature of `conf-1` with the `key-a` public key compiled into U-Boot. `sha256+ OK` is the same step checking that the image bytes match the signed hash. `Loading Kernel Image to 82000000` is `bootm loados` copying the verified payload to Zephyr's link address. The `+` after a key name or hash algorithm is U-Boot's shorthand for a pass. A failed signature check prints `-` instead, and [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) shows one.
 
-`go`, not `bootm`, prints `## Starting application at 0x82000000 ...`. It is the last line from U-Boot. The program that U-Boot verified a moment earlier prints everything after it, starting with the Zephyr banner.
+`go`, not `bootm`, prints `## Starting application at 0x82000000 ...`. It is the last line from U-Boot. The program that U-Boot verified a moment earlier prints everything after it, starting with the Zephyr banner. `Secondary CPU core 1 (MPID:0x1) is up` is Zephyr starting the second Cortex-A53 core through TF-A, the firmware you met on the first page.
 
 ## If nothing prints
 
