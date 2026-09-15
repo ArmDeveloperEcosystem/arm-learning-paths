@@ -1,6 +1,6 @@
 ---
 title: Create signing keys and sign the Zephyr image into a FIT
-description: Build mkimage from the TI U-Boot tree, generate two RSA keys with OpenSSL, and sign the Zephyr binary into a FIT image that U-Boot can verify.
+description: Build mkimage from the board's U-Boot tree, generate two RSA keys with OpenSSL, and sign the Zephyr binary into a FIT image that U-Boot can verify.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -13,13 +13,13 @@ Open a terminal and load the environment: `source $HOME/zephyr-secure-boot/env.s
 
 `mkimage` builds and signs a FIT image. `fit_check_sign` verifies a signed FIT on the host. Both come from the same U-Boot tree as the board's U-Boot, so signer and verifier match.
 
-The `tools` target needs the board's `.config` first, so select the AM62L EVM defconfig:
+The `tools` target needs the board's `.config` first, so run the defconfig target named by `UBOOT_DEFCONFIG` in `env.sh`:
 
 ```bash
-make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="${CROSS}gcc --sysroot=$SYSROOT" am62lx_evm_defconfig
+make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="${CROSS}gcc --sysroot=$SYSROOT" $UBOOT_DEFCONFIG
 ```
 
-`CC="${CROSS}gcc --sysroot=$SYSROOT"` gives the SDK's compiler the library path `SYSROOT` from `env.sh`; without it the U-Boot link fails. Keep it on every `make` line, including the three on the next page.
+`CC="${CROSS}gcc --sysroot=$SYSROOT"` gives the SDK's compiler the library path `SYSROOT` from `env.sh`; on the AM62L SDK the U-Boot link fails without it. Keep it on every `make` line, including the three on the next page.
 
 Then build the host tools:
 
@@ -27,7 +27,7 @@ Then build the host tools:
 make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="${CROSS}gcc --sysroot=$SYSROOT" tools
 ```
 
-Check that `mkimage` runs:
+Both tools land in `$UBOOT_OUT/tools/`. Check that `mkimage` runs:
 
 ```bash
 $UBOOT_OUT/tools/mkimage -V
@@ -41,7 +41,7 @@ mkimage version 2026.01-g5fb294342321
 
 {{% notice Note %}}
 If the `tools` build stops early, the fix depends on where it stops:
-- At `pylibfdt` or `swig`: install `swig python3-dev` as described in [Set up the host tools and the TI SDK](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/2-set-up-tools/). If you'd rather not build U-Boot's own `dtc` and `pylibfdt`, add `DTC=$(which dtc)` to the `make` line and install the `python3-libfdt` package, because U-Boot still checks that `import libfdt` works in `python3`
+- At `pylibfdt` or `swig`: install `swig python3-dev` as described in [Set up the host tools and the board's SDK](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/2-set-up-tools/), or add `DTC=$(which dtc)` to the `make` line and install the `python3-libfdt` package
 - At `mkeficapsule` with `fatal error: gnutls/gnutls.h: No such file or directory`: install `libgnutls28-dev uuid-dev`, or add the line `# CONFIG_TOOLS_MKEFICAPSULE is not set` to `$UBOOT_OUT/.config`, then run the `tools` step again. You don't need that tool
 {{% /notice %}}
 
@@ -71,7 +71,7 @@ key-a.crt  key-a.key  key-b.crt  key-b.key
 
 `mkimage -k <dir>` expects this layout. `<name>.key` holds the private key, `<name>.crt` is a self-signed certificate wrapping the public key, and `<name>` is the `key-name-hint` you write in the FIT source.
 
-`sha256,rsa2048` is enough for a demo. The production page covers stronger keys and where to keep them.
+`sha256,rsa2048` is enough for a demo.
 
 {{% notice Warning %}}
 These are throwaway development keys, generated on the build machine. Production keys are generated and kept elsewhere. See [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/).
@@ -79,15 +79,15 @@ These are throwaway development keys, generated on the build machine. Production
 
 ## Write the FIT source
 
-You describe the FIT from [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/) in a `.its` file (image tree source), and `mkimage` compiles and signs it into an `.itb` (image tree blob).
+You write the FIT that [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/) introduced as a `.its` file (image tree source), and `mkimage` compiles and signs it into an `.itb` (image tree blob).
 
-Write the source with a heredoc, so `$WORK` expands to the absolute path of the Zephyr binary you built on the previous page:
+Write the source with an unquoted heredoc, so `$WORK` expands to the path of the Zephyr binary from the previous page and `$ZEPHYR_ADDR` to its link address:
 
 ```bash
 cat > $FIT/zephyr-a.its <<EOF
 /dts-v1/;
 / {
-	description = "Zephyr RTOS for AM62L Cortex-A53, signed with key-a";
+	description = "Zephyr RTOS, signed with key-a";
 	#address-cells = <1>;
 	images {
 		kernel-1 {
@@ -97,15 +97,15 @@ cat > $FIT/zephyr-a.its <<EOF
 			arch = "arm64";
 			os = "u-boot";
 			compression = "none";
-			load  = <0x82000000>;
-			entry = <0x82000000>;
+			load  = <$ZEPHYR_ADDR>;
+			entry = <$ZEPHYR_ADDR>;
 			hash-1 { algo = "sha256"; };
 		};
 	};
 	configurations {
 		default = "conf-1";
 		conf-1 {
-			description = "Zephyr on AM62L Cortex-A53";
+			description = "Zephyr on Cortex-A";
 			kernel = "kernel-1";
 			signature-1 {
 				algo = "sha256,rsa2048";
@@ -122,7 +122,7 @@ EOF
 
 `os = "u-boot"` is U-Boot's slot for a standalone program: the payload is verified and copied, nothing else. With `os = "linux"`, U-Boot would look for a device tree in the FIT and parse a Linux kernel header.
 
-`load` and `entry` are `0x82000000`, Zephyr's link address on this board, where U-Boot copies the verified payload.
+`load` and `entry` are `ZEPHYR_ADDR`, `0x82000000` on the AM62L EVM: Zephyr's link address, where U-Boot copies the verified payload.
 
 `hash-1 { algo = "sha256"; }` is the hash of the payload bytes. It sits in the image node, and the signature covers it.
 
@@ -130,7 +130,7 @@ EOF
 
 `signature-1` sits under the configuration, not under the image, because the `required = "conf"` rule you build into U-Boot on the next page demands a valid signature on the configuration it boots. With `sign-images = "kernel"`, `mkimage` signs the configuration node plus the hash node of the kernel image. `key-name-hint = "key-a"` names the key files in `$KEYS` and, later, the key node U-Boot looks up.
 
-Both `description` properties are mandatory. `mkimage` refuses the source without them.
+The top-level and image `description` properties are mandatory: `mkimage` refuses the source without them. The one in `conf-1` is optional and only appears in the listing.
 
 ## Sign the image
 
@@ -143,11 +143,11 @@ $UBOOT_OUT/tools/mkimage -f $FIT/zephyr-a.its -k $KEYS $FIT/zephyr-a.itb
 `mkimage` prints the image contents. Your timestamps, `Hash value` and `Sign value` differ, and the `Sign value` is shortened here. The output is similar to:
 
 ```output
-FIT description: Zephyr RTOS for AM62L Cortex-A53, signed with key-a
-Created:         Tue Sep 15 18:52:31 2026
+FIT description: Zephyr RTOS, signed with key-a
+Created:         Fri Sep 11 19:14:00 2026
  Image 0 (kernel-1)
   Description:  Zephyr RTOS image
-  Created:      Tue Sep 15 18:52:31 2026
+  Created:      Fri Sep 11 19:14:00 2026
   Type:         Kernel Image
   Compression:  uncompressed
   Data Size:    58340 Bytes = 56.97 KiB = 0.06 MiB
@@ -159,15 +159,17 @@ Created:         Tue Sep 15 18:52:31 2026
   Hash value:   1d1d375f14c3354579e9e5310986a69b831bcd1944cd6b35aa8e83632b658166
  Default Configuration: 'conf-1'
  Configuration 0 (conf-1)
-  Description:  Zephyr on AM62L Cortex-A53
+  Description:  Zephyr on Cortex-A
   Kernel:       kernel-1
   Sign algo:    sha256,rsa2048:key-a
   Sign value:   6d5f9933722189a0dcee58791243429d0bf28fe0dce96ac093da23c1f24ead70...
-  Timestamp:    Tue Sep 15 18:52:31 2026
+  Timestamp:    Fri Sep 11 19:14:00 2026
 Signature written to '/home/user/zephyr-secure-boot/fit/zephyr-a.itb', node '/configurations/conf-1/signature-1'
 ```
 
-**Lines to look for:** `Sign algo:    sha256,rsa2048:key-a` and the last line say that `mkimage` found `key-a` in `$KEYS` and wrote its signature into `conf-1`. `OS: U-Boot` and `Load Address: 0x82000000` are the FIT source as you wrote it, and `Hash value` is the SHA-256 of `zephyr.bin`, which U-Boot recomputes on the board.
+**Lines to look for:** `Sign algo:    sha256,rsa2048:key-a` and the last line, `Signature written to ... node '/configurations/conf-1/signature-1'`, say that `mkimage` found `key-a` in `$KEYS` and wrote its signature into `conf-1`.
+
+`OS:           U-Boot` and `Load Address: 0x82000000` are the FIT source as you wrote it, and `Hash value` is the SHA-256 of `zephyr.bin`, which U-Boot recomputes on the board.
 
 Don't use the `mkimage -K` option here: the public key goes into U-Boot's own device tree at build time, on the next page.
 

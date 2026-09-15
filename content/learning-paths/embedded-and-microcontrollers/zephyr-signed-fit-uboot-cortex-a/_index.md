@@ -5,17 +5,17 @@ description: Learn how to sign a Zephyr image in a FIT, build the public key int
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an advanced topic for embedded developers who run Zephyr on an Arm Cortex-A processor behind U-Boot and want the bootloader to verify the Zephyr image before it starts.
+who_is_this_for: This is an advanced topic for embedded developers who run Zephyr on an Arm Cortex-A processor behind U-Boot and want the bootloader to verify the Zephyr image before starting it.
 
 learning_objectives:
     - Explain where a Zephyr image sits in the Cortex-A boot chain and which stage can verify it
     - Build and sign a Zephyr image in a FIT, and build the public key into U-Boot without changing U-Boot source
-    - Write a U-Boot boot command that starts Zephyr only after the signature and hash checks pass, and prove it on the board with a wrong key and a tampered image
-    - Explain what an HS-FS board leaves unverified and what a production device needs, such as a fused key, a locked console and no unverified boot path
+    - Write a U-Boot boot command that starts Zephyr only after the signature and hash checks pass, and optionally prove on the board that it refuses a wrong key and a tampered image
+    - Explain what a board in its development state leaves unverified, and what a production device needs on top
 
 prerequisites:
-    - A TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with a micro-SD card, a micro-USB cable for the console, and a USB-C PD power supply
-    - An x86_64 Linux host running Ubuntu 22.04 or 24.04, with about 20 GB of free disk space
+    - A TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with a micro-SD card, a micro-USB cable for the console, and a USB-C Power Delivery (PD) power supply
+    - An x86_64 Linux host running Ubuntu 22.04 or 24.04, with about 20 GB of free disk space; the TI SDK ships its installer and cross compiler as x86_64 binaries only
     - Visual Studio Code with the Workbench for Zephyr extension and its host tools installed, as in the first steps of [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/)
     - Basic knowledge of U-Boot and the Linux command line
 

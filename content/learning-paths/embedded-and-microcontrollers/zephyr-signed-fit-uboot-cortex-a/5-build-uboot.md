@@ -32,7 +32,7 @@ U-Boot keeps its FIT verification keys in the control device tree, the DTB packe
 
 The `rsa,` properties are the public half of `key-a`. `required = "conf"` is the fail-closed rule from [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/): no valid signature by this key, no boot.
 
-`am62lx_evm_defconfig` already turns on everything else. Check the symbols that matter in the `$UBOOT_OUT/.config` from the previous page:
+The board's defconfig has to turn on the verifier, and the AM62L one already does. Check the symbols that matter in the `$UBOOT_OUT/.config` from the previous page:
 
 ```bash
 grep -E '^CONFIG_(FIT|FIT_SIGNATURE|RSA|OF_SEPARATE)=|LEGACY_IMAGE_FORMAT' $UBOOT_OUT/.config
@@ -52,7 +52,7 @@ CONFIG_RSA=y
 
 Legacy image support is off: the older uImage format carries no signature, so `bootm` has nothing unsigned to fall back to. [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) covers the other boot commands.
 
-Only the key and the boot command are missing. Both are build configuration, so the U-Boot source stays untouched.
+Only the key and the boot command are missing. Both are build configuration, so the U-Boot source stays untouched. If your board's `.config` lacks one of the four `=y` lines, add it to the fragment you write in *Configure and build*; if it has `CONFIG_LEGACY_IMAGE_FORMAT=y`, add `# CONFIG_LEGACY_IMAGE_FORMAT is not set` to the fragment as well.
 
 ## Generate the key node
 
@@ -123,13 +123,13 @@ The expected output is:
 
 ## Write a boot command that fails closed
 
-Zephyr's own board page starts the AM62L EVM from the U-Boot prompt with one unverified line:
+Zephyr's board documentation usually gives a one-line U-Boot command to start Zephyr. For the AM62L EVM it is:
 
 ```console
 => fatload mmc 1:1 0x82000000 zephyr.bin; dcache flush; icache flush; dcache off; icache off; go 0x82000000
 ```
 
-Nothing checks the bytes between `fatload` and `go`. The verified version puts `bootm` in front of the same handover. Split over several lines for reading, the chain is:
+Nothing checks the bytes between `fatload` and `go`. The verified version puts `bootm` in front of the same handover. Split over several lines for reading, with the AM62L values from `env.sh` filled in, the chain is:
 
 ```text
 fatload mmc 1:1 0x90000000 ${fit} &&
@@ -142,11 +142,11 @@ echo "*** REFUSED: Zephyr was NOT started ***"
 
 Each piece has one job:
 
-- `fatload mmc 1:1 0x90000000 ${fit}` reads the FIT named in `${fit}` from partition 1 of the SD card (`mmc 1`; `mmc 0` is the eMMC) to `0x90000000`, clear of `0x82000000`, so `loados` can't copy Zephyr over the FIT it is reading.
+- `fatload mmc 1:1 0x90000000 ${fit}` reads the FIT named in `${fit}` from `BOOT_DEV` to `FIT_ADDR`. On the AM62L EVM, `mmc 1:1` is partition 1 of the SD card (`mmc 0` is the eMMC). `FIT_ADDR` is clear of `ZEPHYR_ADDR`, so `loados` can't copy Zephyr over the FIT it is reading.
 - `bootm start 0x90000000` parses the FIT, picks `conf-1`, verifies the RSA signature against `/signature/key-key-a`, then verifies the image hash.
-- `bootm loados` copies the verified payload to its `load` address, `0x82000000`.
-- The four cache commands hand the CPU over the way Zephyr expects.
-- `go 0x82000000` is a jump. It verifies nothing.
+- `bootm loados` copies the verified payload to its `load` address, `ZEPHYR_ADDR`.
+- The four cache commands flush and turn off the caches, and on arm64 `dcache off` also turns the MMU off, the state Zephyr expects at entry.
+- `go 0x82000000` jumps to `ZEPHYR_ADDR`. It verifies nothing.
 
 Why not a plain `bootm`? A full `bootm` continues past `loados` into OS-specific boot code; stopping after `loados` and jumping with `go` uses U-Boot as a verifier only, not as an OS loader.
 
@@ -161,32 +161,32 @@ That chain becomes the environment variable `zboot`, and three one-line wrappers
 | `b` | `setenv fit zephyr-b.itb; run zboot` |
 | `t` | `setenv fit zephyr-tampered.itb; run zboot` |
 
-`a` boots the trusted image. `b` and `t` name images that don't exist yet, for [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/). `CONFIG_PREBOOT` defines all four before autoboot, U-Boot's countdown to running `bootcmd` on its own, so they exist even after you stop it. `CONFIG_BOOTCOMMAND="run a"` makes the trusted image the default and `CONFIG_BOOTDELAY=3` gives you three seconds to stop it.
+`a` boots the trusted image. `b` and `t` name images that don't exist yet, for [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/). Autoboot is U-Boot's countdown to running `bootcmd` on its own. `CONFIG_PREBOOT` defines all four before that countdown starts, so they exist even after you stop it. `CONFIG_BOOTCOMMAND="run a"` makes the trusted image the default and `CONFIG_BOOTDELAY=3` gives you three seconds to stop it.
 
-The commands are compiled into U-Boot rather than stored on the card, where anyone could edit a boot script to skip the check. TI's default `CONFIG_ENV_IS_NOWHERE=y` gives the environment no storage, so nothing on the card can override them.
+The commands are compiled into U-Boot rather than stored on the card, where anyone could edit a boot script to skip the check. The AM62L configuration ends up with `CONFIG_ENV_IS_NOWHERE=y`, which gives the environment no storage, so nothing on the card can override them; check your board's `.config` for the same line.
 
 ## Configure and build
 
-Reset to TI's defconfig so the fragment lands on a known `.config`:
+Reset to the board's defconfig so the fragment lands on a known `.config`:
 
 ```bash
-make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="${CROSS}gcc --sysroot=$SYSROOT" am62lx_evm_defconfig
+make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="${CROSS}gcc --sysroot=$SYSROOT" $UBOOT_DEFCONFIG
 ```
 
-Append the fragment to `.config`. The heredoc is unquoted so `$WORK` expands; `\${fit}` keeps `${fit}` in the file for U-Boot to expand at run time:
+Append the fragment to `.config`. The heredoc is unquoted, so `$WORK` and the board values `$BOOT_DEV`, `$FIT_ADDR` and `$ZEPHYR_ADDR` expand; `\${fit}` keeps `${fit}` in the file for U-Boot to expand at run time:
 
 ```bash
 cat >> $UBOOT_OUT/.config <<EOF
 CONFIG_DEVICE_TREE_INCLUDES="$WORK/signature.dtsi"
 CONFIG_USE_PREBOOT=y
-CONFIG_PREBOOT="setenv zboot 'fatload mmc 1:1 0x90000000 \${fit} && bootm start 0x90000000 && bootm loados && dcache flush && icache flush && dcache off && icache off && go 0x82000000; echo \"*** REFUSED: Zephyr was NOT started ***\"'; setenv a 'setenv fit zephyr-a.itb; run zboot'; setenv b 'setenv fit zephyr-b.itb; run zboot'; setenv t 'setenv fit zephyr-tampered.itb; run zboot'"
+CONFIG_PREBOOT="setenv zboot 'fatload $BOOT_DEV $FIT_ADDR \${fit} && bootm start $FIT_ADDR && bootm loados && dcache flush && icache flush && dcache off && icache off && go $ZEPHYR_ADDR; echo \"*** REFUSED: Zephyr was NOT started ***\"'; setenv a 'setenv fit zephyr-a.itb; run zboot'; setenv b 'setenv fit zephyr-b.itb; run zboot'; setenv t 'setenv fit zephyr-tampered.itb; run zboot'"
 CONFIG_USE_BOOTCOMMAND=y
 CONFIG_BOOTCOMMAND="run a"
 CONFIG_BOOTDELAY=3
 EOF
 ```
 
-The `\"` around the `echo` text stay: that's how a Kconfig string holds a literal quote.
+The `\"` around the `echo` text stay: that's how a Kconfig string holds a literal quote. Run `grep ^CONFIG_PREBOOT $UBOOT_OUT/.config` to check that the board values, not the variable names, landed in the file.
 
 {{% notice Note %}}
 The fresh defconfig starts from a clean `.config`. If the `tools` build on the previous page needed `# CONFIG_TOOLS_MKEFICAPSULE is not set`, add that line to the fragment. If it needed `DTC=$(which dtc)`, add it to both `make` lines that follow.
@@ -208,9 +208,11 @@ The output is similar to:
 .config:2360:warning: override: reassigning to symbol BOOTDELAY
 ```
 
-The five warnings are expected: your lines replace values the defconfig already set. The line numbers can differ.
+The five warnings are expected (six if you added the `mkeficapsule` line): your lines replace values the defconfig already set. The line numbers can differ.
 
-Now build, pointing `BL1`, `BL31`, `TEE` and `BINMAN_INDIRS` at the prebuilt TF-A, OP-TEE and TI firmware from the SDK:
+### Build for the AM62L EVM
+
+TI's U-Boot tree packs the early stages itself, with binman, U-Boot's image packaging tool. Point `BL1`, `BL31` and `TEE` at the prebuilt TF-A and OP-TEE, and `BINMAN_INDIRS` at the directory that holds TI's system firmware, all from the SDK:
 
 ```bash
 make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="${CROSS}gcc --sysroot=$SYSROOT" -j$(nproc) \
@@ -223,7 +225,7 @@ The build takes a few minutes. Check the three boot files:
 ls -l $UBOOT_OUT/tiboot3.bin $UBOOT_OUT/tispl.bin $UBOOT_OUT/u-boot.img
 ```
 
-The sizes are about 0.2 MB, 1.5 MB and 1.4 MB. These are the three files of the boot chain table on the first page.
+The sizes are about 0.2 MB, 1.5 MB and 1.4 MB. These are the three files of the AM62L chain on the first page. On another board, the `make` line takes whatever the vendor's tree expects for its early stages, such as `BL31=` for TF-A, and the vendor's tree names the outputs too: often `u-boot.img` or `u-boot.itb` plus an SPL file, sometimes a single packed image.
 
 ## Check the key is inside U-Boot
 
@@ -306,12 +308,12 @@ Signature check OK
 
 **Lines to look for:** the first line, `sha256,rsa2048:key-a+`, is the signature of `conf-1` verified with `key-a`, the `+` being the pass mark, and the last line, `Signature check OK`, is the verdict. The exit code is 0.
 
-Between them the tool walks the FIT the way `bootm` will on the board: it lists `kernel-1`, checks its hash (`sha256+` then `OK`), prints `Loading Kernel Image to 0` (the host tool loads nothing), and reports that the FIT has no `fdt` and no `ramdisk`. That's correct: it holds Zephyr and nothing else. The `FIT Image at` address is the tool's buffer on the host and changes every run, and the host tool breaks `sha256,rsa2048:key-a+ OK` over two lines where the board prints one.
+Between them the tool walks the FIT the way `bootm` will on the board: it lists `kernel-1`, checks its hash (`sha256+` then `OK`), prints `Decrypting Data ... OK` (nothing in this FIT is encrypted, so there is nothing to do) and `Loading Kernel Image to 0` (the host tool loads nothing), and reports that the FIT has no `fdt` and no `ramdisk`. That's correct: it holds Zephyr and nothing else. The `FIT Image at` address is the tool's buffer on the host and changes every run, and the host tool breaks `sha256,rsa2048:key-a+ OK` over two lines where the board prints one.
 
 [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) runs the same tool on an image signed with `key-b` and on a tampered copy, and expects it to refuse both.
 
 ## What you've accomplished and what's next
 
-You built TI's U-Boot with the public half of `key-a` compiled into its control device tree and a boot command that starts Zephyr only after `bootm` has verified the signature and the hash, without touching the U-Boot source. `fit_check_sign` has shown on the host that the trusted FIT verifies against that key.
+You built the board's U-Boot with the public half of `key-a` compiled into its control device tree, and a boot command that starts Zephyr only after `bootm` has verified the signature and the hash. You did it without touching the U-Boot source. `fit_check_sign` has shown on the host that the trusted FIT verifies against that key.
 
 Next, you [put the boot files and the trusted FIT on an SD card](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-board/) and watch U-Boot make the same decisions on the board.
