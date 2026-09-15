@@ -151,7 +151,7 @@ grep -nr "rse-flash-image" yocto/
 
 The result identifies [`firmware.cfg`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-bsp/recipes-bsp/images/files/fvp-rd-aspen/firmware.cfg?ref_type=heads#L31):
 
-```text
+```output
 yocto/meta-zena-css-bsp/recipes-bsp/images/files/fvp-rd-aspen/firmware.cfg:31:image rse-flash-image.img {
 ```
 
@@ -163,7 +163,7 @@ grep -nr "firmware.cfg" yocto/
 
 The result links it to the image recipe:
 
-```text
+```output
 yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb:40:GENIMAGE_CONFIG = "firmware.cfg"
 ```
 
@@ -201,7 +201,7 @@ For an initial platform validation, none of that is required.
 
 The FreeRTOS binary has already been built externally:
 
-```text
+```output
 build/zena_css/r82ae_smp_fvp_gcc_armclang.bin
 ```
 
@@ -262,7 +262,7 @@ kas build --target firmware-fvp-rd-aspen
 
 The generated flash image is:
 
-```text
+```output
 build/tmp_baremetal/deploy/images/fvp-rd-aspen/rse-flash-image.img
 ```
 
@@ -278,13 +278,13 @@ Wait for the platform to complete boot and access the the Safety Island Cluster 
 
 Execute:
 
-```text
+```console
 ping
 ```
 
 Expected output:
 
-```text
+```output
 Ping from Core 0
 Pong response from Core 1
 Pang response from Core 2

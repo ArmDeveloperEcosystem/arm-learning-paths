@@ -211,7 +211,7 @@ The `core_power_on_by_default` parameter starts Cluster 1 without waiting for th
 
 After the baseline binary boots, run the FreeRTOS image with the additional model configuration needed for the FreeRTOS timer and SMP operation:
 
-```console
+```bash
 <yocto project>/build/tmp-<baremetal|virtualization>/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.cluster1.core_power_on_by_default=1 \
   -C css.smb.si.CL1_LLRAM_config=15 \

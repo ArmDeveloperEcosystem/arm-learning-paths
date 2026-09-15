@@ -65,7 +65,7 @@ The [Zephyr board description for Safety Island Cluster 1](https://gitlab.arm.co
 
 With the configuration file [fvp_R82AE_config.txt](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/fvp_R82AE_config.txt), the FVP_BaseR_Cortex-R82AE can be configured to expose the same amount of LLRAM at the same base address. The Reset vector Address (RVBAR) can be configured to boot from this address.
 
-```
+```ini
 cluster0.memory.has_llram=1
 cluster0.memory.llram_base=0x140000000
 cluster0.memory.llram_enable_at_reset=1
@@ -84,7 +84,7 @@ Other configurations:
 - Disable semihosting.
 - Enable UART.
 
-```
+```ini
 cluster0.VMSA_supported=0
 cluster0.NUM_CORES=4
 bp.refcounter.non_arch_start_at_default=1
@@ -316,7 +316,7 @@ Tracing generates a large amount of data and slows the FVP, so stop the model so
 
 You can then search the trace for a synchronous exception event:
 
-```text
+```console
 grep -B 6 -A 4 'CoreEvent_CURRENT_SPx_SYNC' tarmac.log
   2368226 clk cpu0 IT (694295) 8000f284 f2a02dc0 O EL1h_s : MOVK     x0,#0x16e,LSL #16
   2368226 clk cpu0 R X0 00000000016E3600
@@ -340,7 +340,7 @@ The lines before `CoreEvent_CURRENT_SPx_SYNC` show the execution leading to the 
 Together, this information can reveal an incorrect branch target, an invalid memory access, a stack error, or an unexpected exception-level transition. For an SMP failure, compare the trace events from all four cores. This can show whether a core failed to start, did not receive an interprocessor interrupt, or accessed shared state in an unexpected order. arm also provides Arm also provides Tarmac Trace Utilities for indexing and browsing large trace files.
 
 In this example, we can retrieve the relevant information from the the tarmac trace.
-``` text
+```output
 X0 = 0x016E3600, or 24 MHz
 ELR_EL1 = 0x8000F040, the address of the failing MSR
 ESR_EL1 = 0x02000000EC = 0x00: unknown or undefined instruction

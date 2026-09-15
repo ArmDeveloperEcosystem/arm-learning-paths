@@ -39,12 +39,12 @@ DEPENDS += "\
 ```
 
 By default, [`arm-zena-css/yocto/meta-zena-css-bsp/conf/machine/fvp-rd-aspen.conf`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-bsp/conf/machine/fvp-rd-aspen.conf?ref_type=heads#L92) selects the minimal bare-metal `si-hello-world` recipe:
-```
+```bitbake
 SAFETY_ISLAND_CL1_RECIPE ??= "si-hello-world"
 ```
 
 When you select **Arm Automotive Solutions Demo** in the menu, [`arm-zena-css/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-zephyr.inc`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-zephyr.inc?ref_type=heads#L15) sets the variable to `zephyr-demos-cl1`:
-```
+```bitbake
 SAFETY_ISLAND_CL1_RECIPE ??= "zephyr-demos-cl1"
 ```
 
@@ -56,21 +56,21 @@ When integrating a component into an unfamiliar Yocto build, start with informat
 
 Next, determine how the Zephyr demo is added to the build:
 
-```bash
+```console
 arm-zena-css$ grep -rn -B1  fvp-rd-aspen-zephyr.inc
 yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc-7-require ${@bb.utils.contains('DISTRO_FEATURES', 'zephyr', 'conf/machine/include/fvp/fvp-rd-aspen-zephyr.inc', '', d)}
 ```
 
 The Zephyr recipe is used when `DISTRO_FEATURES` contains `zephyr`. Next, determine where and when it is set.
 
-```bash
+```console
 sw-ref-stack$ grep -nr DISTRO_FEATURES | grep zephyr
 yocto/kas/arm-auto-solutions.yml:73:    DISTRO_FEATURES:append = " cassini-dev zephyr"
 ```
 
 The [`yocto/kas/arm-auto-solutions.yml`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/sw-ref-stack/-/blob/release-v2.2/yocto/kas/arm-auto-solutions.yml?ref_type=heads#L73) file therefore adds `zephyr` unconditionally to `DISTRO_FEATURES`.
 
-```bash
+```console
 sw-ref-stack$ grep -nr arm-auto-solutions.yml
 yocto/kas/virtualization.yml:11:    - ../sw-ref-stack/yocto/kas/arm-auto-solutions.yml
 yocto/kas/baremetal.yml:11:    - ../sw-ref-stack/yocto/kas/arm-auto-solutions.yml
@@ -166,7 +166,7 @@ Use `yocto/meta-zena-css-bsp/recipes-bsp/si-hello-world/si-hello-world.bb` as a 
 
 Create the recipe directory in arm-zena-css/:
 
-```console
+```bash
 mkdir -p yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel
 ```
 
@@ -181,7 +181,7 @@ Begin by identifying the recipe inputs:
 
 When the required compiler recipe is uncertain, search the existing metadata:
 
-```console
+```bash
 grep -R -n 'gcc-aarch64-none-elf.*-native' yocto
 ```
 
@@ -189,7 +189,7 @@ The `scp-firmware-fvp-rd-aspen.inc` file depends on `gcc-aarch64-none-elf-native
 
 Create `yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/freertos-demos-cl1.bb`, add the source, dependency, and build tasks, then test it directly:
 
-```console
+```bash
 kas shell -c 'bitbake freertos-demos-cl1'
 ```
 The first build might expose recipe requirements that aren't visible in the CMake build.
@@ -246,9 +246,9 @@ After applying the packaging, version-tracking, and compiler fixes, the complete
 
 <details>
 
-<summary>expend freertos-demos-cl1.bb</summary>
+<summary>Show the complete freertos-demos-cl1.bb recipe.</summary>
 
-```bitbake
+```bitbake { line_numbers = true }
 # SPDX-License-Identifier: MIT
 
 SUMMARY = "FreeRTOS Demo on Safety Island Cluster 1"
@@ -318,20 +318,20 @@ Note that `${AUTOREV}` does not provide a reproducible build because the selecte
 
 Rebuild the recipe after each change:
 
-```console
+```bash
 kas shell -c 'bitbake freertos-demos-cl1'
 ```
 
 When the standalone recipe succeeds, build the complete stack and launch the model to exercise signing, packaging, and startup:
 
-```console
+```bash
 kas build
 kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux --verbose'
 ```
 
 If a recipe or source change appears not to take effect, clean and rebuild the recipe to eliminate cached output:
 
-```console
+```bash
 kas shell -c 'bitbake -c cleanall freertos-demos-cl1'
 kas shell -c 'bitbake freertos-demos-cl1'
 ```
@@ -345,7 +345,7 @@ First, build the complete stack and inspect the dependency graph. Then check the
 
 Build either the baremetal or virtualization stack with the FreeRTOS selection:
 
-```console
+```bash
 kas build
 ```
 
@@ -353,14 +353,14 @@ This example builds `baremetal-image` and its firmware dependencies. A successfu
 
 Check the recipe dependency graph. `pn-buildlist` must contain `freertos-demos-cl1` instead of `zephyr-demos-cl1`:
 
-```console
+```bash
 kas shell -c 'bitbake -g baremetal-image'
 grep -E 'freertos-demos-cl1|zephyr-demos-cl1' build/pn-buildlist
 ```
 
 The dependency graph proves that BitBake selected the FreeRTOS producer. Next, inspect the deployed FreeRTOS artifacts and final RSE flash image:
 
-```console
+```bash
 ls build/tmp_baremetal/deploy/images/fvp-rd-aspen/freertos-demos-cl1.bin
 ls build/tmp_baremetal/deploy/images/fvp-rd-aspen/rse-flash-image.img
 ```
@@ -369,7 +369,7 @@ Old artifacts can remain in the deploy directory, so file presence alone doesn't
 
 The deploy directory proves that the build produced files, but not that the binary was signed correctly or accepted by RSE. Launch the Zena CSS FVP through the standard runner:
 
-```console
+```bash
 kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
 ```
 
@@ -398,7 +398,7 @@ The [`freertos-yocto-integration.patch`](freertos-yocto-integration.patch) file 
 
 Run the following commands from the root of the Zena CSS checkout. Download the patch, then set `PATCH_FILE` to its absolute path. Confirm that the patch applies before changing the source tree:
 
-```console
+```bash
 PATCH_FILE=/absolute/path/to/freertos-yocto-integration.patch
 git apply --check "$PATCH_FILE"
 git apply "$PATCH_FILE"
@@ -406,7 +406,7 @@ git apply "$PATCH_FILE"
 
 Open the build configuration menu:
 
-```console
+```bash
 kas menu arm-zena-css/Kconfig
 ```
 
@@ -416,13 +416,13 @@ Select **RD-Aspen Cfg2**, either **Baremetal** or **Virtualization**, and then *
 
 Select **Build** or instead **Save & Exit**, then build the complete software stack:
 
-```console
+```bash
 kas build
 ```
 
 Launch the model after the build completes:
 
-```console
+```bash
 kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
 ```
 
