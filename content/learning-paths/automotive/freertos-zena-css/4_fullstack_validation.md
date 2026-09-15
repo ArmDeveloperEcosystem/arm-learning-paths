@@ -52,7 +52,7 @@ To validate FreeRTOS as a drop-in replacement for the Cluster 1 Zephyr image, Fr
 
 For more background about, see [GIC Multiple Views in the Arm Zena CSS documentation](https://arm-zena-css.docs.arm.com/en/latest/design/components.html#gic-multiple-views).
 
-The published demo already defines both configurations. Selecting `zena_css_fvp` configures in `FreeRTOSConfig.h` the GIC distributor and redistributor base addresses to the GIC View 2 :
+The published demo already defines both configurations. Selecting `zena_css_fvp` configures in `FreeRTOSConfig.h` the GIC distributor and redistributor base addresses to the GIC View 2:
 
 ```c
 #elif defined( R82AE_PLATFORM_ZENA_CSS_FVP )
@@ -69,7 +69,7 @@ The published demo already defines both configurations. Selecting `zena_css_fvp`
 
 Configure the exact full-stack platform target, `zena_css_fvp`:
 
-Build with gcc
+Build with GCC:
 
 ```bash
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
@@ -136,7 +136,7 @@ By default, SI CL1 runs a Zephyr image.
 The goal of this exercise is to replace the SI CL1 Zephyr image with a FreeRTOS image while leaving all other software components unchanged.
 
 
-### Safety Island CL1 firmware loading.
+### Safety Island CL1 firmware loading
 
 The Zena CSS documentation indicates that the SI CL1 firmware is loaded by the RSE [boot flow](https://arm-zena-css.docs.arm.com/en/v2.2.1/design/boot_process.html#boot-flow).
 
@@ -168,7 +168,7 @@ Find the recipe that uses this configuration:
 grep -nr "firmware.cfg" yocto/
 ```
 
-The result links it to the image recipe :
+The result links it to the image recipe:
 
 ```text
 yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb:40:GENIMAGE_CONFIG = "firmware.cfg"
@@ -220,7 +220,7 @@ In the next section, you will replace the default Zephyr SI CL1 firmware with th
 
 ## Replace the Cluster 1 firmware
 
-Open the file `yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb`
+Open the file `yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb`.
 
 Locate the following command in the `do_sign_images()` function:
 

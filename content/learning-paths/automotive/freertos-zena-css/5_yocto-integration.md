@@ -57,7 +57,7 @@ When integrating a component into an unfamiliar Yocto build, start with informat
 Next, determine how the Zephyr demo is added to the build:
 
 ```bash
-arm-zena-css$ grep -rn -B1  fvp-rd-aspen-zephyr.inc 
+arm-zena-css$ grep -rn -B1  fvp-rd-aspen-zephyr.inc
 yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc-7-require ${@bb.utils.contains('DISTRO_FEATURES', 'zephyr', 'conf/machine/include/fvp/fvp-rd-aspen-zephyr.inc', '', d)}
 ```
 
@@ -90,7 +90,7 @@ Remove the unconditional `zephyr` setting from `yocto/kas/arm-auto-solutions.yml
      KERNEL_CLASSES:remove = "containers_kernelcfg_check"
 ```
 
-For more details about the kas Yaml file, refer to the [Kas project configuration](https://kas.readthedocs.io/en/4.8.1/userguide/project-configuration.html) 
+For more details about the kas Yaml file, refer to the [Kas project configuration](https://kas.readthedocs.io/en/4.8.1/userguide/project-configuration.html).
 
 In [`arm-zena-css/Kconfig`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/Kconfig?ref_type=heads), add a kas menu entry that selects either Zephyr or FreeRTOS:
 ```diff
@@ -172,12 +172,12 @@ mkdir -p yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel
 
 Begin by identifying the recipe inputs:
 
-- `SRC_URI` fetches the Cortex-R82AE demo and FreeRTOS Kernel repositories
-- `inherit cmake` supplies the native CMake dependency and standard configure and compile tasks
-- `DEPENDS` supplies the AArch64 bare-metal compiler
-- `EXTRA_OECMAKE` maps the CMake configuration from the previous section into the standard `cmake` class
-- `do_compile:append` converts the ELF file to the raw binary required by the RSE image
-- `do_install` and `do_deploy` implement the `/firmware` interface discovered from Zephyr
+- `SRC_URI` fetches the Cortex-R82AE demo and FreeRTOS Kernel repositories.
+- `inherit cmake` supplies the native CMake dependency and standard configure and compile tasks.
+- `DEPENDS` supplies the AArch64 bare-metal compiler.
+- `EXTRA_OECMAKE` maps the CMake configuration from the previous section into the standard `cmake` class.
+- `do_compile:append` converts the ELF file to the raw binary required by the RSE image.
+- `do_install` and `do_deploy` implement the `/firmware` interface discovered from Zephyr.
 
 When the required compiler recipe is uncertain, search the existing metadata:
 
@@ -311,8 +311,8 @@ addtask deploy after do_install
 ```
 
 {{% notice Warning %}}
-Both `SRCREV` values are pinned to commits that have been tested with this integration. To test the latest commits from each branch instead, replace the commit hashes with `${AUTOREV}`.   
-Note that `${AUTOREV}` does not provide a reproducible build because the selected source can change over time
+Both `SRCREV` values are pinned to commits that have been tested with this integration. To test the latest commits from each branch instead, replace the commit hashes with `${AUTOREV}`.
+Note that `${AUTOREV}` does not provide a reproducible build because the selected source can change over time.
 {{% /notice %}}
 </details>
 

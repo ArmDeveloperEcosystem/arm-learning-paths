@@ -22,7 +22,7 @@ After completing this section, you will have verified that:
 - The raw binary can also be loaded directly into the FVP memory.
 - UART output and the interactive command prompt work correctly.
 - SMP scheduling, task affinity, shared state, and interprocessor interrupts operate as expected.
-- The generated ELF image can be used for source-level debugging
+- The generated ELF image can be used for source-level debugging.
 
 
 ## Start from the Cortex-R82 SMP port
@@ -58,7 +58,7 @@ The demo repository does not include the kernel as a submodule. The CMake config
 
 The [Zena CSS boot-flow documentation](https://arm-zena-css.docs.arm.com/en/v2.2/design/boot_process.html#boot-flow) explains that Safety Island Cluster 1 boots from LLRAM:
 
-*RSE BL2 : If CFG2, copies the encrypted SI CL1 image from the RSE flash to SI LLRAM, decrypts and authenticates the image*
+*RSE BL2: If CFG2, copies the encrypted SI CL1 image from the RSE flash to SI LLRAM, decrypts and authenticates the image.*
 
 
 The [Zephyr board description for Safety Island Cluster 1](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/components/safety_island/zephyr/src/boards/arm/fvp_rd_aspen_safety_island/fvp_rd_aspen_safety_island_c1.dts?ref_type=heads#L109) defines 8 MiB of SRAM at `0x140000000`.
@@ -77,12 +77,12 @@ cluster0.cpu2.RVBAR=0x140000000
 cluster0.cpu3.RVBAR=0x140000000
 ```
 Other configurations:
-- Use MPU mode for the Cortex R82AE,
-- Configure 4 cores, 
-- Enable the automatically starts refcounter
-- Model architectural cache state
-- Disable semihosting
-- Enable UART
+- Use MPU mode for the Cortex R82AE.
+- Configure 4 cores.
+- Enable the automatically starts refcounter.
+- Model architectural cache state.
+- Disable semihosting.
+- Enable UART.
 
 ```
 cluster0.VMSA_supported=0
@@ -97,7 +97,7 @@ bp.pl011_uart0.untimed_fifos=1
 bp.pl011_uart0.unbuffered_output=1
 ```
 
-### Code adaptation 
+### Code adaptation
 
 The generic demo isn't sufficient for the Cortex-R82AE FVP. Check that the port handles these platform differences:
 
@@ -195,7 +195,7 @@ aarch64-none-elf-objcopy -O binary \
 
 ### Build with armclang
 
-Similar instruction for Arm Compiler for Embedded
+Follow similar instructions for Arm Compiler for Embedded:
 
 <details>
 <summary>Build with Arm Compiler for Embedded</summary>

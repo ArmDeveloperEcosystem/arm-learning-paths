@@ -17,11 +17,11 @@ You will build the existing FreeRTOS symmetric multiprocessing (SMP) and Memory 
 
 After completing this section, you will have verified that:
 
-- The FreeRTOS distribution and all required submodules are available
-- The selected Arm toolchain can build the Cortex-R82 port
-- The Cortex-R82 AEM FVP can load and run the generated executable
-- FreeRTOS SMP scheduling and MPU-protected task communication operate correctly
-- The existing example provides a working baseline for the Cortex-R82AE port
+- The FreeRTOS distribution and all required submodules are available.
+- The selected Arm toolchain can build the Cortex-R82 port.
+- The Cortex-R82 AEM FVP can load and run the generated executable.
+- FreeRTOS SMP scheduling and MPU-protected task communication operate correctly.
+- The existing example provides a working baseline for the Cortex-R82AE port.
 
 ## Before you begin
 
@@ -71,9 +71,9 @@ The directory contains `port.c`, `portASM.S`, `portmacro.h`, and the MPU wrapper
 
 The example runs FreeRTOS in SMP mode on up to four Cortex-R82 cores. The current upstream example implements a ping/pong-style exchange with three tasks:
 
-- An unprivileged sender places counter values in a shared queue
-- An unprivileged receiver reads the values from the queue
-- A privileged logger prints messages received from both tasks
+- An unprivileged sender places counter values in a shared queue.
+- An unprivileged receiver reads the values from the queue.
+- A privileged logger prints messages received from both tasks.
 
 The sender and receiver are created with `xTaskCreateRestricted()`. Their MPU configuration grants access only to their stacks and a small shared region containing the queue handles. Kernel data remains accessible only to privileged code.
 
@@ -83,7 +83,7 @@ Unlike the application used later in this Learning Path, this example does not p
 
 The example is a useful starting point, but its startup and core-identification code depend on behavior provided by `FVP_BaseR_AEMv8R` configured for `aarch64` but is not strictly following the Cortex-R82 and Cortex-R82AE specification.
 
-1. The example supports entry at Exception Level 1 (EL1) only. Its `fvp_config.txt` file sets `cluster0.has_pl2=0`, so the AEM FVP starts the application without EL2. The boot code reads `CurrentEL` and enters an error loop unless the value indicates EL1. A platform that starts the cores at EL2 therefore cannot use this startup path unchanged. 
+1. The example supports entry at Exception Level 1 (EL1) only. Its `fvp_config.txt` file sets `cluster0.has_pl2=0`, so the AEM FVP starts the application without EL2. The boot code reads `CurrentEL` and enters an error loop unless the value indicates EL1. A platform that starts the cores at EL2 therefore cannot use this startup path unchanged.
 
 2. The example assumes that the core number is stored in the `Aff0` field of `MPIDR_EL1`. The AEM FVP uses this layout by default through `cluster0.mpidr_layout=0`. The startup code consequently extracts bits `[7:0]` to select the primary core, allocate a per-core stack, and index the secondary-core state.
 

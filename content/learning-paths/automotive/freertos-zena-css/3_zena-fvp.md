@@ -158,7 +158,7 @@ Build the Zena CSS target as a raw binary and note its linked load address. The 
 
 Return to the Cortex-R82AE demo directory used in the previous section. Configure the exact direct-load platform target, `zena_css_fvp_direct_load`, and use the adjacent kernel clone:
 
-Build with GCC
+Build with GCC:
 
 ```bash
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
@@ -193,7 +193,7 @@ fromelf --bincombined \
 </details>
 
 
-Selecting the platform `zena_css_fvp_direct_load` will configure the following element
+Selecting the platform `zena_css_fvp_direct_load` configures the following elements:
 ```c
 #elif defined( R82AE_PLATFORM_ZENA_CSS_FVP_DIRECT_LOAD )
     #define configGIC_SGI_CORE_AFFINITY_LEVEL          1U
