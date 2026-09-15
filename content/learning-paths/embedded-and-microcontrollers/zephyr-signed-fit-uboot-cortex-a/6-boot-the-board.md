@@ -11,17 +11,17 @@ layout: learningpathall
 
 Open a terminal and load the environment: `source $HOME/zephyr-secure-boot/env.sh`.
 
-The boot ROM looks for `tiboot3.bin` by name on the first FAT partition of the SD card. It is picky about that partition. Give it a FAT32 volume with 512-byte clusters, for example, and it loads nothing: the console stays empty, with no SPL banner at all.
+The boot ROM looks for `tiboot3.bin` by name on the first FAT partition of the SD card, and it is picky about that partition: a FAT32 volume with 512-byte clusters loads nothing, and the console stays empty.
 
-TI's own SD card image boots. Its first partition starts at sector 2048 and is 262144 sectors long, which is 128 MiB. It is marked bootable, has partition type `0x0c` (the partition-table code for a FAT volume with logical block addressing, LBA), and is formatted FAT16 with four sectors per cluster. So keep that partition byte for byte and replace only the files in it.
+TI's own SD card image boots. Its first partition starts at sector 2048, is 262144 sectors (128 MiB) long, is marked bootable with partition type `0x0c`, and is formatted FAT16 with four sectors per cluster. Keep that partition byte for byte and replace only the files in it.
 
-Start from the `.wic.xz` you downloaded when you [set up the tools](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/2-set-up-tools/). Extract only the first 1 MiB, which holds the partition table, plus the 128 MiB partition into a new image file:
+Start from the `.wic.xz` you downloaded when you [set up the tools](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/2-set-up-tools/). Extract the first 1 MiB, which holds the partition table, plus the 128 MiB partition into a new image file:
 
 ```bash
 xz -dc $WORK/tisdk-default-image.wic.xz | head -c $(( (2048+262144)*512 )) > $WORK/sdcard.img
 ```
 
-The result is a 129 MiB file. `head -c` stops reading after that many bytes, so you never extract TI's Linux root filesystem, which is the second partition. The partition table still lists that second partition, and it now points past the end of the file. Delete it:
+The result is a 129 MiB file. The partition table still lists TI's second partition, which now points past the end of the file. Delete it:
 
 ```bash
 sfdisk --delete $WORK/sdcard.img 2
@@ -34,9 +34,7 @@ The partition table has been altered.
 Syncing disks.
 ```
 
-`sfdisk` edits partition tables in plain files as well as on devices, so you don't need root and you don't need to attach the file as a disk first.
-
-The FAT volume still holds TI's Linux files. Replace them with yours using `mtools`, which reads and writes FAT volumes inside a file. The `@@1048576` suffix tells `mtools` that the volume starts 1 MiB into the file, which is sector 2048. In `mtools` commands, `::` is the root of that volume, so `::EFI` is the `EFI` directory on the card:
+Replace TI's Linux files in the FAT volume with yours using `mtools`. The `@@1048576` suffix tells `mtools` that the volume starts 1 MiB into the file, and `::` is the root of that volume:
 
 ```bash
 M=$WORK/sdcard.img@@1048576
@@ -46,9 +44,7 @@ mcopy -o -i $M $UBOOT_OUT/tiboot3.bin $UBOOT_OUT/tispl.bin $UBOOT_OUT/u-boot.img
 mcopy -o -i $M $FIT/zephyr-a.itb ::
 ```
 
-`-i` names the image. `mdeltree` removes a directory and everything in it, `mdel` removes single files, and `mcopy -o` copies files in and overwrites any that already exist.
-
-`uEnv.txt` deserves a word. It is a text file of environment settings that TI's default boot command imports, and it points at Linux. Your build replaced that command with `run a`, so your U-Boot never reads the file. Delete it anyway: a card that still describes a Linux boot only invites doubt about what ran.
+`uEnv.txt` is TI's Linux boot environment; your U-Boot never reads it, but delete it so nothing on the card describes a Linux boot.
 
 List the volume to check the result:
 
@@ -71,7 +67,7 @@ zephyr-a itb     60198 2026-09-15  16:49
                         130 766 848 bytes free
 ```
 
-Four files: the three boot stages you built and the FIT you signed. Nothing else is needed on the card; the boot commands are compiled into `u-boot.img`, and the optional test page adds only its two FITs.
+Four files: the three boot stages you built and the FIT you signed.
 
 {{% notice Note %}}
 If you prefer not to edit the image on the host, flash TI's `.wic.xz` to the card unchanged. balenaEtcher reads `.wic.xz` directly, and on Linux `xz -dc $WORK/tisdk-default-image.wic.xz | sudo dd of=/dev/sdX bs=4M status=progress` does the same. Then open the first partition on any PC, delete `Image`, `uEnv.txt` and the `EFI` directory, and copy the same four files in.
@@ -79,7 +75,7 @@ If you prefer not to edit the image on the host, flash TI's `.wic.xz` to the car
 
 ## Write the card
 
-Run `lsblk`, insert the micro-SD card in your host, and run `lsblk` again. The disk that appeared is the card. Then write the image to the whole card:
+Run `lsblk`, insert the micro-SD card in your host, and run `lsblk` again. The disk that appeared is the card. Write the image to the whole card:
 
 ```bash
 sudo dd if=$WORK/sdcard.img of=/dev/sdX bs=4M conv=fsync status=progress
@@ -89,17 +85,15 @@ sudo dd if=$WORK/sdcard.img of=/dev/sdX bs=4M conv=fsync status=progress
 Replace `/dev/sdX` with your card, for example `/dev/sdb`, never a partition such as `/dev/sdb1`. `dd` erases everything on the target, so a wrong device name erases the wrong disk.
 {{% /notice %}}
 
-`conv=fsync` makes `dd` wait until the data is on the card before it returns. The image is 129 MiB, so the rest of the card stays unused; the ROM only reads the first partition.
-
 On Windows or macOS, write `sdcard.img` with balenaEtcher.
 
 ## Set the boot switches
 
 The boot switches tell the ROM where to look for `tiboot3.bin`. On the AM62L EVM, **ON** means HIGH, with the knob towards the **ON** label on the switch bank.
 
-The EVM has two ways to set the boot mode, both from the [AM62L EVM User's Guide](https://www.ti.com/lit/pdf/SPRUJG8) (SPRUJG8B). The full pincount setting uses all 16 BOOTMODE bits across three switch banks. The reduced pincount setting uses only the four switches of **SW3**. Either one selects the SD card. Start with the reduced setting: four switches leave fewer ways to get it wrong.
+The [AM62L EVM User's Guide](https://www.ti.com/lit/pdf/SPRUJG8) (SPRUJG8B) gives two ways to select the SD card. The full pincount setting uses all 16 BOOTMODE bits across three switch banks; the reduced pincount setting uses only the four switches of **SW3**. Start with the reduced setting.
 
-The full pincount value is BOOTMODE `0x0E43`: SD card in filesystem mode as the primary boot device, UART as backup, 25 MHz reference clock. Set the three banks like this:
+The full pincount value is BOOTMODE `0x0E43`: SD card in filesystem mode as the primary boot device, UART as backup, 25 MHz reference clock:
 
 | Bank | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
 |---|---|---|---|---|---|---|---|---|
@@ -115,27 +109,27 @@ The reduced pincount setting uses only **SW3**; the ROM ignores **SW2** and **SW
 
 ## Connect the console and power on
 
-Connect the micro-USB port **J7** to your host. The USB-to-serial chip behind it (an FTDI FT4232HL) creates four serial ports: SoC UART0, SoC UART1, WKUP UART0 and SoC UART4. The console is SoC UART0, at 115200 baud, 8 data bits, no parity, one stop bit. On Linux it is usually the first port, `/dev/ttyUSB0`. Open it:
+Connect the micro-USB port **J7** to your host. The FTDI FT4232HL behind it creates four serial ports: SoC UART0, SoC UART1, WKUP UART0 and SoC UART4. The console is SoC UART0, at 115200 baud, 8 data bits, no parity, one stop bit, usually `/dev/ttyUSB0` on Linux. Open it:
 
 ```bash
 picocom -b 115200 /dev/ttyUSB0
 ```
 
-If `picocom` reports a permission error, add your user to the `dialout` group with `sudo usermod -aG dialout $USER`, then log out and back in. To leave `picocom` later, press the `Ctrl` key and `A`, then `Ctrl` and `X`.
+If `picocom` reports a permission error, add your user to the `dialout` group with `sudo usermod -aG dialout $USER`, then log out and back in. To leave `picocom` later, press `Ctrl` and `A`, then `Ctrl` and `X`.
 
-Move the SD card from the host to the board, then power the board through a USB-C PD supply on **J17** or **J19**. The console starts printing at once. Early in the log, the line the SPL prints when it starts shows the device type:
+Move the SD card to the board, then power the board through a USB-C PD supply on **J17** or **J19**. The console starts printing at once. Early in the log, the SPL shows the device type:
 
 ```output
 SoC:   AM62LX SR1.0 HS-FS
 ```
 
-`HS-FS` means no customer key is fused in this device yet; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) explains what that leaves unverified. The check you watch next, U-Boot verifying Zephyr, doesn't depend on it.
+`HS-FS` means no customer key is fused in this device yet; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) explains what that leaves unverified.
 
 ## Watch the trusted image boot
 
-U-Boot counts down for three seconds and then autoboot runs `bootcmd`, which is `run a`, the command you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). It loads `zephyr-a.itb`, verifies it, copies Zephyr to `0x82000000` and jumps there.
+After a three-second countdown, autoboot runs `bootcmd`, which is `run a`, the command you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/).
 
-Your `Created` time, `Hash value` and read time differ; the lines that matter are the same. The output is similar to:
+Your `Created` time, `Hash value` and read time differ. The output is similar to:
 
 ```output
 60198 bytes read in 7 ms (8.2 MiB/s)
@@ -173,24 +167,22 @@ started by       : U-Boot 'go' after FIT signature verification
 this image was verified by U-Boot before it ran.
 ```
 
-Three lines carry the proof. `sha256,rsa2048:key-a+ OK` is `bootm start` verifying the RSA signature of `conf-1` with the `key-a` public key compiled into U-Boot. `sha256+ OK` is the same step checking that the image bytes match the signed hash. `Loading Kernel Image to 82000000` is `bootm loados` copying the verified payload to Zephyr's link address. The `+` after a key name or hash algorithm is U-Boot's shorthand for a pass. A failed signature check prints `-` instead; [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) shows one.
+Three lines carry the proof. `sha256,rsa2048:key-a+ OK` is the RSA signature of `conf-1` verified with the `key-a` public key compiled into U-Boot. `sha256+ OK` is the image bytes matching the signed hash. `Loading Kernel Image to 82000000` is the verified payload copied to Zephyr's link address. The `+` marks a pass; a failed check prints `-` instead, as [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) shows.
 
-`go`, not `bootm`, prints `## Starting application at 0x82000000 ...`. It is the last line from U-Boot. The program that U-Boot verified a moment earlier prints everything after it, starting with the Zephyr banner.
+`## Starting application at 0x82000000 ...` is printed by `go` and is the last line from U-Boot; everything after it comes from the program U-Boot verified.
 
 ## If nothing prints
 
-If the terminal stays empty, the ROM did not load `tiboot3.bin`. Work down this list, because each step removes one suspect:
+If the terminal stays empty, the ROM did not load `tiboot3.bin`. Work down this list:
 
-1. Open all four serial ports that **J7** creates. Windows doesn't always number SoC UART0 first, and on Linux it isn't always `/dev/ttyUSB0`.
+1. Open all four serial ports that **J7** creates; SoC UART0 isn't always the first one.
 2. Check the boot switches against the tables, or try the other setting.
-3. Check the card layout. A FAT32 boot partition with 512-byte clusters gives exactly this symptom; the FAT16 partition from TI's image is the known-good template.
-4. Flash TI's unchanged `.wic.xz` to a card and boot it. That image is TI's own and boots as shipped. If it prints nothing either, the cause is the switches, the port, or the power, not your files.
-5. If TI's own card boots but yours never shows the SPL banner, copy TI's prebuilt first two stages over yours and write the card again: `mcopy -o -i $M $PREBUILT/tiboot3.bin $PREBUILT/tispl.bin ::`. `u-boot.img` carries the key and the boot command, so the check you are testing doesn't change.
+3. Check the card layout against TI's FAT16 partition.
+4. Flash TI's unchanged `.wic.xz` to a card and boot it. If it prints nothing either, the cause is the switches, the port, or the power, not your files.
+5. If TI's card boots but yours never shows the SPL banner, copy TI's prebuilt first two stages over yours and write the card again: `mcopy -o -i $M $PREBUILT/tiboot3.bin $PREBUILT/tispl.bin ::`. `u-boot.img` still carries the key and the boot command.
 
 If U-Boot starts Zephyr but the banner is the last line you see, `CONFIG_ARMV8_A_NS` is missing from the [Zephyr build](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/3-build-zephyr/).
 
 ## What you've accomplished and what's next
 
-You built a bootable SD card from TI's own boot partition and set the switches. Then you watched U-Boot on real silicon verify the FIT signed with `key-a`, accept it, and start Zephyr. U-Boot now enforces the U-Boot to Zephyr link of the boot chain, from an unmodified source tree.
-
-A verifier you've only seen accept an image isn't proven yet. Next, [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) signs an image with a key U-Boot doesn't have, tampers with a copy of the trusted one, and watches U-Boot refuse both. That page is optional. After it, [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) covers what the checks prove and lists what a production device needs on top of them: a fused key, a locked console, and no other boot path.
+You built a bootable SD card from TI's boot partition and watched U-Boot on real silicon verify the FIT signed with `key-a` and start Zephyr. Next, the optional [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) proves both refusals on the board. After it, [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) lists what a production device needs on top: a fused key, a locked console, and no other boot path.
