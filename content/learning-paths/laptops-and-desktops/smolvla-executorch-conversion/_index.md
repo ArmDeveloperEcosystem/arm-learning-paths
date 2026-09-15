@@ -81,5 +81,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
-Convert the SmolVLA vision-language-action model from PyTorch to ExecuTorch and run it on an Arm CPU. You'll first understand the conversion pipeline, then set up the environment, export an FP32 model, and compare it with an INT8 model.
