@@ -1,6 +1,6 @@
 ---
 title: Build a Zephyr image that U-Boot can start
-description: Use Workbench for Zephyr in VS Code to build a small Zephyr 4.4 application for a Cortex-A board, the TI AM62L EVM in this example, then check that the binary starts with a branch instruction that U-Boot's go command can jump to.
+description: Use Workbench for Zephyr in VS Code to build a small Zephyr 4.4 application for a Cortex-A board, the TI AM62L EVM in this example, then check the arm64 image header that U-Boot's go command relies on.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -138,25 +138,11 @@ Memory region         Used Size  Region Size  %age Used
 
 ![The Applications view in Workbench for Zephyr and the build terminal, with red rectangles around the hello application, listed with its zephyrproject workspace, zephyr-sdk-1.0.1 toolchain and am62l_evm/am62l3/a53 board, and around the Memory region table near the end of a successful build#center](images/wz-build.webp "The hello application built for the AM62L EVM")
 
-There is no flash on this board target; `RAM` is the part of the DDR that Zephyr may use. The result is `$WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin`, a raw binary of about 58 KB. It is linked at `0x82000000`, the `ZEPHYR_ADDR` value in `env.sh`. That address is the start of the memory node the board device tree selects as `zephyr,sram`; on the AM62L it sits past the first 32 MB of DDR, where TF-A and OP-TEE live. Every following page uses that address as the FIT `load` and `entry` address and as the `go` target.
+The result is `$WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin`, a raw binary of about 58 KB linked at `ZEPHYR_ADDR`, the start of the board's `zephyr,sram` memory node.
 
-## Check the image starts with a branch
+## Check the arm64 image header
 
-Open a terminal (**Terminal > New Terminal** in VS Code, or any shell), load the environment with `source $HOME/zephyr-secure-boot/env.sh`, and print the first four bytes of the binary:
-
-```bash
-od -An -tx1 -N4 $WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin
-```
-
-The output is similar to:
-
-```output
- 53 04 00 14
-```
-
-Those four bytes, read as a little-endian 32-bit word, are one AArch64 `b` (branch) instruction: the top six bits of the last byte (`14` here) are the opcode and the remaining 26 bits hold the distance to `__start`, so the first three bytes can differ in your build.
-
-Now check the header's magic number at offset `0x38`:
+Open a terminal (**Terminal > New Terminal** in VS Code, or any shell), load the environment with `source $HOME/zephyr-secure-boot/env.sh`, and print the header's magic number at offset `0x38`:
 
 ```bash
 od -An -c -j 0x38 -N4 $WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin
@@ -168,14 +154,8 @@ The expected output is:
    A   R   M   d
 ```
 
-`0x64` is the ASCII code for `d`, so `A R M d` is the magic `ARM\x64`.
-
-{{% notice Note %}}
-If the last of the four bytes isn't in the range `14` to `17`, or the magic isn't at `0x38`, then `CONFIG_AARCH64_IMAGE_HEADER` isn't set in the build. Check `$WORK/zephyrproject/applications/hello/build/primary/zephyr/.config` for `CONFIG_AARCH64_IMAGE_HEADER=y`.
-{{% /notice %}}
+`ARMd` is the arm64 image magic, so the header is in place and the image starts with the branch instruction that `go` jumps to. If you see anything else, check that `$WORK/zephyrproject/applications/hello/build/primary/zephyr/.config` contains `CONFIG_AARCH64_IMAGE_HEADER=y`.
 
 ## What you've accomplished and what's next
 
-You've built one Zephyr image for the Cortex-A53 on the AM62L EVM with Workbench for Zephyr, linked at `0x82000000`, starting with a branch instruction and carrying the arm64 header. That's all U-Boot needs to start it with `go`, and all `mkimage` needs to wrap it in a FIT on the next page.
-
-Next, you [create the signing keys and sign the image into a FIT](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/4-sign-zephyr/).
+You've built a Zephyr image for the AM62L's Cortex-A53, linked at `ZEPHYR_ADDR` and carrying the arm64 header that `go` needs. Next, you [create the signing keys and sign the image into a FIT](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/4-sign-zephyr/).

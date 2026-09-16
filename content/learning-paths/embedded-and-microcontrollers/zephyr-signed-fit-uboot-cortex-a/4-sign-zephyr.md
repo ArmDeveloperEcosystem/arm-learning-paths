@@ -40,9 +40,7 @@ mkimage version 2026.01-g5fb294342321
 ```
 
 {{% notice Note %}}
-If the `tools` build stops early, the fix depends on where it stops:
-- At `pylibfdt` or `swig`: install `swig python3-dev` as described in [Set up the host tools and the board's SDK](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/2-set-up-tools/), or add `DTC=$(which dtc)` to the `make` line and install the `python3-libfdt` package
-- At `mkeficapsule` with `fatal error: gnutls/gnutls.h: No such file or directory`: install `libgnutls28-dev uuid-dev`, or add the line `# CONFIG_TOOLS_MKEFICAPSULE is not set` to `$UBOOT_OUT/.config`, then run the `tools` step again. You don't need that tool
+If the `tools` build stops at `pylibfdt`, `swig` or `gnutls/gnutls.h`, a package is missing: run the `apt install` command from [Set up the host tools and the board's SDK](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/2-set-up-tools/) again, then the `tools` step.
 {{% /notice %}}
 
 ## Create two signing keys
@@ -71,17 +69,11 @@ key-a.crt  key-a.key  key-b.crt  key-b.key
 
 `mkimage -k <dir>` expects this layout. `<name>.key` holds the private key, `<name>.crt` is a self-signed certificate wrapping the public key, and `<name>` is the `key-name-hint` you write in the FIT source.
 
-`sha256,rsa2048` is enough for a demo.
-
-{{% notice Warning %}}
-These are throwaway development keys, generated on the build machine. Production keys are generated and kept elsewhere. See [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/).
-{{% /notice %}}
+These 2048-bit keys, generated on the build machine, are fine for a demo; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) covers production keys.
 
 ## Write the FIT source
 
-You write the FIT that [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/) introduced as a `.its` file (image tree source), and `mkimage` compiles and signs it into an `.itb` (image tree blob).
-
-Write the source with an unquoted heredoc, so `$WORK` expands to the path of the Zephyr binary from the previous page and `$ZEPHYR_ADDR` to its link address:
+You describe the FIT in a `.its` file (image tree source), and `mkimage` compiles and signs it into an `.itb` (image tree blob). Write the source; the heredoc is unquoted, so `$WORK` and `$ZEPHYR_ADDR` expand:
 
 ```bash
 cat > $FIT/zephyr-a.its <<EOF
@@ -118,19 +110,11 @@ cat > $FIT/zephyr-a.its <<EOF
 EOF
 ```
 
-`type = "kernel"` is the plain label `bootm` accepts for the main image.
+Three parts of this file matter:
 
-`os = "u-boot"` is U-Boot's slot for a standalone program: the payload is verified and copied, nothing else. With `os = "linux"`, U-Boot would look for a device tree in the FIT and parse a Linux kernel header.
-
-`load` and `entry` are `ZEPHYR_ADDR`, `0x82000000` on the AM62L EVM: Zephyr's link address, where U-Boot copies the verified payload.
-
-`hash-1 { algo = "sha256"; }` is the hash of the payload bytes. It sits in the image node, and the signature covers it.
-
-`conf-1` points at the image node with `kernel = "kernel-1"`, and `default` names it so U-Boot picks it without being told.
-
-`signature-1` sits under the configuration, not under the image, because the `required = "conf"` rule you build into U-Boot on the next page demands a valid signature on the configuration it boots. With `sign-images = "kernel"`, `mkimage` signs the configuration node plus the hash node of the kernel image. `key-name-hint = "key-a"` names the key files in `$KEYS` and, later, the key node U-Boot looks up.
-
-The top-level and image `description` properties are mandatory: `mkimage` refuses the source without them. The one in `conf-1` is optional and only appears in the listing.
+- `os = "u-boot"` marks Zephyr as a standalone program, so U-Boot verifies and copies it without looking for a Linux kernel header or device tree.
+- `signature-1` sits under the configuration, because the `required = "conf"` rule checks the configuration U-Boot boots. With `sign-images = "kernel"`, the signature also covers the image's `hash-1` node, and `key-name-hint` names the key in `$KEYS`.
+- `load` and `entry` are `ZEPHYR_ADDR`, where U-Boot copies the verified payload and where `go` jumps.
 
 ## Sign the image
 
@@ -167,18 +151,10 @@ Created:         Fri Sep 11 19:14:00 2026
 Signature written to '/home/user/zephyr-secure-boot/fit/zephyr-a.itb', node '/configurations/conf-1/signature-1'
 ```
 
-**Lines to look for:** `Sign algo:    sha256,rsa2048:key-a` and the last line, `Signature written to ... node '/configurations/conf-1/signature-1'`, say that `mkimage` found `key-a` in `$KEYS` and wrote its signature into `conf-1`.
-
-`OS:           U-Boot` and `Load Address: 0x82000000` are the FIT source as you wrote it, and `Hash value` is the SHA-256 of `zephyr.bin`, which U-Boot recomputes on the board.
+**Lines to look for:** `Sign algo:    sha256,rsa2048:key-a` and the last line, `Signature written to ... node '/configurations/conf-1/signature-1'`, say that `mkimage` found `key-a` in `$KEYS` and wrote its signature into `conf-1`. `Hash value` is the SHA-256 of `zephyr.bin`, which U-Boot recomputes on the board.
 
 Don't use the `mkimage -K` option here: the public key goes into U-Boot's own device tree at build time, on the next page.
 
-Print the same listing for any FIT with:
-
-```bash
-$UBOOT_OUT/tools/mkimage -l $FIT/zephyr-a.itb
-```
-
 ## What you've accomplished and what's next
 
-You've built `mkimage` and `fit_check_sign`, created two RSA key pairs, and signed Zephyr into `$FIT/zephyr-a.itb`. U-Boot can't verify it yet because it doesn't have the key. On the next page, [Build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), you compile `key-a`'s public half into U-Boot's device tree, write the boot command, and check the image offline with `fit_check_sign` before touching the board.
+You've built the U-Boot host tools, created two key pairs and signed Zephyr into `$FIT/zephyr-a.itb`. Next, you [build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/).

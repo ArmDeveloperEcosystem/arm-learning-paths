@@ -7,32 +7,11 @@ weight: 6
 layout: learningpathall
 ---
 
-## Where U-Boot keeps its keys
+## Check that U-Boot can verify signatures
 
 Open a terminal and load the environment: `source $HOME/zephyr-secure-boot/env.sh`.
 
-U-Boot keeps its FIT verification keys in the control device tree, the DTB packed into `u-boot.img`, in a node named `/signature`:
-
-```dts
-/ {
-	signature {
-		key-key-a {
-			required = "conf";
-			algo = "sha256,rsa2048";
-			rsa,r-squared = <...>;
-			rsa,modulus = <...>;
-			rsa,exponent = <0x00 0x10001>;
-			rsa,n0-inverse = <...>;
-			rsa,num-bits = <0x800>;
-			key-name-hint = "key-a";
-		};
-	};
-};
-```
-
-The `rsa,` properties are the public half of `key-a`. `required = "conf"` is the fail-closed rule from [Understand where Zephyr sits in the Cortex-A boot chain](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/1-boot-chain/): no valid signature by this key, no boot.
-
-The board's defconfig has to turn on the verifier, and the AM62L one already does. Check the symbols that matter in the `$UBOOT_OUT/.config` from the previous page:
+The board's defconfig must turn on the verifier, and the AM62L one does. Check the symbols that matter in the `$UBOOT_OUT/.config` from the previous page:
 
 ```bash
 grep -E '^CONFIG_(FIT|FIT_SIGNATURE|RSA|OF_SEPARATE)=|LEGACY_IMAGE_FORMAT' $UBOOT_OUT/.config
@@ -48,11 +27,7 @@ CONFIG_OF_SEPARATE=y
 CONFIG_RSA=y
 ```
 
-`CONFIG_FIT_SIGNATURE` and `CONFIG_RSA` are the verifier. `CONFIG_OF_SEPARATE` builds the control DTB from source, so you can add a node to it at build time.
-
-Legacy image support is off: the older uImage format carries no signature, so `bootm` has nothing unsigned to fall back to. [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) covers the other boot commands.
-
-Only the key and the boot command are missing. Both are build configuration, so the U-Boot source stays untouched. If your board's `.config` lacks one of the four `=y` lines, add it to the fragment you write in *Configure and build*; if it has `CONFIG_LEGACY_IMAGE_FORMAT=y`, add `# CONFIG_LEGACY_IMAGE_FORMAT is not set` to the fragment as well.
+`CONFIG_FIT_SIGNATURE` and `CONFIG_RSA` are the verifier, `CONFIG_OF_SEPARATE` builds the control DTB from source so you can add a node to it, and legacy images, which carry no signature, are off. Only the key and the boot command are missing, and both are build configuration, so the U-Boot source stays untouched.
 
 ## Generate the key node
 
@@ -63,7 +38,7 @@ printf '/dts-v1/;\n/ { };\n' | dtc -I dts -O dtb -o $WORK/scratch.dtb
 printf 'payload' > $WORK/payload.bin
 ```
 
-Write the throwaway FIT's source, a copy of the `zephyr-a.its` from [Create signing keys and sign the Zephyr image into a FIT](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/4-sign-zephyr/) with placeholders for the payload and the addresses:
+Write the throwaway FIT's source, the same layout as `zephyr-a.its` with a placeholder payload:
 
 ```bash
 cat > $WORK/key.its <<'EOF'
@@ -91,7 +66,7 @@ cat > $WORK/key.its <<'EOF'
 EOF
 ```
 
-Both `description` properties must stay, as on the previous page. `dtc` looks for `payload.bin` next to `key.its`.
+`mkimage` refuses the file without its two `description` properties, and `dtc` looks for `payload.bin` next to `key.its`.
 
 Sign the throwaway FIT and convert the scratch DTB to `signature.dtsi`:
 
@@ -115,11 +90,7 @@ The expected output is:
 			key-name-hint = "key-a";
 ```
 
-`key-b` must not appear: U-Boot never gets its public half.
-
-## Why a .dtsi and not mkimage -K on u-boot.dtb
-
-`mkimage -K` can also write the key straight into `u-boot.dtb`, but every `make` rebuilds the control DTB from source and the injected key is gone. `CONFIG_DEVICE_TREE_INCLUDES` lists extra `.dtsi` files to include in that build, so the key is compiled in every time.
+`key-b` must not appear: U-Boot never gets its public half. The build includes this file through `CONFIG_DEVICE_TREE_INCLUDES`, because writing the key into `u-boot.dtb` with `mkimage -K` doesn't last: every `make` rebuilds that DTB from source.
 
 ## Write a boot command that fails closed
 
@@ -146,9 +117,7 @@ Each piece has one job:
 - `bootm start 0x90000000` parses the FIT, picks `conf-1`, verifies the RSA signature against `/signature/key-key-a`, then verifies the image hash.
 - `bootm loados` copies the verified payload to its `load` address, `ZEPHYR_ADDR`.
 - The four cache commands flush and turn off the caches, and on arm64 `dcache off` also turns the MMU off, the state Zephyr expects at entry.
-- `go 0x82000000` jumps to `ZEPHYR_ADDR`. It verifies nothing.
-
-Why not a plain `bootm`? A full `bootm` continues past `loados` into OS-specific boot code; stopping after `loados` and jumping with `go` uses U-Boot as a verifier only, not as an OS loader.
+- `go 0x82000000` jumps to `ZEPHYR_ADDR` and verifies nothing. Stopping after `bootm loados` keeps U-Boot a verifier, not an OS loader; a plain `bootm` would go on into OS-specific boot code.
 
 `&&` is what makes it fail closed: `a && b` runs `b` only if `a` succeeded, while `a; b` would fall through to `go` after a failed check. `go` never returns, so the `echo` prints only when a step failed.
 
@@ -163,7 +132,7 @@ That chain becomes the environment variable `zboot`, and three one-line wrappers
 
 `a` boots the trusted image. `b` and `t` name images that don't exist yet, for [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/). Autoboot is U-Boot's countdown to running `bootcmd` on its own. `CONFIG_PREBOOT` defines all four before that countdown starts, so they exist even after you stop it. `CONFIG_BOOTCOMMAND="run a"` makes the trusted image the default and `CONFIG_BOOTDELAY=3` gives you three seconds to stop it.
 
-The commands are compiled into U-Boot rather than stored on the card, where anyone could edit a boot script to skip the check. The AM62L configuration ends up with `CONFIG_ENV_IS_NOWHERE=y`, which gives the environment no storage, so nothing on the card can override them; check your board's `.config` for the same line.
+The commands are compiled into U-Boot rather than stored on the card, where anyone could edit a boot script to skip the check.
 
 ## Configure and build
 
@@ -188,10 +157,6 @@ EOF
 
 The `\"` around the `echo` text stay: that's how a Kconfig string holds a literal quote. Run `grep ^CONFIG_PREBOOT $UBOOT_OUT/.config` to check that the board values, not the variable names, landed in the file.
 
-{{% notice Note %}}
-The fresh defconfig starts from a clean `.config`. If the `tools` build on the previous page needed `# CONFIG_TOOLS_MKEFICAPSULE is not set`, add that line to the fragment. If it needed `DTC=$(which dtc)`, add it to both `make` lines that follow.
-{{% /notice %}}
-
 Let Kconfig resolve the fragment:
 
 ```bash
@@ -208,7 +173,7 @@ The output is similar to:
 .config:2360:warning: override: reassigning to symbol BOOTDELAY
 ```
 
-The five warnings are expected (six if you added the `mkeficapsule` line): your lines replace values the defconfig already set. The line numbers can differ.
+The five warnings are expected: your lines replace values the defconfig already set.
 
 ### Build for the AM62L EVM
 
@@ -225,7 +190,7 @@ The build takes a few minutes. Check the three boot files:
 ls -l $UBOOT_OUT/tiboot3.bin $UBOOT_OUT/tispl.bin $UBOOT_OUT/u-boot.img
 ```
 
-The sizes are about 0.2 MB, 1.5 MB and 1.4 MB. These are the three files of the AM62L chain on the first page. On another board, the `make` line takes whatever the vendor's tree expects for its early stages, such as `BL31=` for TF-A, and the vendor's tree names the outputs too: often `u-boot.img` or `u-boot.itb` plus an SPL file, sometimes a single packed image.
+The sizes are about 0.2 MB, 1.5 MB and 1.4 MB.
 
 ## Check the key is inside U-Boot
 
@@ -252,7 +217,9 @@ With the long values shortened, the output is similar to:
 	};
 ```
 
-Now verify the trusted FIT on the host against that DTB. `fit_check_sign` runs the same verification code as U-Boot, so its verdict predicts the board's, and a mistake shows up now rather than at the serial console. `-f` names the FIT and `-k` the DTB that holds the keys:
+The `rsa,` properties are the public half of `key-a`, and `required = "conf"` is the rule U-Boot enforces with it.
+
+Now verify the trusted FIT on the host against that DTB. `fit_check_sign` runs the same verification code as U-Boot, so its verdict predicts the board's. `-f` names the FIT and `-k` the DTB that holds the keys:
 
 ```bash
 $UBOOT_OUT/tools/fit_check_sign -f $FIT/zephyr-a.itb -k $UBOOT_OUT/u-boot.dtb
@@ -308,12 +275,8 @@ Signature check OK
 
 **Lines to look for:** the first line, `sha256,rsa2048:key-a+`, is the signature of `conf-1` verified with `key-a`, the `+` being the pass mark, and the last line, `Signature check OK`, is the verdict. The exit code is 0.
 
-Between them the tool walks the FIT the way `bootm` will on the board: it lists `kernel-1`, checks its hash (`sha256+` then `OK`), prints `Decrypting Data ... OK` (nothing in this FIT is encrypted, so there is nothing to do) and `Loading Kernel Image to 0` (the host tool loads nothing), and reports that the FIT has no `fdt` and no `ramdisk`. That's correct: it holds Zephyr and nothing else. The `FIT Image at` address is the tool's buffer on the host and changes every run, and the host tool breaks `sha256,rsa2048:key-a+ OK` over two lines where the board prints one.
-
-[Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) runs the same tool on an image signed with `key-b` and on a tampered copy, and expects it to refuse both.
+The lines in between are the tool walking the FIT the way `bootm` does; the two `Could not find subimage node type` lines are expected, because the FIT holds only Zephyr.
 
 ## What you've accomplished and what's next
 
-You built the board's U-Boot with the public half of `key-a` compiled into its control device tree, and a boot command that starts Zephyr only after `bootm` has verified the signature and the hash. You did it without touching the U-Boot source. `fit_check_sign` has shown on the host that the trusted FIT verifies against that key.
-
-Next, you [put the boot files and the trusted FIT on an SD card](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-board/) and watch U-Boot make the same decisions on the board.
+You built U-Boot with `key-a`'s public half and a boot command that starts Zephyr only after `bootm` verifies it, and `fit_check_sign` confirmed on the host that the trusted FIT passes. Next, you [put the boot files and the trusted FIT on an SD card](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-board/) and boot the board.
