@@ -7,9 +7,9 @@ who_is_this_for: This is an introductory topic for developers who want to analyz
 description: Profile Java applications on Arm Neoverse servers using flame graphs generated with async-profiler and Java agents to identify performance bottlenecks.
 
 learning_objectives: 
-  - Set up a benchmarking environment using Tomcat and wrk2
-  - Generate flame graphs using async-profiler
-  - Generate flame graphs using a Java agent
+  - Set up a benchmarking environment using Tomcat and wrk2.
+  - Generate flame graphs using async-profiler.
+  - Generate flame graphs using a Java agent.
 
 prerequisites:
   - Access to both Arm-based and x86-based computers running Ubuntu (you can use cloud-based server instances)
@@ -30,31 +30,31 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:18:57Z'
   faq_source_hash: 9c0966884bee0b120d2e71878e7db5bca6a4ce9ab12429b6950fa97f0a4a41b9
   summary: >-
-    You profile a Java HTTP workload on an Arm Neoverse server by applying repeatable load
-    with Tomcat and `wrk2`. You capture CPU samples with `async-profiler` and generate a flame
-    graph, then profile with a JVMTI agent and the FlameGraph toolkit. You compare both
+    You'll profile a Java HTTP workload on an Arm Neoverse server by applying repeatable load
+    with Tomcat and `wrk2`. First, you'll capture CPU samples with `async-profiler` and generate a flame
+    graph, then profile with a JVMTI agent and the FlameGraph toolkit. You'll compare both
     views to identify the methods and call stacks that dominate execution under load.
   faqs:
-  - question: Which process ID should I target when running `async-profiler`?
+  - question: Which process ID should I target when running async-profiler?
     answer: >-
       Profile the Tomcat JVM process. Use your system’s process listing to find the PID, and start
       profiling while `wrk2` is actively generating load.
-  - question: Do I need to install `async-profiler` on the same machine as Tomcat?
+  - question: Do I need to install async-profiler on the same machine as Tomcat?
     answer: >-
       Yes. Install and run `async-profiler` on the same Arm-based Linux machine where Tomcat is
       running to ensure accurate profiling.
-  - question: Where should I run `wrk2` to generate load?
+  - question: Where should I run wrk2 to generate load?
     answer: >-
-      Run `wrk2` from an `x86_64` Ubuntu client so it sends HTTP requests to the Tomcat server you are
-      profiling. Confirm you can reach the Tomcat endpoint before starting the benchmark.
-  - question: How do I confirm that `perf` is capturing Java method names with the JVMTI agent?
+      Run `wrk2` from an `x86_64` Ubuntu client so that it sends HTTP requests to the Tomcat server that you're
+      profiling. Confirm that you can reach the Tomcat endpoint before starting the benchmark.
+  - question: How do I confirm that perf is capturing Java method names with the JVMTI agent?
     answer: >-
       Check that the profile output shows Java method names rather than raw memory addresses.
-      If it does not, verify that `libperf-jvmti.so` is present and loaded by the JVM.
-  - question: What should I look for in the generated flame graphs before moving on?
+      If it doesn't, verify that `libperf-jvmti.so` is present and loaded by the JVM.
+  - question: What should I look for in the generated flame graphs?
     answer: >-
       Expect a visualization of sampled stacks during the benchmark. The widest stacks indicate
-      where time is spent and help you focus on the hottest Java methods and code paths.
+      where time is spent, so you can focus on the hottest Java methods and code paths.
 # END generated_summary_faq
 
 author: 

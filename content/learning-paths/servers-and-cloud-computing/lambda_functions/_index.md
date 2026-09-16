@@ -1,5 +1,5 @@
 ---
-title: Learn how to deploy AWS Lambda functions
+title: Deploy AWS Lambda functions on AWS Graviton processors
 
 minutes_to_complete: 30   
 
@@ -8,10 +8,10 @@ who_is_this_for: This is an introductory topic for software developers who want 
 description: Deploy AWS Lambda functions on Graviton processors using Terraform for Python and Node.js runtimes.
 
 learning_objectives: 
-    - Deploy Lambda functions on Graviton processors using Terraform
+    - Deploy Lambda functions on Graviton processors using Terraform.
 
 prerequisites:
-    - A computer with [Terraform](/install-guides/terraform/) and the [AWS CLI](/install-guides/aws-cli/) installed.
+    - A computer with [Terraform](/install-guides/terraform/) and the [AWS CLI](/install-guides/aws-cli/) installed
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -28,26 +28,27 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:24:22Z'
   faq_source_hash: 4d6150ca14e66aa8a539c3dd47ca49b26b3914e44db6148cdb53121306ffa2f6
   summary: >-
-    You deploy AWS Lambda functions on Graviton with Terraform and select the arm64
-    architecture. You define Lambda resources, provide simple Node.js and Python function
-    code, and keep the architecture setting consistent while switching runtimes. You apply
-    the Terraform configuration to provision both functions, then review the small code and
+    You'll deploy AWS Lambda functions on Graviton with Terraform. First, you'll define Lambda resources and provide Node.js and Python function
+    code. Then, you'll apply
+    the Terraform configuration to provision functions, and review the small code and
     configuration changes needed to move between Node.js and Python.
   faqs:
   - question: Which architecture setting targets AWS Graviton for Lambda?
     answer: >-
       Use the `arm64` architecture in your Terraform configuration to target Graviton processors.
-  - question: Can I use any computer to follow the steps?
+  - question: How do I verify that the deployed Lambda function uses Arm64?
     answer: >-
-      Yes. Any computer with the required tools installed can be used, as noted in the steps.
+      Open AWS Lambda in the AWS console, select **Functions**, and open your function. In **Runtime
+      settings**, verify that the **Architecture** field is listed as `arm64`.
   - question: What file name and handler inputs does the Python example use?
     answer: >-
       Save the Python function as `python_lambda.py`. The handler reads `event["first_name"]` and
       `event["last_name"]` to build the returned message.
-  - question: Do I need to change the Terraform configuration when switching from Node.js to Python?
+  - question: How do I test the Python Lambda function in the AWS console?
     answer: >-
-      You can reuse what you learned from the Node.js section and replace the Node.js code with
-      the Python function. Keep the architecture set to `arm64` as shown.
+      Open the function's **Test** tab, enter `{"first_name": "Arm-", "last_name": "user"}` in
+      the **Event JSON** field, and select **Test**. You should see the same output as when you run the
+      function with Terraform.
   - question: What result should I expect after applying Terraform?
     answer: >-
       Terraform creates a Lambda function configured to run on arm64. When invoked with the expected

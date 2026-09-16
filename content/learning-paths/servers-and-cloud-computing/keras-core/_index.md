@@ -8,14 +8,14 @@ who_is_this_for: This is an introductory topic for engineers who want to create 
 description: Create, train, and evaluate a neural network model on Arm servers using Keras Core with TensorFlow, PyTorch, and JAX backends.
 
 learning_objectives: 
-    - Create a simple neural network model using Keras Core
-    - Train and evaluate your neural network model with different backends
-    - Generate predictions with the trained model
+    - Create a simple neural network model using Keras Core.
+    - Train and evaluate your neural network model with different backends.
+    - Generate predictions with the trained model.
 
 prerequisites:
-    - Basic Machine Learning knowledge.
-    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, an on-premises Arm server, or a Linux virtual machine on your Arm device. 
-    - Familiarity with SSH, the Linux command line, and basic system administration tasks.
+    - Basic Machine Learning knowledge
+    - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, an on-premises Arm server, or a Linux virtual machine on your Arm device
+    - Familiarity with SSH, the Linux command line, and basic system administration tasks
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -32,26 +32,26 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:21:29Z'
   faq_source_hash: 801a833c43823e5cb293569489ff5c563b983a3e3b1a86952f54ee1db906d741
   summary: >-
-    You build and run a compact neural network with Keras Core on an Arm-based Ubuntu
-    server. You prepare Python, define and execute a model that trains, evaluates, and
-    predicts, then switch among the TensorFlow, PyTorch, and JAX backends. You validate the
-    complete workflow on an Arm instance over SSH or locally by checking the printed
+    You'll build and run a compact neural network with Keras Core on an Arm-based Ubuntu
+    server. First, you'll prepare Python and define and execute a model that trains, evaluates, and
+    predicts. Then, you'll switch among the TensorFlow, PyTorch, and JAX backends. You'll validate the
+    complete workflow either on an Arm-based instance over SSH or locally by checking the printed
     training, evaluation, and prediction outputs.
   faqs:
   - question: How do I know which Keras Core backend is active when the script runs?
     answer: >-
-      After following the step that selects a backend, start the run and check the initial console
-      output to confirm the chosen backend is in use. If it is not the expected one, repeat the
+      After selecting a backend, start the run and check the initial console
+      output to confirm that the chosen backend is in use. If it's not the expected one, repeat the
       backend selection step before training.
-  - question: Where should I save `ml.py` and how do I execute it?
+  - question: Where should I save ml.py, and how do I execute it?
     answer: >-
-      Save `ml.py` in a working directory on the Arm machine you are using. Run it from the same
-      directory with the Python environment you prepared in the dependency setup.
+      Save `ml.py` in a working directory on the Arm machine that you're using. Run it from the same
+      directory as the Python environment that you prepared during dependency setup.
   - question: What result should I expect after training and evaluation?
     answer: >-
       The run prints training progress and evaluation metrics, then shows predictions from the
       trained model. Seeing metrics and prediction values confirms the end-to-end workflow completed.
-  - question: What should I check if importing `keras_core` fails?
+  - question: What should I check if importing keras_core fails?
     answer: >-
       Confirm that `keras_core` is installed in your active Python environment and that the environment
       is activated. On Ubuntu 22.04, also verify that `python3-pip` and `python3-venv` are installed

@@ -8,10 +8,10 @@ who_is_this_for: This is an advanced topic for software developers building cust
 description: Compile and install custom Linux kernels on Arm cloud instances using TuxMake with configurations for 64 KB page sizes and Fastpath testing.
 
 learning_objectives:
-    - Set up a build environment for compiling Linux kernels on Arm cloud instances
-    - Build custom Linux kernels with various configurations using TuxMake
-    - Install and verify custom-built kernels
-    - Configure kernels for specific use cases, including 64 KB page sizes and Fastpath testing
+    - Set up a build environment for compiling Linux kernels on Arm cloud instances.
+    - Build custom Linux kernels with various configurations using TuxMake.
+    - Install and verify custom-built kernels.
+    - Configure kernels for specific use cases, including 64 KB page sizes and Fastpath testing.
 
 prerequisites:
     - An Arm cloud instance with at least 24 vCPUs and 200 GB of free storage running Ubuntu 24.04 LTS
@@ -33,8 +33,8 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:22:08Z'
   faq_source_hash: 2610a92c54a3f084b1f70aa007979898cc0931e75061582cb0acf2ef9e810f43
   summary: >-
-    You prepare an Arm Ubuntu cloud instance and use TuxMake to compile custom Linux kernels
-    with selectable versions and configurations. You choose between installing a kernel
+    You'll prepare an Arm Ubuntu cloud instance and use TuxMake to compile custom Linux kernels
+    with selectable versions and configurations. First, you'll choose between installing a kernel
     directly and generating packages, then verify the bootloader, modules, and build
     artifacts. You can configure 64 KB pages or create Fastpath-ready, build-only outputs,
     copying the flat artifacts to a test environment for validation.
@@ -50,16 +50,16 @@ generated_summary_faq:
   - question: What should I check if my build is very slow or runs out of memory?
     answer: >-
       Use a sufficiently large Arm instance as smaller instances take longer and can run out of
-      memory during compilation. Also confirm you have ample free storage before starting the
+      memory during compilation. Confirm that you have ample free storage before starting the
       build.
-  - question: Can I combine `--fastpath true` with `--kernel-install`?
+  - question: Can I combine --fastpath true with --kernel-install?
     answer: >-
-      No. Fastpath is a build-only workflow, so do not combine `--fastpath true` (or its demo shortcut)
+      No. Fastpath is a build-only workflow, so don't combine `--fastpath true` (or its demo shortcut)
       with `--kernel-install` or any `--install-from` commands. Build the kernel, then copy the flat
       artifacts to your test environment.
-  - question: I want packages instead of installing directly. Which workflow should I use?
+  - question: Which workflow should I use if I want packages instead of installing directly?
     answer: >-
-      Use the standard kernel build workflows for downstream packaging. This produces packages
+      Use the standard kernel build workflows for downstream packaging. The workflows produce packages that
       you can transfer and install later instead of performing a direct install on the build instance.
 # END generated_summary_faq
 

@@ -5,16 +5,16 @@ minutes_to_complete: 30
 
 who_is_this_for: This is an advanced topic for developers looking to migrate their Apache Kafka workloads from x86_64 to Arm-based platforms, specifically on Microsoft Azure Cobalt 100 (arm64) virtual machines.
 
-description: Deploy Apache Kafka on Azure Cobalt 100 Arm virtual machines and benchmark message throughput performance.
+description: Deploy Apache Kafka on Azure Cobalt 100 Arm virtual machines (VMs) and benchmark message throughput performance.
 
 learning_objectives: 
-    - Provision an Azure Arm64 virtual machine using Azure console, with Ubuntu Pro 24.04 LTS as the base image
-    - Deploy Kafka on an Ubuntu virtual machine
-    - Perform Kafka baseline testing and benchmarking on Arm64 virtual machines
+    - Provision an Azure Arm64 VM using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
+    - Deploy Kafka on an Ubuntu VM.
+    - Perform Kafka baseline testing and benchmarking on Arm64 VMs.
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
-    - Basic understanding of Linux command line
+    - Basic understanding of the Linux command line
     - Familiarity with the [Apache Kafka architecture](https://kafka.apache.org/) and deployment practices on Arm64 platforms
 
 # START generated_summary_faq
@@ -32,32 +32,32 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:20:39Z'
   faq_source_hash: c1f6038eaba282ca168d1826dfce644ecb21fd01b627fd274e23e513fcac3a36
   summary: >-
-    You provision an Arm64 Azure Cobalt 100 VM, install Java and Kafka, and configure Kafka
-    4.1.0 in KRaft mode. You create a topic, verify producer-to-consumer message flow, and
-    run Kafka’s official performance tools to capture throughput and latency. You finish
+    You'll provision an Arm64 Azure Cobalt 100 VM, install Java and Kafka, and configure Kafka
+    4.1.0 in KRaft mode. First, you'll create a topic and verify producer-to-consumer message flow, then
+    run Kafka’s official performance tools to capture throughput and latency. You'll finish
     with a working Kafka deployment and baseline benchmark results from an Arm64 instance on
     Microsoft Azure.
   faqs:
-  - question: Which Azure VM series should I pick to use Cobalt 100?
+  - question: Which Azure VM series should I use?
     answer: >-
       Select a D-Series v6 virtual machine from the Dpsv6 size series, which uses the Cobalt 100
-      Arm-based CPU. The Learning Path uses the Azure portal to create this VM.
+      Arm-based CPU. 
   - question: Which operating system image do I choose when creating the VM?
     answer: >-
-      Use Ubuntu Pro 24.04 (Arm64). The steps assume this image for installing Java and Kafka.
+      Use Ubuntu Pro 24.04 (Arm64).
   - question: Do I need ZooKeeper for this Kafka setup?
     answer: >-
-      No. Kafka 4.1.0 supports KRaft mode, which removes the need for ZooKeeper. Start the broker in
-      KRaft mode as shown in the setup.
+      No. Kafka `4.1.0` supports KRaft mode, which removes the need for ZooKeeper. Start the broker in
+      KRaft mode.
   - question: How do I verify that Kafka is working after installation?
     answer: >-
-      Open four terminals: start the Kafka broker (KRaft), create a topic, run a consumer, and
-      run a producer. If the consumer receives the messages you produce, the end-to-end path works.
+      Open separate terminals for each of the following tasks: starting the Kafka broker (KRaft), creating a topic, running a consumer, and
+      running a producer. If the consumer receives the messages that you produce, the end-to-end flow works.
   - question: What should I look for when running the Kafka benchmarks?
     answer: >-
-      Ensure the broker is running and the topic is ready, then run the official
+      Ensure that the broker is running and the topic is ready, then run the official
       `kafka-producer-perf-test.sh` and `kafka-consumer-perf-test.sh` tools. Review the reported throughput and latency metrics
-      to confirm the benchmark completed and to capture baseline results.
+      to confirm that the benchmark completed, and to capture baseline results.
 # END generated_summary_faq
 
 author: Pareena Verma

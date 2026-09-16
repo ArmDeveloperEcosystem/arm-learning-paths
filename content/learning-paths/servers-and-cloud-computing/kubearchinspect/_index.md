@@ -8,13 +8,13 @@ who_is_this_for: This is an introductory topic for software developers who want 
 description: Identify and migrate container images in a Kubernetes cluster to Arm-compatible versions using KubeArchInspect reports.
 
 learning_objectives: 
-    - Run KubeArchInspect to generate a report on the containers running in a Kubernetes cluster
-    - Discover which images support the Arm architecture
-    - Understand common reasons for an image not supporting Arm
-    - Make configuration changes to upgrade images with Arm support
+    - Run KubeArchInspect to generate a report on the containers running in a Kubernetes cluster.
+    - Discover which images support the Arm architecture.
+    - Understand common reasons for an image not supporting Arm.
+    - Make configuration changes to upgrade images with Arm support.
 
 prerequisites:
-    - A running Kubernetes cluster accessible with `kubectl`.
+    - A running Kubernetes cluster accessible with `kubectl`
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -43,18 +43,18 @@ generated_summary_faq:
       The tool connects to the cluster and inspects the images it finds.
   - question: What does the report show and how do I read it?
     answer: >-
-      The report lists each image with its name, tag, and a status symbol. ✅ means arm64 support
-      is present, ❌ means arm64 is not available, 🆙 means a newer tag adds arm64, and 🚫 indicates
+      The report lists each image with its name, tag, and a status symbol. A green tick (✅) means arm64 support
+      is present, and a red cross (❌)  means arm64 is not available. A blue up symbol (🆙) means a newer tag adds arm64, and a red cross mark (🚫) indicates
       an error occurred while checking the image.
-  - question: What should I do when a line shows the 🆙 indicator?
+  - question: What should I do when a line shows the blue up indicator?
     answer: >-
       Update your Kubernetes configuration to use the newer image tag that includes arm64 support.
-      Re-run `kubearchinspect images` to confirm the status changes to ✅.
-  - question: What should I check if an image shows ❌ (no arm64 support)?
+      Re-run `kubearchinspect images` to confirm the status changes to a green tick.
+  - question: What should I check if an image shows a red cross?
     answer: >-
       Review the source registry for alternative tags or a different image that provides arm64.
-      If none is available, note that the current image does not support Arm and plan accordingly.
-  - question: What should I do if a line shows 🚫 (error checking the image)?
+      If no tags or images are available, note that the current image doesn't support Arm and plan accordingly.
+  - question: What should I do if a line shows a red cross mark?
     answer: >-
       Rerun the scan and verify that the image reference is valid and can be queried at its source
       registry. If the issue persists, investigate access to the registry for that image.

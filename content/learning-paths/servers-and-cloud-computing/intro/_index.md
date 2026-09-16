@@ -28,28 +28,27 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:15:55Z'
   faq_source_hash: c992ffa11e64e2d938eb1633f30a36075ffd0002a0600302f866ea077f4ebeae
   summary: >-
-    You explore Arm in servers and cloud computing and identify where Neoverse processors
-    fit in data-center, on-premises, and cloud deployments. You compare access through cloud
+    You'll explore Arm for server and cloud applications and identify where Neoverse processors
+    fit in data-center, on-premises, and cloud deployments. First, you'll compare access through cloud service
     providers and server vendors, then choose a starting point for evaluating software on
-    Arm. You learn how introductory cloud credits and pay-as-you-go instances can help you
+    Arm. You'll learn how introductory cloud credits and pay-as-you-go instances can help you
     begin without purchasing hardware.
   faqs:
   - question: How do I get immediate access to Arm hardware without buying servers?
     answer: >-
-      Create an account with a cloud service provider. CSPs offer Arm instances based on Neoverse
+      Create an account with a cloud provider. Cloud providers offer Arm instances based on Neoverse
       processors, often with introductory free credits and a pay‑as‑you‑go model.
-  - question: How do I confirm I’m choosing an Arm Neoverse‑based cloud instance?
+  - question: How do I confirm that I’m choosing an Arm Neoverse‑based cloud instance?
     answer: >-
       Check the provider’s instance details for Arm‑based options built on Neoverse processors.
-      Cloud providers explicitly offer Arm instances based on Neoverse for server and cloud workloads.
-  - question: What result should I expect after I launch an Arm instance?
+  - question: Which operating systems are commonly available for Arm servers?
     answer: >-
-      You can run server and cloud workloads on an instance powered by Arm Neoverse processors.
-      This enables you to evaluate your software or begin exploring a migration to Arm.
+      You can use Linux distributions such as Ubuntu, Red Hat, SUSE Linux, and Debian.
+      Vendor-specific options include Amazon Linux and Oracle Linux.
   - question: When should I choose on‑premises servers instead of a cloud instance?
     answer: >-
       Choose server hardware from vendors when you need data center or on‑premises deployment.
-      Neoverse‑based systems are available from server vendors as well as CSPs.
+      Neoverse‑based systems are available from server vendors as well as cloud service providers.
   - question: Which workloads should I expect Arm Neoverse processors to handle well?
     answer: >-
       Neoverse is designed for server and cloud workloads and performs a wide range of complex

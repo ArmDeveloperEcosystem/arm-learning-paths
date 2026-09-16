@@ -31,28 +31,27 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:16:42Z'
   faq_source_hash: 1b984aa3a8728506e72fa6241dd6ba8c874159d19379f7c9b610fb16d02c2afb
   summary: >-
-    You analyze and tune network IRQ handling on Arm Linux servers. You review the current
-    IRQ layout, compare placements that pin network interrupts to CPU cores, and use the
-    provided scripts to test cache locality and contention. You apply `smp_affinity` range
+    You'll analyze and tune network IRQ handling on Arm Linux servers. First, you'll review the current
+    IRQ layout, compare placements that pin network interrupts to CPU cores, and test cache locality and contention. Then, you'll apply `smp_affinity` range
     assignments, choose strategies for different system sizes, and make the selected
     settings persistent for repeatable workload testing.
   faqs:
-  - question: How do I check the current network IRQ layout before making changes?
+  - question: What should I do if an IRQ change reduces performance?
     answer: >-
-      Follow the analysis step to review how Linux currently distributes NIC interrupts across
-      CPU cores. Capture this baseline so you can compare it after you apply a new pattern.
-  - question: Which IRQ distribution pattern should I start with on a small server (16 vCPUs or
-      fewer)?
+      Restore the default IRQ handling by running `sudo systemctl unmask irqbalance` and
+      `sudo systemctl enable --now irqbalance`. If `irqbalance` isn't installed on a Debian-based
+      system, install it with `sudo apt install irqbalance`.
+  - question: Which IRQ distribution pattern should I start with on a small server (16 vCPUs or fewer)?
     answer: >-
       Start by concentrating network IRQs on one or two CPU cores instead of spreading them across
       all cores. Use the `smp_affinity` range assignment recommended in the path to bind the interrupts.
   - question: What result should I expect after applying a new IRQ pattern?
     answer: >-
-      You should see NIC interrupts bound to the cores you selected and a consistent distribution
-      under network load. Compare the new layout to your baseline to confirm the change took effect.
+      You should see NIC interrupts bound to the cores that you selected, and a consistent distribution
+      under network load. Compare the new layout to your baseline to confirm that the change took effect.
   - question: How do I make my IRQ configuration persist across reboots?
     answer: >-
-      Use the persistent IRQ management approach described in the path so your chosen assignments
+      Use the persistent IRQ management approach so that your chosen assignments
       are re-applied automatically. The provided scripts help encode the settings for repeatable
       application.
   - question: What should I try if network behavior does not improve with my first pattern?

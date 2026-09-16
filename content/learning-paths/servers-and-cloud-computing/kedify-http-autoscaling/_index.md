@@ -32,32 +32,30 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:20:59Z'
   faq_source_hash: d70ee3667de6482f2ef9f868f78b9a10d02707c9fbf8346f6da72a87b35694b9
   summary: >-
-    You enable event-driven HTTP autoscaling on an Arm-based Kubernetes cluster with KEDA
-    and Kedify. You install the required Kedify charts, verify their components, and
-    configure an NGINX Ingress Controller for arm64 nodes when needed. You deploy a web
-    service, expose it through Ingress, create a scaled object, generate traffic, and
+    You'll enable event-driven HTTP autoscaling on an Arm-based Kubernetes cluster with KEDA
+    and Kedify. First, you'll install the required Kedify charts, verify their components, and
+    configure an NGINX Ingress Controller for arm64 nodes when needed. Then, you'll deploy a web
+    service and expose it through Ingress. You'll create a scaled object, generate traffic, and
     observe scale-out, scale-in, and scale-to-zero behavior.
   faqs:
   - question: How do I verify that Kedify and KEDA installed correctly?
     answer: >-
       Confirm that the KEDA (Kedify build), HTTP Scaler, and Kedify Agent components are deployed
       and healthy in the cluster. Proceed only after the services report a running state.
-  - question: My cluster already has an ingress controller. Do I still need to install NGINX Ingress
-      Controller?
+  - question: Do I still need to install NGINX Ingress
+      Controller if my cluster already has an ingress controller?
     answer: >-
-      No. If an ingress controller is already installed and configured, skip the ingress step
-      and continue to the Autoscale HTTP applications with Kedify and Kubernetes Ingress section.
+      No. If an ingress controller is already installed and configured, skip the installation of NGINX Ingress Controller.
   - question: Which deployment target should I use for the ingress controller on Arm-based nodes?
     answer: >-
-      Install the NGINX Ingress Controller with Helm and target arm64 nodes as described in the
-      step. This ensures the controller runs on Arm nodes in your cluster.
+      Install the NGINX Ingress Controller with Helm and target arm64 nodes to ensure that the controller runs on Arm nodes in your cluster.
   - question: What do I need to connect the cluster to Kedify’s cloud service?
     answer: >-
-      Use your Organization ID and API key from the Kedify Service dashboard. Provide these values
+      Use your `Organization ID` and `API key` from the Kedify Service dashboard. Provide these values
       when installing the Kedify Agent to establish the connection.
   - question: How do I know autoscaling is working after deploying the sample app?
     answer: >-
-      Generate HTTP load against the application’s Ingress and watch the service scale out. When
+      Generate HTTP load against the application’s ingress and watch the service scale out. When
       load stops, it should scale back in, including scale-to-zero when idle.
 # END generated_summary_faq
 

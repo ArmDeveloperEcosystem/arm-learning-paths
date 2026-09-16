@@ -8,11 +8,11 @@ minutes_to_complete: 90
 who_is_this_for: This is an introductory topic for developers, DevOps engineers, platform engineers, and cloud architects who want to deploy centralized authentication and identity management using Keycloak on Arm-based cloud environments.
 
 learning_objectives:
-    - Install and configure Keycloak on Azure Cobalt 100-based Arm64 virtual machines
-    - Configure PostgreSQL as the backend database for Keycloak
-    - Configure realms, users, and OAuth2/OpenID Connect clients
-    - Integrate a Flask application with Keycloak authentication
-    - Validate OAuth2/OpenID Connect authentication workflows
+    - Install and configure Keycloak on Azure Cobalt 100-based Arm64 virtual machines (VMs).
+    - Configure PostgreSQL as the backend database for Keycloak.
+    - Configure realms, users, and OAuth2/OpenID Connect clients.
+    - Integrate a Flask application with Keycloak authentication.
+    - Validate OAuth2/OpenID Connect authentication workflows.
 
 prerequisites:
   - A [Microsoft Azure account](https://azure.microsoft.com/) with access to Cobalt 100-based instances (Dpsv6)
@@ -35,31 +35,30 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:23:00Z'
   faq_source_hash: 9f5a5aa286f27fc31143675bf3658434b56dc80be9dfcf3dfa32292a6d55ab1b
   summary: >-
-    You deploy Keycloak on an Azure Cobalt 100 Arm64 VM with PostgreSQL and a Flask OAuth2
-    demo. You create a Dpsv6 VM, restrict network access to required services, install the
-    needed packages, and configure a realm, users, and an OpenID Connect client. You then
+    You'll deploy Keycloak on an Azure Cobalt 100 Arm64 VM with PostgreSQL and a Flask OAuth2
+    demo. First, you'll create a Dpsv6 VM, restrict network access to required services, and install the
+    needed packages. You'll configure a realm, users, and an OpenID Connect client. Then, you'll
     test the admin console and Flask login flow to verify redirects and the authenticated
     session.
   faqs:
-  - question: How do I know the Azure VM is ready before installing Keycloak?
+  - question: How do I know that the Azure VM is ready before installing Keycloak?
     answer: >-
-      Verify that you can connect to the instance over SSH and update the system packages. Confirm
-      the VM was created in the Dpsv6 series as shown in the steps before proceeding.
+      Verify that you can connect to the instance over SSH and update the system packages. 
   - question: Which inbound firewall rules should I add in Azure?
     answer: >-
       Add inbound rules for ports `8080`, `9000`, and `5000`. Test from a browser using the VM’s
       public IP and the configured ports to confirm access.
   - question: What should I check if Keycloak fails to start with database errors?
     answer: >-
-      Ensure PostgreSQL is installed, running, and reachable on the VM. Check that the Keycloak
-      database settings match the PostgreSQL database, user, and connection details you configured.
+      Ensure that PostgreSQL is installed, running, and reachable on the VM. Check that the Keycloak
+      database settings match the PostgreSQL database, user, and connection details that you configured.
   - question: How do I confirm my realm, user, and client configuration is correct?
     answer: >-
       Open the Flask application and start the login flow. You should be redirected to the Keycloak
       login page and, after authenticating, returned to the Flask app with an authenticated session.
   - question: Can I run Keycloak and the Flask demo on the same VM?
     answer: >-
-      Yes. The steps install both on the Azure Cobalt 100-based VM and expose them through separate
+      Yes. You'll install both on the Azure Cobalt 100-based VM and expose them through separate
       inbound rules in the network security group.
 # END generated_summary_faq
 

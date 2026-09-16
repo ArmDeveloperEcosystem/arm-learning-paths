@@ -29,32 +29,32 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:25:36Z'
   faq_source_hash: e881f6b35dd5bbe42675d28c6139a8482c0da74862eac9b8d5e787ecdeb18571
   summary: >-
-    You deploy a persistent LLM chatbot on an Arm server with `llama.cpp` and a pre-quantized
-    Llama 3.1 8B model from Hugging Face. You build `llama.cpp`, obtain the model, launch its
-    OpenAI-compatible server, and expose it on port 8080. You submit API requests from the
+    You'll deploy a persistent LLM chatbot on an Arm server with `llama.cpp` and a pre-quantized
+    Llama 3.1 8B model from Hugging Face. First, you'll build `llama.cpp`, obtain the model, launch its
+    OpenAI-compatible server, and expose it on port `8080`. You'll submit API requests from the
     local machine or over the network and verify responses without reloading the model
     between calls.
   faqs:
-  - question: What result should I expect when I start the `llama.cpp` server?
+  - question: What result should I expect when I start the llama.cpp server?
     answer: >-
-      The server starts and listens on port 8080. Once running, you can send OpenAI-compatible
+      The server starts and listens on port `8080`. After the server starts running, you can send OpenAI-compatible
       requests without restarting the process between calls.
   - question: Do I need any extra tools to view API responses?
     answer: >-
-      Yes. Install `jq` with `sudo apt install jq -y`; it is used in this section to process JSON
+      Yes. Install `jq` with `sudo apt install jq -y`. You'll use `jq` to process JSON
       returned by the API.
   - question: Can I access the chatbot from another machine?
     answer: >-
       Yes. The server exposes an OpenAI-compatible API over the network, so a remote client can
-      call the host running the LLM if it can reach port 8080.
+      call the host running the LLM if it can reach port `8080`.
   - question: Which model should I download before launching the server?
     answer: >-
-      Use a pre-quantized Llama 3.1 8B model from Hugging Face, as specified in the steps. Download
-      it to the Arm server before starting the server.
-  - question: What should I check if the server command is not found?
+      Use a pre-quantized Llama 3.1 8B model from Hugging Face. Download
+      the model to the Arm server before starting the server.
+  - question: How do I send a request to the running llama.cpp server?
     answer: >-
-      Confirm you completed the build step by running `make` in the `llama.cpp` project. The server
-      executable is produced during that build.
+      Send a `curl` request to `http://localhost:8080/v1/chat/completions` with a JSON prompt, then
+      pipe the response to `jq -C`. Save the request in `curl-test.sh` and run it with `bash ./curl-test.sh`.
 # END generated_summary_faq
 
 author:
