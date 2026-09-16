@@ -41,7 +41,7 @@ generated_summary_faq:
       Restore the default IRQ handling by running `sudo systemctl unmask irqbalance` and
       `sudo systemctl enable --now irqbalance`. If `irqbalance` isn't installed on a Debian-based
       system, install it with `sudo apt install irqbalance`.
-  - question: Which IRQ distribution pattern should I start with on a small server (16 vCPUs or fewer)?
+  - question: Which IRQ distribution pattern should I start with on a small server with 16 vCPUs or fewer?
     answer: >-
       Start by concentrating network IRQs on one or two CPU cores instead of spreading them across
       all cores. Use the `smp_affinity` range assignment recommended in the path to bind the interrupts.
