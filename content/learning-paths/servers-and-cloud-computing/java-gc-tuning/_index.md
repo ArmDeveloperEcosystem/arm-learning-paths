@@ -32,7 +32,7 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:17:09Z'
   faq_source_hash: 4e044481e0de5cbc04512a181dd672f8ca753584abff4b43a6f3307980ecbc56
   summary: >-
-    You'll evaluate and tune Java garbage collection (GC) on Arm-based servers. First, you'll verify your JDK
+    You'll evaluate and tune Java garbage collection on Arm-based servers. First, you'll verify your JDK
     and available collectors, run a compact heap-filling program, and compare common
     production GCs. Then, you'll also learn how to upgrade to a recent long-term-support (LTS) JDK before
     adjusting settings. By comparing application behavior across runs on cloud or
