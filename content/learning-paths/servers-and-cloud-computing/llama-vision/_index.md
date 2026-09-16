@@ -59,7 +59,7 @@ generated_summary_faq:
       firewall if you're connecting remotely.
   - question: How do I know that the model download and 4-bit quantization completed?
     answer: >-
-      Watch the backend terminal where you run a download script. The script downloads the Llama 3.2‑Vision model and performs 4‑bit quantization
+      Watch the backend terminal where you run the download script. The script downloads the Llama 3.2‑Vision model and performs 4‑bit quantization
       before serving. Continue after you see the load steps finish and the server reports it's
       ready.
 # END generated_summary_faq
