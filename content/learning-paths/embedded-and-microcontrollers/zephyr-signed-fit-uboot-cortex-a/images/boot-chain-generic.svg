@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="260" viewBox="0 0 960 260" font-family="Arial, Helvetica, sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="228" viewBox="0 0 960 228" font-family="Arial, Helvetica, sans-serif" font-size="14">
   <title>Generic Cortex-A boot chain with U-Boot verifying the Zephyr FIT image</title>
   <defs>
     <marker id="ga" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
@@ -8,13 +8,17 @@
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b5fa5"/>
     </marker>
   </defs>
-  <rect width="960" height="260" fill="#ffffff"/>
+  <rect width="960" height="228" fill="#ffffff"/>
 
-  <!-- brackets: vendor checks cover early stages and U-Boot; the last arrow is ours -->
-  <text x="430" y="30" text-anchor="middle" fill="#555" font-size="13">Checked by the silicon vendor's ROM and firmware, with the vendor's or your fused key</text>
-  <path d="M 250 42 L 250 52 L 720 52 L 720 42" fill="none" stroke="#999" stroke-width="1"/>
-  <text x="840" y="30" text-anchor="middle" fill="#0b5fa5" font-size="13" font-weight="bold">Checked by U-Boot with your key</text>
-  <path d="M 745 42 L 745 52 L 940 52 L 940 42" fill="none" stroke="#0b5fa5" stroke-width="1.5"/>
+  <!-- range brackets: each starts at the left edge of its first box and ends at the right edge of its last box -->
+  <!-- vendor early boot stages and U-Boot: x 250 to 720 -->
+  <text x="485" y="24" text-anchor="middle" fill="#555" font-size="13">Checked by the silicon vendor's ROM and firmware</text>
+  <text x="485" y="40" text-anchor="middle" fill="#555" font-size="13">against your fused key; before fusing, any key passes</text>
+  <path d="M 250 66 V 52 H 720 V 66" fill="none" stroke="#888" stroke-width="1.2"/>
+  <!-- the Zephyr FIT image: x 790 to 940 -->
+  <text x="865" y="24" text-anchor="middle" fill="#0b5fa5" font-size="13" font-weight="bold">Checked by U-Boot</text>
+  <text x="865" y="40" text-anchor="middle" fill="#0b5fa5" font-size="13" font-weight="bold">with your key</text>
+  <path d="M 790 66 V 52 H 940 V 66" fill="none" stroke="#0b5fa5" stroke-width="1.5"/>
 
   <!-- boxes -->
   <rect x="20" y="80" width="150" height="90" rx="6" fill="#f4f4f4" stroke="#888"/>
@@ -42,9 +46,9 @@
   <line x1="480" y1="125" x2="558" y2="125" stroke="#555" stroke-width="2" marker-end="url(#ga)"/>
   <line x1="720" y1="125" x2="788" y2="125" stroke="#0b5fa5" stroke-width="2.5" marker-end="url(#gb)"/>
 
-  <!-- what each arrow means -->
-  <text x="209" y="200" text-anchor="middle" fill="#555" font-size="12">ROM loads and checks</text>
-  <text x="519" y="200" text-anchor="middle" fill="#555" font-size="12">firmware loads and checks</text>
-  <text x="754" y="200" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="bold">U-Boot verifies the</text>
-  <text x="754" y="216" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="bold">FIT signature, then go</text>
+  <!-- who checks each box, centred under the box being checked -->
+  <text x="365" y="196" text-anchor="middle" fill="#555" font-size="12">checked by the ROM</text>
+  <text x="640" y="196" text-anchor="middle" fill="#555" font-size="12">checked by the firmware</text>
+  <text x="865" y="196" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="bold">checked by U-Boot,</text>
+  <text x="865" y="212" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="bold">then started with go</text>
 </svg>

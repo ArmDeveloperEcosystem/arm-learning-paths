@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="960" height="260" viewBox="0 0 960 260" font-family="Arial, Helvetica, sans-serif" font-size="14">
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="228" viewBox="0 0 960 228" font-family="Arial, Helvetica, sans-serif" font-size="14">
   <title>AM62L boot chain with the U-Boot to Zephyr verification added</title>
   <defs>
     <marker id="ta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
@@ -8,13 +8,17 @@
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b5fa5"/>
     </marker>
   </defs>
-  <rect width="960" height="260" fill="#ffffff"/>
+  <rect width="960" height="228" fill="#ffffff"/>
 
-  <!-- brackets aligned to the boxes they cover: tiboot3.bin .. u-boot.img are checked by TI's ROM and TIFS -->
-  <text x="475" y="30" text-anchor="middle" fill="#555" font-size="13">Checked by TI's ROM and TIFS. On an HS-FS device, TI's development key is accepted.</text>
-  <path d="M 210 42 L 210 52 L 740 52 L 740 42" fill="none" stroke="#999" stroke-width="1"/>
-  <text x="850" y="30" text-anchor="middle" fill="#0b5fa5" font-size="13" font-weight="bold">Checked by U-Boot with your key</text>
-  <path d="M 760 42 L 760 52 L 940 52 L 940 42" fill="none" stroke="#0b5fa5" stroke-width="1.5"/>
+  <!-- range brackets: each starts at the left edge of its first box and ends at the right edge of its last box -->
+  <!-- tiboot3.bin, tispl.bin and u-boot.img: x 210 to 740 -->
+  <text x="475" y="24" text-anchor="middle" fill="#555" font-size="13">Checked by TI's ROM and TIFS</text>
+  <text x="475" y="40" text-anchor="middle" fill="#555" font-size="13">On an HS-FS device such as this EVM, any key passes</text>
+  <path d="M 210 66 V 52 H 740 V 66" fill="none" stroke="#888" stroke-width="1.2"/>
+  <!-- the Zephyr FIT image: x 780 to 940 -->
+  <text x="860" y="24" text-anchor="middle" fill="#0b5fa5" font-size="13" font-weight="bold">Checked by U-Boot</text>
+  <text x="860" y="40" text-anchor="middle" fill="#0b5fa5" font-size="13" font-weight="bold">with your key</text>
+  <path d="M 780 66 V 52 H 940 V 66" fill="none" stroke="#0b5fa5" stroke-width="1.5"/>
 
   <!-- boxes -->
   <rect x="20" y="80" width="150" height="90" rx="6" fill="#f4f4f4" stroke="#888"/>
@@ -48,10 +52,10 @@
   <line x1="550" y1="125" x2="588" y2="125" stroke="#555" stroke-width="2" marker-end="url(#ta)"/>
   <line x1="740" y1="125" x2="778" y2="125" stroke="#0b5fa5" stroke-width="2.5" marker-end="url(#tb)"/>
 
-  <!-- who checks what, under the box that is being checked -->
-  <text x="285" y="200" text-anchor="middle" fill="#555" font-size="12">checked by the ROM</text>
-  <text x="475" y="200" text-anchor="middle" fill="#555" font-size="12">checked by TIFS</text>
-  <text x="665" y="200" text-anchor="middle" fill="#555" font-size="12">checked by TIFS</text>
-  <text x="860" y="200" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="bold">checked by U-Boot,</text>
-  <text x="860" y="216" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="bold">then started with go</text>
+  <!-- who checks each box, centred under the box being checked -->
+  <text x="285" y="196" text-anchor="middle" fill="#555" font-size="12">checked by the ROM</text>
+  <text x="475" y="196" text-anchor="middle" fill="#555" font-size="12">checked by TIFS</text>
+  <text x="665" y="196" text-anchor="middle" fill="#555" font-size="12">checked by TIFS</text>
+  <text x="860" y="196" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="bold">checked by U-Boot,</text>
+  <text x="860" y="212" text-anchor="middle" fill="#0b5fa5" font-size="12" font-weight="bold">then started with go</text>
 </svg>
