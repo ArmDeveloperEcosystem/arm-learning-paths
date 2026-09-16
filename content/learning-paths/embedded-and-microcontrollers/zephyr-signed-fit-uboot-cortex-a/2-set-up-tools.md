@@ -15,7 +15,7 @@ The AM62L EVM boots from a micro-SD card, so you need one and a way to write it.
 
 The host is an x86_64 PC running Ubuntu 22.04 or 24.04 with about 20 GB of free disk space. TI ships the SDK installer and its cross compiler as x86_64 binaries, so an Arm host doesn't work here. The SDK download is 4.5 GB and unpacks to 11 GB.
 
-You build Zephyr with Workbench for Zephyr, an open-source Visual Studio Code extension by Ac6. Follow [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) up to and including its section *Install the required host tools*, then come back here. Skip its toolchain and workspace steps: a Cortex-A board needs an AArch64 toolchain, and the AM62L needs Zephyr 4.4 or later; you add both from Workbench when you [build the Zephyr image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/3-build-zephyr/).
+You build Zephyr with [Workbench for Zephyr](https://z-workbench.com/), an open-source [Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=Ac6.zephyr-workbench) by Ac6. Follow [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) up to and including its section *Install the required host tools*, then come back here. Skip its toolchain and workspace steps: a Cortex-A board needs an AArch64 toolchain, and the AM62L needs Zephyr 4.4 or later; you add both from Workbench when you [build the Zephyr image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/3-build-zephyr/).
 
 ## Install the host packages
 

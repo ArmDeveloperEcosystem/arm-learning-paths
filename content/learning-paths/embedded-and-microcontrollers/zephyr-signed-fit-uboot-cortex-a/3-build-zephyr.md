@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Open Workbench for Zephyr
 
-You build Zephyr with Workbench for Zephyr in VS Code, installed on the previous page. [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) sets up a Cortex-M toolchain and workspace. This page does the same for a Cortex-A board: an AArch64 toolchain, and a Zephyr 4.4 workspace built from your board vendor's template, Texas Instruments here.
+You build Zephyr with [Workbench for Zephyr](https://z-workbench.com/) in VS Code, installed on the previous page. [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) sets up a Cortex-M toolchain and workspace. This page does the same for a Cortex-A board: an AArch64 toolchain, and a Zephyr 4.4 workspace built from your board vendor's template, Texas Instruments here.
 
 Open VS Code on your working directory:
 
