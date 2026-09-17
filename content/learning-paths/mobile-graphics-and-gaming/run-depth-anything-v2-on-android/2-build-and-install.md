@@ -1,15 +1,15 @@
 ---
-title: Build and install the depth-estimation application
-description: Clone the Android sample, prepare the model downloader, and install the debug application on an Arm-based phone.
+title: Build and install Arm AI Portal Image Analysis
+description: Clone Arm AI Portal Image Analysis, prepare the model downloader, and install the debug application on an Arm-based phone.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Clone the Android sample
+## Clone Arm AI Portal Image Analysis
 
-Clone the application that contains the validated Depth Anything V2 adapter:
+Clone Arm AI Portal Image Analysis, which contains the validated Depth Anything V2 adapter:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
@@ -33,11 +33,13 @@ py -m venv .hf-venv
   {{< /tab >}}
 {{< /tabpane >}}
 
+The commands invoke the virtual environment's Python executable directly, so you don't need to activate the environment or change the PowerShell script-execution policy. If Python reports that `venv` is unavailable on Debian or Ubuntu, install the `python3-venv` package and rerun the command.
+
 The repository contains Kotlin adapters and placeholder files, but it doesn't contain model weights or credentials.
 
-## Build and install the application
+## Build and install Arm AI Portal Image Analysis
 
-Build the debug APK, run the unit tests and lint checks, install the app, and start it:
+Build the debug APK, run the unit tests and lint checks, install the application, and start it:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
@@ -53,8 +55,10 @@ adb shell am start -n com.arm.learningpath.imagetoimage/.ui.MainActivity
   {{< /tab >}}
 {{< /tabpane >}}
 
+You don't need to install Gradle separately because the repository includes the Gradle wrapper.
+
 Select **Depth Anything V2 Small INT8** in the model menu. Its status reports `placeholder bundled` because the real `.pte` file hasn't been copied to the phone.
 
-### What you've accomplished
+## What you've accomplished and what's next
 
 You've built, tested, and installed the application with its model-specific Depth Anything adapter. Next, you'll download and stage the exact model artifact.

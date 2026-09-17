@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Generate a depth map
 
-Start the application:
+Start Arm AI Portal Image Analysis:
 
 ```console
 adb shell am start -n com.arm.learningpath.imagetoimage/.ui.MainActivity
@@ -32,8 +32,8 @@ The Android adapter follows the model card's fixed contract:
 
 | Stage | Behavior |
 | --- | --- |
-| Decode | Read the selected RGB image with its orientation applied |
-| Resize | Resize directly to `686 x 518` with bicubic interpolation; this can change the source aspect ratio |
+| Decode | Read the selected RGB image with its orientation applied; the application may subsample a large image during decoding to limit memory use |
+| Resize | Resize the decoded RGB image to `686 x 518` with bicubic interpolation; this can change the source aspect ratio |
 | Normalize | Scale channels to `[0, 1]`, then apply ImageNet mean and standard deviation |
 | Input | Create one `float32 [1, 3, 518, 686]` tensor in NCHW order |
 | Inference | Execute `forward` with the XNNPACK-backed ExecuTorch module |
@@ -65,9 +65,9 @@ Record the following details:
 The model card reports evaluation on 654 indoor images from the official raw-depth NYU Depth V2 test split. Outdoor and out-of-distribution scenes weren't covered. The original and optimized models are licensed under Apache-2.0. The optimized model is intended for evaluation, prototyping, and integration exploration, and isn't a production-ready or supported solution. Re-evaluate its accuracy and suitability on your own data before production use.
 
 {{% notice Important %}}
-The vivo X300 model-card results used ExecuTorch 1.1.0, one thread, and a controlled benchmark procedure. Don't compare the app's ExecuTorch 1.3.1 timing directly with those published results.
+The model card and application use different ExecuTorch versions and test conditions. Treat timings displayed by the application as illustrative; don't compare them directly with the published vivo X300 benchmark.
 {{% /notice %}}
 
-### What you've accomplished
+## What you've accomplished and what's next
 
 You've run Depth Anything V2 Small on an Arm-based Android phone, generated input-dependent relative-disparity maps, and verified that inference works without a network connection.

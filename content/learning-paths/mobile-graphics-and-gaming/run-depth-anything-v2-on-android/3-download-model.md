@@ -34,7 +34,7 @@ Test-Path "$MODEL_DIR\$MODEL_FILE"
 
 The final check has no output on macOS or Linux when the file exists. It returns `True` on Windows. If Hugging Face requests authentication, run `hf auth login` from the virtual environment and use a read token.
 
-The artifact is an INT8 ExecuTorch program. It doesn't contain an Android executable. The APK contains the ExecuTorch 1.3.1 runtime and its arm64 native libraries.
+The artifact is an INT8 ExecuTorch program. It doesn't contain an Android executable. The application APK contains the ExecuTorch 1.3.1 runtime and its arm64 native libraries.
 
 ## Copy the model into application-private storage
 
@@ -61,8 +61,8 @@ adb shell rm "/data/local/tmp/$MODEL_FILE"
   {{< /tab >}}
 {{< /tabpane >}}
 
-The `ls` output shows the model in `files/models/depth-anything-v2-small-int8-xnnpack-executorch-vivo-x300/`. The Android application has no Internet permission and can't access your Hugging Face credentials.
+The `ls` output shows the model in `files/models/depth-anything-v2-small-int8-xnnpack-executorch-vivo-x300/`. The application has no Internet permission and can't access your Hugging Face credentials.
 
-### What you've accomplished
+## What you've accomplished and what's next
 
-You've downloaded the exact model and placed it in the app's private storage. Next, you'll generate and validate relative-disparity maps.
+You've downloaded the exact model and placed it in application-private storage. Next, you'll generate and validate relative-disparity maps.

@@ -7,9 +7,15 @@ weight: 2
 layout: learningpathall
 ---
 
+## Arm AI Portal
+
+The [Arm AI Portal](https://developer.arm.com/ai/models) provides a catalog of AI models across different runtimes, use cases, optimization profiles, and Arm-based targets. It includes benchmarking and compatibility information, code examples, and deployment guidance.
+
+You'll use an application called **Arm AI Portal Image Analysis** to run Depth Anything V2 Small, a monocular depth-estimation model from the Arm AI Portal, on a physical Arm-based Android phone. The application includes a validated ExecuTorch adapter that prepares the image, runs the model, validates its relative-disparity output, and renders a grayscale depth map.
+
 ## Check the existing development tools
 
-The sample application builds with Android SDK 35 and Java 17. Before installing anything, display the versions already available on your development computer:
+Arm AI Portal Image Analysis builds with Android SDK 35 and Java 17. Before installing anything, display the versions already available on your development computer:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
@@ -161,6 +167,6 @@ The first command lists the phone as `device`. The second command returns `arm64
 
 If the phone is `unauthorized`, unlock it and accept the prompt. On Windows, you might also need the manufacturer's USB driver.
 
-### What you've accomplished
+## What you've accomplished and what's next
 
-You've verified the build tools and connected an authorized Arm-based Android phone. Next, you'll build and install the sample application.
+You've verified the build tools and connected an authorized Arm-based Android phone. Next, you'll build and install Arm AI Portal Image Analysis.

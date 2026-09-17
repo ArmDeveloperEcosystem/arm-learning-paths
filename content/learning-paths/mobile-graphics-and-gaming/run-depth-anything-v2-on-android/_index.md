@@ -1,7 +1,7 @@
 ---
 title: Run Depth Anything V2 depth estimation on Android
 draft: true
-lastmod: 2026-09-16
+lastmod: 2026-09-17
 cascade:
     draft: true
 
@@ -84,12 +84,12 @@ learning_path_main_page: "yes"
 
 Depth Anything V2 Small estimates relative scene depth from one RGB image. The Arm-optimized artifact is quantized to INT8 and exported as an ExecuTorch `.pte` program for XNNPACK and KleidiAI on Arm-based mobile CPUs.
 
-You'll use a validated Android adapter to download the model, copy it into application-private storage, and generate a grayscale depth map without sending the image to a server. White pixels represent nearer regions and black pixels represent farther regions.
+You'll use an application called **Arm AI Portal Image Analysis** and its validated Android adapter to download the model, copy it into application-private storage, and generate a grayscale depth map without sending the image to a server. White pixels represent nearer regions and black pixels represent farther regions.
 
 The output is *relative disparity*, not distance measured in meters. Metric depth needs additional scale-and-shift alignment outside the model.
 
-The model accepts a fixed `float32 [1, 3, 518, 686]` tensor. The adapter resizes the selected image directly to `686 x 518`, even when that changes its aspect ratio, and applies ImageNet normalization. It then validates the `[1, 518, 686]` output and resizes the rendered depth map back to the original display resolution.
+The model accepts a fixed `float32 [1, 3, 518, 686]` tensor. To limit memory use, the application may subsample a large image while decoding it. The adapter bicubically resizes the decoded RGB image to `686 x 518`, even when that changes its aspect ratio, and applies ImageNet normalization. It then validates the `[1, 518, 686]` output and resizes the rendered depth map back to the original display resolution.
 
 {{% notice Note %}}
-The model card reports performance measured with ExecuTorch 1.1.0 on a vivo X300. The Android sample uses ExecuTorch 1.3.1. Treat timings shown by the app as functional observations, not comparisons with the published benchmark.
+The model card and application use different ExecuTorch versions and test conditions. Treat timings displayed by the application as illustrative; don't compare them directly with the published vivo X300 benchmark.
 {{% /notice %}}
