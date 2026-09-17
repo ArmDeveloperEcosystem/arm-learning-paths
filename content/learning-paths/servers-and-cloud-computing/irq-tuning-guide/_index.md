@@ -7,10 +7,10 @@ minutes_to_complete: 20
 who_is_this_for: This is an introductory topic for developers and performance engineers who are interested in understanding how network interrupt patterns can impact performance on cloud servers.
 
 learning_objectives:
-   - Analyze the current interrupt request (IRQ) layout on an Arm Linux system
-   - Experiment with different interrupt options and patterns to improve performance
-   - Configure optimal IRQ distribution strategies for your workload
-   - Implement persistent IRQ management solutions
+   - Analyze the current interrupt request (IRQ) layout on an Arm Linux system.
+   - Experiment with different interrupt options and patterns to improve performance.
+   - Configure optimal IRQ distribution strategies for your workload.
+   - Implement persistent IRQ management solutions.
 
 prerequisites:
     - An Arm computer running Linux
@@ -51,10 +51,9 @@ generated_summary_faq:
       under network load. Compare the new layout to your baseline to confirm that the change took effect.
   - question: How do I make my IRQ configuration persist across reboots?
     answer: >-
-      Use the persistent IRQ management approach so that your chosen assignments
-      are re-applied automatically. The provided scripts help encode the settings for repeatable
-      application.
-  - question: What should I try if network behavior does not improve with my first pattern?
+      IRQ changes reset at reboot. Add your affinity settings to `/etc/rc.local` or create a
+      systemd service file so that the assignments are reapplied when the system starts.
+  - question: What should I try if network behavior doesn't improve with my first pattern?
     answer: >-
       Switch to an alternative distribution strategy and retest, because effectiveness depends
       on workload and system size. No single approach is optimal everywhere, so iterate and validate

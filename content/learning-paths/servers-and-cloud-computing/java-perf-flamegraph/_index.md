@@ -53,8 +53,7 @@ generated_summary_faq:
       If the output doesn't, verify that `libperf-jvmti.so` is present and loaded by the JVM.
   - question: What should I look for in the generated flame graphs?
     answer: >-
-      Expect a visualization of sampled stacks during the benchmark. The widest stacks indicate
-      where time is spent, so you can focus on the hottest Java methods and code paths.
+      Open `profile.svg` in a browser to analyze the sampled profiling result from the benchmark. Expect a visualization of sampled stacks during the benchmark. The widest stacks indicate where time is spent, so that you can focus on the hottest Java methods and code paths.
 # END generated_summary_faq
 
 author: 

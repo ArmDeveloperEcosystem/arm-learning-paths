@@ -47,23 +47,23 @@ generated_summary_faq:
       Use the `c4a-standard-4` machine type, which provides 4 vCPUs and 16 GB of memory.
   - question: How do I verify that kubectl is installed correctly before working with GKE?
     answer: >-
-      Run `kubectl version --client` to confirm the client is available and can report version information.
-      If a cluster is connected, the server version also appears.
+      Run `kubectl version --client` to confirm that the client is installed. A `Client Version` and
+      `Kustomize Version` in the output confirm the installation.
   - question: What output should I expect after adding the Bitnami Helm repository?
     answer: >-
-      After running `helm repo add bitnami` and `helm repo update`, expect to see messages such as
-      `"bitnami" has been added to your repositories` and `Successfully got an update from the
-      "bitnami" chart repository`. This confirms your local index is updated.
+      Run `helm repo add bitnami https://charts.bitnami.com/bitnami` and then `helm repo update`.
+      Expect a message that the repository was added, followed by a successful update from the
+      Bitnami chart repository.
   - question: When should I use the local KinD cluster versus GKE?
     answer: >-
       Use the KinD-based local cluster to validate Helm installation and core workflows on the
       SUSE VM. Move to GKE to deploy PostgreSQL, Redis, and NGINX as services on a managed Kubernetes
       environment.
-  - question: How do I know that the Helm deployments on GKE are ready to use?
+  - question: How do I know that the Helm deployments are ready to use?
     answer: >-
-      Check that the deployed pods report `Ready` status and that services are reachable according
-      to the configured service type. If pods aren't ready, review the release status and pod
-      logs before continuing.
+      Run `helm list`, `kubectl get pods`, and `kubectl get svc`. The Helm release should report
+      `deployed`, the pods should report `Running`, and the services should be listed. If a pod is
+      `Pending`, wait 30 to 60 seconds for the images to download and retry.
 # END generated_summary_faq
 
 author: Pareena Verma

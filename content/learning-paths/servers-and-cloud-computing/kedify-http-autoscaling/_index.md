@@ -40,8 +40,8 @@ generated_summary_faq:
   faqs:
   - question: How do I verify that Kedify and KEDA installed correctly?
     answer: >-
-      Confirm that the KEDA (Kedify build), HTTP Scaler, and Kedify Agent components are deployed
-      and healthy in the cluster. Proceed only after the services report a running state.
+      Run `kubectl get pods -n keda` and confirm that the KEDA, HTTP scaler, and Kedify Agent pods
+      show `1/1` in `READY` and `Running` in `STATUS` before continuing.
   - question: Do I still need to install NGINX Ingress
       Controller if my cluster already has an ingress controller?
     answer: >-

@@ -52,16 +52,16 @@ generated_summary_faq:
     answer: >-
       Start the backend script in one terminal with the virtual environment activated. Then, open a
       new terminal, activate the same environment, and start the Streamlit frontend.
-  - question: What should I check if the frontend cannot reach the backend?
+  - question: What should I check if the frontend can't reach the backend?
     answer: >-
-      Verify that the backend process is running without errors and listening. Confirm the backend
-      URL configured in `frontend.py` matches the backend host and port, and open that port in your
-      firewall if you're connecting remotely.
+      Confirm that `backend.py` is running on port `5000` and that `frontend.py` uses
+      `http://localhost:5000/v1/chat/completions`. For remote browser access, open the Streamlit
+      frontend on port `8501`. The frontend connects to the backend locally.
   - question: How do I know that the model download and 4-bit quantization completed?
     answer: >-
-      Watch the backend terminal where you run the download script. The script downloads the Llama 3.2‑Vision model and performs 4‑bit quantization
-      before serving. Continue after you see the load steps finish and the server reports it's
-      ready.
+      Start `backend.py` and wait for the Flask output showing that the server is running on port
+      `5000`. The `backend.py` startup loads the Llama 3.2 Vision model and performs quantization
+      before serving requests.
 # END generated_summary_faq
 
 author: Nobel Chowdary Mandepudi

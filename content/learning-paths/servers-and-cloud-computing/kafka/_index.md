@@ -53,8 +53,8 @@ generated_summary_faq:
       that the rules allow traffic between cluster nodes and from the client where you run Kafka commands.
   - question: What result should I expect after I produce and consume events?
     answer: >-
-      You should see the consumer read the same events that were produced to the topic. Matching
-      messages confirm that the brokers and ZooKeeper are connected and the topic is available.
+      You should see the consumer read the same message that you wrote in the producer terminal.
+      This verifies that the Kafka cluster is working.
   - question: Where do I run the AWS automation, and which tools does it use?
     answer: >-
       Run the automation from any computer with the required tools installed. The AWS deployment

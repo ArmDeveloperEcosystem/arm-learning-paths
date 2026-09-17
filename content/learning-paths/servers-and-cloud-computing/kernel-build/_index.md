@@ -33,7 +33,7 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:22:08Z'
   faq_source_hash: 2610a92c54a3f084b1f70aa007979898cc0931e75061582cb0acf2ef9e810f43
   summary: >-
-    You'll prepare an Arm Ubuntu cloud instance and use TuxMake to compile custom Linux kernels
+    You'll prepare an Arm-based cloud instance running Ubuntu, and use TuxMake to compile custom Linux kernels
     with selectable versions and configurations. First, you'll choose between installing a kernel
     directly and generating packages, then verify the bootloader, modules, and build
     artifacts. You can configure 64 KB pages or create Fastpath-ready, build-only outputs,
@@ -59,8 +59,9 @@ generated_summary_faq:
       artifacts to your test environment.
   - question: Which workflow should I use if I want packages instead of installing directly?
     answer: >-
-      Use the standard kernel build workflows for downstream packaging. The workflows produce packages that
-      you can transfer and install later, instead of performing a direct install on the build instance.
+      Run `./scripts/kernel_build_and_install.sh --tags v6.18.1 --include-bindeb-pkg` to produce
+      Debian packages alongside the flat kernel artifacts. The `.deb` files are written under
+      `~/kernels/v6.18.1` for later transfer and installation.
 # END generated_summary_faq
 
 author: Geremy Cohen

@@ -43,10 +43,10 @@ generated_summary_faq:
       After selecting a backend, start the run and check the initial console
       output to confirm that the chosen backend is in use. If it's not the expected backend, repeat
       backend selection before training.
-  - question: Where should I save ml.py, and how do I execute it?
+  - question: Where should I save ml.py, and how do I run it?
     answer: >-
-      Save `ml.py` in a working directory on the Arm machine that you're using. Run it from the same
-      directory as the Python environment that you prepared during dependency setup.
+      Create and activate the virtual environment that you
+      prepared during dependency setup. Within the activated environment, save the script as `ml.py` in a working directory. To run the script, run `python ml.py`.
   - question: What result should I expect after training and evaluation?
     answer: >-
       The run prints training progress and evaluation metrics, then shows predictions from the
@@ -58,8 +58,8 @@ generated_summary_faq:
       if you use the system Python.
   - question: Can I use a different Python version than the system default?
     answer: >-
-      Yes. If you choose a different version, substitute the `python3` and `pip` commands accordingly
-      and create the virtual environment with that version.
+      Use a Python version supported by the required dependencies. To stay consistent with the Learning Path, use Python
+      3.10 or 3.11. If you want to use a newer version such as Python 3.12, check package support because TensorFlow and PyTorch might not provide packages for it.
 # END generated_summary_faq
 
 author: 
