@@ -34,15 +34,15 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:26:34Z'
   faq_source_hash: acd41945ae84be42f98fbc61a4e1f153067d53e3d3992c38825b78b381d1d568
   summary: >-
-    You'll build and deploy a vision-enabled chatbot on an Google Axion Arm-based instance  with PyTorch, Transformers, and Streamlit. First, you'll run a Flask backend that downloads and serves
+    You'll build and deploy a vision-enabled chatbot with PyTorch, Transformers, and Streamlit on an Arm-based instance powered by Google Axion. First, you'll run a Flask backend that downloads and serves
     a quantized Llama 3.2-Vision model, then create a Streamlit frontend for image uploads
     and prompts. You'll configure firewall access, start both services on Ubuntu, and verify
     image-plus-text responses in the web app.
   faqs:
   - question: What result should I expect when both the backend and frontend are running?
     answer: >-
-      Open the browser to the app and you should see the title **LLM Vision Chatbot on Arm** with
-      controls to upload an image and enter a prompt. After submitting, the page displays a generated
+      Open the browser to the app. You'll see the title **LLM Vision Chatbot on Arm** with
+      controls to upload an image and enter a prompt. After submitting, the page will display a generated
       text response that uses the image as context.
   - question: Which address should I use to open the web app?
     answer: >-
@@ -50,8 +50,8 @@ generated_summary_faq:
       TCP traffic to port `8501` in your instance’s security rules.
   - question: How do I run the backend and frontend at the same time?
     answer: >-
-      Start the backend script in one terminal with the virtual environment activated. Open a
-      new terminal, activate the same environment, and then start the Streamlit frontend.
+      Start the backend script in one terminal with the virtual environment activated. Then, open a
+      new terminal, activate the same environment, and start the Streamlit frontend.
   - question: What should I check if the frontend cannot reach the backend?
     answer: >-
       Verify that the backend process is running without errors and listening. Confirm the backend

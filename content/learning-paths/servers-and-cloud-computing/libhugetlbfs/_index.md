@@ -44,7 +44,7 @@ generated_summary_faq:
   - question: Do I also need to change how I start mysqld after building?
     answer: >-
       Yes. Change both the build and the run of the MySQL server to enable
-      libhugetlbfs.
+      `libhugetlbfs`.
   - question: What should I check if the build fails after I add the flags?
     answer: >-
       Confirm that you applied the options to both `-DCMAKE_C_FLAGS` and `-DCMAKE_CXX_FLAGS`. Verify that the

@@ -34,8 +34,8 @@ generated_summary_faq:
   summary: >-
     You'll enable event-driven HTTP autoscaling on an Arm-based Kubernetes cluster with KEDA
     and Kedify. First, you'll install the required Kedify charts, verify their components, and
-    configure an NGINX Ingress Controller for arm64 nodes when needed. Then, you'll deploy a web
-    service and expose it through Ingress. You'll create a scaled object, generate traffic, and
+    configure an NGINX Ingress Controller for arm64 nodes. Then, you'll deploy a web
+    service and expose it through ingress. You'll create a scaled object, generate traffic, and
     observe scale-out, scale-in, and scale-to-zero behavior.
   faqs:
   - question: How do I verify that Kedify and KEDA installed correctly?

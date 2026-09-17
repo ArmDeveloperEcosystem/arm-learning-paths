@@ -39,7 +39,7 @@ generated_summary_faq:
     You'll deploy Jenkins on Arm-based cloud servers and validate an Arm-native CI/CD setup.
     First, you'll provision an Azure Cobalt 100 VM, open port `8080`, install Jenkins LTS with OpenJDK
     17, and verify the `aarch64` runtime. Then, you'll run Arm-native pipelines, including
-    Docker-based jobs when needed, and configure a Google Cloud firewall rule for Axion C4A
+    Docker-based jobs, and configure a Google Cloud firewall rule for Axion C4A
     access.
   faqs:
   - question: Which Azure VM series should I choose for a Cobalt 100 deployment?
@@ -56,11 +56,11 @@ generated_summary_faq:
       using the correct public IP and port.
   - question: Where do I configure the cloud network access for Jenkins?
     answer: >-
-      Create the Azure network security group inbound TCP rule for port 8080 in the Azure portal. For an Axion C4A
+      Create the Azure network security group inbound TCP rule for port `8080` in the Azure portal. For an Axion C4A
       instance on Google Cloud, create the inbound firewall rule in the Google Cloud Console.
   - question: How do I confirm that the environment is Arm-native before running pipelines or Docker-based jobs?
     answer: >-
-      Check that the system reports Arm64 (`aarch64`) and that Jenkins runs with OpenJDK 17. Ensure
+      Check that the system reports Arm64 (`aarch64`) and that Jenkins runs with OpenJDK 17. Ensure that
       port `8080` is open so that the controller is reachable before you start pipelines.
 # END generated_summary_faq
 

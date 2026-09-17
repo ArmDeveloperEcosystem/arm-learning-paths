@@ -31,20 +31,20 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:23:35Z'
   faq_source_hash: 17fe703c2cb52d231024812a5b3b91a070abb199405bdc39092e3286736e3e72
   summary: >-
-    You use KubeArchInspect to assess Kubernetes workloads for Arm migration. You scan a
+    You'll use KubeArchInspect to assess Kubernetes workloads for Arm migration. First, you'll scan a
     live cluster and review a report that maps container images to the architectures
-    advertised by their registries. You identify images with arm64 support, images that need
-    newer tags, and images that cannot be checked. You update selected workloads and re-run
+    advertised by their registries. Then, you'll identify images with arm64 support, images that need
+    newer tags, and images that can't be checked. You'll update selected workloads and re-run
     the scan to verify Arm-compatible images.
   faqs:
   - question: How do I run the scan against my cluster?
     answer: >-
-      Ensure `kubectl` is configured to connect to your cluster, then run `kubearchinspect images`.
-      The tool connects to the cluster and inspects the images it finds.
+      Ensure that `kubectl` is configured to connect to your cluster, then run `kubearchinspect images`.
+      The tool connects to the cluster and inspects the images that it finds.
   - question: What does the report show and how do I read it?
     answer: >-
-      The report lists each image with its name, tag, and a status symbol. A green tick (✅) means arm64 support
-      is present, and a red cross (❌)  means arm64 is not available. A blue up symbol (🆙) means a newer tag adds arm64, and a red cross mark (🚫) indicates
+      The report lists each image with its name, tag, and a status symbol. A green tick (✅) means that arm64 support
+      is present, and a red cross (❌)  means that arm64 isn't available. A blue up symbol (🆙) means that a newer tag adds arm64, and a red cross mark (🚫) indicates
       an error occurred while checking the image.
   - question: What should I do when a line shows the blue up indicator?
     answer: >-

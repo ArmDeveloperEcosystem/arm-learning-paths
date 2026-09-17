@@ -3,9 +3,9 @@ title: Deploy Apache Kafka on Arm-based Microsoft Azure Cobalt 100 virtual machi
 
 minutes_to_complete: 30   
 
-who_is_this_for: This is an advanced topic for developers looking to migrate their Apache Kafka workloads from x86_64 to Arm-based platforms, specifically on Microsoft Azure Cobalt 100 (arm64) virtual machines.
+who_is_this_for: This is an advanced topic for developers looking to migrate their Apache Kafka workloads from x86_64 to Arm-based platforms, specifically on Microsoft Azure Cobalt 100 (arm64) virtual machines (VMs).
 
-description: Deploy Apache Kafka on Azure Cobalt 100 Arm virtual machines (VMs) and benchmark message throughput performance.
+description: Deploy Apache Kafka on Azure Cobalt 100 Arm virtual machines and benchmark message throughput performance.
 
 learning_objectives: 
     - Provision an Azure Arm64 VM using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
@@ -33,14 +33,14 @@ generated_summary_faq:
   faq_source_hash: c1f6038eaba282ca168d1826dfce644ecb21fd01b627fd274e23e513fcac3a36
   summary: >-
     You'll provision an Arm64 Azure Cobalt 100 VM, install Java and Kafka, and configure Kafka
-    4.1.0 in KRaft mode. First, you'll create a topic and verify producer-to-consumer message flow, then
+    `4.1.0` in KRaft mode. First, you'll create a topic and verify producer-to-consumer message flow, then
     run Kafka’s official performance tools to capture throughput and latency. You'll finish
     with a working Kafka deployment and baseline benchmark results from an Arm64 instance on
     Microsoft Azure.
   faqs:
   - question: Which Azure VM series should I use?
     answer: >-
-      Select a D-Series v6 virtual machine from the Dpsv6 size series, which uses the Cobalt 100
+      Select a D-Series v6 VM from the Dpsv6 size series, which uses the Cobalt 100
       Arm-based CPU. 
   - question: Which operating system image do I choose when creating the VM?
     answer: >-

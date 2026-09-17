@@ -57,7 +57,7 @@ generated_summary_faq:
       spent.
   - question: How can I analyze operator-level performance with Annotation Channels?
     answer: >-
-      Enable channels in the annotation integration so Streamline displays separate lanes for
+      Enable channels in the annotation integration so that Streamline displays separate lanes for
       grouped operations. Inspect the channel lanes to see operator timing and overlaps during
       token generation.
   - question: How do I evaluate multi-core or multi-thread execution?

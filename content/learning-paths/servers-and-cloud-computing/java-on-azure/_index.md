@@ -50,10 +50,9 @@ generated_summary_faq:
     answer: >-
       Confirm that the VM reports an Arm64 architecture and that the installed Java versions are present.
       Ensure both the runtime and compiler are available before proceeding.
-  - question: Why run a Tomcat-like baseline before using a full server, and what should I look for in JMH output?
+  - question: What should I look for in JMH output?
     answer: >-
-      The baseline isolates raw Java execution without framework overhead, giving you a clean
-      reference point. In JMH, focus on throughput or timing metrics that stabilize after warmup
+      In JMH, focus on throughput or timing metrics that stabilize after warmup
       to establish a reliable baseline.
 # END generated_summary_faq
 

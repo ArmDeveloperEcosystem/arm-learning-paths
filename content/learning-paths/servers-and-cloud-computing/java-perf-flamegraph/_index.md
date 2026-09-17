@@ -12,7 +12,7 @@ learning_objectives:
   - Generate flame graphs using a Java agent.
 
 prerequisites:
-  - Access to both Arm-based and x86-based computers running Ubuntu (you can use cloud-based server instances)
+  - Access to both Arm-based and x86-based computers running Ubuntu, or cloud-based server instances
   - Basic familiarity with Java applications and performance profiling using flame graphs
 
 # START generated_summary_faq
@@ -32,12 +32,12 @@ generated_summary_faq:
   summary: >-
     You'll profile a Java HTTP workload on an Arm Neoverse server by applying repeatable load
     with Tomcat and `wrk2`. First, you'll capture CPU samples with `async-profiler` and generate a flame
-    graph, then profile with a JVMTI agent and the FlameGraph toolkit. You'll compare both
+    graph. Then, you'll profile with a Java Virtual Machine Tool Interface (JVMTI) agent and the FlameGraph toolkit. You'll compare both
     views to identify the methods and call stacks that dominate execution under load.
   faqs:
   - question: Which process ID should I target when running async-profiler?
     answer: >-
-      Profile the Tomcat JVM process. Use your system’s process listing to find the PID, and start
+      Profile the Tomcat process. Use your system’s process listing to find the PID, and start
       profiling while `wrk2` is actively generating load.
   - question: Do I need to install async-profiler on the same machine as Tomcat?
     answer: >-
@@ -50,7 +50,7 @@ generated_summary_faq:
   - question: How do I confirm that perf is capturing Java method names with the JVMTI agent?
     answer: >-
       Check that the profile output shows Java method names rather than raw memory addresses.
-      If it doesn't, verify that `libperf-jvmti.so` is present and loaded by the JVM.
+      If the output doesn't, verify that `libperf-jvmti.so` is present and loaded by the JVM.
   - question: What should I look for in the generated flame graphs?
     answer: >-
       Expect a visualization of sampled stacks during the benchmark. The widest stacks indicate

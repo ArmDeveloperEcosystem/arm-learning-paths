@@ -31,9 +31,7 @@ generated_summary_faq:
   summary: >-
     You'll deploy a persistent LLM chatbot on an Arm server with `llama.cpp` and a pre-quantized
     Llama 3.1 8B model from Hugging Face. First, you'll build `llama.cpp`, obtain the model, launch its
-    OpenAI-compatible server, and expose it on port `8080`. You'll submit API requests from the
-    local machine or over the network and verify responses without reloading the model
-    between calls.
+    OpenAI-compatible server, and expose it on port `8080`. You'll then access the chatbot using the OpenAI-compatible API.
   faqs:
   - question: What result should I expect when I start the llama.cpp server?
     answer: >-

@@ -49,7 +49,7 @@ generated_summary_faq:
       version should match the one you built, and the corresponding modules should be available.
   - question: What should I check if my build is very slow or runs out of memory?
     answer: >-
-      Use a sufficiently large Arm instance as smaller instances take longer and can run out of
+      Use a sufficiently large Arm instance, as smaller instances take longer and can run out of
       memory during compilation. Confirm that you have ample free storage before starting the
       build.
   - question: Can I combine --fastpath true with --kernel-install?
@@ -60,7 +60,7 @@ generated_summary_faq:
   - question: Which workflow should I use if I want packages instead of installing directly?
     answer: >-
       Use the standard kernel build workflows for downstream packaging. The workflows produce packages that
-      you can transfer and install later instead of performing a direct install on the build instance.
+      you can transfer and install later, instead of performing a direct install on the build instance.
 # END generated_summary_faq
 
 author: Geremy Cohen
