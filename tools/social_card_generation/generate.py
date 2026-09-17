@@ -41,7 +41,7 @@ REPO_ROOT = BASE_DIR.parents[1]
 SVG_PATH = BASE_DIR / "learn-social-og-template.svg"
 TITLE_FONT_PATH = BASE_DIR / "fonts" / "Aeonik-Medium.otf"
 META_FONT_PATH = BASE_DIR / "fonts" / "AeonikFono-Regular.otf"
-OUTPUT_PATH = BASE_DIR / "output.webp"
+OUTPUT_PATH = BASE_DIR / "social_image.webp"
 
 LEARNING_PATH_ROOT = REPO_ROOT / "content" / "learning-paths"
 INSTALL_GUIDE_ROOT = REPO_ROOT / "content" / "install-guides"
