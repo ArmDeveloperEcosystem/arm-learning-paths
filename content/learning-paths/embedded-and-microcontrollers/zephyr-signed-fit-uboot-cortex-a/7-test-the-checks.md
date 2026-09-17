@@ -1,6 +1,6 @@
 ---
 title: Test that U-Boot refuses a wrong key and a tampered image
-description: "Optional: sign a second Zephyr image with a key U-Boot doesn't have, tamper with a copy of the trusted FIT, check both with fit_check_sign on the host, then watch U-Boot refuse both on the board."
+description: "Optional: sign a second Zephyr image with a key U-Boot doesn't have, tamper with a copy of the trusted FIT, check both with fit_check_sign on the host, then watch U-Boot refuse both on your target."
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -9,11 +9,11 @@ layout: learningpathall
 
 ## Prove the refusal, not only the acceptance
 
-This page makes two images U-Boot must refuse, one signed with the wrong key and one changed after signing, checks them on the host, and watches U-Boot refuse each one at the serial console.
+This page makes two images U-Boot must refuse, one signed with the wrong key and one changed after signing, checks them on the host, and watches U-Boot refuse each one on your target's console.
 
 This page is optional, and the `b` and `t` commands in your U-Boot are already waiting for its two files.
 
-Open a terminal and load the environment: `source $HOME/zephyr-secure-boot/env.sh`.
+Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-am62l.sh`, or `source $HOME/zephyr-secure-boot/env-qemu.sh` for QEMU.
 
 ## Build a second Zephyr image
 
@@ -26,7 +26,7 @@ In Workbench for Zephyr, select **Add Application** again. Use the same workspac
 	printk("#   signed with key-b  (NOT trusted by U-Boot) #\n");
 ```
 
-The replacement text is the same length as the original, so the box stays aligned. Build `hello_b` the same way, with a right-click on it in the **Applications** view and **Build**. The result is `$WORK/zephyrproject/applications/hello_b/build/primary/zephyr/zephyr.bin`, again about 58 KB.
+The replacement text is the same length as the original, so the box stays aligned. Build `hello_b` the same way, with a right-click on it in the **Applications** view and **Build**. The result is `$WORK/zephyrproject/applications/hello_b/build/primary/zephyr/zephyr.bin`, the same size as the first image.
 
 ## Sign the second image with a key U-Boot doesn't have
 
@@ -75,7 +75,7 @@ cp $FIT/zephyr-a.itb $FIT/zephyr-tampered.itb
 printf '\xff' | dd of=$FIT/zephyr-tampered.itb bs=1 seek=32768 conv=notrunc 2>/dev/null
 ```
 
-The payload starts at offset `0xe8` (232), the `Data Start` you saw on the board, and is 58340 bytes long, so offset 32768 (`0x8000`) lands inside Zephyr's code, not in the FIT's own structure.
+The payload starts at the `Data Start` offset you saw when U-Boot loaded the FIT, a couple of hundred bytes into the file, and is tens of kilobytes long, so offset 32768 (`0x8000`) lands inside Zephyr's code, not in the FIT's own structure.
 
 Check that the copy now differs from the original:
 
@@ -166,14 +166,13 @@ Signature check bad (error 1)
 
 **Lines to look for:** `sha256,rsa2048:key-a+` on the first line, then `sha256 error!` and `Bad hash value for 'hash-1' hash node in 'kernel-1' image node`, then `Signature check bad (error 1)`. The exit code is 1.
 
-## Add the two images to the card
+## Add the two images to the boot media
 
-Add the two new FITs to the card image with `mcopy`, at the same `@@1048576` volume offset you used when you [built the card image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-board/), then list the volume:
+Add the two new FITs with `mcopy`, at the same `BOOT_IMG` volume you used when you [built the boot media](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-target/), then list the volume:
 
 ```bash
-M=$WORK/sdcard.img@@1048576
-mcopy -o -i $M $FIT/zephyr-b.itb $FIT/zephyr-tampered.itb ::
-mdir -i $M ::
+mcopy -o -i $BOOT_IMG $FIT/zephyr-b.itb $FIT/zephyr-tampered.itb ::
+mdir -i $BOOT_IMG ::
 ```
 
 The output is similar to:
@@ -193,17 +192,26 @@ ZEPHYR~1 ITB     60198 2026-09-15  16:49  zephyr-tampered.itb
                         130 643 968 bytes free
 ```
 
-Six files: the boot files and the three FITs.
+Six files on the card: the boot files and the three FITs. In QEMU the disk image holds the three FITs and nothing else.
 
+{{< tabpane-normal >}}
+  {{< tab header="AM62L EVM" >}}
 Write the image to the card again with the same `dd` command as on the previous page, taking the same care with `/dev/sdX`:
 
 ```bash
 sudo dd if=$WORK/sdcard.img of=/dev/sdX bs=4M conv=fsync status=progress
 ```
 
+Move the card to the board, open the console with `picocom`, and power the board on.
+  {{< /tab >}}
+  {{< tab header="QEMU" >}}
+Nothing to write: `disk.img` is the disk. Start QEMU again with the same command as on the previous page; it reads the image fresh at every start.
+  {{< /tab >}}
+{{< /tabpane-normal >}}
+
 ## Run the wrong-key test
 
-Move the card to the board, open the console with `picocom` as on the previous page, and power the board on. Press a key during the three-second countdown to stop autoboot. If you miss it, U-Boot starts image A; power the board off and on and try again. At the prompt, run the wrong-key test:
+Press a key during the three-second countdown to stop autoboot. If you miss it, U-Boot starts image A; start the target again and try once more. At the prompt, run the wrong-key test:
 
 ```console
 => run b
@@ -263,7 +271,7 @@ ERROR -2: can't get kernel image!
 **Lines to look for:** `sha256,rsa2048:key-a+ OK` shows the signature passes; `sha256 error!` and `Bad hash value for 'hash-1' hash node in 'kernel-1' image node` show the payload no longer matches the stored `Hash value`; `*** REFUSED: Zephyr was NOT started ***` follows.
 
 {{% notice Note %}}
-If `run b` or `run t` ends with a Zephyr banner instead of the `REFUSED` line, the check isn't failing closed. The two causes seen in practice are a `;` where `&&` belongs in the `zboot` chain of `CONFIG_PREBOOT`, and a `signature.dtsi` without `required = "conf"`. Check both against [Build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), rebuild, and write the card again.
+If `run b` or `run t` ends with a Zephyr banner instead of the `REFUSED` line, the check isn't failing closed. The two causes seen in practice are a `;` where `&&` belongs in the `zboot` chain of `CONFIG_PREBOOT`, and a `signature.dtsi` without `required = "conf"`. Check both against [Build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), rebuild, and put the files on the boot media again.
 {{% /notice %}}
 
 To boot the trusted image again, type `run a`.

@@ -1,6 +1,6 @@
 ---
 title: Create signing keys and sign the Zephyr image into a FIT
-description: Build mkimage from the board's U-Boot tree, generate two RSA keys with OpenSSL, and sign the Zephyr binary into a FIT image that U-Boot can verify.
+description: Build mkimage from your target's U-Boot tree, generate two RSA keys with OpenSSL, and sign the Zephyr binary into a FIT image that U-Boot can verify.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -9,22 +9,22 @@ layout: learningpathall
 
 ## Build U-Boot's host tools first
 
-Open a terminal and load the environment: `source $HOME/zephyr-secure-boot/env.sh`.
+Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-am62l.sh`, or `source $HOME/zephyr-secure-boot/env-qemu.sh` for QEMU.
 
-`mkimage` builds and signs a FIT image. `fit_check_sign` verifies a signed FIT on the host. Both come from the same U-Boot tree as the board's U-Boot, so signer and verifier match.
+`mkimage` builds and signs a FIT image. `fit_check_sign` verifies a signed FIT on the host. Both come from the same U-Boot tree as your target's U-Boot, so signer and verifier match.
 
-The `tools` target needs the board's `.config` first, so run the defconfig target named by `UBOOT_DEFCONFIG` in `env.sh`:
+The `tools` target needs the target's `.config` first, so run the defconfig target named by `UBOOT_DEFCONFIG` in your environment file:
 
 ```bash
-make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="${CROSS}gcc --sysroot=$SYSROOT" $UBOOT_DEFCONFIG
+make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="$UBOOT_CC" $UBOOT_DEFCONFIG
 ```
 
-`CC="${CROSS}gcc --sysroot=$SYSROOT"` gives the SDK's compiler the library path `SYSROOT` from `env.sh`; on the AM62L SDK the U-Boot link fails without it. Keep it on every `make` line, including the three on the next page.
+`UBOOT_CC` is the compiler command from your environment file. On the AM62L it carries `--sysroot`, the SDK's library path, without which the U-Boot link fails; in QEMU it is the plain cross compiler. Keep `CC="$UBOOT_CC"` on every `make` line, including the ones on the next page.
 
 Then build the host tools:
 
 ```bash
-make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="${CROSS}gcc --sysroot=$SYSROOT" tools
+make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="$UBOOT_CC" tools
 ```
 
 Both tools land in `$UBOOT_OUT/tools/`. Check that `mkimage` runs:
@@ -39,8 +39,10 @@ The output is similar to:
 mkimage version 2026.01-g5fb294342321
 ```
 
+The version string names the U-Boot tree you built from; in QEMU it reads `mkimage version 2025.07`.
+
 {{% notice Note %}}
-If the `tools` build stops at `pylibfdt`, `swig` or `gnutls/gnutls.h`, a package is missing: run the `apt install` command from [Set up the host tools and the board's SDK](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/2-set-up-tools/) again, then the `tools` step.
+If the `tools` build stops at `pylibfdt`, `swig` or `gnutls/gnutls.h`, a package is missing: run the `apt install` command from [Set up the host tools for your target](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/2-set-up-tools/) again, then the `tools` step.
 {{% /notice %}}
 
 ## Create two signing keys
@@ -151,7 +153,9 @@ Created:         Fri Sep 11 19:14:00 2026
 Signature written to '/home/user/zephyr-secure-boot/fit/zephyr-a.itb', node '/configurations/conf-1/signature-1'
 ```
 
-**Lines to look for:** `Sign algo:    sha256,rsa2048:key-a` and the last line, `Signature written to ... node '/configurations/conf-1/signature-1'`, say that `mkimage` found `key-a` in `$KEYS` and wrote its signature into `conf-1`. `Hash value` is the SHA-256 of `zephyr.bin`, which U-Boot recomputes on the board.
+**Lines to look for:** `Sign algo:    sha256,rsa2048:key-a` and the last line, `Signature written to ... node '/configurations/conf-1/signature-1'`, say that `mkimage` found `key-a` in `$KEYS` and wrote its signature into `conf-1`. `Hash value` is the SHA-256 of `zephyr.bin`, which U-Boot recomputes on the target.
+
+In QEMU the listing shows the QEMU values instead: `Data Size: 37040 Bytes` and `Load Address: 0x40000000`.
 
 Don't use the `mkimage -K` option here: the public key goes into U-Boot's own device tree at build time, on the next page.
 

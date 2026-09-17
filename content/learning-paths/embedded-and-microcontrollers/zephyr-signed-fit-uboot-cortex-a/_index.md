@@ -1,7 +1,7 @@
 ---
 title: Boot Zephyr from a signed FIT image with U-Boot on Arm Cortex-A
 
-description: Learn how to sign a Zephyr image in a FIT, build the public key into U-Boot, and start Zephyr on an Arm Cortex-A board only after U-Boot verifies it, using the TI AM62L EVM as the example.
+description: Learn how to sign a Zephyr image in a FIT, build the public key into U-Boot, and start Zephyr on Arm Cortex-A only after U-Boot verifies it, on a TI AM62L EVM or in QEMU with no hardware.
 
 minutes_to_complete: 120
 
@@ -10,12 +10,12 @@ who_is_this_for: This is an advanced topic for embedded developers who run Zephy
 learning_objectives:
     - Explain where a Zephyr image sits in the Cortex-A boot chain and which stage can verify it
     - Build and sign a Zephyr image in a FIT, and build the public key into U-Boot without changing U-Boot source
-    - Write a U-Boot boot command that starts Zephyr only after the signature and hash checks pass, and optionally prove on the board that it refuses a wrong key and a tampered image
-    - Explain what a board in its development state leaves unverified, and what a production device needs on top
+    - Write a U-Boot boot command that starts Zephyr only after the signature and hash checks pass, and optionally prove on the target that it refuses a wrong key and a tampered image
+    - Explain what a board in its development state, and what an emulator, each leave unverified, and what a production device needs on top
 
 prerequisites:
-    - A TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with a micro-SD card and an SD card reader for your host, a micro-USB cable for the console, and a USB-C Power Delivery (PD) power supply
-    - An x86_64 Linux host running Ubuntu 22.04 or 24.04, with about 20 GB of free disk space; the TI SDK ships its installer and cross compiler as x86_64 binaries only
+    - One of two targets, either a TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with a micro-SD card and an SD card reader for your host, a micro-USB cable for the console and a USB-C Power Delivery (PD) power supply, or QEMU, which needs no hardware at all
+    - A Linux host running Ubuntu 22.04 or 24.04, with about 20 GB of free disk space for the AM62L EVM or 5 GB for QEMU; the EVM also needs an x86_64 host, because the TI SDK ships its installer and cross compiler as x86_64 binaries only
     - Visual Studio Code with the [Workbench for Zephyr extension](https://marketplace.visualstudio.com/items?itemName=Ac6.zephyr-workbench) and its host tools installed, as in the first steps of [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/)
     - Basic knowledge of U-Boot and the Linux command line
 
@@ -41,6 +41,7 @@ tools_software_languages:
     - Workbench for Zephyr
     - Visual Studio Code
     - U-Boot
+    - QEMU
     - OpenSSL
     - GCC
     - C
@@ -60,6 +61,14 @@ further_reading:
     - resource:
         title: Zephyr AM62L EVM board documentation
         link: https://docs.zephyrproject.org/latest/boards/ti/am62l_evm/doc/index.html
+        type: documentation
+    - resource:
+        title: U-Boot documentation for the QEMU Arm board
+        link: https://docs.u-boot.org/en/latest/board/emulation/qemu-arm.html
+        type: documentation
+    - resource:
+        title: Zephyr QEMU Cortex-A53 board documentation
+        link: https://docs.zephyrproject.org/latest/boards/qemu/cortex_a53/doc/index.html
         type: documentation
     - resource:
         title: Workbench for Zephyr
