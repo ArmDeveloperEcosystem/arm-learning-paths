@@ -24,7 +24,7 @@ The downloaded model package isn't an Android executable. Gradle packages the ru
 
 ## Choose a text-generation path
 
-The application includes two validated text-generation paths that share the interface and deployment flow. However, each needs an adapter because its runtime API, model format, tokenizer handling, and output contract differ.
+The application includes three validated text-generation examples that share the interface and deployment flow. However, each needs an adapter because its runtime API, model format, tokenizer handling, and output contract differ.
 
 The following table describes the paths:
 
@@ -32,6 +32,7 @@ The following table describes the paths:
 | --- | --- | --- | --- | --- |
 | SmolLM2 with ExecuTorch | `executorch` | `inference/models/smollm2/ExecuTorchTextGenerationAdapter` | `.pte`, configuration, tokenizer, and chat template | The recommended default and smallest validated generation example. |
 | TinyLlama with ONNX Runtime GenAI | `onnxruntime` | `inference/models/tinyllama/OnnxTextGenerationAdapter` | ONNX model directory, configuration, tokenizer, and chat template | A directory-based GenAI package with an additional Android AAR dependency. |
+| Llama 3.2 with ONNX Runtime GenAI | `onnxruntime` | `inference/models/llama32/OnnxTextGenerationAdapter` | ONNX model directory, configuration, tokenizer, and chat template | The same GenAI runtime flow with the Llama 3.2 package. |
 
 The repository also contains `inference/models/bge/LiteRtEmbeddingAdapter` for the catalog runtime `litert`. That adapter runs the BGE text-embedding workload and returns vectors rather than generated text, so it is listed separately from the text-generation paths.
 
@@ -53,9 +54,9 @@ This checks compatibility with the adapter and doesn't evaluate the model's lang
 
 ### Prepare the ONNX Runtime GenAI path
 
-The TinyLlama example uses `com.microsoft.onnxruntime:onnxruntime-android:1.27.0` and the official ONNX Runtime GenAI Android AAR. First, complete the [ONNX Runtime GenAI Android Learning Path](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/build-android-chat-app-using-onnxruntime/) to build `onnxruntime-genai-release.aar`.
+The ONNX Runtime GenAI examples use `com.microsoft.onnxruntime:onnxruntime-android:1.27.0` and the official ONNX Runtime GenAI Android AAR. First, complete the [ONNX Runtime GenAI Android Learning Path](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/build-android-chat-app-using-onnxruntime/) to build `onnxruntime-genai-release.aar`.
 
-Create a separate project and download the complete model directory:
+Create a separate project and select one ONNX Runtime GenAI example:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
@@ -64,9 +65,15 @@ git clone https://github.com/arm-education/ai-portal-android-app-text-to-text.gi
     ai-portal-android-app-text-to-text-onnx
 cd ai-portal-android-app-text-to-text-onnx
 
-cp -R adapter-examples/tinyllama-onnx-genai/app/. app/
-
+# Choose one validated ONNX Runtime GenAI example.
+export ONNX_EXAMPLE="tinyllama-onnx-genai"
 export MODEL_ID="tinyllama-1-1b-chat-onnx-genai-int4-kquantlast-emb-int8-vivo-x300"
+# Or use Llama 3.2 instead:
+# export ONNX_EXAMPLE="llama-3-2-onnx-genai"
+# export MODEL_ID="llama-3-2-1b-instruct-onnx-genai-int4-kquantlast-emb-int8-vivo-x300"
+
+cp -R "adapter-examples/$ONNX_EXAMPLE/app/." app/
+
 export MODEL_DIR="../model-onnx"
 ../.hf-venv/bin/hf download "Arm/$MODEL_ID" --local-dir "$MODEL_DIR"
   {{< /tab >}}
@@ -76,10 +83,16 @@ git clone https://github.com/arm-education/ai-portal-android-app-text-to-text.gi
     ai-portal-android-app-text-to-text-onnx
 Set-Location ai-portal-android-app-text-to-text-onnx
 
-Copy-Item -Path "adapter-examples\tinyllama-onnx-genai\app\*" `
+# Choose one validated ONNX Runtime GenAI example.
+$ONNX_EXAMPLE = "tinyllama-onnx-genai"
+$MODEL_ID = "tinyllama-1-1b-chat-onnx-genai-int4-kquantlast-emb-int8-vivo-x300"
+# Or use Llama 3.2 instead:
+# $ONNX_EXAMPLE = "llama-3-2-onnx-genai"
+# $MODEL_ID = "llama-3-2-1b-instruct-onnx-genai-int4-kquantlast-emb-int8-vivo-x300"
+
+Copy-Item -Path "adapter-examples\$ONNX_EXAMPLE\app\*" `
     -Destination "app" -Recurse -Force
 
-$MODEL_ID = "tinyllama-1-1b-chat-onnx-genai-int4-kquantlast-emb-int8-vivo-x300"
 $MODEL_DIR = "..\model-onnx"
 ..\.hf-venv\Scripts\hf.exe download "Arm/$MODEL_ID" --local-dir $MODEL_DIR
   {{< /tab >}}
@@ -89,7 +102,7 @@ Copy the generated AAR to `app/libs/onnxruntime-genai-release.aar` before contin
 
 ## Build and run the selected alternative
 
-The ONNX Runtime GenAI alternative now follows the same workflow: build the APK, install the APK, copy the chosen model package to the directory named by its catalog ID, and start the application.
+The selected ONNX Runtime GenAI alternative now follows the same workflow: build the APK, install the APK, copy the chosen model package to the directory named by its catalog ID, and start the application.
 
 Continue in the same terminal so that `MODEL_ID` and `MODEL_DIR` remain set:
 
