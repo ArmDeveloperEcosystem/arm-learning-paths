@@ -16,7 +16,7 @@ Use a text editor to copy and paste the C example code below into a file named `
 
 The code is adapted from [Joe Mario](https://github.com/joemario/perf-c2c-usage-files) and is discussed thoroughly in the Arm Statistical Profiling Extension Whitepaper.
 
-```cpp
+```c
 /*
  * This is an example program to show false sharing between
  * numa nodes.  
@@ -340,14 +340,15 @@ time ./no_false_sharing 1
 ```
 
 ```output
-real    0m12.101s
-user    0m18.520s
+real    0m6.962s
+user    0m9.093s
 sys     0m0.000s
 ...
-real    0m6.496s
-user    0m8.869s
+real    0m5.537s
+user    0m6.811s
 sys     0m0.000s
 ```
 
 ## Summary
+
 In this section, you ran a hands-on C example to see how false sharing can significantly degrade performance in multithreaded applications. By comparing two versions of the same program, one with aligned memory access and one without, you saw how something as subtle as cache line layout can affect runtime. This practical example sets the foundation for using Perf C2C to capture and analyze real cache line sharing behavior in the next section.
