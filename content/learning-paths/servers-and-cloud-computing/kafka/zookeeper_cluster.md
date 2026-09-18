@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 ---
 
-To setup a Kafka cluster, first you need to set up a Zookeeper cluster and configure it. Use the instructions below to setup a 3 node Zookeeper cluster.
+To set up a Kafka cluster, first you need to set up a Zookeeper cluster and configure it. Use the instructions below to setup a 3 node Zookeeper cluster.
 
 ## Setup 3 node Zookeeper Cluster:
 
