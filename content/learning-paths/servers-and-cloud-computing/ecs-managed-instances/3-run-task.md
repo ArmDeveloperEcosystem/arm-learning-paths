@@ -39,4 +39,4 @@ You've successfully deployed a containerized application on Graviton-based insta
 
 To avoid accruing costs, stop the task after you've completed testing. For more information, see [Stopping an Amazon ECS task](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/standalone-task-stop.html). Also consider [deleting the cluster](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/delete_cluster-new-console.html), [deregistering the task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deregister-task-definition-v2.html), and [deleting the task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/delete-task-definition-v2.html). 
 
-You can extend this workflow to control other compute attributes and deploy multiple containers on Graviton-based instances. 
+You can extend this workflow to control other compute attributes and deploy multiple containers on Arm-based instances powered by AWS Graviton. 
