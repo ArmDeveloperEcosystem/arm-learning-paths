@@ -126,8 +126,8 @@ Clearly Perf C2C is more accurate. You are able to observe the instruction that 
 Compile a debug version of both applications with the following commands: 
 
 ```bash
-gcc -g -lnuma -pthread false_sharing_example.c -o false_sharing.debug
-gcc -g -lnuma -pthread false_sharing_example.c -DNO_FALSE_SHARING -o no_false_sharing.debug
+gcc -g -pthread false_sharing_example.c -o false_sharing.debug -lnuma
+gcc -g -pthread false_sharing_example.c -DNO_FALSE_SHARING -o no_false_sharing.debug -lnuma
 ```
 
 Next, record the application with call stacks using the `perf c2c` subcommand with the `-g` flag. 
