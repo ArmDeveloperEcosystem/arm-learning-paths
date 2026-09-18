@@ -1,6 +1,6 @@
 ---
 # User change
-title: Run a container as an Amazon ECS task on an Arm-based instance
+title: Run a container as an Amazon ECS task on AWS Graviton
 
 weight: 4 # 1 is first, 2 is second, etc.
 

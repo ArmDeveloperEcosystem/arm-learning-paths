@@ -22,7 +22,7 @@ Some of the compute attributes that you can control include the following:
 - CPU manufacturer
 
 
-AWS handles infrastructure management, such as software and OS patching, instance scaling, and maintenance, on your behalf. 
+AWS automatically selects an instance based on the compute attributes that you specify. With Amazon ECS Managed Instances, infrastructure management — such as software and OS patching, instance scaling, and maintenance — are handled by AWS on your behalf. 
 
 For more information, see [Architect for Amazon ECS Managed Instances](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ManagedInstances.html) in the Amazon ECS documentation. 
 
@@ -30,16 +30,16 @@ For more information, see [Architect for Amazon ECS Managed Instances](https://d
 
 To use Amazon ECS managed instances, you need an instance profile and an infrastructure role.
 
-Start by creating an infrastructure role for Amazon ECS Managed Instances that uses the `AmazonECSInfrastructureRolePolicyForManagedInstances` managed policy. For instructions to create the role, see [Amazon ECS infrastructure IAM role](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html) in the AWS documentation. 
+Start by creating an infrastructure role for Amazon ECS Managed Instances that uses the `AmazonECSInfrastructureRolePolicyForManagedInstances` managed policy. For instructions to create the role, see [Amazon ECS infrastructure IAM role](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html) in the Amazon ECS documentation. 
 
-After creating an infrastructure role, create the instance profile. Ensure that the name of the instance role starts with `ecsInstanceRole`, and that you're using the `AmazonECSInstanceRolePolicyForManagedInstances` managed policy. For instructions to create the role, see [Amazon ECS Managed Instances instance profile](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instances-instance-profile.html) in the AWS documentation.
+After creating an infrastructure role, create the instance profile. Ensure that the name of the instance role starts with `ecsInstanceRole`, and that you're using the `AmazonECSInstanceRolePolicyForManagedInstances` managed policy. For instructions to create the role, see [Amazon ECS Managed Instances instance profile](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instances-instance-profile.html) in the Amazon ECS documentation.
 
 
 ## Register an Arm-compatible Amazon ECS task definition 
 
 Task definitions are a blueprint for containerized applications on Amazon ECS. 
 
-To deploy a container on Arm, register a task definition that supports the `ARM64` architecture:
+To deploy a containerized application on Arm-based AWS compute, register a task definition that supports the `ARM64` architecture:
 
 1. Navigate to the [console for Amazon ECS](https://console.aws.amazon.com/ecs/v2).
 2. Select **Task definitions**.

@@ -27,7 +27,6 @@ To specify custom instance requirements and select Arm-based instances, create a
     - For **CPU (vCPU)**, specify a minimum **Attribute value** of **1** and leave the maximum value blank.
     - For **Memory (MiB)**, specify a minimum **Attribute value** of **3072** and leave the maximum value blank.
     - From the dropdown menu for the third attribute, select **CPU Manufactures**, then select **Amazon** as the **Attribute value**. 
-    You'll see a list of instance types that meet the memory, CPU, and CPU manufacturer criteria. By selecting Amazon as the manufacturer, you're filtering for AWS Graviton-based instance types. 
 11. Under **Network settings**, configure the following:
     - For **VPC**, select an available VPC such as the default VPC.
     - For **Subnets**, select available subnets that are associated with the VPC.
@@ -36,9 +35,11 @@ To specify custom instance requirements and select Arm-based instances, create a
     - Under **Inbound rules for security groups**, select **HTTP** for **Type** and **Anywhere** for source.
 12. Leave other settings as defaults and select **Create**. 
 
+By specifying these requirements, you're selecting for instance types that can accomodate workloads requiring a minimum of 1 vCPU CPU allocation and 3072 MiB memory allocation. Supported instance types also have to be based on Arm-based AWS Graviton CPUs that are manufactured by Amazon. 
+
 ## What you've accomplished and what's next
 
-You've now created an Amazon ECS cluster in which you'll run your container. You've also specified CPU, memory, and CPU manufacturer requirements in a capacity provider to filter for Arm-based instances powered by AWS Graviton. 
+You've now created an Amazon ECS cluster in which you'll run your container. You've also specified CPU, memory, and CPU manufacturer requirements in a capacity provider to filter for Arm-based instance types. 
 
 Next, you'll run a container on an Arm-based instance that meets the instance requirements. 
 
