@@ -2,6 +2,10 @@
 title: Deploy containers on AWS Graviton processors with Amazon ECS Managed Instances
 description: Learn how to deploy containerized tasks on AWS Graviton processors using Amazon ECS Managed Instances.
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for developers who want to deploy containers on AWS Graviton processors with Amazon Elastic Container Service (ECS) using Amazon ECS Managed Instances.

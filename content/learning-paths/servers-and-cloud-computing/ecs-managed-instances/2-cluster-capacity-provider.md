@@ -1,6 +1,6 @@
 ---
 # User change
-title: Filter for Graviton-based instances with an Amazon ECS Managed Instances capacity provider
+title: Specify Graviton-based instance requirement with a capacity provider
 
 weight: 3 # 1 is first, 2 is second, etc.
 
