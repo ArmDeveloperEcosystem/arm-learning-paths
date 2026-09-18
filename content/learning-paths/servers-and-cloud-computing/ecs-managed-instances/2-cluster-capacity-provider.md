@@ -35,13 +35,13 @@ To specify custom instance requirements and select Arm-based instances, create a
     - Under **Inbound rules for security groups**, select **HTTP** for **Type** and **Anywhere** for source.
 12. Leave other settings as defaults and select **Create**. 
 
-By specifying these requirements, you're selecting for instance types that can accomodate workloads requiring a minimum of 1 vCPU CPU allocation and 3072 MiB memory allocation. Supported instance types also have to be based on Arm-based AWS Graviton CPUs that are manufactured by Amazon. 
+By creating a capacity provider with these requirements, you're selecting for instance types that can accomodate workloads requiring a minimum of 1 vCPU CPU allocation and 3072 MiB memory allocation. Supported instance types also have to be based on Arm-based AWS Graviton CPUs that are manufactured by Amazon. 
 
 ## What you've accomplished and what's next
 
 You've now created an Amazon ECS cluster in which you'll run your container. You've also specified CPU, memory, and CPU manufacturer requirements in a capacity provider to filter for Arm-based instance types. 
 
-Next, you'll run a container on an Arm-based instance that meets the instance requirements. 
+Next, you'll run a container on an Arm-based instance that meets these instance requirements. 
 
 
 

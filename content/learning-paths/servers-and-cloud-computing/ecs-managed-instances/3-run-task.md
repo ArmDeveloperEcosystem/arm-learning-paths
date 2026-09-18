@@ -26,7 +26,7 @@ Use the cluster, capacity provider, and task definition that you created earlier
 To verify that the application deployed successfully:
 
 1. Under **Tasks**, select the task that you created. 
-2. Under **Configuration**, note that the **Operating system/Architecture** is **Linux/ARM64**.
+2. Under **Configuration**, note that the **Operating system/Architecture** is **Linux/ARM64**. 
 3. Under **Networking**, copy the **Public IP** and paste it into a web browser of your choice. 
 
     You'll see the following welcome message:
