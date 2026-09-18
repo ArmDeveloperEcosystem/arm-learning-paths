@@ -1,10 +1,10 @@
 ---
 title: Deploy containers on AWS Graviton processors with Amazon ECS Managed Instances
-description: Learn how to create an Amazon ECS cluster and capacity provider for ECS Managed Instances, then run containerized tasks on AWS Graviton processors.
+description: Learn how to deploy containerized tasks on AWS Graviton processors using Amazon ECS Managed Instances.
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an introductory topic for developers who want to deploy containers on AWS Graviton processors using Amazon ECS Managed Instances.
+who_is_this_for: This is an introductory topic for developers who want to deploy containers on AWS Graviton processors with Amazon Elastic Container Service (ECS) using Amazon ECS Managed Instances.
 
 learning_objectives:
     - Create an Amazon ECS cluster for ECS Managed Instances.
@@ -12,7 +12,7 @@ learning_objectives:
     - Create and run an Arm64 Amazon ECS task.
 
 prerequisites:
-    - An AWS account
+    - An AWS account with permissions to create AWS IAM roles and access Amazon ECS, and a VPC with subnets 
     - A container image that supports the Arm64 architecture
 
 author: Anupras Mohapatra
