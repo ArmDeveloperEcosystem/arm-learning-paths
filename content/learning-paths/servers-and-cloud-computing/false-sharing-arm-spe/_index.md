@@ -12,7 +12,7 @@ learning_objectives:
     - Investigate cache line performance with Perf C2C.
 
 prerequisites:
-    - Access to an Arm-based cloud instance with support for the Arm Statistical Profiling Extension (SPE).
+    - Access to the Arm AGI CPU or an Arm-based cloud instance with support for the Arm Statistical Profiling Extension (SPE).
     - A basic understanding of cache coherency and its impact on performance.
     - Familiarity with Linux Perf tools.
 
@@ -71,6 +71,7 @@ platforms:
   - Microsoft Azure Cobalt
   - Google Axion
   - Oracle Cloud Infrastructure (OCI) Ampere Compute
+  - Arm AGI CPU
 armips:
     - Neoverse
 tools_software_languages:
