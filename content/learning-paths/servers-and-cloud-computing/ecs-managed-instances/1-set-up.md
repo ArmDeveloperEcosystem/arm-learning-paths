@@ -1,6 +1,7 @@
 ---
 # User change
 title: Set up the AWS environment
+description: Create the IAM roles required by Amazon ECS Managed Instances and register an Arm64 task definition for an NGINX container.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

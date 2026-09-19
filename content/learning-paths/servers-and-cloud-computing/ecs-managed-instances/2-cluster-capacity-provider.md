@@ -1,6 +1,7 @@
 ---
 # User change
 title: Specify Graviton-based instance requirement with a capacity provider
+description: Create an Amazon ECS cluster and capacity provider that selects AWS Graviton-based instances using CPU, memory, and processor requirements.
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -42,7 +43,6 @@ By creating a capacity provider with these requirements, you're selecting for in
 You've now created an Amazon ECS cluster in which you'll run your container. You've also specified CPU, memory, and CPU manufacturer requirements in a capacity provider to filter for Arm-based instance types. 
 
 Next, you'll run a container on an Arm-based instance that meets these instance requirements. 
-
 
 
 

@@ -1,6 +1,7 @@
 ---
 # User change
 title: Run a container as an Amazon ECS task on AWS Graviton
+description: Run an NGINX container as a standalone Amazon ECS task on Managed Instances and verify that it runs on AWS Graviton-based compute.
 
 weight: 4 # 1 is first, 2 is second, etc.
 
