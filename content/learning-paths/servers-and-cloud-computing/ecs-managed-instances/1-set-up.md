@@ -73,7 +73,7 @@ To deploy a containerized application on Arm-based AWS compute, register a task 
           "systemControls": []
         }
       ],
-      "networkMode": "awsvpc",
+      "networkMode": "host",
       "volumes": [],
       "placementConstraints": [],
       "requiresCompatibilities": [

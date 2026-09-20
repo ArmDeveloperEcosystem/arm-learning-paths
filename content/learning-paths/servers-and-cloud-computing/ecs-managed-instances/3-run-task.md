@@ -19,16 +19,18 @@ Use the cluster, capacity provider, and task definition that you created earlier
 4. Under **Tasks**, select **Run new task**.
 5. Under **Task details**, for **Task definition family**, select the task definition **ecs-managed-instances-graviton-task-def** that you created earlier. 
 6. Under **Environment**, for **Capacity provider strategy**, select **Use cluster default**.
-7. Under **Networking**, use the same VPC, subnets, and security group that you used for the cluster. 
-8. Choose **Create**.
+7. Select **Create**.
 
 ## Verify application deployment 
 
 To verify that the application deployed successfully:
 
-1. Under **Tasks**, select the task that you created. 
-2. Under **Configuration**, note that the **Operating system/Architecture** is **Linux/ARM64**. 
-3. Under **Networking**, copy the **Public IP** and paste it into a web browser of your choice. 
+1. Select the cluster **ecs-managed-instances-cluster**. 
+2. Select **Infrastructure**.
+2. Under **Container instances**, note that the **Instance type** that AWS chose based on the capacity provider is a Graviton-based instance type. The following screenshot shows that the instance type selected by AWS is `m6g.medium`:
+      ![Screenshot of the application showing the NGINX welcome page and confirming the web server was deployed on Arm-based compute successfully.#center](container-instance.png "List of container instances indicating that a Graviton-based instance was selected")
+3. Select the container instance that's associated with the ECS Managed Instances capacity provider.
+4. Under **Networking**, copy the **Public IP** and paste it into a web browser of your choice. 
 
     You'll see the following welcome message:
 
@@ -40,4 +42,4 @@ You've successfully deployed a containerized application on Graviton-based insta
 
 To avoid accruing costs, stop the task after you've completed testing. For more information, see [Stopping an Amazon ECS task](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/standalone-task-stop.html). Also consider [deleting the cluster](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/delete_cluster-new-console.html), [deregistering the task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deregister-task-definition-v2.html), and [deleting the task definition](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/delete-task-definition-v2.html). 
 
-You can extend this workflow to control other compute attributes and deploy multiple containers on Arm-based instances powered by AWS Graviton. 
+You can extend this workflow to deploy containers on AWS-managed Arm-based instances powered by AWS Graviton, while maintaining control over the instance types and features that you use. 
