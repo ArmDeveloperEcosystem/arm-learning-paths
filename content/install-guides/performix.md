@@ -58,7 +58,7 @@ The installation includes the GUI, the CLI tool (`apx`) and an MCP server.
 
 Download the Windows installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
-Alternatively, download using PowerShell. These commands require PowerShell and do not work in the Windows Command Prompt (CMD):
+Alternatively, download using PowerShell. The following commands require PowerShell and don't work in the Windows Command Prompt (CMD):
 
 {{< tabpane code=true >}}
 {{< tab header="Arm64" >}}
@@ -69,19 +69,16 @@ curl -o ArmPerformix-windows-x64.exe https://artifacts.tools.arm.com/arm-perform
 {{< /tab >}}
 {{< /tabpane >}}
 
-After downloading the `.exe` file, locate it in your Downloads folder and double-click it to start the installation wizard.
+After downloading the `.exe` file, locate the file in your Downloads folder and double-click it to start the installation wizard.
 
-Review the License Agreement and select **I Agree**.
+Complete the following steps:
 
-Choose whether to install Arm Performix for all users or just yourself, then select **Next**.
-
-If you choose **Anyone who uses this computer (all users)**, a User Access Control dialog opens. Enter an administrator username and password, then select **Yes**.
-
-Choose the installation directory. You can accept the default or select **Browse** to choose a different location.
-
-Select **Install**.
-
-When the installation finishes, select **Finish** to close the wizard.
+1. Review the License Agreement and select **I Agree**.
+2. Choose whether to install Arm Performix for all users or just yourself, then select **Next**.
+3. If you choose **Anyone who uses this computer (all users)**, a User Access Control dialog opens. Enter an administrator username and password, then select **Yes**.
+4. Choose the installation directory. You can accept the default or select **Browse** to choose a different location.
+5. Select **Install**.
+6. When the installation finishes, select **Finish** to close the wizard.
 
 ### Install Arm Performix on a Linux host
 
@@ -166,15 +163,12 @@ curl -Lo ArmPerformix-darwin-x64.pkg https://artifacts.tools.arm.com/arm-perform
 
 After downloading the `.pkg` file, navigate to the directory where you downloaded it and double-click the file to start the installer.
 
-Review the license agreement and select **Agree**.
+Complete the following steps:
 
-Choose the installation destination. By default, Arm Performix installs on your system drive.
-
-Select **Install** and enter your macOS administrator password when prompted.
-
-Wait while the installer copies the files.
-
-When the installation finishes, select **Close** to exit the installer.
+1. Review the license agreement and select **Agree**.
+2. Choose the installation destination. By default, Arm Performix installs on your system drive.
+3. Select **Install** and enter your macOS administrator password when prompted.
+4. Wait while the installer copies the files. When the installation finishes, select **Close** to exit the installer.
 
 ## Use the Arm Performix CLI
 
@@ -197,7 +191,7 @@ export PATH="/opt/Arm Performix/assets/apx:$PATH"
 ```
   {{< /tab >}}
   {{< tab header="Windows" >}}
-On Windows, the default install location depends on the installation scope you chose during setup:
+On Windows, the default install location depends on the installation scope that you chose during setup:
 
 - For a single-user install: `C:\Users\<username>\AppData\Local\Programs\Arm Performix`
 - For an all-users install: `C:\Program Files\Arm Performix`
@@ -208,7 +202,7 @@ Relative to the install location, the `apx` binary is at `\assets\apx\apx.exe`. 
 C:\Program Files\Arm Performix\assets\apx\apx.exe
 ```
 
-For convenience in the current PowerShell session, add it to your `Path`. This example uses the all-users install path:
+For convenience in the current PowerShell session, add it to your `Path`. The following example uses the all-users install path:
 
 ```powershell
 $env:Path += ";C:\Program Files\Arm Performix\assets\apx"
