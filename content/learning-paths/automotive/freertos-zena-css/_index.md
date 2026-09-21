@@ -1,5 +1,10 @@
 ---
 title: Use FreeRTOS with the Arm Zena CSS Safety Island
+
+draft: true
+cascade:
+    draft: true
+    
 description: Port a FreeRTOS SMP application to Cortex-R82AE, run it on the Arm Zena CSS Safety Island, and prepare it for Yocto integration.
 
 minutes_to_complete: 180
