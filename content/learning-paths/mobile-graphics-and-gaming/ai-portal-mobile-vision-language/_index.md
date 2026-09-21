@@ -1,6 +1,10 @@
 ---
 title: Run an optimized vision-language model from the Arm AI Portal on Android
 
+draft: true
+cascade:
+    draft: true
+    
 description: Run the Arm-optimized Qwen3-VL model locally with llama.cpp to generate text from an image and prompt on Android.
 
 minutes_to_complete: 35
