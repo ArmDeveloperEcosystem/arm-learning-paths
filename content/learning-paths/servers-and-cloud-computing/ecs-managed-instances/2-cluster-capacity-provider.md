@@ -24,7 +24,8 @@ To specify custom instance requirements and select Arm-based instances, create a
 7. For **Infrastructure role**, select the Amazon ECS infrastructure role that you created earlier. 
 8. For **Instance selection**, select **Use custom - *advanced***.
 9. To add a third instance attribute, select **Add instance attribute**. 
-10. For the third attribute, select **CPU manufacturers** for **Attribute**, then select **Amazon** as the **Attribute value**. Leave the **CPU (vCPU)** and **Memory (MiB)** attribute values as defaults.
+10. For the third attribute, select **CPU manufacturers** for **Attribute**, then select **Amazon** as the **Attribute value**. Leave the **CPU (vCPU)** and **Memory (MiB)** attribute values as defaults. You'll see a list of instance types that match the criteria:
+ ![Amazon ECS console table showing matching C6g instance types with the Arm64 architecture, confirming that the capacity provider requirements select AWS Graviton-based compute.#center](filtered-instance-types.png "Arm64 instance types matching the capacity provider requirements")
 11. Under **Network settings**, configure the following:
     - For **VPC**, select an available VPC such as the default VPC.
     - For **Subnets**, select available subnets that are associated with the VPC.
@@ -33,7 +34,7 @@ To specify custom instance requirements and select Arm-based instances, create a
 
 By creating a capacity provider with these requirements, you're selecting for instance types that are based on Arm-based AWS Graviton CPUs that are manufactured by Amazon. 
 
- ![Amazon ECS console table showing matching C6g instance types with the Arm64 architecture, confirming that the capacity provider requirements select AWS Graviton-based compute.#center](filtered-instance-types.png "Arm64 instance types matching the capacity provider requirements")
+
 
 ## What you've accomplished and what's next
 
