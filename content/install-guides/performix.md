@@ -28,35 +28,33 @@ multitool_install_part: false
 layout: installtoolsall
 ---
 
-## What is Arm Performix?
-
 Arm Performix is a desktop application that simplifies hardware-specific optimization by offering curated analysis pathways for performance-critical factors in applications, libraries, runtimes, and source code. Its capabilities include:
 
-* Performance profiling using hardware performance monitoring counters
-* Top-down methodology analysis for identifying performance bottlenecks
-* System-wide and per-process profiling
-* SSH-based remote target connections with optional support for jump nodes (also known as bastions)
+- Performance profiling using hardware performance monitoring counters
+- Top-down methodology analysis for identifying performance bottlenecks
+- System-wide and per-process profiling
+- SSH-based remote target connections with optional support for jump nodes (also known as bastions)
 
-## Which host and target platforms does Arm Performix support?
+## Supported host and target platforms 
 
 The Arm Performix desktop application supports the following host platforms:
 
-* **Windows**: Windows 10 or later on Arm64 or x64 architecture
-* **macOS**: macOS on Arm64 (Apple Silicon) or x64 architecture
-* **Linux**: Debian-based distribution on Arm64 or x64 architecture
+- Windows: Windows 10 or later on Arm64 or x64 architecture
+- macOS: macOS on Arm64 (Apple Silicon) or x64 architecture
+- Linux: Debian-based distribution on Arm64 or x64 architecture
 
 You also need a target system on which to profile your application or workload. The following target platforms are supported:
 
-* **Linux with Arm64 architecture**: Full support for Amazon Linux 2023, Ubuntu 22.04, or Ubuntu 24.04
-* **Windows with Arm64 architecture**: Partial support - Code Hotspots recipe only
-* **Linux with x64 architecture**: Partial support - Code Hotspots recipe only
+- Linux with Arm64 architecture: Full support for Amazon Linux 2023, Ubuntu 22.04, or Ubuntu 24.04
+- Windows with Arm64 architecture: Partial support - Code Hotspots recipe only
+- Linux with x64 architecture: Partial support - Code Hotspots recipe only
 
-## How do I download and install Arm Performix?
+## Download and install Arm Performix
 
 Arm Performix is distributed as platform-specific installer packages.
 The installation includes the GUI, the CLI tool (`apx`) and an MCP server.
 
-### How do I install Arm Performix on a Windows host?
+### Install Arm Performix on a Windows host
 
 Download the Windows installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
@@ -85,7 +83,7 @@ Select **Install**.
 
 When the installation finishes, select **Finish** to close the wizard.
 
-### How do I install Arm Performix on a Linux host?
+### Install Arm Performix on a Linux host
 
 Download the Linux installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
@@ -123,7 +121,9 @@ sudo dpkg -i ArmPerformix-linux-amd64.deb
 {{< /tab >}}
 {{< /tabpane >}}
 
-The `dpkg` command may report missing dependency errors. Run the following command to automatically fetch and install any missing dependencies:
+The `dpkg` command might report missing dependency errors. 
+
+Run the following command to automatically fetch and install any missing dependencies:
 
 ```bash
 sudo apt-get install -f
@@ -149,7 +149,7 @@ Arm Performix CLI version: 1.20.0
 Arm Performix daemon version: 1.20.0
 ```
 
-### How do I install Arm Performix on a macOS host?
+### Install Arm Performix on a macOS host
 
 Download the macOS installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
@@ -176,7 +176,7 @@ Wait while the installer copies the files.
 
 When the installation finishes, select **Close** to exit the installer.
 
-## How do I use the Arm Performix CLI?
+## Use the Arm Performix CLI
 
 The CLI is useful when you prefer command-line workflows, rather than GUI or MCP-driven workflows.
 
@@ -237,13 +237,7 @@ Use the CLI help for command-line usage, or for more detailed information see th
 apx --help
 ```
 
-## What comes next after installing Arm Performix?
-
-After completing these installation steps, you can launch the GUI or CLI to get started.
-
-For further guidance on using Arm Performix, including connecting to your target for the first time or setting up the MCP server to use Arm Performix with an AI agent, please refer to the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/latest/).
-
-## How do I uninstall Arm Performix?
+## Uninstall Arm Performix
 
 To remove Arm Performix from your system, use the appropriate method for your platform:
 
@@ -254,3 +248,11 @@ To remove Arm Performix from your system, use the appropriate method for your pl
 ```bash
 sudo apt remove arm-performix
 ```
+
+## Next steps
+
+After completing these installation steps, you can launch the GUI or CLI to get started.
+
+For further guidance on using Arm Performix, including connecting to your target for the first time or setting up the MCP server to use Arm Performix with an AI agent, see the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/latest/).
+
+To get started with profiling using Arm Performix, see the Learning Path [Optimize a sample C++ application on an Arm-based server with Arm Performix](/learning-paths/servers-and-cloud-computing/performix-get-started/).
