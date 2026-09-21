@@ -28,6 +28,22 @@ for tool in python3.12 git cmake c++; do
   }
 done
 
+python3.12 - <<'PY' || exit 1
+import platform
+import sys
+
+if sys.platform == "darwin":
+    version = platform.mac_ver()[0]
+    if not version or int(version.split(".")[0]) < 15:
+        raise SystemExit(f"macOS 15 or later is required; found {version or 'unknown'}.")
+elif sys.platform.startswith("linux"):
+    libc, version = platform.libc_ver()
+    if libc != "glibc" or tuple(map(int, version.split(".")[:2])) < (2, 28):
+        raise SystemExit(
+            f"Linux with glibc 2.28 or later is required; found {libc} {version}."
+        )
+PY
+
 if ! command -v ninja >/dev/null && ! command -v make >/dev/null; then
   echo "Install Ninja or Make before continuing." >&2
   exit 1
@@ -47,19 +63,21 @@ The check confirms that you are using a supported Linux host or Apple silicon Ma
 - A host C++ compiler
 - Ninja or Make
 
+The Python export dependencies require macOS 15 or later on Apple silicon, or glibc 2.28 or later on Linux. The pinned [TOSA tools](https://pypi.org/project/tosa-tools/2026.5.0/#files) set the macOS minimum, and the [PyTorch wheels](https://pypi.org/project/torch/2.14.0/#files) require the Linux glibc version. The preflight check verifies these requirements before you install the dependencies.
+
 ## Clone the ExecuTorch source
 
-Clone ExecuTorch and initialize its submodules:
+Clone ExecuTorch, select the revision used by this Learning Path, and initialize its submodules:
 
 ```bash
 git clone https://github.com/pytorch/executorch.git
 cd executorch
-git checkout 4fd161058ebe2b9d80d11242a9d21811c0e92dac
+git checkout 5c4d2c4a0150a0809bc77be9a67093f80f60a60f
 git submodule sync
 git submodule update --init --recursive
 ```
 
-Run the remaining commands from the ExecuTorch repository root.
+Run the remaining commands from the ExecuTorch repository root. The pinned revision keeps the commands aligned with the [MobileSAM example source](https://github.com/pytorch/executorch/tree/5c4d2c4a0150a0809bc77be9a67093f80f60a60f/examples/arm/mobilesam_prompt_segmentation_example_ethos_u).
 
 ## Create a Python environment
 
@@ -75,8 +93,6 @@ Install the current ExecuTorch checkout with its Ethos-U dependencies:
 
 ```bash
 ./install_executorch.sh --optional-dependency ethos_u
-python -m pip install -r \
-  examples/arm/mobilesam_prompt_segmentation_example_ethos_u/requirements.txt
 ```
 
 Using the checkout's installer keeps the Python package aligned with the example source.
@@ -127,6 +143,24 @@ arm-none-eabi
 ```
 
 The second command prints the path to the Corstone-320 FVP. On macOS, confirm that this path is inside the FVPs-on-Mac `bin` directory.
+
+## Choose how to run the example
+
+To run preparation, export, build, FVP execution, and validation together, use the example's script without arguments:
+
+```bash
+./examples/arm/mobilesam_prompt_segmentation_example_ethos_u/run.sh
+```
+
+The expected output at the end of a successful run is:
+
+```output
+MobileSAM example: PASS
+```
+
+The comparison image, `fvp_comparison.png`, is saved under `arm_test/mobilesam/result/`. After the script completes, continue to [Validate the MobileSAM segmentation result](../validate-the-results/) to inspect the artifacts.
+
+To work through each stage manually, skip this script and continue to the next page. The following pages explain the same preparation, export, build, and validation steps. Continue only after each command succeeds; files from an earlier run can remain after a failed command.
 
 ## What you've accomplished and what's next
 
