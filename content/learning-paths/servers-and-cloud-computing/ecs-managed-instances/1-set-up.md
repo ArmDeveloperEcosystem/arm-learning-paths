@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## What Amazon ECS Managed Instances is
 
-Amazon ECS Managed Instances is a compute option for deploying containers on AWS. Compared to AWS Fargate, you can maintain greater control over the type of Amazon EC2 instances used. 
+Amazon ECS Managed Instances is a compute option for deploying containers on AWS. Compared to AWS Fargate, you can maintain greater control over the Amazon EC2 feature and instance types that are used. 
 
 Some of the compute attributes that you can control include the following:
 
