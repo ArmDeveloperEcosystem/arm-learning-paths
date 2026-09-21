@@ -1,6 +1,6 @@
 ---
-title: Build and install the image-segmentation application on an Arm-based Android phone
-description: Connect an Arm-based Android phone, prepare the MobileSAM model downloader, and build and install the example application.
+title: Build and install Image Analysis on an Arm-based Android phone
+description: Connect an Arm-based Android phone, prepare the MobileSAM model downloader, and build and install Image Analysis.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -21,7 +21,7 @@ The output lists the authorized phone and its device serial. If the output repor
 
 ## Prepare the application and model downloader
 
-Clone the example application, then create the Python environment used to download MobileSAM:
+Clone Image Analysis, then create the Python environment used to download MobileSAM:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
@@ -53,23 +53,45 @@ Sign in with an account that has access to the Arm model repository and use a re
 
 ## Build and install the application
 
-Build and lint the debug APK, install it, and start the main activity:
+Before building, confirm the Gradle JVM configuration:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
 chmod +x gradlew
-./gradlew :app:assembleDebug :app:lintDebug
+./gradlew --version
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell" >}}
+.\gradlew.bat --version
+  {{< /tab >}}
+{{< /tabpane >}}
+
+The `Launcher JVM` entry should report JDK 17 or later. The `Daemon JVM` entry should report that Java 17 is configured by `gradle/gradle-daemon-jvm.properties`. Gradle downloads a compatible JDK 17 automatically when one isn't already available.
+
+Build the debug APK, then run the unit tests and lint checks:
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS or Linux" language="bash" >}}
+./gradlew :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell" >}}
+.\gradlew.bat :app:testDebugUnitTest :app:assembleDebug :app:lintDebug
+  {{< /tab >}}
+{{< /tabpane >}}
+
+After Gradle reports `BUILD SUCCESSFUL`, install the APK and start Image Analysis:
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS or Linux" language="bash" >}}
 adb install -r app/build/outputs/apk/debug/app-debug.apk
 adb shell am start -n com.arm.learningpath.imagetoimage/.ui.MainActivity
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell" >}}
-.\gradlew.bat :app:assembleDebug :app:lintDebug
-adb install -r app/build/outputs/apk/debug/app-debug.apk
+adb install -r app\build\outputs\apk\debug\app-debug.apk
 adb shell am start -n com.arm.learningpath.imagetoimage/.ui.MainActivity
   {{< /tab >}}
 {{< /tabpane >}}
 
-The application opens with MobileSAM selected. Its status reports `(placeholder bundled)` because you haven't copied the real Hugging Face model into application-private storage yet.
+Image Analysis opens with MobileSAM selected by default. The model menu also contains **Depth Anything V2 Small INT8**, which is covered in [Run Depth Anything V2 depth estimation on Android](/learning-paths/mobile-graphics-and-gaming/run-depth-anything-v2-on-android/). The MobileSAM status reports `(placeholder bundled)` because you haven't copied the real Hugging Face model into application-private storage yet.
 
 ## What you've accomplished and what's next
 

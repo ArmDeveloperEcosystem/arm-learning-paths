@@ -1,6 +1,6 @@
 ---
 title: Run and validate depth estimation
-description: Generate relative-disparity maps from two images, inspect the adapter contract, and verify offline inference.
+description: Generate relative-disparity maps from two images, inspect the adapter contract, and validate input-dependent results.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Generate a depth map
 
-Start Arm AI Portal Image Analysis:
+Start Image Analysis:
 
 ```console
 adb shell am start -n com.arm.learningpath.imagetoimage/.ui.MainActivity
@@ -22,9 +22,13 @@ Run the first image:
 3. Select **Choose image** and choose a JPEG or PNG scene with objects at different distances.
 4. Select **Run depth estimation**.
 
+Image Analysis temporarily disables the model and image controls while it decodes an image, loads a model, or runs inference. The controls become available again when the operation finishes or reports an error.
+
 The app displays a grayscale map. Brighter pixels have higher relative disparity and represent nearer regions. Darker pixels represent farther regions.
 
-The result panel reports the original resolution, model resolution, and finite disparity range. The status panel reports model load and inference times.
+The result panel reports the original source resolution, model input and output resolution, and finite disparity range. The displayed map uses the decoded preview dimensions, which can be smaller for a large source image. The status panel reports model load and inference times.
+
+After you stage the model in application-private storage, depth inference runs locally on the phone and doesn't need a network connection.
 
 ## Understand the adapter contract
 
@@ -38,11 +42,11 @@ The Android adapter follows the model card's fixed contract:
 | Input | Create one `float32 [1, 3, 518, 686]` tensor in NCHW order |
 | Inference | Execute `forward` with the XNNPACK-backed ExecuTorch module |
 | Output | Require one finite `float32 [1, 518, 686]` relative-disparity tensor |
-| Render | Min-max normalize each result to `[0, 255]` and resize it to the original display resolution with bilinear filtering |
+| Render | Min-max normalize each result to `[0, 255]` and resize it to the decoded preview dimensions with bilinear filtering |
 
 If the output is constant, the adapter renders a black map instead of dividing by zero. It rejects an incorrect shape, dtype, missing XNNPACK declaration, or non-finite value.
 
-## Validate input-dependent offline inference
+## Validate input-dependent results
 
 Choose a second image with a different scene and run depth estimation again. Confirm that:
 
@@ -50,24 +54,8 @@ Choose a second image with a different scene and run depth estimation again. Con
 - the disparity range contains finite numbers;
 - the second depth map differs from the first;
 - nearer and farther regions have plausible brightness ordering;
-- the displayed result fills the original image dimensions.
-
-Enable airplane mode or otherwise disconnect the phone from the network, then run the model again. The result should still appear because inference is local. Re-enable the network afterward if you need it for other applications.
-
-Record the following details:
-
-- Android phone model and Android version
-- model filename
-- ExecuTorch version (`1.3.1` in this sample)
-- both input images and generated maps
-- load time and both inference times
-
-The model card reports evaluation on 654 indoor images from the official raw-depth NYU Depth V2 test split. Outdoor and out-of-distribution scenes weren't covered. The original and optimized models are licensed under Apache-2.0. The optimized model is intended for evaluation, prototyping, and integration exploration, and isn't a production-ready or supported solution. Re-evaluate its accuracy and suitability on your own data before production use.
-
-{{% notice Important %}}
-The model card and application use different ExecuTorch versions and test conditions. Treat timings displayed by the application as illustrative; don't compare them directly with the published vivo X300 benchmark.
-{{% /notice %}}
+- the displayed result fills and aligns with the decoded image preview.
 
 ## What you've accomplished and what's next
 
-You've run Depth Anything V2 Small on an Arm-based Android phone, generated input-dependent relative-disparity maps, and verified that inference works without a network connection.
+You've run Depth Anything V2 Small on an Arm-based Android phone and generated and validated input-dependent relative-disparity maps.

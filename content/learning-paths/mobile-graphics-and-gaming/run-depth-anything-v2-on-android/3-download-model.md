@@ -32,7 +32,18 @@ Test-Path "$MODEL_DIR\$MODEL_FILE"
   {{< /tab >}}
 {{< /tabpane >}}
 
-The final check has no output on macOS or Linux when the file exists. It returns `True` on Windows. If Hugging Face requests authentication, run `hf auth login` from the virtual environment and use a read token.
+The final check has no output on macOS or Linux when the file exists. It returns `True` on Windows. If Hugging Face requests authentication, sign in with the virtual-environment executable:
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS or Linux" language="bash" >}}
+.hf-venv/bin/hf auth login
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell" >}}
+.\.hf-venv\Scripts\hf.exe auth login
+  {{< /tab >}}
+{{< /tabpane >}}
+
+Use a read token when prompted, then rerun the download command.
 
 The artifact is an INT8 ExecuTorch program. It doesn't contain an Android executable. The application APK contains the ExecuTorch 1.3.1 runtime and its arm64 native libraries.
 

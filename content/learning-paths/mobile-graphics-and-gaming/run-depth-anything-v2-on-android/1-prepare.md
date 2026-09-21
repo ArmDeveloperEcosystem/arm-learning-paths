@@ -1,6 +1,6 @@
 ---
-title: Prepare and connect an Arm-based Android phone
-description: Verify the Android build tools, enable USB debugging, and confirm that an Arm-based Android phone is authorized.
+title: Prepare the Android command-line tools
+description: Verify the host development tools, then install Android CLI and the required SDK packages.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -11,24 +11,28 @@ layout: learningpathall
 
 The [Arm AI Portal](https://developer.arm.com/ai/models) provides a catalog of AI models across different runtimes, use cases, optimization profiles, and Arm-based targets. It includes benchmarking and compatibility information, code examples, and deployment guidance.
 
-You'll use an application called **Arm AI Portal Image Analysis** to run Depth Anything V2 Small, a monocular depth-estimation model from the Arm AI Portal, on a physical Arm-based Android phone. The application includes a validated ExecuTorch adapter that prepares the image, runs the model, validates its relative-disparity output, and renders a grayscale depth map.
+You'll use an application called Image Analysis to run Depth Anything V2 Small, a monocular depth-estimation model from the Arm AI Portal, on a physical Arm-based Android phone. The application includes a validated ExecuTorch adapter that prepares the image, runs the model, validates its relative-disparity output, and renders a grayscale depth map.
 
 ## Check the existing development tools
 
-Arm AI Portal Image Analysis builds with Android SDK 35 and Java 17. Before installing anything, display the versions already available on your development computer:
+Image Analysis builds with Android SDK 35 and Java 17. Before installing anything, display the versions already available on your development computer:
 
 {{< tabpane code=true >}}
-  {{< tab header="macOS or Linux" language="bash" >}}
+  {{< tab header="macOS" language="bash" >}}
+git --version
+java -version
+javac -version
+python3 --version
+python3 -m pip --version
+brew --version
+  {{< /tab >}}
+  {{< tab header="Linux x86_64" language="bash" >}}
 git --version
 java -version
 javac -version
 python3 --version
 python3 -m pip --version
 curl --version
-android -V
-android info
-android sdk list 'platform-tools|platforms/android-35|build-tools/35.0.0'
-adb version
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell" >}}
 git --version
@@ -37,42 +41,17 @@ javac -version
 py --version
 py -m pip --version
 $PSVersionTable.PSVersion
-android -V
-android info
-android sdk list 'platform-tools|platforms/android-35|build-tools/35.0.0'
-adb version
+winget --version
   {{< /tab >}}
 {{< /tabpane >}}
 
-You need Git, Python 3 with `pip`, Java Development Kit (JDK) 17 or later, and `curl`. You also need Android CLI, Android Debug Bridge (`adb`), Platform Tools, Android SDK Platform 35, and Android SDK Build Tools 35.0.0. A `command not found` or `is not recognized` message identifies a tool you need to install. In the Android SDK package listing, verify that all three packages are marked as installed.
+You need Git, Python 3 with `pip`, and Java Development Kit (JDK) 17 or later. You also need Homebrew on macOS, `curl` on Linux, or `winget` on Windows to install Android CLI. A `command not found` or `is not recognized` message identifies a host tool you need to install.
 
-## Optional: install or update the host tools
+Install any missing host prerequisites before continuing, then rerun the version checks. Ensure `java` and `javac` report version 17 or later. The application configures Gradle to provision its JDK 17 build toolchain automatically during the first build.
 
-Skip this section when the version checks meet the requirements. If a host tool is missing or Java is older than version 17, install or update the prerequisites for your development computer:
+## Install Android CLI
 
-{{< tabpane code=true >}}
-  {{< tab header="macOS with Homebrew" language="bash" >}}
-brew install git python openjdk@17
-export PATH="$(brew --prefix openjdk@17)/bin:$PATH"
-  {{< /tab >}}
-  {{< tab header="Ubuntu or Debian" language="bash" >}}
-sudo apt update
-sudo apt install -y git python3 python3-venv python3-pip openjdk-17-jdk curl
-  {{< /tab >}}
-  {{< tab header="Windows PowerShell" language="powershell" >}}
-winget install --exact --id Git.Git
-winget install --exact --id Python.Python.3.13
-winget install --exact --id Microsoft.OpenJDK.17
-  {{< /tab >}}
-{{< /tabpane >}}
-
-On macOS, install [Homebrew](https://brew.sh/) first if the `brew` command isn't available. On another Linux distribution, install equivalent packages with its package manager. Restart PowerShell after a Windows installation so the updated `PATH` is available.
-
-Run the version checks again. Ensure `java` and `javac` report version 17 or later.
-
-## Optional: install or update Android CLI
-
-Google has deprecated `sdkmanager` in favor of [Android CLI](https://developer.android.com/tools/agents/android-cli). Skip this section when `android -V` already reports a version. Otherwise, install Android CLI for your development computer:
+Install Android CLI for your development computer:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS with Homebrew" language="bash" >}}
@@ -95,9 +74,9 @@ android update
 android -V
 ```
 
-## Optional: install or update the Android SDK packages
+## Install the Android SDK packages
 
-Skip this section when the package listing marks all three required packages as installed. Otherwise, set the SDK location, add Platform Tools to `PATH`, and install the packages. Review and accept the Android SDK licenses when prompted.
+Set the SDK location, add Platform Tools to `PATH`, and install the packages. Review and accept the Android SDK licenses when prompted.
 
 {{< tabpane code=true >}}
   {{< tab header="macOS" language="bash" >}}
@@ -152,21 +131,6 @@ Test-Path "$env:ANDROID_HOME\build-tools\35.0.0"
 
 The final two checks have no output on macOS or Linux when the directories exist. Both checks return `True` on Windows.
 
-## Connect the phone
-
-Enable **Developer options** and **USB debugging** on the Arm-based Android phone. Connect it with a data-capable USB cable, unlock it, and accept the debugging authorization prompt.
-
-Verify the connection and architecture:
-
-```console
-adb devices -l
-adb shell getprop ro.product.cpu.abi
-```
-
-The first command lists the phone as `device`. The second command returns `arm64-v8a`.
-
-If the phone is `unauthorized`, unlock it and accept the prompt. On Windows, you might also need the manufacturer's USB driver.
-
 ## What you've accomplished and what's next
 
-You've verified the build tools and connected an authorized Arm-based Android phone. Next, you'll build and install Arm AI Portal Image Analysis.
+You've verified the host tools and prepared Android CLI, Platform Tools, Android SDK Platform 35, and Android SDK Build Tools 35.0.0. Next, you'll connect an Arm-based Android phone, then build and install Image Analysis.
