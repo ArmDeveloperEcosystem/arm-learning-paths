@@ -18,8 +18,7 @@ Use the cluster, capacity provider, and task definition that you created earlier
 3. Select the cluster **ecs-managed-instances-cluster** that you created earlier.
 4. Under **Tasks**, select **Run new task**.
 5. Under **Task details**, for **Task definition family**, select the task definition **ecs-managed-instances-graviton-task-def** that you created earlier. 
-6. Under **Environment**, for **Capacity provider strategy**, select **Use cluster default**.
-7. Select **Create**.
+6. Leave all other values as defaults and select **Create**.
 
 ## Verify application deployment 
 
