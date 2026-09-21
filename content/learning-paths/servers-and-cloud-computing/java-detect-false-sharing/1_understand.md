@@ -1,5 +1,6 @@
 ---
 title: Understand false sharing in Java
+description: Understand how cache-line coherence can cause false sharing between independently updated Java fields on Arm servers.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -15,10 +16,10 @@ invalidates copies held by other cores. A 64-byte cache line is common on Arm Ne
 implementation-dependent.
 
 Processors maintain cache coherence for complete cache lines rather than
-individual Java objects or fields. The JVM determines field layout, while the
-allocator determines where an object resides in the heap. A moving garbage
-collector can later relocate it. As a result, one cache line can contain fields
-from one object or parts of multiple objects.
+individual Java objects or fields. The Java Virtual Machine (JVM) determines
+field layout, while the allocator determines where an object resides in the
+heap. A moving garbage collector can later relocate it. As a result, one cache
+line can contain fields from one object or parts of multiple objects.
 
 Cache-line sharing occurs when multiple cores access data in the same cache
 line and at least one access is a write.
