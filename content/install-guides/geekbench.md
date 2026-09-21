@@ -23,7 +23,7 @@ layout: installtoolsall
 
 When selecting Arm-based hardware, you might need a way to compare different systems and select a hardware configuration for your workload. Running benchmarks on different systems with different configurations is a good way to get more information about system performance.
 
-[Geekbench](https://www.geekbench.com/index.html) is a cross-platform benchmark that makes it easy to measure system performance. You'll install Geekbench 7, the latest version, with a [preview build available for Linux on Arm](https://www.geekbench.com/preview/). For additional operating system options, see Geekbench [downloads](https://www.geekbench.com/download/).
+[Geekbench](https://www.geekbench.com/index.html) is a cross-platform benchmark that makes it easy to measure system performance. You'll install Geekbench 7, the latest version, with a [preview build available for Linux on Arm](https://www.geekbench.com/preview/). For additional operating system options, see the [Geekbench downloads page](https://www.geekbench.com/download/).
 
 Geekbench provides a single-core score and a multi-core score. It also reports individual performance scores for specific tests. You can use the scores to compare different systems and different configurations. A higher score is better.
 
@@ -31,7 +31,7 @@ You can unlock additional features with a purchased [license](https://www.primat
 
 ## Before you begin
 
-You'll need a local Arm platform or an [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider. Geekbench 7 requires Ubuntu 22.04 LTS or later.
+You'll need a local Arm platform or an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider. Geekbench 7 requires Ubuntu 22.04 LTS or later.
 
 Older versions are also available on the [Geekbench preview downloads page](https://www.geekbench.com/preview/): Geekbench 6 requires Ubuntu 18.04 LTS or later and Geekbench 5 requires Ubuntu 16.04 LTS or later.
 
@@ -45,6 +45,10 @@ Install `wget` for the download:
 sudo apt install -y wget
 ```
 
+{{% notice Note %}}
+The following commands use Geekbench version 7.0.0. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see the [Geekbench preview downloads page](https://www.geekbench.com/preview/).
+{{% /notice %}}
+
 Download and extract the archive using `wget`:
 
 ```bash
@@ -54,7 +58,7 @@ tar -xf Geekbench-7.0.0-LinuxARMPreview.tar.gz
 
 ## Verify the Geekbench installation
 
-Verify the installation by running the `geekbench7` benchmark
+Verify the installation by running the `geekbench7` benchmark.
 
 ### Run the benchmark
 
@@ -67,7 +71,7 @@ cd Geekbench-7.0.0-LinuxARMPreview
 ./geekbench7
 ```
 
-Geekbench runs a series of single-core and multi-core tests. When complete, Geekbench uploads the results automatically and provides a link to the results. 
+Geekbench runs a series of single-core and multi-core tests. When complete, Geekbench uploads the results automatically and provides a link to the results.
 
 The output is similar to:
 
@@ -82,9 +86,9 @@ Upload succeeded. Visit the following link and view your results online:
 
 ### Save the benchmark results
 
-You can create an account on [Geekbench browser](https://browser.geekbench.com) and save the results from your runs. Creating an account makes it easy to run Geekbench on a variety of systems and see your results together and compare them. You can add notes to the results to help remember information about each run.
+You can create an account on the [Geekbench Browser](https://browser.geekbench.com) and save the results from your runs. Creating an account makes it easy to run Geekbench on a variety of systems and see your results together and compare them. You can add notes to the results to help remember information about each run.
 
-The output includes a claim link to add the result to your profile. 
+The output includes a claim link to add the result to your profile.
 
 The output is similar to:
 
