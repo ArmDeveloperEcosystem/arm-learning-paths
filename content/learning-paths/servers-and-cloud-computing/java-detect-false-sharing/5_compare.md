@@ -1,5 +1,6 @@
 ---
 title: Compare baseline and padded runtimes
+description: Run repeated baseline and padded measurements to compare Java worker-phase runtimes under consistent test conditions.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -67,6 +68,8 @@ for mode in baseline padded; do
 done
 ```
 
+The output is similar to:
+
 ```output
 baseline: 14.929432 15.045710 15.537969 16.851870 17.709697
 baseline median: 15.537969
@@ -90,3 +93,7 @@ phase. It excludes JVM startup but includes the release of the start latch,
 worker execution, and the joins. It is therefore useful for comparing these two
 modes, but it is not an end-to-end application latency measurement.
 {{% /notice %}}
+
+You have collected repeated timing pairs and compared the median worker-phase
+runtimes for the baseline and padded modes. The conclusion summarizes this
+evidence and the memory-footprint trade-off of contention padding.

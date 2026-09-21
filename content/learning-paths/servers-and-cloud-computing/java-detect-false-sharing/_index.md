@@ -18,7 +18,7 @@ learning_objectives:
   - Apply @Contended, verify the padded layout, and compare repeated runtimes
 
 prerequisites:
-  - Access to an Arm Neoverse Linux system that exposes SPE to perf
+  - Access to an Arm Neoverse Linux system with SPE enabled and exposed to Perf; [verify SPE support](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/) before you begin
   - Familiarity with compiling and running Java applications
   - A working Java runtime installed on the target machine
   - Permission to use perf on the target system

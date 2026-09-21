@@ -1,10 +1,26 @@
 ---
 title: Create and inspect the baseline
+description: Build a Java false-sharing workload, inspect its object layout with JOL, and record a baseline with Perf C2C on an Arm server.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+
+## Before you begin
+
+Run the instructions in this Learning Path on an Arm-based Linux server with
+the Statistical Profiling Extension (SPE) enabled. To confirm that SPE is
+enabled on your server, follow the
+[check for SPE support instructions](https://learn.arm.com/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/).
+
+Install the OpenJDK 21 Java Development Kit (JDK) on your Arm-based Ubuntu
+server:
+
+```bash
+sudo apt update
+sudo apt install -y openjdk-21-jdk
+```
 
 ## Prepare the baseline example
 
@@ -26,9 +42,10 @@ because the restricted `sudo` `PATH` might not contain your Java installation.
 
 ### Set up the false-sharing demo
 
-Create `FalseSharingDemo.java` with the following code. The example has two
-worker threads that update adjacent `volatile long` fields. Each worker performs
-500 million increments, making the sharing behavior easier to sample.
+In your workspace, create a file named `FalseSharingDemo.java` with the complete code shown
+here. The example has two worker threads that update adjacent `volatile long`
+fields. Each worker performs 500 million increments, making the sharing
+behavior easier to sample.
 
 ```java
 import java.util.concurrent.CountDownLatch;
@@ -195,11 +212,33 @@ For other Neoverse processors, confirm that your Perf version supports the
 processor's SPE data-source encoding.
 {{% /notice %}}
 
-Check the version, then record the workload:
+Check the Perf version:
 
 ```bash
 perf version
+```
 
+Before recording, confirm that Linux exposes an Arm SPE performance monitoring
+unit (PMU):
+
+```bash
+find /sys/bus/event_source/devices -maxdepth 1 \
+  -name 'arm_spe_*' -printf '%f\n'
+```
+
+The output should list at least one SPE PMU, usually `arm_spe_0`:
+
+```output
+arm_spe_0
+```
+
+If the command produces no output, don't continue to `perf c2c record`. Follow
+the [SPE enablement and verification instructions](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/), then repeat the check. Without an exposed SPE PMU, Perf reports
+`failed: no PMU supports the memory events`.
+
+After the SPE PMU appears, record the workload:
+
+```bash
 sudo perf c2c record -o baseline.data -- \
   taskset -c 0,1 "$java_bin" FalseSharingDemo baseline
 ```

@@ -1,5 +1,6 @@
 ---
 title: Identify the contended cache line
+description: Analyze Perf C2C data to identify and assess the most contended cache line in the Java baseline workload.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -82,7 +83,6 @@ kernel driver is available, Perf has permission to record, and the installed
 Perf version decodes data sources for the processor.
 {{% /notice %}}
 
-
 ## Display and rank shared lines
 
 Generate a text report:
@@ -156,3 +156,7 @@ specific sampled address belongs to a particular Java object. To correlate a
 Perf C2C cache-line address with a live heap object and its fields, follow
 [Attribute contended cache lines to Java heap objects](/learning-paths/servers-and-cloud-computing/java-attribute-cache-lines/).
 {{% /notice %}}
+
+You have used Perf C2C to identify the highest-ranked shared cache line and
+evaluate its peer-cache evidence. Next, add contention padding to separate the
+two fields and record the padded workload for comparison.

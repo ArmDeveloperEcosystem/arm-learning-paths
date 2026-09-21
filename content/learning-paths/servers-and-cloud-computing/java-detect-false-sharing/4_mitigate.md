@@ -1,5 +1,6 @@
 ---
 title: Add @Contended and verify contention padding
+description: Add HotSpot's `@Contended` annotation, inspect the padded Java object layout, and compare Perf C2C reports.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -112,6 +113,9 @@ taskset -c 0,1 "$java_bin" \
 Confirm that the output contains `mode=padded` and `sum=1000000000`.
 
 ## Inspect the padded layout
+
+Inspect `PaddedCounters` with JOL to confirm that HotSpot inserted padding
+between the two contention groups:
 
 ```bash
 "$java_bin" -XX:-RestrictContended \
@@ -227,3 +231,8 @@ HotSpot normally restricts `@Contended` in application classes. Keep
 `-XX:-RestrictContended` on every padded run; without it, HotSpot ignores the
 padding annotation for this class.
 {{% /notice %}}
+
+You have separated the fields with `@Contended`, verified the padded layout,
+and compared the highest-ranked lines in the baseline and padded Perf C2C
+reports. Next, use repeated timing pairs to assess the runtime effect while
+accounting for measurement variability.
