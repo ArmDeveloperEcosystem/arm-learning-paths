@@ -12,8 +12,9 @@
                         - list-card         --> learning path and tool list cards should have these types
                         - learning-path-nav --> navigation buttons in the application: 'next' button, 'prev' button, left-hand navigation
                         - metadata          --> any metadata links; above LPs and installs, and in 'next steps' page
-                        - content           --> all links from user-generated markdown should have this. the 'render-link.html' should implement this tracker
+                        - content           --> all links from user-generated markdown should have this, INCLUDING CODE. the 'render-link.html' should implement this tracker
                     - data-track-name       --> specific name of the element, human readable to link behavior. A click on a learning path should render its title, etc. This is dynamic
+                    - data-track-identifier --> Prism language of a code block
 
         -   facet-interaction
                 Attributes tracked:
@@ -168,6 +169,70 @@ function attachPageFindSearchTracker() {
 }
 
 
+function getSelectedCodeContext() {
+    const selection = window.getSelection();
+
+    if (!selection || selection.isCollapsed || selection.rangeCount === 0) {
+        return null;
+    }
+
+    const range = selection.getRangeAt(0);
+
+    function getContainingPre(node) {
+        const element = node.nodeType === Node.ELEMENT_NODE
+            ? node
+            : node.parentElement;
+
+        return element?.closest('.code-toolbar pre') || null;
+    }
+
+    const start_pre = getContainingPre(range.startContainer);
+    const end_pre = getContainingPre(range.endContainer);
+
+    // Only track selections contained within one Prism code block.
+    if (!start_pre || start_pre !== end_pre) {
+        return null;
+    }
+
+    const code_element = start_pre.querySelector('code');
+
+    if (!code_element) {
+        return null;
+    }
+
+    return {
+        code_block_language: getCodeBlockLanguage(start_pre),
+        code_block_position: Array.from(document.querySelectorAll('.code-toolbar pre')).indexOf(start_pre),
+        selected_character_count: selection.toString().length,
+        selection_start_offset: range.startOffset,
+        selection_end_offset: range.endOffset
+    };
+}
+
+
+function getCodeBlockLanguage(pre_element) {
+    const code_element = pre_element.querySelector('code');
+    const language_class = Array.from(code_element?.classList || [])
+        .find((class_name) => class_name.startsWith('language-'));
+
+    return language_class
+        ? language_class.replace('language-', '')
+        : 'unknown';
+}
+
+
+function trackCodeInteraction(interaction_type, code_block_language) {
+    if (window._satellite?.track) {
+        window._satellite.track('content-interaction', {
+            'data-track-type'       : interaction_type,
+            'data-track-location'   : 'content',
+            'data-track-name'       : window.location.pathname,
+            'data-track-identifier' : code_block_language
+        });
+    }
+}
+
+
     // Go page by page, and assign the analytics tracker event component to appropriate ares.
 
 
@@ -175,6 +240,77 @@ function attachPageFindSearchTracker() {
     document.addEventListener("DOMContentLoaded", function() {  
         let current_path = window.location.pathname;
         let depth_of_path= current_path.split('/').length - 1 // Get number of '/' in the string; will help identify where we are in the heirarcy
+
+
+        //
+        //  Prism code blocks
+        //  ===================
+        // Use delegated listeners because Prism creates its toolbar buttons after
+        // the page DOM is ready. These listeners cover Learning Paths and install
+        // guides and identify each code block by its Prism language.
+        let code_selection_timer;
+        let last_code_selection_signature = '';
+
+        document.addEventListener('selectionchange', function() {
+            clearTimeout(code_selection_timer);
+
+            // selectionchange fires repeatedly while the selection is changing.
+            code_selection_timer = setTimeout(function() {
+                const context = getSelectedCodeContext();
+
+                if (!context) {
+                    last_code_selection_signature = '';
+                    return;
+                }
+
+                const signature = [
+                    current_path,
+                    context.code_block_position,
+                    context.selected_character_count,
+                    context.selection_start_offset,
+                    context.selection_end_offset
+                ].join('|');
+
+                if (signature === last_code_selection_signature) {
+                    return;
+                }
+
+                last_code_selection_signature = signature;
+                trackCodeInteraction('code-block-selection', context.code_block_language);
+            }, 400);
+        });
+
+        // Track keyboard and context-menu copies of a selection in a code block.
+        document.addEventListener('copy', function() {
+            const context = getSelectedCodeContext();
+
+            if (context) {
+                trackCodeInteraction('code-block-manual-copy', context.code_block_language);
+            }
+        });
+
+        // Track use of Prism's copy-to-clipboard toolbar button.
+        document.addEventListener('click', function(event) {
+            if (!(event.target instanceof Element)) {
+                return;
+            }
+
+            const copy_button = event.target.closest('button.copy-to-clipboard-button');
+
+            if (!copy_button) {
+                return;
+            }
+
+            const pre_element = copy_button
+                .closest('.code-toolbar')
+                ?.querySelector('pre');
+
+            if (!pre_element) {
+                return;
+            }
+
+            trackCodeInteraction('code-block-copy-button', getCodeBlockLanguage(pre_element));
+        });
 
 
         //
