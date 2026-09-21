@@ -1,6 +1,10 @@
 ---
 title: Decode low-bit weights with Arm SME2 LUTI instructions
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for developers who want to efficiently decode packed low-bit weights inside a SME2 matrix multiplication kernel.
