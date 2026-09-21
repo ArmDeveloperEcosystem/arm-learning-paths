@@ -16,7 +16,7 @@ learning_objectives:
     - Create and run an Arm64 Amazon ECS task.
 
 prerequisites:
-    - An AWS account with permissions to create AWS IAM roles and access Amazon ECS, and a VPC with subnets 
+    - An AWS account with permissions to create AWS IAM roles and access Amazon ECS, a VPC with public subnets, and a security group that allows inbound traffic on port `80` 
     - A container image that supports the Arm64 architecture
 
 author: Anupras Mohapatra
@@ -49,6 +49,19 @@ further_reading:
         title: Amazon ECS Managed Instances capacity providers
         link: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instances-capacity-providers-concept.html
         type: documentation
+    - resource:
+        title: Create a security group for your Amazon EC2 instance
+        link: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-security-group.html
+        type: documentation
+    - resource:
+        title: Amazon ECS infrastructure IAM role
+        link: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html
+        type: documentation
+    - resource:
+        title: Amazon ECS Managed Instances instance profile
+        link: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instances-instance-profile.html
+        type: documentation
+    
 
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper

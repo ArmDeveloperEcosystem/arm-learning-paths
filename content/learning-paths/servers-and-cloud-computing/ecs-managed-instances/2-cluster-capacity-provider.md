@@ -23,14 +23,12 @@ To specify custom instance requirements and select Arm-based instances, create a
 6. For **Instance profile**, select the instance profile that you created earlier.
 7. For **Infrastructure role**, select the Amazon ECS infrastructure role that you created earlier. 
 8. For **Instance selection**, select **Use custom - *advanced***.
-9. Select **Add instance attribute** to add a third attribute to the list. 
-10. From the dropdown menu for the third attribute, select **CPU manufacturers**, then select **Amazon** as the **Attribute value**. Leave the **CPU (vCPU)** and **Memory (MiB)** attributes as defaults.
+9. To add a third instance attribute, select **Add instance attribute**. 
+10. For the third attribute, select **CPU manufacturers** for **Attribute**, then select **Amazon** as the **Attribute value**. Leave the **CPU (vCPU)** and **Memory (MiB)** attribute values as defaults.
 11. Under **Network settings**, configure the following:
     - For **VPC**, select an available VPC such as the default VPC.
     - For **Subnets**, select available subnets that are associated with the VPC.
-    - For **Security group**, select **Create a new security group**.
-    - For **Security group name**, enter **ecs-managed-instance-sg**.
-    - Under **Inbound rules for security groups**, select **HTTP** for **Type** and **Anywhere** for source.
+    - For **Security group**, select **Use an existing security group**, then select a security group that has port `80` open for inbound traffic.
 12. Leave other settings as defaults and select **Create**. 
 
 By creating a capacity provider with these requirements, you're selecting for instance types that are based on Arm-based AWS Graviton CPUs that are manufactured by Amazon. 

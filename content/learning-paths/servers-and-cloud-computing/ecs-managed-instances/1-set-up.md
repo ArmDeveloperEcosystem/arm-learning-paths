@@ -93,6 +93,6 @@ To deploy a containerized application on Arm-based AWS compute, register a task 
 
 ## What you've accomplished and what's next
 
-You've now learned what Amazon ECS Managed Instances is, created the necessary AWS IAM roles, and registered a task definition that supports the Arm architecture. 
+You've now learned what Amazon ECS Managed Instances is, created the necessary AWS IAM roles, and registered a task definition that is compatible with the Arm architecture. 
 
 Next, you'll use the available compute attributes to select Arm-based instances for running 
