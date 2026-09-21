@@ -15,6 +15,7 @@
                         - content           --> all links from user-generated markdown should have this, INCLUDING CODE. the 'render-link.html' should implement this tracker
                     - data-track-name       --> specific name of the element, human readable to link behavior. A click on a learning path should render its title, etc. This is dynamic
                     - data-track-identifier --> Prism language of a code block
+                    - data-track-url        --> full page URL for code copy events
 
         -   facet-interaction
                 Attributes tracked:
@@ -29,6 +30,12 @@
                 Attributes tracked:
                     - feedback-type         --> either 'star-rating' or 'reason'
                     - feedback-content      --> specifies the feedback. Star-rating will be 1-5, Reason will be a string (from a limited choice set, not free text) 
+
+        -   copy-type
+                Attributes tracked:
+                    - data-track-type       --> copy-type
+                    - data-track-location   --> manual-copy or button-copy
+                    - data-track-name       --> current page number and name
         
 */
 
@@ -169,7 +176,7 @@ function attachPageFindSearchTracker() {
 }
 
 
-function getSelectedCodeContext() {
+function getSelectedCodeBlock() {
     const selection = window.getSelection();
 
     if (!selection || selection.isCollapsed || selection.rangeCount === 0) {
@@ -194,19 +201,7 @@ function getSelectedCodeContext() {
         return null;
     }
 
-    const code_element = start_pre.querySelector('code');
-
-    if (!code_element) {
-        return null;
-    }
-
-    return {
-        code_block_language: getCodeBlockLanguage(start_pre),
-        code_block_position: Array.from(document.querySelectorAll('.code-toolbar pre')).indexOf(start_pre),
-        selected_character_count: selection.toString().length,
-        selection_start_offset: range.startOffset,
-        selection_end_offset: range.endOffset
-    };
+    return start_pre;
 }
 
 
@@ -221,13 +216,45 @@ function getCodeBlockLanguage(pre_element) {
 }
 
 
-function trackCodeInteraction(interaction_type, code_block_language) {
+function getCodeCopyTrackName() {
+    const active_learning_path_step = document.getElementById('learning-path-step-active');
+
+    if (active_learning_path_step) {
+        const page_number = parseInt(active_learning_path_step.getAttribute('data-step-num')) + 1;
+        const page_name = (active_learning_path_step.innerText || active_learning_path_step.textContent).trim();
+
+        return 'page_number:'+page_number+','+'page_name:'+page_name;
+    }
+
+    const install_guide_title = document.getElementById('install-guide-title');
+
+    if (install_guide_title) {
+        const page_name = (install_guide_title.innerText || install_guide_title.textContent).trim();
+
+        return 'page_number:1,'+'page_name:'+page_name;
+    }
+
+    return window.location.pathname;
+}
+
+
+function trackCodeCopy(copy_location, pre_element) {
+    const code_block_language = getCodeBlockLanguage(pre_element);
+    const track_str = getCodeCopyTrackName();
+
     if (window._satellite?.track) {
         window._satellite.track('content-interaction', {
-            'data-track-type'       : interaction_type,
+            'data-track-type'       : 'copy',
             'data-track-location'   : 'content',
-            'data-track-name'       : window.location.pathname,
-            'data-track-identifier' : code_block_language
+            'data-track-name'       : track_str,
+            'data-track-identifier' : code_block_language,
+            'data-track-url'        : window.location.href
+        });
+
+        window._satellite.track('content-interaction', {
+            'data-track-type'     : 'copy-type',
+            'data-track-location' : copy_location,
+            'data-track-name'     : track_str
         });
     }
 }
@@ -247,45 +274,14 @@ function trackCodeInteraction(interaction_type, code_block_language) {
         //  ===================
         // Use delegated listeners because Prism creates its toolbar buttons after
         // the page DOM is ready. These listeners cover Learning Paths and install
-        // guides and identify each code block by its Prism language.
-        let code_selection_timer;
-        let last_code_selection_signature = '';
-
-        document.addEventListener('selectionchange', function() {
-            clearTimeout(code_selection_timer);
-
-            // selectionchange fires repeatedly while the selection is changing.
-            code_selection_timer = setTimeout(function() {
-                const context = getSelectedCodeContext();
-
-                if (!context) {
-                    last_code_selection_signature = '';
-                    return;
-                }
-
-                const signature = [
-                    current_path,
-                    context.code_block_position,
-                    context.selected_character_count,
-                    context.selection_start_offset,
-                    context.selection_end_offset
-                ].join('|');
-
-                if (signature === last_code_selection_signature) {
-                    return;
-                }
-
-                last_code_selection_signature = signature;
-                trackCodeInteraction('code-block-selection', context.code_block_language);
-            }, 400);
-        });
+        // guides and identify each copied code block by its Prism language.
 
         // Track keyboard and context-menu copies of a selection in a code block.
         document.addEventListener('copy', function() {
-            const context = getSelectedCodeContext();
+            const pre_element = getSelectedCodeBlock();
 
-            if (context) {
-                trackCodeInteraction('code-block-manual-copy', context.code_block_language);
+            if (pre_element) {
+                trackCodeCopy('manual-copy', pre_element);
             }
         });
 
@@ -309,7 +305,7 @@ function trackCodeInteraction(interaction_type, code_block_language) {
                 return;
             }
 
-            trackCodeInteraction('code-block-copy-button', getCodeBlockLanguage(pre_element));
+            trackCodeCopy('button-copy', pre_element);
         });
 
 
