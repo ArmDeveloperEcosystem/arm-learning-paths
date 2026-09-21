@@ -21,7 +21,7 @@ In addition to the GUI, you can use Arm Performix through the command line. Arm 
 
 ## Configure SSH key-based authentication
 
-Arm Performix connects to your target over SSH. After installing Performix, set it up for profiling by configuring SSH key-based authentication.
+Arm Performix connects to your target over SSH. After installing Performix by following the [install guide](/install-guides/performix), set it up for profiling by configuring SSH key-based authentication.
 
 If you don't already have an SSH key pair, generate one on your local machine:
 

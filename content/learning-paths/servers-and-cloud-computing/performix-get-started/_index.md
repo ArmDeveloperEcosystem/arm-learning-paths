@@ -5,17 +5,17 @@ description: Profile and optimize a C++ application on Arm-based servers using A
 
 minutes_to_complete: 120
 
-who_is_this_for: This Learning Path is for software developers and performance engineers who want to optimize applications on Arm-based servers using Arm Performix.
+who_is_this_for: This Learning Path is for software developers and performance engineers who want to get started with optimizing applications on Arm-based servers using Arm Performix.
 
 learning_objectives:
-    - Configure Arm Performix and use its recipes to guide performance analysis on Arm-based systems
-    - Profile a C++ application with the Code Hotspots recipe to identify functions consuming the most CPU time
-    - Use CPU Microarchitecture and Instruction Mix recipes to pinpoint pipeline bottlenecks and missed SIMD opportunities
-    - Optimize the application with Arm Neon intrinsics and compare Performix runs to validate changes in runtime and bottleneck behavior
+    - Configure Arm Performix and use its recipes to guide performance analysis on Arm-based systems.
+    - Profile a C++ application with the Code Hotspots recipe to identify functions consuming the most CPU time.
+    - Use CPU Microarchitecture and Instruction Mix recipes to pinpoint pipeline bottlenecks and missed SIMD opportunities.
+    - Optimize the application with Arm Neon intrinsics and compare Performix runs to validate changes in runtime and bottleneck behavior.
 
 prerequisites:
     - SSH access to an Arm Linux server with at least three Performance Monitor Unit (PMU) counters
-    - Arm Performix installed on your local machine. For installation instructions, see the [Arm Performix install guide](/install-guides/performix).
+    - Arm Performix installed on your local machine
     - A C++ compiler such as GCC or Clang installed on the target Linux server
 
 # START generated_summary_faq
