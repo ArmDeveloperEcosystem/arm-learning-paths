@@ -27,7 +27,7 @@ To verify that the application deployed successfully:
 1. Select the cluster **ecs-managed-instances-cluster**. 
 2. Select **Infrastructure**.
 2. Under **Container instances**, note that the **Instance type** that AWS chose based on the capacity provider is a Graviton-based instance type. The following screenshot shows that the instance type selected by AWS is `m6g.medium`:
-      ![Screenshot of the application showing the NGINX welcome page and confirming the web server was deployed on Arm-based compute successfully.#center](container-instance.png "List of container instances indicating that a Graviton-based instance was selected")
+      ![Amazon ECS cluster Infrastructure tab showing a completed Managed Instances capacity provider and one active m6g.medium container instance, confirming that AWS selected Graviton-based compute.#center](container-instance.png "Active m6g.medium container instance selected by the capacity provider")
 3. Select the container instance that's associated with the ECS Managed Instances capacity provider.
 4. Under **Networking**, you'll find the public DNS name and IP address for the instance. Copy the **Public IP** and paste it into a web browser of your choice. 
 

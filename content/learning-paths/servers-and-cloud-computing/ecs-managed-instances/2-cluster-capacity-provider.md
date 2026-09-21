@@ -35,13 +35,12 @@ To specify custom instance requirements and select Arm-based instances, create a
 
 By creating a capacity provider with these requirements, you're selecting for instance types that are based on Arm-based AWS Graviton CPUs that are manufactured by Amazon. 
 
- ![Screenshot of the application showing the NGINX welcome page and confirming the web server was deployed on Arm-based compute successfully.#center](filtered-instance-types.png "Instance types that match the instance requirements criteria")
+ ![Amazon ECS console table showing matching C6g instance types with the Arm64 architecture, confirming that the capacity provider requirements select AWS Graviton-based compute.#center](filtered-instance-types.png "Arm64 instance types matching the capacity provider requirements")
 
 ## What you've accomplished and what's next
 
 You've now created an Amazon ECS cluster in which you'll run your container, and a security group that allows inbound traffic on port `80`. You've also specified CPU manufacturer requirements in a capacity provider to filter for Arm-based instance types. 
 
 Next, you'll run a container on an Arm-based instance that meets these instance requirements. 
-
 
 
