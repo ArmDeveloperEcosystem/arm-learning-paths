@@ -76,7 +76,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: ML
 armips:
-    - Armv9-A
+    - Arm C1
 tools_software_languages:
     - SME2
     - Bazel
