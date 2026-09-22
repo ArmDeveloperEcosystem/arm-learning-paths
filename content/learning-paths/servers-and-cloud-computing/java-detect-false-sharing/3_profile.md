@@ -160,14 +160,8 @@ Perf C2C cache-line address with a live heap object and its fields, follow
 [Attribute contended cache lines to Java heap objects](/learning-paths/servers-and-cloud-computing/java-attribute-cache-lines/).
 {{% /notice %}}
 
-<<<<<<< HEAD
 ## What you've accomplished and what's next
 
-You've now analyzed `baseline.data` to identify the contended cache line.
-
-Next, you'll add the `@Contended` annotation and verify contention padding. 
-=======
 You have used Perf C2C to identify the highest-ranked shared cache line and
 evaluate its peer-cache evidence. Next, add contention padding to separate the
 two fields and record the padded workload for comparison.
->>>>>>> main

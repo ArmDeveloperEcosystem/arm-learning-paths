@@ -239,15 +239,9 @@ HotSpot normally restricts `@Contended` in application classes. Keep
 padding annotation for this class.
 {{% /notice %}}
 
-<<<<<<< HEAD
 ## What you've accomplished and what's next
 
-You've added `@Contended` groups to the example, inspected the padded layout, and recorded and interpreted the padded mode. 
-
-Next, you'll compare baseline and padded runtimes. 
-=======
 You have separated the fields with `@Contended`, verified the padded layout,
 and compared the highest-ranked lines in the baseline and padded Perf C2C
 reports. Next, use repeated timing pairs to assess the runtime effect while
 accounting for measurement variability.
->>>>>>> main
