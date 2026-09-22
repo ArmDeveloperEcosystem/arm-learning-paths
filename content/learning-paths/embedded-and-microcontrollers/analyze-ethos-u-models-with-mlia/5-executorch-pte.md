@@ -1,7 +1,7 @@
 ---
 title: Analyze ExecuTorch artifacts with Corstone
 
-description: Run MLIA Corstone checks on packaged ExecuTorch PTE artifacts and compare model-wide NPU counters for Ethos-U55 and Ethos-U85.
+description: Run MLIA Corstone checks on packaged ExecuTorch PTE artifacts and compare whole-model NPU performance counters for Ethos-U55 and Ethos-U85.
 
 weight: 6
 
@@ -30,7 +30,7 @@ These are synthetic learning artifacts, not benchmark models. They use a small c
 
 For supported `.pte` workloads, MLIA performance analysis uses a Corstone backend. In this context, Corstone refers to an Arm reference subsystem platform, and the backend uses an FVP, or Fixed Virtual Platform. An FVP is a software model of a hardware platform. It lets you run a packaged artifact in a target-like environment and collect performance counters without needing a physical board on your desk.
 
-For `.pte` artifacts, MLIA currently supports performance analysis only. The artifact has already been packaged for an ExecuTorch deployment path, so Corstone is used to run the packaged program on an FVP and collect model-wide NPU counters. Corstone does not provide per-layer estimates or operator breakdowns. Use Vela-backed analysis earlier in the flow when you need layer-level performance estimates or compatibility checks.
+For `.pte` artifacts, MLIA currently supports performance analysis only. The artifact has already been packaged for an ExecuTorch deployment path, so Corstone is used to run the packaged program on an FVP and collect NPU performance counters for the whole model run. Corstone does not provide per-layer estimates or operator breakdowns. Use Vela-backed analysis earlier in the flow when you need layer-level performance estimates or compatibility checks.
 
 If the required Corstone backends are not yet installed, they will be after we run `mlia check` below.
 
@@ -56,7 +56,7 @@ mlia check pte/toy_conditional_select_int8_ethos_u85_256.pte \
   --backend corstone-320
 ```
 
-The reports should show Corstone running each `.pte` artifact and collecting model-wide NPU performance counters. Read the Corstone report as runtime counter evidence:
+The reports should show Corstone running each `.pte` artifact and collecting NPU performance counters for the whole model run. Read the Corstone report as runtime counter evidence:
 
 | Field | What it tells you |
 | --- | --- |
@@ -75,9 +75,9 @@ Use the reports to compare the NPU counters for each packaged artifact:
 
 The comparison uses `ethos-u55-256` and `ethos-u85-256`, so both target profiles use 256 MACs per cycle. However, Ethos-U85 is a newer and higher performance NPU than Ethos-U55, and the target information in the reports also shows other platform differences, such as accelerator clock and memory configuration.
 
-The U55 report shows `271,725` NPU active cycles and `1,363` NPU idle cycles. The U85 report shows `18,183` NPU active cycles and `873` NPU idle cycles, for `19,056` total NPU cycles. This difference reflects the combined effect of improvements in the U85 over the U55.
+The Ethos-U55 report shows `271,725` NPU active cycles and `1,363` NPU idle cycles. The Ethos-U85 report shows `18,183` NPU active cycles and `873` NPU idle cycles, for `19,056` total NPU cycles. This difference reflects the combined effect of improvements in Ethos-U85 over Ethos-U55.
 
-The Corstone report focuses on model-wide NPU counters. If part of the graph runs outside the NPU delegate, the CPU-side cost is not fully represented by the NPU cycle table. Corstone output is different from the earlier Vela estimates: Vela provides compiler-estimated layer-level metrics before deployment, while Corstone runs the packaged `.pte` artifact on an FVP and reports runtime-oriented NPU counters for the whole model. Use the Corstone counters to compare packaged artifacts under the same target profile and backend.
+Use the Corstone counters to compare packaged artifacts under the same target profile and backend. If part of the graph runs outside the NPU delegate, the CPU-side cost is not fully represented by the NPU cycle table.
 
 ## Use Model Explorer for graph structure
 
@@ -85,7 +85,7 @@ Across this Learning Path, you used MLIA with LiteRT, TOSA, and ExecuTorch `.pte
 
 Model Explorer can open some formats directly, while other formats use adapters. Use it alongside MLIA when you want to connect target advice with the graph structure that produced it.
 
-In the example above, not only is the U85 expected to perform better due to its platform differences, there is also a difference in the way the model delegates to the U85 vs U55.
+In the example above, not only is Ethos-U85 expected to perform better due to its platform differences, there is also a difference in the way the model delegates to Ethos-U85 vs Ethos-U55.
 
 The model pattern is:
 

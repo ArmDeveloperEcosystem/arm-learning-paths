@@ -1,7 +1,7 @@
 ---
 title: What is the ML Inference Advisor?
 
-description: Understand where MLIA fits in model preparation and how it works with Vela, Model Explorer, and runtime profiling tools.
+description: Understand where MLIA fits in model preparation and how Vela, Corstone FVP, Model Explorer, and runtime profiling tools support different checks.
 
 weight: 2
 
@@ -18,9 +18,9 @@ In this Learning Path, you use MLIA from the command line to check model compati
 MLIA is most useful before full deployment or runtime profiling, when you are asking questions such as:
 
 - Will this model map cleanly to my target?
-- Which target profile should I use for early analysis?
 - Which operators or layers are likely to matter most for performance?
 - Is the model compute-bound, memory-bound, or affected by low MAC utilization?
+- Is the model well-optimized for my Arm target hardware?
 - What should I investigate before building firmware or running on a board?
 
 MLIA does not make the final optimization decision for you. It gives target-aware evidence so you can decide what to change, what to measure next, and which workflow stage deserves attention.
@@ -32,7 +32,6 @@ The MLIA CLI is the primary workflow in this Learning Path. You will use it to:
 - discover installed targets, target profiles, and backends
 - run compatibility checks
 - run performance analysis
-- request JSON output
 - inspect advice and metrics
 
 If you want to automate the same checks, there is an optional Python API section at the end of this Learning Path. The API is useful when you want to embed MLIA results in another product, dashboard, CI job, or tool.
@@ -41,14 +40,17 @@ If you want to automate the same checks, there is an optional Python API section
 
 MLIA is not a replacement for graph visualization or runtime profiling. It is an advisory layer that helps earlier in the model preparation workflow.
 
-| Tool | Use it to answer |
+| Tool or backend | Use it to answer |
 | --- | --- |
 | MLIA | Is this model suitable for my target, and what should I change? |
+| Vela | Which operators are supported, and which layers dominate compiler-estimated cycles? |
+| Corstone FVP | What NPU performance counters does a packaged `.pte` artifact produce for the whole model run on a virtual platform? |
 | Model Explorer | What does the generated model artifact graph look like? |
-| Vela | How does the Ethos-U compiler map supported work onto the NPU? |
 | Runtime-specific profiling tools | What happened when the model actually ran? For example, use ETRecord, ETDump, and ExecuTorch Inspector for ExecuTorch deployments, or LiteRT benchmark and profiling tools for LiteRT deployments. |
 
-For example, Vela-backed MLIA reports can tell you which layers dominate estimated cycles or have low MAC utilization. Model Explorer can show how an ExecuTorch `.pte` artifact is partitioned into delegate regions. Runtime-specific profiling tools can show behavior after you have a runnable deployment.
+Vela-backed MLIA checks use compiler estimates. They can include operator-level breakdowns, such as which layers dominate estimated cycles or have low MAC utilization. Corstone-backed MLIA checks run a packaged `.pte` file on an FVP and report NPU performance counters for the whole model run. They do not provide per-layer estimates or operator breakdowns.
+
+Model Explorer can show how an ExecuTorch `.pte` artifact is partitioned into delegate regions. Runtime-specific profiling tools can show behavior after you have a runnable deployment.
 
 Use these tools together:
 
@@ -62,9 +64,9 @@ MLIA can analyze different kinds of model artifacts depending on what workflow y
 
 | Format | Where it fits |
 | --- | --- |
-| `.tosa` | Intermediate representation consumed by compiler/backend flows such as Ethos-U Vela. |
 | `.pte` | Serialized ExecuTorch program. Ethos-U `.pte` performance analysis uses Corstone backends. |
 | `.tflite` | LiteRT model format used in many Ethos-U and embedded ML workflows. |
+| `.tosa` | Intermediate representation consumed by compiler/backend flows such as Ethos-U Vela. |
 
 ## What you have learned
 

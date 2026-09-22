@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## What is TOSA?
 
-TOSA stands for Tensor Operator Set Architecture. It is an intermediate representation for machine learning graphs: a stable set of tensor operators that can sit between a model framework and a target backend.
+TOSA stands for Tensor Operator Set Architecture. It is an intermediate representation for machine learning graphs: a stable set of tensor operators that can sit between a model framework and a target backend. The [TOSA specification](https://www.mlplatform.org/tosa/tosa_spec.html) defines the operator set and semantics.
 
 Instead of asking every backend to understand every framework operator directly, a conversion flow can lower supported parts of a model into TOSA. Backend tools can then analyze or compile that TOSA graph for a target.
 

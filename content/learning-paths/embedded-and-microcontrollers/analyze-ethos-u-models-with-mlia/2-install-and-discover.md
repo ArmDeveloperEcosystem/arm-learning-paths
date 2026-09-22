@@ -13,19 +13,17 @@ layout: "learningpathall"
 
 Use Ubuntu 22.04 LTS or another compatible Linux environment with Python 3.10 or later.
 
-Some Python environments also require the Python development package, such as `libpython3.10-dev`, before installing MLIA packages.
-
 Check that Git LFS is installed:
 
 ```bash
 git lfs version
 ```
 
-If this command fails, install Git LFS:
+If this command fails, install Git LFS and the Python development package:
 
 ```bash
 sudo apt update
-sudo apt install -y git-lfs
+sudo apt install -y git-lfs python3.10-dev
 ```
 
 ## Create a Python environment
@@ -76,17 +74,17 @@ mlia target list
 
 For Ethos-U, typical bundled profiles include:
 
-```output
-ethos-u55-128
-ethos-u55-256
-ethos-u65-256
-ethos-u65-512
-ethos-u85-128
-ethos-u85-256
-ethos-u85-512
-ethos-u85-1024
-ethos-u85-2048
-```
+| Target profile | Ethos-U NPU | MACs per cycle |
+| --- | --- | --- |
+| `ethos-u55-128` | Ethos-U55 | 128 |
+| `ethos-u55-256` | Ethos-U55 | 256 |
+| `ethos-u65-256` | Ethos-U65 | 256 |
+| `ethos-u65-512` | Ethos-U65 | 512 |
+| `ethos-u85-128` | Ethos-U85 | 128 |
+| `ethos-u85-256` | Ethos-U85 | 256 |
+| `ethos-u85-512` | Ethos-U85 | 512 |
+| `ethos-u85-1024` | Ethos-U85 | 1024 |
+| `ethos-u85-2048` | Ethos-U85 | 2048 |
 
 In this Learning Path, the examples use one Ethos-U85 profile:
 
@@ -104,7 +102,7 @@ Backends perform the work behind an MLIA analysis flow. List available and insta
 mlia backend list
 ```
 
-For this Ethos-U demonstration, you should expect Vela and Corstone backend options. Vela is used for compiler-oriented compatibility and performance analysis, including per-operator performance estimates for supported formats. Corstone backends are used for simulation-oriented performance flows, including supported ExecuTorch `.pte` workloads, and report model-wide NPU counters.
+For this Ethos-U demonstration, you should expect Vela and Corstone backend options. You use Vela for the LiteRT and TOSA checks, and Corstone for the packaged ExecuTorch `.pte` checks later in this Learning Path.
 
 ```output
 Name          Installed  Installable

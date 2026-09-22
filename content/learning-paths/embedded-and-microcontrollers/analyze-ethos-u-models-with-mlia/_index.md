@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for ML developers who want to use Arm's M
 learning_objectives:
   - Use the MLIA CLI to discover target profiles and backends
   - Run compatibility and performance analysis on LiteRT, TOSA, and ExecuTorch artifacts
-  - Interpret MLIA JSON output, advice, Vela estimates, and Corstone model-wide NPU counters
+  - Interpret MLIA JSON output, advice, Vela estimates, and Corstone whole-model NPU performance counters
   - (Optional) Call the MLIA Python API from automation or other tools
 
 prerequisites:
