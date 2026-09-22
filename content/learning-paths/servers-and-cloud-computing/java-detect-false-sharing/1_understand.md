@@ -10,10 +10,10 @@ layout: learningpathall
 ## Understand the cache-line effect
 
 Caches transfer data between CPU cores and maintain coherence at the granularity of cache lines.
+
 When one core writes to a location, the coherence
 protocol generally grants it exclusive ownership of the complete line and
-invalidates copies held by other cores. A 64-byte cache line is common on Arm Neoverse servers, but the line size is
-implementation-dependent.
+invalidates copies held by other cores. A 64-byte cache line is common on Arm Neoverse-based servers, but the line size is implementation-dependent.
 
 Processors maintain cache coherence for complete cache lines rather than
 individual Java objects or fields. The Java Virtual Machine (JVM) determines
@@ -38,19 +38,31 @@ Java applications can encounter false sharing in three common forms:
 - Independently allocated objects placed on the same line
 - Array elements updated by different workers
 
-Object headers, inheritance, compressed references, field layout, object
-alignment, allocation order, and garbage collection all influence the result.
+The following factors influence the result:
+
+- Object headers
+- Inheritance
+- Compressed references
+- Field layout
+- Object alignment
+- Allocation order
+- Garbage collection
 
 ## Understand the performance effect
 
 When workers on different cores repeatedly write independent values in one
 cache line, ownership of the line can move between their caches. The cores can
-spend more time waiting for coherence transactions even though the Java
-variables do not logically interact. This can increase latency and limit
+spend more time waiting for coherence transactions, even though the Java
+variables don't logically interact. This can increase latency and limit
 multithreaded throughput.
 
-Field adjacency makes false sharing possible; it does not prove that it occurs.
+Field adjacency makes false sharing possible, but it doesn't prove that false sharing occurs.
 Object placement, thread placement, workload duration, and the processor all
-affect the observed behavior. The remaining steps use Java Object Layout (JOL)
-to inspect field offsets and Perf C2C to observe cache-line sharing before and
-after adding padding.
+affect the observed behavior.
+
+## What you've learned and what's next
+
+You've now learned about cache-line and performance effects of Java false sharing.
+
+Next, you'll create the baseline example and use Java Object Layout (JOL)
+to inspect field offsets and Perf C2C to observe baseline cache-line sharing.
