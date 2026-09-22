@@ -10,6 +10,8 @@ layout: learningpathall
 The earlier examples use the original SME2 lookup path: a table in `ZT0`, packed indices in Z registers, and one or more Z-register results.
 Other architectural features use a different table source or add specialized forms.
 
+{{% notice Note %}} `FEAT_LUT` and `FEAT_SME2p1` are not yet implemented on any shipping hardware. The code excerpts on this page are illustrative. Use the feature macros in the final section to guard these paths and prepare your kernel for when hardware support becomes available. {{% /notice %}}
+
 ## Compare the feature paths
 
 | Feature path | Table source | Execution state | Distinguishing capability |
@@ -20,7 +22,7 @@ Other architectural features use a different table source or add specialized for
 
 ## Use Z-register tables with FEAT_LUT
 
-`FEAT_LUT` expands the functionality of `FEAT_SME2` allowing to use of scalable Z registers as the lookup-table source. This provides an alternative to using the `ZT0` register. 
+`FEAT_LUT` expands the functionality of `FEAT_SME2` allowing the use of scalable Z registers as the lookup-table source. This provides an alternative to using the `ZT0` register.
 
 ```text
 table Z register(s) + packed-index Z register
@@ -32,7 +34,7 @@ table Z register(s) + packed-index Z register
 
 Use this form for vector kernels that do not need `ZT0` register and where multiple LUTs are required by the algorithm.
 
-For example, the two-stage vector decode loop in section 5 reloads `ZT0` using `svldr_zt()` for its LUTI4 and LUTI2 tables.
+For example, the two-stage decode loop in the previous example reloads `ZT0` using `svldr_zt()` for its LUTI4 and LUTI2 tables.
 With `FEAT_LUT`, both lookup tables are kept in separate Z registers and loaded once before the loop with the appropriate predicate.
 This removes the need to call `svldr_zt()` inside the loop.
 
@@ -110,3 +112,5 @@ that the operating system exposes the required feature on the current processor.
 ## What you've learned
 
 You've identified the table source, execution state, output shape, and feature macro for the main LUTI variants. Use these distinctions when selecting an instruction form and when adding compile-time and runtime feature checks to production code.
+
+You can now choose between `ZT0`-based SME2 forms, Z-register table forms with `FEAT_LUT`, and strided destination groups with `FEAT_SME2p1`, depending on the register pressure and algorithm structure of your kernel.

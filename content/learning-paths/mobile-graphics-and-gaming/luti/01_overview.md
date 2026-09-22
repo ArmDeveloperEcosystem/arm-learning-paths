@@ -8,14 +8,14 @@ layout: learningpathall
 ---
 
 ## Overview
-We are at a point where Large Language Model(LLM) inference on the CPU is practical on mobile and edge devices. This is due in large part to the rise of low-bit AI models.
-Low-bit AI models store weights in compact packed format that must be efficiently expanded before matrix multiplication. You will see how 2-bit and 4-bit weights are stored, why conventional unpacking adds cycles, and how lookup-table instructions (LUTI) removes the unpacking step.
+Large language model (LLM) inference on the CPU is now practical on mobile and edge devices, due in large part to the rise of low-bit AI models.
+Low-bit AI models store weights in a compact packed format that must be efficiently expanded before matrix multiplication. You will see how 2-bit and 4-bit weights are stored, why conventional unpacking adds cycles, and how lookup-table instructions (LUTI) remove the unpacking step.
 
-By the end, you should be able to explain why packed low-bit indices are efficient for storage and memory traffic, how the indices are laid out in memory and how to use LUTI instructions to efficiently expand it.
+By the end, you should be able to explain why packed low-bit indices are efficient for storage and memory traffic, how the indices are laid out in memory and how to use LUTI instructions to efficiently expand them.
 
 ## Why use sub-byte weights?
 
-Large language model (LLM) inference on mobile and edge devices is often limited by memory capacity and bandwidth. During inference, model weights must be transferred from memory to the CPU, contributing to latency and energy use.
+LLM inference on mobile and edge devices is often limited by memory capacity and bandwidth. During inference, model weights must be transferred from memory to the CPU, contributing to latency and energy use.
 
 Quantization reduces this traffic by storing weights in lower-precision formats. Weight-only quantization maps each 32-bit floating-point (`fp32`) weight to a compact logical code and stores shared metadata, such as a scale or zero point, for each block.
 
@@ -23,18 +23,7 @@ Quantization reduces this traffic by storing weights in lower-precision formats.
 
 Physical packing is the storage layout that places several low-bit codes into each byte. If you ignore the metadata, four `2-bit` codes or two `4-bit` codes can be stored in one byte.
 
-<p align="center">
-  <img
-    src="images/luti_datatypes.png"
-    alt="Data Type Storage in Vector Register"
-    width="95%"
-  />
-</p>
-
-<p align="left">
-  <em>Figure 1. Packing low-bit weight codes into a scalable vector register. An int8 value occupies 1 byte, whereas one byte can hold four 2-bit codes or two 4-bit codes. Consequently, a 128-bit (16 bytes) vector can contain 16 int8 values, 32 packed 4-bit codes, or 64 packed 2-bit codes.
-</em>
-</p>
+![Diagram comparing how int8, 4-bit, and 2-bit codes pack into a vector register. One byte holds one int8 value, two 4-bit codes, or four 2-bit codes, so a 128-bit vector holds 16, 32, or 64 values respectively.#center](images/luti_datatypes.png "Packing low-bit weight codes into a scalable vector register")
 
 This approach trades reconstruction accuracy for lower memory use. Its value also depends on decoding the packed codes efficiently. LUTI achieves that by expanding low-bit codes directly into arithmetic-ready vector values.
 
@@ -71,20 +60,9 @@ For example, a 2-bit lookup table might contain:
 ### From packed 2-bit codes to 8-bit values
 The key benefit of LUTI is that the matrix multiplication kernel can load weights in their compact form. A source vector of packed weights therefore carries more values per memory load than a vector containing already expanded 8-bit, 16-bit, or 32-bit values.
 
-For 2-bit codes, LUTI uses the packed indices in a source vector to select lookup-table entries and writes the resulting values to destination vector registers. Figure 2 shows how 2-bit codes expand into 8-bit values.
+For 2-bit codes, LUTI uses the packed indices in a source vector to select lookup-table entries and writes the resulting values to destination vector registers. The following diagram shows how 2-bit codes expand into 8-bit values.
 
-<p align="center">
-  <img
-    src="images/luti_flow_overview.png"
-    alt="Lookup-Table Overview"
-    width="95%"
-  />
-</p>
-
-<p align="left">
-  <em>Figure 2. LUTI maps packed 2-bit codes to lookup-table indices, selects the relevant 8-bit values, and writes them to a destination vector. Compared with storing expanded 8-bit values, the packed format allows each memory load to supply four times as many weights.
-</em>
-</p>
+![Diagram showing LUTI expanding packed 2-bit codes into 8-bit values. The packed 2-bit indices in a source vector select lookup-table entries, and the selected 8-bit values are written to a destination vector.#center](images/luti_flow_overview.png "LUTI maps packed 2-bit codes to lookup-table indices and writes the selected 8-bit values to a destination vector")
 
 ## Identify LUTI responsibilities
 

@@ -10,34 +10,22 @@ layout: learningpathall
 ## SME and SME2 architectural features
 
 SME extends the Armv9-A architecture and accelerates matrix-heavy computations, such as outer products and matrix multiplication.
-SME introduces __Streaming SVE mode__ and the __scalable ZA matrix-storage__ array. ZA accumulates matrix outer products and multi-vector dot products.
+SME introduces Streaming SVE mode and the scalable ZA matrix-storage array. ZA accumulates matrix outer products and multi-vector dot products.
 
-SME2 builds on SME and adds __multi-vector instructions__ and the fixed __512-bit ZT0 lookup-table register__.
+SME2 builds on SME and adds multi-vector instructions and the fixed 512-bit ZT0 lookup-table register.
 
-For this learning path, the important points to note is that LUTI uses packed low-bit codes from Z source registers, reads the corresponding look-up table entries from `ZT0`, and writes expanded operands into Z destination registers.
+LUTI uses packed low-bit codes from Z source registers, reads the corresponding lookup table entries from `ZT0`, and writes expanded operands into Z destination registers.
 The expanded operands can then be consumed by SME2 matrix instructions such as `SDOT` or `SMOPA`, with results accumulated in `ZA` array.
 
 ## ZT0 lookup-table register
 
 SME2 provides a fixed 512-bit architectural register named `ZT0`. It contains 64 bytes, arranged as sixteen 32-bit table entries.
 
-<p align="center">
-  <img
-    src="images/luti2.png"
-    alt="SME2 ZT0 Lookup-Table Register"
-    width="100%"
-  />
-    <img
-    src="images/luti4.png"
-    alt="SME2 ZT0 Lookup-Table Register"
-    width="100%"
-  />
-</p>
+![Diagram showing ZT0 as sixteen 32-bit entries. LUTI2 selects entries 0–3 using 2-bit indices, and LUTI4 selects entries 0–15 using 4-bit indices.#center](images/luti2.png "ZT0 lookup-table organization used by LUTI2")
 
-<p align="left">
-  <em>Figure 3. ZT0 lookup-table organization and use by LUTI2 and LUTI4. ZT0 entries form a single linear table of entries 0–15. LUTI2 selects among entries 0–3 using 2-bit indices, while LUTI4 can select among all entries 0–15 using 4-bit indices. According to the destination element size, LUTI copies the low 8, 16, or 32 bits of the selected 32-bit table entry into the destination Z registers.
-</em>
-</p>
+LUTI4 works the same way but uses 4-bit indices, giving access to all sixteen entries and producing wider output elements.
+
+![Diagram showing ZT0 as sixteen 32-bit entries. LUTI4 selects entries 0–15 using 4-bit indices, and the destination element size determines whether the low 8, 16, or 32 bits of each entry are copied.#center](images/luti4.png "ZT0 lookup-table organization used by LUTI4")
 
 LUTI instructions use packed low-bit indices from a source Z register (`Zn`) to select the corresponding `ZT0` register entry.
 
@@ -141,7 +129,3 @@ You've learned how LUTI operates within SME2: a micro-kernel loads the lookup ta
 
 Next, you'll apply these concepts to a complete low-bit matrix multiplication kernel and examine how LUTI can replace explicit unpacking and decoding in the inner computation loop.
 
-## Further reading
-- [Arm SME2 Introduction](https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/part4-arm-sme2-introduction)
-- [SME2 lookup table Armv9-A Documentation](https://developer.arm.com/documentation/109246/0101/SME-Overview/SME-and-SME2/SME2-lookup-table)
-- [Introduction to streaming and non-streaming mode](https://arm-software.github.io/acle/main/acle.html#controlling-the-use-of-streaming-mode)
