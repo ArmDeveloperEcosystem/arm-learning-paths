@@ -1,5 +1,6 @@
 ---
 title: Decode low-bit weights with Arm SME2 LUTI instructions
+description: Learn how to decode packed low-bit weights using Arm SME2 LUTI2 and LUTI4 instructions, and validate the results against a plain C implementation.
 
 draft: true
 cascade:
@@ -7,20 +8,20 @@ cascade:
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for developers who want to efficiently decode packed low-bit weights inside a SME2 matrix multiplication kernel.
+who_is_this_for: This is an advanced topic for developers who want to efficiently decode packed low-bit weights inside an SME2 matrix multiplication kernel.
 
 learning_objectives: 
     - Explain how LUTI2 expands packed 2-bit indices into arithmetic-ready values
-    - Explain how to implement equivalent low-bit decode paths using plain C and SME2 LUTI2
+    - Compare equivalent low-bit decode paths implemented with plain C and SME2 LUTI2
     - Validate the implementations against a scalar reference and inspect the generated SME2 instructions
-    - A recipe-based approach to programming with LUTI instructions
+    - Apply a repeatable workflow for programming SME2 LUTI instructions
 
 prerequisites:
     - Familiarity with C, AArch64 assembly, quantization, and matrix multiplication
     - Understanding of SME2 streaming mode and ZA storage; see [Accelerate matrix multiplication performance with SME2](/learning-paths/cross-platform/multiplying-matrices-with-sme2/)
     - A Mac system with Apple silicon (M4 or later), or an Android device with SME2 support
-    - Git and LLVM Clang 22 or later for native macOS builds
-    - For Android builds, a macOS or Linux build host with LLVM Clang 22 and Android NDK r29
+    - Make, wget, and LLVM Clang 22 or later for native macOS builds
+    - For Android builds, a macOS or Linux build host with LLVM Clang 22 or later and Android NDK r29
     - For Android execution, an Android 15 or later device with SME2
 
 
@@ -79,6 +80,14 @@ further_reading:
         title: KleidiAI project
         link: https://github.com/ARM-software/kleidiai
         type: website
+    - resource:
+        title: Arm SME2 introduction
+        link: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/part4-arm-sme2-introduction
+        type: website
+    - resource:
+        title: Introduction to streaming and non-streaming mode
+        link: https://arm-software.github.io/acle/main/acle.html#controlling-the-use-of-streaming-mode
+        type: documentation
 
 
 ### FIXED, DO NOT MODIFY

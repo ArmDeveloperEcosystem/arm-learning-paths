@@ -11,8 +11,8 @@ layout: learningpathall
 
 You can run the examples using one of the following routes:
 
-- Build and run natively on an arm64 macOS® device with an M4 processor or later
-- Cross-compile on macOS or Linux and run on an Android™ phone with SME2 support
+- Build and run natively on an arm64 macOS device with an M4 processor or later
+- Cross-compile on macOS or Linux and run on an Android phone with SME2 support
 
 See the [list of devices with native SME2 support](https://learn.arm.com/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices) before selecting a target device.
 
@@ -39,13 +39,32 @@ sysctl -n hw.optional.arm.FEAT_SME2
 sysctl -n hw.optional.arm.sme_max_svl_b
 ```
 
+The output is similar to:
+
+```output
+1
+64
+```
+
 The first command must print `1`. The second command reports the maximum SVL in bytes. For example, `64` bytes corresponds to an SVL of 512 bits.
 
-Install Homebrew LLVM and confirm its version:
+If needed, install Homebrew LLVM:
 
 ```bash
 brew install llvm
+```
+
+Confirm the version:
+
+```bash
 /opt/homebrew/opt/llvm/bin/clang --version
+```
+
+The output includes text similar to:
+
+```output
+Homebrew clang version 22.1.7
+Target: arm64-apple-darwin27.0.0
 ```
 
 The Makefile uses Homebrew LLVM at `/opt/homebrew/opt/llvm`.
@@ -72,7 +91,7 @@ clang-22 --version
   {{< /tab >}}
 {{< /tabpane >}}
 
-Check that Clang reports version `22.x`.
+Check that Clang reports version 22 or above.
 
 Install Android Native Development Kit (Android NDK) r29:
 
@@ -141,11 +160,11 @@ You can also inspect the CPU feature list:
 adb shell "grep -m1 '^Features' /proc/cpuinfo"
 ```
 
-The executable performs the definitive runtime check. If SME2 isn't available to Android applications, it prints `SKIP: No support for SME2 on this device.` The program exits successfully without running either set of examples. You can still disassemble the executable on the build host.
+If SME2 isn't available to the device, the examples will skip at runtime and exit successfully.
 
 ## Download and explore the code examples
 
-Download the source and build files into a new `code` directory:
+Download the source and build files into a new `code` directory. Run these commands from a working directory of your choice:
 
 ```bash
 BASE_URL=https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/mobile-graphics-and-gaming/luti
@@ -162,9 +181,9 @@ for FILE in \
 done
 ```
 
-The directory contains these source and build files:
+After the download completes, the `code` directory contains these source and build files:
 
-```text
+```output
 code/
 ├── Makefile
 ├── example_1_luti_decoding.c

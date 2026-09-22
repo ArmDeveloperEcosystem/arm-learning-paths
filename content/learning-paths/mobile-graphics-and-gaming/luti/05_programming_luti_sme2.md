@@ -28,7 +28,7 @@ For every LUTI call, answer these questions.
 | 3 | How many destination Z registers do you need the lookup to fill? | Choose x1, x2, or x4 to match the target operation. |
 | 4 | How much of the source Z register fills the destination register group? | Source-register segment |
 
-A *source segment* is the portion of one packed source Z register that fills the chosen destination group.</br>
+A source segment is the portion of one packed source Z register that fills the chosen destination group.</br>
 Its selector is relative to the destination-group size.</br>
 The examples use several source-segment cases to help you develop intuition for selecting the correct segment.
 
@@ -37,9 +37,9 @@ The examples use several source-segment cases to help you develop intuition for 
 
 This example is a focused extraction from KleidiAI's
 [FP16 LUTI4 FMOPA micro-kernel](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_f16p_qsi4c32p/kai_matmul_clamp_f32_f16p1vlx2_qsi4c32p4vlx2_1vlx4vl_sme2_mopa.c).
-The example uses 4-bit codes as indices that map to `float16` values.
-This example shows how the source-index segment is interpreted relative to the destination-group size.
-This section uses generic SVL terminology to explain the example.
+It uses 4-bit codes as indices that map to `float16` values, and shows how the source-index segment is interpreted relative to the destination-group size using generic SVL terminology.
+
+Open `example_2_luti_programming.c` and find `arm_lp_gemm_luti4` to follow along:
 
 ```c
 __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemm_luti4(
@@ -168,6 +168,8 @@ This encoding reduces the bytes required to store weights.
              +--------+--------+--------+--------+
 
 ```
+
+The `arm_lp_gemv_luti2_luti4` function in `example_2_luti_programming.c` implements this two-stage decode:
 
 ```c
 __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemv_luti2_luti4(
@@ -321,7 +323,7 @@ number of byte elements (`SVL / 8`), `VL_h` is the number of half-word
 elements (`SVL / 16`), and `VL_s` is the number of 32-bit word elements
 (`SVL / 32`).
 
-With a 512-bit SVL, the expected output is:
+The expected output is:
 ```output
 FP16 LUTI4 + FMOPA test (M = VL_s, K = 2, N = 4 * VL_s)
 PASS
@@ -331,8 +333,8 @@ PASS
 
 Each `PASS` confirms that the kernel matches the reference result.
 
-## What you've learned in this section
+## What you've learned and what's next
 
-You've seen how destination-group size determines the meaning of a source
-segment, and how the same four-step method applies once or repeatedly in a
-multi-stage decode.
+You've seen how destination-group size determines the meaning of a source segment, and how the same four-step method applies once or repeatedly in a multi-stage decode.
+
+Next, you'll compare the ZT0-based LUTI path with Z-register table forms and SME2.1 strided destination groups.

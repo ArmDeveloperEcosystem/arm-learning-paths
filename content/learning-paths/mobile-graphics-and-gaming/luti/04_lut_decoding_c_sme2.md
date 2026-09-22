@@ -80,19 +80,7 @@ For an SVL of 512 bits:
 
 The complete LHS block and packed RHS block each fit in one streaming Z register.
 
-<p align="center">
-  <img
-    src="images/luti_svl_512.png"
-    alt="SME2 ZT0 Lookup-Table Register"
-    width="95%"
-  />
-</p>
-
-<p align="left">
-  <em>Figure 4. A 512-bit streaming Z register can be viewed as 16x 32-bit elements, 64x 8-bit elements, or 256x packed 2-bit indices. The word and byte counts define M = svcntw() = 16 and N = svcntb() = 64.
-  Each 16-byte segment holds 64 2-bit indices, so the complete packed RHS of 256x 2-bit indices fits in one Z-register.
-</em>
-</p>
+![Diagram showing three views of a 512-bit streaming Z register: 16 x 32-bit elements (orange), 64 x 8-bit elements (purple), and 256 x packed 2-bit indices (dark orange). Each view highlights a 16-byte segment to show how M and N are derived from svcntw() and svcntb().#center](images/luti_svl_512.png "Three views of a 512-bit Z register showing how element width determines M and N")
 
 ### Low-bit packed format
 
@@ -291,11 +279,11 @@ until the matrix kernel needs it. The expanded values then pass directly from
 Z registers to SME2 matrix instructions.
 
 To see the same instruction pattern in production code, inspect the
-[`qai8dxp_qsu2cxp` Arm® KleidiAI™ micro-kernel source](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsu2cxp/kai_matmul_clamp_f32_qai8dxp1vlx4_qsu2cxp4vlx4_1vlx4vl_sme2_mopa_asm.S).
+[`qai8dxp_qsu2cxp` Arm KleidiAI micro-kernel source](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsu2cxp/kai_matmul_clamp_f32_qai8dxp1vlx4_qsu2cxp4vlx4_1vlx4vl_sme2_mopa_asm.S).
 
 ## Build and validate Example 1
 
-Complete the [environment setup](/learning-paths/mobile-graphics-and-gaming/luti/03_environment_setup/) and run these commands from the `code` directory.
+Run these commands from the `code` directory.
 
 ### Build and run on macOS
 
@@ -335,13 +323,19 @@ After it finishes, enter `exit` to return to the build host's shell.
 
 ### Check the result
 
-On an SME2-capable device, the program prints the matrix shape, lookup table, decoded RHS samples, and a result preview. For a 512-bit SVL, the shape is:
+On an SME2-capable device, the program prints the matrix shape, lookup table, decoded RHS samples, and a matrix preview. For a 512-bit SVL, the output begins with:
 
 ```output
 SVL = 512 bits; matrix shape M=16, K=4, N=64
+2-bit LUT mapping:
+bits  idx  signed  raw byte
+ 00   0      -3    0xFD
+ 01   1      -1    0xFF
+ 10   2       1    0x01
+ 11   3       3    0x03
 ```
 
-After comparing every SME2 output element with the plain C result, the expected final line is:
+The RHS decoding preview and C matrix preview follow, then the final validation line:
 
 ```output
 PASS: LUTI2 SME2 matches plain C matmul.
