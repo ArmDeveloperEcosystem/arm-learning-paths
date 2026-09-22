@@ -145,4 +145,4 @@ On a supported phone without SME2, the same messages may name `I8MM`.
 
 You can now trace the supported Qwen3-VL package from Android file import through image encoding, prompt evaluation, and token generation. You can also distinguish model-load, multimodal-evaluation, and decode measurements.
 
-You can extend the workflow described in the Learning Path to run vision-language models from the Arm AI Portal for your own use cases.
+You can extend this workflow to run vision-language models from the Arm AI Portal for your own use cases.
