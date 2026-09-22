@@ -1,6 +1,6 @@
 ---
 title: Prepare the Android command-line tools
-description: Install and verify the Android command-line tools needed to build and deploy the image-segmentation application.
+description: Install and verify the Android command-line tools needed to build and deploy Image Analysis.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -11,9 +11,9 @@ layout: learningpathall
 
 The [Arm AI Portal](https://developer.arm.com/ai/models) provides a catalog of AI models across different runtimes, use cases, optimization profiles, and Arm-based targets. It includes benchmarking and compatibility information, code examples, and deployment guidance.
 
-You'll use an Android example application to run MobileSAM, an image-segmentation model from the Arm AI Portal, on a physical Arm-based Android phone. MobileSAM receives an image and a box prompt, then returns masks that identify an object inside the box.
+You'll use an Android application called Image Analysis to run MobileSAM, an image-segmentation model from the Arm AI Portal, on a physical Arm-based Android phone. MobileSAM receives an image and a box prompt, then returns masks that identify an object inside the box.
 
-The application includes one validated model adapter for MobileSAM with ExecuTorch. An adapter is application code that does the following:
+Image Analysis includes validated ExecuTorch adapters for MobileSAM and Depth Anything V2. You'll use the MobileSAM adapter, which does the following:
 
 - Validates the model package
 - Prepares the image and prompt tensors
@@ -49,7 +49,7 @@ $PSVersionTable.PSVersion
   {{< /tab >}}
 {{< /tabpane >}}
 
-Install any missing tools before continuing. Ensure the Java compiler version is 17 or later.
+Install any missing tools before continuing. Ensure the Java compiler version is 17 or later. Image Analysis configures Gradle to provision its JDK 17 build toolchain automatically during the first build.
 
 {{% notice Note %}}
 You can open the cloned project in Android Studio and run it on a connected phone or an Android Virtual Device (AVD). For an AVD, select a recent system image compatible with the application's `arm64-v8a` native libraries. An emulator is useful for functional testing, but its performance and memory behavior aren't representative of a physical Arm-based phone.
