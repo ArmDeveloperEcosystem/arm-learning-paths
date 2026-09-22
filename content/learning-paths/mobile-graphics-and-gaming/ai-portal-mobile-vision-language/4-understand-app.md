@@ -15,8 +15,8 @@ Vision Chat supports one model package ZIP. The archive contains two GGUF files
 because llama.cpp separates the language model from the vision encoder and
 projector:
 
-- `Qwen__Qwen3-VL-2B-Instruct_llamacpp_optimized.gguf` contains the Q4_K_M language model
-- `Qwen__Qwen3-VL-2B-Instruct_llamacpp_optimized_mmproj.gguf` contains the Q8_0 vision encoder and projector
+- `Qwen__Qwen3-VL-2B-Instruct_llamacpp_optimized.gguf` contains the `Q4_K_M` language model
+- `Qwen__Qwen3-VL-2B-Instruct_llamacpp_optimized_mmproj.gguf` contains the `Q8_0` vision encoder and projector
 
 The application needs both files to answer a prompt about an image. The
 language-model file can generate text, but it can't process an image without
@@ -104,7 +104,7 @@ Separating image evaluation from token generation makes results easier to compar
 
 ### How Vision Chat uses optimized Arm CPU kernels
 
-Open `app/src/main/cpp/CMakeLists.txt`. The Android build sets the same Arm instruction target used for the published model evaluation and enables KleidiAI in ggml's CPU backend:
+Open `app/src/main/cpp/CMakeLists.txt`. The Android build sets the same Arm instruction target that's used for the published model evaluation, and enables KleidiAI in ggml's CPU backend:
 
 ```cmake
 set(GGML_SYSTEM_ARCH "ARM" CACHE STRING "" FORCE)
@@ -117,11 +117,11 @@ The compile-time target allows `ggml` to use Dot Product and Int8 Matrix Multipl
 KleidiAI builds its SME2, SME, I8MM, and Dot Product microkernels as separate
 implementations in the same APK. When the model loads, llama.cpp reads the CPU
 features reported by Android and selects the most capable compatible
-implementation. On an SME2-enabled phone, the Q8_0 matrix multiplications in
+implementation. On an SME2-enabled phone, the `Q8_0` matrix multiplications in
 the vision encoder and projector use KleidiAI SME2 kernels.
 
-The Q4_K_M language model contains Q4_K and Q6_K matrices. These use llama.cpp's
-optimized Arm repack kernels rather than the KleidiAI Q8_0 path. For this model,
+The `Q4_K_M` language model contains `Q4_K` and `Q6_K` matrices. These use llama.cpp's
+optimized Arm repack kernels rather than the KleidiAI `Q8_0` path. For this model,
 SME2 primarily accelerates image encoding and projection. It doesn't replace
 every kernel used during token generation.
 
@@ -144,3 +144,5 @@ On a supported phone without SME2, the same messages may name `I8MM`.
 ## What you've learned
 
 You can now trace the supported Qwen3-VL package from Android file import through image encoding, prompt evaluation, and token generation. You can also distinguish model-load, multimodal-evaluation, and decode measurements.
+
+You can extend the workflow described in the Learning Path to run vision-language models from the Arm AI Portal for your own use cases.

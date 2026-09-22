@@ -15,7 +15,7 @@ Vision Chat supports the following model package:
 
 | Model | Runtime | Language model | Vision projector |
 | --- | --- | --- | --- |
-| [Qwen3-VL 2B Instruct](https://developer.arm.com/ai/models/hugging-face/Arm/qwen3-vl-2b-instruct-q4-k-m-ggml-llama-cpp-vivo-x300/qwen3-vl-2b-instruct-q4_k_m-gguf?targetName=vivo+X300) | llama.cpp | Q4_K_M GGUF | Q8_0 `mmproj` GGUF |
+| [Qwen3-VL 2B Instruct](https://developer.arm.com/ai/models/hugging-face/Arm/qwen3-vl-2b-instruct-q4-k-m-ggml-llama-cpp-vivo-x300/qwen3-vl-2b-instruct-q4_k_m-gguf?targetName=vivo+X300) | llama.cpp | `Q4_K_M` GGUF | `Q8_0` `mmproj` GGUF |
 
 The ZIP contains the language-model and vision-projector GGUF files. Vision Chat
 validates and extracts them together. It doesn't support other model packages.
@@ -50,10 +50,11 @@ Qwen__Qwen3-VL-2B-Instruct_llamacpp_optimized.zip
 sample_input.jpg
 ```
 
-The ZIP file contains the Q4_K_M language model, the Q8_0 vision encoder and
-projector, and a manifest that records their filenames, sizes, and SHA-256
-hashes. Keep the ZIP filename unchanged so Vision Chat can identify the
-package.
+The ZIP file contains the `Q4_K_M` language model and the `Q8_0` vision encoder and
+projector. It also contains a manifest that records their filenames, sizes, and SHA-256
+hashes.
+
+Keep the ZIP filename unchanged so that Vision Chat can identify the package.
 
 ## Copy the model and sample image to Android
 
