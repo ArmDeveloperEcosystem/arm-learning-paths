@@ -64,9 +64,9 @@ generated_summary_faq:
       loads the model, or runs inference. The controls become available again when the operation
       finishes or reports an error. After inference, you’ll see a grayscale relative-disparity
       map and the model load and inference times.
-  - question: Which images can I use, and how do I validate results across two inputs?
+  - question: How do I validate results across two inputs?
     answer: >-
-      Use JPEG or PNG scenes with objects at different distances. Run two different images and
+      Run two different images and
       confirm that both runs finish without errors, each disparity range contains finite values,
       and the maps differ. Check that nearer regions appear brighter than farther regions and that
       each result aligns with its decoded image preview.

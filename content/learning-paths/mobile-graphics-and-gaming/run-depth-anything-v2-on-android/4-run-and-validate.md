@@ -53,7 +53,7 @@ Choose a second image with a different scene and run depth estimation again. Con
 - Both runs finish without a load or tensor-contract error.
 - The disparity range contains finite numbers.
 - The second depth map differs from the first.
-- Nearer and farther regions have plausible brightness ordering.
+- Nearer and farther regions have the expected brightness ordering.
 - The displayed result fills and aligns with the decoded image preview.
 
 ## What you've accomplished and what's next
