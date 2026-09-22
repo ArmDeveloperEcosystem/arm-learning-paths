@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Download the validated model
 
-MobileSAM with ExecuTorch is the only validated model path for this Learning Path. The application already contains its catalog entry, adapter, preprocessing, and mask rendering.
+You'll use the validated MobileSAM ExecuTorch path. Image Analysis also includes a Depth Anything V2 adapter, covered in [Run Depth Anything V2 depth estimation on Android](/learning-paths/mobile-graphics-and-gaming/run-depth-anything-v2-on-android/). The application already contains the MobileSAM catalog entry, adapter, preprocessing, and mask rendering.
 
 Run the download from the cloned application directory:
 
@@ -50,6 +50,7 @@ adb push "$MODEL_DIR/$MODEL_FILE" "/data/local/tmp/$MODEL_FILE"
 adb shell "run-as $ANDROID_PACKAGE mkdir -p files/models/$MODEL_ID"
 adb shell "run-as $ANDROID_PACKAGE cp /data/local/tmp/$MODEL_FILE files/models/$MODEL_ID/$MODEL_FILE"
 adb shell "run-as $ANDROID_PACKAGE ls -l files/models/$MODEL_ID/$MODEL_FILE"
+adb shell rm "/data/local/tmp/$MODEL_FILE"
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell" >}}
 $ANDROID_PACKAGE = "com.arm.learningpath.imagetoimage"
@@ -58,10 +59,11 @@ adb push "$MODEL_DIR\$MODEL_FILE" "/data/local/tmp/$MODEL_FILE"
 adb shell "run-as $ANDROID_PACKAGE mkdir -p files/models/$MODEL_ID"
 adb shell "run-as $ANDROID_PACKAGE cp /data/local/tmp/$MODEL_FILE files/models/$MODEL_ID/$MODEL_FILE"
 adb shell "run-as $ANDROID_PACKAGE ls -l files/models/$MODEL_ID/$MODEL_FILE"
+adb shell rm "/data/local/tmp/$MODEL_FILE"
   {{< /tab >}}
 {{< /tabpane >}}
 
-The final command displays the copied file and its size. The model directory must match the `id` in `app/src/main/assets/model_catalog.json`.
+The `ls` command displays the copied file and its size. The final `adb shell rm` command removes only the temporary device copy. The downloaded source file remains under `model/` on your development computer. The model directory must match the `id` in `app/src/main/assets/model_catalog.json`.
 
 ## Generate a segmentation mask
 
@@ -90,6 +92,8 @@ The result should show a translucent cyan mask over an object within the box. Th
 - Model load time
 - Run time
 
+After you copy the model into application-private storage, segmentation runs locally on the phone and doesn't need a network connection.
+
 ## Understand what the adapter validates
 
 `model_catalog.json` selects `MobileSamExecuTorchAdapter` through the `mobile-sam-executorch` adapter ID. The adapter isolates MobileSAM's model-specific contract from the shared Android screen.
@@ -100,21 +104,9 @@ When you select **Run segmentation**, the application corrects the image orienta
 
 These checks confirm that the artifact matches the supplied adapter. They don't measure segmentation accuracy or guarantee that every operation uses the same optimized kernel on every phone.
 
-## Verify local inference
+## Validate segmentation results
 
 Run a second image with a distinct central object and confirm that the mask changes with the input. Generated masks don't have a fixed textual output, so check that the overlay follows a plausible object boundary. Also ensure that the result panel contains finite IoU, coverage, and logit values.
-
-Enable airplane mode or otherwise disconnect the phone from the network, then run segmentation again. The result should still appear because the APK and model artifact execute locally. Re-enable the network afterward if you need it for other applications.
-
-Record the following information:
-
-- The model file
-- The ExecuTorch version
-- The Android phone model and Android version
-- The input image
-- Load time
-- Run time
-- The result
 
 Treat the timing as illustrative rather than a benchmark.
 
@@ -122,4 +114,4 @@ Treat the timing as illustrative rather than a benchmark.
 
 You've now downloaded the validated MobileSAM program and copied it into application-private storage. You've generated and checked segmentation masks, and traced the adapter's compatibility checks and output rendering.
 
-Next, you'll learn how to extend the application to use an Arm AI Portal model without a validated adapter.
+Next, you'll learn how to extend Image Analysis to use an Arm AI Portal model without an included validated adapter.

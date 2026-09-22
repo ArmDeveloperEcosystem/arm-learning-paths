@@ -1,5 +1,6 @@
 ---
 title: Compare baseline and padded runtimes
+description: Run repeated baseline and padded measurements to compare Java worker-phase runtimes under consistent test conditions.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
