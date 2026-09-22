@@ -1,6 +1,10 @@
 ---
 title: Run an Arm AI Portal depth estimation model on Android
 
+draft: true
+cascade:
+    draft: true
+
 description: Run an Arm-optimized Depth Anything V2 Small model locally on an Arm-based Android phone with ExecuTorch and render a relative-disparity map.
 
 minutes_to_complete: 35
