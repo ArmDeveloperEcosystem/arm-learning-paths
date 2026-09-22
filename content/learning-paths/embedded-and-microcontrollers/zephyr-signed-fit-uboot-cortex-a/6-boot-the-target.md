@@ -9,13 +9,43 @@ layout: learningpathall
 
 ## What your target boots from
 
-Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-am62l.sh`, or `source $HOME/zephyr-secure-boot/env-qemu.sh` for QEMU.
+Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-qemu.sh`, or `source $HOME/zephyr-secure-boot/env-am62l.sh` for the AM62L EVM.
 
 Some boot ROMs look for the first-stage file by name on a FAT partition, as the AM62L's does; others read it from a fixed offset on the card. That is why you start from the vendor's own card image on a board. QEMU has no boot ROM: it takes `u-boot.bin` on the command line, so its disk carries nothing but the FIT. On both, U-Boot's `fatload` then reads `zephyr-a.itb` from the partition in `BOOT_DEV`.
 
 ## Build the boot media
 
 {{< tabpane-normal >}}
+  {{< tab header="QEMU" >}}
+There is no boot ROM to satisfy and no vendor image to copy, so you build the disk from nothing. Create a 64 MiB file, give it one MBR partition of type `0x0e` (FAT16 with LBA addressing) starting at sector 2048, and format that partition. None of it needs root:
+
+```bash
+truncate -s 64M $WORK/disk.img
+printf 'label: dos\nstart=2048, size=129024, type=e\n' | sfdisk $WORK/disk.img
+mkfs.vfat --offset 2048 -F 16 -n ZEPHYRFIT $WORK/disk.img
+```
+
+Copy the FIT in. `BOOT_IMG` from your environment file is the image plus the `@@1048576` suffix, which tells `mtools` that the volume starts 1 MiB into the file, and `::` is the root of that volume:
+
+```bash
+mcopy -o -i $BOOT_IMG $FIT/zephyr-a.itb ::
+mdir -i $BOOT_IMG ::
+```
+
+The output is similar to:
+
+```output
+ Volume in drive : is ZEPHYRFIT
+ Volume Serial Number is B4EA-EA2A
+Directory for ::/
+
+zephyr-a itb     38742 2026-09-17  22:11
+        1 file              38 742 bytes
+                         65 871 872 bytes free
+```
+
+One file: the FIT you signed. `type=e` is what makes U-Boot's DOS partition driver present this volume as `virtio 0:1`, the `BOOT_DEV` in `env-qemu.sh`.
+  {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
 The boot ROM reads `tiboot3.bin` from the card's first FAT partition and is picky about its format: TI's FAT16 partition boots, while a FAT32 one with 512-byte clusters leaves the console empty. Keep TI's partition byte for byte and replace only the files; it starts at sector 2048 and is 262144 sectors long, which is where the numbers in the next command come from.
 
@@ -65,36 +95,6 @@ zephyr-a itb     60198 2026-09-15  16:49
 
 Four files: the three boot stages you built and the FIT you signed.
   {{< /tab >}}
-  {{< tab header="QEMU" >}}
-There is no boot ROM to satisfy and no vendor image to copy, so you build the disk from nothing. Create a 64 MiB file, give it one MBR partition of type `0x0e` (FAT16 with LBA addressing) starting at sector 2048, and format that partition. None of it needs root:
-
-```bash
-truncate -s 64M $WORK/disk.img
-printf 'label: dos\nstart=2048, size=129024, type=e\n' | sfdisk $WORK/disk.img
-mkfs.vfat --offset 2048 -F 16 -n ZEPHYRFIT $WORK/disk.img
-```
-
-Copy the FIT in. `BOOT_IMG` from your environment file is the image plus the `@@1048576` suffix, which tells `mtools` that the volume starts 1 MiB into the file, and `::` is the root of that volume:
-
-```bash
-mcopy -o -i $BOOT_IMG $FIT/zephyr-a.itb ::
-mdir -i $BOOT_IMG ::
-```
-
-The output is similar to:
-
-```output
- Volume in drive : is ZEPHYRFIT
- Volume Serial Number is B4EA-EA2A
-Directory for ::/
-
-zephyr-a itb     38742 2026-09-17  22:11
-        1 file              38 742 bytes
-                         65 871 872 bytes free
-```
-
-One file: the FIT you signed. `type=e` is what makes U-Boot's DOS partition driver present this volume as `virtio 0:1`, the `BOOT_DEV` in `env-qemu.sh`.
-  {{< /tab >}}
 {{< /tabpane-normal >}}
 
 ## Start the target
@@ -104,6 +104,18 @@ The AM62L EVM steps write to a whole disk with `dd`. Replace `/dev/sdX` with you
 {{% /notice %}}
 
 {{< tabpane-normal >}}
+  {{< tab header="QEMU" >}}
+Start the machine. `-bios` hands QEMU the U-Boot you built, `-nographic` puts the serial console in your terminal, and the `-drive` and `-device` pair attaches `disk.img` as the virtio block device U-Boot sees as `virtio 0:1`:
+
+```bash
+qemu-system-aarch64 -machine virt,gic-version=3 -cpu cortex-a53 -m 1G -nographic -no-reboot \
+    -bios $UBOOT_OUT/u-boot.bin \
+    -drive if=none,file=$WORK/disk.img,format=raw,id=hd0 \
+    -device virtio-blk-device,drive=hd0
+```
+
+The machine must match the one you dumped the device tree from when you [built U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/): same `-machine`, same `-cpu`, same `-m`. U-Boot starts printing at once. To leave QEMU, press **Ctrl+A**, then **X**.
+  {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
 Run `lsblk`, insert the micro-SD card in your host, and run `lsblk` again. The disk that appeared is the card. Write the image to the whole card:
 
@@ -129,21 +141,11 @@ If `picocom` reports a permission error, add your user to the `dialout` group wi
 
 Move the SD card to the board, then power the board through a USB-C PD supply on **J17** or **J19**. The console starts printing at once.
   {{< /tab >}}
-  {{< tab header="QEMU" >}}
-Start the machine. `-bios` hands QEMU the U-Boot you built, `-nographic` puts the serial console in your terminal, and the `-drive` and `-device` pair attaches `disk.img` as the virtio block device U-Boot sees as `virtio 0:1`:
-
-```bash
-qemu-system-aarch64 -machine virt,gic-version=3 -cpu cortex-a53 -m 1G -nographic -no-reboot \
-    -bios $UBOOT_OUT/u-boot.bin \
-    -drive if=none,file=$WORK/disk.img,format=raw,id=hd0 \
-    -device virtio-blk-device,drive=hd0
-```
-
-The machine must match the one you dumped the device tree from when you [built U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/): same `-machine`, same `-cpu`, same `-m`. U-Boot starts printing at once. To leave QEMU, press **Ctrl+A**, then **X**.
-  {{< /tab >}}
 {{< /tabpane-normal >}}
 
-On the AM62L EVM the log up to the countdown is similar to the one below. Your dates, version strings and countdown differ.
+In QEMU there is no TF-A and no SPL, so the log starts at U-Boot's own banner and is about ten lines long. Three of them are worth knowing: `Bloblist at 0 not found (err=-2)` and `Warning: Unexpected devicetree source (not from a prior stage)` are QEMU telling you that nothing ran before U-Boot, which is exactly the case, and `Loading Environment from nowhere... OK` is the environment you compiled in.
+
+On the AM62L EVM there is much more to see, because the stages below U-Boot actually run. The log up to the countdown is similar to the one below; your dates, version strings and countdown differ.
 
 ```output
 NOTICE:  Booting Trusted Firmware
@@ -186,11 +188,9 @@ Hit any key to stop autoboot:  3
 
 This log comes from a board running TI's prebuilt first two stages, so its `U-Boot SPL` line shows TI's build date instead of yours.
 
-In QEMU there is no TF-A and no SPL, so the log starts at U-Boot's own banner and is about ten lines long. Three of them are worth knowing: `Bloblist at 0 not found (err=-2)` and `Warning: Unexpected devicetree source (not from a prior stage)` are QEMU telling you that nothing ran before U-Boot, which is exactly the case, and `Loading Environment from nowhere... OK` is the environment you compiled in.
-
 ## Watch the trusted image boot
 
-After the three-second countdown, autoboot runs `run a`, the command you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). Your times and hash differ, and on another target so do `FIT_ADDR` and `ZEPHYR_ADDR`. The output is similar to:
+After the three-second countdown, autoboot runs `run a`, the command you [built into U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). Your times and hash differ, and on another target so do `FIT_ADDR` and `ZEPHYR_ADDR`. The block below was captured on the AM62L EVM; the QEMU values follow it. The output is similar to:
 
 ```output
 60198 bytes read in 1 ms (57.4 MiB/s)
@@ -236,6 +236,14 @@ In QEMU the same block reads `FIT Image at 48000000`, `Data Size: 37040 Bytes`, 
 ## If nothing prints
 
 {{< tabpane-normal >}}
+  {{< tab header="QEMU" >}}
+QEMU always prints something, so read what it says:
+
+1. Nothing at all, or a hang after the banner: the control device tree does not match the machine. Rebuild it from a fresh `dumpdtb` with the same `-machine`, `-cpu` and `-m` you start QEMU with.
+2. `Failed to load 'zephyr-a.itb'`: U-Boot found the volume but not the file. List it on the host with `mdir -i $BOOT_IMG ::`.
+3. `** Bad device specification virtio 0 **`: the partition type is not `0x0e`. Check with `sfdisk -l $WORK/disk.img` and build the image again.
+4. `Unknown command 'dcache'`: `CONFIG_CMD_CACHE` did not make it into `.config`; add it and build U-Boot again.
+  {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
 If the terminal stays empty, the ROM did not load `tiboot3.bin`. Work down this list:
 
@@ -246,14 +254,6 @@ If the terminal stays empty, the ROM did not load `tiboot3.bin`. Work down this 
 5. If TI's card boots but yours never shows the SPL banner, copy TI's prebuilt first two stages over yours with `mcopy -o -i $BOOT_IMG $PREBUILT/tiboot3.bin $PREBUILT/tispl.bin ::`, then write the card again with the same `dd`. `u-boot.img` still carries the key and the boot command.
 
 On another board the same list applies, with your vendor's first-stage file, card image and console port.
-  {{< /tab >}}
-  {{< tab header="QEMU" >}}
-QEMU always prints something, so read what it says:
-
-1. Nothing at all, or a hang after the banner: the control device tree does not match the machine. Rebuild it from a fresh `dumpdtb` with the same `-machine`, `-cpu` and `-m` you start QEMU with.
-2. `Failed to load 'zephyr-a.itb'`: U-Boot found the volume but not the file. List it on the host with `mdir -i $BOOT_IMG ::`.
-3. `** Bad device specification virtio 0 **`: the partition type is not `0x0e`. Check with `sfdisk -l $WORK/disk.img` and build the image again.
-4. `Unknown command 'dcache'`: `CONFIG_CMD_CACHE` did not make it into `.config`; add it and build U-Boot again.
   {{< /tab >}}
 {{< /tabpane-normal >}}
 

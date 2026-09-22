@@ -13,7 +13,7 @@ This page makes two images U-Boot must refuse, one signed with the wrong key and
 
 This page is optional, and the `b` and `t` commands in your U-Boot are already waiting for its two files.
 
-Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-am62l.sh`, or `source $HOME/zephyr-secure-boot/env-qemu.sh` for QEMU.
+Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-qemu.sh`, or `source $HOME/zephyr-secure-boot/env-am62l.sh` for the AM62L EVM.
 
 ## Build a second Zephyr image
 
@@ -192,9 +192,12 @@ ZEPHYR~1 ITB     60198 2026-09-15  16:49  zephyr-tampered.itb
                         130 643 968 bytes free
 ```
 
-Six files on the card: the boot files and the three FITs. In QEMU the disk image holds the three FITs and nothing else.
+In QEMU the disk image holds the three FITs and nothing else. The listing above is the AM62L EVM's card: six files, the boot files and the three FITs.
 
 {{< tabpane-normal >}}
+  {{< tab header="QEMU" >}}
+Nothing to write: `disk.img` is the disk. Start QEMU again with the same command as on the previous page; it reads the image fresh at every start.
+  {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
 Write the image to the card again with the same `dd` command as on the previous page, taking the same care with `/dev/sdX`:
 
@@ -203,9 +206,6 @@ sudo dd if=$WORK/sdcard.img of=/dev/sdX bs=4M conv=fsync status=progress
 ```
 
 Move the card to the board, open the console with `picocom`, and power the board on.
-  {{< /tab >}}
-  {{< tab header="QEMU" >}}
-Nothing to write: `disk.img` is the disk. Start QEMU again with the same command as on the previous page; it reads the image fresh at every start.
   {{< /tab >}}
 {{< /tabpane-normal >}}
 

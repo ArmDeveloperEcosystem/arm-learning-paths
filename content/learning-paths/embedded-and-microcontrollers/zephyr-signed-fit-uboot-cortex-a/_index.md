@@ -1,7 +1,7 @@
 ---
 title: Boot Zephyr from a signed FIT image with U-Boot on Arm Cortex-A
 
-description: Learn how to sign a Zephyr image in a FIT, build the public key into U-Boot, and start Zephyr on Arm Cortex-A only after U-Boot verifies it, on a TI AM62L EVM or in QEMU with no hardware.
+description: Learn how to sign a Zephyr image in a FIT, build the public key into U-Boot, and start Zephyr on Arm Cortex-A only after U-Boot verifies it, in QEMU with no hardware and then on a TI AM62L EVM.
 
 minutes_to_complete: 120
 
@@ -14,8 +14,8 @@ learning_objectives:
     - Explain what a board in its development state, and what an emulator, each leave unverified, and what a production device needs on top
 
 prerequisites:
-    - One of two targets, either a TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with a micro-SD card and an SD card reader for your host, a micro-USB cable for the console and a USB-C Power Delivery (PD) power supply, or QEMU, which needs no hardware at all
-    - A Linux host running Ubuntu 22.04 or 24.04, with about 20 GB of free disk space for the AM62L EVM or 5 GB for QEMU; the EVM also needs an x86_64 host, because the TI SDK ships its installer and cross compiler as x86_64 binaries only
+    - One of two targets, either QEMU, which needs no hardware at all, or a TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with a micro-SD card and an SD card reader for your host, a micro-USB cable for the console and a USB-C Power Delivery (PD) power supply
+    - A Linux host running Ubuntu 22.04 or 24.04, with about 5 GB of free disk space for QEMU or 20 GB for the AM62L EVM; the EVM also needs an x86_64 host, because the TI SDK ships its installer and cross compiler as x86_64 binaries only
     - Visual Studio Code with the [Workbench for Zephyr extension](https://marketplace.visualstudio.com/items?itemName=Ac6.zephyr-workbench) and its host tools installed, as in the first steps of [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/)
     - Basic knowledge of U-Boot and the Linux command line
 

@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Check that U-Boot can verify signatures
 
-Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-am62l.sh`, or `source $HOME/zephyr-secure-boot/env-qemu.sh` for QEMU.
+Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-qemu.sh`, or `source $HOME/zephyr-secure-boot/env-am62l.sh` for the AM62L EVM.
 
 The target's defconfig must turn on the verifier, and both of these do. Check the symbols that matter in the `$UBOOT_OUT/.config` from the previous page:
 
@@ -96,30 +96,32 @@ The expected output is:
 
 ## Write a boot command that fails closed
 
-Zephyr's board documentation usually gives a one-line U-Boot command to start Zephyr. For the AM62L EVM it is:
+Zephyr's board documentation usually gives a one-line U-Boot command to start Zephyr, with no verification anywhere in it. Filled in with the QEMU values from your environment file, it is:
 
 ```console
-=> fatload mmc 1:1 0x82000000 zephyr.bin; dcache flush; icache flush; dcache off; icache off; go 0x82000000
+=> fatload virtio 0:1 0x40000000 zephyr.bin; dcache flush; icache flush; dcache off; icache off; go 0x40000000
 ```
 
-Nothing checks the bytes between `fatload` and `go`. The verified version puts `bootm` in front of the same handover. Split over several lines for reading, with the AM62L values from the environment file filled in, the chain is:
+On the AM62L EVM the same line reads `fatload mmc 1:1 0x82000000 zephyr.bin` and ends `go 0x82000000`.
+
+Nothing checks the bytes between `fatload` and `go`. The verified version puts `bootm` in front of the same handover. Split over several lines for reading, still with the QEMU values filled in, the chain is:
 
 ```text
-fatload mmc 1:1 0x90000000 ${fit} &&
-bootm start 0x90000000 &&
+fatload virtio 0:1 0x48000000 ${fit} &&
+bootm start 0x48000000 &&
 bootm loados &&
 dcache flush && icache flush && dcache off && icache off &&
-go 0x82000000;
+go 0x40000000;
 echo "*** REFUSED: Zephyr was NOT started ***"
 ```
 
 Each piece has one job:
 
-- `fatload mmc 1:1 0x90000000 ${fit}` reads the FIT named in `${fit}` from `BOOT_DEV` to `FIT_ADDR`. On the AM62L EVM, `mmc 1:1` is partition 1 of the SD card (`mmc 0` is the eMMC); in QEMU the same chain reads `virtio 0:1`, the FAT partition of the disk image, at `0x48000000` and `0x40000000`. `FIT_ADDR` is clear of `ZEPHYR_ADDR`, so `loados` can't copy Zephyr over the FIT it is reading.
-- `bootm start 0x90000000` parses the FIT, picks `conf-1`, verifies the RSA signature against `/signature/key-key-a`, then verifies the image hash.
+- `fatload virtio 0:1 0x48000000 ${fit}` reads the FIT named in `${fit}` from `BOOT_DEV` to `FIT_ADDR`. In QEMU, `virtio 0:1` is the FAT partition of the disk image; on the AM62L EVM the same chain reads `mmc 1:1`, partition 1 of the SD card (`mmc 0` is the eMMC), at `0x90000000` and `0x82000000`. `FIT_ADDR` is clear of `ZEPHYR_ADDR`, so `loados` can't copy Zephyr over the FIT it is reading.
+- `bootm start 0x48000000` parses the FIT, picks `conf-1`, verifies the RSA signature against `/signature/key-key-a`, then verifies the image hash.
 - `bootm loados` copies the verified payload to its `load` address, `ZEPHYR_ADDR`.
 - The four cache commands flush and turn off the caches, and on arm64 `dcache off` also turns the MMU off, the state Zephyr expects at entry.
-- `go 0x82000000` jumps to `ZEPHYR_ADDR` and verifies nothing. Stopping after `bootm loados` keeps U-Boot a verifier, not an OS loader; a plain `bootm` would go on into OS-specific boot code.
+- `go 0x40000000` jumps to `ZEPHYR_ADDR` and verifies nothing. Stopping after `bootm loados` keeps U-Boot a verifier, not an OS loader; a plain `bootm` would go on into OS-specific boot code.
 
 `&&` is what makes it fail closed: `a && b` runs `b` only if `a` succeeded, while `a; b` would fall through to `go` after a failed check. `go` never returns, so the `echo` prints only when a step failed.
 
@@ -161,15 +163,6 @@ The `\"` around the `echo` text stay: that's how a Kconfig string holds a litera
 Then add the lines that get the key into the control device tree and turn on what your target's defconfig leaves off:
 
 {{< tabpane-normal >}}
-  {{< tab header="AM62L EVM" >}}
-TI's tree builds its control device tree from source at every `make`, so one line is enough. `CONFIG_DEVICE_TREE_INCLUDES` is the list of extra `.dtsi` files the build compiles into that tree:
-
-```bash
-cat >> $UBOOT_OUT/.config <<EOF
-CONFIG_DEVICE_TREE_INCLUDES="$WORK/signature.dtsi"
-EOF
-```
-  {{< /tab >}}
   {{< tab header="QEMU" >}}
 QEMU hands U-Boot a device tree at run time, so `qemu_arm64_defconfig` builds none of its own and `CONFIG_DEVICE_TREE_INCLUDES` would have nothing to add to. Instead you build the control device tree yourself in the next step and pass it to the build. These lines turn that on, and close two gaps the AM62L defconfig doesn't have:
 
@@ -186,6 +179,15 @@ EOF
 ```
 
 `CONFIG_OF_BOARD` and `CONFIG_OF_OMIT_DTB` off make U-Boot carry a control device tree of its own, the one your key goes into. `CONFIG_LEGACY_IMAGE_FORMAT` off closes the older image format, which carries no signature. `CONFIG_CMD_CACHE` adds the `dcache` and `icache` commands the boot command uses, and `CONFIG_ENV_IS_NOWHERE` keeps the environment out of flash, so nothing saved at the prompt can replace your boot command.
+  {{< /tab >}}
+  {{< tab header="AM62L EVM" >}}
+TI's tree builds its control device tree from source at every `make`, so one line is enough. `CONFIG_DEVICE_TREE_INCLUDES` is the list of extra `.dtsi` files the build compiles into that tree:
+
+```bash
+cat >> $UBOOT_OUT/.config <<EOF
+CONFIG_DEVICE_TREE_INCLUDES="$WORK/signature.dtsi"
+EOF
+```
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
@@ -210,22 +212,6 @@ The warnings are expected: your lines replace values the defconfig already set. 
 ### Build U-Boot
 
 {{< tabpane-normal >}}
-  {{< tab header="AM62L EVM" >}}
-TI's U-Boot tree packs the early stages itself, with binman, U-Boot's image packaging tool. Point `BL1`, `BL31` and `TEE` at the prebuilt TF-A and OP-TEE, and `BINMAN_INDIRS` at the directory that holds TI's system firmware, all from the SDK:
-
-```bash
-make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="$UBOOT_CC" -j$(nproc) \
-     BL1=$PREBUILT/bl1.bin BL31=$PREBUILT/bl31.bin TEE=$PREBUILT/bl32.bin BINMAN_INDIRS=$PREBUILT
-```
-
-The build takes a few minutes. Check the three boot files:
-
-```bash
-ls -l $UBOOT_OUT/tiboot3.bin $UBOOT_OUT/tispl.bin $UBOOT_OUT/u-boot.img
-```
-
-The sizes are about 0.2 MB, 1.5 MB and 1.4 MB, and the control device tree lands beside them as `u-boot.dtb`.
-  {{< /tab >}}
   {{< tab header="QEMU" >}}
 First get the device tree QEMU builds for the machine you boot later, so U-Boot's drivers, console and memory sizing match it. QEMU writes the file and exits:
 
@@ -255,6 +241,22 @@ ls -l $UBOOT_OUT/u-boot.bin $UBOOT_OUT/u-boot.dtb
 ```
 
 `u-boot.bin` is about 1.4 MB and ends with the bytes of `u-boot.dtb`, the control device tree with your key inside.
+  {{< /tab >}}
+  {{< tab header="AM62L EVM" >}}
+TI's U-Boot tree packs the early stages itself, with binman, U-Boot's image packaging tool. Point `BL1`, `BL31` and `TEE` at the prebuilt TF-A and OP-TEE, and `BINMAN_INDIRS` at the directory that holds TI's system firmware, all from the SDK:
+
+```bash
+make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="$UBOOT_CC" -j$(nproc) \
+     BL1=$PREBUILT/bl1.bin BL31=$PREBUILT/bl31.bin TEE=$PREBUILT/bl32.bin BINMAN_INDIRS=$PREBUILT
+```
+
+The build takes a few minutes. Check the three boot files:
+
+```bash
+ls -l $UBOOT_OUT/tiboot3.bin $UBOOT_OUT/tispl.bin $UBOOT_OUT/u-boot.img
+```
+
+The sizes are about 0.2 MB, 1.5 MB and 1.4 MB, and the control device tree lands beside them as `u-boot.dtb`.
   {{< /tab >}}
 {{< /tabpane-normal >}}
 

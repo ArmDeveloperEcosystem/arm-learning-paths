@@ -1,6 +1,6 @@
 ---
 title: Build a Zephyr image that U-Boot can start
-description: Use Workbench for Zephyr in VS Code to build a small Zephyr 4.4 application for a Cortex-A board, the TI AM62L EVM in this example, then check the arm64 image header that U-Boot's go command relies on.
+description: Use Workbench for Zephyr in VS Code to build a small Zephyr 4.4 application for a Cortex-A target, QEMU or the TI AM62L EVM, then check the arm64 image header that U-Boot's go command relies on.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Open Workbench for Zephyr
 
-You build Zephyr with [Workbench for Zephyr](https://z-workbench.com/) in VS Code, installed on the previous page. [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) sets up a Cortex-M toolchain and workspace. This page does the same for Cortex-A: an AArch64 toolchain, and a Zephyr 4.4 workspace. The steps are the same for both targets; only the board you pick differs.
+You build Zephyr with [Workbench for Zephyr](https://z-workbench.com/) in VS Code, installed on the previous page. [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) sets up a Cortex-M toolchain and workspace. This page does the same for Cortex-A: an AArch64 toolchain, and a Zephyr 4.4 workspace. The steps are the same for both targets; only the board you pick differs. The screenshots on this page were captured with the AM62L EVM selected, so if you are following the QEMU option, read the board field as `qemu_cortex_a53` and take every other field as shown.
 
 Open VS Code on your working directory:
 
@@ -43,7 +43,7 @@ Select **Import**. The download takes a few minutes. When it finishes, the **Too
 
 ## Add a West workspace
 
-The workspace needs a Zephyr release that supports your board. Board support for the AM62L EVM entered Zephyr in version 4.4, so this Learning Path uses 4.4.2; `qemu_cortex_a53` has been in Zephyr for years, and the same workspace builds it. Select **Add West Workspace** and fill in the form:
+The workspace needs a Zephyr release that supports your board. `qemu_cortex_a53` has been in Zephyr for years, and board support for the AM62L EVM entered Zephyr in version 4.4, so this Learning Path uses 4.4.2 and one workspace builds both. Select **Add West Workspace** and fill in the form:
 
 - **Source location**: **From template**
 - **Minimal**, not **Full**, under the **Path** field
@@ -63,14 +63,14 @@ Select **Add Application** and fill in the wizard:
 - **Select West Workspace**: `zephyrproject`
 - **Select Toolchain**: `zephyr-sdk-1.0.1`
 - **SDK Variant**: **GNU GCC**
-- **Select Board**: type `am62l` and select **TI AM62L Evaluation Module (EVM)**, or type `qemu` and select **QEMU Emulation for ARM Cortex-A53**
+- **Select Board**: type `qemu` and select **QEMU Emulation for ARM Cortex-A53**, or type `am62l` and select **TI AM62L Evaluation Module (EVM)**
 - **New or existing application?**: **Create new application**
 - **Select template**: `hello_world`, under `deps/zephyr/samples/hello_world`
 - **Project Name**: `hello`
 - **Application type**: **West workspace application**
 - **Project Location**: `zephyrproject/applications/hello`, filled in by the wizard
 
-The identifier under the board name, `am62l_evm/am62l3/a53` or `qemu_cortex_a53`, is the `BOARD` value in your environment file; on another board, select the entry that matches your `BOARD`.
+The identifier under the board name, `qemu_cortex_a53` or `am62l_evm/am62l3/a53`, is the `BOARD` value in your environment file; on another board, select the entry that matches your `BOARD`.
 
 ![The Add Application wizard in Workbench for Zephyr with red rectangles around the fields to set: Add Application in the sidebar, the zephyrproject workspace, the zephyr-sdk-1.0.1 toolchain, the TI AM62L Evaluation Module board, the hello_world template, the project name hello, the project location under zephyrproject/applications and the Create button. A call-out beside the board field says to select QEMU Emulation for ARM Cortex-A53 instead if you follow the QEMU option.#center](images/wz-add-application.webp "Add Application, filled in for the AM62L EVM; the call-out gives the QEMU board")
 
@@ -123,7 +123,7 @@ Save both files.
 
 `CONFIG_AARCH64_IMAGE_HEADER=y` puts a 64-byte arm64 header at the start of `zephyr.bin`, in the same format as a Linux kernel image. The header's first instruction is `b __start`, a branch to Zephyr's real entry point. U-Boot only needs that branch at offset 0: without the header, `go` jumps into whatever the linker placed there.
 
-The configurations for `am62l_evm/am62l3/a53` and `qemu_cortex_a53` already set both options; repeating them in `prj.conf` protects you on a board whose configuration doesn't.
+The configurations for `qemu_cortex_a53` and `am62l_evm/am62l3/a53` already set both options; repeating them in `prj.conf` protects you on a board whose configuration doesn't.
 
 ## Build the application
 
@@ -138,11 +138,11 @@ Memory region         Used Size  Region Size  %age Used
 
 ![The Applications view in Workbench for Zephyr and the build terminal, with red rectangles around the hello application, listed with its zephyrproject workspace, zephyr-sdk-1.0.1 toolchain and am62l_evm/am62l3/a53 board, and around the Memory region table near the end of a successful build#center](images/wz-build.webp "The hello application built for the AM62L EVM")
 
-The result is `$WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin`, a raw binary linked at `ZEPHYR_ADDR`, the start of the target's `zephyr,sram` memory node. It is about 58 KB for the AM62L EVM and about 37 KB for `qemu_cortex_a53`, whose memory report shows 128 MB of RAM instead of 2016 MB.
+The result is `$WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin`, a raw binary linked at `ZEPHYR_ADDR`, the start of the target's `zephyr,sram` memory node. It is about 37 KB for `qemu_cortex_a53`, whose memory report shows 128 MB of RAM, and about 58 KB for the AM62L EVM, which reports 2016 MB.
 
 ## Check the arm64 image header
 
-Open a terminal (**Terminal > New Terminal** in VS Code, or any shell), load the environment for your target with `source $HOME/zephyr-secure-boot/env-am62l.sh` or `source $HOME/zephyr-secure-boot/env-qemu.sh`, and print the header's magic number at offset `0x38`:
+Open a terminal (**Terminal > New Terminal** in VS Code, or any shell), load the environment for your target with `source $HOME/zephyr-secure-boot/env-qemu.sh` or `source $HOME/zephyr-secure-boot/env-am62l.sh`, and print the header's magic number at offset `0x38`:
 
 ```bash
 od -An -c -j 0x38 -N4 $WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin

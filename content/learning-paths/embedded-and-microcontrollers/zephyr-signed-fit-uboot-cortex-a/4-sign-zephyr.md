@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Build U-Boot's host tools first
 
-Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-am62l.sh`, or `source $HOME/zephyr-secure-boot/env-qemu.sh` for QEMU.
+Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-qemu.sh`, or `source $HOME/zephyr-secure-boot/env-am62l.sh` for the AM62L EVM.
 
 `mkimage` builds and signs a FIT image. `fit_check_sign` verifies a signed FIT on the host. Both come from the same U-Boot tree as your target's U-Boot, so signer and verifier match.
 
@@ -19,7 +19,7 @@ The `tools` target needs the target's `.config` first, so run the defconfig targ
 make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="$UBOOT_CC" $UBOOT_DEFCONFIG
 ```
 
-`UBOOT_CC` is the compiler command from your environment file. On the AM62L it carries `--sysroot`, the SDK's library path, without which the U-Boot link fails; in QEMU it is the plain cross compiler. Keep `CC="$UBOOT_CC"` on every `make` line, including the ones on the next page.
+`UBOOT_CC` is the compiler command from your environment file. In QEMU it is the plain cross compiler; on the AM62L it carries `--sysroot`, the SDK's library path, without which the U-Boot link fails. Keep `CC="$UBOOT_CC"` on every `make` line, including the ones on the next page.
 
 Then build the host tools:
 
@@ -39,7 +39,7 @@ The output is similar to:
 mkimage version 2026.01-g5fb294342321
 ```
 
-The version string names the U-Boot tree you built from; in QEMU it reads `mkimage version 2025.07`.
+The version string names the U-Boot tree you built from. The listing above was captured on the AM62L EVM, whose TI tree is 2026.01; in QEMU it reads `mkimage version 2025.07`.
 
 {{% notice Note %}}
 If the `tools` build stops at `pylibfdt`, `swig` or `gnutls/gnutls.h`, a package is missing: run the `apt install` command from [Set up the host tools for your target](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/2-set-up-tools/) again, then the `tools` step.
@@ -155,7 +155,7 @@ Signature written to '/home/user/zephyr-secure-boot/fit/zephyr-a.itb', node '/co
 
 **Lines to look for:** `Sign algo:    sha256,rsa2048:key-a` and the last line, `Signature written to ... node '/configurations/conf-1/signature-1'`, say that `mkimage` found `key-a` in `$KEYS` and wrote its signature into `conf-1`. `Hash value` is the SHA-256 of `zephyr.bin`, which U-Boot recomputes on the target.
 
-In QEMU the listing shows the QEMU values instead: `Data Size: 37040 Bytes` and `Load Address: 0x40000000`.
+The listing above was captured on the AM62L EVM. In QEMU it shows the QEMU values instead: `Data Size: 37040 Bytes` and `Load Address: 0x40000000`.
 
 Don't use the `mkimage -K` option here: the public key goes into U-Boot's own device tree at build time, on the next page.
 

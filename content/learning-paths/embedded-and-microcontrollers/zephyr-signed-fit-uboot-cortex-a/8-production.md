@@ -11,7 +11,7 @@ layout: learningpathall
 
 U-Boot verifies the last link of the chain, and only that one. It read `zephyr-a.itb` from the boot media, checked `conf-1` against the `key-a` node built into its own device tree, checked the hash of the payload, and only then jumped to `ZEPHYR_ADDR`. The optional [refusal tests](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) show the two ways it stops instead: a FIT signed with `key-b` fails at `Failed to verify required signature 'key-key-a'`, and a FIT with one byte changed after signing fails at `Bad hash value for 'hash-1'`. Zephyr never starts in either case.
 
-Below that link, nothing is checked against your key. Most Cortex-A SoCs hold the customer's key in eFuses, one-time-programmable bits in silicon. Until that key is fused, the SoC is in its development state: the ROM and the vendor's firmware still check the boot files, but any key passes. TI calls the two states HS-FS (High Security, Field Securable) and HS-SE (High Security, Security Enforced), and U-Boot's banner on the EVM read `SoC:   AM62LX SR1.1 HS-FS`. In QEMU there is less still: no ROM, no security firmware and no eFuses, and you hand `u-boot.bin` to the machine on the command line.
+Below that link, nothing is checked against your key. In QEMU there is nothing below it at all: no ROM, no security firmware and no eFuses, and you hand `u-boot.bin` to the machine on the command line. On the board those stages exist, which is the whole reason to repeat the work there. Most Cortex-A SoCs hold the customer's key in eFuses, one-time-programmable bits in silicon. Until that key is fused, the SoC is in its development state: the ROM and the vendor's firmware still check the boot files, but any key passes. TI calls the two states HS-FS (High Security, Field Securable) and HS-SE (High Security, Security Enforced), and U-Boot's banner on the EVM read `SoC:   AM62LX SR1.1 HS-FS`.
 
 So the key that matters, the public half of `key-a`, travels inside `u-boot.img` on an unprotected FAT partition, where anyone who can write the boot media can swap it for their own. Your chain of trust starts on the card, not in the silicon. Moving it there is what the rest of this page is about.
 
@@ -19,11 +19,11 @@ So the key that matters, the public half of `key-a`, travels inside `u-boot.img`
 
 ### Fuse your key and move to the production state
 
-On TI devices the procedure is the keywriter, which burns your key into the eFuses and moves the chip to HS-SE; you then re-sign `tiboot3.bin`, `tispl.bin` and `u-boot.img` with that key. From then on the ROM and the security firmware refuse any boot file that isn't signed with your key, U-Boot included, so the `key-a` public half inside it is itself authenticated. The procedure is vendor-specific and out of scope here.
+On TI devices the tool is the OTP Keywriter, called Keywriter Lite on the AM62L; it burns the hash of your public key into the eFuses and moves the chip to HS-SE. You then re-sign `tiboot3.bin`, `tispl.bin` and `u-boot.img` with that key. From then on the ROM and the security firmware refuse any boot file that isn't signed with your key, U-Boot included, so the `key-a` public half inside it is itself authenticated. The procedure is vendor-specific and out of scope here.
 
 ### Keep the environment built in
 
-`bootcmd` holds the command autoboot runs, and `preboot` holds the one that defined `zboot`, `a`, `b` and `t`. Both builds end up with `CONFIG_ENV_IS_NOWHERE=y`, the AM62L from its defconfig and QEMU from the target block you added, so `saveenv` has nowhere to write and both variables always come from the binary you built. Check your board's `.config` for the same line, and keep it that way: a writable environment is a writable boot command.
+`bootcmd` holds the command autoboot runs, and `preboot` holds the one that defined `zboot`, `a`, `b` and `t`. Both builds end up with `CONFIG_ENV_IS_NOWHERE=y`, QEMU from the target block you added and the AM62L from its defconfig, so `saveenv` has nowhere to write and both variables always come from the binary you built. Check your board's `.config` for the same line, and keep it that way: a writable environment is a writable boot command.
 
 {{% notice Warning %}}
 Don't enable `CONFIG_ENV_IS_IN_FAT`, a development convenience that stores the environment in `uboot.env` on the boot media: a saved environment overrides `bootcmd` and `preboot`, so anyone with the card can skip the check.
@@ -49,7 +49,7 @@ Every target-specific value sits in the `# Target values` block of your environm
 - `UBOOT_SRC`, `CROSS` and `UBOOT_CC` point at the U-Boot source and the compiler that builds it, with `SDK`, `PREBUILT` and `SYSROOT` added when they come from a vendor SDK, as on the AM62L.
 - `BOOT_IMG` is the boot volume `mcopy` writes into: the card image on the EVM, the disk image in QEMU, each with the `@@` offset of its FAT partition.
 
-Two things sit outside the environment file. The `make` line that builds U-Boot takes whatever the target's tree expects: `BL1`, `BL31`, `TEE` and `BINMAN_INDIRS` on the AM62L, `EXT_DTB` in QEMU, and the tree names its own outputs, often `u-boot.img` or `u-boot.itb` plus an SPL file. The boot page follows the target's own media, switches and console.
+Two things sit outside the environment file. The `make` line that builds U-Boot takes whatever the target's tree expects: `EXT_DTB` in QEMU, and `BL1`, `BL31`, `TEE` and `BINMAN_INDIRS` on the AM62L, and the tree names its own outputs, often `u-boot.img` or `u-boot.itb` plus an SPL file. The boot page follows the target's own media, switches and console.
 
 The last difference is how the key reaches the control device tree. `CONFIG_DEVICE_TREE_INCLUDES` works on any board that builds that tree from source (`CONFIG_OF_SEPARATE=y` or `CONFIG_OF_EMBED=y`), as the AM62L does. A board that takes its device tree from a prior stage (`CONFIG_OF_BOARD=y`) has no tree of its own to add a node to; the QEMU option shows the way around it, merging `signature.dtsi` into a dump of that tree and building with `EXT_DTB=`.
 

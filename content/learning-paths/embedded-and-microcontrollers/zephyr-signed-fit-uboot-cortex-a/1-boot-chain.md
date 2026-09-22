@@ -1,6 +1,6 @@
 ---
 title: Understand where Zephyr sits in the Cortex-A boot chain
-description: Learn why Zephyr on a Cortex-A processor is a payload that U-Boot can verify, what a FIT image contains, and how a Cortex-A boot chain hands control to it, on a TI AM62L EVM or in QEMU.
+description: Learn why Zephyr on a Cortex-A processor is a payload that U-Boot can verify, what a FIT image contains, and how a Cortex-A boot chain hands control to it, in QEMU and on a TI AM62L EVM.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -13,7 +13,7 @@ On a microcontroller (MCU), Zephyr runs first, so secure boot means adding a boo
 
 U-Boot checks images packed with their signature into a FIT (Flattened Image Tree). Signed FIT images are documented for Linux, and secure boot for Zephyr is documented for Cortex-M; this Learning Path covers Zephyr signed on a Cortex-A.
 
-Everything except the target setup works on any Cortex-A board that runs U-Boot. You can follow this Learning Path on a TI AM62L EVM (evaluation module) or, with no hardware at all, in QEMU; the next section compares them, and the few steps that differ are in tabs.
+Everything except the target setup works on any Cortex-A board that runs U-Boot. This Learning Path is written for QEMU first, so you can follow every step with no hardware at all, and then shows the same work on a TI AM62L EVM (evaluation module); the next section compares them, and the few steps that differ are in tabs.
 
 ## The boot chain on a Cortex-A board
 
@@ -25,27 +25,22 @@ The early firmware is usually the SPL (Secondary Program Loader), a small U-Boot
 
 ## Choose your target
 
-Pick one target now. Every page is written for both, and marks the few steps that differ.
+Pick one target now. QEMU is the default and needs nothing but your host; the AM62L EVM shows the same work on real silicon. Every page is written for both, and marks the few steps that differ.
 
-| | AM62L EVM | QEMU |
+| | QEMU | AM62L EVM |
 |---|---|---|
-| Hardware | The board, a micro-SD card and reader, a micro-USB cable, a USB-C PD supply | None |
-| Download | TI Processor SDK, 4.5 GB, unpacks to 11 GB | U-Boot source, 32 MB |
-| Stages before U-Boot | Boot ROM, `tiboot3.bin`, `tispl.bin` | None: QEMU starts `u-boot.bin` directly |
-| Zephyr board | `am62l_evm/am62l3/a53` | `qemu_cortex_a53` |
-| Boot media | FAT partition on a micro-SD card, `mmc 1:1` | FAT partition in a 64 MiB disk image, `virtio 0:1` |
-| Console | USB serial at 115200 baud | The terminal you start QEMU in |
+| Hardware | None | The board, a micro-SD card and reader, a micro-USB cable, a USB-C PD supply |
+| Download | U-Boot source, 32 MB | TI Processor SDK, 4.5 GB, unpacks to 11 GB |
+| Stages before U-Boot | None: QEMU starts `u-boot.bin` directly | Boot ROM, `tiboot3.bin`, `tispl.bin` |
+| Zephyr board | `qemu_cortex_a53` | `am62l_evm/am62l3/a53` |
+| Boot media | FAT partition in a 64 MiB disk image, `virtio 0:1` | FAT partition on a micro-SD card, `mmc 1:1` |
+| Console | The terminal you start QEMU in | USB serial at 115200 baud |
 
-QEMU proves the link this Learning Path adds, and nothing underneath it: it has no boot ROM, no vendor firmware and no eFuses, and `u-boot.bin` is handed to the machine on the command line, so nothing authenticates U-Boot itself.
+QEMU proves the link this Learning Path adds, and nothing underneath it: it has no boot ROM, no vendor firmware and no eFuses, and `u-boot.bin` is handed to the machine on the command line, so nothing authenticates U-Boot itself. That is what the board adds. Start in QEMU to learn the mechanism, where every step is reproducible and nothing can go wrong with a cable; move to the AM62L EVM to see the stages underneath, which only real silicon has.
 
 ### The same chain on your target
 
 {{< tabpane-normal >}}
-  {{< tab header="AM62L EVM" >}}
-On the AM62L, the early stages are two files. `tiboot3.bin` holds TF-A's first stage and TIFS (TI Foundational Security), TI's security firmware; `tispl.bin` holds the rest of TF-A, OP-TEE and the SPL. You build them together with `u-boot.img` when you [build U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). The EVM ships as HS-FS, TI's name for the development state described below.
-
-![Diagram of the AM62L boot chain from the boot ROM through tiboot3.bin, tispl.bin and u-boot.img to the Zephyr FIT image. A grey bracket over the three TI files says TI's ROM and TIFS check them, and that on an HS-FS device such as this EVM any key passes. A blue bracket over the FIT says U-Boot checks it with your key. Under each file the diagram names who checks it: the ROM checks tiboot3.bin, TIFS checks tispl.bin and u-boot.img, and U-Boot checks the FIT signature before it starts Zephyr with go.#center](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/images/boot-chain.svg "The same chain on the AM62L, with TI's file names")
-  {{< /tab >}}
   {{< tab header="QEMU" >}}
 QEMU's `virt` machine has no boot ROM and no vendor firmware. It loads the file you pass to `-bios` and starts the Cortex-A53 on it, so the chain is two links long:
 
@@ -54,6 +49,11 @@ QEMU -bios u-boot.bin  ->  U-Boot  ->  Zephyr inside a FIT image
 ```
 
 The U-Boot code that checks the FIT is the same code the board runs. What is missing is everything below it: nothing checks U-Boot itself.
+  {{< /tab >}}
+  {{< tab header="AM62L EVM" >}}
+On the AM62L, the early stages are two files. `tiboot3.bin` holds TF-A's first stage and TIFS (TI Foundational Security), TI's security firmware; `tispl.bin` holds the rest of TF-A, OP-TEE and the SPL. You build them together with `u-boot.img` when you [build U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). The EVM ships as HS-FS, TI's name for the development state described below.
+
+![Diagram of the AM62L boot chain from the boot ROM through tiboot3.bin, tispl.bin and u-boot.img to the Zephyr FIT image. A grey bracket over the three TI files says TI's ROM and TIFS check them, and that on an HS-FS device such as this EVM any key passes. A blue bracket over the FIT says U-Boot checks it with your key. Under each file the diagram names who checks it: the ROM checks tiboot3.bin, TIFS checks tispl.bin and u-boot.img, and U-Boot checks the FIT signature before it starts Zephyr with go.#center](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/images/boot-chain.svg "The same chain on the AM62L, with TI's file names")
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
@@ -81,7 +81,7 @@ The signature does not cover the image bytes: it covers the configuration node p
 
 This Learning Path adds the last link of the chain: U-Boot verifies the Zephyr FIT and only then jumps to Zephyr with `go`, U-Boot's plain jump-to-an-address command.
 
-This Learning Path doesn't fuse your key into the chip, so the SoC stays in its development state, where the ROM and the vendor's firmware accept boot files signed with any key; in QEMU there is no key to fuse and nothing checks U-Boot at all. U-Boot's check of Zephyr is enforced either way. [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) explains the production state.
+In QEMU there is no key to fuse and nothing checks U-Boot at all. On the board, this Learning Path doesn't fuse your key into the chip either, so the SoC stays in its development state, where the ROM and the vendor's firmware accept boot files signed with any key. U-Boot's check of Zephyr is enforced either way. [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) explains the production state.
 
 ## What you've learned and what's next
 

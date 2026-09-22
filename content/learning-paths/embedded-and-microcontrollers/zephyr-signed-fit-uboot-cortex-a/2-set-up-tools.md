@@ -1,6 +1,6 @@
 ---
 title: Set up the host tools for your target
-description: Install the Ubuntu packages, get the U-Boot source and cross compiler for your target, from the vendor SDK for the AM62L EVM or from the U-Boot project for QEMU, and create the environment file that every later page of this Learning Path loads.
+description: Install the Ubuntu packages, get the U-Boot source and cross compiler for your target, from the U-Boot project for QEMU or from the vendor SDK for the AM62L EVM, and create the environment file that every later page of this Learning Path loads.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## What you need
 
-Whichever target you chose, you need a U-Boot source tree that supports it and a cross compiler that builds U-Boot. On the TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) you also need the prebuilt firmware that runs before U-Boot, and all three come in one installer, the TI Processor SDK. For QEMU, the U-Boot release and two Ubuntu packages are everything.
+Whichever target you chose, you need a U-Boot source tree that supports it and a cross compiler that builds U-Boot. For QEMU, the U-Boot release and two Ubuntu packages are everything. On the TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) you also need the prebuilt firmware that runs before U-Boot, and all three come in one installer, the TI Processor SDK.
 
 You build Zephyr with [Workbench for Zephyr](https://z-workbench.com/), an open-source [Visual Studio Code extension](https://marketplace.visualstudio.com/items?itemName=Ac6.zephyr-workbench) by Ac6. Follow [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) up to and including its section *Install the required host tools*, then come back here. Skip its toolchain and workspace steps; you add a Cortex-A toolchain and workspace when you [build the Zephyr image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/3-build-zephyr/).
 
@@ -21,7 +21,7 @@ U-Boot's build and the signing tools need a few packages beyond a normal Zephyr 
 sudo apt install -y build-essential bison flex swig python3-dev python3-setuptools libssl-dev libgnutls28-dev uuid-dev device-tree-compiler openssl mtools dosfstools xz-utils curl picocom
 ```
 
-If you chose QEMU, add the emulator and a cross compiler; the AM62L EVM gets both from the TI SDK instead:
+On QEMU, add the emulator and a cross compiler; the AM62L EVM gets both from the TI SDK instead, so skip this command if you are on the board:
 
 ```bash
 sudo apt install -y qemu-system-arm gcc-aarch64-linux-gnu
@@ -32,6 +32,34 @@ sudo apt install -y qemu-system-arm gcc-aarch64-linux-gnu
 Every path in this Learning Path lives under `$HOME/zephyr-secure-boot`, and every page reads the same variables from a file inside it. Write the file for your target, then load it and create the directories the later pages write into:
 
 {{< tabpane-normal >}}
+  {{< tab header="QEMU" >}}
+```bash
+mkdir -p $HOME/zephyr-secure-boot
+cat > $HOME/zephyr-secure-boot/env-qemu.sh <<'EOF'
+export WORK=$HOME/zephyr-secure-boot
+
+# Target values
+export BOARD=qemu_cortex_a53                  # Zephyr board identifier
+export ZEPHYR_ADDR=0x40000000                 # Zephyr link address, FIT load and go target
+export FIT_ADDR=0x48000000                    # where U-Boot loads the FIT, clear of ZEPHYR_ADDR
+export BOOT_DEV="virtio 0:1"                  # U-Boot device and partition that hold the files
+export UBOOT_DEFCONFIG=qemu_arm64_defconfig   # the target's U-Boot configuration
+
+# No vendor SDK: U-Boot from the U-Boot project, cross compiler from Ubuntu
+export UBOOT_SRC=$WORK/u-boot-2025.07
+export CROSS=aarch64-linux-gnu-
+export UBOOT_CC="${CROSS}gcc"
+
+# Your build outputs: U-Boot build, signing keys, signed FITs, and the boot volume
+export UBOOT_OUT=$WORK/uboot-build
+export KEYS=$WORK/keys
+export FIT=$WORK/fit
+export BOOT_IMG=$WORK/disk.img@@1048576
+EOF
+source $HOME/zephyr-secure-boot/env-qemu.sh
+mkdir -p $KEYS $FIT
+```
+  {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
 ```bash
 mkdir -p $HOME/zephyr-secure-boot
@@ -63,34 +91,6 @@ source $HOME/zephyr-secure-boot/env-am62l.sh
 mkdir -p $KEYS $FIT
 ```
   {{< /tab >}}
-  {{< tab header="QEMU" >}}
-```bash
-mkdir -p $HOME/zephyr-secure-boot
-cat > $HOME/zephyr-secure-boot/env-qemu.sh <<'EOF'
-export WORK=$HOME/zephyr-secure-boot
-
-# Target values
-export BOARD=qemu_cortex_a53                  # Zephyr board identifier
-export ZEPHYR_ADDR=0x40000000                 # Zephyr link address, FIT load and go target
-export FIT_ADDR=0x48000000                    # where U-Boot loads the FIT, clear of ZEPHYR_ADDR
-export BOOT_DEV="virtio 0:1"                  # U-Boot device and partition that hold the files
-export UBOOT_DEFCONFIG=qemu_arm64_defconfig   # the target's U-Boot configuration
-
-# No vendor SDK: U-Boot from the U-Boot project, cross compiler from Ubuntu
-export UBOOT_SRC=$WORK/u-boot-2025.07
-export CROSS=aarch64-linux-gnu-
-export UBOOT_CC="${CROSS}gcc"
-
-# Your build outputs: U-Boot build, signing keys, signed FITs, and the boot volume
-export UBOOT_OUT=$WORK/uboot-build
-export KEYS=$WORK/keys
-export FIT=$WORK/fit
-export BOOT_IMG=$WORK/disk.img@@1048576
-EOF
-source $HOME/zephyr-secure-boot/env-qemu.sh
-mkdir -p $KEYS $FIT
-```
-  {{< /tab >}}
 {{< /tabpane-normal >}}
 
 Only the `# Target values` block and the paths under it depend on the target; for another board, copy `env-am62l.sh`, change those, and leave the rest as it is. [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) says where each value comes from. The variables live only in the shell that loaded them, so every later page starts by loading your file again.
@@ -98,6 +98,38 @@ Only the `# Target values` block and the paths under it depend on the target; fo
 ## Get the U-Boot source and the cross compiler
 
 {{< tabpane-normal >}}
+  {{< tab header="QEMU" >}}
+There is no vendor SDK. Download the U-Boot release from the U-Boot project and unpack it into your working directory; the archive is about 32 MB:
+
+```bash
+curl -L -o $WORK/u-boot-2025.07.tar.bz2 https://ftp.denx.de/pub/u-boot/u-boot-2025.07.tar.bz2
+tar -xf $WORK/u-boot-2025.07.tar.bz2 -C $WORK
+ls -d $UBOOT_SRC
+```
+
+The expected output is:
+
+```output
+/home/user/zephyr-secure-boot/u-boot-2025.07
+```
+
+The source stays unpatched: the key and the boot command are configuration. Check that the compiler you installed above runs:
+
+```bash
+${CROSS}gcc --version
+```
+
+The output is similar to:
+
+```output
+aarch64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+...
+```
+
+`qemu-system-aarch64 --version` prints the emulator's version; this Learning Path uses only long-standing QEMU options, so any recent version works.
+
+There is no card image to download: you build a 64 MiB disk image from nothing when you [boot the target](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-target/).
+  {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
 The U-Boot source, the firmware that runs before U-Boot and the cross compiler all come from the TI Processor SDK Linux for AM62Lx; you use nothing from Linux itself. The installer is 4.5 GB and unpacks to 11 GB. Download it from the [TI download page](https://www.ti.com/tool/download/AM62L-LINUX-SDK/12.01.00.05.03):
 
@@ -134,38 +166,6 @@ The boot ROM only accepts a card laid out the way it expects, so you start from 
 ```bash
 curl -L -o $WORK/tisdk-default-image.wic.xz https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-YjEeNKJJjt/12.01.00.05.03/tisdk-default-image-am62lxx-evm-12.01.00.05.03.rootfs.wic.xz
 ```
-  {{< /tab >}}
-  {{< tab header="QEMU" >}}
-There is no vendor SDK. Download the U-Boot release from the U-Boot project and unpack it into your working directory; the archive is about 32 MB:
-
-```bash
-curl -L -o $WORK/u-boot-2025.07.tar.bz2 https://ftp.denx.de/pub/u-boot/u-boot-2025.07.tar.bz2
-tar -xf $WORK/u-boot-2025.07.tar.bz2 -C $WORK
-ls -d $UBOOT_SRC
-```
-
-The expected output is:
-
-```output
-/home/user/zephyr-secure-boot/u-boot-2025.07
-```
-
-The source stays unpatched: the key and the boot command are configuration. Check that the compiler you installed above runs:
-
-```bash
-${CROSS}gcc --version
-```
-
-The output is similar to:
-
-```output
-aarch64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
-...
-```
-
-`qemu-system-aarch64 --version` prints the emulator's version; this Learning Path uses only long-standing QEMU options, so any recent version works.
-
-There is no card image to download: you build a 64 MiB disk image from nothing when you [boot the target](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-target/).
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
