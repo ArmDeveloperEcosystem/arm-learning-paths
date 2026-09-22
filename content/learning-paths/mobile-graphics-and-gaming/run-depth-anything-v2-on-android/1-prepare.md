@@ -11,7 +11,9 @@ layout: learningpathall
 
 The [Arm AI Portal](https://developer.arm.com/ai/models) provides a catalog of AI models across different runtimes, use cases, optimization profiles, and Arm-based targets. It includes benchmarking and compatibility information, code examples, and deployment guidance.
 
-You'll use an application called Image Analysis to run Depth Anything V2 Small, a monocular depth-estimation model from the Arm AI Portal, on a physical Arm-based Android phone. The application includes a validated ExecuTorch adapter that prepares the image, runs the model, validates its relative-disparity output, and renders a grayscale depth map.
+You'll use an application called Image Analysis to run Depth Anything V2 Small on a physical Arm-based Android phone. Depth Anything V2 Small is a monocular depth-estimation model from the Arm AI Portal.
+
+The application includes a validated ExecuTorch adapter. The adapter prepares the image, runs the model, validates its relative-disparity output, and renders a grayscale depth map.
 
 ## Check the existing development tools
 

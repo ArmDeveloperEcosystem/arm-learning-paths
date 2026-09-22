@@ -44,7 +44,7 @@ The Android adapter follows the model card's fixed contract:
 | Output | Requires one finite `float32 [1, 518, 686]` relative-disparity tensor |
 | Render | Min-max normalizes each result to `[0, 255]` and resizes it to the decoded preview dimensions with bilinear filtering |
 
-If the output is constant, the adapter renders a black map instead of dividing by zero. It rejects an incorrect shape, dtype, missing XNNPACK declaration, or non-finite value.
+If the output is constant, the adapter renders a black map instead of dividing by zero. It rejects an incorrect shape, `dtype`, missing XNNPACK declaration, or non-finite value.
 
 ## Validate input-dependent results
 
@@ -60,4 +60,4 @@ Choose a second image with a different scene and run depth estimation again. Con
 
 You've run Depth Anything V2 Small on an Arm-based Android phone and generated and validated input-dependent relative-disparity maps.
 
-You can extend the workflow described in the Learning Path to deploy monocular depth estimation models from Arm AI Portal locally for your own use cases. 
+You can extend this workflow to deploy monocular depth estimation models from the Arm AI Portal locally for your own use cases.

@@ -50,7 +50,9 @@ py -m venv .hf-venv
   {{< /tab >}}
 {{< /tabpane >}}
 
-The commands invoke the virtual environment's Python executable directly, so you don't need to activate the environment or change the PowerShell script-execution policy. If Python reports that `venv` is unavailable on Debian or Ubuntu, install the `python3-venv` package and rerun the command.
+The commands invoke the virtual environment's Python executable directly, so you don't need to activate the environment or change the PowerShell script-execution policy.
+
+If Python reports that `venv` is unavailable on Debian or Ubuntu, install the `python3-venv` package and rerun the command.
 
 ## Build and install Image Analysis
 

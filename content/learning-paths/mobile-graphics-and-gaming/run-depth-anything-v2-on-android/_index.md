@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for Android and machine learning develope
 learning_objectives:
     - Prepare the Android command-line tools and connect an Arm-based Android phone.
     - Download and run the Depth Anything V2 Small INT8 ExecuTorch model from the Arm AI Portal.
-    - Understand the model's fixed image preprocessing and relative-disparity output.
+    - Inspect the model's fixed image preprocessing and relative-disparity output.
     - Validate input-dependent relative-disparity maps across two images.
 
 prerequisites:
