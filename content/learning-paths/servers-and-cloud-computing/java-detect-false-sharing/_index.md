@@ -1,5 +1,5 @@
 ---
-title: Detect and resolve false sharing in Java on Arm
+title: Detect and resolve false sharing in Java on Arm Neoverse
 
 minutes_to_complete: 30
 
