@@ -122,7 +122,7 @@ chmod +x gradlew
 
 You don't need to install Gradle separately because the repository includes the wrapper.
 
-Install the APK and start Vision Chat with the commands used on every operating system:
+Install the APK and start Vision Chat with the following commands:
 
 ```console
 adb install -r app/build/outputs/apk/debug/app-debug.apk

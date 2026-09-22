@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## How Vision Chat works
 
-`MainActivity.java` connects the Android document pickers, selected image, prompt, model package, and result views. It moves model import and inference off the main Android user-interface thread so the screen remains responsive while files are copied or the model runs.
+`MainActivity.java` connects the Android document pickers, selected image, prompt, model package, and result views. It moves model import and inference off the main Android user-interface thread so that the screen remains responsive while files are copied or the model runs.
 
 Vision Chat supports one model package ZIP. The archive contains two GGUF files
 because llama.cpp separates the language model from the vision encoder and
@@ -56,7 +56,7 @@ The descriptor is:
 
 `ModelPackageImporter.java` receives one URI from Android's document picker. It
 checks the ZIP filename and rejects nested, compressed, duplicate, or unexpected
-entries. During extraction it verifies each file's size and SHA-256 hash against
+entries. During extraction, it verifies each file's size and SHA-256 hash against
 the manifest, then checks the `GGUF` magic bytes.
 
 The importer writes the files to temporary application-private storage. It
@@ -112,7 +112,7 @@ set(GGML_CPU_ARM_ARCH "armv8.6-a+dotprod+i8mm" CACHE STRING "" FORCE)
 set(GGML_CPU_KLEIDIAI ON CACHE BOOL "" FORCE)
 ```
 
-The compile-time target allows ggml to use Dot Product and Int8 Matrix Multiplication instructions. This APK therefore needs a phone that reports `asimddp` and `i8mm` CPU features.
+The compile-time target allows `ggml` to use Dot Product and Int8 Matrix Multiplication instructions. This APK therefore needs a phone that reports `asimddp` and `i8mm` CPU features.
 
 KleidiAI builds its SME2, SME, I8MM, and Dot Product microkernels as separate
 implementations in the same APK. When the model loads, llama.cpp reads the CPU
@@ -122,7 +122,7 @@ the vision encoder and projector use KleidiAI SME2 kernels.
 
 The Q4_K_M language model contains Q4_K and Q6_K matrices. These use llama.cpp's
 optimized Arm repack kernels rather than the KleidiAI Q8_0 path. For this model,
-SME2 primarily accelerates image encoding and projection; it doesn't replace
+SME2 primarily accelerates image encoding and projection. It doesn't replace
 every kernel used during token generation.
 
 The application sends llama.cpp's kernel-selection messages to Android's log.

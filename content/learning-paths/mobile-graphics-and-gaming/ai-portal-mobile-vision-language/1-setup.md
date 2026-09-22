@@ -43,7 +43,7 @@ $PSVersionTable.PSVersion
   {{< /tab >}}
 {{< /tabpane >}}
 
-Install any missing host tools before continuing. The Java compiler version should be 17 or later.
+Install any missing host tools before continuing. Ensure that the Java compiler version is 17 or later.
 
 {{% notice Note %}}
 You can open the cloned project in Android Studio and run it on a connected phone or an Android Virtual Device (AVD). If you use an AVD, select a recent system image that supports the application's `arm64-v8a` native libraries. An emulator is useful for functional testing, but its performance isn't representative of a physical Arm-based phone.

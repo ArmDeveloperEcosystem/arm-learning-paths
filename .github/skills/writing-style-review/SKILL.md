@@ -118,6 +118,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Capitalize `Learning Path`.
 - Use `Azure Cobalt`, `Google Axion`, and `AWS Graviton` as processor names, not VM names. `Graviton-based instances`, not `Graviton instances`, for example.
 - Do not use bold or italics for product names such as LiteRT, XNNPACK, KleidiAI, and SME2 unless they are headings or UI labels.
+- Treat llama.cpp as a product name in prose. Write llama.cpp without code, bold, or italic formatting unless it appears in a command, code sample, file path, or URL.
 
 ## Avoid AI-sounding prose
 
