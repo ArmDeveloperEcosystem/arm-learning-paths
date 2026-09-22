@@ -100,7 +100,7 @@ modes, but it's not an end-to-end application latency measurement.
 ## Review what you tested
 
 You created a Java workload in which two threads update separate
-`volatile long` fields, used JOL to inspect their layout, and used Perf C2C to
+`volatile long` fields, used Java Object Layout (JOL) to inspect their layout, and used Perf C2C to
 observe inter-core sharing. You then added `@Contended` to place the fields in
 separate contention groups and inspected the padded layout.
 
