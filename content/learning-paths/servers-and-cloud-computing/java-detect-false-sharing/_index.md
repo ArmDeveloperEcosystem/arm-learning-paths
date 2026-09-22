@@ -91,10 +91,6 @@ operatingsystems:
 
 further_reading:
   - resource:
-      title: Attribute contended cache lines to Java heap objects
-      link: /learning-paths/servers-and-cloud-computing/java-attribute-cache-lines/
-      type: learning-path
-  - resource:
       title: JEP 142 - Reduce cache contention on specified fields
       link: https://openjdk.org/jeps/142
       type: documentation

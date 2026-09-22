@@ -7,7 +7,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Add `@Contended` groups to the example
+## Add @Contended groups to the example
 
 HotSpot's `@Contended` annotation asks the Java Virtual Machine (JVM) to isolate an annotated class or
 field group by inserting padding into the object layout. Fields with different
@@ -162,7 +162,7 @@ sudo perf c2c report --stdio -i padded.data | tee padded-c2c.txt
 ```
 
 Confirm that the recorded payload prints `mode=padded` and
-`sum=1000000000`. You created `baseline-c2c.txt` in the previous step, and `padded-c2c.txt` using the preceding command. 
+`sum=1000000000`. You created `baseline-c2c.txt` in the previous section, and `padded-c2c.txt` using the preceding command. 
 
 Use the same `awk` match for both reports to display their highest-ranked cache lines together:
 
@@ -237,7 +237,9 @@ padding annotation for this class.
 
 ## What you've accomplished and what's next
 
-You have separated the fields with `@Contended`, verified the padded layout,
+You've separated the fields with `@Contended`, verified the padded layout,
 and compared the highest-ranked lines in the baseline and padded Perf C2C
-reports. Next, use repeated timing pairs to assess the runtime effect while
+reports. 
+
+Next, you'll use repeated timing pairs to assess the runtime effect while
 accounting for measurement variability.

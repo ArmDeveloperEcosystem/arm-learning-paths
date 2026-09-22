@@ -25,6 +25,7 @@ sudo apt install -y openjdk-21-jdk
 
 Before you run the examples, resolve the absolute path to the Java executable.
 Derive `javac_bin` from the same JDK so the compiler and runtime versions match.
+
 Use the same terminal throughout this Learning Path. If you open a new terminal,
 you'll need to rerun the following commands:
 
@@ -189,7 +190,7 @@ itself hasn't been padded to 16 bytes.
 The two fields are adjacent at offsets 16 and 24. They can occupy one 64-byte
 cache line, although their offsets within the object don't reveal where the
 object was placed relative to a physical cache-line boundary. Your layout can
-differ with the JDK and VM configuration.
+differ with the JDK and virtual machine configuration.
 
 ## Record the baseline with Perf C2C
 
@@ -205,7 +206,7 @@ values indicate that another CPU's cache supplied data. Perf C2C uses this
 evidence to rank cache lines that are likely to be shared between CPUs.
 
 {{% notice Note %}}
-On Neoverse V2 systems, use Perf 6.13 or later. Earlier versions can record SPE
+On Neoverse V2-based systems, use Perf 6.13 or later. Earlier versions can record SPE
 packets but don't decode Neoverse V2 data-source values into peer-cache hits.
 For other Neoverse processors, confirm that your Perf version supports the
 processor's SPE data-source encoding.

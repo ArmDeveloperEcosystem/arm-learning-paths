@@ -152,16 +152,16 @@ The command prints the cache-line address from the second column and its full
 summary row. If the report isn't sorted by `Peer Snoop`, the first row doesn't necessarily have the highest peer-snoop count.
 
 {{% notice Note %}}
-JOL and Perf provide complementary evidence. JOL shows that `left` and `right`
+Java Object Layout (JOL) and Perf provide complementary evidence. JOL shows that `left` and `right`
 are adjacent within `BaselineCounters`. Perf C2C shows whether accesses to a
 runtime cache line caused inter-core sharing. Neither tool alone proves that a
-specific sampled address belongs to a particular Java object. To correlate a
-Perf C2C cache-line address with a live heap object and its fields, follow
-[Attribute contended cache lines to Java heap objects](/learning-paths/servers-and-cloud-computing/java-attribute-cache-lines/).
+specific sampled address belongs to a particular Java object.
 {{% /notice %}}
 
 ## What you've accomplished and what's next
 
-You have used Perf C2C to identify the highest-ranked shared cache line and
-evaluate its peer-cache evidence. Next, add contention padding to separate the
+You've used Perf C2C to identify the highest-ranked shared cache line and
+evaluate its peer-cache evidence. 
+
+Next, you'll add contention padding to separate the
 two fields and record the padded workload for comparison.

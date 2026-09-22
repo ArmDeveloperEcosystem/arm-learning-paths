@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Measure repeated pairs
 
-Use the dual-mode program to measure repeated pairs. Keep the JDK, logical CPUs,
+Use the dual-mode program to measure repeated pairs. Keep the Java Development Kit (JDK), logical CPUs,
 iteration count, Java Virtual Machine (JVM) flags, and background system load consistent. 
 
 First, run one warm-up pair:
@@ -123,18 +123,19 @@ In the representative Perf C2C results, the highest-ranked line after padding
 contained 4 local peer hits instead of 36. This approximately 89% reduction in
 the top-line peer count is consistent with removing the original false-sharing
 hot spot. The addresses came from separate JVM processes, however, so this
-comparison does not prove that either reported address belonged to the counter
+comparison doesn't prove that either reported address belonged to the counter
 object.
 
 Across the five representative alternating measurement pairs, the median
-worker-phase runtimes were:
+worker-phase runtimes were the following:
 
 - Baseline: 15.5 seconds
 - Padded: 2.9 seconds
 
 For these representative measurements, adding `@Contended` reduced the median
-runtime by 81.5%, making the padded mode approximately 5.42 times faster. The
-program performed the same one billion increments in both modes; separating
+runtime by 81.5%, making the padded mode approximately 5.42 times faster. 
+
+The program performed the same one billion increments in both modes. Separating
 the fields reduced the cache-line ownership transfers that delayed the
 baseline workers.
 
@@ -149,4 +150,4 @@ larger object size, heap occupancy, and possible garbage-collection cost.
 
 You've now compared baseline and padded Java worker-phase runtimes. 
 
-You can extend this workflow to real applications to add padding for runtime improvements. 
+You can extend this workflow to real applications to add padding and measure runtime improvements. 
