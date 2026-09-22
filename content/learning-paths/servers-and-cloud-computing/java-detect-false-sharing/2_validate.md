@@ -36,6 +36,7 @@ javac_bin="$(dirname "$java_bin")/javac"
 "$java_bin" -version
 "$javac_bin" -version
 ```
+
 {{% notice Note %}}
 Using the absolute path is important when Perf starts the payload with `sudo`,
 because the restricted `sudo` `PATH` might not contain your Java installation.
@@ -124,7 +125,7 @@ the current shell's permitted affinity list:
 taskset -pc $$
 ```
 
-If needed, replace `0,1` with two online CPUs from the reported list. 
+If needed, replace `0,1` with two online CPUs from the reported list.
 
 Run the baseline:
 
@@ -132,7 +133,7 @@ Run the baseline:
 taskset -c 0,1 "$java_bin" FalseSharingDemo baseline
 ```
 
-The output includes `mode=baseline`, elapsed seconds, a sum, and the process ID:
+The output is similar to:
 
 ```output
 mode=baseline seconds=45.123456 sum=1000000000 pid=12345
@@ -249,6 +250,6 @@ before `sudo` runs Perf, avoiding the restricted `sudo` `PATH`.
 
 ## What you've accomplished and what's next
 
-You've created a baseline example, inspected its layout with JOL, and recorded the baseline with Perf C2C. 
+You've created a baseline example, inspected its layout with JOL, and recorded the baseline with Perf C2C.
 
 Next, you'll analyze the recorded `baseline.data` file.

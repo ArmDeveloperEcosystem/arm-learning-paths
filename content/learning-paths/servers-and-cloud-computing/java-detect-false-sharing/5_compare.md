@@ -10,7 +10,7 @@ layout: learningpathall
 ## Measure repeated pairs
 
 Use the dual-mode program to measure repeated pairs. Keep the Java Development Kit (JDK), logical CPUs,
-iteration count, Java Virtual Machine (JVM) flags, and background system load consistent. 
+iteration count, Java Virtual Machine (JVM) flags, and background system load consistent.
 
 First, run one warm-up pair:
 
@@ -22,7 +22,7 @@ for mode in baseline padded; do
 done
 ```
 
-Then, collect five measured pairs, alternating which mode runs first. 
+Then, collect five measured pairs, alternating which mode runs first.
 
 Save the program output so that the individual results remain available:
 
@@ -48,7 +48,7 @@ Run alternating baseline and padded pairs. Don't draw a conclusion from one
 timing comparison.
 {{% /notice %}}
 
-Confirm that every line has the expected mode and `sum=1000000000`. 
+Confirm that every line has the expected mode and `sum=1000000000`.
 
 Display the five elapsed values for each mode in ascending order:
 
@@ -70,6 +70,7 @@ for mode in baseline padded; do
       }'
 done
 ```
+
 The output is similar to:
 
 ```output
@@ -133,7 +134,7 @@ worker-phase runtimes were the following:
 - Padded: 2.9 seconds
 
 For these representative measurements, adding `@Contended` reduced the median
-runtime by 81.5%, making the padded mode approximately 5.42 times faster. 
+runtime by 81.5%, making the padded mode approximately 5.42 times faster.
 
 The program performed the same one billion increments in both modes. Separating
 the fields reduced the cache-line ownership transfers that delayed the
@@ -146,8 +147,8 @@ before adding `@Contended`, and balance any runtime improvement against the
 larger object size, heap occupancy, and possible garbage-collection cost.
 
 
-## What you've accomplished 
+## What you've accomplished
 
-You've now compared baseline and padded Java worker-phase runtimes. 
+You've now compared baseline and padded Java worker-phase runtimes.
 
-You can extend this workflow to real applications to add padding and measure runtime improvements. 
+You can extend this workflow to real applications to add padding and measure runtime improvements.

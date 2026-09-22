@@ -13,7 +13,7 @@ Caches transfer data between CPU cores and maintain coherence at the granularity
 
 When one core writes to a location, the coherence
 protocol generally grants it exclusive ownership of the complete line and
-invalidates copies held by other cores. A 64-byte cache line is common on Arm Neoverse-based  servers, but the line size is implementation-dependent.
+invalidates copies held by other cores. A 64-byte cache line is common on Arm Neoverse-based servers, but the line size is implementation-dependent.
 
 Processors maintain cache coherence for complete cache lines rather than
 individual Java objects or fields. The Java Virtual Machine (JVM) determines
@@ -42,11 +42,11 @@ The following factors influence the result:
 
 - Object headers
 - Inheritance
-- Compressed references 
+- Compressed references
 - Field layout
 - Object alignment
 - Allocation order
-- Garbage collection 
+- Garbage collection
 
 ## Understand the performance effect
 
@@ -58,11 +58,11 @@ multithreaded throughput.
 
 Field adjacency makes false sharing possible, but it doesn't prove that false sharing occurs.
 Object placement, thread placement, workload duration, and the processor all
-affect the observed behavior. 
+affect the observed behavior.
 
 ## What you've learned and what's next
 
-You've now learned about cache-line and performance effects of Java false sharing. 
+You've now learned about cache-line and performance effects of Java false sharing.
 
 Next, you'll create the baseline example and use Java Object Layout (JOL)
 to inspect field offsets and Perf C2C to observe baseline cache-line sharing.

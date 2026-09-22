@@ -1,6 +1,6 @@
 ---
 title: Detect and resolve false sharing in Java on Arm
-    
+
 minutes_to_complete: 30
 
 who_is_this_for: Java developers who need to understand sub-optimal multithreaded scaling caused by cache-line contention on multi-core Arm servers.
@@ -16,7 +16,6 @@ learning_objectives:
 prerequisites:
   - Access to an Arm Neoverse-based Linux system with Arm Statistical Profiling Extension (SPE) enabled and exposed to Perf
   - Familiarity with compiling and running Java applications
-  - A working Java runtime installed on the target machine
   - Permission to use Perf on the target system
 
 # START generated_summary_faq

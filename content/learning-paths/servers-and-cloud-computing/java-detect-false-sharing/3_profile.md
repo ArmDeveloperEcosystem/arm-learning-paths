@@ -15,7 +15,7 @@ Start by analyzing the report statistics:
 sudo perf c2c report --stats -i baseline.data
 ```
 
-The following sections show representative output from an Arm Neoverse system:
+The output is similar to:
 
 ```output
 =================================================
@@ -82,7 +82,7 @@ Confirm the following:
 
 - The Java payload ran
 - The workload lasted long enough
-- the SPE kernel driver is available
+- The SPE kernel driver is available
 - Perf has permission to record
 - The installed Perf version decodes data sources for the processor
 {{% /notice %}}
@@ -116,12 +116,12 @@ properties:
 - The accesses occur while `left-writer` and `right-writer` run.
 
 Don't expect the exact addresses, counts, or percentages to match another
-machine. These values are all affected by SPE sampling, scheduling, object placement, and workload duration. 
+machine. These values are all affected by SPE sampling, scheduling, object placement, and workload duration.
 
 `--show-all` can reveal sampled addresses without creating peer snoop percentages. Absent peer percentages usually mean that Perf didn't
 decode the required data-source information.
 
-You can extract the highest contended cache line address
+You can extract the most highly contended cache line address
 and complete summary row without reading the full report:
 
 ```bash
@@ -161,7 +161,7 @@ specific sampled address belongs to a particular Java object.
 ## What you've accomplished and what's next
 
 You've used Perf C2C to identify the highest-ranked shared cache line and
-evaluate its peer-cache evidence. 
+evaluate its peer-cache evidence.
 
 Next, you'll add contention padding to separate the
 two fields and record the padded workload for comparison.

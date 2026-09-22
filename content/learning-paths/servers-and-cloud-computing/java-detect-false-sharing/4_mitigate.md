@@ -162,7 +162,7 @@ sudo perf c2c report --stdio -i padded.data | tee padded-c2c.txt
 ```
 
 Confirm that the recorded payload prints `mode=padded` and
-`sum=1000000000`. You created `baseline-c2c.txt` in the previous section, and `padded-c2c.txt` using the preceding command. 
+`sum=1000000000`. The previous page created `baseline-c2c.txt`, and the preceding command creates `padded-c2c.txt`.
 
 Use the same `awk` match for both reports to display their highest-ranked cache lines together:
 
@@ -204,7 +204,7 @@ padded report row:       0  0xffff005e4e9c5b00     0      14    9.30%        4  
 ```
 
 Confirm that both reports say `Cachelines sort on: Peer Snoop` before making
-the comparison. 
+the comparison.
 
 You can interpret the example output as follows:
 
@@ -239,7 +239,7 @@ padding annotation for this class.
 
 You've separated the fields with `@Contended`, verified the padded layout,
 and compared the highest-ranked lines in the baseline and padded Perf C2C
-reports. 
+reports.
 
 Next, you'll use repeated timing pairs to assess the runtime effect while
 accounting for measurement variability.
