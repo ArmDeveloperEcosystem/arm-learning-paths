@@ -162,7 +162,7 @@ sudo perf c2c report --stdio -i padded.data | tee padded-c2c.txt
 ```
 
 Confirm that the recorded payload prints `mode=padded` and
-`sum=1000000000`. The previous page created `baseline-c2c.txt`, and the preceding command creates `padded-c2c.txt`.
+`sum=1000000000`. 
 
 Use the same `awk` match for both reports to display their highest-ranked cache lines together:
 

@@ -15,7 +15,7 @@ Start by analyzing the report statistics:
 sudo perf c2c report --stats -i baseline.data
 ```
 
-The output is similar to:
+Representative output from an Arm Neoverse-based system is similar to:
 
 ```output
 =================================================
