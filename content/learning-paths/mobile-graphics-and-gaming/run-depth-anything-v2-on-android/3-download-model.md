@@ -76,4 +76,6 @@ The `ls` output shows the model in `files/models/depth-anything-v2-small-int8-xn
 
 ## What you've accomplished and what's next
 
-You've downloaded the exact model and placed it in application-private storage. Next, you'll generate and validate relative-disparity maps.
+You've downloaded the exact model and placed it in application-private storage. 
+
+Next, you'll generate and validate relative-disparity maps.

@@ -15,7 +15,7 @@ You'll use an application called Image Analysis to run Depth Anything V2 Small, 
 
 ## Check the existing development tools
 
-Image Analysis builds with Android SDK 35 and Java 17. Before installing anything, display the versions already available on your development computer:
+Image Analysis builds with Android SDK 35 and Java 17. Before installing anything, list the versions already available on your development computer:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS" language="bash" >}}
@@ -47,7 +47,7 @@ winget --version
 
 You need Git, Python 3 with `pip`, and Java Development Kit (JDK) 17 or later. You also need Homebrew on macOS, `curl` on Linux, or `winget` on Windows to install Android CLI. A `command not found` or `is not recognized` message identifies a host tool you need to install.
 
-Install any missing host prerequisites before continuing, then rerun the version checks. Ensure `java` and `javac` report version 17 or later. The application configures Gradle to provision its JDK 17 build toolchain automatically during the first build.
+Install any missing host prerequisites before continuing, then rerun the version checks. Ensure that `java` and `javac` report version 17 or later. The application configures Gradle to provision its JDK 17 build toolchain automatically during the first build.
 
 ## Install Android CLI
 
@@ -67,7 +67,7 @@ winget install --exact --id Google.AndroidCLI
   {{< /tab >}}
 {{< /tabpane >}}
 
-Close and reopen the terminal after installation if the `android` command isn't immediately available. Then update Android CLI and confirm its version:
+Close and reopen the terminal after installation if the `android` command isn't immediately available. Then, update Android CLI and confirm its version:
 
 ```console
 android update
@@ -76,7 +76,7 @@ android -V
 
 ## Install the Android SDK packages
 
-Set the SDK location, add Platform Tools to `PATH`, and install the packages. Review and accept the Android SDK licenses when prompted.
+Set the SDK location, add `platform-tools` to `PATH`, and install the packages:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS" language="bash" >}}
@@ -108,6 +108,8 @@ android "--sdk=$env:ANDROID_HOME" sdk install `
   {{< /tab >}}
 {{< /tabpane >}}
 
+Review and accept the Android SDK licenses when prompted.
+
 Verify Android CLI, `adb`, Android SDK Platform 35, and Android SDK Build Tools 35.0.0:
 
 {{< tabpane code=true >}}
@@ -133,4 +135,6 @@ The final two checks have no output on macOS or Linux when the directories exist
 
 ## What you've accomplished and what's next
 
-You've verified the host tools and prepared Android CLI, Platform Tools, Android SDK Platform 35, and Android SDK Build Tools 35.0.0. Next, you'll connect an Arm-based Android phone, then build and install Image Analysis.
+You've verified the host tools and prepared Android CLI, Platform Tools, Android SDK Platform 35, and Android SDK Build Tools 35.0.0. 
+
+Next, you'll connect an Arm-based Android phone, then build and install Image Analysis.

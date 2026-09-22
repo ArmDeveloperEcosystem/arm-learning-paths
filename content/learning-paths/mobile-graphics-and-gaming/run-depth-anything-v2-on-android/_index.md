@@ -1,10 +1,6 @@
 ---
 title: Run an Arm AI Portal depth estimation model on Android
 
-draft: true
-cascade:
-    draft: true
-
 description: Run an Arm-optimized Depth Anything V2 Small model locally on an Arm-based Android phone with ExecuTorch and render a relative-disparity map.
 
 minutes_to_complete: 35
@@ -12,10 +8,10 @@ minutes_to_complete: 35
 who_is_this_for: This Learning Path is for Android and machine learning developers who want to run monocular depth estimation locally on an Arm-based Android phone.
 
 learning_objectives:
-    - Prepare the Android command-line tools and connect an Arm-based Android phone
-    - Download and run the Depth Anything V2 Small INT8 ExecuTorch model from the Arm AI Portal
-    - Explain the model's fixed image preprocessing and relative-disparity output
-    - Validate input-dependent relative-disparity maps across two images
+    - Prepare the Android command-line tools and connect an Arm-based Android phone.
+    - Download and run the Depth Anything V2 Small INT8 ExecuTorch model from the Arm AI Portal.
+    - Understand the model's fixed image preprocessing and relative-disparity output.
+    - Validate input-dependent relative-disparity maps across two images.
 
 prerequisites:
     - A macOS, x86_64 Linux, or Windows development computer with Git, Python 3 with `venv` and `pip`, and JDK 17 or later
