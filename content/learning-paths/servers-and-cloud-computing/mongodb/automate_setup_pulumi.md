@@ -8,7 +8,7 @@ weight: 8 # (intro is 1), 2 is first, 3 is second, etc.
 layout: "learningpathall"
 ---
 
-You can automate the MongoDB performance benchmarking setup, along with the YCSB framework and the required infrastructure in AWS using Pulumi.
+This section shows how to use Pulumi to provision the AWS infrastructure for the MongoDB performance-testing environment. It is specific to AWS and does not run the MongoDB benchmarks themselves. Pulumi is not necessary when you already have full access to an Arm server, such as the AGI CPU; in that case, continue with the MongoDB installation and benchmarking sections directly.
 
 [Pulumi](https://www.pulumi.com/) is a multi-language 'Infrastructure as Code' tool. Pulumi is [open source](https://github.com/pulumi/pulumi) and makes it easy to deploy cloud infrastructure.
 
