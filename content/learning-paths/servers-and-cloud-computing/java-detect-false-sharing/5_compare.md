@@ -8,9 +8,10 @@ layout: learningpathall
 
 ## Measure repeated pairs
 
-Use the dual-mode program from the previous step. Keep the JDK, logical CPUs,
-iteration count, JVM flags, and background system load consistent. First run
-one warm-up pair:
+Use the dual-mode program to measure repeated pairs. Keep the JDK, logical CPUs,
+iteration count, Java Virtual Machine (JVM) flags, and background system load consistent. 
+
+First, run one warm-up pair:
 
 ```bash
 for mode in baseline padded; do
@@ -20,8 +21,9 @@ for mode in baseline padded; do
 done
 ```
 
-Then collect five measured pairs, alternating which mode runs first. Save the
-program output so the individual results remain available:
+Then, collect five measured pairs, alternating which mode runs first. 
+
+Save the program output so that the individual results remain available:
 
 ```bash
 : > timings.txt
@@ -41,12 +43,13 @@ done
 ```
 
 {{% notice Note %}}
-Run alternating baseline and padded pairs. Do not draw a conclusion from one
+Run alternating baseline and padded pairs. Don't draw a conclusion from one
 timing comparison.
 {{% /notice %}}
 
-Confirm that every line has the expected mode and `sum=1000000000`. Display
-the five elapsed values for each mode in ascending order:
+Confirm that every line has the expected mode and `sum=1000000000`. 
+
+Display the five elapsed values for each mode in ascending order:
 
 ```bash
 for mode in baseline padded; do
@@ -66,6 +69,7 @@ for mode in baseline padded; do
       }'
 done
 ```
+The output is similar to:
 
 ```output
 baseline: 14.929432 15.045710 15.537969 16.851870 17.709697
@@ -77,7 +81,7 @@ padded median: 2.867552
 
 With five measurements, the third sorted value is the median.
 
-The baseline commonly takes considerably longer because the writers repeatedly
+The baseline usually takes considerably longer because the writers repeatedly
 transfer ownership of their shared cache line. The exact difference depends on
 object placement, scheduling, processor topology, and system noise. If results
 overlap, repeat more pairs and examine their variability before concluding that
@@ -87,6 +91,49 @@ padding helped.
 {{% notice Note %}}
 The reported `seconds=` value comes from `System.nanoTime()` around the worker
 phase. It excludes JVM startup but includes the release of the start latch,
-worker execution, and the joins. It is therefore useful for comparing these two
-modes, but it is not an end-to-end application latency measurement.
+worker execution, and the joins. The value is therefore useful for comparing these two
+modes, but it's not an end-to-end application latency measurement.
 {{% /notice %}}
+
+## Review the measured impact
+
+After padding, the highest-ranked line in the Perf C2C report contained 4
+local peer hits instead of 36. This approximately 89% reduction in the top-line
+peer count is consistent with removing the original false-sharing hot spot.
+The addresses came from separate JVM processes, however, so this comparison
+doesn't prove that either reported address belonged to the counter object.
+
+Across five alternating measurement pairs, the median worker-phase runtimes
+were the following:
+
+- Baseline: 15.5 seconds
+- Padded: 2.9 seconds
+
+For these measurements, adding `@Contended` reduced the median runtime by
+81.5%, making the padded mode approximately 5.42 times faster. 
+
+The program performed the same one billion increments in both modes. Separating the fields
+reduced the cache-line ownership transfers that delayed the baseline workers.
+
+These results apply to this sample, processor, JVM, and test environment.
+Object placement, CPU scheduling, topology, and background activity can change
+the result. In a real application, use repeated measurements and Perf evidence
+before adding `@Contended`. Balance any runtime improvement against the
+larger object size, heap occupancy, and possible garbage-collection cost.
+
+## What you've accomplished 
+
+You've created a Java workload in which two threads update separate
+`volatile long` fields. JOL showed that the baseline fields were adjacent at
+offsets 16 and 24 in a 32-byte object, making it possible for both fields to
+occupy one 64-byte cache line. Perf C2C then provided runtime evidence of inter-core
+sharing: the baseline report's highest-ranked line contained 36 local peer
+hits.
+
+You added `@Contended` to place the two fields in separate contention groups.
+JOL showed that the fields moved to offsets 144 and 280, with 128 bytes of
+padding between them. This prevented the fields from occupying the same
+64-byte cache line, but increased the object size from 32 bytes to 288 bytes.
+The extra 256 bytes per object are the memory-footprint cost of this mitigation.
+
+You can extend this workflow to real applications to add padding for runtime improvements. 

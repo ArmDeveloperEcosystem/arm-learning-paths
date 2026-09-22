@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Check the recorded events
 
-Start with the report statistics:
+Start by analyzing the report statistics:
 
 ```bash
 sudo perf c2c report --stats -i baseline.data
@@ -55,7 +55,7 @@ The following sections show representative output from an Arm Neoverse system:
   Cacheline data grouping           : offset,iaddr
 ```
 
-The most relevant values are:
+The following values are the most relevant:
 
 - `Total records: 1336447`, including `1332642` loads and `3805` stores,
   confirms that Perf sampled the workload.
@@ -64,22 +64,26 @@ The most relevant values are:
   `Load hits on peer cache or nodes: 112` value summarizes those hits across
   the lines classified as shared.
 - `Total Shared Cache Lines: 42` means the recording contains 42 candidate
-  shared lines. It does not mean that every line belongs to
+  shared lines. It doesn't mean that every line belongs to
   `BaselineCounters` or is equally contended.
 - `Store HITs on shared lines: 81` shows that store samples were associated
   with the shared lines. The much larger L1D-hit count describes accesses to
-  those lines, but an L1D hit by itself is not a cache-line ownership transfer.
+  those lines, but an L1D hit by itself isn't a cache-line ownership transfer.
 
 These statistics confirm that the recording contains sharing evidence, but
-they do not identify which of the 42 lines is the baseline counter line. Use
-the detailed report in the next section to find the line with the largest
+they don't identify which of the 42 lines is the baseline counter line. Use
+the detailed report to find the line with the largest
 absolute peer-snoop count and inspect its accesses.
 
 {{% notice Warning %}}
-A zero-event or zero-peer report does not prove that false sharing is absent.
-Confirm that the Java payload ran, the workload lasted long enough, the SPE
-kernel driver is available, Perf has permission to record, and the installed
-Perf version decodes data sources for the processor.
+A zero-event or zero-peer report doesn't prove that false sharing is absent.
+Confirm the following:
+
+- The Java payload ran
+- The workload lasted long enough
+- the SPE kernel driver is available
+- Perf has permission to record
+- The installed Perf version decodes data sources for the processor
 {{% /notice %}}
 
 
@@ -102,8 +106,8 @@ Confirm that the `c2c details` section in the normal Arm report says
 `Cachelines sort on: Peer Snoop`. The first data row in the shared cache-line
 table is then the line with the highest peer-snoop count.
 
-Inspect the extracted line's records, loads, stores, sampled CPUs, offsets, and
-access symbols in the full report. A strong baseline candidate has all of these
+Inspect the extracted line's records, loads, stores, and sampled CPUs. Also note the offsets and
+access symbols in the full report. A strong baseline candidate has all of the following
 properties:
 
 - Two or more CPUs access the same cache line.
@@ -111,10 +115,10 @@ properties:
 - The sharing count is large relative to other lines in the same recording.
 - The accesses occur while `left-writer` and `right-writer` run.
 
-Do not expect the exact addresses, counts, or percentages to match another
-machine. SPE sampling, scheduling, object placement, and workload duration all
-affect them. `--show-all` can reveal sampled addresses without creating peer
-snoop percentages; absent peer percentages usually mean that Perf did not
+Don't expect the exact addresses, counts, or percentages to match another
+machine. These values are all affected by SPE sampling, scheduling, object placement, and workload duration. 
+
+`--show-all` can reveal sampled addresses without creating peer snoop percentages. Absent peer percentages usually mean that Perf didn't
 decode the required data-source information.
 
 You can extract the highest contended cache line address
@@ -145,14 +149,19 @@ Report row:       0         0x101019100     0   60983   32.14%       36       36
 ```
 
 The command prints the cache-line address from the second column and its full
-summary row. If the report is not sorted by `Peer Snoop`, the first row does
-not necessarily have the highest peer-snoop count.
+summary row. If the report isn't sorted by `Peer Snoop`, the first row doesn't necessarily have the highest peer-snoop count.
 
 {{% notice Note %}}
 JOL and Perf provide complementary evidence. JOL shows that `left` and `right`
-are adjacent within `BaselineCounters`; Perf C2C shows whether accesses to a
+are adjacent within `BaselineCounters`. Perf C2C shows whether accesses to a
 runtime cache line caused inter-core sharing. Neither tool alone proves that a
 specific sampled address belongs to a particular Java object. To correlate a
 Perf C2C cache-line address with a live heap object and its fields, follow
 [Attribute contended cache lines to Java heap objects](/learning-paths/servers-and-cloud-computing/java-attribute-cache-lines/).
 {{% /notice %}}
+
+## What you've accomplished and what's next
+
+You've now analyzed `baseline.data` to identify the contended cache line.
+
+Next, you'll add the `@Contended` annotation and verify contention padding. 

@@ -1,9 +1,5 @@
 ---
-title: Detect and resolve false sharing in Java
-
-draft: true
-cascade:
-    draft: true
+title: Detect and resolve false sharing in Java on Arm
     
 minutes_to_complete: 30
 
@@ -12,13 +8,13 @@ who_is_this_for: Java developers who need to understand sub-optimal multithreade
 description: Build a Java false-sharing example, identify a contended cache line with JOL and Perf C2C, apply @Contended padding, and compare runtimes.
 
 learning_objectives:
-  - Explain why independent Java fields or objects can contend for one cache line
-  - Inspect adjacent Java fields with JOL and record their sharing with Perf C2C
-  - Identify a highly contended cache line in Perf C2C output
-  - Apply @Contended, verify the padded layout, and compare repeated runtimes
+  - Identify why independent Java fields or objects can contend for one cache line.
+  - Inspect adjacent Java fields with JOL and record their sharing with Perf C2C.
+  - Identify a highly contended cache line in Perf C2C output.
+  - Apply @Contended, verify the padded layout, and compare repeated runtimes.
 
 prerequisites:
-  - Access to an Arm Neoverse Linux system that exposes SPE to perf
+  - Access to an Arm Neoverse Linux system that exposes Arm Statistical Profiling Extension (SPE) to perf
   - Familiarity with compiling and running Java applications
   - A working Java runtime installed on the target machine
   - Permission to use perf on the target system
@@ -27,8 +23,8 @@ author:
   - John O'Hara
 
 generate_summary_faq: true
-rerun_summary: false
-rerun_faqs: false
+rerun_summary: true
+rerun_faqs: true
 
 skilllevels: Advanced
 subjects: Performance and Architecture
