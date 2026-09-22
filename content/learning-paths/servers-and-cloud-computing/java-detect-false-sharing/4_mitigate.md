@@ -115,12 +115,8 @@ Confirm that the output contains `mode=padded` and `sum=1000000000`.
 
 ## Inspect the padded layout
 
-<<<<<<< HEAD
-Run the following command to inspect the padded layout:
-=======
 Inspect `PaddedCounters` with JOL to confirm that HotSpot inserted padding
 between the two contention groups:
->>>>>>> main
 
 ```bash
 "$java_bin" -XX:-RestrictContended \

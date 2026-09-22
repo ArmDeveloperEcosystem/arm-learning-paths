@@ -16,17 +16,10 @@ protocol generally grants it exclusive ownership of the complete line and
 invalidates copies held by other cores. A 64-byte cache line is common on Arm Neoverse-based  servers, but the line size is implementation-dependent.
 
 Processors maintain cache coherence for complete cache lines rather than
-<<<<<<< HEAD
-individual Java objects or fields. The Java Virtual Machine (JVM) determines field layout, while the
-allocator determines where an object resides in the heap. A moving garbage
-collector can later relocate it. As a result, one cache line can contain fields
-from one object or parts of multiple objects.
-=======
 individual Java objects or fields. The Java Virtual Machine (JVM) determines
 field layout, while the allocator determines where an object resides in the
 heap. A moving garbage collector can later relocate it. As a result, one cache
 line can contain fields from one object or parts of multiple objects.
->>>>>>> main
 
 Cache-line sharing occurs when multiple cores access data in the same cache
 line and at least one access is a write.
@@ -59,7 +52,7 @@ The following factors influence the result:
 
 When workers on different cores repeatedly write independent values in one
 cache line, ownership of the line can move between their caches. The cores can
-spend more time waiting for coherence transactions even though the Java
+spend more time waiting for coherence transactions, even though the Java
 variables don't logically interact. This can increase latency and limit
 multithreaded throughput.
 
@@ -69,7 +62,7 @@ affect the observed behavior.
 
 ## What you've learned and what's next
 
-You've now learned about cache-line and performance effects. 
+You've now learned about cache-line and performance effects of Java false sharing. 
 
 Next, you'll create the baseline example and use Java Object Layout (JOL)
 to inspect field offsets and Perf C2C to observe baseline cache-line sharing.

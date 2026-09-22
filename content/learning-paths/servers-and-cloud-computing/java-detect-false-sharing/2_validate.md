@@ -10,9 +10,8 @@ layout: learningpathall
 ## Before you begin
 
 Run the instructions in this Learning Path on an Arm-based Linux server with
-the Statistical Profiling Extension (SPE) enabled. To confirm that SPE is
-enabled on your server, follow the
-[check for SPE support instructions](https://learn.arm.com/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/).
+Arm Statistical Profiling Extension (SPE) enabled. For instructions to confirm that SPE is
+enabled on your server, see [Enable and verify Arm SPE support](/learning-paths/servers-and-cloud-computing/spe-on-performix/how-to-3/).
 
 Install the OpenJDK 21 Java Development Kit (JDK) on your Arm-based Ubuntu
 server:
@@ -43,14 +42,7 @@ because the restricted `sudo` `PATH` might not contain your Java installation.
 
 ### Set up the false-sharing demo
 
-<<<<<<< HEAD
-Create `FalseSharingDemo.java` with the following code:
-=======
-In your workspace, create a file named `FalseSharingDemo.java` with the complete code shown
-here. The example has two worker threads that update adjacent `volatile long`
-fields. Each worker performs 500 million increments, making the sharing
-behavior easier to sample.
->>>>>>> main
+In your workspace, create a file named `FalseSharingDemo.java` with the following code:
 
 ```java
 import java.util.concurrent.CountDownLatch;
@@ -205,7 +197,7 @@ The Arm Statistical Profiling Extension (SPE) is a hardware profiling feature
 that samples operations and records information about how the operations executed with
 low overhead. For sampled memory operations, SPE can record the data address,
 access type, latency, and memory-source information. For more information, see the
-[Arm Statistical Profiling Extension performance analysis white paper](https://developer.arm.com/documentation/109429/latest/).
+[Arm SPE performance analysis white paper](https://developer.arm.com/documentation/109429/latest/).
 
 On supported Arm systems, `perf c2c` uses SPE to sample loads and stores, then
 groups their addresses into cache lines. Peer-cache and peer-node data-source
