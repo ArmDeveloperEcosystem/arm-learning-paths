@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## How Vision Chat works
 
-`MainActivity.java` connects the Android document pickers, selected image, prompt, model package, and result views. It moves model import and inference off the main Android user-interface thread so that the screen remains responsive while files are copied or the model runs.
+`MainActivity.java` connects the Android document pickers, selected image, prompt, model package, and result views. Model import and inference run off the main Android user-interface thread, so the screen remains responsive while files are copied or the model runs.
 
 Vision Chat supports one model package ZIP. The archive contains two GGUF files
 because llama.cpp separates the language model from the vision encoder and

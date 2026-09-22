@@ -68,7 +68,7 @@ generated_summary_faq:
       measured on your phone.
   - question: Why does the model package contain two GGUF files?
     answer: >-
-      The ZIP you import contains two GGUF files because llama.cpp separates the language model
+      The ZIP file that you import contains two GGUF files because llama.cpp separates the language model
       from the vision encoder and projector. When you run inference, Vision Chat loads the `Q4_K_M`
       language-model GGUF and the matching `Q8_0` `mmproj` GGUF together.
 # END generated_summary_faq
