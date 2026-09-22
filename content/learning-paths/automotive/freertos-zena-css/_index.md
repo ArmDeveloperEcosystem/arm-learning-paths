@@ -25,10 +25,6 @@ prerequisites:
   - Access to the Cortex-R82AE demo and kernel repositories
   - A working Arm Zena CSS Reference Software Stack build and its FVP
 
-draft: true
-cascade:
-  draft: true
-
 author:
     - Julien Jayat
     - Jaxson Han
