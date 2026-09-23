@@ -19,7 +19,9 @@ prerequisites:
     - Visual Studio Code with the [Workbench for Zephyr extension](https://marketplace.visualstudio.com/items?itemName=Ac6.zephyr-workbench) and its host tools installed, as in the first steps of [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/)
     - Basic knowledge of U-Boot and the Linux command line
 
-author: Roy Jamil
+author:
+    - Roy Jamil
+    - Odin Shen
 
 # New Learning Paths are opted in for the next manual generated summary/FAQ run.
 # The generator resets this to false after a successful write.
