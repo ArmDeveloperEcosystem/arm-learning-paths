@@ -23,13 +23,14 @@ author: Patrick Wang
 
 ### Tags
 skilllevels: Introductory
-subjects: Gaming
+subjects: Graphics
 armips:
     - Mali
 tools_software_languages:
     - Vulkan
 operatingsystems:
-    - Any
+    - Windows
+    - Android
 
 further_reading:
     - resource:

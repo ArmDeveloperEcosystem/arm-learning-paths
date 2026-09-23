@@ -25,7 +25,7 @@ Check the following items:
 - How does animation or deformation change the asset?
 - Do the baker and material use the same cutoff and filtering?
 
-Use different settings for different asset types. A fence, a leaf, and a hair card do not need the same subdivision level.
+Use different settings for different asset types. A fence and a leaf do not need the same subdivision level.
 
 ## Query Vulkan support
 
