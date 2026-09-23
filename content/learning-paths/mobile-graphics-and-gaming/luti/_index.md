@@ -1,24 +1,20 @@
 ---
-title: Decode low-bit weights with Arm SME2 LUTI instructions
-description: Learn how to decode packed low-bit weights using Arm SME2 LUTI2 and LUTI4 instructions, and validate the results against a plain C implementation.
-
-draft: true
-cascade:
-    draft: true
+title: Decode low-bit weights with Arm SME2 LUTI
+description: Learn how to decode packed low-bit weights using Arm SME2 LUTI2 and LUTI4, and validate the results against a plain C implementation.
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for developers who want to efficiently decode packed low-bit weights inside an SME2 matrix multiplication kernel.
+who_is_this_for: This is an advanced topic for developers who want to efficiently decode packed low-bit weights inside an SME2 matrix multiplication kernel with lookup-table instructions (LUTI).
 
 learning_objectives: 
-    - Explain how LUTI2 expands packed 2-bit indices into arithmetic-ready values
-    - Compare equivalent low-bit decode paths implemented with plain C and SME2 LUTI2
-    - Validate the implementations against a scalar reference and inspect the generated SME2 instructions
-    - Apply a repeatable workflow for programming SME2 LUTI instructions
+    - Understand how LUTI2 expands packed 2-bit indices into arithmetic-ready values.
+    - Compare equivalent low-bit decode paths implemented with plain C and SME2 LUTI2.
+    - Validate the implementations against a scalar reference and inspect the generated SME2 instructions.
+    - Apply a repeatable workflow for programming SME2 LUTI.
 
 prerequisites:
     - Familiarity with C, AArch64 assembly, quantization, and matrix multiplication
-    - Understanding of SME2 streaming mode and ZA storage; see [Accelerate matrix multiplication performance with SME2](/learning-paths/cross-platform/multiplying-matrices-with-sme2/)
+    - Understanding of SME2 streaming mode and ZA storage; for more information, see [Accelerate matrix multiplication performance with SME2](/learning-paths/cross-platform/multiplying-matrices-with-sme2/)
     - A Mac system with Apple silicon (M4 or later), or an Android device with SME2 support
     - Make, wget, and LLVM Clang 22 or later for native macOS builds
     - For Android builds, a macOS or Linux build host with LLVM Clang 22 or later and Android NDK r29

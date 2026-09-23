@@ -7,19 +7,19 @@ weight: 6
 layout: learningpathall
 ---
 
+## The four-step LUTI recipe
+
 The examples in `example_2_luti_programming.c` show a recipe-based approach to programming with LUTI instructions.
 
 The examples cover the following combinations and have their base in KleidiAI's matrix multiplication micro-kernels:
 
 | Example | Decode | Arithmetic | Main concept |
 |---|---|---|---|
-| 2.A FP16 LUTI4 + FMOPA | LUTI4 to `float16` | GEMM using FMOPA | Use LUTI and source segments |
-| 2.B LUTI4 -> LUTI2 -> SDOT | LUTI4, then LUTI2 to `int8` | GEMV using SDOT | Use multiple LUTs and source segments |
+| FP16 LUTI4 + FMOPA | LUTI4 to `float16` | GEMM using FMOPA | Use LUTI and source segments |
+| LUTI4 -> LUTI2 -> SDOT | LUTI4, then LUTI2 to `int8` | GEMV using SDOT | Use multiple LUTs and source segments |
 
 
-## The four-step LUTI recipe
-
-For every LUTI call, answer these questions.
+For every LUTI call, answer the following questions:
 
 | Step | Decision | Result |
 |---|---|---|
@@ -29,11 +29,13 @@ For every LUTI call, answer these questions.
 | 4 | How much of the source Z register fills the destination register group? | Source-register segment |
 
 A source segment is the portion of one packed source Z register that fills the chosen destination group.</br>
+
 Its selector is relative to the destination-group size.</br>
+
 The examples use several source-segment cases to help you develop intuition for selecting the correct segment.
 
 
-## Example 2.A: LUTI4 for FP16 GEMM using FMOPA
+## LUTI4 for FP16 GEMM using FMOPA
 
 This example is a focused extraction from KleidiAI's
 [FP16 LUTI4 FMOPA micro-kernel](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_f16p_qsi4c32p/kai_matmul_clamp_f32_f16p1vlx2_qsi4c32p4vlx2_1vlx4vl_sme2_mopa.c).
@@ -131,7 +133,7 @@ __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemm_luti4(
     }
 }
 ```
-## Example 2.B: Two-stage LUTI4 and LUTI2 for GEMV using SDOT
+## Two-stage LUTI4 and LUTI2 for GEMV using SDOT
 
 The SDOT micro-kernel and block size are similar to the KleidiAI's
 [SDOT micro-kernel](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp/kai_matmul_clamp_f32_qai8dxp1x4_qsi4cxp4vlx4_1x4vl_sme2_sdot.c),
@@ -142,9 +144,8 @@ weights.
 
 In this context, vector quantization uses a 4-bit code as an index to select an 8-bit codeword that represents a four-weight pattern. The sixteen `ZT0` entries represent sixteen unique patterns.
 
-The two-stage decode uses LUTI4 to select an 8-bit codeword, then LUTI2 to map the codeword to four 8-bit numerical values.
+The two-stage decode uses LUTI4 to select an 8-bit codeword, then LUTI2 to map the codeword to four 8-bit numerical values:
 
-This encoding reduces the bytes required to store weights.
 ```text
                 packed 4-bit pattern ID
              +-----------------------------+
@@ -168,6 +169,7 @@ This encoding reduces the bytes required to store weights.
              +--------+--------+--------+--------+
 
 ```
+This encoding reduces the bytes required to store weights.
 
 The `arm_lp_gemv_luti2_luti4` function in `example_2_luti_programming.c` implements this two-stage decode:
 
@@ -276,11 +278,13 @@ __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemv_luti2_luti4(
 }
 ```
 
-## Build and validate Example 2
+## Build and validate the examples
+
+To build and validate the examples, complete the following steps:
 
 ### Build and run on macOS
 
-Build and run the executable on an SME2 supported device.
+Build and run the executable on an SME2 supported device:
 
 ```bash
 make example_2_luti_programming
@@ -295,13 +299,13 @@ On macOS or Linux, build the AArch64 Android executable with LLVM 22 and the NDK
 make example_2_luti_programming_android
 ```
 
-With an Android device connected through ADB, push the executable to the device:
+With an Android device connected through `adb`, push the executable to the device:
 
 ```bash
 adb push example_2_luti_programming_android /data/local/tmp/example_2_luti_programming_android
 ```
 
-Open an ADB shell, make the file executable, and run it:
+Open an `adb` shell, make the file executable, and run it:
 
 ```bash
 adb shell
@@ -324,6 +328,7 @@ elements (`SVL / 16`), and `VL_s` is the number of 32-bit word elements
 (`SVL / 32`).
 
 The expected output is:
+
 ```output
 FP16 LUTI4 + FMOPA test (M = VL_s, K = 2, N = 4 * VL_s)
 PASS
@@ -333,8 +338,8 @@ PASS
 
 Each `PASS` confirms that the kernel matches the reference result.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
-You've seen how destination-group size determines the meaning of a source segment, and how the same four-step method applies once or repeatedly in a multi-stage decode.
+You've seen how destination-group size determines the meaning of a source segment. You've also learned how the same four-step method applies once or repeatedly in a multi-stage decode.
 
 Next, you'll compare the ZT0-based LUTI path with Z-register table forms and SME2.1 strided destination groups.

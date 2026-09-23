@@ -9,12 +9,12 @@ layout: learningpathall
 
 ## Compare plain C and SME2
 
-In this section, you compare two ways to expand packed 2-bit right-hand side
+You'll compare two ways to expand packed 2-bit right-hand side
 (RHS) values for signed 8-bit matrix multiplication.
 
 The plain C reference extracts each index with a shift and mask. It then uses
 the index to select a signed 8-bit value from the lookup table. The SME2
-implementation uses `LUTI2` to expand one packed vector and `SMOPA` to
+implementation uses LUTI2 to expand one packed vector and `SMOPA` to
 accumulate four adjacent output panels in `ZA0`-`ZA3`.
 
 Both implementations use the same matrix dimensions, packed RHS bytes, and
@@ -31,13 +31,13 @@ before you build the complete example.
 The example derives its matrix dimensions from the streaming vector length (SVL).
 SVL is the number of bits in one streaming vector.
 
-Use these relationships when reasoning about the dimensions:
+Use the following relationships when reasoning about the dimensions:
 
 - `svcntb()` returns the number of bytes in one streaming vector.
 - `svcntw()` returns the number of 32-bit words in one streaming vector.
-- One 32-bit word contains four bytes, so `svcntb() = 4 * svcntw()`
+- One 32-bit word contains four bytes, so `svcntb() = 4 * svcntw()`.
 
-The helper uses `__arm_locally_streaming` to query the streaming vector length.
+The helper uses `__arm_locally_streaming` to query the streaming vector length:
 
 ```c
 __arm_locally_streaming static size_t streaming_vector_words(void) {
@@ -52,7 +52,7 @@ const size_t m = streaming_vector_words();  // svcntw()
 const size_t n = 4 * m;                     // svcntb()
 ```
 
-Both implementations calculate:
+Both implementations calculate the following:
 
 ```text
 DST[M, N] = LHS[M, K] x RHS[K, N]
@@ -62,8 +62,9 @@ DST[M, N] = LHS[M, K] x RHS[K, N]
 `N` is the number of bytes in one streaming vector: `N = svcntb()`, which is equivalent to `N = 4 * M`. 
 
 The example fixes `K = 4` for two related reasons. First, LUTI2 uses 2-bit lookup indices, so one packed RHS byte contains four 2-bit groups.
+
 Those four groups provide the four RHS values along the K dimension for one output column.
-Second, with `M = svcntw()`, setting `K = 4` makes the `M * K` signed 8-bit LHS block occupy exactly one streaming vector.
+Second, with `M = svcntw()`, setting `K = 4` makes the `M * K` signed 8-bit left-hand side (LHS) block occupy exactly one streaming vector.
 
 For an SVL of 512 bits:
 
@@ -84,7 +85,8 @@ The complete LHS block and packed RHS block each fit in one streaming Z register
 
 ### Low-bit packed format
 
-For each output column, the packed RHS stores the four `K` dimension RHS values in one byte: rhs_packed[col].
+For each output column, the packed RHS stores the four `K` dimension RHS values in one byte: `rhs_packed[col]`.
+
 LUTI2 uses 2-bit indices, so the byte is split into four 2-bit groups.
 Each group selects the lookup-table value for one RHS element, RHS[k, col]. 
 
@@ -115,7 +117,7 @@ enum {
 
 ### Inspect the lookup table
 
-The example uses this mapping:
+The example uses the following mapping:
 
 ```text
 2-bit code  index  signed 8-bit value  raw byte
@@ -139,9 +141,11 @@ The 2-bit indices select only entries 0-3. Entries 4-15 remain zero.
 ## Inspect the plain C reference
 
 The plain C reference calculates one output element at a time. It reads one
-packed RHS byte for each column. For each `k` position, the inner loop shifts
+packed RHS byte for each column. 
+
+For each `k` position, the inner loop shifts
 the corresponding 2-bit field into bits `[1:0]`, applies the `0x03` mask,
-and uses the result to index `lut_i8_i2`.
+and uses the result to index `lut_i8_i2`:
 
 ```c
 static void plain_c_matmul(
@@ -192,7 +196,9 @@ innermost loop shifts, masks, looks up, and multiplies each value.
 
 ## Inspect the SME2 LUTI2 implementation
 
-### Step 1: Store the same lookup values in `ZT0`
+To inspect the SME2 LUTI2 implementation:
+
+### Store the same lookup values in ZT0s
 
 The SME2 path uses the same logical lookup values. `ZT0` has a fixed physical
 layout of sixteen 32-bit entries (64 bytes).
@@ -206,24 +212,24 @@ static const int32_t zt0_table[16] __attribute__((aligned(64))) = {
 };
 ```
 
-`LUTI2 .B` selects entries 0-3 and copies the low byte of each selected
+LUTI2 `.B` selects entries 0-3 and copies the low byte of each selected
 32-bit entry. The low bytes of `ZT0` entries 0-3 therefore match the bit
 patterns in the plain C table for the four signed 8-bit values.
 
-### Step 2: Declare a locally streaming SME function
+### Declare a locally streaming SME function
+
+The following attributes tell the compiler to run the function body in streaming
+mode and provide new `ZA` and `ZT0` state for the function:
 
 ```c
 __arm_new("za", "zt0") __arm_locally_streaming
 ```
 
-These attributes tell the compiler to run the function body in streaming
-mode and provide new `ZA` and `ZT0` state for the function.
-
-### Step 3: Follow the SME2 compute path
+### Follow the SME2 compute path
 
 Review the SME2 implementation below. Inline assembly loads `ZT0`, expands
 the packed RHS, and accumulates four output panels. ACLE intrinsics read `ZA`
-and store the output matrix.
+and store the output matrix:
 
 ```c
 __arm_new("za", "zt0") __arm_locally_streaming
@@ -267,27 +273,27 @@ static void luti2_sme2_asm_matmul(const int8_t *lhs,
 ```
 
 The inline assembly loads the lookup table into `ZT0` and loads one vector
-from each input. `LUTI2` expands the packed RHS into four vectors. Four
+from each input. LUTI2 expands the packed RHS into four vectors. Four
 `SMOPA` instructions accumulate those vectors into `ZA0`-`ZA3`.
 
 The output loop reads one horizontal row across `ZA0`-`ZA3`. It
 reinterprets the returned bytes as four vectors of `int32_t` accumulators and
 stores them as one contiguous output row.
 
-`LUTI2` does not perform the multiplication. The packed RHS stays compact
+LUTI2 does not perform the multiplication. The packed RHS stays compact
 until the matrix kernel needs it. The expanded values then pass directly from
 Z registers to SME2 matrix instructions.
 
 To see the same instruction pattern in production code, inspect the
 [`qai8dxp_qsu2cxp` Arm KleidiAI micro-kernel source](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsu2cxp/kai_matmul_clamp_f32_qai8dxp1vlx4_qsu2cxp4vlx4_1vlx4vl_sme2_mopa_asm.S).
 
-## Build and validate Example 1
+## Build and validate the first example
 
-Run these commands from the `code` directory.
+Run the following commands from the `code` directory:
 
 ### Build and run on macOS
 
-Build and run the executable on an SME2 supported device.
+Build and run the executable on an SME2 supported device:
 
 ```bash
 make example_1_luti_decoding
@@ -296,7 +302,7 @@ make example_1_luti_decoding
 
 ### Cross-compile and run on Android
 
-On macOS or Linux, use LLVM 22 and the NDK r29 installation selected by `ANDROID_NDK_HOME`. The build host does not need SME2 support.
+On macOS or Linux, use LLVM 22 and the NDK r29 installation selected by `ANDROID_NDK_HOME`. The build host doesn't need SME2 support.
 
 Build the standalone Android executable:
 
@@ -304,13 +310,13 @@ Build the standalone Android executable:
 make example_1_luti_decoding_android
 ```
 
-With an Android device connected through ADB, push the executable to the device:
+With an Android device connected through `adb`, push the executable to the device:
 
 ```bash
 adb push example_1_luti_decoding_android /data/local/tmp/example_1_luti_decoding_android
 ```
 
-Open an ADB shell, make the file executable, and run it:
+Open an `adb` shell, make the file executable, and run it:
 
 ```bash
 adb shell
@@ -319,11 +325,13 @@ chmod 755 example_1_luti_decoding_android
 ./example_1_luti_decoding_android
 ```
 
-After it finishes, enter `exit` to return to the build host's shell.
+After running the file, enter `exit` to return to the build host's shell.
 
 ### Check the result
 
-On an SME2-capable device, the program prints the matrix shape, lookup table, decoded RHS samples, and a matrix preview. For a 512-bit SVL, the output begins with:
+On an SME2-capable device, the program prints the matrix shape, lookup table, decoded RHS samples, and a matrix preview. 
+
+For a 512-bit SVL, the output begins with:
 
 ```output
 SVL = 512 bits; matrix shape M=16, K=4, N=64
@@ -335,7 +343,7 @@ bits  idx  signed  raw byte
  11   3       3    0x03
 ```
 
-The RHS decoding preview and C matrix preview follow, then the final validation line:
+The RHS decoding preview and C matrix preview follow. The final validation line is similar to:
 
 ```output
 PASS: LUTI2 SME2 matches plain C matmul.
@@ -347,7 +355,7 @@ If SME2 is unavailable, the runner exits without performing the calculations:
 SKIP: No support for SME2 on this device.
 ```
 
-A `SKIP` result does not validate the calculation. You can still inspect the generated instructions on the build host.
+A `SKIP` result doesn't validate the calculation. You can still inspect the generated instructions on the build host.
 
 ## Inspect the generated SME2 instructions
 
@@ -357,13 +365,15 @@ For the native macOS executable, run:
 make disassemble-example-1
 ```
 
-For the Android executable, run this command on the macOS or Linux build host:
+For the Android executable, run the following command on the macOS or Linux build host:
 
 ```bash
 make disassemble-example-1-android
 ```
 
-The Makefile selects the host's LLVM disassembler and displays only `LUTI2` and `SMOPA` instructions. Disassembly does not require SME2 hardware. The output is similar to:
+The Makefile selects the host's LLVM disassembler and displays only LUTI2 and `SMOPA` instructions. Disassembly doesn't require SME2 hardware. 
+
+The output is similar to:
 
 ```output
 100000cec: c08c8024     luti2 { z4.b - z7.b }, zt0, z1[0]
@@ -373,25 +383,27 @@ The Makefile selects the host's LLVM disassembler and displays only `LUTI2` and 
 100000cfc: a0870003     smopa za3.s, p0/m, p0/m, z0.b, z7.b
 ```
 
-Addresses vary by build. Confirm that one `LUTI2` is followed by four `SMOPA` instructions targeting `ZA0` through `ZA3`.
+Addresses vary by build. Confirm that one LUTI2 is followed by four `SMOPA` instructions targeting `ZA0` through `ZA3`.
 
 ## Check your understanding
 
-Before continuing, make sure you can explain:
+Before continuing, make sure you understand the following:
 
 - Why one packed byte represents four values along the `K` dimension.
 - Why the plain C shift counts are 0, 2, 4, and 6.
 - Why the mask is `0x03`.
-- How one `LUTI2` produces four decoded Z registers.
+- How one LUTI2 produces four decoded Z registers.
 - Why four `SMOPA` instructions produce four adjacent output panels in
   `ZA0`-`ZA3`.
 - How the element-by-element comparison validates the SME2 result.
 
-## What you can do now and what's next
+## What you've accomplished and what's next
+
+You've compared plain C decoding with an SME2 implementation that uses LUTI2,
 
 You can now decode the same packed 2-bit RHS data in plain C or expand it with
-SME2 `LUTI2`. You can also pass the expanded Z-register values directly to
+SME2 LUTI2. You can also pass the expanded Z-register values directly to
 `SMOPA` and accumulate signed 32-bit results in `ZA`.
 
-Next, develop intuition for programming LUTI instructions through practical
+Next, you'll learn to program LUTI instructions through practical
 SME2 examples.

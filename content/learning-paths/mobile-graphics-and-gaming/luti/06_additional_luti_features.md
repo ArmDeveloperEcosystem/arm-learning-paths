@@ -7,22 +7,23 @@ weight: 7
 layout: learningpathall
 ---
 
+## Compare feature paths
+
 The earlier examples use the original SME2 lookup path: a table in `ZT0`, packed indices in Z registers, and one or more Z-register results.
+
 Other architectural features use a different table source or add specialized forms.
 
-{{% notice Note %}} `FEAT_LUT` and `FEAT_SME2p1` are not yet implemented on any shipping hardware. The code excerpts on this page are illustrative. Use the feature macros in the final section to guard these paths and prepare your kernel for when hardware support becomes available. {{% /notice %}}
-
-## Compare the feature paths
+{{% notice Note %}} `FEAT_LUT` and `FEAT_SME2p1` aren't yet implemented on any shipping hardware. The following code excerpts are illustrative. Use the feature macros in the final section to guard these paths and prepare your kernel for when hardware support becomes available. {{% /notice %}}
 
 | Feature path | Table source | Execution state | Distinguishing capability |
 |---|---|---|---|
-| `FEAT_SME2` | Fixed 512-bit `ZT0` | Streaming mode with ZA enabled | `LUTI2` and `LUTI4` can produce one, two, or four Z-register results, subject to the element-width encoding |
+| `FEAT_SME2` | Fixed 512-bit `ZT0` | Streaming mode with ZA enabled | LUTI2 and LUTI4 can produce one, two, or four Z-register results, subject to the element-width encoding |
 | `FEAT_SME2p1` | Fixed 512-bit `ZT0` | Streaming mode with ZA enabled | Extends the SME2 forms with strided destination pairs and quads |
-| `FEAT_LUT` with `FEAT_SVE2` or `FEAT_SME2` | One or two scalable Z registers | Non-streaming SVE or Streaming SVE, respectively | Add Z-register table forms of `LUTI2` and `LUTI4` which produce one Z-register result without using `ZT0` |
+| `FEAT_LUT` with `FEAT_SVE2` or `FEAT_SME2` | One or two scalable Z registers | Non-streaming SVE or Streaming SVE, respectively | Add Z-register table forms of LUTI2 and LUTI4 which produce one Z-register result without using `ZT0` |
 
-## Use Z-register tables with FEAT_LUT
+### Use Z-register tables with FEAT_LUT
 
-`FEAT_LUT` expands the functionality of `FEAT_SME2` allowing the use of scalable Z registers as the lookup-table source. This provides an alternative to using the `ZT0` register.
+`FEAT_LUT` expands the functionality of `FEAT_SME2`, allowing the use of scalable Z registers as the lookup-table source:
 
 ```text
 table Z register(s) + packed-index Z register
@@ -32,13 +33,13 @@ table Z register(s) + packed-index Z register
              one result Z register
 ```
 
-Use this form for vector kernels that do not need `ZT0` register and where multiple LUTs are required by the algorithm.
+This provides an alternative to using the `ZT0` register. Use this form for vector kernels that don't need `ZT0` register and where multiple LUTs are required by the algorithm.
 
 For example, the two-stage decode loop in the previous example reloads `ZT0` using `svldr_zt()` for its LUTI4 and LUTI2 tables.
 With `FEAT_LUT`, both lookup tables are kept in separate Z registers and loaded once before the loop with the appropriate predicate.
 This removes the need to call `svldr_zt()` inside the loop.
 
-The following excerpt illustrates one segment of the two-stage decode.
+The following excerpt illustrates one segment of the two-stage decode:
 
 ```c
 // Load 16-entries LUTI4-Table and 4-entries LUTI2-Table before the loop.
@@ -66,7 +67,7 @@ for (size_t i_k = 0; i_k < lhs_blocks; ++i_k) {
 Each Z-register-table LUTI instruction produces one destination Z register.
 The table entries are the one or two SVL-sized Z register. The logical LUT is still the four entries for LUTI2 or sixteen entries for LUTI4.
 
-## Place results with FEAT_SME2p1
+### Place results with FEAT_SME2p1
 
 The SME2 examples use consecutive destination registers. `FEAT_SME2p1` extends the `ZT0` SME2 forms with strided destination pairs and quads:
 
@@ -83,7 +84,7 @@ For example, the following LUTI2 instruction writes a strided destination quad:
 luti2 {z0.b, z4.b, z8.b, z12.b}, zt0, z1[0]
 ```
 
-This form gives the register allocator more placement options. It does not change
+This form gives the register allocator more placement options. It doesn't change
 the index width, table contents, or number of results produced by the
 instruction.
 
