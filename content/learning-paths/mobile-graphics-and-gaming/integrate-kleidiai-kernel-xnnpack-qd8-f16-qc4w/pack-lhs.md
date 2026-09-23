@@ -1,5 +1,6 @@
 ---
 title: Pack the QD8 activation without requantizing
+description: Trace how the XNNPACK adapter packs QD8 activations for KleidiAI SME2 while preserving per-row quantization.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +11,7 @@ layout: learningpathall
 
 The selected KAI LHS format is `qai8dxp`: asymmetric int8 with dynamic per-row parameters. This matches the XNNPACK qd8 input.
 
-This step corresponds to [patch 3: Pack QD8 LHS for KAI SME2](../0003-pack-qd8-lhs-for-kai-sme2.patch).
+This walkthrough corresponds to [patch 3: Pack QD8 LHS for KAI SME2](../0003-pack-qd8-lhs-for-kai-sme2.patch). It adds the static `pack_lhs` and `lhs_packed_size` helpers in `src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c`. Patch 4 queries the kernel parameters and calls these helpers from the completed wrapper.
 
 ## Convert the XNNPACK LHS to the KAI LHS
 
@@ -94,7 +95,7 @@ KAI rounds K up to a multiple of 32. For a qd8 row, the quantized representation
 q_zero = zero_point
 ```
 
-Use it for padding:
+The following illustrative expression shows how the row zero point supplies padding:
 
 ```c
 packed_value = k_index < k ? input[k_index] : quantization.zero_point;
@@ -123,7 +124,7 @@ For every group, the helper performs the following work:
 4. Pad any K values beyond the original K dimension with that row's quantized zero.
 5. Store `-zero_point` and `inv_scale` for every packed row.
 
-The implementation obtains `kr` from the selected KAI microkernel instead of relying on a hard-coded value. The current SME2 kernel reports `kr = 4`, but querying it keeps the pack layout coupled to the actual kernel contract:
+The completed wrapper obtains `kr` from the selected KAI microkernel instead of relying on a hard-coded value. The current SME2 kernel reports `kr = 4`, but querying it keeps the pack layout coupled to the actual kernel contract. This illustrative excerpt from the patch 4 logic abbreviates the query function names with ellipses:
 
 ```c
 const size_t kr = kai_get_kr_matmul_clamp_f16_qai8dxp...();
@@ -148,4 +149,8 @@ source rows:   8  9  9  9
 
 The matmul call still receives `m = 2`, so it writes results only for rows 8 and 9. Duplicating row 9 only gives the kernel safe data for the complete packed group.
 
-Next, wire the adapter into XNNPACK runtime dispatch.
+## What you've learned
+
+You have traced how the adapter interleaves QD8 values, carries over each row's quantization parameters, and handles incomplete tiles. The packed LHS preserves the original quantization while supplying the layout KAI expects.
+
+Next, inspect how the adapter connects to XNNPACK runtime dispatch.
