@@ -11,7 +11,7 @@ layout: learningpathall
 
 The examples in `example_2_luti_programming.c` show a recipe-based approach to programming with LUTI instructions.
 
-The examples cover the following combinations and have their base in KleidiAI's matrix multiplication micro-kernels:
+The examples cover the following combinations and are based on KleidiAI matrix multiplication micro-kernels:
 
 | Example | Decode | Arithmetic | Main concept |
 |---|---|---|---|
@@ -28,9 +28,9 @@ For every LUTI call, answer the following questions:
 | 3 | How many destination Z registers do you need the lookup to fill? | Choose x1, x2, or x4 to match the target operation. |
 | 4 | How much of the source Z register fills the destination register group? | Source-register segment |
 
-A source segment is the portion of one packed source Z register that fills the chosen destination group.</br>
+A source segment is the portion of one packed source Z register that fills the chosen destination group.
 
-Its selector is relative to the destination-group size.</br>
+Its selector is relative to the destination-group size.
 
 The examples use several source-segment cases to help you develop intuition for selecting the correct segment.
 
@@ -133,9 +133,10 @@ __arm_new("za", "zt0") __arm_locally_streaming void arm_lp_gemm_luti4(
     }
 }
 ```
+
 ## Two-stage LUTI4 and LUTI2 for GEMV using SDOT
 
-The SDOT micro-kernel and block size are similar to the KleidiAI's
+The SDOT micro-kernel and block size are similar to KleidiAI's
 [SDOT micro-kernel](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp/kai_matmul_clamp_f32_qai8dxp1x4_qsi4cxp4vlx4_1x4vl_sme2_sdot.c),
 with two LUTs added to implement a two-stage decode of vector-quantized
 weights.
@@ -284,7 +285,7 @@ To build and validate the examples, complete the following steps:
 
 ### Build and run on macOS
 
-Build and run the executable on an SME2 supported device:
+Build and run the executable on an SME2-supported device:
 
 ```bash
 make example_2_luti_programming

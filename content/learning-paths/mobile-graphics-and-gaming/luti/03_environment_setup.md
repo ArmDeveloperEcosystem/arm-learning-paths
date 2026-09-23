@@ -138,7 +138,7 @@ sudo apt install adb
 
 Enable developer options and USB debugging on the Android phone, connect it to the host, and accept the debugging prompt on the phone.
 
- Verify the connection:
+Verify the connection:
 
 ```bash
 adb devices -l

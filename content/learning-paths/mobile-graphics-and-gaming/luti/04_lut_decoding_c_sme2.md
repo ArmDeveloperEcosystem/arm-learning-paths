@@ -196,9 +196,7 @@ innermost loop shifts, masks, looks up, and multiplies each value.
 
 ## Inspect the SME2 LUTI2 implementation
 
-To inspect the SME2 LUTI2 implementation:
-
-### Store the same lookup values in ZT0s
+### Store the same lookup values in ZT0
 
 The SME2 path uses the same logical lookup values. `ZT0` has a fixed physical
 layout of sixteen 32-bit entries (64 bytes).
@@ -293,7 +291,7 @@ Run the following commands from the `code` directory:
 
 ### Build and run on macOS
 
-Build and run the executable on an SME2 supported device:
+Build and run the executable on an SME2-supported device:
 
 ```bash
 make example_1_luti_decoding
@@ -398,8 +396,6 @@ Before continuing, make sure you understand the following:
 - How the element-by-element comparison validates the SME2 result.
 
 ## What you've accomplished and what's next
-
-You've compared plain C decoding with an SME2 implementation that uses LUTI2,
 
 You can now decode the same packed 2-bit RHS data in plain C or expand it with
 SME2 LUTI2. You can also pass the expanded Z-register values directly to

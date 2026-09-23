@@ -33,7 +33,7 @@ table Z register(s) + packed-index Z register
              one result Z register
 ```
 
-This provides an alternative to using the `ZT0` register. Use this form for vector kernels that don't need `ZT0` register and where multiple LUTs are required by the algorithm.
+This provides an alternative to using the `ZT0` register. Use this form for vector kernels that don't need the `ZT0` register and need multiple LUTs.
 
 For example, the two-stage decode loop in the previous example reloads `ZT0` using `svldr_zt()` for its LUTI4 and LUTI2 tables.
 With `FEAT_LUT`, both lookup tables are kept in separate Z registers and loaded once before the loop with the appropriate predicate.
@@ -65,7 +65,7 @@ for (size_t i_k = 0; i_k < lhs_blocks; ++i_k) {
 ```
 
 Each Z-register-table LUTI instruction produces one destination Z register.
-The table entries are the one or two SVL-sized Z register. The logical LUT is still the four entries for LUTI2 or sixteen entries for LUTI4.
+The table entries are the one or two SVL-sized Z registers. The logical LUT is still the four entries for LUTI2 or sixteen entries for LUTI4.
 
 ### Place results with FEAT_SME2p1
 

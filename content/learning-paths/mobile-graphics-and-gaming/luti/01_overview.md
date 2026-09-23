@@ -39,6 +39,7 @@ Matrix multiplication kernels don't usually operate on packed 2-bit or 4-bit cod
 Before arithmetic, the codes must be decoded into values that the computation can consume.
 
 Conceptually, the operation is:
+
 ```c
 index = get_lut_index(packed_code);
 expanded_value = lookup_table[index];
@@ -57,10 +58,10 @@ For example, a 2-bit lookup table might contain:
 
 | Packed code | Lookup table index | Expanded value |
 |---|---|---|
-| `0b00` | lut[0] | `-2` |
-| `0b01` | lut[1] | `-1` |
-| `0b10` | lut[2] | `0`  |
-| `0b11` | lut[3] | `1`  |
+| `0b00` | `lut[0]` | `-2` |
+| `0b01` | `lut[1]` | `-1` |
+| `0b10` | `lut[2]` | `0`  |
+| `0b11` | `lut[3]` | `1`  |
 
 
 ### From packed 2-bit codes to 8-bit values
@@ -91,4 +92,4 @@ Consider the following when using LUTI:
 ## What you've learned and what's next
 You've learned how LUTI uses packed low-bit codes as indices and expands them into values for subsequent arithmetic.
 
-Next, you'll set up the compiler and SME2 hardware needed to build and run the examples.
+Next, you'll learn how LUTI operates with `ZT0`, Z registers, and `ZA` in SME2.
