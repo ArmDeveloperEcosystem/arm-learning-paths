@@ -132,6 +132,6 @@ The expanded vectors can now feed SME2 matrix instructions such as `SDOT` or `SM
 
 ## What you've learned and what's next
 
-You've learned how LUTI operates within SME2: a micro-kernel loads the lookup table into `ZT0`, uses packed low-bit indices in Z registers to expand the RHS values, and feeds those expanded values into SME2 instructions.
+You've learned how LUTI operates within SME2. A micro-kernel loads the lookup table into `ZT0`, uses packed low-bit indices in Z registers to expand the RHS values, and feeds those expanded values into SME2 instructions.
 
 Next, you'll select and prepare a macOS or Android SME2 environment for the examples.

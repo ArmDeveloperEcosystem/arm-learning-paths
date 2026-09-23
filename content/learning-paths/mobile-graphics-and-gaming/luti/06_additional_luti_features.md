@@ -13,7 +13,7 @@ The earlier examples use the original SME2 lookup path: a table in `ZT0`, packed
 
 Other architectural features use a different table source or add specialized forms.
 
-{{% notice Note %}} `FEAT_LUT` and `FEAT_SME2p1` aren't yet implemented on any shipping hardware. The following code excerpts are illustrative. Use the feature macros in the final section to guard these paths and prepare your kernel for when hardware support becomes available. {{% /notice %}}
+{{% notice Note %}} `FEAT_LUT` and `FEAT_SME2p1` aren't yet implemented on any shipping hardware. The following code excerpts are illustrative. Use the compiler feature macros to guard these paths and prepare your kernel for when hardware support becomes available. {{% /notice %}}
 
 | Feature path | Table source | Execution state | Distinguishing capability |
 |---|---|---|---|

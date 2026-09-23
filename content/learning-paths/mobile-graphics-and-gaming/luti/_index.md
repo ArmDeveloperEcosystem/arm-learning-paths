@@ -7,7 +7,7 @@ minutes_to_complete: 60
 who_is_this_for: This is an advanced topic for developers who want to efficiently decode packed low-bit weights inside a Scalable Matrix Extension 2 (SME2) matrix multiplication kernel with lookup-table instructions (LUTI).
 
 learning_objectives: 
-    - Explain how LUTI2 expands packed 2-bit indices into arithmetic-ready values.
+    - Understand how LUTI2 expands packed 2-bit indices into arithmetic-ready values.
     - Compare equivalent low-bit decode paths implemented with plain C and SME2 LUTI2.
     - Validate the implementations against a scalar reference and inspect the generated SME2 instructions.
     - Apply a repeatable workflow for programming SME2 LUTI.
