@@ -54,13 +54,77 @@ This checks compatibility with the adapter and doesn't evaluate the model's lang
 
 ### Prepare the ONNX Runtime GenAI path
 
-The ONNX Runtime GenAI examples use `com.microsoft.onnxruntime:onnxruntime-android:1.27.0` and the official ONNX Runtime GenAI Android AAR. First, complete the [ONNX Runtime GenAI Android Learning Path](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/build-android-chat-app-using-onnxruntime/) to build `onnxruntime-genai-release.aar`.
+The ONNX Runtime GenAI examples use `com.microsoft.onnxruntime:onnxruntime-android:1.27.0` and the official ONNX Runtime GenAI Android AAR. Build the AAR from the official ONNX Runtime GenAI source before you apply an ONNX Runtime GenAI adapter.
+
+Set `ANDROID_HOME` to your Android SDK location. Set `ANDROID_NDK_HOME` to the installed Android NDK directory, or replace it in the commands below. Android Studio installs the SDK and NDK from **Tools > SDK Manager > SDK Tools**.
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS or Linux" language="bash" >}}
+export WORK_DIR="$HOME/text-to-text-android"
+mkdir -p "$WORK_DIR"
+cd "$WORK_DIR"
+
+git clone --recursive https://github.com/microsoft/onnxruntime-genai.git
+cd onnxruntime-genai
+
+python3 -m pip install -r requirements-dev.txt
+if ! command -v cmake >/dev/null 2>&1; then
+    if ! ls -d "$ANDROID_HOME"/cmake/*/bin >/dev/null 2>&1; then
+        "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+            --sdk_root="$ANDROID_HOME" \
+            "cmake;3.22.1"
+    fi
+    export PATH="$(ls -d "$ANDROID_HOME"/cmake/*/bin | tail -n 1):$PATH"
+fi
+cmake --version
+
+python3 build.py --skip_wheel --build_java --android \
+    --android_home "$ANDROID_HOME" \
+    --android_ndk_path "$ANDROID_NDK_HOME" \
+    --android_abi arm64-v8a \
+    --config Release
+
+export ONNX_GENAI_AAR="$PWD/build/Android/Release/src/java/build/android/outputs/aar/onnxruntime-genai-release.aar"
+test -f "$ONNX_GENAI_AAR"
+cd "$WORK_DIR"
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell" >}}
+$WORK_DIR = Join-Path $HOME "text-to-text-android"
+New-Item -ItemType Directory -Force -Path $WORK_DIR
+Set-Location $WORK_DIR
+
+git clone --recursive https://github.com/microsoft/onnxruntime-genai.git
+Set-Location onnxruntime-genai
+
+python -m pip install -r requirements-dev.txt
+if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) {
+    if (-not (Test-Path "$env:ANDROID_HOME\cmake")) {
+        & "$env:ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager.bat" `
+            --sdk_root="$env:ANDROID_HOME" `
+            "cmake;3.22.1"
+    }
+    $CMAKE_DIR = Get-ChildItem "$env:ANDROID_HOME\cmake" -Directory | Sort-Object Name | Select-Object -Last 1
+    $env:PATH = "$($CMAKE_DIR.FullName)\bin;$env:PATH"
+}
+cmake --version
+
+python build.py --skip_wheel --build_java --android `
+    --android_home "$env:ANDROID_HOME" `
+    --android_ndk_path "$env:ANDROID_NDK_HOME" `
+    --android_abi arm64-v8a `
+    --config Release
+
+$ONNX_GENAI_AAR = Join-Path $PWD "build\Android\Release\src\java\build\android\outputs\aar\onnxruntime-genai-release.aar"
+Test-Path $ONNX_GENAI_AAR
+Set-Location $WORK_DIR
+  {{< /tab >}}
+{{< /tabpane >}}
 
 Create a separate project and select one ONNX Runtime GenAI example:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
-cd ..
+cd "$WORK_DIR"
 git clone https://github.com/arm-education/ai-portal-android-app-text-to-text.git \
     ai-portal-android-app-text-to-text-onnx
 cd ai-portal-android-app-text-to-text-onnx
@@ -73,12 +137,14 @@ export MODEL_ID="tinyllama-1-1b-chat-onnx-genai-int4-kquantlast-emb-int8-vivo-x3
 # export MODEL_ID="llama-3-2-1b-instruct-onnx-genai-int4-kquantlast-emb-int8-vivo-x300"
 
 cp -R "adapter-examples/$ONNX_EXAMPLE/app/." app/
+mkdir -p app/libs
+cp "$ONNX_GENAI_AAR" app/libs/onnxruntime-genai-release.aar
 
 export MODEL_DIR="../model-onnx"
 ../.hf-venv/bin/hf download "Arm/$MODEL_ID" --local-dir "$MODEL_DIR"
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell" >}}
-Set-Location ..
+Set-Location $WORK_DIR
 git clone https://github.com/arm-education/ai-portal-android-app-text-to-text.git `
     ai-portal-android-app-text-to-text-onnx
 Set-Location ai-portal-android-app-text-to-text-onnx
@@ -92,13 +158,15 @@ $MODEL_ID = "tinyllama-1-1b-chat-onnx-genai-int4-kquantlast-emb-int8-vivo-x300"
 
 Copy-Item -Path "adapter-examples\$ONNX_EXAMPLE\app\*" `
     -Destination "app" -Recurse -Force
+New-Item -ItemType Directory -Force -Path "app\libs"
+Copy-Item -Path $ONNX_GENAI_AAR -Destination "app\libs\onnxruntime-genai-release.aar" -Force
 
 $MODEL_DIR = "..\model-onnx"
 ..\.hf-venv\Scripts\hf.exe download "Arm/$MODEL_ID" --local-dir $MODEL_DIR
   {{< /tab >}}
 {{< /tabpane >}}
 
-Copy the generated AAR to `app/libs/onnxruntime-genai-release.aar` before continuing. Keep every file in the downloaded ONNX model directory together, including external model data, `genai_config.json`, tokenizer files, and the chat template.
+The commands above copy the generated AAR to `app/libs/onnxruntime-genai-release.aar`. Keep every file in the downloaded ONNX model directory together, including external model data, `genai_config.json`, tokenizer files, and the chat template.
 
 ## Build and run the selected alternative
 
