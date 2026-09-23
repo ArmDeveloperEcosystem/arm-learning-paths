@@ -11,15 +11,15 @@ layout: learningpathall
 
 The earlier examples use the original SME2 lookup path: a table in `ZT0`, packed indices in Z registers, and one or more Z-register results.
 
-Other architectural features use a different table source or add specialized forms.
-
-{{% notice Note %}} `FEAT_LUT` and `FEAT_SME2p1` aren't yet implemented on any shipping hardware. The following code excerpts are illustrative. Use the compiler feature macros to guard these paths and prepare your kernel for when hardware support becomes available. {{% /notice %}}
+Other architectural features use a different table source or add specialized forms:
 
 | Feature path | Table source | Execution state | Distinguishing capability |
 |---|---|---|---|
 | `FEAT_SME2` | Fixed 512-bit `ZT0` | Streaming mode with ZA enabled | LUTI2 and LUTI4 can produce one, two, or four Z-register results, subject to the element-width encoding |
 | `FEAT_SME2p1` | Fixed 512-bit `ZT0` | Streaming mode with ZA enabled | Extends the SME2 forms with strided destination pairs and quads |
 | `FEAT_LUT` with `FEAT_SVE2` or `FEAT_SME2` | One or two scalable Z registers | Non-streaming SVE or Streaming SVE, respectively | Add Z-register table forms of LUTI2 and LUTI4 which produce one Z-register result without using `ZT0` |
+
+{{% notice Note %}} `FEAT_LUT` and `FEAT_SME2p1` aren't yet implemented on any shipping hardware. The following code excerpts are illustrative. Use the compiler feature macros to guard these paths and prepare your kernel for when hardware support becomes available. {{% /notice %}}
 
 ### Use Z-register tables with FEAT_LUT
 
