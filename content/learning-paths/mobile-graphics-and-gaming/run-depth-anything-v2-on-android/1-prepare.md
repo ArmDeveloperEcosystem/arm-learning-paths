@@ -17,7 +17,7 @@ The application includes a validated ExecuTorch adapter. The adapter prepares th
 
 ## Check the existing development tools
 
-Image Analysis builds with Android SDK 35 and Java 17. Before installing anything, list the versions already available on your development computer:
+Image Analysis builds with Android SDK 35 and Java 17. Before installing anything, list the versions that are already available on your development computer:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS" language="bash" >}}
@@ -47,7 +47,7 @@ winget --version
   {{< /tab >}}
 {{< /tabpane >}}
 
-You need Git, Python 3 with `pip`, and Java Development Kit (JDK) 17 or later. You also need Homebrew on macOS, `curl` on Linux, or `winget` on Windows to install Android CLI. A `command not found` or `is not recognized` message identifies a host tool that you need to install.
+A `command not found` or `is not recognized` message identifies a host tool that you need to install.
 
 Install any missing host prerequisites before continuing, then rerun the version checks. Ensure that `java` and `javac` report version 17 or later. The application configures Gradle to provision its JDK 17 build toolchain automatically during the first build.
 

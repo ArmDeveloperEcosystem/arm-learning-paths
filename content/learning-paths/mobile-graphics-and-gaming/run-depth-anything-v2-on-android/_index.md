@@ -18,6 +18,7 @@ prerequisites:
     - An Arm-based Android phone running Android 9 or later
     - A Hugging Face account if the model repository requires authentication
     - A data-capable USB cable
+    - Homebrew on macOS, `curl` on Linux, or `winget` on Windows to install Android CLI
     - Network access for the first Gradle build and model download
     - Basic familiarity with terminal commands and Android applications
 

@@ -56,7 +56,7 @@ Choose a second image with a different scene and run depth estimation again. Con
 - Nearer and farther regions have the expected brightness ordering.
 - The displayed result fills and aligns with the decoded image preview.
 
-## What you've accomplished and what's next
+## What you've accomplished 
 
 You've run Depth Anything V2 Small on an Arm-based Android phone and generated and validated input-dependent relative-disparity maps.
 
