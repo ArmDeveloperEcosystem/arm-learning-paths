@@ -12,7 +12,7 @@ layout: learningpathall
 
 To open the model on Hugging Face, follow these steps:
 
-1. On the [**TinyLlama-1.1B-Chat INT4 — ONNX GenAI (Graviton G4)**](https://developer.arm.com/ai/models/hugging-face/Arm/tinyllama-1-1b-chat-onnx-genai-int4-kquantlast-emb-int8-graviton-g4/tinyllama-1.1b-chat-int4--onnx-genai-graviton-g4-int4-onnx?targetName=AWS+Graviton+G4) model page, scroll to the top and expand **Use this Model**. 
+1. On the [**TinyLlama-1.1B-Chat INT4 — ONNX GenAI (Graviton G4)**](https://developer.arm.com/ai/models/hugging-face/Arm/tinyllama-1-1b-chat-onnx-genai-int4-kquantlast-emb-int8-graviton-g4/tinyllama-1.1b-chat-int4-onnx?targetName=AWS+Graviton+G4) model page, scroll to the top and expand **Use this Model**. 
 2. Select **Open on Hugging Face**.
 
 You're now ready to deploy the model. Deployment steps are listed for convenience as follows. For detailed instructions, see [How to get started with the model](https://huggingface.co/Arm/tinyllama-1-1b-chat-onnx-genai-int4-kquantlast-emb-int8-graviton-g4#how-to-get-started-with-the-model). 
