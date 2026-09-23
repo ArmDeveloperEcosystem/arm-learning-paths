@@ -61,7 +61,7 @@ generated_summary_faq:
       and then select **Run depth estimation**.
   - question: What should I expect while the model loads or runs inference?
     answer: >-
-      You’ll see the model and image controls become unavailable while the app decodes the image,
+      You’ll see that the model and image controls become unavailable while the app decodes the image,
       loads the model, or runs inference. The controls become available again when the operation
       finishes or reports an error. After inference, you’ll see a grayscale relative-disparity
       map and the model load and inference times.
