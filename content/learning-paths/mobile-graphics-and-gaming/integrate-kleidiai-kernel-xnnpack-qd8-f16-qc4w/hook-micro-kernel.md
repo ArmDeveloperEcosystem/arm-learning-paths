@@ -1,5 +1,6 @@
 ---
 title: Configure and dispatch the SME2 kernel
+description: Inspect XNNPACK runtime dispatch and packing configuration for the KleidiAI SME2 adapter and its native fallback.
 weight: 7
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +9,9 @@ layout: learningpathall
 
 ## Select the KAI SME2 backend
 
-Keep the existing XNNPACK microkernels as the fallback. Select the KAI path only when XNNPACK detects SME2:
+This walkthrough explains patch 4, which you applied during preparation. Its configuration and registration changes are in `init_qd8_f16_qc4w_gemm_config` in `src/configs/gemm-config.c`.
+
+The configuration keeps the existing XNNPACK microkernels as the fallback and selects the KAI path only when XNNPACK detects SME2:
 
 ```c
 if (hardware_config->arch_flags & xnn_arch_arm_sme2) {
@@ -36,7 +39,7 @@ xnn_pack_kai_qs4_weights_and_biases_sme
 xnn_packed_stride_kai_qs4_weights_and_biases_sme
 ```
 
-When SME2 is selected, set these functions in the GEMM configuration:
+When SME2 is selected, the patch sets these functions in the GEMM configuration:
 
 ```c
 qd8_f16_qc4w_gemm_config.pack_weights_and_biases =
@@ -52,7 +55,7 @@ XNNPACK uses this configuration during operator creation. It passes the original
 
 There is no persistent LHS buffer at operator creation because qd8 activations and their quantization parameters change for every invocation.
 
-Instead, the XNNPACK DQGEMM adapter packs each activation tile immediately before calling KAI:
+Instead, the XNNPACK dynamically quantized general matrix multiplication (DQGEMM) adapter packs each activation tile immediately before calling KAI:
 
 ```text
 raw qd8 int8 values + qd8 parameters
@@ -72,7 +75,7 @@ It also queries KAI `kr` and `sr`, checks that `sr == 1`, interleaves the values
 
 ## Register the DQGEMM adapter
 
-Query the KAI tile sizes and register the adapter for both the single-row and full-MR cases:
+The configuration queries the KAI tile sizes and registers the adapter for both the single-row and full-MR cases:
 
 ```c
 const size_t mr =
@@ -88,14 +91,14 @@ qd8_f16_qc4w_gemm_config.minmax.dqgemm[XNN_MR_TO_INDEX(mr)] =
         xnn_qd8_f16_qc4w_gemm_minmax_ukernel_16x64c4__neonsme2);
 ```
 
-Set the KAI packing parameters:
+The integration uses these KAI packing parameters:
 
 ```text
 kr = 4
 sr = 1
 ```
 
-The adapter calls:
+The adapter in `src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c` calls:
 
 ```text
 kai_run_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa
@@ -111,11 +114,13 @@ The patch also changes the generated SME2 source lists. Run the generator after 
 python3 tools/update-microkernels.py
 ```
 
+Depending on your Python version, the generator might report `DeprecationWarning: codecs.open() is deprecated. Use open() instead.` This warning alone does not indicate a failure; check that the script completes successfully.
+
 Before this dispatch is registered, the new wrapper is listed as a non-production SME2 source. After `gemm-config.c` registers the wrapper, the generator finds it in the configuration and moves it to the production SME2 source list. Do not edit the generated list files by hand.
 
 ## Understand the adapter
 
-The adapter has the standard XNNPACK DQGEMM ABI. XNNPACK calls it with an int8 activation tile, a pointer to packed weights, the FP16 output tile, clamp parameters, and the qd8 parameters for the activation rows.
+The adapter has the standard XNNPACK DQGEMM application binary interface (ABI). XNNPACK calls it with an int8 activation tile, a pointer to packed weights, the FP16 output tile, clamp parameters, and the qd8 parameters for the activation rows.
 
 The adapter performs three operations:
 
@@ -129,3 +134,7 @@ raw QD8 tile + per-row parameters
 The wrapper filename uses the XNNPACK-style label `16x64c4__neonsme2`. It is not a fixed runtime tile size. The actual M and N tile sizes are queried from KleidiAI because they depend on the SME streaming vector length.
 
 The adapter currently allocates a temporary packed-LHS buffer for each DQGEMM call. This keeps the first integration simple and correct. The next optimization is to allocate and reuse a workspace buffer so the same LHS is not repacked for every N tile.
+
+## What you've accomplished
+
+You have followed the applied configuration from SME2 detection through packing and adapter registration to the KAI call. Next, build the patched checkout and run the correctness and fallback-build checks.

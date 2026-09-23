@@ -1,5 +1,6 @@
 ---
 title: Pack QC4W weights for the KAI SME2 kernel
+description: Trace how XNNPACK packs static QC4W weights for KleidiAI SME2, including transposed inputs and zero-point correction.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -20,7 +21,7 @@ Original QC4W model weights
 
 This is different from the qd8 left-hand side (LHS), which changes for every inference run and must be packed at runtime.
 
-This step corresponds to [patch 2: Support transposed KAI QC4W weights](../0002-support-transposed-kai-qc4w-weights.patch).
+This walkthrough corresponds to [patch 2: Support transposed KAI QC4W weights](../0002-support-transposed-kai-qc4w-weights.patch). In `src/reference/packing.cc`, `xnn_pack_kai_qs4_weights_and_biases_sme` handles the source-layout conversion before calling the KAI packer.
 
 ## Raw XNNPACK QC4W source layout
 
@@ -93,7 +94,7 @@ The formats represent the same mathematical weights, but their byte layouts are 
 
 ## KAI qsi4cxp packed RHS layout
 
-Use the KAI packer:
+The applied integration calls the KAI packer:
 
 ```text
 kai_run_rhs_pack_nxk_qsi4cxps1s0_qsu4cxs1s0_neon
@@ -239,7 +240,7 @@ Original QC4W model weights
 
 The KAI microkernel would interpret the XNNPACK-native packed bytes using the wrong interleave and metadata offsets. Keep each packed representation private to the microkernel family that created it.
 
-## Summary
+## What you've accomplished
 
 When packing the RHS:
 
