@@ -19,7 +19,7 @@ adb devices -l
 
 The output lists the authorized phone and its device serial. If the phone reports `unauthorized`, unlock it and accept the debugging prompt. If the phone doesn't appear, see [Run apps on a hardware device](https://developer.android.com/studio/run/device).
 
-## Check the phone's CPU features
+## Check the CPU features of the phone
 
 Vision Chat is built for Armv8.6-A with Dot Product and Int8 Matrix Multiplication instructions. Check that the phone reports the corresponding `asimddp` and `i8mm` features:
 
@@ -122,7 +122,7 @@ chmod +x gradlew
 
 You don't need to install Gradle separately because the repository includes the wrapper.
 
-Install the APK and start Vision Chat with the commands used on every operating system:
+Install the APK and start Vision Chat with the following commands:
 
 ```console
 adb install -r app/build/outputs/apk/debug/app-debug.apk

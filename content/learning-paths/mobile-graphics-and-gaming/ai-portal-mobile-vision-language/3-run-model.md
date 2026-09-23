@@ -9,13 +9,13 @@ layout: learningpathall
 
 ## Vision-language inference in Vision Chat
 
-A vision-language model accepts an image and a text prompt, then generates text. It can describe a scene, read visible text, or answer a question about an image. Unlike an image classifier, it isn't limited to a fixed list of labels.
+A vision-language model accepts an image and a text prompt, then generates text. It can describe a scene, read visible text, or answer a question about an image. Unlike an image classifier, a vision-language model isn't limited to a fixed list of labels.
 
 Vision Chat supports the following model package:
 
 | Model | Runtime | Language model | Vision projector |
 | --- | --- | --- | --- |
-| [Qwen3-VL 2B Instruct](https://developer.arm.com/ai/models/hugging-face/Arm/qwen3-vl-2b-instruct-q4-k-m-ggml-llama-cpp-vivo-x300/qwen3-vl-2b-instruct-q4_k_m-gguf?targetName=vivo+X300) | llama.cpp | Q4_K_M GGUF | Q8_0 `mmproj` GGUF |
+| [Qwen3-VL 2B Instruct](https://developer.arm.com/ai/models/hugging-face/Arm/qwen3-vl-2b-instruct-q4-k-m-ggml-llama-cpp-vivo-x300/qwen3-vl-2b-instruct-q4_k_m-gguf?targetName=vivo+X300) | llama.cpp | `Q4_K_M` GGUF | `Q8_0` `mmproj` GGUF |
 
 The ZIP contains the language-model and vision-projector GGUF files. Vision Chat
 validates and extracts them together. It doesn't support other model packages.
@@ -43,21 +43,22 @@ Use the application downloader to fetch the supported model package:
 
 The downloader fetches both GGUF files, writes them to one uncompressed ZIP,
 and removes the separate GGUF files. The `models/qwen3-vl-2b` directory then
-contains:
+contains the following files:
 
 ```output
 Qwen__Qwen3-VL-2B-Instruct_llamacpp_optimized.zip
 sample_input.jpg
 ```
 
-The ZIP contains the Q4_K_M language model, the Q8_0 vision encoder and
-projector, and a manifest that records their filenames, sizes, and SHA-256
-hashes. Keep the ZIP filename unchanged so Vision Chat can identify the
-package.
+The ZIP file contains the `Q4_K_M` language model and the `Q8_0` vision encoder and
+projector. It also contains a manifest that records their filenames, sizes, and SHA-256
+hashes.
+
+Keep the ZIP filename unchanged so that Vision Chat can identify the package.
 
 ## Copy the model and sample image to Android
 
-Copy the model package and sample image to the phone's **Downloads** directory:
+Copy the model package and sample image to the phone's `Download` directory:
 
 ```console
 adb push models/qwen3-vl-2b/Qwen__Qwen3-VL-2B-Instruct_llamacpp_optimized.zip /sdcard/Download/
@@ -66,7 +67,7 @@ adb push models/qwen3-vl-2b/sample_input.jpg /sdcard/Download/
 
 The model package uses about 1.6 GB. Vision Chat extracts another copy into
 application-private storage during import, so keep at least 4 GB free while the
-ZIP also remains in **Downloads**.
+ZIP also remains in the directory.
 
 ## Run Qwen3-VL
 
@@ -80,13 +81,13 @@ In Vision Chat:
 
 The first run loads both GGUF files, encodes the image, evaluates the formatted prompt, and generates up to 128 tokens. Loading and generation can take substantially longer than image classification on the same phone.
 
-The application displays the generated response, model-load time, image-and-prompt evaluation time, output token count, and decode speed.
+The application displays the generated response and model-load time. It also displays image-and-prompt evaluation time, output token count, and decode speed.
 
 The output is similar to:
 
 ![Vision Chat showing a generated Qwen3-VL response for the sample image. The result panel includes model-load, image-and-prompt, output-token, and decode-speed measurements.#center](vision-chat-result.png "Qwen3-VL response generated locally on Android")
 
-The sample shown was recorded on an ASUS ROG Phone 6D. It evaluated the image
+The sample output was recorded on an ASUS ROG Phone 6D. It evaluated the image
 and prompt in 25.1 seconds, then generated 93 tokens at 14.89 tokens per second.
 The timing is an example rather than a benchmark. Measure performance on your
 target phone before making deployment choices.

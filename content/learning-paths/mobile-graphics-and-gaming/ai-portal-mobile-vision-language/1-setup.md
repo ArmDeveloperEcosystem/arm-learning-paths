@@ -21,7 +21,7 @@ Before you run the commands, ensure your development computer has the prerequisi
 
 Open a terminal. On Windows, use PowerShell.
 
-Run the check for tools:
+Check the installed tool versions:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
@@ -43,10 +43,12 @@ $PSVersionTable.PSVersion
   {{< /tab >}}
 {{< /tabpane >}}
 
-Install any missing host tools before continuing. The Java compiler version should be 17 or later.
+Install any missing host tools before continuing. Ensure that the Java compiler version is 17 or later.
 
 {{% notice Note %}}
-You can open the cloned project in Android Studio and run it on a connected phone or an Android Virtual Device (AVD). If you use an AVD, select a recent system image that supports the application's `arm64-v8a` native libraries. An emulator is useful for functional testing, but its performance isn't representative of a physical Arm-based phone.
+You can open the cloned project in Android Studio and run it on a connected phone or an Android Virtual Device (AVD). If you use an AVD, select a recent system image that supports the application's `arm64-v8a` native libraries.
+
+An emulator is useful for functional testing, but its performance isn't representative of a physical Arm-based phone.
 {{% /notice %}}
 
 ## Install the Android command-line tools
@@ -136,7 +138,13 @@ The `export` commands and PowerShell environment assignments apply to the curren
 
 Review and accept the Android SDK licenses when prompted.
 
-After accepting licenses, install Platform-Tools, Android SDK Platform 35, Build-Tools 35.0.0, NDK 27.2.12479018, and CMake 3.22.1:
+After accepting the licenses, install the following SDK packages:
+
+- Platform-Tools
+- Android SDK Platform 35
+- Build-Tools 35.0.0
+- NDK 27.2.12479018
+- CMake 3.22.1
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
