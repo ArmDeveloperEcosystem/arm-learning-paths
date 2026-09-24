@@ -1,5 +1,6 @@
 ---
 title: Integrate a KleidiAI SME2 kernel into XNNPACK
+description: Integrate a KleidiAI SME2 microkernel into XNNPACK with operand packing and runtime dispatch, then validate correctness on Android.
 
 minutes_to_complete: 45
 
@@ -10,8 +11,7 @@ cascade:
 who_is_this_for: This is an advanced topic for software developers and performance engineers who want to integrate a KleidiAI SME2 microkernel into an existing AI inference framework.
 
 learning_objectives:
-    - Understand the XNNPACK `qd8_f16_qc4w` fully connected operator and its quantized matrix formats
-    - Select a KleidiAI microkernel by matching quantization contracts, not only data types
+    - Identify the XNNPACK `qd8_f16_qc4w` operand formats and select a KleidiAI microkernel with a matching quantization contract
     - Pack XNNPACK qd8 activations and QC4W weights into the layouts required by a KleidiAI SME2 kernel
     - Add runtime SME2 dispatch with a safe fallback path
     - Build and validate the integration on an Android Arm device
@@ -19,7 +19,7 @@ learning_objectives:
 prerequisites:
     - Familiarity with C or C++ and basic matrix multiplication
     - Android Debug Bridge (`adb`) and an Android Arm device with SME2 support for the validation steps
-    - Android NDK r29, or a compatible Android NDK
+    - Android NDK r29 (installation steps are included)
 
 author: Arm
 
