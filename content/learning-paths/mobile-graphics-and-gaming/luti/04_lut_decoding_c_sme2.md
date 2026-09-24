@@ -15,7 +15,7 @@ You'll compare two ways to expand packed 2-bit right-hand side
 The plain C reference extracts each index with a shift and mask. It then uses
 the index to select a signed 8-bit value from the lookup table. The SME2
 implementation uses the LUTI2 instruction to expand one packed vector, and `SMOPA` to
-accumulate four adjacent output panels in `ZA0`-`ZA3`.
+accumulate four adjacent output panels in `ZA0` to `ZA3`.
 
 Both implementations use the same matrix dimensions, packed RHS bytes, and
 lookup table. The program compares their output matrices element by element.
@@ -290,7 +290,7 @@ To see the same instruction pattern in production code, inspect the
 
 ## Check your understanding
 
-Before continuing, make sure you understand the following:
+Before continuing, make sure that you understand the following:
 
 - Why one packed byte represents four values along the `K` dimension.
 - Why the plain C shift counts are 0, 2, 4, and 6.
