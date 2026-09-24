@@ -21,7 +21,7 @@ multitool_install_part: false
 weight: 1
 ---
 
-[AWS IoT Greengrass](https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html) is an open-source Internet of Things (IoT) edge runtime and cloud service that helps you build, deploy, and manage IoT applications on your devices.
+[AWS IoT Greengrass](https://docs.aws.amazon.com/greengrass/v2/developerguide/what-is-iot-greengrass.html) is an open-source Internet of Things (IoT) edge runtime and cloud service that you can use to build, deploy, and manage IoT applications on your devices.
 
 You'll create an AWS Identity and Access Management (IAM) user, then install AWS IoT Greengrass and prepare it for use on your device.
 
