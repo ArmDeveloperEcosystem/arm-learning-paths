@@ -40,7 +40,7 @@ You'll need to use an AWS account that has permissions to create access keys and
 
 You'll therefore create a Greengrass installation IAM user with only the permissions needed to set up and deploy devices in the Greengrass environment.
 
-You'll use the installation IAM user to create and save an access key and secret access key for AWS Command Line Interface (AWS CLI) access.
+You'll use the installation IAM user to create and save an access key and secret access key for AWS command-line interface (CLI) access.
 
 ### Create an IAM policy
 
@@ -53,7 +53,6 @@ To create an IAM policy, complete the following steps:
 3. Use the search bar to look for AWS IAM, then navigate to the IAM dashboard.
 4. Under **Access Management**, select **Policies**.
 5. Select **Create policy**.
-   ![AWS IAM Create policy page with the JSON editor selected and the Greengrass permissions policy entered. The account ID placeholders on lines 16 and 17 must be replaced before continuing.#center](/install-guides/_images/greengrass-new-policy.png)
 6. Switch to the **JSON** tab and paste in the following JSON. The JSON specifies all of the permissions needed by the installer user to install and set up a Greengrass device:
 
    ```json {line_numbers=true}
@@ -115,8 +114,11 @@ To create an IAM policy, complete the following steps:
        ]
    }
    ```
+  
+
    Replace `account-id` on lines 16 and 17 with your AWS account ID.
-   ![AWS IAM policy editor showing validation errors because the two resource ARNs contain account-id instead of a valid value. Replace account-id with your 12-digit AWS account ID.#center](/install-guides/_images/gg-role-permissions.png)
+
+    ![AWS IAM Create policy page with the JSON editor selected and the Greengrass permissions policy entered. The account ID placeholders on lines 16 and 17 must be replaced with your 12-digit AWS account ID before continuing.#center](/install-guides/_images/greengrass-new-policy.png)
 
    {{% notice Note %}}
    You can find your account ID by selecting your user name in the AWS console navigation bar.
@@ -177,11 +179,11 @@ To create access keys, complete the following steps:
 
    ![AWS IAM access-key setup page with Command Line Interface selected and the confirmation checkbox enabled so you can proceed.#center](/install-guides/_images/greengrass-config-new-ak.png)
 
-6. Optionally set a description tag for the access key, then select **Create access key**.
+6. For **Description tag value**, enter **MyGreengrassInstallerUserAccessKey**.
 
-   ![AWS IAM Set description tag page with an optional description entered and the Create access key button ready to select.#center](/install-guides/_images/greengrass-new-ak-finish.png)
-
-7. Save your **Access key** and **Secret access key**. This is the only time that you can view the secret access key.
+   ![AWS IAM Set description tag page with a description entered and the Create access key button ready to select.#center](/install-guides/_images/greengrass-new-ak-finish.png)
+7. Select **Create access key**.
+8. Save your **Access key** and **Secret access key**. This is the only time that you can view the secret access key.
 
    ![AWS IAM Retrieve access keys page showing the access key, the hidden secret access key, and the Download CSV file option. Save both credentials now because the secret cannot be retrieved later.#center](/install-guides/_images/gg-access-keys.png)
 
