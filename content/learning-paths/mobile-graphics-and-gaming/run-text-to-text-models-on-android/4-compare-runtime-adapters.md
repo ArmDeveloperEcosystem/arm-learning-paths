@@ -54,83 +54,32 @@ This checks compatibility with the adapter and doesn't evaluate the model's lang
 
 ### Prepare the ONNX Runtime GenAI path
 
-The ONNX Runtime GenAI examples use `com.microsoft.onnxruntime:onnxruntime-android:1.27.0` and the official ONNX Runtime GenAI Android AAR. Build the AAR from the official ONNX Runtime GenAI source before you apply an ONNX Runtime GenAI adapter.
-
-Set `ANDROID_HOME` to your Android SDK location. The commands below install a pinned Android NDK under `ANDROID_HOME` and use it for the ONNX Runtime GenAI AAR build. Android Studio installs the SDK tools from **Tools > SDK Manager > SDK Tools**.
+The ONNX Runtime GenAI examples use `com.microsoft.onnxruntime:onnxruntime-android:1.27.0` and the official ONNX Runtime GenAI Android AAR. Download the official pre-compiled ONNX Runtime GenAI Android AAR before you apply an ONNX Runtime GenAI adapter.
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
 export WORK_DIR="$HOME/text-to-text-android"
-export ONNX_GENAI_VERSION="v0.16.0"
-export ANDROID_NDK_VERSION="27.3.13750724"
-export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/$ANDROID_NDK_VERSION"
 mkdir -p "$WORK_DIR"
-cd "$WORK_DIR"
 
-"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
-    --sdk_root="$ANDROID_HOME" \
-    "ndk;$ANDROID_NDK_VERSION"
+export ONNX_GENAI_AAR="$WORK_DIR/onnxruntime-genai-release.aar"
 
-git clone --recursive --branch "$ONNX_GENAI_VERSION" https://github.com/microsoft/onnxruntime-genai.git
-cd onnxruntime-genai
+curl --fail --location \
+    "https://github.com/microsoft/onnxruntime-genai/releases/download/v0.16.0/onnxruntime-genai-android-0.16.0.aar" \
+    --output "$ONNX_GENAI_AAR"
 
-python3 -m pip install -r requirements-dev.txt
-if ! command -v cmake >/dev/null 2>&1; then
-    if ! ls -d "$ANDROID_HOME"/cmake/*/bin >/dev/null 2>&1; then
-        "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
-            --sdk_root="$ANDROID_HOME" \
-            "cmake;3.22.1"
-    fi
-    export PATH="$(ls -d "$ANDROID_HOME"/cmake/*/bin | tail -n 1):$PATH"
-fi
-cmake --version
-
-python3 build.py --skip_wheel --build_java --android \
-    --android_home "$ANDROID_HOME" \
-    --android_ndk_path "$ANDROID_NDK_HOME" \
-    --android_abi arm64-v8a \
-    --config Release
-
-export ONNX_GENAI_AAR="$PWD/build/Android/Release/src/java/build/android/outputs/aar/onnxruntime-genai-release.aar"
 test -f "$ONNX_GENAI_AAR"
-cd "$WORK_DIR"
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell" >}}
 $WORK_DIR = Join-Path $HOME "text-to-text-android"
-$ONNX_GENAI_VERSION = "v0.16.0"
-$ANDROID_NDK_VERSION = "27.3.13750724"
-$env:ANDROID_NDK_HOME = Join-Path $env:ANDROID_HOME "ndk\$ANDROID_NDK_VERSION"
 New-Item -ItemType Directory -Force -Path $WORK_DIR
-Set-Location $WORK_DIR
 
-& "$env:ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager.bat" `
-    --sdk_root="$env:ANDROID_HOME" `
-    "ndk;$ANDROID_NDK_VERSION"
+$ONNX_GENAI_AAR = Join-Path $WORK_DIR "onnxruntime-genai-release.aar"
 
-git clone --recursive --branch $ONNX_GENAI_VERSION https://github.com/microsoft/onnxruntime-genai.git
-Set-Location onnxruntime-genai
+Invoke-WebRequest `
+    -Uri "https://github.com/microsoft/onnxruntime-genai/releases/download/v0.16.0/onnxruntime-genai-android-0.16.0.aar" `
+    -OutFile $ONNX_GENAI_AAR
 
-python -m pip install -r requirements-dev.txt
-if (-not (Get-Command cmake -ErrorAction SilentlyContinue)) {
-    if (-not (Test-Path "$env:ANDROID_HOME\cmake")) {
-        & "$env:ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager.bat" `
-            --sdk_root="$env:ANDROID_HOME" `
-            "cmake;3.22.1"
-    }
-    $CMAKE_DIR = Get-ChildItem "$env:ANDROID_HOME\cmake" -Directory | Sort-Object Name | Select-Object -Last 1
-    $env:PATH = "$($CMAKE_DIR.FullName)\bin;$env:PATH"
-}
-cmake --version
-
-python build.py --skip_wheel --build_java --android `
-    --android_home "$env:ANDROID_HOME" `
-    --android_ndk_path "$env:ANDROID_NDK_HOME" `
-    --android_abi arm64-v8a `
-    --config Release
-
-$ONNX_GENAI_AAR = Join-Path $PWD "build\Android\Release\src\java\build\android\outputs\aar\onnxruntime-genai-release.aar"
 Test-Path $ONNX_GENAI_AAR
-Set-Location $WORK_DIR
   {{< /tab >}}
 {{< /tabpane >}}
 
