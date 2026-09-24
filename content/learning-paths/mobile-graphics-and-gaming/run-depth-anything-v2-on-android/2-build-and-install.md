@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Connect an Android phone
 
-Enable **Developer options** and **USB debugging** on the Arm-based Android phone. Connect it with a data-capable USB cable, unlock it, and accept the debugging authorization prompt.
+Enable **Developer options** and **USB debugging** on the Arm-based Android phone. Connect the phone with a data-capable USB cable, unlock it, and accept the debugging authorization prompt.
 
 Verify the connection and architecture:
 
@@ -37,7 +37,7 @@ The repository contains Kotlin adapters and placeholder files, but it doesn't co
 
 ## Prepare the Arm AI Portal model downloader
 
-Create a Python virtual environment and install the package used to download models from Hugging Face:
+Create a Python virtual environment and install the package that's used to download models from Hugging Face:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
@@ -50,11 +50,13 @@ py -m venv .hf-venv
   {{< /tab >}}
 {{< /tabpane >}}
 
-The commands invoke the virtual environment's Python executable directly, so you don't need to activate the environment or change the PowerShell script-execution policy. If Python reports that `venv` is unavailable on Debian or Ubuntu, install the `python3-venv` package and rerun the command.
+The commands invoke the virtual environment's Python executable directly, so you don't need to activate the environment or change the PowerShell script-execution policy.
+
+If Python reports that `venv` is unavailable on Debian or Ubuntu, install the `python3-venv` package and rerun the command.
 
 ## Build and install Image Analysis
 
-Before building, confirm the Gradle JVM configuration:
+Before building, confirm the Java Virtual Machine (JVM) configuration for Gradle:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
@@ -98,4 +100,6 @@ Select **Depth Anything V2 Small INT8** in the model menu. Its status reports `p
 
 ## What you've accomplished and what's next
 
-You've built, tested, and installed the application with its model-specific Depth Anything adapter. Next, you'll download and stage the exact model artifact.
+You've built, tested, and installed the application with its model-specific Depth Anything adapter.
+
+Next, you'll download and stage the model artifact.

@@ -36,26 +36,28 @@ The Android adapter follows the model card's fixed contract:
 
 | Stage | Behavior |
 | --- | --- |
-| Decode | Read the selected RGB image with its orientation applied; the application may subsample a large image during decoding to limit memory use |
-| Resize | Resize the decoded RGB image to `686 x 518` with bicubic interpolation; this can change the source aspect ratio |
-| Normalize | Scale channels to `[0, 1]`, then apply ImageNet mean and standard deviation |
-| Input | Create one `float32 [1, 3, 518, 686]` tensor in NCHW order |
-| Inference | Execute `forward` with the XNNPACK-backed ExecuTorch module |
-| Output | Require one finite `float32 [1, 518, 686]` relative-disparity tensor |
-| Render | Min-max normalize each result to `[0, 255]` and resize it to the decoded preview dimensions with bilinear filtering |
+| Decode | Reads the selected RGB image with its orientation applied; the application might subsample a large image during decoding to limit memory use |
+| Resize | Resizes the decoded RGB image to `686 x 518` with bicubic interpolation; this can change the source aspect ratio |
+| Normalize | Scales channels to `[0, 1]`, then applies ImageNet mean and standard deviation |
+| Input | Creates one `float32 [1, 3, 518, 686]` tensor in NCHW order |
+| Inference | Executes `forward` with the XNNPACK-backed ExecuTorch module |
+| Output | Requires one finite `float32 [1, 518, 686]` relative-disparity tensor |
+| Render | Min-max normalizes each result to `[0, 255]` and resizes it to the decoded preview dimensions with bilinear filtering |
 
-If the output is constant, the adapter renders a black map instead of dividing by zero. It rejects an incorrect shape, dtype, missing XNNPACK declaration, or non-finite value.
+If the output is constant, the adapter renders a black map instead of dividing by zero. It rejects an incorrect shape, `dtype`, missing XNNPACK declaration, or non-finite value.
 
 ## Validate input-dependent results
 
-Choose a second image with a different scene and run depth estimation again. Confirm that:
+Choose a second image with a different scene and run depth estimation again. Confirm the following:
 
-- both runs finish without a load or tensor-contract error;
-- the disparity range contains finite numbers;
-- the second depth map differs from the first;
-- nearer and farther regions have plausible brightness ordering;
-- the displayed result fills and aligns with the decoded image preview.
+- Both runs finish without a load or tensor-contract error.
+- The disparity range contains finite numbers.
+- The second depth map differs from the first.
+- Nearer and farther regions have the expected brightness ordering.
+- The displayed result fills and aligns with the decoded image preview.
 
-## What you've accomplished and what's next
+## What you've accomplished 
 
 You've run Depth Anything V2 Small on an Arm-based Android phone and generated and validated input-dependent relative-disparity maps.
+
+You can extend this workflow to deploy monocular depth estimation models from the Arm AI Portal locally for your own use cases.
