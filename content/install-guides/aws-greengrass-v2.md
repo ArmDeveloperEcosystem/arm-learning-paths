@@ -263,7 +263,7 @@ Main PID: 750 (sh)
 ```
 
 {{% notice Note %}}
-Greengrass runs under the `ggc_user` service account in the `ggc_group` group.
+Greengrass doesn't run as a `root` user on your device. It runs under the `ggc_user` service account in the `ggc_group` group.
 {{% /notice %}}
 
 ## Next steps
