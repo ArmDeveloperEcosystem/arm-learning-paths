@@ -1,0 +1,31 @@
+Third-party sample image: c2pa-sample-image.jpg
+
+Source: https://github.com/contentauth/c2pa-rs/blob/712f03b72cbc1b00fc41adee5835fc92be2758d1/cli/sample/image.jpg
+SHA-256: f999fd78bfe8a83c96e468a078830ba94485bc1bc6fd086fb94a43bd29dd0f23
+The JPEG is unchanged; only its filename differs from upstream.
+
+Redistributed under the upstream MIT license. This notice applies to the
+sample JPEG; it does not change the Learning Path's documentation license.
+Retain this notice with redistributed copies of the sample.
+
+MIT License
+
+© Copyright 2020 Adobe. All rights reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
