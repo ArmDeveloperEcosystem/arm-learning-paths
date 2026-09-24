@@ -72,7 +72,7 @@ The Makefile uses Homebrew LLVM at `/opt/homebrew/opt/llvm`.
 ## Set up Android cross-compilation
 
 The build host doesn't need SME2 support. The Android device that runs the
-LUTI examples does. Install the compiler tools on your macOS or Linux host.
+lookup-table instruction (LUTI) examples does. Install the compiler tools on your macOS or Linux host.
 
 Install LLVM 22 on the build host. On macOS, use Homebrew LLVM. The following Linux commands target Ubuntu 24.04 LTS on either x86-64 or AArch64 and use the [LLVM APT packages](https://apt.llvm.org/):
 

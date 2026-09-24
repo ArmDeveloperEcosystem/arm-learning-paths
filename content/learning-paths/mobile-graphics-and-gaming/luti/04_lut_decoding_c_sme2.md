@@ -10,17 +10,17 @@ layout: learningpathall
 ## Compare plain C and SME2
 
 You'll compare two ways to expand packed 2-bit right-hand side
-(RHS) values for signed 8-bit matrix multiplication.
+(RHS) values for signed 8-bit matrix multiplication with a lookup-table instruction (LUTI).
 
 The plain C reference extracts each index with a shift and mask. It then uses
 the index to select a signed 8-bit value from the lookup table. The SME2
-implementation uses LUTI2 to expand one packed vector and `SMOPA` to
+implementation uses the LUTI2 instruction to expand one packed vector, and `SMOPA` to
 accumulate four adjacent output panels in `ZA0`-`ZA3`.
 
 Both implementations use the same matrix dimensions, packed RHS bytes, and
 lookup table. The program compares their output matrices element by element.
 
-## Set up the example
+## Inspect the example
 
 Open `code/example_1_luti_decoding.c`. The file contains both implementations and
 the validation code. The following snippets highlight the sections to inspect
@@ -88,7 +88,7 @@ The complete LHS block and packed RHS block each fit in one streaming Z register
 For each output column, the packed RHS stores the four `K` dimension RHS values in one byte: `rhs_packed[col]`.
 
 LUTI2 uses 2-bit indices, so the byte is split into four 2-bit groups.
-Each group selects the lookup-table value for one RHS element, RHS[k, col]. 
+Each group selects the lookup-table value for one RHS element, RHS[k, col]:
 
 ```text
 rhs_packed[col]
@@ -136,7 +136,7 @@ static const int8_t lut_i8_i2[16] = {
 };
 ```
 
-The 2-bit indices select only entries 0-3. Entries 4-15 remain zero.
+The 2-bit indices select only entries 0 to 3. Entries 4 to 15 remain zero.
 
 ## Inspect the plain C reference
 
@@ -144,7 +144,7 @@ The plain C reference calculates one output element at a time. It reads one
 packed RHS byte for each column. 
 
 For each `k` position, the inner loop shifts
-the corresponding 2-bit field into bits `[1:0]`, applies the `0x03` mask,
+the corresponding 2-bit field into bits `[1:0]`. The loop applies the `0x03` mask
 and uses the result to index `lut_i8_i2`:
 
 ```c
@@ -196,10 +196,12 @@ innermost loop shifts, masks, looks up, and multiplies each value.
 
 ## Inspect the SME2 LUTI2 implementation
 
-### Store the same lookup values in ZT0
+The following snippets highlight the sections of the SME2 LUTI2 implementation that you should inspect.
+
+### Review how the same lookup values are stored in ZT0
 
 The SME2 path uses the same logical lookup values. `ZT0` has a fixed physical
-layout of sixteen 32-bit entries (64 bytes).
+layout of sixteen 32-bit entries (64 bytes):
 
 ```c
 static const int32_t zt0_table[16] __attribute__((aligned(64))) = {
@@ -210,11 +212,11 @@ static const int32_t zt0_table[16] __attribute__((aligned(64))) = {
 };
 ```
 
-LUTI2 `.B` selects entries 0-3 and copies the low byte of each selected
-32-bit entry. The low bytes of `ZT0` entries 0-3 therefore match the bit
+LUTI2 `.B` selects entries 0 to 3 and copies the low byte of each selected
+32-bit entry. The low bytes of `ZT0` entries 0 to 3 therefore match the bit
 patterns in the plain C table for the four signed 8-bit values.
 
-### Declare a locally streaming SME function
+### Review how a locally streaming SME function is declared
 
 The following attributes tell the compiler to run the function body in streaming
 mode and provide new `ZA` and `ZT0` state for the function:
@@ -225,9 +227,7 @@ __arm_new("za", "zt0") __arm_locally_streaming
 
 ### Follow the SME2 compute path
 
-Review the SME2 implementation below. Inline assembly loads `ZT0`, expands
-the packed RHS, and accumulates four output panels. ACLE intrinsics read `ZA`
-and store the output matrix:
+Review the following SME2 implementation:
 
 ```c
 __arm_new("za", "zt0") __arm_locally_streaming
@@ -269,119 +269,24 @@ static void luti2_sme2_asm_matmul(const int8_t *lhs,
     }
 }
 ```
+Inline assembly loads `ZT0`, expands
+the packed RHS, and accumulates four output panels. Arm C Language Extensions (ACLE) intrinsics read `ZA`
+and store the output matrix.
 
 The inline assembly loads the lookup table into `ZT0` and loads one vector
 from each input. LUTI2 expands the packed RHS into four vectors. Four
-`SMOPA` instructions accumulate those vectors into `ZA0`-`ZA3`.
+`SMOPA` instructions accumulate those vectors into `ZA0` to `ZA3`.
 
-The output loop reads one horizontal row across `ZA0`-`ZA3`. It
+The output loop reads one horizontal row across `ZA0` to `ZA3`. It
 reinterprets the returned bytes as four vectors of `int32_t` accumulators and
 stores them as one contiguous output row.
 
-LUTI2 does not perform the multiplication. The packed RHS stays compact
+LUTI2 doesn't perform the multiplication. The packed RHS stays compact
 until the matrix kernel needs it. The expanded values then pass directly from
 Z registers to SME2 matrix instructions.
 
 To see the same instruction pattern in production code, inspect the
 [`qai8dxp_qsu2cxp` Arm KleidiAI micro-kernel source](https://gitlab.arm.com/kleidi/kleidiai/-/blob/v1.30.0/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsu2cxp/kai_matmul_clamp_f32_qai8dxp1vlx4_qsu2cxp4vlx4_1vlx4vl_sme2_mopa_asm.S).
-
-## Build and validate the first example
-
-Run the following commands from the `code` directory:
-
-### Build and run on macOS
-
-Build and run the executable on an SME2-supported device:
-
-```bash
-make example_1_luti_decoding
-./example_1_luti_decoding
-```
-
-### Cross-compile and run on Android
-
-On macOS or Linux, use LLVM 22 and the NDK r29 installation selected by `ANDROID_NDK_HOME`. The build host doesn't need SME2 support.
-
-Build the standalone Android executable:
-
-```bash
-make example_1_luti_decoding_android
-```
-
-With an Android device connected through `adb`, push the executable to the device:
-
-```bash
-adb push example_1_luti_decoding_android /data/local/tmp/example_1_luti_decoding_android
-```
-
-Open an `adb` shell, make the file executable, and run it:
-
-```bash
-adb shell
-cd /data/local/tmp
-chmod 755 example_1_luti_decoding_android
-./example_1_luti_decoding_android
-```
-
-After running the file, enter `exit` to return to the build host's shell.
-
-### Check the result
-
-On an SME2-capable device, the program prints the matrix shape, lookup table, decoded RHS samples, and a matrix preview. 
-
-For a 512-bit SVL, the output begins with:
-
-```output
-SVL = 512 bits; matrix shape M=16, K=4, N=64
-2-bit LUT mapping:
-bits  idx  signed  raw byte
- 00   0      -3    0xFD
- 01   1      -1    0xFF
- 10   2       1    0x01
- 11   3       3    0x03
-```
-
-The RHS decoding preview and C matrix preview follow. The final validation line is similar to:
-
-```output
-PASS: LUTI2 SME2 matches plain C matmul.
-```
-
-If SME2 is unavailable, the runner exits without performing the calculations:
-
-```output
-SKIP: No support for SME2 on this device.
-```
-
-A `SKIP` result doesn't validate the calculation. You can still inspect the generated instructions on the build host.
-
-## Inspect the generated SME2 instructions
-
-For the native macOS executable, run:
-
-```bash
-make disassemble-example-1
-```
-
-For the Android executable, run the following command on the macOS or Linux build host:
-
-```bash
-make disassemble-example-1-android
-```
-
-The Makefile selects the host's LLVM disassembler and displays only LUTI2 and `SMOPA` instructions. Disassembly doesn't require SME2 hardware. 
-
-The output is similar to:
-
-```output
-100000cec: c08c8024     luti2 { z4.b - z7.b }, zt0, z1[0]
-100000cf0: a0840000     smopa za0.s, p0/m, p0/m, z0.b, z4.b
-100000cf4: a0850001     smopa za1.s, p0/m, p0/m, z0.b, z5.b
-100000cf8: a0860002     smopa za2.s, p0/m, p0/m, z0.b, z6.b
-100000cfc: a0870003     smopa za3.s, p0/m, p0/m, z0.b, z7.b
-```
-
-Addresses vary by build. Confirm that one LUTI2 is followed by four `SMOPA` instructions targeting `ZA0` through `ZA3`.
 
 ## Check your understanding
 
@@ -392,14 +297,14 @@ Before continuing, make sure you understand the following:
 - Why the mask is `0x03`.
 - How one LUTI2 produces four decoded Z registers.
 - Why four `SMOPA` instructions produce four adjacent output panels in
-  `ZA0`-`ZA3`.
+  `ZA0` to `ZA3`.
 - How the element-by-element comparison validates the SME2 result.
 
-## What you've accomplished and what's next
+## What you've learned and what's next
 
-You can now decode the same packed 2-bit RHS data in plain C or expand it with
-SME2 LUTI2. You can also pass the expanded Z-register values directly to
-`SMOPA` and accumulate signed 32-bit results in `ZA`.
+You've seen how plain C and SME2 LUTI2 decode the same packed 2-bit RHS data.
+You've also traced how the expanded Z-register values pass directly to `SMOPA`
+and accumulate signed 32-bit results in `ZA`.
 
-Next, you'll learn to program LUTI instructions through practical
-SME2 examples.
+Next, you'll build the first example and validate that both implementations
+produce the same result.

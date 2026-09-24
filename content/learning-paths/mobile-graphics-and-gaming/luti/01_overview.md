@@ -11,13 +11,13 @@ layout: learningpathall
 
 Large language model (LLM) inference on the CPU is now practical on mobile and edge devices, due in large part to the rise of low-bit AI models.
 
-Low-bit AI models store weights in a compact packed format that must be efficiently expanded before matrix multiplication. You'll see how 2-bit and 4-bit weights are stored, why conventional unpacking adds cycles, and how lookup-table instructions (LUTI) remove the unpacking step.
+Low-bit AI models store weights in a compact packed format that must be efficiently expanded before matrix multiplication. You'll see how 2-bit and 4-bit weights are stored, why conventional unpacking adds cycles, and how lookup-table instructions (LUTIs) remove the unpacking step.
 
 By the end, you should be able to understand the following:
 
 - Why packed low-bit indices are efficient for storage and memory traffic
 - How the indices are laid out in memory
-- How to use LUTI instructions to efficiently expand indices
+- How to use LUTIs to efficiently expand indices
 
 ## How sub-byte weights are stored
 
@@ -25,7 +25,7 @@ LLM inference on mobile and edge devices is often limited by memory capacity and
 
 Quantization reduces this traffic by storing weights in lower-precision formats. Weight-only quantization maps each 32-bit floating-point (`fp32`) weight to a compact logical code and stores shared metadata, such as a scale or zero point, for each block.
 
-{{% notice Note %}} The terms 4-bit and 2-bit specify the number of bits assigned to each logical code. These codes don't necessarily denote the numerical datatypes `int4` or `int2`. A 4-bit or 2-bit code might represent a signed integer, an unsigned integer, or an index into a codebook, depending on the quantization format. {{% /notice %}}
+{{% notice Note %}} The terms 4-bit and 2-bit specify the number of bits assigned to each logical code. These codes don't necessarily denote the numerical datatypes `int4` or `int2`. Depending on the quantization format, a 4-bit or 2-bit code might represent a signed integer, an unsigned integer, or an index into a codebook.{{% /notice %}}
 
 Physical packing is the storage layout that places several low-bit codes into each byte. If you ignore the metadata, four 2-bit codes or two 4-bit codes can be stored in one byte.
 
@@ -36,7 +36,7 @@ This approach trades reconstruction accuracy for lower memory use. Its value als
 ## Understand the LUTI operation
 
 Matrix multiplication kernels don't usually operate on packed 2-bit or 4-bit codes.
-Before arithmetic, the codes must be decoded into values that the computation can consume.
+Before arithmetic, the codes needs to be decoded into values that the computation can consume.
 
 Conceptually, the operation is:
 
@@ -45,14 +45,14 @@ index = get_lut_index(packed_code);
 expanded_value = lookup_table[index];
 ```
 
-Armv9-A LUTI instructions perform lookup-table operations that map low-bit indices to expanded values. LUTI2 and LUTI4 operate on 2-bit and 4-bit indices respectively.
+Armv9-A LUTIs perform lookup-table operations that map low-bit indices to expanded values. LUTI2 and LUTI4 operate on 2-bit and 4-bit indices respectively.
 
 - LUTI2 uses each 2-bit index to select one of four lookup-table values.
 - LUTI4 uses each 4-bit index to select one of 16 lookup-table values.
 
 The lookup table defines the expanded value that's associated with each code according to the quantization scheme.
 
-### LUT for 2-bit codes
+### Lookup table for 2-bit codes
 
 For example, a 2-bit lookup table might contain:
 
@@ -76,7 +76,7 @@ The following diagram shows how 2-bit codes expand into 8-bit values:
 
 ## Identify LUTI responsibilities
 
-Consider the following when using LUTI:
+Consider the following when using LUTIs:
 
 - The lookup table defines the meaning of each packed code.
 - LUTI2 and LUTI4 expand indices. They don't calculate quantization metadata.
