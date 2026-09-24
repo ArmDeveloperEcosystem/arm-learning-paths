@@ -56,15 +56,22 @@ This checks compatibility with the adapter and doesn't evaluate the model's lang
 
 The ONNX Runtime GenAI examples use `com.microsoft.onnxruntime:onnxruntime-android:1.27.0` and the official ONNX Runtime GenAI Android AAR. Build the AAR from the official ONNX Runtime GenAI source before you apply an ONNX Runtime GenAI adapter.
 
-Set `ANDROID_HOME` to your Android SDK location. Set `ANDROID_NDK_HOME` to the installed Android NDK directory, or replace it in the commands below. Android Studio installs the SDK and NDK from **Tools > SDK Manager > SDK Tools**.
+Set `ANDROID_HOME` to your Android SDK location. The commands below install a pinned Android NDK under `ANDROID_HOME` and use it for the ONNX Runtime GenAI AAR build. Android Studio installs the SDK tools from **Tools > SDK Manager > SDK Tools**.
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
 export WORK_DIR="$HOME/text-to-text-android"
+export ONNX_GENAI_VERSION="v0.16.0"
+export ANDROID_NDK_VERSION="27.3.13750724"
+export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/$ANDROID_NDK_VERSION"
 mkdir -p "$WORK_DIR"
 cd "$WORK_DIR"
 
-git clone --recursive https://github.com/microsoft/onnxruntime-genai.git
+"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+    --sdk_root="$ANDROID_HOME" \
+    "ndk;$ANDROID_NDK_VERSION"
+
+git clone --recursive --branch "$ONNX_GENAI_VERSION" https://github.com/microsoft/onnxruntime-genai.git
 cd onnxruntime-genai
 
 python3 -m pip install -r requirements-dev.txt
@@ -90,10 +97,17 @@ cd "$WORK_DIR"
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell" >}}
 $WORK_DIR = Join-Path $HOME "text-to-text-android"
+$ONNX_GENAI_VERSION = "v0.16.0"
+$ANDROID_NDK_VERSION = "27.3.13750724"
+$env:ANDROID_NDK_HOME = Join-Path $env:ANDROID_HOME "ndk\$ANDROID_NDK_VERSION"
 New-Item -ItemType Directory -Force -Path $WORK_DIR
 Set-Location $WORK_DIR
 
-git clone --recursive https://github.com/microsoft/onnxruntime-genai.git
+& "$env:ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager.bat" `
+    --sdk_root="$env:ANDROID_HOME" `
+    "ndk;$ANDROID_NDK_VERSION"
+
+git clone --recursive --branch $ONNX_GENAI_VERSION https://github.com/microsoft/onnxruntime-genai.git
 Set-Location onnxruntime-genai
 
 python -m pip install -r requirements-dev.txt
