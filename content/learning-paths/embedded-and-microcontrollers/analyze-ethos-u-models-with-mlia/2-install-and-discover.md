@@ -87,7 +87,7 @@ For Ethos-U, typical bundled profiles include:
 | `ethos-u85-2048` | Ethos-U85 | 2048 |
 
 
-One Ethos-U85 profile (`ethos-u85-256`) is used in the examples. Use a different profile if you want MLIA to evaluate the same model for a different Ethos-U configuration.
+`ethos-u85-256` is the Ethos-U85 profile that's used in the examples. If you want MLIA to evaluate the same model for a different Ethos-U configuration, use a different profile.
 
 ## Discover backends
 
