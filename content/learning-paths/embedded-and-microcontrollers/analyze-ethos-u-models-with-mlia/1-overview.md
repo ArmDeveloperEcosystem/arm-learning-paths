@@ -1,5 +1,5 @@
 ---
-title: Understand the Arm ML Inference Advisor
+title: Understand where MLIA fits in model preparation
 
 description: Understand where MLIA fits in model preparation and how Vela, Corstone FVP, Model Explorer, and runtime profiling tools support different checks.
 
@@ -17,7 +17,7 @@ MLIA is most useful before full deployment or runtime profiling, when you're ask
 
 - Will this model map cleanly to my target?
 - Which operators or layers are likely to matter most for performance?
-- Is the model compute-bound, memory-bound, or affected by low MAC utilization?
+- Is the model compute-bound, memory-bound, or affected by low multiply-accumulate (MAC) utilization?
 - Is the model well-optimized for my Arm target hardware?
 - What should I investigate before building firmware or running on a board?
 

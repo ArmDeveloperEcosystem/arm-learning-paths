@@ -57,16 +57,15 @@ generated_summary_faq:
       needed quantization parameters, so MLIA reports `accelerator_operator_percentage` as `0`.
       For the supplied INT8 model, Vela reports `status` as `ok` and
       `accelerator_operator_percentage` as `100.0` for the `ethos-u85-256` profile.
-  - question: What does Vela performance analysis tell me about LiteRT and TOSA artifacts?
+  - question: How should I interpret Vela performance analysis for LiteRT and TOSA artifacts?
     answer: >-
       You get target-aware compiler estimates, including cycles, utilization, memory use, and
-      operator-level breakdowns when available. Treat these values as estimates for NPU work, not
+      operator-level breakdowns when available. Treat these values as estimates for NPU work rather than
       final latency measurements from hardware. Use the advice to identify operators that dominate
-      estimated cycles or have low MAC utilization.
-  - question: When should I use Corstone analysis or the MLIA Python API?
-    answer: >-
-      Use Corstone to run a packaged ExecuTorch `.pte` artifact on a Fixed Virtual Platform (FVP) and collect whole-model NPU
-      performance counters. It doesn't provide per-layer estimates or operator breakdowns. Use
+      estimated cycles or have low multiply-accumulate (MAC) utilization.
+  - question: When should I use the MLIA Python API?
+    answer: >- 
+      Use
       `run_advisor()` from the Python API when you want to integrate MLIA compatibility checks into
       a product, dashboard, workflow runner, or CI system.
 # END generated_summary_faq

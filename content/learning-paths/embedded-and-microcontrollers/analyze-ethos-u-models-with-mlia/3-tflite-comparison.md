@@ -203,7 +203,7 @@ The following table describes the fields in the generated report, and what they 
 | --- | --- |
 | `warnings` | Important scope limits for the result, such as the estimate referring to NPU work only. |
 | `metrics` | Summary estimates for cycles, inference time, throughput, utilization, model size, and memory use. |
-| `breakdowns` | Per-operator metrics, including operator cycles, memory access cycles, MAC count, and MAC utilization. |
+| `breakdowns` | Per-operator metrics, including operator cycles, memory access cycles, multiply-accumulates (MAC) count, and MAC utilization. |
 | `advice` | MLIA's interpretation of the metrics, including which layers dominate cycles or might be inefficient. |
 | `availability` and `reason` | Why a metric isn't available from the selected backend, if MLIA can't report it. |
 
