@@ -20,7 +20,7 @@ SVE2 (Scalable Vector Extension 2) is an extension to the Arm architecture that 
 
 To work through these examples, you need:
 
-* A cloud instance with SVE2 support running Ubuntu 24.04
+* An Arm-based cloud instance with SVE2 support or an Arm AGI CPU platform running Ubuntu 24.04
 * GCC compiler with SVE support
 
 Start by setting up your environment:
