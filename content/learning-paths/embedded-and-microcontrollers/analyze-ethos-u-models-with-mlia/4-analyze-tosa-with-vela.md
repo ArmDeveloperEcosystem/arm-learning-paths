@@ -1,5 +1,5 @@
 ---
-title: Analyze TOSA IR artifacts with Vela
+title: Analyze TOSA IR artifacts with MLIA and Vela
 
 description: Analyze TOSA artifacts with MLIA and Vela to compare FP32 and INT8 compatibility, performance estimates, and NPU mapping.
 
@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## What TOSA is
 
-Tensor Operator Set Architecture (TOSA) is an intermediate representation for machine learning graphs. It's a stable set of tensor operators that can sit between a model framework and a target backend. The [TOSA specification](https://www.mlplatform.org/tosa/tosa_spec.html) defines the operator set and semantics.
+Tensor Operator Set Architecture (TOSA) is an intermediate representation (IR) for machine learning graphs. It's a stable set of tensor operators that can sit between a model framework and a target backend. The [TOSA specification](https://www.mlplatform.org/tosa/tosa_spec.html) defines the operator set and semantics.
 
 Instead of asking every backend to understand every framework operator directly, a conversion flow can lower supported parts of a model into TOSA. Backend tools can then analyze or compile that TOSA graph for a target.
 
@@ -26,7 +26,7 @@ tosa/mv2_fp32.tosa
 tosa/mv2_int8.tosa
 ```
 
-Start with the FP32 TOSA model:
+Start by running Arm ML Inference Advisor (MLIA) on the FP32 TOSA model:
 
 ```bash
 mlia check tosa/mv2_fp32.tosa \
@@ -38,7 +38,7 @@ mlia check tosa/mv2_fp32.tosa \
 
 The result is similar to the FP32 LiteRT check. The model can be expressed as an artifact, but it's not in the supported quantized integer form required for Ethos-U acceleration with this target profile. The important distinction is that TOSA describes an intermediate graph form rather than a complete runtime deployment.
 
-Run the same compatibility check on the quantized INT8 TOSA model:
+Run the same MLIA compatibility check on the quantized INT8 TOSA model:
 
 ```bash
 mlia check tosa/mv2_int8.tosa \

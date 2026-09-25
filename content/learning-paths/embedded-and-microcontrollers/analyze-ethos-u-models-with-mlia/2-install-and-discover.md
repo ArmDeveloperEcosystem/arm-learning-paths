@@ -74,7 +74,7 @@ mlia target list
 
 For Ethos-U, typical bundled profiles include:
 
-| Target profile | Ethos-U NPU | MACs per cycle |
+| Target profile | Ethos-U NPU | Multiply-accumulates per cycle |
 | --- | --- | --- |
 | `ethos-u55-128` | Ethos-U55 | 128 |
 | `ethos-u55-256` | Ethos-U55 | 256 |

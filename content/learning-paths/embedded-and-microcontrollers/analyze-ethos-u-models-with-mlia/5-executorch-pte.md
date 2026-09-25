@@ -1,5 +1,5 @@
 ---
-title: Analyze ExecuTorch artifacts with Corstone
+title: Analyze ExecuTorch artifacts with MLIA and Corstone
 
 description: Run MLIA Corstone checks on packaged ExecuTorch PTE artifacts and compare whole-model NPU performance counters for Ethos-U55 and Ethos-U85.
 

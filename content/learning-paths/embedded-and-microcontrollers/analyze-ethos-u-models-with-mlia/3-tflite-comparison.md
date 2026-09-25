@@ -1,5 +1,5 @@
 ---
-title: Analyze LiteRT artifacts with Vela
+title: Analyze LiteRT artifacts with MLIA and Vela
 
 description: Run MLIA compatibility and Vela performance checks on LiteRT models and inspect JSON metrics, operator placement, and advice.
 
