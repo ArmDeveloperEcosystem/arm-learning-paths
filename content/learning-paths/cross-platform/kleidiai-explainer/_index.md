@@ -73,7 +73,6 @@ armips:
     - Cortex-A
     - Neoverse
 tools_software_languages:
-    - Arm AGI CPU
     - CPP
     - Generative AI
     - Neon
