@@ -1,26 +1,22 @@
 ---
-title: Analyze ML models with Arm ML Inference Advisor (MLIA)
-
-draft: true
-cascade:
-    draft: true
+title: Analyze ML models with Arm ML Inference Advisor
 
 description: Learn how to use Arm ML Inference Advisor from the command line to check model compatibility, estimate performance, and identify target-aware model improvement opportunities using Ethos-U as the example target.
 
 minutes_to_complete: 45
 
-who_is_this_for: This Learning Path is for ML developers who want to use Arm's ML Inference Advisor (MLIA) to evaluate whether a model is suitable for a target before moving into deployment, graph inspection, or runtime profiling.
+who_is_this_for: This Learning Path is for ML developers who want to use the Arm ML Inference Advisor (MLIA) to evaluate whether a model is suitable for a target before moving into deployment, graph inspection, or runtime profiling.
 
 learning_objectives:
-  - Use the MLIA CLI to discover target profiles and backends
-  - Run compatibility and performance analysis on LiteRT, TOSA, and ExecuTorch artifacts
-  - Interpret MLIA JSON output, advice, Vela estimates, and Corstone whole-model NPU performance counters
-  - (Optional) Call the MLIA Python API from automation or other tools
+  - Use the MLIA CLI to discover target profiles and backends.
+  - Run compatibility and performance analysis on LiteRT, TOSA, and ExecuTorch artifacts.
+  - Interpret MLIA JSON output, advice, Vela estimates, and Corstone whole-model NPU performance counters.
+  - (Optional) Call the MLIA Python API from automation or other tools.
 
 prerequisites:
   - Ubuntu 22.04 LTS or another compatible Linux environment
   - Python 3.10 or later
-  - Git and Git LFS to download the model artifacts
+  - Git and Git Large File Storage (LFS) to download the model artifacts
   - Basic familiarity with machine learning model deployment concepts
   - Basic familiarity with command-line tools
 
