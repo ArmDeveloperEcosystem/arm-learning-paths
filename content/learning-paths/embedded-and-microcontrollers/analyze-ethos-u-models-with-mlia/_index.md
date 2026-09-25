@@ -9,7 +9,7 @@ who_is_this_for: This Learning Path is for ML developers who want to use the Arm
 
 learning_objectives:
   - Use the MLIA CLI to discover target profiles and backends.
-  - Run compatibility and performance analysis on LiteRT, TOSA, and ExecuTorch artifacts.
+  - Run compatibility and performance analysis on LiteRT, Tensor Operator Set Architecture (TOSA), and ExecuTorch artifacts.
   - Interpret MLIA JSON output, advice, Vela estimates, and Corstone whole-model NPU performance counters.
   - (Optional) Call the MLIA Python API from automation or other tools.
 
@@ -35,18 +35,18 @@ generated_summary_faq:
   faq_generated_at: '2026-09-25T16:09:23Z'
   faq_source_hash: fd6174ed455ac37b777456bd6894b86f078555fbaeeb49fda696618ecb9c6489
   summary: >-
-    You use Arm ML Inference Advisor (MLIA) to assess model suitability for Ethos-U targets before
-    deployment. You install MLIA, discover target profiles and backends, and compare LiteRT and TOSA
-    artifacts with Vela. You then analyze packaged ExecuTorch `.pte` artifacts with Corstone. You
+    You'll use MLIA to assess model suitability for Ethos-U targets before
+    deployment. First, you'll install MLIA, discover target profiles and backends, and compare LiteRT and TOSA
+    artifacts with Vela. Then, you'll analyze packaged ExecuTorch `.pte` artifacts with Corstone. You'll
     learn that Vela provides compiler estimates and operator breakdowns, while Corstone reports
-    whole-model NPU counters. Optionally, you automate compatibility checks with the Python API.
+    whole-model NPU counters. Optionally, you'll automate compatibility checks with the Python API.
   faqs:
-  - question: How do I confirm Git LFS is set up before downloading the model artifacts?
+  - question: How do I confirm that Git LFS is set up before downloading the model artifacts?
     answer: >-
       Run `git lfs version`. If the command fails on Ubuntu, run `sudo apt update`, then install
       Git LFS and the Python development package with `sudo apt install -y git-lfs python3.10-dev`.
       Run `git lfs install` before you clone the repository and pull the model artifacts.
-  - question: How do I verify MLIA is installed and discover available backends and target profiles?
+  - question: How do I verify that MLIA is installed and discover available backends and target profiles?
     answer: >-
       Activate your virtual environment with `source mlia_env/bin/activate`, then run `mlia --help`
       to confirm that the CLI works. To list target profiles, run `mlia target list`. To see available
@@ -65,7 +65,7 @@ generated_summary_faq:
       estimated cycles or have low MAC utilization.
   - question: When should I use Corstone analysis or the MLIA Python API?
     answer: >-
-      Use Corstone to run a packaged ExecuTorch `.pte` artifact on an FVP and collect whole-model NPU
+      Use Corstone to run a packaged ExecuTorch `.pte` artifact on an Fixed Virtual Platform (FVP) and collect whole-model NPU
       performance counters. It doesn't provide per-layer estimates or operator breakdowns. Use
       `run_advisor()` from the Python API when you want to integrate MLIA compatibility checks into
       a product, dashboard, workflow runner, or CI system.
