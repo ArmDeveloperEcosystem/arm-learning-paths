@@ -19,7 +19,7 @@ armips:
 - Neoverse
 
 prerequisites:
-- An Arm Linux system or an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider. This Learning Path has been tested on an Arm Neoverse N2-based Alibaba Cloud ECS g8y instance running Ubuntu 22.04 and an Arm Neoverse V3-based AGI system running Ubuntu 24.04.
+- An Arm Linux system or an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider. This Learning Path has been tested on an Alibaba Cloud ECS g8y (Arm Neoverse-N2) instance running Ubuntu 22.04 and an Arm AGI CPU system running Ubuntu 24.04.
 
 operatingsystems:
     - Linux
