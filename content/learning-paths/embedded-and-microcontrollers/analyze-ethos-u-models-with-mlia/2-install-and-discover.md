@@ -13,13 +13,13 @@ layout: "learningpathall"
 
 Use Ubuntu 22.04 LTS or another compatible Linux environment with Python 3.10 or later.
 
-Check that Git LFS is installed:
+Check that Git Large File Storage (LFS) is installed:
 
 ```bash
 git lfs version
 ```
 
-If this command fails, install Git LFS and the Python development package:
+If the command fails, install Git LFS and the Python development package:
 
 ```bash
 sudo apt update
@@ -28,7 +28,7 @@ sudo apt install -y git-lfs python3.10-dev
 
 ## Create a Python environment
 
-Create a virtual environment so the MLIA packages do not conflict with any existing ML framework environment.
+Create a virtual environment so that the Arm ML Inference Advisor (MLIA) packages don't conflict with any existing ML framework environment:
 
 ```bash
 python3 -m venv mlia_env
@@ -38,7 +38,7 @@ python -m pip install --upgrade pip
 
 ## Install MLIA
 
-MLIA uses plugins. The examples in this Learning Path use Ethos-U as the target, so install the Ethos-U plugin package:
+MLIA uses plugins. The example target in the Learning Path is Ethos-U, so install the Ethos-U plugin package:
 
 ```bash
 pip install mlia-ethos-u
@@ -54,7 +54,7 @@ Display top-level help:
 mlia --help
 ```
 
-You should see commands similar to:
+The output is similar to:
 
 ```output
   check     Generate compatibility/performance advice for a model
@@ -62,7 +62,7 @@ You should see commands similar to:
   target    Manage MLIA targets
 ```
 
-The `mlia check` command is the main command you will use to ask MLIA compatibility and performance questions about model artifacts.
+The `mlia check` command is the main command you'll use to ask MLIA compatibility and performance questions about model artifacts.
 
 ## Discover target profiles
 
@@ -74,7 +74,7 @@ mlia target list
 
 For Ethos-U, typical bundled profiles include:
 
-| Target profile | Ethos-U NPU | MACs per cycle |
+| Target profile | Ethos-U NPU | Multiply-accumulates per cycle |
 | --- | --- | --- |
 | `ethos-u55-128` | Ethos-U55 | 128 |
 | `ethos-u55-256` | Ethos-U55 | 256 |
@@ -86,13 +86,8 @@ For Ethos-U, typical bundled profiles include:
 | `ethos-u85-1024` | Ethos-U85 | 1024 |
 | `ethos-u85-2048` | Ethos-U85 | 2048 |
 
-In this Learning Path, the examples use one Ethos-U85 profile:
 
-```output
-ethos-u85-256
-```
-
-Use a different profile if you want MLIA to evaluate the same model for a different Ethos-U configuration.
+`ethos-u85-256` is the Ethos-U85 profile that's used in the examples. If you want MLIA to evaluate the same model for a different Ethos-U configuration, use a different profile.
 
 ## Discover backends
 
@@ -102,7 +97,7 @@ Backends perform the work behind an MLIA analysis flow. List available and insta
 mlia backend list
 ```
 
-For this Ethos-U demonstration, you should expect Vela and Corstone backend options. You use Vela for the LiteRT and TOSA checks, and Corstone for the packaged ExecuTorch `.pte` checks later in this Learning Path.
+For this Ethos-U demonstration, expect Vela and Corstone backend options:
 
 ```output
 Name          Installed  Installable
@@ -112,11 +107,13 @@ corstone-320  no         yes
 vela          no         yes
 ```
 
-When we later use `mlia check`, any missing backends required by your target will be installed.
+Use Vela for LiteRT and Tensor Operator Set Architecture (TOSA) checks. Use Corstone for packaged ExecuTorch `.pte` checks.
+
+When you later use `mlia check`, any missing backends required by your target will be installed.
 
 ## Clone model artifacts
 
-This Learning Path uses prebuilt artifacts from the Arm ML model artifacts repository:
+Clone prebuilt artifacts from the Arm ML model artifacts repository:
 
 ```bash
 git lfs install
@@ -129,23 +126,23 @@ git lfs pull \
 git lfs checkout
 ```
 
-This downloads only the artifacts used in this Learning Path. It avoids larger unrelated files, such as transformer `.pte`, `.etdp`, and `.etrecord` artifacts.
+This downloads only the artifacts that are required for you to complete the Learning Path. It avoids larger unrelated files, such as transformer `.pte`, `.etdp`, and `.etrecord` artifacts.
 
-Confirm that the artifacts are real model files, not Git LFS pointer files:
+Confirm that the artifacts are real model files rather than Git LFS pointer files:
 
 ```bash
 wc -c tflite/mv2_int8.tflite
 ```
 
-You should see a size of several megabytes, similar to:
+The output is a size of several megabytes, similar to:
 
 ```output
 3942808 tflite/mv2_int8.tflite
 ```
 
-If the file is about 100 to 200 bytes, it is still a Git LFS pointer file. Run the `git lfs pull` command again from the `ml-model-artifacts` directory, then rerun the size check.
+If the file is about 100 to 200 bytes, it's still a Git LFS pointer file. Run the `git lfs pull` command again from the `ml-model-artifacts` directory, then rerun the size check.
 
-The model artifacts are provided for learning and analysis exercises. Use them to explore MLIA workflows, model formats, and target-aware advice, not as accuracy reference models.
+The model artifacts are provided for learning and analysis exercises. Use the artifacts to explore MLIA workflows, model formats, and target-aware advice rather than accuracy reference models.
 
 The repository contains model artifacts such as:
 
@@ -162,8 +159,8 @@ ml-model-artifacts/
     └── mv2_int8.tosa
 ```
 
-## What you have learned
+## What you've accomplished and what's next
 
-You have installed MLIA, along with the Ethos-U plugin, discovered available target profiles and backends from the CLI, and cloned model artifacts for analysis.
+You've installed MLIA, along with the Ethos-U plugin. You've also discovered available target profiles and backends from the CLI, and cloned model artifacts for analysis.
 
-Next, you will run your first MLIA compatibility and performance checks.
+Next, you'll run your first MLIA compatibility and performance checks.
