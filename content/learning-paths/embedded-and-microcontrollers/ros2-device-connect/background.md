@@ -13,6 +13,8 @@ A robot or smart camera built on ROS 2 already has a rich internal graph of node
 
 Device Connect fills that gap. In this Learning Path, you'll run a small adapter next to an unchanged ROS 2 system on an Arm-based Linux machine. The adapter registers the ROS 2 system as a Device Connect device and exposes a safe set of remote procedure calls (RPCs) that any peer or agent can discover and invoke.
 
+For robotics, this pattern matters because a robot is not a single API. It is a live graph of sensors, controllers, diagnostics, services, and safety-critical actions. ROS 2 remains the robot's internal software graph. Device Connect adds an external capability layer, where the device owner chooses which ROS 2 operations become discoverable, typed, and remotely callable functions.
+
 ## ROS 2 in brief
 
 ROS 2 (Robot Operating System 2) is an open-source middleware and toolset for building robotics applications. Applications are split into *nodes* that exchange data over *topics* (publish/subscribe), *services* (request/response), and *actions* (long-running goals). ROS 2 publishes official `arm64` packages and container images, so it runs natively on Arm platforms from a Raspberry Pi to a Neoverse cloud server.
@@ -57,6 +59,8 @@ The repository is organized in three layers:
 | Profiles and launchers | `profiles/*.env`, `start_d2d.sh`, `start_fabric.sh` | Per-deployment settings that select the driver, the ROS 2 container, and the ROS 2 setup scripts |
 
 The adapter is deliberately narrow. It exposes read-only inspection plus a small, reviewed set of hardware-specific RPCs. It never offers arbitrary topic publishing or service passthrough, so a remote caller can't drive the ROS 2 system in ways the driver author didn't intend.
+
+This means the same adapter pattern can cover different robotics surfaces. A camera profile can expose perception data, a robot profile can expose diagnostics and bounded motion commands, and both can be called through the same Device Connect discovery and RPC model.
 
 ## What you've learned and what's next
 

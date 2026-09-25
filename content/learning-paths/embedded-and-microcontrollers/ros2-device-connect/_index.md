@@ -16,7 +16,9 @@ prerequisites:
     - An Arm-based Linux machine, such as a Raspberry Pi 5, an Arm cloud instance, or an Arm-based laptop, running Ubuntu 22.04 or later
     - Basic familiarity with Python, the Linux command line, and ROS 2 concepts such as nodes and topics
 
-author: Kieran Hejmadi
+author: 
+    - Kieran Hejmadi
+    - Odin Shen
 
 # New Learning Paths are opted in for the next manual generated summary/FAQ run.
 # The generator resets this to false after a successful write.

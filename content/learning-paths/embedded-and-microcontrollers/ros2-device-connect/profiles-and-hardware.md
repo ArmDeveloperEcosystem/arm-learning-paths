@@ -39,7 +39,9 @@ PROFILE_FILE=/path/to/my-robot.env ./ros2-device-connect/start_d2d.sh
 
 ## Try a Raspberry Pi 5 with a camera
 
-The `rpi_camera` configuration turns a Raspberry Pi 5 with a camera into a device that any peer or agent can ask for a photo. The camera must appear as a V4L2 video device, such as `/dev/video0`. A USB webcam works without extra setup.
+The `rpi_camera` configuration is the lowest-risk real hardware example in this Learning Path. It exposes a sensor capability, not a motion capability: a ROS 2 image topic becomes a Device Connect RPC that any peer or agent can call for a photo. The caller does not need to know the ROS 2 topic name, QoS settings, camera container, or image encoding details.
+
+The camera must appear as a V4L2 video device, such as `/dev/video0`. A USB webcam works without extra setup.
 
 {{% notice Note %}}
 Raspberry Pi Camera Modules connected by ribbon cable use the libcamera stack, and they don't always expose a frame-ready `/dev/video0` that `v4l2_camera` can read. If `v4l2_camera` can't read frames from your Pi Camera Module, start with a USB webcam, or set `VIDEO_DEVICE` to the video node your camera stack provides.
@@ -81,6 +83,8 @@ async def get_raw_image(self, quality: int = DEFAULT_JPEG_QUALITY) -> dict[str, 
 
 The RPC runs `capture_frame.py` inside the container. The script subscribes to `/image_raw`, takes one frame, and returns it as a base64-encoded JPEG. It subscribes with ROS 2's `qos_profile_sensor_data` because `v4l2_camera` publishes with best-effort QoS. A subscriber that uses the default reliable QoS would never match the publisher, and the capture would silently time out.
 
+This is the perception side of the robotics pattern: a ROS 2 sensor stream is converted into a typed Device Connect capability. The PuppyPi profile below uses the same pattern for the action side of robotics.
+
 From a client, call the RPC and save the image. Use the same client environment variables as in the previous section, replacing `127.0.0.1` with the Raspberry Pi's IP address if you run the client on another machine:
 
 ```python
@@ -98,7 +102,9 @@ The repository's `view_image.py` script does the same thing against a device in 
 
 ## Try a ROS 2 robot
 
-The `puppypi` profile targets a [Hiwonder PuppyPi quadruped](https://www.hiwonder.com/products/puppypi) running ROS 2 Humble. It shows how you can add motion control safely:
+The `puppypi` profile targets a [Hiwonder PuppyPi quadruped](https://www.hiwonder.com/products/puppypi), a small four-legged robot built around Raspberry Pi-class hardware and a ROS 2 control stack. In this Learning Path, PuppyPi serves as the real robot example: the same Device Connect adapter pattern used for camera perception is extended to selected locomotion capabilities.
+
+It shows how you can add motion control safely:
 
 - `run_action` accepts only a fixed allowlist of pre-recorded moves, such as `sit`, `stand`, and `wave`, and rejects any other value.
 - `set_velocity` rejects out-of-range values instead of clamping them.
@@ -106,7 +112,7 @@ The `puppypi` profile targets a [Hiwonder PuppyPi quadruped](https://www.hiwonde
 
 Robot bring-up includes starting `puppy_control` and enabling servo torque. For those steps and the full safety model, see the [ros2-device-connect README](https://github.com/odincodeshen/ros2-device-connect#startup-checklist).
 
-//TODO - Odin to provide a video of his quadruped?
+The important design point is that the adapter does not expose arbitrary ROS 2 control. It turns a reviewed subset of the robot's ROS 2 graph into Device Connect capabilities: read-only diagnostics, allowlisted actions, bounded velocity, and an explicit stop command.
 
 ## Build a profile for your own ROS 2 system
 

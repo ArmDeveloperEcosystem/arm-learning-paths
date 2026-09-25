@@ -73,6 +73,23 @@ This is also where you apply safety rules, because it's the boundary where remot
 
 The mixin provides six inspection RPCs in total, for nodes, topics, services, packages, interfaces, and topic info. They all follow the same pattern.
 
+The table below shows how the Device Connect RPC names map back to the ROS 2 operations they run or wrap:
+
+| Device Connect RPC | ROS 2 operation inside the container | Purpose |
+|---|---|---|
+| `get_ros_nodes()` | `ros2 node list` | List active ROS 2 nodes |
+| `get_ros_topics()` | `ros2 topic list` | List active ROS 2 topics |
+| `get_ros_services()` | `ros2 service list` | List active ROS 2 services |
+| `get_ros_packages()` | `ros2 pkg list` | List installed ROS 2 packages |
+| `get_ros_interfaces()` | `ros2 interface list` | List available ROS 2 message and service interfaces |
+| `get_topic_info(topic)` | `ros2 topic info <topic>` | Inspect one topic after validating the topic name |
+| `get_raw_image()` | Subscribe to `/image_raw`, then JPEG/base64 encode one frame | Expose a camera stream as a callable perception RPC |
+| `run_action(action)` | Call `/puppy_control/runActionGroup` with an allowlisted action file | Run a pre-approved PuppyPi motion |
+| `set_velocity(x, y, yaw_rate)` | Publish once to `/puppy_control/velocity` | Send a bounded PuppyPi velocity command |
+| `stop()` | Publish a zero-velocity command | Stop PuppyPi motion |
+
+Device Connect does not replace ROS 2. It wraps selected ROS 2 operations as discoverable, typed, remotely callable capabilities.
+
 ## Layer 4: build the device
 
 The final layer is a driver class that inherits from both `Ros2InspectionMixin` and `DeviceDriver`. The mixin supplies the shared ROS 2 RPCs. `DeviceDriver` makes the class a Device Connect device, and you add any hardware-specific RPCs alongside the shared ones. The `rpi5` profile runs this driver from `puppypi_device.py`:
