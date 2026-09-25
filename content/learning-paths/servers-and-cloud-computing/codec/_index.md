@@ -77,6 +77,7 @@ test_maintenance: true
 skilllevels: Introductory
 subjects: Libraries
 platforms:
+  - Arm AGI CPU
   - AWS Graviton
   - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
