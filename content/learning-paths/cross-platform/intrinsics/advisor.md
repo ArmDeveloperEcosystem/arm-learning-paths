@@ -8,15 +8,15 @@ Porting applications to Arm is easier when you identify architecture specific co
 
 ## Porting Advisor
 
-[Porting Advisor for Graviton](https://github.com/aws/porting-advisor-for-graviton/) is a command line tool for assessing the portability of software to AWS Graviton processors. 
+[Porting Advisor for Graviton](https://github.com/aws/porting-advisor-for-graviton/) is a command line tool for assessing the portability of software to AWS Graviton processors. Supported operating systems include Linux, Windows, and macOS. Alternatively, you can use [migrate-ease](https://github.com/migrate-ease/migrate-ease). Both tools are forked from the original [Porting advisor](https://github.com/arm-hpc/porting-advisor) project. The two projects have different feature sets. 
 
-Supported operating systems include Linux, Windows, and macOS.
+Although Porting Advisor for Graviton is designed for AWS Graviton processors, findings from either tool can also indicate general Arm compatibility issues relevant to porting code from `x86` to `aarch64` on Arm Neoverse-based processors, such as the Arm Arm AGI CPU.
 
 ## Install Porting Advisor
 
-Use the [Porting Advisor for Graviton](/install-guides/porting-advisor/) install guide to set it up on your machine.
+Use the [Porting Advisor for Graviton](/install-guides/porting-advisor/) install guide to set it up on your machine. Alternatively if using `migrate-ease`, use the installation steps in the [getting started guide](/learning-paths/servers-and-cloud-computing/migrate-ease/3_migrate_ease_run/). 
 
-There are multiple ways to run Porting Advisor. The example below assumes you are running Porting Advisor as an executable and it is in your search path.
+There are multiple ways to run Porting Advisor for Graviton. The example below assumes you are running Porting Advisor for Graviton as an executable and it is in your search path.
 
 ## Run Porting Advisor
 
@@ -28,29 +28,36 @@ Use `git` to retrieve the source code:
 git clone https://github.com/kasmtech/KasmVNC.git
 ```
 
-Specify the directory containing the source code to be analyzed.
-
-The Porting Advisor executable name may differ based on your computer architecture and operating system. 
-
-The command below is for an Arm Linux machine. Substitute your executable name if you have a different platform.
+Specify the directory containing the source code to be analyzed. If using `migrate-ease`, specify the architecture of your target machine with the `-march` option. For example when targeting the Arm AGI CPU based on Neoverse V3, specify `-march=armv9.2-a`. 
 
 Run Porting Advisor:
 
-```console
-porting-advisor-linux-aarch64 KasmVNC
-```
+{{< tabpane code=true >}}
+{{< tab header="Porting Advisor for Graviton" >}}
 
-Porting Advisor scans the directory and detects any architecture specific extensions. 
+porting-advisor-linux-aarch64 KasmVNC
+
+{{< /tab >}}
+{{< tab header="Migrate-ease" >}}
+
+python3 -m cpp --march=armv9.2-a --output out.json ./KasmVNC/
+
+{{< /tab >}}
+{{< /tabpane >}}
+
+Porting Advisor and migrate-ease scan the directory and detects any architecture specific extensions. 
 
 The output will be similar to: 
 
-```output
-Porting Advisor for Graviton v1.0.2
-Report date: 2023-06-02 11:36:02
+{{< tabpane code=true >}}
+{{< tab header="Porting Advisor for Graviton" >}}
 
-465 files scanned.
-detected python code. if you need pip, version 19.3 or above is recommended. we detected that you have version 22.0.2.
-detected python code. min version 3.7.5 is required. we detected that you have version 3.10.6. see https://github.com/aws/aws-graviton-getting-started/blob/main/python.md for more details.
+Porting Advisor for Graviton v1.1.1
+Report date: 2026-08-24 08:57:02
+
+506 files scanned.
+detected python code. if you need pip, version 19.3 or above is recommended. we detected that you have version 24.0.
+detected python code. min version 3.7.5 is required. we detected that you have version 3.12.3. see https://github.com/aws/aws-graviton-getting-started/blob/main/python.md for more details.
 KasmVNC/common/rfb/scale_sse2.cxx: 55 other issues
 KasmVNC/common/rfb/scale_sse2.cxx:74 (SSE2_halve): architecture-specific intrinsic: _mm_loadu_si128
 KasmVNC/common/rfb/scale_sse2.cxx:75 (SSE2_halve): architecture-specific intrinsic: _mm_loadu_si128
@@ -64,6 +71,33 @@ KasmVNC/common/rfb/scale_sse2.cxx:77 (SSE2_halve): architecture-specific intrins
 KasmVNC/common/rfb/scale_sse2.cxx:79 (SSE2_halve): architecture-specific intrinsic: _mm_unpacklo_epi8
 
 Report generated successfully. Hint: you can use --output FILENAME.html to generate an HTML report.
-```
+
+{{< /tab >}}
+{{< tab header="migrate-ease" >}}
+
+// out.json
+{
+    "branch": null,
+    "commit": null,
+    "errors": [],
+    "file_summary": {
+        "asm": {
+            "count": 0,
+            "fileName": "Assembly",
+            "loc": 0
+        },
+        "c": {
+            "count": 305,
+            "fileName": "C",
+            "loc": 51787
+    ...
+
+    "target_os": "OpenAnolis",
+    "total_issue_count": 54
+}
+
+{{< /tab >}}
+{{< /tabpane >}}
+
 
 Porting Advisor saves times by quickly identifying architecture specific code in a project. 
