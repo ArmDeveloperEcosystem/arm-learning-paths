@@ -24,6 +24,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Performance and Architecture
 platforms:
+  - Arm AGI CPU
   - AWS Graviton
   - Microsoft Azure Cobalt
   - Google Axion
