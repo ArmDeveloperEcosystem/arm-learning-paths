@@ -137,4 +137,66 @@ general:
   -n,    --predict N              number of tokens to predict (default: -1, -1 = infinity, -2 = until context filled)
   -b,    --batch-size N           logical maximum batch size (default: 2048)
 ```
+## Run this Learning Path on a Mac with Apple silicon
+
+You can also follow this Learning Path on a Mac with Apple silicon. Use these adjustments to the Ubuntu 22.04 LTS setup instructions.
+
+### Install dependencies
+
+Install Python 3.10 or later (Python ≥3.10), which `llama-cpp-agent` requires. Use Homebrew instead of `apt` to install Python and the build tools:
+
+```bash
+brew install python cmake git
+```
+
+Check that `python3` resolves to Python 3.10 or later before creating the virtual environment:
+
+```bash
+python3 --version
+```
+
+If the version is below 3.10, update your shell's `PATH` to use the Homebrew-installed Python, then repeat the check. Create and activate the virtual environment using the verified interpreter:
+
+```bash
+python3 -m venv ai-agent
+source ai-agent/bin/activate
+```
+
+Install `llama-cpp-python` without the `--extra-index-url` flag. This command builds `llama-cpp-python` and its bundled llama.cpp library from source:
+
+```bash
+pip install llama-cpp-python
+```
+
+Install the agent framework, its data validation dependency, and the Hugging Face download tools in the active environment:
+
+```bash
+pip install llama-cpp-agent pydantic huggingface_hub
+```
+
+### Download the model
+
+Newer versions of `huggingface_hub` replace `huggingface-cli` with `hf`. If you see a deprecation warning, use:
+
+```bash
+hf download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir .
+```
+
+The download can fail partway through with a `CAS Client Error` during file reconstruction. If you see this error, disable the Xet transfer backend and try again:
+
+```bash
+export HF_HUB_DISABLE_XET=1
+```
+
+### Build llama.cpp
+
+To build the standalone llama.cpp tools without Metal GPU support, set `GGML_METAL=OFF`. Configure the Python package separately through `CMAKE_ARGS` when installing it; this standalone build does not change the library installed by pip.
+
+```bash
+cmake .. -DCMAKE_CXX_FLAGS="-mcpu=native" -DCMAKE_C_FLAGS="-mcpu=native" -DGGML_METAL=OFF
+cmake --build . -v --config Release -j $(sysctl -n hw.ncpu)
+```
+
+If you're testing these steps from inside a clone of this repository, activate your existing `ai-agent` environment rather than creating a new one in the current folder. Two environments with the same name can make it hard to tell which one is active, and commands like `hf` will fail with `command not found` if you're pointed at the wrong one.
+
 In the next section, you will create a Python script to execute an AI agent powered by the downloaded model.

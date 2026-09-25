@@ -14,7 +14,7 @@ learning_objectives:
      - Choose the appropriate build target to compare Neon, SVE/SVE2, and SME2 implementations
 
 prerequisites:
-    - An AArch64 computer running Linux or macOS. You can use cloud instances, refer to [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) for a list of cloud service providers
+    - An AArch64 computer running Linux or macOS. You can use Arm-based cloud instances(/learning-paths/servers-and-cloud-computing/csp/) or an Arm AGI CPU platform.
     - Some familiarity with SIMD programming and Neon intrinsics
     - Recent toolchains that support SVE and SME (GCC 13+ or Clang 16+ recommended)
 
@@ -86,6 +86,10 @@ tools_software_languages:
   - GCC
   - Clang
   - SME2
+
+platforms:
+    - Arm AGI CPU
+
 shared_path: true
 shared_between:
     - servers-and-cloud-computing
