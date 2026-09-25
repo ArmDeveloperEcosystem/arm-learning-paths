@@ -142,7 +142,7 @@ The output is a size of several megabytes, similar to:
 
 If the file is about 100 to 200 bytes, it's still a Git LFS pointer file. Run the `git lfs pull` command again from the `ml-model-artifacts` directory, then rerun the size check.
 
-The model artifacts are provided for learning and analysis exercises. Use them to explore MLIA workflows, model formats, and target-aware advice rather than accuracy reference models.
+The model artifacts are provided for learning and analysis exercises. Use the artifacts to explore MLIA workflows, model formats, and target-aware advice rather than accuracy reference models.
 
 The repository contains model artifacts such as:
 
