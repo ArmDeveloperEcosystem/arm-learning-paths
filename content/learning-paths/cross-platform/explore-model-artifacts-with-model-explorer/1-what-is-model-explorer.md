@@ -58,23 +58,23 @@ TOSA is not inherently ExecuTorch-specific. TOSA is an intermediate representati
         |
         +-- Cortex-M CMSIS-NN passes -> Cortex-M .pte
         |
-        +-- Lower to TOSA -------------+
-                                       |
-                                       |
-                                       |
-      Alternative (non PyTorch/ExecuTorch)          v
-      frontend with TOSA export ---> TOSA (.tosa)
-                                      |
-                                      |
-                                      +-- Ethos-U Vela
-                                      |     -> command stream
-                                      |     -> Ethos-U .pte
-                                      |
-                                      +-- ML SDK Model Converter
-                                            -> VGF payload
-                                            -> VGF-backend .pte
-                                            -> standalone .vgf
-                                               for workflows using the ML extensions for Vulkan
+        +-- Lower to TOSA -----------+
+                                     |
+      Alternative frontend          |
+      with TOSA export --------------+
+                                     |
+                                     v
+                                TOSA (.tosa)
+                                     |
+                                     +-- Ethos-U Vela
+                                     |     -> command stream
+                                     |     -> Ethos-U .pte
+                                     |
+                                     +-- ML SDK Model Converter
+                                           -> VGF payload
+                                           -> VGF-backend .pte
+                                           -> standalone .vgf
+                                              for workflows using the ML extensions for Vulkan
 ```
 
 For VGF, the ExecuTorch Arm VGF backend uses the [Arm ML SDK Model Converter](https://github.com/arm/ai-ml-sdk-model-converter) to produce a VGF backend payload from TOSA. But the Arm ML SDK Model Converter can be used to convert `.tosa` files generated from a different flow, so VGF is also not specific to ExecuTorch.
@@ -84,8 +84,6 @@ When ExecuTorch is used for VGF, a `.pte` is emitted as well. Use that VGF-backe
 If you've used the [Arm Neural Graphics Model Gym](https://github.com/arm/neural-graphics-model-gym), then you've been using ExecuTorch to export your neural graphics model to VGF. To learn more, see the [Fine-tune neural graphics using Model Gym](https://learn.arm.com/learning-paths/mobile-graphics-and-gaming/model-training-gym/#:~:text=Upon%20completion%20of%20this%20Learning,and%20train%20neural%20graphics%20models) Learning Path, which briefly introduces Model Explorer.
 
 ETRecord and ETDump are additional ExecuTorch-specific artifacts. ETRecord is generated at export time and preserves the graph context needed for profiling attribution. ETDump is generated at runtime and records what happened when a `.pte` ran. Together, these artifacts let Model Explorer move from static inspection to runtime overlays.
-
-You can connect the graph structures that you'll see in the `.pte`, `.tosa`, and `.vgf` sections to operator and delegate events measured during execution.
 
 ## Terminology
 
