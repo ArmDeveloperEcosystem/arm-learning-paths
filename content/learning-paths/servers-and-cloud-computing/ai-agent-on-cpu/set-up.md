@@ -137,41 +137,41 @@ general:
   -n,    --predict N              number of tokens to predict (default: -1, -1 = infinity, -2 = until context filled)
   -b,    --batch-size N           logical maximum batch size (default: 2048)
 ```
-## Running this Learning Path on macOS with Apple Silicon
+## Run this Learning Path on a Mac with Apple silicon
 
-The steps above target an Arm server running Ubuntu 22.04 LTS, but Apple Silicon Macs (M1, M2, M3, and M4) are Arm-based too, and you can follow this Learning Path on one with a few adjustments.
+You can also follow this Learning Path on a Mac with Apple silicon. Use these adjustments to the Ubuntu 22.04 LTS setup instructions.
 
 ### Install dependencies
 
-Use Homebrew instead of `apt`:
+Install Python 3.10 or later (Python ≥3.10), which `llama-cpp-agent` requires. Use Homebrew instead of `apt` to install Python and the build tools:
 
 ```bash
 brew install python cmake git
 ```
 
-This Learning Path needs Python 3.10 or later because `llama-cpp-agent` depends on it. macOS ships with an older system Python by default, so check your version first:
+Check that `python3` resolves to Python 3.10 or later before creating the virtual environment:
 
 ```bash
 python3 --version
 ```
 
-If it's below 3.10, install a newer version with Homebrew:
+If the version is below 3.10, update your shell's `PATH` to use the Homebrew-installed Python, then repeat the check. Create and activate the virtual environment using the verified interpreter:
 
 ```bash
-brew install python@3.12
-```
-
-Create the virtual environment using this newer Python directly:
-
-```bash
-python3.12 -m venv ai-agent
+python3 -m venv ai-agent
 source ai-agent/bin/activate
 ```
 
-Install `llama-cpp-python` without the `--extra-index-url` flag. A prebuilt wheel for macOS `arm64` is available directly from PyPI:
+Install `llama-cpp-python` without the `--extra-index-url` flag. This command builds `llama-cpp-python` and its bundled llama.cpp library from source:
 
 ```bash
 pip install llama-cpp-python
+```
+
+Install the agent framework, its data validation dependency, and the Hugging Face download tools in the active environment:
+
+```bash
+pip install llama-cpp-agent pydantic huggingface_hub
 ```
 
 ### Download the model
@@ -190,7 +190,7 @@ export HF_HUB_DISABLE_XET=1
 
 ### Build llama.cpp
 
-macOS builds with Metal, Apple's GPU framework, enabled by default. To measure genuine Arm CPU performance, the way this Learning Path intends, turn Metal off explicitly:
+To build the standalone llama.cpp tools without Metal GPU support, set `GGML_METAL=OFF`. Configure the Python package separately through `CMAKE_ARGS` when installing it; this standalone build does not change the library installed by pip.
 
 ```bash
 cmake .. -DCMAKE_CXX_FLAGS="-mcpu=native" -DCMAKE_C_FLAGS="-mcpu=native" -DGGML_METAL=OFF
