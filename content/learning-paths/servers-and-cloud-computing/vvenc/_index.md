@@ -27,6 +27,7 @@ operatingsystems:
 skilllevels: Introductory
 subjects: Libraries
 platforms:
+  - Arm AGI CPU
   - AWS Graviton
   - Microsoft Azure Cobalt
   - Google Axion
