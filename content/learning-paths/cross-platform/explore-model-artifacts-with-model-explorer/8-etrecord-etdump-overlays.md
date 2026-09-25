@@ -20,7 +20,7 @@ You'll use the [ExecuTorch extension for Model Explorer](https://github.com/arm/
 
 ETRecord provides the export-time graph context. It preserves graph, operator, debug handle, and delegate partition metadata, allowing runtime measurements to map back to graph nodes.
 
-ETDump contains runtime profiling data captured while the model executes with ExecuTorch event tracing enabled. The Model Explorer ETDump data provider presents aggregate timing measurements as overlays on graph nodes when the profiling events have matching debug handles. The provider excludes `DELEGATE_CALL` events. For the XNNPACK and Ethos-U artifacts in this Learning Path, events inside delegate calls don't contain the information needed to map timings to graph nodes, so Model Explorer doesn't display their timings. Use [ExecuTorch Inspector](https://docs.pytorch.org/executorch/stable/model-inspector.html) to view aggregate delegate timings from the matching ETRecord and ETDump.
+ETDump contains runtime profiling data captured while the model executes with ExecuTorch event tracing enabled. The Model Explorer ETDump data provider presents aggregate timing measurements as overlays on graph nodes. For the XNNPACK and Ethos-U artifacts in this Learning Path, events inside delegate calls don't contain the information needed to map timings to graph nodes, so Model Explorer doesn't display their timings. Use [ExecuTorch Inspector](https://docs.pytorch.org/executorch/stable/model-inspector.html) to view aggregate delegate timings from the matching ETRecord and ETDump.
 
 Use the two artifacts together:
 
