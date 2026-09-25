@@ -11,12 +11,12 @@ layout: learningpathall
 
 You can run the examples using one of the following routes:
 
-- Build and run natively on an arm64 macOS device with an M4 processor or later
-- Cross-compile on macOS or Linux and run on an Android phone with SME2 support
+- Build and run natively on an arm64 macOS device with an M4 processor or later.
+- Cross-compile on macOS or Linux and run on an Android phone with SME2 support.
 
-See the [list of devices with native SME2 support](https://learn.arm.com/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices) before selecting a target device.
+Before selecting a target device, see the [list of devices with native SME2 support](https://learn.arm.com/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices).
 
-The examples use recent Arm C Language Extensions (ACLE) intrinsics and SME2 assembly syntax. Use Homebrew LLVM Clang 22 or later for native macOS builds. Android cross-compilation requires host LLVM Clang 22 and Android NDK r29.
+The examples use recent Arm C Language Extensions (ACLE) intrinsics and Scalable Matrix Extension 2 (SME2) assembly syntax. Use Homebrew LLVM Clang 22 or later for native macOS builds. Android cross-compilation requires host LLVM Clang 22 and Android NDK r29.
 
 ## Set up native macOS development
 
@@ -60,7 +60,7 @@ Confirm the version:
 /opt/homebrew/opt/llvm/bin/clang --version
 ```
 
-The output includes text similar to:
+The output is similar to:
 
 ```output
 Homebrew clang version 22.1.7
@@ -71,10 +71,10 @@ The Makefile uses Homebrew LLVM at `/opt/homebrew/opt/llvm`.
 
 ## Set up Android cross-compilation
 
-The build host does not need SME2 support. The Android device that runs the
-LUTI examples does. Install the compiler tools on your macOS or Linux host.
+The build host doesn't need SME2 support. The Android device that runs the
+lookup-table instruction (LUTI) examples does. Install the compiler tools on your macOS or Linux host.
 
-Install LLVM 22 on the build host. On macOS, use Homebrew LLVM. The Linux commands below target Ubuntu 24.04 LTS on either x86-64 or AArch64 and use the [LLVM APT packages](https://apt.llvm.org/).
+Install LLVM 22 on the build host. On macOS, use Homebrew LLVM. The following Linux commands target Ubuntu 24.04 LTS on either x86-64 or AArch64 and use the [LLVM APT packages](https://apt.llvm.org/):
 
 {{< tabpane code=true >}}
   {{< tab header="macOS host" language="bash">}}
@@ -91,7 +91,7 @@ clang-22 --version
   {{< /tab >}}
 {{< /tabpane >}}
 
-Check that Clang reports version 22 or above.
+Check that Clang reports version 22 or later.
 
 Install Android Native Development Kit (Android NDK) r29:
 
@@ -112,7 +112,7 @@ unzip android-ndk-r29-linux.zip
   {{< /tab >}}
 {{< /tabpane >}}
 
-Set `NDK_PATH` and `ANDROID_NDK_HOME` so the Makefile can locate the NDK:
+Set `NDK_PATH` and `ANDROID_NDK_HOME` so that the Makefile can locate the NDK:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS host" language="bash">}}
@@ -136,7 +136,9 @@ sudo apt install adb
   {{< /tab >}}
 {{< /tabpane >}}
 
-Enable developer options and USB debugging on the Android phone, connect it to the host, and accept the debugging prompt on the phone. Verify the connection:
+Enable developer options and USB debugging on the Android phone, connect it to the host, and accept the debugging prompt on the phone.
+
+Verify the connection:
 
 ```bash
 adb devices -l
@@ -164,7 +166,7 @@ If SME2 isn't available to the device, the examples will skip at runtime and exi
 
 ## Download and explore the code examples
 
-Download the source and build files into a new `code` directory. Run these commands from a working directory of your choice:
+Download the source and build files into a new `code` directory. Run the following commands from a working directory of your choice:
 
 ```bash
 BASE_URL=https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/mobile-graphics-and-gaming/luti
@@ -181,7 +183,7 @@ for FILE in \
 done
 ```
 
-After the download completes, the `code` directory contains these source and build files:
+After the download completes, the `code` directory contains the following source and build files:
 
 ```output
 code/
@@ -197,4 +199,4 @@ code/
 You've prepared a compatible Clang compiler, verified an SME2-capable target,
 and downloaded the source files for the standalone examples.
 
-Next, you'll use `example_1_luti_decoding.c` to compare plain C shifts, masks, and scalar lookups with SME2 `LUTI2` expansion and matrix accumulation.
+Next, you'll use `example_1_luti_decoding.c` to compare plain C shifts, masks, and scalar lookups with SME2 LUTI2 expansion and matrix accumulation.

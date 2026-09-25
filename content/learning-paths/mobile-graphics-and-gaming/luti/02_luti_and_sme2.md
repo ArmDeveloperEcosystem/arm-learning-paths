@@ -9,13 +9,15 @@ layout: learningpathall
 
 ## SME and SME2 architectural features
 
-SME extends the Armv9-A architecture and accelerates matrix-heavy computations, such as outer products and matrix multiplication.
-SME introduces Streaming SVE mode and the scalable ZA matrix-storage array. ZA accumulates matrix outer products and multi-vector dot products.
+Arm Scalable Matrix Extension (SME) extends the Armv9-A architecture and accelerates matrix-heavy computations, such as outer products and matrix multiplication.
+
+SME introduces Streaming Scalable Vector Extension (SVE) mode and the scalable ZA matrix-storage array. ZA accumulates matrix outer products and multi-vector dot products.
 
 SME2 builds on SME and adds multi-vector instructions and the fixed 512-bit ZT0 lookup-table register.
 
-LUTI uses packed low-bit codes from Z source registers, reads the corresponding lookup table entries from `ZT0`, and writes expanded operands into Z destination registers.
-The expanded operands can then be consumed by SME2 matrix instructions such as `SDOT` or `SMOPA`, with results accumulated in `ZA` array.
+Lookup-table instructions (LUTIs) use packed low-bit codes from Z source registers. They read the corresponding lookup table entries from `ZT0`, and write expanded operands into Z destination registers.
+
+The expanded operands can then be consumed by SME2 matrix instructions such as `SDOT` or `SMOPA`, with results accumulated in the `ZA` array.
 
 ## ZT0 lookup-table register
 
@@ -27,9 +29,9 @@ LUTI4 works the same way but uses 4-bit indices, giving access to all sixteen en
 
 ![Diagram showing ZT0 as sixteen 32-bit entries. LUTI4 selects entries 0–15 using 4-bit indices, and the destination element size determines whether the low 8, 16, or 32 bits of each entry are copied.#center](images/luti4.png "ZT0 lookup-table organization used by LUTI4")
 
-LUTI instructions use packed low-bit indices from a source Z register (`Zn`) to select the corresponding `ZT0` register entry.
+LUTIs use packed low-bit indices from a source Z register (`Zn`) to select the corresponding `ZT0` register entry.
 
-The relevant `ZT0` entries are expanded to chosen output element destination width and written to output Z registers (`Zd`).
+The relevant `ZT0` entries are expanded to the chosen destination element width and written to output Z registers (`Zd`).
 
 LUTI2 and LUTI4 can populate one, two, or four destination Z registers. The number of destination registers and the expanded element width (`.B`, `.H`, or `.S`) determine how many packed source bits fill the destinations.
 
@@ -40,15 +42,15 @@ The element suffix specifies the expanded destination width:
 
 ## Streaming mode
 
-ZT0-based SME2 LUTI instructions need both streaming mode and ZA enabled. `SMSTART` enables the required state, and `SMSTOP` disables it.
+ZT0-based SME2 LUTIs need both streaming mode and ZA enabled. `SMSTART` enables the required state, and `SMSTOP` disables it.
 
 Streaming mode changes the execution context in three ways:
 
-- Vector and predicate lengths use the *streaming vector length* (SVL), which can differ from the non-streaming vector length
-- Streaming instructions, including the multi-register LUTI2, SDOT, and SMOPA forms, become available
-- `PSTATE.ZA` controls access to both the ZA matrix-storage array and `ZT0`
+- Vector and predicate lengths use the streaming vector length (SVL), which can differ from the non-streaming vector length.
+- Streaming instructions, including the multi-register LUTI2, SDOT, and SMOPA forms, become available.
+- `PSTATE.ZA` controls access to both the ZA matrix-storage array and `ZT0`.
 
-Efficient kernels enter streaming mode before repeated loops and exit afterwards. Streaming mode does not automatically stream matrix data from memory. The kernel still loads only the current computation tile.
+Efficient kernels enter streaming mode before repeated loops and exit afterwards. Streaming mode doesn't automatically stream matrix data from memory. The kernel still loads only the current computation tile.
 
 ## Follow the SME2 LUTI data path
 
@@ -62,34 +64,37 @@ SMSTOP
 ```
 
 A detailed LUTI SME2 flow is:
-  1. Enter SME streaming mode with `SMSTART` and load the LUT into the sixteen 32-bit `ZT0` register.
-  2. Load LHS activations and packed RHS data for the current computation tile.
-  3. Use LUTI2 or LUTI4 to expand the packed RHS indices from `ZT0` into Z registers.
-  4. Feed the expanded RHS elements and LHS activations to SME2 instructions, such as `SDOT` or `SMOPA`.
-  5. Accumulate partial matrix products in the SME2 `ZA` array.
-  6. Convert, clamp, and store the completed output tile as required by the kernel.
-  7. Exit SME streaming mode with `SMSTOP`. This disables the ZA and ZT0 state after the kernel completes.
 
-LUTI replaces the explicit unpack/decode portion of the data path. It does not replace the matrix multiply instruction that consumes the expanded values.
+1. Enter SME streaming mode with `SMSTART` and load the LUT into the sixteen 32-bit `ZT0` register.
+2. Load left-hand side (LHS) activations and packed right-hand side (RHS) data for the current computation tile.
+3. Use LUTI2 or LUTI4 to expand the packed RHS indices from `ZT0` into Z registers.
+4. Feed the expanded RHS elements and LHS activations to SME2 instructions, such as `SDOT` or `SMOPA`.
+5. Accumulate partial matrix products in the SME2 `ZA` array.
+6. Convert, clamp, and store the completed output tile as required by the kernel.
+7. Exit SME streaming mode with `SMSTOP`. This disables the ZA and ZT0 state after the kernel completes.
 
-### Example: kernel with LUTI2
+LUTI replaces the explicit unpack and decode portion of the data path. It doesn't replace the matrix multiply instruction that consumes the expanded values.
 
-This example shows how LUTI2 expands packed 2-bit RHS weights. It simplifies register allocation, predication, addressing, and loop control to focus on the LUTI data flow.
+### Example kernel with LUTI2
 
-{{% notice Note %}} This example uses a 512-bit streaming vector length (SVL). The SVL is a CPU specific property. {{% /notice %}}
+The following example kernel shows how LUTI2 expands packed 2-bit RHS weights. It simplifies register allocation, predication, addressing, and loop control to focus on the LUTI data flow.
 
-__1. Define and pass the LUT__
+{{% notice Note %}} The example uses a 512-bit SVL. The SVL is a CPU-specific property. {{% /notice %}}
 
-`ZT0` contains sixteen 32-bit entries. LUTI2 uses entries 0–3; entries 4–15 are unused and contain zero.
+#### Define and pass the lookup table
+
+`ZT0` contains sixteen 32-bit entries. LUTI2 uses entries 0 to 3:
+
 ```c
 static const int32_t lut_i8_i2[16] = {-2, -1, 0, 1,};
 ```
+Entries 4 to 15 are unused and contain zero.
 
 For a `.B` LUTI result, the low 8 bits of the selected 32-bit entry form the destination element.
 
-__2. Load the LUT into ZT0__
+#### Load the lookup table into ZT0
 
-Enter streaming mode, initialize ZA, and load ZT0. The lookup table does not change across the inner matrix loop, so load it once before the loop.
+Enter streaming mode, initialize ZA, and load ZT0. The lookup table doesn't change across the inner matrix loop, so load it once before the loop:
 
 ```asm
 smstart                   // Enable Streaming SVE mode and ZA/ZT0 state
@@ -97,9 +102,9 @@ zero    {za}              // Zero initialize accumulators for this output tile
 ldr     zt0, [lut_i8_i2]      // load LUT into fixed 512-bit ZT0 table
 ```
 
-__3. Load LHS and packed RHS__
+#### Load LHS and packed RHS
 
-Load the LHS activations and packed RHS 2-bit indices for the current computation tile, not the entire matrix.
+Load the LHS activations and packed RHS 2-bit indices for the current computation tile, not the entire matrix:
 
 ```asm
 ld1rqb  {z0.b}, ... , [x_lhs]               // load LHS
@@ -110,22 +115,23 @@ ld1b    {z16.b-z19.b}, ... , [x_packed_rhs] // load RHS packed 2-bit indices
 
 `ld1rqb` is the SVE load-and-replicate-quadword operation. For a 512-bit SVL, you can view `z0` as four 128-bit regions. `ld1rqb` replicates the 16-byte LHS block across those regions.
 
-__4. LUTI2 expands the packed indices__
+#### LUTI2 expands the packed indices
+
+Each LUTI2 instruction reads packed 2-bit indices from one source Z register (`z16` to `z19`) and expands them into four `.B` destination registers for a 512-bit SVL:
+
 ```asm
 luti2   { z24.b - z27.b }, zt0, z16[0]     // unpack 2-bit indices
 luti2   { z4.b  - z7.b  }, zt0, z17[0]
 luti2   { z8.b  - z11.b }, zt0, z18[0]
 luti2   { z12.b - z15.b }, zt0, z19[0]
 ```
-Each LUTI2 instruction reads packed 2-bit indices from one source Z register (`z16` to `z19`) and expands them into four `.B` destination registers for a 512-bit SVL.
 
-__5. Feed the expanded vectors directly to SDOT__
+#### Feed the expanded vectors directly to SDOT
 
 The expanded vectors can now feed SME2 matrix instructions such as `SDOT` or `SMOPA`, which accumulate the results in `ZA`.
 
 ## What you've learned and what's next
 
-You've learned how LUTI operates within SME2: a micro-kernel loads the lookup table into `ZT0`, uses packed low-bit indices in Z registers to expand the RHS values, and feeds those expanded values into SME2 instructions.
+You've learned how LUTI operates within SME2. A micro-kernel loads the lookup table into `ZT0`. It uses packed low-bit indices in Z registers to expand the RHS values, and feeds those expanded values into SME2 instructions.
 
-Next, you'll apply these concepts to a complete low-bit matrix multiplication kernel and examine how LUTI can replace explicit unpacking and decoding in the inner computation loop.
-
+Next, you'll select and prepare a macOS or Android SME2 environment for the SME2 LUTI examples.
