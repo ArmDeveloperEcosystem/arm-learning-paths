@@ -81,6 +81,7 @@ armips:
 operatingsystems:
 - Linux
 tools_software_languages:
+  - Arm AGI CPU
   - Neon
   - SVE
   - Intrinsics
