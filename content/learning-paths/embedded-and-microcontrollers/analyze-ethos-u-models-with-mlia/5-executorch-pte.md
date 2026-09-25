@@ -17,7 +17,7 @@ A `.pte` file is a portable ExecuTorch executable: the packaged artifact that Ex
 
 You'll compare two packaged `.pte` artifacts with Corstone backends.
 
-## Compare prebuilt `.pte` artifacts
+## Compare prebuilt ExecuTorch artifacts
 
 The model artifacts repository includes prebuilt Ethos-U `.pte` files:
 
@@ -89,7 +89,7 @@ You've used MLIA with LiteRT, TOSA, and ExecuTorch `.pte` artifacts. MLIA answer
 
 Model Explorer can open some formats directly, while other formats use adapters. Use Model Explorer alongside MLIA when you want to connect target advice with the graph structure that produced it.
 
-In the earlier example, Ethos-U85 is expected to perform better due to its platform differences. The model also delegates differently for Ethos-U85 and Ethos-U55.
+In the earlier example, Ethos-U85 is expected to perform better due to its platform differences. The model also delegates differently for Ethos-U85 compared to Ethos-U55.
 
 The model pattern is:
 
