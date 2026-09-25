@@ -137,4 +137,66 @@ general:
   -n,    --predict N              number of tokens to predict (default: -1, -1 = infinity, -2 = until context filled)
   -b,    --batch-size N           logical maximum batch size (default: 2048)
 ```
+## Running this Learning Path on macOS with Apple Silicon
+
+The steps above target an Arm server running Ubuntu 22.04 LTS, but Apple Silicon Macs (M1, M2, M3, and M4) are Arm-based too, and you can follow this Learning Path on one with a few adjustments.
+
+### Install dependencies
+
+Use Homebrew instead of `apt`:
+
+```bash
+brew install python cmake git
+```
+
+This Learning Path needs Python 3.10 or later because `llama-cpp-agent` depends on it. macOS ships with an older system Python by default, so check your version first:
+
+```bash
+python3 --version
+```
+
+If it's below 3.10, install a newer version with Homebrew:
+
+```bash
+brew install python@3.12
+```
+
+Create the virtual environment using this newer Python directly:
+
+```bash
+python3.12 -m venv ai-agent
+source ai-agent/bin/activate
+```
+
+Install `llama-cpp-python` without the `--extra-index-url` flag. A prebuilt wheel for macOS `arm64` is available directly from PyPI:
+
+```bash
+pip install llama-cpp-python
+```
+
+### Download the model
+
+Newer versions of `huggingface_hub` replace `huggingface-cli` with `hf`. If you see a deprecation warning, use:
+
+```bash
+hf download cognitivecomputations/dolphin-2.9.4-llama3.1-8b-gguf dolphin-2.9.4-llama3.1-8b-Q4_0.gguf --local-dir .
+```
+
+The download can fail partway through with a `CAS Client Error` during file reconstruction. If you see this error, disable the Xet transfer backend and try again:
+
+```bash
+export HF_HUB_DISABLE_XET=1
+```
+
+### Build llama.cpp
+
+macOS builds with Metal, Apple's GPU framework, enabled by default. To measure genuine Arm CPU performance, the way this Learning Path intends, turn Metal off explicitly:
+
+```bash
+cmake .. -DCMAKE_CXX_FLAGS="-mcpu=native" -DCMAKE_C_FLAGS="-mcpu=native" -DGGML_METAL=OFF
+cmake --build . -v --config Release -j $(sysctl -n hw.ncpu)
+```
+
+If you're testing these steps from inside a clone of this repository, activate your existing `ai-agent` environment rather than creating a new one in the current folder. Two environments with the same name can make it hard to tell which one is active, and commands like `hf` will fail with `command not found` if you're pointed at the wrong one.
+
 In the next section, you will create a Python script to execute an AI agent powered by the downloaded model.
