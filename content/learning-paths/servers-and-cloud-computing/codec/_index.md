@@ -13,8 +13,9 @@ learning_objectives:
   presets to measure the performance impact
 
 prerequisites:
-- An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
-  cloud service provider. This Learning Path has been verified on AWS EC2 and Oracle cloud services, running `Ubuntu Linux 20.04.`
+- An Arm server running Linux. This Learning Path has been validated on an Arm AGI CPU running
+  Ubuntu 24.04 LTS. It has also been verified on [Arm based instances](/learning-paths/servers-and-cloud-computing/csp/)
+  from AWS EC2 and Oracle Cloud running Ubuntu Linux 20.04.
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -76,6 +77,7 @@ test_maintenance: true
 skilllevels: Introductory
 subjects: Libraries
 platforms:
+  - Arm AGI CPU
   - AWS Graviton
   - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
