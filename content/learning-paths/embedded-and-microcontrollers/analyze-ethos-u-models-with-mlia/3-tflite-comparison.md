@@ -1,5 +1,5 @@
 ---
-title: Analyze LiteRT artifacts with Vela 
+title: Analyze LiteRT artifacts with Vela
 
 description: Run MLIA compatibility and Vela performance checks on LiteRT models and inspect JSON metrics, operator placement, and advice.
 
@@ -104,7 +104,7 @@ The following table describes the fields in the generated report, and what they 
 | `checks` | The individual operator support checks. |
 | `entities` | The operators MLIA analyzed, including placement and operator type. |
 
-For the INT8 LiteRT file, the important result is that the `status` is `ok` and `accelerator_operator_percentage` is `100.0`. That means Vela found the operators in this quantized MobileNetV2 LiteRT artifact compatible with the selected `ethos-u85-256` target profile. MLIA therefore expects the operator work to map to the NPU path for this compatibility check. 
+For the INT8 LiteRT file, the important result is that the `status` is `ok` and `accelerator_operator_percentage` is `100.0`. That means Vela found the operators in this quantized MobileNetV2 LiteRT artifact compatible with the selected `ethos-u85-256` target profile. MLIA therefore expects the operator work to map to the NPU path for this compatibility check.
 
 The result doesn't prove runtime latency or application accuracy. It tells you that the model is a good candidate for the next step: performance estimation and deeper deployment testing.
 
@@ -212,12 +212,12 @@ For this INT8 LiteRT file, the Vela-backed estimate reports the following:
 - About `5.01M` total cycles
 - About `5.01 ms` inference time for batch size 1
 - About `199.7` inferences per second
-- About `72.4%` target utilization. 
+- About `72.4%` target utilization
 - About `3.62M` NPU cycles, plus SRAM and DRAM access cycles
 
 Treat these as target-aware estimates for the NPU portion of the model rather than final runtime measurements from hardware.
 
-In this report, MLIA advises on where to investigate to improve target performance. The advice identifies the ten layers that make up most operator cycles. It flags five high-impact layers with low MAC utilization, and five high-impact layers as possibly memory-bound. 
+In this report, MLIA advises on where to investigate to improve target performance. The advice identifies the ten layers that make up most operator cycles. It flags five high-impact layers with low MAC utilization, and five high-impact layers as possibly memory-bound.
 
 Low MAC utilization can be expected for layers with small channel counts, small spatial dimensions, or heavy memory movement. These are the layers to consider adjusting.
 

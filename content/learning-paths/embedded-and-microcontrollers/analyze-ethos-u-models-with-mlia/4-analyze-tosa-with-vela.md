@@ -48,7 +48,7 @@ mlia check tosa/mv2_int8.tosa \
   --json
 ```
 
-The INT8 TOSA report shows `status` as `ok` and `accelerator_operator_percentage` as `100.0`. The model format is now TOSA, but the target profile and Vela backend configuration are the same as the LiteRT run. 
+The INT8 TOSA report shows `status` as `ok` and `accelerator_operator_percentage` as `100.0`. The model format is now TOSA, but the target profile and Vela backend configuration are the same as the LiteRT run.
 
 The difference from the FP32 TOSA artifact is that the INT8 artifact has the quantized representation required for Ethos-U acceleration. The operator support checks pass, and MLIA expects the operator work to map to the NPU path.
 
@@ -64,7 +64,7 @@ mlia check tosa/mv2_int8.tosa \
 
 The report is similar to the INT8 LiteRT performance result. The model maps to the NPU path. MLIA reports NPU-scoped estimated metrics, and the advice points you toward operators that dominate estimated cycles or have low utilization.
 
-Whether it's useful for you to use TOSA with MLIA depends on your workflow. Many developers will likely use ExecuTorch or LiteRT artifacts directly.
+Whether TOSA with MLIA is useful depends on your workflow. Many developers will likely use ExecuTorch or LiteRT artifacts directly.
 
 ## What you've accomplished and what's next
 

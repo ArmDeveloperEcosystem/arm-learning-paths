@@ -106,6 +106,7 @@ corstone-310  no         yes
 corstone-320  no         yes
 vela          no         yes
 ```
+
 Use Vela for LiteRT and Tensor Operator Set Architecture (TOSA) checks. Use Corstone for packaged ExecuTorch `.pte` checks.
 
 When you later use `mlia check`, any missing backends required by your target will be installed.

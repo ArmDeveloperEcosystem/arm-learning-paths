@@ -1,7 +1,7 @@
 ---
-title: Analyze ML models with Arm ML Inference Advisor
+title: Analyze ML models for Arm Ethos-U with MLIA
 
-description: Learn how to use Arm ML Inference Advisor from the command line to check model compatibility, estimate performance, and identify target-aware model improvement opportunities using Ethos-U as the example target.
+description: Use Arm ML Inference Advisor (MLIA) to analyze model artifacts for Ethos-U compatibility and performance.
 
 minutes_to_complete: 45
 
@@ -65,7 +65,7 @@ generated_summary_faq:
       estimated cycles or have low MAC utilization.
   - question: When should I use Corstone analysis or the MLIA Python API?
     answer: >-
-      Use Corstone to run a packaged ExecuTorch `.pte` artifact on an Fixed Virtual Platform (FVP) and collect whole-model NPU
+      Use Corstone to run a packaged ExecuTorch `.pte` artifact on a Fixed Virtual Platform (FVP) and collect whole-model NPU
       performance counters. It doesn't provide per-layer estimates or operator breakdowns. Use
       `run_advisor()` from the Python API when you want to integrate MLIA compatibility checks into
       a product, dashboard, workflow runner, or CI system.

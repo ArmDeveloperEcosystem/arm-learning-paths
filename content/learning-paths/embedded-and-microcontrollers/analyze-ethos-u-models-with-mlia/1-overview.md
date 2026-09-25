@@ -9,7 +9,7 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Why use MLIA 
+## Why use MLIA
 
 Use Arm ML Inference Advisor (MLIA) to evaluate whether a machine learning model is suitable for a target inference platform.
 
@@ -36,7 +36,7 @@ If you want to automate the same checks, you can [optionally use the Python API]
 
 ## How you should use MLIA
 
-MLIA isn't a replacement for graph visualization or runtime profiling. It's an advisory layer that helps earlier in the model preparation workflow. The following table demonstrates the questions that you can answer by using MLIA with other tools:
+MLIA isn't a replacement for graph visualization or runtime profiling. It's an advisory layer that helps earlier in the model preparation workflow. The following table shows which questions MLIA and related tools can answer:
 
 | Tool or backend | Use it to answer |
 | --- | --- |
@@ -46,7 +46,7 @@ MLIA isn't a replacement for graph visualization or runtime profiling. It's an a
 | Model Explorer | What does the generated model artifact graph look like? |
 | Runtime-specific profiling tools | What happened when the model ran? For example, use ETRecord, ETDump, and ExecuTorch Inspector for ExecuTorch deployments. Use LiteRT benchmark and profiling tools for LiteRT deployments. |
 
-Vela-backed MLIA checks use compiler estimates. The checks can include operator-level breakdowns, such as which layers dominate estimated cycles or have low MAC utilization. 
+Vela-backed MLIA checks use compiler estimates. The checks can include operator-level breakdowns, such as which layers dominate estimated cycles or have low MAC utilization.
 
 Corstone-backed MLIA checks run a packaged `.pte` file on an FVP and report NPU performance counters for the whole model run. The checks don't provide per-layer estimates or operator breakdowns.
 

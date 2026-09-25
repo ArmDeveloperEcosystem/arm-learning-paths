@@ -17,7 +17,7 @@ A `.pte` file is a portable ExecuTorch executable: the packaged artifact that Ex
 
 You'll compare two packaged `.pte` artifacts with Corstone backends.
 
-## Compare prebuilt .pte artifacts
+## Compare prebuilt `.pte` artifacts
 
 The model artifacts repository includes prebuilt Ethos-U `.pte` files:
 
@@ -28,11 +28,11 @@ pte/toy_conditional_select_int8_ethos_u85_256.pte
 
 These are synthetic learning artifacts rather than benchmark models. The artifacts use a small convolution plus a conditional selection pattern to make target-dependent delegation easier to see. A model can be packaged for different Ethos-U targets and show different delegation and runtime-counter behavior.
 
-For supported `.pte` workloads, MLIA performance analysis uses a Corstone backend. In this context, Corstone refers to an Arm reference subsystem platform. The backend uses a Fixed Virtual Platform (FVP). 
+For supported `.pte` workloads, MLIA performance analysis uses a Corstone backend. In this context, Corstone refers to an Arm reference subsystem platform. The backend uses a Fixed Virtual Platform (FVP).
 
 An FVP is a software model of a hardware platform. You can use an FVP to run a packaged artifact in a target-like environment and collect performance counters without needing a physical board on your desk.
 
-For `.pte` artifacts, MLIA currently supports only performance analysis. The artifact has already been packaged for an ExecuTorch deployment path. Corstone is used to run the packaged program on an FVP and collect NPU performance counters for the whole model run. 
+For `.pte` artifacts, MLIA currently supports only performance analysis. The artifact has already been packaged for an ExecuTorch deployment path. Corstone is used to run the packaged program on an FVP and collect NPU performance counters for the whole model run.
 
 Corstone doesn't provide per-layer estimates or operator breakdowns. Perform a Vela-backed analysis similar to earlier when you need layer-level performance estimates or compatibility checks.
 
@@ -89,7 +89,7 @@ You've used MLIA with LiteRT, TOSA, and ExecuTorch `.pte` artifacts. MLIA answer
 
 Model Explorer can open some formats directly, while other formats use adapters. Use Model Explorer alongside MLIA when you want to connect target advice with the graph structure that produced it.
 
-In the earlier example, Ethos-U85 is expected to perform better due to its platform differences. There's also a difference in the way the model delegates to Ethos-U85 vs Ethos-U55.
+In the earlier example, Ethos-U85 is expected to perform better due to its platform differences. The model also delegates differently for Ethos-U85 and Ethos-U55.
 
 The model pattern is:
 
@@ -107,16 +107,16 @@ aten::gt / aten::where outside delegate
 EthosUBackend region
 ```
 
-On Ethos-U85, the model pattern is handled more cleanly by this backend flow, so the packaged artifact has one `EthosUBackend` region. This will provide further performance benefit, as there's reduced fragmentation between CPU and NPU. To visualize the delegation of models to different backends, use the Model Explorer tool with Arm adapters.
+On Ethos-U85, this backend flow handles the model pattern more cleanly, so the packaged artifact has one `EthosUBackend` region. This provides a further performance benefit because it reduces fragmentation between CPU and NPU. Use Model Explorer with Arm adapters to visualize how models delegate to different backends.
 
 {{% notice Note %}}
-An ExecuTorch `.pte` file can contain work outside an accelerator delegate. However, there's no guarantee that every non-delegated operator can run on the CPU runtime that you deploy. CPU execution depends on the kernel libraries linked into that runtime and the operators, dtypes, layouts, and shapes that they support. 
+An ExecuTorch `.pte` file can contain work outside an accelerator delegate. However, there's no guarantee that every non-delegated operator can run on the CPU runtime that you deploy. CPU execution depends on the kernel libraries linked into that runtime and the operators, dtypes, layouts, and shapes that they support.
 
 Cortex-M bare-metal runtimes are usually built with a smaller, more selective kernel set than Cortex-A runtimes. The difference in kernel set is because Cortex-M systems have tighter memory and storage constraints. In both cases, CPU fallback support depends on which kernels are included in the runtime build.
 {{% /notice %}}
 
-## What you've accomplished 
+## What you've accomplished
 
-You've learned how `.tflite`, `.tosa`, and `.pte` fit into MLIA workflows. You've also seen why PTE is useful for ExecuTorch artifact analysis, where TOSA can fit as an intermediate handoff, and why Model Explorer remains useful for graph structure.
+You've learned how `.tflite`, `.tosa`, and `.pte` fit into MLIA workflows. You've also seen why `.pte` is useful for ExecuTorch artifact analysis, where TOSA can fit as an intermediate handoff, and why Model Explorer remains useful for graph structure.
 
 You can extend this CLI workflow to evaluate other models for whether they're suitable for a target. If you want to call MLIA from automation or another tool, see the next section [(Optional) Use the MLIA Python API](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/6-python-api/).

@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## Run MLIA from Python and compare two models
 
-The Arm ML Inference Advisor (MLIA) CLI is best way to learn the tool, inspect output, and debug your environment.
+The Arm ML Inference Advisor (MLIA) CLI is the best way to learn the tool, inspect output, and debug your environment.
 
 Use the Python API when you want another product, dashboard, workflow runner, or CI system to integrate MLIA.
 
@@ -56,9 +56,9 @@ Run the comparison script:
 python compare_mlia_models.py
 ```
 
-The expected result is that `mv2_fp32.tflite` reports `compatibility incompatible`, while `mv2_int8.tflite` reports `compatibility ok`. 
+The expected result is that `mv2_fp32.tflite` reports `compatibility incompatible`, while `mv2_int8.tflite` reports `compatibility ok`.
 
-You might still see warning advice for both models. For example, MLIA can report that `SOFTMAX` is a suboptimal activation even when the quantized model is otherwise compatible with the NPU. 
+You might still see warning advice for both models. For example, MLIA can report that `SOFTMAX` is a suboptimal activation even when the quantized model is otherwise compatible with the NPU.
 
 Compatibility tells you whether the model can map to the target. Advice can still point out ways to improve it.
 
@@ -95,3 +95,5 @@ Use discovery in integrations so that your product can report what the current e
 ## What you've accomplished
 
 You've used the Python API to run the same kind of analysis you performed from the CLI. You've also learned how to compare model variants programmatically and why the API is useful for product integration or automation.
+
+You can now incorporate these MLIA checks into an automation or integration workflow.
