@@ -1,0 +1,14 @@
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 675' role='img'>
+<title>Complete OMM support chain</title>
+<style>text{font-family:Arial;fill:#163444}.h{font-size:34px;font-weight:700}.t{font-size:21px;font-weight:700}.p{font-size:17px}.l{stroke:#294b5c;stroke-width:2}</style>
+<rect width='1200' height='675' fill='#f3f7f9'/><text x='55' y='60' class='h'>OMM depends on a complete support chain</text>
+<g transform='translate(100 105)'><rect width='590' height='62' rx='11' fill='#eef6df' class='l'/><text x='25' y='39' class='t'>1. Content</text><text x='260' y='39' class='p'>Stable alpha-tested pattern</text>
+<rect y='72' width='590' height='62' rx='11' fill='#e8f5e9' class='l'/><text x='25' y='111' class='t'>2. Baker</text><text x='260' y='111' class='p'>Mesh + UV + alpha → states</text>
+<rect y='144' width='590' height='62' rx='11' fill='#e7f3fb' class='l'/><text x='25' y='183' class='t'>3. Vulkan feature</text><text x='260' y='183' class='p'>Capability and properties</text>
+<rect y='216' width='590' height='62' rx='11' fill='#e7f3fb' class='l'/><text x='25' y='255' class='t'>4. Mali driver</text><text x='260' y='255' class='p'>Target API path exposed</text>
+<rect y='288' width='590' height='62' rx='11' fill='#edf0fa' class='l'/><text x='25' y='327' class='t'>5. Engine / RHI</text><text x='260' y='327' class='p'>Resource and build integration</text>
+<rect y='360' width='590' height='62' rx='11' fill='#fff4cf' class='l'/><text x='25' y='399' class='t'>6. Runtime geometry</text><text x='260' y='399' class='p'>Triangle association + BLAS</text>
+<rect y='432' width='590' height='62' rx='11' fill='#f8eaf4' class='l'/><text x='25' y='471' class='t'>7. Validation</text><text x='260' y='471' class='p'>Visual result + active OMM state</text></g>
+<path d='M760 155V540' stroke='#087bc1' stroke-width='6'/><text x='800' y='175' class='t'>Data moves through every layer</text><text x='800' y='215' class='p'>Each stage prepares valid OMM</text><text x='800' y='245' class='p'>information for the next.</text><text x='800' y='335' class='t'>Validation closes the loop</text><text x='800' y='375' class='p'>Rendered silhouette and runtime</text><text x='800' y='405' class='p'>geometry must describe the same data.</text>
+<rect x='780' y='485' width='340' height='90' rx='18' fill='#fff' stroke='#2e7d32' stroke-width='3'/><text x='850' y='525' class='t'>Complete path</text><text x='830' y='557' class='p'>OMM ready for traversal</text>
+</svg>
