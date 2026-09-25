@@ -20,10 +20,61 @@ prerequisites:
   - Basic familiarity with machine learning model deployment concepts
   - Basic familiarity with command-line tools
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-09-25T16:09:23Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: fd6174ed455ac37b777456bd6894b86f078555fbaeeb49fda696618ecb9c6489
+  summary_generated_at: '2026-09-25T16:09:23Z'
+  summary_source_hash: fd6174ed455ac37b777456bd6894b86f078555fbaeeb49fda696618ecb9c6489
+  faq_generated_at: '2026-09-25T16:09:23Z'
+  faq_source_hash: fd6174ed455ac37b777456bd6894b86f078555fbaeeb49fda696618ecb9c6489
+  summary: >-
+    You use Arm ML Inference Advisor (MLIA) to assess model suitability for Ethos-U targets before
+    deployment. You install MLIA, discover target profiles and backends, and compare LiteRT and TOSA
+    artifacts with Vela. You then analyze packaged ExecuTorch `.pte` artifacts with Corstone. You
+    learn that Vela provides compiler estimates and operator breakdowns, while Corstone reports
+    whole-model NPU counters. Optionally, you automate compatibility checks with the Python API.
+  faqs:
+  - question: How do I confirm Git LFS is set up before downloading the model artifacts?
+    answer: >-
+      Run `git lfs version`. If the command fails on Ubuntu, run `sudo apt update`, then install
+      Git LFS and the Python development package with `sudo apt install -y git-lfs python3.10-dev`.
+      Run `git lfs install` before you clone the repository and pull the model artifacts.
+  - question: How do I verify MLIA is installed and discover available backends and target profiles?
+    answer: >-
+      Activate your virtual environment with `source mlia_env/bin/activate`, then run `mlia --help`
+      to confirm that the CLI works. To list target profiles, run `mlia target list`. To see available
+      and installed backends, run `mlia backend list`.
+  - question: Why is the FP32 LiteRT model incompatible while the INT8 model is compatible?
+    answer: >-
+      Ethos-U acceleration needs supported quantized integer workloads. The FP32 model lacks the
+      needed quantization parameters, so MLIA reports `accelerator_operator_percentage` as `0`.
+      For the supplied INT8 model, Vela reports `status` as `ok` and
+      `accelerator_operator_percentage` as `100.0` for the `ethos-u85-256` profile.
+  - question: What does Vela performance analysis tell me about LiteRT and TOSA artifacts?
+    answer: >-
+      You get target-aware compiler estimates, including cycles, utilization, memory use, and
+      operator-level breakdowns when available. Treat these values as estimates for NPU work, not
+      final latency measurements from hardware. Use the advice to identify operators that dominate
+      estimated cycles or have low MAC utilization.
+  - question: When should I use Corstone analysis or the MLIA Python API?
+    answer: >-
+      Use Corstone to run a packaged ExecuTorch `.pte` artifact on an FVP and collect whole-model NPU
+      performance counters. It doesn't provide per-layer estimates or operator breakdowns. Use
+      `run_advisor()` from the Python API when you want to integrate MLIA compatibility checks into
+      a product, dashboard, workflow runner, or CI system.
+# END generated_summary_faq
+
 author:
   - Matt Cossins
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

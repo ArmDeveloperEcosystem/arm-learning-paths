@@ -1,5 +1,5 @@
 ---
-title: (Optional) Use the Python API
+title: (Optional) Use the MLIA Python API
 
 description: Use the optional MLIA Python API to run compatibility checks, compare LiteRT models, and discover targets and backends programmatically.
 
@@ -15,9 +15,9 @@ The Arm ML Inference Advisor (MLIA) CLI is best way to learn the tool, inspect o
 
 Use the Python API when you want another product, dashboard, workflow runner, or CI system to integrate MLIA.
 
-The `mlia` Python package exposes the same advisor functionality used by the CLI. Use `run_advisor()` as the main API entry point, and helper functions such as `list_targets()`, `list_target_profiles()`, and `list_backends()` to discover what the installed environment supports.
+The `mlia` Python package exposes the same advisor functionality used by the CLI. Use `run_advisor()` as the main API entry point. Use helper functions such as `list_targets()`, `list_target_profiles()`, and `list_backends()` to discover what the installed environment supports.
 
-The following example shows using the API to analyze two LiteRT model variants, and then printing results and advice:
+The following example shows how you can use the API to analyze two LiteRT model variants, and print results and advice:
 
 ```bash
 cat > compare_mlia_models.py <<'PY'
@@ -94,4 +94,4 @@ Use discovery in integrations so that your product can report what the current e
 
 ## What you've accomplished
 
-You've used the Python API to run the same kind of analysis you performed from the CLI. You've also seen how to compare model variants programmatically and why the API is useful for product integration or automation.
+You've used the Python API to run the same kind of analysis you performed from the CLI. You've also learned how to compare model variants programmatically and why the API is useful for product integration or automation.

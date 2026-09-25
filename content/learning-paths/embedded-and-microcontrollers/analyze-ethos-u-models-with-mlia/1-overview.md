@@ -13,8 +13,6 @@ layout: "learningpathall"
 
 Use Arm ML Inference Advisor (MLIA) to evaluate whether a machine learning model is suitable for a target inference platform.
 
-You'll use MLIA from the command line to check model compatibility, estimate performance, and read advice that points toward useful model changes. Arm Ethos-U is the example target in the Learning Path.
-
 MLIA is most useful before full deployment or runtime profiling, when you're asking questions such as:
 
 - Will this model map cleanly to my target?
@@ -25,14 +23,16 @@ MLIA is most useful before full deployment or runtime profiling, when you're ask
 
 MLIA doesn't make the final optimization decision for you. It gives target-aware evidence so that you can decide what to change, what to measure next, and which workflow stage deserves attention.
 
-The MLIA CLI is the primary workflow in this Learning Path. You'll use the CLI to complete the following tasks:
+You'll use the CLI to complete the following tasks:
 
 - Discover installed targets, target profiles, and backends
 - Run compatibility checks
 - Run performance analysis
 - Inspect advice and metrics
 
-If you want to automate the same checks, you can optionally use the Python API. The API is useful when you want to embed MLIA results in another product, dashboard, CI job, or tool.
+Arm Ethos-U is the example target in the Learning Path.
+
+If you want to automate the same checks, you can [optionally use the Python API](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/6-python-api/). The API is useful when you want to embed MLIA results in another product, dashboard, CI job, or tool.
 
 ## How you should use MLIA
 
@@ -60,13 +60,13 @@ Use the following tools together:
 
 ## Supported model formats
 
-MLIA can analyze different kinds of model artifacts depending on what workflow you are using and the stage you want to analyze.
+MLIA can analyze different kinds of model artifacts depending on what workflow you are using and the stage that you want to analyze:
 
 | Format | Where it fits |
 | --- | --- |
 | `.pte` | Serialized ExecuTorch program. Ethos-U `.pte` performance analysis uses Corstone backends. |
 | `.tflite` | LiteRT model format used in many Ethos-U and embedded ML workflows. |
-| `.tosa` | Intermediate representation consumed by compiler/backend flows such as Ethos-U Vela. |
+| `.tosa` | Intermediate representation consumed by compiler or backend flows such as Ethos-U Vela. |
 
 ## What you've learned and what's next
 

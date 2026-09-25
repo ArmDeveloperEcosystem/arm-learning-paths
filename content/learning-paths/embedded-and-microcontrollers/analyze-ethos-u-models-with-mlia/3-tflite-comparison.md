@@ -217,9 +217,9 @@ For this INT8 LiteRT file, the Vela-backed estimate reports the following:
 
 Treat these as target-aware estimates for the NPU portion of the model rather than final runtime measurements from hardware.
 
-In this report, MLIA advises on where to investigate to improve target performance. The advice identifies the ten layers that make up most operator cycles. It flags five high-impact layers with low MAC utilization, and flags five high-impact layers as possibly memory-bound. 
+In this report, MLIA advises on where to investigate to improve target performance. The advice identifies the ten layers that make up most operator cycles. It flags five high-impact layers with low MAC utilization, and five high-impact layers as possibly memory-bound. 
 
-Low MAC utilization can be expected for layers with small channel counts, small spatial dimensions, or heavy memory movement, so these are the layers to consider adjusting.
+Low MAC utilization can be expected for layers with small channel counts, small spatial dimensions, or heavy memory movement. These are the layers to consider adjusting.
 
 ## What you've accomplished and what's next
 

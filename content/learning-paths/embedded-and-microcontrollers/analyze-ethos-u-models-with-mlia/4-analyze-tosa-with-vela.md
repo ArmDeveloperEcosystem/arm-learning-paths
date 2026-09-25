@@ -36,7 +36,7 @@ mlia check tosa/mv2_fp32.tosa \
   --json
 ```
 
-This result is similar to the FP32 LiteRT check. The model can be expressed as an artifact, but it's not in the supported quantized integer form required for Ethos-U acceleration with this target profile. The important distinction is that TOSA describes an intermediate graph form rather than a complete runtime deployment.
+The result is similar to the FP32 LiteRT check. The model can be expressed as an artifact, but it's not in the supported quantized integer form required for Ethos-U acceleration with this target profile. The important distinction is that TOSA describes an intermediate graph form rather than a complete runtime deployment.
 
 Run the same compatibility check on the quantized INT8 TOSA model:
 
@@ -48,9 +48,9 @@ mlia check tosa/mv2_int8.tosa \
   --json
 ```
 
-The INT8 TOSA report should show `status` as `ok` and `accelerator_operator_percentage` as `100.0`. The model format is now TOSA, but the target profile and Vela backend configuration are the same as the LiteRT run. 
+The INT8 TOSA report shows `status` as `ok` and `accelerator_operator_percentage` as `100.0`. The model format is now TOSA, but the target profile and Vela backend configuration are the same as the LiteRT run. 
 
-The difference from the FP32 TOSA artifact is that the INT8 artifact has the quantized representation required for Ethos-U acceleration. The operator support checks therefore pass, and MLIA expects the operator work to map to the NPU path.
+The difference from the FP32 TOSA artifact is that the INT8 artifact has the quantized representation required for Ethos-U acceleration. The operator support checks pass, and MLIA expects the operator work to map to the NPU path.
 
 You can also run a performance check using the INT8 `.tosa` model:
 
@@ -68,6 +68,6 @@ Whether it's useful for you to use TOSA with MLIA depends on your workflow. Many
 
 ## What you've accomplished and what's next
 
-You have seen how the same MLIA CLI pattern applies to TOSA, and also how TOSA bridges model formats and backend compilation.
+You have seen how the same MLIA CLI pattern applies to TOSA, and how TOSA bridges model formats and backend compilation.
 
 Next, you'll learn how packaged ExecuTorch `.pte` artifacts fit into the same MLIA workflow.

@@ -38,7 +38,7 @@ python -m pip install --upgrade pip
 
 ## Install MLIA
 
-MLIA uses plugins. The examples in the Learning Path use Ethos-U as the target, so install the Ethos-U plugin package:
+MLIA uses plugins. The example target in the Learning Path is Ethos-U, so install the Ethos-U plugin package:
 
 ```bash
 pip install mlia-ethos-u
@@ -86,9 +86,8 @@ For Ethos-U, typical bundled profiles include:
 | `ethos-u85-1024` | Ethos-U85 | 1024 |
 | `ethos-u85-2048` | Ethos-U85 | 2048 |
 
-In this Learning Path, the examples use one Ethos-U85 profile:
 
-One Ethos-U85 profile `ethos-u85-256` is used in the examples. Use a different profile if you want MLIA to evaluate the same model for a different Ethos-U configuration.
+One Ethos-U85 profile (`ethos-u85-256`) is used in the examples. Use a different profile if you want MLIA to evaluate the same model for a different Ethos-U configuration.
 
 ## Discover backends
 
@@ -107,7 +106,7 @@ corstone-310  no         yes
 corstone-320  no         yes
 vela          no         yes
 ```
-Use Vela for LiteRT and TOSA checks, and Corstone for packaged ExecuTorch `.pte` checks.
+Use Vela for LiteRT and Tensor Operator Set Architecture (TOSA) checks. Use Corstone for packaged ExecuTorch `.pte` checks.
 
 When you later use `mlia check`, any missing backends required by your target will be installed.
 
