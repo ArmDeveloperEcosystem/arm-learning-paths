@@ -17,7 +17,7 @@ Use these Learning Paths to go further:
 
 ## Improve the integration
 
-The correctness-first adapter packs a qd8 LHS tile immediately before the KAI call. For workloads that split a single activation matrix across many N tiles, consider a workspace-based LHS pre-pack stage:
+The correctness-first adapter packs a qd8 LHS tile immediately before the KleidiAI call. For workloads that split a single activation matrix across many N tiles, consider a workspace-based LHS pre-pack stage:
 
 ```text
 Pack LHS once per run
@@ -28,5 +28,5 @@ Keep the same rules when optimizing:
 
 - Preserve the qd8 per-row zero point and scale.
 - Pad K with the quantized zero point.
-- Query KAI tile dimensions instead of hard-coding vector-length-dependent values.
+- Query KleidiAI tile dimensions instead of hard-coding vector-length-dependent values.
 - Keep the non-SME2 XNNPACK fallback.

@@ -102,7 +102,7 @@ The suite covers normal and small batches, min/max clamp ranges, input and outpu
 
 ## Check the fallback build
 
-The KAI path must not break builds where KleidiAI is disabled. On a development host, run:
+The KleidiAI path must not break builds where KleidiAI is disabled. On a development host, run:
 
 ```bash
 bazel build //:packing --define=xnn_enable_kleidiai=false

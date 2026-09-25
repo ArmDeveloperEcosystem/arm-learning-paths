@@ -7,15 +7,15 @@ weight: 7
 layout: learningpathall
 ---
 
-## Select the KAI SME2 backend
+## Select the KleidiAI SME2 backend
 
 This walkthrough explains patch 4, which you applied during preparation. Its configuration and registration changes are in `init_qd8_f16_qc4w_gemm_config` in `src/configs/gemm-config.c`.
 
-The configuration keeps the existing XNNPACK microkernels as the fallback and selects the KAI path only when XNNPACK detects SME2:
+The configuration keeps the existing XNNPACK microkernels as the fallback and selects the KleidiAI path only when XNNPACK detects SME2:
 
 ```c
 if (hardware_config->arch_flags & xnn_arch_arm_sme2) {
-  // Configure KAI RHS packing, LHS packing, and the DQGEMM adapter.
+  // Configure KleidiAI RHS packing, LHS packing, and the DQGEMM adapter.
 } else {
   // Continue with the existing native XNNPACK configuration.
 }
@@ -28,11 +28,11 @@ RHS: pack static weights once during operator creation
 LHS: pack dynamic qd8 activation tiles at runtime
 ```
 
-Both sides must use the layouts expected by the same KAI SME2 matmul microkernel.
+Both sides must use the layouts expected by the same KleidiAI SME2 matmul microkernel.
 
-## Configure the KAI RHS packer
+## Configure the KleidiAI RHS packer
 
-XNNPACK already has an adapter around the KAI `qsi4cxp` RHS packer:
+XNNPACK already has an adapter around the KleidiAI `qsi4cxp` RHS packer:
 
 ```c
 xnn_pack_kai_qs4_weights_and_biases_sme
@@ -48,34 +48,34 @@ qd8_f16_qc4w_gemm_config.packed_stride_weights_and_biases =
     xnn_packed_stride_kai_qs4_weights_and_biases_sme;
 ```
 
-XNNPACK uses this configuration during operator creation. It passes the original QC4W weights, scales, and bias to the KAI RHS packer. The resulting packed RHS, including `weight_sum[n]`, is stored in operator memory or the XNNPACK weights cache.
+XNNPACK uses this configuration during operator creation. It passes the original QC4W weights, scales, and bias to the KleidiAI RHS packer. The resulting packed RHS, including `weight_sum[n]`, is stored in operator memory or the XNNPACK weights cache.
 
 
-## Configure the KAI LHS packer
+## Configure the KleidiAI LHS packer
 
 There is no persistent LHS buffer at operator creation because qd8 activations and their quantization parameters change for every invocation.
 
-Instead, the XNNPACK dynamically quantized general matrix multiplication (DQGEMM) adapter packs each activation tile immediately before calling KAI:
+Instead, the XNNPACK dynamically quantized general matrix multiplication (DQGEMM) adapter packs each activation tile immediately before calling KleidiAI:
 
 ```text
 raw qd8 int8 values + qd8 parameters
-  -> KAI qai8dxp packed LHS
-  -> KAI SME2 MOPA matmul
+  -> KleidiAI qai8dxp packed LHS
+  -> KleidiAI SME2 MOPA matmul
 ```
 
 The adapter uses the private `pack_lhs` helper in the SME2 wrapper file. It performs the following mapping for each activation row:
 
 ```text
-KAI int8 values       = XNNPACK qd8 values
-KAI negative zero pt  = -XNNPACK zero_point
-KAI scale             = XNNPACK inv_scale
+KleidiAI int8 values       = XNNPACK qd8 values
+KleidiAI negative zero pt  = -XNNPACK zero_point
+KleidiAI scale             = XNNPACK inv_scale
 ```
 
-It also queries KAI `kr` and `sr`, checks that `sr == 1`, interleaves the values in `kr`-sized blocks, and pads the K tail with the row zero point. See [Pack the QD8 activation without requantizing](../pack-lhs/) for the packed-LHS layout.
+It also queries KleidiAI `kr` and `sr`, checks that `sr == 1`, interleaves the values in `kr`-sized blocks, and pads the K tail with the row zero point. See [Pack the QD8 activation without requantizing](../pack-lhs/) for the packed-LHS layout.
 
 ## Register the DQGEMM adapter
 
-The configuration queries the KAI tile sizes and registers the adapter for both the single-row and full-MR cases:
+The configuration queries the KleidiAI tile sizes and registers the adapter for both the single-row and full-MR cases:
 
 ```c
 const size_t mr =
@@ -91,7 +91,7 @@ qd8_f16_qc4w_gemm_config.minmax.dqgemm[XNN_MR_TO_INDEX(mr)] =
         xnn_qd8_f16_qc4w_gemm_minmax_ukernel_16x64c4__neonsme2);
 ```
 
-The integration uses these KAI packing parameters:
+The integration uses these KleidiAI packing parameters:
 
 ```text
 kr = 4
@@ -106,7 +106,7 @@ kai_run_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa
 
 Pass the output row stride, an FP16 column stride of two bytes, and XNNPACK's FP16 clamp range.
 
-This step corresponds to [patch 4: Dispatch QD8 F16 QC4W through KAI SME2](../0004-dispatch-qd8-f16-qc4w-through-kai-sme2.patch).
+This step corresponds to [patch 4: Dispatch QD8 F16 QC4W through KleidiAI SME2](../0004-dispatch-qd8-f16-qc4w-through-kai-sme2.patch).
 
 The patch also changes the generated SME2 source lists. Run the generator after adding or renaming a file that ends in `-neonsme2.c`:
 
@@ -126,7 +126,7 @@ The adapter performs three operations:
 
 ```text
 raw QD8 tile + per-row parameters
-  -> pack_lhs() into KAI qai8dxp layout
+  -> pack_lhs() into KleidiAI qai8dxp layout
   -> kai_run_matmul_clamp_f16_qai8dxp...sme2_mopa()
   -> FP16 output tile
 ```
@@ -137,4 +137,4 @@ The adapter currently allocates a temporary packed-LHS buffer for each DQGEMM ca
 
 ## What you've accomplished
 
-You have followed the applied configuration from SME2 detection through packing and adapter registration to the KAI call. Next, build the patched checkout and run the correctness and fallback-build checks.
+You have followed the applied configuration from SME2 detection through packing and adapter registration to the KleidiAI call. Next, build the patched checkout and run the correctness and fallback-build checks.

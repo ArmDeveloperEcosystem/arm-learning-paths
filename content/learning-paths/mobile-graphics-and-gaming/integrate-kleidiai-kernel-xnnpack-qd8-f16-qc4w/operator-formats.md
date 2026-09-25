@@ -9,13 +9,13 @@ layout: learningpathall
 
 ## Start with the math
 
-The fully connected operator computes:
+The fully connected operator computes the following:
 
 ```text
 C[M,N] = A[M,K] x B[N,K]^T + bias[N]
 ```
 
-Where:
+The variables are as follows:
 
 - `M` is the number of input rows or tokens.
 - `K` is the input feature dimension, also called the reduction dimension.
@@ -24,7 +24,7 @@ Where:
 - `B` is the weight matrix.
 - `C` is the FP16 output matrix.
 
-Although the logical RHS matrix is written as `B[N,K]`, the multiplication uses its transpose. Each output has one row of weights with `K` values.
+Although the logical right-hand side (RHS) matrix is written as `B[N,K]`, the multiplication uses its transpose. Each output has one row of weights with `K` values.
 
 ## Left-hand side: QD8 activation data
 
@@ -43,7 +43,7 @@ The real value represented by one element is:
 A_real[m,k] = (A_q[m,k] - zero_point[m]) * inv_scale[m]
 ```
 
-This is *asymmetric, per-row quantization*:
+This is asymmetric, per-row quantization:
 
 - The int8 values are stored row-major with the input stride.
 - Each row can have a different zero point.
@@ -67,13 +67,13 @@ bits [3:0] = K element 0
 bits [7:4] = K element 1
 ```
 
-For the normal weight layout, the raw tensor is `N x K`: each output channel has a contiguous packed row.
+For the normal weight layout, the raw tensor is `N x K`. Each output channel has a contiguous packed row.
 
 XNNPACK also supports `XNN_FLAG_TRANSPOSE_WEIGHTS`. In that case, the source tensor is `K x N`, so the integration must convert it to the `N x K` form expected by the selected KleidiAI RHS packer.
 
-## Padding K safely
+## Safe K padding
 
-The selected KleidiAI SME2 microkernel rounds its internal K dimension up to a multiple of 32. The original model does not need to have a K dimension that is divisible by 32.
+The selected KleidiAI SME2 microkernel rounds its internal K dimension up to a multiple of 32. The original model doesn't need to have a K dimension that's divisible by 32.
 
 The integration creates a padded representation:
 
@@ -89,7 +89,7 @@ Padding must represent real value zero:
 
 Padding with any other value changes the dot product and produces incorrect output.
 
-## Where this data enters XNNPACK
+## Where the data enters XNNPACK
 
 The public operator entry points are:
 
@@ -101,8 +101,8 @@ xnn_setup_fully_connected_nc_qd8_f16_qc4w(...)
 
 The create step receives the static weights, scales, and bias, and packs the persistent RHS representation. The reshape step receives the runtime batch size and plans the general matrix multiplication (GEMM) tiles, parallel work, and any required workspace. The setup step receives the qd8 activation values, the FP16 output buffer, and the per-row `xnn_qd8_quantization_params` array.
 
-## What you've learned
+## What you've learned and what's next
 
-You have identified the per-row QD8 activation parameters, per-channel QC4W weight data, and zero-valued padding requirements. These define the operand contract that the KleidiAI integration must preserve.
+You've identified the per-row QD8 activation parameters, per-channel QC4W weight data, and zero-valued padding requirements. These define the operand contract that the KleidiAI integration must preserve.
 
-Next, use these facts to examine the choice of KleidiAI microkernel.
+Next, you'll use these facts to examine the choice of KleidiAI microkernel.
