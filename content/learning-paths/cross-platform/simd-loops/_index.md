@@ -81,6 +81,7 @@ operatingsystems:
     - Linux
     - macOS
 tools_software_languages:
+  - Arm AGI CPU
   - C
   - CPP
   - GCC
