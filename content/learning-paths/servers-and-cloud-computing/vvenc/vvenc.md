@@ -15,17 +15,20 @@ weight: 2
 * You can find the optimized code for use with Arm Neoverse platforms in the [vvenc Github Repository](https://github.com/fraunhoferhhi/vvenc). 
 
 ## Install dependencies
-On your Arm-based server instance running Ubuntu 22.04, install the dependencies to build and run vvenc:
+
+On your Arm-based server running Ubuntu 22.04 or Ubuntu 24.04, install the dependencies to build and run `vvenc`:
 
 ```bash
 sudo apt update
-sudo apt install git wget cmake p7zip-full numactl -y
+sudo apt install git wget cmake g++ p7zip-full numactl -y
 ```
-Install llvm compiler to compile the C++ code:
+
+Install the LLVM compiler to compile the C++ code:
+
 ```bash
 wget https://apt.llvm.org/llvm.sh
 chmod +x llvm.sh
-sudo ./llvm.sh 18 all
+sudo ./llvm.sh 18
 ```
 
 ## Download and build vvenc source
@@ -37,84 +40,22 @@ git clone https://github.com/fraunhoferhhi/vvenc.git
 cd vvenc
 CXX=clang++-18 CC=clang-18 cmake -S . -B build/release-static -DVVENC_ENABLE_ARM_SIMD_SVE=1 -DVVENC_ENABLE_ARM_SIMD_SVE2=1
 ```
-Confirm that sve/sve2 has been enabled in the Makefile by checking the output from the configuration step:
+Confirm that SVE and SVE2 are enabled by checking the output from the configuration step. The output includes:
 
 ```output
-root@iZuf61ixurqifmpxuji4viZ:~/vvenc-1.13.0# CXX=clang++-18 CC=clang-18 cmake -S . -B build/release-static -DVVENC_ENABLE_ARM_SIMD_SVE=1 -DVVENC_ENABLE_ARM_SIMD_SVE2=1
 -- The C compiler identification is Clang 18.1.8
 -- The CXX compiler identification is Clang 18.1.8
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Check for working C compiler: /usr/bin/clang-18 - skipped
--- Detecting C compile features
--- Detecting C compile features - done
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /usr/bin/clang++-18 - skipped
--- Detecting CXX compile features
--- Detecting CXX compile features - done
--- CMAKE_MODULE_PATH: updating module path to: /root/vvenc-1.13.0/cmake/modules
 -- normalized target architecture: AARCH64
--- Performing Test SUPPORTED_Werror_unused_command_line_argument
--- Performing Test SUPPORTED_Werror_unused_command_line_argument - Success
--- Performing Test SUPPORTED_march=armv8_2_a+sve
--- Performing Test SUPPORTED_march=armv8_2_a+sve - Success
--- Performing Test SVE_COMPILATION_C_TEST_COMPILED
--- Performing Test SVE_COMPILATION_C_TEST_COMPILED - Success
--- Performing Test SVE_COMPILATION_CXX_TEST_COMPILED
--- Performing Test SVE_COMPILATION_CXX_TEST_COMPILED - Success
--- Performing Test SVE_HEADER_C_TEST_COMPILED
--- Performing Test SVE_HEADER_C_TEST_COMPILED - Success
--- Performing Test SVE_HEADER_CXX_TEST_COMPILED
--- Performing Test SVE_HEADER_CXX_TEST_COMPILED - Success
--- Performing Test SUPPORTED_march=armv9_a+sve2
--- Performing Test SUPPORTED_march=armv9_a+sve2 - Success
--- Performing Test SUPPORTED_msse4_1
--- Performing Test SUPPORTED_msse4_1 - Failed
--- Performing Test SUPPORTED_mavx
--- Performing Test SUPPORTED_mavx - Failed
--- Performing Test HAVE_INTRIN_mm_storeu_si16
--- Performing Test HAVE_INTRIN_mm_storeu_si16 - Success
--- Performing Test HAVE_INTRIN_mm_storeu_si32
--- Performing Test HAVE_INTRIN_mm_storeu_si32 - Success
--- Performing Test HAVE_INTRIN_mm_storeu_si64
--- Performing Test HAVE_INTRIN_mm_storeu_si64 - Success
--- Performing Test HAVE_INTRIN_mm_loadu_si32
--- Performing Test HAVE_INTRIN_mm_loadu_si32 - Success
--- Performing Test HAVE_INTRIN_mm_loadu_si64
--- Performing Test HAVE_INTRIN_mm_loadu_si64 - Success
--- Performing Test HAVE_INTRIN_mm_cvtsi128_si64
--- Performing Test HAVE_INTRIN_mm_cvtsi128_si64 - Success
--- Performing Test HAVE_INTRIN_mm_cvtsi64_si128
--- Performing Test HAVE_INTRIN_mm_cvtsi64_si128 - Success
--- Performing Test HAVE_INTRIN_mm_extract_epi64
--- Performing Test HAVE_INTRIN_mm_extract_epi64 - Success
--- Performing Test HAVE_INTRIN_mm256_zeroupper
--- Performing Test HAVE_INTRIN_mm256_zeroupper - Failed
--- Performing Test HAVE_INTRIN_mm256_loadu2_m128i
--- Performing Test HAVE_INTRIN_mm256_loadu2_m128i - Success
--- Performing Test HAVE_INTRIN_mm256_set_m128i
--- Performing Test HAVE_INTRIN_mm256_set_m128i - Success
 -- x86 SIMD intrinsics enabled (using SIMDE for non-x86 targets)
 -- AArch64 Neon intrinsics enabled
 -- AArch64 SVE intrinsics enabled
 -- AArch64 SVE2 intrinsics enabled
--- Looking for pthread.h
--- Looking for pthread.h - found
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
--- Found Threads: TRUE
--- Performing Test SUPPORTED_mxsave
--- Performing Test SUPPORTED_mxsave - Failed
--- Performing Test SUPPORTED_msse4_2
--- Performing Test SUPPORTED_msse4_2 - Failed
--- Performing Test SUPPORTED_mavx2
--- Performing Test SUPPORTED_mavx2 - Failed
 -- Configuring done
 -- Generating done
--- Build files have been written to: /root/vvenc-1.13.0/build/release-static
 ```
-Now run cmake to build:
+
+Now run CMake to build:
+
 ```bash
 cmake --build build/release-static -j
 ```
@@ -144,7 +85,7 @@ wget http://ultravideo.cs.tut.fi/video/Bosphorus_1920x1080_120fps_420_8bit_YUV_Y
 To benchmark the performance of `vvenc` over 100 frames of the `1080P` video file, run the command:
 ```console
 cd ../vvenc
-numactl -C 0-3 bin/release-static/vvencFFapp --preset faster --BitstreamFile stream.266 --Threads 4 --InputFile ~/video/Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m --InputBitDepth 8 --InputChromaFormat 420 --fps 30 --FramesToBeEncoded 100 --SourceWidth 1920 --SourceHeight 1080 --Qp 22 --IntraPeriod 256 --NumPasses 1 --InternalBitDepth 10 --stats 1 --Verbosity 3
+numactl -C 0-3 bin/release-static/vvencFFapp --preset faster --BitstreamFile stream.266 --Threads 4 --InputFile ../video/Bosphorus_1920x1080_120fps_420_8bit_YUV.y4m --InputBitDepth 8 --InputChromaFormat 420 --fps 30 --FramesToBeEncoded 100 --SourceWidth 1920 --SourceHeight 1080 --Qp 22 --IntraPeriod 256 --NumPasses 1 --InternalBitDepth 10 --stats 1 --Verbosity 3
 ```
 
 You can vary the preset settings and measure the impact on performance.

@@ -56,11 +56,13 @@ Use a separate Python 3.10, 3.11, or 3.12 environment to avoid dependency confli
 python3 -m venv model_explorer_env
 source model_explorer_env/bin/activate
 python -m pip install --upgrade pip
+python -m pip install torch
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}
 py -m venv model_explorer_env
 .\model_explorer_env\Scripts\Activate.ps1
 python -m pip install --upgrade pip
+python -m pip install torch
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -74,7 +76,7 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ## Install Arm extensions with TOSA and VGF adapters
 
-Install the combined ExecuTorch extension with the separate Tensor Operator Set Architecture (TOSA) and VGF adapters:
+Install the combined ExecuTorch extension and the separate Tensor Operator Set Architecture (TOSA) and VGF adapters:
 
 ```bash
 python -m pip install executorch-extension-model-explorer tosa-adapter-model-explorer vgf-adapter-model-explorer
