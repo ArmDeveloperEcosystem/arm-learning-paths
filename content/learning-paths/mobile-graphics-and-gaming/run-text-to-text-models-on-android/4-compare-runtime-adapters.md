@@ -24,7 +24,7 @@ The downloaded model package isn't an Android executable. Gradle packages the ru
 
 ## Choose a text-generation path
 
-The application includes three validated text-generation examples that share the interface and deployment flow. However, each needs an adapter because its runtime API, model format, tokenizer handling, and output contract differ.
+The application includes four validated text-generation examples that share the interface and deployment flow. However, each needs an adapter because its runtime API, model format, tokenizer handling, and output contract differ.
 
 The following table describes the paths:
 
@@ -33,6 +33,7 @@ The following table describes the paths:
 | SmolLM2 with ExecuTorch | `executorch` | `inference/models/smollm2/ExecuTorchTextGenerationAdapter` | `.pte`, configuration, tokenizer, and chat template | The recommended default and smallest validated generation example. |
 | TinyLlama with ONNX Runtime GenAI | `onnxruntime` | `inference/models/tinyllama/OnnxTextGenerationAdapter` | ONNX model directory, configuration, tokenizer, and chat template | A directory-based GenAI package with an additional Android AAR dependency. |
 | Llama 3.2 with ONNX Runtime GenAI | `onnxruntime` | `inference/models/llama32/OnnxTextGenerationAdapter` | ONNX model directory, configuration, tokenizer, and chat template | The same GenAI runtime flow with the Llama 3.2 package. |
+| Qwen3.5 with llama.cpp | `llamacpp` | `inference/models/qwen/LlamaCppTextGenerationAdapter` | GGUF model file and configuration | A GGUF package using the official llama.cpp Android library AAR. |
 
 The repository also contains `inference/models/bge/LiteRtEmbeddingAdapter` for the catalog runtime `litert`. That adapter runs the BGE text-embedding workload and returns vectors rather than generated text, so it is listed separately from the text-generation paths.
 
@@ -131,9 +132,111 @@ $MODEL_DIR = "..\model-onnx"
 
 The commands above copy the generated AAR to `app/libs/onnxruntime-genai-release.aar`. Keep every file in the downloaded ONNX model directory together, including external model data, `genai_config.json`, tokenizer files, and the chat template.
 
+### Prepare the llama.cpp path
+
+The Qwen llama.cpp example uses the official llama.cpp Android library. Build the Android library from the pinned official llama.cpp source, then copy the generated `lib-release.aar` into the starter application before applying the Qwen adapter.
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS or Linux" language="bash" >}}
+export WORK_DIR="$HOME/text-to-text-android"
+mkdir -p "$WORK_DIR"
+
+export LLAMACPP_REF="a72e04abe0fe9b36e203033ac71bd5f379c35bc5"
+export LLAMACPP_AAR="$WORK_DIR/lib-release.aar"
+
+if [ ! -d "$WORK_DIR/llama.cpp" ]; then
+    git clone --filter=blob:none https://github.com/ggml-org/llama.cpp.git "$WORK_DIR/llama.cpp"
+fi
+
+cd "$WORK_DIR/llama.cpp"
+git fetch --tags origin
+git checkout "$LLAMACPP_REF"
+
+"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" \
+    --sdk_root="$ANDROID_HOME" \
+    "ndk;29.0.13113456" \
+    "cmake;3.31.6"
+
+cd examples/llama.android
+chmod +x gradlew
+./gradlew :lib:assembleRelease
+
+cp lib/build/outputs/aar/lib-release.aar "$LLAMACPP_AAR"
+test -f "$LLAMACPP_AAR"
+cd "$WORK_DIR"
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell" >}}
+$WORK_DIR = Join-Path $HOME "text-to-text-android"
+New-Item -ItemType Directory -Force -Path $WORK_DIR | Out-Null
+
+$LLAMACPP_REF = "a72e04abe0fe9b36e203033ac71bd5f379c35bc5"
+$LLAMACPP_AAR = Join-Path $WORK_DIR "lib-release.aar"
+
+if (-not (Test-Path (Join-Path $WORK_DIR "llama.cpp"))) {
+    git clone --filter=blob:none https://github.com/ggml-org/llama.cpp.git (Join-Path $WORK_DIR "llama.cpp")
+}
+
+Set-Location (Join-Path $WORK_DIR "llama.cpp")
+git fetch --tags origin
+git checkout $LLAMACPP_REF
+
+& "$env:ANDROID_HOME\cmdline-tools\latest\bin\sdkmanager.bat" `
+    --sdk_root="$env:ANDROID_HOME" `
+    "ndk;29.0.13113456" `
+    "cmake;3.31.6"
+
+Set-Location "examples\llama.android"
+.\gradlew.bat :lib:assembleRelease
+
+Copy-Item -Path "lib\build\outputs\aar\lib-release.aar" -Destination $LLAMACPP_AAR -Force
+Test-Path $LLAMACPP_AAR
+Set-Location $WORK_DIR
+  {{< /tab >}}
+{{< /tabpane >}}
+
+Create a separate project for the llama.cpp example:
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS or Linux" language="bash" >}}
+cd "$WORK_DIR"
+git clone https://github.com/arm-education/ai-portal-android-app-text-to-text.git \
+    ai-portal-android-app-text-to-text-qwen
+cd ai-portal-android-app-text-to-text-qwen
+
+export LLAMACPP_EXAMPLE="qwen-llamacpp"
+export MODEL_ID="qwen3-5-0-8b-q4-k-m-llamacpp-vivo-x300"
+
+cp -R "adapter-examples/$LLAMACPP_EXAMPLE/app/." app/
+mkdir -p app/libs
+cp "$LLAMACPP_AAR" app/libs/lib-release.aar
+
+export MODEL_DIR="../model-qwen-llamacpp"
+../.hf-venv/bin/hf download "Arm/$MODEL_ID" --local-dir "$MODEL_DIR"
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell" >}}
+Set-Location $WORK_DIR
+git clone https://github.com/arm-education/ai-portal-android-app-text-to-text.git `
+    ai-portal-android-app-text-to-text-qwen
+Set-Location ai-portal-android-app-text-to-text-qwen
+
+$LLAMACPP_EXAMPLE = "qwen-llamacpp"
+$MODEL_ID = "qwen3-5-0-8b-q4-k-m-llamacpp-vivo-x300"
+
+Copy-Item -Path "adapter-examples\$LLAMACPP_EXAMPLE\app\*" `
+    -Destination "app" -Recurse -Force
+New-Item -ItemType Directory -Force -Path "app\libs"
+Copy-Item -Path $LLAMACPP_AAR -Destination "app\libs\lib-release.aar" -Force
+
+$MODEL_DIR = "..\model-qwen-llamacpp"
+..\.hf-venv\Scripts\hf.exe download "Arm/$MODEL_ID" --local-dir $MODEL_DIR
+  {{< /tab >}}
+{{< /tabpane >}}
+
+The commands above apply the Qwen catalog entry, register the `llamacpp` adapter, copy `app/libs/lib-release.aar`, and download the GGUF package. Keep `Qwen__Qwen3.5-0.8B_llamacpp_optimized.gguf` and `config.yaml` together in the downloaded model directory.
+
 ## Build and run the selected alternative
 
-The selected ONNX Runtime GenAI alternative now follows the same workflow: build the APK, install the APK, copy the chosen model package to the directory named by its catalog ID, and start the application.
+The selected ONNX Runtime GenAI or llama.cpp alternative now follows the same workflow: build the APK, install the APK, copy the chosen model package to the directory named by its catalog ID, and start the application.
 
 Continue in the same terminal so that `MODEL_ID` and `MODEL_DIR` remain set:
 
@@ -178,6 +281,6 @@ A successful result is a relevant completion without prompt echoes, control toke
 
 ## What you've accomplished and what's next
 
-You've now identified the default real adapter and distinguished the validated text-generation integrations. You also optionally repeated the common Android deployment workflow with ONNX Runtime GenAI.
+You've now identified the default real adapter and distinguished the validated text-generation integrations. You also optionally repeated the common Android deployment workflow with ONNX Runtime GenAI or llama.cpp.
 
 Next, you'll verify on-device text generation.

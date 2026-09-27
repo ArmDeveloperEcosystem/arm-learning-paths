@@ -89,9 +89,9 @@ $MODEL_DIR = Join-Path .. "model-custom-$MODEL_ID"
 {{< /tabpane >}}
 
 Enter the complete Arm Hugging Face repository ID, runtime value, and workload when prompted. 
-Use `executorch`, `litert-lm`, `litert`, or `onnxruntime` for the runtime. Use `text-generation` or `text-embedding` for the workload.
+Use `executorch`, `litert-lm`, `litert`, `onnxruntime`, or `llamacpp` for the runtime. Use `text-generation` or `text-embedding` for the workload.
 
-The script creates `android_model_config.json`, `model-context/model-summary.json`, and a directory of copied metadata. Review the summary and confirm that it identifies the intended Android artifact, tokenizer, configuration, and template files.
+The script creates `android_model_config.json`, `model-context/model-summary.json`, and a directory of copied metadata. Review the summary and confirm that it identifies the intended Android artifact, tokenizer, configuration, and template files. For llama.cpp packages, confirm that the selected artifact is the expected `.gguf` file and that any runtime configuration file, such as `config.yaml`, is present.
 
 ## Give the coding agent local evidence
 

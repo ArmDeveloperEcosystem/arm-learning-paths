@@ -10,7 +10,7 @@ learning_objectives:
     - Prepare the Android command-line tools and connect an Arm-based Android phone.
     - Download and run an ExecuTorch text-generation model from the Arm AI Portal.
     - Understand how the starter application uses model catalog entries and runtime adapters.
-    - Compare the validated ExecuTorch and ONNX Runtime GenAI adapter paths.
+    - Compare the validated ExecuTorch, ONNX Runtime GenAI, and llama.cpp adapter paths.
 
 prerequisites:
     - A macOS, Linux, or Windows development machine with Git, Python 3.10 or later, and JDK 17
@@ -122,6 +122,6 @@ learning_path_main_page: "yes"
 
 The [Arm AI Portal](https://developer.arm.com/ai/models) provides a catalog of AI models across different runtimes, use cases, optimization profiles, and Arm-based targets. It includes benchmarking and compatibility information, code examples, and deployment guidance.
 
-Use an Android example application to run optimized text models from the Arm AI Portal on a physical Arm-based Android phone. Start with SmolLM2 text generation through ExecuTorch, then use the same application structure to explore validated LiteRT and ONNX models.
+Use an Android example application to run optimized text models from the Arm AI Portal on a physical Arm-based Android phone. Start with SmolLM2 text generation through ExecuTorch, then use the same application structure to explore validated LiteRT, ONNX, and llama.cpp models.
 
-An application-level adapter connects the shared Android interface to one model workflow and runtime. It validates the model package, prepares text inputs, invokes ExecuTorch, LiteRT, or ONNX Runtime, and converts the outputs into generated text or an embedding summary.
+An application-level adapter connects the shared Android interface to one model workflow and runtime. It validates the model package, prepares text inputs, invokes ExecuTorch, LiteRT, ONNX Runtime, or llama.cpp, and converts the outputs into generated text or an embedding summary.
