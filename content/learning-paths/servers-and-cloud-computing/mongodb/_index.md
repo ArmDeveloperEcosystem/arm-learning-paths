@@ -19,7 +19,7 @@ learning_objectives:
 - Measure and compare the performance of MongoDB on Arm versus other architectures with Yahoo Cloud Serving Benchmark (YCSB)
 
 prerequisites:
-- An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
+- An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or access to the Arm AGI CPU.
 
 armips:
 - Neoverse
@@ -32,6 +32,7 @@ learning_path_main_page: 'yes'
 skilllevels: Introductory
 subjects: Databases
 platforms:
+  - Arm AGI CPU  
   - AWS Graviton
   - Microsoft Azure Cobalt
   - Google Axion

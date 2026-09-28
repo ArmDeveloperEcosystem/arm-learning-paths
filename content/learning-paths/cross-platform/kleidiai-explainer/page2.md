@@ -16,18 +16,27 @@ There are essentially two types of KleidiAI micro-kernels today:
 2. Matrix Multiplication routines - the three directories with the prefix `matmul_clamp`. Each directory contains routines specialized for a specific input data type.
 
 
-![Screenshot of the KleidiAI GitLab repository source directory structure showing the kai/ukernels/matmul folder. The directory contains a pack subdirectory for quantization routines and three matmul_clamp directories (for f16, f32, and mixed precision types) containing specialized matrix multiplication micro-kernels.#center](kleidiai-src.JPG "KleidiAI src directory")
+![Screenshot of the KleidiAI GitLab repository source directory structure showing the kai/ukernels/matmul folder. The directory contains subdirectories for indirect matmul_clamp directories containing specialized matrix multiplication micro-kernels.#center](kleidiai-src.png "KleidiAI src directory")
 
 ### What are the quantization levels that KleidiAI supports?
 KleidiAI has multiple matrix multiplication micro-kernels, and dynamic quantization routines, to optimally support all model quantization levels. To learn more about model quantization and how selecting the right quantization level affects your AI-based application, refer to [this Learning Path](/learning-paths/servers-and-cloud-computing/llama-cpu/llama-chatbot/#quantization-format).
 
-KleidiAI currently has three matrix multiplication directories that each handle input/output types differently, and which will evolve to broaden the reach of their support:
+KleidiAI currently has over 30 matrix multiplication directories that each handle input/output types differently, and which will evolve to broaden the reach of their support. Three example directories are below:
 
 | uKernel                           |  Output type     | Input types     |
 | ---------                         | -----------------   | --------------  | 
-| `matmul_clamp_f16_f16_f16`        | 16-bit floating-point | 16-bit floating-point |
-| `matmul_clamp_f32_f32_f32`        | 16-bit floating-point | 32-bit floating-point |
-| `matmul_clamp_f32_qa8dxP_qs4cxP`  | 32-bit floating-point | 8-bit integer and 4-bit integer |
+| `matmul_clamp_f16_f16_f16p`        | 16-bit floating-point | 16-bit floating-point |
+| `matmul_clamp_f32_f32_f32p`        | 16-bit floating-point | 32-bit floating-point |
+| `matmul_clamp_f32_qa8dxP_qsi4cxP`        | 16-bit floating-point | 8-bit integer and 4-bit integer |
+
+The name of the micro-kernel folder provides the description of the operation performed and the data type of the destination and source tensors. The general syntax for the micro-kernel folder is as follows:
+
+`<op>_<dst-data-type>_<src0-data-type>_<src1-data-type>_.`
+
+Where:
+- `op` is the operation performed.
+- `dst-data-type` is the destination data type.
+- `src<x>-data-type` is the source data type for operand `<x>`.
 
 ### How to select the right KleidiAI micro-kernel?
 

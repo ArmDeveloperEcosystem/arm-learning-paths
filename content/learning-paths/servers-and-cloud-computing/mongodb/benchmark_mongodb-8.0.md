@@ -14,39 +14,19 @@ YCSB is an open source project which provides the framework and common set of wo
 
 ## Additional software packages
 
-To run YCSB, additional software packages are required.
+To run the released YCSB binaries, install Java and curl. Use the bundled shell launcher, `bin/ycsb.sh`, to run YCSB without installing Python 2.
 
-Install the additional software:
+On Ubuntu, install the additional software:
 
-{{< tabpane code=true >}}
-  {{< tab header="Ubuntu" >}}
-sudo apt install -y maven make gcc
-  {{< /tab >}}
-  {{< tab header="RHEL / Amazon Linux" >}}
-sudo yum check-update
-# Python 2 may not be available via yum on recent RHEL/Amazon Linux versions.
-# If needed, follow the manual installation steps below.
-  {{< /tab >}}
-{{< /tabpane >}}
-
-For Ubuntu 22.04 and 24.04, Python 2 is not available using the package manager.
-
-You can install Python 2.7 using:
-
-```console
-cd $HOME
-wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
-tar xvf Python-2.7.18.tgz
-cd Python-2.7.18
-./configure --enable-optimizations
-make -j $(nproc)
-sudo make altinstall
-sudo ln -s /usr/local/bin/python2.7 /usr/local/bin/python
+```bash
+sudo apt install -y default-jre curl
 ```
+
+On other Linux distributions, install a Java runtime and curl using your distribution's package manager.
 
 ## Setup YCSB
 
-Download the latest released YCSB zip file and uncompress it.
+Download the YCSB 0.17.0 archive and uncompress it.
 
 ```bash
 cd $HOME
@@ -59,7 +39,7 @@ Now `cd` into project folder and run the executable to print a description of ho
 
 ```bash
 cd ycsb-0.17.0
-./bin/ycsb
+./bin/ycsb.sh load mongodb -help
 ```
 
 ## A simple Load/Insert Test on MongoDB
@@ -67,7 +47,7 @@ cd ycsb-0.17.0
 To load and test the performance of loading data(INSERT) into default database `ycsb` at `(localhost/Primary Node):27017` where MongoDB is running using the synchronous driver run the following command:
 
 ```console
-./bin/ycsb load mongodb -s -P workloads/workloada -p mongodb.url=mongodb://localhost:27017/ycsb?w=0 -threads 10
+./bin/ycsb.sh load mongodb -s -P workloads/workloada -p 'mongodb.url=mongodb://localhost:27017/ycsb?w=0' -threads 10
 ```
 The "-P" parameter is used to load property files. In this example, you used it load the workloada parameter file which sets the recordcount to 1000 in addition to other parameters. The "-threads" parameter indicates the number of client threads (default is 1); this example uses 10 threads.
 
@@ -76,7 +56,7 @@ The "-P" parameter is used to load property files. In this example, you used it 
 To test the performance of executing a workload which includes running UPDATE, Read Modify Write(RMW) and/or READ operations on the data using 10 threads for example, use the following command:
 
 ```console
-./bin/ycsb run mongodb -s -P workloads/workloada -p mongodb.url=mongodb://localhost:27017/ycsb?w=0 -threads 10
+./bin/ycsb.sh run mongodb -s -P workloads/workloada -p 'mongodb.url=mongodb://localhost:27017/ycsb?w=0' -threads 10
 ```
 
 The workloads/workloada file in this example sets the following values `readproportion=0.5` and  `updateproportion=0.5` which means there is an even split between the number of READ and UPDATE operations performed. You can change the type of operations and the splits by providing your own workload parameter file.

@@ -26,6 +26,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Databases
 platforms:
+  - Arm AGI CPU
   - AWS Graviton
   - Microsoft Azure Cobalt
   - Google Axion

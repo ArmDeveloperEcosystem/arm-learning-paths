@@ -1,5 +1,6 @@
 ---
 title: Select a compatible KleidiAI microkernel
+description: Match XNNPACK quantization contracts to a KleidiAI SME2 microkernel that preserves the existing QD8 activation values.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -51,7 +52,7 @@ The kernel tile dimensions are expressed in vector lengths:
 1VL x 4VL
 ```
 
-The actual `mr` and `nr` values depend on the device's streaming vector length. Do not hard-code them. Query the kernel:
+The actual `mr` and `nr` values depend on the device's streaming vector length. The wrapper queries the kernel instead of hard-coding them:
 
 ```c
 size_t mr = kai_get_mr_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa();
@@ -62,7 +63,7 @@ The same kernel reports `kr = 4` and `sr = 1`. These values define the K interle
 
 ## Prepare the XNNPACK SME2 wrapper
 
-The first implementation step is [patch 1: Prepare QD8 F16 QC4W SME2 kernel](../0001-prepare-qd8-f16-qc4w-sme2-kernel.patch).
+The wrapper is introduced by the already-applied [patch 1: Prepare QD8 F16 QC4W SME2 kernel](../0001-prepare-qd8-f16-qc4w-sme2-kernel.patch).
 
 It adds an XNNPACK wrapper at:
 
@@ -75,7 +76,11 @@ The `16x64c4` part follows the existing XNNPACK SME2 wrapper naming convention. 
 
 
 {{% notice Tip %}}
-The most reusable lesson is simple: select a kernel from its complete operand contract. Compare quantization granularity, signedness, zero-point behavior, output type, clamp behavior, and packing requirements before implementing any adapter.
+Select a kernel from its complete operand contract. Compare quantization granularity, signedness, and zero-point behavior. Then check the output type, clamp behavior, and packing requirements before implementing any adapter.
 {{% /notice %}}
 
-Next, pack the static RHS weights.
+## What you've learned
+
+You have matched the operator's quantization contract to the selected KleidiAI microkernel and traced how the wrapper queries its tile dimensions. The integration preserves the existing QD8 activation values while adapting the operands to the kernel's packed layouts.
+
+Next, inspect how the integration packs the static RHS weights.

@@ -49,14 +49,14 @@ int main(int argc, char **argv)
     return 0;
 }
 ```
-This can be compiled and run on your Arm instance using the commands below.
+This can be compiled and run on your Arm instance using the commands below from the directory containing `neon.cpp`.
 
 Install `wget` and `g++` compiler, and use appropriate `g++` command options:
 
 ```bash { target="arm64v8/ubuntu:latest" }
 sudo apt install -y wget g++
 wget https://raw.githubusercontent.com/DLTcollab/sse2neon/master/sse2neon.h
-g++ -O2 -I. -march=armv8.2-a+fp16+rcpc+dotprod+crypto --std=c++14 neon.cpp -o neon
+g++ -O2 -march=native neon.cpp -o neon
 ```
 Run the code:
 ```bash { target="arm64v8/ubuntu:latest" }

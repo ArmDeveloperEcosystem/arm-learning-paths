@@ -96,6 +96,15 @@ setParameter:
 
 If you want to use encryption you will need to add the security and keyFile to your configuration. As well as change some of the parameters in the `mongod.conf` file.
 
+Create the directory specified by `storage.dbPath` and give the MongoDB service account ownership before restarting. For the Ubuntu package and the `/mnt/mongodb` path used above, run:
+
+```bash
+sudo mkdir -p /mnt/mongodb
+sudo chown mongodb:mongodb /mnt/mongodb
+```
+
+If you use a different package or data directory, substitute its service account and path.
+
 Run this command to reload the new configuration.
 
 ```bash
