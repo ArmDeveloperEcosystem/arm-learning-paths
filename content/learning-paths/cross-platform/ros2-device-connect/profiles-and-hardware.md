@@ -114,6 +114,8 @@ Robot bring-up includes starting `puppy_control` and enabling servo torque. For 
 
 The important design point is that the adapter does not expose arbitrary ROS 2 control. It turns a reviewed subset of the robot's ROS 2 graph into Device Connect capabilities: read-only diagnostics, allowlisted actions, bounded velocity, and an explicit stop command.
 
+To see this profile running on a real PuppyPi, watch the [ROS 2 and Device Connect PuppyPi demo](https://www.youtube.com/watch?v=R4DJ2_jKvZQ).
+
 ## Build a profile for your own ROS 2 system
 
 To connect a different ROS 2 system, follow the same pattern:

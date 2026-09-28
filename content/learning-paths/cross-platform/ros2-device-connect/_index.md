@@ -44,6 +44,12 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - automotive
+    - embedded-and-microcontrollers
+
 further_reading:
     - resource:
         title: ros2-device-connect example repository

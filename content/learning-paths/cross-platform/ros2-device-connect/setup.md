@@ -63,12 +63,12 @@ The node list is empty because `ros2 topic pub` runs as a hidden node. This cont
 
 ## Create the workspace
 
-The adapter's launch scripts expect a single project directory that holds the adapter repository and a Python virtual environment named `.venv`. Create that directory and clone both the adapter and the Device Connect source:
+The adapter's launch scripts expect a single project directory that holds the adapter repository and a Python virtual environment named `.venv`. Create that directory and clone both the adapter and the Device Connect source. The adapter is cloned at the `ros2_dc_lp` tag, which is the version this Learning Path was tested with:
 
 ```bash
 mkdir -p ~/device_connect
 cd ~/device_connect
-git clone https://github.com/odincodeshen/ros2-device-connect.git
+git clone --branch ros2_dc_lp https://github.com/odincodeshen/ros2-device-connect.git
 git clone https://github.com/arm/device-connect.git
 ```
 
