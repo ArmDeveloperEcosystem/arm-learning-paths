@@ -11,7 +11,7 @@ layout: learningpathall
 
 Don't select a microkernel only because it produces FP16 output and uses int8 and int4 inputs. The kernel's quantization contract must also match the framework operator.
 
-At first glance, `matmul_clamp_f16_qsi8d32p_qai4c32p` might appear to be a suitable KleidiAI kernel.
+For example, `matmul_clamp_f16_qsi8d32p_qai4c32p` might appear to be a suitable KleidiAI kernel.
 
 That kernel isn't a correct match for XNNPACK `qd8_f16_qc4w` for the following reasons:
 

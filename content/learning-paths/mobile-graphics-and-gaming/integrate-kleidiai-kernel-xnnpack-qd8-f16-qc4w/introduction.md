@@ -26,7 +26,7 @@ The name identifies the output, operand formats, and instruction family:
 
 This is a framework-integration example. The aim is not to write a new assembly microkernel. Instead, you'll learn how to select an existing kernel, adapt framework-owned tensors to its packed layouts, dispatch it safely, and verify correctness.
 
-## Start from the tested XNNPACK revision
+## Clone the tested XNNPACK revision
 
 The patch series that you'll use was created and tested from the XNNPACK commit `119bb329762be10e63688256bb989a0007445b49`.
 

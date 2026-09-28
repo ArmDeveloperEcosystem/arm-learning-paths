@@ -1,5 +1,5 @@
 ---
-title: Pack the QD8 activation without requantizing
+title: Inspect QD8 activation packing without requantizing for KleidiAI
 description: Trace how the XNNPACK adapter packs QD8 activations for KleidiAI SME2 while preserving per-row quantization.
 weight: 6
 

@@ -1,5 +1,5 @@
 ---
-title: Pack QC4W weights for the KleidiAI SME2 kernel
+title: Inspect QC4W weight packing for the KleidiAI SME2 kernel
 description: Trace how XNNPACK packs static QC4W weights for KleidiAI SME2, including transposed inputs and zero-point correction.
 weight: 5
 
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Why pack the RHS once
 
-The right-hand side (RHS) is the fully connected weight matrix. Its int4 values, per-channel scales, and bias values are static after the operator is created. Pack this data once during `xnn_create_fully_connected_nc_qd8_f16_qc4w`, rather than during every inference run.
+The right-hand side (RHS) is the fully connected weight matrix. Its int4 values, per-channel scales, and bias values are static after the operator is created. This data should be packed once during `xnn_create_fully_connected_nc_qd8_f16_qc4w`, rather than during every inference run.
 
 ```text
 Original QC4W model weights
@@ -21,7 +21,7 @@ Original QC4W model weights
 
 The RHS is different from the QD8 left-hand side (LHS), which changes for every inference run and must be packed at runtime.
 
-This corresponds to the second patch [`0002-support-transposed-kai-qc4w-weights.patch`](../0002-support-transposed-kai-qc4w-weights.patch). In `src/reference/packing.cc`, `xnn_pack_kai_qs4_weights_and_biases_sme` handles the source-layout conversion before calling the KleidiAI packer.
+RHS packing corresponds to the second patch [`0002-support-transposed-kai-qc4w-weights.patch`](../0002-support-transposed-kai-qc4w-weights.patch). In `src/reference/packing.cc`, `xnn_pack_kai_qs4_weights_and_biases_sme` handles the source-layout conversion before calling the KleidiAI packer.
 
 ## Raw XNNPACK QC4W source layout
 
