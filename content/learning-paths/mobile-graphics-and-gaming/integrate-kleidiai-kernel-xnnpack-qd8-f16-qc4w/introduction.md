@@ -81,6 +81,6 @@ On a CPU without SME2 support, XNNPACK continues to use its existing native micr
 
 ## What you've accomplished and what's next
 
-You've checked out the tested XNNPACK revision and applied the four integration patches. Your checkout is ready for the implementation walkthrough and subsequent build.
+You've checked out the tested XNNPACK revision and applied the four integration patches. The checkout is ready for you to inspect the implementation and then build.
 
 Next, you'll examine the operator inputs before reviewing the kernel selection.
