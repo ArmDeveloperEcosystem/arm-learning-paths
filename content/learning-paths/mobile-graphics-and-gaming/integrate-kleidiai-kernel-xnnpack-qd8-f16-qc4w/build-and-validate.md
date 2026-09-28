@@ -133,9 +133,9 @@ For workloads that split a single activation matrix across many N tiles, conside
 Pack LHS once per run
   -> reuse packed LHS across all RHS N tiles
 ```
-Keep the same rules described in the Learning Path when optimizing. 
+Keep the following rules when optimizing:
 
-- Preserve the qd8 per-row zero point and scale.
+- Preserve the QD8 per-row zero point and scale.
 - Pad K with the quantized zero point.
 - Query KleidiAI tile dimensions instead of hard-coding vector-length-dependent values.
 - Keep the non-SME2 XNNPACK fallback.
