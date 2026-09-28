@@ -49,7 +49,7 @@ This is asymmetric, per-row quantization:
 - Each row can have a different zero point.
 - Each row can have a different scale.
 
-The important point is that this qd8 representation already contains the quantized activation values. A framework integration should preserve these values whenever possible.
+The important point is that this left-hand side (LHS) QD8 representation already contains the quantized activation values. A framework integration should preserve these values whenever possible.
 
 ## Right-hand side: QC4W weights
 
@@ -69,7 +69,7 @@ bits [7:4] = K element 1
 
 For the normal weight layout, the raw tensor is `N x K`. Each output channel has a contiguous packed row.
 
-XNNPACK also supports `XNN_FLAG_TRANSPOSE_WEIGHTS`. In that case, the source tensor is `K x N`, so the integration must convert it to the `N x K` form expected by the selected KleidiAI RHS packer.
+XNNPACK also supports `XNN_FLAG_TRANSPOSE_WEIGHTS`. In that case, the source tensor is `K x N`. The integration must therefore convert the tensor to the `N x K` form expected by the selected KleidiAI RHS packer.
 
 ## Safe K padding
 
@@ -99,7 +99,7 @@ xnn_reshape_fully_connected_nc_qd8_f16_qc4w(...)
 xnn_setup_fully_connected_nc_qd8_f16_qc4w(...)
 ```
 
-The create step receives the static weights, scales, and bias, and packs the persistent RHS representation. The reshape step receives the runtime batch size and plans the general matrix multiplication (GEMM) tiles, parallel work, and any required workspace. The setup step receives the qd8 activation values, the FP16 output buffer, and the per-row `xnn_qd8_quantization_params` array.
+The create step receives the static weights, scales, and bias, and packs the persistent RHS representation. The reshape step receives the runtime batch size and plans the general matrix multiplication (GEMM) tiles, parallel work, and any required workspace. The setup step receives the QD8 activation values, the FP16 output buffer, and the per-row `xnn_qd8_quantization_params` array.
 
 ## What you've learned and what's next
 

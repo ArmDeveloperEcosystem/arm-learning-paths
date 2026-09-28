@@ -19,9 +19,9 @@ Original QC4W model weights
   -> repeated inference runs
 ```
 
-This is different from the qd8 left-hand side (LHS), which changes for every inference run and must be packed at runtime.
+The RHS is different from the QD8 left-hand side (LHS), which changes for every inference run and must be packed at runtime.
 
-This walkthrough corresponds to [patch 2: Support transposed KleidiAI QC4W weights](../0002-support-transposed-kai-qc4w-weights.patch). In `src/reference/packing.cc`, `xnn_pack_kai_qs4_weights_and_biases_sme` handles the source-layout conversion before calling the KleidiAI packer.
+This corresponds to the second patch [`0002-support-transposed-kai-qc4w-weights.patch`](../0002-support-transposed-kai-qc4w-weights.patch). In `src/reference/packing.cc`, `xnn_pack_kai_qs4_weights_and_biases_sme` handles the source-layout conversion before calling the KleidiAI packer.
 
 ## Raw XNNPACK QC4W source layout
 
@@ -57,7 +57,7 @@ packed bytes:
 [K1|K0] [K3|K2] [K5|K4] [K7|K6]
 ```
 
-The scale and bias are separate arrays. They are not embedded in the raw packed-int4 bytes.
+The scale and bias are separate arrays. They aren't embedded in the raw packed-int4 bytes.
 
 ## Signedness and kernel zero point
 
@@ -74,9 +74,9 @@ kernel_zero_point = 8
 
 The selected KleidiAI microkernel uses signed int4 weight semantics. The KleidiAI RHS packer handles the required zero-point conversion and also pads the K dimension with signed zero.
 
-## Why raw QC4W cannot feed the KleidiAI kernel directly
+## Why raw QC4W can't feed the KleidiAI kernel directly
 
-Raw XNNPACK QC4W data is organized as one K-contiguous row per output channel, with scales and bias stored separately. This is convenient for a model format, but it is not the layout consumed by the SME2 MOPA inner loop.
+Raw XNNPACK QC4W data is organized as one K-contiguous row per output channel, with scales and bias stored separately. This is convenient for a model format, but it's not the layout consumed by the SME2 MOPA inner loop.
 
 The KleidiAI microkernel computes several output channels together. It needs K blocks from an N tile arranged for sequential vector and matrix loads, followed by metadata at KleidiAI-defined offsets.
 
@@ -100,7 +100,7 @@ The applied integration calls the KleidiAI packer:
 kai_run_rhs_pack_nxk_qsi4cxps1s0_qsu4cxs1s0_neon
 ```
 
-It produces the `qsi4cxp` packed RHS format used by:
+The packer produces the `qsi4cxp` packed RHS format used by:
 
 ```text
 kai_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa
@@ -128,23 +128,23 @@ Conceptually, one packed N tile contains:
 
 The exact byte interleave is owned by the KleidiAI packer. Framework code should call the packer rather than reproduce this microkernel-specific layout by hand.
 
-The weight sums are used to compensate for the asymmetric qd8 LHS zero point during matrix multiplication.
+The weight sums are used to compensate for the asymmetric QD8 LHS zero point during matrix multiplication.
 
 ## Why the packed RHS stores weight sums
 
-The qd8 activation is asymmetric. For one activation row, its real values are:
+The QD8 activation is asymmetric. For one activation row, its real values are:
 
 ```text
 a_real[k] = (a_q[k] - a_zero_point) * a_scale
 ```
 
-For one output channel, let `w_q[n,k]` be the signed int4 weight values. Ignoring the final scale and bias for a moment, the integer part of the dot product is:
+For one output channel, let `w_q[n,k]` be the signed int4 weight values. Ignoring the final scale and bias, the integer part of the dot product is:
 
 ```text
 sum_k ((a_q[k] - a_zero_point) * w_q[n,k])
 ```
 
-Expanding this expression gives:
+Expanding the expression gives:
 
 ```text
 sum_k (a_q[k] * w_q[n,k])
@@ -169,9 +169,9 @@ The KleidiAI microkernel can then compute:
 dot(a_q, w_q) + negative_zero_point * weight_sum[n]
 ```
 
-This is equivalent to subtracting `a_zero_point * weight_sum[n]`, which restores the original asymmetric qd8 equation.
+This is equivalent to subtracting `a_zero_point * weight_sum[n]`, which restores the original asymmetric QD8 equation.
 
-`weight_sum[n]` depends only on static weights and K padding, so the RHS packer calculates it once. The dynamic qd8 zero point can change for every activation row and inference run, but it is supplied through the packed LHS metadata. It does not require the RHS to be packed again.
+`weight_sum[n]` depends only on static weights and K padding, so the RHS packer calculates it once. The dynamic QD8 zero point can change for every activation row and inference run, but it's supplied through the packed LHS metadata. It doesn't require the RHS to be packed again.
 
 ## Worked packing example
 
@@ -196,7 +196,7 @@ scale[0..3]
 bias[0..3]
 ```
 
-This diagram explains the data grouping, not every byte position. The KleidiAI packer defines the exact byte layout required by the SME2 microkernel.
+This diagram explains the data grouping. It doesn't explain every byte position. The KleidiAI packer defines the exact byte layout required by the SME2 microkernel.
 
 ## Handle XNN_FLAG_TRANSPOSE_WEIGHTS
 
@@ -240,13 +240,8 @@ Original QC4W model weights
 
 The KleidiAI microkernel would interpret the XNNPACK-native packed bytes using the wrong interleave and metadata offsets. Keep each packed representation private to the microkernel family that created it.
 
-## What you've accomplished
+## What you've learned and what's next
 
-When packing the RHS:
+You've learned how to pack the RHS. Packing the RHS starts with the original QC4W model weights, scales, and bias. A transposed `K x N` source is converted to `N x K`, then the KleidiAI packer creates the `qsi4cxp` layout. The packer packs once during operator creation and reuses the result through the weights cache
 
-1. Start from the original QC4W model weights, scales, and bias.
-2. Convert a transposed `K x N` source to `N x K` when required.
-3. Let the KleidiAI packer create the `qsi4cxp` layout.
-4. Pack once during operator creation and reuse the result through the weights cache.
-
-Next, adapt the dynamic qd8 LHS without requantizing it.
+Next, you'll adapt the dynamic QD8 LHS without requantizing it.

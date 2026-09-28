@@ -7,11 +7,11 @@ weight: 6
 layout: learningpathall
 ---
 
-## Preserve the QD8 quantization
+## Preserve QD8 quantization
 
-The selected KleidiAI LHS format is `qai8dxp`: asymmetric int8 with dynamic per-row parameters. This matches the XNNPACK qd8 input.
+The selected KleidiAI left-hand side (LHS) format is `qai8dxp`: asymmetric int8 with dynamic per-row parameters. This matches the XNNPACK QD8 input.
 
-This walkthrough corresponds to [patch 3: Pack QD8 LHS for KleidiAI SME2](../0003-pack-qd8-lhs-for-kai-sme2.patch). It adds the static `pack_lhs` and `lhs_packed_size` helpers in `src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c`. Patch 4 queries the kernel parameters and calls these helpers from the completed wrapper.
+Preserving QD8 quantization corresponds to the third patch [`0003-pack-qd8-lhs-for-kai-sme2.patch`](../0003-pack-qd8-lhs-for-kai-sme2.patch). The patch adds the static `pack_lhs` and `lhs_packed_size` helpers in `src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c`. The fourth patch `0004-dispatch-qd8-f16-qc4w-through-kai-sme2.patch` queries the kernel parameters and calls these helpers from the completed wrapper.
 
 ## Convert the XNNPACK LHS to the KleidiAI LHS
 
@@ -24,7 +24,7 @@ quantization_params[M]         one { zero_point, inv_scale } pair per row
 
 `input` is row-major. Row `m` starts at `input + m * input_stride`. Its quantization parameters are stored separately at `quantization_params[m]`.
 
-The KleidiAI SME2 microkernel cannot consume these two arrays directly. It expects one packed `qai8dxp` LHS buffer. For each group of `mr` rows, that buffer contains:
+The KleidiAI SME2 microkernel can't consume these two arrays directly. It expects one packed `qai8dxp` LHS buffer. For each group of `mr` rows, that buffer contains:
 
 ```text
 | KleidiAI-interleaved int8 values for mr rows |
@@ -89,7 +89,7 @@ The `mr` value is vector-length dependent, so obtain it from the KleidiAI kernel
 
 ## Pad K with the quantized zero
 
-KleidiAI rounds K up to a multiple of 32. For a qd8 row, the quantized representation of real zero is its row's zero point:
+KleidiAI rounds K up to a multiple of 32. For a QD8 row, the quantized representation of real zero is its row's zero point:
 
 ```text
 q_zero = zero_point
@@ -118,13 +118,13 @@ The packing helper processes the activation matrix in groups of `mr` rows. Each 
 
 For every group, the helper performs the following work:
 
-1. Select up to `mr` source rows starting at `m_start`.
-2. If the final group has fewer than `mr` rows, reuse the last valid source row for the unused packed slots.
-3. Copy values in K blocks of `kr`, interleaving the same K block from every row.
-4. Pad any K values beyond the original K dimension with that row's quantized zero.
-5. Store `-zero_point` and `inv_scale` for every packed row.
+1. Selects up to `mr` source rows starting at `m_start`
+2. Reuses the last valid source row for the unused packed slots if the final group has fewer than `mr` rows
+3. Copies values in K blocks of `kr`, interleaving the same K block from every row
+4. Pads any K values beyond the original K dimension with that row's quantized zero
+5. Stores `-zero_point` and `inv_scale` for every packed row
 
-The completed wrapper obtains `kr` from the selected KleidiAI microkernel instead of relying on a hard-coded value. The current SME2 kernel reports `kr = 4`, but querying it keeps the pack layout coupled to the actual kernel contract. This illustrative excerpt from the patch 4 logic abbreviates the query function names with ellipses:
+The completed wrapper obtains `kr` from the selected KleidiAI microkernel instead of relying on a hard-coded value. The current SME2 kernel reports `kr = 4`, but querying it keeps the pack layout coupled to the actual kernel contract. This illustrative excerpt from the logic in the fourth patch `0004-dispatch-qd8-f16-qc4w-through-kai-sme2.patch` abbreviates the query function names with ellipses:
 
 ```c
 const size_t kr = kai_get_kr_matmul_clamp_f16_qai8dxp...();
@@ -132,7 +132,7 @@ const size_t sr = kai_get_sr_matmul_clamp_f16_qai8dxp...();
 assert(sr == 1);
 ```
 
-For example, if `mr = 4`, the values are stored in this order:
+For example, if `mr = 4`, the values are stored in the following order:
 
 ```text
 K[0..kr-1] for row 0, row 1, row 2, row 3
@@ -147,10 +147,10 @@ packed slots:  0  1  2  3
 source rows:   8  9  9  9
 ```
 
-The matmul call still receives `m = 2`, so it writes results only for rows 8 and 9. Duplicating row 9 only gives the kernel safe data for the complete packed group.
+The matmul call still receives `m = 2`, so it writes results only for rows 8 and 9. Duplicating row 9 gives the kernel safe data only for the complete packed group.
 
-## What you've learned
+## What you've learned and what's next
 
-You have traced how the adapter interleaves QD8 values, carries over each row's quantization parameters, and handles incomplete tiles. The packed LHS preserves the original quantization while supplying the layout KleidiAI expects.
+You've traced how the adapter interleaves QD8 values, carries over each row's quantization parameters, and handles incomplete tiles. The packed LHS preserves the original quantization while supplying the layout KleidiAI expects.
 
-Next, inspect how the adapter connects to XNNPACK runtime dispatch.
+Next, you'll inspect how the adapter connects to XNNPACK runtime dispatch.

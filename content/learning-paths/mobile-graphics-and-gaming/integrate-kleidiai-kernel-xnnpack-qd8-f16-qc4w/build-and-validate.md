@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Check the patch series
 
-With all four patches applied, run the commands from the XNNPACK checkout directory on your development host. You will build there, then use `adb` to run the correctness tests on the Android device.
+With all four patches applied, run the commands from the XNNPACK checkout directory on your development host. You'll build on the host, then use `adb` to run the correctness tests on the Android device.
 
 Confirm that the patches were applied to the baseline XNNPACK revision in the expected order:
 
@@ -17,7 +17,7 @@ Confirm that the patches were applied to the baseline XNNPACK revision in the ex
 git log --oneline -4
 ```
 
-The expected output is shown here with commit subjects only; your output also includes commit identifiers:
+The output is similar to: 
 
 ```output
 Dispatch QD8 F16 QC4W through KAI SME2
@@ -26,18 +26,22 @@ Support transposed KAI QC4W weights
 Prepare QD8 F16 QC4W SME2 kernel
 ```
 
-Regenerate the microkernel source lists. This command must complete without duplicate-microkernel messages:
+The example output lists commit subjects. Your output will also include commit identifiers. 
+
+Regenerate the microkernel source lists:
 
 ```bash
 python3 tools/update-microkernels.py
 git diff --check
 ```
 
-Depending on your Python version, you might see `DeprecationWarning: codecs.open() is deprecated. Use open() instead.` from the generator. This warning alone does not indicate a failure. Continue if the script completes successfully without duplicate-microkernel messages and `git diff --check` passes.
+Depending on your Python version, you might see `DeprecationWarning: codecs.open() is deprecated. Use open() instead.` from the generator. This warning alone doesn't indicate a failure. Continue if the script completes successfully without duplicate microkernel messages and `git diff --check` passes.
 
-## Build for Android
+## Build test binary for Android
 
-To build the test binary for Android, install the Android Native Development Kit (Android NDK) r29. From the XNNPACK checkout, set `WORKSPACE` to its parent directory so the NDK is installed alongside XNNPACK:
+To build the test binary for Android, install the Android Native Development Kit (Android NDK) r29.
+
+From the XNNPACK checkout, set `WORKSPACE` to its parent directory so that the NDK is installed alongside XNNPACK:
 
 ```bash
 export WORKSPACE="$(dirname "$PWD")"
@@ -79,7 +83,7 @@ cmake --build build/android/arm64-v8a \
 
 ## Run the correctness tests on an SME2 device
 
-From the development host, copy the test binary to an [Android device with SME2 support](https://learn.arm.com/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices), make it executable, and run the filtered correctness suite:
+From the development host, copy the test binary to an [Android device with SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices). Make the binary executable, and run the filtered correctness suite:
 
 ```bash
 adb push build/android/arm64-v8a/test/operators/fully-connected-nc-test \
@@ -98,11 +102,18 @@ The expected output is:
 [  PASSED  ] 15 tests.
 ```
 
-The suite covers normal and small batches, min/max clamp ranges, input and output stride, optional bias, transposed weights, and weights-cache reuse.
+The suite covers the following:
+
+- Normal and small batches
+- Mininum and maximum clamp ranges
+- Input and output stride
+- Optional bias
+- Transposed weights
+- Weights-cache reuse
 
 ## Check the fallback build
 
-The KleidiAI path must not break builds where KleidiAI is disabled. On a development host, run:
+Ensure that the KleidiAI path doesn't break builds where KleidiAI is disabled. On a development host, run:
 
 ```bash
 bazel build //:packing --define=xnn_enable_kleidiai=false
@@ -112,4 +123,6 @@ This validates that the `XNN_ENABLE_KLEIDIAI` guards preserve the non-KleidiAI c
 
 ## What you've accomplished
 
-If the checks pass, you have built the patched Android test binary, passed the filtered QD8 F16 QC4W correctness suite, and built the packing target with KleidiAI disabled.
+You've built the patched Android test binary, passed the filtered QD8 F16 QC4W correctness suite, and built the packing target with KleidiAI disabled.
+
+You can extend the workflow and patches to integrate a KleidiAI SME2 microkernel for your own use case into an existing AI inference framework.
