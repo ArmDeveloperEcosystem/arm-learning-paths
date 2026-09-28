@@ -22,7 +22,7 @@ Using that kernel requires dequantizing and then requantizing the left-hand side
 
 ## Select qai8dxp/qsi4cxp
 
-Use the KleidiAI Scalable Matrix Extension 2 (SME2) Matrix Outer Product Accumulate (MOPA) microkernel `kai_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa` instead.
+Use the KleidiAI Scalable Matrix Extension 2 (SME2) matrix outer product accumulate (MOPA) microkernel `kai_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa` instead.
 
 Its formats match the operator:
 

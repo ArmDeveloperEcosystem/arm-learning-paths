@@ -11,7 +11,7 @@ layout: learningpathall
 
 You'll integrate a KleidiAI matrix multiplication microkernel into the existing XNNPACK `qd8_f16_qc4w` fully connected operator.
 
-The completed path uses a KleidiAI microkernel for Scalable Matrix Extension 2 (SME2) Matrix Outer Product Accumulate (MOPA) instructions:
+The completed path uses a KleidiAI microkernel for Scalable Matrix Extension 2 (SME2) matrix outer product accumulate (MOPA) instructions:
 
 ```text
 kai_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa
