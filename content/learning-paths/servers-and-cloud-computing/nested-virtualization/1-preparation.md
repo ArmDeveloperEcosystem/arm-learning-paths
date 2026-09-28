@@ -23,7 +23,7 @@ Throughout this Learning Path, we will refer to the bare metal server as L0, gue
 This will allow us to allocate similar amounts of resources, and pin those resources to specific cores, to minimize any potential resource conflicts across the bare metal host and the VMs when we are comparing the performance of a reference benchmark at the end.
 
 Nested virtualization:
-![Server layout with Nested Virtualization#center](NV2_stack.png "Figure 1. Nested virtualization")
+![Server layout with Nested Virtualization#center](nv2_stack.png "Figure 1. Nested virtualization")
 
 
 ## Installing the virtualization software stack 
