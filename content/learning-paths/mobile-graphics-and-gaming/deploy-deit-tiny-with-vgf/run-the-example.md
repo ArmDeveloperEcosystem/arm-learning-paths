@@ -9,7 +9,7 @@ aliases:
 
 ## Prepare a pet image
 
-Keep your Python environment active and `setup_path.sh` sourced. Use the Learning Path helper to prepare the first image in the dataset's test split:
+Keep your Python environment active and `arm_test/deit_vgf/sdk/setup_path.sh` sourced. Use the Learning Path helper to prepare the first image in the dataset's test split:
 
 ```bash
 python arm_test/deit_vgf/deit_vgf_helper.py prepare
