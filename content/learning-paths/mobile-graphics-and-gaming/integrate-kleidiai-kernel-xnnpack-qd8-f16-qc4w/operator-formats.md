@@ -83,8 +83,8 @@ K_padded = round_up(K, 32)
 
 Padding must represent real value zero:
 
-- For the QD8 LHS, pad each row with its own `zero_point`.
-- For signed int4 weights, pad with zero.
+- For the QD8 LHS, each row is padded with its own `zero_point`.
+- For signed int4 weights, the padding is zero.
 - For unsigned int4 weights with zero point 8, the RHS packer converts padding to signed zero.
 
 Padding with any other value changes the dot product and produces incorrect output.
