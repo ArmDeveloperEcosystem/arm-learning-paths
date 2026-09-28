@@ -100,13 +100,18 @@ The applied integration calls the KleidiAI packer:
 kai_run_rhs_pack_nxk_qsi4cxps1s0_qsu4cxs1s0_neon
 ```
 
-The packer produces the `qsi4cxp` packed RHS format used by:
+The packer produces the `qsi4cxp` packed RHS format used by `kai_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa`.
 
-```text
-kai_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa
-```
+The packer receives the following:
 
-The packer receives the logical `N x K` source, bias, scale, `nr`, `kr`, and `sr`. For the selected SME2 microkernel:
+- Logical `N x K` source
+- Bias
+- Scale
+- `nr`
+- `kr`
+- `sr`
+
+ For the selected SME2 microkernel:
 
 ```text
 kr = 4
