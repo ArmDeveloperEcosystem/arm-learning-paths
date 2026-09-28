@@ -125,4 +125,17 @@ This validates that the `XNN_ENABLE_KLEIDIAI` guards preserve the non-KleidiAI c
 
 You've built the patched Android test binary, passed the filtered QD8 F16 QC4W correctness suite, and built the packing target with KleidiAI disabled.
 
-You can extend the workflow and patches to integrate a KleidiAI SME2 microkernel for your own use case into an existing AI inference framework.
+You can extend the workflow and patches to integrate a KleidiAI SME2 microkernel for your own use case into an existing AI inference framework. Explore the [Understand KleidiAI SME2 matmul microkernels](/learning-paths/mobile-graphics-and-gaming/kai_sme2_matmul_ukernel_explained/) and [KleidiAI on Android with MediaPipe and XNNPACK](/learning-paths/mobile-graphics-and-gaming/kleidiai-on-android-with-mediapipe-and-xnnpack/) Learning Paths. 
+
+For workloads that split a single activation matrix across many N tiles, consider a workspace-based LHS pre-pack stage:
+
+```text
+Pack LHS once per run
+  -> reuse packed LHS across all RHS N tiles
+```
+Keep the same rules described in the Learning Path when optimizing. 
+
+- Preserve the qd8 per-row zero point and scale.
+- Pad K with the quantized zero point.
+- Query KleidiAI tile dimensions instead of hard-coding vector-length-dependent values.
+- Keep the non-SME2 XNNPACK fallback.
