@@ -1,5 +1,5 @@
 ---
-title: Decode low-bit weights with Arm SME2 LUTI
+title: Decode low-bit weights with Arm SME2 lookup-table instructions
 description: Learn how to decode packed low-bit weights using Arm SME2 LUTI2 and LUTI4, and validate the results against a plain C implementation.
 
 minutes_to_complete: 60
