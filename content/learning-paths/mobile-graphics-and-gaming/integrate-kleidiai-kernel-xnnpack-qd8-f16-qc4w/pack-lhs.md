@@ -39,7 +39,7 @@ XNNPACK input[M, K] + quantization_params[M]
   -> KleidiAI qai8dxp packed LHS
 ```
 
-The int8 values are copied and interleaved for the KleidiAI inner loop. The separate XNNPACK metadata is appended after the values as KleidiAI metadata. The following sections show the exact mapping.
+The int8 values are copied and interleaved for the KleidiAI inner loop. The separate XNNPACK metadata is appended after the values as KleidiAI metadata. 
 
 For each XNNPACK row:
 
