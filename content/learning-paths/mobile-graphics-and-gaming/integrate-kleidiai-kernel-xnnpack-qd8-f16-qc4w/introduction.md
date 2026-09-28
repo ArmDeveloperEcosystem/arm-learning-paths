@@ -30,7 +30,7 @@ This is a framework-integration example. The aim is not to write a new assembly 
 
 The patch series that you'll use was created and tested from the XNNPACK commit `119bb329762be10e63688256bb989a0007445b49`.
 
-Other XNNPACK revisions can have different microkernel lists, packing helpers, or operator code. Use this exact revision when you clone and checkout XNNPACK into a directory:
+Other XNNPACK revisions can have different microkernel lists, packing helpers, or operator code. Use this exact revision when you clone and check out XNNPACK:
 
 ```bash
 git clone https://github.com/google/XNNPACK.git

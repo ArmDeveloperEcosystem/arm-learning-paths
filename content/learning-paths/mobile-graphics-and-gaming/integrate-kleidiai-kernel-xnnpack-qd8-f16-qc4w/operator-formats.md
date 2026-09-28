@@ -1,5 +1,5 @@
 ---
-title: Understand the XNNPACK operator qd8_f16_qc4w formats
+title: Understand XNNPACK QD8 and QC4W operand formats
 description: Identify XNNPACK QD8 activation and QC4W weight formats to establish the packing requirements for a KleidiAI microkernel.
 weight: 3
 

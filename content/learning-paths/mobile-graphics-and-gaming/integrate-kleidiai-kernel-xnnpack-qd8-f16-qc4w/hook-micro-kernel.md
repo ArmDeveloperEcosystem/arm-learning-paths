@@ -1,5 +1,5 @@
 ---
-title: Configure and dispatch the SME2 kernel
+title: Inspect SME2 kernel configuration and dispatch
 description: Inspect XNNPACK runtime dispatch and packing configuration for the KleidiAI SME2 adapter and its native fallback.
 weight: 7
 
@@ -120,7 +120,7 @@ Before this dispatch is registered, the new wrapper is listed as a non-productio
 
 ## Understand the adapter
 
-The adapter has the standard XNNPACK DQGEMM application binary interface (ABI). XNNPACK calls it with the following
+The adapter has the standard XNNPACK DQGEMM application binary interface (ABI). XNNPACK calls it with the following:
 
 - An int8 activation tile
 - A pointer to packed weights
@@ -143,6 +143,6 @@ The adapter currently allocates a temporary packed-LHS buffer for each DQGEMM ca
 
 ## What you've learned and what's next
 
-You've followed the applied configuration from SME2 detection through packing and adapter registration to the KleidiAI call. 
+You've followed the applied configuration from SME2 detection through packing and adapter registration to the KleidiAI call.
 
 Next, you'll build the patched checkout and run the correctness and fallback-build checks.

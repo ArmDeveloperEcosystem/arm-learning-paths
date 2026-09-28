@@ -17,7 +17,7 @@ Confirm that the patches were applied to the baseline XNNPACK revision in the ex
 git log --oneline -4
 ```
 
-The output is similar to: 
+The output is similar to:
 
 ```output
 Dispatch QD8 F16 QC4W through KAI SME2
@@ -26,7 +26,7 @@ Support transposed KAI QC4W weights
 Prepare QD8 F16 QC4W SME2 kernel
 ```
 
-The example output lists commit subjects. Your output will also include commit identifiers. 
+The example output lists commit subjects. Your output will also include commit identifiers.
 
 Regenerate the microkernel source lists:
 
@@ -37,7 +37,7 @@ git diff --check
 
 Depending on your Python version, you might see `DeprecationWarning: codecs.open() is deprecated. Use open() instead.` from the generator. This warning alone doesn't indicate a failure. Continue if the script completes successfully without duplicate microkernel messages and `git diff --check` passes.
 
-## Build test binary for Android
+## Build the test binary for Android
 
 To build the test binary for Android, install the Android Native Development Kit (Android NDK) r29.
 
@@ -105,7 +105,7 @@ The expected output is:
 The suite covers the following:
 
 - Normal and small batches
-- Mininum and maximum clamp ranges
+- Minimum and maximum clamp ranges
 - Input and output stride
 - Optional bias
 - Transposed weights
