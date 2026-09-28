@@ -38,7 +38,7 @@ git submodule update --init --recursive
 
 Keep the repository directory named `executorch`: the build checks this name. Run all remaining commands from this repository root, in the same shell. The source checkout provides the example and C++ runner; export uses the matching released Python package.
 
-## Install the Python dependencies
+## Create the Python environment
 
 Create a fresh Python 3.12 environment:
 
@@ -46,7 +46,28 @@ Create a fresh Python 3.12 environment:
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
+mkdir -p arm_test/deit_vgf
+set -o pipefail
 ```
+
+The directory holds your model, images, and logs. `pipefail` preserves command failures when you save logs with `tee` later in the Learning Path.
+
+## Configure the ML SDK for Vulkan
+
+Review the [ML SDK license terms](https://github.com/arm/ai-ml-sdk-for-vulkan/tree/main/LICENSES) and the Vulkan SDK terms before using the tooling. Use the setup script already included in ExecuTorch:
+
+```bash
+bash examples/arm/setup.sh --disable-ethos-u-deps --enable-mlsdk-deps
+```
+
+The script downloads the Vulkan SDK and configures the packaged ML emulation layers. It also installs three developer-only packages that this Learning Path does not use. Remove those packages from the fresh virtual environment before resolving the example's dependencies:
+
+```bash
+python -m pip uninstall -y \
+  tosa-adapter-model-explorer ai-edge-model-explorer pytest-timeout
+```
+
+## Install the Python dependencies
 
 Install the release's CPU-only PyTorch stack, VGF packages, build tools, and example dependencies from PyPI and the stable PyTorch CPU index:
 
@@ -64,36 +85,15 @@ python -m pip check
 
 This installs Transformers 5.3.0 and ML SDK packages 0.10.0. Scikit-learn supplies the training script's accuracy metric. `pip check` should report `No broken requirements found.` The `+cpu` wheels still support the VGF runner's Vulkan execution; they make the Python training and export environment independent of CUDA.
 
-Do not run `install_executorch.sh` or `examples/arm/setup.sh` in this environment. This Learning Path uses released wheels instead of the source installer's nightly indexes, and configures the SDK separately to preserve the resolved Python dependencies.
+Run this dependency installation after SDK setup: it resolves the older FlatBuffers version installed by the setup script. Do not run `install_executorch.sh`; this Learning Path uses released wheels instead of its nightly indexes. If you rerun SDK setup, repeat the package removal and dependency installation above.
 
-## Save the Learning Path helpers
-
-Create an artifact directory and preserve failures when logging command output:
+Load the generated SDK environment:
 
 ```bash
-mkdir -p arm_test/deit_vgf
-set -o pipefail
+source examples/arm/arm-scratch/setup_path.sh
 ```
 
-Download these two files and save them in `arm_test/deit_vgf/`:
-
-- [SDK setup helper](../setup_vgf_sdk.sh), saved as `setup_vgf_sdk.sh`
-- [DeiT-Tiny helper](../deit_vgf_helper.py), saved as `deit_vgf_helper.py`
-
-If your browser displays the source, use **Save as** and keep the original file extension. Review both files before running them.
-
-The helpers belong to this Learning Path. The SDK helper reuses the release's SDK download and environment setup functions without installing Python dependencies. The Python helper handles checkpoint compatibility, image preparation, and result decoding. Training, export, and inference still use the unchanged ExecuTorch example and runner.
-
-## Configure the ML SDK for Vulkan
-
-Review the [ML SDK license terms](https://github.com/arm/ai-ml-sdk-for-vulkan/tree/main/LICENSES) and the Vulkan SDK terms before using the tooling. Download the Vulkan SDK and configure the installed ML SDK emulation layers:
-
-```bash
-bash arm_test/deit_vgf/setup_vgf_sdk.sh
-source arm_test/deit_vgf/sdk/setup_path.sh
-```
-
-The release's download helper verifies the Vulkan SDK archive checksum. The generated environment configures the SDK tools and packaged emulation layers. In a new shell, return to the repository root, activate `.venv`, source this `setup_path.sh`, and enable `set -o pipefail` again.
+In a new shell, return to the repository root, activate `.venv`, source this `setup_path.sh`, and enable `set -o pipefail` again.
 
 {{% notice Note %}}
 This flow uses the packaged emulation layer, which needs `shaderFloat64` support at this release. Use a compatible Linux host for these commands. The [ML SDK source-build helper](https://github.com/pytorch/executorch/blob/v1.5.1/backends/arm/scripts/setup-mlsdk-from-source.sh) documents the separate source-build route for other configurations.
@@ -137,4 +137,4 @@ cmake --build cmake-out-deit-vgf --target executor_runner --parallel 4
 
 ## What you've accomplished
 
-You have prepared the release-based environment, built the VGF runner, and saved the helpers. Next, you will fine-tune the classifier and prepare its checkpoint for export.
+You have prepared the release-based environment and built the VGF runner. Next, you will fine-tune the classifier and prepare its checkpoint for export.

@@ -24,7 +24,17 @@ Record the accuracy from your run. Training speed and final accuracy depend on y
 
 ## Prepare the checkpoint for export
 
-At the pinned revision, the trainer saves `model.safetensors`, but `export_deit.py` loads with `use_safetensors=False`. Use the Learning Path helper to create the compatible PyTorch weight file:
+At the pinned revision, the trainer saves `model.safetensors`, but `export_deit.py` loads with `use_safetensors=False`. The Learning Path helper creates the compatible PyTorch weight file.
+
+Download the [DeiT-Tiny helper](../deit_vgf_helper.py), which also prepares images and decodes predictions in the inference step:
+
+```bash
+curl --fail --location \
+  --output arm_test/deit_vgf/deit_vgf_helper.py \
+  https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/f53c856014c17306c7f0e23e62a993494a2576ca/content/learning-paths/mobile-graphics-and-gaming/deploy-deit-tiny-with-vgf/deit_vgf_helper.py
+```
+
+Review the downloaded file, then prepare the checkpoint:
 
 ```bash
 python arm_test/deit_vgf/deit_vgf_helper.py checkpoint
