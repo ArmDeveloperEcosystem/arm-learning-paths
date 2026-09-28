@@ -23,16 +23,14 @@ if (hardware_config->arch_flags & xnn_arch_arm_sme2) {
 
 The selected backend has two different packing lifetimes:
 
-```text
-RHS: pack static weights once during operator creation
-LHS: pack dynamic qd8 activation tiles at runtime
-```
+- Right-hand side (RHS): Pack static weights once during operator creation.
+- Left-hand side (LHS): Pack dynamic QD8 activation tiles at runtime.
 
 Both sides must use the layouts expected by the same KleidiAI SME2 matmul microkernel.
 
 ## Configure the KleidiAI RHS packer
 
-XNNPACK already has an adapter around the KleidiAI `qsi4cxp` right-hand side (RHS) packer:
+XNNPACK already has an adapter around the KleidiAI `qsi4cxp` RHS packer:
 
 ```c
 xnn_pack_kai_qs4_weights_and_biases_sme
@@ -53,7 +51,7 @@ XNNPACK uses this configuration during operator creation. It passes the original
 
 ## Configure the KleidiAI LHS packer
 
-There's no persistent left-hand side (LHS) buffer at operator creation because QD8 activations and their quantization parameters change for every invocation.
+There's no persistent LHS buffer at operator creation because QD8 activations and their quantization parameters change for every invocation.
 
 Instead, the XNNPACK dynamically quantized general matrix multiplication (DQGEMM) adapter packs each activation tile immediately before calling KleidiAI:
 
@@ -71,7 +69,7 @@ KleidiAI negative zero pt  = -XNNPACK zero_point
 KleidiAI scale             = XNNPACK inv_scale
 ```
 
-It also queries KleidiAI `kr` and `sr`, checks that `sr == 1`, interleaves the values in `kr`-sized blocks, and pads the K tail with the row zero point. For the packed-LHS layout, see [Pack the QD8 activation without requantizing](../pack-lhs/).
+The adapter also queries KleidiAI `kr` and `sr` and checks that `sr == 1`. It interleaves the values in `kr`-sized blocks, and pads the K tail with the row zero point. For the packed-LHS layout, see [Pack the QD8 activation without requantizing](../pack-lhs/).
 
 ## Register the DQGEMM adapter
 

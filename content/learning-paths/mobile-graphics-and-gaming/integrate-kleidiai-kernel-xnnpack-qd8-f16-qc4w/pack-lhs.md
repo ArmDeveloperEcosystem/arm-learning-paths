@@ -24,7 +24,7 @@ quantization_params[M]         one { zero_point, inv_scale } pair per row
 
 `input` is row-major. Row `m` starts at `input + m * input_stride`. Its quantization parameters are stored separately at `quantization_params[m]`.
 
-The KleidiAI SME2 microkernel can't consume these two arrays directly. It expects one packed `qai8dxp` LHS buffer. For each group of `mr` rows, that buffer contains:
+The KleidiAI Scalable Matrix Extension 2 (SME2) microkernel can't consume these two arrays directly. It expects one packed `qai8dxp` LHS buffer. For each group of `mr` rows, that buffer contains:
 
 ```text
 | KleidiAI-interleaved int8 values for mr rows |

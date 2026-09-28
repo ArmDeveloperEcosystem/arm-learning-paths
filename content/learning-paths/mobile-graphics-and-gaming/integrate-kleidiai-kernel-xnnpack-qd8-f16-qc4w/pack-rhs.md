@@ -76,7 +76,7 @@ The selected KleidiAI microkernel uses signed int4 weight semantics. The KleidiA
 
 ## Why raw QC4W can't feed the KleidiAI kernel directly
 
-Raw XNNPACK QC4W data is organized as one K-contiguous row per output channel, with scales and bias stored separately. This is convenient for a model format, but it's not the layout consumed by the SME2 MOPA inner loop.
+Raw XNNPACK QC4W data is organized as one K-contiguous row per output channel, with scales and bias stored separately. This is convenient for a model format. However, it's not the layout consumed by the Scalable Matrix Extension 2 (SME2) Matrix Outer Product Accumulate (MOPA) inner loop.
 
 The KleidiAI microkernel computes several output channels together. It needs K blocks from an N tile arranged for sequential vector and matrix loads, followed by metadata at KleidiAI-defined offsets.
 

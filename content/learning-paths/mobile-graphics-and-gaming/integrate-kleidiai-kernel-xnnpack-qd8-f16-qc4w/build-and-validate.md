@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Check the patch series
 
-With all four patches applied, run the commands from the XNNPACK checkout directory on your development host. You'll build on the host, then use `adb` to run the correctness tests on the Android device.
+With all four patches applied, run the commands from the XNNPACK checkout directory on your development host. You'll build on the host, then use `adb` to run the correctness tests on the Android device with Scalable Matrix Extension 2 (SME2) support.
 
 Confirm that the patches were applied to the baseline XNNPACK revision in the expected order:
 

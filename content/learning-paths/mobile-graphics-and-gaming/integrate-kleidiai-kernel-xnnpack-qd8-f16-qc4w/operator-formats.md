@@ -73,7 +73,7 @@ XNNPACK also supports `XNN_FLAG_TRANSPOSE_WEIGHTS`. In that case, the source ten
 
 ## Safe K padding
 
-The selected KleidiAI SME2 microkernel rounds its internal K dimension up to a multiple of 32. The original model doesn't need to have a K dimension that's divisible by 32.
+The selected KleidiAI Scalable Matrix Extension 2 (SME2) microkernel rounds its internal K dimension up to a multiple of 32. The original model doesn't need to have a K dimension that's divisible by 32.
 
 The integration creates a padded representation:
 

@@ -4,7 +4,7 @@ description: Integrate a KleidiAI SME2 microkernel into XNNPACK with operand pac
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an advanced topic for software developers and performance engineers who want to integrate a KleidiAI SME2 microkernel into an existing AI inference framework.
+who_is_this_for: This is an advanced topic for software developers and performance engineers who want to integrate a KleidiAI Scalable Matrix Extension 2 (SME2) microkernel into an existing AI inference framework.
 
 learning_objectives:
     - Identify the XNNPACK qd8_f16_qc4w operand formats and select a KleidiAI microkernel with a matching quantization contract.
