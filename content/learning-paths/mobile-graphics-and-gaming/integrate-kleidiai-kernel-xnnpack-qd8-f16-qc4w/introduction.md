@@ -24,7 +24,7 @@ The name identifies the output, operand formats, and instruction family:
 - `qsi4cxp`: The right-hand side (RHS) is signed int4 quantized per output channel.
 - `sme2_mopa`: It uses SME2 matrix outer product accumulate instructions.
 
-This is a framework-integration example. The aim is not to write a new assembly microkernel. Instead, you'll learn how to select an existing kernel, adapt framework-owned tensors to its packed layouts, dispatch it safely, and verify correctness.
+This is a framework-integration example. You won't write a new assembly microkernel. Instead, you'll learn how to select an existing kernel, adapt framework-owned tensors to its packed layouts, dispatch it safely, and verify correctness.
 
 ## Clone the tested XNNPACK revision
 
