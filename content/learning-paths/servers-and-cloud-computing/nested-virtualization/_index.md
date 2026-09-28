@@ -29,7 +29,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
-subjects: Virtualization
+subjects: Containers and Virtualization
 armips:
     - Arm v8.6-A or later
     - Arm v9.0-A or later
@@ -39,8 +39,7 @@ tools_software_languages:
     - libvirt
     - virsh / virt-manager
 operatingsystems:
-    - Fedora 44+
-    - Linux 7.2 kernel or later
+    - Linux 7.2 or later
 
 further_reading:
     - resource:
