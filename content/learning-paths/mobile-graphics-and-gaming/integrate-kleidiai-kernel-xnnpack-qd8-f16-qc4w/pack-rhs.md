@@ -247,6 +247,6 @@ The KleidiAI microkernel would interpret the XNNPACK-native packed bytes using t
 
 ## What you've learned and what's next
 
-You've learned how RHS packing starts with the original QC4W model weights, scales, and bias. A transposed `K x N` source is converted to `N x K`, then the KleidiAI packer creates the `qsi4cxp` layout once during operator creation and reuses the result through the weights cache.
+You've learned how RHS packing starts with the original QC4W model weights, scales, and bias. A transposed `K x N` source is converted to `N x K`. The KleidiAI packer then creates the `qsi4cxp` layout once during operator creation and reuses the result through the weights cache.
 
 Next, you'll adapt the dynamic QD8 LHS without requantizing it.
