@@ -64,16 +64,16 @@ Review the [ML SDK license terms](https://github.com/arm/ai-ml-sdk-for-vulkan/tr
 bash examples/arm/setup.sh --disable-ethos-u-deps --enable-mlsdk-deps
 ```
 
-The setup script also installs three developer packages that this example doesn't use. Remove them from the fresh environment before resolving the example's dependencies:
+Remove three developer packages installed by setup that this example doesn't use:
 
 ```bash
 python -m pip uninstall -y \
   tosa-adapter-model-explorer ai-edge-model-explorer pytest-timeout
 ```
 
-## Install the release packages
+## Install ExecuTorch
 
-Install the released CPU PyTorch stack, VGF packages, build tools, and Swin2SR dependencies:
+Install ExecuTorch and the example dependencies after SDK setup to resolve its older FlatBuffers dependency:
 
 ```bash
 python -m pip install \
@@ -87,21 +87,18 @@ python -m pip install \
 python -m pip check
 ```
 
-The example pins Transformers 4.56.1, NumPy 2.1.3, and Pillow 12.0.0. The `+cpu` packages avoid a CUDA dependency during export; the host runner still uses Vulkan.
+`pip check` should report `No broken requirements found.` The CPU wheels are for export; the host runner still uses Vulkan.
 
-Run this installation after SDK setup to resolve its older FlatBuffers dependency. `pip check` should report `No broken requirements found.` Don't run `install_executorch.sh`, which uses nightly package indexes. If you rerun SDK setup, repeat the package removal and release installation.
+These commands replace `install_executorch.sh`, which uses nightly and test indexes. If you rerun SDK setup, repeat the package removal and installation.
 
 ## Check the tools
 
-Activate the SDK paths, check export prerequisites, and confirm that Vulkan can see your GPU:
+Activate the SDK paths and check the export and GPU prerequisites:
 
 ```bash
 source examples/arm/arm-scratch/setup_path.sh
 python -m executorch.backends.arm.vgf.check_env --aot
 python -c "import executorch.exir; from executorch.extension.pybindings import portable_lib; print('ExecuTorch is ready')"
-command -v model-converter
-command -v glslc
-vulkaninfo --summary
 vulkaninfo | grep shaderFloat64
 ```
 
