@@ -9,17 +9,15 @@ layout: learningpathall
 
 ## Download the sandbox runner
 
-From `~/firecracker-ai-sandbox`, create the runner directories:
+Continuing in the `~/firecracker-ai-sandbox` directory, create the runner directories:
 
 ```bash
-cd ~/firecracker-ai-sandbox
 mkdir -p sandbox/examples
 ```
 
 Download the runner and example programs:
 
 ```bash
-cd ~/firecracker-ai-sandbox
 BASE_URL=https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/servers-and-cloud-computing/firecracker-ai-sandbox
 
 for FILE in 00-common.sh run-job.sh demo.sh; do
@@ -33,7 +31,7 @@ done
 chmod +x sandbox/*.sh sandbox/examples/*.sh
 ```
 
-Verify that the downloads completed successfully before running the scripts as root. This lists the files in the `sandbox/` directory, including the `sandbox/examples/` subdirectory. 
+Verify that the downloads completed successfully before running the scripts as root. The command lists the files in the `sandbox/` directory, including the `sandbox/examples/` subdirectory:
 
 ```bash
 find "$PWD/sandbox" -maxdepth 2 -type f -name "*.sh" -printf "%P\n" | sort
@@ -52,14 +50,13 @@ run-job.sh
 
 ## Run the first job
 
-Use the supplied `hello-arm.sh` program to demonstrate how a sandbox could execute code submitted by an AI coding agent. This simple Bash program reports the guest architecture, kernel, CPU count, and memory. The runner copies it into a fresh microVM and executes it with `/bin/bash`.
+Use the provided `hello-arm.sh` program to see how a sandbox can execute code submitted by an AI coding agent. This Bash program reports the guest architecture, kernel, CPU count, and memory. The runner copies the program into a fresh microVM and runs it with `/bin/bash`.
 
-The program uses tools already installed in the base image; jobs cannot rely on outbound IPv4 access to install dependencies.
+The program uses tools already installed in the base image. Jobs can't rely on outbound IPv4 access to install dependencies.
 
 Start a microVM and execute the architecture inspection program:
 
 ```bash
-cd ~/firecracker-ai-sandbox
 sudo ./sandbox/run-job.sh ./sandbox/examples/hello-arm.sh
 ```
 
@@ -120,15 +117,16 @@ The `duration_ms` field measures the host-side SSH execution phase, excluding di
 Set environment variables before `run-job.sh` to change the Firecracker resources and timeout:
 
 ```bash
-cd ~/firecracker-ai-sandbox
 sudo FC_VCPUS=2 FC_MEM_MIB=1024 FC_JOB_TIMEOUT=30 \
   ./sandbox/run-job.sh ./sandbox/examples/hello-arm.sh
 ```
 
 The job receives two virtual CPUs, 1,024 MiB of memory, and a 30-second timeout. These settings apply only to this execution.
 
-The memory allocation includes the guest operating system, so the program has less memory available. The virtual CPU count controls guest CPUs; it doesn't set a host CPU quota. The execution timeout starts after boot and file transfer, so total elapsed time is longer.
+The memory allocation includes the guest operating system, so the program has less memory available. The virtual CPU count controls guest CPUs but doesn't set a host CPU quota. The execution timeout starts after boot and file transfer, so the total elapsed time is longer.
 
 ## What you've accomplished and what's next
 
-You've executed a program on native Arm inside a job-specific microVM and inspected the host-side audit artifacts. Next, you'll prove that filesystem changes don't persist and that the host enforces the execution timeout.
+You've executed a program on native Arm inside a job-specific microVM and inspected the host-side audit artifacts.
+
+Next, you'll prove that filesystem changes don't persist and that the host enforces the execution timeout.

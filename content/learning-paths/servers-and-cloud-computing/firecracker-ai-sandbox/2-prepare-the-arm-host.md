@@ -9,13 +9,17 @@ layout: learningpathall
 
 ## Confirm the host environment
 
-The steps were validated on an [Arm AGI CPU](https://www.arm.com/products/cloud-datacenter/arm-agi-cpu) platform running Ubuntu 24.04.
+The Learning Path was validated on a platform powered by the [Arm AGI CPU](https://www.arm.com/products/cloud-datacenter/arm-agi-cpu) and running Ubuntu 24.04.
 
-You can also run the steps on another Arm-based bare-metal server running Ubuntu 24.04 with KVM available as `/dev/kvm`. For example, you can use an [AWS Graviton4-based Amazon EC2 R8g bare-metal instance](https://aws.amazon.com/blogs/aws/aws-graviton4-based-amazon-ec2-r8g-instances-best-price-performance-in-amazon-ec2/), such as `r8g.metal-24xl` or `r8g.metal-48xl`. Select an Ubuntu 24.04 Arm64 image when provisioning the instance.
+You can also run the steps on another Arm-based bare-metal server with kernel-based virtual machine (KVM) available as `/dev/kvm`. For example, you can use an [AWS Graviton4-based Amazon EC2 R8g bare-metal instance](https://aws.amazon.com/blogs/aws/aws-graviton4-based-amazon-ec2-r8g-instances-best-price-performance-in-amazon-ec2/), such as `r8g.metal-24xl` or `r8g.metal-48xl`. Select an Ubuntu 24.04 Arm64 image when provisioning the instance.
 
-A virtual machine works only when its platform exposes nested virtualization and `/dev/kvm` to the guest. Confirm KVM access before continuing.
+A VM works only when its platform exposes nested virtualization and `/dev/kvm` to the guest. Confirm KVM access before continuing.
 
-Run all commands in a Bash shell on this host. You need `sudo` access and `wget` for the initial downloads. Use a dedicated test machine because setup installs packages and each job temporarily changes the host's networking and firewall rules. Make sure the sandbox subnet, `172.16.0.0/30`, doesn't overlap with any network used by the host or its VPN.
+Ensure the following:
+
+- Run all commands in a Bash shell on this host. You need `sudo` access and `wget` for the initial downloads.
+- Use a dedicated test machine because setup scripts install packages. Each job temporarily changes the host's networking and firewall rules.
+- Make sure that the sandbox subnet, `172.16.0.0/30`, doesn't overlap with any network used by the host or its VPN.
 
 Check that you're running on an Arm-based Linux machine:
 
@@ -41,21 +45,23 @@ The expected output is:
 KVM is available
 ```
 
-If the command produces no output, check that the host kernel enables KVM and that `/dev/kvm` is accessible through `sudo`. On a virtual machine, also check whether the platform supports nested virtualization. This device check is a prerequisite; successfully booting the first microVM verifies that Firecracker can use KVM.
+If the command produces no output, check that the host kernel enables KVM and that `/dev/kvm` is accessible through `sudo`. On a VM, also check whether the platform supports nested virtualization.
 
 ## Download the host preparation scripts
 
-Create a working directory for the example:
+Create a working directory for the sandbox and navigate to it:
 
 ```bash
-mkdir -p ~/firecracker-ai-sandbox/base
+mkdir -p ~/firecracker-ai-sandbox
 cd ~/firecracker-ai-sandbox
 ```
 
-Download the scripts that install Firecracker and prepare the guest. `00-common.sh` holds their shared paths and version settings:
+Run all subsequent commands in the `~/firecracker-ai-sandbox` directory.
+
+Start by creating a subdirectory called `base/` and downloading scripts that install Firecracker and prepare the guest. `00-common.sh` holds their shared paths and version settings:
 
 ```bash
-cd ~/firecracker-ai-sandbox
+mkdir base
 BASE_URL=https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/servers-and-cloud-computing/firecracker-ai-sandbox
 
 for FILE in 00-common.sh 01-setup-host.sh 02-prepare-guest.sh; do
@@ -64,10 +70,9 @@ done
 chmod +x base/*.sh
 ```
 
-Verify that the downloads completed successfully before running the scripts as root. This lists the files in the `base/` directory. 
+Verify that the downloads completed successfully before running the scripts as root. The command lists the files in the `base/` directory:
 
 ```bash
-cd ~/firecracker-ai-sandbox
 find "$PWD/base" -maxdepth 1 -type f -name "*.sh" -printf "%f\n" | sort
 ```
 
@@ -84,11 +89,10 @@ The expected output is:
 Run the host setup script:
 
 ```bash
-cd ~/firecracker-ai-sandbox
 sudo ./base/01-setup-host.sh
 ```
 
-The script performs these tasks:
+The script performs the following tasks:
 
 - Confirms that the host uses `aarch64` and exposes `/dev/kvm`
 - Installs the Ubuntu packages needed for Firecracker, guest preparation, networking, and SSH
@@ -112,7 +116,6 @@ Firecracker v1.15.1
 Create the Arm guest artifacts:
 
 ```bash
-cd ~/firecracker-ai-sandbox
 sudo ./base/02-prepare-guest.sh
 ```
 
@@ -120,7 +123,7 @@ The script downloads an Arm64 Linux kernel and Ubuntu 24.04 root filesystem from
 
 Preparation uses `chroot` to run Arm64 guest provisioning commands on your Arm host. It installs guest packages using the host's network access; the job firewall rules aren't active during this step. Allow disk space for the downloaded image, temporary extracted files, the base disk, and one disposable job disk.
 
-Firecracker and the guest kernel version are pinned in `base/00-common.sh`, but the script selects a dated CI artifact directory dynamically. Those artifacts can change independently of the Firecracker release. 
+Firecracker and the guest kernel version are pinned in `base/00-common.sh`, but the script selects a dated CI artifact directory dynamically. Those artifacts can change independently of the Firecracker release.
 
 List the resulting artifacts:
 
@@ -128,14 +131,14 @@ List the resulting artifacts:
 sudo ls -lh /opt/firecracker-lp/artifacts
 ```
 
-Confirm that the directory contains these key files:
+Confirm that the artifacts directory contains the following key files:
 
 - `vmlinux`: the uncompressed Arm guest kernel
 - `rootfs.ext4`: the reusable base root filesystem
 - `id_rsa`: the host-side private SSH key
 - `id_rsa.pub`: the public key installed in the guest
 
-Despite the file name `id_rsa`, the script generates an Ed25519 key. Keep the private key on the host. The runner uses it to copy and execute programs over SSH; you don't need to open a public SSH port for the microVM.
+Despite the file name `id_rsa`, the script generates an Ed25519 key. Keep the private key on the host. The runner uses the key to copy and execute programs over SSH. You don't need to open a public SSH port for the microVM.
 
 {{% notice Note %}}
 Treat `/opt/firecracker-lp/artifacts/rootfs.ext4` as a clean baseline. The job runner copies it before every execution and never boots the baseline directly.
@@ -143,4 +146,6 @@ Treat `/opt/firecracker-lp/artifacts/rootfs.ext4` as a clean baseline. The job r
 
 ## What you've accomplished and what's next
 
-You've installed Firecracker and created the guest artifacts shared by all jobs. Next, you'll download the runner and execute a shell program inside a disposable microVM.
+You've installed Firecracker and created the guest artifacts shared by all jobs.
+
+Next, you'll download the runner and execute a shell program inside a disposable microVM.
