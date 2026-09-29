@@ -12,6 +12,12 @@ layout: learningpathall
 
 Enable link-time optimization with GCC by passing the `-flto` flag during both compilation and linking.
 
+{{% notice Please Note %}}
+
+If you are optimizing your own application specifically for the Arm AGI CPU, GCC 16.1.0 introduced the [`-mcpu=armagicpu` option](https://gcc.gnu.org/gcc-16/changes.html) for CPU-specific tuning. Installing GCC 16.1.0 is not required to complete this Learning Path; the LTO examples run with older GCC versions.
+
+{{% /notice %}}
+
 For a traditional, stepwise build of an executable, compile each translation unit with LTO enabled:
 ```bash
 gcc -c -O2 -flto component-1.c
@@ -60,7 +66,7 @@ gcc -O2 -flto=4 -o myprog component-1.c component-2.c
 When parallelization is enabled, GCC partitions the program into multiple units of roughly equal size. The compiler attempts to minimize cross-partition references, which could otherwise reduce the effectiveness of certain whole-program optimizations. For best results, set the parallelization level to match the number of available CPU cores.
 
 #### Caching
-During iterative development, repeatedly recompiling with LTO can increase build times. GCC 15 and later support caching intermediate LTO results to speed up incremental builds by reusing previously computed optimization information. Earlier GCC versions do not support this option.
+During iterative development, repeatedly recompiling with LTO can increase build times. GCC 15 and later support optional caching of intermediate LTO results to speed up incremental builds by reusing previously computed optimization information. If you use an earlier GCC version, skip this optional step.
 
 Create a cache directory, then enable caching using the `-flto-incremental=<path>` option:
 
