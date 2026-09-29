@@ -1,6 +1,10 @@
 ---
 title: Build an ephemeral AI code sandbox with Firecracker on Arm
 
+draft: true
+cascade:
+    draft: true
+    
 description: Create a Firecracker-based runner on an Arm AGI CPU system that executes generated shell code in a disposable microVM with bounded resources and restricted networking.
 
 minutes_to_complete: 45
