@@ -56,9 +56,7 @@ python3.12 --version
 
 ## Create an isolated ExecuTorch environment
 
-Use the ExecuTorch `v1.5.1` release for both the Python package and the example and runtime source. The commands below pin the release commit and install released dependencies, without using nightly package indexes.
-
-Clone ExecuTorch and check out the release commit:
+Use ExecuTorch `v1.5.1` for the Python package, example, and native runtime. Clone the matching source:
 
 ```bash
 git clone https://github.com/pytorch/executorch.git
@@ -119,9 +117,9 @@ command -v FVP_Corstone_SSE-320
 
 The compiler resolves under `examples/arm/arm-scratch/`. On Linux, the FVP also resolves under this directory. On macOS, the FVP resolves under the FVPs-on-Mac wrapper directory. If the compiler is missing, source `examples/arm/arm-scratch/setup_path.sh` again. If the FVP is missing on macOS, add the wrapper directory to `PATH`.
 
-## Install the released Python packages
+## Install ExecuTorch
 
-The Arm setup script also installs model-viewing and test packages that this Learning Path doesn't use. Remove these packages from the new virtual environment, then install the released ExecuTorch stack. This order lets the package resolver select the FlatBuffers version required by TOSA tools, rather than retaining the older version installed by the setup script.
+Remove the unused model-viewing and test packages installed by Arm setup:
 
 ```bash
 python -m pip uninstall --yes \
@@ -129,7 +127,7 @@ python -m pip uninstall --yes \
   pytest-timeout pte-adapter-model-explorer
 ```
 
-Select your host operating system. Linux uses the released CPU wheels; macOS uses the released Apple silicon wheels:
+Install the released packages for your host. Linux uses CPU wheels; macOS uses Apple silicon wheels. Keep this step after Arm setup to resolve its older FlatBuffers dependency:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux" language="bash" >}}
@@ -162,14 +160,7 @@ print("ExecuTorch installation verified")
 PY
 ```
 
-The expected output is:
-
-```output
-No broken requirements found.
-ExecuTorch installation verified
-```
-
-The `ethos-u` extra supplies Vela and TOSA tools. The Python package and source checkout use the same ExecuTorch release; the following pages build the host quantized operators and bare-metal runtime from that source. If you rerun the Arm setup script, repeat this package-installation section before continuing.
+The checks should report `No broken requirements found.` and `ExecuTorch installation verified`. These commands replace `install_executorch.sh`, which uses nightly and test indexes. If you rerun Arm setup, repeat this section before continuing.
 
 ## Download the model and sample audio
 
