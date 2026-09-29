@@ -3,16 +3,16 @@ title: Learn about Large System Extensions
 
 minutes_to_complete: 30 
 
-who_is_this_for: This is an introductory topic for software developers who want to learn about Large System Extensions and use them in an application.
+who_is_this_for: This is an introductory topic for software developers who want to learn about Large System Extensions (LSEs) and use them in an application.
 
 description: Understand Large System Extensions (LSEs) for Arm processors and verify whether applications use LSE for improved atomic operation performance.
 
 learning_objectives:
-    - Learn about Large System Extensions
-    - Find out if an application uses Large System Extensions
+    - Understand LSEs.
+    - Find out if an application uses LSE.
 
 prerequisites:
-    - Access to an AWS Graviton-based instance or an Arm AGI CPU platform running Linux. Other Arm Linux computers with LSE support can also be used.
+    - Access to an AWS Graviton-based instance, an Arm AGI CPU platform, or other Arm Linux computers with LSE support 
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -50,9 +50,10 @@ generated_summary_faq:
     answer: >-
       Run the `objdump` command and check its count of LSE atomic instructions. You can
       also inspect the disassembly for instructions such as `ldaddal`.
-  - question: Can I use a different Arm Linux machine than the listed cloud instances?
+  - question: How can I check whether my Arm-based Linux system supports LSE?
     answer: >-
-      Yes. You can use any Arm Linux computer that supports LSE.
+      Run `sudo dmesg | grep LSE` and look for a message that reports detected LSE atomic
+      instructions. You can also run `lscpu | grep Flags`. The `atomics` flag indicates LSE support.
 # END generated_summary_faq
 
 author: Jason Andrews

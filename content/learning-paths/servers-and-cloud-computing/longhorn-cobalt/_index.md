@@ -40,13 +40,14 @@ generated_summary_faq:
     that its data survives pod recreation. Finally, you'll run `fio` against the volume to capture
     baseline storage metrics.
   faqs:
-  - question: Where should I run the installation and kubectl commands?
+  - question: How can I verify that data persists after I recreate the pod?
     answer: >-
-     Connect to the Arm-based Azure VM through
-      SSH and run installation and kubectl commands there.
+      Write data to `/usr/share/nginx/html/index.html` in the running NGINX container. Delete and
+      recreate the pod, then use `kubectl exec` to read the file. If the original content appears,
+      the data persisted on the Longhorn-backed volume.
   - question: What network configuration do I need to access the Longhorn web UI?
     answer: >-
-      Add an inbound Network Security Group rule for TCP ports `80`, `8080`, and `6443`. Apply
+      Add an inbound network security group rule for TCP ports `80`, `8080`, and `6443`. Apply
       the rule to the VM’s network interface or subnet, then use the VM’s IP address and port
       `8080` while the Longhorn port-forward command is running.
   - question: How do I know K3s and Longhorn are ready to use?

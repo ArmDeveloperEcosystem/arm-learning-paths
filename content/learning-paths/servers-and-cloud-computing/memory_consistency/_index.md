@@ -44,9 +44,12 @@ generated_summary_faq:
     answer: >-
       Use AArch64 for the MP litmus test. Configure your tools and hardware runs for the
       same architecture.
-  - question: What file do I need to create for the primer?
+  - question: Why might Litmus7 not observe an outcome that Herd7 permits?
     answer: >-
-      Create `test.litmus` and copy the abbreviated MP example.
+      Herd7 evaluates outcomes against the formal memory model, while Litmus7 runs the test on
+      hardware. A compliant Arm CPU can exhibit stronger ordering than the formal model, and a
+      finite run can miss rare outcomes. Increasing the iteration count improves your chances of
+      observing rare outcomes but doesn't guarantee that every permitted outcome will occur.
   - question: How do I know I’m ready to move from Herd7 to Litmus7 on hardware?
     answer: >-
       Run the test in Herd7 and review the outcomes permitted by the formal model. After you can

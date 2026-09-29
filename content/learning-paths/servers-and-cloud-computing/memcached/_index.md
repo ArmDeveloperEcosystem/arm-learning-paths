@@ -44,14 +44,15 @@ generated_summary_faq:
   - question: Which packages must be installed before running the benchmark tool?
     answer: >-
       Install `libevent` and the packages required by `memtier_benchmark`.
-  - question: How do I know if I’m ready to run the benchmark against Memcached?
+  - question: How should I interpret the aggregated benchmark results?
     answer: >-
-      Confirm that Memcached is running on your Ubuntu instance and that the packages required
-      by `memtier_benchmark` installed without errors.
+      Use `Ops/sec` to compare operation rates and `Hits/sec` and `Misses/sec` to review cache
+      results. Check the average, p50, p99, and p99.9 latency columns to understand response-time
+      distribution, and use `KB/sec` to compare data throughput.
   - question: Can I install Memcached without building it from source?
     answer: >-
       Yes. Run `sudo apt install memcached -y`, then start the service with `sudo systemctl start
-      memcached`. 
+      memcached`.
 # END generated_summary_faq
 
 author: Pareena Verma

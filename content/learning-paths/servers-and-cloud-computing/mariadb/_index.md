@@ -32,8 +32,8 @@ generated_summary_faq:
   faq_generated_at: '2026-09-28T19:46:18Z'
   faq_source_hash: 6ae54841912ce9e663138b616884d6c8ea8bce168608273955b4a99efc256875
   summary: >-
-    You'll deploy MariaDB on Arm-based cloud infrastructure with Terraform and Ansible. You'll provision
-    virtual machines on AWS Graviton, Azure Cobalt, or Google Axion, then automate MariaDB configuration.
+    You'll deploy MariaDB on Arm-based cloud infrastructure with Terraform and Ansible. After provisioning a
+    virtual machine on AWS Graviton, Azure Cobalt, or Google Axion, you'll automate MariaDB configuration.
     You can also create a managed MariaDB instance on Amazon RDS or run MariaDB in a Docker container
     on Ubuntu. By following provider-specific instructions for your environment, you'll build a repeatable
     deployment that matches your preferred operating model.
@@ -46,13 +46,13 @@ generated_summary_faq:
       VMs?
     answer: >-
       Deploy MariaDB using Amazon RDS with
-      Terraform, so that you don’t manage the database on a VM.
+      Terraform, so that you don’t have to manage the database on a VM.
   - question: What credentials do I need before running the deployment on Amazon RDS?
     answer: >-
       You need an AWS account along with an AWS access key ID and secret access key.
   - question: What result should I expect after completing an AWS, Azure, or GCP deployment?
     answer: >-
-      You should have one Arm-based VMs on your chosen cloud provider with MariaDB
+      You should have one Arm-based VM on your chosen cloud provider with MariaDB
       configured by Ansible.
   - question: What do I need for the Docker-based deployment?
     answer: >-

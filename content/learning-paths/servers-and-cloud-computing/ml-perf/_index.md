@@ -43,9 +43,11 @@ generated_summary_faq:
     answer: >-
       No. You can use the same procedure on AWS Graviton or OCI Ampere Compute with Ubuntu 20.04
       or 22.04.
-  - question: Do I need administrator (sudo) privileges for the installation steps?
+  - question: How do I select the backend, model, and device for the benchmark?
     answer: >-
-      Yes. Use `sudo` with the `apt-get` and `pip` installation commands.
+      Pass the backend, model, and device to `run_local.sh` in that order. For the example in this
+      Learning Path, run `./run_local.sh tf resnet50 cpu` to use TensorFlow with ResNet-50 on the
+      CPU. Run `./run_local.sh --help` to view the other supported options.
   - question: Which packages should I install before running the benchmarks?
     answer: >-
       Update your packages, then install `build-essential`, `python3-pip`, and `git` with `apt-get`.
