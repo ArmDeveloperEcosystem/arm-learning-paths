@@ -31,15 +31,13 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Containers and Virtualization
 armips:
-    - Arm v8.6-A or later
-    - Arm v9.0-A or later
-    - Neoverse N2+, V2+
+    - Neoverse
 tools_software_languages:
     - KVM
     - libvirt
     - virsh / virt-manager
 operatingsystems:
-    - Linux 7.2 or later
+    - Linux
 
 further_reading:
     - resource:
