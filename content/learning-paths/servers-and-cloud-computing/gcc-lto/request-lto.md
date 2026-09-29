@@ -60,12 +60,13 @@ gcc -O2 -flto=4 -o myprog component-1.c component-2.c
 When parallelization is enabled, GCC partitions the program into multiple units of roughly equal size. The compiler attempts to minimize cross-partition references, which could otherwise reduce the effectiveness of certain whole-program optimizations. For best results, set the parallelization level to match the number of available CPU cores.
 
 #### Caching
-During iterative development, repeatedly recompiling with LTO can increase build times. GCC provides support for caching intermediate LTO results to speed up incremental builds by reusing previously computed optimization information.
+During iterative development, repeatedly recompiling with LTO can increase build times. GCC 15 and later support caching intermediate LTO results to speed up incremental builds by reusing previously computed optimization information. Earlier GCC versions do not support this option.
 
-Enable this using the `-flto-incremental=<path>` option:
+Create a cache directory, then enable caching using the `-flto-incremental=<path>` option:
 
 ```bash
-gcc -O2 -flto -flto-incremental=lto-cache -c component-1.c
+mkdir -p lto-cache
+gcc -O2 -flto -flto-incremental=lto-cache -o myprog component-1.c component-2.c
 ```
 
 When enabled, GCC stores intermediate optimization results in the specified directory. Subsequent builds reuse previous work where possible, significantly reducing edit–compile cycle times. The cache directory grows over time, so you may need to clean it periodically during development.
