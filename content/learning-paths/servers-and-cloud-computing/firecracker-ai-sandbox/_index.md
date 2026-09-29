@@ -5,14 +5,14 @@ draft: true
 cascade:
     draft: true
     
-description: Create a Firecracker-based runner on an Arm AGI CPU system that executes generated shell code in a disposable microVM with bounded resources and restricted networking.
+description: Build a Firecracker microVM sandbox on an Arm Linux server, such as Arm AGI CPU or AWS Graviton, that runs generated shell code with bounded resources and restricted networking.
 
 minutes_to_complete: 45
 
 who_is_this_for: This Learning Path is for developers who want to isolate AI-generated code in disposable microVMs on an Arm Linux server.
 
 learning_objectives:
-    - Prepare an Arm Linux KVM host and an `aarch64` Firecracker guest image
+    - Prepare an Arm Linux KVM host and an aarch64 Firecracker guest image
     - Run generated shell code in a dedicated disposable microVM
     - Apply CPU, memory, timeout, filesystem, and network boundaries to each execution
     - Verify native Arm execution and confirm that guest filesystem changes do not persist

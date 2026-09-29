@@ -33,6 +33,23 @@ done
 chmod +x sandbox/*.sh sandbox/examples/*.sh
 ```
 
+Verify that the downloads completed successfully before running the scripts as root. This lists the files in the `sandbox/` directory, including the `sandbox/examples/` subdirectory. 
+
+```bash
+find "$PWD/sandbox" -maxdepth 2 -type f -name "*.sh" -printf "%P\n" | sort
+```
+
+The expected output is:
+
+```output
+00-common.sh
+demo.sh
+examples/hello-arm.sh
+examples/timeout.sh
+examples/write-marker.sh
+run-job.sh
+```
+
 ## Run the first job
 
 Use the supplied `hello-arm.sh` program to demonstrate how a sandbox could execute code submitted by an AI coding agent. This simple Bash program reports the guest architecture, kernel, CPU count, and memory. The runner copies it into a fresh microVM and executes it with `/bin/bash`.
