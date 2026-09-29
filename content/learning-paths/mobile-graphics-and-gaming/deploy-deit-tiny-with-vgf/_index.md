@@ -47,11 +47,11 @@ operatingsystems:
 further_reading:
     - resource:
         title: ExecuTorch VGF image classification example
-        link: https://github.com/pytorch/executorch/tree/9dfe4086846ad372b8b78976586ee1857a0c6d13/examples/arm/image_classification_example_vgf
+        link: https://github.com/pytorch/executorch/tree/v1.5.1/examples/arm/image_classification_example_vgf
         type: website
     - resource:
         title: ExecuTorch Arm VGF backend documentation
-        link: https://github.com/pytorch/executorch/blob/9dfe4086846ad372b8b78976586ee1857a0c6d13/docs/source/backends/arm-vgf/arm-vgf-overview.md
+        link: https://github.com/pytorch/executorch/blob/v1.5.1/docs/source/backends/arm-vgf/arm-vgf-overview.md
         type: documentation
     - resource:
         title: ML SDK for Vulkan

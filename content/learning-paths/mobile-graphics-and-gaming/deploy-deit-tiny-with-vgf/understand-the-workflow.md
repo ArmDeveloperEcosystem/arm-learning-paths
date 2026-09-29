@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 You will fine-tune DeiT-Tiny, a Data-efficient Image Transformer, to recognize 37 cat and dog breeds. You will then export the classifier with the Arm VGF backend and run a pet image through ExecuTorch.
 
-You will use the [ExecuTorch example's](https://github.com/pytorch/executorch/tree/9dfe4086846ad372b8b78976586ee1857a0c6d13/examples/arm/image_classification_example_vgf) training and export scripts, then run inference with `executor_runner`. A downloadable Learning Path helper handles checkpoint compatibility, image preparation, and breed decoding. You don't need to edit the example.
+You will use the [ExecuTorch 1.5.1 example's](https://github.com/pytorch/executorch/tree/v1.5.1/examples/arm/image_classification_example_vgf) training and export scripts, then run inference with `executor_runner`. A downloadable Learning Path helper handles checkpoint compatibility, image preparation, and breed decoding. You don't need to edit the example.
 
 ## Follow the model through the pipeline
 
