@@ -1,5 +1,5 @@
 ---
-title: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm based servers
+title: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm-based servers
 
 description: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm servers
 
@@ -32,33 +32,30 @@ generated_summary_faq:
   faq_generated_at: '2026-09-28T19:47:31Z'
   faq_source_hash: 949c6c4ad60a99b6a028f1fe184f80a683b40042b8a461ed539c7ae7fed217f1
   summary: >-
-    Deploy Memcached as a cache for MySQL or PostgreSQL on Arm-based cloud servers. You choose
-    the section for your database and cloud provider, then use Terraform to provision a Linux
-    instance on AWS Graviton, Azure Cobalt, or Google Axion. You run the corresponding Ansible
+    You'll deploy Memcached as a cache for MySQL or PostgreSQL on Arm-based cloud servers. First, you'll use Terraform to provision a Linux
+    instance on AWS Graviton, Azure Cobalt, or Google Axion. Then, you'll run the corresponding Ansible
     automation to install and configure Memcached. Successful Terraform and Ansible runs confirm
     that your cache is ready for the selected database.
   faqs:
-  - question: Which section should I follow for my database and cloud?
+  - question: Which cloud provider should I use for my database?
     answer: >-
-      Choose the section that matches your database engine and provider. For MySQL, you can use
-      AWS, Azure, or Google Cloud. For PostgreSQL, you can use AWS or Azure.
-  - question: Do I need to complete the Terraform automation Learning Path first?
+      For MySQL, you can use AWS, Azure, or Google Cloud. For PostgreSQL, you can use AWS or Azure.
+  - question: Do I need to edit the Ansible inventory file?
     answer: >-
-      If you’re new to Terraform, review the recommended automation Learning Path for your cloud
-      provider first. It provides the background you need to run the infrastructure commands.
+      No. Terraform generates `/tmp/inventory` automatically. Use the file when you run `ansible-playbook
+      playbook.yaml -i /tmp/inventory`.
   - question: Can I run Terraform and Ansible from any computer?
     answer: >-
       Yes. You can run Terraform and Ansible from any computer that has the prerequisite tools
       installed.
-  - question: How do I know the deployment succeeded?
+  - question: How do I know that the deployment succeeded?
     answer: >-
       Confirm that Terraform completes without errors and that the cloud instance appears in your
-      account. Then verify that Ansible finishes successfully after installing and configuring
+      account. Then, verify that Ansible finishes successfully after installing and configuring
       Memcached.
-  - question: Is Google Cloud supported for the PostgreSQL sections?
+  - question: How do I remove the cloud resources after I finish?
     answer: >-
-      No. Choose the PostgreSQL section for AWS or Azure; Google Cloud isn’t included for this
-      database engine.
+      Run `terraform destroy` to delete the resources created by your deployment.
 # END generated_summary_faq
 
 author: Pareena Verma

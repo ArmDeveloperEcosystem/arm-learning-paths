@@ -1,5 +1,5 @@
 ---
-title: Measure Machine Learning Inference Performance on Arm servers
+title: Measure machine learning inference performance on Arm servers
 
 minutes_to_complete: 20
 
@@ -8,12 +8,11 @@ who_is_this_for: This is an introductory topic for software developers intereste
 description: Benchmark machine learning inference performance on Arm servers using TensorFlow and the MLPerf Inference benchmark suite from MLCommons.
 
 learning_objectives:
-- Install and run TensorFlow on your Arm-based cloud server
-- Use MLPerf Inference benchmark suite, an open-sourced benchmark from MLCommons to test ML performance on your Arm server
+- Install and run TensorFlow on your Arm-based cloud server.
+- Use MLPerf Inference benchmark suite, an open-sourced benchmark from MLCommons, to test ML performance on your Arm server.
 
 prerequisites:
-- An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
-  cloud service provider or an on-premise Arm server.
+- An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate cloud service provider, or an on-premise Arm server
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -30,23 +29,23 @@ generated_summary_faq:
   faq_generated_at: '2026-09-28T19:51:15Z'
   faq_source_hash: 811148e908194f3a554b84121e223bfa2f29d5f0bf957480142bc691bd6a24f1
   summary: >-
-    Prepare an Arm-based Ubuntu cloud server to run MLPerf Inference benchmarks. You use AWS Graviton
+    You'll prepare an Arm-based Ubuntu cloud server to run MLPerf Inference benchmarks. First,you set up either an AWS Graviton-based instance
     or OCI Ampere Compute, then install the required build tools, Python packages, and TensorFlow.
-    After configuring the environment with `apt` and `pip`, you run the MLCommons MLPerf Inference
-    suite. The resulting benchmark output helps you verify the setup and record inference performance
+    After configuring the environment with `apt` and `pip`, you'll run the MLCommons MLPerf Inference
+    suite. With the resulting benchmark output, you can verify the setup and record inference performance
     for your system.
   faqs:
   - question: Which Ubuntu version should I use on my instance?
     answer: >-
-      Use Ubuntu 20.04 or Ubuntu 22.04 on your Arm-based server. The procedure has been tested
+      Use Ubuntu 20.04 or Ubuntu 22.04 on your Arm-based server. The Learning Path has been tested
       with both versions.
-  - question: I’m on AWS Graviton or OCI Ampere Compute—does anything change?
+  - question: Is there any difference in procedures between AWS and OCI?
     answer: >-
       No. You can use the same procedure on AWS Graviton or OCI Ampere Compute with Ubuntu 20.04
       or 22.04.
   - question: Do I need administrator (sudo) privileges for the installation steps?
     answer: >-
-      Yes. You use `sudo` with the `apt-get` and `pip` installation commands.
+      Yes. Use `sudo` with the `apt-get` and `pip` installation commands.
   - question: Which packages should I install before running the benchmarks?
     answer: >-
       Update your packages, then install `build-essential`, `python3-pip`, and `git` with `apt-get`.

@@ -7,7 +7,7 @@ who_is_this_for: This is an introductory topic for performance engineers, Linux 
 
 learning_objectives: 
     - Run accurate network microbenchmark tests using iPerf3.
-    - Simulate real-world network conditions using Linux Traffic Control (tc).
+    - Simulate real-world network conditions using Linux traffic control (tc).
     - Tune basic Linux kernel parameters to improve network performance.
 
 prerequisites:
@@ -29,22 +29,22 @@ generated_summary_faq:
   faq_generated_at: '2026-09-28T19:48:55Z'
   faq_source_hash: 2b3db5074d3815ccef1cca54910f28d3ee409c6ddce0676ae53615c443849987
   summary: >-
-    Measure TCP and UDP network performance between Arm-based Linux systems with iPerf3. You configure
+    You'll measure TCP and UDP network performance between Arm-based Linux systems with iPerf3. First, you'll configure
     a server and client, choose an alternate port when needed, and confirm that the server is listening.
-    You identify the active interface and use Linux traffic control to introduce delay and loss,
-    then compare the results. Finally, you apply basic kernel tuning and test traffic between a
+    Next, you'll identify the active interface and use Linux traffic control to introduce delay and loss,
+    then compare the results. Finally, you'll apply basic kernel tuning and test traffic between a
     local machine and a cloud instance.
   faqs:
-  - question: How do I know the iPerf3 server started correctly?
+  - question: How do I know that the iPerf3 server started correctly?
     answer: >-
       Confirm that the server prints output similar to `Server listening on 5201 (test #1)`. If
       the default port is busy, restart it on another port with the `-p` option.
-  - question: What should I check if the client cannot connect to the server?
+  - question: What should I check if the client can't connect to the server?
     answer: >-
       Verify network reachability and confirm that you used the correct IP address or hostname.
       Ensure that your cloud security group allows inbound TCP traffic to the selected iPerf3
       port.
-  - question: Which system runs the iPerf3 server and which runs the test?
+  - question: Which system do I run the iPerf3 server and the test on?
     answer: >-
       Start iPerf3 in server mode on the system designated as `SERVER`. Run the test from the other
       system, which acts as the client.

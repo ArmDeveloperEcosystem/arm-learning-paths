@@ -8,9 +8,9 @@ who_is_this_for: This is an introductory topic for developers looking to migrate
 description: Scan source code for architecture-specific portability issues using migrate-ease to identify and resolve AArch64 porting challenges before migration.
 
 learning_objectives:
-    - Identify architecture-specific dependencies in your application's source code
-    - Recognize common migration challenges and how to resolve them
-    - Use migrate-ease to detect and address AArch64 portability issues
+    - Identify architecture-specific dependencies in your application's source code.
+    - Recognize common migration challenges and how to resolve them.
+    - Use migrate-ease to detect and address AArch64 portability issues.
 
 prerequisites:
     - Access to an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) for testing and validation.
@@ -30,20 +30,20 @@ generated_summary_faq:
   faq_generated_at: '2026-09-28T19:49:15Z'
   faq_source_hash: 060dab4deb1f972d937b093b61e66eb4efdf11ea12736865f22eaf910a26aa70
   summary: >-
-    Assess source code for Arm migration issues with the read-only `migrate-ease` analyzer. You
+    You'll assess source code for Arm migration issues with the read-only `migrate-ease` analyzer. First, you'll
     prepare a Linux environment, scan a local source tree or Git branch for AArch64 concerns,
-    and generate a JSON report. You target Armv8-A and analyze an older Protobuf release to see
+    and generate a JSON report. Next, you'll target Armv8-A and analyze an older Protobuf release to see
     how missing architecture support appears in the findings. You can then apply the same process
     before rebuilding and testing your own workloads on Arm servers.
   faqs:
   - question: Can I run migrate-ease on macOS or Windows?
     answer: >-
       No. Use an `x86_64` or Arm AArch64 Linux host to run the analysis.
-  - question: How do I know the example scan finished correctly?
+  - question: How do I know that the example scan finished correctly?
     answer: >-
       Confirm that the command creates `result.json`, then review the report for AArch64 portability
       issues.
-  - question: What do the `--git-repo` and `--branch` options do in the example?
+  - question: What can I use the `--git-repo` and `--branch` options for?
     answer: >-
       Use `--git-repo` and `--branch` to analyze a specific repository and branch without cloning
       it first. The example targets Protobuf `v2.5.0` to illustrate missing AArch64 support.
@@ -52,7 +52,7 @@ generated_summary_faq:
       Yes. You can run `migrate-ease` against your existing local source tree or a Git repository.
   - question: Does migrate-ease modify my code or dependencies?
     answer: >-
-      No. You can run `migrate-ease` as a read-only analysis; it doesn’t change your source tree.
+      No. You can run `migrate-ease` as a read-only analysis. It doesn’t change your source tree.
 # END generated_summary_faq
 
 author: 
