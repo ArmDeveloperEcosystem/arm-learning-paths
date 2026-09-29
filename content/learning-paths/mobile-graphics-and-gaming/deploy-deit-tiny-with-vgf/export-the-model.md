@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Export the quantized model
 
-Use 300 training images for calibration and 100 test images for the host accuracy check:
+Convert your fine-tuned checkpoint into a quantized ExecuTorch `.pte` program with VGF delegate data. Calibration uses 300 training images to determine quantization parameters; a separate host accuracy check evaluates breed predictions on 100 test images:
 
 ```bash
 python examples/arm/image_classification_example_vgf/model_export/export_deit.py \
@@ -29,7 +29,14 @@ grep -E 'Top-1 accuracy|Exported model saved' arm_test/deit_vgf/export.log
 test -s arm_test/deit_vgf/deit_quantized_vgf.pte
 ```
 
-The script reports `Top-1 accuracy on 100 test samples:` followed by the result from your run. A successful export also reports the output path, and `test -s` exits successfully when that file is nonempty.
+The output is similar to:
+
+```output
+Top-1 accuracy on 100 test samples: 0.8900
+Exported model saved to arm_test/deit_vgf/deit_quantized_vgf.pte
+```
+
+The example accuracy of `0.8900` means the highest-scoring breed matches the dataset label for 89 of the 100 test images. Your result can differ. A successful export also reports the output path, and `test -s` exits successfully when that file is nonempty.
 
 The reported accuracy measures the quantized PyTorch model before VGF execution. The training log evaluates a different number of test images, so those two values alone do not measure the accuracy change caused by quantization. Use the same evaluation images when investigating that change.
 

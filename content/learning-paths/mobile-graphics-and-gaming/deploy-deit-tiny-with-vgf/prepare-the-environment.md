@@ -83,9 +83,17 @@ python -m pip install \
 python -m pip check
 ```
 
-This installs Transformers 5.3.0 and ML SDK packages 0.10.0. Scikit-learn supplies the training script's accuracy metric. `pip check` should report `No broken requirements found.` The `+cpu` wheels still support the VGF runner's Vulkan execution; they make the Python training and export environment independent of CUDA.
+The expected output is:
 
-Run this dependency installation after SDK setup: it resolves the older FlatBuffers version installed by the setup script. Do not run `install_executorch.sh`; this Learning Path uses released wheels instead of its nightly indexes. If you rerun SDK setup, repeat the package removal and dependency installation above.
+```output
+No broken requirements found.
+```
+
+This installs Transformers 5.3.0 and ML SDK packages 0.10.0. Scikit-learn supplies the training script's accuracy metric.
+
+The `+cpu` wheels still support the VGF runner's Vulkan execution; they make the Python training and export environment independent of CUDA.
+
+Run this dependency installation after SDK setup: it resolves the older FlatBuffers version installed by the setup script. Do not run `install_executorch.sh`; this Learning Path uses released wheels instead of its nightly indexes. If you rerun SDK setup, repeat the developer-only package removal in **Configure the ML SDK for Vulkan**, then the installation in **Install the Python dependencies**.
 
 Load the generated SDK environment:
 

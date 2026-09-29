@@ -7,9 +7,9 @@ layout: "learningpathall"
 
 ## Train the pet classifier
 
-The training script loads `facebook/deit-tiny-patch16-224` and replaces its classification head for the dataset's 37 breeds. It uses a fixed dataset revision and seed, reserving ten percent of the training split for validation.
+Fine-tuning adapts a pretrained model to the pet classification task. The training script loads `facebook/deit-tiny-patch16-224` and replaces its classification head for the dataset's 37 breeds. It uses a fixed dataset revision and seed, reserving ten percent of the training split for validation.
 
-Run three training epochs and save the log:
+Validation checks progress during training; the separate test split measures the trained model’s classification accuracy. Each epoch is one pass through the training data. Run three epochs and save the log:
 
 ```bash
 python examples/arm/image_classification_example_vgf/model_export/train_deit.py \
@@ -24,20 +24,28 @@ Record the accuracy from your run. Training speed and final accuracy depend on y
 
 ## Prepare the checkpoint for export
 
-At the pinned revision, the trainer saves `model.safetensors`, but `export_deit.py` loads with `use_safetensors=False`. The Learning Path helper creates the compatible PyTorch weight file.
+At the pinned revision, the trainer saves `model.safetensors`, but `export_deit.py` loads with `use_safetensors=False`. The Learning Path helper converts the weight-file format for export without retraining the model.
 
 Download the [DeiT-Tiny helper](../deit_vgf_helper.py), which also prepares images and decodes predictions in the inference step:
 
 ```bash
 curl --fail --location \
   --output arm_test/deit_vgf/deit_vgf_helper.py \
-  https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/f53c856014c17306c7f0e23e62a993494a2576ca/content/learning-paths/mobile-graphics-and-gaming/deploy-deit-tiny-with-vgf/deit_vgf_helper.py
+  https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/mobile-graphics-and-gaming/deploy-deit-tiny-with-vgf/deit_vgf_helper.py
 ```
 
 Review the downloaded file, then prepare the checkpoint:
 
 ```bash
 python arm_test/deit_vgf/deit_vgf_helper.py checkpoint
+```
+
+The output is similar to:
+
+```output
+Export weights: arm_test/deit_vgf/deit-tiny-oxford-pet/final_model/pytorch_model.bin
+Original weights preserved: arm_test/deit_vgf/deit-tiny-oxford-pet/final_model/model.safetensors
+Export checkpoint ready: arm_test/deit_vgf/deit-tiny-oxford-pet/final_model
 ```
 
 The helper creates `pytorch_model.bin` in `final_model/` without changing the trained weights. Keep `config.json` beside the weights because it contains the model configuration and breed labels.

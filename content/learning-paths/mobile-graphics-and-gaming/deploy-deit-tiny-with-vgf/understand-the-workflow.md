@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Classify a pet image with VGF
 
-You will fine-tune DeiT-Tiny, a Data-efficient Image Transformer, to recognize 37 cat and dog breeds. You will then export the classifier with the Arm VGF backend and run a pet image through ExecuTorch.
+You will fine-tune DeiT-Tiny, a Data-efficient Image Transformer, to recognize 37 cat and dog breeds. You will then export the classifier with the Arm VGF backend and run a pet image through ExecuTorch. Classification selects one of the 37 breed labels for the image.
 
 You will use the [ExecuTorch 1.5.1 example's](https://github.com/pytorch/executorch/tree/v1.5.1/examples/arm/image_classification_example_vgf) training and export scripts, then run inference with `executor_runner`. A downloadable Learning Path helper handles checkpoint compatibility, image preparation, and breed decoding. You don't need to edit the example.
 
@@ -15,12 +15,12 @@ You will use the [ExecuTorch 1.5.1 example's](https://github.com/pytorch/executo
 
 Follow these stages:
 
-1. Prepare the Linux environment and build the VGF runner
-2. Fine-tune DeiT-Tiny on Oxford-IIIT Pet images
-3. Quantize the model and export a VGF-backed ExecuTorch `.pte` file
-4. Classify a pet image and confirm VGF execution
+1. Prepare the Linux environment and build `executor_runner` to execute the exported model
+2. Fine-tune DeiT-Tiny on Oxford-IIIT Pet images to produce a checkpoint for 37 breeds
+3. Quantize and export the checkpoint to produce a VGF-backed ExecuTorch `.pte` program
+4. Run the program on a pet image to obtain a breed prediction and confirm VGF execution
 
-The exporter uses `VgfCompileSpec("TOSA-1.0+INT")`. TOSA, the Tensor Operator Set Architecture, describes the graph that the ML SDK model converter compiles into VGF. The `.pte` includes this delegate data.
+The exporter uses `VgfCompileSpec("TOSA-1.0+INT")`. TOSA, the Tensor Operator Set Architecture, describes the model graph for the ML SDK model converter. The converter compiles that graph into VGF delegate data, which the exporter embeds in the `.pte` program for the VGF runtime to execute.
 
 The model uses these tensor interfaces:
 

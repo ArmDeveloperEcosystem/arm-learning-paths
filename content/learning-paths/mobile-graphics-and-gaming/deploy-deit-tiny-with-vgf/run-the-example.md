@@ -15,13 +15,21 @@ Keep your Python environment active and `examples/arm/arm-scratch/setup_path.sh`
 python arm_test/deit_vgf/deit_vgf_helper.py prepare
 ```
 
-The helper uses the same pinned image processor as the exporter. It saves `input.bin`, `input.jpg`, and `reference.json` under `arm_test/deit_vgf/`.
+The output is similar to:
+
+```output
+Input image: arm_test/deit_vgf/input.jpg
+Input tensor ready: (1, 3, 224, 224)
+Expected breed: newfoundland
+```
+
+`Expected breed` is the dataset's reference label, not a model prediction: inference has not run yet. The helper uses the same pinned image processor as the exporter. It saves `input.bin`, `input.jpg`, and `reference.json` under `arm_test/deit_vgf/`. The reference file stores the breed-label mapping and the selected image's reference label for inspection.
 
 `input.bin` contains the normalized float32 tensor in `[1, 3, 224, 224]` batch, channel, height, width order. The runner reads this tensor, not the JPEG. Open `input.jpg` in an image viewer to inspect the pet you will classify.
 
 ## Run inference through VGF
 
-Execute the exported program with your input file and save the output scores:
+Inference produces one score for each of the 37 breeds. The inspection step then maps the highest score to a breed name. Execute the exported program with your input file and save the scores:
 
 ```bash
 set -o pipefail
@@ -44,7 +52,19 @@ Decode the saved scores and verify VGF execution:
 python arm_test/deit_vgf/deit_vgf_helper.py inspect
 ```
 
-The helper checks for 37 finite output scores, then maps the largest score to a breed. It prints `Expected breed`, `VGF prediction`, and `Matches dataset label`. It also checks the runtime log for `Entered VGF init` and `Model executed successfully` before reporting `VGF execution: confirmed`.
+The output is similar to:
+
+```output
+Expected breed: newfoundland
+VGF prediction: newfoundland
+Matches dataset label: True
+Output scores: 37 finite values
+VGF execution: confirmed
+```
+
+`Output scores: 37 finite values` means there is one valid numeric score per breed, with no NaN or infinite values. The helper maps the largest score to the breed shown as `VGF prediction`. In this example, `Matches dataset label: True` means the predicted Newfoundland breed matches this image's reference label.
+
+The helper also checks the runtime log for `Entered VGF init` and `Model executed successfully` before reporting `VGF execution: confirmed`.
 
 A valid prediction and confirmed VGF execution complete the deployment workflow. A matching dataset label means the model recognizes this image; a mismatch does not by itself indicate a deployment failure.
 
@@ -60,7 +80,21 @@ Run the original fine-tuned model on the same input and compare its winning clas
 python arm_test/deit_vgf/deit_vgf_helper.py inspect --compare-fp32
 ```
 
+The output is similar to:
+
+```output
+Expected breed: newfoundland
+VGF prediction: newfoundland
+Matches dataset label: True
+Output scores: 37 finite values
+VGF execution: confirmed
+FP32 prediction: newfoundland
+Matches FP32 prediction: True
+```
+
 The helper adds the floating-point prediction and whether the two predictions match. Quantization can change the winning class. Compare more images before drawing conclusions about accuracy or numerical equivalence.
+
+## Classify another test image
 
 To classify another test image, repeat `prepare` with `--sample-index 1`, then rerun inference and inspection. Each preparation replaces the previous input artifacts. The helper rejects predictions and logs that predate the prepared image, so you must rerun `executor_runner` before inspecting a new image.
 

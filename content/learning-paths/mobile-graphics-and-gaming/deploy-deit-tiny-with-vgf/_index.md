@@ -1,6 +1,6 @@
 ---
 title: Classify pet images with DeiT-Tiny and Arm VGF using ExecuTorch
-description: Fine-tune DeiT-Tiny, export a quantized model with the Arm VGF backend, and classify a pet image using ExecuTorch and the ML SDK for Vulkan.
+description: Fine-tune DeiT-Tiny for pet breed classification, export a quantized ExecuTorch program with Arm VGF, and run inference on a Linux host.
 
 draft: true
 cascade:
@@ -8,20 +8,18 @@ cascade:
 
 minutes_to_complete: 120
 
-who_is_this_for: This Learning Path is for machine learning developers who want to deploy an image classifier through the Arm VGF backend and run it with the ML SDK for Vulkan.
+who_is_this_for: This Learning Path is for machine learning developers who want to deploy an image classifier with ExecuTorch and Arm VGF using the ML SDK for Vulkan's host emulation layers.
 
 learning_objectives:
     - Prepare ExecuTorch, the ML SDK for Vulkan, and a VGF runner on a Linux host
-    - Fine-tune DeiT-Tiny on the Oxford-IIIT Pet dataset and export a quantized VGF program
+    - Fine-tune DeiT-Tiny on the Oxford-IIIT Pet dataset and export a quantized VGF-backed ExecuTorch program
     - Classify a pet image with the VGF-backed ExecuTorch program
-    - Inspect the predicted breed and confirm VGF execution
+    - Compare the predicted breed with the dataset label and confirm VGF execution on the host
 
 prerequisites:
-    - A Linux development machine with an aarch64 or x86_64 processor
+    - An Arm Linux development machine
     - A working Vulkan 1.3 or later GPU driver with shaderFloat64 support for the packaged ML emulation layer
-    - Python 3.12, Git, a C++ compiler, and Make
-    - Familiarity with Python virtual environments, PyTorch, and model training
-    - Internet access and disk space for the source code, SDK, Oxford-IIIT Pet dataset, and model checkpoints
+    - Internet access and sufficient disk space for the source code, SDK, Oxford-IIIT Pet dataset, and model checkpoints
 
 author: Usamah Zaheer
 
