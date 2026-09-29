@@ -7,7 +7,7 @@ weight: 5
 layout: learningpathall
 ---
 
-## Verify execution boundaries
+## Test sandbox controls
 
 Earlier, you built the sandbox and ran a program inside a disposable microVM. Now, you'll verify that the boundaries hold. Continuing in the `~/firecracker-ai-sandbox` directory, you'll run three independent checks, one for each control that the sandbox is meant to enforce:
 
