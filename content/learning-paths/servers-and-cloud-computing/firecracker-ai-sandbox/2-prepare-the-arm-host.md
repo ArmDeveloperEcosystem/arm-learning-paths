@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Confirm the host environment
 
-The steps in this Learning Path were run on an [Arm AGI CPU](https://www.arm.com/products/cloud-datacenter/arm-agi-cpu) platform running Ubuntu 24.04.
+The steps were validated on an [Arm AGI CPU](https://www.arm.com/products/cloud-datacenter/arm-agi-cpu) platform running Ubuntu 24.04.
 
 You can also run the steps on another Arm-based bare-metal server running Ubuntu 24.04 with KVM available as `/dev/kvm`. For example, you can use an [AWS Graviton4-based Amazon EC2 R8g bare-metal instance](https://aws.amazon.com/blogs/aws/aws-graviton4-based-amazon-ec2-r8g-instances-best-price-performance-in-amazon-ec2/), such as `r8g.metal-24xl` or `r8g.metal-48xl`. Select an Ubuntu 24.04 Arm64 image when provisioning the instance.
 
@@ -64,7 +64,7 @@ done
 chmod +x base/*.sh
 ```
 
-Verify that the downloads completed successfully before running the scripts as root. The expected files are:
+Verify that the downloads completed successfully before running the scripts as root. This lists the files in the `base/` directory. 
 
 ```bash
 cd ~/firecracker-ai-sandbox

@@ -191,4 +191,4 @@ else
 fi
 
 echo
-printf 'Guest preparation complete. Next: sudo %q\n' "$SCRIPT_DIR/03-setup-network.sh"
+printf 'Guest preparation complete.\n'
