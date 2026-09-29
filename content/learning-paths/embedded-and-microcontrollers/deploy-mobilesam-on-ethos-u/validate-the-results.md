@@ -43,7 +43,7 @@ A reference run at the pinned commit produced these scores:
 | Floating-point and quantized host masks | 0.9436 |
 | FVP and quantized host masks | 0.9764 |
 
-This reference run used Ubuntu 24.04.4 on AArch64 with Python 3.12.3, the PyTorch 2.14.0, Torchvision 0.29.0, and TorchAO 0.18.0 CPU wheels, Vela 5.1.0, TOSA tools 2026.5.0, Arm GNU Toolchain 15.2.Rel1, and Corstone-320 FVP 11.27.25. Treat these scores as examples from this configuration; use the two `0.9` thresholds to check your own run.
+This reference run used Ubuntu 24.04.4 on AArch64 with Python 3.12.3 and the dependencies from [environment setup](../prepare-the-environment/). Treat these scores as examples; use the two `0.9` thresholds to check your own run.
 
 ## Confirm Ethos-U delegation
 

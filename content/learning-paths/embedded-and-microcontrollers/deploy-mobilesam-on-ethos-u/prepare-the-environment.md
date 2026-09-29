@@ -108,9 +108,9 @@ The Arm setup script installs the pinned GNU bare-metal toolchain, Ethos-U Vela 
 source examples/arm/arm-scratch/setup_path.sh
 ```
 
-## Install released Python dependencies
+## Install ExecuTorch
 
-The Arm setup script also installs developer packages that this Learning Path does not use. Remove those packages from this fresh, dedicated virtual environment before resolving the model dependencies:
+Remove unused developer packages installed by Arm setup:
 
 ```bash
 python -m pip uninstall -y \
@@ -157,11 +157,9 @@ CMAKE_ARGS='-DEXECUTORCH_BUILD_MLX=OFF' env -u DEBUG \
 python -m pip check
 ```
 
-The Ethos-U extra installs Vela 5.1.0 and TOSA tools 2026.5.0 with their required dependencies. Installing it after Arm setup resolves the older FlatBuffers version installed by that script. `pip check` should report `No broken requirements found.` Resolve any reported conflicts before exporting.
+Installing the Ethos-U extra after Arm setup resolves its older FlatBuffers dependency. Before exporting, confirm that `pip check` reports `No broken requirements found.`
 
-MLX is not used by this Ethos-U workflow; disabling it avoids building an unrelated Apple GPU backend. Removing `DEBUG` from the build environment prevents a shell setting from selecting an unintended debug build.
-
-Do not run `install_executorch.sh` for this environment: at the pinned revision it requests a dated TorchAO nightly. The commands above use released dependencies while keeping the Python package and native code aligned to the same source. If you rerun Arm setup, repeat the package removal and Python dependency installation before continuing.
+These commands replace `install_executorch.sh` and its TorchAO nightly with released dependencies. If you rerun Arm setup, repeat the package removal and Python installation steps.
 
 ## Verify the environment
 
