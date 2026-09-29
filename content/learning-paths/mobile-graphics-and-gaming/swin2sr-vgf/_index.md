@@ -20,7 +20,7 @@ learning_objectives:
 
 prerequisites:
     - A 64-bit Linux host (AArch64 or x86_64) with a Vulkan 1.3 GPU and driver that support shaderFloat64, as required by the packaged ML SDK emulation layer
-    - Python 3.12 with development headers and venv support, Git, curl, xz-utils, CMake 3.24–3.x, and a C++17 compiler
+    - Python 3.12 with development headers and venv support, Git, curl, xz-utils, and a C++17 compiler
     - An internet connection to download ExecuTorch, model weights, and the Arm ML SDK dependencies
     - Basic familiarity with Python and command-line tools
 
@@ -47,7 +47,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: Swin2SR VGF example source
-        link: https://github.com/pytorch/executorch/tree/32a86b69388b5a5208e367a96b0f5b7cb39df8e2/examples/arm/super_resolution_example_vgf
+        link: https://github.com/pytorch/executorch/tree/v1.5.1/examples/arm/super_resolution_example_vgf
         type: code
     - resource:
         title: Swin2SR pretrained model

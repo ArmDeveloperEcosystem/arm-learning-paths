@@ -17,47 +17,95 @@ You export the model with ExecuTorch, then run it through the Arm Vulkan Graph F
 
 This workflow runs on your Linux host using the Arm ML SDK's Vulkan emulation layer. It introduces the model execution flow used by Arm neural graphics; it doesn't deploy an application to a phone or measure Mali GPU performance.
 
-## Install the example
+## Prepare the Linux host
 
 Use a 64-bit Linux system (AArch64 or x86_64) with a working Vulkan 1.3 GPU driver. The packaged ML SDK checks for the `shaderFloat64` feature, even though you export a floating-point 32-bit model. The setup script stops if your GPU doesn't support it. Apple Silicon with MoltenVK needs a separate source-built SDK, which isn't covered here.
 
-Have Python 3.12 with development headers and virtual environment support, Git, `curl`, `xz-utils`, a C++17 compiler, and [CMake 3.24–3.x](/install-guides/cmake/) available before continuing. On Ubuntu 24.04, the Python packages are `python3.12`, `python3.12-dev`, and `python3.12-venv`.
-
-From a directory without an existing `executorch` folder, clone upstream ExecuTorch and select the revision containing this example. Keep the checkout folder named `executorch`; the build requires this exact name:
+On Ubuntu 24.04, install Python 3.12, the build tools, and the Vulkan development files:
 
 ```bash
-git clone https://github.com/pytorch/executorch.git
-cd executorch
-git checkout 32a86b69388b5a5208e367a96b0f5b7cb39df8e2
+sudo apt-get update
+sudo apt-get install -y \
+  ca-certificates curl git build-essential pkg-config \
+  python3.12 python3.12-venv python3.12-dev \
+  libvulkan1 libvulkan-dev vulkan-tools unzip xz-utils
 ```
 
-Create a Python environment and install ExecuTorch and the example's dependencies:
+These packages don't install your GPU's vendor-specific driver. The Python installation step installs CMake 3.31.10.
+
+## Get the ExecuTorch release
+
+Use [ExecuTorch 1.5.1](https://github.com/pytorch/executorch/releases/tag/v1.5.1) for both the Python package and native source. From a path without spaces or an existing `executorch` folder, clone the matching release. Keep the checkout folder named `executorch`; the build requires this exact name:
+
+```bash
+git clone --branch v1.5.1 --single-branch --depth 1 \
+  https://github.com/pytorch/executorch.git executorch
+cd executorch
+test "$(git rev-parse HEAD)" = 3b60683923245cf472b7323426920e15623ba361
+git submodule sync --recursive
+git submodule update --init --recursive
+```
+
+Run the remaining commands from this repository root, in the same terminal.
+
+## Configure the Arm ML SDK
+
+Create a fresh Python environment:
 
 ```bash
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
-./install_executorch.sh --minimal
-python -m pip install -r examples/arm/super_resolution_example_vgf/requirements.txt
 ```
 
-Confirm that the installation succeeded before continuing:
+Review the [ML SDK license terms](https://github.com/arm/ai-ml-sdk-for-vulkan/tree/main/LICENSES) and the Vulkan SDK terms. Use the setup script included in the release to install the SDK tools:
 
 ```bash
-python -c "import executorch.exir; from executorch.extension.pybindings import portable_lib; print('ExecuTorch is ready')"
+bash examples/arm/setup.sh --disable-ethos-u-deps --enable-mlsdk-deps
 ```
 
-Install the Arm ML SDK dependencies and activate their paths:
+The setup script also installs three developer packages that this example doesn't use. Remove them from the fresh environment before resolving the example's dependencies:
 
 ```bash
-./examples/arm/setup.sh \
-  --disable-ethos-u-deps \
-  --disable-cortex-m-deps \
-  --enable-mlsdk-deps
+python -m pip uninstall -y \
+  tosa-adapter-model-explorer ai-edge-model-explorer pytest-timeout
+```
+
+## Install the release packages
+
+Install the released CPU PyTorch stack, VGF packages, build tools, and Swin2SR dependencies:
+
+```bash
+python -m pip install \
+  --index-url https://pypi.org/simple \
+  --extra-index-url https://download.pytorch.org/whl/cpu \
+  'executorch[vgf]==1.5.1' \
+  'torch==2.14.0+cpu' 'torchvision==0.29.0+cpu' 'torchao==0.18.0+cpu' \
+  'cmake==3.31.10' 'zstd==1.5.7.2' \
+  -r examples/arm/super_resolution_example_vgf/requirements.txt \
+  -r backends/arm/requirements-arm-vgf-runtime.txt
+python -m pip check
+```
+
+The example pins Transformers 4.56.1, NumPy 2.1.3, and Pillow 12.0.0. The `+cpu` packages avoid a CUDA dependency during export; the host runner still uses Vulkan.
+
+Run this installation after SDK setup to resolve its older FlatBuffers dependency. `pip check` should report `No broken requirements found.` Don't run `install_executorch.sh`, which uses nightly package indexes. If you rerun SDK setup, repeat the package removal and release installation.
+
+## Check the tools
+
+Activate the SDK paths, check export prerequisites, and confirm that Vulkan can see your GPU:
+
+```bash
 source examples/arm/arm-scratch/setup_path.sh
+python -m executorch.backends.arm.vgf.check_env --aot
+python -c "import executorch.exir; from executorch.extension.pybindings import portable_lib; print('ExecuTorch is ready')"
+command -v model-converter
+command -v glslc
+vulkaninfo --summary
+vulkaninfo | grep shaderFloat64
 ```
 
-The setup script installs the Vulkan SDK and the tools that compile and execute VGF graphs. Keep this terminal open and run the remaining commands from the `executorch` directory.
+Resolve any `FAIL` entries before continuing. Confirm `shaderFloat64 = true` for your device, and keep this terminal open for the remaining steps.
 
 ## Prepare the input image
 
