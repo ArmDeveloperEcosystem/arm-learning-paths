@@ -9,11 +9,11 @@ layout: learningpathall
 
 ## Confirm the host environment
 
-The Learning Path was validated on an [Arm AGI CPU](https://www.arm.com/products/cloud-datacenter/arm-agi-cpu) platform running Ubuntu 24.04.
+The Learning Path was validated on a platform powered by the [Arm AGI CPU](https://www.arm.com/products/cloud-datacenter/arm-agi-cpu) and running Ubuntu 24.04.
 
-You can also run the steps on another Arm-based bare-metal server with KVM available as `/dev/kvm`. For example, you can use an [AWS Graviton4-based Amazon EC2 R8g bare-metal instance](https://aws.amazon.com/blogs/aws/aws-graviton4-based-amazon-ec2-r8g-instances-best-price-performance-in-amazon-ec2/), such as `r8g.metal-24xl` or `r8g.metal-48xl`. Select an Ubuntu 24.04 Arm64 image when provisioning the instance.
+You can also run the steps on another Arm-based bare-metal server with kernel-based virtual machine (KVM) available as `/dev/kvm`. For example, you can use an [AWS Graviton4-based Amazon EC2 R8g bare-metal instance](https://aws.amazon.com/blogs/aws/aws-graviton4-based-amazon-ec2-r8g-instances-best-price-performance-in-amazon-ec2/), such as `r8g.metal-24xl` or `r8g.metal-48xl`. Select an Ubuntu 24.04 Arm64 image when provisioning the instance.
 
-A virtual machine (VM) works only when its platform exposes nested virtualization and `/dev/kvm` to the guest. Confirm kernel-based VM (KVM) access before continuing.
+A VM works only when its platform exposes nested virtualization and `/dev/kvm` to the guest. Confirm KVM access before continuing.
 
 Ensure the following:
 
@@ -56,9 +56,9 @@ mkdir -p ~/firecracker-ai-sandbox
 cd ~/firecracker-ai-sandbox
 ```
 
-Run all subsequent commands for preparing the host in the `~/firecracker-ai-sandbox` directory.
+Run all subsequent commands in the `~/firecracker-ai-sandbox` directory.
 
-Start by creating a child directory called `base/` and downloading scripts that install Firecracker and prepare the guest. `00-common.sh` holds their shared paths and version settings:
+Start by creating a subdirectory called `base/` and downloading scripts that install Firecracker and prepare the guest. `00-common.sh` holds their shared paths and version settings:
 
 ```bash
 mkdir base

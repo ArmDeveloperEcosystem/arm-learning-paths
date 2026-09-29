@@ -7,9 +7,9 @@ weight: 5
 layout: learningpathall
 ---
 
-## Verify filesystem disposability
+## Verify execution boundaries
 
-Earlier, you built the sandbox and ran a program inside a disposable microVM. Now, you'll verify that the boundaries hold. You'll run three independent checks, one for each control the sandbox is meant to enforce:
+Earlier, you built the sandbox and ran a program inside a disposable microVM. Now, you'll verify that the boundaries hold. Continuing in the `~/firecracker-ai-sandbox` directory, you'll run three independent checks, one for each control that the sandbox is meant to enforce:
 
 - Filesystem disposability: confirm that files created by one job don't appear in the next
 - Execution timeout: confirm that the host stops a job that runs longer than its limit
@@ -17,9 +17,11 @@ Earlier, you built the sandbox and ran a program inside a disposable microVM. No
 
 Each check runs an example program and inspects the result.
 
+### Verify filesystem disposability
+
 Verify that a file created by one job is absent from the next job's filesystem. This confirms that each execution starts from a fresh copy of the base image without retaining files from the previous run.
 
-Continuing in the `~/firecracker-ai-sandbox` directory, run the marker program twice:
+Run the marker program twice:
 
 ```bash
 sudo ./sandbox/run-job.sh ./sandbox/examples/write-marker.sh
@@ -43,7 +45,7 @@ sudo ./sandbox/demo.sh
 
 The demonstration runs the architecture inspection program followed by two marker jobs.
 
-## Verify the execution timeout
+### Verify the execution timeout
 
 The timeout example sleeps longer than the configured job limit. Run the example with a three-second limit and capture the expected nonzero status:
 
@@ -67,7 +69,7 @@ The timeout runs on the host and terminates the SSH client if execution stops re
 
 For this sleep example, exit code `124` demonstrates the timeout. The runner also labels exit code `137` as `timed_out`. A guest program can return either code itself, so this result label alone doesn't prove that an arbitrary job exceeded its deadline.
 
-## Confirm network and runtime cleanup
+### Confirm network and runtime cleanup
 
 Check that no sandbox TAP device remains:
 

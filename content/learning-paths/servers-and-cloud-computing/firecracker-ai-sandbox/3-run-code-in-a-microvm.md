@@ -50,7 +50,7 @@ run-job.sh
 
 ## Run the first job
 
-Use the provided `hello-arm.sh` program to demonstrate how a sandbox can execute code submitted by an AI coding agent. This Bash program reports the guest architecture, kernel, CPU count, and memory. The runner copies the program into a fresh microVM and runs it with `/bin/bash`.
+Use the provided `hello-arm.sh` program to see how a sandbox can execute code submitted by an AI coding agent. This Bash program reports the guest architecture, kernel, CPU count, and memory. The runner copies the program into a fresh microVM and runs it with `/bin/bash`.
 
 The program uses tools already installed in the base image. Jobs can't rely on outbound IPv4 access to install dependencies.
 

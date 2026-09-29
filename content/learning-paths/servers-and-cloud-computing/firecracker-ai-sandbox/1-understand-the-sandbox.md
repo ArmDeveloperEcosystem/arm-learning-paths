@@ -27,7 +27,7 @@ A microVM doesn't make arbitrary code safe by itself. You still need the followi
 
 - Host hardening
 - Resource limits
-- Network policy
+- A network policy
 - A clean guest image
 - Lifecycle controls
 
