@@ -1,7 +1,7 @@
 ---
 title: Build an ephemeral AI code sandbox with Firecracker on Arm
-    
-description: Build a Firecracker microVM sandbox on an Arm Linux server, such as Arm AGI CPU or AWS Graviton, that runs generated shell code with bounded resources and restricted networking.
+
+description: Build a Firecracker microVM sandbox on an Arm Linux server based on processors such as Arm AGI CPU or AWS Graviton, that runs generated shell code with bounded resources and restricted networking.
 
 minutes_to_complete: 45
 

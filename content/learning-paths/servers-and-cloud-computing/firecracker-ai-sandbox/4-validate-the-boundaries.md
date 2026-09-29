@@ -91,10 +91,10 @@ Check that the runtime directory contains no job directories:
 sudo find /opt/firecracker-ai/runtime -mindepth 1 -maxdepth 1 -type d -print
 ```
 
-The command produces no output after cleanup. The `runner.lock` file remains and is reused to prevent concurrent jobs. These checks verify TAP and runtime-directory removal. 
+The command produces no output after cleanup. The `runner.lock` file remains and is reused to prevent concurrent jobs. These checks verify TAP and runtime-directory removal.
 
 ## What you've accomplished
 
 You've built an Arm-native execution sandbox where each shell program receives a dedicated Firecracker microVM, bounded resources, restricted networking, and a disposable filesystem. You also validated that filesystem state doesn't cross job boundaries and that the host stops programs that exceed their time limit.
 
-You can extend these examples into a service. Before extending the example, review the [Firecracker production host setup recommendations](https://github.com/firecracker-microvm/firecracker/blob/main/docs/prod-host-setup.md) and assess your deployment's security requirements. Running untrusted code in production requires host hardening, resource controls, and network policies suited to your workload. 
+You can extend these examples into a service. Before extending the example, review the [Firecracker production host setup recommendations](https://github.com/firecracker-microvm/firecracker/blob/main/docs/prod-host-setup.md) and assess your deployment's security requirements. Running untrusted code in production requires host hardening, resource controls, and network policies suited to your workload.

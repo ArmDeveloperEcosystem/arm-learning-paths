@@ -17,8 +17,8 @@ A virtual machine (VM) works only when its platform exposes nested virtualizatio
 
 Ensure the following:
 
-- Run all commands in a Bash shell on this host. You need `sudo` access and `wget` for the initial downloads. 
-- Use a dedicated test machine because setup scripts install packages. Each job temporarily changes the host's networking and firewall rules. 
+- Run all commands in a Bash shell on this host. You need `sudo` access and `wget` for the initial downloads.
+- Use a dedicated test machine because setup scripts install packages. Each job temporarily changes the host's networking and firewall rules.
 - Make sure that the sandbox subnet, `172.16.0.0/30`, doesn't overlap with any network used by the host or its VPN.
 
 Check that you're running on an Arm-based Linux machine:
@@ -45,7 +45,7 @@ The expected output is:
 KVM is available
 ```
 
-If the command produces no output, check that the host kernel enables KVM and that `/dev/kvm` is accessible through `sudo`. On a VM, also check whether the platform supports nested virtualization. 
+If the command produces no output, check that the host kernel enables KVM and that `/dev/kvm` is accessible through `sudo`. On a VM, also check whether the platform supports nested virtualization.
 
 ## Download the host preparation scripts
 
@@ -123,7 +123,7 @@ The script downloads an Arm64 Linux kernel and Ubuntu 24.04 root filesystem from
 
 Preparation uses `chroot` to run Arm64 guest provisioning commands on your Arm host. It installs guest packages using the host's network access; the job firewall rules aren't active during this step. Allow disk space for the downloaded image, temporary extracted files, the base disk, and one disposable job disk.
 
-Firecracker and the guest kernel version are pinned in `base/00-common.sh`, but the script selects a dated CI artifact directory dynamically. Those artifacts can change independently of the Firecracker release. 
+Firecracker and the guest kernel version are pinned in `base/00-common.sh`, but the script selects a dated CI artifact directory dynamically. Those artifacts can change independently of the Firecracker release.
 
 List the resulting artifacts:
 

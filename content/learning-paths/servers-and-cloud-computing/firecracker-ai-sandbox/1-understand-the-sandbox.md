@@ -39,7 +39,7 @@ AI coding agents can create and run programs while they work on a task. Generate
 
 Each Firecracker microVM has its own guest kernel and root filesystem. This creates a stronger boundary than running generated code as another process on the host.
 
-The use case is an AI coding agent using a fresh microVM as an ephemeral sandbox for each generated program. To understand that execution flow, you'll build a small runner and run `hello-arm.sh`, a supplied Bash program that reports the guest's Arm architecture and system information. 
+You can use an AI coding agent to run each generated program in a fresh microVM that acts as an ephemeral sandbox. To understand that execution flow, you'll build a small runner and run `hello-arm.sh`, a supplied Bash program that reports the guest's Arm architecture and system information.
 
 You'll see how the runner starts the microVM, executes the program, collects results, and discards the guest filesystem. Future Learning Paths will cover connecting an AI coding agent to the sandbox. For this Learning Path, you don't need a model, an API key, or an AI framework.
 
@@ -77,6 +77,6 @@ Use the provided sample programs on a dedicated test host while exploring this e
 
 ## What you've learned and what's next
 
-You've learned how microVMs combine a dedicated guest kernel with a minimal virtual hardware model. You've also reviewed the per-job lifecycle and boundaries enforced by the example. 
+You've learned how microVMs combine a dedicated guest kernel with a minimal virtual hardware model. You've also reviewed the per-job lifecycle and boundaries enforced by the example.
 
 Next, you'll confirm KVM access on your Arm Linux machine, install Firecracker, and prepare a reusable Arm guest image.
