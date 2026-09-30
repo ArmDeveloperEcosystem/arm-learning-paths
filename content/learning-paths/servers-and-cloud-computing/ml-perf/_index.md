@@ -67,7 +67,7 @@ rerun_faqs: false
 test_images:
 - ubuntu:latest
 test_link: https://github.com/armflorentlebeau/arm-learning-paths/actions/runs/4312122327
-test_maintenance: true
+test_maintenance: false
 
 ### Tags
 skilllevels: Introductory
