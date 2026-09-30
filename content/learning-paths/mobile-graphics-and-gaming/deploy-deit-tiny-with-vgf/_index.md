@@ -5,7 +5,7 @@ description: Fine-tune DeiT-Tiny for pet breed classification, export a quantize
 
 minutes_to_complete: 120
 
-who_is_this_for: This Learning Path is for machine learning developers who want to deploy an image classifier with ExecuTorch and Arm VGF using the machine learning (ML) SDK for Vulkan's host emulation layers.
+who_is_this_for: This Learning Path is for machine learning (ML) developers who want to deploy an image classifier with ExecuTorch and Arm VGF using the ML SDK for Vulkan's host emulation layers.
 
 learning_objectives:
     - Prepare ExecuTorch, the ML SDK for Vulkan, and a VGF runner on a Linux host.
@@ -60,7 +60,7 @@ generated_summary_faq:
   - question: What should I see after preparing the input image?
     answer: >-
       You'll see the input image path, the tensor shape `[1, 3, 224, 224]`, and the dataset's
-      `Expected breed`. The helper also saves `input.bin` for the runner. The expected breed is
+      `Expected breed`. The helper also saves `input.bin` for the runner. The `Expected breed` at this stage is
       a reference label, not a model prediction.
 # END generated_summary_faq
 
