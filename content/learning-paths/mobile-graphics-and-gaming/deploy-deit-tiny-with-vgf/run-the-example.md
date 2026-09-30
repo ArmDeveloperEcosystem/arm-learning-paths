@@ -23,9 +23,9 @@ Input tensor ready: (1, 3, 224, 224)
 Expected breed: newfoundland
 ```
 
-`Expected breed` is the dataset's reference label. It's not a model prediction because you haven't run inference yet. 
+`Expected breed` is the dataset's reference label. It's not a model prediction because you haven't run inference yet.
 
-The helper uses the same pinned image processor as the exporter. It saves `input.bin`, `input.jpg`, and `reference.json` under `arm_test/deit_vgf/`. The reference file stores the breed-label mapping and the selected image's reference label for inspection.
+The helper uses the same pinned image processor as the exporter. It saves `input.bin`, `input.jpg`, and `reference.json` under `arm_test/deit_vgf/`. The reference file stores the breed-label mapping. It also stores the selected image's reference label for inspection.
 
 `input.bin` contains the normalized float32 tensor in `[1, 3, 224, 224]` batch, channel, height, width order. The runner reads this tensor, not the JPEG. Open `input.jpg` in an image viewer to inspect the pet that you'll classify.
 
@@ -64,7 +64,7 @@ Output scores: 37 finite values
 VGF execution: confirmed
 ```
 
-`Output scores: 37 finite values` means there's one valid numeric score per breed, with no NaN or infinite values. The helper maps the largest score to the breed shown as `VGF prediction`. In this example, `Matches dataset label: True` means the predicted Newfoundland breed matches this image's reference label.
+`Output scores: 37 finite values` means there's one valid numeric score per breed, with no NaN or infinite values. The helper maps the largest score to the breed shown as `VGF prediction`. In this example, `Matches dataset label: True` confirms that the predicted Newfoundland breed matches the image's reference label.
 
 The helper also checks the runtime log for `Entered VGF init` and `Model executed successfully` before reporting `VGF execution: confirmed`.
 
@@ -98,10 +98,10 @@ The helper adds the floating-point prediction and whether the two predictions ma
 
 ## Classify another test image
 
-To classify another test image, repeat `prepare` with `--sample-index 1`, then rerun inference and inspection. Each preparation replaces the previous input artifacts. The helper rejects predictions and logs that predate the prepared image, so you must rerun `executor_runner` before inspecting a new image.
+To classify another test image, repeat `prepare` with `--sample-index 1`, then rerun inference and inspection. Each preparation replaces the previous input artifacts. The helper rejects predictions and logs that predate the prepared image. Rerun `executor_runner` before inspecting a new image.
 
-## What you've accomplished 
+## What you've accomplished
 
-You've fine-tuned DeiT-Tiny, exported a VGF-backed program, and classified a pet image with the host runtime. Your model, input, prediction, and logs are in `arm_test/deit_vgf/`. 
+You've fine-tuned DeiT-Tiny, exported a VGF-backed program, and classified a pet image with the host runtime. Your model, input, prediction, and logs are in `arm_test/deit_vgf/`.
 
 You can now reuse the `.pte` to classify other test images.

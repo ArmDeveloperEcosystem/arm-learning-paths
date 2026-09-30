@@ -39,23 +39,23 @@ generated_summary_faq:
     checkpoint for export. Finally, you'll classify a test image, decode the predicted breed, and
     confirm VGF execution.
   faqs:
-  - question: Which ExecuTorch release should I use for this workflow?
+  - question: Which ExecuTorch release should I use?
     answer: >-
       Use the ExecuTorch 1.5.1 release for both the Python package and the native source. This
       release uses stable PyTorch and TorchAO as referenced by the example.
   - question: Do the Vulkan packages install my GPU’s driver?
     answer: >-
-      No. The listed packages provide Vulkan libraries and tools but do not install a vendor‑specific
-      driver. Ensure your GPU’s Vulkan driver is installed and working before building and running
+      No. The listed packages provide Vulkan libraries and tools but don't install a vendor‑specific
+      driver. Ensure that your GPU’s Vulkan driver is installed and working before building and running
       the VGF runner.
   - question: Do I need to modify the example scripts before training or export?
     answer: >-
-      No edits are required. You use the ExecuTorch example’s training and export scripts, and
-      the Learning Path helper handles checkpoint compatibility, image preparation, and breed
+      No. Use the ExecuTorch example’s training and export scripts as provided.
+      The Learning Path helper handles checkpoint compatibility, image preparation, and breed
       decoding.
   - question: How can I confirm that the export completed successfully?
     answer: >-
-      Check that the exporter reports the output path in `arm_test/deit_vgf/export.log`. Then run
+      Check that the exporter reports the output path in `arm_test/deit_vgf/export.log`. Then, run
       `test -s arm_test/deit_vgf/deit_quantized_vgf.pte` to confirm that the exported program exists
       and isn't empty. The log also reports the host accuracy check on 100 test images.
   - question: What should I see after preparing the input image?

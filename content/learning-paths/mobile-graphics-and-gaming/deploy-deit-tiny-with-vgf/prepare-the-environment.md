@@ -36,7 +36,7 @@ git submodule sync --recursive
 git submodule update --init --recursive
 ```
 
-Keep the repository directory named `executorch`. The build checks this name. Run all remaining commands from this repository root, in the same shell. 
+Keep the repository directory named `executorch`. The build checks this name. Run all remaining commands from this repository root in the same shell.
 
 The source checkout provides the example and C++ runner. Export uses the matching released Python package.
 
@@ -62,7 +62,7 @@ Review the [ML SDK license terms](https://github.com/arm/ai-ml-sdk-for-vulkan/tr
 bash examples/arm/setup.sh --disable-ethos-u-deps --enable-mlsdk-deps
 ```
 
-The script downloads the Vulkan SDK and configures the packaged ML emulation layers. It also installs three developer-only packages that you don't need for this Learning Path. Remove those packages from the fresh virtual environment before resolving the example's dependencies:
+The script downloads the Vulkan SDK and configures the packaged ML emulation layers. It also installs three developer-only packages that you don't need for this Learning Path. Remove them from the fresh virtual environment before resolving the example's dependencies:
 
 ```bash
 python -m pip uninstall -y \
@@ -95,7 +95,7 @@ This installs Transformers 5.3.0 and ML SDK packages 0.10.0. Scikit-learn suppli
 
 The `+cpu` wheels still support the VGF runner's Vulkan execution. They make the Python training and export environment independent of CUDA.
 
-The dependency installation resolves the older FlatBuffers version installed by the SDK setup script. Don't run `install_executorch.sh`. To complete the Learning Path, you'll use released wheels instead of its nightly indexes. If you rerun SDK setup, repeat the developer-only package removal, then repeat installation.
+The dependency installation resolves the older FlatBuffers version installed by the SDK setup script. Don't run `install_executorch.sh`; you'll use released wheels instead of its nightly indexes. If you rerun the SDK setup, remove the developer-only packages and repeat the dependency installation.
 
 Load the generated SDK environment:
 
@@ -147,6 +147,6 @@ cmake --build cmake-out-deit-vgf --target executor_runner --parallel 4
 
 ## What you've accomplished and what's next
 
-You've prepared the release-based environment and built the VGF runner. 
+You've prepared the release-based environment and built the VGF runner.
 
 Next, you'll fine-tune the classifier and prepare its checkpoint for export.
