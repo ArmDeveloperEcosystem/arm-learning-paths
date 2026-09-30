@@ -14,10 +14,10 @@ python -m playwright install --only-shell chromium
 Test from the repo root:
 
 ```bash
-python tools/social_card_prototype/generate.py content/install-guides/ambaviz.md
-python tools/social_card_prototype/generate.py content/learning-paths/embedded-and-microcontrollers/advanced_soc
+python tools/social_card_generation/generate.py content/install-guides/ambaviz.md
+python tools/social_card_generation/generate.py content/learning-paths/embedded-and-microcontrollers/advanced_soc
 ```
 
-Open `tools/social_card_prototype/social_image.webp` to inspect the result.
+Open `tools/social_card_generation/social_image.webp` to inspect the result.
 
 Exact brand rendering still needs a font solution for `fonts/Aeonik-Medium.otf` and `fonts/AeonikFono-Regular.otf`, which I have from our branding team but we are unable to host in the OSS repo on GitHub due to licensing. The current system font fallbacks are near-identical and OK for social sharing.
