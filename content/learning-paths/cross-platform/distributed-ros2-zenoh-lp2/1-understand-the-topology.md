@@ -48,4 +48,4 @@ You'll start with the completed environment from [Build a ROS 2 and Zenoh simula
 
 You now understand how the Zenoh router coordinates communication and why nodes across containers and Arm devices use client mode. 
 
-Next, you'll configure the control container as a Zenoh client.
+Next, you'll configure the `control` container as a Zenoh client.

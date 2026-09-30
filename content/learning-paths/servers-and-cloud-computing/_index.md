@@ -12,10 +12,10 @@ pinned_learning_paths:
 - performix-microarchitecture
 operatingsystems_filter:
 - Android: 3
-- Linux: 273
-- macOS: 19
+- Linux: 278
+- macOS: 20
 - other: 1
-- Windows: 17
+- Windows: 18
 pinned_modules:
 - module:
     name: Recommended getting started learning paths
@@ -27,8 +27,8 @@ subjects_filter:
 - Containers and Virtualization: 50
 - Databases: 29
 - Libraries: 9
-- ML: 44
-- Performance and Architecture: 110
+- ML: 48
+- Performance and Architecture: 111
 - Storage: 2
 - Web: 19
 subtitle: Migrate and optimize cloud native apps on Arm-based servers.
@@ -37,6 +37,7 @@ tools_software_languages_filter:
 - 5G: 1
 - ACL: 1
 - ActiveGate: 1
+- Agent: 1
 - AI: 1
 - Alluxio: 1
 - Amazon ECS: 2
@@ -51,6 +52,7 @@ tools_software_languages_filter:
 - Apache Tomcat: 2
 - ApacheBench: 1
 - Argo CD: 1
+- Arm AI Portal: 3
 - Arm Compiler for Linux: 1
 - Arm Development Studio: 3
 - Arm ISA: 1
@@ -58,6 +60,7 @@ tools_software_languages_filter:
 - Arm Performix: 11
 - Arm Streamline: 1
 - Arm System Characterization Tool: 1
+- Arm Topo: 1
 - armclang: 1
 - armie: 1
 - ArmRAL: 1
@@ -90,7 +93,6 @@ tools_software_languages_filter:
 - bpftool: 1
 - Buildkite: 1
 - C: 16
-- C++: 1
 - Capstone: 1
 - Cargo: 1
 - cassandra-stress: 1
@@ -107,7 +109,7 @@ tools_software_languages_filter:
 - Codex: 1
 - Confidential Containers: 1
 - Couchbase: 1
-- CPP: 21
+- CPP: 22
 - CPUFreq: 1
 - cpupower: 1
 - cqlsh: 1
@@ -118,7 +120,7 @@ tools_software_languages_filter:
 - Demo: 3
 - DevStack: 1
 - Django: 2
-- Docker: 41
+- Docker: 42
 - Docker Buildx: 1
 - dotnet: 5
 - Dynatrace: 1
@@ -129,7 +131,7 @@ tools_software_languages_filter:
 - ESRally: 1
 - ExecuTorch: 1
 - Facter: 1
-- FastAPI: 1
+- FastAPI: 2
 - Fastpath: 1
 - fio: 1
 - FlameGraph: 1
@@ -144,7 +146,7 @@ tools_software_languages_filter:
 - gdb: 1
 - Geekbench: 1
 - Gemma: 1
-- Generative AI: 13
+- Generative AI: 15
 - Gerrit: 1
 - Git: 2
 - GitHub: 3
@@ -173,7 +175,7 @@ tools_software_languages_filter:
 - Herd7: 1
 - Hiera: 1
 - Hive: 1
-- Hugging Face: 13
+- Hugging Face: 15
 - hwmon: 1
 - InnoDB: 1
 - Intrinsics: 1
@@ -181,6 +183,7 @@ tools_software_languages_filter:
 - ipmitool: 1
 - Jaeger: 1
 - Java: 11
+- Java Object Layout: 1
 - JavaScript: 1
 - JAX: 1
 - Jenkins: 1
@@ -195,6 +198,7 @@ tools_software_languages_filter:
 - Keycloak: 1
 - KinD: 1
 - Kiro: 1
+- KleidiAI: 2
 - Kolla-Ansible: 1
 - kube-bench: 1
 - kubectl: 2
@@ -209,7 +213,7 @@ tools_software_languages_filter:
 - Litmus7: 1
 - llama.cpp: 4
 - LlamaIndex: 1
-- LLM: 12
+- LLM: 13
 - LLVM: 2
 - llvm-mca: 1
 - LM Evaluation Harness: 1
@@ -219,7 +223,7 @@ tools_software_languages_filter:
 - MAPPO: 1
 - MariaDB: 1
 - Maven: 1
-- MCP: 7
+- MCP: 8
 - Memcached: 2
 - Memorystore: 1
 - Minecraft: 1
@@ -245,12 +249,12 @@ tools_software_languages_filter:
 - NumPy: 1
 - Ollama: 3
 - ONNX: 1
-- ONNX Runtime: 3
+- ONNX Runtime: 5
 - OpenBLAS: 1
 - OpenBMC: 1
 - OpenCV: 1
 - OpenEBS: 1
-- OpenJDK: 1
+- OpenJDK: 2
 - OpenJDK 17: 1
 - OpenJDK 21: 2
 - OpenRNG: 1
@@ -261,7 +265,7 @@ tools_software_languages_filter:
 - Orchard Core: 1
 - PAPI: 1
 - perf: 10
-- Perf: 2
+- Perf: 3
 - pgbench: 1
 - PGO: 1
 - PHP: 1
@@ -273,7 +277,7 @@ tools_software_languages_filter:
 - psycopg2: 1
 - Puppet: 1
 - Pytest: 1
-- Python: 58
+- Python: 61
 - PyTorch: 15
 - Qdrant: 1
 - QEMU: 1
@@ -316,6 +320,7 @@ tools_software_languages_filter:
 - TensorFlow: 3
 - Terraform: 12
 - Testcontainers: 1
+- Text-to-Speech: 1
 - ThirdAI: 1
 - TimescaleDB: 1
 - Tinkerblox: 1
@@ -355,8 +360,8 @@ tools_software_languages_filter:
 weight: 1
 platforms_filter:
 - Arm AGI CPU: 11
-- AWS: 95
-- Google Cloud: 118
-- Microsoft Azure: 102
-- Oracle: 61
+- AWS Graviton: 95
+- Google Axion: 118
+- Microsoft Azure Cobalt: 102
+- Oracle Cloud Infrastructure (OCI) Ampere Compute: 61
 ---

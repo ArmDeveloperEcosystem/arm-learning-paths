@@ -27,9 +27,9 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Databases
 platforms:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
 armips:
     - Neoverse
 operatingsystems:

@@ -25,7 +25,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Performance and Architecture
 platforms:
-  - Google Cloud
+  - Google Axion
 
 armips:
   - Neoverse

@@ -1,18 +1,18 @@
 ---
-title: Implement operator-level performance analysis with Annotation Channels
+title: Implement operator-level performance analysis with channel annotations
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Overview of Annotation Channels
+## Overview of channel annotations
 
-You can use Streamline Annotation Channels to analyze the execution time of each node in the compute graph, which is especially valuable for understanding and optimizing performance on Arm-based systems. Annotation Channels are specialized annotations that group related operations into separate visual channels in Streamline. Unlike simple markers, channels allow you to track multiple concurrent operations and see their relationships over time.
+You can use Streamline channel annotations to analyze the execution time of each node in the compute graph, which is especially valuable for understanding and optimizing performance on Arm-based systems. Channel annotations are specialized annotations that group related operations into separate visual lanes in Streamline. Unlike simple marker annotations, channel annotations allow you to track multiple concurrent operations and see their relationships over time.
 
-More details on Annotation Channels can be found in the [Group and Channel annotations](https://developer.arm.com/documentation/101816/9-7/Annotate-your-code/User-space-annotations/Group-and-Channel-annotations?lang=en) section of the Streamline User Guide.
+More details on channel annotations can be found in the [Group and Channel annotations](https://developer.arm.com/documentation/101816/9-7/Annotate-your-code/User-space-annotations/Group-and-Channel-annotations?lang=en) section of the Streamline User Guide.
 
-## Integrate Annotation Channels into llama.cpp
+## Integrate channel annotations into llama.cpp
 
 In llama.cpp, tensor nodes are executed in the CPU backend inside the function `ggml_graph_compute_thread()` in the file `~/llama.cpp/ggml/src/ggml-cpu/ggml-cpu.c`.  
 
@@ -25,7 +25,7 @@ for (int node_n = 0; node_n < cgraph->n_nodes && atomic_load_explicit(&tp->abort
         ggml_compute_forward(&params, node);
 ```
 
-To monitor operator execution time, you can create annotation channels for each type of operators such as `GGML_OP_MUL_MAT`, `GGML_OP_SOFTMAX`, `GGML_OP_ROPE`, and `GGML_OP_MUL`. Matrix operations (`GGML_OP_MUL_MAT`) take a significant portion of execution time. These operations include both GEMM (General Matrix Multiply) and GEMV (General Matrix-Vector multiply) operations. You'll create two dedicated annotation channels for GEMM and GEMV respectively to analyze their performance separately. The annotation starts at the beginning of `ggml_compute_forward()` and stops at the end. This approach allows you to monitor the computation time of each tensor node/operator. 
+To monitor operator execution time, you can create channel annotations for each type of operator such as `GGML_OP_MUL_MAT`, `GGML_OP_SOFTMAX`, `GGML_OP_ROPE`, and `GGML_OP_MUL`. Matrix operations (`GGML_OP_MUL_MAT`) take a significant portion of execution time. These operations include both GEMM (General Matrix Multiply) and GEMV (General Matrix-Vector multiply) operations. You'll create two dedicated channel annotations for GEMM and GEMV respectively to analyze their performance separately. The channel annotation starts at the beginning of `ggml_compute_forward()` and stops at the end. This approach allows you to monitor the computation time of each tensor node/operator.
 
 ## Add annotation code to monitor operators 
 
@@ -45,7 +45,7 @@ Your code now looks like:
 for (int node_n = 0; node_n < cgraph->n_nodes && atomic_load_explicit(&tp->abort, memory_order_relaxed) != node_n; node_n++) {
         struct ggml_tensor * node = cgraph->nodes[node_n];
         
-    // +++ Start Annotation Channel for Streamline
+    // +++ Start channel annotation for Streamline
     {
         char printf_buf[256];
         sprintf(printf_buf," %s, %s", node->name, ggml_get_name(node)); 
@@ -59,11 +59,11 @@ for (int node_n = 0; node_n < cgraph->n_nodes && atomic_load_explicit(&tp->abort
         else
             ANNOTATE_CHANNEL((node->op)+2, printf_buf);
     }
-    // --- Start Annotation Channel for Streamline
+    // --- Start channel annotation for Streamline
 
     ggml_compute_forward(&params, node);
 
-    // +++ End Annotation Channel for Streamline
+    // +++ End channel annotation for Streamline
     {
         if(node->op==GGML_OP_MUL_MAT) {
             if (node->src[1]->ne[1] == 1)
@@ -74,7 +74,7 @@ for (int node_n = 0; node_n < cgraph->n_nodes && atomic_load_explicit(&tp->abort
         else
             ANNOTATE_CHANNEL_END((node->op)+2);
     }
-    // --- End Annotation Channel for Streamline
+    // --- End channel annotation for Streamline
 ```
 
 ## Include tensor shape information (optional) 
@@ -108,9 +108,9 @@ Then, build `llama-cli` again.
 
 Run `llama-cli` and collect profiling data with Streamline as you did in the previous section.
 
-Arm Streamline displays string annotations as text overlays in the relevant channels in the Timeline view, such as Channel 0, as shown in the following screenshot.
+Arm Streamline displays string annotations as text overlays in the relevant channel annotation lanes in the Timeline view, such as Channel 0, as shown in the following screenshot.
 
-![Screenshot of Streamline annotation channels displaying operator execution timing with channel indicators alt-text#center](images/deep_dive_1.png "Annotation channel")
+![Screenshot of Streamline channel annotations displaying operator execution timing with channel indicators alt-text#center](images/deep_dive_1.png "Channel annotation")
 
 The letter `A` is displayed in the process list to indicate the presence of annotations. 
 
@@ -120,9 +120,9 @@ String annotations are also displayed in the **Message** column in the Log view.
 
 ## Compare GEMM operations during prefill
 
-The screenshot of annotation channel view at prefill stage is shown as below:
+The screenshot of the channel annotation view at prefill stage is shown below:
 
-![Screenshot showing Streamline annotation channels during Prefill stage with operator categorization and timing visualization alt-text#center](images/prefill_annotation_channel.png "Annotation channel at Prefill stage")
+![Screenshot showing Streamline channel annotations during Prefill stage with operator categorization and timing visualization alt-text#center](images/prefill_annotation_channel.png "Channel annotation at Prefill stage")
 
 The operator name in the screenshot above is manually edited. If you want the operator name to be shown instead of the Channel number by Streamline, you can add ANNOTATE_NAME_CHANNEL to the `ggml_graph_compute_thread` function. 
 
@@ -139,19 +139,19 @@ For example:
    ANNOTATE_NAME_CHANNEL(1, 0, "MUL_MAT_GEMM"); 
 ```
 
-The code above sets the name of annotation channel 0 as `MUL_MAT_GEMV` and channel 1 as `MUL_MAT_GEMM`.
+The code above sets the name of channel 0 as `MUL_MAT_GEMV` and channel 1 as `MUL_MAT_GEMM`.
 
 Zoom into the timeline view to examine additional details:
 
-![Detailed view of Streamline annotation channels showing individual operator execution blocks during Prefill stage alt-text#center](images/prefill_annotation_channel_2.png "Annotation channel at Prefill stage")
+![Detailed view of Streamline channel annotations showing individual operator execution blocks during Prefill stage alt-text#center](images/prefill_annotation_channel_2.png "Channel annotation at Prefill stage")
 
-When moving the cursor over an annotation channel, Streamline shows:  
+When moving the cursor over a channel annotation, Streamline shows:
 
 - The tensor node name  
 - The operator type  
 - The shape and size of the source tensors  
 
-![Close-up screenshot of annotation channel tooltip showing tensor node details including operator type and tensor dimensions alt-text#center](images/prefill_annotation_channel_3.webp "Annotation channel zoom in")
+![Close-up screenshot of channel annotation tooltip showing tensor node details including operator type and tensor dimensions alt-text#center](images/prefill_annotation_channel_3.webp "Channel annotation zoom in")
 
 The example above shows a `GGML_OP_MUL_MAT` operator for the `FFN_UP` node.
 The source tensors have shapes [1024, 2816] and [1024, 68].  
@@ -163,15 +163,15 @@ This view makes it clear that:
 
 ## Analyze GEMV operations during Decode
 
-The annotation channel view for the Decode stage is shown below:
+The channel annotation view for the Decode stage is shown below:
 
-![Screenshot showing Streamline annotation channels during Decode stage highlighting GEMV operations and reduced computation time alt-text#center](images/decode_annotation_channel.png "Annotation channel at Decode stage")
+![Screenshot showing Streamline channel annotations during Decode stage highlighting GEMV operations and reduced computation time alt-text#center](images/decode_annotation_channel.png "Channel annotation at Decode stage")
 
 Zooming in provides additional details:
 
-![Detailed view of Decode stage annotation channels showing shorter execution blocks compared to Prefill stage alt-text#center](images/decode_annotation_channel_2.png "Annotation channel string")
+![Detailed view of Decode stage channel annotations showing shorter execution blocks compared to Prefill stage alt-text#center](images/decode_annotation_channel_2.png "Channel annotation string")
 This view reveals that the majority of time in Decode is spent on `MUL_MAT GEMV` operations within the attention and FFN layers. Unlike the Prefill stage, no GEMM operations are executed in these layers during Decode. The `result_output` linear layer contains a large GEMV operation that takes an even larger proportion of runtime in Decode compared to Prefill. This pattern is expected since each token generation at Decode is shorter due to KV cache reuse, making the `result_output` layer more dominant in the overall execution profile. 
 
 ## Summary
 
-You have successfully implemented Annotation Channels to analyze individual operators within llama.cpp. This detailed view reveals how different operators contribute to overall execution time and shows the stark differences between Prefill (GEMM-dominated) and Decode (GEMV-dominated) stages. The next section will explore how these operations utilize multiple CPU cores and threads. 
+You have successfully implemented channel annotations to analyze individual operators within llama.cpp. This detailed view reveals how different operators contribute to overall execution time and shows the stark differences between Prefill (GEMM-dominated) and Decode (GEMV-dominated) stages. The next section will explore how these operations utilize multiple CPU cores and threads.

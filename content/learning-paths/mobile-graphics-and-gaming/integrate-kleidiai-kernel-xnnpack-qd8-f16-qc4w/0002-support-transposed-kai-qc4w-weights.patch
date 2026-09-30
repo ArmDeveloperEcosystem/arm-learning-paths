@@ -1,0 +1,50 @@
+From 6eb253c4263e54c1697d77aa0ff00b7c5b95d67d Mon Sep 17 00:00:00 2001
+From: Qxiang Xu <Qixiang.Xu@arm.com>
+Date: Tue, 25 Aug 2026 10:04:48 +0800
+Subject: [PATCH 2/4] Support transposed KAI QC4W weights
+
+---
+ src/reference/packing.cc | 19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
+
+diff --git a/src/reference/packing.cc b/src/reference/packing.cc
+index 97553815fb..3b4a0dbc2b 100644
+--- a/src/reference/packing.cc
++++ b/src/reference/packing.cc
+@@ -11,6 +11,7 @@
+ #include <cstddef>
+ #include <cstdint>
+ #include <cstring>
++#include <vector>
+ 
+ #include "include/xnnpack.h"
+ #include "src/xnnpack/common.h"
+@@ -2552,9 +2553,25 @@ void xnn_pack_kai_qs4_weights_and_biases_sme(
+     extra_data0 = calloc(output_channels, sizeof(float));
+     free_accumulator_init = true;
+   }
++  const uint8_t* rhs = reinterpret_cast<const uint8_t*>(weights);
++  std::vector<uint8_t> transposed_rhs;
++  if (flags & XNN_FLAG_TRANSPOSE_WEIGHTS) {
++    const size_t source_stride = round_up(output_channels, 2) / 2;
++    const size_t destination_stride = round_up(input_channels, 2) / 2;
++    transposed_rhs.resize(output_channels * destination_stride);
++    for (size_t n = 0; n < output_channels; n++) {
++      for (size_t k = 0; k < input_channels; k++) {
++        const uint8_t source = rhs[k * source_stride + n / 2];
++        const uint8_t value = (source >> ((n & 1) * 4)) & 0x0F;
++        transposed_rhs[n * destination_stride + k / 2] |= value << ((k & 1) * 4);
++      }
++    }
++    rhs = transposed_rhs.data();
++  }
++
+   kai_run_rhs_pack_nxk_qsi4cxps1s0_qsu4cxs1s0_neon(
+       groups, output_channels, input_channels, nr, kr, sr,
+-      /*rhs=*/reinterpret_cast<const uint8_t*>(weights),
++      rhs,
+       /*bias=*/reinterpret_cast<const float*>(extra_data0),
+       /*scale=*/reinterpret_cast<const float*>(extra_data1),
+       /*rhs_packed=*/packed_weights_ptr,
+-- 
+2.43.0

@@ -76,7 +76,7 @@ tools_software_languages:
   - Tinkerblox
 
 platforms:
-  - Google Cloud
+  - Google Axion
 
 armips:
   - Neoverse

@@ -108,6 +108,10 @@ further_reading:
         title: Realm Management Monitor specification
         link: https://developer.arm.com/documentation/den0137/latest/
         type: documentation
+    - resource:
+        title: The Role of Attestation in Arm CCA
+        link: https://support.arm.com/documentation/111146/latest/
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

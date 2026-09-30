@@ -27,7 +27,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: ML
 platforms:
-  - Google Cloud
+  - Google Axion
 
 armips:
   - Neoverse

@@ -7,18 +7,18 @@ description: Set up a Qualcomm Dragonwing QC6490 board with Ubuntu and install t
 layout: learningpathall
 ---
 
-## Set up a Qualcomm Dragonwing QC6490 with Ubuntu
+## Prepare a Qualcomm Dragonwing QC6490 with Ubuntu
 
-The Qualcomm Dragonwing QC6490 is an Arm-based platform that supports both the on-board Qualcomm camera module and USB-attached cameras for live inference with Edge Impulse. This section covers prerequisites, dependency installation, and the component configuration for running the Edge Impulse Linux Runner on a QC6490 device with AWS IoT Greengrass.
+The Qualcomm Dragonwing QC6490 is an Arm-based platform that supports both the on-board Qualcomm camera module and USB-attached cameras for live inference with Edge Impulse. You'll complete prerequisites, dependency installation, and the component configuration for running the Edge Impulse Linux Runner on a QC6490 device with AWS IoT Greengrass.
 
 ### Prerequisites
 
 Before you begin, make sure you have:
 
-- Qualcomm Dragonwing QC6490 development board with a power supply
+- A Qualcomm Dragonwing QC6490 development board with a power supply
 - Ubuntu flashed onto the device according to the [Qualcomm QC6490 quick start guide](https://docs.qualcomm.com/doc/80-90441-1/topic/qsg-landing-page.html)
-- Network connection (Ethernet or Wi-Fi) and SSH access to the device
-- Optional on-board Qualcomm camera module or USB camera for live inference; without a camera, the Edge Impulse Linux Runner uses a sample video file
+- A Network connection (Ethernet or Wi-Fi) and SSH access to the device
+- (Optional) An on-board Qualcomm camera module or USB camera for live inference; without a camera, the Edge Impulse Linux Runner uses a sample video file
 
 ### Connect over SSH
 
@@ -32,13 +32,13 @@ If you're not sure of the IP address, check your router's admin page for connect
 
 ### Verify Ubuntu is running
 
-Confirm the device is running Ubuntu on aarch64:
+Confirm the device is running Ubuntu on `aarch64`:
 
 ```bash
 uname -a
 ```
 
-The expected result shows `aarch64` as the architecture and an Ubuntu kernel version.
+The output shows `aarch64` as the architecture and an Ubuntu kernel version.
 
 ### Install dependencies
 
@@ -50,7 +50,7 @@ sudo apt install -y curl unzip
 sudo apt install -y gcc g++ make build-essential nodejs sox gstreamer1.0-tools gstreamer1.0-plugins-good gstreamer1.0-plugins-base gstreamer1.0-plugins-base-apps
 ```
 
-Greengrass Nucleus Classic is Java-based, so you also need a JDK:
+Greengrass Nucleus Classic is Java-based, so you also need to install a JDK:
 
 ```bash
 sudo apt install -y default-jdk
@@ -62,13 +62,13 @@ Install any available security updates:
 sudo apt upgrade -y
 ```
 
-### Verify the camera (optional)
+### (Optional) Verify the camera 
 
-The QC6490 supports two types of cameras. The type you have determines which JSON configuration to use later.
+The QC6490 supports two types of cameras. The type of camera you have determines which JSON configuration you need to use:
 
-**On-board Qualcomm camera**: This uses the `qtiqmmfsrc` GStreamer element, which is specific to Qualcomm platforms. If your board has a built-in camera module, it should be available without additional setup.
+If you're using the on-board Qualcomm camera, it uses the `qtiqmmfsrc` GStreamer element, which is specific to Qualcomm platforms. If your board has a built-in camera module, it should be available without additional setup.
 
-**USB-attached camera**: If you're using a USB camera instead, confirm the system detects it:
+If you're using a USB camera instead, confirm that the system detects it:
 
 ```bash
 ls /dev/video*
@@ -84,11 +84,11 @@ If nothing appears, check that the camera is plugged in securely and try a diffe
 
 ### Save the component configuration
 
-The JSON configurations below set up the Edge Impulse Greengrass component for the QC6490. This platform has three configuration options depending on your camera setup. Choose the one that matches your hardware and save it to a text file on your local machine. You'll paste it into the Greengrass deployment configuration in a later step.
+The following JSON configurations set up the Edge Impulse Greengrass component for the QC6490. This platform has three configuration options depending on your camera setup. Choose the one that matches your hardware and save it to a text file on your local machine. You'll paste it into the Greengrass deployment configuration in a later step.
 
 #### With the on-board Qualcomm camera
 
-This configuration uses the `qtiqmmfsrc` GStreamer element to capture video from the on-board camera at 1280 × 720 resolution. The `--force-variant float32` flag selects the float32 model variant, and `--silent` suppresses console output since the Edge Impulse Linux Runner runs as a background service.
+This configuration uses the `qtiqmmfsrc` GStreamer element to capture video from the on-board camera at 1280 × 720 resolution. The `--force-variant float32` flag selects the float32 model variant. `--silent` suppresses console output because the Edge Impulse Linux Runner runs as a background service:
 
 ```json
 {
@@ -126,7 +126,7 @@ This configuration uses the `qtiqmmfsrc` GStreamer element to capture video from
 
 #### With a USB-attached camera
 
-This configuration uses the standard `v4l2src` GStreamer element to capture video from a USB camera at 640 × 480 resolution. Use this if your QC6490 board doesn't have a built-in camera module, or if you prefer to use an external USB camera.
+This configuration uses the standard `v4l2src` GStreamer element to capture video from a USB camera at 640 × 480 resolution. Use this configuration if your QC6490 board doesn't have a built-in camera module, or if you prefer to use an external USB camera:
 
 ```json
 {
@@ -164,7 +164,7 @@ This configuration uses the standard `v4l2src` GStreamer element to capture vide
 
 #### Without a camera
 
-This configuration reads inference input from a local sample video file. The `ei_local_model_file` field points to a pre-downloaded model, and `ei_shutdown_behavior` is set to `wait_on_restart` so the Edge Impulse Linux Runner pauses after the video ends and waits for a restart command.
+This configuration reads inference input from a local sample video file. The `ei_local_model_file` field points to a pre-downloaded model. `ei_shutdown_behavior` is set to `wait_on_restart` so that the Edge Impulse Linux Runner pauses after the video ends and waits for a restart command:
 
 ```json
 {
@@ -200,8 +200,8 @@ This configuration reads inference input from a local sample video file. The `ei
 }
 ```
 
-## What you've accomplished
+## What you've accomplished and what's next
 
 You've prepared your Qualcomm Dragonwing QC6490, installed its dependencies, and saved the component configuration for your selected input source.
 
-Your Qualcomm Dragonwing QC6490 is ready. Return to the [hardware setup page](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/hardwaresetup/) and continue to the next section to set up your Edge Impulse project.
+Your Qualcomm Dragonwing QC6490 is ready. Next, you'll [set up the Edge Impulse project](/learning-paths/embedded-and-microcontrollers/edge_impulse_greengrass/edgeimpulseprojectbuild/). 

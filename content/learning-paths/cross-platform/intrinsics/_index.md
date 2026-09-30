@@ -15,7 +15,7 @@ learning_objectives:
 
 prerequisites:
 - Some understanding of SIMD concepts.
-- An Arm based machine or [cloud instance](/learning-paths/servers-and-cloud-computing/csp/) running Ubuntu Linux.
+- An Arm based machine such as Arm AGI CPU or [cloud instance](/learning-paths/servers-and-cloud-computing/csp/) running Ubuntu Linux.
 - Optionally, an `x86_64` machine also running Ubuntu.
 
 # START generated_summary_faq
@@ -105,6 +105,9 @@ further_reading:
         type: video
 
 ### Cross-platform metadata only
+platforms:
+    - Arm AGI CPU
+    
 shared_path: true
 shared_between:
     - servers-and-cloud-computing

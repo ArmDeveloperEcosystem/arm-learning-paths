@@ -80,7 +80,7 @@ tools_software_languages:
     - BitBake
 
 platforms:
-  - Google Cloud
+  - Google Axion
 
 armips:
   - Neoverse

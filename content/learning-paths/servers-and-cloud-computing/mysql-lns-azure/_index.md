@@ -25,7 +25,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Databases
 platforms:
-  - Microsoft Azure
+  - Microsoft Azure Cobalt
 
 armips:
     - Neoverse

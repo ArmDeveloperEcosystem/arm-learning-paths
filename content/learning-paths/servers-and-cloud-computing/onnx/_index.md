@@ -27,7 +27,7 @@ armips:
     - Neoverse
 subjects: ML
 platforms:
-  - Microsoft Azure
+  - Microsoft Azure Cobalt
 operatingsystems:
     - Linux
 tools_software_languages:

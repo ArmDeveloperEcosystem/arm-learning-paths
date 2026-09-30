@@ -1,5 +1,5 @@
 ---
-title: Run a Large Language model (LLM) chatbot on Arm servers
+title: Run a large language model chatbot on Arm servers
 weight: 3
 
 ### FIXED, DO NOT MODIFY

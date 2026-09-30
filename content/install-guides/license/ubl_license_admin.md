@@ -38,9 +38,9 @@ See [Hardware and software requirements](https://developer.arm.com/documentation
 
 The local license server (LLS) software can be downloaded from:
 ```url
-https://lm.arm.com/downloads
+https://support.arm.com/downloads/view/LLSUBL
 ```
-Expand the tarball (named `flexnetls-armlmd-<version>.tar.gz`), and install the license server software.
+Expand the tarball (named `flexnetls-armlmd-<version>.tar.gz`), and install the license server software. For example:
 ```console
 tar -xf flexnetls-armlmd-1.2024050.0.tar.gz
 sudo ./flexnetls-armlmd-1.2024050.0/install_license_server

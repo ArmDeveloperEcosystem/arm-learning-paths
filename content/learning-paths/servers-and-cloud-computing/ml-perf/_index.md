@@ -30,8 +30,8 @@ test_maintenance: true
 skilllevels: Introductory
 subjects: ML
 platforms:
-  - AWS
-  - Oracle
+  - AWS Graviton
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
 - Neoverse
 operatingsystems:

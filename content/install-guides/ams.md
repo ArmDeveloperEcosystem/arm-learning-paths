@@ -13,7 +13,6 @@ additional_search_terms:
 - mali
 - immortalis
 - cortex-a
-- Install Arm Mobile Studio
 - Streamline
 - Performance Advisor
 - RenderDoc
@@ -26,7 +25,7 @@ minutes_to_complete: 15
 author: Ronan Synnott
 
 ### Link to official documentation
-official_docs: https://developer.arm.com/documentation/107649
+official_docs: https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio
 
 ### PAGE SETUP
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -52,11 +51,11 @@ All features of Arm Performance Studio are available free of charge without any 
 
 Arm Performance Studio is supported on Windows, Linux, and macOS hosts. Download the appropriate installer from [Arm Performance Studio Downloads](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads).
 
-Full details about the supported OS and Android versions are given in the Arm Performance Studio [Release Notes](https://developer.arm.com/documentation/107649).
+Full details about the supported OS and Android versions are given in the Arm Performance Studio [Release Notes](https://support.arm.com/documentation/107649).
 
 ## Install Arm Performance Studio on Windows
 
-Arm Performance Studio is provided as an installer executable. Double-click the `.exe` file and follow the instructions in the setup wizard.
+Arm Performance Studio is provided as an `.msi` installer package. Double-click the `.msi` file and follow the instructions in the setup wizard.
 
 Open the Performance Studio Hub from the **Windows Start** menu, or by double-clicking the shortcut in the installation directory. You can read a description of the tools and launch them from the Hub.
 
@@ -73,22 +72,22 @@ Arm Performance Studio for Linux is available for x86_64 hosts only. The tools p
 Arm Performance Studio is provided as a gzipped tar archive.
 
 {{% notice Note %}}
-The following commands use Arm Performance Studio version 2026.4. The same commands work with other versions. Replace the filename with the file for your version of choice. To find the latest version, see [Arm Performance Studio Downloads](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads).
+The following commands use Arm Performance Studio version 2026.5. The same commands work with other versions. Replace the filename with the file for your version of choice. To find the latest version, see [Arm Performance Studio Downloads](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Studio#Downloads).
 {{% /notice %}}
 
 Extract the tar archive to your home directory:
 
 ```bash
-tar xvzf Arm_Performance_Studio_2026.4_linux_x86-64.tgz -C $HOME
+tar xvzf Arm_Performance_Studio_2026.5_linux_x86-64.tgz -C $HOME
 ```
 
-This creates the `Arm_Performance_Studio_2026.4` directory in your home directory.
+This creates the `Arm_Performance_Studio_2026.5` directory in your home directory.
 
 Add the Streamline and Mali Offline Compiler directories to your `PATH` so you can run the `Streamline-cli` and `malioc` command-line tools from any directory. Add the following lines to your `~/.bashrc`, then start a new shell:
 
 ```bash
-export PATH=$PATH:$HOME/Arm_Performance_Studio_2026.4/streamline
-export PATH=$PATH:$HOME/Arm_Performance_Studio_2026.4/mali_offline_compiler
+export PATH=$PATH:$HOME/Arm_Performance_Studio_2026.5/streamline
+export PATH=$PATH:$HOME/Arm_Performance_Studio_2026.5/mali_offline_compiler
 ```
 
 ## Verify the installation
@@ -102,7 +101,7 @@ malioc --version
 The output is similar to:
 
 ```output
-Mali Offline Compiler v2026.3.0 (Build bbe17b)
+Mali Offline Compiler v2026.5.0 (Build 922df8)
 Copyright (c) 2007-2026 Arm Limited. All rights reserved.
 ```
 
@@ -115,14 +114,14 @@ Streamline-cli --version
 The output is similar to:
 
 ```output
-Streamline 9.8 (Build 9.8.0.v20260625_0741)
+Streamline 9.9 (Build 9.9.0.v20260901_1940)
 Copyright (c) 2010-2026 Arm Limited. All rights reserved.
 ```
 
 To launch the graphical Performance Studio Hub, run the launcher script in the installation directory:
 
 ```bash
-$HOME/Arm_Performance_Studio_2026.4/performance-studio-cli.sh
+$HOME/Arm_Performance_Studio_2026.5/performance-studio-cli.sh
 ```
 
 The Hub describes each tool and lets you launch Streamline, Frame Advisor, and RenderDoc for Arm GPUs.

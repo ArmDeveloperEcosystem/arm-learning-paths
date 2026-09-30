@@ -5,11 +5,11 @@ weight: 6
 layout: "learningpathall"
 ---
 
-The application validates the inference path before it consumes camera frames. This separates model or NPU failures from camera and ISP failures.
-
 ## Check the startup test
 
-After reset, the display shows the bundled Grace Hopper image. The U55 model draws one green face box, and the U85 result identifies an ImageNet class such as `ACADEMIC GOWN`.
+The application validates the inference path before it consumes camera frames. This separates model or neural processing unit (NPU) failures from camera and image signal processor (ISP) failures.
+
+After reset, the display shows the bundled Grace Hopper image. The U55 model draws one green face box. The U85 result identifies an ImageNet class such as `ACADEMIC GOWN`.
 
 The U4 log includes model preparation and isolated preflight messages similar to:
 
@@ -26,9 +26,9 @@ The exact inference times and memory addresses vary between builds.
 
 ## Check the live camera UI
 
-After five seconds, the application clears the test image and starts the MT9M114 stream. Confirm these results:
+After 5 seconds, the application clears the test image and starts the MT9M114 stream. Confirm the following results:
 
-- The 480 x 352 live preview appears near the center of the MW405 display.
+- The MW405 display shows a 480 x 352 live preview.
 - The preview is in color and updates when you move the camera.
 - Green boxes track faces in the live frame.
 - The classification label and confidence change with the scene.
@@ -40,6 +40,10 @@ The log confirms the transition:
 ```output
 dual-et: live dual-NPU pipeline started
 ```
+
+{{% notice Note %}}
+If the preview is grainy or monochrome, the application is displaying packed sensor data as RGB565. Confirm that the build includes both ISP overlays and that the selected video endpoint is `isp@49046000`. The native pipeline requests planar RGB888 output from the ISP before it creates the display preview and model inputs.
+{{% /notice %}}
 
 ## Confirm both NPUs execute for each frame
 
@@ -58,7 +62,7 @@ Use the fields as follows:
 | `span` | Time from the first worker starting to the last worker finishing |
 | `overlap` | Time during which both model executions overlap |
 
-These are Cortex-M cycle-counter wall-time measurements around delegated `Method::execute()`, not NPU PMU active-cycle counts. Input preparation and result decoding are outside these intervals. The two NPU interrupt counters also increase during live operation:
+These are Cortex-M cycle-counter wall-time measurements around delegated `Method::execute()` rather than NPU PMU active-cycle counts. Input preparation and result decoding are outside these intervals. The two NPU interrupt counters also increase during live operation:
 
 ```output
 dual-et: live frame=30 IRQs=.../...
@@ -66,7 +70,17 @@ dual-et: live frame=30 IRQs=.../...
 
 Changing the scene changes the preview, tensor checksums, and detection results. If the image and results remain fixed, the application is still using the startup test input instead of live frames.
 
-You have now built, flashed, and validated a Zephyr application that drives
+{{% notice Note %}}
+If the startup test completes but the live result doesn't change, confirm that `dual-et: live dual-NPU pipeline started` appears and that the live-frame messages and NPU interrupt counters continue to increase.
+
+If capture errors repeat, power-cycle the board, flash the package again, and recheck the camera connector and overlay order.
+{{% /notice %}}
+
+## What you've accomplished
+
+You've now built, flashed, and validated a Zephyr application that drives
 two Ethos-U NPUs with separate persistent worker threads on one Cortex-M55.
-This design runs both ML workloads without adding a second MCU and its
+This design runs both ML workloads without adding a second microcontroller unit and its
 associated system power overhead.
+
+You can now use the workflow to run ExecuTorch models for your own use cases concurrently on separate Ethos-U NPUs under Zephyr.

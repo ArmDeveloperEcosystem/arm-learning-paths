@@ -22,7 +22,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Containers and Virtualization
 platforms:
-  - Oracle
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 
 armips:
     - Neoverse

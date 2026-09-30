@@ -24,7 +24,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Web
 platforms:
-  - AWS
+  - AWS Graviton
 
 armips:
     - Neoverse

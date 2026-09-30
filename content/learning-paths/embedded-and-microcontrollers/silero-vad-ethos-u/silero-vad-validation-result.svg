@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 480" width="980" height="480" role="img" aria-labelledby="title desc">
+  <title id="title">Host and FVP produce identical Silero VAD speech decisions</title>
+  <desc id="desc">Two matching timelines show silence, then speech from 0.224 to 2.048 seconds, then silence. The host reference and FVP output agree on all 79 frames.</desc>
+  <!-- svg-source:excalidraw -->
+  <rect width="980" height="480" fill="#ffffff"/>
+
+  <text x="40" y="52" font-family="Nunito, Arial, sans-serif" font-size="34" font-weight="700" fill="#1e1e1e">Host and FVP found the same speech</text>
+  <text x="40" y="88" font-family="Nunito, Arial, sans-serif" font-size="20" fill="#495057">Both processed the same 2.5-second audio clip</text>
+  <text x="40" y="122" font-family="Nunito, Arial, sans-serif" font-size="17" fill="#495057">Gray = silence   •   Green = speech</text>
+
+  <text x="40" y="204" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="700" fill="#1e1e1e">Host reference</text>
+  <text x="40" y="304" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="700" fill="#1e1e1e">FVP output</text>
+
+  <text x="225" y="148" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" fill="#495057">0 s</text>
+  <text x="286" y="148" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" fill="#495057">0.224 s</text>
+  <text x="782" y="148" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" fill="#495057">2.048 s</text>
+  <text x="905" y="148" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" fill="#495057">2.5 s</text>
+
+  <g stroke="#1971c2" stroke-width="2">
+    <rect x="225" y="165" width="61" height="70" rx="12" fill="#e9ecef"/>
+    <rect x="286" y="165" width="496" height="70" rx="12" fill="#b2f2bb"/>
+    <rect x="782" y="165" width="123" height="70" rx="12" fill="#e9ecef"/>
+    <rect x="225" y="265" width="61" height="70" rx="12" fill="#e9ecef"/>
+    <rect x="286" y="265" width="496" height="70" rx="12" fill="#b2f2bb"/>
+    <rect x="782" y="265" width="123" height="70" rx="12" fill="#e9ecef"/>
+  </g>
+
+  <text x="534" y="208" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="21" font-weight="700" fill="#1864ab">SPEECH</text>
+  <text x="534" y="308" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="21" font-weight="700" fill="#1864ab">SPEECH</text>
+
+  <rect x="225" y="370" width="680" height="68" rx="18" fill="#b2f2bb" stroke="#2b8a3e" stroke-width="3"/>
+  <text x="565" y="402" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="24" font-weight="700" fill="#2b8a3e">MATCH — same decision on all 79 frames</text>
+  <text x="565" y="427" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="17" fill="#2b8a3e">0 speech/silence mismatches</text>
+</svg>

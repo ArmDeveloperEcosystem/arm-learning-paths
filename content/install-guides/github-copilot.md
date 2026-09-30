@@ -248,10 +248,6 @@ Create an `mcp.json` file in the `.vscode` directory with the following configur
         "--pull=always",
         "-v",
         "/path/to/your/workspace:/workspace",
-        "-v",
-        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v",
-        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }
@@ -278,10 +274,6 @@ Add the following configuration to the user-level `mcp.json` file:
         "--pull=always",
         "-v",
         "/path/to/your/workspace:/workspace",
-        "-v",
-        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v",
-        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }
@@ -290,8 +282,6 @@ Add the following configuration to the user-level `mcp.json` file:
 ```
 
 After saving your `mcp.json` file, a **Start** button appears at the top of the servers list. Select this button to start the Arm MCP Server.
-
-To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
 
 ## Optional: Use a Docker replacement containerization tool
 
@@ -319,8 +309,6 @@ Add the following configuration to the user-level `mcp.json` file:
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }
@@ -351,8 +339,6 @@ Add the following configuration to the user-level `mcp.json` file:
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }
@@ -384,8 +370,6 @@ Add the following configuration to the user-level `mcp.json` file:
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }
@@ -417,8 +401,6 @@ Add the following configuration to the user-level `mcp.json` file:
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ]
     }

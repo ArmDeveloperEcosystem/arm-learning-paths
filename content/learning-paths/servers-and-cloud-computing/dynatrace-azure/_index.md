@@ -71,7 +71,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Containers and Virtualization
 platforms:
-  - Microsoft Azure
+  - Microsoft Azure Cobalt
 
 armips:
     - Neoverse

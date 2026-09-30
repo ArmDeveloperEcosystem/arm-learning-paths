@@ -82,7 +82,7 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
 platforms:
-  - Microsoft Azure
+  - Microsoft Azure Cobalt
 tools_software_languages:
     - dotnet
     - csharp

@@ -14,18 +14,18 @@ pinned_learning_paths:
 - introduction-to-tinyml-on-arm
 operatingsystems_filter:
 - Android: 1
-- Baremetal: 30
-- Linux: 56
-- macOS: 21
-- RTOS: 12
+- Baremetal: 31
+- Linux: 59
+- macOS: 24
+- RTOS: 13
 - Windows: 12
 subjects_filter:
 - CI-CD: 7
-- Containers and Virtualization: 11
+- Containers and Virtualization: 10
 - Embedded Linux: 6
 - Libraries: 5
-- ML: 27
-- Performance and Architecture: 22
+- ML: 30
+- Performance and Architecture: 24
 - RTOS Fundamentals: 8
 - Security: 3
 - Virtual Hardware: 2
@@ -40,6 +40,8 @@ tools_software_languages_filter:
 - Arm Compute Library: 3
 - Arm Development Studio: 8
 - Arm Fast Models: 4
+- Arm Fixed Virtual Platform: 1
+- Arm GNU Toolchain: 1
 - Arm Performance Studio: 1
 - Arm Streamline: 1
 - Arm Virtual Hardware: 15
@@ -54,6 +56,7 @@ tools_software_languages_filter:
 - C: 12
 - ChatGPT: 1
 - Clang: 1
+- CMake: 2
 - CMSIS: 5
 - CMSIS-DSP: 1
 - CMSIS-Toolbox: 4
@@ -63,18 +66,18 @@ tools_software_languages_filter:
 - Containerd: 1
 - CPP: 1
 - DetectNet: 1
-- Docker: 18
+- Docker: 19
 - DSTREAM: 2
 - Edge AI: 2
 - Edge Impulse: 2
 - ETDump: 1
 - ETRecord: 1
-- ExecuTorch: 9
+- ExecuTorch: 12
 - FastAPI: 2
 - Fusion 360: 1
-- FVP: 10
-- Gazebo: 2
-- GCC: 14
+- FVP: 11
+- Gazebo: 1
+- GCC: 16
 - Generative AI: 3
 - GitHub: 4
 - GitLab: 2
@@ -90,16 +93,18 @@ tools_software_languages_filter:
 - Kubernetes: 1
 - LeRobot: 1
 - Linux kernel: 1
+- Linux traffic control: 1
 - LLM: 3
 - Matter: 1
 - MCP: 1
 - MediaPipe: 1
+- MobileSAM: 1
 - Model Explorer: 1
 - MPS3: 1
 - MQTT: 1
 - MuJoCo: 1
 - MXNet: 1
-- Navigation2: 2
+- Navigation2: 1
 - Neon: 1
 - NumPy: 1
 - Ollama: 2
@@ -110,17 +115,17 @@ tools_software_languages_filter:
 - Performance analysis: 1
 - picocom: 1
 - Porcupine: 1
-- Python: 20
-- PyTorch: 7
+- Python: 23
+- PyTorch: 9
 - QEMU: 2
-- Raspberry Pi: 10
+- Raspberry Pi: 11
 - Reachy Mini: 1
 - Remote.It: 1
 - remoteproc-runtime: 1
 - rmw_zenoh: 2
-- ROS 2: 2
+- ROS 2: 3
 - Runbook: 4
-- RViz: 2
+- RViz: 1
 - SEGGER JLink: 1
 - SEGGER RTT: 1
 - SSH: 3
@@ -138,11 +143,13 @@ tools_software_languages_filter:
 - TrustZone: 2
 - TVMC: 1
 - vcpkg: 1
+- Vela: 1
 - VGF: 1
 - Visual Studio Code: 2
 - YAML: 1
 - Yocto: 1
 - Yocto Project: 1
-- Zephyr: 5
+- Zenoh: 2
+- Zephyr: 6
 weight: 5
 ---

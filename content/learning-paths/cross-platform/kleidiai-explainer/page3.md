@@ -62,10 +62,15 @@ Do this by adding the following add_compile_options line to the `CMakeLists.txt`
 ```
 cmake_minimum_required(VERSION 3.16)
 
+project(matmul_clamp_f32_qai8dxp_qsi4cxp LANGUAGES C CXX ASM)
+
 set(CMAKE_CXX_STANDARD 17)
-set(KLEIDIAI_PATH ../../)
-set(MATMUL_PACK_PATH ${KLEIDIAI_PATH}/kai/ukernels/matmul/pack/)
-set(MATMUL_PATH ${KLEIDIAI_PATH}/kai/ukernels/matmul/matmul_clamp_f32_qai8dxp_qsi4cxp/)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+...
+
+target_compile_options(matmul_clamp_f32_qai8dxp_qsi4cxp PRIVATE -march=armv8.2-a+dotprod+i8mm)
 
 ######## Add this command
 add_compile_options(-march=armv8.6-a+dotprod+i8mm)
@@ -80,6 +85,7 @@ Then clear your build directory and build again.
 ```
 
 ```output
+Testing RHS format = K x N
 Testing matmul_clamp_f32_qai8dxp1x8_qsi4cxp4x8_1x4x32_neon_dotprod
 TEST[0] = PASSED
 Testing matmul_clamp_f32_qai8dxp1x8_qsi4cxp8x8_1x8x32_neon_dotprod
@@ -90,7 +96,14 @@ Testing matmul_clamp_f32_qai8dxp4x8_qsi4cxp4x8_8x4x32_neon_i8mm
 TEST[3] = PASSED
 Testing matmul_clamp_f32_qai8dxp4x8_qsi4cxp8x8_4x8x32_neon_i8mm
 TEST[4] = PASSED
-Testing matmul_clamp
+Testing matmul_clamp_f32_qai8dxp4x8_qsi4cxp8x8_8x8x32_neon_i8mm
+TEST[5] = PASSED
+Testing matmul_clamp_f32_qai8dxp4x4_qsi4cxp8x4_8x8x32_neon_dotprod
+TEST[6] = PASSED
+Testing matmul_clamp_f32_qai8dxp4x8_qsi4cxp4x4_16x4x32_neon_dotprod
+TEST[7] = PASSED
+Testing matmul_clamp_f32_qai8dxp1x4_qsi4cxp4x4_1x4_neon_dotprod
+TEST[8] = PASSED
 ```
 
 Again, this manual interaction with KleidiAI is for demonstration purposes. In real-world applications, your supported ML Framework handles interfacing with the KleidiAI library.
