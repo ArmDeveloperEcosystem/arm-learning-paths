@@ -23,9 +23,11 @@ Input tensor ready: (1, 3, 224, 224)
 Expected breed: newfoundland
 ```
 
-`Expected breed` is the dataset's reference label, not a model prediction: inference has not run yet. The helper uses the same pinned image processor as the exporter. It saves `input.bin`, `input.jpg`, and `reference.json` under `arm_test/deit_vgf/`. The reference file stores the breed-label mapping and the selected image's reference label for inspection.
+`Expected breed` is the dataset's reference label. It's not a model prediction because you haven't run inference yet. 
 
-`input.bin` contains the normalized float32 tensor in `[1, 3, 224, 224]` batch, channel, height, width order. The runner reads this tensor, not the JPEG. Open `input.jpg` in an image viewer to inspect the pet you will classify.
+The helper uses the same pinned image processor as the exporter. It saves `input.bin`, `input.jpg`, and `reference.json` under `arm_test/deit_vgf/`. The reference file stores the breed-label mapping and the selected image's reference label for inspection.
+
+`input.bin` contains the normalized float32 tensor in `[1, 3, 224, 224]` batch, channel, height, width order. The runner reads this tensor, not the JPEG. Open `input.jpg` in an image viewer to inspect the pet that you'll classify.
 
 ## Run inference through VGF
 
@@ -42,7 +44,7 @@ set -o pipefail
 
 A successful run reports `Model executed successfully` and writes `arm_test/deit_vgf/prediction-0.bin`. The runner appends `-0.bin` for the first output tensor.
 
-Keep `--inputs`: without it, the generic runner fills the input tensor with ones instead of classifying your pet image.
+Keep `--inputs`. Without the flag, the generic runner fills the input tensor with ones instead of classifying your pet image.
 
 ## Inspect the breed prediction
 
@@ -62,17 +64,17 @@ Output scores: 37 finite values
 VGF execution: confirmed
 ```
 
-`Output scores: 37 finite values` means there is one valid numeric score per breed, with no NaN or infinite values. The helper maps the largest score to the breed shown as `VGF prediction`. In this example, `Matches dataset label: True` means the predicted Newfoundland breed matches this image's reference label.
+`Output scores: 37 finite values` means there's one valid numeric score per breed, with no NaN or infinite values. The helper maps the largest score to the breed shown as `VGF prediction`. In this example, `Matches dataset label: True` means the predicted Newfoundland breed matches this image's reference label.
 
 The helper also checks the runtime log for `Entered VGF init` and `Model executed successfully` before reporting `VGF execution: confirmed`.
 
-A valid prediction and confirmed VGF execution complete the deployment workflow. A matching dataset label means the model recognizes this image; a mismatch does not by itself indicate a deployment failure.
+A valid prediction and confirmed VGF execution complete the deployment workflow. A matching dataset label means the model recognizes this image. A mismatch doesn't, by itself, indicate a deployment failure.
 
 {{% notice Note %}}
-One image does not measure dataset accuracy. The export log reports quantized PyTorch accuracy, not VGF accuracy across the test set. This host emulation run also does not establish performance on an Arm GPU.
+One image doesn't measure dataset accuracy. The export log reports quantized PyTorch accuracy, not VGF accuracy across the test set. This host emulation run also doesn't establish performance on an Arm GPU.
 {{% /notice %}}
 
-## Optional: compare with the floating-point model
+## (Optional) Compare with the floating-point model
 
 Run the original fine-tuned model on the same input and compare its winning class with the VGF result:
 
@@ -98,6 +100,8 @@ The helper adds the floating-point prediction and whether the two predictions ma
 
 To classify another test image, repeat `prepare` with `--sample-index 1`, then rerun inference and inspection. Each preparation replaces the previous input artifacts. The helper rejects predictions and logs that predate the prepared image, so you must rerun `executor_runner` before inspecting a new image.
 
-## What you've accomplished
+## What you've accomplished 
 
-You have fine-tuned DeiT-Tiny, exported a VGF-backed program, and classified a pet image with the host runtime. Your model, input, prediction, and logs are in `arm_test/deit_vgf/`. You can now reuse the `.pte` to classify other test images.
+You've fine-tuned DeiT-Tiny, exported a VGF-backed program, and classified a pet image with the host runtime. Your model, input, prediction, and logs are in `arm_test/deit_vgf/`. 
+
+You can now reuse the `.pte` to classify other test images.
