@@ -5,7 +5,7 @@ description: Build an on-device English-to-Spanish voice translator on an Apple 
 
 minutes_to_complete: 45
 
-who_is_this_for: This Learning Path is for Python developers who want to translate English speech into spoken Spanish on macOS with local speech and language models.
+who_is_this_for: This Learning Path is for Python developers who want to implement a translation speech pipeline locally. Whilst we focus specifically on translating to Spanish, these steps are applicable to any other supported translation pair.
 
 learning_objectives:
     - Prepare LiteRT-LM and a Gemma 4 model for local translation on an Apple Silicon Mac.
