@@ -42,15 +42,14 @@ generated_summary_faq:
   - question: Which ExecuTorch release should I use?
     answer: >-
       Use the ExecuTorch 1.5.1 release for both the Python package and the native source. This
-      release uses stable PyTorch and TorchAO as referenced by the example.
+      release uses stable PyTorch and TorchAO.
   - question: Do the Vulkan packages install my GPU’s driver?
     answer: >-
       No. The listed packages provide Vulkan libraries and tools but don't install a vendor‑specific
       driver. Ensure that your GPU’s Vulkan driver is installed and working before building and running
       the VGF runner.
-  - question: Do I need to modify the example scripts before training or export?
+  - question: What does the helper script do?
     answer: >-
-      No. Use the ExecuTorch example’s training and export scripts as provided.
       The Learning Path helper handles checkpoint compatibility, image preparation, and breed
       decoding.
   - question: How can I confirm that the export completed successfully?

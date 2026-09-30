@@ -5,13 +5,13 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Classify a pet image with VGF
+## How you'll classify a pet image with VGF
 
 You'll fine-tune a Data-efficient Image Transformer (DeiT) model called DeiT-Tiny to recognize 37 cat and dog breeds. You'll then export the classifier with the Arm VGF backend and run a pet image through ExecuTorch. The classifier selects one of the 37 breed labels for the image.
 
-You'll use the training and export scripts from the [ExecuTorch 1.5.1 example](https://github.com/pytorch/executorch/tree/v1.5.1/examples/arm/image_classification_example_vgf). You'll then run inference with `executor_runner`. A downloadable Learning Path helper handles checkpoint compatibility, image preparation, and breed decoding, so you don't need to edit the example.
+You'll use the training and export scripts from the [ExecuTorch 1.5.1 example](https://github.com/pytorch/executorch/tree/v1.5.1/examples/arm/image_classification_example_vgf). You'll then run inference with `executor_runner`. A downloadable helper handles checkpoint compatibility, image preparation, and breed decoding, so you don't need to edit the example.
 
-## Follow the model through the pipeline
+### Follow the model through the pipeline
 
 Follow these stages:
 
@@ -31,9 +31,9 @@ The model uses the following tensor interfaces:
 
 Quantization applies inside the model. You still supply the normalized floating-point image expected by its exported input.
 
-## Understand the execution target
+### Understand the execution target
 
-The ML SDK for Vulkan supplies emulation layers for the Arm tensor and data graph extensions. These let you develop the VGF workflow on a compatible host GPU before integrating it with a device application.
+The ML SDK for Vulkan supplies emulation layers for the Arm tensor and data graph extensions. These layers let you develop the VGF workflow on a compatible host GPU before integrating it with a device application.
 
 You'll validate host execution and a breed prediction. Timing from this emulation workflow doesn't establish performance on an Arm GPU, and this example doesn't deploy an Android application.
 

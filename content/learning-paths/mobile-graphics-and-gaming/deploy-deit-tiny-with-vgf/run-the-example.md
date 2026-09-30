@@ -9,7 +9,7 @@ aliases:
 
 ## Prepare a pet image
 
-Keep your Python environment active and `examples/arm/arm-scratch/setup_path.sh` sourced. Use the Learning Path helper to prepare the first image in the dataset's test split:
+Keep your Python environment active and `examples/arm/arm-scratch/setup_path.sh` sourced. Use the downloaded helper to prepare the first image in the dataset's test split:
 
 ```bash
 python arm_test/deit_vgf/deit_vgf_helper.py prepare
@@ -96,12 +96,8 @@ Matches FP32 prediction: True
 
 The helper adds the floating-point prediction and whether the two predictions match. Quantization can change the winning class. Compare more images before drawing conclusions about accuracy or numerical equivalence.
 
-## Classify another test image
-
-To classify another test image, repeat `prepare` with `--sample-index 1`, then rerun inference and inspection. Each preparation replaces the previous input artifacts. The helper rejects predictions and logs that predate the prepared image. Rerun `executor_runner` before inspecting a new image.
-
 ## What you've accomplished
 
 You've fine-tuned DeiT-Tiny, exported a VGF-backed program, and classified a pet image with the host runtime. Your model, input, prediction, and logs are in `arm_test/deit_vgf/`.
 
-You can now reuse the `.pte` to classify other test images.
+You can now reuse the `.pte` to classify other test images. To classify another test image, repeat `prepare` with `--sample-index 1`, then rerun inference and inspection. Each preparation replaces the previous input artifacts. The helper rejects predictions and logs that predate the prepared image. Rerun `executor_runner` before inspecting a new image.

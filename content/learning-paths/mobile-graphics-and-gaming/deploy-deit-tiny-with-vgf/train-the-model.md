@@ -26,9 +26,9 @@ Record the accuracy from your run. Training speed and final accuracy depend on y
 
 ## Prepare the checkpoint for export
 
-At the pinned revision, the trainer saves `model.safetensors`, but `export_deit.py` loads with `use_safetensors=False`. The Learning Path helper converts the weight-file format for export without retraining the model.
+At the pinned revision, the trainer saves `model.safetensors`, but `export_deit.py` loads with `use_safetensors=False`. The downloadable helper for the Learning Path converts the weight-file format for export without retraining the model.
 
-Download the [DeiT-Tiny helper](../deit_vgf_helper.py), which also prepares images and decodes predictions:
+Download the [helper](../deit_vgf_helper.py), which also prepares images and decodes predictions:
 
 ```bash
 curl --fail --location \

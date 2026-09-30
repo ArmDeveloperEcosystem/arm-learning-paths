@@ -52,4 +52,4 @@ The `.pte` includes its VGF delegate data. You don't need to supply a separate `
 
 You've produced a quantized VGF-backed program and recorded its host accuracy.
 
-Next, you'll classify a pet image with the runner you built during setup.
+Next, you'll classify a pet image with the runner that you built during setup.
