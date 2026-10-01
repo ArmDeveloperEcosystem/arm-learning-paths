@@ -14,9 +14,53 @@ prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
     - Familiarity with relational databases and the basics of [MySQL](https://dev.mysql.com/doc/refman/8.0/en/introduction.html)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-01T19:36:26Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 2a34346f8cd7954362d479429942c9b66c863f4470d3e7cdf49efbc6093c54cd
+  summary_generated_at: '2026-10-01T19:36:26Z'
+  summary_source_hash: 2a34346f8cd7954362d479429942c9b66c863f4470d3e7cdf49efbc6093c54cd
+  faq_generated_at: '2026-10-01T19:36:26Z'
+  faq_source_hash: 2a34346f8cd7954362d479429942c9b66c863f4470d3e7cdf49efbc6093c54cd
+  summary: >-
+    Deploy MySQL on an Arm64 Azure Cobalt 100 virtual machine and establish a performance baseline.
+    You provision an Ubuntu Pro 24.04 LTS Dpsv6 VM in the Azure portal, then install, secure,
+    and validate MySQL. After creating sample data, you use `mysqlslap` to run read and write
+    benchmarks, interpret the reported timings, and capture results that you can use in later
+    comparisons.
+  faqs:
+  - question: Which Azure VM size and image should I select for this path?
+    answer: >-
+      Use a general-purpose Dpsv6 series instance based on Azure Cobalt 100, and choose Ubuntu
+      Pro 24.04 LTS as the base image. You create this VM in the Azure portal.
+  - question: Can I provision the VM with the Azure CLI or infrastructure as code instead of
+      the portal?
+    answer: >-
+      Several methods are possible, but you use the Azure portal in the documented workflow.
+      Follow the portal steps to match the configuration shown.
+  - question: How do I confirm MySQL is running before moving on?
+    answer: >-
+      Start MySQL and enable it to start on boot using the provided `systemctl` commands. Then perform
+      the functional validation to confirm queries run and users can authenticate.
+  - question: Should I deploy MySQL with Docker or use native packages?
+    answer: >-
+      You install and secure MySQL directly on the Ubuntu VM. A Docker-based deployment isn't
+      covered.
+  - question: What should I do before running mysqlslap, and what output should I expect?
+    answer: >-
+      Connect to MySQL and create the sample database and table before benchmarking. `mysqlslap`
+      simulates multiple clients and reports timing statistics that you can use as your baseline.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -61,4 +105,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

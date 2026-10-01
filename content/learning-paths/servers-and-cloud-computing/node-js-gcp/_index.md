@@ -15,9 +15,52 @@ prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Familiarity with networking concepts and [Node.js event-driven architecture](https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-01T19:41:01Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: c21d775ef47f9befc1046df0d89f746550a180b29974c45261e0478f59df503e
+  summary_generated_at: '2026-10-01T19:41:01Z'
+  summary_source_hash: c21d775ef47f9befc1046df0d89f746550a180b29974c45261e0478f59df503e
+  faq_generated_at: '2026-10-01T19:41:01Z'
+  faq_source_hash: c21d775ef47f9befc1046df0d89f746550a180b29974c45261e0478f59df503e
+  summary: >-
+    Deploy and benchmark a Node.js workload on an Arm-based Google Cloud C4A virtual machine.
+    You provision a SUSE Linux Enterprise Server instance on Google Axion, then install Node.js
+    with Node Version Manager (NVM). You validate the runtime in the read-eval-print loop (REPL)
+    and with a minimal HTTP server. Finally, you use Autocannon to measure request throughput
+    and latency and capture a baseline for the VM.
+  faqs:
+  - question: Which VM options should I select when creating the instance?
+    answer: >-
+      Use a C4A machine type; the example uses `c4a-standard-4` with four vCPUs and 16 GB. Select a SUSE Linux
+      Enterprise Server image for Arm64 to match the Learning Path objectives.
+  - question: NVM isn’t found after installation—what should I do?
+    answer: >-
+      Load NVM into your current shell using the commands shown in the installation step. If needed,
+      open a new terminal session so your profile changes take effect.
+  - question: How do I confirm Node.js is working before I benchmark?
+    answer: >-
+      Run the REPL test to print a message and start the sample HTTP server. Proceed when the
+      server responds to an HTTP request on the configured port.
+  - question: What URL should I pass to Autocannon?
+    answer: >-
+      Use the address and port where your sample Node.js server is listening, such as `localhost`
+      with the configured port. Run Autocannon against that endpoint to collect results.
+  - question: How do I know I’m running on an Arm-based Axion VM?
+    answer: >-
+      Check that the instance type is C4A in the Google Cloud console. C4A instances use Google
+      Axion processors with Arm Neoverse-V2 cores. The workload targets AArch64.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -61,4 +104,3 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
-

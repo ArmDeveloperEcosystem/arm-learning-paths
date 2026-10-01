@@ -15,9 +15,59 @@ learning_objectives:
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
     - Basic familiarity with SSH and MySQL command-line tools
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-01T19:36:51Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: d6d2cda672e5ed693210356f269aa015cb9b3b80fc92c9c33c200e6d83717b15
+  summary_generated_at: '2026-10-01T19:36:51Z'
+  summary_source_hash: d6d2cda672e5ed693210356f269aa015cb9b3b80fc92c9c33c200e6d83717b15
+  faq_generated_at: '2026-10-01T19:36:51Z'
+  faq_source_hash: d6d2cda672e5ed693210356f269aa015cb9b3b80fc92c9c33c200e6d83717b15
+  summary: >-
+    Migrate a MySQL database from a simulated on-premises x64 server to an Arm-based Azure Cobalt
+    100 virtual machine. You prepare the source VM, install the required tools, and load a sample
+    database. You then configure and run the migration scripts to provision the target and restore
+    the database. Finally, you connect to the Arm VM, run a `sysbench` workload, and review the
+    results.
+  faqs:
+  - question: Which architecture should I choose for the on-premises simulator VM?
+    answer: >-
+      Choose x64 for the simulator VM. It acts as the on-premises MySQL source that you migrate
+      from.
+  - question: Where do I run the migration scripts, and what SSH key do they generate?
+    answer: >-
+      Run the scripts from the downloaded asset repository, for example in `$HOME/lift-n-shift-assets`.
+      The `scripts/create_ssh_key.sh` script generates an SSH key pair in `$HOME/.ssh` and prints the public
+      key.
+  - question: What should I enter when the key generation script prompts for a passphrase, and
+      what output should I keep?
+    answer: >-
+      Press **Enter** to leave the passphrase empty, as instructed. Save the printed `ssh-rsa` public
+      key string for use with the Azure VM.
+  - question: How do I connect to the Arm-based Azure VM before running the benchmark, and which
+      user and key should I use?
+    answer: >-
+      From the on-premises simulator, SSH to the Arm VM using the key created earlier in `$HOME/.ssh`
+      and the `azureadmin` user at the VM’s public IP. Use the filename you identified for the Azure
+      cloud key.
+  - question: Where should I create and run the benchmarking script, and what result should I
+      expect?
+    answer: >-
+      Create and run the script, for example `run.sh`, on the Arm-based Azure Cobalt 100 VM after
+      connecting with SSH. Expect `sysbench` to produce a summary of performance metrics that you
+      can review to validate the migrated database.
+# END generated_summary_faq
+
 author: Doug Anson
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

@@ -18,11 +18,57 @@ prerequisites:
   - Working knowledge of Docker, Git, and common Linux terminal tools
   - Basic understanding of the server firmware stack (such as UEFI, BMC, and TF-A)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-01T19:42:25Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 285ebf154e6d58463132fc7914c672250ff2d66d0657710ec7eebd557386cbd4
+  summary_generated_at: '2026-10-01T19:42:25Z'
+  summary_source_hash: 285ebf154e6d58463132fc7914c672250ff2d66d0657710ec7eebd557386cbd4
+  faq_generated_at: '2026-10-01T19:42:25Z'
+  faq_source_hash: 285ebf154e6d58463132fc7914c672250ff2d66d0657710ec7eebd557386cbd4
+  summary: >-
+    Simulate an Arm server boot flow on the Neoverse RD-V3 r1 Fixed Virtual Platform (FVP). You
+    build OpenBMC and host UEFI images in a Docker environment, launch the FVP, and follow the
+    firmware logs through multiple UART consoles. You then bridge virtual UARTs to validate Serial
+    over LAN communication. Finally, you add a C++ Intelligent Platform Management Interface
+    (IPMI) handler to OpenBMC, rebuild the image, and verify its response.
+  faqs:
+  - question: What result should I expect when the RD-V3 FVP starts?
+    answer: >-
+      Multiple UART consoles open in separate terminal windows for different subsystems, such
+      as Neoverse V3, Cortex-M55, Cortex-M7, and the Cortex-A BMC. You should see boot logs for
+      both the BMC and host UEFI across these consoles.
+  - question: The FVP UART consoles do not appear over SSH. What should I check?
+    answer: >-
+      The consoles are graphical terminals and require a desktop session. If you are connected
+      over SSH only, the windows won't render; launch the simulation from a desktop session.
+  - question: Which ports should I bridge to enable Serial over LAN (SoL)?
+    answer: >-
+      Use the provided bridge: `socat -x tcp:localhost:5005 tcp:localhost:5067`. Verify that these
+      port mappings match the endpoints exposed by your running simulation.
+  - question: After creating the UART bridge, what should I see when opening the host console
+      from the BMC web UI?
+    answer: >-
+      The host console should be accessible through SoL and display the host’s console output.
+      You should see ongoing boot messages or a prompt from the host side.
+  - question: How do I validate that my custom IPMI command works?
+    answer: >-
+      Issue the command using `ipmitool` and check for the expected simple string response. If the
+      response is not returned, ensure the C++ handler is integrated and rebuild the OpenBMC image
+      before re-running the simulation.
+# END generated_summary_faq
+
 author:
   - Odin Shen
   - Ken Zhang
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -69,4 +115,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

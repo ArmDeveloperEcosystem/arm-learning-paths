@@ -19,11 +19,58 @@ prerequisites:
     - Understanding of firmware boot stages and SoC-level architecture
     - Docker installed, or a GitHub Codespaces-compatible development environment
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-01T19:38:48Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: edcf755937689018d68a687def84b27f119fcfa2542949294f965c21e0d0d642
+  summary_generated_at: '2026-10-01T19:38:48Z'
+  summary_source_hash: edcf755937689018d68a687def84b27f119fcfa2542949294f965c21e0d0d642
+  faq_generated_at: '2026-10-01T19:38:48Z'
+  faq_source_hash: edcf755937689018d68a687def84b27f119fcfa2542949294f965c21e0d0d642
+  summary: >-
+    Build the Arm Neoverse RD-V3 firmware stack and test it on an Arm Fixed Virtual Platform (FVP)
+    before hardware is available. You prepare a repeatable environment, sync pinned sources, compile
+    the boot chain, and select the FVP version that matches your release. You then map UART consoles,
+    follow the boot to a Buildroot Linux shell, validate firmware changes, and run the dual-chip
+    RD-V3-R1 simulation.
+  faqs:
+  - question: How do I choose the correct FVP model for my RD-V3 build?
+    answer: >-
+      Match the FVP model version to the RD-V3 release tag you're using. The instructions include an
+      example mapping and point to the release tags list for the full set of supported versions.
+  - question: What result should I expect when the single-die simulation boots successfully?
+    answer: >-
+      The system boots from BL1 through the firmware stack to a Buildroot Linux shell on the FVP.
+      You should see logs across the mapped UART consoles for each stage and a Linux prompt on
+      the application processor path.
+  - question: What should I check if the boot hangs before reaching Linux?
+    answer: >-
+      Review the UART outputs to find the last active stage and identify where control stopped.
+      Confirm the FVP version matches your selected RD-V3 release tag and re-sync sources to the
+      pinned manifest before rebuilding.
+  - question: How do I validate a change to SCP, MCP, or LCP firmware?
+    answer: >-
+      Rebuild the affected platform control firmware, then rerun the FVP simulation. Inspect the
+      corresponding UART logs for your expected messages or behavior and confirm the system still
+      reaches the Linux shell.
+  - question: How do I know the dual-chip RD-V3-R1 simulation is running correctly?
+    answer: >-
+      Look for a dual-AP boot flow and MCP activity coordinating across dies. Both dies should
+      produce console output, and the expected cross-die management
+      behavior should be visible in the logs.
+# END generated_summary_faq
+
 author:
     - Odin Shen
     - Ann Cheng
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -64,4 +111,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

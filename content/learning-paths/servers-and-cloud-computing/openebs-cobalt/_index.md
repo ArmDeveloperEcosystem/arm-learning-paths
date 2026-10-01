@@ -19,9 +19,53 @@ prerequisites:
   - Familiarity with SSH and remote server access
   - Basic understanding of Kubernetes concepts and containerized applications
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-01T19:43:29Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 33e9470ccc06f4835028050615832b7200164ec6ba1fdbc26689e6f4fd43bfa4
+  summary_generated_at: '2026-10-01T19:43:29Z'
+  summary_source_hash: 33e9470ccc06f4835028050615832b7200164ec6ba1fdbc26689e6f4fd43bfa4
+  faq_generated_at: '2026-10-01T19:43:29Z'
+  faq_source_hash: 33e9470ccc06f4835028050615832b7200164ec6ba1fdbc26689e6f4fd43bfa4
+  summary: >-
+    Add Kubernetes-native persistent storage to a workload on an Arm64 Azure Cobalt 100 virtual
+    machine. You create a single-node K3s cluster, install OpenEBS LocalPV with Helm, and configure
+    its storage class. You then create a PersistentVolumeClaim, mount it in an NGINX application,
+    and verify that test data survives pod recreation. Finally, you expose the application through
+    a NodePort and update the Azure network security group for inbound access.
+  faqs:
+  - question: Which Azure VM size should I pick for this setup?
+    answer: >-
+      Use a general-purpose virtual machine in the Dpsv6 series powered by Azure Cobalt 100. For
+      detailed creation instructions, see the Dpsv6 guidance or the Deploy a Cobalt 100 virtual
+      machine on Azure Learning Path.
+  - question: How do I expose the sample application so I can reach it from my browser?
+    answer: >-
+      Expose the NGINX deployment as a NodePort service and run `kubectl get svc` to see the assigned
+      port. Then add an inbound rule for that NodePort in the VM’s Network Security Group.
+  - question: What storage configuration should I use for the PersistentVolumeClaim?
+    answer: >-
+      Use `storageClassName: openebs-hostpath` and `accessModes: ReadWriteOnce` as shown in the PVC
+      manifest. This configuration targets OpenEBS LocalPV for dynamic provisioning.
+  - question: How do I know persistent storage is working before I move on?
+    answer: >-
+      Write data to the mounted volume in the NGINX pod, delete the pod, and let it recreate.
+      If the data is still present after the pod comes back, the volume is persisting as expected.
+  - question: Do I need a multi-node cluster?
+    answer: >-
+      No. You use a lightweight single-node Kubernetes cluster with K3s on the Azure Cobalt
+      100 VM. Multi-node scenarios are not covered here.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

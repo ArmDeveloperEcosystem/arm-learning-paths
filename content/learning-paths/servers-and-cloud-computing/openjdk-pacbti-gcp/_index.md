@@ -16,9 +16,53 @@ prerequisites:
     - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
     - Optionally, [install the gcloud CLI](/install-guides/gcloud/) to connect to the VM from a local terminal instead of using the browser-based SSH
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-01T19:43:54Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 1e27a00bafb12e1648af702e7eadeefc15ceefb119b7e6eb3e4824787d547271
+  summary_generated_at: '2026-10-01T19:43:54Z'
+  summary_source_hash: 1e27a00bafb12e1648af702e7eadeefc15ceefb119b7e6eb3e4824787d547271
+  faq_generated_at: '2026-10-01T19:43:54Z'
+  faq_source_hash: 1e27a00bafb12e1648af702e7eadeefc15ceefb119b7e6eb3e4824787d547271
+  summary: >-
+    Validate Pointer Authentication (PAC) and Branch Target Identification (BTI) support in Java
+    on a Google Axion C4A virtual machine. You provision a SUSE Linux Enterprise Server VM, install
+    OpenJDK, and run a script that checks platform capabilities and Java virtual machine (JVM)
+    just-in-time (JIT) compiler support. You then install Oracle JDK 21, repeat the tests, and
+    compare how each runtime reports branch-protection support.
+  faqs:
+  - question: How do I verify which JVM is active after installation?
+    answer: >-
+      Run `java --version`. The output should identify the distribution and version, for example
+      OpenJDK 17 on `aarch64`.
+  - question: How do I know the C4A VM exposes PAC and BTI?
+    answer: >-
+      Run the provided test script and review its hardware checks. It should report that PAC and
+      BTI are available before you evaluate JVM compiler behavior.
+  - question: What result should I expect from the SUSE OpenJDK 17 tests?
+    answer: >-
+      The tests confirm the platform exposes PAC and BTI, but the SUSE-packaged OpenJDK 17 JIT
+      does not emit PAC/BTI instructions. This distinguishes hardware capability from the compiler’s
+      code generation.
+  - question: How do I ensure the tests run against Oracle JDK 21?
+    answer: >-
+      Invoke the Java binary from the extracted JDK's `bin` directory as shown, for example
+      `./jdk-21.0.11/bin/java`. The exact minor version in `--version` output might differ.
+  - question: Which C4A machine type should I use for this validation?
+    answer: >-
+      Use the `c4a-standard-4` machine type specified in the instructions. Other sizes aren't covered
+      here.
+# END generated_summary_faq
+
 author: Doug Anson
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

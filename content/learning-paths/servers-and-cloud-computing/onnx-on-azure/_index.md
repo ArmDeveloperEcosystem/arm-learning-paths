@@ -14,9 +14,56 @@ prerequisites:
     - Basic understanding of Python and machine learning concepts
     - Familiarity with [ONNX Runtime](https://onnxruntime.ai/docs/) and Azure cloud services
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-01T19:41:46Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 3dfb5d613a9e88a35777de0adc65fbcacd46a906031c4d933c744abf9689e6a0
+  summary_generated_at: '2026-10-01T19:41:46Z'
+  summary_source_hash: 3dfb5d613a9e88a35777de0adc65fbcacd46a906031c4d933c744abf9689e6a0
+  faq_generated_at: '2026-10-01T19:41:46Z'
+  faq_source_hash: 3dfb5d613a9e88a35777de0adc65fbcacd46a906031c4d933c744abf9689e6a0
+  summary: >-
+    Run and benchmark SqueezeNet 1.0 INT8 inference with ONNX Runtime on an Arm-based Azure Cobalt
+    100 virtual machine. You provision an Ubuntu Pro 24.04 LTS Dpsv6 VM and prepare a Python
+    environment. You then run a baseline script to validate inference and record latency. Finally,
+    you use `onnxruntime_perf_test` to collect more detailed performance statistics on the Arm64
+    system.
+  faqs:
+  - question: Which Azure VM size and OS image should I select for this workflow?
+    answer: >-
+      Choose a Cobalt 100-based Dpsv6 VM from the D-series and use Ubuntu Pro 24.04 LTS. You
+      use the Azure portal to create this configuration.
+  - question: What do I need in place before running the baseline latency test?
+    answer: >-
+      Activate your Python virtual environment, have the `baseline.py` script ready, and ensure
+      the SqueezeNet INT8 model file is available as `squeezenet-int8.onnx`. Place the model in
+      the same working directory as the script or provide its full path.
+  - question: How do I know the baseline test worked correctly?
+    answer: >-
+      The script completes without errors and reports a timing result for a single inference through
+      the SqueezeNet INT8 model. Successful execution confirms that ONNX Runtime is functioning
+      on the VM.
+  - question: When should I use `onnxruntime_perf_test`, and what output should I expect?
+    answer: >-
+      Use `onnxruntime_perf_test` after validating the Python baseline to capture more detailed
+      performance statistics. Expect a summary of inference metrics that you can use to evaluate
+      ONNX Runtime efficiency on the Azure Arm64 instance.
+  - question: What should I check if the script cannot find `squeezenet-int8.onnx`?
+    answer: >-
+      Verify the file name matches `squeezenet-int8.onnx` and confirm the working directory contains
+      the model. Alternatively, update the script to reference the model with an absolute or correct
+      relative path.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
