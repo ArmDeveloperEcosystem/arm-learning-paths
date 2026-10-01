@@ -17,11 +17,11 @@ sudo apt-get install -y \
   libvulkan1 libvulkan-dev vulkan-tools unzip xz-utils
 ```
 
-Your GPU's Vulkan driver must also be installed and working. These packages do not install a vendor-specific driver.
+Your GPU's Vulkan driver must also be installed and working. These packages don't install a vendor-specific driver.
 
-## Get the ExecuTorch release
+## Clone the ExecuTorch release
 
-Use the [ExecuTorch 1.5.1 release](https://github.com/pytorch/executorch/releases/tag/v1.5.1) for both the Python package and native source. This release uses stable PyTorch and TorchAO packages; the instructions do not depend on a dated nightly wheel.
+Use the [ExecuTorch 1.5.1 release](https://github.com/pytorch/executorch/releases/tag/v1.5.1) for both the Python package and native source. This release uses stable PyTorch and TorchAO packages. The instructions don't depend on a dated nightly wheel.
 
 Create a new workspace in a path without spaces, then clone the matching source:
 
@@ -36,7 +36,9 @@ git submodule sync --recursive
 git submodule update --init --recursive
 ```
 
-Keep the repository directory named `executorch`: the build checks this name. Run all remaining commands from this repository root, in the same shell. The source checkout provides the example and C++ runner; export uses the matching released Python package.
+Keep the repository directory named `executorch`. The build checks this name. Run all remaining commands from this repository root in the same shell.
+
+The source checkout provides the example and C++ runner. Export uses the matching released Python package.
 
 ## Create the Python environment
 
@@ -50,7 +52,7 @@ mkdir -p arm_test/deit_vgf
 set -o pipefail
 ```
 
-The directory holds your model, images, and logs. `pipefail` preserves command failures when you save logs with `tee` later in the Learning Path.
+The directory holds your model, images, and logs. `pipefail` preserves command failures when you save logs with `tee` later.
 
 ## Configure the ML SDK for Vulkan
 
@@ -60,7 +62,7 @@ Review the [ML SDK license terms](https://github.com/arm/ai-ml-sdk-for-vulkan/tr
 bash examples/arm/setup.sh --disable-ethos-u-deps --enable-mlsdk-deps
 ```
 
-The script downloads the Vulkan SDK and configures the packaged ML emulation layers. It also installs three developer-only packages that this Learning Path does not use. Remove those packages from the fresh virtual environment before resolving the example's dependencies:
+The script downloads the Vulkan SDK and configures the packaged ML emulation layers. It also installs three developer-only packages that you don't need for this Learning Path. Remove them from the fresh virtual environment before resolving the example's dependencies:
 
 ```bash
 python -m pip uninstall -y \
@@ -91,9 +93,9 @@ No broken requirements found.
 
 This installs Transformers 5.3.0 and ML SDK packages 0.10.0. Scikit-learn supplies the training script's accuracy metric.
 
-The `+cpu` wheels still support the VGF runner's Vulkan execution; they make the Python training and export environment independent of CUDA.
+The `+cpu` wheels still support the VGF runner's Vulkan execution. They make the Python training and export environment independent of CUDA.
 
-Run this dependency installation after SDK setup: it resolves the older FlatBuffers version installed by the setup script. Do not run `install_executorch.sh`; this Learning Path uses released wheels instead of its nightly indexes. If you rerun SDK setup, repeat the developer-only package removal in **Configure the ML SDK for Vulkan**, then the installation in **Install the Python dependencies**.
+The dependency installation resolves the older FlatBuffers version installed by the SDK setup script. Don't run `install_executorch.sh`; you'll use released wheels instead of its nightly indexes. If you rerun the SDK setup, remove the developer-only packages and repeat the dependency installation.
 
 Load the generated SDK environment:
 
@@ -101,10 +103,10 @@ Load the generated SDK environment:
 source examples/arm/arm-scratch/setup_path.sh
 ```
 
-In a new shell, return to the repository root, activate `.venv`, source this `setup_path.sh`, and enable `set -o pipefail` again.
+In a new shell, return to the repository root, activate `.venv`, source `setup_path.sh`, and enable `set -o pipefail` again.
 
 {{% notice Note %}}
-This flow uses the packaged emulation layer, which needs `shaderFloat64` support at this release. Use a compatible Linux host for these commands. The [ML SDK source-build helper](https://github.com/pytorch/executorch/blob/v1.5.1/backends/arm/scripts/setup-mlsdk-from-source.sh) documents the separate source-build route for other configurations.
+You'll use the packaged emulation layer, which needs `shaderFloat64` support at this release. Use a compatible Linux host for these commands. For a separate source-build route for other configurations, see the [ML SDK source-build helper](https://github.com/pytorch/executorch/blob/v1.5.1/backends/arm/scripts/setup-mlsdk-from-source.sh).
 {{% /notice %}}
 
 ## Check the environment
@@ -120,7 +122,7 @@ vulkaninfo --summary
 vulkaninfo | grep shaderFloat64
 ```
 
-Resolve any `FAIL` entries before continuing. The tool paths should belong to this environment, and the Vulkan summary should identify your GPU and driver. Confirm `shaderFloat64 = true` for the device you will use.
+Resolve any `FAIL` entries before continuing. The tool paths should belong to this environment, and the Vulkan summary should identify your GPU and driver. Confirm `shaderFloat64 = true` for the device that you'll use.
 
 ## Build the host runner
 
@@ -143,6 +145,8 @@ cmake --build cmake-out-deit-vgf --target executor_runner --parallel 4
 
 `EXECUTORCH_BUILD_VGF` includes the Arm VGF delegate. The Vulkan option enables the associated runtime components. The build produces `cmake-out-deit-vgf/executor_runner` for your host architecture.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You have prepared the release-based environment and built the VGF runner. Next, you will fine-tune the classifier and prepare its checkpoint for export.
+You've prepared the release-based environment and built the VGF runner.
+
+Next, you'll fine-tune the classifier and prepare its checkpoint for export.

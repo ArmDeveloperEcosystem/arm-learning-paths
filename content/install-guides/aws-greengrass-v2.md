@@ -137,7 +137,7 @@ After creating the IAM policy, create an IAM user group and attach the policy to
 2. To create a new user group, select **Create group**.
 3. For **User group name**, enter **gg_installer_group**.
 4. Under **Attach permissions policies**, search for and select the policy **GGDeploymentAccess** that you created earlier. 
-   ![AWS IAM Create user group page with gg_installer_group entered as the group name and the GGDeploymentAccess policy selected.#center](/install-guides/_images/greengrass-new-group.png)
+   ![AWS IAM Create user group page with gg_installer_group entered as the group name and the GGDeploymentAccess policy selected.#center](/install-guides/_images/greengrass-new-group.webp)
 5. Select **Create group**.
 
 ### Create the AWS Greengrass installer IAM user {#prepare-your-aws-role}
@@ -152,7 +152,7 @@ To create the IAM user, complete the following steps:
 3. For **User name**, enter **gg_installer_user**. 
 4. To include access to the AWS Console, select the checkbox **Provide user access to the AWS Management Console**.
 5. For **Console password**, select **Custom password** and provide a password for the new user.
-   ![AWS IAM Specify user details page with gg_installer_user as the user name, console access enabled, and Custom password selected.#center](/install-guides/_images/greengrass-create-iam-user.png)
+   ![AWS IAM Specify user details page with gg_installer_user as the user name, console access enabled, and Custom password selected.#center](/install-guides/_images/greengrass-create-iam-user.webp)
 6. Select **Next**.
 7. Under **Permissions options**, select **Add user to group**. 
    ![AWS IAM Set permissions page with Add user to group selected. Choose gg_installer_group from the User groups table before continuing.#center](/install-guides/_images/greengrass-new-user-next.png)
@@ -170,7 +170,7 @@ To create access keys, complete the following steps:
 1. Under **Access Management**, select **IAM users**.
 2. Select **gg_installer_user** and navigate to the **Security credentials** tab.
 
-   ![Security credentials tab for the gg_installer_user IAM user, showing the Create access key button in the Access keys section.#center](/install-guides/_images/greengrass-create-ak.png)
+   ![Security credentials tab for the gg_installer_user IAM user, showing the Create access key button in the Access keys section.#center](/install-guides/_images/greengrass-create-ak.webp)
 
 3. Under **Access keys**, select **Create access key**.
 
