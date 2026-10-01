@@ -1,17 +1,17 @@
 ---
-title: Develop and Validate Firmware Pre-Silicon on Arm Neoverse CSS V3
+title: Develop and validate firmware pre-silicon on Arm Neoverse CSS V3
 
 minutes_to_complete: 90
 
 who_is_this_for: This advanced topic is for firmware developers, system architects, and silicon validation engineers working on Arm Neoverse CSS platforms who require a pre-silicon workflow for the CSS-V3 reference design using Fixed Virtual Platforms (FVPs).
 
 learning_objectives:
-    - Explain the CSS-V3 architecture and the RD-V3 firmware boot sequence (TF-A, RSE, SCP/MCP/LCP, UEFI/GRUB, Linux)
-    - Set up a containerized build environment and sync sources with a pinned manifest using repo
-    - Build and boot the RD-V3 firmware stack on FVP and map UART consoles to components
-    - Interpret boot logs to verify bring-up and diagnose boot-stage issues
-    - Modify platform control firmware (for example, SCP/MCP) and validate changes via pre-silicon simulation
-    - Launch a dual-chip RD-V3-R1 simulation and verify AP/MCP coordination
+    - Understand the CSS-V3 architecture and the RD-V3 firmware boot sequence.
+    - Set up a containerized build environment and sync sources with a pinned manifest using repo.
+    - Build and boot the RD-V3 firmware stack on FVP and map UART consoles to components.
+    - Interpret boot logs to verify bring-up and diagnose boot-stage issues.
+    - Modify platform control firmware such as System Control Processor (SCP) and Manageability Control Processor (MCP), and validate changes through pre-silicon simulation.
+    - Launch a dual-chip RD-V3-R1 simulation and verify application processor (AP) and MCP coordination.
 
 prerequisites:
     - Access to an Arm Neoverse-based Linux machine (cloud or local) with at least 80 GB of free storage
@@ -34,16 +34,16 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:38:48Z'
   faq_source_hash: edcf755937689018d68a687def84b27f119fcfa2542949294f965c21e0d0d642
   summary: >-
-    Build the Arm Neoverse RD-V3 firmware stack and test it on an Arm Fixed Virtual Platform (FVP)
-    before hardware is available. You prepare a repeatable environment, sync pinned sources, compile
-    the boot chain, and select the FVP version that matches your release. You then map UART consoles,
+    You'll build the Arm Neoverse RD-V3 firmware stack and test it on an Arm FVP
+    before hardware is available. First, you'll prepare a repeatable environment, sync pinned sources, compile
+    the boot chain, and select the FVP version that matches your release. You'll then map UART consoles,
     follow the boot to a Buildroot Linux shell, validate firmware changes, and run the dual-chip
     RD-V3-R1 simulation.
   faqs:
   - question: How do I choose the correct FVP model for my RD-V3 build?
     answer: >-
-      Match the FVP model version to the RD-V3 release tag you're using. The instructions include an
-      example mapping and point to the release tags list for the full set of supported versions.
+      Match the FVP model version to the RD-V3 release tag that you're using. Use the
+      example mapping as reference and refer to the release tags list for the full set of supported versions.
   - question: What result should I expect when the single-die simulation boots successfully?
     answer: >-
       The system boots from BL1 through the firmware stack to a Buildroot Linux shell on the FVP.
@@ -52,12 +52,12 @@ generated_summary_faq:
   - question: What should I check if the boot hangs before reaching Linux?
     answer: >-
       Review the UART outputs to find the last active stage and identify where control stopped.
-      Confirm the FVP version matches your selected RD-V3 release tag and re-sync sources to the
+      Confirm that the FVP version matches your selected RD-V3 release tag and re-sync sources to the
       pinned manifest before rebuilding.
   - question: How do I validate a change to SCP, MCP, or LCP firmware?
     answer: >-
       Rebuild the affected platform control firmware, then rerun the FVP simulation. Inspect the
-      corresponding UART logs for your expected messages or behavior and confirm the system still
+      corresponding UART logs for your expected messages or behavior and confirm that the system still
       reaches the Linux shell.
   - question: How do I know the dual-chip RD-V3-R1 simulation is running correctly?
     answer: >-

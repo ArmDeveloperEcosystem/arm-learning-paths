@@ -6,13 +6,13 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for system administrators and developers who want to learn how to deploy and benchmark NGINX on Microsoft Azure Cobalt 100 Arm-based instances.
 
 learning_objectives: 
-    - Create an Arm64 virtual machine on Azure Cobalt 100 (Dpsv6) using the Azure console with Ubuntu Pro 24.04 LTS as the base image
-    - Install and configure the NGINX web server on the Azure Arm64 virtual machine
-    - Configure and test a static website with NGINX on the virtual machine
-    - Run baseline NGINX performance tests with ApacheBench (ab) on Ubuntu Pro 24.04 LTS Arm64
+    - Create an Arm64 virtual machine (VM) on Azure Cobalt 100 (Dpsv6) using the Azure console with Ubuntu Pro 24.04 LTS as the base image.
+    - Install and configure the NGINX web server on the Azure Arm64 VM.
+    - Configure and test a static website with NGINX on the VM.
+    - Run baseline NGINX performance tests with ApacheBench (ab).
 
 prerequisites:
-    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
+    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100-based instances (Dpsv6)
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -29,18 +29,17 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:39:38Z'
   faq_source_hash: f556dee0540494860c18e38f186e7a602db0635cded4fd4c6cbb649e115ef294
   summary: >-
-    Deploy NGINX on an Arm-based Microsoft Azure Cobalt 100 virtual machine and capture a baseline
-    benchmark. You create an Ubuntu Pro 24.04 LTS Dpsv6 VM in the Azure portal, install NGINX,
-    and verify its default page. You then configure a static site and confirm that NGINX serves
-    your content. Finally, you install ApacheBench and record initial throughput and timing results.
+    You'll deploy NGINX on an Arm-based Microsoft Azure VM powered by Cobalt 100, and capture a baseline
+    benchmark. First, you'll create an Ubuntu Pro 24.04 LTS Dpsv6 VM in the Azure portal, install NGINX,
+    and verify its default page. You'll then configure a static site and confirm that NGINX serves
+    your content. Finally, you'll install ApacheBench and record initial throughput and timing results.
   faqs:
-  - question: Which Azure VM size and image should I choose, and do I need to match the D4ps_v6
-      example?
+  - question: Which Azure VM size and image should I choose?
     answer: >-
-      Use an Arm-based Cobalt 100 VM in the Dpsv6 series with the Ubuntu Pro 24.04 LTS Arm64 image.
+      Use an Arm-based VM in the Dpsv6 series with the Ubuntu Pro 24.04 LTS Arm64 image.
       The example uses a `D4ps_v6` instance, but you can follow the same instructions
       with other Dpsv6 sizes.
-  - question: How do I know NGINX installed correctly before I change any configuration?
+  - question: How do I know that NGINX installed correctly before I change any configuration?
     answer: >-
       After installation, NGINX serves its default welcome page. Confirm that the welcome page
       loads before proceeding to configure your own site.
@@ -51,10 +50,10 @@ generated_summary_faq:
       return your custom page instead of the default welcome page.
   - question: Should I run ApacheBench on the VM or from another machine?
     answer: >-
-      You install and run ApacheBench (`ab`) on the same Ubuntu Pro 24.04 LTS Arm64 VM that
-      runs NGINX. Follow that approach unless you have a specific reason to benchmark from an
+      Install and run ApacheBench (`ab`) on the same VM that
+      runs NGINX, unless you have a specific reason to benchmark from an
       external client.
-  - question: Which package installs `ab` on Ubuntu Pro 24.04 LTS, and how do I verify it?
+  - question: Which package installs ApacheBench on Ubuntu Pro 24.04 LTS, and how do I verify it?
     answer: >-
       Install the `apache2-utils` package. Run `ab -V` to confirm that ApacheBench is available and
       prints a version string.

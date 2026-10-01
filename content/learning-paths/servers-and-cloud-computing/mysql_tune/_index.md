@@ -12,7 +12,7 @@ learning_objectives:
     - Evaluate storage, kernel, compiler, and library choices that can affect MySQL performance.
 
 prerequisites:
-    - On-prem or cloud [installation of MySQL](https://dev.mysql.com/doc/refman/en/)
+    - On-premise or cloud [installation of MySQL](https://dev.mysql.com/doc/refman/en/)
     - A repeatable MySQL workload or benchmark that you can run before and after tuning
 
 # START generated_summary_faq
@@ -42,7 +42,7 @@ generated_summary_faq:
       Run the same repeatable workload before and after the change and compare throughput, latency,
       and profiles. Change one parameter at a time or use a designed experiment so results are
       attributable to specific settings.
-  - question: Should I set MySQL parameters in an option file or on the `mysqld` command line?
+  - question: Should I set MySQL parameters in an option file or on the mysqld command line?
     answer: >-
       Use an option file for persistent tuning so changes are reviewable, version controlled,
       and applied on restart. The examples in the Learning Path target the `[mysqld]` group. Command-line flags are suitable

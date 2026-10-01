@@ -1,17 +1,16 @@
 ---
-title: Learn how to deploy MySQL
+title: Deploy MySQL on Arm
 
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers who want to deploy MySQL on Arm.
 
 learning_objectives: 
-    - Learn about the various ways MySQL can be deployed.
-    - Learn how to interact with a MySQL database using a MySQL client CLI tool.
+    - Identify the various ways MySQL can be deployed.
+    - Interact with a MySQL database using a MySQL client CLI tool.
 
 prerequisites:
-    - An Arm based instance from a cloud service provider, or an on-premise Arm server.
-    - If you do not have an Arm node, the next section discusses some options.
+    - An Arm based instance from a cloud service provider, or an on-premise Arm server
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -28,20 +27,18 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:37:38Z'
   faq_source_hash: 743cde2f666e32bdd9dd2c412037696d36fbe12c5d89d854b04102d9a74a05ec
   summary: >-
-    Deploy MySQL on an Arm-based Linux system and verify that the database is ready to use. You
+    You'll deploy MySQL on an Arm-based Linux system and verify that the database is ready to use. First, you'll
     review deployment options for bare-metal systems, cloud virtual machines, and managed SQL
-    services before choosing an environment. You then follow the MySQL documentation to install
-    and configure the server, connect with the MySQL client, and run basic SQL commands. A separate
-    Learning Path covers performance tuning.
+    services before choosing an environment. Then, you'll identify MySQL documentation to install
+    and configure the server. You'll connect with the MySQL clients and run SQL commands.
   faqs:
-  - question: I already know how to deploy MySQL. Should I skip to the tuning content?
+  - question: What Learning Path should I explore next?
     answer: >-
-      Yes. If you already know how to deploy a MySQL database, continue to the MySQL tuning Learning
-      Path to improve the performance of an Arm-based MySQL server.
-  - question: I already have an Arm server. Which deployment option should I use?
+      Explore the Learning Path [Tune MySQL performance on Arm-based platforms](/learning-paths/servers-and-cloud-computing/mysql_tune/) to improve the performance of an Arm-based MySQL server.
+  - question: What SQL operations can I try after connecting to MySQL?
     answer: >-
-      Use your existing Arm system and continue with the installation and check steps. You can
-      skip the deployment options subsection; bare metal or an existing Arm-based VM both work.
+      You can create and select a database, create and inspect a table, insert sample records, and
+      query the table to display its contents.
   - question: What result should I expect after I install and check MySQL?
     answer: >-
       You should have a running MySQL server on an Arm-based Linux system. A successful connection
@@ -49,14 +46,14 @@ generated_summary_faq:
       is working.
   - question: Can I use a managed SQL service instead of installing MySQL myself?
     answer: >-
-      Yes, managed SQL services on Arm are listed as deployment options. However, the hands-on
-      hands-on verification assumes that you control an Arm instance where you install MySQL and
+      Yes. However, the
+      hands-on verification steps assume that you control an Arm instance where you install MySQL and
       interact with the command-line client.
-  - question: I don’t have an Arm node. Where should I start?
+  - question: Where should I start if I don't have an Arm node?
     answer: >-
-      Use one of the cloud options described in the deployment section, or see the Get started
-      with Arm-based cloud instances Learning Path. Provision an Arm environment before you install
-      MySQL.
+      Provision an Arm environment before you install
+      MySQL. For more information, see the [Get started
+      with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/intro/) Learning Path.
 # END generated_summary_faq
 
 author: Jason Andrews

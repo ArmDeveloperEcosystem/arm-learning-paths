@@ -1,16 +1,16 @@
 ---
-title: Migrate MySQL from on-premises x64 to Azure Cobalt 100 Arm VMs
+title: Migrate MySQL from on-premises x64 to Arm-based Azure virtual machines
 
 description: Learn how to migrate a MySQL database from an on-premises x64 environment to an Arm-based Azure Cobalt 100 VM and validate performance with sysbench.
 
 minutes_to_complete: 30
 
-who_is_this_for: This Learning Path is for developers who want to migrate MySQL from an on-premises x64 environment to an Arm-based Azure Cobalt 100 virtual machine.
+who_is_this_for: This Learning Path is for developers who want to migrate MySQL from an on-premises x64 environment to an Arm-based virtual machine (VM) powered by Azure Cobalt 100.
 
 learning_objectives: 
-    - Provision an Arm-based Azure Cobalt 100 virtual machine using Terraform and Azure CLI
-    - Export and restore a MySQL database from an on-premises x64 simulator into the Arm VM
-    - Run sysbench on the migrated database and interpret key performance metrics
+    - Provision an Arm-based Azure VM powered by Cobalt 100 using Terraform and Azure CLI.
+    - Export and restore a MySQL database from an on-premises x64 simulator into the Arm VM.
+    - Run sysbench on the migrated database and interpret key performance metrics.
 
 prerequisites:
     - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
@@ -31,10 +31,10 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:36:51Z'
   faq_source_hash: d6d2cda672e5ed693210356f269aa015cb9b3b80fc92c9c33c200e6d83717b15
   summary: >-
-    Migrate a MySQL database from a simulated on-premises x64 server to an Arm-based Azure Cobalt
-    100 virtual machine. You prepare the source VM, install the required tools, and load a sample
-    database. You then configure and run the migration scripts to provision the target and restore
-    the database. Finally, you connect to the Arm VM, run a `sysbench` workload, and review the
+    You'll migrate a MySQL database from a simulated on-premises x64 server to an Arm-based Azure VM powered by Cobalt
+    100. First, you'll prepare the source VM, install the required tools, and load a sample
+    database. You'll then configure and run the migration scripts to provision the target and restore
+    the database. Finally, you'll connect to the Arm VM, run a `sysbench` workload, and review the
     results.
   faqs:
   - question: Which architecture should I choose for the on-premises simulator VM?
@@ -49,18 +49,18 @@ generated_summary_faq:
   - question: What should I enter when the key generation script prompts for a passphrase, and
       what output should I keep?
     answer: >-
-      Press **Enter** to leave the passphrase empty, as instructed. Save the printed `ssh-rsa` public
+      Press **Enter** to leave the passphrase empty. Save the printed `ssh-rsa` public
       key string for use with the Azure VM.
   - question: How do I connect to the Arm-based Azure VM before running the benchmark, and which
       user and key should I use?
     answer: >-
-      From the on-premises simulator, SSH to the Arm VM using the key created earlier in `$HOME/.ssh`
-      and the `azureadmin` user at the VM’s public IP. Use the filename you identified for the Azure
+      From the on-premises simulator, SSH to the Arm VM using the key created in `$HOME/.ssh`
+      and the `azureadmin` user at the VM’s public IP. Use the filename that you identified for the Azure
       cloud key.
   - question: Where should I create and run the benchmarking script, and what result should I
       expect?
     answer: >-
-      Create and run the script, for example `run.sh`, on the Arm-based Azure Cobalt 100 VM after
+      Create and run the script, for example `run.sh`, on the Arm-based Azure VM after
       connecting with SSH. Expect `sysbench` to produce a summary of performance metrics that you
       can review to validate the migrated database.
 # END generated_summary_faq
