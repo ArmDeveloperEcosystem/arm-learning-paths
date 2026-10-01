@@ -105,7 +105,7 @@ Create a file named `managed-instances-capacity-provider.json` with the followin
 
 The vCPU and memory ranges support the resources requested by the `nginx` task definition while giving Amazon ECS a choice of matching instance types. The `amazon-web-services` CPU manufacturer is the CLI value for the console's **Amazon** option.
 
-Create the Managed Instances capacity provider:
+Create the Managed Instances capacity provider and associate it with the cluster:
 
 ```console
 aws ecs create-capacity-provider \
@@ -116,10 +116,10 @@ Associate the capacity provider with the cluster and make it the default capacit
 
 ```console
 aws ecs put-cluster-capacity-providers \
-  --cluster ecs-managed-instances-cluster \
-  --capacity-providers graviton-managed-instances-cp \
-  --default-capacity-provider-strategy \
-    capacityProvider=graviton-managed-instances-cp,weight=1
+  --cluster ecs-managed-instances-cluster \
+  --capacity-providers graviton-managed-instances-cp \
+  --default-capacity-provider-strategy \
+    capacityProvider=graviton-managed-instances-cp,weight=1
 ```
 
 Confirm that the capacity provider is associated with the cluster:
@@ -130,7 +130,7 @@ aws ecs describe-clusters \
   --query 'clusters[0].{capacityProviders:capacityProviders,defaultStrategy:defaultCapacityProviderStrategy}'
 ```
 
-By setting the **CPU manufacturers** attribute to **Amazon**, you filter the instance pool to Amazon-built CPUs, which are AWS Graviton processors. Combined with the `ARM64` architecture in your task definition, this ensures that Amazon ECS runs your task on an Arm-based Graviton instance.
+By specifying a requirement for CPUs manufactured by Amazon, you filter the instance pool to instances based on Amazon-built CPUs, which are AWS Graviton processors. Combined with the `ARM64` architecture in your task definition, this ensures that Amazon ECS runs your task on an Arm-based Graviton instance.
 
 ## What you've accomplished and what's next
 

@@ -1,6 +1,6 @@
 ---
 # User change
-title: Clean up Amazon ECS Managed Instances resources
+title: Clean up AWS resources
 description: Remove the Amazon ECS task, capacity provider, cluster, task definition, and optional IAM resources created in this Learning Path.
 
 weight: 5 # 1 is first, 2 is second, etc.
@@ -9,35 +9,63 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-## Clean up resources
+## Remove AWS resources in order
 
-To avoid ongoing charges, remove the resources you created. Delete them in the following order, because Amazon ECS won't let you delete a cluster while a cluster-scoped capacity provider is still attached, and it won't let you delete a capacity provider while it's part of the cluster's default capacity provider strategy or still has running tasks:
+To avoid ongoing charges, remove the resources that you created. You can't delete a cluster while a cluster-scoped capacity provider is still attached. You also can't delete a capacity provider while it's part of the cluster's default capacity provider strategy or still has running tasks.
+
+Clean up resources in the following order:
 
 1. Stop the running task.
-2. Remove the capacity provider from the cluster's default capacity provider strategy.
-3. Delete the capacity provider. This also terminates the Managed Instances compute.
-4. Delete the cluster.
-5. Deregister and delete the task definition.
+2. Delete the capacity provider. This also terminates the Managed Instances compute.
+3. Delete the cluster.
+4. Deregister and delete the task definition.
 
 You can clean up using either the AWS Management Console or the AWS CLI.
 
+## Stop the running task
+
+First, stop the running task.
+
 ### Use the AWS Management Console
 
-1. Stop the task: open the cluster **ecs-managed-instances-cluster**, select **Tasks**, select the running task, then select **Stop**.
-2. Delete the capacity provider: on the cluster page, select **Infrastructure**, select the Managed Instances capacity provider, then select **Delete**. If the deletion is blocked because the capacity provider is part of the cluster's default capacity provider strategy, edit the cluster to remove it from the default strategy first, then delete it. Deleting the capacity provider terminates the Managed Instances compute.
-3. Delete the cluster: on the **Clusters** page, select **ecs-managed-instances-cluster**, then select **Delete cluster** and confirm.
-4. Deregister the task definition: select **Task definitions**, select the **nginx** family, select the revision, then select **Deregister**. You can then delete the task definition.
+To stop the task using the console:
 
-### Use the AWS CLI
+1. Navigate to the [console for Amazon ECS](https://console.aws.amazon.com/ecs/v2).
+2. Select **Clusters**.
+3. Select the cluster **ecs-managed-instances-cluster** that you created earlier.
+4. Select **Tasks**.
+5. Select the running task.
+6. Select **Stop**, then **Stop selected**.
 
-First, find the running task ARN and stop it:
+### Use the AWS CLI 
+
+Find the running task Amazon Resource Name (ARN), then use the ARN to stop it:
 
 ```console
 TASK_ARN=$(aws ecs list-tasks --cluster ecs-managed-instances-cluster --query 'taskArns[0]' --output text)
 aws ecs stop-task --cluster ecs-managed-instances-cluster --task "$TASK_ARN"
 ```
 
-Next, find the name of the capacity provider that's associated with the cluster:
+## Delete the capacity provider
+
+Next, delete the ECS Managed Instances capacity provider. Deleting the capacity provider terminates the Managed Instances compute.
+
+### Use the AWS Management Console
+
+To delete the capacity provider using the console:
+
+1. Navigate to the [console for Amazon ECS](https://console.aws.amazon.com/ecs/v2).
+2. Select **Clusters**.
+3. Select the cluster **ecs-managed-instances-cluster** that you created earlier.
+4. Select **Actions**, then select **Update cluster**.
+5. Locate the capacity provider for ECS Managed Instances under **Cluster configuration**, and select **Remove**. 
+6. Select **Update**.
+7. Select **Infrastructure**. 
+8. Under **Capacity providers**, select the capacity provider for ECS Managed Instances, then select **Delete**. 
+
+### Use the AWS CLI 
+
+Find the name of the capacity provider that's associated with the cluster:
 
 ```console
 aws ecs describe-clusters \
@@ -46,16 +74,16 @@ aws ecs describe-clusters \
   --output text
 ```
 
-The capacity provider is part of the cluster's default capacity provider strategy. You must clear that strategy before you can delete the capacity provider. Remove the default strategy from the cluster:
+The capacity provider is part of the cluster's default capacity provider strategy. Clear that strategy before you can delete the capacity provider. Remove the default strategy from the cluster:
 
 ```console
 aws ecs put-cluster-capacity-providers \
-  --cluster ecs-managed-instances-cluster \
-  --capacity-providers [] \
-  --default-capacity-provider-strategy []
+  --cluster ecs-managed-instances-cluster \
+  --capacity-providers [] \
+  --default-capacity-provider-strategy []
 ```
 
-Then, delete the capacity provider, replacing `<capacity-provider-name>` with the name from the earlier command. Deleting the capacity provider deprovisions and terminates the Managed Instances compute, which can take a few minutes to reach `DELETE_COMPLETE`:
+Then, delete the capacity provider, replacing `<capacity-provider-name>` with the name from the earlier command. Deleting the capacity provider deprovisions and terminates the Managed Instances compute, so it can take a few minutes to reach `DELETE_COMPLETE`:
 
 ```console
 aws ecs delete-capacity-provider \
@@ -63,20 +91,52 @@ aws ecs delete-capacity-provider \
   --cluster ecs-managed-instances-cluster
 ```
 
-After the capacity provider is deleted, delete the cluster:
+## Delete the cluster
+
+After deleting the capacity provider, delete the cluster. 
+
+### Use the AWS Management Console
+
+To delete the cluster using the console:
+
+1. Navigate to the [console for Amazon ECS](https://console.aws.amazon.com/ecs/v2).
+2. Select **Clusters**.
+3. Select the cluster **ecs-managed-instances-cluster** that you created earlier.
+4. Select **Actions**, then select **Delete cluster**.
+
+### Use the AWS CLI
+
+Run the following command to delete the cluster using the CLI:
 
 ```console
 aws ecs delete-cluster --cluster ecs-managed-instances-cluster
 ```
 
-Finally, deregister and delete the task definition:
+## Deregister and delete the task definition
+
+Finally, you can deregister and delete the task definition.
+
+### Use the AWS Management Console
+
+To deregister and delete the task definition using the console:
+
+1. Navigate to the [console for Amazon ECS](https://console.aws.amazon.com/ecs/v2).
+2. Select **Task definitions**.
+3. Select the **nginx** task definition that you created earlier.
+4. Select the task definition revision. For example, **nginx:1**. 
+5. Select **Deregister**.
+6. After the task definition revision is deregistered, select **Delete**.
+
+### Use the AWS CLI
+
+Run the following command to deregister and delete the task definition using the CLI:
 
 ```console
 aws ecs deregister-task-definition --task-definition nginx:1
 aws ecs delete-task-definitions --task-definitions nginx:1
 ```
 
-### Remove the IAM roles (optional)
+### (Optional) Remove the IAM roles 
 
 If you don't plan to use Amazon ECS Managed Instances again, you can also remove the IAM roles and instance profile that you created on the first page:
 
@@ -96,3 +156,9 @@ aws iam detach-role-policy \
   --policy-arn arn:aws:iam::aws:policy/AmazonECSInfrastructureRolePolicyForManagedInstances
 aws iam delete-role --role-name ecsInfrastructureRole
 ```
+
+## What you've accomplished
+
+You've cleaned up all resources that you created to test deploying containers on AWS Graviton with Amazon ECS Managed Instances. 
+
+You can extend this workflow to deploy containers on AWS-managed Arm-based instances powered by AWS Graviton, while maintaining control over the instance types and features that you use.
