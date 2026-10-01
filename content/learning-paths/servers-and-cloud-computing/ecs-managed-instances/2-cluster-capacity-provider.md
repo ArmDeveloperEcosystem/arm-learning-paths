@@ -83,7 +83,7 @@ Create a file named `managed-instances-capacity-provider.json` with the followin
       "capacityOptionType": "ON_DEMAND",
       "instanceRequirements": {
         "vCpuCount": {
-          "min": 2,
+          "min": 1,
           "max": 4
         },
         "memoryMiB": {

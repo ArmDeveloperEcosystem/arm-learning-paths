@@ -99,7 +99,7 @@ further_reading:
         type: documentation
     - resource:
         title: Amazon ECS infrastructure IAM role
-        link: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html
+        link: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/infrastructure_IAM_role.html
         type: documentation
     - resource:
         title: Amazon ECS Managed Instances instance profile
