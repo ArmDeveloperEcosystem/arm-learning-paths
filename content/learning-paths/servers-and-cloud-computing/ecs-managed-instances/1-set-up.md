@@ -39,7 +39,7 @@ You'll create IAM roles with the AWS CLI and register a task definition with eit
 
 ## Before you begin
 
-Before continuing, install and configure the [AWS CLI](/install-guides/aws-cli/), and confirm that you can sign in to the AWS Management Console.
+Before continuing, ensure that the AWS CLI is installed and configured. Confirm that you can sign in to the AWS Management Console.
 
 ## Create AWS IAM roles
 

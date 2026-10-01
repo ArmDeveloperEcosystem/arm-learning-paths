@@ -32,7 +32,7 @@ Use the cluster, capacity provider, and task definition that you created earlier
 
 ### Run a task using the AWS CLI
 
-Run the `nginx` task definition using the Graviton capacity provider that you created earlier. Save the task ARN so that you can use it in later commands:
+Run the `nginx` task definition using the Graviton capacity provider that you created earlier. Save the task Amazon Resource Name (ARN) so that you can use it in later commands:
 
 ```console
 TASK_ARN=$(aws ecs run-task \
@@ -57,9 +57,9 @@ aws ecs wait tasks-running \
 
 This is where you confirm that the Amazon CPU-manufacturer and `ARM64` settings that you configured earlier resulted in Amazon ECS selecting a Graviton-based instance.
 
-To verify that the application deployed successfully:
+### Verify deployment using the AWS Management Console
 
-### Verify deployment using the console
+To verify that the application deployed successfully using the console:
 
 1. Select the cluster **ecs-managed-instances-cluster**.
 2. Select **Infrastructure**.
