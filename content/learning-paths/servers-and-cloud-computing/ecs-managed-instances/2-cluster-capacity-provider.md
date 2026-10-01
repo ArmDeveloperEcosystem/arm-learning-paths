@@ -15,22 +15,22 @@ When you use Amazon ECS Managed Instances, a capacity provider manages the compu
 
 Instead of naming specific instance types, you can describe the attributes that you need, such as vCPU count, memory, and CPU manufacturer. Amazon ECS selects matching instance types automatically.
 
-AWS Graviton is Amazon's family of Arm-based processors, built on Arm Neoverse cores. To target Graviton, you combine two settings:
+AWS Graviton is Amazon's family of Arm-based processors, built on Arm Neoverse cores. To target Graviton, you'll combine two settings:
 
 - The task definition's `runtimePlatform.cpuArchitecture` value of `ARM64`, which you set earlier.
-- The capacity provider's **CPU manufacturers** attribute set to **Amazon**, which filters the instance pool to Amazon-built Graviton CPUs.
+- The capacity provider's **CPU manufacturers** attribute, which filters the instance pool to Amazon-built Graviton CPUs. The console value of the attribute is **Amazon**, and the AWS CLI value is `amazon-web-services`.
 
 ## Before you begin
 
-Ensure that you have a VPC with public subnets and a security group that allows inbound traffic on TCP port 80. If you need to create a security group, see [Create a security group for your Amazon EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-security-group.html).
+Ensure that you have a VPC with public subnets and a security group that allows inbound traffic on TCP port `80`. If you need to create a security group, see [Create a security group for your Amazon EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-security-group.html).
 
 ## Create the cluster and capacity provider
 
-You can use the console or the AWS CLI to create the cluster and the capacity provider:
+You can use the console or the AWS CLI to create the cluster and the capacity provider.
 
 ### Create the cluster and capacity provider using the console
 
-To create a custom capacity provider in the AWS Management Console:
+To create a cluster and a custom capacity provider in the AWS Management Console:
 
 1. Navigate to the [console for Amazon ECS](https://console.aws.amazon.com/ecs/v2).
 2. Select **Clusters**.
@@ -52,7 +52,7 @@ To create a custom capacity provider in the AWS Management Console:
 
 ### Create the cluster and capacity provider using the CLI
 
-Create the cluster:
+To create the cluster, run:
 
 ```console
 aws ecs create-cluster \
@@ -104,9 +104,9 @@ Create a file named `managed-instances-capacity-provider.json` with the followin
 }
 ```
 
-The vCPU and memory ranges support the resources requested by the `nginx` task definition while giving Amazon ECS a choice of matching instance types. The `amazon-web-services` CPU manufacturer is the CLI value for the console's **Amazon** option.
+The vCPU and memory ranges support the resources requested by the `nginx` task definition while giving Amazon ECS a choice of matching instance types. The `amazon-web-services` CPU manufacturer is the CLI value for the attribute that's equivalent to **Amazon** in the console.
 
-Create the Managed Instances capacity provider and associate it with the cluster:
+Create the ECS Managed Instances capacity provider and associate it with the cluster:
 
 ```console
 aws ecs create-capacity-provider \

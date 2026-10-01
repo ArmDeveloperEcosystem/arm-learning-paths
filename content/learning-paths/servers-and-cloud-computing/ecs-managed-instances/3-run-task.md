@@ -13,15 +13,15 @@ layout: "learningpathall"
 
 You can deploy your application on Amazon ECS either as a standalone task or as a service.
 
-A standalone task is one instance of your application. It runs once and isn't automatically replaced when it stops, which suits batch jobs and short tests.
+A standalone task is an instance of your application. It runs once and isn't automatically replaced when it stops, which suits batch jobs and short tests.
 
-A service is a collection of tasks. Using a service, you can maintain a desired number of tasks and replace failed tasks. A service can integrate with a load balancer, which suits long-running applications.
+A service is a collection of tasks. By using a service, you can maintain a desired number of tasks and replace failed tasks. A service can integrate with a load balancer, which suits long-running applications.
 
-To test whether your application lands on Graviton-based compute, run a standalone task.
-
-Use the cluster, capacity provider, and task definition that you created earlier to deploy a containerized application as a standalone task.
+For testing whether your application lands on Graviton-based compute, run a standalone task. Use the cluster, capacity provider, and task definition that you created earlier.
 
 ### Run a task using the console
+
+To deploy a standalone task using the console:
 
 1. Navigate to the [console for Amazon ECS](https://console.aws.amazon.com/ecs/v2).
 2. Select **Clusters**.
@@ -59,11 +59,11 @@ Confirm that the Amazon CPU-manufacturer and `ARM64` settings that you configure
 
 ### Verify deployment using the AWS Management Console
 
-To verify that the application deployed successfully using the console:
+To verify that the application deployed successfully:
 
 1. Select the cluster **ecs-managed-instances-cluster**.
 2. Select **Infrastructure**.
-3. Under **Container instances**, note the **Instance type** that AWS chose based on the capacity provider. The `g` in an instance family name, such as `m6g` or `c6g`, indicates an AWS Graviton (Arm-based) processor. The following screenshot shows that the instance type selected by AWS is `m6g.medium`:
+3. Under **Container instances**, note the **Instance type** that AWS chose based on the capacity provider. The `g` in an instance family name, such as `m6g` or `c6g`, indicates an AWS Graviton (Arm-based) processor. Confirm that the name of the instance family that you see contains a `g`. The following screenshot shows that the instance type selected by AWS is `m6g.medium`:
       ![Amazon ECS cluster Infrastructure tab showing a completed Managed Instances capacity provider and one active m6g.medium container instance, confirming that AWS selected Graviton-based compute.#center](container-instance.png "Active m6g.medium container instance selected by the capacity provider")
 4. Select the container instance that's associated with the ECS Managed Instances capacity provider.
 5. Under **Networking**, you'll find the public DNS name and IP address for the instance. Copy the **Public IP** and paste it into a web browser of your choice.
@@ -108,12 +108,12 @@ The output is similar to:
 
 ```output
 {
-    "InstanceType": "m6g.large",
+    "InstanceType": "m6g.medium",
     "PublicIpAddress": "203.0.113.10"
 }
 ```
 
-The instance type that Amazon ECS selects can differ. Confirm that its family name contains `g`, as in `m6g` or `c6g`, which indicates an AWS Graviton processor.
+The instance type that Amazon ECS selects can differ. Confirm that the name of the instance family contains `g`, as in `m6g` or `c6g`, which indicates an AWS Graviton processor.
 
 Get the public IP address and request the NGINX welcome page:
 

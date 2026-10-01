@@ -17,7 +17,7 @@ Amazon ECS runs your containers as tasks using one of the following compute opti
 
 | Compute option | Who manages the instances | Instance type control | Best for |
 |----------------|---------------------------|-----------------------|----------|
-| AWS Fargate | AWS (serverless, one isolated environment per task) | None | Simple workloads where you don't need to choose instance types |
+| AWS Fargate | AWS (serverless, one isolated environment per task) | None | Workloads that you don't need to choose instance types for |
 | ECS Managed Instances | AWS (provisioning, scaling, patching, maintenance) | Yes, including AWS Graviton | Workloads that need specific EC2 capabilities without managing infrastructure |
 | Amazon EC2 launch type | You (instances, scaling, patching, AMIs) | Full | Workloads that need maximum control over the instances |
 
@@ -32,6 +32,7 @@ Some of the compute attributes that you can control when using ECS Managed Insta
 - Local storage
 - Instance type and family
 - CPU manufacturer
+- Accelerator type
 
 AWS automatically selects an instance based on the compute attributes that you specify. Infrastructure management is handled on your behalf, including software and operating system patching, instance scaling, and maintenance.
 
@@ -48,11 +49,11 @@ To use Amazon ECS Managed Instances, you need two IAM roles:
 - An infrastructure role that allows Amazon ECS to manage the lifecycle of your managed instances on your behalf.
 - An instance role, made available to instances through an instance profile. The Amazon ECS agent assumes this role to register instances with your cluster and communicate with the Amazon ECS service.
 
-You'll create these roles with the AWS CLI. Make sure that your credentials have permission to create IAM roles.
+Make sure that your credentials have the permission to create IAM roles.
 
 ### Create the infrastructure role
 
-First, create a file named `ecs-infrastructure-trust-policy.json` with the following trust policy. The trust policy allows the Amazon ECS service to assume the role.
+First, create a file named `ecs-infrastructure-trust-policy.json` with the following trust policy. The trust policy allows the Amazon ECS service to assume the role:
 
 ```json
 {
@@ -208,11 +209,11 @@ The command returns the registered task definition, including its `family` (`ngi
 
 ### Register the task definition using the AWS Management Console
 
-Instead of using the AWS CLI, you can register the same task definition in the console:
+To register the same task definition using the console:
 
 1. Navigate to the [console for Amazon ECS](https://console.aws.amazon.com/ecs/v2).
 2. Select **Task definitions**.
-3. Select **Create new task definition**, then **Create new task definition with JSON**.
+3. Select **Create new task definition**, then select **Create new task definition with JSON**.
 4. Paste the task definition JSON.
 5. Select **Create**.
 
