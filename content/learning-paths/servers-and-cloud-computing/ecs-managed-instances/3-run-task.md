@@ -55,7 +55,7 @@ aws ecs wait tasks-running \
 
 ## Verify application deployment
 
-This is where you confirm that the Amazon CPU-manufacturer and `ARM64` settings that you configured earlier resulted in Amazon ECS selecting a Graviton-based instance.
+Confirm that the Amazon CPU-manufacturer and `ARM64` settings that you configured earlier resulted in Amazon ECS selecting a Graviton-based instance.
 
 ### Verify deployment using the AWS Management Console
 
@@ -70,7 +70,7 @@ To verify that the application deployed successfully using the console:
 
     You'll see the following welcome message:
 
-    ![Screenshot of the application showing the NGINX welcome page and confirming the web server was deployed on Arm-based compute successfully.#center](nginx-output.png "NGINX welcome page indicating successful deployment")
+    ![Screenshot of the NGINX welcome page confirming that the web server is reachable through its public IP address.#center](nginx-output.png "NGINX welcome page indicating successful deployment")
 
 ### Verify deployment using the AWS CLI
 
@@ -137,6 +137,6 @@ Because the task definition uses `host` network mode, the task doesn't receive a
 
 ## What you've accomplished and what's next
 
-You've successfully deployed a containerized application on Graviton-based instances using Amazon ECS Managed Instances. 
+You've successfully deployed a containerized application on Graviton-based instances using Amazon ECS Managed Instances.
 
 Next, you'll remove the task and the AWS resources that you created.

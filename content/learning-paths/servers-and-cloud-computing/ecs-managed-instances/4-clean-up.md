@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## Remove AWS resources in order
 
-To avoid ongoing charges, remove the resources that you created. You can't delete a cluster while a cluster-scoped capacity provider is still attached. You also can't delete a capacity provider while it's part of the cluster's default capacity provider strategy or still has running tasks.
+Remove the resources that you created to avoid ongoing charges. You can't delete a cluster while a cluster-scoped capacity provider is still attached. You can't delete a capacity provider while it's part of the cluster's default capacity provider strategy. You also can't delete it while it still has running tasks.
 
 Clean up resources in the following order:
 
@@ -37,7 +37,7 @@ To stop the task using the console:
 5. Select the running task.
 6. Select **Stop**, then **Stop selected**.
 
-### Use the AWS CLI 
+### Use the AWS CLI
 
 Find the running task Amazon Resource Name (ARN), then use the ARN to stop it:
 
@@ -58,12 +58,12 @@ To delete the capacity provider using the console:
 2. Select **Clusters**.
 3. Select the cluster **ecs-managed-instances-cluster** that you created earlier.
 4. Select **Actions**, then select **Update cluster**.
-5. Locate the capacity provider for ECS Managed Instances under **Cluster configuration**, and select **Remove**. 
+5. Locate the capacity provider for ECS Managed Instances under **Cluster configuration**, and select **Remove**.
 6. Select **Update**.
-7. Select **Infrastructure**. 
-8. Under **Capacity providers**, select the capacity provider for ECS Managed Instances, then select **Delete**. 
+7. Select **Infrastructure**.
+8. Under **Capacity providers**, select the capacity provider for ECS Managed Instances, then select **Delete**.
 
-### Use the AWS CLI 
+### Use the AWS CLI
 
 Find the name of the capacity provider that's associated with the cluster:
 
@@ -78,9 +78,9 @@ The capacity provider is part of the cluster's default capacity provider strateg
 
 ```console
 aws ecs put-cluster-capacity-providers \
-  --cluster ecs-managed-instances-cluster \
-  --capacity-providers [] \
-  --default-capacity-provider-strategy []
+  --cluster ecs-managed-instances-cluster \
+  --capacity-providers `[]` \
+  --default-capacity-provider-strategy `[]`
 ```
 
 Then, delete the capacity provider, replacing `<capacity-provider-name>` with the name from the earlier command. Deleting the capacity provider deprovisions and terminates the Managed Instances compute, so it can take a few minutes to reach `DELETE_COMPLETE`:
@@ -93,7 +93,7 @@ aws ecs delete-capacity-provider \
 
 ## Delete the cluster
 
-After deleting the capacity provider, delete the cluster. 
+After deleting the capacity provider, delete the cluster.
 
 ### Use the AWS Management Console
 
@@ -123,7 +123,7 @@ To deregister and delete the task definition using the console:
 1. Navigate to the [console for Amazon ECS](https://console.aws.amazon.com/ecs/v2).
 2. Select **Task definitions**.
 3. Select the **nginx** task definition that you created earlier.
-4. Select the task definition revision. For example, **nginx:1**. 
+4. Select the task definition revision, for example **nginx:1**.
 5. Select **Deregister**.
 6. After the task definition revision is deregistered, select **Delete**.
 
@@ -136,7 +136,7 @@ aws ecs deregister-task-definition --task-definition nginx:1
 aws ecs delete-task-definitions --task-definitions nginx:1
 ```
 
-### (Optional) Remove the IAM roles 
+## (Optional) Remove the IAM roles
 
 If you don't plan to use Amazon ECS Managed Instances again, you can also remove the IAM roles and instance profile that you created on the first page:
 
@@ -159,6 +159,6 @@ aws iam delete-role --role-name ecsInfrastructureRole
 
 ## What you've accomplished
 
-You've cleaned up all resources that you created to test deploying containers on AWS Graviton with Amazon ECS Managed Instances. 
+You've cleaned up all resources that you created to test deploying containers on AWS Graviton with Amazon ECS Managed Instances.
 
 You can extend this workflow to deploy containers on AWS-managed Arm-based instances powered by AWS Graviton, while maintaining control over the instance types and features that you use.

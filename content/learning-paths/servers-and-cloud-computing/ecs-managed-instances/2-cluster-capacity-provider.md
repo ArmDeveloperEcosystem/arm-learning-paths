@@ -1,6 +1,6 @@
 ---
 # User change
-title: Create a capacity provider for Graviton instances
+title: Create a capacity provider for Graviton-based instances
 description: Create an Amazon ECS cluster and capacity provider that selects AWS Graviton-based instances using CPU, memory, and processor requirements.
 
 weight: 3 # 1 is first, 2 is second, etc.
@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## Understand capacity providers and Graviton selection
 
-When you use Amazon ECS Managed Instances, a capacity provider manages the compute capacity for your tasks. It defines a launch template that tells Amazon ECS how to launch instances, including the instance profile, networking, storage, and the instance requirements used to select instance types.
+When you use Amazon ECS Managed Instances, a capacity provider manages the compute capacity for your tasks. It defines a launch template that tells Amazon ECS how to launch instances. The template specifies the instance profile, networking, storage, and the instance requirements used to select instance types.
 
 Instead of naming specific instance types, you can describe the attributes that you need, such as vCPU count, memory, and CPU manufacturer. Amazon ECS selects matching instance types automatically.
 
@@ -36,13 +36,14 @@ To create a custom capacity provider in the AWS Management Console:
 2. Select **Clusters**.
 3. Select **Create cluster**.
 4. Under **Cluster configuration**, for **Cluster name**, enter **ecs-managed-instances-cluster**.
-5. Under **Infrastructure - *advanced***, select **Fargate and Managed Instances** as the method for obtaining compute capacity. 
+5. Under **Infrastructure - *advanced***, select **Fargate and Managed Instances** as the method for obtaining compute capacity.
 6. For **Instance profile**, select the **ecsInstanceRole** instance profile that you created earlier.
-7. For **Infrastructure role**, select the **ecsInfrastructureRole** infrastructure role that you created earlier. 
+7. For **Infrastructure role**, select the **ecsInfrastructureRole** infrastructure role that you created earlier.
 8. For **Instance selection**, select **Use custom - *advanced***. By default, **CPU (vCPU)** and **Memory (MiB)** are configured as the first two instance attributes.
-9. To add a third instance attribute, select **Add instance attribute**. 
+9. To add a third instance attribute, select **Add instance attribute**.
 10. For the third attribute, select **CPU manufacturers** for **Attribute**, then select **Amazon** as the **Attribute value**. Leave the **CPU (vCPU)** and **Memory (MiB)** attribute values as defaults. You'll see a list of instance types that match the criteria:
- ![Amazon ECS console table showing matching C6g instance types with the Arm64 architecture, confirming that the capacity provider requirements select AWS Graviton-based compute.#center](filtered-instance-types.png "Arm64 instance types matching the capacity provider requirements")
+
+    ![Amazon ECS console table showing matching C6g instance types with the Arm64 architecture, confirming that the capacity provider requirements select AWS Graviton-based compute.#center](filtered-instance-types.png "Arm64 instance types matching the capacity provider requirements")
 11. Under **Network settings**, configure the following:
     - For **VPC**, select an available VPC such as the default VPC.
     - For **Subnets**, select available subnets that are associated with the VPC.
@@ -116,10 +117,10 @@ Associate the capacity provider with the cluster and make it the default capacit
 
 ```console
 aws ecs put-cluster-capacity-providers \
-  --cluster ecs-managed-instances-cluster \
-  --capacity-providers graviton-managed-instances-cp \
-  --default-capacity-provider-strategy \
-    capacityProvider=graviton-managed-instances-cp,weight=1
+  --cluster ecs-managed-instances-cluster \
+  --capacity-providers graviton-managed-instances-cp \
+  --default-capacity-provider-strategy \
+    capacityProvider=graviton-managed-instances-cp,weight=1
 ```
 
 Confirm that the capacity provider is associated with the cluster:
@@ -134,6 +135,6 @@ By specifying a requirement for CPUs manufactured by Amazon, you filter the inst
 
 ## What you've accomplished and what's next
 
-You've now created an Amazon ECS cluster in which you'll run your container, and configured a capacity provider that uses a security group allowing inbound traffic on port `80`. You've also specified CPU manufacturer requirements in the capacity provider to filter for Arm-based instance types. 
+You've created an Amazon ECS cluster in which you'll run your container. You've also configured a capacity provider that uses a security group allowing inbound traffic on port `80`. The capacity provider uses CPU manufacturer requirements to filter for Arm-based instance types.
 
 Next, you'll run a container on an Arm-based instance that meets these instance requirements.

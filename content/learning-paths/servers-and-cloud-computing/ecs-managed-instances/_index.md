@@ -1,6 +1,7 @@
 ---
-title: Deploy containers on AWS Graviton processors with Amazon ECS Managed Instances
+title: Deploy a container on AWS Graviton processors with Amazon ECS Managed Instances
 description: Deploy an NGINX container with Amazon ECS Managed Instances and verify that your task runs on AWS Graviton-based compute.
+draft: true
 
 minutes_to_complete: 60
 
@@ -9,7 +10,7 @@ who_is_this_for: This is an introductory topic for developers who want to deploy
 learning_objectives:
     - Create an Amazon ECS cluster for ECS Managed Instances
     - Create a capacity provider that selects Arm-based instances powered by AWS Graviton
-    - Create and run an Arm64 Amazon ECS task
+    - Create and run an Arm-compatible Amazon ECS task, and verify that it runs on AWS Graviton-based compute
 
 prerequisites:
     - An AWS account with permissions to create AWS IAM roles and access Amazon ECS
@@ -104,7 +105,7 @@ further_reading:
         title: Amazon ECS Managed Instances instance profile
         link: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/managed-instances-instance-profile.html
         type: documentation
-    
+
 
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper

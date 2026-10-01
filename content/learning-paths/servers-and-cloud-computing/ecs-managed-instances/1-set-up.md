@@ -1,7 +1,7 @@
 ---
 # User change
-title: Set up IAM roles and an Arm64 task definition
-description: Create the IAM roles required by Amazon ECS Managed Instances and register an Arm64 task definition for an NGINX container.
+title: Set up IAM roles and an Arm-compatible task definition
+description: Create the IAM roles required by Amazon ECS Managed Instances and register an Arm-compatible task definition for an NGINX container.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## Understand Amazon ECS Managed Instances
 
-Amazon Elastic Container Service (ECS) is a solution for deploying containers on AWS. 
+Amazon Elastic Container Service (ECS) is a solution for deploying containers on AWS.
 
 Amazon ECS runs your containers as tasks using one of the following compute options:
 
@@ -23,7 +23,7 @@ Amazon ECS runs your containers as tasks using one of the following compute opti
 
 Amazon ECS Managed Instances is a compute option that sits between AWS Fargate and the Amazon EC2 launch type. AWS manages the infrastructure for you, similar to AWS Fargate. However, you get greater control over the Amazon EC2 features and instance types used to run your containers. This includes the ability to use AWS Graviton-based instance types.
 
-Fargate runs each task in its own isolated environment. By contrast, Amazon ECS Managed Instances can place multiple tasks on a larger instance to improve utilization. 
+Fargate runs each task in its own isolated environment. By contrast, Amazon ECS Managed Instances can place multiple tasks on a larger instance to improve utilization.
 
 Some of the compute attributes that you can control when using ECS Managed Instances include the following:
 
@@ -140,11 +140,11 @@ aws iam get-role --role-name ecsInfrastructureRole --query 'Role.RoleName' --out
 aws iam get-instance-profile --instance-profile-name ecsInstanceRole --query 'InstanceProfile.Roles[0].RoleName' --output text
 ```
 
-The commands return `ecsInfrastructureRole` and `ecsInstanceRole`. 
+The commands return `ecsInfrastructureRole` and `ecsInstanceRole`.
 
 You'll use both roles when you create the Amazon ECS cluster.
 
-## Register an Arm Amazon ECS task definition
+## Register an Arm-compatible Amazon ECS task definition
 
 An Amazon ECS task definition is a blueprint for a containerized application.
 
@@ -196,7 +196,7 @@ Create a file named `nginx-task-def.json` with the following contents. The `runt
 
 Register the task definition using either the AWS CLI or the AWS Management Console.
 
-### Use the AWS CLI
+### Register the task definition using the AWS CLI
 
 Register the task definition from the file:
 
@@ -206,7 +206,7 @@ aws ecs register-task-definition --cli-input-json file://nginx-task-def.json
 
 The command returns the registered task definition, including its `family` (`nginx`) and `revision` number.
 
-### Use the AWS Management Console
+### Register the task definition using the AWS Management Console
 
 Instead of using the AWS CLI, you can register the same task definition in the console:
 
@@ -218,6 +218,6 @@ Instead of using the AWS CLI, you can register the same task definition in the c
 
 ## What you've accomplished and what's next
 
-You've now learned what Amazon ECS Managed Instances is, created the necessary AWS IAM roles, and registered a task definition that's compatible with the Arm architecture. 
+You've now learned what Amazon ECS Managed Instances is, created the necessary AWS IAM roles, and registered a task definition that's compatible with the Arm architecture.
 
 Next, you'll create an Amazon ECS cluster and a capacity provider that uses compute attributes to select AWS Graviton-based instance types.
