@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Export the quantized model
 
-Convert your fine-tuned checkpoint into a quantized ExecuTorch `.pte` program with VGF delegate data. Calibration uses 300 training images to determine quantization parameters; a separate host accuracy check evaluates breed predictions on 100 test images:
+Convert your fine-tuned checkpoint into a quantized ExecuTorch `.pte` program with VGF delegate data. Calibration uses 300 training images to determine quantization parameters. A separate host accuracy check evaluates breed predictions on 100 test images:
 
 ```bash
 python examples/arm/image_classification_example_vgf/model_export/export_deit.py \
@@ -18,7 +18,13 @@ python examples/arm/image_classification_example_vgf/model_export/export_deit.py
   2>&1 | tee arm_test/deit_vgf/export.log
 ```
 
-The script exports the floating-point graph, calibrates symmetric INT8 post-training quantization, and evaluates the quantized model in PyTorch. It then delegates supported operations through the Arm VGF backend and writes the `.pte` file.
+The script does the following:
+
+- Exports the floating-point graph
+- Calibrates symmetric INT8 post-training quantization
+- Evaluates the quantized model in PyTorch
+- Delegates supported operations through the Arm VGF backend
+- Writes the `.pte` file
 
 ## Check the export result
 
@@ -38,10 +44,12 @@ Exported model saved to arm_test/deit_vgf/deit_quantized_vgf.pte
 
 The example accuracy of `0.8900` means the highest-scoring breed matches the dataset label for 89 of the 100 test images. Your result can differ. A successful export also reports the output path, and `test -s` exits successfully when that file is nonempty.
 
-The reported accuracy measures the quantized PyTorch model before VGF execution. The training log evaluates a different number of test images, so those two values alone do not measure the accuracy change caused by quantization. Use the same evaluation images when investigating that change.
+The reported accuracy measures the quantized PyTorch model before VGF execution. The training log evaluates a different number of test images, so those two values alone don't measure the accuracy change caused by quantization. Use the same evaluation images when investigating that change.
 
-The `.pte` includes its VGF delegate data. You do not need to supply a separate `.vgf` file to the ExecuTorch runner.
+The `.pte` includes its VGF delegate data. You don't need to supply a separate `.vgf` file to the ExecuTorch runner.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You have produced a quantized VGF-backed program and recorded its host accuracy. Next, you will classify a pet image with the runner you built during setup.
+You've produced a quantized VGF-backed program and recorded its host accuracy.
+
+Next, you'll classify a pet image with the runner that you built during setup.
