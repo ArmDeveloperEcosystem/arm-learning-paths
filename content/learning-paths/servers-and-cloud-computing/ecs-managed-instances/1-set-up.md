@@ -23,7 +23,7 @@ Amazon ECS runs your containers as tasks using one of the following compute opti
 
 Amazon ECS Managed Instances is a compute option that sits between AWS Fargate and the Amazon EC2 launch type. AWS manages the infrastructure for you, similar to AWS Fargate. However, you get greater control over the Amazon EC2 features and instance types used to run your containers. This includes the ability to use AWS Graviton-based instance types.
 
-Fargate runs each task in its own isolated environment. By contrast, Amazon ECS Managed Instances can place multiple tasks on a larger instance to improve utilization.
+Fargate runs each task in its own isolated environment. By contrast, Amazon ECS Managed Instances can place multiple tasks on a larger instance to improve utilization. For more information about task placement, see [How Amazon ECS places tasks on container instances](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html).
 
 Some of the compute attributes that you can control when using ECS Managed Instances include the following:
 

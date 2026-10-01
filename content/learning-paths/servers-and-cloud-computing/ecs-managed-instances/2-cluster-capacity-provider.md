@@ -13,7 +13,7 @@ layout: "learningpathall"
 
 When you use Amazon ECS Managed Instances, a capacity provider manages the compute capacity for your tasks. It defines a launch template that tells Amazon ECS how to launch instances. The template specifies the instance profile, networking, storage, and the instance requirements used to select instance types.
 
-Instead of naming specific instance types, you can describe the attributes that you need, such as vCPU count, memory, and CPU manufacturer. Amazon ECS selects matching instance types automatically.
+Instead of naming specific instance types, you can describe the attributes that you need, such as vCPU count, memory, and CPU manufacturer. Amazon ECS selects matching instance types automatically based on the attributes.
 
 AWS Graviton is Amazon's family of Arm-based processors, built on Arm Neoverse cores. To target Graviton, you'll combine two settings:
 
