@@ -69,7 +69,7 @@ generated_summary_faq:
       verify that the compile-time guards preserve the non-KleidiAI configuration.
 # END generated_summary_faq
 
-author: Arm
+author: Qixiang Xu
 
 generate_summary_faq: false
 rerun_summary: false
