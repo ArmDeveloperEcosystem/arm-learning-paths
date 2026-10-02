@@ -1,15 +1,15 @@
 ---
-title: Deploy Arm Instances on Oracle Cloud Infrastructure (OCI) using Terraform
+title: Deploy Arm Instances on Oracle Cloud Infrastructure using Terraform
 
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers who are new to deploying Arm instances on Oracle Cloud Infrastructure (OCI) using Terraform.
 
 learning_objectives: 
-    - Automate Arm virtual machine creation on OCI using Terraform
+    - Automate Arm virtual machine (VM) creation on OCI using Terraform
 
 prerequisites:
-    - An OCI account
+    - An [OCI account](/learning-paths/servers-and-cloud-computing/csp/oci/)
     - A computer with Terraform installed
 
 # START generated_summary_faq
@@ -27,31 +27,33 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:41:27Z'
   faq_source_hash: f927b34764047b05b4bd225ef1080f9cc345d6bd91ec8220fd23d710a478013d
   summary: >-
-    Use Terraform to automate the creation of an Arm virtual machine on Oracle Cloud Infrastructure
-    (OCI) Ampere Compute. You prepare a Linux control environment, define the OCI resources as
-    code, and run the Terraform workflow to provision the instance. You can use the resulting
+    You'll use Terraform to automate the creation of an Arm VM on 
+    OCI Ampere Compute. First, you'll prepare a Linux control environment, then define the OCI resources as
+    code and run the Terraform workflow to provision the instance. You can use the resulting
     configuration as a repeatable foundation for additional Arm infrastructure on OCI.
   faqs:
   - question: Which computer can I use to run Terraform?
     answer: >-
       You can use any computer with the required tools installed, including a desktop, laptop,
-      or a virtual machine. The command format assumes you are working on a Linux machine.
-  - question: What do I need in OCI before I start?
+      or a virtual machine. The command format assumes that you're working on a Linux machine.
+  - question: What are the OCI API keys and SSH keys used for?
     answer: >-
-      Yes, you need an Oracle Cloud Infrastructure (OCI) account. If you are new to OCI, review
-      the Getting Started with Oracle OCI Learning Path before you begin.
-  - question: Where do I find installation instructions for Terraform?
+      The OCI API key pair is used to authenticate Terraform's requests to OCI. The
+      SSH key pair is used to connect to the provisioned instance. Set `private_key_path` for the API
+      private key and `ssh_authorized_keys_path` and `ssh_private_key_path` for your SSH keys.
+  - question: How can I test OCI authentication before creating the VM?
     answer: >-
-      See the Terraform install guide and follow its instructions on
-      the computer you plan to use.
-  - question: Can I use a virtual machine as my control environment for running Terraform?
+      Create `availability-domains.tf` with the provided data source and output definition, then
+      run `terraform plan`. If authentication succeeds, you'll see the availability domains in your
+      tenancy. Keep this file in the same directory as `provider.tf`.
+  - question: Can I use a VM as my control environment for running Terraform?
     answer: >-
-      Yes. A virtual machine with the required tools installed works the same as a desktop or
+      Yes. A VM with the required tools installed works the same as a desktop or
       laptop for running the commands.
   - question: What result should I expect after I complete the workflow?
     answer: >-
-      Terraform automates the creation of an Arm virtual machine instance on OCI Ampere Compute.
-      You finish with an OCI Arm instance provisioned from your Terraform configuration.
+      Terraform automates the creation of an Arm-based VM instance on OCI Ampere Compute.
+      You'll finish with an OCI Arm instance provisioned from your Terraform configuration.
 # END generated_summary_faq
 
 author: Frédéric -lefred- Descamps

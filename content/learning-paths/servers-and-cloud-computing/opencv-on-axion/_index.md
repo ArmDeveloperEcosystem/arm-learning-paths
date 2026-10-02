@@ -7,16 +7,16 @@ minutes_to_complete: 45
 who_is_this_for: This is an introductory topic for DevOps engineers, software developers, and AI practitioners who want to build and run computer vision pipelines on SUSE Linux Enterprise Server (SLES) Arm64 using OpenCV, process images and videos, visualize outputs in real time, and integrate ML models.
 
 learning_objectives:
-    - Install and configure OpenCV on Google Cloud C4A Axion Arm64 instances
-    - Build image processing pipelines using OpenCV
-    - Develop video processing pipelines with real-time frame updates
-    - Visualize OpenCV outputs in the browser using an HTTP server
-    - Integrate OpenCV pipelines with machine learning models 
+    - Install and configure OpenCV on Google Cloud C4A Axion Arm64 virtual machines (VMs).
+    - Build image processing pipelines using OpenCV.
+    - Develop video processing pipelines with real-time frame updates.
+    - Visualize OpenCV outputs in the browser using an HTTP server.
+    - Integrate OpenCV pipelines with machine learning models.
 
 prerequisites:
   - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
   - Basic familiarity with Python and Linux command line
-  - Understanding of basic image/video processing concepts
+  - Understanding of basic image and video processing concepts
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -33,23 +33,21 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:42:48Z'
   faq_source_hash: 6382d70b3cd7040b984083cffee014bd2377ba150508b818e393263542a56333
   summary: >-
-    Build browser-based computer-vision pipelines with OpenCV on a Google Cloud C4A Axion virtual
-    machine. You provision a SUSE Linux VM, open port 8000, and prepare a Python 3.11 virtual
-    environment. You then create image and video pipelines that process frames and serve updated
-    output through an HTTP server. Finally, you add a machine learning model, stream its visual
+    You'll build browser-based computer-vision pipelines with OpenCV on a Google Cloud C4A Axion VM. First, you'll provision a SUSE Linux VM, open port `8000`, and prepare a Python 3.11 virtual
+    environment. Then, you'll create image and video pipelines that process frames and serve updated
+    output through an HTTP server. Finally, you'll add a machine learning model, stream its visual
     predictions, and validate the output from the VM's external IP address.
   faqs:
-  - question: Which C4A machine type should I create for the VM?
+  - question: Which C4A machine type should I use?
     answer: >-
-      Use the `c4a-standard-4` machine type with four vCPUs and 16 GB of memory. This instance runs
-      the OpenCV application used throughout the workflow.
+      Use the `c4a-standard-4` machine type with four vCPUs and 16 GB of memory.
   - question: Which port do I open for the browser view, and how do I check that it works?
     answer: >-
-      Open TCP port 8000 with a VPC firewall rule. After you start the project's HTTP server,
-      visit `http://EXTERNAL_IP:8000`; a page that loads confirms the rule and service are configured.
+      Open TCP port `8000` with a VPC firewall rule. After you start the project's HTTP server,
+      visit `http://EXTERNAL_IP:8000`. A page that loads confirms the rule and service are configured.
   - question: What Python version do I need during setup?
     answer: >-
-      Install Python 3.11. You also install development tools with zypper to support building
+      Install Python 3.11. Additionally, install development tools with zypper to support building
       OpenCV’s pip package.
   - question: Where are the project files and virtual environment created?
     answer: >-
@@ -57,8 +55,8 @@ generated_summary_faq:
       scripts from that directory with the environment activated.
   - question: What should be ready before I integrate the machine learning model?
     answer: >-
-      Have a running Google Axion Arm-based VM with SUSE Linux, Python 3.11, the `~/opencv-project`
-      directory with the `cv-env` environment and OpenCV, and port 8000 open in the firewall.
+      Have a running Google Axion Arm-based VM with SUSE Linux and Python 3.11. Also ensure that the VM has a
+      directory `~/opencv-project` with the `cv-env` environment and OpenCV. Confirm that port `8000` is open in the firewall.
 # END generated_summary_faq
 
 author: Pareena Verma

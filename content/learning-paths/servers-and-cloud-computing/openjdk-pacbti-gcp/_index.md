@@ -1,16 +1,16 @@
 ---
-title: Validate PAC/BTI security features in OpenJDK on Google Cloud C4A
+title: Validate Pointer Authentication and Branch Target Identification in OpenJDK on Google Cloud C4A
 
 description: Test Pointer Authentication (PAC) and Branch Target Identification (BTI) support in OpenJDK on Google Cloud C4A. Learn to validate hardware security capabilities and verify JVM compiler support for Arm security features.
     
 minutes_to_complete: 30
 
-who_is_this_for: This is for Java developers running OpenJDK on Arm Neoverse platforms who want to verify PAC/BTI security features are properly enabled. Pointer Authentication (PAC) cryptographically signs return addresses to detect tampering, while Branch Target Identification (BTI) restricts where indirect branches can land. You'll learn to test both hardware capabilities and JVM compiler support for these Armv9 security features.
+who_is_this_for: This is for Java developers running OpenJDK on Arm Neoverse platforms who want to verify  Pointer Authentication (PAC) and Branch Target Identification (BTI) security features are properly enabled. PAC cryptographically signs return addresses to detect tampering, while BTI restricts where indirect branches can land. 
 
 learning_objectives: 
-    - Provision a Google Cloud C4A Arm-based virtual machine with SUSE Linux Enterprise Server.
+    - Provision a Google Cloud C4A Arm-based virtual machine (VM) with SUSE Linux Enterprise Server.
     - Install OpenJDK on the Arm-based VM.
-    - Verify PAC/BTI readiness in the installed JVM runtime.
+    - Verify PAC and BTI readiness in the installed Java VM (JVM) runtime.
 
 prerequisites:
     - A [Google Cloud Platform (GCP)](https://cloud.google.com/free) account with billing enabled
@@ -31,33 +31,32 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:43:54Z'
   faq_source_hash: 1e27a00bafb12e1648af702e7eadeefc15ceefb119b7e6eb3e4824787d547271
   summary: >-
-    Validate Pointer Authentication (PAC) and Branch Target Identification (BTI) support in Java
-    on a Google Axion C4A virtual machine. You provision a SUSE Linux Enterprise Server VM, install
-    OpenJDK, and run a script that checks platform capabilities and Java virtual machine (JVM)
-    just-in-time (JIT) compiler support. You then install Oracle JDK 21, repeat the tests, and
+    You'll validate PAC and BTI support in Java
+    on a Google Axion C4A VM. First, you'll provision a SUSE Linux Enterprise Server VM and install
+    OpenJDK. You'll run a script that checks platform capabilities and JVM
+    just-in-time (JIT) compiler support. Then, you'll install Oracle JDK 21, repeat the tests, and
     compare how each runtime reports branch-protection support.
   faqs:
   - question: How do I verify which JVM is active after installation?
     answer: >-
       Run `java --version`. The output should identify the distribution and version, for example
       OpenJDK 17 on `aarch64`.
-  - question: How do I know the C4A VM exposes PAC and BTI?
+  - question: How do I know that the C4A VM exposes PAC and BTI?
     answer: >-
       Run the provided test script and review its hardware checks. It should report that PAC and
       BTI are available before you evaluate JVM compiler behavior.
   - question: What result should I expect from the SUSE OpenJDK 17 tests?
     answer: >-
       The tests confirm the platform exposes PAC and BTI, but the SUSE-packaged OpenJDK 17 JIT
-      does not emit PAC/BTI instructions. This distinguishes hardware capability from the compiler’s
+      doesn't emit PAC and BTI instructions. This distinguishes hardware capability from the compiler’s
       code generation.
-  - question: How do I ensure the tests run against Oracle JDK 21?
+  - question: How do I ensure that the tests run against Oracle JDK 21?
     answer: >-
-      Invoke the Java binary from the extracted JDK's `bin` directory as shown, for example
+      Invoke the Java binary from the extracted JDK's `bin` directory, for example
       `./jdk-21.0.11/bin/java`. The exact minor version in `--version` output might differ.
   - question: Which C4A machine type should I use for this validation?
     answer: >-
-      Use the `c4a-standard-4` machine type specified in the instructions. Other sizes aren't covered
-      here.
+      Use the `c4a-standard-4` machine type.
 # END generated_summary_faq
 
 author: Doug Anson

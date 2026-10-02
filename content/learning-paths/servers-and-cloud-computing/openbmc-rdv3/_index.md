@@ -6,11 +6,11 @@ minutes_to_complete: 120
 who_is_this_for: This advanced topic is for firmware developers, platform software engineers, and system integrators working on Arm Neoverse-based platforms. It is especially useful for developers exploring pre-silicon development, testing, and integration of Baseboard Management Controllers (BMC) with UEFI firmware. If you are building or validating server-class reference platforms such as RD-V3, before hardware is available, this Learning Path shows you how to simulate and debug the full boot path using Fixed Virtual Platforms (FVPs).
 
 learning_objectives:
-  - Understand the role of OpenBMC and UEFI in the Arm server boot flow
-  - Simulate the firmware using the RD-V3 FVP
-  - Build and launch OpenBMC and UEFI images on the RD-V3 FVP
-  - Validate host–BMC communication using UART and Serial over LAN (SoL)
-  - Implement and validate a custom IPMI command in OpenBMC
+  - Understand the role of OpenBMC and UEFI in the Arm server boot flow.
+  - Simulate the firmware using the RD-V3 FVP.
+  - Build and launch OpenBMC and UEFI images on the RD-V3 FVP.
+  - Validate host–BMC communication using UART and Serial over LAN (SoL).
+  - Implement and validate a custom IPMI command in OpenBMC.
 
 prerequisites:
   - An Arm Neoverse-based Linux machine (cloud or local) running Ubuntu 22.04 LTS
@@ -33,10 +33,9 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:42:25Z'
   faq_source_hash: 285ebf154e6d58463132fc7914c672250ff2d66d0657710ec7eebd557386cbd4
   summary: >-
-    Simulate an Arm server boot flow on the Neoverse RD-V3 r1 Fixed Virtual Platform (FVP). You
-    build OpenBMC and host UEFI images in a Docker environment, launch the FVP, and follow the
-    firmware logs through multiple UART consoles. You then bridge virtual UARTs to validate Serial
-    over LAN communication. Finally, you add a C++ Intelligent Platform Management Interface
+    You'll simulate an Arm server boot flow on the Neoverse RD-V3 r1 FVP. First, you'll
+    build OpenBMC and host UEFI images in a Docker environment. Then, you'll launch the FVP and follow the
+    firmware logs through multiple UART consoles. You'll bridge virtual UARTs to validate SoL communication. Finally, you'll add a C++ Intelligent Platform Management Interface
     (IPMI) handler to OpenBMC, rebuild the image, and verify its response.
   faqs:
   - question: What result should I expect when the RD-V3 FVP starts?
@@ -44,11 +43,11 @@ generated_summary_faq:
       Multiple UART consoles open in separate terminal windows for different subsystems, such
       as Neoverse V3, Cortex-M55, Cortex-M7, and the Cortex-A BMC. You should see boot logs for
       both the BMC and host UEFI across these consoles.
-  - question: The FVP UART consoles do not appear over SSH. What should I check?
+  - question: Will the FVP UART consoles appear over SSH?
     answer: >-
-      The consoles are graphical terminals and require a desktop session. If you are connected
-      over SSH only, the windows won't render; launch the simulation from a desktop session.
-  - question: Which ports should I bridge to enable Serial over LAN (SoL)?
+      The consoles are graphical terminals and require a desktop session. If you're connected
+      over SSH only, the windows won't render. To render the windows, launch the simulation from a desktop session.
+  - question: Which ports should I bridge to enable SoL?
     answer: >-
       Use the provided bridge: `socat -x tcp:localhost:5005 tcp:localhost:5067`. Verify that these
       port mappings match the endpoints exposed by your running simulation.
@@ -60,7 +59,7 @@ generated_summary_faq:
   - question: How do I validate that my custom IPMI command works?
     answer: >-
       Issue the command using `ipmitool` and check for the expected simple string response. If the
-      response is not returned, ensure the C++ handler is integrated and rebuild the OpenBMC image
+      response isn't returned, ensure that the C++ handler is integrated and rebuild the OpenBMC image
       before re-running the simulation.
 # END generated_summary_faq
 

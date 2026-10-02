@@ -8,10 +8,10 @@ minutes_to_complete: 60
 who_is_this_for: This is an introductory topic for DevOps engineers, platform engineers, cloud-native developers, and Kubernetes administrators who want to deploy lightweight Kubernetes-native persistent storage on Arm-based cloud infrastructure.
 
 learning_objectives:
-    - Install and configure K3s Kubernetes on Arm64 virtual machines powered by Azure Cobalt 100
-    - Deploy OpenEBS LocalPV using Helm
-    - Configure Kubernetes storage classes and PersistentVolumeClaims (PVCs)
-    - Deploy and validate stateful Kubernetes workloads with persistent storage
+    - Install and configure K3s Kubernetes on Arm64 virtual machines (VMs) powered by Azure Cobalt 100.
+    - Deploy OpenEBS LocalPV using Helm.
+    - Configure Kubernetes storage classes and PersistentVolumeClaims (PVCs).
+    - Deploy and validate stateful Kubernetes workloads with persistent storage.
 
 prerequisites:
   - A [Microsoft Azure account](https://azure.microsoft.com/) with access to Cobalt 100-based instances (Dpsv6)
@@ -34,24 +34,23 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:43:29Z'
   faq_source_hash: 33e9470ccc06f4835028050615832b7200164ec6ba1fdbc26689e6f4fd43bfa4
   summary: >-
-    Add Kubernetes-native persistent storage to a workload on an Arm64 Azure Cobalt 100 virtual
-    machine. You create a single-node K3s cluster, install OpenEBS LocalPV with Helm, and configure
-    its storage class. You then create a PersistentVolumeClaim, mount it in an NGINX application,
-    and verify that test data survives pod recreation. Finally, you expose the application through
+    You'll add Kubernetes-native persistent storage to a workload on an Arm64 Azure VM powered by Cobalt 100. First, you'll create a single-node K3s cluster, install OpenEBS LocalPV with Helm, and configure
+    its storage class. You'll then create a PersistentVolumeClaim, mount it in an NGINX application,
+    and verify that test data survives pod recreation. Finally, you'll expose the application through
     a NodePort and update the Azure network security group for inbound access.
   faqs:
-  - question: Which Azure VM size should I pick for this setup?
+  - question: How can I install a specific version of the OpenEBS Helm chart?
     answer: >-
-      Use a general-purpose virtual machine in the Dpsv6 series powered by Azure Cobalt 100. For
-      detailed creation instructions, see the Dpsv6 guidance or the Deploy a Cobalt 100 virtual
-      machine on Azure Learning Path.
+      Run `helm search repo openebs/openebs --versions` to list available chart versions, then add
+      `--version <version>` to the provided `helm install` command. Without this option, you install
+      the latest available chart.
   - question: How do I expose the sample application so I can reach it from my browser?
     answer: >-
       Expose the NGINX deployment as a NodePort service and run `kubectl get svc` to see the assigned
       port. Then add an inbound rule for that NodePort in the VM’s Network Security Group.
   - question: What storage configuration should I use for the PersistentVolumeClaim?
     answer: >-
-      Use `storageClassName: openebs-hostpath` and `accessModes: ReadWriteOnce` as shown in the PVC
+      Use `storageClassName: openebs-hostpath` and `accessModes: ReadWriteOnce` as shown in the PersistentVolumeClaim
       manifest. This configuration targets OpenEBS LocalPV for dynamic provisioning.
   - question: How do I know persistent storage is working before I move on?
     answer: >-
@@ -59,8 +58,7 @@ generated_summary_faq:
       If the data is still present after the pod comes back, the volume is persisting as expected.
   - question: Do I need a multi-node cluster?
     answer: >-
-      No. You use a lightweight single-node Kubernetes cluster with K3s on the Azure Cobalt
-      100 VM. Multi-node scenarios are not covered here.
+      No. Use a lightweight single-node Kubernetes cluster with K3s on the VM. 
 # END generated_summary_faq
 
 author: Pareena Verma

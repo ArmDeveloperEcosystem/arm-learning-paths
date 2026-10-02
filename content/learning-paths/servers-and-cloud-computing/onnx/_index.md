@@ -7,13 +7,13 @@ who_is_this_for: This is an advanced topic for developers, ML engineers, and clo
 
 learning_objectives:
     - Quantize and run the Phi-4-mini model with ONNX Runtime on Azure.
-    - Analyze performance on Arm Neoverse N2 based Azure Cobalt 100 VMs.
+    - Analyze performance on Arm Neoverse N2-based Azure VMs powered by Cobalt 100.
 
 prerequisites:
-    - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate cloud service provider. This Learning Path has been tested on an Azure Cobalt 100 virtual machine.
-    - Basic understanding of Python and machine learning concepts.
-    - Familiarity with ONNX Runtime and Azure cloud services.
-    - Knowledge of Large Language Model (LLM) fundamentals.
+    - A Microsoft Azure [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/)
+    - Basic understanding of Python and machine learning concepts
+    - Familiarity with ONNX Runtime and Azure cloud services
+    - Knowledge of large language model (LLM) fundamentals
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -30,9 +30,9 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:42:07Z'
   faq_source_hash: 8c80b9778bfd1b0393e43e5eff673f0f83ec1e49c221ad33fe378fa6e5eba082
   summary: >-
-    Build ONNX Runtime on an Arm-based Azure Cobalt 100 server and use it to run a Phi-4-mini
-    chatbot. You prepare Ubuntu 24.04 LTS, quantize and convert the model, and start the Python
-    chatbot with `onnxruntime_genai`. You then send text prompts and inspect the terminal metrics,
+    You'll build ONNX Runtime on an Arm-based Azure server powered by Cobalt 100 and use it to run a Phi-4-mini
+    chatbot. First, you'll prepare Ubuntu 24.04 LTS, quantize and convert the model, and start the Python
+    chatbot with `onnxruntime_genai`. You'll then send text prompts and inspect the terminal metrics,
     including tokens per second and time to first token, to validate inference and assess basic
     performance on the Arm CPU.
   faqs:
@@ -44,23 +44,23 @@ generated_summary_faq:
   - question: Which execution provider should I choose when running the chatbot?
     answer: >-
       If you're unsure, keep the default execution provider, `follow_config`,
-      so the script uses providers defined in the model config. Override only if you need to explicitly
+      so that the script uses providers defined in the model config. Override only if you need to explicitly
       set a different provider, as the script clears providers when you do.
-  - question: How do I know the chatbot server started correctly?
+  - question: How do I know that the chatbot server started correctly?
     answer: >-
       You should see the model load without errors and a prompt to enter text. After you send a
       prompt, the terminal prints generation metrics such as tokens per second and time to first
       token.
-  - question: Do I need the exact Azure VM size used in the example?
+  - question: Do I need to use the exact Azure VM size used in the example?
     answer: >-
       No. The instructions were tested on a 32-core Azure `Dpls_v6` Cobalt 100 VM, but you can
       use another Arm-based Cobalt 100 instance. Use a comparable instance if you want results
       similar to the example output.
-  - question: What should I check if throughput is lower than the example output?
+  - question: How can I limit the number of tokens in a chatbot response?
     answer: >-
-      Confirm that the model was quantized and converted as described, and verify your execution
-      provider selection. Also check that you are running on an Arm-based Azure Cobalt 100 VM
-      similar to the tested environment.
+      Set `--max_length` (or `-l`) when you run `phi4.py`. This limit includes both the prompt
+      and generated tokens, so it isn't a limit on the response alone. If you omit the option,
+      the script uses a maximum length of 2048 tokens.
 # END generated_summary_faq
 
 author: Nobel Chowdary Mandepudi

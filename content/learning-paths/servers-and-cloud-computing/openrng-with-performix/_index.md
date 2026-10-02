@@ -8,13 +8,13 @@ minutes_to_complete: 45
 who_is_this_for: This is an introductory topic for C++ developers who want to profile a data-processing workload on Arm Linux, identify performance bottlenecks with Arm Performix, and accelerate random number generation using OpenRNG and Arm Performance Libraries.
 
 learning_objectives:
-    - Build and run a baseline C++ data-processing workload on Arm Linux
-    - Use Arm Performix Code Hotspots to identify the highest-impact optimization target
-    - Accelerate random number generation by integrating OpenRNG and Arm Performance Libraries
-    - Measure performance improvements using a microbenchmark across multiple data sizes
+    - Build and run a baseline C++ data-processing workload on Arm Linux.
+    - Use Arm Performix Code Hotspots to identify the highest-impact optimization target.
+    - Accelerate random number generation by integrating OpenRNG and Arm Performance Libraries.
+    - Measure performance improvements using a microbenchmark across multiple data sizes. 
 
 prerequisites:
-    - An Arm Linux (aarch64) server, such as an AWS Graviton3 instance
+    - An Arm Linux (aarch64) server, such as an AWS Graviton3-based instance
     - Basic understanding of C++ and CMake
 
 # START generated_summary_faq
@@ -32,16 +32,15 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:44:16Z'
   faq_source_hash: 004969d91992cbe6672e86cb8cc4734742e4461085198eaf09f3e2ff2afaf24d
   summary: >-
-    Accelerate random-number generation in a C++ workload on Arm Linux with OpenRNG. You build
+    You'll accelerate random-number generation in a C++ workload on Arm Linux with OpenRNG. First, you'll build
     and run the baseline application, then use Arm Performix Code Hotspots to identify expensive
-    functions. You replace scalar distribution generation with the OpenRNG vector API from Arm
-    Performance Libraries and profile the updated build. Finally, you run a microbenchmark across
+    functions. You'll then replace scalar distribution generation with the OpenRNG vector API from Arm
+    Performance Libraries and profile the updated build. Finally, you'll run a microbenchmark across
     eight input sizes and compare the baseline and accelerated timings.
   faqs:
-  - question: I’m using Ubuntu or Debian. Which package manager should I use during setup?
+  - question: Which package manager should I use during setup if I'm using Ubuntu or Debian?
     answer: >-
-      Replace `dnf` with `apt` on Ubuntu or Debian. The rest of the setup flow remains the same on
-      Arm Linux.
+      Replace `dnf` with `apt` on Ubuntu or Debian. 
   - question: What result should I expect when I run the baseline example?
     answer: >-
       The program generates two random distributions, filters points within a window, and computes
