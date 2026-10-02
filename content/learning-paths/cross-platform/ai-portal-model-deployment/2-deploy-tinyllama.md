@@ -25,7 +25,7 @@ You're now ready to deploy the model. Deployment steps are listed for convenienc
 
 Before you can deploy the TinyLlama model, installing its dependencies. 
 
-The TinyLlama model is optimized for AWS Graviton 4-based Amazon EC2 instances such as M8g. Run the following commands on your Arm Linux target:
+This TinyLlama model is optimized for Arm-based cloud CPUs. We validated the following steps on an Arm AGI CPU based on Neoverse V3. You can also use another Arm Neoverse-based server, such as an AWS Graviton 4 instance based on Neoverse V2, which is the model’s reference evaluation platform. Performance will vary depending on the target. Run the following commands on your Arm Linux target:
 
 ```bash
 sudo apt update
