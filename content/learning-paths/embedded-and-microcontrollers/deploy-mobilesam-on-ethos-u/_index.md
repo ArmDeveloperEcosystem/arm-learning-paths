@@ -15,6 +15,7 @@ learning_objectives:
 
 prerequisites:
     - A Linux development machine with glibc 2.28 or later, or an Apple silicon Mac running macOS 15 or later
+    - On Linux, libstdc++.so.6 providing GLIBCXX_3.4.26 or later for the Corstone-320 FVP
     - Familiarity with PyTorch model export and embedded cross-compilation
 
 # START generated_summary_faq
@@ -91,7 +92,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: ExecuTorch MobileSAM prompt segmentation example
-        link: https://github.com/pytorch/executorch/tree/main/examples/arm/mobilesam_prompt_segmentation_example_ethos_u
+        link: https://github.com/pytorch/executorch/tree/5c4d2c4a0150a0809bc77be9a67093f80f60a60f/examples/arm/mobilesam_prompt_segmentation_example_ethos_u
         type: repository
     - resource:
         title: ExecuTorch Arm Ethos-U backend documentation
