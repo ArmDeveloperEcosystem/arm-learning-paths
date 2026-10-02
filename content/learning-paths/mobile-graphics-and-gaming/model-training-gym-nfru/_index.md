@@ -86,7 +86,7 @@ operatingsystems:
     - Linux
 further_reading:
     - resource:
-        title: Arm Neural Technology Playbook - Evaluate
+        title: Arm Neural Graphics Playbook - Evaluate
         link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/
         type: learningpath
     - resource:
