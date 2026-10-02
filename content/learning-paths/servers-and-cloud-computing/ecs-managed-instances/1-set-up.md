@@ -1,7 +1,7 @@
 ---
 # User change
-title: Set up IAM roles and an Arm task definition
-description: Create the IAM roles required by Amazon ECS Managed Instances and register an Arm64 task definition for an NGINX container.
+title: Set up IAM roles and an Arm-compatible task definition
+description: Create the IAM roles required by Amazon ECS Managed Instances and register an Arm-compatible task definition for an NGINX container.
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -11,46 +11,49 @@ layout: "learningpathall"
 
 ## Understand Amazon ECS Managed Instances
 
-Amazon ECS Managed Instances is a compute option for deploying containers on AWS. It sits between AWS Fargate and the Amazon EC2 launch type: AWS manages the infrastructure for you, while you retain access to specific Amazon EC2 instance types, including the ability to use AWS Graviton-based instances.
+Amazon Elastic Container Service (ECS) is a solution for deploying containers on AWS.
 
-Amazon ECS runs your tasks using one of the following compute options:
+Amazon ECS runs your containers as tasks using one of the following compute options:
 
 | Compute option | Who manages the instances | Instance type control | Best for |
 |----------------|---------------------------|-----------------------|----------|
-| AWS Fargate | AWS (serverless, one isolated environment per task) | None | Simple workloads where you don't need to choose instance types |
+| AWS Fargate | AWS (serverless, one isolated environment per task) | None | Workloads that you don't need to choose instance types for |
 | ECS Managed Instances | AWS (provisioning, scaling, patching, maintenance) | Yes, including AWS Graviton | Workloads that need specific EC2 capabilities without managing infrastructure |
 | Amazon EC2 launch type | You (instances, scaling, patching, AMIs) | Full | Workloads that need maximum control over the instances |
 
-Compared with AWS Fargate, Amazon ECS Managed Instances gives you greater control over the Amazon EC2 features and instance types used to run your containers. Fargate runs each task in its own isolated environment. By contrast, Amazon ECS Managed Instances can place multiple tasks on a larger instance to improve utilization. It also gives you access to the full range of Amazon EC2 instance types.
+Amazon ECS Managed Instances is a compute option that sits between AWS Fargate and the Amazon EC2 launch type. AWS manages the infrastructure for you, similar to AWS Fargate. However, you get greater control over the Amazon EC2 features and instance types used to run your containers. This includes the ability to use AWS Graviton-based instance types.
 
-Some of the compute attributes that you can control include the following:
+Fargate runs each task in its own isolated environment. By contrast, Amazon ECS Managed Instances can place multiple tasks on a larger instance to improve utilization. For more information about task placement, see [How Amazon ECS places tasks on container instances](https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html).
+
+Some of the compute attributes that you can control when using ECS Managed Instances include the following:
 
 - vCPU count
 - Memory
 - Local storage
 - Instance type and family
 - CPU manufacturer
+- Accelerator type
 
-AWS automatically selects an instance based on the compute attributes that you specify. With Amazon ECS Managed Instances, AWS handles infrastructure management on your behalf, including software and operating system patching, instance scaling, and maintenance.
+AWS automatically selects an instance based on the compute attributes that you specify. Infrastructure management is handled on your behalf, including software and operating system patching, instance scaling, and maintenance.
 
-You'll create IAM roles with the AWS CLI and register a task definition with either the AWS CLI or the AWS Management Console. On the following pages, you'll use the console to create the cluster, capacity provider, and task.
+You'll create IAM roles with the AWS CLI and register a task definition with either the AWS CLI or the AWS Management Console. Then, you'll use either the console or the CLI to create the cluster and capacity provider, and run a task.
 
 ## Before you begin
 
-Before continuing, install and configure the [AWS CLI](/install-guides/aws-cli/), and confirm that you can sign in to the AWS Management Console.
+Before continuing, ensure that the AWS CLI is installed and configured. Confirm that you can sign in to the AWS Management Console.
 
 ## Create AWS IAM roles
 
 To use Amazon ECS Managed Instances, you need two IAM roles:
 
 - An infrastructure role that allows Amazon ECS to manage the lifecycle of your managed instances on your behalf.
-- An instance role, made available to instances through an instance profile, that the Amazon ECS agent assumes to register instances with your cluster and communicate with the Amazon ECS service.
+- An instance role, made available to instances through an instance profile. The Amazon ECS agent assumes this role to register instances with your cluster and communicate with the Amazon ECS service.
 
-You'll create these roles with the AWS CLI. Make sure your credentials have permission to create IAM roles.
+Make sure that your credentials have the permission to create IAM roles.
 
 ### Create the infrastructure role
 
-First, create a file named `ecs-infrastructure-trust-policy.json` with the following trust policy. This allows the Amazon ECS service to assume the role.
+First, create a file named `ecs-infrastructure-trust-policy.json` with the following trust policy. The trust policy allows the Amazon ECS service to assume the role:
 
 ```json
 {
@@ -68,7 +71,7 @@ First, create a file named `ecs-infrastructure-trust-policy.json` with the follo
 }
 ```
 
-Next, create a role named `ecsInfrastructureRole` using this trust policy:
+Next, create a role named `ecsInfrastructureRole` using the trust policy:
 
 ```console
 aws iam create-role \
@@ -86,7 +89,7 @@ aws iam attach-role-policy \
 
 ### Create the instance role and instance profile
 
-First, create a file named `ecsInstanceRole-trust-policy.json` with the following trust policy. This allows Amazon EC2 to assume the role:
+First, create a file named `ecsInstanceRole-trust-policy.json` with the following trust policy. The policy allows Amazon EC2 to assume the role:
 
 ```json
 {
@@ -103,7 +106,7 @@ First, create a file named `ecsInstanceRole-trust-policy.json` with the followin
 }
 ```
 
-Next, create a role named `ecsInstanceRole` using this trust policy:
+Next, create a role named `ecsInstanceRole` using the trust policy:
 
 ```console
 aws iam create-role \
@@ -138,11 +141,11 @@ aws iam get-role --role-name ecsInfrastructureRole --query 'Role.RoleName' --out
 aws iam get-instance-profile --instance-profile-name ecsInstanceRole --query 'InstanceProfile.Roles[0].RoleName' --output text
 ```
 
-The commands return `ecsInfrastructureRole` and `ecsInstanceRole`. 
+The commands return `ecsInfrastructureRole` and `ecsInstanceRole`.
 
-You'll use both when you create the cluster on the next page.
+You'll use both roles when you create the Amazon ECS cluster.
 
-## Register an Arm Amazon ECS task definition
+## Register an Arm-compatible Amazon ECS task definition
 
 An Amazon ECS task definition is a blueprint for a containerized application.
 
@@ -194,7 +197,7 @@ Create a file named `nginx-task-def.json` with the following contents. The `runt
 
 Register the task definition using either the AWS CLI or the AWS Management Console.
 
-### Use the AWS CLI
+### Register the task definition using the AWS CLI
 
 Register the task definition from the file:
 
@@ -204,18 +207,18 @@ aws ecs register-task-definition --cli-input-json file://nginx-task-def.json
 
 The command returns the registered task definition, including its `family` (`nginx`) and `revision` number.
 
-### Alternative: use the AWS Management Console
+### Register the task definition using the AWS Management Console
 
-Instead of using the AWS CLI, you can register the same task definition in the console:
+To register the same task definition using the console:
 
 1. Navigate to the [console for Amazon ECS](https://console.aws.amazon.com/ecs/v2).
 2. Select **Task definitions**.
-3. Select **Create new task definition**, then **Create new task definition with JSON**.
-4. Paste the task definition JSON from this page.
+3. Select **Create new task definition**, then select **Create new task definition with JSON**.
+4. Paste the task definition JSON.
 5. Select **Create**.
 
 ## What you've accomplished and what's next
 
-You've now learned what Amazon ECS Managed Instances is, created the necessary AWS IAM roles, and registered a task definition that is compatible with the Arm architecture. 
+You've now learned what Amazon ECS Managed Instances is, created the necessary AWS IAM roles, and registered a task definition that's compatible with the Arm architecture.
 
-Next, you'll create an Amazon ECS cluster and a capacity provider that uses compute attributes to select AWS Graviton-based instances.
+Next, you'll create an Amazon ECS cluster and a capacity provider that uses compute attributes to select AWS Graviton-based instance types.

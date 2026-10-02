@@ -11,124 +11,132 @@ layout: "learningpathall"
 
 ## Run a standalone Amazon ECS task
 
-You can run a task definition in two ways on Amazon ECS. A *service* maintains a desired number of tasks, replaces failed tasks, and can integrate with a load balancer, which suits long-running applications. A *standalone task* runs once and isn't automatically replaced when it stops, which suits batch jobs and short tests.
+You can deploy your application on Amazon ECS either as a standalone task or as a service.
 
-You run a standalone task here because you're verifying that a single container lands on Graviton-based compute.
+A standalone task is an instance of your application. It runs once and isn't automatically replaced when it stops, which suits batch jobs and short tests.
 
-Use the cluster, capacity provider, and task definition that you created earlier to deploy a containerized application as a standalone task:
+A service is a collection of tasks. By using a service, you can maintain a desired number of tasks and replace failed tasks. A service can integrate with a load balancer, which suits long-running applications.
+
+For testing whether your application lands on Graviton-based compute, run a standalone task. Use the cluster, capacity provider, and task definition that you created earlier.
+
+### Run a task using the console
+
+To deploy a standalone task using the console:
 
 1. Navigate to the [console for Amazon ECS](https://console.aws.amazon.com/ecs/v2).
 2. Select **Clusters**.
 3. Select the cluster **ecs-managed-instances-cluster** that you created earlier.
 4. Under **Tasks**, select **Run new task**.
-5. Under **Task details**, for **Task definition family**, select the **nginx** task definition that you created earlier. 
+5. Under **Task details**, for **Task definition family**, select the **nginx** task definition that you created earlier.
 6. Leave all other values as defaults and select **Create**.
 
-## Verify application deployment 
+### Run a task using the AWS CLI
 
-This is where you confirm the payoff of the Learning Path: that the Amazon CPU-manufacturer and `ARM64` settings you configured earlier caused Amazon ECS to select a Graviton-based instance.
+Run the `nginx` task definition using the Graviton capacity provider that you created earlier. Save the task Amazon Resource Name (ARN) so that you can use it in later commands:
+
+```console
+TASK_ARN=$(aws ecs run-task \
+  --cluster ecs-managed-instances-cluster \
+  --task-definition nginx \
+  --capacity-provider-strategy \
+    capacityProvider=graviton-managed-instances-cp,weight=1 \
+  --query 'tasks[0].taskArn' \
+  --output text)
+echo "$TASK_ARN"
+```
+
+The task initially enters the `PROVISIONING` state while Amazon ECS selects and launches matching compute. Wait until the task reaches the `RUNNING` state:
+
+```console
+aws ecs wait tasks-running \
+  --cluster ecs-managed-instances-cluster \
+  --tasks "$TASK_ARN"
+```
+
+## Verify application deployment
+
+Confirm that the Amazon CPU-manufacturer and `ARM64` settings that you configured earlier resulted in Amazon ECS selecting a Graviton-based instance.
+
+### Verify deployment using the AWS Management Console
 
 To verify that the application deployed successfully:
 
-1. Select the cluster **ecs-managed-instances-cluster**. 
+1. Select the cluster **ecs-managed-instances-cluster**.
 2. Select **Infrastructure**.
-2. Under **Container instances**, note that the **Instance type** that AWS chose based on the capacity provider is a Graviton-based instance type. The following screenshot shows that the instance type selected by AWS is `m6g.medium`:
-      ![Amazon ECS cluster Infrastructure tab showing a completed Managed Instances capacity provider and one active m6g.medium container instance, confirming that AWS selected Graviton-based compute.#center](container-instance.webp "Active m6g.medium container instance selected by the capacity provider")
-3. Select the container instance that's associated with the ECS Managed Instances capacity provider.
-4. Under **Networking**, you'll find the public DNS name and IP address for the instance. Copy the **Public IP** and paste it into a web browser of your choice. 
+3. Under **Container instances**, note the **Instance type** that AWS chose based on the capacity provider. The `g` in an instance family name, such as `m6g` or `c6g`, indicates an AWS Graviton (Arm-based) processor. Confirm that the name of the instance family that you see contains a `g`. The following screenshot shows that the instance type selected by AWS is `m6g.medium`:
+      ![Amazon ECS cluster Infrastructure tab showing a completed Managed Instances capacity provider and one active m6g.medium container instance, confirming that AWS selected Graviton-based compute.#center](container-instance.png "Active m6g.medium container instance selected by the capacity provider")
+4. Select the container instance that's associated with the ECS Managed Instances capacity provider.
+5. Under **Networking**, you'll find the public DNS name and IP address for the instance. Copy the **Public IP** and paste it into a web browser of your choice.
 
     You'll see the following welcome message:
 
-    ![Screenshot of the application showing the NGINX welcome page and confirming the web server was deployed on Arm-based compute successfully.#center](nginx-output.png "NGINX welcome page indicating successful deployment")
+    ![Screenshot of the NGINX welcome page confirming that the web server is reachable through its public IP address.#center](nginx-output.png "NGINX welcome page indicating successful deployment")
 
-## What you've accomplished
+### Verify deployment using the AWS CLI
 
-You've successfully deployed a containerized application on Graviton-based instances using Amazon ECS Managed Instances. You can extend this workflow to deploy containers on AWS-managed Arm-based instances powered by AWS Graviton, while maintaining control over the instance types and features that you use. 
-
-## Clean up resources
-
-To avoid ongoing charges, remove the resources you created. Delete them in the following order, because Amazon ECS won't let you delete a cluster while a cluster-scoped capacity provider is still attached, and it won't let you delete a capacity provider while it's part of the cluster's default capacity provider strategy or still has running tasks:
-
-1. Stop the running task.
-2. Remove the capacity provider from the cluster's default capacity provider strategy.
-3. Delete the capacity provider. This also terminates the Managed Instances compute.
-4. Delete the cluster.
-5. Deregister and delete the task definition.
-
-You can clean up using either the AWS Management Console or the AWS CLI.
-
-### Use the AWS Management Console
-
-1. Stop the task: open the cluster **ecs-managed-instances-cluster**, select **Tasks**, select the running task, then select **Stop**.
-2. Delete the capacity provider: on the cluster page, select **Infrastructure**, select the Managed Instances capacity provider, then select **Delete**. If the deletion is blocked because the capacity provider is part of the cluster's default capacity provider strategy, edit the cluster to remove it from the default strategy first, then delete it. Deleting the capacity provider terminates the Managed Instances compute.
-3. Delete the cluster: on the **Clusters** page, select **ecs-managed-instances-cluster**, then select **Delete cluster** and confirm.
-4. Deregister the task definition: select **Task definitions**, select the **nginx** family, select the revision, then select **Deregister**. You can then delete the task definition.
-
-### Use the AWS CLI
-
-First, find the running task ARN and stop it:
+Get the ARN of the container instance where Amazon ECS placed the task:
 
 ```console
-TASK_ARN=$(aws ecs list-tasks --cluster ecs-managed-instances-cluster --query 'taskArns[0]' --output text)
-aws ecs stop-task --cluster ecs-managed-instances-cluster --task "$TASK_ARN"
-```
-
-Next, find the name of the capacity provider that the console created for the cluster:
-
-```console
-aws ecs describe-clusters \
-  --clusters ecs-managed-instances-cluster \
-  --query 'clusters[0].capacityProviders' \
-  --output text
-```
-
-The console sets this capacity provider as the cluster's default capacity provider strategy. You must clear that strategy before you can delete the capacity provider. Remove the default strategy from the cluster:
-
-```console
-aws ecs put-cluster-capacity-providers \
+CONTAINER_INSTANCE_ARN=$(aws ecs describe-tasks \
   --cluster ecs-managed-instances-cluster \
-  --capacity-providers [] \
-  --default-capacity-provider-strategy []
+  --tasks "$TASK_ARN" \
+  --query 'tasks[0].containerInstanceArn' \
+  --output text)
+echo "$CONTAINER_INSTANCE_ARN"
 ```
 
-Then, delete the capacity provider, replacing `<capacity-provider-name>` with the name from the earlier command. Deleting the capacity provider deprovisions and terminates the Managed Instances compute, which can take a few minutes to reach `DELETE_COMPLETE`:
+Use the container instance ARN to get the ID of the underlying Amazon EC2 instance:
 
 ```console
-aws ecs delete-capacity-provider \
-  --capacity-provider <capacity-provider-name> \
-  --cluster ecs-managed-instances-cluster
+EC2_INSTANCE_ID=$(aws ecs describe-container-instances \
+  --cluster ecs-managed-instances-cluster \
+  --container-instances "$CONTAINER_INSTANCE_ARN" \
+  --query 'containerInstances[0].ec2InstanceId' \
+  --output text)
+echo "$EC2_INSTANCE_ID"
 ```
 
-After the capacity provider is deleted, delete the cluster:
+Display the instance type and public IP address:
 
 ```console
-aws ecs delete-cluster --cluster ecs-managed-instances-cluster
+aws ec2 describe-instances \
+  --instance-ids "$EC2_INSTANCE_ID" \
+  --query 'Reservations[0].Instances[0].{InstanceType:InstanceType,PublicIpAddress:PublicIpAddress}'
 ```
 
-Finally, deregister and delete the task definition:
+The output is similar to:
+
+```output
+{
+    "InstanceType": "m6g.medium",
+    "PublicIpAddress": "203.0.113.10"
+}
+```
+
+The instance type that Amazon ECS selects can differ. Confirm that the name of the instance family contains `g`, as in `m6g` or `c6g`, which indicates an AWS Graviton processor.
+
+Get the public IP address and request the NGINX welcome page:
 
 ```console
-aws ecs deregister-task-definition --task-definition nginx:1
-aws ecs delete-task-definitions --task-definitions nginx:1
+PUBLIC_IP=$(aws ec2 describe-instances \
+  --instance-ids "$EC2_INSTANCE_ID" \
+  --query 'Reservations[0].Instances[0].PublicIpAddress' \
+  --output text)
+curl -s "http://$PUBLIC_IP" | grep '<title>'
 ```
 
-### Remove the IAM roles (optional)
+The expected output is:
 
-If you don't plan to use Amazon ECS Managed Instances again, you can also remove the IAM roles and instance profile that you created on the first page:
-
-```console
-aws iam remove-role-from-instance-profile \
-  --instance-profile-name ecsInstanceRole \
-  --role-name ecsInstanceRole
-aws iam delete-instance-profile --instance-profile-name ecsInstanceRole
-
-aws iam detach-role-policy \
-  --role-name ecsInstanceRole \
-  --policy-arn arn:aws:iam::aws:policy/AmazonECSInstanceRolePolicyForManagedInstances
-aws iam delete-role --role-name ecsInstanceRole
-
-aws iam detach-role-policy \
-  --role-name ecsInfrastructureRole \
-  --policy-arn arn:aws:iam::aws:policy/AmazonECSInfrastructureRolePolicyForManagedInstances
-aws iam delete-role --role-name ecsInfrastructureRole
+```output
+<title>Welcome to nginx!</title>
 ```
+
+{{% notice Note %}}
+Because the task definition uses `host` network mode, the task doesn't receive a separate public IP address. The request uses the public IP address of the backing Managed Instance. If the command returns `None` for the public IP, confirm that the selected subnet automatically assigns public IPv4 addresses.
+{{% /notice %}}
+
+## What you've accomplished and what's next
+
+You've successfully deployed a containerized application on Graviton-based instances using Amazon ECS Managed Instances.
+
+Next, you'll remove the task and the AWS resources that you created.
