@@ -58,8 +58,8 @@ generated_summary_faq:
       then open **Traces** in the dashboard to inspect the longer request duration.
   - question: Which ports do I need to expose to access the deployed application?
     answer: >-
-      Allow TCP traffic on the actual ports your application uses; the example uses `7133`,
-      `7511`, and `17222`. Match your application's port values in the AWS EC2 security group
+      Allow TCP traffic on the ports that your application uses. The example uses `7133`,
+      `7511`, and `17222`. Match your application's port values in the Amazon EC2 security group
       or a Google Cloud firewall rule associated with your VM's `dotnet-app` network tag.
 # END generated_summary_faq
 

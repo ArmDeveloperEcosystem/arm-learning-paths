@@ -37,12 +37,11 @@ generated_summary_faq:
   - question: Which Azure VM size and image should I choose?
     answer: >-
       Use an Arm-based VM in the Dpsv6 series with the Ubuntu Pro 24.04 LTS Arm64 image.
-      Select **D4ps_v6** in the Azure portal to match the demonstrated configuration.
   - question: How do I know that NGINX installed correctly before I change any configuration?
     answer: >-
       Run `sudo systemctl status nginx` and check for `Active: active (running)`.
-      Use `curl -I http://localhost/` to check for `HTTP/1.1 200 OK`, then open
-      your VM's public IP address in a browser to confirm you see the default welcome page.
+      Use `curl -I http://localhost/` to check for `HTTP/1.1 200 OK`. Then, open
+      your VM's public IP address in a browser to confirm that you see the default welcome page.
   - question: Where should I put my static site files, and what should I expect when it works?
     answer: >-
       Create `/var/www/my-static-site/index.html` and configure `/etc/nginx/conf.d/static-site.conf`

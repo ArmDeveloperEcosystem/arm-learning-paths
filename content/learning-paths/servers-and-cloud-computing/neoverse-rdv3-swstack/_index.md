@@ -54,12 +54,11 @@ generated_summary_faq:
       Look in `~/rdv3/model-scripts/rdinfra/platforms/rdv3/rdv3`, where each UART is redirected
       to its own log file. Use the UART-to-terminal mapping to identify the subsystem you
       want to inspect, such as Linux, TF-A and UEFI, SCP, RSE, MCP, or LCP.
-  - question: How do I validate the demonstrated MCP firmware change on RD-V3-R1?
+  - question: How do I validate the MCP firmware change on RD-V3-R1?
     answer: >-
       Add `FWK_LOG_CRIT("[FWK] Customer code here");` in `fwk_module_start()` in
-      `~/rdv3r1/host/scp/framework/src/fwk_module.c`. Rebuild and repackage with the
-      demonstrated `rdv3r1` build commands, then relaunch the FVP. Check your MCP UART
-      output for `[FWK] Customer code here` to confirm your change executes.
+      `~/rdv3r1/host/scp/framework/src/fwk_module.c`. Rebuild and repackage with `rdv3r1` build commands, then relaunch the FVP. Check your MCP UART
+      output for `[FWK] Customer code here` to confirm that your change executes.
   - question: How do I know the dual-chip RD-V3-R1 simulation is running correctly?
     answer: >-
       After launching `./boot-buildroot.sh -p rdv3r1`, check the UART consoles to verify

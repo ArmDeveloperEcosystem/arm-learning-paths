@@ -56,8 +56,8 @@ generated_summary_faq:
       ONNX Runtime efficiency on the Azure Arm64 instance.
   - question: Does the baseline script use a real image as input?
     answer: >-
-      No. You generate random `float32` data with shape `(1, 3, 224, 224)`, representing one input
-      with three color channels and dimensions of 224 by 224 pixels. You use this synthetic input
+      No. The script uses data in `float32` with shape `(1, 3, 224, 224)`. This represents one input
+      with three color channels and dimensions of 224 by 224 pixels. You'll use this synthetic input
       to measure inference latency.
 # END generated_summary_faq
 

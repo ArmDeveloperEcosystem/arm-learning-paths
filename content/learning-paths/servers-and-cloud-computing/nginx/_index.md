@@ -54,14 +54,12 @@ generated_summary_faq:
       Run `wget --no-check-certificate https://localhost/file.txt` on your server, then
       `wget --no-check-certificate https://<ip_or_dns>/file.txt` from another node.
       You can also check the index page with `curl -k https://<ip_or_dns>/index.html`.
-      Use these certificate-check bypasses only for the self-signed certificate demo;
-      for production, use a certificate issued by a certificate authority.
-  - question: What result should I expect after configuring the reverse proxy and API gateway?
+  - question: How do I verify the setup of the reverse proxy and API gateway?
     answer: >-
-      You should retrieve `file.txt` through the reverse proxy and `apigw_file.txt` through
+      Retrieve `file.txt` through the reverse proxy and `apigw_file.txt` through
       `/api_old/apigw_file.txt`. Your API gateway rewrites `/api_old/` to `/api_new/`
-      before forwarding the request upstream. Verify retrieval with the demonstrated `wget`
-      commands on the proxy node and another node.
+      before forwarding the request upstream. Verify retrieval with `wget`
+      commands on the proxy node and another node that isn't the proxy. 
 # END generated_summary_faq
 
 author: Julio Suarez

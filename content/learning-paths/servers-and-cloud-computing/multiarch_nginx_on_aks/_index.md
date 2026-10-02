@@ -44,7 +44,7 @@ generated_summary_faq:
       each pool.
   - question: Which NGINX image should I use to run on both Arm and x86 nodes?
     answer: >-
-      The deployments use a multi-architecture NGINX image from Docker Hub. The container runtime
+      Use a multi-architecture NGINX image from Docker Hub. The container runtime
       pulls the correct image variant based on the node’s CPU architecture.
   - question: What result should I expect when the NGINX services become available?
     answer: >-

@@ -32,9 +32,9 @@ generated_summary_faq:
     services before choosing an environment. Then, you'll identify MySQL documentation to install
     and configure the server. You'll connect with the MySQL clients and run SQL commands.
   faqs:
-  - question: Which version of the MySQL Reference Manual should I use?
+  - question: Which version of the MySQL reference manual should I use?
     answer: >-
-      Use the MySQL Reference Manual for the version of MySQL you're working with.
+      Use the MySQL reference manual for the version of MySQL you're working with.
       Check the version selected in the documentation before following its installation,
       configuration, or client instructions.
   - question: What SQL operations can I try after connecting to MySQL?
@@ -48,7 +48,7 @@ generated_summary_faq:
       is working.
   - question: Can I use a managed SQL service instead of installing MySQL myself?
     answer: >-
-      Yes. You can use AWS RDS and select an Arm-based instance; the service handles MySQL installation
+      Yes. You can use Amazon Relational Database Service (RDS) and select an Arm-based instance. Amazon RDS handles MySQL installation
       for you. If you use a bare-metal server or cloud VM, review the MySQL installation options and
       choose how to install it yourself.
   - question: Where should I start if I don't have an Arm node?

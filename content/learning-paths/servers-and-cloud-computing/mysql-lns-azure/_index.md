@@ -43,7 +43,7 @@ generated_summary_faq:
       from.
   - question: Where do I run the migration scripts, and what SSH key do they generate?
     answer: >-
-      Open an SSH shell on your on-premises simulator and run the scripts from `$HOME/lift-n-shift-assets`.
+      Open an SSH shell on your on-premises x64 simulator and run the scripts from `$HOME/lift-n-shift-assets`.
       Run `scripts/create_ssh_key.sh` to generate an SSH key pair in `$HOME/.ssh` and print the public
       key. Press **Enter** to leave the passphrase empty, and save the printed `ssh-rsa`
       public key string for use with the Azure VM.
@@ -52,12 +52,10 @@ generated_summary_faq:
       Open a second SSH session to the Arm-based Azure VM. Run `sudo su -`, then
       `cat /root/mysql_root_password.txt` to retrieve the password. Enter it at the restore
       prompt in your original session on the on-premises simulator.
-  - question: How do I connect to the Arm-based Azure VM before running the benchmark, and which
-      user and key should I use?
+  - question: How do I connect to the Arm-based Azure VM before running the benchmark?
     answer: >-
-      From the on-premises simulator, SSH to the Arm VM using the key created in `$HOME/.ssh`
-      and the `azureadmin` user at the VM’s public IP. Use the filename that you identified for the Azure
-      cloud key.
+      From the on-premises simulator, SSH to the VM using the key created in `$HOME/.ssh`
+      and the `azureadmin` user at the VM’s public IP.
   - question: Where should I create and run the benchmarking script, and what result should I
       expect?
     answer: >-

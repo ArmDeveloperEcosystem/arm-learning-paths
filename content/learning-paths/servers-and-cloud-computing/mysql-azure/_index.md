@@ -32,18 +32,18 @@ generated_summary_faq:
     You'll deploy MySQL on an Arm64 Azure virtual machine powered by Cobalt 100, and establish a performance baseline.
     First, you'll provision an Ubuntu Pro 24.04 LTS Dpsv6 VM in the Azure portal, then install, secure,
     and validate MySQL. After creating sample data, you'll use `mysqlslap` to run read and write
-    benchmarks. You'll interpret the reported timings, and capture results that you can use in later
+    benchmarks. You'll interpret the reported timings and capture results that you can use in later
     comparisons.
   faqs:
   - question: Which Azure VM size and image should I select?
     answer: >-
       Use a general-purpose Dpsv6 series instance based on Azure Cobalt 100, and choose Ubuntu
       Pro 24.04 LTS as the base image.
-  - question: What do I need to connect to the VM after deployment?
+  - question: What do I use to connect to the VM after deployment?
     answer: >-
       Use the private SSH key that you downloaded when you created the VM, along with the administrator
       username and the VM's public IP address.
-  - question: How do I confirm that MySQL is running before moving on?
+  - question: How do I confirm that MySQL is running?
     answer: >-
       Start MySQL and enable it to start on boot using the provided `systemctl` commands. Then, perform
       the functional validation to confirm queries run and users can authenticate.

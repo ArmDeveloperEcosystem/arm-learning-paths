@@ -53,7 +53,6 @@ generated_summary_faq:
       to display its public IP address.
   - question: What result should I expect after I complete the workflow?
     answer: >-
-      Terraform automates the creation of an Arm-based VM instance on OCI Ampere Compute.
       You'll finish with an OCI Arm instance provisioned from your Terraform configuration.
 # END generated_summary_faq
 

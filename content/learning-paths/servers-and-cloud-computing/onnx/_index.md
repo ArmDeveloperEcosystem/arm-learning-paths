@@ -49,13 +49,12 @@ generated_summary_faq:
   - question: How do I know that the chatbot server started correctly?
     answer: >-
       You should see the model load without errors and a prompt to enter text. If you start
-      the script with `--timings` or `-g`, as in the example command, you'll also see tokens
+      the script with `--timings` or `-g`, you'll also see tokens
       per second and time to first token after sending a prompt.
-  - question: What Azure VM configuration is documented for this setup?
+  - question: What Azure VM configuration should I use?
     answer: >-
       Use the tested configuration as your reference: an Azure `Dpls_v6` Cobalt 100 VM
-      with 32 cores, 64 GB of RAM, and 32 GB of disk space. You don't have documented
-      performance results for other VM sizes in this Learning Path.
+      with 32 cores, 64 GB of RAM, and 32 GB of disk space. 
   - question: How can I limit the number of tokens in a chatbot response?
     answer: >-
       Set `--max_length` (or `-l`) when you run `phi4.py`. This limit includes both the prompt
