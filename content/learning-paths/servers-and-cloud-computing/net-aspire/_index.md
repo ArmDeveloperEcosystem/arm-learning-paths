@@ -39,13 +39,12 @@ generated_summary_faq:
   - question: How do I verify the .NET SDK and install the Aspire workload before creating the
       project?
     answer: >-
-      Run `dotnet --version` in PowerShell and confirm that it reports version 8.0 or later. Then, run `dotnet
-      workload install aspire`. The installer downloads the Aspire components and completes without
-      errors.
+      Run `dotnet --version` in PowerShell and confirm that you have .NET SDK 8.0 or later.
+      Then run `dotnet workload install aspire` and check for `Successfully installed workload(s) aspire.`
   - question: Why do I need to trust the HTTPS development certificate, and how do I do it?
     answer: >-
-      The application uses HTTPS locally and the dashboard relies on a trusted certificate. Run
-      `dotnet dev-certs https --trust` before you start the application.
+      You use HTTPS when running the application locally. Run `dotnet dev-certs https --trust`
+      before starting your application to trust its HTTPS development certificate.
   - question: Which project do I run to start the distributed application, and what output should
       I expect?
     answer: >-
@@ -53,14 +52,15 @@ generated_summary_faq:
       messages such as `Building...`, an Aspire version line, and `Distributed application starting`.
   - question: Where do I add the intensive computations, and how can I confirm the change worked?
     answer: >-
-      Add `ComputationService.cs` to the `NetAspire.Arm.ApiService` project using the provided code,
-      then rebuild and run the solution. Check the console or dashboard logs for the API service
-      to observe the new computation executing.
+      Add the supplied `ComputationService.cs` code to `NetAspire.Arm.ApiService`. In `Program.cs`,
+      update the `/weatherforecast` handler to call `ComputationService.PerformIntensiveCalculations(matrixSize: 800)`.
+      Run `dotnet run --project NetAspire.Arm.AppHost`, select **Weather** in your web frontend,
+      then open **Traces** in the dashboard to inspect the longer request duration.
   - question: Which ports do I need to expose to access the deployed application?
     answer: >-
-      Allow TCP traffic on ports `7133`, `7511`, and `17222`, matching the ports used when you run
-      the application locally. Configure these ports in the EC2 security group on AWS or in a
-      firewall rule associated with the `dotnet-app` network tag on Google Cloud.
+      Allow TCP traffic on the actual ports your application uses; the example uses `7133`,
+      `7511`, and `17222`. Match your application's port values in the AWS EC2 security group
+      or a Google Cloud firewall rule associated with your VM's `dotnet-app` network tag.
 # END generated_summary_faq
 
 author: Dawid Borycki

@@ -37,22 +37,22 @@ generated_summary_faq:
   - question: Which Azure VM size and image should I choose?
     answer: >-
       Use an Arm-based VM in the Dpsv6 series with the Ubuntu Pro 24.04 LTS Arm64 image.
-      The example uses a `D4ps_v6` instance, but you can follow the same instructions
-      with other Dpsv6 sizes.
+      Select **D4ps_v6** in the Azure portal to match the demonstrated configuration.
   - question: How do I know that NGINX installed correctly before I change any configuration?
     answer: >-
-      After installation, NGINX serves its default welcome page. Confirm that the welcome page
-      loads before proceeding to configure your own site.
+      Run `sudo systemctl status nginx` and check for `Active: active (running)`.
+      Use `curl -I http://localhost/` to check for `HTTP/1.1 200 OK`, then open
+      your VM's public IP address in a browser to confirm you see the default welcome page.
   - question: Where should I put my static site files, and what should I expect when it works?
     answer: >-
-      Create the `/var/www/my-static-site` directory and add an HTML file. After updating the NGINX
-      configuration to point to this directory and reloading NGINX, requests to the server should
-      return your custom page instead of the default welcome page.
+      Create `/var/www/my-static-site/index.html` and configure `/etc/nginx/conf.d/static-site.conf`
+      to use that directory and `index.html`. Disable the packaged default site with
+      `sudo unlink /etc/nginx/sites-enabled/default`. Run `sudo nginx -t` before
+      `sudo nginx -s reload`, then open your VM's public IP address to check your custom page.
   - question: Should I run ApacheBench on the VM or from another machine?
     answer: >-
-      Install and run ApacheBench (`ab`) on the same VM that
-      runs NGINX, unless you have a specific reason to benchmark from an
-      external client.
+      Run ApacheBench on your NGINX VM to match the demonstrated baseline test.
+      Use `ab -n 1000 -c 50 http://localhost/` to send 1,000 requests with 50 concurrent connections.
   - question: Which package installs ApacheBench on Ubuntu Pro 24.04 LTS, and how do I verify it?
     answer: >-
       Install the `apache2-utils` package. Run `ab -V` to confirm that ApacheBench is available and

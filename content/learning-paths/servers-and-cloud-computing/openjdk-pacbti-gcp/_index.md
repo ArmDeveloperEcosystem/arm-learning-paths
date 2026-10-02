@@ -52,8 +52,8 @@ generated_summary_faq:
       code generation.
   - question: How do I ensure that the tests run against Oracle JDK 21?
     answer: >-
-      Invoke the Java binary from the extracted JDK's `bin` directory, for example
-      `./jdk-21.0.11/bin/java`. The exact minor version in `--version` output might differ.
+      Run `JAVA=./jdk-21.0.11/bin/java ./test-pacbti.sh` to select the Oracle JDK for the
+      test script. Replace `jdk-21.0.11` with your extracted directory name if it differs.
   - question: Which C4A machine type should I use for this validation?
     answer: >-
       Use the `c4a-standard-4` machine type.

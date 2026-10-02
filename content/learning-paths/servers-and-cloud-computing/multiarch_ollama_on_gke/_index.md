@@ -47,17 +47,20 @@ generated_summary_faq:
   - question: What values should I set when creating the Arm node pool?
     answer: >-
       Name the pool `arm64-pool`, set **Size** to **1**, and enable **Specify node locations** with
-      **us-central1-a** selected. Follow the remaining on-screen options to add the Arm node pool.
+      **us-central1-a** selected. On the **Nodes** tab, select the **C4A** series and `c4a-standard-4`
+      machine type, then select **Create**.
   - question: How do I send a request without selecting an architecture and see which architecture handled
       it?
     answer: >-
       Run `./model_util.sh multiarch hello` to target the multi-architecture service. The response
-      shows which pod served the request, including its deployment, node, and timestamp.
+      includes `Ollama is running`. Under **Pod log output**, you see a pod and container identifier
+      with a timestamp. Use the `amd64` or `arm64` in the pod name to identify its architecture.
   - question: What should I check if requests always go to the same architecture?
     answer: >-
-      Verify that both the amd64 and arm64 deployments are running and their services are available
-      in the `ollama` namespace. If one deployment isn't ready, traffic routes to the available
-      architecture.
+      Check that both the amd64 and arm64 deployments have running, ready pods in the `ollama`
+      namespace. Confirm that both pods have the `app: ollama-multiarch` label and that
+      `ollama-multiarch-svc` selects that label. Repeat `./model_util.sh multiarch hello` to observe
+      the pod identifiers in the logs.
 # END generated_summary_faq
 
 author:

@@ -38,13 +38,12 @@ generated_summary_faq:
   faqs:
   - question: How do I know which NGINX features are enabled in the packaged install?
     answer: >-
-      Review the packaged build configuration to see which modules and paths are compiled in.
-      Use this information to decide which options to enable if you later build from source.
+      Run `nginx -V` to inspect your packaged build. You can see the NGINX and OpenSSL
+      versions, compiler flags, module options, and configured paths in the output.
   - question: Do I need to build NGINX from source?
     answer: >-
-      No. Start with a package install and only build from source if you need a different
-      configuration. Looking at the prebuilt configuration first helps you choose the right source
-      build options.
+      You can install NGINX with a package manager. If you choose a source build,
+      use the packaged build options as a starting point and enable the features you need.
   - question: What do I need before setting up the reverse proxy and API gateway?
     answer: >-
       Set up two file servers and prepare a third node for the reverse
@@ -52,13 +51,17 @@ generated_summary_faq:
       (HTTPS).
   - question: How do I verify that the static HTTPS file server is working?
     answer: >-
-      After configuring NGINX, creating a key and certificate, and starting the service, access
-      a test file over HTTPS from a client. Successful retrieval confirms that the server is working.
+      Run `wget --no-check-certificate https://localhost/file.txt` on your server, then
+      `wget --no-check-certificate https://<ip_or_dns>/file.txt` from another node.
+      You can also check the index page with `curl -k https://<ip_or_dns>/index.html`.
+      Use these certificate-check bypasses only for the self-signed certificate demo;
+      for production, use a certificate issued by a certificate authority.
   - question: What result should I expect after configuring the reverse proxy and API gateway?
     answer: >-
-      The reverse proxy and API gateway forwards requests to the two upstream file servers and load
-      balances across them. During testing, you should observe responses originating from both
-      backends. 
+      You should retrieve `file.txt` through the reverse proxy and `apigw_file.txt` through
+      `/api_old/apigw_file.txt`. Your API gateway rewrites `/api_old/` to `/api_new/`
+      before forwarding the request upstream. Verify retrieval with the demonstrated `wget`
+      commands on the proxy node and another node.
 # END generated_summary_faq
 
 author: Julio Suarez

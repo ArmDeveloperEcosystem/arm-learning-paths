@@ -42,28 +42,29 @@ generated_summary_faq:
   faqs:
   - question: How do I choose the correct FVP model for my RD-V3 build?
     answer: >-
-      Match the FVP model version to the RD-V3 release tag that you're using. Use the
-      example mapping as reference and refer to the release tags list for the full set of supported versions.
+      Match your FVP version to your RD-V3 release tag. For `RD-INFRA-2025.07.03`,
+      use FVP version `11.29.35`. Check the release tags list for other version mappings.
   - question: What result should I expect when the single-die simulation boots successfully?
     answer: >-
-      The system boots from BL1 through the firmware stack to a Buildroot Linux shell on the FVP.
-      You should see logs across the mapped UART consoles for each stage and a Linux prompt on
-      the application processor path.
+      In `terminal_ns_uart0`, select **RD-V3 Buildroot** from the GRUB menu and press **Enter**.
+      You should see `Welcome to Buildroot`, then a `buildroot login:` prompt. Log in as
+      `root` to reach the Linux shell.
   - question: Where can I find the UART logs from the RD-V3 simulation?
     answer: >-
       Look in `~/rdv3/model-scripts/rdinfra/platforms/rdv3/rdv3`, where each UART is redirected
       to its own log file. Use the UART-to-terminal mapping to identify the subsystem you
       want to inspect, such as Linux, TF-A and UEFI, SCP, RSE, MCP, or LCP.
-  - question: How do I validate a change to SCP, MCP, or LCP firmware?
+  - question: How do I validate the demonstrated MCP firmware change on RD-V3-R1?
     answer: >-
-      Rebuild the affected platform control firmware, then rerun the FVP simulation. Inspect the
-      corresponding UART logs for your expected messages or behavior and confirm that the system still
-      reaches the Linux shell.
+      Add `FWK_LOG_CRIT("[FWK] Customer code here");` in `fwk_module_start()` in
+      `~/rdv3r1/host/scp/framework/src/fwk_module.c`. Rebuild and repackage with the
+      demonstrated `rdv3r1` build commands, then relaunch the FVP. Check your MCP UART
+      output for `[FWK] Customer code here` to confirm your change executes.
   - question: How do I know the dual-chip RD-V3-R1 simulation is running correctly?
     answer: >-
-      Look for a dual-AP boot flow and MCP activity coordinating across dies. Both dies should
-      produce console output, and the expected cross-die management
-      behavior should be visible in the logs.
+      After launching `./boot-buildroot.sh -p rdv3r1`, check the UART consoles to verify
+      that both application processors, AP0 and AP1, boot in coordination. You can inspect
+      the additional MCP console and logs in `~/rdv3r1/model-scripts/rdinfra/platforms/rdv3r1/rdv3r1`.
 # END generated_summary_faq
 
 author:

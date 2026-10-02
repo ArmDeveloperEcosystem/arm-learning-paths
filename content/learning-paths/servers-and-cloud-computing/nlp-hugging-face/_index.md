@@ -52,7 +52,7 @@ generated_summary_faq:
       should sum to 1. The first line is the model's strongest prediction.
   - question: How do I know that the PyTorch profiler captured my run?
     answer: >-
-      You should see a table of CPU operators and their execution times after the classification
+      You should see a table of CPU operators and their execution times before the classification
       output. The `model_inference` row summarizes the profiled inference region.
 # END generated_summary_faq
 

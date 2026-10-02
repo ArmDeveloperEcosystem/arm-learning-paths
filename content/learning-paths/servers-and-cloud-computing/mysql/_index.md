@@ -48,14 +48,14 @@ generated_summary_faq:
       is working.
   - question: Can I use a managed SQL service instead of installing MySQL myself?
     answer: >-
-      Yes. However, the
-      hands-on verification steps assume that you control an Arm instance where you install MySQL and
-      interact with the command-line client.
+      Yes. You can use AWS RDS and select an Arm-based instance; the service handles MySQL installation
+      for you. If you use a bare-metal server or cloud VM, review the MySQL installation options and
+      choose how to install it yourself.
   - question: Where should I start if I don't have an Arm node?
     answer: >-
       Provision an Arm environment before you install
       MySQL. For more information, see the [Get started
-      with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/intro/) Learning Path.
+      with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) Learning Path.
 # END generated_summary_faq
 
 author: Jason Andrews

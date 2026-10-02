@@ -50,8 +50,8 @@ generated_summary_faq:
       server responds to an HTTP request on the configured port.
   - question: What URL should I pass to Autocannon?
     answer: >-
-      Use the address and port where your sample Node.js server is listening, such as `localhost`
-      with the configured port. Run Autocannon against that endpoint to collect results.
+      Use `http://localhost:80` when you run Autocannon on the same VM as the sample
+      Node.js server.
   - question: How can I change the load and duration of the Autocannon benchmark?
     answer: >-
       Adjust `-c` to set the number of concurrent connections and `-d` to set the test duration

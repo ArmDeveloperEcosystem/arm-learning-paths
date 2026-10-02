@@ -49,8 +49,9 @@ generated_summary_faq:
       pulls the correct image variant based on the node’s CPU architecture.
   - question: What result should I expect when the nginx services become available?
     answer: >-
-      Each deployment exposes a LoadBalancer service with an external endpoint. Hitting the endpoint
-      returns the default nginx response using the shared configuration from the ConfigMap.
+      When you request a service's external endpoint, you receive JSON with `message`, `timestamp`,
+      `server`, and `request_uri` fields. You see `nginx response` as the message and the serving pod's
+      name in `server`.
   - question: How do I confirm that each nginx pod is running on the correct architecture?
     answer: >-
       Use `kubectl` to check each pod’s node assignment and labels. The Arm service selects pods

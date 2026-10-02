@@ -38,9 +38,9 @@ generated_summary_faq:
   faqs:
   - question: What do I pass to the `--model_path` argument in the chatbot script?
     answer: >-
-      Use the path to the quantized and converted Phi-4-mini model assets that onnxruntime_genai
-      expects. Make sure the quantization and conversion step completed successfully before starting
-      the server.
+      Use the directory containing `genai_config.json` and `model.onnx` for the downloaded
+      INT4-quantized Phi-4-mini model. With the provided download command, pass
+      `cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4` as the model path.
   - question: Which execution provider should I choose when running the chatbot?
     answer: >-
       If you're unsure, keep the default execution provider, `follow_config`,
@@ -48,14 +48,14 @@ generated_summary_faq:
       set a different provider, as the script clears providers when you do.
   - question: How do I know that the chatbot server started correctly?
     answer: >-
-      You should see the model load without errors and a prompt to enter text. After you send a
-      prompt, the terminal prints generation metrics such as tokens per second and time to first
-      token.
-  - question: Do I need to use the exact Azure VM size used in the example?
+      You should see the model load without errors and a prompt to enter text. If you start
+      the script with `--timings` or `-g`, as in the example command, you'll also see tokens
+      per second and time to first token after sending a prompt.
+  - question: What Azure VM configuration is documented for this setup?
     answer: >-
-      No. The instructions were tested on a 32-core Azure `Dpls_v6` Cobalt 100 VM, but you can
-      use another Arm-based Cobalt 100 instance. Use a comparable instance if you want results
-      similar to the example output.
+      Use the tested configuration as your reference: an Azure `Dpls_v6` Cobalt 100 VM
+      with 32 cores, 64 GB of RAM, and 32 GB of disk space. You don't have documented
+      performance results for other VM sizes in this Learning Path.
   - question: How can I limit the number of tokens in a chatbot response?
     answer: >-
       Set `--max_length` (or `-l`) when you run `phi4.py`. This limit includes both the prompt

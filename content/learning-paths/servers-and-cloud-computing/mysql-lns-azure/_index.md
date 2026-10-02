@@ -43,8 +43,8 @@ generated_summary_faq:
       from.
   - question: Where do I run the migration scripts, and what SSH key do they generate?
     answer: >-
-      Run the scripts from the downloaded asset repository, for example in `$HOME/lift-n-shift-assets`.
-      The `scripts/create_ssh_key.sh` script generates an SSH key pair in `$HOME/.ssh` and prints the public
+      Open an SSH shell on your on-premises simulator and run the scripts from `$HOME/lift-n-shift-assets`.
+      Run `scripts/create_ssh_key.sh` to generate an SSH key pair in `$HOME/.ssh` and print the public
       key. Press **Enter** to leave the passphrase empty, and save the printed `ssh-rsa`
       public key string for use with the Azure VM.
   - question: Where can I find the password requested when restoring the database on the cloud VM?

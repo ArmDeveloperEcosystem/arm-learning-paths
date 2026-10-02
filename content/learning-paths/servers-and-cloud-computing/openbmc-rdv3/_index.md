@@ -58,9 +58,9 @@ generated_summary_faq:
       You should see ongoing boot messages or a prompt from the host side.
   - question: How do I validate that my custom IPMI command works?
     answer: >-
-      Issue the command using `ipmitool` and check for the expected simple string response. If the
-      response isn't returned, ensure that the C++ handler is integrated and rebuild the OpenBMC image
-      before re-running the simulation.
+      Run `ipmitool raw 0x30 0x20` in the OpenBMC console. You'll see hexadecimal bytes. Exclude the first byte, which represents the payload length,
+      and decode the remaining bytes using the provided command. The decoded string should be
+      `Hello from OpenBMC IPMI!`.
 # END generated_summary_faq
 
 author:

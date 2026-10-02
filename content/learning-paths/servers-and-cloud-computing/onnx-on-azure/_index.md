@@ -37,7 +37,8 @@ generated_summary_faq:
   faqs:
   - question: Which Azure VM size and OS image should I use?
     answer: >-
-      Choose a Cobalt 100-based Dpsv6 VM from the D-series and use Ubuntu Pro 24.04 LTS. 
+      Select `D4ps_v6` from the Dpsv6 series powered by Azure Cobalt 100.
+      Use the Ubuntu Pro 24.04 LTS image and select **Arm64** as the VM architecture.
   - question: What do I need in place before running the baseline latency test?
     answer: >-
       Activate your Python virtual environment, have the `baseline.py` script ready, and ensure that

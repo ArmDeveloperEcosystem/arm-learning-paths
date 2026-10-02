@@ -40,17 +40,19 @@ generated_summary_faq:
   faqs:
   - question: Which package manager should I use during setup if I'm using Ubuntu or Debian?
     answer: >-
-      Replace `dnf` with `apt` on Ubuntu or Debian. 
+      Replace `dnf` with `apt` on Ubuntu or Debian.
   - question: What result should I expect when I run the baseline example?
     answer: >-
-      The program generates two random distributions, filters points within a window, and computes
-      the shortest distance from the origin. Use this run to establish baseline behavior and timing
+      You'll see the number of generated points, the count within a rectangular window, and
+      the shortest distance from the origin across the full distribution. You generate the points
+      by adding Gaussian and uniform distributions. Use this run to establish baseline behavior
       before profiling and acceleration.
   - question: What should I look for in the Arm Performix Code Hotspots report?
     answer: >-
-      Focus on functions consuming the largest share of CPU cycles. In this example, routines
-      such as `generateDistribution` or `min_length` might appear near the top and inform which code to
-      optimize first.
+      Focus on `generateDistribution`, the primary hotspot in the example flame graph. You'll see
+      more time spent in Gaussian sampling with `std::normal_distribution` than in uniform sampling.
+      Prioritize random-number generation rather than `min_length`, which contributes negligible runtime
+      in the example.
   - question: Which OpenRNG API should I use to speed up distribution generation?
     answer: >-
       Use the Vector Statistical Library (VSL) API with a stream object to generate values in
