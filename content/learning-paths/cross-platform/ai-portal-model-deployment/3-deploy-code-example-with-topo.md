@@ -88,6 +88,10 @@ Hardware Info: ✅ (lscpu)
 Processing Domain Driver (remoteproc): ℹ️ (no remoteproc devices found)
 ```
 
+{{% notice Note %}}
+As of October 2026, [Topo v13.0.0](https://github.com/arm/topo/releases/tag/v13.0.0) is the latest stable release. Its `topo health` command may report Docker Compose as missing because it checks for the legacy `docker-compose` command, even when the current Docker Compose plugin (`docker compose`) is installed. If `docker compose version` reports v2.21.0 or later, you can continue.
+{{% /notice %}}
+
 ## (Optional) Install remoteproc
 
 Remoteproc is a Linux kernel framework for managing remote or auxiliary processors in a heterogeneous SoC. If you see the `no remoteproc devices found` message, install the `remoteproc-runtime` using Topo. However, you need `remoteproc-runtime` only if your target is a heterogeneous SoC.
