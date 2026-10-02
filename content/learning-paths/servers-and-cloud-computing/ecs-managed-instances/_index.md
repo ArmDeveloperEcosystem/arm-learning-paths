@@ -1,7 +1,6 @@
 ---
 title: Deploy a container on AWS Graviton processors with Amazon ECS Managed Instances
 description: Deploy an NGINX container with Amazon ECS Managed Instances and verify that your task runs on AWS Graviton-based compute.
-draft: true
 
 minutes_to_complete: 60
 
