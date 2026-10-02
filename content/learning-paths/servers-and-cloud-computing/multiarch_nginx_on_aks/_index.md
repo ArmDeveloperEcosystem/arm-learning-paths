@@ -31,37 +31,36 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:35:41Z'
   faq_source_hash: 9c684631877441d8756182571940b0aa63797c5adab26c46663b95492bceffbb
   summary: >-
-    Build a hybrid Azure Kubernetes Service (AKS) cluster with x86 and Arm nodes, then deploy
-    nginx workloads to both architectures. You create the node pools, connect with `kubectl`,
-    and use a utility script to inspect and test each deployment. You then add a multi-architecture
-    service, compare its routing with the architecture-specific services, and monitor both workloads
-    while you run load tests.
+    You'll build a hybrid AKS cluster with x86 and Arm nodes, then deploy
+    NGINX workloads to both architectures. First, you'll create the node pools, connect with `kubectl`,
+    and use a utility script to inspect and test each deployment. Then, you'll add a multi-architecture
+    service and compare its routing with the architecture-specific services. While you run load tests, you'll monitor both workloads.
   faqs:
-  - question: How do I know the AKS cluster is set up for both architectures before deploying
-      nginx?
+  - question: How do I know that the AKS cluster is set up for both architectures before deploying
+      NGINX?
     answer: >-
       Confirm that the cluster has two node pools, one x86 and one Arm, and that `kubectl` can reach
       the cluster. Check that nodes report the expected CPU architecture so scheduling can target
       each pool.
-  - question: Which nginx image should I use to run on both Arm and x86 nodes?
+  - question: Which NGINX image should I use to run on both Arm and x86 nodes?
     answer: >-
       The deployments use a multi-architecture nginx image from Docker Hub. The container runtime
       pulls the correct image variant based on the node’s CPU architecture.
-  - question: What result should I expect when the nginx services become available?
+  - question: What result should I expect when the NGINX services become available?
     answer: >-
       When you request a service's external endpoint, you receive JSON with `message`, `timestamp`,
       `server`, and `request_uri` fields. You see `nginx response` as the message and the serving pod's
       name in `server`.
-  - question: How do I confirm that each nginx pod is running on the correct architecture?
+  - question: How do I confirm that each NGINX pod is running on the correct architecture?
     answer: >-
       Use `kubectl` to check each pod’s node assignment and labels. The Arm service selects pods
-      with `app: nginx-multiarch` and `arch: arm`; verify that Arm pods run on the Arm node pool
+      with `app: nginx-multiarch` and `arch: arm`. Verify that Arm pods run on the Arm node pool
       and x86 pods run on the x86 pool.
-  - question: What should I check if the Arm deployment does not start or the service shows no
+  - question: What should I check if the Arm deployment doesn't start or the service shows no
       endpoints?
     answer: >-
-      Verify the Arm node pool exists and is Ready, and ensure the deployment and service selectors
-      match, including `app: nginx-multiarch` and `arch: arm`. Also confirm the namespace and shared
+      Verify the Arm node pool exists and is ready. Ensure that the deployment and service selectors
+      match, including `app: nginx-multiarch` and `arch: arm`. Also confirm that the namespace and shared
       ConfigMap were created before applying the deployment.
 # END generated_summary_faq
 
