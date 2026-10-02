@@ -39,16 +39,16 @@ For generation instructions, see the [ExecuTorch ETRecord documentation](https:/
 
 ## Inspect a portable kernel CPU profile
 
-Open the portable CPU ETRecord for OPT-125M:
+Open the portable CPU ETRecord for GPT-2:
 
 ```output
-ml-model-artifacts/etrecord/opt125m_portable.etrecord
+ml-model-artifacts/etrecord/gpt2_portable.etrecord
 ```
 
 In Model Explorer, select **Add per-node data**, choose the ETDump profiling overlay, and load:
 
 ```output
-ml-model-artifacts/etdump/opt125m_portable.etdp
+ml-model-artifacts/etdump/gpt2_portable.etdp
 ```
 
 Always use an ETDump from the same export as the ETRecord. Profiling data from a different export can map to the wrong nodes.
@@ -60,9 +60,9 @@ Inspect the graph and profiling overlay, then look for the following:
 - Repeated operators that dominate the profile
 - How the runtime view compares with the portable `.pte` view that you inspected
 
-![Model Explorer showing the portable OPT-125M ETRecord with Runtime Event Count and Runtime Total timing overlays. The node table contains mapped values for concrete native-call events, and the graph has no delegate region.#center](portable_profile.png "Portable OPT-125M runtime profile")
+![Model Explorer showing the portable GPT-2 ETRecord with Runtime Event Count and Runtime Total timing overlays. The node table contains mapped values for native-call events, and the graph has no delegate region.#center](portable_profile.png "Portable GPT-2 runtime profile")
 
-This portable CPU ETDump contains about 1,199 events, including a `Method::execute` duration of around 9,082 ms. The provider excludes this wrapper event from the overlay and maps concrete native-call timings to graph nodes. Repeated `aten.addmm` operations form the main hotspot.
+This portable CPU ETDump contains 1,181 events: two setup events and 1,179 execution events. In this captured run, `Method::execute` took about 17,761 ms. The provider excludes this wrapper event from the overlay and maps native-call timings to graph nodes. Repeated `aten.addmm` operations form the main aggregate hotspot, followed by the final matrix multiplication. These timings describe the system used to capture the supplied ETDump; timings on another system will differ.
 
 ## What you've learned
 
