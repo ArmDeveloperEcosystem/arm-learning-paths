@@ -32,9 +32,11 @@ generated_summary_faq:
     services before choosing an environment. Then, you'll identify MySQL documentation to install
     and configure the server. You'll connect with the MySQL clients and run SQL commands.
   faqs:
-  - question: What Learning Path should I explore next?
+  - question: Which version of the MySQL Reference Manual should I use?
     answer: >-
-      Explore the Learning Path [Tune MySQL performance on Arm-based platforms](/learning-paths/servers-and-cloud-computing/mysql_tune/) to improve the performance of an Arm-based MySQL server.
+      Use the MySQL Reference Manual for the version of MySQL you're working with.
+      Check the version selected in the documentation before following its installation,
+      configuration, or client instructions.
   - question: What SQL operations can I try after connecting to MySQL?
     answer: >-
       You can create and select a database, create and inspect a table, insert sample records, and

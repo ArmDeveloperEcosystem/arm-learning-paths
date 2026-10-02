@@ -45,12 +45,13 @@ generated_summary_faq:
     answer: >-
       Run the scripts from the downloaded asset repository, for example in `$HOME/lift-n-shift-assets`.
       The `scripts/create_ssh_key.sh` script generates an SSH key pair in `$HOME/.ssh` and prints the public
-      key.
-  - question: What should I enter when the key generation script prompts for a passphrase, and
-      what output should I keep?
+      key. Press **Enter** to leave the passphrase empty, and save the printed `ssh-rsa`
+      public key string for use with the Azure VM.
+  - question: Where can I find the password requested when restoring the database on the cloud VM?
     answer: >-
-      Press **Enter** to leave the passphrase empty. Save the printed `ssh-rsa` public
-      key string for use with the Azure VM.
+      Open a second SSH session to the Arm-based Azure VM. Run `sudo su -`, then
+      `cat /root/mysql_root_password.txt` to retrieve the password. Enter it at the restore
+      prompt in your original session on the on-premises simulator.
   - question: How do I connect to the Arm-based Azure VM before running the benchmark, and which
       user and key should I use?
     answer: >-

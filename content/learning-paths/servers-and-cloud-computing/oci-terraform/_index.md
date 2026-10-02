@@ -46,10 +46,11 @@ generated_summary_faq:
       Create `availability-domains.tf` with the provided data source and output definition, then
       run `terraform plan`. If authentication succeeds, you'll see the availability domains in your
       tenancy. Keep this file in the same directory as `provider.tf`.
-  - question: Can I use a VM as my control environment for running Terraform?
+  - question: How can I display the provisioned instance's public IP address?
     answer: >-
-      Yes. A VM with the required tools installed works the same as a desktop or
-      laptop for running the commands.
+      Create `outputs.tf` with the provided `public_ip` output definition, which reads
+      `oci_core_instance.Ampere.public_ip`. After provisioning the instance, run `terraform refresh`
+      to display its public IP address.
   - question: What result should I expect after I complete the workflow?
     answer: >-
       Terraform automates the creation of an Arm-based VM instance on OCI Ampere Compute.

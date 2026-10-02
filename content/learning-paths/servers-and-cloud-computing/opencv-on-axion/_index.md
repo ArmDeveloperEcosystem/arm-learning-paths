@@ -53,10 +53,11 @@ generated_summary_faq:
     answer: >-
       Use the `~/opencv-project` directory and a virtual environment named `cv-env`. Run subsequent
       scripts from that directory with the environment activated.
-  - question: What should be ready before I integrate the machine learning model?
+  - question: How do I save the trained model and load it in the OpenCV pipeline?
     answer: >-
-      Have a running Google Axion Arm-based VM with SUSE Linux and Python 3.11. Also ensure that the VM has a
-      directory `~/opencv-project` with the `cv-env` environment and OpenCV. Confirm that port `8000` is open in the firewall.
+      Use `joblib.dump` in the training script to save the classifier as `iris_model.joblib`
+      and the label names as `iris_labels.joblib`. In the OpenCV pipeline, use `joblib.load`
+      to load both files so you can generate predictions without retraining the model.
 # END generated_summary_faq
 
 author: Pareena Verma

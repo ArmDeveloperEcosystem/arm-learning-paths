@@ -49,11 +49,11 @@ generated_summary_faq:
       The system boots from BL1 through the firmware stack to a Buildroot Linux shell on the FVP.
       You should see logs across the mapped UART consoles for each stage and a Linux prompt on
       the application processor path.
-  - question: What should I check if the boot hangs before reaching Linux?
+  - question: Where can I find the UART logs from the RD-V3 simulation?
     answer: >-
-      Review the UART outputs to find the last active stage and identify where control stopped.
-      Confirm that the FVP version matches your selected RD-V3 release tag and re-sync sources to the
-      pinned manifest before rebuilding.
+      Look in `~/rdv3/model-scripts/rdinfra/platforms/rdv3/rdv3`, where each UART is redirected
+      to its own log file. Use the UART-to-terminal mapping to identify the subsystem you
+      want to inspect, such as Linux, TF-A and UEFI, SCP, RSE, MCP, or LCP.
   - question: How do I validate a change to SCP, MCP, or LCP firmware?
     answer: >-
       Rebuild the affected platform control firmware, then rerun the FVP simulation. Inspect the
