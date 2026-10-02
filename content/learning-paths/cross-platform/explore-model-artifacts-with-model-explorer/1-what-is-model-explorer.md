@@ -60,7 +60,7 @@ TOSA is not inherently ExecuTorch-specific. TOSA is an intermediate representati
         |
         +-- Lower to TOSA -----------+
                                      |
-      Alternative frontend          |
+      Alternative frontend           |
       with TOSA export --------------+
                                      |
                                      v
@@ -115,8 +115,8 @@ You'll use the following pre-provided model artifacts provided purely for educat
 ml-model-artifacts/
 ├── pte/
 │   ├── mv2_cortex_m.pte
-│   ├── opt125m_cortex_a_portable.pte
-│   ├── opt125m_cortex_a_xnnpack.pte
+│   ├── gpt2_cortex_a_portable.pte
+│   ├── gpt2_cortex_a_xnnpack.pte
 │   ├── mv2_fp32_ethos_u85.pte
 │   ├── mv2_int8_ethos_u85.pte
 │   ├── mv2_lrn_int8_ethos_u85.pte
@@ -131,14 +131,14 @@ ml-model-artifacts/
 ├── vgf/
 │   └── small_upscaler_ptq.vgf
 ├── etrecord/
-│   ├── opt125m_portable.etrecord
-│   ├── opt125m_xnnpack.etrecord
+│   ├── gpt2_portable.etrecord
+│   ├── gpt2_xnnpack.etrecord
 │   ├── mobilenetv2_fp32_ethosu.etrecord
 │   ├── mobilenetv2_int8_ethosu.etrecord
 │   └── mobilenetv2_lrn_int8_ethosu.etrecord
 └── etdump/
-    ├── opt125m_portable.etdp
-    ├── opt125m_xnnpack.etdp
+    ├── gpt2_portable.etdp
+    ├── gpt2_xnnpack.etdp
     ├── mobilenetv2_fp32_ethosu.etdp
     ├── mobilenetv2_int8_ethosu.etdp
     └── mobilenetv2_lrn_int8_ethosu.etdp
