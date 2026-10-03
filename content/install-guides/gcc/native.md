@@ -72,7 +72,7 @@ sudo dnf group install "development-tools" -y
 If `sudo` is not available become _root_ and omit the `sudo`.
 ```console
 dnf update -y
-sudo dnf group install "development-tools" -y
+dnf group install "development-tools" -y
 ```
 ## Does GCC require a license?
 
