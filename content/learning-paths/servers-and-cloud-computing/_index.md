@@ -7,6 +7,9 @@ key_ip:
 - Neoverse
 maintopic: true
 pinned_learning_paths:
+- firecracker-ai-sandbox
+- memory-subsystem
+- sve2-match
 - arm-mcp-server
 - learning-paths/cross-platform/vectorization-comparison
 - performix-microarchitecture

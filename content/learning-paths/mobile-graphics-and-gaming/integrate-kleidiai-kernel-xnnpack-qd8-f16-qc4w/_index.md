@@ -81,7 +81,7 @@ subjects: ML
 armips:
     - Arm C1
 tools_software_languages:
-    - C++
+    - CPP
     - Android NDK
     - KleidiAI
     - SME2
