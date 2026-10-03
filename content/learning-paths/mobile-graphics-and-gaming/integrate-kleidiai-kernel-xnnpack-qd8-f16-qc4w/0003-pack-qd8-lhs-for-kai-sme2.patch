@@ -1,7 +1,7 @@
 From 4bd031ce80a01e353b28b76fc9c7bf1f8c9aa690 Mon Sep 17 00:00:00 2001
 From: Qxiang Xu <Qixiang.Xu@arm.com>
 Date: Tue, 25 Aug 2026 10:05:08 +0800
-Subject: [PATCH 3/4] Pack QD8 LHS for KAI SME2
+Subject: [PATCH 3/4] Pack QD8 LHS for KleidiAI SME2
 
 ---
  ...d8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c | 45 +++++++++++++++++++

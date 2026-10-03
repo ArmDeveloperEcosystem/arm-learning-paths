@@ -34,7 +34,7 @@ generated_summary_faq:
   summary: >-
     You'll enable event-driven HTTP autoscaling on an Arm-based Kubernetes cluster with KEDA
     and Kedify. First, you'll install the required Kedify charts, verify their components, and
-    configure an NGINX Ingress Controller for arm64 nodes. Then, you'll deploy a web
+    configure Traefik as an ingress controller on arm64 nodes. Then, you'll deploy a web
     service and expose it through ingress. You'll create a scaled object, generate traffic, and
     observe scale-out, scale-in, and scale-to-zero behavior.
   faqs:
@@ -42,13 +42,12 @@ generated_summary_faq:
     answer: >-
       Run `kubectl get pods -n keda` and confirm that the KEDA, HTTP scaler, and Kedify Agent pods
       show `1/1` in `READY` and `Running` in `STATUS` before continuing.
-  - question: Do I still need to install NGINX Ingress
-      Controller if my cluster already has an ingress controller?
+  - question: Do I still need to install Traefik if my cluster already has an ingress controller?
     answer: >-
-      No. If an ingress controller is already installed and configured, skip the installation of NGINX Ingress Controller.
+      No. If your cluster already has an ingress controller, skip the Traefik installation and use its endpoint and IngressClass name in the application steps.
   - question: Which deployment target should I use for the ingress controller on Arm-based nodes?
     answer: >-
-      Install the NGINX Ingress Controller with Helm and target arm64 nodes to ensure that the controller runs on Arm nodes in your cluster.
+      Install Traefik with Helm and set its node selector and toleration for arm64 nodes to run the controller on Arm nodes in your cluster.
   - question: What do I need to connect the cluster to Kedify’s cloud service?
     answer: >-
       Use your `Organization ID` and `API key` from the Kedify Service dashboard. Provide these values

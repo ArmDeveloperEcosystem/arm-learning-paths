@@ -12,8 +12,10 @@
                         - list-card         --> learning path and tool list cards should have these types
                         - learning-path-nav --> navigation buttons in the application: 'next' button, 'prev' button, left-hand navigation
                         - metadata          --> any metadata links; above LPs and installs, and in 'next steps' page
-                        - content           --> all links from user-generated markdown should have this. the 'render-link.html' should implement this tracker
+                        - content           --> all links from user-generated markdown should have this, INCLUDING CODE. the 'render-link.html' should implement this tracker
                     - data-track-name       --> specific name of the element, human readable to link behavior. A click on a learning path should render its title, etc. This is dynamic
+                    - data-track-identifier --> Prism language of a code block
+                    - data-track-url        --> full page URL for code copy events
 
         -   facet-interaction
                 Attributes tracked:
@@ -28,6 +30,12 @@
                 Attributes tracked:
                     - feedback-type         --> either 'star-rating' or 'reason'
                     - feedback-content      --> specifies the feedback. Star-rating will be 1-5, Reason will be a string (from a limited choice set, not free text) 
+
+        -   copy-type
+                Attributes tracked:
+                    - data-track-type       --> copy-type
+                    - data-track-location   --> manual-copy or button-copy
+                    - data-track-name       --> current page number and name
         
 */
 
@@ -168,6 +176,90 @@ function attachPageFindSearchTracker() {
 }
 
 
+function getSelectedCodeBlock() {
+    const selection = window.getSelection();
+
+    if (!selection || selection.isCollapsed || selection.rangeCount === 0) {
+        return null;
+    }
+
+    const range = selection.getRangeAt(0);
+
+    function getContainingPre(node) {
+        const element = node.nodeType === Node.ELEMENT_NODE
+            ? node
+            : node.parentElement;
+
+        return element?.closest('.code-toolbar pre') || null;
+    }
+
+    const start_pre = getContainingPre(range.startContainer);
+    const end_pre = getContainingPre(range.endContainer);
+
+    // Only track selections contained within one Prism code block.
+    if (!start_pre || start_pre !== end_pre) {
+        return null;
+    }
+
+    return start_pre;
+}
+
+
+function getCodeBlockLanguage(pre_element) {
+    const code_element = pre_element.querySelector('code');
+    const language_class = Array.from(code_element?.classList || [])
+        .find((class_name) => class_name.startsWith('language-'));
+
+    return language_class
+        ? language_class.replace('language-', '')
+        : 'unknown';
+}
+
+
+function getCodeCopyTrackName() {
+    const active_learning_path_step = document.getElementById('learning-path-step-active');
+
+    if (active_learning_path_step) {
+        const page_number = parseInt(active_learning_path_step.getAttribute('data-step-num')) + 1;
+        const page_name = (active_learning_path_step.innerText || active_learning_path_step.textContent).trim();
+
+        return 'page_number:'+page_number+','+'page_name:'+page_name;
+    }
+
+    const install_guide_title = document.getElementById('install-guide-title');
+
+    if (install_guide_title) {
+        const page_name = (install_guide_title.innerText || install_guide_title.textContent).trim();
+
+        return 'page_number:1,'+'page_name:'+page_name;
+    }
+
+    return window.location.pathname;
+}
+
+
+function trackCodeCopy(copy_location, pre_element) {
+    const code_block_language = getCodeBlockLanguage(pre_element);
+    const track_str = getCodeCopyTrackName();
+
+    if (window._satellite?.track) {
+        window._satellite.track('content-interaction', {
+            'data-track-type'       : 'copy',
+            'data-track-location'   : 'content',
+            'data-track-name'       : track_str,
+            'data-track-identifier' : code_block_language,
+            'data-track-url'        : window.location.href
+        });
+
+        window._satellite.track('content-interaction', {
+            'data-track-type'     : 'copy-type',
+            'data-track-location' : copy_location,
+            'data-track-name'     : track_str
+        });
+    }
+}
+
+
     // Go page by page, and assign the analytics tracker event component to appropriate ares.
 
 
@@ -175,6 +267,46 @@ function attachPageFindSearchTracker() {
     document.addEventListener("DOMContentLoaded", function() {  
         let current_path = window.location.pathname;
         let depth_of_path= current_path.split('/').length - 1 // Get number of '/' in the string; will help identify where we are in the heirarcy
+
+
+        //
+        //  Prism code blocks
+        //  ===================
+        // Use delegated listeners because Prism creates its toolbar buttons after
+        // the page DOM is ready. These listeners cover Learning Paths and install
+        // guides and identify each copied code block by its Prism language.
+
+        // Track keyboard and context-menu copies of a selection in a code block.
+        document.addEventListener('copy', function() {
+            const pre_element = getSelectedCodeBlock();
+
+            if (pre_element) {
+                trackCodeCopy('manual-copy', pre_element);
+            }
+        });
+
+        // Track use of Prism's copy-to-clipboard toolbar button.
+        document.addEventListener('click', function(event) {
+            if (!(event.target instanceof Element)) {
+                return;
+            }
+
+            const copy_button = event.target.closest('button.copy-to-clipboard-button');
+
+            if (!copy_button) {
+                return;
+            }
+
+            const pre_element = copy_button
+                .closest('.code-toolbar')
+                ?.querySelector('pre');
+
+            if (!pre_element) {
+                return;
+            }
+
+            trackCodeCopy('button-copy', pre_element);
+        });
 
 
         //

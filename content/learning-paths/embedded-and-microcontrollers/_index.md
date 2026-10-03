@@ -15,7 +15,7 @@ pinned_learning_paths:
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 31
-- Linux: 59
+- Linux: 60
 - macOS: 24
 - RTOS: 13
 - Windows: 12
@@ -24,7 +24,7 @@ subjects_filter:
 - Containers and Virtualization: 10
 - Embedded Linux: 6
 - Libraries: 5
-- ML: 30
+- ML: 31
 - Performance and Architecture: 24
 - RTOS Fundamentals: 8
 - Security: 3
@@ -72,7 +72,7 @@ tools_software_languages_filter:
 - Edge Impulse: 2
 - ETDump: 1
 - ETRecord: 1
-- ExecuTorch: 12
+- ExecuTorch: 13
 - FastAPI: 2
 - Fusion 360: 1
 - FVP: 11
@@ -94,10 +94,12 @@ tools_software_languages_filter:
 - LeRobot: 1
 - Linux kernel: 1
 - Linux traffic control: 1
+- LiteRT: 1
 - LLM: 3
 - Matter: 1
 - MCP: 1
 - MediaPipe: 1
+- MLIA: 1
 - MobileSAM: 1
 - Model Explorer: 1
 - MPS3: 1
@@ -115,7 +117,7 @@ tools_software_languages_filter:
 - Performance analysis: 1
 - picocom: 1
 - Porcupine: 1
-- Python: 23
+- Python: 24
 - PyTorch: 9
 - QEMU: 2
 - Raspberry Pi: 11
@@ -138,12 +140,12 @@ tools_software_languages_filter:
 - tinyML: 2
 - Topo: 3
 - TorchAO: 1
-- TOSA: 1
+- TOSA: 2
 - Trusted Firmware: 2
 - TrustZone: 2
 - TVMC: 1
 - vcpkg: 1
-- Vela: 1
+- Vela: 2
 - VGF: 1
 - Visual Studio Code: 2
 - YAML: 1
