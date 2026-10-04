@@ -46,21 +46,11 @@ This table was measured on a Raspberry Pi 5 with 2 GB of RAM, llama.cpp commit `
 
 Look at the `tg128` rows as threads increase. On a memory-bound system, decode stops improving after a small number of threads, because the extra threads wait on the same memory, and it can fall as you add more.
 
-<!-- MANU WRITES: one sentence, in your own words, stating the decode knee on the Raspberry Pi 5 and how much decode is lost at 4 threads.
-Facts from capture 20261003_2358, llama-bench sweep above (see NUMBERS_TRACE.md):
-* tg128: 1 thread 32.42, 2 threads 33.84, 3 threads 29.37, 4 threads 27.28 tokens/s (llamabench_qwen05_q4_0.md lines 4, 6, 8, 10).
-* Knee: 2 threads, the best decode at 33.84 tokens/s (outputs/LP_FACTS_FOR_MANU.md line 25; diagnosis.json analysis.decode_thread_knee = 2).
-* 4 threads decode 19.4 percent less than 2 threads: (33.84 minus 27.28) / 33.84 (outputs/LP_FACTS_FOR_MANU.md line 26).
--->
+The decode knee is at 2 threads, while using 4 threads reduces decode performance by 19.4%.
 
 Now look at the `pp512` rows. Prefill keeps rising up to 4 threads, because it is compute-bound.
 
-<!-- MANU WRITES: one sentence, in your own words, stating how much prefill scales from 1 to 4 threads on the Raspberry Pi 5.
-Facts from capture 20261003_2358, llama-bench sweep above (see NUMBERS_TRACE.md):
-* pp512: 1 thread 93.49, 2 threads 173.68, 3 threads 233.22, 4 threads 289.92 tokens/s (llamabench_qwen05_q4_0.md lines 3, 5, 7, 9).
-* Scaling 1 to 4 threads: 289.92 / 93.49 = 3.10 times (outputs/LP_FACTS_FOR_MANU.md line 28).
-* The diagnose run (pp128, 3 repetitions) reports 3.1 times (diagnose.txt line 61; diagnosis.json analysis.prefill_scaling 3.08). Quote the sweep figure here, because this sentence sits under the sweep table.
--->
+Prefill scales well with more threads, reaching 3.10x the 1-thread result when using 4 threads.
 
 This means:
 

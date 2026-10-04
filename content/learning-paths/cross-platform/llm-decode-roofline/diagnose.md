@@ -175,14 +175,7 @@ plan        : 3 model(s) x 4 thread setting(s), 3 repetition(s)
 
 The report starts with a section called `THE ANSWER`. It states whether decode is memory-bound and at what percentage of the measured ceiling.
 
-<!-- MANU WRITES: one or two sentences, in your own words, stating your result from the THE ANSWER section on the Raspberry Pi 5.
-Facts from capture 20261003_2358 (see NUMBERS_TRACE.md):
-* Verdict: memory-bound (diagnosis.json analysis.verdict).
-* Decode runs at 84 to 86 percent of the measured ceiling across the 3 models (diagnose.txt lines 72 to 74).
-* Ceiling measured inside diagnose: 13.77 GB/s, printed as 13.8 GB/s (diagnosis.json membw.peak_read_GBs; diagnose.txt line 6).
-* Fitted line: decode tokens/s = 11.82 GB/s / bytes per token, R squared 0.9996, 3 models, each at its best thread count (diagnose.txt lines 78 to 80).
-* Per model: 0.5B Q4_0 34.2 tokens/s at 2 threads, 86 percent; 0.5B Q8_0 22.6 tokens/s at 1 thread, 86 percent; 1.5B Q4_0 12.4 tokens/s at 2 threads, 84 percent (diagnose.txt lines 72 to 74).
--->
+The decode results are close to the measured memory ceiling, reaching 84% to 86% of the 13.77 GB/s ceiling across all three models.
 
 llama-roofline bases its verdict on the median percentage across your models. Use the percentage to decide what to change:
 
