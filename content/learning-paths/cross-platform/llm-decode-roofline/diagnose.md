@@ -190,7 +190,7 @@ llama-roofline bases its verdict on the median percentage across your models. Us
 |---|---|---|
 | 70 percent or more | Decode is memory-bound | Read fewer bytes: use a smaller model or a smaller format |
 | 40 to 70 percent | Partly memory-bound | Check thread count and background load first |
-| Below 40 percent | Something other than memory is limiting decode | Check throttling, thread oversubscription, and swap |
+| Below 40 percent | Something other than memory is limiting decode | Check throttling, running more threads than cores, and swap |
 
 The `WHAT WAS MEASURED` table lists each model with its size, decode and prefill speed, best thread count, achieved bandwidth and percentage of the ceiling. The `THE ROOFLINE` section prints the fitted line and its R squared value. An R squared close to 1 means the bandwidth equation explains your results. If R squared is below 0.90, llama-roofline adds a warning, because something other than memory bandwidth is affecting decode.
 
