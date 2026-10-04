@@ -7406,3 +7406,7 @@ requantizing
 signedness
 virsh
 virt
+Manu
+roofline
+membw
+LPDDR4X
