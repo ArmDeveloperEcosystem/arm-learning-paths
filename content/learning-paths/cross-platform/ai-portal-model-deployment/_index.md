@@ -99,6 +99,7 @@ operatingsystems:
 ### Cross-platform metadata only
 platforms:
     - Arm AGI CPU
+    - AWS Graviton
 
 further_reading:
     - resource:
