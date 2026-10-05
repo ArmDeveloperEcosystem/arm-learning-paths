@@ -13,16 +13,16 @@ The adapter doesn't add a new way to talk to ROS 2. It wraps the same `ros2` com
 
 | Layer | What it is | What it adds | Example |
 |---|---|---|---|
-| 1. ROS 2 command | A `ros2` CLI call run in the container from the host | The ROS 2 query itself | `docker exec ros2_test ... ros2 topic list` |
-| 2. Python wrapper | `run_ros()` | The same command, called from Python and returning structured output | `run_ros("ros2 topic list")` |
-| 3. RPC | An `@rpc` method on `Ros2InspectionMixin` | A named function that peers and agents can discover and call over the network | `get_ros_topics()` |
-| 4. Device | A driver class run by `DeviceRuntime` | A device that bundles those RPCs and joins the network | `PuppyPiRos2Driver` |
+| ROS 2 command | A `ros2` CLI call run in the container from the host | The ROS 2 query itself | `docker exec ros2_test ... ros2 topic list` |
+| Python wrapper | `run_ros()` | The same command, called from Python and returning structured output | `run_ros("ros2 topic list")` |
+| Remote procedure calls (RPCs) | An `@rpc` method on `Ros2InspectionMixin` | A named function that peers and agents can discover and call over the network | `get_ros_topics()` |
+| Device | A driver class run by `DeviceRuntime` | A device that bundles those RPCs and joins the network | `PuppyPiRos2Driver` |
 
-Layer 1 is all you need when you have a shell on the machine. Layers 2 to 4 let a caller *without* shell access run the same query, safely and by name.
+The ROS 2 command layer is all you need when you have a shell on the machine. The Python wrapper, RPCs, and device layers let a caller without shell access run the same query safely and by name.
 
-The code excerpts in this section are simplified to show the pattern. The full versions are in `ros2_common.py` and `puppypi_device.py` in the repository.
+The following code excerpts are simplified to show the pattern. The full versions are in `ros2_common.py` and `puppypi_device.py` in the repository.
 
-## Layer 1: run a ROS 2 command in the container
+### Run a ROS 2 command in the container
 
 You've already used this layer. From the host, `docker exec` runs a `ros2` command inside the container after sourcing the ROS 2 environment:
 
@@ -38,7 +38,7 @@ docker exec ros2_test bash -lc 'source /opt/ros/humble/setup.bash && ros2 topic 
 
 Every RPC in this Learning Path ends up running a command like this one.
 
-## Layer 2: wrap the command in Python
+### Wrap the command in Python
 
 `run_ros()` in `ros2_common.py` builds that same `docker exec` command:
 
@@ -50,7 +50,7 @@ def run_ros(command: str, timeout: float = 10.0) -> dict[str, Any]:
 
 The container name, user, and setup scripts come from environment variables, so the same function works with any ROS 2 container. It returns a dictionary with `ok`, `stdout`, and `stderr` instead of printed text, and a timeout stops a stalled ROS 2 command from hanging the adapter.
 
-## Layer 3: expose the command as an RPC
+### Eexpose the command as an RPC
 
 `Ros2InspectionMixin` turns `run_ros()` calls into Device Connect RPCs. The `@rpc()` decorator is what makes a method discoverable and callable over the network:
 
@@ -90,7 +90,7 @@ The table below shows how the Device Connect RPC names map back to the ROS 2 ope
 
 Device Connect does not replace ROS 2. It wraps selected ROS 2 operations as discoverable, typed, remotely callable capabilities.
 
-## Layer 4: build the device
+### Build the device
 
 The final layer is a driver class that inherits from both `Ros2InspectionMixin` and `DeviceDriver`. The mixin supplies the shared ROS 2 RPCs. `DeviceDriver` makes the class a Device Connect device, and you add any hardware-specific RPCs alongside the shared ones. The `rpi5` profile runs this driver from `puppypi_device.py`:
 

@@ -9,25 +9,28 @@ layout: learningpathall
 
 ## Before you begin
 
-Run every command in this section on your Arm-based Linux machine. The instructions assume Ubuntu 22.04 or later on an `aarch64` host, such as a Raspberry Pi 5 or an Arm cloud instance. Confirm the architecture:
+Run every command on your Arm-based Linux machine. Ensure that you're using Ubuntu 22.04 or later on an `aarch64` host, such as a Raspberry Pi 5 or an Arm-based cloud instance. 
+
+Confirm the architecture:
 
 ```bash
 uname -m
 ```
+The expected output is:
 
 ```output
 aarch64
 ```
 
-By the end of this section, you'll have:
+By the end, you'll have:
 
-- a ROS 2 Humble container publishing a demo topic
-- a Python virtual environment with the Device Connect packages
-- the ros2-device-connect adapter cloned and ready to run
+- A ROS 2 Humble container publishing a demo topic
+- A Python virtual environment with the Device Connect packages
+- The `ros2-device-connect` adapter cloned and ready to run
 
 ## Install Docker
 
-The adapter talks to ROS 2 through Docker, so you need Docker Engine. Follow the [Docker Engine install guide](/install-guides/docker/docker-engine/), including the step that adds your user to the `docker` group. The adapter runs `docker exec` as your user, so Docker must work without `sudo`.
+The adapter talks to ROS 2 through Docker, so you need Docker Engine. To install Docker Engine, follow the [Docker Engine install guide](/install-guides/docker/docker-engine/), including the step that adds your user to the `docker` group. The adapter runs `docker exec` as your user, so Docker needs to work without `sudo`.
 
 ## Start a ROS 2 container
 
@@ -59,11 +62,11 @@ The output lists the ROS 2 topics:
 /rosout
 ```
 
-The node list is empty because `ros2 topic pub` runs as a hidden node. This container now stands in for a real robot's ROS 2 stack.
+The node list is empty because `ros2 topic pub` runs as a hidden node. The container now stands in for a real robot's ROS 2 stack.
 
 ## Create the workspace
 
-The adapter's launch scripts expect a single project directory that holds the adapter repository and a Python virtual environment named `.venv`. Create that directory and clone both the adapter and the Device Connect source. The adapter is cloned at the `ros2_dc_lp` tag, which is the version this Learning Path was tested with:
+The adapter's launch scripts expect a single project directory that holds the adapter repository and a Python virtual environment named `.venv`. Create the directory and clone both the adapter and the Device Connect source. The adapter is cloned at the `ros2_dc_lp` tag, which is the version that the Learning Path was tested with:
 
 ```bash
 mkdir -p ~/device_connect
@@ -74,7 +77,7 @@ git clone https://github.com/arm/device-connect.git
 
 ## Install uv and the Device Connect packages
 
-This Learning Path uses [uv](https://docs.astral.sh/uv/) to create the Python environment. Install it:
+Install [uv](https://docs.astral.sh/uv/) to create the Python environment:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -82,9 +85,13 @@ export PATH="$HOME/.local/bin:$PATH"
 uv --version
 ```
 
-Create a Python virtual environment in the project directory, and install the Device Connect edge SDK and agent tools from the cloned source. The Device Connect packages require Python 3.11 or later and are tested on Python 3.11, 3.12, and 3.13. This example uses 3.12, but you can pass any supported version to `--python`. If that version isn't installed on your machine, uv downloads it for you.
+Create a Python virtual environment in the project directory, and install the Device Connect edge SDK and agent tools from the cloned source. 
+
+{{% notice Note %}}
+The Device Connect packages require Python 3.11 or later and are tested on Python 3.11, 3.12, and 3.13. This example uses 3.12, but you can pass any supported version to `--python`. If that version isn't installed on your machine, uv downloads it for you.
 
 This host Python environment is separate from the Python version inside the ROS 2 container, so your choice here doesn't need to match your ROS 2 distribution.
+{{% /notice %}}
 
 ```bash
 cd ~/device_connect
