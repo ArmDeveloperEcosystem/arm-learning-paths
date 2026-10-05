@@ -27,7 +27,7 @@ If you use an existing ingress controller, set `INGRESS_ADDRESS` to its endpoint
 
 ## Deploy the application and configure ingress
 
-Now you will deploy a simple HTTP server and expose it using an `Ingress` resource. For more informaton, see the [Kedify sample HTTP-server source code](https://github.com/kedify/examples/tree/main/samples/http-server).
+Now you'll deploy an HTTP server and expose it using an `Ingress` resource. For more informaton, see the [Kedify sample HTTP-server source code](https://github.com/kedify/examples/tree/main/samples/http-server).
 
 Run the following command to deploy your application:
 
@@ -100,7 +100,7 @@ spec:
 EOF
 ```
 
-The manifest includes a few key options that affect scaling behavior:
+The manifest includes the following options that affect scaling behavior:
 
 - `RESPONSE_DELAY` is set in the `Deployment` manifest and adds approximately 300 ms latency per request. This slower response time increases the number of concurrent requests, making scaling effects easier to observe.
 - The ingress uses the host `application.keda`. To access this app, use your ingress controller's address with a `Host:` header.
@@ -113,7 +113,7 @@ Run the following command to check that one replica is ready:
 kubectl get deployment application
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 NAME          READY   UP-TO-DATE   AVAILABLE   AGE
