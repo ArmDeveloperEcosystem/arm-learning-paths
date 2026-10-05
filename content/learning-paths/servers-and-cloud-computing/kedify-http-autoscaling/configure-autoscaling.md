@@ -77,7 +77,7 @@ Use the following field descriptions to understand how the `ScaledObject` contro
 - `service`, `port` - Identify the Kubernetes Service and port that receive traffic.
 - `scalingMetric: requestRate`, `granularity: 1s`, `window: 10s`, `targetValue: "10"` - Scale out when the average request rate exceeds ~10 requests per second (rps) per replica over the last 10 seconds.
 - `minReplicaCount: 0` - Enables scale to zero when there is no traffic.
-- `trafficAutowire: ingress` - Automatically wires your Ingress to the Kedify proxy for seamless traffic management.
+- `trafficAutowire: ingress` - Automatically wires your ingress to the Kedify proxy for seamless traffic management.
 
 After applying the settings, the `ScaledObject` will appear in the [Kedify dashboard](https://dashboard.kedify.io/).
 
