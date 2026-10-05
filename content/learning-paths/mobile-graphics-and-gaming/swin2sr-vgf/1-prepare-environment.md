@@ -1,5 +1,5 @@
 ---
-title: Prepare your environment and image
+title: Prepare your host and image for Swin2SR
 description: Install the Swin2SR example and Arm ML SDK, then prepare a 64 × 64 input image and its high-resolution reference.
 weight: 2
 
@@ -17,7 +17,7 @@ The Swin2SR transformer processes image features in small regions called windows
 
 You'll use the ×2 version of Swin2SR to turn a 64 × 64 image into a 128 × 128 image. It doubles the width and height, predicting finer detail. These predictions can differ from the original image, which is why you compare the result with a high-resolution reference.
 
-You'll export the model with ExecuTorch to create a `.pte` program, then build a host runner to execute it through the Arm Vulkan Graph Format (VGF) backend. An image helper connects your input image to the runner and saves the result as a PNG. You then check its dimensions and compare it with a high-resolution reference.
+You'll export the model with ExecuTorch to create a `.pte` program, then build a host runner to execute it through the Arm Vulkan Graph Format (VGF) backend. An image helper connects your input image to the runner and saves the result in PNG format. You'll then check its dimensions and compare it with a high-resolution reference.
 
 ![Equal-size views compare a 64 by 64 low-resolution input with its 128 by 128 Swin2SR output. The input is enlarged for display only; labels show actual pixel dimensions. ExecuTorch and Arm VGF run the model on the host.#center](swin2sr-image-flow.svg "Images shown at the same display size to compare detail; labels show actual resolution")
 
@@ -39,7 +39,7 @@ sudo apt-get install -y \
 
 ## Get the ExecuTorch release
 
-Use [ExecuTorch 1.5.1](https://github.com/pytorch/executorch/releases/tag/v1.5.1) for both the Python package and native source. From a path without spaces or an existing `executorch` folder, clone the matching release. Keep the checkout folder named `executorch` as the build requires this exact name:
+Use [ExecuTorch 1.5.1](https://github.com/pytorch/executorch/releases/tag/v1.5.1) for both the Python package and native source. Clone the matching release from a directory whose path has no spaces and that has no existing `executorch` folder. Keep the checkout folder named `executorch` as the build requires this exact name:
 
 ```bash
 git clone --branch v1.5.1 --single-branch --depth 1 \
@@ -108,7 +108,7 @@ python -c "import executorch.exir; from executorch.extension.pybindings import p
 vulkaninfo | grep shaderFloat64
 ```
 
-The output contains a snippet that's similar to:
+The output includes lines similar to:
 
 ```output
 [PASS] Python version

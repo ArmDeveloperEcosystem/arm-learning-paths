@@ -42,6 +42,6 @@ The exporter also saves `swin2sr_delegation.txt`. It records which operations ru
 
 ## What you've accomplished and what's next
 
-You have a floating-point Swin2SR program configured for one 64 × 64 RGB image. 
+You have a floating-point Swin2SR program configured for one 64 × 64 image with red, green, and blue (RGB) color channels.
 
 Next, you'll build the host runner and use it to upscale your image.

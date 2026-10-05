@@ -1,5 +1,5 @@
 ---
-title: Inspect the upscaled image
+title: Inspect the Swin2SR output
 description: Verify the Swin2SR output size and compare the generated image with the low-resolution input and high-resolution reference.
 weight: 5
 

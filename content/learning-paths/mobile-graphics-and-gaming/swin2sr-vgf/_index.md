@@ -6,7 +6,7 @@ description: Export Swin2SR with ExecuTorch and run it through Arm VGF on your L
 minutes_to_complete: 60
 lastmod: 2026-09-14
 
-who_is_this_for: This is an introductory topic for machine learning and graphics developers who want to run image super-resolution with ExecuTorch and Arm Vulkan Graph Format (VGF).
+who_is_this_for: This Learning Path is for machine learning and graphics developers getting started with image super-resolution using ExecuTorch and Arm Vulkan Graph Format (VGF).
 
 learning_objectives:
     - Prepare ExecuTorch, the Arm ML SDK for Vulkan, and a sample image.
