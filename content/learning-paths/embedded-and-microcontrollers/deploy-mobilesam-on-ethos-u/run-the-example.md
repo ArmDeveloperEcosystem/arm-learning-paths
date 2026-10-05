@@ -26,7 +26,7 @@ backends/arm/scripts/build_executor_runner.sh \
   '--extra_build_flags=-DSEMIHOSTING=ON -DET_COMPILED_PTE=ON'
 ```
 
-The script builds the required ExecuTorch libraries and the runner for Corstone-320. `ET_COMPILED_PTE=ON` embeds `mobilesam.pte` in the Executable and Linkable Format (ELF) file named `arm_executor_runner`, under `arm_test/mobilesam/runner/`.
+The script builds the required ExecuTorch libraries and the runner for Corstone-320. The model selected by `--pte` is embedded in the Executable and Linkable Format (ELF) file named `arm_executor_runner`, under `arm_test/mobilesam/runner/`.
 
 `SEMIHOSTING=ON` lets the simulated target read input tensors from host files and write its output tensors back to the host.
 

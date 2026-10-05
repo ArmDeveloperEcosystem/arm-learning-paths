@@ -40,10 +40,10 @@ A reference run at the pinned commit produced these scores:
 
 | Comparison | IoU |
 | --- | --- |
-| Floating-point and quantized host masks | 0.9550 |
-| FVP and quantized host masks | 0.9809 |
+| Floating-point and quantized host masks | 0.9436 |
+| FVP and quantized host masks | 0.9764 |
 
-This run used Python 3.12.13, PyTorch 2.14.0, Vela 5.1.0, and Corstone-320 FVP 11.31.28 on macOS 26.6.2 with Apple silicon. Treat these scores as examples; use the two `0.9` thresholds to check your own run.
+This reference run used Ubuntu 24.04.4 on AArch64 with Python 3.12.3 and the dependencies from [environment setup](../prepare-the-environment/). Treat these scores as examples; use the two `0.9` thresholds to check your own run.
 
 ## Confirm Ethos-U delegation
 

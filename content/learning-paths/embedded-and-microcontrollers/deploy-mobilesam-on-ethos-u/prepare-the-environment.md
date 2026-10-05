@@ -65,6 +65,8 @@ The check confirms that you are using a supported Linux host or Apple silicon Ma
 
 The Python export dependencies require macOS 15 or later on Apple silicon, or glibc 2.28 or later on Linux. The pinned [TOSA tools](https://pypi.org/project/tosa-tools/2026.5.0/#files) set the macOS minimum, and the [PyTorch wheels](https://pypi.org/project/torch/2.14.0/#files) require the Linux glibc version. The preflight check verifies these requirements before you install the dependencies.
 
+On Linux, the Corstone-320 FVP also requires `libstdc++.so.6` providing `GLIBCXX_3.4.26` or later.
+
 ## Clone the ExecuTorch source
 
 Clone ExecuTorch, select the revision used by this Learning Path, and initialize its submodules:
@@ -81,21 +83,12 @@ Run the remaining commands from the ExecuTorch repository root. The pinned revis
 
 ## Create a Python environment
 
-Create and activate a Python 3.12 virtual environment:
+Create and activate a fresh Python 3.12 virtual environment for this checkout:
 
 ```bash
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
 ```
-
-Install the current ExecuTorch checkout with its Ethos-U dependencies:
-
-```bash
-./install_executorch.sh --optional-dependency ethos_u
-```
-
-Using the checkout's installer keeps the Python package aligned with the example source.
 
 ## Install the Arm development tools
 
@@ -114,6 +107,59 @@ The Arm setup script installs the pinned GNU bare-metal toolchain, Ethos-U Vela 
 ./examples/arm/setup.sh --i-agree-to-the-contained-eula
 source examples/arm/arm-scratch/setup_path.sh
 ```
+
+## Install ExecuTorch
+
+Remove unused developer packages installed by Arm setup:
+
+```bash
+python -m pip uninstall -y \
+  tosa-adapter-model-explorer ai-edge-model-explorer \
+  pte-adapter-model-explorer pytest-timeout
+```
+
+Install released PyTorch, Torchvision, and TorchAO packages. Linux uses the stable CPU wheel index; macOS uses the Apple silicon wheels from PyPI:
+
+```bash
+case "$(uname -s)" in
+  Linux)
+    python -m pip install \
+      --index-url https://pypi.org/simple \
+      --extra-index-url https://download.pytorch.org/whl/cpu \
+      'torch==2.14.0+cpu' 'torchvision==0.29.0+cpu' 'torchao==0.18.0+cpu'
+    ;;
+  Darwin)
+    python -m pip install --index-url https://pypi.org/simple \
+      'torch==2.14.0' 'torchvision==0.29.0' 'torchao==0.18.0'
+    ;;
+  *)
+    echo "Use a supported Linux host or Apple silicon Mac." >&2
+    exit 1
+    ;;
+esac
+```
+
+Install the source build dependencies and the `timm` version used by the pinned MobileSAM example:
+
+```bash
+python -m pip install --index-url https://pypi.org/simple \
+  'cmake==3.31.10' 'packaging==26.3' 'setuptools==84.0.0' \
+  'wheel==0.48.0' 'pyyaml==6.0.3' 'zstd==1.5.7.2' \
+  'certifi==2026.7.22' 'patchelf==0.19.1.0; sys_platform == "linux"' \
+  'timm==1.0.7'
+```
+
+Build and install ExecuTorch from the same checkout used by the example and native runner:
+
+```bash
+CMAKE_ARGS='-DEXECUTORCH_BUILD_MLX=OFF' env -u DEBUG \
+  python -m pip install --no-build-isolation '.[ethos_u]'
+python -m pip check
+```
+
+Installing the Ethos-U extra after Arm setup resolves its older FlatBuffers dependency. Before exporting, confirm that `pip check` reports `No broken requirements found.`
+
+These commands replace `install_executorch.sh` and its TorchAO nightly with released dependencies. If you rerun Arm setup, repeat the package removal and Python installation steps.
 
 ## Verify the environment
 
