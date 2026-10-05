@@ -67,6 +67,6 @@ For a different input size, export a matching program first. The helper doesn't 
 
 ## What you've accomplished
 
-You have prepared an image, exported a pretrained Swin2SR model, run it through Arm VGF with ExecuTorch, and inspected the upscaled output. 
+You have prepared an image, exported a pretrained Swin2SR model, run it through Arm Vulkan Graph Format (VGF) with ExecuTorch, and inspected the upscaled output. 
 
 You can now repeat the same flow with your own 64 × 64 images.
