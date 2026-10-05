@@ -86,7 +86,7 @@ To do so you need to go to go to `Tools -> WindowsPerf Host Data` scroll to the 
 6. **Saving Your Settings**:
    - Once you are satisfied with your configurations, click `save`.
 
-![SPE settings #center](./SPE-settings.png)
+![SPE settings #center](./spe-settings.webp)
 
 ## Initiating the Sampling Process
 

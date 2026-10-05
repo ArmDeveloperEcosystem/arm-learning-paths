@@ -28,20 +28,20 @@ There are three main components involved in the process:
 * For ingress, there is a public entry point that is configured using the `application.keda` host.
 * For the ScaledObject, there is a Kedify HTTP scaler using `trafficAutowire: ingress`.
 
-## Configure the Ingress IP environment variable
+## Configure the ingress address
 
-Before testing the application, make sure the `INGRESS_IP` environment variable is set to your ingress controller’s external IP address or hostname.
+Before testing the application, make sure `INGRESS_ADDRESS` is set to your ingress controller's external IP address or hostname. For a local cluster, you can use the forwarded address from the previous section.
 
-If you followed the [Install Ingress Controller](../install-ingress/) guide, you should already have this set. If not, or if you're using an existing ingress controller, run this command:
+If you followed the [Install an ingress controller](../install-ingress/) section, you should already have this set. Otherwise, if you installed Traefik separately, run:
 
 ```bash
-export INGRESS_IP=$(kubectl get service ingress-nginx-controller --namespace=ingress-nginx -o jsonpath='{.status.loadBalancer.ingress[0].ip}{.status.loadBalancer.ingress[0].hostname}')
-echo "Ingress IP/Hostname: $INGRESS_IP"
+export INGRESS_ADDRESS=$(kubectl get service traefik --namespace traefik -o jsonpath='{.status.loadBalancer.ingress[0].ip}{.status.loadBalancer.ingress[0].hostname}')
+echo "Ingress address: $INGRESS_ADDRESS"
 ```
-This will store the correct IP or hostname in the $INGRESS_IP environment variable. If no value is returned, wait a short while and try again.
+If the Service has no external address, use the local port forwarding option in the previous section.
 
 {{% notice Note %}}
-If your ingress controller service uses a different name or namespace, update the command accordingly. For example, some installations use `nginx-ingress-controller` or place it in a different namespace.
+If you use an existing ingress controller, set `INGRESS_ADDRESS` to its endpoint and change `ingressClassName` in the following manifest to its IngressClass name.
 {{% /notice %}}
 
 ## Deploy the application and configure Ingress
@@ -104,7 +104,7 @@ kind: Ingress
 metadata:
   name: application-ingress
 spec:
-  ingressClassName: nginx
+  ingressClassName: traefik
   rules:
     - host: application.keda
       http:
@@ -124,7 +124,7 @@ EOF
 The manifest includes a few key options that affect scaling behavior:
 
 - `RESPONSE_DELAY` is set in the Deployment manifest above and adds approximately 300 ms latency per request; this slower response time increases the number of concurrent requests, making scaling effects easier to observe.
-- The ingress uses the host `application.keda`. To access this app, use your Ingress controller’s IP with a `Host:` header.
+- The ingress uses the host `application.keda`. To access this app, use your ingress controller's address with a `Host:` header.
 
 ## Verify the application is running
 
@@ -145,7 +145,7 @@ application   1/1     1            1           3m44s
 Once the application and Ingress are deployed, verify that everything is working correctly by sending a request to the exposed endpoint. Run the following command:
 
 ```bash
-curl -I -H "Host: application.keda" http://$INGRESS_IP
+curl -I -H "Host: application.keda" http://$INGRESS_ADDRESS
 ```
 
 If the routing is set up properly, you should see a response similar to:
@@ -159,7 +159,7 @@ Connection: keep-alive
 
 ## Enable autoscaling with Kedify
 
-The application is now running. Next, you will enable autoscaling so that it can scale dynamically between 0 and 10 replicas. Kedify ensures that no requests are dropped during scaling. Apply the `ScaledObject` by running the following command:
+The application is now running. Next, enable autoscaling so that it can scale dynamically between 0 and 10 replicas. Kedify holds requests while the application scales from zero, subject to client timeouts. Apply the `ScaledObject` by running the following command:
 
 ```bash
 cat <<'EOF' | kubectl apply -f -
@@ -241,7 +241,7 @@ This continuously monitors the deployment status in the default namespace. Once 
 Send a request to trigger scale-up:
 
 ```bash
-curl -I -H "Host: application.keda" http://$INGRESS_IP
+curl -I -H "Host: application.keda" http://$INGRESS_ADDRESS
 ```
 You should receive an HTTP 200 OK response, confirming that the service is reachable again.
 
@@ -250,7 +250,7 @@ The application scales from 0 → 1 replica automatically, and you should receiv
 Now, generate a heavier, sustained load against the application. You can use `hey` (or a similar benchmarking tool):
 
 ```bash
-hey -n 40000 -c 200 -host "application.keda" http://$INGRESS_IP
+hey -n 40000 -c 200 -t 60 -host "application.keda" http://$INGRESS_ADDRESS
 ```
 
 While the load test is running, open another terminal and monitor the deployment replicas in real time:

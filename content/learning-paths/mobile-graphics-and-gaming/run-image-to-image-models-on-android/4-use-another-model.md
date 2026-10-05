@@ -1,6 +1,6 @@
 ---
-title: (Optional) Use an Arm AI Portal model without a validated adapter
-description: Inspect another image model package and give a capable coding agent the local evidence needed to implement and validate its Android adapter.
+title: (Optional) Use a model not currently supported by Image Analysis
+description: Inspect an unsupported image model package and provide the local evidence needed to implement and validate its Android adapter.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -9,12 +9,12 @@ layout: learningpathall
 
 ## Use a coding agent to implement and validate an adapter
 
-Use this advanced workflow only when the model doesn't match the validated MobileSAM example. A different model might need another runtime dependency, tensor mapping, and preprocessing pipeline. It might also need a different prompt control, output decoder, or result visualization.
+Use this advanced workflow only when the model doesn't match either validated adapter included with Image Analysis: MobileSAM or Depth Anything V2. A different model might need another runtime dependency, tensor mapping, and preprocessing pipeline. It might also need a different prompt control, output decoder, or result visualization.
 
 The included LiteRT and ONNX adapter files are implementation stubs. They show where runtime-specific code belongs, but they aren't ready-made alternatives that can execute an arbitrary `.tflite` or `.onnx` model.
 
 {{% notice Note %}}
-Use an advanced coding agent that supports long-context, multi-file editing, image-model reasoning, and terminal tools. The agent needs to be able to trace Kotlin interfaces and determine tensor and preprocessing contracts from evidence. It also needs to update Gradle dependencies and interpret Android build errors. Lightweight autocomplete or chat-only tools are unlikely to complete this workflow reliably. 
+Use an advanced coding agent that supports long-context, multi-file editing, image-model reasoning, and terminal tools. The agent needs to be able to trace Kotlin interfaces and determine tensor and preprocessing contracts from evidence. It also needs to update Gradle dependencies and interpret Android build errors. Lightweight autocomplete or chat-only tools are unlikely to complete this workflow reliably.
 
 Treat generated code as a starting point that needs developer review and device validation.
 {{% /notice %}}
@@ -131,4 +131,4 @@ Copy the exact files reported by the agent into the catalog's application-privat
 
 You've inspected another Arm AI Portal image model, supplied a coding agent with local model evidence, and identified the build and device checks needed to validate its adapter.
 
-You can use these steps to run Arm AI Portal image models that don't have a validated adapter.
+You can use this workflow to implement and validate an adapter for an Arm AI Portal image model that Image Analysis doesn't yet support.

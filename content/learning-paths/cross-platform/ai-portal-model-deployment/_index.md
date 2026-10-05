@@ -87,6 +87,12 @@ armips:
 tools_software_languages:
     - Python
     - Docker
+    - Topo
+    - Arm AI Portal
+    - MCP
+    - Hugging Face
+    - ONNX Runtime
+    - ExecuTorch
 operatingsystems:
     - Linux
 

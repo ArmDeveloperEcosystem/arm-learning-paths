@@ -1,5 +1,6 @@
 ---
 title: Quantize SmolVLA to INT8 and compare it to FP32
+description: Quantize eligible SmolVLA operations to INT8 and compare the converted model's outputs and latency with the FP32 model on an Arm CPU.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +9,7 @@ layout: learningpathall
 
 ## Quantize and export the INT8 model
 
-You have seen each stage of the pipeline. You'll now use TorchAO to quantize eligible parts of the model to INT8 and run the complete conversion pipeline.
+You've seen each stage of the pipeline. You'll now use TorchAO to quantize eligible parts of the model to INT8 and run the complete conversion pipeline.
 
 Run `pipeline.sh` with INT8 quantization and save the results to `artifacts/int8`:
 
@@ -27,7 +28,7 @@ Artifacts: artifacts/int8
 ```
 
 {{% notice Note %}}
-The `--variant int8` option applies dynamic per-channel INT8 quantization to eligible linear operations in `vision_encoder` and `denoise_step`: weights use per-channel INT8 quantization, while activations are quantized dynamically at runtime. `prefix_forward` remains FP32 to preserve accuracy.
+The `--variant int8` option applies dynamic per-channel INT8 quantization to eligible linear operations in `vision_encoder` and `denoise_step`. Weights use per-channel INT8 quantization, while activations are quantized dynamically at runtime. `prefix_forward` remains FP32 to preserve accuracy.
 
 Quantization occurs immediately after loading the model, before splitting and exporting.
 
@@ -36,9 +37,13 @@ Different SmolVLA configurations can benefit from different quantizations. In pa
 
 ## Compare the FP32 and INT8 executions
 
+To compare the FP32 and INT8 executions, complete the following steps:
+
 ### Inspect the CPU layout and usage
 
-You can assign CPU cores to the native runner to keep the FP32 and INT8 configurations consistent. CPU affinity also lets you tune each component on systems with different core types. Inspect your CPU layout:
+You can assign CPU cores to the native runner to keep the FP32 and INT8 configurations consistent. CPU affinity also lets you tune each component on systems with different core types.
+
+Inspect your CPU layout:
 
 ```bash
 lscpu -e=CPU,ONLINE,MAXMHZ,MODELNAME
@@ -72,13 +77,14 @@ CPU ONLINE    MAXMHZ MODELNAME
 
 The runner lets you allocate one group of cores to `vision` and another group to `prefix` and `denoise`. On the DGX Spark, cores `5-9` and `15-19` are the faster Cortex-X925 cores. If your system has enough cores, a useful starting point is eight to ten cores for `vision` and five to eight cores for the other components.
 
-Only use CPU IDs that are online on your system. You can also omit affinity options, which is useful on smaller systems or CPUs with one core type.
+Use only the CPU IDs that are online on your system. You can also omit affinity options, which is useful on smaller systems or CPUs with one core type.
 
-Other resource-intensive processes affect inference latency. Inspect the live CPU load with `top`, and press `q` to exit:
+Other resource-intensive processes affect inference latency. Inspect the live CPU load with `top`:
 
 ```bash
 top
 ```
+Press `q` to exit. 
 
 ### Run benchmarks
 
@@ -99,13 +105,13 @@ python scripts/benchmark.py \
 ```
 
 {{% notice Tip %}}
-Experiment with these options to suit your system:
+Experiment with the following options to suit your system:
 
 - `--cpu-affinity` specifies the cores allocated to `prefix` and `denoise`
-- `--cpu-threads` specifies the ExecuTorch and XNNPACK thread pool size; match it to the number of cores in `--cpu-affinity`
+- `--cpu-threads` specifies the ExecuTorch and XNNPACK thread pool size; match the thread pool size to the number of cores in `--cpu-affinity`
 - `--vision-cpu-affinity` and `--vision-cpu-threads` set a separate core allocation and thread pool size for the vision encoder
 
-For example, the DGX Spark configuration shown previously uses `--cpu-threads 5 --cpu-affinity 15-19 --vision-cpu-threads 8 --vision-cpu-affinity 5-9,15-19`. Apply identical options to the FP32 and INT8 benchmark commands for a fair comparison.
+For example, the DGX Spark configuration uses `--cpu-threads 5 --cpu-affinity 15-19 --vision-cpu-threads 8 --vision-cpu-affinity 5-9,15-19`. Apply identical options to the FP32 and INT8 benchmark commands for a fair comparison.
 {{% /notice %}}
 
 ### Compare benchmark results
@@ -126,7 +132,7 @@ INT8        720.74  1022.9  0.999376578  0.010765  28.86
 INT8 speedup: 2.00x
 ```
 
-For this run, INT8 reduces median latency by about 50%, giving a 2.00x speedup. It also reduces the combined `.pte` size while keeping the action trajectories close to the FP32 reference. Your results depend on the CPU and core allocation.
+For this run, INT8 reduces median latency by about 50%, resulting in a 2.00x speedup. INT8 also reduces the combined `.pte` size while keeping the action trajectories close to the FP32 reference. Your results depend on the CPU and core allocation.
 
 ![Six line charts compare FP32 and INT8 values across the 50-step trajectory for each action dimension. The lines closely overlap, with mean absolute error values from 0.0033 to 0.0227.#center](action_dimension_comparison.png "FP32 and INT8 action trajectories")
 

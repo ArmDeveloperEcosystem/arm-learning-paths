@@ -1,0 +1,77 @@
+---
+title: Select a compatible KleidiAI microkernel
+description: Match XNNPACK quantization contracts to a KleidiAI SME2 microkernel that preserves the existing QD8 activation values.
+weight: 4
+
+### FIXED, DO NOT MODIFY
+layout: learningpathall
+---
+
+## Match quantization contracts first
+
+Don't select a microkernel only because it produces FP16 output and uses int8 and int4 inputs. The kernel's quantization contract must also match the framework operator.
+
+For example, `matmul_clamp_f16_qsi8d32p_qai4c32p` might appear to be a suitable KleidiAI kernel.
+
+That kernel isn't a correct match for XNNPACK `qd8_f16_qc4w` for the following reasons:
+
+- `qsi8d32p` requires symmetric int8 quantization for each block of 32 K values.
+- XNNPACK QD8 uses asymmetric int8 quantization for each row.
+
+Using that kernel requires dequantizing and then requantizing the left-hand side per 32-value block. These steps add quantization error and can violate the numerical contract of the existing XNNPACK operator.
+
+## Select qai8dxp/qsi4cxp
+
+Use the KleidiAI Scalable Matrix Extension 2 (SME2) matrix outer product accumulate (MOPA) microkernel `kai_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa` instead.
+
+Its formats match the operator:
+
+| Operand | XNNPACK format | KleidiAI format | Result |
+|---|---|---|---|
+| Left-hand side (LHS) | QD8, asymmetric per row | `qai8dxp`, asymmetric per row | Direct metadata adaptation |
+| Right-hand side (RHS) | QC4W, int4 per output channel | `qsi4cxp`, signed int4 per channel | Pack once during create |
+| Output | FP16 with min/max clamp | FP16 with min/max clamp | Direct match |
+
+`qai8dxp` means quantized asymmetric int8 with dynamic, per-row parameters. It's the key reason this kernel is suitable: the original qd8 activation values don't need to be requantized.
+
+## Why SME2 MOPA
+
+The `sme2_mopa` suffix means the microkernel uses SME2 matrix outer product accumulate instructions. SME2 provides a matrix accumulator, called ZA, that's designed for matrix workloads.
+
+The kernel tile dimensions are expressed in vector lengths:
+
+```text
+1VL x 4VL
+```
+
+The actual `mr` and `nr` values depend on the device's streaming vector length. The wrapper queries the kernel instead of hard-coding them:
+
+```c
+size_t mr = kai_get_mr_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa();
+size_t nr = kai_get_nr_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa();
+```
+
+The same kernel reports `kr = 4` and `sr = 1`. These values define the K interleave used by the packed LHS and RHS buffers.
+
+## Prepare the XNNPACK SME2 wrapper
+
+The wrapper is introduced by the already-applied first patch [`0001-prepare-qd8-f16-qc4w-sme2-kernel.patch`](../0001-prepare-qd8-f16-qc4w-sme2-kernel.patch).
+
+The patch adds an XNNPACK wrapper at:
+
+```text
+src/qd8-f16-qc4w-gemm/
+  qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c
+```
+
+The `16x64c4` part follows the existing XNNPACK SME2 wrapper naming convention. It's a name used by XNNPACK tooling, rather than a claim that the KleidiAI kernel always uses a fixed 16 by 64 tile. The actual tile dimensions come from the KleidiAI `get_mr` and `get_nr` functions at runtime.
+
+{{% notice Tip %}}
+Select a kernel from its complete operand contract. Compare quantization granularity, signedness, and zero-point behavior. After comparing these factors, check the output type, clamp behavior, and packing requirements before implementing any adapter.
+{{% /notice %}}
+
+## What you've learned and what's next
+
+You've matched the operator's quantization contract to the selected KleidiAI microkernel and traced how the wrapper queries its tile dimensions. The integration preserves the existing QD8 activation values while adapting the operands to the kernel's packed layouts.
+
+Next, inspect how the integration packs the static RHS weights.
