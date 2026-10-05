@@ -44,7 +44,7 @@ generated_summary_faq:
       show `1/1` in `READY` and `Running` in `STATUS` before continuing.
   - question: Do I need to install Traefik if my cluster already has an ingress controller?
     answer: >-
-      No. If your cluster already has an ingress controller, skip the Traefik installation and use its endpoint and `IngressClass` name in the application steps.
+      No. If your cluster already has an ingress controller, skip the Traefik installation and use its endpoint and `IngressClass` name while deploying the application.
   - question: Which deployment target should I use for the ingress controller on Arm-based nodes?
     answer: >-
       Install Traefik with Helm and set its node selector and toleration for arm64 nodes to run the controller on Arm nodes in your cluster.
