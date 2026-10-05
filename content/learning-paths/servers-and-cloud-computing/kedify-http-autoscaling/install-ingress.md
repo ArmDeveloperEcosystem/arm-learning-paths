@@ -10,7 +10,7 @@ layout: "learningpathall"
 To expose the sample application, you need an ingress controller to handle incoming traffic. One option is to use Traefik with the standard Kubernetes Ingress API and schedule Traefik on arm64 nodes.
 
 {{% notice Note %}}
-- If your cluster already has an ingress controller installed and configured, you can skip this step and proceed to the [Deploy an HTTP application through Kubernetes Ingress](../http-scaling/).
+- If your cluster already has an ingress controller installed and configured, you can skip this step and proceed to [Deploy an HTTP application through Kubernetes Ingress](/learning-paths/servers-and-cloud-computing/kedify-http-autoscaling/http-scaling/).
 - Before installing Traefik, ensure that you're using Kubernetes version 1.25 or later.
 {{% /notice %}}
 
@@ -50,7 +50,7 @@ export INGRESS_ADDRESS=$(kubectl get service traefik --namespace traefik -o json
 echo "Ingress address: $INGRESS_ADDRESS"
 ```
 
-Typical values by provider:
+The following are typical endpoint values by cloud provider:
 - Amazon Elastic Kubernetes Service (EKS): Load balancer hostname (for example, `a1234567890abcdef-123456789.us-west-2.elb.amazonaws.com`)
 - Google Kubernetes Engine (GKE): IP address (for example, `34.102.136.180`)
 - Azure Kubernetes Service (AKS): IP address (for example, `20.62.196.123`)
