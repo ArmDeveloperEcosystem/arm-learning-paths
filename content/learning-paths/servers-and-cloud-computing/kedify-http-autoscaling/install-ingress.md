@@ -1,5 +1,5 @@
 ---
-title: "Install an ingress controller for HTTP autoscaling on Kubernetes"
+title: "Install an ingress controller for testing HTTP autoscaling"
 description: Install Traefik with Helm and prepare an ingress endpoint for testing Kedify HTTP autoscaling on Kubernetes.
 weight: 3
 layout: "learningpathall"
