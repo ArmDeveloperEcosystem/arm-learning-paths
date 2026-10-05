@@ -1,6 +1,10 @@
 ---
 title: Understand Opacity Micromaps and hardware OMM on Arm Mali G2
 
+draft: true
+cascade:
+    draft: true
+    
 description: Learn how OMM stores opacity data, follow that data from baking to ray traversal, and understand hardware OMM on Arm Mali G2.
 
 minutes_to_complete: 30
