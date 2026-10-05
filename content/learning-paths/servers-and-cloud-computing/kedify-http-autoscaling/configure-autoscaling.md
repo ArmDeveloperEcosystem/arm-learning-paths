@@ -1,5 +1,5 @@
 ---
-title: "Configure and test Kedify HTTP autoscaling"
+title: "Configure and test HTTP autoscaling with Kedify"
 description: Configure Kedify HTTP autoscaling for the deployed application and observe replica changes as traffic varies.
 weight: 5
 layout: "learningpathall"
