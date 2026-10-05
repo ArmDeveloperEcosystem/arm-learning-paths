@@ -48,7 +48,7 @@ generated_summary_faq:
     answer: >-
       No. You'll export a pretrained ×2 checkpoint pinned to a specific revision. The export uses
       `--quantization-mode none`, so you don't need calibration images.
-  - question: Why do I need both swin2sr.pte and swin2sr.json?
+  - question: Why do I need both Swin2SR PTE and JSON files?
     answer: >-
       The `.pte` file contains your executable model, while the `.json` file tells the image
       helper how to read the input and reconstruct the output. Keep them in the same directory
