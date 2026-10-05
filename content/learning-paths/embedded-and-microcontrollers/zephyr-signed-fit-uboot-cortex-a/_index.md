@@ -1,6 +1,10 @@
 ---
 title: Boot Zephyr from a signed FIT image with U-Boot on Arm Cortex-A
 
+draft: true                                                                        
+cascade:                                                                           
+    draft: true 
+
 description: Learn how to sign a Zephyr image in a FIT, build the public key into U-Boot, and start Zephyr on Arm Cortex-A only after U-Boot verifies it, in QEMU with no hardware and then on a TI AM62L EVM.
 
 minutes_to_complete: 120
