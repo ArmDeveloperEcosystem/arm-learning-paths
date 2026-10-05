@@ -60,7 +60,7 @@ generated_summary_faq:
   - question: How do I know that the image run succeeded?
     answer: >-
       Look for `Saved super-resolved image to` in the terminal output. Check that your generated
-      image is 128 × 128 RGB and shows the same scene without obvious corruption. You can
+      image is 128 × 128 and shows the same scene without obvious corruption. You can
       compare it with the high-resolution reference, but the visual check isn't a quality
       benchmark or performance result.
 # END generated_summary_faq

@@ -7,7 +7,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## What Swin2SR is
+## Swin2SR and super-resolution
 
 [Swin2SR](https://github.com/mv-lab/swin2sr) is a neural network for image super-resolution and restoration, built on the Swin Transformer V2 architecture. Super-resolution means estimating a higher-resolution image from a lower-resolution input. The model uses patterns learned during training to reconstruct details such as edges and textures.
 
@@ -70,7 +70,7 @@ Review the [ML SDK license terms](https://github.com/arm/ai-ml-sdk-for-vulkan/tr
 bash examples/arm/setup.sh --disable-ethos-u-deps --enable-mlsdk-deps
 ```
 
-Remove three developer packages installed by setup that you don't need for the Learning Path:
+Remove three installed developer packages that you don't need for the Learning Path:
 
 ```bash
 python -m pip uninstall -y \

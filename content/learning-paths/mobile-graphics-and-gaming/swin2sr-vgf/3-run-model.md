@@ -11,7 +11,7 @@ layout: learningpathall
 
 ExecuTorch's `executor_runner` loads your `.pte` program and executes it. Continue from the same terminal in your `executorch` directory.
 
-If you had to open a new terminal, restore the environment:
+If you open a new terminal, restore the environment:
 
 ```bash
 source .venv/bin/activate
@@ -48,7 +48,7 @@ The path reflects your checkout location.
 
 The helper converts the image into a tensor — a numerical representation of its pixels. It runs the model and saves the output tensor as a PNG. A successful run ends with `Saved super-resolved image to`, followed by the full path to `demo_sr_128.png`.
 
-Your input must be exactly 64 × 64 pixels. If you see an `expected (1, 3, 64, 64)` error, check that you used `demo_lr_64.png`, not the larger reference image.
+Your input needs to be exactly 64 × 64 pixels. If you see an `expected (1, 3, 64, 64)` error, check that you used `demo_lr_64.png`, not the larger reference image.
 
 ## What you've accomplished and what's next
 
