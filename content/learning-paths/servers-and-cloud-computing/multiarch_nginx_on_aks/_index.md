@@ -59,7 +59,7 @@ generated_summary_faq:
   - question: What should I check if the Arm deployment doesn't start or the service shows no
       endpoints?
     answer: >-
-      Verify the Arm node pool exists and is ready. Ensure that the deployment and service selectors
+      Verify that the Arm node pool exists and is ready. Ensure that the deployment and service selectors
       match, including `app: nginx-multiarch` and `arch: arm`. Also confirm that the namespace and shared
       ConfigMap were created before applying the deployment.
 # END generated_summary_faq
