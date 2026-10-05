@@ -11,7 +11,7 @@ layout: learningpathall
 
 ExecuTorch's `executor_runner` loads your `.pte` program and executes it. Continue from the same terminal in your `executorch` directory.
 
-If you open a new terminal, restore the environment:
+If you open a new terminal, you'll have to restore the environment:
 
 ```bash
 source .venv/bin/activate
