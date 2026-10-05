@@ -1,11 +1,13 @@
 ---
 title: "Install Kedify using Helm"
+description: Install the Kedify build of KEDA, HTTP Scaler, and Kedify Agent with Helm, then verify the components for HTTP autoscaling.
 weight: 2
 layout: "learningpathall"
 ---
 
 ## Overview
-In this section, you will install Kedify on your Kubernetes cluster using Helm. You will add the Kedify chart repository, then install three separate Helm charts: KEDA (Kedify build) for event-driven autoscaling, the HTTP Scaler for HTTP-based scaling, and the Kedify Agent for connecting your cluster to Kedify's cloud service. You will then verify the installation. This enables HTTP autoscaling on Kubernetes with KEDA and Kedify, including arm64 nodes.
+
+Install Kedify on your Kubernetes cluster with three Helm charts: the Kedify build of KEDA for event-driven autoscaling, the HTTP Scaler for HTTP-based scaling, and the Kedify Agent to connect your cluster to Kedify's cloud service. Then verify that the components are running.
 
 For more information and other installation methods on Arm, see the [Kedify installation documentation](https://docs.kedify.io/installation/helm#installation-on-arm).
 
@@ -116,7 +118,8 @@ List pods in the `keda` namespace to confirm all components are running:
 kubectl get pods -n keda
 ```
 
-Expected output (names might vary):
+Pod names might vary. The output is similar to:
+
 ```output
 NAME                                             READY   STATUS    RESTARTS   AGE
 keda-add-ons-http-external-scaler-xxxxx          1/1     Running   0          1m
@@ -126,5 +129,9 @@ keda-operator-xxxxx                              1/1     Running   0          1m
 keda-operator-metrics-apiserver-xxxxx            1/1     Running   0          1m
 kedify-agent-xxxxx                               1/1     Running   0          1m
 ```
+
+## What you've accomplished
+
+You've gathered Kedify credentials, installed the three Helm charts with Arm node selectors and tolerations, and checked the component pods in the `keda` namespace.
 
 Proceed to the next section to install an ingress controller, deploy a sample HTTP app, and test autoscaling.

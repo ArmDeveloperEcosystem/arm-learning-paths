@@ -1,13 +1,18 @@
 ---
 title: "Autoscale HTTP applications with Kedify and Kubernetes Ingress"
+description: Deploy a sample HTTP application through Kubernetes Ingress, configure Kedify autoscaling, and observe replica changes as traffic varies.
 weight: 4
 layout: "learningpathall"
 ---
 ## Overview
 
-In this section, you’ll gain hands-on experience with Kedify HTTP autoscaling. You will deploy a small web service, expose it through a standard Kubernetes Ingress, and rely on Kedify’s autowiring to route traffic through its proxy so that requests are measured and drive scaling.
+Deploy a sample HTTP application through Kubernetes Ingress and configure autoscaling with [Kedify’s HTTP Scaler](https://docs.kedify.io/scalers/http-scaler/). You'll complete these tasks in order:
 
-You will scale a real HTTP app exposed through Kubernetes Ingress using [Kedify’s HTTP Scaler](https://docs.kedify.io/scalers/http-scaler/), and then move on to deploy a simple application, enable autoscaling with a scaled object, generate load, and observe the system scale out and back in (including scale-to-zero when idle). 
+1. Deploy the application and expose it through Ingress
+2. Enable autoscaling with a `ScaledObject`
+3. Generate traffic and observe scale-out, scale-in, and scale-to-zero behavior when idle
+
+Kedify’s ingress autowiring routes traffic through its proxy so that requests are measured and drive scaling.
 
 For more information, see [Scaling Deployments, StatefulSets & Custom Resources](https://keda.sh/docs/latest/concepts/scaling-deployments/) on the KEDA website.  
 
@@ -15,7 +20,7 @@ For more information, see [Scaling Deployments, StatefulSets & Custom Resources]
 
 With ingress autowiring enabled, Kedify automatically routes traffic through its proxy before it reaches your service and deployment:
 
-```output
+```text
 Ingress → kedify-proxy → Service → Deployment
 ```
 
@@ -46,7 +51,7 @@ If you use an existing ingress controller, set `INGRESS_ADDRESS` to its endpoint
 
 ## Deploy the application and configure Ingress
 
-Now you will deploy a simple HTTP server and expose it using an Ingress resource. The source code for this application is available on the [Kedify GitHub repository](https://github.com/kedify/examples/tree/main/samples/http-server).
+Now you will deploy a simple HTTP server and expose it using an Ingress resource. See the [Kedify sample HTTP-server source code](https://github.com/kedify/examples/tree/main/samples/http-server).
 
 Run the following command to deploy your application:
 
@@ -119,22 +124,23 @@ spec:
 EOF
 ```
 
-## Key settings explained
+## Application and Ingress settings
 
 The manifest includes a few key options that affect scaling behavior:
 
-- `RESPONSE_DELAY` is set in the Deployment manifest above and adds approximately 300 ms latency per request; this slower response time increases the number of concurrent requests, making scaling effects easier to observe.
+- `RESPONSE_DELAY` is set in the Deployment manifest and adds approximately 300 ms latency per request. This slower response time increases the number of concurrent requests, making scaling effects easier to observe.
 - The ingress uses the host `application.keda`. To access this app, use your ingress controller's address with a `Host:` header.
 
 ## Verify the application is running
 
-Run the following command to check that 1 replica is ready:
+Run the following command to check that one replica is ready:
 
 ```bash
 kubectl get deployment application
 ```
 
-Expected output includes 1 available replica:
+The expected output is:
+
 ```output
 NAME          READY   UP-TO-DATE   AVAILABLE   AGE
 application   1/1     1            1           3m44s
@@ -142,13 +148,14 @@ application   1/1     1            1           3m44s
 
 ## Test the application
 
-Once the application and Ingress are deployed, verify that everything is working correctly by sending a request to the exposed endpoint. Run the following command:
+After the application and Ingress are deployed, verify that everything is working correctly by sending a request to the exposed endpoint. Run the following command:
 
 ```bash
 curl -I -H "Host: application.keda" http://$INGRESS_ADDRESS
 ```
 
-If the routing is set up properly, you should see a response similar to:
+The output is similar to:
+
 ```output
 HTTP/1.1 200 OK
 Date: Thu, 11 Sep 2025 14:11:24 GMT
@@ -159,7 +166,7 @@ Connection: keep-alive
 
 ## Enable autoscaling with Kedify
 
-The application is now running. Next, enable autoscaling so that it can scale dynamically between 0 and 10 replicas. Kedify holds requests while the application scales from zero, subject to client timeouts. Apply the `ScaledObject` by running the following command:
+The application is now running. Next, enable autoscaling so that it can scale dynamically between zero and 10 replicas. Kedify holds requests while the application scales from zero, subject to client timeouts. Apply the `ScaledObject` by running the following command:
 
 ```bash
 cat <<'EOF' | kubectl apply -f -
@@ -200,7 +207,7 @@ spec:
 EOF
 ```
 
-## Key fields explained
+## ScaledObject settings for HTTP autoscaling
 
 Use the following field descriptions to understand how the `ScaledObject` controls HTTP-driven autoscaling and how each setting affects traffic routing and scale decisions:
 
@@ -211,41 +218,43 @@ Use the following field descriptions to understand how the `ScaledObject` contro
 - `minReplicaCount: 0` - Enables scale to zero when there is no traffic.
 - `trafficAutowire: ingress` - Automatically wires your Ingress to the Kedify proxy for seamless traffic management.
 
-After applying, the `ScaledObject` will appear in the Kedify dashboard (https://dashboard.kedify.io/).
+After applying, the `ScaledObject` will appear in the [Kedify dashboard](https://dashboard.kedify.io/).
 
-![Kedify dashboard showing the ScaledObject alt-text#center](images/scaledobject.png "Kedify dashboard: ScaledObject")
+![Kedify dashboard with the ScaledObjects tab selected. The application row shows the kedify-http trigger, minimum zero and maximum ten replicas, and READY status after you apply the ScaledObject.#center](images/scaledobject.png "Kedify dashboard: ScaledObject")
 
 ## Send traffic and observe scaling
 
-Since no traffic is currently being sent to the application, it will eventually scale down to zero replicas.
+Because no traffic is currently being sent to the application, it will eventually scale down to zero replicas.
 
-## Verify scale to zero
+### Verify scale to zero
 
-To confirm that the application has scaled down, run the following command and watch until the number of replicas reaches 0:
+To confirm that the application has scaled down, run the following command and watch until the number of replicas reaches zero:
 
 ```bash
 watch kubectl get deployment application -n default
 ```
 
-You should see output similar to:
+The output is similar to:
+
 ```output
 Every 2,0s: kubectl get deployment application -n default
 
 NAME          READY   UP-TO-DATE   AVAILABLE   AGE
 application   0/0     0            0           110s
 ```
-This continuously monitors the deployment status in the default namespace. Once traffic stops and the idle window has passed, you should see the application deployment report 0/0 replicas, indicating that it has successfully scaled to zero.
+This continuously monitors the deployment status in the `default` namespace. After traffic stops and the idle window has passed, you should see the application deployment report `0/0` replicas, indicating that it has successfully scaled to zero.
 
-## Verify the app can scale from zero
+### Verify the app can scale from zero
 
 Send a request to trigger scale-up:
 
 ```bash
 curl -I -H "Host: application.keda" http://$INGRESS_ADDRESS
 ```
-You should receive an HTTP 200 OK response, confirming that the service is reachable again.
 
-The application scales from 0 → 1 replica automatically, and you should receive an HTTP `200 OK` response.
+The application scales from zero to one replica automatically. You should receive an HTTP `200 OK` response, confirming that the service is reachable again.
+
+### Generate load and observe scale-out
 
 Now, generate a heavier, sustained load against the application. You can use `hey` (or a similar benchmarking tool):
 
@@ -259,7 +268,7 @@ While the load test is running, open another terminal and monitor the deployment
 watch kubectl get deployment application -n default
 ```
 
-You will see the number of replicas change dynamically. For example:
+You will see the number of replicas change dynamically. The output is similar to:
 
 ```output
 Every 2,0s: kubectl get deployment application -n default
@@ -274,7 +283,7 @@ Expected behavior:
 
 You can also monitor traffic and scaling in the Kedify dashboard:
 
-![Kedify dashboard showing request load and scaling over time alt-text#center](images/load.webp "Kedify dashboard: request load and scaling over time")
+![Kedify dashboard showing the application's ScaledObject Summary tab. Compare the Scaler's metrics and Number of replicas graphs to observe traffic metrics and replica changes during testing.#center](images/load.webp "Kedify dashboard: request load and scaling over time")
 
 ## Clean up
 
@@ -287,6 +296,10 @@ kubectl delete service application-service
 kubectl delete deployment application
 ```
 This will delete the `ScaledObject`, Ingress, Service, and Deployment associated with the demo application.
+
+## What you've accomplished
+
+You've deployed an HTTP application through Ingress, configured a Kedify `ScaledObject`, and tested scale-to-zero, scale-up, and replica changes under load. You've also monitored scaling in the dashboard and removed the sample application resources.
 
 ## Next steps
 

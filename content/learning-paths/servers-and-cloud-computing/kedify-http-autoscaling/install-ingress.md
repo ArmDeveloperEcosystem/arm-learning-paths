@@ -1,5 +1,6 @@
 ---
 title: "Install an ingress controller"
+description: Install Traefik with Helm and prepare an ingress endpoint for testing Kedify HTTP autoscaling on Kubernetes.
 weight: 3
 layout: "learningpathall"
 ---
@@ -72,7 +73,7 @@ export INGRESS_ADDRESS=127.0.0.1:8080
 You have two options:
 
 - Option 1: DNS (recommended for production):
-  create a DNS record pointing `application.keda` to the external IP address or hostname of your ingress controller.
+  Create a DNS record pointing `application.keda` to the external IP address or hostname of your ingress controller.
 
 - Option 2: Host header (quick test):
   Use `INGRESS_ADDRESS` with a `Host: application.keda` header when you test the application in the next section. The address can be Traefik's external endpoint or your forwarded local port.
@@ -85,5 +86,9 @@ kubectl get pods --namespace traefik
 ```
 
 You should see the `traefik` pod in `Running` status.
+
+## What you've accomplished
+
+You've installed Traefik with Helm, checked its Deployment, IngressClass, and pods, and prepared an ingress endpoint and access method for testing.
 
 Now that you have an ingress controller installed and configured, proceed to the next section to deploy an application and configure Kedify autoscaling.
