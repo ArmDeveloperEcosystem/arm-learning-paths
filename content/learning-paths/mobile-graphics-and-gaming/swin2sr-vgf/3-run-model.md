@@ -39,7 +39,13 @@ python examples/arm/super_resolution_example_vgf/runtime/run_super_resolution.py
   --output-image swin2sr-work/runtime/demo_sr_128.png
 ```
 
-The helper converts the image into a tensor, runs the model, and saves the output tensor as a PNG. A successful run ends with `Saved super-resolved image to` followed by the full path to `demo_sr_128.png`.
+The output includes a message similar to this; the path reflects your checkout location:
+
+```output
+Saved super-resolved image to /home/ubuntu/executorch/swin2sr-work/runtime/demo_sr_128.png
+```
+
+The helper converts the image into a tensor, a numerical representation of its pixels, runs the model, and saves the output tensor as a PNG. A successful run ends with `Saved super-resolved image to` followed by the full path to `demo_sr_128.png`.
 
 Your input must be exactly 64 × 64 pixels. If you see an `expected (1, 3, 64, 64)` error, check that you used `demo_lr_64.png`, not the larger reference image.
 

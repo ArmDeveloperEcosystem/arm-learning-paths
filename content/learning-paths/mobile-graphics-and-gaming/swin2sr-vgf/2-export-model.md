@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Export the pretrained model
 
-You don't need to train Swin2SR. The exporter downloads the pretrained ×2 checkpoint and converts it into an ExecuTorch `.pte` program. The pinned checkpoint revision keeps the model weights consistent between runs.
+You don't need to train Swin2SR. The exporter downloads the pretrained ×2 checkpoint—the saved model weights—and converts it into an ExecuTorch `.pte` program. The pinned checkpoint revision keeps the model weights consistent between runs.
 
 Run the exporter from your ExecuTorch directory:
 
