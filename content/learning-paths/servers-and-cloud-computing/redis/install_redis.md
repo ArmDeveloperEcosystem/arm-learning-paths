@@ -32,7 +32,6 @@ There are numerous ways to deploy Redis on Arm: Bare metal, cloud VMs, or the va
 * Redis services
   * [AWS MemoryDB or ElastiCache](https://aws.amazon.com/redis/)
     * Select an Arm based instance for deployment
-* [Arm AGI CPU](https://www.arm.com/products/cloud-datacenter/arm-agi-cpu)
 * Additional options are listed in the [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro/) learning path
 
 ###  Redis documentation
@@ -42,19 +41,3 @@ Redis has a variety of use cases in large enterprise applications. You can explo
 ### Redis installation options
 
 If you are using a cloud service like AWS MemoryDB or ElastiCache, then the installation of Redis is handled by that service. However, if you are working with a bare metal or cloud node, Redis is available to install on [Linux](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-linux//), [macOS](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-mac-os/), and [Windows](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-on-windows/) through command line or you can download the latest Redis [binary](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/) for your target platform and build it from [source](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-from-source/).
-
-{{%notice Please Note%}}
-
-When installing Redis through your operating system’s package manager, the system page size must match the page size supported by the packaged binary. This issue is most likely to occur on systems that use a page size other than the typical 4 KiB.
-
-To check the page size on Linux, run:
-```bash
-getconf PAGE_SIZE
-```
-
-If the following error appears when starting or interacting with the Redis service, the packaged binary is incompatible with your system’s page size:
-```output
-<jemalloc>: Unsupported system page size
-```
-In this case, build Redis [from source](https://redis.io/docs/latest/operate/oss_and_stack/install/archive/install-redis/install-redis-from-source/) on the target system
-{{%/notice%}}
