@@ -24,7 +24,7 @@ cmake -S . -B build_alif_asr \
   -DTARGET_PLATFORM=alif \
   -DUSE_CASE_BUILD=alif_asr \
   -DTARGET_SUBSYSTEM=RTSS-HP \
-  -DTARGET_BOARD=DevKit-e8 \
+  -DTARGET_BOARD=AppKit-e8 \
   -DML_FRAMEWORK=ExecuTorch \
   -DML_FWK_TMP_MEM_SIZE=0x002C0000 \
   -DGLCD_UI=OFF \
@@ -57,7 +57,7 @@ ls -lh \
 
 ## Confirm the E8 device and configure SETOOLS
 
-The firmware you just built targets the E8 DevKit's M55-HP core and Ethos-U85 NPU. Before programming, confirm the connected chip's full part number and silicon revision so the programming tools match your hardware.
+The firmware you just built targets the E8 AppKit's M55-HP core and Ethos-U85 NPU. Before programming, confirm the connected chip's full part number and silicon revision so the programming tools match your hardware.
 
 Set `SETOOLS_ROOT` to your extracted Security Toolkit directory. Edit the path in the appropriate tab if your installation is elsewhere:
 

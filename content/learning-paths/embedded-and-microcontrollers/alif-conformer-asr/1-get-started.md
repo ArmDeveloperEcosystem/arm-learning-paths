@@ -22,14 +22,14 @@ The Machine Learning Evaluation Kit (MLEK) is a set of embedded machine learning
 
 Ethos-U85 is an Arm NPU for accelerating neural networks in high-performance microcontroller designs, and is a primary target for the MLEK. Conformer is a good fit for this target because ASR depends on both local sound patterns and longer-range speech context. In this flow, the model is exported as an ExecuTorch `.pte` file so supported operations can run on the Ethos-U85 NPU instead of only on the Cortex-M CPU.
 
-Before using the physical Alif E8 DevKit, you will run the ASR application on the [Corstone-320 Fixed Virtual Platform (FVP)](https://support.arm.com/documentation/109760/0000/SSE-320-FVP). An FVP is a software model of an Arm system that can run the same baremetal firmware you later port and deploy to hardware. Corstone-320 includes an Ethos-U85 target, so you can prototype and debug the model, runtime, and application flow before porting the application to the Alif board.
+Before using the physical Alif E8 AppKit, you will run the ASR application on the [Corstone-320 Fixed Virtual Platform (FVP)](https://support.arm.com/documentation/109760/0000/SSE-320-FVP). An FVP is a software model of an Arm system that can run the same baremetal firmware you later port and deploy to hardware. Corstone-320 includes an Ethos-U85 target, so you can prototype and debug the model, runtime, and application flow before porting the application to the Alif board.
 
 ## Prepare your development host
 
 {{% notice Important %}}
 Use Linux on an x86_64 or aarch64 host, or use an **Apple Silicon Mac** running macOS 15 or later. 
 
-The commands have not been validated on native Windows. WSL with USB passthrough can work with the E8 DevKit, but that configuration is outside the scope of this Learning Path.
+The commands have not been validated on native Windows. WSL with USB passthrough can work with the E8 AppKit, but that configuration is outside the scope of this Learning Path.
 {{% /notice %}}
 
 MLEK requires Python 3.10, 3.11, or 3.12. Install the host packages for your operating system. The macOS commands assume you have already installed [Homebrew](https://brew.sh/).
