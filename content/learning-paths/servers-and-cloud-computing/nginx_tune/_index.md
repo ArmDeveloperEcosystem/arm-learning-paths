@@ -91,7 +91,7 @@ operatingsystems:
 test_images:
     - ubuntu:latest
 test_link: null
-test_maintenance: true
+test_maintenance: false
 
 further_reading:
     - resource:
