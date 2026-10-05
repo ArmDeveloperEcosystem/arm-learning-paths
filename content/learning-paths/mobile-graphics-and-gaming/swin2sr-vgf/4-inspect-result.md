@@ -43,7 +43,7 @@ The example output comes from an earlier run with the same checkpoint and demo i
 
 Look at the edges of the letters. The output estimates detail that was lost when the original was reduced to 64 × 64. It won't reproduce every detail of the original. A larger image doesn't automatically mean a more accurate one.
 
-Your end-to-end flow succeeds when:
+The following factors indicate the successful completion of the image upscaling flow:
 
 - The runner finishes
 - The generated image has the expected dimensions
