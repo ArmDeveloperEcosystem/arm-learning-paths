@@ -363,13 +363,13 @@ html[theme="dark"] .learning-path-title {
 .install-guide-title {
     margin-top: 0px;
     margin-bottom: 0px;
-    font-size: 1.25rem!important;
+    font-size: 1.1875rem!important;
     line-height: 1.3;
 }
 
 
 ads-card.tool-card {
-    height: 112px;
+    height: 128px;
     --ads-card-border-radius: 8px;
     --ads-card-border-width: 1px;    
 }

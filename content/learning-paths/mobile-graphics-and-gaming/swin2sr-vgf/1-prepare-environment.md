@@ -7,11 +7,17 @@ weight: 2
 layout: learningpathall
 ---
 
+## What is Swin2SR?
+
+[Swin2SR](https://github.com/mv-lab/swin2sr) is a neural network for image super-resolution and restoration, built on the Swin Transformer V2 architecture. Super-resolution means estimating a higher-resolution image from a lower-resolution input. The model uses patterns learned during training to reconstruct details such as edges and textures.
+
+Its transformer processes image features in small regions called windows and shifts those windows between layers to share information across regions. You use a pretrained model, so you can run it without training it yourself.
+
 ## What you'll build
 
-You will upscale a low-resolution image using Swin2SR, a pretrained image super-resolution model. It predicts finer detail as it doubles the image's width and height.
+You will use the ×2 version of Swin2SR to turn a 64 × 64 image into a 128 × 128 image. It doubles the width and height, predicting finer detail. These predictions can differ from the original image, which is why you compare the result with a high-resolution reference.
 
-You export the model with ExecuTorch, then run it through the Arm Vulkan Graph Format (VGF) backend. The result is a PNG image you can open and compare with a high-resolution reference.
+You export the model with ExecuTorch to create a `.pte` program, then build a host runner to execute it through the Arm Vulkan Graph Format (VGF) backend. An image helper connects your input image to the runner and saves the result as a PNG. You then check its dimensions and compare it with a high-resolution reference.
 
 ![Equal-size views compare a 64 by 64 low-resolution input with its 128 by 128 Swin2SR output. The input is enlarged for display only; labels show actual pixel dimensions. ExecuTorch and Arm VGF run the model on the host.#center](swin2sr-image-flow.svg "Images shown at the same display size to compare detail; labels show actual resolution")
 
@@ -31,7 +37,7 @@ sudo apt-get install -y \
   libvulkan1 libvulkan-dev vulkan-tools unzip xz-utils
 ```
 
-These packages don't install your GPU's vendor-specific driver. The Python installation step installs CMake 3.31.10.
+These packages don't install your GPU's vendor-specific driver. The later **Install ExecuTorch** section installs CMake 3.31.10.
 
 ## Get the ExecuTorch release
 
@@ -46,11 +52,13 @@ git submodule sync --recursive
 git submodule update --init --recursive
 ```
 
+The `test` command checks that the checkout matches the expected commit; success produces no output. The recursive submodule commands synchronize and download the source dependencies, including nested submodules.
+
 Run the remaining commands from this repository root, in the same terminal.
 
 ## Configure the Arm ML SDK
 
-Create a fresh Python environment:
+Create a fresh Python environment to keep this example's packages separate from your system Python. Activating it makes the following `python` and `pip` commands use that environment:
 
 ```bash
 python3.12 -m venv .venv
@@ -58,7 +66,7 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 ```
 
-Review the [ML SDK license terms](https://github.com/arm/ai-ml-sdk-for-vulkan/tree/main/LICENSES) and the Vulkan SDK terms. Use the setup script included in the release to install the SDK tools:
+Review the [ML SDK license terms](https://github.com/arm/ai-ml-sdk-for-vulkan/tree/main/LICENSES) and the Vulkan SDK terms. Use the release's setup script to install the SDK tools. `--enable-mlsdk-deps` selects the ML SDK dependencies for VGF, and `--disable-ethos-u-deps` skips the Ethos-U dependencies:
 
 ```bash
 bash examples/arm/setup.sh --disable-ethos-u-deps --enable-mlsdk-deps
@@ -93,7 +101,7 @@ These commands replace `install_executorch.sh`, which uses nightly and test inde
 
 ## Check the tools
 
-Activate the SDK paths and check the export and GPU prerequisites:
+Source `setup_path.sh` to make the SDK tools and libraries available in this terminal. The `--aot` check verifies the ahead-of-time export dependencies. The import check tests ExecuTorch's export module and runtime bindings, while `vulkaninfo` checks the GPU feature required by the SDK:
 
 ```bash
 source examples/arm/arm-scratch/setup_path.sh
@@ -102,7 +110,29 @@ python -c "import executorch.exir; from executorch.extension.pybindings import p
 vulkaninfo | grep shaderFloat64
 ```
 
-Resolve any `FAIL` entries before continuing. Confirm `shaderFloat64 = true` for your device, and keep this terminal open for the remaining steps.
+The output is similar to this selected excerpt; paths reflect your checkout location:
+
+```output
+[PASS] Python version
+  Python 3.12 meets the recommended VGF minimum (3.12).
+
+[PASS] TOSA serializer
+  Imported tosa_serializer from /home/ubuntu/executorch/.venv/lib/python3.12/site-packages/tosa_serializer/__init__.py (version=1.1).
+
+[PASS] MLSDK model converter
+  /home/ubuntu/executorch/.venv/bin/model-converter --version succeeded (version=0.10.0):
+{
+  "version": "19d1d0f",
+  "dependencies": [
+    "argparse=v3.1-0-g68fd027",
+
+[PASS] MODEL_CONVERTER_LIB_DIR
+  MODEL_CONVERTER_LIB_DIR is not set; relying on the process loader paths. This is OK when model-converter --version succeeds.
+ExecuTorch is ready
+shaderFloat64                           = true
+```
+
+The `[PASS]` entries report successful export dependency checks. `ExecuTorch is ready` confirms the imports succeeded. Confirm `shaderFloat64 = true` for your device, and keep this terminal open for the remaining steps.
 
 ## Prepare the input image
 
@@ -111,6 +141,14 @@ Create the example images from a screenshot included in ExecuTorch:
 ```bash
 python examples/arm/super_resolution_example_vgf/model_export/prepare_demo_assets.py \
   --output-dir swin2sr-work
+```
+
+The output is similar to this; paths reflect your checkout location:
+
+```output
+Prepared demo assets under /home/ubuntu/executorch/swin2sr-work
+Runtime input: /home/ubuntu/executorch/swin2sr-work/runtime/demo_lr_64.png
+Runtime reference: /home/ubuntu/executorch/swin2sr-work/runtime/demo_hr_128.png
 ```
 
 The script creates a 128 × 128 crop and downsizes a copy to 64 × 64. You use these two files:
