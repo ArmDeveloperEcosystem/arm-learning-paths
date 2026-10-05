@@ -13,7 +13,7 @@ After you identify a suitable asset, you need to describe its opacity in a form 
 
 This subdivision changes the OMM data, not the mesh. It doesn't add polygons to the source model or to the bottom-level acceleration structure (BLAS). You can think of it as placing a finer decision grid over the original triangle.
 
-![A leaf quad, its microtriangle grid, and three opacity states](images/omm-introduction/02-microtriangle-states.svg)
+![Diagram showing a leaf alpha mask covered by microtriangles. Opaque cells fill the leaf, transparent cells cover empty space, and unknown cells follow the boundary where shader evaluation can still be needed.#center](images/omm-introduction/02-microtriangle-states.webp "Microtriangle states follow the leaf's alpha boundary")
 
 The figure keeps the two original triangles and overlays a finer OMM grid. Opaque regions cover the inside of the leaf, transparent regions cover empty parts of the quad, and unknown regions follow the detailed edge. The closer the grid follows that edge, the more opacity decisions traversal can make without shader help.
 

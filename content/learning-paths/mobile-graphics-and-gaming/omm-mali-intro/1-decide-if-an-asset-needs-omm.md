@@ -24,7 +24,7 @@ A leaf often uses a quad made from two triangles. The geometry describes the com
 | Geometry | Where can a ray intersect a triangle? |
 | Opacity | Is the intersected position visible? |
 
-![Relationship among geometry, the alpha mask, and a candidate hit](images/omm-introduction/01-masked-geometry.svg)
+![Three-panel diagram showing a ray intersecting a leaf quad. Geometry reports a hit on the complete rectangle, while the alpha mask shows whether that point is part of the visible leaf.#center](images/omm-introduction/01-masked-geometry.webp "Geometry and alpha provide separate answers for the same ray intersection")
 
 The figure shows a ray intersecting the transparent part of the quad. The geometry test reports a valid triangle hit, but the alpha test shows that the ray missed the visible leaf. OMM helps the traversal hardware make that second decision earlier.
 

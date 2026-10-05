@@ -13,7 +13,7 @@ So far, you have treated OMM as asset data: a grid of microtriangles with opacit
 
 Arm Mali G2-Ultra NX can read OMM data in its hardware ray tracing path. Your engine prepares and links the data before traversal begins. When a ray reaches a triangle, the hardware reads the state for the microtriangle it hit and decides whether it can resolve the intersection immediately.
 
-![Arm Mali G2-Ultra NX using OMM states during traversal](images/omm-introduction/04-mali-hardware-flow.svg)
+![Flow diagram showing Mali G2-Ultra NX traversal moving from scene traversal to a triangle hit and hardware OMM lookup. The lookup accepts opaque regions, skips transparent regions, and sends unknown regions to the fallback path.#center](images/omm-introduction/04-mali-hardware-flow.webp "Hardware OMM lookup during Mali G2-Ultra NX ray traversal")
 
 This distinction matters when you debug the feature. A successful offline bake proves that you produced OMM data, but it doesn't prove that the GPU is using it. The resource build, triangle mapping, and traversal controls must also be correct.
 

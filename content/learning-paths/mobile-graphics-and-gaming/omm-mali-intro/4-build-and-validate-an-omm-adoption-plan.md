@@ -13,7 +13,7 @@ You now have all the pieces needed to evaluate OMM, but they only become useful 
 
 The following exercise asks you to make that decision for a sample leaf asset. You don't need OMM-capable hardware because the exercise provides both bake results and a saved device capability report.
 
-![Responsibility map across the OMM pipeline](images/omm-introduction/06-responsibility-map.svg)
+![Pipeline diagram assigning OMM responsibilities across content authoring, the engine and RHI, the Vulkan API and driver, and Mali hardware. Each stage passes its output to the next, from per-triangle data to the final opacity decision.#center](images/omm-introduction/06-responsibility-map.webp "Ownership and outputs across the OMM pipeline")
 
 The responsibility map shows how content, baking, engine integration, and the driver contribute to the final result. Use it to identify where each piece of evidence comes from and who should investigate a failure.
 
