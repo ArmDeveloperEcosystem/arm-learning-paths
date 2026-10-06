@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Export the pretrained model
 
-You don't need to train Swin2SR. The exporter downloads the pretrained ×2 checkpoint—the saved model weights—and converts it into an ExecuTorch `.pte` program. The pinned checkpoint revision keeps the model weights consistent between runs.
+You don't need to train Swin2SR. The exporter downloads the pretrained ×2 checkpoint — the saved model weights — and converts it into an ExecuTorch `.pte` program. The pinned checkpoint revision keeps the model weights consistent between runs.
 
 Run the exporter from your ExecuTorch directory:
 
@@ -30,16 +30,18 @@ The `64` dimensions fix the input size for this export. The model produces a 128
 
 ## Keep the program and metadata together
 
-After export finishes, check the two files the runner needs:
+After export finishes, check the two files that the runner needs:
 
 ```bash
 ls -lh swin2sr-work/swin2sr.pte swin2sr-work/swin2sr.json
 ```
 
-`swin2sr.pte` contains the executable model, including its VGF graphs. `swin2sr.json` tells the image helper how to read the input and reconstruct the output. Keep both files in the same directory with the same base name.
+`swin2sr.pte` contains the executable model, including its Vulkan Graph Format (VGF) graphs. `swin2sr.json` tells the image helper how to read the input and reconstruct the output. Keep both files in the same directory with the same base name.
 
 The exporter also saves `swin2sr_delegation.txt`. It records which operations run through VGF and which remain in ExecuTorch. You don't need to change this report to run the example.
 
 ## What you've accomplished and what's next
 
-You have a floating-point Swin2SR program configured for one 64 × 64 RGB image. Next, build the host runner and use it to upscale your image.
+You have a floating-point Swin2SR program configured for one 64 × 64 image with red, green, and blue (RGB) color channels.
+
+Next, you'll build the host runner and use it to upscale your image.
