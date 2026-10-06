@@ -19,7 +19,7 @@ learning_objectives:
 
 prerequisites:
     - One of two targets - QEMU, which needs no hardware, or a TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with accessories to power it, write an SD card, and attach a serial console
-    - A Linux host running Ubuntu 22.04 or 24.04, with about 20 GB of free disk space; QEMU runs on x86_64 or Arm, while the AM62L EVM needs x86_64 for the TI SDK
+    - A Linux host running Ubuntu 22.04 or 24.04, with about 20 GB of free disk space; QEMU runs on x86_64 or arm64, while the AM62L EVM needs x86_64 for the TI SDK
     - Visual Studio Code with the [Workbench for Zephyr extension](https://marketplace.visualstudio.com/items?itemName=Ac6.zephyr-workbench) installed
     - Basic knowledge of U-Boot and the Linux command line
 

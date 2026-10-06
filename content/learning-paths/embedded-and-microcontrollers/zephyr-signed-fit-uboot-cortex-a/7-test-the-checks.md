@@ -11,7 +11,7 @@ layout: learningpathall
 
 These tests are optional. Create one FIT signed with an untrusted key and another modified after signing. Check both on the host, then confirm that U-Boot refuses to start them on your target. The `b` and `t` commands are already built into U-Boot to select these images.
 
-Open a terminal and load your target’s environment file:
+Open a terminal and load your target's environment file:
 
 - **QEMU**: `source $HOME/zephyr-secure-boot/env-qemu.sh`
 - **AM62L EVM**: `source $HOME/zephyr-secure-boot/env-am62l.sh`
@@ -65,7 +65,7 @@ Created:         Fri Sep 11 19:14:00 2026
 Signature written to '/home/user/zephyr-secure-boot/fit/zephyr-b.itb', node '/configurations/conf-1/signature-1'
 ```
 
-Check for `Sign algo:    sha256,rsa2048:key-b`. The `Hash value` differs from image A’s because the application banner changed. This FIT has a signature from `key-b`, but U-Boot trusts only `key-a` and must reject it.
+Check for `Sign algo:    sha256,rsa2048:key-b`. The `Hash value` differs from image A's because the application banner changed. This FIT has a signature from `key-b`, but U-Boot trusts only `key-a` and must reject it.
 
 ## Make a tampered copy of the trusted image
 
@@ -193,14 +193,14 @@ ZEPHYR~1 ITB     60198 2026-09-15  16:49  zephyr-tampered.itb
                         130 643 968 bytes free
 ```
 
-This example lists the AM62L EVM’s six files: three boot files and three FITs. The QEMU disk image contains only the three FITs.
+This example lists the AM62L EVM's six files: three boot files and three FITs. The QEMU disk image contains only the three FITs.
 
 {{< tabpane-normal >}}
   {{< tab header="QEMU" >}}
 Restart QEMU with the same command used to boot the trusted image. QEMU reads the updated `disk.img` directly; no physical media needs to be written.
   {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
-Write the updated image to the card. Confirm the card’s device name before replacing `/dev/sdX`; `dd` overwrites the entire selected disk:
+Write the updated image to the card. Confirm the card's device name before replacing `/dev/sdX`; `dd` overwrites the entire selected disk:
 
 ```bash
 sudo dd if=$WORK/sdcard.img of=/dev/sdX bs=4M conv=fsync status=progress
@@ -232,7 +232,7 @@ ERROR -2: can't get kernel image!
 *** REFUSED: Zephyr was NOT started ***
 ```
 
-Check for `sha256,rsa2048:key-b-  error!` and `Failed to verify required signature 'key-key-a'`. The `-` indicates failure: the image’s signature doesn’t satisfy the required `key-a` check.
+Check for `sha256,rsa2048:key-b-  error!` and `Failed to verify required signature 'key-key-a'`. The `-` indicates failure: the image's signature doesn't satisfy the required `key-a` check.
 
 When `bootm start` fails, the `&&` chain skips `go` and prints `*** REFUSED: Zephyr was NOT started ***`. Confirm that no Zephyr banner appears. `Bad Data Hash` and `ERROR -2: can't get kernel image!` can appear for either rejection test; use the preceding messages to identify which check failed.
 
@@ -274,11 +274,11 @@ ERROR -2: can't get kernel image!
 Check that `sha256,rsa2048:key-a+ OK` reports a valid signature. `sha256 error!` and `Bad hash value for 'hash-1'` indicate that the payload no longer matches its stored hash. Confirm that `*** REFUSED: Zephyr was NOT started ***` appears without a Zephyr banner.
 
 {{% notice Note %}}
-If `run b` or `run t` starts Zephyr, verification isn’t preventing startup. Check for a `;` where `&&` belongs in `CONFIG_PREBOOT`, and confirm that `signature.dtsi` includes `required = "conf"`. Compare both with the [U-Boot build settings](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), rebuild, and update the boot media.
+If `run b` or `run t` starts Zephyr, verification isn't preventing startup. Check for a `;` where `&&` belongs in `CONFIG_PREBOOT`, and confirm that `signature.dtsi` includes `required = "conf"`. Compare both with the [U-Boot build settings](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), rebuild, and update the boot media.
 {{% /notice %}}
 
 To boot the trusted image again, type `run a`.
 
 ## What you've accomplished and what's next
 
-You’ve confirmed that U-Boot rejects the wrong-key image at the signature check and the tampered image at the payload hash check. Neither reaches `go` or starts Zephyr. Next, you’ll review what these tests establish and what a production device still needs.
+You've confirmed that U-Boot rejects the wrong-key image at the signature check and the tampered image at the payload hash check. Neither reaches `go` or starts Zephyr. Next, you'll review what these tests establish and what a production device still needs.

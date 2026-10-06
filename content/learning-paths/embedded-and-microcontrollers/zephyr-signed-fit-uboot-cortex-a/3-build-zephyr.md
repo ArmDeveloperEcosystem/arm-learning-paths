@@ -25,7 +25,7 @@ The screenshots show Windows paths, a globally installed SDK, and the AM62L EVM.
 
 ## Import the AArch64 toolchain
 
-Use the Zephyr SDK’s `aarch64-zephyr-elf` compiler for your Cortex-A53 target. Select the **Minimal** SDK type and **aarch64** architecture to download that toolchain.
+Use the Zephyr SDK's `aarch64-zephyr-elf` compiler for your Cortex-A53 target. Select the **Minimal** SDK type and **aarch64** architecture to download that toolchain.
 
 In the **Workbench for Zephyr** panel, select **Add Toolchain** and fill in the form:
 
@@ -54,7 +54,7 @@ Create a Zephyr 4.4.2 workspace for your chosen target. The same workspace suppo
 
 ![Workbench for Zephyr Add West Workspace form using the Minimal option, Texas Instruments template, and Zephyr v4.4.2. The workspace is named zephyrproject and supports either target.#center](images/wz-add-west-workspace.webp "Create the Zephyr 4.4.2 workspace")
 
-Select **Import**. Workbench downloads Zephyr, the vendor’s hardware abstraction layer (HAL), and other modules into `zephyrproject/deps`. This can take several minutes. When it finishes, confirm that `zephyrproject` appears in the **West workspaces** view.
+Select **Import**. Workbench downloads Zephyr, the vendor's hardware abstraction layer (HAL), and other modules into `zephyrproject/deps`. This can take several minutes. When it finishes, confirm that `zephyrproject` appears in the **West workspaces** view.
 
 ## Create the application
 
@@ -91,7 +91,7 @@ CONFIG_AARCH64_IMAGE_HEADER=y
 
 `CONFIG_PRINTK` enables console output with `printk()`. `CONFIG_BOOT_BANNER` prints the `*** Booting Zephyr OS build ... ***` line, confirming that Zephyr has started.
 
-Replace the contents of `src/main.c` with the following code. Its banner identifies image A and the key you’ll use to sign it. This helps you distinguish the images during the optional [wrong-key and tampered-image tests](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/).
+Replace the contents of `src/main.c` with the following code. Its banner identifies image A and the key you'll use to sign it. This helps you distinguish the images during the optional [wrong-key and tampered-image tests](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/).
 
 ```c
 #include <zephyr/kernel.h>
@@ -127,7 +127,7 @@ The configurations for `qemu_cortex_a53` and `am62l_evm/am62l3/a53` already set 
 
 ## Build the application
 
-In the **Applications** view, open the context menu for `hello` and select **Build**. Workbench runs `west build` in the terminal and writes the build outputs to the application’s `build/primary` directory. Near the end, the linker prints a memory report similar to:
+In the **Applications** view, open the context menu for `hello` and select **Build**. Workbench runs `west build` in the terminal and writes the build outputs to the application's `build/primary` directory. Near the end, the linker prints a memory report similar to:
 
 ```output
 Memory region         Used Size  Region Size  %age Used
@@ -136,7 +136,7 @@ Memory region         Used Size  Region Size  %age Used
         IDT_LIST:           0 B        32 KB      0.00%
 ```
 
-![Workbench for Zephyr showing hello configured for the AM62L EVM and the build terminal’s memory report. The report appears near the end of the build; the generated zephyr.bin is checked in the next step.#center](images/wz-build.webp "Build hello for the AM62L EVM")
+![Workbench for Zephyr showing hello configured for the AM62L EVM and the build terminal's memory report. The report appears near the end of the build; the generated zephyr.bin is checked in the next step.#center](images/wz-build.webp "Build hello for the AM62L EVM")
 
 The result is `$WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin`, a raw binary linked at `ZEPHYR_ADDR`, the start of the target's `zephyr,sram` memory node. It is about 37 KB for `qemu_cortex_a53`, whose memory report shows 128 MB of RAM, and about 58 KB for the AM62L EVM, which reports 2016 MB.
 
@@ -161,12 +161,12 @@ Rebuild the application. The Zephyr SDK compiler is a native Arm binary and does
 
 ## Check the arm64 image header
 
-Open a terminal with **Terminal > New Terminal** in VS Code, or use an existing shell. Load your target’s environment file:
+Open a terminal with **Terminal > New Terminal** in VS Code, or use an existing shell. Load your target's environment file:
 
 - **QEMU**: `source $HOME/zephyr-secure-boot/env-qemu.sh`
 - **AM62L EVM**: `source $HOME/zephyr-secure-boot/env-am62l.sh`
 
-Print the header’s magic number at offset `0x38`:
+Print the header's magic number at offset `0x38`:
 
 ```bash
 od -An -c -j 0x38 -N4 $WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin
@@ -182,4 +182,4 @@ The expected output is:
 
 ## What you've accomplished and what's next
 
-You’ve built a Zephyr image for your target’s Cortex-A53, linked at `ZEPHYR_ADDR`, and checked its arm64 header. Next, you’ll create the signing keys and package the image in a signed FIT for U-Boot to verify.
+You've built a Zephyr image for your target's Cortex-A53, linked at `ZEPHYR_ADDR`, and checked its arm64 header. Next, you'll create the signing keys and package the image in a signed FIT for U-Boot to verify.

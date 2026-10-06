@@ -17,7 +17,7 @@ Open Visual Studio Code and select **Workbench for Zephyr** in the Activity Bar.
 
 When installation finishes, select **Verify Host Tools**. Resolve any missing-tool errors before continuing.
 
-You’ll import the AArch64 toolchain and create the West workspace in the next lesson, before building Zephyr.
+You'll import the AArch64 toolchain and create the West workspace in the next lesson, before building Zephyr.
 
 ## Install the host packages
 
@@ -27,7 +27,7 @@ Install the additional packages used to build U-Boot, sign images, and prepare t
 sudo apt install -y build-essential bison flex swig python3-dev python3-setuptools libssl-dev libgnutls28-dev uuid-dev device-tree-compiler openssl mtools dosfstools xz-utils curl picocom
 ```
 
-If you chose QEMU, install the emulator and U-Boot cross compiler with this command. For the AM62L EVM, skip it; you’ll get the cross compiler from the TI SDK:
+If you chose QEMU, install the emulator and U-Boot cross compiler with this command. For the AM62L EVM, skip it; you'll get the cross compiler from the TI SDK:
 
 ```bash
 sudo apt install -y qemu-system-arm gcc-aarch64-linux-gnu
@@ -35,11 +35,10 @@ sudo apt install -y qemu-system-arm gcc-aarch64-linux-gnu
 
 ## Create the working directory and environment file
 
-Keep your source, tools, and build outputs under `$HOME/zephyr-secure-boot`. An environment file stores the paths and target settings you’ll reuse throughout the workflow. Select your target’s tab, create and load its environment file, and create the signing-key and FIT directories:
+Keep your source, tools, and build outputs under `$HOME/zephyr-secure-boot`. An environment file stores the paths and target settings you'll reuse throughout the workflow. Select your target's tab, create and load its environment file, and create the signing-key and FIT directories:
 
-{{< tabpane-normal >}}
-  {{< tab header="QEMU" >}}
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="QEMU" language="bash" >}}
 mkdir -p $HOME/zephyr-secure-boot
 cat > $HOME/zephyr-secure-boot/env-qemu.sh <<'EOF'
 export WORK=$HOME/zephyr-secure-boot
@@ -64,10 +63,8 @@ export BOOT_IMG=$WORK/disk.img@@1048576
 EOF
 source $HOME/zephyr-secure-boot/env-qemu.sh
 mkdir -p $KEYS $FIT
-```
   {{< /tab >}}
-  {{< tab header="AM62L EVM" >}}
-```bash
+  {{< tab header="AM62L EVM" language="bash" >}}
 mkdir -p $HOME/zephyr-secure-boot
 cat > $HOME/zephyr-secure-boot/env-am62l.sh <<'EOF'
 export WORK=$HOME/zephyr-secure-boot
@@ -95,11 +92,10 @@ export BOOT_IMG=$WORK/sdcard.img@@1048576
 EOF
 source $HOME/zephyr-secure-boot/env-am62l.sh
 mkdir -p $KEYS $FIT
-```
   {{< /tab >}}
-{{< /tabpane-normal >}}
+{{< /tabpane >}}
 
-The variables are available only in the shell where you load the environment file. Load it again whenever you open a new terminal; later lessons include a reminder. If you adapt the workflow to another board, [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) explains how to choose its target values and paths.
+The variables are available only in the shell where you load the environment file. Load it again whenever you open a new terminal; later lessons include a reminder. If you adapt the workflow to another board, the later section, [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/), explains how to choose its target values and paths.
 
 {{% notice Note %}}
 Example output shows paths under `/home/user/`, the home directory of the account that produced it. Your paths reflect your own username. On a standard Ubuntu cloud instance, for example, they appear under `/home/ubuntu/`. The commands use `$HOME` and `$WORK`, so they adapt to your account automatically, and only the printed paths differ.
@@ -123,7 +119,7 @@ The expected output is:
 /home/user/zephyr-secure-boot/u-boot-2025.07
 ```
 
-You’ll add the public key and boot command through build configuration, without patching U-Boot source. Check that the cross compiler runs:
+You'll add the public key and boot command through build configuration, without patching U-Boot source. Check that the cross compiler runs:
 
 ```bash
 ${CROSS}gcc --version
@@ -136,9 +132,20 @@ aarch64-linux-gnu-gcc (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 ...
 ```
 
-Run `qemu-system-aarch64 --version` to check that the emulator is installed and report its version.
+Check that the emulator is installed and report its version:
 
-You’ll create a 64 MiB disk image when you prepare the boot media; you don’t need to download one for QEMU.
+```bash
+qemu-system-aarch64 --version
+```
+
+The output is similar to:
+
+```output
+QEMU emulator version 8.2.2 (Debian 1:8.2.2+ds-0ubuntu1.18)
+...
+```
+
+You'll create a 64 MiB disk image when you prepare the boot media; you don't need to download one for QEMU.
   {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
 The TI Processor SDK Linux for AM62Lx supplies U-Boot source, prebuilt early firmware, and the cross compiler. You use these components to boot Zephyr. The installer is 4.5 GB and unpacks to 11 GB. Download version 12.01.00.05.03 from the [TI Processor SDK download page](https://www.ti.com/tool/download/AM62L-LINUX-SDK/12.01.00.05.03):
@@ -171,7 +178,7 @@ aarch64-oe-linux-gcc (GCC) 15.3.0
 ...
 ```
 
-Download TI’s SD card image to preserve the boot partition layout expected by the AM62L boot ROM. The download is about 1.3 GB. Leave it compressed; when you prepare the boot media, you’ll extract the boot partition and replace its files:
+Download TI's SD card image to preserve the boot partition layout expected by the AM62L boot ROM. The download is about 1.3 GB. Leave it compressed; when you prepare the boot media, you'll extract the boot partition and replace its files:
 
 ```bash
 curl -L -o $WORK/tisdk-default-image.wic.xz https://dr-download.ti.com/software-development/software-development-kit-sdk/MD-YjEeNKJJjt/12.01.00.05.03/tisdk-default-image-am62lxx-evm-12.01.00.05.03.rootfs.wic.xz
@@ -181,4 +188,4 @@ curl -L -o $WORK/tisdk-default-image.wic.xz https://dr-download.ti.com/software-
 
 ## What you've accomplished and what's next
 
-You’ve installed the Zephyr host tools and U-Boot build packages, obtained your target’s U-Boot source and cross compiler, and created a reusable environment file. For the AM62L EVM, you also have the early firmware and SD card image. Next, you’ll import the AArch64 toolchain, create a West workspace, and build a small Zephyr application for your chosen target.
+You've installed the Zephyr host tools and U-Boot build packages, obtained your target's U-Boot source and cross compiler, and created a reusable environment file. For the AM62L EVM, you also have the early firmware and SD card image. Next, you'll import the AArch64 toolchain, create a West workspace, and build a small Zephyr application for your chosen target.
