@@ -7,7 +7,7 @@ weight: 6
 layout: learningpathall
 ---
 
-# Integrate the FreeRTOS image with Yocto 
+# Integrate the FreeRTOS image with Yocto
 
 ## Objective
 The previous section manually replaced the Safety Island Cluster 1 (SI CL1) payload. That experiment proved that FreeRTOS can meet the Zena CSS secure boot requirements. RSE authenticates the image, copies it to SI CL1 low-latency RAM (LLRAM), and releases the cluster through the standard platform boot flow.
@@ -25,9 +25,9 @@ The steps also demonstrate a reusable Yocto investigation method. Start from a k
 
 ## Apply the FreeRTOS integration patch
 
-The [`freertos-yocto-integration.patch`](../freertos-yocto-integration.patch) file combines the FreeRTOS recipe, GCC 13 compatibility patch, machine configuration, and Kconfig selection changes described later in this section. It applies to a clean and pristine [`Zena CSS v2.2 source tree`](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html) download and clone. 
+The [`freertos-yocto-integration.patch`](../freertos-yocto-integration.patch) file combines the FreeRTOS recipe, GCC 13 compatibility patch, machine configuration, and Kconfig selection changes described later in this section. It applies to a clean Zena CSS v2.2 source tree. Follow the [Zena CSS source-download instructions](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html) to download and clone it.
 
-Lets start by exiting out of your existing tmux session back to your SSH shell on your Ubuntu host. Back at the SSH shell prompt lets move our old source tree and create a new clean one:
+Exit your existing `tmux` session and return to your SSH shell on the Ubuntu host. The following commands stop your `tmux` processes and move the existing checkout to `arm-auto-solutions-BAK` before creating a clean checkout:
 
 ```bash
 cd $HOME
@@ -39,7 +39,7 @@ git clone https://git.gitlab.arm.com/automotive-and-industrial/arm-auto-solution
 kas checkout arm-zena-css/yocto/kas/repos.yml
 ```
 
-Next, copy all contents from [`"freertos-yocto-integration.patch"`](../freertos-yocto-integration.patch) and save them on your Ubuntu build host as `"$HOME/freertos-yocto-integration.patch"`. Then, run the following commands from the root of the Zena CSS checkout on your Ubuntu host. Lets first confirm that the patch applies before changing the source tree:
+Copy all contents from [`freertos-yocto-integration.patch`](../freertos-yocto-integration.patch) and save them on your Ubuntu build host as `$HOME/freertos-yocto-integration.patch`. From the root of the Zena CSS checkout, check that the patch applies before changing the source tree:
 
 ```bash
 PATCH_FILE=$HOME/freertos-yocto-integration.patch
@@ -47,7 +47,7 @@ cd $HOME/arm-auto-solutions
 git apply --verbose --check "$PATCH_FILE"
 ```
 
-If the check passes without issue, lets now change the source tree:
+If the check passes, apply the patch:
 
 ```bash
 PATCH_FILE=$HOME/freertos-yocto-integration.patch
@@ -55,14 +55,14 @@ cd $HOME/arm-auto-solutions
 git apply --verbose "$PATCH_FILE"
 ```
 
-Next, lets open a new tmux session:
+Open a new `tmux` session:
 
 ```bash
 cd $HOME/arm-auto-solutions
 tmux new-session -s arm-auto-solutions
 ```
 
-Within the tmux session, open the build configuration menu:
+Within the `tmux` session, open the build configuration menu:
 
 ```bash
 kas menu arm-zena-css/Kconfig
@@ -86,9 +86,9 @@ kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
 
 At the SI CL1 console, enter `ping`. A successful four-core exchange confirms that the patched Yocto configuration built, signed, packaged, and booted FreeRTOS through the standard Zena CSS flow.
 
-![Zena CSS runfvp SI CL1 console.#center](run_fvp.png "Zena CSS runfvp SI CL1 console")
+![tmux window list with SI C1 - terminal_uart_si_cluster1 selected. The console shows ping, pong, pang, and pung responses from cores 0 through 3, confirming the FreeRTOS four-core exchange.#center](run_fvp.png "FreeRTOS four-core exchange in the SI CL1 console")
 
-Now that we've confirmed that the patch updates our pristine source to enable FreeRTOS into yocto, lets dive deeper into what the patch actually had to do to enable this integration. 
+The patch integrates FreeRTOS into the Yocto build. Next, examine how the integration works.
 
 ## Investigate how the patch works
 
@@ -134,6 +134,8 @@ yocto/kas/arm-auto-solutions.yml:73:    DISTRO_FEATURES:append = " cassini-dev z
 
 The [`yocto/kas/arm-auto-solutions.yml`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/sw-ref-stack/-/blob/release-v2.2/yocto/kas/arm-auto-solutions.yml?ref_type=heads#L73) file therefore adds `zephyr` unconditionally to `DISTRO_FEATURES`.
 
+Find the build configurations that include this kas file:
+
 ```console
 sw-ref-stack$ grep -nr arm-auto-solutions.yml
 yocto/kas/virtualization.yml:11:    - ../sw-ref-stack/yocto/kas/arm-auto-solutions.yml
@@ -156,7 +158,7 @@ Remove the unconditional `zephyr` setting from `yocto/kas/arm-auto-solutions.yml
      KERNEL_CLASSES:remove = "containers_kernelcfg_check"
 ```
 
-For more details about the kas Yaml file, refer to the [Kas project configuration](https://kas.readthedocs.io/en/4.8.1/userguide/project-configuration.html).
+For more details about the kas YAML file, see the [kas project configuration](https://kas.readthedocs.io/en/4.8.1/userguide/project-configuration.html).
 
 In [`arm-zena-css/Kconfig`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/Kconfig?ref_type=heads), add a kas menu entry that selects either Zephyr or FreeRTOS:
 ```diff
@@ -182,7 +184,7 @@ In [`arm-zena-css/Kconfig`](https://gitlab.arm.com/automotive-and-industrial/arm
 The choice appears only when `RD_ASPEN_CFG2` and `USE_CASE_DEMOS` are enabled. It allows either Zephyr or FreeRTOS to be selected, but not both. Zephyr remains the default to preserve the existing build behavior.
 `KAS_INCLUDE_SI_CL1_RTOS` is an internal string option with no visible prompt. Its conditional defaults map the selected RTOS to the corresponding kas configuration file. The build configuration can then include the selected YAML file without duplicating the RTOS-selection logic.
 
-*For more information about choices, dependencies, and conditional defaults, see the [Kconfig language documentation](https://docs.kernel.org/kbuild/kconfig-language.html).*
+For more information about choices, dependencies, and conditional defaults, see the [Kconfig language documentation](https://docs.kernel.org/kbuild/kconfig-language.html).
 
 #### Add the kas configuration fragments
 
@@ -261,7 +263,9 @@ kas shell -c 'bitbake freertos-demos-cl1'
 The first build might expose recipe requirements that aren't visible in the CMake build.
 
 {{% notice Frequently Encountered Errors %}}
-- This error means that a fetched source doesn't have license metadata:
+- This error means that a fetched source doesn't have license metadata.
+
+The output is similar to:
 
 ```output
 ERROR: freertos-demos-cl1-1.0-r0 do_populate_lic: QA Issue: freertos-demos-cl1: Recipe file fetches files and does not have license file information (LIC_FILES_CHKSUM) [license-checksum]
@@ -270,7 +274,9 @@ ERROR: freertos-demos-cl1-1.0-r0 do_populate_lic: QA Issue: freertos-demos-cl1: 
 Add the source license and checksum with `LICENSE` and `LIC_FILES_CHKSUM`. `LICENSE = "CLOSED"` can isolate a license-checksum problem during local diagnosis, but the completed recipe must declare the actual source license.
 
 
-- The signing task can then report that no package version was recorded:
+- The signing task can then report that no package version was recorded.
+
+The output is similar to:
 
 ```output
 ERROR: firmware-fvp-rd-aspen-1.0-r0 do_sign_images: pv_tracker: No PV recorded for freertos-demos-cl1
@@ -315,7 +321,7 @@ After applying the packaging, version-tracking, and compiler fixes, the complete
 
 <summary>Show the complete freertos-demos-cl1.bb recipe.</summary>
 
-```bitbake 
+```bitbake
 # SPDX-License-Identifier: MIT
 
 SUMMARY = "FreeRTOS Demo on Safety Island Cluster 1"
@@ -452,7 +458,7 @@ The deploy directory proves that the build produced files, but not that the bina
 kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
 ```
 
-No additional FVP configuration, such as core_power_on_by_default, or --data override is needed. RSE authenticates the integrated payload, copies it to the SI CL1 LLRAM, and then releases the cluster.
+No additional FVP configuration, such as `core_power_on_by_default`, or `--data` override is needed. RSE authenticates the integrated payload, copies it to the SI CL1 LLRAM, and then releases the cluster.
 
 At the SI CL1 console, enter `ping`. The expected output is:
 

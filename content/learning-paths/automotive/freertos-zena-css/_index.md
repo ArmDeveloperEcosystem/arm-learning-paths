@@ -4,7 +4,7 @@ title: Port and integrate FreeRTOS on the Arm Zena CSS Safety Island
 draft: true
 cascade:
     draft: true
-    
+
 description: Port a FreeRTOS SMP application to Cortex-R82AE and integrate it as signed, Yocto-built firmware for the Arm Zena CSS Safety Island.
 
 minutes_to_complete: 180
@@ -18,7 +18,7 @@ learning_objectives:
   - Implement and validate a selectable Yocto recipe that builds, signs, and packages FreeRTOS instead of Zephyr
 
 prerequisites:
-  - An Ubuntu 22.04 instance. Later editions of Ubuntu will NOT WORK. You must use 22.04.
+  - An Ubuntu 22.04 instance; later Ubuntu versions do not work for this build
   - Experience with FreeRTOS, CMake, linker scripts, and Arm exception levels
   - Arm GNU Toolchain 15.2 or Arm Compiler for Embedded 6.24
   - Access to the Cortex-R82AE demo and kernel repositories

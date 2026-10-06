@@ -20,22 +20,22 @@ After completing this section, you will have verified that:
 - The UART and GIC base addresses are correctly configured for Zena CSS, using GIC Multi-View 0 during initial bring-up.
 - The FreeRTOS raw binary can be loaded directly into Safety Island Cluster 1 LLRAM.
 - Safety Island Cluster 1 can be started independently of the standard Zena CSS secure boot flow.
-- FreeRTOS starts successfully on all four R82AE cores in Safety Island Cluster 1 of FVP_Zena_CSS_Cfg2.
+- FreeRTOS starts successfully on all four R82AE cores in Safety Island Cluster 1 of `FVP_Zena_CSS_Cfg2`.
 - UART output, SMP scheduling, core affinity, shared memory, and interprocessor interrupts operate correctly.
 
 
 ## Build the Yocto-based Zena CSS software stack
 
-First, we need to fully build and run the Arm Zena CSS Reference Software Stack before you replace its Safety Island software. Please follow the [yocto build instructions in the Zena CSS user guide](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html). 
+First, build and run the Arm Zena CSS Reference Software Stack before replacing its Safety Island software. Follow the [Yocto build instructions in the Zena CSS user guide](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html).
 
 {{% notice NOTE %}}
-It is important that when building the yocto Zena CSS image above, please select the `"RD-Aspen Cfg2"` option when running the menu display command immediately after accepting the EULA. Then, press `"Save and Exit"` to exit the config menu.
+When building the Zena CSS Yocto image, select **RD-Aspen Cfg2** in the menu immediately after accepting the EULA. Press **Save and Exit** to exit the configuration menu.
 {{% /notice %}}
 
 {{% notice IMPORTANT NOTE %}}
-If your Ubuntu 22.04 yocto build host has been recently updated with the latest security patches, the `tar` application will have been updated such that the above Zena CSS yocto build will now fail. 
+If your Ubuntu 22.04 Yocto build host has received the latest security patches, the updated `tar` application causes the Zena CSS Yocto build to fail.
 
-In order to fix this prior to attempting the yocto build, you need to download the source to `tar`, compile it with a specific enabler flag and install it replacing your Ubuntu 22.04's original `tar` command:
+To fix this before the build, download the `tar` source, compile it with the specific enabler flag, and install it in place of your Ubuntu 22.04 `tar` command:
 
 ```bash
 wget https://ftp.gnu.org/gnu/tar/tar-1.34.tar.gz
@@ -46,14 +46,14 @@ make -j$(nproc)
 sudo make install
 ```
 
-Once replaced (AND ensuring that your Ubuntu host is 22.04... other versions will NOT work), your Yocto build for Zena should complete fully.
+After replacing `tar`, your Zena CSS Yocto build should complete. Use Ubuntu 22.04; other versions won't work.
 {{% /notice %}}
 
-Verify that the unmodified stack boots. You will want to follow ALL instructions to complete your Zena yocto build prior to the next step. This baseline separates FreeRTOS porting errors from build or FVP installation errors. 
+Verify that the unmodified stack boots. Follow all Zena CSS Yocto build instructions before the next step. This baseline separates FreeRTOS porting errors from build or FVP installation errors.
 
 The Zena CSS Runtime Security Engine (RSE) authenticates, loads, and starts the Safety Island image. During initial porting, bypass this flow and load the FreeRTOS binary directly into Safety Island Cluster 1 low-latency RAM (LLRAM). Direct loading shortens the debug cycle before you add image signing and flash-image packaging.
 
-Lastly, lets set an evironment variable that we'll use in subsequent sections noting where our Zena Yocto build was cloned to. By default it should be `$HOME/arm-auto-solutions`:
+Set `ZENA_YOCTO_DIR` to the location of your Zena CSS checkout. The default location is `$HOME/arm-auto-solutions`:
 
 ```bash
 export ZENA_YOCTO_DIR=$HOME/arm-auto-solutions
@@ -64,13 +64,13 @@ export ZENA_YOCTO_DIR=$HOME/arm-auto-solutions
 
 ### Start with your Zena `tmux` session
 
-You will want to open a `tmux` session for the next steps:
+Open a `tmux` session:
 
 ```bash
 tmux new-session -s arm-auto-solutions
 ```
 
-Verify that your yocto build has completed and is ready:
+Verify that your Yocto build is complete:
 
 ```bash
 ls -al build/tmp_baremetal/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2
@@ -81,7 +81,7 @@ export YOCTO_DIR=`pwd`
 
 The binary built for the standalone `FVP_BaseR_Cortex-R82AE` doesn't use the Zena CSS memory map. Create a Zena CSS target in the port and update these platform-dependent elements:
 
-1. Set the linker code and data regions to the Safety Island cluster 1 LLRAM addresses.
+1. Set the linker code and data regions to the Safety Island Cluster 1 LLRAM addresses.
 2. Make the startup code boot from Exception Level 2 (EL2) and transition to EL1 for FreeRTOS execution.
 3. Configure the Cluster 1 Generic Interrupt Controller (GIC) interfaces and interprocessor interrupt IDs.
 4. Update the core-affinity decoding for the Safety Island cluster.
@@ -127,7 +127,7 @@ uart0: uart@2a410000 {
 
 ### Adapt the FreeRTOS code
 
-The Zephyr image is loaded at 0x140000000, the base address of LLRAM. As in the previous section, configure the FreeRTOS and its linker script to link and load the binary at this address, then execute it from there.
+The Zephyr image is loaded at `0x140000000`, the base address of LLRAM. As in the previous section, configure FreeRTOS and its linker script to link and load the binary at this address, then execute it from there.
 
 Set the PL011 UART base address to `0x2a410000`.
 
@@ -150,7 +150,7 @@ $YOCTO_DIR/build/tmp_virtualization/sysroots-components/x86_64/fvp-rd-aspen-nati
   {{< /tab >}}
 {{< /tabpane >}}
 
-The output includes the distributor and redistributor regions for each view:
+The output includes the distributor and redistributor regions for each view. The output is similar to:
 
 ```output
 Info: RD_ASD: terminal_uart: Listening for serial connection on port 5000
