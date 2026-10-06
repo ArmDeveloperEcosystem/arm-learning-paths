@@ -55,7 +55,7 @@ You used `sha256,rsa2048`. The AM62L's own boot chain uses `sha512,rsa4096`. To 
 
 Generate production keys in a hardware security module (HSM), or at least away from the build host. Sign during the release process and restrict private-key access to that process.
 
-## Optional follow-up: Adapt the workflow to another Cortex-A board
+## Adapt the workflow to another Cortex-A board
 
 If you want to use another Cortex-A board, start by updating the target values and paths in your environment file:
 
