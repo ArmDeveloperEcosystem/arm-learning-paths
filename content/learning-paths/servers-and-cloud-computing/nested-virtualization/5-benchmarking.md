@@ -1,78 +1,185 @@
 ---
-title: Testing Nested Virtualization overhead
-weight: 7
+title: Testing nested virtualization overhead
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Testing Nested Virtualization Overhead
+## Test nested virtualization overhead
+
+To measure the overhead of nested virtualization, you install and run a reference benchmark across the three layers: L0 (bare metal), the L1 guest VM, and the L2 guest VM. To make the test comparable, and to minimize interaction with other workloads running on the server, you pin each system under test to a fixed set of host cores.
+
+The following table shows how each system is pinned:
+
+| System under test | vCPUs | Pinned to |
+|-------------------|-------|-----------|
+| Host (L0) benchmark | | Host cores 8-15 |
+| L1 guest | 0-7 | Host cores 16-23 |
+| L1 hypervisor | 0-15 | Host cores 24-39 |
+| L2 guest | 0-7 | Hypervisor cores 8-15 (host cores 32-39) |
+
+After the core pinning is in place and sysbench is installed on all systems under test, you run the test, verify that the correct cores run at 100% CPU for the duration of the test, and check the results to see how much virtualization passthrough affects performance. You can apply this core pinning while the VMs are running by using the `--live` flag for virsh.
+
+## Pin cores for the L1 guest and L1 hypervisor
+
+Pin the cores for the L1 guest and L1 hypervisor:
+
+```bash
+ # Pin L1 guest to cores 16-23
+ for i in $(seq 0 7); do
+   sudo virsh vcpupin fedora-l1-guest $i $((i+16)) --config --live
+ done
+ sudo virsh emulatorpin fedora-l1-guest 16-23 --config --live
+
+ # Pin L1 hypervisor to cores 24-39
+ for i in $(seq 0 15); do
+   sudo virsh vcpupin fedora-l1-hyper $i $((i+24)) --config --live
+ done
+ sudo virsh emulatorpin fedora-l1-hyper 24-39 --config --live
+```
+
+## Pin cores for the L2 guest
+
+Log in to `fedora-l1-hyper` and pin the cores of `fedora-l2-guest` to cores 8-15:
+
+```bash
+ # On host:
+ ssh -i ~/.ssh/guest_key fedora@${fedora-l1-hyper IP address}
+
+ # Inside L1 hypervisor: pin L2 guest to vCPUs 8-15 
+ for i in $(seq 0 7); do 
+   sudo virsh vcpupin fedora-l2-guest $i $((i+8)) --config --live 
+ done 
+ sudo virsh emulatorpin fedora-l2-guest 8-15 --config --live 
+```
+
+## Verify the core pinning
+
+Verify that the pinning is correct, replacing `<domain>` with the domain name for each of the VMs, such as `fedora-l1-guest`:
+
+```bash
+sudo virsh vcpuinfo <domain>
+sudo virsh emulatorpin <domain>
+```
+
+## Install sysbench
+
+Install the sysbench benchmarking tool on all systems under test (the host, the L1 guest, and the L2 guest):
+
+```bash
+sudo dnf install -y sysbench 
+```
+
+## Run the benchmark
+
+Run the same benchmark test on each system under test. You can run these in three different terminals at the same time, and because they use different cores, they should not significantly interfere with each other.
+
+On the bare metal host, use `taskset` to bind the benchmark to physical cores 8-15:
+
+```bash
+taskset -c 8-15 sysbench cpu --cpu-max-prime=20000 --threads=8 --time=60 run 
+```
+
+On the L1 guest and the L2 guest, run the benchmark without `taskset`, because you already pinned their virtual CPUs with virsh in the previous steps:
+
+```bash
+sysbench cpu --cpu-max-prime=20000 --threads=8 --time=60 run 
+```
+
+The following is an example of the output from a single run:
+
+```output
+sysbench 1.0.20 (using system LuaJIT 2.1.1761727121)
+
+Running the test with following options:
+Number of threads: 8
+Initializing random number generator from current time
 
 
-In this step, we are going to install and run a reference benchmark across our three layers – L0 (bare metal), our L1 guest VM, and our L2 guest VM. To make the test comparable, and to minimize the interaction with other workloads running on the server, we are going to do the following: 
-* In the host OS: We will use taskset to limit the benchmark to only 8 physical cores, CPU cores 8-15 
-* For the L1 guest. we will use ‘virsh vcpupin’ to pin the virtual CPUs 0-7 of the VM to the physical cores 16-23 of the host 
-* For the L1 hypervisor VM, we will pin the 16 cores of the VM to cores 24-39 of the host 
-* Inside the L1 hypervisor, we will pin the 8 cores of the L2 guest to cores 8-15 of the L1 hypervisor, coresponding to host cores 32-39 
+Prime numbers limit: 20000
 
-Once we have completed this, and installed sysbench on all of the systems under test, we will run our test, verify that we are seeing the correct cores running at 100% CPU for the period of the test, and finally verify the results to see how much virtualization passthrough affects performance. We can do this core pinning while the VMs are running by using the –live flag for virsh. 
+Initializing worker threads...
 
-1. Pinning the cores for the L1 guest and L1 hypervisor: 
-   ```
-    # Pin L1 guest to cores 16-23
-    for i in $(seq 0 7); do
-      sudo virsh vcpupin fedora-l1-guest $i $((i+16)) --config –live
-    done
-    sudo virsh emulatorpin fedora-l1-guest 16-23 --config –live
+Threads started!
 
-    # Pin L1 hypervisor to cores 24-39
-    for i in $(seq 0 15); do
-      sudo virsh vcpupin fedora-l1-hyper $i $((i+24)) --config –live
-    done
-    sudo virsh emulatorpin fedora-l1-hyper 24-31 --config –live
-   ```
-2. Log in to `fedora-l1-hyper` and pin the cores of `fedora-l2-guest` to cores 8-15: 
-   ```
-    # On host:
-    ssh -i /path/to/private/key fedora@${fedora-l1-hyper IP address}
+CPU speed:
+    events per second:  9693.21
 
-    # Inside L1 hypervisor: pin L2 guest to vCPUs 8-15 
-    for i in $(seq 0 7); do 
-      sudo virsh vcpupin fedora-l2-guest $i $((i+8)) --config –live 
-    done 
-    sudo virsh emulatorpin fedora-l2-guest 8-15 --config –live 
-   ```
-3. Verify that the pinning has been done correctly, replacing `<domain>` with the domain name for each of the VMs (`fedora-l1-guest`, etc): 
-   ```
-    sudo virsh vcpuinfo <domain>
-    sudo virsh emulatorpin <domain>
-   ```
-4. Install the sysbench benchmarking tool in all sustems under test (the host, the L1 guest, and the L2 guest): 
-   ```
-    sudo dnf install -y sysbench 
-   ```
-5. On each of the systems under test, run the same benchmark test. You can run these in 3 different terminals, at the same time, and since they are using different cores, they should not significantly interfere with each other: 
-   ```
-    # On the host: 
-    taskset -c 8-15 sysbench cpu --cpu-max-prime=20000 --threads=8 --time=60 run 
+General statistics:
+    total time:                          60.0007s
+    total number of events:              581607
 
-    # On the L1 and L2 guests 
-    sysbench cpu --cpu-max-prime=20000 --threads=8 --time=60 run 
-   ```
+Latency (ms):
+         min:                                    0.82
+         avg:                                    0.83
+         max:                                    0.98
+         95th percentile:                        0.83
+         sum:                               479906.25
 
-In our tests, the results were as follows: 
+Threads fairness:
+    events (avg/stddev):           72700.8750/20.69
+    execution time (avg/stddev):   59.9883/0.00
+```
+
+### How to read the output
+
+The fields that matter most for comparing the three layers are:
+
+- `events per second` under `CPU speed` is the throughput. Higher is better. This is the primary number to compare across bare metal, L1, and L2.
+- The `Latency (ms)` block reports per-request latency. `min`, `avg`, and `95th percentile` describe typical responsiveness, while `max` captures the worst-case spike. Lower is better.
+- `events (avg/stddev)` under `Threads fairness` shows how evenly work was spread across threads. The second number is the standard deviation; a smaller value means more even distribution.
+
+### Record your results
+
+Run the benchmark on each layer and record the values from your own output. Fill in a table like this one with your results:
+
+| Metric | Bare metal (L0) | L1 guest | L2 nested guest |
+| ------ | --------------- | -------- | --------------- |
+| Events/sec | | | |
+| Overhead vs bare metal | | | |
+| Min latency (ms) | | | |
+| Avg latency (ms) | | | |
+| Max latency (ms) | | | |
+| 95th percentile (ms) | | | |
+| Thread stddev | | | |
+
+To calculate the overhead for a layer, compare its events/sec against the bare metal result:
+
+```text
+overhead = (bare_metal_events_per_second - layer_events_per_second) / bare_metal_events_per_second * 100
+```
+
+For example, if bare metal reports 9693 events/sec and the L2 nested guest reports 9219 events/sec, the overhead is `(9693 - 9219) / 9693 * 100`, or less than 5%.
+
+Compare the events/sec and latency values across the three layers to see how virtualization and nested virtualization affect your workload. The average and 95th percentile latencies are often close across all three layers, while the maximum latency tends to increase with each level of nesting.
+
+{{% notice Note %}}
+Results vary with the Arm server, CPU generation, kernel, and workload, so draw your conclusions from your own measurements rather than from any single reference figure. Nested virtualization support continues to improve, so newer Arm Neoverse generations typically show lower overhead than older ones. Focus on the relative difference between bare metal, L1, and L2 on your own hardware.
+{{% /notice %}}
+
+Here is an example of a completed table:
 
 | Metric | Bare Metal | L1 KVM Guest | L2 Nested Guest |
 | ------ | ---------- | ------------ | --------------- |
 | Events/sec | 2533.02 | 2525.84 | 2306.22 |
-| Overhead vs bare metal | — | -0.3% | -8.9% | 
+| Overhead vs bare metal | N/A | -0.3% | -8.9% |
 | Min latency | 3.14ms | 3.15ms | 3.38ms |
 | Avg latency | 3.16ms | 3.17ms | 3.47ms |
 | Max latency | 9.16ms | 13.02ms | 19.72ms |
-| 95th percentile | 3.13ms | 3.19ms | 3.55ms | 
-| Thread stddev | 52.18 | 41.46 | 73.47 | 
+| 95th percentile | 3.13ms | 3.19ms | 3.55ms |
+| Thread stddev | 52.18 | 41.46 | 73.47 |
 
-We see some performance drop-off for the nested VM in events/sec (about 10% between bare metal and nested virtual machine), and there is a significant difference in max latency across the three levels, but the average and P95 latencies are very consistent across all three systems under test.
+## What you've accomplished
 
-What this shows is that while latency-sensitive workloads may not be a good match for nested VMs in performance critical situations, the performance of applications is good enough for the test & development environments where nested virt is the best fit.
+You have configured and run nested virtualization on an Arm server from end to end. Along the way, you:
+
+- Enabled nested virtualization on an Arm64 bare metal host and confirmed FEAT_NV2 support.
+- Created and started an L1 guest VM with `virt-install` and `cloud-init`.
+- Configured a second VM to act as a hypervisor by enabling virtualization passthrough.
+- Booted a nested L2 guest VM inside the hypervisor.
+- Pinned CPU cores across all three layers and benchmarked them with sysbench.
+
+You can now use these techniques to run virtual machines inside virtual machines on Arm, whether for workload isolation, hypervisor development and testing, or running microVMs in cloud environments.
+
 
