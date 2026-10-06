@@ -1,5 +1,5 @@
 ---
-title: Boot your QEMU or TI AM62L EVM target
+title: Boot the signed Zephyr FIT with U-Boot on QEMU or the TI AM62L EVM
 description: Prepare boot media for QEMU or the TI AM62L EVM and confirm that U-Boot verifies the signed Zephyr FIT before starting the application.
 weight: 7
 
@@ -273,7 +273,7 @@ Check the symptom and try the corresponding step:
 If the terminal stays empty, check the console connection and whether the ROM loads `tiboot3.bin`:
 
 1. Try all four serial ports that **J7** creates. The console isn't always the first one.
-2. Check **SW3**, or switch to the full pincount setting, which uses all three switch banks. BOOTMODE `0x0E43` in the same guide.
+2. Check **SW3**, or switch to the full pin-count setting, which uses all three switch banks. See BOOTMODE `0x0E43` in the AM62L EVM User's Guide.
 3. Check that the card's first partition is still TI's FAT16 partition, not reformatted.
 4. Flash TI's unchanged `.wic.xz` to a card and boot it. If that also produces no output, check the boot switches, serial port, and power supply before investigating your custom boot files.
 5. If TI's card boots but yours never shows the SPL banner, copy TI's prebuilt first two stages over yours with `mcopy -o -i $BOOT_IMG $PREBUILT/tiboot3.bin $PREBUILT/tispl.bin ::`. Then, write the card again with the same `dd`. `u-boot.img` still carries the key and the boot command.

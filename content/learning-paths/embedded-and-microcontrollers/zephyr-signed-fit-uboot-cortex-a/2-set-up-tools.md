@@ -18,12 +18,12 @@ To install host tools on Visual Studio Code:
 1. Open Visual Studio Code and select **Workbench for Zephyr** in the Activity Bar. 
 2. In its panel, select **Install Host Tools** to install the dependencies used to build Zephyr: 
 
-- Python
-- CMake
-- Ninja
-- Git
-- Device Tree Compiler
-- West
+   - Python
+   - CMake
+   - Ninja
+   - Git
+   - Device Tree Compiler
+   - West
 
 3. When installation finishes, select **Verify Host Tools**. Resolve any missing-tool errors before continuing.
 
@@ -108,7 +108,7 @@ mkdir -p $KEYS $FIT
   {{< /tab >}}
 {{< /tabpane >}}
 
-The variables are available only in the shell where you load the environment file. If you open a new terminal, you'll have to load the environment file again. If you adapt the workflow to another board, you'll learn how to choose its target values and paths in [Review what you verified and what you need for production](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/).
+The variables are available only in the shell where you load the environment file. If you open a new terminal, you'll have to load the environment file again. If you adapt the workflow to another board, you'll learn how to choose its target values and paths in the [optional board-adaptation guidance](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/).
 
 {{% notice Note %}}
 Example output shows paths under `/home/user/`, the home directory of the account that produced it. The paths in your output will reflect your own username. On a standard Ubuntu cloud instance, for example, they appear under `/home/ubuntu/`. The commands use `$HOME` and `$WORK`, so they adapt to your account automatically. Only the printed paths in the output might differ.

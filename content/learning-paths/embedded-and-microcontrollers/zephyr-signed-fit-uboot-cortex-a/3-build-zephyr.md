@@ -74,9 +74,10 @@ Select **Add Application** and fill in the wizard:
 8. For **Application type**, select **West workspace application**.
 9. For **Project Location**, ensure the value is **`zephyrproject/applications/hello`**, filled in by the wizard.
 
-	Check that the board identifier matches `BOARD` in your environment file: `qemu_cortex_a53` for QEMU or `am62l_evm/am62l3/a53` for the AM62L EVM.
-9. Select **Create**. 
-![Workbench for Zephyr Add Application wizard creating hello from the hello_world sample with the zephyrproject workspace and Zephyr SDK 1.0.1. The AM62L EVM is selected; the callout identifies the alternative QEMU Cortex-A53 board.#center](images/wz-add-application.webp "Create hello for your chosen target")
+   Check that the board identifier matches `BOARD` in your environment file: `qemu_cortex_a53` for QEMU or `am62l_evm/am62l3/a53` for the AM62L EVM.
+10. Select **Create**.
+
+    ![Workbench for Zephyr Add Application wizard creating hello from the hello_world sample with the zephyrproject workspace and Zephyr SDK 1.0.1. The AM62L EVM is selected; the callout identifies the alternative QEMU Cortex-A53 board.#center](images/wz-add-application.webp "Create hello for your chosen target")
 
 The application `hello` appears in the **Applications** view, marked `[with zephyrproject]`. `zephyrproject/applications/hello` holds the sample's `CMakeLists.txt`, `prj.conf` and `src/main.c`.
 

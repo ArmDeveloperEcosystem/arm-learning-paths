@@ -1,5 +1,5 @@
 ---
-title: Review what you verified and what you need for production
+title: Review U-Boot's Zephyr FIT verification boundary and production needs
 description: Review the trust boundary of U-Boot's Zephyr FIT verification and the key provisioning, boot controls, and release signing needed for production.
 weight: 9
 
@@ -55,9 +55,9 @@ You used `sha256,rsa2048`. The AM62L's own boot chain uses `sha512,rsa4096`. To 
 
 Generate production keys in a hardware security module (HSM), or at least away from the build host. Sign during the release process and restrict private-key access to that process.
 
-## Adapt the workflow to another Cortex-A board
+## Optional follow-up: Adapt the workflow to another Cortex-A board
 
-Start by updating the target values and paths in your environment file:
+If you want to use another Cortex-A board, start by updating the target values and paths in your environment file:
 
 - `BOARD` is the Zephyr board identifier, from `west boards` or the Workbench board list. The board needs the two settings from [Build a Zephyr image that U-Boot can start](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/3-build-zephyr/): the Non-secure world and the arm64 image header.
 - `ZEPHYR_ADDR` is the start of the memory node that the board's device tree selects as `zephyr,sram`. It's Zephyr's link address, the FIT `load` and `entry`, and the `go` target, so one value serves all three.

@@ -82,7 +82,7 @@ If you choose QEMU as your target, there's no key to fuse and nothing checks U-B
 
 If you choose AM62L EVM as your target, leave it in its development state without fusing your key into the chip. In that state, the ROM and vendor firmware accept boot files signed with any key. U-Boot's check of Zephyr is enforced either way. 
 
-You'll review what a production device needs in [Review what you verified and what you need for production](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/).
+You'll review [U-Boot's Zephyr FIT verification boundary and production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) after booting the image.
 
 ## What you've learned and what's next
 

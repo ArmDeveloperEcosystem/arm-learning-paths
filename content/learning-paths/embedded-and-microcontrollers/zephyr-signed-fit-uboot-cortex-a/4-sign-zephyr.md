@@ -78,7 +78,7 @@ key-a.crt  key-a.key  key-b.crt  key-b.key
 - `<name>.crt` is a self-signed certificate containing the public key.
 - The shared file-name stem, `<name>`, matches `key-name-hint` in the FIT source.
 
-These 2048-bit keys are generated on the build host for this demonstration. The later section, [Review what you verified and what you need for production](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/), covers production key handling.
+These 2048-bit keys are generated on the build host for this demonstration. The later section on [U-Boot's Zephyr FIT verification boundary and production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) covers production key handling.
 
 ## Write the FIT source
 
