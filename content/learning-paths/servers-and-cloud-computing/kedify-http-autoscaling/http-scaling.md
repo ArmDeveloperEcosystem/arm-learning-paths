@@ -27,7 +27,7 @@ If you use an existing ingress controller, set `INGRESS_ADDRESS` to its endpoint
 
 ## Deploy the application and configure ingress
 
-Now you'll deploy an HTTP server and expose it using an `Ingress` resource. For more informaton, see the [Kedify sample HTTP-server source code](https://github.com/kedify/examples/tree/main/samples/http-server).
+Now you'll deploy an HTTP server and expose it using an `Ingress` resource. For more information, see the [Kedify sample HTTP-server source code](https://github.com/kedify/examples/tree/main/samples/http-server).
 
 Run the following command to deploy your application:
 

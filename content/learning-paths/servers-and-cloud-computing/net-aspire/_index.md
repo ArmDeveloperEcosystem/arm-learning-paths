@@ -13,7 +13,7 @@ learning_objectives:
 prerequisites:
     - A Windows on Arm machine such as the Lenovo Thinkpad X13s running Windows 11, to build the .NET Aspire project  
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from AWS or GCP
-    - A code edito, such as [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) 
+    - A code editor, such as [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) 
 
 # START generated_summary_faq
 generated_summary_faq:

@@ -19,7 +19,7 @@ subjects_filter:
 - Performance and Architecture: 10
 operatingsystems_filter:
 - Baremetal: 1
-- Linux: 14
+- Linux: 15
 - macOS: 1
 - other: 1
 - RTOS: 2
@@ -33,7 +33,7 @@ tools_software_languages_filter:
 - CMake: 1
 - CPP: 1
 - DDS: 1
-- Docker: 6
+- Docker: 7
 - FreeRTOS: 1
 - FVP: 2
 - Gazebo: 1
@@ -43,17 +43,17 @@ tools_software_languages_filter:
 - Multipass: 1
 - Navigation2: 1
 - Perf: 1
-- Python: 2
+- Python: 3
 - Raspberry Pi: 2
 - rmw_zenoh: 2
-- ROS 2: 6
+- ROS 2: 7
 - Rust: 1
 - RViz: 1
 - SME2: 1
 - Tinkerblox: 1
 - topdown-tool: 1
 - Yocto: 3
-- Zenoh: 3
+- Zenoh: 4
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit

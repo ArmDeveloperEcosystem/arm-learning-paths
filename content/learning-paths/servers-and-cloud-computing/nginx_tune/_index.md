@@ -15,7 +15,7 @@ learning_objectives:
 prerequisites:
     - An NGINX file server, reverse proxy, or API gateway running on a cloud instance, bare-metal server, or Arm AGI CPU platform
     - A repeatable HTTP workload or load test that you can run before and after tuning
-    - An [NGINX setup](learning-paths/servers-and-cloud-computing/nginx/)
+    - An [NGINX setup](/learning-paths/servers-and-cloud-computing/nginx/)
 
 # START generated_summary_faq
 generated_summary_faq:
