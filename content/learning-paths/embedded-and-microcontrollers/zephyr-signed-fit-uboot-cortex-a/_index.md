@@ -1,10 +1,6 @@
 ---
 title: Boot a signed Zephyr image with U-Boot on Arm Cortex-A
 
-draft: true                                                                        
-cascade:                                                                           
-    draft: true 
-
 description: Sign a Zephyr FIT image and configure U-Boot to verify its signature and payload hash before booting on Arm Cortex-A in QEMU or on a TI AM62L EVM.
 
 minutes_to_complete: 120
@@ -12,10 +8,10 @@ minutes_to_complete: 120
 who_is_this_for: This is an advanced topic for embedded developers who boot Zephyr from U-Boot on an Arm Cortex-A processor and want U-Boot to verify the Zephyr image before starting it.
 
 learning_objectives:
-    - Identify where U-Boot verifies Zephyr in the Arm Cortex-A boot chain
-    - Build and sign a Flattened Image Tree (FIT) containing Zephyr, and embed the public key in U-Boot without changing its source
-    - Configure U-Boot to verify Zephyr before booting, and optionally test rejection of wrong-key and tampered images
-    - Explain the verification boundary in QEMU and on a development board, and how fusing your key extends trust in production
+    - Identify where U-Boot verifies Zephyr in the Arm Cortex-A boot chain.
+    - Build and sign a Flattened Image Tree (FIT) containing Zephyr, and embed the public key in U-Boot without changing its source.
+    - Configure U-Boot to verify Zephyr before booting, and optionally test rejection of wrong-key and tampered images.
+    - Identify the verification boundary in QEMU and on a development board, and how fusing your key extends trust in production.
 
 prerequisites:
     - One of two targets - QEMU, which needs no hardware, or a TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with accessories to power it, write an SD card, and attach a serial console
