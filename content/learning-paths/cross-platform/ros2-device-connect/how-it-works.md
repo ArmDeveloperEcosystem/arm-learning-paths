@@ -11,12 +11,12 @@ layout: learningpathall
 
 The adapter doesn't add a new way to talk to ROS 2. It wraps the same `ros2` command you ran from your terminal in the setup section, one layer at a time. Each layer adds one thing to the layer beneath it:
 
-| Layer | What it is | What it adds | Example |
-|---|---|---|---|
-| 1. ROS 2 command | A `ros2` CLI call run in the container from the host | The ROS 2 query itself | `docker exec ros2_test ... ros2 topic list` |
-| 2. Python wrapper | `run_ros()` | The same command, called from Python and returning structured output | `run_ros("ros2 topic list")` |
-| 3. RPC | An `@rpc` method on `Ros2InspectionMixin` | A named function that peers and agents can discover and call over the network | `get_ros_topics()` |
-| 4. Device | A driver class run by `DeviceRuntime` | A device that bundles those RPCs and joins the network | `PuppyPiRos2Driver` |
+| Layer | Component | What it is | What it adds | Example |
+|---|---|---|---|---|
+| 1 | ROS 2 command | A `ros2` CLI call run in the container from the host | The ROS 2 query itself | `docker exec ros2_test ... ros2 topic list` |
+| 2 | Python wrapper | `run_ros()` | The same command, called from Python and returning structured output | `run_ros("ros2 topic list")` |
+| 3 | RPC | An `@rpc` method on `Ros2InspectionMixin` | A named function that peers and agents can discover and call over the network | `get_ros_topics()` |
+| 4 | Device | A driver class run by `DeviceRuntime` | A device that bundles those RPCs and joins the network | `PuppyPiRos2Driver` |
 
 Layer 1 is all you need when you have a shell on the machine. Layers 2 to 4 let a caller *without* shell access run the same query, safely and by name.
 

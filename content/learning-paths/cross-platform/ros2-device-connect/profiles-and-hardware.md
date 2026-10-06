@@ -139,4 +139,4 @@ In this Learning Path, you:
 - ran the adapter in D2D mode and called read-only inspection RPCs from a Python client, including one call rejected by input validation
 - saw how profiles reuse the same shared core for a Raspberry Pi 5 camera and a ROS 2 robot, and how to add a profile for your own hardware
 
-To go further, try driving the adapter from an AI agent with [Connect AI agents to edge devices using Device Connect and Strands](/learning-paths/embedded-and-microcontrollers/device-connect-strands/), or build a larger ROS 2 workload on Arm with [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/).
+To go further, try building a larger ROS 2 workload on Arm with [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/).

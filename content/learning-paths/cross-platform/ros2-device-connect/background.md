@@ -39,7 +39,6 @@ To learn the SDK primitives in more depth, see these Learning Paths:
 
 - [Device-to-Device communication with Device Connect](/learning-paths/embedded-and-microcontrollers/device-connect-d2d/) for the developer model and a sensor-to-monitor example
 - [Deploy multi-network device meshes using Device Connect server and NATS](/learning-paths/embedded-and-microcontrollers/device-connect-server/) for server mode
-- [Connect AI agents to edge devices using Device Connect and Strands](/learning-paths/embedded-and-microcontrollers/device-connect-strands/) for driving devices from an AI agent
 
 ## The ros2-device-connect example
 

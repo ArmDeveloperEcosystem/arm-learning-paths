@@ -29,6 +29,14 @@ By the end of this section, you'll have:
 
 The adapter talks to ROS 2 through Docker, so you need Docker Engine. Follow the [Docker Engine install guide](/install-guides/docker/docker-engine/), including the step that adds your user to the `docker` group. The adapter runs `docker exec` as your user, so Docker must work without `sudo`.
 
+Verify that Docker is installed and that you can connect to the Docker daemon without `sudo`:
+
+```bash
+docker version
+```
+
+The command should display version information for both the Docker client and server.
+
 ## Start a ROS 2 container
 
 You don't need to install ROS 2 on the host. The official `ros:humble` image is multi-architecture, so Docker pulls the `arm64` variant automatically. If you'd prefer a native install, see the [ROS 2 install guide](/install-guides/ros2/).
