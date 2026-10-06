@@ -14,7 +14,7 @@ learning_objectives:
     - Identify the verification boundary in QEMU and on a development board, and how fusing your key extends trust in production.
 
 prerequisites:
-    - One of two targets - QEMU, which needs no hardware, or a TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with accessories to power it, write an SD card, and attach a serial console
+    - One of two targets - QEMU, which needs no hardware, or a Texas Instruments (TI) [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with accessories to power it, write an SD card, and attach a serial console
     - A Linux host running Ubuntu 22.04 or 24.04, with about 20 GB of free disk space; QEMU runs on x86_64 or arm64, while the AM62L EVM needs x86_64 for the TI SDK
     - Visual Studio Code with the [Workbench for Zephyr extension](https://marketplace.visualstudio.com/items?itemName=Ac6.zephyr-workbench) installed
     - Basic knowledge of U-Boot and the Linux command line
@@ -43,24 +43,24 @@ generated_summary_faq:
     answer: >-
       No. You can use QEMU without hardware. If you have an AM62L EVM, follow its target-specific
       setup and boot-media instructions instead.
-  - question: Why does U-Boot need the public key in its control device tree?
+  - question: Do I need to patch the U-Boot source to add the trusted key?
     answer: >-
-      You'll embed the trusted public key in U-Boot's control device tree so that it can verify the FIT
-      configuration signature. The key's `required = "conf"` setting makes U-Boot reject a FIT
-      without a valid signature from that key.
+      No. You'll generate a public-key node in `signature.dtsi` and include it when you build
+      U-Boot. For the AM62L EVM, use `CONFIG_DEVICE_TREE_INCLUDES`. For QEMU, add the node to the
+      control device tree supplied with `EXT_DTB`. You don't need to change the U-Boot source files.
   - question: How can I check the signed FIT before booting the target?
     answer: >-
-      Use U-Boot's `fit_check_sign` with your signed FIT and built `u-boot.dtb`. This checks the
+      Use the U-Boot `fit_check_sign` tool with your signed FIT and built `u-boot.dtb`. This checks the
       FIT against the public key in the control device tree before you prepare the boot media.
   - question: How do I confirm that verification succeeded on the target?
     answer: >-
-      Look for `sha256,rsa2048:key-a+ OK` in U-Boot's output, followed by the Zephyr image A banner.
+      Look for `sha256,rsa2048:key-a+ OK` in the U-Boot output, followed by the Zephyr image A banner.
       You can also run the optional wrong-key and tampered-image tests to check that U-Boot refuses
       to start either image.
   - question: Does this setup authenticate U-Boot as well as Zephyr?
     answer: >-
-      No. In QEMU, you run U-Boot without an earlier stage that authenticates it. On the AM62L EVM,
-      you leave the device in High Security, Field Securable (HS-FS) development state, where earlier stages accept boot files
+      No. In QEMU, you'll run U-Boot without an earlier stage that authenticates it. On the AM62L EVM,
+      you'll leave the device in High Security, Field Securable (HS-FS) development state, where earlier stages accept boot files
       signed with any key. To extend trust to U-Boot in production, you need to provision your key,
       move the device to High Security, Security Enforced (HS-SE), and sign the earlier boot files.
 # END generated_summary_faq

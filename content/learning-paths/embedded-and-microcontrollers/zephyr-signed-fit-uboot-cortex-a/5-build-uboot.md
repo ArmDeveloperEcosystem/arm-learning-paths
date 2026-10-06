@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Check that U-Boot can verify signatures
 
-Open a terminal and load your target's environment file:
+Open a terminal and load the environment file for your target:
 
 - QEMU: `source $HOME/zephyr-secure-boot/env-qemu.sh`
 - AM62L evaluation module (EVM): `source $HOME/zephyr-secure-boot/env-am62l.sh`
@@ -53,7 +53,7 @@ Create `key.its` using the same layout as `zephyr-a.its`, with the placeholder p
 cat > $WORK/key.its <<'EOF'
 /dts-v1/;
 / {
-	description = "carrier used only to emit key-a's public key";
+	description = "carrier used only to emit the public key for key-a";
 	#address-cells = <1>;
 	images {
 		kernel-1 {
@@ -101,7 +101,7 @@ The expected output is:
 
 Confirm that `key-name-hint` is `key-a` and `required` is `conf`. Leave out `key-b` so that U-Boot doesn't trust its signatures.
 
-The build incorporates `signature.dtsi` into U-Boot's control device tree. Use `mkimage -K` only with the scratch DTB. Adding the key directly to a finished `u-boot.dtb` would lose it when `make` rebuilds that file.
+The build incorporates `signature.dtsi` into the U-Boot control device tree. Use `mkimage -K` only with the scratch DTB. Adding the key directly to a finished `u-boot.dtb` would lose it when `make` rebuilds that file.
 
 ## Write a boot command that fails closed
 
@@ -132,7 +132,7 @@ The command chain loads, verifies, and starts Zephyr:
 - The cache commands flush and disable the caches. On arm64, `dcache off` also disables the memory management unit (MMU), preparing the state Zephyr expects at entry.
 - `go 0x40000000` jumps to `ZEPHYR_ADDR` without performing verification. Using `bootm start` and `bootm loados` stops before the OS-specific boot code that a plain `bootm` would run.
 
-For QEMU, `BOOT_DEV` is `virtio 0:1`, the disk image's File Allocation Table (FAT) partition. On the AM62L EVM, it's `mmc 1:1`, the SD card's first partition. The board loads the FIT at `0x90000000` and copies Zephyr to `0x82000000`.
+For QEMU, `BOOT_DEV` is `virtio 0:1`, the File Allocation Table (FAT) partition in the disk image. On the AM62L EVM, it's `mmc 1:1`, the first partition on the SD card. The board loads the FIT at `0x90000000` and copies Zephyr to `0x82000000`.
 
 Failing closed means stopping before Zephyr starts if any command fails. The `&&` operators enforce this condition: `a && b` runs `b` only if `a` succeeds. Separating the commands with `;` would allow execution to continue after a failed check. In this application, `go` doesn't return, so the refusal message prints only when an earlier command fails.
 
@@ -153,7 +153,7 @@ The commands are compiled into U-Boot rather than stored on the card, where anyo
 
 ## Configure U-Boot
 
-Reset to your target's default configuration before adding the custom settings:
+Reset to the default configuration for your target before adding the custom settings:
 
 ```bash
 make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="$UBOOT_CC" $UBOOT_DEFCONFIG
@@ -171,13 +171,13 @@ CONFIG_BOOTDELAY=3
 EOF
 ```
 
-Keep the `\"` sequences around the `echo` text. The sequences represent literal quotes inside the Kconfig string. Run `grep ^CONFIG_PREBOOT $UBOOT_OUT/.config` and check that your target's device and addresses appear in the command.
+Keep the `\"` sequences around the `echo` text. The sequences represent literal quotes inside the Kconfig string. Run `grep ^CONFIG_PREBOOT $UBOOT_OUT/.config` and check that the device and addresses for your target appear in the command.
 
 Follow the instructions for your target to add its device-tree and boot settings:
 
 {{< tabpane-normal >}}
   {{< tab header="QEMU" >}}
-QEMU normally supplies U-Boot's device tree at runtime, so `CONFIG_DEVICE_TREE_INCLUDES` has no source tree to modify. Instead, you'll create a control device tree containing your key and pass it to the build. 
+QEMU normally supplies the U-Boot device tree at runtime, so `CONFIG_DEVICE_TREE_INCLUDES` has no source tree to modify. Instead, you'll create a control device tree containing your key and pass it to the build.
 
 Add the following settings to enable that approach and disable unsigned legacy images. The settings also enable cache commands and keep the environment from being saved to flash:
 
@@ -235,7 +235,7 @@ Export the device tree for the QEMU machine that you'll boot later:
 ```bash
 qemu-system-aarch64 -machine virt,gic-version=3,dumpdtb=$WORK/qemu-virt.dtb -cpu cortex-a53 -m 1G -nographic
 ```
-This keeps U-Boot's drivers, console, and memory sizing consistent with the machine. QEMU writes the file and exits.
+This keeps the U-Boot drivers, console, and memory sizing consistent with the machine. QEMU writes the file and exits.
 
 Add your public-key node by decompiling the tree, appending `signature.dtsi`, and recompiling it:
 
@@ -252,7 +252,7 @@ Build U-Boot with `EXT_DTB` pointing to your control device tree. Specify `u-boo
 make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="$UBOOT_CC" -j$(nproc) \
      EXT_DTB=$WORK/uboot-control.dtb u-boot.bin u-boot.dtb
 ```
-U-Boot's `scripts/check-of.sh` rejects the default `all` target for this machine, which normally receives its device tree from a prior stage.
+The `scripts/check-of.sh` script in U-Boot rejects the default `all` target for this machine, which normally receives its device tree from a prior stage.
 
 The build takes a couple of minutes. Check the two files:
 
@@ -263,7 +263,7 @@ ls -l $UBOOT_OUT/u-boot.bin $UBOOT_OUT/u-boot.dtb
 `u-boot.bin` is about 1.4 MB and ends with the bytes of `u-boot.dtb`, the control device tree with your key inside.
   {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
-TI's U-Boot tree uses binman, U-Boot's image packaging tool, to package the early stages. Point `BL1`, `BL31`, and `TEE` to the SDK's prebuilt TF-A and OP-TEE binaries. Set `BINMAN_INDIRS` to the SDK directory containing TI's system firmware:
+TI's U-Boot tree uses binman, the U-Boot image packaging tool, to package the early stages. Point `BL1`, `BL31`, and `TEE` to the prebuilt TF-A and OP-TEE binaries in the SDK. Set `BINMAN_INDIRS` to the SDK directory containing TI's system firmware:
 
 ```bash
 make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="$UBOOT_CC" -j$(nproc) \
@@ -307,7 +307,7 @@ With the long values shortened, the output is similar to:
 
 The `rsa,` properties contain the public key for `key-a`. Check that the node includes `required = "conf"`, which makes U-Boot require a valid configuration signature.
 
-Verify the trusted FIT on the host using the key in that DTB. `fit_check_sign` uses U-Boot's verification code. `-f` selects the FIT, and `-k` selects the DTB containing the public key:
+Verify the trusted FIT on the host using the key in that DTB. `fit_check_sign` uses the verification code in U-Boot. `-f` selects the FIT, and `-k` selects the DTB containing the public key:
 
 ```bash
 $UBOOT_OUT/tools/fit_check_sign -f $FIT/zephyr-a.itb -k $UBOOT_OUT/u-boot.dtb

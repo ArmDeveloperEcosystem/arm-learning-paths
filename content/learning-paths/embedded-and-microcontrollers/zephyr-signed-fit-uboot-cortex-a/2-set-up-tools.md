@@ -7,7 +7,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## What you need
+## What you need to set up
 
 You need Zephyr host tools, U-Boot source, and a cross compiler for your chosen target. For QEMU, download U-Boot source and install the emulator and compiler from Ubuntu packages. For the AM62L evaluation module (EVM), the TI Processor SDK supplies U-Boot source, the cross compiler, and prebuilt early firmware.
 
@@ -37,12 +37,12 @@ Install the additional packages used to build U-Boot, sign images, and prepare t
 sudo apt install -y build-essential bison flex swig python3-dev python3-setuptools libssl-dev libgnutls28-dev uuid-dev device-tree-compiler openssl mtools dosfstools xz-utils curl picocom
 ```
 
-If you chose QEMU as your target, install the emulator and U-Boot cross compiler with this command:
+If you chose QEMU as your target, install the emulator and U-Boot cross compiler:
 
 ```bash
 sudo apt install -y qemu-system-arm gcc-aarch64-linux-gnu
 ```
-For the AM62L EVM, skip installing the emulator. You'll get the cross compiler from the TI SDK
+For the AM62L EVM, skip installing the emulator. You'll get the cross compiler from the TI SDK.
 
 ## Create the working directory and environment file
 
@@ -61,7 +61,7 @@ export BOARD=qemu_cortex_a53                  # Zephyr board identifier
 export ZEPHYR_ADDR=0x40000000                 # Zephyr link address, FIT load and go target
 export FIT_ADDR=0x48000000                    # where U-Boot loads the FIT, clear of ZEPHYR_ADDR
 export BOOT_DEV="virtio 0:1"                  # U-Boot device and partition that hold the files
-export UBOOT_DEFCONFIG=qemu_arm64_defconfig   # the target's U-Boot configuration
+export UBOOT_DEFCONFIG=qemu_arm64_defconfig   # U-Boot configuration for the target
 
 # No vendor SDK: U-Boot from the U-Boot project, cross compiler from Ubuntu
 export UBOOT_SRC=$WORK/u-boot-2025.07
@@ -87,7 +87,7 @@ export BOARD=am62l_evm/am62l3/a53             # Zephyr board identifier
 export ZEPHYR_ADDR=0x82000000                 # Zephyr link address, FIT load and go target
 export FIT_ADDR=0x90000000                    # where U-Boot loads the FIT, clear of ZEPHYR_ADDR
 export BOOT_DEV="mmc 1:1"                     # U-Boot device and partition that hold the files
-export UBOOT_DEFCONFIG=am62lx_evm_defconfig   # the target's U-Boot configuration
+export UBOOT_DEFCONFIG=am62lx_evm_defconfig   # U-Boot configuration for the target
 
 # Vendor SDK: U-Boot source, firmware that runs before U-Boot, cross compiler and its libraries
 export SDK=$WORK/tisdk
@@ -111,7 +111,7 @@ mkdir -p $KEYS $FIT
 The variables are available only in the shell where you load the environment file. If you open a new terminal, you'll have to load the environment file again. If you adapt the workflow to another board, you'll learn how to choose its target values and paths in the [optional board-adaptation guidance](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/).
 
 {{% notice Note %}}
-Example output shows paths under `/home/user/`, the home directory of the account that produced it. The paths in your output will reflect your own username. On a standard Ubuntu cloud instance, for example, they appear under `/home/ubuntu/`. The commands use `$HOME` and `$WORK`, so they adapt to your account automatically. Only the printed paths in the output might differ.
+Example output shows paths under `/home/user/`, the home directory of the account that produced it. The paths in your output will reflect your own username. For example, on a standard Ubuntu cloud instance, they appear under `/home/ubuntu/`. The commands use `$HOME` and `$WORK`, so they adapt to your account automatically. Only the printed paths in the example outputs differ.
 {{% /notice %}}
 
 ## Get the U-Boot source and the cross compiler
@@ -209,6 +209,6 @@ The download is about 1.3 GB. Leave it compressed. When you prepare the boot med
 
 ## What you've accomplished and what's next
 
-You've installed the Zephyr host tools and U-Boot build packages, obtained your target's U-Boot source and cross compiler, and created a reusable environment file. For the AM62L EVM, you've also set up the early firmware and SD card image.
+You've installed the Zephyr host tools and U-Boot build packages. You've also obtained the U-Boot source and cross compiler for your target, and created a reusable environment file. For the AM62L EVM, you've additionally set up the early firmware and SD card image.
 
 Next, you'll import the AArch64 toolchain, create a West workspace, and build a small Zephyr application for your chosen target.

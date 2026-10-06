@@ -9,14 +9,14 @@ layout: learningpathall
 
 ## What your target boots from
 
-Open a terminal and load your target's environment file:
+Open a terminal and load the environment file for your target:
 
 - QEMU: `source $HOME/zephyr-secure-boot/env-qemu.sh`
 - AM62L evaluation module (EVM): `source $HOME/zephyr-secure-boot/env-am62l.sh`
 
 The AM62L boot ROM reads the first-stage file from a File Allocation Table (FAT) partition on the SD card. Start with TI's card image to preserve the expected layout. QEMU loads `u-boot.bin` from the command line, so its disk image needs only the signed Flattened Image Tree (FIT).
 
-On either target, U-Boot's `fatload` reads `zephyr-a.itb` from the partition selected by `BOOT_DEV`.
+On either target, the `fatload` of U-Boot reads `zephyr-a.itb` from the partition selected by `BOOT_DEV`.
 
 ## Build the boot media
 
@@ -32,7 +32,7 @@ printf 'label: dos\nstart=2048, size=129024, type=e\n' | sfdisk $WORK/disk.img
 mkfs.vfat --offset 2048 -F 16 -n ZEPHYRFIT $WORK/disk.img
 ```
 
-Copy the signed FIT into the partition and list its contents. `BOOT_IMG` includes `@@1048576`, telling `mtools` that the volume starts 1 MiB into the image. `::` identifies the volume's root directory:
+Copy the signed FIT into the partition and list its contents. `BOOT_IMG` includes `@@1048576`, telling `mtools` that the volume starts 1 MiB into the image. `::` identifies the root directory of the volume:
 
 ```bash
 mcopy -o -i $BOOT_IMG $FIT/zephyr-a.itb ::
@@ -54,7 +54,7 @@ zephyr-a itb     38742 2026-09-17  22:11
 Confirm that the volume contains `zephyr-a.itb`. The partition is accessed as `virtio 0:1`, matching `BOOT_DEV` in `env-qemu.sh`.
   {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
-The boot ROM reads `tiboot3.bin` from the card's first FAT partition. Preserve TI's FAT16 partition layout and replace its files. The supplied partition starts at sector 2048 and spans 262144 sectors. These values determine the extraction size in the command.
+The boot ROM reads `tiboot3.bin` from the first FAT partition on the card. Preserve TI's FAT16 partition layout and replace its files. The supplied partition starts at sector 2048 and spans 262144 sectors. These values determine the extraction size in the command.
 
 Start from the `.wic.xz` that you downloaded. Extract the first 1 MiB, which holds the partition table, plus the 128 MiB partition into a new image file:
 
@@ -109,12 +109,12 @@ Confirm that the volume contains the three boot files and `zephyr-a.itb`.
 Follow the instructions for your target to start the target.
 
 {{% notice Warning %}}
-The AM62L EVM steps write to a whole disk with `dd`. Replace `/dev/sdX` with your card, for example `/dev/sdb`, never a partition such as `/dev/sdb1`. `dd` erases everything on the target, so a wrong device name erases the wrong disk.
+The AM62L EVM steps write to a whole disk with `dd`. Replace `/dev/sdX` with your card – for example, `/dev/sdb` — rather than a partition such as `/dev/sdb1`. `dd` erases everything on the target, so a wrong device name erases the wrong disk.
 {{% /notice %}}
 
 {{< tabpane-normal >}}
   {{< tab header="QEMU" >}}
-Start QEMU with the U-Boot binary and disk image you prepared. `-bios` selects the binary, and `-nographic` displays the serial console in your terminal. The `-drive` and `-device` options attach `disk.img` as the virtio device containing `virtio 0:1`:
+Start QEMU with the U-Boot binary and disk image that you prepared. `-bios` selects the binary, and `-nographic` displays the serial console in your terminal. The `-drive` and `-device` options attach `disk.img` as the virtio device containing `virtio 0:1`:
 
 ```bash
 qemu-system-aarch64 -machine virt,gic-version=3 -cpu cortex-a53 -m 1G -nographic -no-reboot \
@@ -126,7 +126,7 @@ qemu-system-aarch64 -machine virt,gic-version=3 -cpu cortex-a53 -m 1G -nographic
 Use the same `-machine`, `-cpu`, and `-m` settings as the device-tree export used to [build U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). U-Boot should begin printing in the terminal. To exit QEMU, press **Ctrl+A**, then **X**.
   {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
-Run `lsblk` before and after inserting the micro-SD card. Identify the newly listed disk and confirm its size matches the card. Replace `/dev/sdX` with that disk's device name and write the image to the whole card:
+Run `lsblk` before and after inserting the micro-SD card. Identify the newly listed disk and confirm its size matches the card. Replace `/dev/sdX` with the device name of that disk and write the image to the whole card:
 
 ```bash
 sudo dd if=$WORK/sdcard.img of=/dev/sdX bs=4M conv=fsync status=progress
@@ -134,7 +134,7 @@ sudo dd if=$WORK/sdcard.img of=/dev/sdX bs=4M conv=fsync status=progress
 
 If you transfer the prepared image to Windows or macOS, you can write `sdcard.img` with balenaEtcher. Alternatively, write TI's unchanged `.wic.xz` image to the card. Open its first partition, remove `Image`, `uEnv.txt`, and the `EFI` directory, then copy in the three boot files and `zephyr-a.itb`.
 
-Set **SW3** using the table. This is the reduced pin-count setting from the [AM62L EVM User's Guide](https://www.ti.com/lit/pdf/SPRUJG8), where the ROM ignores **SW2** and **SW4**. The **ON** position is toward the **ON** label on the switch bank.
+Set **SW3** using the table. This is the reduced pin-count setting from the [AM62L EVM user guide](https://www.ti.com/lit/pdf/SPRUJG8), where the ROM ignores **SW2** and **SW4**. The **ON** position is toward the **ON** label on the switch bank.
 
 | Switch | 1 | 2 | 3 | 4 |
 |---|---|---|---|---|
@@ -197,7 +197,7 @@ Use the following messages to identify the boot stages and selected devices:
 
 - `NOTICE:  BL1:` and `BL31:` identify TF-A running from `tiboot3.bin` and `tispl.bin`.
 - `Authentication passed` reports successful authentication by TI's security firmware.
-- `SoC:   AM62LX SR1.1 HS-FS` identifies the SoC's development state.
+- `SoC:   AM62LX SR1.1 HS-FS` identifies the development state of the system on chip (SoC).
 - `MMC:` lists the eMMC as device zero and the SD card as device one.
 
 The `Agent 0 Protocol 0x10 Message 0x7: not supported` errors appear in this successful boot log. They don't prevent Zephyr from starting.
@@ -206,7 +206,7 @@ This log comes from a board running TI's prebuilt first two stages, so its `U-Bo
 
 ## Watch the trusted image boot
 
-After the three-second countdown, autoboot runs `run a`, the trusted-image command built into U-Boot. The following example output shows the AM62L EVM. Your timings and hash values will differ. QEMU uses different load addresses and image sizes. The output is similar to:
+After the three-second countdown, autoboot runs `run a`, the trusted-image command built into U-Boot. The following example output shows the AM62L EVM. Your timings and hash values will differ. The output is similar to:
 
 ```output
 60198 bytes read in 1 ms (57.4 MiB/s)
@@ -247,14 +247,14 @@ this image was verified by U-Boot before it ran.
 
 Confirm verification and startup using the following messages:
 
-- `sha256,rsa2048:key-a+ OK` confirms that the signature verifies with U-Boot's embedded public key.
+- `sha256,rsa2048:key-a+ OK` confirms that the signature verifies with the public key embedded in U-Boot.
 - `sha256+ OK` confirms that the payload hash matches.
 - `Loading Kernel Image to 82000000` shows `bootm loados` copying Zephyr to its link address.
 - `## Starting application at 0x82000000 ...` shows `go` handing control to Zephyr.
 
 Zephyr then prints its boot banner and `Hello from ZEPHYR IMAGE A`. On the AM62L EVM, `Secondary CPU core 1 (MPID:0x1) is up` also reports startup of the second core.
 
-For QEMU, expect `FIT Image at 48000000`, `Data Size: 37040 Bytes`, `Loading Kernel Image to 40000000`, and `board : qemu_cortex_a53/qemu_cortex_a53`. Its board configuration starts one core, so there's no secondary-core startup message.
+QEMU uses different load addresses and image sizes. For QEMU, expect `FIT Image at 48000000`, `Data Size: 37040 Bytes`, `Loading Kernel Image to 40000000`, and `board : qemu_cortex_a53/qemu_cortex_a53`. Its board configuration starts one core, so there's no secondary-core startup message.
 
 ## Troubleshoot boot and console output
 
@@ -273,8 +273,8 @@ Check the symptom and try the corresponding step:
 If the terminal stays empty, check the console connection and whether the ROM loads `tiboot3.bin`:
 
 1. Try all four serial ports that **J7** creates. The console isn't always the first one.
-2. Check **SW3**, or switch to the full pin-count setting, which uses all three switch banks. See BOOTMODE `0x0E43` in the AM62L EVM User's Guide.
-3. Check that the card's first partition is still TI's FAT16 partition, not reformatted.
+2. Check **SW3**, or switch to the full pin-count setting, which uses all three switch banks. See BOOTMODE `0x0E43` in the AM62L EVM User Guide.
+3. Check that the first partition of the card is still TI's FAT16 partition, not reformatted.
 4. Flash TI's unchanged `.wic.xz` to a card and boot it. If that also produces no output, check the boot switches, serial port, and power supply before investigating your custom boot files.
 5. If TI's card boots but yours never shows the SPL banner, copy TI's prebuilt first two stages over yours with `mcopy -o -i $BOOT_IMG $PREBUILT/tiboot3.bin $PREBUILT/tispl.bin ::`. Then, write the card again with the same `dd`. `u-boot.img` still carries the key and the boot command.
 

@@ -11,7 +11,7 @@ layout: learningpathall
 
 The following tests are optional. Create one Flattened Image Tree (FIT) signed with an untrusted key and another modified after signing. Check both on the host, then confirm that U-Boot refuses to start them on your target. The `b` and `t` commands are already built into U-Boot to select these images.
 
-Open a terminal and load your target's environment file:
+Open a terminal and load the environment file for your target:
 
 - QEMU: `source $HOME/zephyr-secure-boot/env-qemu.sh`
 - AM62L evaluation module (EVM): `source $HOME/zephyr-secure-boot/env-am62l.sh`
@@ -67,7 +67,7 @@ Created:         Fri Sep 11 19:14:00 2026
 Signature written to '/home/user/zephyr-secure-boot/fit/zephyr-b.itb', node '/configurations/conf-1/signature-1'
 ```
 
-Check for `Sign algo:    sha256,rsa2048:key-b`. The `Hash value` differs from image A's because the application banner changed. This FIT has a signature from `key-b`, but U-Boot trusts only `key-a` and must reject it.
+Check for `Sign algo:    sha256,rsa2048:key-b`. The `Hash value` differs from that of image A because the application banner changed. This FIT has a signature from `key-b`, but U-Boot trusts only `key-a` and must reject it.
 
 ## Make a tampered copy of the trusted image
 
@@ -195,14 +195,14 @@ ZEPHYR~1 ITB     60198 2026-09-15  16:49  zephyr-tampered.itb
                         130 643 968 bytes free
 ```
 
-This example lists the AM62L EVM's six files: three boot files and three FITs. The QEMU disk image contains only the three FITs.
+This example lists the six files of the AM62L EVM: three boot files and three FITs. The QEMU disk image contains only the three FITs.
 
 {{< tabpane-normal >}}
   {{< tab header="QEMU" >}}
 Restart QEMU with the same command used to boot the trusted image. QEMU reads the updated `disk.img` directly. No physical media needs to be written.
   {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
-Write the updated image to the card. Confirm the card's device name before replacing `/dev/sdX`. `dd` overwrites the entire selected disk:
+Write the updated image to the card. Confirm the device name of the card before replacing `/dev/sdX`. `dd` overwrites the entire selected disk:
 
 ```bash
 sudo dd if=$WORK/sdcard.img of=/dev/sdX bs=4M conv=fsync status=progress
@@ -214,7 +214,7 @@ Move the card to the board, open the console with `picocom`, and power the board
 
 ## Run the wrong-key test
 
-Press a key during the three-second countdown to stop autoboot. If you miss it, U-Boot starts image A. Start the target again and try once more. At the prompt, run the wrong-key test:
+Press a key during the three-second countdown to stop autoboot. If you miss the countdown, U-Boot starts image A. Start the target again and try again. At the prompt, run the wrong-key test:
 
 ```console
 => run b
@@ -234,7 +234,7 @@ ERROR -2: can't get kernel image!
 *** REFUSED: Zephyr was NOT started ***
 ```
 
-Check for `sha256,rsa2048:key-b-  error!` and `Failed to verify required signature 'key-key-a'`. The `-` indicates failure, as the image's signature doesn't satisfy the required `key-a` check.
+Check for `sha256,rsa2048:key-b-  error!` and `Failed to verify required signature 'key-key-a'`. The `-` indicates failure, because the signature of the image doesn't satisfy the required `key-a` check.
 
 When `bootm start` fails, the `&&` chain skips `go` and prints `*** REFUSED: Zephyr was NOT started ***`. Confirm that no Zephyr banner appears. `Bad Data Hash` and `ERROR -2: can't get kernel image!` can appear for either rejection test. Use the preceding messages to identify which check failed.
 
