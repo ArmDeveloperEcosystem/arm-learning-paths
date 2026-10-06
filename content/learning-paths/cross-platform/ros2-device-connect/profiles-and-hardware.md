@@ -9,11 +9,11 @@ layout: learningpathall
 
 ## How profiles select the hardware configuration
 
-In the previous section, you overrode the `rpi5` profile to point at a generic ROS 2 container. Each profile in `profiles/` is a shell file that describes one deployment. It sets which driver runs, which container the driver talks to, and which ROS 2 setup scripts it sources.
+You overrode the `rpi5` profile earlier to point at a generic ROS 2 container. Each profile in `profiles/` is a shell file that describes one deployment. It sets which driver runs, which container the driver talks to, and which ROS 2 setup scripts it sources.
 
 | Profile | Driver | Default container | ROS 2 distribution | RPCs added to the shared inspection RPCs |
 |---|---|---|---|---|
-| `rpi5` | `puppypi_device.py` | `test` | Humble | The PuppyPi RPCs, which have no effect without a robot, so this profile works as a general test target |
+| `rpi5` | `puppypi_device.py` | `test` | Humble | The PuppyPi Remote procedure calls (RPCs), which have no effect without a robot, so this profile works as a general test target |
 | `rpi_camera` | `camera_device.py` | `pi_ros` | Jazzy | `get_raw_image(quality)` |
 | `puppypi` | `puppypi_device.py` | `puppypi_ros2` | Humble | `run_action(action)`, `set_velocity(x, y, yaw_rate)`, `stop()` |
 
@@ -39,7 +39,7 @@ PROFILE_FILE=/path/to/my-robot.env ./ros2-device-connect/start_d2d.sh
 
 ## Try a Raspberry Pi 5 with a camera
 
-The `rpi_camera` configuration is the lowest-risk real hardware example in this Learning Path. It exposes a sensor capability, not a motion capability: a ROS 2 image topic becomes a Device Connect RPC that any peer or agent can call for a photo. The caller does not need to know the ROS 2 topic name, QoS settings, camera container, or image encoding details.
+The `rpi_camera` configuration is the lowest-risk real hardware example in this Learning Path. It exposes a sensor capability rather than a motion capability: a ROS 2 image topic becomes a Device Connect RPC that any peer or agent can call for a photo. The caller doesn't need to know the ROS 2 topic name, QoS settings, camera container, or image encoding details.
 
 The camera must appear as a V4L2 video device, such as `/dev/video0`. A USB webcam works without extra setup.
 
@@ -56,10 +56,10 @@ cd ~/device_connect
 
 The `start_camera_ros2.sh` script is idempotent and does the following:
 
-- creates a `ros:jazzy` container named `pi_ros` with the camera passed through using `--device=/dev/video0`
-- installs `ros-jazzy-v4l2-camera`, `ros-jazzy-cv-bridge`, and `python3-opencv` inside the container
-- copies `capture_frame.py` into the container and starts `v4l2_camera_node` in the background
-- verifies that the `/image_raw` topic is being published
+- Creates a `ros:jazzy` container named `pi_ros` with the camera passed through using `--device=/dev/video0`
+- Installs `ros-jazzy-v4l2-camera`, `ros-jazzy-cv-bridge`, and `python3-opencv` inside the container
+- Copies `capture_frame.py` into the container and starts `v4l2_camera_node` in the background
+- Verifies that the `/image_raw` topic is being published
 
 Start the adapter with the camera profile:
 
@@ -83,9 +83,9 @@ async def get_raw_image(self, quality: int = DEFAULT_JPEG_QUALITY) -> dict[str, 
 
 The RPC runs `capture_frame.py` inside the container. The script subscribes to `/image_raw`, takes one frame, and returns it as a base64-encoded JPEG. It subscribes with ROS 2's `qos_profile_sensor_data` because `v4l2_camera` publishes with best-effort QoS. A subscriber that uses the default reliable QoS would never match the publisher, and the capture would silently time out.
 
-This is the perception side of the robotics pattern: a ROS 2 sensor stream is converted into a typed Device Connect capability. The PuppyPi profile below uses the same pattern for the action side of robotics.
+This is the perception side of the robotics pattern: a ROS 2 sensor stream is converted into a typed Device Connect capability. The following PuppyPi profile uses the same pattern for the action side of robotics.
 
-From a client, call the RPC and save the image. Use the same client environment variables as in the previous section, replacing `127.0.0.1` with the Raspberry Pi's IP address if you run the client on another machine:
+From a client, call the RPC and save the image. Use the same client environment variables as earlier, replacing `127.0.0.1` with the IP address of the Raspberry Pi if you run the client on another machine:
 
 ```python
 import base64
@@ -98,7 +98,7 @@ with open("capture.jpg", "wb") as f:
     f.write(base64.b64decode(reply["result"]["jpeg_base64"]))
 ```
 
-The repository's `view_image.py` script does the same thing against a device in fabric mode.
+The `view_image.py` script in the repository does the same thing against a device in fabric mode.
 
 ## Try a ROS 2 robot
 
@@ -131,12 +131,5 @@ D2D mode runs with `DEVICE_CONNECT_ALLOW_INSECURE=true` and no transport authent
 {{% /notice %}}
 
 ## What you've learned
-
-In this Learning Path, you:
-
-- learned how the ros2-device-connect adapter makes an unchanged ROS 2 system discoverable and callable through Device Connect, by wrapping ROS 2 CLI calls in `@rpc` methods run with `docker exec`
-- set up a ROS 2 Humble container and the Device Connect Python packages on an Arm-based Linux machine
-- ran the adapter in D2D mode and called read-only inspection RPCs from a Python client, including one call rejected by input validation
-- saw how profiles reuse the same shared core for a Raspberry Pi 5 camera and a ROS 2 robot, and how to add a profile for your own hardware
 
 To go further, try driving the adapter from an AI agent with [Connect AI agents to edge devices using Device Connect and Strands](/learning-paths/embedded-and-microcontrollers/device-connect-strands/), or build a larger ROS 2 workload on Arm with [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/).
