@@ -7,10 +7,10 @@ weight: 6
 layout: learningpathall
 ---
 
-# Integrate the FreeRTOS image with Yocto
+# Integrate the FreeRTOS image with Yocto 
 
 ## Objective
-The previous section manually replaced the Safety Island Cluster 1 (SI CL1) payload. That experiment proved that FreeRTOS can meet the Zena CSS secure boot requirements: RSE authenticates the image, copies it to SI CL1 low-latency RAM (LLRAM), and releases the cluster through the standard platform boot flow.
+The previous section manually replaced the Safety Island Cluster 1 (SI CL1) payload. That experiment proved that FreeRTOS can meet the Zena CSS secure boot requirements. RSE authenticates the image, copies it to SI CL1 low-latency RAM (LLRAM), and releases the cluster through the standard platform boot flow.
 
 The next step is to build the FreeRTOS application in Yocto.
 
@@ -21,12 +21,78 @@ This section explains how to:
 - Add a FreeRTOS recipe and make it selectable without changing the default Zephyr build
 - Verify that Yocto builds, signs, packages, and boots the selected FreeRTOS image
 
-The steps also demonstrate a reusable Yocto investigation method: start from a known build output, trace its dependencies, identify the interface between recipes, implement a compatible replacement, and validate the complete path.
+The steps also demonstrate a reusable Yocto investigation method. Start from a known build output and trace its dependencies. Identify the interface between recipes, implement a compatible replacement, and validate the complete path.
 
+## Apply the FreeRTOS integration patch
 
-## Investigate how Yocto selects the SI CL1 image
+The [`freertos-yocto-integration.patch`](../freertos-yocto-integration.patch) file combines the FreeRTOS recipe, GCC 13 compatibility patch, machine configuration, and Kconfig selection changes described later in this section. It applies to a clean and pristine [`Zena CSS v2.2 source tree`](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html) download and clone. 
 
-The rest of this section explains how the integration was derived and how to validate each boundary independently.
+Lets start by exiting out of your existing tmux session back to your SSH shell on your Ubuntu host. Back at the SSH shell prompt lets move our old source tree and create a new clean one:
+
+```bash
+cd $HOME
+pkill '^tmux'
+mv arm-auto-solutions arm-auto-solutions-BAK
+mkdir -p $HOME/arm-auto-solutions
+cd $HOME/arm-auto-solutions
+git clone https://git.gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css.git --branch v2.2.1
+kas checkout arm-zena-css/yocto/kas/repos.yml
+```
+
+Next, copy all contents from [`"freertos-yocto-integration.patch"`](../freertos-yocto-integration.patch) and save them on your Ubuntu build host as `"$HOME/freertos-yocto-integration.patch"`. Then, run the following commands from the root of the Zena CSS checkout on your Ubuntu host. Lets first confirm that the patch applies before changing the source tree:
+
+```bash
+PATCH_FILE=$HOME/freertos-yocto-integration.patch
+cd $HOME/arm-auto-solutions
+git apply --verbose --check "$PATCH_FILE"
+```
+
+If the check passes without issue, lets now change the source tree:
+
+```bash
+PATCH_FILE=$HOME/freertos-yocto-integration.patch
+cd $HOME/arm-auto-solutions
+git apply --verbose "$PATCH_FILE"
+```
+
+Next, lets open a new tmux session:
+
+```bash
+cd $HOME/arm-auto-solutions
+tmux new-session -s arm-auto-solutions
+```
+
+Within the tmux session, open the build configuration menu:
+
+```bash
+kas menu arm-zena-css/Kconfig
+```
+
+Select **RD-Aspen Cfg2**, either **Baremetal** or **Virtualization**, and then **FreeRTOS** under **Safety Island RTOS**:
+
+![Zena CSS build configuration with RD-Aspen Cfg2 and FreeRTOS selected.#center](kas_menu_freertos.png "Select FreeRTOS for Safety Island Cluster 1")
+
+Press **Save & Exit**, then build the complete software stack:
+
+```bash
+kas build
+```
+
+Launch the model after the build completes:
+
+```bash
+kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
+```
+
+At the SI CL1 console, enter `ping`. A successful four-core exchange confirms that the patched Yocto configuration built, signed, packaged, and booted FreeRTOS through the standard Zena CSS flow.
+
+![Zena CSS runfvp SI CL1 console.#center](run_fvp.png "Zena CSS runfvp SI CL1 console")
+
+Now that we've confirmed that the patch updates our pristine source to enable FreeRTOS into yocto, lets dive deeper into what the patch actually had to do to enable this integration. 
+
+## Investigate how the patch works
+
+The preceding patch already implements the changes described in this walkthrough. The remaining sections explain how the integration patch was derived and how to validate each boundary independently. If you've applied the patch, inspect the existing changes as you read, then continue to **Build and run the integrated image** for validation.
 
 The previous section identified [`yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb) as the recipe that creates the RSE flash image. Its dependencies include the recipe named by `SAFETY_ISLAND_CL1_RECIPE`:
 
@@ -75,6 +141,8 @@ yocto/kas/baremetal.yml:11:    - ../sw-ref-stack/yocto/kas/arm-auto-solutions.ym
 ```
 The build uses `arm-auto-solutions.yml` for both the `baremetal` and `virtualization` configurations.
 
+### Add the FreeRTOS machine configuration
+
 To add a FreeRTOS build option, remove the unconditional `zephyr` distro feature. Then add a menu entry that selects either FreeRTOS or Zephyr.
 
 Remove the unconditional `zephyr` setting from `yocto/kas/arm-auto-solutions.yml`:
@@ -116,7 +184,7 @@ The choice appears only when `RD_ASPEN_CFG2` and `USE_CASE_DEMOS` are enabled. I
 
 *For more information about choices, dependencies, and conditional defaults, see the [Kconfig language documentation](https://docs.kernel.org/kbuild/kconfig-language.html).*
 
-**Add a `kas` configuration fragment for each SI CL1 operating system.**
+#### Add the kas configuration fragments
 
 Create `sw-ref-stack/yocto/kas/si-cl1-freertos.yml` and add the following content:
 ```diff
@@ -241,6 +309,7 @@ set_source_files_properties(crt_replacements.c PROPERTIES
 ```
 
 After applying the packaging, version-tracking, and compiler fixes, the completed `freertos-demos-cl1.bb` recipe is:
+
 
 <details>
 
@@ -402,50 +471,10 @@ The CLI also accepts `pong`, `pang`, and `pung`. Each command starts the same fo
 
 Finally, return to `kas menu`, select Zephyr, and rebuild. Verify that the original SI CL1 firmware still boots. This last check matters because the integration adds a choice to an existing product configuration. Testing both branches confirms that FreeRTOS works without regressing the default Zephyr path.
 
-## Reproduce the integration
-
-The [`freertos-yocto-integration.patch`](freertos-yocto-integration.patch) file combines the FreeRTOS recipe, GCC 13 compatibility patch, machine configuration, and Kconfig selection changes described later in this section. It applies to a clean [`Zena CSS v2.2`](https://arm-zena-css.docs.arm.com/en/v2.2/user_guide/reproduce.html#download) folder.
-
-Run the following commands from the root of the Zena CSS checkout. Download the patch, then set `PATCH_FILE` to its absolute path. Confirm that the patch applies before changing the source tree:
-
-```bash
-PATCH_FILE=/absolute/path/to/freertos-yocto-integration.patch
-git apply --check "$PATCH_FILE"
-git apply "$PATCH_FILE"
-```
-
-Open the build configuration menu:
-
-```bash
-kas menu arm-zena-css/Kconfig
-```
-
-Select **RD-Aspen Cfg2**, either **Baremetal** or **Virtualization**, and then **FreeRTOS** under **Safety Island RTOS**:
-
-![Zena CSS build configuration with RD-Aspen Cfg2 and FreeRTOS selected.#center](kas_menu_freertos.png "Select FreeRTOS for Safety Island Cluster 1")
-
-Select **Build** or instead **Save & Exit**, then build the complete software stack:
-
-```bash
-kas build
-```
-
-Launch the model after the build completes:
-
-```bash
-kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
-```
-
-At the SI CL1 console, enter `ping`. A successful four-core exchange confirms that the patched Yocto configuration built, signed, packaged, and booted FreeRTOS through the standard Zena CSS flow.
-
-![Zena CSS runfvp SI CL1 console.#center](run_fvp.png "Zena CSS runfvp SI CL1 console")
-
-
-
 ## What you've accomplished and what's next
 
-The Cortex-R82AE FreeRTOS port is now integrated as a reproducible Yocto recipe and selectable as the Zena CSS SI CL1 firmware. The implementation was derived by tracing the working Zephyr flow, identifying the interface between its producer and consumer recipes, and implementing FreeRTOS against the same interface.
+The Cortex-R82AE FreeRTOS port is now integrated as a reproducible Yocto recipe and selectable as the Zena CSS SI CL1 firmware. You traced the working Zephyr flow and identified the interface between its producer and consumer recipes. You then implemented FreeRTOS against the same interface.
 
-Each boundary was verified separately: menu selection, distro features, recipe dependency, deployed artifact, signed flash image, and runtime output. The same investigation pattern can be used to replace or add other firmware components without manually modifying their consuming image recipes.
+You verified menu selection, distro features, and recipe dependencies separately. You also verified the deployed artifact, signed flash image, and runtime output. Use the same investigation pattern to replace or add other firmware components without manually modifying their consuming image recipes.
 
 The next platform-integration step is to add Message Handling Unit (MHU) communication backed by a shared-memory buffer. This provides communication between the FreeRTOS Safety Island application and the primary compute domain, replacing the equivalent inter-processor communication path used by the Zephyr application.

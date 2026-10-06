@@ -1,19 +1,19 @@
 ---
-title: Add FreeRTOS to the Zena CSS SW stack boot flow
-description: Replace the default Zephyr Cluster 1 firmware with a FreeRTOS Multi View 2 image and verify that it runs correctly through the standard Zena CSS secure boot flow.
+title: Add FreeRTOS to the Zena CSS software stack boot flow
+description: Replace the default Zephyr Cluster 1 firmware with a FreeRTOS image using GIC view 2 and verify that it runs correctly through the standard Zena CSS secure boot flow.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Run FreeRTOS in Zena CSS SW stack
+# Run FreeRTOS in the Zena CSS software stack
 
 ## Objective
 
-In the previous Learning Path, you validated the FreeRTOS using direct image loading on the Zena FVP.
+You've validated FreeRTOS by loading the image directly on the Zena FVP.
 
-In this Learning Path, you will validate the same application in the complete Zena CSS software stack by replacing the default Zephyr Cluster 1 firmware with a FreeRTOS image.
+Now validate the application in the complete Zena CSS software stack by replacing the default Zephyr Cluster 1 firmware with a FreeRTOS image.
 
 After completing this section, you will have verified that:
 
@@ -23,7 +23,7 @@ After completing this section, you will have verified that:
 - SCP firmware initialization remains unchanged.
 - GIC Multi-View interrupts continue to work correctly regarding view 2.
 
-This exercise uses a manually substituted binary. Yocto recipe integration is covered in the next Learning Path.
+This exercise uses a manually substituted binary. The next section covers Yocto recipe integration.
 
 ## Before you begin
 
@@ -56,21 +56,23 @@ The published demo already defines both configurations. Selecting `zena_css_fvp`
 
 ```c
 #elif defined( R82AE_PLATFORM_ZENA_CSS_FVP )
+    #define configGIC_SGI_CORE_AFFINITY_LEVEL          1U
     #define configINTERRUPT_CONTROLLER_BASE_ADDRESS    0x30200000UL
     #define configGIC_REDISTRIBUTOR_BASE_ADDRESS       0x30260000UL
     #define configINTERRUPT_PRIORITY_REGISTER_ADDRESS  ( configGIC_REDISTRIBUTOR_BASE_ADDRESS + 0x10400UL )
     #define configPL011_UART0_BASE_ADDRESS             0x2A410000UL
     #define configGIC_SGI_AFF2                         1U
-    #define configGENERIC_TIMER_INTERRUPT_ID           29U
+    #define configGENERIC_TIMER_INTERRUPT_ID           29UL
 ```
 
 
-## Build the FreeRTOS application
+### Compile the application
 
 Build with either GCC or Arm Compiler for Embedded and configure the exact full-stack platform target, `zena_css_fvp`:
 
 {{< tabpane code=true >}}
   {{< tab header="GCC" language="bash" >}}
+cd $HOME
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
 cmake -S . -B build/zena_css \
   -DCMAKE_TOOLCHAIN_FILE=gnu_toolchain.cmake \
@@ -83,6 +85,7 @@ aarch64-none-elf-objcopy -O binary \
   build/zena_css/r82ae_smp_fvp_gcc_armclang.bin
   {{< /tab >}}
   {{< tab header="Arm Compiler for Embedded" language="bash" >}}
+cd $HOME
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
 cmake -S . -B build/zena_css \
   -DCMAKE_TOOLCHAIN_FILE=armclang_toolchain.cmake \
@@ -143,15 +146,17 @@ The next step is to identify the Yocto recipe responsible for creating this imag
 
 Because the Zephyr image is packaged in `rse-flash-image.img`, search for recipes related to firmware image generation.
 
-From the `arm-zena-css` directory, find the RSE image definition:
+From the `arm-zena-css` directory, using `$ZENA_YOCTO_DIR` as the starting point, find the RSE image definition:
 
 ```bash
+cd $ZENA_YOCTO_DIR/arm-zena-css
 grep -nr "rse-flash-image" yocto/
 ```
 
 The result identifies [`firmware.cfg`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-bsp/recipes-bsp/images/files/fvp-rd-aspen/firmware.cfg?ref_type=heads#L31):
 
 ```output
+./arm-zena-css/yocto/meta-zena-css-bsp/recipes-bsp/images/files/fvp-rd-aspen/firmware.cfg
 yocto/meta-zena-css-bsp/recipes-bsp/images/files/fvp-rd-aspen/firmware.cfg:31:image rse-flash-image.img {
 ```
 
@@ -201,8 +206,17 @@ For an initial platform validation, none of that is required.
 
 The FreeRTOS binary has already been built externally:
 
+```bash
+cd $HOME
+pwd
+find . -name r82ae_smp_fvp_gcc_armclang.bin -print | grep -i zena_css
+```
+
+Output should be something like this (i.e. $HOME resolves to `/home/bob` in this example):
+
 ```output
-build/zena_css/r82ae_smp_fvp_gcc_armclang.bin
+/home/bob
+./FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/build/zena_css/r82ae_smp_fvp_gcc_armclang.bin
 ```
 
 The quickest way to validate functionality is therefore to replace the SI CL1 payload at the image-packaging stage.
@@ -213,7 +227,7 @@ In the next section, you will replace the default Zephyr SI CL1 firmware with th
 
 ## Replace the Cluster 1 firmware
 
-Open the file `yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb`.
+Open the file `$HOME/arm-auto-solutions/arm-zena-css/yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb`.
 
 Locate the following command in the `do_sign_images()` function:
 
@@ -222,10 +236,10 @@ cp ${RECIPE_SYSROOT}/firmware/${SI_CL1_FIRMWARE_BINARY} \
    ${B}/safety_island_cl1.bin
 ```
 
-Replace it with:
+Replace it with a completely specified path to `r82ae_smp_fvp_gcc_armclang.bin` binary (i.e. $HOME resolves to `/home/bob` in this example):
 
 ```bash
-cp /absolute/path/to/build/zena_css/r82ae_smp_fvp_gcc_armclang.bin \
+cp /home/bob/FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/build/zena_css/r82ae_smp_fvp_gcc_armclang.bin \
    ${B}/safety_island_cl1.bin
 ```
 <!--
@@ -236,10 +250,10 @@ cp ${RECIPE_SYSROOT}/firmware/${SI_CL1_FIRMWARE_BINARY} \
    ${B}/capsule_safety_island_cl1.bin
 ```
 
-Replace it with:
+Replace it with a completely specified path to `r82ae_smp_fvp_gcc_armclang.bin` binary (i.e. $HOME resolves to `/home/bob` in this example):
 
 ```bash
-cp /absolute/path/to/build/zena_css/r82ae_smp_fvp_gcc_armclang.bin \
+cp /home/bob/FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/build/zena_css/r82ae_smp_fvp_gcc_armclang.bin \
    ${B}/capsule_safety_island_cl1.bin
 ```
 -->
@@ -248,7 +262,14 @@ This replaces the default Zephyr Cluster 1 firmware while leaving the remainder 
 
 ## Rebuild the firmware image
 
-Force regeneration of the signed images:
+Create a new tmux session:
+
+```bash
+cd $HOME/arm-auto-solutions
+tmux new-session -s arm-auto-solutions
+```
+
+From the new tmux session, force regeneration of the signed images:
 
 ```bash
 kas shell -c 'bitbake firmware-fvp-rd-aspen -C sign_images'
@@ -262,8 +283,14 @@ kas build --target firmware-fvp-rd-aspen
 
 The generated flash image is:
 
+```bash
+find . -name rse-flash-image.img -print
+```
+
+Output should resemble:
+
 ```output
-build/tmp_baremetal/deploy/images/fvp-rd-aspen/rse-flash-image.img
+./build/tmp_baremetal/deploy/images/fvp-rd-aspen/rse-flash-image.img
 ```
 
 ## Boot the platform
@@ -274,15 +301,15 @@ Launch the Zena CSS FVP in a tmux session:
 kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
 ```
 
-Wait for the platform to complete boot, and then access the Safety Island Cluster 1 console.
+Wait for the platform to complete boot, and then access the Safety Island Cluster 1 console via pressing `"Ctrl-b"` followed by `"w"` and selecting `"SI C1 - terminal_uart_si_cluster1"`. Then in that console at the `">"` prompt type:
 
 Execute:
 
 ```console
-ping
+> ping
 ```
 
-Expected output:
+You should see the following expected output:
 
 ```output
 Ping from Core 0
@@ -299,10 +326,40 @@ Successful execution confirms that:
 - GIC Multi View 2 has been configured by the Safety Island CL0 (SCP).
 - FreeRTOS can replace Zephyr in the complete Zena CSS software stack.
 
+{{% notice NOTE %}}
+If you only see `"SI C0 - terminal_uart_si_cluster0"` when trying to access the Safety Island Cluster 1 above, in your current tmux session type: `"Ctrl-b"` followed by `"d"` to exit the tmux session back into the Ubuntu build host bash shell. Then: 
+
+```bash
+pkill '^tmux'
+```
+
+Next, bring up the yocto build menu for Zena CSS and select `"RD-Aspent Cfg2"` from the menu options. Then press `"Save and Exit"`:
+
+```bash
+kas menu arm-zena-css/Kconfig
+```
+
+Perform an incremental build:
+
+```bash
+kas build
+kas shell -c 'bitbake firmware-fvp-rd-aspen -C sign_images'
+kas build --target firmware-fvp-rd-aspen
+```
+
+Finally, re-run:
+
+```bash
+kas shell -c "../layers/meta-arm/scripts/runfvp -t tmux --verbose"
+```
+
+Allow the new instance to fully boot up to the login prompt.  After pressing `"Ctrl-b"` and `"w"` you should now see `"SI C1 - terminal_uart_si_cluster1"` that you can select and subsequently enter `"ping"` at the `">"` prompt.
+{{% /notice %}}
+
 ## What you've accomplished and what's next
 
 You have validated a FreeRTOS image in the complete Zena CSS software stack.
 
 By manually replacing the default Zephyr Cluster 1 firmware, you verified that the application works correctly with the standard secure boot, image signing, and firmware packaging flow.
 
-The next Learning Path shows how to automate this process using Yocto integration.
+The next section shows how to automate this process using Yocto integration.

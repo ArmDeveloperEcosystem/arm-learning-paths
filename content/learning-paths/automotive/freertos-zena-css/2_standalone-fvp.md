@@ -11,7 +11,7 @@ layout: learningpathall
 
 ## Objective
 
-The goal of this Learning Path is to demonstrate a practical method for porting a new operating system to a complex firmware stack such as Zena CSS. Although porting an OS to one of its cores may seem overwhelming, this Learning Path breaks the process into manageable steps with clear progress checks. It also explains the debugging techniques used at each stage.
+Build and validate the FreeRTOS SMP application on the standalone Cortex-R82AE FVP before adapting it to Zena CSS. Use staged progress checks and source-level or Tarmac debugging to diagnose early port failures.
 
 
 After completing this section, you will have verified that:
@@ -24,6 +24,27 @@ After completing this section, you will have verified that:
 - SMP scheduling, task affinity, shared state, and interprocessor interrupts operate as expected.
 - The generated ELF image can be used for source-level debugging.
 
+## Download and install Arm Development Studio
+
+`FVP_BaseR_Cortex-R82AE` is part of the ARM Developer Studio distribution and is licensed software.  
+
+Please follow the instructions [here](https://www.arm.com/products/development-tools/embedded-and-software/arm-development-studio?utm_source=digikey&utm_medium=distributor&utm_campaign=dev_studio) to download and install ARM Developer Studio. Please install the `UBL Gold` edition. 
+
+Once the ARM Developer Studio is installed, please send email to one of our distributors located [here](https://www.arm.com/products/development-tools/distributors) to request an eval license.
+
+You will receive a serial number that will then be used to generate an authentication code [here](https://developer.arm.com/support/licensing/user-based)
+
+Once the authentication code is generated, back on the Ubuntu host that you installed Developer Studio with, type:
+
+```bash
+sudo armlm activate --code <your activation code goes here>
+```
+
+If successful, your `FVP_BaseR_Cortex-R82AE` should successfully launch within the X11 desktop of the Ubuntu host after installing xterm:
+
+```bash
+sudo apt install -y xterm
+```
 
 ## Start from the Cortex-R82 SMP port
 
@@ -32,7 +53,7 @@ Begin with the partner-supported Cortex-R82 SMP demo. It provides the Armv8-R Fr
 The Zena CSS FVP provides a configuration that adds a second cluster containing four Cortex-R82AE cores.
 The objective is to run FreeRTOS on this R82AE cluster.
 
-Begin by running FreeRTOS on the standalone `FVP_BaseR_Cortex-R82AE`, which is available with *Arm Development Studio*. You can configure this FVP to closely match the Cortex-R82AE cluster from the Zena CSS FVP.
+Begin by running FreeRTOS on the standalone `FVP_BaseR_Cortex-R82AE`, which was installed above with *Arm Development Studio*. You can configure this FVP to closely match the Cortex-R82AE cluster from the Zena CSS FVP.
 
 The demo provides the board support code for `FVP_BaseR_Cortex-R82AE` and a four-task command-line application. Each task has a fixed core affinity, which makes scheduler and coherency problems visible during bring-up.
 
@@ -228,7 +249,7 @@ Using `fromelf --bin` can create an output directory containing one file for eac
 
 #### Start the FVP
 
-You can load the ELF file directly. The FVP uses the addresses recorded in the ELF file, and the image retains the symbols required for source-level debugging:
+You can load the ELF file directly from within your Ubuntu host's Desktop environment. The FVP will open both xterm and other windows within the Ubuntu desktop. The FVP uses the addresses recorded in the ELF file, and the image retains the symbols required for source-level debugging:
 
 {{< tabpane code=true >}}
   {{< tab header="GCC" language="bash" >}}

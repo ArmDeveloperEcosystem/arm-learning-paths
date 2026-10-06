@@ -1,5 +1,5 @@
 ---
-title: Direct loading FreeRTOS on the Zena CSS Safety Island Cluster 1
+title: Load FreeRTOS directly into Zena CSS Safety Island Cluster 1
 description: Adapt the Cortex-R82AE FreeRTOS port to the Zena CSS memory map and load it directly into the Safety Island cluster on the FVP.
 weight: 4
 
@@ -7,7 +7,7 @@ weight: 4
 layout: learningpathall
 ---
 
-# Direct load FreeRTOS on the Zena CSS FVP
+# Load FreeRTOS directly on the Zena CSS FVP
 
 ## Objective
 
@@ -24,16 +24,58 @@ After completing this section, you will have verified that:
 - UART output, SMP scheduling, core affinity, shared memory, and interprocessor interrupts operate correctly.
 
 
-## Building the Zena CSS SW stack
+## Build the Yocto-based Zena CSS software stack
 
-Build and run the Arm Zena CSS Reference Software Stack before you replace its Safety Island software. Follow the [build instructions in the Zena CSS user guide](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html).
+First, we need to fully build and run the Arm Zena CSS Reference Software Stack before you replace its Safety Island software. Please follow the [yocto build instructions in the Zena CSS user guide](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html). 
 
-Verify that the unmodified stack boots. This baseline separates FreeRTOS porting errors from build or FVP installation errors.
+{{% notice NOTE %}}
+It is important that when building the yocto Zena CSS image above, please select the `"RD-Aspen Cfg2"` option when running the menu display command immediately after accepting the EULA. Then, press `"Save and Exit"` to exit the config menu.
+{{% /notice %}}
+
+{{% notice IMPORTANT NOTE %}}
+If your Ubuntu 22.04 yocto build host has been recently updated with the latest security patches, the `tar` application will have been updated such that the above Zena CSS yocto build will now fail. 
+
+In order to fix this prior to attempting the yocto build, you need to download the source to `tar`, compile it with a specific enabler flag and install it replacing your Ubuntu 22.04's original `tar` command:
+
+```bash
+wget https://ftp.gnu.org/gnu/tar/tar-1.34.tar.gz
+tar xzpf tar-1.34.tar.gz
+cd tar-1.34
+FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix=/usr
+make -j$(nproc)
+sudo make install
+```
+
+Once replaced (AND ensuring that your Ubuntu host is 22.04... other versions will NOT work), your Yocto build for Zena should complete fully.
+{{% /notice %}}
+
+Verify that the unmodified stack boots. You will want to follow ALL instructions to complete your Zena yocto build prior to the next step. This baseline separates FreeRTOS porting errors from build or FVP installation errors. 
 
 The Zena CSS Runtime Security Engine (RSE) authenticates, loads, and starts the Safety Island image. During initial porting, bypass this flow and load the FreeRTOS binary directly into Safety Island Cluster 1 low-latency RAM (LLRAM). Direct loading shortens the debug cycle before you add image signing and flash-image packaging.
 
+Lastly, lets set an evironment variable that we'll use in subsequent sections noting where our Zena Yocto build was cloned to. By default it should be `$HOME/arm-auto-solutions`:
+
+```bash
+export ZENA_YOCTO_DIR=$HOME/arm-auto-solutions
+```
 
 ## Adapt the platform configuration
+
+
+### Start with your Zena `tmux` session
+
+You will want to open a `tmux` session for the next steps:
+
+```bash
+tmux new-session -s arm-auto-solutions
+```
+
+Verify that your yocto build has completed and is ready:
+
+```bash
+ls -al build/tmp_baremetal/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2
+export YOCTO_DIR=`pwd`
+```
 
 ### Identify the platform-specific configuration
 
@@ -99,11 +141,11 @@ To inspect the GIC address map exposed by the model, run:
 
 {{< tabpane code=true >}}
   {{< tab header="Baremetal" language="bash" >}}
-build/tmp_baremetal/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+$YOCTO_DIR/build/tmp_baremetal/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.gic.print-memory-map=1
   {{< /tab >}}
   {{< tab header="Virtualization" language="bash" >}}
-build/tmp_virtualization/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+$YOCTO_DIR/build/tmp_virtualization/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.gic.print-memory-map=1
   {{< /tab >}}
 {{< /tabpane >}}
@@ -166,6 +208,7 @@ Return to the Cortex-R82AE demo directory used in the previous section. Build wi
 
 {{< tabpane code=true >}}
   {{< tab header="GCC" language="bash" >}}
+cd $HOME
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
 cmake -S . -B build/zena_css_direct_load \
   -DCMAKE_TOOLCHAIN_FILE=gnu_toolchain.cmake \
@@ -178,6 +221,7 @@ aarch64-none-elf-objcopy -O binary \
   build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.bin
   {{< /tab >}}
   {{< tab header="Arm Compiler for Embedded" language="bash" >}}
+cd $HOME
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
 cmake -S . -B build/zena_css_direct_load \
   -DCMAKE_TOOLCHAIN_FILE=armclang_toolchain.cmake \
@@ -209,12 +253,12 @@ From the Zena CSS `yocto_project` directory, start the Safety Island cluster and
 
 {{< tabpane code=true >}}
   {{< tab header="Baremetal" language="bash" >}}
-<yocto project>/build/tmp_baremetal/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+$YOCTO_DIR/build/tmp_baremetal/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.cluster1.core_power_on_by_default=1 \
   --data "css.smb.si.cluster1_llram=build/tmp/deploy/images/aspen/si-hello-world.bin@0x0000"
   {{< /tab >}}
   {{< tab header="Virtualization" language="bash" >}}
-<yocto project>/build/tmp_virtualization/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+$YOCTO_DIR/build/tmp_virtualization/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.cluster1.core_power_on_by_default=1 \
   --data "css.smb.si.cluster1_llram=build/tmp/deploy/images/aspen/si-hello-world.bin@0x0000"
   {{< /tab >}}
@@ -226,14 +270,14 @@ After the baseline binary boots, run the FreeRTOS image with the additional mode
 
 {{< tabpane code=true >}}
   {{< tab header="Baremetal" language="bash" >}}
-<yocto project>/build/tmp_baremetal/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+$YOCTO_DIR/build/tmp_baremetal/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.cluster1.core_power_on_by_default=1 \
   -C css.smb.si.CL1_LLRAM_config=15 \
   -C css.smb.smd.ref_counter.non_arch_start_at_default=1 \
   --data "css.smb.si.cluster1_llram=/absolute/path/to/FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/build/zena_css_direct_load/r82ae_smp_fvp_gcc_armclang.bin@0x0000"
   {{< /tab >}}
   {{< tab header="Virtualization" language="bash" >}}
-<yocto project>/build/tmp_virtualization/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
+$YOCTO_DIR/build/tmp_virtualization/sysroots-components/x86_64/fvp-rd-aspen-native/usr/lib/fvp/fvp-rd-aspen/bin/FVP_Zena_CSS_Cfg2 \
   -C css.smb.si.cluster1.core_power_on_by_default=1 \
   -C css.smb.si.CL1_LLRAM_config=15 \
   -C css.smb.smd.ref_counter.non_arch_start_at_default=1 \
@@ -275,4 +319,4 @@ The port is ready for integration when it starts without debugger intervention a
 
 You've mapped the standalone port onto the Zena CSS Safety Island, loaded it directly into Cluster 1 LLRAM, and validated single-core and SMP execution in stages.
 
-Next, you'll replace the manual `--data` workflow with a Yocto-built, signed image selected as part of the full software stack.
+Next, you'll manually replace the Cluster 1 firmware payload and validate FreeRTOS through the standard signed boot flow. You'll then implement the Yocto recipe.
