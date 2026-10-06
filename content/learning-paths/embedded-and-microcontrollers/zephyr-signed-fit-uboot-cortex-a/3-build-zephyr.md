@@ -1,6 +1,6 @@
 ---
 title: Build a Zephyr image that U-Boot can start
-description: Use Workbench for Zephyr in VS Code to build a small Zephyr 4.4 application for a Cortex-A target, QEMU or the TI AM62L EVM, then check the arm64 image header that U-Boot's go command relies on.
+description: Build a Zephyr image for QEMU or the TI AM62L EVM with Workbench for Zephyr, and check the arm64 header used to start it from U-Boot.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Open Workbench for Zephyr
 
-You build Zephyr with [Workbench for Zephyr](https://z-workbench.com/) in VS Code, installed on the previous page. [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/) sets up a Cortex-M toolchain and workspace. This page does the same for Cortex-A: an AArch64 toolchain, and a Zephyr 4.4 workspace. The steps are the same for both targets; only the board you pick differs. The screenshots on this page were captured with the AM62L EVM selected, so if you are following the QEMU option, read the board field as `qemu_cortex_a53` and take every other field as shown.
+Use Workbench for Zephyr to import an AArch64 toolchain, create a Zephyr workspace, and build your application. Both targets follow the same steps; select the board that matches your target.
 
 Open VS Code on your working directory:
 
@@ -17,15 +17,15 @@ Open VS Code on your working directory:
 code $HOME/zephyr-secure-boot
 ```
 
-Then select the **Workbench for Zephyr** icon in the Activity Bar. The panel has one view each for **Applications**, **West workspaces**, **Toolchains** and **Host tools**.
+Select the **Workbench for Zephyr** icon in the Activity Bar. Its panel contains the **Applications**, **West workspaces**, **Toolchains**, and **Host tools** views.
 
 {{% notice Note %}}
-The screenshots were taken on Windows with the Zephyr SDK installed globally, so their paths start with `C:\Users\` and the SDK is tagged `[global]`; on your Ubuntu host the same fields take `/home/` paths and the `tools` directory you choose.
+The screenshots show Windows paths, a globally installed SDK, and the AM62L EVM. On Ubuntu, use your own paths and the SDK location you choose. If you chose QEMU, select `qemu_cortex_a53` wherever a board is requested.
 {{% /notice %}}
 
 ## Import the AArch64 toolchain
 
-Cortex-A cores need the Zephyr SDK's `aarch64-zephyr-elf` compiler, and the Minimal SDK type downloads only that one.
+Use the Zephyr SDK's `aarch64-zephyr-elf` compiler for your Cortex-A53 target. Select the **Minimal** SDK type and **aarch64** architecture to download that toolchain.
 
 In the **Workbench for Zephyr** panel, select **Add Toolchain** and fill in the form:
 
@@ -34,27 +34,27 @@ In the **Workbench for Zephyr** panel, select **Add Toolchain** and fill in the 
 - **Destination**: **Custom location**
 - **SDK Type**: **Minimal**
 - **Version**: v1.0.1
-- **aarch64** checkbox selected, the others clear
-- **Location**: a directory for the SDK, for example `/home/user/zephyr-secure-boot/tools`
+- Select **aarch64** and clear the other architecture checkboxes
+- **Location**: a parent directory where Workbench creates the SDK folder, for example `$HOME/zephyr-secure-boot`. Workbench adds a versioned subdirectory such as `zephyr-sdk-1.0.1` inside it.
 
-![The Add Toolchain form in Workbench for Zephyr with red rectangles around the fields to set: Add Toolchain in the sidebar, the Zephyr SDK family, the Minimal SDK type, the version v1.0.1, the selected aarch64 architecture, the Location field and the Import button#center](images/wz-add-toolchain.webp "Add Toolchain, filled in for the AM62L")
+![Workbench for Zephyr Add Toolchain form with Zephyr SDK 1.0.1, the Minimal SDK type, and aarch64 selected. These settings provide the compiler for both Cortex-A53 targets.#center](images/wz-add-toolchain.webp "Import the AArch64 toolchain")
 
 Select **Import**. The download takes a few minutes. When it finishes, the **Toolchains** view shows `Zephyr SDK 1.0.1` with a `GNU` entry and `aarch64-zephyr-elf` under it.
 
 ## Add a West workspace
 
-The workspace needs a Zephyr release that supports your board. `qemu_cortex_a53` has been in Zephyr for years, and board support for the AM62L EVM entered Zephyr in version 4.4, so this Learning Path uses 4.4.2 and one workspace builds both. Select **Add West Workspace** and fill in the form:
+Create a Zephyr 4.4.2 workspace for your chosen target. The same workspace supports QEMU and the AM62L EVM. Select **Add West Workspace** and fill in the form:
 
 - **Source location**: **From template**
-- **Minimal**, not **Full**, under the **Path** field
-- **Template**: your board vendor's, **Texas Instruments** here; it works for QEMU too, because the template is upstream Zephyr plus the vendor's HAL
+- Select **Minimal** under the **Path** field
+- **Template**: **Texas Instruments**, for either target
 - **Revision**: v4.4.2, or a later 4.x release
-- **Location**: `/home/user/zephyr-secure-boot`
+- **Location**: `$HOME/zephyr-secure-boot` (shown expanded, such as `/home/ubuntu/zephyr-secure-boot`)
 - **Subfolder**: `zephyrproject`
 
-![The Add West Workspace form in Workbench for Zephyr with red rectangles around the fields to set: Add West Workspace in the sidebar, the From template source, the Minimal option, the Texas Instruments template, the v4.4.2 revision, the Location field and the Import button#center](images/wz-add-west-workspace.webp "Add West Workspace, set to Zephyr 4.4.2 with the Texas Instruments template")
+![Workbench for Zephyr Add West Workspace form using the Minimal option, Texas Instruments template, and Zephyr v4.4.2. The workspace is named zephyrproject and supports either target.#center](images/wz-add-west-workspace.webp "Create the Zephyr 4.4.2 workspace")
 
-Select **Import**. Workbench clones Zephyr, the vendor's HAL (hardware abstraction layer) and the other modules into `zephyrproject/deps`, the longest step on this page, and `zephyrproject` appears in the **West workspaces** view.
+Select **Import**. Workbench downloads Zephyr, the vendor's hardware abstraction layer (HAL), and other modules into `zephyrproject/deps`. This can take several minutes. When it finishes, confirm that `zephyrproject` appears in the **West workspaces** view.
 
 ## Create the application
 
@@ -70,9 +70,9 @@ Select **Add Application** and fill in the wizard:
 - **Application type**: **West workspace application**
 - **Project Location**: `zephyrproject/applications/hello`, filled in by the wizard
 
-The identifier under the board name, `qemu_cortex_a53` or `am62l_evm/am62l3/a53`, is the `BOARD` value in your environment file; on another board, select the entry that matches your `BOARD`.
+Check that the board identifier matches `BOARD` in your environment file: `qemu_cortex_a53` for QEMU or `am62l_evm/am62l3/a53` for the AM62L EVM.
 
-![The Add Application wizard in Workbench for Zephyr with red rectangles around the fields to set: Add Application in the sidebar, the zephyrproject workspace, the zephyr-sdk-1.0.1 toolchain, the TI AM62L Evaluation Module board, the hello_world template, the project name hello, the project location under zephyrproject/applications and the Create button. A call-out beside the board field says to select QEMU Emulation for ARM Cortex-A53 instead if you follow the QEMU option.#center](images/wz-add-application.webp "Add Application, filled in for the AM62L EVM; the call-out gives the QEMU board")
+![Workbench for Zephyr Add Application wizard creating hello from the hello_world sample with the zephyrproject workspace and Zephyr SDK 1.0.1. The AM62L EVM is selected; the callout identifies the alternative QEMU Cortex-A53 board.#center](images/wz-add-application.webp "Create hello for your chosen target")
 
 Select **Create**. The application `hello` appears in the **Applications** view, marked `[with zephyrproject]`, and `zephyrproject/applications/hello` holds the sample's `CMakeLists.txt`, `prj.conf` and `src/main.c`.
 
@@ -89,9 +89,9 @@ CONFIG_BOOT_BANNER=y
 CONFIG_AARCH64_IMAGE_HEADER=y
 ```
 
-`CONFIG_PRINTK` gives you `printk()` on the console, and `CONFIG_BOOT_BANNER` prints the `*** Booting Zephyr OS build ... ***` line, the first sign that the jump from U-Boot landed.
+`CONFIG_PRINTK` enables console output with `printk()`. `CONFIG_BOOT_BANNER` prints the `*** Booting Zephyr OS build ... ***` line, confirming that Zephyr has started.
 
-Replace the contents of `src/main.c` with the following code. The banner names the image and its key, so that on the optional page [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) the console tells you which of two images ran.
+Replace the contents of `src/main.c` with the following code. Its banner identifies image A and the key you'll use to sign it. This helps you distinguish the images during the optional [wrong-key and tampered-image tests](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/).
 
 ```c
 #include <zephyr/kernel.h>
@@ -117,7 +117,7 @@ int main(void)
 
 Save both files.
 
-## Two settings that matter
+## Configure Non-secure execution and the arm64 header
 
 `CONFIG_ARMV8_A_NS=y` tells Zephyr that it runs in the Non-secure world, the one U-Boot hands it. Without it, the driver of the GICv3 (Generic Interrupt Controller) never programs the Non-secure registers, the timer interrupt never arrives, and Zephyr hangs right after its banner.
 
@@ -127,7 +127,7 @@ The configurations for `qemu_cortex_a53` and `am62l_evm/am62l3/a53` already set 
 
 ## Build the application
 
-In the **Applications** view, right-click `hello` and select **Build**. Workbench runs `west build` in the terminal with the build directory `build/primary` inside the application, and the linker prints its memory report near the end. The output is similar to:
+In the **Applications** view, open the context menu for `hello` and select **Build**. Workbench runs `west build` in the terminal and writes the build outputs to the application's `build/primary` directory. Near the end, the linker prints a memory report similar to:
 
 ```output
 Memory region         Used Size  Region Size  %age Used
@@ -136,13 +136,37 @@ Memory region         Used Size  Region Size  %age Used
         IDT_LIST:           0 B        32 KB      0.00%
 ```
 
-![The Applications view in Workbench for Zephyr and the build terminal, with red rectangles around the hello application, listed with its zephyrproject workspace, zephyr-sdk-1.0.1 toolchain and am62l_evm/am62l3/a53 board, and around the Memory region table near the end of a successful build#center](images/wz-build.webp "The hello application built for the AM62L EVM")
+![Workbench for Zephyr showing hello configured for the AM62L EVM and the build terminal's memory report. The report appears near the end of the build; the generated zephyr.bin is checked in the next step.#center](images/wz-build.webp "Build hello for the AM62L EVM")
 
 The result is `$WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin`, a raw binary linked at `ZEPHYR_ADDR`, the start of the target's `zephyr,sram` memory node. It is about 37 KB for `qemu_cortex_a53`, whose memory report shows 128 MB of RAM, and about 58 KB for the AM62L EVM, which reports 2016 MB.
 
+{{% notice Troubleshooting %}}
+On an `aarch64` host, the build can fail with `exec format error` when it invokes `cmake` from `~/.zinstaller`. Some versions of the Workbench for Zephyr host tools install `x86_64` builds of CMake and Ninja, which can't run on Arm. Verify Host Tools can also report a misleading error, such as `-255 package(s) are not installed`, for the same reason.
+
+Confirm the architecture of the installed tools:
+
+```bash
+file ~/.zinstaller/tools/cmake-*/bin/cmake ~/.zinstaller/tools/ninja/ninja
+```
+
+If the output reports `x86-64`, point the two tools at your system's Arm builds, after installing them with `sudo apt install -y cmake ninja-build`:
+
+```bash
+ln -sf "$(command -v cmake)" ~/.zinstaller/tools/cmake-*/bin/cmake
+ln -sf "$(command -v ninja)" ~/.zinstaller/tools/ninja/ninja
+```
+
+Rebuild the application. The Zephyr SDK compiler is a native Arm binary and doesn't need this change.
+{{% /notice %}}
+
 ## Check the arm64 image header
 
-Open a terminal (**Terminal > New Terminal** in VS Code, or any shell), load the environment for your target with `source $HOME/zephyr-secure-boot/env-qemu.sh` or `source $HOME/zephyr-secure-boot/env-am62l.sh`, and print the header's magic number at offset `0x38`:
+Open a terminal with **Terminal > New Terminal** in VS Code, or use an existing shell. Load your target's environment file:
+
+- **QEMU**: `source $HOME/zephyr-secure-boot/env-qemu.sh`
+- **AM62L EVM**: `source $HOME/zephyr-secure-boot/env-am62l.sh`
+
+Print the header's magic number at offset `0x38`:
 
 ```bash
 od -An -c -j 0x38 -N4 $WORK/zephyrproject/applications/hello/build/primary/zephyr/zephyr.bin
@@ -158,4 +182,4 @@ The expected output is:
 
 ## What you've accomplished and what's next
 
-You've built a Zephyr image for your target's Cortex-A53, linked at `ZEPHYR_ADDR` and carrying the arm64 header that `go` needs. Next, you [create the signing keys and sign the image into a FIT](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/4-sign-zephyr/).
+You've built a Zephyr image for your target's Cortex-A53, linked at `ZEPHYR_ADDR`, and checked its arm64 header. Next, you'll create the signing keys and package the image in a signed FIT for U-Boot to verify.

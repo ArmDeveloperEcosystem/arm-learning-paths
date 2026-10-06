@@ -1,26 +1,26 @@
 ---
-title: Boot Zephyr from a signed FIT image with U-Boot on Arm Cortex-A
+title: Boot a signed Zephyr image with U-Boot on Arm Cortex-A
 
 draft: true                                                                        
 cascade:                                                                           
     draft: true 
 
-description: Learn how to sign a Zephyr image in a FIT, build the public key into U-Boot, and start Zephyr on Arm Cortex-A only after U-Boot verifies it, in QEMU with no hardware and then on a TI AM62L EVM.
+description: Sign a Zephyr FIT image and configure U-Boot to verify its signature and payload hash before booting on Arm Cortex-A in QEMU or on a TI AM62L EVM.
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an advanced topic for embedded developers who run Zephyr on an Arm Cortex-A processor behind U-Boot and want the bootloader to verify the Zephyr image before starting it.
+who_is_this_for: This is an advanced topic for embedded developers who boot Zephyr from U-Boot on an Arm Cortex-A processor and want U-Boot to verify the Zephyr image before starting it.
 
 learning_objectives:
-    - Explain where a Zephyr image sits in the Cortex-A boot chain and which stage can verify it
-    - Build and sign a Zephyr image in a FIT, and build the public key into U-Boot without changing U-Boot source
-    - Write a U-Boot boot command that starts Zephyr only after the signature and hash checks pass, and optionally prove on the target that it refuses a wrong key and a tampered image
-    - Explain what a board in its development state, and what an emulator, each leave unverified, and what a production device needs on top
+    - Identify where U-Boot verifies Zephyr in the Arm Cortex-A boot chain
+    - Build and sign a Flattened Image Tree (FIT) containing Zephyr, and embed the public key in U-Boot without changing its source
+    - Configure U-Boot to verify Zephyr before booting, and optionally test rejection of wrong-key and tampered images
+    - Explain the verification boundary in QEMU and on a development board, and how fusing your key extends trust in production
 
 prerequisites:
-    - One of two targets, either QEMU, which needs no hardware at all, or a TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with a micro-SD card and an SD card reader for your host, a micro-USB cable for the console and a USB-C Power Delivery (PD) power supply
-    - A Linux host running Ubuntu 22.04 or 24.04, with about 5 GB of free disk space for QEMU or 20 GB for the AM62L EVM; the EVM also needs an x86_64 host, because the TI SDK ships its installer and cross compiler as x86_64 binaries only
-    - Visual Studio Code with the [Workbench for Zephyr extension](https://marketplace.visualstudio.com/items?itemName=Ac6.zephyr-workbench) and its host tools installed, as in the first steps of [Build Zephyr projects with Workbench for Zephyr in VS Code](/learning-paths/embedded-and-microcontrollers/zephyr_vsworkbench/)
+    - One of two targets - QEMU, which needs no hardware, or a TI [AM62L EVM](https://www.ti.com/tool/TMDS62LEVM) with accessories to power it, write an SD card, and attach a serial console
+    - A Linux host running Ubuntu 22.04 or 24.04, with about 20 GB of free disk space; QEMU runs on x86_64 or arm64, while the AM62L EVM needs x86_64 for the TI SDK
+    - Visual Studio Code with the [Workbench for Zephyr extension](https://marketplace.visualstudio.com/items?itemName=Ac6.zephyr-workbench) installed
     - Basic knowledge of U-Boot and the Linux command line
 
 author:
@@ -76,22 +76,6 @@ further_reading:
         title: Zephyr QEMU Cortex-A53 board documentation
         link: https://docs.zephyrproject.org/latest/boards/qemu/cortex_a53/doc/index.html
         type: documentation
-    - resource:
-        title: Workbench for Zephyr
-        link: https://z-workbench.com/
-        type: website
-    - resource:
-        title: Ac6 training, Zephyr RTOS programming
-        link: https://www.ac6-training.com/en/rt5/zephyr-rtos-programming
-        type: website
-    - resource:
-        title: Ac6 training, Secured embedded Linux platform build
-        link: https://www.ac6-training.com/en/sec8/secured-embedded-linux-platform-build
-        type: website
-    - resource:
-        title: Ac6 training, AI-assisted embedded development
-        link: https://www.ac6-training.com/en/ai1/ai-assisted-embedded-development
-        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
