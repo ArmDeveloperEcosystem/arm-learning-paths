@@ -19,13 +19,59 @@ prerequisites:
     - Visual Studio Code with the [Workbench for Zephyr extension](https://marketplace.visualstudio.com/items?itemName=Ac6.zephyr-workbench) installed
     - Basic knowledge of U-Boot and the Linux command line
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-06T18:12:37Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: d29bf65cd5b55f7b412beeb0a62873a02eec10189fb6c259f2a5f84f9d016416
+  summary_generated_at: '2026-10-06T18:12:37Z'
+  summary_source_hash: d29bf65cd5b55f7b412beeb0a62873a02eec10189fb6c259f2a5f84f9d016416
+  faq_generated_at: '2026-10-06T18:12:37Z'
+  faq_source_hash: d29bf65cd5b55f7b412beeb0a62873a02eec10189fb6c259f2a5f84f9d016416
+  summary: >-
+    You'll build a Zephyr image for Arm Cortex-A and configure U-Boot to verify its signed FIT before booting. After choosing QEMU or a TI AM62L evaluation module (EVM), you'll set up the host
+    tools, build Zephyr, sign the FIT, and embed the trusted public key in U-Boot. You'll then boot
+    the image, optionally test rejection of untrusted or tampered images, and examine what remains
+    outside the verification boundary.
+  faqs:
+  - question: Do I need an AM62L EVM to follow this Learning Path?
+    answer: >-
+      No. You can use QEMU without hardware. If you have an AM62L EVM, follow its target-specific
+      setup and boot-media instructions instead.
+  - question: Why does U-Boot need the public key in its control device tree?
+    answer: >-
+      You'll embed the trusted public key in U-Boot's control device tree so that it can verify the FIT
+      configuration signature. The key's `required = "conf"` setting makes U-Boot reject a FIT
+      without a valid signature from that key.
+  - question: How can I check the signed FIT before booting the target?
+    answer: >-
+      Use U-Boot's `fit_check_sign` with your signed FIT and built `u-boot.dtb`. This checks the
+      FIT against the public key in the control device tree before you prepare the boot media.
+  - question: How do I confirm that verification succeeded on the target?
+    answer: >-
+      Look for `sha256,rsa2048:key-a+ OK` in U-Boot's output, followed by the Zephyr image A banner.
+      You can also run the optional wrong-key and tampered-image tests to check that U-Boot refuses
+      to start either image.
+  - question: Does this setup authenticate U-Boot as well as Zephyr?
+    answer: >-
+      No. In QEMU, you run U-Boot without an earlier stage that authenticates it. On the AM62L EVM,
+      you leave the device in High Security, Field Securable (HS-FS) development state, where earlier stages accept boot files
+      signed with any key. To extend trust to U-Boot in production, you need to provision your key,
+      move the device to High Security, Security Enforced (HS-SE), and sign the earlier boot files.
+# END generated_summary_faq
+
 author:
     - Roy Jamil
     - Odin Shen
 
 # New Learning Paths are opted in for the next manual generated summary/FAQ run.
 # The generator resets this to false after a successful write.
-generate_summary_faq: true
+generate_summary_faq: false
 
 # Optional one-shot controls: set either field to true to regenerate just that
 # generated section the next time the summary/FAQ tool runs. The tool resets

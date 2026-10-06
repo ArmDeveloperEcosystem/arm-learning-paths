@@ -1,5 +1,5 @@
 ---
-title: Boot the target
+title: Boot your QEMU or TI AM62L EVM target
 description: Prepare boot media for QEMU or the TI AM62L EVM and confirm that U-Boot verifies the signed Zephyr FIT before starting the application.
 weight: 7
 

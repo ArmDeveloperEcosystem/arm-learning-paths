@@ -19,9 +19,9 @@ The AM62L evaluation module (EVM) has those earlier stages, but you've left it i
 
 On the EVM, the trusted public key is inside `u-boot.img` on an unprotected File Allocation Table (FAT) partition. Anyone who can replace that file can replace the key and boot command. Production needs an authenticated U-Boot and controls that prevent bypassing its verification step.
 
-## What production needs
+## What you need for production
 
-For production, you need the following:
+For production, ensure that you complete the following steps:
 
 ### Fuse your key and move to the production state
 
