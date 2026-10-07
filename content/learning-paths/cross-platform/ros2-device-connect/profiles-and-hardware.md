@@ -15,7 +15,7 @@ You overrode the `rpi5` profile earlier to point at a generic ROS 2 container. E
 
 | Profile | Driver | Default container | ROS 2 distribution | RPCs added to the shared inspection RPCs |
 |---|---|---|---|---|
-| `rpi5` | `puppypi_device.py` | `test` | Humble | PuppyPi RPCs have no effect without a robot, so this profile works as a general test target |
+| `rpi5` | `puppypi_device.py` | `test` | Humble | PuppyPi remote procedure calls (RPCs) have no effect without a robot, so this profile works as a general test target |
 | `rpi_camera` | `camera_device.py` | `pi_ros` | Jazzy | `get_raw_image(quality)` |
 | `puppypi` | `puppypi_device.py` | `puppypi_ros2` | Humble | `run_action(action)`, `set_velocity(x, y, yaw_rate)`, `stop()` |
 
@@ -33,7 +33,7 @@ export ROS_SETUP="${ROS_SETUP:-/opt/ros/jazzy/setup.bash}"
 export WORKSPACE_SETUP="${WORKSPACE_SETUP:-${ROS_SETUP}}"
 ```
 
-Every value uses the `${VAR:-default}` form, so you can override any setting inline, as you did with `ROS_CONTAINER` and `WORKSPACE_SETUP`. For a new deployment, you can also point the launcher at your own profile file:
+Every value uses the `${VAR:-default}` form. You can therefore override any setting inline, as you did with `ROS_CONTAINER` and `WORKSPACE_SETUP`. For a new deployment, you can also point the launcher at your own profile file:
 
 ```bash
 PROFILE_FILE=/path/to/my-robot.env ./ros2-device-connect/start_d2d.sh
