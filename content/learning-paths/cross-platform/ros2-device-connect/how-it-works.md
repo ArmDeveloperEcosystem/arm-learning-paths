@@ -30,6 +30,8 @@ You've already used this layer. From the host, `docker exec` runs a `ros2` comma
 docker exec ros2_test bash -lc 'source /opt/ros/humble/setup.bash && ros2 topic list'
 ```
 
+The output is similar to:
+
 ```output
 /chatter
 /parameter_events
@@ -82,7 +84,7 @@ The mixin provides six inspection RPCs in total for the following:
 
 The inspection RPCs all follow the same pattern.
 
-The following table shows how the Device Connect RPC names map back to the ROS 2 operations they run or wrap:
+The following table shows how the shared inspection and hardware-specific RPCs map to the ROS 2 operations they run or wrap:
 
 | Device Connect RPC | ROS 2 operation inside the container | Purpose |
 |---|---|---|

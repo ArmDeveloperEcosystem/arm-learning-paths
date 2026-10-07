@@ -27,7 +27,7 @@ ROS 2 remains the robot's internal software graph. Device Connect adds an extern
 
 ROS 2 is an open source middleware and toolset for building robotics applications. Applications are split into nodes that exchange data over topics (publish and subscribe), services (request and response), and actions (long-running goals). ROS 2 publishes official `arm64` packages and container images, so it runs natively on Arm platforms from a Raspberry Pi to a Neoverse cloud server.
 
-You'll use ROS 2 inside a Docker container. For more information about ROS2, see the following guides:
+You'll use ROS 2 inside a Docker container. For more information about ROS 2, see the following guides:
 
 - The [ROS 2 install guide](/install-guides/ros2/) to install ROS 2 natively on Arm Linux and run the talker and listener demo
 - The [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/) Learning Path for a full containerized ROS 2 robotics workload on Arm, including the `rmw_zenoh` middleware
@@ -53,7 +53,7 @@ For more information about the SDK primitives, see the following Learning Paths:
 
 The [ros2-device-connect](https://github.com/odincodeshen/ros2-device-connect) repository contains the adapter that you'll run. It doesn't modify or link against ROS 2. Instead, it reaches the ROS 2 graph by running ROS 2 command-line tools inside the ROS 2 container with `docker exec`:
 
-```output
+```text
 Python client  ──Zenoh (D2D)──▶  Device Connect adapter  ──docker exec──▶  ROS 2 container
 (agent tools)                    (DeviceDriver on host)                     (ros2 topic list, ...)
 ```

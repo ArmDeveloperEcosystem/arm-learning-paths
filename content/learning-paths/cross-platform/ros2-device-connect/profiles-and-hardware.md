@@ -1,6 +1,6 @@
 ---
-title: Use deployment profiles and try the adapter on real hardware
-description: Learn how ros2-device-connect profiles select drivers for different hardware, and how to run the adapter on a Raspberry Pi 5 with a camera or on a ROS 2 robot.
+title: Explore deployment profiles and try the adapter with a Raspberry Pi 5 camera
+description: Use a ros2-device-connect profile to run the adapter with a Raspberry Pi 5 camera, and review how the PuppyPi robot profile exposes selected capabilities.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -9,11 +9,13 @@ layout: learningpathall
 
 ## How profiles select the hardware configuration
 
+You've completed the core Device Connect task. The following profiles are optional extensions: you can try the adapter with a Raspberry Pi 5 camera, review the PuppyPi robot profile, or adapt a profile for your own ROS 2 system.
+
 You overrode the `rpi5` profile earlier to point at a generic ROS 2 container. Each profile in `profiles/` is a shell file that describes one deployment. It sets which driver runs, which container the driver talks to, and which ROS 2 setup scripts it sources.
 
 | Profile | Driver | Default container | ROS 2 distribution | RPCs added to the shared inspection RPCs |
 |---|---|---|---|---|
-| `rpi5` | `puppypi_device.py` | `test` | Humble | The PuppyPi Remote procedure calls (RPCs), which have no effect without a robot, so this profile works as a general test target |
+| `rpi5` | `puppypi_device.py` | `test` | Humble | PuppyPi RPCs have no effect without a robot, so this profile works as a general test target |
 | `rpi_camera` | `camera_device.py` | `pi_ros` | Jazzy | `get_raw_image(quality)` |
 | `puppypi` | `puppypi_device.py` | `puppypi_ros2` | Humble | `run_action(action)`, `set_velocity(x, y, yaw_rate)`, `stop()` |
 
@@ -85,7 +87,7 @@ async def get_raw_image(self, quality: int = DEFAULT_JPEG_QUALITY) -> dict[str, 
 
 The RPC runs `capture_frame.py` inside the container. The script subscribes to `/image_raw`, takes one frame, and returns it as a base64-encoded JPEG. It subscribes with ROS 2's `qos_profile_sensor_data` because `v4l2_camera` publishes with best-effort QoS. A subscriber that uses the default reliable QoS would never match the publisher, and the capture would silently time out.
 
-This is the perception side of the robotics pattern: a ROS 2 sensor stream is converted into a typed Device Connect capability. The PuppyPi profile that you'll try next uses the same pattern for the action side of robotics.
+This is the perception side of the robotics pattern: a ROS 2 sensor stream is converted into a typed Device Connect capability. The PuppyPi profile described next uses the same pattern for the action side of robotics.
 
 From a client, call the RPC and save the image. Use the same client environment variables as earlier. Replace `127.0.0.1` with the IP address of the Raspberry Pi if you run the client on another machine:
 
@@ -102,7 +104,7 @@ with open("capture.jpg", "wb") as f:
 
 The `view_image.py` script in the repository does the same thing against a device in fabric mode.
 
-## Try a ROS 2 robot
+## Understand the PuppyPi robot profile
 
 The `puppypi` profile targets a [Hiwonder PuppyPi quadruped](https://www.hiwonder.com/products/puppypi), a small four-legged robot built around Raspberry Pi-class hardware and a ROS 2 control stack. 
 

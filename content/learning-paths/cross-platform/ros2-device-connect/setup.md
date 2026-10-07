@@ -109,6 +109,8 @@ Verify that both packages import:
 .venv/bin/python -c "import device_connect_edge, device_connect_agent_tools; print('Device Connect OK')"
 ```
 
+The expected output is:
+
 ```output
 Device Connect OK
 ```
