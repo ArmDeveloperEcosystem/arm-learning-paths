@@ -164,12 +164,4 @@ The following is an example set of results:
 
 You've pinned CPU cores across all three layers and benchmarked them with `sysbench`.
 
-You have configured and run nested virtualization on an Arm server from end to end. Along the way, you:
-
-- Enabled nested virtualization on an Arm64 bare metal host and confirmed FEAT_NV2 support.
-- Created and started an L1 guest VM with `virt-install` and `cloud-init`.
-- Configured a second VM to act as a hypervisor by enabling virtualization passthrough.
-- Booted a nested L2 guest VM inside the hypervisor.
-- 
-
-You can now use these techniques to run virtual machines inside virtual machines on Arm, whether for workload isolation, hypervisor development and testing, or running microVMs in cloud environments.
+You can now use the techniques described in the Learning Path to run VMs inside VMs on Arm for workload isolation, hypervisor development and testing, or running microVMs in cloud environments.
