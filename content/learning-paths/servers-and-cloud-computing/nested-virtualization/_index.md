@@ -1,21 +1,16 @@
 ---
 title: Configure and run nested virtualization on an Arm server
-
-draft: true
-cascade:
-    draft: true
       
 description: Set up nested virtualization on an Arm server so guest virtual machines can act as hypervisors and run other virtual machines inside them.
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for system administrators who want to enable nested virtualization, so users can run virtual machines inside other virtual machines.
+who_is_this_for: This is an advanced topic for system administrators who want to enable users to run virtual machines (VMs) inside VMs.
 
 learning_objectives: 
-    - Enable nested virtualization on an Arm server and verify the host supports it
-    - Create and start Arm64 guest virtual machines using virt-install, cloud-init, and virsh
-    - Configure a guest VM to act as a hypervisor and run a nested VM inside it
-    - Measure the performance overhead of a nested VM against a standard guest VM and bare metal using sysbench
+    - Start a VM on Linux using virsh.
+    - Configure a host and guest VM to allow the guest VM to function as a hypervisor.
+    - Use a standard benchmark suite to measure the performance impact of running software inside a nested VM against a regular guest VM and on bare metal.
 
 prerequisites:
     - An Arm64 bare metal server with 64 cores or more, supporting FEAT_NV2 (available in Arm v8.4-A and later), with Fedora 44 installed
