@@ -7,17 +7,64 @@ who_is_this_for: This is an advanced topic for developers, ML engineers, and clo
 
 learning_objectives:
     - Quantize and run the Phi-4-mini model with ONNX Runtime on Azure.
-    - Analyze performance on Arm Neoverse N2 based Azure Cobalt 100 VMs.
+    - Analyze performance on Arm Neoverse N2-based Azure VMs powered by Cobalt 100.
 
 prerequisites:
-    - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate cloud service provider. This Learning Path has been tested on an Azure Cobalt 100 virtual machine.
-    - Basic understanding of Python and machine learning concepts.
-    - Familiarity with ONNX Runtime and Azure cloud services.
-    - Knowledge of Large Language Model (LLM) fundamentals.
+    - A Microsoft Azure [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/)
+    - Basic understanding of Python and machine learning concepts
+    - Familiarity with ONNX Runtime and Azure cloud services
+    - Knowledge of large language model (LLM) fundamentals
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-01T19:42:07Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 8c80b9778bfd1b0393e43e5eff673f0f83ec1e49c221ad33fe378fa6e5eba082
+  summary_generated_at: '2026-10-01T19:42:07Z'
+  summary_source_hash: 8c80b9778bfd1b0393e43e5eff673f0f83ec1e49c221ad33fe378fa6e5eba082
+  faq_generated_at: '2026-10-01T19:42:07Z'
+  faq_source_hash: 8c80b9778bfd1b0393e43e5eff673f0f83ec1e49c221ad33fe378fa6e5eba082
+  summary: >-
+    You'll build ONNX Runtime on an Arm-based Azure server powered by Cobalt 100 and use it to run a Phi-4-mini
+    chatbot. First, you'll prepare Ubuntu 24.04 LTS, quantize and convert the model, and start the Python
+    chatbot with `onnxruntime_genai`. You'll then send text prompts and inspect the terminal metrics,
+    including tokens per second and time to first token, to validate inference and assess basic
+    performance on the Arm CPU.
+  faqs:
+  - question: What do I pass to the `--model_path` argument in the chatbot script?
+    answer: >-
+      Use the directory containing `genai_config.json` and `model.onnx` for the downloaded
+      INT4-quantized Phi-4-mini model. With the provided download command, pass
+      `cpu_and_mobile/cpu-int4-rtn-block-32-acc-level-4` as the model path.
+  - question: Which execution provider should I choose when running the chatbot?
+    answer: >-
+      If you're unsure, keep the default execution provider, `follow_config`,
+      so that the script uses providers defined in the model config. Override only if you need to explicitly
+      set a different provider, as the script clears providers when you do.
+  - question: How do I know that the chatbot server started correctly?
+    answer: >-
+      You should see the model load without errors and a prompt to enter text. If you start
+      the script with `--timings` or `-g`, you'll also see tokens
+      per second and time to first token after sending a prompt.
+  - question: What Azure VM configuration should I use?
+    answer: >-
+      Use the tested configuration as your reference: an Azure `Dpls_v6` Cobalt 100 VM
+      with 32 cores, 64 GB of RAM, and 32 GB of disk space. 
+  - question: How can I limit the number of tokens in a chatbot response?
+    answer: >-
+      Set `--max_length` (or `-l`) when you run `phi4.py`. This limit includes both the prompt
+      and generated tokens, so it isn't a limit on the response alone. If you omit the option,
+      the script uses a maximum length of 2048 tokens.
+# END generated_summary_faq
 
 author: Nobel Chowdary Mandepudi
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -54,4 +101,3 @@ weight: 1                       # _index.md always has a weight of 1 to order co
 layout: "learningpathall"       # All files under learning paths use this wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

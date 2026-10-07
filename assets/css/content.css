@@ -186,15 +186,9 @@ div.answer label {
 .normal-tabpane {
     box-sizing: border-box;
     margin-left: 16px;
+    margin-right: 16px;
     margin-top: 8px;
     margin-bottom: 8px;
-    
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 16px;
-
-    background-color:                                  var(--arm-color-surface);
-    --ads-horizontal-tabs-navigation-background-color: var(--arm-color-surface); 
 }
 .normal-horizontal-tabs {
     --ads-horizontal-tabs-tab-color: white;
@@ -202,13 +196,24 @@ div.answer label {
     --ads-horizontal-tabs-underline-color: var(--arm-orange);
 
     --ads-horizontal-tabs-tab-color-hover: var(--lp-hover-text);
+    --ads-horizontal-tabs-navigation-background-color: var(--arm-color-surface);
     --ads-horizontal-tabs-tab-content-background-color: var(--arm-color-footing);
+}
+
+.normal-horizontal-tabs .normal-tab {
+    padding-bottom: 16px;
 }
 
 .normal-horizontal-tabs table, .normal-horizontal-tabs p {
     padding-top: 16px;
     padding-left: 16px;
     padding-right: 16px;
+}
+.normal-horizontal-tabs div.code-toolbar {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 16px;
+    margin-bottom: 16px;
 }
 .normal-horizontal-tabs table{
     padding-bottom: 8px;

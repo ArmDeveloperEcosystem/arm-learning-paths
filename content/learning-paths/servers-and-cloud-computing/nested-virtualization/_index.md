@@ -1,26 +1,26 @@
 ---
-title: Nested Virtualization on an Arm64 Server
+title: Configure and run nested virtualization on an Arm server
 
 draft: true
 cascade:
     draft: true
       
-description: Configure an Arm server to allow guest virtual machines to act as hypervisors, enabling users to run virtual machines inside a virtual machine.
+description: Set up nested virtualization on an Arm server so guest virtual machines can act as hypervisors and run other virtual machines inside them.
 
-minutes_to_complete: 20
+minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for System Administrators who are interested in enabling users to run VMs inside virtual machines.
+who_is_this_for: This is an advanced topic for system administrators who want to enable nested virtualization, so users can run virtual machines inside other virtual machines.
 
 learning_objectives: 
-    - Starting a Virtual Machine on Linux using virsh
-    - Configuring a host and guest VM to allow the guest VM to function as a hypervisor
-    - Using a standard benchmark suite, measure the performance impact of running software inside a nested virtual machine against a regular guest VM and on bare metal
+    - Enable nested virtualization on an Arm server and verify the host supports it
+    - Create and start Arm64 guest virtual machines using virt-install, cloud-init, and virsh
+    - Configure a guest VM to act as a hypervisor and run a nested VM inside it
+    - Measure the performance overhead of a nested VM against a standard guest VM and bare metal using sysbench
 
 prerequisites:
-    - An Arm64 server supporting FEAT_NV2 (available in Arm v8.4-A and later)
-    - Fedora 44 (or any distribution with a version 7.2 or later Linux kernel)
+    - An Arm64 bare metal server with 64 cores or more, supporting FEAT_NV2 (available in Arm v8.4-A and later), with Fedora 44 installed
 
-author: David Neary <nearyd@amperecomputing.com>
+author: Dave Neary 
 
 # New Learning Paths are opted in for the next manual generated summary/FAQ run.
 # The generator resets this to false after a successful write.
@@ -40,22 +40,23 @@ armips:
 tools_software_languages:
     - KVM
     - libvirt
-    - virsh / virt-manager
+    - virsh
+    - virt-install
 operatingsystems:
     - Linux
 
 further_reading:
     - resource:
-        title: PLACEHOLDER MANUAL 
-        link: PLACEHOLDER MANUAL LINK
+        title: Nested virtualization in the Arm AArch64 virtualization guide
+        link: https://support.arm.com/documentation/102142/0100/Nested-virtualization?lang=en
         type: documentation
     - resource:
-        title: PLACEHOLDER BLOG 
-        link: PLACEHOLDER BLOG LINK
+        title: 'Unlocking Layers: Powering Nested Virtualization with Ampere CPUs'
+        link: https://amperecomputing.com/blogs/unlocking-layers
         type: blog
     - resource:
-        title: PLACEHOLDER GENERAL WEBSITE 
-        link: PLACEHOLDER GENERAL WEBSITE LINK
+        title: 'Fedora Discussion: nested virtualization on Arm64'
+        link: https://discussion.fedoraproject.org/t/nested-virtualization/179358
         type: website
 
 ### FIXED, DO NOT MODIFY

@@ -1,62 +1,84 @@
 ---
-title: Review what is verified and what production needs
-description: See what U-Boot checks with your key on the target you built, what the stages below it accept, and what a production device needs before the whole chain can be trusted.
+title: Review the Zephyr FIT verification boundary and production needs
+description: Review the trust boundary for Zephyr FIT verification in U-Boot and the key provisioning, boot controls, and release signing needed for production.
 weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Summary
+## Understand the verification boundary
 
-U-Boot verifies the last link of the chain, and only that one. It read `zephyr-a.itb` from the boot media, checked `conf-1` against the `key-a` node built into its own device tree, checked the hash of the payload, and only then jumped to `ZEPHYR_ADDR`. The optional [refusal tests](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) show the two ways it stops instead: a FIT signed with `key-b` fails at `Failed to verify required signature 'key-key-a'`, and a FIT with one byte changed after signing fails at `Bad hash value for 'hash-1'`. Zephyr never starts in either case.
+You've configured U-Boot to verify the Zephyr payload, the last link in the boot chain. U-Boot reads `zephyr-a.itb` and verifies `conf-1` with the embedded public key for `key-a`. It checks the payload hash before jumping to `ZEPHYR_ADDR`.
 
-Below that link, nothing is checked against your key. In QEMU there is nothing below it at all: no ROM, no security firmware and no eFuses, and you hand `u-boot.bin` to the machine on the command line. On the board those stages exist, which is the whole reason to repeat the work there. Most Cortex-A SoCs hold the customer's key in eFuses, one-time-programmable bits in silicon. Until that key is fused, the SoC is in its development state: the ROM and the vendor's firmware still check the boot files, but any key passes. TI calls the two states HS-FS (High Security, Field Securable) and HS-SE (High Security, Security Enforced), and U-Boot's banner on the EVM read `SoC:   AM62LX SR1.1 HS-FS`.
+If you ran the optional [refusal tests](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/), you also confirmed two rejection cases. The wrong-key Flattened Image Tree (FIT) fails with `Failed to verify required signature 'key-key-a'`. The modified payload fails with `Bad hash value for 'hash-1'`. Neither starts Zephyr.
 
-So the key that matters, the public half of `key-a`, travels inside `u-boot.img` on an unprotected FAT partition, where anyone who can write the boot media can swap it for their own. Your chain of trust starts on the card, not in the silicon. Moving it there is what the rest of this page is about.
+The earlier stages aren't authenticated against your key in either setup. QEMU loads `u-boot.bin` directly, without a boot ROM, security firmware, or eFuses to authenticate it.
 
-## What production needs
+The AM62L evaluation module (EVM) has those earlier stages, but you've left it in TI's High Security, Field Securable (HS-FS) development state. In this state, the ROM and vendor firmware check boot files but accept any signing key. The U-Boot banner identifies it as `SoC:   AM62LX SR1.1 HS-FS`. Provisioning your key into the one-time-programmable eFuses moves the device to High Security, Security Enforced (HS-SE).
+
+On the EVM, the trusted public key is inside `u-boot.img` on an unprotected File Allocation Table (FAT) partition. Anyone who can replace that file can replace the key and boot command. Production needs an authenticated U-Boot and controls that prevent bypassing its verification step.
+
+## What you need for production
+
+For production, ensure that you complete the following steps:
 
 ### Fuse your key and move to the production state
 
-On TI devices the tool is the OTP Keywriter, called Keywriter Lite on the AM62L; it burns the hash of your public key into the eFuses and moves the chip to HS-SE. You then re-sign `tiboot3.bin`, `tispl.bin` and `u-boot.img` with that key. From then on the ROM and the security firmware refuse any boot file that isn't signed with your key, U-Boot included, so the `key-a` public half inside it is itself authenticated. The procedure is vendor-specific and out of scope here.
+TI's one-time-programmable (OTP) Keywriter tool, called Keywriter Lite on the AM62L, burns the public-key hash into the eFuses and moves the chip to HS-SE. You then re-sign `tiboot3.bin`, `tispl.bin`, and `u-boot.img` with that key.
+
+The ROM and security firmware then require boot files signed with your key, including U-Boot. This authenticates the U-Boot image containing the FIT public key. Key provisioning is vendor-specific and isn't covered in these steps.
 
 ### Keep the environment built in
 
-`bootcmd` holds the command autoboot runs, and `preboot` holds the one that defined `zboot`, `a`, `b` and `t`. Both builds end up with `CONFIG_ENV_IS_NOWHERE=y`, QEMU from the target block you added and the AM62L from its defconfig, so `saveenv` has nowhere to write and both variables always come from the binary you built. Check your board's `.config` for the same line, and keep it that way: a writable environment is a writable boot command.
+`bootcmd` selects the autoboot command. `preboot` defines `zboot` and the `a`, `b`, and `t` wrappers before autoboot starts.
+
+Both builds use `CONFIG_ENV_IS_NOWHERE=y`: you added it for QEMU, and the AM62L default configuration supplies it. This prevents `saveenv` from writing a persistent environment, so boot settings are loaded from the binary that you built. Check that the `.config` for your board includes the same setting.
 
 {{% notice Warning %}}
-Don't enable `CONFIG_ENV_IS_IN_FAT`, a development convenience that stores the environment in `uboot.env` on the boot media: a saved environment overrides `bootcmd` and `preboot`, so anyone with the card can skip the check.
+Don't enable `CONFIG_ENV_IS_IN_FAT` for this boot configuration. It stores the environment in `uboot.env` on the boot media. A saved environment can override `bootcmd` and `preboot`, allowing someone with write access to the card to bypass verification.
 {{% /notice %}}
 
 ### Lock the console
 
-With `CONFIG_BOOTDELAY=3`, anyone with a serial cable can stop the countdown, get the `=>` prompt and type `fatload` and `go` by hand. Set `CONFIG_BOOTDELAY=-2` (no delay, no key check), or use `CONFIG_AUTOBOOT_KEYED` so that only a known string stops autoboot. Both settings only cover the countdown: if `bootcmd` returns, for example after a refused image, U-Boot still drops to the `=>` prompt. On a production build, end `zboot` with `reset` after the `echo`, so a refusal restarts the board instead of opening a prompt.
+With `CONFIG_BOOTDELAY=3`, someone with serial-console access can interrupt autoboot and run `fatload` and `go` without verification. Set `CONFIG_BOOTDELAY=-2` to remove the delay and keyboard check, or use `CONFIG_AUTOBOOT_KEYED` to require a known string to interrupt autoboot.
 
-### Use real keys and sign in a release step
+These settings cover only the countdown. If `bootcmd` returns after rejecting an image, U-Boot still opens the `=>` prompt. In a production build, add `reset` after the refusal `echo` in `zboot`. This ensures that a failed boot restarts the board instead of opening the console.
 
-`sha256,rsa2048` is fine for a demo; the AM62L's own boot chain uses `sha512,rsa4096`. To match it, generate the keys with `rsa_keygen_bits:4096`, set `algo = "sha512,rsa4096"` in `zephyr-a.its` and `key.its`, and check that `$UBOOT_OUT/.config` has `CONFIG_SHA512=y`, adding it to the `.config` fragment if it doesn't. Generate the production key on a hardware security module (HSM), or at least off the build host, and sign in the release pipeline, the only place that holds the private key.
+### Protect production keys and sign during release
 
-## Take it to another Cortex-A board
+You used `sha256,rsa2048`. The boot chain of the AM62L uses `sha512,rsa4096`. To use the latter for your FIT:
 
-Every target-specific value sits in the `# Target values` block of your environment file and the paths under it, so porting is a checklist:
+- Generate keys with `rsa_keygen_bits:4096`.
+- Set `algo = "sha512,rsa4096"` in both `zephyr-a.its` and `key.its`.
+- Confirm that `$UBOOT_OUT/.config` includes `CONFIG_SHA512=y`, adding it to the configuration fragment if needed.
+
+Generate production keys in a hardware security module (HSM), or at least away from the build host. Sign during the release process and restrict private-key access to that process.
+
+## Adapt the workflow to another Cortex-A board
+
+If you want to use another Cortex-A board, start by updating the target values and paths in your environment file:
 
 - `BOARD` is the Zephyr board identifier, from `west boards` or the Workbench board list. The board needs the two settings from [Build a Zephyr image that U-Boot can start](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/3-build-zephyr/): the Non-secure world and the arm64 image header.
-- `ZEPHYR_ADDR` is the start of the memory node that the board's device tree selects as `zephyr,sram`. It is Zephyr's link address, the FIT `load` and `entry`, and the `go` target, so one value serves all three.
-- `FIT_ADDR` is any free address clear of `ZEPHYR_ADDR` and of the firmware regions; otherwise `bootm loados` copies Zephyr over the FIT it is still reading.
-- `BOOT_DEV` is the U-Boot device and partition that hold the files. `mmc 1:1` is the SD card's first partition on the AM62L EVM, while `mmc 0` is the eMMC; `mmc list` at the U-Boot prompt shows your board's numbering.
-- `UBOOT_DEFCONFIG` is the board's U-Boot configuration. It must enable `CONFIG_FIT`, `CONFIG_FIT_SIGNATURE` and `CONFIG_RSA`: add any that is missing as `CONFIG_<NAME>=y` to the `.config` fragment in [Build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), and if the board has `CONFIG_LEGACY_IMAGE_FORMAT=y`, add `# CONFIG_LEGACY_IMAGE_FORMAT is not set` too.
-- `UBOOT_SRC`, `CROSS` and `UBOOT_CC` point at the U-Boot source and the compiler that builds it, with `SDK`, `PREBUILT` and `SYSROOT` added when they come from a vendor SDK, as on the AM62L.
-- `BOOT_IMG` is the boot volume `mcopy` writes into: the card image on the EVM, the disk image in QEMU, each with the `@@` offset of its FAT partition.
+- `ZEPHYR_ADDR` is the start of the memory node that the device tree of the board selects as `zephyr,sram`. It's the link address of Zephyr, the FIT `load` and `entry`, and the `go` target, so one value serves all three.
+- `FIT_ADDR` is any free address clear of `ZEPHYR_ADDR` and of the firmware regions. Otherwise, `bootm loados` copies Zephyr over the FIT it's still reading.
+- `BOOT_DEV` is the U-Boot device and partition that hold the files. `mmc 1:1` is the first partition of the SD card on the AM62L EVM, while `mmc 0` is the eMMC. `mmc list` at the U-Boot prompt shows the numbering of your board.
+- `UBOOT_DEFCONFIG` selects the U-Boot default configuration of the board. Check for `CONFIG_FIT=y`, `CONFIG_FIT_SIGNATURE=y`, and `CONFIG_RSA=y`. Add missing settings to the [U-Boot configuration fragment](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). Disable legacy images with `# CONFIG_LEGACY_IMAGE_FORMAT is not set`.
+- `UBOOT_SRC`, `CROSS`, and `UBOOT_CC` point at the U-Boot source and the compiler that builds it. `SDK`, `PREBUILT`, and `SYSROOT` are added when they come from a vendor SDK, as on the AM62L.
+- `BOOT_IMG` is the boot volume that `mcopy` writes into: the card image on the EVM, the disk image in QEMU, each with the `@@` offset of its FAT partition.
 
-Two things sit outside the environment file. The `make` line that builds U-Boot takes whatever the target's tree expects: `EXT_DTB` in QEMU, and `BL1`, `BL31`, `TEE` and `BINMAN_INDIRS` on the AM62L, and the tree names its own outputs, often `u-boot.img` or `u-boot.itb` plus an SPL file. The boot page follows the target's own media, switches and console.
+Also adapt the U-Boot build command and boot-media preparation. The build inputs depend on the target: `EXT_DTB` for QEMU, or `BL1`, `BL31`, `TEE`, and `BINMAN_INDIRS` for the AM62L EVM. Output names also vary, often including `u-boot.img` or `u-boot.itb` and a Secondary Program Loader (SPL) file. Follow the requirements of the target for media layout, boot switches, and console access.
 
-The last difference is how the key reaches the control device tree. `CONFIG_DEVICE_TREE_INCLUDES` works on any board that builds that tree from source (`CONFIG_OF_SEPARATE=y` or `CONFIG_OF_EMBED=y`), as the AM62L does. A board that takes its device tree from a prior stage (`CONFIG_OF_BOARD=y`) has no tree of its own to add a node to; the QEMU option shows the way around it, merging `signature.dtsi` into a dump of that tree and building with `EXT_DTB=`.
+Check how the target obtains its control device tree. `CONFIG_DEVICE_TREE_INCLUDES` adds the key node when the tree is built from source with `CONFIG_OF_SEPARATE=y` or `CONFIG_OF_EMBED=y`, as on the AM62L EVM.
 
-Everything else stays the same: the `.its` file, the keys, the `signature.dtsi` recipe, the boot command and the three test images.
+For a board using a tree from a prior stage (`CONFIG_OF_BOARD=y`), follow the QEMU approach: merge `signature.dtsi` into an exported tree and pass it to the build with `EXT_DTB=`.
 
-## Where to go from here
+Reuse the FIT signing and verification workflow, adapting the target values in the FIT source and boot command as needed.
 
-To run your own application, point `data` in `zephyr-a.its` at its `zephyr.bin` and sign it again; nothing else in the chain changes. To move to another Cortex-A board, work through the checklist above.
+## What you've accomplished
 
-The next page lists the further reading, including U-Boot's FIT signature documentation and the board pages for both targets. Ac6, where this Learning Path was written, runs courses on [Zephyr RTOS programming](https://www.ac6-training.com/en/rt5/zephyr-rtos-programming) and on [building a secured embedded Linux platform](https://www.ac6-training.com/en/sec8/secured-embedded-linux-platform-build), which covers the fusing and release-signing steps above.
+You've established verification of the Zephyr payload and learned how you can extend the workflow to production and to another Cortex-A board. 
+
+Before using this approach in production, authenticate the earlier boot stages. Also protect the boot environment and console and move signing into a controlled release process.
+
+To sign your own application for the same target, point `data` in `zephyr-a.its` to its `zephyr.bin` and sign the FIT again. To use another Cortex-A board, adapt the environment, build inputs, and boot media using the checklist in this section.

@@ -344,7 +344,8 @@ tools_software_languages_filter:
 - Vectorscan: 1
 - Velox: 1
 - Veraison: 3
-- virsh / virt-manager: 1
+- virsh: 1
+- virt-install: 1
 - Visual Studio Code: 7
 - vLLM: 4
 - VMAS: 1
