@@ -7,33 +7,24 @@ weight: 4
 layout: learningpathall
 ---
 
-## The programming pattern: four layers around one ROS 2 command
+## The programming pattern: four components around one ROS 2 command
 
-The adapter doesn't add a new way to talk to ROS 2. It wraps the same `ros2` command you ran from your terminal in the setup section, one layer at a time. Each layer adds one thing to the layer beneath it:
+The adapter doesn't add a new way to talk to Robot Operating System 2 (ROS 2). It wraps the same `ros2` command that you ran from your terminal during setup, one component at a time. Each component adds one thing to the component beneath it:
 
-<<<<<<< HEAD
-| Layer | What it is | What it adds | Example |
+| Component | What it is | What it adds | Example |
 |---|---|---|---|
 | ROS 2 command | A `ros2` CLI call run in the container from the host | The ROS 2 query itself | `docker exec ros2_test ... ros2 topic list` |
 | Python wrapper | `run_ros()` | The same command, called from Python and returning structured output | `run_ros("ros2 topic list")` |
 | Remote procedure calls (RPCs) | An `@rpc` method on `Ros2InspectionMixin` | A named function that peers and agents can discover and call over the network | `get_ros_topics()` |
 | Device | A driver class run by `DeviceRuntime` | A device that bundles those RPCs and joins the network | `PuppyPiRos2Driver` |
-=======
-| Layer | Component | What it is | What it adds | Example |
-|---|---|---|---|---|
-| 1 | ROS 2 command | A `ros2` CLI call run in the container from the host | The ROS 2 query itself | `docker exec ros2_test ... ros2 topic list` |
-| 2 | Python wrapper | `run_ros()` | The same command, called from Python and returning structured output | `run_ros("ros2 topic list")` |
-| 3 | RPC | An `@rpc` method on `Ros2InspectionMixin` | A named function that peers and agents can discover and call over the network | `get_ros_topics()` |
-| 4 | Device | A driver class run by `DeviceRuntime` | A device that bundles those RPCs and joins the network | `PuppyPiRos2Driver` |
->>>>>>> main
 
-The ROS 2 command layer is all you need when you have a shell on the machine. The Python wrapper, RPCs, and device layers let a caller without shell access run the same query safely and by name.
+The ROS 2 command component is all you need when you have a shell on the machine. The Python wrapper, RPCs, and device components let a caller without shell access run the same query safely and by name.
 
 The following code excerpts are simplified to show the pattern. The full versions are in `ros2_common.py` and `puppypi_device.py` in the repository.
 
 ### Run a ROS 2 command in the container
 
-You've already used this layer. From the host, `docker exec` runs a `ros2` command inside the container after sourcing the ROS 2 environment:
+You've already used this component. From the host, `docker exec` runs a `ros2` command inside the container after sourcing the ROS 2 environment:
 
 ```bash
 docker exec ros2_test bash -lc 'source /opt/ros/humble/setup.bash && ros2 topic list'
@@ -59,7 +50,7 @@ def run_ros(command: str, timeout: float = 10.0) -> dict[str, Any]:
     return run(["docker", "exec", "-u", EXEC_USER, CONTAINER, "bash", "-lc", script], timeout=timeout)
 ```
 
-The container name, user, and setup scripts come from environment variables, so the same function works with any ROS 2 container. It returns a dictionary with `ok`, `stdout`, and `stderr` instead of printed text. A timeout stops a stalled ROS 2 command from hanging the adapter.
+The container name, user, and setup scripts come from environment variables. The same function therefore works with any ROS 2 container. It returns a dictionary with `ok`, `stdout`, and `stderr` instead of printed text. A timeout stops a stalled ROS 2 command from hanging the adapter.
 
 ### Expose the command as an RPC
 
@@ -93,7 +84,7 @@ The mixin provides six inspection RPCs in total for the following:
 
 The inspection RPCs all follow the same pattern.
 
-The following table shows how the shared inspection and hardware-specific RPCs map to the ROS 2 operations they run or wrap:
+The following table shows how the shared inspection and hardware-specific RPCs map to the ROS 2 operations that they run or wrap:
 
 | Device Connect RPC | ROS 2 operation inside the container | Purpose |
 |---|---|---|
@@ -112,7 +103,7 @@ Device Connect doesn't replace ROS 2. It wraps selected ROS 2 operations as disc
 
 ### Build the device
 
-The final layer is a driver class that inherits from both `Ros2InspectionMixin` and `DeviceDriver`. The mixin supplies the shared ROS 2 RPCs. `DeviceDriver` makes the class a Device Connect device, and you add any hardware-specific RPCs alongside the shared ones. The `rpi5` profile runs this driver from `puppypi_device.py`:
+The final component is a driver class that inherits from both `Ros2InspectionMixin` and `DeviceDriver`. `Ros2InspectionMixin` supplies the shared ROS 2 RPCs. `DeviceDriver` makes the class a Device Connect device. You add any hardware-specific RPCs alongside the shared ones. The `rpi5` profile runs the driver from `puppypi_device.py`:
 
 ```python
 class PuppyPiRos2Driver(Ros2InspectionMixin, DeviceDriver):
@@ -131,11 +122,11 @@ async def main() -> None:
     await runtime.run()
 ```
 
-`DeviceRuntime` connects the driver to the messaging network and announces every `@rpc` method, both inherited and its own, to peers. To support new hardware, write a new class at this layer. The other layers stay the same.
+`DeviceRuntime` connects the driver to the messaging network and announces every `@rpc` method, both inherited and its own, to peers. To support new hardware, write a new class. The other components stay the same.
 
 ## Start the adapter
 
-The `start_d2d.sh` launcher loads a profile and activates the `.venv` environment. The launcher sets D2D defaults — the Zenoh backend, TCP port 7447, and a device ID of `<profile>-d2d`. It runs the driver script that the profile names.
+The `start_d2d.sh` launcher loads a profile and activates the `.venv` environment. The launcher sets device-to-device (D2D) defaults — the Zenoh backend, TCP port 7447, and a device ID of `<profile>-d2d`. It runs the driver script that the profile names.
 
 Open a terminal on your Arm-based Linux machine and start the adapter with the `rpi5` profile, pointing it at the `ros2_test` container:
 
@@ -276,9 +267,9 @@ discovered: ['rpi5-d2d']
 Each result shows the following:
 
 - `echo` confirms the full round trip from the client over Zenoh to the adapter.
-- `get_ros_topics` returns the same three topics you saw at layer 1. It's the same `ros2 topic list` command, reached through all four layers. `get_topic_info` adds the message type of `/chatter`.
+- `get_ros_topics` returns the same three topics as the `ros2 topic list` command, reached through all four components. `get_topic_info` adds the message type of `/chatter`.
 - `get_ros_packages` shows the `contains` filter reducing the package list to `std_msgs`.
-- The second `get_topic_info` call is rejected at layer 3, so no command runs in the container.
+- The second `get_topic_info` call is rejected at `Ros2InspectionMixin`, so no command runs in the container.
 - `get_status` reports that the container is running ROS 2 Humble. `ros_ok` is `false` because the health check for this driver looks for PuppyPi robot packages, which aren't in a plain `ros:humble` container. This is expected.
 
 ## Clean up
@@ -289,7 +280,7 @@ Stop the adapter with `Ctrl+C` in its terminal. If you started the adapter in th
 pkill -f puppypi_device.py
 ```
 
-The `ros2_test` container keeps running. When you no longer need it, remove it:
+The `ros2_test` container keeps running. When you no longer need the container, remove it:
 
 ```bash
 docker rm -f ros2_test
@@ -297,6 +288,6 @@ docker rm -f ros2_test
 
 ## What you've accomplished and what's next
 
-You've learned the four-layer pattern of the adapter. You started the adapter in D2D mode and called its RPCs from a Python client that knows nothing about ROS 2.
+You've learned the four-component pattern of the adapter. You started the adapter in D2D mode and called its RPCs from a Python client that knows nothing about ROS 2.
 
 Next, you'll see how other profiles reuse layers with different device drivers for real hardware, such as a Raspberry Pi 5 with a camera.

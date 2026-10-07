@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## How profiles select the hardware configuration
 
-You've completed the core Device Connect task. The following profiles are optional extensions: you can try the adapter with a Raspberry Pi 5 camera, review the PuppyPi robot profile, or adapt a profile for your own ROS 2 system.
+You've completed the core Device Connect task. The following profiles are optional extensions. You can try the adapter with a Raspberry Pi 5 camera and review the PuppyPi robot profile. You can also adapt a profile for your own Robot Operating System 2 (ROS 2) system.
 
 You overrode the `rpi5` profile earlier to point at a generic ROS 2 container. Each profile in `profiles/` is a shell file that describes one deployment. It sets which driver runs, which container the driver talks to, and which ROS 2 setup scripts it sources.
 
@@ -41,7 +41,7 @@ PROFILE_FILE=/path/to/my-robot.env ./ros2-device-connect/start_d2d.sh
 
 ## Try a Raspberry Pi 5 with a camera
 
-The `rpi_camera` configuration is the lowest-risk real hardware example in this Learning Path. It exposes a sensor capability rather than a motion capability: a ROS 2 image topic becomes a Device Connect RPC that any peer or agent can call for a photo. The caller doesn't need to know the ROS 2 topic name, QoS settings, camera container, or image encoding details.
+The `rpi_camera` configuration is the lowest-risk real hardware example in this Learning Path. It exposes a sensor capability rather than a motion capability. A ROS 2 image topic becomes a Device Connect RPC that any peer or agent can call for a photo. The caller doesn't need to know the ROS 2 topic name, quality of service (QoS) settings, camera container, or image encoding details.
 
 The camera must appear as a V4L2 video device, such as `/dev/video0`. A USB webcam works without extra setup.
 
@@ -85,7 +85,7 @@ async def get_raw_image(self, quality: int = DEFAULT_JPEG_QUALITY) -> dict[str, 
     )
 ```
 
-The RPC runs `capture_frame.py` inside the container. The script subscribes to `/image_raw`, takes one frame, and returns it as a base64-encoded JPEG. It subscribes with ROS 2's `qos_profile_sensor_data` because `v4l2_camera` publishes with best-effort QoS. A subscriber that uses the default reliable QoS would never match the publisher, and the capture would silently time out.
+The RPC runs `capture_frame.py` inside the container. The script subscribes to `/image_raw`, takes one frame, and returns the frame as a base64-encoded JPEG. It subscribes with ROS 2 `qos_profile_sensor_data` because `v4l2_camera` publishes with best-effort QoS. A subscriber that uses the default reliable QoS would never match the publisher, and the capture would silently time out.
 
 This is the perception side of the robotics pattern: a ROS 2 sensor stream is converted into a typed Device Connect capability. The PuppyPi profile described next uses the same pattern for the action side of robotics.
 
@@ -108,7 +108,7 @@ The `view_image.py` script in the repository does the same thing against a devic
 
 The `puppypi` profile targets a [Hiwonder PuppyPi quadruped](https://www.hiwonder.com/products/puppypi), a small four-legged robot built around Raspberry Pi-class hardware and a ROS 2 control stack. 
 
-PuppyPi serves as the real robot example, as the same Device Connect adapter pattern used for camera perception is extended to selected locomotion capabilities. It shows how you can add motion control safely:
+PuppyPi serves as the real robot example. The same Device Connect adapter pattern used for camera perception is extended to selected locomotion capabilities. PuppyPi shows how you can add motion control safely:
 
 - `run_action` accepts only a fixed allowlist of pre-recorded moves, such as `sit`, `stand`, and `wave`, and rejects any other value.
 - `set_velocity` rejects out-of-range values instead of clamping them.
@@ -129,7 +129,7 @@ To see this profile running on a real PuppyPi, watch the [ROS 2 and Device Conne
 
 To connect a different ROS 2 system, follow the same pattern:
 
-1. Create a driver class that combines `Ros2InspectionMixin` with `DeviceDriver`, and add only the hardware-specific RPCs that you've reviewed.
+1. Create a driver class that combines `Ros2InspectionMixin` with `DeviceDriver`. Add only the hardware-specific RPCs that you've reviewed.
 2. Validate every caller-supplied value before it reaches `run_ros()`, as `get_topic_info` and `get_raw_image` do.
 3. Add a `profiles/<name>.env` file that sets the following environment variables:
     - `DRIVER_SCRIPT`
@@ -138,10 +138,10 @@ To connect a different ROS 2 system, follow the same pattern:
     - `ROS_SETUP`
     - `WORKSPACE_SETUP`
 
-When the device needs to be reachable beyond your local network, run `start_fabric.sh` instead of `start_d2d.sh` with a device credentials file. This connects the device through a Device Connect server rather than Zenoh D2D discovery. For more information, see [Deploy multi-network device meshes using Device Connect server and NATS](/learning-paths/embedded-and-microcontrollers/device-connect-server/).
+When the device needs to be reachable beyond your local network, run `start_fabric.sh` instead of `start_d2d.sh` with a device credentials file. This connects the device through a Device Connect server rather than Zenoh device-to-device (D2D) discovery. For more information, see [Deploy multi-network device meshes using Device Connect server and NATS](/learning-paths/embedded-and-microcontrollers/device-connect-server/).
 
 {{% notice Warning %}}
-D2D mode runs with `DEVICE_CONNECT_ALLOW_INSECURE=true` and no transport authentication. Anyone on the same network segment can discover the device and call its RPCs. Use D2D mode only on a trusted network, and add authentication before you expose motion-control RPCs such as `set_velocity` on a less trusted network.
+D2D mode runs with `DEVICE_CONNECT_ALLOW_INSECURE=true` and no transport authentication. Anyone on the same network segment can discover the device and call its RPCs. Use D2D mode only on a trusted network. Add authentication before you expose motion-control RPCs such as `set_velocity` on a less trusted network.
 {{% /notice %}}
 
 ## What you've learned

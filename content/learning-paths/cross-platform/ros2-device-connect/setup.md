@@ -42,7 +42,7 @@ The command should display version information for both the Docker client and se
 
 ## Start a ROS 2 container
 
-You don't need to install ROS 2 on the host. The official `ros:humble` image is multi-architecture, so Docker pulls the `arm64` variant automatically. If you'd prefer a native install, see the [ROS 2 install guide](/install-guides/ros2/).
+You don't need to install ROS 2 on the host. The official `ros:humble` image is multi-architecture, so Docker pulls the `arm64` variant automatically. If you prefer a native install, see the [ROS 2 install guide](/install-guides/ros2/).
 
 Start a long-running container named `ros2_test`:
 
@@ -50,7 +50,7 @@ Start a long-running container named `ros2_test`:
 docker run -d --name ros2_test ros:humble tail -f /dev/null
 ```
 
-The `tail -f /dev/null` command keeps the container alive so you can run ROS 2 commands inside it with `docker exec`. Start a demo publisher that sends a `std_msgs/msg/String` message on the `/chatter` topic once per second:
+The `tail -f /dev/null` command keeps the container alive so that you can run ROS 2 commands inside it with `docker exec`. Start a demo publisher that sends a `std_msgs/msg/String` message on the `/chatter` topic once per second:
 
 ```bash
 docker exec -d ros2_test bash -lc 'source /opt/ros/humble/setup.bash && ros2 topic pub -r 1 /chatter std_msgs/msg/String "{data: hello}"'
@@ -74,7 +74,7 @@ The node list is empty because `ros2 topic pub` runs as a hidden node. The conta
 
 ## Create the workspace
 
-The adapter's launch scripts expect a single project directory that holds the adapter repository and a Python virtual environment named `.venv`. Create the directory and clone both the adapter and the Device Connect source. The adapter is cloned at the `ros2_dc_lp` tag, which is the version that the Learning Path was tested with:
+The adapter's launch scripts expect a single project directory that holds the adapter repository and a Python virtual environment named `.venv`. Create the directory and clone both the adapter and the Device Connect source:
 
 ```bash
 mkdir -p ~/device_connect
@@ -82,6 +82,7 @@ cd ~/device_connect
 git clone --branch ros2_dc_lp https://github.com/odincodeshen/ros2-device-connect.git
 git clone https://github.com/arm/device-connect.git
 ```
+The adapter is cloned at the `ros2_dc_lp` tag, which is the version that the Learning Path was tested with.
 
 ## Install uv and the Device Connect packages
 
@@ -96,9 +97,9 @@ uv --version
 Create a Python virtual environment in the project directory, and install the Device Connect edge SDK and agent tools from the cloned source:
 
 {{% notice Note %}}
-The Device Connect packages require Python 3.11 or later and are tested on Python 3.11, 3.12, and 3.13. Python 3.12 is used in the commands as an example, but you can pass any supported version to `--python`. If the version isn't installed on your machine, uv downloads it for you.
+The Device Connect packages require Python 3.11 or later and are tested on Python 3.11, 3.12, and 3.13. Python 3.12 is used in the commands as an example, but you can pass any supported version to `--python`. If the version isn't installed on your machine, `uv` downloads it for you.
 
-This host Python environment is separate from the Python version inside the ROS 2 container, so your choice here doesn't need to match your ROS 2 distribution.
+The host Python environment is separate from the Python version inside the ROS 2 container. Your choice here doesn't need to match your ROS 2 distribution.
 {{% /notice %}}
 
 ```bash
@@ -134,6 +135,6 @@ Your workspace now looks like this:
 
 ## What you've accomplished and what's next
 
-You've installed Docker, started a ROS 2 Humble container publishing on `/chatter`, and created a Python environment with the Device Connect packages next to the ros2-device-connect adapter.
+You've installed Docker and started a ROS 2 Humble container publishing on `/chatter`. You've also created a Python environment with the Device Connect packages next to the ros2-device-connect adapter.
 
-Next, you'll see how the adapter code works, start it in D2D mode, and query the ROS 2 container through Device Connect.
+Next, you'll see how the adapter code works, start it in device-to-device mode, and query the ROS 2 container through Device Connect.
