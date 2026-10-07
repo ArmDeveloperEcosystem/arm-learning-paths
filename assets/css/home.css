@@ -14,16 +14,10 @@ ads-breadcrumbs:not(:defined) {
     min-height: 32px;
 }
 
-html[theme='dark'] body {
-    background-color: var(--ads-ui-ink-100);
-    background-image: none;
-}
-
 #only-breadcrumb-masthead {
     box-sizing: border-box;
-    height: 64px;
-    overflow: hidden;
-    padding-top: 24px;
+    min-height: 80px;
+    padding: 40px 0 8px;
 }
 
 .homepage {
@@ -35,12 +29,12 @@ html[theme='dark'] body {
 
 .homepage-hero {
     text-align: center;
-    padding: 40px 16px 32px;
+    padding: 16px;
 }
 
 #homepage-header {
     color: var(--ads-ui-ink-05);
-    font-size: clamp(40px, 5vw, 68px);
+    font-size: clamp(36px, 4vw, 52px);
     font-weight: 400;
     margin: 0 0 8px;
 }
@@ -50,7 +44,7 @@ html[theme='dark'] body {
 }
 
 .homepage-search {
-    margin: 8px 0 40px;
+    margin: 8px 0 24px;
 }
 
 .homepage ads-search {
@@ -58,16 +52,16 @@ html[theme='dark'] body {
 }
 
 .homepage-section {
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
 .homepage-section > h2 {
     color: var(--ads-ui-ink-05);
-    font-size: clamp(28px, 3vw, 36px);
+    font-size: clamp(26px, 2.5vw, 32px);
     font-weight: 400;
     border-bottom: 1px solid var(--ads-ui-ink-50);
-    padding-bottom: 12px;
-    margin: 0 0 16px;
+    padding-bottom: 8px;
+    margin: 0 0 12px;
 }
 
 .homepage ads-card {
@@ -79,22 +73,17 @@ html[theme='dark'] body {
 }
 
 .homepage-topic-card {
-    --ads-card-background-color: var(--ads-ui-ink-80);
+    --ads-card-background-color: #2A2742;
     --ads-card-border-radius: 8px;
-    --ads-card-padding: 24px;
-    --ads-card-min-height: 132px;
+    --ads-card-padding: 16px;
+    --ads-card-min-height: 116px;
     border: 1px solid transparent;
-}
-
-.homepage-topic-card:hover,
-.homepage-topic-card:focus-within {
-    border-color: var(--ads-ui-ink-40);
 }
 
 .homepage-topic-content {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
     height: 100%;
 }
 
@@ -191,8 +180,8 @@ table.contributor-table tbody {
 }
 
 @media (max-width: 576px) {
-    .homepage-hero {
-        padding-top: 24px;
+    #only-breadcrumb-masthead {
+        display: none;
     }
 
     .homepage-contribution-actions ads-cta-button {

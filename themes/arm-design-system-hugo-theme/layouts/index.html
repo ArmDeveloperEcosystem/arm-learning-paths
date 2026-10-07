@@ -11,7 +11,7 @@
 
     <section class="homepage-section" aria-labelledby="homepage-learning-paths">
         <h2 id="homepage-learning-paths">Learning Paths</h2>
-        <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3">
+        <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3">
             {{ range (where .Site.Pages "Params.maintopic" true).ByWeight }}
                 {{ $iconFilename := printf "%s.svg" (.Title | urlize) }}
                 {{ if eq .Title "Servers and Cloud Computing" }}
@@ -21,7 +21,7 @@
                 {{ else if eq .Title "Embedded and Microcontrollers" }}
                     {{ $iconFilename = "Microcontroller.svg" }}
                 {{ end }}
-                <ads-card class="homepage-topic-card" link="{{ .RelPermalink }}">
+                <ads-card class="homepage-topic-card" has-hover-effect link="{{ .RelPermalink }}">
                     <ads-card-content slot="content">
                         <div class="homepage-topic-content">
                             <img alt="" aria-hidden="true" src="{{ printf "img/main-topic-icons/%s" $iconFilename | relURL }}" width="60" height="45" />
@@ -33,7 +33,7 @@
                     </ads-card-content>
                 </ads-card>
             {{ end }}
-            <ads-card class="homepage-topic-card" link="{{ "tag/ml/" | relURL }}">
+            <ads-card class="homepage-topic-card" has-hover-effect link="{{ "tag/ml/" | relURL }}">
                 <ads-card-content slot="content">
                     <div class="homepage-topic-content">
                         <img alt="" aria-hidden="true" src="{{ "img/main-topic-icons/AI_2.svg" | relURL }}" width="60" height="45" />
@@ -49,7 +49,7 @@
 
     <section class="homepage-section" aria-labelledby="homepage-more-ways">
         <h2 id="homepage-more-ways">More ways to learn</h2>
-        <div class="u-display-grid u-gap-2 sm:u-grid-columns-1 md:u-grid-columns-3">
+        <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-3">
             {{ range slice
                 (dict "title" "Install Guides" "link" "install-guides/" "description" "Set up the tools you need to develop on Arm.")
                 (dict "title" "Courses" "link" "courses/" "description" "Build deeper knowledge through structured lessons.")
