@@ -13,13 +13,13 @@ pinned_learning_paths:
 - nfru-unreal
 - model-training-gym-nfru
 operatingsystems_filter:
-- Android: 54
+- Android: 55
 - Linux: 54
 - macOS: 27
 - Windows: 25
 subjects_filter:
 - Gaming: 6
-- Graphics: 8
+- Graphics: 9
 - ML: 46
 - Performance and Architecture: 38
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech.
@@ -40,12 +40,11 @@ tools_software_languages_filter:
 - Bash: 2
 - Bazel: 2
 - C: 7
-- C++: 2
 - CameraX: 1
 - CCA: 1
 - Clang: 13
 - CMake: 6
-- CPP: 20
+- CPP: 22
 - csharp: 3
 - Docker: 2
 - ETDump: 1
@@ -102,7 +101,7 @@ tools_software_languages_filter:
 - VGF: 3
 - Visual Studio: 4
 - Visual Studio Code: 1
-- Vulkan: 12
+- Vulkan: 13
 - Vulkan SDK: 3
 - XNNPACK: 10
 weight: 3
