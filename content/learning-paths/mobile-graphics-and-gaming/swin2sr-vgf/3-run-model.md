@@ -11,21 +11,21 @@ layout: learningpathall
 
 ExecuTorch's `executor_runner` loads your `.pte` program and executes it. Continue from the same terminal in your `executorch` directory.
 
-If you opened a new terminal, restore the environment first:
+If you open a new terminal, you'll have to restore the environment:
 
 ```bash
 source .venv/bin/activate
 source examples/arm/arm-scratch/setup_path.sh
 ```
 
-Use the repository's build script to enable VGF and the runtime libraries it needs:
+Use the repository's build script to enable Vulkan Graph Format (VGF) and the runtime libraries that it needs:
 
 ```bash
 bash backends/arm/scripts/build_executor_runner_vkml.sh \
   --output=swin2sr-work/build
 ```
 
-This builds a Release executable at `swin2sr-work/build/executor_runner`. You only need to build it once for this walkthrough.
+This builds a release executable at `swin2sr-work/build/executor_runner`. You need to build the executable only once.
 
 ## Upscale the image
 
@@ -39,10 +39,19 @@ python examples/arm/super_resolution_example_vgf/runtime/run_super_resolution.py
   --output-image swin2sr-work/runtime/demo_sr_128.png
 ```
 
-The helper converts the image into a tensor, runs the model, and saves the output tensor as a PNG. A successful run ends with `Saved super-resolved image to` followed by the full path to `demo_sr_128.png`.
+The output is similar to:
 
-Your input must be exactly 64 × 64 pixels. If you see an `expected (1, 3, 64, 64)` error, check that you used `demo_lr_64.png`, not the larger reference image.
+```output
+Saved super-resolved image to /home/ubuntu/executorch/swin2sr-work/runtime/demo_sr_128.png
+```
+The path reflects your checkout location.
+
+The helper converts the image into a tensor — a numerical representation of its pixels. It runs the model and saves the output tensor as a PNG. A successful run ends with `Saved super-resolved image to`, followed by the full path to `demo_sr_128.png`.
+
+Your input needs to be exactly 64 × 64 pixels. If you see an `expected (1, 3, 64, 64)` error, check that you used `demo_lr_64.png`, not the larger reference image.
 
 ## What you've accomplished and what's next
 
-You have executed the exported program and saved its 128 × 128 output. Next, open the result and compare it with the input and high-resolution reference.
+You've executed the exported program and saved its 128 × 128 output.
+
+Next, you'll open the result and compare it with the input and high-resolution reference.

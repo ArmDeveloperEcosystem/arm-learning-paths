@@ -10,6 +10,12 @@ layout: learningpathall
 
 Now that you've fine-tuned your model on Raspberry Pi datasheet content, it's time to compare its behavior against the original. You'll serve both versions using vLLM, a high-performance inference server optimized for large language models, and observe how fine-tuning on domain-specific data changes the model's factual accuracy.
 
+Exit the PyTorch container to return to the DGX Spark host. The model remains available in the host directory mounted at `/workspace`:
+
+```bash
+exit
+```
+
 ## Download vLLM container
 
 NVIDIA provides a pre-built vLLM container that includes all the necessary components for efficient model serving. This container is optimized for NVIDIA GPUs and includes support for various quantization methods and multi-GPU inference.
@@ -50,7 +56,7 @@ Start the vLLM server with the original Llama 3.2 3B Instruct model:
 ```bash
 python3 -m vllm.entrypoints.openai.api_server \
 --model "meta-llama/Llama-3.2-3B-Instruct" --trust-remote-code \
---tensor-parallel-size 1 --quantization fp8 \
+--tensor-parallel-size 1 \
 --gpu-memory-utilization 0.80
 ```
 
@@ -59,7 +65,6 @@ The server exposes an OpenAI-compatible API with the following configuration:
 - `--model` specifies the Hugging Face model to load, which will be pulled from the Hugging Face cache we made available to this container
 - `--trust-remote-code` allows loading models with custom code (required for some architectures)
 - `--tensor-parallel-size 1` runs inference on a single GPU (like on a DGX Spark)
-- `--quantization fp8` uses 8-bit floating point quantization to reduce memory usage and improve throughput
 - `--gpu-memory-utilization 0.80` limits memory usage to 80%, leaving room for the rest of the OS because the DGX Spark implements unified memory between CPU and GPU.
 
 Wait for the server to fully load the model and display the message indicating it's ready to accept requests (this typically takes 30-60 seconds).
@@ -110,14 +115,6 @@ The base model confidently reports the RP2350 has "256MB of memory," which is of
 
 Now test your fine-tuned model to see how training on Raspberry Pi datasheet content improved its factual accuracy. Stop the current vLLM server (press Ctrl+C in the container terminal) before launching the fine-tuned model.
 
-{{% notice Note %}}
-As of this writing, vLLM does not support version 5 of the `transformers` library that was used when fine-tuning the model, so you need to patch its `tokenizer_config.json`. Run the following command to update the `tokenizer_class` to `PreTrainedTokenizerFast`, which is compatible with the older `transformers` version bundled in the vLLM container:
-
-```bash
-sed -i 's/"tokenizer_class": "TokenizersBackend"/"tokenizer_class": "PreTrainedTokenizerFast"/' /workspace/models/Llama-3.2-3B-FineTuned/tokenizer_config.json
-```
-{{% /notice %}}
-
 ### Launch vLLM
 
 Start the vLLM server with your fine-tuned model:
@@ -125,7 +122,7 @@ Start the vLLM server with your fine-tuned model:
 ```bash
 python3 -m vllm.entrypoints.openai.api_server \
 --model "/workspace/models/Llama-3.2-3B-FineTuned" --trust-remote-code \
---tensor-parallel-size 1 --quantization fp8 \
+--tensor-parallel-size 1 \
 --gpu-memory-utilization 0.80
 ```
 
