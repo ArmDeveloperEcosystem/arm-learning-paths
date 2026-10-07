@@ -33,7 +33,7 @@ cmake -S . -B build_alif_asr \
   -DTARGET_MICS=PDM
 ```
 
-`RTSS-HP` selects the high-performance Cortex-M55 subsystem. `alif_asr` selects the Conformer model and vocabulary.
+`RTSS-HP` selects the high-performance Cortex-M55 subsystem. `alif_asr` selects the Conformer model and vocabulary. If you are using an E8 DevKit with a display attached, replace `-DTARGET_BOARD=AppKit-e8` with `-DTARGET_BOARD=DevKit-e8`.
 
 {{% notice Note %}}
 Keep `GLCD_UI=OFF` as shown. It disables the generic MLEK GLCD interface to save memory; this application still uses its own LVGL display interface. The display remains required.

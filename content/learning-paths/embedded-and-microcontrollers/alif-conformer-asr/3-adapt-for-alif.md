@@ -21,6 +21,10 @@ The board uses a separate application, `alif_asr`, from the Alif MLEK repository
 
 ## Connect the board
 
+{{% notice Important %}}
+Use the [Alif Ensemble E8 AI/ML AppKit](https://alifsemi.com/support/kits/ensemble-e8appkit/) for this Learning Path. If you use an [E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) instead, ensure a supported display is attached and configure the firmware with `-DTARGET_BOARD=DevKit-e8`.
+{{% /notice %}}
+
 To connect to the Alif Ensemble E8 AppKit:
 
 1. Unplug all USB cables from the AppKit before changing any jumpers.
