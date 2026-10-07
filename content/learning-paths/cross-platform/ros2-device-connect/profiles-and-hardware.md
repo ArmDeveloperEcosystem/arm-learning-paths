@@ -44,10 +44,12 @@ The `rpi_camera` configuration is the lowest-risk real hardware example in this 
 The camera must appear as a V4L2 video device, such as `/dev/video0`. A USB webcam works without extra setup.
 
 {{% notice Note %}}
-Raspberry Pi Camera Modules connected by ribbon cable use the libcamera stack, and they don't always expose a frame-ready `/dev/video0` that `v4l2_camera` can read. If `v4l2_camera` can't read frames from your Pi Camera Module, start with a USB webcam, or set `VIDEO_DEVICE` to the video node your camera stack provides.
+Raspberry Pi Camera Modules connected by ribbon cable use the libcamera stack. They don't always expose a frame-ready `/dev/video0` that `v4l2_camera` can read. 
+
+If `v4l2_camera` can't read frames from your Pi Camera Module, start with a USB webcam. Alternatively, set `VIDEO_DEVICE` to the video node that your camera stack provides.
 {{% /notice %}}
 
-On the Raspberry Pi 5, set up the same `~/device_connect` workspace as in the setup section, then bring up the camera stack:
+On the Raspberry Pi 5, set up the same `~/device_connect` workspace as earlier, then bring up the camera stack:
 
 ```bash
 cd ~/device_connect
@@ -83,9 +85,9 @@ async def get_raw_image(self, quality: int = DEFAULT_JPEG_QUALITY) -> dict[str, 
 
 The RPC runs `capture_frame.py` inside the container. The script subscribes to `/image_raw`, takes one frame, and returns it as a base64-encoded JPEG. It subscribes with ROS 2's `qos_profile_sensor_data` because `v4l2_camera` publishes with best-effort QoS. A subscriber that uses the default reliable QoS would never match the publisher, and the capture would silently time out.
 
-This is the perception side of the robotics pattern: a ROS 2 sensor stream is converted into a typed Device Connect capability. The following PuppyPi profile uses the same pattern for the action side of robotics.
+This is the perception side of the robotics pattern: a ROS 2 sensor stream is converted into a typed Device Connect capability. The PuppyPi profile that you'll try next uses the same pattern for the action side of robotics.
 
-From a client, call the RPC and save the image. Use the same client environment variables as earlier, replacing `127.0.0.1` with the IP address of the Raspberry Pi if you run the client on another machine:
+From a client, call the RPC and save the image. Use the same client environment variables as earlier. Replace `127.0.0.1` with the IP address of the Raspberry Pi if you run the client on another machine:
 
 ```python
 import base64
@@ -102,17 +104,22 @@ The `view_image.py` script in the repository does the same thing against a devic
 
 ## Try a ROS 2 robot
 
-The `puppypi` profile targets a [Hiwonder PuppyPi quadruped](https://www.hiwonder.com/products/puppypi), a small four-legged robot built around Raspberry Pi-class hardware and a ROS 2 control stack. In this Learning Path, PuppyPi serves as the real robot example: the same Device Connect adapter pattern used for camera perception is extended to selected locomotion capabilities.
+The `puppypi` profile targets a [Hiwonder PuppyPi quadruped](https://www.hiwonder.com/products/puppypi), a small four-legged robot built around Raspberry Pi-class hardware and a ROS 2 control stack. 
 
-It shows how you can add motion control safely:
+PuppyPi serves as the real robot example, as the same Device Connect adapter pattern used for camera perception is extended to selected locomotion capabilities. It shows how you can add motion control safely:
 
 - `run_action` accepts only a fixed allowlist of pre-recorded moves, such as `sit`, `stand`, and `wave`, and rejects any other value.
 - `set_velocity` rejects out-of-range values instead of clamping them.
 - `stop` publishes a zero-velocity command.
 
-Robot bring-up includes starting `puppy_control` and enabling servo torque. For those steps and the full safety model, see the [ros2-device-connect README](https://github.com/odincodeshen/ros2-device-connect#startup-checklist).
+Robot bring-up includes starting `puppy_control` and enabling servo torque. For bring-up steps and the full safety model, see the [ros2-device-connect README](https://github.com/odincodeshen/ros2-device-connect#startup-checklist).
 
-The important design point is that the adapter does not expose arbitrary ROS 2 control. It turns a reviewed subset of the robot's ROS 2 graph into Device Connect capabilities: read-only diagnostics, allowlisted actions, bounded velocity, and an explicit stop command.
+The important design point is that the adapter doesn't expose arbitrary ROS 2 control. It turns a reviewed subset of the ROS 2 graph of the robot into the following Device Connect capabilities: 
+
+- Read-only diagnostics
+- Allowlisted actions
+- Bounded velocity
+- An explicit stop command
 
 To see this profile running on a real PuppyPi, watch the [ROS 2 and Device Connect PuppyPi demo](https://www.youtube.com/watch?v=R4DJ2_jKvZQ).
 
@@ -120,9 +127,14 @@ To see this profile running on a real PuppyPi, watch the [ROS 2 and Device Conne
 
 To connect a different ROS 2 system, follow the same pattern:
 
-1. Create a driver class that combines `Ros2InspectionMixin` with `DeviceDriver`, and add only the hardware-specific RPCs you've reviewed.
+1. Create a driver class that combines `Ros2InspectionMixin` with `DeviceDriver`, and add only the hardware-specific RPCs that you've reviewed.
 2. Validate every caller-supplied value before it reaches `run_ros()`, as `get_topic_info` and `get_raw_image` do.
-3. Add a `profiles/<name>.env` file that sets `DRIVER_SCRIPT`, `ROS_CONTAINER`, `ROS_EXEC_USER`, `ROS_SETUP`, and `WORKSPACE_SETUP`.
+3. Add a `profiles/<name>.env` file that sets the following environment variables:
+    - `DRIVER_SCRIPT`
+    - `ROS_CONTAINER`
+    - `ROS_EXEC_USER`
+    - `ROS_SETUP`
+    - `WORKSPACE_SETUP`
 
 When the device needs to be reachable beyond your local network, run `start_fabric.sh` instead of `start_d2d.sh` with a device credentials file. This connects the device through a Device Connect server rather than Zenoh D2D discovery. For more information, see [Deploy multi-network device meshes using Device Connect server and NATS](/learning-paths/embedded-and-microcontrollers/device-connect-server/).
 
@@ -131,5 +143,7 @@ D2D mode runs with `DEVICE_CONNECT_ALLOW_INSECURE=true` and no transport authent
 {{% /notice %}}
 
 ## What you've learned
+
+You've learned how profiles reuse the same shared core for a Raspberry Pi 5 camera and a ROS 2 robot, and how to add a profile for your own hardware.
 
 To go further, try driving the adapter from an AI agent with [Connect AI agents to edge devices using Device Connect and Strands](/learning-paths/embedded-and-microcontrollers/device-connect-strands/), or build a larger ROS 2 workload on Arm with [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/).

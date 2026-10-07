@@ -22,7 +22,7 @@ The expected output is:
 aarch64
 ```
 
-By the end, you'll have:
+By the end of setup, you'll have the following:
 
 - A ROS 2 Humble container publishing a demo topic
 - A Python virtual environment with the Device Connect packages
@@ -85,10 +85,10 @@ export PATH="$HOME/.local/bin:$PATH"
 uv --version
 ```
 
-Create a Python virtual environment in the project directory, and install the Device Connect edge SDK and agent tools from the cloned source. 
+Create a Python virtual environment in the project directory, and install the Device Connect edge SDK and agent tools from the cloned source:
 
 {{% notice Note %}}
-The Device Connect packages require Python 3.11 or later and are tested on Python 3.11, 3.12, and 3.13. This example uses 3.12, but you can pass any supported version to `--python`. If that version isn't installed on your machine, uv downloads it for you.
+The Device Connect packages require Python 3.11 or later and are tested on Python 3.11, 3.12, and 3.13. Python 3.12 is used in the commands as an example, but you can pass any supported version to `--python`. If the version isn't installed on your machine, uv downloads it for you.
 
 This host Python environment is separate from the Python version inside the ROS 2 container, so your choice here doesn't need to match your ROS 2 distribution.
 {{% /notice %}}
@@ -101,7 +101,7 @@ VIRTUAL_ENV=.venv uv pip install \
   -e device-connect/packages/device-connect-agent-tools
 ```
 
-The `device-connect-edge` package is the device runtime that the adapter runs on. The `device-connect-agent-tools` package is the client you'll use to discover the adapter and call its RPCs.
+The `device-connect-edge` package is the device runtime that the adapter runs on. The `device-connect-agent-tools` package is the client that you'll use to discover the adapter and call its RPCs.
 
 Verify that both packages import:
 
@@ -126,4 +126,4 @@ Your workspace now looks like this:
 
 You've installed Docker, started a ROS 2 Humble container publishing on `/chatter`, and created a Python environment with the Device Connect packages next to the ros2-device-connect adapter.
 
-Next, you'll look at how the adapter code works, start it in D2D mode, and query the ROS 2 container through Device Connect.
+Next, you'll see how the adapter code works, start it in D2D mode, and query the ROS 2 container through Device Connect.
