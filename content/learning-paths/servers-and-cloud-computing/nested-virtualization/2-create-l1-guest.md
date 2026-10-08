@@ -2,14 +2,13 @@
 title: Prepare and start an L1 guest virtual machine
 description: Create an L1 guest VM from a Fedora cloud image and connect to it over SSH for comparison with a nested VM.
 weight: 3
-
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 ## Why create a guest VM
 
-Before creating a nested virtual machine (VM), create an L1 guest VM running on the host. The guest VM gives you an unnested VM to compare the performance overhead of virtualization against the additional overhead of nested virtualization. You can use the VM to compare the extra work that's required to create an L1 hypervisor VM.
+Before creating a nested virtual machine (VM), create an L1 guest VM running on the host. The guest VM gives you an unnested VM to compare the performance overhead of virtualization against the additional overhead of nested virtualization. 
 
 To create a guest VM, download a cloud image. Make some configuration changes to the base image using `cloud-config`. Then, install and start the VM using `virt-install`. After the VM starts, connect to it to confirm that it started correctly.
 
@@ -48,9 +47,9 @@ If you don't already have an SSH key-pair to use for the guest VMs, generate a k
 ssh-keygen -t ed25519 -f ~/.ssh/guest_key -N ""
 ```
 
-This creates a private key at `~/.ssh/guest_key` and a public key at `~/.ssh/guest_key.pub`. In the `user-data` file, replace `<your-public-key>` with the contents of `~/.ssh/guest_key.pub`. You'll use the matching private key, `~/.ssh/guest_key`, to connect to the VM later.
+This creates a private key at `~/.ssh/guest_key` and a public key at `~/.ssh/guest_key.pub`. 
 
-Create the `user-data` and `meta-data` files, then generate the seed ISO image that you'll attach to the VM. Copy the ISO to the same directory as the `qcow2` VM image that you created earlier:
+Create the `user-data` and `meta-data` files, then generate the seed ISO image that you'll attach to the VM. In the `user-data` file, replace `<your-public-key>` with the contents of `~/.ssh/guest_key.pub`. You'll use the matching private key, `~/.ssh/guest_key`, to connect to the VM later. Copy the ISO to the same directory as the `qcow2` VM image that you created earlier:
 
 ```bash
  cat > /tmp/user-data <<EOF 
@@ -131,7 +130,7 @@ ssh -i ~/.ssh/guest_key fedora@192.168.122.171
 ```
 
 {{% notice Note %}}
-The DHCP lease can appear before the VM finishes its first boot. If SSH reports `Connection refused`, wait a minute for `cloud-init` to finish and the SSH service to start, then try again.
+The DHCP lease can appear before the VM finishes its first boot. If SSH reports `Connection refused`, wait for `cloud-init` to finish and the SSH service to start, then try again.
 {{% /notice %}}
 
 ## What you've accomplished and what's next

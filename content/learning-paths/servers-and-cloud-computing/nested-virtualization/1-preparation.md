@@ -27,7 +27,7 @@ Many embedded applications run specialized real-time or embedded operating syste
 
 ## Terminology and server setup
 
-The bare metal server is referred to as L0, guest VMs running on the bare metal server as L1 VMs, and nested VMs as L2 VMs. The examples assume an Arm64 bare metal host with 64 cores or more. You'll start two VMs on the host, called `fedora-l1-guest` and `fedora-l1-hyper`. Inside `fedora-l1-hyper`, you'll create another VM called `fedora-l2-guest`. Both guest VMs are 8-core VMs, and the `fedora-l1-hyper` VM is assigned 16 cores.
+The bare metal server is referred to as L0. VMs running on the bare metal server are referred to as L1. Nested VMs are referred to as L2. An Arm64 bare metal host with 64 cores or more is used as an example. You'll start two VMs on the host, called `fedora-l1-guest` and `fedora-l1-hyper`. Inside `fedora-l1-hyper`, you'll create another VM called `fedora-l2-guest`. Both guest VMs are 8-core VMs, and the `fedora-l1-hyper` VM is assigned 16 cores.
 
 This lets you allocate similar amounts of resources, and pin those resources to specific cores. By doing so, you can minimize any potential resource conflicts across the bare metal host and the VMs when you compare the performance of a reference benchmark.
 
@@ -62,7 +62,7 @@ sudo grubby --args="kvm-arm.mode=nested" --update-kernel=ALL
 sudo reboot
 ```
 
-### Verify nested virtualization is enabled
+### Verify that nested virtualization is enabled
 
 After the reboot, verify that the capability is available:
 
@@ -77,7 +77,7 @@ CPU features: detected: Nested Virtualization Support
 kvm [1]: VHE+NV2 mode initialized successfully
 ```
 
-The `VHE+NV2 mode initialized successfully` line is the key confirmation that nested virtualization is active. If you only see `VHE mode initialized successfully` without `+NV2`, nested virtualization isn't enabled. This usually means that the kernel argument wasn't applied or that the hardware doesn't support FEAT_NV2.
+The `VHE+NV2 mode initialized successfully` line is the key confirmation that nested virtualization is active. If you see only `VHE mode initialized successfully` without `+NV2`, nested virtualization isn't enabled. This usually means that the kernel argument wasn't applied or that the hardware doesn't support `FEAT_NV2`.
 
 ## What you've accomplished and what's next
 

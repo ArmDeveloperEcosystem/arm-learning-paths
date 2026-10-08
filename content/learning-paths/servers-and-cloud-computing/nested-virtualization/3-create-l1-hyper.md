@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Build on the L1 guest VM setup
 
-At this point, you've used command line tools to create, boot, and connect to a guest virtual machine (VM) running on your Arm64 host. After completing the steps, you'll have another VM running on the host that can serve as a hypervisor for nested VMs. 
+You've used command line tools to create, boot, and connect to a guest virtual machine (VM) running on your Arm64 host. After completing the steps, you'll have another VM running on the host that can serve as a hypervisor for nested VMs. 
 
 ## Prepare and resize the L1 hypervisor disk image
 
@@ -30,7 +30,7 @@ sudo qemu-img resize "$DISK_L1_HYPER" 80G
 
 ## Create a cloud-init seed ISO
 
-Create a seed ISO image for the guest hypervisor for cloud-init. Replace `<your-public-key>` with the same public SSH key you used for the L1 guest VM:
+Create a seed ISO image for the guest hypervisor for cloud-init. Replace `<your-public-key>` with the same public SSH key that you used for the L1 guest VM:
 
 ```bash
  cat > /tmp/user-data <<EOF 
@@ -61,7 +61,7 @@ Create a seed ISO image for the guest hypervisor for cloud-init. Replace `<your-
  rm -rf "$SEEDTMP" 
 ```
 
-The main change here is the hostname.
+The main change here is the hostname `my-hyper`.
 
 ## Start the L1 hypervisor VM
 
@@ -99,13 +99,13 @@ After the VM starts and obtains an IP address, shut it down to make some changes
 
 You'll pass a kernel parameter to the VM that enables passthrough of virtualization capability. This turns the VM into a hypervisor.
 
-Edit the XML configuration that describes the VM and make two changes. First, import the XML schema for the `qemu` namespace, which lets you pass additional parameters to the `qemu` command that instantiates the VM. Second, add a `<qemu:commandline>` block that enables virtualization functionality.
-
 Open the VM configuration in an editor:
 
 ```bash
 sudo virsh edit fedora-l1-hyper
 ```
+
+Edit the XML configuration that describes the VM to make two changes.  First, import the XML schema for the `qemu` namespace, which lets you pass additional parameters to the `qemu` command that instantiates the VM. 
 
 Change the opening `<domain>` tag to import the `qemu` namespace schema:
 
@@ -113,7 +113,9 @@ Change the opening `<domain>` tag to import the `qemu` namespace schema:
 <domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
 ```
 
-Then, just before the closing `</domain>` tag, add the following block:
+Second, add a `<qemu:commandline>` block that enables virtualization functionality.
+
+Just before the closing `</domain>` tag, add the following block:
 
 ```xml
 <qemu:commandline>
@@ -161,4 +163,4 @@ If you see the line `CPU: All CPU(s) started at EL2`, you now have a VM that can
 
 You've now created an L1 hypervisor VM and booted it.
 
-Next, you'll install virtualization tooling and instantiate an L2 guest VM.
+Next, you'll install virtualization tooling and instantiate an L2 guest VM inside the hypervisor.

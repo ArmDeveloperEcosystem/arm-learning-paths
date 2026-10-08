@@ -2,14 +2,13 @@
 title: Prepare and boot a nested L2 guest VM in the hypervisor VM
 description: Create an L2 guest VM inside your L1 hypervisor VM and connect to the nested guest over SSH.
 weight: 5
-
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
 ## Repeat VM setup in the hypervisor VM
 
-You'll copy the base image and private SSH key from the host to the `fedora-l1-hyper` VM, then install the virtualization tools there. Next, you'll resize the L2 guest disk, create a new seed ISO, and re-run `virt-install` for `fedora-l2-guest`.
+You'll copy the base image and private SSH key from the host to the `fedora-l1-hyper` VM, then install the virtualization tools there. After that, you'll resize the L2 guest disk, create a new seed ISO, and re-run `virt-install` for `fedora-l2-guest`.
 
 ## Copy the image and SSH key to the hypervisor
 
@@ -38,7 +37,7 @@ After the installation completes, restart the hypervisor VM from the host to sta
  # After boot is complete
  ssh -i ~/.ssh/guest_key fedora@{fedora-l1-hyper IP address}
 ```
-Wait for about a minute to be able to connect again with SSH.
+Wait for about a minute to connect again with SSH.
 
 ## Create the L2 guest image
 
@@ -98,7 +97,7 @@ Use the output of that command in place of `<your-public-key>`:
 
 ## Start the L2 guest VM
 
-Start the L2 guest VM and verify that you can connect:
+Start the L2 guest VM using `virt-install`:
 
 ```bash
  sudo virt-install \
@@ -126,6 +125,6 @@ After the VM starts, find its IP address and connect to it with SSH:
 
 ## What you've accomplished and what's next
 
-You're now connected to an L2 guest VM running inside an L1 hypervisor VM over SSH.
+You've now connected to an L2 guest VM over SSH. The L2 guest VM is running inside an L1 hypervisor VM.
 
 Next, you'll use a synthetic benchmark, `sysbench`, to measure the overhead of running an application inside a nested VM.

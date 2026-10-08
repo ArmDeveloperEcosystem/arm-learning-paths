@@ -15,7 +15,7 @@ The following table shows how each system is pinned:
 
 | System under test | vCPUs | Pinned to |
 |-------------------|-------|-----------|
-| Host (L0) benchmark | | Host cores 8-15 |
+| Host (L0) benchmark | N/A | Host cores 8-15 |
 | L1 guest | 0-7 | Host cores 16-23 |
 | L1 hypervisor | 0-15 | Host cores 24-39 |
 | L2 guest | 0-7 | Hypervisor cores 8-15 (host cores 32-39) |
@@ -143,10 +143,10 @@ overhead = (bare_metal_events_per_second - layer_events_per_second) / bare_metal
 
 For example, if bare metal reports 9693 events per second and the L2 nested guest reports 9219 events per second, the overhead is `(9693 - 9219) / 9693 * 100`, or less than 5%.
 
-Compare the events per second and latency values across the three layers to see how virtualization and nested virtualization affect your workload. The average and 95th percentile latencies are often close across all three layers, while the maximum latency tends to increase with each level of nesting.
+Compare the events per second and latency values across the three layers to see how virtualization and nested virtualization affect your workload. The average and 95th percentile latencies are often close across all three layers. The maximum latency tends to increase with each level of nesting.
 
 {{% notice Note %}}
-Results vary with the Arm server, CPU generation, kernel, and workload. Draw your conclusions from your own measurements rather than from any single reference figure. Nested virtualization support continues to improve, so newer Arm Neoverse generations typically show lower overhead than older ones. Focus on the relative difference between bare metal, L1, and L2 on your own hardware.
+Results vary with the Arm server, CPU generation, kernel, and workload. Draw conclusions from your own measurements rather than from any single reference figure. Nested virtualization support continues to improve, so newer Arm Neoverse generations typically show lower overhead than older ones. Focus on the relative difference between bare metal, L1, and L2 on your own hardware.
 {{% /notice %}}
 
 The following is an example set of results:
