@@ -15,7 +15,7 @@ You'll make that decision for a sample leaf asset. You don't need OMM-capable ha
 
 ![Pipeline diagram assigning OMM responsibilities across content authoring, the engine and RHI, the Vulkan API and driver, and Mali hardware. Each stage passes its output to the next, from per-triangle data to the final opacity decision.#center](images/omm-introduction/06-responsibility-map.webp "Ownership and outputs across the OMM pipeline")
 
-The responsibility map shows how content, baking, engine integration, and the driver contribute to the final result. RHI labels the engine's hardware-facing rendering layer in the diagram. Use the map to identify where each piece of evidence comes from and who should investigate a failure.
+The responsibility map shows how content, baking, engine integration, and the driver contribute to the final result. Use the map to identify where each piece of evidence comes from and who should investigate a failure.
 
 ## Review the sample asset
 
@@ -90,6 +90,6 @@ Validation can fail even when the bake itself succeeds. Start with the symptom t
 
 ## What you've accomplished
 
-You started with a familiar rendering problem: rays repeatedly testing transparent parts of alpha-masked geometry. From there, you qualified an asset, classified its opacity regions, and chose a format and subdivision level. You then connected that data to the Mali G2-Ultra NX traversal path and kept the original alpha-tested path as a fallback.
+You've now connected information from earlier to build an OMM adoption plan on the Mali G2-Ultra NX, and kept the original alpha-tested path as a fallback.
 
 Your adoption record serves as something concrete to review. It captures not only the chosen settings, but also the image and runtime evidence needed to check the decision again after an asset, engine, or driver change.

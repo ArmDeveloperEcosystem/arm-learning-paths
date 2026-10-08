@@ -66,7 +66,7 @@ You can use a specialization constant instead if the engine selects the behavior
 
 {{% notice Note %}}
 Traversing an OMM-enabled acceleration structure without enabling `OpacityMicromapIdKHR` is undefined behavior. The implementation doesn't automatically fall back to shader-side opacity evaluation.
-{{% /notice %}}
+{{% / notice %}}
 
 ## Define the unsupported fallback
 

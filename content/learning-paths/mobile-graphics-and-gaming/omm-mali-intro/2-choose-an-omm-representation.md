@@ -67,17 +67,17 @@ Use the 2-state strategy only when you can classify every region without damagin
 
 You can practice classification without OMM-capable hardware. Classify using an alpha cutoff of `0.5`. Values less than the cutoff are transparent, while values greater than or equal to it are opaque. 
 
-Each row contains representative samples from one microtriangle:
+Each row contains representative samples from one microtriangle. Classify each region as opaque, transparent, or unknown:
 
-| Region | Representative alpha samples | Your classification |
-| --- | --- | --- |
-| A | `1.00`, `0.92`, `0.87` | Opaque, transparent, or unknown? |
-| B | `0.00`, `0.08`, `0.14` | Opaque, transparent, or unknown? |
-| C | `0.05`, `0.62`, `0.91` | Opaque, transparent, or unknown? |
-| D | `0.42`, `0.45`, `0.48` | Opaque, transparent, or unknown? |
-| E | `0.49`, `0.50`, `0.51` | Opaque, transparent, or unknown? |
+| Region | Representative alpha samples |
+| --- | --- |
+| A | `1.00`, `0.92`, `0.87` |
+| B | `0.00`, `0.08`, `0.14` |
+| C | `0.05`, `0.62`, `0.91` |
+| D | `0.42`, `0.45`, `0.48` |
+| E | `0.49`, `0.50`, `0.51` |
 
-Classify each region, then calculate the raw state payload for one level-2 triangle. Level 2 contains 16 microtriangles. The 2-state format uses one bit per microtriangle, while the 4-state format uses two bits.
+Then calculate the raw state payload for one level-2 triangle. Level 2 contains 16 microtriangles. The 2-state format uses one bit per microtriangle, while the 4-state format uses two bits.
 
 ### Check your classification and payload calculation
 
