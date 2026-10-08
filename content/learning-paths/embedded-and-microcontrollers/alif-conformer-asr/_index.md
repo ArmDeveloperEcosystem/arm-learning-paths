@@ -23,8 +23,7 @@ prerequisites:
 
 author: 
     - Matt Cossins
-    - Kwashie Andoh
-    - Alif Semiconductor (Authors TBD)    
+    - Kwashie Andoh  
 
 generate_summary_faq: false
 rerun_summary: false
