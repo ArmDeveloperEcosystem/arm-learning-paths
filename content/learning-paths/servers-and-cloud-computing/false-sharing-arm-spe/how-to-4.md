@@ -25,20 +25,25 @@ The output is similar to:
 ```output
 Performance counter stats for './false_sharing 1' (3 runs):
 
-          21759.39 msec task-clock                       #    1.672 CPUs utilized            ( +-  6.11% )
-                30      context-switches                 #    1.470 /sec                     ( +-  4.84% )
-                 0      cpu-migrations                   #    0.000 /sec                   
-                77      page-faults                      #    3.772 /sec                     ( +-  0.43% )
-       54398142665      cycles                           #    2.665 GHz                      ( +-  6.11% )
-       37780364970      instructions                     #    0.74  insn per cycle           ( +-  0.00% )
-   <not supported>      branches                                                    
-             41162      branch-misses                                                        ( +-  2.77% )
-       13115601948      L1-dcache-loads                  #  642.550 M/sec                    ( +-  0.00% )
-         262171680      L1-dcache-load-misses            #    2.00% of all L1-dcache accesses  ( +-  1.60% )
-   <not supported>      LLC-loads                                                   
-   <not supported>      LLC-load-misses                                             
+                14      context-switches                 #      1.3 cs/sec  cs_per_second       ( +-  4.12% )
+                 0      cpu-migrations                   #      0.0 migrations/sec  migrations_per_second
+                67      page-faults                      #      6.0 faults/sec  page_faults_per_second  ( +-  0.50% )
+         11,124.43 msec task-clock                       #      1.4 CPUs  CPUs_utilized         ( +-  1.16% )
+        94,607,174      L1-dcache-load-misses            #      0.7 %  l1d_miss_rate            ( +-  1.52% )  (15.41%)
+        47,396,916      LLC-loads                        #      0.0 %  llc_miss_rate            ( +-  1.51% )  (23.16%)
+            88,701      branch-misses                    #      0.0 %  branch_miss_rate         ( +-  5.15% )  (23.21%)
+     7,325,010,900      branches                         #    658.5 M/sec  branch_frequency     ( +-  0.14% )  (23.23%)
+    30,931,997,598      cpu-cycles                       #      2.8 GHz  cycles_frequency       ( +-  1.22% )  (30.93%)
+    40,846,002,727      instructions                     #      1.3 instructions  insn_per_cycle  ( +-  0.07% )  (30.87%)
+         1,959,896      stalled-cycles-frontend          #     0.00 frontend_cycles_idle        ( +-  8.91% )  (30.79%)
+    24,739,777,784      stalled-cycles-backend           #     0.80 backend_cycles_idle         ( +-  1.46% )  (30.74%)
+    24,735,208,758      stalled-cycles-backend           #     0.60 stalled_cycles_per_instruction  ( +-  1.46% )  (23.08%)
+                        TopdownL1                        #      0.0 percent of slots  bad_speculation  ( +-  0.07% )  (7.71%)
+                                                         #      1.8 percent of slots  frontend_bound  ( +-  1.11% )  (7.71%)
+                                                         #     12.3 percent of slots  retiring  ( +-  1.33% )  (15.40%)
+                                                         #     85.8 percent of slots  backend_bound  ( +-  1.35% )  (15.39%)
 
-            13.012 +- 0.699 seconds time elapsed  ( +-  5.37% )
+       7.739760343 +- 0.045801207 seconds time elapsed  ( +-  0.59% )
 ```
 
 Run the version without false sharing:
@@ -52,49 +57,72 @@ The output is similar to:
 ```output
  Performance counter stats for './no_false_sharing 1' (3 runs):
 
-           8866.24 msec task-clock                       #    1.365 CPUs utilized            ( +-  0.01% )
-                27      context-switches                 #    3.045 /sec                     ( +- 11.91% )
-                 0      cpu-migrations                   #    0.000 /sec                   
-                77      page-faults                      #    8.685 /sec                   
-       22165375057      cycles                           #    2.500 GHz                      ( +-  0.01% )
-       37773034710      instructions                     #    1.70  insn per cycle           ( +-  0.00% )
-   <not supported>      branches                                                    
-             29884      branch-misses                                                        ( +-  0.75% )
-       13113314994      L1-dcache-loads                  #    1.479 G/sec                    ( +-  0.00% )
-             38517      L1-dcache-load-misses            #    0.00% of all L1-dcache accesses  ( +-  5.06% )
-   <not supported>      LLC-loads                                                   
-   <not supported>      LLC-load-misses                                             
+                11      context-switches                 #      1.6 cs/sec  cs_per_second       ( +-  6.06% )
+                 0      cpu-migrations                   #      0.0 migrations/sec  migrations_per_second
+                67      page-faults                      #      9.8 faults/sec  page_faults_per_second  ( +-  0.50% )
+          6,834.93 msec task-clock                       #      1.2 CPUs  CPUs_utilized         ( +-  0.14% )
+           160,152      L1-dcache-load-misses            #      0.0 %  l1d_miss_rate            ( +-  3.31% )  (15.31%)
+            68,812      LLC-loads                        #      2.1 %  llc_miss_rate            ( +-  2.49% )  (23.18%)
+            61,358      branch-misses                    #      0.0 %  branch_miss_rate         ( +-  3.46% )  (23.27%)
+     7,323,309,287      branches                         #   1071.5 M/sec  branch_frequency     ( +-  0.15% )  (23.34%)
+    18,869,229,246      cpu-cycles                       #      2.8 GHz  cycles_frequency       ( +-  0.21% )  (31.09%)
+    40,865,293,293      instructions                     #      2.2 instructions  insn_per_cycle  ( +-  0.36% )  (31.05%)
+           994,831      stalled-cycles-frontend          #     0.00 frontend_cycles_idle        ( +- 10.91% )  (30.99%)
+    13,122,288,700      stalled-cycles-backend           #     0.69 backend_cycles_idle         ( +-  0.15% )  (30.91%)
+    13,152,431,413      stalled-cycles-backend           #     0.32 stalled_cycles_per_instruction  ( +-  0.11% )  (23.09%)
+                        TopdownL1                        #      0.0 percent of slots  bad_speculation  ( +-  0.42% )  (7.69%)
+                                                         #      1.9 percent of slots  frontend_bound  ( +-  0.17% )  (7.72%)
+                                                         #     19.9 percent of slots  retiring  ( +-  0.40% )  (15.38%)
+                                                         #     78.1 percent of slots  backend_bound  ( +-  0.39% )  (15.32%)
 
-         6.4942219 +- 0.0000428 seconds time elapsed  ( +-  0.00% )
+       5.557039735 +- 0.005567408 seconds time elapsed  ( +-  0.10% )
 ```
 
-Comparing the results you can see the run time is significantly different (13.01 s vs. 6.49 s). 
+Comparing the results you can see the run time is significantly different (7.74 s vs. 5.55 s). 
 
-The instructions per cycle (IPC) are also notably different, (0.74 vs. 1.70) and look to be commensurate to run time. 
+The instructions per cycle (IPC) are also notably different, (1.3 vs. 2.2) and look to be commensurate to run time. 
 
 ## Pinpoint pipeline bottlenecks with top-down analysis
 
-There are many root causes of variations in IPC. 
+There are many root causes of variations in IPC. Our version of `perf stat` output on the 1st generation AGI CPU reports `stalled-cycles-frontend` and `stalled-cycles-backend` metrics. From the output above, comparing `false_sharing` to `no_false_sharing` binary, we observe a reduction in the ratio of `stalled-cycles-backend` from 0.80 (80%) to 0.69 (69%):
 
-To identify where the bottleneck occurs, we’ll start by using the [Arm Topdown methodology](https://developer.arm.com/documentation/109542/0100/Arm-Topdown-methodology). Install the python script using the [Telemetry Solution Install Guide](/install-guides/topdown-tool/).
+```output
+1,959,896           stalled-cycles-frontend          #     0.00 frontend_cycles_idle        ( +-  8.91% )  (30.79%)
+24,739,777,784      stalled-cycles-backend           #     0.80 backend_cycles_idle         ( +-  1.46% )  (30.74%)
+...
+994,831             stalled-cycles-frontend          #     0.00 frontend_cycles_idle        ( +- 10.91% )  (30.99%)
+13,122,288,700      stalled-cycles-backend           #     0.69 backend_cycles_idle         ( +-  0.15% )  (30.91%)
+```
+
+{{% notice Using Topdown Tool %}}
+
+
+Alternatively, if your version of `perf` on your Arm-based server doesn't report top-down metrics you can use the [Arm Topdown methodology](https://developer.arm.com/documentation/109542/0100/Arm-Topdown-methodology). Install the python script using the [Telemetry Solution Install Guide](/install-guides/topdown-tool/).
 
 Run the following command to observe the ratio of frontend to backend stall cycles. These indicate which section of the CPU pipeline is waiting on resources and causing slower performance. 
 
 ```bash
-topdown-tool -m Cycle_Accounting -a ./false_sharing 1
+topdown-tool -m Cycle_Accounting ./false_sharing 1
 ```
 
 The output is similar to:
 
 ```output
-Stage 1 (Topdown metrics)
-=========================
-[Cycle Accounting]
-Frontend Stalled Cycles 0.43% cycles
-Backend Stalled Cycles. 75.24% cycles
+CPU Neoverse V3AE metrics
+└── Stage 2 (uarch metrics)
+    └── Cycle Accounting (Cycle_Accounting)
+        └── ┏━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━┓
+            ┃ Metric                  ┃ Value  ┃ Unit ┃
+            ┡━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━┩
+            │ Backend Stalled Cycles  │ 76.149 │ %    │
+            │ Frontend Stalled Cycles │  0.045 │ %    │
+            └─────────────────────────┴────────┴──────┘
 ```
 
-The output shows there are disproportionately more backend stall cycles. This indicates the CPU is waiting for data. You could follow the top-down methodology further looking at the stage 2 microarchitecture analysis, but for sake of brevity you can jump to recording events with SPE.
+The exact values vary by system. A disproportionately high percentage of backend stalled cycles indicates that the CPU is waiting for data. You could follow the top-down methodology further, but for the sake of brevity you can jump to recording events with SPE.
+
+{{% /notice %}}
+
 
 ## Skid: When perf record misleads
 
@@ -126,8 +154,8 @@ Clearly Perf C2C is more accurate. You are able to observe the instruction that 
 Compile a debug version of both applications with the following commands: 
 
 ```bash
-gcc -g -lnuma -pthread false_sharing_example.c -o false_sharing.debug
-gcc -g -lnuma -pthread false_sharing_example.c -DNO_FALSE_SHARING -o no_false_sharing.debug
+gcc -g -fno-omit-frame-pointer false_sharing_example.c  -lnuma -pthread -o false_sharing.debug
+gcc -g -fno-omit-frame-pointer false_sharing_example.c -lnuma -pthread  -DNO_FALSE_SHARING -o no_false_sharing.debug
 ```
 
 Next, record the application with call stacks using the `perf c2c` subcommand with the `-g` flag. 
@@ -142,9 +170,15 @@ Run the following command to view the cache report.
 sudo perf c2c report
 ```
 
-The screen shot below shows the terminal UI (TUI). The first columns to view is the `Snoop` and `PA cnt`. The percentage highlighted red with the associated `PA cnt` of 2347 shows that the specific address `0x440100` is being snooped heavily by other cores. 
+{{% notice Please Note%}}
 
-Next, press `d` character to display the cache line details. The last `Source:Line`column, as the name implies, maps to the source code line that is attempted to access the associated address. 
+If the data cache line table is empty when running `perf c2c` on an Arm AGI CPU, you may need to apply [this patch](https://lore.kernel.org/linux-arm-kernel/20260928-perf_arm_spe_add_neoverse_v3ae-v1-1-738c9ed12d31@arm.com/T/#u) to the linux kernel and build `perf` from the patched source so it parses the table correctly. As of October 2026, this patch is not part of the latest stable mainline release `7.2.9`.
+
+{{%/notice%}}
+
+On supported Neoverse systems, the screen shot below shows the terminal UI (TUI). The `Peer Snoop` value of 98.19% means that cache line `0x440100` accounts for 98.19% of the sampled peer accesses in this recording. `Load Peer Total` reports 2446 corresponding samples, all classified as local peer traffic in this example.
+
+On those systems, press the `d` character to display the cache line details. The last `Source:Line` column maps the associated address to the source-code line that accessed it.
 
 ![perf-c2c-gif](./perf-c2c.gif)
 
