@@ -62,7 +62,7 @@ generated_summary_faq:
     answer: >-
       No. You keep the original mesh triangles and use OMM to describe opacity in smaller regions
       within them. You don't add polygons to the source model.
-  - question: How will I know whether an OMM strategy is suitable for my asset?
+  - question: How do I know whether an OMM strategy is suitable for my asset?
     answer: >-
       Compare image quality with and without OMM, then check the asset's data cost and remaining
       shader-side work against your goals. You can use the Learning Path's sample evidence to
