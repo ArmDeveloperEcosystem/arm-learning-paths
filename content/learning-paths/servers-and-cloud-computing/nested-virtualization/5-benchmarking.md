@@ -1,5 +1,6 @@
 ---
-title: Test nested virtualization overhead
+title: Benchmark Arm nested virtualization with sysbench
+description: Pin CPU cores and use sysbench to compare your benchmark results across the L0 host, L1 guest, and L2 guest.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -87,7 +88,7 @@ On the L1 guest and the L2 guest VMs, run the benchmark without `taskset`, becau
 sysbench cpu --cpu-max-prime=20000 --threads=8 --time=60 run 
 ```
 
-The following is an example of the output from a single run:
+For one run, the output is similar to:
 
 ```output
 sysbench 1.0.20 (using system LuaJIT 2.1.1761727121)

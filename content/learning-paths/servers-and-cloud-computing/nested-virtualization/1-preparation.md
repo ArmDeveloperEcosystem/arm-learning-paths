@@ -1,5 +1,6 @@
 ---
 title: Prepare the host for nested virtualization
+description: Prepare your Arm64 host for nested virtualization by installing virtualization tools and verifying that support is enabled.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +11,7 @@ layout: learningpathall
 
 Virtualization allows organizations to partition large multi-core servers into smaller environments with a strong level of resource isolation. It's a foundational technology for cloud computing. Cloud service providers typically provide compute resources to their customers using virtualization.
 
-Nested virtualization enables guest virtual machines (VMs) to serve as hypervisors, and run guest VMs inside a VM or cloud instance. There are a few use cases where this functionality is useful.
+Nested virtualization enables guest virtual machines (VMs) to serve as hypervisors and run guest VMs inside a VM or cloud instance. There are a few use cases where this functionality is useful.
 
 ### Resource isolation
 
@@ -80,7 +81,7 @@ The `VHE+NV2 mode initialized successfully` line is the key confirmation that ne
 
 ## What you've accomplished and what's next
 
-You've installed all of the virtualization tools that you'll use to prepare and start VMs on the bare metal host. You've also con firmed that your host is now running with nested virtualization enabled.
+You've installed all of the virtualization tools that you'll use to prepare and start VMs on the bare metal host. You've also confirmed that your host is now running with nested virtualization enabled.
 
 Next, you'll create and start an L1 guest VM running Fedora 44.
 

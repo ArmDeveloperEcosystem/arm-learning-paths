@@ -1,5 +1,6 @@
 ---
 title: Prepare and boot a nested L2 guest VM in the hypervisor VM
+description: Create an L2 guest VM inside your L1 hypervisor VM and connect to the nested guest over SSH.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -8,7 +9,7 @@ layout: learningpathall
 
 ## Repeat VM setup in the hypervisor VM
 
-You'll install all the virtualization tools that you need in the hypervisor VM. Then, you'll copy the base image from the host to the `fedora-l1-hyper` VM. You'll resize its disk, create a new seed ISO, and re-run `virt-install` for `fedora-l2-guest`.
+You'll copy the base image and private SSH key from the host to the `fedora-l1-hyper` VM, then install the virtualization tools there. Next, you'll resize the L2 guest disk, create a new seed ISO, and re-run `virt-install` for `fedora-l2-guest`.
 
 ## Copy the image and SSH key to the hypervisor
 

@@ -1,5 +1,6 @@
 ---
 title: Prepare and start an L1 guest virtual machine
+description: Create an L1 guest VM from a Fedora cloud image and connect to it over SSH for comparison with a nested VM.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -49,7 +50,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/guest_key -N ""
 
 This creates a private key at `~/.ssh/guest_key` and a public key at `~/.ssh/guest_key.pub`. In the `user-data` file, replace `<your-public-key>` with the contents of `~/.ssh/guest_key.pub`. You'll use the matching private key, `~/.ssh/guest_key`, to connect to the VM later.
 
-After creating these files, generate a special CD disk image (format ISO) that's attached to the VM when you instantiate it. After generating the ISO image, copy it to the same directory as the `qcow2` VM image that you created earlier:
+Create the `user-data` and `meta-data` files, then generate the seed ISO image that you'll attach to the VM. Copy the ISO to the same directory as the `qcow2` VM image that you created earlier:
 
 ```bash
  cat > /tmp/user-data <<EOF 

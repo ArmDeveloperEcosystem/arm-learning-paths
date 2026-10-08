@@ -1,5 +1,6 @@
 ---
 title: Create a hypervisor virtual machine on the host
+description: Create an L1 hypervisor VM on your Arm64 host and verify that it supports virtualization for nested VMs.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -10,7 +11,7 @@ layout: learningpathall
 
 At this point, you've used command line tools to create, boot, and connect to a guest virtual machine (VM) running on your Arm64 host. After completing the steps, you'll have another VM running on the host that can serve as a hypervisor for nested VMs. 
 
-## Set environment variables
+## Prepare and resize the L1 hypervisor disk image
 
 Set similar convenience environment variables to the L1 guest VM. The L1 hypervisor needs a bigger disk than the L1 guest, because it contains an identical 40GB L2 guest image inside it:
 
@@ -29,7 +30,7 @@ sudo qemu-img resize "$DISK_L1_HYPER" 80G
 
 ## Create a cloud-init seed ISO
 
-Create a seed ISO image for the guest hypervisor for cloud-init. Use the same SSH key pair that you generated or used for the guest VM:
+Create a seed ISO image for the guest hypervisor for cloud-init. Replace `<your-public-key>` with the same public SSH key you used for the L1 guest VM:
 
 ```bash
  cat > /tmp/user-data <<EOF 
