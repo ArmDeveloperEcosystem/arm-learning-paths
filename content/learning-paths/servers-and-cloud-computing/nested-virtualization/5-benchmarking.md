@@ -1,25 +1,26 @@
 ---
-title: Testing nested virtualization overhead
+title: Benchmark Arm nested virtualization with sysbench
+description: Pin CPU cores and use sysbench to compare your benchmark results across the L0 host, L1 guest, and L2 guest.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Test nested virtualization overhead
+## How the virtualization layers are pinned
 
-To measure the overhead of nested virtualization, you install and run a reference benchmark across the three layers: L0 (bare metal), the L1 guest VM, and the L2 guest VM. To make the test comparable, and to minimize interaction with other workloads running on the server, you pin each system under test to a fixed set of host cores.
+To measure the overhead of nested virtualization, you'll install and run a reference benchmark across the three layers: L0 (bare metal), the L1 guest VM, and the L2 guest VM. To make the test comparable and minimize interaction with other workloads running on the server, pin each system under test to a fixed set of host cores.
 
 The following table shows how each system is pinned:
 
 | System under test | vCPUs | Pinned to |
 |-------------------|-------|-----------|
-| Host (L0) benchmark | | Host cores 8-15 |
+| Host (L0) benchmark | N/A | Host cores 8-15 |
 | L1 guest | 0-7 | Host cores 16-23 |
 | L1 hypervisor | 0-15 | Host cores 24-39 |
 | L2 guest | 0-7 | Hypervisor cores 8-15 (host cores 32-39) |
 
-After the core pinning is in place and sysbench is installed on all systems under test, you run the test, verify that the correct cores run at 100% CPU for the duration of the test, and check the results to see how much virtualization passthrough affects performance. You can apply this core pinning while the VMs are running by using the `--live` flag for virsh.
+After the core pinning is in place and `sysbench` is installed on all systems under test, run the test. Verify that the correct cores run at 100% CPU for the duration of the test. Check the results to see how much virtualization passthrough affects performance. Apply this core pinning while the VMs are running by using the `--live` flag for `virsh`.
 
 ## Pin cores for the L1 guest and L1 hypervisor
 
@@ -65,7 +66,7 @@ sudo virsh emulatorpin <domain>
 
 ## Install sysbench
 
-Install the sysbench benchmarking tool on all systems under test (the host, the L1 guest, and the L2 guest):
+Install the `sysbench` benchmarking tool on the host, the L1 guest VM, and the L2 guest VM:
 
 ```bash
 sudo dnf install -y sysbench 
@@ -73,21 +74,21 @@ sudo dnf install -y sysbench
 
 ## Run the benchmark
 
-Run the same benchmark test on each system under test. You can run these in three different terminals at the same time, and because they use different cores, they should not significantly interfere with each other.
+Run the same benchmark test on each system under test. You can run the tests in three different terminals at the same time. The tests shouldn't significantly interfere with each other because they use different cores.
 
-On the bare metal host, use `taskset` to bind the benchmark to physical cores 8-15:
+On the bare metal host, use `taskset` to bind the benchmark to physical cores 8 to 15:
 
 ```bash
 taskset -c 8-15 sysbench cpu --cpu-max-prime=20000 --threads=8 --time=60 run 
 ```
 
-On the L1 guest and the L2 guest, run the benchmark without `taskset`, because you already pinned their virtual CPUs with virsh in the previous steps:
+On the L1 guest and the L2 guest VMs, run the benchmark without `taskset`, because you already pinned their virtual CPUs with `virsh`:
 
 ```bash
 sysbench cpu --cpu-max-prime=20000 --threads=8 --time=60 run 
 ```
 
-The following is an example of the output from a single run:
+For one run, the output is similar to:
 
 ```output
 sysbench 1.0.20 (using system LuaJIT 2.1.1761727121)
@@ -124,46 +125,36 @@ Threads fairness:
 
 ### How to read the output
 
-The fields that matter most for comparing the three layers are:
+The following fields matter most for comparing the three layers:
 
 - `events per second` under `CPU speed` is the throughput. Higher is better. This is the primary number to compare across bare metal, L1, and L2.
 - The `Latency (ms)` block reports per-request latency. `min`, `avg`, and `95th percentile` describe typical responsiveness, while `max` captures the worst-case spike. Lower is better.
-- `events (avg/stddev)` under `Threads fairness` shows how evenly work was spread across threads. The second number is the standard deviation; a smaller value means more even distribution.
+- `events (avg/stddev)` under `Threads fairness` shows how evenly work was spread across threads. The second number is the standard deviation. A smaller value means more even distribution.
 
 ### Record your results
 
-Run the benchmark on each layer and record the values from your own output. Fill in a table like this one with your results:
+Run the benchmark on each layer and record the values from your own output. 
 
-| Metric | Bare metal (L0) | L1 guest | L2 nested guest |
-| ------ | --------------- | -------- | --------------- |
-| Events/sec | | | |
-| Overhead vs bare metal | | | |
-| Min latency (ms) | | | |
-| Avg latency (ms) | | | |
-| Max latency (ms) | | | |
-| 95th percentile (ms) | | | |
-| Thread stddev | | | |
-
-To calculate the overhead for a layer, compare its events/sec against the bare metal result:
+To calculate the overhead for a layer, compare its events per second against the bare metal result:
 
 ```text
 overhead = (bare_metal_events_per_second - layer_events_per_second) / bare_metal_events_per_second * 100
 ```
 
-For example, if bare metal reports 9693 events/sec and the L2 nested guest reports 9219 events/sec, the overhead is `(9693 - 9219) / 9693 * 100`, or less than 5%.
+For example, if bare metal reports 9693 events per second and the L2 nested guest reports 9219 events per second, the overhead is `(9693 - 9219) / 9693 * 100`, or less than 5%.
 
-Compare the events/sec and latency values across the three layers to see how virtualization and nested virtualization affect your workload. The average and 95th percentile latencies are often close across all three layers, while the maximum latency tends to increase with each level of nesting.
+Compare the events per second and latency values across the three layers to see how virtualization and nested virtualization affect your workload. The average and 95th percentile latencies are often close across all three layers. The maximum latency tends to increase with each level of nesting.
 
 {{% notice Note %}}
-Results vary with the Arm server, CPU generation, kernel, and workload, so draw your conclusions from your own measurements rather than from any single reference figure. Nested virtualization support continues to improve, so newer Arm Neoverse generations typically show lower overhead than older ones. Focus on the relative difference between bare metal, L1, and L2 on your own hardware.
+Results vary with the Arm server, CPU generation, kernel, and workload. Draw conclusions from your own measurements rather than from any single reference figure. Nested virtualization support continues to improve, so newer Arm Neoverse generations typically show lower overhead than older ones. Focus on the relative difference between bare metal, L1, and L2 on your own hardware.
 {{% /notice %}}
 
-Here is an example of a completed table:
+The following is an example set of results:
 
 | Metric | Bare Metal | L1 KVM Guest | L2 Nested Guest |
 | ------ | ---------- | ------------ | --------------- |
-| Events/sec | 2533.02 | 2525.84 | 2306.22 |
-| Overhead vs bare metal | N/A | -0.3% | -8.9% |
+| Events per second | 2533.02 | 2525.84 | 2306.22 |
+| Overhead versus bare metal | N/A | -0.3% | -8.9% |
 | Min latency | 3.14ms | 3.15ms | 3.38ms |
 | Avg latency | 3.16ms | 3.17ms | 3.47ms |
 | Max latency | 9.16ms | 13.02ms | 19.72ms |
@@ -172,14 +163,6 @@ Here is an example of a completed table:
 
 ## What you've accomplished
 
-You have configured and run nested virtualization on an Arm server from end to end. Along the way, you:
+You've pinned CPU cores across all three layers and benchmarked them with `sysbench`.
 
-- Enabled nested virtualization on an Arm64 bare metal host and confirmed FEAT_NV2 support.
-- Created and started an L1 guest VM with `virt-install` and `cloud-init`.
-- Configured a second VM to act as a hypervisor by enabling virtualization passthrough.
-- Booted a nested L2 guest VM inside the hypervisor.
-- Pinned CPU cores across all three layers and benchmarked them with sysbench.
-
-You can now use these techniques to run virtual machines inside virtual machines on Arm, whether for workload isolation, hypervisor development and testing, or running microVMs in cloud environments.
-
-
+You can now use the techniques described in the Learning Path to run VMs inside VMs on Arm for workload isolation, hypervisor development and testing, or running microVMs in cloud environments.
