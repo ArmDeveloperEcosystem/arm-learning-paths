@@ -48,7 +48,7 @@
     </section>
 
     <section class="homepage-section" aria-labelledby="homepage-more-ways">
-        <h2 id="homepage-more-ways">More ways to learn</h2>
+        <h2 id="homepage-more-ways">More ways to learn <ads-tag class="homepage-new-tag" text="New!" shape="rectangle"></ads-tag></h2>
         <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-3">
             {{ range slice
                 (dict "title" "Install Guides" "link" "install-guides/" "description" "Set up the tools you need to develop on Arm.")
@@ -69,8 +69,8 @@
         <h2 id="homepage-contribute">Want to contribute content?</h2>
         <p>Share your expertise with the Arm developer community. Follow our contribution instructions to create and submit a Learning Path or Install Guide.</p>
         <div class="homepage-contribution-actions">
-            <ads-cta-button size="medium" level="secondary" data-link="{{ "learning-paths/cross-platform/_example-learning-path/" | relURL }}">Contribution Instructions</ads-cta-button>
-            <ads-cta-button size="medium" level="secondary" data-link="{{ .Param "github_repo" }}">GitHub Repo</ads-cta-button>
+            <ads-cta-button size="medium" level="primary" data-link="{{ "learning-paths/cross-platform/_example-learning-path/" | relURL }}">View Contribution Instructions</ads-cta-button>
+            <ads-cta-button size="medium" level="secondary" data-link="{{ .Param "github_repo" }}">Go to GitHub Repository</ads-cta-button>
         </div>
     </section>
 
