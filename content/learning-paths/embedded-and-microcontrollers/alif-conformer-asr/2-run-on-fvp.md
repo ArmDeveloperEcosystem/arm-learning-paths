@@ -100,7 +100,7 @@ docker run --rm \
   --env "HOME=${HOME}" \
   --env "ARMLM_CACHED_LICENSES_LOCATION=${HOME}/.armlm" \
   fvp:11.27.31 \
-  /opt/avh-fvp/bin/armlm activate \
+  /opt/avh-fvp/bin/arm_license_management_utilities/armlm activate \
   --server https://mdk-preview.keil.arm.com \
   --product KEMDK-COM0
 
