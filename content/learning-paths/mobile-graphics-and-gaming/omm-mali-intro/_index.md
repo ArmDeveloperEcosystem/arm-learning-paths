@@ -48,7 +48,7 @@ generated_summary_faq:
       Use OMM to let ray traversal resolve known opaque and transparent
       regions of an alpha-tested asset. With OMM, you can reduce repeated shader-side opacity checks when
       rays pass through assets such as foliage or fences.
-  - question: What kinds of assets are worth evaluating for OMM?
+  - question: What kinds of assets should I evaluate for OMM?
     answer: >-
       Start with alpha-tested assets that participate in ray tracing, have stable opacity masks,
       and receive repeated ray hits. You'll need an update policy for changing masks, while
@@ -57,12 +57,11 @@ generated_summary_faq:
     answer: >-
       No. You can work through asset decision and validation with the provided bake
       results and saved device capability report. If you have an Arm Mali G2-Ultra NX device,
-      you can also compare its reported capabilities with your chosen OMM strategy.
-  - question: Does OMM replace my existing alpha-tested rendering path?
+      you can compare its reported capabilities with your chosen OMM strategy.
+  - question: Will OMM change the geometry of my asset?
     answer: >-
-      No. You still need shader-side evaluation where OMM leaves opacity uncertain. You need
-      the original alpha-tested path when OMM isn't supported or enabled. Keep both paths consistent
-      so that the rendered image doesn't change when you switch between them.
+      No. You keep the original mesh triangles and use OMM to describe opacity in smaller regions
+      within them. You don't add polygons to the source model.
   - question: How will I know whether an OMM strategy is suitable for my asset?
     answer: >-
       Compare image quality with and without OMM, then check the asset's data cost and remaining
