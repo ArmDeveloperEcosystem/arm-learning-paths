@@ -38,25 +38,25 @@ generated_summary_faq:
   faqs:
   - question: Why do I need a bare-metal Arm64 server?
     answer: >-
-      You need direct access to the processor's EL2 virtualization support and hardware that
-      supports FEAT_NV2. A standard VM doesn't provide the access needed to enable nested
-      virtualization with these steps.
-  - question: How do I confirm nested virtualization is enabled on the host?
+      A bare-metal server provides direct access to the processor's EL2 virtualization support and hardware that
+      supports `FEAT_NV2`. A standard VM doesn't provide the access needed to enable nested
+      virtualization.
+  - question: How do I confirm that nested virtualization is enabled on the host?
     answer: >-
       Check the host's kernel messages for `VHE+NV2 mode initialized successfully`. If you see
       `VHE mode initialized successfully` without `+NV2`, nested virtualization isn't enabled.
       Check whether the kernel argument was applied and whether the hardware supports FEAT_NV2.
-  - question: How do I verify that the L1 hypervisor VM can run a nested guest?
+  - question: How do I verify that the hypervisor VM can run a nested guest?
     answer: >-
       Inside the L1 hypervisor VM, check the kernel messages for `CPU: All CPU(s) started at EL2`
       and confirm that `/dev/kvm` exists. These checks show that virtualization support is
       available to the VM.
-  - question: How do I connect to the L2 guest after it starts?
+  - question: How do I connect to the nested guest VM after it starts?
     answer: >-
       In the L1 hypervisor VM, use `virsh net-dhcp-leases default` to find the L2 guest's IP
       address. Connect with `ssh -i ~/guest_key fedora@<L2-guest-IP-address>` using the private
       key that you copied into the hypervisor VM.
-  - question: Which result should I compare across bare metal, L1, and L2?
+  - question: Which result should I compare across bare metal and guest VMs?
     answer: >-
       Compare `events per second` from your `sysbench` output to assess throughput. After pinning
       each system to the specified cores, calculate each guest's overhead against your bare-metal
