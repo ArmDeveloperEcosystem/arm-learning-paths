@@ -66,7 +66,7 @@ The L1 table defines permissions for each 16KB granule.
 
 Use the Arm Debugger MMU/MPU pane to observe these attributes:
 
-![Screenshot of Arm Debugger MMU/MPU pane showing L1 Granule Protection Table entries for memory region 0xA0000000, displaying Realm access permissions for 16KB granules#center](_images/l1gpt_0xA.png)
+![Screenshot of Arm Debugger MMU/MPU pane showing L1 Granule Protection Table entries for memory region 0xA0000000, displaying Realm access permissions for 16KB granules#center](_images/l1gpt_0xa.png)
 
 ![Screenshot of Arm Debugger MMU/MPU pane showing L1 Granule Protection Table entries for memory region 0x80000000, displaying the protection attributes for this address range#center](_images/l1gpt_0x8.png)
 

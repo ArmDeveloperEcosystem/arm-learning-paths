@@ -1,36 +1,39 @@
 ---
-title: Test that U-Boot refuses a wrong key and a tampered image
-description: "Optional: sign a second Zephyr image with a key U-Boot doesn't have, tamper with a copy of the trusted FIT, check both with fit_check_sign on the host, then watch U-Boot refuse both on your target."
+title: (Optional) Test that U-Boot refuses a wrong key and a tampered image
+description: "Optionally test on the host and target that U-Boot rejects Zephyr FIT images signed with an untrusted key or modified after signing."
 weight: 8
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Prove the refusal, not only the acceptance
+## Test rejection of untrusted and tampered images
 
-This page makes two images U-Boot must refuse, one signed with the wrong key and one changed after signing, checks them on the host, and watches U-Boot refuse each one on your target's console.
+The following tests are optional. Create one Flattened Image Tree (FIT) signed with an untrusted key and another modified after signing. Check both on the host, then confirm that U-Boot refuses to start them on your target. The `b` and `t` commands are already built into U-Boot to select these images.
 
-This page is optional, and the `b` and `t` commands in your U-Boot are already waiting for its two files.
+Open a terminal and load the environment file for your target:
 
-Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-qemu.sh`, or `source $HOME/zephyr-secure-boot/env-am62l.sh` for the AM62L EVM.
+- QEMU: `source $HOME/zephyr-secure-boot/env-qemu.sh`
+- AM62L evaluation module (EVM): `source $HOME/zephyr-secure-boot/env-am62l.sh`
 
 ## Build a second Zephyr image
 
-The wrong-key image is a different program on purpose: if U-Boot ever runs it, the console says so in capital letters.
+Give the wrong-key image a distinct banner so that you can identify it if it unexpectedly starts.
 
-In Workbench for Zephyr, select **Add Application** again. Use the same workspace, toolchain, board and sample as when you [built the trusted image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/3-build-zephyr/), and enter `hello_b` as the **Project Name**. Give it the same `prj.conf` and the same `src/main.c` as `hello`, with the two banner lines changed:
+In Workbench for Zephyr, select **Add Application**. Use the same workspace, toolchain, board, and sample as the [trusted image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/3-build-zephyr/). Enter `hello_b` as the **Project Name**. Copy `prj.conf` and `src/main.c` from `hello`, then replace these two banner lines:
 
 ```c
 	printk("#   Hello from ZEPHYR IMAGE B                  #\n");
 	printk("#   signed with key-b  (NOT trusted by U-Boot) #\n");
 ```
 
-The replacement text is the same length as the original, so the box stays aligned. Build `hello_b` the same way, with a right-click on it in the **Applications** view and **Build**. The result is `$WORK/zephyrproject/applications/hello_b/build/primary/zephyr/zephyr.bin`, the same size as the first image.
+In the **Applications** view, open the context menu for `hello_b` and select **Build**. The resulting binary is `$WORK/zephyrproject/applications/hello_b/build/primary/zephyr/zephyr.bin`.
 
-## Sign the second image with a key U-Boot doesn't have
+## Sign the second image with the untrusted key
 
-`key-b` is the second key pair you created when you [signed the trusted image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/4-sign-zephyr/). Copy the FIT source with `sed`, swapping `key-a` for `key-b` and `hello` for `hello_b`, then sign it:
+Use `key-b`, the second key pair that you created during [FIT signing](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/4-sign-zephyr/). Copy the FIT source with `sed`, replacing `key-a` with `key-b` and the `hello` application path with `hello_b`. 
+
+Then, sign the new FIT:
 
 ```bash
 sed 's/key-a/key-b/g; s#/hello/#/hello_b/#' $FIT/zephyr-a.its > $FIT/zephyr-b.its
@@ -64,7 +67,7 @@ Created:         Fri Sep 11 19:14:00 2026
 Signature written to '/home/user/zephyr-secure-boot/fit/zephyr-b.itb', node '/configurations/conf-1/signature-1'
 ```
 
-**Lines to look for:** `Sign algo:    sha256,rsa2048:key-b`, and a `Hash value` that differs from image A's, because `hello_b` is a different binary. This image proves that a valid signature isn't enough: U-Boot must refuse a key it doesn't have.
+Check for `Sign algo:    sha256,rsa2048:key-b`. The `Hash value` differs from that of image A because the application banner changed. This FIT has a signature from `key-b`, but U-Boot trusts only `key-a` and must reject it.
 
 ## Make a tampered copy of the trusted image
 
@@ -75,7 +78,7 @@ cp $FIT/zephyr-a.itb $FIT/zephyr-tampered.itb
 printf '\xff' | dd of=$FIT/zephyr-tampered.itb bs=1 seek=32768 conv=notrunc 2>/dev/null
 ```
 
-The payload starts at the `Data Start` offset you saw when U-Boot loaded the FIT, a couple of hundred bytes into the file, and is tens of kilobytes long, so offset 32768 (`0x8000`) lands inside Zephyr's code, not in the FIT's own structure.
+In the example FITs, offset 32768 (`0x8000`) falls inside the Zephyr payload rather than the FIT metadata. The payload begins a few hundred bytes into the file and is tens of kilobytes long.
 
 Check that the copy now differs from the original:
 
@@ -89,13 +92,13 @@ The output is similar to:
 /home/user/zephyr-secure-boot/fit/zephyr-a.itb /home/user/zephyr-secure-boot/fit/zephyr-tampered.itb differ: byte 32769, line 94
 ```
 
-If `cmp` prints nothing, that byte was already `0xff` in your build; pick another offset inside the payload, for example `seek=32800`, and run the `dd` and `cmp` commands again.
+If `cmp` prints nothing, the selected byte was already `0xff`. Choose another offset inside the payload, such as `seek=32800`, then repeat the `dd` and `cmp` commands.
 
-This image proves that U-Boot catches a change made after signing. Expect the signature check to pass and the hash check to fail: the signature covers the configuration and the `hash-1` node, which you didn't touch, and `hash-1` covers the payload bytes, which you changed.
+Expect the signature check to pass and the payload hash check to fail. The signature covers the unchanged configuration and `hash-1` node. The hash covers the payload bytes that you modified.
 
 ## Check both images on the host
 
-Your times, hash values and `FIT Image at` addresses differ from the outputs on this page. Run `fit_check_sign` as you did when you [built U-Boot](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), first on the wrong-key image:
+Your timings, hash values, and `FIT Image at` addresses will differ from these examples. Run `fit_check_sign` with the control device tree from your [U-Boot build](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/). Check the wrong-key image first:
 
 ```bash
 $UBOOT_OUT/tools/fit_check_sign -f $FIT/zephyr-b.itb -k $UBOOT_OUT/u-boot.dtb
@@ -111,9 +114,9 @@ Failed to verify required signature 'key-key-a'
 Signature check bad (error 1)
 ```
 
-**Lines to look for:** `sha256,rsa2048:key-b-` followed by `error!`, then `Failed to verify required signature 'key-key-a'`, then `Signature check bad (error 1)`. The exit code is 1.
+Check for `sha256,rsa2048:key-b-` and `Failed to verify required signature 'key-key-a'`. The final verdict, `Signature check bad (error 1)`, confirms rejection. The exit code is one.
 
-Then check the tampered image:
+Then, check the tampered image:
 
 ```bash
 $UBOOT_OUT/tools/fit_check_sign -f $FIT/zephyr-tampered.itb -k $UBOOT_OUT/u-boot.dtb
@@ -164,11 +167,11 @@ Could not find subimage node type 'ramdisk'
 Signature check bad (error 1)
 ```
 
-**Lines to look for:** `sha256,rsa2048:key-a+` on the first line, then `sha256 error!` and `Bad hash value for 'hash-1' hash node in 'kernel-1' image node`, then `Signature check bad (error 1)`. The exit code is 1.
+Check that `sha256,rsa2048:key-a+` reports a valid signature, followed by `sha256 error!` and `Bad hash value for 'hash-1'`. The final verdict is `Signature check bad (error 1)`, and the exit code is one. The modified payload fails verification even though the configuration signature passes.
 
 ## Add the two images to the boot media
 
-Add the two new FITs with `mcopy`, at the same `BOOT_IMG` volume you used when you [built the boot media](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-target/), then list the volume:
+Copy both test FITs into the `BOOT_IMG` volume used to [prepare the boot media](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/6-boot-the-target/), then list its contents:
 
 ```bash
 mcopy -o -i $BOOT_IMG $FIT/zephyr-b.itb $FIT/zephyr-tampered.itb ::
@@ -192,14 +195,14 @@ ZEPHYR~1 ITB     60198 2026-09-15  16:49  zephyr-tampered.itb
                         130 643 968 bytes free
 ```
 
-In QEMU the disk image holds the three FITs and nothing else. The listing above is the AM62L EVM's card: six files, the boot files and the three FITs.
+This example lists the six files of the AM62L EVM: three boot files and three FITs. The QEMU disk image contains only the three FITs.
 
 {{< tabpane-normal >}}
   {{< tab header="QEMU" >}}
-Nothing to write: `disk.img` is the disk. Start QEMU again with the same command as on the previous page; it reads the image fresh at every start.
+Restart QEMU with the same command used to boot the trusted image. QEMU reads the updated `disk.img` directly. No physical media needs to be written.
   {{< /tab >}}
   {{< tab header="AM62L EVM" >}}
-Write the image to the card again with the same `dd` command as on the previous page, taking the same care with `/dev/sdX`:
+Write the updated image to the card. Confirm the device name of the card before replacing `/dev/sdX`. `dd` overwrites the entire selected disk:
 
 ```bash
 sudo dd if=$WORK/sdcard.img of=/dev/sdX bs=4M conv=fsync status=progress
@@ -211,7 +214,7 @@ Move the card to the board, open the console with `picocom`, and power the board
 
 ## Run the wrong-key test
 
-Press a key during the three-second countdown to stop autoboot. If you miss it, U-Boot starts image A; start the target again and try once more. At the prompt, run the wrong-key test:
+Press a key during the three-second countdown to stop autoboot. If you miss the countdown, U-Boot starts image A. Start the target again and try again. At the prompt, run the wrong-key test:
 
 ```console
 => run b
@@ -231,11 +234,13 @@ ERROR -2: can't get kernel image!
 *** REFUSED: Zephyr was NOT started ***
 ```
 
-**Lines to look for:** `sha256,rsa2048:key-b-  error!` says the FIT is signed with `key-b`, which U-Boot doesn't have; `-` means fail. `Failed to verify required signature 'key-key-a'` is the `required = "conf"` rule, which an unsigned image fails too. `Bad Data Hash` and `ERROR -2: can't get kernel image!` close both refusals on this page whichever check failed; the lines above them say which one. `bootm start` failed, so the `&&` chain skipped `go` and the `echo` printed `*** REFUSED: Zephyr was NOT started ***`, with no Zephyr banner.
+Check for `sha256,rsa2048:key-b-  error!` and `Failed to verify required signature 'key-key-a'`. The `-` indicates failure, because the signature of the image doesn't satisfy the required `key-a` check.
 
-## Run the tampered test
+When `bootm start` fails, the `&&` chain skips `go` and prints `*** REFUSED: Zephyr was NOT started ***`. Confirm that no Zephyr banner appears. `Bad Data Hash` and `ERROR -2: can't get kernel image!` can appear for either rejection test. Use the preceding messages to identify which check failed.
 
-Still at the prompt, run the tampered test:
+## Run the tampered-image test
+
+At the U-Boot prompt, run the tampered-image test:
 
 ```console
 => run t
@@ -268,14 +273,16 @@ ERROR -2: can't get kernel image!
 *** REFUSED: Zephyr was NOT started ***
 ```
 
-**Lines to look for:** `sha256,rsa2048:key-a+ OK` shows the signature passes; `sha256 error!` and `Bad hash value for 'hash-1' hash node in 'kernel-1' image node` show the payload no longer matches the stored `Hash value`; `*** REFUSED: Zephyr was NOT started ***` follows.
+Check that `sha256,rsa2048:key-a+ OK` reports a valid signature. `sha256 error!` and `Bad hash value for 'hash-1'` indicate that the payload no longer matches its stored hash. Confirm that `*** REFUSED: Zephyr was NOT started ***` appears without a Zephyr banner.
 
 {{% notice Note %}}
-If `run b` or `run t` ends with a Zephyr banner instead of the `REFUSED` line, the check isn't failing closed. The two causes seen in practice are a `;` where `&&` belongs in the `zboot` chain of `CONFIG_PREBOOT`, and a `signature.dtsi` without `required = "conf"`. Check both against [Build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), rebuild, and put the files on the boot media again.
+If `run b` or `run t` starts Zephyr, verification isn't preventing startup. Check for a `;` where `&&` belongs in `CONFIG_PREBOOT`, and confirm that `signature.dtsi` includes `required = "conf"`. Compare both with the [U-Boot build settings](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/), rebuild, and update the boot media.
 {{% /notice %}}
 
 To boot the trusted image again, type `run a`.
 
 ## What you've accomplished and what's next
 
-U-Boot started the trusted image and stopped the wrong-key image at the signature and the tampered one at the hash, both before `go`. Next, [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) separates what these runs proved from what a product still needs.
+You've confirmed that U-Boot rejects the wrong-key image at the signature check and the tampered image at the payload hash check. Neither reaches `go` or starts Zephyr. 
+
+Next, you'll review what these tests establish and what a production device still needs.

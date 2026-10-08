@@ -1,33 +1,36 @@
 ---
 title: Create signing keys and sign the Zephyr image into a FIT
-description: Build mkimage from your target's U-Boot tree, generate two RSA keys with OpenSSL, and sign the Zephyr binary into a FIT image that U-Boot can verify.
+description: Build the U-Boot signing tools, generate RSA key pairs with OpenSSL, and package Zephyr in a signed FIT image for U-Boot to verify.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Build U-Boot's host tools first
+## Build the U-Boot host tools
 
-Open a terminal and load the environment for your target: `source $HOME/zephyr-secure-boot/env-qemu.sh`, or `source $HOME/zephyr-secure-boot/env-am62l.sh` for the AM62L EVM.
+Open a terminal and load the environment file for your target:
 
-`mkimage` builds and signs a FIT image. `fit_check_sign` verifies a signed FIT on the host. Both come from the same U-Boot tree as your target's U-Boot, so signer and verifier match.
+- QEMU: `source $HOME/zephyr-secure-boot/env-qemu.sh`
+- AM62L evaluation module (EVM): `source $HOME/zephyr-secure-boot/env-am62l.sh`
 
-The `tools` target needs the target's `.config` first, so run the defconfig target named by `UBOOT_DEFCONFIG` in your environment file:
+Build `mkimage` to create and sign Flattened Image Tree (FIT) images, and `fit_check_sign` to verify them on the host. Use the U-Boot source tree for your target so that the host tools match the U-Boot version that you'll run.
+
+Before building the tools, generate `.config` from the default configuration for your target. Run the target named by `UBOOT_DEFCONFIG` in your environment file:
 
 ```bash
 make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="$UBOOT_CC" $UBOOT_DEFCONFIG
 ```
 
-`UBOOT_CC` is the compiler command from your environment file. In QEMU it is the plain cross compiler; on the AM62L it carries `--sysroot`, the SDK's library path, without which the U-Boot link fails. Keep `CC="$UBOOT_CC"` on every `make` line, including the ones on the next page.
+`UBOOT_CC` stores the compiler command. For QEMU, it names the cross compiler installed from Ubuntu. For the AM62L EVM, it also includes `--sysroot` to locate the headers and libraries in the SDK. Keep `CC="$UBOOT_CC"` on every `make` command, including when you build U-Boot later.
 
-Then build the host tools:
+Then, build the host tools:
 
 ```bash
 make -C $UBOOT_SRC O=$UBOOT_OUT CROSS_COMPILE=$CROSS CC="$UBOOT_CC" tools
 ```
 
-Both tools land in `$UBOOT_OUT/tools/`. Check that `mkimage` runs:
+Both tools are written to `$UBOOT_OUT/tools/`. Check that `mkimage` runs:
 
 ```bash
 $UBOOT_OUT/tools/mkimage -V
@@ -39,17 +42,17 @@ The output is similar to:
 mkimage version 2026.01-g5fb294342321
 ```
 
-The version string names the U-Boot tree you built from. The listing above was captured on the AM62L EVM, whose TI tree is 2026.01; in QEMU it reads `mkimage version 2025.07`.
+The version string identifies your U-Boot source tree. The example output indicates the TI tree for the AM62L EVM, version 2026.01. For the QEMU setup, expect `mkimage version 2025.07`.
 
 {{% notice Note %}}
-If the `tools` build stops at `pylibfdt`, `swig` or `gnutls/gnutls.h`, a package is missing: run the `apt install` command from [Set up the host tools for your target](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/2-set-up-tools/) again, then the `tools` step.
+If the tools build reports a missing `pylibfdt` dependency, `swig`, or `gnutls/gnutls.h`, check the packages installed during [host-tool setup](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/2-set-up-tools/). Run the shared `apt install` command again, then retry the tools build.
 {{% /notice %}}
 
-## Create two signing keys
+## Create two signing key pairs
 
-The private key signs and stays on the host. Only the public key goes into U-Boot, on the next page.
+Use the private key to sign the image and keep it on the host. You'll embed only the public key in U-Boot.
 
-You create two pairs. `key-a` is the key U-Boot trusts. `key-b` is a valid key U-Boot never sees. You use it on the optional test page, [Test that U-Boot refuses a wrong key and a tampered image](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/), to prove that U-Boot refuses a key it doesn't know.
+Create two key pairs. You'll configure U-Boot to trust `key-a` and leave out the public key for `key-b`. The optional [wrong-key and tampered-image tests](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/7-test-the-checks/) use `key-b` to demonstrate rejection of an image signed with an untrusted key.
 
 Generate both pairs with OpenSSL:
 
@@ -69,13 +72,17 @@ The expected output is:
 key-a.crt  key-a.key  key-b.crt  key-b.key
 ```
 
-`mkimage -k <dir>` expects this layout. `<name>.key` holds the private key, `<name>.crt` is a self-signed certificate wrapping the public key, and `<name>` is the `key-name-hint` you write in the FIT source.
+`mkimage -k <dir>` expects the following files in the key directory:
 
-These 2048-bit keys, generated on the build machine, are fine for a demo; [Review what is verified and what production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) covers production keys.
+- `<name>.key` holds the private key.
+- `<name>.crt` is a self-signed certificate containing the public key.
+- The shared file-name stem, `<name>`, matches `key-name-hint` in the FIT source.
+
+These 2048-bit keys are generated on the build host for this demonstration. The later section on [the Zephyr FIT verification boundary and production needs](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/8-production/) covers production key handling.
 
 ## Write the FIT source
 
-You describe the FIT in a `.its` file (image tree source), and `mkimage` compiles and signs it into an `.itb` (image tree blob). Write the source; the heredoc is unquoted, so `$WORK` and `$ZEPHYR_ADDR` expand:
+Describe the FIT in an image tree source (`.its`) file. `mkimage` compiles and signs it to produce an image tree blob (`.itb`). Create the source with the following command. The unquoted `EOF` delimiter lets the shell expand `$WORK` and `$ZEPHYR_ADDR`:
 
 ```bash
 cat > $FIT/zephyr-a.its <<EOF
@@ -112,10 +119,10 @@ cat > $FIT/zephyr-a.its <<EOF
 EOF
 ```
 
-Three parts of this file matter:
+The FIT source defines how U-Boot handles the payload:
 
 - `os = "u-boot"` marks Zephyr as a standalone program, so U-Boot verifies and copies it without looking for a Linux kernel header or device tree.
-- `signature-1` sits under the configuration, because the `required = "conf"` rule checks the configuration U-Boot boots. With `sign-images = "kernel"`, the signature also covers the image's `hash-1` node, and `key-name-hint` names the key in `$KEYS`.
+- `signature-1` sits under the configuration, because the `required = "conf"` rule checks the configuration U-Boot boots. With `sign-images = "kernel"`, the signature also covers the `hash-1` node of the image, and `key-name-hint` names the key in `$KEYS`.
 - `load` and `entry` are `ZEPHYR_ADDR`, where U-Boot copies the verified payload and where `go` jumps.
 
 ## Sign the image
@@ -126,7 +133,7 @@ Compile and sign the FIT. `-k $KEYS` tells `mkimage` where the private key is:
 $UBOOT_OUT/tools/mkimage -f $FIT/zephyr-a.its -k $KEYS $FIT/zephyr-a.itb
 ```
 
-`mkimage` prints the image contents. Your timestamps, `Hash value` and `Sign value` differ, and the `Sign value` is shortened here. The output is similar to:
+`mkimage` prints the FIT contents. Your timestamps, `Hash value`, and `Sign value` will differ. The output is similar to:
 
 ```output
 FIT description: Zephyr RTOS, signed with key-a
@@ -152,13 +159,16 @@ Created:         Fri Sep 11 19:14:00 2026
   Timestamp:    Fri Sep 11 19:14:00 2026
 Signature written to '/home/user/zephyr-secure-boot/fit/zephyr-a.itb', node '/configurations/conf-1/signature-1'
 ```
+The `Sign value` is shortened for readability.
 
-**Lines to look for:** `Sign algo:    sha256,rsa2048:key-a` and the last line, `Signature written to ... node '/configurations/conf-1/signature-1'`, say that `mkimage` found `key-a` in `$KEYS` and wrote its signature into `conf-1`. `Hash value` is the SHA-256 of `zephyr.bin`, which U-Boot recomputes on the target.
+Check `Sign algo:    sha256,rsa2048:key-a` and the final `Signature written to ...` line. They confirm that `mkimage` used `key-a` and wrote its signature into `conf-1`. `Hash value` is the SHA-256 hash of `zephyr.bin`, which U-Boot recomputes during verification.
 
-The listing above was captured on the AM62L EVM. In QEMU it shows the QEMU values instead: `Data Size: 37040 Bytes` and `Load Address: 0x40000000`.
+The example output is for the AM62L EVM build. For the QEMU build, expect `Data Size: 37040 Bytes` and `Load Address: 0x40000000`.
 
-Don't use the `mkimage -K` option here: the public key goes into U-Boot's own device tree at build time, on the next page.
+Omit `mkimage -K` when signing this FIT. You'll add the public key to the U-Boot control device tree during the build.
 
 ## What you've accomplished and what's next
 
-You've built the U-Boot host tools, created two key pairs and signed Zephyr into `$FIT/zephyr-a.itb`. Next, you [build U-Boot with the public key and a boot command that fails closed](/learning-paths/embedded-and-microcontrollers/zephyr-signed-fit-uboot-cortex-a/5-build-uboot/).
+You've built the U-Boot host tools, created two key pairs, and packaged Zephyr in the signed FIT `$FIT/zephyr-a.itb`. 
+
+Next, you'll build U-Boot with the trusted public key and a boot command that starts Zephyr only after verification succeeds.
