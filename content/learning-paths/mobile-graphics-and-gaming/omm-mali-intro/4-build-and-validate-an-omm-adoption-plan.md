@@ -9,13 +9,13 @@ layout: learningpathall
 
 ## Make a decision that you can validate
 
-You now have all the pieces needed to evaluate OMM, but they become useful only when you connect them in one decision. A suitable asset still needs a sensible bake strategy, a supported runtime path, and a fallback that preserves the original image.
+You now have all the pieces needed to evaluate Opacity Micromaps (OMM), but they become useful only when you connect them in one decision. A suitable asset still needs a sensible bake strategy, a supported runtime path, and a fallback that preserves the original image.
 
 You'll make that decision for a sample leaf asset. You don't need OMM-capable hardware because this section includes both bake results and a saved device capability report.
 
 ![Pipeline diagram assigning OMM responsibilities across content authoring, the engine and RHI, the Vulkan API and driver, and Mali hardware. Each stage passes its output to the next, from per-triangle data to the final opacity decision.#center](images/omm-introduction/06-responsibility-map.webp "Ownership and outputs across the OMM pipeline")
 
-The responsibility map shows how content, baking, engine integration, and the driver contribute to the final result. Use the map to identify where each piece of evidence comes from and who should investigate a failure.
+The responsibility map shows how content, baking, engine integration, and the driver contribute to the final result. RHI labels the engine's hardware-facing rendering layer in the diagram. Use the map to identify where each piece of evidence comes from and who should investigate a failure.
 
 ## Review the sample asset
 
@@ -72,6 +72,8 @@ For the stated constraints, use the level-3, 4-state candidate. It stays within 
 | Rebuild rule | Rebuild after changes to triangle order, UVs, alpha data, cutoff, filtering, or level of detail source data |
 
 The device also supports the level-5, 2-state candidate, and that option removes all unknown regions. However, its 128-byte raw payload exceeds the asset budget. Reconsider it only if the resource budget changes and profiling shows enough benefit from removing the remaining shader-side work.
+
+Now use the same decision record for the asset you chose on the first page. If you chose an asset from your project, record the evidence you have. If you imagined an asset, note what evidence you would need to collect for each decision.
 
 ## Diagnose a failed validation
 

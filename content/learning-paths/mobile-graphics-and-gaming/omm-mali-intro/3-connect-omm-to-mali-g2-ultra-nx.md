@@ -1,6 +1,6 @@
 ---
 title: Connect OMM to Arm Mali G2-Ultra NX
-description: Follow OMM data into a Vulkan acceleration structure and enable hardware traversal on Arm Mali G2-Ultra NX.
+description: Trace OMM data through Vulkan acceleration-structure setup and assess the integration requirements for adoption on Arm Mali G2-Ultra NX.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -15,7 +15,7 @@ Arm Mali G2-Ultra NX can read OMM data in its hardware ray tracing path. Your en
 
 ![Flow diagram showing Mali G2-Ultra NX traversal moving from scene traversal to a triangle hit and hardware OMM lookup. The lookup accepts opaque regions, skips transparent regions, and sends unknown regions to the fallback path.#center](images/omm-introduction/04-mali-hardware-flow.webp "Hardware OMM lookup during Mali G2-Ultra NX ray traversal")
 
-This distinction is important when you debug the feature. A successful offline bake proves that you produced OMM data, but it doesn't prove that the GPU is using the data. The resource build, triangle mapping, and traversal controls also needs to be correct.
+This distinction is important when you debug the feature. A successful offline bake proves that you produced OMM data, but it doesn't prove that the GPU is using the data. The resource build, triangle mapping, and traversal controls also need to be correct.
 
 ## Follow the runtime lifecycle
 

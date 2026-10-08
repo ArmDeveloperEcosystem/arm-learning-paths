@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Turn an alpha mask into traversal data
 
-After you identify a suitable asset, you need to describe its opacity in a form that ray traversal can use. Opacity Micromaps (OMM) does this by dividing each original triangle into smaller regions called microtriangles. Each microtriangle records whether its part of the alpha mask is opaque, transparent, or still uncertain.
+After you identify a suitable asset, you need to describe its opacity in a form that ray traversal can use. Opacity Micromaps (OMM) do this by dividing each original triangle into smaller regions called microtriangles. Each microtriangle records whether its part of the alpha mask is opaque, transparent, or still uncertain.
 
 This subdivision changes the OMM data, not the mesh. It doesn't add polygons to the source model or to the bottom-level acceleration structure (BLAS). You can think of it as placing a finer decision grid over the original triangle.
 
