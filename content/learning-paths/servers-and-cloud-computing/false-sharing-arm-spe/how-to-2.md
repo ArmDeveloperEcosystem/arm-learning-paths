@@ -15,7 +15,7 @@ SPE requires support from both your hardware and the operating system. Many clou
 
 You need to identify a system that supports SPE using the information below. 
 
-This learning path uses the 1st generation Arm AGI CPU running Ubuntu 24.04 LTS. Alternatively, if you are looking for an AWS system you can use a `c6g.metal` instance running Amazon Linux 2023 (AL2023). 
+This example uses the Arm AGI CPU running Ubuntu 24.04 LTS. Alternatively, you can use an AWS bare metal instance like `c6g.metal` running Amazon Linux 2023 (AL2023). 
 
 Check the operating system kernel version with the following commands: 
 
