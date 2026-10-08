@@ -1,6 +1,6 @@
 ---
-title: Verify ASR inference on the E8 DevKit
-description: Capture a spoken phrase on the E8 DevKit and verify the ASR transcription on its connected display.
+title: Verify ASR inference on the E8 AppKit
+description: Capture a spoken phrase on the E8 AppKit and verify the ASR transcription on its connected display.
 weight: 6
 
 layout: "learningpathall"
@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Start the application
 
-Keep the supported display attached and the **PRG USB** cable connected.
+Keep the **PRG USB** cable connected.
 
 Close J-Flash and SETOOLS, then press and release **RESET**. Wait for the display to show **Conformer ASR (ExecuTorch)** before testing audio.
 
@@ -16,7 +16,7 @@ Close J-Flash and SETOOLS, then press and release **RESET**. Wait for the displa
 
 ## Speak a short phrase
 
-Locate the joystick shown in Figure 2A (page 8) of the [E8 DevKit User Guide](https://alifsemi.com/download/AUGD0023#page=8).
+Locate the joystick as shown in the [E8 AppKit User Guide](https://alifsemi.com/download/AUGD0028).
 
 1. Press straight down on the centre of the joystick and hold it.
 2. Say a short phrase while holding it.
@@ -34,4 +34,4 @@ The display also shows the spectrogram, input duration, and processing times. Th
 
 ## What you have accomplished
 
-You have programmed the E8 DevKit, captured live speech, and read the Conformer ASR transcription on its display.
+You have programmed the E8 AppKit, captured live speech, and read the Conformer ASR transcription on its display.

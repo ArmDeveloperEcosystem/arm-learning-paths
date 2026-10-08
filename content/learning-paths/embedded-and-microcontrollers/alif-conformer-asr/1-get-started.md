@@ -20,16 +20,16 @@ The [SentencePiece vocabulary](https://github.com/google/sentencepiece/blob/mast
 
 The Machine Learning Evaluation Kit (MLEK) is a set of embedded machine learning examples, build scripts, model resources, and deployment flows for Arm-based microcontroller systems. In this section, you will review the ASR and MLEK flow, clone the Arm MLEK repository, initialize submodules, and run the ExecuTorch resource setup script that prepares the Conformer model assets.
 
-<!-- Ethos-U85 is an Arm NPU for accelerating neural networks in high-performance microcontroller designs, and is a primary target for the MLEK. Conformer is a good fit for this target because ASR depends on both local sound patterns and longer-range speech context. In this flow, the model is exported as an ExecuTorch `.pte` file so supported operations can run on the Ethos-U85 NPU instead of only on the Cortex-M CPU. -->
+Ethos-U85 is an Arm NPU for accelerating neural networks in high-performance microcontroller designs, and is a primary target for the MLEK. Conformer is a good fit for this target because ASR depends on both local sound patterns and longer-range speech context. In this flow, the model is exported as an ExecuTorch `.pte` file so supported operations can run on the Ethos-U85 NPU instead of only on the Cortex-M CPU.
 
-Before using the physical Alif E8 DevKit, you will run the ASR application on the [Corstone-320 Fixed Virtual Platform (FVP)](https://support.arm.com/documentation/109760/0000/SSE-320-FVP). An FVP is a software model of an Arm system that can run the same baremetal firmware you later port and deploy to hardware. Corstone-320 includes an Ethos-U85 target, so you can prototype and debug the model, runtime, and application flow before porting the application to the Alif board.
+Before using the physical Alif E8 AppKit, you will run the ASR application on the [Corstone-320 Fixed Virtual Platform (FVP)](https://support.arm.com/documentation/109760/0000/SSE-320-FVP). An FVP is a software model of an Arm system that can run the same baremetal firmware you later port and deploy to hardware. Corstone-320 includes an Ethos-U85 target, so you can prototype and debug the model, runtime, and application flow before porting the application to the Alif board.
 
 ## Prepare your development host
 
 {{% notice Important %}}
 Use Linux on an x86_64 or aarch64 host, or use an **Apple Silicon Mac** running macOS 15 or later. 
 
-The commands have not been validated on native Windows. WSL with USB passthrough can work with the E8 DevKit, but that configuration is outside the scope of this Learning Path.
+The commands have not been validated on native Windows. WSL with USB passthrough can work with the E8 AppKit, but that configuration is outside the scope of this Learning Path.
 {{% /notice %}}
 
 MLEK requires Python 3.10, 3.11, or 3.12. Install the host packages for your operating system. The macOS commands assume you have already installed [Homebrew](https://brew.sh/).
@@ -105,13 +105,6 @@ Confirm that MLEK generated the `.pte` models and that the vocabulary is present
 find resources_downloaded/asr -name '*.pte' -print
 ls -lh resources/asr/labels/librispeech_sp.pieces
 ```
-
-<!-- MLEK creates two alternative ExecuTorch programs from the same checkpoint. CMake selects one at build time:
-
-- `..._arm_TOSA-1.0+FP.pte`: non-delegated floating-point program used without an Ethos-U NPU.
-- `..._arm_delegate_ethos-u85-256_Dedicated_Sram.pte`: quantized program compiled for an Ethos-U85 with 256 MACs. The FVP uses this file.
-
-`fp32` identifies the source checkpoint; the delegated file is still quantized. `Dedicated_Sram` is the NPU compiler memory mode, not the E8 external-flash location. -->
 
 ## How are the ExecuTorch .pte files generated?
 
@@ -204,26 +197,6 @@ At runtime, the application converts audio into Mel spectrogram features, runs t
 The vocab file is a line-by-line token list. During postprocessing, the decoder uses the model output value as an index into this list.
 
 Each entry is a piece of text. Some pieces are single letters, some are word fragments, and some represent common words or word starts. SentencePiece uses the `▁` marker to represent a word boundary, so `▁the` means the token starts a new word.
-
-<!-- Move training-from-scratch into further_reading. It is far beyond the LP’s core task. If custom deployment remains, add a short explicit branch showing these CMake overrides:
-For the FVP build, they would need:
-    -Dasr_MODEL_PATH=/absolute/path/custom.pte \
-    -Dasr_LABELS_TXT_FILE=/absolute/path/custom.pieces
-
-For the Alif build:
-    -Dalif_asr_MODEL_PATH=/absolute/path/custom.pte \
-    -Dalif_asr_LABELS_TXT_FILE=/absolute/path/custom.pieces
-
-These options are supported by MLEK’s usecase.cmake. The custom model must also match the expected inputs, vocabulary, preprocessing, Ethos-U85 configuration, and memory requirements.
- -->
-
-<!-- ## (Optional) Run these steps manually
-
-If you want to run these steps manually, you can start from the original [FP32 implementation of the Conformer](https://github.com/sooftware/conformer/), train the model on a LibriSpeech dataset from torchaudio, and perform Post-Training Quantization (PTQ) to convert from FP32 to INT8, with instructions here: [PyTorch Conformer Train and Quantize](https://github.com/Arm-Examples/ML-examples/tree/main/pytorch-conformer-train-quantize). For more detail, check out the [End-to-end INT8 Conformer on Arm blog](https://developer.arm.com/community/arm-community-blogs/b/internet-of-things-blog/posts/end-to-end-int8-conformer-on-arm-training-quantization-and-deployment-on-ethos-u85).
-
-Alternatively, you can use the exported INT8 Quantized Conformer model, provided by Arm on Hugging Face: [INT8 Conformer](https://huggingface.co/Arm/stt_en_conformer_executorch_small).
-
-Once you have obtained an exported INT8 Conformer model, you will need to lower to ExecuTorch `.pte` format using the `to_edge_transform_and_lower` API. Instructions can be found at the Hugging Face link. -->
 
 ## What you have accomplished and what is next
 

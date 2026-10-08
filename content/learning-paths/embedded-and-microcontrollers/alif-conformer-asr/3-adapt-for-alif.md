@@ -1,57 +1,47 @@
 ---
-title: Prepare the ASR application for the Alif E8 DevKit
-description: Connect the E8 DevKit display, prepare the Alif MLEK resources, and compare the board application with the ASR application you ran on FVP.
+title: Prepare the ASR application for the Alif E8 AI/ML AppKit
+description: Prepare the Alif MLEK resources, and compare the board application with the ASR application you ran on FVP.
 weight: 4
 
 layout: "learningpathall"
 ---
 
-## Move from the FVP to the E8 DevKit
+## Move from the FVP to the E8 AppKit
 
-Your FVP run verified the Conformer model, audio preprocessing, inference, and token decoding using recorded audio. You will now use those same ASR stages to recognize speech on the Alif Ensemble E8 DevKit.
+Your FVP run verified the Conformer model, audio preprocessing, inference, and token decoding using recorded audio. You will now use those same ASR stages to recognize speech on the Alif Ensemble E8 AppKit.
 
 The board uses a separate application, `alif_asr`, from the Alif MLEK repository. You will build new firmware for the E8's high-performance Cortex-M55 core, capture audio from its PDM microphones, and read the transcription on the attached display.
 
-| FVP application | E8 DevKit application |
+| FVP application | E8 AppKit application |
 | --- | --- |
 | Arm MLEK `asr`, built for Corstone-320 | Alif MLEK `alif_asr`, built for the E8 HP subsystem |
 | WAV samples compiled into the firmware | PDM microphone input |
 | Simulated UART output in your terminal | Transcription on the attached display |
 | Application and model loaded through the AXF file | Application in MRAM and model in external OSPI flash |
 
-## Connect the board and required display
-
-To connect to the Alif Ensemble E8 DevKit:
-
-1. Unplug all USB cables from the DevKit before changing any jumpers.
-
-2. Verify that the jumpers are in their factory default positions, as shown in the Alif Ensemble E8 DevKit (DK-E8) User Guide on [alifsemi.com](https://alifsemi.com/support/kits/ensemble-e8devkit/).
-
-3. Connect a USB-C cable from your computer to the PRG USB port on the bottom edge of the DevKit.
-
-![Close-up of the Alif Ensemble E8 DevKit showing a USB-C cable connected to the PRG USB port; the separate MCU USB port is visible below#center](prg-usb-port.png "USB-C cable connected to the PRG USB port")
-
-4. Confirm that a green LED illuminates near the E1 device and switch SW4.
+## Connect the board
 
 {{% notice Important %}}
-Keep a supported display connected throughout the board steps. The `alif_asr` application at the revision used here needs the display attached to run.
+Use the [Alif Ensemble E8 AI/ML AppKit](https://alifsemi.com/support/kits/ensemble-e8appkit/) for this Learning Path. If you use an [E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) instead, ensure a supported display is attached and configure the firmware with `-DTARGET_BOARD=DevKit-e8`.
 {{% /notice %}}
 
-<!-- Use an E8 DevKit, its supported display and ribbon cable, and a USB-C data cable. With the board powered off, connect the display as shown in the [E8 DevKit User Guide](https://alifsemi.com/download/AUGD0023). Check the ribbon orientation and connector latch before applying power.
+To connect to the Alif Ensemble E8 AppKit:
 
-Connect the USB-C data cable to the connector marked **PRG USB**. This connection provides access to the onboard SEGGER J-Link and the serial programming interface.
+1. Unplug all USB cables from the AppKit before changing any jumpers.
 
-Locate the **RESET** push-button, the joystick, and the **SW4** selector. You will use **SE** when programming MRAM. `BOARD_BUTTON2` in the application is the joystick's centre press.
+2. Verify that the jumpers are in their factory default positions, as shown in the Alif Ensemble E8 AI/ML AppKit (AK-E8-AIML) User Guide on [alifsemi.com](https://alifsemi.com/support/kits/ensemble-e8appkit/).
 
-**Image placeholder:** E8 DevKit with the supported display connected. Mark the display ribbon connection, PRG USB connector, RESET button, SW4 selector, joystick centre, and onboard microphones. -->
+3. Connect a USB-C cable from your computer to the PRG USB port on the bottom edge of the AppKit.
 
-<!-- AUTHOR TODO: Confirm the exact display module used for the published test and add a close-up showing the ribbon orientation. Keep the hardware photo specific to the tested E8 DevKit revision. -->
+![Close-up of the Alif Ensemble E8 AppKit showing a USB-C cable connected to the PRG USB port; the separate MCU USB port is visible below#center](prg-usb-port.png "USB-C cable connected to the PRG USB port")
+
+4. Confirm that a green LED illuminates near the E1 device and switch SW4.
 
 ## Install SETOOLS
 
 Secure Enclave Tools (SETOOLS) is Alif's toolset for flashing firmware to MRAM through the Secure Enclave.
 
-1. Download the SETOOLS package for your host operating system from the [Alif Ensemble E8 DevKit support page](https://alifsemi.com/support/kits/ensemble-e8devkit/) and extract it to your home directory, replacing the archive filename in the command:
+1. Download the SETOOLS package for your host operating system from the [Alif Ensemble E8 AppKit support page](https://alifsemi.com/support/kits/ensemble-e8appkit/) and extract it to your home directory, replacing the archive filename in the command:
 
   ```bash
     cd "$HOME/Downloads"
@@ -191,14 +181,12 @@ USER_OPTION(${use_case}_MODEL_IN_EXT_FLASH "Run model from external flash"
 
 With this option enabled, MLEK places model data in the `nn_model_ext_flash` section and generates `ext_flash.bin` separately from `mram.bin`. You will program both files in the next section.
 
-The board configuration uses `TARGET_SUBSYSTEM=RTSS-HP`, `TARGET_BOARD=DevKit-e8`, and `TARGET_MICS=PDM`. Its ExecuTorch memory pools are:
+The board configuration uses `TARGET_SUBSYSTEM=RTSS-HP`, `TARGET_BOARD=AppKit-e8`, and `TARGET_MICS=PDM`. Its ExecuTorch memory pools are:
 
 - `alif_asr_ACTIVATION_BUF_SZ=0x00108000` for the method allocator pool.
 - `ML_FWK_TMP_MEM_SIZE=0x002C0000` for temporary allocation.
 
 Keep these settings for the first run so that model selection, runtime memory, and the physical connections match the tested application.
-
-<!-- AUTHOR TODO: Retain a short Alif-reviewed explanation of how the memory pool sizes were selected if available. Any optional microphone paths or capture-length changes belong after the verified default run. -->
 
 ## What you have accomplished and what is next
 

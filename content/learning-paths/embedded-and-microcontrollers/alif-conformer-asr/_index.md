@@ -1,25 +1,25 @@
 ---
-title: Run Conformer speech recognition on an Alif Ensemble E8 DevKit using ExecuTorch and Ethos-U85
+title: Run Conformer speech recognition on an Alif Ensemble E8 AI/ML AppKit using ExecuTorch and Ethos-U85
 
-description: Build and deploy the Alif MLEK Conformer ASR application with ExecuTorch on the Alif Ensemble E8 DevKit and Ethos-U85 NPU.
+description: Build and deploy the Alif MLEK Conformer ASR application with ExecuTorch on the Alif Ensemble E8 AppKit and Ethos-U85 NPU.
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an advanced topic for embedded ML developers who want to learn how to build a Conformer-based speech recognition application and run it on a physical Alif Ensemble E8 DevKit using ExecuTorch and the Ethos-U85 NPU.
+who_is_this_for: This is an advanced topic for embedded ML developers who want to learn how to build a Conformer-based speech recognition application and run it on a physical Alif Ensemble E8 AppKit using ExecuTorch and the Ethos-U85 NPU.
 
 learning_objectives:
     - Understand what a Conformer model is, and why it is used for Automatic Speech Recognition (ASR) applications
     - Use the ML Embedded Evaluation Kit (MLEK) to prepare the Conformer model for ExecuTorch deployment
     - Build and run the ASR application on the Corstone-320 FVP, and understand how it works
-    - Understand how the ASR application is adapted from an FVP flow, to running on a physical Alif E8 DevKit
-    - Build, flash, and verify the ASR application on the E8 DevKit
+    - Understand how the ASR application is adapted from an FVP flow, to running on a physical Alif E8 AppKit
+    - Build, flash, and verify the ASR application on the E8 AppKit
     - Verify the transcription on the connected display
 
 prerequisites:
     - Experience with C/C++, CMake, and embedded baremetal development concepts
     - Familiarity with PyTorch, ExecuTorch, and quantized model deployment
     - A Linux development machine, or an Apple Silicon Mac running macOS 15 or later (Docker Desktop is also required for the macOS FVP flow)
-    - An Alif Ensemble E8 DevKit with its supported display attached, the onboard SEGGER J-Link debug probe, and a USB-C data cable
+    - An Alif Ensemble E8 AI/ML AppKit (AK-E8-AIML) and a USB-C data cable.
 
 author: 
     - Matt Cossins
@@ -61,8 +61,8 @@ further_reading:
         link: https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit
         type: repository
     - resource:
-        title: Alif Ensemble E8 DevKit Support Page
-        link: https://alifsemi.com/support/kits/ensemble-e8devkit/
+        title: Alif Ensemble E8 AppKit Support Page
+        link: https://alifsemi.com/support/kits/ensemble-e8appkit/
         type: website
     - resource:
         title: ExecuTorch Arm Ethos-U NPU Backend Tutorial

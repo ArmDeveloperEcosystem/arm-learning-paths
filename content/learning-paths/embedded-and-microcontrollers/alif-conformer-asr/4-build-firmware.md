@@ -24,7 +24,7 @@ cmake -S . -B build_alif_asr \
   -DTARGET_PLATFORM=alif \
   -DUSE_CASE_BUILD=alif_asr \
   -DTARGET_SUBSYSTEM=RTSS-HP \
-  -DTARGET_BOARD=DevKit-e8 \
+  -DTARGET_BOARD=AppKit-e8 \
   -DML_FRAMEWORK=ExecuTorch \
   -DML_FWK_TMP_MEM_SIZE=0x002C0000 \
   -DGLCD_UI=OFF \
@@ -33,7 +33,7 @@ cmake -S . -B build_alif_asr \
   -DTARGET_MICS=PDM
 ```
 
-`RTSS-HP` selects the high-performance Cortex-M55 subsystem. `alif_asr` selects the Conformer model and vocabulary.
+`RTSS-HP` selects the high-performance Cortex-M55 subsystem. `alif_asr` selects the Conformer model and vocabulary. If you are using an E8 DevKit with a display attached, replace `-DTARGET_BOARD=AppKit-e8` with `-DTARGET_BOARD=DevKit-e8`.
 
 {{% notice Note %}}
 Keep `GLCD_UI=OFF` as shown. It disables the generic MLEK GLCD interface to save memory; this application still uses its own LVGL display interface. The display remains required.
@@ -57,7 +57,7 @@ ls -lh \
 
 ## Confirm the E8 device and configure SETOOLS
 
-The firmware you just built targets the E8 DevKit's M55-HP core and Ethos-U85 NPU. Before programming, confirm the connected chip's full part number and silicon revision so the programming tools match your hardware.
+The firmware you just built targets the E8 AppKit's M55-HP core and Ethos-U85 NPU. Before programming, confirm the connected chip's full part number and silicon revision so the programming tools match your hardware.
 
 Set `SETOOLS_ROOT` to your extracted Security Toolkit directory. Edit the path in the appropriate tab if your installation is elsewhere:
 
@@ -135,8 +135,6 @@ Press and release **RESET** so the stubs boot.
 Keep the **PRG USB** cable connected after installing and resetting the CPU stubs. Close any SETOOLS session or serial terminal that is using the board. The onboard J-Link uses this same cable; a second debugger cable is not needed.
 
 The steps follow the [Alif MLEK J-Flash guide](https://github.com/alifsemi/alif_ml-embedded-evaluation-kit/blob/0b6ce72c495265501f7a12eaed8e6ea71ef4bf15/docs/programming_flash_jlink.md#j-flash-project). The screenshots below show J-Flash V9.78 on macOS.
-
-<!-- If you run SETOOLS in WSL and J-Flash in Windows, detach the device from WSL before this step. Reattach it before the final MRAM write. See [Microsoft's WSL USB connection instructions](https://learn.microsoft.com/en-us/windows/wsl/connect-usb) for that host-specific setup. Native Linux and macOS do not use `usbipd`. -->
 
 1. Open **J-Flash**, select **Create new project**, then select **Start J-Flash**.
 

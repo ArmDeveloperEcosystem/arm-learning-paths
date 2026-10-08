@@ -6,11 +6,11 @@ weight: 3
 layout: "learningpathall"
 ---
 
-You will build the Arm MLEK `asr` application and run it on the Corstone-320 FVP. This checks the Conformer model, ExecuTorch runtime, audio preprocessing, and token decoding before you move to the Alif E8 DevKit.
+You will build the Arm MLEK `asr` application and run it on the Corstone-320 FVP. This checks the Conformer model, ExecuTorch runtime, audio preprocessing, and token decoding before you move to the Alif E8 AppKit.
 
 ## Understand the FVP ASR application
 
-The FVP application runs the same core ASR stages used later on the E8 DevKit:
+The FVP application runs the same core ASR stages used later on the E8 AppKit:
 
 1. Read 16 kHz audio samples from the built-in sample set.
 2. Convert the samples into Mel spectrogram features.
@@ -18,7 +18,7 @@ The FVP application runs the same core ASR stages used later on the E8 DevKit:
 4. Decode the output token scores with the SentencePiece vocabulary.
 5. Print the decoded text to the FVP console.
 
-On the FVP, the audio comes from WAV files compiled into the application and the result is printed over a simulated UART. On the E8 DevKit, an onboard PDM microphone is used, an external OSPI flash is configured to store the model, and an external screen displays the output. Besides these distinctions, the Conformer model format, preprocessing, inference, and token decoding stages all stay the same.
+On the FVP, the audio comes from WAV files compiled into the application and the result is printed over a simulated UART. On the E8 AppKit, an onboard PDM microphone is used, an external OSPI flash is configured to store the model, and an external screen displays the output. Besides these distinctions, the Conformer model format, preprocessing, inference, and token decoding stages all stay the same.
 
 ## Build the FVP ASR application
 
