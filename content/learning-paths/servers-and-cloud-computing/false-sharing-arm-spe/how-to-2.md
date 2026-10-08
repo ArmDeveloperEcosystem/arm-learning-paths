@@ -65,7 +65,7 @@ If SPE is available, the output you will see is:
 arm_spe_0
 ```
 
-If the output is blank then SPE is not available. To enable Arm SPE, please refer to the [Enable Arm SPE for Performix memory access analysis learning path](https://learn.arm.com/learning-paths/servers-and-cloud-computing/spe-on-performix/).
+If the output is blank then SPE is not available. To enable Arm SPE, please refer to the [Enable Arm SPE for Performix memory access analysis learning path](/learning-paths/servers-and-cloud-computing/spe-on-performix/).
 
 ## Run Sysreport
 
