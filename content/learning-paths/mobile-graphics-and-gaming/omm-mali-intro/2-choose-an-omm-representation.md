@@ -9,13 +9,13 @@ layout: learningpathall
 
 ## Turn an alpha mask into traversal data
 
-After you identify a suitable asset, you need to describe its opacity in a form that ray traversal can use. OMM does this by dividing each original triangle into smaller regions called *microtriangles*. Each microtriangle records whether its part of the alpha mask is opaque, transparent, or still uncertain.
+After you identify a suitable asset, you need to describe its opacity in a form that ray traversal can use. Opacity Micromaps (OMM) does this by dividing each original triangle into smaller regions called microtriangles. Each microtriangle records whether its part of the alpha mask is opaque, transparent, or still uncertain.
 
 This subdivision changes the OMM data, not the mesh. It doesn't add polygons to the source model or to the bottom-level acceleration structure (BLAS). You can think of it as placing a finer decision grid over the original triangle.
 
 ![Diagram showing a leaf alpha mask covered by microtriangles. Opaque cells fill the leaf, transparent cells cover empty space, and unknown cells follow the boundary where shader evaluation can still be needed.#center](images/omm-introduction/02-microtriangle-states.webp "Microtriangle states follow the leaf's alpha boundary")
 
-The figure keeps the two original triangles and overlays a finer OMM grid. Opaque regions cover the inside of the leaf, transparent regions cover empty parts of the quad, and unknown regions follow the detailed edge. The closer the grid follows that edge, the more opacity decisions traversal can make without shader help.
+The figure keeps the two original triangles and overlays a finer OMM grid. Opaque regions cover the inside of the leaf. Transparent regions cover empty parts of the quad. Unknown regions follow the detailed edge. The closer the grid follows that edge, the more opacity decisions traversal can make without shader help.
 
 ## Choose a subdivision level
 
@@ -28,14 +28,14 @@ microtriangle count = 4^N = 2^(2N)
 ```
 
 | Level | Microtriangles per original triangle | Typical use |
-| ---: | ---: | --- |
+| --- | --- | :--- |
 | 0 | 1 | One state for the complete triangle |
 | 1 | 4 | A coarse cutout |
 | 2 | 16 | Large silhouette changes |
 | 3 | 64 | Curved alpha edges |
 | 4 | 256 | Fine detail with higher data cost |
 
-Choose the level by comparing the size of the source triangle with the detail in its alpha mask. Also consider the intended LOD and viewing distance. Don't map the subdivision level directly to screen pixels because the same triangle can appear at many sizes on screen.
+Choose the level by comparing the size of the source triangle with the detail in its alpha mask. Also consider the intended level of detail and viewing distance. Don't map the subdivision level directly to screen pixels because the same triangle can appear at many sizes on screen.
 
 ## Choose a state format
 
@@ -52,7 +52,7 @@ The `VK_KHR_opacity_micromap` extension defines 2-state and 4-state formats. A 2
 | 4-state | Unknown-transparent | Keep shader-side evaluation available | Treat the region as transparent |
 | 4-state | Unknown-opaque | Keep shader-side evaluation available | Treat the region as opaque |
 
-During normal 4-state traversal, both unknown values mean that more evaluation is needed. The transparent and opaque variants only produce different results when a ray or instance forces the OMM into 2-state evaluation.
+During normal 4-state traversal, both unknown values mean that more evaluation is needed. The transparent and opaque variants produce different results only when a ray or instance forces the OMM into 2-state evaluation.
 
 This gives you two practical starting strategies:
 
@@ -65,7 +65,9 @@ Use the 2-state strategy only when you can classify every region without damagin
 
 ## Classify sample microtriangles
 
-You can practice the classification step without OMM-capable hardware. The exercise uses an alpha cutoff of `0.5`: values below the cutoff are transparent, while values at or above it are opaque. Each row contains representative samples from one microtriangle.
+You can practice classification without OMM-capable hardware. Classify using an alpha cutoff of `0.5`. Values less than the cutoff are transparent, while values greater than or equal to it are opaque. 
+
+Each row contains representative samples from one microtriangle:
 
 | Region | Representative alpha samples | Your classification |
 | --- | --- | --- |
@@ -95,8 +97,15 @@ A level-2 triangle needs 16 bits, or 2 bytes, of raw 2-state data. It needs 32 b
 
 The result should contain large areas of opaque and transparent microtriangles, with a narrow band of unknown regions around the alpha boundary. If much of the triangle remains unknown, traversal still needs shader help for many hits.
 
-A wide unknown band can mean that the subdivision level is too low. It can also point to a mismatch in filtering or cutoff, texture detail that is too fine for the grid, or material logic that the baker can't reproduce.
+A wide unknown band can mean the following:
 
-### What you've learned
+- The subdivision level is too low
+- There's a mismatch in filtering or cutoff
+- The texture detail is too fine for the grid
+- There's material logic that the baker can't reproduce
 
-You have classified opacity regions and compared the accuracy and storage implications of the two formats. Next, connect the baked representation to the Mali G2-Ultra NX traversal path.
+## What you've learned and what's next
+
+You've classified opacity regions and compared the accuracy and storage implications of the two formats. 
+
+Next, you'll connect the baked representation to the Mali G2-Ultra NX traversal path.

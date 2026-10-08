@@ -9,7 +9,7 @@ description: Learn how Opacity Micromaps reduce opacity work during ray traversa
 
 minutes_to_complete: 40
 
-who_is_this_for: Use this Learning Path if you develop game graphics and need to evaluate whether an alpha-tested asset is suitable for Opacity Micromaps on Arm Mali G2-Ultra NX. You can complete the exercises without OMM-capable hardware.
+who_is_this_for: This Learning Path is for game graphics developers who need to evaluate whether an alpha-tested asset is suitable for Opacity Micromaps (OMM) on Arm Mali G2-Ultra NX. You can complete the Learning Path without OMM-capable hardware.
 
 learning_objectives:
     - Classify microtriangles as opaque, transparent, or unknown from alpha-mask data.
@@ -20,10 +20,13 @@ learning_objectives:
 prerequisites:
     - Basic familiarity with triangle geometry and alpha-tested materials
     - Basic familiarity with ray tracing intersections and acceleration structures
-    - No OMM-capable hardware is needed for the main exercises
-    - An Arm Mali G2-Ultra NX device and Vulkan capability tools are optional for device validation
+    - (Optional) An Arm Mali G2-Ultra NX device and Vulkan capability tools for device validation
 
 author: Patrick Wang
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced

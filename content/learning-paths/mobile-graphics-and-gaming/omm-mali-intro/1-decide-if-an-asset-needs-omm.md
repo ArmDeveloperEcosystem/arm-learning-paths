@@ -60,12 +60,12 @@ Not every alpha-tested asset benefits from OMM. You get the clearest value when 
 
 Also check every mesh level of detail (LOD) separately. Its UV coordinates, triangle links, and alpha data must match the version used to create the OMM. Otherwise, valid OMM data can become attached to the wrong triangle and produce incorrect opacity results.
 
-## Decide whether to continue
-
-Before continuing, choose one alpha-tested asset from your own project or picture a common example, such as a leaf or wire fence. Ask three questions: does it participate in ray tracing, does its alpha mask remain stable, and will rays cross it often enough for repeated opacity checks to matter?
+Before continuing, choose one alpha-tested asset from your own project. Alternatively, picture a common example, such as a leaf or wire fence. Ask three questions: does it participate in ray tracing, does its alpha mask remain stable, and will rays cross it often enough for repeated opacity checks to matter?
 
 If the answer to all three questions is yes, the asset is a reasonable OMM candidate. Keep dynamic masks and assets with mostly uncertain opacity on the existing shader-side path until profiling gives you a reason to change them.
 
-### What you've learned
+## What you've learned and what's next
 
-You can now distinguish the geometry intersection from the opacity decision and identify assets that are reasonable OMM candidates. Next, choose how microtriangles represent the asset's opacity.
+You can now distinguish the geometry intersection from the opacity decision and identify assets that are reasonable OMM candidates. 
+
+Next, you'll choose how microtriangles represent the asset's opacity.
