@@ -43,33 +43,31 @@ generated_summary_faq:
     acceleration-structure setup. You'll enable the appropriate traversal path and define an alpha-tested
     fallback. Finally, you'll compare image and runtime evidence to record an adoption decision.
   faqs:
-  - question: How do I know if my asset is a good candidate for OMM?
+  - question: Why should I use OMM for ray-traced assets?
     answer: >-
-      Look for an alpha-tested asset with a stable mask that receives repeated ray hits, such as
-      static foliage or a fence. You also need to classify most of its opacity regions in advance.
-      If much of the mask remains unknown, shader-side evaluation can limit the benefit.
-  - question: How should I choose a subdivision level and state format?
+      Use OMM to let ray traversal resolve known opaque and transparent
+      regions of an alpha-tested asset. With OMM, you can reduce repeated shader-side opacity checks when
+      rays pass through assets such as foliage or fences.
+  - question: What kinds of assets are worth evaluating for OMM?
     answer: >-
-      Compare the alpha detail with the microtriangle grid and check the device's subdivision limits.
-      You can use a 4-state format to leave difficult edges unknown for shader-side evaluation.
-      Choose a 2-state format only if you can classify every region without changing the image.
-  - question: What must I enable before my renderer traverses OMM-enabled geometry?
+      Start with alpha-tested assets that participate in ray tracing, have stable opacity masks,
+      and receive repeated ray hits. You'll need an update policy for changing masks, while
+      alpha-blended and rasterization-only assets belong on their existing paths.
+  - question: Do I need OMM-capable hardware to complete this Learning Path?
     answer: >-
-      Check for `VK_KHR_opacity_micromap` and enable its `micromap` feature. Build and link the
-      micromap to the matching triangles in the bottom-level acceleration structure. You must also
-      enable OMM for your traversal path: use `VK_PIPELINE_CREATE_RAY_TRACING_OPACITY_MICROMAP_BIT_KHR`
-      for a ray pipeline, or set `OpacityMicromapIdKHR` to `true` for ray queries.
-  - question: What happens when a microtriangle has an unknown opacity state?
+      No. You can work through asset decision and validation with the provided bake
+      results and saved device capability report. If you have an Arm Mali G2-Ultra NX device,
+      you can also compare its reported capabilities with your chosen OMM strategy.
+  - question: Does OMM replace my existing alpha-tested rendering path?
     answer: >-
-      You retain shader-side opacity evaluation for the candidate hit. During normal 4-state
-      traversal, you handle both unknown variants that way. Forcing 2-state evaluation with a ray
-      or instance makes the variants behave differently. If OMM isn't supported, use your original
-      alpha-tested path without OMM data.
-  - question: How do I validate an OMM adoption decision?
+      No. You still need shader-side evaluation where OMM leaves opacity uncertain. You need
+      the original alpha-tested path when OMM isn't supported or enabled. Keep both paths consistent
+      so that the rendered image doesn't change when you switch between them.
+  - question: How will I know whether an OMM strategy is suitable for my asset?
     answer: >-
-      Compare OMM-on, OMM-off, and reference images across shadows, reflections, levels of detail,
-      and camera distances. You should also record device support, successful micromap and BLAS
-      builds, triangle mapping, state ratios, and the active pipeline or shader control.
+      Compare image quality with and without OMM, then check the asset's data cost and remaining
+      shader-side work against your goals. You can use the Learning Path's sample evidence to
+      practice that decision before testing it in your own renderer.
 # END generated_summary_faq
 
 author: Patrick Wang
