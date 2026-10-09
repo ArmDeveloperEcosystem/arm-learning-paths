@@ -67,9 +67,6 @@ run completes, return its run ID and summarize the measured L1 cache, latency,
 and TLB evidence.
 ```
 
-{{% notice Note %}}
-Dynamic Insights aren't available for Memory Access runs. The MCP server can still run the recipe and query its measured data. Validate the L1 cache, latency, and TLB findings in the Performix GUI.
-{{% /notice %}}
 
 The Arm Performix MCP server manages targets, recipes, and run data. It doesn't provide remote source-file access by itself. To use Codex for the code changes, make the `Orbiting-Galaxy-Example` checkout available in the Codex workspace.
 
