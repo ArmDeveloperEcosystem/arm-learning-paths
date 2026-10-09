@@ -18,7 +18,7 @@
 /* Box around content (learning paths and tools) */
 html[theme="dark"] #main {
     --content-page-surface: var(--ads-ui-ink-90);
-    background-color: var(--ads-ui-ink-100);
+    background-color: var(--lp-background-color);
 }
 
 div.content-box {

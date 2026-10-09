@@ -48,6 +48,7 @@
 
 /* Local ADS v5 accent experiment */
 :root {
+    --lp-background-color: #08052E;
     --lp-accent-primary: #6023DE;   /* ADS UI Violet 65 */
     --lp-accent-secondary: #D1BAFC; /* ADS UI Violet 04 */
     --lp-hover-text: #D9D9D9;       /* ADS UI Gray 35 */
@@ -93,6 +94,14 @@ ads-search#search-box.install-guide{
 }
 ads-search {
     --ads-search-button-background-color: #7233F7;
+}
+
+html[theme='dark'] #main ads-search {
+    --ads-search-background-color: var(--lp-background-color);
+    --ads-search-background-color-fill: var(--lp-background-color);
+    --ads-search-input-background-color: var(--lp-background-color);
+    --ads-search-input-background-color-hover: var(--lp-background-color);
+    --ads-search-input-background-color-fill-hover: var(--lp-background-color);
 }
 
 /* Colors of buttons & links to match DevHub styling */
@@ -251,7 +260,7 @@ ads-masthead #ads-masthead-title {
 /* Replicate style of breadcrumb in masthead when alone. */
 #only-breadcrumb-masthead {
     width: 100%;
-    background-color: var(--ads-ui-ink-100);
+    background-color: var(--lp-background-color);
     padding-top: 8px;
     padding-left: 15px; /* u-padding-left-2-1/2 */
     padding-bottom: 8px; 
@@ -357,7 +366,7 @@ html[theme='light'] body {
 /* Dark Theme */
 /****************************************************/
 html[theme='dark'] body {
-    background-color: var(--ads-ui-ink-100);
+    background-color: var(--lp-background-color);
     background-image: none;
 }
 
