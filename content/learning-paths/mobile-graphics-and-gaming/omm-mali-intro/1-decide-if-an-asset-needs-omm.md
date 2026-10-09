@@ -34,17 +34,17 @@ You might already handle this kind of material with alpha testing during rasteri
 
 | Rendering path | Opacity decision |
 | --- | --- |
-| Rasterization | A pixel shader samples alpha and discards the fragment when it fails the cutoff |
-| Ray tracing without OMM | An any-hit shader or ray-query candidate handler evaluates the mask |
-| Ray tracing with OMM | Traversal resolves known regions and keeps only unknown regions for shader-side evaluation |
+| Rasterization | A pixel shader samples alpha and discards the fragment when it fails the cutoff. |
+| Ray tracing without OMM | An any-hit shader or ray-query candidate handler evaluates the mask. |
+| Ray tracing with OMM | Traversal resolves known regions and keeps only unknown regions for shader-side evaluation. |
 
 A shadow or reflection ray can pass through several overlapping leaves. Without OMM, each possible hit can repeat texture access, material setup, and control flow. With OMM, traversal first reads a compact state for the small region that the ray hit:
 
 | OMM state | Traversal action |
 | --- | --- |
-| Opaque | Accept the region as opaque |
-| Transparent | Ignore the region and continue traversal |
-| Unknown | Keep the candidate for shader-side evaluation |
+| Opaque | Accept the region as opaque. |
+| Transparent | Ignore the region and continue traversal. |
+| Unknown | Keep the candidate for shader-side evaluation. |
 
 ## Identify suitable assets
 

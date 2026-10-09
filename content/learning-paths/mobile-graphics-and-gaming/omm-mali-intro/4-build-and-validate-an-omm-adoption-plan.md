@@ -64,12 +64,12 @@ For the stated constraints, use the level-3, 4-state candidate. It stays within 
 
 | Decision | Suggested record |
 | --- | --- |
-| Use OMM | Yes; the mask is stable, the asset receives rays, and most regions resolve |
-| Format and subdivision | 4-state at level 3 |
-| Fallback behavior | Build the original alpha-tested BLAS without OMM and keep the same cutoff, filtering, and alpha source |
-| Image validation | Compare OMM-on, OMM-off, and reference images across shadows, reflections, LODs, and camera distances |
-| Runtime validation | Record device support, successful micromap and BLAS builds, triangle links, state ratios, and active pipeline or shader controls |
-| Rebuild rule | Rebuild after changes to triangle order, UVs, alpha data, cutoff, filtering, or LOD source data |
+| Use OMM | Yes. The mask is stable, the asset receives rays, and most regions resolve. |
+| Format and subdivision | Use 4-state at level 3. |
+| Fallback behavior | Build the original alpha-tested BLAS without OMM and keep the same cutoff, filtering, and alpha source. |
+| Image validation | Compare OMM-on, OMM-off, and reference images across shadows, reflections, LODs, and camera distances. |
+| Runtime validation | Record device support, successful micromap and BLAS builds, and triangle links. Also record state ratios and active pipeline or shader controls. |
+| Rebuild rule | Rebuild after changes to triangle order, UVs, alpha data, cutoff, filtering, or LOD source data. |
 
 The device also supports the level-5, 2-state candidate, and that option removes all unknown regions. However, its 128-byte raw payload exceeds the asset budget. Reconsider it only if the resource budget changes and profiling shows enough benefit from removing the remaining shader-side work.
 

@@ -23,11 +23,11 @@ Follow one asset from its source files to a rendered frame. At each stage, keep 
 
 | Stage | What your engine does | Evidence to retain |
 | --- | --- | --- |
-| Prepare and bake | Keeps the mesh, triangle order, UVs, alpha source, cutoff, filtering, format, and subdivision on one asset version | Bake report and source version |
-| Build the micromap | Queries build sizes, allocates result and scratch storage, and builds the OMM data | Successful build and resource sizes |
-| Link triangle data | Maps each source triangle to its OMM record during the bottom-level acceleration structure (BLAS) build | Triangle mapping and BLAS build input |
-| Enable traversal | Configures the ray pipeline or ray-query shader for OMM | Active pipeline flag or execution mode |
-| Keep resources valid | Synchronizes builds and keeps the micromap alive while the BLAS uses it | Resource lifetime and synchronization records |
+| Prepare and bake | Keeps the mesh, triangle order, UVs, alpha source, cutoff, filtering, format, and subdivision on one asset version. | Bake report and source version |
+| Build the micromap | Queries build sizes, allocates result and scratch storage, and builds the OMM data. | Successful build and resource sizes |
+| Link triangle data | Maps each source triangle to its OMM record during the bottom-level acceleration structure (BLAS) build. | Triangle mapping and BLAS build input |
+| Enable traversal | Configures the ray pipeline or ray-query shader for OMM. | Active pipeline flag or execution mode |
+| Keep resources valid | Synchronizes builds and keeps the micromap alive while the BLAS uses it. | Resource lifetime and synchronization records |
 
 Under `VK_KHR_opacity_micromap`, the micromap GPU resource uses a `VkAccelerationStructureKHR` handle. When your engine builds the BLAS, it attaches the micromap and provides a mapping from every source triangle to the correct OMM record. This mapping is what connects an intersection in the scene to the opacity states created by the baker.
 
