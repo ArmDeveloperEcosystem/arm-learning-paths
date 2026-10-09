@@ -11,7 +11,7 @@ layout: learningpathall
 
 After you identify a suitable asset, you need to describe its opacity in a form that ray traversal can use. Opacity Micromaps (OMM) do this by dividing each original triangle into smaller regions called microtriangles. Each microtriangle records whether its part of the alpha mask is opaque, transparent, or still uncertain.
 
-This subdivision changes the OMM data, not the mesh. It doesn't add polygons to the source model or to the bottom-level acceleration structure (BLAS). You can think of it as placing a finer decision grid over the original triangle.
+A microtriangle changes the OMM data, not the mesh. It doesn't add polygons to the source model or to the bottom-level acceleration structure (BLAS). You can think of it as placing a finer decision grid over the original triangle.
 
 ![Diagram showing a leaf alpha mask covered by microtriangles. Opaque cells fill the leaf, transparent cells cover empty space, and unknown cells follow the boundary where shader evaluation can still be needed.#center](images/omm-introduction/02-microtriangle-states.webp "Microtriangle states follow the leaf's alpha boundary")
 
@@ -35,11 +35,11 @@ microtriangle count = 4^N = 2^(2N)
 | 3 | 64 | Curved alpha edges |
 | 4 | 256 | Fine detail with higher data cost |
 
-Choose the level by comparing the size of the source triangle with the detail in its alpha mask. Also consider the intended level of detail and viewing distance. Don't map the subdivision level directly to screen pixels because the same triangle can appear at many sizes on screen.
+Choose the level by comparing the size of the source triangle with the detail in its alpha mask. Also consider the intended level of detail (LOD) and viewing distance. Don't map the subdivision level directly to screen pixels because the same triangle can appear at many sizes on screen.
 
 ## Choose a state format
 
-Subdivision decides how small the regions are. The state format decides what each region can say about its opacity.
+The subdivision level decides how small the regions are. The state format decides what each region can say about its opacity.
 
 The `VK_KHR_opacity_micromap` extension defines 2-state and 4-state formats. A 2-state OMM must call every region opaque or transparent. A 4-state OMM can also leave a region unknown, allowing the existing shader path to resolve difficult edges at runtime.
 
@@ -77,7 +77,7 @@ Each row contains representative samples from one microtriangle. Classify each r
 | D | `0.42`, `0.45`, `0.48` |
 | E | `0.49`, `0.50`, `0.51` |
 
-Then calculate the raw state payload for one level-2 triangle. Level 2 contains 16 microtriangles. The 2-state format uses one bit per microtriangle, while the 4-state format uses two bits.
+After classifying each region, calculate the raw state payload for one level-2 triangle. Level 2 contains 16 microtriangles. The 2-state format uses one bit per microtriangle, while the 4-state format uses two bits.
 
 ### Check your classification and payload calculation
 
@@ -91,7 +91,7 @@ Compare your answers with the following classifications:
 | D | Transparent | Every sample is below the cutoff |
 | E | Unknown | The region lies on both sides of the cutoff |
 
-A level-2 triangle needs 16 bits, or 2 bytes, of raw 2-state data. It needs 32 bits, or 4 bytes, of raw 4-state data. These values describe the state payload only. Record metadata, alignment, and implementation-specific storage can increase the final size.
+A level-2 triangle needs 16 bits, or 2 bytes, of raw 2-state data. It needs 32 bits, or 4 bytes, of raw 4-state data. These values describe only the state payload. Record metadata, alignment, and implementation-specific storage can increase the final size.
 
 ## Interpret the result
 
@@ -104,7 +104,7 @@ A wide unknown band can mean the following:
 - The texture detail is too fine for the grid
 - There's material logic that the baker can't reproduce
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You've classified opacity regions and compared the accuracy and storage implications of the two formats. 
 

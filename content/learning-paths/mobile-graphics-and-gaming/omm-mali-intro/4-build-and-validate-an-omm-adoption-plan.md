@@ -19,7 +19,7 @@ The responsibility map shows how content, baking, engine integration, and the dr
 
 ## Review the sample asset
 
-Consider a team that wants to use OMM for a static ginkgo leaf. The asset is a two-triangle quad with an alpha mask, and it appears in ray-traced shadows and reflections. Its mesh, UV coordinates, alpha mask, cutoff, and filtering remain stable for each level of detail, so it passes the initial suitability check.
+Consider a team that wants to use OMM for a static ginkgo leaf. The asset is a two-triangle quad with an alpha mask, and it appears in ray-traced shadows and reflections. Its mesh, UV coordinates, alpha mask, cutoff, and filtering remain stable for each level of detail (LOD), so it passes the initial suitability check.
 
 The team tests two bake strategies. The results are illustrative, and the raw payload sizes don't include record metadata, alignment, or implementation-specific storage:
 
@@ -47,16 +47,16 @@ Before choosing a candidate, also check that the target device can use it. The s
 
 ## Record your decision
 
-Use the evidence to complete the decision record. There can be more than one technically valid approach, but your choice should respect the data budget and explain how you'll preserve image quality:
+Use the evidence to decide the following:
 
-| Decision | Your answer |
-| --- | --- |
-| Should this asset use OMM? | Yes or no, with a reason |
-| Format and subdivision | Choose one candidate |
-| Fallback | Define the behavior when OMM is unavailable |
-| Image validation | State what you'll compare |
-| Runtime validation | State what proves the OMM path executed |
-| Rebuild rule | State which asset changes invalidate the bake |
+- Whether the asset should use OMM, and why
+- What the format and subdivision should be
+- What the fallback behavior should be when OMM is unavailable
+- What images you'll compare for validation
+- What you'll record to verify that the OMM path executed
+- What asset changes invalidate the bake
+
+There can be more than one technically valid approach, but your choice should respect the data budget and define how you'll preserve image quality.
 
 ### Review the suggested adoption plan
 
@@ -66,14 +66,14 @@ For the stated constraints, use the level-3, 4-state candidate. It stays within 
 | --- | --- |
 | Use OMM | Yes; the mask is stable, the asset receives rays, and most regions resolve |
 | Format and subdivision | 4-state at level 3 |
-| Fallback | Build the original alpha-tested BLAS without OMM and keep the same cutoff, filtering, and alpha source |
-| Image validation | Compare OMM-on, OMM-off, and reference images across shadows, reflections, levels of detail, and camera distances |
+| Fallback behavior | Build the original alpha-tested BLAS without OMM and keep the same cutoff, filtering, and alpha source |
+| Image validation | Compare OMM-on, OMM-off, and reference images across shadows, reflections, LODs, and camera distances |
 | Runtime validation | Record device support, successful micromap and BLAS builds, triangle links, state ratios, and active pipeline or shader controls |
-| Rebuild rule | Rebuild after changes to triangle order, UVs, alpha data, cutoff, filtering, or level of detail source data |
+| Rebuild rule | Rebuild after changes to triangle order, UVs, alpha data, cutoff, filtering, or LOD source data |
 
 The device also supports the level-5, 2-state candidate, and that option removes all unknown regions. However, its 128-byte raw payload exceeds the asset budget. Reconsider it only if the resource budget changes and profiling shows enough benefit from removing the remaining shader-side work.
 
-Now use the same decision record for the asset you chose on the first page. If you chose an asset from your project, record the evidence you have. If you imagined an asset, note what evidence you would need to collect for each decision.
+Now use the same decision record for the asset you chose earlier. If you chose an asset from your project, record the evidence that you have. If you imagined an asset, note what evidence you'd need to collect for each decision.
 
 ## Diagnose a failed validation
 

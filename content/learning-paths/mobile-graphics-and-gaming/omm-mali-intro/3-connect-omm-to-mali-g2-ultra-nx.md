@@ -19,7 +19,7 @@ This distinction is important when you debug the feature. A successful offline b
 
 ## Follow the runtime lifecycle
 
-It helps to follow one asset from its source files to a rendered frame. At each stage, keep evidence that you can inspect if the final image or performance doesn't match your expectations.
+Follow one asset from its source files to a rendered frame. At each stage, keep evidence that you can inspect if the final image or performance doesn't match your expectations.
 
 | Stage | What your engine does | Evidence to retain |
 | --- | --- | --- |
@@ -48,12 +48,12 @@ These limits turn device support into an asset compatibility decision. For examp
 
 ## Enable the traversal path
 
-Vulkan doesn't assume that every shader is prepared to traverse geometry with OMM data. You need to opt in through the path your renderer uses. Ray pipelines and inline ray queries use different controls:
+Vulkan doesn't assume that every shader is prepared to traverse geometry with OMM data. You need to opt in through the path that your renderer uses. Ray pipelines and inline ray queries use different controls:
 
 | Traversal path | Required enablement |
 | --- | --- |
-| Ray pipeline | Create the pipeline with `VK_PIPELINE_CREATE_RAY_TRACING_OPACITY_MICROMAP_BIT_KHR` |
-| Ray query | Declare the `OpacityMicromapIdKHR` SPIR-V execution mode with a value that resolves to `true` |
+| Ray pipeline | Create the pipeline with `VK_PIPELINE_CREATE_RAY_TRACING_OPACITY_MICROMAP_BIT_KHR`. |
+| Ray query | Declare the `OpacityMicromapIdKHR` SPIR-V execution mode with a value that resolves to `true`. |
 
 For a GLSL shader that uses ray queries, enable `GL_EXT_opacity_micromap_ray_query_mode` and redeclare the built-in constant:
 
@@ -74,15 +74,15 @@ Not every device or configuration will take the OMM path, so preserve the render
 
 | Path | Micromap and BLAS behavior | Opacity behavior |
 | --- | --- | --- |
-| Supported | Build the micromap and attach its triangle mapping to the BLAS | Traversal resolves known states; unknown states retain shader-side evaluation |
-| Unsupported or disabled | Build the original alpha-tested BLAS without OMM data | The ray pipeline uses its any-hit path, or the ray query uses its existing candidate handler |
+| Supported | Build the micromap and attach its triangle mapping to the BLAS. | Traversal resolves known states. Unknown states retain shader-side evaluation. |
+| Unsupported or disabled | Build the original alpha-tested BLAS without OMM data. | The ray pipeline uses its any-hit path, or the ray query uses its existing candidate handler. |
 
 Both paths must use the same alpha source, cutoff, filtering, and material logic. When you disable OMM, the amount of traversal and shader work can change. The rendered image shouldn't change.
 
-If you have a Mali G2-Ultra NX test device, record its reported limits. Compare the limits with the format and subdivision level that you selected. You can complete validation without a device because it includes a saved capability report.
+If you have a Mali G2-Ultra NX test device, record its reported limits. Compare the limits with the format and subdivision level that you selected. 
 
 ## What you've learned and what's next
 
 You can now trace an OMM from asset data into a BLAS, identify the required Vulkan opt-in, and define a safe fallback. 
 
-Next, you'll use that information to make and validate an adoption decision.
+Next, you'll use that information to make and validate a sample adoption decision.
