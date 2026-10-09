@@ -34,7 +34,7 @@ ads-breadcrumbs:not(:defined) {
 
 #homepage-header {
     color: var(--ads-ui-ink-05);
-    font-size: clamp(36px, 4vw, 52px);
+    font-size: clamp(36px, 4vw, 64px);
     font-weight: 400;
     margin: 0 0 8px;
 }
@@ -164,8 +164,8 @@ ads-breadcrumbs:not(:defined) {
 
 .homepage-contribution-actions {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 24px;
 }
 
