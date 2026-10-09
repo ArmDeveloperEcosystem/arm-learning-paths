@@ -109,7 +109,7 @@ mkdir ArmCompilerforEmbedded6.24
 tar xvzf ./standalone-linux-armv8l_64-rel.tar.gz -C ./ArmCompilerforEmbedded6.24 --strip-components=1
 rm ./standalone-linux-armv8l_64-rel.tar.gz
 export PATH=/home/$USER/ArmCompilerforEmbedded6.24/bin:$PATH
-export AC6_TOOLCHAIN_6_22_0=/home/$USER/ArmCompilerforEmbedded6.24/bin
+export AC6_TOOLCHAIN_6_24_0=/home/$USER/ArmCompilerforEmbedded6.24/bin
 ```
 
 ## Set up the product license

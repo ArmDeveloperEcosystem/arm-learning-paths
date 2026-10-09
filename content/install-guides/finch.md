@@ -154,7 +154,7 @@ sudo finch --version
 The output is similar to:
 
 ```output
-finch version v1.8.2
+finch version v1.17.2
 ```
 
 Run a container to confirm functionality:

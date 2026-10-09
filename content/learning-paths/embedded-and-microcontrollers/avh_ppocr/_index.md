@@ -3,6 +3,10 @@ title: Deploy PaddlePaddle on Arm Cortex-M with Arm Virtual Hardware
 
 description: Learn how to export and compile a PaddleOCR text recognition model using TVMC and deploy it on the Arm Corstone-300 FVP with Cortex-M55 processors.
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for software developers interested in using PaddlePaddle for Arm Cortex-M processors.

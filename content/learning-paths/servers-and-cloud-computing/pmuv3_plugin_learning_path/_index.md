@@ -12,7 +12,7 @@ learning_objectives:
     - Use a tool to plot raw PMU event values along with KPI metric values such as MPKI, stalls, and IPC to aid performance visualization.
 
 prerequisites:
-    - An Arm-based computer running Linux.
+    - An Arm-based computer running Linux, such as an Arm AGI CPU platform.
     - Some familiarity with Linux application performance analysis.
 
 author: Gayathri Narayana Yegna Narayanan
@@ -24,6 +24,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
+platforms:
+    - Arm AGI CPU
 armips:
     - Neoverse
 tools_software_languages:

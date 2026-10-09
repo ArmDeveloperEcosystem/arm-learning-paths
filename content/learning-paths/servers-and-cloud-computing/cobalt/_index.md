@@ -72,8 +72,8 @@ rerun_faqs: false
 # Tagging metadata, see the Learning Path guide for the allowed values
 skilllevels: Introductory
 subjects: Containers and Virtualization
-cloud_service_providers:
-  - Microsoft Azure
+platforms:
+  - Microsoft Azure Cobalt
 armips:
     - Neoverse
 tools_software_languages:

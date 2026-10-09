@@ -495,7 +495,7 @@ def prompt_metadata(metadata: Dict[str, Any]) -> Dict[str, Any]:
         "tools_software_languages",
         "operatingsystems",
         "armips",
-        "cloud_service_providers",
+        "platforms",
         "minutes_to_complete",
     )
     return {key: metadata.get(key) for key in keys if metadata.get(key) not in (None, "", [])}
@@ -807,7 +807,7 @@ def build_source_hash(metadata: Dict[str, Any], steps: Sequence[StepPage]) -> st
         "tools_software_languages": metadata.get("tools_software_languages"),
         "operatingsystems": metadata.get("operatingsystems"),
         "armips": metadata.get("armips"),
-        "cloud_service_providers": metadata.get("cloud_service_providers"),
+        "platforms": metadata.get("platforms"),
         "step_titles": [
             {
                 "file": step.path.name,

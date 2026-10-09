@@ -10,7 +10,7 @@ Use this skill when a Learning Path needs a structural review. Focus on whether 
 ## Workflow
 
 1. Identify the Learning Path directory and read the relevant Markdown files together.
-2. State the owned developer task in one sentence. If the task is unclear, too broad, or split across unrelated goals, flag it.
+2. Summarize the developer task owned by LP in one sentence. If the task is unclear, too broad, or split across unrelated goals, flag it.
 3. Check the required file shape:
    - The Learning Path has an `_index.md` file.
    - The Learning Path has an `_next-steps.md` file.
@@ -34,6 +34,7 @@ Use this skill when a Learning Path needs a structural review. Focus on whether 
    - Avoid repeating earlier content verbatim.
 7. If the Learning Path demonstrates Arm-specific performance features, apply the performance integrity checks.
 8. Report findings by learner impact, with file and line references when available. Do not comment on content that is already structurally sound.
+9. After splitting a page, run `git add --` with every path affected by the split, including newly created files and the original path when it was renamed or deleted. Confirm that the intended additions, renames, and deletions are staged with `git status --short` so they are included in the next commit.
 
 ## Scope rules
 

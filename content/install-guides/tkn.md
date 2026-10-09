@@ -63,7 +63,7 @@ sudo apt install ./tektoncd-cli-${TKN_VERSION#v}_Linux-ARM64.deb
 ```
 
 {{% notice Tip %}}
-If the version query fails, you can manually set `TKN_VERSION` to a known stable version such as `v0.41.0`.
+If the version query fails, you can manually set `TKN_VERSION` to a known stable version such as `v0.45.1`.
 {{% /notice %}}
 
 ### Install on macOS
@@ -95,7 +95,7 @@ tkn version
 The output shows the client version information and is similar to:
 
 ```output
-Client version: 0.41.0
+Client version: 0.45.1
 ```
 
 You can also check that the command is working by displaying the help:
@@ -110,26 +110,26 @@ This displays the main command groups and options:
 CLI for tekton pipelines
 
 Usage:
-  tkn [flags]
-  tkn [command]
+tkn [flags]
+tkn [command]
+
 
 Available Commands:
-  bundle              Manage Tekton Bundles
-  chain               Manage Chains
-  clustertask         Manage ClusterTasks
+  bundle*               Manage Tekton Bundles (experimental)
   clustertriggerbinding Manage ClusterTriggerBindings
-  completion          Prints shell completion scripts
-  eventlistener       Manage EventListeners
-  help                Help about any command
-  hub                 Interact with tekton hub
-  pipeline            Manage pipelines
-  pipelinerun         Manage pipeline runs
-  resource            Manage pipeline resources
-  task                Manage Tasks
-  taskrun             Manage TaskRuns
-  triggerbinding      Manage TriggerBindings
-  triggertemplate     Manage TriggerTemplates
-  version             Prints version information
+  customrun             Manage CustomRuns
+  eventlistener         Manage EventListeners
+  hub                   Interact with tekton hub
+  pipeline              Manage pipelines
+  pipelinerun           Manage PipelineRuns
+  task                  Manage Tasks
+  taskrun               Manage TaskRuns
+  triggerbinding        Manage TriggerBindings
+  triggertemplate       Manage TriggerTemplates
+
+Other Commands:
+  completion            Prints shell completion scripts
+  version               Prints version information
 
 Flags:
   -h, --help   help for tkn

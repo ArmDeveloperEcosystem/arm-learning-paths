@@ -24,8 +24,8 @@ rerun_faqs: false
 ##### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers:
-  - Google Cloud
+platforms:
+  - Google Axion
 
 armips:
   - Neoverse

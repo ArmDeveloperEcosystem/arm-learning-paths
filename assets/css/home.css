@@ -16,10 +16,18 @@ ads-breadcrumbs:not(:defined) {
     min-height: 32px;
 }
 
-/* CLS fix: lock the breadcrumb masthead height so hydration doesn't shift content below */
+/* The homepage uses the ADS v5 Arm Ink background hierarchy. */
+html[theme='dark'] body {
+    background-color: var(--ads-ui-ink-100);
+    background-image: none;
+}
+
+/* Match the homepage breadcrumb spacing more closely to category mastheads. */
 #only-breadcrumb-masthead {
-    height: 40px;
+    box-sizing: border-box;
+    height: 64px;
     overflow: hidden;
+    padding-top: 24px;
 }
 
 /* CLS fix: lock the description+button area height to prevent shift when ads-cta-button hydrates */
@@ -43,7 +51,7 @@ ads-breadcrumbs:not(:defined) {
     min-height: 152px;
     height: 152px;
     align-items: center;
-    background-color: var(--arm-color-base);
+    background-color: var(--ads-ui-ink-80);
     border: 1px solid transparent;
     border-color: #000000;
     transition: 
@@ -51,8 +59,8 @@ ads-breadcrumbs:not(:defined) {
         border-color 0.3s ease-in-out;
 }
 .main-topic-card:hover {
-    background-color: var(--arm-color-base);
-    border-color: var(--arm-green);
+    background-color: var(--ads-ui-ink-80);
+    border-color: #848192;
     cursor: pointer;
     transform: translateY(-3px); /* move up 3px */
 
@@ -86,23 +94,21 @@ ads-breadcrumbs:not(:defined) {
     height: 50px;
     object-fit: contain;
     display: block;
+    /* Figma specifies neutral white icons instead of the legacy purple gradients. */
+    filter: brightness(0) invert(1);
 }
 
-.main-topic-card img[src$="mobile-graphics-and-gaming.svg"],
-.main-topic-card img[src$="ai.svg"] {
-    transform: scale(1.16);
-    transform-origin: center;
-}
-
-.main-topic-card img[src$="embedded-and-microcontrollers.svg"] {
-    transform: scale(1.34);
+/* The two legacy SVGs fill their view boxes more fully than the new 64px icon set. */
+.main-topic-card img[src$="automotive.svg"],
+.main-topic-card img[src$="laptops-and-desktops.svg"] {
+    transform: scale(0.82);
     transform-origin: center;
 }
 
 /* Title styling */
 /**************************************/
 .main-topic-title {
-    color: var(--arm-light-blue);
+    color: #E6E6E9;
     font-weight: 700;
     font-size: 20px;
     line-height: 1.2;
@@ -209,7 +215,7 @@ table.contributor-table th {
     color: black;
 }
 table.contributor-table tbody { 
-    background-color: var(--arm-color-base); 
+    background-color: var(--ads-ui-ink-90);
 }
 
 

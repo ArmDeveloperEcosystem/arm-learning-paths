@@ -23,8 +23,8 @@ rerun_faqs: false
 # Tags
 skilllevels: Advanced
 subjects: CI-CD
-cloud_service_providers:
-  - AWS
+platforms:
+  - AWS Graviton
 armips:
   - Neoverse
 tools_software_languages:

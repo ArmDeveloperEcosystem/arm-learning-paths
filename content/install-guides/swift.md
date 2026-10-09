@@ -71,23 +71,23 @@ sudo apt-get -y install \
 Download Swift for Arm Linux:
 
 {{% notice Note %}}
-The following commands use Swift version 6.3.1 on Ubuntu 24.04. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find all available versions, see [Download Swift](https://www.swift.org/download/).
+The following commands use Swift version 6.3.3 on Ubuntu 24.04. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find all available versions, see [Download Swift](https://www.swift.org/download/).
 {{% /notice %}}
 
 ```bash
-wget https://download.swift.org/swift-6.3.1-release/ubuntu2404-aarch64/swift-6.3.1-RELEASE/swift-6.3.1-RELEASE-ubuntu24.04-aarch64.tar.gz
+wget https://download.swift.org/swift-6.3.3-release/ubuntu2404-aarch64/swift-6.3.3-RELEASE/swift-6.3.3-RELEASE-ubuntu24.04-aarch64.tar.gz
 ```
 
 Extract the archive:
 
 ```bash
-sudo tar -xf swift-6.3.1-RELEASE-ubuntu24.04-aarch64.tar.gz -C /usr/local
+sudo tar -xf swift-6.3.3-RELEASE-ubuntu24.04-aarch64.tar.gz -C /usr/local
 ```
 
 Add the `bin/` directory to your search path:
 
 ```bash
-echo 'export PATH="$PATH:/usr/local/swift-6.3.1-RELEASE-ubuntu24.04-aarch64/usr/bin"' >> ~/.bashrc
+echo 'export PATH="$PATH:/usr/local/swift-6.3.3-RELEASE-ubuntu24.04-aarch64/usr/bin"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -102,7 +102,7 @@ swift --version
 The output is similar to:
 
 ```output
-Swift version 6.3.1 (swift-6.3.1-RELEASE)
+Swift version 6.3.3 (swift-6.3.3-RELEASE)
 Target: aarch64-unknown-linux-gnu
 ```
 

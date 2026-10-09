@@ -35,10 +35,6 @@ WindowsPerf is a Linux Perf-inspired performance profiling tool for Windows on A
 
 WindowsPerf consists of a kernel-mode driver and a user-space command-line tool. You can seamlessly integrate the WindowsPerf command line tool with both the [WindowsPerf Visual Studio Extension](#vs2022) and the [WindowsPerf VS Code Extension](#vscode). These extensions, which you can download from the Visual Studio Marketplace, enhance the functionality of WindowsPerf by providing a user-friendly interface, and additional features for performance analysis and debugging. This integration allows developers to efficiently analyze and optimize their applications directly within their preferred development environment.
 
-{{% notice  Note%}}
-You can't use WindowsPerf on virtual machines, such as cloud instances.
-{{% /notice %}}
-
 ## Install WindowsPerf using winget
 
 You can now install WindowsPerf directly from [winget](https://learn.microsoft.com/en-us/windows/package-manager/). Open an `Administrator` terminal on PowerShell and run:

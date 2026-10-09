@@ -28,8 +28,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers:
-  - Microsoft Azure
+platforms:
+  - Microsoft Azure Cobalt
 
 armips:
     - Neoverse

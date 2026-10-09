@@ -79,7 +79,7 @@ For more information about installation options for Corretto, see the [Amazon Co
 
 ## Install the Microsoft Build of OpenJDK
 
-The Microsoft Build of OpenJDK is a no-cost, open source distribution of OpenJDK. It includes Long-Term Support (LTS) binaries for Java 11 and Java 17 and runs on Arm Linux.
+The Microsoft Build of OpenJDK is a no-cost, open source distribution of OpenJDK. It includes Long-Term Support (LTS) binaries for Java 11, Java 17, Java 21, and Java 25 on Arm Linux.
 
 {{% notice Note %}}
 The Arm architecture is not available in the repositories for the `apt` package manager. 
@@ -90,29 +90,29 @@ You can download a tar.gz file from [Download the Microsoft Build of OpenJDK](ht
 For example:
 
 {{% notice Note %}}
-The following commands use Microsoft Build of OpenJDK version 25.0.2. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Download the Microsoft Build of OpenJDK](https://learn.microsoft.com/en-gb/java/openjdk/download).
+The following commands use Microsoft Build of OpenJDK version 25.0.4. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Download the Microsoft Build of OpenJDK](https://learn.microsoft.com/en-gb/java/openjdk/download).
 {{% /notice %}}
 
 ```console
-wget https://aka.ms/download-jdk/microsoft-jdk-25.0.2-linux-aarch64.tar.gz
+wget https://aka.ms/download-jdk/microsoft-jdk-25.0.4-linux-aarch64.tar.gz
 ```
 
 Extract the contents of the file:
 
 ```console
-tar xvf microsoft-jdk-25.0.2-linux-aarch64.tar.gz
+tar xvf microsoft-jdk-25.0.4-linux-aarch64.tar.gz
 ```
 
 Move the contents to a directory of your choice: 
 
 ```console
-sudo mv  jdk-25.0.2+10/ /usr/local
+sudo mv  jdk-25.0.4+7/ /usr/local
 ```
 
 Set up environment variables to locate your installation:
 
 ```console
-export JAVA_HOME=/usr/local/jdk-25.0.2+10
+export JAVA_HOME=/usr/local/jdk-25.0.4+7
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
@@ -153,13 +153,13 @@ tar xvf jdk-25_linux-aarch64_bin.tar.gz
 Move the contents to a directory of your choice: 
 
 ```console
-sudo mv jdk-25.0.3 /usr/local/
+sudo mv jdk-25.0.4 /usr/local/
 ```
 
 Set up environment variables to locate your installation:
 
 ```console
-export JAVA_HOME=/usr/local/jdk-25.0.3
+export JAVA_HOME=/usr/local/jdk-25.0.4
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 
@@ -175,20 +175,24 @@ sudo update-alternatives --config java
 
 You'll be given the option to select a new version. The options are dependent on the software currently installed on your computer. 
 
+{{% notice Note %}}
+Only Java versions installed through package managers (`apt`, `snap`, or repository-based installs) appear in `update-alternatives`. Manual tar.gz installations (such as the Microsoft Build of OpenJDK or Oracle JDK) don't register automatically. Use `JAVA_HOME` and `PATH` environment variables to switch to those versions.
+{{% /notice %}}
+
 ```output
 There are 3 choices for the alternative java (providing /usr/bin/java).
 
   Selection    Path                                           Priority   Status
 ------------------------------------------------------------
-* 0            /usr/lib/jvm/java-21-amazon-corretto/bin/java   12100004  auto mode
-  1            /usr/lib/jvm/java-17-openjdk-arm64/bin/java     1711      manual mode
-  2            /usr/lib/jvm/java-21-amazon-corretto/bin/java   12100004  manual mode
-  3            /usr/lib/jvm/java-21-openjdk-arm64/bin/java     2111      manual mode
+* 0            /usr/lib/jvm/java-21-amazon-corretto/bin/java   12100012  auto mode
+  1            /usr/lib/jvm/java-21-amazon-corretto/bin/java   12100012  manual mode
+  2            /usr/lib/jvm/java-21-openjdk-arm64/bin/java     2111      manual mode
+  3            /usr/lib/jvm/temurin-17-jdk-arm64/bin/java      1711      manual mode
 
 Press <enter> to keep the current choice[*], or type selection number:
 ```
 
-In this example, if you select option 1, Java 17 becomes the default. 
+In this example, if you select option 3, Java 17 (Temurin) becomes the default. 
 
 ## Verify Java installation by printing Java version
 
@@ -201,9 +205,9 @@ java -version
 The output will be similar to:
 
 ```output
-openjdk version "25.0.2" 2026-01-20 LTS
-OpenJDK Runtime Environment Microsoft-13053556 (build 25.0.2+10-LTS)
-OpenJDK 64-Bit Server VM Microsoft-13053556 (build 25.0.2+10-LTS, mixed mode, sharing)
+openjdk version "25.0.4" 2026-07-21 LTS
+OpenJDK Runtime Environment Microsoft-13053556 (build 25.0.4+7-LTS)
+OpenJDK 64-Bit Server VM Microsoft-13053556 (build 25.0.4+7-LTS, mixed mode, sharing)
 ```
 
 Print the version of the Java compiler:
@@ -215,7 +219,7 @@ javac -version
 The output will be similar to:
 
 ```output
-javac 25.0.2
+javac 25.0.4
 ```
 
 {{% notice Important %}}
@@ -271,9 +275,9 @@ The output is similar to:
 ```output
 Apache Maven 3.8.7
 Maven home: /usr/share/maven
-Java version: 22.0.2, vendor: Oracle Corporation, runtime: /usr/local/jdk-22.0.2
+Java version: 25.0.4, vendor: Oracle Corporation, runtime: /usr/local/jdk-25.0.4
 Default locale: en, platform encoding: UTF-8
-OS name: "linux", version: "6.8.0-41-generic", arch: "aarch64", family: "unix"
+OS name: "linux", version: "6.8.0-60-generic", arch: "aarch64", family: "unix"
 ```
 
 ### Gradle
@@ -330,9 +334,9 @@ Revision:      2d6327017519d23b96af35865dc997fcb544fb40
 Kotlin:        2.3.0
 Groovy:        4.0.29
 Ant:           Apache Ant(TM) version 1.10.15 compiled on August 25 2024
-Launcher JVM:  22.0.2 (Oracle Corporation 22.0.2+9-70)
-Daemon JVM:    /usr/local/jdk-22.0.2 (no JDK specified, using current Java home)
-OS:            Linux 6.8.0-41-generic aarch64
+Launcher JVM:  25.0.4 (Oracle Corporation 25.0.4+7-LTS-189)
+Daemon JVM:    /usr/local/jdk-25.0.4 (no JDK specified, using current Java home)
+OS:            Linux 6.8.0-60-generic aarch64
 ```
 ### Apache Ant
 

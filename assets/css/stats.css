@@ -31,9 +31,7 @@
 }
 
 ads-card.stats-card:hover * {
-    background: white;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #E6E6E9;
 }
 
 .stats-table {

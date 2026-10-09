@@ -27,8 +27,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
-cloud_service_providers:
-    - Microsoft Azure
+platforms:
+    - Microsoft Azure Cobalt
 armips:
     - Neoverse
 tools_software_languages:

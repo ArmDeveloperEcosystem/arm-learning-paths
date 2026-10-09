@@ -16,9 +16,52 @@ prerequisites:
   - An x86_64 Linux host machine running Ubuntu, with at least 15 GB of free disk space
   - An Arm64 target system with support for SME or SME2 - see the Learning Path [Devices with native SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices)
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-17T22:07:35Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 0db365140107125f0dd330363a00a5790214a12c859fb5cd573a8d66af4293c3
+  summary_generated_at: '2026-08-17T22:07:35Z'
+  summary_source_hash: 0db365140107125f0dd330363a00a5790214a12c859fb5cd573a8d66af4293c3
+  faq_generated_at: '2026-08-17T22:07:35Z'
+  faq_source_hash: 0db365140107125f0dd330363a00a5790214a12c859fb5cd573a8d66af4293c3
+  summary: >-
+    You'll cross-compile ExecuTorch with XNNPACK and KleidiAI for an `aarch64` SME or SME2 system.
+    First, you'll create quantized fully connected and Conv2d benchmark models that can use KleidiAI, then run
+    them with `executor_runner`. You'll inspect ETRecord and ETDump traces with the ExecuTorch Inspector API
+    to validate kernel selection and compare behavior across variants.
+  faqs:
+  - question: Do I need to keep my Python virtual environment active while building and exporting
+      models?
+    answer: >-
+      Yes. Keep your virtual environment active so build and runtime dependencies install and
+      import from the same isolated location.
+  - question: What should I check on the Arm64 target before I run benchmarks?
+    answer: >-
+      Verify the device supports SME or SME2. Also confirm that you deploy the AArch64 ExecuTorch binaries and libraries produced
+      by cross-compilation.
+  - question: Which Conv2d variants does the guide benchmark with KleidiAI?
+    answer: >-
+      The guide benchmarks an INT8-quantized Conv2d variant using `pqs8_qc8w_gemm`. It also
+      benchmarks a FP32 pointwise (1×1) Conv2d variant using `pf32_gemm`.
+  - question: Which profiling files do I use with the ExecuTorch Inspector API?
+    answer: >-
+      Model export creates an `ETRecord` file alongside the `.pte` model. `executor_runner` writes an
+      `ETDump` file. Use the matching files with the ExecuTorch Inspector API to analyze kernel behavior.
+  - question: Which GEMM benchmark variants does the guide export?
+    answer: >-
+      The guide exports FP16, FP32, INT8, and INT4 linear-model variants. It also exports FP16 and FP32
+      matrix-multiply models for comparison.
+# END generated_summary_faq
+
 author: Qixiang Xu
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -49,4 +92,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

@@ -31,11 +31,11 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: ML
-cloud_service_providers:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+platforms:
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
     - Neoverse
 operatingsystems:

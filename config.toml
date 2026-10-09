@@ -12,6 +12,7 @@ enableRobotsTXT = true
 name = "dev"
 URL = "s3://arm-learning-paths-dev?region=us-east-1"
 cloudFrontDistributionID = "EAMKPMDBM18II"
+exclude = "{courses,insights}/**"
 
 [[deployment.targets]]
 name = "prod"
@@ -39,13 +40,13 @@ operatingsystem = "operatingsystems"
 skilllevel = "skilllevels"
 tool_software_language = "tools_software_languages"
 armip = "armips"
-cloud_service_provider = "cloud_service_providers"
+platform = "platforms"
 
 [permalinks]
 tools_software_languages = "/tag/:slug/"
 operatingsystems = "/tag/:slug/"
 subjects = "/tag/:slug/"
-cloud_service_providers = "/tag/:slug/"
+platforms = "/tag/:slug/"
 armips = "/tag/:slug/"
 
 [related]
@@ -54,7 +55,7 @@ includeNewer = true
 toLower = false
 
 [[related.indices]]
-name = "cloud_service_providers"
+name = "platforms"
 weight = 100
 
 [[related.indices]]
@@ -72,6 +73,9 @@ github_repo = "https://github.com/ArmDeveloperEcosystem/arm-learning-paths"
 github_project_repo = "https://github.com/ArmDeveloperEcosystem/arm-learning-paths"
 # location of assets
 assetsDir = "assets"
+
+# Optionally override the global web components bundle for a specific deployment.
+# global_web_components_url = "https://www.arm.com/arm-global-web-components/devhub/app.js"
 
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = ""

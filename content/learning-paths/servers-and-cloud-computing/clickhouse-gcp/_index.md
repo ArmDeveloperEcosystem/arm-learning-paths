@@ -74,8 +74,8 @@ rerun_faqs: false
 ##### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers:
-  - Google Cloud
+platforms:
+  - Google Axion
 
 armips:
   - Neoverse
@@ -85,7 +85,7 @@ tools_software_languages:
   - Apache Beam
   - Google Dataflow
   - Google Cloud Pub/Sub
-  - Python 3.11
+  - Python
 
 operatingsystems:
   - Linux

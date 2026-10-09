@@ -14,7 +14,7 @@ Up to this point, the focus has been on evaluating Arm Neural Technology from a 
 
 If you’re working with technologies such as NSS or NFRU, model support is already handled for you. The models are provided, integrated, and ready to use through the Unreal Engine plugins. In practice, this means you can approach them much like any other engine feature: enable them, test them in your project, and decide if they fit.
 
-If you want to go deeper, leading with NSS and with NFRU following shortly, Arm’s model development tools are a good place to start.
+If you want to go deeper, Arm's model development tools let you train, evaluate, quantize, and export NFRU models.
 
 For most game teams, this is new ground. It raises questions such as:
 
@@ -24,7 +24,7 @@ For most game teams, this is new ground. It raises questions such as:
 
 Instead, a good way to think about it is in stages.
 
-Start with what's readily available - NSSD or NFRU - and use that to build intuition. Validate the results in your game. Use the available tools for fine-tuning and data collection for NSSD. Get a feel for how these techniques behave in your pipeline.
+Start with the prebuilt NFRU model and use it to build intuition. Validate the results in your game before changing the model. For NSSD, use the available data-capture and fine-tuning tools to establish the same kind of repeatable baseline.
 
 From there, if you’re interested in pushing further, this is where model work starts to become relevant. This section focuses on that path - how to take what’s available and make it work for your game.
 
@@ -34,12 +34,13 @@ If you decide to go beyond that, you’re stepping into more open-ended territor
 
 ### Prove the runtime path with prebuilt models
 
-The quickest way to get signal is to enable NSS in Unreal using Arm’s integration path, and learn about the lower-level Vulkan ML execution using the sample apps. At this stage, you’re checking that the data flows correctly through the pipeline and that the outputs behave as expected.
+The quickest way to get signal is to enable NFRU in Unreal Engine using Arm's integration path. You can then compare it with the NSS workflow or inspect lower-level Vulkan ML execution using the sample applications. At this stage, you're checking that data flows correctly through the pipeline and that the outputs behave as expected.
 
 A strong baseline flow is:
 
+- [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/)
 - [Enable Neural Super Sampling in Unreal Engine with ML Extensions](/learning-paths/mobile-graphics-and-gaming/nss-unreal/)
-- [Validate the lower-level Vulkan data graph path using sample appsn](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/)
+- [Validate the lower-level Vulkan data graph path using sample applications](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/)
 
 
 ### Capture your game before changing the model
@@ -56,9 +57,9 @@ This creates a data contract for model iteration: when artifacts appear, you can
 
 Move into model tuning only after you can clearly reproduce a problem. At this stage, Model Gym becomes useful. You can target specific issues you’re seeing: ghosting in motion, instability in certain lighting conditions, or loss of detail in specific scenes.
 
-When baseline integration is stable and issues are reproducible, move into Model Gym:
+When baseline integration is stable and issues are reproducible, move into the NFRU Model Gym workflow:
 
-[Fine-tune neural graphics models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym/)
+[Train and evaluate Neural Frame Rate Upscaling models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym-nfru/)
 
 The important part is having a clear definition of what you’re trying to fix, and what “good enough” looks like. Without that, it’s easy to spend time training models without actually improving the result in a meaningful way.
 

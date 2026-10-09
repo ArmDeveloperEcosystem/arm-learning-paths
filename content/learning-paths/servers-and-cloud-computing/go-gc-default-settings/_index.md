@@ -19,17 +19,58 @@ prerequisites:
     - The [AWS CLI](/install-guides/aws-cli/) installed and configured on your local machine
     - Basic familiarity with Go benchmarks and Linux shell commands
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-09-10T22:09:54Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 8839edf689c26c8abe50094c0cfa62521b58a69c4e58a3f4c67b2e111e7d49e6
+  summary_generated_at: '2026-09-10T22:09:54Z'
+  summary_source_hash: 8839edf689c26c8abe50094c0cfa62521b58a69c4e58a3f4c67b2e111e7d49e6
+  faq_generated_at: '2026-09-10T22:09:54Z'
+  faq_source_hash: 8839edf689c26c8abe50094c0cfa62521b58a69c4e58a3f4c67b2e111e7d49e6
+  summary: >-
+    You'll establish a Go GC baseline on an AWS Graviton-based Arm server. First, you'll install Go and Benchstat and confirm default runtime settings. Then, you'll run a benchmark and collect allocation, pause, and GC metrics with CPU and heap profiles. You'll compare results with Benchstat before experimenting with GC behavior and measuring its impact.
+  faqs:
+  - question: How do I verify the instance and Go toolchain are Arm-based before benchmarking?
+    answer: >-
+      Run `go version` and check that it reports `linux/arm64`. Also run `go env GOOS GOARCH` and confirm
+      `GOARCH` is `arm64`.
+  - question: What should I check to keep the default Go GC baseline intact?
+    answer: >-
+      Confirm that `GOGC`, `GOMEMLIMIT`, `GODEBUG`, and `GOMAXPROCS` aren't set. Use `env | grep -E '^(GOGC|GOMEMLIMIT|GODEBUG|GOMAXPROCS)=' || true` and unset any variables that appear.
+  - question: What result should I expect after the baseline benchmark run?
+    answer: >-
+      You should have a runtime snapshot (Go version, `GOOS/GOARCH`, CPU count, and memory) and raw
+      benchmark output in `default_gc_benchmark.txt`. Run `benchstat default_gc_benchmark.txt` next to create the summary used to compare and interpret the baseline metrics.
+  - question: How do I interpret the Benchstat metrics related to GC?
+    answer: >-
+      `ns/op` shows time per operation (lower is faster), `B/op` shows bytes allocated per operation,
+      and `allocs/op` shows the number of allocations per operation—lower values generally reduce
+      GC pressure. `gc/op` indicates how often GC cycles occur per operation. A lower `gc/op` means
+      GC runs less frequently for the same work.
+  - question: How do I capture CPU and heap profiles without changing GC behavior?
+    answer: >-
+      Leave `GOGC`, `GOMEMLIMIT`, `GODEBUG`, and `GOMAXPROCS` unset and run the benchmark using the profiling
+      commands. The run writes CPU and heap profiles alongside the benchmark
+      results while preserving default GC behavior.
+# END generated_summary_faq
+
 author: Geremy Cohen
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-cloud_service_providers:
-  - AWS
+platforms:
+  - AWS Graviton
 armips:
     - Neoverse
 tools_software_languages:

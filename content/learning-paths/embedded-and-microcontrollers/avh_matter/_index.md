@@ -3,6 +3,10 @@ title: Develop for Matter with Arm Virtual Hardware
 
 description: Learn how to build Matter reference examples on Arm Virtual Hardware, demonstrate device communication, and automate testing with GitHub Actions CI/CD workflows.
 
+draft: true
+cascade:
+    draft: true
+
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for embedded software developers new to Arm Virtual Hardware.

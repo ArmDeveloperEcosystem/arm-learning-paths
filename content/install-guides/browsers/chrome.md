@@ -2,7 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Chrome
-description: Install Chrome on Windows on Arm and understand its Arm Linux availability so you can choose a supported browser for Arm devices.
+description: Install Chrome on Arm Linux or Windows on Arm and use a native browser for development and web workflows.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -10,7 +10,7 @@ additional_search_terms:
 - chrome
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
-minutes_to_complete: 5
+minutes_to_complete: 10
 
 author: Jason Andrews
 
@@ -26,11 +26,20 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 ## How do I install Chrome?
 
-The Chrome browser runs on Windows on Arm as a native ARM64 application. Chrome is not available for Arm Linux. 
+The Chrome browser runs on Windows on Arm as a native ARM64 application. Chrome is also available for Arm Linux. 
 
 ### Linux
 
-Chrome is not available for Arm Linux. 
+Chrome is available for Arm Linux.
+
+To install Chrome on Arm Linux:
+
+{{< tabpane code=true >}}
+  {{< tab header="Ubuntu/Debian" language="bash">}}
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_arm64.deb
+sudo apt install ./google-chrome-stable_current_arm64.deb
+  {{< /tab >}}
+{{< /tabpane >}}
 
 ### Windows 
 

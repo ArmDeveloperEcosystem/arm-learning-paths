@@ -171,6 +171,6 @@ arm-none-eabi-gcc -v
 
 Additional examples are included in the toolchain installation. If you installed to `$HOME` using the example provided in this guide, you can find them at:
 ```console
-$HOME/arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi/share/doc/gcc-arm-none-eabi/examples
+$HOME/arm-gnu-toolchain-15.2.rel1-aarch64-arm-none-eabi/share/gcc-arm-none-eabi/samples
 ```
 You're now ready to use Arm GNU Toolchain.

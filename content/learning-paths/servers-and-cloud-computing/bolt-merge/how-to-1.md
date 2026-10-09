@@ -18,7 +18,7 @@ BOLT complements compile-time optimizations like LTO (Link-Time Optimization) an
 
 Before you begin, ensure that you have the following installed:
 
-- [BOLT](/install-guides/bolt/) 
+- [BOLT](/install-guides/llvm/#verify-bolt-tools)
 - [Linux Perf](/install-guides/perf/)
 
 You should use an Arm-based Linux system with at least 8 CPUs and 16 GB of RAM. This Learning Path was tested on Ubuntu 24.04, but other Linux distributions are also supported.
@@ -57,5 +57,4 @@ Although this Learning Path uses MySQL and Sysbench as examples, you can apply t
 - **Uses dynamic libraries** - most modern applications rely on shared libraries for functionality. + Optimizing shared libraries alongside the main binary ensures consistent performance across your stack.
 
 - **Requires full-stack binary optimization for performance-critical deployment** - in scenarios where every bit of performance matters, such as high-throughput servers or latency-sensitive applications, optimizing the entire binary stack can yield significant benefits.
-
 

@@ -32,13 +32,9 @@ g++ -O3 -std=c++17 -fprofile-use div_bench.cpp -lbenchmark -lpthread -o div_benc
 
 Now run the optimized binary:
 
-```bash
+```bash {command_line="user@localhost | 2-16" }
 ./div_bench.opt
-```
-
-The following output shows the performance improvement:
-
-```output
+2026-05-21T09:20:23+00:00
 Running ./div_bench.opt
 Run on (4 X 2100 MHz CPU s)
 CPU Caches:

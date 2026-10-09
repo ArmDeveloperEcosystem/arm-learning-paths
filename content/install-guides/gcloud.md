@@ -125,14 +125,12 @@ gcloud -v
 The output is similar to:
 
 ```output
-Google Cloud SDK 418.0.0
-alpha 2023.02.13
-beta 2023.02.13
-bq 2.0.85
-bundled-python3-unix 3.9.16
-core 2023.02.13
+Google Cloud SDK 579.0.0
+bq 2.1.36
+bundled-python3-unix 3.14.6
+core 2026.07.31
 gcloud-crc32c 1.0.0
-gsutil 5.20
+gsutil 5.37
 ```
 
 ## How do I acquire user access credentials for Google Cloud? {#acquire-user-credentials}

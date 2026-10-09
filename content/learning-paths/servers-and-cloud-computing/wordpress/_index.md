@@ -21,8 +21,8 @@ learning_objectives:
 ### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers:
-  - Oracle
+platforms:
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 
 armips:
     - Neoverse

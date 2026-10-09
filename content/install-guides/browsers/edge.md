@@ -10,7 +10,7 @@ additional_search_terms:
 - edge
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
-minutes_to_complete: 5
+minutes_to_complete: 10
 
 author: Jason Andrews
 
@@ -32,7 +32,7 @@ Edge is not available for Arm Linux.
 
 Visit the [download page](https://www.microsoft.com/en-us/edge/download) for additional install options. 
 
-{{% notice Note %}}
+{{% notice Linux support %}}
 The Linux downloads are not for the Arm architecture.
 {{% /notice %}}
 

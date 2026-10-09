@@ -1,0 +1,78 @@
+From 32db2b56876ceac0bd4da299b6775e2dddfa5ee3 Mon Sep 17 00:00:00 2001
+From: Qxiang Xu <Qixiang.Xu@arm.com>
+Date: Tue, 25 Aug 2026 10:04:03 +0800
+Subject: [PATCH 1/4] Prepare QD8 F16 QC4W SME2 kernel
+
+---
+ cmake/gen/neonsme2_microkernels.cmake          |  3 ++-
+ gen/neonsme2_microkernels.bzl                  |  1 +
+ ...qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c | 18 ++++++++++++++++++
+ src/xnnpack/gemm.h                             |  3 +++
+ 4 files changed, 24 insertions(+), 1 deletion(-)
+ create mode 100644 src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c
+
+diff --git a/cmake/gen/neonsme2_microkernels.cmake b/cmake/gen/neonsme2_microkernels.cmake
+index c349181e17..45d7de4c3c 100644
+--- a/cmake/gen/neonsme2_microkernels.cmake
++++ b/cmake/gen/neonsme2_microkernels.cmake
+@@ -30,6 +30,7 @@ SET(PROD_NEONSME2_MICROKERNEL_SRCS
+   src/x32-pack-lh/x32-packlh-igemm-neonsme2.c
+   src/x32-pack-lh/x32-packlh-neonsme2.c)
+ 
+-SET(NON_PROD_NEONSME2_MICROKERNEL_SRCS)
++SET(NON_PROD_NEONSME2_MICROKERNEL_SRCS
++  src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c)
+ 
+ SET(ALL_NEONSME2_MICROKERNEL_SRCS ${PROD_NEONSME2_MICROKERNEL_SRCS} ${NON_PROD_NEONSME2_MICROKERNEL_SRCS})
+diff --git a/gen/neonsme2_microkernels.bzl b/gen/neonsme2_microkernels.bzl
+index cf22def575..3024cc5b07 100644
+--- a/gen/neonsme2_microkernels.bzl
++++ b/gen/neonsme2_microkernels.bzl
+@@ -28,6 +28,7 @@ PROD_NEONSME2_MICROKERNEL_SRCS = [
+ ]
+ 
+ NON_PROD_NEONSME2_MICROKERNEL_SRCS = [
++    "src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c",
+ ]
+ 
+ ALL_NEONSME2_MICROKERNEL_SRCS = PROD_NEONSME2_MICROKERNEL_SRCS + NON_PROD_NEONSME2_MICROKERNEL_SRCS
+diff --git a/src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c b/src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c
+new file mode 100644
+index 0000000000..9999026148
+--- /dev/null
++++ b/src/qd8-f16-qc4w-gemm/qd8-f16-qc4w-gemm-minmax-16x64c4-neonsme2.c
+@@ -0,0 +1,18 @@
++// Copyright 2026 Google LLC
++//
++// This source code is licensed under the BSD-style license found in the
++// LICENSE file in the root directory of this source tree.
++
++#include <stddef.h>
++
++#if XNN_ENABLE_KLEIDIAI
++#include "kai/ukernels/matmul/matmul_clamp_f16_qai8dxp_qsi4cxp/kai_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa.h"
++
++size_t xnn_qd8_f16_qc4w_gemm_minmax_ukernel_16x64c4__neonsme2_get_mr(void) {
++  return kai_get_mr_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa();
++}
++
++size_t xnn_qd8_f16_qc4w_gemm_minmax_ukernel_16x64c4__neonsme2_get_nr(void) {
++  return kai_get_nr_matmul_clamp_f16_qai8dxp1vlx8_qsi4cxp4vlx8_1vlx4vl_sme2_mopa();
++}
++#endif  // XNN_ENABLE_KLEIDIAI
+diff --git a/src/xnnpack/gemm.h b/src/xnnpack/gemm.h
+index 146c9970db..9fc4cfa5a8 100644
+--- a/src/xnnpack/gemm.h
++++ b/src/xnnpack/gemm.h
+@@ -4042,6 +4042,9 @@ size_t xnn_qp8_f32_qc4w_gemm_minmax_ukernel_1x64c4__neonsme2_get_nr();
+ size_t xnn_qp8_f32_qc4w_gemm_minmax_ukernel_16x64c4__neonsme2_get_mr();
+ size_t xnn_qp8_f32_qc4w_gemm_minmax_ukernel_16x64c4__neonsme2_get_nr();
+ 
++size_t xnn_qd8_f16_qc4w_gemm_minmax_ukernel_16x64c4__neonsme2_get_mr(void);
++size_t xnn_qd8_f16_qc4w_gemm_minmax_ukernel_16x64c4__neonsme2_get_nr(void);
++
+ size_t xnn_qp8_f32_qc4w_gemm_minmax_ukernel_1x64c4__neonsme_get_mr();
+ size_t xnn_qp8_f32_qc4w_gemm_minmax_ukernel_1x64c4__neonsme_get_nr();
+ size_t xnn_qp8_f32_qc4w_gemm_minmax_ukernel_16x64c4__neonsme_get_mr();
+-- 
+2.43.0

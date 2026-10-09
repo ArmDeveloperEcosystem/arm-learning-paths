@@ -16,6 +16,7 @@ author: Jason Andrews
 
 ### Link to official documentation
 official_docs: https://support.brave.com/hc/en-us/categories/360001053032-Desktop-Browser
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/windows?package=Brave
 
 weight: 2                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: false             # Set to true to be listed in main selection page, else false
@@ -60,7 +61,7 @@ For more ways to install Brave on Linux refer to [Installing Brave on Linux](htt
 
 ### Windows 
 
-Brave is a native ARM64 application. If you visit [brave.com](https://www.brave.com) and download from a Windows on Arm computer you will install the native version. 
+Brave is a native ARM64 application. If you visit [brave.com](https://www.brave.com) and download from a Windows on Arm computer, you will install the native version. 
 
 Additional Brave releases for Windows on Arm are available on [GitHub](https://github.com/brave/brave-browser) 
 
@@ -68,7 +69,7 @@ To download the offline installer, use the files with `Standalone` in the name.
 
 To install Brave on Windows on Arm:
 
-1. Click on latest release on the right side of the page. 
+1. Click on the latest release on the right side of the page. 
 
 2. Find and download the offline install file `BraveBrowserStandaloneSetupArm64.exe`
 
@@ -76,7 +77,7 @@ To install Brave on Windows on Arm:
 
 4. Find and start Brave from the applications menu
 
-{{% notice Note %}}
+{{% notice Online installer %}}
 If you want the smaller, online installer download the file `BraveBrowserSetupArm64.exe`
 {{% /notice %}}
 

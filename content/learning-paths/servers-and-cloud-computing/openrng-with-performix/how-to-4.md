@@ -92,7 +92,7 @@ To fix this, rebuild OpenRNG from source with debug information enabled (for exa
 Clone and build OpenRNG from the project root with debug symbols enabled:
 
 ```bash
-git clone https://gitlab.arm.com/libraries/openrng.git && cd openrng
+git clone https://github.com/arm/openrng.git && cd openrng
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$PWD/install
 cmake --build build -j $(nproc -1)
 cmake --install build

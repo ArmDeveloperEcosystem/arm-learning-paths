@@ -24,10 +24,10 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Databases
-cloud_service_providers:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
+platforms:
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
 armips:
     - Neoverse
 operatingsystems:

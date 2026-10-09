@@ -25,7 +25,7 @@ def load_allowlist():
         "subjects_by_category": data.get("subjects", {}),
         "flat_subjects": flat_subjects,
         "operatingsystems": set(data.get("operatingsystems", [])),
-        "cloud_service_providers": set(data.get("cloud_service_providers", [])),
+        "platforms": set(data.get("platforms", [])),
     }
 
 def extract_frontmatter(path):
@@ -90,6 +90,14 @@ def validate_file(path, allowlist):
         for os_entry in osys:
             if os_entry not in allowlist["operatingsystems"]:
                 errors.append(f"Invalid operatingsystem: {os_entry}. Please choose from {', '.join(allowlist['operatingsystems'])}")
+
+    # Validate platforms if present
+    platforms = data.get("platforms", [])
+    if isinstance(platforms, str):
+        platforms = [platforms]
+    for platform in platforms:
+        if platform not in allowlist["platforms"]:
+            errors.append(f"Invalid platform: {platform}. Please choose from {', '.join(allowlist['platforms'])}")
 
     # Validate subject/category mapping
     category = get_category_from_path(path)

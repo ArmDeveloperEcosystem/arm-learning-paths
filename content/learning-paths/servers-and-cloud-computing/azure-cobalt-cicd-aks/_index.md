@@ -73,14 +73,14 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
-cloud_service_providers:
-  - Microsoft Azure
+platforms:
+  - Microsoft Azure Cobalt
 
 armips:
     - Neoverse
 
 tools_software_languages:
-    - .NET
+    - dotnet
     - Kubernetes
     - Docker
 

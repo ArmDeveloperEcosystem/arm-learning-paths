@@ -9,7 +9,7 @@ additional_search_terms:
 
 layout: installtoolsall
 minutes_to_complete: 15
-official_docs: https://docs.aws.amazon.com/greengrass/v2/developerguide/quick-installation.html
+official_docs: https://docs.arduino.cc/software/ide-v2
 prerequisites: Arduino IDE
 test_maintenance: true
 test_images:
@@ -61,6 +61,10 @@ Once the support package is installed, you need to tell the Arduino IDE which su
 
 ![Arduino Board Selection](/install-guides/_images/arduino_rp2040_select.png)
 
+{{% notice Note %}}
+Due to changes and updates to the board packages and their package names, you may find your specific board is found within the `Raspberry Pi Pico/RP2040/RP2350` board package (vs. `Arduino Mbed RP2040 Boards`). This is especially true if you have a Pico that has wireless/BT hardware support.
+{{% /notice %}}
+
 ## How do I upload code to my board?
 
 Because the Raspberry Pi Pico doesn't come with the Arduino core software installed, the Arduino IDE won't recognize it.
@@ -75,6 +79,20 @@ You should see the LED on your Raspberry Pi Pico blink on and off every second.
 
 {{% notice Note %}}
 If you have trouble uploading a sketch, unplug the board, press and hold the `BOOTSEL` button on the board, plug it in, and then release the button.
+{{% /notice %}}
+
+{{% notice Note about Arduino on Apple Silicon %}}
+If you receive compile errors that resemble this:
+
+        /Users/<myusername>/Library/Arduino15/packages/builtin/tools/ctags/5.8-arduino11/ctags: bad CPU type in executable 
+
+        Compilation error: fork/exec /Users/<myusername>/Library/Arduino15/packages/builtin/tools/ctags/5.8-arduino11/ctags: bad CPU type in executable
+
+You will need to install Apple's Rosetta2:
+
+        softwareupdate --install-rosetta --agree-to-license
+
+Once installed, please reboot your Apple Silicon Mac and retry. 
 {{% /notice %}}
 
 You are ready to start writing your own Arduino sketches for Raspberry Pi Pico.

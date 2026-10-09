@@ -1,6 +1,6 @@
 ---
 title: Using Keil Studio
-description: Convert a uVision project to csolution format in Keil Studio and build it with CMSIS-Toolbox.
+description: Convert a μVision project to csolution format in Keil Studio and build it with CMSIS-Toolbox.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -41,3 +41,7 @@ layout: learningpathall
    info cbuild: build finished successfully!
    Build complete
    ```
+
+{{% notice Note %}}
+For more information, refer to the [Arm Keil Studio user's guide](https://mdk-packs.github.io/vscode-cmsis-solution-docs/importuv.html).
+{{% /notice %}}

@@ -96,7 +96,7 @@ Calls to:
 <div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1 u-padding-bottom-2-1/2">
     <!-- Filter bar on left -->
     <div class="c-col filter-column-div u-hide lg:u-display-block u-flex-shrink-0">
-        {{if eq "cloud_service_provider" .Data.Singular}}
+        {{if eq "platform" .Data.Singular}}
             <h3 class="u-margin-top-0">{{.Data.Term}} Learning Paths</h3>
             <p>
                 This page lists all Learning Paths focused on {{.Data.Term}} in the Server and Cloud Computing category. 
@@ -110,7 +110,7 @@ Calls to:
     <!-- Search & Results on Right -->
     <div class="c-col">
         
-        {{if eq "cloud_service_provider" .Data.Singular}}
+        {{if eq "platform" .Data.Singular}}
             {{ partial "filter-search-sort/csp-term-page.html" (dict  "context" . "content_to_list" $paths_to_list "page_type" "learning paths")}} 
         {{else}}
             <!-- Mobile: Search & Filter -->

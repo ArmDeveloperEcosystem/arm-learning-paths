@@ -1,5 +1,5 @@
 ---
-title: Learn how to use the Visual Studio extension for WindowsPerf
+title: Analyze performance data with the Visual Studio extension for WindowsPerf
 
 description: Learn how to install and use the WindowsPerf Visual Studio extension to generate counting and sampling reports and analyze performance data in Windows Performance Analyzer.
 
@@ -15,12 +15,55 @@ learning_objectives:
 
 prerequisites:
   - A desktop or laptop running Windows on Arm.
-  - Visual Studio 2022 Community Edition, WindowsPerf, WindowsPerf Visual Studio extension, and Windows Performance Analyzer (WPA) installed. 
+  - Visual Studio 2022 Community Edition, WindowsPerf, WindowsPerf Visual Studio extension, and WPA installed.
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-11T16:25:59Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 4b88beee8d8aa7ec61969d8a7278dd37f65c97562c7db0a514819b2c56a3561b
+  summary_generated_at: '2026-08-11T16:25:59Z'
+  summary_source_hash: 4b88beee8d8aa7ec61969d8a7278dd37f65c97562c7db0a514819b2c56a3561b
+  faq_generated_at: '2026-08-11T16:25:59Z'
+  faq_source_hash: 4b88beee8d8aa7ec61969d8a7278dd37f65c97562c7db0a514819b2c56a3561b
+  summary: >-
+    You'll integrate WindowsPerf into Visual Studio 2022 on Windows on Arm to collect and review
+    performance data. First, you'll configure the required tools, run counting sessions from **View** >
+    **Counting Settings**, and inspect the results. Then, you'll use **View** > **Sampling Explorer**
+    to analyze samples and use the Arm Statistical Profiling Extension (SPE) when supported.
+  faqs:
+  - question: How do I know the WindowsPerf Visual Studio extension is installed correctly?
+    answer: >-
+      In Visual Studio 2022, the **View** menu should include **Counting Settings** and **Sampling Explorer**.
+      If these entries are missing, check that the extension is installed and that you're running
+      Visual Studio 2022 on Windows on Arm.
+  - question: Where do I configure which events are counted before collecting data?
+    answer: >-
+      Open **View** > **Counting Settings** to display the **Counting Settings** dialog. Use this dialog to
+      review and adjust the available parameters for your run.
+  - question: What result should I expect after a counting run?
+    answer: >-
+      The extension produces a counting report you can explore in Visual Studio. You can then
+      open the report in WPA using the WindowsPerf WPA plugin.
+  - question: How do I start a sampling session and set its preferences?
+    answer: >-
+      Open **View** > **Sampling Explorer**, then select the **Configure the sampling command** icon to set
+      preferences. Start the sampling run from **Sampling Explorer** and review the results when
+      it completes.
+  - question: What does it mean if I don't see any SPE options in the sampling workflow?
+    answer: >-
+      Your system doesn't support SPE. The SPE feature is available only on hardware that supports it. If your system doesn't support SPE, use the standard sampling feature instead.
+# END generated_summary_faq
 
 author: 
   - Nader Zouaoui
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -72,4 +115,3 @@ weight: 1 # _index.md always has weight of 1 to order correctly
 layout: "learningpathall" # All files under learning paths have this same wrapper
 learning_path_main_page: "yes" # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

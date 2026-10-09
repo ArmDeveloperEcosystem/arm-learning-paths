@@ -69,8 +69,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
-cloud_service_providers:
-  - AWS
+platforms:
+  - AWS Graviton
 armips:
     - Neoverse 
 operatingsystems:

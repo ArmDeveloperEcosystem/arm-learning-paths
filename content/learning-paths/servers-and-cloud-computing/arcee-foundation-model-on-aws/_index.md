@@ -75,15 +75,15 @@ rerun_faqs: false
 # Tagging metadata, see the Learning Path guide for the allowed values
 skilllevels: Introductory
 subjects: ML
-cloud_service_providers:
-  - AWS
+platforms:
+  - AWS Graviton
 armips:
     - Neoverse
 tools_software_languages:
     - AWS
     - Hugging Face
     - Python
-    - Llama.cpp
+    - llama.cpp
 operatingsystems:
     - Linux
 

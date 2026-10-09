@@ -1,6 +1,6 @@
 ---
 title: Clone and deploy the application with Topo
-description: Prepare the NXP FRDM i.MX 93 target, deploy the image classification Topo Template, and validate MobileNetV2 inference through the browser application.
+description: Prepare the NXP FRDM i.MX 93 target, deploy the image classification Topo Project, and validate MobileNetV2 inference through the browser application.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Prepare the target
 
-Before deploying the Topo Template, confirm that the FRDM i.MX 93 board is reachable from your host and that it's ready for deployment:
+Before deploying the Topo Project, confirm that the FRDM i.MX 93 board is reachable from your host and that it's ready for deployment:
 
 ```bash
 topo health --target <user>@<target-ip>
@@ -135,7 +135,7 @@ topo health --target <user>@<target-ip>
 
 ## Deploy to the board
 
-You can choose to deploy from the original Topo Template, or from the template you built from scratch. If you haven't already cloned the original template, clone it now:
+You can choose to deploy from the original Topo Project, or from the project you built from scratch. If you haven't already cloned the original project, clone it now:
 
 ```bash
 topo clone https://github.com/Arm-Examples/topo-imx93-npu-deployment.git
@@ -225,6 +225,6 @@ Try this out with an image from an ImageNet-supported class.
 
 ## What you've accomplished
 
-You've prepared an FRDM i.MX 93 board for shared-memory NPU inference, deployed the `topo-imx93-npu-deployment` template with Topo, and started Cortex-M33 firmware through `remoteproc-runtime`. You used a browser-based application to stage the ExecuTorch `.pte` program and input tensor for MobileNetV2 classification with Ethos-U65 acceleration.
+You've prepared an FRDM i.MX 93 board for shared-memory NPU inference, deployed the `topo-imx93-npu-deployment` Topo Project with Topo, and started Cortex-M33 firmware through `remoteproc-runtime`. You used a browser-based application to stage the ExecuTorch `.pte` program and input tensor for MobileNetV2 classification with Ethos-U65 acceleration.
 
 You can now use the deployed application as a reference for your own heterogeneous Arm applications, or adapt the model, firmware runner, web interface, or Topo metadata for another target.

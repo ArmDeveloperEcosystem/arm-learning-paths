@@ -1,6 +1,6 @@
 ---
-title: Understand the toolchains used in the Topo Template
-description: Identify the build and runtime components that connect ExecuTorch, remoteproc-runtime, RPMsg, reserved memory, and the Flask web application in the Topo Template.
+title: Understand the toolchains used in the Topo Project
+description: Identify the build and runtime components that connect ExecuTorch, remoteproc-runtime, RPMsg, reserved memory, and the Flask web application in the Topo Project.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Understand the build and runtime components
 
-The `topo-imx93-npu-deployment` Topo Template combines several toolchains. Topo hides much of the deployment plumbing, but it's useful to understand what's being built and where each component runs.
+The `topo-imx93-npu-deployment` Topo Project combines several toolchains. Topo hides much of the deployment plumbing, but it's useful to understand what's being built and where each component runs.
 
 ### ExecuTorch
 
@@ -17,9 +17,9 @@ The `topo-imx93-npu-deployment` Topo Template combines several toolchains. Topo 
 
 To learn more about how the MobileNetV2 model was exported from PyTorch to ExecuTorch and delegated to the Ethos-U, see [Build ExecuTorch models for Ethos-U65](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/observing-ethos-u-on-nxp/7-build-executorch-pte/).
 
-In this Topo Template, ExecuTorch is used in two places:
+In this Topo Project, ExecuTorch is used in two places:
 
-- At build time, the template exports a MobileNetV2 model to an ExecuTorch `.pte` program.
+- At build time, the project exports a MobileNetV2 model to an ExecuTorch `.pte` program.
 - At run time, the Cortex-M33 firmware loads and executes that `.pte` program.
 
 The export pipeline targets `ethos-u65-256`, which means the Ethos-U65 has 256 multiply-accumulate (MAC) units. The model is quantized and lowered so supported neural network operators can be delegated to the Ethos-U65 NPU. 
@@ -34,7 +34,7 @@ The firmware runner is built as `executorch_runner_cm33.elf`.
 
 This firmware runs on the Cortex-M33 core. It waits for commands coming from the Linux web application over `RPMsg`, reads input image tensors from reserved memory, runs inference through ExecuTorch, and writes classification output back over `RPMsg`.
 
-The Topo Template packages the firmware as the entrypoint of the `cm33-runner` image:
+The Topo Project packages the firmware as the entrypoint of the `cm33-runner` image:
 
 ```yaml
 cm33-runner:
@@ -67,7 +67,7 @@ If the deployment succeeds but classification times out, inspect the web app's b
 
 ### Shared reserved memory
 
-The web application and firmware exchange model and input data through reserved physical memory. The Topo Template expects the target device tree to reserve:
+The web application and firmware exchange model and input data through reserved physical memory. The Topo Project expects the target device tree to reserve:
 
 - `model@c0000000`: 4 MiB for the ExecuTorch `.pte` file and input tensor.
 - `ethosu_region@A8000000`: 128 MiB for Ethos-U65 use.
@@ -82,6 +82,6 @@ By default, the service publishes port `3001` on the target and forwards it to c
 
 ## What you've learned and what's next
 
-You now understand the major toolchains and runtime interfaces used by the Topo Template: ExecuTorch, the Cortex-M33 firmware runner, remoteproc-runtime, RPMsg, reserved memory, and the Flask web application. You've also seen how the web application stages the `.pte` program and input data in reserved memory before sending inference commands to the Cortex-M33 firmware.
+You now understand the major toolchains and runtime interfaces used by the Topo Project: ExecuTorch, the Cortex-M33 firmware runner, remoteproc-runtime, RPMsg, reserved memory, and the Flask web application. You've also seen how the web application stages the `.pte` program and input data in reserved memory before sending inference commands to the Cortex-M33 firmware.
 
-Next, you'll build the Topo Template from the base projects by adding the Compose services, build artifacts, Remoteproc Runtime metadata, and Topo arguments.
+Next, you'll build the Topo Project from the base projects by adding the Compose services, build artifacts, Remoteproc Runtime metadata, and Topo parameters.

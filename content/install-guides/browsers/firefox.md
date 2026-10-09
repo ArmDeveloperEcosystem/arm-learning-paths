@@ -34,7 +34,7 @@ Visit the [download page](https://www.mozilla.org/en-US/firefox/all/#product-des
 
 The best way to install Firefox on Arm Linux is to use the package manager for your distribution. 
 
-{{% notice Note %}}
+{{% notice Arm Linux downloads %}}
 There are no Arm Linux downloads on the download page. 
 {{% /notice %}}
 

@@ -2,11 +2,13 @@
 title: Gemini CLI
 description: Install Gemini CLI on macOS or Arm Linux and configure authentication so you can use Google's command-line AI assistant for development tasks.
 
+draft: true
+
 author: Jason Andrews
 minutes_to_complete: 15
 official_docs: https://geminicli.com/docs/
 
-test_maintenance: true
+test_maintenance: false
 test_images:
 - ubuntu:latest
 
@@ -16,6 +18,10 @@ multitool_install_part: false
 tool_install: true
 weight: 1
 ---
+
+{{% notice Note %}}
+Gemini CLI was deprecated on June 18, 2026 and no longer serves requests for individual accounts. Google replaced it with [Antigravity CLI](/install-guides/antigravity/). Use the Antigravity CLI install guide instead.
+{{% /notice %}}
 
 Gemini CLI is Google's command-line interface for interacting with the Gemini AI assistant. You can use it to ask questions about software development, architecture, and general programming tasks with advanced AI capabilities.
 
@@ -364,10 +370,6 @@ Make sure to use a `,` at the end of each object that is not the last one. For e
         "--pull=always",
         "-v",
         "/path/to/your/workspace:/workspace",
-        "-v",
-        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v",
-        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -378,8 +380,6 @@ Make sure to use a `,` at the end of each object that is not the last one. For e
 ```
 
 This configuration tells Gemini CLI to connect to the Arm MCP server running in the Docker container.
-
-To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
 
 ### Optional: Use a Docker replacement containerization tool
 
@@ -411,8 +411,6 @@ Add the following configuration to the user-level `~/.gemini/settings.json` file
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -447,8 +445,6 @@ Add the following configuration to the user-level `~/.gemini/settings.json` file
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -485,8 +481,6 @@ Add the following configuration to the user-level `~/.gemini/settings.json` file
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -523,8 +517,6 @@ Add the following configuration to the user-level `~/.gemini/settings.json` file
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -561,14 +553,13 @@ The Arm MCP server tools are listed in the output:
 ```output
 Configured MCP servers:
 
-🟢 arm_mcp_server - Ready (6 tools)
+🟢 arm_mcp_server - Ready (5 tools)
   Tools:
   - check_image
   - knowledge_base_search
   - mca
   - migrate_ease_scan
   - skopeo
-  - sysreport_instructions
 ```
 
 ### Use Arm prompt files with the MCP Server

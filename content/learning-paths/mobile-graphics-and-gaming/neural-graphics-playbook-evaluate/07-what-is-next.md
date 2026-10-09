@@ -1,7 +1,7 @@
 ---
 title: What's next?
 
-description: Review key takeaways about Arm Neural Technology evaluation and learn how to get started with the Neural Graphics Development Kit and Early Access Program.
+description: Review key takeaways about Arm Neural Technology evaluation and start using NFRU with Unreal Engine and the Neural Graphics Development Kit.
 weight: 8
 
 ### FIXED, DO NOT MODIFY
@@ -26,4 +26,4 @@ More teams are encouraged to get involved. Try things out, see what works for yo
 
 ## Get involved
 
-Start with the [Neural Graphics Development Kit](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics) and the Learning Paths linked throughout this playbook. If you want to evaluate NFRU before the public plugin release, sign up for the [Early Access Program](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics/early-access-program). Keep an eye on the Neural Graphics Development Kit landing page for release channels, NFRU updates, and the next version of this playbook.
+Start with [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/) to configure the plugin and evaluate NFRU with your own content. Continue with [Analyze Neural Frame Rate Upscaling using Project Moku](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/) to examine visual quality, frame pacing, and performance in repeatable test scenes. Arm publishes the [Neural Frame Rate Upscaling model on Hugging Face](https://huggingface.co/Arm/neural-frame-rate-upscaling), and the [Neural Graphics Development Kit](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics) provides the SDK and supporting tools. When you need to customize the model, continue with [Train and evaluate Neural Frame Rate Upscaling models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym-nfru/).

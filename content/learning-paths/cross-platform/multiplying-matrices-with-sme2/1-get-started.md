@@ -317,9 +317,13 @@ These Android phones support SME2 natively.
 
 | Device                              | Release Date | Chip Options              |
 |-------------------------------------|--------------|---------------------------|
+| Google Pixel 11                     | 2026         | Google Tensor G6 featuring a 7-core Arm C1 CPU cluster |
+| Samsung Galaxy S26 / S26+           | 2026         | Exynos 2600 variant featuring a 10-core Arm C1 CPU cluster |
+| Samsung Galaxy Z Flip8              | 2026         | Exynos 2600 variant featuring a 10-core Arm C1 CPU cluster |
 | Vivo X300                           | 2025         | MediaTek Dimensity 9500 featuring an 8-core Arm C1 CPU cluster and Arm G1-Ultra GPU |
 | OPPO Find X9                        | 2025         | MediaTek Dimensity 9500 featuring an 8-core Arm C1 CPU cluster and Arm G1-Ultra GPU |
-| Samsung Galaxy S26                  | 2026         | Exynos 2600 variant |
+| Xiaomi Poco X8 Pro Max              | 2026         | MediaTek Dimensity 9500 featuring an 8-core Arm C1 CPU cluster and Arm G1-Ultra GPU |
+| Xiaomi 18 Fold                      | 2026         | XRing O3 featuring a 10-core Arm C1 CPU cluster |
 
 These Apple devices support SME2 natively.
 
@@ -329,8 +333,11 @@ These Apple devices support SME2 natively.
 | iPhone 17                           | 2025         | A19                       |
 | iPad Pro (7th generation)           | 2024         | M4                        |
 | iMac (2024)                         | 2024         | M4                        |
-| Mac Mini (2024)                     | 2024         | M4, M4 Pro, M4 Max        |
-| MacBook Pro (14-inch, 16-inch, 2024)| 2024         | M4 Pro, M4 Max            |
+| Mac Mini (2024)                     | 2024         | M4                        |
+| MacBook Pro (14-inch, 16-inch, 2024)| 2024         | M4                        |
 | MacBook Air (2025)                  | 2025         | M4                        |
+| MacBook Pro (14-inch, 2025)         | 2025         | M5                        |
+| MacBook Air (13-inch, 15-inch, 2026)| 2026         | M5                        |
+| MacBook Pro (14-inch, 16-inch, 2026)| 2026         | M5                        |
 
 

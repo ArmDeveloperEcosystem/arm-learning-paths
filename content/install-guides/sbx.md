@@ -107,20 +107,20 @@ grep VERSION_ID /etc/os-release
 ```
 
 {{% notice Note %}}
-The following commands use Docker Sandboxes version 0.33.0. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest release and available Ubuntu versions, see the [sbx releases page](https://github.com/docker/sbx-releases/releases).
+The following commands use Docker Sandboxes version 0.37.1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest release and available Ubuntu versions, see the [sbx releases page](https://github.com/docker/sbx-releases/releases).
 {{% /notice %}}
 
 For Ubuntu 26.04, download and install the .deb package:
 
 ```bash
-wget https://github.com/docker/sbx-releases/releases/download/v0.33.0/DockerSandboxes-linux-arm64-ubuntu2604.deb
+wget https://github.com/docker/sbx-releases/releases/download/v0.37.1/DockerSandboxes-linux-arm64-ubuntu2604.deb
 sudo apt install ./DockerSandboxes-linux-arm64-ubuntu2604.deb
 ```
 
 For Ubuntu 24.04, download and install the .deb package:
 
 ```bash
-wget https://github.com/docker/sbx-releases/releases/download/v0.33.0/DockerSandboxes-linux-arm64-ubuntu2404.deb
+wget https://github.com/docker/sbx-releases/releases/download/v0.37.1/DockerSandboxes-linux-arm64-ubuntu2404.deb
 sudo apt install ./DockerSandboxes-linux-arm64-ubuntu2404.deb
 ```
 
@@ -155,7 +155,7 @@ The following output shows the version at the time this guide was written. To fi
 The output is similar to:
 
 ```output
-sbx version: v0.33.0 d7da69cb30eb3000c4d4ef0c848ffe84f32058bf
+sbx version: v0.37.1 2d4f32448c7a94d7fa525517dfca21aa36599829
 ```
 
 ### Authenticate with Docker Hub

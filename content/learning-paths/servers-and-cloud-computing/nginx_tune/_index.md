@@ -13,9 +13,9 @@ learning_objectives:
     - Measure NGINX performance before and after tuning.
 
 prerequisites:
-    - A cloud or bare-metal installation of an NGINX file server, reverse proxy, or API gateway.
-    - A repeatable HTTP workload or load test that you can run before and after tuning.
-    - If you don't already have an NGINX setup, see [Learn how to deploy NGINX](/learning-paths/servers-and-cloud-computing/nginx/).
+    - An NGINX file server, reverse proxy, or API gateway running on a cloud instance, bare-metal server, or Arm AGI CPU platform
+    - A repeatable HTTP workload or load test that you can run before and after tuning
+    - An [NGINX setup](/learning-paths/servers-and-cloud-computing/nginx/)
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -73,11 +73,12 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Web
-cloud_service_providers:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+platforms:
+  - Arm AGI CPU
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
     - Neoverse
 tools_software_languages:
@@ -90,7 +91,7 @@ operatingsystems:
 test_images:
     - ubuntu:latest
 test_link: null
-test_maintenance: true
+test_maintenance: false
 
 further_reading:
     - resource:

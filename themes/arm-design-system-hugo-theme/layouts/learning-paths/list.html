@@ -146,7 +146,7 @@ Calls to:
                                 {{ with .learning_path.Params.subjects }}
                                     tag-{{. | urlize}}
                                 {{ end }}
-                                {{ with .learning_path.Params.cloud_service_providers }}
+                                {{ with .learning_path.Params.platforms }}
                                     {{ range . }}
                                         tag-{{. | urlize}}
                                     {{ end }}

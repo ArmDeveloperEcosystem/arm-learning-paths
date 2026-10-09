@@ -1,6 +1,7 @@
 ---
 # User change
-title: "Testing PostgreSQL Tunings"
+title: Test PostgreSQL tuning with HammerDB
+description: Learn how to use HammerDB TPROC-C as a repeatable PostgreSQL workload when evaluating tuning changes.
 
 weight: 5 # 1 is first, 2 is second, etc.
 
@@ -8,23 +9,25 @@ weight: 5 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-##  Testing PostgreSQL Optimizations
+## Measure PostgreSQL tuning changes
 
-Skip this section if you already have a performance test methodology for your `PostgreSQL` deployment. 
+Use this section if you need a repeatable way to test PostgreSQL changes. If you already have a performance test methodology for your PostgreSQL deployment, use that instead.
 
-This section presents a method for testing `PostgreSQL` using HammerDB TPROC-C. This is useful information if you do not already have an established test methodology. To understand the impact of tuning on specific use cases and deployments, it is recommended that you develop a performance test strategy that reflects your use cases.
+HammerDB TPROC-C is one option for comparing a baseline with a tuned configuration. It does not replace a performance test that reflects your application's SQL statements, data size, client concurrency, and latency requirements.
 
 ## Before you begin
 
-You will need a physical machine or cloud node with [`PostgreSQL`](https://www.postgresql.org/) installed and configured.
+You need a physical system or cloud instance with [PostgreSQL](https://www.postgresql.org/) installed and configured, plus enough storage and memory for the test database.
       
 ## About HammerDB
 
-[HammerDB](https://www.hammerdb.com/) is a database benchmarking tool. It can test `PostgreSQL`, MySQL, MariaDB, Db2, & SQL Server. It offers two benchmark types; TPROC-C and TPROC-H. TPROC-C models the TPC-C benchmark, while TPROC-H models the TPC-H benchmark. We will only discuss TPROC-C which is an [Online Transactional Processing](https://www.hammerdb.com/docs/ch03s01.html) style of workload. TPROC-C simulates a company that processes customer orders and manages the warehouses which contain the products the company sells.
+[HammerDB](https://www.hammerdb.com/) is a database performance test tool that supports PostgreSQL, MySQL, MariaDB, Db2, and SQL Server. It provides TPROC-C and TPROC-H workloads. TPROC-C models an [online transaction processing](https://www.hammerdb.com/docs/ch03s01.html) workload based on TPC-C, while TPROC-H models a decision-support workload based on TPC-H.
 
-You can use this topic as a primer on how to run HammerDB. 
+TPROC-C and TPROC-H results are not official TPC-C or TPC-H benchmark results. If you need a TPC-C or TPC-H result, run the corresponding official TPC benchmark and follow its rules.
 
-To learn more about HammerDB refer to the [documentation](https://www.hammerdb.com/document.html).
+This Learning Path uses TPROC-C, which simulates a company processing customer orders and managing warehouses containing the products it sells.
+
+For more information, see the [HammerDB documentation](https://www.hammerdb.com/document.html).
 
 ## Installing HammerDB
 
@@ -32,24 +35,24 @@ Follow the [installation instructions](https://www.hammerdb.com/docs/ch01.html) 
 
 ## Running tests using the GUI
 
-You can use TCL scripts to run HammerDB in an automated fashion. 
+You can use TCL scripts to run HammerDB automatically.
 
-It is also possible to run a HammerDB test using the GUI. 
+You can also run a HammerDB test with the GUI.
 
 If you are interested in running HammerDB tests through a GUI, read the [Quick Start](https://www.hammerdb.com/docs/ch02.html) guide.
 
 
 ## Running tests using TCL scripts
 
-The [CLI and command documentation](https://www.hammerdb.com/docs/ch09s08.html) contains information on how to setup and run TCL script based tests. 
+The [CLI and command documentation](https://www.hammerdb.com/docs/ch09s08.html) explains how to set up and run TCL-script-based tests.
 
 The example in the documentation is for MySQL. The example below is for testing `PostgreSQL`.
 
-The script creates a test database with 1000 warehouses. 
+The script creates a test database with 1000 warehouses.
 
-The user count is set to 128 to help populate the database faster. Use stored procedures (pg_storedprocs) instead of functions (default) because this is [recommended for PostgrSQL version v11 and above](https://www.hammerdb.com/docs/ch04s03.html#d0e1734). 
+The user count is set to 128 to populate the database faster. It uses stored procedures (`pg_storedprocs`) instead of functions because HammerDB recommends this option for PostgreSQL version 11 and later.
 
-1. Use a text editor to save the code below in a file named `test.tcl`
+1. Use a text editor to save the code below in a file named `build.tcl`
 
 Replace `postgresql_host_ip` with your IP address. 
 
@@ -69,14 +72,14 @@ buildschema
 2. Execute the script:
 
 ```console
-hammerdbcli auto test.tcl
+hammerdbcli auto build.tcl
 ```
 
-The next script will run 6 iterations of the the TPROC-C test. 
+The next script runs six TPROC-C test iterations.
 
-It will run the test with 8, 16, 32, 64, 128, and 256 users. Each test iteration will ramp for 3 minutes, then run the actual test for 15 minutes. 
+It runs with 8, 16, 32, 64, 128, and 256 users. Each iteration ramps for three minutes and then runs for 15 minutes.
 
-3. Use a text editor to save the code below in a file named `test2.tcl`
+3. Use a text editor to save the code below in a file named `test.tcl`
 
 Replace `postgresql_host_ip` with your IP address. 
 
@@ -116,16 +119,21 @@ puts "Tests complete"
 4. Execute the script:
 
 ```console
-hammerdbcli auto test2.tcl
+hammerdbcli auto test.tcl
 ```
 
-The above scripts can be used as a starting point for testing. You can adjust the scripts to create scenarios that are closer to your use case. 
+Use these scripts as a starting point. Adjust the data size, user count, ramp time, duration, and SQL execution mode to create a workload closer to your use case.
 
 ## Running tests against a pool of PostgreSQL nodes
 
-You can run tests against a `PostgreSQL` cluster. 
+You can run tests against a PostgreSQL cluster.
 
-The cluster could consist of a primary (RW) node and two secondary (RO) nodes. 
+The cluster can consist of a primary read/write node and one or more read-only standby nodes.
 
-Look into using the connect pool feature of HammerDB in the [documentation](https://www.hammerdb.com/docs/ch04s06.html#d0e2280). 
+See the [HammerDB connection pool documentation](https://www.hammerdb.com/docs/ch04s06.html#d0e2280) for cluster testing options.
 
+## What you've learned
+
+You've learned how to use HammerDB TPROC-C as a repeatable PostgreSQL test workload.
+
+Use the same workload, system configuration, and measurement process before and after each tuning change so you can attribute the result to the change you made.

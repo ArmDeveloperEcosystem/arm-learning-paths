@@ -1,0 +1,4 @@
+interface:
+  display_name: "Editorial Learning Path Refactor"
+  short_description: "Refactor Learning Paths with editorial review gates"
+  default_prompt: "Use $refactor-learning-path-editorial to audit and editorially refactor this Learning Path without changing technical content."

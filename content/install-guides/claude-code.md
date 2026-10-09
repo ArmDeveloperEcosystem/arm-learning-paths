@@ -5,6 +5,7 @@ description: Install Claude Code on Arm Linux, Apple Silicon macOS, or Windows o
 author: Pareena Verma
 minutes_to_complete: 10
 official_docs: https://code.claude.com/docs
+ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/windows?package=Claude%20Code
 
 layout: installtoolsall
 multi_install: false
@@ -183,7 +184,7 @@ Navigate to your project directory and add the Arm MCP Server:
 
 ```console
 cd your-project
-claude mcp add --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+claude mcp add --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
 ```
 
 This configuration is stored in `~/.claude.json` under your project's path and is only accessible when working in this directory.
@@ -193,7 +194,7 @@ This configuration is stored in `~/.claude.json` under your project's path and i
 To make the Arm MCP Server available across all your projects:
 
 ```console
-claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
 ```
 
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
@@ -204,7 +205,7 @@ To share the MCP server configuration with your team via version control:
 
 ```console
 cd your-project
-claude mcp add --scope project --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+claude mcp add --scope project --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
 ```
 
 This creates a `.mcp.json` file in your project root that can be committed to version control.
@@ -216,10 +217,8 @@ The Arm MCP Server automatically mounts your current working directory to the `/
 To analyze a different directory, modify the volume mount in the `docker run` command. For example, to analyze `/Users/username/myproject`:
 
 ```console
-claude mcp add --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "/Users/username/myproject:/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+claude mcp add --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "/Users/username/myproject:/workspace" armlimited/arm-mcp:latest
 ```
-
-To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
 
 ### Optional: Use a Docker replacement containerization tool
 
@@ -237,7 +236,7 @@ podman pull armlimited/arm-mcp:latest
 To make the Arm MCP Server available across all your projects (user scope):
 
 ```console
-claude mcp add --scope user --transport stdio arm-mcp -- podman run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+claude mcp add --scope user --transport stdio arm-mcp -- podman run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
 ```
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
 You can choose other scopes (local or project) as described in the Docker section above.
@@ -253,7 +252,7 @@ finch pull armlimited/arm-mcp:latest
 To make the Arm MCP Server available across all your projects (user scope):
 
 ```console
-claude mcp add --scope user --transport stdio arm-mcp -- finch run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+claude mcp add --scope user --transport stdio arm-mcp -- finch run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
 ```
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
 You can choose other scopes (local or project) as described in the Docker section above.
@@ -271,7 +270,7 @@ docker pull armlimited/arm-mcp:latest
 To make the Arm MCP Server available across all your projects (user scope):
 
 ```console
-claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
 ```
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
 You can choose other scopes (local or project) as described in the Docker section above.
@@ -289,7 +288,7 @@ docker pull armlimited/arm-mcp:latest
 To make the Arm MCP Server available across all your projects (user scope):
 
 ```console
-claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" -v "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro" -v "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro" armlimited/arm-mcp:latest
+claude mcp add --scope user --transport stdio arm-mcp -- docker run --rm -i --pull=always -v "$(pwd):/workspace" armlimited/arm-mcp:latest
 ```
 This configuration is stored in `~/.claude.json` and is accessible from any project directory.
 You can choose other scopes (local or project) as described in the Docker section above.

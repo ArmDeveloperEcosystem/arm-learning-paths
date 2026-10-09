@@ -50,11 +50,11 @@ A computer running macOS with Apple Silicon or an Arm Linux computer with Kernel
 Download Multipass for macOS from GitHub:
 
 {{% notice Note %}}
-The following commands use Multipass version 1.16.2. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Multipass releases](https://github.com/canonical/multipass/releases).
+The following commands use Multipass version 1.16.3. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [Multipass releases](https://github.com/canonical/multipass/releases).
 {{% /notice %}}
 
 ```console
-wget https://github.com/canonical/multipass/releases/download/v1.16.2/multipass-1.16.2+mac-Darwin.pkg
+wget https://github.com/canonical/multipass/releases/download/v1.16.3/multipass-1.16.3+mac-Darwin.pkg
 ```
 
 ## Install Multipass on macOS
@@ -62,7 +62,7 @@ wget https://github.com/canonical/multipass/releases/download/v1.16.2/multipass-
 Install the download using the package command:
 
 ```console
-sudo installer -pkg multipass-1.16.2+mac-Darwin.pkg -target /
+sudo installer -pkg multipass-1.16.3+mac-Darwin.pkg -target /
 ```
 
 The following getting started instructions use the command line interface. If you prefer to use the graphical interface, start it from the macOS Launchpad. The following image shows the initial screen. You can use the UI to create, start, and stop virtual machines.
@@ -172,10 +172,10 @@ The output from `find` is similar to:
 
 ```output
 Image                       Aliases           Version          Description
-22.04                       jammy             20251001         Ubuntu 22.04 LTS
-24.04                       noble,lts         20251001         Ubuntu 24.04 LTS
-25.04                       plucky            20251003         Ubuntu 25.04
-daily:25.10                 questing,devel    20251015         Ubuntu 25.10
+22.04                       jammy             20260802         Ubuntu 22.04 LTS
+24.04                       noble             20260801         Ubuntu 24.04 LTS
+26.04                       resolute,lts      20260720         Ubuntu 26.04 LTS
+daily:26.10                 stonking,devel    20260802         Ubuntu 26.10
 
 Blueprint (deprecated)      Aliases           Version          Description
 anbox-cloud-appliance                         latest           Anbox Cloud Appliance
@@ -224,7 +224,7 @@ multipass exec m1u -- uname -a
 The `uname` output is similar to:
 
 ```output
-Linux m1u 6.8.0-36-generic #36-Ubuntu SMP PREEMPT_DYNAMIC Mon Jun 10 13:20:23 UTC 2024 aarch64 aarch64 aarch64 GNU/Linux
+Linux m1u 7.0.0-28-generic #28-Ubuntu SMP PREEMPT_DYNAMIC Sun Jun 21 00:50:10 UTC 2026 aarch64 aarch64 aarch64 GNU/Linux
 ```
 
 ### Print instance information
@@ -241,13 +241,13 @@ The output is similar to:
 Name:           m1u
 State:          Running
 Snapshots:      0
-IPv4:           192.168.73.29
-Release:        Ubuntu 24.04.1 LTS
-Image hash:     e380b683b0c4 (Ubuntu 24.04 LTS)
+IPv4:           10.7.43.74
+Release:        Ubuntu 26.04 LTS
+Image hash:     7bcf159e29ad (Ubuntu 26.04 LTS)
 CPU(s):         4
-Load:           0.00 0.03 0.01
-Disk usage:     2.0GiB out of 15.4GiB
-Memory usage:   355.3MiB out of 3.8GiB
+Load:           0.43 0.12 0.04
+Disk usage:     2.5GiB out of 15.4GiB
+Memory usage:   410.6MiB out of 3.8GiB
 Mounts:         --
 ```
 

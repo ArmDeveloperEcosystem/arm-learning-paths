@@ -12,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - General knowledge about SIMD processing, vectorization or Arm Neon.
-    - An Arm computer running Linux. Cloud instances can be used, refer to the list of [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/).
+    - An Arm computer running Linux, such as a cloud instance or an Arm AGI CPU platform.
 
 author: Florent Lebeau
 
@@ -23,11 +23,12 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: ML
-cloud_service_providers:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+platforms:
+  - Arm AGI CPU
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
     - Neoverse
     - Cortex-A

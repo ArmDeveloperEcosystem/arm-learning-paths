@@ -10,10 +10,10 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 ## Workflow
 
 1. Identify the target file, section, or selected text.
-2. Read surrounding context so style edits preserve the author's intent and the technical flow. If you've previously read the page, use context and don't re-read it unless there's a change since the last read. 
+2. Read surrounding context so style edits preserve the author's intent and the technical flow. If you've previously read the page, use context and don't re-read it unless asked to. 
 3. Review the target against the guidelines defined in this skill.
 4. Depending on request type, do the following:
-  - For review requests, report high-impact style issues by file and line when possible. 
+  - For review requests, report style issues by file and line when possible, ordered by severity. 
   - For edit requests, make focused rewrites, then re-open changed sections to check Markdown, shortcodes, links, and code fences.
 
 ## Voice and tone
@@ -47,6 +47,9 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Flag pages over 3500 words total when prose density hurts review or learning.
 - Use visual breaks to prevent walls of text. Code blocks count as visual breaks.
 - If a section explains three or more things, suggest splitting it.
+- Ensure lists have a lead-in sentence or phrase ending with a colon. Ensure each item starts with a capitalized word unless the word is supposed to be styled differently. Ensure list items don't end with periods unless the item is one or more complete sentences.
+- Avoid back-to-back notices. Condense consecutive notices into a single notice with bullet list items.
+- Limit lists in paragraph to four items. Favor splitting sentences with more than four list items, or using bullets.
 
 ## Arm framing and technical depth
 
@@ -76,10 +79,11 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use `avoid` instead of `try not to`.
 - Use `such as` instead of `like`.
 - Use `after` or `when` instead of `once`.
+- Avoid slashes unless part of a technical term. Replace slashes with "and" or "or" as adequate.
 
 ## Tone cleanup
 
-- Avoid `simply`, `just`, `obviously`, and `clearly`.
+- Avoid `simply`, `just`, `obviously`, and `clearly`. Any terms that could be condescending
 - Avoid `above`, `below`, `left`, `right`, `top`, and `bottom` when referring to content.
 - Acknowledge difficulty naturally, such as `this step can be confusing at first`.
 - Normalize errors, such as `if you see this error, here's how to fix it`.
@@ -96,7 +100,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use `keyboard shortcut` instead of `key combination`.
 - Use `Ctrl key`.
 - Use `double-tap` instead of `double-click` for touch interfaces.
-- Use **bold** for UI elements.
+- Use **bold** for UI elements and keyboard keys.
 - Use *italics* for emphasis and new terms.
 - Use `code formatting` for file names, commands, package names, flags, paths, and environment variables.
 
@@ -114,6 +118,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Capitalize `Learning Path`.
 - Use `Azure Cobalt`, `Google Axion`, and `AWS Graviton` as processor names, not VM names. `Graviton-based instances`, not `Graviton instances`, for example.
 - Do not use bold or italics for product names such as LiteRT, XNNPACK, KleidiAI, and SME2 unless they are headings or UI labels.
+- Treat llama.cpp as a product name in prose. Write llama.cpp without code, bold, or italic formatting unless it appears in a command, code sample, file path, or URL.
 
 ## Avoid AI-sounding prose
 

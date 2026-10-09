@@ -30,8 +30,8 @@ skilllevels: Advanced
 armips:
     - Neoverse
 subjects: ML
-cloud_service_providers:
-  - Google Cloud
+platforms:
+  - Google Axion
 operatingsystems:
     - Linux
 tools_software_languages:

@@ -169,9 +169,10 @@ Operating Systems
 
 
 ==================================================
-Cloud Service Providers
+Platforms
      servers-and-cloud-computing
          Allowed
+             4: Arm AGI
              14: AWS
              8: Google Cloud
              8: Microsoft Azure
@@ -1437,4 +1438,3 @@ Tools Software Languages - All
 
 
 No overwriting specifed with --update-md-files flag. Exiting.
-

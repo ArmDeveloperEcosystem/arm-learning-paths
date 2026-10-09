@@ -28,9 +28,9 @@ test_maintenance: true
 ### Tags
 skilllevels: Introductory
 subjects: Libraries
-cloud_service_providers:
-  - AWS
-  - Oracle
+platforms:
+  - AWS Graviton
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
 - Neoverse
 operatingsystems:

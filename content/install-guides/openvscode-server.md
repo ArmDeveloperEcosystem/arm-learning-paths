@@ -29,6 +29,10 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 OpenVSCode Server is a version of VS Code which runs on any computer and can be accessed using a browser. The project was initiated by Gitpod and is available on [GitHub](https://github.com/gitpod-io/openvscode-server/).
 
+{{% notice Note %}}
+The OpenVSCode Server project is no longer actively maintained on GitHub. The existing releases continue to work, but new updates are unlikely. For an alternative, see the [VS Code Tunnels install guide](/install-guides/vscode-tunnels/).
+{{% /notice %}}
+
 OpenVSCode Server supports the Arm architecture and is useful for developing on a remote Arm machine. You can use it on cloud instances without needing to install a Linux desktop. It's also useful when developing on a local Arm machine with a Linux subsystem, such as Windows Subsystem for Linux (WSL), ChromeOS with Linux enabled, or Multipass.
 
 In this guide, you'll learn how to install OpenVSCode Server natively on an Arm Linux machine. 

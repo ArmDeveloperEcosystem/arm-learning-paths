@@ -72,8 +72,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
-cloud_service_providers:
-  - AWS
+platforms:
+  - AWS Graviton
 armips:
     - Neoverse
     - Cortex-A
@@ -92,6 +92,10 @@ further_reading:
     - resource:
         title: The Realm Management Monitor Specification
         link: https://developer.arm.com/documentation/den0137/latest/
+        type: documentation
+    - resource:
+        title: The Role of Attestation in Arm CCA
+        link: https://support.arm.com/documentation/111146/latest/
         type: documentation
     - resource:
         title: The Attestation Results for Secure Interactions (AR4SI) 

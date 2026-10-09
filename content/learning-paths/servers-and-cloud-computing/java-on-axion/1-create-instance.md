@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## Create an Axion instance
+## Create an instance powered by Axion
 
 Axion is Google's first Arm-based server processor, built using the Armv9 Neoverse V2 CPU. Created specifically for the data center, Axion delivers industry-leading performance and energy efficiency. To learn more about Google Axion, refer to this [page](http://cloud.google.com/products/axion/)
 
@@ -16,7 +16,7 @@ This guide will use the gcloud CLI. If you would like to read more about deployi
 
 If you have never used the Google Cloud Platform before, please review [Getting Started with Google Cloud Platform](/learning-paths/servers-and-cloud-computing/csp/google/).
 
-#### Open and configure the Google Cloud Shell Editor
+### Open and configure the Google Cloud Shell Editor
 
 The gcloud CLI is pre-installed in Cloud Shell Editor, which is the quickest way to access a terminal with the gcloud CLI. It can be found at [shell.cloud.google.com](https://shell.cloud.google.com/).
 
@@ -25,7 +25,7 @@ Once the shell is available, configure it to use your Google Cloud project ID:
 ```bash
 gcloud config set project [PROJECT_ID]
 ```
-#### Create the instance
+### Create the instance
 
 Run the following command, being careful to replace `[YOUR ZONE]` with the appropriate zone:
 
@@ -41,7 +41,7 @@ The command above will use the default network in your GCP project. If you want 
 ```
 {{% /notice %}}
 
-#### Configure network access
+### Configure network access
 
 In the next section you will run a Java web server that serves on port 8080. To set up access to your instance for this, run:
 
@@ -51,7 +51,7 @@ gcloud compute firewall-rules create default-allow-http-8080 --network=[YOUR NET
 
 If you want to use the default network, you can omit the `--network` flag.
 
-#### Obtain the IP of your instance
+### Obtain the IP of your instance
 
 To obtain the external IP of your instance, run
 

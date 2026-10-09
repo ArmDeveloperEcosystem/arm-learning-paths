@@ -68,15 +68,15 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: Containers and Virtualization
-cloud_service_providers:
-  - AWS
+platforms:
+  - AWS Graviton
 armips:
     - Neoverse
 operatingsystems:
     - Linux
 tools_software_languages:
     - AWS CDK CLI
-    - Amazon Elastic Container Service (Amazon ECS)
+    - Amazon ECS
     - AWS CLI
     - Node.js
     - JavaScript

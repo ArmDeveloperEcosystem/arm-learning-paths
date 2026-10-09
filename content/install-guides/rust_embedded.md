@@ -15,7 +15,7 @@ test_maintenance: true
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
 tool_install: true              # Set to true to be listed in main selection page, else false
-multi_install: FALSE            # Set to true if first page of multi-page article, else false
+multi_install: false            # Set to true if first page of multi-page article, else false
 multitool_install_part: false   # Set to true if a sub-page of a multi-page article, else false
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
@@ -24,11 +24,11 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 This install guide is for developers using Rust for their embedded applications.
 
-If you are using Rust to build Linux applications on an Arm Linux platform, refer to [Rust for Linux Applications](/install-guides/rust/) instead.
+If you are using Rust to build Linux applications on an Arm Linux platform, see [Rust for Linux Applications](/install-guides/rust/) instead.
 
 This install guide describes a setup using an Ubuntu Linux host.
 
-For a thorough review of all options, refer to the official documentation. See [The Embedded Rust Book](https://docs.rust-embedded.org/book/).
+For a thorough review of all options, see [The Embedded Rust Book](https://docs.rust-embedded.org/book/).
 
 ## How do I install Rust for Embedded Applications? {#install}
 
@@ -37,7 +37,7 @@ For a thorough review of all options, refer to the official documentation. See [
 Run the following command to download and install Rust:
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -y | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ```
 
 Start a new shell or run the following command to continue:
@@ -54,8 +54,8 @@ cargo version
 
 The output is similar to:
 ```output
-rustc 1.78.0 (9b00956e5 2024-04-29)
-cargo 1.78.0 (54d8815d0 2024-03-26)
+rustc 1.98.0 (88d9e12ae 2026-08-18)
+cargo 1.98.0 (797e8a9bc 2026-08-05)
 ```
 
 ### How do I add Arm cross-compilation support?
@@ -71,21 +71,20 @@ rustup target list
 
 ### How do I install cargo-generate?
 
-To generate a project from a template, you need `cargo-generate`. To install and rebuild use:
+To generate a project from a template, you need `cargo-generate`. Install it with:
 
 ```bash
-sudo apt install -y libssl-dev pkg-config
-sudo apt install -y build-essential
+sudo apt install -y libssl-dev pkg-config build-essential
 cargo install cargo-generate
 ```
 
 ### How do I install cargo-binutils? (optional)
 
-Other utilities are also available. For completeness, they can be installed with:
+Other utilities are also available. For completeness, install them with:
 
-```command
+```bash
 cargo install cargo-binutils
-rustup component add llvm-tools-preview
+rustup component add llvm-tools
 ```
 
 You are now ready to build an embedded application in Rust.

@@ -20,6 +20,7 @@ Use skills for repeatable workflows such as image audits, metadata description u
 
 Current shared skills:
 
+- Editorial-only Learning Path refactoring orchestration: `.github/skills/refactor-learning-path-editorial/SKILL.md`
 - Learning Path structure review: `.github/skills/learning-path-structure-review/SKILL.md`
 - Install guide structure review: `.github/skills/install-guide-structure-review/SKILL.md`
 - Writing style and voice review: `.github/skills/writing-style-review/SKILL.md`
@@ -31,6 +32,7 @@ Current shared skills:
 - Stale content risk scans: `.github/skills/stale-content-review/SKILL.md`
 - Images, alt text, captions, and `#center` syntax: `.github/skills/audit-images/SKILL.md`
 - Code samples, commands, outputs, and code fence integrity: `.github/skills/code-sample-review/SKILL.md`
+- Summary and FAQ generation, review, and fixes: `.github/skills/summary-faq-workflow/SKILL.md`
 
 Keep deterministic scans in scripts when possible, and keep long reference material out of always-loaded instructions. 
 

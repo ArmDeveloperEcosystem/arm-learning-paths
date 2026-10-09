@@ -80,7 +80,7 @@ With the model and tokenizer loaded, the script prepares the training data by ca
 
 ## Training configuration
 
-The training configuration controls how the SFT process runs. Notable parameters include `num_train_epochs` (initially set to 0.01 for a warmup pass, then updated for full training), `gradient_accumulation_steps` (batches to accumulate before each weight update), `learning_rate` (optimizer step size), and `max_length` (maximum sequence length). The logging parameters determine where and how often training metrics are recorded.
+The training configuration controls how the SFT process runs. Notable parameters include `num_train_epochs` (initially set to 0.05 for a warmup pass, then updated for full training), `gradient_accumulation_steps` (batches to accumulate before each weight update), `learning_rate` (optimizer step size), and `max_length` (maximum sequence length). The logging parameters determine where and how often training metrics are recorded.
 
 ```python
     # Configure the SFT config
@@ -95,6 +95,7 @@ The training configuration controls how the SFT process runs. Notable parameters
         "seed": 42,
         "dataset_text_field": "text",
         "packing": False,
+        "loss_type": "nll",
         "max_length": args.seq_length,
         "report_to": "none",
         "logging_dir": args.log_dir,
@@ -102,6 +103,8 @@ The training configuration controls how the SFT process runs. Notable parameters
         "gradient_checkpointing": args.gradient_checkpointing,  # Save memory
     }
 ```
+
+The explicit `loss_type` setting keeps TRL on its standard negative log likelihood path. TRL 1.13.0 otherwise defaults to chunked loss, which attempts to patch the `torch.compile()` wrapper and raises an `AttributeError` during `SFTTrainer` initialization.
 
 ## Model compilation and training
 
@@ -167,7 +170,7 @@ python Llama3_3B_full_finetuning.py \
 --output_dir "/workspace/models/Llama-3.2-3B-FineTuned"
 ```
 
-The `--dataset_size 300` flag tells the script to use all entries in the Raspberry Pi dataset (the default is 500, but a smaller, focused dataset can be more effective than a larger generic one). The `--output_dir` flag saves the fine-tuned model and tokenizer to the specified directory. Because you mounted your current directory into the container with `-v ${PWD}:/workspace`, the saved model is also accessible from the host system.
+The `--dataset_size 300` flag tells the script to use all entries in the Raspberry Pi dataset (the default is 512, but a smaller, focused dataset can be more effective than a larger generic one). The `--output_dir` flag saves the fine-tuned model and tokenizer to the specified directory. Because you mounted your current directory into the container with `-v ${PWD}:/workspace`, the saved model is also accessible from the host system.
 
 Training takes a few minutes on DGX Spark. When it completes, you'll see a summary with metrics like runtime, samples per second, and loss, followed by a confirmation that the model was saved.
 

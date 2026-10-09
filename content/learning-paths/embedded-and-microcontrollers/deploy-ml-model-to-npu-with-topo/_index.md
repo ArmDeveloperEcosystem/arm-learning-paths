@@ -9,9 +9,9 @@ who_is_this_for: This is an introductory topic for embedded/edge software develo
 
 learning_objectives:
     - Explain how Topo deploys an application that spans Cortex-A, Cortex-M, and Ethos-U
-    - Deploy the topo-imx93-npu-deployment Template, which operates across Cortex-A, Cortex-M, and Ethos-U, to perform image classification using an ExecuTorch MobileNetV2 model
-    - Describe how the Template is bootstrapped from Compose services, Remoteproc Runtime metadata, and Topo arguments and follow this process yourself
-    - Understand how to take similar projects and create Topo Templates, including using Agent Skills
+    - Deploy the topo-imx93-npu-deployment Topo Project, which operates across Cortex-A, Cortex-M, and Ethos-U, to perform image classification using an ExecuTorch MobileNetV2 model
+    - Describe how the project is bootstrapped from Compose services, Remoteproc Runtime metadata, and Topo parameters and follow this process yourself
+    - Understand how to take similar projects and create Topo Projects, including using Agent Skills
 
 prerequisites:
     - A host machine (x86 or Arm) with Linux, macOS, or Windows
@@ -40,7 +40,7 @@ generated_summary_faq:
   faq_source_hash: 6469ed1daadf6dd4fe5436b42234282d32e14c97f772447009eabda8350f130b
   summary: >-
     You'll build and deploy a heterogeneous image classification
-    application to an NXP FRDM i.MX 93 board using Topo. First, you'll assemble a Topo Template from two
+    application to an NXP FRDM i.MX 93 board using Topo. First, you'll assemble a Topo Project from two
     base projects: a Cortex-A web application and a Cortex-M33 ExecuTorch runner, then convert
     the combined sources into a Compose project with Topo metadata and Remoteproc Runtime services.
     The application preprocesses images on Cortex-A, shares model and tensor data through shared
@@ -58,17 +58,17 @@ generated_summary_faq:
       The Cortex-A side runs the web application that prepares images, writes model and tensor
       data into shared memory, and sends inference commands. The Cortex-M33 runs the ExecuTorch
       firmware and receives commands over RPMsg.
-  - question: What should I expect after deploying the Topo Template?
+  - question: What should I expect after deploying the Topo Project?
     answer: >-
       Topo builds images on the host, transfers them to the target, and starts services on the
       board. Remoteproc Runtime starts the Cortex-M firmware, and the browser-based MobileNetV2
       classifier becomes available.
-  - question: What are the key steps to turn the two base projects into a Topo Template?
+  - question: What are the key steps to turn the two base projects into a Topo Project?
     answer: >-
       Combine the Cortex-A web app and the Cortex-M33 ExecuTorch firmware sources into a single
       repository, make it a normal Compose project, then add Topo metadata and Remoteproc Runtime
-      services. The Template is bootstrapped from Compose services, Remoteproc Runtime metadata,
-      and Topo arguments.
+      services. The Topo Project is bootstrapped from Compose services, Remoteproc Runtime metadata,
+      and Topo parameters.
   - question: What should I check if `topo health` reports a failure?
     answer: >-
       Resolve the specific errors shown by `topo health` before continuing. Confirm SSH access to
@@ -106,8 +106,8 @@ further_reading:
         link: https://github.com/arm/topo
         type: documentation
     - resource:
-        title: Topo template format
-        link: https://github.com/arm/topo-template-format
+        title: Topo Project specification
+        link: https://github.com/arm/topo/tree/main/docs/project-specification
         type: documentation
     - resource:
         title: Topo releases

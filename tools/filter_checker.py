@@ -78,7 +78,7 @@ def updateFiltersInIndexMD(main_category):
     
     to_iterate = ['subjects','operatingsystems','tools_software_languages']
     if main_category == "servers-and-cloud-computing":
-        to_iterate.append('cloud_service_providers')
+        to_iterate.append('platforms')
 
     for filter_name in to_iterate:
         all_existing_filters = status_dic[filter_name][main_category]
@@ -222,31 +222,31 @@ def printToolsSoftwareLanguagesReport():
     print()
     print() 
 
-def printCSPsReport():
+def printPlatformsReport():
     global status_dic, dic_allow_list
     print()
     print()
     print('='*50)
-    print('Cloud Service Providers')
-    for main_category in status_dic['cloud_service_providers']:
-        cat_dic = status_dic['cloud_service_providers'][main_category]
+    print('Platforms')
+    for main_category in status_dic['platforms']:
+        cat_dic = status_dic['platforms'][main_category]
 
         print('     '+main_category)
         print('         '+'Allowed')
-        for csp in cat_dic:
-            if cat_dic[csp]['allowed']:
-                print('             '+str(cat_dic[csp]['count'])+': '+csp)
+        for platform in cat_dic:
+            if cat_dic[platform]['allowed']:
+                print('             '+str(cat_dic[platform]['count'])+': '+platform)
         print('         '+'Not Allowed')
-        for csp in cat_dic:
-            if not cat_dic[csp]['allowed']:
-                print('             '+csp+'     '+str(cat_dic[csp]['count']))
-                for learning_paths in cat_dic[csp]['learning-path-titles']:
+        for platform in cat_dic:
+            if not cat_dic[platform]['allowed']:
+                print('             '+platform+'     '+str(cat_dic[platform]['count']))
+                for learning_paths in cat_dic[platform]['learning-path-titles']:
                     print('                 '+learning_paths)
         print('         '+'Unused')
         
-        for allowed_OS in dic_allow_list["cloud_service_providers"]:
-            if allowed_OS not in cat_dic:
-                print('             '+allowed_OS)
+        for allowed_platform in dic_allow_list["platforms"]:
+            if allowed_platform not in cat_dic:
+                print('             '+allowed_platform)
         print()
     print('='*50)
     print()
@@ -315,28 +315,28 @@ def addToolsSoftwareLanguagesToStatusDict():
     return status_dic
 
 
-def addCloudServiceProvidersToStatusDict():
+def addPlatformsToStatusDict():
     global status_dic, learning_path_metadata
-    if 'cloud_service_providers' in learning_path_metadata: # since not all LPs have this filtering mechanism, need this check to avoid errors
-        cloud_service_providers = learning_path_metadata['cloud_service_providers']
-        if cloud_service_providers is not None:
+    if 'platforms' in learning_path_metadata: # since not all LPs have this filtering mechanism, need this check to avoid errors
+        platforms = learning_path_metadata['platforms']
+        if platforms is not None:
             # Normalize to list to handle both single string and YAML list formats
-            if isinstance(cloud_service_providers, str):
-                cloud_service_providers = [cloud_service_providers]
-            for csp in cloud_service_providers:
-                if csp not in status_dic['cloud_service_providers'][dir_main_category]:
+            if isinstance(platforms, str):
+                platforms = [platforms]
+            for platform in platforms:
+                if platform not in status_dic['platforms'][dir_main_category]:
                     # create subject key in dic
-                    status_dic['cloud_service_providers'][dir_main_category][csp] = {}
+                    status_dic['platforms'][dir_main_category][platform] = {}
                     # check if in allow list
-                    if csp in dic_allow_list["cloud_service_providers"]:
-                        status_dic['cloud_service_providers'][dir_main_category][csp]['allowed']          = True              
+                    if platform in dic_allow_list["platforms"]:
+                        status_dic['platforms'][dir_main_category][platform]['allowed']          = True
                     else:
-                        status_dic['cloud_service_providers'][dir_main_category][csp]['allowed']          = False              
-                    status_dic['cloud_service_providers'][dir_main_category][csp]['count']                = 1                # make count one
-                    status_dic['cloud_service_providers'][dir_main_category][csp]['learning-path-titles'] = [learning_path_metadata['title']]   # create list with title
+                        status_dic['platforms'][dir_main_category][platform]['allowed']          = False
+                    status_dic['platforms'][dir_main_category][platform]['count']                = 1                # make count one
+                    status_dic['platforms'][dir_main_category][platform]['learning-path-titles'] = [learning_path_metadata['title']]   # create list with title
                 else:
-                    status_dic['cloud_service_providers'][dir_main_category][csp]['count']               += 1                # increase count by one
-                    status_dic['cloud_service_providers'][dir_main_category][csp]['learning-path-titles'].append(learning_path_metadata['title'])   # add title to list
+                    status_dic['platforms'][dir_main_category][platform]['count']               += 1                # increase count by one
+                    status_dic['platforms'][dir_main_category][platform]['learning-path-titles'].append(learning_path_metadata['title'])   # add title to list
 
     return status_dic
 
@@ -351,7 +351,7 @@ def checker(report = 'all', update_md_files = False):
     '''
     arg_parser = argparse.ArgumentParser(description='Filter updater & Checker.', prefix_chars='-')
     arg_parser.add_argument('-u', '--update-md-files', action='store_true', help='Update .md index files filtering information.')
-    arg_parser.add_argument('-r', '--report', action='store', help='Report only specific information. Default is none. Set to "all", "subjects", "oses", "csps", or "tools-software-languages"')
+    arg_parser.add_argument('-r', '--report', action='store', help='Report only specific information. Default is none. Set to "all", "subjects", "oses", "platforms", or "tools-software-languages"')
 
     args = arg_parser.parse_args()
     update_md_files = args.update_md_files
@@ -384,7 +384,7 @@ def checker(report = 'all', update_md_files = False):
         'subjects':{},
         'operatingsystems':{},
         'tools_software_languages': {},
-        'cloud_service_providers': {}
+        'platforms': {}
         }
 
     # iterate over main categories as defined in the dic allow list (embedded, mobile, etc.)
@@ -395,7 +395,7 @@ def checker(report = 'all', update_md_files = False):
         status_dic['operatingsystems'][dir_main_category] = {}
         status_dic['tools_software_languages'][dir_main_category] = {}
         if dir_main_category == "servers-and-cloud-computing":
-            status_dic['cloud_service_providers'][dir_main_category] = {}
+            status_dic['platforms'][dir_main_category] = {}
             
 
         # iterate over every directory in this category
@@ -408,7 +408,7 @@ def checker(report = 'all', update_md_files = False):
             status_dic = addOperatingSystemsToStatusDict()
             status_dic = addToolsSoftwareLanguagesToStatusDict()
             if dir_main_category == "servers-and-cloud-computing":
-                status_dic = addCloudServiceProvidersToStatusDict()
+                status_dic = addPlatformsToStatusDict()
 
     #
     # 2.5
@@ -426,7 +426,7 @@ def checker(report = 'all', update_md_files = False):
                 status_dic = addOperatingSystemsToStatusDict()
                 status_dic = addToolsSoftwareLanguagesToStatusDict()
                 if dir_main_category == "servers-and-cloud-computing":
-                    status_dic = addCloudServiceProvidersToStatusDict()
+                    status_dic = addPlatformsToStatusDict()
 
     #
     # 3
@@ -434,14 +434,14 @@ def checker(report = 'all', update_md_files = False):
     if report == 'all':
         printSubjectReport()
         printOSesReport()
-        printCSPsReport()
+        printPlatformsReport()
         printToolsSoftwareLanguagesReport()
     elif report == 'subjects':
         printSubjectReport()
     elif report == 'oses':
         printOSesReport()
-    elif report == 'csps':
-        printCSPsReport()
+    elif report == 'platforms':
+        printPlatformsReport()
     elif report == 'tools-software-languages':
         printToolsSoftwareLanguagesReport()
 

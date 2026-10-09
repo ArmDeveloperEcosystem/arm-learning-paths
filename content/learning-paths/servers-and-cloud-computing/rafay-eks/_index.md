@@ -77,15 +77,15 @@ rerun_faqs: false
 ### Tags
 skilllevels: Advanced
 subjects: Containers and Virtualization
-cloud_service_providers:
-    - AWS
+platforms:
+    - AWS Graviton
 armips:
     - Neoverse
 operatingsystems:
     - Linux
 tools_software_languages:
     - Kubernetes
-    - AWS Elastic Kubernetes Service (EKS)
+    - Amazon EKS
     - Rafay
     - NGINX
     - rctl

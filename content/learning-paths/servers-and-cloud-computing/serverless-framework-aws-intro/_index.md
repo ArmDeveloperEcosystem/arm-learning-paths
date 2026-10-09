@@ -22,8 +22,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: Web
-cloud_service_providers:
-  - AWS
+platforms:
+  - AWS Graviton
 
 armips:
     - Neoverse

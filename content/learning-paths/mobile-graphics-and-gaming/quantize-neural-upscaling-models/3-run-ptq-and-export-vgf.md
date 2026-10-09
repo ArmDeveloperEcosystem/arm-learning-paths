@@ -21,6 +21,8 @@ Create a file called `quantize_and_export_vgf.py` and add the following code.
 
 This example uses CIFAR-10 as a convenient image source. It constructs a low-resolution input by downsampling an image, then trains the model to reconstruct the original image. This is a practical proxy for a real neural upscaler.
 
+The export also enables two optional debug settings. The `--emit-debug-info` Model Converter flag embeds ExecuTorch stack traces and module metadata in the VGF, while `dump_debug_info(VgfCompileSpec.DebugMode.TOSA)` preserves the corresponding TOSA debug information during lowering. You can omit both settings when you don't need debug information.
+
 ```python
 import torch
 from torch.utils.data import DataLoader
@@ -207,9 +209,13 @@ def ptq_example(device="cpu"):
     )
 
     # 8) Partition and dump a `.vgf` artifact.
-    compile_spec = VgfCompileSpec(TosaSpecification.create_from_string(tosa_spec))
+    compile_spec = VgfCompileSpec(
+        TosaSpecification.create_from_string(tosa_spec),
+        compiler_flags=["--emit-debug-info"],
+    )
     vgf_partitioner = VgfPartitioner(
         compile_spec.dump_intermediate_artifacts_to("./output/")
+        .dump_debug_info(VgfCompileSpec.DebugMode.TOSA)
     )
 
     to_edge_transform_and_lower(aten_dialect, partitioner=[vgf_partitioner])
@@ -290,8 +296,14 @@ def export_vgf_int8_ptq(
     q = convert_pt2e(q)
     aten_dialect = torch.export.export(q, args=example_input, strict=True)
 
-    compile_spec = VgfCompileSpec(TosaSpecification.create_from_string(tosa_spec))
-    vgf_partitioner = VgfPartitioner(compile_spec.dump_intermediate_artifacts_to(output_dir))
+    compile_spec = VgfCompileSpec(
+        TosaSpecification.create_from_string(tosa_spec),
+        compiler_flags=["--emit-debug-info"],
+    )
+    vgf_partitioner = VgfPartitioner(
+        compile_spec.dump_intermediate_artifacts_to(output_dir)
+        .dump_debug_info(VgfCompileSpec.DebugMode.TOSA)
+    )
     to_edge_transform_and_lower(aten_dialect, partitioner=[vgf_partitioner])
 ```
 

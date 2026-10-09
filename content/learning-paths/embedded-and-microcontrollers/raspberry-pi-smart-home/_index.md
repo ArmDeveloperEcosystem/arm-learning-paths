@@ -19,9 +19,54 @@ prerequisites:
   - Electronic components (breadboard, LEDs, resistors, jumper wires) for GPIO testing
   - Familiarity with Python programming, Raspberry Pi GPIO pinout, and basic electronics
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-12T20:15:37Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: f0788b1a8fefc43d93ddf80c76daba575f91c93f8ec2ce9a04b04108254fa5c4
+  summary_generated_at: '2026-08-12T20:15:37Z'
+  summary_source_hash: f0788b1a8fefc43d93ddf80c76daba575f91c93f8ec2ce9a04b04108254fa5c4
+  faq_generated_at: '2026-08-12T20:15:37Z'
+  faq_source_hash: f0788b1a8fefc43d93ddf80c76daba575f91c93f8ec2ce9a04b04108254fa5c4
+  summary: >-
+    You'll build a local, privacy-first smart home assistant on a Raspberry Pi 5. First, you'll install
+    Python and Ollama, wire an LED to GPIO 17, and verify GPIO access. Then, you'll run
+    `smart_home_assistant.py`, interact through a terminal or browser, and use natural-language
+    requests that the local model converts into actions for configured devices.
+  faqs:
+  - question: What result should I expect when I run the GPIO test script?
+    answer: >-
+      The LED connected to GPIO 17 should turn on and off as coded without GPIO-related errors.
+      If nothing changes, check the wiring and pin selection in the script.
+  - question: Which GPIO pin and resistor value does the LED example use?
+    answer: >-
+      Use GPIO 17 (physical pin 11) with a 220Ω series resistor. Connect the LED anode (long leg)
+      to GPIO 17 through the resistor and the cathode (short leg) to a GND pin.
+  - question: How do I access the assistant’s web interface and know it started correctly?
+    answer: >-
+      The script starts a local web server and prints the address and port in the terminal. Open
+      a browser to your Raspberry Pi’s IP at that port. A responsive page indicates the server
+      is running.
+  - question: Where should I run the assistant code after cloning it, and what should I see?
+    answer: >-
+      Change into the cloned project directory before launching `smart_home_assistant.py`. On start,
+      it initializes the configured GPIO devices and brings up the local web server.
+  - question: What should I check if natural language commands don't control the LED or other
+      device?
+    answer: >-
+      Verify the wiring to GPIO 17 and GND, and ensure the script's pin assignments match your
+      setup. Confirm Ollama is installed and available so the assistant can process model replies,
+      and review the console for JSON parsing or connection errors.
+# END generated_summary_faq
+
 author: Fidel Makatia Omusilibwa
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -69,4 +114,3 @@ weight: 1 # _index.md always has weight of 1 to order correctly
 layout: "learningpathall" # All files under learning paths have this same wrapper
 learning_path_main_page: "yes" # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-

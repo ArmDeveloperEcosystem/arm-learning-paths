@@ -79,8 +79,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-cloud_service_providers:
-    - AWS
+platforms:
+    - AWS Graviton
 
 armips:
     - Cortex-A

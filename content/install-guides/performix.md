@@ -28,39 +28,37 @@ multitool_install_part: false
 layout: installtoolsall
 ---
 
-## What is Arm Performix?
-
 Arm Performix is a desktop application that simplifies hardware-specific optimization by offering curated analysis pathways for performance-critical factors in applications, libraries, runtimes, and source code. Its capabilities include:
 
-* Performance profiling using hardware performance monitoring counters
-* Top-down methodology analysis for identifying performance bottlenecks
-* System-wide and per-process profiling
-* SSH-based remote target connections with optional support for jump nodes (also known as bastions)
+- Performance profiling using hardware performance monitoring counters
+- Top-down methodology analysis for identifying performance bottlenecks
+- System-wide and per-process profiling
+- SSH-based remote target connections with optional support for jump nodes (also known as bastions)
 
-## Which host and target platforms does Arm Performix support?
+## Supported host and target platforms 
 
 The Arm Performix desktop application supports the following host platforms:
 
-* **Windows**: Windows 10 or later on Arm64 or x64 architecture
-* **macOS**: macOS on Arm64 (Apple Silicon) or x64 architecture
-* **Linux**: Debian-based distribution on Arm64 or x64 architecture
+- Windows: Windows 10 or later on Arm64 or x64 architecture
+- macOS: macOS on Arm64 (Apple Silicon) or x64 architecture
+- Linux: Debian-based distribution on Arm64 or x64 architecture
 
 You also need a target system on which to profile your application or workload. The following target platforms are supported:
 
-* **Linux with Arm64 architecture**: Full support for Amazon Linux 2023, Ubuntu 22.04, or Ubuntu 24.04
-* **Windows with Arm64 architecture**: Partial support - Code Hotspots recipe only
-* **Linux with x64 architecture**: Partial support - Code Hotspots recipe only
+- Linux with Arm64 architecture: Full support for Amazon Linux 2023, Ubuntu 22.04, or Ubuntu 24.04
+- Windows with Arm64 architecture: Partial support - Code Hotspots recipe only
+- Linux with x64 architecture: Partial support - Code Hotspots recipe only
 
-## How do I download and install Arm Performix?
+## Download and install Arm Performix
 
 Arm Performix is distributed as platform-specific installer packages.
 The installation includes the GUI, the CLI tool (`apx`) and an MCP server.
 
-### How do I install Arm Performix on a Windows host?
+### Install Arm Performix on a Windows host
 
 Download the Windows installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
-Alternatively, download using PowerShell. These commands require PowerShell and do not work in the Windows Command Prompt (CMD):
+Alternatively, download using PowerShell. The following commands require PowerShell and don't work in the Windows Command Prompt (CMD):
 
 {{< tabpane code=true >}}
 {{< tab header="Arm64" >}}
@@ -71,21 +69,18 @@ curl -o ArmPerformix-windows-x64.exe https://artifacts.tools.arm.com/arm-perform
 {{< /tab >}}
 {{< /tabpane >}}
 
-After downloading the `.exe` file, locate it in your Downloads folder and double-click it to start the installation wizard.
+After downloading the `.exe` file, locate the file in your Downloads folder and double-click it to start the installation wizard.
 
-Review the License Agreement and select **I Agree**.
+Complete the following steps:
 
-Choose whether to install Arm Performix for all users or just yourself, then select **Next**.
+1. Review the License Agreement and select **I Agree**.
+2. Choose whether to install Arm Performix for all users or just yourself, then select **Next**.
+3. If you choose **Anyone who uses this computer (all users)**, a User Access Control dialog opens. Enter an administrator username and password, then select **Yes**.
+4. Choose the installation directory. You can accept the default or select **Browse** to choose a different location.
+5. Select **Install**.
+6. When the installation finishes, select **Finish** to close the wizard.
 
-If you choose **Anyone who uses this computer (all users)**, a User Access Control dialog opens. Enter an administrator username and password, then select **Yes**.
-
-Choose the installation directory. You can accept the default or select **Browse** to choose a different location.
-
-Select **Install**.
-
-When the installation finishes, select **Finish** to close the wizard.
-
-### How do I install Arm Performix on a Linux host?
+### Install Arm Performix on a Linux host
 
 Download the Linux installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
@@ -123,7 +118,9 @@ sudo dpkg -i ArmPerformix-linux-amd64.deb
 {{< /tab >}}
 {{< /tabpane >}}
 
-The `dpkg` command may report missing dependency errors. Run the following command to automatically fetch and install any missing dependencies:
+The `dpkg` command might report missing dependency errors. 
+
+Run the following command to automatically fetch and install any missing dependencies:
 
 ```bash
 sudo apt-get install -f
@@ -145,11 +142,11 @@ The output shows the installed version number:
 
 ```output
 Daemon process started; to stop call `apx daemon stop`.
-Arm Performix CLI version: 1.0.0
-Arm Performix daemon version: 1.0.0
+Arm Performix CLI version: 1.20.0
+Arm Performix daemon version: 1.20.0
 ```
 
-### How do I install Arm Performix on a macOS host?
+### Install Arm Performix on a macOS host
 
 Download the macOS installer package for your architecture from the [Arm Performix download page](https://developer.arm.com/servers-and-cloud-computing/arm-performix).
 
@@ -160,23 +157,20 @@ Alternatively, download using `curl`:
 curl -Lo ArmPerformix-darwin-arm64.pkg https://artifacts.tools.arm.com/arm-performix/app/latest/darwin/arm64/ArmPerformix-darwin-arm64.pkg
 {{< /tab >}}
 {{< tab header="x64" >}}
-curl -Lo ArmPerformix-darwin-arm64.pkg https://artifacts.tools.arm.com/arm-performix/app/latest/darwin/x64/ArmPerformix-darwin-x64.pkg
+curl -Lo ArmPerformix-darwin-x64.pkg https://artifacts.tools.arm.com/arm-performix/app/latest/darwin/x64/ArmPerformix-darwin-x64.pkg
 {{< /tab >}}
 {{< /tabpane >}}
 
 After downloading the `.pkg` file, navigate to the directory where you downloaded it and double-click the file to start the installer.
 
-Review the license agreement and select **Agree**.
+Complete the following steps:
 
-Choose the installation destination. By default, Arm Performix installs on your system drive.
+1. Review the license agreement and select **Agree**.
+2. Choose the installation destination. By default, Arm Performix installs on your system drive.
+3. Select **Install** and enter your macOS administrator password when prompted.
+4. Wait while the installer copies the files. When the installation finishes, select **Close** to exit the installer.
 
-Select **Install** and enter your macOS administrator password when prompted.
-
-Wait while the installer copies the files.
-
-When the installation finishes, select **Close** to exit the installer.
-
-## How do I use the Arm Performix CLI?
+## Use the Arm Performix CLI
 
 The CLI is useful when you prefer command-line workflows, rather than GUI or MCP-driven workflows.
 
@@ -197,7 +191,7 @@ export PATH="/opt/Arm Performix/assets/apx:$PATH"
 ```
   {{< /tab >}}
   {{< tab header="Windows" >}}
-On Windows, the default install location depends on the installation scope you chose during setup:
+On Windows, the default install location depends on the installation scope that you chose during setup:
 
 - For a single-user install: `C:\Users\<username>\AppData\Local\Programs\Arm Performix`
 - For an all-users install: `C:\Program Files\Arm Performix`
@@ -208,7 +202,7 @@ Relative to the install location, the `apx` binary is at `\assets\apx\apx.exe`. 
 C:\Program Files\Arm Performix\assets\apx\apx.exe
 ```
 
-For convenience in the current PowerShell session, add it to your `Path`. This example uses the all-users install path:
+For convenience in the current PowerShell session, add it to your `Path`. The following example uses the all-users install path:
 
 ```powershell
 $env:Path += ";C:\Program Files\Arm Performix\assets\apx"
@@ -237,13 +231,7 @@ Use the CLI help for command-line usage, or for more detailed information see th
 apx --help
 ```
 
-## What comes next after installing Arm Performix?
-
-After completing these installation steps, you can simply launch the GUI or CLI to get started.
-
-For further guidance on using Arm Performix, including connecting to your target for the first time or setting up the MCP server to use Arm Performix with an AI agent, please refer to the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/latest/).
-
-## How do I uninstall Arm Performix?
+## Uninstall Arm Performix
 
 To remove Arm Performix from your system, use the appropriate method for your platform:
 
@@ -254,3 +242,11 @@ To remove Arm Performix from your system, use the appropriate method for your pl
 ```bash
 sudo apt remove arm-performix
 ```
+
+## Next steps
+
+After completing these installation steps, you can launch the GUI or CLI to get started.
+
+For further guidance on using Arm Performix, including connecting to your target for the first time or setting up the MCP server to use Arm Performix with an AI agent, see the [Arm Performix User Guide](https://developer.arm.com/documentation/110163/latest/).
+
+To get started with profiling using Arm Performix, see the Learning Path [Optimize a sample C++ application on an Arm-based server with Arm Performix](/learning-paths/servers-and-cloud-computing/performix-get-started/).
