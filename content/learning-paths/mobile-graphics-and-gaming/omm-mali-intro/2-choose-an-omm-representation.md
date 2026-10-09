@@ -49,8 +49,8 @@ The `VK_KHR_opacity_micromap` extension defines 2-state and 4-state formats. A 2
 | 2-state | Fully opaque | Handle the region as opaque. | No change |
 | 4-state | Fully transparent | Ignore the hit. | No change |
 | 4-state | Fully opaque | Handle the region as opaque. | No change |
-| 4-state | Unknown-transparent | Keep shader-side evaluation available. | Treat the region as transparent |
-| 4-state | Unknown-opaque | Keep shader-side evaluation available. | Treat the region as opaque |
+| 4-state | Unknown-transparent | Keep shader-side evaluation available. | Treat the region as transparent. |
+| 4-state | Unknown-opaque | Keep shader-side evaluation available. | Treat the region as opaque. |
 
 During normal 4-state traversal, both unknown values mean that more evaluation is needed. The transparent and opaque variants produce different results only when a ray or instance forces the OMM into 2-state evaluation.
 

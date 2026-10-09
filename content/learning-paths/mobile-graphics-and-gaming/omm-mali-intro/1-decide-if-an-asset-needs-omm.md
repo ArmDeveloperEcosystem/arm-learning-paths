@@ -55,8 +55,8 @@ Not every alpha-tested asset benefits from OMM. You get the clearest value when 
 | Static foliage | Strong candidate | Stable mask, repeated ray hits, and narrow alpha edges |
 | Chain-link fence or grille | Strong candidate | Stable binary cutouts and enough subdivision for thin features |
 | Animated or changing mask | Conditional | A defined update or rebuild policy |
-| Alpha-blended surface | Poor candidate | Continuous transparency needs a blending path |
-| Rasterization-only asset | No benefit | The asset never participates in ray traversal |
+| Alpha-blended surface | Poor candidate | Continuous transparency needs a blending path. |
+| Rasterization-only asset | No benefit | The asset never participates in ray traversal. |
 
 Also check every mesh level of detail (LOD) separately. Its UV coordinates, triangle links, and alpha data need to match the version that's used to create the OMM. Otherwise, valid OMM data can become attached to the wrong triangle and produce incorrect opacity results.
 

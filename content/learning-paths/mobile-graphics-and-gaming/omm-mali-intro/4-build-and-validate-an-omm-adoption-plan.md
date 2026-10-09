@@ -31,7 +31,7 @@ The team tests two bake strategies. The results are illustrative, and the raw pa
 | Resolved regions | 82% | 100% |
 | Unknown regions | 18%, concentrated along the edge and stem | None |
 | Reference-image comparison | Matches | Matches |
-| Runtime behavior | Edge candidates retain shader-side evaluation | Every OMM candidate resolves during traversal |
+| Runtime behavior | Edge candidates retain shader-side evaluation. | Every OMM candidate resolves during traversal. |
 
 The target profile sets a budget of 32 bytes of raw OMM state data for each original triangle. Profiling also shows that shader-side evaluation along the leaf edge is measurable, but it doesn't dominate frame time. Your decision therefore needs to balance storage against the benefit of resolving every region in hardware.
 
