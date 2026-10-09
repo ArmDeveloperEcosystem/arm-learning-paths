@@ -11,7 +11,7 @@ layout: learningpathall
 
 ## Objective
 
-The goal of this Learning Path is to demonstrate a practical method for porting a new operating system to a complex firmware stack such as Zena CSS. Although porting an OS to one of its cores may seem overwhelming, this Learning Path breaks the process into manageable steps with clear progress checks. It also explains the debugging techniques used at each stage.
+Build and validate the FreeRTOS SMP application on the standalone Cortex-R82AE FVP before adapting it to Zena CSS. Use staged progress checks and source-level or Tarmac debugging to diagnose early port failures.
 
 
 After completing this section, you will have verified that:
@@ -24,6 +24,27 @@ After completing this section, you will have verified that:
 - SMP scheduling, task affinity, shared state, and interprocessor interrupts operate as expected.
 - The generated ELF image can be used for source-level debugging.
 
+## Download and install Arm Development Studio
+
+`FVP_BaseR_Cortex-R82AE` is part of the Arm Development Studio distribution and is licensed software.
+
+Download and install Arm Development Studio using the [Arm Development Studio download information](https://www.arm.com/products/development-tools/embedded-and-software/arm-development-studio?utm_source=digikey&utm_medium=distributor&utm_campaign=dev_studio). Install the `UBL Gold` edition.
+
+After installing Arm Development Studio, email one of the [Arm development-tool distributors](https://www.arm.com/products/development-tools/distributors) to request an evaluation license.
+
+Use the serial number you receive to generate an authentication code with the [Arm user-based licensing instructions](https://developer.arm.com/support/licensing/user-based).
+
+After generating the authentication code, activate the license on your Ubuntu host:
+
+```bash
+sudo armlm activate --code <your activation code goes here>
+```
+
+Install `xterm` so the FVP can open its terminal window in the Ubuntu desktop:
+
+```bash
+sudo apt install -y xterm
+```
 
 ## Start from the Cortex-R82 SMP port
 
@@ -32,7 +53,7 @@ Begin with the partner-supported Cortex-R82 SMP demo. It provides the Armv8-R Fr
 The Zena CSS FVP provides a configuration that adds a second cluster containing four Cortex-R82AE cores.
 The objective is to run FreeRTOS on this R82AE cluster.
 
-Begin by running FreeRTOS on the standalone `FVP_BaseR_Cortex-R82AE`, which is available with *Arm Development Studio*. You can configure this FVP to closely match the Cortex-R82AE cluster from the Zena CSS FVP.
+Begin by running FreeRTOS on the standalone `FVP_BaseR_Cortex-R82AE`, which was installed with Arm Development Studio. You can configure this FVP to closely match the Cortex-R82AE cluster from the Zena CSS FVP.
 
 The demo provides the board support code for `FVP_BaseR_Cortex-R82AE` and a four-task command-line application. Each task has a fixed core affinity, which makes scheduler and coherency problems visible during bring-up.
 
@@ -63,7 +84,7 @@ The [Zena CSS boot-flow documentation](https://arm-zena-css.docs.arm.com/en/v2.2
 
 The [Zephyr board description for Safety Island Cluster 1](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/components/safety_island/zephyr/src/boards/arm/fvp_rd_aspen_safety_island/fvp_rd_aspen_safety_island_c1.dts?ref_type=heads#L109) defines 8 MiB of SRAM at `0x140000000`.
 
-With the configuration file [fvp_R82AE_config.txt](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/fvp_R82AE_config.txt), the FVP_BaseR_Cortex-R82AE can be configured to expose the same amount of LLRAM at the same base address. The Reset vector Address (RVBAR) can be configured to boot from this address.
+With the configuration file [`fvp_R82AE_config.txt`](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/fvp_R82AE_config.txt), `FVP_BaseR_Cortex-R82AE` can be configured to expose the same amount of LLRAM at the same base address. The reset vector address (RVBAR) can be configured to boot from this address.
 
 ```text
 cluster0.memory.has_llram=1
@@ -77,8 +98,8 @@ cluster0.cpu2.RVBAR=0x140000000
 cluster0.cpu3.RVBAR=0x140000000
 ```
 Other configurations:
-- Use MPU mode for the Cortex R82AE.
-- Configure 4 cores.
+- Use MPU mode for the Cortex-R82AE.
+- Configure four cores.
 - Start the reference counter automatically.
 - Model architectural cache state.
 - Disable semihosting.
@@ -108,7 +129,7 @@ The generic demo isn't sufficient for the Cortex-R82AE FVP. Check that the port 
 - The application uses a PL011 UART instead of semihosting.
 - The FVP protected MPU and shared low-latency RAM (LLRAM) need explicit configuration.
 - The image entry point must be set to the first address of the code section.
-- Configure the timer frequency at the highest Exception Level.
+- The timer frequency must be configured at the highest Exception Level.
 
 The reference FVP configuration uses four cores and an 8 MiB LLRAM window. The address range is divided into separate code and data regions:
 
@@ -220,7 +241,7 @@ fromelf --bincombined \
 
 The build creates `r82ae_smp_fvp_gcc_armclang.elf` and `r82ae_smp_fvp_gcc_armclang.bin` in the selected build directory.
 
-Although ELF is a standard format, embedded toolchains encode load and execution addresses differently. Binary conversion is not merely removal of ELF metadata: The converter must understand the memory layout and startup-copy model defined by the linker. A converter from another toolchain may accept the ELF without errors but silently produce an incorrect image. For this reason, use `aarch64-none-elf-objcopy` for the GCC build and `fromelf --bincombined` for the Arm Compiler build.
+Although ELF is a standard format, embedded toolchains encode load and execution addresses differently. Binary conversion needs a converter that understands the memory layout and startup-copy model defined by the linker. A converter from another toolchain can accept the ELF without errors but silently produce an incorrect image. Use `aarch64-none-elf-objcopy` for the GCC build and `fromelf --bincombined` for the Arm Compiler build.
 
 Using `fromelf --bin` can create an output directory containing one file for each load region. Use `--bincombined` when the FVP requires one binary file.
 
@@ -228,7 +249,7 @@ Using `fromelf --bin` can create an output directory containing one file for eac
 
 #### Start the FVP
 
-You can load the ELF file directly. The FVP uses the addresses recorded in the ELF file, and the image retains the symbols required for source-level debugging:
+You can load the ELF file directly from within your Ubuntu host's desktop environment. The FVP will open both `xterm` and other windows within the Ubuntu desktop. The FVP uses the addresses recorded in the ELF file, and the image retains the symbols required for source-level debugging:
 
 {{< tabpane code=true >}}
   {{< tab header="GCC" language="bash" >}}
@@ -353,13 +374,13 @@ grep -B 6 -A 4 'CoreEvent_CURRENT_SPx_SYNC' tarmac.log
 The lines before `CoreEvent_CURRENT_SPx_SYNC` show the execution leading to the exception. Identify the core that generated the event and inspect the last executed instruction. Use the trace alongside these exception registers:
 
 - `ELR_EL1` contains the address to which the processor returns after handling the exception. For a synchronous exception, it identifies the instruction associated with the failure.
-- `ESR_EL1` describes the exception class and provides information about its cause. For quickly interpreting the syndrome register you can use [ESR.arm64](https://esr.arm64.dev/).
+- `ESR_EL1` describes the exception class and provides information about its cause. Use [ESR.arm64](https://esr.arm64.dev/) to interpret the syndrome register.
 - `FAR_EL1` contains the address associated with an instruction or data access fault, when valid for that exception.
 - `SPSR_EL1` captures the processor state at the time of the exception.
 
 Together, this information can reveal an incorrect branch target, an invalid memory access, a stack error, or an unexpected exception-level transition. For an SMP failure, compare the trace events from all four cores. This can show whether a core failed to start, did not receive an interprocessor interrupt, or accessed shared state in an unexpected order. Arm also provides Tarmac Trace Utilities for indexing and browsing large trace files.
 
-Retrieve the relevant information from the Tarmac trace:
+The relevant values from this trace example are:
 
 ```output
 X0 = 0x016E3600, or 24 MHz

@@ -9,25 +9,28 @@ layout: learningpathall
 
 ## Before you begin
 
-Run every command in this section on your Arm-based Linux machine. The instructions assume Ubuntu 22.04 or later on an `aarch64` host, such as a Raspberry Pi 5 or an Arm cloud instance. Confirm the architecture:
+Run every command on your Arm-based Linux machine. Ensure that you're using Ubuntu 22.04 or later on an `aarch64` host, such as a Raspberry Pi 5 or an Arm-based cloud instance. 
+
+Confirm the architecture:
 
 ```bash
 uname -m
 ```
+The expected output is:
 
 ```output
 aarch64
 ```
 
-By the end of this section, you'll have:
+By the end of setup, you'll have the following:
 
-- a ROS 2 Humble container publishing a demo topic
-- a Python virtual environment with the Device Connect packages
-- the ros2-device-connect adapter cloned and ready to run
+- A ROS 2 Humble container publishing a demo topic
+- A Python virtual environment with the Device Connect packages
+- The `ros2-device-connect` adapter cloned and ready to run
 
 ## Install Docker
 
-The adapter talks to ROS 2 through Docker, so you need Docker Engine. Follow the [Docker Engine install guide](/install-guides/docker/docker-engine/), including the step that adds your user to the `docker` group. The adapter runs `docker exec` as your user, so Docker must work without `sudo`.
+The adapter talks to ROS 2 through Docker, so you need Docker Engine. To install Docker Engine, follow the [Docker Engine install guide](/install-guides/docker/docker-engine/), including the step that adds your user to the `docker` group. The adapter runs `docker exec` as your user, so Docker needs to work without `sudo`.
 
 Verify that Docker is installed and that you can connect to the Docker daemon without `sudo`:
 
@@ -39,7 +42,7 @@ The command should display version information for both the Docker client and se
 
 ## Start a ROS 2 container
 
-You don't need to install ROS 2 on the host. The official `ros:humble` image is multi-architecture, so Docker pulls the `arm64` variant automatically. If you'd prefer a native install, see the [ROS 2 install guide](/install-guides/ros2/).
+You don't need to install ROS 2 on the host. The official `ros:humble` image is multi-architecture, so Docker pulls the `arm64` variant automatically. If you prefer a native install, see the [ROS 2 install guide](/install-guides/ros2/).
 
 Start a long-running container named `ros2_test`:
 
@@ -47,7 +50,7 @@ Start a long-running container named `ros2_test`:
 docker run -d --name ros2_test ros:humble tail -f /dev/null
 ```
 
-The `tail -f /dev/null` command keeps the container alive so you can run ROS 2 commands inside it with `docker exec`. Start a demo publisher that sends a `std_msgs/msg/String` message on the `/chatter` topic once per second:
+The `tail -f /dev/null` command keeps the container alive so that you can run ROS 2 commands inside it with `docker exec`. Start a demo publisher that sends a `std_msgs/msg/String` message on the `/chatter` topic once per second:
 
 ```bash
 docker exec -d ros2_test bash -lc 'source /opt/ros/humble/setup.bash && ros2 topic pub -r 1 /chatter std_msgs/msg/String "{data: hello}"'
@@ -67,11 +70,11 @@ The output lists the ROS 2 topics:
 /rosout
 ```
 
-The node list is empty because `ros2 topic pub` runs as a hidden node. This container now stands in for a real robot's ROS 2 stack.
+The node list is empty because `ros2 topic pub` runs as a hidden node. The container now stands in for a real robot's ROS 2 stack.
 
 ## Create the workspace
 
-The adapter's launch scripts expect a single project directory that holds the adapter repository and a Python virtual environment named `.venv`. Create that directory and clone both the adapter and the Device Connect source. The adapter is cloned at the `ros2_dc_lp` tag, which is the version this Learning Path was tested with:
+The adapter's launch scripts expect a single project directory that holds the adapter repository and a Python virtual environment named `.venv`. Create the directory and clone both the adapter and the Device Connect source:
 
 ```bash
 mkdir -p ~/device_connect
@@ -79,10 +82,11 @@ cd ~/device_connect
 git clone --branch ros2_dc_lp https://github.com/odincodeshen/ros2-device-connect.git
 git clone https://github.com/arm/device-connect.git
 ```
+The adapter is cloned at the `ros2_dc_lp` tag, which is the version that the Learning Path was tested with.
 
 ## Install uv and the Device Connect packages
 
-This Learning Path uses [uv](https://docs.astral.sh/uv/) to create the Python environment. Install it:
+Install [uv](https://docs.astral.sh/uv/) to create the Python environment:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -90,9 +94,13 @@ export PATH="$HOME/.local/bin:$PATH"
 uv --version
 ```
 
-Create a Python virtual environment in the project directory, and install the Device Connect edge SDK and agent tools from the cloned source. The Device Connect packages require Python 3.11 or later and are tested on Python 3.11, 3.12, and 3.13. This example uses 3.12, but you can pass any supported version to `--python`. If that version isn't installed on your machine, uv downloads it for you.
+Create a Python virtual environment in the project directory, and install the Device Connect edge SDK and agent tools from the cloned source:
 
-This host Python environment is separate from the Python version inside the ROS 2 container, so your choice here doesn't need to match your ROS 2 distribution.
+{{% notice Note %}}
+The Device Connect packages require Python 3.11 or later and are tested on Python 3.11, 3.12, and 3.13. Python 3.12 is used in the commands as an example, but you can pass any supported version to `--python`. If the version isn't installed on your machine, `uv` downloads it for you.
+
+The host Python environment is separate from the Python version inside the ROS 2 container. Your choice here doesn't need to match your ROS 2 distribution.
+{{% /notice %}}
 
 ```bash
 cd ~/device_connect
@@ -102,13 +110,15 @@ VIRTUAL_ENV=.venv uv pip install \
   -e device-connect/packages/device-connect-agent-tools
 ```
 
-The `device-connect-edge` package is the device runtime that the adapter runs on. The `device-connect-agent-tools` package is the client you'll use to discover the adapter and call its RPCs.
+The `device-connect-edge` package is the device runtime that the adapter runs on. The `device-connect-agent-tools` package is the client that you'll use to discover the adapter and call its RPCs.
 
 Verify that both packages import:
 
 ```bash
 .venv/bin/python -c "import device_connect_edge, device_connect_agent_tools; print('Device Connect OK')"
 ```
+
+The expected output is:
 
 ```output
 Device Connect OK
@@ -125,6 +135,6 @@ Your workspace now looks like this:
 
 ## What you've accomplished and what's next
 
-You've installed Docker, started a ROS 2 Humble container publishing on `/chatter`, and created a Python environment with the Device Connect packages next to the ros2-device-connect adapter.
+You've installed Docker and started a ROS 2 Humble container publishing on `/chatter`. You've also created a Python environment with the Device Connect packages next to the ros2-device-connect adapter.
 
-Next, you'll look at how the adapter code works, start it in D2D mode, and query the ROS 2 container through Device Connect.
+Next, you'll see how the adapter code works, start it in device-to-device mode, and query the ROS 2 container through Device Connect.

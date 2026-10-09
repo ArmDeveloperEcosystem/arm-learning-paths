@@ -7463,3 +7463,13 @@ tisdk
 tispl
 uboot
 codename
+Hiwonder
+PuppyPi
+allowlist
+ecda
+fedoraproject
+libcamera
+libnuma
+mixin
+numactl
+unnested
