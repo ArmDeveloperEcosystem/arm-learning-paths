@@ -13,14 +13,14 @@ pinned_learning_paths:
 - nfru-unreal
 - model-training-gym-nfru
 operatingsystems_filter:
-- Android: 55
-- Linux: 54
+- Android: 56
+- Linux: 55
 - macOS: 27
 - Windows: 25
 subjects_filter:
 - Gaming: 6
 - Graphics: 9
-- ML: 46
+- ML: 47
 - Performance and Architecture: 38
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech.
 title: Mobile, Graphics, and Gaming
@@ -64,7 +64,7 @@ tools_software_languages_filter:
 - Jupyter Notebook: 3
 - KleidiAI: 11
 - Kotlin: 14
-- LiteRT: 5
+- LiteRT: 6
 - LiteRT-LM: 1
 - llama.cpp: 5
 - LLM: 3
@@ -72,14 +72,15 @@ tools_software_languages_filter:
 - llvm-mca: 1
 - MCP: 1
 - MediaPipe: 3
+- MLIA: 1
 - Model Explorer: 2
 - MTE: 2
 - Neon: 5
-- NX: 10
+- NX: 11
 - ONNX: 1
 - ONNX Runtime: 5
 - OpenGL ES: 1
-- Python: 20
+- Python: 21
 - PyTorch: 9
 - QEMU: 1
 - RenderDoc: 1
@@ -93,12 +94,12 @@ tools_software_languages_filter:
 - TensorFlow: 1
 - Topo: 1
 - TorchAO: 1
-- TOSA: 3
+- TOSA: 4
 - Transformers: 1
 - Trusted Firmware: 1
 - Unity: 6
 - Unreal Engine: 8
-- VGF: 3
+- VGF: 4
 - Visual Studio: 4
 - Visual Studio Code: 1
 - Vulkan: 13
