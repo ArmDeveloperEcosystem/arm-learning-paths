@@ -8,10 +8,10 @@ key_ip:
 maintopic: true
 pinned_learning_paths:
 - firecracker-ai-sandbox
+- nested-virtualization
+- arm-mcp-server
 - memory-subsystem
 - sve2-match
-- arm-mcp-server
-- learning-paths/cross-platform/vectorization-comparison
 - performix-microarchitecture
 operatingsystems_filter:
 - Android: 3
