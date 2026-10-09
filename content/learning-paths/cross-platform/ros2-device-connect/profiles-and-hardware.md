@@ -148,4 +148,4 @@ D2D mode runs with `DEVICE_CONNECT_ALLOW_INSECURE=true` and no transport authent
 
 You've learned how profiles reuse the same shared core for a Raspberry Pi 5 camera and a ROS 2 robot, and how to add a profile for your own hardware.
 
-To go further, try driving the adapter from an AI agent with [Connect AI agents to edge devices using Device Connect and Strands](/learning-paths/embedded-and-microcontrollers/device-connect-strands/). You can also build a larger ROS 2 workload on Arm with [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/).
+To go further, you can also build a larger ROS 2 workload on Arm with [Build a ROS 2 and Zenoh simulation environment on an Arm server](/learning-paths/cross-platform/ros2-zenoh-arm/).
