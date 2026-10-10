@@ -1,16 +1,15 @@
 {{ define "main" }}
 <div class="homepage">
     <header class="homepage-hero">
-        <h1 id="homepage-header">Learn by Doing.</h1>
+        <h1 id="homepage-header">Arm Learning Paths</h1>
         <p>Build and optimize software on Arm with practical, hands-on tutorials.</p>
     </header>
 
     <div class="homepage-search">
-        <ads-search id="homepage-search-bar" theme="dark" has-search-button placeholder="Search all Learning Paths and Install Guides..." search-index="learning-paths"></ads-search>
+        <ads-search id="homepage-search-bar" theme="dark" has-search-button placeholder="Search all content..." search-index="learning-paths"></ads-search>
     </div>
 
-    <section class="homepage-section" aria-labelledby="homepage-learning-paths">
-        <h2 id="homepage-learning-paths">Learning Paths</h2>
+    <section class="homepage-section" aria-label="Learning Paths">
         <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3">
             {{ range (where .Site.Pages "Params.maintopic" true).ByWeight }}
                 {{ $iconFilename := printf "%s.svg" (.Title | urlize) }}
@@ -66,8 +65,8 @@
     </section>
 
     <section class="homepage-section" aria-labelledby="homepage-contribute">
-        <h2 id="homepage-contribute">Want to contribute content?</h2>
-        <p>Share your expertise with the Arm developer community. Follow our contribution instructions to create and submit a Learning Path or Install Guide.</p>
+        <h2 id="homepage-contribute">Contribute as an author</h2>
+        <p>Share your expertise with the Arm developer community. Follow our authoring guidelines to create and submit a Learning Path or Install Guide.</p>
         <div class="homepage-contribution-actions">
             <ads-cta-button size="medium" level="primary" data-link="{{ "learning-paths/cross-platform/_example-learning-path/" | relURL }}">View Contribution Instructions</ads-cta-button>
             <ads-cta-button size="medium" level="secondary" data-link="{{ .Param "github_repo" }}">Go to GitHub Repository</ads-cta-button>
