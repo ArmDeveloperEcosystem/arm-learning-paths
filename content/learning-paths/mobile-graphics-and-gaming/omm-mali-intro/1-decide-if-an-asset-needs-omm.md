@@ -26,7 +26,7 @@ A leaf often uses a quad made from two triangles. The geometry describes the com
 
 ![Three-panel diagram showing a ray intersecting a leaf quad. Geometry reports a hit on the complete rectangle, while the alpha mask shows whether that point is part of the visible leaf.#center](images/omm-introduction/01-masked-geometry.webp "Geometry and alpha provide separate answers for the same ray intersection")
 
-The figure shows a ray intersecting the transparent part of the quad. The geometry test reports a valid triangle hit, but the alpha test shows that the ray missed the visible leaf. OMM helps the traversal hardware make that second decision earlier.
+The figure shows a candidate hit on the visible leaf. The geometry test reports a triangle hit, and the alpha mask confirms that the position is opaque. Other positions on the same quad can be transparent, so traversal still needs an opacity decision. OMM helps the traversal hardware make that decision earlier.
 
 ## Compare rasterization and ray traversal
 
@@ -34,17 +34,17 @@ You might already handle this kind of material with alpha testing during rasteri
 
 | Rendering path | Opacity decision |
 | --- | --- |
-| Rasterization | A pixel shader samples alpha and discards the fragment when it fails the cutoff |
-| Ray tracing without OMM | An any-hit shader or ray-query candidate handler evaluates the mask |
-| Ray tracing with OMM | Traversal resolves known regions and keeps only unknown regions for shader-side evaluation |
+| Rasterization | A pixel shader samples alpha and discards the fragment when it fails the cutoff. |
+| Ray tracing without OMM | An any-hit shader or ray-query candidate handler evaluates the mask. |
+| Ray tracing with OMM | Traversal resolves known regions and keeps only unknown regions for shader-side evaluation. |
 
 A shadow or reflection ray can pass through several overlapping leaves. Without OMM, each possible hit can repeat texture access, material setup, and control flow. With OMM, traversal first reads a compact state for the small region that the ray hit:
 
 | OMM state | Traversal action |
 | --- | --- |
-| Opaque | Accept the region as opaque |
-| Transparent | Ignore the region and continue traversal |
-| Unknown | Keep the candidate for shader-side evaluation |
+| Opaque | Accept the region as opaque. |
+| Transparent | Ignore the region and continue traversal. |
+| Unknown | Keep the candidate for shader-side evaluation. |
 
 ## Identify suitable assets
 
@@ -55,17 +55,23 @@ Not every alpha-tested asset benefits from OMM. You get the clearest value when 
 | Static foliage | Strong candidate | Stable mask, repeated ray hits, and narrow alpha edges |
 | Chain-link fence or grille | Strong candidate | Stable binary cutouts and enough subdivision for thin features |
 | Animated or changing mask | Conditional | A defined update or rebuild policy |
-| Alpha-blended surface | Poor candidate | Continuous transparency needs a blending path |
-| Rasterization-only asset | No benefit | The asset never participates in ray traversal |
+| Alpha-blended surface | Poor candidate | Continuous transparency needs a blending path. |
+| Rasterization-only asset | No benefit | The asset never participates in ray traversal. |
 
-Also check every mesh level of detail (LOD) separately. Its UV coordinates, triangle links, and alpha data must match the version used to create the OMM. Otherwise, valid OMM data can become attached to the wrong triangle and produce incorrect opacity results.
+Also check every mesh level of detail (LOD) separately. Its UV coordinates, triangle links, and alpha data need to match the version that's used to create the OMM. Otherwise, valid OMM data can become attached to the wrong triangle and produce incorrect opacity results.
 
-## Decide whether to continue
+Before continuing, choose one alpha-tested asset from your own project. Alternatively, picture a common example, such as a leaf or wire fence. 
 
-Before continuing, choose one alpha-tested asset from your own project or picture a common example, such as a leaf or wire fence. Ask three questions: does it participate in ray tracing, does its alpha mask remain stable, and will rays cross it often enough for repeated opacity checks to matter?
+Ask three questions about the asset: 
+
+- Does the asset participate in ray tracing? 
+- Does the alpha mask of the asset remain stable? 
+- Will rays cross the asset often enough for repeated opacity checks to matter?
 
 If the answer to all three questions is yes, the asset is a reasonable OMM candidate. Keep dynamic masks and assets with mostly uncertain opacity on the existing shader-side path until profiling gives you a reason to change them.
 
-### What you've learned
+## What you've learned and what's next
 
-You can now distinguish the geometry intersection from the opacity decision and identify assets that are reasonable OMM candidates. Next, choose how microtriangles represent the asset's opacity.
+You've learned how to distinguish the geometry intersection from the opacity decision and identify assets that are reasonable OMM candidates. 
+
+Next, you'll choose how microtriangles represent the asset's opacity.
