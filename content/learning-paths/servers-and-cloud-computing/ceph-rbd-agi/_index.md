@@ -26,7 +26,7 @@ rerun_summary: false
 rerun_faqs: false
 
 ### Tags
-skilllevels: Introductory
+skilllevels: Advanced
 subjects: Containers and Virtualization
 armips:
     - Neoverse
@@ -34,7 +34,6 @@ platforms:
   - Arm AGI CPU
 tools_software_languages:
     - Ceph
-    - Bash
 operatingsystems:
     - Linux
 
