@@ -26,8 +26,8 @@ subtitle: Optimize Android apps and build faster games using cutting-edge Arm te
 title: Mobile, Graphics, and Gaming
 tools_software_languages_filter:
 - 7-Zip: 1
-- ADB: 1
 - adb: 2
+- ADB: 1
 - Android: 6
 - Android NDK: 4
 - Android SDK: 1

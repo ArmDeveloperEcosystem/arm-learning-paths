@@ -11,27 +11,34 @@ layout: "learningpathall"
 
 ## Check your environment
 
-Use Ubuntu 22.04 LTS or another compatible Linux environment with Python 3.10 or later.
+Use Ubuntu 24.04 LTS on an x86-64 machine with CPython 3.12. Other Linux distributions must provide glibc 2.39 or newer and CPython 3.12.
 
-Check that Git Large File Storage (LFS) is installed:
-
-```bash
-git lfs version
-```
-
-If the command fails, install Git LFS and the Python development package:
+On Ubuntu 24.04, install Git, Git Large File Storage (LFS), and the Python 3.12 development and virtual environment packages:
 
 ```bash
 sudo apt update
-sudo apt install -y git-lfs python3.10-dev
+sudo apt install -y git git-lfs python3.12-dev python3.12-venv libatomic1
 ```
+
+The Corstone-320 simulator requires `libatomic1`, which provides the `libatomic.so.1` shared library.
+
+Check the architecture, glibc version, Python version, and Git LFS installation:
+
+```bash
+uname -m
+ldd --version
+python3.12 --version
+git lfs version
+```
+
+Confirm that the architecture is `x86_64`, glibc is 2.39 or newer, and Python is 3.12.x. If you use VS Code over SSH or in a development container, check these requirements in the remote host or container where the extension runs.
 
 ## Create a Python environment
 
 Create a virtual environment so that the Arm ML Inference Advisor (MLIA) packages don't conflict with any existing ML framework environment:
 
 ```bash
-python3 -m venv mlia_env
+python3.12 -m venv mlia_env
 source mlia_env/bin/activate
 python -m pip install --upgrade pip
 ```
@@ -41,7 +48,7 @@ python -m pip install --upgrade pip
 MLIA uses plugins. The example target in the Learning Path is Ethos-U, so install the Ethos-U plugin package:
 
 ```bash
-pip install mlia-ethos-u
+python -m pip install mlia-ethos-u
 ```
 
 The Ethos-U plugin package depends on a compatible MLIA core package. Installing the target plugin is the recommended starting point because it brings in the matching MLIA core dependency.
