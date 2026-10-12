@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## Check your environment
 
-Use Ubuntu 24.04 LTS on an x86-64 machine with CPython 3.12. Other Linux distributions must provide glibc 2.39 or newer and CPython 3.12.
+Use Ubuntu 24.04 LTS on an x86-64 machine with CPython 3.12. Other Linux distributions need to provide glibc 2.39 or later and CPython 3.12.
 
 On Ubuntu 24.04, install Git, Git Large File Storage (LFS), and the Python 3.12 development and virtual environment packages:
 
@@ -31,7 +31,7 @@ python3.12 --version
 git lfs version
 ```
 
-Confirm that the architecture is `x86_64`, glibc is 2.39 or newer, and Python is 3.12.x. If you use VS Code over SSH or in a development container, check these requirements in the remote host or container where the extension runs.
+Confirm that the architecture is `x86_64`, glibc is 2.39 or newer, and Python is 3.12.x. If you use Visual Studio Code over SSH or in a development container, check these requirements in the remote host or container where the extension runs.
 
 ## Create a Python environment
 

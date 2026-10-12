@@ -11,14 +11,15 @@ learning_objectives:
   - Use the MLIA CLI to discover target profiles and backends.
   - Run compatibility and performance analysis on LiteRT, Tensor Operator Set Architecture (TOSA), and ExecuTorch artifacts.
   - Interpret MLIA JSON output, advice, Vela estimates, and Corstone whole-model NPU performance counters.
-  - (Optional) Automate checks with the MLIA Python API or inspect results with the MLIA & Model Explorer VS Code extension.
+  - (Optional) Automate checks with the MLIA Python API.
+  - (Optional) Inspect results with the MLIA and Model Explorer Visual Studio Code (VS Code) extension.
 
 prerequisites:
   - Ubuntu 24.04 LTS on x86-64, or another x86-64 Linux environment with glibc 2.39 or newer
   - CPython 3.12 (>=3.12,<3.13)
-  - Git and Git Large File Storage (LFS) to download the model artifacts
   - Basic familiarity with machine learning model deployment concepts
   - Basic familiarity with command-line tools
+  - VS Code 1.100 or later, if you want to use the MLIA and Model Explorer extension
 
 # START generated_summary_faq
 generated_summary_faq:
