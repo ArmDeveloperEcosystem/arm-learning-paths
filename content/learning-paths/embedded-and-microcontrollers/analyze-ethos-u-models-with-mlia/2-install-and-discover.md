@@ -31,7 +31,7 @@ python3.12 --version
 git lfs version
 ```
 
-Confirm that the architecture is `x86_64`, the glibc version is 2.39 or later, and Python is 3.12.x. If you use Visual Studio Code (VS Code) over SSH or in a development container, check these requirements in the remote host or container where you run the VS Code extension for Arm ML Inference Advisor (MLIA).
+Confirm that the architecture is `x86_64`, the glibc version is 2.39 or later, and Python is 3.12.x. For Visual Studio Code (VS Code) over SSH or in a development container, check these requirements where you plan to run the Arm ML Inference Advisor (MLIA) extension.
 
 ## Create a Python environment
 
