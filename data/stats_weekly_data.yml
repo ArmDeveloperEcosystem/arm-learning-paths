@@ -10320,6 +10320,7 @@
     anupras-mohapatra: 3
     arnaud-de-grandmaison: 7
     arnaud-grasset: 1
+    arulselvan-jeevaraj: 1
     aryan-bhusari: 1
     ash-naik: 1
     asher-dobrescu: 1
@@ -10383,6 +10384,7 @@
     johanna-skinnider: 2
     john-o'hara: 1
     johnny-nunez: 2
+    jonathan-davies: 2
     jose-emilio-munoz-lopez: 1
     joshua-marshall-law: 5
     julie-gaskin: 8
@@ -10423,8 +10425,7 @@
     owen-wu: 2
     pareena-verma: 103
     parichay-das: 1
-    paschalis-mpeis: 1
-    paschalis-mpeis,-jonathan-davies: 2
+    paschalis-mpeis: 3
     paul-howard: 3
     peter-harris: 1
     phalani-paladugu: 1
@@ -10451,9 +10452,7 @@
     steve-jordahl: 1
     steve-suzuki: 1
     sue-wu: 2
-    thirdai: 1
     tianyu-li: 2
-    tinkerblox: 1
     tirui-wu: 1
     tom-dunkle: 1
     tom-pilar: 1
@@ -10464,6 +10463,7 @@
     usamah-zaheer: 4
     varun-chari: 4
     victor-do-nascimento: 1
+    vinod-iyengar: 1
     waheed-brown: 4
     willen-yang: 1
     william-liang: 1
@@ -10477,9 +10477,9 @@
     zhengjun-xing: 2
     éliás-bálint: 1
   contributions:
-    internal: 543
-    external: 162
+    internal: 587
+    external: 120
   github:
-    stars: 154
+    stars: 153
     forks: 336
-    open_prs: 12
+    open_prs: 13
