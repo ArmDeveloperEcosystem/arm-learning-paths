@@ -126,8 +126,10 @@ Select **advice** as the overlay in **Current Analysis Run** or Model Explorer t
 
 ![The selected softmax node has NPU placement and advice about a suboptimal SOFTMAX activation, showing that a supported operation can still receive performance advice.#center](images/vscode-softmax-advice.png "Locate the Softmax performance advice")
 
-The advice identifies `SOFTMAX` as a suboptimal activation for NPU performance. The operation is supported, so the model can still map fully to the NPU, but it's a candidate for optimization. You can choose to change the model, after which you can rerun MLIA to compare compatibility and performance estimates. After a rerun, you can check that prediction accuracy and any required probability outputs still meet your application's needs.
+The advice identifies `SOFTMAX` as a suboptimal activation for NPU performance. The operation is supported, so the model can still map fully to the NPU, but it's a candidate for optimization. You can choose to change the model, after which you can rerun MLIA to compare compatibility and performance estimates. After a rerun, you can check whether the prediction accuracy and any required probability outputs still meet the needs of your application.
 
 ## What you've accomplished
 
-You've set up the MLIA extension, analyzed a model for Ethos-U, and inspected compatibility, model metrics, operation overlays, and advice in Model Explorer. You can now use the same workflow to compare other supported model artifacts or investigate a revised model.
+You've set up the MLIA extension, analyzed a model for Ethos-U, and inspected compatibility, model metrics, operation overlays, and advice in Model Explorer. 
+
+You can now use the same workflow to compare other supported model artifacts or investigate a revised model.
