@@ -8,10 +8,10 @@ key_ip:
 maintopic: true
 pinned_learning_paths:
 - firecracker-ai-sandbox
+- nested-virtualization
+- arm-mcp-server
 - memory-subsystem
 - sve2-match
-- arm-mcp-server
-- learning-paths/cross-platform/vectorization-comparison
 - performix-microarchitecture
 operatingsystems_filter:
 - Android: 3
@@ -85,8 +85,8 @@ tools_software_languages_filter:
 - Azure: 2
 - Azure CLI: 5
 - Azure Portal: 1
-- Bash: 9
 - bash: 2
+- Bash: 9
 - Bastion: 3
 - BenchMARL: 1
 - Benchstat: 1
@@ -337,8 +337,8 @@ tools_software_languages_filter:
 - Trusted Firmware: 1
 - Trustee: 2
 - TSan: 1
-- TuxMake: 1
 - tuxmake: 1
+- TuxMake: 1
 - TypeScript: 2
 - Ubuntu: 1
 - Vectorscan: 1
@@ -366,8 +366,8 @@ tools_software_languages_filter:
 - ZooKeeper: 1
 weight: 1
 platforms_filter:
-- Arm AGI CPU: 20
-- AWS Graviton: 97
+- Arm AGI CPU: 25
+- AWS Graviton: 98
 - Google Axion: 118
 - Microsoft Azure Cobalt: 102
 - Oracle Cloud Infrastructure (OCI) Ampere Compute: 61

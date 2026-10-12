@@ -20,6 +20,7 @@ z_local_saved/
 /.python-version
 *.iml
 *.xml
+!layouts/index.coveoindex.xml
 
 # CTags symbol index
 tags

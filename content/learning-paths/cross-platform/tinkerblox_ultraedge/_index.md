@@ -63,7 +63,7 @@ generated_summary_faq:
       system state and troubleshoot common connection and architecture issues.
 # END generated_summary_faq
 
-author: Tinkerblox
+author: Arulselvan Jeevaraj
 
 generate_summary_faq: false
 rerun_summary: false
