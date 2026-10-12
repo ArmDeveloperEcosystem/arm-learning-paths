@@ -309,19 +309,17 @@ With frequent matches, early termination reduces the benefit of processing multi
 
 ### Interpret the results
 
-This pattern makes SVE2 MATCH particularly well-suited for applications where matches are rare but important to find, such as:
-
-- Searching for specific patterns in large datasets
-- Filtering operations with high selectivity
-- Security applications looking for specific signatures
-
 The unrolled implementation performs better in most of these measurements, but not at every hit rate:
 
 - When there are very low hit rates, the implementation improves the 0% case from 101.98 times to 121.09 times for 8-bit. It improves the 0% case from 3.13 times to 4.02 times for 16-bit.
 - When there are low and medium hit rates, the implementation improves performance for both element sizes. The largest gains can be seen in the 8-bit 0.01% case.
 - When there are high hit rates, the implementation performs similarly for 16-bit data. It's slightly slower than the basic SVE2 MATCH implementation for 8-bit data.
 
-These results demonstrate that loop unrolling and prefetching are most useful when the scan processes large portions of the array before finding a match.
+These results demonstrate that loop unrolling and prefetching are most useful when the scan processes large portions of the array before finding a match. Such applications include:
+
+- Searching for specific patterns in large datasets
+- Filtering operations with high selectivity
+- Security applications looking for specific signatures
 
 ## What you've accomplished
 
