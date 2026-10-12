@@ -17,45 +17,26 @@ Use the public `mobilenet_v1_0.25_128_quant.tflite` variant. It keeps the Mobile
 These are separately trained public model variants, not the same weights with a resized input. Their weights and quantization parameters differ. The TensorFlow model catalog reports lower ImageNet accuracy for the smaller variant. This exercise compares estimated workload cost; it doesn't prove that the smaller model is an acceptable replacement for your application. Validate task accuracy, preprocessing, and runtime behavior before deployment.
 {{% /notice %}}
 
-## Download and convert the smaller variant
+## Download the smaller variant
 
 From the same `mlia-demo` directory, download the versioned model archive and verify the extracted file:
 
 ```bash
-curl --fail --location \
-  https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_0.25_128_quant.tgz \
-  --output mlia-demo-models/mobilenet_v1_0.25_128_quant.tgz
-tar -xzf mlia-demo-models/mobilenet_v1_0.25_128_quant.tgz \
-  -C mlia-demo-models ./mobilenet_v1_0.25_128_quant.tflite
-printf '%s  %s\n' \
-  3799e7cdb3ec44beacaf47ef5c884111c919e51bb50b34ac836244b08d4b953b \
-  mlia-demo-models/mobilenet_v1_0.25_128_quant.tflite \
-  | sha256sum --check
-tosa-converter-for-tflite \
-  mlia-demo-models/mobilenet_v1_0.25_128_quant.tflite \
-  --text --emit-debug-info \
-  -o mlia-demo-models/smaller.tosamlir
-test -s mlia-demo-models/smaller.tosamlir
+curl -fL https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_0.25_128_quant.tgz -o models/smaller.tgz
+tar -xzf models/smaller.tgz -C models ./mobilenet_v1_0.25_128_quant.tflite
+mv models/mobilenet_v1_0.25_128_quant.tflite models/smaller.tflite
+echo "3799e7cdb3ec44beacaf47ef5c884111c919e51bb50b34ac836244b08d4b953b  models/smaller.tflite" | sha256sum --check
 ```
 
-The checksum check reports `OK`, and the converter writes `mlia-demo-models/smaller.tosamlir`.
+The checksum check reports `models/smaller.tflite: OK`. Pass this file directly to MLIA, as you did for the baseline.
 
 ## Recheck compatibility and performance
 
-Keep the original target profile and backend for both checks:
+Keep the original target profile for both checks. MLIA selects the same backend automatically:
 
 ```bash
-mlia check mlia-demo-models/smaller.tosamlir \
-  --target-profile neural-technology \
-  --backend nx-performance-estimator \
-  --compatibility \
-  --output-dir runs/smaller-compatibility
-
-mlia check mlia-demo-models/smaller.tosamlir \
-  --target-profile neural-technology \
-  --backend nx-performance-estimator \
-  --performance \
-  --output-dir runs/smaller
+mlia check models/smaller.tflite --target-profile neural-technology --compatibility --output-dir runs/smaller-compatibility
+mlia check models/smaller.tflite --target-profile neural-technology --performance --output-dir runs/smaller
 ```
 
 ## Compare standardized metrics
@@ -100,6 +81,6 @@ Fewer cycles, shorter inference times, and higher throughput indicate better per
 
 ## What you've accomplished and what's next
 
-You've installed MLIA from public PyPI packages, converted public pretrained models, validated operator compatibility, and compared NX performance estimates under a consistent target configuration. You can now apply the workflow to your own model: establish a baseline, inspect the breakdowns, make a focused change, recheck compatibility and estimates, then validate accuracy and performance on your deployment runtime.
+You've analyzed two public LiteRT models directly with MLIA and compared their NX performance estimates under the same target profile. For your own model, keep that profile fixed while checking each change. Validate the model's accuracy and runtime behavior before deployment.
 
 If you have compatible hardware, continue to [(Optional) Run and profile the model on an NX device](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/7-run-on-nx-device/). Otherwise, you've completed the estimator workflow.

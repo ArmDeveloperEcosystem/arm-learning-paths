@@ -1,6 +1,6 @@
 ---
-title: Download and convert a public baseline model
-description: Download a public quantized MobileNet V1 classifier, verify its checksum, and convert the LiteRT model to TOSA before MLIA analysis.
+title: Download a public baseline model
+description: Download a public quantized MobileNet V1 classifier, verify its checksum, and prepare it for direct analysis with MLIA.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -15,50 +15,24 @@ The model has quantized eight-bit weights and activations, with unsigned eight-b
 
 ## Download and verify the model
 
-From `mlia-demo`, create directories for models and reports, download the versioned public archive, and extract only the LiteRT model:
+From `mlia-demo`, download the versioned public archive and extract the LiteRT model. Name your local copy `baseline.tflite`:
 
 ```bash
-mkdir -p mlia-demo-models runs
-curl --fail --location \
-  https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_0.25_224_quant.tgz \
-  --output mlia-demo-models/mobilenet_v1_0.25_224_quant.tgz
-tar -xzf mlia-demo-models/mobilenet_v1_0.25_224_quant.tgz \
-  -C mlia-demo-models ./mobilenet_v1_0.25_224_quant.tflite
-printf '%s  %s\n' \
-  ce8f61fe3e4e29560c4ea8038e4b91eb354be330fc428348b9645bd1e7de03bf \
-  mlia-demo-models/mobilenet_v1_0.25_224_quant.tflite \
-  | sha256sum --check
+mkdir -p models runs
+curl -fL https://storage.googleapis.com/download.tensorflow.org/models/mobilenet_v1_2018_08_02/mobilenet_v1_0.25_224_quant.tgz -o models/baseline.tgz
+tar -xzf models/baseline.tgz -C models ./mobilenet_v1_0.25_224_quant.tflite
+mv models/mobilenet_v1_0.25_224_quant.tflite models/baseline.tflite
+echo "ce8f61fe3e4e29560c4ea8038e4b91eb354be330fc428348b9645bd1e7de03bf  models/baseline.tflite" | sha256sum --check
 ```
 
 The expected final output is:
 
 ```output
-mlia-demo-models/mobilenet_v1_0.25_224_quant.tflite: OK
+models/baseline.tflite: OK
 ```
 
-Keep the model in your working directory. No model binaries need to be added to the Learning Paths repository.
-
-## Convert the model before analysis
-
-Use the converter installed with `mlia-converters-litert` to create a textual TOSA MLIR artifact. Preserve debug locations to help associate analysis results with source operators:
-
-```bash
-tosa-converter-for-tflite \
-  mlia-demo-models/mobilenet_v1_0.25_224_quant.tflite \
-  --text --emit-debug-info \
-  -o mlia-demo-models/baseline.tosamlir
-test -s mlia-demo-models/baseline.tosamlir
-```
-
-The output is similar to:
-
-```output
-[WARNING] Debug info emission is enabled; output size and conversion time may increase significantly for large models.
-[INFO] TOSA MLIR (text) written to: mlia-demo-models/baseline.tosamlir
-```
-
-Use the `.tosamlir` extension for textual TOSA MLIR. A `.tosa` FlatBuffer is a different serialization; don't rename this text file to imply that it's a FlatBuffer. If conversion fails, resolve that failure before starting MLIA analysis.
+Pass `models/baseline.tflite` directly to MLIA in the next section. MLIA runs the installed converter and saves the intermediate artifacts with its reports. Keep the downloaded model in your working directory; no model binaries need to be added to the Learning Paths repository.
 
 ## What you've accomplished and what's next
 
-You've downloaded and verified a public quantized baseline, then converted it to TOSA. Next, you'll install the bundled estimator and check whether the model's operators are supported.
+You've downloaded and verified the quantized MobileNet baseline. Next, you'll check whether its operators are supported.

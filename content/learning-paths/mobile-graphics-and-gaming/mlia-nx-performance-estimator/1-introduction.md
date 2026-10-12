@@ -11,7 +11,7 @@ layout: learningpathall
 
 Arm ML Inference Advisor (MLIA) helps you evaluate a model for an Arm target before you build a deployment pipeline or tune an application on a device. You provide a model and a target profile, then inspect compatibility checks, performance metrics, and advice.
 
-In this Learning Path, you'll use the `mlia-neural-technology` package to evaluate two pretrained, quantized MobileNet V1 image classifiers from TensorFlow's public model catalog. You'll compare a baseline with a smaller-input variant under the same Neural Technology configuration. You don't need a model stored in this repository or a device to run the estimator.
+Use the `mlia-neural-technology` package to evaluate two pretrained, quantized MobileNet V1 image classifiers from TensorFlow's public model catalog. You'll compare a baseline with a smaller-input variant under the same Neural Technology configuration. You don't need a model stored in this repository or a device to run the estimator.
 
 The tested example reduces estimated total cycles from `136,962` to `79,824`. These are compiler estimates, not device measurements or an accuracy result. The model comparison section explains the model and configuration assumptions behind this comparison.
 
@@ -25,15 +25,13 @@ The report-reading approach carries across targets, but their backends, supporte
 
 ## Understand the conversion and analysis flow
 
-The Neural Accelerator (NX) Performance Estimator backend evaluates Arm Neural Technology targets. In this workflow, the tools perform the following steps:
+The Neural Accelerator (NX) Performance Estimator backend evaluates Arm Neural Technology targets. You download the models and pass their `.tflite` files directly to MLIA. With the LiteRT converter plugin installed, MLIA handles the conversion and analysis:
 
-1. Download a public LiteRT model in `.tflite` format.
-2. Convert it to Tensor Operator Set Architecture (TOSA) MLIR with the public LiteRT-to-TOSA converter.
-3. Check TOSA operator compatibility with MLIA and the ML SDK Model Converter.
-4. Convert the TOSA graph to a Vulkan Graph Format (VGF) artifact and run the NX Performance Estimator.
-5. Write standardized JSON results and detailed estimator artifacts.
+1. Convert the LiteRT model to Tensor Operator Set Architecture (TOSA) MLIR and check operator compatibility.
+2. Compile the graph to a Vulkan Graph Format (VGF) artifact and run the NX Performance Estimator for a performance check.
+3. Write standardized JSON results and the intermediate model artifacts to your output directory.
 
-You'll convert the models before analysis so that you can distinguish a conversion failure from an estimator failure. With the `mlia-converters-litert` plugin installed, MLIA can also perform that conversion automatically when you pass a `.tflite` file directly.
+You don't need to run a separate converter or manage intermediate model files.
 
 ## Select a target profile
 

@@ -40,14 +40,11 @@ cd mlia-demo
 python3.12 -m venv mlia-venv
 source mlia-venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install \
-  mlia==0.12.3 \
-  mlia-neural-technology==0.2.0 \
-  mlia-converters-litert==0.1.2
+python -m pip install mlia-neural-technology==0.2.0 mlia-converters-litert==0.1.2
 python -m pip check
 ```
 
-These are public PyPI packages. The Neural Technology plugin installs the ML SDK Model Converter and TOSA tools as dependencies. The LiteRT converter plugin supplies the `.tflite`-to-TOSA converter. You don't need TensorFlow, a GPU driver, or a separate model-training environment for this example.
+These are public PyPI packages. The Neural Technology plugin installs a compatible MLIA core, the ML SDK Model Converter, and TOSA tools as dependencies. The LiteRT converter plugin lets MLIA analyze `.tflite` files directly. You don't need TensorFlow, a GPU driver, or a separate model-training environment for this example.
 
 The expected final output is:
 
@@ -63,12 +60,11 @@ Verify the CLI and inspect the installed capabilities:
 mlia --help
 mlia target list
 mlia backend list
-tosa-converter-for-tflite --version
 ```
 
 Confirm that the target list includes `neural-technology` and both `NX-peak-12SC-8NX-600MHz` and `NX-sustained-12SC-8NX-350MHz`. The backend list includes `nx-performance-estimator`; before backend installation, its installed status is `no` and its installable status is `yes`.
 
-The estimator executable is bundled with the public wheel. You'll install it and review its license before the first compatibility check.
+The estimator executable is bundled with the public wheel. MLIA offers to install it during your first check, so you don't need a separate backend installation command.
 
 {{% notice Troubleshooting %}}
 If pip reports that no matching distribution exists for `mlia-neural-technology`, check the three host requirements again and upgrade pip inside the environment. A virtual environment doesn't change the host architecture or glibc version. Don't substitute an older Python version or Ubuntu 22.04 for this release.
@@ -76,4 +72,4 @@ If pip reports that no matching distribution exists for `mlia-neural-technology`
 
 ## What you've accomplished and what's next
 
-You've installed the public MLIA core, Neural Technology plugin, and LiteRT converter, and checked their dependencies. Next, you'll download a pretrained MobileNet baseline and convert it to TOSA.
+You've installed the Neural Technology and LiteRT converter plugins, along with their dependencies. Next, you'll download a pretrained MobileNet baseline to analyze with MLIA.

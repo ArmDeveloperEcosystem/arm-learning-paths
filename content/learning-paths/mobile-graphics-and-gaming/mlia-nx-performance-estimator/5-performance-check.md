@@ -12,14 +12,10 @@ layout: learningpathall
 Run a performance check with the same model and target profile:
 
 ```bash
-mlia check mlia-demo-models/baseline.tosamlir \
-  --target-profile neural-technology \
-  --backend nx-performance-estimator \
-  --performance \
-  --output-dir runs/baseline
+mlia check models/baseline.tflite --target-profile neural-technology --performance --output-dir runs/baseline
 ```
 
-In the tested configuration, the model takes an estimated `136,962` total cycles and `0.09131 ms` per inference. These values describe the configured accelerator workload, and the actual values on the host may differ. 
+With the tested packages and `neural-technology` profile, expect `136,962` estimated total cycles and about `0.09131 ms` per inference. These are compiler estimates, not timings measured on a device.
 
 ## Locate and read the reports
 
@@ -30,12 +26,12 @@ With `--output-dir runs/baseline`, the key files are:
 | `mlia-output.json` | Standardized MLIA result, including model metadata, metrics, entities, breakdowns, and advice |
 | `nx_performance_statistics.json` | Detailed chain and cascade performance statistics |
 | `nx-performance-estimator/` | Estimator summaries and raw performance, timing, and debug databases |
-| `ml-sdk-model-converter/` | Intermediate VGF artifact produced from TOSA |
+| `ml-sdk-model-converter/` | TOSA intermediates and `baseline.tosa.vgf`, produced automatically from the LiteRT model |
 | `logs/mlia.log` | Analysis and diagnostic log |
 
 By default MLIA writes to `mlia-output` in the current directory, with the report in `mlia-output.json`.
 
-Read the model-level performance metrics:
+Read the main cycle and inference estimates:
 
 ```bash
 python - <<'PY'
@@ -45,15 +41,24 @@ from pathlib import Path
 report = json.loads(Path("runs/baseline/mlia-output/mlia-output.json").read_text())
 result = next(result for result in report["results"] if result["kind"] == "performance")
 assert result["status"] == "ok", "Review the performance report for errors."
-for metric in result["metrics"]:
-    if "value" in metric:
-        print(f"{metric['name']}: {metric['value']} {metric.get('unit', '')}")
-    else:
-        print(f"{metric['name']}: unavailable ({metric.get('reason', 'not reported')})")
+metrics = {metric["name"]: metric for metric in result["metrics"]}
+for name in ("total_cycles", "compute_cycles", "dram_cycles", "inference_time", "inferences_per_second"):
+    metric = metrics[name]
+    print(f"{name}: {metric['value']:.6g} {metric['unit']}")
 PY
 ```
 
-The metrics include estimated `total_cycles`, `inference_time`, `inferences_per_second`, `compute_cycles`, `dram_cycles`, and `target_utilization`. 
+The expected output is:
+
+```output
+total_cycles: 136962 cycles
+compute_cycles: 34976 cycles
+dram_cycles: 94396 cycles
+inference_time: 0.091308 ms
+inferences_per_second: 10951.9 inferences/s
+```
+
+The full report also includes `target_utilization`, memory traffic, and compiled size.
 
 For the baseline, `dram_cycles` is `94,396`, compared with `34,976` compute cycles. This gives you a reason to investigate memory traffic.
 
@@ -72,16 +77,12 @@ The example uses Ethos-U and Vela metrics. For NX, use the metrics and chain-and
 
 For graph inspection without MLIA overlays, follow [Explore model artifacts with Model Explorer](/learning-paths/cross-platform/explore-model-artifacts-with-model-explorer/). Use its VGF adapter to inspect the compiled graph produced here. The adapter visualizes graph structure; it isn't the MLIA metrics-and-advice overlay plugin. Continue using `mlia-output.json` for the analysis results.
 
-## Compare a different built-in profile
+## (Optional) Compare a different built-in profile
 
 Keep the model unchanged when exploring a different target configuration. For example, run the peak profile into its own directory:
 
 ```bash
-mlia check mlia-demo-models/baseline.tosamlir \
-  --target-profile NX-peak-12SC-8NX-600MHz \
-  --backend nx-performance-estimator \
-  --performance \
-  --output-dir runs/baseline-peak
+mlia check models/baseline.tflite --target-profile NX-peak-12SC-8NX-600MHz --performance --output-dir runs/baseline-peak
 ```
 
 Differences here reflect the profile's system and compiler assumptions, not a model optimization. Return to `neural-technology` for the model comparison in the final section.

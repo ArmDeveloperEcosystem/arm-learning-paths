@@ -1,40 +1,25 @@
 ---
-title: Install the NX backend and check operator compatibility
-description: Install the bundled NX Performance Estimator after reviewing its license, then check the public MobileNet baseline and validate the compatibility report.
+title: Check baseline operator compatibility
+description: Analyze the public MobileNet LiteRT model directly with MLIA, let it install the bundled NX backend if needed, and check operator compatibility.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install the bundled estimator
-
-Install the backend from the public wheel's bundled payload:
-
-```bash
-mlia backend install nx-performance-estimator
-mlia backend list
-```
-
-{{% notice License %}}
-The installer presents the Arm license for the bundled NX Performance Estimator and asks whether you accept it. Read the terms and continue only if you agree.
-{{% /notice %}}
-
-After installation, the backend list shows `nx-performance-estimator` as installed.
-
 ## Check the baseline operators
 
-Run a compatibility check on the converted model. Use a dedicated output directory to keep this report separate from performance results:
+Pass `models/baseline.tflite` to MLIA. It converts the model automatically and selects the backend for the `neural-technology` target profile:
+
+{{% notice License %}}
+On your first check, MLIA offers to install the bundled NX Performance Estimator. Confirm installation when prompted, then read its Arm license and continue only if you agree. If the backend is already installed, MLIA skips this setup.
+{{% /notice %}}
 
 ```bash
-mlia check mlia-demo-models/baseline.tosamlir \
-  --target-profile neural-technology \
-  --backend nx-performance-estimator \
-  --compatibility \
-  --output-dir runs/baseline-compatibility
+mlia check models/baseline.tflite --target-profile neural-technology --compatibility --output-dir runs/baseline-compatibility
 ```
 
-The `runs` parent directory was created during model preparation. MLIA version `0.12.3` creates the per-run directory, but needs its parent to exist.
+Each check writes to its own directory under `runs`, created during the model download.
 
 The standardized report is written to `runs/baseline-compatibility/mlia-output/mlia-output.json`. Read the compatibility result and validate its status:
 
@@ -62,12 +47,12 @@ Non-passing checks: 0
 
 ## Interpret compatibility correctly
 
-The compatibility result includes `checks`, source-operator `entities`, and metrics. For this model, `accelerator_operator_percentage` is `100.0`. The compatibility producer is `ml-sdk-model-converter`, even though you selected the NX analysis backend: operator support is checked during conversion.
+The compatibility result includes `checks`, source-operator `entities`, and metrics. For this model, `accelerator_operator_percentage` is `100.0`. MLIA reports `ml-sdk-model-converter` as the compatibility producer because operator support is checked during conversion.
 
 A passing result means that this graph can proceed through the supported conversion flow. It doesn't establish classification accuracy, guarantee a deployable application, or measure device performance.
 
-If a check fails, inspect the report's non-passing checks and linked entities. Verify that you're analyzing the intended TOSA file and that the package versions match the setup. For direct `.tflite` inputs, confirm that `mlia-converters-litert` is installed. PyTorch `.pt2` and ExecuTorch `.pte` inputs need a different converter plugin and aren't part of this example.
+If a check fails, inspect the report's non-passing checks and linked entities. Verify that you're analyzing `models/baseline.tflite` and that both plugins from the environment setup are installed.
 
 ## What you've accomplished and what's next
 
-You've installed the estimator and validated the baseline's operator compatibility. Next, you'll collect performance estimates and inspect the metrics and scheduling breakdowns.
+You've checked the baseline's operator compatibility without a manual conversion step. Next, you'll collect performance estimates and inspect their breakdowns.

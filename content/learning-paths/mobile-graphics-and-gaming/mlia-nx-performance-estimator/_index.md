@@ -9,12 +9,12 @@ who_is_this_for: This Learning Path is for ML engineers and graphics developers 
 
 learning_objectives:
     - Install the public MLIA Neural Technology plugin and discover its target profiles and backend
-    - Download public quantized MobileNet models and convert them to TOSA
+    - Analyze public quantized MobileNet models with automatic model conversion
     - Check operator compatibility and interpret NX Performance Estimator reports
     - Compare model variants under the same target configuration and identify accuracy tradeoffs
 
 prerequisites:
-    - An Ubuntu 24.02 development machine
+    - An Ubuntu development host
     - Basic familiarity with Python, command-line tools, and model deployment
     - (Optional) An NX-capable Android device
 
