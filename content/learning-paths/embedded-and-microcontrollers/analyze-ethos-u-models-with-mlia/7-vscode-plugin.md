@@ -13,8 +13,6 @@ layout: "learningpathall"
 
 You can use the Arm ML Inference Advisor (MLIA) Visual Studio Code (VS Code) extension to move from a CLI view to using MLIA within your IDE. The extension also supports visualizing models in Model Explorer, with data from MLIA overlaid onto the model graphs.
 
-Ensure you have [VS Code](https://code.visualstudio.com/download?_exp_download=d53503e735) 1.100 or later on your local machine.
-
 If you completed the earlier steps on the same local machine, do the following:
 
 1. Open VS Code on the local machine.

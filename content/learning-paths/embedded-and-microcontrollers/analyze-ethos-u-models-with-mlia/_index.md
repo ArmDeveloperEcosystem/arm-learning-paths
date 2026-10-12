@@ -15,11 +15,11 @@ learning_objectives:
   - (Optional) Inspect results with the MLIA and Model Explorer Visual Studio Code (VS Code) extension.
 
 prerequisites:
-  - Ubuntu 24.04 LTS on x86-64, or another x86-64 Linux environment with glibc 2.39 or newer
+  - Ubuntu 24.04 LTS on x86-64, or another x86-64 Linux environment with glibc 2.39 or later
   - CPython 3.12 (>=3.12,<3.13)
   - Basic familiarity with machine learning model deployment concepts
   - Basic familiarity with command-line tools
-  - VS Code 1.100 or later, if you want to use the MLIA and Model Explorer extension
+  - VS Code [1.100 or later](https://code.visualstudio.com/download?_exp_download=d53503e735) on your local machine, if you want to use the MLIA and Model Explorer extension
 
 # START generated_summary_faq
 generated_summary_faq:
