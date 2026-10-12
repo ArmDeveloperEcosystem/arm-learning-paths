@@ -1,6 +1,10 @@
 ---
 title: Deploy Ceph RBD block storage on an Arm AGI CPU host
 
+draft: true
+cascade:
+    draft: true
+    
 description: Build a Ceph cluster in Ubuntu 26.04 Arm64 virtual machines, use an RBD block volume, and extend the cluster from one node to three nodes on an Arm AGI CPU host.
 
 minutes_to_complete: 90
