@@ -10292,8 +10292,8 @@
     open_prs: 13
 - date: '2026-10-12'
   content:
-    total: 595
-    install-guides: 104
+    total: 596
+    install-guides: 105
     automotive: 14
     cross-platform: 56
     embedded-and-microcontrollers: 90
@@ -10482,4 +10482,4 @@
   github:
     stars: 153
     forks: 336
-    open_prs: 13
+    open_prs: 10
