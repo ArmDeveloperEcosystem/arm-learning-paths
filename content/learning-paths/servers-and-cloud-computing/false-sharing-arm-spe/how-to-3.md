@@ -16,14 +16,14 @@ Use a text editor to copy and paste the C example code below into a file named `
 
 The code is adapted from [Joe Mario](https://github.com/joemario/perf-c2c-usage-files) and is discussed thoroughly in the Arm Statistical Profiling Extension Whitepaper.
 
-```cpp
+```c
 /*
  * This is an example program to show false sharing between
  * numa nodes.  
  *
  * It can be compiled two ways:
- *    gcc -g false_sharing_example.c -pthread -lnuma -o false_sharing.exe
- *    gcc -g false_sharing_example.c -pthread -lnuma -DNO_FALSE_SHARING -o no_false_sharing.exe
+ *    gcc -g false_sharing_example.c -pthread -o false_sharing.exe -lnuma
+ *    gcc -g false_sharing_example.c -pthread -DNO_FALSE_SHARING -o no_false_sharing.exe -lnuma
  *
  * The -DNO_FALSE_SHARING macro reduces the false sharing by expanding the shared data
  * structure into two different cachelines, (and it runs faster).
@@ -239,9 +239,9 @@ int main ( int argc, char *argv[] )
   int thread_cnt = atoi(argv[1]);
 
   max_node_num = numa_max_node();
+  int node_cnt = max_node_num + 1;
   if ( max_node_num == 0 )
     max_node_num = 1;
-  int node_cnt = max_node_num + 1;
 
   // Use "thread_cnt" threads per node.
   num_threads = (max_node_num +1) * thread_cnt;
@@ -328,11 +328,11 @@ typedef struct _buf {
 Compile the example with the commands: 
 
 ```bash
-gcc -lnuma -pthread false_sharing_example.c -o false_sharing
-gcc -lnuma -pthread false_sharing_example.c -DNO_FALSE_SHARING -o no_false_sharing
+gcc -pthread false_sharing_example.c -o false_sharing -lnuma
+gcc -pthread false_sharing_example.c -DNO_FALSE_SHARING -o no_false_sharing -lnuma
 ```
 
-Run both binaries with the command line argument of 1. Both binaries successfully return a 0 exit status but the binary with the false sharing runs almost 2x slower!
+Run both binaries with the command line argument of 1. Both binaries successfully return a 0 exit status, but the binary with false sharing runs slower. The performance difference varies by system.
 
 ```bash
 time ./false_sharing 1
@@ -340,15 +340,15 @@ time ./no_false_sharing 1
 ```
 
 ```output
-real    0m12.101s
-user    0m18.520s
+real    0m6.962s
+user    0m9.093s
 sys     0m0.000s
 ...
-real    0m6.496s
-user    0m8.869s
+real    0m5.537s
+user    0m6.811s
 sys     0m0.000s
 ```
 
 ## Summary
-In this section, you ran a hands-on C example to see how false sharing can significantly degrade performance in multithreaded applications. By comparing two versions of the same program, one with aligned memory access and one without, you saw how something as subtle as cache line layout can result in a 2x difference in runtime. This practical example sets the foundation for using Perf C2C to capture and analyze real cache line sharing behavior in the next section.
 
+In this section, you ran a hands-on C example to see how false sharing can significantly degrade performance in multithreaded applications. By comparing two versions of the same program, one with aligned memory access and one without, you saw how something as subtle as cache line layout can affect runtime. This practical example sets the foundation for using Perf C2C to capture and analyze real cache line sharing behavior in the next section.

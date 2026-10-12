@@ -42,8 +42,9 @@ generated_summary_faq:
     You'll then inspect TOSA intermediate graphs, relate TOSA fragments to
     delegation boundaries, and compare a VGF-backed PTE with the standalone VGF
     graph used by workflows with the ML extensions for Vulkan. Finally, you'll
-    open ETRecord files and load their matching ETDump data to identify whether
-    delegate calls or non-delegated operators dominate runtime.
+    open ETRecord files and load their matching ETDump data to inspect mapped
+    operation timings, and identify when ExecuTorch Inspector is needed for aggregate
+    delegate timings.
   faqs:
   - question: Which extensions should I enable to load the artifacts used here?
     answer: >-
@@ -65,8 +66,8 @@ generated_summary_faq:
   - question: How do I connect runtime data to the exported graph?
     answer: >-
       Open the matching `.etrecord` file and its `.etdp` profiling data with the ExecuTorch extension enabled.
-      Model Explorer overlays align these data with graph nodes so you can correlate structure
-      with runtime behavior.
+      Model Explorer overlays align profiling events with matching graph nodes so you can
+      correlate structure with runtime behavior. Delegate-call timings aren't included.
 # END generated_summary_faq
 
 author:

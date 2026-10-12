@@ -87,7 +87,7 @@ Here's an explanation of each of the arguments passed to the scanner tool:
 
 `{result_file_name}`: The name of the exported results file (without the extension).
 
-`{arch}`: Target processor architecture. It follows the same semantics as GCC's `-march`, specifying the target architecture and feature set. Supported: `armv8-a` (default) and `armv8.6-a+sve2`.
+`{arch}`: Target processor architecture. It follows the same semantics as GCC's `-march`, specifying the target architecture and feature set. Supported: `armv8-a` (default), `armv8.6-a+sve2`, `armv9-a`, and `armv9.2-a`. Run the scanner with `--help` to check the architectures supported by your checkout.
 
 `{scan_path}`: The path to the code you want to scan.
 

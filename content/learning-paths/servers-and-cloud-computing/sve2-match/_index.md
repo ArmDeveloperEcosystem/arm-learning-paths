@@ -12,7 +12,7 @@ learning_objectives:
   - Analyze speedups and efficiency gains on Arm Neoverse-based instances with SVE2.
 
 prerequisites:
-- Access to an [AWS Graviton4, Google Axion, or Azure Cobalt 100 virtual machine](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider.
+- Access to an [AWS Graviton, Google Axion, or Azure Cobalt 100 virtual machine](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an Arm AGI CPU platform. 
 
 author: Pareena Verma
 
@@ -24,6 +24,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Performance and Architecture
 platforms:
+  - Arm AGI CPU
   - AWS Graviton
   - Microsoft Azure Cobalt
   - Google Axion

@@ -87,6 +87,7 @@ When you want to try another runtime or workload, return to the following table:
 | [SmolLM2 360M Instruct](https://huggingface.co/Arm/smollm2-360m-instruct-8da4w-xnnpack-executorch) | ExecuTorch 1.1.0 | Text generation | `smollm2-executorch` |
 | [BGE Base English v1.5](https://huggingface.co/Arm/bge-base-en-v1.5-int8-litert) | LiteRT 1.4.2 | Text embedding | `bge-base-litert` |
 | [TinyLlama 1.1B Chat](https://huggingface.co/Arm/tinyllama-1-1b-chat-onnx-genai-int4-kquantlast-emb-int8-vivo-x300) | ONNX Runtime GenAI | Text generation | `tinyllama-onnx-genai` |
+| [Llama 3.2 1B Instruct](https://huggingface.co/Arm/llama-3-2-1b-instruct-onnx-genai-int4-kquantlast-emb-int8-vivo-x300) | ONNX Runtime GenAI | Text generation | `llama-3-2-onnx-genai` |
 
 The model and runtime change together in these examples, so their results and timings aren't controlled runtime benchmarks.
 

@@ -10,7 +10,7 @@ layout: learningpathall
 
 ## Understand llama.cpp multi-threading architecture
 
-In this section, you use Arm Streamline to analyze how llama.cpp distributes inference work across CPU threads. You configure the thread count and CPU affinity, capture execution data, and inspect Core Map, Cluster Map, and Annotation Channel views to identify thread behavior, load-balancing issues, and optimization opportunities.
+In this section, you use Arm Streamline to analyze how llama.cpp distributes inference work across CPU threads. You configure the thread count and CPU affinity, capture execution data, and inspect Core Map, Cluster Map, and channel annotation views to identify thread behavior, load-balancing issues, and optimization opportunities.
 
 The CPU backend in llama.cpp uses multiple cores and threads to accelerate operator execution. Understanding how work is distributed across threads helps you optimize performance on Arm processors.
 
@@ -51,9 +51,9 @@ Collect profiling data with Streamline, then select Core Map and Cluster Map mod
 
 In the screenshot above, you can observe that two threads are created and they are running on CPU core0 and CPU core1, respectively. This confirms that the thread affinity configuration is working correctly.
 
-You can also use the Annotation Channel view to analyze operator execution on a per-thread basis. Each thread generates its own annotation channel independently, allowing you to see how work is distributed across parallel execution units.
+You can also use the channel annotation view to analyze operator execution on a per-thread basis. Each thread generates its own channel annotation independently, allowing you to see how work is distributed across parallel execution units.
 
-![Screenshot showing Streamline annotation channels with multiple threads executing the same tensor node simultaneously alt-text#center](images/multi_thread_annotation_channel.webp "Multi-thread annotation channels")
+![Screenshot showing Streamline channel annotations with multiple threads executing the same tensor node simultaneously alt-text#center](images/multi_thread_annotation_channel.webp "Multi-thread channel annotations")
 
 In the screenshot above, at the highlighted time, both threads are executing the same node. In this particular case, the node is the result_output linear layer. You can see how the workload is distributed across threads, with each thread processing a different portion of the matrix computation. This visualization helps identify load balancing issues and optimization opportunities in parallel execution.
 
@@ -61,7 +61,6 @@ In the screenshot above, at the highlighted time, both threads are executing the
 
 You have successfully completed the walkthrough of profiling an LLM model on an Arm CPU using advanced multi-threading analysis techniques.
 
-You now understand how to integrate Streamline annotations into LLM inference code for detailed profiling, capture and analyze performance data showing the distinct characteristics of Prefill and Decode stages, and use Annotation Channels to analyze individual operators and their execution patterns. Additionally, you can configure thread affinity and examine multi-threaded execution patterns across CPU cores while identifying performance bottlenecks and work distribution issues in parallel execution.
+You now understand how to integrate Streamline annotations into LLM inference code for detailed profiling, capture and analyze performance data showing the distinct characteristics of Prefill and Decode stages, and use channel annotations to analyze individual operators and their execution patterns. Additionally, you can configure thread affinity and examine multi-threaded execution patterns across CPU cores while identifying performance bottlenecks and work distribution issues in parallel execution.
 
 These skills enable you to optimize LLM performance on Arm CPUs by understanding where computational resources are spent and how to leverage multi-core parallelism effectively. By combining Arm Streamline with a solid understanding of llama.cpp threading architecture, you can visualize model execution, analyze code efficiency, and identify opportunities for optimization.
-

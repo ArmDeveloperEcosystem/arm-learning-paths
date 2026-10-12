@@ -69,8 +69,8 @@ sudo yum install gcc-gfortran -y
 If `sudo` is not available become _root_ and omit the `sudo`.
 
 ```console
-sudo yum update -y
-sudo yum install gcc-gfortran -y
+yum update -y
+yum install gcc-gfortran -y
 ```
 
 ## Do I need to set up a product license for gfortran?

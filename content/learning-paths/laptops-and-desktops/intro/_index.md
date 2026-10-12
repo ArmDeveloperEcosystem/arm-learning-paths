@@ -24,6 +24,9 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
+    - Cortex-A
+    - Cortex-X
+    - Arm C1
 operatingsystems:
     - Linux
     - Windows

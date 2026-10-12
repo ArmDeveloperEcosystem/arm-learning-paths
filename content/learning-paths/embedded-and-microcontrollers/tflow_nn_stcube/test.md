@@ -78,7 +78,7 @@ plt.legend(loc='lower right')
 ```
 In this example, see that the training and validation accuracy start to converge after around 150 epochs. This means that the 200 epochs are enough to train the model. If you train the model for too many epochs, then the validation accuracy may drop due to overfitting. If you experience this, re-run [training](#train) with an appropriate epoch value.
 
-![output2](images/output2.PNG)
+![output2](images/output2.png)
 
 ## Investigate learning rate (optional)
 
@@ -103,7 +103,7 @@ plt.legend(loc='lower right')
 ```
 Expected output shown below:
 
-![output3](images/output3.PNG)
+![output3](images/output3.png)
 
 Now try a lower learning rate, which is 0.0001. Execute the code block. The graph shows the training and validation loss values decrease much more slowly. So, it is important to use a proper learning rate in training.
 
@@ -125,7 +125,7 @@ plt.legend(loc='lower right')
 
 Expected output shown below:
 
-![output4](images/output4.PNG)
+![output4](images/output4.png)
 
 With the model trained, you are now ready to test it.
 

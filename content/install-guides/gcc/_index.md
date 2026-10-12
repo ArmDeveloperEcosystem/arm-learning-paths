@@ -31,7 +31,7 @@ This section provides installation instructions for GCC targeting the Arm archit
 Use this option to install GCC using the Linux package manager and build applications on an Arm Linux system. 
 
 ## How do I use GCC as a cross-compiler on Arm Linux?
-Use this option to install GCC using the Linux package manager and build bare metal applications by cross compiling them for the Arm architecture from an x86 or Arm Linux host machine. Also, use this option to install and compile Linux applications from an x86 host for an Arm target. 
+Use this option to install GCC using the Linux package manager and build Linux applications by cross compiling them for the Arm architecture from an x86 or Arm Linux host machine. For bare-metal and embedded targets, use the Arm GNU Toolchain option below instead.
 
 ## How do I use GCC from the Arm GNU Toolchain?
-Use this option to download an install a version of GCC produced by Arm. It is available from the Arm Developer website and works on Linux, Windows, and macOS host machines. It supports bare-metal and Linux targets. 
+Use this option to download and install a version of GCC produced by Arm. It is available from the Arm Developer website and works on Linux, Windows, and macOS host machines. It supports bare-metal and Linux targets. 

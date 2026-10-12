@@ -16,13 +16,13 @@ Launching Model Explorer opens a webpage in your browser.
 
 {{< tabpane code=true >}}
   {{< tab header="All Learning Path extensions" language="bash">}}
-model-explorer --extensions=executorch_extension_model_explorer,tosa_adapter_model_explorer,vgf_adapter_model_explorer
+python -m model_explorer --extensions=executorch_extension_model_explorer,tosa_adapter_model_explorer,vgf_adapter_model_explorer
   {{< /tab >}}
   {{< tab header="ExecuTorch extension" language="bash">}}
-model-explorer --extensions=executorch_extension_model_explorer
+python -m model_explorer --extensions=executorch_extension_model_explorer
   {{< /tab >}}
   {{< tab header="No adapters" language="bash">}}
-model-explorer
+python -m model_explorer
   {{< /tab >}}
 {{< /tabpane >}}
 

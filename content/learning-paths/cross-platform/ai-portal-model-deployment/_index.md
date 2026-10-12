@@ -13,7 +13,7 @@ learning_objectives:
     - Deploy a model using Topo, Arm's deployment tool
 
 prerequisites:
-    - An Arm Linux target device to deploy models on, with enough memory and storage for the selected model and application
+    - An Arm Linux target device, such as an Arm AGI CPU, with enough memory and storage to run the selected model and application    
     - A development host running Windows, macOS, or Linux with internet access and permission to install tools
     - Python 3 with `pip` and virtual environment support
     - Docker and Topo to run containerized code examples from the AI Portal
@@ -87,8 +87,19 @@ armips:
 tools_software_languages:
     - Python
     - Docker
+    - Topo
+    - Arm AI Portal
+    - MCP
+    - Hugging Face
+    - ONNX Runtime
+    - ExecuTorch
 operatingsystems:
     - Linux
+
+### Cross-platform metadata only
+platforms:
+    - Arm AGI CPU
+    - AWS Graviton
 
 further_reading:
     - resource:

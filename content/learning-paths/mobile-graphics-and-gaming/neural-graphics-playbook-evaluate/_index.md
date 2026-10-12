@@ -1,5 +1,5 @@
 ---
-title: Arm Neural Technology Playbook - Evaluate
+title: Arm Neural Graphics Playbook - Evaluate
 description: Evaluate whether Arm Neural Technology techniques such as NFRU and NSSD are a fit for your game.
 minutes_to_complete: 45
 

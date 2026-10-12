@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## The RD-V3-R1 dual-chip platform
 
-The RD-V3-R1 platform is a dual-chip simulation environment built to model multi-die Arm server SoCs. It expands on the single-die RD-V3 design by introducing a second application processor and a Management Control Processor (MCP).
+The RD-V3-R1 platform is a dual-chip simulation environment built to model multi-die Arm server SoCs. It expands on the single-die RD-V3 design by introducing a second application processor and a Manageability Control Processor (MCP).
 
 Key use cases of RD-V3-R1 are:
 

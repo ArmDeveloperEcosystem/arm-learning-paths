@@ -22,7 +22,7 @@ You will be supplied with license key(s) to generate such license(s).
 
 License Administrators should download and install the latest FlexNet Publisher software to your internal license server.
 ```url
-https://developer.arm.com/downloads/-/download-flexnet-publisher
+https://support.arm.com/downloads/view/LLSFL
 ```
 ### How do I generate a license file?
 

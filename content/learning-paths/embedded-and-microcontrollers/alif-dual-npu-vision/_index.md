@@ -76,9 +76,8 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: ML
 armips:
-    - Cortex-M55
-    - Ethos-U55
-    - Ethos-U85
+    - Cortex-M
+    - Ethos-U
 tools_software_languages:
     - ExecuTorch
     - Zephyr

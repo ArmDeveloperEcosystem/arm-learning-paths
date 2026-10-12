@@ -92,7 +92,14 @@ The overall code structure also includes setup and cleanup code in the main func
 
 At compile time, you can select which loop optimization to compile, whether it's based on SME or SVE intrinsics, or one of the available inline assembly variants.
 
-To compile the project, run make in the project directory:
+SIMD Loops requires a C compiler and an objectdump binary. If the toolchain binaries are not available in the PATH, then you can set the following environment variables:
+
+```bash
+export C_COMPILER=/path/to/bin/c_compiler
+export OBJDUMP=/path/to/bin/objdump
+```
+
+Then, run make in the project directory:
 
 ```console
 make
@@ -115,6 +122,15 @@ To build all loops for a single target, such as Neon, run:
 ```console
 make neon
 ```
+
+If you are compiling on a Linux machine, you can quickly check which CPU features are available using the following flag. For example, on the Arm AGI CPU:
+
+```bash { command_line="user@localhost | 2-6"}
+lscpu | grep Flags
+Flags:                                   fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm jscvt fcma lrcpc dcpop sha3 sm3 sm4 asimddp sha512 sve asimdfhm dit uscat ilrcpc flagm sb paca pacg dcpodp sve2 sveaes svepmull svebitperm svesha3 svesm4 flagm2 frint svei8mm svebf16 i8mm bf16 dgh rng bti ecv afp wfxt ls64
+```
+
+There is not an exact match between the Make targets and the reported CPU flags, but you can still quickly determine which features the system lacks—for example, this system does not support SME2.
 
 As a result of the build, two types of binaries are generated.
 
@@ -146,4 +162,10 @@ Example output:
 
 ```output
  - Checksum correct.
+```
+
+Running on a system without the supported CPU feature will show the following.
+
+```bash
+Illegal instruction        (core dumped) <command run>
 ```
