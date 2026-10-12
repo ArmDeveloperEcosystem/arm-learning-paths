@@ -33,7 +33,15 @@ With Remote - SSH, the MLIA extension and analysis run on the remote host.
 
 ## Install the MLIA extension and prepare its environment
 
-Open the **Extensions** view, search for **MLIA**, and install the extension published by **Arm**. If you are connected over SSH, install MLIA on the SSH host and confirm that it is enabled there, as shown below.
+Download the `.vsix` package from the latest [MLIA VS Code extension release](https://github.com/arm/vscode-mlia/releases) to your local machine.
+
+In VS Code:
+
+1. If you’re using a remote Linux machine, connect to it with **Remote - SSH** first.
+2. Open the **Extensions** view.
+3. Select the **...** menu at the top of the view, then **Install from VSIX...**.
+4. Select the `.vsix` file you downloaded to your local machine and install it.
+5. If you’re connected over SSH, confirm that MLIA is installed and enabled on the SSH host, as shown below.
 
 <img src="/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/images/vscode-mlia-installed.png" width="1088" style="max-width: min(70%, 1088px); height: auto;" alt="The MLIA extension page identifies Arm as the publisher and confirms that the extension is enabled on an SSH host." title="MLIA installed on the remote host" class="content-uploaded-image centered" />
 <span class="content-image-caption centered">MLIA installed on the remote host</span>
