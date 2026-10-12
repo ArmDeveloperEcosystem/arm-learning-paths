@@ -29,7 +29,7 @@ layout: installtoolsall
 
 NVIDIA OpenShell is an open-source, secure runtime for autonomous AI agents. It protects your host machine and enterprise systems by running agents inside sandboxes with kernel-level isolation, granular filesystem jails, and network policy enforcement.
 
-On Arm Linux, OpenShell uses the Linux kernel Landlock Linux Security Module (LSM) and seccomp for process containment. For stronger isolation, OpenShell also supports a microVM mode that adds a hardware VM boundary using KVM and `libkrun`.
+On Arm Linux, OpenShell uses the Linux kernel Landlock Linux Security Module (LSM) and seccomp for process containment. For stronger isolation, OpenShell also supports a microVM mode that adds a hardware virtual machine (VM) boundary using kernel-based VM (KVM) and `libkrun`.
 
 OpenShell runs on multiple platforms. The following steps are for Ubuntu and Debian on `aarch64`. Other Debian-based distributions on Arm Linux should work with the same steps. 
 
@@ -41,15 +41,15 @@ You need an Arm Linux system running Ubuntu 22.04 or later on `aarch64` architec
 
 This guide includes instructions for two backends for running sandboxes. Choose a backend before installing OpenShell, and set up the prerequisites for your chosen backend.
 
-The container backend runs sandboxes as containers using Landlock LSM, seccomp, and network policy enforcement at the supervisor level. It works on Arm Linux servers that meet the kernel and runtime requirements, including cloud instances and virtual machines (VMs) where kernel-based VM (KVM) isn't available. You can use Podman or Docker for the container backend.
+The container backend runs sandboxes as containers using Landlock LSM, seccomp, and network policy enforcement at the supervisor level. It works on Arm Linux servers that meet the kernel and runtime requirements, including cloud instances and VMs where KVM isn't available. You can use Podman or Docker as the runtime for the container backend. 
 
 The microVM backend runs each sandbox in its own lightweight VM using `libkrun` and KVM. This adds a hardware VM boundary on top of the Landlock and seccomp controls, giving a second layer of isolation. The microVM backend requires KVM access on the host and is opt-in.
 
-The container backend is the default and enforces isolation through kernel-level controls. Use the microVM backend when you need a hardware VM boundary in addition.
+The container backend is the default and enforces isolation through kernel-level controls. Use the microVM backend when you additionally need a hardware VM boundary.
 
 ### Container backend prerequisites
 
-If you want to set up the container backend, confirm that your Arm Linux host meets the Landlock and Docker prerequisites.
+If you want to set up the container backend, confirm that your Arm Linux host meets the Landlock and runtime prerequisites.
 
 #### Landlock requirement
 
@@ -79,12 +79,12 @@ Confirm that `landlock` appears in the comma-separated output. This confirms tha
 
 The host kernel also needs seccomp user-notification and support for reading workload process memory. OpenShell checks the required facilities when starting a sandbox and refuses to start the workload if they are unavailable. For the full set of requirements and startup checks, see the [OpenShell kernel requirements](https://docs.nvidia.com/openshell/about/support-matrix#kernel-requirements).
 
-#### Install Docker
+#### Install a sandbox runtime
 
 Install Docker Engine if it's not already installed:
 
 {{% notice Note %}}
-You can also use the Podman driver instead of Docker to run container sandboxes. For setup and configuration details, see the [OpenShell Podman driver documentation](https://docs.nvidia.com/openshell/how-it-works/sandboxes/runtimes#podman-driver).
+Alternatively, you can use the Podman driver to run container sandboxes. For setup and configuration details, see the [OpenShell Podman driver documentation](https://docs.nvidia.com/openshell/how-it-works/sandboxes/runtimes#podman-driver).
 {{% /notice %}}
 
 ```bash
@@ -97,7 +97,7 @@ Add your user to the docker group:
 sudo usermod -aG docker $USER
 ```
 
-Log out and log back in to activate the Docker group for your session. On cloud instances such as Amazon EC2, reboot instead because the user's systemd session can persist across SSH reconnects. A logout alone might not be enough:
+Log out and log back in to activate the Docker group for your session. On cloud instances such as Amazon EC2, reboot instead of logging out because the user's systemd session can persist across SSH reconnects. Only logging out might not be enough:
 
 ```bash
 sudo reboot
@@ -115,7 +115,7 @@ Confirm that `docker` appears in the output.
 
 Confirm that your Arm host supports KVM acceleration and that the gateway user has access to `/dev/kvm`. Your host kernel doesn't need Landlock for the microVM backend.
 
-The guest kernel inside the microVM needs Landlock enabled with ABI 3 or newer, seccomp user-notification, and support for reading workload process memory. OpenShell checks these facilities inside the guest when starting a sandbox. For more information, see the [OpenShell kernel requirements](https://docs.nvidia.com/openshell/about/support-matrix#kernel-requirements).
+The guest kernel inside the microVM needs Landlock enabled with ABI 3 or newer, seccomp user-notification, and support for reading workload process memory. OpenShell checks for these requirements inside the guest when starting a sandbox. For more information, see the [OpenShell kernel requirements](https://docs.nvidia.com/openshell/about/support-matrix#kernel-requirements).
 
 Install `cpu-checker` on Ubuntu:
 
@@ -166,9 +166,9 @@ Server Status
   Version: 0.1.3
 ```
 
-## Configure the microVM backend
+## (Optional) Configure the microVM backend
 
-If you want hardware VM-level isolation, switch to the microVM backend after installing OpenShell. Skip this section if you are using the container backend.
+If you want hardware VM-level isolation, switch to the microVM backend after installing OpenShell. If you're using the container backend, skip the step.
 
 Create the configuration directory if needed:
 
@@ -232,7 +232,7 @@ systemctl --user restart openshell-gateway
 
 ## Verify the installation
 
-With OpenShell installed and the gateway running, you can create and manage a sandbox using the CLI to verify that the installation was successful.
+With OpenShell installed and the gateway running, you can create and manage a sandbox using the CLI to verify that the installation was successful. You can also test the filesystem and networking boundaries of the sandbox.
 
 ### Create a sandbox
 
@@ -271,13 +271,15 @@ With the Docker driver, the sandbox shares the host kernel, so you'll see the ho
 7.1.5-76070105-generic aarch64
 ```
 
-On the microVM backend, the sandbox runs a guest kernel provided by `libkrun` so you will see a kernel version different from the host. The output is similar to:
+On the microVM backend, the sandbox runs a guest kernel provided by `libkrun` so you'll see a kernel version different from the host. 
+
+The output is similar to:
 
 ```output
 6.12.76 aarch64
 ```
 
-Both examples report an `aarch64` kernel. Kernel versions vary by host and OpenShell release. A guest kernel version that differs from the host is consistent with a separate VM kernel, but `uname` alone doesn't verify KVM use or the selected runtime. 
+Both examples report an `aarch64` kernel. Kernel versions vary by host and OpenShell release. A guest kernel version that differs from the host is consistent with a separate VM kernel. `uname` alone doesn't verify KVM use or the selected runtime. 
 
 ### List sandboxes
 
@@ -318,7 +320,7 @@ Open an interactive shell session inside a sandbox:
 openshell sandbox connect verify-test
 ```
 
-To exit the session, enter **Ctrl + C**. 
+To exit the session, press **Ctrl + C**. 
 
 ### Test sandbox boundaries
 
