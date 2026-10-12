@@ -235,7 +235,7 @@ systemctl --user restart openshell-gateway
 
 ## Verify the installation
 
-Create a sandbox to verify that OpenShell and the gateway work together. You can then check its filesystem and network boundaries.
+Create a sandbox to verify that OpenShell works as expected. You can then check the filesystem and network boundaries of the sandbox.
 
 ### Create a sandbox
 
