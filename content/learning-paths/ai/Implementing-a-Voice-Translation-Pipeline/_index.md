@@ -1,6 +1,10 @@
 ---
 title: Implement a voice translation pipeline
 
+draft: true
+cascade:
+    draft: true
+    
 description: Build an on-device English-to-Spanish voice translator on an Apple Silicon (aarch64) Mac using Python, Sherpa-ONNX, Gemma 4 E2B, and LiteRT-LM.
 
 minutes_to_complete: 45
