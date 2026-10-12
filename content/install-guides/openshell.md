@@ -27,29 +27,28 @@ multitool_install_part: false
 layout: installtoolsall
 ---
 
-NVIDIA OpenShell is an open-source, secure runtime for autonomous AI agents. It protects your host machine and enterprise systems by running agents inside sandboxes with kernel-level isolation, granular filesystem jails, and network policy enforcement.
+NVIDIA OpenShell is an open-source, secure runtime for autonomous AI agents. It protects your host machine and enterprise systems by running agents inside sandboxes. The sandboxes provide kernel-level isolation, granular filesystem jails, and network policy enforcement.
 
 On Arm Linux, OpenShell uses the Linux kernel Landlock Linux Security Module (LSM) and seccomp for process containment. For stronger isolation, OpenShell also supports a microVM mode that adds a hardware virtual machine (VM) boundary using kernel-based VM (KVM) and `libkrun`.
 
-OpenShell runs on multiple platforms. The following steps are for Ubuntu and Debian on `aarch64`. Other Debian-based distributions on Arm Linux should work with the same steps. 
+OpenShell runs on multiple platforms. The following steps are for Ubuntu and Debian on `aarch64`. You can use the same steps for other Debian-based distributions on Arm Linux. 
 
 OpenShell is also supported on macOS, where you can install it using Homebrew and run the gateway as a Homebrew service. For macOS-specific steps, see the [NVIDIA OpenShell documentation](https://docs.nvidia.com/openshell/about/installation).
 
 ## Before you begin
 
-You need an Arm Linux system running Ubuntu 22.04 or later on `aarch64` architecture, with sudo access. 
+You need an Arm Linux system running Ubuntu 22.04 or later on `aarch64`, with sudo access.
 
-This guide includes instructions for two backends for running sandboxes. Choose a backend before installing OpenShell, and set up the prerequisites for your chosen backend.
+Choose a sandbox backend and complete its prerequisites before installing OpenShell:
 
-The container backend runs sandboxes as containers using Landlock LSM, seccomp, and network policy enforcement at the supervisor level. It works on Arm Linux servers that meet the kernel and runtime requirements, including cloud instances and VMs where KVM isn't available. You can use Podman or Docker as the runtime for the container backend. 
+- The container backend is the default. It uses Landlock, seccomp, and supervisor-level network policy. It works on Arm Linux servers that meet the kernel and runtime requirements, including cloud instances and VMs without KVM. You can use Docker or Podman as the runtime.
+- The microVM backend runs each sandbox in its own lightweight VM using `libkrun` and KVM. It adds a hardware VM boundary on top of the Landlock and seccomp controls, acting as a second layer of isolation. It requires host access to KVM.
 
-The microVM backend runs each sandbox in its own lightweight VM using `libkrun` and KVM. This adds a hardware VM boundary on top of the Landlock and seccomp controls, giving a second layer of isolation. The microVM backend requires KVM access on the host and is opt-in.
-
-The container backend is the default and enforces isolation through kernel-level controls. Use the microVM backend when you additionally need a hardware VM boundary.
+Use the microVM backend if you need a hardware VM boundary in addition to the sandbox controls.
 
 ### Container backend prerequisites
 
-If you want to set up the container backend, confirm that your Arm Linux host meets the Landlock and runtime prerequisites.
+For the container backend, confirm that your Arm Linux host meets the Landlock and runtime prerequisites.
 
 #### Landlock requirement
 
@@ -81,7 +80,7 @@ The host kernel also needs seccomp user-notification and support for reading wor
 
 #### Install a sandbox runtime
 
-Install Docker Engine if it's not already installed:
+If you don't already have Docker Engine, install it:
 
 {{% notice Note %}}
 Alternatively, you can use the Podman driver to run container sandboxes. For setup and configuration details, see the [OpenShell Podman driver documentation](https://docs.nvidia.com/openshell/how-it-works/sandboxes/runtimes#podman-driver).
@@ -97,13 +96,15 @@ Add your user to the docker group:
 sudo usermod -aG docker $USER
 ```
 
-Log out and log back in to activate the Docker group for your session. On cloud instances such as Amazon EC2, reboot instead of logging out because the user's systemd session can persist across SSH reconnects. Only logging out might not be enough:
+Log out and back in to activate the Docker group for your session. 
+
+On cloud instances such as Amazon EC2, the systemd user session can persist across SSH reconnects. Reboot instead:
 
 ```bash
 sudo reboot
 ```
 
-After the instance is back up, verify that the group is active before continuing:
+When the instance is back up, check that the group is active:
 
 ```bash
 groups
@@ -138,15 +139,17 @@ KVM acceleration can be used
 
 ## Install OpenShell
 
-After setting up a backend of your choice, run the official installation script. On Ubuntu or Debian, the script downloads and installs a Debian package. It starts the gateway as a systemd user service, registers the gateway with the CLI, and confirms the connection:
-
-```bash
-curl -LsSf https://raw.githubusercontent.com/NVIDIA/OpenShell/main/install.sh | sh
-```
+After completing the prerequisites for your backend, run the official installation script. On Ubuntu or Debian, it installs a Debian package, starts the gateway as a systemd user service, and registers it with the CLI.
 
 {{% notice Note %}}
 The command installs the latest stable release. To install a specific version, set the `OPENSHELL_VERSION` environment variable to a release tag before running the script. To find available releases, see the [OpenShell releases page](https://github.com/NVIDIA/OpenShell/releases).
 {{% /notice %}}
+
+Run the installation script:
+
+```bash
+curl -LsSf https://raw.githubusercontent.com/NVIDIA/OpenShell/main/install.sh | sh
+```
 
 Confirm that the CLI can connect to the gateway:
 
@@ -166,9 +169,9 @@ Server Status
   Version: 0.1.3
 ```
 
-## (Optional) Configure the microVM backend
+## (Optional) Configure the microVM backend 
 
-If you want hardware VM-level isolation, switch to the microVM backend after installing OpenShell. If you're using the container backend, skip the step.
+To use the microVM backend, switch to it after installing OpenShell. If you're using the container backend, skip this section.
 
 Create the configuration directory if needed:
 
@@ -232,7 +235,7 @@ systemctl --user restart openshell-gateway
 
 ## Verify the installation
 
-With OpenShell installed and the gateway running, you can create and manage a sandbox using the CLI to verify that the installation was successful. You can also test the filesystem and networking boundaries of the sandbox.
+Create a sandbox to verify that OpenShell and the gateway work together. You can then check its filesystem and network boundaries.
 
 ### Create a sandbox
 
@@ -252,7 +255,7 @@ Created sandbox: verify-test
   [3.3s] Image pulled
   [3.6s] Starting sandbox Container created
 ```
-Alternatively, you can use a different image by passing it with `--from`:
+To use a different image when creating the sandbox, pass it with `--from`:
 
 ```bash
 openshell sandbox create --name verify-test --from ubuntu:26.04 --detach
@@ -271,7 +274,7 @@ With the Docker driver, the sandbox shares the host kernel, so you'll see the ho
 7.1.5-76070105-generic aarch64
 ```
 
-On the microVM backend, the sandbox runs a guest kernel provided by `libkrun` so you'll see a kernel version different from the host. 
+With the microVM backend, the sandbox runs a guest kernel provided by `libkrun`, so you'll see a different kernel version from the host.
 
 The output is similar to:
 
@@ -279,7 +282,7 @@ The output is similar to:
 6.12.76 aarch64
 ```
 
-Both examples report an `aarch64` kernel. Kernel versions vary by host and OpenShell release. A guest kernel version that differs from the host is consistent with a separate VM kernel. `uname` alone doesn't verify KVM use or the selected runtime. 
+Both examples report `aarch64`. Kernel versions vary by host and OpenShell release. A different guest kernel version is consistent with a separate VM kernel, but `uname` alone doesn't verify KVM use or the selected runtime.
 
 ### List sandboxes
 
@@ -293,7 +296,7 @@ The output is similar to:
 
 ```output
 NAME        CREATED              PHASE
-my-sandbox  2026-10-08 19:48:42  Ready
+verify-test 2026-10-08 19:48:42  Ready
 ```
 
 ### Run a command in a sandbox
@@ -310,7 +313,7 @@ The output is:
 aarch64
 ```
 
-This reports the sandbox kernel's architecture as `aarch64`.
+The `aarch64` output confirms the sandbox kernel's architecture.
 
 ### Connect to a sandbox
 
@@ -320,21 +323,21 @@ Open an interactive shell session inside a sandbox:
 openshell sandbox connect verify-test
 ```
 
-To exit the session, press **Ctrl + C**. 
+To exit the session, press **Ctrl + C**.
 
 ### Test sandbox boundaries
 
-OpenShell applies a restrictive default policy when the following is true:
+OpenShell applies a restrictive default policy when all of the following are true:
 
 - No global policy is active
 - The sandbox has no saved policy
 - Its image contains no policy
 
-Creating a sandbox without `--policy` doesn't guarantee that this default is selected. The following examples assume that the restrictive default is active and no providers add network access. For policy selection and runtime additions, see [Default Policy and Baseline Paths](https://docs.nvidia.com/openshell/how-it-works/policies/default-policy) in the NVIDIA OpenShell documentation.
+Creating a sandbox without `--policy` doesn't guarantee that the restrictive default applies. The following examples assume that the default is active and that no providers add network access. For policy selection and runtime additions, see [Default Policy and Baseline Paths](https://docs.nvidia.com/openshell/how-it-works/policies/default-policy) in the NVIDIA OpenShell documentation.
 
 #### Filesystem isolation
 
-The restrictive default grants read-only access to the following folders:
+The restrictive default grants read-only access to the following paths:
 
 - `/bin`
 - `/usr`
@@ -344,7 +347,7 @@ The restrictive default grants read-only access to the following folders:
 - `/etc`
 - `/var/log`
 
-It grants read-write access to the sandbox working directory, `/tmp`, and `/dev/null`. These paths refer to the sandbox filesystem. Host files aren't exposed by default. You can change that boundary with explicitly configured mounts.
+It grants read-write access to the sandbox working directory, `/tmp`, and `/dev/null`. These paths belong to the sandbox filesystem. Host files aren't exposed by default. Explicitly configured mounts can change that boundary.
 
 Inspect the base and effective policies of the sandbox before testing the boundary:
 
@@ -391,7 +394,7 @@ The output is similar to:
 touch: cannot touch '/etc/evil': Permission denied
 ```
 
-The `/tmp` directory is writable by design, so that agents have a scratch space:
+The `/tmp` directory is writable so that agents have a scratch space:
 
 ```bash
 openshell sandbox exec -n verify-test -- touch /tmp/ok && echo "write succeeded"
@@ -405,7 +408,7 @@ write succeeded
 
 #### Network isolation
 
-The restrictive default defines no network rules, so outbound connections are denied. Image policies, global policies, and attached providers can change the effective network access. 
+The restrictive default defines no network rules, so outbound connections are denied. Image policies, global policies, and attached providers can change the effective network access.
 
 With no network rules in the effective policy, test a direct outbound connection:
 
@@ -428,11 +431,11 @@ OpenShell enforces isolation through multiple layers:
 - Network policy mediates each outbound TCP connection at the supervisor level.
 - Credential providers mean that the agent process never receives real API key values.
 
-Landlock provides an additional containment layer, but it relies on the enforcing kernel. It can't guarantee protection against an exploit that compromises that kernel. 
+Landlock provides another containment layer, but it relies on the enforcing kernel. It can't guarantee protection against an exploit that compromises that kernel.
 
-## Delete the sandbox
+## Delete the test sandbox
 
-After verifying that OpenShell installed successfully and works as expected, delete the sandbox:
+After verification, delete the test sandbox:
 
 ```bash
 openshell sandbox delete verify-test
@@ -441,9 +444,9 @@ openshell sandbox delete verify-test
 The output is similar to:
 
 ```output
-✓ Sandbox my-sandbox deletion accepted; cleanup is pending
+✓ Sandbox verify-test deletion accepted; cleanup is pending
 ```
 
 ## Next steps
 
-You're now ready to use NVIDIA OpenShell to run AI agents and untrusted code in policy-governed environments. 
+You can now use NVIDIA OpenShell to run AI agents and untrusted code in policy-governed environments.
