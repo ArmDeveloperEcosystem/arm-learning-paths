@@ -1,6 +1,10 @@
 ---
 title: Generate human faces with a diffusion model on an Alif Ensemble E8
 
+draft: true
+cascade:
+    draft: true
+    
 description: Export the pico-faces diffusion model with ExecuTorch, run it on the Alif Ensemble E8 Ethos-U85 NPU, and display generated faces on the DevKit LCD.
 
 minutes_to_complete: 120
