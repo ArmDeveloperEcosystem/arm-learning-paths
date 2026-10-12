@@ -115,6 +115,8 @@ An ExecuTorch `.pte` file can contain work outside an accelerator delegate. Howe
 Cortex-M bare-metal runtimes are usually built with a smaller, more selective kernel set than Cortex-A runtimes. The difference in kernel set is because Cortex-M systems have tighter memory and storage constraints. In both cases, CPU fallback support depends on which kernels are included in the runtime build.
 {{% /notice %}}
 
+You can also look at the optional section at the end of this Learning Path, where you will [use the MLIA VS Code extension to inspect model graphs with performance metrics and advice overlaid](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/). This runs through an example with one of the `tflite` models.
+
 ## What you've accomplished
 
 You've learned how `.tflite`, `.tosa`, and `.pte` fit into MLIA workflows. You've also seen why `.pte` is useful for ExecuTorch artifact analysis, where TOSA can fit as an intermediate handoff, and why Model Explorer remains useful for graph structure.
