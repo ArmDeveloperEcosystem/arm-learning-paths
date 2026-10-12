@@ -1,6 +1,10 @@
 ---
 title: Measure whether LLM token generation is memory-bound on Arm CPUs with llama-roofline
 
+draft: true
+cascade:
+    draft: true
+
 description: Use llama-roofline and llama-bench on a Raspberry Pi 5 or another Arm Linux system to measure the memory bandwidth ceiling, check how close llama.cpp decode runs to it, and pick decode and prefill thread counts from the results.
 
 minutes_to_complete: 45
