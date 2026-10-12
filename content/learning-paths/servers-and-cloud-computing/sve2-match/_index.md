@@ -41,18 +41,18 @@ generated_summary_faq:
 #       24.04. You also need a GCC compiler with SVE support.
 #   - question: Where do I add the scalar and SVE2 MATCH implementations?
 #     answer: >-
-#       You add the search functions to `sve2_match_demo.c`, then append the benchmark harness after
+#       Add the search functions to `sve2_match_demo.c`, then append the benchmark harness after
 #       those functions.
 #   - question: What does a successful search return?
 #     answer: >-
-#       You get `1` when any array element matches any key, and `0` otherwise.
-#   - question: What result should I expect from the benchmark harness?
+#       A successful search returns `1` when any array element matches any key, and `0` otherwise.
+#    - question: How does hit rate affect the SVE2 MATCH comparison?
 #     answer: >-
-#       You compare latency, throughput, and speedups for the scalar, SVE2 MATCH, and unrolled SVE2
-#       MATCH implementations.
+#       You'll see larger speedups at low hit rates in the sample results. As matches become more
+#       frequent, early termination narrows the difference between SVE2 MATCH and scalar search.
 #   - question: How do I change the benchmark’s hit rate?
 #     answer: >-
-#       You pass a hit probability as the third argument to `./sve2_match_demo`, after the array
+#       Pass a hit probability as the third argument to `./sve2_match_demo`, after the array
 #       length and iteration count.
 # END generated_summary_faq
 
