@@ -75,7 +75,7 @@ The `search_generic_u8()` and `search_generic_u16()` functions both return 1 imm
 
 Next, create an implementation that uses SVE2 MATCH instructions to process multiple elements in parallel.
 
-Copy the following code into the same source file:
+Add the following code to the same source file:
 
 ```c
 int search_sve2_match_u8(const uint8_t *hay, size_t n, const uint8_t *keys,
@@ -123,20 +123,20 @@ int search_sve2_match_u16(const uint16_t *hay, size_t n, const uint16_t *keys,
 }
 ```
 
-The SVE MATCH implementation with the `search_sve2_match_u8()` and `search_sve2_match_u16()` functions provide an efficient vectorized search approach. The implementation:
+The SVE MATCH implementation with the `search_sve2_match_u8()` and `search_sve2_match_u16()` functions provides an efficient vectorized search approach. The implementation:
 
   - Uses SVE2's specialized MATCH instruction to compare multiple elements against multiple keys in parallel.
-  - Leverages hardware-specific vector length through `svcntb()` for scalability
+  - Leverages hardware-specific vector length through `svcntb()` for scalability.
   - Falls back to the generic scalar version if the number of keys, `nkeys`, exceeds the hardware-specific vector length.
   - Prepares a vector of search keys that's compared against blocks of data.
-  - Processes data in vector-sized chunks with early termination when matches are found, and stops immediately when any element in the vector matches.
+  - Processes data in vector-sized chunks with early termination when matches are found.
   - Falls back to scalar code for remainder elements.
 
 ### Create an optimized SVE2 MATCH implementation
 
 Next, add loop unrolling and prefetching to further improve performance.
 
-Copy the following code into the same source file:
+Add the following code to the same source file:
 
 ```c
 int search_sve2_match_u8_unrolled(const uint8_t *hay, size_t n, const uint8_t *keys,
@@ -244,7 +244,6 @@ The implementation:
    - Uses prefetching (`__builtin_prefetch`) to reduce memory latency.
    - Leverages the `svmatch_u8` and `svmatch_u16` instructions to efficiently compare each element against multiple keys in a single operation.
    - Aligns memory to 64-byte boundaries for better memory access performance.
-
 
 ## What you've accomplished and what's next
 

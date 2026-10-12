@@ -14,7 +14,9 @@ Searching an array for any of several keys is common in data-processing workload
 - Byte pattern searches for network packet inspection
 - Pixel value searches for image processing 
 
-You'll implement scalar and Scalable Vector Extension 2 (SVE2) MATCH functions to search for any occurrence of a set of keys in an array. The function should return true if any element in the array matches any of the keys, and false otherwise. You'll then benchmark them using 8-bit and 16-bit array elements on an Arm server that supports SVE2.
+You'll implement scalar and Scalable Vector Extension 2 (SVE2) MATCH functions to search for any occurrence of a set of keys in an array. The functions should return true if any element in the array matches any of the keys, and false otherwise.
+
+You'll then benchmark the functions using 8-bit and 16-bit array elements on an Arm server that supports SVE2.
 
 ## What SVE2 MATCH is
 

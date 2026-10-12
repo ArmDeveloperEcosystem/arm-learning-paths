@@ -1,6 +1,6 @@
 ---
 title: Benchmark scalar and SVE2 MATCH search
-description: Compile and benchmark scalar and SVE2 MATCH search implementations on an Arm server.
+description: Compile and benchmark scalar and SVE2 MATCH search implementations on an Arm server to compare their performance.
 weight: 4
 layout: "learningpathall"
 ---
@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 Add a benchmark harness that times the scalar, SVE2 MATCH, and unrolled SVE2 MATCH implementations. Its helper functions prepare test data with controlled hit rates.
 
-Append the following code to `sve2_match_demo.c`, after the search functions that you created earlier:
+Append the following code to `sve2_match_demo.c`, after the search functions that you added earlier:
 
 ```c
 // Timing function
@@ -234,6 +234,8 @@ Throughput (million items/second):
   speed‑up (unroll): 4.17x
 ```
 
+Use the latency and throughput values in the output to compare the implementations with the sample results that follow.
+
 You can experiment with different haystack lengths, iterations and hit probabilities.
 
 ```bash
@@ -289,7 +291,7 @@ The sample results show that the SVE2 MATCH speedup changes with the hit rate.
 
 For 8-bit data, the SVE2 MATCH implementations achieve an 87 to 121 times speedup.  For 16-bit data, the speedup ranges from about 3.1 times to 4.2 times.
 
-This is where SVE2 MATCH truly shines, as it can quickly process large chunks of data with few or no matches.
+At these low hit rates, SVE2 MATCH processes large chunks of data with few or no matches faster than the generic scalar implementation.
 
 #### Low hit rate (0.01%)
 
@@ -305,6 +307,7 @@ The 8-bit implementations remain about 4.6 to 4.8 times faster than the generic 
 
 With frequent matches, early termination reduces the benefit of processing multiple elements at once.
 
+### Interpret the results
 
 This pattern makes SVE2 MATCH particularly well-suited for applications where matches are rare but important to find, such as:
 
@@ -312,18 +315,16 @@ This pattern makes SVE2 MATCH particularly well-suited for applications where ma
 - Filtering operations with high selectivity
 - Security applications looking for specific signatures
 
-### Benefits of loop unrolling
-
 The unrolled implementation performs better in most of these measurements, but not at every hit rate:
 
-- Very low hit rates: Improves the 0% case from 101.98 times to 121.09 times for 8-bit and from 3.13 times to 4.02 times for 16-bit
-- Low and medium hit rates: Improves performance for both element sizes, with the largest gains in the 8-bit 0.01% case
-- High hit rates: Performs similarly for 16-bit data and is slightly slower than the basic SVE2 MATCH implementation for 8-bit data
+- When there are very low hit rates, the implementation improves the 0% case from 101.98 times to 121.09 times for 8-bit. It improves the 0% case from 3.13 times to 4.02 times for 16-bit.
+- When there are low and medium hit rates, the implementation improves performance for both element sizes. The largest gains can be seen in the 8-bit 0.01% case.
+- When there are high hit rates, the implementation performs similarly for 16-bit data. It's slightly slower than the basic SVE2 MATCH implementation for 8-bit data.
 
-This demonstrates that loop unrolling and prefetching are most useful when the scan processes large portions of the array before finding a match.
+These results demonstrate that loop unrolling and prefetching are most useful when the scan processes large portions of the array before finding a match.
 
 ## What you've accomplished
 
-You've benchmarked scalar, SVE2 MATCH, and unrolled SVE2 MATCH search implementations. The SVE2 MATCH instruction provides a powerful way to accelerate search operations in byte and half word arrays. 
+You've benchmarked scalar, SVE2 MATCH, and unrolled SVE2 MATCH search implementations. The SVE2 MATCH instruction provides a powerful way to accelerate search operations in byte and halfword arrays.
 
 By implementing these optimizations on cloud instances with SVE2, you can achieve significant performance improvements for your applications.

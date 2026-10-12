@@ -7,7 +7,7 @@ minutes_to_complete: 20
 who_is_this_for: This is an introductory topic for database developers, performance engineers, and anyone optimizing data processing workloads on Arm-based cloud instances.
 
 learning_objectives:
-  - Understand the purpose and function of SVE2 MATCH instructions.
+  - Explain the purpose and function of SVE2 MATCH instructions.
   - Implement a search algorithm using both scalar and SVE2-based MATCH approaches.
   - Benchmark and compare performance between scalar and vectorized implementations.
   - Analyze speedups and efficiency gains on Arm Neoverse-based instances with SVE2.
