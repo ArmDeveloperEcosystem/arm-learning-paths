@@ -50,7 +50,7 @@ For an install guide:
 - Install guide descriptions should describe the tool, supported Arm platform or operating system context, and what the setup enables.
 - Evaluate existing `additional_search_terms` before suggesting additions or removals; suggest only terms supported by the guide content. Check relevant repository examples for spelling and style, and do not suggest unsupported terms. Do not apply search-term suggestions unless the user explicitly approves them.
 
-## Description quality checks
+### Description quality checks
 
 - The description should be one sentence.
 - It should state what the reader will do, the main tool or platform, and the useful outcome.
@@ -59,7 +59,7 @@ For an install guide:
 - It should not use vague summaries, hype, keyword stuffing, unsupported claims, or invented capabilities.
 - Quote the value only when needed for YAML syntax.
 
-## Validation rules
+### Validation rules
 
 - Preserve body content, Hugo shortcodes, links, commands, code blocks, and expected output unless the user explicitly asks for broader edits.
 - Do not invent metadata values. Use nearby content, repository examples, or the closed-list metadata reference.
