@@ -119,4 +119,6 @@ Cortex-M bare-metal runtimes are usually built with a smaller, more selective ke
 
 You've learned how `.tflite`, `.tosa`, and `.pte` fit into MLIA workflows. You've also seen why `.pte` is useful for ExecuTorch artifact analysis, where TOSA can fit as an intermediate handoff, and why Model Explorer remains useful for graph structure.
 
-You can extend this CLI workflow to evaluate other models for whether they're suitable for a target. If you want to call MLIA from automation or another tool, see the next section [(Optional) Use the MLIA Python API](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/6-python-api/).
+You can extend this CLI workflow to evaluate other models for whether they're suitable for a target. If you want to call MLIA from automation or another tool, see [(Optional) Use the MLIA Python API](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/6-python-api/).
+
+To learn how to use the Visual Studio Code extension for MLIA, see [(Optional) Use the MLIA and Model Explorer Visual Studio Code extension](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/).

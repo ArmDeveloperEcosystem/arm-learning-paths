@@ -21,7 +21,7 @@ MLIA is most useful before full deployment or runtime profiling, when you're ask
 - Is the model well-optimized for my Arm target hardware?
 - What should I investigate before building firmware or running on a board?
 
-MLIA doesn't make the final optimization decision for you. It gives target-aware evidence so that you can decide what to change, what to measure next, and which workflow stage deserves attention.
+MLIA doesn't make the final optimization decision for you. It provides target-aware evidence so that you can decide what to change, what to measure next, and which workflow stage deserves attention.
 
 You'll use the CLI to complete the following tasks:
 
@@ -34,6 +34,8 @@ Arm Ethos-U is the example target in the Learning Path.
 
 If you want to automate the same checks, you can [optionally use the Python API](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/6-python-api/). The API is useful when you want to embed MLIA results in another product, dashboard, CI job, or tool.
 
+You can also [optionally run the checks in Visual Studio Code and inspect their results in Model Explorer](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/).
+
 ## How you should use MLIA
 
 MLIA isn't a replacement for graph visualization or runtime profiling. It's an advisory layer that helps earlier in the model preparation workflow. The following table shows which questions MLIA and related tools can answer:
@@ -42,7 +44,7 @@ MLIA isn't a replacement for graph visualization or runtime profiling. It's an a
 | --- | --- |
 | MLIA | Is this model suitable for my target, and what should I change? |
 | Vela | Which operators are supported, and which layers dominate compiler-estimated cycles? |
-| Corstone FVP | What NPU performance counters does a packaged `.pte` artifact produce for the whole model run on a virtual platform? |
+| Corstone Fixed Virtual Platform (FVP) | What NPU performance counters does a packaged `.pte` artifact produce for the whole model run on a virtual platform? |
 | Model Explorer | What does the generated model artifact graph look like? |
 | Runtime-specific profiling tools | What happened when the model ran? For example, use ETRecord, ETDump, and ExecuTorch Inspector for ExecuTorch deployments. Use LiteRT benchmark and profiling tools for LiteRT deployments. |
 
@@ -70,6 +72,6 @@ MLIA can analyze different kinds of model artifacts depending on what workflow y
 
 ## What you've learned and what's next
 
-You've learned what MLIA does, what you use it for, and how MLIA fits alongside other tools.
+You've learned what MLIA does, what you should use it for, and how MLIA fits alongside other tools.
 
 Next, you'll install MLIA and inspect the capabilities available in your environment.
