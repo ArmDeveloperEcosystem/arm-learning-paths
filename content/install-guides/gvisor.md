@@ -19,7 +19,7 @@ author: Jason Andrews
 
 test_images:
 - ubuntu:latest
-test_maintenance: false
+test_maintenance: true
 
 weight: 1
 tool_install: true
@@ -88,7 +88,11 @@ The package includes the runtime and its accompanying binaries.
 
 ## Configure Docker
 
-When you install `runsc`, Docker is automatically configured.
+When you install `runsc`, Docker is automatically configured if Docker is already installed. If you installed Docker afterwards, register the runtime:
+
+```bash
+sudo runsc install
+```
 
 Restart Docker to load the runtime configuration:
 
@@ -189,7 +193,7 @@ gVisor handles the kernel-log request and generates sandbox messages instead of 
 
 ## Troubleshoot issues with gVisor runsc
 
-If Docker reports an unknown runtime, or if you install Docker after `runsc`, run `sudo runsc install` to register the runtime. Then, restart Docker and inspect the runtimes again. The [Docker quick start](https://gvisor.dev/docs/user_guide/quick_start/docker/) describes the configuration entry.
+If Docker reports an unknown runtime, run `sudo runsc install` to register the runtime. Then, restart Docker and inspect the runtimes again. The [Docker quick start](https://gvisor.dev/docs/user_guide/quick_start/docker/) describes the configuration entry.
 
 If Docker fails to restart, inspect `sudo journalctl -u docker -n 50 --no-pager` for configuration errors. Preserve other settings in `/etc/docker/daemon.json` when correcting the runtime entry.
 
