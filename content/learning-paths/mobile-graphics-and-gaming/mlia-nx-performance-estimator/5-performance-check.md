@@ -9,13 +9,15 @@ layout: learningpathall
 
 ## Estimate baseline performance
 
-Run a performance check with the same model and target profile:
+Run a performance check with the same model and target profile, and open the results in Model Explorer:
 
 ```bash
-mlia check models/baseline.tflite --target-profile neural-technology --performance --output-dir runs/baseline
+mlia check models/baseline.tflite --target-profile neural-technology --performance --output-dir runs/baseline --model-explorer open
 ```
 
 With the tested packages and `neural-technology` profile, expect `136,962` estimated total cycles and about `0.09131 ms` per inference. These are compiler estimates, not timings measured on a device.
+
+`--model-explorer open` creates a standalone HTML visualization and opens it in your browser. Omit this option if you only want the CLI reports.
 
 ## Locate and read the reports
 
@@ -24,6 +26,7 @@ With `--output-dir runs/baseline`, the key files are:
 | Path under `runs/baseline/mlia-output/` | Purpose |
 | --- | --- |
 | `mlia-output.json` | Standardized MLIA result, including model metadata, metrics, entities, breakdowns, and advice |
+| `model-explorer/bundle/index.html` | Self-contained Model Explorer page with the graph and MLIA overlays |
 | `nx_performance_statistics.json` | Detailed chain and cascade performance statistics |
 | `nx-performance-estimator/` | Estimator summaries and raw performance, timing, and debug databases |
 | `ml-sdk-model-converter/` | TOSA intermediates and `baseline.tosa.vgf`, produced automatically from the LiteRT model |
@@ -66,16 +69,17 @@ Use `results[].breakdowns` and their `entity_id` links to `results[].entities` t
 
 ## (Optional) Explore results in VS Code and Model Explorer
 
-You can also run MLIA in your editor and explore its results visually. Follow the [Ethos-U VS Code and Model Explorer walkthrough](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/) to set up and use two complementary tools:
+In the Model Explorer page opened by the command, inspect the generated MLIA hierarchy alongside **Source Model**:
 
-- **MLIA VS Code extension**: configure compatibility and performance checks in your editor, run an analysis, and inspect model-level results
-- **MLIA Model Explorer plugin**: overlay MLIA metrics and advice on the model graph, select operations, and compare costs within graph groups
+1. Select a cycle metric in the node-data controls to color the hierarchy by cost.
+2. Expand the hierarchy and select a chain or cascade to read its reported values.
+3. Follow its mapping to **Source Model**, where available, to find the related model operations.
 
-The walkthrough shows how to select a cycle or memory-access metric in **Overlay** and locate operations that dominate the estimate. Selecting **advice** highlights operations to investigate. This helps you connect a report's numbers to the model structure rather than inspecting JSON alone.
+Use the cycle overlays to find scheduling groups worth investigating. A group can contain several operations, so its cost isn't a separate measurement for each operation. Keep using the model-level report for whole-model totals.
 
-The example uses Ethos-U and Vela metrics. For NX, use the metrics and chain-and-cascade breakdowns described here; don't assume that Ethos-U metric names or graph groupings apply unchanged. Graph-group summaries also aren't necessarily whole-model totals.
+If the browser doesn't open, open `runs/baseline/mlia-output/model-explorer/bundle/index.html` manually.
 
-For graph inspection without MLIA overlays, follow [Explore model artifacts with Model Explorer](/learning-paths/cross-platform/explore-model-artifacts-with-model-explorer/). Use its VGF adapter to inspect the compiled graph produced here. The adapter visualizes graph structure; it isn't the MLIA metrics-and-advice overlay plugin. Continue using `mlia-output.json` for the analysis results.
+To run these checks from your editor, follow the [Ethos-U VS Code and Model Explorer walkthrough](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/). It introduces the MLIA VS Code extension and shows how to explore metrics and advice. Its example uses Ethos-U and Vela; use the NX metrics from this analysis rather than expecting the same metric names or graph groups.
 
 ## (Optional) Compare a different built-in profile
 
