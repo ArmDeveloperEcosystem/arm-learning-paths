@@ -1,5 +1,5 @@
 ---
-title: (Optional) Use the MLIA & Model Explorer VS Code Extension
+title: (Optional) Use the MLIA and Model Explorer Visual Studio Code extension
 
 description: Set up MLIA in VS Code, analyze a MobileNet model for Ethos-U, and inspect compatibility, performance metrics, and advice in Model Explorer.
 
@@ -9,27 +9,30 @@ weight: 8
 layout: "learningpathall"
 ---
 
-The MLIA VS Code extension allows you to move from a CLI view, to using MLIA within your IDE, and also supports visualizing models in Model Explorer, with data from MLIA overlaid onto the model graphs.
-
 ## Open your model workspace in VS Code
 
-Ensure you have [VS Code](https://code.visualstudio.com/download?_exp_download=d53503e735) 1.100 or newer on your local machine.
+You can use the Visual Studio Code (VS Code) extension for Arm ML Inference Advisor (MLIA) to move from a CLI view to using MLIA within your IDE. The extension also supports visualizing models in Model Explorer, with data from MLIA overlaid onto the model graphs.
 
-If you completed the earlier steps on that same local machine, open VS Code, select **File > Open Folder**, open your `ml-model-artifacts` directory, and continue to **Install the MLIA extension and prepare its environment**.
+If you completed the earlier steps on the same local machine, do the following:
 
-If you completed the earlier steps on a remote Linux machine, connect to it using [VS Code Remote - SSH](https://code.visualstudio.com/docs/remote/ssh). Use the same SSH connection details you used for the CLI steps:
+1. Open VS Code on the local machine.
+2. Select **File > Open Folder**. 
+3. Open your `ml-model-artifacts` directory.
+
+If you completed the earlier steps on a remote Linux machine, connect to the machine using [VS Code Remote - SSH](https://code.visualstudio.com/docs/remote/ssh). With Remote - SSH, the MLIA extension and analysis run on the remote host. Use the same SSH connection details that you used for the CLI steps:
 
 1. Install the **Remote - SSH** extension on the machine running VS Code.
-2. Open the Command Palette with **Ctrl+Shift+P** on Windows or Linux, or **Cmd+Shift+P** on macOS. Select **Remote-SSH: Add New SSH Host**.
-3. Enter your existing SSH command, including any key-file option such as `-i`. For example, enter `ssh ubuntu@YOUR_HOST`, replacing the user and host with your connection details. Select an SSH configuration file when prompted.
+2. Open the Command Palette with **Ctrl+Shift+P** on Windows or Linux, or **Cmd+Shift+P** on macOS.
+3. Select **Remote-SSH: Add New SSH Host**.
+4. Enter your existing SSH command, including any key-file option such as `-i`. For example, enter `ssh ubuntu@YOUR_HOST`, replacing the user and host with your connection details. 
+5. Select an SSH configuration file when prompted.
 
 ![VS Code prompts for an SSH connection command. Enter the user and host of the Linux machine containing your models.#center](images/vscode-ssh-connection.png "Add your Linux host to Remote - SSH")
 
-4. Run **Remote-SSH: Connect to Host** and select the host you added.
-5. Confirm that the VS Code status bar shows your SSH host.
-6. In the connected window, select **File > Open Folder** and open the remote `ml-model-artifacts` directory.
+6. Run **Remote-SSH: Connect to Host** and select the host that you added. Confirm that the VS Code status bar shows your SSH host.
+7. In the connected window, select **File > Open Folder** and open the remote `ml-model-artifacts` directory.
 
-With Remote - SSH, the MLIA extension and analysis run on the remote host.
+After opening the `ml-model-artifacts` directory, install the MLIA extension and prepare its environment.
 
 ## Install the MLIA extension and prepare its environment
 
@@ -39,19 +42,23 @@ In VS Code:
 
 1. If you’re using a remote Linux machine, connect to it with **Remote - SSH** first.
 2. Open the **Extensions** view.
-3. Select the **...** menu at the top of the view, then **Install from VSIX...**.
-4. Select the `.vsix` file you downloaded to your local machine and install it.
-5. If you’re connected over SSH, confirm that MLIA is installed and enabled on the SSH host, as shown below.
+3. Select the **...** menu at the top of the view, then select **Install from VSIX...**.
+4. Select the `.vsix` file that you downloaded to your local machine and install it.
+
+If you’re connected over SSH, confirm that MLIA is installed and enabled on the SSH host as follows:
 
 <img src="/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/images/vscode-mlia-installed.png" width="1088" style="max-width: min(70%, 1088px); height: auto;" alt="The MLIA extension page identifies Arm as the publisher and confirms that the extension is enabled on an SSH host." title="MLIA installed on the remote host" class="content-uploaded-image centered" />
 <span class="content-image-caption centered">MLIA installed on the remote host</span>
 
-Select **MLIA** in the Activity Bar. In **New Analysis**, select **Refresh MLIA Environment** and wait for setup to finish.
+To set up the MLIA environment:
+
+1. Select **MLIA** in the Activity Bar.
+2. In **New Analysis**, select **Refresh MLIA Environment** and wait for setup to finish.
 
 <img src="/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/images/vscode-refresh-environment.png" width="426" style="max-width: min(70%, 426px); height: auto;" alt="The MLIA New Analysis view shows Refresh MLIA Environment before setup. Select this button to prepare the extension&#x27;s runtime." title="Create the managed MLIA environment" class="content-uploaded-image centered" />
 <span class="content-image-caption centered">Create the managed MLIA environment</span>
 
-The extension installs and manages `uv`, Python, and MLIA in its own environment. You don't need to activate `mlia_env` or install MLIA again for the extension. Its packages and backends are separate from the CLI environment you created earlier.
+The extension installs and manages `uv`, Python, and MLIA in its own environment. You don't need to activate `mlia_env` or install MLIA again for the extension. Its packages and backends are separate from the CLI environment that you created earlier.
 
 Setup is complete when **New Analysis** shows the **Estimation** and **Profiling** tabs, a source-model field, and target-profile selection.
 
@@ -63,9 +70,9 @@ Setup is complete when **New Analysis** shows the **Estimation** and **Profiling
 In **New Analysis**:
 
 1. Select **Estimation**.
-2. Use the **...** button next to **Source model** to select `tflite/mv2_int8.tflite` in your model-artifacts folder.
+2. Use the **...** button next to **Source model** to select `tflite/mv2_int8.tflite` in your `ml-model-artifacts` folder.
 3. Select **ethos-u85-256** as the target profile.
-4. Enable both **Performance** and **Compatibility**, by ticking each box.
+4. Select both the **Performance** and **Compatibility** checkboxes.
 5. Select **Run Analysis**.
 
 <img src="/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/images/vscode-analysis-settings.png" width="613" style="max-width: min(70%, 613px); height: auto;" alt="The estimation form selects mv2_int8.tflite and ethos-u85-256 with both Performance and Compatibility enabled, ready to run both checks." title="Select the model, target, and checks" class="content-uploaded-image centered" />
@@ -77,13 +84,15 @@ Model Explorer opens with a loading view while the analysis runs. When it finish
 
 ## Inspect compatibility and model performance
 
-Expand **Result 1 · compatibility > Model metrics**. For this INT8 model, expect `accelerator_operator_percentage` to be **100%**, matching the earlier CLI check.
+To inspect performance:
 
-![The compatibility result reports accelerator_operator_percentage as 100 percent, confirming that the INT8 model's operators map to the accelerator.#center](images/vscode-compatibility-metrics.png "Inspect the compatibility result")
+1. Expand **Result 1 · compatibility > Model metrics**. For this INT8 model, expect `accelerator_operator_percentage` to be **100%**, matching the earlier CLI check.
 
-Expand **Result 2 · performance > Model metrics** to inspect model-level cycle estimates, memory use, and estimated inference time.
+    ![The compatibility result reports accelerator_operator_percentage as 100 percent, confirming that the INT8 model's operators map to the accelerator.#center](images/vscode-compatibility-metrics.png "Inspect the compatibility result")
 
-![The performance result lists NPU cycles, SRAM and DRAM access cycles, total cycles, estimated inference time, and model memory sizes.#center](images/vscode-performance-metrics.png "Inspect whole-model performance estimates")
+2. Expand **Result 2 · performance > Model metrics** to inspect model-level cycle estimates, memory use, and estimated inference time.
+
+    ![The performance result lists NPU cycles, SRAM and DRAM access cycles, total cycles, estimated inference time, and model memory sizes.#center](images/vscode-performance-metrics.png "Inspect whole-model performance estimates")
 
 These LiteRT results come from Vela compiler estimates. The displayed inference time is an estimate, rather than latency measured on a board.
 
@@ -91,17 +100,21 @@ These LiteRT results come from Vela compiler estimates. The displayed inference 
 
 In Model Explorer, pan, zoom, and expand the model's groups to inspect operations. Use the search box to locate a node by name.
 
-Select a performance metric in the **Overlay** selector under **Current Analysis Run**. The corresponding values and colours appear on the graph. You can also select this in Model Explorer, and this is synchronized with the sidebar. `op_cycles` are shown in the image below.
+Select a performance metric in the **Overlay** selector under **Current Analysis Run**. The corresponding values and colours appear on the graph. You can also select the overlay in Model Explorer, and the selection is synchronized with the sidebar. 
+
+The following image shows `op_cycles`.
 
 ![Model Explorer displays the MobileNet source graph alongside completed compatibility and performance results. The selected op_cycles provider adds cycle values to the graph.#center](images/vscode-model-explorer.png "View analysis metrics on the source graph")
 
-Select a model group and inspect **Node data in selected layer**. Compare operation placement, `npu_cycles`, `op_cycles`, and memory-access metrics. Use the table's filter to narrow the operations you inspect.
+Select a model group and inspect **Node data in selected layer**. Compare operation placement, `npu_cycles`, `op_cycles`, and memory-access metrics. Use the table filter to narrow the operations that you inspect.
 
 ![The node-data table shows NPU placement and coloured performance metrics for convolution and depthwise convolution operations, allowing operation costs to be compared.#center](images/vscode-node-metrics.png "Compare metrics across operations")
 
-The **Aggregated stats in selected layer** table summarizes the available numeric metrics with minimum, maximum, sum, and average values. These summaries describe the selected graph group; use **Model metrics** for the whole-model result.
+The **Aggregated stats in selected layer** table summarizes the available numeric metrics with minimum, maximum, sum, and average values. These summaries describe the selected graph group.
 
 ![Aggregated stats in selected layer shows minimum, maximum, sum, and average values for the selected group's numeric metrics.#center](images/vscode-aggregated-metrics.png "Inspect metrics for a selected group")
+
+Use **Model metrics** for the whole-model result.
 
 You can zoom in on the graph to see specific operators, with associated data overlaid. For example, to investigate memory cost, select the `dram_access_cycles` overlay. Expand a group and compare the values attached to its operations.
 
@@ -113,8 +126,10 @@ Select **advice** as the overlay in **Current Analysis Run** or Model Explorer t
 
 ![The selected softmax node has NPU placement and advice about a suboptimal SOFTMAX activation, showing that a supported operation can still receive performance advice.#center](images/vscode-softmax-advice.png "Locate the Softmax performance advice")
 
-The advice identifies `SOFTMAX` as a suboptimal activation for NPU performance. The operation is supported, so the model can still map fully to the NPU, but it is a candidate for optimization. You could choose to change the model, after which you can rerun MLIA to compare compatibility and performance estimates, and check that prediction accuracy and any required probability outputs still meet your application's needs.
+The advice identifies `SOFTMAX` as a suboptimal activation for NPU performance. The operation is supported, so the model can still map fully to the NPU, but it's a candidate for optimization. You can choose to change the model, after which you can rerun MLIA to compare compatibility and performance estimates. After a rerun, check whether the prediction accuracy and any required probability outputs still meet the needs of your application.
 
 ## What you've accomplished
 
-You've set up the MLIA extension, analyzed a model for Ethos-U, and inspected compatibility, model metrics, operation overlays, and advice in Model Explorer. You can now use the same workflow to compare other supported model artifacts or investigate a revised model.
+You've set up the MLIA extension, analyzed a model for Ethos-U, and inspected compatibility, model metrics, operation overlays, and advice in Model Explorer. 
+
+You can now use the same workflow to compare other supported model artifacts or investigate a revised model.

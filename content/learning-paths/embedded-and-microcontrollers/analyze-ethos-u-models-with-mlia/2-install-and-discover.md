@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 ## Check your environment
 
-Use Ubuntu 24.04 LTS on an x86-64 machine with CPython 3.12. Other Linux distributions must provide glibc 2.39 or newer and CPython 3.12.
+Use Ubuntu 24.04 LTS on an x86-64 machine with CPython 3.12. If you use a different Linux distribution, ensure that it supports glibc 2.39 or later and CPython 3.12.
 
 On Ubuntu 24.04, install Git, Git Large File Storage (LFS), and the Python 3.12 development and virtual environment packages:
 
@@ -31,11 +31,11 @@ python3.12 --version
 git lfs version
 ```
 
-Confirm that the architecture is `x86_64`, glibc is 2.39 or newer, and Python is 3.12.x. If you use VS Code over SSH or in a development container, check these requirements in the remote host or container where the extension runs.
+Confirm that the architecture is `x86_64`, the glibc version is 2.39 or later, and Python is 3.12.x. For Visual Studio Code (VS Code) over SSH or in a development container, check these requirements where you plan to run the Arm ML Inference Advisor (MLIA) extension.
 
 ## Create a Python environment
 
-Create a virtual environment so that the Arm ML Inference Advisor (MLIA) packages don't conflict with any existing ML framework environment:
+Create a virtual environment so that the MLIA packages don't conflict with any existing ML framework environment:
 
 ```bash
 python3.12 -m venv mlia_env

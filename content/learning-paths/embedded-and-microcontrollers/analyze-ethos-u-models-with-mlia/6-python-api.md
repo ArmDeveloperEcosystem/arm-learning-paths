@@ -98,4 +98,4 @@ You've used the Python API to run the same kind of analysis you performed from t
 
 You can now incorporate these MLIA checks into an automation or integration workflow.
 
-To inspect these results interactively, continue to [(Optional) Analyze models with the MLIA VS Code extension](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/).
+To inspect these results interactively on Visual Studio Code, see [(Optional) Use the MLIA and Model Explorer Visual Studio Code extension](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/).
