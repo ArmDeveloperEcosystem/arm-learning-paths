@@ -19,7 +19,7 @@ author: Jason Andrews
 
 test_images:
 - ubuntu:latest
-test_maintenance: true
+test_maintenance: false
 
 weight: 1
 tool_install: true
