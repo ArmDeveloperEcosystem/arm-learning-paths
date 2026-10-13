@@ -156,7 +156,7 @@ The container sees the kernel release advertised by gVisor instead of the host k
 
 Run `dmesg` using Docker's standard `runc` runtime:
 
-```bash
+```console
 sudo docker run --runtime=runc --rm ubuntu:24.04 dmesg
 ```
 
