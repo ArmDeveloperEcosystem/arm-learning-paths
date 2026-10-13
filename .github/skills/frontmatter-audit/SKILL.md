@@ -1,23 +1,23 @@
 ---
 name: frontmatter-audit
-description: Audit YAML front matter and metadata for Arm Learning Paths and install guides. Use when checking required fields, fixed layout fields, duplicate weights, draft visibility metadata, closed-list metadata values, description presence or quality, YAML validity, and front matter consistency.
+description: Audit YAML front matter and metadata for Arm Learning Paths and install guides. Use when checking required fields, fixed layout fields, duplicate weights, draft visibility metadata, closed-list metadata values, Learning Path tag suggestions, description presence or quality, YAML validity, and front matter consistency.
 ---
 
 # Front matter audit
 
-Use this skill to audit front matter and metadata without rewriting body content. It can report issues or make metadata-only edits when requested.
+Use this skill to audit front matter and metadata without rewriting body content. It can report issues, suggest metadata values for human review, or make metadata-only edits when requested. For draft visibility changes during content intake, use `.github/skills/intake-metadata-update/SKILL.md`.
 
-## Workflow
+## Shared workflow
 
-1. Identify whether the target is a Learning Path, single-page install guide, multi-page install guide, or mixed content directory.
-2. Read the front matter and enough body context to understand the page task, platform, and outcome.
-3. Check YAML validity and preserve front matter order when editing.
-4. Check required and fixed fields for the content type.
-5. Check metadata consistency across files in a content unit, including duplicate or missing `weight` values.
-6. Check whether `description` is present and fit for purpose. If it is missing or weak, either report it or use `.github/skills/metadata-description-update/SKILL.md` when the user asked for edits.
-7. After completing all checks, report findings by severity with file and line references when available.
+1. Identify the content type and scope: Learning Path directory, single-page install guide, multi-page install guide, or mixed directory. For mixed content, run the matching procedure below for each content type.
+2. Read the relevant front matter and enough body context to understand the task, platform, and outcome.
+3. Check YAML validity. Preserve front matter order when editing.
+4. Perform the applicable content-type check.
+5. After performing checks, return the files changes, lines changed, and rationale for any changes or suggestions that you make. 
 
-## Learning Path checks
+
+
+### Learning Path checks
 
 For a Learning Path directory:
 
@@ -33,9 +33,11 @@ For a Learning Path directory:
 - `armips` should use Arm IP families such as Neoverse, Cortex-A, or Cortex-M, not specific CPU models or Arm architecture versions.
 - `author` can list multiple authors with YAML list syntax.
 - `generate_summary_faq`, `rerun_summary`, and `rerun_faqs` values are only `true` and `false`.
+- Evalue existing tags before proposing additions or edits. Verify closed-list `subjects`, `skilllevels`, and `operatingsystems` against the metadata example; do not invent values outside those lists. `tools_software_languages` and `armips` are open lists, but suggestions must still be supported by the content and relevant repository examples. Treat tag suggestions as protected metadata: propose them for human review and do not apply them unless the user explicitly approves the values.
 - Skip `_next-steps.md` for description updates unless the user explicitly asks how to handle it.
 
-## Install guide checks
+
+### Install guide checks
 
 For an install guide:
 
@@ -46,6 +48,7 @@ For an install guide:
 - If `multi_install` is true, the first page should act as the series overview.
 - Sub-pages in a multi-page guide should set `multitool_install_part: true`.
 - Install guide descriptions should describe the tool, supported Arm platform or operating system context, and what the setup enables.
+- Evaluate existing `additional_search_terms` before suggesting additions or removals; suggest only terms supported by the guide content. Check relevant repository examples for spelling and style, and do not suggest unsupported terms. Do not apply search-term suggestions unless the user explicitly approves them.
 
 ## Description quality checks
 
@@ -65,6 +68,6 @@ For an install guide:
 
 ## Response format
 
-For audits, lead with metadata findings ordered by severity and include file and line references. Then add skipped files, assumptions, and a short summary.
+For audits, lead with metadata findings ordered by severity and include file and line references. Then add skipped files, assumptions, and a short summary. For tag or search-term suggestions, list proposed additions or replacements with a brief content-based rationale. Identify fields or terms for which you can't support an addition.
 
 For edits, summarize changed fields and note any metadata checks performed.
