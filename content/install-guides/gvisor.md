@@ -34,7 +34,7 @@ gVisor delivers a middle ground between lightweight containers and hardware-virt
 
 You'll install `runsc` on an Arm Linux host and verify it with Docker Engine. 
 
-By default, gVisor uses its systrap platform to intercept system calls in user space using Linux signals and shared memory. gVisor therefore doesn't need hardware virtualization or `/dev/kvm` access.
+By default, gVisor uses its Systrap platform to intercept system calls in user space using Linux signals and shared memory. gVisor therefore doesn't need hardware virtualization or `/dev/kvm` access.
 
 ## Before you begin
 
