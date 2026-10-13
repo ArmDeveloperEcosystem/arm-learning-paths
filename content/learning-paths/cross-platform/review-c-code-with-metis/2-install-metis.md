@@ -25,7 +25,7 @@ If the Xcode Command Line Tools are already installed, macOS reports that no ins
 
 ## Install uv and Python
 
-Metis is a Python project. Use `uv` to install Python 3.12 and create an isolated Metis environment:
+Metis requires Python 3.12 or later. This Learning Path uses `uv` to install Python 3.12 and create an isolated Metis environment:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -68,31 +68,34 @@ cd "$HOME/metis-security-review"
 
 ## Clone and install Metis
 
-Clone the Metis repository at the 1.5.0 release:
+Clone the Metis repository at the tested [2.0.0 release](https://github.com/arm/metis/releases/tag/metis-v2.0.0):
 
 ```bash
-git clone --branch metis-v1.5.0 --depth 1 \
+git clone --branch metis-v2.0.0 --depth 1 \
   https://github.com/arm/metis.git \
   "$HOME/metis-security-review/metis"
 
 cd "$HOME/metis-security-review/metis"
 
-uv sync --no-dev
+uv sync --no-dev --python 3.12
 source "$HOME/metis-security-review/metis/.venv/bin/activate"
 
 command -v metis
 metis --version
+git rev-parse HEAD
 
 cd "$HOME/metis-security-review"
 ```
 
-`uv sync --no-dev` installs only the runtime dependencies needed to run the Metis CLI. It selects a Python version that satisfies the Metis project requirements, creates `metis/.venv`, and installs Metis there. Activating the environment makes the `metis` command and the matching Python interpreter available in the current terminal.
+`uv sync --no-dev --python 3.12` installs only the runtime dependencies needed to run the Metis CLI, using Python 3.12. It creates `metis/.venv` and installs Metis there. Activating the environment makes the `metis` command and the matching Python interpreter available in the current terminal.
 
-The version command should report:
+The expected output from `metis --version` for this tag is:
 
 ```output
-Metis 1.5.0
+Metis 2.0.0
 ```
+
+The `metis-v2.0.0` tag points to commit [`742b20d685b0aeb3216b36ddfc44bc5e05ace82c`](https://github.com/arm/metis/commit/742b20d685b0aeb3216b36ddfc44bc5e05ace82c). The output of `git rev-parse HEAD` should match this commit. Record the version and commit when comparing runs.
 
 If you open a new terminal, return to the exercise workspace and reactivate the Metis environment before continuing:
 
@@ -106,51 +109,32 @@ The path printed by `command -v` should end with `metis-security-review/metis/.v
 
 ## Configure the model provider
 
-Metis supports several hosted and local model providers. The following commands use OpenAI as an example. Export your API key in the same terminal that will run Metis:
+Metis supports several hosted and local model providers. These examples use an OpenAI-compatible endpoint that serves the model ID `gpt-6.1-sol`. Export your API key in the same terminal that will run Metis:
 
 ```bash
 export OPENAI_API_KEY="your-api-key"
-# Optional: set this if your organization uses an OpenAI-compatible proxy.
-# export OPENAI_BASE_URL="https://your-openai-compatible-endpoint/v1"
 ```
 
-Do not add secrets to `.metis.md`, shell history, source control, or report files.
+Do not add secrets to `.metis.md`, `metis-review.yaml`, shell history, source control, or report files.
 
-If your organization provides an OpenAI-compatible endpoint, export `OPENAI_BASE_URL` before running Metis. Additionally, remember to install any certificates required by your organization so Python can verify the endpoint. Otherwise, the examples use the public OpenAI API endpoint.
-
-For other model providers, follow the [Metis provider instructions](https://github.com/arm/metis#2-set-up-llm-provider).
-
-Check that Python inside the active Metis environment can reach the configured OpenAI endpoint:
+Create a provider configuration outside the review targets. Replace `https://your-provider.example/v1` below with the trusted base URL of the provider that serves `gpt-6.1-sol`, including any required API prefix. The example address is a placeholder, not a service endpoint:
 
 ```bash
-python - <<'PY'
-import os
-import httpx
-
-base_url = (
-    os.environ.get("OPENAI_BASE_URL")
-    or os.environ.get("OPENAI_API_BASE")
-    or "https://api.openai.com/v1"
-)
-response = httpx.get(
-    base_url.rstrip("/") + "/models",
-    headers={"Authorization": "Bearer " + os.environ["OPENAI_API_KEY"]},
-    timeout=20,
-)
-print(f"status: {response.status_code}")
-response.raise_for_status()
-PY
+cat > "$HOME/metis-security-review/metis-review.yaml" <<'EOF'
+llm_provider:
+  name: openai
+  model: gpt-6.1-sol
+  base_url: https://your-provider.example/v1
+EOF
 ```
 
-The expected output is:
+The review commands select this file explicitly with `--config`. The captured reviews use `gpt-6.1-sol`; choosing another model can change the findings. Metis reads the API key from `OPENAI_API_KEY`. This provider-only configuration inherits the packaged execution graph; adding an `execution` section replaces that graph as a whole.
 
-```output
-status: 200
-```
+Model IDs and availability depend on the endpoint. Use a provider that offers `gpt-6.1-sol` and supports the OpenAI Responses API; do not assume that a model ID from one provider is available at another provider's URL.
 
-If this check reports `401` or `403`, check the API key and model access. If it reports `404`, check the base URL. If it reports a certificate verification error or timeout, check your network, proxy, and Python certificate configuration before running a review.
+For custom CA certificates, follow the [HTTPX `SSL_CERT_FILE` guidance](https://www.python-httpx.org/environment_variables/#ssl_cert_file). Keep certificate verification enabled.
 
-The endpoint you use can affect runtime, rate limits, retry behavior, response formatting, and the set of reported findings.
+For other providers, follow the [Metis 2.0.0 provider setup instructions](https://github.com/arm/metis/blob/metis-v2.0.0/README.md#2-set-up-llm-provider).
 
 ## Confirm that the command starts
 
@@ -160,8 +144,8 @@ Display the command help without starting a model-backed review. This verifies t
 metis --help
 ```
 
-The help output should include options such as `--codebase-path`, `--command`, `--non-interactive`, and `--output-file`.
+The help output should include `--codebase-path`, `--config`, `--interactive`, and `--output-file`. Repeat `--output-file` to save more than one format. Metis 2.0.0 runs the configured graph by default; the packaged graph includes Initialize, Review, and Triage. Use `--interactive` to open the prompt for the exercises. Their direct review commands run Initialize prerequisites automatically, and omitting `--triage` keeps the results review-only so you can assess the findings manually afterward.
 
 ## What you've accomplished and what's next
 
-You installed Metis v1.5.0 and set it up with your model provider. Next, you will review a small C program and compare the report with defects that are intentionally present in its source.
+You installed the tested Metis 2.0.0 release and set it up with your model provider. Next, you will review a small C program and compare the report with defects that are intentionally present in its source.

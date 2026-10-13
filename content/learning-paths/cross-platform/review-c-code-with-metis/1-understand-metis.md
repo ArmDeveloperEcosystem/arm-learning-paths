@@ -21,24 +21,23 @@ Model-backed review can consume substantial API tokens. The initial exercise is 
 
 A Metis review starts with source files and project context. Metis collects language-aware evidence, asks your configured model to investigate possible vulnerabilities, and returns structured findings for a human reviewer.
 
-For C programs, reviewers often care about memory safety, integer arithmetic, resource management, parser state, and input validation. Tree-sitter is a parser that turns source files into syntax trees, so tools can identify functions, variables, calls, and other language constructs without treating code as plain text. Metis uses Tree-sitter to build a code graph of symbols and relationships. Its reachability review follows paths between possible attacker-controlled inputs and security-sensitive operations. The model receives source paths and targeted checks, rather than only a large prompt containing raw files.
+Metis offers two review approaches:
 
-## Providing Metis with context
+- **Simple LLM review (default):** the model examines source code or a patch using language-specific security prompts and project guidance. It returns structured findings without requiring a code graph. This is also the review path for languages without C/C++ reachability support.
+- **Optional reachability review:** for C/C++, Tree-sitter builds a CodeGraph of functions, calls, and source facts. When enabled, `reachability` reviews selected functions with this evidence and surrounding caller/callee context. Graph evidence does not by itself prove attacker control, build reachability, or exploitability.
 
-Metis has two main ways to give the model source-code context:
+In Metis 2.0.0, the packaged Review stage runs `simple_llm_review`, `finding_dedup`, and `result`. Reachability is opt-in, not part of this default review. Initialize still builds the CodeGraph for Triage. The exercises use the shipped graph through `review_code` and `review_file` without enabling reachability.
 
-- **Source navigation:** this is the default for review commands. Metis reads files from the codebase and gives the model targeted source snippets, paths, and checks. For C code, this includes Tree-sitter-based reachability analysis. Use this mode when you want to review a file, directory, patch, or small codebase without building an index first.
-- **Vector indexing:** this is optional. The `index` command builds an embedding index for code and documentation, and `update` refreshes that index from a patch. Use indexing when you want to ask broad questions with `ask`, search across a larger repository, or add indexed context to later review and triage commands.
-
-The exercises in this Learning Path use source navigation and C reachability analysis. You do not build an index because the review targets are small and the tasks are focused.
+## Follow the review workflow
 
 A typical Metis workflow looks like this:
 
 1. Pick the review question, such as "review this parser file" or "review this patch."
-2. Choose a command: `review_code`, `review_dir`, `review_file`, `review_patch`, `ask`, or `triage`.
+2. Choose a review command: `review_code`, `review_dir`, `review_file`, or `review_patch`.
 3. Add project-specific security context in `.metis.md` when the source needs extra assumptions.
 4. Run Metis and save the result as JSON, SARIF, or both.
-5. Check each finding against the source code, input boundaries, build configuration, and tests.
+5. Optionally run Metis triage to assess the candidates against additional source evidence.
+6. Check the remaining findings against the source code, input boundaries, build configuration, and tests.
 
 Metis supplies the review workflow, source navigation, prompts, validation stages, and output handling. The model provider supplies the reasoning model. Results can vary between models and providers even when the source code is unchanged.
 
@@ -51,7 +50,23 @@ Use the narrowest scope that answers your review question:
 - `review_file` focuses on one source file while retaining codebase context.
 - `review_patch` focuses on changed code and is suited to pull-request or pre-merge review.
 
-This Learning Path demonstrates use of `review_code` and `review_file`.
+This Learning Path demonstrates `review_code` and `review_file` at the prompt started with `--interactive`. Direct review commands run their Initialize prerequisites automatically, so the exercises do not need a separate `init` command.
+
+## Strengthen findings with automated triage
+
+Review discovers candidate issues; triage assesses existing findings. Metis starts with a source window around the reported location. For C/C++, available CodeGraph context adds the enclosing function, callers, and callees. The model can use navigation tools to inspect missing definitions, macros, or guards, then decide whether the evidence supports the finding (`valid`), refutes it (`invalid`), or cannot settle it (`inconclusive`). Keyword rules do not override these verdicts.
+
+In the built-in workflow, both `valid` and `invalid` require citations and a resolution chain. Metis checks that cited lines were displayed to the model for that finding, remain inside the codebase, and match current source. Unusable citations produce `inconclusive`. These checks validate citation provenance, not the semantic truth of the model's reasoning; even `valid` is not proof of a working exploit.
+
+Without `--interactive`, Metis 2.0.0 runs the full configured graph. The packaged graph includes Initialize, Review, and Triage, so it triages findings automatically. In interactive mode, `--triage` optionally chains Triage after `review_code`, `review_dir`, `review_file`, or `review_patch`; the `triage` command can instead assess an existing Metis review JSON or SARIF report.
+
+Automated triage can consume additional model tokens. These exercises use `--interactive` without `--triage` so you can inspect review-only findings and practice manual triage. See the [Metis 2.0.0 triage flow](https://github.com/arm/metis/blob/metis-v2.0.0/docs/triage-flow.md) for decisions, citation validation, and report annotations.
+
+## Configure the workflow with graph YAML
+
+The execution graph describes the workflow, not the source code's call graph. In `metis.yaml`, `metis_engine.execution` selects stages and their nodes. The packaged graph runs `initialize` to prepare context and build the CodeGraph, `review` to run simple LLM review and deduplicate findings, and `triage` to assess Review's SARIF findings. Input bindings pass data and establish dependencies; `depends_on` adds ordering without passing a value.
+
+The exercises configure only the model provider and inherit this graph. An explicit `execution` section replaces the whole packaged graph rather than merging individual nodes. To customize it or enable reachability, start from the [Metis 2.0.0 execution-graph configuration](https://github.com/arm/metis/blob/metis-v2.0.0/docs/execution-graph.md#default-graph) and retain the required stages, outputs, and dependencies.
 
 ## Interpret Metis findings
 
@@ -76,4 +91,4 @@ You will apply these questions to the libpng report later in the Learning Path.
 
 ## What you've learned and what's next
 
-You have seen how Metis gathers source evidence, when indexing is useful, and why every result needs human triage. Next, you will install the tested release and add your provider API key.
+You have seen how default simple LLM review and optional reachability review find candidates, how automated triage assesses the evidence, and why human validation is still needed. Next, you will install the tested release and add your provider API key.

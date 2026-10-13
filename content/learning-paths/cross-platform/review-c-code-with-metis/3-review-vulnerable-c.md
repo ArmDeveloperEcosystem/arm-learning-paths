@@ -34,16 +34,37 @@ The note tells Metis how to treat inputs and security boundaries. The source fil
 
 ## Run the review
 
-Change into the review directory and run `review_code`. Save JSON for detailed inspection and SARIF for code-scanning tools:
+Change into the review directory and start the Metis interactive prompt with the provider configuration you created. Save JSON for detailed inspection and SARIF for code-scanning tools:
 
 ```bash
 cd "$HOME/metis-security-review/dvcp-review"
 metis \
+  --interactive \
   --codebase-path . \
-  --non-interactive \
-  --command "review_code" \
+  --config "$HOME/metis-security-review/metis-review.yaml" \
   --output-file ../results/dvcp.json \
   --output-file ../results/dvcp.sarif
+```
+
+At the Metis prompt, run the review, then exit after it completes. The command runs its Initialize prerequisites automatically, then performs the packaged simple LLM review and deduplication:
+
+```console
+review_code
+exit
+```
+
+Metis prints review progress and detailed findings under `File:`, with an `Identified issue` heading. Finding fields include `Snippet`, `Line number`, `CWE`, `Severity`, `Why`, `Mitigation`, and `Confidence`. After the findings, the export and token-usage output is similar to:
+
+```output
+Results saved to ../results/dvcp.json
+SARIF report saved to ../results/dvcp.sarif
+Token usage (review_code)
+Current (input: 8,420 · output: 3,349 · total: 11,769)
+```
+
+Back in your shell, return to the exercise workspace:
+
+```bash
 cd "$HOME/metis-security-review"
 ```
 
@@ -53,7 +74,7 @@ It can take a couple of minutes to complete.
 
 ## Summarize the JSON report
 
-Use the Python interpreter from the active Metis environment to print the issue type and source location for each finding:
+The JSON report stores findings in `reviews[].reviews`. Source locations can appear in an `anchor`, in `primary_file` and `line_number`, or in the enclosing review group's `file` field. Use the Python interpreter from the active Metis environment to count the findings and print their issue types and source locations:
 
 ```bash
 python - <<'PY'
@@ -61,54 +82,55 @@ import json
 from pathlib import Path
 
 data = json.loads(Path("results/dvcp.json").read_text())
-findings = [
-    finding
-    for review_group in data["reviews"]
-    for finding in review_group["reviews"]
-]
-
-print(f"Finding count: {len(findings)}")
-for finding in findings:
-    anchor = finding.get("anchor") or {}
-    file_path = (
-        anchor.get("file_path")
-        or finding.get("primary_file")
-        or finding.get("file")
-    )
-    line = anchor.get("start_line") or finding.get("line_number")
-    print(
-        f"- {finding['cwe']} {finding['issue']} "
-        f"({file_path}:{line})"
-    )
+review_groups = data["reviews"]
+count = sum(len(group["reviews"]) for group in review_groups)
+print(f"Finding count: {count}")
+for review_group in review_groups:
+    for finding in review_group["reviews"]:
+        anchor = finding.get("anchor") or {}
+        file_path = (
+            anchor.get("file_path")
+            or finding.get("primary_file")
+            or finding.get("file")
+            or review_group.get("file")
+        )
+        line = anchor.get("start_line") or finding.get("line_number")
+        print(
+            f"- {finding['cwe']} {finding['issue']} "
+            f"({file_path}:{line})"
+        )
 PY
 ```
+
+This example was captured on November 2, 2026 using the `metis-v2.0.0` tag ([`742b20d`](https://github.com/arm/metis/commit/742b20d685b0aeb3216b36ddfc44bc5e05ace82c)), with `gpt-6.1-sol` through an OpenAI-compatible endpoint and DVCP commit [`8dcbd20`](https://github.com/hardik05/Damn_Vulnerable_C_Program/commit/8dcbd202887f587783952a320a2301de701be529). The provider reported the model ID as `gpt-6.1-sol`. The run used the packaged simple LLM review and deduplication nodes; reachability review and automated triage were not enabled.
 
 The output is similar to:
 
 ```output
-Finding count: 9
-- CWE-190 Image width and height read from the file are added in a signed int without validation, allowing overflow before the result is used as an allocation size. (dvcp.c:54)
-- CWE-120 The code copies the full img.data array into buff1 without ensuring that the allocated size1 buffer is at least sizeof(img.data). (dvcp.c:58)
-- CWE-415 buff1 is freed unconditionally and then freed again when size1 is even. (dvcp.c:62)
-- CWE-416 After buff1 is freed, an alternate branch can write to buff1 when size1 is divisible by 3. (dvcp.c:67)
-- CWE-191 Image dimensions read from the file are subtracted and offset in a signed int without validation, allowing underflow or negative values before allocation. (dvcp.c:74)
-- CWE-120 The code copies the full img.data array into buff2 without ensuring that the allocated size2 buffer is at least sizeof(img.data). (dvcp.c:79)
-- CWE-787 The code copies the full img.data array into buff4 even though buff4 was allocated with attacker-controlled size3 and may be smaller than sizeof(img.data). (dvcp.c:87)
-- CWE-125 The computed size3 value is used as an index into a 10-byte stack buffer without bounds checking. (dvcp.c:90)
-- CWE-674 stack_operation recursively calls itself in an infinite loop with a large stack buffer, causing stack exhaustion. (dvcp.c:25)
+Finding count: 10
+- CWE-125 Unterminated image fields cause out-of-bounds string reads (dvcp.c:48)
+- CWE-122 Unchecked dimension-derived allocations permit heap overflows and NULL dereferences (dvcp.c:54)
+- CWE-415 An even dimension sum causes a double free (dvcp.c:59)
+- CWE-416 An odd dimension sum divisible by three causes a use-after-free write (dvcp.c:64)
+- CWE-369 Unvalidated image dimensions cause invalid integer division (dvcp.c:82)
+- CWE-787 File-controlled quotient indexes outside a stack buffer (dvcp.c:90)
+- CWE-787 The heap buffer is accessed one byte past its allocation (dvcp.c:91)
+- CWE-674 Recursive operation has no termination condition (dvcp.c:22)
+- CWE-400 Allocation loop intentionally retains memory until exhaustion (dvcp.c:109)
+- CWE-401 Large-quotient branch discards an allocated buffer without freeing it (dvcp.c:97)
 ```
 
-Your exact count and wording can differ. A valid report can contain zero findings. An empty report means that this run did not report any findings; it does not mean the program is safe. If you expected findings, check the provider reachability test and any Metis log output before judging the result.
+Your exact count and wording can differ. A valid report can contain zero findings. An empty report means that this run did not report any findings; it does not mean the program is safe. If you expected findings, check your provider connection and any Metis log output before judging the result.
 
 ## Compare the report with known defects
 
 Display four source regions that the program identifies as deliberately vulnerable:
 
 ```bash
-sed -n '20,28p' dvcp-review/dvcp.c
-sed -n '51,68p' dvcp-review/dvcp.c
-sed -n '72,83p' dvcp-review/dvcp.c
-sed -n '89,108p' dvcp-review/dvcp.c
+sed -n '14,28p' dvcp-review/dvcp.c
+sed -n '42,69p' dvcp-review/dvcp.c
+sed -n '72,87p' dvcp-review/dvcp.c
+sed -n '89,115p' dvcp-review/dvcp.c
 ```
 
 Check whether your report covers these concrete cases:
@@ -119,20 +141,17 @@ Check whether your report covers these concrete cases:
 - `size3` is used as an index into fixed-size and heap buffers without bounds checks.
 - Attacker-controlled dimensions can select recursive stack exhaustion or repeated heap allocation.
 
-During validation for this Learning Path, Metis v1.5.0 reported nine findings. This table shows how that run compared with the known defects in the teaching program:
+The captured Metis 2.0.0 JSON and SARIF reports contain ten findings. Source anchors can span multiple lines, and one finding can discuss additional sites in its reasoning. The table maps those reported regions and explanations to the known source defects:
 
 | Source issue | Tested-run outcome |
 | --- | --- |
-| `size1` signed overflow before `malloc()` and `memcpy()` | Reported as `CWE-190` at `dvcp.c:54` |
-| `memcpy()` into `buff1` without checking `size1` against `sizeof(img.data)` | Reported as `CWE-120` at `dvcp.c:58` |
-| `buff1` double free | Reported as `CWE-415` at `dvcp.c:62` |
-| `buff1` use-after-free write | Reported as `CWE-416` at `dvcp.c:67` |
-| `size2` signed underflow or negative allocation size before `memcpy()` | Reported as `CWE-191` at `dvcp.c:74` |
-| `memcpy()` into `buff2` without checking `size2` against `sizeof(img.data)` | Reported as `CWE-120` at `dvcp.c:79` |
-| `buff4` allocation smaller than `memcpy()` length | Reported as `CWE-787` at `dvcp.c:87` |
-| `size3` out-of-bounds stack-buffer read | Reported as `CWE-125` at `dvcp.c:90` |
-| Recursive `stack_operation()` with a large stack buffer | Reported as `CWE-674` at `dvcp.c:25` |
-| Divide by zero, indexed heap out-of-bounds read/write, indexed stack out-of-bounds write, memory leak, and heap exhaustion | Not reported in that run |
+| Non-NUL-terminated image fields passed to `%s` | `CWE-125` at `dvcp.c:48` |
+| Dimension-derived allocations followed by fixed-size copies | `CWE-122` anchored at `dvcp.c:54–58`; its reasoning also covers `dvcp.c:74–79` and `dvcp.c:82–87` |
+| `buff1` double free and use-after-free | `CWE-415` at `dvcp.c:59–63`; `CWE-416` at `dvcp.c:64–69` |
+| Integer division using unvalidated image dimensions | `CWE-369` at `dvcp.c:82` |
+| Indexed stack and heap accesses | Separate `CWE-787` findings at `dvcp.c:90–94` and `dvcp.c:91–95` |
+| `buff4` allocation lost without being freed | `CWE-401` at `dvcp.c:97–100` |
+| Unbounded recursion and repeated heap allocation | `CWE-674` at `dvcp.c:22–27`; `CWE-400` at `dvcp.c:109–115` |
 
 For each reported finding, verify the source location, attacker control, and operation. Also record known source defects that the run omitted. The goal is to practice reviewing Metis output, not to turn the finding count into a coverage score.
 
