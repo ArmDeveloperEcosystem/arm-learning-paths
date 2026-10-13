@@ -38,9 +38,9 @@ By default, gVisor uses its systrap platform to intercept system calls in user s
 
 ## Before you begin
 
-You need:
+Ensure that you have the following:
 
-- Ubuntu 24.04 (Ubuntu 22.04 and later are also supported) running on an Arm Linux system  
+- Ubuntu 22.04 and later running on an Arm Linux system 
 - [Docker Engine](/install-guides/docker/docker-engine/) installed
 - Sudo access to install packages and restart Docker
 
@@ -56,7 +56,7 @@ For an Arm Linux system, the output is:
 aarch64
 ```
 
-## Install runsc
+## Install gVisor runsc
 
 Install the APT repository prerequisites:
 
@@ -88,11 +88,7 @@ The package includes the runtime and its accompanying binaries.
 
 ## Configure Docker
 
-The APT package configures Docker when Docker is already installed. If you install Docker after the repository, register the runtime:
-
-```bash
-sudo runsc install
-```
+When you install `runsc`, Docker is automatically configured.
 
 Restart Docker to load the runtime configuration:
 
@@ -150,7 +146,7 @@ After any image download messages, the expected output for the gVisor release wi
 4.19.0-gvisor aarch64
 ```
 
-The container sees the kernel release advertised by gVisor instead of the host kernel's release. `4.19.0-gvisor` is a Linux compatibility identifier and doesn't mean gVisor runs a Linux 4.19 guest kernel. Use `runsc --version` to identify the installed gVisor release. The version string alone doesn't verify isolation.
+The container sees the kernel release advertised by gVisor instead of the host kernel's release. `4.19.0-gvisor` is a Linux compatibility identifier and doesn't mean that gVisor runs a Linux 4.19 guest kernel. Use `runsc --version` to identify the installed gVisor release. The version string alone doesn't verify isolation.
 
 ### Compare kernel logs
 
@@ -189,11 +185,11 @@ The output starts with messages similar to:
 
 The message text and timestamps vary between runs.
 
-gVisor handles the kernel-log request itself and generates sandbox messages instead of exposing the host's kernel logs. The banner is a quick check that Docker selected gVisor for the test container. 
+gVisor handles the kernel-log request and generates sandbox messages instead of exposing the host's kernel logs. The banner is a quick check that Docker selected gVisor for the test container. 
 
 ## Troubleshoot issues with gVisor
 
-If Docker reports an unknown runtime, run `sudo runsc install`, restart Docker, and inspect the runtimes again. The [Docker quick start](https://gvisor.dev/docs/user_guide/quick_start/docker/) describes the configuration entry.
+If Docker reports an unknown runtime, or if you install Docker after `runsc`, run `sudo runsc install`. Then, restart Docker and inspect the runtimes again. The [Docker quick start](https://gvisor.dev/docs/user_guide/quick_start/docker/) describes the configuration entry.
 
 If Docker fails to restart, inspect `sudo journalctl -u docker -n 50 --no-pager` for configuration errors. Preserve other settings in `/etc/docker/daemon.json` when correcting the runtime entry.
 
@@ -201,6 +197,6 @@ If the test container works but your application fails, check the [gVisor applic
 
 ## Next steps
 
-You can now run your own containers with gVisor. To run your own containers, include `--runtime=runsc` in your `docker run` commands. 
+You can now run your own containers with gVisor by including `--runtime=runsc` in your `docker run` commands. 
 
 For guidance on choosing workloads and tuning your configuration, see the [gVisor production guide](https://gvisor.dev/docs/user_guide/production/).
