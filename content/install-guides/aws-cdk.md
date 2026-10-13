@@ -2,6 +2,12 @@
 additional_search_terms:
 - cloud
 - deploy
+- cloud development kit
+- infrastructure as code
+- IaC
+- CloudFormation
+- AWS Graviton
+- npm
 layout: installtoolsall
 minutes_to_complete: 15
 author: Anupras Mohapatra
