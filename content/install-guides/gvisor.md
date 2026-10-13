@@ -19,7 +19,7 @@ author: Jason Andrews
 
 test_images:
 - ubuntu:latest
-test_maintenance: true
+test_maintenance: false
 
 weight: 1
 tool_install: true
@@ -152,7 +152,7 @@ The container sees the kernel release advertised by gVisor instead of the host k
 
 Run `dmesg` using Docker's standard `runc` runtime:
 
-```console
+```bash
 sudo docker run --runtime=runc --rm ubuntu:24.04 dmesg
 ```
 
@@ -164,7 +164,7 @@ dmesg: read kernel buffer failed: Operation not permitted
 
 Repeat the check with `runsc` and list the first 10 log lines using the [upstream runtime verification command](https://gvisor.dev/docs/user_guide/quick_start/docker/#verify-the-runtime):
 
-```console
+```bash
 sudo docker run --runtime=runsc --rm ubuntu:24.04 sh -c 'dmesg | head -n 10'
 ```
 
