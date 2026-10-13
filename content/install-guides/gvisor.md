@@ -88,7 +88,7 @@ The package includes the runtime and its accompanying binaries.
 
 ## Configure Docker
 
-When you install `runsc`, Docker is automatically configured if Docker is already installed. If you installed Docker afterwards, register the runtime:
+Register the runtime:
 
 ```bash
 sudo runsc install
