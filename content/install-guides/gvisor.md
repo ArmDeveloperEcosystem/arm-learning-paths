@@ -19,7 +19,7 @@ author: Jason Andrews
 
 test_images:
 - ubuntu:latest
-test_maintenance: false
+test_maintenance: true
 
 weight: 1
 tool_install: true
@@ -164,7 +164,7 @@ dmesg: read kernel buffer failed: Operation not permitted
 
 Repeat the check with `runsc` and list the first 10 log lines using the [upstream runtime verification command](https://gvisor.dev/docs/user_guide/quick_start/docker/#verify-the-runtime):
 
-```bash
+```console
 sudo docker run --runtime=runsc --rm ubuntu:24.04 sh -c 'dmesg | head -n 10'
 ```
 
