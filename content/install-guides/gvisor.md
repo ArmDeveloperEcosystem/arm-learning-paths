@@ -187,7 +187,7 @@ The message text and timestamps vary between runs.
 
 gVisor handles the kernel-log request and generates sandbox messages instead of exposing the host's kernel logs. The banner is a quick check that Docker selected gVisor for the test container. 
 
-## Troubleshoot issues with gVisor
+## Troubleshoot issues with gVisor runsc
 
 If Docker reports an unknown runtime, or if you install Docker after `runsc`, run `sudo runsc install` to register the runtime. Then, restart Docker and inspect the runtimes again. The [Docker quick start](https://gvisor.dev/docs/user_guide/quick_start/docker/) describes the configuration entry.
 
