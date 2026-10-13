@@ -1,14 +1,14 @@
 ---
-title: Booting a nested L2 guest VM in the hypervisor VM
+title: Prepare and boot a nested L2 guest VM in the hypervisor VM
+description: Create an L2 guest VM inside your L1 hypervisor VM and connect to the nested guest over SSH.
 weight: 5
-
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Prepare and boot a nested L2 guest VM inside the hypervisor VM 
+## Repeat VM setup in the hypervisor VM
 
-This process is essentially identical to the process you followed to create the L1 guest VM on the host. You install all the virtualization tools you need in the hypervisor VM, copy the base image from the host to the `fedora-l1-hyper` VM, resize its disk, create a new seed ISO, and re-run `virt-install` for `fedora-l2-guest`.
+You'll copy the base image and private SSH key from the host to the `fedora-l1-hyper` VM, then install the virtualization tools there. After that, you'll resize the L2 guest disk, create a new seed ISO, and re-run `virt-install` for `fedora-l2-guest`.
 
 ## Copy the image and SSH key to the hypervisor
 
@@ -29,7 +29,7 @@ sudo dnf -y install libvirt libvirt-daemon-qemu libvirt-client qemu-kvm virt-ins
 
 ## Restart the hypervisor VM
 
-After the installation completes, restart the hypervisor VM from the host to start virtualization services. You need to wait a minute to be able to connect again with SSH:
+After the installation completes, restart the hypervisor VM from the host to start virtualization services:
 
 ```bash
  # In the host:
@@ -37,6 +37,7 @@ After the installation completes, restart the hypervisor VM from the host to sta
  # After boot is complete
  ssh -i ~/.ssh/guest_key fedora@{fedora-l1-hyper IP address}
 ```
+Wait for about a minute to connect again with SSH.
 
 ## Create the L2 guest image
 
@@ -54,13 +55,15 @@ After the VM restarts, connect to it again and create the L2 guest VM image:
 
 ## Create a cloud-init seed ISO
 
-Create a seed ISO image for `cloud-config` similar to the other VMs. You copied the private key (`~/guest_key`) into the hypervisor earlier, so derive the matching public key from it to use in `ssh_authorized_keys`:
+Create a seed ISO image for `cloud-config` similar to the other VMs. 
+
+You copied the private key (`~/guest_key`) into the hypervisor earlier. Derive the matching public key from it to use in `ssh_authorized_keys`:
 
 ```bash
 ssh-keygen -y -f ~/guest_key
 ```
 
-Use the output of that command in place of `<your-public-key>` below:
+Use the output of that command in place of `<your-public-key>`:
 
 ```bash
  cat > /tmp/user-data <<EOF 
@@ -94,7 +97,7 @@ Use the output of that command in place of `<your-public-key>` below:
 
 ## Start the L2 guest VM
 
-Start the L2 guest VM and verify that you can connect:
+Start the L2 guest VM using `virt-install`:
 
 ```bash
  sudo virt-install \
@@ -120,7 +123,8 @@ After the VM starts, find its IP address and connect to it with SSH:
  ssh -i ~/guest_key fedora@{fedora-l2-guest ip address}
 ```
 
-You are now connected to an L2 guest VM running inside an L1 hypervisor VM over SSH.
+## What you've accomplished and what's next
 
-In the next step, you use a common synthetic benchmark, sysbench, to measure the overhead of running an application inside a nested VM. To minimize any resource conflicts or CPU scheduling issues, you pin all VMs to a fixed set of cores.
+You've now connected to an L2 guest VM over SSH. The L2 guest VM is running inside an L1 hypervisor VM.
 
+Next, you'll use a synthetic benchmark, `sysbench`, to measure the overhead of running an application inside a nested VM.

@@ -97,3 +97,5 @@ Use discovery in integrations so that your product can report what the current e
 You've used the Python API to run the same kind of analysis you performed from the CLI. You've also learned how to compare model variants programmatically and why the API is useful for product integration or automation.
 
 You can now incorporate these MLIA checks into an automation or integration workflow.
+
+To inspect these results interactively, continue to [(Optional) Analyze models with the MLIA VS Code extension](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/).

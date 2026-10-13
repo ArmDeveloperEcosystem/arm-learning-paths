@@ -7406,6 +7406,12 @@ requantizing
 signedness
 virsh
 virt
+Manu
+roofline
+membw
+LPDDR4X
+doi
+manunicholasjacob
 Autoboot
 BOOTMODE
 DTB
@@ -7463,3 +7469,13 @@ tisdk
 tispl
 uboot
 codename
+Hiwonder
+PuppyPi
+allowlist
+ecda
+fedoraproject
+libcamera
+libnuma
+mixin
+numactl
+unnested

@@ -34,6 +34,8 @@ Arm Ethos-U is the example target in the Learning Path.
 
 If you want to automate the same checks, you can [optionally use the Python API](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/6-python-api/). The API is useful when you want to embed MLIA results in another product, dashboard, CI job, or tool.
 
+You can also [optionally run the checks in VS Code and inspect their results in Model Explorer](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/).
+
 ## How you should use MLIA
 
 MLIA isn't a replacement for graph visualization or runtime profiling. It's an advisory layer that helps earlier in the model preparation workflow. The following table shows which questions MLIA and related tools can answer:
