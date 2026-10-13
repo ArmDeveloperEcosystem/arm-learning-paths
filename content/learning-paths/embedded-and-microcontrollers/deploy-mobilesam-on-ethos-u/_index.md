@@ -16,6 +16,7 @@ learning_objectives:
 prerequisites:
     - A Linux development machine with glibc 2.28 or later, or an Apple silicon Mac running macOS 15 or later
     - On Linux, libstdc++.so.6 providing GLIBCXX_3.4.26 or later for the Corstone-320 FVP
+    - Python 3.12 with development headers and virtual-environment support
     - Familiarity with PyTorch model export and embedded cross-compilation
 
 # START generated_summary_faq

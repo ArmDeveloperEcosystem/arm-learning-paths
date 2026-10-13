@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Check your development machine
 
-Run the following preflight check before downloading the source:
+Use Python 3.12 with development headers and virtual-environment support. Run the following preflight check before downloading the source:
 
 ```bash
 case "$(uname -s)/$(uname -m)" in
@@ -163,16 +163,22 @@ These commands replace `install_executorch.sh` and its TorchAO nightly with rele
 
 ## Verify the environment
 
-Confirm that Python imports ExecuTorch:
+Check the ExecuTorch and Ethos-U imports used by the exporter:
 
 ```bash
-python -c "import executorch; print('ExecuTorch import succeeded')"
+python - <<'PYTHON'
+import executorch.kernels.quantized
+from executorch.backends.arm.ethosu import EthosUPartitioner
+from executorch.backends.arm.quantizer import EthosUQuantizer
+
+print("ExecuTorch Ethos-U imports succeeded")
+PYTHON
 ```
 
 The output is similar to:
 
 ```output
-ExecuTorch import succeeded
+ExecuTorch Ethos-U imports succeeded
 ```
 
 Check the target compiler and FVP:

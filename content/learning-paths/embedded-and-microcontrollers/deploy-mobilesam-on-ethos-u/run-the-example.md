@@ -69,6 +69,8 @@ backends/arm/scripts/run_fvp.sh \
 
 The runner reads the tensor specified by `-i input.bin` and writes its first output tensor to `output-0.bin` under `arm_test/mobilesam/io/`. The console transcript is saved to `arm_test/mobilesam/fvp.log`; validation reads the tensor file.
 
+`--fast` selects fast Ethos-U simulation for functional validation. Don't use its cycle counts or performance monitoring unit (PMU) counters to benchmark the model.
+
 Confirm that the run created the output file before continuing:
 
 ```bash

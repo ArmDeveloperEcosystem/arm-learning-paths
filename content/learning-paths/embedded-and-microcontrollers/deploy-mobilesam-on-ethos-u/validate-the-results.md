@@ -63,6 +63,12 @@ Number of non-delegated nodes: 3
 
 Node counts can vary with dependency versions. Use the values from your export when reporting delegation.
 
+In `arm_test/mobilesam/fvp.log`, also confirm `NPU delegations: 1`. This count records a completed NPU invocation at runtime; the export report shows how the model was partitioned.
+
+{{% notice Note %}}
+The FVP can report `Inference CPU ratio: 100.00 %` and `Inference NPU ratio: 0.00 %` even when the NPU executes the delegated subgraph. These ratios use CPU-side timing, not delegated operator counts. CPU timing isn't cycle accurate on this FVP. Fast mode can also zero PMU event counters and isn't suitable for benchmarking. Use the delegation count and mask comparison to validate this run.
+{{% /notice %}}
+
 ## Inspect the visual result
 
 Open `fvp_comparison.png` under `arm_test/mobilesam/result/` in an image viewer. The image contains three panels:
