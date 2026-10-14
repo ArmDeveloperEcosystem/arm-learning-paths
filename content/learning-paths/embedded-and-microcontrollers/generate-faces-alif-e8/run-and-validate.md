@@ -56,6 +56,14 @@ The source project's reference DevKit run uses these conditions:
 | Execution model | Bare-metal, single core; thread count and CPU affinity don't apply |
 | Observed time | About 78 ms total: about 68 ms for eight `dit_step` calls and 3 ms for `decode` |
 
+These instructions have been verified on a Mac using the following versions:
+
+| Software or component | Version |
+| --- | --- |
+| CMSIS Solution extension | 1.72.0 |
+| Alif SETOOLS | 1.112.00 DEV |
+| SEGGER J-Link Software | 9.36 |
+
 Treat the timing as a reference measurement rather than a pass threshold. Tool versions, the exported program, and board conditions can change the result.
 
 ## Generate more faces
@@ -65,7 +73,9 @@ Use the **SW2** joystick after the boot image appears:
 - Press toward the left to generate one face with the next seed.
 - Press toward the right to start continuous generation. Press in the same direction again to stop.
 
-Each completed generation updates the LCD and prints its seed, class, guidance, timing, and CRC to the console.
+Each completed joystick generation updates the LCD and prints its image number, seed, class, guidance, and total time to the console. The boot demo prints a CRC; joystick log lines don't include one.
+
+Stop continuous generation and wait for the current image to finish before restarting a debug session or resetting the board. Resetting through the debugger during active NPU inference can produce a transient inference error and affect the timing sample. To check standalone boot, end the debug session and press **RESET (SW1)** while the application is idle; the boot image and `Test_result: PASS` should return.
 
 ## View an example result
 
@@ -84,10 +94,31 @@ Use these checks if the application doesn't reach the pass marker:
 | UART has no application output | Set **SW4** to **UART4**, then close and reopen Serial Monitor. |
 | `app-write-mram` receives no response | Set **SW4** to **SEUART**, close programs using the port, and press reset while the tool waits. |
 | The build can't find `ai_layer/model_pte.c` | Run **Setup Python virtual environment**, followed by **Create AI layer**. |
+| The Python setup task rejects Python 3.14 | Install `uv`, check `uv --version` in the VS Code terminal, then run **Setup Python virtual environment (uv)** with Python `3.12`. |
+| SETOOLS reports a missing `utils` directory | Run the command from the extracted SETOOLS directory rather than your home directory. |
 
 ## Optional: use the Corstone-320 FVP
 
-The same CMSIS solution also includes the `SSE-320-U85` target for the Corstone-320 Fixed Virtual Platform (FVP). Select that target in **Manage Solution**, recreate the AI layer, and select **Run** or **Debug**. The FVP produces the same seed-based image and writes its raw result to `out/fvp_image.bin`, but the physical DevKit workflow is the primary target for this Learning Path.
+The same CMSIS solution also includes the `SSE-320-U85` target for the Corstone-320 Fixed Virtual Platform (FVP). On Linux and Windows, the managed tools environment supplies the native FVP. Select `SSE-320-U85` in **Manage Solution**, select **Apply**, recreate the AI layer, and build before selecting **Run** or **Debug**.
+
+On macOS, the project runs the FVP in Docker. Follow these additional steps:
+
+1. Install [Docker Desktop for Mac](https://docs.docker.com/desktop/setup/install/mac-install/) and keep it running.
+2. In `cmsis-executorch.csolution.yml`, find the `debugger` entry under the `SSE-320-U85` target's `target-set`. Replace its `model` value with the project's Docker wrapper:
+
+   ```yaml
+   model: "${workspaceFolder}/.vscode/fvp.sh"
+   ```
+
+3. Select `SSE-320-U85` in **Manage Solution** and select **Apply**. After the extension generates the debug configuration, open a terminal in the `CMSIS-Executorch` directory and copy the macOS configuration:
+
+   ```bash
+   cp .vscode/launch.json.mac .vscode/launch.json
+   ```
+
+4. Recreate the AI layer, build, and select **Run** or **Debug**. The first invocation builds the Docker image and downloads the simulator, so it takes longer than subsequent runs.
+
+The FVP writes the raw image to `out/fvp_image.bin`. These optional steps follow the pinned example's FVP instructions; FVP execution wasn't part of the physical DevKit validation above. To return to the board, select `DevKit-E8`, select **Apply**, and recreate its AI layer before building again.
 
 ## What you've accomplished
 

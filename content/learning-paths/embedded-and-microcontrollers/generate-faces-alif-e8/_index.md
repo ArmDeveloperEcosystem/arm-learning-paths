@@ -21,6 +21,7 @@ prerequisites:
     - Familiarity with Python, machine learning models, and embedded development
     - An [Alif Ensemble E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) with its display and a USB-C data cable
     - A development computer running Linux, macOS, or Windows, with internet access and several GB of free storage
+    - Git, plus Python 3.10 through 3.13 or uv to install a compatible Python interpreter
     - An Arm account for the Keil MDK Community license and an Alif account for downloading SETOOLS
 
 # START generated_summary_faq
