@@ -26,11 +26,11 @@ List the audio devices visible to Python:
 python -m sounddevice
 ```
 
-Confirm that the list contains an input device, such as `MacBook Pro Microphone` or your external microphone. 
+Confirm that the list contains an input device, such as `MacBook Pro Microphone` or your external microphone.
 
 ## Create the transcription script
 
-Create `stt.py` in `~/voice-translator`. `create_recogniser()` loads the model and `transcribe()` accepts recorded samples and returns text. By keeping the recording in `main()`, we let the Gradio application reuse these functions with browser audio.
+Using a file editor of your choice, create a file named `stt.py` in `~/voice-translator`. Copy the code below into the file and save it. `create_recogniser()` loads the model and `transcribe()` accepts recorded samples and returns text. Keeping the recording in `main()` lets the Gradio application reuse these functions with browser audio.
 
 ```python
 from pathlib import Path
@@ -104,8 +104,7 @@ if __name__ == "__main__":
     main()
 ```
 
-`sounddevice` records one channel of `float32` samples at the microphone's sample rate. `sd.wait()` will then wait for the 5 second recording to finish before moving on to the transcription. 
-
+`sounddevice` records one channel of `float32` samples at the microphone's sample rate. `sd.wait()` waits for the five-second recording to finish before transcription starts.
 
 Sherpa-ONNX resamples the audio to the model's 16 kHz input rate. `transcribe()` creates a new stream for each recording, appends half a second of silence to flush the final words, and marks the input as finished. The decode loop then consumes the available frames and returns the transcript.
 
@@ -133,10 +132,9 @@ Recording for 5 seconds...
 Transcript: WHERE IS THE NEAREST TRAIN STATION
 ```
 
-Capitalisation and punctuation may differ, but the transcript should contain the words you spoke. 
+Capitalisation and punctuation may differ, but the transcript should contain the words you spoke.
 
-
-If the transcript is empty, run `python -m sounddevice` again. Check that the `>` marker is beside the microphone you spoke into, and confirm the terminal application's microphone permission in System Settings.
+If the transcript is empty, run `python -m sounddevice` again. Check that the `>` or `*` marker is beside the microphone you spoke into. The `*` marker identifies a device used for both default input and output. Also confirm the terminal application's microphone permission in **System Settings**.
 
 If the script remains at `Recording for 5 seconds...`, check the same device and permission settings, restart the terminal application, and run it again.
 
