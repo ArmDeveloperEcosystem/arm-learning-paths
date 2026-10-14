@@ -1,5 +1,5 @@
 ---
-title: Deploy MySQL on Arm
+title: Deploy MySQL on an Arm-based Linux server
 
 minutes_to_complete: 30
 
@@ -31,31 +31,31 @@ generated_summary_faq:
     review deployment options for bare-metal systems, cloud virtual machines, and managed SQL
     services before choosing an environment. Then, you'll identify MySQL documentation to install
     and configure the server. You'll connect with the MySQL clients and run SQL commands.
-  faqs:
-  - question: Which version of the MySQL reference manual should I use?
-    answer: >-
-      Use the MySQL reference manual for the version of MySQL you're working with.
-      Check the version selected in the documentation before following its installation,
-      configuration, or client instructions.
-  - question: What SQL operations can I try after connecting to MySQL?
-    answer: >-
-      You can create and select a database, create and inspect a table, insert sample records, and
-      query the table to display its contents.
-  - question: What result should I expect after I install and check MySQL?
-    answer: >-
-      You should have a running MySQL server on an Arm-based Linux system. A successful connection
-      with the MySQL client and the ability to issue basic SQL statements indicate that the setup
-      is working.
-  - question: Can I use a managed SQL service instead of installing MySQL myself?
-    answer: >-
-      Yes. You can use Amazon Relational Database Service (RDS) and select an Arm-based instance. Amazon RDS handles MySQL installation
-      for you. If you use a bare-metal server or cloud VM, review the MySQL installation options and
-      choose how to install it yourself.
-  - question: Where should I start if I don't have an Arm node?
-    answer: >-
-      Provision an Arm environment before you install
-      MySQL. For more information, see the [Get started
-      with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) Learning Path.
+  # faqs:
+  # - question: Which version of the MySQL reference manual should I use?
+  #   answer: >-
+  #     Use the MySQL reference manual for the version of MySQL you're working with.
+  #     Check the version selected in the documentation before following its installation,
+  #     configuration, or client instructions.
+  # - question: What SQL operations can I try after connecting to MySQL?
+  #   answer: >-
+  #     You can create and select a database, create and inspect a table, insert sample records, and
+  #     query the table to display its contents.
+  # - question: What result should I expect after I install and check MySQL?
+  #   answer: >-
+  #     You should have a running MySQL server on an Arm-based Linux system. A successful connection
+  #     with the MySQL client and the ability to issue basic SQL statements indicate that the setup
+  #     is working.
+  # - question: Can I use a managed SQL service instead of installing MySQL myself?
+  #   answer: >-
+  #     Yes. You can use Amazon Relational Database Service (RDS) and select an Arm-based instance. Amazon RDS handles MySQL installation
+  #     for you. If you use a bare-metal server or cloud VM, review the MySQL installation options and
+  #     choose how to install it yourself.
+  # - question: Where should I start if I don't have an Arm node?
+  #   answer: >-
+  #     Provision an Arm environment before you install
+  #     MySQL. For more information, see the [Get started
+  #     with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) Learning Path.
 # END generated_summary_faq
 
 author: Jason Andrews
