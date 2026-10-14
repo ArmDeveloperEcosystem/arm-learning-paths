@@ -12,7 +12,7 @@ layout: learningpathall
 Install [Visual Studio Code](https://code.visualstudio.com/) and add the following extensions:
 
 - [Keil Studio Pack](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack), extension ID `Arm.keil-studio-pack`
-- [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python), extension ID `ms-python.python`
+- [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python), extension ID `ms-python.python`
 
 To complete the Learning Path, you need CMSIS Solution extension 1.72.0 or later, which is included with Keil Studio Pack. Accept the project's managed CMSIS-Toolbox 2.15 environment when prompted. Sign in with your Arm account when Keil Studio requests a license. The free Keil MDK Community license supports this example.
 

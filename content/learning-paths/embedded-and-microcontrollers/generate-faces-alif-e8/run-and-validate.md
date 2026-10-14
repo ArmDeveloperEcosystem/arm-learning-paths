@@ -109,7 +109,7 @@ Use the following checks if the application doesn't reach the pass marker:
 
 The same CMSIS solution also includes the `SSE-320-U85` target for the Corstone-320 Fixed Virtual Platform (FVP). On Linux and Windows, the managed tools environment supplies the native FVP. Select `SSE-320-U85` in **Manage Solution**, select **Apply**, recreate the AI layer, and build before selecting **Run** or **Debug**.
 
-On macOS, the project runs the FVP in Docker. Follow these additional steps:
+On macOS, the project runs the FVP in Docker. To use the FVP, follow these additional steps:
 
 1. Install [Docker Desktop for Mac](https://docs.docker.com/desktop/setup/install/mac-install/) and keep it running.
 2. In `cmsis-executorch.csolution.yml`, find the `debugger` entry under the `target-set` of the `SSE-320-U85` target. Replace its `model` value with the Docker wrapper for the project:
@@ -127,6 +127,10 @@ On macOS, the project runs the FVP in Docker. Follow these additional steps:
 4. Recreate the AI layer, build, and select **Run** or **Debug**. The first invocation builds the Docker image and downloads the simulator, so it takes longer than subsequent runs.
 
 The FVP writes the raw image to `out/fvp_image.bin`. To return to the board, select `DevKit-E8`, select **Apply**, and recreate its AI layer before building again.
+
+{{% notice Note %}}
+These optional steps follow the pinned example's FVP instructions. FVP execution wasn't part of the physical DevKit validation.
+{{% /notice %}}
 
 ## What you've accomplished
 
