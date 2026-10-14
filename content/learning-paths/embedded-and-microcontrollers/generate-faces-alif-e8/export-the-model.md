@@ -37,25 +37,33 @@ The CMSIS packs provide the Alif device support and the ExecuTorch runtime compo
 
 ## Set up the Python environment
 
-Open the VS Code Command Palette and select **Tasks: Run Task > Setup Python virtual environment**.
+To set up the Python environment:
+
+1. Open the VS Code Command Palette.
+2. Select **Tasks: Run Task**.
+3. Select **Setup Python virtual environment**.
 
 The task creates `.venv` and installs the pinned export packages. It downloads about 60 MB of pico-faces checkpoints into `model/pico_faces/`. The Python packages include several gigabytes of PyTorch dependencies, so the first setup can take some time.
 
 {{% notice Note %}}
-The exporter supports Python 3.10 through 3.13. If your system Python isn't in that range, first [install uv](https://docs.astral.sh/uv/getting-started/installation/). 
+The exporter supports Python 3.10 through 3.13. If your system Python isn't in that range, start by [installing uv](https://docs.astral.sh/uv/getting-started/installation/).
 
-Restart VS Code after installation so that its tasks can find `uv` on `PATH`, then confirm that it's available in the VS Code terminal:
+Restart VS Code after installation so that its tasks can find `uv` on `PATH`. Then, confirm that it's available in the VS Code terminal:
 
 ```bash
 uv --version
 ```
 
-Select **Setup Python virtual environment (uv)** and enter `3.12` at the Python version prompt. This task can download a compatible interpreter. The physical DevKit validation used Python 3.12.13. Python 3.14 isn't supported by this exporter.
+Select **Setup Python virtual environment (uv)** and enter `3.12` at the Python version prompt. This task can download a compatible interpreter. The physical DevKit was validated using Python 3.12.13. Python 3.14 isn't supported by this exporter.
 {{% /notice %}}
 
 ## Create the AI layer
 
-Select **Tasks: Run Task > Create AI layer**.
+To create the AI layer:
+
+1. Open the VS Code Command Palette.
+2. Select **Tasks: Run Task**.
+3. Select **Create AI layer**.
 
 If the task reports that `cmsis-executorch.cbuild-mlops.yml` is missing, select **Build** once in the **CMSIS** view. The extension generates the target description. You can then run **Create AI layer** again.
 
