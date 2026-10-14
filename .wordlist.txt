@@ -7497,3 +7497,6 @@ landlock
 nemoclaw
 openshell
 unnested
+PMIC
+pmic
+vcgencmd
