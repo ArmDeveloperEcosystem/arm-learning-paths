@@ -1,6 +1,10 @@
 ---
 title: Run Conformer speech recognition on an Alif Ensemble E8 AI/ML AppKit using ExecuTorch and Ethos-U85
 
+draft: true
+cascade:
+    draft: true
+    
 description: Build and deploy the Alif MLEK Conformer ASR application with ExecuTorch on the Alif Ensemble E8 AppKit and Ethos-U85 NPU.
 
 minutes_to_complete: 120
