@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Prepare an Apple Silicon Mac
 
-You will build a Python app that records an English text input, translates it into Spanish, and plays the Spanish speech. A local Gradio page provides the recording and playback controls. Three seperate models handle inference:
+You will build a Python app that records English speech, transcribes it, translates the transcript into Spanish, and plays the Spanish speech. A local Gradio page provides the recording and playback controls. Three separate models handle inference:
 
 | Stage | Model and runtime | Processor | Input and output |
 | --- | --- | --- | --- |
@@ -19,7 +19,7 @@ You will build a Python app that records an English text input, translates it in
 
 The Gemma model receives the transcript, rather than the recording itself. Translation text will appear as Gemma generates it, followed by speech synthesis starting after the translation finishes. All three models run locally after you download them, so this pipeline will work fully offline once built.
 
-Before starting, quickly check that macOS reports the Apple Silicon architecture and that a version of Python 3.10 through 3.13 is available:
+Before starting, check that your terminal is running natively on Apple Silicon and that Python 3.10 through 3.13 is available:
 
 ```bash
 uname -m
@@ -34,9 +34,8 @@ arm64
 
 macOS uses the name `arm64` for the 64-bit Arm architecture. If `uname -m` reports `x86_64`, you are either using an Intel-based Mac or running the terminal through Rosetta.
 
-Use Python 3.10 through 3.13 for the pinned packages in this Learning Path. If `python3` reports another version, install and select a supported version before you create the virtual environment.
+Use Python 3.10 through 3.13 for the pinned packages in this Learning Path. If `python3` reports another version, follow the [Python installation instructions for macOS](https://docs.python.org/3.13/using/mac.html) to install a version in this range. For example, after installing Python 3.13, check `python3.13 --version` and use `python3.13 -m venv .venv` instead of `python3 -m venv .venv` below.
 
-Note that packages used in this Learning Path may not support versions of Python later than 3.14.
 ## Create the Python environment
 
 Create a project directory and a virtual environment:
@@ -92,8 +91,6 @@ curl -L -o models/sherpa-asr.tar.bz2 https://github.com/k2-fsa/sherpa-onnx/relea
 tar -xjf models/sherpa-asr.tar.bz2 -C models
 rm models/sherpa-asr.tar.bz2
 ```
-
-
 
 ## Download Gemma 4 E2B
 

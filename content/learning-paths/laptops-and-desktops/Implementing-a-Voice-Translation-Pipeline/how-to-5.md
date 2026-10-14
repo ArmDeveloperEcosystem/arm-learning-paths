@@ -20,7 +20,7 @@ cd ~/voice-translator
 source .venv/bin/activate
 ```
 
-Create `app.py`. The code is arranged as follows:
+Using a file editor of your choice, create a file named `app.py` in `~/voice-translator`. Copy the code below into the file and save it. The code is arranged as follows:
 
 1. `normalise_audio()` prepares browser audio for the recogniser.
 2. `main()` loads the models and owns their lifetime.
@@ -146,7 +146,7 @@ def main():
         ) as demo:
             gr.Markdown(
                 "# Voice translator\n"
-                "Record an sentence and translate it locally."
+                "Record a sentence and translate it locally."
             )
 
             with gr.Row():
@@ -224,7 +224,7 @@ if __name__ == "__main__":
 
 ### Keep the models loaded
 
-`main()` creates the recogniser, synthesiser, and Gemma engine before Gradio starts serving requests. `select_conversation()` reuses the current conversation while the target language stays the same. When the language changes, it closes that conversation and creates one with a new system instruction. `ExitStack` handles this replaceable conversation, and the `finally` block closes it at shut down.
+`main()` creates the recogniser, synthesiser, and Gemma engine before Gradio starts serving requests. `select_conversation()` reuses the current conversation while the target language stays the same. When the language changes, it closes that conversation and creates one with a new system instruction. `ExitStack` handles this replaceable conversation, and the `finally` block closes it at shutdown.
 
 ### Update the interface in order
 
@@ -240,19 +240,21 @@ Start the application:
 python app.py
 ```
 
-The three loading messages appear once, then Gradio prints a local address and opens the interface in your default browser.
+The three loading messages appear once, then Gradio prints a local address and opens the application in your default browser. The screenshot shows the completed result after translating a recording.
+
+![Gradio voice translator showing the English transcript, Spanish translation, and playable translated speech with Ready status#center](voice_translator.png "Completed English-to-Spanish voice translation")
 
 {{% notice Microphone permission %}}
-The browser may request microphone access the first time you record. Select Allow. If recording is unavailable, open System Settings, select Privacy & Security, select Microphone and enable access for your browserr.
+The browser may request microphone access the first time you record. Select **Allow**. If recording is unavailable, open **System Settings**, select **Privacy & Security**, select **Microphone**, and enable access for your browser.
 {{% /notice %}}
 
-Leave Translate to set to its default of Spanish. Record this sentence, stop the recording, and select Translate:
+Leave **Translate to** set to its default of **Spanish**. Record this sentence, stop the recording, and select **Translate**:
 
 ```text
 Where is the nearest train station?
 ```
 
-The interface displays the recognised text in the source transcript, streams the Spanish translation into Translation, and then adds playable audio to Translated speech.
+The interface displays the recognised text in **Transcript**, streams the Spanish translation into **Translation**, and then adds playable audio to **Translated speech**.
 
 ## What you've accomplished and what's next
 
