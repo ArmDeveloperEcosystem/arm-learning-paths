@@ -73,13 +73,13 @@ Use the **SW2** joystick after the boot image appears:
 - Press toward the left to generate one face with the next seed.
 - Press toward the right to start continuous generation. Press in the same direction again to stop.
 
-Each completed joystick generation updates the LCD and prints the following:
+Each completed joystick generation updates the LCD and prints the following to the console:
 
 - Image number
 - Seed
 - Class
 - Guidance
-- Total time to the console
+- Total time 
 
 The boot demo prints a CRC. Joystick log lines don't include one.
 
