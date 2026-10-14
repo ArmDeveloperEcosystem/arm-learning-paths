@@ -14,11 +14,11 @@ Install [Visual Studio Code](https://code.visualstudio.com/) and add these exten
 - [Keil Studio Pack](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack), extension ID `Arm.keil-studio-pack`
 - [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python), extension ID `ms-python.python`
 
-The project tasks need CMSIS Solution extension 1.70.0 or later, which is included with Keil Studio Pack. Sign in with your Arm account when Keil Studio requests a license. The free Keil MDK Community license supports this example.
+The project tasks need CMSIS Solution extension 1.72.0 or later, which is included with Keil Studio Pack. Accept the project's managed CMSIS-Toolbox 2.15 environment when prompted. Sign in with your Arm account when Keil Studio requests a license. The free Keil MDK Community license supports this example.
 
 Install two tools for the physical DevKit:
 
-1. Download Alif SETOOLS version 1.110.00 or later from the [Alif software and tools page](https://alifsemi.com/support/software-tools/ensemble/). Extract the package and follow its README to install any Python dependencies. On Linux and macOS, make the SETOOLS programs executable.
+1. Download Alif SETOOLS version 1.110.00 or later for your host operating system from the [Alif software and tools page](https://alifsemi.com/support/software-tools/ensemble/). Extract the package. On Linux and macOS, make the SETOOLS programs executable if necessary.
 2. Install SEGGER [J-Link Software](https://www.segger.com/downloads/jlink/) version 8.42 or later. The DevKit includes an on-board J-Link probe.
 
 ## Configure the SETOOLS path
@@ -45,6 +45,10 @@ Prepare the board before applying power:
 Don't move jumpers while the board is powered. Disconnect **PRG USB** before changing a jumper.
 {{% /notice %}}
 
+Use the following photo to locate the jumpers. **JP7** is below the blue potentiometer, and **JP5** is beside **RESET (SW1)**. The installed jumper caps connect the required pairs of pins, as shown in the close-ups. See the [Alif DK-E8 User Guide](https://alifsemi.com/download/AUGD0023) for the board layout and pin numbering.
+
+![Annotated Alif Ensemble E8 DevKit photograph locating JP7 below the blue potentiometer and JP5 beside RESET. Enlarged views show JP7 on pins 3–4 and JP5 on pins 1–2, the jumper positions required before applying power.#center](devkit-jumper-positions.jpg "JP7 on pins 3–4 and JP5 on pins 1–2")
+
 The **PRG USB** connection supplies power and exposes both the on-board J-Link probe and the USB-to-UART bridge. **SW4** selects which UART signal reaches that bridge:
 
 | SW4 position | Connection | Use |
@@ -52,9 +56,11 @@ The **PRG USB** connection supplies power and exposes both the on-board J-Link p
 | **SEUART** | Secure Enclave UART | SETOOLS and initial board provisioning |
 | **UART4** | Application UART4 at 115200 8N1 | Application logs and image requests |
 
+On macOS, accept **Allow accessory to connect** if prompted. If the power LED lights but neither J-Link nor a serial port appears, reconnect **PRG USB** with a known USB data cable and check for that prompt. The macOS serial port name is typically `/dev/cu.usbmodem...`; Linux typically uses `/dev/ttyACM...`, and Windows uses a `COM` port.
+
 ## Update the board support firmware
 
-Open a terminal in the extracted SETOOLS directory. On Linux or macOS, run:
+Open a terminal in the extracted SETOOLS directory. Run the tools from that directory because they load configuration and supporting files using relative paths. On Linux or macOS, run:
 
 ```bash
 ./updateSystemPackage -d

@@ -9,11 +9,12 @@ layout: learningpathall
 
 ## Clone the example branch
 
-Clone the branch that contains the pico-faces application:
+Clone the branch that contains the pico-faces application and check out the revision:
 
 ```bash
 git clone --branch hackathon-pico-faces --single-branch https://github.com/Arm-Examples/CMSIS-Executorch.git
 cd CMSIS-Executorch
+git checkout bb82e8f0c67b9e603ba6b0a48984c2f72866afce
 code .
 ```
 
@@ -32,7 +33,15 @@ Open the VS Code Command Palette and select **Tasks: Run Task > Setup Python vir
 
 The task creates `.venv`, installs the pinned export packages, and downloads about 60 MB of pico-faces checkpoints into `model/pico_faces/`. The Python packages include several GB of PyTorch dependencies, so the first setup can take some time.
 
-The exporter supports Python 3.10 through 3.13. If your system Python isn't in that range, select the **Setup Python virtual environment (uv)** task. The `uv` variant can download a compatible Python interpreter.
+{{% notice Python version %}}
+The exporter supports Python 3.10 through 3.13. If your system Python isn't in that range, first [install uv](https://docs.astral.sh/uv/getting-started/installation/). Restart VS Code after installation so its tasks can find `uv` on `PATH`, then confirm it is available in the VS Code terminal:
+
+```bash
+uv --version
+```
+
+Select **Setup Python virtual environment (uv)** and enter `3.12` at the Python version prompt. This task can download a compatible interpreter; the physical DevKit validation used Python 3.12.13. Python 3.14 isn't supported by this exporter.
+{{% /notice %}}
 
 ## Create the AI layer
 
