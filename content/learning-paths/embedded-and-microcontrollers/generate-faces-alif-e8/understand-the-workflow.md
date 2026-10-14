@@ -11,11 +11,11 @@ layout: learningpathall
 
 [pico-faces](https://github.com/cpldcpu/pico-faces) is a compact generative model that produces 128 x 128 RGB face images. It combines a 2.5-million-parameter latent rectified-flow diffusion transformer (DiT) with a small convolutional decoder.
 
-The model provides four conditioned face classes and one unconditional class. The conditioned classes combine the model's female or male label with a neutral or smiling expression.
+The model provides four conditioned face classes and one unconditional class. The conditioned classes combine the female or male label of the model with a neutral or smiling expression.
 
 ![Diagram showing the pico-faces generation workflow: random latent noise passes through repeated diffusion transformer denoising steps and a decoder to produce a 128 x 128 RGB face on the Alif E8 Cortex-M55 and Ethos-U85. A row of example generated faces illustrates the model output.#center](image1.png "pico-faces diffusion workflow on the Alif Ensemble E8")
 
-The [CMSIS-ExecuTorch example](https://github.com/Arm-Examples/CMSIS-Executorch/tree/hackathon-pico-faces) re-expresses the model as two ExecuTorch methods:
+The [CMSIS-ExecuTorch example](https://github.com/Arm-Examples/CMSIS-Executorch/tree/hackathon-pico-faces) that you'll build re-expresses the model as two ExecuTorch methods:
 
 | Method | Purpose | Execution target |
 | --- | --- | --- |
@@ -23,7 +23,7 @@ The [CMSIS-ExecuTorch example](https://github.com/Arm-Examples/CMSIS-Executorch/
 | `decode(z)` | Convert the final latent image into an RGB face | Ethos-U85 |
 | Sampling loop | Generate noise, apply guidance, and update the latent image | Cortex-M55 |
 
-The `dit_step` method uses 16-bit activations and 8-bit weights. The extra activation precision preserves the transformer's residual stream. The decoder uses 8-bit activations and weights, which reduces its execution time without the same visible quality loss.
+The `dit_step` method uses 16-bit activations and 8-bit weights. The extra activation precision preserves the residual stream of the transformer. The decoder uses 8-bit activations and weights, which reduces its execution time without the same visible quality loss.
 
 ## Follow the deployment flow
 
@@ -47,4 +47,6 @@ The first image uses a fixed seed and configuration. This makes the boot test re
 
 ## What you've learned and what's next
 
-You've learned how the Cortex-M55 sampling loop calls two ExecuTorch methods that run on the Ethos-U85 NPU. Next, you'll install the host tools and connect the DevKit.
+You've learned how the Cortex-M55 sampling loop calls two ExecuTorch methods that run on the Ethos-U85 NPU. 
+
+Next, you'll install the host tools and connect the DevKit.
