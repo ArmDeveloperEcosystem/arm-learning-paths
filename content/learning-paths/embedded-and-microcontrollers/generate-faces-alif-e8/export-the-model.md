@@ -48,13 +48,13 @@ The task creates `.venv` and installs the pinned export packages. It downloads a
 {{% notice Note %}}
 The exporter supports Python 3.10 through 3.13. If your system Python isn't in that range, start by [installing uv](https://docs.astral.sh/uv/getting-started/installation/).
 
-Restart VS Code after installation so that its tasks can find `uv` on `PATH`. Then, confirm that it's available in the VS Code terminal:
+Restart VS Code after installation so that its tasks can find `uv` on `PATH`. Then, confirm that `uv` is available in the VS Code terminal:
 
 ```bash
 uv --version
 ```
 
-Select **Setup Python virtual environment (uv)** and enter `3.12` at the Python version prompt. This task can download a compatible interpreter. The physical DevKit was validated using Python 3.12.13. Python 3.14 isn't supported by this exporter.
+Select **Setup Python virtual environment (uv)** and enter `3.12` at the Python version prompt. This task can download a compatible interpreter. The physical DevKit was validated using Python 3.12.13.
 {{% /notice %}}
 
 ## Create the AI layer
@@ -74,7 +74,7 @@ The export performs the following operations:
 - Delegates each method as one Ethos-U85 segment
 - Generates the CMSIS component selection and embedded model data
 
-The task takes a few minutes. When it completes, confirm that `ai_layer/` contains these generated artifacts:
+The task takes a few minutes. When it completes, confirm that `ai_layer/` contains the following generated artifacts:
 
 | File | Purpose |
 | --- | --- |
@@ -93,4 +93,4 @@ Run **Create AI layer** again after changing `model/model.py` or selecting a tar
 
 You've exported the diffusion transformer and decoder as one ExecuTorch program for the DevKit's Ethos-U85. 
 
-Next, you'll install the boot configuration and debug stub needed to load that program on the high-performance Cortex-M55 core.
+Next, you'll install the boot configuration and debug stub needed to load the program on the high-performance Cortex-M55 core.

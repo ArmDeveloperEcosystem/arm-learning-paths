@@ -20,11 +20,17 @@ If the port was open before you changed **SW4**, close and reopen it.
 
 ## Build and debug the application
 
-In the **CMSIS** view, confirm that `DevKit-E8` is active. Select **Build**, then select **Debug**. Keil Studio starts the J-Link GDB server over Serial Wire Debug (SWD) and loads the application into magnetoresistive random-access memory (MRAM).
+In the **CMSIS** view, confirm that `DevKit-E8` is active.
+
+Select **Build**, then select **Debug**.
+
+Keil Studio starts the J-Link GDB server over Serial Wire Debug (SWD) and loads the application into magnetoresistive random-access memory (MRAM).
 
 The debugger stops at `main`. Press **F5** to continue.
 
-The firmware initializes the display and NPU, loads the two ExecuTorch methods, and generates a repeatable boot image. The output is similar to:
+The firmware initializes the display and NPU, loads the two ExecuTorch methods, and generates a repeatable boot image.
+
+The output is similar to:
 
 ```output
 Ethos-U version info:
@@ -45,7 +51,7 @@ The LCD displays the 128 x 128 result scaled to 384 x 384 pixels in the center o
 
 Inspect the two performance lines printed after generation. They report NPU cycles, NPU active time, multiply-accumulate array activity, and AXI reads for `dit_step` and `decode`. These counters come from the Ethos-U performance monitoring unit and confirm that both methods executed on the NPU.
 
-The reference DevKit run of the source project uses the following conditions:
+The following is a reference DevKit run of the source project:
 
 | Setting | Reference value |
 | --- | --- |
@@ -79,11 +85,15 @@ Each completed joystick generation updates the LCD and prints the following to t
 - Seed
 - Class
 - Guidance
-- Total time 
+- Total time
 
 The boot demo prints a CRC. Joystick log lines don't include one.
 
-Stop continuous generation and wait for the current image to finish before restarting a debug session or resetting the board. Resetting through the debugger during active NPU inference can produce a transient inference error and affect the timing sample. To check standalone boot, end the debug session and press **RESET (SW1)** while the application is idle. The boot image and `Test_result: PASS` should return.
+To check standalone boot, end the debug session and press **RESET (SW1)** while the application is idle. The boot image and `Test_result: PASS` should return.
+
+{{% notice Note %}}
+Stop continuous generation and wait for the current image to finish before restarting a debug session or resetting the board. Resetting through the debugger during active NPU inference can produce a transient inference error and affect the timing sample.
+{{% /notice %}}
 
 ## View an example result
 
@@ -97,12 +107,12 @@ Use the following checks if the application doesn't reach the pass marker:
 
 | Symptom | Check |
 | --- | --- |
-| J-Link connects but execution doesn't stop at `main` | Set **SW4** to **SEUART** and repeat the debug-stub task from the previous section. |
+| J-Link connects but execution doesn't stop at `main` | Set **SW4** to **SEUART** and repeat the debug-stub steps from [Prepare the DevKit for debugging](/learning-paths/embedded-and-microcontrollers/generate-faces-alif-e8/prepare-the-board/). |
 | Debug remains at **Connecting** | Confirm that the target uses SWD, not JTAG, then power-cycle the board. |
 | UART has no application output | Set **SW4** to **UART4**, then close and reopen Serial Monitor. |
 | `app-write-mram` receives no response | Set **SW4** to **SEUART**, close programs using the port, and press reset while the tool waits. |
 | The build can't find `ai_layer/model_pte.c` | Run **Setup Python virtual environment**, followed by **Create AI layer**. |
-| The Python setup task rejects Python 3.14 | Install `uv`, check `uv --version` in the VS Code terminal, then run **Setup Python virtual environment (uv)** with Python `3.12`. |
+| The Python setup task rejects your Python version | Install `uv`, check `uv --version` in the VS Code terminal, then run **Setup Python virtual environment (uv)** with Python `3.12`. |
 | SETOOLS reports a missing `utils` directory | Run the command from the extracted SETOOLS directory rather than your home directory. |
 
 ## (Optional) Use the Corstone-320 FVP
@@ -110,6 +120,10 @@ Use the following checks if the application doesn't reach the pass marker:
 The same CMSIS solution also includes the `SSE-320-U85` target for the Corstone-320 Fixed Virtual Platform (FVP). On Linux and Windows, the managed tools environment supplies the native FVP. Select `SSE-320-U85` in **Manage Solution**, select **Apply**, recreate the AI layer, and build before selecting **Run** or **Debug**.
 
 On macOS, the project runs the FVP in Docker. To use the FVP, follow these additional steps:
+
+{{% notice Note %}}
+These optional steps follow the pinned example's FVP instructions and are separate from the physical DevKit validation.
+{{% /notice %}}
 
 1. Install [Docker Desktop for Mac](https://docs.docker.com/desktop/setup/install/mac-install/) and keep it running.
 2. In `cmsis-executorch.csolution.yml`, find the `debugger` entry under the `target-set` of the `SSE-320-U85` target. Replace its `model` value with the Docker wrapper for the project:
@@ -128,10 +142,8 @@ On macOS, the project runs the FVP in Docker. To use the FVP, follow these addit
 
 The FVP writes the raw image to `out/fvp_image.bin`. To return to the board, select `DevKit-E8`, select **Apply**, and recreate its AI layer before building again.
 
-{{% notice Note %}}
-These optional steps follow the pinned example's FVP instructions. FVP execution wasn't part of the physical DevKit validation.
-{{% /notice %}}
-
 ## What you've accomplished
 
 You've exported a generative model through ExecuTorch, loaded it on the Alif Ensemble E8 DevKit, and generated faces with both neural-network methods delegated to Ethos-U85. You also validated the run through the LCD, pass marker, and hardware performance counters.
+
+You can extend the Learning Path workflow to deploy other Generative AI models on a microcontroller with Arm Ethos-U85 acceleration.

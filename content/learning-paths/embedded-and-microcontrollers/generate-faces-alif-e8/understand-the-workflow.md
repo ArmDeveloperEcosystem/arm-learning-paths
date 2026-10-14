@@ -7,7 +7,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## Understand the model
+## What pico-faces is
 
 [pico-faces](https://github.com/cpldcpu/pico-faces) is a compact generative model that produces 128 x 128 RGB face images. It combines a 2.5-million-parameter latent rectified-flow diffusion transformer (DiT) with a small convolutional decoder.
 
@@ -35,15 +35,13 @@ The example uses a CMSIS solution to keep the hardware definition separate from 
 
 The generated application uses the high-performance Cortex-M55 core at 400 MHz to control sampling. The Ethos-U85 configuration provides 256 multiply-accumulate operations per cycle. The firmware displays each generated face on the DevKit LCD and reports timings through UART4.
 
-## Know what success looks like
-
-A successful run proves the complete workflow in three ways:
+A successful workflow run is indicated in three ways:
 
 - The DevKit LCD displays the generated face.
 - UART output ends with `Test_result: PASS`.
 - The Ethos-U performance monitoring unit reports cycles and activity for both model methods.
 
-The first image uses a fixed seed and configuration. This makes the boot test repeatable even though the exact CRC can change when the model is exported on a different host.
+The first image uses a fixed seed and configuration. This makes the boot test repeatable even though the exact Cyclic Redundancy Check (CRC) can change when the model is exported on a different host.
 
 ## What you've learned and what's next
 
