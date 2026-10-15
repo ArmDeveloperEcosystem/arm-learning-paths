@@ -31,17 +31,23 @@ You can also explore **nn_module** and **code_stack** when available to see the 
 
 If selecting a node doesn't open the source, check `vscode-mlia.syncModelExplorerSelectionToCode` in VS Code **Settings** and confirm that the file appears under **Accessible locally**. A node needs one unambiguous local file and line. If a group maps to several locations, expand it and select an individual operation, or inspect the locations in **Source mappings**.
 
-<!-- Publication: verify automatic navigation from segment_cascade_chain or Source Model with the actual upscaler capture. Add a screenshot showing the selected node and measured overlay beside the highlighted SmallUpscalerModel source line. -->
-
 ## Read source heatmaps and CodeLens
 
 With your model source open, select the measured cycle overlay in **Current Analysis Run**. Inspect its source presentation:
 
-- Numeric heatmap colors show relative values across mapped lines. They help locate regions to inspect; red doesn't by itself establish a performance defect.
+- Numeric heatmap colours show relative values across mapped lines. They help locate regions to inspect.
 - CodeLens displays the selected value and, when it can be calculated safely, its percentage of the model total.
 - Selecting a metric CodeLens entry selects its associated node in Model Explorer.
 
 Follow a CodeLens entry back to the graph and confirm that the same overlay remains selected. Several source lines can refer to shared execution work, so their values are not additive model totals.
+
+In this example, CodeLens maps 22,506 cycles to `x = self.net(x)`, approximately 88% of the captured model's total cycles. This line calls the `nn.Sequential` block defined in `SmallUpscalerModel`.
+
+![VS Code showing SmallUpscalerModel with source heatmaps and CodeLens values. The self.net(x) call is mapped to 22,506 cycles, or 88% of the model total, while interpolation is mapped to 3,037 cycles, or 12%.#center](images/python-model.png "Inspect measured cycles mapped to Python source")
+
+Clicking on the `MLIA: 22,506 cycles (88% of model)` will open up a Model Explorer like the example below. In this view the operators from the **Source Model** are highlighted on the left and the specific operators from this line are shown in the **code_stack** on the right.
+
+![Model Explorer showing synchronized Source Model and code_stack views beside the Python source. The selected code_stack group maps three CONV2D and RESCALE pairs to x = self.net(x), with total_cycles of 22,506.#center](images/code-mapping.png "Trace a Python source line to its mapped operations")
 
 If source presentation is missing, check these settings and inputs:
 

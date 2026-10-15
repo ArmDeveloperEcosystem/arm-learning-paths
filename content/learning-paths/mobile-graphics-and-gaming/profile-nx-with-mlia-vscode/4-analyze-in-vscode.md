@@ -31,6 +31,8 @@ In **MLIA > New Analysis**:
 
 <!-- Publication: add a screenshot from this walkthrough showing Profiling, its capture root, model.vgf, neural-technology, and Performance. -->
 
+![MLIA New Analysis with Profiling selected, the capture directory and model.vgf entered, neural-technology selected, and Performance enabled.#center](images/nx-profiling-capture.png "Configure the NX profiling analysis")
+
 Model Explorer opens with a loading view while MLIA analyzes the capture. Wait for completion before inspecting the metrics.
 
 ## Verify that the result uses measurements
@@ -68,13 +70,13 @@ If the run fails, inspect its error summary and the **MLIA** output log, then ch
 
 ## Read the model-level metrics first
 
-Expand the performance result's **Model metrics** and find `total_cycles`, with unit `cycles`. It summarizes the cycle cost attributed to the captured VGF. The mode-1 profiling backend derives both `total_cycles` and `compute_cycles` from the reported NX-active cycle counts, so equal values do not establish that memory or scheduling overhead is absent.
-
-Record `total_cycles` and its full value as context for the graph investigation. Hover over a shortened value to see its full precision. If this metric is absent, inspect the result's reported metrics and their descriptions before selecting another cycle metric; keep its name and scope in your notes.
+Expand the performance result's **Model metrics** and find `total_cycles`, with unit `cycles`. It summarizes the cycle cost attributed to the captured VGF. The mode-1 profiling backend derives both `total_cycles` and `compute_cycles` from the reported NX-active cycle counts.
 
 These counts describe accelerator work for the captured dispatch, excluding application work such as CPU preprocessing and presentation. They are not elapsed application latency. Use representative inputs and repeated measurements before drawing application-performance conclusions.
 
-<!-- Publication: add a screenshot from the successful measured run showing its inputs, Profiling mode, and model metrics. -->
+In the example below we can see that the `total_cycles` is 25,543 and the utilization is 100%. The other metrics aren't available through the "Profiling" route, just "Estimation", but we will look into the cycles in more detail in the model view, in the next few sections. Record the model’s total_cycles value before exploring the graph.
+
+![MLIA Model metrics showing total_cycles and compute_cycles of 25,543 cycles, target_utilization of 100%, and unavailable metrics with explanatory messages.#center](images/current-analysis.png "Inspect model-level profiling metrics")
 
 ## Explore the model graph
 
@@ -85,38 +87,31 @@ In Model Explorer, select **Source Model** in the graph selector to inspect the 
 3. Use a group's expand control to reveal its contents. Collapse it when you want to return to a broader view.
 4. Use the search box to find a node by name. Select a result to locate it in the graph, then inspect its attributes, inputs, and outputs in the side panel.
 
-Next, select **segment_cascade_chain**. It groups operations into the segments, cascades, and chains used for hardware execution. Expand a segment to its cascades and chains to inspect increasingly specific execution groups. If this representation is absent, continue in **Source Model** and record that your candidate is a source-graph group rather than a hardware execution group.
+Next, select **segment_cascade_chain**. It groups operations into the segments, cascades, and chains used for hardware execution. Expand a segment to its cascades and chains to inspect increasingly specific execution groups.
 
 The [Model Explorer representation guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/model-explorer-representations.md) explains the views available for different model metadata and results.
 
-## Compare measured values within a group
+## Compare measured values within a cascade
 
-Use a measured overlay to locate a group with a high reported cost:
+Lets look into the results in more detail. In the example we can see that `Cascade 249` is darker green than the rest, indicating that the total cycle count is greater than other cascades in the graph. If we click on this we can see the cycle count for this `12471`. This is a combination of the `CONV2D` and `RESCALE` operators. Also this highlights the two operators in the `Source Model` on the left.
 
-1. In **Current Analysis Run > Overlay**, choose an available cycle metric from the measured performance result.
-2. Expand the graph and inspect the values and colors on its nodes. Read the values as well as the colors when comparing costs.
-3. Select a group and inspect **Node data in selected layer** in Model Explorer's side panel. This table lets you compare mapped values without reading each label on the graph.
-4. Use the table filter to narrow the entries by node name. Compare the same metric and unit at the same hierarchy level, such as two chains within one cascade. A chain and its containing cascade cover different amounts of work.
+If source model mapping is also setup, it will point to the line of code from your model that represents these layers, but we will look at that in the next page.
 
-Overlay selections synchronize between **Current Analysis Run** and Model Explorer. If the table has no values, reselect the measured cycle overlay and inspect **Source Model**. If that view also has no mapped values, return to **Model metrics** and the MLIA log to check whether graph breakdowns were produced. Resolve this before choosing a candidate.
+![Model Explorer showing Cascade 249 selected in segment_cascade_chain with total_cycles of 12,471. The corresponding CONV2D and RESCALE operations are highlighted in Source Model.#center](images/profiling-result.png "Inspect Cascade 249 and its source operations")
 
-A scheduling group can contain several model operations. A cost mapped to those operations isn't an independent measurement of every operation. Missing values don't mean zero cycles. Use the execution grouping to understand what was measured before deciding which part of the model to investigate.
+## Inspect group statistics and change the overlay
 
-<!-- Publication: add an NX screenshot from this walkthrough showing the segment_cascade_chain representation, a measured cycle overlay, and the selected group. -->
+With the group selected, inspect **Aggregated stats in selected layer**. The table summarizes available numeric node values within that group. Minimum and maximum help you find the range of mapped costs; average and sum summarize those values when the result exposes them. This is more useful when there are multiple runs, in this example we have only executed the workload once.
 
-## Interpret group statistics
+![Model Explorer's Aggregated stats in selected layer table showing minimum, maximum, sum, and average values for the selected group's available node metrics.#center](images/aggregated-stats.png "Inspect aggregated node metrics")
 
-With the group selected, inspect **Aggregated stats in selected layer**. The table summarizes available numeric node values within that group. Minimum and maximum help you find the range of mapped costs; average and sum summarize those values when the result exposes them.
+In Node data providers (descendants), select the eye icon beside a metric to display its overlay on the graph. In this example, total_cycles is selected, which is enabled by default.
 
-Filtering the node-data table narrows the rows you inspect. The aggregated statistics still describe the selected group.
-
-These statistics depend on the selected graph representation and its metric mappings. Shared or overlapping costs can appear on several nodes, so a sum of mapped values doesn't necessarily represent an independently measured group total. Use **Model metrics** for the reported whole-model result, and don't add summaries from different representations together.
-
-<!-- Publication: add an NX screenshot from the same run showing Node data in selected layer and Aggregated stats in selected layer for the selected group. Include the metric labels and explanatory alt text and caption. -->
+![Model Explorer's Node data providers list with total_cycles highlighted and its eye icon active, indicating the metric selected for the graph overlay.#center](images/view-options.png "Select the metric displayed on the graph")
 
 ## Choose a group to investigate
 
-Choose a group with a higher reported cycle cost than a comparable group in the same view. Record the comparison that makes it worth investigating. If only one group has a value, record that limitation and use it to practice source tracing without claiming it is the dominant cost.
+Choose a group with a higher reported cycle cost than a comparable group in the same view, like in the sample above. Record the comparison that makes it worth investigating. If only one group has a value, record that limitation and use it to practice source tracing without claiming it is the dominant cost.
 
 Before moving to the Python source, record:
 
