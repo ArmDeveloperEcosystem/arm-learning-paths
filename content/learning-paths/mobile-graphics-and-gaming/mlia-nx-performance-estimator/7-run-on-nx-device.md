@@ -198,7 +198,7 @@ A completed capture with a nonempty statistics file shows that the layer interce
 
 ## Analyze measured data with MLIA
 
-Return to the MLIA environment and pass the same VGF with the complete capture directory. Add `--model-explorer open` to view the measured results on the graph:
+Return to the MLIA environment and pass the same VGF with the complete capture directory:
 
 ```bash
 source mlia-venv/bin/activate
@@ -206,8 +206,7 @@ mlia check nx-demo/baseline.vgf \
   --target-profile neural-technology \
   --performance \
   --profiling-data "nx-demo/captures/$CAPTURE_NAME" \
-  --output-dir runs/baseline-measured \
-  --model-explorer open
+  --output-dir runs/baseline-measured
 ```
 
 The following abbreviated output comes from a device capture of this MobileNet scenario. Your cycle counts will depend on the device and its configuration:
@@ -229,38 +228,6 @@ Metrics:
 
 `Status ok` confirms that MLIA analyzed the capture. The full results are saved in `runs/baseline-measured/mlia-output/mlia-output.json`.
 
-
-## (Optional) Explore measured performance and TOSA operations
-
-The MLIA command opens Model Explorer with the capture's results already loaded. The plugin installed during setup includes the VGF adapter, so you don't need a separate installation or launch command.
-
-### View measured cycle counts
-
-In the generated MLIA hierarchy, select a cycle metric from the measured performance result using the node-data controls. Expand the hierarchy and select an entity to inspect its reported cycle count. Follow the source mapping, where available, to see the related operations in **Source Model**.
-
-These overlays show the capture's measurements, not the estimates from the earlier performance check. Use them to locate costly parts of the workload. Only entities with reported metrics have values; a missing value doesn't mean zero cycles. The `951,154` cycles shown in the CLI output are the whole-model result, not the cost of the selected convolution.
-
-MLIA saves the visualization in `runs/baseline-measured/mlia-output/model-explorer/bundle/index.html`. Open this self-contained file to revisit or share the results without rerunning the capture or starting a server.
-
-### Inspect a TOSA convolution
-
-In **Source Model**, inspect `nx-demo/baseline.vgf`. The baseline graph contains 103 nodes. Expand `graph_segment_0` and select the first `CONV2D` node, between two `RESCALE` nodes.
-
-This view exposes the TOSA operations in the VGF graph. You can see how the original MobileNet layer is represented after MLIA's LiteRT-to-TOSA conversion and VGF generation. The screenshot shows the operation's attributes, rather than a performance overlay.
-
-![Model Explorer showing a TOSA CONV2D operation between two RESCALE nodes in baseline.vgf. The Attributes panel links to the TOSA CONV2D specification and shows the MobileNet source location, connecting the converted operation to its definition and original model.#center](model-explorer-conv2d.png "Inspect a TOSA convolution in the VGF graph")
-
-In **ATTRIBUTES**, **opcode** identifies the TOSA operation as `CONV2D`. Select **TOSA spec: CONV2D** in the **spec** field to open the [TOSA operator definition](https://www.mlplatform.org/tosa/tosa_spec_1_0_1.html#_conv2d), including its tensor shapes, padding, stride, and dilation arguments. Compare these with the values shown for this node:
-
-| Field | Value in this example | What it tells you |
-| --- | --- | --- |
-| **result type** | `uint32[1, 112, 112, 8]` | The convolution produces an intermediate tensor with a batch size of one, 112 × 112 spatial dimensions, and eight channels. |
-| **arg1 stride** | `int32[2, 2]` | A stride of two reduces the 224 × 224 input to 112 × 112. |
-| **debug info** | `MobilenetV1/MobilenetV1/Conv2d_0/Relu6` | Relates this TOSA operation to its source location in MobileNet. Expand the field to read the full name. |
-
-Select the following `RESCALE` node to inspect how TOSA scales the convolution's intermediate integer result into the output's quantized range. You can also search for `DEPTHWISE_CONV2D` and follow its specification link to compare the two convolution operators.
-
-For the editor workflow, follow the [MLIA and Model Explorer VS Code walkthrough](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/). The same tools support Ethos-U analysis, with different target-specific metrics.
 
 ## Use the measurements
 

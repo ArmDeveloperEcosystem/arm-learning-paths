@@ -40,13 +40,11 @@ cd mlia-demo
 python3.12 -m venv mlia-venv
 source mlia-venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install mlia-neural-technology==0.2.0 mlia-converters-litert==0.1.2 "mlia-model-explorer[vgf]"
+python -m pip install mlia-neural-technology==0.2.0 mlia-converters-litert==0.1.2
 python -m pip check
 ```
 
 These are public PyPI packages. The Neural Technology plugin installs a compatible MLIA core, the ML SDK Model Converter, and TOSA tools as dependencies. The LiteRT converter plugin lets MLIA analyze `.tflite` files directly. You don't need TensorFlow, a GPU driver, or a separate model-training environment for this example.
-
-The [MLIA Model Explorer plugin](https://github.com/Arm-Debug/mlia-model-explorer) adds graph visualizations with performance overlays. The `vgf` extra includes the adapter for the compiled model you'll inspect later. You don't need to install or start Model Explorer separately.
 
 The expected final output is:
 
@@ -74,4 +72,4 @@ If pip reports that no matching distribution exists for `mlia-neural-technology`
 
 ## What you've accomplished and what's next
 
-You've installed MLIA with the Neural Technology, LiteRT converter, and Model Explorer plugins. Next, you'll download a pretrained MobileNet baseline to analyze with MLIA.
+You've installed MLIA with the Neural Technology and LiteRT converter plugins. Next, you'll download a pretrained MobileNet baseline to analyze with MLIA.

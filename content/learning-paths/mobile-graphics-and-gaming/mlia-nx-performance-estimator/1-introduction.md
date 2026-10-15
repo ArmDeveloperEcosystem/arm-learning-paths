@@ -21,7 +21,7 @@ If you have an NX-capable Android device and a compatible native Vulkan driver, 
 
 The [Analyze Ethos-U models with MLIA Learning Path](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/) applies the same workflow to Arm Ethos-U: select a target profile, check compatibility, inspect performance, and use the advice to guide your next change. It uses Vela for compiler estimates and Corstone for whole-model NPU performance counters. Here, you'll use the Neural Technology plugin and NX Performance Estimator, with optional measurements from an Android device.
 
-The report-reading approach carries across targets, but their backends, supported operators, and performance metrics differ. Don't compare cycle counts across targets as though they describe the same hardware configuration. For a visual workflow, see the [Ethos-U VS Code and Model Explorer walkthrough](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/).
+The report-reading approach carries across targets, but their backends, supported operators, and performance metrics differ. Don't compare cycle counts across targets as though they describe the same hardware configuration.
 
 ## Understand the conversion and analysis flow
 
