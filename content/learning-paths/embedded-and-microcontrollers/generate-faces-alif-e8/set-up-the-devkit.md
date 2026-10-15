@@ -9,12 +9,12 @@ layout: learningpathall
 
 ## Install the host tools
 
-Install [Visual Studio Code](https://code.visualstudio.com/) and add these extensions from the Extensions view:
+Install [Visual Studio Code (VS Code)](https://code.visualstudio.com/) and add the following extensions:
 
 - [Keil Studio Pack](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack), extension ID `Arm.keil-studio-pack`
-- [Python](https://marketplace.visualstudio.com/items?itemName=ms-python.python), extension ID `ms-python.python`
+- [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python), extension ID `ms-python.python`
 
-The project tasks need CMSIS Solution extension 1.72.0 or later, which is included with Keil Studio Pack. Accept the project's managed CMSIS-Toolbox 2.15 environment when prompted. Sign in with your Arm account when Keil Studio requests a license. The free Keil MDK Community license supports this example.
+To complete the Learning Path, you need CMSIS Solution extension 1.72.0 or later, which is included with Keil Studio Pack. Accept the project's managed CMSIS-Toolbox 2.15 environment when prompted. Sign in with your Arm account when Keil Studio requests a license. You can complete the Learning Path with the free Keil MDK Community license.
 
 Install two tools for the physical DevKit:
 
@@ -23,13 +23,17 @@ Install two tools for the physical DevKit:
 
 ## Configure the SETOOLS path
 
-In VS Code, press **Ctrl+Shift+P** on Linux or Windows, or **Cmd+Shift+P** on macOS, to open the Command Palette. Search for and select **Preferences: Open User Settings (JSON)**. Add `alif.setools.root` inside the existing JSON object and replace the example value with the directory that contains `app-gen-toc` and `app-write-mram`:
+To configure the SETOOLS path:
 
-```json
-"alif.setools.root": "/absolute/path/to/setools"
-```
+1. In VS Code, press **Ctrl+Shift+P** on Linux or Windows, or **Cmd+Shift+P** on macOS, to open the Command Palette.
+2. Search for and select **Preferences: Open User Settings (JSON)**. 
+3. Add `alif.setools.root` inside the existing JSON object and replace the example value with the directory that contains `app-gen-toc` and `app-write-mram`:
 
-Keep the comma required by your existing JSON properties. The project uses this setting when it installs the Cortex-M55 debug stubs.
+    ```json
+    "alif.setools.root": "/absolute/path/to/setools"
+    ```
+
+    Keep the comma required by your existing JSON properties. The project uses this setting when it installs the Cortex-M55 debug stubs.
 
 ## Connect the DevKit
 
@@ -45,7 +49,7 @@ Prepare the board before applying power:
 Don't move jumpers while the board is powered. Disconnect **PRG USB** before changing a jumper.
 {{% /notice %}}
 
-Use the following photo to locate the jumpers. **JP7** is below the blue potentiometer, and **JP5** is beside **RESET (SW1)**. The installed jumper caps connect the required pairs of pins, as shown in the close-ups. See the [Alif DK-E8 User Guide](https://alifsemi.com/download/AUGD0023) for the board layout and pin numbering.
+Use the following photo to locate the jumpers. **JP7** is below the blue potentiometer, and **JP5** is beside **RESET (SW1)**. The installed jumper caps connect the required pairs of pins, as shown in the close-ups. For the board layout and pin numbering, see the [Alif DK-E8 User Guide](https://alifsemi.com/download/AUGD0023).
 
 ![Annotated Alif Ensemble E8 DevKit photograph locating JP7 below the blue potentiometer and JP5 beside RESET. Enlarged views show JP7 on pins 3–4 and JP5 on pins 1–2, the jumper positions required before applying power.#center](devkit-jumper-positions.jpg "JP7 on pins 3–4 and JP5 on pins 1–2")
 
@@ -60,17 +64,16 @@ On macOS, accept **Allow accessory to connect** if prompted. If the power LED li
 
 ## Update the board support firmware
 
-Open a terminal in the extracted SETOOLS directory. Run the tools from that directory because they load configuration and supporting files using relative paths. On Linux or macOS, run:
+Open a terminal in the extracted SETOOLS directory. Run the tools from the SETOOLS directory because they load configuration and supporting files using relative paths:
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Linux or macOS" language="bash" >}}
 ./updateSystemPackage -d
-```
-
-On Windows, run the corresponding executable:
-
-```powershell
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell" >}}
 .\updateSystemPackage.exe -d
-```
+  {{< /tab >}}
+{{< /tabpane >}}
 
 Select the DevKit serial port when prompted. The output is similar to:
 
@@ -87,10 +90,12 @@ Verify Image
 Done
 ```
 
-The serial port, package names, progress details, and elapsed time can differ. The default revision message is expected during initial setup; answer `y` to make the detected E8 revision the default.
+The serial port, package names, progress details, and elapsed time can differ. The default revision message is expected during initial setup. Answer `y` to make the detected E8 revision the default.
 
 Run J-Link Commander once to update the on-board probe firmware and install its serial drivers. Use `JLinkExe` on Linux or macOS, or `JLink.exe` on Windows.
 
 ## What you've accomplished and what's next
 
-You've installed the required host tools, configured the SETOOLS path, and connected the DevKit through **PRG USB**. Next, you'll clone the example and export the diffusion model for Ethos-U85.
+You've installed the required host tools, configured the SETOOLS path, and connected the DevKit through **PRG USB**.
+
+Next, you'll clone the example and export the diffusion model for Ethos-U85.
