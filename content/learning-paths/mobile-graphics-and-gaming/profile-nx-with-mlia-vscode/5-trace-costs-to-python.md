@@ -11,58 +11,38 @@ layout: learningpathall
 
 Keep the completed profiling run selected in **Analysis Runs**. Expand its performance result's **Source mappings** in **Current Analysis Run**.
 
-The view distinguishes reported code stacks, code stacks mapped to Model Explorer, distinct source locations, and locations **Accessible locally**. Find entries for the `quantize_and_export_vgf.py` file that produced your VGF, then select an accessible line to open it.
+Expand **Accessible locally**, find `quantize_and_export_vgf.py`, and select a reported line to open the source that produced your VGF.
 
 If no source locations are reported, return to the model export and check both debug settings. A path mapping can't recreate metadata omitted during export. If you re-export the VGF, generate a new scenario and collect a matching capture before repeating the analysis.
 
-If locations exist but your Python file is inaccessible, use the source-mapping steps below. Missing framework files don't necessarily prevent navigation to your own model file, but you need at least one accessible, mapped model-source location to complete this exercise.
-
-## Resolve moved source files
-
-Skip this section if the model's source locations already open correctly.
-
-1. Expand **Distinct source locations** and inspect the embedded file paths.
-2. Select **Configure source file mapping**.
-3. Map the embedded project prefix to the location of the same source files on this host.
-
-For example, if export embedded `/home/export/upscaler` but the unchanged project is now in `/home/developer/upscaler`, add this workspace setting, replacing both paths with yours:
-
-```json
-{
-    "vscode-mlia.sourceFileMap": {
-        "/home/export/upscaler": "/home/developer/upscaler"
-    }
-}
-```
-
-If the workspace settings already contain other entries, merge this property into the existing JSON object. The extension preserves the suffix after a matching prefix, so the example maps `quantize_and_export_vgf.py` under the old directory to the same filename under the new directory.
-
-After saving, the mapping index refreshes automatically. Recheck **Accessible locally** and open a source line. The file's contents must still match the exported version; remapping paths doesn't correct changed line numbers. See the [source-file mapping guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/source-file-mapping.md) for more complex directory layouts.
+If locations exist but your Python file is inaccessible, [resolve its moved path](#optional-resolve-moved-source-files), then return here. Missing framework files need not block navigation to your model, but you need at least one accessible, mapped model-source location to complete the exercise.
 
 ## Follow a costly group into the Python model
 
-Use the execution group and cycle overlay you recorded on the previous page:
+Open VS Code **Settings**, search for `vscode-mlia.syncModelExplorerSelectionToCode`, and enable **Sync Model Explorer Selection To Code**. Return to the group and measured cycle overlay you recorded:
 
-1. Inspect the group's mapped operations in **Source Model**.
-2. Switch to **nn_module**, when available, to inspect costs grouped by the PyTorch module hierarchy. Locate the `SmallUpscalerModel` modules associated with those operations.
-3. Switch to **code_stack** to inspect their source call stacks. Expand to a node referring to your model file.
-4. Select a node with one unambiguous local source location. With **Sync Model Explorer Selection To Code** enabled, VS Code opens that file and highlights the line.
+1. Expand the group to an operation. In the side panel, inspect its `spv id`, opcode, and **debug info**. Record the Python module path from `nn_module_stack` and your model-file location from `stack_trace`, when present.
+2. Switch to **Source Model** and search for the recorded opcode. Select the operation with the matching `spv id` in the same graph segment; use its attributes and connections to distinguish it from other instances of that opcode.
+3. Switch to **nn_module** and locate the module path from the debug information. Expand it and confirm the operation's `spv id`. If this representation is absent, proceed directly to **code_stack**.
+4. In **code_stack**, find the recorded model filename and line, expand that call-stack group, and confirm it contains the operation. Select the group with that single local source location to open and highlight the Python line.
 
-These views regroup the analysis; they aren't separate device captures. Keep the same overlay selected and inspect the reported values rather than assuming a graph node's cost remains identical under every grouping.
+For the supplied `SmallUpscalerModel`, module paths `net.0`, `net.2`, and `net.4` identify its first, middle, and final convolutions. For example, a mapped operation under `net.2` belongs to the middle 32-channel convolution. A source frame at `x = self.net(x)` identifies the call to the entire sequence; use the module path to distinguish the convolutions that share this call site. Your measured overlay determines which group merits investigation.
 
-Some nodes map to multiple source locations or have no usable file and line. In those cases, automatic navigation is unavailable. Use **Source mappings** to inspect the reported locations instead of expecting every node to open one line.
+Keep the same overlay selected across views. Their groupings can change the reported aggregate, so match operations by their attributes and source metadata rather than by equal costs.
 
-<!-- Publication: add a screenshot from this walkthrough showing a measured overlay on a code_stack or nn_module graph beside the matching SmallUpscalerModel source. -->
+If **code_stack** is absent or a group has several source locations, use the file and line recorded from **debug info** to select the matching entry in **Source mappings**. If neither view provides a model-source location for the operation, check the export debug settings before claiming a source match.
+
+<!-- Publication: verify and illustrate this sequence with the actual upscaler capture. Record the execution group, operation spv id, module path, source line, and measured value; add a screenshot of the mapped graph beside SmallUpscalerModel. -->
 
 ## Read source heatmaps and CodeLens
 
-With your model source open, select the measured cycle overlay in **Current Analysis Run**. Mapped source lines receive heatmap colors, and CodeLens entries can show the metric above those lines.
+With your model source open, select the measured cycle overlay in **Current Analysis Run**. Inspect its source presentation:
 
 - Numeric heatmap colors show relative values across mapped lines. They help locate regions to inspect; red doesn't by itself establish a performance defect.
 - CodeLens displays the selected value and, when it can be calculated safely, its percentage of the model total.
-- Selecting a metric CodeLens entry selects its associated node in Model Explorer. Caller and called-source actions navigate related source locations when available.
+- Selecting a metric CodeLens entry selects its associated node in Model Explorer.
 
-Follow a CodeLens entry back to the graph and confirm that the same overlay remains selected. A source line can represent work shared by several operations, and multiple lines can refer to related execution work. Don't add all line values to obtain an independent model total.
+Follow a CodeLens entry back to the graph and confirm that the same overlay remains selected. Several source lines can refer to shared execution work, so their values are not additive model totals.
 
 If source presentation is missing, check these settings and inputs:
 
@@ -75,25 +55,47 @@ If source presentation is missing, check these settings and inputs:
 | `vscode-mlia.showCodeLens` and `editor.codeLens` | Both enabled. |
 | Metric mapping | The selected overlay reports a value for that source location. |
 
-An unavailable value is different from zero. Read any explanation provided by MLIA or the CodeLens hover. The extension's [source visualization guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/source-visualisation.md) explains the presentation controls.
+For unavailable values, read the CodeLens hover explanation. The extension's [source visualization guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/source-visualisation.md) explains the presentation controls.
 
-## Reopen and record the analysis
+## Record your investigation
 
-Close the analysis tab, then select the completed entry in **Analysis Runs**. Confirm that its Model Explorer views and saved overlay reopen without collecting another capture. Open the mapped model source again to inspect its heatmap and CodeLens.
+Copy this table into `$RUN_DIR/run-notes.md`, replacing the guidance in the second column with your values and artifact paths:
 
-Before finishing, record:
+| Record | Where to find it |
+| --- | --- |
+| Capture directory, VGF checksum, and source revision or unchanged source copy | `$CAPTURE_ROOT`, `$NX_WORKSPACE/model.sha256`, and your Python project |
+| Device, Android version, and driver | `$RUN_DIR/device-model.txt`, `$RUN_DIR/android-version.txt`, and `$NX_WORKSPACE/device-vulkan.json` |
+| Extension and MLIA package versions | The MLIA extension's details page, and **Show MLIA Information** in the **New Analysis** title bar |
+| SDK revisions | `$NX_WORKSPACE/sdk-manifest.xml` |
+| Capture configuration | Mode `1`, filter `0`, one scenario execution, zero-filled input |
+| Model result | Metric name, full value, unit, and the selected VGF's scope |
+| Candidate and reason | Representation, group, metric value, and the comparison that led you to it |
+| Source connection | Operation `spv id` and segment, module path, and Python file and line |
 
-- The capture directory, VGF checksum, and source revision or unchanged source copy.
-- The device, Android and driver versions, extension version, MLIA package versions, and resolved SDK manifest.
-- The capture configuration: mode `1`, filter `0`, one scenario execution, and zero-filled input.
-- One measured model total and one expensive group, with their units and a mapped Python location worth investigating.
+For a performance comparison, first establish a new baseline with representative inputs and repeated captures. Then change one model operation and repeat under the same input, frequency, and thermal conditions. Validate model quality as well as performance.
 
-This gives you evidence for choosing the next experiment. For example, investigate whether a costly operation can be changed, then validate model quality and collect a new capture with representative input. Keep the device and measurement conditions consistent, change one meaningful variable at a time, and distinguish model changes from changes in frequency, thermal state, or workload.
+Use **Open Analysis Run Folder** to retain the generated reports. Deleting a saved analysis through the extension also deletes that run's output directory.
 
-Use the run's output folder to retain its generated reports. Deleting a saved analysis through the extension also deletes that run's output directory.
+## Optional: resolve moved source files
+
+Use this section only if the embedded paths no longer resolve. In **Source mappings**, expand **Distinct source locations**, inspect the old paths, and select **Configure source file mapping**. This opens the setting in VS Code. To enter JSON, run **Preferences: Open Workspace Settings (JSON)** from the Command Palette.
+
+If export embedded `/home/export/upscaler` and the unchanged project is now in `/home/developer/upscaler`, add this property, replacing both paths with yours:
+
+```json
+{
+    "vscode-mlia.sourceFileMap": {
+        "/home/export/upscaler": "/home/developer/upscaler"
+    }
+}
+```
+
+Merge the property into the existing settings object. The extension preserves the path suffix after the matched prefix and refreshes mappings automatically. Recheck **Accessible locally** and open a source line. Path remapping cannot correct changed source contents or line numbers. See the [source-file mapping guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/source-file-mapping.md) for more complex layouts.
+
+## Optional: reopen a saved analysis
+
+Close the analysis tab, then select the completed entry in **Analysis Runs**. Its graph views and saved overlay should reopen without another capture. Open the mapped source again to inspect its heatmap and CodeLens. The [analysis guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/analyses.md) describes saved-run management.
 
 ## What you've accomplished
 
-You've captured NX statistics on Android, analyzed measured performance in VS Code, and followed reported execution costs through model graphs to Python source. You can now identify a model region to investigate and collect comparable evidence for a later change.
-
-For compiler estimates before deployment, see the [NX performance estimation Learning Path proposal](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/pull/3876). For a different target, the [Ethos-U VS Code walkthrough](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/) applies MLIA and Model Explorer to compatibility checks and estimates, with different metrics and backends.
+You've captured NX statistics for the selected VGF, analyzed its measured costs in VS Code, and traced a candidate through model graphs to Python source. Your next task is to establish a representative baseline before testing a model change.

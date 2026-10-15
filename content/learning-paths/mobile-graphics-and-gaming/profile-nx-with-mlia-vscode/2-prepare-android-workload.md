@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Check the host tools and device
 
-Continue in the Bash terminal from the previous page. Use the Linux host for the SDK builds, ADB connection, and MLIA extension.
+Continue in the Bash terminal from the previous page.
 
 Prepare these tools before building:
 
@@ -25,7 +25,7 @@ Prepare these tools before building:
 
 Use the [Android SDK command-line tools](https://developer.android.com/tools), [NDK installation guide](https://developer.android.com/studio/projects/install-ndk), [Repo installation instructions](https://source.android.com/docs/setup/download), and [Gradle installation guide](https://docs.gradle.org/8.4/userguide/installation.html) where needed. Builds require network access for Python packages, Gradle dependencies, and downloaded source dependencies.
 
-The commands below use SDK manifest `v2026.09.0`, which selects Scenario Runner and VGF Library `v0.11.0`, and Neural Statistics layer `v1.0.0`. The extension's [capture guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md) describes the underlying procedure. Keep these versions together while validating this example.
+Use SDK manifest `v2026.09.0`, which selects Scenario Runner and VGF Library `v0.11.0`. Download Neural Statistics layer `v1.0.0` separately in the final step. Keep these versions together; the extension's [capture guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md) describes the procedure.
 
 Enable **Developer options > USB debugging** on your NX device, connect it, and check ADB:
 
@@ -39,7 +39,15 @@ The device must appear with status `device`. Unlock it and accept the authorizat
 export ANDROID_SERIAL="<your-device-serial>"
 ```
 
-Replace the placeholder with the serial shown by ADB. The device must support the model's Vulkan data-graph workload and `VK_ARM_data_graph_neural_accelerator_statistics`. A working ADB connection alone doesn't establish those capabilities. The extension documents support for Arm Mali GPU Driver r56p0.
+Replace the placeholder with the serial shown by ADB. Before building, save the device's Vulkan information:
+
+```bash
+adb shell cmd gpu vkjson > "$NX_WORKSPACE/device-vulkan.json"
+```
+
+Open `device-vulkan.json` in VS Code and find the Arm GPU's `driverInfo`. The extension documents support for r56p0, identified by a value beginning `Driver: v1.r56p0-`. Check that the same device lists `VK_ARM_data_graph` and `VK_ARM_data_graph_neural_accelerator_statistics` among its extensions.
+
+If the command is unavailable, the driver differs from r56p0, or either extension is missing, confirm support with your device provider before continuing. These checks establish advertised capabilities; executing the scenario and collecting statistics will verify this workload on the device.
 
 ## Build Scenario Runner
 
@@ -76,7 +84,7 @@ gradle --version
 test -f "$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake"
 ```
 
-Confirm Java 17, Gradle 8.4, and an existing NDK toolchain file. Then build the debuggable Arm64 APK. The subshell matters: the build creates `apk_package` relative to its working directory.
+Confirm Java 17, Gradle 8.4, and an existing NDK toolchain file. Then build the debuggable Arm64 APK. The subshell creates `apk_package` under Scenario Runner and preserves your terminal's current directory.
 
 ```bash
 (
@@ -108,7 +116,7 @@ export APK="$SDK_PATH/sw/scenario-runner/apk_package/app/build/outputs/apk/debug
 test -s "$APK"
 ```
 
-Don't continue if the build failed or the APK is missing. The explicit package version gives the APK a predictable filename; the debug build permits the `run-as` commands used for capture.
+Don't continue if the build failed or the APK is missing. The debug build permits the `run-as` commands used for capture.
 
 ## Generate a scenario for your model
 
@@ -132,7 +140,30 @@ The help output should list `--input`, `--output`, and `--scenario-template`. Ge
 
 Open `workload/scenario.json` in VS Code. In its tensor resources, remove only the `src` and `dst` properties whose values are placeholders such as `TEMPLATE_PATH_TENSOR_INPUT_0` and `TEMPLATE_PATH_TENSOR_OUTPUT_0`. Fix any trailing commas after removing a property.
 
-Keep the graph's `src: "model.vgf"`, the generated tensor dimensions and formats, resource identifiers, bindings, and commands. The scenario generator derives these from the exported artifact; copying MobileNet's scenario or assuming Python tensor layouts would describe a different workload.
+For example, the input tensor object generated from the example upscaler has this form:
+
+```json
+{
+    "dims": [1, 16, 16, 3],
+    "format": "VK_FORMAT_R8_SINT",
+    "shader_access": "readonly",
+    "src": "TEMPLATE_PATH_TENSOR_INPUT_0",
+    "uid": "input_0_ref"
+}
+```
+
+After removing its placeholder `src`, the object is:
+
+```json
+{
+    "dims": [1, 16, 16, 3],
+    "format": "VK_FORMAT_R8_SINT",
+    "shader_access": "readonly",
+    "uid": "input_0_ref"
+}
+```
+
+Apply the same edit to the output tensor's placeholder `dst`. Keep the graph's `src: "model.vgf"` and all generated dimensions, formats, identifiers, bindings, and commands. Edit your generated objects in place; these excerpts are not a complete scenario.
 
 An input tensor without `src` is initialized to zero by Scenario Runner. An output without `dst` isn't written to a file. These settings are sufficient to exercise the graph and capture statistics. To measure representative inference later, supply matching input tensors instead of zeros.
 
@@ -146,7 +177,7 @@ Confirm that no `TEMPLATE_PATH` values remain and that every referenced resource
 
 ## Install the debug APK and capture layer
 
-Install Scenario Runner and confirm that ADB can access its application identity:
+Install Scenario Runner and verify that `run-as` can access the debuggable app:
 
 ```bash
 export PACKAGE=com.arm.ai_ml_sdk_scenario_runner
@@ -154,7 +185,7 @@ adb install -r "$APK"
 adb shell run-as "$PACKAGE" id
 ```
 
-Installation should report `Success`; `run-as` should print the application's UID. If it reports `package not debuggable`, install the debug APK built above. Unlock the device and approve any install-over-USB prompt.
+Installation should report `Success`; `run-as` should print the application's UID. If it reports `package not debuggable`, install the debug APK you built. Unlock the device and approve any install-over-USB prompt.
 
 Download and extract the Android Arm64 capture layer:
 
@@ -166,7 +197,7 @@ export LAYER_LIB="$NX_WORKSPACE/VkLayerNeuralStatistics-android-arm64-v8a/libVkL
 test -s "$LAYER_LIB"
 ```
 
-This layer archive is separate from the SDK checkout. The next page copies it into the application's private storage, where Android's Vulkan loader can find it without root access.
+The next page copies this library into the application's private storage.
 
 ## What you've accomplished and what's next
 

@@ -1,6 +1,6 @@
 ---
 title: Analyze measured performance in VS Code
-description: Import a validated NX capture and its matching VGF into MLIA for VS Code, then distinguish model totals from graph-level measurements.
+description: Import an NX capture and its matching VGF into MLIA for VS Code, verify measured results, and distinguish model totals from graph-level values.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -24,16 +24,14 @@ In **MLIA > New Analysis**:
 
 1. Select **Profiling**.
 2. Add the printed **Profiling data** directory. Select the directory directly containing `capture.json`, not `capture.tar`, the enclosing `captures` directory, or an individual `.bin` file.
-3. Select `nx-profile/workload/model.vgf` in **Source model**.
+3. Select `nx-profile/workload/model.vgf` in **Source model**. This matching VGF supplies the graph and Python source mappings.
 4. Select `neural-technology` as the target profile.
-5. Enable **Performance**. Measured Neural Technology profiling supports the performance check; an unavailable **Compatibility** option can remain disabled.
+5. Enable **Performance**.
 6. Select **Run Analysis**.
-
-The extension permits profiling without a source model for some formats. Supply the matching VGF here because the exercise includes model graphs and Python source mappings.
 
 <!-- Publication: add a screenshot from this walkthrough showing Profiling, its capture root, model.vgf, neural-technology, and Performance. -->
 
-Model Explorer opens with a loading view while MLIA analyzes the capture. Wait for completion before inspecting the metrics. The [analysis guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/analyses.md) describes run management and the managed output directory.
+Model Explorer opens with a loading view while MLIA analyzes the capture. Wait for completion before inspecting the metrics.
 
 ## Verify that the result uses measurements
 
@@ -45,11 +43,21 @@ In **Current Analysis Run**, confirm that:
 - The target profile is `neural-technology`.
 - A performance result is available under **Model metrics**.
 
-The selected entry in **Analysis Runs** determines which analysis you're inspecting. **Current Analysis Run** shows its configuration and results, including **Model metrics** for the whole model. Model Explorer displays the run's graphs, with details for the selected node or group in its own side panel. Keep this profiling run selected as you explore its results.
+The selected entry in **Analysis Runs** determines which analysis you're inspecting. **Current Analysis Run** shows its configuration and **Model metrics** for the selected VGF. Model Explorer displays its graphs and details for the selected node or group in its side panel. Keep this profiling run selected as you explore its results.
 
-Select the run's output-folder action in **Analysis Runs**. Inside that folder, open `mlia-output/model-explorer/standardized-output.json`. Find the performance entry in `results` and confirm that `status` is `ok` and `mode` is `measured`. This establishes the origin of the reported metrics; selecting a target profile alone doesn't turn an estimate into a measurement.
+Select **Open Analysis Run Folder** on the completed entry in **Analysis Runs**, then open `mlia-output/model-explorer/standardized-output.json`. Within its `results` array, find the object whose `kind` is `performance`. Confirm these fields; the excerpt omits the other result fields:
 
-If the run fails, inspect its error summary and the **MLIA** output log. Resolve the input problem before using another run's metrics:
+```json
+{
+    "kind": "performance",
+    "status": "ok",
+    "mode": "measured"
+}
+```
+
+The `measured` mode confirms that the result uses capture data.
+
+If the run fails, inspect its error summary and the **MLIA** output log, then check the inputs:
 
 | Problem | Action |
 | --- | --- |
@@ -60,13 +68,11 @@ If the run fails, inspect its error summary and the **MLIA** output log. Resolve
 
 ## Read the model-level metrics first
 
-Expand the performance result's **Model metrics**. Look for reported cycle metrics such as `total_cycles` and `compute_cycles`, and read their units. Available metrics depend on the driver statistics and MLIA package version; only use values that this run actually reports.
+Expand the performance result's **Model metrics** and find `total_cycles`, with unit `cycles`. It summarizes the cycle cost attributed to the captured VGF. The mode-1 profiling backend derives both `total_cycles` and `compute_cycles` from the reported NX-active cycle counts, so equal values do not establish that memory or scheduling overhead is absent.
 
-Record a model-level metric and its value as the starting point for your investigation. Hover over a shortened value to see its full precision.
+Record `total_cycles` and its full value as context for the graph investigation. Hover over a shortened value to see its full precision. If this metric is absent, inspect the result's reported metrics and their descriptions before selecting another cycle metric; keep its name and scope in your notes.
 
-These results describe accelerator work for the captured dispatch. They don't include every part of an application, such as CPU preprocessing or presentation. Avoid treating an accelerator cycle count as measured application latency or comparing it directly with an estimator result that assumes a different hardware configuration.
-
-The one-dispatch, zero-input example establishes that the tools work together. Use representative inputs and repeated measurements under controlled device conditions before drawing performance conclusions about your application.
+These counts describe accelerator work for the captured dispatch, excluding application work such as CPU preprocessing and presentation. They are not elapsed application latency. Use representative inputs and repeated measurements before drawing application-performance conclusions.
 
 <!-- Publication: add a screenshot from the successful measured run showing its inputs, Profiling mode, and model metrics. -->
 
@@ -79,9 +85,9 @@ In Model Explorer, select **Source Model** in the graph selector to inspect the 
 3. Use a group's expand control to reveal its contents. Collapse it when you want to return to a broader view.
 4. Use the search box to find a node by name. Select a result to locate it in the graph, then inspect its attributes, inputs, and outputs in the side panel.
 
-Next, select **segment_cascade_chain** when it is available. This representation groups operations into the segments, cascades, and chains used for hardware execution. It helps you relate measured costs to the work the accelerator executes. Switching representations changes how you inspect the same analysis; it doesn't collect another capture.
+Next, select **segment_cascade_chain**. It groups operations into the segments, cascades, and chains used for hardware execution. Expand a segment to its cascades and chains to inspect increasingly specific execution groups. If this representation is absent, continue in **Source Model** and record that your candidate is a source-graph group rather than a hardware execution group.
 
-The [Model Explorer representation guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/model-explorer-representations.md) explains the available views. Their presence depends on the model's metadata and the result.
+The [Model Explorer representation guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/model-explorer-representations.md) explains the views available for different model metadata and results.
 
 ## Compare measured values within a group
 
@@ -90,9 +96,9 @@ Use a measured overlay to locate a group with a high reported cost:
 1. In **Current Analysis Run > Overlay**, choose an available cycle metric from the measured performance result.
 2. Expand the graph and inspect the values and colors on its nodes. Read the values as well as the colors when comparing costs.
 3. Select a group and inspect **Node data in selected layer** in Model Explorer's side panel. This table lets you compare mapped values without reading each label on the graph.
-4. Use the table filter to narrow the entries by node name. Compare values for the same metric and unit, and check which execution unit each value describes.
+4. Use the table filter to narrow the entries by node name. Compare the same metric and unit at the same hierarchy level, such as two chains within one cascade. A chain and its containing cascade cover different amounts of work.
 
-Overlay selections synchronize between **Current Analysis Run** and Model Explorer. If you see no values, check that the overlay belongs to the measured result and that the selected representation contains mapped entities.
+Overlay selections synchronize between **Current Analysis Run** and Model Explorer. If the table has no values, reselect the measured cycle overlay and inspect **Source Model**. If that view also has no mapped values, return to **Model metrics** and the MLIA log to check whether graph breakdowns were produced. Resolve this before choosing a candidate.
 
 A scheduling group can contain several model operations. A cost mapped to those operations isn't an independent measurement of every operation. Missing values don't mean zero cycles. Use the execution grouping to understand what was measured before deciding which part of the model to investigate.
 
@@ -110,16 +116,16 @@ These statistics depend on the selected graph representation and its metric mapp
 
 ## Choose a group to investigate
 
-Use the graph and tables to choose one execution group with a high reported cycle cost. If other measured overlays are available, inspect them to understand what else the capture reports about that group. Use the metric names and units provided by this run.
+Choose a group with a higher reported cycle cost than a comparable group in the same view. Record the comparison that makes it worth investigating. If only one group has a value, record that limitation and use it to practice source tracing without claiming it is the dominant cost.
 
 Before moving to the Python source, record:
 
 - The graph representation and group name.
 - The selected measured cycle metric, its value, and its unit.
-- The operations associated with the group, where available.
+- An operation inside the group, including its opcode, graph segment, and `spv id` from the node attributes. These identify it when you switch views.
 - The model-level metric and value you recorded earlier, keeping its scope distinct from the group's value.
 
-Keep that group and cycle overlay selected for the next page. Treat it as a candidate for investigation: a high cost alone doesn't establish that an operation is inefficient or that changing it will improve application performance.
+Keep that group and cycle overlay selected for the next page. A high reported cost identifies a candidate to inspect; it does not establish that changing the operation will improve application performance.
 
 ## What you've accomplished and what's next
 

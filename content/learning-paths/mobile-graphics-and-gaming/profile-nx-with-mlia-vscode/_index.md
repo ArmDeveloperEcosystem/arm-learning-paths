@@ -7,12 +7,10 @@ cascade:
 
 description: Capture neural accelerator statistics on an Android device and use MLIA for VS Code to trace measured performance through Model Explorer to your Python model.
 
-minutes_to_complete: 60
+minutes_to_complete: 90
 
 who_is_this_for: >-
-    This Learning Path is for machine learning and graphics developers investigating model performance on Arm neural accelerators (NX).
-    You'll capture profiling data on an Android device and analyze it in VS Code.
-    Use the results to identify costly parts of your model and trace them to Python source.
+    You're a machine learning or graphics developer investigating model performance on Arm neural accelerators (NX).
 
 learning_objectives:
     - Prepare a debug-enabled VGF model and an Android Scenario Runner workload
@@ -23,10 +21,9 @@ learning_objectives:
 prerequisites:
     - An x86-64 Ubuntu 24.04 LTS host with internet access and permission to install development tools
     - Visual Studio Code 1.100 or later on the host
-    - An Arm64 Android device with USB debugging enabled and a compatible NX driver; the extension documents support for Arm Mali GPU Driver r56p0
-    - A driver that supports Vulkan data-graph execution and VK_ARM_data_graph_neural_accelerator_statistics
+    - An Arm64 Android device with USB debugging and a driver supporting Vulkan data-graph execution and VK_ARM_data_graph_neural_accelerator_statistics; check the documented r56p0 driver on the [Android preparation page](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/2-prepare-android-workload/#check-the-host-tools-and-device)
     - Familiarity with Bash, ADB, and PyTorch model export
-    - The PTQ model and Python source from [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/), using the version and debug settings specified on the first page
+    - The PTQ model and Python source from [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/); read the [version requirements](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/1-prepare-model-and-workspace/#prepare-a-compatible-vgf-export) before installing its tools or exporting the model
 
 author: Matthew Sloyan
 

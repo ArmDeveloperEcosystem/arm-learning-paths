@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Record the existing device settings
 
-Continue in the same Bash terminal, with the device selected and Scenario Runner installed. Create a unique name for this execution and a host directory for its settings and logs:
+Continue in the same Bash terminal, with the device selected and Scenario Runner installed. Create a unique name for this execution and a host directory for its settings and capture archive:
 
 ```bash
 cd "$NX_WORKSPACE"
@@ -33,7 +33,7 @@ adb shell getprop ro.product.model > "$RUN_DIR/device-model.txt"
 adb shell getprop ro.build.version.release > "$RUN_DIR/android-version.txt"
 ```
 
-Keep these files for restoration at the end of this page. Also record the device's driver version from its platform information, the model checksum, and the software versions noted during setup. Coordinate with anyone using another GPU debugging tool on the same device before changing these settings.
+Keep these files for restoration at the end of this page. Create `$RUN_DIR/run-notes.md` using the [investigation record](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/5-trace-costs-to-python/#record-your-investigation), and fill in the device and tool versions. Use `$NX_WORKSPACE/device-vulkan.json` from the previous page for the driver version. Coordinate with anyone using another GPU debugging tool on the same device before changing these settings.
 
 ## Stage the workload and layer
 
@@ -54,7 +54,7 @@ adb shell chmod a+r "$STAGING/libVkLayerNeuralStatistics.so"
 adb shell run-as "$PACKAGE" cp "$STAGING/libVkLayerNeuralStatistics.so" .
 ```
 
-The Vulkan loader can load the loose library from this directory. Shared storage such as `/sdcard` can have incompatible access or loading restrictions. `run-as` gives access as the debuggable application, so root access isn't needed.
+The Vulkan loader can load the library from the app's private directory. `run-as` gives access as the debuggable application without root access; shared storage such as `/sdcard` can restrict library loading.
 
 ## Select one dispatch to capture
 
@@ -97,9 +97,9 @@ adb shell am start-foreground-service -n "$PACKAGE/.Main" --esa args "$RUN_ARGS"
 adb logcat -v time -s ScenarioService ScenarioRunner VkLayerNeuralStatistics vulkan AndroidRuntime
 ```
 
-Android's `--esa args` option passes the comma-separated arguments to the runner. Check timestamps in the log so that you inspect the launch you just made, rather than a previous execution.
+Check timestamps in the log so that you inspect the launch you just made.
 
-The expected completion message for a successful run is:
+The expected output for a successful run includes:
 
 ```output
 native exit code=0
@@ -133,7 +133,7 @@ capture-<run-name>/
         statistics_mode1.bin
 ```
 
-Validate the root metadata and confirm that at least one nonempty statistics payload exists:
+Run this preliminary check of the root metadata and statistics payloads. MLIA will validate the remaining capture files when it loads the directory:
 
 ```bash
 python - <<'PY'
@@ -157,7 +157,7 @@ print(f"Profiling-data directory: {root}")
 PY
 ```
 
-Check that there are no unexpected warnings. For this single-dispatch exercise, investigate unexpected additional dispatches before treating the capture as the intended workload. Keep the printed **Profiling-data directory** for the next page.
+For this single-dispatch exercise, expect `Capture status: complete`, `Nonempty statistics payloads: 1`, and an empty warnings list. If the count differs or a warning appears, use the diagnostics to resolve it before analysis; preserve any warning text you cannot explain. Keep the printed **Profiling-data directory** for the next page.
 
 If validation fails, preserve the files and diagnose the failure before analysis:
 
@@ -173,7 +173,7 @@ See the [capture-layer troubleshooting guide](https://github.com/arm/vscode-mlia
 
 ## Restore the device settings
 
-After retrieving a valid capture, stop Scenario Runner and restore the exact settings recorded before this run. Perform this restoration after a failed capture too, before using the device for other work.
+After retrieving the capture, stop Scenario Runner and restore the exact settings recorded before this run. Perform this restoration after a failed capture too, before using the device for other work.
 
 ```bash
 adb shell am force-stop "$PACKAGE"
@@ -198,11 +198,11 @@ print("Previous GPU debug-layer settings restored.")
 PY
 ```
 
-The script deletes a setting only when it was previously unset (`null`), and quotes values for Android's shell. If ADB reports an error, reconnect the same device and complete restoration before continuing.
+The script deletes a setting only when it was previously unset (`null`). If ADB reports an error, reconnect the same device and complete restoration before continuing.
 
 Keep the host capture and backup files. The application-private workload and library can remain for another capture; they aren't active when their layer configuration is disabled. If you remove the library later, first confirm that no restored configuration still needs it.
 
-To repeat the exercise, start at the top of this page with a new run name. Confirm that ordinary application startup works after restoring the previous configuration.
+To repeat the exercise, return to **Record the existing device settings** and create a new run name. If another GPU debugging application was configured before this capture, relaunch it and confirm its previous layer configuration works.
 
 ## What you've accomplished and what's next
 

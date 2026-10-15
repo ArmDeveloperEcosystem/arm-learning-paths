@@ -21,33 +21,35 @@ The workflow has three parts:
 | Analyze | MLIA for VS Code extension on your Linux host | A saved profiling analysis with measured performance results |
 | Investigate | Model Explorer and the source editor within VS Code | Graph overlays, source navigation, heatmaps, and CodeLens |
 
-Capture requires a compatible NX Android device. You can run the Android tools from VS Code's integrated terminal, then copy the capture to your Linux host and load it into the extension for analysis.
-
 The exercise uses one dispatch and zero-filled input to establish the capture and analysis workflow. It doesn't measure application frame time, establish sustained performance, or validate the upscaler's image quality.
 
+Allow about 90 minutes after preparing the prerequisite model and host tools. This provisional estimate includes building the runner and collecting and analyzing a capture; allow extra time for installation and downloads.
+
 {{% notice Draft validation %}}
-This draft has not yet been validated from model export through device capture and VS Code source navigation. The device walkthrough and screenshots must be checked before publication.
+This draft has not yet been validated from model export through device capture and VS Code source navigation.
 {{% /notice %}}
 
 ## Prepare a compatible VGF export
 
-Use the `SmallUpscalerModel` PTQ example in [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/3-run-ptq-and-export-vgf/). Keep its `quantize_and_export_vgf.py` source file alongside the exported artifacts. Complete that path's environment and PTQ steps; you don't need the QAT example.
+MLIA needs VGF 0.4.3 from Model Converter v0.10.0, as specified in the extension's [VGF preparation guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/creating-vgf-model.md). Use ExecuTorch v1.5.1, which selects that converter.
 
-Apply the following version requirement **before** running the installation scripts in the [environment setup page](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/2-set-up-your-environment/): after cloning ExecuTorch, select its compatible release:
+Follow the prerequisite [environment setup page](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/2-set-up-your-environment/) through the `git clone` command. Before running `./install_executorch.sh`, enter the checkout and select the required release:
 
 ```bash
 cd executorch
 git checkout v1.5.1
 ```
 
-Continue with the installation scripts from that page. The extension's [VGF preparation guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/creating-vgf-model.md) specifies Model Converter v0.10.0 and VGF 0.4.3; ExecuTorch v1.5.1 selects that converter. A newer SDK used to build Scenario Runner later in this path doesn't change the VGF version accepted by MLIA.
+Continue with `./install_executorch.sh` and the Arm backend setup steps. Keep v1.5.1 selected even where that page's general troubleshooting suggests `main`. The newer SDK used to build Scenario Runner later in this path is separate from the export toolchain.
+
+Then run the `SmallUpscalerModel` post-training quantization (PTQ) example in [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/3-run-ptq-and-export-vgf/). Keep its `quantize_and_export_vgf.py` source file. You can skip the own-model and quantization-aware training examples. If you already exported with a different toolchain, prepare a fresh environment with these versions and rerun PTQ and export; changing the checkout does not update an existing VGF.
 
 Retain both debug options already present in the PTQ example:
 
 - `compiler_flags=["--emit-debug-info"]` in `VgfCompileSpec` embeds ExecuTorch stack traces and module metadata.
 - `.dump_debug_info(VgfCompileSpec.DebugMode.TOSA)` preserves the corresponding TOSA debug information during lowering.
 
-Keep the Python file that produced the export unchanged during this exercise. Changing its line numbers or moving it can make source navigation misleading or require path remapping. Debug information and matching source are required for the final page, even though other MLIA workflows can operate without them.
+Keep the Python file that produced the export unchanged. Source navigation needs its original contents and line numbers; moving the file can require path remapping.
 
 ## Create a profiling workspace
 
@@ -59,21 +61,26 @@ From that project directory, list the exported VGF files:
 find output -type f -name '*.vgf'
 ```
 
-Select the VGF produced by the PTQ example. Replace `<exported-model>.vgf` with its actual filename, then copy it to a stable workload path:
+Use the VGF from this PTQ export, typically `output/output_tag0.tosa.vgf`. If you find several artifacts, check that `output/` contains only the current example's export. If a fresh export still produces several partitions, stop and check the pinned versions and unchanged example before proceeding. This walkthrough profiles one VGF, and its totals describe only the graph contained in that file.
+
+Replace `<exported-model>.vgf` with the filename you found, and check that it contains data:
 
 ```bash
 export NX_WORKSPACE="$PWD/nx-profile"
 export MODEL_VGF="$PWD/output/<exported-model>.vgf"
 test -s "$MODEL_VGF"
+```
+
+Continue only if `test -s` succeeds. Copy the model to a stable workload path and record its checksum:
+
+```bash
 mkdir -p "$NX_WORKSPACE/workload" "$NX_WORKSPACE/captures"
 cp "$MODEL_VGF" "$NX_WORKSPACE/workload/model.vgf"
 sha256sum "$NX_WORKSPACE/workload/model.vgf" > "$NX_WORKSPACE/model.sha256"
 cd "$NX_WORKSPACE"
 ```
 
-Stop if `test -s` fails: the selected model must exist and contain data. If export produced several partitions, use the artifact corresponding to the graph you intend to capture; the measurements will describe that artifact, not every partition in the original Python program.
-
-Keep this terminal open across the capture pages. `NX_WORKSPACE` identifies the host working directory; later pages also define `SDK_PATH`, `PACKAGE`, and a unique run name. The original Python source stays in the project directory so its embedded locations remain available.
+Keep this terminal open across the capture pages. `NX_WORKSPACE` identifies the host working directory; leave the original Python source in the project directory.
 
 ## Prepare the extension's managed environment
 
@@ -83,10 +90,9 @@ In VS Code:
 
 1. Select **MLIA** in the Activity Bar.
 2. In **New Analysis**, select **Refresh MLIA Environment** and wait for setup to finish.
-3. Confirm that **Estimation** and **Profiling** are available.
-4. Select **Profiling** and confirm that the `neural-technology` target profile is available.
+3. Select **Profiling** and confirm that the `neural-technology` target profile is available.
 
-The extension manages its own `uv`, Python, and MLIA installation. Your model-export environment and the SDK build environment are separate. You don't need a command-line MLIA installation for this path.
+The extension manages its own Python and MLIA installation, separately from your model-export and SDK build environments. You don't need a command-line MLIA installation.
 
 If setup fails or the profile is absent, select **Show Log** and resolve the environment error before proceeding. See the extension's [environment troubleshooting guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/troubleshooting.md).
 
