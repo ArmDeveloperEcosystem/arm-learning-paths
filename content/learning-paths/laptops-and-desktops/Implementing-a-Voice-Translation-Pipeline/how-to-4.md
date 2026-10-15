@@ -13,14 +13,7 @@ You'll create `tts.py` to turn the Spanish translation from [Translate text with
 
 You'll first check the output device and create the script. You'll then run it and paste in the Spanish text to test playback. The model will stay loaded so that you can try several sentences in the same session.
 
-Return to the project directory and activate the virtual environment if it isn't already active:
-
-```bash
-cd ~/voice-translator
-source .venv/bin/activate
-```
-
-List the output devices visible to Python:
+Continuing in the `~/voice-translator` directory with the active virtual environment, list the output devices visible to Python:
 
 ```bash
 python -m sounddevice
@@ -28,7 +21,7 @@ python -m sounddevice
 
 Confirm that the list contains your Mac speakers, headphones, or another output device.
 
-Using a file editor of your choice, create a file named `tts.py` in `~/voice-translator`. Copy and paste the following code into the file and save it:
+Using a file editor of your choice, create a file named `tts.py` in the `~/voice-translator` directory. Copy and paste the following code into the file and save it:
 
 ```python
 import argparse

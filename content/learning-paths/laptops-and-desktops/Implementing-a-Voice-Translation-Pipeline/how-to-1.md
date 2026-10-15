@@ -48,7 +48,7 @@ source .venv/bin/activate
 python -m pip install --upgrade pip
 ```
 
-Keep this environment active while you complete the Learning Path. Make sure to run the scripts from `~/voice-translator` since their model paths are relative to that directory.
+Keep this virtual environment active while you complete the Learning Path. Make sure to run the scripts from `~/voice-translator` since their model paths are relative to that directory.
 
 Create a `requirements.txt` file in `~/voice-translator` with the following contents:
 

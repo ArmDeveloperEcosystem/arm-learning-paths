@@ -13,14 +13,7 @@ With your environment and models ready, you'll create `stt.py`, a Python script 
 
 You'll first check your microphone and create the script, then run it to record a sentence. By testing transcription on its own, you'll be able to identify recording or recognition problems before adding translation.
 
-Return to the project directory and activate the virtual environment if it isn't already active:
-
-```bash
-cd ~/voice-translator
-source .venv/bin/activate
-```
-
-List the audio devices visible to Python:
+Continuing in the `~/voice-translator` directory with the active virtual environment, list the audio devices visible to Python:
 
 ```bash
 python -m sounddevice
@@ -30,7 +23,7 @@ Confirm that the list contains an input device, such as `MacBook Pro Microphone`
 
 ## Create the transcription script
 
-Using a file editor of your choice, create a file named `stt.py` in `~/voice-translator`. Copy and paste the following code into the file and save it:
+Using a file editor of your choice, create a file named `stt.py` in the `~/voice-translator` directory. Copy and paste the following code into the file and save it:
 
 ```python
 from pathlib import Path

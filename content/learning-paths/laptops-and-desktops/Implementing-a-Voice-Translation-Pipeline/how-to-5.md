@@ -13,14 +13,7 @@ You'll create `app.py` to connect the functions from `stt.py`, `translate.py`, a
 
 After creating and launching the application, you'll test it with an English recording and Spanish as the target language. The application will transcribe the recording, display the Spanish translation as it's generated, then synthesize Spanish speech.
 
-Return to the project directory and activate the virtual environment if it isn't already active:
-
-```bash
-cd ~/voice-translator
-source .venv/bin/activate
-```
-
-Using a file editor of your choice, create a file named `app.py` in `~/voice-translator`. Copy and paste the following code into the file and save it:
+Using a file editor of your choice, create a file named `app.py` in the `~/voice-translator` directory. Copy and paste the following code into the file and save it:
 
 ```python
 from contextlib import ExitStack
@@ -233,7 +226,7 @@ Both event handlers use `concurrency_id="models"` with a limit of one. This seri
 
 ## Launch the desktop interface
 
-Start the application:
+Continuing in the `~/voice-translator` directory with the active virtual environment, start the application:
 
 ```bash
 python app.py

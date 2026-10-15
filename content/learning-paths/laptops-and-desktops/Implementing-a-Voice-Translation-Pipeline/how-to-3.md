@@ -13,14 +13,7 @@ With microphone transcription working, you'll build `translate.py` to translate 
 
 You'll first define the shared language settings in `languages.py`, then create and test the translation script. Using typed text will let you check translation independently of microphone quality and recognition errors. Later, the same translation function will receive the transcript from Sherpa-ONNX.
 
-Return to the project directory and activate the virtual environment if it isn't already active:
-
-```bash
-cd ~/voice-translator
-source .venv/bin/activate
-```
-
-Using a file editor of your choice, create a file named `languages.py` in `~/voice-translator`. Copy and paste the following shared language settings into the file and save it:
+Using a file editor of your choice, create a file named `languages.py` in the `~/voice-translator` directory. Copy and paste the following shared language settings into the file and save it:
 
 ```python
 LANGUAGES = {
@@ -42,7 +35,7 @@ The dictionary keys serve as command-line choices, interface labels, and languag
 
 ## Create the translation script
 
-Using a file editor of your choice, create a file named `translate.py` in `~/voice-translator`. Copy and paste the following code into the file and save it:
+Using a file editor of your choice, create a file named `translate.py` in the `~/voice-translator` directory. Copy and paste the following code into the file and save it:
 
 ```python
 import argparse
@@ -114,7 +107,7 @@ The target language is fixed for each command-line run. In the Gradio applicatio
 
 ## Translate an English sentence
 
-Run the script with Spanish as the target language:
+Continuing in the `~/voice-translator` directory with the active virtual environment, run the script with Spanish as the target language:
 
 ```bash
 python translate.py Spanish
