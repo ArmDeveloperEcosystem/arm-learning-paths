@@ -83,7 +83,7 @@ The prebuilt LiteRT-LM and Sherpa-ONNX packages mean that you don't need to comp
 
 ## Download the speech recognition model
 
-Download and extract the quantised English streaming Zipformer model:
+Download and extract the quantized English streaming Zipformer model:
 
 ```bash
 cd ~/voice-translator
@@ -105,7 +105,7 @@ Keep the filename `gemma-4-E2B-it.litertlm`. The translation script uses this pa
 
 ## Download the speech synthesis model
 
-Download and extract the quantised Supertonic 3 model:
+Download and extract the quantized Supertonic 3 model:
 
 ```bash
 curl -L -o models/supertonic.tar.bz2 https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/sherpa-onnx-supertonic-3-tts-int8-2026-05-11.tar.bz2

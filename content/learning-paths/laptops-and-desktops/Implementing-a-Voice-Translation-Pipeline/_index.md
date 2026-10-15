@@ -5,13 +5,13 @@ description: Build an on-device English-to-Spanish voice translator on an Apple 
 
 minutes_to_complete: 45
 
-who_is_this_for: This Learning Path is for Python developers who want to implement a voice translation pipeline locally on an Apple silicon Mac. You'll translate English speech into Spanish. You can select other supported target languages, but recognising speech in another source language requires a different speech recognition model and configuration.
+who_is_this_for: This Learning Path is for Python developers who want to implement a voice translation pipeline locally on an Apple silicon Mac. You'll translate English speech into Spanish. You can select other supported target languages, but recognizing speech in another source language requires a different speech recognition model and configuration.
 
 learning_objectives:
     - Prepare LiteRT-LM and a Gemma 4 model for local translation on an Apple silicon Mac.
     - Capture microphone input and transcribe English speech locally with Sherpa-ONNX.
     - Prompt Gemma 4 to translate the English transcript into Spanish.
-    - Synthesise and play the Spanish translation with Supertonic 3 and Sherpa-ONNX.
+    - Synthesize and play the Spanish translation with Supertonic 3 and Sherpa-ONNX.
 
 prerequisites:
     - A Mac with Apple silicon running macOS 12 or later, with a microphone, speakers, at least 8 GB of memory, and 15 GB of free storage

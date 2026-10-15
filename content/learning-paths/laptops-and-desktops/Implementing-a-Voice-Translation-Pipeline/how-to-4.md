@@ -1,6 +1,6 @@
 ---
-title: Synthesise translated speech with Supertonic 3
-description: Configure Supertonic 3 with Sherpa-ONNX to synthesise and play the Spanish translation locally on an Apple silicon Mac.
+title: Synthesize translated speech with Supertonic 3
+description: Configure Supertonic 3 with Sherpa-ONNX to synthesize and play the Spanish translation locally on an Apple silicon Mac.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Configure Supertonic 3
 
-You'll create `tts.py` to turn the Spanish translation from [Translate text with Gemma 4 E2B](/learning-paths/laptops-and-desktops/implementing-a-voice-translation-pipeline/how-to-3/) into spoken audio. The script will use Supertonic 3 through Sherpa-ONNX to synthesise speech, then `sounddevice` to play it through the default output device for your Mac.
+You'll create `tts.py` to turn the Spanish translation from [Translate text with Gemma 4 E2B](/learning-paths/laptops-and-desktops/implementing-a-voice-translation-pipeline/how-to-3/) into spoken audio. The script will use Supertonic 3 through Sherpa-ONNX to synthesize speech, then `sounddevice` to play it through the default output device for your Mac.
 
 You'll first check the output device and create the script. You'll then run it and paste in the Spanish text to test playback. The model will stay loaded so that you can try several sentences in the same session.
 
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 ```
 `create_tts()` loads the model, `synthesise()` returns audio samples and their sample rate, and `speak()` plays them.
 
-The model configuration uses the downloaded quantised files and selects the CPU with eight threads. `config.validate()` checks the configuration before the model is loaded.
+The model configuration uses the downloaded quantized files and selects the CPU with eight threads. `config.validate()` checks the configuration before the model is loaded.
 
 The generation settings select voice preset `6` with `sid`, normal speed with `speed=1.0`, and eight generation steps with `num_steps`. `config.extra` receives the language code from `LANGUAGES`: `{"lang": "es"}` when you select Spanish. Assign the complete dictionary because modifying an item in `config.extra` doesn't persist the change in this version of the Python bindings.
 

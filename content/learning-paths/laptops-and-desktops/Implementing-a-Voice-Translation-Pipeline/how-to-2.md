@@ -110,7 +110,7 @@ if __name__ == "__main__":
 
 Sherpa-ONNX resamples the audio to the model's 16 kHz input rate. `transcribe()` creates a new stream for each recording, appends half a second of silence to flush the final words, and marks the input as finished. The decode loop then consumes the available frames and returns the transcript.
 
-The encoder and joiner use the `int8` files, whilst the decoder uses the separate file named in the configuration. `provider="cpu"` and `num_threads=2` select CPU execution with two threads. The loaded recogniser can be reused, while each recording has its own stream.
+The encoder and joiner use the `int8` files, while the decoder uses the separate file named in the configuration. `provider="cpu"` and `num_threads=2` select CPU execution with two threads. The loaded recognizer can be reused, while each recording has its own stream.
 
 ## Record and transcribe an utterance
 
@@ -140,7 +140,7 @@ Recording for 5 seconds...
 Transcript: WHERE IS THE NEAREST TRAIN STATION
 ```
 
-Capitalisation and punctuation may differ, but the transcript should contain the words that you spoke.
+Capitalization and punctuation may differ, but the transcript should contain the words that you spoke.
 
 If the transcript is empty, run `python -m sounddevice` again. Check that the microphone that you spoke into is marked with `>` or `*`. The `*` marker identifies a device used for both default input and output. Also confirm the microphone permission for the terminal application in **System Settings**.
 
@@ -150,4 +150,4 @@ If the script remains at `Recording for 5 seconds...`, check the same device and
 
 You've set up audio transcription with Sherpa-ONNX. `stt.py` now records one utterance and prints its transcript. The application will pass that text to Gemma only after recognition finishes.
 
-Next, you'll test Gemma's translation with typed text before connecting it to the recogniser.
+Next, you'll test Gemma's translation with typed text before connecting it to the recognizer.

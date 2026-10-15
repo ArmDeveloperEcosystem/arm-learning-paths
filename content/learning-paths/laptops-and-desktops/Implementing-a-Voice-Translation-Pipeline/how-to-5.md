@@ -11,7 +11,7 @@ layout: learningpathall
 
 You'll create `app.py` to connect the functions from `stt.py`, `translate.py`, and `tts.py` to a local Gradio page. The browser will provide recording and playback controls, and the Python backend will run the three models.
 
-After creating and launching the application, you'll test it with an English recording and Spanish as the target language. The application will transcribe the recording, display the Spanish translation as it's generated, then synthesise Spanish speech.
+After creating and launching the application, you'll test it with an English recording and Spanish as the target language. The application will transcribe the recording, display the Spanish translation as it's generated, then synthesize Spanish speech.
 
 Return to the project directory and activate the virtual environment if it isn't already active:
 
@@ -118,7 +118,7 @@ def main():
             if not translated_text:
                 raise gr.Error("Model did not return a translation")
 
-            yield transcript, translated_text, None, "Synthesising..."
+            yield transcript, translated_text, None, "Synthesizing..."
             generated_audio = synthesise(
                 tts, translated_text, LANGUAGES[language]
             )
@@ -211,7 +211,7 @@ if __name__ == "__main__":
 ```
 The code is arranged as follows:
 
-1. `normalise_audio()` prepares browser audio for the recogniser.
+1. `normalise_audio()` prepares browser audio for the recognizer.
 2. `main()` loads the models and owns their lifetime.
 3. `select_conversation()` and `reset_language()` handle the selected language.
 4. `run_pipeline()` yields the transcript, translation, audio, and status as processing advances.
@@ -223,13 +223,13 @@ The code is arranged as follows:
 
 ### Keep the models loaded
 
-`main()` creates the recogniser, synthesiser, and Gemma engine before Gradio starts serving requests. `select_conversation()` reuses the current conversation while the target language stays the same. When the language changes, it closes that conversation and creates one with a new system instruction. `ExitStack` handles this replaceable conversation, and the `finally` block closes it at shutdown.
+`main()` creates the recognizer, synthesizer, and Gemma engine before Gradio starts serving requests. `select_conversation()` reuses the current conversation while the target language stays the same. When the language changes, it closes that conversation and creates one with a new system instruction. `ExitStack` handles this replaceable conversation, and the `finally` block closes it at shutdown.
 
 ### Update the interface in order
 
-Each `yield` in `run_pipeline()` supplies values in the same order as the `outputs` list: transcript, translation, audio, and status. The audio value remains `None` until Supertonic has synthesised the complete translation.
+Each `yield` in `run_pipeline()` supplies values in the same order as the `outputs` list: transcript, translation, audio, and status. The audio value remains `None` until Supertonic has synthesized the complete translation.
 
-Both event handlers use `concurrency_id="models"` with a limit of one. This serialises translation and language changes, preventing a language change from closing a conversation while a translation is using it. A language change requested during translation waits for that work to finish.
+Both event handlers use `concurrency_id="models"` with a limit of one. This serializes translation and language changes, preventing a language change from closing a conversation while a translation is using it. A language change requested during translation waits for that work to finish.
 
 ## Launch the desktop interface
 
@@ -255,7 +255,7 @@ Leave **Translate to** set to its default of **Spanish**. Record the following s
 Where is the nearest train station?
 ```
 
-The interface displays the recognised text in **Transcript**, streams the Spanish translation into **Translation**, and adds playable audio to **Translated speech**.
+The interface displays the recognized text in **Transcript**, streams the Spanish translation into **Translation**, and adds playable audio to **Translated speech**.
 
 ## What you've accomplished and what's next
 

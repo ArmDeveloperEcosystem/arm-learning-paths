@@ -38,7 +38,7 @@ def translation_prompt(language):
 
 These settings include choices for the application's language selector. You'll use Spanish to complete the Learning Path.
 
-The dictionary keys serve as command-line choices, interface labels, and language names in the Gemma prompt. The values are the codes passed to Supertonic: `Spanish` maps to `es`. You can add other target languages alongside Spanish, provided Supertonic 3 supports them. The speech recogniser still requires English input.
+The dictionary keys serve as command-line choices, interface labels, and language names in the Gemma prompt. The values are the codes passed to Supertonic: `Spanish` maps to `es`. You can add other target languages alongside Spanish, provided Supertonic 3 supports them. The speech recognizer still requires English input.
 
 ## Create the translation script
 
@@ -106,7 +106,7 @@ def main():
 if __name__ == "__main__":
     main()
 ```
-`translation_chunks()` yields the text from each model response, whilst `stream_translation()` prints those chunks and collects the complete translation.
+`translation_chunks()` yields the text from each model response, while `stream_translation()` prints those chunks and collects the complete translation.
 
 `backend=litert_lm.Backend.GPU()` selects the Apple GPU for Gemma 4. `enable_speculative_decoding=True` enables multi-token prediction: the model proposes multiple tokens for verification together to accelerate text generation.
 
@@ -120,7 +120,7 @@ Run the script with Spanish as the target language:
 python translate.py Spanish
 ```
 
-Model initialisation can take several seconds. At the prompt, enter:
+Model initialization can take several seconds. At the prompt, enter:
 
 ```text
 Where is the nearest train station?
