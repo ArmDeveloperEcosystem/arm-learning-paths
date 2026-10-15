@@ -1,5 +1,5 @@
 ---
-title: Transcribe microphone audio
+title: Transcribe microphone audio with Sherpa-ONNX
 description: Record English microphone audio with sounddevice and transcribe it locally with Sherpa-ONNX for the voice translation pipeline.
 weight: 3
 
@@ -11,7 +11,7 @@ layout: learningpathall
 
 With your environment and models ready, you'll create `stt.py`, a Python script that records English speech and prints a transcript. The script will use `sounddevice` to capture five seconds of microphone audio, then Sherpa-ONNX to transcribe it with the downloaded Zipformer model.
 
-You'll first check your microphone and create the script, then run it to record a sentence. By testing transcription on its own, you will be able to identify recording or recognition problems before adding translation.
+You'll first check your microphone and create the script, then run it to record a sentence. By testing transcription on its own, you'll be able to identify recording or recognition problems before adding translation.
 
 Return to the project directory and activate the virtual environment if it isn't already active:
 
@@ -30,7 +30,7 @@ Confirm that the list contains an input device, such as `MacBook Pro Microphone`
 
 ## Create the transcription script
 
-Using a file editor of your choice, create a file named `stt.py` in `~/voice-translator`. Copy the code below into the file and save it. `create_recogniser()` loads the model and `transcribe()` accepts recorded samples and returns text. Keeping the recording in `main()` lets the Gradio application reuse these functions with browser audio.
+Using a file editor of your choice, create a file named `stt.py` in `~/voice-translator`. Copy and paste the following code into the file and save it:
 
 ```python
 from pathlib import Path
@@ -104,6 +104,8 @@ if __name__ == "__main__":
     main()
 ```
 
+`create_recogniser()` loads the model and `transcribe()` accepts recorded samples and returns text. Keeping the recording in `main()` lets the Gradio application reuse these functions with browser audio.
+
 `sounddevice` records one channel of `float32` samples at the microphone's sample rate. `sd.wait()` waits for the five-second recording to finish before transcription starts.
 
 Sherpa-ONNX resamples the audio to the model's 16 kHz input rate. `transcribe()` creates a new stream for each recording, appends half a second of silence to flush the final words, and marks the input as finished. The decode loop then consumes the available frames and returns the transcript.
@@ -112,11 +114,17 @@ The encoder and joiner use the `int8` files, whilst the decoder uses the separat
 
 ## Record and transcribe an utterance
 
-Run the script:[^microphone-permission]
+Run the script:
 
 ```bash
 python stt.py
 ```
+
+{{% notice Note %}}
+The first recording can trigger a macOS permission request. Select **Allow**. 
+
+If recording fails, open **System Settings**. Select **Privacy & Security**, select **Microphone**, and enable access for your terminal application.
+{{% /notice %}}
 
 After the recording message appears, say:
 
@@ -132,16 +140,14 @@ Recording for 5 seconds...
 Transcript: WHERE IS THE NEAREST TRAIN STATION
 ```
 
-Capitalisation and punctuation may differ, but the transcript should contain the words you spoke.
+Capitalisation and punctuation may differ, but the transcript should contain the words that you spoke.
 
-If the transcript is empty, run `python -m sounddevice` again. Check that the `>` or `*` marker is beside the microphone you spoke into. The `*` marker identifies a device used for both default input and output. Also confirm the terminal application's microphone permission in **System Settings**.
+If the transcript is empty, run `python -m sounddevice` again. Check that the microphone that you spoke into is marked with `>` or `*`. The `*` marker identifies a device used for both default input and output. Also confirm the microphone permission for the terminal application in **System Settings**.
 
 If the script remains at `Recording for 5 seconds...`, check the same device and permission settings, restart the terminal application, and run it again.
 
 ## What you've accomplished and what's next
 
-`stt.py` now records one utterance and prints its transcript. The application will pass that text to Gemma only after recognition finishes.
+You've set up audio transcription with Sherpa-ONNX. `stt.py` now records one utterance and prints its transcript. The application will pass that text to Gemma only after recognition finishes.
 
-Next, test Gemma's translation with typed text before connecting it to the recogniser.
-
-[^microphone-permission]: The first recording can trigger a macOS permission request. Select **Allow**. If recording fails, open **System Settings**, select **Privacy & Security**, select **Microphone**, and enable access for your terminal application.
+Next, you'll test Gemma's translation with typed text before connecting it to the recogniser.

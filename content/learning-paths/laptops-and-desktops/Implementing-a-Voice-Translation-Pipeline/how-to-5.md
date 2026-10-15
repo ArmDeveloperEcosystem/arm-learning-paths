@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Connect the inference stages
 
-You'll create `app.py` to connect the functions from `stt.py`, `translate.py`, and `tts.py` to a local Gradio page. The browser will provide recording and playback controls and the Python backend will run the three models.
+You'll create `app.py` to connect the functions from `stt.py`, `translate.py`, and `tts.py` to a local Gradio page. The browser will provide recording and playback controls, and the Python backend will run the three models.
 
-After creating and launching the application, you'll test it with an English recording and Spanish as the target language. The application will transcribe the recording, display the Spanish translation as it is generated, then synthesise Spanish speech.
+After creating and launching the application, you'll test it with an English recording and Spanish as the target language. The application will transcribe the recording, display the Spanish translation as it's generated, then synthesise Spanish speech.
 
 Return to the project directory and activate the virtual environment if it isn't already active:
 
@@ -20,15 +20,7 @@ cd ~/voice-translator
 source .venv/bin/activate
 ```
 
-Using a file editor of your choice, create a file named `app.py` in `~/voice-translator`. Copy the code below into the file and save it. The code is arranged as follows:
-
-1. `normalise_audio()` prepares browser audio for the recogniser.
-2. `main()` loads the models and owns their lifetime.
-3. `select_conversation()` and `reset_language()` handle the selected language.
-4. `run_pipeline()` yields the transcript, translation, audio, and status as processing advances.
-5. The Gradio components connect those functions to the recording and translation controls.
-
-Add the following code:
+Using a file editor of your choice, create a file named `app.py` in `~/voice-translator`. Copy and paste the following code into the file and save it:
 
 ```python
 from contextlib import ExitStack
@@ -217,10 +209,17 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+The code is arranged as follows:
+
+1. `normalise_audio()` prepares browser audio for the recogniser.
+2. `main()` loads the models and owns their lifetime.
+3. `select_conversation()` and `reset_language()` handle the selected language.
+4. `run_pipeline()` yields the transcript, translation, audio, and status as processing advances.
+5. The Gradio components connect those functions to the recording and translation controls.
 
 ### Prepare browser audio
 
-`normalise_audio()` accepts the sample-rate and sample-array pair from Gradio. It scales integer samples to floating-point values, averages multiple channels into mono, and returns a contiguous `float32` array. It preserves the recording's sample rate so Sherpa-ONNX can resample it.
+`normalise_audio()` accepts the sample-rate and sample-array pair from Gradio. It scales integer samples to floating-point values, averages multiple channels into mono, and returns a contiguous `float32` array. It preserves the sample rate of the recording so that Sherpa-ONNX can resample it.
 
 ### Keep the models loaded
 
@@ -228,7 +227,7 @@ if __name__ == "__main__":
 
 ### Update the interface in order
 
-Each `yield` in `run_pipeline()` supplies values in the same order as the `outputs` list: transcript, translation, audio, and status. The audio value stays `None` until Supertonic has synthesised the complete translation.
+Each `yield` in `run_pipeline()` supplies values in the same order as the `outputs` list: transcript, translation, audio, and status. The audio value remains `None` until Supertonic has synthesised the complete translation.
 
 Both event handlers use `concurrency_id="models"` with a limit of one. This serialises translation and language changes, preventing a language change from closing a conversation while a translation is using it. A language change requested during translation waits for that work to finish.
 
@@ -240,22 +239,26 @@ Start the application:
 python app.py
 ```
 
-The three loading messages appear once, then Gradio prints a local address and opens the application in your default browser. The screenshot shows the completed result after translating a recording.
+The three loading messages appear once, then Gradio prints a local address and opens the application in your default browser. The following screenshot shows the completed result after translating a recording:
 
 ![Gradio voice translator showing the English transcript, Spanish translation, and playable translated speech with Ready status#center](voice_translator.png "Completed English-to-Spanish voice translation")
 
-{{% notice Microphone permission %}}
-The browser may request microphone access the first time you record. Select **Allow**. If recording is unavailable, open **System Settings**, select **Privacy & Security**, select **Microphone**, and enable access for your browser.
+{{% notice Note %}}
+The browser might request microphone access the first time you record. Select **Allow**. 
+
+If recording is unavailable, open **System Settings**. Select **Privacy & Security**, select **Microphone**, and enable access for your browser.
 {{% /notice %}}
 
-Leave **Translate to** set to its default of **Spanish**. Record this sentence, stop the recording, and select **Translate**:
+Leave **Translate to** set to its default of **Spanish**. Record the following sentence, stop the recording, and select **Translate**:
 
 ```text
 Where is the nearest train station?
 ```
 
-The interface displays the recognised text in **Transcript**, streams the Spanish translation into **Translation**, and then adds playable audio to **Translated speech**.
+The interface displays the recognised text in **Transcript**, streams the Spanish translation into **Translation**, and adds playable audio to **Translated speech**.
 
 ## What you've accomplished and what's next
 
-The three command-line stages now run from one browser recording, with their models kept in memory between requests. Next, check the transcript, Spanish translation, and spoken Spanish result, then repeat the test without a network connection.
+You've set up the desktop voice translator by combining functions for transcription, translation, and speech generation. The three command-line stages now run from one browser recording, with their models kept in memory between requests. 
+
+Next, you'll check the transcript, Spanish translation, and spoken Spanish result, then repeat the test without a network connection.

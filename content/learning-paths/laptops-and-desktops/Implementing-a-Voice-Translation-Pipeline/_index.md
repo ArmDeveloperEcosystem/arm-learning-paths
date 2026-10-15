@@ -1,5 +1,5 @@
 ---
-title: Implement a voice translation pipeline on Apple silicon with Sherpa-ONNX
+title: Implement a voice translation pipeline on Apple silicon 
 
 description: Build an on-device English-to-Spanish voice translator on an Apple silicon Mac using Python, Sherpa-ONNX, Gemma 4 E2B, and LiteRT-LM.
 
