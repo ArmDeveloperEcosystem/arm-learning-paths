@@ -9,11 +9,15 @@ layout: learningpathall
 
 ## Replicate data across three nodes
 
-In this section, you will add the prepared `ceph2` and `ceph3` VMs to the existing cluster, then increase the RBD pool from one copy of its data to three. Start on the AGI host to authorize SSH access, then administer the cluster from `ceph1`. Keep the RBD volume mounted so you can check the same file after replication completes.
+You'll add the prepared `ceph2` and `ceph3` VMs to the existing cluster, then increase the RBD pool from one copy of its data to three. Start on the AGI host to authorize SSH access, then administer the cluster from `ceph1`. Keep the RBD volume mounted so you can check the same file after replication completes.
 
 ## Authorize cephadm on the new nodes
 
-Cephadm uses SSH to deploy and manage services on the additional nodes. Start in a terminal on the AGI host, using the account holding `~/.ssh/agi_ceph`. Retrieve the cluster's public SSH key from `ceph1`:
+Cephadm uses SSH to deploy and manage services on the additional nodes. 
+
+Start in a terminal on the AGI host and the key at `~/.ssh/agi_ceph`. 
+
+Retrieve the cluster's public SSH key from `ceph1`:
 
 ```bash
 ssh -o ConnectTimeout=10 -i "${HOME}/.ssh/agi_ceph" \
@@ -22,7 +26,7 @@ ssh -o ConnectTimeout=10 -i "${HOME}/.ssh/agi_ceph" \
 ssh-keygen -lf /tmp/agi-ceph-cluster.pub
 ```
 
-Continue only if the fingerprint command succeeds. Install that public key using the existing `ubuntu` access on each new node:
+Install that public key using the existing `ubuntu` access on each new node:
 
 ```bash
 for VM_NUMBER in 2 3; do
@@ -37,11 +41,11 @@ for VM_NUMBER in 2 3; do
 done
 ```
 
-This authorizes cephadm's root SSH key without enabling password login or copying the AGI host's private key. If your environment prohibits root SSH access, use the [cephadm SSH user option](https://docs.ceph.com/en/squid/cephadm/install/#further-information-about-cephadm-bootstrap) with a user that has passwordless sudo and authorize that user's key instead.
+This authorizes cephadm's root SSH key without enabling password login or copying the AGI host's private key. 
 
-Return to the SSH session on `ceph1` for all remaining commands in this section. Do not bootstrap another cluster on `ceph2` or `ceph3`.
+Return to the SSH session on `ceph1` for all remaining commands in this section. 
 
-Add both hosts with their stable addresses. Substitute your addresses if they differ from these examples:
+Add both hosts with their stable addresses: 
 
 ```bash
 sudo /usr/local/sbin/cephadm shell -- ceph orch host add ceph2 192.168.100.12
@@ -49,7 +53,7 @@ sudo /usr/local/sbin/cephadm shell -- ceph orch host add ceph3 192.168.100.13
 sudo /usr/local/sbin/cephadm shell -- ceph orch host ls
 ```
 
-The hostnames passed to `ceph orch host add` must match the output of `hostname` on each VM.
+The hostnames passed to `ceph orch host add` matches the output of `hostname` on each VM.
 
 ## Add the other OSDs
 
@@ -105,12 +109,20 @@ sudo /usr/local/sbin/cephadm shell -- ceph osd pool set agi-rbd min_size 2
 watch sudo /usr/local/sbin/cephadm shell -- ceph -s
 ```
 
-Ceph copies existing pool data to the new OSDs through backfill. Stop `watch` with Ctrl+C after all placement groups return to `active+clean`; the new replica count is then satisfied.
+Ceph copies existing pool data to the new OSDs through backfill. 
+
+Stop `watch` with Ctrl+C after all placement groups return to `active+clean`; the new replica count is then satisfied.
 
 Confirm that the file remains available:
 
 ```bash
-cat /mnt/ceph-rbd/hello.txt
+sudo cat /mnt/ceph-rbd/hello.txt
+```
+
+The output is:
+
+```output
+Ceph RBD on aarch64
 ```
 
 ## What you've accomplished and what's next

@@ -7,9 +7,13 @@ weight: 5
 layout: learningpathall
 ---
 
-## Start the storage cluster
+## Create the storage cluster
 
-In this section, you will bootstrap a new Ceph cluster on `ceph1` and provision its data disk as the first OSD. Run all commands inside `ceph1`; the other two VMs will join later. The result is a working single-node cluster, ready to store an RBD image.
+You'll bootstrap a new Ceph cluster on `ceph1` and provision its data disk as the first OSD. 
+
+Run all commands inside `ceph1` to create a working single-node cluster, ready to store an RBD image.
+
+You will add the other two VMs later. 
 
 ## Install cephadm
 
@@ -29,7 +33,7 @@ python3 ./cephadm-19.2.6 version
 )
 ```
 
-Continue only if the command identifies 19.2.6. Stop on a download error or Python traceback. Install the executable and check the host:
+Install the executable and check the host:
 
 ```bash
 sudo install -m 755 "$HOME/ceph-tools/cephadm-19.2.6" /usr/local/sbin/cephadm
@@ -59,9 +63,13 @@ sudo podman run --rm --entrypoint /usr/bin/ceph "$CEPH_IMAGE" --version
 sudo /usr/local/sbin/cephadm --image "$CEPH_IMAGE" bootstrap --mon-ip "$CEPH1_IP"
 ```
 
-If you changed the `agi-net` subnet or supplied your own VMs, replace `192.168.100.11` with the address you recorded for `ceph1`. Bootstrap can take several minutes while Ceph downloads container images and starts the first monitor and manager.
+Bootstrap can take several minutes while Ceph downloads container images and starts the first monitor and manager.
 
-You should see the message "Bootstrap complete". At completion, cephadm writes the cluster configuration and administrator keyring under `/etc/ceph/`. Run the administrative commands through `cephadm shell` to use the Ceph client from the cluster's container image:
+You should see the message "Bootstrap complete". 
+
+At completion, cephadm writes the cluster configuration and administrator keyring under `/etc/ceph/`. 
+
+Run the administrative commands through `cephadm shell` to use the Ceph client from the cluster's container image:
 
 ```bash
 sudo /usr/local/sbin/cephadm shell -- ceph --version
@@ -101,9 +109,11 @@ For the VMs created in this Learning Path, the device listing should include:
 | `/dev/sr0` | Cloud-init seed CD-ROM | `No`: it contains a file system, is read-only, and is smaller than 5 GB. |
 | `/dev/vdb` | Empty 10 GB Ceph data disk | `Yes`, with no reject reasons. |
 
-The rejection of `/dev/sr0` is expected. Keep the seed ISO attached and leave it out of OSD provisioning.
+No availability for `/dev/sr0` is expected. Keep the seed ISO attached and leave it out of OSD provisioning.
 
-Confirm that `/dev/vdb` reports `AVAILABLE: Yes` and is the unused data disk you checked in the previous section. Then give the complete disk to Ceph:
+Confirm that `/dev/vdb` is available. This is the unused data disk you checked in the previous section. 
+
+Give the complete disk to Ceph:
 
 ```bash
 sudo /usr/local/sbin/cephadm shell -- ceph orch daemon add osd ceph1:/dev/vdb
