@@ -1,6 +1,6 @@
 ---
 title: Translate text with Gemma 4 E2B
-description: Use LiteRT-LM and Gemma 4 E2B on an Apple Silicon Mac to stream Spanish translations of English text.
+description: Use LiteRT-LM and Gemma 4 E2B on an Apple silicon Mac to stream Spanish translations of English text.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -13,14 +13,7 @@ With microphone transcription working, you'll build `translate.py` to translate 
 
 You'll first define the shared language settings in `languages.py`, then create and test the translation script. Using typed text will let you check translation independently of microphone quality and recognition errors. Later, the same translation function will receive the transcript from Sherpa-ONNX.
 
-Return to the project directory and activate the virtual environment if it isn't already active:
-
-```bash
-cd ~/voice-translator
-source .venv/bin/activate
-```
-
-Using a file editor of your choice, create a file named `languages.py` in `~/voice-translator`. Copy the shared language settings below into the file and save it. These include choices for the application's language selector. You'll use Spanish throughout the walkthrough:
+Using a file editor of your choice, create a file named `languages.py` in the `~/voice-translator` directory. Copy and paste the following shared language settings into the file and save it:
 
 ```python
 LANGUAGES = {
@@ -36,11 +29,13 @@ def translation_prompt(language):
     return f"Translate into {language}. Output only the translation."
 ```
 
-The dictionary keys serve as command-line choices, interface labels, and language names in the Gemma prompt. The values are the codes passed to Supertonic: `Spanish` maps to `es`. You can add other target languages alongside Spanish, provided Supertonic 3 supports them. The speech recogniser still requires English input.
+These settings include choices for the application's language selector. You'll use Spanish to complete the Learning Path.
+
+The dictionary keys serve as command-line choices, interface labels, and language names in the Gemma prompt. The values are the codes passed to Supertonic: `Spanish` maps to `es`. You can add other target languages alongside Spanish, provided Supertonic 3 supports them. The speech recognizer still requires English input.
 
 ## Create the translation script
 
-Using a file editor of your choice, create a file named `translate.py` in `~/voice-translator`. Copy the code below into the file and save it. `translation_chunks()` yields the text from each model response, whilst `stream_translation()` prints those chunks and collects the complete translation.
+Using a file editor of your choice, create a file named `translate.py` in the `~/voice-translator` directory. Copy and paste the following code into the file and save it:
 
 ```python
 import argparse
@@ -104,6 +99,7 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+`translation_chunks()` yields the text from each model response, while `stream_translation()` prints those chunks and collects the complete translation.
 
 `backend=litert_lm.Backend.GPU()` selects the Apple GPU for Gemma 4. `enable_speculative_decoding=True` enables multi-token prediction: the model proposes multiple tokens for verification together to accelerate text generation.
 
@@ -111,13 +107,13 @@ The target language is fixed for each command-line run. In the Gradio applicatio
 
 ## Translate an English sentence
 
-Run the script with Spanish as the target language:
+Continuing in the `~/voice-translator` directory with the active virtual environment, run the script with Spanish as the target language:
 
 ```bash
 python translate.py Spanish
 ```
 
-Model initialisation can take several seconds. At the prompt, enter:
+Model initialization can take several seconds. At the prompt, enter:
 
 ```text
 Where is the nearest train station?
@@ -132,8 +128,12 @@ Spanish: ¿Dónde está la estación de tren más cercana?
 English (Enter to quit):
 ```
 
-The wording may differ slightly, but the response should contain only a Spanish translation. You can cross-check the meaning with a translation tool such as Google Translate or DeepL. This optional check requires internet access.
+The wording might differ slightly, but the response should contain only a Spanish translation. You can cross-check the meaning with a translation tool such as Google Translate or DeepL. 
+
+Press **Enter** at an empty prompt to exit the script and return to the shell before continuing. Copy the complete Spanish translation for conversion to speech.
 
 ## What you've accomplished and what's next
 
-The terminal now shows Spanish translation chunks as Gemma generates them, using one loaded model for the session. Copy the complete Spanish translation for the next step, where Supertonic 3 will turn it into speech. Press **Enter** at an empty prompt to exit the script and return to the shell before continuing.
+You've set up translation with Gemma 4 E2B. The terminal now shows Spanish translation chunks as Gemma generates them, using one loaded model for the session. 
+
+Next, you'll use Supertonic 3 to convert the Spanish translation into speech.
