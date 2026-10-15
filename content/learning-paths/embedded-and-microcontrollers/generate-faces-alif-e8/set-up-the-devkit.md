@@ -64,7 +64,7 @@ On macOS, accept **Allow accessory to connect** if prompted. If the power LED li
 
 ## Update the board support firmware
 
-Open a terminal in the extracted SETOOLS directory. Run the tools from that directory because they load configuration and supporting files using relative paths:
+Open a terminal in the extracted SETOOLS directory. Run the tools from the SETOOLS directory because they load configuration and supporting files using relative paths:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux or macOS" language="bash" >}}

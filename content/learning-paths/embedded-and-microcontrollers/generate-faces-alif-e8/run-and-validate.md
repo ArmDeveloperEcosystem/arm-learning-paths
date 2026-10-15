@@ -20,17 +20,14 @@ If the port was open before you changed **SW4**, close and reopen it.
 
 ## Build and debug the application
 
-In the **CMSIS** view, confirm that `DevKit-E8` is active.
+To build and debug the application:
 
-Select **Build**, then select **Debug**.
-
-Keil Studio starts the J-Link GDB server over Serial Wire Debug (SWD) and loads the application into magnetoresistive random-access memory (MRAM).
-
-The debugger stops at `main`. Press **F5** to continue.
-
-The firmware initializes the display and NPU, loads the two ExecuTorch methods, and generates a repeatable boot image.
-
-The output is similar to:
+1. In the **CMSIS** view, confirm that `DevKit-E8` is active.
+2. Select **Build**, then select **Debug**. 
+   Keil Studio starts the J-Link GDB server over Serial Wire Debug (SWD) and loads the application into magnetoresistive random-access memory (MRAM).
+3. The debugger stops at `main`. Press **F5** to continue. 
+   
+The firmware initializes the display and NPU, loads the two ExecuTorch methods, and generates a repeatable boot image. The output is similar to:
 
 ```output
 Ethos-U version info:
@@ -117,12 +114,12 @@ Use the following checks if the application doesn't reach the pass marker:
 
 ## (Optional) Use the Corstone-320 FVP
 
-The same CMSIS solution also includes the `SSE-320-U85` target for the Corstone-320 Fixed Virtual Platform (FVP). On Linux and Windows, the managed tools environment supplies the native FVP. Select `SSE-320-U85` in **Manage Solution**, select **Apply**, recreate the AI layer, and build before selecting **Run** or **Debug**.
+The same CMSIS solution also includes the `SSE-320-U85` target for the Corstone-320 Fixed Virtual Platform (FVP). On Linux and Windows, the managed tools environment supplies the native FVP. Before selecting **Run** or **Debug**, select `SSE-320-U85` in **Manage Solution**, select **Apply**, and recreate the AI layer.
 
 On macOS, the project runs the FVP in Docker. To use the FVP, follow these additional steps:
 
 {{% notice Note %}}
-These optional steps follow the pinned example's FVP instructions and are separate from the physical DevKit validation.
+These optional steps follow the FVP instructions for the pinned example and are separate from the physical DevKit validation.
 {{% /notice %}}
 
 1. Install [Docker Desktop for Mac](https://docs.docker.com/desktop/setup/install/mac-install/) and keep it running.
