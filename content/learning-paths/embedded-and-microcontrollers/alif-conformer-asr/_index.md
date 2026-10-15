@@ -1,29 +1,27 @@
 ---
-title: Run Conformer speech recognition on an Alif Ensemble E8 AI/ML AppKit using ExecuTorch and Ethos-U85
+title: Run offline Conformer speech recognition on Alif Ensemble E8 with ExecuTorch
 
 draft: true
 cascade:
     draft: true
     
-description: Build and deploy the Alif MLEK Conformer ASR application with ExecuTorch on the Alif Ensemble E8 AppKit and Ethos-U85 NPU.
+description: Deploy Conformer ASR on an Alif Ensemble E8, capture live speech, and verify offline transcription and Ethos-U85 execution with ExecuTorch.
 
 minutes_to_complete: 120
 
-who_is_this_for: This is an advanced topic for embedded ML developers who want to learn how to build a Conformer-based speech recognition application and run it on a physical Alif Ensemble E8 AppKit using ExecuTorch and the Ethos-U85 NPU.
+who_is_this_for: This Learning Path is for embedded ML developers who want to capture and transcribe live speech on an Alif Ensemble E8 using ExecuTorch and the Ethos-U85 NPU.
 
 learning_objectives:
-    - Understand what a Conformer model is, and why it is used for Automatic Speech Recognition (ASR) applications
-    - Use the ML Embedded Evaluation Kit (MLEK) to prepare the Conformer model for ExecuTorch deployment
-    - Build and run the ASR application on the Corstone-320 FVP, and understand how it works
-    - Understand how the ASR application is adapted from an FVP flow, to running on a physical Alif E8 AppKit
-    - Build, flash, and verify the ASR application on the E8 AppKit
-    - Verify the transcription on the connected display
+    - Prepare a quantized Conformer model with Alif MLEK for ExecuTorch deployment
+    - Build and flash the E8 application and its external-flash model
+    - Capture live speech and assess the transcription on the connected display
+    - Confirm Ethos-U85 inference with UART performance counters and verify standalone restart
 
 prerequisites:
     - Experience with C/C++, CMake, and embedded baremetal development concepts
     - Familiarity with PyTorch, ExecuTorch, and quantized model deployment
-    - A Linux development machine, or an Apple Silicon Mac running macOS 15 or later (Docker Desktop is also required for the macOS FVP flow)
-    - An Alif Ensemble E8 AI/ML AppKit (AK-E8-AIML) and a USB-C data cable.
+    - A Linux development machine, or an Apple Silicon Mac running macOS 15 or later
+    - An Alif Ensemble E8 AI/ML AppKit (AK-E8-AIML), or an E8 DevKit with a compatible attached display, and a USB-C data cable
 
 author: 
     - Matt Cossins
@@ -60,9 +58,9 @@ further_reading:
         link: https://github.com/alifsemi/alif_ml-embedded-evaluation-kit/tree/main
         type: repository
     - resource:
-        title: Arm ML Embedded Evaluation Kit
-        link: https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit
-        type: repository
+        title: Deploy Silero VAD on Arm Ethos-U with ExecuTorch
+        link: /learning-paths/embedded-and-microcontrollers/silero-vad-ethos-u/
+        type: learning-path
     - resource:
         title: Alif Ensemble E8 AppKit Support Page
         link: https://alifsemi.com/support/kits/ensemble-e8appkit/

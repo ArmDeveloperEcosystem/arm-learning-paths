@@ -1,7 +1,7 @@
 ---
 title: Build and flash the ASR firmware
 description: Build the E8 ASR firmware, program its model into external OSPI flash, and install the M55-HP application in MRAM.
-weight: 5
+weight: 4
 
 layout: "learningpathall"
 ---
@@ -95,16 +95,10 @@ cd "$SETOOLS_ROOT"
 ```
 
 {{% notice Important %}}
-Again, for macOS, the system might block ./maintenance the first time you run it. If this happens, do the following:
-
-1. Open **System Settings**.
-2. Navigate to **Privacy & Security**.
-3. Select **Open Anyway**.
-
-Then, run the command again.
+On macOS, `maintenance` and `tools-config` can each require the separate **Privacy & Security > Open Anyway** approval described in the previous section. Run the blocked executable again after approving the trusted Alif download.
 {{% /notice %}}
 
-Select **2 - Device Information**, then **5 - Get revision info**. Record the full part number (`ALIF_PN`) and silicon revision. Press **Enter** to return through the menus and exit.
+Select **2 - Device Information**, then **5 - Get revision info**. Record the full part number (`ALIF_PN`) and revision information. Press **Enter** to return through the menus and exit. Toolkit output varies: the reviewed package printed a `Version` field, while `app-write-mram` explicitly identified the device's silicon revision during its preflight check.
 
 Run `tools-config` and confirm that the selected part number and silicon revision match the detected device.
 
@@ -112,7 +106,7 @@ Run `tools-config` and confirm that the selected part number and silicon revisio
 ./tools-config
 ```
 
-If these settings already match, leave them unchanged. If the toolkit does not support the detected part or revision, use a compatible toolkit before proceeding. Do not continue through a part or revision mismatch without resolving it.
+If these settings already match, leave them unchanged. If `app-write-mram` later reports a part or revision mismatch, decline the write, correct `tools-config`, and regenerate the package before retrying. For the reviewed `AE822FA0E5597LS0`, the detected revision was A0. If the toolkit does not support your detected part or revision, use a compatible toolkit before proceeding.
 
 ## Install the temporary CPU stubs
 
