@@ -12,15 +12,15 @@ minutes_to_complete: 90
 who_is_this_for: This Learning Path is for infrastructure developers who want a hands-on introduction to Ceph block storage on an Arm server.
 
 learning_objectives:
-    - Create three networked Ubuntu 26.04 Arm64 virtual machines on one Arm AGI CPU host.
-    - Bootstrap a single-node Ceph cluster and use an RBD block volume.
-    - Extend the cluster to three Ceph nodes with one OSD per node.
-    - Verify replicated storage during a controlled OSD failure and recovery.
+    - Create three networked Ubuntu 26.04 Arm64 virtual machines on one Arm AGI CPU host
+    - Bootstrap a single-node Ceph cluster and use an RBD block volume
+    - Extend the cluster to three Ceph nodes with one OSD per node
+    - Verify replicated storage during a controlled OSD failure and recovery
 
 prerequisites:
-    - An Arm AGI CPU host running Ubuntu 24.04 Arm64 with KVM hardware virtualization support
+    - An Arm AGI CPU host running Ubuntu 24.04 with KVM hardware virtualization support
     - Root or `sudo` access on the AGI CPU host
-    - Familiarity with Linux block devices, and virtual machines
+    - Familiarity with Linux block devices and virtual machines
     - Outbound internet access from the AGI CPU host and virtual machines
 
 author: Pareena Verma
