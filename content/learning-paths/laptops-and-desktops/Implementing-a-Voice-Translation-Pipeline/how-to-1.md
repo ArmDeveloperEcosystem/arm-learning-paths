@@ -88,7 +88,6 @@ The prebuilt LiteRT-LM and Sherpa-ONNX packages mean that you don't need to comp
 Download and extract the quantized English streaming Zipformer model:
 
 ```bash
-cd ~/voice-translator
 curl -L -o models/sherpa-asr.tar.bz2 https://github.com/k2-fsa/sherpa-onnx/releases/download/asr-models/sherpa-onnx-streaming-zipformer-en-2023-06-26.tar.bz2
 tar -xjf models/sherpa-asr.tar.bz2 -C models
 rm models/sherpa-asr.tar.bz2
