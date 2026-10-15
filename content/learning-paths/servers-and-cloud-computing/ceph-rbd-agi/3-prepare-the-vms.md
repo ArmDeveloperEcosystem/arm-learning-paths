@@ -9,11 +9,13 @@ layout: learningpathall
 
 ## Prepare the nodes for Ceph
 
-You'll prepare all three virtual machines with hostname resolution, synchronized clocks, and the tools cephadm needs to run storage services. Connect from the AGI host, then run the preparation commands inside each VM. Finish by identifying the empty data disks that Ceph will use.
+You'll prepare all three virtual machines (VMs) with hostname resolution, synchronized clocks, and the tools cephadm needs to run storage services. Connect from the AGI host, then run the preparation commands inside each VM. Finish by identifying the empty data disks that Ceph will use.
 
-## Check the virtual machines
+### Check the virtual machines
 
-The previous section created three Ubuntu 26.04 virtual machines named `ceph1`, `ceph2`, and `ceph3`. Each VM should have:
+You created three Ubuntu 26.04 virtual machines named `ceph1`, `ceph2`, and `ceph3`. 
+
+Ensure that each VM has the following resources:
 
 - 4 virtual CPUs
 - 4 GB of memory
@@ -24,10 +26,10 @@ The previous section created three Ubuntu 26.04 virtual machines named `ceph1`, 
 The example assumes that the unused disk is `/dev/vdb`. Substitute your device name if it differs.
 
 {{% notice Warning %}}
-Ceph consumes the complete OSD data disk. Do not use a disk that contains data you need. Check the device name and contents before you create each OSD.
+Ceph consumes the complete OSD data disk. Don't use a disk that contains data that you need. Check the device name and contents before you create each OSD.
 {{% /notice %}}
 
-## Record the addresses
+### Record the addresses
 
 Start from a terminal on the AGI host with the `~/.ssh/agi_ceph` private key created in the previous section. Connect to `ceph1` as the `ubuntu` user:
 
@@ -62,7 +64,7 @@ Repeat the login and address checks for `ceph2` and `ceph3`, using `192.168.100.
 
 You can also open a separate AGI-host terminal for each SSH session.
 
-# Configure the hosts file
+### Configure the hosts file
 
 After recording all three addresses, connect to each VM again and add all three nodes to that VM's `/etc/hosts`. Run the following block once inside each VM's SSH session, replacing the example addresses if needed:
 
@@ -82,7 +84,7 @@ ping -c 2 ceph2
 ping -c 2 ceph3
 ```
 
-## Install and confirm the Ceph prerequisites
+### Install and confirm the Ceph prerequisites
 
 Run the following commands on all three virtual machines:
 
