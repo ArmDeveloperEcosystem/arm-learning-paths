@@ -33,7 +33,7 @@ adb shell getprop ro.product.model > "$RUN_DIR/device-model.txt"
 adb shell getprop ro.build.version.release > "$RUN_DIR/android-version.txt"
 ```
 
-Keep these files for restoration at the end of this page. Create `$RUN_DIR/run-notes.md` using the [investigation record](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/5-trace-costs-to-python/#record-your-investigation), and fill in the device and tool versions. Use `$NX_WORKSPACE/device-vulkan.json` from the previous page for the driver version. Coordinate with anyone using another GPU debugging tool on the same device before changing these settings.
+Keep these files for restoration at the end of this page. Create `$RUN_DIR/run-notes.md` using the [investigation record](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/5-trace-costs-to-python/#record-your-investigation), and fill in the device and tool versions. Use `$NX_WORKSPACE/device-vulkan.json` from the previous page for the driver version.
 
 ## Stage the workload and layer
 
@@ -115,6 +115,7 @@ Ordinary `adb pull` cannot traverse the private capture directory. Stream its co
 adb exec-out run-as "$PACKAGE" tar -C files -cf - "$CAPTURE_NAME" > "$RUN_DIR/capture.tar"
 tar -xf "$RUN_DIR/capture.tar" -C "$NX_WORKSPACE/captures"
 export CAPTURE_ROOT="$NX_WORKSPACE/captures/$CAPTURE_NAME"
+printf 'Profiling data: %s\n' "$CAPTURE_ROOT"
 ```
 
 Preserve the complete directory hierarchy. MLIA needs the related metadata and binary payloads, not just the statistics file. A typical single-dispatch capture has this structure:
@@ -133,33 +134,11 @@ capture-<run-name>/
         statistics_mode1.bin
 ```
 
-Run this preliminary check of the root metadata and statistics payloads. MLIA will validate the remaining capture files when it loads the directory:
+Open `capture.json` and confirm that `status` is `complete`, `capture.statistics_mode` is `1`, and there are no unexpected warnings. Check that the capture includes pipeline and dispatch directories with statistics files. MLIA validates the capture files when it loads the directory.
 
-```bash
-python - <<'PY'
-import json
-import os
-from pathlib import Path
+Keep the printed **Profiling data** path for the next page. This is `$CAPTURE_ROOT`, the extracted directory directly containing `capture.json`. Keep the capture terminal open so you can reuse the variable when selecting the analysis inputs.
 
-root = Path(os.environ["CAPTURE_ROOT"])
-capture = json.loads((root / "capture.json").read_text())
-assert capture["schema_version"] == 2, "Review the capture format version."
-assert capture["status"] == "complete", "The capture is not complete."
-assert capture["capture"]["statistics_mode"] == 1, "Expected statistics mode 1."
-assert capture.get("pipelines"), "No pipelines were captured."
-payloads = [p for p in root.glob("pipeline_*/session_*/dispatch_*/statistics_mode1.bin")
-            if p.stat().st_size > 0]
-assert payloads, "No nonempty statistics payloads were captured."
-print(f"Capture status: {capture['status']}")
-print(f"Nonempty statistics payloads: {len(payloads)}")
-print(f"Warnings: {capture.get('warnings', [])}")
-print(f"Profiling-data directory: {root}")
-PY
-```
-
-For this single-dispatch exercise, expect `Capture status: complete`, `Nonempty statistics payloads: 1`, and an empty warnings list. If the count differs or a warning appears, use the diagnostics to resolve it before analysis; preserve any warning text you cannot explain. Keep the printed **Profiling-data directory** for the next page.
-
-If validation fails, preserve the files and diagnose the failure before analysis:
+If you encounter a problem, preserve the available files and use these checks before analysis:
 
 | Symptom | Check |
 | --- | --- |
@@ -173,32 +152,23 @@ See the [capture-layer troubleshooting guide](https://github.com/arm/vscode-mlia
 
 ## Restore the device settings
 
-After retrieving the capture, stop Scenario Runner and restore the exact settings recorded before this run. Perform this restoration after a failed capture too, before using the device for other work.
+After retrieving the capture, stop Scenario Runner and restore the device's previous GPU debug-layer configuration. Do this after a failed capture too, before using the device for other work.
+
+If the four saved settings are `null` and `settings-path.before` is empty, the device had no previous configuration. Use these cleanup commands from the [capture guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md#restore-the-device):
 
 ```bash
 adb shell am force-stop "$PACKAGE"
-python - <<'PY'
-import os
-import shlex
-import subprocess
-from pathlib import Path
 
-run_dir = Path(os.environ["RUN_DIR"])
-keys = ("enable_gpu_debug_layers", "gpu_debug_app", "gpu_debug_layer_app", "gpu_debug_layers")
-previous = {key: (run_dir / f"{key}.before").read_text().strip() for key in keys}
-settings_path = (run_dir / "settings-path.before").read_text().strip()
-for key, value in previous.items():
-    command = (["settings", "delete", "global", key] if value == "null"
-               else ["settings", "put", "global", key, value])
-    subprocess.run(["adb", "shell", shlex.join(command)], check=True)
-subprocess.run(["adb", "shell", shlex.join([
-    "setprop", "debug.vulkan.khronos_profiles.settings_path", settings_path
-])], check=True)
-print("Previous GPU debug-layer settings restored.")
-PY
+adb shell settings delete global enable_gpu_debug_layers
+adb shell settings delete global gpu_debug_app
+adb shell settings delete global gpu_debug_layer_app
+adb shell settings delete global gpu_debug_layers
+adb shell "setprop debug.vulkan.khronos_profiles.settings_path ''"
 ```
 
-The script deletes a setting only when it was previously unset (`null`). If ADB reports an error, reconnect the same device and complete restoration before continuing.
+If the backups show an existing configuration, force-stop Scenario Runner and use `adb shell settings put global` to restore the saved setting values. Use `adb shell setprop debug.vulkan.khronos_profiles.settings_path` to restore the saved settings-file path. Delete only settings that were previously unset, and clear the property only if its saved value was empty.
+
+If ADB reports an error, reconnect the same device and complete restoration before continuing.
 
 Keep the host capture and backup files. The application-private workload and library can remain for another capture; they aren't active when their layer configuration is disabled. If you remove the library later, first confirm that no restored configuration still needs it.
 
