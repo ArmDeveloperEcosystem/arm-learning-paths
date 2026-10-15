@@ -133,7 +133,7 @@ Recording for 5 seconds...
 Transcript: WHERE IS THE NEAREST TRAIN STATION
 ```
 
-Capitalization and punctuation may differ, but the transcript should contain the words that you spoke.
+Capitalization and punctuation might differ, but the transcript should contain the words that you spoke.
 
 If the transcript is empty, run `python -m sounddevice` again. Check that the microphone that you spoke into is marked with `>` or `*`. The `*` marker identifies a device used for both default input and output. Also confirm the microphone permission for the terminal application in **System Settings**.
 
