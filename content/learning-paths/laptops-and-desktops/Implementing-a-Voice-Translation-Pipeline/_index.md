@@ -18,11 +18,55 @@ prerequisites:
     - Python 3.10 through 3.13
     - Internet access for dependency and model downloads
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-15T18:08:06Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 7440bcab530ab4801097c8a94c7f82f5b33404e389c40090c8d74573c1dc7f28
+  summary_generated_at: '2026-10-15T18:08:06Z'
+  summary_source_hash: 7440bcab530ab4801097c8a94c7f82f5b33404e389c40090c8d74573c1dc7f28
+  faq_generated_at: '2026-10-15T18:08:06Z'
+  faq_source_hash: 7440bcab530ab4801097c8a94c7f82f5b33404e389c40090c8d74573c1dc7f28
+  summary: >-
+    You'll build a local English-to-Spanish voice translator on an Apple silicon Mac. First, you'll prepare
+    Python and download the models. You'll then test microphone transcription with Sherpa-ONNX, text
+    translation with Gemma 4 E2B and LiteRT-LM, and speech synthesis with Supertonic 3. Finally,
+    you'll connect these stages in Gradio and verify the transcript, translation, spoken result, and
+    offline operation.
+#   faqs:
+#   - question: How do I confirm that my microphone transcription works before adding translation?
+#     answer: >-
+#       Run `python stt.py` to record five seconds of audio. Confirm that the transcript contains the
+#       words you spoke. If it's empty, check the selected microphone and your terminal's permission.
+#   - question: How do I test Spanish translation before connecting the microphone?
+#     answer: >-
+#       Run `python translate.py Spanish` and enter a short English sentence at the prompt. You should
+#       see the Spanish translation appear as Gemma generates it.
+#   - question: How do I test text-to-speech and verify audio playback?
+#     answer: >-
+#       Run `python tts.py Spanish` and paste a Spanish sentence to synthesize and play speech. If you
+#       don't hear audio, confirm that macOS has selected your intended output device.
+#   - question: Which files should exist before launching the Gradio app?
+#     answer: >-
+#       Make sure `stt.py`, `translate.py`, `tts.py`, and `languages.py` are in your project directory.
+#       Then create `app.py` to connect them to a local Gradio interface.
+#   - question: Can I translate into a language other than Spanish?
+#     answer: >-
+#       Yes. Select another language listed in `LANGUAGES`. To add a new supported target language,
+#       update `LANGUAGES` in `languages.py`. For a non-English source language, you need a different
+#       speech recognition model and configuration.
+# END generated_summary_faq
+
 author: Sammy Sahnine
 
 # New Learning Paths are opted in for the next manual generated summary/FAQ run.
 # The generator resets this to false after a successful write.
-generate_summary_faq: true
+generate_summary_faq: false
 
 # Optional one-shot controls: set either field to true to regenerate just that
 # generated section the next time the summary/FAQ tool runs. The tool resets
