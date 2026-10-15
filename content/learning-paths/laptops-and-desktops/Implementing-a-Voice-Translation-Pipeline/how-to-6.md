@@ -24,7 +24,7 @@ Could you show me the way to the city center?
 Select **Translate** and verify the results in this order:
 
 1. **Transcript** contains the sentence you spoke.
-2. The translation appears progressively in Spanish and preserves the meaning of the sentence. It contains no explanation or formatting.
+2.  The translation appears progressively in Spanish, preserves the meaning of the sentence, and contains no explanation or formatting.
 3. The status changes to **Synthesizing...** after translation finishes.
 4. **Translated speech** appears and plays the complete translated sentence with Spanish pronunciation.
 5. The status returns to **Ready**.
