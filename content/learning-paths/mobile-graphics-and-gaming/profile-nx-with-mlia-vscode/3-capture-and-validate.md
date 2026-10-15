@@ -33,7 +33,7 @@ adb shell getprop ro.product.model > "$RUN_DIR/device-model.txt"
 adb shell getprop ro.build.version.release > "$RUN_DIR/android-version.txt"
 ```
 
-Keep these files for restoration at the end of this page. Create `$RUN_DIR/run-notes.md` using the [investigation record](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/5-trace-costs-to-python/#record-your-investigation), and fill in the device and tool versions. Use `$NX_WORKSPACE/device-vulkan.json` from the previous page for the driver version.
+Keep these files for restoration at the end of this page.
 
 ## Stage the workload and layer
 

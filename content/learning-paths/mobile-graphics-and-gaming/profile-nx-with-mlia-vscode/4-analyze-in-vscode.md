@@ -81,7 +81,7 @@ These counts describe accelerator work for the captured dispatch, excluding appl
 In Model Explorer, select **Source Model** in the graph selector to inspect the original VGF graph. Use the navigation controls to find your way around the model:
 
 1. Select **Fit to screen** on the toolbar, or press **Space** while the graph has focus, to show the whole graph.
-2. Drag the graph to pan. Hold **Ctrl** while scrolling, or pinch on a touchpad, to zoom.
+2. Drag the graph to pan.
 3. Use a group's expand control to reveal its contents. Collapse it when you want to return to a broader view.
 4. Use the search box to find a node by name. Select a result to locate it in the graph, then inspect its attributes, inputs, and outputs in the side panel.
 
@@ -122,7 +122,6 @@ Before moving to the Python source, record:
 
 - The graph representation and group name.
 - The selected measured cycle metric, its value, and its unit.
-- An operation inside the group, including its opcode, graph segment, and `spv id` from the node attributes. These identify it when you switch views.
 - The model-level metric and value you recorded earlier, keeping its scope distinct from the group's value.
 
 Keep that group and cycle overlay selected for the next page. A high reported cost identifies a candidate to inspect; it does not establish that changing the operation will improve application performance.

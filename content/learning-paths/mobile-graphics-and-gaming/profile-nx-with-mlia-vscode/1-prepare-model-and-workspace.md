@@ -90,7 +90,13 @@ In VS Code:
 
 1. Select **MLIA** in the Activity Bar.
 2. In **New Analysis**, select **Refresh MLIA Environment** and wait for setup to finish.
+
+    <img src="/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/images/refresh-environment.png" width="360" style="max-width: 100%; height: auto;" alt="MLIA's New Analysis view prompts you to set up the environment. Select Refresh MLIA Environment to begin setup." title="Initialize the managed MLIA environment" class="content-uploaded-image centered" />
+    <span class="content-image-caption centered">Initialize the managed MLIA environment</span>
+
 3. Select **Profiling** and confirm that the `neural-technology` target profile is available.
+
+    ![The Profiling tab shows the neural-technology target profile and Performance check, confirming that the managed environment has loaded the profiling options.#center](images/profiling-overview.png "Check that profiling options are available")
 
 The extension manages its own Python and MLIA installation, separately from your model-export and SDK build environments. You don't need a command-line MLIA installation.
 
