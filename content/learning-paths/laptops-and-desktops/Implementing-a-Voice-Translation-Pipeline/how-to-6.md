@@ -1,6 +1,6 @@
 ---
 title: Validate the voice translation pipeline
-description: Validate English transcription, Spanish translation and speech, and offline operation in the completed voice translator on an Apple Silicon Mac.
+description: Validate English transcription, Spanish translation and speech, and offline operation in the completed voice translator on an Apple silicon Mac.
 weight: 7
 
 ### FIXED, DO NOT MODIFY

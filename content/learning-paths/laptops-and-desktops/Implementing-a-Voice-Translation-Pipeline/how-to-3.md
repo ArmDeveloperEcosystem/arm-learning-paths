@@ -1,6 +1,6 @@
 ---
 title: Translate text with Gemma 4 E2B
-description: Use LiteRT-LM and Gemma 4 E2B on an Apple Silicon Mac to stream Spanish translations of English text.
+description: Use LiteRT-LM and Gemma 4 E2B on an Apple silicon Mac to stream Spanish translations of English text.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -143,4 +143,4 @@ Press **Enter** at an empty prompt to exit the script and return to the shell be
 
 You've set up translation with Gemma 4 E2B. The terminal now shows Spanish translation chunks as Gemma generates them, using one loaded model for the session. 
 
-Next, you'll use Supertronic 3 to convert the Spanish translation into speech. 
+Next, you'll use Supertonic 3 to convert the Spanish translation into speech.

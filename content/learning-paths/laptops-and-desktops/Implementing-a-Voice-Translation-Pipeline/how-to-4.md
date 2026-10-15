@@ -1,6 +1,6 @@
 ---
 title: Synthesise translated speech with Supertonic 3
-description: Configure Supertonic 3 with Sherpa-ONNX to synthesise and play the Spanish translation locally on an Apple Silicon Mac.
+description: Configure Supertonic 3 with Sherpa-ONNX to synthesise and play the Spanish translation locally on an Apple silicon Mac.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

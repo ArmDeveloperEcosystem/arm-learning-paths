@@ -1,6 +1,6 @@
 ---
 title: Set up the voice translation project
-description: Set up Python and download Sherpa-ONNX, Gemma 4 E2B, and Supertonic 3 models for an on-device English-to-Spanish voice translator on an Apple Silicon Mac.
+description: Set up Python and download Sherpa-ONNX, Gemma 4 E2B, and Supertonic 3 models for an on-device English-to-Spanish voice translator on an Apple silicon Mac.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

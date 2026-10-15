@@ -1,6 +1,6 @@
 ---
-title: Build the desktop voice translator
-description: Combine Sherpa-ONNX, Gemma 4 E2B, Supertonic 3, and Gradio into a local English-to-Spanish voice translation interface on an Apple Silicon Mac.
+title: Build the voice translator with Gradio
+description: Combine Sherpa-ONNX, Gemma 4 E2B, Supertonic 3, and Gradio into a local English-to-Spanish voice translation interface on an Apple silicon Mac.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
