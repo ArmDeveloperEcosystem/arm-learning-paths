@@ -5,22 +5,22 @@ draft: true
 cascade:
     draft: true
     
-description: Deploy Conformer ASR on an Alif Ensemble E8, capture live speech, and verify offline transcription and Ethos-U85 execution with ExecuTorch.
+description: Prepare Conformer ASR with ExecuTorch, validate it on Corstone-320, and capture and transcribe speech on an Alif E8 with Ethos-U85.
 
 minutes_to_complete: 120
 
 who_is_this_for: This Learning Path is for embedded ML developers who want to capture and transcribe live speech on an Alif Ensemble E8 using ExecuTorch and the Ethos-U85 NPU.
 
 learning_objectives:
-    - Prepare a quantized Conformer model with Alif MLEK for ExecuTorch deployment
+    - Prepare a quantized Conformer model with Arm and Alif MLEK for ExecuTorch deployment
+    - Build and run ASR on the Corstone-320 FVP using recorded audio
     - Build and flash the E8 application and its external-flash model
-    - Capture live speech and assess the transcription on the connected display
-    - Confirm Ethos-U85 inference with UART performance counters and verify standalone restart
+    - Validate live transcription, Ethos-U85 execution, and standalone restart on the E8
 
 prerequisites:
     - Experience with C/C++, CMake, and embedded baremetal development concepts
     - Familiarity with PyTorch, ExecuTorch, and quantized model deployment
-    - A Linux development machine, or an Apple Silicon Mac running macOS 15 or later
+    - A Linux development machine, or an Apple Silicon Mac running macOS 15 or later (Docker Desktop is also required for the macOS FVP flow)
     - An Alif Ensemble E8 AI/ML AppKit (AK-E8-AIML), or an E8 DevKit with a compatible attached display, and a USB-C data cable
 
 author: 
@@ -58,9 +58,9 @@ further_reading:
         link: https://github.com/alifsemi/alif_ml-embedded-evaluation-kit/tree/main
         type: repository
     - resource:
-        title: Deploy Silero VAD on Arm Ethos-U with ExecuTorch
-        link: /learning-paths/embedded-and-microcontrollers/silero-vad-ethos-u/
-        type: learning-path
+        title: Arm ML Embedded Evaluation Kit
+        link: https://gitlab.arm.com/artificial-intelligence/ethos-u/ml-embedded-evaluation-kit
+        type: repository
     - resource:
         title: Alif Ensemble E8 AppKit Support Page
         link: https://alifsemi.com/support/kits/ensemble-e8appkit/

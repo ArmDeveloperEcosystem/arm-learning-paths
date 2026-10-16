@@ -1,7 +1,7 @@
 ---
 title: Build and flash the ASR firmware
 description: Build the E8 ASR firmware, program its model into external OSPI flash, and install the M55-HP application in MRAM.
-weight: 4
+weight: 5
 
 layout: "learningpathall"
 ---

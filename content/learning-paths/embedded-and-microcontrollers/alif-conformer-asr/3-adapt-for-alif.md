@@ -1,14 +1,23 @@
 ---
 title: Prepare the Alif E8 ASR application and model
-description: Connect the E8 board, install its programming tools, and prepare the quantized Conformer resources with Alif MLEK.
-weight: 3
+description: Prepare the Alif MLEK resources and compare the board application with the ASR application you ran on the FVP.
+weight: 4
 
 layout: "learningpathall"
 ---
 
-## Prepare the on-device application
+## Move from the FVP to the E8 AppKit
 
-The `alif_asr` application in Alif MLEK runs on the E8's high-performance Cortex-M55 core and Ethos-U85 NPU. You will capture audio from the board's PDM microphones and read the transcription on the attached display. The application lives in MRAM, while its model lives in external OSPI flash.
+Your FVP run verified the Conformer model, audio preprocessing, inference, and token decoding using recorded audio. You will now use those same ASR stages to recognize speech on the Alif Ensemble E8 AppKit.
+
+The board uses a separate application, `alif_asr`, from the Alif MLEK repository. You will build new firmware for the E8's high-performance Cortex-M55 core, capture audio from its PDM microphones, and read the transcription on the attached display.
+
+| FVP application | E8 AppKit application |
+| --- | --- |
+| Arm MLEK `asr`, built for Corstone-320 | Alif MLEK `alif_asr`, built for the E8 HP subsystem |
+| WAV samples compiled into the firmware | PDM microphone input |
+| Simulated UART output in your terminal | Transcription on the attached display |
+| Application and model loaded through the AXF file | Application in MRAM and model in external OSPI flash |
 
 ## Connect the board
 
@@ -87,7 +96,7 @@ sudo apt install ./replace_with_your_jlink_download.deb
 
 ## Clone the Alif MLEK repository
 
-Before you begin, use Python 3.12 as configured in the previous section. Leave any active virtual environment and check your version:
+Before you begin, use Python 3.12 as configured during host setup. Leave any active virtual environment and check your version:
 
 ```bash
 if type deactivate >/dev/null 2>&1; then deactivate; fi
@@ -158,7 +167,7 @@ The handler then:
 5. Limits the captured length to fit the model input, generates the Mel spectrogram, runs inference, and decodes the tokens.
 6. Updates the display with the transcription and processing times.
 
-The Conformer preprocessor creates the Mel spectrogram, and the postprocessor selects token IDs, removes repeated tokens, and maps them to text with the SentencePiece vocabulary. The board-specific code supplies live audio, display output, and the E8 memory layout.
+The Conformer preprocessing, postprocessing, ExecuTorch model wrapper, and SentencePiece vocabulary serve the same purposes as in the FVP application. The board-specific code supplies live audio, display output, and the E8 memory layout.
 
 ## Understand the model and memory settings
 
@@ -181,6 +190,6 @@ Keep these settings for the first run so that model selection, runtime memory, a
 
 ## What you have accomplished and what is next
 
-You have connected the board hardware, prepared the Alif MLEK model resources, and identified how the application captures audio, runs inference, and displays text.
+You have connected the board hardware, prepared the Alif MLEK model resources, and identified how the board application extends the ASR flow you ran on the FVP.
 
 Next, you will build the E8 firmware, program the model into OSPI flash, and install the application in MRAM.

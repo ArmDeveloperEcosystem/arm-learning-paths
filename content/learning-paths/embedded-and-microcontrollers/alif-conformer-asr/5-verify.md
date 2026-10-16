@@ -1,7 +1,7 @@
 ---
 title: Verify live speech recognition and NPU execution
 description: Capture speech on the E8, assess transcription quality, confirm Ethos-U85 inference from UART counters, and check standalone restart.
-weight: 5
+weight: 6
 
 layout: "learningpathall"
 ---
