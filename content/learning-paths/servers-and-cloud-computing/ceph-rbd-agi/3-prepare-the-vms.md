@@ -1,6 +1,6 @@
 ---
-title: Validate the virtual machines
-description: Check the resources, network connectivity, time synchronization, and empty data disks required by Ceph.
+title: Prepare and validate the virtual machines
+description: Prepare the Ceph virtual machines with hostname resolution, time synchronization, and required tools, then validate connectivity and empty data disks.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -31,7 +31,7 @@ Ceph consumes the complete object storage daemon (OSD) data disk. Don't use a di
 
 ### Record the addresses
 
-Start from a terminal on the AGI host with the `~/.ssh/agi_ceph` private key created that you created earlier. Connect to `ceph1` as the `ubuntu` user:
+Start from a terminal on the AGI host with the `~/.ssh/agi_ceph` private key that you created earlier. Connect to `ceph1` as the `ubuntu` user:
 
 ```bash
 ssh -o ConnectTimeout=10 -i "${HOME}/.ssh/agi_ceph" ubuntu@192.168.100.11

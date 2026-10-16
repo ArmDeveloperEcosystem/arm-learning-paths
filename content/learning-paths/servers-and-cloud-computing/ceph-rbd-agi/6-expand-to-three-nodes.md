@@ -15,7 +15,7 @@ You'll add the prepared `ceph2` and `ceph3` virtual machines (VMs) to the existi
 
 Cephadm uses SSH to deploy and manage services on the additional nodes. 
 
-Start in a terminal on the AGI host and the key at `~/.ssh/agi_ceph`. 
+Start in a terminal on the AGI host with the SSH key at `~/.ssh/agi_ceph`.
 
 Retrieve the public SSH key of the cluster from `ceph1`:
 
@@ -53,7 +53,7 @@ sudo /usr/local/sbin/cephadm shell -- ceph orch host add ceph3 192.168.100.13
 sudo /usr/local/sbin/cephadm shell -- ceph orch host ls
 ```
 
-The hostnames passed to `ceph orch host add` matches the output of `hostname` on each VM.
+The hostnames passed to `ceph orch host add` match the output of `hostname` on each VM.
 
 ### Add the other OSDs
 

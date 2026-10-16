@@ -1,6 +1,6 @@
 ---
-title: Test degraded operation and recovery
-description: Stop one OSD, verify that the RBD data remains readable, and watch Ceph return to a healthy state.
+title: Test Ceph RBD during an OSD outage and recovery
+description: Verify read and write access to the Ceph RBD volume during an OSD outage, then restore the OSD and confirm data integrity after recovery.
 weight: 8
 
 ### FIXED, DO NOT MODIFY

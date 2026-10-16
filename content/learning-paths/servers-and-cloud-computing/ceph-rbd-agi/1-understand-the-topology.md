@@ -9,7 +9,9 @@ layout: learningpathall
 
 ## What Ceph RBD is
 
-Ceph is a distributed storage system that keeps multiple copies of your data across independent nodes. RADOS Block Device (RBD) exposes Ceph storage as a virtual block device, a volume that behaves like a local disk. Ceph splits the volume into objects and spreads them across the cluster, but to Linux it looks like an ordinary device at a path such as `/dev/rbd0`. You can format the device with a filesystem, mount it, and read and write files normally, while Ceph handles replication and distribution across the nodes.
+Ceph is a distributed storage system that keeps multiple copies of your data across independent nodes. RADOS Block Device (RBD) exposes Ceph storage as a virtual block device, a volume that behaves like a local disk.
+
+Ceph splits the volume into objects and spreads them across the cluster, but to Linux it looks like an ordinary device at a path such as `/dev/rbd0`. You can format the device with a filesystem, mount it, and read and write files normally, while Ceph handles replication and distribution across the nodes.
 
 ## Understand the Ceph deployment
 
