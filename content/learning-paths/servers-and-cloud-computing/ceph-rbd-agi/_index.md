@@ -14,10 +14,11 @@ learning_objectives:
     - Verify replicated storage during a controlled OSD failure and recovery.
 
 prerequisites:
-    - An Arm AGI CPU host running Ubuntu 24.04 with kernel-based VM (KVM) hardware virtualization support and at least 12 available CPU cores, 12 GB of available memory, and 90 GB of available storage
+    - An Arm AGI CPU host running Ubuntu 24.04 with kernel-based VM (KVM) hardware virtualization support
+    - At least 12 available CPU cores, 12 GB of available memory, and 90 GB of available storage on the AGI CPU host
     - Root or `sudo` access on the AGI CPU host
     - Familiarity with Linux block devices and VMs
-    - Outbound internet access from the AGI CPU host and VMs
+    - Outbound internet access from the AGI CPU host and the VMs
 
 
 # START generated_summary_faq
