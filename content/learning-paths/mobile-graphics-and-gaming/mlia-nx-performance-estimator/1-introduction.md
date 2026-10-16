@@ -7,7 +7,7 @@ weight: 2
 layout: learningpathall
 ---
 
-## How you'll estimate performance before deployment
+## Performance estimation with MLIA
 
 Arm ML Inference Advisor (MLIA) helps you evaluate a model for an Arm target before you build a deployment pipeline or tune an application on a device. You provide a model and a target profile, then inspect compatibility checks, performance metrics, and advice.
 

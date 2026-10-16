@@ -32,7 +32,7 @@ sudo apt update
 sudo apt install -y python3.12-venv curl ca-certificates
 ```
 
-Create a working directory and a clean virtual environment. Run the remaining commands from this directory unless stated otherwise:
+Create a working directory `mlia-demo` and a clean virtual environment. Run the remaining commands from `mlia-demo` unless stated otherwise:
 
 ```bash
 mkdir -p mlia-demo

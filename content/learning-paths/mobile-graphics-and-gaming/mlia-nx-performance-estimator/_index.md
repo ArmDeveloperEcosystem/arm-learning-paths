@@ -5,7 +5,7 @@ description: Use public MLIA packages and quantized MobileNet models to check Ne
 
 minutes_to_complete: 40
 
-who_is_this_for: This Learning Path is for ML engineers and graphics developers who want to evaluate model compatibility and estimated neural accelerator (NX) performance for Arm Neural Technology before deployment.
+who_is_this_for: This Learning Path is for machine learning (ML) engineers and graphics developers who want to evaluate model compatibility and estimated neural accelerator (NX) performance for Arm Neural Technology before deployment.
 
 learning_objectives:
     - Install the public Arm ML Inference Advisor (MLIA) Neural Technology plugin and discover its target profiles and backend.
