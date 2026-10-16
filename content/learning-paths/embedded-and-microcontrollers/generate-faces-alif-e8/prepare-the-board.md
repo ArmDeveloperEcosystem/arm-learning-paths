@@ -9,21 +9,23 @@ layout: learningpathall
 
 ## Understand the one-time provisioning step
 
-The Alif Secure Enclave boots processor images from a table of contents in magnetoresistive random-access memory (MRAM). Before the first debug session, install the configuration that points the high-performance Cortex-M55 core to the project's debug stub.
+The Alif Secure Enclave boots processor images from a table of contents in magnetoresistive random-access memory (MRAM). Before the first debug session, install the configuration that points the high-performance Cortex-M55 core to the project debug stub.
 
-You normally perform this step once. Repeat it if another project replaces the table of contents.
+You normally perform the provisioning step once. Repeat the step if another project replaces the table of contents.
 
 ## Install the debug stub
 
 Confirm that the board is connected through **PRG USB** and that **SW4** is set to **SEUART**. Close any serial monitor that has the DevKit port open.
 
-In VS Code, select:
+In Visual Studio Code:
 
-**Terminal > Run Task > Alif: Install M55_HP debug stubs (DevKit-E8, single core configuration)**
+1. Select **Terminal**.
+2. Select **Run Task**.
+3. Select **Alif: Install M55_HP debug stubs (DevKit-E8, single core configuration)**.
 
 Choose automatic COM port discovery with `-d` the first time. SETOOLS remembers the selected port for later runs.
 
-The task performs these operations:
+The task performs the following operations:
 
 1. Selects the DevKit-E8 part `AE822FA0E5597LS0` with revision `A0`.
 2. Copies the supplied device configuration and debug stub into the SETOOLS workspace.
@@ -34,12 +36,14 @@ If `app-write-mram` reports a different board revision and asks whether to conti
 
 ## Switch the UART to the application
 
-After the task completes, set **SW4** to **UART4**. This routes the DevKit's application console to the USB-to-UART bridge.
+After the task completes, set **SW4** to **UART4**. This routes the application console of the DevKit to the USB-to-UART bridge.
 
 {{% notice Important %}}
-Keep the debug interface set to SWD. A JTAG configuration can leave the generated load task waiting for a J-Link chain response while the device remains in SWD mode.
+Keep the debug interface set to Serial Wire Debug (SWD). A JTAG configuration can leave the generated load task waiting for a J-Link chain response while the device remains in SWD mode.
 {{% /notice %}}
 
 ## What you've accomplished and what's next
 
-You've installed the boot table and debug stub for the Cortex-M55 high-performance core, then routed the console to UART4. Next, you'll build the application, generate a face, and validate that both ExecuTorch methods ran on the Ethos-U85 NPU.
+You've installed the boot table and debug stub for the Cortex-M55 high-performance core, then routed the console to UART4. 
+
+Next, you'll build the application, generate a face, and validate that both ExecuTorch methods ran on the Ethos-U85 NPU.
