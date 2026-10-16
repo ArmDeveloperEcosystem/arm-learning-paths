@@ -9,15 +9,15 @@ layout: learningpathall
 
 ## Replicate data across three nodes
 
-You'll add the prepared `ceph2` and `ceph3` VMs to the existing cluster, then increase the RBD pool from one copy of its data to three. Start on the AGI host to authorize SSH access, then administer the cluster from `ceph1`. Keep the RBD volume mounted so you can check the same file after replication completes.
+You'll add the prepared `ceph2` and `ceph3` virtual machines (VMs) to the existing cluster. Then, you'll increase the RADOS Block Device (RBD) pool from one copy of its data to three. Start on the AGI host to authorize SSH access, then administer the cluster from `ceph1`. Keep the RBD volume mounted so that you can check the same file after replication completes.
 
-## Authorize cephadm on the new nodes
+### Authorize cephadm on the new nodes
 
-Cephadm uses SSH to deploy and manage services on the additional nodes. 
+`cephadm` uses SSH to deploy and manage services on the additional nodes.
 
-Start in a terminal on the AGI host and the key at `~/.ssh/agi_ceph`. 
+Start in a terminal on the AGI host with the SSH key at `~/.ssh/agi_ceph`.
 
-Retrieve the cluster's public SSH key from `ceph1`:
+Retrieve the public SSH key of the cluster from `ceph1`:
 
 ```bash
 ssh -o ConnectTimeout=10 -i "${HOME}/.ssh/agi_ceph" \
@@ -41,9 +41,9 @@ for VM_NUMBER in 2 3; do
 done
 ```
 
-This authorizes cephadm's root SSH key without enabling password login or copying the AGI host's private key. 
+This authorizes the `cephadm` root SSH key without enabling password login or copying the private key of the AGI host.
 
-Return to the SSH session on `ceph1` for all remaining commands in this section. 
+Return to the SSH session on `ceph1` for all remaining commands. 
 
 Add both hosts with their stable addresses: 
 
@@ -53,11 +53,11 @@ sudo /usr/local/sbin/cephadm shell -- ceph orch host add ceph3 192.168.100.13
 sudo /usr/local/sbin/cephadm shell -- ceph orch host ls
 ```
 
-The hostnames passed to `ceph orch host add` matches the output of `hostname` on each VM.
+The hostnames passed to `ceph orch host add` match the output of `hostname` on each VM.
 
-## Add the other OSDs
+### Add the other OSDs
 
-Each additional OSD provides a storage location for another copy of the pool's data. Confirm that each new data disk is available:
+Each additional object storage daemon (OSD) provides a storage location for another copy of the pool's data. Confirm that each new data disk is available:
 
 ```bash
 sudo /usr/local/sbin/cephadm shell -- ceph orch device ls --hostname ceph2 --wide --refresh
@@ -77,9 +77,9 @@ Wait until all three OSDs are `up` and `in`:
 sudo /usr/local/sbin/cephadm shell -- ceph osd tree
 ```
 
-The tree should show one OSD beneath each of `ceph1`, `ceph2`, and `ceph3`. A container reporting `running` does not prove the OSD is `up`; wait for the OSD tree and cluster status to agree before increasing replication.
+The tree should show one OSD beneath each of `ceph1`, `ceph2`, and `ceph3`. A container reporting `running` doesn't prove the OSD is `up`. Wait for the OSD tree and cluster status to agree before increasing replication.
 
-## Place monitors on all three nodes
+### Place monitors on all three nodes
 
 Monitors maintain the cluster maps and use a majority to agree on cluster state. Deploy a monitor on each node:
 
@@ -90,7 +90,7 @@ sudo /usr/local/sbin/cephadm shell -- ceph orch ps --daemon-type mon
 
 Run `sudo /usr/local/sbin/cephadm shell -- ceph -s` and wait until quorum includes all three hosts. An odd number of monitors allows a majority to form if one monitor becomes unavailable.
 
-## Increase the pool replication
+### Increase the pool replication
 
 Confirm that the pool uses a replicated CRUSH rule with `host` as its failure domain:
 
@@ -99,9 +99,9 @@ sudo /usr/local/sbin/cephadm shell -- ceph osd pool get agi-rbd crush_rule
 sudo /usr/local/sbin/cephadm shell -- ceph osd crush rule dump replicated_rule
 ```
 
-In the rule output, find the step containing `chooseleaf` and confirm its type is `host`. If your pool uses a differently named rule, substitute that rule name in the second command.
+In the rule output, find the step containing `chooseleaf` and confirm that its type is `host`. If your pool uses a differently named rule, substitute that rule name in the second command.
 
-Set `size` to three to keep a copy on each virtual host, and `min_size` to two so I/O can continue during a single-OSD outage:
+Set `size` to `3` to keep a copy on each virtual host, and `min_size` to `2`:
 
 ```bash
 sudo /usr/local/sbin/cephadm shell -- ceph osd pool set agi-rbd size 3
@@ -109,9 +109,11 @@ sudo /usr/local/sbin/cephadm shell -- ceph osd pool set agi-rbd min_size 2
 watch sudo /usr/local/sbin/cephadm shell -- ceph -s
 ```
 
+These values ensure that I/O can continue during a single-OSD outage.
+
 Ceph copies existing pool data to the new OSDs through backfill. 
 
-Stop `watch` with Ctrl+C after all placement groups return to `active+clean`; the new replica count is then satisfied.
+Stop `watch` with **Ctrl+C** after all placement groups return to `active+clean`. The new replica count is then satisfied.
 
 Confirm that the file remains available:
 
@@ -119,7 +121,7 @@ Confirm that the file remains available:
 sudo cat /mnt/ceph-rbd/hello.txt
 ```
 
-The output is:
+The expected output is:
 
 ```output
 Ceph RBD on aarch64
@@ -127,4 +129,6 @@ Ceph RBD on aarch64
 
 ## What you've accomplished and what's next
 
-You've expanded the cluster to three virtual hosts and changed the RBD pool to three host-level replicas. Next, you'll stop one OSD and observe degraded operation and recovery.
+You've expanded the cluster to three virtual hosts and changed the RBD pool to three host-level replicas. 
+
+Next, you'll stop one OSD and observe degraded operation and recovery.

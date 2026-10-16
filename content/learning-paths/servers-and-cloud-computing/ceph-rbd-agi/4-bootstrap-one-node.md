@@ -1,6 +1,6 @@
 ---
 title: Bootstrap Ceph on one node
-description: Install cephadm, bootstrap the cluster on ceph1, and provision the first OSD.
+description: Install `cephadm`, bootstrap the cluster on ceph1, and provision the first OSD.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -9,15 +9,15 @@ layout: learningpathall
 
 ## Create the storage cluster
 
-You'll bootstrap a new Ceph cluster on `ceph1` and provision its data disk as the first OSD. 
+You'll bootstrap a new Ceph cluster on `ceph1` and provision its data disk as the first object storage daemon (OSD). 
 
-Run all commands inside `ceph1` to create a working single-node cluster, ready to store an RBD image.
+Run all commands inside `ceph1` to create a working single-node cluster, ready to store an RADOS Block Device (RBD) image.
 
-You will add the other two VMs later. 
+You'll add the other two VMs later. 
 
-## Install cephadm
+### Install cephadm
 
-Use the [standalone cephadm installation method](https://docs.ceph.com/en/squid/cephadm/install/#curl-based-installation) with release 19.2.6. This example uses Ceph Squid 19.2.6, but the Ubuntu 26.04 repositories provide Ceph 20.2.0. To keep the deployment tools and cluster on the same release, download cephadm 19.2.6 directly rather than installing it through the Ubuntu package manager (APT), and use the pinned Ceph 19.2.6 container image.
+Use the [standalone `cephadm` installation method](https://docs.ceph.com/en/squid/cephadm/install/#curl-based-installation) with release 19.2.6. You'll use Ceph Squid 19.2.6, but the Ubuntu 26.04 repositories provide Ceph 20.2.0. To keep the deployment tools and cluster on the same release, download `cephadm` 19.2.6 directly rather than installing it through the Ubuntu package manager (APT). Use the pinned Ceph 19.2.6 container image.
 
 Download the executable and check its version before installing it:
 
@@ -51,9 +51,9 @@ Unit chrony.service is enabled and running
 Host looks OK
 ```
 
-## Bootstrap the cluster
+### Bootstrap the cluster
 
-Set `CEPH1_IP` to the stable address you recorded for `ceph1`:
+Set `CEPH1_IP` to the stable address that you recorded earlier for `ceph1`:
 
 ```bash
 CEPH1_IP=192.168.100.11
@@ -65,9 +65,9 @@ sudo /usr/local/sbin/cephadm --image "$CEPH_IMAGE" bootstrap --mon-ip "$CEPH1_IP
 
 Bootstrap can take several minutes while Ceph downloads container images and starts the first monitor and manager.
 
-You should see the message "Bootstrap complete". 
+You should see the message `Bootstrap complete`. 
 
-At completion, cephadm writes the cluster configuration and administrator keyring under `/etc/ceph/`. 
+At completion, `cephadm` writes the cluster configuration and administrator keyring under `/etc/ceph/`.
 
 Run the administrative commands through `cephadm shell` to use the Ceph client from the cluster's container image:
 
@@ -81,12 +81,14 @@ sudo /usr/local/sbin/cephadm shell -- ceph orch ps
 The shell prints the inferred cluster ID, configuration path, and container image before the command output. Compare the container client version with the monitor and manager versions reported by `ceph versions`.
 
 {{% notice Note %}}
-Use the pinned container client for administration throughout this path. Squid 19.2.6 introduced the `aes256k` CephX key type; an older userspace client can fail to parse these credentials even when the guest kernel supports them. Upstream kernel support began with Linux 7.0. See the [Ceph key-format compatibility guidance](https://www.ceph.io/en/news/blog/2026/v20-2-4-v19-2-6-combo-released/).
+To complete the Learning Path, use the pinned container client for administration. 
+
+Squid 19.2.6 introduced the `aes256k` CephX key type. An older userspace client can fail to parse these credentials even when the guest kernel supports them. Upstream kernel support began with Linux 7.0. For more information, see the [Ceph key-format compatibility guidance](https://www.ceph.io/en/news/blog/2026/v20-2-4-v19-2-6-combo-released/).
 {{% /notice %}}
 
 The status initially reports no OSDs. A warning about the default pool replication count is expected until you add storage.
 
-## Add the first OSD
+### Add the first OSD
 
 Ask the orchestrator whether `/dev/vdb` is available:
 
@@ -94,15 +96,16 @@ Ask the orchestrator whether `/dev/vdb` is available:
 sudo /usr/local/sbin/cephadm shell -- ceph orch device ls --hostname ceph1 --wide
 ```
 
-The expected output is similar to the following. The seed ISO size and refresh times can vary:
+The output is similar to:
 
 ```output
 HOST   PATH      TYPE  TRANSPORT  RPM  DEVICE ID                      SIZE   HEALTH  IDENT  FAULT  AVAILABLE  REFRESHED  REJECT REASONS
 ceph1  /dev/sr0  hdd                  QEMU_CD-ROM_drive-scsi0-0-0-0   368k           N/A    N/A    No         11m ago    Has a FileSystem, Insufficient space (<5GB), read-only
 ceph1  /dev/vdb  hdd                                                 10.0G          N/A    N/A    Yes        11m ago
 ```
+The seed ISO size and refresh times can vary.
 
-For the VMs created in this Learning Path, the device listing should include:
+For the VMs that you created, the device listing should include the following size values:
 
 | Device | Purpose | Expected availability |
 | --- | --- | --- |
@@ -111,7 +114,7 @@ For the VMs created in this Learning Path, the device listing should include:
 
 No availability for `/dev/sr0` is expected. Keep the seed ISO attached and leave it out of OSD provisioning.
 
-Confirm that `/dev/vdb` is available. This is the unused data disk you checked in the previous section. 
+Confirm that the unused data disk is available. For this Learning Path, the example unused disk is `/dev/vdb`. If you used a different disk earlier, replace `/dev/vdb` in the command with your chosen device name. 
 
 Give the complete disk to Ceph:
 
@@ -119,21 +122,29 @@ Give the complete disk to Ceph:
 sudo /usr/local/sbin/cephadm shell -- ceph orch daemon add osd ceph1:/dev/vdb
 ```
 
-This operation erases and provisions `/dev/vdb`. Wait for the OSD to start, then inspect the result:
+This operation erases and provisions the unused data disk. Wait for the OSD to start, then inspect the result:
 
 ```bash
 sudo /usr/local/sbin/cephadm shell -- ceph orch ps --hostname ceph1 --daemon-type osd
 sudo /usr/local/sbin/cephadm shell -- ceph osd tree
 ```
 
-The `ceph orch ps` command should report a running OSD, similar to:
+The `ceph orch ps` command reports a running OSD, similar to:
 
 ```output
 NAME   HOST   PORTS  STATUS         REFRESHED  AGE  MEM USE  MEM LIM  VERSION  IMAGE ID      CONTAINER ID
 osd.0  ceph1         running (37s)    35s ago  37s    10.4M    4096M  19.2.6   9e014221cd72  a97627c1ce67
 ```
 
-Times, memory usage, version, image ID, and container ID can vary. The `ceph osd tree` command should show:
+The following values can vary:
+
+- Times
+- Memory usage
+- Version
+- Image ID
+- Container ID 
+
+The output of the `ceph osd tree` command is similar to:
 
 ```output
 ID  CLASS  WEIGHT   TYPE NAME       STATUS  REWEIGHT  PRI-AFF
@@ -146,8 +157,8 @@ The tree IDs and weight can vary with the cluster and disk capacity.
 
 The output includes one OSD beneath host `ceph1`, with status `up`.
 
-The next section tests the complete client path: the pinned userspace tools, the Ubuntu 26.04 guest kernel, authentication, and persistent filesystem access.
-
 ## What you've accomplished and what's next
 
-You've bootstrapped a Ceph monitor and manager and added one OSD on `ceph1`. Next, you'll create an RBD image and use it as a Linux block device.
+You've bootstrapped a Ceph monitor and manager and added one OSD on `ceph1`. 
+
+Next, you'll create an RBD image and use it as a Linux block device. You'll test the complete client path: the pinned userspace tools, the Ubuntu 26.04 guest kernel, authentication, and persistent filesystem access.
