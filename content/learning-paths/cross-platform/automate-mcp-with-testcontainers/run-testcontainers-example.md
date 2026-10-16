@@ -76,7 +76,7 @@ Now apply these concepts to the Arm MCP server. Create a script called `mcp_cont
 from testcontainers.core.container import DockerContainer
 from testcontainers.core.waiting_utils import wait_for_logs
 
-MCP_IMAGE = "arm-mcp:latest"
+MCP_IMAGE = "arm-mcp:local"
 
 print("Starting MCP server container...")
 
@@ -139,7 +139,7 @@ Testcontainers provides methods to configure container settings:
 from testcontainers.core.container import DockerContainer
 
 with (
-    DockerContainer("arm-mcp:latest")
+    DockerContainer("arm-mcp:local")
     .with_env("LOG_LEVEL", "debug")           # Set environment variables
     .with_volume_mapping("/local/path", "/container/path")  # Mount volumes
     .with_kwargs(stdin_open=True, tty=False)  # Additional Docker options
@@ -165,7 +165,7 @@ from testcontainers.core.container import DockerContainer
 from testcontainers.core.waiting_utils import wait_for_logs
 from docker.errors import ImageNotFound
 
-MCP_IMAGE = "arm-mcp:latest"
+MCP_IMAGE = "arm-mcp:local"
 
 try:
     with (
