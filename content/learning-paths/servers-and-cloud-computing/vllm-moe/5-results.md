@@ -34,7 +34,7 @@ The optimized BF16 MoE path improves GPT-OSS request throughput by around `2.80x
 | --- | ---: | ---: | ---: |
 | ShareGPT ~512 input tokens | 2.80x - 3.62x | 2.74x - 3.50x | 64% - 72% |
 
-GPT-OSS required additional Harmony/tiktoken setup during benchmarking.
+In the tested vLLM 0.27.1+cpu setup, GPT-OSS required local Harmony/tiktoken encoding files during serving and benchmarking.
 
 ## Qwen3 BF16 and INT8/W8A8 MoE
 

@@ -73,12 +73,16 @@ python -m pip install --upgrade pip
 
 ## Install vLLM for CPU
 
-Install the CPU version of vLLM and the required packages:
+{{% notice Note %}}
+The following command installs vLLM version 0.27.1. The same steps work with other versions. Replace the version number in the URL with the version of your choice. To find the latest version, see the [vLLM releases page](https://github.com/vllm-project/vllm/releases).
+{{% /notice %}}
+
+Install a CPU-specific build of vLLM:
 
 ```bash
-pip install vllm==0.27.1+cpu --extra-index-url https://download.pytorch.org/whl/cpu
+export VLLM_VERSION=0.27.1
+pip install https://github.com/vllm-project/vllm/releases/download/v${VLLM_VERSION}/vllm-${VLLM_VERSION}+cpu-cp38-abi3-manylinux_2_34_aarch64.whl --extra-index-url https://download.pytorch.org/whl/cpu
 ```
-
 If you want to build vLLM from source, follow the instructions in the [Build and Run vLLM on Arm Servers Learning Path](/learning-paths/servers-and-cloud-computing/vllm/vllm-setup/).
 
 ## Configure vLLM KV cache space

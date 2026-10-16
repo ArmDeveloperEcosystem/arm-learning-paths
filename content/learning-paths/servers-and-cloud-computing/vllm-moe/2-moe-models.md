@@ -49,10 +49,10 @@ For model quantization workflows, refer to the existing [vLLM quantization Learn
 
 ## Why compare both BF16 and INT8/W8A8?
 
-The benchmark results show two improvements:
+The benchmark results show two optimization effects:
 
-- BF16 MoE optimization improves regular MoE model serving performance.
-- INT8/W8A8 MoE support provides another optimized serving option with additional performance improvement over BF16.
+- The BF16 comparison shows the impact of the optimized unquantized MoE path for AArch64. The pre-optimization path did not use the AArch64 FusedMoE kernel for BF16 MoE layers, while the optimized path enables that kernel and uses an AdvSIMD BFMMLA micro-kernel to accelerate the `w13` and `w2` expert GEMMs.
+- The INT8/W8A8 comparison shows the additional benefit of lower-precision MoE execution. W8A8 reduces memory bandwidth pressure by using 8-bit weights and activations. On Arm CPUs with I8MM support, W8A8 can also use SMMLA, Arm's signed INT8 matrix multiply-accumulate instruction, which provides twice the theoretical matrix-multiply throughput of BFMMLA for BF16.
 
 ## What you've accomplished and what's next
 
