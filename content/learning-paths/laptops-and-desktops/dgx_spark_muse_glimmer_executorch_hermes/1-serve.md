@@ -11,7 +11,7 @@ In this Learning Path, you'll use the Hermes Agent framework and the Muse Glimme
 
 [Hermes Agent](https://hermes-agent.nousresearch.com/docs) is an open-source agent framework from Nous Research, [first released on 25 February 2026](https://nousresearch.com/releases). It sends the model's requests to tools and returns their results. Hermes runs on the DGX Spark's Arm CPU and executes shell commands in a restricted Docker container.
 
-[Muse Glimmer](https://huggingface.co/meta-models/Muse-Glimmer-30B) is Meta's open-weight, approximately 30-billion-parameter model designed for local agent tasks, including multi-step reasoning, tool use, and code repair. Meta [released it on 10 August 2026](https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model). It supports text and image inputs, though this Learning Path uses text only. Muse Glimmer chooses the commands and code changes, while Hermes executes the requested tools and returns their output.
+[Muse Glimmer](https://huggingface.co/meta-models/Muse-Glimmer-30B) is Meta's open-weight, approximately 30-billion-parameter model designed for local agent tasks, including multi-step reasoning, tool use, and code repair. Meta [released it on 10 August 2026](https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model). It supports text and image inputs. Muse Glimmer chooses the commands and code changes, while Hermes executes the requested tools and returns their output.
 
 [ExecuTorch](https://pytorch.org/projects/executorch/) is PyTorch’s framework for running AI models locally on devices, including laptops, mobile phones, and embedded systems. It was [first introduced on 17 October 2023](https://pytorch.org/blog/pytorch-edge-enabling-on-device-inference-across-mobile-and-edge-devices-with-executorch/). ExecuTorch loads and runs the exported Muse Glimmer model. ExecuTorch's CUDA backend runs Muse Glimmer on the DGX Spark's NVIDIA Blackwell GPU, and its server exposes a local endpoint for Hermes.
 
@@ -45,7 +45,7 @@ sudo apt install build-essential cmake git curl python3.12-venv
 
 Docker Engine must already be running and accessible to your SSH account. Follow the [Docker Engine install guide](/install-guides/docker/docker-engine/) if needed, and reconnect after changing group membership.
 
-Download the five Learning Path files from the Arm Learning Paths GitHub repository once into `~/muse-agent`: the prerequisite checker, dependency constraints, Hermes setup helper, broken release checker, and acceptance tests. Download these files before downloading source or model weights:
+Download the six Learning Path files from the Arm Learning Paths GitHub repository once into `~/muse-agent`: the prerequisite checker, dependency constraints, Hermes setup helper, broken release checker, acceptance tests, and release-summary image. Download these files before downloading source or model weights:
 
 ```bash
 mkdir -p ~/muse-agent
@@ -53,14 +53,14 @@ cd ~/muse-agent
 LP_FILES=https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/laptops-and-desktops/dgx_spark_muse_glimmer_executorch_hermes/files
 (
   set -e
-  for file in check-prereqs.sh executorch-constraints.txt setup-hermes-cli.sh release_tool.py test_release_tool.py; do
+  for file in check-prereqs.sh executorch-constraints.txt setup-hermes-cli.sh release_tool.py test_release_tool.py release-summary.png; do
     curl --fail --location --remove-on-error "$LP_FILES/$file" -o "$file"
     test -s "$file"
   done
 )
 ```
 
-The parenthesized block stops at the first failed download or empty file without closing your SSH session. All five downloads must finish successfully. If a download fails, resolve the error and retry this download step before continuing.
+The parenthesized block stops at the first failed download or empty file without closing your SSH session. All six downloads must finish successfully. If a download fails, resolve the error and retry this download step before continuing.
 
 Run the prerequisite checker:
 
@@ -126,18 +126,19 @@ The build must finish without errors, and the executable check must return exit 
 
 ## Export the model to ExecuTorch
 
-You will start from a `GGUF` format quantized model checkpoint, and export and lower to ExecuTorch on the DGX Spark.
+Download the quantized language model and vision checkpoint in `GGUF` format, then export and lower both to ExecuTorch on DGX Spark. The vision checkpoint adds an image encoder and projector, used to turn image patches into embeddings the language model can use.
 
 {{% notice Note %}}
 Optionally, sign in to Hugging Face with `hf auth login` before downloading. Authentication provides higher [Hugging Face request limits](https://huggingface.co/docs/hub/main/en/rate-limits) and can help avoid rate-limit interruptions, especially on shared networks.
 {{% /notice %}}
 
-Download the quantized checkpoint (approximately **17 GB**):
+Download the language-model checkpoint (approximately **17 GB**) and vision checkpoint (approximately **1.4 GB**):
 
 ```bash
 hf download meta-models/Muse-Glimmer-30B-GGUF \
   --revision 70bf1b61ac09f91b24d39038091b41c582bc5d7a \
   --include Muse-Glimmer-30B-KQuant-17GB-Q4_K_M.gguf \
+  --include mmproj-Muse-Glimmer-30B-Q4_K_M.gguf \
   --local-dir assets/quant
 ```
 
@@ -149,16 +150,17 @@ Export, partition, and compile the model for CUDA:
 MAX_JOBS=4 TORCHINDUCTOR_COMPILE_THREADS=4 \
 python -m executorch.examples.models.muse_glimmer.export.export_solo \
   --gguf assets/quant/Muse-Glimmer-30B-KQuant-17GB-Q4_K_M.gguf \
-  --backend cuda --max-seq-len 65536 --output-dir exports/spark-native-64k
+  --mmproj assets/quant/mmproj-Muse-Glimmer-30B-Q4_K_M.gguf \
+  --backend cuda --max-seq-len 65536 --output-dir exports/spark-native-vision-64k
 ```
 
 The [export script](https://github.com/pytorch/executorch/blob/0a4a05e84d9642460d87ec2bbbd0e397667ec9c8/examples/models/muse-glimmer/export/export_solo.py), used by the command above, performs three steps:
 
 1. Loads the GGUF weights and captures the model's inference methods as graphs with `torch.export.export()`.
 2. Calls `executorch.exir.to_edge_transform_and_lower()` with `CudaPartitioner` to select and delegate supported graph regions to `CudaBackend`. That backend uses [AOTInductor](https://docs.pytorch.org/docs/stable/torch.compiler_aot_inductor.html), PyTorch's ahead-of-time compiler, to turn the exported computation into compiled CUDA code during setup. ExecuTorch loads that code for inference.
-3. Calls `.to_executorch()` to prepare the runtime program and memory plan, then saves `model.pte` and its external delegate data in `aoti_cuda_blob.ptd`.
+3. Calls `.to_executorch()` to prepare the runtime program and memory plan, then saves `model.pte`, its external delegate data in `aoti_cuda_blob.ptd`, and the vision position-embedding table in `pos_embed.bin`.
 
-`--max-seq-len 65536` sets the exported context limit. `MAX_JOBS` and `TORCHINDUCTOR_COMPILE_THREADS` limit build parallelism.
+`--mmproj` adds the exported `vision_encoder` method. `--max-seq-len 65536` sets the exported context limit. `MAX_JOBS` and `TORCHINDUCTOR_COMPILE_THREADS` limit build parallelism.
 
 Wait for the export to print `Done.` and return to the shell without an error. If export fails, resolve the reported error and rerun only the export command. The checkpoint and worker do not need to be downloaded or built again.
 
@@ -181,8 +183,9 @@ This command starts an OpenAI-compatible HTTP server and launches the CUDA worke
 
 ```bash
 python -m executorch.examples.models.muse_glimmer.serving.serve \
-  --model-path exports/spark-native-64k/model.pte \
-  --data-path exports/spark-native-64k/aoti_cuda_blob.ptd \
+  --model-path exports/spark-native-vision-64k/model.pte \
+  --data-path exports/spark-native-vision-64k/aoti_cuda_blob.ptd \
+  --pos-embed-path exports/spark-native-vision-64k/pos_embed.bin \
   --tokenizer-path exports/tokenizer.json \
   --hf-tokenizer exports \
   --worker-bin cmake-out/examples/models/muse-glimmer/muse_glimmer_worker \
@@ -217,4 +220,4 @@ If an endpoint check fails, inspect the server's terminal for the error. Correct
 
 ## What you've accomplished
 
-You've built the CUDA worker, exported Muse Glimmer 30B to ExecuTorch with the CUDA backend, and started a local model endpoint. Next, you will set up Hermes Agent on the Arm CPU.
+You've built the CUDA worker, exported Muse Glimmer 30B with text and image capability, and started a local model endpoint. Next, you will set up Hermes Agent on the Arm CPU.

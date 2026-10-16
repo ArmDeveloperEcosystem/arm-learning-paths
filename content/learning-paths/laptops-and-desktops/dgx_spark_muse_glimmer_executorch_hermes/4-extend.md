@@ -1,6 +1,6 @@
 ---
 title: Extend your local agent
-description: Add vision, faster decoding, voice interaction, custom tools, or scheduled tasks to your local Hermes and Muse Glimmer agent.
+description: Explore image input, faster decoding, voice interaction, custom tools, or scheduled tasks with your local Hermes and Muse Glimmer agent.
 weight: 5
 layout: learningpathall
 ---
@@ -13,7 +13,7 @@ Use your Hermes–Muse Glimmer coding agent to help build its next capability. C
 
 Try one of these extensions:
 
-- **Add image input.** Extend the text-only endpoint with vision artifacts so the agent can investigate a screenshot or interpret a diagram alongside your request. Follow [Meta's Muse Glimmer ExecuTorch guide](https://dev.meta.ai/docs/muse-glimmer/executorch) for vision-enabled serving. Adding an image to a prompt alone does not enable vision in the current export.
+- **Try other images.** Give the agent a screenshot from a small project or a diagram and ask it to explain what it sees. See [Meta's Muse Glimmer ExecuTorch guide](https://dev.meta.ai/docs/muse-glimmer/executorch) for supported image inputs and serving options.
 - **Explore DFlash speculative decoding.** DFlash uses a draft model to propose tokens that Muse Glimmer verifies. Export and serve the draft model, then compare response latency on the same coding task. See the [ExecuTorch Muse Glimmer example](https://github.com/pytorch/executorch/blob/main/examples/models/muse-glimmer/README.md) for the required artifacts and configuration.
 - **Improve prompts and tool definitions.** Design a small tool with clear arguments and test whether the model calls it correctly. Use the [Muse Glimmer prompting guide](https://dev.meta.ai/docs/muse-glimmer/prompting) as a reference. Test any changes to the API settings against your endpoint.
 

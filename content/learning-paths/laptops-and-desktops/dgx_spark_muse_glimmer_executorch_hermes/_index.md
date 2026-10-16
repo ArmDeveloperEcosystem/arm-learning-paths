@@ -1,17 +1,17 @@
 ---
 title: Build a local Muse Glimmer 30B agent with Hermes and ExecuTorch on NVIDIA DGX Spark
 
-description: Run Hermes on the Arm CPU and Muse Glimmer on the Blackwell GPU of NVIDIA DGX Spark, then use a local agent to diagnose and repair a broken Python release checker.
+description: Run Hermes on the Arm CPU and Muse Glimmer on the Blackwell GPU of NVIDIA DGX Spark, then use the local agent with text and image capabilities to investigate and repair a broken Python checker.
 
 minutes_to_complete: 90
 
 who_is_this_for: Developers who want to run a local AI agent on NVIDIA DGX Spark using Hermes Agent framework and the Muse Glimmer 30B parameter model.
 
 learning_objectives:
-    - Serve Muse Glimmer 30B through a local ExecuTorch CUDA endpoint
+    - Serve Muse Glimmer 30B with text and image input through a local ExecuTorch CUDA endpoint
     - Connect Hermes Agent on the Arm CPU to the local model server
     - Restrict agent tools to a dedicated workspace and a network-disabled container
-    - Verify an agent-generated code repair against acceptance tests
+    - Use image and text inputs to diagnose a release error and verify the agent-generated code repair against acceptance tests
 
 prerequisites:
     - SSH access to an NVIDIA DGX Spark running Ubuntu 24.04-based DGX OS, NVIDIA driver 580 or newer, and the CUDA 13.0 development toolkit
@@ -42,7 +42,6 @@ tools_software_languages:
     - Hermes Agent
     - Muse Glimmer
     - CUDA
-
 
 further_reading:
     - resource:

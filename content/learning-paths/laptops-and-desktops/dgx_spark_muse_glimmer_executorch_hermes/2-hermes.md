@@ -21,9 +21,9 @@ Expect `Hermes installed` and the Hermes CLI help output. This confirms that the
 
 The helper checks Docker access and free disk space, pulls the pinned Arm64 sandbox image by immutable digest, runs the complete official installer at the pinned revision, then configures the local provider and Docker sandbox.
 
-The script writes `~/muse-agent/hermes-home/config.yaml`, defining a custom provider named `spark-local` at `http://127.0.0.1:8000/v1`. It selects `muse-glimmer-30B` as the default model and matches the server's 65,536-token context. The generated `~/muse-agent/bin/hermes` launcher sets `HERMES_HOME` to this configuration directory, so Hermes sends model requests to the local ExecuTorch server using its OpenAI-compatible API.
+The script writes `~/muse-agent/hermes-home/config.yaml`, defining a custom provider named `spark-local` at `http://127.0.0.1:8000/v1`. It selects `muse-glimmer-30B` as the default model and matches the server's 65,536-token context. It sets `agent.image_input_mode: native` so attached images go directly to local Muse Glimmer through the same API. The generated `~/muse-agent/bin/hermes` launcher sets `HERMES_HOME` to this configuration directory, so Hermes sends model requests to the local ExecuTorch server using its OpenAI-compatible API.
 
-If setup fails, fix the reported error and rerun `bash setup-hermes-cli.sh`. The helper repeats the upstream installation and image-pull steps. After its first successful configuration, it preserves `hermes-home/config.yaml`.
+If setup fails, fix the reported error and rerun `bash setup-hermes-cli.sh`. The helper repeats the upstream installation and image-pull steps. After its first successful configuration, it preserves other settings in `hermes-home/config.yaml` and ensures that native image input is enabled.
 
 Verify the model connection and sandbox in the checks that follow.
 
@@ -35,6 +35,7 @@ A sandbox is a restricted environment that limits what a program can access. Her
 | --- | --- |
 | Local provider | Muse Glimmer on `http://127.0.0.1:8000/v1`, with a 65,536-token context |
 | Explicit sampling | Temperature 1.0, `top_p` 0.95, `top_k` 64; a null `reasoning_effort` override avoids an unsupported API setting |
+| Image input | `agent.image_input_mode: native` sends image pixels to the local model, without an auxiliary vision service |
 | Python CLI | `--cli` selects the terminal interface used in this exercise |
 | Docker tool backend | Agent shell commands run inside a container on the Spark |
 | No tool-container network | `docker_network: false` prevents outbound access from agent commands |

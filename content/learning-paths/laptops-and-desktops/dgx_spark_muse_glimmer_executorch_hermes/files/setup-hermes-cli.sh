@@ -79,7 +79,8 @@ if not marker.exists():
             'default_model': 'muse-glimmer-30B', 'context_length': 65536,
             'extra_body': {'temperature': 1.0, 'top_p': 0.95, 'top_k': 64,
                            'reasoning_effort': None}}},
-        'agent': {'reasoning_effort': None, 'max_turns': 40},
+        'agent': {'reasoning_effort': None, 'max_turns': 40,
+                  'image_input_mode': 'native'},
         'approvals': {'mode': 'manual'},
         'terminal': {'backend': 'docker', 'docker_image': sandbox_image,
                      'docker_network': False, 'docker_forward_env': [],
@@ -93,6 +94,8 @@ if not marker.exists():
 elif not (root / 'hermes-home/config.yaml').is_file():
     sys.exit('Configuration marker exists but config.yaml is missing. Restore it or use another work directory.')
 PY
+# Apply this vision setting on reruns too; preserve other existing settings.
+"$work_dir/bin/hermes" config set agent.image_input_mode native
 "$work_dir/bin/hermes" chat --help >/dev/null
 printf 'Hermes installed: %s/bin/hermes\n' "$work_dir"
 printf 'Next: verify the local model connection and Docker sandbox using the Learning Path checks.\n'

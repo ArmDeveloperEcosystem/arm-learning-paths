@@ -1,13 +1,15 @@
 ---
 title: Use Hermes with Muse Glimmer as a coding agent
-description: Ask Hermes to reproduce a release-gate failure, fix the Python tool, and verify the repair against read-only tests.
+description: Ask Hermes-Muse Glimmer to interpret a release-summary image, and then repair the Python checker and verify using its tests.
 weight: 4
 layout: learningpathall
 ---
 
 ## Prepare a broken release checker
 
-A release checker reads test results and decides whether deployment can proceed. This one is broken: it can approve a release despite failed tests, and its exit status is wrong. Ask Hermes to reproduce the failure, inspect the code, and repair it so the tests pass.
+A release checker reads test results and decides whether deployment can proceed. This one is broken: it can approve a release despite failed tests, and its exit status is wrong. The example image is an illustrative release-summary dashboard showing an incorrect deployment decision. Ask Hermes to read the image and identify the problem, inspect the code, and repair it so the tests pass.
+
+![Example release summary showing one passed test, one failed test, and one skipped test, with an incorrect READY decision#center](files/release-summary.png "Illustrative release-summary dashboard")
 
 Use `release_tool.py` and `test_release_tool.py` downloaded at the start of the Learning Path. Copy them into the exercise workspace:
 
@@ -30,12 +32,24 @@ PYTHONPATH="$PWD" python3 -m unittest discover \
 
 Expect four failed tests. They cover all-passed, mixed pass/fail, skipped-only, and empty test runs. Their assertions also check the exit status a deployment pipeline would use.
 
-## Ask Hermes to diagnose and repair it
+## Ask Hermes to read the image and repair the checker
 
-Return to the Hermes session and enter:
+Exit the earlier Hermes session with `/quit`. Start a new session with the release-summary image downloaded at the beginning:
+
+```bash
+cd ~/muse-agent
+~/muse-agent/bin/hermes chat --cli --toolsets terminal \
+  --image "$HOME/muse-agent/release-summary.png" \
+  -q "Read the image. Report the passed, failed, and skipped counts, the displayed release decision, and whether deployment should proceed. Do not run tools or change files yet."
+```
+
+Hermes should report that it is attaching the image natively, confirming that the image is sent directly to the local model. Expect one passed, one failed, and one skipped test. The image displays `READY`, but the failed test should block deployment. `--image` attaches the file from the DGX Spark.
+
+Keep this Hermes session open and enter:
 
 ```text
-Use only the terminal tool. Diagnose and fix /demo/output/release_tool.py.
+Use the image you just read as context. Use only the terminal tool.
+Diagnose and fix /demo/output/release_tool.py.
 Run the acceptance tests first:
 PYTHONPATH=/demo/output python3 -m unittest discover -s /demo/input -p test_release_tool.py -v
 Read the checker and /demo/input/test_release_tool.py together in one call.
@@ -74,6 +88,7 @@ The setup helper saves the Hermes configuration in `~/muse-agent/hermes-home/con
 | Hermes cannot reach Muse Glimmer | Keep the server running in its SSH session. On Spark, run `curl --fail http://127.0.0.1:8000/health` and check the server terminal for errors. |
 | Hermes rejects the context length | Match the export's `--max-seq-len 65536`, the server's `--max-context 65536`, and `context_length: 65536` in the Hermes configuration. |
 | Hermes replies but does not execute tools | Launch it with `--cli --toolsets terminal`. Check that the server uses `--tool-parser atem` and that the `spark-local` configuration retains the helper's sampling settings and null `reasoning_effort` override. |
+| Hermes cannot process the image | Use the vision export and its `--pos-embed-path`. Check `agent.image_input_mode: native` in the Hermes configuration and the image path on Spark. |
 | The agent cannot find the code or tests | Check that the preparation commands copied the files into `~/muse-agent/demo/input` and `demo/output`. Inspect the container mounts: these must appear as `/demo/input` and `/demo/output`. |
 | Hermes asks for command approval | Read the command before approving it. Allow exercise edits only under `/demo/output`; reject changes to host or sandbox settings. |
 | Tests still fail after the repair | Give Hermes the failing test output and ask it to revise the working copy. Keep `/demo/input` read-only and rerun the independent host tests. |
@@ -89,8 +104,9 @@ cd ~/muse-agent/executorch
 export PATH=/usr/local/cuda/bin:$PATH
 source ../executorch-venv/bin/activate
 python -m executorch.examples.models.muse_glimmer.serving.serve \
-  --model-path exports/spark-native-64k/model.pte \
-  --data-path exports/spark-native-64k/aoti_cuda_blob.ptd \
+  --model-path exports/spark-native-vision-64k/model.pte \
+  --data-path exports/spark-native-vision-64k/aoti_cuda_blob.ptd \
+  --pos-embed-path exports/spark-native-vision-64k/pos_embed.bin \
   --tokenizer-path exports/tokenizer.json \
   --hf-tokenizer exports \
   --worker-bin cmake-out/examples/models/muse-glimmer/muse_glimmer_worker \
@@ -110,6 +126,6 @@ No repeat export or installation is needed.
 
 ## What you've accomplished
 
-Your agent reproduced the failure, repaired the checker, and passed the read-only tests. To use it on your own project, mount a dedicated working directory and keep acceptance tests outside the agent's writable area.
+Your agent interpreted the image, reproduced the failure, repaired the checker, and passed the read-only tests. To use it on your own project, mount a dedicated working directory and keep acceptance tests outside the agent's writable area.
 
 Next, explore ways to extend the agent with Muse Glimmer features and additional Hermes tools.
