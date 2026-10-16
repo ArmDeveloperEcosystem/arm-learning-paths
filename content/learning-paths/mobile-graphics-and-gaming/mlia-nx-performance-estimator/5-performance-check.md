@@ -19,14 +19,14 @@ With the tested packages and `neural-technology` profile, expect `136,962` estim
 
 ## Locate and read the reports
 
-With `--output-dir runs/baseline`, the key files are:
+With `--output-dir runs/baseline`, the following files are important:
 
 | Path under `runs/baseline/mlia-output/` | Purpose |
 | --- | --- |
-| `mlia-output.json` | Standardized MLIA result, including model metadata, metrics, entities, breakdowns, and advice |
+| `mlia-output.json` | Standardized Arm ML Inference Advisor (MLIA) result, including model metadata, metrics, entities, breakdowns, and advice |
 | `nx_performance_statistics.json` | Detailed chain and cascade performance statistics |
 | `nx-performance-estimator/` | Estimator summaries and raw performance, timing, and debug databases |
-| `ml-sdk-model-converter/` | TOSA intermediates and `baseline.tosa.vgf`, produced automatically from the LiteRT model |
+| `ml-sdk-model-converter/` | Tensor Operator Set Architecture (TOSA) intermediates and `baseline.tosa.vgf`, produced automatically from the LiteRT model |
 | `logs/mlia.log` | Analysis and diagnostic log |
 
 By default MLIA writes to `mlia-output` in the current directory, with the report in `mlia-output.json`.
@@ -72,8 +72,10 @@ Keep the model unchanged when exploring a different target configuration. For ex
 mlia check models/baseline.tflite --target-profile NX-peak-12SC-8NX-600MHz --performance --output-dir runs/baseline-peak
 ```
 
-Differences here reflect the profile's system and compiler assumptions, not a model optimization. Return to `neural-technology` for the model comparison in the final section.
+Differences in performance reflect the system and compiler assumptions of the profile, not a model optimization. 
 
 ## What you've accomplished and what's next
 
-You've collected baseline estimates and distinguished model metrics from scheduling breakdowns. Next, you'll evaluate a smaller public model under the original profile and compare the results.
+You've collected baseline estimates and distinguished model metrics from scheduling breakdowns.
+
+Next, you'll evaluate a smaller public model under the `neural-technology` profile and compare the results.

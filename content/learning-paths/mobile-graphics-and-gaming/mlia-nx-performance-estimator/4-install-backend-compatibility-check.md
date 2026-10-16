@@ -9,10 +9,10 @@ layout: learningpathall
 
 ## Check the baseline operators
 
-Pass `models/baseline.tflite` to MLIA. It converts the model automatically and selects the backend for the `neural-technology` target profile:
+Pass `models/baseline.tflite` to Arm ML Inference Advisor (MLIA). It converts the model automatically and selects the backend for the `neural-technology` target profile:
 
 {{% notice License %}}
-On your first check, MLIA offers to install the bundled NX Performance Estimator. Confirm installation when prompted, then read its Arm license and continue only if you agree. If the backend is already installed, MLIA skips this setup.
+On your first check, MLIA offers to install the bundled neural acceleration (NX) Performance Estimator. Confirm installation when prompted, then read its Arm license and continue only if you agree. If the backend is already installed, MLIA skips this setup.
 {{% /notice %}}
 
 ```bash
@@ -45,14 +45,16 @@ Compatibility status: ok
 Non-passing checks: 0
 ```
 
-## Interpret compatibility correctly
+## Interpret the compatibility result
 
 The compatibility result includes `checks`, source-operator `entities`, and metrics. For this model, `accelerator_operator_percentage` is `100.0`. MLIA reports `ml-sdk-model-converter` as the compatibility producer because operator support is checked during conversion.
 
 A passing result means that this graph can proceed through the supported conversion flow. It doesn't establish classification accuracy, guarantee a deployable application, or measure device performance.
 
-If a check fails, inspect the report's non-passing checks and linked entities. Verify that you're analyzing `models/baseline.tflite` and that both plugins from the environment setup are installed.
+If a check fails, inspect the non-passing checks and linked entities of the report. Verify that you're analyzing `models/baseline.tflite` and that both plugins from the environment setup are installed.
 
 ## What you've accomplished and what's next
 
-You've checked the baseline's operator compatibility without a manual conversion step. Next, you'll collect performance estimates and inspect their breakdowns.
+You've checked the baseline's operator compatibility without a manual conversion step. 
+
+Next, you'll collect performance estimates and inspect their breakdowns.

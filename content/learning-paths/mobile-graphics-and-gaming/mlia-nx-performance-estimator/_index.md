@@ -1,17 +1,17 @@
 ---
-title: Estimate neural accelerator (NX) performance with ML Inference Advisor
+title: Estimate neural accelerator performance with ML Inference Advisor
 
 description: Use public MLIA packages and quantized MobileNet models to check Neural Technology compatibility, estimate NX performance, and compare model variants.
 
 minutes_to_complete: 40
 
-who_is_this_for: This Learning Path is for ML engineers and graphics developers who want to evaluate model compatibility and estimated performance for Arm Neural Technology before deployment.
+who_is_this_for: This Learning Path is for ML engineers and graphics developers who want to evaluate model compatibility and estimated neural accelerator (NX) performance for Arm Neural Technology before deployment.
 
 learning_objectives:
-    - Install the public MLIA Neural Technology plugin and discover its target profiles and backend
-    - Analyze public quantized MobileNet models with automatic model conversion
-    - Check operator compatibility and interpret NX Performance Estimator reports
-    - Compare model variants under the same target configuration and identify accuracy tradeoffs
+    - Install the public Arm ML Inference Advisor (MLIA) Neural Technology plugin and discover its target profiles and backend.
+    - Analyze public quantized MobileNet models with automatic model conversion.
+    - Check operator compatibility and interpret NX Performance Estimator reports.
+    - Compare model variants under the same target configuration and identify accuracy tradeoffs.
 
 prerequisites:
     - An Ubuntu development host
