@@ -128,11 +128,10 @@ findmnt --source "$RBD_DEVICE"
 sudo fuser -vm "$RBD_DEVICE"
 ```
 
-If both commands report nothing, the kernel can still hold a watch on the image, which keeps the mapping busy even with no filesystem mounted. Confirm that the device is unmounted, then force the unmap:
+If both commands report nothing, the kernel can still hold a watch on the image, which keeps the mapping busy even with no filesystem mounted. After confirming that the device is unmounted, force the unmap:
 
 ```bash
 rbd_kernel device unmap -o force "$RBD_DEVICE"
-rbd_kernel device list
 ```
 
 Confirm that the image is no longer mapped:
