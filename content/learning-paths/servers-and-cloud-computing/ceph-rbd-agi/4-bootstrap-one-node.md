@@ -1,6 +1,6 @@
 ---
 title: Bootstrap Ceph on one node
-description: Install cephadm, bootstrap the cluster on ceph1, and provision the first OSD.
+description: Install `cephadm`, bootstrap the cluster on ceph1, and provision the first OSD.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -13,11 +13,11 @@ You'll bootstrap a new Ceph cluster on `ceph1` and provision its data disk as th
 
 Run all commands inside `ceph1` to create a working single-node cluster, ready to store an RADOS Block Device (RBD) image.
 
-You will add the other two VMs later. 
+You'll add the other two VMs later. 
 
 ### Install cephadm
 
-Use the [standalone cephadm installation method](https://docs.ceph.com/en/squid/cephadm/install/#curl-based-installation) with release 19.2.6. You'll use Ceph Squid 19.2.6, but the Ubuntu 26.04 repositories provide Ceph 20.2.0. To keep the deployment tools and cluster on the same release, download cephadm 19.2.6 directly rather than installing it through the Ubuntu package manager (APT). Use the pinned Ceph 19.2.6 container image.
+Use the [standalone `cephadm` installation method](https://docs.ceph.com/en/squid/cephadm/install/#curl-based-installation) with release 19.2.6. You'll use Ceph Squid 19.2.6, but the Ubuntu 26.04 repositories provide Ceph 20.2.0. To keep the deployment tools and cluster on the same release, download `cephadm` 19.2.6 directly rather than installing it through the Ubuntu package manager (APT). Use the pinned Ceph 19.2.6 container image.
 
 Download the executable and check its version before installing it:
 
@@ -67,7 +67,7 @@ Bootstrap can take several minutes while Ceph downloads container images and sta
 
 You should see the message `Bootstrap complete`. 
 
-At completion, cephadm writes the cluster configuration and administrator keyring under `/etc/ceph/`. 
+At completion, `cephadm` writes the cluster configuration and administrator keyring under `/etc/ceph/`.
 
 Run the administrative commands through `cephadm shell` to use the Ceph client from the cluster's container image:
 
@@ -105,7 +105,7 @@ ceph1  /dev/vdb  hdd                                                 10.0G      
 ```
 The seed ISO size and refresh times can vary.
 
-For the VMs that you created, the device listing should include the following availability and size values:
+For the VMs that you created, the device listing should include the following size values:
 
 | Device | Purpose | Expected availability |
 | --- | --- | --- |

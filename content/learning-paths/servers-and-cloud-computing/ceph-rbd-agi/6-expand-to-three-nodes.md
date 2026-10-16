@@ -13,7 +13,7 @@ You'll add the prepared `ceph2` and `ceph3` virtual machines (VMs) to the existi
 
 ### Authorize cephadm on the new nodes
 
-Cephadm uses SSH to deploy and manage services on the additional nodes. 
+`cephadm` uses SSH to deploy and manage services on the additional nodes.
 
 Start in a terminal on the AGI host with the SSH key at `~/.ssh/agi_ceph`.
 
@@ -41,7 +41,7 @@ for VM_NUMBER in 2 3; do
 done
 ```
 
-This authorizes the cephadm root SSH key without enabling password login or copying the private key of the AGI host. 
+This authorizes the `cephadm` root SSH key without enabling password login or copying the private key of the AGI host.
 
 Return to the SSH session on `ceph1` for all remaining commands. 
 

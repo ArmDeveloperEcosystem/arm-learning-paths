@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Prepare the nodes for Ceph
 
-You'll prepare all three virtual machines (VMs) with hostname resolution, synchronized clocks, and the tools cephadm needs to run storage services. Connect from the AGI host, then run the preparation commands inside each VM. Finish by identifying the empty data disks that Ceph will use.
+You'll prepare all three virtual machines (VMs) with hostname resolution, synchronized clocks, and the tools that `cephadm` needs to run storage services. Connect from the AGI host, then run the preparation commands inside each VM. Finish by identifying the empty data disks that Ceph will use.
 
 ### Check the virtual machines
 
@@ -17,7 +17,7 @@ You created three Ubuntu 26.04 VMs named `ceph1`, `ceph2`, and `ceph3`.
 
 Ensure that each VM has the following resources:
 
-- 4 virtual CPUs
+- Four virtual CPUs
 - 4 GB of memory
 - A 20 GB operating-system disk 
 - A separate unused data disk of at least 10 GB
@@ -86,6 +86,13 @@ ping -c 2 ceph3
 
 ### Install and confirm the Ceph prerequisites
 
+You need the following prerequisites for `cephadm`:
+- Python 3
+- systemd
+- A container runtime
+- Time synchronization
+- LVM2 
+
 Run the following commands on all three VMs:
 
 ```bash
@@ -93,13 +100,6 @@ sudo apt update
 sudo apt install -y chrony lvm2 podman openssh-server curl
 sudo systemctl enable --now chrony ssh
 ```
-
-You need the following prerequisites for Cephadm:
-- Python 3
-- systemd
-- A container runtime
-- Time synchronization
-- LVM2 
 
 Confirm the remaining services and tools:
 

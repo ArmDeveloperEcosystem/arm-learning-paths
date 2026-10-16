@@ -22,7 +22,7 @@ sudo /usr/local/sbin/cephadm shell -- ceph osd pool create agi-rbd 8
 sudo /usr/local/sbin/cephadm shell -- ceph config get mon mon_allow_pool_size_one
 ```
 
-By default, Ceph prevents setting a pool size to 1 to protect against data loss. Temporarily enable single-replica pools, set the size to 1, and immediately restore the safety check:
+By default, Ceph prevents setting a pool size to `1` to protect against data loss. Temporarily enable single-replica pools, set the size to `1`, and immediately restore the safety check:
 
 ```bash
 sudo /usr/local/sbin/cephadm shell -- ceph config set mon mon_allow_pool_size_one true
@@ -87,7 +87,7 @@ sudo timeout --kill-after=5s 30s \
 echo "Credential exit status: $?"
 ```
 
-After generating the configuration and credential files, verify that both commands completed successfully, then install them to the system directory:
+After generating the configuration and credential files, verify that both commands completed successfully and install them to the system directory:
 
 ```bash
 test -s "$CLIENT_DIRECTORY/ceph.conf.new" &&

@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Verify access during an OSD outage
 
-You'll test whether the replicated RADOS Block Device (RBD) volume stays readable and writable when one object storage daemon (OSD) stops. Run all commands on `ceph1`, using the mounted volume and checksum baseline from the RBD exercise. You'll restore the OSD and verify both the original file and a file written during the outage.
+You'll test whether the replicated RADOS Block Device (RBD) volume stays readable and writable when one object storage daemon (OSD) stops. Run all commands on `ceph1` using the mounted volume and checksum baseline from the RBD exercise. You'll restore the OSD and verify both the original file and a file written during the outage.
 
 ### Record the healthy state
 
@@ -146,4 +146,4 @@ The list should no longer show `agi-rbd/demo-volume`. This leaves the Ceph clust
 
 You've built a three-node Ceph cluster on Arm virtual machines, used RBD as Linux block storage, and verified data availability and integrity during an OSD outage and recovery. You've learned how replication settings and Controlled Replication Under Scalable Hashing (CRUSH) placement work together to protect data, and how to monitor cluster health.
 
-You also learned about OSD recovery. Protecting against physical-host failure requires spreading the cluster across independent hosts. You can apply the same Ceph concepts to independent Arm servers and define failure domains that match the physical infrastructure.
+You've also learned about OSD recovery. Protecting against physical-host failure requires spreading the cluster across independent hosts. You can apply the same Ceph concepts to independent Arm servers and define failure domains that match the physical infrastructure.

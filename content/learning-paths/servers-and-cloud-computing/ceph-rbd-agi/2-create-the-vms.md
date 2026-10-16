@@ -13,7 +13,7 @@ You'll create three Ubuntu 26.04 virtual machines (VMs) with stable IP addresses
 
 ### Check the AGI host
 
-The example uses kernel-based VM (KVM) and libvirt to create the VMs. The commands in this section assume that the AGI CPU host runs Ubuntu 24.04 and provides the following:
+The example uses kernel-based VM (KVM) and libvirt to create the VMs. Ensure that the AGI CPU host runs Ubuntu 24.04 and has the following attributes:
 
 - At least 12 available CPU cores
 - At least 12 GB of memory available to the VMs, with 16 GB or more of total host memory recommended
@@ -21,7 +21,7 @@ The example uses kernel-based VM (KVM) and libvirt to create the VMs. The comman
 - Hardware virtualization support through KVM
 - Root or `sudo` access
 
-The virtual disks use the QCOW2 format and grow as data is written, but the host must have enough capacity for the disks to reach their configured sizes.
+The virtual disks use the QCOW2 format and grow as data is written. However, the host needs to have enough capacity for the disks to reach their configured sizes.
 
 Confirm that the host uses the Arm architecture:
 
@@ -175,13 +175,13 @@ sudo curl --fail --location \
   --output "$BASE_IMAGE"
 ```
 
-The release URL may change as Ubuntu publishes updates; the tested guest image reported Ubuntu 26.04.1 and kernel `7.0.0-34-generic`.
+The release URL might change as Ubuntu publishes updates. The tested guest image reported Ubuntu 26.04.1 and kernel `7.0.0-34-generic`.
 
-The base image remains unchanged. Each VM uses a separate copy-on-write operating-system disk backed by this image.
+The base image remains unchanged. Each VM uses a separate copy-on-write operating system disk backed by this image.
 
 ## Create and start the VMs
 
-The following loop creates virtual machines named `ceph1`, `ceph2`, and `ceph3`. 
+You'll run a loop to create VMs named `ceph1`, `ceph2`, and `ceph3`. 
 
 Each VM receives the following resources:
 
@@ -303,7 +303,7 @@ Confirm that all three VMs are running:
 sudo virsh list --all
 ```
 
-The expected output is similar to:
+The output is similar to:
 ```output
  Id   Name    State
 -----------------------
@@ -319,7 +319,7 @@ Check that libvirt assigned `192.168.100.11`, `192.168.100.12`, and `192.168.100
 ```bash
 sudo virsh net-dhcp-leases agi-net
 ```
-The expected output is similar to:
+The output is similar to:
 ```output
 Expiry Time           MAC address         Protocol   IP address          Hostname   Client ID or DUID
 -----------------------------------------------------------------------------------------------------------------------------------------------
@@ -328,7 +328,7 @@ Expiry Time           MAC address         Protocol   IP address          Hostnam
  2026-10-07 14:58:52   52:54:00:ce:00:03   ipv4       192.168.100.13/24   ceph3      ff:cb:39:0a:c7:00:02:00:00:ab:11:bb:14:a0:3e:17:e0:f4:e8
 ```
 
-If the lease list is empty immediately after boot, wait a few minutes and check again. If a lease remains missing, run `sudo virsh domblklist ceph1 --details` for the affected VM and confirm that its seed ISO is attached to the CD-ROM. Use `sudo virsh console ceph1` to inspect boot and cloud-init messages. To leave the console, press **Ctrl+]**.
+If the lease list is empty immediately after boot, wait for a few minutes and check again. If a lease remains missing, run `sudo virsh domblklist ceph1 --details` for the affected VM and confirm that its seed ISO is attached to the CD-ROM. Use `sudo virsh console ceph1` to inspect boot and cloud-init messages. To leave the console, press **Ctrl+]**.
 
 After the leases appear, connect to each VM and display its hostname, architecture, and cloud-init status:
 
