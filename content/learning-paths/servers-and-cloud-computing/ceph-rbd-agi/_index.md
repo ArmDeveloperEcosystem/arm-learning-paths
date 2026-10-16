@@ -19,9 +19,57 @@ prerequisites:
     - Familiarity with Linux block devices and VMs
     - Outbound internet access from the AGI CPU host and VMs
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-16T16:23:37Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: c7c7c1e8983617e4b303c2531a22ae18915d1ba16c21e5189c2f62f58a068e8e
+  summary_generated_at: '2026-10-16T16:23:37Z'
+  summary_source_hash: c7c7c1e8983617e4b303c2531a22ae18915d1ba16c21e5189c2f62f58a068e8e
+  faq_generated_at: '2026-10-16T16:23:37Z'
+  faq_source_hash: c7c7c1e8983617e4b303c2531a22ae18915d1ba16c21e5189c2f62f58a068e8e
+  summary: >-
+    You'll build and test replicated Ceph RBD storage on an Arm AGI CPU host. First, you'll create three Ubuntu
+    26.04 Arm64 VMs, prepare them, and bootstrap a single-node cluster. You'll map an RBD
+    image, mount it, and verify file persistence on the single node. After authorizing cluster SSH access to the other
+    nodes, you'll add their OSDs and increase replication. Finally, you'll stop and restart an OSD to
+    check continued access and recovery.
+#   faqs:
+#   - question: Which `cephadm` release should I install on Ubuntu 26.04 and why?
+#     answer: >-
+#       Use `cephadm` 19.2.6 to match the Ceph Squid 19.2.6 cluster release. Ubuntu 26.04 repositories
+#       provide Ceph 20.2.0, so download `cephadm` 19.2.6 directly to keep the deployment tools and
+#       cluster on the same version.
+#   - question: 'Where do I run commands during each phase: host setup, VM prep, and cluster operations?'
+#     answer: >-
+#       Run VM creation commands on the Arm AGI CPU host. Run preparation commands inside each VM.
+#       During expansion, authorize the cluster's SSH key on the new nodes from the AGI host. Run
+#       cluster bootstrap, RBD usage, and the remaining expansion commands inside `ceph1`.
+#   - question: How do I know each VM is ready before bootstrapping Ceph?
+#     answer: >-
+#       Confirm each VM has 4 vCPUs, 4 GB memory, a 20 GB OS disk, a separate unused data disk of
+#       at least 10 GB, stable IP addressing, SSH access, hostname resolution, and synchronized
+#       clocks. Identify the empty data disk that Ceph will use on each node.
+#   - question: What device should appear after mapping the RBD image, and how do I verify persistence?
+#     answer: >-
+#       You should see a block device such as `/dev/rbd0`. Format and mount it, write a test file, then
+#       unmap and remap the image and compare checksums to verify the file persists in Ceph.
+#   - question: What changes when expanding to three nodes, and how is replication tested?
+#     answer: >-
+#       You add two more Ceph nodes so the cluster runs one OSD per node. A controlled OSD failure
+#       tests whether you can keep reading and writing the RBD volume. After the OSD returns, you
+#       verify that Ceph repairs changed objects and both the original and outage files retain their
+#       checksums.
+# END generated_summary_faq
+
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
