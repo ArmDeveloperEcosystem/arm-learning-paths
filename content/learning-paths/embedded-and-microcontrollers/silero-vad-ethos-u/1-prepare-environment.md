@@ -23,7 +23,7 @@ Use the FVP for functional validation. The FVP's Ethos-U model is cycle accurate
 
 ## Check your development machine
 
-Run the following preflight check before downloading the source:
+Use Python 3.12 with development headers and virtual-environment support. The release wheels require glibc 2.28 or later on Linux, or macOS 15 or later on Apple silicon. On Linux, the FVP also requires `libstdc++.so.6` providing `GLIBCXX_3.4.26` or later. Run the following preflight check before downloading the source; CMake is installed in the virtual environment later:
 
 ```bash
 case "$(uname -s)/$(uname -m)" in
@@ -36,7 +36,7 @@ case "$(uname -s)/$(uname -m)" in
     ;;
 esac
 
-for tool in python3 git cmake c++ curl; do
+for tool in python3.12 git c++ curl; do
   command -v "$tool" >/dev/null || {
     echo "Missing required tool: $tool" >&2
     exit 1
@@ -51,34 +51,17 @@ fi
 printf 'int main() { return 0; }\n' | \
   c++ -std=c++17 -x c++ -fsyntax-only -
 
-python3 - <<'PY'
-import re
-import subprocess
-import sys
-
-if not (3, 10) <= sys.version_info[:2] <= (3, 13):
-    raise SystemExit("Python 3.10 through 3.13 is required")
-
-output = subprocess.check_output(["cmake", "--version"], text=True)
-version = tuple(map(int, re.search(r"\d+(?:\.\d+)+", output).group().split(".")[:2]))
-if version < (3, 24):
-    raise SystemExit("CMake 3.24 or later is required")
-
-print(f"Python {sys.version.split()[0]}")
-print(output.splitlines()[0])
-PY
+python3.12 --version
 ```
 
 ## Create an isolated ExecuTorch environment
 
-The Silero VAD Ethos-U example is available in the upstream ExecuTorch repository. Use the tested main-branch commit so that the commands and generated artifacts match the Learning Path.
-
-Clone ExecuTorch and check out the tested revision:
+Use ExecuTorch `v1.5.1` for the Python package, example, and native runtime. Clone the matching source:
 
 ```bash
 git clone https://github.com/pytorch/executorch.git
 cd executorch
-git checkout 4fd161058ebe2b9d80d11242a9d21811c0e92dac
+git checkout 3b60683923245cf472b7323426920e15623ba361
 git submodule sync --recursive
 git submodule update --init --recursive
 ```
@@ -92,34 +75,16 @@ git rev-parse --short=12 HEAD
 The expected output is:
 
 ```output
-4fd161058ebe
+3b6068392324
 ```
 
 Create and activate a Python virtual environment:
 
 ```bash
-python3 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 ```
-
-Install ExecuTorch and its Python dependencies:
-
-```bash
-CMAKE_ARGS="-DEXECUTORCH_BUILD_MLX=OFF" \
-  env -u DEBUG ./install_executorch.sh \
-  --minimal --optional-dependency ethos_u
-
-python - <<'PY'
-import executorch.codegen.tools.selective_build
-from executorch.backends.arm.ethosu import EthosUPartitioner
-from executorch.backends.arm.quantizer import EthosUQuantizer
-
-print("ExecuTorch installation verified")
-PY
-```
-
-The installation script initializes the Git submodules that are needed by the build. The script also installs the matching PyTorch and ExecuTorch packages. The command omits the unrelated MLX backend and optional packages used by other examples.
 
 ## Install the Arm backend tools
 
@@ -151,6 +116,51 @@ command -v FVP_Corstone_SSE-320
 ```
 
 The compiler resolves under `examples/arm/arm-scratch/`. On Linux, the FVP also resolves under this directory. On macOS, the FVP resolves under the FVPs-on-Mac wrapper directory. If the compiler is missing, source `examples/arm/arm-scratch/setup_path.sh` again. If the FVP is missing on macOS, add the wrapper directory to `PATH`.
+
+## Install ExecuTorch
+
+Remove the unused model-viewing and test packages installed by Arm setup:
+
+```bash
+python -m pip uninstall --yes \
+  tosa-adapter-model-explorer ai-edge-model-explorer \
+  pytest-timeout pte-adapter-model-explorer
+```
+
+Install the released packages for your host. Linux uses CPU wheels; macOS uses Apple silicon wheels. Keep this step after Arm setup to resolve its older FlatBuffers dependency:
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux" language="bash" >}}
+python -m pip install \
+  --index-url https://pypi.org/simple \
+  --extra-index-url https://download.pytorch.org/whl/cpu \
+  "executorch[ethos-u]==1.5.1" \
+  "torch==2.14.0+cpu" "torchvision==0.29.0+cpu" "torchao==0.18.0+cpu" \
+  "cmake==3.31.10" "zstd==1.5.7.2"
+  {{< /tab >}}
+  {{< tab header="macOS" language="bash" >}}
+python -m pip install \
+  --index-url https://pypi.org/simple \
+  "executorch[ethos-u]==1.5.1" \
+  "torch==2.14.0" "torchvision==0.29.0" "torchao==0.18.0" \
+  "cmake==3.31.10" "zstd==1.5.7.2"
+  {{< /tab >}}
+{{< /tabpane >}}
+
+Check dependency consistency and the imports used by export and CMake code generation:
+
+```bash
+python -m pip check
+python - <<'PY'
+import executorch.codegen.tools.selective_build
+from executorch.backends.arm.ethosu import EthosUPartitioner
+from executorch.backends.arm.quantizer import EthosUQuantizer
+
+print("ExecuTorch installation verified")
+PY
+```
+
+The checks should report `No broken requirements found.` and `ExecuTorch installation verified`. These commands replace `install_executorch.sh`, which uses nightly and test indexes. If you rerun Arm setup, repeat this section before continuing.
 
 ## Download the model and sample audio
 
