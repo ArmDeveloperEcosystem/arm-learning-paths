@@ -20,7 +20,7 @@ The Arm Machine Learning Evaluation Kit (MLEK) is a set of embedded machine lear
 
 Ethos-U85 is an Arm NPU for accelerating neural networks in high-performance microcontroller designs, and is a primary target for the MLEK. Conformer is a good fit for this target because ASR depends on both local sound patterns and longer-range speech context. You'll export the model as an ExecuTorch `.pte` file using the Ethos-U ExecuTorch backend. Supported operations can therefore run on the Ethos-U85 NPU instead of only on the Cortex-M CPU.
 
-## Recognition quality considerations
+## Speech recognition quality considerations
 
 The [Conformer model](https://huggingface.co/Arm/stt_en_conformer_executorch_small/blob/87d021a59a62a4c9640b5b568067ae8063550d26/README.md) has about 10 million parameters and was trained on English LibriSpeech audio. The deployment uses INT8 quantization and a lightweight decoder that selects the most likely tokens without an additional language model. These choices keep memory and computation manageable for embedded deployment.
 
