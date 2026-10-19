@@ -69,7 +69,7 @@ The following plots show relative speedups for the ShareGPT ~512 input-token sub
 
 ### Qwen3 BF16 and INT8/W8A8 comparison
 
-![Qwen3 BF16 and INT8/W8A8 speedup for ShareGPT 512](images/qwen_512_new.png)
+![Qwen3 BF16 and INT8/W8A8 speedup for ShareGPT 512](images/qwen_512_new.webp)
 
 ## What you've accomplished
 
