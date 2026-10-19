@@ -157,8 +157,8 @@ The application lives in `source/app/use_case/alif_asr/`. The following files ex
 
 For the ExecuTorch build, `MainLoop.cc` uses `ConformerModel` as the ASR model wrapper. It creates two memory regions before entering the handler:
 
-- `modelMem` points to the generated model data
-- `computeMem` points to the activation buffer used while loading and running the model
+- `modelMem` points to the generated model data.
+- `computeMem` points to the activation buffer used while loading and running the model.
 
 The startup code initializes the model, checks tensor dimensions, loads the vocabulary labels, and creates the profiler. It adds the model, labels, profiler, and Conformer window and hop settings to an application context, then calls `ClassifyAudioHandler(caseContext)`. The context lets helpers share these settings without each owning the full application state.
 
