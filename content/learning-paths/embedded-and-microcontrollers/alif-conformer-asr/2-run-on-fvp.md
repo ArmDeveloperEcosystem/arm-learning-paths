@@ -6,11 +6,16 @@ weight: 3
 layout: "learningpathall"
 ---
 
-You will build the Arm MLEK `asr` application and run it on the Corstone-320 FVP. This checks the Conformer model, ExecuTorch runtime, audio preprocessing, and token decoding before you move to the Alif E8 AppKit.
-
 ## Understand the FVP ASR application
 
-The FVP application runs the same core ASR stages used later on the E8 AppKit:
+You'll build the Arm Machine Learning Evaluation Kit (MLEK) `asr` application and run it on the Corstone-320 Fixed Virtual Platform (FVP). The application checks the following before you move to the Alif E8 AppKit:
+
+- Conformer model
+- ExecuTorch runtime
+- Audio preprocessing
+- Token decoding 
+
+The FVP application runs the same core automatic speech recognition (ASR) stages used later on the E8 AppKit:
 
 1. Read 16 kHz audio samples from the built-in sample set.
 2. Convert the samples into Mel spectrogram features.
@@ -18,7 +23,11 @@ The FVP application runs the same core ASR stages used later on the E8 AppKit:
 4. Decode the output token scores with the SentencePiece vocabulary.
 5. Print the decoded text to the FVP console.
 
-On the FVP, the audio comes from WAV files compiled into the application and the result is printed over a simulated UART. On the E8 AppKit, an onboard PDM microphone is used, an external OSPI flash is configured to store the model, and an external screen displays the output. Besides these distinctions, the Conformer model format, preprocessing, inference, and token decoding stages all stay the same.
+On the FVP, the audio comes from WAV files compiled into the application. The result is printed over a simulated UART. 
+
+On the E8 AppKit, the audio comes from an onboard pulse-density modulation (PDM) microphone. An external Octal Serial Peripheral Interface (OSPI) flash stores the model, and an external screen displays the output. 
+
+Besides these distinctions, the Conformer model format, preprocessing, inference, and token decoding stages all stay the same.
 
 ## Build the FVP ASR application
 
@@ -28,7 +37,7 @@ Activate the Python environment created by the setup script:
 source resources_downloaded/env/bin/activate
 ```
 
-Configure the application with MLEK's `mps4-320-gcc` preset:
+Configure the application with the MLEK `mps4-320-gcc` preset:
 
 ```bash
 cmake -B build_fvp_asr \
@@ -38,7 +47,15 @@ cmake -B build_fvp_asr \
   -DETHOS_U_NPU_TIMING_ADAPTER_ENABLED=OFF
 ```
 
-The preset selects the MPS4 Corstone-320 platform, Cortex-M85 CPU, Ethos-U85 with 256 MACs, dedicated SRAM memory mode, and the GNU bare-metal toolchain. Disabling the timing adapter prepares this build for the functional fast-mode FVP run.
+The preset selects the following configuration:
+
+- MPS4 Corstone-320 platform
+- Cortex-M85 CPU
+- Ethos-U85 with 256 MACs
+- Dedicated SRAM memory mode
+- GNU bare-metal toolchain
+
+Disabling the timing adapter prepares this build for the functional fast-mode FVP run.
 
 Build only the ASR target:
 
@@ -46,19 +63,19 @@ Build only the ASR target:
 cmake --build build_fvp_asr --target mlek_asr --parallel
 ```
 
-The output application is:
+The output is similar to:
 
 ```output
 build_fvp_asr/bin/mlek_asr.axf
 ```
 
-An `.axf` file is the linked executable, in ELF format. It contains compiled code and data, their memory locations, and potentially debugging information. An FVP can load an appropriate AXF directly.
+An `.axf` file is the linked executable, in ELF format. It contains compiled code and data, their memory locations, and potentially debugging information. An FVP can load an appropriate `.axf` file directly.
 
 ## Install and verify the Corstone-320 FVP
 
-The MLEK resource setup script does not install the Corstone-320 FVP. Install the FVP before you run the built `mlek_asr.axf` application.
+The MLEK resource setup script doesn't install the Corstone-320 FVP. Install the FVP before you run the built `mlek_asr.axf` application.
 
-For macOS, install [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/) and start it before continuing. The macOS tab also activates the free MDK Community license for evaluation and non-commercial use.
+For macOS, ensure that [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/) is installed before continuing. On macOS, you'll also activate the free MDK Community license for evaluation and non-commercial use.
 
 {{< tabpane code=true >}}
   {{< tab header="Linux x86_64" language="bash">}}
@@ -109,7 +126,7 @@ FVP_Corstone_SSE-320 --version
   {{< /tab >}}
 {{< /tabpane >}}
 
-The `PATH` setting, and the Linux `runtime.sh` environment, apply only to the current terminal. Add the appropriate settings to your shell startup file if you open a new terminal later.
+The `PATH` setting and the Linux `runtime.sh` environment apply only to the current terminal. Add the appropriate settings to your shell startup file if you need to open a new terminal later.
 
 ## Run the application on the FVP
 
@@ -119,10 +136,10 @@ Return to the Arm MLEK repository root:
 cd "$HOME/ml-embedded-evaluation-kit"
 ```
 
-The generated model targets an Ethos-U85 with 256 MACs, so the FVP must use the matching `num_macs=256` setting. Run headlessly and enable the NPU's functional fast mode:
+The generated model targets an Ethos-U85 with 256 MACs, so the FVP must use the matching `num_macs=256` setting. Run headlessly and enable the NPU functional fast mode:
 
 {{% notice Note %}}
-Fast mode is for checking application behavior. Performance and cycle figures reported by this run are not meaningful. A timing-accurate run must keep the timing adapter enabled and omit `--fast`, and can take more than one hour.
+Fast mode is for checking application behavior. Performance and cycle figures reported by this run aren't meaningful. A timing-accurate run needs to keep the timing adapter enabled and omit `--fast`, and can take more than one hour.
 {{% /notice %}}
 
 ```bash
@@ -145,11 +162,7 @@ INFO - Using sample audio: another_door.wav
 INFO - Decoded output: and he walked immediately out of the apartment by another door
 ```
 
-The application uses audio samples compiled into the firmware at build time. By default, the `asr` use case reads WAV files from:
-
-```output
-resources/asr/samples/
-```
+The application uses audio samples compiled into the firmware at build time. By default, the `asr` use case reads WAV files from `resources/asr/samples/`.
 
 ## Use a custom audio sample
 
@@ -171,27 +184,25 @@ cmake --build build_fvp_asr --target mlek_asr --parallel
 
 The CMake configure step converts the WAV files into generated C/C++ files and compiles them into the firmware.
 
-Run the FVP command from the previous section again. The output should now identify your custom audio file:
+Run the `FVP_Corstone_SSE-320` command from earlier again. The output should now identify your custom audio file:
 
 ```output
 INFO - Using sample audio: my_clip.wav
 INFO - Decoded output: <recognized text>
 ```
 
-## Troubleshooting
+## Troubleshoot issues with the FVP ASR application
 
-- If macOS reports that it cannot find a compatible `executorch` or `tosa-tools` distribution, confirm that the host is Apple Silicon, macOS 15 or later, and using Python 3.10 through 3.12.
-- If the macOS FVP reports a license error, confirm that `~/.armlm` contains the active license cache. Repeat the activation step or use your organization's entitlement.
-- If Docker cannot access the `.axf` file, confirm that the MLEK repository is under your home directory and run the command from the repository root.
-- If Linux cannot find the FVP or its Python runtime, repeat the `PATH` export and source `FVP_Corstone_SSE-320/scripts/runtime.sh` in the current terminal.
+To troubleshoot issues with the FVP ASR application, consider the following guidance:
+
+- If macOS reports that it can't find a compatible `executorch` or `tosa-tools` distribution, confirm that the host is Apple silicon. Ensure that the host is running macOS 15 or later and using Python 3.10 through 3.12.
+- If the macOS FVP reports a license error, confirm that `~/.armlm` contains the active license cache. Repeat the activation step or use the entitlement for your organization.
+- If Docker can't access the `.axf` file, confirm that the MLEK repository is under your home directory. Run the command from the repository root.
+- If Linux can't find the FVP or its Python runtime, repeat the `PATH` export and source `FVP_Corstone_SSE-320/scripts/runtime.sh` in the current terminal.
 - If inference appears to stall, confirm that the build used `ETHOS_U_NPU_TIMING_ADAPTER_ENABLED=OFF` and that the FVP command includes `extra_args="--fast"`.
 
-{{% notice Note %}}
-Deactivate your environment before moving on.
-{{% /notice %}}
+## What you've accomplished and what's next
 
-## What you have accomplished and what is next
+You've built the Arm MLEK Conformer ASR application, and run it on the Corstone-320 FVP. Deactivate your environment before moving on.
 
-You have built the Arm MLEK Conformer ASR application, and run it on the Corstone-320 FVP.
-
-Next, you will clone the separate Alif MLEK repository, prepare the equivalent Conformer resources in its layout, and compare the board-specific application with the FVP application.
+Next, you'll clone the separate Alif MLEK repository and prepare the equivalent Conformer resources in its layout. You'll then compare the board-specific application with the FVP application.

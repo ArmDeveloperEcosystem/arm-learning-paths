@@ -8,38 +8,34 @@ layout: "learningpathall"
 
 ## Move from the FVP to the E8 AppKit
 
-Your FVP run verified the Conformer model, audio preprocessing, inference, and token decoding using recorded audio. You will now use those same ASR stages to recognize speech on the Alif Ensemble E8 AppKit.
+Your fixed virtual platform (FVP) run verified the Conformer model, audio preprocessing, inference, and token decoding using recorded audio. You'll now use those same automatic speech recognition (ASR) stages to recognize speech on the Alif Ensemble E8 AppKit.
 
-The board uses a separate application, `alif_asr`, from the Alif MLEK repository. You will build new firmware for the E8's high-performance Cortex-M55 core, capture audio from its PDM microphones, and read the transcription on the attached display.
+The board uses a separate application, `alif_asr`, from the Alif Machine Learning Evaluation Kit (MLEK) repository. You'll build new firmware for the high-performance Cortex-M55 core of the E8, and capture audio from its pulse-density modulation (PDM) microphones. You'll then read the transcription on the attached display.
 
 | FVP application | E8 AppKit application |
 | --- | --- |
 | Arm MLEK `asr`, built for Corstone-320 | Alif MLEK `alif_asr`, built for the E8 HP subsystem |
 | WAV samples compiled into the firmware | PDM microphone input |
 | Simulated UART output in your terminal | Transcription on the attached display |
-| Application and model loaded through the AXF file | Application in MRAM and model in external OSPI flash |
+| Application and model loaded through the AXF file | Application in MRAM and model in external Octal Serial Peripheral Interface (OSPI) flash |
 
 ## Connect the board
 
 {{% notice Important %}}
-Use an [Alif Ensemble E8 AI/ML AppKit](https://alifsemi.com/support/kits/ensemble-e8appkit/), or an [E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) with a supported display attached. The build command defaults to `AppKit-e8`; for the DevKit, select `-DTARGET_BOARD=DevKit-e8`. The measured validation later in this Learning Path used the DevKit.
+Use an [Alif Ensemble E8 AI/ML AppKit](https://alifsemi.com/support/kits/ensemble-e8appkit/), or an [E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) with a supported display attached. The build command defaults to `AppKit-e8`. For the DevKit, select `-DTARGET_BOARD=DevKit-e8`. Validation for this Learning Path was done using the DevKit.
 {{% /notice %}}
 
 To connect to the Alif Ensemble E8 AppKit:
 
 1. Unplug all USB cables from the AppKit before changing any jumpers.
-
-2. Verify that the jumpers are in their factory default positions, as shown in the Alif Ensemble E8 AI/ML AppKit (AK-E8-AIML) User Guide on [alifsemi.com](https://alifsemi.com/support/kits/ensemble-e8appkit/).
-
+2. Verify that the jumpers are in their factory default positions, as shown in the [Alif Ensemble E8 AI/ML AppKit (AK-E8-AIML) User Guide](https://alifsemi.com/support/kits/ensemble-e8appkit/).
 3. Connect a USB-C cable from your computer to the PRG USB port on the bottom edge of the AppKit.
-
-![Close-up of the Alif Ensemble E8 AppKit showing a USB-C cable connected to the PRG USB port; the separate MCU USB port is visible below#center](prg-usb-port.png "USB-C cable connected to the PRG USB port")
-
+  ![Close-up of the Alif Ensemble E8 AppKit showing a USB-C cable connected to the PRG USB port; the separate MCU USB port is visible below#center](prg-usb-port.png "USB-C cable connected to the PRG USB port")
 4. Confirm that a green LED illuminates near the E1 device and switch SW4.
 
 ## Install SETOOLS
 
-Secure Enclave Tools (SETOOLS) is Alif's toolset for flashing firmware to MRAM through the Secure Enclave.
+Secure Enclave Tools (SETOOLS) is the Alif toolset for flashing firmware to MRAM through the Secure Enclave.
 
 1. Download the SETOOLS package for your host operating system from the [Alif Ensemble E8 AppKit support page](https://alifsemi.com/support/kits/ensemble-e8appkit/) and extract it to your home directory, replacing the archive filename in the command:
 
@@ -72,7 +68,7 @@ Secure Enclave Tools (SETOOLS) is Alif's toolset for flashing firmware to MRAM t
   2. Navigate to **Privacy & Security**.
   3. Select **Open Anyway**, only if you trust the package downloaded from Alif.
 
-  Then, run the command again. Each executable can require separate approval: `app-write-mram`, `app-gen-toc`, and the `maintenance` and `tools-config` utilities used during board provisioning.
+  Then, run the command again. Each executable can require separate approval: `app-write-mram`, `app-gen-toc`, and the `maintenance` and `tools-config` utilities that are used during board provisioning.
   {{% /notice %}}
 
 
@@ -80,7 +76,7 @@ Secure Enclave Tools (SETOOLS) is Alif's toolset for flashing firmware to MRAM t
 
 The SEGGER J-Link Software and Documentation Pack includes J-Flash, which you'll use later to program the model into external OSPI flash.
 
-Install J-Link for your host operating system. The DevKit validation described later used version 9.36.
+Install J-Link for your host operating system. The DevKit validation was done using version 9.36.
 
 On Linux, run `uname -m` and download the matching `.deb` package from the [SEGGER website](https://www.segger.com/downloads/jlink/): x86-64 for `x86_64`, or ARM64 for `aarch64`. Replace the filename in the command:
 
@@ -126,9 +122,9 @@ python3 set_up_default_resources.py --ml-frameworks executorch --use-case asr
 source resources_downloaded/env/bin/activate
 ```
 
-This downloads the trained Conformer checkpoint and generates the Ethos-U85 `.pte` model. It creates a Python environment and runs `resources/asr/models/conformer_pte_gen.py` to export the model, calibrate INT8 quantization with the bundled WAV samples, and lower the graph for Ethos-U. The SentencePiece vocabulary is supplied in the repository. The board build uses these resources when it builds `mlek_alif_asr`. The first setup can take several minutes.
+This downloads the trained Conformer checkpoint and generates the Ethos-U85 `.pte` model. It creates a Python environment and runs `resources/asr/models/conformer_pte_gen.py` to export the model, calibrate INT8 quantization with the bundled WAV samples, and lower the graph for Ethos-U. The SentencePiece vocabulary is included in the repository. The board build uses these resources when it builds `mlek_alif_asr`. The first setup can take several minutes.
 
-Confirm the board model and vocabulary are available:
+Confirm that the board model and vocabulary are available:
 
 ```bash
 ls -lh \
@@ -136,11 +132,11 @@ ls -lh \
   resources/asr/labels/librispeech_sp.pieces
 ```
 
-The generated model used in the tested build is about 10.4 MB. The E8's application MRAM cannot hold that model alongside the firmware, so the build places the model in external flash accessed through the Octal Serial Peripheral Interface (OSPI).
+The generated model used in the tested build is about 10.4 MB. The application MRAM of the E8 can't hold that model alongside the firmware, so the build places the model in external flash accessed through the OSPI.
 
 ## Locate the board application
 
-The application lives in `source/app/use_case/alif_asr/`. These files explain the parts you will configure and run:
+The application lives in `source/app/use_case/alif_asr/`. These files explain the parts that you'll configure and run:
 
 | File | Role |
 | --- | --- |
@@ -150,15 +146,18 @@ The application lives in `source/app/use_case/alif_asr/`. These files explain th
 | `include/UseCaseHandler.hpp` | Declares the use-case handler |
 | `alif_asr.json` in the repository root | Describes the MRAM application package and HP boot configuration |
 
-`src/UseCaseHandlerTflm.cc` contains the alternative TensorFlow Lite Micro path. This Learning Path uses `UseCaseHandlerEt.cc`.
+`src/UseCaseHandlerTflm.cc` contains the alternative TensorFlow Lite Micro path. You'll use `UseCaseHandlerEt.cc` instead.
 
 ## Follow the startup and inference flow
 
-For the ExecuTorch build, `MainLoop.cc` uses `ConformerModel` as the ASR model wrapper. It creates two memory regions before entering the handler: `modelMem` points to the generated model data, and `computeMem` points to the activation buffer used while loading and running the model.
+For the ExecuTorch build, `MainLoop.cc` uses `ConformerModel` as the ASR model wrapper. It creates two memory regions before entering the handler: 
+
+- `modelMem` points to the generated model data
+- `computeMem` points to the activation buffer used while loading and running the model
 
 The startup code initializes the model, checks tensor dimensions, loads the vocabulary labels, and creates the profiler. It adds the model, labels, profiler, and Conformer window and hop settings to an application context, then calls `ClassifyAudioHandler(caseContext)`. The context lets helpers share these settings without each owning the full application state.
 
-The handler then:
+The handler then performs the following tasks:
 
 1. Gets the model tensors and creates the Conformer preprocessor and postprocessor.
 2. Initializes the display layout and the button callback.
@@ -179,17 +178,17 @@ USER_OPTION(${use_case}_MODEL_IN_EXT_FLASH "Run model from external flash"
     BOOL)
 ```
 
-With this option enabled, MLEK places model data in the `nn_model_ext_flash` section and generates `ext_flash.bin` separately from `mram.bin`. You will program both files in the next section.
+With this option enabled, MLEK places model data in the `nn_model_ext_flash` section and generates `ext_flash.bin` separately from `mram.bin`. You'll program both files.
 
-The board configuration uses `TARGET_SUBSYSTEM=RTSS-HP`, `TARGET_BOARD=AppKit-e8`, and `TARGET_MICS=PDM`. Its ExecuTorch memory pools are:
+The board configuration uses `TARGET_SUBSYSTEM=RTSS-HP`, `TARGET_BOARD=AppKit-e8`, and `TARGET_MICS=PDM`. The configuration has the following ExecuTorch memory pools:
 
 - `alif_asr_ACTIVATION_BUF_SZ=0x00108000` for the method allocator pool.
 - `ML_FWK_TMP_MEM_SIZE=0x002C0000` for temporary allocation.
 
 Keep these settings for the first run so that model selection, runtime memory, and the physical connections match the tested application.
 
-## What you have accomplished and what is next
+## What you've accomplished and what's next
 
-You have connected the board hardware, prepared the Alif MLEK model resources, and identified how the board application extends the ASR flow you ran on the FVP.
+You've connected the board hardware and prepared the Alif MLEK model resources. You've also identified how the board application extends the ASR flow that you ran on the FVP.
 
-Next, you will build the E8 firmware, program the model into OSPI flash, and install the application in MRAM.
+Next, you'll build the E8 firmware, program the model into OSPI flash, and install the application in MRAM.

@@ -1,46 +1,40 @@
 ---
-title: Get started with Conformer ASR and MLEK
+title: Set up Conformer ASR and MLEK resources
 description: Review the ASR flow, clone the Arm MLEK repository, and generate the ExecuTorch Conformer model resources used by the FVP application.
 weight: 2
 
 layout: "learningpathall"
 ---
 
-## What you will run
+## Automatic speech recognition with Conformer
 
-You will first run Conformer speech recognition on the Corstone-320 Fixed Virtual Platform (FVP) using recorded audio. Then you will capture a spoken phrase on an Alif Ensemble E8 board, run the model through ExecuTorch on its Ethos-U85 NPU, and read the transcription on the connected display. Speech processing runs locally on the board.
+Automatic speech recognition (ASR) converts speech audio into text. [Conformer](https://github.com/sooftware/conformer/) is a transformer-based neural network architecture used for speech tasks. It combines attention layers, which help the model use context from different parts of an utterance, with convolution layers, which help capture local audio patterns.
 
-## What is automatic speech recognition?
+You'll first run an application on the Corstone-320 Fixed Virtual Platform (FVP) that reads fixed 16 kHz recorded audio. The application converts the samples into Mel spectrogram features and runs a Conformer speech recognition model. It then decodes the output tokens into text. After running on the FVP, you'll extend the application to run on an Alif Ensemble E8. 
 
-Automatic speech recognition (ASR) converts speech audio into text. The application you will run reads fixed 16 kHz audio, converts the samples into Mel spectrogram features, runs a Conformer model, and decodes the output tokens into text.
-
-[Conformer](https://github.com/sooftware/conformer/) is a transformer-based neural network architecture used for speech tasks. It combines attention layers, which help the model use context from different parts of an utterance, with convolution layers, which help capture local audio patterns.
-
-The Conformer model in this flow does not take raw audio directly. The preprocessing code creates an 80-bin Mel spectrogram using a 512-sample window and 160-sample hop. The postprocessing code then removes repeated tokens and maps token IDs to text using the SentencePiece vocabulary.
-
-The [SentencePiece vocabulary](https://github.com/google/sentencepiece/blob/master/README.md#what-is-sentencepiece) is the token list used by the decoder. The model outputs token IDs, not finished words, and the vocabulary maps each ID to a text piece such as a letter, word fragment, or word-start marker.
+The [SentencePiece vocabulary](https://github.com/google/sentencepiece/blob/master/README.md#what-is-sentencepiece) is the token list used for decoding the output tokens. The model outputs token IDs, and the vocabulary maps each ID to a text piece such as a letter, word fragment, or word-start marker.
 
 ## The ML Evaluation Kit
 
-The Machine Learning Evaluation Kit (MLEK) is a set of embedded machine learning examples, build scripts, model resources, and deployment flows for Arm-based microcontroller systems. You will first use Arm MLEK's `asr` application on the FVP. Later, you will use Alif's MLEK application, `alif_asr`, which adds the E8 microphone, display, and memory configuration to this deployment flow.
+The Arm Machine Learning Evaluation Kit (MLEK) is a set of embedded machine learning examples, build scripts, model resources, and deployment flows for Arm-based microcontroller systems. You'll first use Arm MLEK's `asr` application on the FVP. Later, you'll use the Alif MLEK application, `alif_asr`, which adds the E8 microphone, display, and memory configuration to this deployment flow.
 
-Ethos-U85 is an Arm NPU for accelerating neural networks in high-performance microcontroller designs, and is a primary target for the MLEK. Conformer is a good fit for this target because ASR depends on both local sound patterns and longer-range speech context. In this flow, the model is exported as an ExecuTorch `.pte` file using the Ethos-U ExecuTorch backend, so supported operations can run on the Ethos-U85 NPU instead of only on the Cortex-M CPU.
+Ethos-U85 is an Arm NPU for accelerating neural networks in high-performance microcontroller designs, and is a primary target for the MLEK. Conformer is a good fit for this target because ASR depends on both local sound patterns and longer-range speech context. You'll export the model as an ExecuTorch `.pte` file using the Ethos-U ExecuTorch backend. Supported operations can therefore run on the Ethos-U85 NPU instead of only on the Cortex-M CPU.
 
-## Set expectations for recognition quality
+## Recognition quality considerations
 
 The [Conformer model](https://huggingface.co/Arm/stt_en_conformer_executorch_small/blob/87d021a59a62a4c9640b5b568067ae8063550d26/README.md) has about 10 million parameters and was trained on English LibriSpeech audio. The deployment uses INT8 quantization and a lightweight decoder that selects the most likely tokens without an additional language model. These choices keep memory and computation manageable for embedded deployment.
 
-Recognition also depends on the training data, speaker, and recording conditions. You might see substituted or missing words, or unusual word boundaries. Completed inference demonstrates that the deployment works; comparing the transcription with what you said is a separate accuracy check. You will check both when you test the board.
+Recognition also depends on the training data, speaker, and recording conditions. You might see substituted or missing words, or unusual word boundaries. Completed inference demonstrates that the deployment works. Comparing the transcription with what you said is a separate accuracy check. You'll check both when you test the board.
 
 ## Prepare your development host
 
 {{% notice Important %}}
-Use Linux on an x86_64 or aarch64 host, or use an **Apple Silicon Mac** running macOS 15 or later. 
+Use Linux on an x86_64 or aarch64 host, or use an Apple silicon Mac running macOS 15 or later. 
 
-The commands have not been validated on native Windows. WSL with USB passthrough can work with the E8 AppKit, but that configuration is outside the scope of this Learning Path.
+The commands haven't been validated on native Windows. WSL with USB passthrough can work with the E8 AppKit, but that configuration is beyond the scope of this Learning Path.
 {{% /notice %}}
 
-Use Python 3.12 for the tested setup. Install the host packages for your operating system. The macOS commands assume you have already installed [Homebrew](https://brew.sh/).
+Use Python 3.12 for the tested setup. Install the host packages for your operating system. The macOS commands assume that you've already installed [Homebrew](https://brew.sh/).
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu Linux" language="bash">}}
@@ -64,7 +58,7 @@ alias python3=/opt/homebrew/bin/python3.12
   {{< /tab >}}
 {{< /tabpane >}}
 
-Install the `arm-none-eabi` distribution of the [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/). The FVP and board builds were verified with Arm GNU Toolchain 15.3.Rel1 (GCC 15.3.1). Ensure `arm-none-eabi-gcc` is on your `PATH`.
+Install the `arm-none-eabi` distribution of the [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/). The FVP and board builds were verified with Arm GNU Toolchain 15.3.Rel1 (GCC 15.3.1). Ensure that `arm-none-eabi-gcc` is on your `PATH`.
 
 Verify the host and toolchain:
 
@@ -76,7 +70,7 @@ arm-none-eabi-gcc --version
 
 ## Clone the Arm MLEK repository
 
-Clone the Arm ML Embedded Evaluation Kit repository:
+Clone the Arm MLEK repository from GitLab:
 
 ```bash
 cd "$HOME"
@@ -88,7 +82,7 @@ git submodule update --init --recursive
 
 ## Set up ExecuTorch resources
 
-Run the setup script with ExecuTorch enabled. Selecting only the `asr` use case avoids generating resources for unrelated MLEK examples.
+Run the setup script with ExecuTorch enabled:
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu Linux" language="bash">}}
@@ -105,7 +99,9 @@ python3 set_up_default_resources.py \
   {{< /tab >}}
 {{< /tabpane >}}
 
-The first run creates a Python environment and downloads the pinned model and framework dependencies. It can take several minutes.
+Selecting only the `asr` use case avoids generating resources for unrelated MLEK examples.
+
+The first run creates a Python environment and downloads the pinned model and framework dependencies. The run can take several minutes.
 
 Confirm that MLEK generated the `.pte` models and that the vocabulary is present:
 
@@ -114,7 +110,7 @@ find resources_downloaded/asr -name '*.pte' -print
 ls -lh resources/asr/labels/librispeech_sp.pieces
 ```
 
-## How are the ExecuTorch .pte files generated?
+### How the ExecuTorch .pte files are generated
 
 The setup script is a wrapper around the MLEK resource pipeline. For the ASR use case, it does three jobs:
 
@@ -159,7 +155,7 @@ exported_program = export(
 graph_module = exported_program.module(check_guards=False)
 ```
 
-For Ethos-U targets, the script prepares the graph for post-training quantization using the ExecuTorch Arm backend's `EthosUQuantizer`. It calibrates the graph by running the model over the WAV files in `resources/asr/samples/`, using the same log Mel spectrogram preprocessing as the application:
+For Ethos-U targets, the script prepares the graph for post-training quantization using the ExecuTorch Arm backend `EthosUQuantizer`. It calibrates the graph by running the model over the WAV files in `resources/asr/samples/`, using the same log Mel spectrogram preprocessing as the application:
 
 ```python
 quantizer = EthosUQuantizer(compile_spec)
@@ -180,7 +176,7 @@ partitioner = EthosUPartitioner(compile_spec)
 exported_program = export(quantized_graph_module, example_inputs, strict=True)
 ```
 
-Finally, ExecuTorch lowers the exported program to the edge form, applies the Ethos-U partitioner, converts the result to an ExecuTorch program, and writes the `.pte` file:
+Finally, ExecuTorch lowers the exported program to the edge form and applies the Ethos-U partitioner. ExecuTorch then converts the result to an ExecuTorch program and writes the `.pte` file:
 
 ```python
 edge_program_manager = to_edge_transform_and_lower(
@@ -197,17 +193,16 @@ save_pte_program(
 )
 ```
 
-- The `.pte` model file contains the ExecuTorch program that runs the Conformer network.
-- The `.pieces` vocabulary file contains the text tokens used to decode the model output.
+The `.pte` model file contains the ExecuTorch program that runs the Conformer network. The `.pieces` vocabulary file contains the text tokens used to decode the model output.
 
-At runtime, the application converts audio into Mel spectrogram features, runs the `.pte` model, and then uses the vocabulary file to turn model output IDs into text.
+At runtime, the application converts audio into Mel spectrogram features. It then runs the `.pte` model and uses the vocabulary file to turn model output IDs into text.
 
 The vocab file is a line-by-line token list. During postprocessing, the decoder uses the model output value as an index into this list.
 
-Each entry is a piece of text. Some pieces are single letters, some are word fragments, and some represent common words or word starts. SentencePiece uses the `▁` marker to represent a word boundary, so `▁the` means the token starts a new word.
+Each entry is a piece of text. Some pieces are single letters, some are word fragments, and some represent common words or word starts. SentencePiece uses the `▁` marker to represent a word boundary, so `▁the` means that the token starts a new word.
 
-## What you have accomplished and what is next
+## What you've accomplished and what's next
 
-You have reviewed how the Conformer ASR application fits into MLEK, cloned the Arm MLEK repository, and generated the ExecuTorch `.pte` model and vocabulary resources used by the FVP application.
+You've reviewed how the Conformer ASR application fits into MLEK. You've also cloned the Arm MLEK repository and generated the ExecuTorch `.pte` model and vocabulary resources used by the FVP application.
 
-Next, you will build and run the ASR application on the Corstone-320 FVP.
+Next, you'll build and run the ASR application on the Corstone-320 FVP.
