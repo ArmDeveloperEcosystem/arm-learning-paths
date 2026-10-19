@@ -9,11 +9,13 @@ layout: learningpathall
 
 ## Check the baseline operators
 
-Pass `models/baseline.tflite` to Arm ML Inference Advisor (MLIA). It converts the model automatically and selects the backend for the `neural-technology` target profile:
+Pass `models/baseline.tflite` to Arm ML Inference Advisor (MLIA). It converts the model automatically and selects the backend for the `neural-technology` target profile.
 
 {{% notice License %}}
 On your first check, MLIA offers to install the bundled neural acceleration (NX) Performance Estimator. Confirm installation when prompted, then read its Arm license and continue only if you agree. If the backend is already installed, MLIA skips this setup.
 {{% /notice %}}
+
+Run the compatibility check:
 
 ```bash
 mlia check models/baseline.tflite --target-profile neural-technology --compatibility --output-dir runs/baseline-compatibility
@@ -55,6 +57,6 @@ If a check fails, inspect the non-passing checks and linked entities of the repo
 
 ## What you've accomplished and what's next
 
-You've checked the baseline's operator compatibility without a manual conversion step. 
+You've checked the baseline's operator compatibility without a manual conversion step.
 
 Next, you'll collect performance estimates and inspect their breakdowns.

@@ -31,10 +31,10 @@ The expected final output is:
 models/baseline.tflite: OK
 ```
 
-MLIA runs the installed converter and saves the intermediate artifacts with its reports. Keep the downloaded model in your working directory. 
+MLIA runs the installed converter and saves the intermediate artifacts with its reports. Keep the downloaded model in your working directory.
 
 ## What you've accomplished and what's next
 
-You've downloaded and verified the quantized MobileNet baseline. 
+You've downloaded and verified the quantized MobileNet baseline.
 
 Next, you'll check whether its operators are supported by passing `models/baseline.tflite` directly to MLIA.

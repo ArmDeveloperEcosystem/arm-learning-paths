@@ -1,6 +1,6 @@
 ---
 title: Compare a smaller model under the same target profile
-description: Convert a smaller-input public MobileNet variant, recheck compatibility, and compare NX estimates without confusing lower cost with preserved accuracy.
+description: Download and analyze a smaller-input public MobileNet variant with MLIA, then compare its NX estimates with the baseline under the same target profile.
 weight: 7
 
 ### FIXED, DO NOT MODIFY

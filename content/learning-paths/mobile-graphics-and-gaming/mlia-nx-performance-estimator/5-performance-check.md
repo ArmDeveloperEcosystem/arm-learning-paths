@@ -1,6 +1,6 @@
 ---
-title: Estimate performance and inspect configurations
-description: Run the NX Performance Estimator, read standardized model and scheduling metrics, and compare built-in or custom target configurations.
+title: Estimate baseline performance and inspect reports
+description: Estimate baseline NX performance with MLIA, inspect report metrics and breakdowns, and optionally compare a built-in target profile.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -72,7 +72,7 @@ Keep the model unchanged when exploring a different target configuration. For ex
 mlia check models/baseline.tflite --target-profile NX-peak-12SC-8NX-600MHz --performance --output-dir runs/baseline-peak
 ```
 
-Differences in performance reflect the system and compiler assumptions of the profile, not a model optimization. 
+Differences in performance reflect the system and compiler assumptions of the profile, not a model optimization.
 
 ## What you've accomplished and what's next
 

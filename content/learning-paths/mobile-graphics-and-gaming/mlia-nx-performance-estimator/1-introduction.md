@@ -11,11 +11,11 @@ layout: learningpathall
 
 Arm ML Inference Advisor (MLIA) helps you evaluate a model for an Arm target before you build a deployment pipeline or tune an application on a device. You provide a model and a target profile, then inspect compatibility checks, performance metrics, and advice.
 
-You'll use the `mlia-neural-technology` package to evaluate two pretrained, quantized MobileNet V1 image classifiers from TensorFlow's public model catalog. You'll compare a baseline with a smaller-input variant under the same Neural Technology configuration. You don't need a model stored in this repository or a device to run the estimator.
+You'll use the `mlia-neural-technology` package to evaluate two pretrained, quantized MobileNet V1 image classifiers from the TensorFlow public model catalog. You'll compare a baseline with a smaller-input variant under the same Neural Technology configuration. You don't need a model stored in this repository or a device to run the estimator.
 
 The tested example reduces estimated total cycles from `136,962` to `79,824`. These are compiler estimates, not device measurements or an accuracy result. You'll learn about the model and configuration assumptions behind this comparison in [Compare a smaller model under the same target profile](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/6-iterate-and-compare/).
 
-If you have an neural accelerator (NX)-capable Android device and a compatible native Vulkan driver, you can execute the model on the device. You can then bring a measured capture back to MLIA. For more information, see [(Optional) Run and profile the model on an NX device](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/7-run-on-nx-device/).
+If you have a neural accelerator (NX)-capable Android device and a compatible native Vulkan driver, you can execute the model on the device. You can then bring a measured capture back to MLIA. For more information, see [(Optional) Run and profile the model on an NX device](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/7-run-on-nx-device/).
 
 ## How the NX and Ethos-U workflows are connected
 
@@ -39,6 +39,6 @@ The Neural Technology plugin supplies `neural-technology`, `NX-peak-12SC-8NX-600
 
 ## What you've learned and what's next
 
-You've learned how model conversion, compatibility analysis, and performance estimation fit together. 
+You've learned how model conversion, compatibility analysis, and performance estimation fit together.
 
 Next, you'll install the public packages and verify that the Neural Technology profiles are available.

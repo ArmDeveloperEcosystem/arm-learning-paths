@@ -51,7 +51,7 @@ The following steps configure the public Neural Statistics layer for the unmodif
 
 ### Prepare the baseline scenario on the host
 
-Run the remaining host commands from `mlia-demo` in the same Bash shell. 
+Run the remaining host commands from `mlia-demo` in the same Bash shell.
 
 Create a separate environment for NumPy, copy the compiled model as `baseline.vgf`, and download the [ready-made MobileNet scenario](mobilenet-scenario.json):
 
@@ -236,13 +236,13 @@ Your cycle counts will depend on the device and its configuration.
 
 ## Use the measurements
 
-`mlia-output.json` shows accelerator cycles and `benchmark.json` shows graph execution times. Use both when comparing your next model version on the same device. 
+`mlia-output.json` shows accelerator cycles and `benchmark.json` shows graph execution times. Use both when comparing your next model version on the same device.
 
-Check the predictions predictions on real images as well. A faster model isn't useful if it misses your accuracy target.
+Check the predictions on real images as well. A faster model isn't useful if it misses your accuracy target.
 
 
 ## What you've accomplished
 
-You've learned how to run the VGF file on an NX-capable device and validate output. You've also learned how to collect a structured neural statistics capture and return it to MLIA for measured analysis. 
+You've run the VGF file on an NX-capable device, checked that Scenario Runner completed, and confirmed that the neural statistics capture contains data. You've also returned the capture to MLIA for measured analysis.
 
 Use this evidence alongside model accuracy tests and end-to-end application profiling before making deployment decisions for your own use cases.

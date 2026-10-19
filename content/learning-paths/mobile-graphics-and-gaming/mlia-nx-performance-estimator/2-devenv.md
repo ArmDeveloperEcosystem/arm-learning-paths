@@ -48,7 +48,7 @@ These are public PyPI packages. The Neural Technology plugin installs the follow
 
 - A compatible Arm ML Inference Advisor (MLIA) core
 - The ML SDK Model Converter
-- Tensor Operator Set Architecture (TOSA) tools  
+- Tensor Operator Set Architecture (TOSA) tools
 
 The LiteRT converter plugin lets MLIA analyze `.tflite` files directly. You don't need TensorFlow, a GPU driver, or a separate model-training environment for this example.
 
@@ -78,6 +78,6 @@ If pip reports that no matching distribution exists for `mlia-neural-technology`
 
 ## What you've accomplished and what's next
 
-You've installed MLIA with the Neural Technology and LiteRT converter plugins. 
+You've installed MLIA with the Neural Technology and LiteRT converter plugins.
 
 Next, you'll download a pretrained MobileNet baseline to analyze with MLIA.
