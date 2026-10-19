@@ -25,6 +25,7 @@ Current shared skills:
 - Install guide structure review: `.github/skills/install-guide-structure-review/SKILL.md`
 - Writing style and voice review: `.github/skills/writing-style-review/SKILL.md`
 - Front matter and metadata audits: `.github/skills/frontmatter-audit/SKILL.md`
+- Draft visibility metadata during content intake: `.github/skills/intake-metadata-update/SKILL.md`
 - Metadata descriptions: `.github/skills/metadata-description-update/SKILL.md`
 - SEO, GEO, AEO, and AI-agent discoverability: `.github/skills/seo-geo-aeo-review/SKILL.md`
 - Markdown components: `.github/skills/markdown-component-edit/SKILL.md`
