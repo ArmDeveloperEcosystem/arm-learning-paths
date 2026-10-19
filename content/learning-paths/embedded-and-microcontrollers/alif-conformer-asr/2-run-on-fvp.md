@@ -139,7 +139,7 @@ cd "$HOME/ml-embedded-evaluation-kit"
 The generated model targets an Ethos-U85 with 256 MACs, so the FVP must use the matching `num_macs=256` setting. Run headlessly and enable the NPU functional fast mode:
 
 {{% notice Note %}}
-Fast mode is for checking application behavior. Performance and cycle figures reported by this run aren't meaningful. A timing-accurate run needs to keep the timing adapter enabled and omit `--fast`, and can take more than one hour.
+Fast mode is for checking application behavior. Performance and cycle figures reported by this run aren't meaningful. For a timing-accurate run, keep the timing adapter enabled and omit `--fast`. A timing-accurate run can take more than one hour.
 {{% /notice %}}
 
 ```bash
@@ -184,7 +184,7 @@ cmake --build build_fvp_asr --target mlek_asr --parallel
 
 The CMake configure step converts the WAV files into generated C/C++ files and compiles them into the firmware.
 
-Run the `FVP_Corstone_SSE-320` command from earlier again. The output should now identify your custom audio file:
+Run the `FVP_Corstone_SSE-320` command again. The output should now identify your custom audio file:
 
 ```output
 INFO - Using sample audio: my_clip.wav

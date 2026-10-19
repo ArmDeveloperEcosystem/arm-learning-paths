@@ -122,15 +122,15 @@ cd "$SETOOLS_ROOT" && \
 ./app-write-mram -c "$ALIF_PORT" -p
 ```
 
-The `&&` operators prevent the write if package generation fails. Continue only after both commands succeed and the write reaches 100% followed by `Done`. The `-c` option selects the serial port; `-p` pads the images to a 16-byte boundary.
+The `&&` operators prevent the write if package generation fails. Continue only after both commands succeed and the write reaches 100% followed by `Done`. The `-c` option selects the serial port, and `-p` pads the images to a 16-byte boundary.
 
-Press and release **RESET** so the stubs boot.
+Press and release **RESET** so that the stubs boot.
 
 ## Program external OSPI flash with J-Flash
 
-Keep the **PRG USB** cable connected after installing and resetting the CPU stubs. Close any SETOOLS session or serial terminal that is using the board. The onboard J-Link uses this same cable; a second debugger cable is not needed.
+Keep the **PRG USB** cable connected after installing and resetting the CPU stubs. Close any SETOOLS session or serial terminal that's using the board. The onboard J-Link uses this same cable, so you don't need a second debugger cable.
 
-The steps follow the [Alif MLEK J-Flash guide](https://github.com/alifsemi/alif_ml-embedded-evaluation-kit/blob/0b6ce72c495265501f7a12eaed8e6ea71ef4bf15/docs/programming_flash_jlink.md#j-flash-project). The screenshots that follow show J-Flash V9.78 on macOS.
+For more information, see the [Alif MLEK J-Flash guide](https://github.com/alifsemi/alif_ml-embedded-evaluation-kit/blob/0b6ce72c495265501f7a12eaed8e6ea71ef4bf15/docs/programming_flash_jlink.md#j-flash-project). The screenshots that follow show J-Flash V9.78 on macOS.
 
 1. Open **J-Flash**, select **Create new project**, then select **Start J-Flash**.
 
@@ -214,11 +214,11 @@ To troubleshoot programming problems, consider the following guidance:
 
 | Symptom | Check |
 | --- | --- |
-| SETOOLS opens the serial port but reports `Target did not respond` | Close other serial programs, select SW4 **SE**, reset the board, and retry with the current port |
-| A part or revision mismatch appears | Select the detected device in `tools-config`, regenerate the package, and retry |
-| J-Flash can't connect to the probe | Check PRG USB, close other debugger programs, and return USB access to the J-Flash host if using WSL |
-| J-Flash cannot prepare the OSPI flash algorithm | Check the part, OSPI bank, and that the CPU stubs were written and booted |
-| The board still boots a previous application | Check the copied `mram.bin` and regenerate the package with `alif_asr.json` before writing again |
+| SETOOLS opens the serial port but reports `Target did not respond` | Close other serial programs, select SW4 **SE**, reset the board, and retry with the current port. |
+| A part or revision mismatch appears | Select the detected device in `tools-config`, regenerate the package, and retry. |
+| J-Flash can't connect to the probe | Check PRG USB, close other debugger programs, and return USB access to the J-Flash host if using WSL. |
+| J-Flash can't prepare the OSPI flash algorithm | Check the part, OSPI bank, and that the CPU stubs were written and booted. |
+| The board still boots a previous application | Check the copied `mram.bin` and regenerate the package with `alif_asr.json` before writing again. |
 
 ## What you've accomplished and what's next
 

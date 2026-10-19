@@ -10,13 +10,13 @@ layout: "learningpathall"
 
 Automatic speech recognition (ASR) converts speech audio into text. [Conformer](https://github.com/sooftware/conformer/) is a transformer-based neural network architecture used for speech tasks. It combines attention layers, which help the model use context from different parts of an utterance, with convolution layers, which help capture local audio patterns.
 
-You'll first run an application on the Corstone-320 Fixed Virtual Platform (FVP) that reads fixed 16 kHz recorded audio. The application converts the samples into Mel spectrogram features and runs a Conformer speech recognition model. It then decodes the output tokens into text. After running on the FVP, you'll extend the application to run on an Alif Ensemble E8.
+You'll first run an application on the Corstone-320 Fixed Virtual Platform (FVP) that reads fixed 16 kHz recorded audio. The application converts the samples into 80-bin Mel spectrogram features using a 512-sample window and 160-sample hop. It runs a Conformer speech recognition model, then decodes the output tokens into text. After running on the FVP, you'll extend the application to work on a spoken phrase on an Alif Ensemble E8 board.
 
 The [SentencePiece vocabulary](https://github.com/google/sentencepiece/blob/master/README.md#what-is-sentencepiece) is the token list used for decoding the output tokens. The model outputs token IDs, and the vocabulary maps each ID to a text piece such as a letter, word fragment, or word-start marker.
 
-## The ML Evaluation Kit
+## Arm Machine Learning Evaluation Kit
 
-The Arm Machine Learning Evaluation Kit (MLEK) is a set of embedded machine learning examples, build scripts, model resources, and deployment flows for Arm-based microcontroller systems. You'll first use Arm MLEK's `asr` application on the FVP. Later, you'll use the Alif MLEK application, `alif_asr`, which adds the E8 microphone, display, and memory configuration to this deployment flow.
+The Arm Machine Learning Evaluation Kit (MLEK) is a set of embedded machine learning examples, build scripts, model resources, and deployment flows for Arm-based microcontroller systems. You'll first use the Arm MLEK `asr` application on the FVP. Later, you'll use the Alif MLEK application, `alif_asr`, which adds the E8 microphone, display, and memory configuration to this deployment flow.
 
 Ethos-U85 is an Arm NPU for accelerating neural networks in high-performance microcontroller designs, and is a primary target for the MLEK. Conformer is a good fit for this target because ASR depends on both local sound patterns and longer-range speech context. You'll export the model as an ExecuTorch `.pte` file using the Ethos-U ExecuTorch backend. Supported operations can therefore run on the Ethos-U85 NPU instead of only on the Cortex-M CPU.
 
@@ -31,10 +31,10 @@ Recognition also depends on the training data, speaker, and recording conditions
 {{% notice Important %}}
 Use Linux on an x86_64 or aarch64 host, or use an Apple silicon Mac running macOS 15 or later.
 
-The commands haven't been validated on native Windows. WSL with USB passthrough can work with the E8 AppKit, but that configuration is beyond the scope of this Learning Path.
+The commands haven't been validated on native Windows. Windows Subsystem for Linux (WSL) with USB passthrough can work with the E8 AppKit, but that configuration is beyond the scope of this Learning Path.
 {{% /notice %}}
 
-Use Python 3.12 for the tested setup. Install the host packages for your operating system. The macOS commands assume that you've already installed [Homebrew](https://brew.sh/).
+Use Python 3.12 for the tested setup. Install the host packages for your operating system. If you're using an Apple silicon Mac, ensure that you've already installed [Homebrew](https://brew.sh/).
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu Linux" language="bash">}}

@@ -8,16 +8,18 @@ layout: "learningpathall"
 
 ## Move from the FVP to the E8 AppKit
 
-Your fixed virtual platform (FVP) run verified the Conformer model, audio preprocessing, inference, and token decoding using recorded audio. You'll now use those same automatic speech recognition (ASR) stages to recognize speech on the Alif Ensemble E8 AppKit.
+Your Fixed Virtual Platform (FVP) run verified the Conformer model, audio preprocessing, inference, and token decoding using recorded audio. You'll now use those same automatic speech recognition (ASR) stages to recognize speech on the Alif Ensemble E8 AppKit.
 
 The board uses a separate application, `alif_asr`, from the Alif Machine Learning Evaluation Kit (MLEK) repository. You'll build new firmware for the high-performance Cortex-M55 core of the E8, and capture audio from its pulse-density modulation (PDM) microphones. You'll then read the transcription on the attached display.
+
+The following table is a comparison between the FVP and E8 applications:
 
 | FVP application | E8 AppKit application |
 | --- | --- |
 | Arm MLEK `asr`, built for Corstone-320 | Alif MLEK `alif_asr`, built for the E8 HP subsystem |
 | WAV samples compiled into the firmware | PDM microphone input |
 | Simulated UART output in your terminal | Transcription on the attached display |
-| Application and model loaded through the AXF file | Application in MRAM and model in external Octal Serial Peripheral Interface (OSPI) flash |
+| Application and model loaded through the `.axf` file | Application in MRAM and model in external Octal Serial Peripheral Interface (OSPI) flash |
 
 ## Connect the board
 
@@ -37,6 +39,8 @@ To connect to the Alif Ensemble E8 AppKit:
 ## Install SETOOLS
 
 Secure Enclave Tools (SETOOLS) is the Alif toolset for flashing firmware to MRAM through the Secure Enclave.
+
+To install SETOOLS:
 
 1. Download the SETOOLS package for your host operating system from the [Alif Ensemble E8 AppKit support page](https://alifsemi.com/support/kits/ensemble-e8appkit/) and extract it to your home directory, replacing the archive filename in the command:
 
@@ -93,7 +97,7 @@ sudo apt install ./replace_with_your_jlink_download.deb
 
 ## Clone the Alif MLEK repository
 
-Before you begin, use Python 3.12 as configured during host setup. Leave any active virtual environment and check your version:
+Before you begin, use Python 3.12 as configured during host setup. Deactivate any active virtual environment in the shell and check your version:
 
 ```bash
 if type deactivate >/dev/null 2>&1; then deactivate; fi
@@ -137,7 +141,7 @@ The generated model used in the tested build is about 10.4 MB. The application M
 
 ## Locate the board application
 
-The application lives in `source/app/use_case/alif_asr/`. These files explain the parts that you'll configure and run:
+The application lives in `source/app/use_case/alif_asr/`. The following files explain the parts that you'll configure and run:
 
 | File | Role |
 | --- | --- |
@@ -183,8 +187,8 @@ With this option enabled, MLEK places model data in the `nn_model_ext_flash` sec
 
 The board configuration uses `TARGET_SUBSYSTEM=RTSS-HP`, `TARGET_BOARD=AppKit-e8`, and `TARGET_MICS=PDM`. The configuration has the following ExecuTorch memory pools:
 
-- `alif_asr_ACTIVATION_BUF_SZ=0x00108000` for the method allocator pool.
-- `ML_FWK_TMP_MEM_SIZE=0x002C0000` for temporary allocation.
+- `alif_asr_ACTIVATION_BUF_SZ=0x00108000` for the method allocator pool
+- `ML_FWK_TMP_MEM_SIZE=0x002C0000` for temporary allocation
 
 Keep these settings for the first run so that model selection, runtime memory, and the physical connections match the tested application.
 

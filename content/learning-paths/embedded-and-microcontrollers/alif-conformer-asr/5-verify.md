@@ -65,7 +65,7 @@ The following values were observed on an E8 DevKit with an attached LCD and an `
 
 The firmware reported a 400 MHz Cortex-M55 HP clock and an Ethos-U85 with 256 MACs per cycle in `Shared_Sram` mode. It ran bare-metal on the HP core with no debugger attached. OS thread count and CPU affinity don't apply.
 
-These are measurements from one test session. Don't treat these values as pass thresholds or a word-error-rate benchmark. The LCD timings were reported by the operator. The decoded output and NPU counters for the second phrase were captured from UART. Repeated `ARM_PDM_EVENT_ERROR` messages were also present. Their cause and relationship to the recognition errors weren't established.
+These are measurements from one test session. These values are therefore not pass thresholds or a word-error-rate benchmark. The LCD timings were reported by the operator. The decoded output and NPU counters for the second phrase were captured from UART. Repeated `ARM_PDM_EVENT_ERROR` messages were also present. Their cause and relationship to the recognition errors weren't established.
 
 The following software configuration was used for testing:
 
@@ -111,6 +111,6 @@ To fix issues with the application, consider the following guidance:
 
 ## What you've accomplished
 
-You've programmed the E8, captured live speech, assessed its transcription, confirmed Ethos-U85 inference through hardware counters, and checked standalone restart.
+You've programmed the E8, captured live speech, and assessed its transcription. You've also confirmed Ethos-U85 inference through hardware counters and checked standalone restart.
 
 You can now use the Learning Path as a starting point for evaluating offline speech recognition with your own speakers and recording conditions.
