@@ -25,7 +25,7 @@ If the port was open before you changed **SW4**, close and reopen it. Press and 
 
 Locate the joystick as shown in the user guide for your board: the [E8 AppKit User Guide](https://alifsemi.com/download/AUGD0028) or the [E8 DevKit support page](https://alifsemi.com/support/kits/ensemble-e8devkit/).
 
-1. Press straight down on the centre of the joystick and hold it.
+1. Press straight down on the center of the joystick and hold it.
 2. Say a short phrase while holding it.
 3. Release the joystick after you finish speaking.
 4. Wait for the transcription to appear on the display and a `Decoded output:` line to appear in the console.
@@ -111,4 +111,6 @@ To fix issues with the application, consider the following guidance:
 
 ## What you've accomplished
 
-You've programmed the E8, captured live speech, assessed its transcription, confirmed Ethos-U85 inference through hardware counters, and checked standalone restart. You can now use the Learning Path as a starting point for evaluating offline speech recognition with your own speakers and recording conditions.
+You've programmed the E8, captured live speech, assessed its transcription, confirmed Ethos-U85 inference through hardware counters, and checked standalone restart.
+
+You can now use the Learning Path as a starting point for evaluating offline speech recognition with your own speakers and recording conditions.

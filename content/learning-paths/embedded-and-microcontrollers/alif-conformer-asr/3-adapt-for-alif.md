@@ -1,6 +1,6 @@
 ---
 title: Prepare the Alif E8 ASR application and model
-description: Prepare the Alif MLEK resources and compare the board application with the ASR application you ran on the FVP.
+description: Connect the Alif E8, install SETOOLS and J-Link, prepare Alif MLEK resources, and compare the board application with the FVP ASR application.
 weight: 4
 
 layout: "learningpathall"
@@ -30,7 +30,8 @@ To connect to the Alif Ensemble E8 AppKit:
 1. Unplug all USB cables from the AppKit before changing any jumpers.
 2. Verify that the jumpers are in their factory default positions, as shown in the [Alif Ensemble E8 AI/ML AppKit (AK-E8-AIML) User Guide](https://alifsemi.com/support/kits/ensemble-e8appkit/).
 3. Connect a USB-C cable from your computer to the PRG USB port on the bottom edge of the AppKit.
-  ![Close-up of the Alif Ensemble E8 AppKit showing a USB-C cable connected to the PRG USB port; the separate MCU USB port is visible below#center](prg-usb-port.png "USB-C cable connected to the PRG USB port")
+
+   ![Close-up of the Alif Ensemble E8 AppKit showing a USB-C cable connected to the PRG USB port; the separate MCU USB port is visible below#center](prg-usb-port.png "USB-C cable connected to the PRG USB port")
 4. Confirm that a green LED illuminates near the E1 device and switch SW4.
 
 ## Install SETOOLS
@@ -39,37 +40,37 @@ Secure Enclave Tools (SETOOLS) is the Alif toolset for flashing firmware to MRAM
 
 1. Download the SETOOLS package for your host operating system from the [Alif Ensemble E8 AppKit support page](https://alifsemi.com/support/kits/ensemble-e8appkit/) and extract it to your home directory, replacing the archive filename in the command:
 
-  ```bash
+   ```bash
     cd "$HOME/Downloads"
     tar xvf "replace_with_your_alif_security_toolkit_download.tar" -C "$HOME"
-  ```
+   ```
 
 2. Verify the installation:
 
-  {{< tabpane code=true >}}
+   {{< tabpane code=true >}}
     {{< tab header="macOS" language="bash" >}}
     cd "$HOME/app-release-exec-macos"
     ./app-write-mram -h
     ./app-gen-toc -h
     {{< /tab >}}
-  {{< tab header="Linux" language="bash" >}}
+   {{< tab header="Linux" language="bash" >}}
     cd "$HOME/app-release-exec-linux"
     ./app-write-mram -h
     ./app-gen-toc -h
-  {{< /tab >}}
-  {{< /tabpane >}}
+   {{< /tab >}}
+   {{< /tabpane >}}
 
-  The extracted folder name can vary by SETOOLS release. The commands assume the package extracts to `app-release-exec-*`. Each command should print a `usage:` message. If either command fails, check that you're in the extracted SETOOLS directory for your operating system.
+   The extracted folder name can vary by SETOOLS release. The commands assume the package extracts to `app-release-exec-*`. Each command should print a `usage:` message. If either command fails, check that you're in the extracted SETOOLS directory for your operating system.
 
-  {{% notice Important %}}
-  On macOS, the system might block the unsigned binary the first time you run it. If this happens, do the following:
+   {{% notice Important %}}
+   On macOS, the system might block the unsigned binary the first time you run it. If this happens, do the following:
 
-  1. Open **System Settings**.
-  2. Navigate to **Privacy & Security**.
-  3. Select **Open Anyway**, only if you trust the package downloaded from Alif.
+   1. Open **System Settings**.
+   2. Navigate to **Privacy & Security**.
+   3. Select **Open Anyway**, only if you trust the package downloaded from Alif.
 
-  Then, run the command again. Each executable can require separate approval: `app-write-mram`, `app-gen-toc`, and the `maintenance` and `tools-config` utilities that are used during board provisioning.
-  {{% /notice %}}
+   Then, run the command again. Each executable can require separate approval: `app-write-mram`, `app-gen-toc`, and the `maintenance` and `tools-config` utilities that are used during board provisioning.
+   {{% /notice %}}
 
 
 ## Install J-Link
@@ -78,7 +79,7 @@ The SEGGER J-Link Software and Documentation Pack includes J-Flash, which you'll
 
 Install J-Link for your host operating system. The DevKit validation was done using version 9.36.
 
-On Linux, run `uname -m` and download the matching `.deb` package from the [SEGGER website](https://www.segger.com/downloads/jlink/): x86-64 for `x86_64`, or ARM64 for `aarch64`. Replace the filename in the command:
+On Linux, run `uname -m` and download the matching `.deb` package from [SEGGER J-Link downloads](https://www.segger.com/downloads/jlink/): x86-64 for `x86_64`, or ARM64 for `aarch64`. Replace the filename in the command:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS" language="bash">}}
@@ -150,7 +151,7 @@ The application lives in `source/app/use_case/alif_asr/`. These files explain th
 
 ## Follow the startup and inference flow
 
-For the ExecuTorch build, `MainLoop.cc` uses `ConformerModel` as the ASR model wrapper. It creates two memory regions before entering the handler: 
+For the ExecuTorch build, `MainLoop.cc` uses `ConformerModel` as the ASR model wrapper. It creates two memory regions before entering the handler:
 
 - `modelMem` points to the generated model data
 - `computeMem` points to the activation buffer used while loading and running the model
@@ -162,7 +163,7 @@ The handler then performs the following tasks:
 1. Gets the model tensors and creates the Conformer preprocessor and postprocessor.
 2. Initializes the display layout and the button callback.
 3. Initializes the PDM microphone path at 16 kHz.
-4. Waits for a joystick centre press and captures audio while you hold it.
+4. Waits for a joystick center press and captures audio while you hold it.
 5. Limits the captured length to fit the model input, generates the Mel spectrogram, runs inference, and decodes the tokens.
 6. Updates the display with the transcription and processing times.
 

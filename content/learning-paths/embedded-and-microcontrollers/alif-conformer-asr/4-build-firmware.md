@@ -85,7 +85,9 @@ export ALIF_PORT=/dev/cu.usbmodemXXXX
   {{< /tab >}}
 {{< /tabpane >}}
 
-Replace the example `ALIF_PORT` with the device you found. On Linux, your user needs to have permission to open it. If the device belongs to `dialout`, add your user to that group with `sudo usermod -aG dialout "$USER"`. After adding your user, sign out and back in before continuing. After signing in, repeat the `ALIF_MLEK_ROOT`, `SETOOLS_ROOT`, and `ALIF_PORT` assignments because these variables don't survive closing the shell.
+Replace the example `ALIF_PORT` with the device you found. On Linux, your user needs to have permission to open it. If the device belongs to `dialout`, add your user to that group with `sudo usermod -aG dialout "$USER"`.
+
+After adding your user, sign out and back in before continuing. After signing in, repeat the `ALIF_MLEK_ROOT`, `SETOOLS_ROOT`, and `ALIF_PORT` assignments because these variables don't survive closing the shell.
 
 Open the read-only device information menu:
 
@@ -159,7 +161,7 @@ The steps follow the [Alif MLEK J-Flash guide](https://github.com/alifsemi/alif_
 8. Select **Target > Disconnect** and close J-Flash.
 
 {{% notice Note %}}
-If J-Link connects but reports `Failed to perform RAMCode-sided Prepare()`, check the selected device and flash bank. Confirm that the CPU-stub write succeeded, and reset the board before retrying. Sometimes, it might help to powercycle the board and reopen JFlash. This message isn't a successful OSPI write.
+If J-Link connects but reports `Failed to perform RAMCode-sided Prepare()`, check the selected device and flash bank. Confirm that the CPU-stub write succeeded, and reset the board before retrying. If the error persists, power-cycle the board and reopen J-Flash before retrying. This message isn't a successful OSPI write.
 {{% /notice %}}
 
 ## Package and flash the ASR application into MRAM
@@ -173,7 +175,7 @@ cp "$ALIF_MLEK_ROOT/build_alif_asr/bin/sectors/alif_asr/mram.bin" "$SETOOLS_ROOT
 
 The configuration identifies the HP boot application and includes the board device configuration:
 
-```output
+```json
 {
     "HP_asr": {
         "binary": "mram.bin",
@@ -202,7 +204,7 @@ cd "$SETOOLS_ROOT"
 ./app-write-mram -c "$ALIF_PORT" -p
 ```
 
-Check that the write names `build/images/mram.bin` and `build/AppTocPackage.bin`, and completes successfully. 
+Check that the write names `build/images/mram.bin` and `build/AppTocPackage.bin`, and completes successfully.
 
 ![SETOOLS output showing build/images/mram.bin and build/AppTocPackage.bin each reaching 100 percent and ending with Done, confirming both MRAM writes completed.#center](successful-mram-write.png "Application firmware and ATOC package written successfully")
 

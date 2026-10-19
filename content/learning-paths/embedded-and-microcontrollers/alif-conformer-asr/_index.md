@@ -1,7 +1,7 @@
 ---
 title: Run Conformer speech recognition on Alif Ensemble E8 with ExecuTorch
 
-    
+
 description: Prepare Conformer ASR with ExecuTorch, validate it on Corstone-320, and capture and transcribe speech on an Alif E8 with Ethos-U85.
 
 minutes_to_complete: 120
@@ -17,12 +17,12 @@ learning_objectives:
 prerequisites:
     - Experience with C or C++, CMake, and embedded baremetal development concepts
     - Familiarity with PyTorch, ExecuTorch, and quantized model deployment
-    - A Linux development machine, or an Apple silicon Mac running macOS 15 or later with Homebrew and [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/) installed 
+    - A Linux development machine, or an Apple silicon Mac running macOS 15 or later with Homebrew and [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/) installed
     - An Alif Ensemble E8 AI/ML AppKit (AK-E8-AIML), or an E8 DevKit with a compatible attached display, and a USB-C data cable
 
-author: 
+author:
     - Matt Cossins
-    - Kwashie Andoh  
+    - Kwashie Andoh
 
 generate_summary_faq: false
 rerun_summary: false

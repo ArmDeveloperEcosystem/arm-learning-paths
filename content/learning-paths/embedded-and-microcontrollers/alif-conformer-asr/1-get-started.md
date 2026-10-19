@@ -10,7 +10,7 @@ layout: "learningpathall"
 
 Automatic speech recognition (ASR) converts speech audio into text. [Conformer](https://github.com/sooftware/conformer/) is a transformer-based neural network architecture used for speech tasks. It combines attention layers, which help the model use context from different parts of an utterance, with convolution layers, which help capture local audio patterns.
 
-You'll first run an application on the Corstone-320 Fixed Virtual Platform (FVP) that reads fixed 16 kHz recorded audio. The application converts the samples into Mel spectrogram features and runs a Conformer speech recognition model. It then decodes the output tokens into text. After running on the FVP, you'll extend the application to run on an Alif Ensemble E8. 
+You'll first run an application on the Corstone-320 Fixed Virtual Platform (FVP) that reads fixed 16 kHz recorded audio. The application converts the samples into Mel spectrogram features and runs a Conformer speech recognition model. It then decodes the output tokens into text. After running on the FVP, you'll extend the application to run on an Alif Ensemble E8.
 
 The [SentencePiece vocabulary](https://github.com/google/sentencepiece/blob/master/README.md#what-is-sentencepiece) is the token list used for decoding the output tokens. The model outputs token IDs, and the vocabulary maps each ID to a text piece such as a letter, word fragment, or word-start marker.
 
@@ -29,7 +29,7 @@ Recognition also depends on the training data, speaker, and recording conditions
 ## Prepare your development host
 
 {{% notice Important %}}
-Use Linux on an x86_64 or aarch64 host, or use an Apple silicon Mac running macOS 15 or later. 
+Use Linux on an x86_64 or aarch64 host, or use an Apple silicon Mac running macOS 15 or later.
 
 The commands haven't been validated on native Windows. WSL with USB passthrough can work with the E8 AppKit, but that configuration is beyond the scope of this Learning Path.
 {{% /notice %}}
@@ -110,7 +110,7 @@ find resources_downloaded/asr -name '*.pte' -print
 ls -lh resources/asr/labels/librispeech_sp.pieces
 ```
 
-### How the ExecuTorch .pte files are generated
+### How the ExecuTorch `.pte` files are generated
 
 The setup script is a wrapper around the MLEK resource pipeline. For the ASR use case, it does three jobs:
 

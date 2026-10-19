@@ -13,7 +13,7 @@ You'll build the Arm Machine Learning Evaluation Kit (MLEK) `asr` application an
 - Conformer model
 - ExecuTorch runtime
 - Audio preprocessing
-- Token decoding 
+- Token decoding
 
 The FVP application runs the same core automatic speech recognition (ASR) stages used later on the E8 AppKit:
 
@@ -23,9 +23,9 @@ The FVP application runs the same core automatic speech recognition (ASR) stages
 4. Decode the output token scores with the SentencePiece vocabulary.
 5. Print the decoded text to the FVP console.
 
-On the FVP, the audio comes from WAV files compiled into the application. The result is printed over a simulated UART. 
+On the FVP, the audio comes from WAV files compiled into the application. The result is printed over a simulated UART.
 
-On the E8 AppKit, the audio comes from an onboard pulse-density modulation (PDM) microphone. An external Octal Serial Peripheral Interface (OSPI) flash stores the model, and an external screen displays the output. 
+On the E8 AppKit, the audio comes from an onboard pulse-density modulation (PDM) microphone. An external Octal Serial Peripheral Interface (OSPI) flash stores the model, and an external screen displays the output.
 
 Besides these distinctions, the Conformer model format, preprocessing, inference, and token decoding stages all stay the same.
 
@@ -203,6 +203,6 @@ To troubleshoot issues with the FVP ASR application, consider the following guid
 
 ## What you've accomplished and what's next
 
-You've built the Arm MLEK Conformer ASR application, and run it on the Corstone-320 FVP. Deactivate your environment before moving on.
+You've built the Arm MLEK Conformer ASR application and run it on the Corstone-320 FVP. Deactivate your environment before moving on.
 
 Next, you'll clone the separate Alif MLEK repository and prepare the equivalent Conformer resources in its layout. You'll then compare the board-specific application with the FVP application.
