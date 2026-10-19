@@ -14,7 +14,7 @@ learning_objectives:
     - Compare model variants under the same target configuration and identify accuracy tradeoffs.
 
 prerequisites:
-    - An Ubuntu development host
+    - An x86-64 Ubuntu 24.04 LTS development host with CPython 3.12
     - Basic familiarity with Python, command-line tools, and model deployment
     - (Optional) An NX-capable Android device
 

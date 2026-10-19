@@ -57,6 +57,6 @@ If a check fails, inspect the non-passing checks and linked entities of the repo
 
 ## What you've accomplished and what's next
 
-You've checked the baseline's operator compatibility without a manual conversion step.
+You've checked the operator compatibility of the baseline without a manual conversion step.
 
 Next, you'll collect performance estimates and inspect their breakdowns.

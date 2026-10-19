@@ -21,7 +21,7 @@ getconf GNU_LIBC_VERSION
 
 The expected architecture is `x86_64`, Python is `3.12.x`, and glibc is at least `2.39`.
 
-You'll also need permission to install Ubuntu packages and internet access to PyPI and TensorFlow's public model downloads.
+You'll also need permission to install Ubuntu packages and internet access to PyPI and TensorFlow public model downloads.
 
 ## Install the public packages
 
@@ -32,7 +32,7 @@ sudo apt update
 sudo apt install -y python3.12-venv curl ca-certificates
 ```
 
-Create a working directory `mlia-demo` and a clean virtual environment. Run the remaining commands from `mlia-demo` unless stated otherwise:
+Create a working directory `mlia-demo` and a clean virtual environment. Run subsequent commands from `mlia-demo` unless stated otherwise:
 
 ```bash
 mkdir -p mlia-demo
@@ -52,7 +52,7 @@ These are public PyPI packages. The Neural Technology plugin installs the follow
 
 The LiteRT converter plugin lets MLIA analyze `.tflite` files directly. You don't need TensorFlow, a GPU driver, or a separate model-training environment for this example.
 
-The expected final output is:
+The expected output is:
 
 ```output
 No broken requirements found.
@@ -73,7 +73,7 @@ Confirm that the target list includes `neural-technology` and both `NX-peak-12SC
 The estimator executable is bundled with the public wheel. MLIA offers to install it during your first check, so you don't need a separate backend installation command.
 
 {{% notice Note %}}
-If pip reports that no matching distribution exists for `mlia-neural-technology`, check the three host requirements again and upgrade pip inside the environment. A virtual environment doesn't change the host architecture or glibc version. Don't substitute an older Python version or Ubuntu 22.04 for this release.
+If `pip` reports that no matching distribution exists for `mlia-neural-technology`, check the three host requirements again and upgrade `pip` inside the environment. A virtual environment doesn't change the host architecture or glibc version. Don't substitute an older Python version or Ubuntu 22.04 for this release.
 {{% /notice %}}
 
 ## What you've accomplished and what's next

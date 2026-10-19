@@ -24,7 +24,7 @@ mv models/mobilenet_v1_0.25_128_quant.tflite models/smaller.tflite
 echo "3799e7cdb3ec44beacaf47ef5c884111c919e51bb50b34ac836244b08d4b953b  models/smaller.tflite" | sha256sum --check
 ```
 
-The checksum check reports `models/smaller.tflite: OK`. Pass this file directly to MLIA, as you did for the baseline.
+The checksum check reports `models/smaller.tflite: OK`. Pass this file directly to Arm ML Inference Advisor (MLIA), as you did for the baseline.
 
 ## Recheck compatibility and performance
 
@@ -72,12 +72,12 @@ The following table includes example results:
 | Inferences per second | 10,951.94 | 18,791.34 | +71.58% |
 | DRAM cycles | 94,396 | 45,981 | -51.29% |
 
-Fewer cycles, shorter inference times, and higher throughput indicate better performance. However, these are separately trained public model variants, not the same weights with a resized input. Their weights and quantization parameters differ.
+Fewer cycles, shorter inference times, and higher throughput indicate better performance. However, these are separately trained public model variants. Their weights and quantization parameters differ.
 
 The TensorFlow model catalog reports lower ImageNet accuracy for the smaller variant, so don't choose a model on performance alone. Validate task accuracy, preprocessing, and runtime behavior on representative data before deployment to confirm that the model meets your requirements.
 
 ## What you've accomplished and what's next
 
-You've analyzed two public LiteRT models directly with MLIA and compared their neural acceleration (NX) performance estimates under the same target profile. For your own model, keep that profile fixed while checking each change. Validate the accuracy and runtime behavior of the model before deployment.
+You've analyzed two public LiteRT models directly with MLIA and compared their neural acceleration (NX) performance estimates under the same target profile. For your own model, keep the target profile fixed while checking each change. Validate the accuracy and runtime behavior of the model before deployment.
 
 If you have compatible hardware, continue to [(Optional) Run and profile the model on an NX device](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/7-run-on-nx-device/). Otherwise, you've completed the estimator workflow and can extend it to models and profiles of your choice.

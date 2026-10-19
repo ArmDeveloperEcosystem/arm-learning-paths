@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Choose a pretrained baseline
 
-Use `mobilenet_v1_0.25_224_quant.tflite` from the [TensorFlow MobileNet V1 model catalog](https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet_v1.md). It's a public pretrained image classifier with a width multiplier of `0.25` and a fixed input shape of `[1, 224, 224, 3]`.
+Download an existing quantized export rather than retraining or calibrating a model. Use `mobilenet_v1_0.25_224_quant.tflite` from the [TensorFlow MobileNet V1 model catalog](https://github.com/tensorflow/models/blob/master/research/slim/nets/mobilenet_v1.md). It's a public pretrained image classifier with a width multiplier of `0.25` and a fixed input shape of `[1, 224, 224, 3]`.
 
-The model has quantized eight-bit weights and activations, with unsigned eight-bit input and output tensors. It isn't a neural upscaling model. However, it provides a real convolutional workload for learning the Arm ML Inference Advisor (MLIA) analysis workflow. You download the existing quantized export rather than retraining or calibrating a model.
+The model has quantized eight-bit weights and activations, with unsigned eight-bit input and output tensors. It isn't a neural upscaling model. However, it provides a real convolutional workload for learning the Arm ML Inference Advisor (MLIA) analysis workflow. 
 
 ## Download and verify the model
 
@@ -25,7 +25,7 @@ mv models/mobilenet_v1_0.25_224_quant.tflite models/baseline.tflite
 echo "ce8f61fe3e4e29560c4ea8038e4b91eb354be330fc428348b9645bd1e7de03bf  models/baseline.tflite" | sha256sum --check
 ```
 
-The expected final output is:
+The expected output is:
 
 ```output
 models/baseline.tflite: OK

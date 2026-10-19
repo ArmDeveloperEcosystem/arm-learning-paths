@@ -41,13 +41,13 @@ List of devices attached
 <device-serial>  device
 ```
 
-Your device should appear with the status `device`. If several devices are connected, set the `ANDROID_SERIAL` environment variable with `export ANDROID_SERIAL="your-device-serial"`, replacing `"your-device-serial"` with the serial number for your device.
+Your device should appear with the status `device`. If several devices are connected, set the `ANDROID_SERIAL` environment variable with `export ANDROID_SERIAL="your-device-serial"`. Replace `"your-device-serial"` with the serial number for your device.
 
-To build a debuggable Android arm64 APK, follow the [Scenario Runner 0.11.0 Android build instructions](https://github.com/arm/ai-ml-sdk-scenario-runner/tree/release/v0.11.0#building-with-the-script). This experimental build needs the Android NDK, Android SDK, Gradle, and public SDK source dependencies. Use Scenario Runner and VGF Library `release/v0.11.0` for this example.
+To build a debuggable Android arm64 APK, follow the [Scenario Runner 0.11.0 Android build instructions](https://github.com/arm/ai-ml-sdk-scenario-runner/tree/release/v0.11.0#building-with-the-script). This experimental build needs the Android NDK, Android SDK, Gradle, and public SDK source dependencies. Use Scenario Runner and Vulkan Graph Format (VGF) Library `release/v0.11.0` for this example.
 
 Run the Android build command from `mlia-demo` and add `--package-version 0.11.0`. This ensures that the generated APK has the fixed filename used in subsequent commands.
 
-The following steps configure the public Neural Statistics layer for the unmodified runner. They turn on **Enable GPU debug layers**, select the runner application, and activate `VK_LAYER_LGL_neural_statistics` through `adb`.
+Complete the following steps to configure the public Neural Statistics layer for the unmodified runner. You'll turn on **Enable GPU debug layers**, select the runner application, and activate `VK_LAYER_LGL_neural_statistics` through `adb`.
 
 ### Prepare the baseline scenario on the host
 
@@ -99,7 +99,7 @@ The expected output is:
 Success
 ```
 
-Pack the three workload files into an archive, then stream it into the application's storage. `run-as` accesses the debuggable runner's files without root:
+Pack the three workload files into an archive, then stream it into application storage. `run-as` accesses the debuggable runner files without root:
 
 ```bash
 PACKAGE=com.arm.ai_ml_sdk_scenario_runner
@@ -117,13 +117,13 @@ curl -fL https://github.com/arm/vulkan-layer-neural-statistics/releases/download
 tar -xzf nx-demo/neural-statistics-layer.tar.gz -C nx-demo
 ```
 
-Copy the library into the runner's application-owned data directory:
+Copy the library into the runner application-owned data directory:
 
 ```bash
 adb shell -T "run-as $PACKAGE sh -c 'cat > libVkLayerNeuralStatistics.so'" < nx-demo/VkLayerNeuralStatistics-android-arm64-v8a/libVkLayerNeuralStatistics.so
 ```
 
-Android loads this library from the runner's data directory.
+Android loads this library from the runner data directory.
 
 ### Configure one measured dispatch
 
@@ -150,11 +150,11 @@ adb shell settings put global gpu_debug_layers VK_LAYER_LGL_neural_statistics
 adb shell setprop debug.vulkan.khronos_profiles.settings_path "$SETTINGS_PATH"
 ```
 
-The layer writes the capture into the runner's application-owned storage. For more information about the format of the generated files, see the [public layer settings and capture format](https://github.com/arm/vulkan-layer-neural-statistics).
+The layer writes the capture into the runner application-owned storage. For more information about the format of the generated files, see the [public layer settings and capture format](https://github.com/arm/vulkan-layer-neural-statistics).
 
 ### Run the graph with capture enabled
 
-Start the runner's foreground service. The Android `--esa args` option passes the comma-separated `RUN_ARGS` values as the runner's command-line arguments. The profiling file collects Vulkan timestamps separately from the neural statistics capture:
+Start the runner foreground service:
 
 ```bash
 DEVICE_DIR="/data/data/$PACKAGE/files/nx-demo"
@@ -163,6 +163,7 @@ adb shell am force-stop "$PACKAGE"
 adb shell am start-foreground-service -n "$PACKAGE/.Main" --esa args "$RUN_ARGS"
 adb logcat -s ScenarioService ScenarioRunner VkLayerNeuralStatistics vulkan AndroidRuntime
 ```
+The Android `--esa args` option passes the comma-separated `RUN_ARGS` values as command-line arguments for the runner. The profiling file collects Vulkan timestamps separately from the neural statistics capture.
 
 The successful run includes the following log message:
 
@@ -170,7 +171,7 @@ The successful run includes the following log message:
 native exit code=0
 ```
 
-Stop `adb logcat` with **Ctrl+C** after this message appears. A nonzero code or a `runScenarioRunner failed` message means that the run failed. Exit code `0` confirms runner completion. The capture checks that the layer collected neural statistics from the driver.
+Stop `adb logcat` by pressing **Ctrl+C** after this message appears. A nonzero code or a `runScenarioRunner failed` message means that the run failed. Exit code `0` confirms runner completion. The capture checks that the layer collected neural statistics from the driver.
 
 After the workload completes, retrieve its timestamp profiling and complete capture tree:
 
@@ -202,7 +203,7 @@ A completed capture with a nonempty statistics file shows that the layer interce
 
 ## Analyze measured data with MLIA
 
-Return to the MLIA environment and pass the same Vulkan Graph Format (VGF) file with the complete capture directory:
+Return to the MLIA environment and pass the same VGF file with the complete capture directory:
 
 ```bash
 source mlia-venv/bin/activate
@@ -229,14 +230,14 @@ Metrics:
 │ compute_cycles │ 951154 │ cycles │
 └────────────────┴────────┴────────┘
 ```
-Your cycle counts will depend on the device and its configuration.
+Your cycle counts will depend on your device and its configuration.
 
 `Status ok` confirms that MLIA analyzed the capture. The full results are saved in `runs/baseline-measured/mlia-output/mlia-output.json`.
 
 
 ## Use the measurements
 
-`mlia-output.json` shows accelerator cycles and `benchmark.json` shows graph execution times. Use both when comparing your next model version on the same device.
+`mlia-output.json` shows accelerator cycles and `benchmark.json` shows graph execution times. Use both measurements when comparing your next model version on the same device.
 
 Check the predictions on real images as well. A faster model isn't useful if it misses your accuracy target.
 
