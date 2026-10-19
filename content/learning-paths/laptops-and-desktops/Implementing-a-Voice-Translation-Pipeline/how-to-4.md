@@ -1,6 +1,6 @@
 ---
-title: Synthesise translated speech
-description: Configure Supertonic 3 with Sherpa-ONNX to synthesise and play the Spanish translation locally on an Apple Silicon Mac.
+title: Synthesize translated speech with Supertonic 3
+description: Configure Supertonic 3 with Sherpa-ONNX to synthesize and play the Spanish translation locally on an Apple silicon Mac.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -9,18 +9,11 @@ layout: learningpathall
 
 ## Configure Supertonic 3
 
-You'll create `tts.py` to turn the Spanish translation from the previous step into spoken audio. The script will use Supertonic 3 through Sherpa-ONNX to synthesise speech, then `sounddevice` to play it through your Mac's default output device.
+You'll create `tts.py` to turn the Spanish translation from [Translate text with Gemma 4 E2B](/learning-paths/laptops-and-desktops/implementing-a-voice-translation-pipeline/how-to-3/) into spoken audio. The script will use Supertonic 3 through Sherpa-ONNX to synthesize speech, then `sounddevice` to play it through the default output device for your Mac.
 
-You'll first check the output device and create the script. You'll then run it and paste in the Spanish text to test playback. The model will stay loaded so you can try several sentences in the same session.
+You'll first check the output device and create the script. You'll then run it and paste in the Spanish text to test playback. The model will stay loaded so that you can try several sentences in the same session.
 
-Return to the project directory and activate the virtual environment if it isn't already active:
-
-```bash
-cd ~/voice-translator
-source .venv/bin/activate
-```
-
-List the output devices visible to Python:
+Continuing in the `~/voice-translator` directory with the active virtual environment, list the output devices visible to Python:
 
 ```bash
 python -m sounddevice
@@ -28,7 +21,7 @@ python -m sounddevice
 
 Confirm that the list contains your Mac speakers, headphones, or another output device.
 
-Create `tts.py`. `create_tts()` loads the model, `synthesise()` returns audio samples and their sample rate, and `speak()` plays them.
+Using a file editor of your choice, create a file named `tts.py` in the `~/voice-translator` directory. Copy and paste the following code into the file and save it:
 
 ```python
 import argparse
@@ -63,7 +56,6 @@ def create_tts():
             debug=False,
             provider="cpu",
         ),
-        max_num_sentences=1,
     )
 
     if not config.validate():
@@ -77,7 +69,7 @@ def synthesise(tts, text, language_code):
     config.sid = 6
     config.speed = 1.0
     config.num_steps = 8
-    config.extra["lang"] = language_code
+    config.extra = {"lang": language_code}
 
     audio = tts.generate(text, config)
     if len(audio.samples) == 0:
@@ -115,10 +107,11 @@ def main():
 if __name__ == "__main__":
     main()
 ```
+`create_tts()` loads the model, `synthesise()` returns audio samples and their sample rate, and `speak()` plays them.
 
-The model configuration will use the downloaded quantised files, selects the CPU with eight threads, and sets `max_num_sentences=1` to process one sentence at a time. `config.validate()` checks the configuration before the model is loaded.
+The model configuration uses the downloaded quantized files and selects the CPU with eight threads. `config.validate()` checks the configuration before the model is loaded.
 
-The generation settings select voice preset `6` with `sid`, normal speed with `speed=1.0`, and eight generation steps with `num_steps`. `extra["lang"]` receives `es` from `LANGUAGES` when you select Spanish.
+The generation settings select voice preset `6` with `sid`, normal speed with `speed=1.0`, and eight generation steps with `num_steps`. `config.extra` receives the language code from `LANGUAGES`: `{"lang": "es"}` when you select Spanish. Assign the complete dictionary because modifying an item in `config.extra` doesn't persist the change in this version of the Python bindings.
 
 `speak()` uses the sample rate returned by Supertonic when calling `sd.play()`. It then waits for playback to finish before accepting another sentence.
 
@@ -130,7 +123,7 @@ Run the script with Spanish as the target language:
 python tts.py Spanish
 ```
 
-At the prompt, paste the Spanish translation from the previous step:
+At the prompt, paste the Spanish translation:
 
 ```text
 ¿Dónde está la estación de tren más cercana?
@@ -141,18 +134,20 @@ The script reports the duration and plays the sentence through the default outpu
 ```output
 Loading Supertonic 3
 Spanish text (press Enter to quit): ¿Dónde está la estación de tren más cercana?
-Playing 2.8 seconds of audio...
+Playing 2.8s of audio...
 Spanish text (press Enter to quit):
 ```
 
-The duration varies with the generated speech. Confirm that you hear the complete sentence with Spanish pronunciation.
+The duration varies with the generated speech. Confirm that you hear the complete sentence with Spanish pronunciation. Press **Enter** at an empty prompt to exit the script and return to the shell before continuing.
 
-If you don't hear audio, you made need to run `python -m sounddevice` again and confirm that macOS has selected the intended output device.
+If you don't hear audio, you might need to run `python -m sounddevice` again and confirm that macOS has selected the intended output device.
 
-## Wait for the complete translation
-
-The desktop application will collect all translation chunks before calling `synthesise()`. This gives Supertonic the complete text, but it also means you wait for translation and synthesis before hearing any audio. Only the displayed translation text streams in this implementation.
+{{% notice Note %}}
+The desktop application will collect all translation chunks before calling `synthesise()`. This gives Supertonic the complete text. It also means that you need to wait for translation and synthesis before hearing any audio. Only the displayed translation text streams in this implementation.
+{{% /notice %}}
 
 ## What you've accomplished and what's next
 
-You can now test recording, translation, and playback separately with `stt.py`, `translate.py`, and `tts.py`. Next, import their functions into a Gradio application so one English recording produces a transcript, Spanish translation, and spoken Spanish result.
+You've generated and played translated speech using Supertonic 3. You can now test recording, translation, and playback separately with `stt.py`, `translate.py`, and `tts.py`.
+
+Next, you'll import the three functions into a Gradio application so that one English recording produces a transcript, Spanish translation, and spoken Spanish result.

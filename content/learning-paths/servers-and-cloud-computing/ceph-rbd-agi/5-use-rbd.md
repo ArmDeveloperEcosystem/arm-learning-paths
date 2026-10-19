@@ -9,11 +9,11 @@ layout: learningpathall
 
 ## Use Ceph storage from Linux
 
-In this section, you will create an RBD image, map it as a block device, and mount a filesystem on it to store a test file. Run all commands inside `ceph1`, which acts as both a storage node and an RBD client. A checksum check after remapping will verify that the file persists in Ceph.
+You'll create a RADOS Block Device (RBD) image, map it as a block device, and mount a filesystem on it to store a test file. Run all commands inside `ceph1`, which acts as both a storage node and an RBD client. A checksum check after remapping will verify that the file persists in Ceph.
 
-## Create the learning pool
+### Create the storage pool
 
-A pool groups the objects that store your RBD image and controls how many copies Ceph keeps. Start with one copy because only one OSD is available. Cluster administration uses `cephadm shell`; RBD mapping uses the pinned container tools to configure the VM's own kernel block device.
+A pool groups the objects that store your RBD image and controls how many copies Ceph keeps. Start with one copy because only one object storage daemon (OSD) is available. Cluster administration uses `cephadm shell`. RBD mapping uses the pinned container tools to configure a kernel block device for the VM.
 
 Create the pool:
 
@@ -22,7 +22,7 @@ sudo /usr/local/sbin/cephadm shell -- ceph osd pool create agi-rbd 8
 sudo /usr/local/sbin/cephadm shell -- ceph config get mon mon_allow_pool_size_one
 ```
 
-Record the second command's value. For the default value `false`, run each of these commands individually:
+By default, Ceph prevents setting a pool size to `1` to protect against data loss. Temporarily enable single-replica pools, set the size to `1`, and immediately restore the safety check:
 
 ```bash
 sudo /usr/local/sbin/cephadm shell -- ceph config set mon mon_allow_pool_size_one true
@@ -30,9 +30,7 @@ sudo /usr/local/sbin/cephadm shell -- ceph osd pool set agi-rbd size 1 --yes-i-r
 sudo /usr/local/sbin/cephadm shell -- ceph config set mon mon_allow_pool_size_one false
 ```
 
-Restore `false` even if setting the pool size fails. If the original value was `true`, run only the pool-size command and leave the configuration value unchanged.
-
-The pool's `size` is the desired number of copies; `min_size` is the minimum required to serve I/O. Set that minimum to one for this single-OSD stage, then initialize the pool for RBD:
+The `size` of the pool is the desired number of copies, and `min_size` is the minimum required to serve I/O. Set that minimum to `1` for this single-OSD stage, then initialize the pool for RBD:
 
 ```bash
 sudo /usr/local/sbin/cephadm shell -- ceph osd pool set agi-rbd min_size 1
@@ -42,10 +40,10 @@ sudo /usr/local/sbin/cephadm shell -- ceph osd pool get agi-rbd min_size
 sudo /usr/local/sbin/cephadm shell -- ceph pg ls-by-pool agi-rbd
 ```
 
-Expect `size: 1`, `min_size: 1`, and all placement groups for `agi-rbd` to become `active+clean`. Placement groups organize objects across OSDs; `active+clean` means they can serve I/O and have the copies required by the pool settings. Other pools can still report replication warnings at this stage.
+Confirm that `size` and `min_size` are `1` and all placement groups for `agi-rbd` show `active+clean`. This means they can serve I/O and have the copies required by the pool settings.
 
 {{% notice Warning %}}
-A single-replica pool can lose all of its data if its OSD or backing disk fails. Use it only for this learning stage. You will change the pool to three replicas after adding the other nodes.
+A single-replica pool can lose all of its data if its OSD or backing disk fails. Use it only for this learning stage. You'll change the pool to three replicas after adding the other nodes.
 {{% /notice %}}
 
 Create a new 1 GiB image:
@@ -55,9 +53,7 @@ sudo /usr/local/sbin/cephadm shell -- rbd create --size 1024 agi-rbd/demo-volume
 sudo /usr/local/sbin/cephadm shell -- rbd info agi-rbd/demo-volume
 ```
 
-If the image already exists, inspect it before proceeding. Do not recreate or format an image containing data you need.
-
-## Create a pool-restricted client
+### Create a pool-restricted client
 
 Generate a minimal configuration and an `aes256k` credential for `client.agirbd`. The credential grants access to the `agi-rbd` pool. Run each block individually in the same SSH session on `ceph1`, checking its result before continuing.
 
@@ -78,7 +74,7 @@ sudo timeout --kill-after=5s 30s \
 echo "Configuration exit status: $?"
 ```
 
-Continue only if the exit status is `0`. Then create or retrieve the pool-restricted credential:
+Continue only if the exit status is `0`. Then, create or retrieve the pool-restricted credential:
 
 ```bash
 sudo timeout --kill-after=5s 30s \
@@ -91,11 +87,7 @@ sudo timeout --kill-after=5s 30s \
 echo "Credential exit status: $?"
 ```
 
-Continue only if this exit status is also `0`. The commands redirect normal output to files; image-inference messages can still appear in the terminal. Redirecting stdin from `/dev/null` avoids terminal input for these noninteractive commands.
-
-If either command fails or times out, resolve the error before continuing. Exit status `124` indicates a timeout. Do not install partial output or share keyring contents.
-
-After both commands succeed, check that their output files are nonempty and install them separately from cephadm's administrator configuration:
+After generating the configuration and credential files, verify that both commands completed successfully and install them to the system directory:
 
 ```bash
 test -s "$CLIENT_DIRECTORY/ceph.conf.new" &&
@@ -110,9 +102,11 @@ echo "Client files installed successfully"
 
 Continue when the success message appears. The `.new` files keep command output separate from the installed files until generation succeeds.
 
-## Define the RBD mapping command
+### Define the RBD mapping command
 
-Mapping exposes the RBD image as a device such as `/dev/rbd0` inside `ceph1`. Save a helper that runs the matching Ceph tools in a container, so you can reload it after reconnecting by SSH:
+Mapping exposes the RBD image as a device such as `/dev/rbd0` inside `ceph1`. 
+
+Save a script that runs the matching Ceph tools in a container, so that you can reload it after reconnecting by SSH:
 
 ```bash
 cat > "$HOME/agi-rbd-tools.sh" <<'TOOLS'
@@ -135,15 +129,15 @@ rbd_kernel info agi-rbd/demo-volume
 rbd_kernel device list
 ```
 
-The privileged container needs access to the VM's devices and sysfs to configure kernel mappings. The Ceph credential restricts cluster access to the learning pool; it does not restrict the container's privileges within the VM.
+The privileged container needs access to the devices and sysfs of the VM to configure kernel mappings. The Ceph credential restricts cluster access to the pool but doesn't restrict the privileges of the container within the VM.
 
-If the image is not already mapped, map it:
+Map the RBD image to a kernel block device:
 
 ```bash
 rbd_kernel device map agi-rbd/demo-volume
 ```
 
-Set `RBD_DEVICE` to the returned path. Use `/dev/rbd0` below only if that is the actual result:
+Set `RBD_DEVICE` to the returned path:
 
 ```bash
 RBD_DEVICE=/dev/rbd0
@@ -152,18 +146,18 @@ sudo lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS "$RBD_DEVICE"
 sudo blockdev --getsize64 "$RBD_DEVICE"
 ```
 
-Confirm that the device list associates this path with `agi-rbd/demo-volume`, that its size is 1 GiB (`1073741824` bytes), and that it has no filesystem or mount point.
+Confirm that the device list associates this path with `agi-rbd/demo-volume`. Ensure that the block size is 1 GiB (`1073741824` bytes), and that it has no filesystem or mount point.
 
-## Allow RBD inspection if AppArmor blocks lsblk
+#### Allow RBD inspection if AppArmor blocks lsblk
 
-On the tested Ubuntu 26.04 image, `lsblk` was denied access to RBD sysfs information even with `sudo`. If inspection reports `Permission denied`, check the kernel log:
+If `lsblk` returns `Permission denied`, verify whether AppArmor blocked access to the RBD sysfs path:
 
 ```bash
 sudo dmesg --color=never | grep -Ei 'apparmor|denied|rbd|ceph' | tail -n 30
 sudo grep -n 'local/' /etc/apparmor.d/lsblk
 ```
 
-Apply the following change only if the log names profile `lsblk` and paths under `/sys/devices/rbd/`, and the profile includes `<local/lsblk>`. If those checks differ, diagnose the reported denial first. Add read access to the local profile override and reload it:
+If AppArmor denied `lsblk` access to `/sys/devices/rbd/`, add a read rule to the local profile override and reload AppArmor:
 
 ```bash
 sudo mkdir -p /etc/apparmor.d/local
@@ -177,11 +171,11 @@ sudo apparmor_parser -r -T /etc/apparmor.d/lsblk
 sudo lsblk -o NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS "$RBD_DEVICE"
 ```
 
-Stop if profile reload or inspection fails. This uses Ubuntu's [local AppArmor profile customization](https://ubuntu.com/server/docs/changing-package-files/) mechanism.
+When `lsblk` displays the device details without permission errors, you're ready to format the volume.
 
-## Format and verify persistent data
+### Format and verify persistent data
 
-Create a filesystem on the new image so Linux can store files on it. After confirming the image identity, size, and absence of a filesystem, format it once, mount it, and record a test file's checksum for later comparisons:
+Create a filesystem on the new image so that Linux can store files on it. After confirming the image identity, size, and absence of a filesystem, format it once. Then, mount the filesystem and record the checksum of a test file for later comparisons:
 
 ```bash
 sudo mkfs.ext4 "$RBD_DEVICE"
@@ -192,7 +186,7 @@ sudo sync -f /mnt/ceph-rbd/hello.txt
 sudo sha256sum /mnt/ceph-rbd/hello.txt | tee "$HOME/agi-rbd-baseline.sha256"
 ```
 
-Run checksum reads with `sudo` so they can access files on the mounted volume. The unprivileged `tee` saves the baseline in your home directory.
+Run checksum reads with `sudo` so that they can access files on the mounted volume. The unprivileged `tee` saves the baseline in your home directory.
 
 Unmount and unmap the image, then map it again:
 
@@ -217,8 +211,17 @@ The expected output is:
 /mnt/ceph-rbd/hello.txt: OK
 ```
 
-Leave the image mounted. After reconnecting to `ceph1`, run `source "$HOME/agi-rbd-tools.sh"` and `rbd_kernel device list` to reload the helper and identify the current device path.
+Keep the volume mounted.
+
+If you disconnect or start a new SSH session on `ceph1`, reload the helper functions and check the device path:
+
+```bash
+source "$HOME/agi-rbd-tools.sh"
+rbd_kernel device list
+```
 
 ## What you've accomplished and what's next
 
-You've created an RBD image, mapped it through the Ubuntu 26.04 guest kernel, and verified persistent data. Next, you'll add two Ceph hosts and change the pool from one replica to three.
+You've created an RBD image, mapped it through the Ubuntu 26.04 guest kernel, and verified persistent data. 
+
+Next, you'll add two Ceph hosts and change the pool from one replica to three.

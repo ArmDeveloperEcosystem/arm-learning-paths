@@ -83,6 +83,32 @@ innodb_buffer_pool_instances=8
 
 The [`innodb_buffer_pool_instances`](https://dev.mysql.com/doc/refman/en/innodb-parameters.html#sysvar_innodb_buffer_pool_instances) setting takes effect only when `innodb_buffer_pool_size` is at least `1 GiB`. The total buffer pool is divided across the instances, so keep each instance at least `1 GiB`. Test values such as `4`, `8`, or `16` with your workload, and avoid creating so many instances that each one becomes too small.
 
+### Adaptive hash index
+
+The [`innodb_adaptive_hash_index`](https://dev.mysql.com/doc/refman/en/innodb-parameters.html#sysvar_innodb_adaptive_hash_index) parameter controls whether InnoDB builds an adaptive hash index to speed up frequently repeated index lookups. It can apply to both the clustered index (normally the primary key) and secondary indexes.
+
+When enabled, InnoDB observes index searches and automatically builds hash entries for frequently accessed index pages in the buffer pool. These entries can reduce the work needed to find records compared with searching the existing B-tree index.
+
+To test the feature, enable it in your MySQL option file:
+
+```ini
+innodb_adaptive_hash_index=ON
+```
+
+In MySQL 8.4 and later, this setting defaults to `OFF`. Earlier versions default to `ON`, so check the current value when comparing MySQL versions.
+
+Maintaining the adaptive hash index adds overhead, and access to it can become a source of contention under high concurrency. Compare throughput and latency with the setting enabled and disabled using your workload. Allow time for hash entries to build after enabling it before measuring performance. Keep it enabled only if measured performance improves. For more information, see the MySQL [Adaptive Hash Index documentation](https://dev.mysql.com/doc/refman/en/innodb-adaptive-hash.html).
+
+{{% notice Note %}}
+To check adaptive hash index activity while your workload is running, use the following command in the MySQL client:
+
+```sql
+SHOW ENGINE INNODB STATUS\G
+```
+
+Under `INSERT BUFFER AND ADAPTIVE HASH INDEX`, a non-zero `hash searches/s` value confirms that lookups are using the adaptive hash index. This confirms activity, but doesn't establish a performance benefit. For details about the output, see the MySQL [InnoDB Standard Monitor documentation](https://dev.mysql.com/doc/refman/en/innodb-standard-monitor.html).
+{{% /notice %}}
+
 ### Redo log capacity
 
 For write-heavy workloads, you can keep `innodb_dedicated_server=ON` and explicitly set a larger redo log capacity than the value MySQL calculates automatically:

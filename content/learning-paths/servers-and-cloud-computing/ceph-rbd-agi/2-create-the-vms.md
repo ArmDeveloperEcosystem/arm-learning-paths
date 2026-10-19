@@ -1,5 +1,5 @@
 ---
-title: Create three Arm64 virtual machines
+title: Create three virtual machines
 description: Use KVM, libvirt, and cloud-init to create three networked Ubuntu 26.04 Arm64 virtual machines on one Arm AGI CPU host.
 weight: 3
 
@@ -9,31 +9,31 @@ layout: learningpathall
 
 ## Build the VM environment
 
-In this section, you will create three Ubuntu 26.04 Arm64 VMs with stable IP addresses, SSH access, and a separate data disk for Ceph. Run the commands on the physical AGI host. By the end, you will be able to connect to each VM and confirm that its initial setup has completed.
+You'll create three Ubuntu 26.04 virtual machines (VMs) with stable IP addresses, SSH access, and a separate data disk for Ceph. Run the commands on the physical AGI host. By the end, you'll be able to connect to each VM and confirm that its initial setup has completed.
 
-## Check the AGI host
+### Check the AGI host
 
-This Learning Path uses KVM and libvirt to create the virtual machines. The commands in this section assume that the AGI CPU host runs Ubuntu 24.04 Arm64 and provides:
+The example uses kernel-based VM (KVM) and libvirt to create the VMs. Ensure that the AGI CPU host runs Ubuntu 24.04 and has the following attributes:
 
 - At least 12 available CPU cores
-- At least 12 GB of memory available to the VMs; 16 GB or more of total host memory is recommended
+- At least 12 GB of memory available to the VMs, with 16 GB or more of total host memory recommended
 - At least 90 GB of available storage
 - Hardware virtualization support through KVM
 - Root or `sudo` access
 
-The virtual disks use the QCOW2 format and grow as data is written, but the host must have enough capacity for the disks to reach their configured sizes.
+The virtual disks use the QCOW2 format and grow as data is written. However, the host needs to have enough capacity for the disks to reach their configured sizes.
 
-Confirm that the host uses the Arm64 architecture:
+Confirm that the host uses the Arm architecture:
 
 ```bash
 uname -m
 ```
 
-The command should print `aarch64`.
+On an Arm-based host, the command prints `aarch64`.
 
-## Install the virtualization tools
+### Install the virtualization tools
 
-Install KVM, libvirt, the Arm64 UEFI firmware, `virt-install`, and the cloud-image tools:
+Install KVM, virtualization packages, the Arm64 UEFI firmware, and the cloud-image tools:
 
 ```bash
 sudo apt update
@@ -48,7 +48,7 @@ sudo apt install -y \
   curl
 ```
 
-Start libvirt and configure it to start when the host boots:
+Start the libvirt daemon and configure it to start when the host boots:
 
 ```bash
 sudo systemctl enable --now libvirtd
@@ -76,9 +76,9 @@ The expected output is:
   QEMU: Checking if IOMMU is enabled by kernel                               : PASS
   QEMU: Checking for secure guest support                                    : WARN (Unknown if this platform has Secure Guest support)
 ```
-Warnings for features that this example does not use, such as secure guests, can be ignored.
+Ignore warnings for features that you won't use, such as secure guests.
 
-## Create the shared virtual network
+### Create the shared virtual network
 
 Create a libvirt NAT network named `agi-net`. The network gives the VMs outbound access and lets them communicate with one another. It also assigns a fixed private address to each VM:
 
@@ -88,15 +88,15 @@ Create a libvirt NAT network named `agi-net`. The network gives the VMs outbound
 | `ceph2` | `52:54:00:ce:00:02` | `192.168.100.12` |
 | `ceph3` | `52:54:00:ce:00:03` | `192.168.100.13` |
 
-If the AGI host already uses the `192.168.100.0/24` subnet, select an unused private subnet and update the addresses in this section.
+If the AGI host already uses the `192.168.100.0/24` subnet, select an unused private subnet and update the addresses.
 
-Run this on the AGI host to check for an existing route:
+Check for an existing route on the AGI host:
 
 ```bash
 ip -4 route show 192.168.100.0/24
 ```
 
-If the command returns nothing, there is no matching route currently configured on the AGI host.
+If the command returns nothing, there's no matching route currently configured on the AGI host.
 
 Create the network definition:
 
@@ -126,6 +126,7 @@ sudo virsh net-autostart agi-net
 ```
 
 The expected output is:
+
 ```output
 Network agi-net defined from /tmp/agi-net.xml
 Network agi-net started
@@ -146,7 +147,7 @@ Name      State    Autostart   Persistent
  default   active   yes         yes
 ```
 
-## Create an SSH key for the VMs
+### Create an SSH key for the VMs
 
 Create a dedicated SSH key on the AGI host. The command preserves the key if it already exists:
 
@@ -156,11 +157,11 @@ if [ ! -f "${HOME}/.ssh/agi_ceph" ]; then
 fi
 ```
 
-Cloud-init adds the public key to each VM. You will use the matching private key to connect as the `ubuntu` user.
+Cloud-init adds the public key to each VM. You'll use the matching private key to connect as the `ubuntu` user.
 
-No password is set for `ubuntu`, so use SSH key authentication rather than a password at the VM console.
+No password is set for `ubuntu`, so use SSH key authentication rather than a password to access each VM.
 
-## Download the Ubuntu Arm64 cloud image
+### Download the Ubuntu Arm64 cloud image
 
 Create a directory for the VM images and download the Ubuntu 26.04 Arm64 release cloud image:
 
@@ -174,19 +175,27 @@ sudo curl --fail --location \
   --output "$BASE_IMAGE"
 ```
 
-Do not download over an existing base image that backs VM disks. The release URL can change as Ubuntu publishes updates; the tested guest image reported Ubuntu 26.04.1 and kernel `7.0.0-34-generic`.
+The release URL might change as Ubuntu publishes updates. The tested guest image reported Ubuntu 26.04.1 and kernel `7.0.0-34-generic`.
 
-The base image remains unchanged. Each VM uses a separate copy-on-write operating-system disk backed by this image.
+The base image remains unchanged. Each VM uses a separate copy-on-write operating system disk backed by this image.
 
 ## Create and start the VMs
 
-The following loop creates `ceph1`, `ceph2`, and `ceph3`. Each VM receives four virtual CPUs, 4 GB of memory, a 20 GB operating-system disk, a separate empty 10 GB data disk, and an interface on `agi-net`.
+You'll run a loop to create VMs named `ceph1`, `ceph2`, and `ceph3`. 
 
-Use `--cpu host-passthrough` to expose the host CPU to the Arm64 KVM guests. The `host-model` CPU mode is not supported by the hypervisor used here.
+Each VM receives the following resources:
 
-Each VM also receives a persistent NoCloud seed ISO containing its hostname, SSH public key, and network configuration. The network configuration enables IPv4 DHCP on the interface matching the VM's MAC address. The DHCP reservation in `agi-net` supplies the fixed IP address.
+- Four virtual CPUs
+- 4 GB of memory
+- A 20 GB operating-system disk
+- A separate empty 10 GB data disk
+- An interface on `agi-net`
 
-Run the loop on the AGI host for the initial VM creation. It checks that the VM disk and seed files do not already exist before creating them.
+Use `--cpu host-passthrough` to expose the host CPU to the Arm64 KVM guests. 
+
+Each VM also receives a persistent NoCloud seed ISO containing its hostname, SSH public key, and network configuration. The network configuration enables IPv4 DHCP on the interface matching the MAC address of the VM. The DHCP reservation in `agi-net` supplies the fixed IP address.
+
+Run the loop on the AGI host for the initial VM creation. It checks that the VM disk and seed files don't already exist before creating them:
 
 ```bash
 (
@@ -284,7 +293,7 @@ rmdir "$SEED_DIRECTORY"
 )
 ```
 
-The first boot can take a few minutes while cloud-init configures each VM. Keep the seed ISOs attached so they remain available on subsequent boots. The subshell stops the loop if a command fails.
+The first boot can take a few minutes while cloud-init configures each VM. Keep the seed ISOs attached so that they remain available on subsequent boots. 
 
 ## Verify access to the VMs
 
@@ -294,7 +303,7 @@ Confirm that all three VMs are running:
 sudo virsh list --all
 ```
 
-The expected output is similar to:
+The output is similar to:
 ```output
  Id   Name    State
 -----------------------
@@ -303,15 +312,14 @@ The expected output is similar to:
  3    ceph3   running
  ```
 
-If a VM is listed as `shut off`, start that existing VM with `sudo vi
-rsh start ceph1`, replacing `ceph1` with its name.
+If a VM is listed as `shut off`, start that existing VM with `sudo virsh start ceph1`, replacing `ceph1` with its name.
 
 Check that libvirt assigned `192.168.100.11`, `192.168.100.12`, and `192.168.100.13` to the three VMs:
 
 ```bash
 sudo virsh net-dhcp-leases agi-net
 ```
-The expected output is similar to:
+The output is similar to:
 ```output
 Expiry Time           MAC address         Protocol   IP address          Hostname   Client ID or DUID
 -----------------------------------------------------------------------------------------------------------------------------------------------
@@ -320,7 +328,7 @@ Expiry Time           MAC address         Protocol   IP address          Hostnam
  2026-10-07 14:58:52   52:54:00:ce:00:03   ipv4       192.168.100.13/24   ceph3      ff:cb:39:0a:c7:00:02:00:00:ab:11:bb:14:a0:3e:17:e0:f4:e8
 ```
 
-If the lease list is empty immediately after boot, wait a few minutes and check again. If a lease remains missing, run `sudo virsh domblklist ceph1 --details` for the affected VM and confirm that its seed ISO is attached to the CD-ROM. Use `sudo virsh console ceph1` to inspect boot and cloud-init messages; press **Ctrl+]** to leave the console.
+If the lease list is empty immediately after boot, wait for a few minutes and check again. If a lease remains missing, run `sudo virsh domblklist ceph1 --details` for the affected VM and confirm that its seed ISO is attached to the CD-ROM. Use `sudo virsh console ceph1` to inspect boot and cloud-init messages. To leave the console, press **Ctrl+]**.
 
 After the leases appear, connect to each VM and display its hostname, architecture, and cloud-init status:
 
@@ -341,4 +349,6 @@ Accept each SSH host key when prompted. Each connection should report the corres
 
 ## What you've accomplished and what's next
 
-You've created three Ubuntu 26.04 Arm64 virtual machines with fixed private addresses and separate empty data disks. Next, you'll validate their resources, networking, time synchronization, and storage before installing Ceph.
+You've created three Ubuntu 26.04 VMs with fixed private addresses and separate empty data disks. 
+
+Next, you'll validate their resources, networking, time synchronization, and storage before installing Ceph.
