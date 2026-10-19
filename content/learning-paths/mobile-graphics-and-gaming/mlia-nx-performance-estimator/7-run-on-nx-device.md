@@ -53,7 +53,7 @@ Complete the following steps to configure the public Neural Statistics layer for
 
 Run the remaining host commands from `mlia-demo` in the same Bash shell.
 
-Create a separate environment for NumPy, copy the compiled model as `baseline.vgf`, and download the [ready-made MobileNet scenario](mobilenet-scenario.json):
+Create a separate environment for NumPy, copy the compiled model as `baseline.vgf`, and download the [ready-made MobileNet scenario](../mobilenet-scenario.json):
 
 ```bash
 python3.12 -m venv nx-tools-venv
