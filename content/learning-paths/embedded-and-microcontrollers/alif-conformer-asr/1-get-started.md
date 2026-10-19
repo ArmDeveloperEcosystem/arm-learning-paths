@@ -110,7 +110,7 @@ find resources_downloaded/asr -name '*.pte' -print
 ls -lh resources/asr/labels/librispeech_sp.pieces
 ```
 
-### How the ExecuTorch `.pte` files are generated
+### How the ExecuTorch .pte files are generated
 
 The setup script is a wrapper around the MLEK resource pipeline. For the ASR use case, it does three jobs:
 

@@ -20,6 +20,53 @@ prerequisites:
     - A Linux development machine, or an Apple silicon Mac running macOS 15 or later with Homebrew and [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/) installed
     - An Alif Ensemble E8 AI/ML AppKit (AK-E8-AIML), or an E8 DevKit with a compatible attached display, and a USB-C data cable
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-10-19T18:53:32Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: d578cfc715a8053023cefa73fadd12f17f8a7c80482312edb5728285cab7d367
+  summary_generated_at: '2026-10-19T18:53:32Z'
+  summary_source_hash: d578cfc715a8053023cefa73fadd12f17f8a7c80482312edb5728285cab7d367
+  faq_generated_at: '2026-10-19T18:53:32Z'
+  faq_source_hash: d578cfc715a8053023cefa73fadd12f17f8a7c80482312edb5728285cab7d367
+  summary: >-
+    You'll prepare a quantized Conformer speech recognition model for ExecuTorch, validate it on a
+    Corstone-320 FVP, and deploy it to an Alif Ensemble E8. First, you'll
+    generate model resources and run the FVP application with recorded audio. Then, you'll build the E8
+    firmware, program the model in external flash, and capture speech through the onboard
+    microphones. Finally, you'll check the displayed transcription, Ethos-U85 activity, and standalone
+    restart.
+#   faqs:
+#   - question: How do I know the FVP ASR application ran correctly before moving to the E8 board?
+#     answer: >-
+#       Check that the FVP console identifies the audio sample and prints a `Decoded output:` line
+#       with recognized text. You can then move on to the E8 build.
+#   - question: Which application do I build for the E8 and which core does it target?
+#     answer: >-
+#       Select the Alif MLEK `alif_asr` application with `-DUSE_CASE_BUILD=alif_asr`, then build
+#       the `mlek_alif_asr` target. You deploy it to the E8's high-performance Cortex-M55 subsystem.
+#   - question: Which build option selects the Ethos-U85 NPU for the E8 firmware?
+#     answer: >-
+#       Set `-DETHOS_U_NPU_ID=U85` when you configure the E8 firmware. You can check for nonzero
+#       `NPU ACTIVE` and `NPU TOTAL` counters in the UART log after inference.
+#   - question: What should I set up on the E8 before opening the serial console, and what settings do I use?
+#     answer: >-
+#       Keep the **PRG USB** cable connected and set **SW4** to **UART4**. Open the board's serial
+#       port at 115200 baud, eight data bits, no parity, and one stop bit. If the port was already
+#       open when you changed **SW4**, close and reopen it.
+#   - question: How do I know the E8 is ready to capture speech, and how do I record a phrase?
+#     answer: >-
+#       Press **RESET (SW1)** and wait for `Model initialisation complete` in the UART log and
+#       **Conformer ASR (ExecuTorch)** on the display. Hold down the joystick center while you
+#       speak, then release it. Check the display for a transcription and the console for a
+#       `Decoded output:` line.
+# END generated_summary_faq
+
 author:
     - Matt Cossins
     - Kwashie Andoh

@@ -85,7 +85,7 @@ export ALIF_PORT=/dev/cu.usbmodemXXXX
   {{< /tab >}}
 {{< /tabpane >}}
 
-Replace the example `ALIF_PORT` with the device you found. On Linux, your user needs to have permission to open it. If the device belongs to `dialout`, add your user to that group with `sudo usermod -aG dialout "$USER"`.
+Replace the example `ALIF_PORT` with the device that you found. On Linux, your user needs to have permission to open it. If the device belongs to `dialout`, add your user to that group with `sudo usermod -aG dialout "$USER"`.
 
 After adding your user, sign out and back in before continuing. After signing in, repeat the `ALIF_MLEK_ROOT`, `SETOOLS_ROOT`, and `ALIF_PORT` assignments because these variables don't survive closing the shell.
 
