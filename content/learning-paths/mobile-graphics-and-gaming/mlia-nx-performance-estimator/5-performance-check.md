@@ -1,6 +1,6 @@
 ---
-title: Estimate performance and inspect configurations
-description: Run the NX Performance Estimator, read standardized model and scheduling metrics, and compare built-in or custom target configurations.
+title: Estimate baseline performance and inspect reports
+description: Estimate baseline NX performance with MLIA, inspect report metrics and breakdowns, and optionally compare a built-in target profile.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -15,21 +15,21 @@ Run a performance check with the same model and target profile:
 mlia check models/baseline.tflite --target-profile neural-technology --performance --output-dir runs/baseline
 ```
 
-With the tested packages and `neural-technology` profile, expect `136,962` estimated total cycles and about `0.09131 ms` per inference. These are compiler estimates, not timings measured on a device.
+With the tested packages and `neural-technology` profile, expect an estimated `136,962` total cycles and about `0.09131 ms` per inference. 
 
 ## Locate and read the reports
 
-With `--output-dir runs/baseline`, the key files are:
+With `--output-dir runs/baseline`, the following files are important:
 
 | Path under `runs/baseline/mlia-output/` | Purpose |
 | --- | --- |
-| `mlia-output.json` | Standardized MLIA result, including model metadata, metrics, entities, breakdowns, and advice |
+| `mlia-output.json` | Standardized Arm ML Inference Advisor (MLIA) result, including model metadata, metrics, entities, breakdowns, and advice |
 | `nx_performance_statistics.json` | Detailed chain and cascade performance statistics |
 | `nx-performance-estimator/` | Estimator summaries and raw performance, timing, and debug databases |
-| `ml-sdk-model-converter/` | TOSA intermediates and `baseline.tosa.vgf`, produced automatically from the LiteRT model |
+| `ml-sdk-model-converter/` | Tensor Operator Set Architecture (TOSA) intermediates and `baseline.tosa.vgf`, produced automatically from the LiteRT model |
 | `logs/mlia.log` | Analysis and diagnostic log |
 
-By default MLIA writes to `mlia-output` in the current directory, with the report in `mlia-output.json`.
+By default, MLIA writes to `mlia-output` in the current directory, with the report in `mlia-output.json`.
 
 Read the main cycle and inference estimates:
 
@@ -62,7 +62,7 @@ The full report also includes `target_utilization`, memory traffic, and compiled
 
 For the baseline, `dram_cycles` is `94,396`, compared with `34,976` compute cycles. This gives you a reason to investigate memory traffic.
 
-Use `results[].breakdowns` and their `entity_id` links to `results[].entities` to inspect individual chains and cascades. These are compiler scheduling groups, not necessarily one framework layer each. Source-operator provenance helps you relate those groups to the original graph. Some metrics overlap or use non-additive aggregation policies, so don't sum every breakdown to recreate the model total.
+Use `results[].breakdowns` and their `entity_id` links to `results[].entities` to inspect individual chains and cascades. These are compiler scheduling groups. They're not necessarily one framework layer each. Source-operator provenance helps you relate those groups to the original graph. Some metrics overlap or use non-additive aggregation policies, so don't sum every breakdown to recreate the model total.
 
 ## (Optional) Compare a different built-in profile
 
@@ -72,8 +72,10 @@ Keep the model unchanged when exploring a different target configuration. For ex
 mlia check models/baseline.tflite --target-profile NX-peak-12SC-8NX-600MHz --performance --output-dir runs/baseline-peak
 ```
 
-Differences here reflect the profile's system and compiler assumptions, not a model optimization. Return to `neural-technology` for the model comparison in the final section.
+Differences in performance reflect the system and compiler assumptions of the profile. The performance differences don't reflect a model optimization.
 
 ## What you've accomplished and what's next
 
-You've collected baseline estimates and distinguished model metrics from scheduling breakdowns. Next, you'll evaluate a smaller public model under the original profile and compare the results.
+You've collected baseline estimates and distinguished model metrics from scheduling breakdowns.
+
+Next, you'll evaluate a smaller public model under the `neural-technology` profile and compare the results.

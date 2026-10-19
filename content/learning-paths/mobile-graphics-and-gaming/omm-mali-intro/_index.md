@@ -1,10 +1,6 @@
 ---
 title: Evaluate Opacity Micromaps for ray-traced game assets
 
-draft: true
-cascade:
-    draft: true
-    
 description: Evaluate an alpha-tested asset for Opacity Micromaps on Arm Mali G2-Ultra NX, then choose an OMM strategy, fallback, and validation plan.
 
 minutes_to_complete: 40

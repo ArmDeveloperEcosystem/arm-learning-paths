@@ -1,6 +1,6 @@
 ---
-title: Prepare the ASR application for the Alif E8 AI/ML AppKit
-description: Prepare the Alif MLEK resources, and compare the board application with the ASR application you ran on FVP.
+title: Prepare the Alif E8 ASR application and model
+description: Prepare the Alif MLEK resources and compare the board application with the ASR application you ran on the FVP.
 weight: 4
 
 layout: "learningpathall"
@@ -22,7 +22,7 @@ The board uses a separate application, `alif_asr`, from the Alif MLEK repository
 ## Connect the board
 
 {{% notice Important %}}
-Use the [Alif Ensemble E8 AI/ML AppKit](https://alifsemi.com/support/kits/ensemble-e8appkit/) for this Learning Path. If you use an [E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) instead, ensure a supported display is attached and configure the firmware with `-DTARGET_BOARD=DevKit-e8`.
+Use an [Alif Ensemble E8 AI/ML AppKit](https://alifsemi.com/support/kits/ensemble-e8appkit/), or an [E8 DevKit](https://alifsemi.com/support/kits/ensemble-e8devkit/) with a supported display attached. The build command defaults to `AppKit-e8`; for the DevKit, select `-DTARGET_BOARD=DevKit-e8`. The measured validation later in this Learning Path used the DevKit.
 {{% /notice %}}
 
 To connect to the Alif Ensemble E8 AppKit:
@@ -72,7 +72,7 @@ Secure Enclave Tools (SETOOLS) is Alif's toolset for flashing firmware to MRAM t
   2. Navigate to **Privacy & Security**.
   3. Select **Open Anyway**, only if you trust the package downloaded from Alif.
 
-  Then, run the command again. You might need to reapprove for both `./app-*` commands.
+  Then, run the command again. Each executable can require separate approval: `app-write-mram`, `app-gen-toc`, and the `maintenance` and `tools-config` utilities used during board provisioning.
   {{% /notice %}}
 
 
@@ -80,7 +80,7 @@ Secure Enclave Tools (SETOOLS) is Alif's toolset for flashing firmware to MRAM t
 
 The SEGGER J-Link Software and Documentation Pack includes J-Flash, which you'll use later to program the model into external OSPI flash.
 
-Install J-Link for your host operating system. This Learning Path was tested with version 9.54. 
+Install J-Link for your host operating system. The DevKit validation described later used version 9.36.
 
 On Linux, run `uname -m` and download the matching `.deb` package from the [SEGGER website](https://www.segger.com/downloads/jlink/): x86-64 for `x86_64`, or ARM64 for `aarch64`. Replace the filename in the command:
 
@@ -96,7 +96,7 @@ sudo apt install ./replace_with_your_jlink_download.deb
 
 ## Clone the Alif MLEK repository
 
-Before you begin, **use Python 3.10–3.13**. Leave any active virtual environment and check your version:
+Before you begin, use Python 3.12 as configured during host setup. Leave any active virtual environment and check your version:
 
 ```bash
 if type deactivate >/dev/null 2>&1; then deactivate; fi
@@ -119,14 +119,14 @@ Use this pinned revision for the first run. If you already have a clone, keep an
 
 ## Prepare the ExecuTorch model
 
-Run the resource setup script in the Alif repository:
+Run the resource setup script in the Alif repository. Select only `asr` to avoid downloading and exporting unrelated examples:
 
 ```bash
-python3 set_up_default_resources.py --ml-frameworks executorch
+python3 set_up_default_resources.py --ml-frameworks executorch --use-case asr
 source resources_downloaded/env/bin/activate
 ```
 
-This prepares the Conformer checkpoint, vocabulary, and Ethos-U85 `.pte` models in the Alif repository layout. It also creates this repository's Python environment. The board build uses these resources when it builds `mlek_alif_asr`.
+This downloads the trained Conformer checkpoint and generates the Ethos-U85 `.pte` model. It creates a Python environment and runs `resources/asr/models/conformer_pte_gen.py` to export the model, calibrate INT8 quantization with the bundled WAV samples, and lower the graph for Ethos-U. The SentencePiece vocabulary is supplied in the repository. The board build uses these resources when it builds `mlek_alif_asr`. The first setup can take several minutes.
 
 Confirm the board model and vocabulary are available:
 
@@ -190,6 +190,6 @@ Keep these settings for the first run so that model selection, runtime memory, a
 
 ## What you have accomplished and what is next
 
-You have connected the required board hardware, prepared the Alif MLEK resources, and identified how the board application extends the ASR flow you ran on the FVP.
+You have connected the board hardware, prepared the Alif MLEK model resources, and identified how the board application extends the ASR flow you ran on the FVP.
 
 Next, you will build the E8 firmware, program the model into OSPI flash, and install the application in MRAM.

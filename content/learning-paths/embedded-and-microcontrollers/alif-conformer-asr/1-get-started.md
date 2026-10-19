@@ -6,6 +6,10 @@ weight: 2
 layout: "learningpathall"
 ---
 
+## What you will run
+
+You will first run Conformer speech recognition on the Corstone-320 Fixed Virtual Platform (FVP) using recorded audio. Then you will capture a spoken phrase on an Alif Ensemble E8 board, run the model through ExecuTorch on its Ethos-U85 NPU, and read the transcription on the connected display. Speech processing runs locally on the board.
+
 ## What is automatic speech recognition?
 
 Automatic speech recognition (ASR) converts speech audio into text. The application you will run reads fixed 16 kHz audio, converts the samples into Mel spectrogram features, runs a Conformer model, and decodes the output tokens into text.
@@ -18,11 +22,15 @@ The [SentencePiece vocabulary](https://github.com/google/sentencepiece/blob/mast
 
 ## The ML Evaluation Kit
 
-The Machine Learning Evaluation Kit (MLEK) is a set of embedded machine learning examples, build scripts, model resources, and deployment flows for Arm-based microcontroller systems. In this section, you will review the ASR and MLEK flow, clone the Arm MLEK repository, initialize submodules, and run the ExecuTorch resource setup script that prepares the Conformer model assets.
+The Machine Learning Evaluation Kit (MLEK) is a set of embedded machine learning examples, build scripts, model resources, and deployment flows for Arm-based microcontroller systems. You will first use Arm MLEK's `asr` application on the FVP. Later, you will use Alif's MLEK application, `alif_asr`, which adds the E8 microphone, display, and memory configuration to this deployment flow.
 
 Ethos-U85 is an Arm NPU for accelerating neural networks in high-performance microcontroller designs, and is a primary target for the MLEK. Conformer is a good fit for this target because ASR depends on both local sound patterns and longer-range speech context. In this flow, the model is exported as an ExecuTorch `.pte` file using the Ethos-U ExecuTorch backend, so supported operations can run on the Ethos-U85 NPU instead of only on the Cortex-M CPU.
 
-Before using the physical Alif E8 AppKit, you will run the ASR application on the [Corstone-320 Fixed Virtual Platform (FVP)](https://support.arm.com/documentation/109760/0000/SSE-320-FVP). An FVP is a software model of an Arm system that can run the same baremetal firmware you later port and deploy to hardware. Corstone-320 includes an Ethos-U85 target, so you can prototype and debug the model, runtime, and application flow before porting the application to the Alif board.
+## Set expectations for recognition quality
+
+The [Conformer model](https://huggingface.co/Arm/stt_en_conformer_executorch_small/blob/87d021a59a62a4c9640b5b568067ae8063550d26/README.md) has about 10 million parameters and was trained on English LibriSpeech audio. The deployment uses INT8 quantization and a lightweight decoder that selects the most likely tokens without an additional language model. These choices keep memory and computation manageable for embedded deployment.
+
+Recognition also depends on the training data, speaker, and recording conditions. You might see substituted or missing words, or unusual word boundaries. Completed inference demonstrates that the deployment works; comparing the transcription with what you said is a separate accuracy check. You will check both when you test the board.
 
 ## Prepare your development host
 
@@ -32,7 +40,7 @@ Use Linux on an x86_64 or aarch64 host, or use an **Apple Silicon Mac** running 
 The commands have not been validated on native Windows. WSL with USB passthrough can work with the E8 AppKit, but that configuration is outside the scope of this Learning Path.
 {{% /notice %}}
 
-MLEK requires Python 3.10, 3.11, or 3.12. Install the host packages for your operating system. The macOS commands assume you have already installed [Homebrew](https://brew.sh/).
+Use Python 3.12 for the tested setup. Install the host packages for your operating system. The macOS commands assume you have already installed [Homebrew](https://brew.sh/).
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu Linux" language="bash">}}
@@ -56,7 +64,7 @@ alias python3=/opt/homebrew/bin/python3.12
   {{< /tab >}}
 {{< /tabpane >}}
 
-Install the `arm-none-eabi` distribution of the [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/). The compiler must be version 13.2.1 or later for Cortex-M85; Arm GNU Toolchain 14.2.Rel1 is the version used by the pinned MLEK Docker environment.
+Install the `arm-none-eabi` distribution of the [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/). The FVP and board builds were verified with Arm GNU Toolchain 15.3.Rel1 (GCC 15.3.1). Ensure `arm-none-eabi-gcc` is on your `PATH`.
 
 Verify the host and toolchain:
 
