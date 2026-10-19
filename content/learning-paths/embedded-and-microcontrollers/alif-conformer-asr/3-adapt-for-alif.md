@@ -6,7 +6,7 @@ weight: 4
 layout: "learningpathall"
 ---
 
-## Move from the FVP to the E8 AppKit
+## Compare the FVP and the E8 AppKit applications
 
 Your Fixed Virtual Platform (FVP) run verified the Conformer model, audio preprocessing, inference, and token decoding using recorded audio. You'll now use those same automatic speech recognition (ASR) stages to recognize speech on the Alif Ensemble E8 AppKit.
 
