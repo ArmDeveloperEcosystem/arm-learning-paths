@@ -31,7 +31,7 @@ Microsandbox is an open-source, local-first microVM runtime for untrusted worklo
 
 Microsandbox runs workloads in lightweight virtual machines (microVMs) using libkrun. On Arm Linux, it uses Kernel-based VM (KVM) support to run a separate guest kernel for each sandbox.
 
-You'll install the `msb` command-line runtime on Ubuntu 24.04 LTS on `aarch64`, the tested Linux distribution for this guide. You'll then run Python inside a sandbox to verify the installation.
+You'll install the `msb` command-line runtime on Ubuntu 24.04 LTS on `aarch64`. You'll then run Python inside a sandbox to verify the installation.
 
 In addition to Linux, Microsandbox supports Windows and macOS on Apple silicon. On macOS, you can use the same installation script. For macOS installation and platform-specific setup checks, see the [Microsandbox quickstart](https://docs.microsandbox.dev/getting-started/quickstart).
 
@@ -41,7 +41,7 @@ The Microsandbox release bundle supplies the runtime and `libkrunfw` guest firmw
 
 You need an Arm Linux system running Ubuntu 24.04 LTS, with sudo access and internet access to GitHub and Docker Hub. Allow disk space for the downloaded image and its extracted filesystem. You also need enough available memory for a 512 MiB guest alongside the host operating system.
 
-These steps were tested on an Arm AGI CPU host. Ensure that your host exposes KVM to run the sandbox. If Ubuntu runs inside a VM, ensure that the outer hypervisor exposes nested virtualization.
+The steps in the install guide were tested on an Arm AGI CPU host. Ensure that your host exposes KVM to run the sandbox. If Ubuntu runs inside a VM, ensure that the outer hypervisor exposes nested virtualization.
 
 Check your host:
 
@@ -90,7 +90,7 @@ sudo apt install -y ca-certificates curl tar gzip coreutils
 ```
 
 {{% notice Note %}}
-The installer downloads the latest release. These steps were tested with Microsandbox v0.7.8. To find available versions, see the [Microsandbox releases page](https://github.com/superradcompany/microsandbox/releases).
+The installer downloads the latest release. The steps in the install guide were tested with Microsandbox v0.7.8. To find available versions, see the [Microsandbox releases page](https://github.com/superradcompany/microsandbox/releases).
 {{% /notice %}}
 
 Run the official installer from your user account, without `sudo`:
