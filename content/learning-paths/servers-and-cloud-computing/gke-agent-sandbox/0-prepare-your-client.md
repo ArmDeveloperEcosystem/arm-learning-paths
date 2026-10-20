@@ -7,21 +7,21 @@ layout: learningpathall
 
 ## Run agent-generated code in an isolated remote sandbox
 
-Coding agents can write useful programs, but running agent-generated code on your local machine gives untrusted code direct access to your files, credentials, and network. Agent Sandbox on Google Kubernetes Engine (GKE) executes untrusted, model-generated code in a secure, isolated environment away from your local machine.
+Coding agents can write useful programs. However, running agent-generated code on your local machine gives untrusted code direct access to your files, credentials, and network. Agent Sandbox on Google Kubernetes Engine (GKE) executes untrusted, model-generated code in a secure, isolated environment away from your local machine.
 
 Each sandbox Pod runs under gVisor, which places a user-space application kernel between the workload and the host kernel. Agent Sandbox applies a default-deny network posture to sandboxed workloads.
 
-To use agent sandboxes, you can create a Google Kubernetes Engine (GKE) Standard cluster and enable Agent Sandbox on a Google Axion node pool. 
+To use agent sandboxes, create a Google Kubernetes Engine (GKE) Standard cluster and enable Agent Sandbox on a Google Axion node pool. 
 
 You'll create a cluster with a pool of pre-warmed sandboxes. When you need to run code, you'll allocate a sandbox from the pool and submit your code to it from your local machine.
 
-Your agent and your terminal stay on your local machine, and the generated code runs remotely.
+Your agent and your terminal will stay on your local machine, and you'll run the generated code remotely.
 
 ## Set up your local machine
 
-Your local machine manages the Kubernetes resources. The Python workloads run on the remote Arm node. You don't need local Docker, KVM, or a local gVisor installation.
+Your local machine will manage the Kubernetes resources. The Python workloads will run on the remote Arm node. You don't need local Docker, KVM, or a local gVisor installation.
 
-Use Ubuntu Linux or macOS. The examples were tested on an Arm Linux system and on macOS.
+Use Ubuntu Linux or macOS. The Learning Path was tested on an Arm Linux system and on macOS.
 
 ### Install the required tools
 
