@@ -21,7 +21,7 @@ generated_summary_faq:
     client and provision a GKE cluster with an Axion node pool. Then, you'll create a sandbox
     warm pool, claim a sandbox, and verify its restrictions. Next, you'll correct a failing CSV
     analysis and retrieve reports. You'll then inspect the environment interactively, connect
-    Antigravity for remote execution, and clean up cloud resources.
+    Antigravity to run code remotely, and clean up cloud resources.
   # faqs:
   # - question: Which node pool should I use to run sandboxes on Google Axion?
   #   answer: >-
