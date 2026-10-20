@@ -56,7 +56,7 @@ kubectl --context "$GKE_CONTEXT" delete namespace "$NAMESPACE" --wait=true
 
 Deleting the namespace removes its remaining namespaced resources. Node and control-plane charges continue until you delete the cluster.
 
-## Delete the tutorial cluster
+## Delete the cluster
 
 Confirm that the project, location, and cluster name still identify the dedicated cluster that you created. After confirming, delete the cluster:
 
@@ -91,8 +91,8 @@ You didn't create an external load balancer, custom image registry, or persisten
 
 ## What you've accomplished
 
-You've retained results while removing the task environments and the dedicated cluster.
+You've retained results while removing the task environments and the dedicated cluster for the Learning Path.
 
-You can extend the Learning Path workflow to run workloads in an isolated environment on Arm for your own use cases.
+You can extend the Learning Path workflow to run agent-generated code in an isolated environment for your own use cases.
 
 

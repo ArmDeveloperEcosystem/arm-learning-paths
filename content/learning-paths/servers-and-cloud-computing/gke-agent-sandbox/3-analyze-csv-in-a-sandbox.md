@@ -73,7 +73,7 @@ The workspace identifier and traceback line numbers can vary.
 
 That error is part of the demonstration. The runner treats an unexpected initial success, a timeout, or a different failure as an unsuccessful run.
 
-After replacing the program, the output includes the following checks and report result. The following condensed example omits the test duration:
+After replacing the program, the output includes the checks and report result. This condensed example omits the test duration:
 
 ```output
 test_duplicate_orders_are_not_double_counted (test_sales.SalesChecks...) ... ok

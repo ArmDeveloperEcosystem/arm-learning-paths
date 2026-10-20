@@ -46,7 +46,7 @@ After authenticating, type `/exit` to close `agy` and return to your terminal.
 
 ## Set up the MCP bridge
 
-The model context protocol (MCP) bridge is a Python script that runs on your local machine and forwards the `agy` tool calls to the sandbox Pod using kubectl. 
+The Model Context Protocol (MCP) bridge is a Python script that runs on your local machine and forwards the `agy` tool calls to the sandbox Pod using `kubectl`.
 
 Create a virtual environment for the bridge and install its dependencies:
 

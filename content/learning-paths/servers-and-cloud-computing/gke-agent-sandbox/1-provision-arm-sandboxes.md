@@ -35,7 +35,7 @@ gcloud compute networks subnets create "$SUBNETWORK" \
   --region="$REGION" --range=10.0.0.0/20
 ```
 
-You'll use these environment variables for subsequent commands, so keep this terminal open or re-export them if you start a new session. `us-central1-c` is the default zone. If you hit C4A capacity issues, `us-east4-a` is a good alternative — update both `LOCATION` and `REGION`, and recreate the subnet in the new region as described in [Handle capacity failures](/learning-paths/servers-and-cloud-computing/gke-agent-sandbox/1-provision-arm-sandboxes/#handle-capacity-failures).
+You'll use these environment variables for subsequent commands, so keep this terminal open or re-export them if you start a new session. `us-central1-c` is the default zone. If you hit C4A capacity issues, `us-east4-a` is a good alternative. Update both `LOCATION` and `REGION`, then recreate the subnet in the new region.
 
 If you saved `env.sh` earlier, append these variables to it:
 
@@ -173,7 +173,9 @@ For a quota error, the `statusMessage` names the quota that was exceeded. Go to 
 
 ## Install the matching kubectl
 
-Now that the cluster exists, install a kubectl within one minor version of its control plane, following the [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/). Set `KUBECTL_VERSION` to match the minor of the `CLUSTER_VERSION` that you chose earlier. The following block detects your OS and architecture, downloads the matching binary, and verifies its checksum. Run it as a subshell so that a download failure stops the block:
+Now that the cluster exists, install a kubectl within one minor version of its control plane, following the [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/). Set `KUBECTL_VERSION` to match the minor of the `CLUSTER_VERSION` that you chose earlier.
+
+The following block detects your OS and architecture, downloads the matching binary, and verifies its checksum. Run it as a subshell so that a download failure stops the block:
 
 ```bash
 (
@@ -259,6 +261,8 @@ Confirm that the Agent Sandbox API resources are available:
 ```bash
 kubectl --context "$GKE_CONTEXT" api-resources --api-group=extensions.agents.x-k8s.io
 ```
+
+The output is similar to:
 
 ```output
 NAME                 SHORTNAMES   APIVERSION                                    NAMESPACED   KIND

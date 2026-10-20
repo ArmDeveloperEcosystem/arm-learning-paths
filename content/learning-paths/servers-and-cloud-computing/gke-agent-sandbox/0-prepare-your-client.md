@@ -7,7 +7,9 @@ layout: learningpathall
 
 ## Run agent-generated code in an isolated remote sandbox
 
-Coding agents can write useful programs, but running agent-generated code on your local machine gives untrusted code direct access to your files, credentials, and network. Agent Sandbox on Google Kubernetes Engine (GKE) is purpose-built for this problem: it executes untrusted, model-generated code in a secure, isolated environment away from your local machine. Each sandbox Pod runs under gVisor, which places a user-space application kernel between the workload and the host kernel. Agent Sandbox applies a default-deny network posture to sandboxed workloads.
+Coding agents can write useful programs, but running agent-generated code on your local machine gives untrusted code direct access to your files, credentials, and network. Agent Sandbox on Google Kubernetes Engine (GKE) executes untrusted, model-generated code in a secure, isolated environment away from your local machine.
+
+Each sandbox Pod runs under gVisor, which places a user-space application kernel between the workload and the host kernel. Agent Sandbox applies a default-deny network posture to sandboxed workloads.
 
 To use agent sandboxes, you can create a Google Kubernetes Engine (GKE) Standard cluster and enable Agent Sandbox on a Google Axion node pool. 
 
