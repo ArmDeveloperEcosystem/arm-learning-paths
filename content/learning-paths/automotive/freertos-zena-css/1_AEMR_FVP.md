@@ -7,33 +7,23 @@ weight: 2
 layout: learningpathall
 ---
 
-# Run the existing FreeRTOS demo on the Cortex-R82 AEM FVP
-
-## Objective
+## Run the existing FreeRTOS demo on the Cortex-R82 AEM FVP
 
 Porting an operating system to a new platform involves changes to startup code, memory maps, interrupts, timers, and peripherals. Before making those changes, reproduce a known-good example on its supported platform. This separates tool installation problems from problems introduced during the port.
 
-You will build the existing FreeRTOS symmetric multiprocessing (SMP) and Memory Protection Unit (MPU) demo for Cortex-R82. You will then run it on `FVP_BaseR_AEMv8R` and confirm that the compiler, CMake, FreeRTOS sources, and FVP work together.
-
-After completing this section, you will have verified that:
-
-- The FreeRTOS distribution and all required submodules are available.
-- The selected Arm toolchain can build the Cortex-R82 port.
-- The Cortex-R82 AEM FVP can load and run the generated executable.
-- FreeRTOS SMP scheduling and MPU-protected task communication operate correctly.
-- The existing example provides a working baseline for the Cortex-R82AE port.
+You'll build the existing FreeRTOS symmetric multiprocessing (SMP) and Memory Protection Unit (MPU) demo for Cortex-R82. You'll then run it on `FVP_BaseR_AEMv8R` and confirm that the compiler, CMake, FreeRTOS sources, and Fixed Virtual Platform (FVP) work together.
 
 ## Before you begin
 
-The example is tested with:
+Ensure that you've installed the following tools and added their executable directories to your `PATH`:
 
 - CMake 3.22.1
 - [Arm GNU Toolchain 15.3](https://gitlab.arm.com/tooling/gnu-toolchains-for-arm/-/tree/releases/15.3.rel1?ref_type=heads#linux) or [Arm Compiler for Embedded 6.24](https://support.arm.com/downloads/view/ACOMPE?sortBy=availableBy&revision=r6p24-00rel0)
 - [`FVP_BaseR_AEMv8R` from Fast Models 11.32](https://support.arm.com/tools-and-software/fixed-virtual-platforms/arm-architecture-fvps)
 
-Install the tools and add their executable directories to your `PATH`. You need only one compiler.
+You need only one of Arm GNU Toolchain or Arm Compiler for Embedded.
 
-Verify your setup:
+Verify your setup with the following commands, omitting the command for the compiler that you didn't choose:
 
 ```bash
 cmake --version
@@ -42,9 +32,9 @@ aarch64-none-elf-gcc --version  # GNU build
 armclang --version              # Arm Compiler build
 ```
 
-## Get the FreeRTOS sources
+## Clone the FreeRTOS sources
 
-Clone the FreeRTOS distribution with its submodules. The Cortex-R82 demo is supplied by the partner-supported demos submodule, while the portable kernel code is supplied by the kernel submodule.
+Clone the FreeRTOS distribution with its submodules:
 
 ```bash
 git clone --recurse-submodules \
@@ -52,6 +42,8 @@ git clone --recurse-submodules \
   freertos-r82-baseline
 cd freertos-r82-baseline
 ```
+
+The Cortex-R82 demo is supplied by the partner-supported demos submodule. The portable kernel code is supplied by the kernel submodule.
 
 ## Review the Cortex-R82 kernel port
 

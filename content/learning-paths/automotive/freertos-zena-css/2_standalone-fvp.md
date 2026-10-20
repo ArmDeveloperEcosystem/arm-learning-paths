@@ -7,9 +7,7 @@ weight: 3
 layout: learningpathall
 ---
 
-# Run FreeRTOS on the Cortex-R82AE
-
-## Objective
+## Run FreeRTOS on the Cortex-R82AE
 
 Build and validate the FreeRTOS SMP application on the standalone Cortex-R82AE FVP before adapting it to Zena CSS. Use staged progress checks and source-level or Tarmac debugging to diagnose early port failures.
 
