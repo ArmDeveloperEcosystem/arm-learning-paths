@@ -5,11 +5,20 @@ weight: 5
 layout: learningpathall
 ---
 
-## Inspect the application task
+## Inspect the CSV analysis task
 
-The sandbox isolates each attempt — a failure doesn't affect your local machine or require cleanup of the execution environment. `run_demo.py` automates the full sequence: it runs a broken program, observes the failure, replaces it with the corrected version, and runs the tests, all within the same sandbox.
+The sandbox isolates each attempt. A failure therefore doesn't affect your local machine or require cleanup of the deployment environment. 
 
-Use the running cluster and warm pool for this task. Download the necessary files:
+Within the same sandbox, `run_demo.py` performs the following tasks:
+
+- Runs a broken program `analyze_sales_initial.py` to analyze a CSV file
+- Observes the failure
+- Replaces the broken program with the corrected version `analyze_sales.py`
+- Runs the tests
+
+Use the running cluster and warm pool for this CSV file analysis. 
+
+Start by downloading the necessary files:
 
 ```bash
 cd "$LP_WORKDIR"
@@ -38,21 +47,28 @@ Review the initial program before running it:
 cat csv-app/analyze_sales_initial.py
 ```
 
-The initial revision assumes that every quantity can be converted to an integer. Its core calculation is:
+The initial revision of the analysis program `analyze_sales_initial.py` assumes that every quantity can be converted to an integer. Its core calculation is:
 
 ```python
 total += int(row["quantity"]) * Decimal(row["unit_price"])
 ```
 
-A row with an empty quantity makes this fail. The corrected revision in `csv-app/analyze_sales.py` validates input, accounts for refunds, uses decimal arithmetic, and renders an HTML report with escaped product names.
+A row with an empty quantity makes this fail. 
+
+The revised program `csv-app/analyze_sales.py` corrects this issue by performing the following tasks:
+
+- Validates input
+- Accounts for refunds
+- Uses decimal arithmetic
+- Renders an HTML report with escaped product names
 
 You'll use saved revisions for a reproducible comparison.
 
 ## Run the failure and correction sequence
 
-The runner uses kubectl to create a claim, verify its Pod, and upload the CSV, tests, and initial program from your local machine. It executes that program remotely, checks the expected failure, and replaces only the program. It then runs the corrected application and six tests in the same workspace.
+The runner uses kubectl to create a claim, verify its Pod, and upload the CSV, tests, and initial program from your local machine. It executes that program remotely, checks the expected failure, and replaces only the program. The runner then runs the corrected application and six tests in the same workspace.
 
-Run the sequence with an explicit cluster context:
+Run the sequence with cluster context:
 
 ```bash
 python3 csv-app/run_demo.py \
@@ -69,7 +85,7 @@ Traceback (most recent call last):
 ValueError: invalid literal for int() with base 10: ''
 ```
 
-The workspace identifier and traceback line numbers can vary.
+The workspace identifier and traceback line numbers might vary.
 
 That error is part of the demonstration. The runner treats an unexpected initial success, a timeout, or a different failure as an unsuccessful run.
 

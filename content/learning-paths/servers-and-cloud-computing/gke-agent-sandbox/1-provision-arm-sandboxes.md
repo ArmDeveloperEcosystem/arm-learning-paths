@@ -35,7 +35,7 @@ gcloud compute networks subnets create "$SUBNETWORK" \
   --region="$REGION" --range=10.0.0.0/20
 ```
 
-You'll use these environment variables for subsequent commands, so keep this terminal open or re-export them if you start a new session. `us-central1-c` is the default zone. If you hit C4A capacity issues, `us-east4-a` is a good alternative. Update both `LOCATION` and `REGION`, then recreate the subnet in the new region as described in [Handle capacity failures](/learning-paths/servers-and-cloud-computing/gke-agent-sandbox/1-provision-arm-sandboxes/#handle-capacity-failures).
+You'll use these environment variables for subsequent commands, so keep this terminal open or re-export them if you start a new session. `us-central1-c` is the default zone. If you hit C4A capacity issues, `us-east4-a` is a good alternative. Update both `LOCATION` and `REGION`, then recreate the subnet in the new region.
 
 If you saved `env.sh` earlier, append these variables to it:
 
@@ -150,7 +150,7 @@ gcloud container operations list --project="$PROJECT_ID" --location="$LOCATION" 
   --filter="operationType=CREATE_NODE_POOL" --format="table(name,status,statusMessage)"
 ```
 
-An insufficient-capacity error means no `c4a-standard-2` nodes were available in `LOCATION`. Delete the cluster, then retry in a different zone or with a larger machine type:
+An insufficient-capacity error means that no `c4a-standard-2` nodes were available in `LOCATION`. Delete the cluster, then retry in a different zone or with a larger machine type:
 
 ```bash
 gcloud container clusters delete "$CLUSTER_NAME" \
@@ -171,9 +171,9 @@ export MACHINE_TYPE=c4a-standard-4
 
 For a quota error, the `statusMessage` names the quota that was exceeded. Go to **IAM & Admin > Quotas** in the Google Cloud console, find that quota, and request an increase before retrying.
 
-## Install the matching kubectl
+## Install the matching kubectl version
 
-Now that the cluster exists, install a kubectl within one minor version of its control plane, following the [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/). Set `KUBECTL_VERSION` to match the minor of the `CLUSTER_VERSION` that you chose earlier.
+Now that the cluster exists, install a kubectl version within one minor version of its control plane, following the [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/). Set `KUBECTL_VERSION` to match the minor of the `CLUSTER_VERSION` that you chose earlier.
 
 The following block detects your OS and architecture, downloads the matching binary, and verifies its checksum. Run it as a subshell so that a download failure stops the block:
 

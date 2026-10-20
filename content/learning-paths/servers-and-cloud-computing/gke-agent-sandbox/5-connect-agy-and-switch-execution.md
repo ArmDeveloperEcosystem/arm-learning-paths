@@ -5,11 +5,11 @@ weight: 7
 layout: learningpathall
 ---
 
-## Install the Antigravity CLI
+## Install Python programs and authenticate the Antigravity CLI
 
-You'll now install the Antigravity CLI, connect it to your Google Kubernetes Engine (GKE) sandbox, and prompt it to write and run a Python program. The code runs inside the sandbox on the remote Arm node, not on your local machine. You'll verify this by checking that the output shows the remote Linux environment.
+You'll now install the Antigravity CLI and connect it to your Google Kubernetes Engine (GKE) sandbox. After connecting to the sandbox, you'll prompt the CLI to write and run a Python program. The code runs inside the sandbox on the remote Arm node, not on your local machine. You'll verify this by checking that the output shows the remote Linux environment.
 
-Start by downloading the code that you'll run:
+Start by downloading necessary files, including the program that you'll run:
 
 ```bash
 cd "$LP_WORKDIR"
@@ -150,7 +150,7 @@ cd "$LP_WORKDIR"
 python3 mcp-bridge/capture_hello.py --record "$AGY_RECORD" --label remote-first
 ```
 
-The command runs `hello.py` in the recorded Pod one more time and saves the source, output, and a SHA-256 hash to `$AGY_SESSION/remote-first/` for your records.
+The command runs `hello.py` in the recorded Pod one more time. It saves the source, output, and a SHA-256 hash to `$AGY_SESSION/remote-first/` for your records.
 
 ## What you've accomplished and what's next
 

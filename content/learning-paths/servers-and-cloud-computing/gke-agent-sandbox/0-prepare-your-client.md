@@ -13,7 +13,7 @@ Each sandbox Pod runs under gVisor, which places a user-space application kernel
 
 To use agent sandboxes, create a Google Kubernetes Engine (GKE) Standard cluster and enable Agent Sandbox on a Google Axion node pool. 
 
-You'll create a cluster with a pool of pre-warmed sandboxes. When you need to run code, you'll allocate a sandbox from the pool and submit your code to it from your local machine.
+In this Learning Path, you'll create a cluster with a pool of pre-warmed sandboxes. When you need to run code, you'll allocate a sandbox from the pool and submit your code to it from your local machine.
 
 Your agent and your terminal will stay on your local machine, and you'll run the generated code remotely.
 
@@ -27,7 +27,7 @@ Use Ubuntu Linux or macOS. The Learning Path was tested on an Arm Linux system a
 
 Install the Google Cloud CLI (with `gke-gcloud-auth-plugin`) and Python 3.
 
-The Google Cloud CLI provisions and manages the GKE cluster and authenticates kubectl. Python 3 runs the helper scripts used on later pages.
+The Google Cloud CLI provisions and manages the GKE cluster and authenticates kubectl. Python 3 runs the helper scripts that you'll use later.
 
 #### Ubuntu Linux
 
@@ -86,7 +86,7 @@ export LP_WORKDIR="$PWD"
 mkdir -p output runs
 ```
 
-`output/` stores command output you save for reference, such as cluster configuration, pod specs, and workload results. `runs/` holds per-task subdirectories created by the helper scripts, one for each sandbox claim lifecycle.
+`output/` stores command output that you can save for reference, such as cluster configuration, pod specs, and workload results. `runs/` holds per-task subdirectories created by the helper scripts, one for each sandbox claim lifecycle.
 
 If you want to be able to restore your session in a new terminal, save `LP_WORKDIR` and `PROJECT_ID` to a file called `env.sh`:
 

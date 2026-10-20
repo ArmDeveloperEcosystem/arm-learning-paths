@@ -34,7 +34,7 @@ python3 claim.py check --record "$LP_WORKDIR/runs/shell/run.json"
 kubectl --context "$GKE_CONTEXT" -n "$NAMESPACE" exec -it "$POD_NAME" -c runtime -- /bin/sh
 ```
 
-You now have a shell inside the sandbox. You'll run subsequent commands inside the sandbox, not on your local machine.
+You now have a shell inside the sandbox. 
 
 ## Inspect the user and Linux environment
 
@@ -68,7 +68,7 @@ The kernel release can include `gvisor`.
 
 gVisor supplies an advertised kernel identity rather than reporting the real kernel version of the node. The Debian release identifies the operating system environment of the container.
 
-Try retrieving CPU and memory information:
+Retrieve CPU and memory information within the sandbox:
 
 ```bash
 lscpu
@@ -77,7 +77,7 @@ head -n 12 /proc/meminfo
 
 The CPU shows Neoverse-V2 with 2 cores, confirming this is a Google Axion node. Memory shows 512MB total, matching the `512Mi` limit set in the sandbox template.
 
-Write a test file to the writable workspace, then leave the shell:
+Write a test file to the writable workspace, then leave the sandbox shell:
 
 ```bash
 printf 'created in my sandbox shell\n' > /workspace/shell-marker.txt
@@ -85,7 +85,7 @@ cat /workspace/shell-marker.txt
 exit
 ```
 
-You now return to your local machine terminal. Exiting the shell doesn't delete its Pod or claim.
+You've now returned to your local machine terminal. Exiting the shell doesn't delete its Pod or claim.
 
 ## Compare filesystem writes
 
@@ -115,7 +115,7 @@ The output is similar to:
 ```
 Denied-write errno values and messages vary.
 
-The output shows which paths are writable and which are blocked. `/workspace` and `/tmp` succeed because they are writable volumes in the template. `/etc` and `/usr/local` are blocked because the root filesystem is read-only and the process runs as a non-root user.
+The output shows which paths are writable and which are blocked. `/workspace` and `/tmp` succeed because they're writable volumes in the template. `/etc` and `/usr/local` are blocked because the root filesystem is read-only and the process runs as a non-root user.
 
 ## Verify sandbox configuration
 
@@ -152,9 +152,9 @@ kubectl --context "$GKE_CONTEXT" -n "$NAMESPACE" get pod "$POD_NAME" \
 
 Confirm RuntimeClass `gvisor` and limits `500m` CPU and `512Mi` memory.
 
-## Release the inspection claim
+## Release the claim for interactive inspection
 
-Remove the inspection claim when you're done:
+Remove the claim when you're done:
 
 ```bash
 python3 claim.py delete --record "$LP_WORKDIR/runs/shell/run.json"

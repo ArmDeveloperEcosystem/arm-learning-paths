@@ -54,7 +54,7 @@ Wait for an available warm Pod to become ready before continuing.
 
 ## Claim and identify your sandbox
 
-`claim.py` is a Python script that automates the sandbox lifecycle. The script creates a `SandboxClaim` against the warm pool and waits until a sandbox Pod is ready. It then records the exact claim, sandbox, and Pod names in a local run directory. You'll use those recorded names in subsequent commands to target the right Pod.
+`claim.py` is a Python script that automates the sandbox lifecycle. The script creates a `SandboxClaim` against the warm pool and waits until a sandbox Pod is ready. It then records the exact claim, Sandbox, and Pod names in a local run directory. You'll use those recorded names in subsequent commands to target the right Pod.
 
 Create the claim and wait for the Pod to be ready:
 
@@ -81,7 +81,7 @@ kubectl --context "$GKE_CONTEXT" -n "$NAMESPACE" get sandboxclaim,sandbox,pod -o
 kubectl --context "$GKE_CONTEXT" -n "$NAMESPACE" get events --sort-by=.lastTimestamp
 ```
 
-## Run the small Python test
+## Run the Python test
 
 Review `workload.py` before running it:
 
@@ -91,10 +91,10 @@ cat workload.py
 
 The script runs inside the sandbox and does four things:
 
-- Reports the CPU architecture and user ID to confirm it's running on Arm as a non-root user (UID 1000).
+- Reports the CPU architecture and user ID to confirm that it's running on Arm as a non-root user (UID 1000).
 - Checks that the default Kubernetes service-account token is absent, as configured in the template.
 - Attempts to write a file under `/etc`. This write is expected to fail because the root filesystem is read-only and the process runs without root privileges. A write to `/workspace` succeeds because the template mounts a writable volume there.
-- Computes the sum of squares of integers 1–9 as a numeric result to confirm that the Python environment works.
+- Computes the sum of squares of integers 1 to 9 as a numeric result to confirm that the Python environment works.
 
 Verify that the claim is still bound, then run the script and retrieve the result:
 
@@ -136,7 +136,7 @@ cat "$LP_WORKDIR/output/runtime-image.txt"
 
 The runtime class should be `gvisor`.
 
-## Release the small-test claim
+## Release the claim for the test 
 
 Delete only the verified claim and wait for its bound Sandbox and Pod to disappear:
 

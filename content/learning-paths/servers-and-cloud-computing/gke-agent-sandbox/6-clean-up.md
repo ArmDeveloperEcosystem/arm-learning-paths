@@ -30,9 +30,7 @@ python3 mcp-bridge/finish_session.py --record "$AGY_RECORD"
 
 The script verifies claim ownership, deletes the claim and its bound Pod, and preserves the bridge logs.
 
-## Remove the dedicated namespace and warm pool
-
-You've released claims for the small test and the interactive inspection tasks. The CSV runner cleans up its claim. 
+## Remove the dedicated namespace and warm pool 
 
 Inspect the claims that remain in the Learning Path namespace:
 
@@ -48,7 +46,7 @@ kubectl --context "$GKE_CONTEXT" -n "$NAMESPACE" delete sandboxwarmpool axion-py
 
 If you stopped an earlier task midway, inspect and delete its claim by name. 
 
-After confirming that the dedicated namespace contains only Learning Path resources, delete the namespace:
+After confirming that the namespace contains only resources associated with the Learning Path, delete the namespace:
 
 ```bash
 kubectl --context "$GKE_CONTEXT" delete namespace "$NAMESPACE" --wait=true
@@ -58,7 +56,7 @@ Deleting the namespace removes its remaining namespaced resources. Node and cont
 
 ## Delete the cluster
 
-Confirm that the project, location, and cluster name still identify the dedicated cluster that you created. After confirming, delete the cluster:
+Confirm that the project, location, and cluster name still identify the cluster that you created. After confirming, delete the cluster:
 
 ```bash
 printf 'Project: %s\nLocation: %s\nCluster: %s\n' "$PROJECT_ID" "$LOCATION" "$CLUSTER_NAME"
@@ -76,9 +74,9 @@ gcloud compute disks list --project="$PROJECT_ID"
 gcloud compute addresses list --project="$PROJECT_ID"
 ```
 
-Confirm that the tutorial cluster is absent. Investigate any leftover tutorial-owned resources before removing them. Retain unrelated project resources. If you needed to create another cluster in a different zone to troubleshoot capacity issues, remove that cluster too.
+Confirm that the cluster that you deleted is absent. Investigate any leftover resources associated with the Learning Path before removing them. Retain unrelated project resources. If you needed to create another cluster in a different zone to troubleshoot capacity issues, remove that cluster too.
 
-After the cluster is deleted, remove the VPC subnet and network that you created earlier:
+After cluster deletion, remove the VPC subnet and network that you created earlier:
 
 ```bash
 gcloud compute networks subnets delete "$SUBNETWORK" \
