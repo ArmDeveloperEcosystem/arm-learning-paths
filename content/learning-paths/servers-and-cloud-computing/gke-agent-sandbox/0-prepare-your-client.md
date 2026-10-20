@@ -7,7 +7,7 @@ layout: learningpathall
 
 ## Run agent-generated code in an isolated remote sandbox
 
-Coding agents can write useful programs. However, running agent-generated code on your local machine gives untrusted code direct access to your files, credentials, and network. Agent Sandbox on Google Kubernetes Engine (GKE) executes untrusted, model-generated code in a secure, isolated environment away from your local machine.
+Coding agents can write useful programs. However, running agent-generated code on your local machine gives untrusted code direct access to your files, credentials, and network. Agent Sandbox on Google Kubernetes Engine (GKE) runs untrusted, model-generated code in a secure, isolated environment away from your local machine.
 
 Each sandbox Pod runs under gVisor, which places a user-space application kernel between the workload and the host kernel. Agent Sandbox applies a default-deny network posture to sandboxed workloads.
 
@@ -27,7 +27,7 @@ Use Ubuntu Linux or macOS. The Learning Path was tested on an Arm Linux system a
 
 Install the Google Cloud CLI (with `gke-gcloud-auth-plugin`) and Python 3.
 
-The Google Cloud CLI provisions and manages the GKE cluster and authenticates kubectl. Python 3 runs the helper scripts that you'll use later.
+The Google Cloud CLI provisions and manages the GKE cluster and authenticates `kubectl`. Python 3 runs the helper scripts that you'll use later.
 
 #### Ubuntu Linux
 
@@ -104,4 +104,4 @@ If you save the variables to `env.sh`, source them at the start of any new termi
 
 You've installed the Google Cloud CLI and Python, created the working directory, and confirmed the Cloud CLI supports Agent Sandbox. 
 
-Next, you'll create the dedicated GKE cluster and its Arm sandbox node pool, then install the matching kubectl.
+Next, you'll create the dedicated GKE cluster and its Arm sandbox node pool, then install the matching `kubectl`.

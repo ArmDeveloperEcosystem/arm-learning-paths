@@ -66,7 +66,7 @@ You'll use saved revisions for a reproducible comparison.
 
 ## Run the failure and correction sequence
 
-The runner uses kubectl to create a claim, verify its Pod, and upload the CSV, tests, and initial program from your local machine. It executes that program remotely, checks the expected failure, and replaces only the program. The runner then runs the corrected application and six tests in the same workspace.
+The runner uses `kubectl` to create a claim, verify its Pod, and upload the CSV, tests, and initial program from your local machine. It runs that program remotely, checks the expected failure, and replaces only the program. The runner then runs the corrected application and six tests in the same workspace.
 
 Run the sequence with cluster context:
 
@@ -148,6 +148,6 @@ You can repeat the task with a new output directory, such as `runs/csv-second`.
 
 ## What you've accomplished and what's next
 
-You've executed a failure-and-correction workflow on Arm and verified the business result. You've also retained reports after removing the task environment. 
+You've run a failure-and-correction workflow on Arm and verified the business result. You've also retained reports after removing the task environment.
 
 Next, you'll open an interactive shell in another claimed sandbox to inspect its user, filesystem, and exposed Linux information.

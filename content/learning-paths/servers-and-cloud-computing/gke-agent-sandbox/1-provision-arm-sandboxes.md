@@ -171,9 +171,9 @@ export MACHINE_TYPE=c4a-standard-4
 
 For a quota error, the `statusMessage` names the quota that was exceeded. Go to **IAM & Admin > Quotas** in the Google Cloud console, find that quota, and request an increase before retrying.
 
-## Install the matching kubectl version
+## Install the matching `kubectl` version
 
-Now that the cluster exists, install a kubectl version within one minor version of its control plane, following the [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/). Set `KUBECTL_VERSION` to match the minor of the `CLUSTER_VERSION` that you chose earlier.
+Now that the cluster exists, install a `kubectl` version within one minor version of its control plane, following the [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/). Set `KUBECTL_VERSION` to match the minor of the `CLUSTER_VERSION` that you chose earlier.
 
 The following block detects your OS and architecture, downloads the matching binary, and verifies its checksum. Run it as a subshell so that a download failure stops the block:
 
