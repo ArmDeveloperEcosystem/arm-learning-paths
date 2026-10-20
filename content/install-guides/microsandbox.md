@@ -41,7 +41,7 @@ The Microsandbox release bundle supplies the runtime and `libkrunfw` guest firmw
 
 You need an Arm Linux system running Ubuntu 24.04 LTS, with sudo access and internet access to GitHub and Docker Hub. Allow disk space for the downloaded image and its extracted filesystem. You also need enough available memory for a 512 MiB guest alongside the host operating system.
 
-The steps in the install guide were tested on an Arm AGI CPU host. Ensure that your host exposes KVM to run the sandbox. If Ubuntu runs inside a VM, ensure that the outer hypervisor exposes nested virtualization.
+The install guide was tested on an Arm AGI CPU host. Ensure that your host exposes KVM to run the sandbox. If Ubuntu runs inside a VM, ensure that the outer hypervisor exposes nested virtualization.
 
 Check your host:
 
@@ -90,7 +90,7 @@ sudo apt install -y ca-certificates curl tar gzip coreutils
 ```
 
 {{% notice Note %}}
-The installer downloads the latest release. The steps in the install guide were tested with Microsandbox v0.7.8. To find available versions, see the [Microsandbox releases page](https://github.com/superradcompany/microsandbox/releases).
+The installer downloads the latest release. The install guide was tested with Microsandbox v0.7.8. To find available versions, see the [Microsandbox releases page](https://github.com/superradcompany/microsandbox/releases).
 {{% /notice %}}
 
 Run the official installer from your user account, without `sudo`:
