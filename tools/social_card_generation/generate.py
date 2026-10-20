@@ -41,7 +41,10 @@ REPO_ROOT = BASE_DIR.parents[1]
 SVG_PATH = BASE_DIR / "learn-social-og-template.svg"
 TITLE_FONT_PATH = BASE_DIR / "fonts" / "Aeonik-Medium.otf"
 META_FONT_PATH = BASE_DIR / "fonts" / "AeonikFono-Regular.otf"
-OUTPUT_PATH = BASE_DIR / "social_image.webp"
+OUTPUT_ROOT = REPO_ROOT / "static" / "social-images"
+DEFAULT_OUTPUT_PATH = OUTPUT_ROOT / "default.webp"
+DEFAULT_TITLE = "Arm Learning Paths"
+DEFAULT_CONTENT_TYPE = "LEARN ARM"
 
 LEARNING_PATH_ROOT = REPO_ROOT / "content" / "learning-paths"
 INSTALL_GUIDE_ROOT = REPO_ROOT / "content" / "install-guides"
@@ -76,11 +79,25 @@ def parse_args():
     )
     parser.add_argument(
         "content_path",
+        nargs="?",
         help=(
             "Path to a Learning Path directory/_index.md or an install guide .md file."
         ),
     )
-    return parser.parse_args()
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Generate the default card and all Learning Path and install guide cards.",
+    )
+    parser.add_argument(
+        "--default",
+        action="store_true",
+        help="Generate only static/social-images/default.webp.",
+    )
+    args = parser.parse_args()
+    if sum((bool(args.content_path), args.all, args.default)) != 1:
+        parser.error("provide a content path, --all, or --default")
+    return args
 
 
 def resolve_content_path(value: str) -> Path:
@@ -124,6 +141,34 @@ def content_type_for_path(path: Path) -> str:
         "Content path must be under content/learning-paths or content/install-guides: "
         f"{path}"
     )
+
+
+def output_path_for_content(path: Path) -> Path:
+    relative_path = path.relative_to((REPO_ROOT / "content").resolve())
+
+    if path.name == "_index.md" and relative_path.parent != Path("."):
+        relative_path = relative_path.parent.with_suffix(".webp")
+    else:
+        relative_path = relative_path.with_suffix(".webp")
+
+    return OUTPUT_ROOT / relative_path
+
+
+def all_content_paths() -> list[Path]:
+    learning_paths = sorted(
+        path for path in LEARNING_PATH_ROOT.rglob("_index.md")
+        if len(path.relative_to(LEARNING_PATH_ROOT).parts) >= 3
+        and not any(
+            part.startswith("_")
+            for part in path.relative_to(LEARNING_PATH_ROOT).parts[:-1]
+        )
+    )
+    install_guides = sorted(
+        path for path in INSTALL_GUIDE_ROOT.rglob("*.md")
+        if (path.parent == INSTALL_GUIDE_ROOT and path.name != "_index.md")
+        or (path.parent != INSTALL_GUIDE_ROOT and path.name == "_index.md")
+    )
+    return learning_paths + install_guides
 
 
 def read_front_matter(path: Path) -> dict:
@@ -183,12 +228,15 @@ def font_face_css(path: Path, family: str, weight: int, fallback: str) -> str:
 """
 
 
-def main():
-    args = parse_args()
-    content_path = resolve_content_path(args.content_path)
+def generate_card(content_path: Path):
     raw_title = title_for_path(content_path)
     content_type = content_type_for_path(content_path)
     title = render_title(raw_title, content_type)
+    output_path = output_path_for_content(content_path)
+    render_card(title, content_type, output_path)
+
+
+def render_card(title: str, content_type: str, output_path: Path):
 
     for path in (
         SVG_PATH,
@@ -434,14 +482,46 @@ fitTitle();
         )
 
 
+        output_path.parent.mkdir(parents=True, exist_ok=True)
         image.save(
-            OUTPUT_PATH,
+            output_path,
             format="WEBP",
             quality=96,
             method=6,
         )
 
-    print(f"Wrote: {OUTPUT_PATH}")
+    print(f"Wrote: {output_path}")
+
+
+def main():
+    args = parse_args()
+    if args.content_path:
+        generate_card(resolve_content_path(args.content_path))
+        return
+    if args.default:
+        render_card(DEFAULT_TITLE, DEFAULT_CONTENT_TYPE, DEFAULT_OUTPUT_PATH)
+        return
+
+    paths = all_content_paths()
+    failures = []
+    try:
+        render_card(DEFAULT_TITLE, DEFAULT_CONTENT_TYPE, DEFAULT_OUTPUT_PATH)
+    except Exception as error:
+        failures.append((DEFAULT_OUTPUT_PATH, error))
+        print(f"Failed: {DEFAULT_OUTPUT_PATH}: {error}", flush=True)
+    for index, path in enumerate(paths, start=1):
+        print(f"[{index}/{len(paths)}] {path.relative_to(REPO_ROOT)}", flush=True)
+        try:
+            generate_card(path.resolve())
+        except Exception as error:
+            failures.append((path, error))
+            print(f"Failed: {error}", flush=True)
+
+    print(f"Generated {len(paths) + 1 - len(failures)} of {len(paths) + 1} cards.")
+    if failures:
+        for path, error in failures:
+            print(f"  {path.relative_to(REPO_ROOT)}: {error}")
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

@@ -62,6 +62,19 @@ jobs:
       - name: Install Post-CSS
         run: npm install postcss-cli
 
+      - name: Setup Python for social cards
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install social card dependencies
+        run: |
+          python -m pip install Pillow PyYAML playwright
+          python -m playwright install --with-deps --only-shell chromium
+
+      - name: Generate social cards
+        run: python tools/social_card_generation/generate.py --all
+
       - name: AWS Github OIDC Login
         uses: aws-actions/configure-aws-credentials@v6
         with:
