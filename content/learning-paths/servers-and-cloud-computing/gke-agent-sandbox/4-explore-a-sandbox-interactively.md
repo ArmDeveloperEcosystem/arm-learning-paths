@@ -34,11 +34,11 @@ python3 claim.py check --record "$LP_WORKDIR/runs/shell/run.json"
 kubectl --context "$GKE_CONTEXT" -n "$NAMESPACE" exec -it "$POD_NAME" -c runtime -- /bin/sh
 ```
 
-You now have a shell inside the sandbox. The next commands run inside the sandbox, not on your local machine.
+You now have a shell inside the sandbox. You'll run subsequent commands inside the sandbox, not on your local machine.
 
 ## Inspect the user and Linux environment
 
-Run these commands inside the sandbox shell:
+Run the following commands inside the sandbox shell:
 
 ```bash
 id
@@ -50,7 +50,7 @@ cat /etc/os-release
 ls -la /workspace
 ```
 
-Expected values include UID `1000`, architecture `aarch64`, working directory `/workspace`, Python `3.12.15`, and Debian GNU/Linux 12. The kernel release can include `gvisor`:
+The expected output is:
 
 ```output
 uid=1000 gid=1000 groups=1000
@@ -64,10 +64,11 @@ total 4
 drwxrwxrwt 2 root root   40 ...
 drwxr-xr-x 2 root root 4096 ...
 ```
+The kernel release can include `gvisor`.
 
-gVisor supplies an advertised kernel identity rather than reporting the node's real kernel version. The Debian release identifies the container's operating system environment.
+gVisor supplies an advertised kernel identity rather than reporting the real kernel version of the node. The Debian release identifies the operating system environment of the container.
 
-Try CPU and memory information:
+Try retrieving CPU and memory information:
 
 ```bash
 lscpu
@@ -84,7 +85,7 @@ cat /workspace/shell-marker.txt
 exit
 ```
 
-You return to your local machine terminal. Exiting the shell doesn't delete its Pod or claim.
+You now return to your local machine terminal. Exiting the shell doesn't delete its Pod or claim.
 
 ## Compare filesystem writes
 
@@ -96,7 +97,7 @@ Review the script before running it:
 cat inspect_filesystem.py
 ```
 
-Run it from your local machine in the same Pod:
+Run the script from your local machine in the same Pod:
 
 ```bash
 python3 claim.py check --record "$LP_WORKDIR/runs/shell/run.json"
@@ -104,7 +105,7 @@ kubectl --context "$GKE_CONTEXT" -n "$NAMESPACE" exec -i "$POD_NAME" -c runtime 
   python3 - < inspect_filesystem.py | tee "$LP_WORKDIR/output/filesystem-probes.txt"
 ```
 
-The expected output is similar to this illustrative example; denied-write errno values and messages vary:
+The output is similar to:
 
 ```output
 /workspace: write/read/remove succeeded
@@ -112,12 +113,13 @@ The expected output is similar to this illustrative example; denied-write errno 
 /etc: denied (errno 13: Permission denied)
 /usr/local: denied (errno 13: Permission denied)
 ```
+Denied-write errno values and messages vary.
 
 The output shows which paths are writable and which are blocked. `/workspace` and `/tmp` succeed because they are writable volumes in the template. `/etc` and `/usr/local` are blocked because the root filesystem is read-only and the process runs as a non-root user.
 
 ## Verify sandbox configuration
 
-Reconnect to confirm the test file is still there:
+Reconnect to confirm that the test file is still there:
 
 ```bash
 python3 claim.py check --record "$LP_WORKDIR/runs/shell/run.json"
@@ -137,7 +139,7 @@ fi
 exit
 ```
 
-The token should be absent. If it exists, stop and inspect the actual Pod configuration before continuing.
+The token should be absent. If it exists, stop and inspect the Pod configuration before continuing.
 
 Save the Pod configuration and check the resource limits:
 
@@ -152,14 +154,16 @@ Confirm RuntimeClass `gvisor` and limits `500m` CPU and `512Mi` memory.
 
 ## Release the inspection claim
 
-Remove this claim when you're done:
+Remove the inspection claim when you're done:
 
 ```bash
 python3 claim.py delete --record "$LP_WORKDIR/runs/shell/run.json"
 ```
 
-Keep the cluster and warm pool running. The next page creates its own claim.
+Keep the cluster and warm pool running. 
 
 ## What you've accomplished and what's next
 
-You've inspected the environment interactively, verified permitted and denied writes, and confirmed the sandbox runs as a non-root user with the expected resource limits. Next, connect the Antigravity CLI to the sandbox and run agent-generated Python remotely.
+You've inspected the environment interactively and verified permitted and denied writes. You've also confirmed that the sandbox runs as a non-root user with the expected resource limits. 
+
+Next, you'll connect the Antigravity CLI to the sandbox and run agent-generated Python remotely.

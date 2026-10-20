@@ -1,17 +1,13 @@
 ---
 title: Run agent-generated Python in GKE Agent Sandbox on Google Axion
 
-draft: true
-cascade:
-    draft: true
-
 author: Jason Andrews
 
 description: Run Python workloads on Google Axion with GKE Agent Sandbox, then connect Antigravity for remote Linux execution.
 
 minutes_to_complete: 90
 
-who_is_this_for: This is an advanced topic for developers who use coding agents and want to run agent-generated Python in an isolated Arm Linux workspace on Google Kubernetes Engine.
+who_is_this_for: This is an advanced topic for developers who use coding agents and want to run agent-generated Python in an isolated Arm Linux workspace on Google Kubernetes Engine (GKE).
 
 learning_objectives:
     - Create a GKE sandbox warm pool on Google Axion processors.
@@ -24,7 +20,7 @@ prerequisites:
     - A Google Cloud project with billing enabled and permission to create GKE clusters, node pools, and VPC networks
     - An Ubuntu Linux or macOS local machine with internet access, a route to the GKE API endpoint, and permission to install the required tools
     - Familiarity with Bash, Python, and Kubernetes Pods
-    - A Google account for Antigravity CLI authentication
+    - A Google account for [Antigravity CLI]((/install-guides/antigravity/)) authentication
 
 generate_summary_faq: true
 rerun_summary: false
