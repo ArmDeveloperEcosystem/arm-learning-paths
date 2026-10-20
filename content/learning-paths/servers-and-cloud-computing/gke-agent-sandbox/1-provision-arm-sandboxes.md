@@ -35,7 +35,7 @@ gcloud compute networks subnets create "$SUBNETWORK" \
   --region="$REGION" --range=10.0.0.0/20
 ```
 
-You'll use these environment variables for subsequent commands, so keep this terminal open or re-export them if you start a new session. `us-central1-c` is the default zone. If you hit C4A capacity issues, `us-east4-a` is a good alternative. Update both `LOCATION` and `REGION`, then recreate the subnet in the new region.
+You'll use these environment variables for subsequent commands, so keep this terminal open or re-export them if you start a new session. `us-central1-c` is the default zone. If you hit C4A capacity issues, `us-east4-a` is a good alternative. Update both `LOCATION` and `REGION`, then recreate the subnet in the new region as described in [Handle capacity failures](/learning-paths/servers-and-cloud-computing/gke-agent-sandbox/1-provision-arm-sandboxes/#handle-capacity-failures).
 
 If you saved `env.sh` earlier, append these variables to it:
 

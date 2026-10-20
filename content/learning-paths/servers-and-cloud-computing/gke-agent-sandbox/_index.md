@@ -11,7 +11,7 @@ who_is_this_for: This is an advanced topic for developers who use coding agents 
 
 learning_objectives:
     - Create a GKE sandbox warm pool on Google Axion processors.
-    - Verify non-root execution and filesystem restrictions, then inspect the sandbox's user, filesystem, and Linux environment interactively.
+    - Verify non-root execution and filesystem restrictions, then inspect the sandbox user, filesystem, and Linux environment interactively.
     - Run a CSV analysis Python program in the sandbox and retrieve the results.
     - Connect Antigravity CLI and run agent-generated Python in a remote GKE sandbox.
 
