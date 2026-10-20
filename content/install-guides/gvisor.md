@@ -205,4 +205,4 @@ You can now run your own containers with gVisor by including `--runtime=runsc` i
 
 For guidance on choosing workloads and tuning your configuration, see the [gVisor production guide](https://gvisor.dev/docs/user_guide/production/).
 
-You can also run agent-generated code on Google Kubernetes Engine (GKE) in Agent Sandboxes that run on gVisor. For more information, see [Run agent-generated Python in GKE Agent Sandbox on Google Axion](/learning-paths/servers-and-cloud-computing/gke-agent-sandbox/).
+You can also run agent-generated code on Google Kubernetes Engine (GKE) in Agent Sandboxes that run under gVisor. For more information, see [Run agent-generated Python in GKE Agent Sandbox on Google Axion](/learning-paths/servers-and-cloud-computing/gke-agent-sandbox/).
