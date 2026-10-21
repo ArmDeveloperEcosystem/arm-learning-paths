@@ -1,5 +1,5 @@
 ---
-title: Port FreeRTOS to the Cortex-R82AE FVP
+title: Build and validate FreeRTOS on the Cortex-R82AE FVP
 description: Build the FreeRTOS SMP port with GCC or armclang and validate four-core task execution on the Cortex-R82AE FVP.
 weight: 3
 
@@ -59,7 +59,7 @@ The demo repository doesn't include the kernel as a submodule. The CMake configu
 
 ### Understand the Cortex-R82AE changes
 
-The following changes need to be made to adapt the demo for Cortex-R82AE:
+Adapting the demo for Cortex-R82AE involves changes to the FVP configuration and the code.
 
 #### FVP configuration
 
@@ -83,7 +83,7 @@ cluster0.cpu1.RVBAR=0x140000000
 cluster0.cpu2.RVBAR=0x140000000
 cluster0.cpu3.RVBAR=0x140000000
 ```
-You can also provide the following alternative configuration:
+You can also provide the following additional configuration:
 
 - Use MPU mode for the Cortex-R82AE.
 - Configure four cores.
@@ -341,8 +341,13 @@ Tracing generates a large amount of data and slows the FVP, so stop the model so
 
 You can then search the trace for a synchronous exception event:
 
-```console
+```bash
 grep -B 6 -A 4 'CoreEvent_CURRENT_SPx_SYNC' tarmac.log
+```
+
+The output is similar to:
+
+```output
   2368226 clk cpu0 IT (694295) 8000f284 f2a02dc0 O EL1h_s : MOVK     x0,#0x16e,LSL #16
   2368226 clk cpu0 R X0 00000000016E3600
   2368227 clk cpu0 IT (694296) 8000f288 97ffff6e O EL1h_s : BL       0x8000f040

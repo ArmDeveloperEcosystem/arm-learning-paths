@@ -87,18 +87,14 @@ fromelf --bincombined \
 {{< /tabpane >}}
 
 
-The generated binary will be located in:
-
-```output
-build/zena_css/r82ae_smp_fvp_gcc_armclang.bin
-```
+The generated binary is located at `build/zena_css/r82ae_smp_fvp_gcc_armclang.bin`.
 
 Record the full path to this file.
 
 
 ### Understand how the firmware is packaged
 
-If you're familiar with the Zena CSS firmware packaging flow, continue to [Replace the Cluster 1 firmware](learning-paths/automotive/freertos-zena-css/4_fullstack_validation/#replace-the-cluster-1-firmware).
+If you're familiar with the Zena CSS firmware packaging flow, continue to [Replace the Cluster 1 firmware](/learning-paths/automotive/freertos-zena-css/4_fullstack_validation/#replace-the-cluster-1-firmware).
 
 Before replacing the Cluster 1 firmware, trace how it's packaged into the final Zena CSS image. Use this investigation process when integrating software into other Yocto-based platforms.
 
@@ -119,7 +115,7 @@ You'll replace the SI CL1 Zephyr image with a FreeRTOS image while leaving all o
 
 #### Safety Island CL1 firmware loading
 
-The Zena CSS documentation indicates that the SI CL1 firmware is loaded by the RSE [boot flow](https://arm-zena-css.docs.arm.com/en/v2.2.1/design/boot_process.html#boot-flow).
+The Zena CSS documentation indicates that the SI CL1 firmware is loaded by the [Zena CSS RSE boot flow](https://arm-zena-css.docs.arm.com/en/v2.2.1/design/boot_process.html#boot-flow).
 
 The [Zena CSS RSE image layout](https://arm-zena-css.docs.arm.com/en/v2.2.1/design/boot_process.html#images-layout) indicates where the SI CL1 image is packaged.
 

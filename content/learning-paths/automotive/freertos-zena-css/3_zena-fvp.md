@@ -47,7 +47,7 @@ export ZENA_YOCTO_DIR=$HOME/arm-auto-solutions
 
 ### Adapt the platform configuration
 
-After building the Zema CSS software stack, adapt the platform configuration.
+After building the Zena CSS software stack, adapt the platform configuration.
 
 #### Start with your Zena tmux session
 

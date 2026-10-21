@@ -1,6 +1,6 @@
 ---
-title: Integrate the FreeRTOS image with Yocto
-description: Define a Yocto recipe and image-selection flow that builds, signs, and packages FreeRTOS as the Zena CSS Safety Island firmware.
+title: Integrate FreeRTOS into Zena CSS with Yocto
+description: Apply the FreeRTOS integration patch to Zena CSS, validate the Yocto-built image, and examine the configuration and recipe changes.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -86,7 +86,7 @@ The patch integrates FreeRTOS into the Yocto build. Next, you'll examine how the
 
 ### Investigate how the patch works
 
-The preceding patch already implements the described changes. You'll now understand how the integration patch was derived and how to validate each boundary independently. If you've applied the patch, inspect the existing changes as you read, then continue to [Build and run the integrated image](/learning-paths/automotive/freertos-zena-css/5_yocto-integration/#build-and-run-the-integrated-image) for validation.
+The preceding patch already implements the changes shown in the following sections. The instructions describe how those changes were made. If you've applied the patch, treat the directions to remove, add, and create files as explanations of what the patch did. Inspect the corresponding files instead of repeating the edits. After reviewing the changes, continue to [Build and run the integrated image](/learning-paths/automotive/freertos-zena-css/5_yocto-integration/#build-and-run-the-integrated-image) for validation.
 
 [`yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb) was identified as the recipe that creates the RSE flash image.
 
@@ -114,28 +114,43 @@ The following investigation explains how the top-level image reaches `firmware-f
 
 When integrating a component into an unfamiliar Yocto build, start with information that the build must resolve: its target and machine. Following those two values is more reliable than searching every layer for a guessed component name.
 
-Next, determine how the Zephyr demo is added to the build:
+From `arm-zena-css`, determine how the Zephyr demo is added to the build:
 
-```console
-arm-zena-css$ grep -rn -B1  fvp-rd-aspen-zephyr.inc
+```bash
+grep -rn -B1  fvp-rd-aspen-zephyr.inc
+```
+
+The output is similar to:
+
+```output
 yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc-7-require ${@bb.utils.contains('DISTRO_FEATURES', 'zephyr', 'conf/machine/include/fvp/fvp-rd-aspen-zephyr.inc', '', d)}
 ```
 
 The Zephyr recipe is used when `DISTRO_FEATURES` contains `zephyr`. 
 
-Next, determine where and when it is set:
+From `sw-ref-stack`, determine where and when it is set:
 
-```console
-sw-ref-stack$ grep -nr DISTRO_FEATURES | grep zephyr
+```bash
+grep -nr DISTRO_FEATURES | grep zephyr
+```
+
+The output is similar to:
+
+```output
 yocto/kas/arm-auto-solutions.yml:73:    DISTRO_FEATURES:append = " cassini-dev zephyr"
 ```
 
 The [`yocto/kas/arm-auto-solutions.yml`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/sw-ref-stack/-/blob/release-v2.2/yocto/kas/arm-auto-solutions.yml?ref_type=heads#L73) file therefore adds `zephyr` unconditionally to `DISTRO_FEATURES`.
 
-Find the build configurations that include this kas file:
+From `sw-ref-stack`, find the build configurations that include this kas file:
 
-```console
-sw-ref-stack$ grep -nr arm-auto-solutions.yml
+```bash
+grep -nr arm-auto-solutions.yml
+```
+
+The output is similar to:
+
+```output
 yocto/kas/virtualization.yml:11:    - ../sw-ref-stack/yocto/kas/arm-auto-solutions.yml
 yocto/kas/baremetal.yml:11:    - ../sw-ref-stack/yocto/kas/arm-auto-solutions.yml
 ```
