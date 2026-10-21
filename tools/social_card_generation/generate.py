@@ -147,7 +147,7 @@ def output_path_for_content(path: Path) -> Path:
     relative_path = path.relative_to((REPO_ROOT / "content").resolve())
 
     if path.name == "_index.md" and relative_path.parent != Path("."):
-        relative_path = relative_path.parent.with_suffix(".webp")
+        relative_path = relative_path.parent.with_name(f"{relative_path.parent.name}.webp")
     else:
         relative_path = relative_path.with_suffix(".webp")
 
