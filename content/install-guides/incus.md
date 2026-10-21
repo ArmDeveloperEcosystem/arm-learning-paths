@@ -16,20 +16,21 @@ tool_install: true
 multi_install: false
 multitool_install_part: false
 layout: installtoolsall
-draft: true
 ---
 
-Incus is an open-source system container and virtual machine manager. It provides image-based instance management, storage, networking, profiles, and a command-line interface.
+Incus is an open-source system container and virtual machine manager that provides image-based instance management and storage. It also provides networking, profiles, and a command-line interface.
 
-Incus system containers share the host Linux kernel. By default, containers are unprivileged and map container user IDs to non-root user IDs on the host. This guide installs Incus and verifies an unprivileged container.
+Incus system containers share the host Linux kernel. By default, containers are unprivileged and map container user IDs to non-root user IDs on the host. 
 
-This setup is useful for agentic tasks that need a disposable Linux filesystem for generated commands, scripts, builds, and tests. You can apply CPU, memory, and process limits while keeping the agent's filesystem changes separate from the host.
+You'll install Incus and verify an unprivileged container.
 
-The Incus daemon runs on Linux. The following steps use the native Ubuntu package on Ubuntu 24.04 LTS on `aarch64`. Incus is also packaged for other Linux distributions. For platform-specific installation options, see the [Incus installation documentation](https://linuxcontainers.org/incus/docs/main/installing/).
+Incus is useful for agentic tasks that need a disposable Linux filesystem for generated commands, scripts, builds, and tests. You can apply CPU, memory, and process limits while keeping agent filesystem changes separate from the host.
+
+The Incus daemon runs on Linux. You'll install Incus using the Ubuntu package on Ubuntu 24.04 long-term support (LTS) on `aarch64`. Incus is also packaged for other Linux distributions. For platform-specific installation options, see the [Incus installation documentation](https://linuxcontainers.org/incus/docs/main/installing/).
 
 ## Before you begin
 
-You need an Arm Linux system running Ubuntu 24.04 LTS on `aarch64`, with sudo access and internet access to the Ubuntu package repositories and the Incus image server. The network must allow the container to obtain a DHCP address with its own MAC address.
+You need an Arm Linux system running Ubuntu 24.04 LTS on `aarch64`. The system needs to have sudo access and internet access to the Ubuntu package repositories and the Incus image server. Ensure that your network allows the container to obtain a DHCP address with its own MAC address.
 
 Check the host architecture and operating system:
 
@@ -61,7 +62,7 @@ sudo apt update
 ```
 
 {{% notice Note %}}
-The following commands use the Incus 6.0 long-term support release from the Ubuntu 24.04 repositories. The Ubuntu package revision can change as updates are published. The same commands work with updated Incus 6.0 packages. To learn about the available release branches, see the [Incus installation documentation](https://linuxcontainers.org/incus/docs/main/installing/#choose-your-release).
+The following commands use the Incus 6.0 LTS release from the Ubuntu 24.04 repositories. The Ubuntu package revision can change as updates are published. The same commands work with updated Incus 6.0 packages. To learn about the available release branches, see the [Incus installation documentation](https://linuxcontainers.org/incus/docs/main/installing/#choose-your-release).
 {{% /notice %}}
 
 Install the Incus daemon and command-line client:
@@ -78,7 +79,7 @@ Add your user to the `incus-admin` group:
 sudo adduser "$USER" incus-admin
 ```
 
-Membership in `incus-admin` grants full control of the local Incus daemon. Give this access only to users you trust with root-level control of the host.
+Membership in `incus-admin` grants full control of the local Incus daemon. Give this access only to users that you trust with root-level control of the host.
 
 Activate the new group in your current terminal:
 
@@ -86,7 +87,7 @@ Activate the new group in your current terminal:
 newgrp incus-admin
 ```
 
-The command opens a new shell with the group active. Keep this shell open for the remaining steps. Alternatively, log out and back in before continuing.
+The command opens a new shell with the group active. Keep this shell open to complete initialization and verification. If you need to open another shell, log out and back in before continuing.
 
 Confirm that the client can connect to the local daemon:
 
@@ -126,7 +127,7 @@ profiles:
 EOF
 ```
 
-This creates a `dir`-backed storage pool named `default` and attaches it to new instances through the default profile. The `dir` storage driver is suitable for this installation check, but it doesn't provide the snapshot, quota, and optimized-copy features of storage drivers such as ZFS or Btrfs.
+This creates a `dir`-backed storage pool named `default` and attaches it to new instances through the default profile. The `dir` storage driver is suitable for this installation check. However, it doesn't provide the snapshot, quota, and optimized-copy features of storage drivers such as ZFS or Btrfs.
 
 {{% notice Note %}}
 Run the preseed command only for a new Incus installation. If the host already has Incus storage, networks, profiles, or instances, inspect the existing configuration instead of replacing it.
@@ -156,7 +157,7 @@ Confirm that no Incus managed bridge was created:
 incus network list
 ```
 
-Confirm that `incusbr0` doesn't appear. Existing host interfaces might appear as unmanaged networks. You will connect the test container directly to the host's default network interface with a `macvlan` device.
+Confirm that `incusbr0` doesn't appear. Existing host interfaces might appear as unmanaged networks. You'll connect the test container directly to the default network interface of the host with a `macvlan` device.
 
 ## Verify the installation
 
@@ -171,13 +172,15 @@ parent_interface="$(
 echo "$parent_interface"
 ```
 
-The output is the interface name, for example:
+The output is the interface name, and is similar to:
 
 ```output
 enP11p1s0
 ```
 
-Initialize an Ubuntu 24.04 system container with privileged mode disabled and resource limits suitable for an installation check. On an `aarch64` host, the image server selects the Arm64 image:
+Initialize an Ubuntu 24.04 system container with privileged mode disabled and resource limits suitable for an installation check.
+
+On an `aarch64` host, the image server selects the Arm64 image:
 
 ```bash
 incus init images:ubuntu/24.04 arm-install-check \
@@ -187,7 +190,7 @@ incus init images:ubuntu/24.04 arm-install-check \
     --config limits.processes=256
 ```
 
-The expected output is similar to:
+The output is similar to:
 ```output
 Creating arm-install-check
                                            
@@ -288,7 +291,7 @@ lxc
 Incus container command succeeded
 ```
 
-The `aarch64` output confirms the container userspace architecture. The `lxc` output identifies the container environment; it doesn't indicate a separate guest kernel.
+The `aarch64` output confirms the container userspace architecture. The `lxc` output identifies the container environment but doesn't indicate a separate guest kernel.
 
 ### Verify the unprivileged container
 
@@ -298,7 +301,7 @@ Check the explicit privileged-mode setting:
 incus config get arm-install-check security.privileged
 ```
 
-The output is:
+The output is similar to:
 
 ```output
 false
@@ -335,4 +338,4 @@ The downloaded image and `default` storage pool remain available for future cont
 
 You can now use Incus to create and manage unprivileged system containers on Arm Linux. To use an Incus managed bridge with outbound NAT, use a kernel that enables `CONFIG_NFT_NAT` and `CONFIG_NFT_MASQ`.
 
-See the [Incus documentation](https://linuxcontainers.org/incus/docs/main/) to learn about storage drivers, managed networks, profiles, snapshots, projects, and virtual machines.
+To learn about features such as storage drivers, managed networks, profiles, and snapshots, see the [Incus documentation](https://linuxcontainers.org/incus/docs/main/).
