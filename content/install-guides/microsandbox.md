@@ -16,14 +16,24 @@ tool_install: true
 multi_install: false
 multitool_install_part: false
 layout: installtoolsall
-draft: true
 ---
 
-Microsandbox is an open-source, local-first microVM runtime for untrusted workloads, including AI agents, user code, plugins, package installs, CI jobs, development environments, scrapers, and automation. It runs workloads in lightweight virtual machines (microVMs) using libkrun. On Arm Linux, it uses Kernel-based Virtual Machine (KVM) support to run a separate guest kernel for each sandbox.
+Microsandbox is an open-source, local-first microVM runtime for untrusted workloads. The following are some of the untrusted workloads supported by the runtime:
 
-Microsandbox runs on Linux, macOS, and Windows. The following steps install the `msb` command-line runtime on Ubuntu 24.04 LTS on `aarch64`, the tested Linux distribution for this guide. You then run Python inside a sandbox to verify the installation.
+- AI agents
+- User code
+- Plugins
+- Package installs
+- CI jobs
+- Development environments
+- Scrapers
+- Automation
 
-Microsandbox also supports macOS on Apple Silicon, where you can use the same installation script. For macOS installation and platform-specific setup checks, see the [Microsandbox quickstart](https://docs.microsandbox.dev/getting-started/quickstart).
+Microsandbox runs workloads in lightweight virtual machines (microVMs) using libkrun. On Arm Linux, it uses Kernel-based VM (KVM) support to run a separate guest kernel for each sandbox.
+
+You'll install the `msb` command-line runtime on Ubuntu 24.04 LTS on `aarch64`. You'll then run Python inside a sandbox to verify the installation.
+
+In addition to Linux, Microsandbox supports Windows and macOS on Apple silicon. On macOS, you can use the same installation script. For macOS installation and platform-specific setup checks, see the [Microsandbox quickstart](https://docs.microsandbox.dev/getting-started/quickstart).
 
 The Microsandbox release bundle supplies the runtime and `libkrunfw` guest firmware library. You don't need Docker, Python on the host, or a separate system installation of libkrun.
 
@@ -31,7 +41,7 @@ The Microsandbox release bundle supplies the runtime and `libkrunfw` guest firmw
 
 You need an Arm Linux system running Ubuntu 24.04 LTS, with sudo access and internet access to GitHub and Docker Hub. Allow disk space for the downloaded image and its extracted filesystem. You also need enough available memory for a 512 MiB guest alongside the host operating system.
 
-These steps were tested on an Arm AGI CPU host. Your host must expose KVM to run the sandbox. If Ubuntu runs inside a virtual machine (VM), the outer hypervisor must expose nested virtualization.
+The install guide was tested on an Arm AGI CPU host. Ensure that your host exposes KVM to run the sandbox. If Ubuntu runs inside a VM, ensure that the outer hypervisor exposes nested virtualization.
 
 Check your host:
 
@@ -56,7 +66,7 @@ else
 fi
 ```
 
-The expected output includes:
+The expected output is:
 
 ```output
 KVM device is accessible
@@ -68,7 +78,7 @@ If the device exists and belongs to the `kvm` group but your user lacks access, 
 sudo usermod -aG kvm "$USER"
 ```
 
-Log out and back in to activate the kvm group for your session. 
+Log out and log back in to activate the `kvm` group for your session. 
 
 ## Install Microsandbox
 
@@ -80,16 +90,18 @@ sudo apt install -y ca-certificates curl tar gzip coreutils
 ```
 
 {{% notice Note %}}
-The installer downloads the latest release. These steps were tested with Microsandbox v0.7.8. To find available versions, see the [Microsandbox releases page](https://github.com/superradcompany/microsandbox/releases).
+The installer downloads the latest release. The install guide was tested with Microsandbox v0.7.8. To find available versions, see the [Microsandbox releases page](https://github.com/superradcompany/microsandbox/releases).
 {{% /notice %}}
 
-Run the official installer from your user account, without `sudo`. By default, it installs the runtime and firmware in `~/.microsandbox` and creates command links in `~/.local/bin`. The `~` directory is your current user's home; for root, it resolves to `/root`.
+Run the official installer from your user account, without `sudo`:
 
 ```bash
 curl -fsSL https://install.microsandbox.dev | sh
 ```
 
-The output is similar to this excerpt. Home directory paths are shown as `~`; the installer prints their full paths:
+By default, the installer installs the runtime and firmware in `~/.microsandbox` and creates command links in `~/.local/bin`. The `~` directory is the home directory for your current user. For the root directory, the `~` resolves to `/root`.
+
+The output is similar to the following excerpt:
 
 ```output
   Microsandbox Installer
@@ -108,6 +120,8 @@ done Linked ~/.local/bin/msb -> ~/.microsandbox/bin/msb
 done Linked ~/.local/bin/microsandbox -> ~/.microsandbox/bin/microsandbox
 ```
 
+Home directory paths are shown as `~` in the excerpt. The installer prints their full paths.
+
 Wait for the installer to report that installation is complete. If `~/.local/bin` isn't on your PATH, the installer prints instructions for adding it.
 
 Make the installed commands available in your current Bash session:
@@ -117,7 +131,7 @@ export PATH="$HOME/.local/bin:$PATH"
 hash -r
 ```
 
-Add the same `export PATH` line to `~/.bashrc` to make the commands available in future Bash sessions. Run the remaining commands with the same account you used to install Microsandbox.
+Add the same `export PATH` line to `~/.bashrc` to make the commands available in future Bash sessions. Run the remaining commands with the same account that you used to install Microsandbox.
 
 Confirm the installed version:
 
@@ -125,7 +139,7 @@ Confirm the installed version:
 msb --version
 ```
 
-The output from the tested release is:
+The output is similar to:
 
 ```output
 msb 0.7.8
@@ -149,7 +163,7 @@ The first run downloads the Arm64 image from Docker Hub. The `python:3.12-slim` 
 
 ### Run a command in a sandbox
 
-Execute Python through the sandbox runtime:
+Run Python through the sandbox runtime:
 
 ```bash
 msb exec arm-install-check -- python3 -c 'import platform; print(platform.machine()); print("Python calculation:", 6 * 7)'
@@ -216,19 +230,20 @@ NAME                 IMAGE               STATUS     CREATED
 arm-install-check    python:3.12-slim    running    2026-10-19 15:03:42
 ```
 
-Confirm that `arm-install-check` appears with the image `python:3.12-slim` and status `running`. Together with the Python output, this confirms that Microsandbox created the sandbox and executed the verification workload successfully.
+Confirm that `arm-install-check` appears with the image `python:3.12-slim` and status `running`. Together with the Python output, this output confirms that Microsandbox created the sandbox and ran the verification workload successfully.
 
 ### Check filesystem isolation
 
-The sandbox has its own filesystem. Host files are accessible only through mounts you explicitly provide, as described in the [Microsandbox isolation overview](https://microsandbox.dev/features/isolation). The sandbox created in this guide has no host-directory mounts.
+The sandbox has its own filesystem. Host files are accessible only through mounts that you provide, as described in the [Microsandbox isolation overview](https://microsandbox.dev/features/isolation). The sandbox that you created has no host-directory mounts.
 
-In your host terminal, create a temporary file and confirm that you can read it. Keep the same terminal open for the remaining checks and cleanup:
+In your host terminal, create a temporary file and confirm that you can read it:
 
 ```bash
 msb_host_file=$(mktemp /tmp/msb-host-check.XXXXXX)
 printf 'This file belongs to the host.\n' > "$msb_host_file"
 cat "$msb_host_file"
 ```
+Keep the same terminal open for the remaining checks and cleanup.
 
 The expected output is:
 
@@ -278,7 +293,7 @@ Remove the temporary host file:
 rm -- "${msb_host_file:?}"
 ```
 
-Deleting the sandbox in the next step removes its test file.
+Deleting the sandbox removes its test file.
 
 ## Delete the test sandbox
 
@@ -300,7 +315,7 @@ No sandboxes found.
 
 If you have other sandboxes, `msb ls` lists those instead.
 
-Confirm that `arm-install-check` no longer appears. This removes the sandbox; downloaded images remain cached for reuse.
+Confirm that `arm-install-check` no longer appears. The downloaded images remain cached for reuse.
 
 Optionally remove the verification image if no other sandbox needs it:
 
@@ -314,4 +329,4 @@ The installed runtime and firmware remain available for future use.
 
 You can now use Microsandbox to run Python workloads in microVMs on Arm Linux.
 
-See the [Microsandbox CLI documentation](https://docs.microsandbox.dev/cli/overview) for sandbox lifecycle commands and the [Microsandbox SDK documentation](https://docs.microsandbox.dev/sdk/overview) for programmatic execution.
+For sandbox lifecycle commands, see the [Microsandbox CLI documentation](https://docs.microsandbox.dev/cli/overview). For more information about programmatic execution, see the [Microsandbox SDK documentation](https://docs.microsandbox.dev/sdk/overview).
