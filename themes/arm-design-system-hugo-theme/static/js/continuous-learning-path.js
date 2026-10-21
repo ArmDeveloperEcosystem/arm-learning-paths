@@ -44,11 +44,34 @@
         window.addEventListener('scroll', schedule, { passive: true });
         window.addEventListener('resize', schedule);
         window.addEventListener('hashchange', schedule);
+        function scrollToSection(id) {
+            var section = document.getElementById(id);
+            if (!section || !sections.includes(section)) return false;
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            activate(id);
+            return true;
+        }
+
+        // Keep the Learning Path URL stable for navigation and page-view analytics.
+        window.scrollToLearningPathSection = scrollToSection;
         links.forEach(function (link) {
-            link.addEventListener('click', function () {
-                if (link.hash) activate(decodeURIComponent(link.hash.slice(1)));
+            link.addEventListener('click', function (event) {
+                if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                var id = decodeURIComponent(link.hash.slice(1));
+                if (!document.getElementById(id)) return;
+                event.preventDefault();
+                scrollToSection(id);
             });
         });
+
+        // Existing step URLs redirect with a fragment. Scroll there, then show
+        // the canonical Learning Path URL without adding another history entry.
+        if (window.location.hash) {
+            var initialId = decodeURIComponent(window.location.hash.slice(1));
+            if (scrollToSection(initialId)) {
+                window.history.replaceState(window.history.state, '', window.location.pathname + window.location.search);
+            }
+        }
         update();
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

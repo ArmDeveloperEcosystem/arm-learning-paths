@@ -472,6 +472,13 @@ function trackCodeCopy(copy_location, pre_element) {
             
 
 
+            // A continuous Learning Path has one page view for the whole path.
+            // Keep step names in navigation interaction events, not page-view data.
+            if (document.querySelector('.continuous-learning-path')) {
+                delete digitalData.learningPath.pageInfo.learningTabName;
+                delete digitalData.learningPath.pageInfo.pageNumber;
+            }
+
             // 1) Tags
             let tag_elements = document.querySelectorAll('ads-tag');  
             for (let tag of tag_elements) {
