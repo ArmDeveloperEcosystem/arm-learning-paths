@@ -1,5 +1,8 @@
 /public
-/static/
+/static/*
+!/static/social-images/
+/static/social-images/*
+!/static/social-images/default.webp
 __pycache__/
 resources/
 node_modules/

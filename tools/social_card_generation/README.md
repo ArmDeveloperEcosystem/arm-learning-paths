@@ -2,7 +2,7 @@
 
 Prototype generator for learn.arm.com social/Open Graph cards with updated branding and name of the content directly in the image. It reads a Learning Path or install guide Markdown file, pulls the `title` from front matter, applies the content type label, and writes a WebP image under `static/social-images/` matching the content path. A directory's `_index.md` produces an image named after that directory; a standalone Markdown file produces an image named after the file.
 
-The shared deployment workflow downloads existing cards from the target S3 bucket, then runs `--all` before building Hugo for both dev and production. `--all` generates only missing cards. Hugo copies the cards from `static/social-images/` to the matching `social-images/` paths in the built site, and `hugo deploy` uploads new or changed files. Generated images remain ignored by Git.
+The shared deployment workflow downloads existing cards from the target S3 bucket, then runs `--all` before building Hugo for both dev and production. `--all` generates only missing cards. Hugo copies the cards from `static/social-images/` to the matching `social-images/` paths in the built site, and `hugo deploy` uploads new or changed files. The default card at `static/social-images/default.webp` is committed as a guaranteed fallback; generated Learning Path and install guide cards remain ignored by Git.
 
 
 You'll need these python files installed:
