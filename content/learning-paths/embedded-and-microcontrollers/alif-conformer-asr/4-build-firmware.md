@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Build the E8 application
 
-This build captures PDM microphone input and shows the transcription on the attached display.
+This build captures pulse-density modulation (PDM) microphone input and shows the transcription on the attached display.
 
 Activate the Python environment created by the setup script:
 
@@ -33,13 +33,13 @@ cmake -S . -B build_alif_asr \
   -DTARGET_MICS=PDM
 ```
 
-`RTSS-HP` selects the high-performance Cortex-M55 subsystem. `alif_asr` selects the Conformer model and vocabulary. If you are using an E8 DevKit with a display attached, replace `-DTARGET_BOARD=AppKit-e8` with `-DTARGET_BOARD=DevKit-e8`.
+`RTSS-HP` selects the high-performance Cortex-M55 subsystem. `alif_asr` selects the Conformer model and vocabulary. If you're using an E8 DevKit with a display attached, replace `-DTARGET_BOARD=AppKit-e8` with `-DTARGET_BOARD=DevKit-e8`.
 
 {{% notice Note %}}
-Keep `GLCD_UI=OFF` as shown. It disables the generic MLEK GLCD interface to save memory; this application still uses its own LVGL display interface. The display remains required.
+Keep `GLCD_UI=OFF`. It disables the generic Machine Learning Evaluation Kit (MLEK) graphic LCD interface to save memory. This application still uses its own LVGL display interface. The display remains required.
 {{% /notice %}}
 
-Build the ASR target:
+Build the automatic speech recognition (ASR) target:
 
 ```bash
 cmake --build build_alif_asr --target mlek_alif_asr --parallel 4
@@ -53,13 +53,13 @@ ls -lh \
   build_alif_asr/bin/sectors/alif_asr/mram.bin
 ```
 
-`ext_flash.bin` contains the model data for external OSPI flash. `mram.bin` contains the application firmware. Use these two images from the same build.
+`ext_flash.bin` contains the model data for external Octal Serial Peripheral Interface (OSPI) flash. `mram.bin` contains the application firmware. Use these two images from the same build.
 
 ## Confirm the E8 device and configure SETOOLS
 
-The firmware you just built targets the E8 AppKit's M55-HP core and Ethos-U85 NPU. Before programming, confirm the connected chip's full part number and silicon revision so the programming tools match your hardware.
+The firmware that you built targets the M55-HP core and Ethos-U85 NPU of the E8 AppKit. Before programming, confirm the full part number and silicon revision of the connected chip so that the programming tools match your hardware.
 
-Set `SETOOLS_ROOT` to your extracted Security Toolkit directory. Edit the path in the appropriate tab if your installation is elsewhere:
+Set `SETOOLS_ROOT` to your extracted Security Toolkit directory. Edit the path if your installation is elsewhere:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux" language="bash">}}
@@ -70,9 +70,9 @@ export SETOOLS_ROOT="$HOME/app-release-exec-macos"
   {{< /tab >}}
 {{< /tabpane >}}
 
-Close any serial terminal that is using the board. Set **SW4** to **SE**, connect **PRG USB**, and press and release **RESET**.
+Close any serial terminal that's using the board. Set **SW4** to **SE**, connect **PRG USB**, and press and release **RESET**.
 
-Find the board's serial device. Compare the list with the board disconnected and connected if you have several devices:
+Find the board serial device. Compare the list with the board disconnected and connected if you have several devices:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux" language="bash">}}
@@ -85,7 +85,9 @@ export ALIF_PORT=/dev/cu.usbmodemXXXX
   {{< /tab >}}
 {{< /tabpane >}}
 
-Replace the example `ALIF_PORT` with the device you found. On Linux, your user must have permission to open it. If the device belongs to `dialout`, add your user to that group with `sudo usermod -aG dialout "$USER"`, then sign out and back in before continuing. After signing back in, repeat the `ALIF_MLEK_ROOT`, `SETOOLS_ROOT`, and `ALIF_PORT` assignments above; these variables do not survive closing the shell.
+Replace the example `ALIF_PORT` with the device that you found. On Linux, your user needs to have permission to open it. If the device belongs to `dialout`, add your user to that group with `sudo usermod -aG dialout "$USER"`.
+
+After adding your user, sign out and back in before continuing. After signing in, repeat the `ALIF_MLEK_ROOT`, `SETOOLS_ROOT`, and `ALIF_PORT` assignments because these variables don't survive closing the shell.
 
 Open the read-only device information menu:
 
@@ -95,10 +97,10 @@ cd "$SETOOLS_ROOT"
 ```
 
 {{% notice Important %}}
-On macOS, `maintenance` and `tools-config` can each require the separate **Privacy & Security > Open Anyway** approval described in the previous section. Run the blocked executable again after approving the trusted Alif download.
+On macOS, `maintenance` and `tools-config` can each require the separate **Privacy & Security > Open Anyway** approval. Run the blocked executable again after approving the trusted Alif download.
 {{% /notice %}}
 
-Select **2 - Device Information**, then **5 - Get revision info**. Record the full part number (`ALIF_PN`) and revision information. Press **Enter** to return through the menus and exit. Toolkit output varies: the reviewed package printed a `Version` field, while `app-write-mram` explicitly identified the device's silicon revision during its preflight check.
+Select **2 - Device Information**, then **5 - Get revision info**. Record the full part number (`ALIF_PN`) and revision information. Press **Enter** to return through the menus and exit. Toolkit output varies: the reviewed package printed a `Version` field, while `app-write-mram` explicitly identified the silicon revision of the device during its preflight check.
 
 Run `tools-config` and confirm that the selected part number and silicon revision match the detected device.
 
@@ -106,7 +108,7 @@ Run `tools-config` and confirm that the selected part number and silicon revisio
 ./tools-config
 ```
 
-If these settings already match, leave them unchanged. If `app-write-mram` later reports a part or revision mismatch, decline the write, correct `tools-config`, and regenerate the package before retrying. For the reviewed `AE822FA0E5597LS0`, the detected revision was A0. If the toolkit does not support your detected part or revision, use a compatible toolkit before proceeding.
+If these settings already match, leave them unchanged. If `app-write-mram` later reports a part or revision mismatch, decline the write, correct `tools-config`, and regenerate the package before retrying. For the reviewed `AE822FA0E5597LS0`, the detected revision was A0. If the toolkit doesn't support your detected part or revision, use a compatible toolkit before proceeding.
 
 ## Install the temporary CPU stubs
 
@@ -120,21 +122,21 @@ cd "$SETOOLS_ROOT" && \
 ./app-write-mram -c "$ALIF_PORT" -p
 ```
 
-The `&&` operators prevent the write if package generation fails. Continue only after both commands succeed and the write reaches 100% followed by `Done`. The `-c` option selects the serial port; `-p` pads the images to a 16-byte boundary.
+The `&&` operators prevent the write if package generation fails. Continue only after both commands succeed and the write reaches 100% followed by `Done`. The `-c` option selects the serial port, and `-p` pads the images to a 16-byte boundary.
 
-Press and release **RESET** so the stubs boot.
+Press and release **RESET** so that the stubs boot.
 
 ## Program external OSPI flash with J-Flash
 
-Keep the **PRG USB** cable connected after installing and resetting the CPU stubs. Close any SETOOLS session or serial terminal that is using the board. The onboard J-Link uses this same cable; a second debugger cable is not needed.
+Keep the **PRG USB** cable connected after installing and resetting the CPU stubs. Close any SETOOLS session or serial terminal that's using the board. The onboard J-Link uses this same cable, so you don't need a second debugger cable.
 
-The steps follow the [Alif MLEK J-Flash guide](https://github.com/alifsemi/alif_ml-embedded-evaluation-kit/blob/0b6ce72c495265501f7a12eaed8e6ea71ef4bf15/docs/programming_flash_jlink.md#j-flash-project). The screenshots below show J-Flash V9.78 on macOS.
+For more information, see the [Alif MLEK J-Flash guide](https://github.com/alifsemi/alif_ml-embedded-evaluation-kit/blob/0b6ce72c495265501f7a12eaed8e6ea71ef4bf15/docs/programming_flash_jlink.md#j-flash-project). The screenshots that follow show J-Flash V9.78 on macOS.
 
 1. Open **J-Flash**, select **Create new project**, then select **Start J-Flash**.
 
    ![J-Flash welcome dialog with Create new project selected. Select Start J-Flash to open the project wizard.#center](jflash-create-project.png "Create a new J-Flash project")
 
-2. Open the **Target device** selector. For the tested part `AE822FA0E5597LS0`, select `AE822FA0E5597LS0_M55_HP`. If your detected part differs, confirm the appropriate supported target before proceeding. Don’t select this entry simply because it appears in the example.
+2. Open the **Target device** selector. For the tested part `AE822FA0E5597LS0`, select `AE822FA0E5597LS0_M55_HP`. If your detected part differs, confirm the appropriate supported target before proceeding. Don’t select this entry only because it appears in the example.
 
    ![J-Flash Target Device Settings with AE822FA0E5597LS0_M55_HP highlighted. Match the part number to your board and select the M55-HP core.#center](jflash-select-e8-m55-hp.png "Select the E8 M55-HP target")
 
@@ -148,7 +150,7 @@ The steps follow the [Alif MLEK J-Flash guide](https://github.com/alifsemi/alif_
 
    ![J-Flash Enter start address dialog with C0000000 entered in the hexadecimal address field. This places ext_flash.bin at the external OSPI flash base.#center](jflash-ext-flash-start-address.png "Set the start address to 0xC0000000")
 
-6. Ensure your USB-C cable is still connected and select **Target > Connect**. Check that the log reports a successful connection before continuing.
+6. Ensure that your USB-C cable is still connected and select **Target > Connect**. Check that the log reports a successful connection before continuing.
 
    ![J-Flash Target menu with Connect highlighted. Select it to establish the debug connection to the board.#center](jflash-connect-target.png "Select Target > Connect")
 
@@ -159,7 +161,7 @@ The steps follow the [Alif MLEK J-Flash guide](https://github.com/alifsemi/alif_
 8. Select **Target > Disconnect** and close J-Flash.
 
 {{% notice Note %}}
-If J-Link connects but reports `Failed to perform RAMCode-sided Prepare()`, check the selected device and flash bank, confirm the CPU-stub write succeeded, and reset the board before retrying. Sometimes, it might help to powercycle the board and reopen JFlash. This message is not a successful OSPI write.
+If J-Link connects but reports `Failed to perform RAMCode-sided Prepare()`, check the selected device and flash bank. Confirm that the CPU-stub write succeeded, and reset the board before retrying. If the error persists, power-cycle the board and reopen J-Flash before retrying. This message isn't a successful OSPI write.
 {{% /notice %}}
 
 ## Package and flash the ASR application into MRAM
@@ -173,7 +175,7 @@ cp "$ALIF_MLEK_ROOT/build_alif_asr/bin/sectors/alif_asr/mram.bin" "$SETOOLS_ROOT
 
 The configuration identifies the HP boot application and includes the board device configuration:
 
-```output
+```json
 {
     "HP_asr": {
         "binary": "mram.bin",
@@ -192,7 +194,7 @@ The configuration identifies the HP boot application and includes the board devi
 }
 ```
 
-The `DEVICE` entry references `app-device-config.json`, supplied with SETOOLS at `$SETOOLS_ROOT/build/config/app-device-config.json`. The toolkit includes this device configuration in the application package; you do not need to create it in the MLEK repository.
+The `DEVICE` entry references `app-device-config.json`, supplied with SETOOLS at `$SETOOLS_ROOT/build/config/app-device-config.json`. The toolkit includes this device configuration in the application package, so you don't need to create it in the MLEK repository.
 
 After both files copy successfully, generate a new application table of contents (ATOC) from `alif_asr.json` and write the application:
 
@@ -202,22 +204,24 @@ cd "$SETOOLS_ROOT"
 ./app-write-mram -c "$ALIF_PORT" -p
 ```
 
-Check that the write names `build/images/mram.bin` and `build/AppTocPackage.bin`, and completes successfully. 
+Check that the write names `build/images/mram.bin` and `build/AppTocPackage.bin`, and completes successfully.
 
 ![SETOOLS output showing build/images/mram.bin and build/AppTocPackage.bin each reaching 100 percent and ending with Done, confirming both MRAM writes completed.#center](successful-mram-write.png "Application firmware and ATOC package written successfully")
 
-## Check programming problems
+## Troubleshoot programming problems
+
+To troubleshoot programming problems, consider the following guidance:
 
 | Symptom | Check |
 | --- | --- |
-| SETOOLS opens the serial port but reports `Target did not respond` | Close other serial programs, select SW4 **SE**, reset the board, and retry with the current port |
-| A part or revision mismatch appears | Select the detected device in `tools-config`, regenerate the package, and retry |
-| J-Flash cannot connect to the probe | Check PRG USB, close other debugger programs, and return USB access to the J-Flash host if using WSL |
-| J-Flash cannot prepare the OSPI flash algorithm | Check the part, OSPI bank, and that the CPU stubs were written and booted |
-| The board still boots a previous application | Check the copied `mram.bin` and regenerate the package with `alif_asr.json` before writing again |
+| SETOOLS opens the serial port but reports `Target did not respond` | Close other serial programs, select SW4 **SE**, reset the board, and retry with the current port. |
+| A part or revision mismatch appears | Select the detected device in `tools-config`, regenerate the package, and retry. |
+| J-Flash can't connect to the probe | Check PRG USB, close other debugger programs, and return USB access to the J-Flash host if using WSL. |
+| J-Flash can't prepare the OSPI flash algorithm | Check the part, OSPI bank, and that the CPU stubs were written and booted. |
+| The board still boots a previous application | Check the copied `mram.bin` and regenerate the package with `alif_asr.json` before writing again. |
 
-## What you have accomplished and what is next
+## What you've accomplished and what's next
 
-You have built the E8 firmware, programmed the model into external OSPI flash, and replaced the temporary CPU stubs with the ASR application in MRAM.
+You've built the E8 firmware and programmed the model into external OSPI flash. You've also replaced the temporary CPU stubs with the ASR application in MRAM.
 
-Next, you will reset the board, test a spoken phrase, and read the transcription on the display.
+Next, you'll reset the board, test a spoken phrase, and read the transcription on the display.
