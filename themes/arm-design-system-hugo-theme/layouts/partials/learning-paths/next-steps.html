@@ -10,6 +10,13 @@ Called from:
 
 
 
+{{ $introduction := .context.Site.GetPage .context.File.Dir }}
+{{ with $introduction.Params.generated_summary_faq.faqs }}
+    <div class="content-box learning-path-faq">
+        {{ partial "learning-paths/generated-summary-faq.html" (dict "context" $introduction "mode" "faqs") }}
+    </div>
+{{ end }}
+
 <!-- Share -->
 <style>
     .social-icons {
