@@ -5,11 +5,20 @@ weight: 5
 layout: learningpathall
 ---
 
-## Inspect the application task
+## Inspect the CSV analysis task
 
-The sandbox isolates each attempt — a failure doesn't affect your local machine or require cleanup of the execution environment. `run_demo.py` automates the full sequence: it runs a broken program, observes the failure, replaces it with the corrected version, and runs the tests, all within the same sandbox.
+The sandbox isolates each attempt. A failure therefore doesn't affect your local machine or require cleanup of the deployment environment. 
 
-Use the running cluster and warm pool for this task. Download the files needed for this page:
+Within the same sandbox, `run_demo.py` performs the following tasks:
+
+- Runs a broken program `analyze_sales_initial.py` to analyze a CSV file
+- Observes the failure
+- Replaces the broken program with the corrected version `analyze_sales.py`
+- Runs the tests
+
+Use the running cluster and warm pool for this CSV file analysis. 
+
+Start by downloading the necessary files:
 
 ```bash
 cd "$LP_WORKDIR"
@@ -26,7 +35,7 @@ for FILE in \
 done
 ```
 
-The CSV has 12 data rows, including sales, refunds, and invalid fields. Inspect the data:
+The CSV file has 12 data rows, including sales, refunds, and invalid fields. Inspect the data:
 
 ```bash
 cat csv-app/sales.csv
@@ -38,21 +47,28 @@ Review the initial program before running it:
 cat csv-app/analyze_sales_initial.py
 ```
 
-The initial revision assumes that every quantity can be converted to an integer. Its core calculation is:
+The initial revision of the analysis program `analyze_sales_initial.py` assumes that every quantity can be converted to an integer. Its core calculation is:
 
 ```python
 total += int(row["quantity"]) * Decimal(row["unit_price"])
 ```
 
-A row with an empty quantity makes this fail. The corrected revision in `csv-app/analyze_sales.py` validates input, accounts for refunds, uses decimal arithmetic, and renders an HTML report with escaped product names.
+A row with an empty quantity makes this fail. 
 
-You use saved revisions for a reproducible comparison.
+The revised program `csv-app/analyze_sales.py` corrects this issue by performing the following tasks:
+
+- Validates input
+- Accounts for refunds
+- Uses decimal arithmetic
+- Renders an HTML report with escaped product names
+
+You'll use saved revisions for a reproducible comparison.
 
 ## Run the failure and correction sequence
 
-The runner uses kubectl to create a claim, verify its Pod, and upload the CSV, tests, and initial program from your local machine. It executes that program remotely, checks the expected failure, and replaces only the program. It then runs the corrected application and six tests in the same workspace.
+The runner uses `kubectl` to create a claim, verify its Pod, and upload the CSV, tests, and initial program from your local machine. It runs that program remotely, checks the expected failure, and replaces only the program. The runner then runs the corrected application and six tests in the same workspace.
 
-Run the sequence with an explicit cluster context:
+Run the sequence with cluster context:
 
 ```bash
 python3 csv-app/run_demo.py \
@@ -60,7 +76,7 @@ python3 csv-app/run_demo.py \
   --pool axion-python-pool --output-dir "$LP_WORKDIR/runs/csv"
 ```
 
-The output includes the initial failure. The workspace identifier and traceback line numbers can vary:
+The output includes the initial failure:
 
 ```output
 Initial revision failed as expected:
@@ -69,9 +85,11 @@ Traceback (most recent call last):
 ValueError: invalid literal for int() with base 10: ''
 ```
 
+The workspace identifier and traceback line numbers might vary.
+
 That error is part of the demonstration. The runner treats an unexpected initial success, a timeout, or a different failure as an unsuccessful run.
 
-After replacing the program, the output includes the following checks and report result. This condensed example omits the test duration:
+After replacing the program, the output includes the checks and report result. The following condensed example omits the test duration:
 
 ```output
 test_duplicate_orders_are_not_double_counted (test_sales.SalesChecks...) ... ok
@@ -87,7 +105,15 @@ Report: net revenue $328.41; 9 accepted, 3 rejected
 Cleanup: claim removed; bound Sandbox and Pod deleted.
 ```
 
-The checks cover duplicate orders, invalid rows, decimal precision, refunds, and HTML escaping. The runner also verifies the CSV hash stays unchanged between executions and replaces the program in the same sandbox workspace without creating a new claim.
+The checks cover the following areas:
+
+- Duplicate orders
+- Invalid rows
+- Decimal precision
+- Refunds
+- HTML escaping
+
+The runner also verifies that the CSV hash stays unchanged between executions. It replaces the program in the same sandbox workspace without creating a new claim.
 
 ## Inspect the retrieved reports
 
@@ -98,7 +124,7 @@ python3 -m json.tool "$LP_WORKDIR/runs/csv/summary.json"
 python3 -m json.tool "$LP_WORKDIR/runs/csv/run.json"
 ```
 
-Confirm these values in `summary.json`:
+Confirm the following values in `summary.json`:
 
 | Field | Expected value |
 | --- | --- |
@@ -114,7 +140,7 @@ The HTML displays the same revenue and row counts, plus monthly totals, product 
 
 ## Understand the workspace lifecycle
 
-The runner's successful exit confirms that the task claim and its bound Sandbox and Pod were deleted. The reports remain on your local machine. The warm pool and cluster keep running for the next task.
+The runner exiting successfully confirms that the task claim and its bound Sandbox and Pod were deleted. The reports remain on your local machine. The warm pool and cluster keep running for the next task.
 
 For a failed run, inspect `$LP_WORKDIR/runs/csv/run.json`. A `cleanup_error` needs attention even if application checks passed.
 
@@ -122,4 +148,6 @@ You can repeat the task with a new output directory, such as `runs/csv-second`.
 
 ## What you've accomplished and what's next
 
-You've executed a failure-and-correction workflow on Arm, verified the business result, and retained reports after removing the task environment. Next, open an interactive shell in another claimed sandbox to inspect its user, filesystem, and exposed Linux information.
+You've run a failure-and-correction workflow on Arm and verified the business result. You've also retained reports after removing the task environment.
+
+Next, you'll open an interactive shell in another claimed sandbox to inspect its user, filesystem, and exposed Linux information.
