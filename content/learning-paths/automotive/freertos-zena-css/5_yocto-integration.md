@@ -464,7 +464,7 @@ ls build/tmp_virtualization/deploy/images/fvp-rd-aspen/rse-flash-image.img
 
 Old artifacts can remain in the deploy directory. File presence alone doesn't prove which recipe was selected. Use the resolved `DISTRO_FEATURES` and `pn-buildlist` checks as the authoritative evidence.
 
-The deploy directory proves that the build produced files. It doesn't prove that the binary was signed correctly or accepted by RSE. Launch the Zena CSS FVP through the standard runner:
+The deploy directory proves that the build produced files. It doesn't prove that the binary was signed correctly or accepted by RSE. Launch the Zena CSS Fixed Virtual Platform (FVP) through the standard runner:
 
 ```bash
 kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
