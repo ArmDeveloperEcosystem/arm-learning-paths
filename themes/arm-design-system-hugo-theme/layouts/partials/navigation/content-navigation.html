@@ -8,7 +8,7 @@ Called from:
     - learning-paths/learningpathall.html
 */}}
 
-<a class="a-tab inner-learning-path-navbar-element {{.counter}}-weight" href="{{.context.Permalink}}">
+<a class="a-tab inner-learning-path-navbar-element {{.counter}}-weight" href="{{ if .continuous }}{{ .root }}#{{ .context.File.TranslationBaseName }}{{ else }}{{ .context.Permalink}}{{ end }}">
     <div class="c-row tab-row {{ if eq .context.File.TranslationBaseName .thisfile}} active {{else}} inactive {{ end }}">
         <div class="tab-right-card
             {{ if eq .context.File.TranslationBaseName .thisfile}} active {{else}} inactive {{ end }}">

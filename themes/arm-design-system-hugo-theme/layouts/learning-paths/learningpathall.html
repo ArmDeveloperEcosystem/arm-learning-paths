@@ -1,97 +1,56 @@
-{{/*
-A content page that acts as a wrapper for all learning path content, rendering different depending on what type of page it is.
-
-Where it is used:
-    - /learning-paths/:category/:learning-path/:optional-step
-    - /learning-paths/servers-and-cloud-computing/gke/
-
-Called from:
-    - baseof
-
-Calls to:
-    - partial navigation/content-navigation.html
-    - partial general-formatting/github-links.html
-    - partial navigation/content-navigation-mobile.html
-    - partial learning-paths/introduction
-    - partial learning-paths/review
-    - partial learning-paths/next-steps
-    - partial learning-paths/content
-    - partial navigation/nav-buttons
-*/}}
-
-{{define "main"}}
-
-<!-- Define variables for dynamic creation-->
+{{ define "main" }}
 {{ $thisdir := .File.Dir }}
-{{ $thisfile:= .File.TranslationBaseName}}
-{{ $learningpathfiles := slice }}
+{{ $path := .Site.GetPage $thisdir }}
+{{ $pages := slice }}
+{{ range .Site.Pages.ByWeight }}
+    {{ if and .File (eq .File.Dir $thisdir) (ne .Params.hide_from_navpane true) }}
+        {{ $pages = $pages | append . }}
+    {{ end }}
+{{ end }}
 
-
-
-
-<div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1">
-    <!-- Left pane -->
+{{/* Existing step URLs remain usable and take readers to the corresponding section. */}}
+{{ if ne .File.TranslationBaseName "_index" }}
+    <script>window.location.replace({{ printf "%s#%s" $path.RelPermalink .File.TranslationBaseName | jsonify | safeJS }});</script>
+    <p>Continue reading <a href="{{ $path.RelPermalink }}#{{ .File.TranslationBaseName }}">{{ $path.Title }}</a>.</p>
+{{ else }}
+<div class="c-row md:is-collapsed u-gap-1-1/2 u-flex-nowrap u-padding-top-1 continuous-learning-path">
     <div class="c-col lg:c-col-3 xl:c-col-2 u-hide lg:u-display-block u-flex-shrink-0">
-        <div class="left-nav-pane">
-
-            <!-- Title of _index.md always top left -->
-            {{ with .Site.GetPage $thisdir}}
-                <h6 id="learning-path-title" class="u-margin-top-1/2" style="font-size:1em; font-weight: normal;">{{ .Params.Title }}</h6>
-                <!-- Author name hidden but availible for analytics -->
-                <div hidden id="learning-path-author" 
-                data-author='{{ if reflect.IsSlice .Params.author }}{{ delimit .Params.author ", " }}{{ else }}{{ .Params.author }}{{ end }}'></div>
+        <nav class="left-nav-pane" aria-label="Learning Path sections">
+            <h6 id="learning-path-title" class="u-margin-top-1/2" style="font-size:1em; font-weight:normal;">{{ .Title }}</h6>
+            <div hidden id="learning-path-author" data-author='{{ if reflect.IsSlice .Params.author }}{{ delimit .Params.author ", " }}{{ else }}{{ .Params.author }}{{ end }}'></div>
+            {{ range $index, $page := $pages }}
+                {{ partial "navigation/content-navigation.html" (dict "context" $page "thisfile" "_index" "counter" $index "continuous" true "root" $path.RelPermalink) }}
             {{ end }}
-
-
-            <!-- Dynamic, content ordered by weight-->
-            {{ $counter := 0 }}       <!-- Counter to track index-->
-            {{ range .Site.Pages.ByWeight }}
-                {{ if .File}}
-                   <!-- Add option for metadata to optionally hide page from navigation pane-->
-                   {{ if ne .Params.hide_from_navpane true  }}
-                        {{ if (eq .File.Dir $thisdir)}}
-                            {{ $learningpathfiles = $learningpathfiles | append . }}
-
-                            <!-- Call partial to fill out navigation tabs -->
-                            {{partial "navigation/content-navigation.html" (dict "context" . "thisfile" $thisfile "counter" $counter) }}
-                            {{ $counter = add $counter 1 }}
-                        {{ end }}
-                    {{ end }}
-                {{end}}
-            {{end}} 
-
-            <!-- GitHub links to edit / log an issue -->
-            {{partial "general-formatting/github-links.html" .  }}
-        </div>
+            {{ partial "general-formatting/github-links.html" . }}
+        </nav>
     </div>
-
-    <!-- Right pane, content-->
     <div class="c-col lg:c-col-9 xl:c-col-10">
-
-        <!-- Mobile only shown navigation - sticky header -->
-        {{partial "navigation/content-navigation-mobile.html" (dict "context" .    "thisfile" $thisfile    "thisdir" $thisdir    "filesindir" $learningpathfiles)  }}
-
-
-        <!-- Custom content layout depending on type -->
-        {{if .File}}
-            {{ if eq .File.TranslationBaseName "_index" }}
-                {{partial "learning-paths/introduction" .  }}
-            {{else if eq .File.TranslationBaseName "_demo"}}
-                {{partial "learning-paths/demo" .  }}
-            {{else if eq .File.TranslationBaseName "_review"}}
-                {{partial "learning-paths/review" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
-            {{else if eq .File.TranslationBaseName "_next-steps"}}
-                {{partial "learning-paths/next-steps" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
-            {{ else }}
-                {{partial "learning-paths/content" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
+        {{ partial "navigation/content-navigation-mobile.html" (dict "context" . "thisfile" "_index" "thisdir" $thisdir "filesindir" $pages "continuous" true "root" $path.RelPermalink) }}
+        {{ range $index, $page := $pages }}
+            {{ if eq $page.File.TranslationBaseName "_next-steps" }}
+                {{ with $path.Params.generated_summary_faq.faqs }}
+                    <div class="content-box learning-path-faq">
+                        {{ partial "learning-paths/generated-summary-faq.html" (dict "context" $path "mode" "faqs") }}
+                    </div>
+                {{ end }}
             {{ end }}
-        {{end}}
-
-        <!-- Next steps for buttons -->
-        {{ if ne .File.TranslationBaseName "_demo"}}
-            {{partial "navigation/nav-buttons" (dict "context" . "learningpathfiles" $learningpathfiles)  }}
-        {{end}}
+            <section id="{{ $page.File.TranslationBaseName }}" class="learning-path-section" aria-labelledby="learning-path-section-title-{{ $index }}">
+                <h2 id="learning-path-section-title-{{ $index }}" class="learning-path-section-heading">{{ if eq $page.File.TranslationBaseName "_index" }}Introduction{{ else if eq $page.File.TranslationBaseName "_demo" }}Demo{{ else }}{{ $page.Title }}{{ end }}</h2>
+                {{ if eq $page.File.TranslationBaseName "_index" }}
+                    {{ partial "learning-paths/introduction" $page }}
+                {{ else if eq $page.File.TranslationBaseName "_demo" }}
+                    {{ partial "learning-paths/demo" $page }}
+                {{ else if eq $page.File.TranslationBaseName "_review" }}
+                    {{ partial "learning-paths/review" (dict "context" $page "learningpathfiles" $pages "continuous" true "root" $path.RelPermalink) }}
+                {{ else if eq $page.File.TranslationBaseName "_next-steps" }}
+                    {{ partial "learning-paths/next-steps" (dict "context" $page "learningpathfiles" $pages) }}
+                {{ else }}
+                    {{ partial "learning-paths/content" (dict "context" $page "learningpathfiles" $pages) }}
+                {{ end }}
+            </section>
+        {{ end }}
     </div>
 </div>
-
-{{end}}
+<script src="/js/continuous-learning-path.js" defer></script>
+{{ end }}
+{{ end }}

@@ -72,13 +72,18 @@ Called from:
 {{end}}
 
 <!-- Content pages only that are not _index, _next-steps, or _review -->
-{{if and $is_content (not (hasPrefix .File.TranslationBaseName "_"))}}
+{{if and $is_content (or (not (hasPrefix .File.TranslationBaseName "_")) (and (eq .Layout "learningpathall") (eq .File.TranslationBaseName "_index")))}}
     <script src="/js/prism.js" defer></script>                        <!-- Include code highlighting javascript, Prism-->
     <script src="/js/prism_post_output_formating.js" defer></script>  <!-- must be called after prism.js to modify it once rendered -->
 {{end}}
 
 <!-- Demo page only -->
-{{ if and $is_content (hasPrefix .File.TranslationBaseName "_demo")}}
+{{ $hasDemo := false }}
+{{ if and (eq .Layout "learningpathall") (eq .File.TranslationBaseName "_index") }}
+    {{ $dir := .File.Dir }}
+    {{ range .Site.Pages }}{{ if and .File (eq .File.Dir $dir) (eq .File.TranslationBaseName "_demo") }}{{ $hasDemo = true }}{{ end }}{{ end }}
+{{ end }}
+{{ if or (and $is_content (hasPrefix .File.TranslationBaseName "_demo")) $hasDemo }}
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 {{end}}
 
@@ -130,7 +135,7 @@ Called from:
 </script>
 {{if .File}}
     {{if .File.TranslationBaseName}}
-        {{if hasPrefix .File.TranslationBaseName "_review"}}
+        {{if or (hasPrefix .File.TranslationBaseName "_review") (and (eq .Layout "learningpathall") (eq .File.TranslationBaseName "_index"))}}
             <script src="/js/review-question-behavior.js" defer></script>       <!-- Only needed on install guide pages and content pages -->
         {{end}}
     {{end}}

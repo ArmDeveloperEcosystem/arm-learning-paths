@@ -54,7 +54,7 @@ Called from:
     </div>
     <!-- View Next Steps button is shown a few seconds after answering the Qs to prompt moving on -->
     <div id="push-to-next-steps-div" hidden>
-        <ads-button name="Next Steps" class="inner-learning-path-navbtn-element {{sub (len .learningpathfiles) 1}}-weight" onclick="window.location.href={{(index .learningpathfiles (sub (len .learningpathfiles) 1)).Permalink}}" level="primary">
+        <ads-button name="Next Steps" class="inner-learning-path-navbtn-element {{sub (len .learningpathfiles) 1}}-weight" onclick="window.location.href='{{ if .continuous }}{{ .root }}#_next-steps{{ else }}{{ (index .learningpathfiles (sub (len .learningpathfiles) 1)).RelPermalink }}{{ end }}'" level="primary">
             View Next Steps
         </ads-button>
     </div>

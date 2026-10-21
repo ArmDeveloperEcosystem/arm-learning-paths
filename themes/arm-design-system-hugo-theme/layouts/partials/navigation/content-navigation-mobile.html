@@ -36,7 +36,7 @@ Called from:
                     
                     {{ $counter := 0 }}       <!-- Counter to track index-->
                     {{range .filesindir}}
-                        <a href="{{.Permalink}}" class="content-individual-a-mobile inner-learning-path-navbar-element {{$counter}}-weight">
+                        <a href="{{ if $.continuous }}{{ $.root }}#{{ .File.TranslationBaseName }}{{ else }}{{ .Permalink }}{{ end }}" class="content-individual-a-mobile inner-learning-path-navbar-element {{$counter}}-weight">
                             <div class="content-individual-mobile {{ if eq .File.TranslationBaseName $thisfile}} active {{else}} inactive {{ end }}">
                                 <p class="content-individual-txt-mobile {{ if eq .File.TranslationBaseName $thisfile}} active {{else}} inactive {{ end }}">
                                     {{ if eq .File.TranslationBaseName "_demo" }} 

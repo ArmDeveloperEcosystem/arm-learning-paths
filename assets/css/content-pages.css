@@ -5,6 +5,15 @@
     top:5px;
 }
 
+/* Keep the full Learning Path navigation inside the visible viewport. */
+.continuous-learning-path .left-nav-pane {
+    top: 1rem;
+    max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
 .left-nav-pane a.a-tab {
     display: block;
     line-height: 0;
@@ -376,4 +385,13 @@ html[theme='dark'] ads-expansion-panel.generated-summary-faq__panel {
     padding-bottom: 6px;
     padding-right: 16px;
     font-size: 16px;
+}
+
+/* Continuous Learning Path sections */
+.learning-path-section {
+    scroll-margin-top: 6rem;
+    margin-bottom: 3rem;
+}
+.learning-path-section-heading {
+    margin-bottom: 1.5rem;
 }
