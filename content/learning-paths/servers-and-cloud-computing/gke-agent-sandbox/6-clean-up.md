@@ -5,9 +5,9 @@ weight: 8
 layout: learningpathall
 ---
 
-## Preserve the results you need
+## Preserve the results that you need
 
-Your local machine retains the small-test result, CSV reports, interactive observations, and `agy` execution captures. Preserve the `agy` conversations and the final Project permission state before deleting the remote environment.
+Your local machine retains the small-test result, CSV reports, interactive observations, and `agy` execution captures. Preserve the `agy` conversations and the final project permission state before deleting the remote environment.
 
 Inspect your local files from your terminal:
 
@@ -22,29 +22,31 @@ The bridge audit can contain task commands and output. Review it before sharing.
 
 ## Release the agent session claim
 
-Make sure `agy` is closed, then release the sandbox claim created on the previous page:
+Make sure that `agy` is closed, then release the sandbox claim that you created earlier:
 
 ```bash
 python3 mcp-bridge/finish_session.py --record "$AGY_RECORD"
 ```
 
-This verifies claim ownership, deletes the claim and its bound Pod, and preserves the bridge logs.
+The script verifies claim ownership, deletes the claim and its bound Pod, and preserves the bridge logs.
 
-## Remove the dedicated namespace and warm pool
+## Remove the dedicated namespace and warm pool 
 
-The small-test and interactive pages release their own claims, and the CSV runner cleans up its claim. Inspect what remains in the tutorial namespace:
+Inspect the claims that remain in the Learning Path namespace:
 
 ```bash
 kubectl --context "$GKE_CONTEXT" -n "$NAMESPACE" get sandboxclaim,sandboxwarmpool,sandbox,pod
 ```
 
-Remove the warm pool so it stops replenishing available sandboxes:
+Remove the warm pool so that it stops replenishing available sandboxes:
 
 ```bash
 kubectl --context "$GKE_CONTEXT" -n "$NAMESPACE" delete sandboxwarmpool axion-python-pool --ignore-not-found
 ```
 
-If you stopped an earlier task midway, inspect and delete its recorded tutorial claim by name. After confirming that this dedicated namespace contains only tutorial resources, delete it:
+If you stopped an earlier task midway, inspect and delete its claim by name. 
+
+After confirming that the namespace contains only resources associated with the Learning Path, delete the namespace:
 
 ```bash
 kubectl --context "$GKE_CONTEXT" delete namespace "$NAMESPACE" --wait=true
@@ -52,9 +54,9 @@ kubectl --context "$GKE_CONTEXT" delete namespace "$NAMESPACE" --wait=true
 
 Deleting the namespace removes its remaining namespaced resources. Node and control-plane charges continue until you delete the cluster.
 
-## Delete the tutorial cluster
+## Delete the cluster
 
-Confirm that the project, location, and cluster name still identify the dedicated cluster you created. Then delete it:
+Confirm that the project, location, and cluster name still identify the cluster that you created. After confirming, delete the cluster:
 
 ```bash
 printf 'Project: %s\nLocation: %s\nCluster: %s\n' "$PROJECT_ID" "$LOCATION" "$CLUSTER_NAME"
@@ -62,7 +64,9 @@ gcloud container clusters delete "$CLUSTER_NAME" \
   --project="$PROJECT_ID" --location="$LOCATION" --quiet
 ```
 
-Wait for the deletion to complete before continuing — it can take a few minutes. Check the project for remaining clusters, disks, and addresses:
+Deletion can take a few minutes. Wait for the deletion to complete before continuing. 
+
+Check the project for remaining clusters, disks, and addresses:
 
 ```bash
 gcloud container clusters list --project="$PROJECT_ID"
@@ -70,9 +74,9 @@ gcloud compute disks list --project="$PROJECT_ID"
 gcloud compute addresses list --project="$PROJECT_ID"
 ```
 
-Confirm that the tutorial cluster is absent. Investigate any leftover tutorial-owned resources before removing them; retain unrelated project resources. If capacity troubleshooting created another tutorial cluster in a different zone, remove that cluster too.
+Confirm that the cluster that you deleted is absent. Investigate any leftover resources associated with the Learning Path before removing them. Retain unrelated project resources. If you needed to create another cluster in a different zone to troubleshoot capacity issues, remove that cluster too.
 
-Once the cluster is deleted, remove the VPC subnet and network created on page 1:
+After cluster deletion, remove the VPC subnet and network that you created earlier:
 
 ```bash
 gcloud compute networks subnets delete "$SUBNETWORK" \
@@ -81,8 +85,12 @@ gcloud compute networks delete "$NETWORK" \
   --project="$PROJECT_ID" --quiet
 ```
 
-You didn't create an external load balancer, custom image registry, or persistent workload disk in this walkthrough. Existing project logging, storage, and other services can still incur charges independently.
+You didn't create an external load balancer, custom image registry, or persistent workload disk. Existing project logging, storage, and other services can still incur charges independently.
 
 ## What you've accomplished
 
-You've created an Arm sandbox pool, tested its access restrictions, run a CSV task, inspected a sandbox interactively, and used the Antigravity CLI to run agent-generated Python in the remote sandbox. You retained results while removing the task environments and the dedicated cluster.
+You've retained results while removing the task environments and the dedicated cluster for the Learning Path.
+
+You can extend the Learning Path workflow to run agent-generated code in an isolated environment for your own use cases.
+
+

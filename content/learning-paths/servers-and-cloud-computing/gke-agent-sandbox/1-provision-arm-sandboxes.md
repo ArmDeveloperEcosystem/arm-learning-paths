@@ -9,7 +9,7 @@ layout: learningpathall
 
 Continue in the same terminal with `LP_WORKDIR` still set. Run `cd "$LP_WORKDIR"` if you opened a new terminal. 
 
-You create one small system node and one Arm sandbox node. The system pool uses an `e2-standard-2` node. Your Python workloads use the separate `c4a-standard-2` pool which uses Google Axion processors.
+You'll create one small system node and one Arm sandbox node. The system pool will use an `e2-standard-2` node. Your Python workloads will use the separate `c4a-standard-2` pool which uses Google Axion processors.
 
 Set the names and networking for a dedicated tutorial cluster:
 
@@ -35,9 +35,9 @@ gcloud compute networks subnets create "$SUBNETWORK" \
   --region="$REGION" --range=10.0.0.0/20
 ```
 
-The remaining commands use these environment variables, so keep this terminal open or re-export them if you start a new session. `us-central1-c` is the default zone. If you hit C4A capacity issues, `us-east4-a` is a good alternative — update both `LOCATION` and `REGION`, and recreate the subnet in the new region as described in "Handle capacity failures".
+You'll use these environment variables for subsequent commands, so keep this terminal open or re-export them if you start a new session. `us-central1-c` is the default zone. If you hit C4A capacity issues, `us-east4-a` is a good alternative. Update both `LOCATION` and `REGION`, then recreate the subnet in the new region.
 
-If you saved `env.sh` on the previous page, append these variables to it:
+If you saved `env.sh` earlier, append these variables to it:
 
 ```bash
 cat >> "$LP_WORKDIR/env.sh" << EOF
@@ -54,7 +54,15 @@ EOF
 
 ## Check access, quota, and versions
 
-These commands enable the GKE and Compute APIs on your project, which are required before you can create a cluster. The remaining commands confirm billing is active, verify that the Axion machine type is available in your zone, and save your region's quota and available GKE versions to `output/server-config.json` in case you need them for troubleshooting:
+The following commands enable the Google Kubernetes Engine (GKE) and Compute APIs on your project, which are required before you can create a cluster. 
+
+The commands also perform the following tasks:
+
+- Confirm that billing is active.
+- Verify that the Axion machine type is available in your zone.
+- Save the quota and available GKE versions for your chosen region to `output/server-config.json` for troubleshooting.
+
+Run the commands:
 
 ```bash
 gcloud billing projects describe "$PROJECT_ID"
@@ -67,13 +75,13 @@ gcloud container get-server-config --location="$LOCATION" --project="$PROJECT_ID
 cat output/server-config.json
 ```
 
-The server config saved above lists the available GKE versions for your location. Query it to see which versions are available in the `regular` release channel:
+The saved server config lists the available GKE versions for your location. Query the config to see which versions are available in the `regular` release channel:
 
 ```bash
 jq -r '.channels[] | select(.channel=="REGULAR") | .validVersions[]' output/server-config.json
 ```
 
-Agent Sandbox requires GKE `1.36.3-gke.1767000` or later with the `v1beta1` API. Pick the latest available version in the `regular` channel that meets this requirement. The version used for testing was `1.36.4-gke.1391000` but yours may be newer.
+Agent Sandbox requires GKE `1.36.3-gke.1767000` or later with the `v1beta1` API. Pick the latest available version in the `regular` channel that meets this requirement. The version used for testing was `1.36.4-gke.1391000`, but your version might be newer.
 
 Set your chosen version and channel:
 
@@ -82,7 +90,7 @@ export CLUSTER_VERSION=1.36.4-gke.1391000   # replace with your chosen version
 export RELEASE_CHANNEL=regular
 ```
 
-If you are using `env.sh`, append these too:
+If you're using `env.sh`, append these variables to the file:
 
 ```bash
 cat >> "$LP_WORKDIR/env.sh" << EOF
@@ -93,7 +101,9 @@ EOF
 
 ## Provision the cluster
 
-Run each provisioning command separately and check its result before continuing. First create the system pool:
+Run each provisioning command separately and check its result before continuing. 
+
+First, create the system pool:
 
 ```bash
 gcloud beta container clusters create "$CLUSTER_NAME" \
@@ -121,7 +131,7 @@ gcloud beta container clusters update "$CLUSTER_NAME" \
   --project="$PROJECT_ID" --location="$LOCATION" --enable-agent-sandbox
 ```
 
-Confirm the Axion node is running before continuing:
+Confirm that the Axion node is running before continuing:
 
 ```bash
 gcloud container node-pools describe "$NODE_POOL_NAME" \
@@ -140,20 +150,20 @@ gcloud container operations list --project="$PROJECT_ID" --location="$LOCATION" 
   --filter="operationType=CREATE_NODE_POOL" --format="table(name,status,statusMessage)"
 ```
 
-An insufficient-capacity error means no `c4a-standard-2` nodes were available in `LOCATION`. Delete the cluster, then retry in a different zone or with a larger machine type:
+An insufficient-capacity error means that no `c4a-standard-2` nodes were available in `LOCATION`. Delete the cluster, then retry in a different zone or with a larger machine type:
 
 ```bash
 gcloud container clusters delete "$CLUSTER_NAME" \
   --project="$PROJECT_ID" --location="$LOCATION" --quiet
 ```
 
-To try a different zone, update `LOCATION` and re-run all commands from the beginning of "Provision the cluster":
+To try a different zone, update `LOCATION` and re-run the commands under [Provision the cluster](/learning-paths/servers-and-cloud-computing/gke-agent-sandbox/1-provision-arm-sandboxes/#provision-the-cluster):
 
 ```bash
 export LOCATION=us-central1-a
 ```
 
-To try a larger machine type, update `MACHINE_TYPE` and re-run from the beginning of "Provision the cluster":
+To try a larger machine type, update `MACHINE_TYPE` and re-run the commands under [Provision the cluster](/learning-paths/servers-and-cloud-computing/gke-agent-sandbox/1-provision-arm-sandboxes/#provision-the-cluster):
 
 ```bash
 export MACHINE_TYPE=c4a-standard-4
@@ -161,9 +171,11 @@ export MACHINE_TYPE=c4a-standard-4
 
 For a quota error, the `statusMessage` names the quota that was exceeded. Go to **IAM & Admin > Quotas** in the Google Cloud console, find that quota, and request an increase before retrying.
 
-## Install the matching kubectl
+## Install the matching `kubectl` version
 
-Now that the cluster exists, install a kubectl within one minor version of its control plane, following the [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/). Set `KUBECTL_VERSION` to match the minor of the `CLUSTER_VERSION` you chose earlier. The following block detects your OS and architecture, downloads the matching binary, and verifies its checksum. Run it as a subshell so a download failure stops the block:
+Now that the cluster exists, install a `kubectl` version within one minor version of its control plane, following the [Kubernetes version skew policy](https://kubernetes.io/releases/version-skew-policy/). Set `KUBECTL_VERSION` to match the minor of the `CLUSTER_VERSION` that you chose earlier.
+
+The following block detects your OS and architecture, downloads the matching binary, and verifies its checksum. Run it as a subshell so that a download failure stops the block:
 
 ```bash
 (
@@ -210,7 +222,7 @@ gcloud container clusters get-credentials "$CLUSTER_NAME" \
 export GKE_CONTEXT="$(kubectl config current-context)"
 ```
 
-If you are using `env.sh`, append `GKE_CONTEXT`:
+If you're using `env.sh`, append `GKE_CONTEXT`:
 
 ```bash
 echo "export GKE_CONTEXT=\"$GKE_CONTEXT\"" >> "$LP_WORKDIR/env.sh"
@@ -231,22 +243,26 @@ gke-gke-agent-sandbox-axion-sandbox-pool-<hash>   Ready    <none>   2m    v1.36.
 gke-gke-agent-sandbox-default-pool-<hash>         Ready    <none>   4m    v1.36.x   amd64   e2-standard-2
 ```
 
-Confirm the gVisor runtime class is registered:
+Confirm that the gVisor runtime class is registered:
 
 ```bash
 kubectl --context "$GKE_CONTEXT" get runtimeclass gvisor
 ```
+
+The output is similar to:
 
 ```output
 NAME     HANDLER   AGE
 gvisor   runsc     2m
 ```
 
-Confirm the Agent Sandbox API resources are available:
+Confirm that the Agent Sandbox API resources are available:
 
 ```bash
 kubectl --context "$GKE_CONTEXT" api-resources --api-group=extensions.agents.x-k8s.io
 ```
+
+The output is similar to:
 
 ```output
 NAME                 SHORTNAMES   APIVERSION                                    NAMESPACED   KIND
@@ -267,4 +283,6 @@ gcloud container node-pools describe "$NODE_POOL_NAME" \
 
 ## What you've accomplished and what's next
 
-You've enabled Agent Sandbox and prepared a gVisor node pool on Google Axion. Next, define the Python environment, claim a sandbox, and verify its filesystem restrictions.
+You've enabled Agent Sandbox and prepared a gVisor node pool on Google Axion.
+
+Next, you'll define the Python environment, claim a sandbox, and verify its filesystem restrictions.
