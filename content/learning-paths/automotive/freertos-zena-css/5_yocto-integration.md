@@ -245,9 +245,9 @@ The patch also adds the referenced `freertos-demos-cl1` recipe. Its design follo
 
 The patch makes `freertos-demos-cl1.bb` build the FreeRTOS application and expose its binary under the name expected by the signing flow.
 
-The patch uses `yocto/meta-zena-css-bsp/recipes-bsp/si-hello-world/si-hello-world.bb` as a bare-metal example. Inspect `zephyr-environment.txt` to understand the expanded `do_install` and `do_deploy` behavior. Build the recipe after each meaningful addition so that BitBake can report any missing requirements.
+The patch uses `yocto/meta-zena-css-bsp/recipes-bsp/si-hello-world/si-hello-world.bb` as a bare-metal example. Inspect `zephyr-environment.txt` to understand the expanded `do_install` and `do_deploy` behavior. If you update the provided patch, build the recipe after each meaningful addition so that BitBake can report any missing requirements.
 
-Create the recipe directory in `arm-zena-css/`:
+The patch creates the recipe directory in `arm-zena-css/`:
 
 ```bash
 mkdir -p yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel
@@ -272,7 +272,7 @@ The `scp-firmware-fvp-rd-aspen.inc` file depends on `gcc-aarch64-none-elf-native
 
 The patch creates `yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/freertos-demos-cl1.bb` and adds the source, dependency, and build tasks.
 
-Test the patch directly:
+If you want to test the patch directly, run:
 
 ```bash
 kas shell -c 'bitbake freertos-demos-cl1'
@@ -462,9 +462,9 @@ ls build/tmp_virtualization/deploy/images/fvp-rd-aspen/rse-flash-image.img
   {{< /tab >}}
 {{< /tabpane >}}
 
-Old artifacts can remain in the deploy directory, so file presence alone doesn't prove which recipe was selected. Use the resolved `DISTRO_FEATURES` and `pn-buildlist` checks as the authoritative evidence.
+Old artifacts can remain in the deploy directory. File presence alone doesn't prove which recipe was selected. Use the resolved `DISTRO_FEATURES` and `pn-buildlist` checks as the authoritative evidence.
 
-The deploy directory proves that the build produced files, but not that the binary was signed correctly or accepted by RSE. Launch the Zena CSS FVP through the standard runner:
+The deploy directory proves that the build produced files. It doesn't prove that the binary was signed correctly or accepted by RSE. Launch the Zena CSS FVP through the standard runner:
 
 ```bash
 kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
