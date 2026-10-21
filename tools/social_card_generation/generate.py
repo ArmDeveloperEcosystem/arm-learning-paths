@@ -87,7 +87,7 @@ def parse_args():
     parser.add_argument(
         "--all",
         action="store_true",
-        help="Generate the default card and all Learning Path and install guide cards.",
+        help="Generate missing default, Learning Path, and install guide cards.",
     )
     parser.add_argument(
         "--default",
@@ -504,20 +504,35 @@ def main():
 
     paths = all_content_paths()
     failures = []
-    try:
-        render_card(DEFAULT_TITLE, DEFAULT_CONTENT_TYPE, DEFAULT_OUTPUT_PATH)
-    except Exception as error:
-        failures.append((DEFAULT_OUTPUT_PATH, error))
-        print(f"Failed: {DEFAULT_OUTPUT_PATH}: {error}", flush=True)
+    generated = 0
+    skipped = 0
+    if DEFAULT_OUTPUT_PATH.is_file():
+        skipped += 1
+        print(f"Already exists: {DEFAULT_OUTPUT_PATH}", flush=True)
+    else:
+        try:
+            render_card(DEFAULT_TITLE, DEFAULT_CONTENT_TYPE, DEFAULT_OUTPUT_PATH)
+            generated += 1
+        except Exception as error:
+            failures.append((DEFAULT_OUTPUT_PATH, error))
+            print(f"Failed: {DEFAULT_OUTPUT_PATH}: {error}", flush=True)
     for index, path in enumerate(paths, start=1):
         print(f"[{index}/{len(paths)}] {path.relative_to(REPO_ROOT)}", flush=True)
+        output_path = output_path_for_content(path.resolve())
+        if output_path.is_file():
+            skipped += 1
+            continue
         try:
             generate_card(path.resolve())
+            generated += 1
         except Exception as error:
             failures.append((path, error))
             print(f"Failed: {error}", flush=True)
 
-    print(f"Generated {len(paths) + 1 - len(failures)} of {len(paths) + 1} cards.")
+    print(
+        f"Cards: {generated} generated, {skipped} already present, "
+        f"{len(failures)} failed ({len(paths) + 1} total)."
+    )
     if failures:
         for path, error in failures:
             print(f"  {path.relative_to(REPO_ROOT)}: {error}")
