@@ -37,6 +37,11 @@
                     {{ partial "learning-paths/review" (dict "context" $page "learningpathfiles" $pages "continuous" true "root" $path.RelPermalink) }}
                 {{ else if eq $page.File.TranslationBaseName "_next-steps" }}
                     {{ partial "learning-paths/next-steps" (dict "context" $page "learningpathfiles" $pages) }}
+                    {{ with $path.Params.generated_summary_faq.faqs }}
+                        <div class="content-box learning-path-faq">
+                            {{ partial "learning-paths/generated-summary-faq.html" (dict "context" $path "mode" "faqs") }}
+                        </div>
+                    {{ end }}
                 {{ else }}
                     {{ partial "learning-paths/content" (dict "context" $page "learningpathfiles" $pages) }}
                 {{ end }}

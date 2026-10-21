@@ -1,5 +1,5 @@
 {{/*
-Render a generated summary paragraph and FAQ block for Learning Path introduction pages.
+Render the generated summary or FAQ block for a Learning Path.
 
 	Expected front-matter shape:
 	  generated_summary_faq:
@@ -11,6 +11,7 @@ Render a generated summary paragraph and FAQ block for Learning Path introductio
 */}}
 
 {{ $generated := .context.Params.generated_summary_faq }}
+{{ $mode := .mode }}
 {{ if $generated }}
 	{{ $summary := $generated.summary }}
 	{{ $faqs := $generated.faqs }}
@@ -18,7 +19,7 @@ Render a generated summary paragraph and FAQ block for Learning Path introductio
 
 	{{ if or $summary $faqs }}
 		<div id="generated-summary-faq" class="u-margin-top-2">
-			{{ with $summary }}
+			{{ if ne $mode "faqs" }}{{ with $summary }}
 				<div class="generated-summary-faq__heading">
 					<h3>Summary</h3>
 					{{ if $ai_assisted }}
@@ -44,9 +45,9 @@ Render a generated summary paragraph and FAQ block for Learning Path introductio
 				<div class="u-margin-left-1">
 					{{ . | markdownify }}
 				</div>
-			{{ end }}
+			{{ end }}{{ end }}
 
-			{{ with $faqs }}
+			{{ if ne $mode "summary" }}{{ with $faqs }}
 				<div class="generated-summary-faq__heading u-margin-top-2">
 					<h3>Frequently asked questions</h3>
 					{{ if $ai_assisted }}
@@ -77,7 +78,7 @@ Render a generated summary paragraph and FAQ block for Learning Path introductio
 						</div>
 					</ads-expansion-panel>
 				{{ end }}
-			{{ end }}
+			{{ end }}{{ end }}
 
 			{{ if $ai_assisted }}
 				<script>
