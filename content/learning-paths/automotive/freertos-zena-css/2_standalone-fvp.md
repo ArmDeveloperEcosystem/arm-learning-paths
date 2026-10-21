@@ -9,28 +9,17 @@ layout: learningpathall
 
 ## Run FreeRTOS on the Cortex-R82AE
 
-Build and validate the FreeRTOS SMP application on the standalone Cortex-R82AE FVP before adapting it to Zena CSS. Use staged progress checks and source-level or Tarmac debugging to diagnose early port failures.
+You'll build and validate the FreeRTOS symmetric multiprocessing (SMP) application on the standalone Cortex-R82AE Fixed Virtual Platform (FVP). Then, you'll adapt it to Zena CSS. Use staged progress checks and source-level or Tarmac debugging to diagnose early port failures.
 
-
-After completing this section, you will have verified that:
-
-- The FreeRTOS SMP application builds successfully for Cortex-R82AE.
-- FreeRTOS runs across all four cores of `FVP_BaseR_Cortex-R82AE`.
-- The ELF image can be loaded directly by the FVP.
-- The raw binary can also be loaded directly into the FVP memory.
-- UART output and the interactive command prompt work correctly.
-- SMP scheduling, task affinity, shared state, and interprocessor interrupts operate as expected.
-- The generated ELF image can be used for source-level debugging.
-
-## Download and install Arm Development Studio
+### Download and install Arm Development Studio
 
 `FVP_BaseR_Cortex-R82AE` is part of the Arm Development Studio distribution and is licensed software.
 
-Download and install Arm Development Studio using the [Arm Development Studio download information](https://www.arm.com/products/development-tools/embedded-and-software/arm-development-studio?utm_source=digikey&utm_medium=distributor&utm_campaign=dev_studio). Install the `UBL Gold` edition.
+Download and install the UBL Gold edition of Arm Development Studio. For installation steps, see the [Arm Development Studio](/install-guides/armds/) install guide. For more information, see the [Arm Development Studio download information](https://www.arm.com/products/development-tools/embedded-and-software/arm-development-studio?utm_source=digikey&utm_medium=distributor&utm_campaign=dev_studio).
 
 After installing Arm Development Studio, email one of the [Arm development-tool distributors](https://www.arm.com/products/development-tools/distributors) to request an evaluation license.
 
-Use the serial number you receive to generate an authentication code with the [Arm user-based licensing instructions](https://developer.arm.com/support/licensing/user-based).
+Use the serial number that you receive to generate an authentication code with the [Arm user-based licensing instructions](https://support.arm.com/documentation/107573/1-2025100/Activation-code-administration/Create-an-activation-code).
 
 After generating the authentication code, activate the license on your Ubuntu host:
 
@@ -38,22 +27,22 @@ After generating the authentication code, activate the license on your Ubuntu ho
 sudo armlm activate --code <your activation code goes here>
 ```
 
-Install `xterm` so the FVP can open its terminal window in the Ubuntu desktop:
+Install `xterm` so that the FVP can open its terminal window in the Ubuntu desktop:
 
 ```bash
 sudo apt install -y xterm
 ```
 
-## Start from the Cortex-R82 SMP port
+### Start from the Cortex-R82 SMP port
 
 Begin with the partner-supported Cortex-R82 SMP demo. It provides the Armv8-R FreeRTOS port, Generic Interrupt Controller (GIC) setup, Memory Protection Unit (MPU) configuration, and SMP scheduler support needed for Cortex-R82.
 
 The Zena CSS FVP provides a configuration that adds a second cluster containing four Cortex-R82AE cores.
-The objective is to run FreeRTOS on this R82AE cluster.
+You'll eventually run FreeRTOS on this R82AE cluster.
 
-Begin by running FreeRTOS on the standalone `FVP_BaseR_Cortex-R82AE`, which was installed with Arm Development Studio. You can configure this FVP to closely match the Cortex-R82AE cluster from the Zena CSS FVP.
+Start by running FreeRTOS on the standalone `FVP_BaseR_Cortex-R82AE`, which was installed with Arm Development Studio. You can configure this FVP to closely match the Cortex-R82AE cluster from the Zena CSS FVP.
 
-The demo provides the board support code for `FVP_BaseR_Cortex-R82AE` and a four-task command-line application. Each task has a fixed core affinity, which makes scheduler and coherency problems visible during bring-up.
+The demo includes the board support code for `FVP_BaseR_Cortex-R82AE` and a four-task command-line application. Each task has a fixed core affinity, which makes scheduler and coherency problems visible during bring-up.
 
 Clone the `R82AE-demo` branches of the [Cortex-R82AE partner-supported demos](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/tree/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG) and [FreeRTOS Kernel](https://github.com/JulienJayat-Arm/FreeRTOS-Kernel/tree/R82AE-demo) repositories into the same parent directory:
 
@@ -66,14 +55,13 @@ git clone --branch R82AE-demo --single-branch \
   FreeRTOS-Kernel
 ```
 
-The demo repository does not include the kernel as a submodule. The CMake configuration therefore uses `KERNEL_DIR_PATH` to select the adjacent kernel clone. This kernel branch adds the configurable GICv3 SGI affinity routing required by the Cortex-R82AE topology.
+The demo repository doesn't include the kernel as a submodule. The CMake configuration therefore uses `KERNEL_DIR_PATH` to select the adjacent kernel clone. This kernel branch adds the configurable GICv3 SGI affinity routing required by the Cortex-R82AE topology.
 
+### Understand the Cortex-R82AE changes
 
+The following changes need to be made to adapt the demo for Cortex-R82AE:
 
-
-## Understand the Cortex-R82AE changes
-
-### FVP configuration
+#### FVP configuration
 
 The [Zena CSS boot-flow documentation](https://arm-zena-css.docs.arm.com/en/v2.2/design/boot_process.html#boot-flow) explains that Safety Island Cluster 1 boots from LLRAM:
 
@@ -82,7 +70,7 @@ The [Zena CSS boot-flow documentation](https://arm-zena-css.docs.arm.com/en/v2.2
 
 The [Zephyr board description for Safety Island Cluster 1](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/components/safety_island/zephyr/src/boards/arm/fvp_rd_aspen_safety_island/fvp_rd_aspen_safety_island_c1.dts?ref_type=heads#L109) defines 8 MiB of SRAM at `0x140000000`.
 
-With the configuration file [`fvp_R82AE_config.txt`](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/fvp_R82AE_config.txt), `FVP_BaseR_Cortex-R82AE` can be configured to expose the same amount of LLRAM at the same base address. The reset vector address (RVBAR) can be configured to boot from this address.
+With the configuration file [`fvp_R82AE_config.txt`](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/fvp_R82AE_config.txt), you can configure `FVP_BaseR_Cortex-R82AE` to expose the same amount of LLRAM at the same base address. You can configure the reset vector base address register (RVBAR) to boot from this address:
 
 ```text
 cluster0.memory.has_llram=1
@@ -95,7 +83,8 @@ cluster0.cpu1.RVBAR=0x140000000
 cluster0.cpu2.RVBAR=0x140000000
 cluster0.cpu3.RVBAR=0x140000000
 ```
-Other configurations:
+You can also provide the following alternative configuration:
+
 - Use MPU mode for the Cortex-R82AE.
 - Configure four cores.
 - Start the reference counter automatically.
@@ -116,18 +105,18 @@ bp.pl011_uart0.untimed_fifos=1
 bp.pl011_uart0.unbuffered_output=1
 ```
 
-### Code adaptation
+#### Code adaptation
 
-The generic demo isn't sufficient for the Cortex-R82AE FVP. Check that the port handles these platform differences:
+The generic demo isn't sufficient for the Cortex-R82AE FVP. Check that the port handles the following platform differences:
 
-- The processors start at Exception Level 2 (EL2), while the FreeRTOS port runs at EL1. The original Cortex-R82 example boots directly at EL1, which is not possible with this Cortex-R82AE configuration.
-- The Cortex-R82AE affinity layout differs from the layout assumed by the original interprocessor interrupt code.
-- The GIC uses the architectural affinity layout and must be configured separately from task affinity.
+- The processors start at Exception Level 2 (EL2), while the FreeRTOS port runs at EL1. The original Cortex-R82 demo boots directly at EL1, which isn't possible with this Cortex-R82AE configuration.
+- The Cortex-R82AE affinity layout differs from the layout that's assumed by the original interprocessor interrupt code.
+- The GIC uses the architectural affinity layout and needs to be configured separately from task affinity.
 - MPU programming needs the required data and instruction synchronization barriers.
 - The application uses a PL011 UART instead of semihosting.
-- The FVP protected MPU and shared low-latency RAM (LLRAM) need explicit configuration.
-- The image entry point must be set to the first address of the code section.
-- The timer frequency must be configured at the highest Exception Level.
+- The FVP-protected MPU and shared low-latency RAM (LLRAM) need explicit configuration.
+- The image entry point needs to be set to the first address of the code section.
+- The timer frequency needs to be configured at the highest Exception Level.
 
 The reference FVP configuration uses four cores and an 8 MiB LLRAM window. The address range is divided into separate code and data regions:
 
@@ -136,8 +125,7 @@ The reference FVP configuration uses four cores and an 8 MiB LLRAM window. The a
 | Code | `0x140000000` | 4 MiB |
 | Data | `0x140400000` | 4 MiB |
 
-All four reset vector base address registers (RVBAR) point to `0x140000000`.
-
+All four RVBARs point to `0x140000000`.
 
 Update the linker description for your selected compiler. For GCC, modify the [GNU linker script](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/gnu_linker_script.ld#L20). For Arm Compiler for Embedded, make the equivalent changes in the [scatter file](https://github.com/JulienJayat-Arm/FreeRTOS-Partner-Supported-Demos/blob/R82AE-demo/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG/armclang_linker_script.sct#L18):
 
@@ -200,7 +188,7 @@ LOAD_REGION __ROM_START
 
 Both linker descriptions place the reset code first at `0x140000000` and the data sections at `0x140400000`.
 
-## Compile and run the standalone platform
+### Compile and run the standalone platform
 
 Enter the Cortex-R82AE demo directory:
 
@@ -208,9 +196,9 @@ Enter the Cortex-R82AE demo directory:
 cd FreeRTOS-Partner-Supported-Demos/CORTEX_R82AE_SMP_FVP_MPU_GCC_ARMCLANG
 ```
 
-### Build the application
+#### Build the application
 
-Configure a debug build with either GCC or Arm Compiler for Embedded. The `R82AE_PLATFORM` setting selects the standalone Cortex-R82AE FVP memory and peripheral map. Each tab builds the ELF file and converts it to a raw binary using the matching toolchain utility.
+Configure a debug build with either GCC or Arm Compiler for Embedded. The debug build builds the ELF file and converts it to a raw binary by using the matching toolchain utility. The `R82AE_PLATFORM` setting selects the standalone Cortex-R82AE FVP memory and peripheral map:
 
 {{< tabpane code=true >}}
   {{< tab header="GCC" language="bash" >}}
@@ -243,11 +231,9 @@ Although ELF is a standard format, embedded toolchains encode load and execution
 
 Using `fromelf --bin` can create an output directory containing one file for each load region. Use `--bincombined` when the FVP requires one binary file.
 
-### Run the application
+#### Run the application
 
-#### Start the FVP
-
-You can load the ELF file directly from within your Ubuntu host's desktop environment. The FVP will open both `xterm` and other windows within the Ubuntu desktop. The FVP uses the addresses recorded in the ELF file, and the image retains the symbols required for source-level debugging:
+You can load the ELF file directly from within the desktop environment of your Ubuntu host. The FVP will open both `xterm` and other windows within the Ubuntu desktop. The FVP uses the addresses recorded in the ELF file, and the image retains the symbols required for source-level debugging:
 
 {{< tabpane code=true >}}
   {{< tab header="GCC" language="bash" >}}
@@ -262,7 +248,7 @@ FVP_BaseR_Cortex-R82AE \
   {{< /tab >}}
 {{< /tabpane >}}
 
-Or you can load the binary at the Cluster 0 LLRAM base address, `0x140000000`:
+Alternatively, you can load the binary at the Cluster 0 LLRAM base address, `0x140000000`:
 
 {{< tabpane code=true >}}
   {{< tab header="GCC" language="bash" >}}
@@ -277,20 +263,21 @@ FVP_BaseR_Cortex-R82AE \
   {{< /tab >}}
 {{< /tabpane >}}
 
-The Zena CSS will use the raw-binary loading method. Validate it here first, where the standalone FVP provides a simpler environment for troubleshooting.
-
-#### Interact with the demo through UART
+The Zena CSS will use the raw-binary loading method. Validate the loading method here first, where the standalone FVP provides a simpler environment for troubleshooting.
 
 At the application prompt, enter `ping`. The four tasks exchange a message in a cycle across the four cores, as shown in the terminal output:
 
 ![FVP terminal showing the FreeRTOS four-core ping, pong, pang, and pung commands completing on cores 0 through 3. The output confirms that all four SMP tasks are running.#center](terminal.png "FreeRTOS four-core command output")
 
-This output validates UART access, SMP scheduling, core affinity, interprocessor interrupts, and visibility of shared task state.
+This output validates UART access, SMP scheduling, and core affinity. It also validates interprocessor interrupts and the visibility of shared task state.
 
-## Debug early port failures
+### Debug early port failures
 
-### Use the Arm Development Studio debugger
-Start the FVP with its debug server enabled when the application doesn't reach the prompt. Select the tab that matches your compiler:
+You can debug port failures by using either the Arm Development Studio debugger or Tarmac Trace.
+
+#### Use the Arm Development Studio debugger
+
+Start the FVP with its debug server enabled when the application doesn't reach the prompt:
 
 {{< tabpane code=true >}}
   {{< tab header="GCC" language="bash" >}}
@@ -326,11 +313,11 @@ b FreeRTOS_Abort
   {{< /tab >}}
 {{< /tabpane >}}
 
-### Use Tarmac Trace
+#### Use Tarmac Trace
 
 A different debugging approach is to use [Tarmac Trace](https://developer.arm.com/community/arm-community-blogs/b/tools-software-ides-blog/posts/tarmac-trace-utilities).
 
-Tarmac Trace records the execution of software running on an Arm FVP. It can log:
+Tarmac Trace records the execution of software running on an Arm FVP. It can log the following information:
 
 - Instructions executed by each core
 - Register updates
@@ -338,8 +325,7 @@ Tarmac Trace records the execution of software running on an Arm FVP. It can log
 - Interrupts and exceptions
 - Changes in processor state
 
-This execution history is especially useful when the software fails before UART output or when attaching a debugger changes the behavior. Unlike a breakpoint, the trace lets you inspect what happened immediately before the failure. Arm describes Tarmac as a textual record of CPU instructions and their effects.
-
+This execution history is especially useful when the software fails before UART output or when attaching a debugger changes the behavior. Unlike a breakpoint, you can use the trace to inspect what happened immediately before the failure. Arm describes Tarmac as a textual record of CPU instructions and their effects.
 
 Enable the Tarmac Trace plugin and write the trace to `tarmac.log`:
 
@@ -369,14 +355,14 @@ grep -B 6 -A 4 'CoreEvent_CURRENT_SPx_SYNC' tarmac.log
   2368228 clk cpu0 R ESR_EL1 0000000002000000
 ```
 
-The lines before `CoreEvent_CURRENT_SPx_SYNC` show the execution leading to the exception. Identify the core that generated the event and inspect the last executed instruction. Use the trace alongside these exception registers:
+The lines before `CoreEvent_CURRENT_SPx_SYNC` show the run leading to the exception. Identify the core that generated the event and inspect the last executed instruction. Use the trace alongside the following exception registers:
 
 - `ELR_EL1` contains the address to which the processor returns after handling the exception. For a synchronous exception, it identifies the instruction associated with the failure.
 - `ESR_EL1` describes the exception class and provides information about its cause. Use [ESR.arm64](https://esr.arm64.dev/) to interpret the syndrome register.
 - `FAR_EL1` contains the address associated with an instruction or data access fault, when valid for that exception.
 - `SPSR_EL1` captures the processor state at the time of the exception.
 
-Together, this information can reveal an incorrect branch target, an invalid memory access, a stack error, or an unexpected exception-level transition. For an SMP failure, compare the trace events from all four cores. This can show whether a core failed to start, did not receive an interprocessor interrupt, or accessed shared state in an unexpected order. Arm also provides Tarmac Trace Utilities for indexing and browsing large trace files.
+Together, this information can reveal an incorrect branch target, an invalid memory access, a stack error, or an unexpected exception-level transition. For an SMP failure, compare the trace events from all four cores. The comparison can show whether a core failed to start, didn't receive an interprocessor interrupt, or accessed shared state in an unexpected order. Arm also provides Tarmac Trace Utilities for indexing and browsing large trace files.
 
 The relevant values from this trace example are:
 
@@ -387,7 +373,7 @@ ESR_EL1 = 0x02000000EC = 0x00: unknown or undefined instruction
 IL = 1: the faulting instruction is 32 bits
 EL1h_s: the application is executing at Secure EL1
 ```
-The trace shows that execution stops on `MSR CNTFRQ_EL0, x0`. `ELR_EL1` contains the address of this instruction, while the exception class in `ESR_EL1` reports an undefined instruction. The application runs at EL1, but `CNTFRQ_EL0` can be written only from the highest implemented Exception Level, which is EL2 on Cortex-R82AE. The timer frequency must therefore be initialized at EL2 before entering EL1.
+The trace shows that execution stops on `MSR CNTFRQ_EL0, x0`. `ELR_EL1` contains the address of this instruction, while the exception class in `ESR_EL1` reports an undefined instruction. The application runs at EL1, but `CNTFRQ_EL0` can be written only from the highest implemented Exception Level, which is EL2 on Cortex-R82AE. The timer frequency therefore needs to be initialized at EL2 before entering EL1.
 
 For more advanced analysis, use the open-source [Arm Tarmac Trace Utilities](https://github.com/ARM-software/tarmac-trace-utilities).
 
