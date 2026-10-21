@@ -27,13 +27,6 @@
     <div class="c-col lg:c-col-9 xl:c-col-10">
         {{ partial "navigation/content-navigation-mobile.html" (dict "context" . "thisfile" "_index" "thisdir" $thisdir "filesindir" $pages "continuous" true "root" $path.RelPermalink) }}
         {{ range $index, $page := $pages }}
-            {{ if eq $page.File.TranslationBaseName "_next-steps" }}
-                {{ with $path.Params.generated_summary_faq.faqs }}
-                    <div class="content-box learning-path-faq">
-                        {{ partial "learning-paths/generated-summary-faq.html" (dict "context" $path "mode" "faqs") }}
-                    </div>
-                {{ end }}
-            {{ end }}
             <section id="{{ $page.File.TranslationBaseName }}" class="learning-path-section" aria-labelledby="learning-path-section-title-{{ $index }}">
                 <h2 id="learning-path-section-title-{{ $index }}" class="learning-path-section-heading">{{ if eq $page.File.TranslationBaseName "_index" }}Introduction{{ else if eq $page.File.TranslationBaseName "_demo" }}Demo{{ else }}{{ $page.Title }}{{ end }}</h2>
                 {{ if eq $page.File.TranslationBaseName "_index" }}
