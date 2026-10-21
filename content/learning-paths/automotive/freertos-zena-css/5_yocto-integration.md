@@ -241,7 +241,7 @@ However, the referenced `freertos-demos-cl1` recipe doesn't exist yet. You'll bu
 
 The patch also adds the referenced `freertos-demos-cl1` recipe. Its design follows `zephyr-demos-cl1` and other bare-metal recipes.
 
-### How the patch creates the FreeRTOS recipe
+#### How the patch creates the FreeRTOS recipe
 
 The patch makes `freertos-demos-cl1.bb` build the FreeRTOS application and expose its binary under the name expected by the signing flow.
 
