@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## BF16 MoE
 
-BF16 is the baseline precision used for the regular MoE models in this Learning Path.
+BF16 (bfloat16) is a 16-bit floating-point format. It is the baseline precision for the unquantized MoE checkpoints used here.
 
 The BF16 section uses:
 
@@ -19,7 +19,7 @@ These models are used to show the before and after impact of the BF16 MoE optimi
 
 ## INT8/W8A8 MoE
 
-INT8/W8A8 uses 8-bit weights and 8-bit activations. Storing weights in INT8 instead of BF16 can reduce memory bandwidth pressure during inference. On Arm CPUs with I8MM support, W8A8 can also use SMMLA, Arm's signed INT8 matrix multiply-accumulate instruction, providing twice the theoretical matrix-multiply throughput of BF16.
+INT8/W8A8 uses 8-bit weights and 8-bit activations. Storing weights in INT8 instead of BF16 can reduce memory bandwidth pressure during inference. The optimized Arm INT8 path uses the I8MM instructions checked during setup. W8A8 describes the quantized operations; it does not mean every operation or the KV cache uses INT8.
 
 The INT8/W8A8 section uses a pre-quantized Qwen3 MoE model:
 
@@ -45,16 +45,18 @@ The Qwen comparison uses:
 
 This Learning Path does not cover quantizing a model from scratch. Instead, it uses a pre-quantized W8A8 model from Hugging Face so you can focus on running and benchmarking INT8/W8A8 MoE inference with vLLM.
 
-For model quantization workflows, refer to the existing [vLLM quantization Learning Path](/learning-paths/servers-and-cloud-computing/vllm-benchmark-quantisation/).
+For model quantization workflows, see the [vLLM quantization Learning Path](/learning-paths/servers-and-cloud-computing/vllm-benchmark-quantisation/).
 
 ## Why compare both BF16 and INT8/W8A8?
 
-The benchmark results show two optimization effects:
+The reported benchmarks compare two optimization effects:
 
-- The BF16 comparison shows the impact of the optimized unquantized MoE path for AArch64. The pre-optimization path did not use the AArch64 FusedMoE kernel for BF16 MoE layers, while the optimized path enables that kernel and uses an AdvSIMD BFMMLA micro-kernel to accelerate the `w13` and `w2` expert GEMMs.
-- The INT8/W8A8 comparison shows the additional benefit of lower-precision MoE execution. W8A8 reduces memory bandwidth pressure by using 8-bit weights and activations. On Arm CPUs with I8MM support, W8A8 can also use SMMLA, Arm's signed INT8 matrix multiply-accumulate instruction, which provides twice the theoretical matrix-multiply throughput of BFMMLA for BF16.
+- The BF16 comparison shows the impact of the optimized unquantized MoE path for AArch64. The pre-optimization path did not use the AArch64 FusedMoE kernel for BF16 MoE layers, while the optimized path enables that kernel and uses an AdvSIMD BFMMLA micro-kernel to accelerate the `w13` and `w2` expert matrix multiplications.
+- The INT8/W8A8 comparison shows the additional benefit of lower-precision MoE execution. W8A8 reduces memory bandwidth pressure by using 8-bit weights and activations. On Arm CPUs with I8MM support, W8A8 can also use SMMLA, Arm's signed INT8 matrix multiply-accumulate instruction, which performs twice as many multiply-accumulate operations per instruction as BFMMLA for BF16. This does not imply a twofold end-to-end serving speedup.
 
-## What you've accomplished and what's next
+The setup installs the optimized release only. Reproducing the before-and-after comparison also needs the baseline build and configuration, which are pending in this draft.
+
+## What you've learned and what's next
 
 You've now reviewed the MoE models and precision choices used in this Learning Path.
 

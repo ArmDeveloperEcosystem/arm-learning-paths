@@ -8,7 +8,11 @@ layout: learningpathall
 
 ## MoE performance benchmarking
 
-Use the `vllm bench serve` CLI to measure online serving performance for the selected MoE models.
+Use `vllm bench serve` to measure throughput and latency while a model serves concurrent requests.
+
+{{% notice Note %}}
+Benchmark validation is pending in this draft. The model-specific ShareGPT subsets referenced here are not yet supplied, and there is no subset-generation script. The download command provides the full dataset only. Obtain the subsets before running the ~512-input-token benchmarks; otherwise, the commands fail with `FileNotFoundError`.
+{{% /notice %}}
 
 The benchmark sends requests to the vLLM OpenAI-compatible API server at:
 
@@ -18,13 +22,20 @@ The benchmark sends requests to the vLLM OpenAI-compatible API server at:
 
 Start the model server first using the commands from [Run MoE inference with vLLM](../3-run-inference/), and keep it running in one terminal. Then run the benchmark command from another terminal.
 
-Benchmark using ShareGPT prompt subsets. First, download the public ShareGPT dataset from Hugging Face:
+In the benchmark terminal, change to the directory where you created `vllm_env_new`. Activate that environment and set `MODEL` to match the running server:
+
+```bash
+source vllm_env_new/bin/activate
+export MODEL=google/gemma-4-26B-A4B-it
+```
+
+Download the full ShareGPT dataset into this directory:
 
 ```bash
 wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json
 ```
 
-The benchmark results in this Learning Path use ShareGPT prompt subsets selected with each model tokenizer. The results shown use prompts with approximately 512 input tokens. You can use your own ShareGPT subset or another dataset by updating the dataset path in the benchmark command.
+The reported results use subsets selected with each model tokenizer for approximately 512 input tokens. Downloading the full dataset does not create those subsets. For a general serving test, you can use `--dataset-path ./ShareGPT_V3_unfiltered_cleaned_split.json` instead, but that workload is not comparable to the reported ~512-input-token results. Renaming the full dataset does not reproduce a subset.
 
 ## Benchmark setup
 
@@ -42,13 +53,13 @@ Concurrency values: 4, 8, 16, 32
 Benchmark tool: vllm bench serve
 ```
 
-Greedy decoding is configured with `--top-p 1 --temperature 0 --top-k 1`. This selects the next token deterministically instead of sampling from multiple likely tokens.
+Greedy decoding is configured with `--top-p 1 --temperature 0 --top-k 1`. This selects the highest-probability next token instead of sampling. It does not guarantee identical responses across different builds or precision settings.
 
-When prefix caching is enabled, repeating `vllm bench serve` against the same server can reuse prompts from earlier benchmark runs and inflate throughput. To avoid this, start a fresh vLLM server for each concurrency value.
+When prefix caching is enabled, repeating `vllm bench serve` against the same server can reuse prompts from earlier benchmark runs and inflate throughput. To avoid cache reuse across runs, start a fresh vLLM server for each concurrency value. Warmup requests can still populate the cache within a run; keep the warmup and cache settings consistent across comparisons.
 
 ## Run the benchmark
 
-For the ShareGPT ~512 input-token subset, run:
+Once the Gemma 4 subset is available in your current directory, run:
 
 ```bash
 export C=4
@@ -73,53 +84,41 @@ vllm bench serve \
   --num-warmups 5
 ```
 
-Repeat the benchmark for:
+`--max-concurrency` limits simultaneous requests. `--num-prompts` sets the total number of requests, and `--num-warmups` sends warmup requests before measurement. The benchmark prints a summary and saves JSON to `bench_out/gemma4_sharegpt_mc4.json` for this run.
 
-```text
-C=8
-C=16
-C=32
-```
+`--sharegpt-output-len 512` requests up to 512 generated tokens. Responses can stop earlier, so inspect actual output token counts when comparing throughput.
 
-Start a fresh vLLM server before each concurrency value.
+Repeat the command with `C=8`, then `C=16`, then `C=32`. Restart the server and wait for it to become ready before each run. Keep the model, dataset, and server settings unchanged while varying concurrency.
 
-For Gemma4, use the Gemma4 ShareGPT subset:
+For each additional model, update `MODEL` in both terminals, restart the server, and replace the dataset and result filename arguments. Use distinct result filenames for each model and precision to avoid overwriting earlier runs:
 
-```bash
---dataset-path ./sharegpt_gemma4_512.json
-```
+| Model | Required subset file | Example result filename |
+| --- | --- | --- |
+| Gemma 4 BF16 | `sharegpt_gemma4_512.json` | `gemma4_bf16_sharegpt_mc${C}.json` |
+| GPT-OSS BF16 | `sharegpt_gptoss_512.json` | `gptoss_bf16_sharegpt_mc${C}.json` |
+| Qwen3 BF16 | `sharegpt_qwen_512.json` | `qwen3_bf16_sharegpt_mc${C}.json` |
+| Qwen3 W8A8 | `sharegpt_qwen_512.json` | `qwen3_w8a8_sharegpt_mc${C}.json` |
 
-For GPT-OSS, use the GPT-OSS ShareGPT subset:
-
-```bash
---dataset-path ./sharegpt_gptoss_512.json
-```
-
-For Qwen3 BF16 and Qwen3 W8A8, use the Qwen3 ShareGPT subset:
-
-```bash
---dataset-path ./sharegpt_qwen_512.json
-```
-
-To benchmark an alternative dataset or subset, update the dataset path and result filename:
-
-```text
---dataset-path <path_to_dataset>
---result-filename <model>_<dataset>_mc${C}.json
-```
+Use the same Qwen3 subset for both precisions. Record CPU thread binding, server arguments, package versions, and any changes to the KV-cache budget alongside your results.
 
 ## Metrics
 
-The interesting results are:
+Check that all 128 measured requests completed successfully before interpreting performance. Investigate failed requests in the server logs.
 
-- Request throughput
-- Output token throughput
-- Total token throughput
-- TTFT, or time to first token
-- TPOT, or time per output token
+Use the summary and saved JSON to compare these metrics at the same concurrency:
+
+| Metric | Meaning | Preferred direction |
+| --- | --- | --- |
+| Request throughput | Completed requests per second | Higher |
+| Output token throughput | Generated tokens per second | Higher |
+| Total token throughput | Input and output tokens per second | Higher |
+| TTFT | Time to first token, reported in milliseconds | Lower |
+| TPOT | Time per output token after the first, reported in milliseconds | Lower |
+
+The command reports the 50th, 95th, and 99th percentiles for TTFT and TPOT. Higher percentiles help you assess latency for slower requests. Compare actual input and output token counts as well as throughput, because different response lengths change the amount of work performed.
 
 ## What you've accomplished and what's next
 
-You've now benchmarked MoE serving performance with `vllm bench serve`.
+After completing a run, you have a serving-performance summary and a saved JSON result for your selected model and workload.
 
 Next, you'll review the benchmark results and compare the BF16 and INT8/W8A8 MoE runs.
