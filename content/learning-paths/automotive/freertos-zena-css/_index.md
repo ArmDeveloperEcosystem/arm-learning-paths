@@ -8,8 +8,8 @@ minutes_to_complete: 180
 who_is_this_for: This advanced topic is for embedded and automotive software developers who want to replace the Zephyr Safety Island image in the Arm Zena CSS Reference Software Stack with FreeRTOS.
 
 learning_objectives:
-  - Build and validate a four-core FreeRTOS SMP port on the standalone Cortex-R82AE FVP.
-  - Adapt the port's boot, memory, and UART configuration for the Zena CSS Safety Island and verify direct loading.
+  - Build and validate a four-core FreeRTOS SMP port on the standalone Cortex-R82AE Fixed Virtual Platform (FVP).
+  - Adapt the boot, memory, and UART configuration of the port for the Zena CSS Safety Island and verify direct loading.
   - Validate FreeRTOS as the Cluster 1 firmware through the standard Zena CSS secure boot flow.
   - Implement and validate a selectable Yocto recipe that builds, signs, and packages FreeRTOS instead of Zephyr.
 

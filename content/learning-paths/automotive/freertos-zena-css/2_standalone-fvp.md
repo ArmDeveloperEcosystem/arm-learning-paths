@@ -9,13 +9,13 @@ layout: learningpathall
 
 ## Run FreeRTOS on the Cortex-R82AE
 
-You'll build and validate the FreeRTOS symmetric multiprocessing (SMP) application on the standalone Cortex-R82AE Fixed Virtual Platform (FVP). Then, you'll adapt it to Zena CSS. Use staged progress checks and source-level or Tarmac debugging to diagnose early port failures.
+You'll now build and validate the FreeRTOS symmetric multiprocessing (SMP) application on the standalone Cortex-R82AE Fixed Virtual Platform (FVP). Then, you'll adapt it to Zena CSS. Use staged progress checks and source-level or Tarmac debugging to diagnose early port failures.
 
 ### Download and install Arm Development Studio
 
 `FVP_BaseR_Cortex-R82AE` is part of the Arm Development Studio distribution and is licensed software.
 
-Download and install the UBL Gold edition of Arm Development Studio. For installation steps, see the [Arm Development Studio](/install-guides/armds/) install guide. For more information, see the [Arm Development Studio download information](https://www.arm.com/products/development-tools/embedded-and-software/arm-development-studio?utm_source=digikey&utm_medium=distributor&utm_campaign=dev_studio).
+Download and install the UBL Gold edition of Arm Development Studio. For installation steps, see the [Arm Development Studio](/install-guides/armds/) install guide. For more information, see [Arm Development Studio download information](https://www.arm.com/products/development-tools/embedded-and-software/arm-development-studio?utm_source=digikey&utm_medium=distributor&utm_campaign=dev_studio).
 
 After installing Arm Development Studio, email one of the [Arm development-tool distributors](https://www.arm.com/products/development-tools/distributors) to request an evaluation license.
 
@@ -35,10 +35,15 @@ sudo apt install -y xterm
 
 ### Start from the Cortex-R82 SMP port
 
-Begin with the partner-supported Cortex-R82 SMP demo. It provides the Armv8-R FreeRTOS port, Generic Interrupt Controller (GIC) setup, Memory Protection Unit (MPU) configuration, and SMP scheduler support needed for Cortex-R82.
+Begin with the partner-supported Cortex-R82 SMP demo. It provides the following components needed for Cortex-R82:
+
+- Armv8-R FreeRTOS port
+- Generic Interrupt Controller (GIC) setup
+- Memory Protection Unit (MPU) configuration
+- SMP scheduler support 
 
 The Zena CSS FVP provides a configuration that adds a second cluster containing four Cortex-R82AE cores.
-You'll eventually run FreeRTOS on this R82AE cluster.
+You'll eventually run FreeRTOS on this second R82AE cluster.
 
 Start by running FreeRTOS on the standalone `FVP_BaseR_Cortex-R82AE`, which was installed with Arm Development Studio. You can configure this FVP to closely match the Cortex-R82AE cluster from the Zena CSS FVP.
 
@@ -63,10 +68,7 @@ Adapting the demo for Cortex-R82AE involves changes to the FVP configuration and
 
 #### FVP configuration
 
-The [Zena CSS boot-flow documentation](https://arm-zena-css.docs.arm.com/en/v2.2/design/boot_process.html#boot-flow) explains that Safety Island Cluster 1 boots from LLRAM:
-
-*RSE BL2: If CFG2, copies the encrypted SI CL1 image from the RSE flash to SI LLRAM, decrypts and authenticates the image.*
-
+The [Zena CSS boot-flow documentation](https://arm-zena-css.docs.arm.com/en/v2.2/design/boot_process.html#boot-flow) explains that Safety Island Cluster 1 boots from LLRAM.
 
 The [Zephyr board description for Safety Island Cluster 1](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/components/safety_island/zephyr/src/boards/arm/fvp_rd_aspen_safety_island/fvp_rd_aspen_safety_island_c1.dts?ref_type=heads#L109) defines 8 MiB of SRAM at `0x140000000`.
 
@@ -317,7 +319,7 @@ b FreeRTOS_Abort
 
 A different debugging approach is to use [Tarmac Trace](https://developer.arm.com/community/arm-community-blogs/b/tools-software-ides-blog/posts/tarmac-trace-utilities).
 
-Tarmac Trace records the execution of software running on an Arm FVP. It can log the following information:
+Tarmac Trace records software running on an Arm FVP. It can log the following information:
 
 - Instructions executed by each core
 - Register updates
@@ -325,7 +327,7 @@ Tarmac Trace records the execution of software running on an Arm FVP. It can log
 - Interrupts and exceptions
 - Changes in processor state
 
-This execution history is especially useful when the software fails before UART output or when attaching a debugger changes the behavior. Unlike a breakpoint, you can use the trace to inspect what happened immediately before the failure. Arm describes Tarmac as a textual record of CPU instructions and their effects.
+This history is especially useful when the software fails before UART output or when attaching a debugger changes the behavior. Unlike a breakpoint, you can use the trace to inspect what happened immediately before the failure. Arm describes Tarmac as a textual record of CPU instructions and their effects.
 
 Enable the Tarmac Trace plugin and write the trace to `tarmac.log`:
 
@@ -360,7 +362,7 @@ The output is similar to:
   2368228 clk cpu0 R ESR_EL1 0000000002000000
 ```
 
-The lines before `CoreEvent_CURRENT_SPx_SYNC` show the run leading to the exception. Identify the core that generated the event and inspect the last executed instruction. Use the trace alongside the following exception registers:
+The lines before `CoreEvent_CURRENT_SPx_SYNC` show the run leading to the exception. Identify the core that generated the event and inspect the last instruction that was run. Use the trace alongside the following exception registers:
 
 - `ELR_EL1` contains the address to which the processor returns after handling the exception. For a synchronous exception, it identifies the instruction associated with the failure.
 - `ESR_EL1` describes the exception class and provides information about its cause. Use [ESR.arm64](https://esr.arm64.dev/) to interpret the syndrome register.

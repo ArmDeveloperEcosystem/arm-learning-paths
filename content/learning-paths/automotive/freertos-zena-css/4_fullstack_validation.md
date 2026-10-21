@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Run FreeRTOS in the Zena CSS software stack
 
-You've validated FreeRTOS by loading the image directly on the Zena FVP.
+You've validated FreeRTOS by loading the image directly on the Zena Fixed Virtual Platform (FVP).
 
 Now, you'll validate the application in the complete Zena CSS software stack by replacing the default Zephyr Cluster 1 firmware with a FreeRTOS image.
 
@@ -17,7 +17,7 @@ You'll use a manually substituted binary for this validation.
 
 ### Before you begin
 
-You should have the following environment ready:
+Ensure that the following environment is ready:
 
 - A working Zena CSS build environment
 - A working Zena CSS Configuration 2 FVP platform
@@ -29,13 +29,13 @@ To build the FreeRTOS image, complete the following steps.
 
 #### Update the GIC configuration for view 2
 
-The direct-loading workflow used during bring-up doesn't follow the normal Zena CSS boot sequence. In that environment, the SCP firmware isn't running and the GIC remains in its default configuration.
+The direct-loading workflow used during bring-up doesn't follow the normal Zena CSS boot sequence. In that environment, the System Control Processor (SCP) firmware isn't running. The Generic Interrupt Controller (GIC) remains in its default configuration.
 
 The initial FreeRTOS port therefore uses GIC view 0 to simplify platform bring-up and debugging.
 
 In the standard Zena CSS boot process, SCP firmware configures the GIC multi-view topology before releasing the Safety Island software. Safety Island Cluster 1 is assigned to GIC view 2, which is the same view that's used by the default Zephyr RTOS.
 
-To validate FreeRTOS as a drop-in replacement for the Cluster 1 Zephyr image, FreeRTOS has to use the same GIC view and redistributor addresses as the original firmware. Otherwise, interrupt configuration no longer matches the platform state.
+To replace the Cluster 1 Zephyr image, FreeRTOS has to use the same GIC view and redistributor addresses as the original firmware. Otherwise, interrupt configuration no longer matches the platform state.
 
 For more information, see [GIC multiple views in the Arm Zena CSS documentation](https://arm-zena-css.docs.arm.com/en/latest/design/components.html#gic-multiple-views).
 
@@ -102,10 +102,10 @@ Before replacing the Cluster 1 firmware, trace how it's packaged into the final 
 
 Before examining the Yocto build system, review the Zena CSS architecture. Identify the software running on each processing element.
 
-For this Learning Path, the important components are:
+The following components are important:
 
 - Runtime Security Engine (RSE)
-- System Control Processor (SCP)
+- SCP
 - Application Processing (AP) subsystem
 - Safety Island Cluster 1 (SI CL1)
 
@@ -147,7 +147,9 @@ Find the recipe that uses this configuration:
 grep -nr "firmware.cfg" yocto/
 ```
 
-The search links this configuration to the image recipe. The output is similar to:
+The search links this configuration to the image recipe.
+
+The output is similar to:
 
 ```output
 yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb:40:GENIMAGE_CONFIG = "firmware.cfg"
@@ -314,11 +316,12 @@ Stop your `tmux` processes:
 pkill '^tmux'
 ```
 
-Next, open the Yocto build menu for Zena CSS and select **RD-Aspen Cfg2**. Press **Save and Exit**:
+Next, open the Yocto build menu for Zena CSS:
 
 ```bash
 kas menu arm-zena-css/Kconfig
 ```
+Select **RD-Aspen Cfg2**, then select **Save and Exit**.
 
 Perform an incremental build:
 

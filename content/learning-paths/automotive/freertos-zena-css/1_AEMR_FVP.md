@@ -23,7 +23,7 @@ Ensure that you've installed the following tools and added their executable dire
 
 You need only one of Arm GNU Toolchain or Arm Compiler for Embedded.
 
-Verify your setup with the following commands, omitting the command for the compiler that you didn't choose:
+Verify your setup with the following commands, omitting the command for the compiler that you're not using:
 
 ```bash
 cmake --version
@@ -115,7 +115,7 @@ The generated executable is in `build_AEMR` for GCC or `build_AEMR_armclang` for
 
 ### Launch the demo on the AEM FVP
 
-The upstream `run.sh` script expects its default output-directory name. You'll use different build-directory names, so you can launch the executable directly:
+The upstream `run.sh` script expects its default output-directory name. You'll use different build-directory names so that you can launch the executable directly:
 
 {{< tabpane code=true >}}
   {{< tab header="GCC" language="bash" >}}

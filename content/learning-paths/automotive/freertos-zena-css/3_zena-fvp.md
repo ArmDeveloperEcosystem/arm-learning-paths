@@ -18,7 +18,7 @@ For the initial bring-up, you'll boot only the software for Safety Island Cluste
 First, build and run the Arm Zena CSS Reference Software Stack before replacing its Safety Island software. Follow the [Yocto build instructions in the Zena CSS user guide](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html).
 
 {{% notice Note %}}
-- When building the Zena CSS Yocto image, select **RD-Aspen Cfg2** in the menu immediately after accepting the EULA. Press **Save and Exit** to exit the configuration menu.
+- When building the Zena CSS Yocto image, select **RD-Aspen Cfg2** in the menu immediately after accepting the EULA. Select **Save and Exit** to exit the configuration menu.
 - If your Ubuntu 22.04 Yocto build host has received the latest security patches, the updated `tar` application causes the Zena CSS Yocto build to fail.
 
   To fix this before the build, download the `tar` source. Then, compile it with the specific enabler flag and install it in place of your Ubuntu 22.04 `tar` command:
@@ -114,7 +114,7 @@ uart0: uart@2a410000 {
 
 #### Adapt the FreeRTOS code
 
-The Zephyr image is loaded at `0x140000000`, the base address of LLRAM. Configure FreeRTOS and its linker script to link and load the binary at this address as you did earlier, then execute it from there.
+The Zephyr image is loaded at `0x140000000`, the base address of LLRAM. Configure FreeRTOS and its linker script to link and load the binary at this address as you did earlier, then run it from there.
 
 Set the PL011 UART base address to `0x2a410000`.
 
@@ -236,7 +236,7 @@ Selecting the platform `zena_css_fvp_direct_load` configures the following eleme
 
 #### Load the binary into Cluster 1 LLRAM
 
-From the Zena CSS `yocto_project` directory, start the Safety Island cluster and load a binary directly. First, check the workflow with the stack's `si-hello-world.bin`:
+From the Zena CSS `yocto_project` directory, start the Safety Island cluster and load a binary directly. First, check the workflow with `si-hello-world.bin` from the software stack:
 
 {{< tabpane code=true >}}
   {{< tab header="Baremetal" language="bash" >}}
