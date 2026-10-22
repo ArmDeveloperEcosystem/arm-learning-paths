@@ -82,9 +82,14 @@ jobs:
         run: |
           aws s3 sync "s3://arm-learning-paths-${{ inputs.target }}/social-images/" static/social-images/ \
             --exclude '*' --include '*.webp' --no-progress
+          aws s3 sync "s3://arm-learning-paths-${{ inputs.target }}/social-images/" "$RUNNER_TEMP/social-card-state/" \
+            --exclude '*' --include 'manifest.json' --no-progress
+          if [ -f "$RUNNER_TEMP/social-card-state/manifest.json" ]; then
+            cp "$RUNNER_TEMP/social-card-state/manifest.json" "$RUNNER_TEMP/social-card-state/manifest.original.json"
+          fi
 
-      - name: Generate missing social cards
-        run: python tools/social_card_generation/generate.py --all
+      - name: Generate missing or retitled social cards
+        run: python tools/social_card_generation/generate.py --all --manifest "$RUNNER_TEMP/social-card-state/manifest.json"
 
       # Builds arm-software-developer repo
       - name: Build
@@ -107,3 +112,11 @@ jobs:
       # Deploys website to AWS S3 and invalidate CloudFront Cache
       - name: Deploy to S3
         run: hugo deploy --maxDeletes -1 --invalidateCDN --target ${{ inputs.target }}
+
+      - name: Save social card title manifest to S3
+        run: |
+          if ! cmp -s "$RUNNER_TEMP/social-card-state/manifest.json" "$RUNNER_TEMP/social-card-state/manifest.original.json"; then
+            aws s3 cp "$RUNNER_TEMP/social-card-state/manifest.json" \
+              "s3://arm-learning-paths-${{ inputs.target }}/social-images/manifest.json" \
+              --content-type application/json --no-progress
+          fi
