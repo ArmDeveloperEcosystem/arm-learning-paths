@@ -10,14 +10,14 @@ minutes_to_complete: 90
 who_is_this_for: This is an introductory topic for developers interested in running and benchmarking Mixture of Experts (MoE) models with vLLM on Arm CPUs.
 
 learning_objectives:
-- Install a recent release of vLLM for CPU inference on an Arm server
-- Run BF16 MoE models with vLLM
-- Run INT8/W8A8 MoE models with vLLM
+- Install and verify vLLM for CPU inference on an Arm server
+- Serve BF16 and INT8/W8A8 MoE models and validate a response
 - Benchmark MoE serving performance with vLLM bench serve
 - Compare BF16 and INT8/W8A8 MoE performance using relative speedups
 
 prerequisites:
-- An Arm-based Linux server running Ubuntu 24.04 LTS or newer, with enough CPU cores, memory, and disk space for large MoE models
+- An Arm-based Linux server running Ubuntu 24.04 LTS, with enough CPU cores, memory, and disk space for large MoE models
+- CPU support for BF16 and I8MM instructions
 - Python 3.12 and basic familiarity with Hugging Face models and vLLM serving
 
 description: Learn how to run and benchmark BF16 and INT8/W8A8 Mixture of Experts models with vLLM on Arm CPUs.

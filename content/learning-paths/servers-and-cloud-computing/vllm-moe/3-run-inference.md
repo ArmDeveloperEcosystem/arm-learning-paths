@@ -6,24 +6,26 @@ weight: 4
 layout: learningpathall
 ---
 
-This section validates that the selected MoE models can be served with vLLM on Arm CPUs and queried through the OpenAI-compatible API.
+## Validate model serving
 
-For each model, start the vLLM server in one terminal, then send a test request from another terminal. Before starting another model, stop the current vLLM server. Only one vLLM server can use the default port `8000` at a time.
+Start a model server and send a chat request to verify that the selected checkpoint works with your CPU installation.
 
-## Model commands
+For each model, start the vLLM server in one terminal, then send a test request from another terminal. Before starting another model, stop the current vLLM server with **Ctrl+C** and wait for it to exit. Only one vLLM server can use the default port `8000` at a time.
+
+## Choose a model
 
 Use the following model IDs in the `vllm serve` and `curl` commands.
 
 | Model | Model ID |
 | --- | --- |
-| Gemma4 BF16 | `google/gemma-4-26B-A4B-it` |
+| Gemma 4 BF16 | `google/gemma-4-26B-A4B-it` |
 | GPT-OSS BF16 | `unsloth/gpt-oss-20b-BF16` |
 | Qwen3 BF16 | `Qwen/Qwen3-30B-A3B-Thinking-2507` |
 | Qwen3 W8A8 | `RedHatAI/Qwen3-30B-A3B-Thinking-2507-quantized.w8a8` |
 
 ## GPT-OSS tiktoken setup
 
-GPT-OSS uses Harmony formatting and requires local tiktoken encoding files in this setup. Download the required encoding files and set the cache environment variables before starting the GPT-OSS vLLM server:
+For GPT-OSS only, prepare the local encoding files used by its Harmony message format in the validated setup. Run these commands in the server terminal before starting GPT-OSS; skip this step for Gemma 4 and Qwen3:
 
 ```bash
 mkdir -p tiktoken_encodings
@@ -34,13 +36,13 @@ wget -O tiktoken_encodings/o200k_base.tiktoken \
 wget -O tiktoken_encodings/cl100k_base.tiktoken \
   https://openaipublic.blob.core.windows.net/encodings/cl100k_base.tiktoken
 
-export TIKTOKEN_ENCODINGS_BASE=$PWD/tiktoken_encodings
-export TIKTOKEN_RS_CACHE_DIR=$PWD/tiktoken_encodings
+export TIKTOKEN_ENCODINGS_BASE="$PWD/tiktoken_encodings"
+export TIKTOKEN_RS_CACHE_DIR="$PWD/tiktoken_encodings"
 ```
 
 ## Start a model server
 
-Set the model ID and start the vLLM server. For example, to serve Gemma4 BF16:
+Use the terminal with your virtual environment active and `VLLM_CPU_KVCACHE_SPACE` set. Set the model ID and start the server. For example, to serve Gemma 4 BF16:
 
 ```bash
 export MODEL=google/gemma-4-26B-A4B-it
@@ -48,13 +50,13 @@ export MODEL=google/gemma-4-26B-A4B-it
 vllm serve "$MODEL"
 ```
 
-Wait until you see `Application startup complete` before continuing. The server is now listening on port `8000`.
+On the first run, vLLM downloads the model weights and warms up the model, including CPU code compilation. Wait until you see `Application startup complete` before continuing. The server is now listening on port `8000`.
 
 To test a different model, stop the current server, update `MODEL` using one of the model IDs from the table, and run `vllm serve "$MODEL"` again.
 
 ## Send a test request
 
-In another terminal, set the same model ID and send a test request:
+In another terminal on the same server, set the model ID to match the running server and send a test request. The example uses Gemma 4:
 
 ```bash
 export MODEL=google/gemma-4-26B-A4B-it
@@ -71,10 +73,40 @@ curl http://127.0.0.1:8000/v1/chat/completions \
   }'
 ```
 
-If the server returns a valid chat completion response, inference is working for the selected model.
+`max_tokens` limits generation to 64 tokens, and `temperature: 0` selects greedy decoding. This is a short connectivity and generation check.
+
+The output is similar to the following Gemma 4 response, with some metadata fields omitted for brevity:
+
+```output
+{
+  "id": "chatcmpl-960932ecaccca7ae",
+  "object": "chat.completion",
+  "created": 1792608120,
+  "model": "google/gemma-4-26B-A4B-it",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Mixture of Experts (MoE) is a neural network architecture that increases model capacity by using a \"router\" to activate only a small, specialized subset of its total parameters for any given input, making it more efficient than dense models."
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 21,
+    "total_tokens": 70,
+    "completion_tokens": 49
+  }
+}
+```
+
+The response text, ID, timestamp, and token counts can vary. The assistant's answer appears in `choices[0].message.content`. In this example, `finish_reason` is `stop`, indicating that generation ended normally rather than reaching the token limit.
+
+A response with generated text confirms that inference is working for the selected model. If `finish_reason` is `length`, generation reached the token limit. Reasoning models can use the short budget before producing a final answer; inspect any reasoning output and increase `max_tokens` if you need a complete answer.
 
 ## What you've accomplished and what's next
 
-You've now served BF16 and INT8/W8A8 MoE models with vLLM on Arm CPUs.
+You've validated a chat response from your selected model. Repeat the check for each checkpoint you plan to benchmark.
 
 Next, you'll benchmark the models with `vllm bench serve`.
