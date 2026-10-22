@@ -18,7 +18,7 @@ multitool_install_part: false
 layout: installtoolsall
 ---
 
-Incus is an open-source system container and virtual machine manager that provides image-based instance management and storage. It also provides networking, profiles, and a command-line interface.
+Incus is an open-source system container and virtual machine manager. It provides image-based instance management and storage, as well as networking, profiles, and a command-line interface.
 
 Incus system containers share the host Linux kernel. By default, containers are unprivileged and map container user IDs to non-root user IDs on the host. 
 
