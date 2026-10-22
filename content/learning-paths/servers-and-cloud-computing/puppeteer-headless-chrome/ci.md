@@ -9,13 +9,19 @@ layout: "learningpathall"
 
 ## Run tests on pull requests
 
-You can run Puppeteer tests automatically on pull requests to check changes before merging them. The workflow you'll create here checks out the repository, starts Hugo, and runs all three Puppeteer scripts whenever a pull request targets the main branch. If any script exits with a non-zero code, the workflow fails.
+You can run Puppeteer tests automatically on pull requests to check changes before merging them. You'll create a workflow that performs the following tasks whenever a pull request targets the main branch: 
 
-Using a native arm64 runner means Chrome runs at full native speed, the same as on your Arm server.
+- Checks out the repository
+- Starts Hugo
+- Runs all three Puppeteer scripts  
 
-## Commit the test scripts to your fork
+If any script exits with a non-zero code, the workflow fails.
 
-The GitHub Actions workflow expects the `puppeteer-tests` directory and its scripts to be present in the repository. Commit everything you created in the previous section:
+Using an arm64 runner means Chrome runs at the same speed as on your Arm server.
+
+### Commit the test scripts to your fork
+
+The GitHub Actions workflow expects the `puppeteer-tests` directory and its scripts to be present in the repository. Commit everything that you created earlier to the repository:
 
 ```bash
 cd $HOME/ecosystem-dashboard-for-arm
@@ -24,7 +30,7 @@ git commit -m "Add Puppeteer headless tests"
 git push origin main
 ```
 
-## Create the workflow file
+### Create the workflow file
 
 Create the `.github/workflows/` directory and the workflow file:
 
@@ -95,7 +101,7 @@ jobs:
           path: puppeteer-tests/dashboard.png
 ```
 
-Commit and push the workflow file to trigger it on your next pull request:
+Commit and push the workflow file to invoke it on your next pull request:
 
 ```bash
 git add .github/workflows/puppeteer-test.yml
@@ -103,9 +109,7 @@ git commit -m "Add Puppeteer GitHub Actions workflow"
 git push origin main
 ```
 
-To verify the workflow immediately, open your fork on GitHub and select **Actions**. Select **Puppeteer pre-publish tests**, then select **Run workflow**. Choose the `main` branch and select **Run workflow** to start the tests.
-
-### What each step does
+Each step in the workflow accomplishes the following tasks:
 
 - `actions/checkout@v4` — clones the repository onto the runner.
 - `peaceiris/actions-hugo@v3` — installs the Hugo extended binary at the pinned version. The `extended: true` flag is required because the dashboard uses Hugo Pipes for asset processing.
@@ -117,13 +121,18 @@ To verify the workflow immediately, open your fork on GitHub and select **Action
 - The three test steps run each script and let the exit code determine whether the step passes or fails.
 - `actions/upload-artifact@v4` — saves `dashboard.png` so you can download and inspect the screenshot from the GitHub Actions run summary.
 
-## The arm64 runner label
-
 The `runs-on: ubuntu-24.04-arm` label selects a GitHub-hosted runner running Ubuntu 24.04 on 64-bit Arm hardware.
 
-## Expected job outcome
+### Verify the workflow
 
-When the workflow runs successfully on a pull request, the three test steps and the screenshot upload step show green check marks in the Actions tab. The job summary includes a downloadable artifact named `dashboard-screenshot`.
+To verify the workflow: 
+
+1. Open your fork on GitHub and select **Actions**. 
+2. Select **Puppeteer pre-publish tests**. 
+3. Select **Run workflow**. 
+4. Select the `main` branch and select **Run workflow** to start the tests.
+
+After a successful run, the three test steps and the screenshot upload step show green check marks in the **Actions** tab. The job summary includes a downloadable artifact named `dashboard-screenshot`.
 
 The expected output is:
 
@@ -133,8 +142,10 @@ PASS: docs link https://www.nginx.com/resources/wiki/start/ returned HTTP 200
 Screenshot saved to dashboard.png
 ```
 
-If any test step shows a red cross, expand the step log to see which assertion failed and which exit code the script returned. A `net::ERR_CONNECTION_REFUSED` error in the test logs usually means the Hugo server was not ready in time; increase the `--timeout` value passed to `wait-on`.
+If any test step shows a red cross, expand the step log to see which assertion failed and which exit code the script returned. A `net::ERR_CONNECTION_REFUSED` error in the test logs usually means the Hugo server wasn't ready in time. If you encounter this error, increase the `--timeout` value passed to `wait-on`.
 
 ## What you've accomplished
 
-You've created a GitHub Actions workflow that runs your Puppeteer scripts on an Arm runner and saves a dashboard screenshot as an artifact. You can extend the scripts to check other packages or adapt them to test your own web application.
+You've created a GitHub Actions workflow that runs your Puppeteer scripts on an Arm runner and saves a dashboard screenshot as an artifact.
+
+You can extend the scripts to check other packages or adapt them to test your own web application.

@@ -1,8 +1,5 @@
 ---
 title: Run headless browser tests with Puppeteer on Arm Linux
-draft: true
-cascade:
-    draft: true
 
 description: Install Chrome and Puppeteer on Arm Linux servers running Ubuntu 24.04 or Amazon Linux 2023, write headless tests against a local Hugo site, and automate them with GitHub Actions on an Arm runner.
 
