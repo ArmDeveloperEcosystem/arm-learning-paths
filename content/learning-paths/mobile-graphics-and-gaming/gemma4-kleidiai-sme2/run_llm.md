@@ -1,21 +1,19 @@
 ---
-title: Build and compare Gemma 4 benchmarks
-description: Build baseline and SME2-optimized XNNPACK variants, compare Gemma 4 prefill and decode throughput, and verify the model with a prompt.
+title: Build and compare benchmarks on macOS
+description: Build baseline and optimized XNNPACK variants on macOS and compare Gemma 4 prefill and decode throughput.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Build and benchmark XNNPACK variants
-
-After downloading Gemma 4, build and benchmark the baseline and upstream-optimized variants with identical settings at one and four CPU threads.
+## Build and benchmark one XNNPACK variant
 
 Create directories for the shared Bazel output and benchmark results:
 
 ```bash
 cd $HOME/gemma4-prefill-bench
-mkdir -p bazel-output-base results
+mkdir -p bazel-output-base bin results
 ```
 
 Define a shell function that builds one XNNPACK tree and immediately runs the
@@ -41,16 +39,19 @@ run_variant() {
   bazelisk --output_base="$output_base" build \
     --config=macos_arm64 \
     --macos_sdk_version="$sdk_version" \
+    --define=xnn_enable_arm_sme2=true \
+    --define=xnn_enable_kleidiai=true \
     --override_repository=XNNPACK="$xnnpack_dir" \
     --override_repository=KleidiAI="$root/kleidiai" \
-    //runtime/engine:litert_lm_advanced_main
+    //runtime/engine:litert_lm_advanced_main || return
 
-  binary="$(bazelisk --output_base="$output_base" info bazel-bin)/runtime/engine/litert_lm_advanced_main"
+  binary="$root/bin/litert_lm_advanced_main-${variant}-macos"
+  cp -L bazel-bin/runtime/engine/litert_lm_advanced_main "$binary" || return
 
   for threads in 1 4; do
     result="${variant}-${threads}t"
 
-    "$binary" \
+    DYLD_LIBRARY_PATH="$root/LiteRT-LM/prebuilt/macos_arm64" "$binary" \
       --backend=cpu \
       --model_path="$model" \
       --benchmark \
@@ -63,116 +64,107 @@ run_variant() {
       --num_iterations=3 \
       --report_peak_memory_footprint \
       --metric_proto_file_path="$root/results/${result}.pb" \
-      2>&1 | tee "$root/results/${result}.log"
+      2>&1 | tee "$root/results/${result}.log" || return
   done
 }
 ```
 
-The first build compiles the full LiteRT-LM dependency graph. Reusing one
-Bazel output base means that changing the XNNPACK override rebuilds only the
-affected actions for later variants.
+The first build can take several minutes. `DYLD_LIBRARY_PATH` points each saved
+binary to LiteRT-LM's matching Gemma constraint-provider library.
 
-Run the historical baseline and the upstream-optimized variant:
+Run the baseline and optimized builds:
 
 ```bash
 run_variant baseline "$HOME/gemma4-prefill-bench/xnnpack-baseline"
 run_variant optimized "$HOME/gemma4-prefill-bench/xnnpack"
 ```
 
-The commands create separate logs and metric files for `baseline-1t`,
-`baseline-4t`, `optimized-1t`, and `optimized-4t`.
+Each run writes its log and metrics to `results/`. Keep caches disabled and
+other applications idle when comparing the builds.
 
-{{% notice Note %}}
-Use `--disable_cache=true` for the A/B comparison. The tested Gemma 4 artifact
-contains XNNPACK weight-cache fingerprints that are recognized by the upstream
-optimized tree but not by the historical baseline. Enabling caches
-makes initialization time and memory use non-comparable.
-{{% /notice %}}
+## Compare prefill and decode
 
-## Read the benchmark output
+Read `Prefill Speed` and `Decode Speed` in tokens per second. Discard the first
+iteration as warm-up, then average iterations 2 and 3 for each build and thread
+count. Calculate the changes separately:
 
-Each iteration prints output similar to the following:
-
-```output
---------------------------------------------------
-  Time to first token: 7.14 s
---------------------------------------------------
-  Prefill Turns (Total 1 turns):
-    Prefill Turn 1: Processed 1024 tokens in 7.044162s duration.
-      Prefill Speed: 145.37 tokens/sec.
---------------------------------------------------
-  Decode Turns (Total 1 turns):
-    Decode Turn 1: Processed 256 tokens in 23.268829s duration.
-      Decode Speed: 11.00 tokens/sec.
---------------------------------------------------
+```text
+throughput change (%) = 100 * (optimized throughput / baseline throughput - 1)
 ```
 
-Treat iteration 1 as a warm-up and compare the mean of iterations 2 and 3 for
-each variant and thread count.
+A positive value means higher throughput; a negative value is a regression.
+Prefill and decode scale differently, so compare both phases at both thread
+counts.
 
-## Tested results on Apple M4
+{{% notice Note %}}
+If you see `Failed to get prefill profile summary` or its decode equivalent with
+profiling disabled, check that all three iterations finish and the command exits
+successfully. Collect operator profiles separately to avoid timing overhead.
+{{% /notice %}}
 
-After running the benchmark, compare steady-state prefill and decode throughput.
+## Compare two device examples
 
-The following representative results use 1024 prefill tokens, 256 decode
-tokens, and disabled caches:
+These examples use LiteRT-LM v0.16.1 and KleidiAI v1.31.0 with the same model
+and benchmark settings: 1,024 prefill tokens, 256 decode tokens, and disabled
+caches and profiling. Values are the mean of iterations 2 and 3; percentage
+changes compare the optimized build with the baseline.
 
-| CPU threads | XNNPACK variant | Prefill tokens/s | Change | Decode tokens/s | Change |
-| ---: | --- | ---: | ---: | ---: | ---: |
-| 1 | No SME2 kernels | 142.60 | - | 15.79 | - |
-| 1 | SME2 Int4 and Int2 | 215.93 | +51.4% | 23.89 | +51.3% |
-| 4 | No SME2 kernels | 411.70 | - | 37.04 | - |
-| 4 | SME2 Int4 and Int2 | 562.92 | +36.7% | 30.28 | -18.3% |
+| Device | CPU threads | Prefill tokens/s | Prefill change | Decode tokens/s | Decode change |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Apple M4 Pro | 1 | 137.79 | −3.4% | 17.40 | +53.6% |
+| Apple M4 Pro | 4 | 458.62 | +0.3% | 25.91 | +12.8% |
+| Xiaomi 2608BPX34C | 1 | 75.35 | +16.3% | 10.10 | +44.5% |
+| Xiaomi 2608BPX34C | 4 | 240.86 | +2.0% | 17.54 | +4.2% |
 
-Frequency and thermal state weren't fixed, so use the values as a functional comparison.
+The Mac uses unrestricted CPU scheduling; Android uses CPUs 4–7. Frequencies
+aren't fixed. The small Mac prefill changes and Android four-thread changes are
+within observed run variation, so results will vary by device and conditions.
 
-### Interpret thread scaling
+In a separate Android comparison, enabling SME2 improves four-thread prefill by
+53.7% and lowers decode by 9.1%. That comparison includes all SME2 kernels;
+the table isolates the static INT2 addition.
 
-Prefill and decode expose different amounts of parallel work. Prefill processes
-many prompt tokens together, so additional CPU threads can improve throughput.
-Autoregressive decode generates one token at a time, and each token depends on
-the preceding output. This dependency limits the work available to parallelize
-within each decode step.
+{{% notice Note %}}
+For Android, you also need an SME2-capable phone, the Android SDK, NDK r28b or
+newer, and an authorized `adb` connection. Follow the
+[Android SME2 development setup](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#android-sme2).
+Set `ANDROID_HOME` and `ANDROID_NDK_HOME`, then use `--config=android_arm64` with
+the same repository overrides. Copy the Android binary, model, and
+`prebuilt/android_arm64/libGemmaModelConstraintProvider.so` to the device.
+Run from that directory with `LD_LIBRARY_PATH=.` and choose a valid CPU mask
+with `taskset`.
+{{% /notice %}}
 
-Decode also reads model weights and key-value cache data for every token.
-As the thread count increases, threads compete for memory bandwidth and add
-scheduling overhead. These costs can outweigh the available parallel work,
-especially when the system exposes one matrix engine, known as a 1xCME
-configuration.
-
-The results illustrate this difference. SME2 improves prefill at both thread
-counts. For decode, SME2 throughput increases from 23.89 tokens/s with one
-thread to 30.28 tokens/s with four threads, but it scales less than the
-non-SME2 path. The one-thread SME2 advantage of 51.3% becomes an
-18.3% deficit at four threads.
-
-Results can differ by the following:
-- Model signature
-- SoC
-- Operating system
-- Memory conditions
-- Thermal state
-
-## Verify the model with a prompt
+## Check the output and accelerated operator
 
 After building a variant, use its generated binary for a short prompt:
 
 ```bash
-binary="$(bazelisk --output_base="$HOME/gemma4-prefill-bench/bazel-output-base/ab" info bazel-bin)/runtime/engine/litert_lm_advanced_main"
+root="$HOME/gemma4-prefill-bench"
+binary="$root/bin/litert_lm_advanced_main-optimized-macos"
+model="$root/models/gemma-4-E2B-it-litert-lm/gemma-4-E2B-it.litertlm"
 
-"$binary" \
-  --backend=cpu \
-  --model_path="$HOME/gemma4-prefill-bench/models/gemma-4-E2B-it-litert-lm/gemma-4-E2B-it.litertlm" \
+DYLD_LIBRARY_PATH="$root/LiteRT-LM/prebuilt/macos_arm64" "$binary" \
+  --backend=cpu --model_path="$model" \
   --input_prompt="What is the capital of France?" \
-  --max_output_tokens=16 \
-  --num_cpu_threads=4 \
-  --async=false
+  --max_output_tokens=16 --num_cpu_threads=4 \
+  --disable_cache=true --async=false
 ```
 
-The tested model answers that the capital of France is Paris.
+Confirm that the answer identifies Paris. Collect operator evidence with a
+separate short benchmark:
 
-## What you've accomplished
+```bash
+DYLD_LIBRARY_PATH="$root/LiteRT-LM/prebuilt/macos_arm64" "$binary" \
+  --backend=cpu --model_path="$model" --benchmark \
+  --benchmark_prefill_tokens=128 --benchmark_decode_tokens=8 \
+  --max_num_tokens=4096 --num_cpu_threads=1 --num_iterations=1 \
+  --disable_cache=true --async=false --enable_profiling=true
+```
 
-You've run a benchmark to compare baseline and upstream-optimized XNNPACK variants and learned how to interpret the results. You've also verified the variants with prompts.
+Look for `Fully Connected (NC, PQS8, QC2W)` in the summary to confirm that the
+static INT2 SME2 path ran. Keep profiling disabled for timed measurements.
 
-You now have a reproducible baseline for Gemma 4 LiteRT-LM prefill performance.
+You've benchmarked both builds on macOS, compared prefill and decode, and
+verified the accelerated operator. Use the same settings when testing another
+SME2 device.
