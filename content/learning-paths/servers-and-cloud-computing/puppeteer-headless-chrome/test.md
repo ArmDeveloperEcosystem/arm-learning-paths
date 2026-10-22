@@ -130,7 +130,7 @@ You should see `200`. Leave the server running while you work through the tests.
 
 ## Create Puppeteer tests
 
-With the server running and the project ready, you can now create the following three tests.
+With the server running and the project ready, you can now create three Puppeteer tests.
 
 {{% notice Note %}}
 All three test scripts pass `--no-sandbox` and `--disable-setuid-sandbox` to Chrome. These flags are required when Chrome runs as a non-root user on a Linux server that hasn't been configured with user namespaces. Cloud instances and CI runners typically fall into this category. Without these flags, Chrome exits immediately with a sandbox initialization error. Including them makes your scripts portable across server environments without any code change.

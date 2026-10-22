@@ -17,9 +17,9 @@ You can run Puppeteer tests automatically on pull requests to check changes befo
 
 If any script exits with a non-zero code, the workflow fails.
 
-The workflow is invoked whenever a pull request targets the main branch. For testing purposes, you'll invoke the workflow manually.
+The workflow is invoked whenever a pull request targets the main branch. To verify that the workflow works, you'll invoke it manually.
 
-Using an arm64 runner means Chrome runs at the same speed as on your Arm server.
+Using an arm64 runner means that Chrome runs at the same speed as on your Arm server.
 
 ### Commit the test scripts to your fork
 
@@ -113,19 +113,21 @@ git push origin main
 
 Each step in the workflow accomplishes the following tasks:
 
-- `actions/checkout@v4` — clones the repository onto the runner.
-- `peaceiris/actions-hugo@v3` — installs the Hugo extended binary at the pinned version. The `extended: true` flag is required because the dashboard uses Hugo Pipes for asset processing.
-- `hugo server --port 1313 &` — starts the development server in the background. The `&` is essential; without it the step never finishes.
-- `actions/setup-node@v4` — installs Node.js 20 and adds `npm` to the path.
-- `Install Chrome` — downloads the official Google arm64 `.deb` package and installs it with `apt`. This is the same package you installed on your server in the previous section.
-- `Install Puppeteer` — runs `npm install puppeteer-core` inside the `puppeteer-tests` directory where your test scripts live.
-- `npx wait-on` — polls `http://localhost:1313` until Hugo responds or the 30-second timeout expires. This prevents the test steps from starting before the server is ready.
+- `actions/checkout@v4` clones the repository onto the runner.
+- `peaceiris/actions-hugo@v3` installs the Hugo extended binary at the pinned version. The `extended: true` flag is required because the dashboard uses Hugo Pipes for asset processing.
+- `hugo server --port 1313 &` starts the development server in the background. The `&` is essential because without it, the step never finishes.
+- `actions/setup-node@v4` installs Node.js 20 and adds `npm` to the path.
+- `Install Chrome` downloads the official Google arm64 `.deb` package and installs it with `apt`. This is the same package that you installed on your server earlier.
+- `Install Puppeteer` runs `npm install puppeteer-core` inside the `puppeteer-tests` directory where your test scripts live.
+- `npx wait-on` polls `http://localhost:1313` until Hugo responds or the 30-second timeout expires. This prevents the test steps from starting before the server is ready.
 - The three test steps run each script and let the exit code determine whether the step passes or fails.
-- `actions/upload-artifact@v4` — saves `dashboard.png` so you can download and inspect the screenshot from the GitHub Actions run summary.
+- `actions/upload-artifact@v4` saves `dashboard.png` so that you can download and inspect the screenshot from the GitHub Actions run summary.
 
 The `runs-on: ubuntu-24.04-arm` label selects a GitHub-hosted runner running Ubuntu 24.04 on 64-bit Arm hardware.
 
 ### Verify the workflow
+
+Verify the workflow by invoking it manually.
 
 To verify the workflow: 
 
@@ -148,6 +150,6 @@ If any test step shows a red cross, expand the step log to see which assertion f
 
 ## What you've accomplished
 
-You've created a GitHub Actions workflow that runs your Puppeteer scripts on an Arm runner and saves a dashboard screenshot as an artifact.
+You've created a GitHub Actions workflow that runs your Puppeteer scripts on an Arm runner. The workflow also saves a dashboard screenshot as an artifact.
 
 You can extend the scripts to check other packages or adapt them to test your own web application.

@@ -19,11 +19,7 @@ You can use headless browsers programmatically for automated regression testing 
 - Fill in forms
 - Assert that the right content appears in the UI
 
-You can also run these tests automatically on pull requests to detect the following issues before merging changes:
-
-- Broken pages
-- Invalid links
-- Missing elements
+You can also run tests automatically on pull requests to detect broken pages, invalid links, and missing elements before merging changes. 
 
 Besides regression testing, you can use a headless browser to accomplish the following tasks:
 
@@ -37,14 +33,7 @@ Google Chrome holds the largest share of global browser traffic. Running tests a
 
 ## What Puppeteer is
 
-Puppeteer is a Node.js library maintained by the Chrome team. It communicates with Chrome over the DevTools Protocol, a low-level interface that exposes full control over the browser. 
-
-The DevTools Protocol provides:
-
-- Navigation
-- DOM inspection
-- Network interception
-- Screenshot capture
+Puppeteer is a Node.js library maintained by the Chrome team. It communicates with Chrome over the DevTools Protocol, a low-level interface that exposes full control over the browser. The DevTools Protocol provides access to functionalities such as navigation, DOM inspection, network interception, and screenshot capture.
 
 Puppeteer works with the system-installed Chrome binary, so you don't need a separate browser download on the server.
 
