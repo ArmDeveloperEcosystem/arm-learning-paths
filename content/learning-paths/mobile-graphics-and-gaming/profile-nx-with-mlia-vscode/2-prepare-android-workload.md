@@ -1,6 +1,6 @@
 ---
 title: Prepare the Android workload
-description: Build a debuggable Scenario Runner APK and generate a scenario from the VGF model you will profile on NX hardware.
+description: Prepare Scenario Runner and generate a scenario from the VGF model you will profile on NX hardware.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -11,21 +11,23 @@ layout: learningpathall
 
 Continue in the Bash terminal from the previous page.
 
-Prepare these tools before building:
+This example uses Scenario Runner to execute `workload/model.vgf` with `workload/scenario.json` on your NX device. The Neural Statistics layer records the execution for MLIA to analyze.
+
+**Using an existing application:** Scenario Runner is optional. You can instead capture a debuggable Android application that executes your model through the Vulkan data-graph APIs, including an application with its own VGF runtime. The same Neural Statistics layer captures its dispatches without a Scenario Runner scenario file. Follow the [existing-application capture instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md#capture-an-existing-vulkan-data-graph-application), adapting the package name, paths, and launch steps. This Learning Path's commands and capture helper use Scenario Runner; after collecting your application's capture, continue with [Analyze measured performance in VS Code](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/4-analyze-in-vscode/) using the capture and its matching VGF.
+
+For the Scenario Runner example below, prepare these host tools:
 
 | Tool | Version or requirement |
 | --- | --- |
 | Python | Python 3.12 with virtual environment support |
-| Host compiler | C++17-capable GCC or Clang |
-| Build tools | CMake 3.25 or later and Ninja 1.10 or later |
-| Android SDK | `platforms;android-34` and `build-tools;34.0.0` |
-| Android NDK | r28c (`28.2.13676358`) |
-| Java and Gradle | JDK 17 and Gradle 8.4 on `PATH` |
-| Other tools | Git, the Android `repo` tool, ADB, and `curl` |
+| Device connection | Android Debug Bridge (ADB) |
+| Download and extraction | `curl` and `tar` |
 
-Use the [Android SDK command-line tools](https://developer.android.com/tools), [NDK installation guide](https://developer.android.com/studio/projects/install-ndk), [Repo installation instructions](https://source.android.com/docs/setup/download), and [Gradle installation guide](https://docs.gradle.org/8.4/userguide/installation.html) where needed. Builds require network access for Python packages, Gradle dependencies, and downloaded source dependencies.
+If you choose Scenario Runner, you'll also need a debuggable Android Arm64 Scenario Runner v0.11.0 APK. If you need to build it, follow the [Scenario Runner setup and build guide](https://github.com/arm/ai-ml-sdk-scenario-runner/blob/v0.11.0/README.md#cloning-the-repository), then return here. Select SDK manifest `v2026.09.0` by adding `-b v2026.09.0` to `repo init`. Use the guide's Android APK build command with `--package-version 0.11.0`. Keep its SDK build environment separate from your model-export environment.
 
-Use SDK manifest `v2026.09.0`, which selects Scenario Runner and VGF Library `v0.11.0`. Download Neural Statistics layer `v1.0.0` separately in the final step. Keep these versions together; the extension's [capture guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md) describes the procedure.
+If you build the APK, use JDK 17, Gradle 8.4, Android SDK 34 with build-tools 34.0.0, and NDK r28c (`28.2.13676358`). Use `-j 4` on a four-vCPU host, or fewer jobs if memory is limited. Android cross-compilation is experimental.
+
+The manifest selects Scenario Runner and VGF Library v0.11.0, which support the VGF 0.4.3 model exported on the previous page. Download Neural Statistics layer v1.0.0 separately in the final step. The extension's [capture guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md) describes the capture procedure.
 
 Enable **Developer options > USB debugging** on your NX device, connect it, and check ADB:
 
@@ -39,94 +41,39 @@ The device must appear with status `device`. Unlock it and accept the authorizat
 export ANDROID_SERIAL="<your-device-serial>"
 ```
 
-Replace the placeholder with the serial shown by ADB. Before building, save the device's Vulkan information:
+Replace the placeholder with the serial shown by ADB. Save the device's Vulkan information:
 
 ```bash
 adb shell cmd gpu vkjson > "$NX_WORKSPACE/device-vulkan.json"
 ```
 
-Open `device-vulkan.json` in VS Code and find the Arm GPU's `driverInfo`. The extension documents support for r56p0, identified by a value beginning `Driver: v1.r56p0-`. Check that the same device lists `VK_ARM_data_graph` and `VK_ARM_data_graph_neural_accelerator_statistics` among its extensions.
+Open `device-vulkan.json` in VS Code and find the Arm GPU's `driverInfo`. Check for the documented r56p0 revision, such as a value beginning `v1.r56p0-`. Check that the same device lists `VK_ARM_data_graph` and `VK_ARM_data_graph_neural_accelerator_statistics` among its extensions.
 
 If the command is unavailable, the driver differs from r56p0, or either extension is missing, confirm support with your device provider before continuing. These checks establish advertised capabilities; executing the scenario and collecting statistics will verify this workload on the device.
 
-## Build Scenario Runner
+## Select the Scenario Runner APK
 
-Download the SDK projects needed by Scenario Runner into the profiling workspace:
-
-```bash
-cd "$NX_WORKSPACE"
-mkdir ml-sdk
-cd ml-sdk
-repo init -u https://github.com/arm/ai-ml-sdk-manifest -b v2026.09.0 -g scenario-runner
-repo sync --no-clone-bundle
-export SDK_PATH="$PWD"
-repo manifest -r > "$NX_WORKSPACE/sdk-manifest.xml"
-```
-
-The resolved manifest records the source revisions used for the build. Create a separate SDK build environment and install its requirements:
+Set the path to your debug APK. Replace the example path with the file's absolute location on your host:
 
 ```bash
-python3.12 -m venv "$SDK_PATH/.venv"
-source "$SDK_PATH/.venv/bin/activate"
-python -m pip install -r "$SDK_PATH/sw/scenario-runner/tooling-requirements.txt"
-```
-
-Set the Android tool locations. Replace the SDK and JDK paths with your installed locations:
-
-```bash
-export ANDROID_HOME="$HOME/Android/Sdk"
-export ANDROID_SDK_ROOT="$ANDROID_HOME"
-export ANDROID_NDK_HOME="$ANDROID_HOME/ndk/28.2.13676358"
-export JAVA_HOME=/path/to/jdk-17
-export PATH="$JAVA_HOME/bin:$PATH"
-java -version
-gradle --version
-test -f "$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake"
-```
-
-Confirm Java 17, Gradle 8.4, and an existing NDK toolchain file. Then build the debuggable Arm64 APK. The subshell creates `apk_package` under Scenario Runner and preserves your terminal's current directory.
-
-```bash
-(
-cd "$SDK_PATH/sw/scenario-runner"
-python scripts/build.py \
-    -j 8 \
-    --target-platform android \
-    --cmake-toolchain-for-android "$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake" \
-    --flatbuffers-path "$SDK_PATH/dependencies/flatbuffers" \
-    --argparse-path "$SDK_PATH/dependencies/argparse" \
-    --json-path "$SDK_PATH/dependencies/json" \
-    --vulkan-headers-path "$SDK_PATH/dependencies/Vulkan-Headers" \
-    --glslang-path "$SDK_PATH/dependencies/glslang" \
-    --dxc-path "$SDK_PATH/dependencies/DirectXShaderCompiler" \
-    --spirv-headers-path "$SDK_PATH/dependencies/SPIRV-Headers" \
-    --spirv-tools-path "$SDK_PATH/dependencies/SPIRV-Tools" \
-    --vgf-lib-path "$SDK_PATH/sw/vgf-lib" \
-    --package-type apk \
-    --package-version 0.11.0
-)
-```
-
-Reduce `-j 8` if the host runs out of memory. The SDK describes Android cross-compilation as experimental; use the [Scenario Runner build documentation](https://github.com/arm/ai-ml-sdk-scenario-runner/tree/v0.11.0) to diagnose build failures.
-
-Set the generated APK path and confirm that the file exists:
-
-```bash
-export APK="$SDK_PATH/sw/scenario-runner/apk_package/app/build/outputs/apk/debug/ai-ml-sdk-scenario-runner-0.11.0-debug.apk"
+export APK="/path/to/ai-ml-sdk-scenario-runner-0.11.0-debug.apk"
 test -s "$APK"
 ```
 
-Don't continue if the build failed or the APK is missing. The debug build permits the `run-as` commands used for capture.
+Continue only if the file exists and contains data. The debug build permits the `run-as` commands used for capture.
 
 ## Generate a scenario for your model
 
-Build the host `vgf_dump` tool from the same manifest checkout:
+Download the prebuilt Linux x86-64 tools from the [VGF Library v0.11.0 release](https://github.com/arm/ai-ml-sdk-vgf-library/releases/tag/release/v0.11.0) for your Ubuntu host:
 
 ```bash
-python "$SDK_PATH/sw/vgf-lib/scripts/build.py" -j 8
-export VGF_DUMP="$SDK_PATH/sw/vgf-lib/build/vgf_dump/vgf_dump"
-"$VGF_DUMP" --help
 cd "$NX_WORKSPACE"
+mkdir -p tools/vgf-lib-0.11.0
+curl -fL https://github.com/arm/ai-ml-sdk-vgf-library/releases/download/release/v0.11.0/ai_ml_sdk_vgf_library-0.11.0-Linux_x86_64.tar.gz \
+    -o vgf-library-0.11.0-linux-x86_64.tar.gz
+tar -xzf vgf-library-0.11.0-linux-x86_64.tar.gz -C tools/vgf-lib-0.11.0
+export VGF_DUMP="$NX_WORKSPACE/tools/vgf-lib-0.11.0/bin/vgf_dump"
+"$VGF_DUMP" --help
 ```
 
 The help output should list `--input`, `--output`, and `--scenario-template`. Generate a scenario from the exact model copied on the previous page:
@@ -138,32 +85,25 @@ The help output should list `--input`, `--output`, and `--scenario-template`. Ge
     --scenario-template
 ```
 
-Open `workload/scenario.json` in VS Code. In its tensor resources, remove only the `src` and `dst` properties whose values are placeholders such as `TEMPLATE_PATH_TENSOR_INPUT_0` and `TEMPLATE_PATH_TENSOR_OUTPUT_0`. Fix any trailing commas after removing a property.
+Remove the generated tensor-file placeholders with this script. It changes only tensor `src` and `dst` properties beginning `TEMPLATE_PATH_TENSOR_` and preserves the graph's `src: "model.vgf"`:
 
-For example, the input tensor object generated from the example upscaler has this form:
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
 
-```json
-{
-    "dims": [1, 16, 16, 3],
-    "format": "VK_FORMAT_R8_SINT",
-    "shader_access": "readonly",
-    "src": "TEMPLATE_PATH_TENSOR_INPUT_0",
-    "uid": "input_0_ref"
-}
+path = Path("workload/scenario.json")
+scenario = json.loads(path.read_text())
+for resource in scenario["resources"]:
+    tensor = resource.get("tensor", {})
+    for key in ("src", "dst"):
+        if tensor.get(key, "").startswith("TEMPLATE_PATH_TENSOR_"):
+            del tensor[key]
+path.write_text(json.dumps(scenario, indent=4) + "\n")
+PY
 ```
 
-After removing its placeholder `src`, the object is:
-
-```json
-{
-    "dims": [1, 16, 16, 3],
-    "format": "VK_FORMAT_R8_SINT",
-    "shader_access": "readonly",
-    "uid": "input_0_ref"
-}
-```
-
-Apply the same edit to the output tensor's placeholder `dst`. Keep the graph's `src: "model.vgf"` and all generated dimensions, formats, identifiers, bindings, and commands. Edit your generated objects in place; these excerpts are not a complete scenario.
+All generated dimensions, formats, identifiers, bindings, and commands remain in place.
 
 An input tensor without `src` is initialized to zero by Scenario Runner. An output without `dst` isn't written to a file. These settings are sufficient to exercise the graph and capture statistics. To measure representative inference later, supply matching input tensors instead of zeros.
 
@@ -185,7 +125,7 @@ adb install -r "$APK"
 adb shell run-as "$PACKAGE" id
 ```
 
-Installation should report `Success`; `run-as` should print the application's UID. If it reports `package not debuggable`, install the debug APK you built. Unlock the device and approve any install-over-USB prompt.
+Installation should report `Success`; `run-as` should print the application's UID. If it reports `package not debuggable`, install a debug APK. Unlock the device and approve any install-over-USB prompt.
 
 Download and extract the Android Arm64 capture layer:
 
@@ -201,4 +141,4 @@ The next page copies this library into the application's private storage.
 
 ## What you've accomplished and what's next
 
-You've built a debug runner, generated a scenario from your model, verified `run-as` access, and downloaded the capture layer. Next, you'll execute the workload with the layer enabled and retrieve a complete capture.
+You've installed a debug runner, generated a scenario from your model, verified `run-as` access, and downloaded the capture layer. Next, you'll execute the workload with the layer enabled and retrieve a complete capture.

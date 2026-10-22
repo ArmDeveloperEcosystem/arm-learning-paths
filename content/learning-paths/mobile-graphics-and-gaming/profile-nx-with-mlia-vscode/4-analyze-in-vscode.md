@@ -15,10 +15,9 @@ Print the two input paths from the capture terminal:
 
 ```bash
 printf 'Profiling data: %s\nSource model: %s\n' "$CAPTURE_ROOT" "$NX_WORKSPACE/workload/model.vgf"
-sha256sum --check "$NX_WORKSPACE/model.sha256"
 ```
 
-The checksum check should report `OK`. Use this same VGF for analysis; exporting the Python model again can change the artifact and break the match with the captured pipelines.
+Select the same `model.vgf` used to collect the capture. Don't overwrite it with a new export before analysis.
 
 In **MLIA > New Analysis**:
 
@@ -64,7 +63,7 @@ If the run fails, inspect its error summary and the **MLIA** output log, then ch
 | Problem | Action |
 | --- | --- |
 | Missing or invalid capture files | Recheck `capture.json`, its completion status, and the complete extracted directory tree. |
-| Model and captured pipelines don't match | Select the exact VGF deployed to the device and verify its recorded checksum. |
+| Model and captured pipelines don't match | Select the exact VGF deployed to the device. If you exported a new VGF, collect a matching capture before analyzing it. |
 | Capture selection is ambiguous | Recreate this example with one scenario execution and dispatch filter `0`; consult the profiling documentation before combining captures. |
 | No profiling target profile is available | Refresh the managed MLIA environment and inspect its setup log. |
 
@@ -74,7 +73,11 @@ Expand the performance result's **Model metrics** and find `total_cycles`, with 
 
 These counts describe accelerator work for the captured dispatch, excluding application work such as CPU preprocessing and presentation. They are not elapsed application latency. Use representative inputs and repeated measurements before drawing application-performance conclusions.
 
-In the example below we can see that the `total_cycles` is 25,543 and the utilization is 100%. The other metrics aren't available through the "Profiling" route, just "Estimation", but we will look into the cycles in more detail in the model view, in the next few sections. Record the model’s total_cycles value before exploring the graph.
+The screenshot shows an illustrative model total of 25,543 cycles. Your value can differ with the exported model, driver, and device. Record your model's `total_cycles` before exploring the graph, and read the explanations for unavailable metrics.
+
+<!-- TODO (Ann, author confirmation): Confirm that mode 1 derives target_utilization as compute_cycles / total_cycles * 100, with both using the same NX-active counters. Confirm the wording below with Matthew before publication. -->
+
+In this mode-1 result, `total_cycles` and `compute_cycles` use the same NX-active counts, so `target_utilization` displays 100%. This ratio does not independently measure accelerator occupancy over application execution. Use the reported cycle costs for this exercise. See the [Neural Technology metrics reference](https://github.com/arm/mlia-neural-technology/blob/main/docs/source/outputs_metrics.md) for the counter aggregation rules.
 
 ![MLIA Model metrics showing total_cycles and compute_cycles of 25,543 cycles, target_utilization of 100%, and unavailable metrics with explanatory messages.#center](images/current-analysis.png "Inspect model-level profiling metrics")
 
@@ -93,19 +96,19 @@ The [Model Explorer representation guide](https://github.com/arm/vscode-mlia/blo
 
 ## Compare measured values within a cascade
 
-Lets look into the results in more detail. In the example we can see that `Cascade 249` is darker green than the rest, indicating that the total cycle count is greater than other cascades in the graph. If we click on this we can see the cycle count for this `12471`. This is a combination of the `CONV2D` and `RESCALE` operators. Also this highlights the two operators in the `Source Model` on the left.
+In the screenshot, `Cascade 249` is darker green than the other cascades because its reported cycle count is higher. Selecting it shows 12,471 cycles for the combined `CONV2D` and `RESCALE` work and highlights the corresponding operations in **Source Model**. Your group identifiers and values can differ; select a group with a measured value in your own result.
 
-If source model mapping is also setup, it will point to the line of code from your model that represents these layers, but we will look at that in the next page.
+When an operation has an accessible source mapping, you can navigate to its Python source. The next page explains source navigation and the availability of source-line cycle values.
 
 ![Model Explorer showing Cascade 249 selected in segment_cascade_chain with total_cycles of 12,471. The corresponding CONV2D and RESCALE operations are highlighted in Source Model.#center](images/profiling-result.png "Inspect Cascade 249 and its source operations")
 
 ## Inspect group statistics and change the overlay
 
-With the group selected, inspect **Aggregated stats in selected layer**. The table summarizes available numeric node values within that group. Minimum and maximum help you find the range of mapped costs; average and sum summarize those values when the result exposes them. This is more useful when there are multiple runs, in this example we have only executed the workload once.
+With the group selected, inspect **Aggregated stats in selected layer**. The table summarizes available numeric node values within that group, separately for each data-provider run. Minimum and maximum show their range; sum and average summarize those node values. The table can be useful for a single captured execution containing several valued nodes. If only one node has a numeric value, minimum, maximum, sum, and average can all be equal.
 
 ![Model Explorer's Aggregated stats in selected layer table showing minimum, maximum, sum, and average values for the selected group's available node metrics.#center](images/aggregated-stats.png "Inspect aggregated node metrics")
 
-In Node data providers (descendants), select the eye icon beside a metric to display its overlay on the graph. In this example, total_cycles is selected, which is enabled by default.
+In **Node data providers (descendants)**, select the eye icon beside a metric to display its overlay on the graph. In this example, `total_cycles` is selected by default.
 
 ![Model Explorer's Node data providers list with total_cycles highlighted and its eye icon active, indicating the metric selected for the graph overlay.#center](images/view-options.png "Select the metric displayed on the graph")
 

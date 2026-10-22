@@ -33,7 +33,13 @@ If selecting a node doesn't open the source, check `vscode-mlia.syncModelExplore
 
 ## Read source heatmaps and CodeLens
 
-With your model source open, select the measured cycle overlay in **Current Analysis Run**. Inspect its source presentation:
+<!-- TODO (Ann, author confirmation): Ask Matthew for the exact model artifact, exporter/driver versions, extension and MLIA versions, and any extra settings used for the numeric heatmap and 88%/12% screenshots. With the unchanged PTQ example, ExecuTorch 1.5.1 / converter 0.10.0, extension 0.1.1, MLIA 0.12.3 and mlia-neural-technology 0.2.1, capture and graph metrics passed, but both Python lines showed "total cycles unavailable". Revalidate the steps and screenshots below with his confirmed setup before publication; confirm whether a matching model/source/scenario bundle can be supplied. -->
+
+With your model source open, select the measured cycle overlay in **Current Analysis Run**. Source navigation and numeric attribution are separate checks: an accessible mapped line can still have no reported cycle value.
+
+If CodeLens reports **total cycles unavailable**, read its hover explanation. During technical review, both model lines reported missing cycle data even though the capture, measured graph metrics, and source navigation succeeded. You can still inspect the measured group in Model Explorer and follow its source mapping. Don't assign part of a group's cycles to a Python line without a reported numeric mapping.
+
+When numeric source values are available, inspect their presentation:
 
 - Numeric heatmap colours show relative values across mapped lines. They help locate regions to inspect.
 - CodeLens displays the selected value and, when it can be calculated safely, its percentage of the model total.
@@ -41,11 +47,11 @@ With your model source open, select the measured cycle overlay in **Current Anal
 
 Follow a CodeLens entry back to the graph and confirm that the same overlay remains selected. Several source lines can refer to shared execution work, so their values are not additive model totals.
 
-In this example, CodeLens maps 22,506 cycles to `x = self.net(x)`, approximately 88% of the captured model's total cycles. This line calls the `nn.Sequential` block defined in `SmallUpscalerModel`.
+In the author's screenshot, CodeLens maps 22,506 cycles to `x = self.net(x)`, approximately 88% of the captured model's total cycles. This line calls the `nn.Sequential` block defined in `SmallUpscalerModel`. These values illustrate numeric source attribution; they are not expected values for every export or capture.
 
 ![VS Code showing SmallUpscalerModel with source heatmaps and CodeLens values. The self.net(x) call is mapped to 22,506 cycles, or 88% of the model total, while interpolation is mapped to 3,037 cycles, or 12%.#center](images/python-model.png "Inspect measured cycles mapped to Python source")
 
-Clicking on the `MLIA: 22,506 cycles (88% of model)` will open up a Model Explorer like the example below. In this view the operators from the **Source Model** are highlighted on the left and the specific operators from this line are shown in the **code_stack** on the right.
+When a numeric CodeLens entry is available, select it to locate its associated graph nodes. The screenshot shows `MLIA: 22,506 cycles (88% of model)` selected, with corresponding **Source Model** operations on the left and the line's operations in **code_stack** on the right.
 
 ![Model Explorer showing synchronized Source Model and code_stack views beside the Python source. The selected code_stack group maps three CONV2D and RESCALE pairs to x = self.net(x), with total_cycles of 22,506.#center](images/code-mapping.png "Trace a Python source line to its mapped operations")
 

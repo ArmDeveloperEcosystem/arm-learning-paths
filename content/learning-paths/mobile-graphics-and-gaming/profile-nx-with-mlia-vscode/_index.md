@@ -66,9 +66,9 @@ further_reading:
         link: https://github.com/arm/ai-ml-sdk-manifest
         type: repository
     - resource:
-        title: NX performance estimation Learning Path proposal
-        link: https://github.com/ArmDeveloperEcosystem/arm-learning-paths/pull/3876
-        type: documentation
+        title: Estimate neural accelerator performance with ML Inference Advisor
+        link: /learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/
+        type: learningpath
     - resource:
         title: Analyze Ethos-U models with MLIA
         link: /learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/

@@ -13,6 +13,8 @@ The MLIA for VS Code extension lets you analyze model performance within your ed
 
 You'll run a small neural upscaler on an Android device with an Arm neural accelerator (NX) and capture its execution. Then you'll use the extension to inspect measured performance and trace costly parts of the model back to Python source.
 
+To check model compatibility and estimate NX performance before running on a device, see the [NX performance estimation Learning Path](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/). It introduces the MLIA command-line workflow and compares model variants without requiring NX hardware.
+
 The workflow has three parts:
 
 | Stage | Tool | Result |
@@ -23,26 +25,37 @@ The workflow has three parts:
 
 The exercise uses one dispatch and zero-filled input to establish the capture and analysis workflow. It doesn't measure application frame time, establish sustained performance, or validate the upscaler's image quality.
 
-Allow about 90 minutes after preparing the prerequisite model and host tools. This provisional estimate includes building the runner and collecting and analyzing a capture; allow extra time for installation and downloads.
+Allow about 90 minutes after preparing the prerequisite model and host tools. This provisional estimate includes preparing Scenario Runner and collecting and analyzing a capture; allow extra time for installation and downloads.
 
 {{% notice Draft validation %}}
-This draft has not yet been validated from model export through device capture and VS Code source navigation.
+Device capture, measured graph metrics, and Python source navigation have been validated. Numeric source-line heatmaps and CodeLens values still need confirmation with the author before publication.
 {{% /notice %}}
 
 ## Prepare a compatible VGF export
 
 MLIA needs VGF 0.4.3 from Model Converter v0.10.0, as specified in the extension's [VGF preparation guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/creating-vgf-model.md). Use ExecuTorch v1.5.1, which selects that converter.
 
-Follow the prerequisite [environment setup page](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/2-set-up-your-environment/) through the `git clone` command. Before running `./install_executorch.sh`, enter the checkout and select the required release:
+In a new project directory, create an export environment with the released CPU packages. These packages include the VGF export dependencies, so you can prepare this example without building ExecuTorch from source:
 
 ```bash
-cd executorch
-git checkout v1.5.1
+python3.12 -m venv export-venv
+source export-venv/bin/activate
+python -m pip install \
+    'executorch[vgf]==1.5.1' \
+    'torch==2.14.0+cpu' \
+    'torchvision==0.29.0+cpu' \
+    --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
-Continue with `./install_executorch.sh` and the Arm backend setup steps. Keep v1.5.1 selected even where that page's general troubleshooting suggests `main`. The newer SDK used to build Scenario Runner later in this path is separate from the export toolchain.
+Keep this environment active so that the installed Model Converter is on `PATH`. If you build Scenario Runner, use a separate SDK build environment.
 
-Then run the `SmallUpscalerModel` post-training quantization (PTQ) example in [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/3-run-ptq-and-export-vgf/). Keep its `quantize_and_export_vgf.py` source file. You can skip the own-model and quantization-aware training examples. If you already exported with a different toolchain, prepare a fresh environment with these versions and rerun PTQ and export; changing the checkout does not update an existing VGF.
+Save the complete `SmallUpscalerModel` post-training quantization (PTQ) example from [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/3-run-ptq-and-export-vgf/#run-the-end-to-end-ptq-example) as `quantize_and_export_vgf.py` in this directory. Use the environment above and run only that example:
+
+```bash
+python quantize_and_export_vgf.py
+```
+
+The script downloads CIFAR-10, trains the small model for one epoch, calibrates it, and exports a VGF under `output/`. If you already exported with a different toolchain, prepare a fresh environment with these versions and rerun the example; installing new tools does not update an existing VGF.
 
 Retain both debug options already present in the PTQ example:
 
@@ -63,20 +76,19 @@ find output -type f -name '*.vgf'
 
 Use the VGF from this PTQ export, typically `output/output_tag0.tosa.vgf`. If you find several artifacts, check that `output/` contains only the current example's export. If a fresh export still produces several partitions, stop and check the pinned versions and unchanged example before proceeding. This walkthrough profiles one VGF, and its totals describe only the graph contained in that file.
 
-Replace `<exported-model>.vgf` with the filename you found, and check that it contains data:
+For the unchanged example, set the exported model path and check that it contains data:
 
 ```bash
 export NX_WORKSPACE="$PWD/nx-profile"
-export MODEL_VGF="$PWD/output/<exported-model>.vgf"
+export MODEL_VGF="$PWD/output/output_tag0.tosa.vgf"
 test -s "$MODEL_VGF"
 ```
 
-Continue only if `test -s` succeeds. Copy the model to a stable workload path and record its checksum:
+Continue only if `test -s` succeeds. Copy the model to a stable workload path:
 
 ```bash
 mkdir -p "$NX_WORKSPACE/workload" "$NX_WORKSPACE/captures"
 cp "$MODEL_VGF" "$NX_WORKSPACE/workload/model.vgf"
-sha256sum "$NX_WORKSPACE/workload/model.vgf" > "$NX_WORKSPACE/model.sha256"
 cd "$NX_WORKSPACE"
 ```
 
@@ -84,7 +96,7 @@ Keep this terminal open across the capture pages. `NX_WORKSPACE` identifies the 
 
 ## Prepare the extension's managed environment
 
-Follow the [MLIA extension installation instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/installation.md). If you use a release VSIX, install it with **Extensions > ... > Install from VSIX...**.
+Follow the [MLIA extension installation instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/installation.md). This walkthrough was tested with extension v0.1.1. If you use a release VSIX, install it with **Extensions > ... > Install from VSIX...**.
 
 In VS Code:
 
