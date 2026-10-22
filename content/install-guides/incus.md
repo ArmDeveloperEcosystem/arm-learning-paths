@@ -157,9 +157,11 @@ Confirm that no Incus managed bridge was created:
 incus network list
 ```
 
-Confirm that `incusbr0` doesn't appear. Existing host interfaces might appear as unmanaged networks. You'll connect the test container directly to the default network interface of the host with a `macvlan` device.
+Confirm that `incusbr0` doesn't appear. Existing host interfaces might appear as unmanaged networks.
 
 ## Verify the installation
+
+You'll connect the test container directly to the default network interface of the host with a `macvlan` device.
 
 Find the host interface that carries the default IPv4 route:
 
