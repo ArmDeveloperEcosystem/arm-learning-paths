@@ -1,6 +1,6 @@
 ---
 title: "Write and run Puppeteer tests against a Hugo site"
-description: "Fork the Ecosystem Dashboard for Arm, install Puppeteer inside the repository, start a local Hugo development server, and run three Puppeteer test scripts that assert page content, validate a documentation link, and capture a screenshot."
+description: "Write and run Puppeteer tests against a locally served Hugo site on Arm Linux to check page content and a documentation link, and capture a screenshot."
 
 weight: 4
 
@@ -48,7 +48,7 @@ git config --global user.email "you@example.com"
 
 To fork and clone the repository:
 
-1. Go to [https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm](https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm).
+1. Go to the [Ecosystem Dashboard for Arm repository](https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm).
 2. Select **Fork** and follow the prompts to create a fork under your account.
 3. Clone your fork on your Arm server, replacing `your-github-username` with your actual username:
 
@@ -313,7 +313,7 @@ The expected output is:
 Screenshot saved to dashboard.png
 ```
 
-You'll find `dashboard.png` in your `puppeteer-tests` directory. Copy it to your local machine to view it:
+You'll find `dashboard.png` in your `puppeteer-tests` directory. Run the following command on your local machine to copy the screenshot from the Arm server:
 
 ```bash
 scp user@your-server-ip:~/ecosystem-dashboard-for-arm/puppeteer-tests/dashboard.png .

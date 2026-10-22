@@ -9,13 +9,15 @@ layout: "learningpathall"
 
 ## Run tests on pull requests
 
-You can run Puppeteer tests automatically on pull requests to check changes before merging them. You'll create a workflow that performs the following tasks whenever a pull request targets the main branch: 
+You can run Puppeteer tests automatically on pull requests to check changes before merging them. You'll create a workflow that performs the following tasks: 
 
 - Checks out the repository
 - Starts Hugo
 - Runs all three Puppeteer scripts  
 
 If any script exits with a non-zero code, the workflow fails.
+
+The workflow is invoked whenever a pull request targets the main branch. For testing purposes, you'll invoke the workflow manually.
 
 Using an arm64 runner means Chrome runs at the same speed as on your Arm server.
 
@@ -115,8 +117,8 @@ Each step in the workflow accomplishes the following tasks:
 - `peaceiris/actions-hugo@v3` — installs the Hugo extended binary at the pinned version. The `extended: true` flag is required because the dashboard uses Hugo Pipes for asset processing.
 - `hugo server --port 1313 &` — starts the development server in the background. The `&` is essential; without it the step never finishes.
 - `actions/setup-node@v4` — installs Node.js 20 and adds `npm` to the path.
-- Install Chrome — downloads the official Google arm64 `.deb` package and installs it with `apt`. This is the same package you installed on your server in the previous section.
-- Install Puppeteer — runs `npm install puppeteer-core` inside the `puppeteer-tests` directory where your test scripts live.
+- `Install Chrome` — downloads the official Google arm64 `.deb` package and installs it with `apt`. This is the same package you installed on your server in the previous section.
+- `Install Puppeteer` — runs `npm install puppeteer-core` inside the `puppeteer-tests` directory where your test scripts live.
 - `npx wait-on` — polls `http://localhost:1313` until Hugo responds or the 30-second timeout expires. This prevents the test steps from starting before the server is ready.
 - The three test steps run each script and let the exit code determine whether the step passes or fails.
 - `actions/upload-artifact@v4` — saves `dashboard.png` so you can download and inspect the screenshot from the GitHub Actions run summary.
@@ -134,7 +136,7 @@ To verify the workflow:
 
 After a successful run, the three test steps and the screenshot upload step show green check marks in the **Actions** tab. The job summary includes a downloadable artifact named `dashboard-screenshot`.
 
-The expected output is:
+Across the three test-step logs, the expected messages are:
 
 ```output
 PASS: NGINX package is present in the rendered dashboard

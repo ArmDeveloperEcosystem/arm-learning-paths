@@ -9,7 +9,9 @@ layout: "learningpathall"
 
 ## Headless browsers and why they matter
 
-A headless browser renders pages, executes JavaScript, and processes CSS without opening a browser window. This makes it useful on servers and in containers and CI/CD pipelines without a graphical display.
+You'll use Puppeteer with headless Chrome on an Arm Linux server to test a local Hugo site, then run those tests in GitHub Actions.
+
+A headless browser renders pages, executes JavaScript, and processes CSS without opening a browser window. This makes it useful on servers, in containers, and in continuous integration and continuous delivery (CI/CD) pipelines without a graphical display.
 
 You can use headless browsers programmatically for automated regression testing after every code change. Headless browsers allow you to perform the following UI tests without needing to check manually:
 
@@ -37,7 +39,7 @@ Google Chrome holds the largest share of global browser traffic. Running tests a
 
 Puppeteer is a Node.js library maintained by the Chrome team. It communicates with Chrome over the DevTools Protocol, a low-level interface that exposes full control over the browser. 
 
-The following are some of the functionalities that the DevTools Protocol exposes: 
+The DevTools Protocol provides:
 
 - Navigation
 - DOM inspection

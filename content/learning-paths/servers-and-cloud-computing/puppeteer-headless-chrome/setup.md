@@ -1,6 +1,6 @@
 ---
 title: "Set up Chrome and Node.js for headless testing"
-description: "Install Google Chrome and Node.js v20 on Ubuntu 24.04 or Amazon Linux 2023 (arm64)."
+description: "Install and verify Google Chrome and Node.js v20 on Ubuntu 24.04 or Amazon Linux 2023 (arm64) for headless testing."
 
 weight: 3
 
