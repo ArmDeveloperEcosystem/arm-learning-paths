@@ -62,7 +62,7 @@ sudo apt update
 ```
 
 {{% notice Note %}}
-The following commands use the Incus 6.0 LTS release from the Ubuntu 24.04 repositories. The Ubuntu package revision can change as updates are published. The same commands work with updated Incus 6.0 packages. To learn about the available release branches, see the [Incus installation documentation](https://linuxcontainers.org/incus/docs/main/installing/#choose-your-release).
+The following commands use the Incus 6.0 LTS release from the Ubuntu 24.04 repositories. The Ubuntu package revision can change as updates are published. The same commands work with updated Incus 6.0 packages. To learn about the available release branches, see [Choose your release](https://linuxcontainers.org/incus/docs/main/installing/#choose-your-release) in the Incus documentation.
 {{% /notice %}}
 
 Install the Incus daemon and command-line client:
@@ -108,6 +108,10 @@ The package revision can change without changing the displayed upstream version.
 
 Initialize Incus with a `dir` storage pool and a default profile that doesn't attach a network interface:
 
+{{% notice Note %}}
+Run the preseed command only for a new Incus installation. If the host already has Incus storage, networks, profiles, or instances, inspect the existing configuration instead of replacing it.
+{{% /notice %}}
+
 ```bash
 cat <<'EOF' | incus admin init --preseed
 config: {}
@@ -128,10 +132,6 @@ EOF
 ```
 
 This creates a `dir`-backed storage pool named `default` and attaches it to new instances through the default profile. The `dir` storage driver is suitable for this installation check. However, it doesn't provide the snapshot, quota, and optimized-copy features of storage drivers such as ZFS or Btrfs.
-
-{{% notice Note %}}
-Run the preseed command only for a new Incus installation. If the host already has Incus storage, networks, profiles, or instances, inspect the existing configuration instead of replacing it.
-{{% /notice %}}
 
 List the storage pools:
 
@@ -162,6 +162,10 @@ Confirm that `incusbr0` doesn't appear. Existing host interfaces might appear as
 ## Verify the installation
 
 You'll connect the test container directly to the default network interface of the host with a `macvlan` device.
+
+{{% notice Note %}}
+A `macvlan` device gives the container direct access to the physical network without an Incus managed bridge or outbound NAT. The network has to permit an additional MAC address on the host connection. The host and container can't communicate directly over this interface, but `incus exec` continues to work.
+{{% /notice %}}
 
 Find the host interface that carries the default IPv4 route:
 
@@ -219,10 +223,6 @@ The device command reports:
 ```output
 Device eth0 added to arm-install-check
 ```
-
-{{% notice Note %}}
-A `macvlan` device gives the container direct access to the physical network without an Incus managed bridge or outbound NAT. The network must permit an additional MAC address on the host connection. The host and container can't communicate directly over this interface, but `incus exec` continues to work.
-{{% /notice %}}
 
 ### Check the container status
 
