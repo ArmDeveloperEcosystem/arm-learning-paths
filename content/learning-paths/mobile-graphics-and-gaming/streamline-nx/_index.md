@@ -1,5 +1,5 @@
 ---
-title: Get Started with profiling Arm Neural Technology workloads with Streamline
+title: Profile Arm Neural Technology workloads with the Arm Streamline GUI
 
 draft: true
 cascade:
@@ -12,7 +12,7 @@ minutes_to_complete: 45
 who_is_this_for: This Learning Path is for Android and graphics developers who want to profile their ML for Vulkan applications on the Mali Neural Accelerator using the Arm Streamline GUI.
 
 learning_objectives:
-    - Explain how neural accelerator (NX), Vulkan ML workloads, and GPU shader execution relate to a Streamline capture.
+    - Identify how neural accelerator (NX), Vulkan ML workloads, and GPU shader execution relate to a Streamline capture.
     - Prepare your debuggable Android workload for Streamline capture.
     - Collect and open a 30-second workload capture using the Streamline GUI.
     - Inspect NX activity and graph operations using Mali Timeline and Dispatch Graph Workloads.

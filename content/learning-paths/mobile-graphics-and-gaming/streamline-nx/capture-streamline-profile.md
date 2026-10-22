@@ -7,19 +7,19 @@ weight: 4
 layout: learningpathall
 ---
 
-## Understand what a capture records
+## Understand what a Streamline capture records
 
-Streamline samples hardware performance counters on the CPU and GPU to show how your application uses these resources over time. This walkthrough focuses on GPU counters and ML graph execution rather than CPU profiling.
+Streamline samples hardware performance counters on the CPU and GPU to show how your application uses these resources over time. You'll focus on GPU counters and ML graph execution rather than CPU profiling.
 
-Complete the [device and workload preparation](../prepare-tools-and-device/) first. Use your own debuggable ML for Vulkan application; Moku is only the example shown in the screenshots.
-
-Streamline also supports command-line capture for automation. See the [Streamline 9.9 command-line reference](https://support.arm.com/documentation/101816/9-9/Command-line-reference) for that alternative; the steps below use only the GUI.
+Streamline also supports command-line capture for automation. For more information, see the [Streamline 9.9 command-line reference](https://support.arm.com/documentation/101816/9-9/Command-line-reference).
 
 ## Select the application and counters
 
+To select your applicaation and a counter on Streamline:
+
 1. In the **Start** view, select **Android (adb)** and your device.
 2. Select your installed application. Compare its listed activity with the component returned by `adb shell cmd package resolve-activity --brief YOUR_PACKAGE` during preparation.
-3. If the listed activity is not the one you need, select **Override activity** and enter the activity class, such as `YOUR_ACTIVITY`, from that component. The selected application already supplies the package name. In **Arguments**, enter only arguments required by your own app, or leave the field empty.
+3. If the listed activity isn't the one that you need, select **Override activity** and enter the activity class, such as `YOUR_ACTIVITY`, from that component. The selected application already supplies the package name. In **Arguments**, enter only the arguments that are required by your app, or leave the field empty.
 4. Select **Use advanced mode**, then **Select counters**. Open **Add counters from a template**, select **Mali G2-Ultra - 5th Generation** for the example GPU, and click **Save**. Use the corresponding template for your GPU.
 
 ![Streamline template menu with Mali G2-Ultra - 5th Generation highlighted#center](./images/template-counters.png "Select the template matching your GPU. The G2-Ultra template includes neural accelerator charts.")
@@ -47,5 +47,7 @@ After capture, you may be prompted to download process images. This optional ste
 2. Confirm that the capture identifies the intended device and application package, and check its duration. Review the capture log, **Warnings**, and any data-loss bookmarks.
 3. Expand **Mali Neural Accelerator Overview** and inspect **Neural Accelerator Usage**. Nonzero neural accelerator activity in the workload interval shows that the selected counters recorded NX activity. If it is absent, confirm that the intended workload ran rather than just a loading screen.
 4. In the details panel menu at the bottom of **Timeline**, select **Mali Timeline** and confirm that GPU workload events are present. Counter data and Timeline events are separate checks; a saved `.apc` alone is not evidence of either.
+
+## What you've accomplished and what's next
 
 Next, [inspect NX activity and graph operations](../analyze-neural-workloads/) to establish where your application's operations executed.
