@@ -1,17 +1,19 @@
 ---
 title: Understand NX, Streamline, and Project Moku
-description: Understand the hardware and driver requirements for profiling an Android neural graphics workload with Streamline.
+description: Understand how NX, shader execution, and Vulkan graphs relate to Streamline profiling, with Project Moku as an illustrative workload.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+Use your own installed, debuggable Android application with a supported ML for Vulkan workload throughout this Learning Path. The screenshots use [Project Moku](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/1-introduction_to_moku/) as an example.
+
 ## What NX adds to an Arm GPU
 
 NX provides dedicated neural acceleration within supported Arm GPUs. An ML graph can contain work mapped to NX and work implemented as compute shaders on the GPU’s shader cores.
 
-Arm ML Extensions for Vulkan, including `VK_ARM_tensors` and `VK_ARM_data_graph`, let applications describe tensor data and dispatch ML graphs through Vulkan. A graph dispatch can execute work on both NX and shader cores. The compiler maps graph operations to these execution engines according to the operations, tensor data types and shapes, and capabilities of the target GPU and driver
+Arm ML Extensions for Vulkan, including `VK_ARM_tensors` and `VK_ARM_data_graph`, let applications describe tensor data and dispatch ML graphs through Vulkan. A graph dispatch can execute work on both NX and shader cores. The compiler maps graph operations to these execution engines according to the operations, tensor data types and shapes, and capabilities of the target GPU and driver.
 
 Neural graphics techniques use these capabilities within a rendering pipeline. Neural Super Sampling (NSS) reconstructs an image from a lower-resolution input. Neural Frame Rate Upscaling (NFRU) generates intermediate frames between rendered frames. For a broader set of potential use cases, see the [Arm Neural Technology Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/).
 
@@ -31,8 +33,7 @@ Counters summarize activity over sampling intervals. Events describe work along 
 
 Project Moku is an Unreal Engine sample project developed by Arm that demonstrates neural rendering technologies for mobile platforms. It provides a controlled environment for testing Neural Frame Rate Upscaling (NFRU) and complementary neural rendering techniques, and is designed to exercise dedicated neural accelerators on GPUs with built-in neural processing support. For more context, see [the introduction to Project Moku](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/1-introduction_to_moku/).
 
-This Learning Path uses Moku's NFRU configuration as a representative workload to collect a 30-second Streamline profile. **However, you will need to replace Moku with your own debuggable application that uses the ML extensions for Vulkan on supported hardware**. The [Arm ML SDK for Vulkan](https://github.com/arm/ai-ml-sdk-for-vulkan) provides tools and documentation for developing applications with these extensions.
-
+The example captures use Moku's NFRU configuration. Its scene, settings, and measurements are not performance guarantees for your application. The [Arm ML SDK for Vulkan](https://github.com/arm/ai-ml-sdk-for-vulkan) provides tools and documentation for developing applications with these extensions.
 
 For details about the sample and frame generation, see [Analyze Neural Frame Rate Upscaling using Project Moku](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/).
 
@@ -46,6 +47,6 @@ Project Moku is running on a [Xiaomi 18 Fold](https://www.mi.com/global/discover
 
 ## What you've learned and what's next
 
-You now know how NX, shader execution, and Vulkan graph dispatches relate to the two Streamline views. You also know how the device hardware and supplied driver affect the available profiling features.
+You now know how NX, shader execution, and Vulkan graph dispatches relate to the two Streamline views, and how Moku illustrates the workflow you will apply to your own application.
 
 Next, [prepare the tools, device, and your workload](../prepare-tools-and-device/).

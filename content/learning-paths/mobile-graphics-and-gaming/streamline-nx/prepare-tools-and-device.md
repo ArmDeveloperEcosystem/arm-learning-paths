@@ -9,25 +9,11 @@ layout: learningpathall
 
 ## Install Arm Performance Studio and open Streamline
 
-Install the package for your host using the [Arm Performance Studio install guide](/install-guides/ams/). Open the Performance Studio Hub and launch Streamline. 
+Install the package for your host using the [Arm Performance Studio install guide](/install-guides/ams/). Open the Performance Studio Hub and launch Streamline.
 
-Confirm that you are using **Streamline 9.9 or newer**. On macOS, select **Streamline > About Streamline** to check the version. 
+Confirm that you are using **Streamline 9.9 or newer**. On macOS, select **Streamline > About Streamline** to check the version. An older installation can support general GPU profiling without supporting this NX workflow.
 
 ![About Streamline dialog showing version 9.9.0 over the Start view, with Android (adb) selected and no device selected#center](./images/streamline_startscreen.png "The About Streamline dialog confirms version 9.9.0. Use Streamline 9.9 or newer for ML for Vulkan workload profiling.")
-
-Alternatively, nativate to the installation directory on Mac this is `/Applications/Arm Performance Studio 2026.5/streamline` and run the following command.
-
-```bash
-./Streamline-cli --version
-```
-
-You should the following output. 
-
-```output
-Streamline 9.9 (Build 9.9.0.v20260901_1940)
-Copyright (c) 2010-2026 Arm Limited. All rights reserved
-```
-
 
 ## Connect an Android device with ADB
 
@@ -35,8 +21,10 @@ Install the [Android SDK Platform Tools](https://developer.android.com/tools/rel
 
 Enable **Developer options** on the Android device, typically by opening **Settings > About phone** and tapping **Build number** seven times. Then enable **USB debugging**, usually under **Settings > System > Developer options**. The exact labels and locations vary by manufacturer; see the [Android developer options guidance](https://developer.android.com/studio/debug/dev-options).
 
-{{% notice For Xiaomi Devices %}}
-You will also need to enable **Developer options > USB debugging (Security settings)** so Streamline can configure the Vulkan Timeline layer for Dispatch Graph profiling. Enabling this setting on the Xiaomi used here requires a **Xiaomi account and a SIM card**.
+Connect the device with a USB data cable, unlock it, and accept the debugging authorization prompt.
+
+{{% notice Xiaomi devices %}}
+On the Xiaomi used here, **Developer options > USB debugging (Security settings)** must also be enabled so Streamline can configure the Vulkan Timeline layer for Dispatch Graph profiling.
 
 ![Xiaomi Developer options with USB debugging (Security settings) enabled, allowing permission grants and simulated input through ADB#center](./images/xiaomi_additional_permission.png "Enable the additional debugging permissions for Vulkan Timeline layer setup.")
 {{% /notice %}}
@@ -56,31 +44,36 @@ List of devices attached
 
 Your selected device must appear with status `device`. If it is `unauthorized`, accept the prompt.
 
-{{% notice Note%}}
+{{% notice Note %}}
 If more than one device is listed, add `-s YOUR_DEVICE_SERIAL` after `adb` in each subsequent command.
 {{% /notice %}}
 
 In Streamline's **Start** view, select the **Android (adb)** radio button. Your connected device should appear under **Select device**. Select it to list its filtered debuggable applications.
 
-Confirm the Perfetto service is running which is required for the Mali timeline view.
+Confirm that the Perfetto service is running. It is required for Mali Timeline events and is separate from USB debugging authorization:
 
 ```bash
 adb shell pidof traced || echo "Perfetto service not running"
 ```
 
-If no process ID appears, try enabling the service, then repeat the check:
+The expected output is a process ID. If no process ID appears, first record the current setting:
+
+```bash
+adb shell getprop persist.traced.enable
+```
+
+Then try enabling the service and repeat the process check:
 
 ```bash
 adb shell setprop persist.traced.enable 1
+adb shell pidof traced
 ```
 
-## Check GPU and Driver information
+Do not continue without a running service. If it cannot be enabled, consult the [Streamline Android target setup guide](https://support.arm.com/documentation/101813/9-9). If you changed this persistent setting, restore its recorded value after profiling.
 
-Mali NX profiling requires **Mali DDK r56p0 or later**. 
+## Check GPU and driver information
 
-The GPU driver is supplied by the SoC manufacturer and shipped in the device manufacturer's software image. Application developers normally receive driver changes through device software updates. This walkthrough does not require a separate DDK release check: start by confirming that your app runs its intended workload on the device.
-
-Run the followin command to dump the Vulkan properties and filter for the GPU and driver fields:
+For a brief check against the hardware and driver prerequisites, dump the Vulkan properties and filter for the GPU and driver fields. Run this example in a Bash-compatible host terminal:
 
 ```bash
 adb shell cmd gpu vkjson |
@@ -89,41 +82,45 @@ adb shell cmd gpu vkjson |
 
 The Xiaomi 18 Fold used for this Learning Path returned the following values (repeated fields omitted):
 
-```out
+```output
 "driverInfo" : "v1.r56p0-15bet0.62068c9e2b6dab93feff4ddf773d9a12",
 "driverName" : "Mali-G2-Ultra-NX MC16"
 "deviceName" : "Mali-G2-Ultra-NX MC16",
 "driverVersion" : 234881024.0,
 ```
 
-If the command above does not identify your driver, use the Vulkan API to query [`VkPhysicalDeviceProperties::driverVersion`](https://docs.vulkan.org/refpages/latest/refpages/source/VkPhysicalDeviceProperties.html) and [`VkPhysicalDeviceDriverProperties::driverID`, `driverName`, and `driverInfo`](https://docs.vulkan.org/refpages/latest/refpages/source/VkPhysicalDeviceDriverProperties.html).
+## Confirm your installed workload
 
-## Transfer application to device
-
-Run these commands from your APK directory, replacing `YOUR_APP.apk` and `YOUR_PACKAGE` with your debuggable APK and package ID (for Moku, `station-arm64.apk` and `com.arm.station`). They install the app and check its APK path, debug access, and launch [activity](https://developer.android.com/guide/components/activities/intro-activities).
+An installed, debuggable application is a prerequisite; this Learning Path does not build or supply an APK. Replace `YOUR_PACKAGE` with your application's package ID. Check debug access and resolve its launch [activity](https://developer.android.com/guide/components/activities/intro-activities):
 
 ```bash
-adb install -r YOUR_APP.apk
+adb shell run-as YOUR_PACKAGE id
 adb shell cmd package resolve-activity --brief YOUR_PACKAGE
 ```
 
-The output from the final command should show the package and activity name which you can select for streamline capture through the GUI. 
+The first command should print the application's UID and group information. If it reports that the package is not debuggable, obtain a debuggable build before continuing. The final command should return the package/activity component to select in Streamline. For example, Moku returns:
 
 ```output
-priority=0 preferredOrder=0 match=0x108000 specificIndex=-1 isDefault=false
 com.arm.station/com.epicgames.unreal.GameActivity
 ```
 
-After installation, your app will appear in the device launcher. The screenshot below shows its icon highlighted on the Xiaomi 18 Fold home screen, mirrored to the local machine using `scrcpy`.
+Unlock the device and launch your own app once. Confirm that its intended ML workload runs, and note any navigation or application-specific arguments required to reach it. Streamline can launch the app again when capture starts.
 
-![Xiaomi 18 Fold home screen mirrored in scrcpy, with the installed MOKU app icon outlined in green on the right#center](./images/installed_moku.png "The installed Moku app on the Xiaomi 18 Fold home screen. Select its highlighted icon to launch the workload.")
+The screenshot below illustrates an installed app using Moku; use your own application's launcher icon.
+
+![Xiaomi 18 Fold home screen mirrored in scrcpy, with the example MOKU app icon outlined in green on the right#center](./images/installed_moku.png "Moku is the example installed app; launch your own debuggable application to verify its workload.")
 
 ## Enable NX statistics collection
 
-NX statistics supplement GPU timeline events with information about neural execution. For streamline capture, check and record the existing setting before changing it. If you will use the CLI sequence on the next page, let that sequence record and enable the setting instead:
+NX statistics supplement GPU timeline events with information about neural execution. Record the existing setting, including whether the output is blank, before changing it:
 
 ```bash
 adb shell getprop debug.mali.statistics_mode
+```
+
+Then enable per-unit statistics and verify the new setting:
+
+```bash
 adb shell setprop debug.mali.statistics_mode 2
 adb shell getprop debug.mali.statistics_mode
 ```
@@ -139,22 +136,10 @@ The modes described in the [Streamline ML workload setup guide](https://support.
 | `2` | Per-unit counters; the documented default |
 
 
-{{% notice Note %}}
-After profiling, you may want to reset NX statistics collection to the previous 'X' value:
-
-```bash
-adb shell setprop debug.mali.statistics_mode X
-```
-{{% /notice %}}
-
-Finally, enable the Mali timeline layer.
-
-```bash
-adb shell setprop debug.vulkan.layers VK_LAYER_LGL_gpu_timeline
-```
+The GUI capture on the next page automatically deploys and enables the Mali Timeline layer. You do not need to set `debug.vulkan.layers` manually for this workflow. After analysis, [restore any settings you changed](../analyze-neural-workloads/#restore-device-settings) to their recorded values rather than unconditionally disabling statistics.
 
 ## What you've accomplished and what's next
 
-You've connected the device and prepared your debuggable workload for NX statistics collection. You also know which Vulkan properties and features can help investigate compatibility.
+You've connected the device, checked Perfetto, and prepared your own debuggable workload for NX statistics collection.
 
-Next, [capture Moku using the CLI or GUI](../capture-streamline-profile/).
+Next, [capture your workload using the Streamline GUI](../capture-streamline-profile/).
