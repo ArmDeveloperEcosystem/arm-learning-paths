@@ -13,9 +13,9 @@ Start with the published model. Customize it only when the runtime exposes a rep
 
 ## Design with NX in mind
 
-<!-- TODO: Link the guide title below when the public NX Best Practices URL is available. -->
+Use the [Neural Network Model Development Best Practices for GPUs with Neural Accelerator](https://developer.arm.com/documentation/112431/latest) guide to understand how the GPU Execution Engine and NX divide a workload, choose precision and quantization deliberately, limit avoidable data movement and execution transitions, and connect model design to measurement, conversion, and deployment.
 
-Use the **Neural Network Model Development Best Practices for GPUs with Neural Accelerator** guide to understand how the GPU Execution Engine and NX divide a workload, choose precision and quantization deliberately, limit avoidable data movement and execution transitions, and connect model design to measurement, conversion, and deployment.
+Use the [Arm GPU Best Practices Developer Guide](https://support.arm.com/documentation/101897/latest/) alongside it to optimize the graphics workload that runs with your neural model.
 
 ## Use Model Gym for NSS and NFRU model workflows
 

@@ -89,20 +89,16 @@ operatingsystems:
 
 further_reading:
     - resource:
+        title: Neural Network Model Development Best Practices for GPUs with Neural Accelerator
+        link: https://developer.arm.com/documentation/112431/latest
+        type: documentation
+    - resource:
+        title: Arm GPU Best Practices Developer Guide
+        link: https://support.arm.com/documentation/101897/latest/
+        type: documentation
+    - resource:
         title: Arm Neural Technology Playbook - Evaluate
         link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/
-        type: learningpath
-    - resource:
-        title: Enable Neural Frame Rate Upscaling in Unreal Engine
-        link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/
-        type: learningpath
-    - resource:
-        title: Analyze Neural Frame Rate Upscaling using Project Moku
-        link: /learning-paths/mobile-graphics-and-gaming/nfru-cases-study/
-        type: learningpath
-    - resource:
-        title: Train and evaluate Neural Frame Rate Upscaling models using Model Gym
-        link: /learning-paths/mobile-graphics-and-gaming/model-training-gym-nfru/
         type: learningpath
     - resource:
         title: Get Started with profiling Arm Neural Technology workloads with Streamline
