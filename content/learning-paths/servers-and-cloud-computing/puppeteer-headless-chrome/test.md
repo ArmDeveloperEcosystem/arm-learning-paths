@@ -7,9 +7,9 @@ weight: 4
 layout: "learningpathall"
 ---
 
-## Fork and clone the repository
+## Set up the test repository
 
-The following tests run against the [Ecosystem Dashboard for Arm](https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm). The dashboard is a public Hugo site that tracks the Arm compatibility status of open-source packages. You need your own fork so that you can commit the test scripts and wire them into GitHub Actions.
+You'll create Puppeteer tests that run against the [Ecosystem Dashboard for Arm](https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm) GitHub repository. The dashboard is a public Hugo site that tracks the Arm compatibility status of open-source packages. You need your own fork so that you can commit the test scripts and wire them into GitHub Actions.
 
 ### Authenticate with GitHub
 
@@ -132,9 +132,9 @@ You should see `200`. Leave the server running while you work through the tests.
 
 With the server running and the project ready, you can now create the following three tests.
 
-{{< notice Note >}}
+{{% notice Note %}}
 All three test scripts pass `--no-sandbox` and `--disable-setuid-sandbox` to Chrome. These flags are required when Chrome runs as a non-root user on a Linux server that hasn't been configured with user namespaces. Cloud instances and CI runners typically fall into this category. Without these flags, Chrome exits immediately with a sandbox initialization error. Including them makes your scripts portable across server environments without any code change.
-{{< /notice >}}
+{{% /notice %}}
 
 ### Assert that an NGINX package row is present
 
