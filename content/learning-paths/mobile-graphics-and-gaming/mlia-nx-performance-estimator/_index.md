@@ -93,6 +93,10 @@ operatingsystems:
 
 further_reading:
     - resource:
+        title: Capture and analyze NX profiling data with MLIA for VS Code
+        link: /learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/
+        type: learningpath
+    - resource:
         title: MLIA Neural Technology package on PyPI
         link: https://pypi.org/project/mlia-neural-technology/
         type: documentation

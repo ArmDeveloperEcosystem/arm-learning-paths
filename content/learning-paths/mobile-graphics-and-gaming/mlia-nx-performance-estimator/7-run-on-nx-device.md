@@ -234,6 +234,8 @@ Your cycle counts will depend on your device and its configuration.
 
 `Status ok` confirms that MLIA analyzed the capture. The full results are saved in `runs/baseline-measured/mlia-output/mlia-output.json`.
 
+To inspect measured NX performance in Model Explorer and trace costs to Python source, follow [Capture and analyze NX profiling data with MLIA for VS Code](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/).
+
 
 ## Use the measurements
 
