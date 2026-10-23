@@ -7,7 +7,13 @@ layout: "learningpathall"
 
 ## Prepare the Zephyr workspace
 
-First, on the ubuntu host which is running ubuntu 22.04, lets install python3.12:
+First, on our ubuntu build host, lets check if we have python v3.12:
+
+```bash
+python3.12 --version
+```
+
+If a version string is returned, we can proceed to install the host dependencies for Zephyr. If python 3.12 is not installed (likely the case if our build host is ubuntu 22.04), lets install python3.12:
 
 ```bash
 sudo add-apt-repository ppa:deadsnakes/ppa

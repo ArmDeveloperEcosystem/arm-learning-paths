@@ -15,7 +15,7 @@ learning_objectives:
     - Deploy the component through a thing group and verify execution on the board
 prerequisites:
     - A PocketBeagle 2, a 32 GB or larger microSD card, a card reader, and a USB-C data cable
-    - An x86_64 Ubuntu 22.04 build host with 16–32 GB RAM and 250–400 GB free disk on a Linux filesystem
+    - An x86_64 Ubuntu 22.04 or 24.04 build host with 16–32 GB RAM and 250–400 GB free disk on a Linux filesystem
     - An AWS account with permission to manage IoT resources and Greengrass deployments, plus an approved token-exchange IAM role or permission to create one
     - AWS CLI v2 configured on an administrative workstation and Python 3 for validating JSON and generating deployment documents
     - Internet access for the build host and board, using host Internet sharing or a supported USB Ethernet adapter and host cape

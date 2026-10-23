@@ -14,7 +14,7 @@ learning_objectives:
 prerequisites:
     - A PocketBeagle 2 revision A1 with AM6254, running the updated image from [Part 1](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/)
     - SSH access and outbound networking configured as in Part 1
-    - An Ubuntu 22.04 development host, from [Part 1](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/), with Git, Python 3, CMake, Ninja, west, and Zephyr SDK support for Arm
+    - An Ubuntu 22.04 or 24.04 build host, from [Part 1](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/), with Git, Python 3, CMake, Ninja, west, and Zephyr SDK support for Arm
     - A 3.3 V logic USB-to-UART adapter, jumper wires, and a serial terminal on your workstation
 author: Doug Anson
 generate_summary_faq: true
