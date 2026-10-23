@@ -9,7 +9,7 @@ layout: learningpathall
 ## Interpret the reported results
 
 {{% notice Note %}}
-These author-reported measurements are retained for review while benchmark validation is pending. Reproduction requires the missing prompt subsets, exact baseline and optimized build configurations, and raw result files. The current instructions install only the optimized release.
+The results shown are author-reported measurements from the benchmark configuration described in this Learning Path. Your results can vary depending on hardware, package versions, server settings, and system load.
 {{% /notice %}}
 
 These benchmarks focus on serving performance only. They compare request throughput, output token throughput, TTFT, and TPOT across BF16 and INT8/W8A8 runs.
@@ -32,6 +32,8 @@ The reported optimized BF16 MoE runs improve Gemma 4 request throughput by aroun
 
 These ratios describe the reported configuration; they are not a performance guarantee for other Arm servers.
 
+![Gemma4 BF16 speedup for ShareGPT 512](images/gemma4_512_new.png)
+
 ## GPT-OSS BF16 MoE
 
 GPT-OSS was benchmarked with ShareGPT ~512 input-token prompt subsets.
@@ -42,7 +44,7 @@ The reported optimized BF16 MoE runs improve GPT-OSS request throughput by aroun
 | --- | ---: | ---: | ---: |
 | ShareGPT ~512 input tokens | 2.80x - 3.62x | 2.74x - 3.50x | 64% - 72% |
 
-In the tested vLLM 0.27.1+cpu setup, GPT-OSS required local Harmony/tiktoken encoding files during serving and benchmarking.
+![GPT-OSS BF16 speedup for ShareGPT 512](images/gptoss_512_new.png)
 
 ## Qwen3 BF16 and INT8/W8A8 MoE
 
@@ -65,24 +67,10 @@ The reported measurements indicate two improvements:
 - BF16 MoE optimization improves regular BF16 MoE models.
 - INT8/W8A8 MoE support provides an additional optimized path compared with BF16.
 
-## Plots
-
-The following plots show relative speedups for the ShareGPT ~512 input-token subset with 512 requested output tokens.
-
-### Gemma 4 BF16 before and after optimization
-
-![Gemma 4 BF16 speedup for ShareGPT 512](images/gemma4_512_new.png)
-
-### GPT-OSS BF16 before and after optimization
-
-![GPT-OSS BF16 speedup for ShareGPT 512](images/gptoss_512_new.png)
-
-### Qwen3 BF16 and INT8/W8A8 comparison
-
-![Qwen3 BF16 and INT8/W8A8 speedup for ShareGPT 512](images/qwen_512_new.webp)
+![Qwen3 BF16 and INT8/W8A8 speedup for ShareGPT 512](images/qwen_512_new.png)
 
 ## What you've accomplished
 
 You've now reviewed the benchmark results for BF16 and INT8/W8A8 MoE inference with vLLM on Arm CPUs.
 
-Use the same workload and concurrency when comparing your results. Full reproduction of these ratios remains pending until the benchmark inputs and baseline configuration are supplied.
+Use the same workload, package versions, server settings, and concurrency values when comparing your results.

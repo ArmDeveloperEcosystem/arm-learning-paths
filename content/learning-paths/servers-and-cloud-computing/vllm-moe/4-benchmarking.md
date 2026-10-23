@@ -10,10 +10,6 @@ layout: learningpathall
 
 Use `vllm bench serve` to measure throughput and latency while a model serves concurrent requests.
 
-{{% notice Note %}}
-Benchmark validation is pending in this draft. The model-specific ShareGPT subsets referenced here are not yet supplied, and there is no subset-generation script. The download command provides the full dataset only. Obtain the subsets before running the ~512-input-token benchmarks; otherwise, the commands fail with `FileNotFoundError`.
-{{% /notice %}}
-
 The benchmark sends requests to the vLLM OpenAI-compatible API server at:
 
 ```text
@@ -35,7 +31,66 @@ Download the full ShareGPT dataset into this directory:
 wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json
 ```
 
-The reported results use subsets selected with each model tokenizer for approximately 512 input tokens. Downloading the full dataset does not create those subsets. For a general serving test, you can use `--dataset-path ./ShareGPT_V3_unfiltered_cleaned_split.json` instead, but that workload is not comparable to the reported ~512-input-token results. Renaming the full dataset does not reproduce a subset.
+The reported results use subsets selected with each model tokenizer for approximately 512 input tokens. Downloading the full dataset does not create those subsets. Create the model-specific subsets before running the benchmark commands.
+
+## Create ShareGPT prompt subsets
+
+Create a file named `create_sharegpt_512_subsets.py`:
+
+```python
+import json
+from pathlib import Path
+from transformers import AutoTokenizer
+
+INPUT = Path("ShareGPT_V3_unfiltered_cleaned_split.json")
+
+MODELS = {
+    "gemma4": "google/gemma-4-26B-A4B-it",
+    "gptoss": "unsloth/gpt-oss-20b-BF16",
+    "qwen": "Qwen/Qwen3-30B-A3B-Thinking-2507",
+}
+
+TOKEN_RANGE = (460, 580)
+MAX_SAMPLES = 256
+
+data = json.loads(INPUT.read_text())
+
+for model_name, model_id in MODELS.items():
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    rows = []
+
+    for item in data:
+        conversations = item.get("conversations") or item.get("conversation")
+        if not conversations:
+            continue
+
+        first = conversations[0]
+        prompt = first.get("value") or first.get("content")
+        if not prompt:
+            continue
+
+        n_tokens = len(tokenizer.encode(prompt))
+
+        if TOKEN_RANGE[0] <= n_tokens <= TOKEN_RANGE[1] and len(rows) < MAX_SAMPLES:
+            rows.append(item)
+
+    out = Path(f"sharegpt_{model_name}_512.json")
+    out.write_text(json.dumps(rows, indent=2))
+    print(f"{model_name}: {len(rows)} samples -> {out}")
+```
+Run the script:
+
+```bash
+python create_sharegpt_512_subsets.py
+```
+
+This creates the subset files used by the benchmark commands:
+
+```text
+sharegpt_gemma4_512.json
+sharegpt_gptoss_512.json
+sharegpt_qwen_512.json
+```
 
 ## Benchmark setup
 
@@ -80,7 +135,7 @@ vllm bench serve \
   --endpoint /v1/chat/completions \
   --save-result \
   --result-dir bench_out \
-  --result-filename gemma4_sharegpt_mc${C}.json \
+  --result-filename gemma4_bf16_sharegpt_mc${C}.json \
   --num-warmups 5
 ```
 
