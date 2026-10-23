@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Install prerequisites on macOS
 
-Install Xcode Command Line Tools if they are not already available:
+Install Xcode Command Line Tools if they're not already available:
 
 ```bash
 xcode-select --install
@@ -63,8 +63,10 @@ The expected SHA-256 checksum is:
 ```
 
 {{% notice Note %}}
-Download the `.litertlm` artifact used by LiteRT-LM; the file is about 2.6 GB.
+Download the `.litertlm` artifact used by LiteRT-LM. The file is about 2.6 GB.
 {{% /notice %}}
 
+## What you've accomplished and what's next 
+
 You've installed the build tools and verified the shared model artifact.
-Next, build each XNNPACK variant and run the benchmark.
+Next, you'll build each XNNPACK variant and run the benchmark.
