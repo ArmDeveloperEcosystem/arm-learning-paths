@@ -37,6 +37,8 @@ adb devices -l
 
 You should see a device serial number and product details for each attached device. A wireless `adb` connection uses `<IP address>:<port number>` instead of a USB serial number.
 
+The expected output is similar to:
+
 ```out
 List of devices attached
 10.72.66.137:33735     device product:lhasa model:2608BPX34C device:lhasa transport_id:3
@@ -91,7 +93,7 @@ The Xiaomi 18 Fold used to test this Learning Path returned the following values
 
 ## Confirm your installed workload
 
-Replace `YOUR_PACKAGE` with the package ID of your application. Check debug access and resolve its launch [activity](https://developer.android.com/guide/components/activities/intro-activities):
+Replace `YOUR_PACKAGE` with the package ID of your application. Check debug access and resolve its launch activity using the [Android activity documentation](https://developer.android.com/guide/components/activities/intro-activities):
 
 ```bash
 adb shell run-as YOUR_PACKAGE id
@@ -108,7 +110,7 @@ Unlock the device and launch your own app once. Confirm that its intended ML wor
 
 The following screenshot shows Moku installed on a Xiaomi 18 Fold.
 
-![Xiaomi 18 Fold home screen mirrored in scrcpy, with the example MOKU app icon outlined in green on the right#center](./images/installed_moku.png "The Moku app installed on a Xiaomi 18 Fold")
+![Xiaomi 18 Fold home screen mirrored in scrcpy, with the example MOKU app icon outlined in green on the right, confirming the app is installed before launch#center](./images/installed_moku.png "The Moku app installed on a Xiaomi 18 Fold")
 
 ## Enable NX statistics collection
 

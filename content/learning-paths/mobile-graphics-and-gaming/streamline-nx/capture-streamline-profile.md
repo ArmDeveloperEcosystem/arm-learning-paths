@@ -15,7 +15,7 @@ Streamline also supports command-line capture for automation. For more informati
 
 ## Select the application and counters
 
-To select your applicaation and a counter on Streamline:
+To select your application and a counter on Streamline:
 
 1. In the **Start** view, select **Android (adb)** and your device.
 2. Select your installed application. Compare its listed activity with the component returned by `adb shell cmd package resolve-activity --brief YOUR_PACKAGE` during preparation.
@@ -26,8 +26,8 @@ To select your applicaation and a counter on Streamline:
 
 ![Streamline template menu with Mali G2-Ultra - 5th Generation highlighted#center](./images/template-counters.png "Select the template matching your GPU. The G2-Ultra template includes neural accelerator charts.")
 
-5. In **Select counters**, confirm that **Mali Timeline events: Perfetto** is in **Events to collect**, then select **Save**. The G2-Ultra template includes this event and the neural activity, utilization, and L2 traffic counters that you'll use later.
-6. In **Capture settings**, leave **GPU Timeline layer driver** set to **Auto**. With the Perfetto event selected, Streamline deploys and enables the layer automatically.
+7. In **Select counters**, confirm that **Mali Timeline events: Perfetto** is in **Events to collect**, then select **Save**. The G2-Ultra template includes this event and the neural activity, utilization, and L2 traffic counters that you'll use later.
+8. In **Capture settings**, leave **GPU Timeline layer driver** set to **Auto**. With the Perfetto event selected, Streamline deploys and enables the layer automatically.
 
 ![Streamline Start view with an example application selected, Override activity enabled, an empty Arguments field, and advanced capture controls visible#center](./images/override_activity.png "Select your own application. Override its activity only when needed, and use your application's arguments if required.")
 
@@ -54,6 +54,6 @@ To check the capture:
 
 ## What you've accomplished and what's next
 
-You've used the Streamline GUI to capture about 30 seconds of the operations that your application performs 
+You've captured about 30 seconds of app operations and checked for NX activity. You've confirmed that GPU workload events appear in Mali Timeline.
 
 Next, you'll inspect NX activity and graph operations to establish where the operations ran.
