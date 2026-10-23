@@ -1,6 +1,6 @@
 ---
 title: Set up the Gemma 4 benchmark workspace
-description: Prepare a reproducible macOS workspace for comparing Gemma 4 LiteRT-LM performance with baseline and SME2-optimized XNNPACK variants.
+description: Set up LiteRT-LM, KleidiAI, and baseline and optimized XNNPACK builds for the Gemma 4 benchmark.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -9,15 +9,20 @@ layout: learningpathall
 
 ## What you'll build
 
-You'll build a workflow for comparing Gemma 4 CPU performance with the upstream XNNPACK SME2 Int4 and Int2 paths used through LiteRT-LM and KleidiAI.
+Benchmark Gemma 4 CPU inference with LiteRT-LM and KleidiAI on macOS. Compare
+baseline and optimized XNNPACK builds to measure prefill and decode throughput.
 
-The workflow records the repository revisions and uses the
-`litert_lm_advanced_main --benchmark` command so that you can compare results
-across XNNPACK variants.
+The optimized build improves one-thread decode by 53.6% on Apple M4 Pro and
+44.5% on the Android example. Prefill and thread scaling vary by device, so
+compare both phases using the same model and settings.
 
 ## Confirm SME2 support on your device
 
-Confirm the architecture and SME feature flags:
+Use an SME2-capable Mac, such as an M4-family Mac. See the
+[devices with native SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices)
+for Mac and Android examples. The setup here uses macOS.
+
+Confirm the host architecture and SME feature flags:
 
 ```bash
 uname -m
@@ -25,7 +30,7 @@ sysctl hw.optional.arm.FEAT_SME
 sysctl hw.optional.arm.FEAT_SME2
 ```
 
-The output on a supported Apple M4 system is similar to:
+The expected output on a supported Apple M4 system is:
 
 ```output
 arm64
@@ -33,85 +38,47 @@ hw.optional.arm.FEAT_SME: 1
 hw.optional.arm.FEAT_SME2: 1
 ```
 
-If either feature reports `0`, XNNPACK can't dispatch the SME2 kernels, and the
-performance comparison isn't valid.
+If either feature reports `0`, XNNPACK cannot dispatch the SME2 kernels and the
+macOS performance comparison is not valid.
 
-For a deeper validation, see [Test your SME2 development
-environment](/learning-paths/cross-platform/multiplying-matrices-with-sme2/2-check-your-environment).
+## Create the workspace
 
-After confirming SME2 support on your device, create a workspace. Then, clone LiteRT-LM `v0.16.1`, KleidiAI `v1.30.0`, and upstream XNNPACK with SME2 Int4 and Int2 support.
-
-## Create a workspace directory
-
-Create a working directory outside the Learning Paths repository and navigate to it:
+Create a working directory outside the Learning Paths repository:
 
 ```bash
 mkdir -p $HOME/gemma4-prefill-bench
 cd $HOME/gemma4-prefill-bench
 ```
 
-## Clone the tested LiteRT-LM and KleidiAI versions
+## Clone the sources
 
-Clone LiteRT-LM and check out the tested `v0.16.1` commit:
+{{% notice Note %}}
+The commands check out specific revisions so you can reproduce the benchmark results.
+{{% /notice %}}
+
+Clone LiteRT-LM, KleidiAI, and XNNPACK:
 
 ```bash
 git clone https://github.com/google-ai-edge/LiteRT-LM.git LiteRT-LM
 git -C LiteRT-LM checkout 924e79c91542761242244e4f1651851f822e4cbb
-```
 
-Clone KleidiAI and check out `v1.30.0`, which the upstream XNNPACK SME2 paths
-require:
-
-```bash
 git clone https://github.com/ARM-software/kleidiai.git kleidiai
-git -C kleidiai checkout 74b1a12d3620c89dae4766de640e064952000f4d
-```
+git -C kleidiai checkout 02f7b3df98c39df1884eead7461c3269feca4ddc
 
-## Create the XNNPACK variants
-
-Clone upstream XNNPACK using the default XNNPACK branch:
-
-```bash
 git clone https://github.com/google/XNNPACK.git xnnpack
-git -C xnnpack log -1 --oneline
+git -C xnnpack fetch origin 27199f7c0b5d0178a67f666d2ba85db56ec9858e
+git -C xnnpack checkout --detach 27199f7c0b5d0178a67f666d2ba85db56ec9858e
 ```
-The default XNNPACK branch contains the merged SME2 Int4 and Int2 support, and is the optimized tree.
 
-Record the commit printed by the command so that you can identify the exact upstream
-revision used for your results.
+## Create the baseline
 
-Create a historical baseline worktree from the common XNNPACK revision before
-the SME2 Int4 and Int2 support:
+Create a separate XNNPACK worktree for the baseline. It already includes earlier
+SME2 support; the optimized build adds the static INT2 SME2 kernels.
 
 ```bash
 git -C xnnpack worktree add --detach ../xnnpack-baseline \
-  eb452a766d8f1075b5491f22309e8f09bd31d828
+  c6b52536d3f614793f21ab4a17ae1cde73cc0333
 ```
 
-Verify the repository revisions:
-
-```bash
-git -C LiteRT-LM rev-parse HEAD
-git -C kleidiai rev-parse HEAD
-git -C xnnpack rev-parse HEAD
-git -C xnnpack-baseline rev-parse HEAD
-```
-
-The baseline command should print
-`eb452a766d8f1075b5491f22309e8f09bd31d828`.
-
-The workspace layout is now:
-
-```output
-gemma4-prefill-bench/
-├── kleidiai/
-├── LiteRT-LM/
-├── xnnpack/
-└── xnnpack-baseline/
-```
-
-## What you've accomplished and what's next
-
-You now have a workspace for the Gemma 4 benchmark.
-
-Next, you'll install the prerequisites and download the Gemma 4 model.
+You've prepared the sources and baseline. Next, install the build tools and
+download the Gemma 4 model.
