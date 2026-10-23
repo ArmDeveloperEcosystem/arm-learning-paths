@@ -1,5 +1,5 @@
 ---
-title: Prepare the tools, device, and workload
+title: Prepare your device and workload for Streamline
 description: Set up Streamline and an Android device, inspect useful Vulkan properties, and prepare your debuggable app for an NX capture.
 weight: 3
 
@@ -11,9 +11,9 @@ layout: learningpathall
 
 Install the package for your host using the [Arm Performance Studio install guide](/install-guides/ams/). Open the Performance Studio Hub and launch Streamline.
 
-Confirm that you're using **Streamline 9.9 or newer**. On macOS, select **Streamline > About Streamline** to check the version. An older installation can support general GPU profiling without supporting the neural accelerator (NX) workflow.
+Confirm that you're using Streamline version 9.9 or later. On macOS, select **Streamline > About Streamline** to check the version. An older installation can support general GPU profiling without supporting the neural accelerator (NX) workflow.
 
-![About Streamline dialog showing version 9.9.0 over the Start view, with Android (adb) selected and no device selected#center](./images/streamline_startscreen.png "The About Streamline dialog confirms version 9.9.0. Use Streamline 9.9 or newer for ML for Vulkan workload profiling.")
+![About Streamline dialog showing version 9.9.0 over the Start view, with Android (adb) selected and no device selected#center](./images/streamline_startscreen.png "About Streamline reports version 9.9.0, which supports ML for Vulkan profiling.")
 
 ## Connect an Android device with adb
 
@@ -26,7 +26,7 @@ Connect the device with a USB data cable, unlock it, and accept the debugging au
 {{% notice Note %}}
 If you're using a Xiaomi device, enable **Developer options > USB debugging (Security settings)**. The setting allows Streamline to configure the Vulkan Timeline layer for Dispatch Graph profiling.
 
-![Xiaomi Developer options with USB debugging (Security settings) enabled, allowing permission grants and simulated input through ADB#center](./images/xiaomi_additional_permission.png "Enable the additional debugging permissions for Vulkan Timeline layer setup.")
+![Xiaomi Developer options with USB debugging (Security settings) enabled, allowing permission grants and simulated input through ADB#center](./images/xiaomi_additional_permission.png "Additional Xiaomi USB debugging permission for Vulkan Timeline setup.")
 {{% /notice %}}
 
 In a terminal, check the host tool and device connection:
@@ -37,7 +37,7 @@ adb devices -l
 
 You should see a device serial number and product details for each attached device. A wireless `adb` connection uses `<IP address>:<port number>` instead of a USB serial number.
 
-The expected output is similar to:
+The output is similar to:
 
 ```out
 List of devices attached
@@ -47,18 +47,20 @@ List of devices attached
 Your selected device has to appear with status `device`. If the status is `unauthorized`, accept the prompt.
 
 {{% notice Note %}}
-If more than one device is listed, add `-s YOUR_DEVICE_SERIAL` after `adb` in each subsequent command.
+If more than one device is listed, add `-s YOUR_DEVICE_SERIAL` after `adb` in each subsequent command. Replace `YOUR_DEVICE_SERIAL` with the serial number of the device that you're using to complete the Learning Path.
 {{% /notice %}}
 
 In Streamline's **Start** view, select the **Android (adb)** radio button. Your connected device should appear under **Select device**. Select it to list its filtered debuggable applications.
 
-Confirm that the Perfetto service is running. It's required for Mali Timeline events and is separate from USB debugging authorization:
+Confirm that the Perfetto service is running. The service is required for Mali Timeline events and is separate from USB debugging authorization:
 
 ```bash
 adb shell pidof traced || echo "Perfetto service not running"
 ```
 
-The expected output is a process ID. If no process ID appears, first record the current setting:
+The expected output is a process ID. 
+
+If no process ID appears, first record the current setting:
 
 ```bash
 adb shell getprop persist.traced.enable
@@ -71,18 +73,18 @@ adb shell setprop persist.traced.enable 1
 adb shell pidof traced
 ```
 
-Don't continue without a running service. If it can't be enabled, consult the [Streamline Android target setup guide](https://support.arm.com/documentation/101813/9-9). If you changed this persistent setting, restore its recorded value after profiling.
+Don't continue without a running service. If the service can't be enabled, consult the [Streamline Android target setup guide](https://support.arm.com/documentation/101813/9-9). If you change this persistent setting, restore its recorded value after profiling.
 
 ## Check GPU and driver information
 
-For a brief check against the hardware and driver prerequisites, dump the Vulkan properties and filter for the GPU and driver fields. Run the following example in a Bash-compatible host terminal:
+For a brief check against the hardware and driver prerequisites, dump the Vulkan properties and filter for the GPU and driver fields:
 
 ```bash
 adb shell cmd gpu vkjson |
   grep -E '"(deviceName|driverName|driverInfo|driverVersion)"'
 ```
 
-The Xiaomi 18 Fold used to test this Learning Path returned the following values (repeated fields omitted):
+The Xiaomi 18 Fold used to test this Learning Path returned the following values. Repeated fields are omitted:
 
 ```output
 "driverInfo" : "v1.r56p0-15bet0.62068c9e2b6dab93feff4ddf773d9a12",
@@ -106,11 +108,11 @@ The first command should print the UID and group information of the application.
 com.arm.station/com.epicgames.unreal.GameActivity
 ```
 
-Unlock the device and launch your own app once. Confirm that its intended ML workload runs. Note any navigation or application-specific arguments that are required to reach it. Streamline can launch the app again when capture starts.
+Unlock the device and launch your app once. Confirm that its intended ML workload runs. Note any navigation or application-specific arguments that are required to reach it. Streamline can launch the app again when capture starts.
 
 The following screenshot shows Moku installed on a Xiaomi 18 Fold.
 
-![Xiaomi 18 Fold home screen mirrored in scrcpy, with the example MOKU app icon outlined in green on the right, confirming the app is installed before launch#center](./images/installed_moku.png "The Moku app installed on a Xiaomi 18 Fold")
+![Xiaomi 18 Fold home screen mirrored in scrcpy, with the example MOKU app icon outlined in green on the right, confirming the app is installed before launch#center](./images/installed_moku.png "Moku installed and ready to launch on a Xiaomi 18 Fold.")
 
 ## Enable NX statistics collection
 

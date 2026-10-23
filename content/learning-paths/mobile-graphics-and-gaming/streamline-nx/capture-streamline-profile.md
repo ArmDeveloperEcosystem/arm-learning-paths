@@ -19,17 +19,20 @@ To select your application and a counter on Streamline:
 
 1. In the **Start** view, select **Android (adb)** and your device.
 2. Select your installed application. Compare its listed activity with the component returned by `adb shell cmd package resolve-activity --brief YOUR_PACKAGE` during preparation.
-3. If the listed activity isn't the one that you need, select **Override activity** and enter the activity class, such as `YOUR_ACTIVITY`, from that component. The selected application already supplies the package name. 
-4. In **Arguments**, enter only the arguments that are required by your app, or leave the field empty.
+3. If the listed activity isn't the one that you need, complete the following steps:
+    1. Select **Override activity**.
+    2. Enter the activity class, such as `YOUR_ACTIVITY`, from that component.
+    The selected application already supplies the package name. 
+4. In **Arguments**, enter only the arguments that are required by your app. If no arguments are required, leave the field empty.
 5. Select **Use advanced mode**, then **Select counters** and open **Add counters from a template**.
 6. Select **Mali G2-Ultra - 5th Generation** for the example GPU and select **Save**. Use the corresponding template for your GPU.
 
-![Streamline template menu with Mali G2-Ultra - 5th Generation highlighted#center](./images/template-counters.png "Select the template matching your GPU. The G2-Ultra template includes neural accelerator charts.")
+![Streamline template menu with Mali G2-Ultra - 5th Generation highlighted#center](./images/template-counters.png "The Mali G2-Ultra template includes neural accelerator counters.")
 
-7. In **Select counters**, confirm that **Mali Timeline events: Perfetto** is in **Events to collect**, then select **Save**. The G2-Ultra template includes this event and the neural activity, utilization, and L2 traffic counters that you'll use later.
+7. In **Select counters**, confirm that **Mali Timeline events: Perfetto** is in **Events to collect**, then select **Save**. The G2-Ultra template includes this event. The template also includes the neural activity, utilization, and L2 traffic counters that you'll use later.
 8. In **Capture settings**, leave **GPU Timeline layer driver** set to **Auto**. With the Perfetto event selected, Streamline deploys and enables the layer automatically.
 
-![Streamline Start view with an example application selected, Override activity enabled, an empty Arguments field, and advanced capture controls visible#center](./images/override_activity.png "Select your own application. Override its activity only when needed, and use your application's arguments if required.")
+![Streamline Start view with an example application selected, Override activity enabled, an empty Arguments field, and advanced capture controls visible#center](./images/override_activity.png "Example capture setup with Override activity enabled and Arguments left empty.")
 
 ## Capture about 30 seconds of data
 
@@ -39,7 +42,7 @@ Unlock the device before starting capture and keep the app visible. If necessary
 2. Run the intended machine learning workload, using the controls or launch configuration for your app to reach it. Keep loading separate from the interval that you want to inspect.
 3. After about 30 seconds of capture, select **Stop capture and analyze**. 
 
-Streamline automatically transfers the required utilities, including `gatord`, and Vulkan profiling layers to the device. If setup fails, check the capture log and the debugging permissions from the preparation page instead of assuming that Timeline data was collected.
+Streamline automatically transfers the required utilities, including `gatord`, and Vulkan profiling layers to the device. If setup fails, check the capture log and debugging permissions.
 
 After capture, you might be prompted to download process images. This optional step copies executables and shared libraries to your computer. Streamline uses this to resolve profiling samples to function names. When debug information and source files are available, Streamline can also resolve profiling samples to source code. This isn't required to inspect neural accelerator (NX) hardware counters and graph-operation statistics.
 

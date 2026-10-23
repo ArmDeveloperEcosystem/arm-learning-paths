@@ -1,10 +1,6 @@
 ---
 title: Profile Arm Neural Technology workloads with the Arm Streamline GUI
 
-draft: true
-cascade:
-    draft: true
-
 description: Profile your Android ML for Vulkan workload with the Arm Streamline GUI, then inspect NX activity, GPU timeline events, and graph-operation costs.
 
 minutes_to_complete: 45
@@ -39,7 +35,7 @@ generated_summary_faq:
   faq_generated_at: '2026-10-23T17:52:54Z'
   faq_source_hash: 560b2a63a796a5c370b3c916b2e3192dd01be07b72252bd540af3da98f74109f
   summary: >-
-    You'll use Arm Streamline to profile an Android ML for Vulkan workload and inspect NX activity, GPU timeline events, and graph-operation costs. First, you'll review how Vulkan graph dispatches can use NX and shader cores. Then, you'll prepare a debuggable app and Android device and capture about 30 seconds in the Streamline GUI. Finally, you'll analyze the neural-related capture data.
+    You'll use Arm Streamline to profile an Android ML for Vulkan workload and inspect NX activity, GPU timeline events, and graph-operation costs. First, you'll review how Vulkan graph dispatches can use NX and shader cores. Then, you'll prepare a debuggable app and Android device and capture about 30 seconds in the Streamline GUI. Finally, you'll analyze the capture using the Mali Timeline and Dispatch Graph Workloads views.
   # faqs:
   # - question: How can I check whether Streamline supports NX profiling?
   #   answer: >-

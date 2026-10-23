@@ -1,5 +1,5 @@
 ---
-title: Understand NX, Streamline, and Project Moku
+title: Understand NX and Project Moku with Streamline
 description: Understand how NX, shader execution, and Vulkan graphs relate to Streamline profiling, with Project Moku as an illustrative workload.
 weight: 2
 
@@ -29,11 +29,11 @@ Counters summarize activity over sampling intervals. Events describe work along 
 
 ## What Project Moku is
 
-Project Moku is an Unreal Engine sample project developed by Arm that demonstrates neural rendering technologies for mobile platforms. It provides a controlled environment for testing Neural Frame Rate Upscaling (NFRU) and complementary neural rendering techniques. It's designed to exercise dedicated neural accelerators on GPUs with built-in neural processing support. For more context, see [the introduction to Project Moku](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/1-introduction_to_moku/).
+Project Moku is an Unreal Engine sample project developed by Arm that demonstrates neural rendering technologies for mobile platforms. It provides a controlled environment for testing Neural Frame Rate Upscaling (NFRU) and complementary neural rendering techniques. Moku is designed to exercise dedicated neural accelerators on GPUs with built-in neural processing support. For more context, see [the introduction to Project Moku](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/1-introduction_to_moku/).
 
-To complete the Learning Path, you'll use your own installed, debuggable Android application with a supported ML for Vulkan workload. [Project Moku](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/1-introduction_to_moku/) is used in the Learning Path as an example.
+To complete the Learning Path, you'll use your own installed, debuggable Android application with a supported ML for Vulkan workload. [Project Moku](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/1-introduction_to_moku/) is used as an example in the Learning Path.
 
-The example captures in the Learning Path use the NFRU configuration of Moku. The scene, settings, and measurements of the captures aren't performance guarantees for your application. The [Arm ML SDK for Vulkan](https://github.com/arm/ai-ml-sdk-for-vulkan) provides tools and documentation for developing applications with these extensions.
+The NFRU configuration of Moku was used for the example captures in the Learning Path. The scene, settings, and measurements of the captures aren't performance guarantees for your application. The [Arm ML SDK for Vulkan](https://github.com/arm/ai-ml-sdk-for-vulkan) provides tools and documentation for developing applications with these extensions.
 
 For details about sample and frame generation, see [Analyze Neural Frame Rate Upscaling using Project Moku](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/).
 
@@ -41,12 +41,12 @@ For details about sample and frame generation, see [Analyze Neural Frame Rate Up
 
 Project Moku screenshots were captured on a [Xiaomi 18 Fold](https://www.mi.com/global/discover/article?id=6357) with a [Mali G2-Ultra NX GPU](https://www.arm.com/products/silicon-ip-multimedia/gpu/mali-g2-ultra-nx). The device display was streamed to the local machine using [`scrcpy`](https://github.com/genymobile/scrcpy).
 
-![Project Moku showing a robot in a red-lit science-fiction corridor in a scrcpy window, with the Content_SM5_NFRU device profile displayed in the debug overlay#center](./images/moku-screenshot.png "Project Moku's CorridorV2 scene running in Unreal Engine 5.6, with NFRU enabled in a debug build.")
+![Project Moku showing a robot in a red-lit science-fiction corridor in a scrcpy window, with the Content_SM5_NFRU device profile displayed in the debug overlay#center](./images/moku-screenshot.png "CorridorV2 scene from Project Moku with NFRU enabled in an Unreal Engine 5.6 debug build.")
 
 {{% /notice %}}
 
 ## What you've learned and what's next
 
-You now know how NX, shader execution, and Vulkan graph dispatches relate to the two Streamline views. You've also learned how Project Moku illustrates the workflow that you'll apply to your own application.
+You now know how NX, shader execution, and Vulkan graph dispatches relate to the two Streamline views. You've also learned about Project Moku and how it's used to demonstrate the workflow that you'll apply to your application.
 
-Next, you'll prepare the tools, device, and your workload.
+Next, you'll prepare the tools, device, and your workload for Streamline.
