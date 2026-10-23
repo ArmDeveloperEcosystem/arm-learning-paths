@@ -1,5 +1,5 @@
 ---
-title: Catch up on what changed
+title: What has changed with Arm Neural Technology
 description: See how NFRU moved from Early Access to a public integration route and how this playbook builds on the Arm Neural Technology Playbook - Evaluate.
 weight: 2
 

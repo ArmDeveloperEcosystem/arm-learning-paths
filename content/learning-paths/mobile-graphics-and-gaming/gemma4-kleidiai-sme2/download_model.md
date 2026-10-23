@@ -63,7 +63,7 @@ The expected SHA-256 checksum is:
 ```
 
 {{% notice Note %}}
-Download the `.litertlm` artifact used by LiteRT-LM. The file is about 2.6 GB.
+Download the `.litertlm` artifact used by LiteRT-LM. The size of the file is about 2.6 GB.
 {{% /notice %}}
 
 ## What you've accomplished and what's next 
