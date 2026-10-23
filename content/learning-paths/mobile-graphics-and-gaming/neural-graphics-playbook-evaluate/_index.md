@@ -1,5 +1,5 @@
 ---
-title: Arm Neural Graphics Playbook - Evaluate
+title: Arm Neural Technology Playbook - Evaluate
 description: Evaluate whether Arm Neural Technology techniques such as NFRU and NSSD are a fit for your game.
 minutes_to_complete: 45
 
@@ -80,6 +80,10 @@ operatingsystems:
     - Windows
 
 further_reading:
+    - resource:
+        title: Arm Neural Technology Playbook - Integrate
+        link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-integrate/
+        type: learningpath
     - resource:
         title: Enable Neural Frame Rate Upscaling in Unreal Engine
         link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/

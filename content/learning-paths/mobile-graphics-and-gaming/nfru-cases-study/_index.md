@@ -88,7 +88,7 @@ further_reading:
         link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/
         type: learningpath
     - resource:
-        title: Arm Neural Graphics Playbook - Evaluate
+        title: Arm Neural Technology Playbook - Evaluate
         link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/
         type: learningpath
     - resource:
