@@ -13,7 +13,9 @@ learning_objectives:
     - Validate simulated speech probabilities against a host-generated reference.
 
 prerequisites:
-    - A Linux host using `x86_64` or `arm64`, or an Apple silicon macOS host
+    - A Linux host using `x86_64` or `arm64` with glibc 2.28 or later, or an Apple silicon host running macOS 15 or later
+    - On Linux, libstdc++.so.6 providing GLIBCXX_3.4.26 or later for the Corstone-320 FVP
+    - Python 3.12 with development headers and virtual-environment support
     - Basic familiarity with PyTorch models and command-line development tools
 
 # START generated_summary_faq
@@ -95,7 +97,7 @@ further_reading:
         type: documentation
     - resource:
         title: Silero VAD Ethos-U example source
-        link: https://github.com/pytorch/executorch/tree/main/examples/arm/silero_vad_example_ethos_u
+        link: https://github.com/pytorch/executorch/tree/3b60683923245cf472b7323426920e15623ba361/examples/arm/silero_vad_example_ethos_u
         type: repository
     - resource:
         title: Silero VAD project

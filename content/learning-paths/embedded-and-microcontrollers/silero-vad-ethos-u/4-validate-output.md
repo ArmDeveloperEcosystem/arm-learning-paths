@@ -60,7 +60,9 @@ Mean abs error: 0.018459
 Threshold mismatches at 0.550: 0
 ```
 
-The comparison confirms that the host and FVP produced the same number of finite probabilities, and the numerical differences stay within tolerance. It also confirms that every frame has the same speech or silence decision.
+The comparison checks that the host and FVP produced the same number of finite probabilities, that the numerical differences stay within the stated tolerances, and that every frame has the same speech or silence decision.
+
+The pinned exporter retains the recurrent state left after generating the host reference, so the FVP starts from a different state. Treat this as a functional check of the example clip's speech decisions; the probability errors include that state difference.
 
 ## What you've accomplished
 
