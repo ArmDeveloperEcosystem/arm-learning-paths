@@ -11,7 +11,7 @@ learning_objectives:
     - Identify how neural accelerator (NX), Vulkan ML workloads, and GPU shader execution relate to a Streamline capture.
     - Prepare your debuggable Android workload for Streamline capture.
     - Collect and open a 30-second workload capture using the Streamline GUI.
-    - Inspect NX activity and graph operations using Mali Timeline and Dispatch Graph Workloads.
+    - Inspect NX activity and graph operations using the Mali Timeline and Dispatch Graph Workloads views.
 
 prerequisites:
     - Your own debuggable Android app, already installed on the device, with a supported ML for Vulkan workload
