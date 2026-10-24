@@ -16,6 +16,10 @@ You will serve Mixture of Experts (MoE) models on Arm CPUs, validate responses, 
 
 MoE layers contain multiple expert networks. For each token, a router selects a subset of those experts.
 
+The following diagram shows the high-level routing flow for an MoE layer:
+
+![MoE routing flow](images/moe-routing.png)
+
 This can reduce compute compared with activating the full model, but it also makes inference performance depend heavily on routing, batching, and optimized expert kernels.
 
 This Learning Path focuses on two MoE paths:
@@ -24,6 +28,8 @@ This Learning Path focuses on two MoE paths:
 - INT8/W8A8 (8-bit weights and activations) MoE inference and benchmarking
 
 ## Understand the models you'll use
+
+This Learning Path compares MoE serving performance before and after vLLM added an optimized unquantized MoE execution path for AArch64. The optimized path enables the CPU FusedMoE kernel on Arm CPUs and accelerates the BF16 expert GEMMs used inside MoE layers.
 
 [Gemma 4 26B-A4B](https://huggingface.co/google/gemma-4-26B-A4B-it) is a multimodal MoE model. You will use its text-generation capability in BF16.
 
@@ -80,7 +86,7 @@ The flags identify the instructions used by the optimized paths:
 W8A8 is a quantization format, so there is no CPU flag named `w8a8`. These checks confirm instruction availability; running the models later in this Learning Path verifies that your vLLM build and model configuration work together.
 
 
-## Install build dependencies
+## Install Dependencies
 
 Install the following packages required for running vLLM on Arm. PyTorch's Inductor backend needs `g++` to compile CPU code during model warmup, even when you install vLLM from a prebuilt wheel. The `curl` and `wget` tools are used for API requests and downloads:
 
@@ -102,14 +108,14 @@ python -m pip install --upgrade pip
 ## Install vLLM for CPU
 
 {{% notice Note %}}
-Use vLLM 0.27.1 with Transformers 5.14.1 for this Learning Path. Newer Transformers versions, including 5.20.2, can cause Gemma 4 startup to fail with `AmbiguousGlobalPerLayerAttributeError`. They expose `head_dim` per layer, while this vLLM release reads it as a global attribute. The command pins Transformers to avoid this mismatch. For details, see the [vLLM Gemma 4 compatibility issue](https://github.com/vllm-project/vllm/issues/51744).
+Use vLLM 0.31.0 for this Learning Path. This version was validated with Gemma 4, GPT-OSS, Qwen3 BF16, and Qwen3 W8A8 on Arm CPUs. The command installs the CPU-specific vLLM wheel used for the benchmark validation. For other versions, see the [vLLM releases page](https://github.com/vllm-project/vllm/releases).
 {{% /notice %}}
 
 Install a CPU-specific build of vLLM:
 
 ```bash
-export VLLM_VERSION=0.27.1
-python -m pip install https://github.com/vllm-project/vllm/releases/download/v${VLLM_VERSION}/vllm-${VLLM_VERSION}+cpu-cp38-abi3-manylinux_2_34_aarch64.whl "transformers==5.14.1" --extra-index-url https://download.pytorch.org/whl/cpu
+export VLLM_VERSION=0.31.0
+python -m pip install "https://github.com/vllm-project/vllm/releases/download/v${VLLM_VERSION}/vllm-${VLLM_VERSION}%2Bcpu-cp38-abi3-manylinux_2_39_aarch64.whl" --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
 If you want to build vLLM from source, follow the instructions in the [Build and Run vLLM on Arm Servers Learning Path](/learning-paths/servers-and-cloud-computing/vllm/vllm-setup/).
@@ -127,9 +133,9 @@ python -c "from importlib.metadata import version; print('transformers:', versio
 The expected output for the package versions used in the public-wheel validation is:
 
 ```output
-vLLM: 0.27.1+cpu
+vLLM: 0.31.0+cpu
 torch: 2.13.0+cpu
-transformers: 5.14.1
+transformers: 5.17.0
 ```
 
 ## Configure vLLM KV cache space

@@ -23,23 +23,6 @@ Use the following model IDs in the `vllm serve` and `curl` commands.
 | Qwen3 BF16 | `Qwen/Qwen3-30B-A3B-Thinking-2507` |
 | Qwen3 W8A8 | `RedHatAI/Qwen3-30B-A3B-Thinking-2507-quantized.w8a8` |
 
-## GPT-OSS tiktoken setup
-
-For GPT-OSS only, prepare the local encoding files used by its Harmony message format in the validated setup. Run these commands in the server terminal before starting GPT-OSS; skip this step for Gemma 4 and Qwen3:
-
-```bash
-mkdir -p tiktoken_encodings
-
-wget -O tiktoken_encodings/o200k_base.tiktoken \
-  https://openaipublic.blob.core.windows.net/encodings/o200k_base.tiktoken
-
-wget -O tiktoken_encodings/cl100k_base.tiktoken \
-  https://openaipublic.blob.core.windows.net/encodings/cl100k_base.tiktoken
-
-export TIKTOKEN_ENCODINGS_BASE="$PWD/tiktoken_encodings"
-export TIKTOKEN_RS_CACHE_DIR="$PWD/tiktoken_encodings"
-```
-
 ## Start a model server
 
 Use the terminal with your virtual environment active and `VLLM_CPU_KVCACHE_SPACE` set. Set the model ID and start the server. For example, to serve Gemma 4 BF16:
