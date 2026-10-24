@@ -3,6 +3,7 @@ from io import BytesIO
 import argparse
 import base64
 import html
+import json
 
 import yaml
 from PIL import Image, ImageChops
@@ -41,7 +42,11 @@ REPO_ROOT = BASE_DIR.parents[1]
 SVG_PATH = BASE_DIR / "learn-social-og-template.svg"
 TITLE_FONT_PATH = BASE_DIR / "fonts" / "Aeonik-Medium.otf"
 META_FONT_PATH = BASE_DIR / "fonts" / "AeonikFono-Regular.otf"
-OUTPUT_PATH = BASE_DIR / "social_image.webp"
+OUTPUT_ROOT = REPO_ROOT / "static" / "social-images"
+DEFAULT_MANIFEST_PATH = BASE_DIR / ".social-card-manifest.json"
+DEFAULT_OUTPUT_PATH = OUTPUT_ROOT / "default.webp"
+DEFAULT_TITLE = "Arm Learning Paths"
+DEFAULT_CONTENT_TYPE = "LEARN ARM"
 
 LEARNING_PATH_ROOT = REPO_ROOT / "content" / "learning-paths"
 INSTALL_GUIDE_ROOT = REPO_ROOT / "content" / "install-guides"
@@ -76,11 +81,32 @@ def parse_args():
     )
     parser.add_argument(
         "content_path",
+        nargs="?",
         help=(
             "Path to a Learning Path directory/_index.md or an install guide .md file."
         ),
     )
-    return parser.parse_args()
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Generate missing or retitled default, Learning Path, and install guide cards.",
+    )
+    parser.add_argument(
+        "--default",
+        action="store_true",
+        help="Generate only static/social-images/default.webp.",
+    )
+    parser.add_argument(
+        "--manifest",
+        type=Path,
+        help="JSON title manifest for --all (defaults to a local ignored file).",
+    )
+    args = parser.parse_args()
+    if sum((bool(args.content_path), args.all, args.default)) != 1:
+        parser.error("provide a content path, --all, or --default")
+    if args.manifest and not args.all:
+        parser.error("--manifest requires --all")
+    return args
 
 
 def resolve_content_path(value: str) -> Path:
@@ -124,6 +150,58 @@ def content_type_for_path(path: Path) -> str:
         "Content path must be under content/learning-paths or content/install-guides: "
         f"{path}"
     )
+
+
+def output_path_for_content(path: Path) -> Path:
+    relative_path = path.relative_to((REPO_ROOT / "content").resolve())
+
+    if path.name == "_index.md" and relative_path.parent != Path("."):
+        relative_path = relative_path.parent.with_name(f"{relative_path.parent.name}.webp")
+    else:
+        relative_path = relative_path.with_suffix(".webp")
+
+    return OUTPUT_ROOT / relative_path
+
+
+def all_content_paths() -> list[Path]:
+    learning_paths = sorted(
+        path for path in LEARNING_PATH_ROOT.rglob("_index.md")
+        if len(path.relative_to(LEARNING_PATH_ROOT).parts) >= 3
+        and not any(
+            part.startswith("_")
+            for part in path.relative_to(LEARNING_PATH_ROOT).parts[:-1]
+        )
+    )
+    install_guides = sorted(
+        path for path in INSTALL_GUIDE_ROOT.rglob("*.md")
+        if (path.parent == INSTALL_GUIDE_ROOT and path.name != "_index.md")
+        or (path.parent != INSTALL_GUIDE_ROOT and path.name == "_index.md")
+    )
+    return learning_paths + install_guides
+
+
+def read_manifest(path: Path) -> dict[str, str]:
+    if not path.exists():
+        print(f"No title manifest at {path}; generating a baseline for all cards.")
+        return {}
+
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict) or not all(
+        isinstance(key, str) and isinstance(value, str)
+        for key, value in data.items()
+    ):
+        raise ValueError(f"Title manifest must map image paths to titles: {path}")
+    return data
+
+
+def write_manifest(path: Path, titles: dict[str, str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = path.with_name(f"{path.name}.tmp")
+    temporary_path.write_text(
+        json.dumps(titles, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    temporary_path.replace(path)
 
 
 def read_front_matter(path: Path) -> dict:
@@ -183,12 +261,15 @@ def font_face_css(path: Path, family: str, weight: int, fallback: str) -> str:
 """
 
 
-def main():
-    args = parse_args()
-    content_path = resolve_content_path(args.content_path)
+def generate_card(content_path: Path):
     raw_title = title_for_path(content_path)
     content_type = content_type_for_path(content_path)
     title = render_title(raw_title, content_type)
+    output_path = output_path_for_content(content_path)
+    render_card(title, content_type, output_path)
+
+
+def render_card(title: str, content_type: str, output_path: Path):
 
     for path in (
         SVG_PATH,
@@ -434,14 +515,74 @@ fitTitle();
         )
 
 
+        output_path.parent.mkdir(parents=True, exist_ok=True)
         image.save(
-            OUTPUT_PATH,
+            output_path,
             format="WEBP",
             quality=96,
             method=6,
         )
 
-    print(f"Wrote: {OUTPUT_PATH}")
+    print(f"Wrote: {output_path}")
+
+
+def main():
+    args = parse_args()
+    if args.content_path:
+        generate_card(resolve_content_path(args.content_path))
+        return
+    if args.default:
+        render_card(DEFAULT_TITLE, DEFAULT_CONTENT_TYPE, DEFAULT_OUTPUT_PATH)
+        return
+
+    manifest_path = args.manifest or DEFAULT_MANIFEST_PATH
+    previous_titles = read_manifest(manifest_path)
+    current_titles = {}
+    paths = all_content_paths()
+    failures = []
+    generated = 0
+    skipped = 0
+    default_key = DEFAULT_OUTPUT_PATH.relative_to(OUTPUT_ROOT).as_posix()
+    current_titles[default_key] = DEFAULT_TITLE
+    if DEFAULT_OUTPUT_PATH.is_file() and previous_titles.get(default_key) == DEFAULT_TITLE:
+        skipped += 1
+        print(f"Up to date: {DEFAULT_OUTPUT_PATH}", flush=True)
+    else:
+        try:
+            render_card(DEFAULT_TITLE, DEFAULT_CONTENT_TYPE, DEFAULT_OUTPUT_PATH)
+            generated += 1
+        except Exception as error:
+            failures.append((DEFAULT_OUTPUT_PATH, error))
+            print(f"Failed: {DEFAULT_OUTPUT_PATH}: {error}", flush=True)
+    for index, path in enumerate(paths, start=1):
+        print(f"[{index}/{len(paths)}] {path.relative_to(REPO_ROOT)}", flush=True)
+        try:
+            resolved_path = path.resolve()
+            output_path = output_path_for_content(resolved_path)
+            key = output_path.relative_to(OUTPUT_ROOT).as_posix()
+            content_type = content_type_for_path(resolved_path)
+            title = render_title(title_for_path(resolved_path), content_type)
+            current_titles[key] = title
+            if output_path.is_file() and previous_titles.get(key) == title:
+                skipped += 1
+                continue
+            render_card(title, content_type, output_path)
+            generated += 1
+        except Exception as error:
+            failures.append((path, error))
+            print(f"Failed: {error}", flush=True)
+
+    print(
+        f"Cards: {generated} generated, {skipped} already present, "
+        f"{len(failures)} failed ({len(paths) + 1} total)."
+    )
+    if failures:
+        for path, error in failures:
+            print(f"  {path.relative_to(REPO_ROOT)}: {error}")
+        raise SystemExit(1)
+    if current_titles != previous_titles:
+        write_manifest(manifest_path, current_titles)
+        print(f"Updated title manifest: {manifest_path}")
 
 
 if __name__ == "__main__":

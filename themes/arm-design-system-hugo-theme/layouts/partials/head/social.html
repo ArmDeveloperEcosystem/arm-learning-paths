@@ -69,12 +69,32 @@ Where it is used:
 <meta property="og:description"  content="{{$desc}}">
 <meta name="twitter:description" content="{{$desc}}">
 
-<!-- Image (2x1 aspect ratio, less than 5Mb) -->
-<meta name="twitter:image" content="{{ .Site.Params.social_image | absURL }}">
-<meta property="og:image"  content="{{ .Site.Params.social_image | absURL }}">
-<meta property="og:image:type" content="image/jpg">
-<meta property="og:image:width" content="1280">
-<meta property="og:image:height" content="640">
+{{/* Use the parent card for content subpages and the page card for entries. */}}
+{{$image := "/social-images/default.webp"}}
+{{if $is_content}}
+    {{$cardPage := .}}
+    {{if and $is_subpage (or (eq .Layout "learningpathall") (ne .Parent.Title "Install Guides"))}}
+        {{$cardPage = .Parent}}
+    {{end}}
+    {{with $cardPage.File}}
+        {{$source := .Path}}
+        {{if eq (path.Base $source) "_index.md"}}
+            {{$image = printf "/social-images/%s.webp" (path.Dir $source)}}
+        {{else}}
+            {{$image = printf "/social-images/%s.webp" (strings.TrimSuffix ".md" $source)}}
+        {{end}}
+    {{end}}
+{{end}}
+{{if not (fileExists (printf "static%s" $image))}}
+    {{$image = "/social-images/default.webp"}}
+{{end}}
+
+<!-- Image (1200x630 WebP) -->
+<meta name="twitter:image" content="{{ $image | absURL }}">
+<meta property="og:image"  content="{{ $image | absURL }}">
+<meta property="og:image:type" content="image/webp">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 
 <!-- Author / Creator -->
 <meta name="author" content="{{$author}}">
