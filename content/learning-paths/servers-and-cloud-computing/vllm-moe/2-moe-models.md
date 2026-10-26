@@ -84,7 +84,7 @@ This improves performance because the expert data is arranged for the fused kern
 
 - The INT8/W8A8 comparison shows the additional benefit of lower-precision MoE execution. W8A8 reduces memory bandwidth pressure by using 8-bit weights and activations. On Arm CPUs with I8MM support, W8A8 can also use SMMLA, Arm's signed INT8 matrix multiply-accumulate instruction, which performs twice as many multiply-accumulate operations per instruction as BFMMLA for BF16. This does not imply a twofold end-to-end serving speedup.
 
-The setup installs the optimized release only. Reproducing the before-and-after comparison also needs the baseline build and configuration, which are pending in this draft.
+The setup installs vLLM 0.31.0 so you can benchmark the current release and compare BF16 with W8A8 on your server. It does not recreate the historical pre-optimization baseline. Reproducing the author's before-and-after speedups requires the original baseline build and configuration, which are not provided here.
 
 ## What you've learned and what's next
 

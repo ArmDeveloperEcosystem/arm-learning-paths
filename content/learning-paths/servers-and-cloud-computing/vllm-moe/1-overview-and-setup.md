@@ -29,7 +29,7 @@ This Learning Path focuses on two MoE paths:
 
 ## Understand the models you'll use
 
-This Learning Path compares MoE serving performance before and after vLLM added an optimized unquantized MoE execution path for AArch64. The optimized path enables the CPU FusedMoE kernel on Arm CPUs and accelerates the BF16 expert GEMMs used inside MoE layers.
+The instructions let you run and benchmark MoE models with vLLM 0.31.0 on your Arm server. The results section also presents the historical before-and-after measurements for the optimized AArch64 MoE path. The optimized path enables the CPU FusedMoE kernel on Arm CPUs and accelerates the BF16 expert GEMMs used inside MoE layers.
 
 [Gemma 4 26B-A4B](https://huggingface.co/google/gemma-4-26B-A4B-it) is a multimodal MoE model. You will use its text-generation capability in BF16.
 
