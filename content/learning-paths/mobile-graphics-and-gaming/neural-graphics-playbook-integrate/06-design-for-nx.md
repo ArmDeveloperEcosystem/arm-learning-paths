@@ -36,7 +36,7 @@ Use Model Gym in four steps:
 
 1. Reproduce the issue with a prebuilt model and fixed data.
 2. Prepare a fixed training and evaluation dataset that represents the measured issue.
-3. Follow [Train and evaluate NFRU models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym-nfru/) to train or fine-tune an NFRU model, then compare quality before and after quantization.
+3. Follow [Train and evaluate NFRU models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym-nfru/) to train or fine-tune an NFRU model. Then, compare quality before and after quantization.
 4. Follow [Prepare models for Arm Neural Technology](/learning-paths/mobile-graphics-and-gaming/preparing-models-for-nt/) to export and validate the artifact.
 
 ## Connect model estimates to measured results
@@ -47,6 +47,8 @@ When you have supported NX hardware, follow [Profile Arm Neural Technology workl
 
 Change one variable at a time, and validate each hardware-aware design choice against your workload.
 
-## What you've learned
+## What you've accomplished and what's next
 
-You now have a bounded model workflow, from a reproducible gap through training, quantization, and export. Next, use the model toolkit to connect compatibility checks and performance estimates to device evidence.
+You now have a bounded model workflow, from a reproducible gap through training, quantization, and export. 
+
+Next, you'll use the model toolkit to connect compatibility checks and performance estimates to device evidence.

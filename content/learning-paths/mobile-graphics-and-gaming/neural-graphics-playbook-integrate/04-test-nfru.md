@@ -53,7 +53,7 @@ You have enough information now to make one of the following decisions:
 - Iterate if the failure is reproducible and has a credible fix.
 - Stop if quality, latency, sustained cost, or fallback misses the product target.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
 You now have a controlled NFRU result and a clear decision. 
 

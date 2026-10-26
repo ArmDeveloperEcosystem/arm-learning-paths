@@ -7,7 +7,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## See the larger opportunity
+## See the larger opportunity with NSSD
 
 Neural Super Sampling and Denoising (NSSD) reconstructs a clean, high-resolution frame from a low-resolution, noisy render. This can make low sample counts useful for advanced lighting and ray tracing. To learn more about the algorithm and Neural Dawn implementation, see the Arm [NSSD presentation](https://community.arm.com/cfs-file/__key/communityserver-blogs-components-weblogfiles/00-00-00-20-66/2026_2D00_mmg_2D00_liam_2D00_nssd.pdf).
 

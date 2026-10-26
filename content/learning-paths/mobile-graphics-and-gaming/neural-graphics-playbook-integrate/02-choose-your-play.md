@@ -11,14 +11,14 @@ layout: learningpathall
 
 Name the player-facing outcome, then choose the technology and integration surface. Choose between Neural Frame Rate Upscaling (NFRU), Neural Super Sampling (NSS), and Neural Super Sampling and Denoising (NSSD). If the fit is still unclear, return to the [evaluation guidance in Arm Neural Technology Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/04-evaluating-fit-for-your-game/).
 
-Compare the routes before you choose where to start. NFRU, NSS, and NSSD target Arm GPUs with dedicated neural accelerators (NX). The ML Emulation Layer supports desktop development and testing, but its performance isn't representative of production hardware.
+Compare the routes before you choose where to start. NFRU, NSS, and NSSD target Arm GPUs with dedicated neural accelerators (NX). The ML Emulation Layer supports desktop development and testing. However, its performance isn't representative of production hardware.
 
 | Technology or route | Use case | Availability | Prerequisites | Key constraints | Next step |
 | --- | --- | --- | --- | --- | --- |
-| NFRU | Present smoother motion without rendering every displayed frame | Public plugins for Unreal Engine 5.4 and 5.6, and the open SDK | Stable base rate of at least 30 FPS for a 60 FPS target; correct depth and motion-vector inputs; measurable quality and pacing targets | Adds processing and latency and needs frame pacing and fallback behavior | Use the [NFRU plugin](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/) or [integrate the SDK](https://github.com/arm/neural-graphics-sdk-for-game-engines/blob/main/docs/user_guide.md#integrate-the-sdk). |
-| NSS | Lower spatial rendering cost through neural upscaling | Public plugins for Unreal Engine 4.27, 5.4, and 5.6, and the open SDK | Arm Neural Graphics plugin in a supported Unreal Engine project, or SDK integration in another engine | The plugin includes the model integration, and desktop emulation is for development and testing only | Use the [NSS plugin](/learning-paths/mobile-graphics-and-gaming/nss-unreal/) or [NSS SDK checklist](https://github.com/arm/neural-graphics-sdk-for-game-engines/blob/main/docs/user_guide.md#neural-super-sampling-integration-checklist). |
-| NSSD | Reconstruct advanced lighting from low-resolution, noisy rendering | Early Access exploration with Arm, not a public product or plugin | A ray-traced lighting use case and a team prepared to explore the technology with Arm | Operates in screen space on scene color after ray-traced lighting; it isn't a general denoiser for arbitrary noisy inputs | [Apply to the Arm Neural Technology Early Access Program](https://developer.arm.com/mobile-graphics-and-gaming/neural-technology/early-access-program). |
-| Custom model work | Address a quality or performance gap that the published model doesn't meet | Model Gym supports NSS and NFRU model workflows | A reproducible gap, fixed training and evaluation data, and capacity for model work | Start with the published model and customize only for a measured reason | Start with [Neural Graphics Model Gym](https://github.com/arm/neural-graphics-model-gym). |
+| NFRU | Present smoother motion without rendering every displayed frame | Public plugins for Unreal Engine 5.4 and 5.6, and the open SDK | Stable base rate of at least 30 FPS for a 60 FPS target; correct depth and motion-vector inputs; measurable quality and pacing targets | NFRU adds processing and latency and needs frame pacing and fallback behavior. | Use the [NFRU plugin](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/) or [integrate the SDK](https://github.com/arm/neural-graphics-sdk-for-game-engines/blob/main/docs/user_guide.md#integrate-the-sdk). |
+| NSS | Lower spatial rendering cost through neural upscaling | Public plugins for Unreal Engine 4.27, 5.4, and 5.6, and the open SDK | Arm Neural Graphics plugin in a supported Unreal Engine project, or SDK integration in another engine | The plugin includes the model integration. Desktop emulation is for development and testing only. | Use the [NSS plugin](/learning-paths/mobile-graphics-and-gaming/nss-unreal/) or [NSS SDK checklist](https://github.com/arm/neural-graphics-sdk-for-game-engines/blob/main/docs/user_guide.md#neural-super-sampling-integration-checklist). |
+| NSSD | Reconstruct advanced lighting from low-resolution, noisy rendering | Early Access exploration with Arm, not a public product or plugin | A ray-traced lighting use case and a team prepared to explore the technology with Arm | NSSD operates in screen space on scene color after ray-traced lighting. It isn't a general denoiser for arbitrary noisy inputs. | [Apply to the Arm Neural Technology Early Access Program](https://developer.arm.com/mobile-graphics-and-gaming/neural-technology/early-access-program). |
+| Custom model work | Address a quality or performance gap that the published model doesn't meet | Model Gym workflows for NSS and NFRU models | A reproducible gap, fixed training and evaluation data, and capacity for model work | Start with the published model. Customize only for a measured reason. | Start with [Neural Graphics Model Gym](https://github.com/arm/neural-graphics-model-gym). |
 
 Unreal Engine 4.27 provides only NSS and uses Neural Graphics SDK v1.0.1. Unreal Engine 5.4 and 5.6 provide NSS and NFRU through public release v1.1.0. The Unreal Engine 5.5 plugin is deprecated and isn't included in the current release. Follow the version-specific setup instructions for [Unreal Engine 4.27](https://github.com/arm/neural-graphics-for-unreal/blob/main/UE4.27/README.md), [Unreal Engine 5.4](https://github.com/arm/neural-graphics-for-unreal/blob/main/UE5.4/README.md), or [Unreal Engine 5.6](https://github.com/arm/neural-graphics-for-unreal/blob/main/UE5.6/README.md).
 
@@ -30,7 +30,7 @@ NFRU is a credible candidate when your game has the following characteristics:
 
 - A stable base frame rate of at least 30 FPS before frame generation when targeting 60 FPS presentation
 - Correct depth and motion-vector inputs
-- A quality target you can test in motion
+- A quality target that you can test in motion
 - Enough latency tolerance and a fallback for unsupported devices
 
 Use the [Project Moku frame-pacing analysis](/learning-paths/mobile-graphics-and-gaming/nfru-cases-study/7-nfru_performance/) to examine the timing conditions.
@@ -51,7 +51,7 @@ The ML Emulation Layer is for development and testing only. Don't use it in prod
 
 Use the linked Arm Neural Graphics SDK Developer Guide sections for commands and API details as you complete the steps.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You now have a starting route based on your needs. 
 

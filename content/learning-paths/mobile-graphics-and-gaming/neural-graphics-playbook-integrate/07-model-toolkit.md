@@ -26,7 +26,7 @@ Keep estimates and measurements separate. Neither tool replaces the image-qualit
 
 Start with the MLIA Learning Path when you have a supported model input and want to investigate compatibility or compare model variants. Its development-host workflow uses public quantized MobileNet models to demonstrate conversion, operator compatibility checks, and the NX Performance Estimator. You don't need an NX device for those estimates.
 
-By following the MobileNet examples, you learn the assessment workflow. However, they aren't Neural Super Sampling (NSS) or Neural Frame Rate Upscaling (NFRU) models. Check the supported input formats and operators before applying that workflow to your own model. Don't assume that every artifact exported by your training workflow is accepted directly.
+By following the MobileNet examples, you learn the assessment workflow. However, the examples aren't Neural Super Sampling (NSS) or Neural Frame Rate Upscaling (NFRU) models. Check the supported input formats and operators before applying that workflow to your own model. Don't assume that every artifact exported by your training workflow is accepted directly.
 
 Compare candidates under the same target profile and compiler configuration. Use the reports to select a change worth testing. A lower estimated cost doesn't prove that your model preserves quality or improves frame pacing.
 
@@ -51,7 +51,7 @@ Before choosing a candidate, check that your evidence answers four questions:
 
 If you don't yet have NX hardware, record the compatibility findings and estimates that you have. Leave device validation open. Don't turn a promising estimate into a deployment claim.
 
-## What you've learned
+## What you've learned and what's next
 
 You've learned that you can use MLIA to assess supported models before deployment. You can use Streamline to investigate neural graphics execution in your application. You know what evidence MLIA and Streamline provide, and where device and quality validation are still needed. 
 

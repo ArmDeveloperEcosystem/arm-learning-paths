@@ -19,7 +19,7 @@ NFRU generates an intermediate frame between neighboring rendered frames. It use
 
 1. Estimate motion: Optical flow estimates dense pixel-level movement between rendered frames. Engine motion vectors provide additional information about projected scene movement.
 2. Generate the frame: NFRU aligns candidates from neighboring frames. A neural network combines them and resolves missing or conflicting information.
-3. Pace presentation: Rendered and generated frames must reach the display at an even cadence. You can use the SDK component or own frame pacing in your engine.
+3. Pace presentation: Rendered and generated frames need to reach the display at an even cadence. You can use the SDK component or own frame pacing in your engine.
 
 Your engine supplies color, depth, and motion vectors. It also supplies camera data and metadata. The [SDK API workflow](https://github.com/arm/neural-graphics-sdk-for-game-engines/blob/main/docs/user_guide.md#api-interface) provides the exact dispatch sequence.
 
@@ -39,7 +39,7 @@ Your game owns the following behavior:
 
 Use the [NFRU integration checklist](https://github.com/arm/neural-graphics-sdk-for-game-engines/blob/main/docs/user_guide.md#neural-frame-rate-upscaling-integration-checklist) as the implementation reference.
 
-## What you've learned
+## What you've learned and what's next
 
 You've learned how NFRU combines motion estimation, neural composition, and frame pacing. 
 

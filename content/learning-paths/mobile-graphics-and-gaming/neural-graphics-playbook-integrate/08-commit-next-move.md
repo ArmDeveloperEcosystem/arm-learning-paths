@@ -22,13 +22,13 @@ Carry the following decisions forward:
 
 Capture the result in a short integration brief. Record the chosen route, representative test content, measurable targets, and named owners.
 
-Include the [model toolkit evidence](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-integrate/07-model-toolkit/) relevant to your route. Evidence can include ML Inference Advisor (MLIA) compatibility findings and estimates for supported models. It can also include Streamline captures when you have a supported neural accelerator (NX) target. 
+Include the [model toolkit evidence](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-integrate/07-model-toolkit/) relevant to your route. Evidence can include Arm ML Inference Advisor (MLIA) compatibility findings and estimates for supported models. It can also include Streamline captures when you have a supported neural accelerator (NX) target. 
 
 Label estimates and measurements separately, record any outstanding device validation, and define the fallback.
 
 ## The next chapter: deploy
 
-The next turning point comes when NX devices reach the market. The question will change from *can this work for your game?* to *how do you deploy it on the devices players use?*
+The next turning point comes when NX devices reach the market. The question changes from whether this can work for your game to how you can deploy it on the devices that players use.
 
 The third and final playbook will follow that path from a proven integration to a shipping build. The playbook will cover how to deploy the content prepared here and validate it on NX hardware. It will also include guidance to measure production performance and power, and plan support across devices with different capabilities.
 
