@@ -85,44 +85,52 @@ other applications idle when comparing the builds.
 ## Compare prefill and decode
 
 Read `Prefill Speed` and `Decode Speed` in tokens per second. Discard the first
-iteration as warm-up, then average iterations 2 and 3 for each build and thread
-count. Calculate the changes separately:
+iteration as warm-up, then average the second and third iterations for each build and thread
+count. 
+
+Calculate the changes separately:
 
 ```text
 throughput change (%) = 100 * (optimized throughput / baseline throughput - 1)
 ```
 
-A positive value means higher throughput; a negative value is a regression.
+A positive value means higher throughput, and a negative value is a regression.
 Prefill and decode scale differently, so compare both phases at both thread
 counts.
 
 {{% notice Note %}}
 If you see `Failed to get prefill profile summary` or its decode equivalent with
-profiling disabled, check that all three iterations finish and the command exits
+profiling disabled, check that all three iterations finish. Also check that the command exits
 successfully. Collect operator profiles separately to avoid timing overhead.
 {{% /notice %}}
 
 ## Compare two device examples
 
-These examples use LiteRT-LM v0.16.1 and KleidiAI v1.31.0 with the same model
-and benchmark settings: 1,024 prefill tokens, 256 decode tokens, and disabled
-caches and profiling. Values are the mean of iterations 2 and 3; percentage
+The following examples use LiteRT-LM v0.16.1 and KleidiAI v1.31.0 with the same model
+and benchmark settings: 
+
+- 1,024 prefill tokens
+- 256 decode tokens
+- Disabled caches and profiling
+
+Values are the mean of the second and third iterations. Percentage
 changes compare the optimized build with the baseline.
 
-| Device | CPU threads | Prefill tokens/s | Prefill change | Decode tokens/s | Decode change |
+| Device | CPU threads | Prefill tokens per second | Prefill change | Decode tokens per second | Decode change |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Apple M4 Pro | 1 | 137.79 | −3.4% | 17.40 | +53.6% |
 | Apple M4 Pro | 4 | 458.62 | +0.3% | 25.91 | +12.8% |
 | Xiaomi 2608BPX34C | 1 | 75.35 | +16.3% | 10.10 | +44.5% |
 | Xiaomi 2608BPX34C | 4 | 240.86 | +2.0% | 17.54 | +4.2% |
 
-The Mac uses unrestricted CPU scheduling; Android uses CPUs 4–7. Frequencies
+The Mac uses unrestricted CPU scheduling, while the Android uses CPUs 4–7. Frequencies
 aren't fixed. The small Mac prefill changes and Android four-thread changes are
 within observed run variation, so results will vary by device and conditions.
 
 In a separate Android comparison, enabling SME2 improves four-thread prefill by
-53.7% and lowers decode by 9.1%. That comparison includes all SME2 kernels;
-the table isolates the static INT2 addition.
+53.7% and lowers decode by 9.1%. 
+
+That comparison includes all SME2 kernels. The table isolates the static INT2 addition.
 
 {{% notice Note %}}
 For Android, you also need an SME2-capable phone, the Android SDK, NDK r28b or
@@ -151,8 +159,9 @@ DYLD_LIBRARY_PATH="$root/LiteRT-LM/prebuilt/macos_arm64" "$binary" \
   --disable_cache=true --async=false
 ```
 
-Confirm that the answer identifies Paris. Collect operator evidence with a
-separate short benchmark:
+Confirm that the answer identifies Paris. 
+
+Collect operator evidence with a separate short benchmark:
 
 ```bash
 DYLD_LIBRARY_PATH="$root/LiteRT-LM/prebuilt/macos_arm64" "$binary" \
@@ -165,6 +174,9 @@ DYLD_LIBRARY_PATH="$root/LiteRT-LM/prebuilt/macos_arm64" "$binary" \
 Look for `Fully Connected (NC, PQS8, QC2W)` in the summary to confirm that the
 static INT2 SME2 path ran. Keep profiling disabled for timed measurements.
 
+## What you've accomplished
+
 You've benchmarked both builds on macOS, compared prefill and decode, and
-verified the accelerated operator. Use the same settings when testing another
-SME2 device.
+verified the accelerated operator. 
+
+You can use the same settings when testing another SME2 device.
