@@ -16,7 +16,7 @@ The benchmark sends requests to the vLLM OpenAI-compatible API server at:
 /v1/chat/completions
 ```
 
-Start the model server first using the commands from [Run MoE inference with vLLM](../3-run-inference/), and keep it running in one terminal. Then run the benchmark command from another terminal.
+Start the model server first using the commands from [Run MoE inference with vLLM](/learning-paths/servers-and-cloud-computing/vllm-moe/3-run-inference/), and keep it running in one terminal. Then, run the benchmark command from another terminal.
 
 In the benchmark terminal, change to the directory where you created `vllm_env_new`. Activate that environment and set `MODEL` to match the running server:
 
@@ -31,11 +31,11 @@ Download the full ShareGPT dataset into this directory:
 wget https://huggingface.co/datasets/anon8231489123/ShareGPT_Vicuna_unfiltered/resolve/main/ShareGPT_V3_unfiltered_cleaned_split.json
 ```
 
-The reported results use subsets selected with each model tokenizer for approximately 512 input tokens. Downloading the full dataset does not create those subsets. Create the model-specific subsets before running the benchmark commands.
+The reported results use subsets selected with each model tokenizer for approximately 512 input tokens. Downloading the full dataset doesn't create those subsets. Create the model-specific subsets before running the benchmark commands.
 
 ## Create ShareGPT prompt subsets
 
-Create a file named `create_sharegpt_512_subsets.py`:
+Create a file named `create_sharegpt_512_subsets.py` with the following code:
 
 ```python
 import json
@@ -84,7 +84,7 @@ Run the script:
 python create_sharegpt_512_subsets.py
 ```
 
-This creates the subset files used by the benchmark commands:
+This creates the subset files that are used by the benchmark commands:
 
 ```text
 sharegpt_gemma4_512.json
@@ -92,9 +92,9 @@ sharegpt_gptoss_512.json
 sharegpt_qwen_512.json
 ```
 
-## Benchmark setup
+## Review benchmark setup
 
-The benchmark setup used in this Learning Path is:
+The benchmark setup that you'll use includes the following configuration:
 
 ```text
 Dataset: ShareGPT prompt subsets
@@ -108,13 +108,13 @@ Concurrency values: 4, 8, 16, 32
 Benchmark tool: vllm bench serve
 ```
 
-Greedy decoding is configured with `--top-p 1 --temperature 0 --top-k 1`. This selects the highest-probability next token instead of sampling. It does not guarantee identical responses across different builds or precision settings.
+Greedy decoding is configured with `--top-p 1 --temperature 0 --top-k 1`. This selects the highest-probability next token instead of sampling. It doesn't guarantee identical responses across different builds or precision settings.
 
-When prefix caching is enabled, repeating `vllm bench serve` against the same server can reuse prompts from earlier benchmark runs and inflate throughput. To avoid cache reuse across runs, start a fresh vLLM server for each concurrency value. Warmup requests can still populate the cache within a run; keep the warmup and cache settings consistent across comparisons.
+When prefix caching is enabled, repeating `vllm bench serve` against the same server can reuse prompts from earlier benchmark runs and inflate throughput. To avoid cache reuse across runs, start a fresh vLLM server for each concurrency value. Warmup requests can still populate the cache within a run. Keep the warmup and cache settings consistent across comparisons.
 
 ## Run the benchmark
 
-Once the Gemma 4 subset is available in your current directory, run:
+After the Gemma 4 subset is available in your current directory, run the benchmark:
 
 ```bash
 export C=4
@@ -145,7 +145,7 @@ vllm bench serve \
 
 Repeat the command with `C=8`, then `C=16`, then `C=32`. Restart the server and wait for it to become ready before each run. Keep the model, dataset, and server settings unchanged while varying concurrency.
 
-For each additional model, update `MODEL` in both terminals, restart the server, and replace the dataset and result filename arguments. Use distinct result filenames for each model and precision to avoid overwriting earlier runs:
+For each additional model, update `MODEL` in both terminals. Then, restart the server and replace the dataset and result filename arguments. Use distinct result filenames for each model and precision to avoid overwriting earlier runs:
 
 | Model | Required subset file | Example result filename |
 | --- | --- | --- |
@@ -154,13 +154,18 @@ For each additional model, update `MODEL` in both terminals, restart the server,
 | Qwen3 BF16 | `sharegpt_qwen_512.json` | `qwen3_bf16_sharegpt_mc${C}.json` |
 | Qwen3 W8A8 | `sharegpt_qwen_512.json` | `qwen3_w8a8_sharegpt_mc${C}.json` |
 
-Use the same Qwen3 subset for both precisions. Record CPU thread binding, server arguments, package versions, and any changes to the KV-cache budget alongside your results.
+Use the same Qwen3 subset for both precisions. Record the following values alongside your results:
 
-## Metrics
+- CPU thread binding
+- Server arguments
+- Package versions
+- Any changes to the key-value (KV) cache budget 
+
+## Review metrics
 
 Check that all 128 measured requests completed successfully before interpreting performance. Investigate failed requests in the server logs.
 
-Use the summary and saved JSON to compare these metrics at the same concurrency:
+Use the summary and saved JSON to compare the following metrics at the same concurrency:
 
 | Metric | Meaning | Preferred direction |
 | --- | --- | --- |
@@ -170,7 +175,9 @@ Use the summary and saved JSON to compare these metrics at the same concurrency:
 | TTFT | Time to first token, reported in milliseconds | Lower |
 | TPOT | Time per output token after the first, reported in milliseconds | Lower |
 
-The command reports the 50th, 95th, and 99th percentiles for TTFT and TPOT. Higher percentiles help you assess latency for slower requests. Compare actual input and output token counts as well as throughput, because different response lengths change the amount of work performed.
+The command reports the 50th, 95th, and 99th percentiles for TTFT and TPOT. Higher percentiles help you assess latency for slower requests.  
+
+Different response lengths change the amount of work performed. You should therefore compare actual input and output token counts as well as throughput.
 
 ## What you've accomplished and what's next
 
