@@ -16,7 +16,7 @@ The benchmark sends requests to the vLLM OpenAI-compatible API server at:
 /v1/chat/completions
 ```
 
-Start the model server first using the commands from [Run MoE inference with vLLM](/learning-paths/servers-and-cloud-computing/vllm-moe/3-run-inference/), and keep it running in one terminal. Then, run the benchmark command from another terminal.
+Start the model server first using the commands from [Run mixture of experts (MoE) inference with vLLM](/learning-paths/servers-and-cloud-computing/vllm-moe/3-run-inference/), and keep it running in one terminal. Then, run the benchmark command from another terminal.
 
 In the benchmark terminal, change to the directory where you created `vllm_env_new`. Activate that environment and set `MODEL` to match the running server:
 

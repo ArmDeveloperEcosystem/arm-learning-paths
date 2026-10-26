@@ -1,7 +1,7 @@
 ---
 title: Run and benchmark vLLM mixture of experts models on Arm CPUs
 
-description: Learn how to run and benchmark BF16 and INT8/W8A8 Mixture of Experts models with vLLM on Arm CPUs.
+description: Learn how to run and benchmark BF16 and INT8/W8A8 mixture of experts models with vLLM on Arm CPUs.
     
 minutes_to_complete: 90
 

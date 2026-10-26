@@ -8,10 +8,6 @@ layout: learningpathall
 
 ## Interpret the reported results
 
-{{% notice Note %}}
-You benchmarked vLLM 0.31.0 and will compare BF16 with W8A8 on your server. Your measurements can vary with hardware, package versions, server settings, and system load.
-{{% /notice %}}
-
 The ShareGPT ~512 input-token benchmarks focus on serving performance only. They compare the following metrics across BF16 and INT8/W8A8 runs:
 
 - Request throughput
@@ -25,11 +21,15 @@ The benchmark requested 512 output tokens and used `vllm bench serve`.
 
 Throughput speedup is optimized throughput divided by baseline throughput. A `3.25x` speedup means a 225% increase. Latency reduction is `(baseline latency - optimized latency) / baseline latency × 100%`. In the Qwen3 plot, latency speedup instead means baseline latency divided by optimized latency. Compare matching concurrency values and workloads.
 
+{{% notice Note %}}
+Your measurements can vary with hardware, package versions, server settings, and system load.
+{{% /notice %}}
+
 ### Gemma 4 BF16 MoE
 
 Gemma 4 was benchmarked with ShareGPT ~512 input-token prompt subsets.
 
-The reported optimized BF16 MoE runs improve Gemma 4 request throughput by around `3.25x` to `3.80x`, depending on concurrency.
+The reported optimized BF16 mixture of experts (MoE) runs improve Gemma 4 request throughput by around `3.25x` to `3.80x`, depending on concurrency.
 
 | Prompt subset | Requests per second speedup | Output tokens per second speedup | Mean TPOT reduction |
 | --- | ---: | ---: | ---: |
