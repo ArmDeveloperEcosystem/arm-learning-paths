@@ -154,6 +154,20 @@ If successful, you should see output similar to the following.
 ╰───────────────────────────────────────────────────────────────────────────────╯
 ```
 
+{{% notice Troubleshooting Tip %}}
+
+Compute Flow uses prebuilt, optimized dependency binaries where available. Some dependencies, such as llama.cpp, are first checked on your local machine. A preinstalled version may be incompatible with Compute Flow and cause build errors.
+
+You can build the supported runtime dependencies from their pinned source revisions instead with the following command, although this takes longer:
+
+```bash
+compute-flow build native --from-source
+```
+
+Alternatively, either update the dependency causing the error to a compatible version or uninstall the local version to allow Compute Flow to build just the missing depencencies from source.
+
+{{% /notice %}}
+
 The build downloads optimized macOS Arm64 runtimes such as LiteRT, ExecuTorch, and ONNX Runtime with support for KleidiAI, packages them with your installed brick implementations in an application SDK for C++ applications, and installs Python bindings so you can use the same native functionality from Python.
 
 ```output
@@ -192,23 +206,6 @@ The build downloads optimized macOS Arm64 runtimes such as LiteRT, ExecuTorch, a
 ```
 
 The second command confirms that your active environment can load the native module. If the import fails, check that the build completed successfully and that the same virtual environment is active. A dependency download error needs to be resolved before the bindings can be built.
-
-{{% notice Troubleshooting %}}
-If the build fails with `ld: tapi error`, your compiler and macOS SDK may be incompatible. From the checkout root, with your virtual environment active, select matching Apple tools:
-
-```bash
-export CC="$(xcrun --find clang)"
-export CXX="$(xcrun --find clang++)"
-export SDKROOT="$(xcrun --sdk macosx --show-sdk-path)"
-```
-
-Delete the generated `build_native` directory to clear the saved compiler settings, then rebuild in the same terminal:
-
-```bash
-rm -rf build_native
-compute-flow build native
-```
-{{% /notice %}}
 
 ## Create the Python application
 
