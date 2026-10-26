@@ -116,7 +116,7 @@ For higher rate limits and faster downloads from Hugging Face, set the optional 
 
 ```bash
 compute-flow update
-compute-flow model install stt:moonshine moonshine-base-en
+compute-flow model install stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic
 compute-flow model install lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation
 compute-flow model install tts:qwen3-tts qwen3-tts-0-6b-custom-voice
 ```
@@ -125,16 +125,14 @@ Each `model install` command installs the brick source, if needed, and its model
 
 | Brick | Model package | Pipeline role |
 | --- | --- | --- |
-| `stt:moonshine` | Moonshine Base English, FP32 | Recognize the English recording |
+| `stt:parakeet-tdt` | Parakeet TDT 0.6B v3, dynamic INT8 | Recognize the English recording |
 | `lm_text:lm-text-generic` | Hy-MT2 1.8B, 2-bit | Translate the transcription into French |
 | `tts:qwen3-tts` | Qwen3-TTS 0.6B Custom Voice | Generate French speech |
-
-Moonshine Base English recognizes English only and uses ONNX Runtime with 32-bit floating-point (FP32) models. It expects 16 kHz audio.
 
 Models are downloaded to the `~/.compute-flow` directory by default.
 
 ```bash
-compute-flow model info stt:moonshine moonshine-base-en
+compute-flow model info stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic
 compute-flow model info lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation
 compute-flow model info tts:qwen3-tts qwen3-tts-0-6b-custom-voice
 ```
@@ -160,13 +158,13 @@ If successful, you should see output similar to the following.
 
 Compute Flow uses prebuilt, optimized dependency binaries where available. Some dependencies, such as llama.cpp, are first checked on your local machine. A preinstalled version may be incompatible with Compute Flow and cause build errors.
 
-In the first instance, **either update the dependency causing the error to a compatible version or uninstall the local version** to allow Compute Flow to build just the missing depencencies from source.
-
-As a fallback, you can build the supported runtime dependencies from their pinned source revisions with the following command, although this will take up to 1 hour so we strongly recommend attempting the steps above before building from source:
+You can build the supported runtime dependencies from their pinned source revisions instead with the following command, although this takes longer:
 
 ```bash
 compute-flow build native --from-source
 ```
+
+Alternatively, either update the dependency causing the error to a compatible version or uninstall the local version to allow Compute Flow to build just the missing depencencies from source.
 
 {{% /notice %}}
 
@@ -329,24 +327,24 @@ The Qwen3-TTS manifest filename includes `en`, but the script sets its `language
 
 ## Translate the packaged recording
 
-Resolve the package locations through Brick Manager instead of hard-coding cache paths. Then run your application using the sample supplied with Moonshine:
+Resolve the package locations through Brick Manager instead of hard-coding cache paths. Then run your application using the sample supplied with Parakeet:
 
 ```bash
-MOONSHINE_PACKAGE="$(compute-flow model path stt:moonshine moonshine-base-en)"
+PARAKEET_PACKAGE="$(compute-flow model path stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic)"
 HY_MT2_PACKAGE="$(compute-flow model path lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation)"
 QWEN3_TTS_PACKAGE="$(compute-flow model path tts:qwen3-tts qwen3-tts-0-6b-custom-voice)"
 
 python audio_translation_example/audio_translation.py \
-  --stt-manifest "$MOONSHINE_PACKAGE/moonshine_manifest_base_en.json" \
+  --stt-manifest "$PARAKEET_PACKAGE/parakeet_tdt_0_6b_v3_manifest.json" \
   --translation-manifest "$HY_MT2_PACKAGE/hy_mt2_1_8b_manifest.json" \
   --tts-manifest "$QWEN3_TTS_PACKAGE/qwen3_tts_custom_voice_en_manifest.json" \
-  --input "$MOONSHINE_PACKAGE/samples/beckett.wav" \
+  --input "$PARAKEET_PACKAGE/samples/beckett.wav" \
   --source-language English \
   --destination-language French \
   --output translated_french.wav
 ```
 
-The application prints `Transcription:`, `Translation:`, and `Saved:` lines alongside the runtime logs. The following illustrative output shows these lines, with the checkout path shortened. Your transcription and translation can differ:
+The application prints `Transcription:`, `Translation:`, and `Saved:` lines alongside the runtime logs. The output from one run is shown here, with the checkout path shortened:
 
 ```output
 Transcription: Ever tried, ever failed. No matter. Try again. Fail again. Fail better.
@@ -354,7 +352,7 @@ Translation: Avez-vous déjà essayé, avez-vous déjà échoué. Peu importe. E
 Saved: <checkout>/translated_french.wav
 ```
 
-Check that the transcription matches the English recording and that the translation preserves its meaning. Generated wording and punctuation can vary and can contain errors: the illustrative output contains the incorrect word "Écheclez". Completing the pipeline verifies the integration; review the generated text and speech separately for translation quality.
+Check that the transcription matches the English recording and that the translation preserves its meaning. Generated wording and punctuation can vary and can contain errors: this run produced the incorrect word "Écheclez". Completing the pipeline verifies the integration; review the generated text and speech separately for translation quality.
 
 
 ## What you've accomplished
