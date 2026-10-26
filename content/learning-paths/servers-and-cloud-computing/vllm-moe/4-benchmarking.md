@@ -137,7 +137,7 @@ vllm bench serve \
   --num-warmups 5
 ```
 
-`--max-concurrency` limits simultaneous requests. `--num-prompts` sets the total number of requests, and `--num-warmups` sends warmup requests before measurement. The benchmark prints a summary and saves JSON to `bench_out/gemma4_sharegpt_mc4.json` for this run.
+`--max-concurrency` limits simultaneous requests. `--num-prompts` sets the total number of requests, and `--num-warmups` sends warmup requests before measurement. The benchmark prints a summary and saves JSON to `bench_out/gemma4_bf16_sharegpt_mc4.json` for this run.
 
 `--sharegpt-output-len 512` requests up to 512 generated tokens. Responses can stop earlier, so inspect actual output token counts when comparing throughput.
 

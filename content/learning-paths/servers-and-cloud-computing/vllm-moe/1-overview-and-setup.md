@@ -11,9 +11,9 @@ layout: learningpathall
 
 [vLLM](https://docs.vllm.ai/en/latest/) is an open-source, high-throughput inference and serving engine for large language models (LLMs). vLLM provides an OpenAI-compatible API server and benchmarking tools for measuring online serving performance.
 
-You'll serve mixture of experts (MoE) models on Arm CPUs, validate responses, and measure serving throughput and latency.
-
 ## Understand MoE models
+
+You'll serve mixture of experts (MoE) models on Arm CPUs, validate responses, and measure serving throughput and latency.
 
 MoE layers contain multiple expert networks. For each token, a router selects a subset of those experts.
 
