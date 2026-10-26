@@ -51,7 +51,37 @@ For model quantization workflows, see the [vLLM quantization Learning Path](/lea
 
 The reported benchmarks compare two optimization effects:
 
-- The BF16 comparison shows the impact of the optimized unquantized MoE path for AArch64. The pre-optimization path did not use the AArch64 FusedMoE kernel for BF16 MoE layers, while the optimized path enables that kernel and uses an AdvSIMD BFMMLA micro-kernel to accelerate the `w13` and `w2` expert matrix multiplications.
+### BF16 MoE optimization
+
+The BF16 comparison shows the impact of enabling a faster BF16 MoE path on AArch64. Before this optimization, AArch64 BF16 MoE execution did not use the CPU FusedMoE kernel, so the expert work followed a more general CPU path:
+
+```text
+Before:
+    route tokens to experts
+    for each selected expert:
+        run w13 BF16 expert GEMM
+        apply activation
+        run w2 BF16 expert GEMM
+    combine expert outputs
+```
+
+This is correct, but it is not ideal for serving because MoE routing creates many expert-specific GEMMs. Running those through a general path adds overhead around the main matrix-multiply work.
+
+The optimized path adds an Arm-specific CPU FusedMoE path. It packs the routed token data and uses Arm BFMMLA instructions to speed up the `w13` and `w2` BF16 expert GEMMs:
+
+```text
+After:
+    route tokens to experts
+    pack routed token data for the fused MoE kernel
+    run fused MoE on AArch64:
+        run w13 BF16 expert GEMM with BFMMLA
+        apply activation
+        run w2 BF16 expert GEMM with BFMMLA
+    combine expert outputs
+```
+
+This improves performance because the expert data is arranged for the fused kernel and the main BF16 matrix-multiply work uses Arm's faster BF16 instruction path.
+
 - The INT8/W8A8 comparison shows the additional benefit of lower-precision MoE execution. W8A8 reduces memory bandwidth pressure by using 8-bit weights and activations. On Arm CPUs with I8MM support, W8A8 can also use SMMLA, Arm's signed INT8 matrix multiply-accumulate instruction, which performs twice as many multiply-accumulate operations per instruction as BFMMLA for BF16. This does not imply a twofold end-to-end serving speedup.
 
 The setup installs the optimized release only. Reproducing the before-and-after comparison also needs the baseline build and configuration, which are pending in this draft.
