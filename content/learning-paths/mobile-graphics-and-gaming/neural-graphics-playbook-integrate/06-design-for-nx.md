@@ -9,24 +9,35 @@ layout: learningpathall
 
 ## Customize only for a measured reason
 
-Start with the published model. Customize it only when the runtime exposes a reproducible quality or performance gap. The [model workflow in Arm Neural Technology Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/06-models-in-practice/) explains when to make that move.
+Start with the published model. Customize it only when the runtime exposes a reproducible quality or performance gap. To know when to customize a model, see the model workflow in [Arm Neural Technology Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/06-models-in-practice/).
 
 ## Design with NX in mind
 
-Use the [Neural Network Model Development Best Practices for GPUs with Neural Accelerator](https://developer.arm.com/documentation/112431/latest) guide to understand how the GPU Execution Engine and NX divide a workload, choose precision and quantization deliberately, limit avoidable data movement and execution transitions, and connect model design to measurement, conversion, and deployment.
+Understand how the GPU Execution Engine and neural accelerator (NX) perform the following tasks:
 
-Use the [Arm GPU Best Practices Developer Guide](https://support.arm.com/documentation/101897/latest/) alongside it to optimize the graphics workload that runs with your neural model.
+- Divide a workload
+- Choose precision and quantization deliberately
+- Limit avoidable data movement and execution transitions
+- Connect model design to measurement, conversion, and deployment
+
+For more information, see [Neural Network Model Development Best Practices for GPUs with Neural Accelerator](https://developer.arm.com/documentation/112431/latest). Use the [Arm GPU Best Practices Developer Guide](https://support.arm.com/documentation/101897/latest/) alongside it to optimize the graphics workload that runs with your neural model.
 
 ## Use Model Gym for NSS and NFRU model workflows
 
-[Neural Graphics Model Gym](https://github.com/arm/neural-graphics-model-gym) supports NSS and NFRU model workflows. It covers training, fine-tuning, evaluation, quantization, and export for ML extensions for Vulkan.
+[Neural Graphics Model Gym](https://github.com/arm/neural-graphics-model-gym) supports Neural Super Sampling (NSS) and Neural Frame Rate Upscaling (NFRU) model workflows. The Model Gym covers the following workflows: 
 
-Use it in four steps:
+- Training
+- Fine-tuning
+- Evaluation
+- Quantization
+- Export for ML extensions for Vulkan
+
+Use Model Gym in four steps:
 
 1. Reproduce the issue with a prebuilt model and fixed data.
 2. Prepare a fixed training and evaluation dataset that represents the measured issue.
 3. Follow [Train and evaluate NFRU models using Model Gym](/learning-paths/mobile-graphics-and-gaming/model-training-gym-nfru/) to train or fine-tune an NFRU model, then compare quality before and after quantization.
-4. Export and validate the artifact with [Prepare models for Arm Neural Technology](/learning-paths/mobile-graphics-and-gaming/preparing-models-for-nt/).
+4. Follow [Prepare models for Arm Neural Technology](/learning-paths/mobile-graphics-and-gaming/preparing-models-for-nt/) to export and validate the artifact.
 
 ## Connect model estimates to measured results
 
