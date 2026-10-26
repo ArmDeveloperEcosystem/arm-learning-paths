@@ -1,5 +1,6 @@
 ---
 title: Review benchmark results
+description: Compare reported BF16 and INT8/W8A8 mixture of experts throughput and latency results with your vLLM measurements.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -37,7 +38,7 @@ The reported optimized BF16 mixture of experts (MoE) runs improve Gemma 4 reques
 
 These ratios describe the reported configuration; they are not a performance guarantee for other Arm servers.
 
-![Gemma4 BF16 speedup for ShareGPT 512](images/gemma4_512_new.png)
+![Gemma 4 BF16 heatmap showing higher throughput and lower mean TPOT and TTFT in optimized runs at concurrency 4, 8, 16, and 32.#center](images/gemma4_512_new.png)
 
 ### GPT-OSS BF16 MoE
 
@@ -49,7 +50,7 @@ The reported optimized BF16 MoE runs improve GPT-OSS request throughput by aroun
 | --- | ---: | ---: | ---: |
 | ShareGPT ~512 input tokens | 2.80x - 3.62x | 2.74x - 3.50x | 64% - 72% |
 
-![GPT-OSS BF16 speedup for ShareGPT 512](images/gptoss_512_new.png)
+![GPT-OSS BF16 heatmap showing higher throughput and lower mean TPOT and TTFT in optimized runs at concurrency 4, 8, 16, and 32.#center](images/gptoss_512_new.png)
 
 ### Qwen3 BF16 and INT8/W8A8 MoE
 
@@ -59,7 +60,7 @@ The comparison includes the pre-optimization Qwen BF16 baseline, new optimized Q
 
 The following ratios compare request throughput:
 
-| Prompt subset | New BF16 versus pre-optimization BF16 | INT8/W8A8 verus pre-optimization BF16 | INT8/W8A8 versus new BF16 |
+| Prompt subset | New BF16 versus pre-optimization BF16 | INT8/W8A8 versus pre-optimization BF16 | INT8/W8A8 versus new BF16 |
 | --- | ---: | ---: | ---: |
 | ShareGPT ~512 input tokens | 3.25x - 4.83x | 4.25x - 7.00x | 1.31x - 1.45x |
 
@@ -70,10 +71,12 @@ The reported measurements indicate two improvements:
 - BF16 MoE optimization improves regular BF16 MoE models.
 - INT8/W8A8 MoE support provides an additional optimized path compared with BF16.
 
-![Qwen3 BF16 and INT8/W8A8 speedup for ShareGPT 512](images/qwen_512_new.png)
+![Qwen3 chart comparing pre-optimization BF16, optimized BF16, and W8A8 throughput, TPOT, and TTFT speedups at concurrency 4, 8, 16, and 32.#center](images/qwen_512_new.png)
 
 ## What you've accomplished
 
 You've now reviewed the benchmark results for BF16 and INT8/W8A8 MoE inference with vLLM on Arm CPUs.
 
 Use the same workload, package versions, server settings, and concurrency values when comparing your results.
+
+Use your saved measurements to assess throughput and latency for your serving workload.

@@ -1,5 +1,6 @@
 ---
 title: Benchmark MoE serving performance
+description: Prepare ShareGPT prompt subsets and measure mixture of experts serving throughput and latency with vLLM on Arm CPUs.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -10,11 +11,7 @@ layout: learningpathall
 
 Use `vllm bench serve` to measure throughput and latency while a model serves concurrent requests.
 
-The benchmark sends requests to the vLLM OpenAI-compatible API server at:
-
-```text
-/v1/chat/completions
-```
+The benchmark sends requests to the vLLM OpenAI-compatible API server at `/v1/chat/completions`.
 
 Start the model server first using the commands from [Run mixture of experts (MoE) inference with vLLM](/learning-paths/servers-and-cloud-computing/vllm-moe/3-run-inference/), and keep it running in one terminal. Then, run the benchmark command from another terminal.
 
@@ -78,6 +75,7 @@ for model_name, model_id in MODELS.items():
     out.write_text(json.dumps(rows, indent=2))
     print(f"{model_name}: {len(rows)} samples -> {out}")
 ```
+
 Run the script:
 
 ```bash

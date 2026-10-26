@@ -1,5 +1,6 @@
 ---
 title: Run MoE inference with vLLM
+description: Serve a mixture of experts model with vLLM on an Arm CPU and validate inference through a chat API response.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -35,7 +36,7 @@ vllm serve "$MODEL"
 
 On the first run, vLLM downloads the model weights and warms up the model, including CPU code compilation. Wait until you see `Application startup complete` before continuing. The server is now listening on port `8000`.
 
-To test a different model, stop the current server.  Update `MODEL` using one of the model IDs from the table, then run `vllm serve "$MODEL"` again.
+To test a different model, stop the current server. Update `MODEL` using one of the model IDs from the table, then run `vllm serve "$MODEL"` again.
 
 ## Send a test request
 

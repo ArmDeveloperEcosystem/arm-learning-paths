@@ -1,5 +1,6 @@
 ---
 title: Set up vLLM for MoE inference
+description: Check Arm CPU instruction support, install vLLM, and configure the environment for mixture of experts inference.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -18,7 +19,7 @@ MoE layers contain multiple expert networks. For each token, a router selects a 
 
 The following diagram shows the high-level routing flow for an MoE layer:
 
-![MoE routing flow](images/moe-routing.png)
+![An input token is routed to selected Experts 1 and 3 of four experts, then their outputs are combined in the MoE layer.#center](images/moe-routing.png)
 
 This can reduce compute compared with activating the full model. However, it also makes inference performance depend heavily on routing, batching, and optimized expert kernels.
 
