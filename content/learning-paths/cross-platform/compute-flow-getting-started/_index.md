@@ -39,6 +39,11 @@ tools_software_languages:
 operatingsystems:
     - macOS
 
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - laptops-and-desktops
+
 further_reading:
     - resource:
         title: Compute Flow source repository (public URL placeholder)
