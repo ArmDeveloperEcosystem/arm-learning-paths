@@ -19,7 +19,7 @@ You'll use Python to translate a short English recording into French speech on y
 English WAV
     |
     v
-Speech-to-text: Parakeet TDT
+Speech-to-text: Moonshine Base English (FP32)
     | English text
     v
 Text translation: Hy-MT2
@@ -51,7 +51,7 @@ A *model package* contains the weights and supporting assets that a brick needs.
 
 The manifest describes model filenames, inference runtimes, model-specific tensor formats, and supporting assets, such as tokenizers. It also provides configuration values and constants needed by the brick. The weights live in separate files referenced by the manifest.
 
-For example, the Parakeet package includes `parakeet_tdt_0_6b_v3_manifest.json`. Your Python application reads this file with `cf.load_manifest()`, selects the implementation with `cf.load_brick()`, and prepares the models with `brick.setup()`. This keeps model-specific file paths and runtime configuration out of your application code.
+For example, the Moonshine Base English package includes `moonshine_manifest_base_en.json`. Your Python application reads this file with `cf.load_manifest()`, selects the implementation with `cf.load_brick()`, and prepares the models with `brick.setup()`. This keeps model-specific file paths and runtime configuration out of your application code.
 
 ## Use versioned brick APIs
 
