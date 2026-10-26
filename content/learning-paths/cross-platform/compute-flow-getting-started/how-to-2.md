@@ -158,13 +158,13 @@ If successful, you should see output similar to the following.
 
 Compute Flow uses prebuilt, optimized dependency binaries where available. Some dependencies, such as llama.cpp, are first checked on your local machine. A preinstalled version may be incompatible with Compute Flow and cause build errors.
 
-You can build the supported runtime dependencies from their pinned source revisions instead with the following command, although this takes longer:
+In the first instance, **either update the dependency causing the error to a compatible version or uninstall the local version** to allow Compute Flow to build just the missing depencencies from source.
+
+As a fallback, you can build the supported runtime dependencies from their pinned source revisions with the following command, although this will take up to 1 hour so we strongly recommend attempting the steps above before building from source:
 
 ```bash
 compute-flow build native --from-source
 ```
-
-Alternatively, either update the dependency causing the error to a compatible version or uninstall the local version to allow Compute Flow to build just the missing depencencies from source.
 
 {{% /notice %}}
 
