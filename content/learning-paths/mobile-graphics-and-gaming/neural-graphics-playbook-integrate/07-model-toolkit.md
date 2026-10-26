@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Choose the tool for your next question
 
-Your model toolkit connects model development to the integration decision. Model Gym supports the training, evaluation, quantization, and export workflow introduced in [Prepare model work for neural accelerator (NX)](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-integrate/06-design-for-nx/). ML Inference Advisor (MLIA) and Arm Streamline help you investigate whether a candidate fits your target and what happens when it runs in your application. 
+Your model toolkit connects model development to the integration decision. Model Gym supports the training, evaluation, quantization, and export workflow introduced in [Prepare model work for neural accelerator (NX)](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-integrate/06-design-for-nx/). Arm ML Inference Advisor (MLIA) and Arm Streamline help you investigate whether a candidate fits your target and what happens when it runs in your application. 
 
 Keep the released model as your baseline. Profiling doesn't mean that you need to train a replacement.
 
