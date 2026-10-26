@@ -12,13 +12,13 @@ enableRobotsTXT = true
 name = "dev"
 URL = "s3://arm-learning-paths-dev?region=us-east-1"
 cloudFrontDistributionID = "EAMKPMDBM18II"
-exclude = "{courses,insights}/**"
+exclude = "{courses/**,insights/**,social-images/manifest.json}"
 
 [[deployment.targets]]
 name = "prod"
 URL = "s3://arm-learning-paths-prod?region=us-east-1"
 cloudFrontDistributionID = "E2IA2AC83UE2VJ"
-exclude = "{courses,insights,md}/**"
+exclude = "{courses/**,insights/**,md/**,social-images/manifest.json}"
 
 [markup]
   [markup.goldmark]
@@ -87,7 +87,7 @@ github_branch = "main"
 # For metadata posting on socials
 title = 'Arm Learning Paths'
 description = 'Tutorials with code examples, created by the Arm ecosystem to develop better code faster across all platforms: Servers, phones, laptops, embedded devices, and microcontrollers.'
-social_image = '/img/social-image.png'
+social_image = '/social-images/default.webp'
 twitter_handle = '@ArmSoftwareDev'
 
 math = true
