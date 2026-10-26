@@ -9,9 +9,13 @@ layout: learningpathall
 
 ## See the larger opportunity with NSSD
 
-Neural Super Sampling and Denoising (NSSD) reconstructs a clean, high-resolution frame from a low-resolution, noisy render. This can make low sample counts useful for advanced lighting and ray tracing. To learn more about the algorithm and Neural Dawn implementation, see the Arm [NSSD presentation](https://community.arm.com/cfs-file/__key/communityserver-blogs-components-weblogfiles/00-00-00-20-66/2026_2D00_mmg_2D00_liam_2D00_nssd.pdf).
+Watch the recorded presentation to learn how Neural Super Sampling and Denoising (NSSD) reconstructs a clean, high-resolution frame from a low-resolution, noisy render, and how it is implemented in Neural Dawn:
 
-<!-- TODO: Add the NSSD recorded presentation embed when the public URL is available. -->
+{{< youtube-nocookie id="Dns9-QOWLtk" title="Neural Super Sampling and Denoising recorded presentation" >}}
+
+If you prefer to read, see the [NSSD presentation slides (PDF)](https://community.arm.com/cfs-file/__key/communityserver-blogs-components-weblogfiles/00-00-00-20-66/2026_2D00_mmg_2D00_liam_2D00_nssd.pdf).
+
+NSSD can make low sample counts useful for advanced lighting and ray tracing.
 
 ## Decide whether NSSD changes the game
 
