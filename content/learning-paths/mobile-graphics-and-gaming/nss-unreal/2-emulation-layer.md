@@ -16,6 +16,12 @@ To run NSS in your Unreal Engine project, you will need to install and configure
 
 These components allow you to run NSS in Unreal Engine, using ML emulation layers for Vulkan for development and testing.
 
+{{% notice Development setup %}}
+For the steps below, use Windows 11, Unreal Engine 5.6, Visual Studio 2022 17.14, Vulkan SDK 1.4.321.0, ML Emulation Layer for Vulkan 0.10.0, and Arm Neural Graphics Plugin 1.1.0. These versions follow the [UE5.6 development requirements](https://dev.epicgames.com/documentation/en-us/unreal-engine/setting-up-visual-studio-development-environment-for-cplusplus-projects-in-unreal-engine?application_version=5.6) and [plugin setup instructions](https://github.com/arm/neural-graphics-for-unreal/blob/v1.1.0/UE5.6/README.md).
+
+In Visual Studio Installer, enable **Desktop development with C++**, **Game development with C++**, and **.NET desktop development**, including MSVC v143 14.38 and Windows SDK 10.0.22621.0. Source builds also require Git with Git LFS, Python 3, and CMake 3.21–3.31 on **PATH**.
+{{% /notice %}}
+
 ## Install Vulkan Software Development Kit
 
 Go to the [Vulkan SDK landing page](https://vulkan.lunarg.com/sdk/home) and download version 1.4.321.0 or later of the SDK installer for Windows. After you run the installer, continue to the next step.
@@ -50,12 +56,12 @@ To emulate the ML extensions for Vulkan:
 
 5. Confirm that `VK_LAYER_ML_Graph_Emulation` and `VK_LAYER_ML_Tensor_Emulation` appear in the layer list.
 
-6. Switch back to the **Vulkan Loader Management** tab. Ensure the Graph layer is listed *above* the Tensor layer, and that you've set up the configuration scope as shown in the image.
+6. Switch back to the **Vulkan Loader Management** tab. Set **Vulkan Loader Configuration Scope** to **Any Running Vulkan Executable** and select your `NSS` configuration under **Apply a Vulkan Loader Configuration**. Select **Include Vulkan Layers Selection and Execution Order**, set both ML emulation layers to **Enable**, and place Graph *above* Tensor.
 
    ![Layer configuration showing Graph above Tensor#center](./images/verify_layers.png "Figure 2: Verify layer ordering and scope.")
 
 {{% notice Before you move on %}}
-Make sure you keep Vulkan Configurator running in the background as you go through the next steps.
+Confirm that both layers are enabled, Graph is above Tensor, and your `NSS` configuration is selected. Keep Vulkan Configurator running in the background as you go through the next steps. If you change the configuration while Unreal Editor is open, restart the editor before testing NSS.
 {{% /notice %}}
 
 With the standalone ML emulation layers configured, Vulkan can run machine learning workloads through the ML extensions for Vulkan. This enables neural inference to execute alongside the graphics pipeline during development, without requiring access to hardware with dedicated neural accelerators.
