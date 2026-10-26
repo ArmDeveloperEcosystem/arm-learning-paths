@@ -14,13 +14,6 @@ decoder=${LLVM_OBJDUMP:-$(xcrun -f llvm-objdump)}
 mkdir -p "$evidence_dir"
 
 "$decoder" --version > "$evidence_dir/decoder-version.txt"
-decoder_version=$(sed -n '1p' "$evidence_dir/decoder-version.txt")
-if [[ -n ${EXPECTED_LLVM_OBJDUMP_VERSION:-} &&
-      "$decoder_version" != "$EXPECTED_LLVM_OBJDUMP_VERSION" ]]; then
-    printf 'FAIL: decoder version is %s; expected %s\n' \
-        "$decoder_version" "$EXPECTED_LLVM_OBJDUMP_VERSION" >&2
-    exit 2
-fi
 
 "$decoder" -d --macho --arch=arm64 --mattr=+sme,+sme2 "$artifact" \
     > "$evidence_dir/llvm-objdump.txt"

@@ -6,23 +6,32 @@ weight: 4
 layout: learningpathall
 ---
 
-## Understand the decoder result
+## Encoding and Decoding Mnemonics and Operands
 
-Each A64 instruction occupies a fixed-width 32-bit word, or four bytes. An assembler encodes the instruction into those bytes. A disassembler applies Arm Instruction Set Architecture (ISA) decoding rules to recover a mnemonic and its operands.
+Assemblers encode Arm Instruction Set Architecture (ISA) instruction mnemonics and operands into four byte, 32-bit words.  You can use a disassembler to decode those ISA words to recover the mnemonics and its operands.
 
-For one instruction in the fixture, the transformation is:
+Use the true-positive fixture you created earlier as an example of this assembly/disassemly concept.  When you wrote the source, you included this line:
 
-```output
+```
+fmopa za0.s, p0/m, p0/m, z0.s, z1.s
+```
+
+Where the mnemonic is `fmopa`, and the following operands identify the ZA tile, predicate registers, and vector registers.
+
+
+When assembled, that mnemonic (za0.s) and operand (p0/m, p0/m, z0.s, z1.s) are converted to four bytes (in little endian format) as 00 00 81 80, which are also represented as 0x80810000 (in big endian format).  
+
+```
 00 00 81 80 -> 0x80810000 -> fmopa za0.s, p0/m, p0/m, z0.s, z1.s
 ```
 
-The mnemonic is `fmopa`. The operands identify the ZA tile, predicate registers, and vector registers. Those operands matter: `ptrue p0.s` is an ordinary SVE form, while `ptrue pn8.s` uses an SME2 predicate-as-counter register.
 
 ## Define a scoped SME/SME2 predicate
 
-Create `strict-sme2.awk` with the following predicate. It recognizes the high-signal state-control, ZA access, matrix-operation, and SME2 predicate forms used in this Learning Path.
+Run the following command to create `strict-sme2.awk`. The predicate recognizes the high-signal state-control, ZA access, matrix-operation, and SME2 predicate forms used in this Learning Path.
 
-```awk { file_name="strict-sme2.awk" }
+```bash
+cat > strict-sme2.awk <<'EOF'
 function has_pn_operand(text, mnemonic, pattern) {
     pattern = "(^|[[:space:]])" mnemonic "[[:space:]]+" \
               "pn(8|9|1[0-5])(\\.[bhsd])?([[:space:],]|$)"
@@ -55,6 +64,7 @@ function is_strict_sme2(line, text) {
 }
 
 is_strict_sme2($0) { print }
+EOF
 ```
 
 The predicate accepts `ptrue` only when its first operand is PN8 through PN15. It accepts `whilelt` only with that PN range and a `vlx2` or `vlx4` operand. It rejects ordinary SVE forms such as `ptrue p0.s`.
@@ -165,4 +175,4 @@ The string-only control still contains the SME2 hint and symbol you observed ear
 
 ## What you've learned and what's next
 
-You correlated strict SME/SME2 instructions with bytes, operands, static PCs, a symbol, and a coherent region. Next, you will generalize the evidence sequence and turn it into a release gate without converting static inclusion into an execution claim.
+You verified SME/SME2 instructions in the binary by examining their bytes, operands, addresses, and surrounding code. Next, you'll combine these checks in a reusable script and adapt the method to other Arm extensions and binary formats.

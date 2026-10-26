@@ -30,7 +30,6 @@ tools_software_languages:
     - LLVM
     - Assembly
     - Bash
-    - GitHub Actions
 operatingsystems:
     - macOS
 

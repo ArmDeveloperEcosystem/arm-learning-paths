@@ -27,9 +27,10 @@ mkdir arm64-extension-inspection
 cd arm64-extension-inspection
 ```
 
-Create `sme2-main.c` with the following content.
+Run the following command to create `sme2-main.c`:
 
-```c { file_name="sme2-main.c" }
+```bash
+cat > sme2-main.c <<'EOF'
 #include <stddef.h>
 
 extern void sme2_fixture_kernel(void);
@@ -42,11 +43,13 @@ void (*volatile keep_sme2_kernel)(void) = sme2_fixture_kernel;
 int main(void) {
     return keep_sme2_kernel == NULL || feature_hint[0] == '\0';
 }
+EOF
 ```
 
-Next, create `sme2-kernel.S` with the following content. 
+Next, run the following command to create `sme2-kernel.S`:
 
-```asm { file_name="sme2-kernel.S" }
+```bash
+cat > sme2-kernel.S <<'EOF'
 .text
 .p2align 2
 .globl _sme2_fixture_kernel
@@ -60,6 +63,7 @@ _sme2_fixture_kernel:
     fmopa za0.s, p0/m, p0/m, z0.s, z1.s
     smstop
     ret
+EOF
 ```
 
 Build the final SME2-Mach-O executable. The `-march=armv9-a+sme2` option makes the compile-time intent explicit, but you will verify the linked output rather than treating this flag as proof.
@@ -73,9 +77,10 @@ Congrats, you now have an SME2-enabled binary!
 
 ## Create negative controls
 
-You just created a file which will be used as an SME2 true positive control. Next, create `string-only-control.c` with a feature string and SME2-like symbol name, but no actual SME2 instructions.  This is an example of a true negative control fixture:
+You just created a file which will be used as an SME2 true positive control. Next, run the following command to create `string-only-control.c` with a feature string and SME2-like symbol name, but no actual SME2 instructions.  This is an example of a true negative control fixture:
 
-```c { file_name="string-only-control.c" }
+```bash
+cat > string-only-control.c <<'EOF'
 __attribute__((used))
 static const char feature_hint[] = "hw.optional.arm.FEAT_SME2";
 
@@ -87,11 +92,13 @@ void sme2_string_only_marker(void) {
 int main(void) {
     return feature_hint[0] == '\0';
 }
+EOF
 ```
 
-Create another true-negative fixture, `plain-arm64-control.c` without extension-specific source, names, or strings:
+Run the following command to create another true-negative fixture, `plain-arm64-control.c` without extension-specific source, names, or strings:
 
-```c { file_name="plain-arm64-control.c" }
+```bash
+cat > plain-arm64-control.c <<'EOF'
 __attribute__((noinline))
 int arm64_plain_add(int left, int right) {
     return left + right;
@@ -100,6 +107,7 @@ int arm64_plain_add(int left, int right) {
 int main(void) {
     return arm64_plain_add(1, 2) == 3 ? 0 : 1;
 }
+EOF
 ```
 
 Build both controls for the base arm64 architecture:

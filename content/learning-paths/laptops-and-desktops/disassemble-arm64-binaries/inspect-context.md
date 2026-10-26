@@ -64,7 +64,7 @@ hw.optional.arm.FEAT_SME2
 
 The control produces convincing-looking hints despite containing no SME2 instruction. This is why source names, compiler options, strings, symbols, and arm64 slice metadata must remain supporting evidence.
 
-Use the evidence ladder consistently:
+You can see how SME2 presence can be detected methodically:
 
 | Finding | What it supports | What it doesn't prove |
 | --- | --- | --- |
@@ -75,4 +75,4 @@ Use the evidence ladder consistently:
 
 ## What you've learned and what's next
 
-You can now use strings and symbols without overstating their meaning. Next, you will decode executable bytes and require an operand-aware SME/SME2 match.
+You can now use strings and symbols to help assemble evidence of SME2 presence... next, you will perform actual disassembly methods to detect SME2 presence.
