@@ -62,7 +62,7 @@ Android Build Support installs and manages the Android SDK and Android NDK for y
 
 _Note that this will be within a project, not the hub_
 
-## 3. Extract and open the Unity project
+## Extract and open the Unity project
 
 A simple project is provided to accompany this Learning Path. To open it in Unity, please follow these instructions:
 

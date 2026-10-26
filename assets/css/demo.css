@@ -173,7 +173,7 @@
     font-size: 14px!important;
 }
 #reset-demo-txt:hover {
-    color: var(--arm-green);
+    color: var(--lp-hover-text);
 }
 #ping-info, #traffic-info, #terms-of-use {
     float: left;

@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Application porting" 
+description: Port application code to Arm by addressing architecture assumptions, compiler intrinsics, and build configuration differences.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

@@ -1,5 +1,6 @@
 ---
 title: Kiro CLI
+description: Install and verify the Kiro CLI on macOS or Arm Linux so you can access AWS-focused AI assistance from the command line.
 
 author: Jason Andrews
 minutes_to_complete: 10
@@ -18,27 +19,29 @@ weight: 1
 
 Kiro CLI is a command-line tool powered by a generative AI assistant. You can use it to ask questions about AWS architecture, resources, and general development tasks. 
 
-It supports multiple operating systems, including Arm-based Linux distributions and macOS, and you can install it in several ways.
+You can install Kiro CLI in several ways on multiple operating systems, including Arm-based Linux distributions and macOS.
 
-## What should I do before installing Kiro CLI?
+## Before you begin
 
 You need a Builder ID to use Kiro CLI. If you don't have one, visit [Do more with AWS Builder ID](https://community.aws/builderid) and select **Sign up with Builder ID** to create your AWS Builder ID.
 
-This guide explains how to install Kiro CLI on macOS and Arm Linux.
+You'll learn how to install Kiro CLI on macOS and Arm Linux.
 
-## How do I download and install Kiro CLI?
+## How to download and install Kiro CLI
 
-The CLI is invoked using the `kiro-cli` command. 
+You can invoke the CLI using the `kiro-cli` command. 
 
-The easiest way to install Kiro CLI on Linux and macOS is with a single command:
+Install Kiro CLI on Linux and macOS with a single command:
 
 ```console
 curl -fsSL https://cli.kiro.dev/install | bash
 ```
 
-### Can I use Homebrew to install Kiro CLI on macOS?
+### Install Kiro CLI on macOS using Homebrew 
 
-Yes, you can install [Homebrew](https://brew.sh/) if it's not already available on your computer.
+You can also use [Homebrew](https://brew.sh/) to install Kiro CLI. 
+
+Start by installing Homebrew if it's not already available on your computer.
 
 Install Kiro CLI using Homebrew:
 
@@ -46,14 +49,14 @@ Install Kiro CLI using Homebrew:
 brew install kiro-cli
 ```
 
-### Can I install Kiro CLI on Arm Linux by downloading a ZIP file?
+### Install Kiro CLI on Arm Linux by downloading a ZIP file
 
-Yes, you can download and install Kiro CLI on any Arm Linux distribution using the installer.
+You can download and install Kiro CLI on any Arm Linux distribution using the installer.
 
 Before starting, ensure that `curl` and `unzip` are available on your computer. 
 
 {{% notice Note %}}
-For Debian-based distributions such as Ubuntu, use the commands below. For other Linux distributions, use the appropriate package manager to install `curl` and `unzip`.
+For Debian-based distributions such as Ubuntu, use the following commands. For other Linux distributions, use the appropriate package manager to install `curl` and `unzip`.
 {{% /notice %}} 
 
 ```bash { target="ubuntu:latest" }
@@ -74,7 +77,7 @@ unzip kirocli.zip
 bash ./kirocli/install.sh
 ```
 
-The installer prompts you about updating your shell configuration:
+You'll be prompted by the installer about updating your shell configuration:
 
 ```output
 ✔ Do you want kiro to modify your shell config (you will have to manually do this otherwise)? 
@@ -85,7 +88,7 @@ To automate the install, add the `--no-confirm` flag to the `install.sh` command
 {{% notice Note %}}
 If you're using a Linux distribution with an older version of the GNU C Library, or one that doesn't use it at all (such as Alpine), you can download an alternative package. This package is built with the musl C library and has no external dependencies. 
 
-Substitute the `curl` command above with this one and use the same install instructions:
+Substitute the `curl` command with this one and use the same install instructions:
 
 ```bash { target="ubuntu:latest" }
 curl --proto '=https' --tlsv1.2 -sSf 'https://desktop-release.q.us-east-1.amazonaws.com/latest/kirocli-aarch64-linux-musl.zip' -o 'kirocli.zip'
@@ -93,7 +96,7 @@ curl --proto '=https' --tlsv1.2 -sSf 'https://desktop-release.q.us-east-1.amazon
 
 {{% /notice %}}
 
-### How do I confirm Kiro CLI is working?
+## Confirm Kiro CLI is working
 
 You now have the latest version of Kiro CLI installed. 
 
@@ -103,25 +106,39 @@ Confirm the CLI is available by printing the version:
 kiro-cli version
 ```
 
-The output shows the version:
+The output shows the version, and is similar to:
 
 ```output
-kiro-cli 1.28.1
+kiro-cli 2.16.1
 ```
 
-## How can I configure my AWS account to get the most from Kiro CLI?
+## Log in with your Builder ID
 
-Kiro CLI can answer questions and solve problems related to your AWS resources and help you develop faster on AWS. To get the maximum benefit, you can configure the AWS CLI to use your account.
+Before you can use Kiro CLI features, you need to log in with your AWS Builder ID.
 
-Follow the [AWS CLI Install Guide](/install-guides/aws-cli/) and the [AWS Credentials Install Guide](/install-guides/aws_access_keys/) to set up the AWS CLI and generate and configure access keys.
+Run the login command:
 
-This allows you to use Kiro CLI to ask questions and solve issues specific to your AWS account.
+```console
+kiro-cli login
+```
 
-For example, you can ask for the IP address of an EC2 instance instead of going to the AWS console or looking up the AWS CLI command to get it.
+Follow the prompts to authenticate. The CLI opens a browser window (or provides a URL for remote sessions) where you sign in with your Builder ID credentials.
 
-Kiro accesses your AWS resources and prints the information you ask for.
+After a successful login, you can start using Kiro CLI:
 
-## How can I set the Kiro CLI context to tailor responses?
+```console
+kiro-cli chat
+```
+
+## Configure your AWS account to get the most from Kiro CLI
+
+Kiro CLI can answer questions and solve problems related to your AWS resources. For example, you can ask for the IP address of an EC2 instance instead of going to the AWS console or looking up the AWS CLI command to get it. Kiro CLI accesses your AWS resources and returns the information you ask for.
+
+To get account-specific answers, configure AWS CLI credentials.
+
+To set up the AWS CLI and generate and configure access keys, follow the [AWS CLI Install Guide](/install-guides/aws-cli/) and the [AWS Credentials Install Guide](/install-guides/aws_access_keys/).
+
+## Set the Kiro CLI context to tailor responses
 
 Kiro CLI can read your context. If you provide more information about yourself, you get tailored responses that match your development environment.
 
@@ -133,22 +150,36 @@ Use the `/context` command to see the possible locations to store your context.
 /context show
 ```
 
-The help information is printed.
+The output is similar to:
 
 ```output
-
-Agent (kiro_default)
-  - AmazonQ.md (no matches)
-  - AGENTS.md (no matches)
-  - README.md (no matches)
-
-Session (temporary)
-  <none>
-
-No files in the current directory matched the rules above.
+Active agent context: kiro_default
+ 
+   – AGENTS.md 0.0% (no matches)
+   – README.md 0.1%
+ 
+ Session (temporary)
+   <none>
+ 
+ Tools
+   Built-in 3.5% · 14 tools
+     · code 0.3%
+     · glob 0.1%
+     · goal 0.3%
+     · grep 0.2%
+     · introspect 0.2%
+     · knowledge 0.6%
+     · read 0.3%
+     · shell 0.2%
+     · subagent 0.3%
+     · todo_list 0.4%
+     · use_aws 0.2%
+     · web_fetch 0.1%
+     · web_search 0.1%
+     · write 0.2%
 ```
 
-For example, you can create a new file to store your context as shown below:
+For example, you can create a new file to store your context as follows:
 
 ```console
 echo "I am an Arm Linux developer. I prefer Ubuntu and other Debian based distributions. I don't use any x86 computers so please provide all information assuming I'm working on Arm Linux. Sometimes I use macOS and Windows on Arm, but please only provide information about these operating systems when I ask for it." > ~/.kiro/context.md
@@ -162,23 +193,28 @@ Load the context file:
 /context add ~/.kiro/context.md
 ```
 
-Confirm it was read:
+Confirm the context file was read:
 
 ```console
 did you read my context information?
 ```
 
-The response confirms the context file was read:
+The response confirms the context file was read, and is similar to:
 
 ```output
-Yes, I read your context information. You're an Arm Linux developer who prefers Ubuntu and other Debian-based
-distributions, and you don't use x86 computers. You also sometimes use macOS and Windows on Arm, but only want
-information about those when you specifically ask for them.
+Yes, I read your context information. Here's what I picked up:
+  
+  - You're an Arm Linux developer who prefers Ubuntu/Debian-based distributions.
+  - You don't use x86 computers, so I'll default to aarch64/arm64 for any architecture-specific
+  guidance.
+  - I'll only bring up macOS or Windows on Arm if you specifically ask about them.
+  
+  Let me know how I can help!
 ```
 
 Ask questions like "How do I install the AWS CLI?" to verify that the answers match the provided context.
 
-## How do I change the model Kiro uses?
+## Change the model Kiro uses
 
 When you start `kiro-cli chat`, the model is printed:
 
@@ -192,23 +228,29 @@ Use the `/model` command to list other available models:
 /model
 ```
 
-The model options are displayed:
+The output is similar to:
 
 ```output
- Press (↑↓) to navigate · Enter(⏎) to select model
-❯ Auto (current) | 1x credit | Models chosen by task for optimal usage and consistent quality
-  claude-sonnet-4.5 | 1.3x credit | The latest Claude Sonnet model
-  claude-sonnet-4 | 1.3x credit | Hybrid reasoning and coding for regular use
-  claude-haiku-4.5 | 0.4x credit | The latest Claude Haiku model
+❯ auto                 1.00x credits    Models chosen by task for optimal usage and consistent q...
+  claude-sonnet-4.6    1.30x credits    Claude Sonnet 4.6 model with 1M context window
+  claude-opus-4.5      2.20x credits    Claude Opus 4.5 model
+  claude-sonnet-4.5    1.30x credits    Claude Sonnet 4.5 model
+  claude-sonnet-4      1.30x credits    Hybrid reasoning and coding for regular use
+  claude-haiku-4.5     0.40x credits    The latest Claude Haiku model
+  deepseek-3.2         0.25x credits    Experimental preview of DeepSeek V3.2
+  minimax-m2.5         0.25x credits    MiniMax M2.5 model
+(+3 more)
 ```
 
 Use the arrow keys to select the model you want to use. 
 
 You can ask Kiro to set the default model for future sessions.
 
-## Install a local MCP server
+## Configure the Arm MCP Server for Kiro CLI 
 
-The Arm MCP Server is an MCP server providing AI assistants with tools and knowledge for Arm architecture development, migration, and optimization. This section shows how to configure the Arm MCP server locally using Docker.
+You can use a Model Context Protocol (MCP) such as the Arm MCP Server with Kiro CLI.
+
+The Arm MCP Server provides AI assistants with tools and knowledge for Arm architecture development, migration, and optimization. You can configure the Arm MCP Server locally using Docker.
 
 First, pull the MCP server image to your local machine:
 
@@ -216,13 +258,11 @@ First, pull the MCP server image to your local machine:
 docker pull armlimited/arm-mcp:latest
 ```
 
-You also need Docker running on the system. See the [Docker install guide](/install-guides/docker/) for instructions.
+You also need Docker running on the system. For instructions, see the [Docker install guide](/install-guides/docker/).
 
-### How do I configure the Arm MCP server?
+Modify the file `~/.kiro/settings/mcp.json` to add the Arm MCP Server via a Docker container.
 
-Modify the file `~/.kiro/settings/mcp.json` to add the Arm MCP server via a Docker container.
-
-To analyze a local codebase, use a `-v` command to mount a volume to the Arm MCP server `/workspace` folder so it can access code you want to analyze with migrate-ease and other tools.
+To analyze a local codebase, use a `-v` command to mount a volume to the Arm MCP Server `/workspace` folder so it can access code you want to analyze with `migrate-ease` and other tools.
 
 Replace the path `/path/to/your/workspace` with the path to your local codebase:
 
@@ -238,10 +278,6 @@ Replace the path `/path/to/your/workspace` with the path to your local codebase:
         "--pull=always",
         "-v",
         "/path/to/your/workspace:/workspace",
-        "-v",
-        "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v",
-        "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -251,11 +287,9 @@ Replace the path `/path/to/your/workspace` with the path to your local codebase:
 }
 ```
 
-To enable Arm Performix features through the Arm MCP Server, replace `/path/to/your/ssh/private_key` and `/path/to/your/ssh/known_hosts` with the SSH private key and `known_hosts` file used for your target device.
+### (Optional) Use an alternative containerization tool
 
-### Optional: Use a Docker replacement containerization tool
-
-You can use other containerization tools besides Docker that are free and do not require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the options below and use its CLI in place of `docker`.
+You can use other containerization tools besides Docker that are free and don't require licenses, such as Podman, Finch, Colima, and Rancher Desktop. Choose one of the following options and use its CLI in place of `docker` to configure the Arm MCP Server.
 
 {{< tabpane-normal >}}
   {{< tab header="Podman" >}}
@@ -278,8 +312,6 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -309,8 +341,6 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -342,8 +372,6 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -356,7 +384,7 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
   {{< tab header="Rancher Desktop" >}}
 Install: [Rancher Desktop](https://docs.rancherdesktop.io/getting-started/installation/)
 
-Rancher Desktop uses the Docker container engine via Morby.
+Rancher Desktop uses the Docker container engine via Moby.
 
 Pull the Arm MCP Server image:
 ```console
@@ -375,8 +403,6 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
         "-i",
         "--pull=always",
         "-v", "/path/to/your/workspace:/workspace",
-        "-v", "/path/to/your/ssh/private_key:/run/keys/ssh-key.pem:ro",
-        "-v", "/path/to/your/ssh/known_hosts:/run/keys/known_hosts:ro",
         "armlimited/arm-mcp:latest"
       ],
       "env": {},
@@ -388,9 +414,9 @@ Add the following configuration to the user-level `~/.kiro/settings/mcp.json` fi
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-### How do I verify the Arm MCP server is working?
+### Verify that the Arm MCP Server is working
 
-Start Kiro CLI chat from your local shell and list the tools from the MCP server to verify it is working:
+Start Kiro CLI chat from your local shell and list the tools from the MCP server to verify it's working:
 
 ```console
 kiro-cli chat
@@ -402,9 +428,9 @@ Use the `/tools` command to list the available tools:
 /tools
 ```
 
-You should see the Arm MCP server tools listed in the output. If the arm-mcp server says it's still loading, wait a moment and run `/tools` again.
+You'll see the Arm MCP Server tools listed in the output. If the `arm-mcp` server says it's still loading, wait a moment and run `/tools` again.
 
-### Use Arm prompt files with the MCP Server
+### Use Arm prompt files with the Arm MCP Server
 
 The Arm MCP Server provides a rich set of tools and knowledge base, but to make the best use of it, you should pair it with Arm-specific prompt files. These prompt files supply task-oriented context, best practices, and structured workflows that guide the agent in using MCP tools more effectively across common Arm development tasks.
 
@@ -418,4 +444,8 @@ Each prompt file is a Markdown configuration that you can reference in your Kiro
 
 If you're facing issues or have questions, reach out to mcpserver@arm.com.
 
-You're now ready to use Kiro CLI with the Arm MCP server for Arm-specific development assistance.
+## Next steps
+
+You're now ready to use Kiro CLI with the Arm MCP Server for Arm-specific development assistance.
+
+For an AI-assisted x86-to-Arm migration walkthrough, see [Automate x86-to-Arm application migration using the Arm MCP Server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/).

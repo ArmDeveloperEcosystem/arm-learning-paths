@@ -1,5 +1,6 @@
 ---
 title: Finch on Arm Linux
+description: Install Finch on Amazon Linux 2023 or Ubuntu 24.04 for Arm and verify Docker-compatible container workflows with containerd and nerdctl.
 author: Jason Andrews
 
 minutes_to_complete: 10
@@ -153,7 +154,7 @@ sudo finch --version
 The output is similar to:
 
 ```output
-finch version v1.8.2
+finch version v1.17.2
 ```
 
 Run a container to confirm functionality:

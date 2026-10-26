@@ -23,9 +23,54 @@ prerequisites:
     - 18-8 stainless steel socket head screw. 4 per card. [Example part](https://www.mcmaster.com/91292A016/)
     - 18-8 stainless steel hex nut. 4 per card. [Example part](https://www.mcmaster.com/91828A113/)
     - PETG filament. Others can work, but PETG allows some flex without the risk of snapping
-    
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-13T18:55:42Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: fbbcf5658e75212ba1d4fdd808bf20435558996e5965c598abdf1daaf31c7750
+  summary_generated_at: '2026-08-13T18:55:42Z'
+  summary_source_hash: fbbcf5658e75212ba1d4fdd808bf20435558996e5965c598abdf1daaf31c7750
+  faq_generated_at: '2026-08-13T18:55:42Z'
+  faq_source_hash: fbbcf5658e75212ba1d4fdd808bf20435558996e5965c598abdf1daaf31c7750
+  summary: >-
+    You'll build a universal single-board-computer rack in a 4U chassis using 3D-printed parts and
+    common hardware. First, you'll print PETG bay bodies and covers, prepare stainless threaded rods,
+    and assemble modular bay rows. Then, you'll mount a board on a card plate with bolts and standoffs,
+    align it with the grip edge, and slide it into a bay.
+  faqs:
+  - question: Which filament should I use for the printed parts and why?
+    answer: >-
+      Use PETG. The card plate tabs need to flex for removal. PETG bends instead of snapping like
+      PLA, is non-toxic, and tolerates higher temperatures than PLA.
+  - question: How many bay bodies and bay covers do I need to print for each bay?
+    answer: >-
+      Print the number of bay bodies required by your chosen spacer size, and print the same number
+      of bay covers. The exact count depends on the spacer size used.
+  - question: What should I do to prepare the threaded rods before assembly?
+    answer: >-
+      Wash the grease off the rods with soap and hot water. This prevents the build from becoming
+      greasy during assembly.
+  - question: What length should I cut the threaded rods to?
+    answer: >-
+      Cut each rod to 405 mm. A chop saw is recommended, though you can use a hacksaw.
+  - question: How do I mount an SBC to the card plate and install it in the rack?
+    answer: >-
+      Place bolts through the SBC and add standoffs on the back. Align the board so its back edge
+      is flush with the grip side of the card plate, then tighten hex nuts. Slide the assembled
+      card and plate into a bay slot.
+# END generated_summary_faq
 
 author: Gabriel Peterson
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -50,8 +95,6 @@ further_reading:
         title: 3D Printing for Beginners - How to Get Started with FDM 
         link: https://all3dp.com/2/3d-printing-for-beginners-all-you-need-to-know-to-get-started/
         type: blog
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

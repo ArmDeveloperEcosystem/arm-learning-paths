@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Initialize the Operating System"
+description: Initialize the CMSIS-RTOS2 kernel in the Keil Studio project and prepare the application startup code.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

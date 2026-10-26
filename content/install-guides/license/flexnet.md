@@ -1,5 +1,6 @@
 ---
 title: FlexNet Publisher Floating license setup
+description: Set up a FlexNet Publisher floating license server and configure end-user machines for older Arm products that do not support user-based licensing.
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/dui0209
 author: Ronan Synnott
@@ -21,7 +22,7 @@ You will be supplied with license key(s) to generate such license(s).
 
 License Administrators should download and install the latest FlexNet Publisher software to your internal license server.
 ```url
-https://developer.arm.com/downloads/-/download-flexnet-publisher
+https://support.arm.com/downloads/view/LLSFL
 ```
 ### How do I generate a license file?
 

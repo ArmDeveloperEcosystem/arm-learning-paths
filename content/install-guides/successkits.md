@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Arm Success Kits
+description: Download and install Arm Success Kit components from Arm Product Download Hub so licensed development tools are available on your workstation.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -58,4 +59,3 @@ Bundles are provided for Windows, Linux, or Mac OS. Not all components are suppo
 [Install Arm Socrates](/install-guides/socrates/)
 
 [Install Arm AMBA Viz](/install-guides/ambaviz/)
-

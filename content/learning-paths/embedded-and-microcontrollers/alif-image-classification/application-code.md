@@ -1,5 +1,6 @@
 ---
 title: Add the application code
+description: Add firmware code for camera input, image preprocessing, and Ethos-U85 inference in the Alif Ensemble image classification project.
 weight: 5
 
 layout: "learningpathall"

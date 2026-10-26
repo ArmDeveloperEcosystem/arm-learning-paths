@@ -14,19 +14,24 @@ learning_objectives:
     - Identify when a cloud instance does not expose SPE to the guest OS and choose a suitable system for Arm Performix memory access analysis.
 
 prerequisites:
-    - Access to a Linux-based Arm bare-metal system with sudo or root access. Cloud VMs typically don't expose SPE to guest operating systems. Use a bare-metal (metal) instance from your cloud provider instead.
+    - Access to a Linux-based Arm bare-metal system with sudo or root access, such as an Arm AGI CPU platform that exposes SPE. Cloud VMs typically don't expose SPE to guest operating systems. Use a bare-metal (metal) instance from your cloud provider instead.
     - Access to Arm Performix on your host machine and SSH access to the target system. For setup instructions, see the [Arm Performix install guide](/install-guides/performix/).
     - Familiarity with the Linux command line and SSH.
 
 author: Kieran Hejmadi
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-cloud_service_providers:
-    - AWS
-    - Google Cloud
-    - Microsoft Azure
+platforms:
+    - Arm AGI CPU
+    - AWS Graviton
+    - Google Axion
+    - Microsoft Azure Cobalt
 armips:
     - Neoverse
 tools_software_languages:
@@ -58,8 +63,6 @@ further_reading:
         title: Analyze cache behavior with Perf C2C on Arm
         link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/false-sharing-arm-spe/
         type: learning-path
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

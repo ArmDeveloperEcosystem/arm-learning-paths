@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Embedded Programming on Arm"
+description: Review Arm embedded development concepts and tool options used when programming Cortex-M based microcontroller projects.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

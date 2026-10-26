@@ -1,6 +1,7 @@
 ---
 # User change
 title: Feature extraction
+description: Extract features from captured training data so the TensorFlow model can learn the letter recognition task.
 
 weight: 5 # 1 is first, 2 is second, etc.
 
@@ -54,7 +55,7 @@ for idx, file in enumerate(data_files):
 You can check the extracted features with this code block. These are the extracted features from one data sample.
 Expected output shown below:
 
-![output5](images/output5.PNG)
+![output5](images/output5.png)
 
 ## Feature based model
 

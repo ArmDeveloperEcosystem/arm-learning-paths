@@ -20,7 +20,7 @@ For more information, see [Arm Zena Compute Subsystem (CSS)](https://developer.a
 
 ## Build the software stack
 
-Follow the steps to download and build the software stack in the [Arm Automotive Solutions Software Reference Stack User Guide](https://arm-auto-solutions.docs.arm.com/en/latest/rd-aspen/user_guide/reproduce.html).
+Follow the steps to download and build the software stack in the [Arm Automotive Solutions Software Reference Stack User Guide](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html).
 
 The default **Cfg1, Arm Automotive Solutions Demo, Bare Metal** build is used in this learning path.
 
@@ -29,7 +29,9 @@ Software build will usually take at least one hour to complete, depending on hos
 {{% notice Note %}}
 The primary focus of this Learning Path is to demonstrate how to debug the software stack.
 
-The latest version of software tested at time of writing is `2.1`. Screenshots show previous versions.
+The latest version of software tested at time of writing is `2.2`. Screenshots show previous versions.
+
+For documentation of earlier versions, go to [here](https://arm-auto-solutions.docs.arm.com).
 {{% /notice %}}
 
 ## Verify the build and execution

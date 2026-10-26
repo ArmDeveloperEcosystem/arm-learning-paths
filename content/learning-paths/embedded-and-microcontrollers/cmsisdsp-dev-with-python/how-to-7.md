@@ -1,5 +1,6 @@
 ---
 title: Convert the CMSIS-DSP Python to C
+description: Convert the CMSIS-DSP Python prototype to C so the algorithm can run efficiently on Arm embedded targets.
 weight: 8
 
 ### FIXED, DO NOT MODIFY

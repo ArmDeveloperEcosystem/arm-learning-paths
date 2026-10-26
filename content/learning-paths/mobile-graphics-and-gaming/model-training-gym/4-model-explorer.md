@@ -1,6 +1,6 @@
 ---
-title: Visualize your model with Model Explorer
-weight: 5
+title: Inspect the model graph with Model Explorer
+weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -8,9 +8,9 @@ layout: learningpathall
 
 ## What is Model Explorer?
 
-Model Explorer is a visualization tool for inspecting neural network structures and execution graphs. Arm provides a VGF adapter for Model Explorer, allowing you to visualize `.vgf` models created from your training and export pipeline.
+Model Explorer is a visualization tool for inspecting neural network structures and execution graphs. Arm provides a VGF adapter for Model Explorer, allowing you to inspect the graph of a `.vgf` model created by the export pipeline.
 
-This lets you inspect model architecture, tensor shapes, and graph connectivity before deployment. This can be a powerful way to debug and understand your exported neural graphics models.
+This lets you inspect model architecture, tensor shapes, and graph connectivity before deployment. It does not visualize or evaluate rendered output quality; use the evaluation notebook to compare model output with the ground truth.
 
 ## Set up the VGF adapter
 
@@ -42,8 +42,10 @@ Once installed, launch the explorer with the VGF adapter:
 model-explorer --extensions=vgf_adapter_model_explorer
 ```
 
-Use the file browser to open the `.vgf` model exported earlier in your training workflow.
+Use the file browser to open the `.vgf` model exported by the QAT notebook from:
 
-Continue to the next section to learn about bringing your own use-cases to the Model Gym.
+```output
+neural-graphics-model-gym-examples/tutorials/output/vgf
+```
 
-
+You have now trained, evaluated, quantized, and exported an NSS model, then inspected its graph with Model Explorer. Continue to Next Steps for more neural graphics resources.

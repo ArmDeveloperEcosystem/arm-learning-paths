@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Linux Perf"
+description: Use Linux perf on Raspberry Pi 4 to collect performance data from Arm workloads.
 
 weight: 8 # 1 is first, 2 is second, etc.
 

@@ -1,5 +1,6 @@
 ---
 title: Program your first TinyML device
+description: Flash the TinyML firmware to the Arduino Nano RP2040 and verify that voice commands control the LEDs.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

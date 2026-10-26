@@ -16,7 +16,57 @@ prerequisites:
     - Knowledge of the Vulkan API.
     - A Vulkan renderer. Most code is generic and should be easy to incorporate into any deferred PBR renderer.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-21T17:26:44Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 6895a7653dc7811c0cc58ebbac2d79a4b7408fb265ec98b20fcc7f28fff40b44
+  summary_generated_at: '2026-08-21T17:26:44Z'
+  summary_source_hash: 6895a7653dc7811c0cc58ebbac2d79a4b7408fb265ec98b20fcc7f28fff40b44
+  faq_generated_at: '2026-08-21T17:26:44Z'
+  faq_source_hash: 6895a7653dc7811c0cc58ebbac2d79a4b7408fb265ec98b20fcc7f28fff40b44
+  summary: >-
+    You'll add Vulkan ray tracing effects to an Android renderer. First, you'll query and enable the required
+    extensions, then use a ray tracing pipeline or ray queries to traverse the scene. After that, you'll build
+    acceleration structures and use bindless resources for material data. Finally, you'll implement reflections,
+    shadows, and refractions, and use Arm tools to debug and optimize ray traversal.
+  faqs:
+  - question: How do I know my Android device can run the ray tracing steps?
+    answer: >-
+      Confirm that the device exposes the required Vulkan ray tracing extensions. Immortalis GPUs
+      such as Immortalis‑G715, Immortalis‑G720, and Immortalis‑G925 support ray tracing, while
+      some Mali G7‑series GPUs after Mali‑G715 might or might not depending on the phone model.
+  - question: Should I use ray tracing pipeline or ray query as the ray traversal option?
+    answer: >-
+      Use `VK_KHR_ray_query` for most simple effects because it lets you add traversal to existing
+      shaders. Use `VK_KHR_ray_tracing_pipeline`
+      when you need its dedicated ray-tracing shader stages and driver-managed traversal.
+  - question: What should exist after I build the acceleration structure?
+    answer: >-
+      After you build an acceleration structure, use it to represent scene geometry for fast
+      ray-intersection tests. Vulkan exposes it through `VK_KHR_acceleration_structure`; the
+      implementation is opaque but typically tree-like.
+  - question: Do I need bindless materials to implement ray tracing effects?
+    answer: >-
+      No. `VK_EXT_descriptor_indexing` is independent of ray tracing. Use it when you need shaders
+      to dynamically index arrays of buffers and textures, such as when accessing material data for ray hits.
+  - question: Which build preference should I use for acceleration structures?
+    answer: >-
+      For static Bottom-Level Acceleration Structures (BLASes), use `VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_TRACE_BIT_KHR`. For
+      Top-Level Accelerations Structures (TLASes) and dynamic BLASes, use `VK_BUILD_ACCELERATION_STRUCTURE_PREFER_FAST_BUILD_BIT_KHR`,
+      usually with `VK_BUILD_ACCELERATION_STRUCTURE_ALLOW_UPDATE_BIT_KHR`.
+# END generated_summary_faq
+
 author: Iago Calvo Lista
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
@@ -28,7 +78,6 @@ operatingsystems:
     - Android
 tools_software_languages:
     - Vulkan
-
 
 further_reading:
     - resource:
@@ -49,7 +98,6 @@ further_reading:
         title: "Realistic Mobile Graphics with Optimized Ray Tracing (GDC 2024)"
         link: https://www.youtube.com/watch?v=OPLTK7RB7co
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

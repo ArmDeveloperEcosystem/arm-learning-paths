@@ -16,6 +16,7 @@ test_images:
 test_link: null
 test_maintenance: false
 title: PyTorch
+description: Install PyTorch on Arm Linux and run a starter example so you can build and test machine learning applications with Python.
 tool_install: true
 weight: 1
 ---

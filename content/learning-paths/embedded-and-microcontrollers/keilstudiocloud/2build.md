@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Work with an example project"
+description: Import an example project into Keil Studio Cloud, build it, and run a basic debug session in the browser.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

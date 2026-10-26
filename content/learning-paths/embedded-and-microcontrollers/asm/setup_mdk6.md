@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Setting up a Project in Keil Studio (VS Code)" 
+description: Create a Keil Studio csolution project for the Cortex-M assembly examples and prepare it for mixed C and assembly code.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

@@ -1,5 +1,6 @@
 ---
 title: Initial setup
+description: Install Raspberry Pi OS and configure the packages needed to build the voice-controlled ChatGPT bot.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

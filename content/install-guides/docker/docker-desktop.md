@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Docker Desktop
+description: Install Docker Desktop on Windows or macOS and test container execution so you can build and run Docker workloads on Arm-capable systems.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

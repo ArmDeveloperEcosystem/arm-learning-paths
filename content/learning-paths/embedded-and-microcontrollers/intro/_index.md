@@ -16,17 +16,21 @@ prerequisites:
 
 author: Jason Andrews
 
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-M
+    - Cortex-A
     - Ethos-U
 operatingsystems:
     - Baremetal
     - RTOS
 tools_software_languages:
-
 
 further_reading:
     - resource:
@@ -37,7 +41,6 @@ further_reading:
         title: BBC micro:bit
         link: https://microbit.org/
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

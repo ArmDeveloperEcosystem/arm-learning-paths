@@ -1,5 +1,6 @@
 ---
 title: Write a noise suppression algorithm
+description: Build a noise suppression algorithm in Python and understand the math that prepares it for embedded DSP implementation.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

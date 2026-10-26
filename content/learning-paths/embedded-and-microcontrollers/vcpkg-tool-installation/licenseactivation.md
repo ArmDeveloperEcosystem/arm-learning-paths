@@ -1,5 +1,6 @@
 ---
 title: Activate a license
+description: Activate tool licenses through vcpkg so installed Arm command-line tools are ready for use.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

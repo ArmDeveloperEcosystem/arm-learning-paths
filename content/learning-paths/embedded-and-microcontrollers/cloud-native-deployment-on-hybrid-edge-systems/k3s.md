@@ -1,5 +1,6 @@
 ---
 title: Deploy SMARTER Demo using K3s
+description: Deploy the SMARTER demo with K3s on Arm Virtual Hardware and verify container orchestration for the hybrid edge system.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

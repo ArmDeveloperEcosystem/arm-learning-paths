@@ -15,20 +15,24 @@ prerequisites:
 draft: true
 cascade:
     draft: true
-
 author: Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-M
+    - Cortex-A
+    - Cortex-R
     - Ethos-U
 operatingsystems:
     - Baremetal
     - RTOS
 tools_software_languages:
-
 
 further_reading:
     - resource:
@@ -39,7 +43,6 @@ further_reading:
         title: BBC micro:bit
         link: https://microbit.org/
         type: website
-
 
 weight: 1
 layout: "learningpathall"       # All files under learning paths have this same wrapper

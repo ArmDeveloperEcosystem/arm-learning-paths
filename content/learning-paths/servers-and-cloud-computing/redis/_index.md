@@ -15,14 +15,20 @@ prerequisites:
     - If you do not have an Arm node, the next section discusses some options.
 
 author: Elham Harirpoush
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+platforms:
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
+  - Arm AGI CPU
 armips:
     - Neoverse
 operatingsystems:
@@ -31,14 +37,11 @@ tools_software_languages:
     - Redis
     - Runbook
 
-
 further_reading:
     - resource:
         title: Redis documentation
         link: https://redis.io/docs/
         type: documentation
-
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

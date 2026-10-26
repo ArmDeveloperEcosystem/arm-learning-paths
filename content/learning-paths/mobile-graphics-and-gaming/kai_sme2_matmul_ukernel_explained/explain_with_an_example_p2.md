@@ -29,7 +29,7 @@ llama_context::decode
 								    kai_run_lhs_quant_pack_qsi8d32p_f32_neon
 ```
 The diagram below illustrates how the LHS is quantized and packed by *kai_run_lhs_quant_pack_qsi8d32p_f32_neon*:
-![Figure showing Quantization and Packing of the LHS alt-text#center](images/kai_run_lhs_quant_pack_qsi8d32p_f32_neon_for_sme2.jpg "Quantization and Packing of the LHS")
+![Figure showing Quantization and Packing of the LHS alt-text#center](images/kai_run_lhs_quant_pack_qsi8d32p_f32_neon_for_sme2.webp "Quantization and Packing of the LHS")
 
 The values of mr, nr, and kr can be obtained in the same way as described above.
 The values of `mr`, `nr`, and `kr`, together with the matrix dimensions `m` and `k`, are passed as parameters to *kai_run_lhs_quant_pack_qsi8d32p_f32_neon*.

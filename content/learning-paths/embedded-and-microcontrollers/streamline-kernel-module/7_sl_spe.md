@@ -1,5 +1,6 @@
 ---
 title: Use Streamline with the Statistical Profiling Extension
+description: Use Arm Streamline with Statistical Profiling Extension data to analyze Linux workload behavior in more detail.
 weight: 8
 
 ### FIXED, DO NOT MODIFY

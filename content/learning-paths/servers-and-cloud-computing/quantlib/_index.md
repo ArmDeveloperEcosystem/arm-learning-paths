@@ -1,6 +1,6 @@
 ---
 title: Benchmark QuantLib on Azure Cobalt
-    
+
 description: Learn how to build QuantLib on an Arm-based Azure Cobalt virtual machine and run benchmark workloads to evaluate performance on Arm64 cloud infrastructure.
 
 minutes_to_complete: 60
@@ -21,12 +21,14 @@ prerequisites:
 author: Chris Moroney
 
 generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
-cloud_service_providers:
-    - Microsoft Azure
+platforms:
+    - Microsoft Azure Cobalt
 armips:
     - Neoverse
 tools_software_languages:

@@ -1,5 +1,6 @@
 ---
 title: Add the interrupt code
+description: Add interrupt handling code to the Raspberry Pi Pico application so the device responds to sensor changes without constant polling.
 weight: 9
 
 ### FIXED, DO NOT MODIFY

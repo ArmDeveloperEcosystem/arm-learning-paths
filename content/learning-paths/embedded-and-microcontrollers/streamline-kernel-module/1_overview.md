@@ -1,5 +1,6 @@
 ---
 title: Profile Linux kernel modules with Arm Streamline
+description: Review the Arm Streamline kernel module profiling workflow and the Linux targets used for performance analysis.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

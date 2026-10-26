@@ -14,6 +14,8 @@ This is the path to use first because it matches the model preparation workflow 
 
 ## Lower directly with the ExecuTorch VGF backend
 
+The example enables two optional debug settings. The `--emit-debug-info` Model Converter flag embeds ExecuTorch stack traces and module metadata in the VGF, while `dump_debug_info(VgfCompileSpec.DebugMode.TOSA)` preserves the corresponding TOSA debug information during lowering. You can omit both settings when you don't need debug information.
+
 Create a Python file named `export_vgf.py`:
 
 ```python
@@ -32,8 +34,9 @@ os.makedirs("executorch-model", exist_ok=True)
 
 exported_model = torch.export.load("add_sigmoid.pt2")
 
-compile_spec = VgfCompileSpec()
+compile_spec = VgfCompileSpec(compiler_flags=["--emit-debug-info"])
 compile_spec.dump_intermediate_artifacts_to("executorch-model")
+compile_spec.dump_debug_info(VgfCompileSpec.DebugMode.TOSA)
 partitioner = VgfPartitioner(compile_spec)
 
 edge_pm = to_edge_transform_and_lower(

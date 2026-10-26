@@ -1,6 +1,7 @@
 ---
 # User change
 title: Debug connection with Arm DSTREAM
+description: Create an Arm Development Studio debug connection for a hardware target using a DSTREAM debug probe.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

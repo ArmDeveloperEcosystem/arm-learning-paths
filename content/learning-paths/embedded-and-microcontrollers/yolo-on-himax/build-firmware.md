@@ -1,5 +1,6 @@
 ---
 title: Build the firmware
+description: Build the Himax firmware that runs the YOLO object detection model on the WiseEye2 microcontroller module.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,6 @@
 ---
 title: Motivation
+description: Understand why hybrid-runtime enables cloud-native deployment of embedded workloads across Cortex-A and Cortex-M cores.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

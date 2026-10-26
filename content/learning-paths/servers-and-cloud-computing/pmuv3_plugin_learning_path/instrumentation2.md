@@ -96,6 +96,7 @@ int main(int argc, char **argv) {
     shutdown_resources();
 
     return EXIT_SUCCESS;
+}
 ```
 
 Build the application:
@@ -116,20 +117,20 @@ The output now contains data for 2 sections and prints:
 - running pmuv3_plugin_bundle.c...OK
 section 1: 0
 section 2: 1
-End is 296049, Start is 233645, diff is 62404
-End is 2163, Start is 1881, diff is 282
-End is 35572, Start is 24711, diff is 10861
-End is 0, Start is 0, diff is 0
-End is 0, Start is 0, diff is 0
-End is 0, Start is 0, diff is 0
-End is 0, Start is 0, diff is 0
-End is 316557, Start is 309185, diff is 7372
-End is 2362, Start is 2224, diff is 138
-End is 40786, Start is 38413, diff is 2373
-End is 0, Start is 0, diff is 0
-End is 0, Start is 0, diff is 0
-End is 0, Start is 0, diff is 0
-End is 0, Start is 0, diff is 0
+End is 4295746437, Start is 4295069884, diff is 676553
+End is 4294968118, Start is 4294967724, diff is 394
+End is 4295307089, Start is 4294993064, diff is 314025
+End is 4295295692, Start is 4294986720, diff is 308972
+End is 4294967867, Start is 4294967499, diff is 368
+End is 4295245791, Start is 4294976253, diff is 269538
+End is 4295012643, Start is 4294968164, diff is 44479
+End is 4295863211, Start is 4295753132, diff is 110079
+End is 4294968215, Start is 4294968196, diff is 19
+End is 4295331822, Start is 4295308901, diff is 22921
+End is 4295319761, Start is 4295297198, diff is 22563
+End is 4294967953, Start is 4294967918, diff is 35
+End is 4295268632, Start is 4295247245, diff is 21387
+End is 4295014550, Start is 4295012949, diff is 1601
 ```
 
 The results are captured in the file `bundle3.csv`.
@@ -144,8 +145,8 @@ The data shows the metrics on the first line and the values for section 1 on the
 
 ```output
 CONTEXT,CPU_CYCLES,BR_MIS_PRED,BR_PRED,BR_RETIRED,BR_MIS_PRED_RETIRED,BR_IMMED_SPEC,BR_INDIRECT_SPEC
-SECTION_1,60569,254,10871,0,0,0,0
-SECTION_2,7413,22,1917,0,0,0,0
+SECTION_1,679996,517,313451,307426,485,268808,44711
+SECTION_2,110975,33,24423,24000,41,22507,1925
 ```
 
 You can use this methodology to instrument multiple sections of code and generate the data for all bundles by modifying the `run.sh` file from the single section instrumentation. All you need to do is change the command from `test1` to `test2` and invoke the `run.sh` script again.

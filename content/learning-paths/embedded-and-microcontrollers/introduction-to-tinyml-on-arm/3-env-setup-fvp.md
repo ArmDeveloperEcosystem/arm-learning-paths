@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Set up the Corstone-320 FVP"
+description: Install and configure the Corstone-320 Fixed Virtual Platform for running TinyML examples without physical hardware.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

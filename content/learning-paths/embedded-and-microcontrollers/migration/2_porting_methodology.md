@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Porting methodology" 
+description: Apply a structured porting methodology for moving Linux applications from x86_64 to Arm AArch64.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

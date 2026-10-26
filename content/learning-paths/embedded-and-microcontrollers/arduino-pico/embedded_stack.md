@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Embedded Programming"
+description: Understand the layers of an embedded software stack and how firmware, runtime libraries, and hardware interact on microcontrollers.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

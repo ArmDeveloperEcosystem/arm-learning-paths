@@ -1,6 +1,7 @@
 ---
 layout: learningpathall
 title: Arm in Microcontrollers
+description: Understand how Arm Cortex-M processors are used in microcontrollers and where they fit in embedded system design.
 weight: 2
 ---
 

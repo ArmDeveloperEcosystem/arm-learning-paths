@@ -17,7 +17,53 @@ prerequisites:
     - Raspberry Pi Pico board.
     - Raspberry Pi 3, 4, 400, or 5 as a development computer.
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-13T18:50:05Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: e408a86c9afbacbac3ab183c88a25e7101ac8e696e2d5023ac010a9b7764ce2a
+  summary_generated_at: '2026-08-13T18:50:05Z'
+  summary_source_hash: e408a86c9afbacbac3ab183c88a25e7101ac8e696e2d5023ac010a9b7764ce2a
+  faq_generated_at: '2026-08-13T18:50:05Z'
+  faq_source_hash: e408a86c9afbacbac3ab183c88a25e7101ac8e696e2d5023ac010a9b7764ce2a
+  summary: >-
+    You'll set up a Raspberry Pi Pico C and C++ development environment and debug applications on
+    Cortex-M0+. First, you'll install the Pico SDK, build a hello example with CMake and GCC, and
+    verify its LED and USB output. Then, you'll measure Fibonacci implementations with SysTick and
+    use the Serial Wire Debug (SWD) interface to load and debug programs without BOOTSEL.
+  faqs:
+  - question: Which script installs the Pico SDK, and when should I run it?
+    answer: >-
+      Use the `pico_setup.sh` script maintained in GitHub. Run it before building the examples so
+      the SDK and build files are available.
+  - question: What result should I expect when I run the hello example?
+    answer: >-
+      The on-board LED blinks, and the program prints Hello messages over USB. Seeing both indicates
+      the board and SDK setup work.
+  - question: How do I know my build environment is configured correctly before moving on?
+    answer: >-
+      CMake configure and build complete without errors and produce binaries for the Pico. Running
+      the hello program confirms the toolchain and SDK are usable.
+  - question: How do I verify that SysTick is measuring cycles as intended?
+    answer: >-
+      Run the performance example and check the printed cycle counts. The two Fibonacci implementations
+      should report different counts, showing the counter is active.
+  - question: How can I load and debug Pico applications without using BOOTSEL?
+    answer: >-
+      Use the three-pin SWD interface. SWD lets you load and run from the command
+      line and debug interactively with `gdb`.
+# END generated_summary_faq
+
 author: Jason Andrews
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -38,7 +84,6 @@ further_reading:
         title: Raspberry Pi Pico documentation
         link: https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html
         type: documentation
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

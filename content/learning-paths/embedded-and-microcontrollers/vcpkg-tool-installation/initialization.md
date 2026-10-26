@@ -1,5 +1,6 @@
 ---
 title: Initialize vcpkg
+description: Initialize vcpkg in the project so command-line tools can be installed from the configured registries.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

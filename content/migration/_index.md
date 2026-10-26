@@ -113,7 +113,7 @@ The below resources are curated to address migration challenges on specific clou
 - [simd.info](https://simd.info/) - a searchable reference tool for C intrinsics for SIMD engines.
 - [migrate-ease](https://github.com/migrate-ease/migrate-ease) - scan your source code for suggestions to migrate to Arm Neoverse, get started with [Migrate applications to Arm servers using migrate-ease](/learning-paths/servers-and-cloud-computing/migrate-ease/).
 - [Arm Infrastructure Solutions blog](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/) - an Arm-specific technical blog.
-- [Arm Learning Paths for Servers and Cloud](/learning-paths/servers-and-cloud-computing/) - general tutorials for Arm servers. You can search for specific cloud service providers, including [AWS](/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=aws/#), [Google Cloud](/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=google-cloud/#), [Microsoft Azure](/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=microsoft-azure/#), and [Oracle](/learning-paths/servers-and-cloud-computing/?cloud-service-providers-filter=oracle/#).
+- [Arm Learning Paths for Servers and Cloud](/learning-paths/servers-and-cloud-computing/) - general tutorials for Arm servers. You can search for specific platforms, including [Arm AGI](/learning-paths/servers-and-cloud-computing/?platforms-filter=arm-agi/#), [AWS](/learning-paths/servers-and-cloud-computing/?platforms-filter=aws/#), [Google Cloud](/learning-paths/servers-and-cloud-computing/?platforms-filter=google-cloud/#), [Microsoft Azure](/learning-paths/servers-and-cloud-computing/?platforms-filter=microsoft-azure/#), and [Oracle](/learning-paths/servers-and-cloud-computing/?platforms-filter=oracle/#).
      
 
 - AWS has additional resources such as the [Porting Advisor for Graviton](/install-guides/porting-advisor/) and [AWS Graviton Technical Guide](https://github.com/aws/aws-graviton-getting-started).
@@ -270,7 +270,7 @@ You may have some performance analysis methodologies you already follow, continu
 Below are some additional performance analysis tips and methodologies specific to Arm-based servers:
 - [Learn the Arm Neoverse N1 performance analysis methodology](/learning-paths/servers-and-cloud-computing/top-down-n1/)
 - [Profiling for Neoverse with Streamline CLI Tools](/learning-paths/servers-and-cloud-computing/profiling-for-neoverse/)
-- [Learn how to optimize an application with BOLT](/learning-paths/servers-and-cloud-computing/bolt/)
+- [Optimize AArch64 binaries with LLVM BOLT](/learning-paths/servers-and-cloud-computing/bolt/)
 - [How to use the Arm Performance Monitoring Unit and System Counter](/learning-paths/servers-and-cloud-computing/arm_pmu/)
 - [NVIDIA Grace CPU Benchmarking Guide](https://nvidia.github.io/grace-cpu-benchmarking-guide/index.html)
 - [Learn about Large System Extensions (LSE)](/learning-paths/servers-and-cloud-computing/lse/)

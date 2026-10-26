@@ -1,23 +1,25 @@
 ---
-title: "Tune a Reverse Proxy or API Gateway"
+title: Tune an NGINX reverse proxy or API gateway for performance 
+description: Tune NGINX reverse proxy and API gateway directives for Arm-based platforms so upstream keepalive, rewrites, and caching decisions match your workload.
 weight: 5
 layout: "learningpathall"
 ---
 
-Use the information below as general guidance for tuning Nginx.
+## NGINX reverse proxy and API gateway configuration
 
-##  Nginx Reverse Proxy and API Gateway Configuration
+You'll now review a tuned configuration based on the configuration in the [set up a reverse proxy and API gateway](/learning-paths/servers-and-cloud-computing/nginx/reverse_proxy_and_api_gateway/) section of the [Learn how to deploy NGINX](/learning-paths/servers-and-cloud-computing/nginx/) Learning Path. 
 
-In the [Setup Reverse Proxy and API Gateway](/learning-paths/servers-and-cloud-computing/nginx/basic_static_file_server/) section of the [Learn how to deploy Nginx](/learning-paths/servers-and-cloud-computing/nginx/) learning path, a bare minimum Reverse Proxy and API Gateway configuration was discussed. In this section, you will look at a tuned configuration.
+Use this example configuration as a starting point, then size each directive for your workload and validate the result with repeatable measurements.
 
-### Top Level nginx.conf
+### Top-level nginx.conf
 
-The same top level config used in [Tune a static file server](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server/) is suggested.
+Use the same top-level configuration from [Tune a static file server](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server/).
 
-  ### Reverse Proxy and API Gateway configuration
+### Tuned reverse proxy and API gateway configuration
 
-A tuned configuration (`/etc/nginx/conf.d/loadbalancer.conf`) is shown below. Only performance relevant directives that were not discussed in the [file server section](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server/) are explained here.
-```
+The following is a tuned configuration (`/etc/nginx/conf.d/loadbalancer.conf`):
+
+```nginx
 # Upstreams for https
 upstream ssl_file_server_com {
   server <fileserver_1_ip_or_dns>:443;
@@ -25,7 +27,7 @@ upstream ssl_file_server_com {
   keepalive 1024;
 }
 
-# HTTPS reverse proxy and API Gateway
+# HTTPS reverse proxy and API gateway
 server {
   listen 443 ssl reuseport backlog=65535;
   root /usr/share/nginx/html;
@@ -36,7 +38,7 @@ server {
   ssl_certificate_key /etc/nginx/ssl/ecdsa.key;
   ssl_ciphers ECDHE-ECDSA-AES256-GCM-SHA384;
 
-  # API Gateway Path
+  # API gateway path
   location ~ ^/api_old/.*$ {
     limit_except GET {
       deny all;
@@ -50,7 +52,7 @@ server {
     proxy_set_header Connection "";
   }
 
-  # Reverse Proxy Path
+  # Reverse proxy path
   location / {
     limit_except GET {
       deny all;
@@ -62,12 +64,26 @@ server {
 }
 ```
 
-* [`keepalive`](https://nginx.org/en/docs/http/ngx_http_upstream_module.html#keepalive):
-  * This directive enables connection caching for upstream servers.
-  * This is disabled by default. It should be turned on because it can improve performance significantly. This value should be increased further when more upstream servers are added to the `upstream` block.
-  * The value of 1024 shown above is probably more than enough for most production deployments. It is recommended that you test in order to find an appropriate value for your deployment.
-  * When this directive is used, the `proxy_http_version` should be set to 1.1 and `proxy_set_header` connection header should be cleared for upstream keep alive to work properly.
-* [`proxy_cache_path`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_path)
-  * This directive is not in the configuration above. However it is worth mentioning because it can impact performance greatly. This enables a cache within the Reverse Proxy or API Gateway.
-  * When this directive is used, both `proxy_cache_lock` and `proxy_cache_valid` should be considered as additional optimizations.
-  * The [Nginx admin-guide](https://docs.nginx.com/nginx/admin-guide/) has a section on [content-caching](https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/) that should be explored.
+The following are performance-relevant directives that weren't described in the [static file server section](/learning-paths/servers-and-cloud-computing/nginx_tune/tune_static_file_server/):
+
+- [`keepalive`](https://nginx.org/en/docs/http/ngx_http_upstream_module.html#keepalive): Controls the cache of idle connections to upstream servers. For NGINX 1.29.7 and later, upstream keepalive is enabled by default with a small cache. Set `keepalive` explicitly when you want to tune the upstream idle connection cache for your workload.
+
+  For older NGINX versions, enable upstream keepalive with the `keepalive` directive. Also set [`proxy_http_version`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_http_version) to `1.1` and clear the `Connection` header with [`proxy_set_header`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_set_header).
+  
+  The value `1024` is a cache size for idle upstream connections per worker, not a total upstream connection limit. Keep this value small enough that upstream servers can still accept new connections.
+- [`rewrite`](https://nginx.org/en/docs/http/ngx_http_rewrite_module.html#rewrite): Rewrites the old API path to the internal API path. Regular expression-heavy configurations can make PCRE performance more important, as discussed in [Kernel, compiler, and libraries](/learning-paths/servers-and-cloud-computing/nginx_tune/kernel_comp_lib/).
+- [`proxy_pass`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_pass): Forwards matching requests to the upstream server group. Use the same upstream block for related locations when you want them to share the same upstream connection pool.
+- [`internal`](https://nginx.org/en/docs/http/ngx_http_core_module.html#internal) and [`limit_except`](https://nginx.org/en/docs/http/ngx_http_core_module.html#limit_except): Included for request handling and access control, not as primary performance settings.
+- [`proxy_cache_path`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_path): Not in the example configuration, but it's worth considering when responses can be cached by the reverse proxy or API gateway.
+  
+  When you use this directive, review [`proxy_cache_lock`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_lock) and [`proxy_cache_valid`](https://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_valid).
+  
+  For more information, see the NGINX Admin Guide section on [content caching](https://docs.nginx.com/nginx/admin-guide/content-cache/content-caching/).
+- NGINX variables: The example uses `$hostname` in `server_name`. For the full list of built-in variables, see the NGINX [variable index](https://nginx.org/en/docs/varindex.html).
+
+## What you've learned and what's next
+
+You've now reviewed reverse proxy and API gateway directives that affect upstream connection reuse, request rewriting, access control, and caching decisions.
+
+Next, you'll test NGINX optimizations with a repeatable `wrk` workload.
+

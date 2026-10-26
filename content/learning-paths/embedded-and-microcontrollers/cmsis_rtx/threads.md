@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Create RTOS threads"
+description: Create RTX5 threads with CMSIS-RTOS2 APIs and coordinate them in the embedded example application.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

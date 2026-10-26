@@ -124,4 +124,4 @@ The compiled DLL will be available under the ARM64EC subfolder. You can then use
 To use MSBuild for the second DLL, proceed in the same way. For your convenience, you can refer to the [full source code on GitHub](https://github.com/dawidborycki/Arm64EC.Porting.MSBuild/).
 
 ## Summary
-This learning path demonstrated how to port C/C++ DLLs to Arm64 using Arm64EC. It showed you how to use CMake and MSBuild projects. You also learned how to use DLLs in the Python app with ctypes. This information can help you rapidly build UIs and keep computation-intensive work in a separate DLL. You can then build those DLLs for Arm64 and mix them with your existing x64 dependencies.
+This learning path demonstrated how to port C++ DLLs to Arm64 using Arm64EC. It showed you how to use CMake and MSBuild projects. You also learned how to use DLLs in the Python app with ctypes. This information can help you rapidly build UIs and keep computation-intensive work in a separate DLL. You can then build those DLLs for Arm64 and mix them with your existing x64 dependencies.

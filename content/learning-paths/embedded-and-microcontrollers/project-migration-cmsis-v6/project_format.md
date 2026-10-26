@@ -1,5 +1,6 @@
 ---
 title: Project format conversion
+description: Convert a legacy CMSIS project format to the CMSIS v6 csolution structure used by modern tools.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

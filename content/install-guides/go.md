@@ -43,19 +43,19 @@ If you see a different result, you are not using an Arm computer running 64-bit 
 The easiest way to install Go for Ubuntu on Arm is to download a release, extract it, and set up your `PATH` environment variable. To download and install Go, follow these steps:
 
 {{% notice Note %}}
-The following commands use Go version 1.24.5. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version of Go, see [All releases](https://go.dev/dl/).
+The following commands use Go version 1.26.5. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version of Go, see [All releases](https://go.dev/dl/).
 {{% /notice %}}
 
 1. Download a Go release:
 
 ```bash { target="ubuntu:latest" }
-wget https://go.dev/dl/go1.24.5.linux-arm64.tar.gz
+wget https://go.dev/dl/go1.26.5.linux-arm64.tar.gz
 ```
 
 2. Extract the release to `/usr/local/go`:
 
 ```bash { target="ubuntu:latest" }
-sudo tar -C /usr/local -xzf ./go1.24.5.linux-arm64.tar.gz
+sudo tar -C /usr/local -xzf ./go1.26.5.linux-arm64.tar.gz
 ```
 
 3. Add the path to `go` in your `.bashrc` file:
@@ -76,7 +76,7 @@ go version
 The output is similar to:
 
 ```output
-go version go1.24.5 linux/arm64
+go version go1.26.5 linux/arm64
 ```
 
 ## Next steps

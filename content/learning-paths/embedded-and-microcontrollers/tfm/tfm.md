@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build and run TF-M tests and example application"
+description: Build and run Trusted Firmware-M tests and the reference application on an Arm Fixed Virtual Platform.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

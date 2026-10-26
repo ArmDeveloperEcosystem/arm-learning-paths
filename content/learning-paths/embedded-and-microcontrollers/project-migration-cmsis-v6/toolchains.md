@@ -1,5 +1,6 @@
 ---
 title: Supported toolchains
+description: Review supported toolchains for CMSIS v6 project migration and select the compiler configuration for the target.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

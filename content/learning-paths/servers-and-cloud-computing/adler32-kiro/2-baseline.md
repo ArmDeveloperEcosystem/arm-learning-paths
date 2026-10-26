@@ -10,7 +10,7 @@ layout: learningpathall
 
 To get started, you need an Arm Linux system with SVE support. Suitable cloud instances can run on AWS Graviton3 or Graviton4, Microsoft Cobalt 100, or Google Axion. The examples in this Learning Path were tested on Ubuntu 26.04.
 
-You also need an AI coding assistant with the Arm MCP server configured. Supported assistants include [GitHub Copilot](/install-guides/github-copilot/), [Kiro CLI](/install-guides/kiro-cli/), [Claude Code](/install-guides/claude-code/), [Gemini CLI](/install-guides/gemini/), and [Codex CLI](/install-guides/codex-cli/). For setup instructions, see the [Arm MCP server Learning Path](/learning-paths/servers-and-cloud-computing/arm-mcp-server/).
+You also need an AI coding assistant with the Arm MCP server configured. Supported assistants include [GitHub Copilot](/install-guides/github-copilot/), [Kiro CLI](/install-guides/kiro-cli/), [Claude Code](/install-guides/claude-code/), [Antigravity CLI](/install-guides/antigravity/), and [Codex CLI](/install-guides/codex-cli/). For setup instructions, see the [Arm MCP server Learning Path](/learning-paths/servers-and-cloud-computing/arm-mcp-server/).
 
 {{< notice Note >}}
 The AI responses shown are samples. Your AI assistant's responses will vary in wording, detail, and structure depending on the tool and model you use. Focus on the key concepts rather than the exact wording.

@@ -1,6 +1,7 @@
 ---
 # User change
 title: Assembly Instructions for the Chassis Bays
+description: Assemble the 3D-printed chassis bays used to mount single board computers in the universal SBC rack system.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

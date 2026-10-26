@@ -40,7 +40,6 @@ You are now ready to download this model and run a full classification example f
 
 ```python
 from transformers import AutoModelForSequenceClassification
-from transformers import TFAutoModelForSequenceClassification
 from transformers import AutoTokenizer, AutoConfig
 import numpy as np
 from scipy.special import softmax
@@ -104,7 +103,6 @@ Now that you have run the model, let's add the ability to profile the model exec
 
 ```python
 from transformers import AutoModelForSequenceClassification
-from transformers import TFAutoModelForSequenceClassification
 from transformers import AutoTokenizer, AutoConfig
 import numpy as np
 from scipy.special import softmax

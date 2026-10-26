@@ -1,5 +1,6 @@
 ---
 title: Arm Linux Migration Tools
+description: Install Arm Linux Migration Tools on Arm Linux to access utilities for code analysis, performance profiling, containers, and migration assessment.
 
 additional_search_terms:
 - migration
@@ -59,7 +60,7 @@ The Arm Linux Migration Tools package includes the following utilities:
 | KubeArchInspect | Kubernetes architecture inspection and reporting tool | `kubearchinspect --help` | [Migrate containers to Arm using KubeArchInspect](/learning-paths/servers-and-cloud-computing/kubearchinspect/) |
 | Migrate Ease | Migration assistance tool for analyzing and porting workloads | `migrate-ease-cpp --help` | [Migrate applications to Arm servers using migrate-ease](/learning-paths/servers-and-cloud-computing/migrate-ease/) |
 | Aperf | Performance monitoring tool for Linux systems | `aperf --help` | [Aperf install guide](/install-guides/aperf/) |
-| BOLT | Binary optimization and layout tool (part of LLVM) | `llvm-bolt --help` | [BOLT install guide](/install-guides/bolt/) |
+| BOLT | Binary optimization and layout tool (part of LLVM) | `llvm-bolt --help` | [LLVM install guide](/install-guides/llvm/#verify-bolt-tools) |
 | PAPI | Performance API for accessing hardware performance counters | `papi_avail -h` | [PAPI install guide](/install-guides/papi/) |
 | Perf | Linux performance analysis tool for profiling and tracing | `perf --help` | [Perf install guide](/install-guides/perf/) |
 | Process Watch | Process monitoring tool for Linux systems | `processwatch -h` | [Run Process watch on your Arm machine](/learning-paths/servers-and-cloud-computing/processwatch/) |

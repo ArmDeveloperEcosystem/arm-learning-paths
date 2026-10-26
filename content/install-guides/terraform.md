@@ -18,6 +18,7 @@ test_images:
 test_link: false
 test_maintenance: true
 title: Terraform
+description: Install Terraform on Ubuntu for Arm or Apple Silicon macOS and verify the CLI so you can manage cloud infrastructure as code.
 tool_install: true
 weight: 1
 ---
@@ -91,14 +92,14 @@ terraform version
 The output for Linux is similar to:
 
 ```output
-Terraform v1.14.9
+Terraform v1.15.8
 on linux_arm64
 ```
 
 The output for macOS is similar to:
 
 ```output
-Terraform v1.14.9
+Terraform v1.15.8
 on darwin_arm64
 ```
 ## Next steps

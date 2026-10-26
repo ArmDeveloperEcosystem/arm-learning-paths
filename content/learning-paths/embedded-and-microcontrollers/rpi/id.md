@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Identifying the hardware"
+description: Identify Raspberry Pi 4 hardware details and system information before running software and performance examples.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

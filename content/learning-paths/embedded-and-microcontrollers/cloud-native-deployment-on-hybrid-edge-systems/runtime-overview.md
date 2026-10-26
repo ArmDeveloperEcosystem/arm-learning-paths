@@ -1,5 +1,6 @@
 ---
 title: Hybrid container runtime
+description: Review the hybrid container runtime architecture and how it maps firmware containers to Arm edge hardware.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

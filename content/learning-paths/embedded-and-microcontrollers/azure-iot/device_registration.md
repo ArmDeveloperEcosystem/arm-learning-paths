@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build a Python-based IoT telemetry simulator"
+description: Build a Python telemetry simulator and register it as an Azure IoT device for sending sample sensor readings.
 
 weight: 4
 

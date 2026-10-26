@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Measure Power with ULINKplus"
+description: Measure target power with ULINKplus in Keil uVision and correlate energy use with firmware execution.
 
 weight: 6 # 1 is first, 2 is second, etc.
 

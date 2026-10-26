@@ -1,5 +1,6 @@
 ---
 title: Refactor the application
+description: Refactor the Raspberry Pi Pico application to separate state handling from hardware control and improve the device workflow.
 weight: 10
 
 ### FIXED, DO NOT MODIFY

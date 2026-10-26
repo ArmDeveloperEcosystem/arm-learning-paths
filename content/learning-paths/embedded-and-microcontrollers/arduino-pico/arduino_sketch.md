@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Program your smart device prototype"
+description: Write and upload the Arduino sketch for the Raspberry Pi Pico so the smart device prototype can react to motion events.
 
 weight: 7 # 1 is first, 2 is second, etc.
 

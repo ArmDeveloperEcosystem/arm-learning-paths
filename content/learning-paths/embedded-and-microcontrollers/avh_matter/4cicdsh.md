@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Manage development in a CI/CD workflow with Self-Hosted Runner"
+description: Configure a GitHub Actions self-hosted runner on Arm Virtual Hardware to automate Matter example builds and tests.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

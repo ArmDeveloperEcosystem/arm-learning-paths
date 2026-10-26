@@ -1,5 +1,6 @@
 ---
 title: Use vcpkg
+description: Use vcpkg commands to install, list, and manage versioned tools for an embedded development workflow.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

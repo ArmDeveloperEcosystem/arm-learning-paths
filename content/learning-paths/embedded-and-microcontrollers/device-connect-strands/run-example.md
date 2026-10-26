@@ -1,5 +1,6 @@
 ---
 title: Run device discovery and agent control examples
+description: Run local Device Connect examples that demonstrate device discovery and agent control with simulated edge devices.
 weight: 4
 
 # FIXED, DO NOT MODIFY

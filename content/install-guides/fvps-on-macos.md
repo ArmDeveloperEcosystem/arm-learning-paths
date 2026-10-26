@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: AVH FVPs on macOS
+description: Run Arm Virtual Hardware Fixed Virtual Platforms on macOS with Docker containers so you can use FVP models from an Apple development machine.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -66,7 +67,7 @@ These wrappers can be used exactly like any native model executable:
 Add `$(pwd)/FVPs-on-Mac/bin` to `PATH` environment:
 
 ```sh
-export PATH=$PATH:$(pwd)/FVPs-on-Mac/bin
+export PATH="$HOME/FVPs-on-Mac/bin:$PATH"
 ```
 
 Put this to your `~/.zshrc` to make it permanent.

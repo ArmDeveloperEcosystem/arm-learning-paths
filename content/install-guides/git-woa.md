@@ -1,5 +1,6 @@
 ---
 title: Git for Windows on Arm
+description: Install native Git for Windows on Arm and verify Git commands in Command Prompt, PowerShell, or Git Bash.
 
 additional_search_terms:
 - git

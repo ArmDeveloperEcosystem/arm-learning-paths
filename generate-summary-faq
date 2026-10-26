@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Team-friendly shortcut for the AI-assisted Learning Path summary/FAQ generator.
+# With no arguments, run the normal full generation workflow for all opted-in paths.
+# With arguments, pass them through to the full tool for category/path/dry-run control.
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+if [[ $# -eq 0 ]]; then
+  exec "$SCRIPT_DIR/tools/generate-summary-faq" --all --write
+fi
+
+exec "$SCRIPT_DIR/tools/generate-summary-faq" "$@"

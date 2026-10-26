@@ -1,5 +1,6 @@
 ---
 title: Device mapping
+description: Map legacy device identifiers to CMSIS v6 device definitions so migrated projects select the correct target.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

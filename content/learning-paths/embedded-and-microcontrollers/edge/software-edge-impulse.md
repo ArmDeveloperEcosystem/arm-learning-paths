@@ -1,5 +1,6 @@
 ---
 title: Train and deploy a TinyML audio classifier with Edge Impulse
+description: Use Edge Impulse to collect audio samples, train a TinyML classifier, and generate deployment code for the board.
 weight: 3
 
 # FIXED, DO NOT MODIFY

@@ -1,5 +1,4 @@
 ---
-
 title: Implement Code level Performance Analysis using the PMUv3 plugin 
 
 minutes_to_complete: 60
@@ -13,14 +12,20 @@ learning_objectives:
     - Use a tool to plot raw PMU event values along with KPI metric values such as MPKI, stalls, and IPC to aid performance visualization.
 
 prerequisites:
-    - An Arm-based computer running Linux.
+    - An Arm-based computer running Linux, such as an Arm AGI CPU platform.
     - Some familiarity with Linux application performance analysis.
 
 author: Gayathri Narayana Yegna Narayanan
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 ### Tags
 skilllevels: Advanced
 subjects: Performance and Architecture
+platforms:
+    - Arm AGI CPU
 armips:
     - Neoverse
 tools_software_languages:
@@ -31,7 +36,6 @@ tools_software_languages:
 
 operatingsystems:
     - Linux
-
 
 further_reading:
     - resource:
@@ -47,10 +51,10 @@ further_reading:
         link: https://developer.arm.com/documentation/109215/0200/?lang=en
         type: documentation
 
-
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

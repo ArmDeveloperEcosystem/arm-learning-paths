@@ -28,6 +28,7 @@ You can use application controls to enable extra functionality or gather perform
 |---|---|---|
 |Input tokens|128|Number of prompt (input) tokens fed to the model before generation starts.|
 |Output tokens|128|Number of new tokens the model should generate after the prompt.|
+|Context size|2048|Context size in tokens.|
 |Threads|4|Number of CPU threads used for inference.|
 |Iterations|5|Number of measured benchmark runs to collect stable, averaged measurements.|
 |Warmup|1|Number of warmup iterations which are not counted in benchmarking, these eliminate one-time overheads before measuring.

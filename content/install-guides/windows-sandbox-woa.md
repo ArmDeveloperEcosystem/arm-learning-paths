@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Windows Sandbox for Windows on Arm
+description: Enable and install Windows Sandbox on Windows on Arm so you can run isolated desktop test environments on supported Arm devices.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

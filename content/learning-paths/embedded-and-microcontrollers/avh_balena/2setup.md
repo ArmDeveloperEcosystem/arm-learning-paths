@@ -1,5 +1,6 @@
 ---
 title: "Prepare a custom Balena OS image"
+description: Create a Balena Cloud application and prepare a custom Balena OS image for a virtual Raspberry Pi 4 device.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

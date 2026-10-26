@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Porting Advisor for Graviton
+description: Install Porting Advisor for Graviton on Ubuntu or Amazon Linux 2023 and scan application source code for portability issues on AWS Graviton.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -200,4 +201,3 @@ Report generated successfully. Hint: you can use --output FILENAME.html to gener
 Try out the other sample projects. 
 
 You are now ready to use Porting Advisor for Graviton on your own projects.
-

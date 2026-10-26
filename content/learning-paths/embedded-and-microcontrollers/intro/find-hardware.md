@@ -1,6 +1,7 @@
 ---
 layout: learningpathall
 title: Find Arm hardware
+description: Identify Arm-based microcontroller development boards and choose hardware for embedded software projects.
 weight: 3
 ---
 

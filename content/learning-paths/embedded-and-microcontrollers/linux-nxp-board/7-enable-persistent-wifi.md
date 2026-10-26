@@ -1,6 +1,7 @@
 ---
 # User change
 title: "(Optional) Enable Persistent WiFi"
+description: Configure persistent WiFi on the NXP FRDM i.MX 93 board so networking reconnects after reboot.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

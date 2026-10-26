@@ -1,5 +1,6 @@
 ---
 title: Board connection and IDE setup
+description: Connect the Arduino Nano RP2040 board and configure the Arduino IDE so it is ready for TinyML deployment.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

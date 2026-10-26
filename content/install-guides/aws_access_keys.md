@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: AWS Credentials
+description: Generate AWS access keys and configure them for AWS CLI so command-line tools can sign programmatic requests to AWS services.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

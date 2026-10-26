@@ -1,5 +1,6 @@
 ---
 title: Run the model on a Raspberry Pi 5
+description: Deploy the compiled Llama 3 model to Raspberry Pi 5 and run local inference on the device.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

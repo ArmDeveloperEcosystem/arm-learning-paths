@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Evaluate Ethos-U Performance"
+description: Interpret Ethos-U performance output from the FVP and use the results to understand model behavior.
 
 weight: 8 # 1 is first, 2 is second, etc.
 

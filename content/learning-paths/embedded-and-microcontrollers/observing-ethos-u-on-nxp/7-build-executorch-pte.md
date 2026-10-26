@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build ExecuTorch models for Ethos-U65"
+description: Compile ExecuTorch model artifacts for Ethos-U65 so they can run with NPU acceleration on the NXP board.
 
 weight: 8 # 1 is first, 2 is second, etc.
 

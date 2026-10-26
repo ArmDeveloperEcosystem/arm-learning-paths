@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Install Arm Ecosystem FVP"
+description: Install the Arm Ecosystem FVP and configure it as the execution target for ML Evaluation Kit examples.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

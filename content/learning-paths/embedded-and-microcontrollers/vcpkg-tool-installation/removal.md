@@ -1,5 +1,6 @@
 ---
 title: Remove vcpkg
+description: Remove vcpkg-managed tools and configuration when you need to reset the local tool installation.
 weight: 7
 
 ### FIXED, DO NOT MODIFY

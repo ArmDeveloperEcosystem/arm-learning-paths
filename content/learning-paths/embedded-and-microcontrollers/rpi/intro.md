@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Introduction to the Raspberry Pi 4" 
+description: Review Raspberry Pi 4 hardware specifications and setup considerations for Arm software development.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

@@ -1,5 +1,6 @@
 ---
 title: Why device-to-device at the edge
+description: Understand when device-to-device communication is useful at the edge and how Device Connect supports local device workflows.
 weight: 2
 
 # FIXED, DO NOT MODIFY
@@ -10,7 +11,7 @@ layout: learningpathall
 
 Arm processors sit at the heart of a remarkable range of systems, from Cortex-M microcontrollers in industrial sensors, to Cortex-A boards driving robots and appliances, to Neoverse servers in the cloud. Many edge applications need these devices to cooperate: a sensor publishes a reading, a supervisor reacts, a controller adjusts an actuator. The obvious way to wire that up is through a central broker or a cloud service, but both add latency, operational overhead, and a single point of failure you may not want in a lab, a vehicle, or a factory cell.
 
-Direct device-to-device (D2D) communication sidesteps that. Devices on the same local network discover each other, exchange typed events, and call each other's functions directly, with no broker, no registry, and no cloud round-trip. It is a good fit for:
+Direct device-to-device (D2D) communication sidesteps that. Devices on the same local network discover each other, exchange typed events, and call each other's functions directly, with no broker, no registry, and no cloud round-trip. This Learning Path uses a Raspberry Pi 5 as the example primary device because it is an Arm-based Linux system that can run the same Python runtime and Device Connect SDK used by larger edge devices. D2D is a good fit for:
 
 - prototyping sensor networks and local automation flows
 - small fleets (roughly 50-100 devices) on a shared network
@@ -33,7 +34,7 @@ In D2D mode, every participant is a peer. Each device runtime joins the same pub
 
 ```
 ┌──────────────────────────────────────────────┐
-│  Sensor device                               │
+│  Raspberry Pi 5 sensor device                │
 │  - device_id: sensor-001                     │
 │  - @rpc  get_reading                         │
 │  - @emit reading_ready  ─┐                   │

@@ -107,16 +107,16 @@ Streamline running on your host PC will start the data analysis.
 
 ## Analyze the data with Streamline
 
-From the timeline view of Streamline, you can see some annotation markers. Since an Annotation Marker is added before the llama_decode function, each Annotation Marker marks the start time of a token generation. 
-![Screenshot of Streamline timeline view showing annotation markers indicating token generation start points during llama.cpp execution alt-text#center](images/annotation_marker_1.png "Annotation marker")
+From the timeline view of Streamline, you can see some marker annotations. Since a marker annotation is added before the `llama_decode` function, each marker annotation marks the start time of a token generation.
+![Screenshot of Streamline timeline view showing marker annotations indicating token generation start points during llama.cpp execution alt-text#center](images/annotation_marker_1.png "Marker annotation")
 
-You can view the annotation details by clicking on any Annotation Marker in the timeline. This displays the marker string with token position and processing information:
+You can view the annotation details by clicking on any marker annotation in the timeline. This displays the marker string with token position and processing information:
 
-![Screenshot showing detailed annotation marker information with token position and count data displayed in Streamline alt-text#center](images/annotation_marker_2.png "Annotation string")
+![Screenshot showing detailed marker annotation information with token position and count data displayed in Streamline alt-text#center](images/annotation_marker_2.png "Marker annotation string")
 
 The number after **past** indicates the position of input tokens, the number after **n_eval** indicates the number of tokens to be processed this time.
 
-By checking the string of Annotation Marker, the first token generation at Prefill stage has `past 0, n_eval 78`, which means that the position of input tokens starts at 0 and there are 78 input tokens to be processed.
+By checking the string of the marker annotation, the first token generation at Prefill stage has `past 0, n_eval 78`, which means that the position of input tokens starts at 0 and there are 78 input tokens to be processed.
 
 You can see that the first token generated at the Prefill stage takes more time since 78 input tokens have to be processed at the Prefill stage, performing lots of GEMM operations. At the Decode stage, tokens are generated one by one at mostly equal speed; one token takes less time than that of the Prefill stage, thanks to the effect of KV cache. At the Decode stage, it performs many GEMV operations.
 
@@ -157,7 +157,7 @@ The computation of RoPE, Softmax, and RMSNorm layers does not take a significant
 
 The profiling data reveals clear differences between Prefill and Decode stages:
 
-- Annotation Markers show token generation start points. The Prefill stage shows `past 0, n_eval 78`, indicating 78 input tokens processed simultaneously. During Decode, tokens are generated one at a time.
+- Marker annotations show token generation start points. The Prefill stage shows `past 0, n_eval 78`, indicating 78 input tokens processed simultaneously. During Decode, tokens are generated one at a time.
 
 - Performance characteristics differ significantly between stages. Prefill demonstrates compute-bound behavior with high SIMD, floating-point, and integer instruction counts but relatively few L3 cache misses. Decode shows memory-bound behavior with lighter compute workloads but frequent L3 cache accesses.
 

@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build and run the application"
+description: Build and run the CMSIS-RTOS2 RTX application in Keil MDK and verify the thread behavior on the target.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

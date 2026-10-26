@@ -39,7 +39,7 @@ Note the use of double-word register `d0`, `d1` instead of SVE registers `z0.d` 
 
 {{% notice Autovectorization on the Arm AGI CPU %}}
 
-If specifically targeting the 1st generation Arm AGI CPU, the `-mcpu=armagicpu` defintion was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, this is the same as the `-march=neoverse-v3ae` option available from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html) onwards. However, in the future there may be differences between `neoverse-v3ae` and `armagicpu`.
+If specifically targeting the Arm AGI CPU, the `-mcpu=armagicpu` defintion was added in [GCC 16.1.0](https://github.com/gcc-mirror/gcc/commit/0f5f728854d2ea93e6806a8632c04383502b0386). As of May 2026, this is the same as the `-march=neoverse-v3ae` option available from [GCC 15](https://gcc.gnu.org/gcc-15/changes.html) onwards. However, in the future there may be differences between `neoverse-v3ae` and `armagicpu`.
 
 As such, we recommend installing the latest version of GCC/G++ if you are targeting the Arm AGI CPU. Use the `-mcpu=native` flag if compiling on the target machine or `-mcpu=armagicpu` if cross compiling. 
 
@@ -89,11 +89,11 @@ Neoverse-N1 | `-mcpu=neoverse-n1`
 Neoverse-V1 | `-mcpu=neoverse-v1`
 Neoverse-V2 | `-mcpu=neoverse-v2`
 Neoverse-V3 | `-mcpu=neoverse-v3`
-Arm AGI CPU (first generation)* | `-mcpu=neoverse-v3ae` (as of ATfL 22.1.0)
+Arm AGI CPU* | `-mcpu=neoverse-v3ae` (as of ATfL 22.1.0)
 
 {{% notice Please Note %}}
 
-Support for the 1st generation Arm AGI CPU, based on the Neoverse V3-AE core, is expected to be added in LLVM version 23. Once available, ATfL is expected to support this target through the dedicated compiler option `-mcpu=armagicpu`.
+Support for the Arm AGI CPU, based on the Neoverse V3-AE core, is expected to be added in LLVM version 23. Once available, ATfL is expected to support this target through the dedicated compiler option `-mcpu=armagicpu`.
 
 If you are targeting the Arm AGI CPU, we recommend using the latest available version of ATfL to ensure support for the most recent compiler optimizations and features.
 

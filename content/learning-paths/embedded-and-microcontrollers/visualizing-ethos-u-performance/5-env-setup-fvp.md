@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Set up the Corstone-320 Fixed Virtual Platform"
+description: Install and configure the Corstone-320 Fixed Virtual Platform for running and visualizing TinyML models.
 
 weight: 5 
 

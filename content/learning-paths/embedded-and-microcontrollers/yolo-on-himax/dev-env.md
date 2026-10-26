@@ -1,5 +1,6 @@
 ---
 title: Set up the environment
+description: Install the software tools and SDK dependencies required to build YOLO firmware for the Himax WiseEye2 module.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

@@ -1,5 +1,6 @@
 ---
 title: Required CMSIS-Packs
+description: Identify and install the CMSIS-Packs required to migrate a CMSIS v5 project to CMSIS v6.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

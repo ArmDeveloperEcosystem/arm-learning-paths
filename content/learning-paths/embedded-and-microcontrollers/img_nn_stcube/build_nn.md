@@ -1,6 +1,7 @@
 ---
 # User change
 title: Build an image classification NN model trained with the CIFAR-10 dataset
+description: Train an image classification model with the CIFAR-10 dataset and prepare it for deployment with STM32 tools.
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -91,7 +92,7 @@ plt.show()
 
 The expected output is shown below
 
-![output1](images/lab4_1.PNG)
+![output1](images/lab4_1.png)
 
 Next, normalize all the training and testing data to have values between 0 and 1. This normalization facilitates machine learning. Each RGB value ranges from 0 to 255, so divide the training and testing data by 255.
 
@@ -124,7 +125,7 @@ You are going to create a small convolutional neural network for image classific
 
 Here is an image illustrating the network architecture. Note that only convolution and dense layers are illustrated in this image.
 
-![output2](images/lab4_2.PNG)
+![output2](images/lab4_2.png)
 
 Execute the code blocks below to create a sequential model and add the layers
 

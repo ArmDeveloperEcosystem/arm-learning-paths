@@ -1,5 +1,6 @@
 ---
 title: Set up software dependencies on Raspberry Pi 5 for Ollama and LLMs
+description: Install Ollama, Python dependencies, and supporting software for running local LLM smart home workloads on Raspberry Pi 5.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

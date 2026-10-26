@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Prepare AVH instances of Raspberry Pi 4"
+description: Prepare two Raspberry Pi 4 instances in Arm Virtual Hardware for building and testing Matter examples.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

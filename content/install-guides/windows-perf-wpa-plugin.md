@@ -1,5 +1,6 @@
 ---
 title: Windows Performance Analyzer (WPA) plugin
+description: Install the WindowsPerf WPA plugin on Windows on Arm so Windows Performance Analyzer can display WindowsPerf telemetry and timeline data.
 
 minutes_to_complete: 15
 

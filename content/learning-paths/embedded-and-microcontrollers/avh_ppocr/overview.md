@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Overview of OCR"
+description: Review optical character recognition concepts and the PaddleOCR model workflow before deploying it on Arm Virtual Hardware.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

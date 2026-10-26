@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Create a peripheral using Virtual Input/Output (VIO)"
+description: Create a virtual LED peripheral with Arm Virtual Hardware VIO and connect it to firmware running on the simulated platform.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

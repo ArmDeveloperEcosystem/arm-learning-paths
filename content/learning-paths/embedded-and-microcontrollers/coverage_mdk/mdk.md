@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Set up Code Coverage"
+description: Enable code coverage in Keil MDK, run the embedded example, and review the coverage results from the FVP.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

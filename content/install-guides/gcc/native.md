@@ -14,6 +14,7 @@ test_images:
 test_link: null
 test_maintenance: true
 title: Native compiler
+description: Install native GCC and G++ packages on Arm Linux so you can compile C and C++ applications directly on an Arm machine.
 tool_install: false
 weight: 2
 ---
@@ -71,7 +72,7 @@ sudo dnf group install "development-tools" -y
 If `sudo` is not available become _root_ and omit the `sudo`.
 ```console
 dnf update -y
-sudo dnf group install "development-tools" -y
+dnf group install "development-tools" -y
 ```
 ## Does GCC require a license?
 

@@ -21,16 +21,17 @@ Locate the `libperf-jvmti.so` library:
 
 ```bash
 pushd /usr/lib
-find . -name libperf-jvmti.so`
+find . -name libperf-jvmti.so
+popd
 ```
 The output will show the path to the shared object file:
 
 ## Modify Tomcat configuration
 
-Open the Tomcat launch script:
+Open the Tomcat launch script using an editor of your choice:
 
 ```bash
-vi apache-tomcat-11.0.9/bin/catalina.sh
+apache-tomcat-${TOMCAT_VERSION}/bin/catalina.sh
 ```
 Add the following line (replace the path if different on your system):
 
@@ -40,9 +41,10 @@ JAVA_OPTS="$JAVA_OPTS -agentpath:/usr/lib/linux-tools-6.8.0-63/libperf-jvmti.so 
 Now shutdown and restart Tomcat:
 
 ```bash
-cd apache-tomcat-11.0.9/bin
+pushd apache-tomcat-${TOMCAT_VERSION}/bin
 ./shutdown.sh
 ./startup.sh
+popd
 ```
 
 ## Run perf to record profiling data
@@ -50,7 +52,8 @@ cd apache-tomcat-11.0.9/bin
 Run the following command to record a 10-second profile of the Tomcat process:
 
 ```bash
-sudo perf record -g -k1 -p $(jps | awk /Bootstrap/'{print $1}') -- sleep 10
+PID=$(pgrep -f 'org.apache.catalina.startup.Bootstrap' | head -n1)
+sudo perf record -g -k 1 -p "$PID" -- sleep 10
 ```
 This generates a file named `perf.data`.
 
@@ -63,7 +66,8 @@ Clone the FlameGraph repository and add it to your PATH:
 ```bash
 git clone https://github.com/brendangregg/FlameGraph.git
 export PATH=$PATH:`pwd`/FlameGraph
-sudo perf inject -j -i perf.data | perf script | stackcollapse-perf.pl | flamegraph.pl &> profile.svg
+sudo perf inject -j -i perf.data -o perf.jit.data
+sudo perf script -i perf.jit.data | stackcollapse-perf.pl --all | flamegraph.pl --color=java --hash > profile.svg
 ```
 ## View the result
 

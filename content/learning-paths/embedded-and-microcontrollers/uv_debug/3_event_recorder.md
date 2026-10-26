@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Debug using Event Recorder"
+description: Use Event Recorder in Keil uVision to capture and analyze runtime events from an embedded application.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

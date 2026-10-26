@@ -1,5 +1,6 @@
 ---
 title: UBL Local License Server (LLS) setup
+description: Install and configure an Arm user-based Local License Server so administrators can host and manage commercial Arm tool licenses.
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/107573
 author: Ronan Synnott
@@ -37,9 +38,9 @@ See [Hardware and software requirements](https://developer.arm.com/documentation
 
 The local license server (LLS) software can be downloaded from:
 ```url
-https://lm.arm.com/downloads
+https://support.arm.com/downloads/view/LLSUBL
 ```
-Expand the tarball (named `flexnetls-armlmd-<version>.tar.gz`), and install the license server software.
+Expand the tarball (named `flexnetls-armlmd-<version>.tar.gz`), and install the license server software. For example:
 ```console
 tar -xf flexnetls-armlmd-1.2024050.0.tar.gz
 sudo ./flexnetls-armlmd-1.2024050.0/install_license_server

@@ -1,5 +1,6 @@
 ---
 title: Arm Product Download Hub
+description: Access Arm Product Download Hub through a browser or API so you can find and download entitled Arm IP and software product packages.
 author: Ronan Synnott
 
 additional_search_terms:

@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Sensor Data Aggregation Using Azure Functions"
+description: Aggregate IoT telemetry with Azure Functions so sensor data from Arm devices can be summarized for downstream services.
 
 weight: 8
 

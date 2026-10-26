@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Development environment" 
+description: Set up the compilers, libraries, and tools needed to build and test the application on Arm Linux.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

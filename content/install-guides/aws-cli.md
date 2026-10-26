@@ -14,6 +14,7 @@ test_images:
 - ubuntu:latest
 test_maintenance: true
 title: AWS CLI
+description: Install AWS CLI version 2 on Ubuntu for Arm and verify the setup so you can manage AWS services from the command line.
 tool_install: true
 weight: 1
 ---

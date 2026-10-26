@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Set up data monitoring and alerts with Azure Functions"
+description: Set up Azure Functions based monitoring and alerts so incoming IoT telemetry can trigger automated responses.
 
 weight: 7
 

@@ -1,5 +1,6 @@
 ---
 title: Overview
+description: Review the Himax WiseEye2 module and the YOLO object detection workflow before building and flashing firmware.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

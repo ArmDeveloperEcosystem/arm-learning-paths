@@ -1,9 +1,10 @@
 ---
-cloud_service_providers:
-  - AWS
-  - Google Cloud
-  - Microsoft Azure
-  - Oracle
+platforms:
+  - Arm AGI CPU
+  - AWS Graviton
+  - Google Axion
+  - Microsoft Azure Cobalt
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 
 operatingsystems:
   - Linux

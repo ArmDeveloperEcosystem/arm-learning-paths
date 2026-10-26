@@ -1,5 +1,6 @@
 ---
 title: Fixed Virtual Platforms (FVP)
+description: Install the legacy Arm Fixed Virtual Platform library on Windows or Linux so you can run ready-to-use virtual Arm platforms.
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/100966/
 author: Ronan Synnott
@@ -82,4 +83,3 @@ You can a workaround this error using `execstack` on each of the runtime binarie
 execstack -c <binary>
 ```
 {{% /notice %}}
-

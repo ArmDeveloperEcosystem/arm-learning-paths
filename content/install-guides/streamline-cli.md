@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Streamline CLI Tools
+description: Install Streamline CLI tools on Arm Linux and prepare applications for command-line performance profiling on Arm servers.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -273,4 +274,3 @@ Follow these steps to integrate these patches into an RPM-based distribution's k
     ```
 
 You are now ready to use Streamline CLI Tools. Refer to [Profiling for Neoverse with Streamline CLI Tools](/learning-paths/servers-and-cloud-computing/profiling-for-neoverse/) to get started.
-

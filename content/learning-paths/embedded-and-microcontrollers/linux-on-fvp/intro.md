@@ -1,5 +1,6 @@
 ---
 title: Introduction to Arm Fixed Virtual Platforms (FVPs)
+description: Understand Arm Fixed Virtual Platforms and how they support Linux software development before hardware is available.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

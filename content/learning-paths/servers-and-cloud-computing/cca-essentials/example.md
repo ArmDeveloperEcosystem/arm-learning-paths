@@ -21,8 +21,8 @@ The KBS in this Learning Path is part of the [Veraison](https://github.com/verai
 First, pull the docker container image with the pre-built KBS, and then run the container:
 
 ```bash
-docker pull armswdev/cca-learning-path:cca-key-broker-v2
-docker run --rm -it armswdev/cca-learning-path:cca-key-broker-v2
+docker pull armlimited/cca-learning-path:cca-key-broker-v4
+docker run --rm -it armlimited/cca-learning-path:cca-key-broker-v4
 ```
 
 Now within your running docker container, get a list of network interfaces:
@@ -66,12 +66,12 @@ With the Key Broker Server running in one terminal, open up a new terminal in wh
 In the new terminal that you have just opened, pull the docker container image that contains the FVP and pre-built software binaries to run the Key Broker Client in a realm.
 
 ```bash
-docker pull armswdev/cca-learning-path:cca-simulation-v2
+docker pull armlimited/cca-learning-path:cca-simulation-v4
 ```
 
 Now run the docker container:
 ```bash
-docker run --rm -it armswdev/cca-learning-path:cca-simulation-v2
+docker run --rm -it armlimited/cca-learning-path:cca-simulation-v4
 ```
 
 Within your running container, launch the `run-cca-fvp.sh` script to run the Arm CCA pre-built binaries on the FVP:

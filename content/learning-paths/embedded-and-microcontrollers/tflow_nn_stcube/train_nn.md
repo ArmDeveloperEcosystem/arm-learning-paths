@@ -1,6 +1,7 @@
 ---
 # User change
 title: Collect training data
+description: Collect training data for the letter recognition model and prepare it for TensorFlow feature extraction.
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -162,4 +163,4 @@ plot_single_sample(data_sample=data[idx], label=labels[idx])
 
 Example output is shown below:
 
-![output1](images/output1.PNG)
+![output1](images/output1.png)

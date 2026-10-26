@@ -1,5 +1,6 @@
 ---
 title: Run LLMs locally on Raspberry Pi 5 for Edge AI
+description: Review the Raspberry Pi 5 smart home architecture and how local LLMs can control GPIO-connected devices.
 
 weight: 2
 

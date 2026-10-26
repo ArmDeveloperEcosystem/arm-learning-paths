@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Arm IP Explorer
+description: Access Arm IP Explorer in the browser and use it to explore Arm IP, simulate processors, and create SoC concepts.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

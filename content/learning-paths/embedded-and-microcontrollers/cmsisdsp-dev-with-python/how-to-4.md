@@ -1,5 +1,6 @@
 ---
 title: Write a simple VAD
+description: Implement a simple voice activity detector in Python and validate the signal processing behavior before optimization.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

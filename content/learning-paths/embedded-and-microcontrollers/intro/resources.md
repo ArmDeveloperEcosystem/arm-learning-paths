@@ -1,6 +1,7 @@
 ---
 layout: learningpathall
 title: Other learning resources
+description: Find additional Arm microcontroller documentation, courses, and examples to continue embedded software learning.
 weight: 4
 ---
 ## Reading resources

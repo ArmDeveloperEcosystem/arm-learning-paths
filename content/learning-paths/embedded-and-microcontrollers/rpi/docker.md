@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Docker"
+description: Install Docker on Raspberry Pi 4 and run a containerized workload to validate the Arm Linux environment.
 
 weight: 7 # 1 is first, 2 is second, etc.
 

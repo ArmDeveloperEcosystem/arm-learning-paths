@@ -1,5 +1,6 @@
 ---
 title: Modify the device tree for CPU FVPs
+description: Update the device tree so the Linux software stack matches the selected Arm CPU FVP model.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

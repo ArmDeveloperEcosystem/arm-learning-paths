@@ -13,6 +13,7 @@ test_images:
 - ubuntu:latest
 test_maintenance: true
 title: Azure CLI
+description: Install Azure CLI on Ubuntu for Arm using a script or pip so you can manage Azure resources from an Arm Linux system.
 tool_install: true
 weight: 1
 ---

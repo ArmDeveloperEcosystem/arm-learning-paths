@@ -1,5 +1,6 @@
 ---
 title: Add a KEM implementation to pqm4
+description: Add a new key encapsulation mechanism implementation to pqm4 and integrate it with the Cortex-M4 benchmark framework.
 
 weight: 5
 

@@ -1,6 +1,7 @@
 ---
 # User change
 title: "What is Code Coverage?"
+description: Understand code coverage concepts for embedded software testing and how they apply to Keil MDK projects.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

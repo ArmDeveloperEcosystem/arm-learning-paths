@@ -20,13 +20,17 @@ prerequisites:
 
 author: Pareena Verma
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 description: Deploy PostgreSQL on Azure Cobalt 100 Arm64 virtual machines, load a relational schema with transactional data, and benchmark and optimize query performance using pgbench and pg_stat_statements.
 
 ### Tags
 skilllevels: Introductory
 subjects: Databases
-cloud_service_providers:
-  - Microsoft Azure
+platforms:
+  - Microsoft Azure Cobalt
 
 armips:
     - Neoverse
@@ -62,3 +66,4 @@ weight: 1
 layout: "learningpathall"
 learning_path_main_page: "yes"
 ---
+

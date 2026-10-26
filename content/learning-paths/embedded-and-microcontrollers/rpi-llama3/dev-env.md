@@ -1,5 +1,6 @@
 ---
 title: Set up the development environment
+description: Set up an Arm Linux development machine with the tools required to build Llama 3 for ExecuTorch.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

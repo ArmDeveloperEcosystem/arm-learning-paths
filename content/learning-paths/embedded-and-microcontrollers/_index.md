@@ -14,45 +14,50 @@ pinned_learning_paths:
 - introduction-to-tinyml-on-arm
 operatingsystems_filter:
 - Android: 1
-- Baremetal: 30
-- Linux: 39
-- macOS: 11
-- RTOS: 11
-- Windows: 5
+- Baremetal: 31
+- Linux: 62
+- macOS: 24
+- RTOS: 14
+- Windows: 12
 subjects_filter:
 - CI-CD: 7
-- Containers and Virtualization: 6
+- Containers and Virtualization: 10
 - Embedded Linux: 6
-- Libraries: 3
-- ML: 22
-- Performance and Architecture: 20
-- RTOS Fundamentals: 5
-- Security: 2
+- Libraries: 6
+- ML: 31
+- Performance and Architecture: 24
+- RTOS Fundamentals: 8
+- Security: 4
 - Virtual Hardware: 2
 subtitle: Learn best practices for IoT, embedded, and microcontroller development.
 title: Embedded and Microcontrollers
 tools_software_languages_filter:
 - AI: 1
 - Arduino: 2
+- Arm Compiler: 1
 - Arm Compiler for Embedded: 8
 - Arm Compiler for Linux: 1
 - Arm Compute Library: 3
 - Arm Development Studio: 8
 - Arm Fast Models: 4
+- Arm Fixed Virtual Platform: 1
+- Arm GNU Toolchain: 1
 - Arm Performance Studio: 1
 - Arm Streamline: 1
-- Arm Virtual Hardware: 16
+- Arm Virtual Hardware: 15
 - Assembly: 1
-- AWS IoT Greengrass: 2
+- AWS IoT Greengrass: 3
 - Azure: 1
 - balenaCloud: 1
 - BalenaOS: 1
 - Baremetal: 1
 - Bash: 1
-- C: 7
+- BitBake: 1
+- C: 13
 - ChatGPT: 1
 - Clang: 1
-- CMSIS: 4
+- CMake: 2
+- CMSIS: 5
 - CMSIS-DSP: 1
 - CMSIS-Toolbox: 4
 - CNN: 1
@@ -61,63 +66,95 @@ tools_software_languages_filter:
 - Containerd: 1
 - CPP: 1
 - DetectNet: 1
-- Docker: 12
+- Docker: 20
 - DSTREAM: 2
 - Edge AI: 2
 - Edge Impulse: 2
-- ExecuTorch: 6
-- FastAPI: 1
+- ETDump: 1
+- ETRecord: 1
+- ExecuTorch: 13
+- FastAPI: 2
 - Fusion 360: 1
-- FVP: 10
-- GCC: 10
-- Generative AI: 2
+- FVP: 11
+- Gazebo: 1
+- GCC: 17
+- Generative AI: 3
 - GitHub: 4
 - GitLab: 2
 - GStreamer: 1
 - Himax SDK: 1
 - Hugging Face: 3
 - IP Explorer: 2
+- Java: 1
 - Jupyter Notebook: 1
 - K3s: 1
 - Keil MDK: 7
 - Keil RTX RTOS: 2
 - Kubernetes: 1
+- LeRobot: 1
 - Linux kernel: 1
-- LLM: 2
+- Linux traffic control: 1
+- LiteRT: 1
+- LLM: 3
 - Matter: 1
 - MCP: 1
+- MediaPipe: 1
+- MLIA: 1
+- MobileSAM: 1
+- Model Explorer: 1
 - MPS3: 1
+- MQTT: 1
+- MuJoCo: 1
 - MXNet: 1
+- Navigation2: 1
 - Neon: 1
 - NumPy: 1
-- Ollama: 1
+- Ollama: 2
+- ONNX: 1
+- ONNX Runtime: 1
 - OpenSSH: 1
+- OpenSSL: 1
 - Paddle: 1
 - Performance analysis: 1
 - picocom: 1
 - Porcupine: 1
-- Python: 12
-- PyTorch: 5
-- QEMU: 1
-- Raspberry Pi: 9
+- Python: 25
+- PyTorch: 9
+- QEMU: 3
+- Raspberry Pi: 11
+- Reachy Mini: 1
 - Remote.It: 1
+- remoteproc-runtime: 1
+- rmw_zenoh: 2
+- ROS 2: 4
 - Runbook: 4
+- RViz: 1
+- SEGGER JLink: 1
+- SEGGER RTT: 1
+- SSH: 3
+- stlink: 1
 - STM32: 2
 - strands-agents: 1
 - systemd: 1
 - TensorFlow: 3
 - TensorRT: 1
 - tinyML: 2
+- Topo: 3
+- TorchAO: 1
+- TOSA: 2
 - Trusted Firmware: 2
 - TrustZone: 2
 - TVMC: 1
+- U-Boot: 1
 - vcpkg: 1
-- Visual Studio Code: 1
+- Vela: 2
+- VGF: 1
+- Visual Studio Code: 3
+- Workbench for Zephyr: 1
+- YAML: 1
+- Yocto: 1
 - Yocto Project: 1
-- Zephyr: 2
+- Zenoh: 3
+- Zephyr: 7
 weight: 5
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
 ---

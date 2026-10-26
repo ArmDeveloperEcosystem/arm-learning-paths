@@ -13,17 +13,26 @@ Calls to:
 */}}
 
 <!-- Hugo Process parameters first -->
-{{ $dict_of_name_counts := dict }}      <!--[ "name": count   "name": count  ] -->
+<!--
+    Build a slice of {name, count, sortkey} entries so the list can be sorted
+    case-insensitively. Ranging over a Hugo map (the previous approach) sorts
+    keys case-sensitively, which places uppercase-heavy names (e.g. "AWS")
+    before mixed-case names (e.g. "Arm AGI CPU"). Sorting by a lowercased key
+    gives natural alphabetical order regardless of case.
+-->
+{{ $tag_entries := slice }}
 {{ range $x, $y := .tagnames }}
     <!-- Figure out if the type is a string (if filter doesn't come with an initial count, such as the Skill Level) or array (like the tools_software_languages) -->
     {{ if ne (printf "%T" $y) "string" }}
             {{range $name, $count := $y}}
-                    {{ $dict_of_name_counts = merge $dict_of_name_counts (dict $name $count ) }}
+                    {{ $tag_entries = $tag_entries | append (dict "name" $name "count" $count "sortkey" (lower $name)) }}
             {{end}}
     {{else}}
-            {{ $dict_of_name_counts = merge $dict_of_name_counts (dict $y "NA" ) }}
+            {{ $tag_entries = $tag_entries | append (dict "name" $y "count" "NA" "sortkey" (lower $y)) }}
     {{end}}
 {{end}}
+<!-- Sort case-insensitively by name -->
+{{ $tag_entries = sort $tag_entries "sortkey" "asc" }}
 {{$group_name := .displayname | urlize}}
 {{$input_type := .type}}
 
@@ -33,11 +42,13 @@ Calls to:
     <span slot="toggle">{{.displayname}}</span>
     <div slot="content">
         <div class="u-flex u-flex-column">
-            {{- range $name, $count := $dict_of_name_counts -}}
+            {{- range $entry := $tag_entries -}}
+                {{ $name := $entry.name }}
+                {{ $count := $entry.count }}
                 <!-- Radio buttons -->
                 {{if eq $input_type "radio"}}
                     <div class="form-group ads-radio-style">
-                        <input type="radio" class="tag-{{$name | urlize}} group-{{$group_name}}" data-urlized-name="{{$name | urlize}}" name="{{$group_name}}" onchange="filterHandler_radio_LearningPaths(this)"></input>
+                        <input type="radio" id="{{$name | urlize}}" class="tag-{{$name | urlize}} group-{{$group_name}}" data-urlized-name="{{$name | urlize}}" name="{{$group_name}}" onchange="filterHandler_radio_LearningPaths(this)"></input>
                         <label for="{{$name | urlize}}">{{$name}}</label>
                     </div>
                 <!-- Checkboxes -->

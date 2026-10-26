@@ -1,6 +1,7 @@
 ---
 # User change
 title: Debug the example
+description: Debug the example project in Arm Development Studio using an FVP target and inspect execution with breakpoints and registers.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

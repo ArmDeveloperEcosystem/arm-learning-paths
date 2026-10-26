@@ -14,6 +14,7 @@ test_images:
 - ubuntu:latest
 test_maintenance: true
 title: AWS Copilot CLI
+description: Install AWS Copilot CLI on Ubuntu for Arm or macOS and verify the setup so you can deploy container applications to AWS services.
 tool_install: true
 weight: 1
 ---

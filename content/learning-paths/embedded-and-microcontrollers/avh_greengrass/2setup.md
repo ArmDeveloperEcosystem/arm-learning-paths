@@ -1,5 +1,6 @@
 ---
 title: Set  up your accounts and create a virtual device
+description: Configure AWS and Arm Virtual Hardware accounts and create the virtual Raspberry Pi 4 device used as a Greengrass core.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -30,7 +31,7 @@ You'll be presented with a list of devices to choose from.
 
 Select Raspberry Pi 4 from the list of devices and proceed to the configure dialog.
 
-![AVH device creation dialog showing device selection list with Raspberry Pi 4 highlighted and firmware configuration options below#center](./create_device.webp "Create device dialog"device selection list with Raspberry Pi 4 highlighted and firmware configuration options below#center](./create_device.webp "Create device dialog")
+![AVH device creation dialog showing device selection list with Raspberry Pi 4 highlighted and firmware configuration options below#center](./create_device.webp)
 
 AWS IoT Greengrass Core runs on Ubuntu Server and Raspberry Pi OS. 
 
@@ -42,7 +43,7 @@ You don't need to set any advanced boot options.
 
 Wait for the device to be created.
 
-![AVH console showing device status message indicating the Raspberry Pi 4 virtual device is ready with Ubuntu Server boot logs displayed#center](device_ready.webp "Device ready"us message indicating the Raspberry Pi 4 virtual device is ready with Ubuntu Server boot logs displayed#center](device_ready.webp "Device ready")
+![AVH console showing device status message indicating the Raspberry Pi 4 virtual device is ready with Ubuntu Server boot logs displayed#center](device_ready.webp)
 
 When it's ready, log in with the default username `pi` and password `raspberry`.
 

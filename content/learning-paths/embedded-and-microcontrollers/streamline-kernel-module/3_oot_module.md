@@ -1,5 +1,6 @@
 ---
 title: Build the out-of-tree kernel module
+description: Create and build an out-of-tree Linux kernel module designed to expose cache-unfriendly behavior for Streamline analysis.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

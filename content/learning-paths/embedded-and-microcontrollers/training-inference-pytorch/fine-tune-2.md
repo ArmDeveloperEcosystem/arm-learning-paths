@@ -1,5 +1,6 @@
 ---
 title: Train and Test the rock-paper-scissors Model
+description: Train and test the PyTorch rock-paper-scissors classifier before converting it for embedded inference.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

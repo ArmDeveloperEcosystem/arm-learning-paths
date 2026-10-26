@@ -1,6 +1,7 @@
 ---
 # User change
 title: "How do I install the Raspberry Pi Pico SDK?"
+description: Install the Raspberry Pi Pico SDK and configure the tools needed to build Pico applications.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

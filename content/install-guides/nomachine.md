@@ -15,11 +15,16 @@ test_images:
 test_link: null
 test_maintenance: false
 title: NoMachine
+description: Install NoMachine and an xfce desktop on remote Arm Linux so you can connect to a graphical development environment.
 tool_install: true
 weight: 1
 ---
 
 [NoMachine](https://www.nomachine.com/) is a client-server application that you can use to connect to a remote Linux desktop, including Arm servers and cloud instances. The NoMachine server runs on the remote machine. The client runs on the local machine and connects to the remote server.
+
+{{% notice Note %}}
+NoMachine Personal Edition requires a subscription or evaluation license. You can generate a 14-day evaluation license by creating an account at [NoMachine](https://users.nomachine.com/create-account). 
+{{% /notice %}}
 
 During development, it might be useful to quickly create a remote desktop on an Arm server.
 
@@ -54,18 +59,21 @@ fi
 Use a text editor to copy and paste this script into a file on the remote machine at `$HOME/install-nomachine.sh`:
 
 {{% notice Note %}}
-The following commands use NoMachine version 9.5.7. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To download the latest version, see [NoMachine downloads](https://downloads.nomachine.com/).
+The following commands use NoMachine version 10.0.57. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To download the latest version, see [NoMachine downloads](https://downloads.nomachine.com/).
 {{% /notice %}}
 
 ```file { file_name="install-nomachine.sh" }
 #!/bin/bash
 
 # install NoMachine for remote desktop
-wget https://download.nomachine.com/download/9.5/Arm/nomachine_9.5.7_2_arm64.deb
-sudo dpkg -i nomachine_9.5.7_2_arm64.deb
+wget https://web9001.nomachine.com/download/10.0/Arm/nomachine-personal-edition_10.0.57_2_arm64.deb
+sudo dpkg -i nomachine-personal-edition_10.0.57_2_arm64.deb
 if [ $? != 0 ]; then
   exit 1
 fi
+
+# Configure NoMachine to use xfce4 as the desktop
+sudo sed -i 's|DefaultDesktopCommand "/etc/X11/Xsession gnome-session"|DefaultDesktopCommand "/etc/X11/Xsession startxfce4"|' /usr/NX/etc/node.cfg
 
 # user of the AMI must run the nx-key.sh to copy their key for NX
 echo "$HOME/nx-key.sh" >> /home/$USER/.bashrc
@@ -84,6 +92,37 @@ On the remote machine, run the install script:
 
 ```bash { ret_code="0" }
 ./install-nomachine.sh
+```
+
+### Activate the NoMachine license
+
+NoMachine Personal Edition requires an evaluation or paid license. To activate a 14-day evaluation:
+
+1. Create a NoMachine account at [https://users.nomachine.com/create-account](https://users.nomachine.com/create-account).
+2. Log in to your User Area and navigate to the **Software** section.
+3. Generate an evaluation license and download the `key.tar.gz` file.
+4. Copy the file to the remote machine and extract it:
+
+```console
+tar xzf key.tar.gz
+```
+
+5. Apply the license:
+
+```console
+sudo /usr/NX/bin/nxserver --subscriptionset server.lic
+```
+
+The output confirms the license is active:
+
+```output
+NX> 1277 Subscription for 'NoMachine Personal Edition Evaluation' has been updated.
+```
+
+Restart the NoMachine server:
+
+```console
+sudo /usr/NX/bin/nxserver --restart
 ```
 
 ### Set a user password for a NoMachine connection

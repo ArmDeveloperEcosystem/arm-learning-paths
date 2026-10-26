@@ -1,5 +1,6 @@
 ---
 title: Pulumi
+description: Install Pulumi on Linux and verify the setup with a container registry example so you can deploy infrastructure as code from Arm systems.
 minutes_to_complete: 5
 official_docs: https://www.pulumi.com/docs/
 ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=pulumi
@@ -31,8 +32,8 @@ curl -fsSL https://get.pulumi.com | sh
 The installer output is similar to:
 
 ```output
-=== Installing Pulumi v3.232.0 ===
-+ Downloading https://github.com/pulumi/pulumi/releases/download/v3.232.0/pulumi-v3.232.0-linux-arm64.tar.gz...
+=== Installing Pulumi v3.255.0 ===
++ Downloading https://github.com/pulumi/pulumi/releases/download/v3.255.0/pulumi-v3.255.0-linux-arm64.tar.gz...
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
@@ -68,7 +69,7 @@ pulumi version
 ```
 
 ```output
-v3.232.0
+v3.255.0
 ```
 
 ## Verify Pulumi installation with an example {#start}

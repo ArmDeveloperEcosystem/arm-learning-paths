@@ -1,5 +1,6 @@
 ---
 title: Set up the Alif Ensemble E8 DevKit
+description: Connect and configure the Alif Ensemble E8 DevKit so it is ready for firmware flashing and image classification inference.
 weight: 2
 
 layout: "learningpathall"

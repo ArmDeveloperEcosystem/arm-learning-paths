@@ -63,12 +63,12 @@ Before installing ASCT, ensure that you have the required system packages:
 
 ```bash
 sudo apt update
-sudo apt install python3 python3-pip python-is-python3 gcc make numactl fio linux-tools-generic linux-tools-$(uname -r) -y
+sudo apt install python3 python3-pip python-is-python3 gcc make libc6-dev numactl fio linux-tools-generic linux-tools-$(uname -r) -y
 ```
 
 These packages are needed for:
 - `python3` — Python 3.10 or later for running ASCT
-- `gcc` and `make` — for compiling benchmark components
+- `gcc`, `make`, and `libc6-dev` — for compiling benchmark components
 - `numactl` — for NUMA-aware memory benchmarks
 - `fio` — version 3.36 or later for storage benchmarks
 - `linux-tools-generic` and `linux-tools-$(uname -r)` — Linux Perf for performance analysis
@@ -80,15 +80,15 @@ For more information about installing Perf on different Linux distributions, see
 ASCT is distributed as a Python package and requires Python 3.10 or later. 
 
 {{% notice Note %}}
-The following commands use ASCT version 0.5.1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [ASCT downloads](https://artifacts.tools.arm.com/asct/dist/).
+The following commands use ASCT version 0.6.0. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [ASCT downloads](https://artifacts.tools.arm.com/asct/dist/).
 {{% /notice %}}
 
 ### Download ASCT
 
-Download ASCT version `0.5.1`:
+Download ASCT version `0.6.0`:
 
 ```bash
-wget https://artifacts.tools.arm.com/asct/dist/0.5.1/asct-0.5.1+11d418d-release.tar.gz
+wget https://artifacts.tools.arm.com/asct/dist/0.6.0/asct-0.6.0+6324f8f-release.tar.gz
 ```
 
 ### Install ASCT using uv
@@ -99,10 +99,16 @@ The recommended method uses [uv](https://github.com/astral-sh/uv), a fast Python
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
+Add `uv` to your `PATH` for the current session:
+
+```bash
+source $HOME/.local/bin/env
+```
+
 Extract the release archive:
 
 ```bash
-tar xzf asct-0.5.1+11d418d-release.tar.gz
+tar xzf asct-0.6.0+6324f8f-release.tar.gz
 ```
 
 Create the required directories:
@@ -114,8 +120,8 @@ sudo mkdir -p /opt/uv/tools /usr/local/bin
 Install ASCT system-wide using:
 
 ```bash
-cd asct-0.5.1+11d418d
-sudo UV_TOOL_DIR=/opt/uv/tools UV_TOOL_BIN_DIR=/usr/local/bin $(which uv) tool install ./asct-0.5.1+11d418d.tar.gz
+cd asct-0.6.0+6324f8f
+sudo UV_TOOL_DIR=/opt/uv/tools UV_TOOL_BIN_DIR=/usr/local/bin $(which uv) tool install ./asct-0.6.0+6324f8f.tar.gz
 ```
 
 This installs ASCT to `/usr/local/bin` making it available system-wide. Installing to `/usr/local/bin` instead of the default `~/.local/bin` allows you to run ASCT with `sudo`, which is required for some benchmarks to access system resources and configure huge pages.
@@ -131,7 +137,7 @@ asct version
 The output is similar to:
 
 ```output
-ASCT 0.5.1+11d418d
+ASCT 0.6.0+6324f8f
 ```
 
 Display the help information:
@@ -297,6 +303,8 @@ sudo -E $(which uv) tool uninstall asct
 
 ## More information about ASCT
 
+ASCT is open source and available on GitHub at [https://github.com/Arm/asct](https://github.com/Arm/asct). You can browse the source code, report issues, and contribute to the project.
+
 To get detailed information about any ASCT command, run the built-in help command:
 
 ```bash
@@ -308,4 +316,5 @@ For example:
 ```bash
 asct help run
 ```
+
 You are now ready to use ASCT for analyzing performance on Arm-based platforms.

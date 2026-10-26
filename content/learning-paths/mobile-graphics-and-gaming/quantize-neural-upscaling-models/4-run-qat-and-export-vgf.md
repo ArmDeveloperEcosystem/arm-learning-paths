@@ -29,6 +29,8 @@ from torchao.quantization.pt2e import (
 
 Then add the QAT training function and example entry point. This code prepares the exported model for QAT, fine-tunes for a small number of epochs, converts to INT8, and exports to `.vgf`.
 
+The export also enables two optional debug settings. The `--emit-debug-info` Model Converter flag embeds ExecuTorch stack traces and module metadata in the VGF, while `dump_debug_info(VgfCompileSpec.DebugMode.TOSA)` preserves the corresponding TOSA debug information during lowering. You can omit both settings when you don't need debug information.
+
 ```python
 def train_model_qat(
     model: nn.Module,
@@ -109,9 +111,13 @@ def qat_example(device="cpu"):
     )
 
     # 8) Partition and dump a `.vgf` artifact.
-    compile_spec = VgfCompileSpec(TosaSpecification.create_from_string(tosa_spec))
+    compile_spec = VgfCompileSpec(
+        TosaSpecification.create_from_string(tosa_spec),
+        compiler_flags=["--emit-debug-info"],
+    )
     vgf_partitioner = VgfPartitioner(
         compile_spec.dump_intermediate_artifacts_to("./output_qat/")
+        .dump_debug_info(VgfCompileSpec.DebugMode.TOSA)
     )
 
     to_edge_transform_and_lower(aten_dialect, partitioner=[vgf_partitioner])
@@ -183,8 +189,14 @@ def export_vgf_int8_qat(
     q = convert_pt2e(qat_ready)
     aten_dialect = torch.export.export(q, args=example_input, strict=True)
 
-    compile_spec = VgfCompileSpec(TosaSpecification.create_from_string(tosa_spec))
-    vgf_partitioner = VgfPartitioner(compile_spec.dump_intermediate_artifacts_to(output_dir))
+    compile_spec = VgfCompileSpec(
+        TosaSpecification.create_from_string(tosa_spec),
+        compiler_flags=["--emit-debug-info"],
+    )
+    vgf_partitioner = VgfPartitioner(
+        compile_spec.dump_intermediate_artifacts_to(output_dir)
+        .dump_debug_info(VgfCompileSpec.DebugMode.TOSA)
+    )
     to_edge_transform_and_lower(aten_dialect, partitioner=[vgf_partitioner])
 ```
 

@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Boot the NXP FRDM i.MX 93 board"
+description: Connect to the NXP FRDM i.MX 93 board, boot Linux, and verify the board is ready for ExecuTorch deployment.
 
 weight: 3
 

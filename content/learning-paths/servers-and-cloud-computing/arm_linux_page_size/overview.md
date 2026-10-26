@@ -19,7 +19,7 @@ To keep track of these mappings efficiently, CPUs use a fast lookup cache called
 
 On x86 systems, 4K pages are the standard, while Arm-based systems support multiple page sizes - typically 4K, 16K, or 64K. This flexibility allows developers to fine-tune performance for specific workloads. 
 
-This Learning Path explains how to switch between 4K and 64K pages on different Linux distributions.
+You'll learn how to switch between 4K, 16K, and 64K pages on different Linux distributions.
 
 ## How does the CPU locate data in memory?
 
@@ -39,21 +39,22 @@ Changing the page size has a cascading effect on system performance:
 
 ### Trade-offs to consider
 
-| Aspect          | 4K Pages                             | 64K Pages                              |
-|-----------------|--------------------------------------|----------------------------------------|
-| **Size**        | Small “bricks” (4 KB each)           | Big “bricks” (64 KB each)              |
-| **Flexibility** | Best for flexibility and compatibility | Best for large, contiguous memory workloads |
-| **Efficiency**  | Needs more entries (more bookkeeping) | Needs fewer entries (less bookkeeping) |
-| **Waste**       | At most 4 KB unused per page         | Up to ~63 KB unused if not fully used   |
-| **TLB reach**       | Lower, more misses         | Higher, fewer misses |
+| Aspect | 4K pages | 16K pages | 64K pages |
+|---|---|---|---|
+| **Flexibility** | Highest compatibility | Balance of compatibility and reach | Best for large, contiguous memory workloads |
+| **Efficiency** | Needs the most page table entries | Needs fewer entries than 4K pages | Needs the fewest entries |
+| **Internal fragmentation** | Up to about 4 KB per partly used page | Up to about 16 KB per partly used page | Up to about 64 KB per partly used page |
+| **TLB reach** | Lowest | Higher than 4K pages | Highest |
 
-This Learning Path covers switching between 4K and 64K page sizes because these are supported by most Arm Linux distributions. In some cases, you may find that 16K page size is a sweet spot for your application, but Linux kernel, hardware, and software support is limited. One example of 16K page size is [Asahi Linux](https://asahilinux.org/).
+Linux distribution support varies. Debian 12 and later provide a packaged 16K kernel, while the Ubuntu and CentOS instructions use packaged 64K kernels. Debian users can also build a 64K kernel from source.
 
 ## How do I select the memory page size?
 
 Points to consider when thinking about page size:
 
 - **4K pages** are the safe, default choice. They let you use memory in small slices and keep waste low. Since they are smaller, you need more of them when handling larger memory footprint applications. This creates more overhead for the operating system to manage, but it may be worth it for the flexibility. They are great for applications that need to access small bits of data frequently, like web servers or databases with lots of small transactions.
+
+- **16K pages** provide a middle ground. They increase TLB reach compared with 4K pages while reducing the internal fragmentation risk of 64K pages.
 
 - **64K pages** shine when you work with large, contiguous data such as video frames or large database caches because they cut down on management overhead. They will use more memory if you don’t use the whole page, but they can also speed up access times for large data sets.
 
@@ -69,7 +70,7 @@ The best way to determine the impact of page size on application performance is 
 Do not modify the Linux kernel page size in a production environment. It can lead to system instability or failure. Perform testing in a non-production environment before applying to production systems.
 {{% /notice %}}
 
-Select the Arm Linux distribution you are using to find out how to install the 64K page size kernel.
+Select your Arm Linux distribution to install an available larger-page kernel. The Debian instructions cover both 16K and 64K page sizes.
 
 - [Ubuntu](/learning-paths/servers-and-cloud-computing/arm_linux_page_size/ubuntu/)
 - [Debian](/learning-paths/servers-and-cloud-computing/arm_linux_page_size/debian/)

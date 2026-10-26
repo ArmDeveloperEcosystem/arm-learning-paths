@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Vivaldi
+description: Install Vivaldi on Arm Linux or Windows on Arm and use a native browser for development and web workflows.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -47,7 +48,7 @@ sudo dnf --nogpgcheck -y install ./vivaldi*.rpm
   {{< /tab >}}
 {{< /tabpane >}}
 
-If you need a command line only install use the instructions below:
+If you need a command-line-only install, use the instructions below:
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu/Debian" language="bash">}}

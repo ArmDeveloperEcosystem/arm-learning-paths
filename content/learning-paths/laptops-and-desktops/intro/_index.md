@@ -16,24 +16,28 @@ prerequisites:
 
 author: Jason Andrews
 
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
+    - Cortex-A
+    - Cortex-X
+    - Arm C1
 operatingsystems:
     - Linux
     - Windows
     - ChromeOS
 tools_software_languages:
 
-
 further_reading:
     - resource:
         title: All Chromebooks with Arm Processors 
         link: https://www.linuxmadesimple.info/2019/08/all-chromebooks-with-arm-processors-in.html
         type: website
-
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

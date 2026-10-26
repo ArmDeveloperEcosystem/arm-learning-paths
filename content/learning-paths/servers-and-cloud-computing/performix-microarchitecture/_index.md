@@ -1,7 +1,6 @@
 ---
 title: Optimize application performance using Arm Performix CPU microarchitecture analysis
 
-
 minutes_to_complete: 60
 
 who_is_this_for: This is an introductory topic for software developers who want to learn performance analysis methodologies for Linux applications on Arm Neoverse-based servers.
@@ -13,18 +12,25 @@ learning_objectives:
     - Compare performance profiles to measure execution improvements
 
 prerequisites:
-    - An Arm Neoverse-based server running Linux (bare-metal or cloud bare-metal instance preferred for access to hardware performance counters)
+    - An Arm Neoverse-based server running Linux, such as an Arm AGI CPU platform.
+    - Bare-metal server or cloud bare-metal access is preferred for hardware performance counters
     - Familiarity with Linux command line
     - Basic understanding of CPU performance concepts
 
 author:
-- Brendan Long
-- Kieran Hejmadi
-- Jason Andrews
+    - Brendan Long
+    - Kieran Hejmadi
+    - Jason Andrews
+
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
+platforms:
+    - Arm AGI CPU
 armips:
     - Neoverse
 tools_software_languages:
@@ -55,3 +61,4 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
+

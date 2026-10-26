@@ -1,6 +1,7 @@
 ---
 # User change
 title: Create and build a Hello World example project
+description: Create and build a bare-metal Hello World project with Arm tools and run it on an Arm Fixed Virtual Platform.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

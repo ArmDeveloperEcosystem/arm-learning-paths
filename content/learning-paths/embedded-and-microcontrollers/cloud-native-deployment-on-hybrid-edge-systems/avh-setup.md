@@ -1,5 +1,6 @@
 ---
 title: AVH device setup
+description: Set up the i.MX 8M Plus model in Arm Virtual Hardware for testing hybrid edge application deployment.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

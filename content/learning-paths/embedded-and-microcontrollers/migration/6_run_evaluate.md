@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Run and evaluate" 
+description: Run the ported application on Arm, evaluate behavior and performance, and compare results with the original environment.
 
 weight: 6 # 1 is first, 2 is second, etc.
 

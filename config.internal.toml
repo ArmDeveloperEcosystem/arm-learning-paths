@@ -1,0 +1,3 @@
+[params]
+# Use Arm's stable navigation and footer bundle internally.
+global_web_components_url = "https://www.arm.com/arm-global-web-components/devhub/app.js"

@@ -1,5 +1,6 @@
 ---
 title: "Deploy an application to your device"
+description: Deploy an application from Balena Hub to the Arm Virtual Hardware device and verify that it runs in Balena Cloud.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Create and setup Keil MDK project"
+description: Create a Keil MDK project, install CMSIS packs, and configure the components needed for an RTX5 application.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

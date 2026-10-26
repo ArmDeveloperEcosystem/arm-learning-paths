@@ -1,6 +1,7 @@
 ---
 # User change
 title: Debug connection to Arm Fast Models
+description: Create an Arm Development Studio debug connection for Arm Fast Models and verify the virtual target setup.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

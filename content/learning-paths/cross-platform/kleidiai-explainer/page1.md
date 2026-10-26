@@ -38,7 +38,7 @@ What does this all mean? An 8-billion parameter model generating one token requi
 KleidiAI uses modern Arm CPU instructions to accelerate matrix multiplication and overall AI inference.
 
 ## What Arm features does KleidiAI leverage?
-Each KleidiAI matrix multiplication micro-kernel uses a specific Arm architecture feature to enhance AI inference. In this section you can read a description of each architecture feature that KleidiAI uses to accelerate matrix multiplication.
+Each KleidiAI matrix multiplication micro-kernel uses a specific Arm architecture feature to enhance AI inference. In this section you can read a description of each architecture-specific instruction that KleidiAI can use to accelerate operations used in matrix multiplication.
 
 * **Dot Product**: KleidiAI uses the `vdotq_s32` intrinsic, which is a vector dot product, introduced as part of SIMD. It computes the dot product of two vector 8-bit integers, and accumulates the result into a 32-bit integer. View the [`vdot` documentation](https://developer.arm.com/documentation/ddi0597/2024-03/SIMD-FP-Instructions/VDOT--by-element---BFloat16-floating-point-indexed-dot-product--vector--by-element--).
 
@@ -58,13 +58,14 @@ Today, Arm-powered hardware containing these instructions exist in cloud servers
 | Smartphone  | Vivo Y22            | MediaTek Helio G70  | Armv8.2  |
 | Smartphone  | Xiaomi Mi 11        | Qualcomm Snapdragon 888 | Armv8.2  |
 | Smartphone  | Samsung Galaxy S20 Ultra      | Samsung Exynos 990 | Armv8.2  |
-| Smartphone  | Google Pixel 8 Pro | Google Tensor G3   | Armv9.0  |
+| Smartphone  | Google Pixel 11 Pro | Google Tensor G6   | Armv9.3  |
 | Smartphone  | Samsung Galaxy S22 | Snapdragon 8 Gen 1 | Armv9.0  |
 | Smartphone  | OPPO Find X5 Pro   | Snapdragon 8 Gen 1 | Armv9.0  |
 | Smartphone  | Xiaomi 12T         | Mediatek Dimensity 9000 | Armv9.0  |
 | Server      | c8y                | Alibaba Yitian 710 | Armv9.0  |
 | Server      | GB200 NVL72        | NVIDIA Grace       | Armv9.0  |
-| Server      | C7g, M7g, R7g      | AWS Graviton 3     | Armv8.4  |
+| Server      | M9g, M9gd      | AWS Graviton 5     | Armv9.2  |
+| Server      | Arm AGI CPU      | Arm AGI CPU     | Armv9.2  |
 
 
 This Learning Path now moves on to answer the following questions while stepping through a C++ example:

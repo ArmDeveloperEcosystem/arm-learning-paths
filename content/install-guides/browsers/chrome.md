@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Chrome
+description: Install Chrome on Arm Linux or Windows on Arm and use a native browser for development and web workflows.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -9,7 +10,7 @@ additional_search_terms:
 - chrome
 
 ### Estimated completion time in minutes (please use integer multiple of 5)
-minutes_to_complete: 5
+minutes_to_complete: 10
 
 author: Jason Andrews
 
@@ -23,15 +24,25 @@ multitool_install_part: true    # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## How do I install Chrome?
+The Chrome browser runs on Windows on Arm as a native ARM64 application. Chrome is also available for Arm Linux. 
 
-The Chrome browser runs on Windows on Arm as a native ARM64 application. Chrome is not available for Arm Linux. 
+## Install Chrome on Linux
 
-### Linux
+To install Chrome on Arm Linux:
 
-Chrome is not available for Arm Linux. 
+{{< tabpane code=true >}}
+  {{< tab header="Ubuntu 24.04" language="bash" >}}
+sudo apt-get update
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_arm64.deb
+sudo apt install -y ./google-chrome-stable_current_arm64.deb
+  {{< /tab >}}
+  {{< tab header="Amazon Linux 2023" language="bash" >}}
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_aarch64.rpm
+sudo dnf install -y ./google-chrome-stable_current_aarch64.rpm
+  {{< /tab >}}
+{{< /tabpane >}}
 
-### Windows 
+## Install Chrome on Windows 
 
 To install Chrome on Windows on Arm:
 
@@ -40,3 +51,9 @@ To install Chrome on Windows on Arm:
 2. Run the downloaded `ChromeSetup.exe` file 
 
 3. Find and start Chrome from the applications menu
+
+## Next steps
+
+You can now use Chrome on Arm. 
+
+To learn about implementing headless browser testing using Chrome and Puppeteer, see [Run headless browser tests with Puppeteer on Arm Linux](/learning-paths/servers-and-cloud-computing/puppeteer-headless-chrome/).

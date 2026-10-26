@@ -1,5 +1,6 @@
 ---
 title: Device support
+description: Review CMSIS-Pack device support changes needed when migrating device packs from CMSIS v5 to CMSIS v6.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

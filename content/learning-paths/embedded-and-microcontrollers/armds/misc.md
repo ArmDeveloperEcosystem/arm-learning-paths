@@ -1,6 +1,7 @@
 ---
 # User change
 title: Other compilers and project types
+description: Adjust Arm Development Studio projects for alternate compiler versions and project types when the default setup does not match your environment.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

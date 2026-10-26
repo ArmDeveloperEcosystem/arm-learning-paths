@@ -1,6 +1,7 @@
 ---
 # User change
 title: "How do I debug RPi Pico applications?"
+description: Connect debug wiring for Raspberry Pi Pico applications and use the debugger to inspect firmware execution.
 
 weight: 5 # 1 is first, 2 is second, etc.
 

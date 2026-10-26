@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Application Programming"
+description: Understand the application stack for the Raspberry Pi Pico motion detector before connecting sensors and implementing the firmware.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

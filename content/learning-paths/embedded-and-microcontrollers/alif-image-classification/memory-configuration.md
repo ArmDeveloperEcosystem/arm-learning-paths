@@ -1,5 +1,6 @@
 ---
 title: Configure memory layout and flash settings
+description: Configure SRAM, flash, and scatter file settings so the Alif Ensemble application can load the model and run on the target hardware.
 weight: 6
 
 layout: "learningpathall"

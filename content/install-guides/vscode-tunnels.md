@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: VS Code Tunnels
+description: Install the VS Code CLI on Arm systems and configure Remote Tunnels for browser-based access to non-desktop Arm development environments.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

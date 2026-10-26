@@ -1,6 +1,7 @@
 ---
 # User change
-title: "Build and run an example application to learn about MTE"
+title: Create and compile an example C application to explore Arm MTE 
+description: "Create and compile a C example on AArch64 Linux to prepare for exploring Arm Memory Tagging Extension (MTE)."
 
 weight: 2 # 1 is first, 2 is second, etc.
 
@@ -8,27 +9,29 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-The Arm Memory Tagging Extension (MTE) is a security feature built into Armv8.5-A and Armv9-A processors. MTE detects buffer overflow errors and use-after-free errors in software. These memory safety issues are the primary source of vulnerabilities.
+## What Arm MTE is
 
-To learn more about MTE read the article [Memory safety: How Arm Memory Tagging Extension addresses this industry-wide security challenge](https://www.arm.com/blogs/blueprint/memory-safety-arm-memory-tagging-extension).
+The Arm Memory Tagging Extension (MTE) is a security feature built into Armv8.5-A and Armv9-A processors. MTE detects buffer overflow errors and use-after-free errors in software. These memory safety issues are the primary source of vulnerabilities.
 
 MTE is helpful for many types of software. It improves the Linux kernel as well as Linux and Android applications.
 
-If you have a recent AArch64 Linux machine you can run a small application to see how it works. 
+To learn more about MTE, read the article [Memory safety: How Arm Memory Tagging Extension addresses this industry-wide security challenge](https://www.arm.com/blogs/blueprint/memory-safety-arm-memory-tagging-extension).
 
-Hardware availability for MTE is limited, but you can run the example application using [QEMU](https://www.qemu.org/).
-
-The process below uses Ubuntu 22.04, but other recent versions of Linux can work. 
+The example uses Ubuntu 22.04. You can use other recent versions of Linux.
 
 ## Before you begin
 
-Install the meta package which includes software tools for building the example C program:
+Ensure you have an AArch64 Linux machine.
+
+On the machine, install the metapackage that includes software tools for building the example C program:
 
 ```console
 sudo apt install build-essential -y
 ```
 
-Install `qemu-user` to run the example on processors which do not support MTE:
+Hardware availability for MTE is limited. If your processor doesn't support MTE, you can run the example application using [QEMU](https://www.qemu.org/). 
+
+Install `qemu-user` if your processor doesn't support MTE:
 
 ```console
 sudo apt install qemu-user -y
@@ -36,7 +39,7 @@ sudo apt install qemu-user -y
 
 ## Create and build the example
 
-Review the comments in the source code to see how MTE works. 
+Review the comments in the source code to see how MTE works.
 
 The code demonstrates how to:
 
@@ -46,11 +49,13 @@ The code demonstrates how to:
 - Access memory with the default tag of 0
 - Generate a random tag and use it for the lock on the memory and the key on the pointer
 - Access memory with the generated tag
-- Access memory beyond the 16 byte granule and confirm MTE detects a mismatch
+- Access memory beyond the 16-byte granule and confirm MTE detects a mismatch
 
-1. Use a text editor to copy and paste the C code below to a file named `mte-example.c`:
+To create and build the example, follow these steps:
 
-```C
+1. Use a text editor to copy and paste the following C code into a file named `mte-example.c`:
+
+```c
 /*
  * Memory Tagging Extension (MTE) example for Linux
  *
@@ -191,43 +196,8 @@ gcc mte-example.c -o mte-example -march=armv8.5-a+memtag
 
 The executable `mte-example` is now ready to run.
 
-## Run the example 
+## What you've accomplished and what's next
 
-1. Run the example on the Linux machine and confirm MTE is not supported:
+You've created and compiled the `mte-example` executable.
 
-```console
-./mte-example
-```
-
-The expected output is:
-
-```output
-MTE is not supported
-```
-
-This occurs because `getauxval()`, the function to query hardware features from applications, does not report the field `HWCAP2_MTE` set. This means MTE is not implemented in the processor. For more information about how to identify hardware features refer to [ARM64 ELF hwcaps](https://docs.kernel.org/arch/arm64/elf_hwcaps.html).
-
-2. Run the application again using `qemu-aarch64`, the userspace program which includes support for MTE:
-
-```console
-qemu-aarch64 ./mte-example
-```
-
-The expected output is:
-
-```output
-MTE is supported
-pointer is 0x5501a14000
-ptr[0] = 0x41 ptr[1] = 0x42
-pointer is now 0x100005501a14000
-ptr[0] = 0x43 ptr[1] = 0x44
-Expecting SIGSEGV...
-qemu: uncaught target signal 11 (Segmentation fault) - core dumped
-Segmentation fault (core dumped)
-```
-
-The application detects MTE is available and memory tagging can be enabled and used.
-
-Notice that the tag value will be different compared to the output above (the tag value is 1). Each time you run the application a random tag will be generated by the `IRG` instruction.
-
-You have learned how to build and run a program with the Memory Tagging Extension on Linux. 
+Next, you'll run the executable to observe the example's behavior.

@@ -1,5 +1,6 @@
 ---
 title: Integrate a custom character device driver into the Linux kernel
+description: Integrate a custom character device driver into the Linux kernel so it can be profiled as an in-tree module.
 weight: 6
 
 ### FIXED, DO NOT MODIFY

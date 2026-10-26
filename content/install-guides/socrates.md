@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Arm Socrates
+description: Install Arm Socrates from Arm Product Download Hub, configure licensing, and update the IP catalog for Arm IP selection and SoC creation.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:
@@ -93,4 +94,3 @@ They are available on the [Arm YouTube channel](https://www.youtube.com/c/arm):
  * [Getting Started](https://youtube.com/playlist?list=PLgyFKd2HIZlY_y7b5OTtyrso45q-eCM_s)
  * [NIC-400 Configuration](https://youtube.com/playlist?list=PLgyFKd2HIZlaQBfd8YEMwSQX_cWIxODgG)
  * [NI-700 Configuration](https://youtube.com/playlist?list=PLgyFKd2HIZlahIsHSSw7ViwiFxeBYc36b)
-

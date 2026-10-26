@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Import and build example project"
+description: Import an embedded example project into Arm Development Studio and build it for the selected compiler and target platform.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

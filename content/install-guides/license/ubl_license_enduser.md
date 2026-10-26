@@ -1,5 +1,6 @@
 ---
 title: UBL LLS End-user setup
+description: Activate Arm user-based licenses from a Local License Server on an end-user machine using environment variables, tool IDEs, or manual activation.
 minutes_to_complete: 15
 official_docs: https://developer.arm.com/documentation/102516
 author: Ronan Synnott

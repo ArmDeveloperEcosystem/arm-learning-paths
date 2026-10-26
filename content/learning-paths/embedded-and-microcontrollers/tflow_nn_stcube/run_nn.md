@@ -1,6 +1,7 @@
 ---
 # User change
 title: Run the model on development board
+description: Deploy the trained TensorFlow model to the STM32 development board and run inference from the generated firmware.
 
 weight: 6 # 1 is first, 2 is second, etc.
 

@@ -43,11 +43,11 @@ In the default editor layout:
 
 1. You should be presented with a simple title screen with a menu of _Easy_, _Medium_, _Hard_ and _Demo_ options
 
-![Dr Arm Title Screen](/images/game-title-screen.jpg "Figure 1. Title screen with menu options")
+![Dr Arm Title Screen](images/game-title-screen.jpg "Figure 1. Title screen with menu options")
 
 1. Click _Demo_ to run a battle between two AI characters
 
-![Dr Arm Demo Mode](/images/game-demo-mode.jpg "Figure 2. Demo mode running two AT characters against each other")
+![Dr Arm Demo Mode](images/game-demo-mode.jpg "Figure 2. Demo mode running two AT characters against each other")
 
 The screenshots above show a working version. If you see something similar, you know everything is working as expected.
 

@@ -1,18 +1,19 @@
 ---
-title: Add Autonomous Workspace Cognition
+title: Add autonomous workspace cognition to Hermes Agent
+description: Add autonomous workspace cognition to Hermes Agent so the runtime schedules memory summaries, reloads policy settings, and preserves state.
 weight: 8
 layout: "learningpathall"
 ---
 
-## Add Autonomous Workspace Cognition
+## Update Hermes to add proactive behavior
 
-In this section, you will add ***autonomous workspace cognition*** to Hermes Agent.
+In this section, you'll add autonomous workspace cognition to Hermes Agent.
 
-In the previous section, Hermes could answer a question by retrieving relevant memory on demand. This section adds proactive behavior: Hermes will periodically review stored workspace memory, identify recurring themes, and write a summary without waiting for a user query.
+In the previous section, Hermes could answer a question by retrieving relevant memory on demand. You'll now add proactive behavior: Hermes will periodically review stored workspace memory, identify recurring themes, and write a summary without waiting for a user query.
 
 For example, if the workspace contains notes about CPU orchestration, GPU inference, and semantic memory, Hermes can generate a scheduled workspace summary that explains those themes and how they relate to the current local AI runtime.
 
-The runtime can already ingest documents, build semantic memory, and answer questions using retrieved context. You will now add a ***periodic cognition workflow*** that reviews stored memory and generates a workspace-level summary.
+The runtime can already ingest documents, build semantic memory, and answer questions using retrieved context. You'll now add a periodic cognition workflow that reviews stored memory and generates a workspace-level summary.
 
 The workflow becomes:
 
@@ -26,24 +27,17 @@ stored workspace memory
 
 This is the final stage of the Learning Path. Hermes becomes a persistent autonomous local AI runtime that can monitor, remember, retrieve, and periodically reason about workspace state.
 
-## Autonomous Cognition Overview
+### Understand autonomous cognition 
 
 Autonomous cognition means the runtime performs useful reasoning without waiting for a new document or explicit query.
 
-Hermes will:
-
-- Load runtime policy from `/workspace/config/runtime.json`
-- Continue watching `workspace/inbox/`
-- Continue ingesting supported files into semantic memory
-- Continue answering questions from `/workspace/query.txt`
-- Periodically summarize the stored workspace memory
-- Write the summary to `/workspace/memory/workspace-summary.txt`
+Hermes continues watching `workspace/inbox/` and ingesting supported files into semantic memory. It continues answering questions from `/workspace/query.txt` and also periodically generates a workspace-level summary, writing the result to `/workspace/memory/workspace-summary.txt`. Runtime behavior is controlled by a policy file at `/workspace/config/runtime.json`.
 
 The runtime remains local-first. Files, models, vector memory, and summaries stay on the DGX Spark system.
 
-## Create the Runtime Config Directory
+### Create the runtime configuration directory and policy file
 
-Create the configuration directory if it does not already exist:
+Create the configuration directory if it doesn't already exist:
 
 ```bash
 mkdir -p ~/dgx-hermes-agent/workspace/config
@@ -75,9 +69,9 @@ The policy file controls runtime behavior without rebuilding the container.
 | `retrieval_limit` | Records the intended semantic retrieval depth for the runtime policy |
 | `summary_output` | Defines where Hermes writes the workspace summary |
 
-The verified code in this section keeps semantic retrieval at `limit=3`, matching the policy value shown above. The policy file makes this setting visible for later hardening, where the retrieval function can load it dynamically.
+The verified code in this section keeps semantic retrieval at `limit=3`, matching the listed policy values. The policy file makes this setting visible for later hardening, where the retrieval function can load it dynamically.
 
-## Add Autonomous Cognition to Hermes
+### Add autonomous cognition to Hermes
 
 Open and edit the file `~/dgx-hermes-agent/hermes/agent.py`.
 
@@ -368,75 +362,27 @@ if __name__ == "__main__":
     observer.join()
 ```
 
-## Code Trace
+#### Understand code trace
 
-This version adds JSON configuration loading:
+Hermes reads `/workspace/config/runtime.json` using `load_runtime_config()` at multiple points in the runtime loop. File filtering now uses the `supported_extensions` list from that config rather than a hardcoded constant, so you can update the list without rebuilding the container.
 
-```python
-CONFIG_PATH = "/workspace/config/runtime.json"
-```
+`generate_workspace_summary()` collects stored memory using `qdrant.scroll()` with `limit=10` and `with_payload=True`. Hermes reads recent stored summaries without performing a semantic search. The combined summaries are sent to `qwen2.5:7b` with a system prompt requesting recurring themes and insights. The result is written to the path defined by `summary_output` in the config.
 
-```python
-def load_runtime_config():
-    with open(CONFIG_PATH, "r") as f:
-        return json.load(f)
-```
+The main loop reloads config on every iteration and checks elapsed time against `summary_interval_hours`. Any edit to `runtime.json` takes effect at the next loop tick without restarting Hermes.
 
-File filtering now comes from runtime policy:
+#### Understand runtime behavior considerations
 
-```python
-config = load_runtime_config()
+Runtime configuration is reloaded inside the main loop on every tick, so changes to `/workspace/config/runtime.json` take effect without rebuilding the Hermes container. If the JSON file is malformed, Hermes will fail when it tries to reload, so validate the syntax after any edit.
 
-supported_extensions = config.get(
-    "supported_extensions",
-    [".txt"]
-)
-```
+Workspace cognition uses `qdrant.scroll()` to collect stored summaries for workspace-level analysis, which differs from `qdrant.query_points()` used for question-driven semantic retrieval. The `scroll()` call is not semantically guided — it reads stored records in insertion order.
 
-The cognition function reads stored memory from Qdrant:
+On startup, the cognition cycle runs immediately because `last_summary_time` is initialized to `0`. This is expected and confirms that the pipeline can read memory, call Ollama, and write the summary output before any interval has elapsed.
 
-```python
-results = qdrant.scroll(
-    collection_name=COLLECTION_NAME,
-    limit=10,
-    with_payload=True
-)[0]
-```
+The current implementation handles file creation through the `on_created()` event handler. Existing files and file modifications don't trigger ingestion. Handling file modification events is a natural extension for a more robust runtime.
 
-It extracts stored summaries:
+The `retrieval_limit` value in `runtime.json` is a visible configuration placeholder. The retrieval code still uses `limit=3` in `search_memory()`. Treat it as a forward-looking entry for later hardening.
 
-```python
-summaries.append(
-    payload.get("summary", "")
-)
-```
-
-It asks the local model to analyze recurring themes:
-
-```python
-"You are an autonomous workspace cognition agent. "
-"Analyze the workspace summaries and identify "
-"important recurring themes and insights."
-```
-
-It writes the result to the configured summary output path:
-
-```python
-output_path = config.get(
-    "summary_output",
-    "/workspace/memory/workspace-summary.txt"
-)
-```
-
-The main loop reloads runtime policy every cycle:
-
-```python
-config = load_runtime_config()
-```
-
-This allows changes to `runtime.json` to affect runtime behavior without rebuilding the container.
-
-## Rebuild Hermes
+### Rebuild Hermes
 
 Rebuild the Hermes container:
 
@@ -451,35 +397,45 @@ Restart the runtime:
 docker compose up -d
 ```
 
-Follow the logs:
+Follow the logs in the terminal:
 
 ```bash
 docker logs -f hermes
 ```
 
+Leave this terminal open with the log stream running and open a second terminal for the next step.
+
 On startup, the first cognition cycle runs immediately because `last_summary_time` starts at `0`.
 
-Expected output:
+The output is similar to:
 
-```text
+```output
+[Hermes Agent] Starting workspace watcher...
+[Hermes Agent] Monitoring: /workspace/inbox
+
 [Cognition] Generating workspace summary...
+
 [Cognition] Workspace summary updated:
 /workspace/memory/workspace-summary.txt
 ```
 
 This startup behavior is expected and validates that the cognition pipeline can read memory, call Ollama, and write the summary file.
 
-## Verify Workspace Summary Output
+## Validate Hermes autonomous cognition
 
-View the generated summary on the host:
+After adding autonomous workspace cognition to Hermes, verify that it works as expected.
+
+### Verify workspace summary output
+
+In the second terminal, view the generated summary on the host:
 
 ```bash
 cat ~/dgx-hermes-agent/workspace/memory/workspace-summary.txt
 ```
 
-Expected structure:
+The output is structured similar to:
 
-```text
+```output
 Workspace Summary
 Generated: 2026-05-20 22:53:29.539079
 
@@ -507,11 +463,11 @@ Generated: 2026-05-20 22:53:29.539079
 The key insights from the workspace summaries revolve around how semantic memory enables context-based recall in AI systems, the role of NVIDIA GPUs in accelerating model inference tasks, and the multifaceted responsibilities of Arm CPUs in orchestrating various operational aspects of a persistent AI environment. These themes highlight the interdependence of different hardware components and their specific roles in enhancing the performance and effectiveness of AI systems.
 ```
 
-The summary content will vary because it is generated by the local model from stored memory.
+The summary content will vary because it's generated by the local model from stored memory.
 
-## Validate Event-Driven Ingestion
+### Validate event-driven ingestion
 
-Create a new file. As in the previous sections, write it outside the inbox first and then move it into `workspace/inbox/` so Hermes reads a completed file.
+In the second terminal, create a new file. Write it outside the inbox first and then move it into `workspace/inbox/` so Hermes reads a completed file:
 
 ```bash
 cat > /tmp/autonomous-runtime-note.txt <<'EOF'
@@ -524,9 +480,11 @@ mv /tmp/autonomous-runtime-note.txt \
 ~/dgx-hermes-agent/workspace/inbox/autonomous-runtime-note.txt
 ```
 
-Expected Hermes logs:
+Watch the first terminal running Hermes logs for the Hermes log output. 
 
-```text
+The output is similar to:
+
+```output
 [Agent] New file detected:
 /workspace/inbox/autonomous-runtime-note.txt
 
@@ -543,20 +501,22 @@ Expected Hermes logs:
 
 The new document is added to semantic memory and can be included in future workspace summaries.
 
-## Validate Semantic Retrieval Still Works
+### Revalidate semantic retrieval 
 
-Autonomous cognition adds scheduling and workspace-level summaries, but it should not break the interactive retrieval workflow from the previous section. Validate semantic retrieval again to confirm that Hermes can still process `/workspace/query.txt` while the cognition loop is enabled.
+Autonomous cognition adds scheduling and workspace-level summaries, but it doesn't break the interactive retrieval workflow from the previous section. Validate semantic retrieval again to confirm that Hermes can still process `/workspace/query.txt` when the cognition loop is enabled.
 
-Create a query:
+In the second terminal, create a query:
 
 ```bash
 echo "What is autonomous workspace cognition?" \
 > ~/dgx-hermes-agent/workspace/query.txt
 ```
 
-Expected logs:
+Watch the first terminal running Hermes logs.
 
-```text
+The output is similar to:
+
+```output
 [Memory] Searching semantic memory...
 
 [Workspace Query]
@@ -585,15 +545,15 @@ Summary:
 Autonomous workspace cognition is a feature that enables ongoing AI analysis of stored data at scheduled intervals. This system uses the analysis to detect recurring themes and summarize activities within the workspace. It maintains scheduled awareness from stored memory, allowing the runtime to reason over the information it has already ingested.
 ```
 
-This confirms that autonomous cognition was added without removing the query workflow from the previous section.
+This output shows that autonomous cognition was added without removing the query workflow from the previous section.
 
-## Validate Runtime Policy Reload
+### Validate runtime policy reload
 
-Runtime policy reload is important because persistent AI systems should be configurable without rebuilding containers or restarting the full stack. In this validation, you temporarily change the supported file extensions and confirm that Hermes applies the new policy during its normal runtime loop.
+Runtime policy reload is important because persistent AI systems are configurable without rebuilding containers or restarting the full stack. In this validation, you'll temporarily change the supported file extensions and confirm that Hermes applies the new policy during its normal runtime loop.
 
 Open and edit the file `~/dgx-hermes-agent/workspace/config/runtime.json`.
 
-Change the supported extensions so Hermes only ingests Markdown files:
+Change the supported extensions so Hermes ingests only Markdown files:
 
 ```json
 {
@@ -608,7 +568,7 @@ Change the supported extensions so Hermes only ingests Markdown files:
 
 Wait 5 to 10 seconds for the runtime loop to reload the policy.
 
-Create a `.txt` file:
+Create a `.txt` file in the second terminal:
 
 ```bash
 echo "This text file should be ignored by the current policy." \
@@ -618,9 +578,9 @@ mv /tmp/ignored-policy-test.txt \
 ~/dgx-hermes-agent/workspace/inbox/ignored-policy-test.txt
 ```
 
-Hermes should not ingest it because `.txt` is no longer in `supported_extensions`.
+Hermes won't ingest it because `.txt` is no longer in `supported_extensions`.
 
-Now create a Markdown file:
+Now in the second terminal, create a Markdown file:
 
 ```bash
 cat > /tmp/accepted-policy-test.md <<'EOF'
@@ -634,9 +594,11 @@ mv /tmp/accepted-policy-test.md \
 ~/dgx-hermes-agent/workspace/inbox/accepted-policy-test.md
 ```
 
-Expected logs:
+Watch the first terminal running Hermes logs for the Hermes log output. 
 
-```text
+The output is similar to:
+
+```output
 [Agent] New file detected:
 /workspace/inbox/accepted-policy-test.md
 
@@ -648,7 +610,7 @@ Expected logs:
 - Recommendations include integrating chatbots and virtual assistants to improve communication efficiency and customer service.
 ```
 
-This validates that Hermes reloads runtime configuration dynamically.
+This output validates that Hermes reloads runtime configuration dynamically.
 
 Restore the original policy when you are done:
 
@@ -665,7 +627,7 @@ Restore the original policy when you are done:
 }
 ```
 
-## Trigger a Faster Cognition Cycle
+### Trigger a faster cognition cycle
 
 For validation, you can temporarily reduce the summary interval.
 
@@ -686,19 +648,21 @@ Set a very small interval:
 }
 ```
 
-This is approximately 3.6 seconds. With this setting, Hermes repeatedly triggers the cognition loop after only a short pause. In the logs, you should see `[Cognition] Generating workspace summary...` and `[Cognition] Workspace summary updated:` appear again and again while the runtime is active.
+This interval is approximately 3.6 seconds. With this setting, Hermes repeatedly triggers the cognition loop after only a short pause. In the logs, you'll see `[Cognition] Generating workspace summary...` and `[Cognition] Workspace summary updated:` appear again and again when the runtime is active.
 
 This fast interval is useful for validation, but it is intentionally aggressive. Leave it enabled only long enough to confirm that scheduling works, then restore the interval to a larger value.
 
-Follow the logs:
+In the first terminal running Hermes logs, follow the logs:
 
 ```bash
 docker logs -f hermes
 ```
 
-Expected output:
+Press `Ctrl+C` after confirming the cognition cycles are running, then restore the interval.
 
-```text
+The output is similar to:
+
+```output
 [Cognition] Generating workspace summary...
 [Cognition] Workspace summary updated:
 ```
@@ -718,7 +682,7 @@ Restore the interval to `8` after validation to avoid continuous summary generat
 }
 ```
 
-## Validate Persistent Runtime Lifecycle
+### Validate persistent runtime lifecycle
 
 Restart the stack:
 
@@ -733,9 +697,11 @@ Follow the logs:
 docker logs -f hermes
 ```
 
-Expected output:
+Press `Ctrl+C` after the startup messages appear.
 
-```text
+The output is similar to:
+
+```output
 [Hermes Agent] Starting workspace watcher...
 [Hermes Agent] Monitoring: /workspace/inbox
 ```
@@ -748,94 +714,22 @@ Verify that the summary file still exists:
 ls ~/dgx-hermes-agent/workspace/memory/
 ```
 
-You should see `workspace-summary.txt`.
+You'll see `workspace-summary.txt`.
 
-This confirms that the runtime state persists across container restarts.
+This output shows that the runtime state persists across container restarts.
 
-## Runtime Validation Summary
+## Understand CPU and GPU responsibilities
 
-At this point, the local runtime supports:
+The Arm Grace CPU coordinates the autonomous runtime: monitoring the filesystem, reloading runtime policy, scheduling background cognition cycles, aggregating semantic memory for workspace summaries, and coordinating the query workflow.
 
-| Capability | Status |
-|---|---|
-| Workspace monitoring | Complete |
-| Local summarization | Complete |
-| Embedding generation | Complete |
-| Persistent vector memory | Complete |
-| Semantic retrieval | Complete |
-| Contextual reasoning | Complete |
-| Autonomous workspace cognition | Complete |
-| Dynamic runtime policy reload | Complete |
+The Blackwell GPU accelerates summarization, embedding generation, contextual reasoning, and autonomous workspace analysis. The result is a heterogeneous local AI system where the CPU coordinates persistent workflows and the GPU accelerates model execution.
 
-## CPU and GPU Responsibilities
+## What you've accomplished
 
-The Arm Grace CPU coordinates the autonomous runtime:
+You've now completed the persistent autonomous local AI runtime on DGX Spark. The finished system demonstrates how an Arm CPU can coordinate long-running AI workflows, while a GPU accelerates summarization, embedding generation, contextual reasoning, and workspace-level cognition.
 
-- Filesystem monitoring
-- Runtime policy loading
-- Dynamic configuration reload
-- Background scheduling
-- Semantic memory aggregation
-- Query workflow coordination
-- Workspace summary lifecycle
+This Learning Path uses DGX Spark as the reference platform, but the architecture is reusable beyond this specific system. You can adapt the same pattern to other Arm platforms that can run containerized services, local inference backends, vector memory, and a CPU-side orchestration runtime.
 
-The Blackwell GPU accelerates:
+The key idea is that persistent AI systems are distributed orchestration systems, not just single inference calls. Hermes coordinates workspace ingestion, semantic memory, retrieval, autonomous summaries, and runtime policy, while the inference and memory services remain replaceable implementation choices.
 
-- Summarization
-- Embedding generation
-- Contextual reasoning
-- Autonomous workspace analysis
-
-The result is a heterogeneous local AI system where the CPU coordinates persistent workflows and the GPU accelerates model execution.
-
-## Runtime Behavior Notes
-
-The final runtime still uses the Ollama and Qdrant APIs introduced in the previous sections. The notes below focus on runtime behavior that is specific to autonomous cognition and policy-driven orchestration.
-
-Runtime configuration is reloaded inside the main loop:
-
-```python
-config = load_runtime_config()
-```
-
-This means changes to `/workspace/config/runtime.json` can affect behavior without rebuilding the Hermes container. If the JSON file is malformed, Hermes will fail when it tries to reload the policy, so validate the file syntax after editing.
-
-Workspace cognition reads stored memory using Qdrant `scroll(...)`:
-
-```python
-results = qdrant.scroll(
-    collection_name=COLLECTION_NAME,
-    limit=10,
-    with_payload=True
-)[0]
-```
-
-This is different from semantic search. `scroll(...)` is used here to collect recent stored summaries for workspace-level analysis, while `query_points(...)` is still used for question-driven semantic retrieval.
-
-On startup, the first cognition cycle runs immediately because `last_summary_time` starts at `0`:
-
-```python
-last_summary_time = 0
-```
-
-This behavior is expected. It validates that Hermes can read memory, call Ollama, and write the configured summary output path.
-
-The current implementation primarily handles file creation events through:
-
-```python
-on_created()
-```
-
-For validation, use new filenames. Existing files or file modifications may not trigger ingestion. File modification handling is a natural next improvement for a hardened runtime.
-
-The `retrieval_limit` value is present in `runtime.json`, but the verified retrieval code in this section still uses `limit=3` inside `search_memory()`. Treat the policy value as a visible configuration placeholder for later hardening.
-
-## Summary
-
-You completed the ***persistent autonomous local AI runtime*** on DGX Spark. The finished system demonstrates how an Arm CPU can coordinate long-running AI workflows while a GPU accelerates summarization, embedding generation, contextual reasoning, and workspace-level cognition.
-
-This Learning Path uses DGX Spark as the reference platform, but the architecture is reusable beyond this specific system. The same pattern can be adapted to other Arm platforms that can run containerized services, local inference backends, vector memory, and a CPU-side orchestration runtime.
-
-The key idea is that persistent AI systems are ***distributed orchestration systems***, not just single inference calls. Hermes coordinates workspace ingestion, semantic memory, retrieval, autonomous summaries, and runtime policy, while the inference and memory services remain replaceable implementation choices.
-
-This implementation is intentionally a minimal MVP. It validates the end-to-end architecture, but it does not yet handle production concerns such as repeated updates to the same file, deduplication, re-indexing, versioned memory records, or file modification events. Those hardening steps are natural extensions once the core runtime pattern is working.
+This implementation is intentionally a minimal version. It validates the end-to-end architecture, but it doesn't yet handle production concerns such as repeated updates to the same file, deduplication, re-indexing, versioned memory records, or file modification events. Those hardening steps are natural extensions after the core runtime pattern is working.

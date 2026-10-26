@@ -1,5 +1,6 @@
 ---
 title: Run a Large Language Model (LLM) chatbot on a Raspberry Pi 5
+description: Install llama.cpp Python bindings on Raspberry Pi 5, download an LLM, and run an interactive chatbot locally.
 weight: 2
 
 ### FIXED, DO NOT MODIFY

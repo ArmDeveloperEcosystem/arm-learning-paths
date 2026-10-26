@@ -18,7 +18,7 @@ export max_size_kb=200 # maximum file size in KB before resizing
 confirm_args() {
     if [ $# -eq 0 ]; then
         echo "No images provided as arguments"
-        echo "Usage: $0 <image1> <image2> ..."
+        echo "Usage: $0 <image-or-directory> ..."
         exit 1
     fi
 }
@@ -29,7 +29,7 @@ confirm_args() {
 #
 process_env_tunables() {
     # Dry Run
-    if [ -z "${DRY_RUN}" ]; then
+    if [ -n "${DRY_RUN}" ]; then
         export dry_run=${DRY_RUN}
     fi
 
@@ -52,26 +52,39 @@ process_env_tunables() {
 }
 
 #
-# Function: process_images
-# Purpose: process all images passed as arguments
+# Function: find_markdown_root
+# Purpose: find the nearest content root containing an _index.md file
 #
-process_images() {
-    # loop through all image arguments
-    for img in "$@"; do
-        # Skip if file doesn't exist
-        [ -f "$img" ] || {
-            echo "⚠️ File not found: $img"
-            continue
-        }
+find_markdown_root() {
+    local search_dir="$1"
+
+    while [ "$search_dir" != "/" ]; do
+        if [ -f "$search_dir/_index.md" ]; then
+            echo "$search_dir"
+            return
+        fi
+        search_dir=$(dirname "$search_dir")
+    done
+
+    # Preserve the previous behavior for images outside a content directory.
+    dirname "$1"
+}
+
+#
+# Function: process_image
+# Purpose: process one image
+#
+process_image() {
+        local img="$1"
 
         # Skip if not an image file
         if [[ ! "$img" =~ \.(png|PNG|jpg|JPG|jpeg|JPEG)$ ]]; then
             if [[ "$img" == *.webp ]]; then
                 echo "Skipping $img (already .webp)"
-                continue
+                return
             fi
             echo "Skipping non-image file: $img"
-            continue
+            return
         fi
 
         # Get width using ImageMagick
@@ -135,21 +148,28 @@ process_images() {
                     rm "$img"
                 fi
 
-                img_name=$(basename "$img")             # create_device.png
-                webp_name=$(basename "$webp_img")       # create_device.webp
                 img_dir=$(dirname "$img")               # The directory of the image
+                markdown_root=$(find_markdown_root "$img_dir")
+                relative_img="${img#"$markdown_root"/}"
+                relative_webp="${webp_img#"$markdown_root"/}"
 
-                # Only scan markdown files in the same directory
-                find "$img_dir" "$(dirname "$img_dir")" -name "*.md" 2>/dev/null | while read -r md_file; do
-                    if grep -q "$img_name" "$md_file"; then
-                        echo "Replacing $img_name → $webp_name in $md_file"
+                # Escape paths before using them in a sed expression. Matching the
+                # relative path avoids changing a same-named image in another
+                # nested directory.
+                sed_img=$(printf '%s\n' "$relative_img" | sed 's/[][\\.^$*|]/\\&/g')
+                sed_webp=$(printf '%s\n' "$relative_webp" | sed 's/[\\&|]/\\&/g')
+
+                # Scan the Learning Path or Install Guide containing the image. This
+                # reaches Markdown files above nested directories such as
+                # images/streamline/ without touching unrelated content.
+                find "$markdown_root" -type f -name "*.md" -print0 2>/dev/null | while IFS= read -r -d '' md_file; do
+                    if grep -Fq "$relative_img" "$md_file"; then
+                        echo "Replacing $relative_img → $relative_webp in $md_file"
                         # Handle sed differences between macOS and Linux
                         if [[ "$OSTYPE" == "darwin"* ]]; then
-                            sed -i '' "s|($img_name|(${webp_name}|g" "$md_file"
-                            sed -i '' "s|/$img_name|/${webp_name}|g" "$md_file"
+                            sed -i '' "s|$sed_img|$sed_webp|g" "$md_file"
                         else
-                            sed -i "s|($img_name|(${webp_name}|g" "$md_file"
-                            sed -i "s|/$img_name|/${webp_name}|g" "$md_file"
+                            sed -i "s|$sed_img|$sed_webp|g" "$md_file"
                         fi
                     fi
                 done
@@ -161,6 +181,30 @@ process_images() {
                 echo "Skipping $img since it's small enough: (${kbsize}KB, ${width}px)"
             fi
         fi
+}
+
+#
+# Function: process_images
+# Purpose: process image files and recursively process image directories
+#
+process_images() {
+    local input
+
+    for input in "$@"; do
+        if [ -d "$input" ]; then
+            while IFS= read -r -d '' img; do
+                process_image "$img"
+            done < <(find "$input" -type f \( \
+                -iname "*.png" -o \
+                -iname "*.jpg" -o \
+                -iname "*.jpeg" -o \
+                -iname "*.webp" \
+            \) -print0)
+        elif [ -f "$input" ]; then
+            process_image "$input"
+        else
+            echo "⚠️ File or directory not found: $input"
+        fi
     done
 }
 
@@ -170,17 +214,17 @@ process_images() {
 #
 main() {
     # confirm arguments
-    confirm_args $*
+    confirm_args "$@"
 
     # pull/configure tunables from environment
-    process_env_tunables $*
+    process_env_tunables "$@"
 
     # process all images passed as arguments
-    process_images $*
+    process_images "$@"
 
     # we are done!
     echo "🎉 Optimization complete."
 }
 
 # Invoke main() with all script arguments
-main $*
+main "$@"

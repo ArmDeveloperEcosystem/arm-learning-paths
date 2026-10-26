@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Overview"
+description: Review the Azure IoT services and telemetry flow used to build an end-to-end cloud pipeline for Arm devices.
 
 weight: 2
 

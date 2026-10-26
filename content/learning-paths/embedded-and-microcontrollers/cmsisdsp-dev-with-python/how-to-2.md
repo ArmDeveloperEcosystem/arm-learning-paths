@@ -1,5 +1,6 @@
 ---
 title: Set up environment 
+description: Create the Python environment and install the packages needed to develop and test CMSIS-DSP signal processing code.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

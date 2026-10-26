@@ -16,6 +16,7 @@ test_images:
 - ubuntu:latest
 test_maintenance: true
 title: Google Cloud Platform (GCP) CLI
+description: Install the Google Cloud CLI on Ubuntu for Arm and verify the setup so you can manage Google Cloud resources with gcloud.
 tool_install: true
 weight: 1
 ---
@@ -59,18 +60,20 @@ sudo apt-get install -y curl apt-transport-https ca-certificates gnupg
 Install `gcloud` from the Google repository.
 
 ```bash { target="ubuntu:latest" }
-echo "deb https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
-curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list
 sudo apt-get update && sudo apt-get install google-cloud-cli -y
 ```
 
 ### How do I install gcloud using the archive file?
 
-If you cannot use the package manager or you get a Python version error such as the one below you can use the archive file.
+If you cannot use the package manager, or the package's Python dependency is not satisfied on your system, you can use the archive file instead.
+
+The Debian/Ubuntu package requires a system Python within a supported range (currently `python3 (>= 3.10), python3 (<< 3.16)`). Recent releases such as Ubuntu 22.04 and 24.04 satisfy this, but older releases like Ubuntu 20.04 (Python 3.8) do not. If the dependency is not met, `apt` reports an error similar to the one below:
 
 ```output
 The following packages have unmet dependencies:
- google-cloud-cli : Depends: python3 (< 3.12) but 3.12.3-0ubuntu2 is to be installed
+ google-cloud-cli : Depends: python3 (>= 3.10) but 3.8.10-0ubuntu1~20.04.9 is to be installed
 ```
 
 Download the archive file and extract the contents:
@@ -118,20 +121,19 @@ export PATH="/opt/google-cloud-sdk/bin:$PATH"
 Confirm the executable is available and print the version:
 
 ```bash { target="ubuntu:latest" }
-gcloud -v
+gcloud version
 ```
 
 The output is similar to:
 
 ```output
-Google Cloud SDK 418.0.0
-alpha 2023.02.13
-beta 2023.02.13
-bq 2.0.85
-bundled-python3-unix 3.9.16
-core 2023.02.13
+Google Cloud SDK 590.0.0
+alpha 2026.10.16
+beta 2026.10.16
+bq 2.1.40
+core 2026.10.16
 gcloud-crc32c 1.0.0
-gsutil 5.20
+gsutil 5.37
 ```
 
 ## How do I acquire user access credentials for Google Cloud? {#acquire-user-credentials}

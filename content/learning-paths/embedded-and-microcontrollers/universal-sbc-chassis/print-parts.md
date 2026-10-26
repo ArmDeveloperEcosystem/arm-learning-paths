@@ -1,6 +1,7 @@
 ---
 # User change
 title: Print the Required Parts
+description: Print the required 3D parts for the universal SBC chassis and prepare them for assembly.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

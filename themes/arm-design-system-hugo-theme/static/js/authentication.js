@@ -243,9 +243,6 @@ function renderAuthInTopNav() {
 
 }
 
-
-
-
 // ----------------------------------------------------------------------
 //                 Auth Callback hooks in top nav
 // ----------------------------------------------------------------------
@@ -263,8 +260,10 @@ document.addEventListener('arm-account-signout', (event) => {
     }
 
   clearDigitalDataUser();
-    
+
   const account = getAccount();
+  window.dispatchEvent(new Event('VFAE-logout'));
+
   msalInstance.logoutRedirect({
     account,
     authority: AUTHORITY,
@@ -280,7 +279,7 @@ document.addEventListener('arm-account-signin', (event) => {
 
       const signInButton = shadowRoot.querySelector('.c-utility-navigation-login__sign-in-button');
     if (signInButton) {
-        signInButton.innerHTML = "Redirecting to login...";
+        signInButton.textContent = "Redirecting...";
     }
     else {
         console.log("Sign-in button not found in DOM.");

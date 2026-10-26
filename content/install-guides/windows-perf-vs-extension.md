@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Visual Studio Extension for WindowsPerf
+description: Install the WindowsPerf Visual Studio extension on Windows on Arm so you can capture and visualize performance data inside Visual Studio.
 
 minutes_to_complete: 10
 

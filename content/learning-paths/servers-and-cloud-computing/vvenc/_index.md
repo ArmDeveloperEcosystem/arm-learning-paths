@@ -3,6 +3,10 @@ title: Run the vvenc H.266 encoder on Arm servers
 
 author: Willen Yang
 
+generate_summary_faq: true
+rerun_summary: false
+rerun_faqs: false
+
 minutes_to_complete: 20
 
 who_is_this_for: This is an introductory topic for software developers who want to build and run the VVenC® (Fraunhofer Versatile Video Encoder) H.266 project on Arm servers and measure the performance.
@@ -15,18 +19,19 @@ armips:
 - Neoverse
 
 prerequisites:
-- An Arm Linux system or an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider. This Learning Path has been tested on an Arm Neoverse N2-based Alibaba cloud ECS instance(g8y), running Ubuntu 22.04.
+- An Arm Linux system or an [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider. This Learning Path has been tested on an Alibaba Cloud ECS g8y (Arm Neoverse-N2) instance running Ubuntu 22.04 and an Arm AGI CPU system running Ubuntu 24.04.
 
 operatingsystems:
     - Linux
 
 skilllevels: Introductory
 subjects: Libraries
-cloud_service_providers:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+platforms:
+  - Arm AGI CPU
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 
 tools_software_languages:
 - vvenc
@@ -49,8 +54,7 @@ further_reading:
         link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/oracle-cloud-infrastructure-arm-based-a1
         type: blog
 
-
 weight: 1
 layout: learningpathall
-learning_path_main_page: "yes" 
+learning_path_main_page: "yes"
 ---

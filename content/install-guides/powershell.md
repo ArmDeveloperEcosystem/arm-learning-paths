@@ -1,5 +1,6 @@
 ---
 title: PowerShell
+description: Install PowerShell on Arm Linux and verify the shell so you can run cross-platform automation commands and scripts.
 minutes_to_complete: 10
 official_docs: https://learn.microsoft.com/en-us/powershell/
 ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=powershell
@@ -48,14 +49,14 @@ The PowerShell installation documentation for Linux package managers does not wo
 You can download a release file for the Arm architecture from GitHub and install it using the steps below:
 
 {{% notice Note %}}
-The following commands use PowerShell version 7.6.1. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [PowerShell releases](https://github.com/PowerShell/PowerShell/releases).
+The following commands use PowerShell version 7.6.4. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [PowerShell releases](https://github.com/PowerShell/PowerShell/releases).
 {{% /notice %}}
 
 1. Copy and paste the commands below to your Linux shell prompt:
 
 ```bash { target="ubuntu:latest" }
 # Download the powershell '.tar.gz' archive
-curl -L -o /tmp/powershell.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v7.6.1/powershell-7.6.1-linux-arm64.tar.gz
+curl -L -o /tmp/powershell.tar.gz https://github.com/PowerShell/PowerShell/releases/download/v7.6.4/powershell-7.6.4-linux-arm64.tar.gz
 
 # Create the target folder where powershell will be placed
 sudo mkdir -p /opt/microsoft/powershell/7
@@ -91,7 +92,7 @@ pwsh --version
 The output is similar to:
 
 ```output
-PowerShell 7.6.1
+PowerShell 7.6.4
 ```
 
 ## Verify PowerShell installation

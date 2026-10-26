@@ -1,6 +1,7 @@
 ---
 # User change
 title: "TensorFlow"
+description: Install and run TensorFlow on Raspberry Pi 4 to test machine learning workloads on Arm hardware.
 
 weight: 6 # 1 is first, 2 is second, etc.
 

@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Build and run Zephyr applications"
+description: Build and run Zephyr RTOS applications on the Corstone-300 FVP using Arm Virtual Hardware.
 
 weight: 2 # 1 is first, 2 is second, etc.
 

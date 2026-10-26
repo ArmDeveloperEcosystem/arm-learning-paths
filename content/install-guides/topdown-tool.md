@@ -2,6 +2,7 @@
 ### Title the install tools article with the name of the tool to be installed
 ### Include vendor name where appropriate
 title: Telemetry Solution (Topdown Methodology)
+description: Install the Arm Telemetry Solution on Arm Linux and test top-down performance methodology tools that work with Linux Perf.
 
 ### Optional additional search terms (one per line) to assist in finding the article
 additional_search_terms:

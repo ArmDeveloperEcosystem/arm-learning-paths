@@ -1,5 +1,6 @@
 ---
 title: Develop your knowledge
+description: Explore additional CMSIS-DSP resources and example projects to continue developing embedded signal processing skills.
 weight: 9
 
 ### FIXED, DO NOT MODIFY

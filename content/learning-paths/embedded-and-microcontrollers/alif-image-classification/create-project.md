@@ -1,5 +1,6 @@
 ---
 title: Create the image classification firmware project
+description: Create the Alif Ensemble firmware project in VS Code and add the files needed for the image classification application.
 weight: 4
 
 layout: "learningpathall"

@@ -1,5 +1,6 @@
 DirectoryPath: "public"
 IgnoreDirectoryMissingTrailingSlash: True
+IgnoreAltMissing: True
 IgnoreURLs:
   - "fonts.gstatic.com"
   - "github.com"

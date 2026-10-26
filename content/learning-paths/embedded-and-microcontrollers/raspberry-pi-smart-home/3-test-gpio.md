@@ -1,5 +1,6 @@
 ---
 title: Test Raspberry Pi 5 GPIO pins for smart home devices
+description: Test Raspberry Pi 5 GPIO outputs with connected devices so the smart home assistant can control hardware reliably.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

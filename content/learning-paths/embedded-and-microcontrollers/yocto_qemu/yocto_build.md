@@ -1,6 +1,7 @@
 ---
 # User change
 title: "How do I get started with Yocto Linux on Qemu?" 
+description: Build a minimal Yocto Linux image for a 64-bit Arm QEMU target and boot it in the emulator.
 
 weight: 3 # 1 is first, 2 is second, etc.
 

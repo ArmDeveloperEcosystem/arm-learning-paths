@@ -1,5 +1,6 @@
 ---
 title: Arm Fast Models and FVPs
+description: Install Arm Fast Models and Fixed Virtual Platforms so you can create and run virtual Arm platforms for software development and verification.
 author: Ronan Synnott
 
 additional_search_terms:

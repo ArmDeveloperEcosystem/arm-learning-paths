@@ -1,6 +1,7 @@
 ---
 # User change
 title: Writing assembly functions
+description: Create C and Arm assembly source files that work together under the Arm Procedure Call Standard for a Cortex-M project.
 
 weight: 6 # 1 is first, 2 is second, etc.
 

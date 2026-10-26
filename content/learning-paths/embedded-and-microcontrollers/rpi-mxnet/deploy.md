@@ -1,6 +1,7 @@
- ---
+---
 # User change
 title: "Install on Raspberry Pi"
+description: Copy the Raspberry Pi OS image with MXNet to a local machine, write it to an SD card, and verify MXNet on a Raspberry Pi.
 
 weight: 4
 

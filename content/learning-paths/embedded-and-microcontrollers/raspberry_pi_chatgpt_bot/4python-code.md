@@ -1,5 +1,6 @@
 ---
 title: Create the Python application
+description: Create the Python application that detects a wake word, sends speech input to ChatGPT, and plays audio output.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

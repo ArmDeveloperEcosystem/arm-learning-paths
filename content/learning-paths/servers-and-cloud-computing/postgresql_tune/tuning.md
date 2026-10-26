@@ -1,120 +1,138 @@
 ---
-# User change
-title: "Tuning PostgreSQL"
+title: Tune PostgreSQL configuration for performance
+description: Learn how to tune PostgreSQL parameters for connections, memory, write-ahead logging, query planning, I/O, and parallel execution.
 
-weight: 4 # 1 is first, 2 is second, etc.
-
-# Do not modify these elements
+weight: 4
 layout: "learningpathall"
 ---
 
-##  PostgreSQL configuration
+## Choose PostgreSQL parameters for tuning
 
-There are different ways to set configuration parameters for `PostgreSQL`.
+You can set PostgreSQL parameters in `postgresql.conf`, with `ALTER SYSTEM`, or for a database, role, or session when the parameter supports that scope. For persistent tuning, use a configuration method that can be reviewed, version controlled, and applied consistently when PostgreSQL restarts. See the PostgreSQL [configuration settings documentation](https://www.postgresql.org/docs/current/config-setting.html) for details.
 
-This is discussed in the [Setting Parameters documentation](https://www.postgresql.org/docs/current/config-setting.html).
+{{% notice Note %}}
+Leave most PostgreSQL settings at their defaults and change them only when a workload requirement, test result, profile, or observed bottleneck supports the change.
+{{% /notice %}}
 
-The configurations below can be directly pasted into a `PostgreSQL` configuration file.
+### Connections
 
-### Connections and prepared transactions
+The [`max_connections`](https://www.postgresql.org/docs/current/runtime-config-connection.html#GUC-MAX-CONNECTIONS) parameter sets the maximum number of concurrent connections PostgreSQL accepts. It does not directly improve query performance.
 
-```output
-max_connections = 1000             # Default 100
-max_prepared_transactions = 1000   # Default 0
+```ini
+# Example high connection limit. Size this for your expected peak connection count.
+max_connections = 1000
 ```
 
-`max_connections` doesn't impact performance of queries directly, but if a high client connection count is expected or required, it's a good idea to raise this in order to not reject request from clients. If connections start getting reject, this will affect overall performance.
+Each PostgreSQL connection uses memory and operating system resources. Size this value for expected peak demand, and review the kernel resource limits when you increase it. When an application needs many client connections, use a connection pooler such as [PgBouncer](https://www.pgbouncer.org/) to reuse a smaller number of PostgreSQL server connections. This can reduce memory use and process overhead, but it does not make individual queries faster.
 
-Keep in mind that more client connections means more resources will be consumed (especially memory). Setting this to something higher is completely dependent on use case and requirements.
+### Memory configuration
 
-`max_prepared_transactions` is 0 by default.
+#### Shared buffers
 
-This means that stored procedures and functions cannot be used out of the box. It must be enabled by setting `max_prepared_transactions` to a value greater than 0. If this is set to a number larger than 0, a good number to start with would be at least as large as `max_connections`. In a test or development environment, it doesn't hurt to set it to an even larger value(10000) to avoid errors.
+The [`shared_buffers`](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-SHARED-BUFFERS) parameter controls the shared memory cache that PostgreSQL uses for table and index data.
 
-Using procedures and functions can greatly improve performance.
+For a dedicated database server with at least `1 GB` of memory, set `shared_buffers` to `25%` to `40%` of system memory as a starting range. PostgreSQL also relies on the operating system page cache, so values above `40%` are unlikely to help. Larger `shared_buffers` settings often need a corresponding increase in `max_wal_size`.
 
-### Memory related configuration
-
-```output
-huge_pages = on    # default is try
-shared_buffers = <25%-40% system memory>    # Default is 128MB
-work_mem = 32MB    # default is 4MB
-maintenance_work_mem = 2GB    # Default is 64MB
+```ini
+# Example for a dedicated server with 128 GiB of memory.
+shared_buffers = 32GB
 ```
 
-Turning on `huge_pages` is not required because the default is `try`.
+#### Query and maintenance memory
 
-However, you can explicitly set it to `on` because errors will be produced if huge pages are not enabled in Linux.
+The [`work_mem`](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-WORK-MEM) parameter is the base memory limit for each sort or hash operation before PostgreSQL writes temporary files. A single complex query can use multiple operations, and many sessions can run them concurrently. Treat increases as a measured change, not a global performance setting.
 
-`shared_buffers` is one of the most important configuration parameters that can be set. It determines how much memory can be used to store indexes and table data. It's a cache that improves read/write latency and relieves pressure on storage. The [PostgreSQL documentation](https://www.postgresql.org/docs/15/runtime-config-resource.html) suggests this be set to 25% - 40% of total system memory.
-
-`work_mem` is memory used when queries are being processed. Raising this significantly from the default value can help performance.
-
-`maintenance_work_mem` is memory used for operations like VACUUM. In a scenario where data is removed often, raising this can help performance.
-
-### Processing and process count
-
-```output
-deadlock_timeout = 10s                      # Default is 1s
-max_worker_processes = <num_system_cpus>    # Default is 8
+```ini
+# Example values. Test with realistic query concurrency.
+work_mem = 32MB
+maintenance_work_mem = 2GB
 ```
 
-`deadlock_timeout` sets a polling interval for checking locks. The [documentation](https://www.postgresql.org/docs/15/runtime-config-locks.html) states that this check is expensive from a CPU cycles standpoint, and that the default of 1s is probably the smallest that should be used. Consider raising this timeout much higher to save some CPU cycles.
+The [`maintenance_work_mem`](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-MAINTENANCE-WORK-MEM) parameter controls memory for maintenance operations such as `VACUUM` and `CREATE INDEX`. A larger value can improve maintenance performance, especially for databases with frequent updates or deletes, but account for concurrent autovacuum workers. Set [`autovacuum_work_mem`](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-AUTOVACUUM-WORK-MEM) separately if you need to limit each worker.
 
-`max_worker_processes` is a key parameter for performance. It's the number of total background processes allowed. A good starting point is to set this to the number of cores present on the PostgreSQL node.
+#### Huge pages
 
-### Write Ahead Log (WAL) configuration
+The [`huge_pages`](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-HUGE-PAGES) setting requests huge pages for PostgreSQL shared memory. The default value, `try`, falls back to regular pages if allocation fails. Set it to `on` when you want PostgreSQL to fail at startup instead of using regular pages.
 
-```output
-synchronous_commit = off    # Default is on
-max_wal_size = 20GB         # Default is 1GB
-min_wal_size = 1GB          # Default is 80MB
+```ini
+huge_pages = on
 ```
 
-If `synchronous_commit` is on (default), it tells the WAL processor to wait until more of the log is applied before reporting success to clients. Turning this off means that the PostgreSQL instance will report success to clients sooner. This will result in a performance improvement. It is safe to turn this off in most cases, but keep in mind that it will increase the risk of losing transactions if there is a crash. However, it will not increase the risk of data corruption.
+Huge pages must also be configured at the Linux kernel level. For setup instructions and sizing guidance, see the [system, kernel, compiler, and library settings](/learning-paths/servers-and-cloud-computing/postgresql_tune/kernel_comp_lib/) section of this Learning Path.
 
-In high load scenarios, check pointing can happen very often. In fact, in testing with HammerDB, there may be so much check pointing that PostgreSQL reports warnings. One way to reduce how often check pointing occurs is to increase the `max_wal_size` of the WAL log. Setting it to 20GB can make the excessive check pointing warnings go away. `min_wal_size` can also be increased to help absorb spikes in WAL log usage under high load.
+### Write-ahead log and durability configuration
 
-### Planner/Optimizer configuration
+PostgreSQL uses the write-ahead log (WAL) to protect committed data and support crash recovery. The following settings affect checkpoint behavior and transaction durability.
 
-The optimizer (also called planner) is responsible for taking statistics about the execution of previous queries, and using that information to figure out what is the fastest way to process new queries. Some of these statistics include shared buffer hit/miss rate, execution time of sequential scans, and execution time of index scans. Below are some parameters that affect the optimizer.
+#### Checkpoint and WAL capacity
 
-```output
-effective_cache_size = <80% of system memory>    # Default is 4GB
-random_page_cost = 1.1    # Default is 4.0
+The [`max_wal_size`](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-MAX-WAL-SIZE) parameter is a soft limit on WAL size during automatic checkpoints. Increasing it can reduce checkpoint frequency and smooth write I/O for write-heavy workloads.
+
+Under sustained high load, WAL can fill quickly enough to trigger frequent checkpoints and checkpoint warnings. Increasing `max_wal_size` gives PostgreSQL more WAL space before a checkpoint is required. The following value is an example, not a universal recommendation:
+
+```ini
+# Example for a write-heavy workload. Test against storage capacity and recovery requirements.
+min_wal_size = 1GB
+max_wal_size = 20GB
 ```
 
-One key piece of information that a `PostgreSQL` instance will not have access to is the size of the OS page cache. `effective_cache_size` provides a way to inform `PostgreSQL` of the page cache size. Assuming the host is dedicated to running `PostgreSQL`, a good starting value is to set this to about 80% of total system memory. The value of this parameter should roughly be the shared buffer size and the OS page cache size combined. Use a tool like `free` while `PostgreSQL` is running to understand how much memory is being used for the OS page cache. This can help further refine the value from the suggested 80%. Also note that this parameter does not affect memory allocations.
+The [`min_wal_size`](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-MIN-WAL-SIZE) parameter keeps a minimum amount of WAL available for recycling. Increasing it can help absorb bursts of WAL activity and reduce the need to create new WAL files during a spike.
 
-**How does `effective_cache_size` affect the optimizer and help performance?**
+Larger WAL settings use more storage and can increase crash recovery time. PostgreSQL logs a checkpoint warning when WAL-triggered checkpoints occur more often than `checkpoint_warning`, which can indicate that `max_wal_size` is too small for the workload.
 
-When data is loaded into the PostgreSQL shared buffer, the same data may also be present in the page cache. It is also possible that data that isn't in the shared buffer is present in the page cache. This second case creates a scenario where tuning `effective_cache_size` can help improve performance.
+#### Transaction durability settings
 
-Sometimes `PostgreSQL` needs to read data that is not in the shared buffer, but it is in the page cache. From the perspective of `PostgreSQL`, there will be a shared buffer miss when it tries to read the data. When this happens, the `PostgreSQL` instance will assume that reading this data will be slow because it will come from disk. It assumes the data will come from disk because `PostgreSQL` has no way to know if the data is in the page cache. However, if it turns out that the data is present in the page cache, the data will be read faster than if it was read from disk.
+Use the following setting when transaction durability is required. It is the PostgreSQL default:
 
-If the page cache is large, it is far more likely that the data will in fact be in the page cache. `effective_cache_size` gives us a way to tell `PostgreSQL` that there is a lot of system memory used for the page cache, and thus, even if there is a shared buffer miss, it's very possible it will be "saved" by the page cache. The bigger `effective_cache_size` is set, the more likely `PostgreSQL` is to favor doing something like trying to read an index that is not present in the shared buffer, over doing a sequential scan of a table that is in the shared buffer. Even with the overhead of moving the index to the shared buffer from the page cache, the index scan will likely be faster than a sequential scan from the shared buffer. On average, this should improve performance.
-
-`random_page_cost` has a similar effect as `effective_cache_size`.
-
-`random_page_cost` tells the optimizer how much of a relative cost there is to accessing data from storage. The default of 4.0 is fairly conservative and is more appropriate for HDD based storage or when the shared buffer hit rate is below 90%. If the underlying storage technology is SSD, then it's best to reduce this number. Also, if the shared buffer hit rate is very high (90%+), it is also a good idea to reduce this number. The [documentation](https://www.postgresql.org/docs/15/runtime-config-query.html#GUC-RANDOM-PAGE-COST) suggests 1.1 for these cases.
-
-**How does `random_page_cost` affect the optimizer and help performance?**
-
-The effect to the planner/optimizer is similar to that of `effective_cache_size`. Basically, a lower `random_page_cost` tells the optimizer to favor doing something like reading an index from disk over doing a sequential table scan from the shared buffer. Also, keep in mind that when `PostgreSQL` tries to access the disk, it might actually be accessing from the page cache which is faster.
-
-### Concurrency configuration
-
-Increasing parallelism uses available resources more efficiently. It's always a good idea to look at parameters related to parallel execution.
-
-```output
-max_parallel_workers = <num_system_cpus>    # Default is 8
-max_parallel_workers_per_gather = 4    # Default is 2
-max_parallel_maintenance_workers = 4    # Default is 2
-effective_io_concurrency = 300    # Default is 1
+```ini
+# Keep the default when transaction durability is required.
+synchronous_commit = on
 ```
 
-`max_parallel_workers` selects how many parallel operations can occur. A good starting point for this parameter is to set this to match the number of cores in the system.
+The [`synchronous_commit`](https://www.postgresql.org/docs/current/runtime-config-wal.html#GUC-SYNCHRONOUS-COMMIT) parameter controls whether PostgreSQL waits for WAL records to reach durable storage before reporting commit success to the client.
 
-Doubling `max_parallel_workers_per_gather` and  `max_parallel_maintenance_workers` to 4 seems to provide the most benefit.
+When `synchronous_commit` is `on`, PostgreSQL prioritizes transaction durability over peak write throughput. Setting `synchronous_commit=off` lets PostgreSQL acknowledge commits before the WAL data is flushed to durable storage. This can improve parallel transaction execution and write throughput, especially for write-heavy workloads, but it increases the time window where acknowledged transactions exist only in memory or operating system cache.
 
-`effective_io_concurrency` affects how many parallel IO requests you can send to storage. Modern storage technologies tend to allow a large number of IOPS. Thus, setting this higher is advised. Also note, this parameter only affects bitmap heap scans. A bitmap heap scan is an "in between" method for processing a query. That is, while Index scans (and Index only scans) are typically the fastest way to access data, and sequential scans are typically the slowest way to access data. A bitmap heap scan is in between these extremes.
+{{% notice Warning %}}
+Changing `synchronous_commit` to `off` trades away transaction durability, which is part of ACID compliance. A power failure, operating system crash, or unexpected PostgreSQL exit can lose recently acknowledged transactions, though this setting does not cause database corruption.
+
+Change this setting only when your application and recovery process can tolerate potential transaction loss.
+{{% /notice %}}
+
+### Query planner configuration
+
+The PostgreSQL query planner selects an execution plan using table and index statistics, along with cost estimates for operations such as sequential scans and index scans. Use `EXPLAIN` and `EXPLAIN ANALYZE` with representative queries to understand a plan before changing planner-related settings.
+
+#### Effective cache size
+
+The [`effective_cache_size`](https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE) parameter tells the planner how much memory it can expect to be available for caching PostgreSQL data. Set it to an estimate of the total cache available to PostgreSQL, including `shared_buffers` and the operating system page cache. It does not allocate memory or reserve page cache.
+
+For a dedicated PostgreSQL server, `80%` of total memory is a useful starting estimate. Use `free` while PostgreSQL is running to understand page-cache use, then refine the value for the memory available to PostgreSQL and the expected number of concurrent queries.
+
+When the page cache is large, data that misses `shared_buffers` is more likely to be read from memory instead of storage. A larger `effective_cache_size` makes index scans look less expensive to the planner, while a smaller value makes sequential scans more likely. This can help the planner choose an index scan when the index is likely to be cached, rather than assuming the access requires a slow storage read.
+
+#### Random page cost
+
+The [`random_page_cost`](https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-RANDOM-PAGE-COST) parameter estimates the relative cost of a non-sequential page read. The default is `4.0`. Lowering it relative to `seq_page_cost` makes index scans more likely; raising it makes them less likely.
+
+The default can be a better fit for storage with a high random-read penalty, such as hard disks. On SSD-backed systems, or when a large part of the database is likely to be cached, a lower value such as `1.1` can be worth testing. Storage latency, cache behavior, and network latency all affect the right value, so compare the resulting plans and execution times with representative queries instead of applying a fixed value to every system.
+
+`random_page_cost` and `effective_cache_size` both influence how the planner values index scans, but from different directions. `effective_cache_size` estimates how likely the data is to be cached. `random_page_cost` estimates the penalty when PostgreSQL has to access a page that is not already in cache.
+
+### Parallel execution and I/O configuration
+
+PostgreSQL uses worker processes for parallel queries, maintenance, and extensions. The [`max_worker_processes`](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-MAX-WORKER-PROCESSES) setting is the overall limit. The [`max_parallel_workers`](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-MAX-PARALLEL-WORKERS) setting limits workers available to parallel operations, and must not exceed `max_worker_processes`.
+
+Set `max_worker_processes` and `max_parallel_workers` high enough to allow useful parallel work, but leave CPU capacity for connection handling, background processes, and other applications. A starting point for a dedicated test system is the number of available logical CPUs. PostgreSQL can launch fewer workers than the configured limits when capacity is unavailable.
+
+Use [`max_parallel_workers_per_gather`](https://www.postgresql.org/docs/current/runtime-config-query.html#GUC-MAX-PARALLEL-WORKERS-PER-GATHER) and [`max_parallel_maintenance_workers`](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-MAX-PARALLEL-MAINTENANCE-WORKERS) to limit workers used by an individual query or maintenance operation. A value of `4` is a reasonable test starting point for each on a sufficiently large system. Increase the values only when suitable queries or maintenance operations have unused CPU capacity. More workers can increase coordination overhead or reduce performance when CPU, memory bandwidth, or storage is already saturated.
+
+The [`effective_io_concurrency`](https://www.postgresql.org/docs/current/runtime-config-resource.html#GUC-EFFECTIVE-IO-CONCURRENCY) parameter controls how many storage I/O operations a PostgreSQL session expects to issue in parallel. A value in the low hundreds, such as `300`, can be a useful starting point for high-IOPS SSD or cloud storage. Higher values can help high-latency storage with enough I/O capacity, but unnecessarily high values can increase I/O latency. Its default has changed across PostgreSQL versions, so check the value on the version you deploy before overriding it.
+
+## What you've learned
+
+You've explored PostgreSQL parameters that affect connection handling, memory use, WAL behavior, query planning, and parallel execution.
+
+Use the guidance in this Learning Path to design measured tuning experiments for your PostgreSQL workload on Arm.
+
+Next, use the HammerDB TPROC-C workflow to measure the effect of your tuning changes.

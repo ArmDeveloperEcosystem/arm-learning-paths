@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680" role="img" aria-labelledby="title description">
+  <title id="title">False sharing between two processor cores</title>
+  <desc id="description">Two threads write different Java fields that occupy the same cache line. Each write transfers ownership of the whole line and invalidates the other core's cached copy.</desc>
+  <defs>
+    <style>
+      .label { font-family: Arial, sans-serif; font-size: 24px; font-weight: 600; fill: #172433; }
+      .heading { font-family: Arial, sans-serif; font-size: 30px; font-weight: 700; fill: #172433; }
+      .body { font-family: Arial, sans-serif; font-size: 20px; fill: #263746; }
+      .small { font-family: Arial, sans-serif; font-size: 18px; fill: #3e4d59; }
+      .mono { font-family: "Courier New", monospace; font-size: 20px; font-weight: 600; fill: #172433; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="680" fill="#f7f9fb"/>
+  <text x="600" y="46" text-anchor="middle" class="heading">Different fields, one shared cache line</text>
+
+  <rect x="70" y="80" width="390" height="105" rx="6" fill="#e8f1f7" stroke="#315b7d" stroke-width="3"/>
+  <circle cx="118" cy="124" r="24" fill="#315b7d"/>
+  <text x="118" y="132" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">0</text>
+  <text x="158" y="119" class="label">Core 0 / Thread A</text>
+  <text x="158" y="154" class="body">Writes only <tspan class="mono">counterA</tspan></text>
+
+  <rect x="740" y="80" width="390" height="105" rx="6" fill="#e9f5f0" stroke="#27836f" stroke-width="3"/>
+  <circle cx="788" cy="124" r="24" fill="#27836f"/>
+  <text x="788" y="132" text-anchor="middle" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#ffffff">1</text>
+  <text x="828" y="119" class="label">Core 1 / Thread B</text>
+  <text x="828" y="154" class="body">Writes only <tspan class="mono">counterB</tspan></text>
+
+  <path d="M 264 185 L 264 215" stroke="#315b7d" stroke-width="4"/>
+  <path d="M 936 185 L 936 215" stroke="#27836f" stroke-width="4"/>
+  <path d="M 252 211 L 264 229 L 276 211 z" fill="#315b7d"/>
+  <path d="M 924 211 L 936 229 L 948 211 z" fill="#27836f"/>
+
+  <rect x="70" y="230" width="390" height="145" rx="6" fill="#ffffff" stroke="#7b8791" stroke-width="2"/>
+  <text x="265" y="265" text-anchor="middle" class="label">Core 0 private cache</text>
+  <rect x="100" y="290" width="330" height="56" fill="#fff7dc" stroke="#d39b23" stroke-width="3"/>
+  <rect x="100" y="290" width="165" height="56" fill="#dbe9f3"/>
+  <line x1="265" y1="290" x2="265" y2="346" stroke="#7b8791" stroke-width="2"/>
+  <text x="182" y="324" text-anchor="middle" class="mono">counterA</text>
+  <text x="347" y="324" text-anchor="middle" class="mono">counterB</text>
+  <text x="265" y="367" text-anchor="middle" class="small">One cached 64-byte line</text>
+
+  <rect x="740" y="230" width="390" height="145" rx="6" fill="#ffffff" stroke="#7b8791" stroke-width="2"/>
+  <text x="935" y="265" text-anchor="middle" class="label">Core 1 private cache</text>
+  <rect x="770" y="290" width="330" height="56" fill="#fff7dc" stroke="#d39b23" stroke-width="3"/>
+  <rect x="935" y="290" width="165" height="56" fill="#dcefe9"/>
+  <line x1="935" y1="290" x2="935" y2="346" stroke="#7b8791" stroke-width="2"/>
+  <text x="852" y="324" text-anchor="middle" class="mono">counterA</text>
+  <text x="1017" y="324" text-anchor="middle" class="mono">counterB</text>
+  <text x="935" y="367" text-anchor="middle" class="small">A copy of the same line</text>
+
+  <path d="M 460 280 C 545 230, 655 230, 724 272" fill="none" stroke="#c43d4f" stroke-width="5"/>
+  <path d="M 740 345 C 655 405, 545 405, 476 353" fill="none" stroke="#c43d4f" stroke-width="5"/>
+  <path d="M 715 252 L 746 281 L 704 286 z" fill="#c43d4f"/>
+  <path d="M 485 373 L 454 344 L 496 339 z" fill="#c43d4f"/>
+  <rect x="470" y="273" width="260" height="70" rx="5" fill="#fff1f3" stroke="#c43d4f" stroke-width="2"/>
+  <text x="600" y="301" text-anchor="middle" class="label" font-size="21" fill="#9e2f3f">Ownership ping-pong</text>
+  <text x="600" y="329" text-anchor="middle" class="small">transfer + invalidate</text>
+
+  <rect x="100" y="430" width="1000" height="118" rx="6" fill="#ffffff" stroke="#7b8791" stroke-width="2"/>
+  <text x="600" y="463" text-anchor="middle" class="label">Java object layout in memory</text>
+  <rect x="175" y="480" width="850" height="48" fill="#fff7dc" stroke="#d39b23" stroke-width="3"/>
+  <rect x="175" y="480" width="120" height="48" fill="#e8edf1"/>
+  <rect x="295" y="480" width="220" height="48" fill="#dbe9f3"/>
+  <rect x="515" y="480" width="220" height="48" fill="#dcefe9"/>
+  <rect x="735" y="480" width="290" height="48" fill="#e8edf1"/>
+  <line x1="295" y1="480" x2="295" y2="528" stroke="#7b8791"/>
+  <line x1="515" y1="480" x2="515" y2="528" stroke="#7b8791"/>
+  <line x1="735" y1="480" x2="735" y2="528" stroke="#7b8791"/>
+  <text x="235" y="511" text-anchor="middle" class="small">header</text>
+  <text x="405" y="511" text-anchor="middle" class="mono">counterA</text>
+  <text x="625" y="511" text-anchor="middle" class="mono">counterB</text>
+  <text x="880" y="511" text-anchor="middle" class="small">other fields</text>
+
+  <rect x="100" y="585" width="1000" height="64" rx="6" fill="#fff1f3" stroke="#c43d4f" stroke-width="2"/>
+  <text x="600" y="613" text-anchor="middle" class="body">Each thread updates a different field, but coherence operates on the entire line.</text>
+  <text x="600" y="639" text-anchor="middle" class="body">The repeated ownership transfers are false sharing.</text>
+</svg>

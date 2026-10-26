@@ -8,7 +8,6 @@ package-lock.json
 .vscode
 .env
 startup.sh
-data/
 
 # macOS files
 *.DS_Store
@@ -21,9 +20,11 @@ z_local_saved/
 /.python-version
 *.iml
 *.xml
+!layouts/index.coveoindex.xml
 
 # CTags symbol index
 tags
 
 # Generated spell check config
 .spellcheck-non-draft.yml
+ai-agent/

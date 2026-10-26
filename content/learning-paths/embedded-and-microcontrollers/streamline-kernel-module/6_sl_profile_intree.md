@@ -1,5 +1,6 @@
 ---
 title: Profile the in-tree kernel driver
+description: Profile the in-tree kernel driver with Arm Streamline and compare results with the out-of-tree module workflow.
 weight: 7
 
 ### FIXED, DO NOT MODIFY

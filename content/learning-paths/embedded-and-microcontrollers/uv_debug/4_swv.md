@@ -1,6 +1,7 @@
 ---
 # User change
 title: "Debug using Serial Wire Viewer"
+description: Use Serial Wire Viewer in Keil uVision to observe trace data from a running Cortex-M application.
 
 weight: 4 # 1 is first, 2 is second, etc.
 

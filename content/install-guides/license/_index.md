@@ -1,5 +1,6 @@
 ---
 title: Arm Software Licensing
+description: Configure Arm software licensing with user-based, cloud, local, or FlexNet license servers so Arm commercial tools can check out licenses.
 author: Ronan Synnott
 additional_search_terms:
 - success kits
