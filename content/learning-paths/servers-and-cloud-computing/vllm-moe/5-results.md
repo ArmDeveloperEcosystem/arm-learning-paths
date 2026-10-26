@@ -9,7 +9,7 @@ layout: learningpathall
 ## Interpret the reported results
 
 {{% notice Note %}}
-The results shown are author-reported measurements from the benchmark configuration described in this Learning Path. Your results can vary depending on hardware, package versions, server settings, and system load.
+The instructions in this Learning Path let you benchmark vLLM 0.31.0 and compare BF16 with W8A8 on your server. Your measurements can also vary with hardware, package versions, server settings, and system load.
 {{% /notice %}}
 
 These benchmarks focus on serving performance only. They compare request throughput, output token throughput, TTFT, and TPOT across BF16 and INT8/W8A8 runs.
