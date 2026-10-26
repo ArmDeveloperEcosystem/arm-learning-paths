@@ -22,7 +22,9 @@ You can use [Arm Neural Technology Playbook - Evaluate](/learning-paths/mobile-g
 
 This playbook starts at the next decision: You see a potential fit, so how do you make the first move?
 
-You don't need to have read the earlier playbook. The only context you need is that neural graphics isn't one feature with one integration path. Your route depends on the following factors:
+You don't need to have read the earlier playbook. The only context you need is that neural graphics isn't one feature with one integration path. 
+
+Your route depends on the following factors:
 
 - What problem you want to solve
 - What engine you use
