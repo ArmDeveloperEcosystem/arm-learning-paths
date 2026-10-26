@@ -84,12 +84,13 @@ W8A8 is a quantization format, so there's no CPU flag named `w8a8`. These checks
 
 ### Install dependencies
 
-Install the following packages required for running vLLM on Arm. The PyTorch Inductor backend needs `g++` to compile CPU code during model warmup, even when you install vLLM from a prebuilt wheel. The `curl` and `wget` tools are used for API requests and downloads:
+Install the following packages required for running vLLM on Arm:
 
 ```bash
 sudo apt-get update -y
 sudo apt install -y python3.12-venv python3.12-dev g++ curl wget
 ```
+The PyTorch Inductor backend needs `g++` to compile CPU code during model warmup, even when you install vLLM from a prebuilt wheel. The `curl` and `wget` tools are used for API requests and downloads.
 
 ### Create and activate a Python virtual environment
 

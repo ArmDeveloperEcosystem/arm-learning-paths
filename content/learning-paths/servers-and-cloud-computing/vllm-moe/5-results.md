@@ -31,12 +31,12 @@ Your measurements can vary with hardware, package versions, server settings, and
 Gemma 4 was benchmarked with ShareGPT ~512 input-token prompt subsets.
 
 The reported optimized BF16 mixture of experts (MoE) runs improve Gemma 4 request throughput by around `3.25x` to `3.80x`, depending on concurrency.
-
+ 
 | Prompt subset | Requests per second speedup | Output tokens per second speedup | Mean TPOT reduction |
 | --- | ---: | ---: | ---: |
 | ShareGPT ~512 input tokens | 3.25x - 3.80x | 3.15x - 3.83x | 68% - 74% |
 
-These ratios describe the reported configuration; they are not a performance guarantee for other Arm servers.
+These ratios describe the reported configuration and aren't a performance guarantee for other Arm servers.
 
 ![Gemma 4 BF16 heatmap showing higher throughput and lower mean TPOT and TTFT in optimized runs at concurrency 4, 8, 16, and 32.#center](images/gemma4_512_new.png)
 
@@ -78,5 +78,3 @@ The reported measurements indicate two improvements:
 You've now reviewed the benchmark results for BF16 and INT8/W8A8 MoE inference with vLLM on Arm CPUs.
 
 Use the same workload, package versions, server settings, and concurrency values when comparing your results.
-
-Use your saved measurements to assess throughput and latency for your serving workload.

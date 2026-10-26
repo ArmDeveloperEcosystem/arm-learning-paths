@@ -37,9 +37,9 @@ There's no pre-optimization INT8/W8A8 baseline because INT8 MoE support wasn't a
 
 The Qwen comparison uses the following performance values:
 
-- Pre-optimization Qwen BF16 performance as the baseline.
-- New optimized Qwen BF16 performance to show the BF16 MoE optimization gain.
-- New Qwen INT8/W8A8 performance to show the further improvement from INT8 MoE support.
+- Pre-optimization Qwen BF16 performance as the baseline
+- New optimized Qwen BF16 performance to show the BF16 MoE optimization gain
+- New Qwen INT8/W8A8 performance to show the further improvement from INT8 MoE support
 
 ## Why use a pre-quantized model
 
@@ -82,7 +82,7 @@ After:
     combine expert outputs
 ```
 
-This improves performance because the expert data is arranged for the fused kernel and the main BF16 matrix-multiply work uses Arm's faster BF16 instruction path.
+This improves performance because the expert data is arranged for the fused kernel. The main BF16 matrix-multiply work uses the faster Arm BF16 instruction path.
 
 ### INT8/W8A8 MoE optimization
 
