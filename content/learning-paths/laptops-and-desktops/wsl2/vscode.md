@@ -1,5 +1,5 @@
 ---
-title: Developing with VS Code on WSL
+title: Develop with VS Code on WSL
 
 weight: 7
 layout: learningpathall
