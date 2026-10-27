@@ -1,6 +1,6 @@
 ---
 title: Choose thread count and model size from the measurements
-description: Run a llama-bench thread sweep on an Arm CPU to find the decode thread knee, see how prefill scales with cores, and use the fitted bandwidth to predict decode speed for other model sizes.
+description: Use llama-bench measurements on Arm CPUs to choose decode and prefill thread counts and predict throughput for different model sizes.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -38,19 +38,19 @@ Each row of the table is one test at one thread count:
 
 - `pp512` is prompt processing of a 512-token prompt.
 - `tg128` is token generation of 128 tokens.
-- `t/s` is tokens per second, with the standard deviation over 5 repetitions.
+- `t/s` is tokens per second, with the standard deviation over five repetitions.
 
-This table was measured on a Raspberry Pi 5 with 2 GB of RAM, llama.cpp commit `836d571` built with GCC 12.2.0 and the default Release flags, the `ondemand` governor, and `get_throttled` reporting `throttled=0x0` before and after the sweep. Threads were not pinned to cores.
+This table was measured on a Raspberry Pi 5 with 2 GB of RAM. The build uses llama.cpp commit `836d571`, GCC 12.2.0 and the default Release flags. The board used the `ondemand` governor. The `get_throttled` command reported `throttled=0x0` before and after the sweep. Threads were not pinned to cores.
 
 ## Find the decode knee
 
-Look at the `tg128` rows as threads increase. On a memory-bound system, decode stops improving after a small number of threads, because the extra threads wait on the same memory, and it can fall as you add more.
+Look at the `tg128` rows as threads increase. On a memory-bound system, decode stops improving after a small number of threads. Extra threads wait on the same memory, and decode performance can fall as you add more.
 
-The decode knee is at 2 threads, while using 4 threads reduces decode performance by 19.4%.
+The decode knee is at two threads, while using four threads reduces decode performance by 19.4%.
 
-Now look at the `pp512` rows. Prefill keeps rising up to 4 threads, because it is compute-bound.
+Now look at the `pp512` rows. Prefill keeps rising up to four threads, because it is compute-bound.
 
-Prefill scales well with more threads, reaching 3.10x the 1-thread result when using 4 threads.
+Prefill scales well with more threads, reaching 3.10x the one-thread result when using four threads.
 
 This means:
 
@@ -68,7 +68,7 @@ Measured here: qwen2.5-0.5b-instruct-q4_0 is 2.68x smaller than qwen2.5-1.5b-ins
 
 If the size ratio and the speed ratio are close, the bandwidth equation holds on your system, and you can estimate the decode speed of any dense model before you download it:
 
-```output
+```text
 expected tokens/s  =  fitted bandwidth  /  bytes per token
 ```
 
@@ -80,7 +80,7 @@ This estimate is a short-context result. As the KV cache grows during a long con
 
 ## What you've accomplished
 
-In this Learning Path, you have:
+You have:
 
 - Measured the sustained memory-read bandwidth of an Arm system.
 - Determined how close llama.cpp decode runs to that ceiling on your Arm CPU.
