@@ -1,6 +1,6 @@
 ---
 title: Capture NX profiling data
-description: Capture one NX dispatch with the supplied helper and load the resulting directory into MLIA.
+description: Capture and validate one NX dispatch with the supplied helper, then set the profiling data directory for MLIA.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -15,9 +15,9 @@ The helper runs the scenario once. It captures the first dispatch with statistic
 
 To run the capture steps manually, follow the [Arm ML Inference Advisor (MLIA) for Visual Studio Code capture instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md#neural-technology). After retrieving the capture, set `CAPTURE_ROOT` to the extracted directory containing `capture.json`. Then, continue with [Analyze measured performance in VS Code](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/4-analyze-in-vscode/) using your capture and matching VGF model.
 
-## Execute and retrieve one capture
+## Run and retrieve one capture
 
-Run the helper with the workspace and Android Arm64 layer from [earlier](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/2-prepare-android-workload/):
+Run the helper with the workspace and Android Arm64 layer from the [Prepare the Android workload](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/2-prepare-android-workload/) page:
 
 ```bash
 cd "$NX_WORKSPACE"

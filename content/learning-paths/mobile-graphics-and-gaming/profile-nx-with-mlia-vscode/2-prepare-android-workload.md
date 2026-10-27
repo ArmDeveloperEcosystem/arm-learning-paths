@@ -1,6 +1,6 @@
 ---
 title: Prepare the Android workload
-description: Set up Scenario Runner and use the supplied scenario file to profile the sample VGF model on NX hardware.
+description: Prepare Scenario Runner, an Android device, and the supplied scenario file to capture an NX profile of the sample VGF model.
 weight: 3
 
 ### FIXED, DO NOT MODIFY

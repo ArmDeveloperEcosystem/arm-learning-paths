@@ -77,7 +77,7 @@ Keep this terminal open for the preparation and capture commands. Leave the Pyth
 
 ## Prepare the managed environment for the extension
 
-Download the MLIA for VS Code `.vsix` package from the [GitHub release](https://github.com/arm/vscode-mlia/releases/tag/v0.1.1). Then, follow the [VSIX installation instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/installation.md#install-the-extension).
+Download the MLIA for VS Code `.vsix` package from the [MLIA for VS Code v0.1.1 release](https://github.com/arm/vscode-mlia/releases/tag/v0.1.1). Then, follow the [VSIX installation instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/installation.md#install-the-extension).
 
 In VS Code:
 

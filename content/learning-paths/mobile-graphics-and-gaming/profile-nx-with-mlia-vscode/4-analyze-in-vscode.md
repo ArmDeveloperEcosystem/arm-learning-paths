@@ -60,6 +60,6 @@ Source navigation is enabled by default. If the file doesn't open, see the [MLIA
 
 ## What you've accomplished
 
-You've captured an NX dispatch, inspected cycle cost of a cascade, and followed a mapped operation to the Python model.
+You've captured an NX dispatch and inspected the cycle cost of a cascade. You've also followed a mapped operation to the Python model.
 
 You can extend the Learning Path steps to capture and analyze performance of a model of your choice on an NX device.
