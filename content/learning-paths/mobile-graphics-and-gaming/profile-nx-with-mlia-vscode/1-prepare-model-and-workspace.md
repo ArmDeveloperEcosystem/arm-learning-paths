@@ -1,6 +1,6 @@
 ---
 title: Prepare your model and VS Code workspace
-description: Preserve Python debug information in a compatible VGF export and prepare the managed MLIA environment for device profiling.
+description: Export SmallUpscalerModel with Python debug information and set up MLIA for VS Code.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -9,82 +9,73 @@ layout: learningpathall
 
 ## Understand the NX profiling workflow
 
-The MLIA for VS Code extension lets you analyze model performance within your editor. It runs Arm ML Inference Advisor (MLIA) and presents the results in Model Explorer.
+You'll run `SmallUpscalerModel` on an Android device with an Arm neural accelerator (NX) and capture one execution with Scenario Runner. Then you'll inspect cycle costs and follow an operation to its Python source.
 
-You'll run a small neural upscaler on an Android device with an Arm neural accelerator (NX) and capture its execution. Then you'll use the extension to inspect measured performance and trace costly parts of the model back to Python source.
+The MLIA for VS Code extension runs Arm ML Inference Advisor (MLIA) and presents the results in Model Explorer.
 
-The workflow has three parts:
+To profile your own Android application, follow the [existing-application capture instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md#capture-an-existing-vulkan-data-graph-application). Once you've collected a capture, continue with [Analyze measured performance in VS Code](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/4-analyze-in-vscode/) using your capture and matching VGF model.
 
-| Stage | Tool | Result |
-| --- | --- | --- |
-| Execute and capture | Scenario Runner and the Neural Statistics Vulkan layer on Android | A directory containing capture metadata and driver statistics |
-| Analyze | MLIA for VS Code extension on your Linux host | A saved profiling analysis with measured performance results |
-| Investigate | Model Explorer and the source editor within VS Code | Graph overlays, source navigation, heatmaps, and CodeLens |
-
-The exercise uses one dispatch and zero-filled input to establish the capture and analysis workflow. It doesn't measure application frame time, establish sustained performance, or validate the upscaler's image quality.
-
-Allow about 90 minutes after preparing the prerequisite model and host tools. This provisional estimate includes building the runner and collecting and analyzing a capture; allow extra time for installation and downloads.
-
-{{% notice Draft validation %}}
-This draft has not yet been validated from model export through device capture and VS Code source navigation.
-{{% /notice %}}
+Otherwise, continue with the steps below to profile the sample model using Scenario Runner.
 
 ## Prepare a compatible VGF export
 
-MLIA needs VGF 0.4.3 from Model Converter v0.10.0, as specified in the extension's [VGF preparation guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/creating-vgf-model.md). Use ExecuTorch v1.5.1, which selects that converter.
+> **Note:** A specific version of ExecuTorch is required for compatibility with MLIA. See the [VGF preparation guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/creating-vgf-model.md) for compatibility requirements.
 
-Follow the prerequisite [environment setup page](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/2-set-up-your-environment/) through the `git clone` command. Before running `./install_executorch.sh`, enter the checkout and select the required release:
+In a new project directory, create an export environment:
 
 ```bash
-cd executorch
-git checkout v1.5.1
+python3.12 -m venv export-venv
+source export-venv/bin/activate
+python -m pip install \
+    'executorch[vgf]==1.5.1' \
+    'torch==2.14.0+cpu' \
+    'torchvision==0.29.0+cpu' \
+    --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
-Continue with `./install_executorch.sh` and the Arm backend setup steps. Keep v1.5.1 selected even where that page's general troubleshooting suggests `main`. The newer SDK used to build Scenario Runner later in this path is separate from the export toolchain.
+Keep this environment active while running the model export steps below.
 
-Then run the `SmallUpscalerModel` post-training quantization (PTQ) example in [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/3-run-ptq-and-export-vgf/). Keep its `quantize_and_export_vgf.py` source file. You can skip the own-model and quantization-aware training examples. If you already exported with a different toolchain, prepare a fresh environment with these versions and rerun PTQ and export; changing the checkout does not update an existing VGF.
+Save the complete `SmallUpscalerModel` post-training quantization (PTQ) example from [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/3-run-ptq-and-export-vgf/#run-the-end-to-end-ptq-example) as `quantize_and_export_vgf.py` in your project directory. Run it in the export environment:
 
-Retain both debug options already present in the PTQ example:
+```bash
+python quantize_and_export_vgf.py
+```
 
-- `compiler_flags=["--emit-debug-info"]` in `VgfCompileSpec` embeds ExecuTorch stack traces and module metadata.
-- `.dump_debug_info(VgfCompileSpec.DebugMode.TOSA)` preserves the corresponding TOSA debug information during lowering.
-
-Keep the Python file that produced the export unchanged. Source navigation needs its original contents and line numbers; moving the file can require path remapping.
+The script downloads CIFAR-10, trains for one epoch, applies PTQ, and exports `output/output_tag0.tosa.vgf`.
 
 ## Create a profiling workspace
 
 Open the directory containing `quantize_and_export_vgf.py` in VS Code using **File > Open Folder**. Open **Terminal > New Terminal** and use Bash for the remaining commands.
 
-From that project directory, list the exported VGF files:
-
-```bash
-find output -type f -name '*.vgf'
-```
-
-Use the VGF from this PTQ export, typically `output/output_tag0.tosa.vgf`. If you find several artifacts, check that `output/` contains only the current example's export. If a fresh export still produces several partitions, stop and check the pinned versions and unchanged example before proceeding. This walkthrough profiles one VGF, and its totals describe only the graph contained in that file.
-
-Replace `<exported-model>.vgf` with the filename you found, and check that it contains data:
+Copy the exported model into the profiling workspace:
 
 ```bash
 export NX_WORKSPACE="$PWD/nx-profile"
-export MODEL_VGF="$PWD/output/<exported-model>.vgf"
-test -s "$MODEL_VGF"
-```
-
-Continue only if `test -s` succeeds. Copy the model to a stable workload path and record its checksum:
-
-```bash
+export MODEL_VGF="$PWD/output/output_tag0.tosa.vgf"
 mkdir -p "$NX_WORKSPACE/workload" "$NX_WORKSPACE/captures"
 cp "$MODEL_VGF" "$NX_WORKSPACE/workload/model.vgf"
-sha256sum "$NX_WORKSPACE/workload/model.vgf" > "$NX_WORKSPACE/model.sha256"
 cd "$NX_WORKSPACE"
 ```
 
-Keep this terminal open across the capture pages. `NX_WORKSPACE` identifies the host working directory; leave the original Python source in the project directory.
+Your project now contains these key files and folders:
+
+```text
+your-project/
+├── quantize_and_export_vgf.py
+├── export-venv/
+├── output/
+│   └── output_tag0.tosa.vgf
+└── nx-profile/
+    ├── captures/
+    └── workload/
+        └── model.vgf
+```
+
+Keep this terminal open for the preparation and capture commands. Leave the Python source in the project directory.
 
 ## Prepare the extension's managed environment
 
-Follow the [MLIA extension installation instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/installation.md). If you use a release VSIX, install it with **Extensions > ... > Install from VSIX...**.
+Download the MLIA for VS Code `.vsix` package from the [GitHub release](https://github.com/arm/vscode-mlia/releases/tag/v0.1.1), then follow the [VSIX installation instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/installation.md#install-the-extension).
 
 In VS Code:
 
@@ -94,14 +85,10 @@ In VS Code:
     <img src="/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/images/refresh-environment.png" width="360" style="max-width: 100%; height: auto;" alt="MLIA's New Analysis view prompts you to set up the environment. Select Refresh MLIA Environment to begin setup." title="Initialize the managed MLIA environment" class="content-uploaded-image centered" />
     <span class="content-image-caption centered">Initialize the managed MLIA environment</span>
 
-3. Select **Profiling** and confirm that the `neural-technology` target profile is available.
-
-    ![The Profiling tab shows the neural-technology target profile and Performance check, confirming that the managed environment has loaded the profiling options.#center](images/profiling-overview.png "Check that profiling options are available")
-
-The extension manages its own Python and MLIA installation, separately from your model-export and SDK build environments. You don't need a command-line MLIA installation.
-
-If setup fails or the profile is absent, select **Show Log** and resolve the environment error before proceeding. See the extension's [environment troubleshooting guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/troubleshooting.md).
+{{% notice Note %}}
+The extension manages its own Python and MLIA installation separately from your export environment. For setup problems, see the [MLIA environment troubleshooting guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/troubleshooting.md#environment-refresh-fails).
+{{% /notice %}}
 
 ## What you've accomplished and what's next
 
-You've prepared a debug-enabled VGF, retained the source that produced it, and initialized MLIA in VS Code. Next, you'll prepare Scenario Runner and generate the Android workload for this exact artifact.
+You've exported the model and initialized MLIA in VS Code. Next, prepare the Android workload.

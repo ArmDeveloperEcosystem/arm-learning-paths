@@ -1,11 +1,11 @@
 ---
-title: Capture and analyze NX profiling data with MLIA for VS Code
+title: Capture and analyze neural accelerator (NX) profiling data with MLIA for VS Code
 
 draft: true
 cascade:
     draft: true
 
-description: Capture neural accelerator statistics on an Android device and use MLIA for VS Code to trace measured performance through Model Explorer to your Python model.
+description: Profile a small neural upscaling model on an Android neural accelerator and use MLIA for VS Code to inspect cycle costs and follow graph operations to Python source.
 
 minutes_to_complete: 90
 
@@ -13,17 +13,17 @@ who_is_this_for: >-
     You're a machine learning or graphics developer investigating model performance on Arm neural accelerators (NX).
 
 learning_objectives:
-    - Prepare a debug-enabled VGF model and an Android Scenario Runner workload
-    - Capture and validate NX neural statistics from a device
-    - Analyze measured performance in MLIA for VS Code and Model Explorer
-    - Trace reported costs to Python source using graph mappings, heatmaps, and CodeLens
+    - Export a small neural upscaling model with Python debug information
+    - Capture one NX dispatch with Android Scenario Runner
+    - Inspect measured cycle costs in Model Explorer
+    - Follow graph operations to Python source in VS Code
 
 prerequisites:
     - An x86-64 Ubuntu 24.04 LTS host with internet access and permission to install development tools
     - Visual Studio Code 1.100 or later on the host
-    - An Arm64 Android device with USB debugging and a driver supporting Vulkan data-graph execution and VK_ARM_data_graph_neural_accelerator_statistics; check the documented r56p0 driver on the [Android preparation page](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/2-prepare-android-workload/#check-the-host-tools-and-device)
+    - An NX-capable Android device with USB debugging. See the [MLIA for VS Code device requirements](https://github.com/arm/vscode-mlia/blob/main/docs/users/installation.md#requirements)
+    - Python 3.12 with virtual environment support, Android Debug Bridge (ADB), curl, and tar on the host
     - Familiarity with Bash, ADB, and PyTorch model export
-    - The PTQ model and Python source from [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/); read the [version requirements](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/1-prepare-model-and-workspace/#prepare-a-compatible-vgf-export) before installing its tools or exporting the model
 
 author: Matthew Sloyan
 
@@ -66,9 +66,9 @@ further_reading:
         link: https://github.com/arm/ai-ml-sdk-manifest
         type: repository
     - resource:
-        title: NX performance estimation Learning Path proposal
-        link: https://github.com/ArmDeveloperEcosystem/arm-learning-paths/pull/3876
-        type: documentation
+        title: Estimate neural accelerator performance with ML Inference Advisor
+        link: /learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/
+        type: learningpath
     - resource:
         title: Analyze Ethos-U models with MLIA
         link: /learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/
