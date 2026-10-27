@@ -1,21 +1,23 @@
 ---
 title: Read power from the Raspberry Pi 5 PMIC
-description: Use vcgencmd pmic_read_adc to read the current and voltage of each Raspberry Pi 5 power rail, compute power from them, and understand what this measurement includes and leaves out.
+description: Use vcgencmd pmic_read_adc to read current and voltage from each Raspberry Pi 5 power rail, compute per-rail power, and understand what the PMIC rail sum does and doesn't include.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Why the Raspberry Pi 5 needs a different method
+## Confirm hwmon has no power files
 
-On Arm servers you can often read power from the Linux `hwmon` interface, which exposes `power*_input` files. The Raspberry Pi 5 has no such files. List the `hwmon` devices on your board:
+Before you can measure energy per token, you need a reliable way to read the board's power consumption. On a general-purpose Arm Linux system, such as a server or cloud instance, the standard approach is the Linux `hwmon` interface. The Raspberry Pi 5 doesn't expose power or current data through `hwmon`. Instead, use the onboard power management integrated circuit (PMIC). You can query it with the `vcgencmd` tool included in Raspberry Pi OS.
+
+List the hardware monitoring sensors exposed by `hwmon` on your board to confirm there are no power or current files:
 
 ```bash
 for d in /sys/class/hwmon/hwmon*; do echo "$d $(cat $d/name): $(ls $d | grep -E '^(power|curr|in|temp|fan)[0-9]' | tr '\n' ' ')"; done
 ```
 
-On the Raspberry Pi 5 used for this Learning Path, the output shows only a temperature sensor, an ADC with voltage inputs, the fan and a voltage monitor, and no power or current files:
+The output is similar to:
 
 ```output
 /sys/class/hwmon/hwmon0 cpu_thermal: temp1_input
@@ -24,17 +26,17 @@ On the Raspberry Pi 5 used for this Learning Path, the output shows only a tempe
 /sys/class/hwmon/hwmon3 rpi_volt: in0_lcrit_alarm
 ```
 
-The Raspberry Pi 5 does have a power management IC (PMIC) with a built-in analog-to-digital converter (ADC). The firmware reads that ADC for you, and you query it with the `vcgencmd` tool that ships with Raspberry Pi OS.
+The output shows a temperature sensor, an analog-to-digital converter (ADC) with voltage inputs, the fan, and a voltage monitor. There are no power or current files.
 
 ## Read the PMIC ADC
 
-Run:
+Read all power rails:
 
 ```bash
 vcgencmd pmic_read_adc
 ```
 
-The output lists a current reading (`_A`) and a voltage reading (`_V`) for each rail. On an idle Raspberry Pi 5 the output is similar to:
+The output lists a current reading (`_A`) and a voltage reading (`_V`) for each rail. On an idle Raspberry Pi 5, the output is similar to:
 
 ```output
  3V7_WL_SW_A current(0)=0.09271335A
@@ -65,23 +67,23 @@ The output lists a current reading (`_A`) and a voltage reading (`_V`) for each 
       BATT_V volt(25)=0.00085470V
 ```
 
-Twelve rails, such as `VDD_CORE`, `0V8_SW` and `1V1_SYS`, have both a current and a voltage reading. The power of each of these rails is the current multiplied by the voltage. For example, `VDD_CORE` above draws 0.661 A at 0.807 V, which is 0.53 W.
+Twelve rails, such as `VDD_CORE`, `0V8_SW` and `1V1_SYS`, have both a current and a voltage reading. The power of each of these rails is the current multiplied by the voltage. In this output, `VDD_CORE` draws 0.661 A at 0.807 V, which is 0.53 W.
 
-`VDD_CORE` is the largest rail at idle, and it is the rail that changes most when the Arm cores are busy. You see this in the next sections.
+`VDD_CORE` is the largest rail at idle, and it's the rail that changes most when the Arm cores are busy. You see this in the next sections.
 
 ## Know what the sum of the rails measures
 
-The sum of current times voltage over the rails that report both values is a useful measure of how much power the system on chip and its supplies draw. It is not the power at the wall or at the USB-C input:
+The sum of current times voltage over the rails that report both values is a useful measure of how much power the system on chip and its supplies draw. It isn't the power at the wall or at the USB-C input:
 
-- `EXT5V_V` reports only the 5 V input voltage. There is no input current reading, so the total input power is not available.
-- The losses in the PMIC regulators, the fan, and USB devices powered from the 5 V input are not included.
-- On the 2 GB board used here, `DDR_VDD2_A` and `DDR_VDDQ_A` read 0 A at idle. During token generation `DDR_VDD2` reports up to about 0.3 W and `DDR_VDDQ` stays below 0.06 W. The idle reading of 0 A is therefore likely below what these channels can resolve, so treat the two DDR rails as a lower bound for memory power, and check them on your own board before you draw conclusions about it.
+- `EXT5V_V` reports only the 5 V input voltage. There's no input current reading, so the total input power isn't available.
+- The losses in the PMIC regulators, the fan, and USB devices powered from the 5 V input aren't included.
+- On the 2 GB board used here, `DDR_VDD2_A` and `DDR_VDDQ_A` read 0 A at idle. During token generation, `DDR_VDD2` reports up to about 0.3 W and `DDR_VDDQ` stays below 0.06 W. The idle reading of 0 A is therefore likely below what these channels can resolve. Treat the two DDR rails as a lower bound for memory power. Check them on your own board before drawing conclusions about memory power.
 
 Use the rail sum to compare settings on the same board, for example two thread counts or two clock frequencies. If you need the absolute input power, measure it with a USB-C power meter.
 
 ## Check how fast you can sample
 
-Each call to `vcgencmd pmic_read_adc` takes time. Measure the read rate on your board:
+Each call to `vcgencmd pmic_read_adc` takes time. Run 20 consecutive reads, once for all rails and once for a single named channel, to measure the read rate on your board:
 
 ```bash
 time (for i in $(seq 20); do vcgencmd pmic_read_adc > /dev/null; done)
@@ -101,5 +103,7 @@ sys	0m0.001s
 ```
 
 A full read of every rail takes about 25 ms, so you can sample all rails about 40 times per second. Reading one named channel is several times faster. A token-generation run of a few seconds therefore produces a few hundred samples, which is enough for a stable average.
+
+## What you've accomplished
 
 You can now read the power of the board. In the next section, you log it to a file with a timestamp on every sample.

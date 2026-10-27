@@ -1,6 +1,6 @@
 ---
 title: Log rail power to a CSV file
-description: Write a small Python sampler that reads the Raspberry Pi 5 PMIC in a loop, time stamps every sample, and saves the power of each rail to a CSV file.
+description: Create a Python script that samples Raspberry Pi 5 PMIC power rails in a loop and logs timestamped per-rail power readings to a CSV file.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Create the sampler
 
-To compute energy you need power samples with a time stamp on each one, so that you can later select only the samples that fall inside a measurement window.
+To compute energy you need power samples with a timestamp on each one, so that you can later select only the samples that fall inside a measurement window. The script below is a sampler: a polling script that reads the PMIC at regular intervals and records each reading with a timestamp.
 
 Create a working directory:
 
@@ -96,7 +96,7 @@ if __name__ == "__main__":
     main()
 ```
 
-The script calls `vcgencmd pmic_read_adc`, matches each rail's current line with its voltage line, and writes one row per sample:
+The script calls `vcgencmd pmic_read_adc`, matches each rail's (power supply output) current line with its voltage line, and writes one row per sample:
 
 - `time_s` is the wall-clock time, in seconds, at the middle of the read.
 - `total_W` is the sum of the power of all rails that report both a current and a voltage.
@@ -151,7 +151,7 @@ wrote 1386 samples to core.csv
 ```
 
 {{% notice Note %}}
-The sampler runs on the same four Cortex-A76 cores as the workload you measure, and each sample starts a `vcgencmd` process. Logging at a higher rate costs more CPU time. The last section of this Learning Path measures how much this slows down llama.cpp, so that you can decide whether the overhead matters for your measurement.
+The sampler runs on the same four Cortex-A76 cores as the workload you measure, and each sample starts a `vcgencmd` process. Logging at a higher rate costs more CPU time. The last section measures how much this slows down llama.cpp, so that you can decide whether the overhead matters for your measurement.
 {{% /notice %}}
 
-You can now log power with time stamps. In the next section, you line these samples up with llama.cpp token generation and compute joules per token.
+You can now log power with timestamps. In the next section, you line these samples up with llama.cpp token generation and compute joules per token.
