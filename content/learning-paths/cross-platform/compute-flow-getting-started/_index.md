@@ -47,15 +47,7 @@ shared_between:
 further_reading:
     - resource:
         title: Compute Flow source repository (public URL placeholder)
-        link: https://github.com/ARM-software/ComputeFlow
-        type: documentation
-    - resource:
-        title: Compute Flow application development guide (public URL placeholder)
-        link: https://github.com/ARM-software/ComputeFlow/blob/main/docs/howto/developing_apps_with_compute_flow.md
-        type: documentation
-    - resource:
-        title: Compute Flow speech translation example (public URL placeholder)
-        link: https://github.com/ARM-software/ComputeFlow/blob/main/docs/examples/python/audio_to_audio_translation.md
+        link: https://github.com/ARM-software/compute-flow
         type: documentation
     - resource:
         title: Install uv

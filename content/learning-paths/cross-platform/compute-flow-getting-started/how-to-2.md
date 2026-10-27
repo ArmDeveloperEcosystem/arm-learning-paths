@@ -46,8 +46,8 @@ The public repository URL in this draft is a placeholder. Until it is available,
 When the public repository is available, obtain it with:
 
 ```bash
-git clone https://github.com/ARM-software/ComputeFlow.git
-cd ComputeFlow
+git clone https://github.com/ARM-software/compute-flow.git
+cd compute-flow
 ```
 
 Create and activate the Python environment, then check the required system dependencies:
