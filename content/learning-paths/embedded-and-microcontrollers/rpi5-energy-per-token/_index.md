@@ -1,6 +1,10 @@
 ---
 title: Measure llama.cpp energy per token on a Raspberry Pi 5 with the PMIC ADC
 
+draft: true
+cascade:
+    draft: true
+
 description: Read the Raspberry Pi 5 power management IC with vcgencmd, log rail power with time stamps, align it with llama.cpp token generation, and compare joules per token across CPU clock caps and thread counts.
 
 minutes_to_complete: 60
