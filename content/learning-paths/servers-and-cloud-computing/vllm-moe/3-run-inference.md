@@ -1,5 +1,6 @@
 ---
 title: Run MoE inference with vLLM
+description: Serve a mixture of experts model with vLLM on an Arm CPU and validate inference through a chat API response.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -14,7 +15,7 @@ For each model, start the vLLM server in one terminal, then send a test request 
 
 ## Choose a model
 
-Use the following model IDs in the `vllm serve` and `curl` commands.
+Use the following model IDs in the `vllm serve` and `curl` commands:
 
 | Model | Model ID |
 | --- | --- |
@@ -35,11 +36,13 @@ vllm serve "$MODEL"
 
 On the first run, vLLM downloads the model weights and warms up the model, including CPU code compilation. Wait until you see `Application startup complete` before continuing. The server is now listening on port `8000`.
 
-To test a different model, stop the current server, update `MODEL` using one of the model IDs from the table, and run `vllm serve "$MODEL"` again.
+To test a different model, stop the current server. Update `MODEL` using one of the model IDs from the table, then run `vllm serve "$MODEL"` again.
 
 ## Send a test request
 
-In another terminal on the same server, set the model ID to match the running server and send a test request. The example uses Gemma 4:
+In another terminal on the same server, set the model ID to match the running server and send a test request. 
+
+For example, to send a test request to a Gemma 4 server:
 
 ```bash
 export MODEL=google/gemma-4-26B-A4B-it
@@ -84,12 +87,12 @@ The output is similar to the following Gemma 4 response, with some metadata fiel
 }
 ```
 
-The response text, ID, timestamp, and token counts can vary. The assistant's answer appears in `choices[0].message.content`. In this example, `finish_reason` is `stop`, indicating that generation ended normally rather than reaching the token limit.
+The response text, ID, timestamp, and token counts can vary. The response by the assistant appears in `choices[0].message.content`. In this example, `finish_reason` is `stop`, indicating that generation ended normally rather than reaching the token limit.
 
-A response with generated text confirms that inference is working for the selected model. If `finish_reason` is `length`, generation reached the token limit. Reasoning models can use the short budget before producing a final answer; inspect any reasoning output and increase `max_tokens` if you need a complete answer.
+A response with generated text confirms that inference is working for the selected model. If `finish_reason` is `length`, generation reached the token limit. Reasoning models can use the short budget before producing a final response. If you need a complete response, inspect any reasoning output and increase `max_tokens`.
 
 ## What you've accomplished and what's next
 
-You've validated a chat response from your selected model. Repeat the check for each checkpoint you plan to benchmark.
+You've validated a chat response from your selected model. Repeat the check for each checkpoint that you plan to benchmark.
 
 Next, you'll benchmark the models with `vllm bench serve`.
