@@ -1,6 +1,10 @@
 ---
 title: Disassemble Arm64 binaries to verify architecture extensions
 
+draft: true
+cascade:
+    draft: true
+    
 description: Learn how to disassemble a final arm64 Mach-O executable and verify exact instruction bytes, operands, static addresses, and symbols for an Arm architecture extension.
 
 minutes_to_complete: 45
