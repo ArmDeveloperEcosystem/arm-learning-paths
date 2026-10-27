@@ -77,6 +77,9 @@ assetsDir = "assets"
 # Optionally override the global web components bundle for a specific deployment.
 # global_web_components_url = "https://www.arm.com/arm-global-web-components/devhub/app.js"
 
+# Use the pre-production chatbot component for local and internal builds.
+chatbot_component_url = "https://content.dev.bespin.arm.com/VirtualFAE/learnarm/chat-ai.js"
+
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = ""
 
