@@ -46,6 +46,12 @@ tools_software_languages:
 operatingsystems:
     - Linux
 
+### Cross-platform metadata only
+shared_path: true
+shared_between:
+    - laptops-and-desktops
+    - embedded-and-microcontrollers
+
 further_reading:
     - resource:
         title: Raspberry Pi documentation for vcgencmd
