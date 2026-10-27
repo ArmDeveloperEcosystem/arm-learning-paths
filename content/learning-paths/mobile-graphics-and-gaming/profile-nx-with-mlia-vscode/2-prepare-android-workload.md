@@ -11,7 +11,7 @@ layout: learningpathall
 
 Continue in the Bash terminal from earlier.
 
-You'll use Scenario Runner to run `workload/model.vgf` on your neural accelerator (NX) device. The Neural Statistics layer records the execution for Arm ML Inference Advisor (MLIA) to analyze.
+You'll use Scenario Runner to run `workload/model.vgf` on your neural accelerator (NX) device. The Neural Statistics layer records the run for Arm ML Inference Advisor (MLIA) to analyze.
 
 For the Scenario Runner example, prepare a debuggable Android Arm64 Scenario Runner v0.11.0 APK. To build it, follow the [MLIA Scenario Runner build instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md#download-and-build-scenario-runner) in a separate terminal and virtual environment. Add `-b v2026.09.0` to `repo init`, use NDK r28c (`28.2.13676358`), and add `--package-version 0.11.0` to the APK build command. This SDK manifest selects the runner and VGF Library versions compatible with the exported VGF 0.4.3 model.
 
