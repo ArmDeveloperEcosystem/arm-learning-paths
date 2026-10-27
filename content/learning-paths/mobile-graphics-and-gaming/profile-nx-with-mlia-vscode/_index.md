@@ -1,29 +1,25 @@
 ---
-title: Capture and analyze neural accelerator (NX) profiling data with MLIA for VS Code
+title: Profile a model on a neural accelerator with MLIA for VS Code
 
-draft: true
-cascade:
-    draft: true
-
-description: Profile a small neural upscaling model on an Android neural accelerator and use MLIA for VS Code to inspect cycle costs and follow graph operations to Python source.
+description: Profile a small neural upscaling model on an Android neural accelerator (NX) and use MLIA for VS Code to inspect cycle costs and follow graph operations to Python source.
 
 minutes_to_complete: 90
 
 who_is_this_for: >-
-    You're a machine learning or graphics developer investigating model performance on Arm neural accelerators (NX).
+    This Learning Path is for machine learning or graphics developers investigating model performance on Arm neural accelerators (NX).
 
 learning_objectives:
-    - Export a small neural upscaling model with Python debug information
-    - Capture one NX dispatch with Android Scenario Runner
-    - Inspect measured cycle costs in Model Explorer
-    - Follow graph operations to Python source in VS Code
+    - Export a small neural upscaling model with Python debug information.
+    - Capture one NX dispatch with Android Scenario Runner.
+    - Inspect measured cycle costs in Model Explorer.
+    - Follow graph operations to Python source in Visual Studio Code (VS Code).
 
 prerequisites:
     - An x86-64 Ubuntu 24.04 LTS host with internet access and permission to install development tools
     - Visual Studio Code 1.100 or later on the host
-    - An NX-capable Android device with USB debugging. See the [MLIA for VS Code device requirements](https://github.com/arm/vscode-mlia/blob/main/docs/users/installation.md#requirements)
-    - Python 3.12 with virtual environment support, Android Debug Bridge (ADB), curl, and tar on the host
-    - Familiarity with Bash, ADB, and PyTorch model export
+    - An NX-capable Android device with USB debugging that meets the [Arm ML Inference Advisor (MLIA) VS Code device requirements](https://github.com/arm/vscode-mlia/blob/main/docs/users/installation.md#requirements)
+    - Python 3.12 with virtual environment support, Android Debug Bridge (`adb`), curl, and tar on the host
+    - Familiarity with Bash, adb, and PyTorch model export
 
 author: Matthew Sloyan
 

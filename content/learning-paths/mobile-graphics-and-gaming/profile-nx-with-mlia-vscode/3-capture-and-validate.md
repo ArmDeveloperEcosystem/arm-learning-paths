@@ -11,13 +11,13 @@ layout: learningpathall
 
 Continue in the same Bash terminal. Save the [capture helper](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/files/capture_nx.py) as `capture_nx.py` in `$NX_WORKSPACE`.
 
-The helper runs the scenario once, captures the first dispatch with statistics mode `1`, retrieves and validates the capture, and restores the previous GPU debug settings. Keep the device connected until the helper finishes.
+The helper runs the scenario once. It captures the first dispatch with statistics mode `1`. Then, it retrieves and validates the capture, and restores the previous GPU debug settings. Keep the device connected until the helper finishes.
 
-To run the capture steps manually, follow the [MLIA for VS Code capture instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md#neural-technology). After retrieving the capture, set `CAPTURE_ROOT` to the extracted directory containing `capture.json`. Then continue with [Analyze measured performance in VS Code](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/4-analyze-in-vscode/) using your capture and matching VGF model.
+To run the capture steps manually, follow the [Arm ML Inference Advisor (MLIA) for Visual Studio Code capture instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md#neural-technology). After retrieving the capture, set `CAPTURE_ROOT` to the extracted directory containing `capture.json`. Then, continue with [Analyze measured performance in VS Code](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/4-analyze-in-vscode/) using your capture and matching VGF model.
 
 ## Execute and retrieve one capture
 
-Run the helper with the workspace and Android Arm64 layer from the previous page:
+Run the helper with the workspace and Android Arm64 layer from [earlier](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/2-prepare-android-workload/):
 
 ```bash
 cd "$NX_WORKSPACE"
@@ -39,4 +39,6 @@ For capture failures, see the [MLIA capture troubleshooting guide](https://githu
 
 ## What you've accomplished and what's next
 
-You've captured one dispatch. Next, open the capture and its matching VGF in MLIA for VS Code.
+You've captured one dispatch.
+
+Next, you'll open the capture and its matching VGF in MLIA for Visual Studio Code.

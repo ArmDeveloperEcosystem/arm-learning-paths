@@ -9,17 +9,19 @@ layout: learningpathall
 
 ## Understand the NX profiling workflow
 
-You'll run `SmallUpscalerModel` on an Android device with an Arm neural accelerator (NX) and capture one execution with Scenario Runner. Then you'll inspect cycle costs and follow an operation to its Python source.
+You'll run `SmallUpscalerModel` on an Android device with an Arm neural accelerator (NX) and capture one run with Scenario Runner. Then, you'll inspect cycle costs and follow an operation to its Python source.
 
-The MLIA for VS Code extension runs Arm ML Inference Advisor (MLIA) and presents the results in Model Explorer.
+You'll use the Arm ML Inference Advisor (MLIA) extension for Visual Studio Code (VS Code). The extension presents the results in Model Explorer.
 
-To profile your own Android application, follow the [existing-application capture instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md#capture-an-existing-vulkan-data-graph-application). Once you've collected a capture, continue with [Analyze measured performance in VS Code](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/4-analyze-in-vscode/) using your capture and matching VGF model.
+To profile your own Android application, follow the [existing-application capture instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/profiling-data.md#capture-an-existing-vulkan-data-graph-application). After you've collected a capture, continue with [Analyze measured performance in VS Code](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/4-analyze-in-vscode/) using your capture and matching VGF model.
 
-Otherwise, continue with the steps below to profile the sample model using Scenario Runner.
+Otherwise, continue with the following steps to profile the sample model using Scenario Runner.
 
 ## Prepare a compatible VGF export
 
-> **Note:** A specific version of ExecuTorch is required for compatibility with MLIA. See the [VGF preparation guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/creating-vgf-model.md) for compatibility requirements.
+{{% notice Note %}}
+A specific version of ExecuTorch is required for compatibility with MLIA. For compatibility requirements, see the [VGF preparation guide](https://github.com/arm/vscode-mlia/blob/main/docs/users/creating-vgf-model.md).
+{{% /notice %}}
 
 In a new project directory, create an export environment:
 
@@ -33,7 +35,7 @@ python -m pip install \
     --extra-index-url https://download.pytorch.org/whl/cpu
 ```
 
-Keep this environment active while running the model export steps below.
+Keep this environment active while running the model export steps.
 
 Save the complete `SmallUpscalerModel` post-training quantization (PTQ) example from [Quantize neural upscaling models with ExecuTorch](/learning-paths/mobile-graphics-and-gaming/quantize-neural-upscaling-models/3-run-ptq-and-export-vgf/#run-the-end-to-end-ptq-example) as `quantize_and_export_vgf.py` in your project directory. Run it in the export environment:
 
@@ -57,7 +59,7 @@ cp "$MODEL_VGF" "$NX_WORKSPACE/workload/model.vgf"
 cd "$NX_WORKSPACE"
 ```
 
-Your project now contains these key files and folders:
+Your project now contains the following key files and folders:
 
 ```text
 your-project/
@@ -73,9 +75,9 @@ your-project/
 
 Keep this terminal open for the preparation and capture commands. Leave the Python source in the project directory.
 
-## Prepare the extension's managed environment
+## Prepare the managed environment for the extension
 
-Download the MLIA for VS Code `.vsix` package from the [GitHub release](https://github.com/arm/vscode-mlia/releases/tag/v0.1.1), then follow the [VSIX installation instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/installation.md#install-the-extension).
+Download the MLIA for VS Code `.vsix` package from the [GitHub release](https://github.com/arm/vscode-mlia/releases/tag/v0.1.1). Then, follow the [VSIX installation instructions](https://github.com/arm/vscode-mlia/blob/main/docs/users/installation.md#install-the-extension).
 
 In VS Code:
 
@@ -91,4 +93,6 @@ The extension manages its own Python and MLIA installation separately from your 
 
 ## What you've accomplished and what's next
 
-You've exported the model and initialized MLIA in VS Code. Next, prepare the Android workload.
+You've exported the model and initialized MLIA in VS Code. 
+
+Next, you'll prepare the Android workload.
