@@ -7496,6 +7496,10 @@ halfword
 landlock
 nemoclaw
 openshell
+unnested
+PMIC
+pmic
+vcgencmd
 AppArmor
 Ceph
 CephX
