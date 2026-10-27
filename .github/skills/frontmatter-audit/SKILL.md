@@ -28,6 +28,7 @@ For a Learning Path directory:
 - Required `_index.md` fields include `title`, `description`, `weight`, `layout`, `minutes_to_complete`, `prerequisites`, `author`, `generate_summary_faq`, `rerun_summary`, `rerun_faqs`, `subjects`, `armips`, `tools_software_languages`, `skilllevels`, and `operatingsystems`.
 - `layout` is usually `learningpathall`.
 - `title` should be task-led and use an imperative structure: verb + technology/tool + outcome.
+- Keep every Learning Path `title` under 70 characters, including section-page titles; count spaces and punctuation.
 - `skilllevels` values are only `Introductory` or `Advanced`.
 - `subjects` and `operatingsystems` must match the closed lists in `content/learning-paths/cross-platform/_example-learning-path/write-2-metadata/`.
 - `armips` should use Arm IP families such as Neoverse, Cortex-A, or Cortex-M, not specific CPU models or Arm architecture versions.
