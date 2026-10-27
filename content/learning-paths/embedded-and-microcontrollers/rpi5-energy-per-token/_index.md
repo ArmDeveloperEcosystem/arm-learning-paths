@@ -1,27 +1,26 @@
 ---
-title: Measure llama.cpp energy per token on a Raspberry Pi 5 with the PMIC ADC
+title: Measure energy per token for llama.cpp on a Raspberry Pi 5 using the PMIC ADC
 
 draft: true
 cascade:
     draft: true
 
-description: Read the Raspberry Pi 5 power management IC with vcgencmd, log rail power with time stamps, align it with llama.cpp token generation, and compare joules per token across CPU clock caps and thread counts.
+description: Use the Raspberry Pi 5 PMIC ADC and llama.cpp to measure joules per token, then compare energy efficiency across CPU clock caps and thread counts to find the most efficient inference settings.
 
 minutes_to_complete: 60
 
 who_is_this_for: This is an advanced topic for developers who run llama.cpp on a Raspberry Pi 5 and want to measure the energy each generated token costs, and to choose a clock frequency and thread count from measured energy instead of speed alone.
 
 learning_objectives:
-    - Read the current and voltage of each Raspberry Pi 5 power rail with vcgencmd pmic_read_adc, and explain what the rail sum includes and leaves out.
-    - Log rail power to a CSV file with a time stamp on every sample.
-    - Compute joules per token for llama.cpp token generation from power samples aligned to the generation phase only, with and without the idle power.
-    - Compare energy per token across CPU clock caps and thread counts, and measure how much the power sampler itself slows down the workload.
+    - Read current and voltage from each Raspberry Pi 5 power rail using vcgencmd pmic_read_adc, and interpret what the rail sum measures.
+    - Log timestamped PMIC power samples to a CSV file and align them with the llama.cpp token-generation phase.
+    - Compute joules per token from aligned power samples, with and without idle power subtracted.
+    - Compare energy per token across CPU clock caps and thread counts to identify the most efficient inference settings.
 
 prerequisites:
-    - A Raspberry Pi 5 running 64-bit Raspberry Pi OS with an active cooler.
-    - About 1 GB of free disk space for llama.cpp and one GGUF model.
-    - Python 3, which is installed with Raspberry Pi OS.
-    - Familiarity with building software with CMake on Linux.
+    - A Raspberry Pi 5 running 64-bit Raspberry Pi OS with an active cooler
+    - About 1 GB of free disk space for llama.cpp and one GGUF model
+    - Familiarity with building software with CMake and running Python scripts on Linux
 
 author: Manu Nicholas Jacob
 

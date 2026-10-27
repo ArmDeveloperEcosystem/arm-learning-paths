@@ -1,6 +1,6 @@
 ---
 title: Measure joules per token for llama.cpp
-description: Build llama-bench, align PMIC power samples with the token-generation phase only, and compute joules per generated token with and without the idle power of the board.
+description: Build llama-bench and run a Python script that aligns PMIC power samples with the llama.cpp token-generation phase to compute joules per token with and without idle power.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -17,12 +17,11 @@ sudo apt install -y git cmake build-essential
 cd $HOME
 git clone https://github.com/ggml-org/llama.cpp
 cd llama.cpp
-git rev-parse --short HEAD
 cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --target llama-bench -j 1
 ```
 
-Record the commit hash that `git rev-parse` prints. The outputs in this Learning Path come from llama.cpp commit `836d571`.
+Because llama.cpp changes frequently, your token rates and energy results might differ from the example outputs.
 
 Download the Qwen2.5 0.5B Instruct model in the Q4_0 format, a 429 MB file:
 
@@ -34,13 +33,19 @@ wget https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/9217f5db79a2
 
 ## Measure only the token-generation phase
 
-A `llama-bench` process first loads the model, then runs a warmup, and only then runs the timed repetitions. Loading reads the whole file from storage and draws a different power from token generation. If you average power over the whole process, the result mixes the two and depends on how long loading took.
+A `llama-bench` process first loads the model, then runs a warmup, and only then runs the timed repetitions. Loading reads the whole file from storage and draws a different amount of power than token generation. If you average power over the whole process, the result mixes the two and depends on how long loading took.
 
-To exclude loading, the script below runs `llama-bench` with `--progress`. With this option `llama-bench` prints a line such as `generation run 1/3` immediately before each timed repetition starts. The script stamps each line with the time it arrives. The length of each repetition comes from `llama-bench` itself, in the `samples_ns` field of its JSON output. Every repetition therefore has a known start and end time, and the script averages only the power samples inside that window.
+To exclude loading, the `energy_per_token.py` script runs `llama-bench` with `--progress`. With this option `llama-bench` prints a line such as `generation run 1/3` immediately before each timed repetition starts. The script records a timestamp for each line as it arrives. The length of each repetition comes from `llama-bench` itself, in the `samples_ns` field of its JSON output. Every repetition therefore has a known start and end time, and the script averages only the power samples inside that window.
 
 The script also records an idle window before `llama-bench` starts, and it saves the output of `vcgencmd get_throttled` and the temperature before and after the run.
 
-Use a text editor to save the following code as `energy_per_token.py` in `$HOME/pi-energy`, next to `pmic_sampler.py`:
+The script starts `pmic_sampler.py` from its own directory, so both files need to be in the same directory. Change to the working directory you created in the previous section:
+
+```bash
+cd $HOME/pi-energy
+```
+
+Use a text editor to save the following code as `energy_per_token.py` in `$HOME/pi-energy`:
 
 ```python
 #!/usr/bin/env python3
@@ -190,15 +195,15 @@ rep  tok/s   power_W  J/token  net_J/token  samples
 throttled before throttled=0x0 after throttled=0x0; temp=47.2'C -> temp=49.9'C
 ```
 
-The `samples` column shows how many power samples fall inside each window. Aim for at least 50; a window that is too short gives a noisy mean. Use a larger `-n` to lengthen the window.
+The `samples` column shows how many power samples fall inside each window. Aim for at least 50, because a short window gives a noisy mean. To lengthen the window, increase the number of tokens generated in each repetition with the `-n` option of `energy_per_token.py`. The default is 128, so `-n 256` roughly doubles the window length and the number of samples.
 
-The `throttled` values before and after the run must both be `throttled=0x0`. If they are not, the clock was reduced during the run and the result is not valid.
+The `throttled` values before and after the run must both be `throttled=0x0`. If they aren't, the clock was reduced during the run and the result isn't valid.
 
-The run directory contains `power.csv` with every sample, `llama-bench.stderr` with the time-stamped progress lines, and `summary.json` with the per-repetition results, so you can check every number later.
+The run directory contains `power.csv` with every sample, `llama-bench.stderr` with the timestamped progress lines, and `summary.json` with the per-repetition results, so you can check every number later.
 
 ## Check the window alignment
 
-Plot or print the power around the first window to confirm that it starts where power rises. The following command prints the mean power in one-second steps from the start of the idle window, and marks with `G` each second whose midpoint falls inside a generation window:
+Print the power around the generation windows to confirm that each window starts where power rises. The following command prints the mean power for each second, starting at the idle window. It marks with `G` each second whose midpoint falls inside a generation window:
 
 ```bash
 python3 - <<'PY'
@@ -248,6 +253,6 @@ The output is similar to:
  27 s  3.91 W G
 ```
 
-Seconds 0 to 9 are the idle window, at about 1.7 W. Power starts to rise at second 10, while `llama-bench` loads the model and runs its warmup, and the first `G` second follows. Within the generation windows the rail sum stays between 5.1 W and 5.4 W. The last second is lower because it only partly overlaps the end of the run. If the `G` marks start before the power rises, or long after it, the time stamps and the power samples are not aligned, and the result is not valid.
+Seconds 0 to 9 are the idle window, at about 1.7 W. Power starts to rise at second 10, while `llama-bench` loads the model and runs its warmup, and the first `G` second follows. Within the generation windows, the rail sum stays between 5.1 W and 5.4 W. The last second is lower because it only partly overlaps the end of the run. If the `G` marks start before the power rises, or long after it, the timestamps and the power samples aren't aligned, and the result isn't valid.
 
 You have now measured joules per token for one setting. In the next section, you repeat the measurement across clock frequencies and thread counts to find the most efficient setting on your board.
