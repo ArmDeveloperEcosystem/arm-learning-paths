@@ -32,19 +32,36 @@ List the databases and confirm that `arm_test` appears:
 SHOW DATABASES;
 ```
 
+The output is similar to:
+
+```output
++--------------------+
+| Database           |
++--------------------+
+| arm_test           |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+```
+
 Select the sample database:
 
 ```console
 USE arm_test;
 ```
 
-The client should report `Database changed`. Check that the new database has no tables:
+The client should report `Database changed`. 
+
+Check that the new database has no tables:
 
 ```console
 SHOW TABLES;
 ```
 
-The expected result is `Empty set`.
+The expected output is `Empty set`.
 
 Create a sample table:
 
@@ -94,4 +111,4 @@ The output is similar to:
 
 You've verified that the MySQL container accepts connections and can store and retrieve data.
 
-You can extend the Learning Path steps to set up MySQL and create databases on Arm for your own use cases.
+You can extend the Learning Path steps to set up MySQL and create databases on Arm for your own use cases. To learn how to optimize your MySQL server on Arm, see the [Tune MySQL performance on Arm-based platforms](/learning-paths/servers-and-cloud-computing/mysql_tune/) Learning Path.

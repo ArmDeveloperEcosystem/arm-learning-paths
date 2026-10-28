@@ -1,12 +1,12 @@
 ---
-title: Install MySQL on an Arm-based Linux server
+title: Configure MySQL on an Arm-based Linux server
 weight: 2
 layout: "learningpathall"
 ---
 
 ## MySQL installation options
 
-If you're using a cloud service like Amazon Relational Database Service (RDS), the installation of MySQL is handled by those services. However, if you're working with a bare metal or cloud node, there are a few different installation options. 
+If you're using a cloud service such as  Amazon Relational Database Service (RDS), the installation of MySQL is handled by those services. However, if you're working with a bare metal or cloud node, there are a few different installation options. 
 
 You'll configure MySQL on an Arm Linux server using a container image. For other installation approaches, see [Chapter 2 Installing MySQL](https://dev.mysql.com/doc/refman/8.1/en/installing.html) in the MySQL documentation.
 
