@@ -1,5 +1,6 @@
 ---
 title: Deploy MySQL on an Arm-based Linux server
+description: Deploy MySQL with Docker on an Arm-based Linux server, create a database, and verify that it stores and retrieves data.
 
 minutes_to_complete: 30
 
@@ -11,7 +12,7 @@ learning_objectives:
 
 prerequisites:
     - An Arm-based Linux cloud instance or on-premises server with at least 2 GiB of available memory
-    - Docker Engine installed and running on the server
+    - Docker Engine [installed](/install-guides/docker/docker-engine/) and running on the server
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -30,8 +31,8 @@ generated_summary_faq:
   summary: >-
     You'll deploy MySQL 8.4 on an Arm-based Linux server with Docker Engine. First, you'll check the server
     architecture and Docker connection. Then, you'll start an Arm64 MySQL container with a persistent
-    volume. You'll connect through `docker exec`, create a test database, and add a sample
-    table. Finally, you'll insert seven rows and verify the stored data.
+    volume. You'll connect to the MySQL client, create a test database, and add a sample
+    table. Finally, you'll insert rows into the table and verify the stored data.
   # faqs:
   # - question: How do I check that my server is ready to run the Arm64 MySQL image?
   #   answer: >-

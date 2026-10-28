@@ -1,18 +1,21 @@
 ---
 title: Connect to MySQL and verify the database
+description: Connect to a MySQL container, create a database and table, and verify that MySQL stores and retrieves data.
 weight: 3
 layout: "learningpathall"
 ---
 
 ## Connect to MySQL
 
-Open the MySQL client in the running container again:
+After starting the MySQL container, you can connect to MySQL and create a database.
+
+Open the MySQL client in the running container:
 
 ```bash
 docker exec -it mysql-arm mysql -uroot -p
 ```
 
-Enter the root password. A successful connection displays a `mysql>` prompt.
+Enter the root password. After a successful connection, you'll see a `mysql>` prompt.
 
 ## Create a database
 
@@ -111,4 +114,4 @@ The output is similar to:
 
 You've verified that the MySQL container accepts connections and can store and retrieve data.
 
-You can extend the Learning Path steps to set up MySQL and create databases on Arm for your own use cases. To learn how to optimize your MySQL server on Arm, see the [Tune MySQL performance on Arm-based platforms](/learning-paths/servers-and-cloud-computing/mysql_tune/) Learning Path.
+You can now use this database for your own application. To learn how to optimize a MySQL server on Arm, see the [Tune MySQL performance on Arm-based platforms](/learning-paths/servers-and-cloud-computing/mysql_tune/) Learning Path.
