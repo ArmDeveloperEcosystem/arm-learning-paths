@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy Arm instances on AWS and provide access via Jump Server"
+title: Provide access to Arm instances on AWS with Jump Server
 
 weight: 3 # 1 is first, 2 is second, etc.
 
@@ -19,7 +19,7 @@ A Jump Server (also known as a bastion host) is an intermediary device responsib
 An alternative to setting up a Jump server like below is to use [Linux Bastion Hosts](https://aws.amazon.com/solutions/implementations/linux-bastion/) or [AWS Systems Manager service](https://aws.amazon.com/systems-manager/).
 {{% /notice %}}
 
-## Deploying Arm instances on AWS and providing access via Jump Server
+## Deploy Arm instances on AWS and provide access via Jump Server
 
 For deploying Arm instances on AWS and providing access via Jump Server, the Terraform configuration can be broken down into six files: `variables.tf`, `provider.tf`, `VPC_subnet_IG_RT.tf`, `security_groups.tf`, `ec2.tf` and `outputs.tf`.
 

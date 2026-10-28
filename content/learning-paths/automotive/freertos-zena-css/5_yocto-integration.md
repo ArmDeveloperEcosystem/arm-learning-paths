@@ -1,33 +1,27 @@
 ---
-title: Integrate the FreeRTOS image with Yocto
-description: Define a Yocto recipe and image-selection flow that builds, signs, and packages FreeRTOS as the Zena CSS Safety Island firmware.
+title: Integrate FreeRTOS into Zena CSS with Yocto
+description: Apply the FreeRTOS integration patch to Zena CSS, validate the Yocto-built image, and examine the configuration and recipe changes.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-# Integrate the FreeRTOS image with Yocto
+## Build the FreeRTOS application in Yocto
 
-## Objective
-The previous section manually replaced the Safety Island Cluster 1 (SI CL1) payload. That experiment proved that FreeRTOS can meet the Zena CSS secure boot requirements. RSE authenticates the image, copies it to SI CL1 low-latency RAM (LLRAM), and releases the cluster through the standard platform boot flow.
+You manually replaced the Safety Island Cluster 1 (SI CL1) payload. Doing so proved that FreeRTOS can meet the Zena CSS secure boot requirements. Runtime Security Engine (RSE) authenticates the image, copies it to SI CL1 low-latency RAM (LLRAM), and releases the cluster through the standard platform boot flow.
 
-The next step is to build the FreeRTOS application in Yocto.
+You'll now build the FreeRTOS application in Yocto.
 
-This section explains how to:
+You'll learn a reusable Yocto investigation method. Start from a known build output and trace its dependencies. Identify the interface between recipes, implement a compatible replacement, and validate the complete path.
 
-- Trace a firmware payload from a `kas` build target to the recipe that supplies it
-- Identify the file names, variables, and sysroot layout that a replacement recipe must provide
-- Add a FreeRTOS recipe and make it selectable without changing the default Zephyr build
-- Verify that Yocto builds, signs, packages, and boots the selected FreeRTOS image
+### Apply the FreeRTOS integration patch
 
-The steps also demonstrate a reusable Yocto investigation method. Start from a known build output and trace its dependencies. Identify the interface between recipes, implement a compatible replacement, and validate the complete path.
+The [`freertos-yocto-integration.patch`](../freertos-yocto-integration.patch) file combines the FreeRTOS recipe with the GCC 13 compatibility patch, machine configuration, and Kconfig selection changes. It applies to a clean Zena CSS v2.2 source tree. Follow the [Zena CSS source-download instructions](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html) to download and clone it.
 
-## Apply the FreeRTOS integration patch
+Exit your existing `tmux` session and return to your SSH shell on the Ubuntu host. 
 
-The [`freertos-yocto-integration.patch`](../freertos-yocto-integration.patch) file combines the FreeRTOS recipe, GCC 13 compatibility patch, machine configuration, and Kconfig selection changes described later in this section. It applies to a clean Zena CSS v2.2 source tree. Follow the [Zena CSS source-download instructions](https://arm-zena-css.docs.arm.com/en/latest/user_guide/reproduce.html) to download and clone it.
-
-Exit your existing `tmux` session and return to your SSH shell on the Ubuntu host. The following commands stop your `tmux` processes and move the existing checkout to `arm-auto-solutions-BAK` before creating a clean checkout:
+Stop your `tmux` processes and move the existing checkout to `arm-auto-solutions-BAK` before creating a clean checkout:
 
 ```bash
 cd $HOME
@@ -72,7 +66,7 @@ Select **RD-Aspen Cfg2**, either **Baremetal** or **Virtualization**, and then *
 
 ![Zena CSS build configuration with RD-Aspen Cfg2 and FreeRTOS selected.#center](kas_menu_freertos.png "Select FreeRTOS for Safety Island Cluster 1")
 
-Press **Save & Exit**, then build the complete software stack:
+Select **Save & Exit**, then build the complete software stack:
 
 ```bash
 kas build
@@ -88,13 +82,15 @@ At the SI CL1 console, enter `ping`. A successful four-core exchange confirms th
 
 ![tmux window list with SI C1 - terminal_uart_si_cluster1 selected. The console shows ping, pong, pang, and pung responses from cores 0 through 3, confirming the FreeRTOS four-core exchange.#center](run_fvp.png "FreeRTOS four-core exchange in the SI CL1 console")
 
-The patch integrates FreeRTOS into the Yocto build. Next, examine how the integration works.
+The patch integrates FreeRTOS into the Yocto build. Next, you'll examine how the integration works.
 
-## Investigate how the patch works
+### Investigate how the patch works
 
-The preceding patch already implements the changes described in this walkthrough. The remaining sections explain how the integration patch was derived and how to validate each boundary independently. If you've applied the patch, inspect the existing changes as you read, then continue to **Build and run the integrated image** for validation.
+The preceding patch already implements FreeRTOS into Yocto. You'll now learn how the changes were made. Treat the directions to remove, add, and create files as explanations of what the patch did. Inspect the corresponding files instead of repeating the edits. After reviewing the changes, continue to [Build and run the integrated image](/learning-paths/automotive/freertos-zena-css/5_yocto-integration/#build-and-run-the-integrated-image) for validation.
 
-The previous section identified [`yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb) as the recipe that creates the RSE flash image. Its dependencies include the recipe named by `SAFETY_ISLAND_CL1_RECIPE`:
+[`yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-bsp/recipes-bsp/images/firmware-fvp-rd-aspen.bb) was identified as the recipe that creates the RSE flash image.
+
+Its dependencies include the recipe named by `SAFETY_ISLAND_CL1_RECIPE`:
 
 ```bitbake
 DEPENDS += "\
@@ -114,40 +110,57 @@ SAFETY_ISLAND_CL1_RECIPE ??= "zephyr-demos-cl1"
 
 This immediately suggests the main integration approach: create a `freertos-demos-cl1.bb` recipe and select it instead of [`zephyr-demos-cl1.bb`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-safety-island/recipes-kernel/zephyr-kernel/zephyr-demos-cl1.bb).
 
-The following investigation explains how the top-level image reaches `firmware-fvp-rd-aspen.bb` and how the machine configuration selects Zephyr. Readers already familiar with this Yocto dependency flow can continue at **Add the FreeRTOS machine configuration**.
+The following investigation explains how the top-level image reaches `firmware-fvp-rd-aspen.bb` and how the machine configuration selects Zephyr. If you're already familiar with the Yocto dependency flow, continue to [How the patch adds FreeRTOS machine configuration](/learning-paths/automotive/freertos-zena-css/5_yocto-integration/#how-the-patch-adds-freertos-machine-configuration).
 
 When integrating a component into an unfamiliar Yocto build, start with information that the build must resolve: its target and machine. Following those two values is more reliable than searching every layer for a guessed component name.
 
-Next, determine how the Zephyr demo is added to the build:
+From `arm-zena-css`, determine how the Zephyr demo is added to the build:
 
-```console
-arm-zena-css$ grep -rn -B1  fvp-rd-aspen-zephyr.inc
+```bash
+grep -rn -B1  fvp-rd-aspen-zephyr.inc
+```
+
+The output is similar to:
+
+```output
 yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc-7-require ${@bb.utils.contains('DISTRO_FEATURES', 'zephyr', 'conf/machine/include/fvp/fvp-rd-aspen-zephyr.inc', '', d)}
 ```
 
-The Zephyr recipe is used when `DISTRO_FEATURES` contains `zephyr`. Next, determine where and when it is set.
+The Zephyr recipe is used when `DISTRO_FEATURES` contains `zephyr`. 
 
-```console
-sw-ref-stack$ grep -nr DISTRO_FEATURES | grep zephyr
+From `sw-ref-stack`, determine where and when it is set:
+
+```bash
+grep -nr DISTRO_FEATURES | grep zephyr
+```
+
+The output is similar to:
+
+```output
 yocto/kas/arm-auto-solutions.yml:73:    DISTRO_FEATURES:append = " cassini-dev zephyr"
 ```
 
 The [`yocto/kas/arm-auto-solutions.yml`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/sw-ref-stack/-/blob/release-v2.2/yocto/kas/arm-auto-solutions.yml?ref_type=heads#L73) file therefore adds `zephyr` unconditionally to `DISTRO_FEATURES`.
 
-Find the build configurations that include this kas file:
+From `sw-ref-stack`, find the build configurations that include this kas file:
 
-```console
-sw-ref-stack$ grep -nr arm-auto-solutions.yml
+```bash
+grep -nr arm-auto-solutions.yml
+```
+
+The output is similar to:
+
+```output
 yocto/kas/virtualization.yml:11:    - ../sw-ref-stack/yocto/kas/arm-auto-solutions.yml
 yocto/kas/baremetal.yml:11:    - ../sw-ref-stack/yocto/kas/arm-auto-solutions.yml
 ```
 The build uses `arm-auto-solutions.yml` for both the `baremetal` and `virtualization` configurations.
 
-### Add the FreeRTOS machine configuration
+#### How the patch adds FreeRTOS machine configuration
 
-To add a FreeRTOS build option, remove the unconditional `zephyr` distro feature. Then add a menu entry that selects either FreeRTOS or Zephyr.
+To add a FreeRTOS build option, the patch removes the unconditional `zephyr` distro feature. Then, it adds a menu entry that selects either FreeRTOS or Zephyr.
 
-Remove the unconditional `zephyr` setting from `yocto/kas/arm-auto-solutions.yml`:
+The patch removes the unconditional `zephyr` setting from `yocto/kas/arm-auto-solutions.yml`:
 ```diff
  local_conf_header:
    cassini: |
@@ -160,7 +173,7 @@ Remove the unconditional `zephyr` setting from `yocto/kas/arm-auto-solutions.yml
 
 For more details about the kas YAML file, see the [kas project configuration](https://kas.readthedocs.io/en/4.8.1/userguide/project-configuration.html).
 
-In [`arm-zena-css/Kconfig`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/Kconfig?ref_type=heads), add a kas menu entry that selects either Zephyr or FreeRTOS:
+In [`arm-zena-css/Kconfig`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/Kconfig?ref_type=heads), the patch adds a kas menu entry that selects either Zephyr or FreeRTOS:
 ```diff
 +choice
 +    prompt "Safety Island RTOS"
@@ -186,16 +199,16 @@ The choice appears only when `RD_ASPEN_CFG2` and `USE_CASE_DEMOS` are enabled. I
 
 For more information about choices, dependencies, and conditional defaults, see the [Kconfig language documentation](https://docs.kernel.org/kbuild/kconfig-language.html).
 
-#### Add the kas configuration fragments
+#### How the patch adds kas configuration fragments
 
-Create `sw-ref-stack/yocto/kas/si-cl1-freertos.yml` and add the following content:
+The patch creates `sw-ref-stack/yocto/kas/si-cl1-freertos.yml` and adds the following content:
 ```diff
 +local_conf_header:
 +  si-cl1-freertos: |
 +    DISTRO_FEATURES:append = " freertos"
 ```
 
-Create `sw-ref-stack/yocto/kas/si-cl1-zephyr.yml` and add the following content:
+It creates `sw-ref-stack/yocto/kas/si-cl1-zephyr.yml` and adds the following content:
 ```diff
 +local_conf_header:
 +  si-cl1-zephyr: |
@@ -203,7 +216,7 @@ Create `sw-ref-stack/yocto/kas/si-cl1-zephyr.yml` and add the following content:
 ```
 
 
-In [`yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc), add a conditional include for the `freertos` distro feature:
+In [`yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc`](https://gitlab.arm.com/automotive-and-industrial/arm-auto-solutions/arm-zena-css/-/blob/release-v2.2/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc), it adds a conditional include for the `freertos` distro feature:
 
 ```diff
  require ${@bb.utils.contains('DISTRO_FEATURES', 'zephyr', \
@@ -214,7 +227,7 @@ In [`yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-ext
 ```
 
 
-Create `yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc` with the FreeRTOS defaults:
+The patch creates `yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-freertos.inc` with the FreeRTOS defaults:
 
 ```bitbake
 # Safety Island FreeRTOS defaults.
@@ -224,15 +237,17 @@ SAFETY_ISLAND_CL1_IMAGE ??= "${SAFETY_ISLAND_CL1_RECIPE}"
 
 BitBake uses these values only when `DISTRO_FEATURES` contains `freertos`. The two assignments tell the existing firmware recipe which recipe to build and which image name to sign.
 
-However, the referenced `freertos-demos-cl1` recipe doesn't exist yet. The next step is to build that recipe by following the behavior of `zephyr-demos-cl1` and other bare-metal recipes.
+However, the referenced `freertos-demos-cl1` recipe doesn't exist yet. You'll build that recipe by following the behavior of `zephyr-demos-cl1` and other bare-metal recipes.
 
-## Create the FreeRTOS recipe
+The patch also adds the referenced `freertos-demos-cl1` recipe. Its design follows `zephyr-demos-cl1` and other bare-metal recipes.
 
-The remaining task is to make `freertos-demos-cl1.bb` build the FreeRTOS application and expose its binary under the name expected by the signing flow.
+#### How the patch creates the FreeRTOS recipe
 
-Use `yocto/meta-zena-css-bsp/recipes-bsp/si-hello-world/si-hello-world.bb` as a bare-metal example. Inspect `zephyr-environment.txt` to understand the expanded `do_install` and `do_deploy` behavior. Build the recipe after each meaningful addition so BitBake can report any missing requirements.
+The patch makes `freertos-demos-cl1.bb` build the FreeRTOS application and expose its binary under the name expected by the signing flow.
 
-Create the recipe directory in `arm-zena-css/`:
+The patch uses `yocto/meta-zena-css-bsp/recipes-bsp/si-hello-world/si-hello-world.bb` as a bare-metal example. Inspect `zephyr-environment.txt` to understand the expanded `do_install` and `do_deploy` behavior. If you update the provided patch, build the recipe after each meaningful addition so that BitBake can report any missing requirements.
+
+The patch creates the recipe directory in `arm-zena-css/`:
 
 ```bash
 mkdir -p yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel
@@ -243,7 +258,7 @@ Begin by identifying the recipe inputs:
 - `SRC_URI` fetches the Cortex-R82AE demo and FreeRTOS Kernel repositories.
 - `inherit cmake` supplies the native CMake dependency and standard configure and compile tasks.
 - `DEPENDS` supplies the AArch64 bare-metal compiler.
-- `EXTRA_OECMAKE` maps the CMake configuration from the previous section into the standard `cmake` class.
+- `EXTRA_OECMAKE` maps the CMake configuration into the standard `cmake` class.
 - `do_compile:append` converts the ELF file to the raw binary required by the RSE image.
 - `do_install` and `do_deploy` implement the `/firmware` interface discovered from Zephyr.
 
@@ -253,36 +268,41 @@ When the required compiler recipe is uncertain, search the existing metadata:
 grep -R -n 'gcc-aarch64-none-elf.*-native' yocto
 ```
 
-The `scp-firmware-fvp-rd-aspen.inc` file depends on `gcc-aarch64-none-elf-native`, so use the same dependency for FreeRTOS. A compiler compatibility issue is addressed later.
+The `scp-firmware-fvp-rd-aspen.inc` file depends on `gcc-aarch64-none-elf-native`, so the patch uses the same dependency for FreeRTOS.
 
-Create `yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/freertos-demos-cl1.bb`, add the source, dependency, and build tasks, then test it directly:
+The patch creates `yocto/meta-zena-css-safety-island/recipes-kernel/freertos-kernel/freertos-demos-cl1.bb` and adds the source, dependency, and build tasks.
+
+If you want to test the patch directly, run:
 
 ```bash
 kas shell -c 'bitbake freertos-demos-cl1'
 ```
 The first build might expose recipe requirements that aren't visible in the CMake build.
 
-{{% notice Frequently Encountered Errors %}}
-- This error means that a fetched source doesn't have license metadata.
+{{% notice Note %}}
 
-The output is similar to:
+Consider the following guidance to troubleshoot issues that you might encounter:
 
-```output
-ERROR: freertos-demos-cl1-1.0-r0 do_populate_lic: QA Issue: freertos-demos-cl1: Recipe file fetches files and does not have license file information (LIC_FILES_CHKSUM) [license-checksum]
-```
+- A fetched source doesn't have license metadata.
 
-Add the source license and checksum with `LICENSE` and `LIC_FILES_CHKSUM`. `LICENSE = "CLOSED"` can isolate a license-checksum problem during local diagnosis, but the completed recipe must declare the actual source license.
+  The output is similar to:
+
+  ```output
+  ERROR: freertos-demos-cl1-1.0-r0 do_populate_lic: QA Issue: freertos-demos-cl1: Recipe file fetches files and does not have license file information (LIC_FILES_CHKSUM) [license-checksum]
+  ```
+
+  To fix this, add the source license and checksum with `LICENSE` and `LIC_FILES_CHKSUM`. `LICENSE = "CLOSED"` can isolate a license-checksum problem during local diagnosis, but the completed recipe must declare the actual source license.
 
 
 - The signing task can then report that no package version was recorded.
 
-The output is similar to:
+  The output is similar to:
 
-```output
-ERROR: firmware-fvp-rd-aspen-1.0-r0 do_sign_images: pv_tracker: No PV recorded for freertos-demos-cl1
-```
+  ```output
+  ERROR: firmware-fvp-rd-aspen-1.0-r0 do_sign_images: pv_tracker: No PV recorded for freertos-demos-cl1
+  ```
 
-Add `inherit pv_tracker` because the Zena CSS signing flow records the versions of its firmware inputs.
+  To fix this, add `inherit pv_tracker` because the Zena CSS signing flow records the versions of its firmware inputs.
 
 
 - If `do_package` reports files that were installed but not shipped, set `PACKAGES = ""` because this firmware isn't installed in a Linux root file system. Add `/firmware` to `SYSROOT_DIRS` so that `firmware-fvp-rd-aspen.bb` can read the binary from its recipe sysroot.
@@ -291,7 +311,7 @@ Add `inherit pv_tracker` because the Zena CSS signing flow records the versions 
 
 The compiler dependency reveals another issue. The version of `gcc-aarch64-none-elf-native` provided by Zena CSS is GCC 13, which doesn't recognize `-mcpu=cortex-r82ae`.
 
-Use a source patch to replace that option with the supported `cortex-r82` name in both the C and assembly flags:
+The patch replaces that option with the supported `cortex-r82` name in both the C and assembly flags:
 
 ```diff
 -set(CMAKE_C_FLAGS "-mcpu=cortex-r82ae ...")
@@ -304,9 +324,9 @@ This change allows the image to compile, but runtime validation reveals another 
 
 The generated code contains `stp q0, q0, [x1]`. This SIMD store needs 16-byte alignment, but the destination is only 8-byte aligned. GCC 13 generated the instruction while optimizing the replacement `memset`.
 
-Keep alignment checking enabled in `SCTLR_EL1`. Disabling it would hide the invalid access instead of fixing the generated code.
+The patch keeps alignment checking enabled in `SCTLR_EL1`. Disabling the check would hide the invalid access instead of fixing the generated code.
 
-Extend the compatibility patch to disable the built-in `memset` only for `crt_replacements.c`:
+The compatibility patch disables the built-in `memset` only for `crt_replacements.c`:
 
 ```cmake
 set_source_files_properties(crt_replacements.c PROPERTIES
@@ -385,36 +405,26 @@ addtask deploy after do_install
 
 {{% notice Warning %}}
 Both `SRCREV` values are pinned to commits that have been tested with this integration. To test the latest commits from each branch instead, replace the commit hashes with `${AUTOREV}`.
-Note that `${AUTOREV}` does not provide a reproducible build because the selected source can change over time.
+
+`${AUTOREV}` doesn't provide a reproducible build because the selected source can change over time.
 {{% /notice %}}
 </details>
 
-Rebuild the recipe after each change:
-
-```bash
-kas shell -c 'bitbake freertos-demos-cl1'
-```
-
-When the standalone recipe succeeds, build the complete stack and launch the model to exercise signing, packaging, and startup:
-
-```bash
-kas build
-kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux --verbose'
-```
-
-If a recipe or source change appears not to take effect, clean and rebuild the recipe to eliminate cached output:
+If you later edit the recipe or update its source revision and the build doesn't reflect the change, clean and rebuild the recipe:
 
 ```bash
 kas shell -c 'bitbake -c cleanall freertos-demos-cl1'
 kas shell -c 'bitbake freertos-demos-cl1'
 ```
 
-With the GCC 13 compatibility patch and recipe available, BitBake can build `freertos-demos-cl1` directly. The menu option provides a controlled user selection that adds `freertos` to `DISTRO_FEATURES`.
+The menu option provides a controlled user selection that adds `freertos` to `DISTRO_FEATURES`.
 
 
-## Build and run the integrated image
+### Build and run the integrated image
 
-First, build the complete stack and inspect the dependency graph. Then check the artifacts. Finally, boot the image to confirm that signing and loading also work.
+With the GCC 13 compatibility patch and recipe available, you can build `freertos-demos-cl1` directly with BitBake.
+
+First, you'll build the complete stack and inspect the dependency graph. Then, you'll check the artifacts. Finally, you'll boot the image to confirm that signing and loading also work.
 
 Build either the baremetal or virtualization stack with the FreeRTOS selection:
 
@@ -437,7 +447,9 @@ grep -E 'freertos-demos-cl1|zephyr-demos-cl1' build/pn-buildlist
   {{< /tab >}}
 {{< /tabpane >}}
 
-The dependency graph proves that BitBake selected the FreeRTOS producer. Next, inspect the deployed FreeRTOS artifacts and final RSE flash image:
+The dependency graph proves that BitBake selected the FreeRTOS producer.
+
+Next, inspect the deployed FreeRTOS artifacts and final RSE flash image:
 
 {{< tabpane code=true >}}
   {{< tab header="Baremetal" language="bash" >}}
@@ -450,9 +462,9 @@ ls build/tmp_virtualization/deploy/images/fvp-rd-aspen/rse-flash-image.img
   {{< /tab >}}
 {{< /tabpane >}}
 
-Old artifacts can remain in the deploy directory, so file presence alone doesn't prove which recipe was selected. Use the resolved `DISTRO_FEATURES` and `pn-buildlist` checks as the authoritative evidence.
+Old artifacts can remain in the deploy directory. File presence alone doesn't prove which recipe was selected. Use the resolved `DISTRO_FEATURES` and `pn-buildlist` checks as the authoritative evidence.
 
-The deploy directory proves that the build produced files, but not that the binary was signed correctly or accepted by RSE. Launch the Zena CSS FVP through the standard runner:
+The deploy directory proves that the build produced files. It doesn't prove that the binary was signed correctly or accepted by RSE. Launch the Zena CSS Fixed Virtual Platform (FVP) through the standard runner:
 
 ```bash
 kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
@@ -460,7 +472,9 @@ kas shell -c '../layers/meta-arm/scripts/runfvp -t tmux'
 
 No additional FVP configuration, such as `core_power_on_by_default`, or `--data` override is needed. RSE authenticates the integrated payload, copies it to the SI CL1 LLRAM, and then releases the cluster.
 
-At the SI CL1 console, enter `ping`. The expected output is:
+At the SI CL1 console, enter `ping`. 
+
+The expected output is:
 
 ```output
 > ping
@@ -471,16 +485,16 @@ Pung response from Core 3
 >
 ```
 
-This confirms that Yocto built the FreeRTOS application, the firmware recipe signed and packaged it, and RSE started it through the normal boot flow.
+This confirms that Yocto built the FreeRTOS application. The firmware recipe signed and packaged the application, and RSE started it through the normal boot flow.
 
-The CLI also accepts `pong`, `pang`, and `pung`. Each command starts the same four-hop exchange from the corresponding fixed-affinity task, so any of the four commands can be used to repeat the multicore validation from a different starting core.
+The CLI also accepts `pong`, `pang`, and `pung`. Each command starts the same four-hop exchange from the corresponding fixed-affinity task. You can use any of the four commands to repeat the multicore validation from a different starting core.
 
 Finally, return to `kas menu`, select Zephyr, and rebuild. Verify that the original SI CL1 firmware still boots. This last check matters because the integration adds a choice to an existing product configuration. Testing both branches confirms that FreeRTOS works without regressing the default Zephyr path.
 
-## What you've accomplished and what's next
+## What you've accomplished 
 
 The Cortex-R82AE FreeRTOS port is now integrated as a reproducible Yocto recipe and selectable as the Zena CSS SI CL1 firmware. You traced the working Zephyr flow and identified the interface between its producer and consumer recipes. You then implemented FreeRTOS against the same interface.
 
 You verified menu selection, distro features, and recipe dependencies separately. You also verified the deployed artifact, signed flash image, and runtime output. Use the same investigation pattern to replace or add other firmware components without manually modifying their consuming image recipes.
 
-The next platform-integration step is to add Message Handling Unit (MHU) communication backed by a shared-memory buffer. This provides communication between the FreeRTOS Safety Island application and the primary compute domain, replacing the equivalent inter-processor communication path used by the Zephyr application.
+The next platform-integration step is to add Message Handling Unit (MHU) communication backed by a shared-memory buffer. This provides communication between the FreeRTOS Safety Island application and the primary compute domain. It replaces the equivalent inter-processor communication path used by the Zephyr application.

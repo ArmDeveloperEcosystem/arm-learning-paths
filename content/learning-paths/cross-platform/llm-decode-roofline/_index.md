@@ -5,11 +5,11 @@ draft: true
 cascade:
     draft: true
 
-description: Use llama-roofline and llama-bench on a Raspberry Pi 5 or another Arm Linux system to measure the memory bandwidth ceiling, check how close llama.cpp decode runs to it, and pick decode and prefill thread counts from the results.
+description: Use llama-roofline on Arm Linux to diagnose memory-bound llama.cpp token generation and choose thread counts and model size from measurements.
 
 minutes_to_complete: 45
 
-who_is_this_for: This is an advanced topic for developers and performance engineers who run llama.cpp on Arm CPUs, such as a Raspberry Pi 5 or another Arm Linux system, and want to know which setting actually changes their tokens per second.
+who_is_this_for: This topic helps developers and performance engineers choose llama.cpp settings from measured token throughput on Arm CPUs, using a Raspberry Pi 5 or another Arm Linux system.
 
 learning_objectives:
     - Measure the sustained memory-read bandwidth of an Arm Linux system.

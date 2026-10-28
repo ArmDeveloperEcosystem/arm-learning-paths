@@ -8,18 +8,27 @@ layout: learningpathall
 
 ## Start the level and verify NSS
 
-Press the green **Play** button to start the level. To verify NSS is running, you can run this command in Unreal:
+1. Enable NSS before starting the level. The plugin checkbox alone does not enable NSS, which defaults to `0`. Run this command in the Unreal Engine console:
+
+   ```console
+   r.NSS.Enable 1
    ```
+
+2. Press the green **Play** button to start the level.
+3. In the running game's console, verify NSS with:
+
+   ```console
    ShowFlag.VisualizeTemporalUpscaler 1
    ```
-You’ll see **NSS** listed in the rendering summary.
+
+   Confirm that **ThirdParty TemporalUpscaler** reports **NSS** in the rendering summary.
 
 {{% notice %}}
-In **Edit > Project Settings > Plugins > Arm Neural Graphics Plugin 1.1.0**, you can view and configure the NSS settings.
+To save the NSS setting for future sessions, select **Enable** under **NSS** in **Edit > Project Settings > Plugins > Neural Graphics 1.1.0**.
 {{% /notice %}}
 
 Run `ShowFlag.VisualizeTemporalUpscaler 0` to disable the overview. To visualize the NSS model output in real-time, run the following command:
-   ```
+   ```console
    r.NSS.Debug 1
    ```
 
@@ -34,7 +43,7 @@ Use these Unreal Engine console variables to configure NSS behavior, debug views
 | Console variable | Default | Value range | Details |
 |------------------|---------|-------------|---------|
 | `r.NSS.Enable` | `0` | `0`, `1` | Enables NSS for Temporal Upscale. |
-| `r.NSS.EnabledInEditorViewport` | `0` | `0`, `1` | Enables NSS for Temporal Upscale in the editor viewport. |
+| `r.NSS.EnableInEditorViewport` | `0` | `0`, `1` | Enables NSS for Temporal Upscale in the editor viewport. |
 | `r.NSS.Debug` (UE 5.4 and UE 5.6) | `0` | `0`, `1` | Displays 16 debug outputs in a 4x4 grid. |
 | `r.NSS.Debug` (UE 4.27) | `0` | `0`, `1` | Displays 12 debug outputs in a 3x4 grid. |
 | `r.NSS.AdjustMipBias` | `1` | `0`, `1` | Allows NSS to adjust the minimum global texture mip bias: `r.ViewTextureMipBias.Min` and `r.ViewTextureMipBias.Offset`. |
@@ -46,14 +55,15 @@ Use these Unreal Engine console variables to configure NSS behavior, debug views
 
 If the example does not behave as expected, check the following common issues before continuing.
 
-### Check for build issues in Visual Studio
-- Build failures related to `AutomationTool`, `Gauntlet`, or other `*.Automation` projects can be ignored.
-- Focus on whether the project itself, named as `<Your Project Name>Editor`, builds successfully.
+### Plugin missing or build failed
 
-### Check you Unreal Engine configuration
+If the plugin is missing, first check that `NG.uplugin` is directly inside your engine-specific plugin folder. If the build failed, first inspect the earliest error for your project's editor target in Visual Studio's **Output > Build**. Follow the [plugin setup and build checks](/learning-paths/mobile-graphics-and-gaming/nss-unreal/3-create-example/#enable-the-plugin).
+
+### NSS absent from the rendering summary
+- First query `r.NSS.Enable` without a value and confirm that it reports `1`.
 - Verify that Vulkan is selected as the **Default RHI**.
 - Confirm the **Arm Neural Graphics Plugin** is enabled and that Unreal Engine was restarted after enabling it.
-- Check **Edit > Project Settings > Plugins > Arm Neural Graphics Plugin 1.1.0** to confirm that NSS is enabled.
+- Check **Edit > Project Settings > Plugins > Neural Graphics 1.1.0** to confirm that NSS is enabled.
 
 If the Arm Neural Graphics Plugin is enabled but NSS appears to have no effect:
 - Confirm that you installed version 0.10.0 or later of the standalone [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan).
@@ -64,6 +74,10 @@ If the Arm Neural Graphics Plugin is enabled but NSS appears to have no effect:
   - The Graph layer is ordered above the Tensor layer
 
 Refer back to the [emulation layer section](/learning-paths/mobile-graphics-and-gaming/nss-unreal/2-emulation-layer/) for the full Vulkan Configurator setup and validation steps.
+
+### Debug view absent
+
+First confirm that `ShowFlag.VisualizeTemporalUpscaler 1` reports NSS while the game is running. Then hide the overview and run `r.NSS.Debug 1` again. Use **Play** for this check; NSS is disabled in the non-playing editor viewport by default.
 
 ### Check the software and hardware setup
 - Confirm that you're using Arm Neural Graphics Plugin 1.1.0 with a supported Unreal Engine version.

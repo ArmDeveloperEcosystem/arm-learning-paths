@@ -1,6 +1,6 @@
 ---
 title: Understand why token generation is limited by memory bandwidth
-description: Learn why llama.cpp token generation on an Arm CPU is limited by how many bytes it reads per token, why prompt processing is not, and what llama-roofline measures to show the difference.
+description: Understand how memory bandwidth and bytes read per token limit llama.cpp decode on Arm CPUs, and how prefill differs.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -16,11 +16,11 @@ When llama.cpp runs a model on an Arm CPU, it does two kinds of work:
 
 Because decode reads the model weights for every token, its speed follows one equation:
 
-```output
+```text
 decode tokens/s  =  effective memory bandwidth (bytes/s)  /  bytes read per token
 ```
 
-This is the memory-bound side of the roofline model. For example, the Raspberry Pi 5 used for this Learning Path sustains 13.8 GB/s, and the smallest model in this Learning Path reads 346 MB per token, so decode on that model cannot go faster than about 40 tokens/s, no matter how fast the cores are.
+This is the memory-bound side of the roofline model. The Raspberry Pi 5 used for this Learning Path sustains 13.8 GB/s. The smallest model reads 346 MB per token. Decode on that model cannot go faster than about 40 tokens/s, no matter how fast the cores are.
 
 The equation gives you three practical rules:
 

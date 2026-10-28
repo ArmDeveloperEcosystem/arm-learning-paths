@@ -1,15 +1,15 @@
 ---
 title: "Write and run Puppeteer tests against a Hugo site"
-description: "Fork the Ecosystem Dashboard for Arm, install Puppeteer inside the repository, start a local Hugo development server, and run three Puppeteer test scripts that assert page content, validate a documentation link, and capture a screenshot."
+description: "Write and run Puppeteer tests against a locally served Hugo site on Arm Linux to check page content and a documentation link, and capture a screenshot."
 
 weight: 4
 
 layout: "learningpathall"
 ---
 
-## Fork and clone the repository
+## Set up the test repository
 
-The tests below run against the [Ecosystem Dashboard for Arm](https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm), a public Hugo site that tracks the Arm compatibility status of open-source packages. You need your own fork so you can commit the test scripts and wire them into GitHub Actions on the next page.
+You'll create Puppeteer tests that run against the [Ecosystem Dashboard for Arm](https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm) GitHub repository. The dashboard is a public Hugo site that tracks the Arm compatibility status of open-source packages. You need your own fork so that you can commit the test scripts and wire them into GitHub Actions.
 
 ### Authenticate with GitHub
 
@@ -29,13 +29,13 @@ sudo dnf install -y gh
   {{< /tab >}}
 {{< /tabpane >}}
 
-Log in using the browser-based device flow (no token required):
+Log in using the browser-based device flow. You don't need a token:
 
 ```bash
 gh auth login
 ```
 
-Follow the prompts: select GitHub.com, HTTPS, and authenticate via browser.
+Select **GitHub.com**, **HTTPS**, and authenticate using the browser.
 
 If this is a new server, also configure your git identity:
 
@@ -44,22 +44,24 @@ git config --global user.name "Your Name"
 git config --global user.email "you@example.com"
 ```
 
-### Fork and clone
+### Fork and clone the repository
 
-1. Go to [https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm](https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm)
+To fork and clone the repository:
+
+1. Go to the [Ecosystem Dashboard for Arm repository](https://github.com/ArmDeveloperEcosystem/ecosystem-dashboard-for-arm).
 2. Select **Fork** and follow the prompts to create a fork under your account.
 3. Clone your fork on your Arm server, replacing `your-github-username` with your actual username:
 
-```bash
-cd $HOME
-git clone https://github.com/your-github-username/ecosystem-dashboard-for-arm
-```
+  ```bash
+  cd $HOME
+  git clone https://github.com/your-github-username/ecosystem-dashboard-for-arm
+  ```
 
-Then change into the cloned directory:
+After forking and cloning the repository, change into the cloned directory:
 
-```bash
-cd ecosystem-dashboard-for-arm
-```
+  ```bash
+  cd ecosystem-dashboard-for-arm
+  ```
 
 ## Set up the Puppeteer project
 
@@ -72,7 +74,7 @@ npm init -y
 npm install puppeteer-core
 ```
 
-`puppeteer-core` skips the automatic download of a bundled browser binary. It uses the system-installed Chrome you set up in the previous section, which keeps the install fast and avoids a duplicate browser on disk.
+`puppeteer-core` skips the automatic download of a bundled browser binary. It uses the system-installed Chrome that you set up earlier. This keeps the install fast and avoids a duplicate browser on disk.
 
 Add a `.gitignore` file inside `puppeteer-tests` to exclude `node_modules` from version control:
 
@@ -82,7 +84,9 @@ echo "node_modules/" > .gitignore
 
 ## Install Hugo and start the dev server
 
-The test scripts target the dashboard served locally by Hugo. Install Hugo first.
+The test scripts target the dashboard served locally by Hugo. 
+
+Install Hugo first:
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu 24.04" language="bash" >}}
@@ -116,7 +120,7 @@ cd $HOME/ecosystem-dashboard-for-arm
 hugo server --port 1313 &
 ```
 
-The `&` runs the server in the background. Wait a few seconds, then confirm it is ready:
+The `&` runs the server in the background. Wait a few seconds, then confirm that it's ready:
 
 ```bash
 curl -s -o /dev/null -w "%{http_code}\n" http://localhost:1313/linux/
@@ -124,9 +128,17 @@ curl -s -o /dev/null -w "%{http_code}\n" http://localhost:1313/linux/
 
 You should see `200`. Leave the server running while you work through the tests.
 
-## Test 1: Assert that an NGINX package row is present
+## Create Puppeteer tests
 
-This test navigates to the dashboard's Linux page and checks that the NGINX package row is rendered. It uses the `data-title` attribute that the dashboard sets on each table row to identify packages.
+With the server running and the project ready, you can now create three Puppeteer tests.
+
+{{% notice Note %}}
+All three test scripts pass `--no-sandbox` and `--disable-setuid-sandbox` to Chrome. These flags are required when Chrome runs as a non-root user on a Linux server that hasn't been configured with user namespaces. Cloud instances and CI runners typically fall into this category. Without these flags, Chrome exits immediately with a sandbox initialization error. Including them makes your scripts portable across server environments without any code change.
+{{% /notice %}}
+
+### Assert that an NGINX package row is present
+
+The test navigates to the Linux page of the dashboard and checks that the NGINX package row is rendered. It uses the `data-title` attribute that the dashboard sets on each table row to identify packages.
 
 Navigate to the `puppeteer-tests` directory before creating the test files:
 
@@ -179,9 +191,9 @@ The expected output is:
 PASS: NGINX package is present in the rendered dashboard
 ```
 
-## Test 2: Validate the official documentation link
+### Validate the official documentation link
 
-This test clicks the NGINX row to expand its sub-row, waits for the official documentation link to appear, extracts its URL, navigates to it, and asserts the server returns HTTP 200.
+This test clicks the NGINX row of the dashboard to expand its sub-row. It waits for the official documentation link to appear and extracts its URL. The test navigates to the URL and asserts that the server returns HTTP `200`.
 
 Create `test-doc-link.mjs`:
 
@@ -265,7 +277,7 @@ PASS: docs link https://www.nginx.com/resources/wiki/start/ returned HTTP 200
 
 The exact URL in the output depends on what the dashboard stores for the NGINX official docs entry.
 
-## Test 3: Capture a screenshot
+### Capture a screenshot
 
 This test sets a 1920×1080 viewport, navigates to the Linux page, and saves a screenshot as `dashboard.png`.
 
@@ -301,7 +313,7 @@ The expected output is:
 Screenshot saved to dashboard.png
 ```
 
-You'll find `dashboard.png` in your `puppeteer-tests` directory. Copy it to your local machine to view it:
+You'll find `dashboard.png` in your `puppeteer-tests` directory. Run the following command on your local machine to copy the screenshot from the Arm server:
 
 ```bash
 scp user@your-server-ip:~/ecosystem-dashboard-for-arm/puppeteer-tests/dashboard.png .
@@ -325,10 +337,8 @@ PASS: docs link https://www.nginx.com/resources/wiki/start/ returned HTTP 200
 Screenshot saved to dashboard.png
 ```
 
-## About the sandbox flags
+## What you've accomplished and what's next
 
-All three scripts pass `--no-sandbox` and `--disable-setuid-sandbox` to Chrome. These flags are required when Chrome runs as a non-root user on a Linux server that has not been configured with user namespaces. Cloud instances and CI runners typically fall into this category. Without these flags, Chrome exits immediately with a sandbox initialization error. Including them makes your scripts portable across server environments without any code change.
+You've written and run Puppeteer scripts on the Ecosystem Dashboard for Arm. The scripts check package content, validate a documentation link, and capture a screenshot of the dashboard. 
 
-## What you've accomplished
-
-You've written and run Puppeteer scripts to check package content, validate a documentation link, and capture a screenshot of the dashboard. Next, you'll automate these scripts with GitHub Actions on an Arm runner.
+Next, you'll automate these scripts with GitHub Actions on an Arm runner.

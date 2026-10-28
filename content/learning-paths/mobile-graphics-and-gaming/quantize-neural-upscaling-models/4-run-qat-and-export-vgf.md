@@ -29,7 +29,7 @@ from torchao.quantization.pt2e import (
 
 Then add the QAT training function and example entry point. This code prepares the exported model for QAT, fine-tunes for a small number of epochs, converts to INT8, and exports to `.vgf`.
 
-The export also enables two optional debug settings. The `--emit-debug-info` Model Converter flag embeds ExecuTorch stack traces and module metadata in the VGF, while `dump_debug_info(VgfCompileSpec.DebugMode.TOSA)` preserves the corresponding TOSA debug information during lowering. You can omit both settings when you don't need debug information.
+The export also enables two optional debug settings. The `--emit-debug-info` Model Converter flag preserves debug information when converting TOSA to VGF, while `dump_debug_info(VgfCompileSpec.DebugMode.TOSA)` embeds ExecuTorch stack traces and module metadata in the intermediate TOSA graph. You can omit both settings when you don't need debug information.
 
 ```python
 def train_model_qat(

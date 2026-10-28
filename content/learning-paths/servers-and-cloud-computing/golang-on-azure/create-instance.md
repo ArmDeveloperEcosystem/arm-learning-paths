@@ -1,5 +1,5 @@
 ---
-title: Create an Azure Cobalt 100 Arm64 virtual machine for Golang deployment
+title: Create an Arm64 Azure virtual machine for Golang deployment
 weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

@@ -1,6 +1,6 @@
 ---
 title: Build llama.cpp and install llama-roofline
-description: Check the Arm CPU features, build the llama.cpp llama-bench tool, download three Qwen2.5 GGUF models, and install llama-roofline from PyPI on a Raspberry Pi 5 or another Arm Linux system.
+description: Build llama-bench, download three Qwen2.5 GGUF models, and install llama-roofline to prepare your Arm Linux system for decode measurements.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -16,7 +16,7 @@ uname -m
 grep -m1 Features /proc/cpuinfo
 ```
 
-On a Raspberry Pi 5 the output is:
+On a Raspberry Pi 5, the output is similar to:
 
 ```output
 aarch64
@@ -26,6 +26,8 @@ Features	: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid
 The `asimd` flag is NEON and `asimddp` is the DotProd extension. llama.cpp detects DotProd when you build it and uses it for its quantized kernels on the Cortex-A76. The Pi 5 does not have `i8mm` or `sve`, which some newer Arm cores provide.
 
 ## Install the build tools
+
+Install the build tools and Python virtual-environment packages:
 
 ```bash
 sudo apt update
@@ -53,7 +55,7 @@ On a board with more memory you can raise `-j` to the number of cores to build f
 
 Record the commit hash printed by `git rev-parse`. You need it when you compare results with anyone else. The outputs in this Learning Path come from llama.cpp commit `836d571`.
 
-To confirm that the build enabled DotProd, look in the output of the `cmake -B build` command for the line that starts with `-- Adding CPU backend variant`. On the Raspberry Pi 5 it is:
+To confirm that the build enabled DotProd, look in the output of the `cmake -B build` command for the line that starts with `-- Adding CPU backend variant`. On the Raspberry Pi 5, the output is similar to:
 
 ```output
 -- Adding CPU backend variant ggml-cpu: -U__ARM_FEATURE_MATMUL_INT8;-U__ARM_FEATURE_SVE;-mcpu=cortex-a76+crypto+dotprod+noi8mm+nosve
@@ -87,7 +89,7 @@ wget https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct-GGUF/resolve/main/qwen2.5
 ls -l *.gguf
 ```
 
-The output is similar to the following, with your user name and dates. The byte counts must match exactly:
+Your user name and dates can differ, but the byte counts must match exactly. The output is similar to:
 
 ```output
 -rw-r--r-- 1 manu manu  428730208 Oct  4 00:10 qwen2.5-0.5b-instruct-q4_0.gguf

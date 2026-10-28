@@ -1,5 +1,5 @@
 ---
-title: Learn about glibc with Large System Extensions for performance improvement
+title: Improve workload performance with glibc and Large System Extensions 
 description: Rebuild and benchmark glibc with LSE atomics on Arm servers, then evaluate scalability using MongoDB workloads and guidance on when LSE delivers a measurable uplift.
 
 minutes_to_complete: 60

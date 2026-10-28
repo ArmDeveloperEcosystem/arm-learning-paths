@@ -115,6 +115,21 @@ p > code {
     margin-right: 4px;
 }
 
+/* Inline code inside headings: keep the monospace font to signal a literal
+   command or identifier, but inherit the heading's font-size and weight so it
+   matches the surrounding heading text instead of shrinking to the global
+   16px code size set in cross-page.css. */
+div.markdown-content-div h1 code,
+div.markdown-content-div h2 code,
+div.markdown-content-div h3 code,
+div.markdown-content-div h4 code,
+div.markdown-content-div h5 code,
+div.markdown-content-div h6 code {
+    font-size: inherit !important;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
 
 
 

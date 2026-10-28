@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy Arm instances on GCP and provide access via Jump Server"
+title: "Provide access to Arm instances on GCP with Jump Server"
 
 weight: 3 # 1 is first, 2 is second, etc.
 

@@ -1,5 +1,5 @@
 ---
-title: Perform Golang baseline testing and web server deployment on Azure Cobalt 100 
+title: Perform Golang baseline testing and web server deployment 
 weight: 5
 
 ### FIXED, DO NOT MODIFY
