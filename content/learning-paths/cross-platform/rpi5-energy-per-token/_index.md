@@ -5,7 +5,7 @@ description: Use the Raspberry Pi 5 PMIC ADC and llama.cpp to measure joules per
 
 minutes_to_complete: 60
 
-who_is_this_for: This is an advanced topic for developers who run llama.cpp on a Raspberry Pi 5 and want to measure the energy each generated token costs, and to choose a clock frequency and thread count from measured energy instead of speed alone.
+who_is_this_for: This is an advanced topic for developers who run llama.cpp on a Raspberry Pi 5 and want to measure the energy each generated token costs. 
 
 learning_objectives:
     - Read current and voltage from each Raspberry Pi 5 power rail, and interpret what the rail sum measures.

@@ -104,7 +104,7 @@ The script calls `vcgencmd pmic_read_adc` and matches the current line of each r
 - `total_W` is the sum of the power of all rails that report both a current and a voltage.
 - One column per rail follows, in watts.
 
-The script stops cleanly when it receives **Ctrl+C** or a stop signal, or after `--duration` seconds.
+The script stops cleanly when it receives **Ctrl+C**, a `SIGINT` or `SIGTERM` signal, or after `--duration` seconds.
 
 ## Log an idle board
 
@@ -153,7 +153,7 @@ wrote 1386 samples to core.csv
 ```
 
 {{% notice Note %}}
-The sampler runs on the same four Cortex-A76 cores as the workload you measure, and each sample starts a `vcgencmd` process. Logging at a higher rate costs more CPU time. The last section measures how much this slows down llama.cpp, so that you can decide whether the overhead matters for your measurement.
+The sampler runs on the same four Cortex-A76 cores as the workload that you measure. Each sample starts a `vcgencmd` process. Logging at a higher rate costs more CPU time. You'll measure how much this slows down llama.cpp, so that you can decide whether the overhead matters for your measurement.
 {{% /notice %}}
 
 ## What you've accomplished and what's next

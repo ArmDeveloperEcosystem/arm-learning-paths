@@ -123,13 +123,13 @@ The idle power and the temperature drift between runs. Repeat the sweep at least
 | 2.4 GHz | 2 | 31.51 | 4.82 | 0.1529 | 0.1020 |
 | 2.4 GHz | 4 | 24.02 | 5.12 | 0.2131 | 0.1451 |
 
-Across the five passes, the tokens per second of each setting varied by 1.2% or less (coefficient of variation). The J per token varied by 3.8% or less, and the net J per token by 6.7% or less. `get_throttled` returned `throttled=0x0` before and after every run, and the system-on-chip (SoC) temperature stayed between 45°C and 51°C.
+Across the five passes, the tokens per second of each setting varied by 1.2% or less (coefficient of variation). The J per token varied by 3.8% or less, and the net J per token varied by 6.7% or less. `get_throttled` returned `throttled=0x0` before and after every run. The system-on-chip (SoC) temperature stayed between 45°C and 51°C.
 
 Four threads is the worst setting at every clock cap. At 2.4 GHz, it costs 61% more energy per token than one thread while running 25% slower. This is despite four being the thread count that `llama-bench` uses by default on the board. Token generation for this model is limited by memory bandwidth. Extra threads therefore add power on `VDD_CORE` without adding tokens.
 
 With one thread, the three clock caps are within 3% of each other in total J per token. That's inside the run-to-run variation, so this data doesn't rank them. A lower clock reduces the power, but each token takes longer. As a result, the board draws its idle power for longer too.
 
-The net J per token does depend on the clock. One thread at 1.5 GHz uses 30% less net energy per token than one thread at 2.4 GHz. However, it generates 32% fewer tokens per second.
+The net J per token depends on the clock. One thread at 1.5 GHz uses 30% less net energy per token than one thread at 2.4 GHz. However, it generates 32% fewer tokens per second.
 
 Most of the extra power during generation is on `VDD_CORE`. With one thread at 2.4 GHz, `VDD_CORE` rises from 0.42 W at idle to 2.62 W. This is about 85% of the rise of the rail sum.
 
@@ -137,7 +137,7 @@ Which setting is best depends on what you pay for. If the board runs only this m
 
 ## Measure the cost of the sampler
 
-The sampler competes with llama.cpp for the four cores. To see how much it costs, compare `llama-bench` alone with the same run under the full-rail sampler and the single-rail sampler, at 2.4 GHz:
+The sampler competes with llama.cpp for the four cores. At 2.4 GHz, compare `llama-bench` alone with the same run under the full-rail sampler and the single-rail sampler:
 
 ```bash
 cd $HOME/pi-energy
@@ -149,7 +149,7 @@ for t in 1 4; do
 done
 ```
 
-In the output, `none` means no sampler, `full` means the full-rail sampler, and `core` means the single-rail sampler reading `VDD_CORE`.
+In the output, `none` means no sampler and `full` means the full-rail sampler. `core` means the single-rail sampler reading `VDD_CORE`.
 
 The output is similar to:
 
@@ -166,9 +166,11 @@ wrote 3027 samples to over_core_t4/power.csv
 threads 4 core 21.74 tok/s
 ```
 
-The full-rail sampler reads about 40 samples per second. It slows token generation by about 2% with one thread and 4% with four threads. The single-rail sampler reads more often, about 100 to 140 samples per second. It costs more: about 8% with one thread and 14% with four threads. Over five alternating passes on the example board, the full-rail sampler slowed generation by 1.8% with one thread and 4.5% with four threads. The single-rail sampler slowed generation by 8.0% and 14.0%, respectively. Both samplers reported the same `VDD_CORE` power during generation, within 0.5%.
+The full-rail sampler reads about 40 samples per second. It slows token generation by about 2% with one thread and 4% with four threads. The single-rail sampler reads more often, about 100 to 140 samples per second. It costs more: about 8% with one thread and 14% with four threads. 
 
-The full-rail sampler already gives more than 150 samples in each 128-token window. A faster sampler therefore adds overhead without making the average more precise. Use the single-rail mode only when you need to see short changes in power. Report the slowdown with your results.
+Over five alternating passes on the example board, the full-rail sampler slowed generation by 1.8% with one thread. It slowed generation by 4.5% with four threads. The single-rail sampler slowed generation by 8.0% and 14.0%, respectively. Both samplers reported the same `VDD_CORE` power during generation, within 0.5%.
+
+The full-rail sampler already gives more than 150 samples in each 128-token window. A faster sampler adds overhead without making the average more precise. Use the single-rail mode only when you need to see short changes in power. Report the slowdown with your results.
 
 ## What you've accomplished
 

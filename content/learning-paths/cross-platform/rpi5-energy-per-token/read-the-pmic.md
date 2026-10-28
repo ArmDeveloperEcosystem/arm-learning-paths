@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Confirm `hwmon` has no power files
 
-Before you can measure energy per token, you need a reliable way to read the power consumption of a Raspberry Pi board. On a general-purpose Arm Linux system, such as a server or cloud instance, the standard approach is the Linux `hwmon` interface.
+Before you can measure energy per token on a Raspberry Pi board, you need a reliable way to read the power consumption. On a general-purpose Arm Linux system, such as a server or cloud instance, the standard approach is the `hwmon` interface.
 
 The Raspberry Pi 5 doesn't expose power or current data through `hwmon`. Instead, use the onboard power management integrated circuit (PMIC). You can query it with the `vcgencmd` tool included in Raspberry Pi OS.
 
@@ -71,9 +71,9 @@ On an idle Raspberry Pi 5, the output is similar to:
       BATT_V volt(25)=0.00085470V
 ```
 
-Twelve rails, such as `VDD_CORE`, `0V8_SW` and `1V1_SYS`, have both a current and a voltage reading. The power of each of these rails is the current multiplied by the voltage. In this output, `VDD_CORE` draws 0.661 A at 0.807 V, which is 0.53 W.
+12 rails, such as `VDD_CORE`, `0V8_SW` and `1V1_SYS`, have both a current and a voltage reading. The power of each of these rails is the current multiplied by the voltage. In the example output, `VDD_CORE` draws 0.661 A at 0.807 V, which is 0.53 W.
 
-`VDD_CORE` is the largest rail at idle. It's the rail that changes most when the Arm cores are busy.
+`VDD_CORE` is the largest rail at idle. It's the rail that changes the most when the Arm cores are busy.
 
 ## Know what the sum of the rails measures
 
@@ -81,13 +81,13 @@ Consider the sum of current times voltage over the rails that report both values
 
 - `EXT5V_V` reports only the 5 V input voltage. There's no input current reading, so the total input power isn't available.
 - The losses in the PMIC regulators, the fan, and USB devices powered from the 5 V input aren't included.
-- On the 2 GB board used here, `DDR_VDD2_A` and `DDR_VDDQ_A` read 0 A at idle. During token generation, `DDR_VDD2` reports up to about 0.3 W and `DDR_VDDQ` stays below 0.06 W. The idle reading of 0 A is therefore likely less than what these channels can resolve. Treat the two DDR rails as a lower bound for memory power. Check them on your own board before drawing conclusions about memory power.
+- On the example 2 GB board, `DDR_VDD2_A` and `DDR_VDDQ_A` read 0 A at idle. During token generation, `DDR_VDD2` reports up to about 0.3 W, and `DDR_VDDQ` stays below 0.06 W. The idle reading of 0 A is therefore likely less than what these channels can resolve. Treat the two DDR rails as a lower bound for memory power. Check them on your own board before drawing conclusions about memory power.
 
 Use the rail sum to compare settings on the same board, for example two thread counts or two clock frequencies. If you need the absolute input power, measure it with a USB-C power meter.
 
 ## Check how fast you can sample
 
-Each call to `vcgencmd pmic_read_adc` takes time. Run 20 consecutive reads, once for all rails and once for a single named channel, to measure the read rate on your board:
+Each call to `vcgencmd pmic_read_adc` takes time. Measure the read rate on your board by running 20 consecutive reads for all rails, then for a single named channel:
 
 ```bash
 time (for i in $(seq 20); do vcgencmd pmic_read_adc > /dev/null; done)
@@ -106,10 +106,10 @@ user	0m0.014s
 sys	0m0.001s
 ```
 
-A full read of every rail takes about 25 ms, so you can sample all rails about 40 times per second. Reading one named channel is several times faster. A token-generation run of a few seconds therefore produces a few hundred samples, which is enough for a stable average.
+A full read of every rail takes about 25 ms, so you can sample all rails about 40 times per second. Reading one named channel is several times faster. A token-generation run of a few seconds therefore produces a few hundred samples. This is enough for a stable average.
 
 ## What you've accomplished and what's next
 
-You can now read PMIC current and voltage on a Raspberry Pi 5 and estimate the power of each rail.
+You can now read PMIC current and voltage on a Raspberry Pi 5, and estimate the power of each rail.
 
 Next, you'll log the power to a file with a timestamp on every sample.

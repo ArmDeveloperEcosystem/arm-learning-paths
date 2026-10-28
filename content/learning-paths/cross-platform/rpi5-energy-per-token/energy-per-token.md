@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Build llama-bench and download a model
 
-If you already have `llama-bench` built in `$HOME/llama.cpp`, skip to [Measure only the token-generation phase](/learning-paths/cross-platform/rpi5-energy-per-token/#measure-only-the-token-generation-phase). Otherwise, install the build tools and build only the `llama-bench` target with one compile job, which keeps memory use low on a 2 GB board:
+If you already have `llama-bench` built in `$HOME/llama.cpp`, skip the build commands. Otherwise, install the build tools and build only the `llama-bench` target with one compile job:
 
 ```bash
 sudo apt update
@@ -21,9 +21,11 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --target llama-bench -j 1
 ```
 
+This keeps memory use low on a 2 GB board.
+
 Your token rates and energy results might differ from the example outputs because llama.cpp changes frequently.
 
-Download the Qwen2.5 0.5B Instruct model in the Q4_0 format:
+Download the Qwen2.5 0.5B Instruct model in the `Q4_0` format:
 
 ```bash
 mkdir -p $HOME/models
@@ -36,11 +38,11 @@ The size of the file is about 429 MB.
 
 A `llama-bench` process first loads the model, then runs a warmup. Only then does the process run the timed repetitions. Loading reads the whole file from storage and draws a different amount of power than token generation. If you average power over the whole process, the result mixes the two and depends on how long loading took.
 
-To exclude loading, the `energy_per_token.py` script runs `llama-bench` with `--progress`. With this option, `llama-bench` prints a line such as `generation run 1/3` immediately before each timed repetition starts. The script records a timestamp for each line as it arrives. The length of each repetition comes from `llama-bench` itself, in the `samples_ns` field of its JSON output. Every repetition therefore has a known start and end time. The script averages only the power samples inside that window.
+To exclude loading, the `energy_per_token.py` script runs `llama-bench` with `--progress`. With this option, `llama-bench` prints a line such as `generation run 1/3` immediately before each timed repetition starts. The script records a timestamp for each line as it arrives. The length of each repetition comes from `llama-bench`, in the `samples_ns` field of its JSON output. Every repetition therefore has a known start and end time. The script averages only the power samples inside that window.
 
 The script also records an idle window before `llama-bench` starts. It saves the output of `vcgencmd get_throttled` and the temperature before and after the run.
 
-The script starts `pmic_sampler.py` from its own directory, so both files need to be in the same directory.
+The script starts `pmic_sampler.py` from its own directory. Both files need to be in the same directory.
 
 Change to the working directory that you created earlier:
 
@@ -256,7 +258,7 @@ The output is similar to:
  27 s  3.91 W G
 ```
 
-Seconds 0 to 9 are the idle window, at about 1.7 W. Power starts to rise at second 10, while `llama-bench` loads the model and runs its warmup, and the first `G` second follows. Within the generation windows, the rail sum stays between 5.1 W and 5.4 W. The last second is lower because it only partly overlaps the end of the run.
+Seconds 0 to 9 are the idle window, at about 1.7 W. Power starts to rise at second 10, while `llama-bench` loads the model and runs its warmup. The first `G` second then follows. Within the generation windows, the rail sum stays between 5.1 W and 5.4 W. The last second is lower because it only partly overlaps the end of the run.
 
 If the `G` marks start before the power rises, or long after it, the timestamps and the power samples aren't aligned. The result in that case isn't valid.
 
