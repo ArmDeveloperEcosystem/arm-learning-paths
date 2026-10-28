@@ -6,11 +6,12 @@ minutes_to_complete: 30
 who_is_this_for: This is an introductory topic for software developers who want to deploy MySQL on Arm.
 
 learning_objectives: 
-    - Identify the various ways MySQL can be deployed.
-    - Interact with a MySQL database using a MySQL client CLI tool.
+    - Run MySQL in a container on an Arm-based Linux server.
+    - Connect to MySQL, create a database, and verify that it can store and retrieve data.
 
 prerequisites:
-    - An Arm based instance from a cloud service provider, or an on-premise Arm server
+    - An Arm-based Linux instance from a cloud service provider or an on-premises Arm server
+    - Docker Engine installed and running on the server
 
 # START generated_summary_faq
 generated_summary_faq:
