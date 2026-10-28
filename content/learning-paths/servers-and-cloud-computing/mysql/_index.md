@@ -10,53 +10,52 @@ learning_objectives:
     - Connect to MySQL, create a database, and verify that it can store and retrieve data.
 
 prerequisites:
-    - An Arm-based Linux instance from a cloud service provider or an on-premises Arm server
+    - An Arm-based Linux cloud instance or on-premises server with at least 2 GiB of available memory
     - Docker Engine installed and running on the server
 
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-10-01T19:37:38Z'
+  generated_at: '2026-10-28T18:45:50Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
-  source_hash: 743cde2f666e32bdd9dd2c412037696d36fbe12c5d89d854b04102d9a74a05ec
-  summary_generated_at: '2026-10-01T19:37:38Z'
-  summary_source_hash: 743cde2f666e32bdd9dd2c412037696d36fbe12c5d89d854b04102d9a74a05ec
-  faq_generated_at: '2026-10-01T19:37:38Z'
-  faq_source_hash: 743cde2f666e32bdd9dd2c412037696d36fbe12c5d89d854b04102d9a74a05ec
+  source_hash: 348a89a04baaedaf9f54c699fea0f15fd66f54aac7a68d55a65cc739b822943c
+  summary_generated_at: '2026-10-28T18:45:50Z'
+  summary_source_hash: 348a89a04baaedaf9f54c699fea0f15fd66f54aac7a68d55a65cc739b822943c
+  faq_generated_at: '2026-10-28T18:45:50Z'
+  faq_source_hash: 348a89a04baaedaf9f54c699fea0f15fd66f54aac7a68d55a65cc739b822943c
   summary: >-
-    You'll deploy MySQL on an Arm-based Linux system and verify that the database is ready to use. First, you'll
-    review deployment options for bare-metal systems, cloud virtual machines, and managed SQL
-    services before choosing an environment. Then, you'll identify MySQL documentation to install
-    and configure the server. You'll connect with the MySQL clients and run SQL commands.
+    You'll deploy MySQL 8.4 on an Arm-based Linux server with Docker Engine. First, you'll check the server
+    architecture and Docker connection. Then, you'll start an Arm64 MySQL container with a persistent
+    volume. You'll connect through `docker exec`, create a test database, and add a sample
+    table. Finally, you'll insert seven rows and verify the stored data.
   # faqs:
-  # - question: Which version of the MySQL reference manual should I use?
+  # - question: How do I check that my server is ready to run the Arm64 MySQL image?
   #   answer: >-
-  #     Use the MySQL reference manual for the version of MySQL you're working with.
-  #     Check the version selected in the documentation before following its installation,
-  #     configuration, or client instructions.
-  # - question: What SQL operations can I try after connecting to MySQL?
+  #     Run `uname -m` and confirm that it prints `aarch64`. Then run `docker info` to check that
+  #     your Docker client can reach Docker Engine. If it can't, use the linked Docker install guide.
+  # - question: How do I keep my MySQL data when I replace the container?
   #   answer: >-
-  #     You can create and select a database, create and inspect a table, insert sample records, and
-  #     query the table to display its contents.
-  # - question: What result should I expect after I install and check MySQL?
+  #     Create the `mysql-data` Docker volume and mount it at `/var/lib/mysql`, as shown in the
+  #     `docker run` command. Your database files then remain in the volume when you replace the
+  #     container.
+  # - question: What should I check if `docker exec` cannot connect to the MySQL container?
   #   answer: >-
-  #     You should have a running MySQL server on an Arm-based Linux system. A successful connection
-  #     with the MySQL client and the ability to issue basic SQL statements indicate that the setup
-  #     is working.
-  # - question: Can I use a managed SQL service instead of installing MySQL myself?
+  #     Run `docker ps --filter name=mysql-arm` to check that the container is running. Check
+  #     `docker logs mysql-arm` and wait for MySQL to report that it is ready for connections.
+  #     Use the container name you chose if it differs from `mysql-arm`.
+  # - question: How do I connect and create the sample database?
   #   answer: >-
-  #     Yes. You can use Amazon Relational Database Service (RDS) and select an Arm-based instance. Amazon RDS handles MySQL installation
-  #     for you. If you use a bare-metal server or cloud VM, review the MySQL installation options and
-  #     choose how to install it yourself.
-  # - question: Where should I start if I don't have an Arm node?
+  #     Run `docker exec -it mysql-arm mysql -uroot -p` and enter your root password. At the
+  #     `mysql>` prompt, run `CREATE DATABASE arm_test;`. You can confirm its creation with
+  #     `SHOW DATABASES;`.
+  # - question: How do I verify that the sample table stores data?
   #   answer: >-
-  #     Provision an Arm environment before you install
-  #     MySQL. For more information, see the [Get started
-  #     with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) Learning Path.
+  #     Select `arm_test`, create the `book` table, and insert the seven sample rows. Run
+  #     `SELECT * FROM book;` and confirm that the query returns seven rows.
 # END generated_summary_faq
 
 author: Jason Andrews

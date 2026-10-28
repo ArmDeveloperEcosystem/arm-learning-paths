@@ -6,13 +6,13 @@ layout: "learningpathall"
 
 ## MySQL installation options
 
-If you're using a cloud service like Amazon Relational Database Service (RDS), the installation of MySQL is handled by those services. However, if you're working with a bare metal or cloud node, there are a few different installation options. You'll configure MySQL on an Arm Linux server using a container image.
+If you're using a cloud service like Amazon Relational Database Service (RDS), the installation of MySQL is handled by those services. However, if you're working with a bare metal or cloud node, there are a few different installation options. 
 
-For other installation approaches, see [Chapter 2 Installing MySQL](https://dev.mysql.com/doc/refman/8.1/en/installing.html) in the MySQL documentation.
+You'll configure MySQL on an Arm Linux server using a container image. For other installation approaches, see [Chapter 2 Installing MySQL](https://dev.mysql.com/doc/refman/8.1/en/installing.html) in the MySQL documentation.
 
 ## Before you begin
 
-You need an Arm-based Linux server with Docker Engine installed and running. Follow the [Docker install guide](https://learn.arm.com/install-guides/docker/) to choose an installation path, or use the [Docker Engine install guide](https://learn.arm.com/install-guides/docker/docker-engine/) for an Arm Linux server.
+You need an Arm-based Linux server with Docker Engine installed and running. For Docker Engine installation instructions, see the [Docker Engine install guide](/install-guides/docker/docker-engine/).
 
 Check the server architecture:
 
@@ -31,8 +31,6 @@ Check that the Docker client can reach Docker Engine:
 ```bash
 docker info
 ```
-
-If the command reports a connection error, follow the [Docker Engine install guide](https://learn.arm.com/install-guides/docker/docker-engine/) before continuing.
 
 ## Start a MySQL container
 
@@ -54,7 +52,7 @@ docker run -d \
   mysql:8.4
 ```
 
-Docker selects the Arm64 image for the server. The port binding makes MySQL available on the server's loopback interface. The volume stores the database outside the container.
+Docker selects the Arm64 image for the server. The port binding makes MySQL available on the loopback interface of the server. The volume stores the database outside the container.
 
 Check that the container is running:
 
@@ -67,7 +65,10 @@ MySQL needs time to initialize on its first start. Check the logs and wait until
 ```bash
 docker logs mysql-arm
 ```
+Ensure that the output includes ` MySQL init process done. Ready for start up.`
 
 ## What you've accomplished and what's next
 
-You can now connect to MySQL and create a database in the running container.
+You've used a container image to install MySQL on your Arm-based Linux instance. 
+
+Next, you'll connect to MySQL and create a database in the running container.

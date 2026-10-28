@@ -65,7 +65,30 @@ DESCRIBE book;
 SELECT * FROM book;
 ```
 
-The query should return seven rows. 
+The output is similar to:
+
+```output
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| name  | char(10)    | YES  |     | NULL    |       |
+| id    | varchar(10) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
++-------+------+
+| name  | id   |
++-------+------+
+| Abook | 10   |
+| Bbook | 20   |
+| Cbook | 20   |
+| Dbook | 30   |
+| Ebook | 45   |
+| Fbook | 40   |
+| Gbook | 69   |
++-------+------+
+7 rows in set (0.00 sec)
+```
 
 ## What you've accomplished
 
