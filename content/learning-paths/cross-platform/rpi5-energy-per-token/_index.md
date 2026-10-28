@@ -1,9 +1,5 @@
 ---
-title: Measure energy per token for llama.cpp on a Raspberry Pi 5 using the PMIC ADC
-
-draft: true
-cascade:
-    draft: true
+title: Measure llama.cpp energy per token on a Raspberry Pi 5
 
 description: Use the Raspberry Pi 5 PMIC ADC and llama.cpp to measure joules per token, then compare energy efficiency across CPU clock caps and thread counts to find the most efficient inference settings.
 

@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Cap the CPU clock
 
-The Linux cpufreq interface sets the highest frequency the CPU governor can choose. On the Raspberry Pi 5, all four cores share one frequency policy, `policy0`. Check the governor, the available frequencies, and the current maximum frequency:
+The Linux `cpufreq` interface sets the highest frequency that the CPU governor can choose. On the Raspberry Pi 5, all four cores share one frequency policy, `policy0`. Check the governor, the available frequencies, and the current maximum frequency:
 
 ```bash
 cat /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
@@ -25,13 +25,15 @@ ondemand
 2400000
 ```
 
-The values are in kHz. With the `ondemand` governor, the Raspberry Pi OS default, the CPU runs at the lowest frequency when idle and moves to `scaling_max_freq` under load. Writing a lower value to `scaling_max_freq` caps the clock:
+The values are in kHz. The `ondemand` governor is the Raspberry Pi OS default. With `ondemand`, the CPU runs at the lowest frequency when idle and moves to `scaling_max_freq` under load. 
+
+Writing a lower value to `scaling_max_freq` caps the clock:
 
 ```bash
 echo 2000000 | sudo tee /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
 ```
 
-To confirm that the cap holds while llama.cpp generates tokens, read the current frequency during a run:
+Confirm that the cap holds while llama.cpp generates tokens. To confirm, read the current frequency during a run:
 
 ```bash
 $HOME/llama.cpp/build/bin/llama-bench -m $HOME/models/qwen2.5-0.5b-instruct-q4_0.gguf -p 0 -n 256 -r 1 -t 1 > /dev/null 2>&1 &
@@ -45,7 +47,7 @@ The expected output is:
 ```
 
 {{% notice Note %}}
-If your governor isn't `ondemand`, for example `userspace` or `powersave`, the CPU doesn't move to `scaling_max_freq` under load. Set the governor with `echo ondemand | sudo tee /sys/devices/system/cpu/cpufreq/policy0/scaling_governor` before you run the sweep, and record the governor with your results.
+If your governor isn't `ondemand`, for example `userspace` or `powersave`, the CPU doesn't move to `scaling_max_freq` under load. Set the governor with `echo ondemand | sudo tee /sys/devices/system/cpu/cpufreq/policy0/scaling_governor` before you run the sweep. Then, record the governor with your results.
 {{% /notice %}}
 
 ## Run the sweep
@@ -98,11 +100,16 @@ cap_GHz threads tok/s  power_W idle_W J/token net_J/token
 
 ## Read the results
 
-Your numbers will differ from these, but look for the same patterns: how tokens per second changes with the thread count, and whether a lower clock reduces the total J per token or only the net J per token. Also compare the `idle_W` column across runs. On the board used here, the idle power moved between about 1.45 W and 1.76 W from run to run. Almost all of this change was on the Wi-Fi rail `3V7_WL_SW`, because the board was controlled over SSH through Wi-Fi. A change of this size can reorder settings that are close, so a single sweep isn't enough to rank them.
+Your numbers will differ from these, but look for the following patterns: 
 
-## Repeat before you decide
+- How tokens per second changes with the thread count
+- Whether a lower clock reduces the total J per token or only the net J per token
 
-The idle power and the temperature drift between runs. Repeat the sweep at least five times, alternating the order of the settings, before you trust a difference of a few percent. For the board used here, five passes in alternating order gave the following means:
+Also compare the `idle_W` column across runs. On the example board, the idle power moved between about 1.45 W and 1.76 W from run to run. Almost all of this change was on the Wi-Fi rail `3V7_WL_SW`. This is because the board was controlled over SSH through Wi-Fi. A change of this size can reorder settings that are close, so a single sweep isn't enough to rank them.
+
+## Repeat the sweep before making a decision
+
+The idle power and the temperature drift between runs. Repeat the sweep at least five times, alternating the order of the settings, before you trust a difference of a few percent. For the example board, five passes in alternating order gave the following means:
 
 | Clock cap | Threads | Tokens per second | Rail sum during generation (W) | J per token | Net J per token |
 |---|---|---|---|---|---|
@@ -116,17 +123,17 @@ The idle power and the temperature drift between runs. Repeat the sweep at least
 | 2.4 GHz | 2 | 31.51 | 4.82 | 0.1529 | 0.1020 |
 | 2.4 GHz | 4 | 24.02 | 5.12 | 0.2131 | 0.1451 |
 
-Across the five passes, the tokens per second of each setting varied by 1.2% or less (coefficient of variation), the J per token by 3.8% or less, and the net J per token by 6.7% or less. `get_throttled` returned `throttled=0x0` before and after every run, and the SoC temperature stayed between 45°C and 51°C.
+Across the five passes, the tokens per second of each setting varied by 1.2% or less (coefficient of variation). The J per token varied by 3.8% or less, and the net J per token by 6.7% or less. `get_throttled` returned `throttled=0x0` before and after every run, and the system-on-chip (SoC) temperature stayed between 45°C and 51°C.
 
-Four threads is the worst setting at every clock cap. At 2.4 GHz, it costs 61% more energy per token than one thread while running 25% slower, even though four is the thread count that `llama-bench` uses by default on this board. Token generation for this model is limited by memory bandwidth, so extra threads add power on `VDD_CORE` without adding tokens.
+Four threads is the worst setting at every clock cap. At 2.4 GHz, it costs 61% more energy per token than one thread while running 25% slower. This is despite four being the thread count that `llama-bench` uses by default on the board. Token generation for this model is limited by memory bandwidth. Extra threads therefore add power on `VDD_CORE` without adding tokens.
 
-With one thread, the three clock caps are within 3% of each other in total J per token. That's inside the run-to-run variation, so this data doesn't rank them. A lower clock reduces the power, but each token takes longer, and the board draws its idle power for longer too.
+With one thread, the three clock caps are within 3% of each other in total J per token. That's inside the run-to-run variation, so this data doesn't rank them. A lower clock reduces the power, but each token takes longer. As a result, the board draws its idle power for longer too.
 
-The net J per token does depend on the clock. One thread at 1.5 GHz uses 30% less net energy per token than one thread at 2.4 GHz, but it generates 32% fewer tokens per second.
+The net J per token does depend on the clock. One thread at 1.5 GHz uses 30% less net energy per token than one thread at 2.4 GHz. However, it generates 32% fewer tokens per second.
 
-Most of the extra power during generation is on `VDD_CORE`. With one thread at 2.4 GHz, `VDD_CORE` rises from 0.42 W at idle to 2.62 W, about 85% of the rise of the rail sum.
+Most of the extra power during generation is on `VDD_CORE`. With one thread at 2.4 GHz, `VDD_CORE` rises from 0.42 W at idle to 2.62 W. This is about 85% of the rise of the rail sum.
 
-Which setting is best depends on what you pay for. If the board runs only this model, the total energy per token decides, and one thread at any clock cap is close to the best. If the board stays on for other work, the net energy per token decides, and a lower clock saves energy at the cost of speed.
+Which setting is best depends on what you pay for. If the board runs only this model, the total energy per token is the decider. One thread at any clock cap is close to the best. If the board stays on for other work, the net energy per token is the decider. A lower clock saves energy at the cost of speed.
 
 ## Measure the cost of the sampler
 
@@ -157,10 +164,12 @@ wrote 3027 samples to over_core_t4/power.csv
 threads 4 core 21.74 tok/s
 ```
 
-The full-rail sampler, at about 40 samples per second, slows token generation by about 2% with one thread and 4% with four threads. The single-rail sampler reads more often, about 100 to 140 samples per second, and costs more: about 8% with one thread and 14% with four threads. Over five alternating passes on the board used here, the full-rail sampler slowed generation by 1.8% with one thread and 4.5% with four threads. The single-rail sampler slowed generation by 8.0% and 14.0%, respectively. Both samplers reported the same `VDD_CORE` power during generation, within 0.5%.
+The full-rail sampler reads about 40 samples per second. It slows token generation by about 2% with one thread and 4% with four threads. The single-rail sampler reads more often, about 100 to 140 samples per second. It costs more: about 8% with one thread and 14% with four threads. Over five alternating passes on the example board, the full-rail sampler slowed generation by 1.8% with one thread and 4.5% with four threads. The single-rail sampler slowed generation by 8.0% and 14.0%, respectively. Both samplers reported the same `VDD_CORE` power during generation, within 0.5%.
 
-The full-rail sampler already gives more than 150 samples in each 128-token window, so a faster sampler adds overhead without making the average more precise. Use the single-rail mode only when you need to see short changes in power, and report the slowdown with your results.
+The full-rail sampler already gives more than 150 samples in each 128-token window. A faster sampler therefore adds overhead without making the average more precise. Use the single-rail mode only when you need to see short changes in power. Report the slowdown with your results.
 
-## Summary
+## What you've accomplished
 
-You have measured the power of a Raspberry Pi 5 from its PMIC, aligned the samples with llama.cpp token generation, and compared joules per token across clock caps and thread counts. The same method works for any workload that prints a marker when its measured phase starts, and for other models: replace the GGUF file and repeat the sweep.
+You've now compared joules per token across clock caps and thread counts. 
+
+You can extend the Learning Path for any workload that prints a marker when its measured phase starts. For other models, replace the GGUF file and repeat the sweep.

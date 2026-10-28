@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Confirm hwmon has no power files
 
-Before you can measure energy per token, you need a reliable way to read the board's power consumption. On a general-purpose Arm Linux system, such as a server or cloud instance, the standard approach is the Linux `hwmon` interface. The Raspberry Pi 5 doesn't expose power or current data through `hwmon`. Instead, use the onboard power management integrated circuit (PMIC). You can query it with the `vcgencmd` tool included in Raspberry Pi OS.
+Before you can measure energy per token, you need a reliable way to read the power consumption of a Raspberry Pi board. On a general-purpose Arm Linux system, such as a server or cloud instance, the standard approach is the Linux `hwmon` interface. The Raspberry Pi 5 doesn't expose power or current data through `hwmon`. Instead, use the onboard power management integrated circuit (PMIC). You can query it with the `vcgencmd` tool included in Raspberry Pi OS.
 
-List the hardware monitoring sensors exposed by `hwmon` on your board to confirm there are no power or current files:
+List the hardware monitoring sensors exposed by `hwmon` on your board to confirm that there are no power or current files:
 
 ```bash
 for d in /sys/class/hwmon/hwmon*; do echo "$d $(cat $d/name): $(ls $d | grep -E '^(power|curr|in|temp|fan)[0-9]' | tr '\n' ' ')"; done
@@ -26,7 +26,7 @@ The output is similar to:
 /sys/class/hwmon/hwmon3 rpi_volt: in0_lcrit_alarm
 ```
 
-The output shows a temperature sensor, an analog-to-digital converter (ADC) with voltage inputs, the fan, and a voltage monitor. There are no power or current files.
+The output shows a temperature sensor and an analog-to-digital converter (ADC) with voltage inputs. It also includes the fan and a voltage monitor. There are no power or current files.
 
 ## Read the PMIC ADC
 
@@ -36,7 +36,9 @@ Read all power rails:
 vcgencmd pmic_read_adc
 ```
 
-The output lists a current reading (`_A`) and a voltage reading (`_V`) for each rail. On an idle Raspberry Pi 5, the output is similar to:
+The output lists a current reading (`_A`) and a voltage reading (`_V`) for each rail. 
+
+On an idle Raspberry Pi 5, the output is similar to:
 
 ```output
  3V7_WL_SW_A current(0)=0.09271335A
@@ -69,15 +71,15 @@ The output lists a current reading (`_A`) and a voltage reading (`_V`) for each 
 
 Twelve rails, such as `VDD_CORE`, `0V8_SW` and `1V1_SYS`, have both a current and a voltage reading. The power of each of these rails is the current multiplied by the voltage. In this output, `VDD_CORE` draws 0.661 A at 0.807 V, which is 0.53 W.
 
-`VDD_CORE` is the largest rail at idle, and it's the rail that changes most when the Arm cores are busy. You see this in the next sections.
+`VDD_CORE` is the largest rail at idle. It's the rail that changes most when the Arm cores are busy. 
 
 ## Know what the sum of the rails measures
 
-The sum of current times voltage over the rails that report both values is a useful measure of how much power the system on chip and its supplies draw. It isn't the power at the wall or at the USB-C input:
+Consider the sum of current times voltage over the rails that report both values. This value is a useful measure of how much power the system on chip and its supplies draw. It isn't the power at the wall or at the USB-C input:
 
 - `EXT5V_V` reports only the 5 V input voltage. There's no input current reading, so the total input power isn't available.
 - The losses in the PMIC regulators, the fan, and USB devices powered from the 5 V input aren't included.
-- On the 2 GB board used here, `DDR_VDD2_A` and `DDR_VDDQ_A` read 0 A at idle. During token generation, `DDR_VDD2` reports up to about 0.3 W and `DDR_VDDQ` stays below 0.06 W. The idle reading of 0 A is therefore likely below what these channels can resolve. Treat the two DDR rails as a lower bound for memory power. Check them on your own board before drawing conclusions about memory power.
+- On the 2 GB board used here, `DDR_VDD2_A` and `DDR_VDDQ_A` read 0 A at idle. During token generation, `DDR_VDD2` reports up to about 0.3 W and `DDR_VDDQ` stays below 0.06 W. The idle reading of 0 A is therefore likely less than what these channels can resolve. Treat the two DDR rails as a lower bound for memory power. Check them on your own board before drawing conclusions about memory power.
 
 Use the rail sum to compare settings on the same board, for example two thread counts or two clock frequencies. If you need the absolute input power, measure it with a USB-C power meter.
 
@@ -104,6 +106,8 @@ sys	0m0.001s
 
 A full read of every rail takes about 25 ms, so you can sample all rails about 40 times per second. Reading one named channel is several times faster. A token-generation run of a few seconds therefore produces a few hundred samples, which is enough for a stable average.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You can now read the power of the board. In the next section, you log it to a file with a timestamp on every sample.
+You can now read the power of a Raspberry Pi 5 board. 
+
+Next, you'll log the power to a file with a timestamp on every sample.
