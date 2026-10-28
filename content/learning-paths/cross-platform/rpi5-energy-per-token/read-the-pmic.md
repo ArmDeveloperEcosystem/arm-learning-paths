@@ -1,15 +1,17 @@
 ---
 title: Read power from the Raspberry Pi 5 PMIC
-description: Use vcgencmd pmic_read_adc to read current and voltage from each Raspberry Pi 5 power rail, compute per-rail power, and understand what the PMIC rail sum does and doesn't include.
+description: Read Raspberry Pi 5 PMIC current and voltage with vcgencmd pmic_read_adc to estimate rail power and understand what the rail sum includes and excludes.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Confirm hwmon has no power files
+## Confirm `hwmon` has no power files
 
-Before you can measure energy per token, you need a reliable way to read the power consumption of a Raspberry Pi board. On a general-purpose Arm Linux system, such as a server or cloud instance, the standard approach is the Linux `hwmon` interface. The Raspberry Pi 5 doesn't expose power or current data through `hwmon`. Instead, use the onboard power management integrated circuit (PMIC). You can query it with the `vcgencmd` tool included in Raspberry Pi OS.
+Before you can measure energy per token, you need a reliable way to read the power consumption of a Raspberry Pi board. On a general-purpose Arm Linux system, such as a server or cloud instance, the standard approach is the Linux `hwmon` interface.
+
+The Raspberry Pi 5 doesn't expose power or current data through `hwmon`. Instead, use the onboard power management integrated circuit (PMIC). You can query it with the `vcgencmd` tool included in Raspberry Pi OS.
 
 List the hardware monitoring sensors exposed by `hwmon` on your board to confirm that there are no power or current files:
 
@@ -36,7 +38,7 @@ Read all power rails:
 vcgencmd pmic_read_adc
 ```
 
-The output lists a current reading (`_A`) and a voltage reading (`_V`) for each rail. 
+The output lists a current reading (`_A`) and a voltage reading (`_V`) for each rail.
 
 On an idle Raspberry Pi 5, the output is similar to:
 
@@ -71,7 +73,7 @@ On an idle Raspberry Pi 5, the output is similar to:
 
 Twelve rails, such as `VDD_CORE`, `0V8_SW` and `1V1_SYS`, have both a current and a voltage reading. The power of each of these rails is the current multiplied by the voltage. In this output, `VDD_CORE` draws 0.661 A at 0.807 V, which is 0.53 W.
 
-`VDD_CORE` is the largest rail at idle. It's the rail that changes most when the Arm cores are busy. 
+`VDD_CORE` is the largest rail at idle. It's the rail that changes most when the Arm cores are busy.
 
 ## Know what the sum of the rails measures
 
@@ -108,6 +110,6 @@ A full read of every rail takes about 25 ms, so you can sample all rails about 4
 
 ## What you've accomplished and what's next
 
-You can now read the power of a Raspberry Pi 5 board. 
+You can now read PMIC current and voltage on a Raspberry Pi 5 and estimate the power of each rail.
 
 Next, you'll log the power to a file with a timestamp on every sample.

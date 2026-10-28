@@ -1,6 +1,6 @@
 ---
 title: Measure joules per token for llama.cpp
-description: Build llama-bench and run a Python script that aligns PMIC power samples with the llama.cpp token-generation phase to compute joules per token with and without idle power.
+description: Build llama-bench and use Python to align Raspberry Pi 5 PMIC samples with llama.cpp token generation and measure joules per token with and without idle power.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -40,7 +40,7 @@ To exclude loading, the `energy_per_token.py` script runs `llama-bench` with `--
 
 The script also records an idle window before `llama-bench` starts. It saves the output of `vcgencmd get_throttled` and the temperature before and after the run.
 
-The script starts `pmic_sampler.py` from its own directory, so both files need to be in the same directory. 
+The script starts `pmic_sampler.py` from its own directory, so both files need to be in the same directory.
 
 Change to the working directory that you created earlier:
 
@@ -256,12 +256,12 @@ The output is similar to:
  27 s  3.91 W G
 ```
 
-Seconds 0 to 9 are the idle window, at about 1.7 W. Power starts to rise at second 10, while `llama-bench` loads the model and runs its warmup, and the first `G` second follows. Within the generation windows, the rail sum stays between 5.1 W and 5.4 W. The last second is lower because it only partly overlaps the end of the run. 
+Seconds 0 to 9 are the idle window, at about 1.7 W. Power starts to rise at second 10, while `llama-bench` loads the model and runs its warmup, and the first `G` second follows. Within the generation windows, the rail sum stays between 5.1 W and 5.4 W. The last second is lower because it only partly overlaps the end of the run.
 
 If the `G` marks start before the power rises, or long after it, the timestamps and the power samples aren't aligned. The result in that case isn't valid.
 
 ## What you've accomplished and what's next
 
-You've now measured joules per token for one setting. 
+You've now measured joules per token for one setting.
 
 Next, you'll repeat the measurement across clock frequencies and thread counts to find the most efficient setting on your board.

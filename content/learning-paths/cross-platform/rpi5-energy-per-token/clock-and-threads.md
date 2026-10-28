@@ -1,6 +1,6 @@
 ---
 title: Compare energy per token across clock caps and thread counts
-description: Cap the Raspberry Pi 5 CPU clock with cpufreq and measure llama.cpp joules per token at one, two, and four threads to find the most energy-efficient setting and the overhead of the power sampler.
+description: Use cpufreq to compare llama.cpp joules per token across Raspberry Pi 5 clock caps at one, two, and four threads, and measure power-sampler overhead.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -25,7 +25,7 @@ ondemand
 2400000
 ```
 
-The values are in kHz. The `ondemand` governor is the Raspberry Pi OS default. With `ondemand`, the CPU runs at the lowest frequency when idle and moves to `scaling_max_freq` under load. 
+The values are in kHz. The `ondemand` governor is the Raspberry Pi OS default. With `ondemand`, the CPU runs at the lowest frequency when idle and moves to `scaling_max_freq` under load.
 
 Writing a lower value to `scaling_max_freq` caps the clock:
 
@@ -33,7 +33,7 @@ Writing a lower value to `scaling_max_freq` caps the clock:
 echo 2000000 | sudo tee /sys/devices/system/cpu/cpufreq/policy0/scaling_max_freq
 ```
 
-Confirm that the cap holds while llama.cpp generates tokens. To confirm, read the current frequency during a run:
+To confirm that the cap holds while llama.cpp generates tokens, read the current frequency during a run:
 
 ```bash
 $HOME/llama.cpp/build/bin/llama-bench -m $HOME/models/qwen2.5-0.5b-instruct-q4_0.gguf -p 0 -n 256 -r 1 -t 1 > /dev/null 2>&1 &
@@ -100,7 +100,7 @@ cap_GHz threads tok/s  power_W idle_W J/token net_J/token
 
 ## Read the results
 
-Your numbers will differ from these, but look for the following patterns: 
+Your numbers will differ from these, but look for the following patterns:
 
 - How tokens per second changes with the thread count
 - Whether a lower clock reduces the total J per token or only the net J per token
@@ -149,6 +149,8 @@ for t in 1 4; do
 done
 ```
 
+In the output, `none` means no sampler, `full` means the full-rail sampler, and `core` means the single-rail sampler reading `VDD_CORE`.
+
 The output is similar to:
 
 ```output
@@ -170,6 +172,6 @@ The full-rail sampler already gives more than 150 samples in each 128-token wind
 
 ## What you've accomplished
 
-You've now compared joules per token across clock caps and thread counts. 
+You've now compared joules per token across clock caps and thread counts.
 
 You can extend the Learning Path for any workload that prints a marker when its measured phase starts. For other models, replace the GGUF file and repeat the sweep.

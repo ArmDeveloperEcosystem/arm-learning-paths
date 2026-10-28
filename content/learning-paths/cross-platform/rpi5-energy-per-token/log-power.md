@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Create the sampler
 
-To compute energy, you need power samples with a timestamp on each one. When you have timestamped samples, you can select only the samples that fall inside a measurement window. 
+To compute energy, you need power samples with a timestamp on each one. When you have timestamped samples, you can select only the samples that fall inside a measurement window.
 
 The following sample polling script reads the power management integrated circuit (PMIC) at regular intervals. It records each reading with a timestamp.
 
@@ -104,7 +104,7 @@ The script calls `vcgencmd pmic_read_adc` and matches the current line of each r
 - `total_W` is the sum of the power of all rails that report both a current and a voltage.
 - One column per rail follows, in watts.
 
-The script stops cleanly when it receives **Ctrl+C** or a `kill` signal, or after `--duration` seconds.
+The script stops cleanly when it receives **Ctrl+C** or a stop signal, or after `--duration` seconds.
 
 ## Log an idle board
 
@@ -158,6 +158,6 @@ The sampler runs on the same four Cortex-A76 cores as the workload you measure, 
 
 ## What you've accomplished and what's next
 
-You can now log power with timestamps. 
+You can now log power with timestamps.
 
 Next, you'll line these samples up with llama.cpp token generation and compute joules per token.
