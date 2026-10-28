@@ -79,6 +79,7 @@ operatingsystems:
 tools_software_languages:
     - SQL
     - MySQL
+    - Docker
 
 further_reading:
     - resource:
@@ -86,13 +87,17 @@ further_reading:
         link: https://dev.mysql.com/doc/refman/8.0/en/installing.html
         type: documentation
     - resource:
-        title: RDS
-        link: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html
-        type: documentation
+        title: Tune MySQL performance on Arm-based platforms
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/mysql_tune/
+        type: learning-path
     - resource:
-        title: Ansible
-        link: https://docs.ansible.com/
-        type: documentation
+        title: Benchmarking MySQL with Sysbench
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/mysql_benchmark/
+        type: learning-path
+    - resource:
+        title: Deploy MySQL on Microsoft Azure Cobalt 100 processors
+        link: https://learn.arm.com/learning-paths/servers-and-cloud-computing/mysql-azure/
+        type: learning-path
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
