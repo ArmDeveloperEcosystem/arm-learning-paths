@@ -52,7 +52,7 @@ The decode knee is at two threads. Using four threads reduces decode performance
 
 Now look at the `pp512` rows. Prefill keeps rising up to four threads, because it's compute-bound.
 
-Prefill scales well with more threads, reaching 3.10x the one-thread result when using four threads.
+Prefill scales well with more threads, reaching 3.10 times the one-thread result when using four threads.
 
 You can draw the following conclusions from this:
 

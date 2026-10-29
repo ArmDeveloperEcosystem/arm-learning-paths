@@ -36,7 +36,7 @@ sudo apt install -y git cmake build-essential python3-venv python3-pip
 
 ## Build llama-bench
 
-You need only the `llama-bench` tool from llama.cpp. Building one target, with one compile job, keeps memory use low on a 2 GB board:
+You need only the `llama-bench` tool from llama.cpp. Building one target with one compile job keeps memory use low on a 2 GB board:
 
 ```bash
 cd $HOME
@@ -47,7 +47,7 @@ cmake -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --target llama-bench -j 1
 ```
 
-On the Raspberry Pi 5 used to test the Learning Path, the clone and build took about 11 minutes.
+The clone and build took about 11 minutes on the test Raspberry Pi 5.
 
 {{% notice Note %}}
 On a board with more memory, you can increase `-j` to the number of cores to build faster. On a 2 GB Raspberry Pi 5, keep `-j 1`. Parallel compilation of large llama.cpp source files can exhaust memory and make the board unresponsive.
@@ -55,7 +55,7 @@ On a board with more memory, you can increase `-j` to the number of cores to bui
 
 Record the commit hash printed by `git rev-parse`. You need it when you compare results. The outputs in the Learning Path come from llama.cpp commit `836d571`.
 
-To confirm that the build enabled DotProd, look in the output of the `cmake -B build` command. Search for the line that starts with `-- Adding CPU backend variant`. 
+To confirm that the build enabled DotProd, check the output of the `cmake -B build` command. Search for the line that starts with `-- Adding CPU backend variant`. 
 
 On a Raspberry Pi 5, the output is similar to:
 
@@ -81,7 +81,7 @@ options:
 
 ## Download three models
 
-The tool fits a line through several models of different sizes, so you need at least three models. Use the official Qwen2.5 GGUF files, which aren't gated and fit in 2 GB of RAM:
+The tool fits a line through several models of different sizes, so you need at least three models. Use the official Qwen2.5 GGUF files, which fit in 2 GB of RAM and aren't gated:
 
 ```bash
 mkdir -p $HOME/models && cd $HOME/models
@@ -102,7 +102,7 @@ The output is similar to:
 ```
 
 {{% notice Note %}}
-Use files from the same publisher and the same conversion pipeline when you compare them. Two files with the same format label can contain different tensor types, depending on how they were produced. This changes their speed.
+Use files from the same publisher and the same conversion pipeline for comparison. Two files with the same format label can contain different tensor types, depending on how they were produced. This changes their speed.
 {{% /notice %}}
 
 ## Install llama-roofline

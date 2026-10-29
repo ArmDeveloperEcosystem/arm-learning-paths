@@ -9,11 +9,11 @@ layout: learningpathall
 
 ## Prepare the system for measurement
 
-After setting up llama-roofline and downloading three models, you're now ready to measure memory bandwidth.
+After setting up llama-roofline and downloading three models, you're ready to measure memory bandwidth.
 
 Background load lowers measured bandwidth and makes every result that depends on it wrong. 
 
-Before you measure, complete the following steps:
+Before you measure bandwidth, complete the following steps:
 
 1. Close other applications and stop any running benchmarks.
 2. Check that the board is idle and has free memory:
@@ -67,7 +67,7 @@ this is a measured lower bound on true peak; pass it to `run` with --peak-bw 13.
 wrote /home/manu/lp_capture/20261003_2358/membw_1.json
 ```
 
-On a Raspberry Pi 5, one thread already reaches the highest read rate. Adding threads lowers it. This is the first sign that decode, which streams the weights from memory, doesn't need all four cores.
+One thread already reaches the highest read rate. Adding threads lowers it. This is the first sign that decode, which streams the weights from memory, doesn't need all four cores.
 
 {{% notice Note %}}
 The ceiling is a measured lower bound on the true peak. llama.cpp hand-written kernels can stream faster than the Python kernels that the tool uses. If decode exceeds the measured ceiling, llama-roofline warns you and treats the percentages as lower bounds.
@@ -85,4 +85,4 @@ If your runs differ by more than 5 percent, something else is using memory bandw
 
 You've measured how many bytes per second your Arm system can read from DRAM. This is the roof that decode runs into. 
 
-Next, you'll measure decode and prefill and compare them with this ceiling.
+Next, you'll measure decode and prefill, and compare them with this ceiling.

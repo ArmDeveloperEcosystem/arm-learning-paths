@@ -6,7 +6,7 @@ description: Use llama-roofline on Arm Linux to diagnose memory-bound llama.cpp 
 
 minutes_to_complete: 45
 
-who_is_this_for: This topic helps developers and performance engineers choose llama.cpp settings from measured token throughput on Arm CPUs, using a Raspberry Pi 5 or another Arm Linux system.
+who_is_this_for: This topic is for developers and performance engineers who want to choose llama.cpp settings from measured token throughput on Arm CPUs, using a Raspberry Pi 5 or another Arm Linux system.
 
 learning_objectives:
     - Measure the sustained memory-read bandwidth of an Arm Linux system.

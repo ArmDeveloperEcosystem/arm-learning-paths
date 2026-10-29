@@ -39,7 +39,7 @@ The equation gives you three practical rules:
 3. It runs `llama-bench` across a thread sweep.
 4. It fits `tokens/s = bandwidth / bytes` across your models and reports how close each model is to the ceiling, in plain language.
 
-The answer tells you which setting moves your tokens per second on this specific Arm system.
+The answer tells you which setting moves your tokens per second on your Arm system.
 
 ## The reference platform
 
@@ -48,7 +48,7 @@ The Learning Path was tested on a Raspberry Pi 5. Every output shown in the Lear
 | Item | Raspberry Pi 5 |
 |---|---|
 | CPU | 4 x Arm Cortex-A76 at up to 2.4 GHz |
-| Architecture features used by llama.cpp | NEON (ASIMD), DotProd |
+| Architecture features used by llama.cpp | Neon (ASIMD), DotProd |
 | Cache | 512 KB L2 per core, 2 MB shared L3 |
 | Memory | 2 GB LPDDR4X, 32-bit interface |
 | Operating system | 64-bit Raspberry Pi OS (Debian 12), kernel 6.12 |

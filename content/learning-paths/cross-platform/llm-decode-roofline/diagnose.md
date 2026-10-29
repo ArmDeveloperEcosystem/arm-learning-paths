@@ -47,7 +47,7 @@ The output is similar to:
   model sizes the substitution can take over the file.
 ```
 
-The `per token` line is smaller than the file size. The token embedding table is part of the file. Decode looks up only one row of the table per token. It doesn't stream all of it. For this 0.5B file, decode reads 346 MB of the 429 MB file, or 82 percent.
+The `per token` line is smaller than the file size. The token embedding table is part of the file. Decode looks up only one row of the table per token. Decode doesn't stream all of it. For this 0.5B file, decode reads 346 MB of the 429 MB file, or 82 percent.
 
 Using the file size would make the model look slower relative to the ceiling than it is.
 
@@ -191,11 +191,11 @@ llama-roofline bases its verdict on the median percentage across your models. Us
 | 40 to 70 percent | Partly memory-bound | Check thread count and background load first |
 | Below 40 percent | Something other than memory is limiting decode | Check throttling, running more threads than cores, and swap |
 
-The `WHAT WAS MEASURED` table lists each model with its size and decode and prefill speed. It also lists the best thread count, achieved bandwidth and percentage of the ceiling. 
+The `WHAT WAS MEASURED` table lists each model with its size and decode and prefill speed. It also lists the best thread count, achieved bandwidth, and percentage of the ceiling. 
 
-The report section named `THE ROOFLINE` prints the fitted line and its R squared value. An R squared close to 1 means that the bandwidth equation explains your results. 
+The report section named `THE ROOFLINE` prints the fitted line and its R squared value. An R squared value close to 1 means that the bandwidth equation explains your results. 
 
-If R squared is less than 0.90, llama-roofline adds a warning. The warning means that something other than memory bandwidth is affecting decode.
+If the R squared value is less than 0.90, llama-roofline adds a warning. The warning means that something other than memory bandwidth is affecting decode.
 
 ## Save the shareable report
 
