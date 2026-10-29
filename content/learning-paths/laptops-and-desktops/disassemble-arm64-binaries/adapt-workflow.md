@@ -1,5 +1,6 @@
 ---
 title: Automate and adapt the inspection workflow
+description: Automate the static SME/SME2 check for Mach-O binaries and identify how to adapt the evidence sequence to other Arm extensions and binary formats.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
@@ -55,7 +56,7 @@ Run the script against the positive fixture:
 ./verify-static-sme2.sh sme2-positive evidence-positive
 ```
 
-The script returns status 0 and reports:
+The script returns status 0. The expected output is:
 
 ```output
 PASS: strict SME/SME2 instructions were decoded from sme2-positive
@@ -68,7 +69,7 @@ Now run the same check against the string-only control:
 ./verify-static-sme2.sh string-only-control evidence-string-only
 ```
 
-The script returns status 1 and reports:
+The script returns status 1. The expected output is:
 
 ```output
 FAIL: no strict SME/SME2 instruction was decoded from string-only-control
@@ -103,9 +104,9 @@ You can apply the same sequence to SVE and SVE2, Dot Product, Int8 Matrix Multip
 
 Don't publish a supposedly complete regular expression based only on mnemonic names. Ground the predicate in the [A64 Instruction Set Architecture](https://developer.arm.com/documentation/ddi0602/latest/) and validate it with these controls:
 
-- A positive artifact containing known extension instructions in executable code.
-- A negative artifact containing nearby base-architecture or related-extension instructions.
-- A string-only artifact containing feature names and mnemonic-like text but no matching instruction.
+- A positive artifact containing known extension instructions in executable code
+- A negative artifact containing nearby base-architecture or related-extension instructions
+- A string-only artifact containing feature names and mnemonic-like text but no matching instruction
 
 For example, a Dot Product predicate must distinguish the intended dot-product encodings and operand types from unrelated multiply-accumulate operations. A Pointer Authentication predicate must account for instruction aliases and whether hints decode differently under the selected architecture features. These are validation requirements, not complete predicates.
 
@@ -121,6 +122,6 @@ The evidence model is independent of the object format, but the artifact and sec
 
 Don't use the Mach-O commands in this Learning Path to claim that a separate Neoverse Linux artifact contains the same code. Inspect the actual ELF executable or shared library that you plan to release on the Neoverse target.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You can now automate the static instruction check and adapt the inspection method to other Arm extensions and binary formats. Next, you'll learn when to use static inspection and when to use Arm Performix to investigate runtime performance.

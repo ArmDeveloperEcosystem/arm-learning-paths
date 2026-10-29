@@ -1,27 +1,28 @@
 ---
 title: Disassemble and verify SME2
+description: Cross-check SME/SME2 instruction bytes, operands, and static addresses with otool and llvm-objdump, then validate the checks against negative controls.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Encoding and Decoding Mnemonics and Operands
+## Encode and decode mnemonics and operands
 
-Assemblers encode Arm Instruction Set Architecture (ISA) instruction mnemonics and operands into four byte, 32-bit words.  You can use a disassembler to decode those ISA words to recover the mnemonics and its operands.
+Assemblers encode Arm Instruction Set Architecture (ISA) instruction mnemonics and operands into four-byte, 32-bit words. You can use a disassembler to decode those ISA words to recover the mnemonics and their operands.
 
-Use the true-positive fixture you created earlier as an example of this assembly/disassemly concept.  When you wrote the source, you included this line:
+Use the true-positive fixture you created earlier as an example of assembly and disassembly. When you wrote the source, you included this line:
 
-```
+```output
 fmopa za0.s, p0/m, p0/m, z0.s, z1.s
 ```
 
-Where the mnemonic is `fmopa`, and the following operands identify the ZA tile, predicate registers, and vector registers.
+The mnemonic is `fmopa`, and the following operands identify the ZA tile, predicate registers, and vector registers.
 
 
 When assembled, that mnemonic (za0.s) and operand (p0/m, p0/m, z0.s, z1.s) are converted to four bytes (in little endian format) as 00 00 81 80, which are also represented as 0x80810000 (in big endian format).  
 
-```
+```output
 00 00 81 80 -> 0x80810000 -> fmopa za0.s, p0/m, p0/m, z0.s, z1.s
 ```
 
@@ -173,6 +174,6 @@ plain-arm64-control: no strict hits
 
 The string-only control still contains the SME2 hint and symbol you observed earlier. Its zero instruction hits confirm that the predicate scans decoded executable code rather than feature-related words.
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
 You verified SME/SME2 instructions in the binary by examining their bytes, operands, addresses, and surrounding code. Next, you'll combine these checks in a reusable script and adapt the method to other Arm extensions and binary formats.

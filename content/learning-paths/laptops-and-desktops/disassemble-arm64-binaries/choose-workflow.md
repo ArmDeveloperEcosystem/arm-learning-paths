@@ -1,5 +1,6 @@
 ---
 title: Choose static inspection or Arm Performix
+description: Choose between static disassembly and Arm Performix profiling to answer questions about instruction presence, runtime execution, and performance.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -28,4 +29,4 @@ You will often use both workflows. Start with static inspection to confirm that 
 
 ## What you've learned and what's next
 
-You can now choose an evidence method without mixing static presence, runtime execution, and performance claims. The next page lists the Learning Path resources you can use to continue.
+You can now choose an evidence method without mixing static presence, runtime execution, and performance claims. Use this Learning Path's further-reading resources to continue.

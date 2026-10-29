@@ -9,7 +9,7 @@ description: Learn how to disassemble a final arm64 Mach-O executable and verify
 
 minutes_to_complete: 45
 
-who_is_this_for: This is for developers who need to verify that Arm architecture extension optimizations are present in a final binary.  Its also an excellent way to learn the basics of binary disassembly on Arm-based systems.
+who_is_this_for: You want to verify that Arm architecture extension optimizations are present in a final binary and learn the basics of binary disassembly on Arm-based systems.
 
 learning_objectives:
     - Identify the arm64 slice, executable code, symbols, and supporting strings in a Mach-O binary.
@@ -22,6 +22,10 @@ prerequisites:
     - Basic familiarity with C, assembly language, and the macOS Terminal.
 
 author: Geremy Cohen
+
+generate_summary_faq: false
+rerun_summary: false
+rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
@@ -63,7 +67,7 @@ further_reading:
         link: /learning-paths/servers-and-cloud-computing/performix-memory-access/
         type: learning-path
     - resource:
-        title: Optimize memory access behavior using Arm Performix and the Arm MCP Server
+        title: Arm Scalable Matrix Extension 2 (SME2)
         link: https://www.arm.com/technologies/sme2
         type: documentation
 

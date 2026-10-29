@@ -1,5 +1,6 @@
 ---
 title: Inspect binary context
+description: Inspect strings and symbols in arm64 Mach-O fixtures to distinguish supporting SME2 hints from instruction evidence.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -17,7 +18,7 @@ BIN=sme2-positive
 strings -arch arm64 "$BIN" | grep -Ei 'FEAT_SME|FEAT_SME2|sme2|matrix|kernel'
 ```
 
-The expected output includes:
+The output includes the feature-name string. The output is similar to:
 
 ```output
 hw.optional.arm.FEAT_SME2
@@ -73,6 +74,6 @@ You can see how SME2 presence can be detected methodically:
 | String or symbol | Feature awareness and attribution | Extension instruction presence or execution |
 | Decoded strict instruction in executable code | Static presence | Runtime execution, dispatch, or performance |
 
-## What you've learned and what's next
+## What you've accomplished and what's next
 
-You can now use strings and symbols to help assemble evidence of SME2 presence... next, you will perform actual disassembly methods to detect SME2 presence.
+You inspected strings and symbols to collect attribution hints without treating them as instruction proof. Next, you'll disassemble the binary to check for SME2 instructions.
