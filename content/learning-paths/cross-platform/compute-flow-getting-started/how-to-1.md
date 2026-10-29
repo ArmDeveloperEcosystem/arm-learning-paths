@@ -1,49 +1,51 @@
 ---
-title: Understand Compute Flow
-description: Understand how you can combine local AI models through Compute Flow bricks, manifests, and shared interfaces.
+title: What is Compute Flow
+description: Learn about Compute Flow bricks, manifests, and shared interfaces to combine multiple AI models and run them locally on-device.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Connect models into a local application
+## Combine Compute Flow bricks to connect multiple AI models into a local application.
 
-Compute Flow is an SDK for building AI applications from reusable components called *bricks*. Each brick exposes an AI capability through a shared interface for that capability. You connect those interfaces in Python or C++ while the brick handles model-specific inference. Compute Flow brings together runtimes such as LiteRT, ONNX Runtime, ExecuTorch, and llama.cpp for Arm devices.
+Compute Flow is an SDK for building AI applications from reusable AI building blocks called *bricks*. Each brick exposes an AI capability through a shared interface for that capability. You connect those interfaces in Python or C++ while the brick handles model-specific inference.
 
-We'll use the example of an application that translates speech needs several models. One recognizes speech, another translates text, and a third generates audio. These models can use different inference runtimes, tensor formats, tokenizers, and configuration files. Connecting them directly means learning each runtime's API and writing code for each model. Replacing a model can mean rewriting that integration.
+A *brick type* defines an input and output contract. A *brick variant* implements that contract using a particular model family. For example, Parakeet TDT and Moonshine are different speech-to-text variants. Both accept audio and its sample rate, and return text.
+
+In this Learning Path, we'll use three different bricks to build the audio translation application. The first recognises human speech, the second translates speech into text, the third generate audio. Each of these bricks use different models to get to our aims of translating English into French.
+
+The figure below illustrate the three stages of our audio translation application, pointing out the AI models that are used at each stage.
 
 You'll use Python to translate a short English recording into French speech on your Apple Silicon Mac. The application processes the recording through three stages:
 
 ```text
-English WAV
+English WAV (Input)
     |
     v
-Speech-to-text: Parakeet TDT
+Stage 1. Speech-to-text: Parakeet TDT
     | English text
     v
-Text translation: Hy-MT2
+Stage 2. Text translation: Hy-MT2
     | French text
     v
-Text-to-speech: Qwen3-TTS
+Stage 3. Text-to-speech: Qwen3-TTS
     |
     v
-French WAV
+French WAV (Output)
 ```
 
-Python coordinates the stages: it passes the transcription to the translation brick, then passes the translation to the speech synthesis brick. Compute Flow doesn't automatically assemble this pipeline for you.
+Python coordinates the stages: it passes the speech-to-text transcription to the translation brick, then passes the translation to the speech synthesis brick. Compute Flow doesn't automatically assemble this pipeline for you.
 
 ## Separate the application from the model
-
-A *brick type* defines an input and output contract. A *brick variant* implements that contract using a particular model family. For example, Parakeet TDT and Moonshine are different speech-to-text variants. Both accept audio and its sample rate, and return text.
 
 Your pipeline uses these contracts:
 
 | Stage | Brick type | Input | Output |
 | --- | --- | --- | --- |
-| Recognize speech | `stt` | `raw_wav` and `sample_rate` | `text` |
+| Audio transcription | `speech-to-text (stt)` | `raw_wav` and `sample_rate` | `text` |
 | Translate text | `lm_text` | `text_prompt` | `text` |
-| Synthesize speech | `tts` | `text_prompt` | `left_channel`, `right_channel`, and `sample_rate` |
+| Synthesize speech | `text-to-speech (tts)` | `text_prompt` | `left_channel`, `right_channel`, and `sample_rate` |
 
 ### Understand the model manifest
 
@@ -53,18 +55,13 @@ The manifest describes model filenames, inference runtimes, model-specific tenso
 
 For example, the Parakeet package includes `parakeet_tdt_0_6b_v3_manifest.json`. Your Python application reads this file with `cf.load_manifest()`, selects the implementation with `cf.load_brick()`, and prepares the models with `brick.setup()`. This keeps model-specific file paths and runtime configuration out of your application code.
 
-## Use versioned brick APIs
-
-From Python or C++, you use a brick's versioned input/output contract and shared execution methods such as `setup()`, `run()`, and `reset_states()`. Parakeet and Moonshine both implement `stt.v1`, so your script keeps the same input and output handling when switching between them. Compute Flow's compatibility policy requires newer releases to support bricks using earlier API versions.
-
-For details, see the [Brick API guide](https://github.com/ARM-software/ComputeFlow/blob/main/docs/design/brick_api.md), [Brick Runtime Interface V1](https://github.com/ARM-software/ComputeFlow/blob/main/docs/design/brick_runtime_interface_v1.md), and [documentation README](https://github.com/ARM-software/ComputeFlow/blob/main/docs/README.md). These links use the public repository URL placeholder.
-
 ## Prepare once, then run locally
 
-*Brick Manager*, the `compute-flow` command, discovers bricks, installs their source and model packages, and builds the native libraries and Python bindings. You'll update its registry, install the three models, and build for your Mac with `compute-flow build native`.
+To discover and install the required Compute Flow Bricks, alongside with the selected AI models for our audio-to-audio translation pipeline, we will use Compute Flow Brick Manager.
+The Brick Manager is responsible for installing the bricks type and brick variant based on users' selected AI model, and builds the user's developed application for the selected runtime platforms.
 
 Setup needs network access to download dependencies and model packages. After setup, the example reads the installed assets and performs inference on your Mac. It writes a WAV file locally and doesn't call a hosted inference service. You don't need a microphone because the input recording is included in a model package.
 
 ## What you've learned
 
-Compute Flow separates your application from model-specific inference through versioned brick APIs and manifests. Brick Manager prepares the implementations and model assets, while your Python code connects their inputs and outputs. Next, you'll build and run the speech translation pipeline on your Mac.
+Compute Flow provides reusable AI building blocks that you can combine together to build AI application to deploy locally on your device. Compute Flows Bricks allow users to focus on the AI models actions, inputs and outputs, rather than the AI models inference, easing out the combination and replacement of different AI models.
