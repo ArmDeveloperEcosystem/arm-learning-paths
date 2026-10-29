@@ -18,8 +18,9 @@ learning_objectives:
     - Generate an AI insight and validate its recommendations against profile evidence.
 
 prerequisites:
-    - Arm Performix version 2026.2.5 or later installed. For installation and target setup instructions, see the [Arm Performix install guide](/install-guides/performix/).
-    - Visual Studio Code with the Claude Code extension installed
+    - Arm Performix version 2026.2.5 or later installed. For installation instructions, see the [Arm Performix install guide](/install-guides/performix/).
+    - A completed Code Hotspots run, or a configured Arm Linux target with a workload to profile. To configure a new target, follow [Set up Arm Performix](/learning-paths/servers-and-cloud-computing/performix-get-started/add_target/).
+    - Visual Studio Code with the Claude Code extension version 2.1.261 or later installed to add MCP servers through the extension's interface
     - Access to Claude Code through a Claude account, or an organization-approved Anthropic API key provided through the `ANTHROPIC_API_KEY` environment variable
     - Permission from your organization to share profile data, symbols, source excerpts, disassembly excerpts, and performance metrics with Claude Code
 
