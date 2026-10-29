@@ -1,9 +1,6 @@
 ---
 title: Measure whether LLM token generation is memory-bound on Arm CPUs with llama-roofline
 
-draft: true
-cascade:
-    draft: true
 
 description: Use llama-roofline on Arm Linux to diagnose memory-bound llama.cpp token generation and choose thread counts and model size from measurements.
 
@@ -15,13 +12,13 @@ learning_objectives:
     - Measure the sustained memory-read bandwidth of an Arm Linux system.
     - Determine whether llama.cpp token generation is memory-bound on your Arm CPU, and by how much, using llama-roofline.
     - Choose a decode thread count and a model size from measured data instead of defaults.
-    - Explain why prompt processing and token generation need different thread counts.
+    - Identify why prompt processing and token generation need different thread counts.
 
 prerequisites:
-    - A Raspberry Pi 5 with 2 GB of RAM or more, running 64-bit Raspberry Pi OS with an active cooler, or another 64-bit Arm Linux system.
-    - Python 3 with the venv module.
-    - About 3.3 GB of free disk space for llama.cpp and three GGUF models.
-    - Familiarity with building software with CMake on Linux.
+    - A 64-bit Arm Linux system, such as a Raspberry Pi 5 with 2 GB of RAM and an active cooler
+    - Python 3 with the venv module
+    - About 3.3 GB of free disk space for llama.cpp and three GGUF models
+    - Familiarity with building software with CMake on Linux
 
 author: Manu Nicholas Jacob
 

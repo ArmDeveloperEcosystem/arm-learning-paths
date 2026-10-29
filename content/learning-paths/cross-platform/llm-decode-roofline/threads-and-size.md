@@ -9,6 +9,8 @@ layout: learningpathall
 
 ## Measure the thread sweep directly
 
+You're now ready to make decisions based on the decode and prefill diagnosis that you performed. 
+
 The diagnosis picks the best thread count for each model. To see the whole sweep, run `llama-bench` directly on one model:
 
 ```bash
@@ -40,51 +42,50 @@ Each row of the table is one test at one thread count:
 - `tg128` is token generation of 128 tokens.
 - `t/s` is tokens per second, with the standard deviation over five repetitions.
 
-This table was measured on a Raspberry Pi 5 with 2 GB of RAM. The build uses llama.cpp commit `836d571`, GCC 12.2.0 and the default Release flags. The board used the `ondemand` governor. The `get_throttled` command reported `throttled=0x0` before and after the sweep. Threads were not pinned to cores.
+The examples measurements were made using a Raspberry Pi 5 with 2 GB of RAM. The build used llama.cpp commit `836d571`, GCC 12.2.0 and the default Release flags. The board used the `ondemand` governor. The `get_throttled` command reported `throttled=0x0` before and after the sweep. Threads weren't pinned to cores.
 
 ## Find the decode knee
 
 Look at the `tg128` rows as threads increase. On a memory-bound system, decode stops improving after a small number of threads. Extra threads wait on the same memory, and decode performance can fall as you add more.
 
-The decode knee is at two threads, while using four threads reduces decode performance by 19.4%.
+The decode knee is at two threads. Using four threads reduces decode performance by 19.4%.
 
-Now look at the `pp512` rows. Prefill keeps rising up to four threads, because it is compute-bound.
+Now look at the `pp512` rows. Prefill keeps rising up to four threads, because it's compute-bound.
 
 Prefill scales well with more threads, reaching 3.10x the one-thread result when using four threads.
 
-This means:
+You can draw the following conclusions from this:
 
-- For chat and other workloads with short prompts and long answers, set `-t` to the decode knee.
-- For summarization and other workloads with long prompts and short answers, use all cores.
-- Always set `-t` explicitly. The default is not chosen for your workload.
+- For workloads with short prompts and long answers, such as a chat, set `-t` to the decode knee.
+- For workloads with long prompts and short answers, such as summarization, use all cores.
+- Always set `-t` explicitly. The default isn't chosen for your workload.
 
 ## Predict the effect of a smaller model
 
-Because decode is memory-bound, the ratio of model sizes predicts the ratio of decode speeds. The `WHAT TO CHANGE` section of the diagnosis compares two of your models:
+Because decode is memory-bound, the ratio of model sizes predicts the ratio of decode speeds. 
+
+The `WHAT TO CHANGE` section of the diagnosis compares two of your models:
 
 ```output
 Measured here: qwen2.5-0.5b-instruct-q4_0 is 2.68x smaller than qwen2.5-1.5b-instruct-q4_0 and decodes 2.75x faster.
 ```
 
-If the size ratio and the speed ratio are close, the bandwidth equation holds on your system, and you can estimate the decode speed of any dense model before you download it:
+If the size ratio and the speed ratio are close, the bandwidth equation holds on your system. 
+
+You can then estimate the decode speed of any dense model before you download it:
 
 ```text
 expected tokens/s  =  fitted bandwidth  /  bytes per token
 ```
 
-For example, with the fitted bandwidth of 11.82 GB/s measured on the Raspberry Pi 5, a model that reads 2 GB per token decodes at about 6 tokens/s.
+For example, consider the fitted bandwidth of 11.82 GB/s measured on the Raspberry Pi 5. On a Pi with that bandwidth, a model that reads 2 GB per token decodes at about 6 tokens/s.
 
 {{% notice Note %}}
-This estimate is a short-context result. As the KV cache grows during a long conversation, decode reads more than the weights and slows down beyond what the equation predicts. Use the `--depth` option of `llama-roofline run` to measure decode with tokens already in the context.
+This estimate is a short-context result. As the key-value (KV) cache grows during a long conversation, decode reads more than the weights. It slows down beyond what the equation predicts. Use the `--depth` option of `llama-roofline run` to measure decode with tokens already in the context.
 {{% /notice %}}
 
 ## What you've accomplished
 
-You have:
+You've now chosen thread counts for decode and prefill from measurements. You've learned to predict decode speed from model size and fitted bandwidth. You know why an Arm system generates tokens at a given rate, and what change will make it faster. 
 
-- Measured the sustained memory-read bandwidth of an Arm system.
-- Determined how close llama.cpp decode runs to that ceiling on your Arm CPU.
-- Chosen thread counts for decode and prefill from measurements.
-- Learned to predict decode speed from model size and fitted bandwidth.
-
-You can now explain why a given Arm system generates tokens at the rate it does, and which change will make it faster. Run the same commands on any other Arm Linux system to compare its ceiling, fitted bandwidth and decode knee with the Raspberry Pi 5 results.
+Run the same commands on other Arm Linux systems to evaluate their ceiling, fitted bandwidth, and decode knee.
