@@ -13,6 +13,7 @@ The Claude Code extension and Claude CLI use the same MCP configuration. Choose 
 
 - Use the Claude Code extension's MCP interface
 - Run `claude mcp add` in a terminal
+- Edit the user-scoped MCP configuration in `~/.claude.json`
 
 You need to complete only one method. The MCP server is a local standard input and output (STDIO) process started by the `apx` executable.
 
@@ -22,11 +23,13 @@ Configure the server on the host where Claude Code runs. In a local Visual Studi
 
 ## Configure the MCP server in the Claude Code extension
 
+Adding servers through the MCP dialog requires Claude Code extension version 2.1.261 or later. If you use an older version, update the extension or use the CLI or JSON configuration method below. See the [Claude Code MCP configuration documentation](https://code.claude.com/docs/en/vs-code#connect-to-external-tools-with-mcp) for details.
+
 To add the MCP server in VS Code:
 
 1. Install the official [Claude Code VSCode extension from Anthropic](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code) and open the Claude Code panel.
 2. Open the command menu by selecting `/` in the prompt box, then select **MCP servers** under **Customize**.
-3. Add a user-scoped STDIO server named `arm-performix`.
+3. Add a **Local command (stdio)** server named `arm-performix`.
 4. For the command, enter the full path to the Arm Performix `apx` executable.
 
 {{< tabpane-normal >}}
@@ -62,12 +65,16 @@ On macOS, the default path is:
 {{< /tabpane-normal >}}
 
 5. Add `mcp` and `start` as separate arguments.
-6. Add the server, then start a new Claude Code session.
+6. Under **Scope**, select **User** to make the server available in all your projects, matching the CLI and JSON methods below. **Local command (stdio)** is the transport type; it doesn't determine the configuration scope.
+7. Add the server, then start a new Claude Code session.
 
 ![Claude Code MCP servers dialog in Visual Studio Code showing arm-performix connected and its available profiling tools#center](configure_mcp_claude.png "Steps in Claude VSCode extension to configure the Arm Performix MCP server and view the available tools")
 
+The screenshot shows **Local** scope selected. For this Learning Path, select **User** instead before adding the server.
 
 ## Configure the MCP server with Claude CLI
+
+This optional method requires the [standalone Claude Code CLI](https://code.claude.com/docs/en/vs-code#run-cli-in-vs-code). Installing the VS Code extension doesn't add `claude` to your terminal's `PATH`.
 
 If the `claude` command is available in your terminal, add the same user-scoped STDIO server from the command line. On macOS, the default install path for `apx` is `/Applications/Arm Performix.app/Contents/assets/apx/apx`. Replace `<path-to-apx>` with the full executable path for your host:
 
@@ -116,7 +123,11 @@ Save `~/.claude.json`, then start a new Claude Code session.
 
 ## Check that the MCP server is connected
 
-List the configured servers:
+In a new Claude Code conversation in VS Code, enter `/mcp`. Select `arm-performix` and confirm that its status is **Connected**. This check uses the extension and doesn't require a standalone CLI installation.
+
+### Optional CLI connection checks
+
+If you have installed the standalone Claude Code CLI, you can also list the configured servers from a terminal:
 
 ```bash
 claude mcp list
@@ -146,7 +157,7 @@ arm-performix:
   Environment:
 ```
 
-You can also enter `/mcp` in Claude Code to review the server status.
+### Verify access to Performix data
 
 Configuration alone doesn't prove that the tools can read Performix data. In a new Claude Code chat, enter:
 
@@ -170,13 +181,13 @@ Use the following checks to diagnose MCP connection issues:
 
 ### The Arm Performix MCP server isn't listed
 
-Check whether Claude Code loaded the server configuration:
+Enter `/mcp` in the Claude Code extension and look for `arm-performix`. If you have installed the standalone Claude Code CLI, you can also check from a terminal:
 
 ```bash
 claude mcp list
 ```
 
-Find `arm-performix` in the output. Then confirm:
+Find `arm-performix` in the dialog or CLI output. Then confirm:
 
 - The command is the full path to the `apx` executable, including `apx.exe` on Windows
 - The arguments are `mcp` and `start`
@@ -188,8 +199,16 @@ Find `arm-performix` in the output. Then confirm:
 
 Run the executable's built-in help from a terminal to separate an `apx` problem from a Claude Code configuration problem. Replace `<path-to-apx>` with the configured path:
 
+On Linux or macOS, use Bash or Zsh:
+
 ```bash
 "<path-to-apx>" mcp --help
+```
+
+On Windows, use PowerShell. The `&` call operator runs the executable at the quoted path:
+
+```powershell
+& "<path-to-apx>" mcp --help
 ```
 
 If the help text doesn't appear, check the executable path, file permissions, and installed Arm Performix version. If it does appear, enter `/mcp` in Claude Code and check the server status.
