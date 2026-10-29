@@ -1,18 +1,18 @@
 ---
-title: Getting Started with Compute Flow
-description: Connect speech recognition, translation, and speech synthesis with Compute Flow on your Apple silicon Mac, then replace a model without changing your Python application.
+title: Get Started with Compute Flow
+description: Build and run an audio-to-audio pipeline as a Python application on your Arm-based device, combining Compute Flow bricks for speech recognition, translation, and speech synthesis
 
-minutes_to_complete: 30
+minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for developers who want to combine multiple AI models into a performant end-to-end AI applicaton running on an Arm CPU.
+who_is_this_for: This is an introductory topic for developers who want to combine multiple AI models into a performant end-to-end AI applicaton running on an Arm-based CPU. This learning path has been validated on an Apple® Silicon Mac but is expected to work on other Arm-based CPUs.
 
 learning_objectives:
     - Explain how Compute Flow bricks and manifests separate application code from model implementations
-    - Run a local Python pipeline that translates English speech into French speech
-    - Replace the speech recognition model and verify the pipeline using the same application and recording
+    - Deploy an AI audio-to-audio translation pipline in Python with Compute Flow. 
+    - Select the speech recognition model and verify the pipeline using the same application and recording
 
 prerequisites:
-    - An Apple silicon Mac running macOS
+    - An Arm-based system such as an Apple® silicon Mac.
     - Basic Python knowledge and familiarity with terminal commands
     - Internet access and at least 15 GB of available storage
 
