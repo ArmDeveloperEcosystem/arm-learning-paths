@@ -13,13 +13,15 @@ If you already have a supported Code Hotspots run, skip to [Generate Arm Perform
 
 If you haven't configured an Arm Linux target yet, follow [Set up Arm Performix](/learning-paths/servers-and-cloud-computing/performix-get-started/add_target/) before continuing.
 
-For a new run, choose a workload that represents the behavior you want to optimize. Specify the executable with an absolute path because Performix doesn't support relative workload paths. Build it with debug symbols when possible so Performix can attribute samples to functions and source lines. Aim for at least 20 seconds of representative activity; a very short run might not collect enough samples for useful analysis.
+For a new run, choose a workload that represents the behavior that you want to optimize. Specify the executable with an absolute path because Performix doesn't support relative workload paths. Build it with debug symbols when possible so that Performix can attribute samples to functions and source lines. 
 
-Before profiling, make sure you know:
+Aim for at least 20 seconds of representative activity. A very short run might not collect enough samples for useful analysis.
+
+Before profiling, identify the following information:
 
 - The Performix target name
 - The executable path and arguments on the target
-- The workload's working directory and required environment variables
+- The working directory and required environment variables of the workload
 - Whether running the workload has side effects
 
 ## Create a run with Claude Code
@@ -30,7 +32,7 @@ First, ask Claude Code to list the configured targets:
 Use the Arm Performix MCP server to list the configured targets. Include each target's name and connection status when available.
 ```
 
-Choose the correct target, then ask Claude Code to run Code Hotspots. Keep collection and analysis as separate requests so you can record the run ID before requesting an insight:
+Choose the correct target, then ask Claude Code to run Code Hotspots. Keep collection and analysis as separate requests so that you can record the run ID before requesting an insight:
 
 ```text
 Use Arm Performix to run the Code Hotspots recipe on target "<target-name>" with workload "<command>". When the run completes, return its run ID and collection status.
@@ -51,9 +53,9 @@ Claude Code uses the MCP server to start the recipe. Review any permission reque
 
 ## Create a run with the Arm Performix CLI
 
-If you prefer to control collection from a terminal, first check that the recipe dependencies and workload are ready:
+If you prefer to control collection from a terminal, first check that the recipe dependencies and workload are ready.
 
-The following single-line commands work in Bash, Zsh, and PowerShell when `apx` is on your `PATH`. For host-specific PATH setup, see [Use the Arm Performix CLI](/install-guides/performix/#use-the-arm-performix-cli). Replace `my-target` and the example workload with your target name and workload command.
+The following single-line commands work in Bash, Zsh, and PowerShell when `apx` is on your `PATH`. For host-specific PATH setup, see [Use the Arm Performix CLI](/install-guides/performix/#use-the-arm-performix-cli). Replace `my-target` and the example workload with your target name and workload command:
 
 ```bash
 apx recipe ready code_hotspots --target my-target --workload "/opt/myapp/bin/my_app --input /data/input.dat"
@@ -79,7 +81,7 @@ Confirm that the new run completed successfully and record its run ID.
 
 ## Troubleshoot remote target authentication
 
-If remote target authentication fails, check that:
+If remote target authentication fails, verify that the following conditions are met:
 
 - SSH key-based authentication works without an interactive password prompt.
 - The private key doesn't require an interactive passphrase.

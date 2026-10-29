@@ -7,7 +7,9 @@ description: Ask Claude Code for an Arm Performix AI insight tied to a specific 
 
 layout: learningpathall
 ---
-## Select the exact run
+## Select a specific run
+
+You're now ready to generate AI insights using Performix and Claude Code.
 
 Use a run ID whenever possible. A run ID prevents Claude Code from selecting a similarly named run or a more recent run from a different workload.
 
@@ -19,15 +21,13 @@ Use Arm Performix to list supported Code Hotspots runs. Include the run ID, targ
 
 ## Generate AI insights for a specific run
 
-Request an insight for the selected run:
+Request an insight for the selected run, replacing `<run-id>` with the ID returned by Arm Performix:
 
 ```text
 Use Arm Performix to generate an AI insight for run ID "<run-id>". Identify the highest-impact finding, cite the profile evidence that supports it, and suggest the first investigation or optimization step. State any missing evidence or uncertainty.
 ```
 
-Replace `<run-id>` with the ID returned by Arm Performix.
-
-If you are investigating a specific function, make the request more focused:
+If you're investigating a specific function, make the request more focused:
 
 ```text
 Use Arm Performix to explain why function "<function-name>" is hot in run ID "<run-id>".
@@ -37,7 +37,7 @@ Focused prompts usually produce more useful results than broad application-wide 
 
 ## Evaluate and refine AI insights
 
-A useful AI insight identifies the run it analyzed and connects its conclusion to measured evidence, such as sample percentages, call paths, source attribution, or disassembly. It should also state when the available data can't establish a root cause.
+A useful AI insight identifies the run it analyzed and connects its conclusion to measured evidence. The evidence can include sample percentages, call paths, source attribution, or disassembly. An insight should also state when the available data can't establish a root cause.
 
 If a recommendation isn't traceable, ask for one finding and its evidence:
 
@@ -65,7 +65,7 @@ Code Hotspots locates sampled CPU time. If you need evidence about microarchitec
 
 ## Iterate and measure
 
-After you review the evidence, use a controlled optimization loop:
+After you review the evidence, use the following controlled optimization loop:
 
 1. Record the baseline workload, target, run configuration, and elapsed time.
 2. Change one performance-relevant variable.

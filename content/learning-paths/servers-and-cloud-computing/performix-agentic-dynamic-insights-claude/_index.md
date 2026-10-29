@@ -1,9 +1,5 @@
 ---
 title: Generate Arm Performix AI insights in Visual Studio Code with Claude Code
-
-draft: true
-cascade:
-    draft: true
     
 description: Configure the Arm Performix MCP server for Claude Code in Visual Studio Code and use profile evidence to generate and validate AI insights.
 
@@ -12,15 +8,15 @@ minutes_to_complete: 20
 who_is_this_for: This Learning Path is for software developers and performance engineers who want to optimize applications on Arm-based servers using Arm Performix.
 
 learning_objectives:
-    - Configure the Arm Performix MCP server for the Claude Code extension in VS Code.
+    - Configure the Arm Performix MCP server for the Claude Code extension in Visual Studio Code (VS Code).
     - Verify that Claude Code can access Arm Performix recipes, targets, and runs.
     - Create or select a supported Code Hotspots run.
     - Generate an AI insight and validate its recommendations against profile evidence.
 
 prerequisites:
-    - Arm Performix version 2026.2.5 or later installed. For installation instructions, see the [Arm Performix install guide](/install-guides/performix/).
-    - A completed Code Hotspots run, or a configured Arm Linux target with a workload to profile. To configure a new target, follow [Set up Arm Performix](/learning-paths/servers-and-cloud-computing/performix-get-started/add_target/).
-    - Visual Studio Code with the Claude Code extension version 2.1.261 or later installed to add MCP servers through the extension's interface
+    - An installation of [Arm Performix version 2026.2.5 or later](/install-guides/performix/)
+    - A [configured Arm Linux target](/learning-paths/servers-and-cloud-computing/performix-get-started/add_target/) with a workload to profile
+    - VS Code, with the Claude Code extension version 2.1.261 or later installed to add MCP servers through the extension interface
     - Access to Claude Code through a Claude account, or an organization-approved Anthropic API key provided through the `ANTHROPIC_API_KEY` environment variable
     - Permission from your organization to share profile data, symbols, source excerpts, disassembly excerpts, and performance metrics with Claude Code
 
