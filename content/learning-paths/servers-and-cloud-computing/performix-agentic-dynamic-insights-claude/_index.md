@@ -1,5 +1,5 @@
 ---
-title: Generate Arm Performix AI insights in Visual Studio Code with Claude Code
+title: Generate Arm Performix AI insights in VS Code with Claude Code
     
 description: Configure the Arm Performix MCP server for Claude Code in Visual Studio Code and use profile evidence to generate and validate AI insights.
 

@@ -22,7 +22,7 @@ Replace `<run-id>` with the ID you recorded. Use the returned workload, recipe, 
 1. Open Arm Performix on the host that stores the run used by the Model Context Protocol (MCP) server.
 2. Select **Runs** in the activity bar on the left, or select **Explore run data** on the home page.
 3. Locate the Code Hotspots run using its timestamp, recipe, and workload labels, then select it to open its results.
-4. Open **Run Details**. Compare the workload, execution times, target configuration, and recipe parameters with the details of the selected details. Don't rely on the display name alone.
+4. Open **Run Details**. Compare the workload, execution times, target configuration, and recipe parameters with those of the selected run. Don't rely on the display name alone.
 
 If you can't identify the matching run, perform the missing-run checks described in [Troubleshoot the MCP connection](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-claude/configure_mcp_claude/#code-hotspots-runs-are-missing) before evaluating the insight.
 

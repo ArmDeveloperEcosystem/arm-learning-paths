@@ -27,7 +27,7 @@ Adding servers through the MCP dialog requires Claude Code extension version 2.1
 
 To add the MCP server in VS Code:
 
-1. Install the official [Claude Code VSCode extension from Anthropic](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code) and open the Claude Code panel.
+1. Install the official [Claude Code extension for VS Code from Anthropic](https://marketplace.visualstudio.com/items?itemName=anthropic.claude-code) and open the Claude Code panel.
 2. Open the command menu by selecting `/` in the prompt box, then select **MCP servers** under **Customize**.
 3. Add a **Local command (stdio)** server named `arm-performix`.
 4. For the command, enter the full path to the Arm Performix `apx` executable.
@@ -68,7 +68,7 @@ To add the MCP server in VS Code:
 6. Under **Scope**, select **User** to make the server available in all your projects, matching the CLI and JSON methods. **Local command (stdio)** is the transport type. It doesn't determine the configuration scope.
 7. Add the server, then start a new Claude Code session.
 
-![Claude Code MCP servers dialog in Visual Studio Code showing arm-performix connected and its available profiling tools#center](configure_mcp_claude.png "Steps in Claude VSCode extension to configure the Arm Performix MCP server and view the available tools")
+![Claude Code MCP servers dialog in Visual Studio Code showing arm-performix connected and its available profiling tools#center](configure_mcp_claude.png "Configure the Arm Performix MCP server and view its tools in Claude Code for VS Code")
 
 The screenshot shows **Local** scope selected. For this Learning Path, select **User** instead before adding the server.
 
@@ -192,7 +192,7 @@ Find `arm-performix` in the dialog or CLI output. Verify the following configura
 - The command is the full path to the `apx` executable, including `apx.exe` on Windows.
 - The arguments are `mcp` and `start`.
 - The server is enabled.
-- You started a new Claude Code session after changing the configuration,
+- You started a new Claude Code session after changing the configuration.
 - You configured the server for the same user account and Claude Code host that runs the extension.
 
 ### The MCP server fails to start
@@ -213,7 +213,7 @@ On Windows, use PowerShell. The `&` call operator runs the executable at the quo
 
 If the help text doesn't appear, check the executable path, file permissions, and installed Arm Performix version. If it appears, enter `/mcp` in Claude Code and check the server status.
 
-In a remote development session, make sure that `apx` is installed on the Claude Code host. Make sure that the installation uses the expected Performix configuration and run data.
+In a remote development session, verify that `apx` is installed on the Claude Code host and that its installation uses the expected Performix configuration and run data.
 
 ### Claude Code doesn't use Arm Performix
 
