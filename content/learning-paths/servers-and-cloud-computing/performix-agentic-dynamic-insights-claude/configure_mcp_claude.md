@@ -213,7 +213,7 @@ On Windows, use PowerShell. The `&` call operator runs the executable at the quo
 
 If the help text doesn't appear, check the executable path, file permissions, and installed Arm Performix version. If it appears, enter `/mcp` in Claude Code and check the server status.
 
-In a remote development session, verify that `apx` is installed on the Claude Code host and that its installation uses the expected Performix configuration and run data.
+In a remote development session, verify that `apx` is installed on the Claude Code host. Also verify that the installation uses the expected Performix configuration and run data.
 
 ### Claude Code doesn't use Arm Performix
 
