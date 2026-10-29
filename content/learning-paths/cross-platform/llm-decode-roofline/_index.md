@@ -1,5 +1,5 @@
 ---
-title: Measure whether LLM token generation is memory-bound on Arm CPUs with llama-roofline
+title: Measure LLM decode bandwidth limits on Arm with llama-roofline
 
 
 description: Use llama-roofline on Arm Linux to diagnose memory-bound llama.cpp token generation and choose thread counts and model size from measurements.

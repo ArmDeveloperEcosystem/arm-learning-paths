@@ -42,7 +42,7 @@ Each row of the table is one test at one thread count:
 - `tg128` is token generation of 128 tokens.
 - `t/s` is tokens per second, with the standard deviation over five repetitions.
 
-The examples measurements were made using a Raspberry Pi 5 with 2 GB of RAM. The build used llama.cpp commit `836d571`, GCC 12.2.0 and the default Release flags. The board used the `ondemand` governor. The `get_throttled` command reported `throttled=0x0` before and after the sweep. Threads weren't pinned to cores.
+The example measurements were made on a Raspberry Pi 5 with 2 GB of RAM. The build used llama.cpp commit `836d571`, GCC 12.2.0, and the default Release flags. The board used the `ondemand` governor. The `get_throttled` command reported `throttled=0x0` before and after the sweep. Threads weren't pinned to cores.
 
 ## Find the decode knee
 

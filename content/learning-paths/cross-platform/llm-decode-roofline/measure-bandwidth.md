@@ -70,7 +70,9 @@ wrote /home/manu/lp_capture/20261003_2358/membw_1.json
 On a Raspberry Pi 5, one thread already reaches the highest read rate. Adding threads lowers it. This is the first sign that decode, which streams the weights from memory, doesn't need all four cores.
 
 {{% notice Note %}}
-The ceiling is a measured lower bound on the true peak. llama.cpp hand-written kernels can stream faster than the Python kernels that the tool uses. If decode exceeds the measured ceiling, llama-roofline warns you and treats the percentages as lower bounds. If you already have a trusted STREAM result for your system, pass it with `--peak-bw` to skip this step.
+The ceiling is a measured lower bound on the true peak. llama.cpp hand-written kernels can stream faster than the Python kernels that the tool uses. If decode exceeds the measured ceiling, llama-roofline warns you and treats the percentages as lower bounds.
+
+If you already have a trusted STREAM result for your system, pass it with `--peak-bw` to skip this step.
 {{% /notice %}}
 
 ## Check that the measurement is repeatable

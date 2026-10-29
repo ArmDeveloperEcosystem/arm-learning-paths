@@ -23,7 +23,7 @@ aarch64
 Features	: fp asimd evtstrm aes pmull sha1 sha2 crc32 atomics fphp asimdhp cpuid asimdrdm lrcpc dcpop asimddp
 ```
 
-The `asimd` flag is Neon, and `asimddp` is the DotProd extension. llama.cpp detects DotProd when you build it and uses it for its quantized kernels on the Cortex-A76. The Pi 5 doesn't have `i8mm` or `sve`, which some newer Arm cores provide.
+The `asimd` flag is Neon. The `asimddp` flag is the DotProd extension. llama.cpp detects DotProd when you build it. It uses DotProd for its quantized kernels on the Cortex-A76. The Pi 5 doesn't have `i8mm` or `sve`, which some newer Arm cores provide.
 
 ## Install the build tools
 

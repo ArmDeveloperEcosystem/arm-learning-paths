@@ -47,7 +47,9 @@ The output is similar to:
   model sizes the substitution can take over the file.
 ```
 
-The `per token` line is smaller than the file size. The token embedding table is part of the file. Decode looks up only one row of it per token instead of streaming all of it. For this 0.5B file, decode reads 346 MB of the 429 MB file, or 82 percent. Using the file size would make the model look slower relative to the ceiling than it is.
+The `per token` line is smaller than the file size. The token embedding table is part of the file. Decode looks up only one row of the table per token. It doesn't stream all of it. For this 0.5B file, decode reads 346 MB of the 429 MB file, or 82 percent.
+
+Using the file size would make the model look slower relative to the ceiling than it is.
 
 ## Run the diagnosis
 
