@@ -1,6 +1,6 @@
 ---
 title: Run a local speech translation pipeline
-description: Build Compute Flow on your Mac and connect three Python bricks to translate an English recording into French speech.
+description: Build Compute Flow on your Mac and connect three Compute Flow bricks to translate an English recording into French speech.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -37,13 +37,15 @@ command -v cc
 command -v c++
 ```
 
+Finally, remove any previously installed `llama.cpp` versions. For example if installed with the `brew` package manager, run the following command:
+
+```bash
+brew uninstall llama.cpp
+```
+
 ## Set up Compute Flow
 
-{{% notice Note %}}
-The public repository URL in this draft is a placeholder. Until it is available, use the Compute Flow checkout supplied through your project access. You also need access to its native dependency bundles. Run the remaining commands from that checkout's root directory.
-{{% /notice %}}
-
-When the public repository is available, obtain it with:
+Run the following command.
 
 ```bash
 git clone https://github.com/ARM-software/compute-flow.git
@@ -125,11 +127,11 @@ Each `model install` command installs the brick source, if needed, and its model
 
 | Brick | Model package | Pipeline role |
 | --- | --- | --- |
-| `stt:parakeet-tdt` | Parakeet TDT 0.6B v3, dynamic INT8 | Recognize the English recording |
-| `lm_text:lm-text-generic` | Hy-MT2 1.8B, 2-bit | Translate the transcription into French |
-| `tts:qwen3-tts` | Qwen3-TTS 0.6B Custom Voice | Generate French speech |
+| `stt:parakeet-tdt` | Parakeet TDT 0.6B v3, dynamic INT8 | Transcribe the English recording |
+| `lm_text:lm-text-generic` | Hy-MT2 1.8B, 2-bit | Translate English text into French |
+| `tts:qwen3-tts` | Qwen3-TTS 0.6B Custom Voice | Synthesize French speech |
 
-Models are downloaded to the `~/.compute-flow` directory by default.
+Models are downloaded to the `~/.compute-flow` directory by default.The `compute-flow model info` command displays details about a specified model
 
 ```bash
 compute-flow model info stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic
@@ -139,7 +141,7 @@ compute-flow model info tts:qwen3-tts qwen3-tts-0-6b-custom-voice
 
 ## Build for your Mac
 
-Build the installed bricks and the native Python bindings:
+Build the installed bricks:
 
 ```bash
 compute-flow build native
@@ -149,63 +151,12 @@ If successful, you should see output similar to the following.
 
 ```output
 ╭────────────────────────────── OK Build Complete ──────────────────────────────╮
-│  Build directory  /Users/kiehej01/compute_flow/compute_flow/build_native      │
-│  Application SDK  /Users/kiehej01/compute_flow/compute_flow/build_native/sdk  │
+│  Build directory  /Users/user/compute_flow/compute_flow/build_native      │
+│  Application SDK  /Users/user/compute_flow/compute_flow/build_native/sdk  │
 ╰───────────────────────────────────────────────────────────────────────────────╯
 ```
 
-{{% notice Troubleshooting Tip %}}
-
-Compute Flow uses prebuilt, optimized dependency binaries where available. Some dependencies, such as llama.cpp, are first checked on your local machine. A preinstalled version may be incompatible with Compute Flow and cause build errors.
-
-In the first instance, **either update the dependency causing the error to a compatible version or uninstall the local version** to allow Compute Flow to build just the missing depencencies from source.
-
-As a fallback, you can build the supported runtime dependencies from their pinned source revisions with the following command, although this will take up to 1 hour so we strongly recommend attempting the steps above before building from source:
-
-```bash
-compute-flow build native --from-source
-```
-
-{{% /notice %}}
-
-The build downloads optimized macOS Arm64 runtimes such as LiteRT, ExecuTorch, and ONNX Runtime with support for KleidiAI, packages them with your installed brick implementations in an application SDK for C++ applications, and installs Python bindings so you can use the same native functionality from Python.
-
-```output
-├── CMakeLists.txt
-├── force_load_libraries.txt
-├── include
-│   └── compute_flow
-│       ├── accelerator.h
-│       ├── bindings
-│       ├── bricks
-│       ├── check.h
-│       ├── compute_flow.h
-│       ├── lm_params.h
-│       ├── lm_runners
-│       ├── manifest.h
-│       ├── memory_planner.h
-│       ├── model_data.h
-│       ├── profiler
-│       ├── runners
-│       ├── runtime.h
-│       └── tensor_dict.h
-├── lib
-│   ├── libcompute_flow_brick_factory.a
-│   ├── libcompute_flow_core.a
-│   ├── libcompute_flow.a
-│   ├── libexecutorch.a
-│   ├── liblm_text_core.a
-│   ├── liboptimized_native_cpu_ops_lib.a
-│   ├── libstt_core.a
-│   ├── libtts_core.a
-│   └── libxnnpack_backend.a
-├── README.md
-└── share
-    └── compute_flow
-        └── bricks
-```
-
-The second command confirms that your active environment can load the native module. If the import fails, check that the build completed successfully and that the same virtual environment is active. A dependency download error needs to be resolved before the bindings can be built.
+The build command downloads inference runtimes optimized for your deployment platform and packages them with your installed brick implementations into an application SDK available at `build_native/sdk`. 
 
 ## Create the Python application
 
@@ -215,13 +166,12 @@ Create a directory for your application:
 mkdir -p audio_translation_example
 ```
 
-Save the following code as `audio_translation_example/audio_translation.py`. It loads each manifest, configures the languages, and connects the three bricks. The sample-rate check prevents passing incompatible audio to the speech recognition model.
+Save the following code as `audio_translation_example/audio_translation.py`. The below code provides everything you need to run the audio-to-audio translation pipeline. You will see that the code first load and configure each of the three bricks required for our application, then execute each brick, with the output from the previous brick being pass to the next one, and finally, save the output of our pipeline.
 
 ```python
-# SPDX-FileCopyrightText: Copyright 2026 Arm Limited and/or its affiliates <open-source-office@arm.com>
-# SPDX-License-Identifier: Apache-2.0
+"""Translate speech between languages with three Compute Flow bricks."""
 
-"""Translate an English recording with three local Compute Flow bricks."""
+from __future__ import annotations
 
 import argparse
 from pathlib import Path
@@ -231,7 +181,7 @@ import numpy as np
 import soundfile as sf
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--stt-manifest", required=True)
     parser.add_argument("--translation-manifest", required=True)
@@ -239,93 +189,116 @@ def main() -> None:
     parser.add_argument("--input", required=True, dest="input_audio")
     parser.add_argument("--source-language", required=True)
     parser.add_argument("--destination-language", required=True)
-    parser.add_argument("--output", default="translated_french.wav")
-    args = parser.parse_args()
+    parser.add_argument(
+        "--output", default="translated_french.wav", dest="output_audio"
+    )
+    args = parser.parse_args(argv)
 
-    # Both speech recognition variants in this tutorial expect 16 kHz audio.
-    audio, input_rate = sf.read(args.input_audio, dtype="float32", always_2d=True)
-    if input_rate != 16000 or audio.shape[0] == 0:
-        raise ValueError("Use a nonempty 16 kHz recording, such as beckett.wav")
-    mono = np.mean(audio, axis=1, dtype=np.float32)
-    raw_wav = np.ascontiguousarray(mono.reshape(1, -1), dtype=np.float32)
-    sample_rate = np.asarray([input_rate], dtype=np.int64)
+    # Load the input as a batch containing one mono float32 waveform.
+    input_audio, input_sample_rate = sf.read(
+        args.input_audio, dtype="float32", always_2d=True
+    )
+    mono_audio = np.mean(input_audio, axis=1, dtype=np.float32)
+    raw_wav = np.ascontiguousarray(mono_audio.reshape(1, -1), dtype=np.float32)
+    sample_rate = np.asarray([input_sample_rate], dtype=np.int64)
 
+    options = cf.BrickOptions()
+    options.runtime.enable_warmup = True
+
+    # Load the manifests.
     stt_manifest = cf.load_manifest(args.stt_manifest)
     translation_manifest = cf.load_manifest(args.translation_manifest)
     tts_manifest = cf.load_manifest(args.tts_manifest)
+
+    # Configure the requested translation and text-to-speech languages.
     translation_manifest.set_config("src_lang", args.source_language)
     translation_manifest.set_config("dst_lang", args.destination_language)
     tts_manifest.set_config("language", args.destination_language.lower())
 
-    options = cf.BrickOptions()
-    options.runtime.enable_warmup = True
-    stt = cf.load_brick(stt_manifest)
-    translation = cf.load_brick(translation_manifest)
-    tts = cf.load_brick(tts_manifest)
-    stt.setup(stt_manifest, options)
-    translation.setup(translation_manifest, options)
-    tts.setup(tts_manifest, options)
+    # Load the bricks.
+    stt_brick = cf.load_brick(stt_manifest)
+    translation_brick = cf.load_brick(translation_manifest)
+    tts_brick = cf.load_brick(tts_manifest)
 
-    # Keep the waveform and sample-rate tensors alive throughout recognition.
-    stt.reset_states()
+    # Set up the bricks.
+    stt_brick.setup(stt_manifest, options)
+    translation_brick.setup(translation_manifest, options)
+    tts_brick.setup(tts_manifest, options)
+
+    #################################
+    # Run speech-to-text brick
+    #################################
+    stt_brick.reset_states()
+
     stt_input = {"raw_wav": raw_wav, "sample_rate": sample_rate}
     transcription_chunks = []
-    while not stt.is_generation_complete():
-        result = stt.run(stt_input)
-        transcription_chunks.append(str(np.asarray(result["text"]).item()))
-    transcription = "".join(transcription_chunks)
-    if not transcription.strip():
-        raise RuntimeError("Speech recognition returned no text")
-    print(f"Transcription: {transcription}", flush=True)
+    while not stt_brick.is_generation_complete():
+        stt_output = stt_brick.run(stt_input)
+        transcription_chunks.append(str(np.asarray(stt_output["text"]).item()))
 
-    # Pass the complete transcription to the translation brick.
-    translation.reset_states()
-    translation_input = {"text_prompt": transcription}
+    #################################
+    # Run translation brick
+    #################################
+    translation_brick.reset_states()
+
+    translation_input = {"text_prompt": "".join(transcription_chunks)}
     translation_chunks = []
-    while not translation.is_generation_complete():
-        result = translation.run(translation_input)
-        translation_chunks.append(str(np.asarray(result["text"]).item()))
-    translated_text = "".join(translation_chunks)
-    if not translated_text.strip():
-        raise RuntimeError("Translation returned no text")
-    print(f"Translation: {translated_text}", flush=True)
+    while not translation_brick.is_generation_complete():
+        translation_output = translation_brick.run(translation_input)
+        translation_text = np.asarray(translation_output["text"]).item()
+        translation_chunks.append(str(translation_text))
 
-    # Copy each audio chunk before the brick reuses its output buffers.
-    tts.reset_states()
-    tts_input = {"text_prompt": translated_text}
-    audio_chunks = []
-    output_rate = 0
-    while not tts.is_generation_complete():
-        result = tts.run(tts_input)
-        left = np.asarray(result["left_channel"], dtype=np.float32).reshape(-1)
-        right = np.asarray(result["right_channel"], dtype=np.float32).reshape(-1)
-        output_rate = int(np.asarray(result["sample_rate"]).reshape(-1)[0])
+    tts_input = {"text_prompt": "".join(translation_chunks)}
+    left_chunks = []
+    right_chunks = []
+    output_sample_rate = 0
+
+    #################################
+    # Run text-to-speech brick
+    #################################
+    tts_brick.reset_states()
+
+    while not tts_brick.is_generation_complete():
+        tts_output = tts_brick.run(tts_input)
+        left = np.asarray(tts_output["left_channel"], dtype=np.float32).reshape(-1)
+        right = np.asarray(tts_output["right_channel"], dtype=np.float32).reshape(-1)
+        sample_rate_tensor = np.asarray(tts_output["sample_rate"])
+        output_sample_rate = int(sample_rate_tensor.reshape(-1)[0])
+
         if left.size:
-            audio_chunks.append(np.column_stack((left, right)))
+            left_chunks.append(left.copy())
+            right_chunks.append(right.copy())
 
-    stt.reset_states()
-    translation.reset_states()
-    tts.reset_states()
-    if not audio_chunks or output_rate <= 0:
-        raise RuntimeError("Speech synthesis returned no audio")
-    output_audio = np.concatenate(audio_chunks, axis=0)
-    sf.write(args.output, output_audio, output_rate, subtype="FLOAT")
-    print(f"Saved: {Path(args.output).resolve()}")
+    tts_brick.reset_states()
+
+    if not left_chunks or output_sample_rate == 0:
+        raise RuntimeError("Qwen3-TTS did not generate audio")
+
+    left_audio = np.concatenate(left_chunks)
+    right_audio = np.concatenate(right_chunks)
+    output_audio = np.column_stack((left_audio, right_audio))
+
+    sf.write(
+        args.output_audio,
+        output_audio,
+        output_sample_rate,
+        subtype="FLOAT",
+    )
+
+    print(f"Transcription: {''.join(transcription_chunks)}")
+    print(f"Translation: {''.join(translation_chunks)}")
+    print(f"Saved: {Path(args.output_audio).resolve()}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
 ```
-
-The input waveform has shape `(1, number_of_samples)` and uses `float32`; its sample rate uses `int64`. Each input dictionary remains alive until its generation loop completes. `np.column_stack()` copies the left and right audio channels into a stereo chunk before another call can reuse the brick's buffers.
-
-`load_manifest()` reads the model configuration, `load_brick()` selects the implementation, and `setup()` prepares it for inference. Warmup happens during setup, so the first printed transcription can take time to appear. Each `run()` call returns the next output from a brick; the loop continues until `is_generation_complete()` returns `True`. `reset_states()` clears the request state while retaining the loaded models.
 
 All three bricks share these execution methods, documented in [Brick Runtime Interface V1](https://github.com/ARM-software/ComputeFlow/blob/main/docs/design/brick_runtime_interface_v1.md).
 
-The Qwen3-TTS manifest filename includes `en`, but the script sets its `language` configuration to `french` before setup. The selected Custom Voice model supports French synthesis. The translation configuration similarly sets English as the source language and French as the destination.
 
-## Translate the packaged recording
+## Translate a pre-recorded sample
 
 Resolve the package locations through Brick Manager instead of hard-coding cache paths. Then run your application using the sample supplied with Parakeet:
 
@@ -344,17 +317,16 @@ python audio_translation_example/audio_translation.py \
   --output translated_french.wav
 ```
 
-The application prints `Transcription:`, `Translation:`, and `Saved:` lines alongside the runtime logs. The output from one run is shown here, with the checkout path shortened:
+The expected output is:
 
 ```output
 Transcription: Ever tried, ever failed. No matter. Try again. Fail again. Fail better.
 Translation: Avez-vous déjà essayé, avez-vous déjà échoué. Peu importe. Essayez à nouveau. Écheclez encore. Échouez mieux.
-Saved: <checkout>/translated_french.wav
 ```
 
-Check that the transcription matches the English recording and that the translation preserves its meaning. Generated wording and punctuation can vary and can contain errors: this run produced the incorrect word "Écheclez". Completing the pipeline verifies the integration; review the generated text and speech separately for translation quality.
+Check that the transcription matches the English recording and that the translation preserves its meaning. An accurate translation is, ""Déjà essayé, déjà échoué. Peu importe. Essaie encore. Échoue encore. Échoue mieux.". We will later demonstrate how to select alternative models with different performance and accuracy tradeoffs. 
 
 
 ## What you've accomplished
 
-You've installed three model packages, built Compute Flow, and connected their brick interfaces in a Python application. Your application now turns an English recording into a local French WAV file. Next, you'll replace the speech recognition model and run the same application again.
+You've installed three Compute Flow brick types, using three of their model variants to build and audio-to-audio pipeline. Your application now turns an English recording into a local French WAV file. Next, you'll replace the speech recognition model and run the same application again.
