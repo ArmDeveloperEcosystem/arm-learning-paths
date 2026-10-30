@@ -11,24 +11,23 @@ layout: learningpathall
 
 You'll install three model packages, build Compute Flow for your Mac, and create a Python application.
 
-First, check your  CPU architecture:
+First, check your CPU architecture:
 
 ```bash
 uname -m
 ```
 
-You should see `arm64`.
+The expected output is `arm64`.
 
-If `uv` isn't installed, use the [uv standalone installer](https://docs.astral.sh/uv/getting-started/installation/) with the following command.
+If `uv` isn't installed, use the [uv standalone installer](https://docs.astral.sh/uv/getting-started/installation/) with the following command:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
+Next, if Apple developer tools aren't installed, [install Xcode Command Line Tools](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools/). The package includes Git, Clang, and the macOS SDK. If you already have Xcode or the Command Line Tools installed, use those tools.
 
-Next, if Apple's developer tools aren't installed, follow [Apple's instructions for installing the Xcode Command Line Tools](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools/). The package includes Git, Clang, and the macOS SDK. If you already have Xcode or the Command Line Tools installed, use those tools.
-
-Finish with a quick check that the tools are available:
+Check that the tools are available:
 
 ```bash
 uv --version
@@ -37,7 +36,7 @@ command -v cc
 command -v c++
 ```
 
-Finally, remove any previously installed `llama.cpp` versions. For example if installed with the `brew` package manager, run the following command:
+Finally, remove any previously installed `llama.cpp` versions. For example, if installed with the `brew` package manager, run the following command:
 
 ```bash
 brew uninstall llama.cpp
@@ -45,7 +44,7 @@ brew uninstall llama.cpp
 
 ## Set up Compute Flow
 
-Run the following command.
+Clone the Compute Flow repository:
 
 ```bash
 git clone https://github.com/ARM-software/compute-flow.git
@@ -101,18 +100,17 @@ compute-flow check
 
 ```
 
-Compute Flow requires Python 3.11 or later. `uv sync` installs the project's Python dependencies into the virtual environment. With its default settings, [uv also downloads a compatible Python interpreter](https://docs.astral.sh/uv/concepts/python-versions/) if it can't find one locally.
+Compute Flow requires Python 3.11 or later. `uv sync` installs the project Python dependencies into the virtual environment. With its default settings, [uv also downloads a compatible Python interpreter](https://docs.astral.sh/uv/concepts/python-versions/) if it can't find one locally.
 
 `compute-flow check` reports missing system dependencies and suggests installation commands. It doesn't install them or test whether the compiler can compile and link a program. If it reports a missing native compiler or Git installation, follow the suggested action and run the check again.
 
-Brick Manager automatically downloads managed tools, such as CMake and Git LFS, when a command needs them. The check reports these as `will be downloaded when needed`; you don't need to install them manually. For example, `compute-flow build native` downloads its managed CMake version if it isn't already available.
-
+Brick Manager automatically downloads managed tools, such as CMake and Git LFS, when a command needs them. The check reports these as `will be downloaded when needed`, so you don't need to install them manually. For example, `compute-flow build native` downloads its managed CMake version if it isn't already available.
 
 ## Install the three model packages
 
-Update Brick Manager's registry cache and install the models used by your pipeline:
+Update the Brick Manager registry cache and install the models that will be used by your pipeline:
 
-{{% notice Tip %}}
+{{% notice Note %}}
 For higher rate limits and faster downloads from Hugging Face, set the optional `HF_TOKEN` environment variable to your Hugging Face access token before installing the models. You can [create a Hugging Face access token](https://huggingface.co/settings/tokens) in account settings.
 {{% /notice %}}
 
@@ -123,7 +121,7 @@ compute-flow model install lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation
 compute-flow model install tts:qwen3-tts qwen3-tts-0-6b-custom-voice
 ```
 
-Each `model install` command installs the brick source, if needed, and its model package. The identifiers select these implementations:
+Each `model install` command installs the brick source, if needed, and its model package. The identifiers select the following implementations:
 
 | Brick | Model package | Pipeline role |
 | --- | --- | --- |
@@ -131,7 +129,7 @@ Each `model install` command installs the brick source, if needed, and its model
 | `lm_text:lm-text-generic` | Hy-MT2 1.8B, 2-bit | Translate English text into French |
 | `tts:qwen3-tts` | Qwen3-TTS 0.6B Custom Voice | Synthesize French speech |
 
-Models are downloaded to the `~/.compute-flow` directory by default.The `compute-flow model info` command displays details about a specified model
+Models are downloaded to the `~/.compute-flow` directory by default. The `compute-flow model info` command displays details about a specified model
 
 ```bash
 compute-flow model info stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic
@@ -147,7 +145,7 @@ Build the installed bricks:
 compute-flow build native
 ```
 
-If successful, you should see output similar to the following. 
+If successful, the output is similar to: 
 
 ```output
 ╭────────────────────────────── OK Build Complete ──────────────────────────────╮
@@ -156,7 +154,7 @@ If successful, you should see output similar to the following.
 ╰───────────────────────────────────────────────────────────────────────────────╯
 ```
 
-The build command downloads inference runtimes optimized for your deployment platform and packages them with your installed brick implementations into an application SDK available at `build_native/sdk`. 
+The build command downloads inference runtimes optimized for your deployment platform. It packages them with your installed brick implementations into an application SDK available at `build_native/sdk`. 
 
 ## Create the Python application
 
@@ -166,7 +164,7 @@ Create a directory for your application:
 mkdir -p audio_translation_example
 ```
 
-Save the following code as `audio_translation_example/audio_translation.py`. The below code provides everything you need to run the audio-to-audio translation pipeline. You will see that the code first load and configure each of the three bricks required for our application, then execute each brick, with the output from the previous brick being pass to the next one, and finally, save the output of our pipeline.
+Save the following code as `audio_translation_example/audio_translation.py`:
 
 ```python
 """Translate speech between languages with three Compute Flow bricks."""
@@ -294,13 +292,14 @@ def main(argv: list[str] | None = None) -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 ```
+The code provides everything you need to run the audio-to-audio translation pipeline. The code first loads and configures each of the three bricks required for the application. It then runs each brick, with the output from the previous brick being passed to the next one. Finally, it saves the output of our pipeline.
 
 All three bricks share these execution methods, documented in [Brick Runtime Interface V1](https://github.com/ARM-software/ComputeFlow/blob/main/docs/design/brick_runtime_interface_v1.md).
 
 
 ## Translate a pre-recorded sample
 
-Resolve the package locations through Brick Manager instead of hard-coding cache paths. Then run your application using the sample supplied with Parakeet:
+Resolve the package locations through Brick Manager instead of hard-coding cache paths. Then, run your application using the sample supplied with Parakeet:
 
 ```bash
 PARAKEET_PACKAGE="$(compute-flow model path stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic)"
@@ -324,9 +323,16 @@ Transcription: Ever tried, ever failed. No matter. Try again. Fail again. Fail b
 Translation: Avez-vous déjà essayé, avez-vous déjà échoué. Peu importe. Essayez à nouveau. Écheclez encore. Échouez mieux.
 ```
 
-Check that the transcription matches the English recording and that the translation preserves its meaning. An accurate translation is, ""Déjà essayé, déjà échoué. Peu importe. Essaie encore. Échoue encore. Échoue mieux.". We will later demonstrate how to select alternative models with different performance and accuracy tradeoffs. 
+Check that the transcription matches the English recording and that the translation preserves its meaning. An accurate translation is as follows:
 
+```text
+ Déjà essayé, déjà échoué. Peu importe. Essaie encore. Échoue encore. Échoue mieux.
+```
 
-## What you've accomplished
+You'll later learn how to select alternative models with different performance and accuracy tradeoffs. 
 
-You've installed three Compute Flow brick types, using three of their model variants to build and audio-to-audio pipeline. Your application now turns an English recording into a local French WAV file. Next, you'll replace the speech recognition model and run the same application again.
+## What you've accomplished and what's next
+
+You've installed three Compute Flow brick types and used three of their model variants to build an audio-to-audio pipeline. Your application now turns an English recording into a local French WAV file. 
+
+Next, you'll replace the speech recognition model and run the same application again.

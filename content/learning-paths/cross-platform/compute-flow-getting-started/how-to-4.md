@@ -1,5 +1,5 @@
 ---
-title: Compare Speech-to-text performance
+title: Compare speech-to-text performance
 description: Replace the Parakeet AI model with Moonshine in your speech-to-text brick
 weight: 5
 
@@ -7,17 +7,17 @@ weight: 5
 layout: learningpathall
 ---
 
-##  Compare Speech-to-text performance
+## Compare speech recognition performance
 
-Use the built STT CLI to compare the speech recognition stage. Changing the manifest lets you experiment quickly with another model.
+Use the built speech-to-text CLI to compare the speech recognition stage. Changing the manifest lets you experiment quickly with another model.
 
-Parakeet's model files total approximately 683 MB, with dynamic INT8 quantization for fully connected weights and FP32 external interfaces. Moonshine's FP32 model files total approximately 247 MB. These are different model families using LiteRT and ONNX Runtime respectively.
+The Parakeet model files total approximately 683 MB, with dynamic INT8 quantization for fully connected weights and FP32 external interfaces. The Moonshine FP32 model files total approximately 247 MB. These are different model families using LiteRT and ONNX Runtime respectively.
 
-Run the following command:
+Resolve the Parakeet package path for its manifest. Run both alternatives on the same mono 16 kHz recording, with one CPU thread and profiling enabled:
 
 ```bash
 PARAKEET_PACKAGE="$(compute-flow model path stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic)"
-INPUT_AUDIO="$PARAKEET_PACKAGE/samples/beckett.wav"
+INPUT_AUDIO="$MOONSHINE_PACKAGE/samples/beckett.wav"
 ```
 
 {{< tabpane-normal >}}
@@ -31,14 +31,37 @@ Run the Parakeet manifest:
   -t 1 --enable-op-profiling
 ```
 
-The output should include timing information like the excerpt below, along with statistics for individual operators. The operator statistics are omitted here for brevity.
+The output is similar to this captured excerpt, showing the featurizer operator breakdown and the complete scope summary. The first-call report and other operator tables are omitted:
 
 ```output
 [TRANSCRIPTION]
 Ever tried, ever failed. No matter. Try again. Fail again. Fail better.
-----------------
+...
+All Calls
 Scope: run() [total ms: 985.12]
 Scope stats | calls: 30 | avg ms: 32.84 | min ms: 0.34 | max ms: 487.10
+Model + Op Breakdown
+runner          contributor                                              calls                                         %      total ms      avg ms      min ms      max ms
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+litert          featurizer
+                  GATHER_ND                                                  4 [██████████████░░░░░░░░░░░░░░░░]  45.01%          7.86        1.96        1.94        1.98
+                  Fully Connected (NC, QP8, F32, QC8W) GEMM                 12 [████████░░░░░░░░░░░░░░░░░░░░░░]  25.58%          4.46        0.37        0.18        0.49
+                  ADD                                                        4 [██████░░░░░░░░░░░░░░░░░░░░░░░░]  19.29%          3.37        0.84        0.81        0.87
+                  Multiply (ND)                                             24 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   1.27%          0.22        0.01        0.00        0.03
+                  Log (NC)                                                   4 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.85%          0.15        0.04        0.03        0.05
+                  Extra Ops                                                    [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   2.37%          0.41
+                  Overhead                                                     [██░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   5.64%          0.98
+...
+Scope Summary
+runner          contributor                                              calls                                         %      total ms      avg ms      min ms      max ms
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+litert          encoder                                                      2 [█████████████████████████████░]  95.60%        941.76      470.88      469.83      471.93
+litert          featurizer                                                   4 [█░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   1.77%         17.45        4.36        4.28        4.44
+litert          joint_step                                                  42 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   1.43%         14.06        0.33        0.31        0.36
+litert          decoder_step                                                30 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   1.12%         11.06        0.37        0.34        0.65
+                Overhead                                                    30 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.08%          0.79        0.03
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                Scope Total                                                                                                     985.12
 ```
   {{< /tab >}}
   {{< tab header="Moonshine FP32" >}}
@@ -51,7 +74,7 @@ Run the Moonshine manifest:
   -t 1 --enable-op-profiling
 ```
 
-The output should include timing information like the excerpt below, along with statistics for individual operators. The operator statistics are omitted here for brevity.
+The output is similar to the following captured report. This ONNX Runtime runner reports model timings without operator details:
 
 ```output
 [TRANSCRIPTION]
@@ -59,18 +82,26 @@ Ever tried ever failed, no matter try again fail again fail better.
 ----------------
 Scope: run() [total ms: 290.30]
 Scope stats | calls: 1 | avg ms: 290.30 | min ms: 290.30 | max ms: 290.30
+Scope Summary
+runner          contributor                                              calls                                         %      total ms      avg ms      min ms      max ms
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+onnxrt          encoder                                                      1 [██████████████████████░░░░░░░░]  74.69%        216.82      216.82      216.82      216.82
+onnxrt          decoder                                                     15 [████████░░░░░░░░░░░░░░░░░░░░░░]  25.21%         73.19        4.88        3.23       25.37
+                Overhead                                                     1 [░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░]   0.10%          0.29        0.29
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                Scope Total                                                                                                     290.30
 ```
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-Compare the total `run()` time. Parakeet's 30 streaming calls complete one transcription compared with a single call for Moonshine.
- 
-These results are one example of how to compare the models; your timings will vary with your hardware and setup. On an Apple M3 Pro, Moonshine took 290.30 ms and Parakeet took 985.12 ms to process a single 9.963-second audio sample. The timings exclude setup and warmup, include profiling overhead, and do not assess transcription accuracy.
+These timings are based on a single 9.963-second audio sample. The timings exclude setup and warmup and include profiling overhead. This isn't an assessment of changes to transcription accuracy. 
 
-Pass your own representative audio samples in a JSON file with `-j runs.json` to evaluate more inputs. The shared Python API and CLI let you quickly profile models across different runtimes and find the most suitable model for your application by changing manifests.
+On an Apple M3 Pro, Moonshine takes 290.30 ms, while Parakeet takes 985.12 ms to process the audio sample. Compare total `run()` time: 30 Parakeet streaming calls complete one transcription, not 30 benchmark repetitions.
+
+Pass your own representative audio samples in a JSON file with `-j runs.json` to evaluate more inputs. The shared Python API and CLI let you quickly profile models across different runtimes. You can find the most suitable model for your application by changing manifests.
 
 ## What you've accomplished
 
-You've learned how brick types, implementations, model packages, and manifests fit together. You used Brick Manager to install models and build Compute Flow on your Apple silicon Mac, then connected speech recognition, translation, and speech synthesis in Python to turn an English recording into a French WAV file locally.
+You've compared speech recognition performance between Parakeet and Moonshine. 
 
-Finally, you replaced Parakeet with Moonshine by installing its brick and model package, rebuilding, and selecting a different manifest. The shared speech-to-text interface kept your Python script unchanged. You can use this approach to combine other bricks and select compatible models for your own applications.
+You can use the approach described in the Learning Path to combine other bricks and select compatible models for your own applications.
