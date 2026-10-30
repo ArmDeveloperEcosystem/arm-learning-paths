@@ -22,10 +22,17 @@
             return;
         }
 
-        try {
-            dismissed = window.localStorage.getItem(dismissalKey) === 'true';
-        } catch (error) {
-            // Keep the notice available when storage is disabled.
+        dismissed = document.cookie.split('; ').some(function (cookie) {
+            return cookie === dismissalKey + '=true';
+        });
+
+        // Preserve dismissals saved by the earlier local-storage implementation.
+        if (!dismissed) {
+            try {
+                dismissed = window.localStorage.getItem(dismissalKey) === 'true';
+            } catch (error) {
+                // Keep the notice available when storage is disabled.
+            }
         }
 
         if (!dismissed) {
@@ -34,11 +41,9 @@
 
         alertElement.addEventListener('visibleChange', function (event) {
             if (event.detail && event.detail.visible === false) {
-                try {
-                    window.localStorage.setItem(dismissalKey, 'true');
-                } catch (error) {
-                    // The alert still closes for this page when storage is disabled.
-                }
+                container.hidden = true;
+                document.cookie = dismissalKey + '=true; Max-Age=31536000; Path=/; SameSite=Lax' +
+                    (window.location.protocol === 'https:' ? '; Secure' : '');
             }
         });
     })();
