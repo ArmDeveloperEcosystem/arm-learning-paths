@@ -9,6 +9,8 @@ layout: learningpathall
 
 ## Inspect what each model reads per token
 
+Now that you've measured the memory bandwidth ceiling, you can check whether decode is memory-bound.
+
 Before you benchmark, check how many bytes decode reads from each file:
 
 ```bash
@@ -45,7 +47,9 @@ The output is similar to:
   model sizes the substitution can take over the file.
 ```
 
-The `per token` line is smaller than the file size. The token embedding table is part of the file. Decode only looks up one row of it per token instead of streaming all of it. For this 0.5B file, decode reads 346 MB of the 429 MB file, or 82 percent. Using the file size would make the model look slower relative to the ceiling than it is.
+The `per token` line is smaller than the file size. The token embedding table is part of the file. Decode looks up only one row of the table per token. Decode doesn't stream all of it. For this 0.5B file, decode reads 346 MB of the 429 MB file, or 82 percent.
+
+Using the file size would make the model look slower relative to the ceiling than it is.
 
 ## Run the diagnosis
 
@@ -58,10 +62,12 @@ llama-roofline diagnose $HOME/models \
     --threads 1,2,3,4
 ```
 
-The command took about 11 minutes on the Raspberry Pi 5 used for this Learning Path. It measures the memory ceiling again, then runs `llama-bench` for each model at each thread count. It uses a 128-token prompt and 128 generated tokens, and repeats each setting three times.
+The command took about 11 minutes on the Raspberry Pi 5 that was used for testing. 
+
+The command measures the memory ceiling again, then runs `llama-bench` for each model at each thread count. It uses a 128-token prompt and 128 generated tokens, and repeats each setting three times.
 
 {{% notice Note %}}
-Do not run anything else on the board while the diagnosis runs. If you are connected over SSH, run the command under `nohup` and redirect its output to a file so a dropped connection does not stop it.
+Don't run anything else on the board while the diagnosis runs. If you're connected over SSH, run the command under `nohup` and redirect its output to a file. Doing this prevents a dropped connection from stopping the diagnosis.
 {{% /notice %}}
 
 The output is similar to:
@@ -171,11 +177,11 @@ plan        : 3 model(s) x 4 thread setting(s), 3 repetition(s)
   diagnosis.md is the shareable one: paste it into an issue or a forum thread as is.
 ```
 
-## Read the answer
+## Read the diagnosis report
 
 The report starts with a section called `THE ANSWER`. It states whether decode is memory-bound and at what percentage of the measured ceiling.
 
-The decode results are close to the measured memory ceiling, reaching 84% to 86% of the 13.77 GB/s ceiling across all three models.
+The decode results are close to the measured memory ceiling. They reach 84% to 86% of the 13.77 GB/s ceiling across all three models.
 
 llama-roofline bases its verdict on the median percentage across your models. Use the percentage to decide what to change:
 
@@ -185,11 +191,17 @@ llama-roofline bases its verdict on the median percentage across your models. Us
 | 40 to 70 percent | Partly memory-bound | Check thread count and background load first |
 | Below 40 percent | Something other than memory is limiting decode | Check throttling, running more threads than cores, and swap |
 
-The `WHAT WAS MEASURED` table lists each model with its size and decode and prefill speed. It also lists the best thread count, achieved bandwidth and percentage of the ceiling. The report section named `THE ROOFLINE` prints the fitted line and its R squared value. An R squared close to 1 means the bandwidth equation explains your results. If R squared is below 0.90, llama-roofline adds a warning. The warning means something other than memory bandwidth is affecting decode.
+The `WHAT WAS MEASURED` table lists each model with its size and decode and prefill speed. It also lists the best thread count, achieved bandwidth, and percentage of the ceiling. 
+
+The report section named `THE ROOFLINE` prints the fitted line and its R squared value. An R squared value close to 1 means that the bandwidth equation explains your results. 
+
+If the R squared value is less than 0.90, llama-roofline adds a warning. The warning means that something other than memory bandwidth is affecting decode.
 
 ## Save the shareable report
 
-The diagnosis writes two files to `llama-roofline-out/`. List the generated files:
+The diagnosis writes two files to `llama-roofline-out/`.
+
+List the generated files:
 
 ```bash
 ls llama-roofline-out/
@@ -203,6 +215,8 @@ diagnosis.json  diagnosis.md
 
 `diagnosis.md` is formatted for pasting into an issue or a forum thread. `diagnosis.json` contains every measurement for your own analysis.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You have measured decode and prefill on three models and compared them with your system's bandwidth ceiling. You know whether decode is memory-bound on your Arm CPU and by how much. Next, you use the thread sweep to choose thread counts for decode and for prefill.
+You've measured decode and prefill on three models and compared them with the system bandwidth ceiling. You know whether decode is memory-bound on your Arm CPU and by how much. 
+
+Next, you'll use the thread sweep to choose thread counts for decode and for prefill.
