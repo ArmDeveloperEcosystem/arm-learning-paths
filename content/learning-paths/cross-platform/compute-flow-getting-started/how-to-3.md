@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Understand what changes when you replace a model
 
-Now that you've built the audio-to-audio pipeline, you can make changes to it.
+Now that you've built the audio-to-audio pipeline, you can make changes to the speech-to-text component.
 
 Speech-to-text is a brick type: audio and a sample rate go in, and text comes out.
 

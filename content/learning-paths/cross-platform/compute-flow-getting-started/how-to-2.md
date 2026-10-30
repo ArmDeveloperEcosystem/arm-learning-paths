@@ -36,7 +36,9 @@ command -v cc
 command -v c++
 ```
 
-Finally, remove any previously installed `llama.cpp` versions. For example, if installed with the `brew` package manager, run the following command:
+Finally, remove any previously installed `llama.cpp` versions.
+
+For example, if installed with the `brew` package manager, run the following command:
 
 ```bash
 brew uninstall llama.cpp
@@ -104,16 +106,16 @@ The environment check reports the available dependencies and native toolchain:
 
 Compute Flow requires Python 3.11 or later. `uv sync` installs the project Python dependencies into the virtual environment. With its default settings, [uv also downloads a compatible Python interpreter](https://docs.astral.sh/uv/concepts/python-versions/) if it can't find one locally.
 
-`compute-flow check` reports missing system dependencies and suggests installation commands. It doesn't install them or test whether the compiler can compile and link a program. If it reports a missing native compiler or Git installation, follow the suggested action and run the check again.
+`compute-flow check` reports missing system dependencies and suggests installation commands. It doesn't install dependencies or test whether the compiler can compile and link a program. If it reports a missing native compiler or Git installation, follow the suggested action and run the check again.
 
-Brick Manager automatically downloads managed tools, such as CMake and Git LFS, when a command needs them. The check reports these as `will be downloaded when needed`, so you don't need to install them manually. For example, `compute-flow build native` downloads its managed CMake version if it isn't already available.
+Brick Manager automatically downloads managed tools, such as CMake and Git Large File Storage (LFS), when a command needs them. The check reports these as `will be downloaded when needed`, so you don't need to install them manually. For example, `compute-flow build native` downloads its managed CMake version if it isn't already available.
 
 ## Install the three model packages
 
 Update the Brick Manager registry cache and install the models that will be used by your pipeline:
 
 {{% notice Note %}}
-For higher rate limits and faster downloads from Hugging Face, set the optional `HF_TOKEN` environment variable to your Hugging Face access token before installing the models. You can [create a Hugging Face access token](https://huggingface.co/settings/tokens) in account settings.
+For faster Hugging Face downloads and higher rate limits, set the optional `HF_TOKEN` environment variable before installing the models. You can [create a Hugging Face access token](https://huggingface.co/settings/tokens) in account settings.
 {{% /notice %}}
 
 ```bash
@@ -123,7 +125,9 @@ compute-flow model install lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation
 compute-flow model install tts:qwen3-tts qwen3-tts-0-6b-custom-voice
 ```
 
-Each `model install` command installs the brick source, if needed, and its model package. The identifiers select the following implementations:
+Each `model install` command installs the brick source, if needed, and its model package. 
+
+The identifiers select the following implementations:
 
 | Brick | Model package | Pipeline role |
 | --- | --- | --- |
@@ -295,9 +299,9 @@ if __name__ == "__main__":
     raise SystemExit(main())
 ```
 
-The code provides everything you need to run the audio-to-audio translation pipeline. The code first loads and configures each of the three bricks required for the application. It then runs each brick, with the output from the previous brick being passed to the next one. Finally, it saves the output of our pipeline.
+The code provides everything that you need to run the audio-to-audio translation pipeline. The code first loads and configures each of the three bricks required for the application. It then runs each brick, with the output from the previous brick being passed to the next one. Finally, it saves the pipeline output.
 
-All three bricks share these execution methods, documented in [Brick Runtime Interface V1](https://github.com/ARM-software/ComputeFlow/blob/main/docs/design/brick_runtime_interface_v1.md).
+All three bricks share these deployment methods, documented in [Brick Runtime Interface V1](https://github.com/ARM-software/ComputeFlow/blob/main/docs/design/brick_runtime_interface_v1.md).
 
 
 ## Translate a pre-recorded sample
@@ -336,6 +340,6 @@ You'll later learn how to select alternative models with different performance a
 
 ## What you've accomplished and what's next
 
-You've installed three Compute Flow brick types and used three of their model variants to build an audio-to-audio pipeline. Your application now turns an English recording into a local French WAV file. 
+You've installed three Compute Flow brick types and used three of their model variants to build an audio-to-audio pipeline. Your application now turns an English recording into a local French `.wav` file. 
 
 Next, you'll replace the speech recognition model and run the same application again.

@@ -31,7 +31,7 @@ Run the Parakeet manifest:
   -t 1 --enable-op-profiling
 ```
 
-The output is similar to this captured excerpt, showing the featurizer operator breakdown and the complete scope summary. The first-call report and other operator tables are omitted:
+The output is similar to the following captured excerpt showing the featurizer operator breakdown and the complete scope summary. The first-call report and other operator tables are omitted:
 
 ```output
 [TRANSCRIPTION]

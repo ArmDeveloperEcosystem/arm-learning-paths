@@ -15,7 +15,7 @@ A brick type defines an input and output contract. A brick variant implements th
 
 You'll use three different bricks to build an audio translation application. The first recognises human speech, the second translates speech into text, and the third generates audio. Each brick uses different models to accomplish the goal of translating English into French.
 
-You'll use Python to translate a short English recording into French speech on your Apple silicon Mac. The application processes the recording through three stages:
+You'll use a Python application to translate a short English recording into French speech on your Apple silicon Mac. The application processes the recording through three stages:
 
 ```text
 English WAV (Input)
@@ -37,7 +37,7 @@ Python coordinates the stages. It passes the speech-to-text transcription to the
 
 ## Separate the application from the model
 
-Your pipeline uses the following contracts:
+You'll use the following contracts:
 
 | Stage | Brick type | Input | Output |
 | --- | --- | --- | --- |
@@ -49,20 +49,20 @@ Your pipeline uses the following contracts:
 
 A model package contains the weights and supporting assets that a brick needs. A model manifest is a JSON configuration file in that package. It tells Compute Flow which brick implementation to use and how to load and run the models.
 
-The manifest describes model filenames, inference runtimes, and model-specific tensor formats. It also describes supporting assets such as tokenizers. The manifest provides configuration values and constants needed by the brick. The weights live in separate files that are referenced by the manifest.
+The manifest describes model filenames, inference runtimes, and model-specific tensor formats. It also describes supporting assets such as tokenizers. The manifest provides configuration values and constants that are needed by the brick. The weights live in separate files that are referenced by the manifest.
 
-For example, the Parakeet package includes `parakeet_tdt_0_6b_v3_manifest.json`. Your Python application reads this file with `cf.load_manifest()`, selects the implementation with `cf.load_brick()`, and prepares the models with `brick.setup()`. This keeps model-specific file paths and runtime configuration out of your application code.
+For example, the Parakeet package includes `parakeet_tdt_0_6b_v3_manifest.json`. The Python application reads this file with `cf.load_manifest()`. It selects the implementation with `cf.load_brick()`, and prepares the models with `brick.setup()`. This keeps model-specific file paths and runtime configuration out of your application code.
 
 ## Compute Flow Brick Manager
 
-To discover and install the required Compute Flow Bricks, you'll use Compute Flow Brick Manager alongside the selected AI models.
+To discover and install the required Compute Flow bricks, you'll use Compute Flow Brick Manager alongside the selected AI models.
 
-The Brick Manager is responsible for installing the bricks type and brick variant based on the selected AI model. It builds the developed application for the selected runtime platforms.
+The Brick Manager is responsible for installing the brick type and variant based on the selected AI model. It builds the developed application for the selected runtime platforms.
 
-To complete setup, you need network access to download dependencies and model packages. After setup, the example application reads the installed assets and performs inference on your Mac. It writes a WAV file locally and doesn't call a hosted inference service. You don't need a microphone because the input recording is included in a model package.
+To complete setup, you need network access to download dependencies and model packages. After setup, the application reads the installed assets and performs inference on your Mac. It writes a WAV file locally and doesn't call a hosted inference service. You don't need a microphone because the input recording is included in a model package.
 
 ## What you've learned and what's next
 
-You've learned that Compute Flow provides reusable AI building blocks that you can combine to build locally deployable AI applications. You've also learned about Compute Flows Bricks.
+You've learned that Compute Flow provides reusable AI building blocks that you can combine to build locally deployable AI applications. You've also learned about Compute Flows Brick Manager.
 
 Next, you'll build and run the example audio translation application with Compute Flow. 
