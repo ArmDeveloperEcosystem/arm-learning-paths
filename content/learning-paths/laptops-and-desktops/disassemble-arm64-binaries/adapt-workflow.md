@@ -1,17 +1,17 @@
 ---
 title: Automate and adapt the inspection workflow
-description: Automate the static SME/SME2 check for Mach-O binaries and identify how to adapt the evidence sequence to other Arm extensions and binary formats.
+description: Automate the SME and SME2 instruction check for Mach-O binaries and adapt the inspection method to other instruction groups and binary formats.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Automate the SME/SME2 check
+## Automate the SME and SME2 instruction check
 
-In the previous section, you inspected the fixture with two disassemblers and checked both negative controls. You can now combine the `llvm-objdump` and AWK steps in a reusable script.
+You inspected the example binary with two disassemblers and checked both comparison binaries. You can now combine the `llvm-objdump` and AWK steps in a reusable script.
 
-Continue in the `arm64-extension-inspection` working directory, alongside `strict-sme2.awk` and the compiled fixtures. Run the following block to create `verify-static-sme2.sh` and make it executable:
+Continue in the `arm64-extension-inspection` working directory, alongside `strict-sme2.awk` and the compiled binaries. Run the following block to create `verify-static-sme2.sh` and make it executable:
 
 ```bash
 cat > verify-static-sme2.sh <<'EOF'
@@ -19,7 +19,7 @@ cat > verify-static-sme2.sh <<'EOF'
 set -euo pipefail
 
 if [[ $# -lt 1 || $# -gt 2 ]]; then
-    printf 'Usage: %s <Mach-O artifact> [evidence directory]\n' "$0" >&2
+    printf 'Usage: %s <Mach-O binary> [output directory]\n' "$0" >&2
     exit 2
 fi
 
@@ -40,88 +40,84 @@ awk -f "$script_dir/strict-sme2.awk" \
     > "$evidence_dir/strict-sme2-hits.txt"
 
 if [[ ! -s "$evidence_dir/strict-sme2-hits.txt" ]]; then
-    printf 'FAIL: no strict SME/SME2 instruction was decoded from %s\n' "$artifact" >&2
+    printf 'FAIL: no matching SME or SME2 instructions found in %s\n' "$artifact" >&2
     exit 1
 fi
 
-printf 'PASS: strict SME/SME2 instructions were decoded from %s\n' "$artifact"
-printf 'Evidence: %s\n' "$evidence_dir"
+printf 'PASS: matching SME or SME2 instructions found in %s\n' "$artifact"
+printf 'Results saved to: %s\n' "$evidence_dir"
 EOF
 chmod +x verify-static-sme2.sh
 ```
 
-Run the script against the positive fixture:
+Run the script on the example binary:
 
 ```bash
 ./verify-static-sme2.sh sme2-positive evidence-positive
 ```
 
-The script returns status 0. The expected output is:
+The script returns exit status 0 to indicate that it found matching instructions. The expected output is:
 
 ```output
-PASS: strict SME/SME2 instructions were decoded from sme2-positive
-Evidence: evidence-positive
+PASS: matching SME or SME2 instructions found in sme2-positive
+Results saved to: evidence-positive
 ```
 
-Now run the same check against the string-only control:
+Now run the same check on the string-only comparison binary:
 
 ```bash
 ./verify-static-sme2.sh string-only-control evidence-string-only
 ```
 
-The script returns status 1. The expected output is:
+The script returns exit status 1. The expected output is:
 
 ```output
-FAIL: no strict SME/SME2 instruction was decoded from string-only-control
+FAIL: no matching SME or SME2 instructions found in string-only-control
 ```
 
-This `FAIL` result is expected for a negative control: status 1 means that no matching instruction was found. The evidence directory still contains `decoder-version.txt`, `llvm-objdump.txt`, and the empty `strict-sme2-hits.txt`, so you can inspect how the result was obtained.
+This `FAIL` result is expected because the comparison binary contains no matching instructions. Exit status 1 indicates that the filter found no matches. The output directory still contains the disassembler version in `decoder-version.txt`, the disassembly in `llvm-objdump.txt`, and an empty `strict-sme2-hits.txt` file.
 
-This check verifies static inclusion. It doesn't verify that a runtime dispatcher selected the code, that a target executed it, or that it improved performance.
+This check confirms that matching instructions are present in the binary. It doesn't show whether the application runs them or whether they improve performance.
 
-## Reuse the evidence sequence
+## Check another binary
 
-To apply the same approach beyond the fixture, use this sequence:
+To inspect another binary, follow these steps:
 
-1. Select the final shipped artifact, not an object file or build log.
-2. Select the architecture slice and executable sections.
-3. Decode the instructions with a decoder that enables the required extension.
-4. Apply an operand-aware extension predicate to decoded instruction text.
-5. Inspect nearby instructions, symbols, and component context.
-6. Record a verdict that states what the evidence proves and what remains unknown.
+1. Select the executable or library you plan to distribute.
+2. Select the architecture slice and sections containing executable code.
+3. Decode the instructions with a disassembler configured to recognize the instruction group you want to check.
+4. Filter the decoded instructions by checking both their names and operands.
+5. Inspect the surrounding function and its symbols.
+6. Summarize which instructions you found and what the checks don't establish.
 
-For the positive fixture, combining the manual checks from the previous section with the script results supports this verdict:
+For the example binary, you can summarize the manual checks and script results as follows:
 
-```output
-Static presence confirmed: strict SME/SME2 instructions decode from executable
-code at matching static PCs in two decoder views. Runtime execution, dispatch
-selection, and performance impact were not measured.
-```
+Both disassemblers found SME and SME2 instructions at matching addresses. These checks don't show whether the application runs those instructions or whether they improve performance.
 
-## Design another extension predicate
+## Check for other instruction groups
 
-You can apply the same sequence to SVE and SVE2, Dot Product, Int8 Matrix Multiplication (I8MM), BFloat16 (BF16), Large System Extensions (LSE), cryptographic instructions, and Pointer Authentication. Each extension has different encodings, aliases, and operand constraints.
+You can apply the same method to other instruction groups, such as Scalable Vector Extension (SVE), SVE2, and Dot Product instructions.
 
-Don't publish a supposedly complete regular expression based only on mnemonic names. Ground the predicate in the [A64 Instruction Set Architecture](https://developer.arm.com/documentation/ddi0602/latest/) and validate it with these controls:
+To check another instruction group, update the filter to recognize its instruction names and operands. Check the documentation for those instructions rather than relying on names alone. Test the filter with these comparison binaries:
 
-- A positive artifact containing known extension instructions in executable code
-- A negative artifact containing nearby base-architecture or related-extension instructions
-- A string-only artifact containing feature names and mnemonic-like text but no matching instruction
+- A binary containing instructions you want to detect
+- A binary containing similar instructions that shouldn't match
+- A binary containing related strings and symbol names, but no matching instructions
 
-For example, a Dot Product predicate must distinguish the intended dot-product encodings and operand types from unrelated multiply-accumulate operations. A Pointer Authentication predicate must account for instruction aliases and whether hints decode differently under the selected architecture features. These are validation requirements, not complete predicates.
+## Adapt the commands for Linux or Windows
 
-## Apply the method to ELF and PE/COFF
+The inspection method also applies to Linux and Windows binaries, but the commands must match the binary format:
 
-The evidence model is independent of the object format, but the artifact and section-selection commands change:
-
-| Artifact format | Common deployment | What changes |
+| Binary format | Common platforms | What to inspect |
 | --- | --- | --- |
-| Mach-O | macOS and iOS | Select an arm64 slice and Mach-O executable sections |
-| ELF | Arm Linux, Android native libraries, and most Neoverse releases | Select AArch64 ELF executable sections and account for shared objects and stripped symbols |
-| PE/COFF | Windows on Arm | Select the ARM64 image and executable PE sections |
+| Mach-O | macOS and iOS | The arm64 slice and sections containing executable code |
+| ELF | Linux and Android | The AArch64 executable or shared library and its executable code sections |
+| PE/COFF | Windows on Arm | The ARM64 executable or library and its executable code sections |
 
-Don't use the Mach-O commands in this Learning Path to claim that a separate Neoverse Linux artifact contains the same code. Inspect the actual ELF executable or shared library that you plan to release on the Neoverse target.
+Inspect the actual executable or library you plan to distribute. Checking the macOS binary doesn't establish what a separately built Linux or Windows binary contains.
 
-## What you've accomplished and what's next
+## What you've accomplished
 
-You can now automate the static instruction check and adapt the inspection method to other Arm extensions and binary formats. Next, you'll learn when to use static inspection and when to use Arm Performix to investigate runtime performance.
+You can now inspect a macOS binary for SME and SME2 instructions using two disassemblers and automate the check with a reusable script. You also know why strings, symbols, and compiler options alone don't prove those instructions are present.
+
+Apply this workflow to your own executable or library. Remember that finding instructions in a binary doesn't establish whether your application runs them or whether they improve performance.

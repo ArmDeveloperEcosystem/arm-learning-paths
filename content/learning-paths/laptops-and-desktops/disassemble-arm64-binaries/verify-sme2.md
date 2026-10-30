@@ -1,6 +1,6 @@
 ---
 title: Disassemble and verify SME2
-description: Cross-check SME/SME2 instruction bytes, operands, and static addresses with otool and llvm-objdump, then validate the checks against negative controls.
+description: Use otool and llvm-objdump to check SME and SME2 instructions in the example binary, then test the filter on comparison binaries.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -11,7 +11,7 @@ layout: learningpathall
 
 Assemblers encode Arm Instruction Set Architecture (ISA) instruction mnemonics and operands into four-byte, 32-bit words. You can use a disassembler to decode those ISA words to recover the mnemonics and their operands.
 
-Use the true-positive fixture you created earlier as an example of assembly and disassembly. When you wrote the source, you included this line:
+Use the example program you created earlier to explore assembly and disassembly. When you wrote the source, you included this line:
 
 ```output
 fmopa za0.s, p0/m, p0/m, z0.s, z1.s
@@ -19,17 +19,17 @@ fmopa za0.s, p0/m, p0/m, z0.s, z1.s
 
 The mnemonic is `fmopa`, and the following operands identify the ZA tile, predicate registers, and vector registers.
 
-
-When assembled, that mnemonic (za0.s) and operand (p0/m, p0/m, z0.s, z1.s) are converted to four bytes (in little endian format) as 00 00 81 80, which are also represented as 0x80810000 (in big endian format).  
+The assembler converts `fmopa` and its operands into the four bytes shown here:
 
 ```output
 00 00 81 80 -> 0x80810000 -> fmopa za0.s, p0/m, p0/m, z0.s, z1.s
 ```
 
+## Create a filter for SME and SME2 instructions
 
-## Define a scoped SME/SME2 predicate
+AWK is a command-line tool for processing text. This AWK script filters disassembly output by checking instruction names and operands. It recognizes the state-control, ZA access, matrix-operation, and SME2 predicate instructions used in this example.
 
-Run the following command to create `strict-sme2.awk`. The predicate recognizes the high-signal state-control, ZA access, matrix-operation, and SME2 predicate forms used in this Learning Path.
+Run the following command to create `strict-sme2.awk`:
 
 ```bash
 cat > strict-sme2.awk <<'EOF'
@@ -68,21 +68,21 @@ is_strict_sme2($0) { print }
 EOF
 ```
 
-The predicate accepts `ptrue` only when its first operand is PN8 through PN15. It accepts `whilelt` only with that PN range and a `vlx2` or `vlx4` operand. It rejects ordinary SVE forms such as `ptrue p0.s`.
+The filter accepts `ptrue` only when its first operand is `pn8` through `pn15`. It accepts `whilelt` only with that register range and a `vlx2` or `vlx4` operand. It rejects ordinary SVE forms such as `ptrue p0.s`.
 
-{{% notice Scoped predicate %}}
-This predicate is deliberately scoped to the instruction families demonstrated here. It isn't a complete implementation of SME or SME2. Treat every future addition as an ISA-backed classification change with positive, negative, and string-only tests.
+{{% notice Filter scope %}}
+This filter recognizes the instruction forms used in this example. It doesn't detect every SME or SME2 instruction. Check the instruction reference and test any additional matching rules against binaries with and without the instructions.
 {{% /notice %}}
 
-## Decode with otool
+## Decode with `otool`
 
-The `otool` command selects the arm64 slice and disassembles its main executable code section. Apply the predicate to decoded text rather than scanning raw bytes or strings:
+The `otool` command selects the arm64 slice and disassembles its main executable code section. Apply the filter to decoded text rather than scanning raw bytes or strings:
 
 ```bash
 otool -tvV -arch arm64 "$BIN" | awk -f strict-sme2.awk
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 0000000100000424  smstart
@@ -93,18 +93,18 @@ The expected output is:
 000000010000043c  smstop
 ```
 
-Static PCs can shift when the source, compiler, linker, or options change. Within one artifact, use the numeric addresses to correlate both decoder views.
+Instruction addresses can change when you rebuild the program. When comparing disassembler output for the same binary, check that the addresses match.
 
-## Cross-check with llvm-objdump
+## Cross-check with `llvm-objdump`
 
-LLVM's decoder can show each instruction's four bytes. The `--mattr` option enables the SME and SME2 decoding tables explicitly:
+The `llvm-objdump` disassembler can show each instruction's four bytes. The `--mattr` option enables decoding of SME and SME2 instructions:
 
 ```bash
 xcrun llvm-objdump -d --macho --arch=arm64 --mattr=+sme,+sme2 "$BIN" |
   awk -f strict-sme2.awk
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 100000424:  7f 47 03 d5  smstart
@@ -115,9 +115,9 @@ The expected output is:
 10000043c:  7f 46 03 d5  smstop
 ```
 
-The leading zeros differ between the display formats, but the numeric static PCs agree. The following correlation captures the direct static evidence:
+The tools display leading zeros differently, but the instruction addresses match. Compare the addresses, bytes, and decoded instructions:
 
-| Static PC | Executable bytes | Decoded instruction | Role in the region |
+| Instruction address | Executable bytes | Decoded instruction | Purpose |
 | --- | --- | --- | --- |
 | `0x100000424` | `7f 47 03 d5` | `smstart` | Enable streaming mode and ZA |
 | `0x10000042c` | `10 78 a0 25` | `ptrue pn8.s` | Initialize an SME2 predicate-as-counter |
@@ -126,18 +126,18 @@ The leading zeros differ between the display formats, but the numeric static PCs
 | `0x100000438` | `00 00 81 80` | `fmopa za0.s, ...` | Update a ZA tile with an outer product |
 | `0x10000043c` | `7f 46 03 d5` | `smstop` | Disable streaming mode and ZA |
 
-Two decoders corroborate the meaning of the same bytes in the same artifact. They aren't two runtime measurements.
+Both disassemblers identify the same instructions in the same binary. This confirms their presence, but doesn't show whether they run.
 
-## Inspect the coherent code region
+## Inspect the complete function
 
-Use the symbol to display the complete small function from its label through its return:
+Use the function's symbol to display all its instructions, from the label through the `ret` instruction:
 
 ```bash
 otool -tvV -arch arm64 "$BIN" |
   sed -n '/_sme2_fixture_kernel:/,/ret/p'
 ```
 
-The expected output is:
+The output is similar to:
 
 ```output
 _sme2_fixture_kernel:
@@ -151,11 +151,11 @@ _sme2_fixture_kernel:
 0000000100000440  ret
 ```
 
-The nearby state setup, predicate operations, ZA initialization, matrix operation, and state teardown form a coherent SME/SME2 region. Region coherence strengthens attribution, but the function could still be unreachable or unselected at runtime.
+The function contains setup instructions, matrix operations, and cleanup instructions. Their presence doesn't prove the application calls this function.
 
-## Run the controls
+## Check the comparison binaries
 
-Apply the same decoder and predicate to both controls:
+Apply the same disassembler and filter to both comparison binaries:
 
 ```bash
 for CONTROL in string-only-control plain-arm64-control; do
@@ -172,8 +172,8 @@ string-only-control: no strict hits
 plain-arm64-control: no strict hits
 ```
 
-The string-only control still contains the SME2 hint and symbol you observed earlier. Its zero instruction hits confirm that the predicate scans decoded executable code rather than feature-related words.
+The string-only comparison binary still contains the SME2-related string and symbol you found earlier. The filter finds no matching instructions because it checks disassembled code rather than strings or symbol names.
 
 ## What you've accomplished and what's next
 
-You verified SME/SME2 instructions in the binary by examining their bytes, operands, addresses, and surrounding code. Next, you'll combine these checks in a reusable script and adapt the method to other Arm extensions and binary formats.
+You verified SME and SME2 instructions in the binary by examining their bytes, operands, addresses, and surrounding code. Next, you'll combine these checks in a reusable script and adapt the method to other instruction groups and binary formats.
