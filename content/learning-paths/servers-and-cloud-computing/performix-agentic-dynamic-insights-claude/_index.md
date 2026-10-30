@@ -18,7 +18,7 @@ prerequisites:
     - A [configured Arm Linux target](/learning-paths/servers-and-cloud-computing/performix-get-started/add_target/) with a workload to profile
     - VS Code, with the Claude Code extension version 2.1.261 or later installed to add MCP servers through the extension interface
     - Access to Claude Code through a Claude account, or an organization-approved Anthropic API key provided through the `ANTHROPIC_API_KEY` environment variable
-    - Permission from your organization to share profile data, symbols, source excerpts, disassembly excerpts, and performance metrics with Claude Code
+    - Permission from your organization to share profile data, symbols, source and disassembly excerpts, and performance metrics with Claude Code
 
 # START generated_summary_faq
 generated_summary_faq:
