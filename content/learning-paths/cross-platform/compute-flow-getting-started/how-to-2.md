@@ -58,6 +58,8 @@ uv sync && source .venv/bin/activate
 compute-flow check
 ```
 
+The environment check reports the available dependencies and native toolchain:
+
 ```output
 ╭───────────────────────────────────────── OK Environment Ready ─────────────────────────────────────────╮
 │  All required system dependencies are available.                                                       │
@@ -129,7 +131,7 @@ Each `model install` command installs the brick source, if needed, and its model
 | `lm_text:lm-text-generic` | Hy-MT2 1.8B, 2-bit | Translate English text into French |
 | `tts:qwen3-tts` | Qwen3-TTS 0.6B Custom Voice | Synthesize French speech |
 
-Models are downloaded to the `~/.compute-flow` directory by default. The `compute-flow model info` command displays details about a specified model
+Models are downloaded to the `~/.compute-flow` directory by default. The `compute-flow model info` command displays details about a specified model:
 
 ```bash
 compute-flow model info stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic
@@ -292,6 +294,7 @@ def main(argv: list[str] | None = None) -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 ```
+
 The code provides everything you need to run the audio-to-audio translation pipeline. The code first loads and configures each of the three bricks required for the application. It then runs each brick, with the output from the previous brick being passed to the next one. Finally, it saves the output of our pipeline.
 
 All three bricks share these execution methods, documented in [Brick Runtime Interface V1](https://github.com/ARM-software/ComputeFlow/blob/main/docs/design/brick_runtime_interface_v1.md).

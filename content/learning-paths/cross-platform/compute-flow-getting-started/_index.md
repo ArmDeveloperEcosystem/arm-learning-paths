@@ -4,12 +4,12 @@ description: Build and run an audio-to-audio pipeline as a Python application on
 
 minutes_to_complete: 15
 
-who_is_this_for: This is an introductory topic for developers who want to combine multiple AI models into a performant end-to-end AI applicaton running on an Arm-based CPU. 
+who_is_this_for: This is an introductory topic for developers who want to combine multiple AI models into a performant end-to-end AI application running on an Arm-based CPU.
 
 learning_objectives:
     - Identify how Compute Flow bricks and manifests separate application code from model implementations.
-    - Deploy an AI audio-to-audio translation pipline in Python with Compute Flow. 
-    - Select the speech recognition model and verify the pipeline using the same application and recording.
+    - Deploy an AI audio-to-audio translation pipeline in Python with Compute Flow.
+    - Select a speech recognition model and verify the pipeline using the same application and recording.
 
 prerequisites:
     - An Arm-based system such as an Apple® silicon Mac

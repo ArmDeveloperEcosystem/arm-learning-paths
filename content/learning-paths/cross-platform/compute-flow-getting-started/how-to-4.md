@@ -1,6 +1,6 @@
 ---
 title: Compare speech-to-text performance
-description: Replace the Parakeet AI model with Moonshine in your speech-to-text brick
+description: Compare Parakeet and Moonshine speech-to-text performance using the same audio sample.
 weight: 5
 
 ### FIXED, DO NOT MODIFY

@@ -59,8 +59,8 @@ python audio_translation_example/audio_translation.py \
 ```
 The Moonshine package includes the same `beckett.wav` recording that was used in the first run.
 
-## What you've accomplished and what's mext
+## What you've accomplished and what's next
 
 You've replaced Parakeet with Moonshine by installing its brick and model package, rebuilding, and selecting a different manifest. The shared speech-to-text interface kept your Python script unchanged. 
 
-Next, you'll compare performance between Parakeet and Moonshine. 
+Next, you'll compare performance between Parakeet and Moonshine.
