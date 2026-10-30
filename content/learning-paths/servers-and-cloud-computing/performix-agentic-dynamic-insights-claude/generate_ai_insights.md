@@ -37,7 +37,7 @@ Focused prompts usually produce more useful results than broad application-wide 
 
 ## Evaluate and refine AI insights
 
-A useful AI insight identifies the run it analyzed and connects its conclusion to measured evidence. The evidence can include sample percentages, call paths, source attribution, or disassembly. An insight should also state when the available data can't establish a root cause.
+A useful AI insight identifies the run that it analyzed and connects its conclusion to measured evidence. The evidence can include sample percentages, call paths, source attribution, or disassembly. An insight should also state when the available data can't establish a root cause.
 
 If a recommendation isn't traceable, ask for one finding and its evidence:
 

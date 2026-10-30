@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for software developers and performance e
 learning_objectives:
     - Configure the Arm Performix Model Context Protocol (MCP) server for the Claude Code extension in Visual Studio Code (VS Code).
     - Verify that Claude Code can access Arm Performix recipes, targets, and runs.
-    - Create or select a supported Code Hotspots run.
+    - Create a supported Code Hotspots run.
     - Generate an AI insight and validate its recommendations against profile evidence.
 
 prerequisites:

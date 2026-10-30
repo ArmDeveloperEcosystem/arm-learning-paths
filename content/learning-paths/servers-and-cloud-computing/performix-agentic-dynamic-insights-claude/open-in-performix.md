@@ -17,12 +17,13 @@ A chat response helps you triage a performance problem, but the underlying profi
 apx run info "<run-id>"
 ```
 
-Replace `<run-id>` with the ID you recorded. Use the returned workload, recipe, target information, and timestamps to identify the corresponding run in the GUI:
+Replace `<run-id>` with the ID that you recorded. Use the returned workload, recipe, target information, and timestamps to identify the corresponding run in the GUI:
 
-1. Open Arm Performix on the host that stores the run used by the Model Context Protocol (MCP) server.
+1. Open Arm Performix on the host that stores the run that was used by the Model Context Protocol (MCP) server.
 2. Select **Runs** in the activity bar on the left, or select **Explore run data** on the home page.
-3. Locate the Code Hotspots run using its timestamp, recipe, and workload labels, then select it to open its results.
-4. Open **Run Details**. Compare the workload, execution times, target configuration, and recipe parameters with those of the selected run. Don't rely on the display name alone.
+3. Locate the Code Hotspots run using its timestamp, recipe, and workload labels.
+4. Select the run to open its results.
+5. Select **Run Details**. Compare the returned workload, execution times, target configuration, and recipe parameters with those of the selected run. Don't rely on the display name alone.
 
 If you can't identify the matching run, perform the missing-run checks described in [Troubleshoot the MCP connection](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-claude/configure_mcp_claude/#code-hotspots-runs-are-missing) before evaluating the insight.
 
@@ -32,7 +33,7 @@ Inspect the following views to verify the claim:
 
 - **Flame graph**: Identify where sampled CPU time accumulates across call paths.
 - **Functions**: Confirm which functions account for the largest sample percentages.
-- **Call Stack**: Distinguish a function's own cost from the cost of its callees.
+- **Call Stack**: Distinguish the cost of a function from the cost of its callees.
 - **Source**: Correlate samples with source lines when source mapping is available.
 - **Disassembly**: Inspect generated instructions and confirm claims about the compiled code.
 - **Compare**: Evaluate equivalent before-and-after runs.
@@ -40,7 +41,7 @@ Inspect the following views to verify the claim:
 For a concrete check of the highest-impact hotspot finding, complete the following steps:
 
 1. Record the function name, sample count or percentage, and call path cited by Claude Code. If the response omits these details, ask for them before continuing.
-2. Locate the function in **Functions** and compare the reported metric with the profile. Use the same filters and distinguish samples attributed to the function itself from samples that include its callees.
+2. Locate the function in **Functions** and compare the reported metric with the profile. Use the same filters and distinguish samples that are attributed to the function from samples that include its callees.
 3. Open **Call Stack** and check that the cited callers and callees match the profile.
 4. If the recommendation refers to a source line or instruction, double-click the function to open the **Source Code Viewer**. Use **Source**, **Disassembly**, or **Split** to inspect the claim. If source mapping is missing, select **Specify Root Directory** and choose the matching source tree on your host.
 5. Record whether the observation matches, conflicts with, or can't be established from the available data. Ask Claude Code to revise any finding whose function, metric, or call path doesn't match.

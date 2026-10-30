@@ -24,7 +24,7 @@ Before profiling, identify the following information:
 - The working directory and required environment variables of the workload
 - Whether running the workload has side effects
 
-## Create a run with Claude Code
+### Create a run with Claude Code
 
 First, ask Claude Code to list the configured targets:
 
@@ -51,11 +51,11 @@ Use Arm Performix to run the Code Hotspots recipe on target "graviton-dev" with 
 
 Claude Code uses the MCP server to start the recipe. Review any permission request before allowing the assistant to run a command on the target.
 
-## Create a run with the Arm Performix CLI
+### Create a run with the Arm Performix CLI
 
 If you prefer to control collection from a terminal, first check that the recipe dependencies and workload are ready.
 
-The following single-line commands work in Bash, Zsh, and PowerShell when `apx` is on your `PATH`. For host-specific PATH setup, see [Use the Arm Performix CLI](/install-guides/performix/#use-the-arm-performix-cli). Replace `my-target` and the example workload with your target name and workload command:
+The following single-line commands work in `bash`, `zsh`, and PowerShell when `apx` is on your `PATH`. For host-specific PATH setup, see [Use the Arm Performix CLI](/install-guides/performix/#use-the-arm-performix-cli). Replace `my-target` and the example workload with your target name and workload command:
 
 ```bash
 apx recipe ready code_hotspots --target my-target --workload "/opt/myapp/bin/my_app --input /data/input.dat"
@@ -97,6 +97,6 @@ apx target test --target "<target-name>"
 
 ## What you've accomplished and what's next
 
-You now have the stable identifier Claude Code needs to analyze the intended profile.
+You now have the stable identifier that Claude Code needs to analyze the intended profile.
 
-Next, you'll generate AI insights from a Code Hotspots run.
+Next, you'll generate AI insights from the Code Hotspots run.

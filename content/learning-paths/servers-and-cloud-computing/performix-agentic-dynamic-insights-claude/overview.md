@@ -11,12 +11,12 @@ layout: learningpathall
 
 [Arm Performix](https://developer.arm.com/servers-and-cloud-computing/arm-performix) is a performance toolkit designed to help developers identify bottlenecks and validate improvements on Arm-based systems. The toolkit turns low-level performance data into actionable insights through guided analysis paths called recipes. You can use these recipes to answer common performance questions and move quickly from observation to root cause.
 
-Arm Performix includes a local Model Context Protocol (MCP) server. MCP is a standard way for an AI assistant to discover and call tools. AI assistants such as Claude Code can use the MCP server to query Performix recipes, targets, and runs from Visual Studio Code (VS Code). This provides AI assistants an alternative to relying on source-code analysis.
+Arm Performix includes a local Model Context Protocol (MCP) server. MCP is a standard way for an AI assistant to discover and call tools. The MCP server provides AI assistants such as Claude Code an alternative to relying on source-code analysis. AI assistants can use the MCP server to query Performix recipes, targets, and runs from Visual Studio Code (VS Code). 
 
 You'll connect the server to Claude Code, select or create a Code Hotspots run, and ask for an AI insight. The response should connect each recommendation to evidence from the selected run.
 
 {{% notice Important %}}
-The MCP server runs on the same host as Claude Code. It can make profile data, symbols, source excerpts, disassembly excerpts, and performance metrics available to the assistant. Before you continue, confirm that this use complies with the data-handling policy of your organization.
+The MCP server runs on the same host as Claude Code. It can make profile data, symbols, source and disassembly excerpts, and performance metrics available to the assistant. Before you continue, confirm that this use complies with the data-handling policy of your organization.
 {{% /notice %}}
 
 Use AI-generated responses to support performance investigation. Validate important findings by reviewing the relevant data in Arm Performix and by rerunning the workload after making changes.
