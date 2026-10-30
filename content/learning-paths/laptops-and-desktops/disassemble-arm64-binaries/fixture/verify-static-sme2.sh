@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if [[ $# -lt 1 || $# -gt 2 ]]; then
-    printf 'Usage: %s <Mach-O artifact> [evidence directory]\n' "$0" >&2
+    printf 'Usage: %s <Mach-O binary> [output directory]\n' "$0" >&2
     exit 2
 fi
 
@@ -23,9 +23,9 @@ awk -f "$script_dir/strict-sme2.awk" \
     > "$evidence_dir/strict-sme2-hits.txt"
 
 if [[ ! -s "$evidence_dir/strict-sme2-hits.txt" ]]; then
-    printf 'FAIL: no strict SME/SME2 instruction was decoded from %s\n' "$artifact" >&2
+    printf 'FAIL: no matching SME or SME2 instructions found in %s\n' "$artifact" >&2
     exit 1
 fi
 
-printf 'PASS: strict SME/SME2 instructions were decoded from %s\n' "$artifact"
-printf 'Evidence: %s\n' "$evidence_dir"
+printf 'PASS: matching SME or SME2 instructions found in %s\n' "$artifact"
+printf 'Results saved to: %s\n' "$evidence_dir"

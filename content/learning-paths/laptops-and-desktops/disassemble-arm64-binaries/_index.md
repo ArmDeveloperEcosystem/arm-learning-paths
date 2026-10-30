@@ -1,25 +1,25 @@
 ---
-title: Disassemble Arm64 binaries to verify architecture extensions
+title: Disassemble macOS binaries to check for SME and SME2 instructions
 
 draft: true
 cascade:
     draft: true
     
-description: Learn how to disassemble a final arm64 Mach-O executable and verify exact instruction bytes, operands, static addresses, and symbols for an Arm architecture extension.
+description: Use otool and llvm-objdump on macOS to verify that a compiled binary contains SME and SME2 instructions.
 
 minutes_to_complete: 45
 
-who_is_this_for: You want to verify that Arm architecture extension optimizations are present in a final binary and learn the basics of binary disassembly on Arm-based systems.
+who_is_this_for: This is an introductory topic for software developers who want to disassemble binaries on macOS and check for SME and SME2 instructions.
 
 learning_objectives:
-    - Identify the arm64 slice, executable code, symbols, and supporting strings in a Mach-O binary.
-    - Decode instruction bytes and correlate mnemonics, operands, static program counters, and symbols with two disassemblers.
-    - Distinguish build intent and supporting hints from static instruction evidence and runtime proof.
+    - Identify the architecture, executable code, symbols, and supporting strings in a macOS binary.
+    - Use two disassemblers to inspect instruction bytes, names, operands, and addresses.
+    - Explain what disassembly can and can't tell you about SME and SME2 instructions.
 
 prerequisites:
-    - An Apple silicon Mac. SME2 hardware is not required because you will build but not run the SME2 fixture.
-    - Xcode 26.6 or compatible Xcode command-line tools with Clang, `otool`, `nm`, and `llvm-objdump`.
-    - Basic familiarity with C, assembly language, and the macOS Terminal.
+    - An Apple silicon Mac. You will compile and inspect the example program without running it, so SME2 hardware support isn't needed.
+    - Xcode 26.6 or newer, which includes `clang`, `otool`, `nm`, and `llvm-objdump`
+    - Basic familiarity with C, assembly language, and the macOS terminal
 
 author: Geremy Cohen
 
@@ -30,9 +30,7 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
-armips:
-    - Cortex-A
-    - Neoverse
+armips: []
 tools_software_languages:
     - Clang
     - LLVM
@@ -43,32 +41,12 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: A64 Instruction Set Architecture
-        link: https://developer.arm.com/documentation/ddi0602/latest/
-        type: documentation
+        title: Arm Scalable Matrix Extension (SME) Introduction (Part 1)
+        link: https://developer.arm.com/community/arm-community-blogs/b/architectures-and-processors-blog/posts/arm-scalable-matrix-extension-introduction
+        type: blog
     - resource:
         title: LLVM llvm-objdump command guide
         link: https://llvm.org/docs/CommandGuide/llvm-objdump.html
-        type: documentation
-    - resource:
-        title: Arm Performix install guide
-        link: /install-guides/performix/
-        type: documentation
-    - resource:
-        title: Find Code Hotspots with Arm Performix
-        link: /learning-paths/servers-and-cloud-computing/cpu_hotspot_performix/
-        type: learning-path
-    - resource:
-        title: Optimize application performance using Arm Performix CPU microarchitecture analysis
-        link: /learning-paths/servers-and-cloud-computing/performix-microarchitecture/
-        type: learning-path
-    - resource:
-        title: Optimize memory access behavior using Arm Performix and the Arm MCP Server
-        link: /learning-paths/servers-and-cloud-computing/performix-memory-access/
-        type: learning-path
-    - resource:
-        title: Arm Scalable Matrix Extension 2 (SME2)
-        link: https://www.arm.com/technologies/sme2
         type: documentation
 
 ### FIXED, DO NOT MODIFY

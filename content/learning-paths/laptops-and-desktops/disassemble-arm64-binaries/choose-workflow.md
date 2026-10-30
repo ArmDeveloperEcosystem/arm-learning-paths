@@ -2,6 +2,7 @@
 title: Choose static inspection or Arm Performix
 description: Choose between static disassembly and Arm Performix profiling to answer questions about instruction presence, runtime execution, and performance.
 weight: 6
+draft: true
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -13,7 +14,7 @@ Static disassembly and runtime performance analysis answer different questions. 
 
 | Question | Recommended workflow |
 | --- | --- |
-| What extension-specific code is present in this artifact, where is it, and what exact bytes support the claim? | This static-disassembly Learning Path |
+| Does this binary contain SME or SME2 instructions, and where are they? | This static-disassembly Learning Path |
 | What executed on an Arm Linux target, where was time spent, and which CPU or memory behavior should be optimized? | Arm Performix |
 
 [Arm Performix](/install-guides/performix/) is a performance-analysis environment. Its host application can run on macOS, Windows, or Linux and connects to a supported Arm Linux profiling target. Use the existing Learning Paths to answer specific runtime questions:
@@ -25,7 +26,7 @@ Static disassembly and runtime performance analysis answer different questions. 
 
 Arm Performix Instruction Mix can report categories of instructions observed during profiling. That runtime view complements static inspection, but it doesn't replace the exact static-PC, symbol, operand, and byte-level artifact evidence you collected here.
 
-You will often use both workflows. Start with static inspection to confirm that the required extension-specific code shipped. Then use Arm Performix on the supported Arm Linux target to learn whether the application executed that code path and where to focus performance work.
+You will often use both workflows. Start with static inspection to confirm that the binary contains the instructions you're looking for. Then use Arm Performix on the supported Arm Linux target to learn whether the application executed that code path and where to focus performance work.
 
 ## What you've learned and what's next
 

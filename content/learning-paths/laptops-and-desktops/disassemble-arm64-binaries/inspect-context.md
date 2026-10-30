@@ -1,6 +1,6 @@
 ---
-title: Inspect binary context
-description: Inspect strings and symbols in arm64 Mach-O fixtures to distinguish supporting SME2 hints from instruction evidence.
+title: Inspect strings and symbols in a binary
+description: Search a macOS binary for SME2-related strings and symbols, and understand why these don't prove SME2 instructions are present.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -11,26 +11,26 @@ layout: learningpathall
 
 A string is printable data stored in the binary. It can reveal a feature check, diagnostic message, or component name without interpreting executable machine code.
 
-Set the positive fixture as the artifact to inspect, then search its arm64 slice for SME2-related text:
+Select the example binary, then search its arm64 slice for SME2-related text:
 
 ```bash
 BIN=sme2-positive
 strings -arch arm64 "$BIN" | grep -Ei 'FEAT_SME|FEAT_SME2|sme2|matrix|kernel'
 ```
 
-The output includes the feature-name string. The output is similar to:
+The output includes the feature-name string:
 
 ```output
 hw.optional.arm.FEAT_SME2
 ```
 
-This text supports the interpretation that the program is SME2-aware. It could remain in a binary after extension-specific code was removed, so it isn't instruction proof.
+This text suggests that the program includes code related to SME2. It could remain in a binary after SME and SME2 instructions were removed, so it doesn't prove those instructions are present.
 
 ## Inspect symbols
 
-The `nm` tool reads structured symbol-table metadata. A code symbol can associate a name with a static address, which helps you attribute nearby instructions.
+The `nm` tool lists symbols in a binary. Symbols associate names with addresses, helping you locate functions and data.
 
-Search the positive fixture for relevant symbols:
+Search the example binary for SME2-related symbols:
 
 ```bash
 nm -arch arm64 "$BIN" | grep -Ei 'sme|sme2|mopa|matrix|kernel'
@@ -45,11 +45,11 @@ The output is similar to:
 
 The `T` identifies `_sme2_fixture_kernel` as a defined code symbol. Its address is the start of the function in this build. The leading underscore is the Mach-O naming convention for a C-compatible symbol.
 
-Symbols improve attribution, but they can be removed by stripping or use a misleading name. Executable instructions remain the primary evidence.
+Symbol names can be misleading, and symbols can be removed from a binary. Disassembly is needed to check which instructions are present.
 
 ## Check the string-only control
 
-Apply the same supporting-evidence searches to the string-only control:
+Run the same searches on the string-only comparison binary:
 
 ```bash
 strings -arch arm64 string-only-control | grep -Ei 'FEAT_SME|FEAT_SME2|sme2|matrix|kernel'
@@ -63,17 +63,17 @@ hw.optional.arm.FEAT_SME2
 0000000100000378 T _sme2_string_only_marker
 ```
 
-The control produces convincing-looking hints despite containing no SME2 instruction. This is why source names, compiler options, strings, symbols, and arm64 slice metadata must remain supporting evidence.
+The comparison binary contains an SME2-related string and symbol, but no SME2 instructions. Finding these names doesn't prove the instructions are present. Compiler options and the arm64 architecture label don't prove this either.
 
-You can see how SME2 presence can be detected methodically:
+Each check tells you something different about the binary:
 
 | Finding | What it supports | What it doesn't prove |
 | --- | --- | --- |
-| Source or `-march` option | Build intent | Inclusion in the final artifact |
-| arm64 slice | Base architecture | Optional extension instructions |
-| String or symbol | Feature awareness and attribution | Extension instruction presence or execution |
-| Decoded strict instruction in executable code | Static presence | Runtime execution, dispatch, or performance |
+| `-march` option | Requested compiler features | Presence of SME or SME2 instructions in the compiled binary |
+| arm64 slice | Code compiled for arm64 | Presence of SME or SME2 instructions |
+| String or symbol | Names associated with SME2 | Presence or runtime execution of SME or SME2 instructions |
+| Decoded SME or SME2 instruction in executable code | Instructions present in the binary | Whether those instructions run or improve performance |
 
 ## What you've accomplished and what's next
 
-You inspected strings and symbols to collect attribution hints without treating them as instruction proof. Next, you'll disassemble the binary to check for SME2 instructions.
+You found SME2-related strings and symbols in both the example and comparison binaries. Next, you'll disassemble the binaries to check which ones contain SME2 instructions.
