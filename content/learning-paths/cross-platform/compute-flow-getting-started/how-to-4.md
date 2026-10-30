@@ -104,4 +104,4 @@ Pass your own representative audio samples in a JSON file with `-j runs.json` to
 
 You've compared speech recognition performance between Parakeet and Moonshine. 
 
-You can use the Learning Path steps to combine other bricks and select compatible models for your own applications.
+You can extend the Learning Path to combine other bricks and select compatible models for your own applications.
