@@ -8,11 +8,11 @@ minutes_to_complete: 60
 who_is_this_for: This is an advanced topic for developers and ML engineers who want to build private, offline voice assistant systems on Arm-based servers such as DGX Spark.
 
 learning_objectives:
-  - Explain the architecture of an offline voice chatbot pipeline combining speech-to-text (STT) and vLLM
-  - Capture and segment real-time audio using PyAudio and Voice Activity Detection (VAD)
-  - Transcribe speech using faster-whisper and generate replies using vLLM
-  - Tune segmentation and prompt strategies to improve latency and response quality
-  - Deploy and run the full pipeline on Arm-based systems such as DGX Spark
+  - Identify the architecture of an offline voice chatbot pipeline combining speech-to-text (STT) and vLLM.
+  - Capture and segment real-time audio using PyAudio and Voice Activity Detection (VAD).
+  - Transcribe speech using faster-whisper and generate replies using vLLM.
+  - Tune segmentation and prompt strategies to improve latency and response quality.
+  - Deploy and run the full pipeline on Arm-based systems such as DGX Spark.
 
 prerequisites:
     - An NVIDIA DGX Spark system with at least 15 GB of available disk space

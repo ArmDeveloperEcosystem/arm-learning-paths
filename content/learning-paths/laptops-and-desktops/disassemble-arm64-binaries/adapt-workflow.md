@@ -89,7 +89,7 @@ The positive-control run confirms that the example binary contains matching inst
 
 ## Check another binary
 
-To inspect another binary, use this checklist:
+To inspect another binary, complete the following steps:
 
 1. Select the executable or library you plan to distribute.
 2. Select the architecture slice and sections containing executable code.
@@ -102,7 +102,7 @@ In the example binary, both disassemblers found SME and SME2 instructions at mat
 
 ## Check for other instruction groups
 
-You can apply the same method to other instruction groups, such as Scalable Vector Extension (SVE), SVE2, and Dot Product instructions.
+You can apply the same method to other instruction groups such as Scalable Vector Extension (SVE), SVE2, and Dot Product instructions.
 
 To check another instruction group, update the filter to recognize its instruction names and operands. Check the documentation for those instructions rather than relying on names alone.
 
@@ -124,7 +124,7 @@ The inspection method also applies to Linux and Windows binaries, but the comman
 
 Inspect the executable or library that you plan to distribute. Checking the macOS binary doesn't establish what a separately built Linux or Windows binary contains.
 
-## Analyze runtime performance with Arm Performix
+## (Optional) Analyze runtime performance with Arm Performix
 
 After disassembling binaries to evaluate whether they contain SME or SME2 instructions, you might need to analyze runtime performance. To do so, use Arm Performix, which is a performance-analysis environment.
 

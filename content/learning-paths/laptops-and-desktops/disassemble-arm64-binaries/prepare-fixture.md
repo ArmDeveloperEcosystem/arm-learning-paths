@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Build the SME2 fixture and comparison binaries
 
-A macOS binary can contain Scalable Matrix Extension (SME) and SME2 instructions. Including supporting source code or enabling compiler options doesn't prove those instructions are present in the compiled binary.
+A macOS binary can contain Scalable Matrix Extension (SME) and SME2 instructions. Including supporting source code or enabling compiler options doesn't mean that those instructions are present in the compiled binary.
 
 You'll build a small Mach-O executable and inspect its final machine code for SME and SME2 instructions. You'll identify state-control, matrix, and predicate instructions. You'll correlate each finding with its exact four bytes and decoded mnemonic. You'll also inspect the operands, static program counter (PC), symbol, and surrounding code.
 
@@ -79,7 +79,7 @@ You now have a compiled example program ready for inspection.
 
 ## Create negative controls
 
-The compiled example program serves as your positive control. Create `string-only-control.c` as a negative control with a feature string and SME2-like symbol name, but no SME2 instructions:
+The compiled example program serves as your positive control. Create `string-only-control.c` as a negative control with a feature string and a symbol name similar to SME2, but no SME2 instructions:
 
 ```bash
 cat > string-only-control.c <<'EOF'
@@ -147,10 +147,10 @@ For a universal binary, `lipo -info` might report both `x86_64` and `arm64`. The
 
 If you inspect a universal binary, ensure that you're working with the `arm64` slice.
 
-The source code in this Learning Path produces a thin Mach-O binary.
+The source code that you'll examine to complete this Learning Path produces a thin Mach-O binary.
 
 ## What you've accomplished and what's next
 
-You built an example binary containing SME2 instructions and two comparison binaries without them.
+You've built an example binary containing SME2 instructions and two comparison binaries without them.
 
 Next, you'll inspect strings and symbols to see why they don't prove instructions are present.

@@ -1,5 +1,5 @@
 ---
-title: Disassemble and verify SME2
+title: Disassemble binaries and verify SME2
 description: Use otool and llvm-objdump to check SME and SME2 instructions in the example binary, then test the filter on comparison binaries.
 weight: 4
 
@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Encode and decode mnemonics and operands
 
-Next, disassemble the binaries to check for Scalable Matrix Extension 2 (SME2) instructions.
+You can now disassemble the binaries to check for Scalable Matrix Extension 2 (SME2) instructions.
 
 Assemblers encode Arm Instruction Set Architecture (ISA) mnemonics and operands into 32-bit words. A disassembler decodes those words to recover the mnemonics and operands.
 
@@ -179,6 +179,6 @@ The string-only comparison binary still contains the SME2-related string and sym
 
 ## What you've accomplished and what's next
 
-You verified SME and SME2 instructions in the binary by examining their bytes, operands, addresses, and surrounding code.
+You've verified SME and SME2 instructions in the binary by examining their bytes, operands, addresses, and surrounding code.
 
 Next, you'll combine these checks in a reusable script and adapt the method to other instruction groups and binary formats.

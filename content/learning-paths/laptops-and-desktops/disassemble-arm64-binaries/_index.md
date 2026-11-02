@@ -84,6 +84,10 @@ further_reading:
         title: LLVM llvm-objdump command guide
         link: https://llvm.org/docs/CommandGuide/llvm-objdump.html
         type: documentation
+    - resource:
+        title: SME Insights
+        link: /insights/sme/
+        type: website
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
