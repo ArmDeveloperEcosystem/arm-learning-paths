@@ -98,10 +98,19 @@ The installer supplies CMake, the model export dependencies, and the example req
 ## Install the Arm development tools
 
 {{% notice Note %}}
-Before you run the Arm setup command on macOS, install [Docker Desktop](/install-guides/docker/docker-desktop/) and follow the [AVH FVPs on macOS install guide](/install-guides/fvps-on-macos/). Add the FVPs-on-Mac `bin` directory to `PATH`. The wrapper runs the Linux Corstone-320 FVP in a container. Confirm that Docker is running and that `FVP_Corstone_SSE-320` resolves to the wrapper:
+Before you run the Arm setup command on macOS, install [Docker Desktop](/install-guides/docker/docker-desktop/) and start Docker. Install the [FVPs-on-Mac wrappers](https://github.com/Arm-Examples/FVPs-on-Mac) at the revision for FVP `11.31.28`. The wrapper runs the Linux Corstone-320 FVP in a container. Run these commands from the ExecuTorch repository root:
 
 ```bash
 docker info >/dev/null
+mkdir -p examples/arm/arm-scratch "$HOME/.armlm"
+git clone https://github.com/Arm-Examples/FVPs-on-Mac.git \
+  examples/arm/arm-scratch/FVPs-on-Mac
+git -C examples/arm/arm-scratch/FVPs-on-Mac checkout --detach \
+  cc7a4be5456db085619647811fac29e9795f806e
+bash examples/arm/arm-scratch/FVPs-on-Mac/build.sh
+export PATH="$PWD/examples/arm/arm-scratch/FVPs-on-Mac/bin:$PATH"
+export FVP_MOUNT_DIR="$PWD"
+FVP_Corstone_SSE-320 --version
 command -v FVP_Corstone_SSE-320
 ```
 {{% /notice %}}
