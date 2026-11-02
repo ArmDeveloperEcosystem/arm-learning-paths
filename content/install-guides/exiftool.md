@@ -58,11 +58,11 @@ Follow the [official Windows installation instructions](https://exiftool.org/ins
 2. Extract the archive and open the extracted folder containing `exiftool(-k).exe`.
 3. In File Explorer, select **View > Show > File name extensions**, then rename `exiftool(-k).exe` to `exiftool.exe`.
 4. Move `exiftool.exe` and its accompanying `exiftool_files` folder into a permanent folder, such as `C:\Users\<username>\Tools\ExifTool`. Keep them together.
-5. Search the Start menu for **Edit environment variables for your account** and open it. 
-6. Under **User variables**, select **Path**, then **Edit > New**. 
+5. Search the **Start** menu for **Edit environment variables for your account** and open it. 
+6. Under **User variables**, select **Path**, then select **Edit > New**. 
 7. Add the full path to the folder directly containing `exiftool.exe`, such as `C:\Users\<username>\Tools\ExifTool`. Replace `<username>` with the name of your Windows user folder. 
 8. Select **OK** to save and close the dialogs.
-9. Open a new PowerShell window so it picks up the change.
+9. Open a new PowerShell window so that it picks up the change.
 
 ## Verify the installation
 
@@ -88,7 +88,7 @@ The output begins with `Available tags:` followed by tag names.
 
 ## Troubleshoot installation issues
 
-If your shell can't find `exiftool`, open a new terminal. After opening the terminal, confirm that the directory containing
+If your shell can't find `exiftool`, open a new terminal. Confirm that the directory containing
 `exiftool` is in your `PATH`. On Windows, also check that the executable is named `exiftool.exe` and that `exiftool_files` is still beside it.
 
 If Ubuntu can't locate the package, check that the `universe` repository is enabled for your Ubuntu
@@ -96,4 +96,4 @@ release. After checking, run `sudo apt update` again.
 
 ## Next steps
 
-You can now use ExifTool to to read and write media metadata on Arm.
+You can now use ExifTool to read and write media metadata on Arm.
