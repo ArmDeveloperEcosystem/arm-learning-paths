@@ -59,10 +59,11 @@ The Windows x64 executable runs through
 Follow the [official Windows installation instructions](https://exiftool.org/install.html#Windows):
 
 1. Download the **64-bit Windows Executable** ZIP from the [ExifTool download page](https://exiftool.org/).
-2. Extract the archive into a permanent folder in your user directory.
-3. Rename `exiftool(-k).exe` to `exiftool.exe`. Keep its accompanying `exiftool_files` folder beside it.
-4. Add the folder containing `exiftool.exe` to your user's `Path` environment variable.
-5. Open a new PowerShell window so it picks up the change.
+2. Extract the archive and open the extracted folder containing `exiftool(-k).exe`.
+3. In File Explorer, select **View > Show > File name extensions**, then rename `exiftool(-k).exe` to `exiftool.exe`.
+4. Move `exiftool.exe` and its accompanying `exiftool_files` folder into a permanent folder, such as `C:\Users\<username>\Tools\ExifTool`. Keep them together.
+5. Search the Start menu for **Edit environment variables for your account** and open it. Under **User variables**, select **Path**, then **Edit > New**. Add the full path to the folder directly containing `exiftool.exe`, such as `C:\Users\<username>\Tools\ExifTool`, replacing `<username>` with your Windows user folder name. Select **OK** to save and close the dialogs.
+6. Open a new PowerShell window so it picks up the change.
 
 ## Verify the installation
 
