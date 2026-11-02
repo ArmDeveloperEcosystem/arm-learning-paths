@@ -1,18 +1,19 @@
 ---
-title: Creating Heatmaps with BOLT
+title: Create heatmaps with BOLT
+description: Generate LLVM BOLT heatmaps to compare sampled code locality in original and optimized AArch64 binaries.
 weight: 15
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Creating Heatmaps with BOLT
+## Understand BOLT heatmaps
 
 {{% notice Note %}}
-The example below uses a [BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt/brbe/) optimized binary. You can apply similar steps to binaries optimized using the other BOLT profiling methods, which are covered at the end of this page. Naturally, it is assumed that you have followed the steps for the profiling method you are using. 
+The main example uses a binary optimized with [BRBE profiling](/learning-paths/servers-and-cloud-computing/bolt/brbe/). You can also generate heatmaps for binaries optimized using other profiling methods, as described at the end of this page. Before continuing, complete the optimization steps for your chosen profiling method.
 {{% /notice %}}
 
-In addition to using hardware metrics to verify the optimisations performed by BOLT, you can also generate heatmaps to make visual comparisons between the layouts of binaries after being processed by BOLT. In a heatmap each character, called a block, represents a number of bytes of code in the binary (this is usually 64 bytes). Based off of the profile used with BOLT:
+Alongside hardware metrics, you can use heatmaps to compare code layouts before and after BOLT optimization. Each character in a heatmap represents a block of code, typically 64 bytes. The characters indicate activity recorded in the profile:
 - A dot (.) means no samples in the profile were recorded for that block, creating a gap in the heatmap. It should be noted that these gaps do not prove that the corresponding code never executes.
 - A letter means that samples were recorded in the profile. The letter shows the binary's code section.
 - 'o' or 'O' is used to show samples in the profile that belong outside of the known code sections, such as `.text`.
@@ -21,14 +22,16 @@ You can find the key to the heatmap in the legend which is produced with the hea
 
 ## Producing heatmaps
 
-You can produce a heatmap of a binary using the `llvm-bolt-heatmap` tool, using the binary and a matching `perf` measurement, that has been collected whilst running it: 
+Generate a heatmap using `llvm-bolt-heatmap`, the binary, and a matching `perf` profile collected while running that binary:
 
-```bash 
+```bash
 # General form: llvm-bolt-heatmap -p <profile> <executable> <options>
 llvm-bolt-heatmap -p prof/brbe.data ./out/bsort -block-size=64 -line-size=100 -print-mappings
 ```
 
-By default this will be printed to _stdout_, you can redirect this using the `-o` option. Additionally, multiple heatmaps at a range of block sizes will also be printed, you can specify only one to be printed using the `-block-size`  option, in this example block sizes of 64 bytes have been used. The associated sections of the binary and the letters used in the heatmaps can be printed using the `-print-mappings`  option. 
+By default, the tool writes multiple heatmaps to standard output at different block sizes. Use `-o` to write them to a file. Specify `-block-size=64` to generate one heatmap with 64-byte blocks. Use `-print-mappings` to include the mapping between letters and binary sections in the legend.
+
+The output is similar to:
 
 <pre style="background: black; color: white; white-space: pre; overflow-x: auto; padding: 1rem; font-family: monospace;">
 ...
@@ -48,11 +51,11 @@ Sections:
   c/C : .fini      0x000283c8-0x000283e0
   d/D : .plt       0x000283e0-0x00028480
 
-            0                                                                                                   
-            0                                                               1                                   
-            0   1   2   3   4   5   6   7   8   9   a   b   c   d   e   f   0   1   2   3   4   5   6   7   8   
+            0
+            0                                                               1
+            0   1   2   3   4   5   6   7   8   9   a   b   c   d   e   f   0   1   2   3   4   5   6   7   8
             048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c
-            0                                                                                                   
+            0
 0x00012c00: ................................................................................</span><span style="color:yellow;">A</span><span style="color:white;">.................</span><span style="color:yellow;">AA</span><span style="color:white;">
 0x00014500: ....................................</span><span style="color:yellow;">AA</span><span style="color:white;">..............................................................
 0x00015e00: ....................................................................................................
@@ -69,7 +72,7 @@ Sections:
 0x00027100: ..................................................................</span><span style="color:red;">AAA</span><span style="color:white;">...............................
 </span>
 ...
-</pre> 
+</pre>
 
 To produce the heatmap of the binary optimized by BOLT, we must collect additional profile data, using `perf`:
 
@@ -78,6 +81,9 @@ perf record -j any,u -o prof/bolted-brbe.data -- ./out/bsort.opt.brbe
 llvm-bolt-heatmap -p prof/bolted-brbe.data ./out/bsort.opt.brbe \
     -block-size=64 -line-size=100 -print-mappings
 ```
+
+The output is similar to:
+
 <pre style="background: black; color: white; white-space: pre; overflow-x: auto; padding: 1rem; font-family: monospace;">
 ...
 <span style="background-color:black;"></span><span style="color:white;">Legend:
@@ -98,11 +104,11 @@ Sections:
   e/E : .text      0x00400000-0x004001ac
   f/F : .text.cold 0x004001c0-0x0040028c
 
-            0                                                                                                   
-            0                                                               1                                   
-            0   1   2   3   4   5   6   7   8   9   a   b   c   d   e   f   0   1   2   3   4   5   6   7   8   
+            0
+            0                                                               1
+            0   1   2   3   4   5   6   7   8   9   a   b   c   d   e   f   0   1   2   3   4   5   6   7   8
             048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c048c
-            0                                                                                                   
+            0
 0x003ff700: ....................................</span><span style="color:yellow;">EEE</span><span style="color:red;">EEE</span><span style="color:yellow;">E</span><span style="color:white;">.........................................................
 </span>
 ...
@@ -111,24 +117,24 @@ Sections:
 ## Verification of layout optimizations using heatmaps
 Comparing the heatmaps between the optimized and original binaries, given above, we can see that in the original binary the sampled code is spread across fourteen rows, starting at `0x00012c00` and extending into the row at `0x00027100`. The `A` characters represent sampled execution within the `.text` section. Between these characters are large gaps shown as dots, meaning that no execution activity was captured for those regions in this recording. This matches the layout created earlier, where cold code separates the frequently executed parts of BubbleSort.
 
-We can see that after BOLT has processed the binary, the displayed execution activity in the heatmap is grouped into seven adjacent blocks, shown as `EEEEEEE`, starting at `0x00400000`. As each block represents 64 bytes, these seven blocks cover a 448 byte address range. We can infer that the execution activity is concentrated within a small continuous region of the binary, rather than being spread across widely separated addresses. The sample counts are used to colour each block, importantly calculated ranges are used to choose this colour (as specified by the legend for each individual heatmap), and so some blocks may be of the same colour but have different sample counts. The change from `A` to `E` occurs because the letters identify sections within each binary. In the original binary, `A` represents `.text`. In the optimised binary, `E` represents the new `.text` section containing the rewritten code.
+We can see that after BOLT has processed the binary, the displayed execution activity in the heatmap is grouped into seven adjacent blocks, shown as `EEEEEEE`, starting at `0x00400000`. As each block represents 64 bytes, these seven blocks cover a 448-byte address range. We can infer that the execution activity is concentrated within a small continuous region of the binary, rather than being spread across widely separated addresses. Each heatmap assigns colors using its own sample-count ranges, shown in its legend. Blocks with the same color can therefore have different sample counts. The change from `A` to `E` occurs because the letters identify sections within each binary. In the original binary, `A` represents `.text`. In the optimized binary, `E` represents the new `.text` section containing the rewritten code.
 
 Grouping frequently executed instructions closer together improves spatial locality, which can reduce instruction-cache misses and hence, time spent waiting for instructions. The heatmaps therefore show that BOLT has achieved the intended layout change, whose performance impacts can be confirmed using the [TopDown Methodology](https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology).
 
-## Useful aids for visualisation
+## Useful aids for visualization
 When producing BOLT heatmaps, there are a variety of options that can be used when formatting the heatmap:
 
 ```plaintext
--line-size=<uint>   - number of entries per line (default 256). Use a smaller value (e.g. 128) 
+-line-size=<uint>   - number of entries per line (default 256). Use a smaller value (e.g. 128)
                       if the heatmap doesn't fit the screen horizontally.
--block-size=<initial size>[,<zoom-out size>,...] - heatmap block size, optionally followed by 
-                      zoom-out sizes to produce coarse-grained heatmaps. Size can be specified 
+-block-size=<initial size>[,<zoom-out size>,...] - heatmap block size, optionally followed by
+                      zoom-out sizes to produce coarse-grained heatmaps. Size can be specified
                       in human-readable format with [kKmMgG][i][B] suffix. Default 64B, 4K, 256K.
 -max-address=<uint> - maximum address considered valid for heatmap (default 4GB)
 -print-mappings     - print mappings in the legend, between characters/blocks and text sections (default false)
 ```
 
-As mentioned, heatmaps are printed into _stdout_ or into a file using the `-o` flag. If you prefer to look at the data in a browser (or would like to share it that way), then you can output your heatmap into a text file and use a HTML conversion tool, such as `aha`, which can be installed using `sudo apt install aha` on Ubuntu:  
+To view or share heatmaps in a browser, save them to text files with `-o`, then convert them to HTML using `aha`. On Ubuntu, install `aha` with `sudo apt install aha`:
 
 ```bash
 mkdir -p heatmap html
@@ -144,12 +150,12 @@ aha -b -f ./heatmap/bsort-optimized.txt > ./html/bsort-optimized.html
 ```
 
 ## Using other profiling methods
-The example above makes use of BRBE profiles to produce the heatmaps, the other profiling methods can also be used to produce heatmaps as shown below:  
+The main example uses BRBE profiles. You can also generate heatmaps using the profiling methods described in the following tabs:
 
 {{< tabpane-normal >}}
-{{< tab header="SPE Profiling" >}}
+{{< tab header="SPE profiling" >}}
 
-On an SPE-capable system, you can use `perf` to record branch samples from the original and optimized binaries. This example uses the `arm_spe_0` device. If your system exposes a different name, then use the one shown by `perf list`. 
+On an SPE-capable system, you can use `perf` to record branch samples from the original and optimized binaries. This example uses the `arm_spe_0` device. If your system exposes a different name, then use the one shown by `perf list`.
 
 ```bash
 mkdir -p prof
@@ -165,7 +171,7 @@ llvm-bolt-heatmap --spe -p prof/bolted-spe.data ./out/bsort.opt.spe -block-size=
 ```
 
 {{< /tab >}}
-{{< tab header="ETM Profiling" >}}
+{{< tab header="ETM profiling" >}}
 
 On a system with CoreSight ETM support, instruction flow traces can be recorded using `perf` for both binaries.
 
@@ -182,7 +188,7 @@ llvm-bolt-heatmap --itrace=l64i1us -p prof/etm.data ./out/bsort -block-size=64 -
 llvm-bolt-heatmap --itrace=l64i1us -p prof/bolted-etm.data ./out/bsort.opt.etm -block-size=64 -print-mappings
 ```
 
-#### ETM AutoFDO
+### ETM AutoFDO
 If you are using ETM AutoFDO to produce heatmaps, use <code>cs_etm/autofdo/u</code> instead of <code>cs_etm//u</code> as given in the examples.
 
 ```bash
@@ -201,7 +207,7 @@ llvm-bolt-heatmap --itrace=l64i1us -p prof/bolted-etm.data ./out/bsort.opt.etm-a
 
 
 {{< /tab >}}
-{{< tab header="PMU Profiling" >}}
+{{< tab header="PMU profiling" >}}
 
 PMU profiling can be used to provide basic samples to generate heatmaps. These are recorded using `perf`.
 
@@ -221,7 +227,7 @@ llvm-bolt-heatmap -ba -p prof/bolted-pmu.data ./out/bsort.opt.pmu -block-size=64
 {{< /tab >}}
 {{< tab header="Instrumentation" >}}
 
-Profiles produced using instrumentation cannot be used directly by `llvm-bolt-heatmap`. Instead instruction samples from the original and optimised binaries must be used. The example below uses the same approach as PMU profiling.
+Profiles produced using instrumentation cannot be used directly by `llvm-bolt-heatmap`. Instead instruction samples from the original and optimized binaries must be used. The example below uses the same approach as PMU profiling.
 
 ```bash
 mkdir -p prof
@@ -241,6 +247,4 @@ llvm-bolt-heatmap -ba -p prof/bolted-instr.data ./out/bsort.opt.instr -block-siz
 
 ## Summary
 
-In this learning path, you learned how to use BOLT to optimize binary code layout using several profiling methods. The optimized binaries improved instruction locality, reduced frontend stalls, and delivered measurable performance gains. 
-
-You have also learnt how to use heatmaps to be able to visualise the layout changes made by BOLT and be able to compare heatmaps to identify potential performance impacts.
+You’ve optimized binary code layout with BOLT and verified the results using runtime measurements and hardware metrics. You can now generate and compare heatmaps to inspect changes in sampled code locality.
