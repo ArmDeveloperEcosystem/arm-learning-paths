@@ -296,7 +296,8 @@ html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's
     row-gap: 8px;
 }
 
-.generated-summary-faq__heading h3 {
+.generated-summary-faq__heading h3,
+.generated-summary-faq__heading h2 {
     line-height: 1.1;
     margin: 0;
 }
