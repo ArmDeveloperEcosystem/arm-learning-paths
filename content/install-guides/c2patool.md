@@ -21,7 +21,7 @@ You can install C2PA Tool on 64-bit Arm Linux, macOS on Apple silicon, or Window
 
 On macOS, you'll install C2PA Tool with Homebrew. 
 
-On Arm Linux and Windows on Arm, you'll use Cargo, the Rust package manager. With Cargo, you'll download the source code, compile it for Arm, and install the executable. Building from source produces an executable that runs natively on your Arm system.
+On Arm Linux and Windows on Arm, use Cargo, the Rust package manager, to install C2PA Tool. With Cargo, you'll download the source code and compile it for Arm. This produces an executable for your Arm platform.
 
 Homebrew and Cargo install the version available from their package source. For release
 information, see [C2PA Tool releases](https://github.com/contentauth/c2patool/releases).
@@ -136,4 +136,4 @@ cargo uninstall c2patool
 
 ## Next steps
 
-You can now use C2PA Tool to work with Content Credentials on Arm using a CLI. 
+You can now use the C2PA Tool to work with Content Credentials on Arm. 
