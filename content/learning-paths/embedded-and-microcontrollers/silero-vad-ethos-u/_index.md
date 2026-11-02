@@ -34,8 +34,8 @@ generated_summary_faq:
   faq_source_hash: f56e6a716c01c38d2eb7f19f379804a0bf8d1f3faac81c75121ddb3470cfb799
   summary: >-
     You'll deploy the stateful Silero VAD model on an Arm Ethos-U85 virtual target.
-    First, you'll prepare ExecuTorch, the model, and audio clips. Then, you'll build host quantized operators,
-    export a `.pte` model, and create a host reference. Finally, you'll package the model and validation clip
+    First, you'll prepare ExecuTorch, the model, and validation audio. Then, you'll
+    export a `.pte` model and create a host reference. Finally, you'll package the model and validation clip
     into a Cortex-M85 application, run it on the Corstone-320 FVP, and compare its speech decisions with
     the host reference.
   faqs:
@@ -97,7 +97,7 @@ further_reading:
         type: documentation
     - resource:
         title: Silero VAD Ethos-U example source
-        link: https://github.com/pytorch/executorch/tree/3b60683923245cf472b7323426920e15623ba361/examples/arm/silero_vad_example_ethos_u
+        link: https://github.com/pytorch/executorch/tree/d78bc1b0ba1c33a90d2d93662de118577f37efd4/examples/arm/silero_vad_example_ethos_u
         type: repository
     - resource:
         title: Silero VAD project
