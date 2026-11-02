@@ -18,12 +18,16 @@ Continue from the ExecuTorch repository root. Activate the environment and build
 ```bash
 source .venv/bin/activate
 source examples/arm/arm-scratch/setup_path.sh
+if [ "$(uname -s)" = Darwin ]; then
+  export PATH="$PWD/examples/arm/arm-scratch/FVPs-on-Mac/bin:$PATH"
+  export FVP_MOUNT_DIR="$PWD"
+fi
 
 cmake --preset arm-baremetal \
   -DCMAKE_BUILD_TYPE=Release \
   -DTARGET_CPU=cortex-m85 \
   -B cmake-out-arm -S .
-cmake --build cmake-out-arm --target install --parallel
+cmake --build cmake-out-arm --target install --parallel 2
 ```
 
 The installed libraries provide the ExecuTorch runtime, portable operators, and Ethos-U backend used by the application.
@@ -53,7 +57,7 @@ Build the configured application:
 
 ```bash
 cmake --build examples/arm/silero_vad_ethos_u \
-  --target silero_vad_ethos_u --parallel
+  --target silero_vad_ethos_u --parallel 2
 ```
 
 The build creates `examples/arm/silero_vad_ethos_u/silero_vad_ethos_u`. This ELF image contains both the `.pte` model and the 2.5-second validation clip.
