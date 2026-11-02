@@ -39,15 +39,18 @@ git clone https://github.com/arm/mcp.git
 cd mcp
 ```
 
-## Build the MCP server Docker image
+## Build the MCP server Docker image locally
 
 The integration tests require a locally built Docker image of the MCP server. Build it from the repository root:
 
 ```bash
-docker buildx build -f mcp-local/Dockerfile -t arm-mcp .
+docker buildx build --pull \
+  --file mcp-local/Dockerfile.local \
+  --tag arm-mcp:local \
+  --load \
 ```
 
-This command creates a Docker image tagged as `arm-mcp:latest`. The build process takes several minutes as it generates the vector database for the knowledge base.
+This command creates a Docker image tagged as `arm-mcp:local`. 
 
 To verify the image was created successfully:
 
@@ -59,7 +62,7 @@ The output is similar to:
 
 ```output
 REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
-arm-mcp      latest    a1b2c3d4e5f6   2 minutes ago   1.2GB
+arm-mcp      local    a1b2c3d4e5f6   2 minutes ago   3.3GB
 ```
 
 ## Create a Python virtual environment
@@ -79,17 +82,10 @@ venv\Scripts\activate
 
 ## Install test dependencies
 
-The test framework requires Pytest and Testcontainers. Install them using the provided requirements file:
+The test framework requires Pytest and Testcontainers. Install them with `pip`:
 
 ```bash
-pip install -r mcp-local/tests/requirements.txt
-```
-
-The requirements file includes:
-
-```text
-testcontainers
-pytest
+pip install pytest testcontainers
 ```
 
 ## Verify your setup
@@ -113,7 +109,6 @@ The test files are located in `mcp-local/tests/`:
 ```text
 mcp-local/tests/
 ├── constants.py      # Test data and expected responses
-├── requirements.txt  # Python dependencies
 ├── sum_test.s        # Sample Arm assembly file for MCA tests
 └── test_mcp.py       # Main test file
 ```

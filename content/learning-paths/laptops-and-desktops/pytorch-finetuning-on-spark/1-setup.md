@@ -35,7 +35,7 @@ The first command grants your user Docker access, and `newgrp docker` activates 
 
 NVIDIA provides pre-built PyTorch containers that include all the necessary frameworks, libraries, and dependencies optimized for NVIDIA GPUs. These containers are regularly updated and maintained, ensuring you have access to the latest stable versions without the complexity of manual dependency management.
 
-Pull the latest PyTorch container from NVIDIA's container registry:
+Pull the PyTorch 25.11 container from NVIDIA's container registry:
 
 ```bash
 docker pull nvcr.io/nvidia/pytorch:25.11-py3
@@ -67,23 +67,51 @@ After running the command, you'll be inside the container with a root shell prom
 
 ## Install dependencies
 
-The base PyTorch container doesn't include all the specialized libraries needed for efficient model fine-tuning. You need to install several additional Python packages that provide transformer models, parameter-efficient fine-tuning methods, dataset utilities, and training frameworks.
+The base PyTorch container doesn't include all the libraries needed for this fine-tuning workflow. Install the package versions used by the script and the rest of this Learning Path.
 
 Inside the running container, install the required dependencies:
 
 ```bash
-pip install transformers peft datasets trl bitsandbytes
+pip install \
+  "accelerate==1.15.0" \
+  "datasets==5.0.1" \
+  "transformers==4.57.1" \
+  "trl==1.13.0"
+```
+
+Verify the installed versions:
+
+```bash
+python - <<'PY'
+import accelerate
+import datasets
+import transformers
+import trl
+
+print("accelerate", accelerate.__version__)
+print("datasets", datasets.__version__)
+print("transformers", transformers.__version__)
+print("trl", trl.__version__)
+PY
+```
+
+The output is:
+
+```output
+accelerate 1.15.0
+datasets 5.0.1
+transformers 4.57.1
+trl 1.13.0
 ```
 
 These packages serve specific purposes:
 
+- `accelerate` provides device placement and training-loop integration
 - `transformers` provides access to pre-trained language models and tokenizers from Hugging Face
-- `peft` (Parameter-Efficient Fine-Tuning) enables techniques like LoRA and QLoRA that reduce memory requirements
 - `datasets` offers a standardized interface for loading and processing training datasets
 - `trl` (Transformer Reinforcement Learning) includes training utilities and recipes for language models
-- `bitsandbytes` enables 4-bit and 8-bit quantization for memory-efficient training
 
-The installation can take a few minutes as pip downloads and installs each package along with their dependencies.
+The pinned versions prevent API changes in newer packages from breaking the script. The installation can take a few minutes as pip downloads each package and its dependencies.
 
 ## Authenticate with Hugging Face
 
@@ -106,9 +134,30 @@ Clone the playbooks repository:
 ```bash
 git clone https://github.com/mhall119/finetuning-scripts.git
 cd finetuning-scripts/nvidia
+git checkout 0076c9979dee71a16e3cca5e91da80d06cfb913a
 ```
 
-The repository contains a fork of the scripts found in [NVIDIA's Playbook](https://github.com/NVIDIA/dgx-spark-playbooks/nvidia/pytorch-fine-tune/assets) including the fine-tuning scripts you'll use in the next steps. This script is preconfigured with sensible defaults but also accepts command-line arguments for customization.
+The repository contains a customized copy of the 3B full fine-tuning script from [NVIDIA's PyTorch fine-tuning assets](https://github.com/NVIDIA/dgx-spark-playbooks/tree/main/nvidia/pytorch-fine-tune/assets). The customized script adds the dataset and output options used later in this Learning Path. The `git checkout` command selects the revision that matches the code walkthrough.
+
+TRL 1.13.0 uses chunked negative log likelihood (`chunked_nll`) by default. That loss mode isn't compatible with the script's compiled model wrapper. The existing `packing: False` setting controls dataset packing; it doesn't disable chunked loss. Update the script to use the standard negative log likelihood loss instead:
+
+```bash
+sed -i '/"packing": False,/a\        "loss_type": "nll",' Llama3_3B_full_finetuning.py
+```
+
+Verify that the setting is present:
+
+```bash
+grep -n '"loss_type": "nll"' Llama3_3B_full_finetuning.py
+```
+
+The output is similar to:
+
+```output
+83:        "loss_type": "nll",
+```
+
+The line number can vary if the upstream script changes. The script is now configured to avoid the `AttributeError: 'function' object has no attribute '__func__'` error when `SFTTrainer` initializes.
 
 ## What you've accomplished and what's next
 
@@ -117,6 +166,6 @@ In this section you:
 - Configured Docker permissions on DGX Spark
 - Pulled the NVIDIA PyTorch container and launched an interactive session
 - Installed fine-tuning libraries and authenticated with Hugging Face
-- Cloned the fine-tuning scripts repository
+- Cloned the fine-tuning scripts repository and selected a TRL-compatible loss mode
 
 In the next section, you'll learn how supervised fine-tuning works and what makes it effective for adapting pre-trained models to specific tasks.

@@ -13,14 +13,14 @@ pinned_learning_paths:
 operatingsystems_filter:
 - Android: 3
 - ChromeOS: 2
-- Linux: 51
+- Linux: 52
 - macOS: 16
 - Windows: 50
 subjects_filter:
 - CI-CD: 7
 - Containers and Virtualization: 8
 - Migration to Arm: 30
-- ML: 16
+- ML: 17
 - Performance and Architecture: 30
 subtitle: Build native Windows on Arm applications that are fast and efficient.
 title: Laptops and Desktops
@@ -41,7 +41,7 @@ tools_software_languages_filter:
 - CSS: 1
 - Docker: 13
 - dotnet: 13
-- ExecuTorch: 1
+- ExecuTorch: 2
 - FastAPI: 1
 - FFmpeg: 1
 - GCC: 12
@@ -63,7 +63,7 @@ tools_software_languages_filter:
 - KleidiCV: 1
 - Kubernetes: 1
 - KVM: 1
-- LeRobot: 1
+- LeRobot: 2
 - Linux: 1
 - llama.cpp: 4
 - LLM: 2
@@ -85,8 +85,8 @@ tools_software_languages_filter:
 - PGO: 1
 - PowerShell: 1
 - Pytest: 1
-- Python: 21
-- PyTorch: 2
+- Python: 22
+- PyTorch: 3
 - QEMU: 1
 - Qt: 2
 - Raspberry Pi: 1
@@ -97,12 +97,13 @@ tools_software_languages_filter:
 - Runbook: 17
 - Rust: 2
 - SME2: 3
-- SmolVLA: 1
+- SmolVLA: 2
 - SSH: 2
 - SVE: 1
 - SVE2: 1
 - Testcontainers: 1
 - Topo: 2
+- TorchAO: 1
 - Trusted Firmware: 1
 - Ubuntu: 1
 - Visual Studio: 14
@@ -116,8 +117,8 @@ tools_software_languages_filter:
 - WinUI 3: 1
 - WSL: 1
 - Xamarin Forms: 1
+- XNNPACK: 1
 weight: 2
-# auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit

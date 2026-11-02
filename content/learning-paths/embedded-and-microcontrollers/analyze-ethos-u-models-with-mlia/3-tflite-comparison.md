@@ -225,4 +225,4 @@ Low MAC utilization can be expected for layers with small channel counts, small 
 
 You've used MLIA to check compatibility and estimate performance with LiteRT and Vela. You've also learned how to read target and backend metadata, metrics, operator placement, and advice.
 
-Next, you'll inspect the Tensor Operator Set Architecture (TOSA) intermediate representation using MLIA.
+Next, you'll inspect the Tensor Operator Set Architecture (TOSA) intermediate representation (IR) using MLIA.

@@ -11,14 +11,15 @@ learning_objectives:
   - Use the MLIA CLI to discover target profiles and backends.
   - Run compatibility and performance analysis on LiteRT, Tensor Operator Set Architecture (TOSA), and ExecuTorch artifacts.
   - Interpret MLIA JSON output, advice, Vela estimates, and Corstone whole-model NPU performance counters.
-  - (Optional) Call the MLIA Python API from automation or other tools.
+  - (Optional) Automate checks with the MLIA Python API.
+  - (Optional) Inspect results with the MLIA and Model Explorer Visual Studio Code (VS Code) extension.
 
 prerequisites:
-  - Ubuntu 22.04 LTS or another compatible Linux environment
-  - Python 3.10 or later
-  - Git and Git Large File Storage (LFS) to download the model artifacts
+  - Ubuntu 24.04 LTS on x86-64, or another x86-64 Linux environment with glibc 2.39 or later
+  - CPython 3.12 (>=3.12,<3.13)
   - Basic familiarity with machine learning model deployment concepts
   - Basic familiarity with command-line tools
+  - VS Code [1.100 or later](https://code.visualstudio.com/download?_exp_download=d53503e735) on your local machine, if you want to use the MLIA and Model Explorer extension
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -43,8 +44,10 @@ generated_summary_faq:
   faqs:
   - question: How do I confirm that Git LFS is set up before downloading the model artifacts?
     answer: >-
-      Run `git lfs version`. If the command fails on Ubuntu, run `sudo apt update`, then install
-      Git LFS and the Python development package with `sudo apt install -y git-lfs python3.10-dev`.
+      On Ubuntu 24.04, run `sudo apt update`, then install Git, Git LFS, and the Python 3.12
+      development and virtual environment packages with
+      `sudo apt install -y git git-lfs python3.12-dev python3.12-venv libatomic1`. Confirm Git LFS is available
+      with `git lfs version`.
       Run `git lfs install` before you clone the repository and pull the model artifacts.
   - question: How do I verify that MLIA is installed and discover available backends and target profiles?
     answer: >-
@@ -104,6 +107,10 @@ further_reading:
       title: MLIA Ethos-U Plugin
       link: https://github.com/arm/mlia-ethos-u
       type: repository
+  - resource:
+      title: MLIA for VS Code user guide
+      link: https://github.com/arm/vscode-mlia/blob/main/docs/users/README.md
+      type: documentation
   - resource:
       title: Arm ML model artifacts
       link: https://github.com/arm-education/ml-model-artifacts

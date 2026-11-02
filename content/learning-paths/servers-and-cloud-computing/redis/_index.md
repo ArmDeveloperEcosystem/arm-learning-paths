@@ -28,6 +28,7 @@ platforms:
   - Microsoft Azure Cobalt
   - Google Axion
   - Oracle Cloud Infrastructure (OCI) Ampere Compute
+  - Arm AGI CPU
 armips:
     - Neoverse
 operatingsystems:

@@ -26,7 +26,7 @@ After BL2, the Runtime Security Engine (RSE, Cortex-M55) authenticates critical 
 
 ## Stage 2: Early hardware initialization (SCP/MCP)
 
-Once RSE completes verification, the System Control Processor (SCP, Cortex-M7) and the Management Control Processor (MCP, where present) are released from reset.
+Once RSE completes verification, the System Control Processor (SCP, Cortex-M7) and the Manageability Control Processor (MCP, where present) are released from reset.
 
 They perform essential bring-up:
 * Initializing clocks, reset lines, and power domains

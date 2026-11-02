@@ -87,7 +87,7 @@ armips:
 tools_software_languages:
     - Android Studio
     - Java
-    - C++
+    - CPP
     - llama.cpp
     - KleidiAI
     - Arm AI Portal

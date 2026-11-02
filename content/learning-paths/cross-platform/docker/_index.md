@@ -82,6 +82,8 @@ tools_software_languages:
     - Docker
 
 ### Cross-platform metadata only
+platforms:
+    - Arm AGI CPU
 shared_path: true
 shared_between:
     - servers-and-cloud-computing

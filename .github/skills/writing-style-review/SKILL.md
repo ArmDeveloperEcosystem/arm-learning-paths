@@ -28,7 +28,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 
 ## Inclusive language
 
-- Use `primary/subordinate` instead of `master/slave`.
+- Replace legacy role terms with context-appropriate terms, such as `primary/replica` for databases or `controller/worker` for distributed systems.
 - Do not use gendered examples or assumptions.
 - Be mindful of cultural references that might not translate globally.
 - Avoid assumptions about a reader's physical capabilities or setup.
@@ -53,7 +53,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 
 ## Arm framing and technical depth
 
-- Default to Arm-native solutions, Arm terminology, and Arm platform assumptions.
+- Default to solutions built for Arm, Arm terminology, and Arm platform assumptions.
 - Flag x86 assumptions and suggest Arm alternatives when available.
 - Match technical depth to the stated audience, prerequisites, and skill level.
 - Keep the level of formality and technical detail consistent across related sections.
@@ -80,6 +80,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use `such as` instead of `like`.
 - Use `after` or `when` instead of `once`.
 - Avoid slashes unless part of a technical term. Replace slashes with "and" or "or" as adequate.
+- Avoid `execute`, `kill`, `native`, `blacklist`, `whitelist`, `dummy`, `grandfathered`, `master`, `slave`, `terminate`, `suicide`, and `sanity check` in reader-facing prose. Choose a precise alternative for the context, such as `run`, `stop`, `allowlist`, `denylist`, `placeholder`, or `quick check`. Preserve exact commands, identifiers, product names, quoted output, and necessary technical terminology.
 
 ## Tone cleanup
 
@@ -106,6 +107,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 
 ## Headings and terminology
 
+- Keep Learning Path titles, section titles, and subheadings under 70 characters, counting spaces and punctuation.
 - Use sentence case for headings and subheadings.
 - Capitalize only the first word and proper nouns in headings.
 - Keep heading wording consistent across related files.

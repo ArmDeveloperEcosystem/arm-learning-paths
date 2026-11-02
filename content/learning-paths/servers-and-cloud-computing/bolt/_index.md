@@ -73,7 +73,9 @@ generated_summary_faq:
       in the optimized binary.
 # END generated_summary_faq
 
-author: Paschalis Mpeis, Jonathan Davies
+author:
+    - Paschalis Mpeis
+    - Jonathan Davies
 
 generate_summary_faq: false
 rerun_summary: false

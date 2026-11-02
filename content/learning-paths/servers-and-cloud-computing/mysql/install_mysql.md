@@ -1,149 +1,75 @@
 ---
-# User change
-title: "Install, configure and check MySQL"
-
-weight: 2 # 1 is first, 2 is second, etc.
-
-# Do not modify these elements
+title: Install MySQL with Docker on an Arm-based Linux server
+description: Install MySQL 8.4 in a Docker container on an Arm-based Linux server and check that the service is running.
+weight: 2
 layout: "learningpathall"
 ---
 
-##  MySQL Tuning
+## MySQL installation options
 
-If you already know how to deploy a MySQL database. You might want to skip this learning path, and instead explore the [Learn how to Tune MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/) learning path. That learning path covers how to get more performance out of an Arm based MySQL server.
+Cloud services such as Amazon Relational Database Service (RDS) handle MySQL installation for you. On a bare-metal or cloud server, you can install MySQL in several ways.
 
-##  Arm deployment options
+You'll install MySQL on an Arm-based Linux server using a container image. For other installation approaches, see [Chapter 2 Installing MySQL](https://dev.mysql.com/doc/refman/8.1/en/installing.html) in the MySQL documentation.
 
-There are numerous ways to deploy MySQL on Arm. Bare metal, cloud VMs, or the various SQL services that cloud providers offer. If you already have an Arm system, you can skip over this subsection and continue reading.
+## Before you begin
 
-* Arm Cloud VMs
-  * [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) learning path
-  * [AWS EC2](https://aws.amazon.com/ec2/)
-    * [Deploy Arm Instances on AWS using Terraform](/learning-paths/servers-and-cloud-computing/aws-terraform/) learning path
-  * [Azure VMs](https://azure.microsoft.com/en-us/products/virtual-machines/)
-    * [Deploy Arm virtual machines on Azure with Terraform](/learning-paths/servers-and-cloud-computing/azure-terraform/) learning path
-  * [GCP Compute Engine](https://cloud.google.com/compute)
-    * [Deploy Arm virtual machines on Google Cloud Platform (GCP) using Terraform](/learning-paths/servers-and-cloud-computing/gcp/) learning path
-  * [Oracle Cloud Infrastructure](https://www.oracle.com/cloud/)
-* MySQL services
-  * [AWS RDS](https://aws.amazon.com/rds)
-    * Simply select an Arm based instance for deployment
-* Additional options are listed in the [Get started with Servers and Cloud Computing](/learning-paths/servers-and-cloud-computing/intro/) learning path
+You need an Arm-based Linux server with Docker Engine installed and running. For Docker Engine installation instructions, see the [Docker Engine install guide](/install-guides/docker/docker-engine/).
 
-##  MySQL Documentation
+Check the server architecture:
 
-MySQL server is a large project with many features. The [MySQL Reference Manual](https://dev.mysql.com/doc/refman/8.1/en/) should be explored. Make sure you are looking at the documentation for the version of MySQL you are working with.
+```bash
+uname -m
+```
 
-##  MySQL installation options
-
-If you are using a cloud service like AWS RDS, then the installation of MySQL is handled by those services. However, if you are working with a bare metal or cloud node, there are a few different [installation options](https://dev.mysql.com/doc/refman/8.1/en/installing.html). You should decide what approach you want to take for installing MySQL after reviewing the documentation.
-
-##  MySQL Server Configuration
-
-Getting MySQL server up and running is easy. This is because the default out of box configuration will work. However, this out of box configuration is most likely under optimized. In fact, a [graph](/learning-paths/servers-and-cloud-computing/mysql_tune/tuning/) of the performance difference between an out of box MySQL server and a tuned server is shown in the [Learn how to Tune MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/) learning path. That said, for the purpose of learning, it's ok to start with the out of box configuration. Once you have that working, you should read the [MySQL server configuration documentation](https://dev.mysql.com/doc/refman/8.1/en/mysqld-server.html), and follow the [Learn how to Tune MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/) learning path.
-
-## Connect to Database
-
-Installations of MySQL will also install a CLI client application called `mysql`. Once a database is up and running, this tool can be used to connect to the database and make sure it is working. Review the [instructions](https://dev.mysql.com/doc/refman/8.1/en/mysql.html) on how to use the `mysql` CLI tool.
-
-Shown below is sample output of what you should see when you connect to the database successfully.
+The expected output on a 64-bit Arm server is:
 
 ```output
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 14
-Server version: 8.0.32-0ubuntu0.22.04.2 (Ubuntu)
-
-Copyright (c) 2000, 2023, Oracle and/or its affiliates.
-
-Oracle is a registered trademark of Oracle Corporation and/or its
-affiliates. Other names may be trademarks of their respective
-owners.
-
-Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
-
-mysql>
+aarch64
 ```
 
-### Sample MySQL Commands
+Check that the Docker client can reach Docker Engine:
 
-There are plenty of resources that explain how to do basic interactions with a MySQL database. That said, a few basic command examples are shown below.
-
-Create a data base:
-
-```console
-create DATABASE arm_test;
+```bash
+docker info
 ```
 
-List available databases:
+## Start a MySQL container
 
-```console { output_lines = "2-11" }
-show databases;
-+--------------------+
-| Database           |
-+--------------------+
-| arm_test           |
-| information_schema |
-| mysql              |
-| performance_schema |
-| sys                |
-+--------------------+
-5 rows in set (0.10 sec)
+The [official MySQL container image](https://hub.docker.com/_/mysql) supports arm64. Create a Docker volume to keep the database files when the container is replaced:
+
+```bash
+docker volume create mysql-data
 ```
 
-Access the database:
+Start MySQL 8.4. Replace `change-me` with a strong password of your choice:
 
-```console { output_lines = "2" }
-use arm_test;
-Database changed
+```bash
+docker run -d \
+  --name mysql-arm \
+  --restart unless-stopped \
+  -p 127.0.0.1:3306:3306 \
+  -v mysql-data:/var/lib/mysql \
+  -e MYSQL_ROOT_PASSWORD='change-me' \
+  mysql:8.4
 ```
 
-List tables in the database:
+Docker selects the arm64 image for the server. The port binding makes MySQL available on the loopback interface of the server. The volume stores the database outside the container.
 
-```console { output_lines= "2" }
-show tables;
-Empty set (0.09 sec)
+Check that the container is running:
+
+```bash
+docker ps --filter name=mysql-arm
 ```
 
-Create a table:
+MySQL needs time to initialize on its first start. Check the logs and wait until they report that the server is ready for connections:
 
-```console { output_lines= "2" }
-create table book(name char(10),id varchar(10));
-Query OK, 0 rows affected (0.12 sec)
+```bash
+docker logs mysql-arm
 ```
+Ensure that the output includes ` MySQL init process done. Ready for start up.`
 
-Insert values into the table:
+## What you've accomplished and what's next
 
-```console { output_lines= "2,3" }
-insert into book(name,id) values ('Abook','10'),('Bbook','20'),('Cbook','20'),('Dbook','30'),('Ebook','45'),('Fbook','40'),('Gbook','69');
-Query OK, 7 rows affected (0.11 sec)
-Records: 7  Duplicates: 0  Warnings: 0
-```
-Display information about the table:
-```console { output_lines= "2-8" }
-describe book;
-+-------+-------------+------+-----+---------+-------+
-| Field | Type        | Null | Key | Default | Extra |
-+-------+-------------+------+-----+---------+-------+
-| name  | char(10)    | YES  |     | NULL    |       |
-| id    | varchar(10) | YES  |     | NULL    |       |
-+-------+-------------+------+-----+---------+-------+
-2 rows in set (0.10 sec)
-```
+You've used a container image to install MySQL on your Arm-based Linux instance. 
 
-Access the content of the table:
-
-```console { output_lines= "2-13" }
-select * from book;
-+--------+------+
-| name   | id   |
-+--------+------+
-| Abook  | 10   |
-| Bbook  | 20   |
-| Cbook  | 20   |
-| Dbook  | 30   |
-| Ebook  | 45   |
-| Fbook  | 40   |
-| Gbook  | 69   |
-+--------+------+
-7 rows in set (0.09 sec)
-```
+Next, you'll connect to MySQL and create a database in the running container.

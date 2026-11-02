@@ -1,13 +1,13 @@
 ---
 # User change
-title: "Large System Extensions (LSE) Example"
+title: Deploy an example C program
 weight: 3
 
 layout: "learningpathall"
 
 ---
 
-## Try Large System Extensions (LSE) using an example C program
+## Try LSEs using an example C program
 
 You can build and run an example to learn more and find out if the compiler is generating LSE instructions. 
 

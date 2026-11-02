@@ -81,6 +81,10 @@ operatingsystems:
 
 further_reading:
     - resource:
+        title: Arm Neural Technology Playbook - Integrate
+        link: /learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-integrate/
+        type: learningpath
+    - resource:
         title: Enable Neural Frame Rate Upscaling in Unreal Engine
         link: /learning-paths/mobile-graphics-and-gaming/nfru-unreal/
         type: learningpath

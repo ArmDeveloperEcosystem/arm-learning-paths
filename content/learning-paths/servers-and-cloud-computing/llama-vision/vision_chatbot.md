@@ -63,12 +63,13 @@ pip install -r requirements.txt
 Install the `PyTorch` package, which includes the Kleidi AI optimizations from the nightly build, using the following command:
 
 ```bash
-pip install torch==2.7.0.dev20250307 --extra-index-url https://download.pytorch.org/whl/nightly/cpu/
+pip install torch==2.15.0.dev20260929+cpu --extra-index-url https://download.pytorch.org/whl/nightly/cpu/
 ```
 
 {{% notice Note %}}
 
-If the specified PyTorch version fails to install, try installing any PyTorch nightly build from [PyTorch Nightly Builds](https://download.pytorch.org/whl/nightly/cpu/) released after version 2.7.0.dev20250307.
+If the specified PyTorch version fails to install, try installing any PyTorch nightly build from [PyTorch Nightly Builds](https://download.pytorch.org/whl/nightly/cpu/) released after version `2.15.0.dev20260929+cpu`. Upon failure, `pip` should display a list of available versions. If one is available, select a version newer than `2.15.0.dev20260929+cpu` from that list and retry the installation command with the selected version.
+
 {{% /notice %}}
 
 ## Install Torch AO
@@ -94,7 +95,7 @@ Install Torch AO:
 
 To use the [Llama-3.2-11B-Vision-Instruct](https://huggingface.co/meta-llama/Llama-3.2-11B-Vision-Instruct) model from Hugging Face, you need to request access or accept the terms. You need to log in to Hugging Face using a token.
 ```bash
-    huggingface-cli login
+    hf auth login
 ```
 Enter your Hugging Face token. You can generate a token from [Hugging Face Hub](https://huggingface.co/) by clicking your profile on the top right corner and selecting **Access Tokens**. 
 
