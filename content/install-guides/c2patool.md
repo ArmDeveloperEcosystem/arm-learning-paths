@@ -26,6 +26,11 @@ Coalition for Content Provenance and Authenticity (C2PA) standard to record medi
 You can install C2PA Tool on 64-bit Arm Linux, macOS on Apple silicon, or Windows on Arm.
 The Linux instructions cover Ubuntu and Debian.
 
+On macOS, install C2PA Tool with Homebrew. On Arm Linux and Windows on Arm, the following
+steps use Cargo, Rust's package manager, to download the source code, compile it for Arm,
+and install the executable. Building from source produces an executable that runs natively
+on your Arm system.
+
 Homebrew and Cargo install the version available from their package source. For release
 information, see [C2PA Tool releases](https://github.com/contentauth/c2patool/releases).
 
@@ -39,8 +44,7 @@ brew install c2patool
 
 ## Install on Arm Linux
 
-Prebuilt Linux releases target `x86_64`. Use Cargo to build and install a native `aarch64`
-executable.
+Build C2PA Tool from source on your Arm Linux system to install a native `aarch64` executable.
 
 Install the build dependencies on Ubuntu or Debian:
 
@@ -49,7 +53,7 @@ sudo apt update
 sudo apt install -y build-essential pkg-config libssl-dev
 ```
 
-Install [Rust](/install-guides/rust/) to obtain Cargo, then install C2PA Tool:
+Install [Rust](/install-guides/rust/) to obtain Cargo, then build and install C2PA Tool from source:
 
 ```console
 cargo install c2patool --locked
@@ -59,10 +63,20 @@ Cargo installs `c2patool` in `$HOME/.cargo/bin`.
 
 ## Install on Windows on Arm
 
-Prebuilt Windows releases target `x86_64`. Use Cargo to build and install a native ARM64 executable.
+Build C2PA Tool from source with the ARM64 Rust toolchain to install a native ARM64 executable
+on Windows on Arm.
 
 Install the Microsoft C++ Build Tools and [Rust](https://www.rust-lang.org/tools/install) with the
-MSVC toolchain for ARM64. Open a new PowerShell window and run:
+MSVC toolchain for ARM64. Install [7-Zip](https://www.7-zip.org/) and add its installation
+directory (typically `C:\Program Files\7-Zip`) to your `PATH`.
+
+Open a new PowerShell window and confirm that 7-Zip is available:
+
+```console
+7z -h
+```
+
+The output displays the 7-Zip version and command usage. Then build and install C2PA Tool from source:
 
 ```console
 cargo install c2patool --locked
