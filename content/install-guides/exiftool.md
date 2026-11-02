@@ -16,7 +16,7 @@ layout: installtoolsall
 ---
 
 [ExifTool](https://exiftool.org/) reads and writes metadata in image, audio, and video files.
-You can install it on macOS on Apple silicon, 64-bit Arm Linux, or Windows 11 on Arm.
+You can install ExifTool on macOS on Apple silicon, 64-bit Arm Linux, or Windows 11 on Arm.
 On Windows on Arm, you'll use the Windows x64 executable under emulation.
 
 Package-manager commands install the version available from your package source. For current releases, see the
@@ -88,9 +88,8 @@ The output begins with `Available tags:` followed by tag names.
 
 ## Troubleshoot installation issues
 
-If your shell can't find `exiftool`, open a new terminal and confirm that the directory containing
-`exiftool` is in your `PATH`. On Windows, also check that the executable is named `exiftool.exe`
-and that `exiftool_files` is still beside it.
+If your shell can't find `exiftool`, open a new terminal. After opening the terminal, confirm that the directory containing
+`exiftool` is in your `PATH`. On Windows, also check that the executable is named `exiftool.exe` and that `exiftool_files` is still beside it.
 
 If Ubuntu can't locate the package, check that the `universe` repository is enabled for your Ubuntu
 release. After checking, run `sudo apt update` again.
