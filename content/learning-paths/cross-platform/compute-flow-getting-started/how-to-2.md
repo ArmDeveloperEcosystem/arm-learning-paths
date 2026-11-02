@@ -327,13 +327,13 @@ The expected output is:
 
 ```output
 Transcription: Ever tried, ever failed. No matter. Try again. Fail again. Fail better.
-Translation: Avez-vous déjà essayé, avez-vous déjà échoué. Peu importe. Essayez à nouveau. Écheclez encore. Échouez mieux.
+Translation: Avez-vous déjà essayé, avez-vous déjà échoué. Peu importe. Essayez à nouveau. Échouez encore. Échouez mieux.
 ```
 
-Check that the transcription matches the English recording and that the translation preserves its meaning. An accurate translation is as follows:
+Check that the transcription matches the English recording and that the translation preserves its meaning. An accurate translation in the polite form is as follows:
 
 ```text
- Déjà essayé, déjà échoué. Peu importe. Essaie encore. Échoue encore. Échoue mieux.
+Avez-vous déjà essayé, avez-vous déjà échoué. Peu importe. Essayez à nouveau. Échouez encore. Échouez mieux.
 ```
 
 You'll later learn how to select alternative models with different performance and accuracy tradeoffs. 
