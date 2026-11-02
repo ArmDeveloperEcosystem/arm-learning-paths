@@ -1,35 +1,47 @@
 const $ = id => document.getElementById(id);
 const main = document.querySelector('main[data-index]');
-const worker = new Worker(main.dataset.worker, { type: 'module' });
+let worker, workerFailure;
 let nextId = 0, generation = 0, limit = 10;
 const pending = new Map();
-worker.onmessage = ({ data }) => {
-  const request = pending.get(data.id);
-  if (!request) return;
-  pending.delete(data.id);
-  data.error ? request.reject(Error(data.error)) : request.resolve(data.result);
-};
-worker.onerror = () => {
-  for (const request of pending.values()) request.reject(Error('Search worker failed. Reload the page to retry.'));
+function failWorker() {
+  workerFailure = Error('Search is unavailable. Reload the page to retry.');
+  worker?.terminate();
+  ++generation;
+  for (const request of pending.values()) request.reject(workerFailure);
   pending.clear();
-  $('status').textContent = 'Search could not start. Reload the page to retry.';
-};
+  $('more').hidden = true;
+  $('search-diagnostics').hidden = true;
+  $('status').textContent = workerFailure.message;
+}
+try {
+  worker = new Worker(main.dataset.worker, { type: 'module' });
+  worker.onmessage = ({ data }) => {
+    const request = pending.get(data.id);
+    if (!request) return;
+    pending.delete(data.id);
+    data.error ? request.reject(Error(data.error)) : request.resolve(data.result);
+  };
+  worker.onerror = failWorker;
+  worker.onmessageerror = failWorker;
+} catch { failWorker(); }
 function call(action, input) {
+  if (workerFailure) return Promise.reject(workerFailure);
   return new Promise((resolve, reject) => {
     const id = ++nextId;
     pending.set(id, { resolve, reject });
-    worker.postMessage({ id, action, input, url: main.dataset.index });
+    try { worker.postMessage({ id, action, input, url: main.dataset.index }); }
+    catch { failWorker(); }
   });
 }
 const ready = call('init');
 const tool = {
   name: 'search_arm_content',
-  description: 'Find Arm Learning Paths and install guides by keyword or author name. Returns source URLs and metadata excerpts; use these sources to read the full instructions. Scores indicate keyword relevance, not confidence.',
+  description: 'Find Arm Learning Paths and install guides by keyword or author name, with word prefixes and limited typo tolerance. Relevance defaults to complete query matches first. Returns source URLs and metadata excerpts; use these sources to read the full instructions. Scores indicate keyword relevance, not confidence.',
   inputSchema: { type: 'object', properties: {
     query: { type: 'string', minLength: 1, maxLength: 300 },
     type: { type: 'string', enum: ['', 'learning-path', 'install-guide'], default: '' },
     category: { type: 'string', description: 'Learning Path category slug, such as servers-and-cloud-computing.' },
-    sort: { type: 'string', enum: ['updated', 'relevance'], default: 'updated' },
+    sort: { type: 'string', enum: ['relevance', 'updated'], default: 'relevance' },
     limit: { type: 'integer', minimum: 1, maximum: 100, default: 10 }
   }, required: ['query'], additionalProperties: false },
   annotations: { readOnlyHint: true },
@@ -76,6 +88,7 @@ async function render() {
   $('results').replaceChildren();
   $('more').hidden = true;
   $('search-diagnostics').hidden = true;
+  if (workerFailure) { $('status').textContent = workerFailure.message; return; }
   if (!query) { $('status').textContent = ''; return; }
   $('status').textContent = 'Searching…';
   const start = performance.now();
@@ -87,6 +100,7 @@ async function render() {
     $('performance').textContent = `Last search: ${result.searchMs.toFixed(1)} ms engine · ${(performance.now() - start).toFixed(1)} ms response`;
     $('search-diagnostics').hidden = false;
     if (!result.total) $('status').textContent += '. Try fewer words or remove a filter.';
+    if (result.total > 100) $('status').textContent += `. Showing ${result.results.length} of the first 100 results. Narrow your search to find other matches.`;
     for (const record of result.results) {
       const li = document.createElement('li'); li.className = 'search-result-card';
       const a = document.createElement('a'); a.href = record.url; a.textContent = record.title;

@@ -79,7 +79,7 @@ html[theme="dark"] .browser-search {
 .browser-search pre { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 450px; overflow: auto; background: var(--search-field); color: inherit; border-radius: 4px; }
 .browser-search pre:not(:empty) { border: 1px solid var(--search-border); padding: 16px; }
 @media (max-width: 760px) {
-  .browser-search { padding: 28px 0 40px; }
+  .browser-search { padding: 28px 16px 40px; }
   .browser-search .filters { grid-template-columns: 1fr; gap: 16px; }
   .browser-search .search-panel, .browser-search .search-result-card { padding: 20px; }
 }

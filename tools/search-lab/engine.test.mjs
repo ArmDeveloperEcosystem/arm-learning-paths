@@ -51,13 +51,14 @@ test('newest sorting applies to all matches before limiting, with relevance as a
     { id: '/new/', title: 'Containers', description: 'Docker', lastUpdated: '2026-10-29', type: 'install-guide' },
     { id: '/missing/', title: 'Docker', type: 'learning-path' }
   ]);
-  assert.deepEqual(datedSearch({ query: 'docker' }).results.map(r => r.id), ['/new/', '/old/', '/missing/']);
-  assert.equal(datedSearch({ query: 'docker', limit: 1 }).results[0].id, '/new/');
+  assert.deepEqual(datedSearch({ query: 'docker', sort: 'updated' }).results.map(r => r.id), ['/new/', '/old/', '/missing/']);
+  assert.equal(datedSearch({ query: 'docker', sort: 'updated', limit: 1 }).results[0].id, '/new/');
+  assert.equal(datedSearch({ query: 'docker', limit: 1 }).results[0].id, '/old/');
   assert.equal(datedSearch({ query: 'docker', sort: 'relevance' }).results[0].id, '/old/');
   assert.throws(() => datedSearch({ query: 'docker', sort: 'invalid' }));
 });
 
-test('relevance puts matching install guides first, then ranks each type by score', () => {
+test('relevance ranks all content by score, with content type available as a filter', () => {
   const prioritize = createEngine([
     { id: '/path/', title: 'Docker', type: 'learning-path', lastUpdated: '2026-10-29' },
     { id: '/weak-guide/', title: 'Containers', summary: 'Docker', type: 'install-guide', lastUpdated: '2025-01-01' },
@@ -66,8 +67,57 @@ test('relevance puts matching install guides first, then ranks each type by scor
     { id: '/unmatched/', title: 'GCC', type: 'install-guide' }
   ]);
   assert.deepEqual(prioritize({ query: 'docker', sort: 'relevance' }).results.map(r => r.id),
-    ['/strong-guide/', '/weak-guide/', '/path/', '/weak-path/']);
-  assert.equal(prioritize({ query: 'docker', sort: 'relevance', limit: 1 }).results[0].id, '/strong-guide/');
+    ['/path/', '/strong-guide/', '/weak-guide/', '/weak-path/']);
+  assert.equal(prioritize({ query: 'docker', sort: 'relevance', limit: 1 }).results[0].id, '/path/');
   assert.equal(prioritize({ query: 'docker', sort: 'updated' }).results[0].id, '/path/');
   assert.deepEqual(prioritize({ query: 'docker', sort: 'relevance', type: 'learning-path' }).results.map(r => r.id), ['/path/', '/weak-path/']);
+  assert.deepEqual(prioritize({ query: 'docker', sort: 'relevance', type: 'install-guide' }).results.map(r => r.id), ['/strong-guide/', '/weak-guide/']);
+});
+
+test('a title and author match outranks install guides matching only the topic', () => {
+  const search = createEngine([
+    { id: '/llvm/', title: 'LLVM toolchain', summary: 'BOLT', type: 'install-guide' },
+    { id: '/bolt/', title: 'Optimize applications with BOLT', authors: ['Gayathri'], type: 'learning-path' }
+  ]);
+  assert.equal(search({ query: 'bolt Gayathri', sort: 'relevance', limit: 1 }).results[0].id, '/bolt/');
+});
+
+test('all significant words rank before stronger partial matches, across fields', () => {
+  const search = createEngine([
+    { id: '/partial/', title: 'BOLT BOLT BOLT', description: 'BOLT', lastUpdated: '2026-10-01' },
+    { id: '/complete/', title: 'Other topic', faq: 'BOLT', authors: ['Gayathri'], lastUpdated: '2025-01-01' }
+  ]);
+  const input = { query: 'BOLT and Gayathri' };
+  assert.equal(search(input).results[0].id, '/complete/');
+  assert.equal(search({ ...input, limit: 1 }).results[0].id, '/complete/');
+  assert.equal(search({ ...input, sort: 'updated' }).results[0].id, '/partial/');
+});
+
+test('prefix completions rank below exact matches and cover every query word', () => {
+  const search = createEngine([
+    { id: '/prefix/', title: 'Graviton Docker' },
+    { id: '/exact/', summary: 'grav dock' },
+    { id: '/partial/', title: 'Graviton' }
+  ]);
+  assert.deepEqual(search({ query: 'grav dock' }).results.map(r => r.id), ['/exact/', '/prefix/', '/partial/']);
+  assert.equal(search({ query: 'viton' }).total, 0, 'No arbitrary substring matches');
+  assert.equal(search({ query: 'gr' }).total, 0, 'Prefixes need at least three letters');
+});
+
+test('typo fallback supports one edit including adjacent transposition', () => {
+  const search = createEngine([{ id: '/docker/', title: 'Docker', authors: ['Gayathri'] }]);
+  for (const query of ['dokcer', 'doker', 'dockerr', 'dockar', 'dokcer Gayathri']) {
+    assert.equal(search({ query }).results[0]?.id, '/docker/', query);
+  }
+  assert.equal(search({ query: 'dakkar' }).total, 0, 'Two edits do not match');
+  assert.equal(search({ query: 'dockar', type: 'install-guide' }).total, 0, 'Filters still apply');
+});
+
+test('typos do not expand valid tokens, short words, or technical identifiers', () => {
+  const search = createEngine([
+    { id: '/valid/', title: 'dockar' },
+    { id: '/other/', title: 'Docker GCC SVE2 llama.cpp' }
+  ]);
+  assert.deepEqual(search({ query: 'dockar' }).results.map(r => r.id), ['/valid/']);
+  for (const query of ['gdc', 'SVE3', 'llama.cop']) assert.equal(search({ query }).total, 0, query);
 });
