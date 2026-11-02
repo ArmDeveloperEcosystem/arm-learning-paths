@@ -2,7 +2,7 @@
 title: "Optimize AArch64 binaries with LLVM BOLT"
 description: Learn how to identify optimization candidates and apply LLVM BOLT post-link optimization to AArch64 binaries using BRBE, instrumentation, SPE, ETM, and PMU profiling techniques.
 
-minutes_to_complete: 30
+minutes_to_complete: 35
 
 aliases:
     - /learning-paths/servers-and-cloud-computing/bolt-demo/
@@ -15,6 +15,7 @@ learning_objectives:
     - Use LLVM BOLT to perform profile-guided post-link optimization of an AArch64 binary with poor spatial locality
     - Collect profile data using multiple techniques, including BRBE, instrumentation, SPE, ETM, and PMU event sampling
     - Evaluate the impact of BOLT optimizations using performance metrics and profiling data
+    - Visualise the layout changes performed by BOLT on an AArch64 binary using heatmaps
 
 prerequisites:
     - An AArch64 system running Linux, such as an Arm AGI CPU platform, with [LLVM BOLT](/install-guides/llvm/#verify-bolt-tools) and [perf](/install-guides/perf/) installed
@@ -46,7 +47,9 @@ generated_summary_faq:
     SPE, ETM, or PMU sampling. Using a small set of Arm TopDown indicators, you'll judge
     whether a program is front-end bound and a good candidate for BOLT. You'll then run BOLT with
     collected profiles to reorganize code layout and evaluate the impact using performance
-    metrics and profiling data to confirm improvements in instruction delivery and locality.
+    metrics and profiling data to confirm improvements in instruction delivery and locality. Finally, 
+    you'll generate heatmaps to visualise the layout changes performed by BOLT to show that locality 
+    has been improved.
   faqs:
   - question: Which BOLT version should I use if my package manager installs an older release?
     answer: >-
@@ -56,7 +59,8 @@ generated_summary_faq:
     answer: >-
       You'll find outputs in three directories: out for binaries, prof for profile data,
       and heatmap for visualization artifacts. Keeping these separate makes it easier to rerun
-      steps and compare results.
+      steps and compare results. There is also an optional html directory if you want to make 
+      HTML files of generated heatmaps. 
   - question: How do I know if my program is a good candidate for BOLT?
     answer: >-
       Check a small set of Arm TopDown indicators related to instruction delivery and code locality.
@@ -76,6 +80,7 @@ generated_summary_faq:
 author:
     - Paschalis Mpeis
     - Jonathan Davies
+    - Andreas Mullen
 
 generate_summary_faq: false
 rerun_summary: false
@@ -121,6 +126,10 @@ further_reading:
         title: Arm® Architecture Reference Manual, for A-profile architecture
         link: https://developer.arm.com/documentation/ddi0487/latest
         type: documentation
+    - resource: 
+        title: Code Heatmaps with BOLT
+        link: https://github.com/llvm/llvm-project/blob/main/bolt/docs/Heatmaps.md
+        type: documentation 
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
