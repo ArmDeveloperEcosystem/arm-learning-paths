@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">PocketBeagle 2: BMP280 temperature to AWS IoT Core</title>
+  <desc id="desc">Greengrass downloads two components from S3 and runs them on Yocto Linux on Cortex-A53. Component 1 loads and stops the Zephyr firmware on Cortex-M4F through remoteproc. The BMP280 sends temperature over I2C to Zephyr, which sends calibrated JSON frames over a UART jumper to Component 2, the Linux bridge. The bridge publishes through Greengrass IPC and the runtime's MQTT connection to AWS IoT Core.</desc>
+  <defs>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #173248; }
+      .title { font-size: 36px; font-weight: 700; }
+      .heading { font-size: 25px; font-weight: 700; }
+      .body { font-size: 21px; }
+      .small { font-size: 18px; }
+      .eyebrow { font-size: 17px; font-weight: 700; letter-spacing: 1.5px; }
+      .muted { fill: #506779; }
+      .white { fill: white; }
+      .data { fill: none; stroke: #007f78; stroke-width: 5; stroke-linejoin: round; marker-end: url(#teal); }
+      .deploy { fill: none; stroke: #7853b1; stroke-width: 4; stroke-dasharray: 10 7; stroke-linejoin: round; marker-end: url(#purple); }
+      .control { fill: none; stroke: #456480; stroke-width: 4; stroke-linejoin: round; marker-end: url(#slate); }
+    </style>
+    <marker id="teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0 0 10 5 0 10Z" fill="#007f78"/></marker>
+    <marker id="purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0 0 10 5 0 10Z" fill="#7853b1"/></marker>
+    <marker id="slate" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="11" markerHeight="11" orient="auto-start-reverse" markerUnits="userSpaceOnUse"><path d="M0 0 10 5 0 10Z" fill="#456480"/></marker>
+    <g id="chip" fill="none" stroke="currentColor" stroke-width="3">
+      <rect x="0" y="0" width="42" height="42" rx="5"/>
+      <path d="M10 -8V0 M21 -8V0 M32 -8V0 M10 42V50 M21 42V50 M32 42V50 M-8 10H0 M-8 21H0 M-8 32H0 M42 10H50 M42 21H50 M42 32H50"/>
+      <rect x="11" y="11" width="20" height="20" rx="2"/>
+    </g>
+  </defs>
+
+  <rect width="1600" height="1000" fill="#ffffff"/>
+  <text x="48" y="57" class="title">PocketBeagle 2: external temperature to the cloud</text>
+  <text x="48" y="91" class="body muted">Two Greengrass components connect Zephyr sensing with an AWS IoT Core JSON topic.</text>
+
+  <!-- Cloud services -->
+  <rect x="40" y="120" width="1520" height="205" rx="22" fill="#f4f0fb" stroke="#d7c9ed" stroke-width="2"/>
+  <text x="64" y="151" class="eyebrow" fill="#7853b1">AWS CLOUD</text>
+  <rect x="70" y="175" width="480" height="115" rx="15" fill="white" stroke="#baa4d7" stroke-width="2"/>
+  <circle cx="112" cy="211" r="13" fill="#7853b1"/>
+  <circle cx="96" cy="249" r="9" fill="#ab92cf"/>
+  <circle cx="128" cy="249" r="9" fill="#ab92cf"/>
+  <path d="M108 224 98 240 M116 224 125 240" stroke="#7853b1" stroke-width="3"/>
+  <text x="154" y="212" class="heading">Greengrass group deployment</text>
+  <text x="154" y="246" class="body">Recipes + component versions</text>
+  <text x="154" y="272" class="small muted">Target: PocketBeagleDevices</text>
+
+  <rect x="640" y="175" width="420" height="115" rx="15" fill="white" stroke="#baa4d7" stroke-width="2"/>
+  <path d="M674 205V256 C674 267 720 267 720 256V205" fill="#eee6f7" stroke="#7853b1" stroke-width="3"/>
+  <ellipse cx="697" cy="205" rx="23" ry="8" fill="white" stroke="#7853b1" stroke-width="3"/>
+  <text x="746" y="212" class="heading">S3 artifacts</text>
+  <text x="746" y="246" class="body">Zephyr ELF + scripts</text>
+  <text x="746" y="272" class="small muted">Bridge + offline SDK wheels</text>
+
+  <rect x="1160" y="175" width="370" height="115" rx="15" fill="#007f78"/>
+  <path d="M1191 234 C1176 234 1176 212 1191 212 C1190 191 1221 189 1227 208 C1247 203 1254 234 1236 234Z" fill="white"/>
+  <text x="1270" y="216" class="heading white">AWS IoT Core</text>
+  <text x="1270" y="248" class="body white">MQTT / TLS</text>
+  <text x="1270" y="274" class="small white">JSON temperature messages</text>
+
+  <!-- Board and Linux boundary -->
+  <rect x="365" y="382" width="1195" height="478" rx="24" fill="#f4f8fc" stroke="#6f93b5" stroke-width="3"/>
+  <text x="392" y="420" class="heading">PocketBeagle 2 · AM6254</text>
+  <rect x="804" y="439" width="730" height="395" rx="20" fill="#e7f0f8" stroke="#b1c9dd" stroke-width="2"/>
+  <text x="827" y="470" class="eyebrow">CORTEX-A53 · YOCTO LINUX</text>
+
+  <!-- The runtime receives cloud deployment and downloads -->
+  <path d="M310 290 V349 H1270 V500" class="deploy"/>
+  <path d="M850 290 V349" fill="none" stroke="#7853b1" stroke-width="4" stroke-dasharray="10 7"/>
+  <circle cx="850" cy="349" r="5" fill="#7853b1"/>
+  <rect x="410" y="332" width="285" height="31" rx="7" fill="white"/>
+  <text x="424" y="354" class="small" fill="#7853b1">Deployment + artifact download</text>
+
+  <!-- Component 1 -->
+  <rect x="833" y="500" width="290" height="130" rx="16" fill="white" stroke="#7853b1" stroke-width="2"/>
+  <rect x="852" y="514" width="162" height="26" rx="7" fill="#7853b1"/>
+  <text x="865" y="533" class="small white">COMPONENT 1</text>
+  <text x="852" y="571" class="heading">Firmware manager</text>
+  <text x="852" y="604" class="body muted">Install ELF; supervise M4</text>
+
+  <!-- Greengrass runtime -->
+  <rect x="1195" y="500" width="307" height="130" rx="16" fill="#173f62"/>
+  <text x="1216" y="540" class="heading white">Greengrass Lite</text>
+  <text x="1216" y="575" class="body white">Install / run lifecycle</text>
+  <text x="1216" y="607" class="small white">IPC + device MQTT connection</text>
+  <path d="M1195 564 H1123" class="deploy"/>
+
+  <!-- Component 2 -->
+  <rect x="1005" y="709" width="358" height="106" rx="16" fill="white" stroke="#7853b1" stroke-width="2"/>
+  <rect x="1023" y="723" width="162" height="26" rx="7" fill="#7853b1"/>
+  <text x="1036" y="742" class="small white">COMPONENT 2</text>
+  <text x="1023" y="781" class="heading">Linux telemetry bridge</text>
+  <path d="M1240 630 V665 H1177 V709" class="deploy"/>
+  <text x="1077" y="679" class="small" fill="#7853b1">install / run</text>
+
+  <!-- M4 with chip pictogram -->
+  <rect x="405" y="655" width="310" height="160" rx="16" fill="#e3f3ef" stroke="#58a393" stroke-width="2"/>
+  <use href="#chip" x="429" y="689" style="color:#007f78"/>
+  <text x="494" y="690" class="eyebrow">CORTEX-M4F</text>
+  <text x="494" y="729" class="heading">Zephyr app</text>
+  <text x="429" y="766" class="body">Read + compensate</text>
+  <text x="429" y="794" class="small muted">BMP280 temperature</text>
+
+  <!-- Physical external sensor -->
+  <rect x="40" y="659" width="267" height="156" rx="17" fill="#fff3dc" stroke="#dba845" stroke-width="2"/>
+  <rect x="62" y="683" width="58" height="51" rx="7" fill="#b48325"/>
+  <rect x="76" y="690" width="30" height="27" rx="3" fill="#f4d68f"/>
+  <circle cx="72" cy="725" r="3" fill="#fff3dc"/><circle cx="84" cy="725" r="3" fill="#fff3dc"/><circle cx="96" cy="725" r="3" fill="#fff3dc"/><circle cx="108" cy="725" r="3" fill="#fff3dc"/>
+  <text x="138" y="703" class="heading">BMP280</text>
+  <text x="62" y="766" class="body">External sensor module</text>
+  <text x="62" y="795" class="small muted">3.3 V · I2C 0x76 / 0x77</text>
+
+  <!-- Data and M4 management paths -->
+  <path d="M307 728 H405" class="data"/>
+  <text x="328" y="708" class="small" fill="#007f78">I2C</text>
+  <path d="M715 762 H1005" class="data"/>
+  <rect x="752" y="723" width="219" height="29" rx="5" fill="#f4f8fc"/>
+  <text x="766" y="744" class="small" fill="#007f78">UART jumper · JSON</text>
+  <text x="742" y="792" class="small muted">MCU_UART0 → MAIN_UART0</text>
+  <path d="M1363 760 H1445 V630" class="data"/>
+  <text x="1382" y="696" class="small" fill="#007f78">IPC</text>
+  <path d="M1445 500 V290" class="data"/>
+  <rect x="1354" y="367" width="182" height="33" rx="6" fill="white"/>
+  <text x="1367" y="391" class="small" fill="#007f78">Publish to IoT Core</text>
+  <path d="M833 566 H560 V655" class="control"/>
+  <text x="439" y="529" class="body" fill="#456480">remoteproc</text>
+  <text x="439" y="554" class="small muted">load / start / stop</text>
+
+  <!-- Explicit destination and legend -->
+  <rect x="40" y="887" width="1520" height="65" rx="15" fill="#e5f4f1"/>
+  <text x="63" y="928" class="body" font-weight="700">IoT Core topic:</text>
+  <text x="230" y="928" font-family="monospace" font-size="24" fill="#006f68">ti/pocketbeagle2/temperature/external</text>
+  <path d="M48 978 H95" class="data"/><text x="109" y="984" class="small">Temperature telemetry</text>
+  <path d="M445 978 H492" class="deploy"/><text x="506" y="984" class="small">Greengrass deployment / lifecycle</text>
+  <path d="M985 978 H1032" class="control"/><text x="1046" y="984" class="small">M4 firmware control</text>
+</svg>
