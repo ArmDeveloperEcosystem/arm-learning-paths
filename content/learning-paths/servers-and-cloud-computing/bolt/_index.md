@@ -15,7 +15,7 @@ learning_objectives:
     - Use LLVM BOLT to perform profile-guided post-link optimization of an AArch64 binary with poor spatial locality
     - Collect profile data using multiple techniques, including BRBE, instrumentation, SPE, ETM, and PMU event sampling
     - Evaluate the impact of BOLT optimizations using performance metrics and profiling data
-    - Visualise the layout changes performed by BOLT on an AArch64 binary using heatmaps
+    - Visualize the layout changes performed by BOLT on an AArch64 binary using heatmaps
 
 prerequisites:
     - An AArch64 system running Linux, such as an Arm AGI CPU platform, with [LLVM BOLT](/install-guides/llvm/#verify-bolt-tools) and [perf](/install-guides/perf/) installed
@@ -40,16 +40,11 @@ generated_summary_faq:
   faq_generated_at: '2026-06-30T21:37:54Z'
   faq_source_hash: 8654b656131bf1d529e11d85f874f7a81c01f7207340d2a606b6fd2d80bfad04
   summary: >-
-    You'll apply LLVM BOLT post-link optimization to AArch64 binaries
-    using profile-guided code layout. Starting with a deliberately inefficient BubbleSort workload
-    to make instruction locality issues visible, you'll verify a suitable BOLT
-    installation, set up a working directory, and gather profiles with BRBE, instrumentation,
-    SPE, ETM, or PMU sampling. Using a small set of Arm TopDown indicators, you'll judge
-    whether a program is front-end bound and a good candidate for BOLT. You'll then run BOLT with
-    collected profiles to reorganize code layout and evaluate the impact using performance
-    metrics and profiling data to confirm improvements in instruction delivery and locality. Finally, 
-    you'll generate heatmaps to visualise the layout changes performed by BOLT to show that locality 
-    has been improved.
+    You’ll use LLVM BOLT to optimize AArch64 binary code layout. Starting with a deliberately
+    inefficient BubbleSort example, you’ll prepare your environment and identify poor instruction
+    locality using Arm TopDown metrics. You’ll collect profiles using a supported method and
+    generate an optimized binary. Finally, you’ll compare runtime measurements, hardware metrics,
+    and heatmaps to evaluate performance and inspect code layout changes.
   faqs:
   - question: Which BOLT version should I use if my package manager installs an older release?
     answer: >-
@@ -59,8 +54,8 @@ generated_summary_faq:
     answer: >-
       You'll find outputs in three directories: out for binaries, prof for profile data,
       and heatmap for visualization artifacts. Keeping these separate makes it easier to rerun
-      steps and compare results. There is also an optional html directory if you want to make 
-      HTML files of generated heatmaps. 
+      steps and compare results. There is also an optional html directory if you want to make
+      HTML files of generated heatmaps.
   - question: How do I know if my program is a good candidate for BOLT?
     answer: >-
       Check a small set of Arm TopDown indicators related to instruction delivery and code locality.
@@ -123,13 +118,9 @@ further_reading:
         link: https://developer.arm.com/documentation/109528/0200/Metrics-by-metric-group-in-Neoverse-V2
         type: documentation
     - resource:
-        title: Arm® Architecture Reference Manual, for A-profile architecture
-        link: https://developer.arm.com/documentation/ddi0487/latest
-        type: documentation
-    - resource: 
         title: Code Heatmaps with BOLT
         link: https://github.com/llvm/llvm-project/blob/main/bolt/docs/Heatmaps.md
-        type: documentation 
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

@@ -84,6 +84,6 @@ You can also compute the MPKI values manually using `perf stat`, as described in
 
 ## What you've learned and what's next
 
-In this learning path, you learned how to use [TopDown Methodology](https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology) to be able to verify optimizations performed by BOLT. 
+You’ve compared runtime measurements and applied the [TopDown Methodology](https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology) to evaluate BOLT’s optimizations.
 
-Now you're ready to generate heatmaps to visualise the layout changes performed by BOLT. 
+Next, you’ll generate heatmaps to inspect how BOLT changed the binary’s code layout.
