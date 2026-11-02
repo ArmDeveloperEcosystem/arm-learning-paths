@@ -11,7 +11,11 @@ layout: learningpathall
 
 You inspected the example binary with two disassemblers and checked both comparison binaries for Scalable Matrix Extension (SME) and SME2 instructions. You can now combine the `llvm-objdump` and `awk` steps in a reusable script.
 
-Continue in the `arm64-extension-inspection` working directory, alongside `strict-sme2.awk` and the compiled binaries.
+Return to the project directory:
+
+```bash
+cd "$HOME/arm64-extension-inspection"
+```
 
 Create `verify-static-sme2.sh` and make it executable:
 
@@ -83,7 +87,7 @@ FAIL: no matching SME or SME2 instructions found in string-only-control
 
 This `FAIL` result is expected because the comparison binary contains no matching instructions. Exit status `1` indicates that the filter found no matches.
 
-The output directory still contains the disassembler version in `decoder-version.txt`, the disassembly in `llvm-objdump.txt`, and an empty `strict-sme2-hits.txt` file.
+These runs create `evidence-positive` and `evidence-string-only` inside `$HOME/arm64-extension-inspection`. The `evidence-string-only` directory still contains the disassembler version in `decoder-version.txt`, the disassembly in `llvm-objdump.txt`, and an empty `strict-sme2-hits.txt` file.
 
 The positive-control run confirms that the example binary contains matching instructions. It doesn't show whether the application runs them or whether they improve performance.
 

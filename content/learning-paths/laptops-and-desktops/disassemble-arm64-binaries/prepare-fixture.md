@@ -21,11 +21,18 @@ You'll begin by creating an example program from source code. This program will 
 
 The example contains SME and SME2 assembly instructions and is compiled for macOS on Apple silicon. You'll compile the code but never run it, so you don't need SME2 hardware on your Mac.
 
-To begin, create a working directory and navigate to it:
+To begin, go to your home directory, create a working directory, and navigate to it:
 
 ```bash
+cd "$HOME"
 mkdir arm64-extension-inspection
 cd arm64-extension-inspection
+```
+
+If you open a new terminal or return to the project later, run:
+
+```bash
+cd "$HOME/arm64-extension-inspection"
 ```
 
 Create `sme2-main.c`:

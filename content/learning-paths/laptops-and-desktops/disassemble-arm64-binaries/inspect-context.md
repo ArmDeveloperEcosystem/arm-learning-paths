@@ -11,6 +11,12 @@ layout: learningpathall
 
 After building binaries, you can now inspect strings and symbols in them.
 
+Run the commands on this page from the project directory that contains your compiled binaries:
+
+```bash
+cd "$HOME/arm64-extension-inspection"
+```
+
 A string is printable data stored in the binary. It can reveal a feature check, diagnostic message, or component name without interpreting executable machine code.
 
 Select the example binary, then search its `arm64` slice for text related to Scalable Matrix Extension 2 (SME2):
