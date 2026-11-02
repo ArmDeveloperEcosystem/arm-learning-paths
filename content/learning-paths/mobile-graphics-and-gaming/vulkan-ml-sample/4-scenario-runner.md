@@ -27,7 +27,7 @@ The following table summarizes the main SDK components and their roles.
 | **Emulation Layer** | Vulkan layer that emulates data graph and tensor extensions using compute shaders.                      | Test on devices without native support for ML Extensions for Vulkan | https://github.com/arm/ai-ml-emulation-layer-for-vulkan |
 | **ML Workload Library for Vulkan** | C++ library for creating and executing ML workloads using Vulkan. | Integrate ML workloads into Vulkan applications | https://github.com/arm/ai-ml-workload-library-for-vulkan |
 
-Vulkan Graph Format (VGF) is a format for packaging machine learning graphs and their associated data for execution with Vulkan. It brings together the graph definition, shaders, and model constants in a single file, making it easier to distribute and load prebuilt ML workloads.
+VGF is a format for packaging machine learning graphs and their associated data for execution with Vulkan. It brings together the graph definition, shaders, and model constants in a single file, making it easier to distribute and load prebuilt ML workloads.
 
 For this exercise, Scenario Runner uses the VGF Library to load a prebuilt `.vgf` model and executes the workload described in a JSON scenario file through the configured ML Emulation Layers.
 
@@ -76,16 +76,24 @@ If the virtual environment is not already active, activate it:
 & "$HOME\.venv\Scripts\Activate.ps1"
 ```
 
-Install Scenario Runner using pip:
+Install Scenario Runner:
 
 ```powershell
-python -m pip install ai-ml-sdk-scenario-runner
+python -m pip install "ai-ml-sdk-scenario-runner>=0.11.0"
+```
+
+This installs the latest compatible version of Scenario Runner, starting from v0.11.0. If no compatible version is available for your Python environment, the installation will fail rather than selecting an older release.
+
+Verify the installed version:
+
+```powershell
+python -m pip show ai-ml-sdk-scenario-runner
 ```
 
 Verify that Scenario Runner is available:
 
 ```powershell
-scenario-runner --help
+scenario_runner --help
 ```
 
 ### Run the Neural Super Sampling scenario
@@ -99,7 +107,7 @@ cd "$HOME\neural-super-sampling\scenario"
 Run Scenario Runner using the supplied JSON configuration:
 
 ```powershell
-scenario-runner --scenario configs/960x540_1920x1080_high_fragment.json --output out_high
+scenario_runner --scenario configs/960x540_1920x1080_high_fragment.json --output out_high
 ```
 
 The configuration specifies a Neural Super Sampling workload that upscales an input frame from 960 × 540 to 1920 × 1080.

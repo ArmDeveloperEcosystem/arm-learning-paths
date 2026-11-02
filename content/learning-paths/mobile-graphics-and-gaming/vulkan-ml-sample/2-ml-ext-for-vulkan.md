@@ -18,7 +18,7 @@ This setup involves three main steps:
 
 ## Set up the development environment
 
-Open **Windows PowerShell** from the Windows 11 Start menu. Verify that Python 3.10 or later is installed, then navigate to your user home directory:
+Open **Windows PowerShell** from the Windows 11 Start menu. Verify that Python 3.10 or later is installed. Use a standard CPython build rather than a free-threaded build, then navigate to your user home directory:
 
 ```powershell
 python --version
