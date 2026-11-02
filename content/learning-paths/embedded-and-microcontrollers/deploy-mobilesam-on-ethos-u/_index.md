@@ -42,7 +42,7 @@ generated_summary_faq:
   - question: How do I know my host is supported before I start?
     answer: >-
       Run the preflight check to verify macOS 15 or later on Apple silicon, or glibc 2.28 or later on Linux.
-      You'll also check the required tools, including `python3.12`, `git`, `cmake`, `c++`, and either `Ninja` or `Make`.
+      You'll also check `python3.12`, `git`, `c++`, `ninja`, `curl`, `pkg-config`, and `xz`.
   - question: Which directory should I run commands from during export and build?
     answer: >-
       Run commands from the `ExecuTorch` repository root. Activate your Python environment and source
@@ -93,7 +93,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: ExecuTorch MobileSAM prompt segmentation example
-        link: https://github.com/pytorch/executorch/tree/5c4d2c4a0150a0809bc77be9a67093f80f60a60f/examples/arm/mobilesam_prompt_segmentation_example_ethos_u
+        link: https://github.com/pytorch/executorch/tree/fe93a8b0fc8d363fbb3bfa2aa18e253507fd13f8/examples/arm/mobilesam_prompt_segmentation_example_ethos_u
         type: repository
     - resource:
         title: ExecuTorch Arm Ethos-U backend documentation

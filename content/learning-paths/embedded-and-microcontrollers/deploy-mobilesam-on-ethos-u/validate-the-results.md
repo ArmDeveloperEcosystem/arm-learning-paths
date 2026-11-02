@@ -36,15 +36,6 @@ python3 -m json.tool arm_test/mobilesam/export/metrics.json
 
 The `fp32_quantized_iou` value must also be at least `0.9`.
 
-A reference run at the pinned commit produced these scores:
-
-| Comparison | IoU |
-| --- | --- |
-| Floating-point and quantized host masks | 0.9436 |
-| FVP and quantized host masks | 0.9764 |
-
-This reference run used Ubuntu 24.04.4 on AArch64 with Python 3.12.3 and the dependencies from [environment setup](../prepare-the-environment/). Treat these scores as examples; use the two `0.9` thresholds to check your own run.
-
 ## Confirm Ethos-U delegation
 
 Display the delegation report written during export:
@@ -53,12 +44,10 @@ Display the delegation report written during export:
 sed -n '1,120p' arm_test/mobilesam/export/delegation.txt
 ```
 
-Confirm that `Total delegated subgraphs` is `1`. The exporter checks this before writing the `.pte`. The reference run above produced:
+Confirm that `Total delegated subgraphs` is `1`. The exporter checks this before writing the `.pte`. The output includes:
 
 ```output
 Total delegated subgraphs: 1
-Number of delegated nodes: 5076
-Number of non-delegated nodes: 3
 ```
 
 Node counts can vary with dependency versions. Use the values from your export when reporting delegation.
@@ -66,7 +55,7 @@ Node counts can vary with dependency versions. Use the values from your export w
 In `arm_test/mobilesam/fvp.log`, also confirm `NPU delegations: 1`. This count records a completed NPU invocation at runtime; the export report shows how the model was partitioned.
 
 {{% notice Note %}}
-The FVP can report `Inference CPU ratio: 100.00 %` and `Inference NPU ratio: 0.00 %` even when the NPU executes the delegated subgraph. These ratios use CPU-side timing, not delegated operator counts. CPU timing isn't cycle accurate on this FVP. Fast mode can also zero PMU event counters and isn't suitable for benchmarking. Use the delegation count and mask comparison to validate this run.
+The FVP reports CPU timing and CPU/NPU ratios as `N/A`. Fast mode also marks NPU PMU counters as unavailable; timing mode reports simulated NPU counters. Use the delegation count and mask comparison to validate execution. Simulated counters are not measurements of real-device latency.
 {{% /notice %}}
 
 ## Inspect the visual result

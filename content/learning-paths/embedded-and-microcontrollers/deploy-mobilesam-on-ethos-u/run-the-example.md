@@ -69,7 +69,7 @@ backends/arm/scripts/run_fvp.sh \
 
 The runner reads the tensor specified by `-i input.bin` and writes its first output tensor to `output-0.bin` under `arm_test/mobilesam/io/`. The console transcript is saved to `arm_test/mobilesam/fvp.log`; validation reads the tensor file.
 
-`--fast` selects fast Ethos-U simulation for functional validation. Don't use its cycle counts or performance monitoring unit (PMU) counters to benchmark the model.
+`--fast` selects functional validation and reports CPU timing, CPU/NPU ratios, and NPU performance monitoring unit (PMU) counters as `N/A`. To collect simulated NPU counters, omit `--fast` and set `--timeout=7200`. CPU timing and CPU/NPU ratios remain unavailable; the simulated NPU counters are not measurements of real-device latency.
 
 Confirm that the run created the output file before continuing:
 

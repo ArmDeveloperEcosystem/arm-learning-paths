@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Check your development machine
 
-Use Python 3.12 with development headers and virtual-environment support. Run the following preflight check before downloading the source:
+Use Python 3.12 with development headers and virtual-environment support. On Linux, also install the GLib and OpenMP runtime packages (`libglib2.0-0` and `libgomp1` on Ubuntu). Run the following preflight check before downloading the source:
 
 ```bash
 case "$(uname -s)/$(uname -m)" in
@@ -21,7 +21,7 @@ case "$(uname -s)/$(uname -m)" in
     ;;
 esac
 
-for tool in python3.12 git cmake c++; do
+for tool in python3.12 git c++ ninja curl pkg-config xz; do
   command -v "$tool" >/dev/null || {
     echo "Missing required tool: $tool" >&2
     exit 1
@@ -44,14 +44,8 @@ elif sys.platform.startswith("linux"):
         )
 PY
 
-if ! command -v ninja >/dev/null && ! command -v make >/dev/null; then
-  echo "Install Ninja or Make before continuing." >&2
-  exit 1
-fi
-
 python3.12 --version
 git --version
-cmake --version | head -n 1
 c++ --version | head -n 1
 ```
 
@@ -59,9 +53,9 @@ The check confirms that you are using a supported Linux host or Apple silicon Ma
 
 - Python 3.12
 - Git
-- CMake
 - A host C++ compiler
-- Ninja or Make
+- Ninja
+- curl, pkg-config, and xz
 
 The Python export dependencies require macOS 15 or later on Apple silicon, or glibc 2.28 or later on Linux. The pinned [TOSA tools](https://pypi.org/project/tosa-tools/2026.5.0/#files) set the macOS minimum, and the [PyTorch wheels](https://pypi.org/project/torch/2.14.0/#files) require the Linux glibc version. The preflight check verifies these requirements before you install the dependencies.
 
@@ -74,12 +68,13 @@ Clone ExecuTorch, select the revision used by this Learning Path, and initialize
 ```bash
 git clone https://github.com/pytorch/executorch.git
 cd executorch
-git checkout 5c4d2c4a0150a0809bc77be9a67093f80f60a60f
+git fetch origin fe93a8b0fc8d363fbb3bfa2aa18e253507fd13f8
+git checkout fe93a8b0fc8d363fbb3bfa2aa18e253507fd13f8
 git submodule sync
 git submodule update --init --recursive
 ```
 
-Run the remaining commands from the ExecuTorch repository root. The pinned revision keeps the commands aligned with the [MobileSAM example source](https://github.com/pytorch/executorch/tree/5c4d2c4a0150a0809bc77be9a67093f80f60a60f/examples/arm/mobilesam_prompt_segmentation_example_ethos_u).
+Run the remaining commands from the ExecuTorch repository root. The pinned revision keeps the commands aligned with the [MobileSAM example source](https://github.com/pytorch/executorch/tree/fe93a8b0fc8d363fbb3bfa2aa18e253507fd13f8/examples/arm/mobilesam_prompt_segmentation_example_ethos_u).
 
 ## Create a Python environment
 
@@ -89,6 +84,16 @@ Create and activate a fresh Python 3.12 virtual environment for this checkout:
 python3.12 -m venv .venv
 source .venv/bin/activate
 ```
+
+## Install ExecuTorch
+
+Build the Python package from the same checkout used by the example and native runner:
+
+```bash
+CMAKE_GENERATOR=Ninja ./install_executorch.sh --optional-dependency ethos_u
+```
+
+The installer supplies CMake, the model export dependencies, and the example requirements. It selects released PyTorch and TorchAO packages for the CPU workflow.
 
 ## Install the Arm development tools
 
@@ -108,60 +113,15 @@ The Arm setup script installs the pinned GNU bare-metal toolchain, Ethos-U Vela 
 source examples/arm/arm-scratch/setup_path.sh
 ```
 
-## Install ExecuTorch
+## Verify the environment
 
-Remove unused developer packages installed by Arm setup:
-
-```bash
-python -m pip uninstall -y \
-  tosa-adapter-model-explorer ai-edge-model-explorer \
-  pte-adapter-model-explorer pytest-timeout
-```
-
-Install released PyTorch, Torchvision, and TorchAO packages. Linux uses the stable CPU wheel index; macOS uses the Apple silicon wheels from PyPI:
+Check that the Python dependencies are consistent after Arm setup:
 
 ```bash
-case "$(uname -s)" in
-  Linux)
-    python -m pip install \
-      --index-url https://pypi.org/simple \
-      --extra-index-url https://download.pytorch.org/whl/cpu \
-      'torch==2.14.0+cpu' 'torchvision==0.29.0+cpu' 'torchao==0.18.0+cpu'
-    ;;
-  Darwin)
-    python -m pip install --index-url https://pypi.org/simple \
-      'torch==2.14.0' 'torchvision==0.29.0' 'torchao==0.18.0'
-    ;;
-  *)
-    echo "Use a supported Linux host or Apple silicon Mac." >&2
-    exit 1
-    ;;
-esac
-```
-
-Install the source build dependencies and the `timm` version used by the pinned MobileSAM example:
-
-```bash
-python -m pip install --index-url https://pypi.org/simple \
-  'cmake==3.31.10' 'packaging==26.3' 'setuptools==84.0.0' \
-  'wheel==0.48.0' 'pyyaml==6.0.3' 'zstd==1.5.7.2' \
-  'certifi==2026.7.22' 'patchelf==0.19.1.0; sys_platform == "linux"' \
-  'timm==1.0.7'
-```
-
-Build and install ExecuTorch from the same checkout used by the example and native runner:
-
-```bash
-CMAKE_ARGS='-DEXECUTORCH_BUILD_MLX=OFF' env -u DEBUG \
-  python -m pip install --no-build-isolation '.[ethos_u]'
 python -m pip check
 ```
 
-Installing the Ethos-U extra after Arm setup resolves its older FlatBuffers dependency. Before exporting, confirm that `pip check` reports `No broken requirements found.`
-
-These commands replace `install_executorch.sh` and its TorchAO nightly with released dependencies. If you rerun Arm setup, repeat the package removal and Python installation steps.
-
-## Verify the environment
+Confirm that the output is `No broken requirements found.`
 
 Check the ExecuTorch and Ethos-U imports used by the exporter:
 
@@ -211,6 +171,14 @@ MobileSAM example: PASS
 ```
 
 The comparison image, `fvp_comparison.png`, is saved under `arm_test/mobilesam/result/`. After the script completes, continue to [Validate the MobileSAM segmentation result](../validate-the-results/) to inspect the artifacts.
+
+To run the same workflow with simulated NPU counters, use timing mode:
+
+```bash
+./examples/arm/mobilesam_prompt_segmentation_example_ethos_u/run.sh --timed
+```
+
+Timing mode uses a 7,200-second timeout; the default fast mode uses 300 seconds. CPU timing and CPU/NPU ratios remain unavailable on FVP.
 
 To work through each stage manually, skip this script and continue to the next page. The following pages explain the same preparation, export, build, and validation steps. Continue only after each command succeeds; files from an earlier run can remain after a failed command.
 
