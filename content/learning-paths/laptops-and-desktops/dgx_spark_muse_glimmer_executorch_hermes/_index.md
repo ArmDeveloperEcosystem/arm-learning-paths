@@ -1,6 +1,10 @@
 ---
 title: Build a local Muse Glimmer 30B agent with Hermes and ExecuTorch on NVIDIA DGX Spark
 
+draft: true
+cascade:
+    draft: true
+    
 description: Run Hermes on the Arm CPU and Muse Glimmer on the Blackwell GPU of NVIDIA DGX Spark, then use the local agent with text and image capabilities to investigate and repair a broken Python checker.
 
 minutes_to_complete: 90
