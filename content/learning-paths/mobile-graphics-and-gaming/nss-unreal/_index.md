@@ -14,7 +14,7 @@ learning_objectives:
 
 prerequisites:
     - Windows 11
-    - Unreal Engine 4.27 or 5.4 or 5.6 (with the Templates and Feature Pack enabled)
+    - Unreal Engine 4.27, 5.4, or 5.6 (with the Templates and Feature Pack enabled)
     - Visual Studio (with Desktop Development with C++ and .NET desktop build tools)
 
 # START generated_summary_faq
@@ -47,9 +47,9 @@ generated_summary_faq:
       and build from source before enabling and running NSS.
   - question: How do I set up the ML emulation layers for Vulkan?
     answer: >-
-      Install Vulkan SDK version 1.4.321.0 or later and the ML Emulation Layer for Vulkan version
-      0.10.0 or later. Use Vulkan Configurator to set up the emulation layers used for ML extensions
-      workloads.
+      For Unreal Engine 5.4 or 5.6, install Vulkan SDK version 1.4.321.0 or later, then run
+      the plugin's `DownloadEmulationLayer.bat` script. Use Vulkan Configurator to enable the
+      downloaded Graph and Tensor layers. For Unreal Engine 4.27, follow its separate plugin README.
   - question: How can I visualize the NSS model output while the game runs?
     answer: >-
       Run the command `r.NSS.Debug 1` in Unreal. The command adds real-time views showing the model output
