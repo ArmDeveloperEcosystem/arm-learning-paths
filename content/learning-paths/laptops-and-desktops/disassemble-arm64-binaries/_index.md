@@ -1,6 +1,6 @@
 ---
 title: Disassemble macOS binaries to check for SME and SME2 instructions
-    
+
 description: Use otool and llvm-objdump on macOS to verify that a compiled binary contains SME and SME2 instructions.
 
 minutes_to_complete: 45
@@ -19,7 +19,7 @@ prerequisites:
 
 author: Geremy Cohen
 
-generate_summary_faq: false
+generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 

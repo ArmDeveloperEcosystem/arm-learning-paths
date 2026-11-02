@@ -7,11 +7,11 @@ weight: 2
 layout: learningpathall
 ---
 
-## Check for SME and SME2 instructions in a binary
+## Build the SME2 fixture and comparison binaries
 
 A macOS binary can contain Scalable Matrix Extension (SME) and SME2 instructions. Including supporting source code or enabling compiler options doesn't prove those instructions are present in the compiled binary.
 
-You'll build a small Mach-O executable and inspect its final machine code for SME and SME2 instructions. You'll identify state-control, matrix, and predicate instructions, then correlate each finding with its exact four bytes and decoded mnemonic. You'll also inspect the operands, static program counter (PC), symbol, and surrounding code.
+You'll build a small Mach-O executable and inspect its final machine code for SME and SME2 instructions. You'll identify state-control, matrix, and predicate instructions. You'll correlate each finding with its exact four bytes and decoded mnemonic. You'll also inspect the operands, static program counter (PC), symbol, and surrounding code.
 
 You can use the same inspection method to check for other instruction groups in a compiled binary.
 
@@ -123,7 +123,7 @@ xcrun clang -arch arm64 -O2 plain-arm64-control.c -o plain-arm64-control
 
 With your controls built, begin with file-type and architecture-slice checks before inspecting the instructions.
 
-A thin Mach-O file contains one architecture slice. A universal Mach-O file, also called a fat Mach-O file, can contain several slices, such as `arm64` and `x86_64`. This allows x86 and Arm executable code to coexist in the same file.
+A thin Mach-O file contains one architecture slice. A universal Mach-O file, also called a fat Mach-O file, can contain several slices, including `arm64` and `x86_64`. A universal file can therefore contain both x86 and Arm executable code.
 
 Use `file` and `lipo` to identify the file type and slices.
 

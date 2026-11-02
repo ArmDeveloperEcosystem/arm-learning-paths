@@ -78,6 +78,6 @@ Each check tells you something different about the binary:
 
 ## What you've accomplished and what's next
 
-You found SME2-related strings and symbols in both the example and comparison binaries. 
+You found SME2-related strings and symbols in both the example and comparison binaries.
 
 Next, you'll disassemble the binaries to check which ones contain SME2 instructions.

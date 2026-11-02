@@ -9,19 +9,19 @@ layout: learningpathall
 
 ## Encode and decode mnemonics and operands
 
-After inspecting binaries, you're now ready to disassemble the binaries and check Scalable Matrix Extension 2 (SME2) instructions.
+Next, disassemble the binaries to check for Scalable Matrix Extension 2 (SME2) instructions.
 
-Assemblers encode Arm Instruction Set Architecture (ISA) instruction mnemonics and operands into four-byte, 32-bit words. You can use a disassembler to decode those ISA words to recover the mnemonics and their operands.
+Assemblers encode Arm Instruction Set Architecture (ISA) mnemonics and operands into 32-bit words. A disassembler decodes those words to recover the mnemonics and operands.
 
 Use the example program that you created earlier to explore assembly and disassembly. When you wrote the source, you included the following line:
 
-```output
+```text
 fmopa za0.s, p0/m, p0/m, z0.s, z1.s
 ```
 
 The mnemonic is `fmopa`. The assembler converts `fmopa` and its operands into the following four bytes:
 
-```output
+```text
 00 00 81 80 -> 0x80810000 -> fmopa za0.s, p0/m, p0/m, z0.s, z1.s
 ```
 The operands identify the ZA tile, predicate registers, and vector registers.
@@ -77,7 +77,7 @@ This filter recognizes the instruction forms that are used in the example binari
 
 ## Decode with `otool`
 
-The `otool` command selects the `arm64` slice and disassembles its main executable code section. 
+The `otool` command selects the `arm64` slice and disassembles its main executable code section.
 
 Apply the filter to decoded text rather than scanning raw bytes or strings:
 
@@ -179,6 +179,6 @@ The string-only comparison binary still contains the SME2-related string and sym
 
 ## What you've accomplished and what's next
 
-You verified SME and SME2 instructions in the binary by examining their bytes, operands, addresses, and surrounding code. 
+You verified SME and SME2 instructions in the binary by examining their bytes, operands, addresses, and surrounding code.
 
 Next, you'll combine these checks in a reusable script and adapt the method to other instruction groups and binary formats.
