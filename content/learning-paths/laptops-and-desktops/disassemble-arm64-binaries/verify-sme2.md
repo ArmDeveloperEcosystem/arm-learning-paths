@@ -11,6 +11,13 @@ layout: learningpathall
 
 You can now disassemble the binaries to check for Scalable Matrix Extension 2 (SME2) instructions.
 
+Return to the project directory and select the example binary:
+
+```bash
+cd "$HOME/arm64-extension-inspection"
+BIN=sme2-positive
+```
+
 Assemblers encode Arm Instruction Set Architecture (ISA) mnemonics and operands into 32-bit words. A disassembler decodes those words to recover the mnemonics and operands.
 
 Use the example program that you created earlier to explore assembly and disassembly. When you wrote the source, you included the following line:

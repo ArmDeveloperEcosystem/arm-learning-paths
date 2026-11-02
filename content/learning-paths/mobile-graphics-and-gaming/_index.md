@@ -9,25 +9,25 @@ key_ip:
 - Mali
 maintopic: true
 pinned_learning_paths:
-- voice-assistant
+- neural-graphics-playbook-integrate
+- gemma4-kleidiai-sme2
 - nfru-unreal
-- model-training-gym-nfru
 operatingsystems_filter:
-- Android: 56
-- Linux: 55
+- Android: 59
+- Linux: 56
 - macOS: 27
-- Windows: 25
+- Windows: 26
 subjects_filter:
 - Gaming: 6
-- Graphics: 9
-- ML: 47
+- Graphics: 11
+- ML: 48
 - Performance and Architecture: 38
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech.
 title: Mobile, Graphics, and Gaming
 tools_software_languages_filter:
 - 7-Zip: 1
-- adb: 2
 - ADB: 1
+- adb: 2
 - Android: 6
 - Android NDK: 4
 - Android SDK: 1
@@ -35,7 +35,7 @@ tools_software_languages_filter:
 - Arm AI Portal: 9
 - Arm Development Studio: 1
 - Arm Mobile Studio: 1
-- Arm Performance Studio: 5
+- Arm Performance Studio: 7
 - Assembly: 2
 - Bash: 2
 - Bazel: 2
@@ -49,7 +49,7 @@ tools_software_languages_filter:
 - Docker: 2
 - ETDump: 1
 - ETRecord: 1
-- ExecuTorch: 20
+- ExecuTorch: 21
 - Frame Advisor: 1
 - GCC: 12
 - Generative AI: 3
@@ -72,15 +72,15 @@ tools_software_languages_filter:
 - llvm-mca: 1
 - MCP: 1
 - MediaPipe: 3
-- MLIA: 1
-- Model Explorer: 2
+- MLIA: 3
+- Model Explorer: 3
 - MTE: 2
 - Neon: 5
-- NX: 11
+- NX: 14
 - ONNX: 1
 - ONNX Runtime: 5
 - OpenGL ES: 1
-- Python: 21
+- Python: 22
 - PyTorch: 9
 - QEMU: 1
 - RenderDoc: 1
@@ -90,6 +90,7 @@ tools_software_languages_filter:
 - SDDiskTool: 1
 - SME: 1
 - SME2: 14
+- Streamline: 2
 - SVE2: 4
 - TensorFlow: 1
 - Topo: 1
@@ -98,11 +99,11 @@ tools_software_languages_filter:
 - Transformers: 1
 - Trusted Firmware: 1
 - Unity: 6
-- Unreal Engine: 8
-- VGF: 4
+- Unreal Engine: 9
+- VGF: 5
 - Visual Studio: 4
-- Visual Studio Code: 1
-- Vulkan: 13
+- Visual Studio Code: 2
+- Vulkan: 16
 - Vulkan SDK: 3
 - XNNPACK: 10
 weight: 3
