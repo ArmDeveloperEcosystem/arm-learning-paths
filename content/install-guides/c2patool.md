@@ -59,7 +59,7 @@ Build C2PA Tool from source with the ARM64 Rust toolchain to install a native AR
 on Windows on Arm.
 
 Install the Microsoft C++ Build Tools and [Rust](https://www.rust-lang.org/tools/install) with the
-MSVC toolchain for ARM64. Install [7-Zip](https://www.7-zip.org/) and add its installation
+Microsoft Visual C++ (MSVC) toolchain for ARM64. Install [7-Zip](https://www.7-zip.org/) and add its installation
 directory (typically `C:\Program Files\7-Zip`) to your `PATH`.
 
 Open a new PowerShell window and confirm that 7-Zip is available:
