@@ -1,9 +1,5 @@
 ---
 title: Disassemble macOS binaries to check for SME and SME2 instructions
-
-draft: true
-cascade:
-    draft: true
     
 description: Use otool and llvm-objdump on macOS to verify that a compiled binary contains SME and SME2 instructions.
 
@@ -14,10 +10,10 @@ who_is_this_for: This is an introductory topic for software developers who want 
 learning_objectives:
     - Identify the architecture, executable code, symbols, and supporting strings in a macOS binary.
     - Use two disassemblers to inspect instruction bytes, names, operands, and addresses.
-    - Explain what disassembly can and can't tell you about SME and SME2 instructions.
+    - Identify what disassembly can and can't tell you about SME and SME2 instructions.
 
 prerequisites:
-    - An Apple silicon Mac. You will compile and inspect the example program without running it, so SME2 hardware support isn't needed.
+    - An Apple silicon Mac
     - Xcode 26.6 or newer, which includes `clang`, `otool`, `nm`, and `llvm-objdump`
     - Basic familiarity with C, assembly language, and the macOS terminal
 

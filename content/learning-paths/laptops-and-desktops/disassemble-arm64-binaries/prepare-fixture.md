@@ -9,26 +9,26 @@ layout: learningpathall
 
 ## Check for SME and SME2 instructions in a binary
 
-A macOS binary can contain Scalable Matrix Extension (SME) and Scalable Matrix Extension 2 (SME2) instructions. Including supporting source code or enabling compiler options doesn't prove those instructions are present in the compiled binary.
+A macOS binary can contain Scalable Matrix Extension (SME) and SME2 instructions. Including supporting source code or enabling compiler options doesn't prove those instructions are present in the compiled binary.
 
-You build a small Mach-O executable and inspect its final machine code for SME and SME2 instructions. You identify state-control, matrix, and predicate instructions, then correlate each finding with its exact four bytes and decoded mnemonic. You also inspect the operands, static program counter (PC), symbol, and surrounding code.
+You'll build a small Mach-O executable and inspect its final machine code for SME and SME2 instructions. You'll identify state-control, matrix, and predicate instructions, then correlate each finding with its exact four bytes and decoded mnemonic. You'll also inspect the operands, static program counter (PC), symbol, and surrounding code.
 
 You can use the same inspection method to check for other instruction groups in a compiled binary.
 
 ## Create an example binary containing SME2 instructions
 
-You will begin by creating an example program from source code. This program will contain an SME2 function, a normal C entry point, and a feature-name string. You will compile the code but never run it, so the Mac you develop this on doesn't need SME2 hardware.
+You'll begin by creating an example program from source code. This program will contain an SME2 function, a normal C entry point, and a feature-name string.
 
-The example contains SME and SME2 assembly instructions and is compiled for macOS on Apple silicon.
+The example contains SME and SME2 assembly instructions and is compiled for macOS on Apple silicon. You'll compile the code but never run it, so you don't need SME2 hardware on your Mac.
 
-To begin, create a working directory and move into it:
+To begin, create a working directory and navigate to it:
 
 ```bash
 mkdir arm64-extension-inspection
 cd arm64-extension-inspection
 ```
 
-Run the following command to create `sme2-main.c`:
+Create `sme2-main.c`:
 
 ```bash
 cat > sme2-main.c <<'EOF'
@@ -47,7 +47,7 @@ int main(void) {
 EOF
 ```
 
-Next, run the following command to create `sme2-kernel.S`:
+Next, create `sme2-kernel.S`:
 
 ```bash
 cat > sme2-kernel.S <<'EOF'
@@ -67,12 +67,13 @@ _sme2_fixture_kernel:
 EOF
 ```
 
-Build the example program. The `-march=armv9-a+sme2` option enables SME2 instructions during compilation. You'll inspect the compiled binary to confirm they're present.
+Build the example program:
 
 ```bash
 xcrun clang -arch arm64 -O2 -march=armv9-a+sme2 \
   sme2-main.c sme2-kernel.S -o sme2-positive
 ```
+The `-march=armv9-a+sme2` option enables SME2 instructions during compilation. You'll inspect the compiled binary to confirm that they're present.
 
 You now have a compiled example program ready for inspection.
 
@@ -96,7 +97,7 @@ int main(void) {
 EOF
 ```
 
-Run the following command to create another comparison program, `plain-arm64-control.c`, without SME or SME2 code, names, or strings:
+Create another comparison program, `plain-arm64-control.c`, without SME or SME2 code, names, or strings:
 
 ```bash
 cat > plain-arm64-control.c <<'EOF'
@@ -111,7 +112,7 @@ int main(void) {
 EOF
 ```
 
-Build both controls for the base arm64 architecture:
+Build both controls for the base `arm64` architecture:
 
 ```bash
 xcrun clang -arch arm64 -O2 string-only-control.c -o string-only-control
@@ -120,9 +121,9 @@ xcrun clang -arch arm64 -O2 plain-arm64-control.c -o plain-arm64-control
 
 ## Confirm the final architecture slice
 
-With your controls built, begin with file-type and architecture-slice checks before moving to instruction inspection.
+With your controls built, begin with file-type and architecture-slice checks before inspecting the instructions.
 
-A *thin* Mach-O file contains one architecture slice. A universal, or *fat* Mach-O file can contain several slices, such as arm64 and x86_64. This allows x86 and Arm executable code to coexist in the same file.
+A thin Mach-O file contains one architecture slice. A universal Mach-O file, also called a fat Mach-O file, can contain several slices, such as `arm64` and `x86_64`. This allows x86 and Arm executable code to coexist in the same file.
 
 Use `file` and `lipo` to identify the file type and slices.
 
@@ -142,12 +143,14 @@ plain-arm64-control: Mach-O 64-bit executable arm64
 Non-fat file: sme2-positive is architecture: arm64
 ```
 
-For a universal (fat) binary, `lipo -info` might report both `x86_64` and `arm64`. The later `-arch arm64` options select the slice to inspect.
+For a universal binary, `lipo -info` might report both `x86_64` and `arm64`. The later `-arch arm64` options select the slice to inspect.
 
-A binary you inspect outside this Learning Path might be a fat binary. If it is, you'd need to be sure you are working with the arm64 slice.
+If you inspect a universal binary, ensure that you're working with the `arm64` slice.
 
 The source code in this Learning Path produces a thin Mach-O binary.
 
 ## What you've accomplished and what's next
 
-You built an example binary containing SME2 instructions and two comparison binaries without them. Next, you'll inspect strings and symbols to see why they don't prove instructions are present.
+You built an example binary containing SME2 instructions and two comparison binaries without them.
+
+Next, you'll inspect strings and symbols to see why they don't prove instructions are present.

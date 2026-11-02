@@ -9,9 +9,11 @@ layout: learningpathall
 
 ## Inspect supporting strings
 
+After building binaries, you can now inspect strings and symbols in them.
+
 A string is printable data stored in the binary. It can reveal a feature check, diagnostic message, or component name without interpreting executable machine code.
 
-Select the example binary, then search its arm64 slice for SME2-related text:
+Select the example binary, then search its `arm64` slice for text related to Scalable Matrix Extension 2 (SME2):
 
 ```bash
 BIN=sme2-positive
@@ -24,7 +26,7 @@ The output includes the feature-name string:
 hw.optional.arm.FEAT_SME2
 ```
 
-This text suggests that the program includes code related to SME2. It could remain in a binary after SME and SME2 instructions were removed, so it doesn't prove those instructions are present.
+This text suggests that the program includes code related to SME2. The string can remain in a binary after SME and SME2 instructions were removed. It doesn't prove that those instructions are present.
 
 ## Inspect symbols
 
@@ -45,7 +47,7 @@ The output is similar to:
 
 The `T` identifies `_sme2_fixture_kernel` as a defined code symbol. Its address is the start of the function in this build. The leading underscore is the Mach-O naming convention for a C-compatible symbol.
 
-Symbol names can be misleading, and symbols can be removed from a binary. Disassembly is needed to check which instructions are present.
+Symbol names can be misleading, and symbols can be removed from a binary. To check which instructions are present, you need disassembly.
 
 ## Check the string-only control
 
@@ -63,7 +65,7 @@ hw.optional.arm.FEAT_SME2
 0000000100000378 T _sme2_string_only_marker
 ```
 
-The comparison binary contains an SME2-related string and symbol, but no SME2 instructions. Finding these names doesn't prove the instructions are present. Compiler options and the arm64 architecture label don't prove this either.
+The comparison binary contains an SME2-related string and symbol, but no SME2 instructions. Finding these names doesn't mean that SME2 instructions are present. Compiler options and the `arm64` architecture label don't prove this either.
 
 Each check tells you something different about the binary:
 
@@ -76,4 +78,6 @@ Each check tells you something different about the binary:
 
 ## What you've accomplished and what's next
 
-You found SME2-related strings and symbols in both the example and comparison binaries. Next, you'll disassemble the binaries to check which ones contain SME2 instructions.
+You found SME2-related strings and symbols in both the example and comparison binaries. 
+
+Next, you'll disassemble the binaries to check which ones contain SME2 instructions.

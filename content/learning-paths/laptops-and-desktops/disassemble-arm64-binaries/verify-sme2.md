@@ -9,27 +9,28 @@ layout: learningpathall
 
 ## Encode and decode mnemonics and operands
 
+After inspecting binaries, you're now ready to disassemble the binaries and check Scalable Matrix Extension 2 (SME2) instructions.
+
 Assemblers encode Arm Instruction Set Architecture (ISA) instruction mnemonics and operands into four-byte, 32-bit words. You can use a disassembler to decode those ISA words to recover the mnemonics and their operands.
 
-Use the example program you created earlier to explore assembly and disassembly. When you wrote the source, you included this line:
+Use the example program that you created earlier to explore assembly and disassembly. When you wrote the source, you included the following line:
 
 ```output
 fmopa za0.s, p0/m, p0/m, z0.s, z1.s
 ```
 
-The mnemonic is `fmopa`, and the following operands identify the ZA tile, predicate registers, and vector registers.
-
-The assembler converts `fmopa` and its operands into the four bytes shown here:
+The mnemonic is `fmopa`. The assembler converts `fmopa` and its operands into the following four bytes:
 
 ```output
 00 00 81 80 -> 0x80810000 -> fmopa za0.s, p0/m, p0/m, z0.s, z1.s
 ```
+The operands identify the ZA tile, predicate registers, and vector registers.
 
 ## Create a filter for SME and SME2 instructions
 
-AWK is a command-line tool for processing text. This AWK script filters disassembly output by checking instruction names and operands. It recognizes the state-control, ZA access, matrix-operation, and SME2 predicate instructions used in this example.
+`awk` is a command-line tool for processing text. This `awk` script filters disassembly output by checking instruction names and operands. It recognizes the state-control, ZA access, matrix-operation, and SME2 predicate instructions.
 
-Run the following command to create `strict-sme2.awk`:
+Create `strict-sme2.awk`:
 
 ```bash
 cat > strict-sme2.awk <<'EOF'
@@ -68,15 +69,17 @@ is_strict_sme2($0) { print }
 EOF
 ```
 
-The filter accepts `ptrue` only when its first operand is `pn8` through `pn15`. It accepts `whilelt` only with that register range and a `vlx2` or `vlx4` operand. It rejects ordinary SVE forms such as `ptrue p0.s`.
+The filter accepts `ptrue` only when its first operand is `pn8` through `pn15`. It accepts `whilelt` only with that register range and a `vlx2` or `vlx4` operand. It rejects ordinary Scalable Vector Extension (SVE) forms such as `ptrue p0.s`.
 
-{{% notice Filter scope %}}
-This filter recognizes the instruction forms used in this example. It doesn't detect every SME or SME2 instruction. Check the instruction reference and test any additional matching rules against binaries with and without the instructions.
+{{% notice Note %}}
+This filter recognizes the instruction forms that are used in the example binaries. It doesn't detect every SME or SME2 instruction. Check the instruction reference and test any additional matching rules against binaries with and without the instructions.
 {{% /notice %}}
 
 ## Decode with `otool`
 
-The `otool` command selects the arm64 slice and disassembles its main executable code section. Apply the filter to decoded text rather than scanning raw bytes or strings:
+The `otool` command selects the `arm64` slice and disassembles its main executable code section. 
+
+Apply the filter to decoded text rather than scanning raw bytes or strings:
 
 ```bash
 otool -tvV -arch arm64 "$BIN" | awk -f strict-sme2.awk
@@ -97,7 +100,7 @@ Instruction addresses can change when you rebuild the program. When comparing di
 
 ## Cross-check with `llvm-objdump`
 
-The `llvm-objdump` disassembler can show each instruction's four bytes. The `--mattr` option enables decoding of SME and SME2 instructions:
+The `llvm-objdump` disassembler can show four bytes of each instruction. The `--mattr` option enables decoding of SME and SME2 instructions:
 
 ```bash
 xcrun llvm-objdump -d --macho --arch=arm64 --mattr=+sme,+sme2 "$BIN" |
@@ -126,11 +129,11 @@ The tools display leading zeros differently, but the instruction addresses match
 | `0x100000438` | `00 00 81 80` | `fmopa za0.s, ...` | Update a ZA tile with an outer product |
 | `0x10000043c` | `7f 46 03 d5` | `smstop` | Disable streaming mode and ZA |
 
-Both disassemblers identify the same instructions in the same binary. This confirms their presence, but doesn't show whether they run.
+Both disassemblers identify the same instructions in the same binary. This confirms their presence, but it doesn't show whether they run.
 
 ## Inspect the complete function
 
-Use the function's symbol to display all its instructions, from the label through the `ret` instruction:
+Use the function symbol to display all its instructions, from the label through the `ret` instruction:
 
 ```bash
 otool -tvV -arch arm64 "$BIN" |
@@ -151,7 +154,7 @@ _sme2_fixture_kernel:
 0000000100000440  ret
 ```
 
-The function contains setup instructions, matrix operations, and cleanup instructions. Their presence doesn't prove the application calls this function.
+The function contains setup instructions, matrix operations, and cleanup instructions. Their presence doesn't mean that the application calls this function.
 
 ## Check the comparison binaries
 
@@ -172,8 +175,10 @@ string-only-control: no strict hits
 plain-arm64-control: no strict hits
 ```
 
-The string-only comparison binary still contains the SME2-related string and symbol you found earlier. The filter finds no matching instructions because it checks disassembled code rather than strings or symbol names.
+The string-only comparison binary still contains the SME2-related string and symbol that you found earlier. The filter finds no matching instructions because it checks disassembled code rather than strings or symbol names.
 
 ## What you've accomplished and what's next
 
-You verified SME and SME2 instructions in the binary by examining their bytes, operands, addresses, and surrounding code. Next, you'll combine these checks in a reusable script and adapt the method to other instruction groups and binary formats.
+You verified SME and SME2 instructions in the binary by examining their bytes, operands, addresses, and surrounding code. 
+
+Next, you'll combine these checks in a reusable script and adapt the method to other instruction groups and binary formats.
