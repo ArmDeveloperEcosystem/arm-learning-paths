@@ -31,9 +31,9 @@ test('filters apply before limiting and total is independent of limit', () => {
   assert.equal(search({ query: 'GCC', type: 'learning-path' }).total, 0);
 });
 test('reject invalid tool arguments', () => {
-  for (const input of [null, [], {}, { query: ' ' }, { query: 'gcc', limit: 101 }, { query: 'gcc', limit: 1.5 }, { query: 'gcc', category: 'fake' }, { query: 'gcc', type: 'fake' }]) assert.throws(() => search(input));
+  for (const input of [null, [], {}, { query: 'gcc', offset: -1 }, { query: 'gcc', offset: 1.5 }, { query: 'gcc', limit: 101 }, { query: 'gcc', limit: 1.5 }, { query: 'gcc', category: 'fake' }, { query: 'gcc', type: 'fake' }]) assert.throws(() => search(input));
 });
-test('empty or irrelevant queries produce no matches', () => {
+test('stop-word-only or irrelevant queries produce no matches', () => {
   assert.equal(search({ query: 'the and' }).total, 0);
   assert.equal(search({ query: 'unfindable' }).total, 0);
 });
@@ -120,4 +120,51 @@ test('typos do not expand valid tokens, short words, or technical identifiers', 
   ]);
   assert.deepEqual(search({ query: 'dockar' }).results.map(r => r.id), ['/valid/']);
   for (const query of ['gdc', 'SVE3', 'llama.cop']) assert.equal(search({ query }).total, 0, query);
+});
+
+
+test('language aliases match in both queries and indexed fields without changing identifiers', () => {
+  const search = createEngine([
+    { id: '/cpp-tag/', title: 'Qt application', metadata: ['CPP'] },
+    { id: '/cpp-title/', title: 'C++ application' },
+    { id: '/sharp-tag/', title: 'Application', metadata: ['csharp'] },
+    { id: '/sharp-title/', title: 'C# application' },
+    { id: '/identifier/', title: 'llama.cpp' },
+    { id: '/c/', title: 'C application' }
+  ]);
+  for (const [alias, language] of [['CPP', 'C++'], ['csharp', 'C#']]) {
+    assert.deepEqual(search({ query: alias }), search({ query: language }));
+    assert.equal(search({ query: language }).total, 2);
+  }
+  assert.deepEqual(tokenize('C C# C++ cpp csharp llama.cpp'), ['c', 'c#', 'c++', 'c++', 'c#', 'llama.cpp']);
+  assert.equal(search({ query: 'llama.cpp' }).total, 1);
+});
+
+test('install guides ignore Learning Path categories while other searches keep them', () => {
+  assert.deepEqual(search({ query: 'GCC', type: 'install-guide', category: 'cross-platform' }),
+    search({ query: 'GCC', type: 'install-guide' }));
+  assert.equal(search({ query: 'GCC', category: 'cross-platform' }).total, 0);
+});
+
+test('blank browsing filters before pagination and sorts newest first with missing dates last', () => {
+  const records = [
+    { id: '/old/', title: 'Old', type: 'learning-path', category: 'cross-platform', lastUpdated: '2025-01-01' },
+    { id: '/new/', title: 'New', type: 'install-guide', category: '', lastUpdated: '2026-01-01' },
+    { id: '/missing/', title: 'Missing date', type: 'learning-path', category: 'cross-platform' }
+  ];
+  const search = createEngine(records);
+  for (const query of ['', '   ']) {
+    assert.deepEqual(search({ query }).results.map(r => r.id), ['/new/', '/old/', '/missing/']);
+    assert.equal(search({ query, offset: 1, limit: 1 }).results[0].id, '/old/');
+    assert.equal(search({ query, offset: 10 }).total, 3);
+    assert.equal(search({ query, offset: 10 }).results.length, 0);
+    assert.equal(search({ query, type: 'install-guide', category: 'cross-platform' }).total, 1);
+    assert.equal(search({ query, type: 'learning-path' }).total, 2);
+    assert.equal(search({ query, category: 'cross-platform', offset: 1, limit: 1 }).results[0].id, '/missing/');
+  }
+});
+
+test('offset pagination preserves keyword rankings', () => {
+  const all = search({ query: 'chatbot' });
+  assert.deepEqual(search({ query: 'chatbot', offset: 1, limit: 1 }).results, all.results.slice(1, 2));
 });

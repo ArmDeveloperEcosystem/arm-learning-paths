@@ -1,7 +1,8 @@
 const $ = id => document.getElementById(id);
 const main = document.querySelector('main[data-index]');
 let worker, workerFailure;
-let nextId = 0, generation = 0, limit = 10;
+let allowBlankSearch = false;
+let nextId = 0, generation = 0, offset = 0;
 const pending = new Map();
 function failWorker() {
   workerFailure = Error('Search is unavailable. Reload the page to retry.');
@@ -38,10 +39,11 @@ const tool = {
   name: 'search_arm_content',
   description: 'Find Arm Learning Paths and install guides by keyword or author name, with word prefixes and limited typo tolerance. Relevance defaults to complete query matches first. Returns source URLs and metadata excerpts; use these sources to read the full instructions. Scores indicate keyword relevance, not confidence.',
   inputSchema: { type: 'object', properties: {
-    query: { type: 'string', minLength: 1, maxLength: 300 },
+    query: { type: 'string', maxLength: 300, description: 'Leave empty to browse all content matching the filters, newest first.' },
     type: { type: 'string', enum: ['', 'learning-path', 'install-guide'], default: '' },
-    category: { type: 'string', description: 'Learning Path category slug, such as servers-and-cloud-computing.' },
+    category: { type: 'string', description: 'Learning Path category slug, such as servers-and-cloud-computing. Ignored when type is install-guide.' },
     sort: { type: 'string', enum: ['relevance', 'updated'], default: 'relevance' },
+    offset: { type: 'integer', minimum: 0, default: 0, description: 'Number of results to skip for pagination.' },
     limit: { type: 'integer', minimum: 1, maximum: 100, default: 10 }
   }, required: ['query'], additionalProperties: false },
   annotations: { readOnlyHint: true },
@@ -79,28 +81,34 @@ register();
 async function render() {
   const current = ++generation;
   const query = $('query').value.trim();
+  $('clear-blank-search').hidden = !allowBlankSearch || $('query').value !== '';
+  $('category').disabled = $('type').value === 'install-guide';
+  if ($('category').disabled) $('category').value = '';
   const params = new URLSearchParams();
   if (query) params.set('q', query);
   if ($('type').value) params.set('type', $('type').value);
   if ($('category').value) params.set('category', $('category').value);
   params.set('sort', $('sort').value);
   history.replaceState(null, '', `${location.pathname}${params.size ? '?' + params : ''}${location.hash}`);
-  $('results').replaceChildren();
+  if (!offset) $('results').replaceChildren();
   $('more').hidden = true;
   $('search-diagnostics').hidden = true;
   if (workerFailure) { $('status').textContent = workerFailure.message; return; }
-  if (!query) { $('status').textContent = ''; return; }
+  if (!query && !allowBlankSearch) {
+    $('status').textContent = 'Enter a search term, or click Search to browse all content matching your filters.';
+    return;
+  }
   $('status').textContent = 'Searching…';
   const start = performance.now();
   try {
     await ready;
-    const result = await call('search', { query, type: $('type').value, category: $('category').value, sort: $('sort').value, limit });
+    const result = await call('search', { query, type: $('type').value, category: $('category').value, sort: $('sort').value, limit: 10, offset });
     if (current !== generation) return;
-    $('status').textContent = `${result.total} result${result.total === 1 ? '' : 's'} for “${query}”`;
+    $('status').textContent = `${result.total} result${result.total === 1 ? '' : 's'}${query ? ` for “${query}”` : ' · newest first'}`;
     $('performance').textContent = `Last search: ${result.searchMs.toFixed(1)} ms engine · ${(performance.now() - start).toFixed(1)} ms response`;
     $('search-diagnostics').hidden = false;
-    if (!result.total) $('status').textContent += '. Try fewer words or remove a filter.';
-    if (result.total > 100) $('status').textContent += `. Showing ${result.results.length} of the first 100 results. Narrow your search to find other matches.`;
+    if (!result.total) $('status').textContent += query ? '. Try fewer words or remove a filter.' : '. Try removing a filter.';
+    if (result.total) $('status').textContent += `. Showing ${offset + result.results.length} of ${result.total}.`;
     for (const record of result.results) {
       const li = document.createElement('li'); li.className = 'search-result-card';
       const a = document.createElement('a'); a.href = record.url; a.textContent = record.title;
@@ -120,20 +128,28 @@ async function render() {
       } else { updated.textContent = 'Last updated: unavailable'; }
       footer.append(updated); li.append(meta, h, p, footer); $('results').append(li);
     }
-    $('more').hidden = result.total <= limit || limit >= 100;
+    $('more').hidden = result.total <= offset + result.results.length;
   } catch (error) { if (current === generation) $('status').textContent = error.message; }
 }
 function categoryLabel(slug) {
   return slug.split('-').map((word, index) => index && ['and'].includes(word) ? word : word[0].toUpperCase() + word.slice(1)).join(' ');
 }
 for (const button of main.querySelectorAll('[data-query]')) button.onclick = () => {
-  $('query').value = button.dataset.query; $('type').value = ''; $('category').value = ''; limit = 10; render();
+  $('query').value = button.dataset.query; $('type').value = ''; $('category').value = ''; offset = 0; render();
 };
 let timer;
-$('query').oninput = () => { clearTimeout(timer); timer = setTimeout(() => { limit = 10; render(); }, 120); };
-$('search-form').onsubmit = event => { event.preventDefault(); clearTimeout(timer); limit = 10; render(); };
-for (const id of ['type', 'category', 'sort']) $(id).onchange = () => { limit = 10; render(); };
-$('more').onclick = () => { limit = Math.min(100, limit + 10); render(); };
+$('query').oninput = () => { $('clear-blank-search').hidden = true; allowBlankSearch = false; ++generation; $('more').hidden = true; clearTimeout(timer); timer = setTimeout(() => { offset = 0; render(); }, 120); };
+$('search-form').onsubmit = event => { event.preventDefault(); allowBlankSearch = true; clearTimeout(timer); offset = 0; render(); };
+$('clear-blank-search').onclick = () => {
+  clearTimeout(timer);
+  allowBlankSearch = false;
+  $('query').value = '';
+  offset = 0;
+  render();
+  $('query').focus();
+};
+for (const id of ['type', 'category', 'sort']) $(id).onchange = () => { offset = 0; render(); };
+$('more').onclick = () => { offset += 10; render(); };
 const params = new URLSearchParams(location.search);
 $('query').value = (params.get('q') || '').slice(0, 300);
 if (['updated', 'relevance'].includes(params.get('sort'))) $('sort').value = params.get('sort');
