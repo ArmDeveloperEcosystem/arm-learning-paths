@@ -1,5 +1,5 @@
 ---
-title: Set up Docker MCP Toolkit with Arm, GitHub, and Sequential Thinking servers
+title: Set up Docker MCP Toolkit with Arm and GitHub servers
 weight: 3
 
 ### FIXED, DO NOT MODIFY

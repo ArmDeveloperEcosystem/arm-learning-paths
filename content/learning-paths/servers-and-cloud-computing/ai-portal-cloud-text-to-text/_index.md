@@ -1,5 +1,5 @@
 ---
-title: Run optimized LLMs from the Arm AI Portal on Arm Neoverse-based instances
+title: Run Arm AI Portal LLMs on Neoverse instances
 
 description: Download and run an Arm-optimized LLM using the supplied ONNX Runtime GenAI workflow, or use a coding agent to adapt the application for a compatible alternative model runtime or format.
 

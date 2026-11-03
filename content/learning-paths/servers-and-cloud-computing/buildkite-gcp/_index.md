@@ -1,5 +1,5 @@
 ---
-title: Create multi-architecture Docker images with Buildkite on Google Axion
+title: Build multi-architecture images with Buildkite on Axion
 description: Learn how to configure Buildkite agents on Google Axion C4A VMs to build and publish multi-architecture Docker images using Docker Buildx for Arm and x86 platforms.
 
 minutes_to_complete: 40

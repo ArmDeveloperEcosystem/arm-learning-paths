@@ -1,5 +1,5 @@
 ---
-title: Run MNIST on an Alif E8 Ensemble DevKit using ExecuTorch and Ethos-U85
+title: Run MNIST with ExecuTorch and Ethos-U85 on Alif E8
 description: Run MNIST digit classification on an Alif Ensemble E8 DevKit with ExecuTorch and Ethos-U85 NPU acceleration, from setup through firmware deployment.
 
 minutes_to_complete: 45

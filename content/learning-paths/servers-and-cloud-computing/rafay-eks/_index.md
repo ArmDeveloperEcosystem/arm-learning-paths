@@ -1,5 +1,5 @@
 ---
-title: Deploy an Amazon EKS cluster with AWS Graviton-based nodes using Rafay
+title: Deploy an Amazon EKS Graviton cluster with Rafay
 
 description: Use the Rafay Kubernetes Operations Platform to provision an Amazon EKS cluster with an AWS Graviton-based node group and deploy NGINX to verify the setup.
 

@@ -1,5 +1,5 @@
 ---
-title: Prepared the Fine Tune Large Language Model for ExecuTorch and Mobile Deployment 
+title: Prepare the fine-tuned LLM for ExecuTorch and mobile deployment
 weight: 11 
 
 ### FIXED, DO NOT MODIFY

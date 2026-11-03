@@ -1,5 +1,5 @@
 ---
-title: Run an optimized text-to-speech model from the Arm AI Portal on an Arm Neoverse-based instance
+title: Run Arm AI Portal text-to-speech on Neoverse
 description: Run an optimized text-to-speech model with ONNX Runtime on an Arm Neoverse-based machine.
 minutes_to_complete: 40
 

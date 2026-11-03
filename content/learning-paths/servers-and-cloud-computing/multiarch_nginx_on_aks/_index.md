@@ -1,5 +1,5 @@
 ---
-title: Build a multi-architecture Kubernetes cluster running nginx on Azure AKS
+title: Build a multi-architecture nginx cluster on Azure AKS
 
 minutes_to_complete: 60
 

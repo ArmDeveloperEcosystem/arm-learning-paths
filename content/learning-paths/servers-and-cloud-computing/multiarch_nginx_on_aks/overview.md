@@ -1,5 +1,5 @@
 ---
-title: Start your journey with Arm and x86 nginx workloads on a single Kubernetes cluster
+title: Explore Arm and x86 nginx workloads on one Kubernetes cluster
 weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

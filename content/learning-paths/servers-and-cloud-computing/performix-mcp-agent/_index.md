@@ -1,5 +1,5 @@
 ---
-title: Identify and optimize code hotspots using the Arm Performix MCP server
+title: Optimize code hotspots with the Arm Performix MCP server
 
 description: Learn how to use an AI agent and the Arm Performix MCP server to run the Code Hotspots recipe on a C++ application, interpret profile evidence, and apply targeted optimizations on Arm Neoverse.
 

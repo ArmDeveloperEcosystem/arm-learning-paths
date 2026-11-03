@@ -1,5 +1,5 @@
 ---
-title: Understand how OpenEBS provides Kubernetes-native persistent storage on Azure 
+title: Explore OpenEBS storage on Azure Cobalt 100
 description: Learn how OpenEBS LocalPV uses Kubernetes-native storage provisioning to support stateful workloads on Azure Cobalt 100-based Arm64 virtual machines.
 weight: 2
 

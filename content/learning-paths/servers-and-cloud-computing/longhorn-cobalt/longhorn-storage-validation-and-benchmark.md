@@ -1,5 +1,5 @@
 ---
-title: Validate persistent Kubernetes storage and benchmark Longhorn with fio
+title: Validate and benchmark Longhorn storage with fio
 description: Create a Longhorn-backed PersistentVolumeClaim, verify data persistence after pod recreation, and run a fio benchmark on an Arm64 Azure VM powered by Azure Cobalt 100.
 weight: 6
 

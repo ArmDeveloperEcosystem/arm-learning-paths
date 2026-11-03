@@ -1,5 +1,5 @@
 ---
-title: Run optimized object-detection models from the Arm AI Portal on Android
+title: Run Arm AI Portal object detection models on Android
 
 description: Run Arm-optimized YOLO models with ExecuTorch or LiteRT on Android to detect objects in saved images or a live camera feed.
 

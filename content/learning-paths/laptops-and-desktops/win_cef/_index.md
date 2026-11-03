@@ -1,5 +1,5 @@
 ---
-title: Develop desktop applications with Chromium Embedded Framework on Windows on Arm
+title: Develop CEF desktop apps for Windows on Arm
 
 description: Learn how to create and build Chromium Embedded Framework desktop applications using CMake and web technologies on Windows on Arm.
 

@@ -1,5 +1,5 @@
 ---
-title: Build Robot Simulation and Reinforcement Learning Workflows with Isaac Sim and Isaac Lab on DGX Spark
+title: Build robotics workflows with Isaac Sim and Isaac Lab on DGX Spark
 
 description: Learn how to build and deploy high-fidelity robotic simulations and reinforcement learning pipelines using Isaac Sim and Isaac Lab on Arm-based NVIDIA DGX Spark with Grace-Blackwell architecture.
 

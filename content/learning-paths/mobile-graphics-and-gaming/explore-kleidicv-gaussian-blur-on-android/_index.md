@@ -1,5 +1,5 @@
 ---
-title: Compare KleidiCV Gaussian blur performance across Neon, SVE2, and SME on Android
+title: Compare KleidiCV Gaussian blur with Neon, SVE2, and SME on Android
 description: Build a KleidiCV Gaussian blur benchmark for Android and evaluate how Neon, SVE2, and SME performance changes with image resolution and kernel size.
 
 minutes_to_complete: 45

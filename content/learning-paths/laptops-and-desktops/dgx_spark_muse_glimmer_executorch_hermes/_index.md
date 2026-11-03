@@ -1,5 +1,5 @@
 ---
-title: Build a local Muse Glimmer 30B agent with Hermes and ExecuTorch on NVIDIA DGX Spark
+title: Build Muse Glimmer 30B with Hermes and ExecuTorch on DGX Spark
 
 draft: true
 cascade:

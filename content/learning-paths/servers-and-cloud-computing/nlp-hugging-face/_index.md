@@ -1,5 +1,5 @@
 ---
-title: Run a Natural Language Processing (NLP) model from Hugging Face on Arm servers
+title: Run a Hugging Face NLP model on Arm servers
 
 minutes_to_complete: 20
 

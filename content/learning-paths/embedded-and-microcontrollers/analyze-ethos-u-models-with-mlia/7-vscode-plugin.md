@@ -1,5 +1,5 @@
 ---
-title: (Optional) Use the MLIA and Model Explorer Visual Studio Code extension
+title: Use the MLIA and Model Explorer VS Code extension
 
 description: Set up MLIA in VS Code, analyze a MobileNet model for Ethos-U, and inspect compatibility, performance metrics, and advice in Model Explorer.
 

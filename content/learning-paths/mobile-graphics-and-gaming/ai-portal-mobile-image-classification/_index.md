@@ -1,5 +1,5 @@
 ---
-title: Run optimized image classification models from the Arm AI Portal on Android
+title: Run Arm AI Portal image classification models on Android
 
 description: Run Arm-optimized LiteRT, ExecuTorch, and CLIP image-classification models on Android, then extend Photo Insight for another compatible model or adapter.
 

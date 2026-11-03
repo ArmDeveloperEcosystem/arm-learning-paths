@@ -1,5 +1,5 @@
 ---
-title: Build an embedded application with Rust and debug with Arm Development Studio
+title: Build and debug an embedded Rust app with Arm Development Studio
 minutes_to_complete: 60
 
 description: Learn how to build an embedded Rust application for Arm processors, run it on a Fixed Virtual Platform, and debug it using Arm Development Studio.

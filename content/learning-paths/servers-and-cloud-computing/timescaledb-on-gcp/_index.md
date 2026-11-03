@@ -1,5 +1,5 @@
 ---
-title: Deploy a live sensor dashboard with TimescaleDB and Grafana on Google Cloud C4A
+title: Deploy a TimescaleDB and Grafana dashboard on Axion
 
 minutes_to_complete: 45
 

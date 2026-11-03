@@ -1,5 +1,5 @@
 ---
-title: Use RunsOn to deploy managed, self-hosted Arm runners for GitHub Actions 
+title: Deploy Arm GitHub Actions runners with RunsOn
 description: Learn how to install RunsOn self-hosted runner manager in your AWS account to execute GitHub Actions workflows on Arm runners.
 
 minutes_to_complete: 15

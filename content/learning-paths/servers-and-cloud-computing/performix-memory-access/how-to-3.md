@@ -1,5 +1,5 @@
 ---
-title: Optimize the application manually and with the Arm Performix MCP server
+title: Optimize an app with the Arm Performix MCP server
 description: Use Arm Performix profile evidence and its standalone MCP server to optimize the particle layout and validate the improvement.
 weight: 5
 

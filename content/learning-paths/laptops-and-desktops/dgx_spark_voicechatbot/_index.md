@@ -1,5 +1,5 @@
 ---
-title: Build an offline voice chatbot with faster-whisper and vLLM on DGX Spark
+title: Build an offline chatbot with faster-whisper and vLLM
 
 description: Learn how to build an offline voice assistant combining speech-to-text via faster-whisper and text generation via vLLM on Arm-based DGX Spark for privacy-focused deployments.
 

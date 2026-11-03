@@ -1,5 +1,5 @@
 ---
-title: Deploy OpenStack on an Azure Cobalt 100 Arm64 virtual machine using DevStack
+title: Deploy OpenStack on Azure Cobalt 100 with DevStack
 weight: 4
 
 ### FIXED, DO NOT MODIFY

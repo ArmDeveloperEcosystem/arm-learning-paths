@@ -1,5 +1,5 @@
 ---
-title: Build multi-architecture applications with Red Hat OpenShift Pipelines on AWS
+title: Build multi-architecture apps with OpenShift Pipelines on AWS
 
 minutes_to_complete: 30
 

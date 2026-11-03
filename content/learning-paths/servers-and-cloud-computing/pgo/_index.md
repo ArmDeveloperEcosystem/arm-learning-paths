@@ -1,5 +1,5 @@
 ---
-title: Optimize AArch64 code with LLVM link-time optimization and profile-guided optimization
+title: Optimize AArch64 code with LLVM LTO and PGO
     
 description: Build and apply LLVM LTO, sample-based PGO, frontend PGO, IR-PGO, and CSIR-PGO workflows with Clang to optimize an AArch64 C++ application.
 minutes_to_complete: 45

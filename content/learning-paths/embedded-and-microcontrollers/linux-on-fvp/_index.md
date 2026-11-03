@@ -1,5 +1,5 @@
 ---
-title: Debug Trusted Firmware-A and the Linux kernel on Arm FVP with Arm Development Studio 
+title: Debug TF-A and Linux on Arm FVP with Arm Development Studio
 
 description: Learn how to boot a Linux software stack on Arm Fixed Virtual Platforms (FVPs), then debug Trusted Firmware-A and the Linux kernel using Arm Development Studio.
 

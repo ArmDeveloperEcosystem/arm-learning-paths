@@ -1,5 +1,5 @@
 ---
-title: Enable reproducible math functions across vector extensions with Arm Performance Libraries
+title: Enable reproducible Arm Performance Libraries math functions
 
 minutes_to_complete: 10
 
