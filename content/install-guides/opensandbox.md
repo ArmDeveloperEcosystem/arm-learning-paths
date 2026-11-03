@@ -192,6 +192,27 @@ osb sandbox kill "$sandbox_id" -o json
 osb sandbox list -o json
 ```
 
+The output is similar to:
+
+```json
+[
+  {
+    "sandbox_id": "5e4b52ca-9947-4f3a-a1a7-6254239cd431",
+    "status": "deletion_requested"
+  }
+]
+{
+  "items": [],
+  "pagination": {
+    "page": 1,
+    "page_size": 20,
+    "total_items": 0,
+    "total_pages": 0,
+    "has_next_page": false
+  }
+}
+```
+
 The `kill` command can return `deletion_requested` while removal completes. Repeat the list command if the sandbox is still present. The server configuration, CLI settings, and downloaded images remain available for future use.
 
 ## Next steps
