@@ -1,7 +1,7 @@
 ---
 title: Analyze and adjust NFRU frame pacing
 description: Measure NFRU render FPS, present FPS, GPU and neural workload, and frame pacing, then tune the pace adjuster for a sustainable presentation rate.
-weight: 8
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

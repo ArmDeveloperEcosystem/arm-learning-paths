@@ -1,7 +1,7 @@
 ---
 title: Analyze particle effects with NFRU and Project Moku
 description: Evaluate how NFRU handles alpha-blended particles, including blur, flicker, distortion, and natural-looking generated effects.
-weight: 6
+weight: 7
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

@@ -129,4 +129,4 @@ You've now learned how to validate NFRU using Streamline and RenderDoc. Streamli
 
 Together, these tools make smoother NFRU presentation measurable and its edge cases actionable.
 
-Next, you'll evaluate NFRU performance and visual quality in representative gameplay scenarios.
+Next, you'll compare camera movement and a moving object to see how NFRU preserves scene structure and object shape during moderate motion.
