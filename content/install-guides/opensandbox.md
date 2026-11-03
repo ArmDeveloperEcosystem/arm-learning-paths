@@ -133,18 +133,38 @@ osb sandbox create --image python:3.12 --timeout 30m -o json
 
 The first run downloads the Python image and the OpenSandbox execution helper image. The command returns JSON containing the new sandbox ID. 
 
-Copy that ID into a shell variable in the second terminal:
+The output is similar to:
+
+```json
+{
+  "id": "5e4b52ca-9947-4f3a-a1a7-6254239cd431",
+  "status": "created",
+  "timeout": "0:30:00",
+  "image": "python:3.12"
+}
+```
+
+Copy the `id` into a shell variable in the second terminal:
 
 ```bash
 sandbox_id="<sandbox-id>"
 ```
 
-Replace `<sandbox-id>` with the ID returned by the `create` command. 
+Replace `<sandbox-id>` with the `id` returned by your `create` command. 
 
 Check that the sandbox is healthy:
 
 ```bash
 osb sandbox health "$sandbox_id" -o json
+```
+
+The output is similar to:
+
+```json
+{
+  "sandbox_id": "5e4b52ca-9947-4f3a-a1a7-6254239cd431",
+  "healthy": true
+}
 ```
 
 Run commands inside the sandbox:
@@ -161,7 +181,7 @@ aarch64
 42
 ```
 
-The `aarch64` result confirms that the container runs on Arm. The Python result confirms that command execution works through the OpenSandbox CLI.
+The `aarch64` result confirms that the sandbox container runs on Arm. The Python result confirms that command execution works through the OpenSandbox CLI.
 
 ## Delete the test sandbox
 
@@ -176,6 +196,6 @@ The `kill` command can return `deletion_requested` while removal completes. Repe
 
 ## Next steps
 
-You can now create and manage Docker-backed sandboxes on Arm Linux. 
+You can now use OpenSandbox to create and manage Docker-backed sandboxes on Arm Linux. 
 
 For additional commands, see the [OpenSandbox CLI documentation](https://open-sandbox.ai/cli/). For server authentication and deployment settings, see the [OpenSandbox configuration documentation](https://open-sandbox.ai/getting-started/configuration).
