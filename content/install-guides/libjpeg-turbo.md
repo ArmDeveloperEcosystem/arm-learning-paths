@@ -19,9 +19,10 @@ layout: installtoolsall
 
 ## Overview
 
-[libjpeg-turbo](https://www.libjpeg-turbo.org/) provides JPEG encoding and decoding libraries and
-command-line tools. The tools include `cjpeg` for encoding, `djpeg` for decoding, and `jpegtran`
-for transforming JPEG images.
+[libjpeg-turbo](https://www.libjpeg-turbo.org/) is a JPEG image codec that uses single instruction,
+multiple data (SIMD) instructions
+to accelerate JPEG encoding and decoding. It provides libraries and command-line tools,
+including `cjpeg` for encoding, `djpeg` for decoding, and `jpegtran` for transforming JPEG images.
 
 You can install the tools on macOS on Apple silicon, 64-bit Arm Linux, or Windows on Arm.
 Package-manager commands on macOS and Linux install the version available from your package source.
@@ -36,6 +37,8 @@ brew install jpeg-turbo
 ```
 
 ## Install on Arm Linux
+
+Use the commands for your Linux distribution.
 
 On Ubuntu and Debian, install the `libjpeg-turbo-progs` package:
 
@@ -57,20 +60,23 @@ runtime library doesn't provide these tools.
 
 {{% notice Note %}}
 The following steps use libjpeg-turbo version 3.1.4.1. You can use another version that provides
-a native ARM64 installer. Replace the installer with the file for your chosen version.
+an ARM64 installer. Replace the installer with the file for your chosen version.
 To find the latest version, see [libjpeg-turbo releases](https://github.com/libjpeg-turbo/libjpeg-turbo/releases).
 {{% /notice %}}
 
 1. Download `libjpeg-turbo-3.1.4.1-vc-arm64.exe` from the
    [libjpeg-turbo 3.1.4.1 release](https://github.com/libjpeg-turbo/libjpeg-turbo/releases/tag/3.1.4.1).
 2. Run the installer and note the installation directory.
-3. Add the installation's `bin` directory, containing `jpegtran.exe`, to your user's `Path`
-   environment variable.
-4. Open a new PowerShell window so it picks up the change.
+3. Open the installation directory in File Explorer. Open its `bin` folder and confirm that
+   it contains `jpegtran.exe`. Copy the full path to this folder from the address bar.
+4. Search the Start menu for **Edit environment variables for your account** and open it.
+5. Under **User variables**, select **Path**, then **Edit > New**. Paste the path to the
+   `bin` folder. Select **OK** to save and close the dialogs.
+6. Open a new PowerShell window to use the updated `Path`.
 
 ## Verify the installation
 
-Print the installed version:
+In your terminal, or PowerShell on Windows, print the installed version:
 
 ```console
 jpegtran -version
