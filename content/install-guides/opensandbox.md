@@ -3,7 +3,7 @@ title: OpenSandbox
 
 description: Install OpenSandbox on Arm Linux and run a Python command in a Docker-backed sandbox.
 
-minutes_to_complete: 15
+minutes_to_complete: 20
 official_docs: https://open-sandbox.ai/getting-started/
 
 author: Anupras Mohapatra
@@ -18,9 +18,9 @@ multitool_install_part: false
 layout: installtoolsall
 ---
 
-OpenSandbox provides a server and command-line interface (CLI) for creating and managing isolated environments. Its Docker runtime runs sandboxes as containers, which share the host Linux kernel. 
+OpenSandbox provides a server and a command-line interface (CLI) for creating and managing isolated environments. Its Docker runtime runs sandboxes as containers that share the host Linux kernel. 
 
-You'll install OpenSandbox on an `aarch64` Ubuntu 24.04 LTS host. You'll start a local server, create a sandbox, and run a Python command inside it to verify the installation. 
+You'll install OpenSandbox on an `aarch64` host with Ubuntu 24.04 LTS or later. You'll start a local server, create a sandbox, and run a Python command inside it to verify the installation. 
 
 ## Before you begin
 
@@ -33,7 +33,7 @@ uname -m
 cat /etc/os-release
 ```
 
-Confirm that the architecture is `aarch64` and that the operating system is Ubuntu 24.04 LTS.
+Confirm that the architecture is `aarch64` and that the operating system is Ubuntu 24.04 LTS or later.
 
 You also need Docker installed on your system. For installation steps, see the [Docker Engine install guide](/install-guides/docker/docker-engine/).
 
