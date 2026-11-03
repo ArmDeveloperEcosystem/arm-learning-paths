@@ -9,6 +9,7 @@
         {{partial "head/analytics.html" .}}
         {{partial "head/conditional-redirect.html" .}}
         {{partial "head/hotjar-surveys.html" .}}
+        {{block "page-head" .}}{{end}}
 
         {{ if .Param "math" }}
            {{ partialCached "math.html" . }}

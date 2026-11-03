@@ -66,7 +66,7 @@ Called from:
 {{end}}
 
 <!-- List pages only -->
-{{if $is_list}}
+{{if and $is_list (not .Params.browser_search)}}
     <script src="/js/search-and-filter.js" defer></script>
     <script src="/js/filter-and-navigate-mobile-behavior.js" defer></script>
 {{end}}
