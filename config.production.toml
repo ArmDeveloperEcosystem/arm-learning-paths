@@ -1,3 +1,5 @@
 [params]
 # Use Arm's stable navigation and footer bundle in production.
 global_web_components_url = "https://www.arm.com/arm-global-web-components/devhub/app.js"
+# Use the production chatbot component on learn.arm.com.
+chatbot_component_url = "https://content.ipexplorer.arm.com/VirtualFAE/learnarm/chat-ai.js"

@@ -14,25 +14,27 @@ pinned_learning_paths:
 - introduction-to-tinyml-on-arm
 operatingsystems_filter:
 - Android: 1
-- Baremetal: 31
-- Linux: 62
-- macOS: 24
+- Baremetal: 33
+- Linux: 68
+- macOS: 27
 - RTOS: 14
-- Windows: 12
+- Windows: 14
 subjects_filter:
 - CI-CD: 7
-- Containers and Virtualization: 10
+- Containers and Virtualization: 11
 - Embedded Linux: 6
-- Libraries: 6
-- ML: 31
-- Performance and Architecture: 24
+- Libraries: 5
+- ML: 34
+- Performance and Architecture: 26
 - RTOS Fundamentals: 8
-- Security: 4
+- Security: 5
 - Virtual Hardware: 2
 subtitle: Learn best practices for IoT, embedded, and microcontroller development.
 title: Embedded and Microcontrollers
 tools_software_languages_filter:
 - AI: 1
+- AI Portal: 1
+- Alif SETOOLS: 1
 - Arduino: 2
 - Arm Compiler: 1
 - Arm Compiler for Embedded: 8
@@ -43,6 +45,7 @@ tools_software_languages_filter:
 - Arm Fixed Virtual Platform: 1
 - Arm GNU Toolchain: 1
 - Arm Performance Studio: 1
+- Arm Runtime for YOLO26 on Raspberry Pi 5: 1
 - Arm Streamline: 1
 - Arm Virtual Hardware: 15
 - Assembly: 1
@@ -54,16 +57,19 @@ tools_software_languages_filter:
 - Bash: 1
 - BitBake: 1
 - C: 13
+- C2PA Tool: 1
 - ChatGPT: 1
 - Clang: 1
-- CMake: 2
+- CMake: 4
 - CMSIS: 5
 - CMSIS-DSP: 1
-- CMSIS-Toolbox: 4
+- CMSIS-Toolbox: 5
 - CNN: 1
 - Computer Vision: 1
+- Conformer: 1
 - ConnMan: 1
 - Containerd: 1
+- Content Credentials: 1
 - CPP: 1
 - DetectNet: 1
 - Docker: 20
@@ -72,29 +78,34 @@ tools_software_languages_filter:
 - Edge Impulse: 2
 - ETDump: 1
 - ETRecord: 1
-- ExecuTorch: 13
+- ExecuTorch: 15
+- ExifTool: 1
 - FastAPI: 2
 - Fusion 360: 1
 - FVP: 11
 - Gazebo: 1
-- GCC: 17
-- Generative AI: 3
+- GCC: 19
+- Generative AI: 4
 - GitHub: 4
 - GitLab: 2
 - GStreamer: 1
 - Himax SDK: 1
-- Hugging Face: 3
+- Hugging Face: 4
 - IP Explorer: 2
 - Java: 1
 - Jupyter Notebook: 1
 - K3s: 1
 - Keil MDK: 7
 - Keil RTX RTOS: 2
+- Keil Studio: 1
 - Kubernetes: 1
 - LeRobot: 1
+- libjpeg-turbo: 1
 - Linux kernel: 1
 - Linux traffic control: 1
 - LiteRT: 1
+- llama-roofline: 1
+- llama.cpp: 2
 - LLM: 3
 - Matter: 1
 - MCP: 1
@@ -118,10 +129,10 @@ tools_software_languages_filter:
 - Performance analysis: 1
 - picocom: 1
 - Porcupine: 1
-- Python: 25
-- PyTorch: 9
+- Python: 30
+- PyTorch: 11
 - QEMU: 3
-- Raspberry Pi: 11
+- Raspberry Pi: 14
 - Reachy Mini: 1
 - Remote.It: 1
 - remoteproc-runtime: 1
@@ -129,7 +140,7 @@ tools_software_languages_filter:
 - ROS 2: 4
 - Runbook: 4
 - RViz: 1
-- SEGGER JLink: 1
+- SEGGER JLink: 2
 - SEGGER RTT: 1
 - SSH: 3
 - stlink: 1
@@ -151,9 +162,11 @@ tools_software_languages_filter:
 - VGF: 1
 - Visual Studio Code: 3
 - Workbench for Zephyr: 1
+- XNNPACK: 1
 - YAML: 1
 - Yocto: 1
 - Yocto Project: 1
+- YOLO26: 1
 - Zenoh: 3
 - Zephyr: 7
 weight: 5

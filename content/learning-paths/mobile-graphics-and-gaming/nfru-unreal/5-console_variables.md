@@ -1,6 +1,6 @@
 ---
 title: Understand console variables for NFRU
-description: Configure NFRU console variables in Unreal Engine and use stat FrameGen metrics to tune frame-generation behavior and performance.
+description: Configure NFRU console variables in Unreal Engine and use `stat FrameGen` to check frame generation and pacing.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
@@ -9,25 +9,24 @@ layout: learningpathall
 
 ## Configure the plugin through Project Settings
 
-In Development Editor, open **Edit > Project Settings > Plugins > Arm Neural Graphics Plugin 1.1.0** to configure the NFRU settings stored with the project.
+In Development Editor, open **Edit > Project Settings > Plugins > Neural Graphics 1.1.1** to configure the NFRU settings stored with the project.
 
-After you save a setting that affects shaders or assets, cook the Windows content again. Then close the editor and run a Development, DebugGame, or Debug non-editor executable to observe the result. NFRU does not run in an Editor build.
+After you save a setting that affects shaders or assets, relaunch Standalone Game to observe the result. If you are testing a packaged build, package the project again so the game includes the update. NFRU does not run in Play In Editor.
 
 ## Configure the running build with console variables
 
-The following table summarizes key console variables for Neural Frame Rate Upscaling (NFRU) in Unreal Engine. These variables control enablement, debugging, performance tuning, and frame generation modes. Adjust them to optimize NFRU behavior for your development, testing, and performance needs.
+Use these Neural Frame Rate Upscaling (NFRU) console variables to enable frame generation, inspect debug output, and tune frame pacing:
 
 | Console variable | Type | Default | Description | Notes |
 |---|---|---|---|---|
 | `r.NFRU.Enable` | int | 0 | Enables NFRU when set to `1`. | — |
-| `r.NFRU.CaptureDebugUI` | int | 1 | Captures debug UI rendered on the first Slate `DrawWindow` call. | Non-shipping builds only |
+| `r.NFRU.CaptureDebugUI` | int | 1 in non-shipping builds; 0 in Shipping | Captures debug UI rendered on the first Slate `DrawWindow` call. | — |
 | `r.NFRU.UpdateGlobalFrameTime` | int | 0 | Includes interpolated frames in global frame-time and FPS calculations. | — |
 | `r.NFRU.ModifySlateDeltaTime` | int | 1 | Sets the Slate delta time to zero during UI redraws to avoid `NativeTick` side effects. | Slate Redraw UI mode |
 | `r.NFRU.PaceAdjuster` | int | 0 | Enables dynamic target-FPS adjustment. | Set to `1` to enable |
 | `r.NFRU.UpAdjustFrameCount` | int | 40 | Sets how many frames above the target are required before the Pace Adjuster increases the target FPS. | Requires `r.NFRU.PaceAdjuster 1` |
 | `r.NFRU.DownAdjustFrameCount` | int | 20 | Sets how many frames below the target are required before the Pace Adjuster decreases the target FPS. | Requires `r.NFRU.PaceAdjuster 1` |
-| `r.NFRU.DataGraphOpticalFlow` | int | 1 | Selects the optical-flow method: `0` = Data Graph preferred, `1` = Data Graph only, `2` = shader-based. | Availability depends on the plugin build |
-| `r.NFRU.DataGraphFrameGeneration` | int | 1 | Selects frame generation: `0` = NFRU preferred, `1` = neural, `2` = shader-based. | Availability depends on the plugin build |
+| `r.NFRU.UseFragmentShader` | int | 1 | Uses the default fragment shader path when set to `1`. | Set to `0` to select compute stages |
 | `r.NFRU.OnlyInterpolatedFrames` | int | 0 | Presents only interpolated frames for debugging. | Development and test builds only |
 | `r.NFRU.ShowDebugView` | int | 0 | Displays the NFRU intermediate-buffer grid. | Development and test builds only |
 
@@ -50,7 +49,7 @@ r.NFRU.DownAdjustFrameCount 20
 
 `r.NFRU.UpAdjustFrameCount` controls how long performance must remain above the current target before the target increases. `r.NFRU.DownAdjustFrameCount` controls how long performance must remain below the target before it decreases. Larger values make the adjustment less reactive; smaller values make it respond sooner.
 
-Use `stat FrameGen` while you tune these values. Compare the generated and paced statistics to determine whether the application produces frames consistently and whether presentation pacing matches the intended cadence.
+Use `stat FrameGen` while you tune these values. Compare generated and paced frames to check whether presentation keeps up with frame generation.
 
 ## Monitor frame generation performance with STATGROUP_FrameGen
 

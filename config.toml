@@ -12,13 +12,13 @@ enableRobotsTXT = true
 name = "dev"
 URL = "s3://arm-learning-paths-dev?region=us-east-1"
 cloudFrontDistributionID = "EAMKPMDBM18II"
-exclude = "{courses,insights}/**"
+exclude = "{courses/**,insights/**,social-images/manifest.json}"
 
 [[deployment.targets]]
 name = "prod"
 URL = "s3://arm-learning-paths-prod?region=us-east-1"
 cloudFrontDistributionID = "E2IA2AC83UE2VJ"
-exclude = "{courses,insights,md}/**"
+exclude = "{courses/**,insights/**,md/**,social-images/manifest.json}"
 
 [markup]
   [markup.goldmark]
@@ -77,6 +77,9 @@ assetsDir = "assets"
 # Optionally override the global web components bundle for a specific deployment.
 # global_web_components_url = "https://www.arm.com/arm-global-web-components/devhub/app.js"
 
+# Use the pre-production chatbot component for local and internal builds.
+chatbot_component_url = "https://content.dev.bespin.arm.com/VirtualFAE/learnarm/chat-ai.js"
+
 # Specify a value here if your content directory is not in your repo's root directory
 # github_subdir = ""
 
@@ -87,7 +90,7 @@ github_branch = "main"
 # For metadata posting on socials
 title = 'Arm Learning Paths'
 description = 'Tutorials with code examples, created by the Arm ecosystem to develop better code faster across all platforms: Servers, phones, laptops, embedded devices, and microcontrollers.'
-social_image = '/img/social-image.png'
+social_image = '/social-images/default.webp'
 twitter_handle = '@ArmSoftwareDev'
 
 math = true

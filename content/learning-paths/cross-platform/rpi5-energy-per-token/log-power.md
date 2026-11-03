@@ -9,7 +9,9 @@ layout: learningpathall
 
 ## Create the sampler
 
-To compute energy you need power samples with a timestamp on each one, so that you can later select only the samples that fall inside a measurement window. The script below is a sampler: a polling script that reads the PMIC at regular intervals and records each reading with a timestamp.
+To compute energy, you need power samples with a timestamp on each one. When you have timestamped samples, you can select only the samples that fall inside a measurement window.
+
+The following sample polling script reads the power management integrated circuit (PMIC) at regular intervals. It records each reading with a timestamp.
 
 Create a working directory:
 
@@ -18,7 +20,7 @@ mkdir -p $HOME/pi-energy
 cd $HOME/pi-energy
 ```
 
-Use a text editor to save the following code as `pmic_sampler.py` in that directory:
+Use a text editor to save the following code as `pmic_sampler.py` in the working directory:
 
 ```python
 #!/usr/bin/env python3
@@ -96,13 +98,13 @@ if __name__ == "__main__":
     main()
 ```
 
-The script calls `vcgencmd pmic_read_adc`, matches each rail's (power supply output) current line with its voltage line, and writes one row per sample:
+The script calls `vcgencmd pmic_read_adc` and matches the current line of each rail (power supply output) with its voltage line. It then writes one row per sample:
 
 - `time_s` is the wall-clock time, in seconds, at the middle of the read.
 - `total_W` is the sum of the power of all rails that report both a current and a voltage.
 - One column per rail follows, in watts.
 
-The script stops cleanly when it receives `Ctrl+C` or a `kill` signal, or after `--duration` seconds.
+The script stops cleanly when it receives **Ctrl+C**, a `SIGINT` or `SIGTERM` signal, or after `--duration` seconds.
 
 ## Log an idle board
 
@@ -136,7 +138,7 @@ The output is similar to:
 
 ## Sample one rail faster
 
-If you only need one rail, pass `--rail`. The sampler then reads only that rail's current and voltage channels:
+If you need only one rail, pass `--rail`. The sampler then reads the current and voltage channels of only that rail:
 
 ```bash
 python3 pmic_sampler.py core.csv --rail VDD_CORE --duration 10
@@ -151,7 +153,11 @@ wrote 1386 samples to core.csv
 ```
 
 {{% notice Note %}}
-The sampler runs on the same four Cortex-A76 cores as the workload you measure, and each sample starts a `vcgencmd` process. Logging at a higher rate costs more CPU time. The last section measures how much this slows down llama.cpp, so that you can decide whether the overhead matters for your measurement.
+The sampler runs on the same four Cortex-A76 cores as the workload that you measure. Each sample starts a `vcgencmd` process. Logging at a higher rate costs more CPU time. You'll measure how much this slows down llama.cpp, so that you can decide whether the overhead matters for your measurement.
 {{% /notice %}}
 
-You can now log power with timestamps. In the next section, you line these samples up with llama.cpp token generation and compute joules per token.
+## What you've accomplished and what's next
+
+You can now log power with timestamps.
+
+Next, you'll line these samples up with llama.cpp token generation and compute joules per token.

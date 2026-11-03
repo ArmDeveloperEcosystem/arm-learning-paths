@@ -7,12 +7,12 @@ weight: 2
 layout: learningpathall
 ---
 
-## What this Learning Path measures
+## How decode speed depends on bandwidth
 
 When llama.cpp runs a model on an Arm CPU, it does two kinds of work:
 
-- **Prompt processing (prefill)** reads your whole prompt at once. Each weight that comes out of memory is used for every prompt token in the batch, so the cores do a lot of arithmetic per byte. Prefill speeds up when you add cores.
-- **Token generation (decode)** produces one token at a time. To produce each token, the CPU reads the model weights from DRAM and uses each weight once. The cores do very little arithmetic per byte, so they spend most of each token waiting for memory.
+- Prompt processing (prefill) reads your whole prompt at once. Each weight that comes out of memory is used for every prompt token in the batch. The cores do a lot of arithmetic per byte, so prefill speeds up when you add cores.
+- Token generation (decode) produces one token at a time. To produce each token, the CPU reads the model weights from DRAM and uses each weight once. The cores do very little arithmetic per byte, so they spend most of each token waiting for memory.
 
 Because decode reads the model weights for every token, its speed follows one equation:
 
@@ -20,12 +20,14 @@ Because decode reads the model weights for every token, its speed follows one eq
 decode tokens/s  =  effective memory bandwidth (bytes/s)  /  bytes read per token
 ```
 
-This is the memory-bound side of the roofline model. The Raspberry Pi 5 used for this Learning Path sustains 13.8 GB/s. The smallest model reads 346 MB per token. Decode on that model cannot go faster than about 40 tokens/s, no matter how fast the cores are.
+This is the memory-bound side of the roofline model. 
+
+The Raspberry Pi 5 that was used to test the Learning Path sustains 13.8 GB/s of bandwidth. The smallest model reads 346 MB per token. Decode on that model can't go faster than about 40 tokens/s, no matter how fast the cores are.
 
 The equation gives you three practical rules:
 
 - Halving the bytes read per token, with a smaller model or a smaller quantization format, roughly doubles decode speed.
-- Adding threads past the point where memory is saturated does not help decode, and it often makes decode slower.
+- Adding threads past the point where memory is saturated doesn't help decode. It often makes decode slower.
 - Prefill is compute-bound, so it keeps scaling with threads. The best thread count for prefill and for decode is often different.
 
 ## How llama-roofline helps
@@ -37,23 +39,25 @@ The equation gives you three practical rules:
 3. It runs `llama-bench` across a thread sweep.
 4. It fits `tokens/s = bandwidth / bytes` across your models and reports how close each model is to the ceiling, in plain language.
 
-The answer tells you which setting moves your tokens per second on this specific Arm system.
+The answer tells you which setting moves your tokens per second on your Arm system.
 
 ## The reference platform
 
-This Learning Path uses a Raspberry Pi 5 as the example platform. Every output shown in the following sections comes from one run on this board:
+The Learning Path was tested on a Raspberry Pi 5. Every output shown in the Learning Path comes from one run on a board with the following configuration:
 
 | Item | Raspberry Pi 5 |
 |---|---|
 | CPU | 4 x Arm Cortex-A76 at up to 2.4 GHz |
-| Architecture features used by llama.cpp | NEON (ASIMD), DotProd |
+| Architecture features used by llama.cpp | Neon (ASIMD), DotProd |
 | Cache | 512 KB L2 per core, 2 MB shared L3 |
 | Memory | 2 GB LPDDR4X, 32-bit interface |
 | Operating system | 64-bit Raspberry Pi OS (Debian 12), kernel 6.12 |
 | CPU frequency governor | `ondemand` |
 
-The same commands work on any Arm Linux system.
+You can complete the Learning Path on any Arm Linux system.
 
-## What you've learned
+## What you've learned and what's next 
 
-You now know why decode speed depends on bytes and bandwidth, and why prefill behaves differently. Next, you build llama.cpp and install llama-roofline on your Arm system.
+You now know why decode speed depends on bytes and bandwidth, and why prefill behaves differently.
+
+Next, you'll build llama.cpp and install llama-roofline on your Arm system.
