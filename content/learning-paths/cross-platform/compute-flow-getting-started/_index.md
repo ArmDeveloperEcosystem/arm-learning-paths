@@ -1,6 +1,6 @@
 ---
 title: Build an audio-to-audio pipeline on Arm with Compute Flow
-description: Build and run an audio-to-audio pipeline as a Python application on your Arm-based device, combining Compute Flow bricks for speech recognition, translation, and speech synthesis
+description: Build and run an audio-to-audio pipeline as an application on your Arm-based device, combining Compute Flow bricks for speech recognition, translation, and speech synthesis
 
 minutes_to_complete: 15
 
@@ -8,12 +8,12 @@ who_is_this_for: This is an introductory topic for developers who want to combin
 
 learning_objectives:
     - Identify how Compute Flow bricks and manifests separate application code from model implementations.
-    - Deploy an AI audio-to-audio translation pipeline in Python with Compute Flow.
+    - Deploy an AI audio-to-audio translation pipeline with Compute Flow.
     - Select a speech recognition model and verify the pipeline using the same application and recording.
 
 prerequisites:
-    - An Arm-based system such as an Apple® silicon Mac or Arm-based Linux machine.
-    - Basic Python knowledge and familiarity with terminal commands
+    - An Arm-based system such as an Apple® silicon Mac, Arm-based Linux machine or Android® phone.
+    - Basic Python / C++ knowledge and familiarity with terminal commands
     - Internet access and at least 15 GB of available storage
 
 # START generated_summary_faq
@@ -31,7 +31,7 @@ generated_summary_faq:
   faq_generated_at: '2026-10-30T19:19:38Z'
   faq_source_hash: 4d713ef29d940b9043e743e78543b697ed42036d7557c4840126ee434003ac9d
   summary: >-
-    You'll set up Compute Flow and use it to build an audio-to-audio pipeline on an Arm-based Mac. First, you'll learn about Compute Flow and bricks. Then, you'll create a Python application that connects speech-to-text, translation,
+    You'll set up Compute Flow and use it to build an audio-to-audio pipeline on an Arm-based Mac. First, you'll learn about Compute Flow and bricks. Then, you'll create an application that connects speech-to-text, translation,
     and text-to-speech bricks. You'll start with the Parakeet model for speech-to-text. Then, you'll switch to Moonshine by installing its implementation and model, rebuilding, and selecting its
     manifest. Finally, you'll compare speech-to-text performance between the two models.
   # faqs:
@@ -83,11 +83,13 @@ tools_software_languages:
 operatingsystems:
     - macOS
     - Linux
+    - Android
 
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
     - laptops-and-desktops
+    - mobile-graphics-and-gaming
     - servers-and-cloud-computing
 
 further_reading:

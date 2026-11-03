@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Prepare your host device
 
-You'll install three model packages, build Compute Flow for your device, and create a Python application.
+You'll install three model packages, build Compute Flow for your device, and create an application.
 
 First, check your CPU architecture:
 
@@ -36,9 +36,9 @@ command -v cc
 command -v c++
 ```
 
-Finally, remove any previously installed `llama.cpp` versions.
+If you are targeting an Android device with cross compilation. You will also need to [install the Android Platform Tools](https://developer.android.com/tools/releases/platform-tools) with the `adb` utility. 
 
-For example, if installed with the `brew` package manager, run the following command:
+Finally, remove any previously installed `llama.cpp` versions. For example, if installed with the `brew` package manager, run the following command:
 
 ```bash
 brew uninstall llama.cpp
@@ -147,9 +147,22 @@ compute-flow model info tts:qwen3-tts qwen3-tts-0-6b-custom-voice
 
 Build the installed bricks:
 
+{{< tabpane-normal >}}
+{{< tab header="Native Arm64" >}}
 ```bash
 compute-flow build native
 ```
+{{< /tab >}}
+{{< tab header="Cross-compile for Android Arm64" >}}
+
+```bash
+compute-flow build android_arm64
+```
+
+**Please Note:** As of November 2026, the Android NDK does not support cross-compilation from Linux Arm64 hosts. You must instead use a macOS or Linux x86-64 host system.
+
+{{< /tab >}}
+{{< /tabpane-normal >}}
 
 If successful, the output is similar to: 
 
@@ -162,13 +175,18 @@ If successful, the output is similar to:
 
 The build command downloads inference runtimes optimized for your deployment platform. It packages them with your installed brick implementations into an application SDK available at `build_native/sdk`. 
 
-## Create the Python application
+## Create the application
 
 Create a directory for your application:
 
 ```bash
 mkdir -p audio_translation_example
 ```
+
+Follow the instructions for your target device.
+
+{{< tabpane-normal >}}
+{{< tab header="Native Arm64" >}}
 
 Save the following code as `audio_translation_example/audio_translation.py`:
 
@@ -298,6 +316,256 @@ def main(argv: list[str] | None = None) -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 ```
+{{< /tab >}}
+{{< tab header="Cross-compile for Android Arm64" >}}
+
+Save the following code as `audio_translation_example/audio_translation.cpp`
+
+```cpp
+//Translate speech between languages with three Compute Flow bricks.
+
+#include <getopt.h>
+
+#include <algorithm>
+#include <cctype>
+#include <cstdint>
+#include <cstdlib>
+#include <exception>
+#include <filesystem>
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include "compute_flow/cli_examples/internal/wav.h"
+#include "compute_flow/compute_flow.h"
+
+namespace bricks = compute_flow::bricks;
+
+namespace {
+
+void print_usage(const char* name) {
+    std::cout << "Usage: " << name
+              << " --stt-manifest <path> --translation-manifest <path> --tts-manifest <path>\n"
+                 "       --input <mono.wav> --source-language <language> --destination-language <language>\n"
+                 "       [--output <path>] [--help]\n\n"
+                 "Translate speech between languages with three Compute Flow bricks.\n"
+                 "The output defaults to translated_french.wav.\n";
+}
+
+int32_t run(int32_t argc, char** argv) {
+    std::string stt_manifest_path;
+    std::string translation_manifest_path;
+    std::string tts_manifest_path;
+    std::string input_path;
+    std::string source_language;
+    std::string destination_language;
+    std::string output_path     = "translated_french.wav";
+    const option long_options[] = {
+        {"stt-manifest", required_argument, nullptr, 's'},
+        {"translation-manifest", required_argument, nullptr, 't'},
+        {"tts-manifest", required_argument, nullptr, 'v'},
+        {"input", required_argument, nullptr, 'i'},
+        {"source-language", required_argument, nullptr, 'l'},
+        {"destination-language", required_argument, nullptr, 'd'},
+        {"output", required_argument, nullptr, 'o'},
+        {"help", no_argument, nullptr, 'h'},
+        {nullptr, 0, nullptr, 0},
+    };
+    int32_t option_value = 0;
+    while ((option_value = getopt_long(argc, argv, "h", long_options, nullptr)) != -1) {
+        switch (option_value) {
+            case 's':
+                stt_manifest_path = optarg;
+                break;
+            case 't':
+                translation_manifest_path = optarg;
+                break;
+            case 'v':
+                tts_manifest_path = optarg;
+                break;
+            case 'i':
+                input_path = optarg;
+                break;
+            case 'l':
+                source_language = optarg;
+                break;
+            case 'd':
+                destination_language = optarg;
+                break;
+            case 'o':
+                output_path = optarg;
+                break;
+            case 'h':
+                print_usage(argv[0]);
+                return EXIT_SUCCESS;
+            default:
+                print_usage(argv[0]);
+                return EXIT_FAILURE;
+        }
+    }
+
+    if (stt_manifest_path.empty() || translation_manifest_path.empty() || tts_manifest_path.empty() ||
+        input_path.empty() || source_language.empty() || destination_language.empty() || output_path.empty() ||
+        optind != argc) {
+        std::cerr << "Error: provide all required arguments and no positional arguments.\n";
+        print_usage(argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    // Load the input as a batch containing one mono float32 waveform.
+    std::vector<float> audio;
+    int64_t input_sample_rate = bricks::internal::read_mono_wav(input_path, audio);
+
+    COMPUTE_FLOW_CHECK(!audio.empty());
+
+    bricks::BrickOptions options;
+    options.runtime.enable_warmup = true;
+
+    // Load the manifests and configure the requested languages before setup.
+    auto stt_manifest         = bricks::load_manifest(stt_manifest_path);
+    auto translation_manifest = bricks::load_manifest(translation_manifest_path);
+    auto tts_manifest         = bricks::load_manifest(tts_manifest_path);
+    std::string tts_language  = destination_language;
+
+    std::transform(tts_language.begin(), tts_language.end(), tts_language.begin(),
+                   [](unsigned char value) { return static_cast<char>(std::tolower(value)); });
+    translation_manifest.set_config("src_lang", source_language);
+    translation_manifest.set_config("dst_lang", destination_language);
+    tts_manifest.set_config("language", tts_language);
+
+    auto stt_brick         = bricks::load_brick(stt_manifest);
+    auto translation_brick = bricks::load_brick(translation_manifest);
+    auto tts_brick         = bricks::load_brick(tts_manifest);
+
+    stt_brick->setup(stt_manifest, options);
+    translation_brick->setup(translation_manifest, options);
+    tts_brick->setup(tts_manifest, options);
+
+    // Run speech-to-text, keeping the input buffers alive for every generation call.
+    stt_brick->reset_states();
+
+    compute_flow::TensorDict stt_input;
+
+    stt_input.declare_tensor("raw_wav");
+    stt_input.declare_tensor("sample_rate");
+
+    stt_input["raw_wav"].data             = audio.data();
+    stt_input["raw_wav"].format.dt        = compute_flow::DataType::F32;
+    stt_input["raw_wav"].format.shape     = {1, static_cast<int64_t>(audio.size())};
+    stt_input["sample_rate"].data         = &input_sample_rate;
+    stt_input["sample_rate"].format.dt    = compute_flow::DataType::I64;
+    stt_input["sample_rate"].format.shape = {1};
+    std::string transcription;
+
+    while (!stt_brick->is_generation_complete()) {
+        const auto output       = stt_brick->run(stt_input);
+        const auto& text        = output["text"];
+        const int64_t num_bytes = text.format.get_nbytes();
+
+        if (num_bytes > 0) {
+            transcription.append(static_cast<const char*>(text.data), static_cast<uint64_t>(num_bytes));
+        }
+    }
+
+    std::cout << "Transcription: " << transcription << std::endl;
+
+    // Translate the complete transcription.
+    translation_brick->reset_states();
+
+    compute_flow::TensorDict translation_input;
+
+    translation_input.declare_tensor("text_prompt");
+
+    translation_input["text_prompt"].data         = transcription.data();
+    translation_input["text_prompt"].format.dt    = compute_flow::DataType::String;
+    translation_input["text_prompt"].format.shape = {static_cast<int64_t>(transcription.size())};
+    std::string translation;
+
+    while (!translation_brick->is_generation_complete()) {
+        const auto output       = translation_brick->run(translation_input);
+        const auto& text        = output["text"];
+        const int64_t num_bytes = text.format.get_nbytes();
+
+        if (num_bytes > 0) {
+            translation.append(static_cast<const char*>(text.data), static_cast<uint64_t>(num_bytes));
+        }
+    }
+
+    std::cout << "Translation: " << translation << std::endl;
+
+    // Synthesize the translation, copying chunks before the brick reuses its buffers.
+    tts_brick->reset_states();
+
+    compute_flow::TensorDict tts_input;
+
+    tts_input.declare_tensor("text_prompt");
+
+    tts_input["text_prompt"].data         = translation.data();
+    tts_input["text_prompt"].format.dt    = compute_flow::DataType::String;
+    tts_input["text_prompt"].format.shape = {static_cast<int64_t>(translation.size())};
+    std::vector<float> left_audio;
+    std::vector<float> right_audio;
+    int64_t output_sample_rate = 0;
+
+    while (!tts_brick->is_generation_complete()) {
+        const auto output         = tts_brick->run(tts_input);
+        const int64_t num_samples = output["left_channel"].format.shape[0];
+        output_sample_rate        = *static_cast<const int64_t*>(output["sample_rate"].data);
+
+        COMPUTE_FLOW_CHECK(num_samples == output["right_channel"].format.shape[0]);
+
+        if (num_samples > 0) {
+            const auto* left  = static_cast<const float*>(output["left_channel"].data);
+            const auto* right = static_cast<const float*>(output["right_channel"].data);
+
+            left_audio.insert(left_audio.end(), left, left + num_samples);
+            right_audio.insert(right_audio.end(), right, right + num_samples);
+        }
+    }
+
+    tts_brick->reset_states();
+
+    COMPUTE_FLOW_CHECK(!left_audio.empty() && output_sample_rate > 0);
+
+    bricks::internal::write_stereo_wav(output_path, left_audio.data(), right_audio.data(),
+                                       static_cast<int64_t>(left_audio.size()), output_sample_rate);
+
+    std::cout << "Saved: " << std::filesystem::absolute(output_path).string() << std::endl;
+    return EXIT_SUCCESS;
+}
+
+}  // namespace
+
+int32_t main(int32_t argc, char** argv) {
+    try {
+        return run(argc, argv);
+    } catch (const std::exception& error) {
+        std::cerr << "Error: " << error.what() << std::endl;
+        return EXIT_FAILURE;
+    }
+}
+```
+
+Then create a CMakeLists.txt file in the same directory.
+
+```cmake
+cmake_minimum_required(VERSION 3.24)
+project(audio_translation LANGUAGES CXX)
+
+add_subdirectory("${COMPUTE_FLOW_SDK_DIR}" compute_flow_sdk)
+
+add_executable(audio_translation audio_translation.cpp ../compute_flow/cli_examples/internal/wav.cpp)
+target_include_directories(audio_translation PRIVATE ..)
+target_link_libraries(audio_translation PRIVATE compute_flow::sdk)
+
+target_link_options(
+    audio_translation
+    PRIVATE -fopenmp -static-openmp "LINKER:-z,max-page-size=16384" "LINKER:-z,common-page-size=16384"
+)
+```
+
+{{< /tab >}}
+{{< /tabpane-normal >}}
 
 The code provides everything that you need to run the audio-to-audio translation pipeline. The code first loads and configures each of the three bricks required for the application. It then runs each brick, with the output from the previous brick being passed to the next one. Finally, it saves the pipeline output.
 
@@ -308,6 +576,8 @@ All three bricks share these deployment methods, documented in [Brick Runtime In
 
 Resolve the package locations through Brick Manager instead of hard-coding cache paths. Then, run your application using the sample supplied with Parakeet:
 
+{{< tabpane-normal >}}
+{{< tab header="Native Arm64" >}}
 ```bash
 PARAKEET_PACKAGE="$(compute-flow model path stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic)"
 HY_MT2_PACKAGE="$(compute-flow model path lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation)"
@@ -322,6 +592,54 @@ python audio_translation_example/audio_translation.py \
   --destination-language French \
   --output translated_french.wav
 ```
+{{< /tab >}}
+{{< tab header="Cross-compile for Android Arm64" >}}
+Compile the application.
+```bash
+cmake -S audio_translation_example -B build_audio_translation_android \
+  -DCOMPUTE_FLOW_SDK_DIR="$PWD/build_android_arm64/sdk" \
+  -DCMAKE_TOOLCHAIN_FILE="$(sed -n 's/^CMAKE_TOOLCHAIN_FILE:[^=]*=//p' build_android_arm64/CMakeCache.txt)" \
+  -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-28 -DCMAKE_BUILD_TYPE=Release
+cmake --build build_audio_translation_android --parallel
+```
+Connect your Android device via `adb` and push the model files to the device.
+
+```bash
+adb shell mkdir -p /data/local/tmp/compute-flow/audio-translation/stt \
+  /data/local/tmp/compute-flow/audio-translation/translation \
+  /data/local/tmp/compute-flow/audio-translation/tts
+adb push --sync "$(compute-flow model path stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic)"/. \
+  /data/local/tmp/compute-flow/audio-translation/stt/
+adb push --sync "$(compute-flow model path lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation)"/. \
+  /data/local/tmp/compute-flow/audio-translation/translation/
+adb push --sync "$(compute-flow model path tts:qwen3-tts qwen3-tts-0-6b-custom-voice)"/. \
+  /data/local/tmp/compute-flow/audio-translation/tts/
+```
+
+Next, push the binary to the device.
+
+```bash
+adb push --sync build_audio_translation_android/audio_translation /data/local/tmp/compute-flow/audio-translation/
+```
+Finally, run the application and retrieve the French translation.
+
+```bash
+adb shell 'cd /data/local/tmp/compute-flow/audio-translation &&
+  chmod +x audio_translation &&
+  ./audio_translation \
+    --stt-manifest stt/parakeet_tdt_0_6b_v3_manifest.json \
+    --translation-manifest translation/hy_mt2_1_8b_manifest.json \
+    --tts-manifest tts/qwen3_tts_custom_voice_en_manifest.json \
+    --input stt/samples/beckett.wav \
+    --source-language English --destination-language French \
+    --output translated_french.wav'
+adb pull /data/local/tmp/compute-flow/audio-translation/translated_french.wav audio_translation_example/
+```
+
+{{< /tab >}}
+{{< /tabpane-normal >}}
+
+
 
 The expected output is:
 

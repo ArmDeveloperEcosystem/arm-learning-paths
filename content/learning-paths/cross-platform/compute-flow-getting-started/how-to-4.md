@@ -13,6 +13,8 @@ Use the built speech-to-text CLI to compare the speech recognition stage. Changi
 
 The Parakeet model files total approximately 683 MB, with dynamic INT8 quantization for fully connected weights and FP32 external interfaces. The Moonshine FP32 model files total approximately 247 MB. These are different model families using LiteRT and ONNX Runtime respectively.
 
+### On Native Arm64 device
+
 Resolve the Parakeet package path for its manifest. Run both alternatives on the same mono 16 kHz recording, with one CPU thread and profiling enabled:
 
 ```bash
@@ -69,6 +71,67 @@ Compare the total `run()` time. Parakeet's 30 streaming calls complete one trans
 These results are one example of how to compare the models; your timings will vary with your hardware and setup. On an Apple M3 Pro, Moonshine took 290.30 ms and Parakeet took 985.12 ms to process a single 9.963-second audio sample. The timings exclude setup and warmup, include profiling overhead, and do not assess transcription accuracy.
 
 Pass your own representative audio samples in a JSON file with `-j runs.json` to evaluate more inputs. The shared Python API and CLI let you quickly profile models across different runtimes and find the most suitable model for your application by changing manifests.
+
+### On Android Arm64 phone
+
+Use the Android build and model packages from the previous steps. Run both models on the same mono 16 kHz recording, with one CPU thread and profiling enabled.
+
+From the Compute Flow repository root, transfer the speech-to-text CLI and make it executable:
+
+```bash
+adb push --sync build_android_arm64/stt_cli /data/local/tmp/compute-flow/audio-translation/
+adb shell chmod +x /data/local/tmp/compute-flow/audio-translation/stt_cli
+```
+
+The following results were measured on a Pixel 8 running Android 16. The operator breakdowns have been omitted for brevity.
+
+{{< tabpane-normal >}}
+  {{< tab header="Parakeet dynamic INT8" >}}
+Run the Parakeet manifest:
+
+```bash
+adb shell 'cd /data/local/tmp/compute-flow/audio-translation &&
+  ./stt_cli \
+    -m stt/parakeet_tdt_0_6b_v3_manifest.json \
+    -a stt/samples/beckett.wav \
+    -t 1 --enable-op-profiling'
+```
+
+The output is similar to:
+
+```output
+[TRANSCRIPTION]
+Ever tried, ever failed. No matter. Try again. Fail again. Fail better.
+...
+All Calls
+Scope: run() [total ms: 1154.04]
+Scope stats | calls: 30 | avg ms: 38.47 | min ms: 0.36 | max ms: 565.70
+```
+  {{< /tab >}}
+  {{< tab header="Moonshine FP32" >}}
+Run the Moonshine manifest with the same input recording:
+
+```bash
+adb shell 'cd /data/local/tmp/compute-flow/audio-translation &&
+  ./stt_cli \
+    -m moonshine/moonshine_manifest_base_en.json \
+    -a stt/samples/beckett.wav \
+    -t 1 --enable-op-profiling'
+```
+
+The output is similar to:
+
+```output
+[TRANSCRIPTION]
+Ever tried ever failed, no matter try again fail again fail better.
+----------------
+Scope: run() [total ms: 552.39]
+Scope stats | calls: 1 | avg ms: 552.39 | min ms: 552.39 | max ms: 552.39
+```
+  {{< /tab >}}
+{{< /tabpane-normal >}}
+
+Compare the total `run()` time across all calls. On this Pixel 8, Moonshine took 552.39 ms and Parakeet took 1154.04 ms to process the same 9.963-second sample. These are single-run measurements; your timings will vary with device load, temperature, and hardware. The timings exclude setup and warmup, include profiling overhead, and do not assess transcription accuracy.
 
 ## What you've accomplished
 

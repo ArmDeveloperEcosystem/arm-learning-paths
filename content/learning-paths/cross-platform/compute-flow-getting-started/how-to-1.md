@@ -15,7 +15,7 @@ A brick type defines an input and output contract. A brick variant implements th
 
 You'll use three different bricks to build an audio translation application. The first recognises human speech, the second translates speech into text, and the third generates audio. Each brick uses different models to accomplish the goal of translating English into French.
 
-You'll use a Python application to translate a short English recording into French speech on your Arm-based device. The application processes the recording through three stages:
+You'll use a Python / C++ application to translate a short English recording into French speech on your Arm-based device. The application processes the recording through three stages:
 
 ```text
 English WAV (Input)
@@ -33,7 +33,7 @@ Stage 3. Text-to-speech: Qwen3-TTS
 French WAV (Output)
 ```
 
-Python coordinates the stages. It passes the speech-to-text transcription to the translation brick, then passes the translation to the speech synthesis brick. Compute Flow doesn't automatically assemble this pipeline for you.
+Your application coordinates the stages. It passes the speech-to-text transcription to the translation brick, then passes the translation to the speech synthesis brick. Compute Flow doesn't automatically assemble this pipeline for you.
 
 ## Separate the application from the model
 
@@ -51,7 +51,7 @@ A model package contains the weights and supporting assets that a brick needs. A
 
 The manifest describes model filenames, inference runtimes, and model-specific tensor formats. It also describes supporting assets such as tokenizers. The manifest provides configuration values and constants that are needed by the brick. The weights live in separate files that are referenced by the manifest.
 
-For example, the Parakeet package includes `parakeet_tdt_0_6b_v3_manifest.json`. The Python application reads this file with `cf.load_manifest()`. It selects the implementation with `cf.load_brick()`, and prepares the models with `brick.setup()`. This keeps model-specific file paths and runtime configuration out of your application code.
+For example, the Parakeet package includes `parakeet_tdt_0_6b_v3_manifest.json`. The application reads this file with `cf.load_manifest()`. It selects the implementation with `cf.load_brick()`, and prepares the models with `brick.setup()`. This keeps model-specific file paths and runtime configuration out of your application code.
 
 ## Compute Flow Brick Manager
 
