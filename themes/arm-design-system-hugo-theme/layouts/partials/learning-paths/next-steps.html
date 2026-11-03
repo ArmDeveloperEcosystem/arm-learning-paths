@@ -77,8 +77,38 @@ Called from:
   </style>
 
 
-<div class="c-row u-margin-bottom-0">
+<div class="c-row u-margin-top-0">
     <div class="c-col">
+        <div class="next-steps-layout">
+            <div id="further-reading-div" class="next-steps-resources">
+                <h2>Read related resources</h2>
+                <p>Find more information about the topics in this Learning Path:</p>
+                <ul class="fa-ul u-margin-left-0">
+                {{ range $index, $r := (index .learningpathfiles 0).Params.further_reading }} {{/* obtain from index.md */}}
+                    {{ with $r.resource}}
+                        <li class="u-margin-bottom-1/2"><i class='u-margin-right-1/2 fa-solid
+                                    {{if eq .type "blog" }}
+                                        fa-pen-to-square' title='Blog'
+                                    {{ else if eq .type "website" }}
+                                        fa-browser' title='External website'
+                                    {{else if eq .type "documentation" }}
+                                        fa-book' title='Documentation'
+                                    {{else}}
+                                        fa-book' title='Reference'
+                                    {{end}}
+                                ></i>
+                        <a href="{{ .link }}" target="_blank">{{ .title }}{{partial "general-formatting/external-link.html"}}</a>
+                        </li>
+                    {{end}}
+                {{end}}
+                </ul>
+            </div>
+
+    <div class="next-steps-feedback">
+        {{ partial "general-formatting/feedback.html" (dict "context" .context "learningpath_or_toolinstall" "Learning Path") }}
+    </div>
+
+    <div class="next-steps-share">
         <h2>Share</h2>
         <p>Bring your insights to the conversation.</p>
         <div class="social-sharing">
@@ -130,13 +160,6 @@ Called from:
             </div>
         </div>
     </div>
-    <div class="c-col">
-        <!-- Feedback -->
-        {{partial "general-formatting/feedback.html" (dict "context" .context "learningpath_or_toolinstall" "Learning Path")  }}
-
-
-    </div>
-</div>
 
 <script>
 
@@ -230,42 +253,6 @@ Called from:
     });
 
 </script>
-
-
-
-<div class="c-row u-margin-top-0">
-    <div class="c-col">
-        <!-- Main CTA for next learning path: -->
-        <h2>Continue Learning</h2>
-
-        <!-- 3 columns of next steps -->
-        <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 lg:u-grid-columns-2 xl:u-grid-columns-3 u-margin-top-1">
-            
-            <div id="further-reading-div" class="content-box">
-                <h4>Read related resources</h4>
-                <p>Find more information about the topics in this Learning Path:</p>
-                <ul class="fa-ul u-margin-left-0">
-                {{ range $index, $r := (index .learningpathfiles 0).Params.further_reading }} {{/* obtain from index.md */}}
-                    {{ with $r.resource}}
-                        <li class="u-margin-bottom-1/2"><i class='u-margin-right-1/2 fa-solid 
-                                    {{if eq .type "blog" }}
-                                        fa-pen-to-square' title='Blog'
-                                    {{ else if eq .type "website" }}
-                                        fa-browser' title='External website'
-                                    {{else if eq .type "documentation" }}
-                                        fa-book' title='Documentation'
-                                    {{else}}
-                                        fa-book' title='Reference'
-                                    {{end}}
-                                ></i>
-                        <a href="{{ .link }}" target="_blank">{{ .title }}{{partial "general-formatting/external-link.html"}}</a>
-                        </li>
-                    {{end}}
-                {{end}}
-                </ul>
-            </div>
-
-
 
             <div id="arm-dev-program-div" class="content-box">
                 
@@ -641,4 +628,4 @@ document.body.appendChild(formScript);
             -->
         </div>
     </div>
-</div>  
+</div>

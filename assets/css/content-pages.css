@@ -378,3 +378,39 @@ html[theme='dark'] ads-expansion-panel.generated-summary-faq__panel {
     padding-right: 16px;
     font-size: 16px;
 }
+
+/* Next Steps: resources and feedback first, followed by sharing and account actions. */
+.next-steps-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem 1.5rem;
+    align-items: start;
+}
+
+.next-steps-layout > .content-box {
+    margin-top: 0;
+}
+
+@media (min-width: 900px) {
+    .next-steps-layout {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    }
+
+    .next-steps-resources { grid-column: 1; }
+    .next-steps-feedback { grid-column: 2; }
+    .next-steps-share { grid-column: 1; }
+    .next-steps-layout #arm-dev-program-div { grid-column: 2; }
+    .next-steps-layout #arm-account-div { grid-column: 1 / -1; }
+}
+
+@media (min-width: 1280px) {
+    .next-steps-layout {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .next-steps-resources { grid-column: 1 / span 8; }
+    .next-steps-feedback { grid-column: 9 / span 4; }
+    .next-steps-share { grid-column: 1 / span 4; }
+    .next-steps-layout #arm-dev-program-div { grid-column: 5 / span 4; }
+    .next-steps-layout #arm-account-div { grid-column: 9 / span 4; }
+}
