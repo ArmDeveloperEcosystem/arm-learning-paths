@@ -52,15 +52,3 @@ weight: 1
 layout: learningpathall
 learning_path_main_page: "yes"
 ---
-
-## Run local LLM inference on Zena CSS
-
-You can use an [Arm Zena CSS virtual platform](https://www.arm.com/products/autonomous-machines/zena-compute-subsystems) to bring up an arm64 AI workload before physical hardware is available. In this Learning Path, you build a CPU-only [llama.cpp](https://github.com/ggml-org/llama.cpp) binary inside the Linux guest, verify one text model, run two prompts, and save the results.
-
-The tested setup used [Siemens Innexis ANA](https://www.siemens.com/en-gb/products/ic/hav/innexis/architecture-native-acceleration/) 2026.02 on a g4 chamber with the supplied Zena CSS virtual platform and EWAOL v2.1.0 (`styhead`) Linux 6.6.54 image. The CPU and memory settings were unchanged: ANA showed **Simulation CPUs: 4**, while Linux reported **16 online CPUs** (`0-15`) and about 8 GB of guest memory. The ANA simulation setting is separate from the CPU count visible inside Linux.
-
-The final result is a record of the guest environment, source and model identities, commands, generated text, and exit status. It shows that this workload can run in the selected virtual platform. It does not assess the quality of the answers or predict performance on a physical SoC.
-
-The [Zena CSS onboarding Learning Path](../innexis_ana_zena/) establishes the virtual platform, Linux access, and file exchange used here. Complete that workflow first, or obtain an equivalent working guest from your chamber administrator. You do not need to deploy ANA or rebuild the Zena firmware for this exercise.
-
-The commands on the following pages run inside the **Primary Compute Linux guest** unless a step says otherwise. Keep one guest shell open across the pages because it holds the paths you choose for the build, model, and result files.
