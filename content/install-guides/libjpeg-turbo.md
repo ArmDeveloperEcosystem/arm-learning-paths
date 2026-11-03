@@ -66,7 +66,7 @@ To find the latest version, see [libjpeg-turbo releases](https://github.com/libj
 3. Open the installation directory in File Explorer. 
 4. Open the `bin` folder and confirm that it contains `jpegtran.exe`. 
 5. Copy the full path to the `bin` folder from the address bar.
-6. Search the Start menu for **Edit environment variables for your account** and open it.
+6. Search the **Start** menu for **Edit environment variables for your account** and open it.
 7. Under **User variables**, select **Path**, then select **Edit > New**. 
 8. Paste the path to the `bin` folder, then select **OK** to save and close the dialogs.
 9. Open a new PowerShell window to use the updated `Path`.
