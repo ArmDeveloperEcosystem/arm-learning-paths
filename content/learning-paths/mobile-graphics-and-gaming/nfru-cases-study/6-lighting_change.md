@@ -9,6 +9,8 @@ layout: learningpathall
 
 ## Understand how NFRU handles lighting changes
 
+For the tested-build context of these images, see [capture provenance](../3-validate_nfru_with_streamline_and_renderdoc/#capture-provenance).
+
 Lighting changes demonstrate how NFRU combines image-space and geometry information to preserve a coherent intermediate frame. NFRU generates `InterpolatedRT` between `r_previous_interpolation_source` and `r_current_interpolation_source`, using color, depth, motion vectors, and optical flow. In Moku, this process maintains natural-looking motion across bright emissive detail, translucent effects, and changing illumination, while difficult screen-edge combinations can still reveal localized differences.
 
 The following sequence shows the process. The previous source and current source are used as inputs for the interpolation calculation. The dynamic region is highlighted to show where generated content is most likely to differ from the source frames. The result is visible in the final `InterpolatedRT`.
@@ -27,7 +29,7 @@ If color changes mainly because illumination changed, optical flow might interpr
 
 ## Inspect a natural-moving character
 
-Not every lighting-heavy region produces a visible artifact. The moving character in this example is interpolated naturally even though it contains bright emissive detail, translucent effects, and fine edges. The core glow stays centered, the ring keeps a plausible shape, and the surrounding lighting remains coherent. Minor softness around the character reads as motion blur or glow during playback.
+Not every lighting-heavy region produces a visible artifact. The moving character in this scenario is interpolated naturally even though it contains bright emissive detail, translucent effects, and fine edges. The core glow stays centered, the ring keeps a plausible shape, and the surrounding lighting remains coherent. Minor softness around the character reads as motion blur or glow during playback.
 
 ![Marked moving character lighting area in the generated frame, with a zoomed inset showing a natural interpolated result#center](./images/lighting_change/zoom_in_marked_issue_generated_1.webp "Natural-looking generated moving character")
 
@@ -61,6 +63,6 @@ When lighting-change artifacts appear, inspect the image inputs as well as the m
 
 ## What you've learned and what's next
 
-You've now seen NFRU preserve a natural-looking moving character across bright emissive detail, translucent effects, and fine edges. The screen edge example showed how a dramatic lighting transition can produce localized ghosting when optical flow, depth, motion, and blend parameters don't fully agree. Together, the examples show that the overall generated frame can remain coherent while RenderDoc exposes the specific inputs behind a difficult edge case.
+You've now seen NFRU preserve a natural-looking moving character across bright emissive detail, translucent effects, and fine edges. The screen edge scenario showed how a dramatic lighting transition can produce localized ghosting when optical flow, depth, motion, and blend parameters don't fully agree. Together, the scenarios show that the overall generated frame can remain coherent while RenderDoc exposes the specific inputs behind a difficult edge case.
 
 Next, continue with NFRU performance analysis to understand how frame generation affects render FPS, present FPS, and frame pacing during gameplay.

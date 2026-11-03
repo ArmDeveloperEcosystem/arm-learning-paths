@@ -9,9 +9,11 @@ layout: learningpathall
 
 ## Understand how NFRU handles occluded objects
 
+For the tested-build context of these images, see [capture provenance](../3-validate_nfru_with_streamline_and_renderdoc/#capture-provenance).
+
 When an object moves in front of another surface, NFRU has to generate an intermediate frame where part of the background is being covered (occlusion-in) or revealed (occlusion-out). These regions are challenging because foreground and background samples can change visibility between the two rendered frames.
 
-In the Moku occlusion examples, NFRU handles most of the occluded and newly revealed areas cleanly. The generated frames preserve the main foreground shape and background region well. 
+In the Moku occlusion scenarios, NFRU handles most of the occluded and newly revealed areas cleanly. The generated frames preserve the main foreground shape and background region well.
 
 This is expected because NFRU uses the following to choose and combine source information for the intermediate frame:
 
@@ -36,7 +38,7 @@ The marked close-up highlights a small boundary artifact in the generated frame.
 
 ## Analyze occlusion-out artifacts
 
-In an occlusion-out case, newly revealed background might be missing from one of the source frames. NFRU uses the available color, depth, motion, and optical-flow information to reconstruct the revealed region. In the example, the revealed area is mostly clean. The remaining artifact appears as a small amount of blur or distortion near the moving edge.
+In an occlusion-out case, newly revealed background might be missing from one of the source frames. NFRU uses the available color, depth, motion, and optical-flow information to reconstruct the revealed region. In the scenario, the revealed area is mostly clean. The remaining artifact appears as a small amount of blur or distortion near the moving edge.
 
 The occlusion-out generation sequence shows how the interpolated frame handles background pixels that become visible as the foreground object moves away.
 
