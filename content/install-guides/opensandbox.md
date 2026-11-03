@@ -3,7 +3,7 @@ title: OpenSandbox
 
 description: Install OpenSandbox on Arm Linux and run a Python command in a Docker-backed sandbox.
 
-minutes_to_complete: 20
+minutes_to_complete: 15
 official_docs: https://open-sandbox.ai/getting-started/
 
 author: Anupras Mohapatra
