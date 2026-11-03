@@ -379,27 +379,45 @@ html[theme='dark'] ads-expansion-panel.generated-summary-faq__panel {
     font-size: 16px;
 }
 
-/* Keep the related resources prominent in the Next Steps card group. */
-.next-steps-cards {
+/* Next Steps layout: full-width guidance, followed by optional actions. */
+.next-steps-layout {
+    display: grid;
     grid-template-columns: minmax(0, 1fr);
+    gap: 2rem 1.5rem;
+    align-items: start;
 }
 
-@media (min-width: 768px) {
-    .next-steps-cards {
+.next-steps-layout > .content-box {
+    margin-top: 0;
+}
+
+@media (min-width: 900px) {
+    .next-steps-layout {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .next-steps-cards #further-reading-div {
+    .next-steps-resources {
         grid-column: 1 / -1;
-    }
-}
-
-@media (min-width: 1280px) {
-    .next-steps-cards {
-        grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr));
+        grid-row: 1;
     }
 
-    .next-steps-cards #further-reading-div {
-        grid-column: auto;
+    .next-steps-feedback {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+
+    .next-steps-share {
+        grid-column: 1;
+        grid-row: 3;
+    }
+
+    .next-steps-layout #arm-dev-program-div {
+        grid-column: 2;
+        grid-row: 3;
+    }
+
+    .next-steps-layout #arm-account-div {
+        grid-column: 2;
+        grid-row: 4;
     }
 }
