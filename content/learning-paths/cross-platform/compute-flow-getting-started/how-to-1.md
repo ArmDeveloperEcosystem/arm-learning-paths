@@ -15,7 +15,7 @@ A brick type defines an input and output contract. A brick variant implements th
 
 You'll use three different bricks to build an audio translation application. The first recognises human speech, the second translates speech into text, and the third generates audio. Each brick uses different models to accomplish the goal of translating English into French.
 
-You'll use a Python application to translate a short English recording into French speech on your Apple silicon Mac. The application processes the recording through three stages:
+You'll use a Python application to translate a short English recording into French speech on your Arm-based device. The application processes the recording through three stages:
 
 ```text
 English WAV (Input)
@@ -59,7 +59,7 @@ To discover and install the required Compute Flow bricks, you'll use Compute Flo
 
 The Brick Manager is responsible for installing the brick type and variant based on the selected AI model. It builds the developed application for the selected runtime platforms.
 
-To complete setup, you need network access to download dependencies and model packages. After setup, the application reads the installed assets and performs inference on your Mac. It writes a WAV file locally and doesn't call a hosted inference service. You don't need a microphone because the input recording is included in a model package.
+To complete setup, you need network access to download dependencies and model packages. After setup, the application reads the installed assets and performs inference on your device. It writes a WAV file locally and doesn't call a hosted inference service. You don't need a microphone because the input recording is included in a model package.
 
 ## What you've learned and what's next
 

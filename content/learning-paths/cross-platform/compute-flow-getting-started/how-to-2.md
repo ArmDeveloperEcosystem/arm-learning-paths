@@ -7,9 +7,9 @@ weight: 3
 layout: learningpathall
 ---
 
-## Prepare your Mac
+## Prepare your host device
 
-You'll install three model packages, build Compute Flow for your Mac, and create a Python application.
+You'll install three model packages, build Compute Flow for your device, and create a Python application.
 
 First, check your CPU architecture:
 
@@ -17,7 +17,7 @@ First, check your CPU architecture:
 uname -m
 ```
 
-The expected output is `arm64`.
+The expected output is `arm64` or `aarch64`.
 
 If `uv` isn't installed, use the [uv standalone installer](https://docs.astral.sh/uv/getting-started/installation/) with the following command:
 
@@ -25,7 +25,7 @@ If `uv` isn't installed, use the [uv standalone installer](https://docs.astral.s
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Next, if Apple developer tools aren't installed, [install Xcode Command Line Tools](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools/). The package includes Git, Clang, and the macOS SDK. If you already have Xcode or the Command Line Tools installed, use those tools.
+Next, if compiling natively for MacOS and Apple developer tools aren't installed, [install Xcode Command Line Tools](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools/). The package includes Git, Clang, and the macOS SDK. If you already have Xcode or the Command Line Tools installed, use those tools.
 
 Check that the tools are available:
 
@@ -143,7 +143,7 @@ compute-flow model info lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation
 compute-flow model info tts:qwen3-tts qwen3-tts-0-6b-custom-voice
 ```
 
-## Build for your Mac
+## Build for your Device
 
 Build the installed bricks:
 

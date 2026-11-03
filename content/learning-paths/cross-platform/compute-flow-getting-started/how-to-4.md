@@ -54,7 +54,6 @@ Run the Moonshine manifest:
 
 The output is similar to the following. The operator breakdown has been omitted for brevity.
 
-
 ```output
 [TRANSCRIPTION]
 Ever tried ever failed, no matter try again fail again fail better.

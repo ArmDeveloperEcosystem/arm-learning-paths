@@ -12,7 +12,7 @@ learning_objectives:
     - Select a speech recognition model and verify the pipeline using the same application and recording.
 
 prerequisites:
-    - An Arm-based system such as an Apple® silicon Mac
+    - An Arm-based system such as an Apple® silicon Mac or Arm-based Linux machine.
     - Basic Python knowledge and familiarity with terminal commands
     - Internet access and at least 15 GB of available storage
 
@@ -82,11 +82,13 @@ tools_software_languages:
     - uv
 operatingsystems:
     - macOS
+    - Linux
 
 ### Cross-platform metadata only
 shared_path: true
 shared_between:
     - laptops-and-desktops
+    - servers-and-cloud-computing
 
 further_reading:
     - resource:
