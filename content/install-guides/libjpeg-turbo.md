@@ -5,8 +5,6 @@ minutes_to_complete: 10
 official_docs: https://libjpeg-turbo.org/Documentation/Documentation
 author: Kostiantyn Perehuda
 
-draft: true
-
 test_maintenance: false
 
 ### FIXED, DO NOT MODIFY
@@ -16,8 +14,6 @@ multi_install: false
 multitool_install_part: false
 layout: installtoolsall
 ---
-
-## Overview
 
 [libjpeg-turbo](https://www.libjpeg-turbo.org/) is a JPEG image codec that uses single instruction,
 multiple data (SIMD) instructions
@@ -59,7 +55,7 @@ runtime library doesn't provide these tools.
 ## Install on Windows on Arm
 
 {{% notice Note %}}
-The following steps use libjpeg-turbo version 3.1.4.1. You can use another version that provides
+The following steps use libjpeg-turbo version `3.1.4.1`. You can use another version that provides
 an ARM64 installer. Replace the installer with the file for your chosen version.
 To find the latest version, see [libjpeg-turbo releases](https://github.com/libjpeg-turbo/libjpeg-turbo/releases).
 {{% /notice %}}
@@ -67,12 +63,13 @@ To find the latest version, see [libjpeg-turbo releases](https://github.com/libj
 1. Download `libjpeg-turbo-3.1.4.1-vc-arm64.exe` from the
    [libjpeg-turbo 3.1.4.1 release](https://github.com/libjpeg-turbo/libjpeg-turbo/releases/tag/3.1.4.1).
 2. Run the installer and note the installation directory.
-3. Open the installation directory in File Explorer. Open its `bin` folder and confirm that
-   it contains `jpegtran.exe`. Copy the full path to this folder from the address bar.
-4. Search the Start menu for **Edit environment variables for your account** and open it.
-5. Under **User variables**, select **Path**, then **Edit > New**. Paste the path to the
-   `bin` folder. Select **OK** to save and close the dialogs.
-6. Open a new PowerShell window to use the updated `Path`.
+3. Open the installation directory in File Explorer. 
+4. Open the `bin` folder and confirm that it contains `jpegtran.exe`. 
+5. Copy the full path to the `jpegtran.exe` folder from the address bar.
+6. Search the Start menu for **Edit environment variables for your account** and open it.
+7. Under **User variables**, select **Path**, then select **Edit > New**. 
+8. Paste the path to the `bin` folder, then select **OK** to save and close the dialogs.
+9. Open a new PowerShell window to use the updated `Path`.
 
 ## Verify the installation
 
@@ -91,11 +88,15 @@ libjpeg-turbo version 3.1.4.1 (build 20260327)
 Your version and build can differ. A successful version check confirms that your terminal can
 find and run `jpegtran`.
 
-## Troubleshooting
+## Troubleshoot installation issues
 
-If your shell can't find `jpegtran`, open a new terminal and confirm that the directory containing the
-executable is in your `PATH`. On Windows, check for `jpegtran.exe` in the installation's `bin`
-directory. On Linux, check that you installed the command-line tools package for your distribution.
+If your shell can't find `jpegtran`, open a new terminal. Confirm that the directory containing the
+executable is in your `PATH`. On Windows, check for `jpegtran.exe` in the `bin`
+directory of the installation. On Linux, check that you installed the command-line tools package for your distribution.
 
-If Ubuntu cannot locate the package, check that the `universe` repository is enabled for your
-release, then run `sudo apt update` again.
+If Ubuntu can't locate the package, check that the `universe` repository is enabled for your
+release. Then, run `sudo apt update` again.
+
+## Next steps
+
+You can now encode, decode, and transform JPEG images on Arm using `libjpeg-turbo`. 
