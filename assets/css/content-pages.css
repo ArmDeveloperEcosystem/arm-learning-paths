@@ -378,3 +378,28 @@ html[theme='dark'] ads-expansion-panel.generated-summary-faq__panel {
     padding-right: 16px;
     font-size: 16px;
 }
+
+/* Keep the related resources prominent in the Next Steps card group. */
+.next-steps-cards {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 768px) {
+    .next-steps-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .next-steps-cards #further-reading-div {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (min-width: 1280px) {
+    .next-steps-cards {
+        grid-template-columns: minmax(0, 1.4fr) repeat(2, minmax(0, 1fr));
+    }
+
+    .next-steps-cards #further-reading-div {
+        grid-column: auto;
+    }
+}
