@@ -63,7 +63,7 @@ To find the latest version, see [libjpeg-turbo releases](https://github.com/libj
 1. Download `libjpeg-turbo-3.1.4.1-vc-arm64.exe` from the
    [libjpeg-turbo 3.1.4.1 release](https://github.com/libjpeg-turbo/libjpeg-turbo/releases/tag/3.1.4.1).
 2. Run the installer and note the installation directory.
-3. Open the installation directory in File Explorer. 
+3. Open the installation directory in **File Explorer**. 
 4. Open the `bin` folder and confirm that it contains `jpegtran.exe`. 
 5. Copy the full path to the `bin` folder from the address bar.
 6. Search the **Start** menu for **Edit environment variables for your account** and open it.
