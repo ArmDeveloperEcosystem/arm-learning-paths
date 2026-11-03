@@ -1,5 +1,5 @@
 ---
-title: Migrate MySQL from x64 to Arm on Azure VMs
+title: Migrate MySQL from on-premises x64 to Arm on Azure virtual machines
 
 description: Learn how to migrate a MySQL database from an on-premises x64 environment to an Arm-based Azure Cobalt 100 VM and validate performance with sysbench.
 

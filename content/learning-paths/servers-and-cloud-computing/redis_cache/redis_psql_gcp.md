@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy Redis for PostgreSQL on a Google Cloud Arm VM"
+title: "Deploy Redis as a cache for PostgreSQL on a Google Cloud Arm VM"
 
 weight: 7 # 1 is first, 2 is second, etc.
 

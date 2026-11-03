@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Run Docker Hub and Amazon ECR images with CodeBuild"
+title: "Run Docker Hub and Amazon ECR images with AWS CodeBuild"
 
 weight: 3 # 1 is first, 2 is second, etc.
 

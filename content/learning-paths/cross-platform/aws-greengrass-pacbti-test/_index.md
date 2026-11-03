@@ -1,5 +1,5 @@
 ---
-title: Verify PAC/BTI in an AWS IoT Greengrass component on Arm
+title: Verify PAC/BTI support in an AWS IoT Greengrass component on Arm
 
 description: Learn how to register Arm devices as AWS IoT Greengrass core devices, build and deploy a custom component, and use MQTT to verify PAC/BTI support across Armv8 and Armv9 platforms.
 

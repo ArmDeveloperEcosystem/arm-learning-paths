@@ -1,5 +1,5 @@
 ---
-title: Capture neural graphics datasets in Unreal Engine
+title: Capture neural graphics datasets with Neural Graphics Data Capture
 description: Learn how to capture high-quality frame datasets from Unreal Engine 5.5 gameplay for training and evaluating neural graphics models like Neural Super Sampling.
 
 minutes_to_complete: 30

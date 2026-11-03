@@ -1,5 +1,5 @@
 ---
-title: Optimize Adler32 with Neon intrinsics and GitHub Copilot
+title: Optimize Adler32 with Neon intrinsics using GitHub Copilot
 
 description: Learn how to use GitHub Copilot to write Neon intrinsics that accelerate the Adler32 checksum algorithm on Arm platforms, achieving significant performance improvements over standard C implementations.
 

@@ -1,5 +1,5 @@
 ---
-title: "Install Nginx and inspect its build configuration"
+title: "Install NGINX and inspect its build configuration"
 weight: 2
 layout: "learningpathall"
 ---

@@ -5,7 +5,7 @@ description: Learn how to create and build Chromium Embedded Framework desktop a
 
 minutes_to_complete: 30
 
-who_is_this_for: This learning path is for developers who want to learn how to use web technologies for developing Desktop apps on Windows on Arm (WoA).
+who_is_this_for: This learning path is for developers who want to learn how to use web technologies for developing Chromium Embedded Framework (CEF) desktop apps on Windows on Arm (WoA).
 
 learning_objectives:
     - Create and build a Chromium Embedded Framework (CEF) project using CMake

@@ -1,5 +1,5 @@
 ---
-title: Deploy an AI storefront assistant on GKE with Axion
+title: Deploy an AI storefront assistant on GKE on Google Axion
 
 minutes_to_complete: 120
 description: Deploy and validate an Online Boutique storefront on GKE on Arm, add an AI shopping assistant, and compare N4A and C4A placement for the assistant tier.

@@ -4,7 +4,7 @@ description: Learn how to apply profile-guided optimization to C++ applications 
 
 minutes_to_complete: 15
 
-who_is_this_for: Developers looking to optimize C++ performance based on runtime behavior.
+who_is_this_for: Developers looking to optimize C++ performance based on runtime behavior with profile-guided optimization (PGO).
 
 learning_objectives: 
     - Microbenchmark a function using Google Benchmark.

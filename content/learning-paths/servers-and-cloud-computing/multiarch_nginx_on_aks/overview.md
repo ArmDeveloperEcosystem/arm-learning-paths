@@ -1,5 +1,5 @@
 ---
-title: Explore Arm and x86 nginx workloads on one Kubernetes cluster
+title: Explore Arm and x86 NGINX workloads on a Kubernetes cluster
 weight: 2
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

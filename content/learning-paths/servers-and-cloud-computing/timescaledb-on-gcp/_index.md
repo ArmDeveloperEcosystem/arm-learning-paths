@@ -1,5 +1,5 @@
 ---
-title: Deploy a TimescaleDB and Grafana dashboard on Axion
+title: Deploy a TimescaleDB and Grafana live sensor dashboard on Google Axion
 
 minutes_to_complete: 45
 

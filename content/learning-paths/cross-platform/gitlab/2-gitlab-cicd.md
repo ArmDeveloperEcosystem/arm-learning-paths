@@ -1,5 +1,5 @@
 ---
-title: Automate multi-architecture builds and deployment with GitLab CI/CD
+title: Automate multi-architecture builds and deployments with GitLab CI/CD
 weight: 3
 
 ### FIXED, DO NOT MODIFY

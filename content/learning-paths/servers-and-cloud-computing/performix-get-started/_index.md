@@ -1,5 +1,5 @@
 ---
-title: Optimize a C++ app on Arm servers with Arm Performix
+title: Optimize a C++ app on an Arm-based server with Arm Performix
 
 description: Profile and optimize a C++ application on Arm-based servers using Arm Performix recipes, CPU microarchitecture analysis, and Neon intrinsics.
 

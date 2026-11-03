@@ -1,5 +1,5 @@
 ---
-title: Build Qdrant search and chat retrieval on Google Axion
+title: Build semantic search and chat retrieval with Qdrant on Google Axion
 description: Learn how to deploy Qdrant on Google Cloud C4A Axion processors, generate vector embeddings with Sentence Transformers, and build a semantic search and chatbot retrieval system on Arm-based infrastructure.
 
 minutes_to_complete: 30

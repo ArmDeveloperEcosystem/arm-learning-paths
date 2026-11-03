@@ -1,5 +1,5 @@
 ---
-title: Deploy AWS Lambda and DynamoDB with Serverless Framework
+title: Deploy AWS Lambda and DynamoDB using the Serverless Framework
 
 minutes_to_complete: 30
 

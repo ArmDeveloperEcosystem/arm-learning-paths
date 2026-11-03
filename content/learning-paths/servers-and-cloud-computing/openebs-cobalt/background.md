@@ -1,5 +1,5 @@
 ---
-title: Explore OpenEBS storage on Azure Cobalt 100
+title: Explore OpenEBS storage for Kubernetes on Azure Cobalt 100
 description: Learn how OpenEBS LocalPV uses Kubernetes-native storage provisioning to support stateful workloads on Azure Cobalt 100-based Arm64 virtual machines.
 weight: 2
 
@@ -26,7 +26,7 @@ OpenEBS is an open-source, Kubernetes-native storage platform designed for state
 
 OpenEBS allows applications to retain persistent data on a node even after pods restart, reschedule, or recreate. This makes OpenEBS ideal for databases, analytics platforms, message queues, and other stateful cloud-native applications.
 
-OpenEBS provides key capabilities for Kubernetes-native storage management:
+OpenEBS provides the following key capabilities for Kubernetes-native storage management:
 
 - Dynamic provisioning: Automatically creates persistent volumes using Kubernetes PersistentVolumeClaims (PVCs).
 - Kubernetes-native architecture: Runs entirely inside Kubernetes without requiring external storage appliances.
@@ -38,7 +38,7 @@ To learn more, see the official [OpenEBS documentation](https://openebs.io/docs)
 
 ## Why use OpenEBS LocalPV 
 
-You'll use OpenEBS LocalPV in this Learning Path because it's optimized for:
+You'll use OpenEBS LocalPV because it's optimized for the following use cases:
 
 - Single-node Kubernetes clusters
 - Arm64 environments

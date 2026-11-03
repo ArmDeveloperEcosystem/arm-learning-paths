@@ -1,5 +1,5 @@
 ---
-title: Build a multi-architecture nginx cluster on Azure AKS
+title: Build a multi-architecture NGINX cluster on Azure Kubernetes Service
 
 minutes_to_complete: 60
 
