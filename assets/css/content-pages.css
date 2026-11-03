@@ -378,3 +378,62 @@ html[theme='dark'] ads-expansion-panel.generated-summary-faq__panel {
     padding-right: 16px;
     font-size: 16px;
 }
+
+/* Next Steps follows the reader's next action, then questions and optional actions. */
+.next-steps-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem 1.5rem;
+    align-items: start;
+}
+
+.next-steps-faq #generated-summary-faq,
+.next-steps-faq .generated-summary-faq__heading {
+    margin-top: 0 !important;
+}
+
+.next-steps-more-heading {
+    margin-bottom: 0;
+}
+
+.next-steps-layout > .content-box {
+    margin-top: 0;
+}
+
+@media (min-width: 900px) {
+    .next-steps-layout {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .next-steps-resources,
+    .next-steps-faq,
+    .next-steps-more-heading {
+        grid-column: 1 / -1;
+    }
+
+    .next-steps-feedback {
+        grid-column: 1 / span 7;
+    }
+
+    .next-steps-share {
+        grid-column: 8 / span 5;
+    }
+
+    .next-steps-layout #arm-dev-program-div {
+        grid-column: 1 / span 6;
+    }
+
+    .next-steps-layout #arm-account-div {
+        grid-column: 7 / span 6;
+    }
+}
+
+@media (min-width: 1200px) {
+    .next-steps-resources {
+        grid-column: 1 / span 5;
+    }
+
+    .next-steps-faq {
+        grid-column: 6 / span 7;
+    }
+}
