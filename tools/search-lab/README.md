@@ -14,7 +14,13 @@ The `page-head` block in the theme's `baseof.html` lets the search layout load i
 
 Relevance is the default for the page and agent tool. Results matching every significant query word exactly come first, followed by complete matches using word expansion, then partial matches. Common words such as “and” are ignored. Within each group, results sort by score regardless of content type. Scores express ranking, not confidence.
 
-Alphabetic prefixes of at least three letters match token beginnings (`grav` matches `Graviton`). If a word has no exact token or prefix completion, words of at least five letters allow one insertion, deletion, substitution, or adjacent letter swap (`dokcer` matches `Docker`). Typo matching applies only to alphabetic tokens of at least five letters; identifiers with punctuation or digits are not corrected. Expanded matches receive lower weights. There is no arbitrary substring matching, stemming, synonym expansion, or embedding search.
+Alphabetic prefixes of at least three letters match token beginnings (`grav` matches `Graviton`). If a word has no exact token or prefix completion, words of at least five letters allow one insertion, deletion, substitution, or adjacent letter swap (`dokcer` matches `Docker`). Typo matching applies only to alphabetic tokens of at least five letters; identifiers with punctuation or digits are not corrected. Expanded matches receive lower weights. Language aliases are normalized in both indexed text and queries: `cpp` and `C++` are equivalent, as are `csharp` and `C#`. Other identifiers such as `llama.cpp` remain intact. There is no arbitrary substring matching, stemming, general synonym expansion, or embedding search.
+
+The initial blank page shows no results, including when filters are restored from its URL. Submitting a blank or whitespace-only query with Search or Return lists all content matching the filters, newest first (including when Relevance is selected). Typing keeps live search enabled; clearing the field waits for another explicit submission before listing all content. Selecting Install guides clears and disables the Learning Path category filter, including when restoring filters from a URL. The search engine also ignores category filters for install-guide searches.
+
+After an empty search, a small clear control inside the field appears on hover or focus and returns to the initial empty view while preserving filters. For nonempty input, the browser provides its native clear control.
+
+Show more loads batches of 10 with no overall result cap. The agent tool accepts an `offset` to skip results, with up to 100 results per call.
 
 Newest-first remains available and sorts by date instead of match completeness: the latest page date across a Learning Path, or the entry-page date for an install guide. Missing dates sort last; ties use score. Sorting and content filters apply before pagination. Existing URLs with `sort=updated` retain newest-first sorting.
 

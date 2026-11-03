@@ -1,7 +1,9 @@
 // Dependency-free BM25 baseline. Exact identifiers stay searchable alongside words.
 const stop = new Set('a an and are at be can do for from how i in is it me my of on or the to using what with'.split(' '));
+const aliases = new Map([['cpp', 'c++'], ['csharp', 'c#']]);
 export function tokenize(text) {
-  return String(text).toLowerCase().match(/[\p{L}\p{N}]+(?:[.+#-][\p{L}\p{N}+#]+)*/gu) || [];
+  const tokens = String(text).toLowerCase().match(/[\p{L}\p{N}]+(?:[.+#-][\p{L}\p{N}+#]+)*#?/gu) || [];
+  return tokens.map(token => aliases.get(token) || token);
 }
 // One insertion, deletion, substitution, or adjacent transposition.
 function oneEditAway(a, b) {
@@ -33,15 +35,17 @@ export function createEngine(records) {
   const vocabulary = [...df.keys()];
   return function search(input = {}) {
     if (!input || typeof input !== 'object' || Array.isArray(input)) throw Error('Arguments must be an object.');
-    if (Object.keys(input).some(key => !['query', 'type', 'category', 'limit', 'sort'].includes(key))) throw Error('Unknown search argument.');
-    const { query, type = '', category = '', limit = 10, sort = 'relevance' } = input;
-    if (typeof query !== 'string' || !query.trim() || query.length > 300) throw Error('Query must contain 1–300 characters.');
+    if (Object.keys(input).some(key => !['query', 'type', 'category', 'limit', 'offset', 'sort'].includes(key))) throw Error('Unknown search argument.');
+    const { query, type = '', category = '', limit = 10, offset = 0, sort = 'relevance' } = input;
+    if (typeof query !== 'string' || query.length > 300) throw Error('Query must be a string of at most 300 characters.');
     if (!['', 'learning-path', 'install-guide'].includes(type)) throw Error('Unknown content type.');
     if (typeof category !== 'string' || (category && !records.some(r => r.category === category))) throw Error('Unknown category.');
     if (!Number.isInteger(limit) || limit < 1 || limit > 100) throw Error('Limit must be an integer from 1 to 100.');
+    if (!Number.isInteger(offset) || offset < 0) throw Error('Offset must be a non-negative integer.');
     if (!['updated', 'relevance'].includes(sort)) throw Error('Unknown sort order.');
     const terms = [...new Set(tokenize(query).filter(t => !stop.has(t)))];
-    if (!terms.length) return { total: 0, results: [] };
+    const browsing = !query.trim();
+    if (!browsing && !terms.length) return { total: 0, results: [] };
     const expansions = terms.map(term => {
       const candidates = [{ token: term, weight: 1 }];
       if (/^\p{L}{3,}$/u.test(term)) {
@@ -61,7 +65,11 @@ export function createEngine(records) {
     });
     const ranked = [];
     for (const doc of docs) {
-      if ((type && doc.record.type !== type) || (category && doc.record.category !== category)) continue;
+      if ((type && doc.record.type !== type) || (type !== 'install-guide' && category && doc.record.category !== category)) continue;
+      if (browsing) {
+        ranked.push({ record: { ...doc.record, score: 0 }, tier: 0 });
+        continue;
+      }
       let score = 0, matched = 0, exact = 0;
       for (const candidates of expansions) {
         let termScore = 0;
@@ -85,10 +93,10 @@ export function createEngine(records) {
     }
     ranked.sort((a, b) => {
       // ISO date strings sort chronologically; missing dates follow dated results.
-      const dateOrder = sort === 'updated' ? (b.record.lastUpdated || '').localeCompare(a.record.lastUpdated || '') : 0;
+      const dateOrder = (browsing || sort === 'updated') ? (b.record.lastUpdated || '').localeCompare(a.record.lastUpdated || '') : 0;
       const coverageOrder = sort === 'relevance' ? b.tier - a.tier : 0;
       return dateOrder || coverageOrder || b.record.score - a.record.score || a.record.id.localeCompare(b.record.id);
     });
-    return { total: ranked.length, results: ranked.slice(0, limit).map(item => item.record) };
+    return { total: ranked.length, results: ranked.slice(offset, offset + limit).map(item => item.record) };
   };
 }

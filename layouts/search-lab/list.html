@@ -74,11 +74,11 @@
 <p>Explore Learning Paths and install guides by topic, tool, platform, or author.</p>
 </header>
 <form id="search-form" class="search-panel" role="search"><label for="query">What do you want to find?</label>
-<div class="query-row"><input id="query" name="q" type="search" maxlength="300" placeholder="Search topics, tools, or authors" autocomplete="off"><button class="search-button" type="submit">Search</button></div>
+<div class="query-row"><div class="query-field"><input id="query" name="q" type="search" maxlength="300" placeholder="Search topics, tools, or authors" autocomplete="off"><button id="clear-blank-search" class="query-clear" type="button" aria-label="Clear search results" hidden><span aria-hidden="true">×</span></button></div><button class="search-button" type="submit">Search</button></div>
 <div class="search-examples" aria-label="Example searches"><span>Try:</span><button type="button" data-query="llama.cpp">llama.cpp</button><button type="button" data-query="Hermes">Hermes</button><button type="button" data-query="Graviton">Graviton</button><button type="button" data-query="Docker">Docker</button><button type="button" data-query="gcc">gcc</button></div>
 <div class="filters"><div><label for="type">Content</label><select id="type"><option value="">All content</option><option value="learning-path">Learning Paths</option><option value="install-guide">Install guides</option></select></div>
 <div><label for="category">Learning Path category</label><select id="category"><option value="">All categories</option></select></div>
-<div><label for="sort">Sort by</label><select id="sort"><option value="relevance">Relevance</option><option value="updated">Last updated (newest first)</option></select></div></div></form>
+<div><label for="sort">Sort by</label><select id="sort"><option value="relevance">Relevance (newest first if blank)</option><option value="updated">Last updated (newest first)</option></select></div></div></form>
 <section class="search-results" aria-label="Search results">
 <p id="status" role="status" aria-live="polite">Loading search index…</p>
 <div id="search-diagnostics" class="search-diagnostics muted" aria-label="Search performance" hidden>

@@ -29,6 +29,16 @@ html[theme="dark"] .browser-search {
 .browser-search .search-panel { background: var(--search-surface); border: 1px solid var(--search-border); border-radius: 8px; padding: 28px; }
 .browser-search label { display: block; font-weight: 700; margin-bottom: 8px; }
 .browser-search .query-row { display: flex; gap: 12px; }
+.browser-search .query-field { position: relative; display: flex; flex: 1; min-width: 0; }
+.browser-search .query-clear {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  width: 32px; height: 36px; padding: 0; border: 0; border-radius: 4px;
+  background: transparent; color: var(--search-muted); font: inherit; font-size: 22px;
+  cursor: pointer; opacity: 0;
+}
+.browser-search .query-field:hover .query-clear,
+.browser-search .query-field:focus-within .query-clear { opacity: 1; }
+.browser-search .query-field:has(.query-clear:not([hidden])) input { padding-right: 44px; }
 .browser-search input, .browser-search select, .browser-search textarea {
   font: inherit; color: inherit; border: 1px solid var(--search-border);
   border-radius: 4px; background: var(--search-field); padding: 12px; min-height: 48px;
@@ -36,6 +46,7 @@ html[theme="dark"] .browser-search {
 .browser-search input { flex: 1; width: 100%; min-width: 0; }
 .browser-search input::placeholder { color: var(--search-muted); opacity: 1; }
 .browser-search select, .browser-search textarea { width: 100%; }
+.browser-search select:disabled { opacity: .55; cursor: not-allowed; }
 .browser-search .search-button {
   display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
   border: 1px solid var(--lp-accent-primary, #6023de); border-radius: 4px;
