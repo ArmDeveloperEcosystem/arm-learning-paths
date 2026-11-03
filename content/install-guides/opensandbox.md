@@ -215,6 +215,8 @@ The output is similar to:
 
 The `kill` command can return `deletion_requested` while removal completes. Repeat the list command if the sandbox is still present. The server configuration, CLI settings, and downloaded images remain available for future use.
 
+To shut the running server, press **Ctrl + C**. 
+
 ## Next steps
 
 You can now use OpenSandbox to create and manage Docker-backed sandboxes on Arm Linux. 
