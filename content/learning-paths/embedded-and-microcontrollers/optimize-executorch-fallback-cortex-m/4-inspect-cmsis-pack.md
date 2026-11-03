@@ -7,6 +7,14 @@ description: Trace the mixed ExecuTorch graph to versioned runtime, backend, ope
 layout: learningpathall
 ---
 
+## Understand what the CMSIS Pack provides
+
+The [ExecuTorch CMSIS Pack](https://www.keil.arm.com/packs/executorch-pytorch/overview/) is a *source Pack*, not a prebuilt runtime library. It contains the ExecuTorch sources plus metadata defining selectable components and their dependencies.
+
+CMSIS-Toolbox then uses that metadata to add only the chosen components to the
+application build. Arm Compiler then compiles those sources for the Cortex-M55
+target with the rest of the project. 
+
 ## See which Packs were resolved
 
 CMSIS-Toolbox has already acquired the software Packs needed by the project.
@@ -24,7 +32,7 @@ Get-Content .\cmsis-executorch-u55.cbuild-pack.yml
 Among the resolved entries, you can see the two Packs responsible for the
 mixed model:
 
-```yaml
+```output
 - resolved-pack: ARM::CMSIS-NN@8.0.0
 - resolved-pack: PyTorch::ExecuTorch@1.5.1
 ```
@@ -39,34 +47,18 @@ They have different responsibilities:
 The Pack lock records exact resolved versions so later builds don't silently
 move to newer installed Packs.
 
-## Understand what a source Pack provides
-
-The ExecuTorch CMSIS Pack is a *source Pack*, not a prebuilt runtime library.
-Its Pack Description file lists named components, their source files, their
-dependencies, and the conditions under which they can be selected.
-
-CMSIS-Toolbox uses that metadata to add only the chosen components to the
-application build. Arm Compiler then compiles those sources for the Cortex-M55
-target with the rest of the project. This is why one published Pack can support
-different CMSIS projects without shipping a separate binary runtime for every
-target configuration.
-
-`cbuild setup --packs` stores each installed Pack under the CMSIS Pack root in
-a vendor, name, and version hierarchy. Both `cbuild` and other CMSIS tools can
-then resolve `PyTorch::ExecuTorch@1.5.1` by its package identity. Manually
-downloading the same archive with `curl` would create an unrelated second copy
-and wouldn't improve the build.
-
 ## Trace the graph into the AI layer
+
+The AI layer is a generated CMSIS software layer that embeds the model and declares the runtime, backends, operators, and libraries needed to execute it.
 
 Open the AI layer generated from the `.pte` operator list:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux" language="bash">}}
-cat ai_layer/U55/ai_layer.clayer.yml
+cat ai_layer/ai_layer.clayer.yml
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}
-Get-Content .\ai_layer\U55\ai_layer.clayer.yml
+Get-Content .\ai_layer\ai_layer.clayer.yml
   {{< /tab >}}
 {{< /tabpane >}}
 

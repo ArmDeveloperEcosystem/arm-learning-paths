@@ -53,18 +53,18 @@ each of the ten output channels.
 
 ## Export the Cortex-M baseline
 
-Before we demonstrate fallback, it is useful to know which operations could be optimized by the Cortex-M backend. 
+Before we demonstrate fallback, it is useful to know which operations could be optimized by the Cortex-M backend itself. 
 Therefore, as a useful first step, we will specify `--mode cortex-m`, such that no operation is offered to the NPU. Run the diagnostic exporter from the repository root:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux" language="bash">}}
-.venv/bin/python export_cortex_m_fallback.py \
+python export_cortex_m_fallback.py \
   --mode cortex-m \
   --model-file model/model.py \
   --output-dir artifacts
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}
-.\.venv\Scripts\python.exe .\export_cortex_m_fallback.py `
+python .\export_cortex_m_fallback.py `
   --mode cortex-m `
   --model-file model/model.py `
   --output-dir artifacts
@@ -86,18 +86,29 @@ cortex_m.quantized_conv2d_nhwc.default: 2
 cortex_m.transpose.default: 1
 ```
 
-Before lowering, the graph contained two general convolution operations (Stride-1 and Stride-4). After
-lowering, both become `cortex_m.quantized_conv2d_nhwc` operations. The `_nhwc`
-suffix identifies the explicit channel-last layout used by the Cortex-M
-operator.
+Before lowering, the graph contained two general convolution operations (Stride-1 and Stride-4). The `aten` prefix identifies PyTorch’s ATen operator namespace. These operators describe the computation, but not the hardware or kernel that will perform it. Lowering replaces both with `cortex_m.quantized_conv2d_nhwc`, an INT8 convolution using NHWC layout.
 
 `aten.topk` is unchanged, so it will use the portable CPU kernel. The `cortex_m.quantize_*`
-and `cortex_m.dequantize_*` operators mark boundaries between floating-point and INT8
-regions. They are real work in the final graph, not annotation-only metadata.
+and `cortex_m.dequantize_*` operators mark boundaries between floating-point (FP32) and INT8
+regions. 
 
-The helper writes `artifacts/stride4_cortex_m.pte` and a JSON summary. This PTE
-is an inspection baseline; the project generator will create the program that
-is embedded in the final firmware.
+Confirm the generated artifacts from the export script:
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux" language="bash">}}
+ls -lh artifacts/stride4_cortex_m.*
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell">}}
+Get-ChildItem .\artifacts\stride4_cortex_m.*
+  {{< /tab >}}
+{{< /tabpane >}}
+
+The expected output contains:
+
+```output
+stride4_cortex_m.json
+stride4_cortex_m.pte
+```
 
 ## What you've accomplished and what's next
 

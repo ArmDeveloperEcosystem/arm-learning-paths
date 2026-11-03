@@ -15,17 +15,16 @@ Open it and inspect:
 ```yaml
 target-types:
   - type: SSE-300-U55
-    board: ARM::V2M-MPS3-SSE-300-FVP
-    device: ARM::SSE-300-MPS3
+    board: V2M-MPS3-SSE-300-FVP
+    device: SSE-300-MPS3
     variables:
       - Board-Layer: $SolutionDir()$/board/Corstone-300/Board-U55.clayer.yml
-      - AI-Layer: $SolutionDir()$/ai_layer/U55/ai_layer.clayer.yml
+      - AI-Layer: $SolutionDir()$/ai_layer/ai_layer.clayer.yml
 ```
 
-`SSE-300-U55` is the project's readable target name. The `ARM::` values identify
-specific board and device records supplied by installed Packs. CMSIS-Toolbox
-uses those identities to resolve startup files, memory information, and device
-conditions.
+`SSE-300-U55` is the project's readable target name. The board and device
+values identify records supplied by installed Packs. CMSIS-Toolbox uses those
+identities to resolve startup files, memory information, and device conditions.
 
 The solution's `mlops:` node is the single source for the NPU and Vela target
 settings:
@@ -41,6 +40,8 @@ mlops:
   model:
     clayer: $AI-Layer$
     name: TinyCNN
+    input-shape: 1x16x16x3
+    calibration-samples: 2
 ```
 
 `cbuild setup` resolves this into the `*.cbuild-mlops.yml` file consumed by
@@ -75,7 +76,7 @@ Each part has one job:
 - The App group initializes ExecuTorch, creates an input tensor, runs one
   inference, and prints the ten output values.
 
-The FVP configuration in `board/Corstone-300/fvp_config.txt` describes the
+The FVP configuration in `board/Corstone-300/fvp_config_u55.txt` describes the
 simulated hardware. It is separate from the Board layer because one configures
 the simulator while the other builds software for the simulated target.
 
@@ -84,9 +85,9 @@ the simulator while the other builds software for the simulated target.
 The AI-layer directory now contains these related model files:
 
 ```text
-ai_layer/U55/model.pte
-ai_layer/U55/model_pte.c
-ai_layer/U55/model_pte.h
+ai_layer/model.pte
+ai_layer/model_pte.c
+ai_layer/model_pte.h
 ```
 
 `model.pte` is the serialized ExecuTorch program. `model_pte.c` contains the

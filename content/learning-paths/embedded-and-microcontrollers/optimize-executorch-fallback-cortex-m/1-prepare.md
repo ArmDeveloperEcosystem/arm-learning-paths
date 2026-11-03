@@ -9,12 +9,11 @@ layout: learningpathall
 
 ## Understand the execution plan
 
-You will start with a small PyTorch model and export it as an ExecuTorch
-program (`.pte`).
+This learning path involves exporting a small PyTorch model into an ExecuTorch
+program (`.pte`). The CMSIS project then embeds the PTE bytes in the firmware as a C array.
 
-On the target, the Cortex-M CPU runs the ExecuTorch runtime and coordinates
-the whole program. The CPU reads the `.pte` and dispatches different parts 
-to either the Ethos-U NPU or to CPU kernels. You will use the ExecuTorch ahead-of-time export flow to divide one model across
+On the target, the Cortex-M CPU runs the ExecuTorch runtime and loads the embedded program. It then dispatches different parts of the operation
+to either the Ethos-U NPU or to CPU kernels. In this learning path, you will use the ExecuTorch ahead-of-time export flow to divide one model across
 three execution paths:
 
 - A stride-one convolution that Ethos-U55 accepts.
@@ -23,19 +22,21 @@ three execution paths:
 
 After Ethos-U partitioning and Cortex-M lowering, the graph follows this path:
 
-```text
+<!-- ```text
 input
   -> Ethos-U55 delegated convolution
   -> Cortex-M quantized operator using CMSIS-NN
   -> portable FP32 topk
 output
-```
+``` -->
+
+![Diagram of the simulated Corstone-300 FVP target showing the Cortex-M CPU running the ExecuTorch runtime and dispatching a stride-one convolution to Ethos-U55, while CMSIS-NN executes the stride-four convolution and a portable kernel executes topk on Cortex-M#center](images/cortex-m-execution-picture.svg "ExecuTorch execution paths")
 
 The three execution paths have different roles:
 
 | Technology | Role in this Learning Path | Expected performance |
 | --- | --- | --- |
-| Ethos-U | Runs supported graph regions on the NPU. (eg: Stride-1 convolution) | Expected to provide the best performance and energy efficiency for supported neural-network operations. |
+| [Ethos-U55](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u55) | Runs supported graph regions on the NPU. (eg: Stride-1 convolution) | Expected to provide the best performance and energy efficiency for supported neural-network operations. |
 | [CMSIS-NN](https://arm-software.github.io/CMSIS-NN/latest/index.html) | Supplies optimized Cortex-M kernels for quantized CPU operations that are unsupported by the NPU. (eg: Stride-4 convolution) | Preferred CPU fallback when a matching CMSIS-NN-backed operator is available. |
 | ExecuTorch portable kernels | Supply general CPU implementations for operations without an accelerated backend implementation. (eg: `topk` operation) | Compatibility fallback rather than the preferred performance path. |
 
@@ -50,18 +51,18 @@ so it will typically have less CPU fallback than U55. The same workflow still
 applies when a model contains operations that remain outside the U85 delegate.
 {{% /notice %}}
 
-In this Learning Path, you will clone a CMSIS-Executorch example that already contains the needed board support,
+In this Learning Path, you will clone a [CMSIS-Executorch example](https://github.com/Arm-Examples/cmsis-executorch) that already contains the needed board support,
 runner, memory configuration, and Fixed Virtual Platform (FVP) settings. You
-will then inspect and modify that to observe Cortex-M fallback using optimized CMSIS-NN microkernels.
+will then inspect and modify it to observe Cortex-M fallback using optimized CMSIS-NN microkernels.
 
 ## Clone the example project
 
-Clone the CMSIS-Executorch project used by this Learning Path:
+Begin by cloning the CMSIS-Executorch project used by this Learning Path:
 
 ```console
-git clone --branch add-corstone-300-u55 https://github.com/Kwash45/CMSIS-Executorch.git
+git clone https://github.com/Arm-Examples/CMSIS-Executorch.git
 cd CMSIS-Executorch
-git checkout 173c251496446b8f564c178c415e6f7f28081070
+git checkout 4002b63dcc3e27eb7444946a0dbf69b9a74d6fc9
 ```
 
 The explicit checkout pins the project to a revision that has been tested and validated.
@@ -103,17 +104,19 @@ activate the free, non-commercial Keil MDK Community license:
 armlm activate -product KEMDK-COM0 -server https://mdk-preview.keil.arm.com
 ```
 
-## Create the Python environment
+## Create and activate the Python environment
 
-Use the repository's setup wrapper to create `.venv` and install its pinned
-export dependencies:
+Use the repository's setup wrapper to create `.venv`, install its pinned
+export dependencies, and activate it in the current terminal:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux" language="bash">}}
 ./setup_venv.sh
+source .venv/bin/activate
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}
 .\setup_venv.bat
+.\.venv\Scripts\Activate.ps1
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -125,23 +128,21 @@ build tools, and Python packages:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux" language="bash">}}
-git --version
-python3 --version
-cbuild --version
-armclang --version
-.venv/bin/python -c "from importlib.metadata import version; print('ExecuTorch', version('executorch')); print('PyTorch', version('torch'))"
-  {{< /tab >}}
-  {{< tab header="Windows PowerShell" language="powershell">}}
-git --version
 python --version
 cbuild --version
 armclang --version
-.\.venv\Scripts\python.exe -c "from importlib.metadata import version; print('ExecuTorch', version('executorch')); print('PyTorch', version('torch'))"
+python -c "from importlib.metadata import version; print('ExecuTorch', version('executorch')); print('PyTorch', version('torch'))"
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell">}}
+python --version
+cbuild --version
+armclang --version
+python -c "from importlib.metadata import version; print('ExecuTorch', version('executorch')); print('PyTorch', version('torch'))"
   {{< /tab >}}
 {{< /tabpane >}}
 
-Your Git version can vary. Confirm that Python is between 3.10 and 3.13,
-`cbuild` reports 2.14.0, Arm Compiler for Embedded reports 6.24, and the final
+Confirm that Python is between 3.10 and 3.13,
+`cbuild` reports 2.15.0, Arm Compiler for Embedded reports 6.24, and the final
 two lines are:
 
 ```output
@@ -178,8 +179,5 @@ Each file will be explained in greater detail in subsequent pages.
 ## What you've accomplished and what's next
 
 You now have a pinned Corstone-300 U55 project, its matching Python packages,
-and its versioned Arm tools. The project already owns the board and application
-integration that previously needed many manual setup steps.
-
-Next, you will establish a CPU-only baseline before adding
+and its versioned Arm tools. Next, you will establish a CPU-only baseline before adding
 Ethos-U delegation on the U55 demonstration target.

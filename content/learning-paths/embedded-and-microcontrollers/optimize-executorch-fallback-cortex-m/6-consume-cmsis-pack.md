@@ -40,16 +40,16 @@ against the compilation database:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux" language="bash">}}
-.venv/bin/python verify_pack_sources.py \
+python verify_pack_sources.py \
   out/cmsis-executorch/SSE-300-U55/Debug/compile_commands.json
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}
-.\.venv\Scripts\python.exe .\verify_pack_sources.py `
+python .\verify_pack_sources.py `
   .\out\cmsis-executorch\SSE-300-U55\Debug\compile_commands.json
   {{< /tab >}}
 {{< /tabpane >}}
 
-The expected output is:
+The expected output is: 
 
 ```output
 PASS: ExecuTorch runtime was compiled from its declared CMSIS Pack
@@ -71,7 +71,7 @@ shows both the resolved Pack versions and the source files actually compiled.
 Start the Corstone-300 model and load the generated HEX image:
 
 ```console
-FVP_Corstone_SSE-300_Ethos-U55 -f board/Corstone-300/fvp_config.txt --simlimit 60 -a cpu0=out/cmsis-executorch/SSE-300-U55/Debug/cmsis-executorch.hex
+FVP_Corstone_SSE-300_Ethos-U55 -f board/Corstone-300/fvp_config_u55.txt -a out/cmsis-executorch/SSE-300-U55/Debug/cmsis-executorch.hex --simlimit 60
 ```
 
 The relevant output is:
@@ -81,10 +81,11 @@ Ethos-U version info:
         Arch:       v1.1.0
         MACs/cc:    128
         Cmd stream: v0
-ExecuTorch Ethos-U example: 7608 byte model
+ExecuTorch Ethos-U55-128 application: 7608 byte model
 Output: 10 element(s): 0.0532 -0.0239 0.0541 0.1064 0.0706 0.0395 0.0881 0.1340 0.0807 0.0064
 Test_result: PASS
 ```
+
 {{% notice Note %}}
 On Windows, the FVP can print warnings that `python3.dll` is unavailable and
 that the VIO or VSI bridges are disabled. This headless example doesn't use

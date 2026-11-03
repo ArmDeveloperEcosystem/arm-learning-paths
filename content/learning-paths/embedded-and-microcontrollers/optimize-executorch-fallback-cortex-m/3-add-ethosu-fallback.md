@@ -9,22 +9,11 @@ layout: learningpathall
 
 ## Partition the same model for Ethos-U
 
-The mixed export changes the order of decisions, not the model. It first gives
+The mixed export changes the order of decisions. It first gives
 `EthosUPartitioner` the opportunity to claim supported graph regions. It then
 applies Cortex-M lowering only to the operations left outside the delegate:
 
-```text
-quantize the graph
-       |
-       v
-partition supported work for Ethos-U
-       |
-       v
-lower supported remainder to Cortex-M operators
-       |
-       v
-leave the final remainder as portable operations
-```
+![Flow diagram showing that the graph is quantized, supported work is partitioned for Ethos-U, the supported remainder is lowered to Cortex-M operators, and the final remainder stays portable. This order preserves eligible NPU work before CPU lowering.#center](images/executorch-export-flow.svg "ExecuTorch partitioning and lowering order")
 
 Ordering matters. If Cortex-M lowering ran first, it could rewrite a
 convolution that should have been offered to the NPU.
@@ -37,14 +26,14 @@ Run the diagnostic exporter in mixed mode:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux" language="bash">}}
-.venv/bin/python export_cortex_m_fallback.py \
+python export_cortex_m_fallback.py \
   --mode ethos-u-fallback \
   --target ethos-u55-128 \
   --model-file model/model.py \
   --output-dir artifacts
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}
-.\.venv\Scripts\python.exe .\export_cortex_m_fallback.py `
+python .\export_cortex_m_fallback.py `
   --mode ethos-u-fallback `
   --target ethos-u55-128 `
   --model-file model/model.py `
@@ -52,8 +41,7 @@ Run the diagnostic exporter in mixed mode:
   {{< /tab >}}
 {{< /tabpane >}}
 
-Vela prints a summary for the region it compiles. The graph inspection at the
-end shows the complete program:
+Vela prints a summary for the region it compiles:
 
 ```output
 Relevant targets before Cortex-M lowering:
@@ -70,9 +58,9 @@ cortex_m.transpose.default: 2
 executorch_call_delegate: 1
 ```
 
-Compare this result with the baseline:
+The above summary is interpreted as follows:
 
-| Model work | Final graph target | Execution engine |
+| Model work | Final Graph target | Execution engine |
 | --- | --- | --- |
 | Stride-one convolution and supported surrounding work | `executorch_call_delegate` | Ethos-U55 |
 | Stride-four convolution | `cortex_m.quantized_conv2d_nhwc` | Cortex-M55 using CMSIS-NN |
@@ -89,13 +77,12 @@ Cortex-M convolution and portable `topk` that remain outside the delegate.
 
 ## Connect fallback to the CMSIS project
 
-The PTE you have just produced by runnning the diagnostic exporter is not used by the final CMSIS project. It's simply an inspection result that proves the graph split. 
 The CMSIS-Executorch project uses `create_ai_layer.py` to export the model again, generate the final PTE, and select the source components required to execute it. 
 
 However, some patches have to be made. The project generator within that project currently handles Ethos-U delegation, but it does not lower the remaining convolution to Cortex-M or select CMSIS-NN. The focused
 integration patch makes four related changes:
 
-- It declares `ARM::CMSIS-NN@8.0.0` as a project pack.
+- It adds `ARM::CMSIS-NN@8.0.0` to the solution's Pack list.
 - It applies Cortex-M lowering after Ethos-U partitioning.
 - It maps explicit-layout names such as `quantized_conv2d_nhwc` to their Pack
   component names.
@@ -107,15 +94,14 @@ Check and apply the patch, then inspect its small project diff:
 ```console
 git apply --check enable_cortex_m_fallback.patch
 git apply enable_cortex_m_fallback.patch
-git diff -- cmsis-executorch-u55.csolution.yml create_ai_layer.py
+git --no-pager diff -- cmsis-executorch-u55.csolution.yml create_ai_layer.py
 ```
 
 No board, runner, or linker changes are needed.
 
 ## Generate the target description
 
-If you opened a new terminal, initialize `vcpkg` and run
-`vcpkg-shell activate` again. Then resolve the declared packs and active target:
+Resolve the declared Packs and active target:
 
 ```console
 cbuild setup cmsis-executorch-u55.csolution.yml --active SSE-300-U55 --packs
@@ -129,19 +115,16 @@ writes three useful descriptions:
   Vela settings, and destination AI layer.
 - `cmsis-executorch-u55.cbuild-idx.yml` indexes the resolved build context.
 
-You need `--packs` on a fresh checkout. There is no separate manual Pack
-download or `cpackget add` step.
-
 ## Generate the AI layer
 
 Use the MLOps description to export the model and write its CMSIS AI layer:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux" language="bash">}}
-.venv/bin/python create_ai_layer.py cmsis-executorch-u55.cbuild-mlops.yml
+python create_ai_layer.py cmsis-executorch-u55.cbuild-mlops.yml
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}
-.\.venv\Scripts\python.exe .\create_ai_layer.py .\cmsis-executorch-u55.cbuild-mlops.yml
+python .\create_ai_layer.py .\cmsis-executorch-u55.cbuild-mlops.yml
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -149,7 +132,7 @@ The relevant final output is similar to:
 
 ```output
 [ai_layer] 7608 byte program, operators: ['Cortex-M dequantize_per_tensor', 'Cortex-M quantize_per_tensor', 'Cortex-M quantized_conv2d', 'Cortex-M transpose', 'Portable topk']
-[ai_layer] wrote .../ai_layer/U55/ai_layer.clayer.yml
+[ai_layer] wrote .../ai_layer/ai_layer.clayer.yml
 ```
 
 The generator writes the final `model.pte`, converts it to C data for the
