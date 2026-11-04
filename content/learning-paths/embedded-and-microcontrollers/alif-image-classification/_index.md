@@ -1,5 +1,5 @@
 ---
-title: Run image classification on an Alif Ensemble E8 DevKit using ExecuTorch and Ethos-U85
+title: Run image classification with ExecuTorch on Alif E8 and Ethos-U85
 
 description: Deploy a MobileNetV2 image classification model to an Alif Ensemble E8 DevKit and run inference on the Ethos-U85 NPU.
 

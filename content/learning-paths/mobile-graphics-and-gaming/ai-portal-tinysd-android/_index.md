@@ -1,5 +1,5 @@
 ---
-title: Run optimized TinySD image generation from the Arm AI Portal on Arm-powered Android devices
+title: Run Arm AI Portal TinySD image generation on Android
 description: Run an Arm-optimized TinySD image-generation model on Android with the supplied ExecuTorch adapter.
 minutes_to_complete: 60
 

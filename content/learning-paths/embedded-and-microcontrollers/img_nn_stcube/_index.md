@@ -1,5 +1,5 @@
 ---
-title: Build and run an image classification NN model on an STM32L4 Discovery board
+title: Run an image classification model on STM32L4 Discovery
 
 description: Develop a image classification neural network model and deploy it on an STM32 B-L475E-IOT01A2 board.
 

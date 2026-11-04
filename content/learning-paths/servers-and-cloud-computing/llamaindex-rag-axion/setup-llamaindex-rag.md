@@ -1,5 +1,5 @@
 ---
-title: Install and configure LlamaIndex on a Google Cloud C4A virtual machine
+title: Install LlamaIndex on a Google Axion C4A VM
 description: Learn how to install Python, Ollama, LlamaIndex, ChromaDB, and FastAPI on an Arm-based Google Cloud C4A virtual machine for a browser-based RAG application.
 weight: 5
 

@@ -1,5 +1,5 @@
 ---
-title: Debug Arm Zena CSS Reference Software Stack with Arm Development Studio
+title: Debug Arm Zena CSS with Arm Development Studio
 
 description: Learn how to debug the Arm Zena CSS Reference Software Stack using Arm Development Studio on a Fixed Virtual Platform, covering RSE, Safety Island, and Linux kernel debugging workflows.
 

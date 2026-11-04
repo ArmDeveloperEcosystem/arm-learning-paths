@@ -1,5 +1,5 @@
 ---
-title: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm-based servers
+title: Cache MySQL and PostgreSQL with Memcached on Arm
 
 description: Deploy Memcached as a cache for MySQL and PostgreSQL on Arm servers
 

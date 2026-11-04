@@ -1,5 +1,5 @@
 ---
-title: Trace how KleidiAI and SME2 accelerate llama.cpp from model load to token decode
+title: Trace KleidiAI and SME2 acceleration in llama.cpp
 weight: 3
 
 ### FIXED, DO NOT MODIFY

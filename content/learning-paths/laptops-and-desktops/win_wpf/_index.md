@@ -1,5 +1,5 @@
 ---
-title: Develop applications with Windows Presentation Foundation (WPF) on Windows on Arm
+title: Develop WPF apps for Windows on Arm
 
 description: Learn how to create and build Windows Presentation Foundation (WPF) applications and measure code execution performance uplift on Arm64.
 

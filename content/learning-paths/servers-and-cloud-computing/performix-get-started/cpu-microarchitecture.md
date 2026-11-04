@@ -1,5 +1,5 @@
 ---
-title: Identify CPU pipeline bottlenecks in the scalar dot-product application
+title: Find scalar dot-product CPU pipeline bottlenecks
 
 description: Use Arm Performix CPU Microarchitecture analysis to identify frontend and backend pipeline bottlenecks in a sample C++ application.
 

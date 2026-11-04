@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build and run an example application to obtain Arm GPU configuration information"
+title: "Build an app to inspect Arm GPU configuration"
 
 weight: 2 # 1 is first, 2 is second, etc.
 

@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Optimize bitmap scanning in databases with SVE and Neon on Arm servers"
+title: "Optimize database bitmap scanning with SVE and Neon"
 
 weight: 2
 

@@ -1,5 +1,5 @@
 ---
-title: "Build Nginx from source"
+title: "Build NGINX from source"
 weight: 3
 layout: "learningpathall"
 ---

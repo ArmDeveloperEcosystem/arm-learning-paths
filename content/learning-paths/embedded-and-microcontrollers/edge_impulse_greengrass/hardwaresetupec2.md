@@ -1,6 +1,6 @@
 ---
 hide_from_navpane: true
-title: Set up an Amazon EC2 instance to simulate an Edge Impulse Greengrass device
+title: Set up an Amazon EC2 instance as an Edge Impulse Greengrass device
 description: Launch an Arm-based Amazon EC2 instance running Ubuntu and install the dependencies needed to simulate an Edge Impulse Greengrass device.
 
 ### FIXED, DO NOT MODIFY

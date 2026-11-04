@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Build a native windows application using .NET 6 framework for Windows on Arm"
+title: "Build a native .NET 6 app for Windows on Arm"
 
 weight: 2
 

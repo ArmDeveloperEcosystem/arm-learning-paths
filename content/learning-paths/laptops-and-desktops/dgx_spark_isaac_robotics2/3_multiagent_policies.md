@@ -1,5 +1,5 @@
 ---
-title: Train multiple agents to coordinate two Shadow Hands in one simulation
+title: Train agents to coordinate two Shadow Hands in one simulation
 description: Train and compare MAPPO and IPPO policies for coordinated Shadow Hand object transfer with Isaac Lab on DGX Spark.
 weight: 4
 

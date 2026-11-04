@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Automate MongoDB Performance Benchmarking Infrastructure Setup with Pulumi"
+title: "Automate MongoDB benchmark setup with Pulumi"
 
 weight: 8 # (intro is 1), 2 is first, 3 is second, etc.
 

@@ -1,5 +1,5 @@
 ---
-title: (Optional) Use an object-detection model not currently supported by Scene Detector
+title: (Optional) Use an unsupported model with Scene Detector
 description: Register a compatible mobile object detector or generate and validate support for a model that needs another adapter.
 weight: 6
 
