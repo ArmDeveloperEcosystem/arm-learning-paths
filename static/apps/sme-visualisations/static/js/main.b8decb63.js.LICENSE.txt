@@ -1,3 +1,14 @@
+/*
+ * Arm SME visualisations
+ *
+ * Copyright 2026 Arm limited
+ *
+ * The source files are proprietary to Arm and made available
+ * solely to facilitate the performance of the SME
+ * visualisations. Viewing the code does not grant a license
+ * or any right to use, copy, or distribute it.
+ */
+
 /*!
 	Copyright (c) 2018 Jed Watson.
 	Licensed under the MIT License (MIT), see

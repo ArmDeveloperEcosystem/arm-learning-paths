@@ -1,6 +1,6 @@
 ---
-title: Follow a 32-bit transpose
-description: Step through an Arm SME transpose to trace 32-bit values from memory into ZA and back in a new order.
+title: 32-bit transpose
+description: Step through a matrix transpose using Arm SME.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -9,26 +9,50 @@ layout: learningpathall
 
 ## See how ZA transposes values
 
-A transpose exchanges rows and columns. ZA can help move a vector of values into one tile orientation and read those values back in the other. This view uses one **Matrix Data** area for both the original values and the transposed result.
+A transpose exchanges rows and columns. ZA tiles make this easy since we can move vectors of values into rows, and extract those values back as columns or vice versa. This visualisation shows a transpose in-place, where no external memory is used and the transposed result overwrites the original data.
 
 ## Use the playback controls
 
-Select the **rightmost double-arrow button (⏩)** to advance one step at a time. The **leftmost double-arrow button (⏪)** goes back one step. The **middle Play/Pause button** runs or pauses the sequence. Read the current-step description after each step; the highlights show the memory and ZA locations involved.
+Select the **rightmost double-arrow button (⏩)** to advance one step at a time. The **leftmost double-arrow button (⏪)** goes back one step. The **middle Play/Pause button** runs or pauses the remaining sequence. Reload the page to return to the initial state.
 
-## Trace the change
+The description of each step appears immediately below the "32-bit Transpose" title, and includes the tile addressing; the highlights show the memory and ZA locations involved.
 
-Follow one group from memory into ZA and back:
+## Trace the algorithm
 
-1. Advance through the first few steps. Notice that consecutive values from **Matrix Data** enter horizontal ZA rows.
-2. Continue until values begin returning to memory. Watch which vertical ZA slices are read.
-3. Compare the final arrangement in **Matrix Data** with the starting arrangement. Identify one value that moved from a row position to a column position.
+With SVL=256 bits and accessing 32-bit data elements, there are four logical ZA tiles available. We make use of all of them to meximise memory efficiency.
 
-<iframe src="/apps/sme-visualisations/#/sme/transpose32" title="Interactive 32-bit matrix transpose visualization" style="width: 100%; height: 850px; border: 1px solid #999;" loading="lazy"></iframe>
+Press play or advance manually to follow the algorithm:
 
-[Open the 32-bit transpose visualization in a full browser tab](/apps/sme-visualisations/#/sme/transpose32) if you need more space or the embedded view does not load.
+1. The first sixteen steps load data sequentially from memory into rows of the ZA0 and ZA1 tiles.
+2. The next sixteen steps load data sequentially from memory into rows of the ZA2 and ZA3 tiles.
+3. The next sixteen steps store data sequentially into memory from columns of the ZA0 and ZA2 tiles.
+4. The final sixteen steps store data sequentially into memory from columns of the ZA1 and ZA3 tiles.
+5. The transpose is achieved by loading data into rows and storing it back from columns.
+6. Satisfy yourself that the original matrix had data increasing sequentially along each row, whereas the resulting transposed matrix instead has data increasing sequentially down each column. To quickly see the original data, use browser reload to reset the visualisation 
+
+{{< fullscreen-iframe
+    src="/apps/sme-visualisations/#/sme/transpose32"
+    title="Interactive 32-bit matrix transpose"
+    height="800px"
+    width="100%"
+    border="1px solid #999"
+    loading="lazy"
+>}}
+
+If you need more space then use the "Full screen" button at the top-right, or [open the 32-bit transpose visualization in a full browser tab](/apps/sme-visualisations/#/sme/transpose32) if the embedded view does not load.
+
+## Why is the data mirrored left-to-right? ##
+
+Reload the page to reset the visualization, and advance one step. The first eight values of **Matrix Data** read 0, 1, 2, 3, 4, 5, 6, 7. The values loaded into ZA0 read 7, 6, 5, 4, 3, 2, 1, 0.
+
+There is no mirroring. Memory is not addressed as a two dimensional grid. Memory is addressed as one-dimensional storage from low to high addresses, like floors of a skyscraper. The visualization arranges **Matrix Data** as a grid so that you can see clearly how the data values relate to the matrix. By convention, humans draw matrices with the lowest indexed value at the top left. Here, the top-left element of the grid would have the lowest memory address, and elements to the right would have increasing memory addresses. Moving down from the end of one row to the beginning of the next, also increases memory address. Thus, in that first data read, the 0 is at the lowest address and the 7 is at the highest address.
+
+By convention we represent the ZA tiles as having column zero on the right side and row 0 at the top. This is purely a convention. The ZA storage is a register file, and there is no left, right, up or down in register files. Because of this convention, in that first data read the zero is stored in the top-right element of ZA0 and the 7 is stored in the top-left.
 
 ## What you've learned
 
-The tile provides different row and column views of stored values, so the example can change their layout as it copies them back to memory. Next, see what changes when the matrix extends beyond a complete tile.
+The ZA tiles provide row and column access to stored values, which can be used to transpose data in memory.
 
 For a related C example, see [Optimize memory layout with transposition](/learning-paths/cross-platform/multiplying-matrices-with-sme2/5-outer-product/#optimize-memory-layout-with-transposition). That kernel prepares a matrix operand for multiplication; it does not reproduce this animation step for step.
+
+Next, see what changes when the matrix size is not an exact multiple of the ZA tile size.

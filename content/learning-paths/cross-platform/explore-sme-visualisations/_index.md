@@ -7,9 +7,9 @@ minutes_to_complete: 40
 who_is_this_for: You want to understand Arm SME matrix data movement before reading or writing SME2 code.
 
 learning_objectives:
-    - Identify how the streaming vector length and element size change the views of ZA
-    - Trace transposition, packing, and padding between memory and ZA
-    - Compare three matrix multiplication views and explain how their input layouts affect loads and accumulation
+    - Understand how ZA storage and ZA tiles are affected by Streaming Vector Length and data element size.
+    - Explore transposition, packing, and padding to optimize memory layout.
+    - Compare three matrix multiplication implementations and explain how their input layouts affect data movement efficiency.
 
 prerequisites:
     - A browser with JavaScript enabled
