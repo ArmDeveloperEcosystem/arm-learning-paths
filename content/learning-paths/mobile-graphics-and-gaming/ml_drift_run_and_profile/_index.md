@@ -21,7 +21,7 @@ rerun_summary: false
 rerun_faqs: false
 
 ### Tags
-skilllevels: Intermediate
+skilllevels: Introductory
 subjects: ML
 armips:
     - Mali
