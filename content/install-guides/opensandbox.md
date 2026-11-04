@@ -244,7 +244,7 @@ The output is similar to:
 
 The `kill` command can return `deletion_requested` while removal completes. Repeat the `osb sandbox list` command if the sandbox is still present. The server configuration, CLI settings, and downloaded images remain available for future use.
 
-Return to the terminal with the running server and shut it by pressing **Ctrl + C**. 
+Return to the terminal with the running server and shut the server by pressing **Ctrl + C**. 
 
 ## Next steps
 
