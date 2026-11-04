@@ -52,11 +52,11 @@ You will now configure the stream analytics job such that the telemetry data wil
 Start by creating the Create Cosmos DB account and database:
 1. Log in to the Azure Portal.
 2. Select **Create a resource**, search for “Azure Cosmos DB”, and click **Create**:
-![img14 alt-text#center](figures/14.webp)
-![img15 alt-text#center](figures/15.png)
+![Azure Marketplace search results for Azure Cosmos DB, with the Microsoft Azure Cosmos DB tile visible for selection.#center](figures/14.webp)
+![Azure Marketplace Azure Cosmos DB product page with the Azure Cosmos DB plan selected and the Create button available.#center](figures/15.png)
 
 3. Select Azure Cosmos DB for NoSQL, then click **Create**.
-![img16 alt-text#center](figures/16.webp)
+![Azure Cosmos DB account creation page offering API choices, with the Create button under Azure Cosmos DB for NoSQL.#center](figures/16.webp)
 
 4. Fill in the required details:
 * Subscription: select your subscription.
@@ -67,7 +67,7 @@ Start by creating the Create Cosmos DB account and database:
 * Select serverless as capacity mode.
 * Apply Free Tier Discount: apply
 * Check Limit total account throughput.
-![img17 alt-text#center](figures/17.webp)
+![Azure Cosmos DB for NoSQL account Basics form with a resource group and account name entered, availability zones disabled, and Serverless selected as the capacity mode.#center](figures/17.webp)
 5. Click **Review + create**, then click **Create**.
 
 Once the deployment completes:
@@ -76,16 +76,16 @@ Once the deployment completes:
 * Select an appropriate partition key (recommended: /deviceId).
 * Enable analytical store capability to perform near real-time analytics on your operational data, without impacting the performance of transactional workloads: Off.
 * Click **OK**.
-![img18 alt-text#center](figures/18.webp)
+![Azure Cosmos DB Data Explorer New Container pane with a new IoTDatabase database, SensorReadings container, and /deviceId partition key entered.#center](figures/18.webp)
 
 ### Modify Stream Analytics Job
 Now update your query in Stream Analytics to write data from IoT Hub directly into Cosmos DB:
 1. Go to `IoTStreamAnalyticsJob`.
 2. Under Job topology, select **Outputs**.
 3. Click **Add output**, and select **Cosmos DB**:
-![img19 alt-text#center](figures/19.webp)
+![Azure Stream Analytics job Outputs page with the Add output menu open and Cosmos DB available as an output destination.#center](figures/19.webp)
 4. In the Cosmos DB pane, type "CosmosDBOutput" for the alias name, leave other fields at their default values, and click the **Save** button:
-![img20 alt-text#center](figures/20.webp)
+![Azure Stream Analytics Cosmos DB output form with alias CosmosDBOutput and the existing Cosmos DB account, IoTDatabase database, and SensorReadings container selected.#center](figures/20.webp)
 
 ### Update Your Stream Analytics Query
 Now that you have the output configured, lets modify the query. To do so, select Query under Job topology. Then, modify your existing query to explicitly specify your Cosmos DB output alias:
@@ -103,16 +103,16 @@ FROM
     IoTHubInput
 ```
 
-![img21 alt-text#center](figures/21.webp)
+![Azure Stream Analytics Query page showing IoT Hub sensor fields selected INTO CosmosDBOutput FROM IoTHubInput, so incoming telemetry is written to Cosmos DB.#center](figures/21.webp)
 
 Afterwards, click **Start job**, and then **Start**:
 
-![img22 alt-text#center](figures/22.webp)
+![Azure Stream Analytics Start job pane with Now selected as the job output start time and the Start button available.#center](figures/22.webp)
 
 ## Verify data flow in Cosmos DB
 To verify that your data pipeline is working correctly, first start your Python IoT simulator application `iot_simulator.py`. Ensure it's actively sending telemetry data. Next, open the Azure Portal and navigate to your Azure Cosmos DB resource. Under Data Explorer, select your database and then your container (e.g., SensorReadings). Once selected, click **Items** to view your stored data. Sensor readings streamed from your IoT device will appear on the right-hand side of the Data Explorer interface, similar to the screenshot below:
 
-![img23 alt-text#center](figures/23.webp)
+![Azure Cosmos DB Data Explorer with the SensorReadings Items list open and a stored JSON document showing device ID, temperature, pressure, humidity, and timestamp fields.#center](figures/23.webp)
 
 Azure Cosmos DB stores data as JSON documents within a NoSQL (document-based) structure, making it ideal for flexible and dynamic data, such as IoT telemetry. Each record (also called a document) is stored in a container (or collection) that doesn’t enforce a rigid schema. As a result, each document can contain different fields without requiring schema changes or migrations, which is particularly valuable when collecting data from diverse IoT devices with evolving attributes.
 
