@@ -1,6 +1,8 @@
 ---
 title: Pethost CLI
 
+draft: true
+
 description: Install the Pethost CLI on Arm Linux, macOS on Apple silicon, or Windows on Arm, and verify it so you can deploy and manage Pethost projects from the terminal.
 
 additional_search_terms:
