@@ -9,7 +9,14 @@ official_docs: https://open-sandbox.ai/getting-started/
 author: Anupras Mohapatra
 
 test_maintenance: false
-draft: true
+
+additional_search_terms:
+- opensandbox
+- osb
+- sandbox
+- docker
+- containers
+- arm64
 
 weight: 1
 tool_install: true
@@ -20,7 +27,7 @@ layout: installtoolsall
 
 OpenSandbox provides a server and a command-line interface (CLI) for creating and managing isolated environments. Its Docker runtime runs sandboxes as containers that share the host Linux kernel. 
 
-You'll install OpenSandbox on an `aarch64` host with Ubuntu 24.04 LTS or later, start a local server, create a sandbox, and run a Python command inside it to verify the installation. 
+You'll install OpenSandbox on an `aarch64` host with Ubuntu 24.04 LTS or later. Then, you'll start a local server and create a sandbox. Finally, you'll run a Python command inside it to verify the installation. 
 
 ## Before you begin
 
@@ -35,7 +42,7 @@ cat /etc/os-release
 
 Confirm that the architecture is `aarch64` and that the operating system is Ubuntu 24.04 LTS or later.
 
-You also need Docker installed on your system. For installation steps, see the [Docker Engine install guide](/install-guides/docker/docker-engine/).
+You also need Docker Engine version 20.10 or later installed on your system. For installation steps, see the [Docker Engine install guide](/install-guides/docker/docker-engine/).
 
 Confirm that Docker works without `sudo`:
 
@@ -85,14 +92,14 @@ Generate a server configuration for the Docker runtime:
 opensandbox-server init-config ~/.sandbox.toml --example docker
 ```
 
-The Docker example sets `host` under `[server]` to `127.0.0.1` by default. Confirm this is the case in `~/.sandbox.toml`:
+`host` under `[server]` is set to `127.0.0.1` by default. Confirm that this is the case in `~/.sandbox.toml`:
 
 ```toml
 [server]
 host = "127.0.0.1"
 ```
 
-Binding the server to localhost keeps its API reachable from the same host without exposing port 8080. 
+Binding the server to localhost keeps its API reachable from the same host without exposing port `8080`.
 
 The example configuration has no API key. Use this configuration only for testing the installation. If the server asks you to acknowledge the unauthenticated configuration, enter `YES`.
 
@@ -135,7 +142,7 @@ The first run downloads the Python image and the OpenSandbox execution helper im
 
 The output is similar to:
 
-```json
+```output
 {
   "id": "5e4b52ca-9947-4f3a-a1a7-6254239cd431",
   "status": "created",
@@ -150,7 +157,7 @@ Copy the `id` into a shell variable in the second terminal:
 sandbox_id="<sandbox-id>"
 ```
 
-Replace `<sandbox-id>` with the `id` returned by your `create` command. 
+Replace `<sandbox-id>` with the `id` that was returned by your `create` command. 
 
 Check that the sandbox is healthy:
 
@@ -160,7 +167,7 @@ osb sandbox health "$sandbox_id" -o json
 
 The output is similar to:
 
-```json
+```output
 {
   "sandbox_id": "5e4b52ca-9947-4f3a-a1a7-6254239cd431",
   "healthy": true
@@ -193,11 +200,11 @@ The expected output is:
 42
 ```
 
-The Python result confirms that command execution works through the OpenSandbox CLI.
+The Python result confirms that you can run a command in the sandbox through the OpenSandbox CLI.
 
-## Delete the test sandbox
+## Clean up test resources 
 
-Delete the sandbox:
+Delete the test sandbox:
 
 ```bash
 osb sandbox kill "$sandbox_id" -o json
@@ -205,7 +212,7 @@ osb sandbox kill "$sandbox_id" -o json
 
 The output is similar to:
 
-```json
+```output
 [
   {
     "sandbox_id": "5e4b52ca-9947-4f3a-a1a7-6254239cd431",
@@ -222,7 +229,7 @@ osb sandbox list -o json
 
 The output is similar to:
 
-```json
+```output
 {
   "items": [],
   "pagination": {
@@ -237,7 +244,7 @@ The output is similar to:
 
 The `kill` command can return `deletion_requested` while removal completes. Repeat the `osb sandbox list` command if the sandbox is still present. The server configuration, CLI settings, and downloaded images remain available for future use.
 
-To shut the running server, press **Ctrl + C**. 
+After deleting the sandbox, return to the terminal with the running server. Shut the server by pressing **Ctrl + C**. 
 
 ## Next steps
 
