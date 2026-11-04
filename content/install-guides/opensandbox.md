@@ -10,6 +10,14 @@ author: Anupras Mohapatra
 
 test_maintenance: false
 
+additional_search_terms:
+- opensandbox
+- osb
+- sandbox
+- docker
+- containers
+- arm64
+
 weight: 1
 tool_install: true
 multi_install: false
@@ -84,14 +92,14 @@ Generate a server configuration for the Docker runtime:
 opensandbox-server init-config ~/.sandbox.toml --example docker
 ```
 
-The Docker example sets `host` under `[server]` to `127.0.0.1` by default. Confirm this is the case in `~/.sandbox.toml`:
+`host` under `[server]` is set to `127.0.0.1` by default. Confirm that this is the case in `~/.sandbox.toml`:
 
 ```toml
 [server]
 host = "127.0.0.1"
 ```
 
-Binding the server to localhost keeps its API reachable from the same host without exposing port `8080`. 
+Binding the server to localhost keeps its API reachable from the same host without exposing port `8080`.
 
 The example configuration has no API key. Use this configuration only for testing the installation. If the server asks you to acknowledge the unauthenticated configuration, enter `YES`.
 
