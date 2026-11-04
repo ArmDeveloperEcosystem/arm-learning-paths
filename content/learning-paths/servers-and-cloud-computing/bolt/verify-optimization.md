@@ -82,6 +82,8 @@ The Branch MPKI also decreases—from 16 to about 10—because BOLT can improve 
 
 You can also compute the MPKI values manually using `perf stat`, as described in the [Good BOLT Candidates](/learning-paths/servers-and-cloud-computing/bolt/good-candidates/) section.
 
-## Summary
+## What you've learned and what's next
 
-In this learning path, you learned how to use BOLT to optimize binary code layout using several profiling methods. The optimized binaries improved instruction locality, reduced frontend stalls, and delivered measurable performance gains.
+You’ve compared runtime measurements and applied the [TopDown Methodology](https://developer.arm.com/documentation/109542/02/Arm-Topdown-methodology) to evaluate BOLT’s optimizations.
+
+Next, you’ll generate heatmaps to inspect how BOLT changed the binary’s code layout.

@@ -1,5 +1,5 @@
 ---
-title: Understand how SME2 and KleidiAI accelerate LLM inference in llama.cpp
+title: Explore SME2 and KleidiAI acceleration in llama.cpp
 weight: 2
 
 ### FIXED, DO NOT MODIFY

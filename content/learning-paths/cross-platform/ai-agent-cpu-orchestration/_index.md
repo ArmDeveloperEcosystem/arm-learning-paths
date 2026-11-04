@@ -1,5 +1,5 @@
 ---
-title: Run a local AI agent with Ollama to visualize CPU orchestration on Arm
+title: Visualize Arm CPU orchestration with Ollama and a local AI agent
 
 description: Run a local AI concierge agent with Ollama on Arm and visualize how the CPU orchestrates web search, scraping, and text processing while Gemma 3 handles model reasoning.
 

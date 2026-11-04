@@ -1,5 +1,5 @@
 ---
-title: Migrate applications between Arm platforms using Kiro Arm SoC Migration Power
+title: Migrate apps between Arm platforms with Kiro powers
 description: Learn how to migrate C applications between Arm platforms using Kiro's AI-assisted tooling to identify hardware dependencies and implement abstraction layers for cross-platform compatibility.
 
 minutes_to_complete: 60

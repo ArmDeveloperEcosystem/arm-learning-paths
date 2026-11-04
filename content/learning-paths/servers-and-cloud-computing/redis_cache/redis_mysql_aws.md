@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy Redis as a cache for MySQL on an AWS Arm based Instance"
+title: "Deploy Redis as a cache for MySQL on an AWS Arm-based VM"
 
 weight: 2 # 1 is first, 2 is second, etc.
 

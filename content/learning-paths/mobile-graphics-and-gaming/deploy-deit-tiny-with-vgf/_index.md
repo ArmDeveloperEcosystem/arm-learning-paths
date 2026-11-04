@@ -43,10 +43,10 @@ generated_summary_faq:
     answer: >-
       Use the ExecuTorch 1.5.1 release for both the Python package and the native source. This
       release uses stable PyTorch and TorchAO.
-  - question: Do the Vulkan packages install my GPU’s driver?
+  - question: Do the Vulkan packages install my GPU's driver?
     answer: >-
-      No. The listed packages provide Vulkan libraries and tools but don't install a vendor‑specific
-      driver. Ensure that your GPU’s Vulkan driver is installed and working before building and running
+      No. The listed packages provide Vulkan libraries and tools but don't install a vendor-specific
+      driver. Ensure that your GPU's Vulkan driver is installed and working before building and running
       the VGF runner.
   - question: What does the helper script do?
     answer: >-

@@ -1,5 +1,5 @@
 ---
-title: Deploy IoT applications with AWS IoT Greengrass and Arm Virtual Hardware
+title: Deploy IoT apps with AWS IoT Greengrass and Arm Virtual Hardware
 
 description: Learn how to set up AWS IoT Greengrass Core on Arm Virtual Hardware and deploy AWS Greengrass components to a virtual Raspberry Pi 4 device.
 

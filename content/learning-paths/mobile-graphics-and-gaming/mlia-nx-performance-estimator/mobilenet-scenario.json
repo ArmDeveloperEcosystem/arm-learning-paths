@@ -1,0 +1,40 @@
+{
+  "commands": [
+    {
+      "dispatch_graph": {
+        "bindings": [
+          { "id": 0, "resource_ref": "input_0_ref", "set": 0 },
+          { "id": 1, "resource_ref": "output_0_ref", "set": 0 }
+        ],
+        "graph_ref": "vgf_graph_ref",
+        "shader_substitutions": []
+      }
+    }
+  ],
+  "resources": [
+    {
+      "graph": {
+        "src": "baseline.vgf",
+        "uid": "vgf_graph_ref"
+      }
+    },
+    {
+      "tensor": {
+        "dims": [1, 224, 224, 3],
+        "format": "VK_FORMAT_R8_UINT",
+        "shader_access": "readonly",
+        "src": "input.npy",
+        "uid": "input_0_ref"
+      }
+    },
+    {
+      "tensor": {
+        "dims": [1, 1001],
+        "dst": "output.npy",
+        "format": "VK_FORMAT_R8_UINT",
+        "shader_access": "writeonly",
+        "uid": "output_0_ref"
+      }
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 ---
-title: Profile llama.cpp performance with Arm Streamline and KleidiAI LLM kernels
+title: Profile llama.cpp with Arm Streamline and KleidiAI
 
 minutes_to_complete: 60
 

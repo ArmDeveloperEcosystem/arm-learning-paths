@@ -1,5 +1,5 @@
 ---
-title: Run an optimized vision-language model from the Arm AI Portal on Android
+title: Run an Arm AI Portal vision-language model on Android
 description: Run the Arm-optimized Qwen3-VL model locally with llama.cpp to generate text from an image and prompt on Android.
 
 minutes_to_complete: 35
@@ -87,7 +87,7 @@ armips:
 tools_software_languages:
     - Android Studio
     - Java
-    - C++
+    - CPP
     - llama.cpp
     - KleidiAI
     - Arm AI Portal

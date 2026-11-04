@@ -12,7 +12,7 @@ layout: learningpathall
 Project Moku is an Unreal Engine sample project developed by Arm that demonstrates neural rendering technologies for mobile platforms. Built on Unreal 5.6, the project provides a controlled environment for testing Neural Frame Rate Upscaling (NFRU), along with complementary neural rendering techniques such as Neural Super Sampling (NSS) and Neural Super Sampling and Denoising (NSSD). Project Moku is designed to exercise dedicated neural accelerators on GPUs with built-in neural processing support.
 
 {{% notice Info %}}
-To learn more about neural graphics techniques — including NFRU — and evaluate how they fit your game, see the [Neural Graphics Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/) Learning Path.
+To learn more about neural graphics techniques — including NFRU — and evaluate how they fit your game, see the [Neural Technology Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/) Learning Path.
 {{% /notice %}}
 
 ![Project Moku corridor scene used as a controlled environment for comparing NFRU-generated and rendered frames#center](./images/moku_intro.webp "Project Moku corridor scene")

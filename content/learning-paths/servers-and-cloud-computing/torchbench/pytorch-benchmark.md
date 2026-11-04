@@ -1,5 +1,5 @@
 ---
-title: Measure and accelerate the inference performance of PyTorch models on Arm servers
+title: Benchmark PyTorch inference on Arm servers
 weight: 2
 
 ### FIXED, DO NOT MODIFY

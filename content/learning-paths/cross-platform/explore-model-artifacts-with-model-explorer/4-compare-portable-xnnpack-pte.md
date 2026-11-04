@@ -14,7 +14,7 @@ You'll focus on Cortex-A CPU deployment. Cortex-A processors are application-cla
 
 The portable `.pte` uses ExecuTorch portable kernels. A portable kernel is a general ExecuTorch implementation of an operator. Portable kernels exist so ExecuTorch programs can run with a small runtime and broad operator coverage, even when no specialized backend is available. They are important for correctness, portability, fallback, and bring-up on new targets.
 
-Portable kernels aren't usually the fastest CPU path. The kernels prioritize broad support and a lightweight deployment model, rather than using every architecture-specific optimization available on a modern Cortex-A CPU. For transformer models such as OPT-125M, much of the runtime cost comes from linear layers and matrix multiplications. Those operations benefit strongly from optimized CPU kernels.
+Portable kernels aren't usually the fastest CPU path. The kernels prioritize broad support and a lightweight deployment model, rather than using every architecture-specific optimization available on a modern Cortex-A CPU. For transformer models such as GPT-2, much of the runtime cost comes from linear layers and matrix multiplications. Those operations benefit strongly from optimized CPU kernels.
 
 [XNNPACK](https://github.com/google/XNNPACK) is the optimized CPU backend used by ExecuTorch for many Arm CPU deployments. During [export and lowering](https://docs.pytorch.org/executorch/stable/using-executorch-export.html), the XNNPACK partitioner finds supported parts of the graph and turns them into delegated regions. At runtime, those regions execute with XNNPACK instead of the default portable-kernel path. Operators that XNNPACK doesn't support, or graph sections that can't be grouped into an XNNPACK region, remain on the default ExecuTorch path.
 
@@ -36,15 +36,13 @@ To summarize the different CPU paths:
 
 ## Compare CPU deployment artifacts
 
-You'll compare two `.pte` files generated from the same Open Pre-trained Transformer (OPT) model: [`facebook/opt-125m`](https://huggingface.co/facebook/opt-125m).
+You'll compare two `.pte` files generated from the same [`openai-community/gpt2`](https://huggingface.co/openai-community/gpt2) model.
 
-OPT-125M is a 125-million-parameter, decoder-only transformer language model from Meta. The model is a small member of the OPT family, which makes it useful for demonstrations. OPT-125M is large enough to contain transformer operations such as embeddings, attention, linear layers, matrix multiplication, reshapes, and masking, but small enough to inspect and run on edge-class Arm systems.
-
-The FP32 artifacts that you'll use come from the [ExecuTorch on Arm Practical Labs](https://github.com/arm-education/executorch_on_arm_labs).
+GPT-2 is a decoder-only transformer language model from OpenAI. It contains embeddings, attention, linear layers, matrix multiplication, reshapes, masking, and GELU activations, so it provides a useful example for comparing portable and optimized CPU execution paths.
 
 ## Open the portable kernel PTE
 
-Open `opt125m_cortex_a_portable.pte` in Model Explorer and inspect the graph structure. 
+Open `gpt2_cortex_a_portable.pte` in Model Explorer and inspect the graph structure.
 This file is the baseline ExecuTorch program without XNNPACK delegation. It shows how the model looks when the graph runs through the default ExecuTorch portable-kernel path. 
 
 Inspect the graph and look for the following:
@@ -57,20 +55,20 @@ Inspect the graph and look for the following:
 
 The following is a small snippet image:
 
-![Portable OPT-125M PTE graph showing ATen KernelCall nodes and no XNNPACK delegate regions, establishing the default CPU execution baseline.#center](portable.png "Portable OPT-125M execution graph")
+![Model Explorer showing the portable GPT-2 PTE graph with ATen KernelCall nodes and no XNNPACK delegate regions. This establishes the default CPU execution baseline for comparison with the delegated graph.#center](portable.png "Portable GPT-2 execution graph")
 
 In the artifact, notice the following:
 
-- The graph has 600 operator nodes and no XNNPACK delegate regions. The visible operators are regular ExecuTorch `KernelCall` nodes.
+- The graph has 589 operator nodes and no XNNPACK delegate regions. Including the graph input and output nodes, Model Explorer displays 591 nodes.
 - Most visible operator names use the `aten::` namespace. ATen is PyTorch's core operator library.
 - The model has two fixed-shape inputs with shape `[1, 128]`, corresponding to a batch size of 1 and a fixed sequence length of 128 tokens.
-- The output shape is `[1, 50272]`, which represents logits over the OPT vocabulary for the wrapped last-token output.
-- Repeated transformer patterns are visible. Look for groups of `aten::addmm`, `aten::bmm`, `aten::_softmax`, `aten::native_layer_norm`, `aten::relu`, and residual `aten::add` operations.
+- The output shape is `[1, 50257]`, which represents logits over the GPT-2 vocabulary for the wrapped last-token output.
+- Repeated transformer patterns are visible. Look for groups of `aten::addmm`, `aten::bmm`, `aten::_softmax`, `aten::native_layer_norm`, residual `aten::add`, and the `aten::pow`, `aten::tanh`, and `aten::mul` operations used by the GELU activations.
 - Many layout and shape-manipulation operators are present, such as `aten::permute_copy`, `aten::expand_copy`, `aten::unsqueeze_copy`, and `dim_order_ops::_clone_dim_order`. These operators are useful to notice because they can affect memory movement and become boundaries around optimized backend regions.
 
 ## Open the XNNPACK PTE
 
-Open `opt125m_cortex_a_xnnpack.pte` and compare it with the portable graph. 
+Open `gpt2_cortex_a_xnnpack.pte` and compare it with the portable graph.
 
 Inspect the graph and look for the following:
 
@@ -83,16 +81,16 @@ Inspect the graph and look for the following:
 
 The backend has changed the execution plan:
 
-![XNNPACK OPT-125M graph showing multiple XnnpackBackend delegate calls interleaved with ATen operators, demonstrating partial and fragmented CPU delegation.#center](xnnpack.png "Fragmented XNNPACK delegation in OPT-125M")
+![Model Explorer showing the GPT-2 XNNPACK graph with several XnnpackBackend delegate calls interleaved with ATen operators. The alternating nodes show that supported work is delegated while other operations remain on the default path.#center](xnnpack.png "Fragmented XNNPACK delegation in GPT-2")
 
-- The top-level graph is smaller than the portable graph, with about 335 operator nodes instead of about 600.
-- The graph contains many `XnnpackBackend` nodes. In this artifact, these represent the delegated regions that'll execute through XNNPACK.
-- Model Explorer exposes the XNNPACK delegate subgraphs. Open a delegate subgraph to see backend-level operators such as `XNNFullyConnected`, `XNNBatchMatrixMultiply`, `XNNStaticTranspose`, `XNNAdd`, `XNNMultiply`, and `XNNSoftmax`.
-- The input and output contract remains the same as the portable artifact: two `[1, 128]` inputs and one `[1, 50272]` output.
+- The top-level graph is smaller than the portable graph, with 336 operator nodes instead of 589. Including the graph input and output nodes, Model Explorer displays 338 nodes.
+- The graph contains 75 `XnnpackBackend` nodes. These represent the delegated regions that'll execute through XNNPACK.
+- Model Explorer exposes the XNNPACK delegate subgraphs. Open a delegate subgraph to see backend-level operators such as `XNNFullyConnected`, `XNNBatchMatrixMultiply`, `XNNStaticTranspose`, `XNNStaticReshape`, `XNNAdd`, `XNNMultiply`, `XNNTanh`, and `XNNSoftmax`.
+- The input and output contract remains the same as the portable artifact: two `[1, 128]` inputs and one `[1, 50257]` output.
 - Some `aten::` operators still remain at the top level, including shape, masking, normalization, and elementwise operations. These are the parts of the graph that stayed on the default ExecuTorch path.
-- The graph isn't one single XNNPACK region. OPT-125M is a transformer with attention, masking, reshapes, and layout changes, so delegation is useful but fragmented into many backend regions.
+- The graph isn't one single XNNPACK region. GPT-2 contains attention, masking, reshapes, and layout changes, so delegation is fragmented into many backend regions.
 
-![Expanded XNNPACK delegate subgraph showing backend operators that replace supported regions of the portable ExecuTorch graph.#center](xnnpack_subgraph.png "Operators inside an XNNPACK delegate region")
+![Model Explorer showing an expanded GPT-2 XNNPACK delegate subgraph. Backend operators inside the subgraph replace a supported region of the portable ExecuTorch graph.#center](xnnpack_subgraph.png "Operators inside a GPT-2 XNNPACK delegate region")
 
 This is the key difference to notice: XNNPACK doesn't replace the whole `.pte`. It captures supported subgraphs and leaves the rest of the program in ExecuTorch. In performance work, the balance between large delegated regions and remaining default-path operators is often more important than the raw number of delegate nodes.
 
@@ -109,7 +107,7 @@ Use the following table to guide your comparison:
 
 ## What you've accomplished and what's next
 
-You've compared the same FP32 OPT-125M model exported as a portable Cortex-A `.pte` and as an XNNPACK-delegated Cortex-A `.pte`. The portable artifact shows the baseline ExecuTorch execution plan with mostly `aten::` `KernelCall` nodes. The XNNPACK artifact shows how supported CPU subgraphs are replaced by `XnnpackBackend` regions, while unsupported or awkward graph sections remain on the default ExecuTorch path.
+You've compared the same FP32 GPT-2 model exported as a portable Cortex-A `.pte` and as an XNNPACK-delegated Cortex-A `.pte`. The portable artifact shows the baseline ExecuTorch execution plan with mostly `aten::` `KernelCall` nodes. The XNNPACK artifact shows how supported CPU subgraphs are replaced by `XnnpackBackend` regions, while unsupported or awkward graph sections remain on the default ExecuTorch path.
 
 You've also seen that backend delegation is not all-or-nothing. For transformer models, shape changes, masking, normalization, and layout operations can fragment the graph. Performance analysis depends on both what was delegated and what stayed outside the delegate.
 

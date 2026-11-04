@@ -1,5 +1,5 @@
 ---
-title: Provision a Google Axion C4A virtual machine for Yocto image builds on Arm
+title: Provision a Google Axion C4A VM for Arm Yocto builds
 description: Provision a Google Axion C4A virtual machine with Ubuntu 22.04 and sufficient storage to build NVIDIA Jetson Yocto images on Arm.
 weight: 3
 

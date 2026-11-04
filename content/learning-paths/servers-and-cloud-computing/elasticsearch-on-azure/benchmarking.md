@@ -1,5 +1,5 @@
 ---
-title: Benchmark Elasticsearch using ESRally on the Cobalt 100 virtual machine instance
+title: Benchmark Elasticsearch with ESRally on Azure Cobalt 100
 
 weight: 5
 

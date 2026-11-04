@@ -1,5 +1,5 @@
 ---
-title: Explore Grace Blackwell architecture for efficient quantized LLM inference
+title: Explore Grace Blackwell for quantized LLM inference
 weight: 2
 
 ### FIXED, DO NOT MODIFY

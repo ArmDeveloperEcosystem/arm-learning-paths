@@ -21,7 +21,7 @@ Create a file called `quantize_and_export_vgf.py` and add the following code.
 
 This example uses CIFAR-10 as a convenient image source. It constructs a low-resolution input by downsampling an image, then trains the model to reconstruct the original image. This is a practical proxy for a real neural upscaler.
 
-The export also enables two optional debug settings. The `--emit-debug-info` Model Converter flag embeds ExecuTorch stack traces and module metadata in the VGF, while `dump_debug_info(VgfCompileSpec.DebugMode.TOSA)` preserves the corresponding TOSA debug information during lowering. You can omit both settings when you don't need debug information.
+The export also enables two optional debug settings. The `--emit-debug-info` Model Converter flag preserves debug information when converting TOSA to VGF, while `dump_debug_info(VgfCompileSpec.DebugMode.TOSA)` embeds ExecuTorch stack traces and module metadata in the intermediate TOSA graph. You can omit both settings when you don't need debug information.
 
 ```python
 import torch

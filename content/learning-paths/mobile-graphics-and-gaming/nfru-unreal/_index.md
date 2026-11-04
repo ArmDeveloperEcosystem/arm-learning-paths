@@ -35,34 +35,25 @@ generated_summary_faq:
   faq_generated_at: '2026-07-20T21:53:46Z'
   faq_source_hash: 58ca900e7970e8d2d3dded0aacca94ff1c237ef3881005d422ba95f3f1d8f9b9
   summary: >-
-    You’ll configure NFRU in Unreal Engine using Arm’s Neural Graphics
-    Development Kit and ML Extensions for Vulkan. You’ll build the Neural Graphics SDK, enable the
-    Vulkan ML emulation layers, and add the Neural Rendering plugin to a C++ project. After configuring
-    Vulkan as the rendering hardware interface, you’ll validate NFRU in **Standalone Game** mode and
-    inspect frame-generation statistics and intermediate buffers. You’ll then learn to adjust NFRU settings with
-    console variables, visualize NFRU intermediate buffers, and inspect frames with RenderDoc for Arm GPUs
-    to examine Vulkan events, resources, and pipeline stages. By the end, you’ll have a working NFRU
-    project and a repeatable workflow for validation and debugging.
+    You'll clone the Arm Neural Graphics plugin, download the Vulkan ML emulation layers, and add the plugin to an Unreal Engine C++ project. After configuring Vulkan, you'll test NFRU in Standalone Game or a packaged Windows build. You'll use console variables, the debug view, frame-generation statistics, and RenderDoc for Arm GPUs to inspect and tune NFRU.
   faqs:
   - question: Which Unreal Engine project type should I create to use NFRU?
     answer: >-
-      Create a **Third Person** template project using the **C++** option. A C++ project is required
-      to build the Neural Graphics for Unreal plugin.
+      Create a **Third Person** template project using the **C++** option. You need a C++ project to build the Arm Neural Graphics plugin.
   - question: Why doesn’t NFRU work in the standard Unreal Editor viewport?
     answer: >-
       NFRU isn’t supported in the standard viewport. Use **Standalone Game** mode or create a packaged
       build to run and validate NFRU.
   - question: Where should I place the Neural Graphics plugin in my project?
     answer: >-
-      Create a `Plugins` directory in the project's root directory to place the plugin. Then, create a symbolic link to the plugin folder for your Unreal Engine version. You need administrator permissions to create the symbolic link.
+      Create a `Plugins` directory in your project root, then copy the complete `neural-graphics-for-unreal` folder into it. Keep the downloaded emulation-layer files inside the plugin folder.
   - question: Which Vulkan SDK version do I need for ML extension emulation?
     answer: >-
       Install Vulkan SDK version `1.4.321.0` or newer. Use Vulkan Configurator to enable the emulation
       layers for running ML workloads through Vulkan ML extensions.
   - question: How do I tune or debug NFRU while testing?
     answer: >-
-      Adjust NFRU console variables, such as `r.NFRU.Enable`, `r.NFRU.ShowDebugView`, and `r.NFRU.DataGraphFrameGeneration`, in **Standalone Game** mode to control enablement, debugging, performance tuning, and
-      frame generation modes.
+      In **Standalone Game** or a packaged Development build, use `r.NFRU.Enable`, `r.NFRU.ShowDebugView`, and `r.NFRU.PaceAdjuster` to enable NFRU, view intermediate buffers, and tune frame pacing.
 # END generated_summary_faq
 
 author: Powen Yang

@@ -9,13 +9,13 @@ layout: learningpathall
 
 ## Enable the debug view
 
-To inspect intermediate buffers during frame generation, enter this command in the console of the running Windows non-editor executable:
+To inspect intermediate buffers during frame generation, enter this command in the console of Standalone Game or the packaged Windows game:
 
 ```console
 r.NFRU.ShowDebugView 1
 ```
 
-The debug view activates a grid that shows you depth, disocclusion, and warped color buffers. If the grid appears and updates during gameplay, it also verifies that the NFRU path is active. The command does not verify NFRU in Development Editor, DebugGame Editor, or Debug Editor because NFRU does not run in those builds.
+The debug view activates a grid that shows you depth, disocclusion, and warped color buffers. If the grid appears and updates during gameplay, it also verifies that the NFRU path is active. Use Standalone Game or a packaged build for this check; the Editor viewport and Play In Editor do not run NFRU.
 
 ![Nine-tile debug view grid showing depth, disocclusion, and warped color buffers for tm1 and tp1#center](./images/debug_view.png "Debug view grid for frame generation debugging")
 

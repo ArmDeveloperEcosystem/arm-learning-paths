@@ -23,7 +23,7 @@ Click on the box titled "JETSON XAVIER NX DEVELOPER KIT & ORIN NANO DEVELOPER KI
 
 1. Open balenaEtcher
 2. Click "Flash from file"
-![balenaEtcher interface](./balenaEtcher1.png)
+![balenaEtcher interface](./balenaetcher1.png)
 3. Select the zip file of the image you just downloaded (you don't need to unzip the file).
 4. Click "Select target" and choose your microSD card
 5. Click "Flash" and wait for the process to complete which will take around 10 minutes. You may be prompted to enter a username and password before it will start.

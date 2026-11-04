@@ -1,8 +1,8 @@
 diff --git a/arm-zena-css/Kconfig b/arm-zena-css/Kconfig
-index f823ec28..14421e81 100644
+index f823ec28..def6aa2a 100644
 --- a/arm-zena-css/Kconfig
 +++ b/arm-zena-css/Kconfig
-@@ -40,6 +40,24 @@ config RD_ASPEN_CFG1
+@@ -40,6 +40,19 @@ config RD_ASPEN_CFG1
  config RD_ASPEN_CFG2
      bool "RD-Aspen Cfg2"
  
@@ -19,14 +19,21 @@ index f823ec28..14421e81 100644
 +
 +endchoice
 +
+ config RD_ASPEN_RTL
+     bool "RD-Aspen RTL"
+ 
+@@ -78,6 +91,11 @@ config RD_ASPEN_RTL_VARIANT
+ endif # RD_ASPEN_RTL
+ 
+ 
 +config KAS_INCLUDE_SI_CL1_RTOS
 +    string
 +    default "../sw-ref-stack/yocto/kas/si-cl1-zephyr.yml" if SI_CL1_RTOS_ZEPHYR
 +    default "../sw-ref-stack/yocto/kas/si-cl1-freertos.yml" if SI_CL1_RTOS_FREERTOS
 +
- config RD_ASPEN_RTL
-     bool "RD-Aspen RTL"
+ if ARM_FVP_EULA_ACCEPT_CHOICE
  
+ choice
 diff --git a/arm-zena-css/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc b/arm-zena-css/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc
 index e0f3a249..831a156d 100644
 --- a/arm-zena-css/yocto/meta-zena-css-safety-island/conf/machine/include/fvp/fvp-rd-aspen-extras.inc

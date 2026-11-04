@@ -1,5 +1,5 @@
 ---
-title: Deploy a static website to Amazon S3 and integrate with AWS Lambda and DynamoDB using the Serverless Framework
+title: Deploy an S3 site with Lambda and DynamoDB using Serverless Framework
 
 minutes_to_complete: 60
 

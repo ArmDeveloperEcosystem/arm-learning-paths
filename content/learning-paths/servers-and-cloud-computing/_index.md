@@ -7,13 +7,16 @@ key_ip:
 - Neoverse
 maintopic: true
 pinned_learning_paths:
+- firecracker-ai-sandbox
+- nested-virtualization
 - arm-mcp-server
-- learning-paths/cross-platform/vectorization-comparison
+- memory-subsystem
+- sve2-match
 - performix-microarchitecture
 operatingsystems_filter:
 - Android: 3
-- Linux: 278
-- macOS: 20
+- Linux: 286
+- macOS: 21
 - other: 1
 - Windows: 18
 pinned_modules:
@@ -24,13 +27,13 @@ pinned_modules:
     - migration
 subjects_filter:
 - CI-CD: 14
-- Containers and Virtualization: 50
+- Containers and Virtualization: 55
 - Databases: 29
 - Libraries: 9
-- ML: 48
-- Performance and Architecture: 111
+- ML: 49
+- Performance and Architecture: 112
 - Storage: 2
-- Web: 19
+- Web: 20
 subtitle: Migrate and optimize cloud native apps on Arm-based servers.
 title: Servers and Cloud Computing
 tools_software_languages_filter:
@@ -40,10 +43,11 @@ tools_software_languages_filter:
 - Agent: 1
 - AI: 1
 - Alluxio: 1
-- Amazon ECS: 2
+- Amazon ECS: 3
 - Amazon EKS: 4
 - Android Studio: 1
 - Ansible: 2
+- Antigravity: 1
 - Apache: 1
 - Apache Arrow: 1
 - Apache Beam: 1
@@ -52,12 +56,12 @@ tools_software_languages_filter:
 - Apache Tomcat: 2
 - ApacheBench: 1
 - Argo CD: 1
-- Arm AI Portal: 3
+- Arm AI Portal: 4
 - Arm Compiler for Linux: 1
 - Arm Development Studio: 3
 - Arm ISA: 1
 - Arm Performance Libraries: 3
-- Arm Performix: 11
+- Arm Performix: 12
 - Arm Streamline: 1
 - Arm System Characterization Tool: 1
 - Arm Topo: 1
@@ -82,7 +86,7 @@ tools_software_languages_filter:
 - Azure: 2
 - Azure CLI: 5
 - Azure Portal: 1
-- Bash: 8
+- Bash: 9
 - bash: 2
 - Bastion: 3
 - BenchMARL: 1
@@ -97,15 +101,18 @@ tools_software_languages_filter:
 - Cargo: 1
 - cassandra-stress: 1
 - CCA: 10
+- Ceph: 1
 - ChromaDB: 1
+- Chrome: 1
 - CircleCI: 2
 - Clair: 1
 - Clang: 14
+- Claude Code: 1
 - ClickBench: 1
 - ClickHouse: 2
 - Cloud Build: 1
 - Cloud SQL: 1
-- CMake: 6
+- CMake: 7
 - Codex: 1
 - Confidential Containers: 1
 - Couchbase: 1
@@ -120,7 +127,7 @@ tools_software_languages_filter:
 - Demo: 3
 - DevStack: 1
 - Django: 2
-- Docker: 42
+- Docker: 43
 - Docker Buildx: 1
 - dotnet: 5
 - Dynatrace: 1
@@ -129,11 +136,12 @@ tools_software_languages_filter:
 - Envoy: 3
 - Erlang: 1
 - ESRally: 1
-- ExecuTorch: 1
+- ExecuTorch: 2
 - Facter: 1
 - FastAPI: 2
 - Fastpath: 1
 - fio: 1
+- Firecracker: 1
 - FlameGraph: 1
 - Flask: 4
 - Flink: 2
@@ -142,15 +150,14 @@ tools_software_languages_filter:
 - FunASR: 1
 - FVP: 9
 - Gardener: 1
-- GCC: 31
+- GCC: 32
 - gdb: 1
-- Geekbench: 1
 - Gemma: 1
 - Generative AI: 15
 - Gerrit: 1
 - Git: 2
 - GitHub: 3
-- GitHub Actions: 3
+- GitHub Actions: 4
 - GitHub CLI: 1
 - GitHub Copilot: 4
 - GitLab: 2
@@ -165,17 +172,20 @@ tools_software_languages_filter:
 - Google Cloud: 2
 - Google Cloud Pub/Sub: 1
 - Google Dataflow: 1
+- Google Kubernetes Engine: 1
 - Google Test: 1
 - Grafana: 1
 - Groovy: 1
 - gRPC: 1
+- gVisor: 1
 - Hadoop: 1
 - HammerDB: 1
 - Helm: 4
 - Herd7: 1
 - Hiera: 1
 - Hive: 1
-- Hugging Face: 15
+- Hugging Face: 18
+- Hugo: 1
 - hwmon: 1
 - InnoDB: 1
 - Intrinsics: 1
@@ -204,14 +214,17 @@ tools_software_languages_filter:
 - kubectl: 2
 - Kubernetes: 21
 - Kustomize: 1
+- KVM: 2
 - LeRobot: 1
 - Libamath: 2
 - libbpf: 1
+- libvirt: 1
 - Linaro Forge: 1
 - Linux: 1
 - Linux kernel: 1
 - Litmus7: 1
-- llama.cpp: 4
+- llama-roofline: 1
+- llama.cpp: 5
 - LlamaIndex: 1
 - LLM: 13
 - LLVM: 2
@@ -223,14 +236,14 @@ tools_software_languages_filter:
 - MAPPO: 1
 - MariaDB: 1
 - Maven: 1
-- MCP: 8
+- MCP: 9
 - Memcached: 2
 - Memorystore: 1
 - Minecraft: 1
 - MinIO: 2
 - MLflow: 1
 - MLPerf: 1
-- Model Context Protocol: 1
+- Model Context Protocol: 3
 - ModelScope: 1
 - MongoDB: 4
 - mongostat: 1
@@ -244,12 +257,12 @@ tools_software_languages_filter:
 - Nexmark: 1
 - NGINX: 8
 - nginx: 1
-- Node.js: 7
+- Node.js: 8
 - npm: 3
 - NumPy: 1
 - Ollama: 3
 - ONNX: 1
-- ONNX Runtime: 5
+- ONNX Runtime: 6
 - OpenBLAS: 1
 - OpenBMC: 1
 - OpenCV: 1
@@ -276,9 +289,10 @@ tools_software_languages_filter:
 - Prometheus: 1
 - psycopg2: 1
 - Puppet: 1
+- Puppeteer: 1
 - Pytest: 1
-- Python: 61
-- PyTorch: 15
+- Python: 64
+- PyTorch: 16
 - Qdrant: 1
 - QEMU: 1
 - QuantLib: 1
@@ -286,6 +300,7 @@ tools_software_languages_filter:
 - Rafay: 1
 - RAG: 1
 - Rails: 1
+- Raspberry Pi: 1
 - Ray: 1
 - rctl: 1
 - Redis: 6
@@ -294,7 +309,7 @@ tools_software_languages_filter:
 - Remote.It: 2
 - RME: 10
 - Ruby: 2
-- Runbook: 73
+- Runbook: 72
 - Rust: 3
 - scikit-learn: 2
 - Sentence Transformers: 1
@@ -325,7 +340,7 @@ tools_software_languages_filter:
 - TimescaleDB: 1
 - Tinkerblox: 1
 - topdown-tool: 1
-- Topo: 2
+- Topo: 3
 - TorchAO: 1
 - TorchRL: 1
 - Trivy: 1
@@ -339,8 +354,10 @@ tools_software_languages_filter:
 - Vectorscan: 1
 - Velox: 1
 - Veraison: 3
-- Visual Studio Code: 7
-- vLLM: 4
+- virsh: 1
+- virt-install: 1
+- Visual Studio Code: 8
+- vLLM: 5
 - VMAS: 1
 - VS Code: 1
 - vvenc: 1
@@ -359,9 +376,9 @@ tools_software_languages_filter:
 - ZooKeeper: 1
 weight: 1
 platforms_filter:
-- Arm AGI CPU: 11
-- AWS Graviton: 95
-- Google Axion: 118
+- Arm AGI CPU: 26
+- AWS Graviton: 98
+- Google Axion: 119
 - Microsoft Azure Cobalt: 102
 - Oracle Cloud Infrastructure (OCI) Ampere Compute: 61
 ---

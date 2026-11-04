@@ -1,5 +1,5 @@
 ---
-title: (Optional) Use an image-generation model not currently supported by TinySD Studio
+title: (Optional) Use an unsupported model with TinySD Studio
 description: Register a compatible mobile image-generation model or generate and validate support for a model that needs another adapter.
 weight: 6
 

@@ -1,5 +1,5 @@
 ---
-title: Deploy nginx on Intel x86
+title: Deploy NGINX on Intel x86
 weight: 5
 
 ### FIXED, DO NOT MODIFY

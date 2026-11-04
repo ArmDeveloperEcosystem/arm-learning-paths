@@ -8,7 +8,7 @@ layout: learningpathall
 
 ## Why fine-tuning matters for domain knowledge
 
-Pre-trained models like Llama 3.2 8B have broad language skills, but they don't know everything. Ask the base model about the maximum clock speed of the RP2350 microcontroller and it confidently answers "1.8 GHz," a completely fabricated number. The actual specification is 150 MHz.
+Pre-trained models like Llama 3.2 3B have broad language skills, but they don't know everything. Ask the base model about the maximum clock speed of the RP2350 microcontroller and it confidently answers "1.8 GHz," a completely fabricated number. The actual specification is 150 MHz.
 
 Fine-tuning fixes this by training the model on real data from Raspberry Pi datasheets. After fine-tuning, the same model answers correctly: "The RP2350 supports up to 150 MHz." No hallucination, no guessing.
 

@@ -12,7 +12,7 @@ learning_objectives:
     - Evaluate the performance and code size trade-offs of LTO.
 
 prerequisites:
-    - An Arm Linux system (cloud instance, on-premises hardware, or a virtual machine)
+    - An Arm-based Linux system (cloud-hosted, virtualized, or on-premise), including Arm AGI CPU-based systems.
     - A recent version of the [GCC toolchain](/install-guides/gcc/)
 
 # START generated_summary_faq
@@ -63,6 +63,8 @@ rerun_faqs: false
 ### Tags
 skilllevels: Introductory
 subjects: Performance and Architecture
+platforms:
+    - Arm AGI CPU
 armips:
     - Neoverse
     - Cortex-A

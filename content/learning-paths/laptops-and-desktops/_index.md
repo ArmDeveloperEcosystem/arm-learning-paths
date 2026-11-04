@@ -13,15 +13,15 @@ pinned_learning_paths:
 operatingsystems_filter:
 - Android: 3
 - ChromeOS: 2
-- Linux: 51
-- macOS: 16
+- Linux: 54
+- macOS: 18
 - Windows: 50
 subjects_filter:
 - CI-CD: 7
 - Containers and Virtualization: 8
 - Migration to Arm: 30
-- ML: 16
-- Performance and Architecture: 30
+- ML: 18
+- Performance and Architecture: 33
 subtitle: Build native Windows on Arm applications that are fast and efficient.
 title: Laptops and Desktops
 tools_software_languages_filter:
@@ -30,21 +30,22 @@ tools_software_languages_filter:
 - Arm Development Studio: 1
 - Arm Performance Libraries: 2
 - Arm64EC: 1
-- Assembly: 1
-- Bash: 6
+- Assembly: 2
+- Bash: 7
 - C: 12
 - CCA: 1
-- Clang: 13
-- CMake: 5
+- Clang: 14
+- CMake: 6
 - CPP: 13
 - csharp: 6
 - CSS: 1
 - Docker: 13
 - dotnet: 13
-- ExecuTorch: 1
+- ExecuTorch: 2
 - FastAPI: 1
 - FFmpeg: 1
-- GCC: 12
+- GCC: 13
+- Gemma 4: 1
 - Generative AI: 1
 - Git: 1
 - GitHub: 3
@@ -52,8 +53,9 @@ tools_software_languages_filter:
 - GitLab: 2
 - Google Benchmark: 1
 - Google Test: 1
+- Gradio: 1
 - HTML: 2
-- Hugging Face: 3
+- Hugging Face: 4
 - Hyper-V: 1
 - i3: 1
 - Intrinsics: 1
@@ -63,11 +65,13 @@ tools_software_languages_filter:
 - KleidiCV: 1
 - Kubernetes: 1
 - KVM: 1
-- LeRobot: 1
+- LeRobot: 2
 - Linux: 1
-- llama.cpp: 4
+- LiteRT-LM: 1
+- llama-roofline: 1
+- llama.cpp: 6
 - LLM: 2
-- LLVM: 2
+- LLVM: 3
 - llvm-mca: 1
 - MCP: 1
 - MediaPipe: 1
@@ -85,24 +89,27 @@ tools_software_languages_filter:
 - PGO: 1
 - PowerShell: 1
 - Pytest: 1
-- Python: 21
-- PyTorch: 2
+- Python: 25
+- PyTorch: 3
 - QEMU: 1
 - Qt: 2
-- Raspberry Pi: 1
+- Raspberry Pi: 3
 - RDP: 1
 - Reachy Mini: 1
 - Remote.It: 1
 - RME: 1
 - Runbook: 17
 - Rust: 2
+- Sherpa-ONNX: 1
 - SME2: 3
-- SmolVLA: 1
+- SmolVLA: 2
 - SSH: 2
+- Supertonic 3: 1
 - SVE: 1
 - SVE2: 1
 - Testcontainers: 1
 - Topo: 2
+- TorchAO: 1
 - Trusted Firmware: 1
 - Ubuntu: 1
 - Visual Studio: 14
@@ -116,9 +123,8 @@ tools_software_languages_filter:
 - WinUI 3: 1
 - WSL: 1
 - Xamarin Forms: 1
+- XNNPACK: 1
 weight: 2
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 ---

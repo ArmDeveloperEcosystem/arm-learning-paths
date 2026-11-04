@@ -9,6 +9,7 @@
         {{partial "head/analytics.html" .}}
         {{partial "head/conditional-redirect.html" .}}
         {{partial "head/hotjar-surveys.html" .}}
+        {{block "page-head" .}}{{end}}
 
         {{ if .Param "math" }}
            {{ partialCached "math.html" . }}
@@ -16,10 +17,6 @@
     </head>
     <body>
         {{partial "header/nav-masthead.html" .}}
-
-        {{ if not .IsHome }}
-            {{ partial "header/color-refresh-alert.html" . }}
-        {{ end }}
 
         {{/* Where all content sits. Each layout file defines "main" which then sits here. */}}
         <div id="main" class="c-container is-responsive-width" style="min-height: 250px;">

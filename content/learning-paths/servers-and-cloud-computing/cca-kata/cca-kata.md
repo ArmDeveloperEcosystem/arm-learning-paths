@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Overview of Confidential Containers and Arm CCA Attestation with Trustee"
+title: "Explore Confidential Containers and Arm CCA attestation"
 
 weight: 2 # 1 is first, 2 is second, etc.
 

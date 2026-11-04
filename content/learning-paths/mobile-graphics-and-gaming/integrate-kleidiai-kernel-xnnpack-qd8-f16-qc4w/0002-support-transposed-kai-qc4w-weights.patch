@@ -1,7 +1,7 @@
 From 6eb253c4263e54c1697d77aa0ff00b7c5b95d67d Mon Sep 17 00:00:00 2001
 From: Qxiang Xu <Qixiang.Xu@arm.com>
 Date: Tue, 25 Aug 2026 10:04:48 +0800
-Subject: [PATCH 2/4] Support transposed KAI QC4W weights
+Subject: [PATCH 2/4] Support transposed KleidiAI QC4W weights
 
 ---
  src/reference/packing.cc | 19 ++++++++++++++++++-

@@ -3,6 +3,10 @@
 !/static/apps/
 /static/apps/*
 !/static/apps/sme-visualisations/
+!/static/social-images/
+/static/social-images/*
+!/static/social-images/default.webp
+/tools/social_card_generation/.social-card-manifest.json*
 __pycache__/
 resources/
 node_modules/
@@ -23,6 +27,7 @@ z_local_saved/
 /.python-version
 *.iml
 *.xml
+!layouts/index.coveoindex.xml
 
 # CTags symbol index
 tags

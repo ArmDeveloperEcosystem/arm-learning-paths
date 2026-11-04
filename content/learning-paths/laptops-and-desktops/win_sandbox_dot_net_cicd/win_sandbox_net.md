@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Configure Windows Sandbox as your GitHub Actions self-hosted Arm64 runner"
+title: "Configure Windows Sandbox as an Arm64 GitHub Actions runner"
 
 weight: 2
 

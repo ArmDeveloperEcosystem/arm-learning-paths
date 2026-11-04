@@ -15,7 +15,7 @@ Tensor Operator Set Architecture (TOSA) is an intermediate representation (IR) f
 
 Instead of asking every backend to understand every framework operator directly, a conversion flow can lower supported parts of a model into TOSA. Backend tools can then analyze or compile that TOSA graph for a target.
 
-TOSA can appear in more than one kind of ML workflow. Some compiler flows for LiteRT models can use TOSA as an intermediate representation. Other LiteRT flows hand a `.tflite` file directly to a backend tool such as Vela. In the ExecuTorch Arm Ethos-U flow, supported PyTorch graph regions are lowered to TOSA before Vela compiles them for Ethos-U.
+TOSA can appear in more than one kind of ML workflow. Some compiler flows for LiteRT models can use TOSA as an IR. Other LiteRT flows hand a `.tflite` file directly to a backend tool such as Vela. In the ExecuTorch Arm Ethos-U flow, supported PyTorch graph regions are lowered to TOSA before Vela compiles them for Ethos-U.
 
 ## Compare FP32 and INT8 TOSA artifacts
 
@@ -68,6 +68,6 @@ Whether TOSA with MLIA is useful depends on your workflow. Many developers will 
 
 ## What you've accomplished and what's next
 
-You have seen how the same MLIA CLI pattern applies to TOSA, and how TOSA bridges model formats and backend compilation.
+You've seen how the same MLIA CLI pattern applies to TOSA, and how TOSA bridges model formats and backend compilation.
 
 Next, you'll learn how packaged ExecuTorch `.pte` artifacts fit into the same MLIA workflow.

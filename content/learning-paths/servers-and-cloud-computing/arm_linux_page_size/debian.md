@@ -5,39 +5,91 @@ weight: 4
 layout: learningpathall
 ---
 
-Follow the steps below to install a 64K page size kernel on [Debian 11 “Bullseye” or later](https://www.debian.org/releases/bullseye/).
-
-Debian does not provide a 64K kernel package, so you will need to compile it from source.  
-
-There are two ways to do this: 
-- Download the source from kernel.org.
-- Use the Debian source package.
-
-The instructions below use the Debian source package. 
+You can install a packaged 16K page size kernel on Debian 12 or later. Debian doesn't provide a 64K kernel package, so you need to compile a 64K kernel from source.
 
 ## Verify the current page size
 
-Verify you’re using a 4KB pagesize kernel by entering the following commands:
+Verify that you're using a 4 KB page size kernel:
 
 ```bash
 getconf PAGESIZE
 uname -r
 ```
 
-The output should be similar to below. The kernel flavor (the string after the version number) may vary, but the first line should always be 4096.
+The output is similar to the following. The kernel flavor (the string after the version number) can vary, but the first line is always 4096:
 
 ```output
 4096
 6.1.0-34-cloud-arm64
 ```
 
-The 4096 indicates the current page size is 4KB. If you see a value that is different, you are already using a page size other than 4096 (4K).  On Arm systems, the valid options are 4K, 16K, and 64K.
+The 4096 indicates the current page size is 4 KB. If you see a different value, you're already using a page size other than 4 KB. On Arm systems, the valid options are 4 KB, 16 KB, and 64 KB.
 
-## Install the Debian kernel source package
+## Install a packaged 16K kernel
 
-Follow the steps below to install a 64K kernel using the Debian kernel source package.
+Debian provides the [`linux-image-arm64-16k` package](https://packages.debian.org/linux-image-arm64-16k) for Debian 13 (Trixie) and through backports for Debian 12 (Bookworm).
 
-First, update, and install the required software:
+Check your Debian release codename:
+
+```bash
+. /etc/os-release
+echo "$VERSION_CODENAME"
+```
+
+The output is either `trixie` for Debian 13 or `bookworm` for Debian 12.
+
+### Install on Debian 13
+
+On Debian 13, install the 16K kernel directly from the standard package repositories:
+
+```bash
+sudo apt-get update
+sudo apt-get install linux-image-arm64-16k
+```
+
+### Install on Debian 12
+
+On Debian 12, add the official Bookworm Backports repository by following the [Debian Backports configuration format](https://backports.debian.org/Instructions/):
+
+```bash
+sudo tee /etc/apt/sources.list.d/debian-backports.sources > /dev/null <<'EOF'
+Types: deb
+URIs: http://deb.debian.org/debian
+Suites: bookworm-backports
+Components: main
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+EOF
+```
+
+Update the package index and install the 16K kernel from backports:
+
+```bash
+sudo apt-get update
+sudo apt-get install -t bookworm-backports linux-image-arm64-16k
+```
+
+Reboot the system to load the new kernel:
+
+```bash
+sudo reboot
+```
+
+After the system restarts, verify the page size and running kernel:
+
+```bash
+getconf PAGESIZE
+uname -r
+```
+
+The first command returns `16384`, and the kernel name ends in `arm64-16k`.
+
+If you want to test a 64K page size instead, continue with the source-build instructions.
+
+## Install a 64K kernel from source
+
+You can build a 64K kernel from the Debian source package. Another option is to download the source from kernel.org, but these instructions use the Debian source package.
+
+First, update the package index and install the required software:
 
 ```bash
 sudo apt-get -y update
@@ -53,7 +105,7 @@ apt source linux
 cd -- linux*/
 ```
 
-## Build and install the kernel
+## Build and install the 64K kernel
 
 Now that you have the kernel source, follow these steps to build and install the kernel:
 
@@ -100,9 +152,22 @@ The output shows the 64k kernel is running:
 6.12.22-64k
 ```
 
-This indicates the current page size is 64K, and you are using the new custom-built 64k kernel.  
+This indicates the current page size is 64 KB, and you're using the new custom-built 64K kernel.
 
-## Revert to the 4K kernel
+## Revert from the 16K kernel
+
+Boot into the original 4K kernel from the bootloader's advanced options. Then remove the 16K kernel packages:
+
+```bash
+dpkg-query -W -f='${Package}\n' 'linux-image-*16k*' 'linux-headers-*16k*' 2>/dev/null \
+  | xargs --no-run-if-empty sudo apt-get purge -y
+sudo update-grub
+sudo reboot
+```
+
+After the system restarts, verify that `getconf PAGESIZE` returns `4096`.
+
+## Revert from the 64K kernel
 
 To revert to the kernel we started with, enter:
 
@@ -127,4 +192,4 @@ The output should be similar to below -- the full kernel name may vary, but the 
 6.1.0-34-cloud-arm64
 ```
 
-The 4096 indicates the current page size has been reverted to 4 KB. 
+The 4096 indicates the current page size has been reverted to 4 KB.

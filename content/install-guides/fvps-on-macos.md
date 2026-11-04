@@ -67,7 +67,7 @@ These wrappers can be used exactly like any native model executable:
 Add `$(pwd)/FVPs-on-Mac/bin` to `PATH` environment:
 
 ```sh
-export PATH=$PATH:$(pwd)/FVPs-on-Mac/bin
+export PATH="$HOME/FVPs-on-Mac/bin:$PATH"
 ```
 
 Put this to your `~/.zshrc` to make it permanent.
