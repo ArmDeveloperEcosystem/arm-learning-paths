@@ -9,7 +9,7 @@ official_docs: https://open-sandbox.ai/getting-started/
 author: Anupras Mohapatra
 
 test_maintenance: false
-draft: true 
+draft: true
 
 weight: 1
 tool_install: true
@@ -20,11 +20,11 @@ layout: installtoolsall
 
 OpenSandbox provides a server and a command-line interface (CLI) for creating and managing isolated environments. Its Docker runtime runs sandboxes as containers that share the host Linux kernel. 
 
-You'll install OpenSandbox on an `aarch64` host with Ubuntu 24.04 LTS or later. You'll start a local server, create a sandbox, and run a Python command inside it to verify the installation. 
+You'll install OpenSandbox on an `aarch64` host with Ubuntu 24.04 LTS or later, start a local server, create a sandbox, and run a Python command inside it to verify the installation. 
 
 ## Before you begin
 
-You need an Arm Linux system running Ubuntu 24.04 LTS with sudo access. The system also needs to have internet access to the Ubuntu package repositories, Python package index, and Docker Hub. Allow free disk space for Docker images and container data. You don't need kernel-based virtual machine (KVM) for the Docker runtime.
+You need an Arm Linux system running Ubuntu 24.04 LTS with `sudo` access. The system also needs to have internet access to the Ubuntu package repositories, Python package index, and Docker Hub. Allow free disk space for Docker images and container data. You don't need kernel-based virtual machine (KVM) for the Docker runtime.
 
 Check the host architecture and operating system:
 
@@ -46,7 +46,7 @@ docker info --format '{{.Architecture}}'
 
 The server version should be at least `20.10`, and the architecture should be `aarch64`. If Docker reports a socket permission error, log out and log back in before continuing.
 
-### Install uv
+### Install `uv`
 
 Install `uv` using the [official installer](https://docs.astral.sh/uv/getting-started/installation/):
 
@@ -61,7 +61,7 @@ export PATH="$HOME/.local/bin:$PATH"
 uv --version
 ```
 
-Add the same `export PATH` line to `~/.bashrc` if `~/.local/bin` isn't already on your PATH in new shells.
+Add the same `export PATH` line to `~/.bashrc` if `~/.local/bin` isn't already on your `PATH` in new shells.
 
 ## Install and configure OpenSandbox
 
@@ -85,14 +85,14 @@ Generate a server configuration for the Docker runtime:
 opensandbox-server init-config ~/.sandbox.toml --example docker
 ```
 
-In `~/.sandbox.toml`, set `host` under `[server]` to `127.0.0.1`:
+The Docker example sets `host` under `[server]` to `127.0.0.1` by default. Confirm this is the case in `~/.sandbox.toml`:
 
 ```toml
 [server]
 host = "127.0.0.1"
 ```
 
-Keep the other values from the generated configuration. Binding the server to localhost keeps its API reachable from the same host without exposing port 8080. 
+Binding the server to localhost keeps its API reachable from the same host without exposing port 8080. 
 
 The example configuration has no API key. Use this configuration only for testing the installation. If the server asks you to acknowledge the unauthenticated configuration, enter `YES`.
 
@@ -167,29 +167,40 @@ The output is similar to:
 }
 ```
 
-Run commands inside the sandbox:
+Run the architecture check inside the sandbox:
 
 ```bash
 osb command run "$sandbox_id" -o raw -- sh -c 'uname -m'
-osb command run "$sandbox_id" -o raw -- sh -c 'python -c "print(6 * 7)"'
 ```
 
 The expected output is:
 
 ```output
 aarch64
+```
+
+The `aarch64` result confirms that the sandbox container runs on Arm.
+
+Run a Python command inside the sandbox:
+
+```bash
+osb command run "$sandbox_id" -o raw -- sh -c 'python -c "print(6 * 7)"'
+```
+
+The expected output is:
+
+```output
 42
 ```
 
-The `aarch64` result confirms that the sandbox container runs on Arm. The Python result confirms that command execution works through the OpenSandbox CLI.
+The Python result confirms that command execution works through the OpenSandbox CLI.
 
 ## Delete the test sandbox
 
-Delete the sandbox, then list sandboxes to confirm deletion:
+Delete the sandbox:
 
 ```bash
 osb sandbox kill "$sandbox_id" -o json
-osb sandbox list -o json
 ```
 
 The output is similar to:
@@ -201,6 +212,17 @@ The output is similar to:
     "status": "deletion_requested"
   }
 ]
+```
+
+List sandboxes to confirm deletion:
+
+```bash
+osb sandbox list -o json
+```
+
+The output is similar to:
+
+```json
 {
   "items": [],
   "pagination": {
@@ -213,7 +235,7 @@ The output is similar to:
 }
 ```
 
-The `kill` command can return `deletion_requested` while removal completes. Repeat the list command if the sandbox is still present. The server configuration, CLI settings, and downloaded images remain available for future use.
+The `kill` command can return `deletion_requested` while removal completes. Repeat the `osb sandbox list` command if the sandbox is still present. The server configuration, CLI settings, and downloaded images remain available for future use.
 
 To shut the running server, press **Ctrl + C**. 
 
