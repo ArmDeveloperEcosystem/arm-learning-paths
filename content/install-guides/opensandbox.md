@@ -142,7 +142,7 @@ The first run downloads the Python image and the OpenSandbox execution helper im
 
 The output is similar to:
 
-```json
+```output
 {
   "id": "5e4b52ca-9947-4f3a-a1a7-6254239cd431",
   "status": "created",
@@ -167,7 +167,7 @@ osb sandbox health "$sandbox_id" -o json
 
 The output is similar to:
 
-```json
+```output
 {
   "sandbox_id": "5e4b52ca-9947-4f3a-a1a7-6254239cd431",
   "healthy": true
@@ -212,7 +212,7 @@ osb sandbox kill "$sandbox_id" -o json
 
 The output is similar to:
 
-```json
+```output
 [
   {
     "sandbox_id": "5e4b52ca-9947-4f3a-a1a7-6254239cd431",
@@ -229,7 +229,7 @@ osb sandbox list -o json
 
 The output is similar to:
 
-```json
+```output
 {
   "items": [],
   "pagination": {
