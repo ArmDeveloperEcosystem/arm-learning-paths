@@ -48,6 +48,7 @@ Called from:
 <script src="/vendor/msal-browser.min.js" defer></script> <!-- Authentication -->
 <script src="/js/authentication.js" defer></script> <!-- Authentication -->
 {{ if eq (getenv "HUGO_CHATBOT_ENABLED") "true" }}
+<script src="/js/ai-sign-in-banner.js" defer></script>
 <script type="text/javascript" src="https://content.ipexplorer.arm.com/VirtualFAE/learnarm/chat-ai.js" defer></script>
 <script>
     {{/* Get the chatbot API location from GitHub Secrets */}}
