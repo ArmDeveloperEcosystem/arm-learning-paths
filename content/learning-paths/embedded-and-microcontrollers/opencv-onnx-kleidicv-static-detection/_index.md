@@ -1,6 +1,11 @@
 ---
 title: Build and profile a YOLOX pipeline with KleidiCV on arm64
 description: Build a YOLOX object detection pipeline on arm64 Linux and compare baseline and KleidiCV preprocessing and pipeline latency.
+
+draft: true
+cascade:
+    draft: true
+
 lastmod: 2026-10-29
 
 minutes_to_complete: 90
