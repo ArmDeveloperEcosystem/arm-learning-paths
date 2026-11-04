@@ -202,9 +202,9 @@ The expected output is:
 
 The Python result confirms that you can run a command in the sandbox through the OpenSandbox CLI.
 
-## Delete the test sandbox
+## Clean up test resources 
 
-Delete the sandbox:
+Delete the test sandbox:
 
 ```bash
 osb sandbox kill "$sandbox_id" -o json
