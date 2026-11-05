@@ -17,7 +17,7 @@ learning_objectives:
 
 prerequisites:
     - An Arm-based system such as an Apple® silicon Mac, Arm-based Linux machine, or Android® phone.
-    - Basic Python / C++ knowledge and familiarity with terminal commands
+    - Basic Python or C++ knowledge and familiarity with terminal commands
     - Internet access and at least 15 GB of available storage
 
 # START generated_summary_faq
