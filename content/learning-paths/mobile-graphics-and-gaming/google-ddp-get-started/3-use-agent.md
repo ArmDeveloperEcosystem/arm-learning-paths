@@ -48,7 +48,8 @@ The scrcpy window should show the reserved phone's current screen. Check that th
 
 Click to tap, drag to swipe, and use your keyboard to type into a text field. Try opening the app drawer and returning to the home screen. The agent can also save and inspect a screenshot through the same connection:
 
-![Home screen of the remote Pixel 11 captured through its exact ADB connection. Seeing the phone screen confirms the screenshot route works before the agent starts interacting with Termux.#center](images/ddp-connected-phone.jpg "Inspect a real screenshot from the reserved phone")
+<img src="/learning-paths/mobile-graphics-and-gaming/google-ddp-get-started/images/ddp-connected-phone.jpg" width="240" alt="Home screen of the remote Pixel 11 captured through its exact ADB connection. Seeing the phone screen confirms the screenshot route works before the agent starts interacting with Termux." title="Inspect a real screenshot from the reserved phone" class="content-uploaded-image centered" />
+<span class="content-image-caption centered">Inspect a real screenshot from the reserved phone</span>
 
 If the screen doesn't appear or control doesn't work, describe what happened to the agent. It can inspect the connection, correct the viewer settings, and try again within the existing session. You can review its observations without managing ports or issuing device commands yourself.
 
