@@ -7,11 +7,8 @@ layout: learningpathall
 
 ## Choose the metrics
 
-Keep `wash dev` running in the first terminal. Run the following tests from the
-second SSH terminal on the same server. Stop other load tests and builds before
-you begin.
-
-You will collect three measurements:
+Keep `wash dev` running in the first terminal. Stop any other load tests and builds. Then, run the following tests from the
+second SSH terminal on the same server to collect the following measurements:
 
 | Test | Metric | What it tells you |
 |---|---|---|
@@ -20,8 +17,8 @@ You will collect three measurements:
 | Concurrent requests | Latency and requests per second | Behavior when multiple requests overlap |
 
 The fixed greeting measures a small HTTP path. Results include the client,
-loopback networking, wasmCloud routing, and component execution. They do not
-represent a database application or an external user's Internet latency.
+loopback networking, wasmCloud routing, and component execution. They don't
+represent a database application or the internet latency of an external user.
 
 Record the runtime version and system state before testing:
 
@@ -37,12 +34,13 @@ uptime >> "$result_dir/environment.txt"
 ```
 
 The tests use the normal scheduler without CPU affinity. Both the load generator
-and host share your server's CPUs. This is a local performance overview, rather
-than a measurement of the maximum capacity available to a remote client.
+and host share the CPU of your server. 
+
+This is a local performance overview. It's not a measurement of the maximum capacity available to a remote client.
 
 ## Time individual requests
 
-Make one request to confirm the application is ready:
+Make one request to confirm that the application is ready:
 
 ```bash
 curl --noproxy '*' --fail --show-error http://127.0.0.1:8000/
@@ -73,9 +71,9 @@ status=200 total_seconds=0.000481
 Each line should contain `status=200` and a time in seconds. For example,
 multiply a measured value in seconds by 1,000 to express it in milliseconds.
 These calls create a new curl process and connection each time. The reported
-`time_total` covers curl's transfer, rather than shell process startup.
+`time_total` covers the curl transfer, rather than shell process startup.
 
-The host is already running, so these are warm-host requests. They do not
+The host is already running, so these are warm-host requests. They don't
 measure loading the component, compiling it, or starting an EC2 instance.
 
 ## Measure one connection
@@ -146,8 +144,8 @@ Requests/sec:  34363.59
 Transfer/sec:      3.74MB
 ```
 
-`-c32` distributes 32 connections across the four load-generator threads; it
-does not create 32 applications or configure a pool of 32 guest instances.
+`-c32` distributes 32 connections across the four load-generator threads. It
+doesn't create 32 applications or configure a pool of 32 guest instances.
 This test changes the offered concurrency and the client thread count together.
 It compares two useful load profiles, rather than isolating one runtime setting.
 
@@ -157,16 +155,16 @@ A higher request rate is useful only if errors and latency remain acceptable
 for your application.
 
 Treat runs with socket errors, timeouts, or non-2xx/3xx responses as failures to
-investigate. wrk's exit status alone does not certify that every request
-succeeded. Check the response body with curl as well; wrk does not validate it.
+investigate. The `wrk` exit status alone doesn't certify that every request
+succeeded. Check the response body with `curl` as well because `wrk` doesn't validate it.
 
-Run the two wrk commands again if you want to check consistency, choosing new
+Run the two `wrk` commands again if you want to check consistency, choosing new
 output filenames. Keep the application, server, and test duration the same.
 Avoid interpreting small differences from a single short run as an improvement.
 
 ## Save the results
 
-Display the location of this run's files:
+Print the location of the run results:
 
 ```bash
 printf '%s\n' "$result_dir"
@@ -174,11 +172,19 @@ ls -1 "$result_dir"
 ```
 
 Keep the environment record with the test output. If you close this shell,
-`result_dir` will no longer be defined; use the printed absolute path to find
+`result_dir` will no longer be defined. Use the printed absolute path to find
 the files later.
 
-## What you've accomplished
+## Clean up
 
-You have measured individual warm-host requests and collected latency and
-throughput under two load profiles. Next, connect those observations to the
-application model and the choices wasmCloud gives you.
+Stop `wash dev` by navigating to the terminal and entering **Ctrl+C** in its terminal. Stop any SSH tunnel that you opened.
+Keep the application source and results if you want to repeat the tests.
+
+When finished with your AWS instance, stop or terminate it to avoid continued charges.
+
+## What you've accomplished and what's next
+
+You've measured individual warm-host requests and collected latency and
+throughput under two load profiles. 
+
+Next, you'll connect those observations to the application model and the choices that wasmCloud gives you.

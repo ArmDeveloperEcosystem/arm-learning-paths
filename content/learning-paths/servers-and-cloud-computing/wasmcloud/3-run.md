@@ -7,11 +7,13 @@ layout: learningpathall
 
 ## Start the application
 
-This step uses two SSH terminals connected to the Arm server. `wash dev` runs
-in the foreground and occupies the first terminal; you send requests from the
-second.
+Now that you've built the application, you can start it.
 
-In your first terminal, start the development host from the application
+You'll use two SSH terminals connected to the Arm server. You'll run `wash dev`
+in the foreground in the first terminal. You'll send requests from the
+second terminal.
+
+In the first terminal, start the development host from the application
 directory:
 
 ```bash
@@ -35,7 +37,7 @@ Wait for the `listening for HTTP requests` line before continuing. Leave this te
 
 ## Send a request
 
-Open a second SSH terminal connected to the same Graviton server. Send an HTTP
+In the second terminal, send an HTTP
 request to the loopback listener:
 
 ```bash
@@ -53,15 +55,16 @@ date: Tue, 03 Nov 2026 18:31:16 GMT
 hello from wasmCloud
 ```
 
-Your request passed through the host's HTTP listener to the WebAssembly handler.
-One application is loaded. That does not mean one guest instance must remain
-alive for the entire server process: instance creation and reuse are runtime
-policies, which you'll consider when interpreting performance.
+Your request passed through the host HTTP listener to the WebAssembly handler.
+One application is loaded. This doesn't mean that one guest instance needs to remain
+alive for the entire server process. Instance creation and reuse are runtime
+policies that you'll consider when interpreting performance.
 
 ## Change the application
 
-Stop `wash dev` with Ctrl+C in the first terminal. In the application directory,
-change the greeting in `src/lib.rs`:
+Stop `wash dev` with **Ctrl+C** in the first terminal. 
+
+Then, in the application directory, change the greeting in `src/lib.rs`:
 
 ```bash
 cd ~/wasmcloud-learning-path/hello-http
@@ -69,7 +72,7 @@ sed -i 's/hello from wasmCloud/hello from Graviton/' src/lib.rs
 wash dev
 ```
 
-Wait for the listener message, then request it again from the second terminal:
+Wait for the listener message, then send an HTTP request again from the second terminal:
 
 ```bash
 curl --noproxy '*' --fail --show-error http://127.0.0.1:8000/
@@ -86,7 +89,7 @@ This manual stop-and-restart cycle rebuilds and reloads the component.
 `wash dev` in this version doesn't watch for file changes automatically.
 Leave the modified application running for the performance exercise.
 
-## Optional: view it from your computer
+## (Optional) View it from your computer
 
 Run an SSH tunnel from your own computer, replacing the placeholders with your
 key path and server address:
@@ -95,13 +98,14 @@ key path and server address:
 ssh -i /path/to/key.pem -N -L 8000:127.0.0.1:8000 ubuntu@SERVER_PUBLIC_IP
 ```
 
-The command produces no output. It is forwarding traffic in the foreground.
-Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in your computer's browser. The tunnel forwards that
-local port to the server's loopback listener. Close the tunnel with Ctrl+C when
+The command produces no output. It's forwarding traffic in the foreground.
+
+Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in a browser on your computer. The tunnel forwards that
+local port to the server loopback listener. Close the tunnel with **Ctrl+C** when
 finished.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You have run a WebAssembly application on Graviton, verified its HTTP response,
-and rebuilt it after changing its source. Next, measure the same running
-application with a small set of HTTP tests.
+You've run a WebAssembly application on Graviton and verified its HTTP response. Then, you rebuilt it after changing its source. 
+
+Next, you'll measure the same running application with a small set of HTTP tests.

@@ -7,12 +7,12 @@ layout: learningpathall
 
 ## Connect the numbers to the application
 
-The application you measured performs little work beyond returning a greeting.
-Its results describe the HTTP hosting path on your Graviton system. An
+The application that you measured performs little work beyond returning a greeting.
+Its results describe the HTTP hosting path on your Graviton-based system. An
 application that queries a database, transforms a large payload, or performs
 substantial computation will have different behavior.
 
-Use your measurements to answer these questions:
+Use your measurements to answer the following questions:
 
 - Does the ready application return successful responses consistently?
 - How does response latency change when you increase concurrent connections?
@@ -22,51 +22,47 @@ One small application can handle many requests. The number of connections,
 requests, guest instances, and independently hosted applications are different
 quantities.
 
-## A reference point from the Graviton benchmark
+## wasmCloud HTTP handler benchmark
 
-wasmCloud publishes a benchmark for its HTTP handler in the [wasmCloud benchmark scripts](https://github.com/wasmCloud/wasmCloud/tree/main/scripts/bench). On an 8-core Neoverse V2 system, hot invocations complete in hundreds of microseconds and HTTP throughput reaches tens of thousands of requests per second. Your `wrk` measurements use a different load client and measurement boundary, so the numbers aren't directly comparable, but they describe the same hosting path.
+wasmCloud publishes a benchmark for its HTTP handler in [wasmCloud benchmark scripts](https://github.com/wasmCloud/wasmCloud/tree/main/scripts/bench). On an 8-core Neoverse V2 system, hot invocations complete in hundreds of microseconds. HTTP throughput reaches tens of thousands of requests per second. 
+
+Your `wrk` measurements use a different load client and measurement boundary, so the numbers aren't directly comparable. However, they describe the same hosting path.
 
 ## Warm instance pooling and concurrency
 
 Some applications do expensive setup before they can handle useful work. Keeping
 an initialized instance warm avoids repeating that setup on every request.
-Applications that spend time waiting, for example on an external service, can
-also benefit from overlapping requests when the runtime and component support it.
+Applications that spend time waiting can also benefit from overlapping requests when the runtime and component support it.
 
-wasmCloud lets you configure a pool of warm instances (`poolSize`) and allow each
+wasmCloud lets you configure a pool of warm instances (`poolSize`) and allows each
 instance to handle multiple calls simultaneously (`maxConcurrency`). Total warm
-capacity becomes `poolSize × maxConcurrency` in-flight calls. For workloads with
-significant initialization cost or I/O waiting, the wasmCloud 2.7 release
-measured roughly a 13.6× improvement in concurrent throughput when concurrent
-pooling was enabled. The [wasmCloud benchmark site](https://wasmcloud.github.io/arewefastyet/)
-tracks these results across releases.
+capacity becomes `poolSize × maxConcurrency` in-flight calls. 
 
-You didn't configure those policies in the greeting application. The concept
-matters once you move to a workload with real initialization cost or concurrency.
+The wasmCloud 2.7 release measured roughly a 13.6-times improvement in concurrent throughput when concurrent
+pooling was enabled. This improvement was observed for workloads with
+significant initialization cost or I/O waiting.
+
+For results across releases, see the [wasmCloud benchmark site](https://wasmcloud.github.io/arewefastyet/).
+
+You didn't configure these policies in the sample greeting application. The concept
+matters when you move to a workload with real initialization cost or concurrency.
 Measure your application before choosing a policy.
 
-## What wasmCloud provides
+## Why use wasmCloud 
 
 wasmCloud provides a way to package application logic as WebAssembly components
 and host those components with shared runtime capabilities. For developers,
-this separates the handler's business logic from the machinery that listens
+this separates handler business logic from the machinery that listens
 for requests and provides infrastructure access. For operators, workload and
-instance policies offer choices about readiness, concurrency, and resource use.
+instance policies offer readiness, concurrency, and resource use choices.
 
 The practical value depends on your workload. You can build and run a component on Graviton and observe its HTTP
-performance. It does not measure a maximum application count, memory savings
+performance. It doesn't measure a maximum application count, memory savings
 against containers, or a performance advantage over native services.
 
-## Clean up
+## What you've learned
 
-Stop `wash dev` with Ctrl+C in its terminal. Stop any SSH tunnel you opened.
-Keep the application source and results if you want to repeat the tests.
-When finished with your AWS instance, stop or terminate it according to your
-normal AWS workflow to avoid continued charges.
+You've learned how to interpret warm response time and throughput results. You've also learned how wasmCloud instance pooling and concurrency settings affect throughput.
 
-## What you've accomplished
-
-You have built and changed a WebAssembly HTTP component, hosted it on an Arm
-server with wasmCloud, and measured warm response time and throughput. You can
-now use the same sequence with a more representative application and judge its
-behavior using your own latency and throughput requirements.
+You can now extend the Learning Path with a more representative application and judge its
+behavior using your own requirements.
