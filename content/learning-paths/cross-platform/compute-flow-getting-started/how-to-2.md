@@ -574,10 +574,13 @@ All three bricks share these deployment methods, documented in [Brick Runtime In
 
 ## Translate a pre-recorded sample
 
-Resolve the package locations through Brick Manager instead of hard-coding cache paths. Then, run your application using the sample supplied with Parakeet:
+Resolve the package locations through Brick Manager instead of hard-coding cache paths. Then, run your application using the sample supplied with Parakeet.
 
 {{< tabpane-normal >}}
 {{< tab header="Native Arm64" >}}
+
+Run the application: 
+
 ```bash
 PARAKEET_PACKAGE="$(compute-flow model path stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic)"
 HY_MT2_PACKAGE="$(compute-flow model path lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation)"
