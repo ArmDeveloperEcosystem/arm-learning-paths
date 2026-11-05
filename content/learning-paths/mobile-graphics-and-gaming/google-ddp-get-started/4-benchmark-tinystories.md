@@ -45,14 +45,9 @@ The following reference results were measured on November 5, 2026, on a physical
 Higher tokens per second is better. Calculate `speedup = optimized / baseline` and `throughput uplift (%) = 100 × (speedup − 1)` from the median throughput for each path. These results measure warmed-up inference and exclude model loading and initial weight packing.
 
 {{% notice Note %}}
-These measurements come from a reference run with the versions and settings recorded in the saved evidence. Your agent selects the latest stable releases and a compatible model for your run, so its results can differ.
+Your agent selects the latest stable releases and a compatible model for your run, so its results can differ.
 {{% /notice %}}
 
-In the reference run, the phone exposed SVE and SVE2 with a 128-bit vector length, while that runtime's KleidiAI SVE kernels required 256-bit vectors. The verified path used Neon I8MM matrix-multiplication kernels and Neon dot-product matrix-vector kernels. The uplift in the table is for that KleidiAI path. It doesn't establish an SVE2 performance gain.
-
-The baseline retained its normal Arm CPU optimizations. All eight output test prompts passed the agreed smoke check; this limited check doesn't establish equivalent model quality.
-
-Download the [reference measurements and validation evidence](../files/benchmark-results-2026-11-05.json) to inspect the recorded software versions, model identity, build settings, raw samples, output checks, and kernel trace counts. You only need these details if you want to examine or reproduce that particular run.
 
 ## Confirm the results are saved and the phone is released
 
