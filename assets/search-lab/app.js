@@ -2,6 +2,7 @@ const $ = id => document.getElementById(id);
 const main = document.querySelector('main[data-index]');
 let worker, workerFailure;
 let allowBlankSearch = false;
+const searchStop = new Set('a an and are at be can do for from how i in is it me my of on or the to using what with'.split(' '));
 let nextId = 0, generation = 0, offset = 0;
 const pending = new Map();
 function failWorker() {
@@ -98,6 +99,10 @@ async function render() {
     $('status').textContent = 'Enter a search term, or click Search to browse all content matching your filters.';
     return;
   }
+  if (query && !(query.toLowerCase().match(/[a-z0-9]+/g) || []).some(w => !searchStop.has(w))) {
+    $('status').textContent = `"${query}" contains only common words that search ignores. Try adding a more specific term.`;
+    return;
+  }
   $('status').textContent = 'Searching…';
   const start = performance.now();
   try {
@@ -129,6 +134,7 @@ async function render() {
       footer.append(updated); li.append(meta, h, p, footer); $('results').append(li);
     }
     $('more').hidden = result.total <= offset + result.results.length;
+    if (offset && result.results.length) { const firstNew = $('results').children[offset]; firstNew?.querySelector('a')?.focus(); }
   } catch (error) { if (current === generation) $('status').textContent = error.message; }
 }
 function categoryLabel(slug) {
@@ -138,7 +144,7 @@ for (const button of main.querySelectorAll('[data-query]')) button.onclick = () 
   $('query').value = button.dataset.query; $('type').value = ''; $('category').value = ''; offset = 0; render();
 };
 let timer;
-$('query').oninput = () => { $('clear-blank-search').hidden = true; allowBlankSearch = false; ++generation; $('more').hidden = true; clearTimeout(timer); timer = setTimeout(() => { offset = 0; render(); }, 120); };
+$('query').oninput = () => { $('clear-blank-search').hidden = true; allowBlankSearch = false; ++generation; $('more').hidden = true; clearTimeout(timer); $('results').replaceChildren(); $('search-diagnostics').hidden = true; if (!$('query').value) { offset = 0; $('status').textContent = 'Enter a search term, or click Search to browse all content matching your filters.'; } else { $('status').textContent = ''; } };
 $('search-form').onsubmit = event => { event.preventDefault(); allowBlankSearch = true; clearTimeout(timer); offset = 0; render(); };
 $('clear-blank-search').onclick = () => {
   clearTimeout(timer);
@@ -148,7 +154,7 @@ $('clear-blank-search').onclick = () => {
   render();
   $('query').focus();
 };
-for (const id of ['type', 'category', 'sort']) $(id).onchange = () => { offset = 0; render(); };
+for (const id of ['type', 'category', 'sort']) $(id).onchange = () => { if (!$('query').value.trim()) allowBlankSearch = true; offset = 0; render(); };
 $('more').onclick = () => { offset += 10; render(); };
 const params = new URLSearchParams(location.search);
 $('query').value = (params.get('q') || '').slice(0, 300);
