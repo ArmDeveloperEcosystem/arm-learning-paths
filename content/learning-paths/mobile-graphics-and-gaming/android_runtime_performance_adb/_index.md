@@ -77,7 +77,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: PERFORMANCE AND ARCHITECTURE
+subjects: Performance and Architecture
 armips:
     - Cortex-A
 tools_software_languages:

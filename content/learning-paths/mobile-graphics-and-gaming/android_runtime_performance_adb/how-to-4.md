@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-# Download a monitoring script
+## Download a monitoring script
 Download the monitoring script that the Jupyter Notebook will call to collect device data for a specified duration over wireless `adb`. Review the comments in the script to understand each section.
 
 Download the script:
@@ -15,7 +15,7 @@ cd $WORK
 curl -fL -O "$BASE_URL/run-device-monitor.sh"
 ```
 
-# Download the monitoring configuration and queries
+## Download the monitoring configuration and queries
 Without explicit instructions, the Perfetto tracing daemon doesn't know what to capture, where to store it, or how to manage memory.
 
 Download the following `.cfg` file to configure your Perfetto trace:
@@ -34,7 +34,7 @@ curl -fL -O "$BASE_URL/monitor-memory.sql"
 curl -fL -O "$BASE_URL/power-battery.sql"
 ```
 
-# Start up JupyterLab
+## Start up JupyterLab
 From your working directory, start up a local JupyterLab server and create a new notebook file:
 ```bash
 cd  $WORK
@@ -43,7 +43,7 @@ jupyter lab
 Create a new notebook and rename it to something appropriate.
 ![Screenshot of JupyterLab web UI with a highlight around the notebook launch tab#center](jupyter_setup.png "Figure 3. Screenshot of JupyterLab Notebook launcher")
 
-# Initiate device monitoring
+## Initiate device monitoring
 In your notebook, create a section titled 'Runtime Monitoring' and add the following code:
 ```python
 from pathlib import Path
@@ -93,5 +93,5 @@ If any files are missing, review the output below the monitoring cell for errors
 You will not see any data in the LLM performance CSV file as you have not performed any inference as part of this smoke test.
 {{% /notice %}}
 
-# What you've accomplished
+## What you've accomplished and what's next
 You have now prepared and tested the necessary monitoring assets for your performance analysis pipeline. Continue to the next section, where you will initiate a full monitoring run and collect some data from your device.

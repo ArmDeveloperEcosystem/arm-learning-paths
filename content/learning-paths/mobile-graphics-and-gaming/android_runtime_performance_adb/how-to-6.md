@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-# Inspect the benchmark summary
+## Inspect the benchmark summary
 Inside `$WORK/data/` you should have a directory labelled with the timestamp you ran the benchmark, for example: `runtime-perf-TIMESTAMP/`. Open this directory and inspect the file called `summary.txt`.
 
 This text file contains useful information about the benchmark such as:
@@ -21,7 +21,7 @@ Check these fields in the job summary:
 - `inference_count=` is greater than zero. If not, confirm that you pushed the model to the correct location.
 - `power_source=` is not `unavailable`. If it is, your device might not expose a supported power-monitoring source.
 
-# Download the plotting scripts
+## Download the plotting scripts
 Download the four plotting scripts into `$WORK/plots/`:
 ```bash
 mkdir -p "$WORK/plots"
@@ -33,7 +33,7 @@ curl -fL -O "$BASE_URL/memory_time_plot.py"
 curl -fL -O "$BASE_URL/power_time_plot.py"
 ```
 
-# Visualise the latest benchmark
+## Visualise the latest benchmark
 The plotting scripts use pandas to load the CSV files and Matplotlib to create the figures.
 
 Create a new Jupyter Notebook section titled **Visualise performance data** and install both packages from a new notebook cell if they are not already available:
@@ -91,5 +91,5 @@ This cell selects the newest timestamped benchmark directory and creates data pl
 - Application resident memory over time
 - Device power usage over time
 
-# What you've accomplished
+## What you've accomplished and what's next
 You have converted the measurements from your benchmark into figures that show inference performance and device behaviour over time. You should move on to the next section where you will learn to interpret the results you have gathered.

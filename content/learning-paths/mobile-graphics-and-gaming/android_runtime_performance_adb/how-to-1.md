@@ -6,7 +6,7 @@ weight: 2
 layout: learningpathall
 ---
 
-# Create a working directory
+## Create a working directory
 Create a working directory to store the Learning Path files:
 ```bash
 mkdir -p "$HOME/Work"
@@ -22,7 +22,7 @@ export BASE_URL=https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-lear
 ``` -->
 Run the commands in the same terminal session, or set `WORK` and `BASE_URL` again if you open a new one.
 
-# Install Android SDK
+## Install Android SDK
 Install Java 17 and the Android command-line tools with Homebrew, followed by the SDK Platform Tools:
 ``` bash
 brew install --cask temurin@17 android-commandlinetools
@@ -44,7 +44,7 @@ command -v adb
 adb --version
 ```
 
-# Install Perfetto tools for profiling
+## Install Perfetto tools for profiling
 Perfetto is an open-source system tracing and performance analysis platform. You'll use it as part of your performance analysis to capture kernel-level events, process statistics and hardware activity.
 
 Trace Processor is a C++ library that loads Perfetto traces and provides an SQL interface for querying them.
@@ -59,7 +59,7 @@ chmod +x "$WORK/tools/perfetto/trace_processor"
 export PERFETTO_TRACE_PROCESSOR="$WORK/tools/perfetto/trace_processor"
 ```
 
-# Install Jupyter Notebook
+## Install Jupyter Notebook
 To create a Jupyter Notebook, install JupyterLab if it is not already:
 ``` bash
 brew install jupyterlab
@@ -71,12 +71,12 @@ jupyter --version
 
 With the `jupyter lab` command, you can run a locally hosted web UI for developing Jupyter Notebook files. You will use this to create your analysis pipeline.
 
-# Install Hugging Face Hub
+## Install Hugging Face Hub
 Install the Hugging Face Hub CLI where you will download the LiteRT-LM model from:
 ```bash
 brew install hf
 hf version
 ```
 
-# What you've accomplished
+## What you've accomplished and what's next
 So far, you have installed all the necessary environment tools and packages which you will need to complete the Learning Path. In the next section you'll use the Android Platform tools to wirelessly connect to a device.

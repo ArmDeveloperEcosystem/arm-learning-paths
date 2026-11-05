@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-# Configure model backend
+## Configure model backend
 Now that you have all of the monitoring assets in place, you are ready to capture some real performance data.
 
 On your target device, open PhotoTalk and tap the **Select Image** button. This is where you will come to upload an image to the chat during the benchmark. Confirm that you have at least one non-sensitive image available to upload.
@@ -28,7 +28,7 @@ Select CPU, or try GPU if your device supports it. NPU requires compatible hardw
 
 ![Screenshot of the settings menu in the PhotoTalk application with hardware backend, model path and initialisation confirmation highlighted#center](phototalk_config.png "Figure 5. Screenshot of PhotoTalk settings")
 
-# Capture performance data
+## Capture performance data
 Update the duration inside your 'Runtime Monitoring' notebook section to five minutes as shown here:
 ```python
 DURATION_SECONDS = 300
@@ -46,5 +46,5 @@ This Learning Path uses a manual benchmark. For longer tests, automate applicati
 
 After five minutes, the script saves the extracted data in `$WORK/data/`.
 
-# What you've accomplished
+## What you've accomplished and what's next
 You have captured performance data from a five-minute manual benchmark. The data describes how the hardware of your target device was performing during the benchmark. Next, you will visualise the data to interpret the results.

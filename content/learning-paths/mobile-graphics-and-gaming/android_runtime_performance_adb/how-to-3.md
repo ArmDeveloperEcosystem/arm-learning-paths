@@ -6,8 +6,8 @@ weight: 4
 layout: learningpathall
 ---
 
-# Download the reference application
-Download the reference application, whose runtime performance you'll measure, onto your host machine. [PhotoTalk](https://github.com/google-ai-edge/litert-samples/tree/main/samples/litert/phototalk_sample_app) is an open-source LiteRT-LM sample application for interactive image-based conversation.
+## Download the reference application
+You need an application to profile, and for the Learning Path you'll use this reference application: [PhotoTalk](https://github.com/google-ai-edge/litert-samples/tree/main/samples/litert/phototalk_sample_app), an open-source LiteRT-LM sample application for interactive image-based conversation. Download it onto your host machine so you can measure its runtime performance. You can also adapt all the steps to your own application to measure its runtime performance assuming it is LiteRT-LM based.
 
 Clone the repository into your working directory:
 ``` bash
@@ -15,7 +15,7 @@ cd $WORK
 git clone https://github.com/google-ai-edge/litert-samples.git
 ```
 
-# Modify the reference application
+## Modify the reference application
 PhotoTalk doesn’t log LiteRT-LM model performance metrics by default. Modify its Conversation API calls to log these metrics. You can apply the same approach to other applications that use the LiteRT-LM Conversation API.
 
 Navigate to the PhotoTalk source directory, then open `LiteRtLmHelper.kt` in your preferred editor:
@@ -88,7 +88,7 @@ For example:
 `android --sdk="$ANDROID_HOME" sdk install PACKAGE`
 {{% /notice %}}
 
-# Download and push a LiteRT-LM model
+## Download and push a LiteRT-LM model
 PhotoTalk automatically scans your Android device's `/sdcard/Download/` folder for compatible `.litertlm` models. Supported model families include:
 - Gemma 4 E2B
 - Gemma 3 1B
@@ -117,5 +117,5 @@ adb shell 'ls -lh /sdcard/Download/*.litertlm'
 Make sure to use a test device or provide only non-sensitive prompts and images. Also note that the model will remain in `/sdcard/Download/` after the tutorial until removed.
 {{% /notice %}}
 
-# What you've accomplished
+## What you've accomplished and what's next
 You have modified the PhotoTalk application to expose Large language model (LLM) activity and uploaded it, along with a LiteRT-LM model, onto your target Android device. Proceed to the next section where you will prepare the performance monitoring infrastructure.

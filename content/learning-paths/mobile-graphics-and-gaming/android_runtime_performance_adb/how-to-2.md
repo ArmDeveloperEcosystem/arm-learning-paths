@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-# Enable wireless debugging
+## Enable wireless debugging
 Android Debug Bridge (adb) lets you communicate with an Android device over USB or Wi-Fi. You’ll use it to deploy applications and collect telemetry from the device. An advantage of wireless connection is that it avoids USB charging, which can distort power measurements during performance monitoring.
 
 Before connecting your Android device, disable mDNS auto-connect on the host to prevent adb from creating duplicate wireless connections:
@@ -22,14 +22,14 @@ On the target device, navigate to **Developer options** and enable **Wireless de
 
 {{% notice %}}
 Use the search bar in the Settings application to find the **Developer options** page.
-If **Developer options** isn’t available, enable _developer mode_.
+If **Developer options** isn’t available, enable [developer mode](https://developer.android.com/studio/debug/dev-options).
 {{% /notice %}}
 
 After you enable wireless debugging, the device will request to connect to a Wi-Fi network if it isn't already. Connect the device to the same Wi-Fi network as your host machine.
 
 When the Wi-Fi connection is established, you'll be able to pair your host machine. Select **Pair device with pairing code**. Note the pairing IP address, pairing port, and pairing code shown on the device, then run:
 
-![Screenshot of device pairing pop-up with highlighted Connection and Pairing IP addresses#center](device_pair_popup.png "Figure 2. Screenshot of device pairing pop-up")
+![Screenshot of device pairing pop-up with highlighted Connection and Pairing IP addresses#center](device_pair_popup_blurred.png "Figure 2. Screenshot of device pairing pop-up")
 
 ``` bash { output_lines = "2-3" }
 adb pair PAIRING_IP_ADDRESS:PAIRING_PORT
@@ -40,7 +40,7 @@ Successfully paired to PAIRING_IP_ADDRESS:PAIRING_PORT [guid=<device GUID>]
 VPNs can cause connection issues with wireless pairing. Ensure that both devices have direct peer-to-peer network access.
 {{% /notice %}}
 
-# Connect to the target device
+## Connect to the target device
 Connect to the target device using the connection IP address:
 ```bash { output_lines = "2" }
 adb connect DEVICE_IP_ADDRESS:CONNECTION_PORT
@@ -53,5 +53,5 @@ List of devices attached
 DEVICE_IP_ADDRESS:CONNECTION_PORT    device
 ```
 
-# What you've accomplished
+## What you've accomplished and what's next
 At this stage, you have established and verified a wireless connection to an Android device using Android Debug Bridge. Next, you will install a modified reference application as well as a LiteRT-LM model over this wireless connection.

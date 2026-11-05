@@ -6,12 +6,12 @@ weight: 8
 layout: learningpathall
 ---
 
-# Interpret the results
+## Interpret the results
 The final step of performance analysis is to interpret the results of your benchmark. This guide uses its own reference data but you can use this as an example when reviewing your own results.
 
 The following reference data was collected from a two-minute runtime benchmark of the PhotoTalk application which included three separate conversations with varied question lengths to give a better idea of LLM performance with respect to prompt length.
 
-## LLM performance
+### LLM performance
 ![Three adjacent performance graphs showing prefill speed, decode speed and ttft against prompt length#center](inference_plot.png "Figure 6. LLM performance plots")
 The figure shows three different plots relating to time to first token, prefill and decode speed respectively. The line of best fit gives a rough estimate of the trend of each measure in relation to prompt length.
 
@@ -25,13 +25,13 @@ Prefill speed increases with prompt length in this run, but does the same trend 
 
 Decode speed varies across the measurements. This variation could reflect changes in workload or device conditions, including throttling. To further investigate you could compare the timing of the measurements with temperature and power data.
 
-## Compare temperature and power
+### Compare temperature and power
 The temperature and power plots let you investigate whether device conditions coincide with changes in LLM performance. Do higher temperature or power spikes align with lower decode speeds at the same time? The CSV logs you collected in `$WORK/data/` contain timestamps to help you correlate hardware events and verify this. Repeat the benchmark to check whether any relationship appears consistently before attributing the variation to throttling.
 
 ![A line plot from the reference data of temperature plotted against time. Numerous spikes can be observed from a baseline temperature of around 35 degrees#center](temperature_plot.png "Figure 7. Temperature performance plot")
 ![A line plot from the reference data of power plotted against time. Numerous spikes can be observed from a baseline power usage of around 2.25W#center](power_plot.png "Figure 8. Power performance plot")
 
-## Inspect memory usage
+### Inspect memory usage
 The resident set size stays fairly constant during this run, except for two sharp troughs that coincide with temperature and power spikes.
 
 Do these troughs align with the timestamps at which new conversations started? In `llm-perf.csv` you can align the `elapsedSeconds` field of each inference with the time axis of the plot. The number of troughs alone does not establish a relationship. Record the conversation start times and repeat the benchmark to check whether the pattern occurs consistently.
@@ -39,5 +39,5 @@ Do these troughs align with the timestamps at which new conversations started? I
 
 You should draw your own conclusions about the data you have collected as it might look slightly different depending on the device and backend you have chosen.
 
-# What you've accomplished
+## What you've accomplished and what's next
 You now have the skills to interpret the data from your runtime performance analysis. At this point you have a full performance analysis pipeline from data gathering to result interpretation. Going forward you might choose to make this process more detailed and efficient by adding in new measurements or automating application usage.
