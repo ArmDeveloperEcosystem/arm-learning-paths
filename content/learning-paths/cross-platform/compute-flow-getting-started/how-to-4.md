@@ -13,7 +13,7 @@ Use the built speech-to-text CLI to compare the speech recognition stage. Changi
 
 The Parakeet model files total approximately 683 MB, with dynamic INT8 quantization for fully connected weights and FP32 external interfaces. The Moonshine FP32 model files total approximately 247 MB. These are different model families using LiteRT and ONNX Runtime respectively.
 
-### Compare on an Arm64 device
+### Compare on native Arm64
 
 Resolve the Parakeet package path for its manifest. Run both alternatives on the same mono 16 kHz recording, with one CPU thread and profiling enabled:
 
