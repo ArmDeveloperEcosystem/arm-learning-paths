@@ -71,6 +71,7 @@ generated_summary_faq:
 author:
     - Annie Tallund
     - Joshua Marshall-Law
+    - Barbara Corriero
 
 generate_summary_faq: false
 rerun_summary: false
