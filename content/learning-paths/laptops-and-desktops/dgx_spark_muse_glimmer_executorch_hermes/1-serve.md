@@ -45,22 +45,32 @@ sudo apt install build-essential cmake git curl python3.12-venv
 
 Docker Engine must already be running and accessible to your SSH account. Follow the [Docker Engine install guide](/install-guides/docker/docker-engine/) if needed, and reconnect after changing group membership.
 
-Download the six Learning Path files from the Arm Learning Paths GitHub repository once into `~/muse-agent`: the prerequisite checker, dependency constraints, Hermes setup helper, broken release checker, acceptance tests, and release-summary image. Download these files before downloading source or model weights:
+Download the code archive from the Arm Learning Code Examples GitLab repository and the release-summary image from the Learning Path repository once into `~/muse-agent`. The archive contains the prerequisite checker, dependency constraints, Hermes setup helper, broken release checker, acceptance tests, README, and licence. Download these files before downloading source or model weights:
 
 ```bash
 mkdir -p ~/muse-agent
 cd ~/muse-agent
-LP_FILES=https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/laptops-and-desktops/dgx_spark_muse_glimmer_executorch_hermes/files
 (
   set -e
+  EXAMPLES_REV=d0905fd84ac1e23c8c0ecb5c8052bc6ac06523ce
+  EXAMPLES_PATH=learning-paths/laptops-and-desktops/dgx_spark_muse_glimmer_executorch_hermes
+  EXAMPLES_URL="https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/$EXAMPLES_REV/code-examples-$EXAMPLES_REV.tar.gz?path=$EXAMPLES_PATH"
+  LP_FILES=https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/laptops-and-desktops/dgx_spark_muse_glimmer_executorch_hermes/files
+  download_dir=$(mktemp -d)
+  trap 'rm -rf "$download_dir"' EXIT
+  curl --fail --location --remove-on-error "$EXAMPLES_URL" -o "$download_dir/examples.tar.gz"
+  tar -xzf "$download_dir/examples.tar.gz" -C "$download_dir"
+  checker=$(find "$download_dir" -type f -name check-prereqs.sh -print -quit)
+  test -n "$checker"
+  cp "$(dirname "$checker")"/* .
+  curl --fail --location --remove-on-error "$LP_FILES/release-summary.png" -o release-summary.png
   for file in check-prereqs.sh executorch-constraints.txt setup-hermes-cli.sh release_tool.py test_release_tool.py release-summary.png; do
-    curl --fail --location --remove-on-error "$LP_FILES/$file" -o "$file"
     test -s "$file"
   done
 )
 ```
 
-The parenthesized block stops at the first failed download or empty file without closing your SSH session. All six downloads must finish successfully. If a download fails, resolve the error and retry this download step before continuing.
+The parenthesized block stops at the first failed download or extraction without closing your SSH session. The archive is pinned to a tested commit. All files must download successfully; resolve any error and retry this step before continuing.
 
 Run the prerequisite checker:
 
