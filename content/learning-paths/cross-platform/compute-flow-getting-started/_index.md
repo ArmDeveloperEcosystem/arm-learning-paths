@@ -2,6 +2,10 @@
 title: Build an audio-to-audio pipeline on Arm with Compute Flow
 description: Build and run an audio-to-audio pipeline as an application on your Arm-based device, combining Compute Flow bricks for speech recognition, translation, and speech synthesis
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 15
 
 who_is_this_for: This is an introductory topic for developers who want to combine multiple AI models into a performant end-to-end AI application running on an Arm-based CPU.
