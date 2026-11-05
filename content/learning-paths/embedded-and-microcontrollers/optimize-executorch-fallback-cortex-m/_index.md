@@ -1,22 +1,24 @@
 ---
-title: Deploy ML models across Cortex-M and Ethos-U with CMSIS-NN fallback
+title: Optimize ML model deployment on microcontrollers with CMSIS-NN kernels
 
-description: Build an ExecuTorch 1.5.1 application that delegates supported work to Ethos-U and uses CMSIS-NN for optimized Cortex-M fallback, demonstrated on Ethos-U55.
+description: Build an ExecuTorch 1.5.1 application from the published ExecuTorch CMSIS Pack, that uses CMSIS-NN for optimized Cortex-M fallback.
 
 minutes_to_complete: 60
 
-who_is_this_for: This Learning Path is for embedded machine learning developers who want to understand and build an ExecuTorch application split across an Ethos-U NPU and Cortex-M CPU.
+who_is_this_for: This Learning Path is for embedded machine learning developers building ExecuTorch applications for Cortex-M CPUs and Ethos-U NPUs.
 
 learning_objectives:
-    - Explain how ExecuTorch assigns model operations to Ethos-U, CMSIS-NN-backed Cortex-M operators, and portable kernels
-    - Compare a Cortex-M baseline with a partially delegated Ethos-U program
-    - Generate a model-specific CMSIS AI layer from published software packs
-    - Build and run the mixed application on a Corstone-300 Ethos-U55 FVP
+    - Export an ExecuTorch graph with Ethos-U, CMSIS-NN, and portable-kernel execution regions
+    - Lower quantized CPU fallback operations to optimized CMSIS-NN-backed Cortex-M operators, and understand the benefits in doing so
+    - Install and consume the published ExecuTorch CMSIS Pack for version 1.5.1 with selected runtime and operator components
+    - Run an application built from the ExecuTorch CMSIS Pack on a Corstone-300 Ethos-U55 FVP
+    - Understand when and why to use the ExecuTorch CMSIS Pack
 
 prerequisites:
-    - A Windows or Linux computer with Git and Python 3.10 to 3.13
+    - A Windows, Linux, or macOS machine with Git, VS Code, and Python 3.10 to 3.13
+    - Docker Desktop for FVP simulation on macOS
     - An internet connection and command-line access
-    - Familiarity with PyTorch models and post-training quantization
+    - Familiarity with PyTorch
     - Basic familiarity with Cortex-M processors and Ethos-U NPUs
 
 author:
@@ -37,6 +39,7 @@ armips:
 operatingsystems:
     - Linux
     - Windows
+    - macOS
 tools_software_languages:
     - Python
     - PyTorch

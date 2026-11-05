@@ -1,31 +1,68 @@
 ---
 title: Add Ethos-U delegation and CPU fallback
 weight: 4
-description: Partition TinyCNN for Ethos-U, lower the remaining convolution to Cortex-M, and generate the model-specific AI layer on the U55 demonstration target.
+description: Partition TinyCNN for Ethos-U, lower the remaining convolution to Cortex-M, and generate the model-specific AI layer on the Ethos-U55 demonstration target.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Partition the same model for Ethos-U
+## Deploying across Cortex-M and Ethos-U NPU
 
-The mixed export changes the order of decisions. It first gives
-`EthosUPartitioner` the opportunity to claim supported graph regions. It then
-applies Cortex-M lowering only to the operations left outside the delegate:
+We can re-use the same script as on the previous page, this time using 'Fallback mode'. This uses `EthosUPartitioner` to
+create an Ethos-U55 delegate region, represented by `executorch_call_delegate`.
+The exporter then applies `CortexMPassManager` to operations left outside that
+delegate, lowering its supported convolution to a registered Cortex-M operator
+implemented by CMSIS-NN.
+
+For supported neural-network operations, the expected order is Ethos-U NPU,
+then CMSIS-NN on the Cortex-M CPU, then a portable CPU kernel. This keeps as much
+work as possible on the NPU and gives unsupported quantized work an optimized
+CPU route before using a general implementation.
 
 ![Flow diagram showing that the graph is quantized, supported work is partitioned for Ethos-U, the supported remainder is lowered to Cortex-M operators, and the final remainder stays portable. This order preserves eligible NPU work before CPU lowering.#center](images/executorch-export-flow.svg "ExecuTorch partitioning and lowering order")
 
-Ordering matters. If Cortex-M lowering ran first, it could rewrite a
-convolution that should have been offered to the NPU.
+Ordering matters. If Cortex-M lowering runs first, it could rewrite a
+convolution that should be offered to the NPU.
+
+The exporter first creates an Ethos-U55 compile specification and configures
+the target-specific quantizer:
+
+```python
+compile_spec = EthosUCompileSpec(target=args.target)
+quantizer = EthosUQuantizer(compile_spec)
+quantizer.set_global(
+    get_symmetric_quantization_config(is_per_channel=True)
+)
+```
+
+After quantization, `EthosUPartitioner` identifies supported regions and lowers
+them into an Ethos-U delegate:
+
+```python
+edge_program_manager = to_edge_transform_and_lower(
+    quantized_exported_program,
+    partitioner=[EthosUPartitioner(compile_spec)],
+    compile_config=EdgeCompileConfig(_check_ir_validity=False),
+)
+```
+
+The exporter then applies Cortex-M lowering to the operations that remain
+outside the delegate:
+
+```python
+edge_program_manager._edge_programs["forward"] = CortexMPassManager(
+    edge_program_manager.exported_program()
+).transform()
+```
 
 This run uses the `ethos-u55-128` target to create the predictable fallback
-described earlier. The partition-then-lower order also applies to
-other Ethos-U targets; the operations left outside their delegates can differ.
+described earlier.
 
-Run the diagnostic exporter in mixed mode:
+Run the export script in mixed Cortex-M + Ethos-U mode:
 
 {{< tabpane code=true >}}
-  {{< tab header="Linux" language="bash">}}
+  {{< tab header="Linux and macOS" language="bash">}}
 python export_cortex_m_fallback.py \
   --mode ethos-u-fallback \
   --target ethos-u55-128 \
@@ -58,29 +95,20 @@ cortex_m.transpose.default: 2
 executorch_call_delegate: 1
 ```
 
-The above summary is interpreted as follows:
+The final graph contains all three execution paths:
+- `executorch_call_delegate` contains the stride-one convolution accepted by
+  Ethos-U55.
+- `cortex_m.quantized_conv2d` is the stride-four convolution rejected by
+  Ethos-U55 and lowered to CMSIS-NN.
+- `aten.topk` remains a portable FP32 operation.
 
-| Model work | Final Graph target | Execution engine |
-| --- | --- | --- |
-| Stride-one convolution and supported surrounding work | `executorch_call_delegate` | Ethos-U55 |
-| Stride-four convolution | `cortex_m.quantized_conv2d_nhwc` | Cortex-M55 using CMSIS-NN |
-| Output selection | `aten.topk` | Cortex-M55 using the portable ExecuTorch kernel |
+## Using the CMSIS-ExecuTorch project workflow
 
-One of the two convolution nodes has disappeared into the delegate. The other
-becomes a Cortex-M operator. `topk` remains portable.
+The CMSIS-Executorch project workflow uses `create_ai_layer.py` to export a model, generate a `.pte`, and select the source components required to execute it. 
 
-{{% notice Note %}}
-Vela can report `CPU operators = 0` for the region submitted to it. That line
-doesn't describe the complete ExecuTorch graph. The graph summary shows the
-Cortex-M convolution and portable `topk` that remain outside the delegate.
-{{% /notice %}}
+We have instead used a separate script for the previous examples. By using `create_ai_layer.py` instead, we will benefit from the rest of the setup.
 
-## Connect fallback to the CMSIS project
-
-The CMSIS-Executorch project uses `create_ai_layer.py` to export the model again, generate the final PTE, and select the source components required to execute it. 
-
-However, some patches have to be made. The project generator within that project currently handles Ethos-U delegation, but it does not lower the remaining convolution to Cortex-M or select CMSIS-NN. The focused
-integration patch makes four related changes:
+The pre-existing `create_ai_layer.py` does not include CMSIS-NN lowering, so we will add this through a targeted patch that makes four key changes:
 
 - It adds `ARM::CMSIS-NN@8.0.0` to the solution's Pack list.
 - It applies Cortex-M lowering after Ethos-U partitioning.
@@ -120,7 +148,7 @@ writes three useful descriptions:
 Use the MLOps description to export the model and write its CMSIS AI layer:
 
 {{< tabpane code=true >}}
-  {{< tab header="Linux" language="bash">}}
+  {{< tab header="Linux and macOS" language="bash">}}
 python create_ai_layer.py cmsis-executorch-u55.cbuild-mlops.yml
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}

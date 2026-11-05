@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Understand the solution file
 
-`cmsis-executorch-u55.csolution.yml` defines the complete U55 build context.
+`cmsis-executorch-u55.csolution.yml` defines the complete Ethos-U55 build context.
 Open it and inspect:
 
 ```yaml

@@ -9,12 +9,10 @@ layout: learningpathall
 
 ## Build the application
 
-Make sure the `vcpkg` tools are active in your current terminal, then build the
-U55 target from the repository root:
-
-```console
-cbuild cmsis-executorch-u55.csolution.yml --active SSE-300-U55
-```
+In VS Code's **CMSIS** view, confirm that
+`cmsis-executorch-u55.csolution.yml` is the active solution and
+`SSE-300-U55` is the selected target. Select **Build** to compile the application
+using the AI layer generated in chapter 3.
 
 CMSIS-Toolbox combines the App, Board, and AI layers, resolves their selected
 components, and invokes Arm Compiler for Embedded. The final output includes:
@@ -35,11 +33,12 @@ The `.axf` file contains the linked executable and debug information. The
 ## Verify the compiled source paths
 
 A successful build proves that an image was produced, but it doesn't by itself
-show which implementation supplied each operation. Run the verification helper
-against the compilation database:
+show which implementation supplied each operation. In the VS Code terminal,
+with `.venv` activated and the project root as the current directory, run the
+verification helper against the compilation database:
 
 {{< tabpane code=true >}}
-  {{< tab header="Linux" language="bash">}}
+  {{< tab header="Linux and macOS" language="bash">}}
 python verify_pack_sources.py \
   out/cmsis-executorch/SSE-300-U55/Debug/compile_commands.json
   {{< /tab >}}
@@ -68,11 +67,17 @@ shows both the resolved Pack versions and the source files actually compiled.
 
 ## Run the image on the FVP
 
-Start the Corstone-300 model and load the generated HEX image:
+In the same VS Code terminal, start the Corstone-300 model and load the generated
+HEX image. On macOS, use the Docker wrapper configured during setup:
 
-```console
+{{< tabpane code=true >}}
+  {{< tab header="Linux and Windows" language="console">}}
 FVP_Corstone_SSE-300_Ethos-U55 -f board/Corstone-300/fvp_config_u55.txt -a out/cmsis-executorch/SSE-300-U55/Debug/cmsis-executorch.hex --simlimit 60
-```
+  {{< /tab >}}
+  {{< tab header="macOS" language="bash">}}
+FVP_MODEL=FVP_Corstone_SSE-300_Ethos-U55 bash .vscode/fvp.sh -f board/Corstone-300/fvp_config_u55.txt -a out/cmsis-executorch/SSE-300-U55/Debug/cmsis-executorch.hex --simlimit 60
+  {{< /tab >}}
+{{< /tabpane >}}
 
 The relevant output is:
 
@@ -113,7 +118,7 @@ You also verified the implementation rather than inferring it from a successful
 run. The exported graph shows ownership, the compilation database shows the
 compiled Pack sources, and the FVP confirms that the combined firmware runs.
 
-This build uses U55 to make one unsupported convolution predictable. The same
+This build uses Ethos-U55 to make one unsupported convolution predictable. The same
 Pack workflow applies to another Ethos-U target when its delegated graph leaves
 operations for Cortex-M execution.
 

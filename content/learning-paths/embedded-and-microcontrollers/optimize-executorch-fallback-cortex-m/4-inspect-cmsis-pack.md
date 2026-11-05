@@ -9,10 +9,16 @@ layout: learningpathall
 
 ## Understand what the CMSIS Pack provides
 
-The [ExecuTorch CMSIS Pack](https://www.keil.arm.com/packs/executorch-pytorch/overview/) is a *source Pack*, not a prebuilt runtime library. It contains the ExecuTorch sources plus metadata defining selectable components and their dependencies.
+The [ExecuTorch CMSIS Pack](https://www.keil.arm.com/packs/executorch-pytorch/overview/) is a *source Pack*, not a prebuilt runtime library. It supplies the ExecuTorch runtime, registration code, backends, and
+operators as selectable CMSIS components.
 
-CMSIS-Toolbox then uses that metadata to add only the chosen components to the
-application build. Arm Compiler then compiles those sources for the Cortex-M55
+A `.pack` file is a ZIP-compatible archive. Its Pack Description file, or
+PDSC, records component names, source files, dependencies, versions, and
+conditions.
+
+CMSIS-Toolbox uses that metadata to add only the chosen components to the
+application build. A CMSIS project can select only the components required by its lowered graph
+instead of maintaining one large source list. Arm Compiler then compiles those sources for the Cortex-M55
 target with the rest of the project. 
 
 ## See which Packs were resolved
@@ -21,7 +27,7 @@ CMSIS-Toolbox has already acquired the software Packs needed by the project.
 Inspect the generated Pack lock:
 
 {{< tabpane code=true >}}
-  {{< tab header="Linux" language="bash">}}
+  {{< tab header="Linux and macOS" language="bash">}}
 cat cmsis-executorch-u55.cbuild-pack.yml
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}
@@ -54,7 +60,7 @@ The AI layer is a generated CMSIS software layer that embeds the model and decla
 Open the AI layer generated from the `.pte` operator list:
 
 {{< tabpane code=true >}}
-  {{< tab header="Linux" language="bash">}}
+  {{< tab header="Linux and macOS" language="bash">}}
 cat ai_layer/ai_layer.clayer.yml
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}
