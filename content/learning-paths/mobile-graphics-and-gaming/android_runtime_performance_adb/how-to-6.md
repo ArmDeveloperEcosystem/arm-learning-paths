@@ -7,7 +7,7 @@ layout: learningpathall
 ---
 
 ## Inspect the benchmark summary
-Inside `$WORK/data/` you should have a directory labelled with the timestamp you ran the benchmark, for example: `runtime-perf-TIMESTAMP/`. Open this directory and inspect the file called `summary.txt`.
+Inside `$WORK/data/` you should have a directory with the timestamp you ran the benchmark, named: `runtime-perf-TIMESTAMP/`. Open this directory and inspect the file called `summary.txt`.
 
 This text file contains useful information about the benchmark such as:
 - Duration

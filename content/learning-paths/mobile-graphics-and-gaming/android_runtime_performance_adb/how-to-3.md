@@ -16,7 +16,7 @@ git clone https://github.com/google-ai-edge/litert-samples.git
 ```
 
 ## Modify the reference application
-PhotoTalk doesn’t log LiteRT-LM model performance metrics by default. Modify its Conversation API calls to log these metrics. You can apply the same approach to other applications that use the LiteRT-LM Conversation API.
+PhotoTalk doesn’t log LiteRT-LM model performance metrics by default. You'll need to modify its Conversation API calls to log these metrics as below. You can apply the same approach to other applications that use the LiteRT-LM Conversation API.
 
 Navigate to the PhotoTalk source directory, then open `LiteRtLmHelper.kt` in your preferred editor:
 
@@ -55,7 +55,7 @@ conv.sendMessageAsync(prompt, object : MessageCallback {
 ```
 Here an object called `MessageCallback` is passed as an action argument to `sendMessageAsync`. This is the function call to the model. `MessageCallback` executes its methods each time this function is called.
 
-Firstly add this line just before `conv.sendMessageAsync(...)` to log the inference start timestamp:
+Firstly add this line just before `conv.sendMessageAsync(...)` to record the inference start timestamp:
 ```java
 val inferenceStartUnixMilliseconds = System.currentTimeMillis()
 ```
@@ -72,16 +72,17 @@ Save and close the file after making the edits. Now each time the model is calle
 - Decode speed
 - Time to first token (TTFT)
 
-The monitoring script you will use automatically collects these log entries.
+The monitoring script you will use later automatically collects these log entries.
 
-The reference application comes with its own Gradle-based build wrapper, which will automatically install any missing Android build tools or libraries. The build will automatically use the wireless connection you have previously established:
+## Install the reference application
+The reference application comes with its own Gradle-based build wrapper, which will install any missing Android build tools or libraries. The build will use the wireless connection you have previously established:
 ``` bash
 cd $WORK/litert-samples/samples/litert/phototalk_sample_app/android
 ./gradlew installDebug
 ```
 You should now have the PhotoTalk application installed on your target device.
 
-{{% notice Disclaimer%}}
+{{% notice Important Note%}}
 The PhotoTalk build might need additional Android SDK packages. Gradle downloads missing packages when the required SDK licences have been accepted. If the build reports a missing package or licence, install or accept it using the Android CLI, then run the command again.
 For example:
 
@@ -89,7 +90,7 @@ For example:
 {{% /notice %}}
 
 ## Download and push a LiteRT-LM model
-PhotoTalk automatically scans your Android device's `/sdcard/Download/` folder for compatible `.litertlm` models. Supported model families include:
+PhotoTalk scans your Android device's `/sdcard/Download/` folder for compatible `.litertlm` models. Supported model families include:
 - Gemma 4 E2B
 - Gemma 3 1B
 - FastVLM (0.5B)
@@ -97,7 +98,7 @@ PhotoTalk automatically scans your Android device's `/sdcard/Download/` folder f
 You will use Gemma 4 E2B for this Learning Path, which can be downloaded from [Hugging Face](https://huggingface.co/litert-community/gemma-4-E2B-it-litert-lm).
 
 {{% notice Note %}}
-Downloading the model can take around 30 minutes, depending on your network connection.
+Downloading the model can take around 30 minutes, depending on your network connection. Note that the model will remain in `/sdcard/Download/` after the tutorial until removed.
 {{% /notice %}}
 ```bash
 mkdir -p "$WORK/models"
@@ -112,10 +113,6 @@ Validate that the model was pushed successfully:
 ```bash
 adb shell 'ls -lh /sdcard/Download/*.litertlm'
 ```
-
-{{% notice Disclaimer%}}
-Make sure to use a test device or provide only non-sensitive prompts and images. Also note that the model will remain in `/sdcard/Download/` after the tutorial until removed.
-{{% /notice %}}
 
 ## What you've accomplished and what's next
 You have modified the PhotoTalk application to expose Large language model (LLM) activity and uploaded it, along with a LiteRT-LM model, onto your target Android device. Proceed to the next section where you will prepare the performance monitoring infrastructure.

@@ -1,5 +1,5 @@
+-- Match current and voltage samples captured at the same trace timestamp.
 WITH raw_samples AS (
-  -- Battery current and voltage share timestamps when sampled by android.power.
   SELECT
     current.ts,
     current.value AS current_ua,
@@ -11,6 +11,8 @@ WITH raw_samples AS (
   WHERE current_track.name = 'batt.current_ua'
     AND voltage_track.name = 'batt.voltage_uv'
 ),
+-- Convert microamps and microvolts to watts, and retain the preceding timestamp
+-- so energy can be calculated for each sampling interval.
 samples AS (
   SELECT
     ts,
@@ -21,6 +23,8 @@ samples AS (
     lag(ts) OVER (ORDER BY ts) AS previous_ts
   FROM raw_samples
 ),
+-- Convert trace time to elapsed wall-clock time and integrate power over each
+-- interval. The script replaces MONITOR_START_MS before running this query.
 power AS (
   SELECT
     ts,
@@ -35,6 +39,7 @@ power AS (
     END AS interval_energy_wh
   FROM samples
 )
+-- Return instantaneous battery readings and cumulative energy in CSV-ready units.
 SELECT
   cast(round(to_realtime(ts) / 1000000.0) AS integer) AS timestampUnixMilliseconds,
   round(elapsed_seconds, 3) AS elapsedSeconds,

@@ -1,3 +1,5 @@
+-- Select memory-counter samples for every process owned by the target package.
+-- The monitoring script replaces APP_PACKAGE before running this query.
 WITH samples AS (
   SELECT counter.ts, process.pid, track.name, counter.value
   FROM counter
@@ -9,7 +11,9 @@ WITH samples AS (
       'mem.rss', 'mem.rss.anon', 'mem.rss.file', 'mem.rss.shmem',
       'mem.rss.watermark', 'mem.swap', 'mem.virt', 'mem.locked'
     )
-), pivoted AS (
+),
+-- Convert the counter names recorded as rows into one row per timestamp and PID.
+pivoted AS (
   SELECT
     ts, pid,
     max(CASE WHEN name = 'mem.rss' THEN value END) AS rss_bytes,
@@ -23,6 +27,8 @@ WITH samples AS (
   FROM samples
   GROUP BY ts, pid
 )
+-- Express timestamps relative to the monitoring start and return byte values in
+-- a CSV-friendly schema. The script replaces MONITOR_START_MS before execution.
 SELECT
   cast(round(to_realtime(ts) / 1000000.0) AS integer) AS timestampUnixMilliseconds,
   round((to_realtime(ts) / 1000000.0 - MONITOR_START_MS) / 1000.0, 3) AS elapsedSeconds,

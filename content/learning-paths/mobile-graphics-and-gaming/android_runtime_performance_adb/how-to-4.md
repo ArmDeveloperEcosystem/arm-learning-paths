@@ -34,6 +34,8 @@ curl -fL -O "$BASE_URL/monitor-memory.sql"
 curl -fL -O "$BASE_URL/power-battery.sql"
 ```
 
+Again, you should read through the comments of both the Perfetto config and SQL queries to understand how they function.
+
 ## Start up JupyterLab
 From your working directory, start up a local JupyterLab server and create a new notebook file:
 ```bash

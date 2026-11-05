@@ -9,7 +9,7 @@ layout: learningpathall
 ## Configure model backend
 Now that you have all of the monitoring assets in place, you are ready to capture some real performance data.
 
-On your target device, open PhotoTalk and tap the **Select Image** button. This is where you will come to upload an image to the chat during the benchmark. Confirm that you have at least one non-sensitive image available to upload.
+On your target device, open PhotoTalk and tap the **Select Image** button. This is where you will come to send an image to the chat during the benchmark. Confirm that you have at least one image available to use.
 
 ![Screenshot of the chat UI which appears when you first open PhotoTalk with the Image selection and settings buttons highlighted#center](phototalk_chat.png "Figure 4. Screenshot of PhotoTalk chat screen")
 
@@ -24,7 +24,7 @@ In this menu you can also select from the following hardware backends:
 - GPU
 - NPU
 
-Select CPU, or try GPU if your device supports it. NPU requires compatible hardware, a specialised model, and additional build setup, so don’t select it for this Learning Path. Tap **Initialize Engine**.
+Select CPU, or you can try GPU if your device supports it. NPU requires compatible hardware, a specialised model, and additional build setup, so do not select it for this Learning Path. Tap **Initialize Engine**.
 
 ![Screenshot of the settings menu in the PhotoTalk application with hardware backend, model path and initialisation confirmation highlighted#center](phototalk_config.png "Figure 5. Screenshot of PhotoTalk settings")
 

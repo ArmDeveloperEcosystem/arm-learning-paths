@@ -90,6 +90,24 @@ operatingsystems:
     - Android
     - macOS
 
+further_reading:
+    - resource:
+        title: Run apps on a hardware device
+        link: https://developer.android.com/studio/run/device
+        type: documentation
+    - resource:
+        title: LiteRT for Android
+        link: https://ai.google.dev/edge/litert/android
+        type: documentation
+    - resource:
+        title: perfetto
+        link: https://developer.android.com/tools/perfetto
+        type: documentation
+    - resource:
+        title: Overview of measuring app performance
+        link: https://developer.android.com/topic/performance/measuring-performance
+        type: documentation
+
 ### FIXED, DO NOT MODIFY
 # ================================================================================
 weight: 1                       # _index.md always has weight of 1 to order correctly
