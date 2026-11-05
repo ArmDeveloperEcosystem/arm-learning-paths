@@ -1,5 +1,5 @@
 ---
-title: Understand the results
+title: Interpret wasmCloud HTTP benchmark results
 description: Interpret your curl and wrk measurements and learn how wasmCloud instance pooling and concurrency settings affect throughput.
 weight: 6
 layout: learningpathall

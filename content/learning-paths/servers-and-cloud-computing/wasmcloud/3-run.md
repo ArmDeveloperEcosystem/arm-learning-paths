@@ -100,7 +100,7 @@ ssh -i /path/to/key.pem -N -L 8000:127.0.0.1:8000 ubuntu@SERVER_PUBLIC_IP
 
 The command produces no output. It's forwarding traffic in the foreground.
 
-Open [http://127.0.0.1:8000/](http://127.0.0.1:8000/) in a browser on your computer. The tunnel forwards that
+Open the [local HTTP endpoint](http://127.0.0.1:8000/) in a browser on your computer. The tunnel forwards that
 local port to the server loopback listener. Close the tunnel with **Ctrl+C** when
 finished.
 

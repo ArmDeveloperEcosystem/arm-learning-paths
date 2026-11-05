@@ -19,9 +19,9 @@ You'll build a small HTTP application from Rust source and run it on AWS Gravito
 wasmCloud. Then, you'll collect response time and throughput to measure how it responds to individual and concurrent requests.
 The application returns a greeting. 
 
-WebAssembly separates the application packaging of the component from the native host executable installed
-for a particular processor architecture. The native Linux
-Arm64 host on Graviton runs the component.
+WebAssembly separates the component package from the host executable built
+for a particular processor architecture. On Graviton, a Linux `aarch64` host
+runs the component.
 
 
 The flow of the application is as follows:

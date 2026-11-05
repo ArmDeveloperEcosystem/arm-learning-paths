@@ -7,8 +7,8 @@ layout: learningpathall
 
 ## Choose the metrics
 
-Keep `wash dev` running in the first terminal. Stop any other load tests and builds. Then, run the following tests from the
-second SSH terminal on the same server to collect the following measurements:
+Keep `wash dev` running in the first terminal. Stop any other load tests and builds. Then, run the tests from the
+second SSH terminal on the same server to collect these measurements:
 
 | Test | Metric | What it tells you |
 |---|---|---|
@@ -177,10 +177,10 @@ the files later.
 
 ## Clean up
 
-Stop `wash dev` by navigating to the terminal and entering **Ctrl+C** in its terminal. Stop any SSH tunnel that you opened.
+In the terminal running `wash dev`, press **Ctrl+C**. Stop any SSH tunnel that you opened.
 Keep the application source and results if you want to repeat the tests.
 
-When finished with your AWS instance, stop or terminate it to avoid continued charges.
+When finished with your AWS instance, stop or delete it to avoid continued charges.
 
 ## What you've accomplished and what's next
 

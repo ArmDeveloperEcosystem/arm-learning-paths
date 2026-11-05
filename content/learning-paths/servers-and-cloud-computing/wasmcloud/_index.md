@@ -1,8 +1,6 @@
 ---
 title: Build and benchmark a WebAssembly app on AWS Graviton with wasmCloud
 
-
-generate_summary_faq: true
 description: Build a small Rust HTTP application as a WebAssembly component, run it with wasmCloud on AWS Graviton, and measure response time and throughput.
 
 minutes_to_complete: 45
@@ -24,7 +22,7 @@ author:
     - Jason Andrews
     - Liam Randall
  
-generate_summary_faqs: true
+generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 

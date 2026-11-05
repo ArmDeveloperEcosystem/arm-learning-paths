@@ -7,7 +7,7 @@ layout: learningpathall
 
 ## Get the application source
 
-After setting up the `wash` CLI and Rust environment, you can now build the HTTP application.
+With `wash` and Rust set up, build the HTTP application.
 
 Download and extract the sample application archive, then navigate to the project directory:
 
@@ -116,8 +116,8 @@ The result is `http_handler_p2.wasm`.
 
 The first build also creates `Cargo.lock`. Retain it if you rebuild the application later.
 
-Your `wash` executable is native Arm64 code. The application that you built is
-a WebAssembly component that was run by the host. These are separate artifacts.
+Your `wash` executable is an `aarch64` program. The application that you built is
+a WebAssembly component that you'll run on the host. These are separate artifacts.
 
 ## What you've accomplished and what's next
 
