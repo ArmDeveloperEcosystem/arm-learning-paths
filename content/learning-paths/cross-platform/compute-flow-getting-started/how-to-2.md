@@ -38,7 +38,9 @@ command -v c++
 
 If you're targeting an Android device with cross compilation, [install the Android Platform Tools](https://developer.android.com/tools/releases/platform-tools) with the `adb` utility. 
 
-Finally, remove any previously installed `llama.cpp` versions. For example, if installed with the `brew` package manager, run the following command:
+Finally, remove any previously installed `llama.cpp` versions. 
+
+For example, if `llama.cpp` was previously installed using `brew` package manager, run the following command:
 
 ```bash
 brew uninstall llama.cpp
