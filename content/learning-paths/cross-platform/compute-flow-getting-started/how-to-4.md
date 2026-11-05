@@ -13,7 +13,7 @@ Use the built speech-to-text CLI to compare the speech recognition stage. Changi
 
 The Parakeet model files total approximately 683 MB, with dynamic INT8 quantization for fully connected weights and FP32 external interfaces. The Moonshine FP32 model files total approximately 247 MB. These are different model families using LiteRT and ONNX Runtime respectively.
 
-### On Native Arm64 device
+### Compare on an Arm64 device
 
 Resolve the Parakeet package path for its manifest. Run both alternatives on the same mono 16 kHz recording, with one CPU thread and profiling enabled:
 
@@ -21,6 +21,8 @@ Resolve the Parakeet package path for its manifest. Run both alternatives on the
 PARAKEET_PACKAGE="$(compute-flow model path stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic)"
 INPUT_AUDIO="$MOONSHINE_PACKAGE/samples/beckett.wav"
 ```
+The following results were measured on an Apple M3 Pro. The operator breakdowns have been omitted for brevity.
+
 
 {{< tabpane-normal >}}
   {{< tab header="Parakeet dynamic INT8" >}}
@@ -33,7 +35,7 @@ Run the Parakeet manifest:
   -t 1 --enable-op-profiling
 ```
 
-The output is similar to the following. The operator breakdown has been omitted for brevity.
+The output is similar to:
 
 ```output
 [TRANSCRIPTION]
@@ -54,7 +56,7 @@ Run the Moonshine manifest:
   -t 1 --enable-op-profiling
 ```
 
-The output is similar to the following. The operator breakdown has been omitted for brevity.
+The output is similar to:
 
 ```output
 [TRANSCRIPTION]
@@ -66,15 +68,15 @@ Scope stats | calls: 1 | avg ms: 290.30 | min ms: 290.30 | max ms: 290.30
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-Compare the total `run()` time. Parakeet's 30 streaming calls complete one transcription compared with a single call for Moonshine.
+Compare the total `run()` time. 30 Parakeet streaming calls complete one transcription compared with a single call for Moonshine.
 
-These results are one example of how to compare the models; your timings will vary with your hardware and setup. On an Apple M3 Pro, Moonshine took 290.30 ms and Parakeet took 985.12 ms to process a single 9.963-second audio sample. The timings exclude setup and warmup, include profiling overhead, and do not assess transcription accuracy.
+These results are one example of how to compare the models. Your timings will vary with your hardware and setup. On the Apple M3 Pro, Moonshine took 290.30 ms and Parakeet took 985.12 ms to process a single 9.963-second audio sample. The timings exclude setup and warmup, include profiling overhead, and don't assess transcription accuracy.
 
-Pass your own representative audio samples in a JSON file with `-j runs.json` to evaluate more inputs. The shared Python API and CLI let you quickly profile models across different runtimes and find the most suitable model for your application by changing manifests.
+Pass your own representative audio samples in a JSON file with `-j runs.json` to evaluate more inputs. The shared Python API and CLI let you quickly profile models across different runtimes. You can find the most suitable model for your application by changing manifests.
 
-### On Android Arm64 phone
+### Compare on an Android Arm64 phone
 
-Use the Android build and model packages from the previous steps. Run both models on the same mono 16 kHz recording, with one CPU thread and profiling enabled.
+Use the Android build and model packages from earlier. Run both models on the same mono 16 kHz recording, with one CPU thread and profiling enabled.
 
 From the Compute Flow repository root, transfer the speech-to-text CLI and make it executable:
 
@@ -131,7 +133,7 @@ Scope stats | calls: 1 | avg ms: 552.39 | min ms: 552.39 | max ms: 552.39
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-Compare the total `run()` time across all calls. On this Pixel 8, Moonshine took 552.39 ms and Parakeet took 1154.04 ms to process the same 9.963-second sample. These are single-run measurements; your timings will vary with device load, temperature, and hardware. The timings exclude setup and warmup, include profiling overhead, and do not assess transcription accuracy.
+Compare the total `run()` time across all calls. On the Pixel 8, Moonshine took 552.39 ms and Parakeet took 1154.04 ms to process the same 9.963-second sample. These are single-run measurements. Your timings will vary with device load, temperature, and hardware. The timings exclude setup and warmup, include profiling overhead, and don't assess transcription accuracy.
 
 ## What you've accomplished
 

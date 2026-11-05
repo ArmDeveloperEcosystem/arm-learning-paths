@@ -7,7 +7,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Understand what changes when you replace a model
+## How the speech-to-text component update works
 
 Now that you've built the audio-to-audio pipeline, you can make changes to the speech-to-text component.
 
@@ -67,7 +67,7 @@ python audio_translation_example/audio_translation.py \
 ```
 {{< /tab >}}
 {{< tab header="Cross-compile for Android Arm64" >}}
-Push the moonshine model
+Push the moonshine model:
 ```bash
 adb shell mkdir -p /data/local/tmp/compute-flow/audio-translation/moonshine
 
@@ -75,7 +75,7 @@ adb push --sync "$(compute-flow model path stt:moonshine moonshine-base-en)"/. \
   /data/local/tmp/compute-flow/audio-translation/moonshine/
 ```
 
-Rerun the application using moonshine. 
+Rerun the application using moonshine:
 
 ```bash
 adb push --sync build_audio_translation_android/audio_translation \
@@ -92,7 +92,7 @@ adb shell 'cd /data/local/tmp/compute-flow/audio-translation &&
     --output translated_french_moonshine.wav'
 ```
 
-Retrieve the translated audio sample.
+Retrieve the translated audio sample:
 
 ```bash
 adb pull /data/local/tmp/compute-flow/audio-translation/translated_french_moonshine.wav \

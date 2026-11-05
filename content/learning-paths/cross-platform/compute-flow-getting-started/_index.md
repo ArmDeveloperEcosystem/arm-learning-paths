@@ -16,7 +16,7 @@ learning_objectives:
     - Select a speech recognition model and verify the pipeline using the same application and recording.
 
 prerequisites:
-    - An Arm-based system such as an Apple® silicon Mac, Arm-based Linux machine or Android® phone.
+    - An Arm-based system such as an Apple® silicon Mac, Arm-based Linux machine, or Android® phone.
     - Basic Python / C++ knowledge and familiarity with terminal commands
     - Internet access and at least 15 GB of available storage
 
@@ -35,7 +35,7 @@ generated_summary_faq:
   faq_generated_at: '2026-10-30T19:19:38Z'
   faq_source_hash: 4d713ef29d940b9043e743e78543b697ed42036d7557c4840126ee434003ac9d
   summary: >-
-    You'll set up Compute Flow and use it to build an audio-to-audio pipeline on an Apple® silicon Mac. First, you'll learn about Compute Flow and bricks. Then, you'll create an application that connects speech-to-text, translation,
+    You'll set up Compute Flow and use it to build an audio-to-audio pipeline on an Arm-based device. First, you'll learn about Compute Flow and bricks. Then, you'll create an application that connects speech-to-text, translation,
     and text-to-speech bricks. You'll start with the Parakeet model for speech-to-text. Then, you'll switch to Moonshine by installing its implementation and model, rebuilding, and selecting its
     manifest. Finally, you'll compare speech-to-text performance between the two models.
   # faqs:

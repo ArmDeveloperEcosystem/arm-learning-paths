@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Compute Flow bricks
 
-Compute Flow is an SDK for building AI applications from reusable AI building blocks called bricks. Each brick exposes an AI capability through a shared interface for that capability. You connect the interfaces in Python or C++ while the brick handles model-specific inference.
+Compute Flow is an SDK for building AI applications from reusable AI building blocks called bricks. Each brick exposes an AI capability through a shared interface. You connect the interfaces in Python or C++ while the brick handles model-specific inference.
 
 A brick type defines an input and output contract. A brick variant implements that contract using a particular model family. For example, Parakeet TDT and Moonshine are different speech-to-text variants. Both accept audio and its sample rate, and return text.
 
@@ -42,8 +42,8 @@ You'll use the following contracts:
 | Stage | Brick type | Input | Output |
 | --- | --- | --- | --- |
 | Audio transcription | `speech-to-text (stt)` | `raw_wav` and `sample_rate` | `text` |
-| Translate text | `lm_text` | `text_prompt` | `text` |
-| Synthesize speech | `text-to-speech (tts)` | `text_prompt` | `left_channel`, `right_channel`, and `sample_rate` |
+| Text translation | `lm_text` | `text_prompt` | `text` |
+| Speech synthesis | `text-to-speech (tts)` | `text_prompt` | `left_channel`, `right_channel`, and `sample_rate` |
 
 ### Understand the model manifest
 
