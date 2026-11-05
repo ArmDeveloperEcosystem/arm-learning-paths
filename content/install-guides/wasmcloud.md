@@ -32,15 +32,15 @@ You need an Arm Linux system and internet access. Confirm your processor archite
 uname -m
 ```
 
-The output is similar to:
+The expected output is:
 
 ```output
 aarch64
 ```
 
-## Install wash
+## Install `wash`
 
-There are two ways to install `wash`. The install script is the simplest option and always installs the latest version. The GitHub release download lets you pin a specific version and verify the checksum before installing.
+There are two ways to install `wash`. The install script is a single command that always installs the latest version. The GitHub release download lets you pin a specific version and verify the checksum before installing.
 
 ### Install using the install script
 
@@ -50,7 +50,9 @@ Run the install script to download and install `wash`:
 curl -fsSL https://wasmcloud.com/sh | bash
 ```
 
-The script detects your platform automatically and installs `wash` to `~/.wash/bin`. The output is similar to:
+The script detects your platform automatically and installs `wash` to `~/.wash/bin`. 
+
+The output is similar to:
 
 ```output
 [INFO] Installing wash - The Wasm Shell
@@ -64,7 +66,9 @@ The script detects your platform automatically and installs `wash` to `~/.wash/b
 [SUCCESS] Verified installation
 ```
 
-The script updates your shell profile automatically. Open a new terminal, or run the following to use `wash` in your current session:
+The script updates your shell profile automatically.
+
+ Open a new terminal, or run the following command to use `wash` in your current session:
 
 ```bash
 source ~/.bashrc
@@ -80,7 +84,7 @@ sudo apt-get install -y ca-certificates curl
 ```
 
 {{% notice Note %}}
-The following commands use wash version 2.11.0. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [wasmCloud releases](https://github.com/wasmCloud/wasmCloud/releases).
+The following commands use `wash` version `2.11.0`. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [wasmCloud releases](https://github.com/wasmCloud/wasmCloud/releases).
 {{% /notice %}}
 
 Download the prebuilt Arm64 binary:
@@ -107,9 +111,9 @@ The output is similar to:
 /home/ubuntu/.cache/wasmcloud-install/2.11.0/wash: OK
 ```
 
-If your username isn't `ubuntu`, the path shown will reflect your actual username. If the checksum fails, download the file again and confirm the version and asset name match before continuing.
+If your username isn't `ubuntu`, the path shown will reflect your actual username. If the checksum fails, download the file again and confirm that the version and asset name match before continuing.
 
-Install wash to your user executable directory:
+Install `wash` to your user executable directory:
 
 ```bash
 mkdir -p "$HOME/.local/bin"
@@ -182,4 +186,6 @@ Displaying help doesn't start a listener or load an application.
 
 ## Next steps
 
-To build and run a WebAssembly application on AWS Graviton, see [Build and measure a WebAssembly application on AWS Graviton with wasmCloud](/learning-paths/servers-and-cloud-computing/wasmcloud/).
+You can now use `wash` to build and run a WebAssembly application on Arm. 
+
+To learn more, see [Build and measure a WebAssembly application on AWS Graviton with wasmCloud](/learning-paths/servers-and-cloud-computing/wasmcloud/).
