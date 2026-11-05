@@ -7,6 +7,10 @@ theme = "arm-design-system-hugo-theme"
 enableGitInfo = true
 enableRobotsTXT = true
 
+[security]
+# Keep Hugo's default content policy, except this site has first-party HTML pages.
+allowContent = ['! ^text/org$']
+
 [deployment]
 [[deployment.targets]]
 name = "dev"
