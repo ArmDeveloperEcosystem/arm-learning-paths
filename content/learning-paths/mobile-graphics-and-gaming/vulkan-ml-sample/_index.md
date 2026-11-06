@@ -1,9 +1,9 @@
 ---
-title: Enable neural graphics using ML Extensions for Vulkan
+title: Enable Neural Graphics using ML Extensions for Vulkan®
 description: Learn how to set up ML Emulation Layers for Vulkan, run sample applications with ML Extensions for Vulkan, and debug the workflow with RenderDoc.
 minutes_to_complete: 30
 
-who_is_this_for: This advanced Learning Path is for engine developers who want to create neural graphics with ML Extensions for Vulkan.
+who_is_this_for: This advanced Learning Path is for developers who want to create neural graphics and AI/ML workloads using ML Extensions for Vulkan.
 
 learning_objectives:
     - Explain the purpose of neural graphics and the role of ML Extensions for Vulkan
@@ -12,11 +12,11 @@ learning_objectives:
     - Debug the flow using RenderDoc
 
 prerequisites:
-    - Windows 11 development machine
-    - Visual Studio 2022
-    - Visual Studio workload - Desktop development with C++
-    - Visual Studio workload - .NET desktop build tools
-    - Visual Studio Code
+    - Windows 11 x86-64 computer (physical machine or virtual machine)
+    - Visual Studio 2022 with Desktop development with C++ and .NET desktop build tools workloads
+    - Visual Studio Code with C/C++ and CMake Tools extensions (Microsoft)
+    - Python 3.10 or later
+    - Git
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -71,6 +71,7 @@ generated_summary_faq:
 author:
     - Annie Tallund
     - Joshua Marshall-Law
+    - Barbara Corriero
 
 generate_summary_faq: false
 rerun_summary: false
