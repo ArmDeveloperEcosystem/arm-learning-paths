@@ -22,12 +22,12 @@ To use hardware breakpoints in µVision follow the steps outlined below:
 1. ![Run](./b_uv4_run.png) **Run (F5)** the application.
 1. Bring `Blinky.c` in focus by clicking on its tab. If it is not visible, double-click on it in the **Project** window.
 3. In `Blinky.c`, scroll down to the `while (1)` loop in the `main` function near line 42 as shown here:  
-![Inside the while loop](./mainwhileloop.png)
+![Blinky.c source showing the while loop where hardware breakpoints can be set#center](./mainwhileloop.png)
 4. Note the darker grey blocks on the left of the line numbers. They indicate assembly code being present and that you can set a hardware breakpoint on these lines. You can also see these blocks in the **Disassembly** window:  
-![while loop Disassembly](./mainwhileloopdisassembly.png)
+![Disassembly window showing machine instructions interleaved with Blinky.c source lines and margin markers for breakpoints#center](./mainwhileloopdisassembly.png)
 5. While the program is still running, click to the left of a suitable line in the `while` loop (for example at line 47) and a red circle will be created. This is a hardware breakpoint. The simulated Arm Cortex-M55 has eight hardware breakpoints. μVision will warn you if you exceed this limit.
 6. The program will soon stop at the line where you have set the breakpoint on as shown below. The yellow arrow is the current program counter position. This will be the next instruction executed. The cyan arrow is a placeholder you can use to explore the relationship between a source window and the **Disassembly** window.  
-![Program execution stopped](./mainwhileloopstopped.png)
+![Blinky.c stopped at a breakpoint in the while loop, with the yellow program counter arrow beside the next instruction#center](./mainwhileloopstopped.png)
 7. Add another breakpoint in `while (1)` (for example at line 50).
 8. Each time you click on ![Run](./b_uv4_run.png) **Run (F5)**, the program will cycle to the next breakpoint.
 
@@ -42,7 +42,7 @@ To use hardware breakpoints in µVision follow the steps outlined below:
 ### Manage Breakpoints
 
 1. Go to **Debug - Breakpoints (Ctrl-B)** to manage breakpoints:  
-![Manage Breakpoints](./managebkpt.png)
+![Breakpoints dialog listing two enabled breakpoints in Blinky.c, with controls to disable or remove them#center](./managebkpt.png)
 2. You can temporarily unselect, delete or create breakpoints in this window. It is easier to create a breakpoint by clicking in a source file or the **Disassembly** window.
 3. [Watchpoints](#watchpoints) are also created in this window.
 4. Select **Kill All** to remove all breakpoints.
@@ -64,7 +64,7 @@ When the program is stopped, the list of stacked functions is displayed. This is
 1. Stop the program with the ![Stop](./b_uv4_stop.png) **Stop** icon. The program will probably stop in the `Delay` function.
 2. Click on the **Call Stack + Locals** window in the bottom right corner of μVision.
 3. Inspect the various entries in the Call Stack + Locals window as shown below in this simple example. Local variables are displayed only when they are in scope:  
-   ![Call Stack + Locals Window](./callstacklocals.png)  
+   ![Call Stack and Locals window showing the active function calls and local variables while Blinky is stopped#center](./callstacklocals.png)
 1. Set a breakpoint in the `while (1)` loop at line 50 on the `g_ledSet = 1;`.
 5. ![Run](./b_uv4_run.png) **Run (F5)** the application.
 6. Shortly after, the program will stop there.
@@ -72,7 +72,7 @@ When the program is stopped, the list of stacked functions is displayed. This is
 9. Note how the variables displayed change in the **Call Stack + Locals** window.
 1. ![Step into](./b_uv4_stepinto.png) **Step (F11)**  a few more times.
 1. Right-click on a function and select either **Show Caller Code** or **Show Callee Code** and this will be highlighted in the **Disassembly** and **source code** windows:  
-   ![Call Stack + Locals Window](./callstacklocals_caller_callee.png)
+   ![Call Stack and Locals context menu offering Show Caller Code and Show Callee Code for the selected function#center](./callstacklocals_caller_callee.png)
 1. ![Step out](./b_uv4_stepout.png) **Step Out (Ctrl+F11)** to exit a function immediately.
 1. Remove the **Breakpoint** (by clicking on its red circle ![Breakpoint](./bkpt.png)) to continue.
 
@@ -95,9 +95,9 @@ There is a global variable `g_msTicks` located in `Blinky.c` near line 11 that y
 1. ![Run](./b_uv4_run.png) **Run (F5)** the application.
 2. Right click on `g_msTicks` in `Blinky.c` near line 11 and select **Add 'g_msTicks' to…** and select **Watch 1**.
 3. Go to **View** in the main menu and enable **Periodic Window Update**:  
-![Periodic Window Update](./periodicwindowupdate.png)
+![View menu with Periodic Window Update enabled so Watch values refresh while the program runs#center](./periodicwindowupdate.png)
 4. `g_msTicks` will be displayed in **Watch 1**:  
-![g_msTicks in Watch 1 Window](./gmstickswatch.png)
+![Watch 1 window displaying the changing g_msTicks value during program execution#center](./gmstickswatch.png)
 5. The values of `g_msTicks` are updated in real-time if *Periodic Window Update* is enabled.
 6. You can modify the value in a **Watch** window when the program is stopped or changing slowly. You can modify a variable in a **Memory** window anytime (see next section).
 
@@ -105,7 +105,7 @@ There is a global variable `g_msTicks` located in `Blinky.c` near line 11 that y
 
 1. Click on `<Enter expression>` twice and enter: `SystemCoreClock`
 2. Right click on the `Value` and deselect **Hexadecimal Display**. 32 MHz will be displayed:  
-![SystemCoreClock in Watch 1 Window](./systemcoreclockwatch.png)
+![Watch 1 window showing SystemCoreClock in decimal as 32 MHz#center](./systemcoreclockwatch.png)
 
 {{% notice Note %}}
 You do not need to stop the program execution to enter variables, raw addresses or structures in a **Watch** or **Memory** window.
@@ -118,7 +118,7 @@ You do not need to stop the program execution to enter variables, raw addresses 
 3. Right click in **Memory 1** and select **Unsigned Long** to see the data field as 32-bit numbers.
 4. Add an ampersand `&` in front of the variable name `g_msTicks` and press Enter. Now the physical address is shown (0x2000_0008) in this case. This physical address could change with different compilation optimizations.
 5. The data contents of `g_msTicks` is displayed as shown:  
-![g_msTicks in Memory 1 Window](./gmsticksmemory.png)
+![Memory 1 window showing the g_msTicks address and its 32-bit value#center](./gmsticksmemory.png)
 6. Right click on the memory data value and select **Modify Memory at 0x3000000C**. Enter a value and this will be pushed into `g_msTicks`. Since `g_msTicks` is updated often, you will only see the new value displayed for a very short time.
 7. ![Stop](./b_uv4_stop.png) **Stop** the application.
 
@@ -141,7 +141,7 @@ The example application uses the Arm Cortex-M system tick timer.
 
 1. ![System Viewer](./b_uv4_systemviewer.png) Go to **Peripherals - Core Peripherals** and then select **System Tick Timer S (SysTick)**.
 2. The **SysTick Timer** window opens:  
-![SysTick Timer Window](./systicktimerwindow.png)
+![SysTick Timer window showing the LOAD register that controls the timer interval#center](./systicktimerwindow.png)
 1. ![Run](./b_uv4_run.png) **Run (F5)** the application.
 6. While the program is running, type `0x10000` in the `SysTick -> LOAD` register and click in another register or press Enter.
 7. The program execution will speed up. This is the power of Arm CoreSight debugging.
@@ -174,12 +174,12 @@ The following does not work with the FVP used in this example. Switch to a real 
 3. In the **Expression** box, enter g_msTicks==0x44.
 4. Select both the **Read** and **Write Access**.
 5. Click on **Define** and it will be accepted as shown here:  
-![Breakpoints Window](./watchpoint.png)
+![Breakpoints dialog listing an enabled g_msTicks watchpoint that stops on read or write access at value 0x44#center](./watchpoint.png)
 6. Click on Close.
 7. ![Run](./b_uv4_run.png) **Run (F5)** the application.
 8. When `g_msTicks` equals `0x44`, the program will halt.
 9. You will see `g_msTicks` displayed with a value of 0x44 in the Watch window:  
-![Watch Window](./watchpoint_watch.png)
+![Watch window showing g_msTicks at 0x44 after the watchpoint stops execution#center](./watchpoint_watch.png)
 10. Delete the watchpoint by selecting **Kill All** in the **Breakpoints** window or use ![Kill all Breakpoints in Current Target](./b_uv4_kill_all_bpnt.png) **Kill all Breakpoints in Current Target**.
 11. Select Close.
 12. Leave Debug mode.
@@ -191,7 +191,7 @@ If you put a RAM address as the expression with no value, the next read and/or w
 1. In this example a watchpoint is created with address `0x2000_0008`.
 2. Running the program, the first read or write will stop the processor.
 3. The [**Command**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Command-Window) window shows the setting of this Watchpoint and its execution including the approximate instruction location:
-![Command Window](./command_wp_stop.png)
+![Command window showing the watchpoint at a stack address and where execution stopped#center](./command_wp_stop.png)
 
 {{% notice Notes %}}
 - Skid: The instruction noted will not be the instruction causing the break as it has not been executed yet. It will be noted in **Disassembly**.

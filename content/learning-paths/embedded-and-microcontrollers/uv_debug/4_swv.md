@@ -40,7 +40,7 @@ layout: "learningpathall"
 1. Go to ![Options for Target](./b_uv4_target_options.png) **Project - Options for Target... (Alt+F7)** and switch to the **Debug** tab.
 2. On the right-hand side, select your debug adapter and click on **Settings**. The **Target Driver Setup** window opens.
 3. Select the **Trace** tab:  
-   ![Target Driver Setup Window](./target_driver_setup.png)
+   ![Target Driver Setup Trace tab with Core Clock, Trace Enable, and exception tracing settings for SWV#center](./target_driver_setup.png)
 4. In **Core Clock:** enter the correct core clock of your target device. This value will be used for calculating timing values.
 5. If your device runs a different trace clock, you might need to unselect **Use Core Clock** and enter the correct trace clock speed. The SWO clock speed will be calculated from this. This value is crucial for a ULINK2/ULINKplus or J-Link as a UART is used. ULINKpro does not use this for the connection.
 4. Select Trace Enable. 
@@ -57,11 +57,11 @@ layout: "learningpathall"
 
 The [**Trace Exceptions**](https://developer.arm.com/documentation/101407/latest/Debugging/Debug-Windows-and-Dialogs/Trace-Exceptions) window displays statistical data about the traced exceptions and interrupts.
 
-1. ![Build](./b_uv4_debug.png) **Start a Debug Session (Ctrl+F5)** to enter the µVision debugger.
+1. ![Start Debug Session](./b_uv4_debug.png) **Start a Debug Session (Ctrl+F5)** to enter the µVision debugger.
 5. Go to **View - Trace** and select **Trace Exceptions**.
 1. ![Run](./b_uv4_run.png) **Run (F5)** the application.  
 3. In this window, click on the Count column name to bring 15 SysTick into view:  
-   ![Trace Exceptions Window](./trace_exceptions_window.png)
+   ![Trace Exceptions window showing SysTick exception 15 counts and timing statistics during execution#center](./trace_exceptions_window.png)
 4. The values are updating while the application runs. Unselect EXCTRC: box to stop the updates.
 5. Various statistics are displayed. Any other active exceptions will automatically be displayed (not in this example).
 6. *Period*=14.13/14122 = 1 ms. Thus, the SysTick is generating an interrupt every millisecond.
@@ -73,7 +73,7 @@ The [**Trace Data**](https://developer.arm.com/documentation/101407/latest/Debug
 1. Go to **View - Trace** and select **Trace Data**.
 1. ![Run](./b_uv4_run.png) **Run (F5)** the application and stop is after a little while.
 3. The **SysTick** exception is shown in Trace Data:  
-   ![Trace Data Window](./trace_data_window.png)
+   ![Trace Data window showing SysTick exception entry, exit, and return records#center](./trace_data_window.png)
 5. It is displayed with Entry, Exit and Return points:  
    **Entry**: when the exception or interrupt is entered.  
    **Exit**: when the exception or interrupt exits.  
@@ -89,13 +89,13 @@ LA shares the comparators in CoreSight with the **Watchpoints**. They are mutual
 3. In the LA, click on **Setup**. In **Display Range** set **Max:** to 0x0F. Click on **Close**. The LA is now configured. You can also configure LA while the program is running.
 4. ![Run](./b_uv4_run.png) **Run (F5)** the application. 
 5. `counter` will still be visible in Watch 1 but also shown in LA:  
-   ![Logic Analyzer Window](./la_window.png)
+   ![Logic Analyzer window plotting changes to the counter variable while Blinky runs#center](./la_window.png)
 6. Adjust the Zoom using **Out** or the **All** icon in the LA to provide a suitable scale. If no waveform is displayed in the LA, exit and re-enter debug mode to refresh the comparators.
 7. Enable **Amplitude**, **Signal Info** and **Cursor** in the LA window.
 8. Select ![Stop](./b_uv4_stop.png) **Stop** in the Update Screen to stop the LA from collecting data. The program keeps running.
 9. Click on a spot in the LA and position the mouse to demonstrate the method used to measure
 timing values:  
-   ![Logic Analyzer Window Measurements](./la_window_measure.png)
+   ![Logic Analyzer window with cursors positioned on the counter waveform to measure elapsed time#center](./la_window_measure.png)
 
 {{% notice Notes %}}
 - When you enter a variable in the Logic Analyzer window, it is also displayed in the Trace Records (or Trace Data for ULINKpro). A ULINK2, ULINKplus or ULINKpro displays the data writes. J-Link does not. ULINKplus and ULINKpro also display any LA waveforms in ![System Analyzer Window](./b_uv4_system_analyzer.png) **System Analyzer** window.
@@ -114,13 +114,13 @@ timing values:
 1. ![Run](./b_uv4_run.png) **Run (F5)** the application for a little while. The values are updating while the application runs. User the lock icon to stop the updates.
 3. In the window, use the scroll wheel of your mouse to zoom in on **SysTick(15)** in the **Exceptions** section.
 4. Use the green and red markers to verify that the SysTick interrupts are one millisecond apart and that the `counter` variable value is shown in the **Data Watch** section:  
-   ![System Analyzer Window](./system_analyzer_window.png)
+   ![System Analyzer timeline with markers one millisecond apart, counter at 9 in Data Watch, and core clock at 100 MHz#center](./system_analyzer_window.png)
 4. Depending on the debug adapter you are using, you can also verify the correct **Core Clock** setting under **System**. ULINKplus is capable of measuring this value while the application is running.
 
 #### Where are the other Events and printf?
 
 These events are there. In this simple program these events are occurring very close together. If you expand the X axis further, the events will be displayed as shown here:  
-   ![System Analyzer Window](./sa_evtrec.png)  
+   ![System Analyzer timeline zoomed in to show Event Recorder StartA and StopA annotations with stdout events#center](./sa_evtrec.png)
 You can activate the cursors and make various timing measurements.
 
 {{% notice Notes %}}
