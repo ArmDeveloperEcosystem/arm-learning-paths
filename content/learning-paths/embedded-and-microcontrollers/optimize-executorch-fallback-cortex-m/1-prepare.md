@@ -132,7 +132,7 @@ python -c "from importlib.metadata import version; print('ExecuTorch', version('
 {{< /tabpane >}}
 
 Confirm that Python is between 3.10 and 3.13,
-`cbuild` reports 2.15.0, Arm Compiler for Embedded reports 6.24, and the final
+`cbuild` reports 2.15.0 or later, Arm Compiler for Embedded reports 6.24, and the final
 two lines are:
 
 ```output
@@ -140,27 +140,32 @@ ExecuTorch 1.5.1
 PyTorch 2.14.0
 ```
 
+{{% notice Note %}}
+CMSIS-Toolbox 2.15.0 or later is required for the commands and MLOps workflow in
+this Learning Path. If `cbuild --version` reports an older version, update the
+toolbox or activate the project's 2.15.0 installation through Arm Environment
+Manager, then open a new VS Code terminal.
+{{% /notice %}}
+
 ## Download the Learning Path assets
 
-Download the fallback model, focused integration patch, and two inspection
-helpers into the repository root:
+Download this Learning Path's example folder from the code examples repository.
+The archive is pinned to a commit and includes the fallback model, integration
+patch, inspection helpers, and their license. Extract it into `lp-assets`, then
+copy the four working files into the CMSIS-Executorch project root:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux and macOS" language="bash">}}
-LP_ASSETS=https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/embedded-and-microcontrollers/optimize-executorch-fallback-cortex-m/files
-
-curl -fLO "$LP_ASSETS/mixed_backend_cnn.py"
-curl -fLO "$LP_ASSETS/enable_cortex_m_fallback.patch"
-curl -fLO "$LP_ASSETS/export_cortex_m_fallback.py"
-curl -fLO "$LP_ASSETS/verify_pack_sources.py"
+curl -fL "https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/e234c59f4b64b7b41e3d82b90dca21775572363f/code-examples-e234c59f4b64b7b41e3d82b90dca21775572363f.tar.gz?path=learning-paths/embedded-and-microcontrollers/optimize-executorch-fallback-cortex-m" -o lp-assets.tar.gz
+mkdir -p lp-assets
+tar -xzf lp-assets.tar.gz -C lp-assets --strip-components=4
+cp lp-assets/*.py lp-assets/*.patch .
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}
-$lpAssets = "https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/embedded-and-microcontrollers/optimize-executorch-fallback-cortex-m/files"
-
-curl.exe -fLO "$lpAssets/mixed_backend_cnn.py"
-curl.exe -fLO "$lpAssets/enable_cortex_m_fallback.patch"
-curl.exe -fLO "$lpAssets/export_cortex_m_fallback.py"
-curl.exe -fLO "$lpAssets/verify_pack_sources.py"
+curl.exe -fL "https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/e234c59f4b64b7b41e3d82b90dca21775572363f/code-examples-e234c59f4b64b7b41e3d82b90dca21775572363f.tar.gz?path=learning-paths/embedded-and-microcontrollers/optimize-executorch-fallback-cortex-m" -o lp-assets.tar.gz
+New-Item -ItemType Directory -Force lp-assets | Out-Null
+tar -xzf lp-assets.tar.gz -C lp-assets --strip-components=4
+Copy-Item lp-assets\*.py, lp-assets\*.patch .
   {{< /tab >}}
 {{< /tabpane >}}
 

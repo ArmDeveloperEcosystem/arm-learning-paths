@@ -15,13 +15,9 @@ In VS Code's **CMSIS** view, confirm that
 using the AI layer generated in chapter 3.
 
 CMSIS-Toolbox combines the App, Board, and AI layers, resolves their selected
-components, and invokes Arm Compiler for Embedded. The final output includes:
-
-```output
-Build summary: 1 succeeded, 0 failed
-```
-
-The generated images are written under:
+components, and invokes Arm Compiler for Embedded. Check that the build task
+finishes successfully without errors. Confirm that the build produces `cmsis-executorch.axf` and
+`cmsis-executorch.hex` under:
 
 ```text
 out/cmsis-executorch/SSE-300-U55/Debug/
@@ -107,15 +103,14 @@ also have a cost.
 
 ## What you've accomplished
 
-You have built and run one ExecuTorch program across three execution paths:
+You have built and run one ExecuTorch program across three execution paths, and used CMSIS-ExecuTorch to make setup easier:
 
 - The supported convolution runs in an Ethos-U55 delegate.
 - The unsupported stride-four convolution runs on Cortex-M55 through the
   ExecuTorch wrapper and optimized CMSIS-NN kernel.
 - `topk` runs through the portable ExecuTorch CPU kernel.
 
-You also verified the implementation rather than inferring it from a successful
-run. The exported graph shows ownership, the compilation database shows the
+You also verified the implementation. The exported graph shows ownership, the compilation database shows the
 compiled Pack sources, and the FVP confirms that the combined firmware runs.
 
 This build uses Ethos-U55 to make one unsupported convolution predictable. The same

@@ -13,6 +13,15 @@ Before we demonstrate fallback from an Ethos-U, we will briefly look at running 
 
 ## See how the export script lowers the graph
 
+{{% notice Note %}}
+The ExecuTorch Cortex-M backend is in **beta** in the 1.5 release used here.
+Validation covers MLPerf Tiny models and MobileNetV2.
+It combines optimized CMSIS-NN implementations with portable FP32 operators
+for operations outside its accelerated coverage. See the
+[Cortex-M backend documentation](https://docs.pytorch.org/executorch/stable/backends/arm-cortex-m/arm-cortex-m-overview.html)
+for supported operators and limitations.
+{{% /notice %}}
+
 The exporter first prepares and converts the model with `CortexMQuantizer`:
 
 ```python
