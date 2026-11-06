@@ -9,9 +9,18 @@ layout: learningpathall
 
 ## Create a working directory
 
-Create a folder named `c2pa-demo` wherever you keep your projects, using your file manager or terminal.
-Open a terminal in that folder and run the remaining commands there. Keep all files from this
-Learning Path in the same folder so the commands can use their filenames without full paths.
+Use Bash or Zsh on Linux or macOS, or PowerShell on Windows. Open your terminal in the directory
+where you keep your projects, then create and enter a working directory:
+
+```console
+mkdir c2pa-demo
+cd c2pa-demo
+```
+
+These commands create the `c2pa-demo` folder and make it your terminal's working directory. If the
+folder already exists, run only `cd c2pa-demo`. Run the remaining commands from this directory.
+Keep all files from this Learning Path in the same folder so the commands can use their filenames
+without full paths.
 
 ## Confirm C2PA Tool is available
 
@@ -42,9 +51,15 @@ To focus on signing and validation without setting up a camera, use the
 For this exercise, assume the sample represents a digitally captured photograph whose capture
 details are available to the camera software when it adds Content Credentials.
 
-Download the original JPEG from that GitHub page and save it as `image.jpg` in your `c2pa-demo`
-working directory. If your browser displays the raw image, use **Save image as**. The file is
-61,720 bytes. Keep this unsigned source file for the later steps.
+From your `c2pa-demo` working directory, download the original JPEG as `image.jpg` using `wget`:
+
+```console
+wget -O image.jpg https://raw.githubusercontent.com/contentauth/c2patool/v0.27.20/sample/image.jpg
+```
+
+The command saves the JPEG as `image.jpg`, replacing that file if it already exists. The URL points
+to the raw image rather than the GitHub HTML page. The file is 61,720 bytes. Keep this unsigned
+source file for the later steps.
 
 The upstream sample is provided under the [MIT license, © Copyright 2020 Adobe](https://github.com/contentauth/c2patool/blob/v0.27.20/LICENSE-MIT).
 Retain its copyright and permission notice if you redistribute the image.
