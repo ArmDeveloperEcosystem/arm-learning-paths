@@ -98,7 +98,7 @@ sudo apt-get install -y ca-certificates curl
 The following commands use `wash` version `2.11.0`. The same commands work with other versions. Replace the file used in these steps with the file for your version of choice. To find the latest version, see [wasmCloud releases](https://github.com/wasmCloud/wasmCloud/releases).
 {{% /notice %}}
 
-Download the prebuilt Arm64 binary:
+Download the prebuilt `aarch64` binary:
 
 ```bash
 mkdir -p "$HOME/.cache/wasmcloud-install/2.11.0"
