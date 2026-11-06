@@ -8,7 +8,7 @@ layout: "learningpathall"
 
 ## Check your development machine
 
-Run the following preflight check before downloading the source:
+Use Python 3.12 with development headers and virtual-environment support. On Linux, also install the GLib and OpenMP runtime packages (`libglib2.0-0` and `libgomp1` on Ubuntu). Run the following preflight check before downloading the source:
 
 ```bash
 case "$(uname -s)/$(uname -m)" in
@@ -21,7 +21,7 @@ case "$(uname -s)/$(uname -m)" in
     ;;
 esac
 
-for tool in python3.12 git cmake c++; do
+for tool in python3.12 git c++ ninja curl pkg-config xz; do
   command -v "$tool" >/dev/null || {
     echo "Missing required tool: $tool" >&2
     exit 1
@@ -44,14 +44,8 @@ elif sys.platform.startswith("linux"):
         )
 PY
 
-if ! command -v ninja >/dev/null && ! command -v make >/dev/null; then
-  echo "Install Ninja or Make before continuing." >&2
-  exit 1
-fi
-
 python3.12 --version
 git --version
-cmake --version | head -n 1
 c++ --version | head -n 1
 ```
 
@@ -59,11 +53,13 @@ The check confirms that you are using a supported Linux host or Apple silicon Ma
 
 - Python 3.12
 - Git
-- CMake
 - A host C++ compiler
-- Ninja or Make
+- Ninja
+- curl, pkg-config, and xz
 
 The Python export dependencies require macOS 15 or later on Apple silicon, or glibc 2.28 or later on Linux. The pinned [TOSA tools](https://pypi.org/project/tosa-tools/2026.5.0/#files) set the macOS minimum, and the [PyTorch wheels](https://pypi.org/project/torch/2.14.0/#files) require the Linux glibc version. The preflight check verifies these requirements before you install the dependencies.
+
+On Linux, the Corstone-320 FVP also requires `libstdc++.so.6` providing `GLIBCXX_3.4.26` or later.
 
 ## Clone the ExecuTorch source
 
@@ -72,38 +68,49 @@ Clone ExecuTorch, select the revision used by this Learning Path, and initialize
 ```bash
 git clone https://github.com/pytorch/executorch.git
 cd executorch
-git checkout 5c4d2c4a0150a0809bc77be9a67093f80f60a60f
+git fetch origin fe93a8b0fc8d363fbb3bfa2aa18e253507fd13f8
+git checkout fe93a8b0fc8d363fbb3bfa2aa18e253507fd13f8
 git submodule sync
 git submodule update --init --recursive
 ```
 
-Run the remaining commands from the ExecuTorch repository root. The pinned revision keeps the commands aligned with the [MobileSAM example source](https://github.com/pytorch/executorch/tree/5c4d2c4a0150a0809bc77be9a67093f80f60a60f/examples/arm/mobilesam_prompt_segmentation_example_ethos_u).
+Run the remaining commands from the ExecuTorch repository root. The pinned revision keeps the commands aligned with the [MobileSAM example source](https://github.com/pytorch/executorch/tree/fe93a8b0fc8d363fbb3bfa2aa18e253507fd13f8/examples/arm/mobilesam_prompt_segmentation_example_ethos_u).
 
 ## Create a Python environment
 
-Create and activate a Python 3.12 virtual environment:
+Create and activate a fresh Python 3.12 virtual environment for this checkout:
 
 ```bash
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install --upgrade pip
 ```
 
-Install the current ExecuTorch checkout with its Ethos-U dependencies:
+## Install ExecuTorch
+
+Build the Python package from the same checkout used by the example and native runner:
 
 ```bash
-./install_executorch.sh --optional-dependency ethos_u
+CMAKE_GENERATOR=Ninja ./install_executorch.sh --optional-dependency ethos_u
 ```
 
-Using the checkout's installer keeps the Python package aligned with the example source.
+The installer supplies CMake, the model export dependencies, and the example requirements. It selects released PyTorch and TorchAO packages for the CPU workflow.
 
 ## Install the Arm development tools
 
 {{% notice Note %}}
-Before you run the Arm setup command on macOS, install [Docker Desktop](/install-guides/docker/docker-desktop/) and follow the [AVH FVPs on macOS install guide](/install-guides/fvps-on-macos/). Add the FVPs-on-Mac `bin` directory to `PATH`. The wrapper runs the Linux Corstone-320 FVP in a container. Confirm that Docker is running and that `FVP_Corstone_SSE-320` resolves to the wrapper:
+Before you run the Arm setup command on macOS, install [Docker Desktop](/install-guides/docker/docker-desktop/) and start Docker. Install the [FVPs-on-Mac wrappers](https://github.com/Arm-Examples/FVPs-on-Mac) at the revision for FVP `11.31.28`. The wrapper runs the Linux Corstone-320 FVP in a container. Run these commands from the ExecuTorch repository root:
 
 ```bash
 docker info >/dev/null
+mkdir -p examples/arm/arm-scratch "$HOME/.armlm"
+git clone https://github.com/Arm-Examples/FVPs-on-Mac.git \
+  examples/arm/arm-scratch/FVPs-on-Mac
+git -C examples/arm/arm-scratch/FVPs-on-Mac checkout --detach \
+  cc7a4be5456db085619647811fac29e9795f806e
+bash examples/arm/arm-scratch/FVPs-on-Mac/build.sh
+export PATH="$PWD/examples/arm/arm-scratch/FVPs-on-Mac/bin:$PATH"
+export FVP_MOUNT_DIR="$PWD"
+FVP_Corstone_SSE-320 --version
 command -v FVP_Corstone_SSE-320
 ```
 {{% /notice %}}
@@ -117,16 +124,30 @@ source examples/arm/arm-scratch/setup_path.sh
 
 ## Verify the environment
 
-Confirm that Python imports ExecuTorch:
+Check that the Python dependencies are consistent after Arm setup:
 
 ```bash
-python -c "import executorch; print('ExecuTorch import succeeded')"
+python -m pip check
+```
+
+Confirm that the output is `No broken requirements found.`
+
+Check the ExecuTorch and Ethos-U imports used by the exporter:
+
+```bash
+python - <<'PYTHON'
+import executorch.kernels.quantized
+from executorch.backends.arm.ethosu import EthosUPartitioner
+from executorch.backends.arm.quantizer import EthosUQuantizer
+
+print("ExecuTorch Ethos-U imports succeeded")
+PYTHON
 ```
 
 The output is similar to:
 
 ```output
-ExecuTorch import succeeded
+ExecuTorch Ethos-U imports succeeded
 ```
 
 Check the target compiler and FVP:
@@ -159,6 +180,14 @@ MobileSAM example: PASS
 ```
 
 The comparison image, `fvp_comparison.png`, is saved under `arm_test/mobilesam/result/`. After the script completes, continue to [Validate the MobileSAM segmentation result](../validate-the-results/) to inspect the artifacts.
+
+To run the same workflow with simulated NPU counters, use timing mode:
+
+```bash
+./examples/arm/mobilesam_prompt_segmentation_example_ethos_u/run.sh --timed
+```
+
+Timing mode uses a 7,200-second timeout; the default fast mode uses 300 seconds. CPU timing and CPU/NPU ratios remain unavailable on FVP.
 
 To work through each stage manually, skip this script and continue to the next page. The following pages explain the same preparation, export, build, and validation steps. Continue only after each command succeeds; files from an earlier run can remain after a failed command.
 
