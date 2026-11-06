@@ -100,6 +100,18 @@ further_reading:
         title: C2PA Tool source repository
         link: https://github.com/contentauth/c2patool
         type: repository
+    - resource:
+        title: C2PA and Content Credentials explainer
+        link: https://spec.c2pa.org/specifications/specifications/2.4/explainer/Explainer.html
+        type: documentation
+    - resource:
+        title: C2PA Tool manifest definition file
+        link: https://github.com/contentauth/c2patool/blob/main/docs/manifest.md
+        type: documentation
+    - resource:
+        title: C2PA Conformance Program
+        link: https://c2pa.org/conformance/
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================
