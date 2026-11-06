@@ -95,7 +95,7 @@ Each run reports the mean, minimum, and standard deviation for every stage. Conf
 
 Use the image operations subtotal as your primary metric. Full preprocessing, printed as `Preprocessing`, also includes padding and tensor packing. Compare both with DNN inference and End-to-end latency to assess the application-level impact.
 
-For a more stable comparison, run six rounds, executing each build once per round and alternating their order:
+For a more stable comparison, run six rounds, running each build once per round and alternating their order:
 
 | Rounds | Execution order |
 |---|---|
