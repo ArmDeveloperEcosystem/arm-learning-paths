@@ -7,7 +7,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Understand what changes when you replace a model
+## How the speech-to-text brick update works
 
 Now that you've built the audio-to-audio pipeline, you can make changes to the speech-to-text component.
 
@@ -47,10 +47,13 @@ Selecting a different manifest works only when its brick implementation has been
 
 ## Run the same application with Moonshine
 
-Resolve the package paths again so that the command also works in a fresh terminal with the environment activated:
+Resolve the package paths again so that the command also works in a fresh terminal with the environment activated. Then, run the commands for your device.
 
 {{< tabpane-normal >}}
 {{< tab header="Native Arm64" >}}
+
+Rerun the application with Moonshine:
+
 ```bash
 MOONSHINE_PACKAGE="$(compute-flow model path stt:moonshine moonshine-base-en)"
 HY_MT2_PACKAGE="$(compute-flow model path lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation)"
@@ -67,7 +70,7 @@ python audio_translation_example/audio_translation.py \
 ```
 {{< /tab >}}
 {{< tab header="Cross-compile for Android Arm64" >}}
-Push the moonshine model
+Push the Moonshine model:
 ```bash
 adb shell mkdir -p /data/local/tmp/compute-flow/audio-translation/moonshine
 
@@ -75,7 +78,7 @@ adb push --sync "$(compute-flow model path stt:moonshine moonshine-base-en)"/. \
   /data/local/tmp/compute-flow/audio-translation/moonshine/
 ```
 
-Rerun the application using moonshine. 
+Rerun the application using Moonshine:
 
 ```bash
 adb push --sync build_audio_translation_android/audio_translation \
@@ -92,7 +95,7 @@ adb shell 'cd /data/local/tmp/compute-flow/audio-translation &&
     --output translated_french_moonshine.wav'
 ```
 
-Retrieve the translated audio sample.
+Retrieve the translated audio sample:
 
 ```bash
 adb pull /data/local/tmp/compute-flow/audio-translation/translated_french_moonshine.wav \
@@ -102,7 +105,7 @@ adb pull /data/local/tmp/compute-flow/audio-translation/translated_french_moonsh
 {{< /tab >}}
 {{< /tabpane-normal >}}
 
-The Moonshine package includes the same `beckett.wav` recording that was used in the first run.
+The Moonshine package includes the same `beckett.wav` recording that you used in the first run.
 
 ## What you've accomplished and what's next
 
