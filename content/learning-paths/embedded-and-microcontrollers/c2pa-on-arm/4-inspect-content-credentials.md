@@ -84,6 +84,9 @@ and the image. `assertion.dataHash.match` reports that C2PA Tool successfully ch
 
 ## Inspect the signature and credential
 
+Under `manifests`, open the object whose label matches `active_manifest`, then locate
+`signature_info`. The expected output includes:
+
 ```output
 "signature_info": {
   "alg": "Es256",
@@ -92,7 +95,9 @@ and the image. `assertion.dataHash.match` reports that C2PA Tool successfully ch
 }
 ```
 
-The validation results also report:
+Under `validation_results.activeManifest.success`, find `claimSignature.validated` to confirm
+that the claim signature verifies. Under `validation_results.activeManifest.failure`, the
+expected output includes:
 
 ```output
 {
@@ -126,6 +131,12 @@ Read this summary together with the individual status codes. Here, `signingCrede
 means that the signing certificate is not accepted by the tool's configured trust policy, even though
 the integrity checks succeeded. The tool distinguishes `Valid` from `Trusted`, which additionally
 requires acceptance of the signing credential under that policy.
+
+You may also find `signingCredential.ocsp.skipped` under
+`validation_results.activeManifest.informational`. This means that online certificate-status
+fetching through the Online Certificate Status Protocol (OCSP) was skipped. The `Valid` result
+does not establish that an online revocation check succeeded; read it alongside the individual
+status codes.
 
 ## Locate the C2PA structures inside the JPEG
 

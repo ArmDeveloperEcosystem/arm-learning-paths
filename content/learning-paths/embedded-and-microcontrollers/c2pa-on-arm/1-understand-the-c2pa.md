@@ -87,8 +87,9 @@ the signing credential against its trust policy.
 ## Understand trust in Content Credentials
 
 The [C2PA trust model](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_trust_model) distinguishes a *valid manifest* from a *trusted manifest*. A valid manifest is well-formed, has
-not changed since it was signed, and passes the required signature, validity-period, and credential
-revocation checks. A trusted manifest is valid and its signing credential is also trusted. A validator
+not changed since it was signed, passes the required signature and validity-period checks, and has
+not been rejected because its signing credential was revoked. A `Valid` result does not necessarily
+mean that an online revocation check succeeded. A trusted manifest is valid and its signing credential is also trusted. A validator
 can establish credential trust through configured trust anchors, including anchors from the
 [C2PA Trust List](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_c2pa_trust_list), or through a credential that the user has explicitly added to a private credential store.
 

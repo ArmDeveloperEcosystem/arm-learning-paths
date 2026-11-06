@@ -24,8 +24,9 @@ to declare how the image was created.
 The [*claim generator*](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#claim-generator-definition) is the software that assembles the claim and its references to assertions for
 signing. In this exercise, C2PA Tool performs that work using the example identity you supply below.
 
-In your text editor, create a plain-text file named `manifest.json` in your `c2pa-demo` working directory
-with these contents:
+In your text editor, create a file named `manifest.json` in your `c2pa-demo` working
+directory with these contents. On Windows, enable **File name extensions** in File Explorer and
+confirm that the filename is `manifest.json`, rather than `manifest.json.txt`:
 
 ```json
 {
