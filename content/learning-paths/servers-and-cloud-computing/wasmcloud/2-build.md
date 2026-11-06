@@ -7,7 +7,9 @@ layout: learningpathall
 
 ## Get the application source
 
-Download and extract the sample application archive, then move into the project directory:
+With `wash` and Rust set up, build the HTTP application.
+
+Download and extract the sample application archive, then navigate to the project directory:
 
 ```bash
 cd ~/wasmcloud-learning-path
@@ -16,10 +18,10 @@ tar -xzf hello-http.tar.gz
 cd hello-http
 ```
 
-The archive includes source, rather than a precompiled application. You'll
-build the component on your Graviton server.
+The archive includes source and isn't a precompiled application. You'll
+build the component on your Graviton-based server.
 
-## Understand the handler
+## Understand the handler 
 
 Open `src/lib.rs`:
 
@@ -45,13 +47,13 @@ impl Guest for Component {
 }
 ```
 
-The function receives a request, creates an HTTP response with status 200, and
-writes a fixed greeting to its body. It ignores the request contents. There is
+The function receives a request and creates an HTTP response with status `200`. It then
+writes a fixed greeting to its body and ignores the request contents. There's
 no database, external network call, or substantial computation in the handler.
 
 The surrounding `wit_bindgen::generate!` and `export!(Component)` statements
-generate the bindings and export the implementation. WIT, the WebAssembly
-Interface Types language, describes the interfaces between components and hosts.
+generate the bindings and export the implementation. The WebAssembly
+Interface Types (WIT) language describes the interfaces between components and hosts.
 
 Read the interface declaration:
 
@@ -70,7 +72,7 @@ world http-handler-p2 {
 ```
 
 This declares an incoming HTTP handler export. The component implements the
-handler; it does not open the server's TCP listening port itself.
+handler but doesn't open the TCP listening port of the server.
 
 ## Build the WebAssembly component
 
@@ -92,7 +94,7 @@ dev:
 
 The build command selects the WebAssembly target and release profile. The
 component path tells `wash` where to find the result. The development listener
-uses loopback, so you do not need to open an HTTP port in the EC2 security group.
+uses loopback, so you don't need to open an HTTP port in the EC2 security group.
 
 Build the application:
 
@@ -109,14 +111,17 @@ The output is similar to:
 -rw-rw-r-- 2 ubuntu ubuntu 95K Nov  4 15:26 target/wasm32-wasip2/release/http_handler_p2.wasm
 ```
 
-wash resolves the local WIT dependencies and runs the configured Cargo build.
-The result is `http_handler_p2.wasm`. The first build also creates `Cargo.lock`;
-retain it if you rebuild the application later.
+`wash` resolves the local WIT dependencies and runs the configured Cargo build.
+The result is `http_handler_p2.wasm`. 
 
-Your `wash` executable is native Arm64 code. The application you just built is
-a WebAssembly component, executed by the host. These are separate artifacts.
+The first build also creates `Cargo.lock`. Retain it if you want to rebuild the application later.
 
-## What you've accomplished
+Your `wash` executable is an `aarch64` program. The application that you built is
+a WebAssembly component that you'll run on the host. These are separate artifacts.
 
-You have read the handler, identified its HTTP interface, and built its `.wasm`
-artifact. Next, load that artifact into the development host and send a request.
+## What you've accomplished and what's next
+
+You've read the handler, identified its HTTP interface, and built its `.wasm`
+artifact. 
+
+Next, you'll load that artifact into the development host and send a request.
