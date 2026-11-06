@@ -25,7 +25,7 @@ You can install `wash` on Arm Linux without compiling wasmCloud or installing Ru
 
 ## Before you begin
 
-You need an Arm Linux system and internet access. 
+You need an Arm Linux system and internet access.
 
 Confirm your processor architecture:
 
@@ -51,7 +51,6 @@ Install `curl`:
 sudo apt-get update
 sudo apt-get install -y curl
 ```
-
 
 Run the install script to download and install `wash`:
 
