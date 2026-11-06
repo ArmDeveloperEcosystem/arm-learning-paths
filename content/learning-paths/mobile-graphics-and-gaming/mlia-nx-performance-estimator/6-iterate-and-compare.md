@@ -63,7 +63,7 @@ for name in ("total_cycles", "inference_time", "inferences_per_second", "dram_cy
     print(f"{name}: {before:.5f} -> {after:.5f} ({change:+.2f}%)")
 PY
 ```
-The following table includes example results:
+The following table contains reference results recorded with Neural Technology `0.2.0` and LiteRT converter `0.1.2`. Compare your own reports after installing the updated packages:
 
 | Metric | Baseline, 224 × 224 | Smaller, 128 × 128 | Change |
 | --- | ---: | ---: | ---: |
