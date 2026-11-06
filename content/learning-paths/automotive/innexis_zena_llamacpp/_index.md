@@ -1,5 +1,10 @@
 ---
 title: Run Local LLM Inference with llama.cpp on Arm Zena CSS
+
+draft: true
+cascade:
+    draft: true
+    
 description: Build llama.cpp in a Zena CSS Linux guest, verify a text model, and run two recorded CPU inference requests.
 
 minutes_to_complete: 60
