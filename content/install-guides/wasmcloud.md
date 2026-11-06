@@ -26,7 +26,9 @@ You can install `wash` on Arm Linux without compiling wasmCloud or installing Ru
 
 ## Before you begin
 
-You need an Arm Linux system and internet access. Confirm your processor architecture:
+You need an Arm Linux system and internet access. 
+
+Confirm your processor architecture:
 
 ```bash
 uname -m
@@ -76,7 +78,9 @@ source ~/.bashrc
 
 ### Install a specific version from GitHub
 
-Use this method when you need a pinned, verifiable install. You'll need `curl` and `ca-certificates`:
+Use this method when you need a pinned, verifiable install. 
+
+Install `curl` and `ca-certificates`:
 
 ```bash
 sudo apt-get update
@@ -111,7 +115,7 @@ The output is similar to:
 /home/ubuntu/.cache/wasmcloud-install/2.11.0/wash: OK
 ```
 
-If your username isn't `ubuntu`, the path shown will reflect your actual username. If the checksum fails, download the file again and confirm that the version and asset name match before continuing.
+If your username isn't `ubuntu`, the path will reflect your actual username. If the checksum fails, download the file again and confirm that the version and asset name match before continuing.
 
 Install `wash` to your user executable directory:
 
@@ -141,7 +145,7 @@ The output is similar to:
 wash 2.12.0
 ```
 
-Confirm the development host command is available:
+Confirm that the development host command is available:
 
 ```bash
 wash dev --help
@@ -188,4 +192,4 @@ Displaying help doesn't start a listener or load an application.
 
 You can now use `wash` to build and run a WebAssembly application on Arm. 
 
-To learn more, see [Build and measure a WebAssembly application on AWS Graviton with wasmCloud](/learning-paths/servers-and-cloud-computing/wasmcloud/).
+To learn more, see [Run and benchmark a WebAssembly application on AWS Graviton with wasmCloud](/learning-paths/servers-and-cloud-computing/wasmcloud/).

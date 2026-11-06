@@ -1,5 +1,5 @@
 ---
-title: Prepare wasmCloud on your Graviton server
+title: Prepare wasmCloud on your AWS Graviton-based server
 description: Install wash and the Rust toolchain on an AWS Graviton server to prepare for building and running a WebAssembly component.
 weight: 2
 layout: learningpathall
@@ -30,11 +30,12 @@ The flow of the application is as follows:
 HTTP client → wasmCloud HTTP listener → WebAssembly handler → HTTP response
 ```
 
-## Check the server
+## Check the server and install build tools
 
 Connect to your Ubuntu 24.04 Graviton-based instance using SSH. Run all Linux
-commands on that server. The Learning Path was tested on a `c7g.2xlarge` instance with 8 vCPUs and 16 GiB of RAM, with at least 16 GiB of free disk space. Other Graviton-based instance sizes
-work, and your measurements will be slightly different if you use a different size.
+commands on that server. 
+
+The Learning Path was tested on a `c7g.2xlarge` instance with 8 vCPUs and 16 GiB of RAM, with at least 16 GiB of free disk space. Other Graviton-based instance sizes work. Your measurements will be slightly different if you use a different size.
 
 Check the architecture, available processors, and memory:
 

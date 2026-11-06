@@ -1,5 +1,5 @@
 ---
-title: Build and benchmark a WebAssembly app on AWS Graviton with wasmCloud
+title: Run and benchmark a WebAssembly app on AWS Graviton with wasmCloud
 
 description: Build a small Rust HTTP application as a WebAssembly component, run it with wasmCloud on AWS Graviton, and measure response time and throughput.
 
@@ -11,7 +11,7 @@ learning_objectives:
   - Identify how a WebAssembly component and its wasmCloud host work together.
   - Build and run a Rust HTTP handler on an AWS Graviton server.
   - Measure warm response time and concurrent request throughput.
-  - Interpret the measurements and explain when instance reuse can help.
+  - Interpret the measurements and identify when instance reuse can help.
 
 prerequisites:
   - An AWS account and an [AWS Graviton instance](/learning-paths/servers-and-cloud-computing/csp/) running Ubuntu 24.04 with SSH access and sudo privileges
@@ -35,7 +35,7 @@ generated_summary_faq:
     You'll build a Rust HTTP handler as a WebAssembly component and run it with wasmCloud on an
     AWS Graviton-based server. You'll prepare the server, inspect and build the handler, then start
     `wash dev` and verify its response. Then, you'll measure warm request time, latency, and throughput
-    under one-connection and concurrent load. Finally, you'll interpret the results and consider
+    under one connection and concurrent load. Finally, you'll interpret the results and consider
     when wasmCloud instance pooling can help your application.
   # faqs:
   # - question: How do I know the wasmCloud development host started correctly?

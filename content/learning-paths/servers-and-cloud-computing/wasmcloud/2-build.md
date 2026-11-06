@@ -19,7 +19,7 @@ cd hello-http
 ```
 
 The archive includes source and isn't a precompiled application. You'll
-build the component on your Graviton server.
+build the component on your Graviton-based server.
 
 ## Understand the handler 
 
@@ -114,7 +114,7 @@ The output is similar to:
 `wash` resolves the local WIT dependencies and runs the configured Cargo build.
 The result is `http_handler_p2.wasm`. 
 
-The first build also creates `Cargo.lock`. Retain it if you rebuild the application later.
+The first build also creates `Cargo.lock`. Retain it if you want to rebuild the application later.
 
 Your `wash` executable is an `aarch64` program. The application that you built is
 a WebAssembly component that you'll run on the host. These are separate artifacts.

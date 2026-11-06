@@ -1,7 +1,8 @@
 ---
 title: Interpret wasmCloud HTTP benchmark results
-description: Interpret your curl and wrk measurements and learn how wasmCloud instance pooling and concurrency settings affect throughput.
+description: Interpret your HTTP timing and load-test measurements and learn how wasmCloud instance pooling and concurrency settings affect throughput.
 weight: 6
+
 layout: learningpathall
 ---
 
@@ -26,7 +27,7 @@ quantities.
 
 wasmCloud publishes a benchmark for its HTTP handler in [wasmCloud benchmark scripts](https://github.com/wasmCloud/wasmCloud/tree/main/scripts/bench). On an 8-core Neoverse V2 system, hot invocations complete in hundreds of microseconds. HTTP throughput reaches tens of thousands of requests per second. 
 
-Your `wrk` measurements use a different load client and measurement boundary, so the numbers aren't directly comparable. However, they describe the same hosting path.
+Your `wrk` measurements use a different load client and measurement boundary, so the numbers aren't directly comparable. However, the published benchmark describes the same hosting path.
 
 ## Warm instance pooling and concurrency
 

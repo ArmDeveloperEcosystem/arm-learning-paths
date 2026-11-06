@@ -7,8 +7,8 @@ layout: learningpathall
 
 ## Choose the metrics
 
-Keep `wash dev` running in the first terminal. Stop any other load tests and builds. Then, run the tests from the
-second SSH terminal on the same server to collect these measurements:
+Keep `wash dev` running in the first terminal. Stop any other load tests and builds. Then, run tests from the
+second SSH terminal on the same server to collect the following measurements:
 
 | Test | Metric | What it tells you |
 |---|---|---|
@@ -17,7 +17,7 @@ second SSH terminal on the same server to collect these measurements:
 | Concurrent requests | Latency and requests per second | Behavior when multiple requests overlap |
 
 The fixed greeting measures a small HTTP path. Results include the client,
-loopback networking, wasmCloud routing, and component execution. They don't
+loopback networking, wasmCloud routing, and component deployment. They don't
 represent a database application or the internet latency of an external user.
 
 Record the runtime version and system state before testing:
@@ -68,10 +68,9 @@ status=200 total_seconds=0.000469
 status=200 total_seconds=0.000481
 ```
 
-Each line should contain `status=200` and a time in seconds. For example,
-multiply a measured value in seconds by 1,000 to express it in milliseconds.
-These calls create a new curl process and connection each time. The reported
-`time_total` covers the curl transfer, rather than shell process startup.
+Each line should contain `status=200` and a time in seconds. Multiply a value measured in seconds by 1,000 to express it in milliseconds.
+These calls create a new `curl` process and connection each time. The reported
+`time_total` covers the `curl` transfer and doesn't include shell process startup.
 
 The host is already running, so these are warm-host requests. They don't
 measure loading the component, compiling it, or starting an EC2 instance.
@@ -147,7 +146,7 @@ Transfer/sec:      3.74MB
 `-c32` distributes 32 connections across the four load-generator threads. It
 doesn't create 32 applications or configure a pool of 32 guest instances.
 This test changes the offered concurrency and the client thread count together.
-It compares two useful load profiles, rather than isolating one runtime setting.
+Rather than isolating one runtime setting, it compares two useful load profiles.
 
 Compare the request rate and latency with the one-connection test. Throughput
 can increase when requests overlap, while latency can also rise as work queues.

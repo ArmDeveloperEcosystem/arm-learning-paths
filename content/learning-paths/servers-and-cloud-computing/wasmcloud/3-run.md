@@ -35,7 +35,7 @@ INFO listening for HTTP requests address=http://127.0.0.1:8000
 
 Wait for the `listening for HTTP requests` line before continuing. Leave this terminal running.
 
-## Send a request
+## Send an HTTP request and receive a response
 
 In the second terminal, send an HTTP
 request to the loopback listener:
@@ -60,7 +60,7 @@ One application is loaded. This doesn't mean that one guest instance needs to re
 alive for the entire server process. Instance creation and reuse are runtime
 policies that you'll consider when interpreting performance.
 
-## Change the application
+## Change the application and receive an updated response
 
 Stop `wash dev` with **Ctrl+C** in the first terminal. 
 
@@ -89,7 +89,7 @@ This manual stop-and-restart cycle rebuilds and reloads the component.
 `wash dev` in this version doesn't watch for file changes automatically.
 Leave the modified application running for the performance exercise.
 
-## (Optional) View it from your computer
+## (Optional) View the response from your computer
 
 Run an SSH tunnel from your own computer, replacing the placeholders with your
 key path and server address:
@@ -106,6 +106,6 @@ finished.
 
 ## What you've accomplished and what's next
 
-You've run a WebAssembly application on Graviton and verified its HTTP response. Then, you rebuilt it after changing its source. 
+You've run a WebAssembly application on Graviton and verified its HTTP response. Then, you rebuilt the application after changing its source and received an updated response. 
 
 Next, you'll measure the same running application with a small set of HTTP tests.
