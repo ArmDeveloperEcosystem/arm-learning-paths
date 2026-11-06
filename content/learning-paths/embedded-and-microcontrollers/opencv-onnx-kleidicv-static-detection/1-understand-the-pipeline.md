@@ -13,32 +13,32 @@ You'll deploy a YOLOX object detection application on an arm64 Linux board and m
 
 The application combines four components:
 
-- **YOLOX** is the object detection model.
-- **ONNX** is the file format used to store the trained model.
-- **OpenCV DNN** loads the ONNX file and runs the neural network.
-- **KleidiCV** accelerates supported OpenCV image-processing operations on Arm CPUs.
+- YOLOX is the object detection model.
+- ONNX is the file format used to store the trained model.
+- OpenCV DNN (deep neural network) loads the ONNX file and runs the neural network.
+- KleidiCV accelerates supported OpenCV image-processing operations on Arm CPUs.
 
 ## What is YOLOX?
 
-You'll use the pretrained YOLOX-S object detection model from OpenCV Zoo in Open Neural Network Exchange (ONNX) format. Trained on the COCO dataset, it recognizes 80 object classes and predicts a bounding box, class, and confidence score for each detected object. You run inference without training the model.
+You'll use the pretrained YOLOX-S object detection model from OpenCV Zoo in Open Neural Network Exchange (ONNX) format. Trained on the Common Objects in Context (COCO) dataset, it recognizes 80 object classes and predicts a bounding box, class, and confidence score for each detected object. You run inference without training the model.
 
 ## Understand the image-processing pipeline
 
 The application processes the image in these stages:
 
-![YOLOX pipeline grouped into image preprocessing, model inference, and output processing. Resize and the two conversions are marked as eligible for KleidiCV HAL acceleration, while padding and tensor packing remain part of full preprocessing.#center](pipeline.svg "YOLOX processing stages and KleidiCV-eligible operations")
+![YOLOX pipeline grouped into image preprocessing, model inference, and output processing. Resize and the two conversions are marked as eligible for KleidiCV acceleration through the Hardware Acceleration Layer, while padding and tensor packing remain part of full preprocessing.#center](pipeline.svg "YOLOX processing stages and KleidiCV-eligible operations")
 
 Non-maximum suppression removes duplicate detections before the application draws bounding boxes.
 
-The *letterbox* operation resizes the image while preserving its aspect ratio and pads the unused area so that the result is `640 x 640`, which is the YOLOX input size. The application then converts the OpenCV BGR image to RGB and changes the element type from unsigned 8-bit integers to 32-bit floating-point values. Pixel values remain in the `0` to `255` range expected by this YOLOX model.
+The *letterbox* operation resizes the image while preserving its aspect ratio and pads the unused area so that the result is `640 x 640`, which is the YOLOX input size. The application then converts the OpenCV blue-green-red (BGR) image to red-green-blue (RGB) and changes the element type from unsigned 8-bit integers to 32-bit floating-point values. Pixel values remain in the `0` to `255` range expected by this YOLOX model.
 
-OpenCV packs the prepared image into an NCHW tensor with this shape:
+OpenCV packs the prepared image into a tensor in batch, channel, height, width (NCHW) order with this shape:
 
 ```text
 [1, 3, 640, 640]
 ```
 
-The dimensions represent one image, three color channels, a height of 640 pixels, and a width of 640 pixels.
+The dimensions represent a batch size (N) of one image, three color channels (C), a height (H) of 640 pixels, and a width (W) of 640 pixels.
 
 ## Understand where KleidiCV is used
 
