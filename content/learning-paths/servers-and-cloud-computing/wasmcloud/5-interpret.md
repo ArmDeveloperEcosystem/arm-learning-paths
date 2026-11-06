@@ -49,7 +49,7 @@ You didn't configure these policies in the sample greeting application. The conc
 matters when you move to a workload with real initialization cost or concurrency.
 Measure your application before choosing a policy.
 
-## How wasmCloud can help
+## What wasmCloud provides
 
 wasmCloud provides a way to package application logic as WebAssembly components
 and host those components with shared runtime capabilities. For developers,
