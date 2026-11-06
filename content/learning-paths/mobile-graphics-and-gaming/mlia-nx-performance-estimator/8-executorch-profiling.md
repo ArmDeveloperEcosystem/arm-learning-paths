@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Prepare artifacts from your ExecuTorch deployment
 
-Use this workflow when your application runs an ExecuTorch program and you already have its profiling artifacts. MLIA reads the captured data and reports measured performance. The earlier LiteRT conversion and Scenario Runner steps don't generate these artifacts.
+Use this workflow when your application runs an ExecuTorch program and you've already captured its profiling data in an ETDump file. MLIA reads the captured data and reports measured performance. The earlier LiteRT conversion and Scenario Runner steps don't generate these artifacts.
 
 Collect the following files from the same deployed program and model build:
 
@@ -19,7 +19,9 @@ Collect the following files from the same deployed program and model build:
 | `run.etdump` or `run.etdp` | One matching runtime capture, including VGF profiling when enabled |
 | `model.pte` (optional) | The deployed program containing a VGF delegate, for companion graph associations |
 
-For artifact generation, see the [ExecuTorch 1.5 profiling tutorial](https://docs.pytorch.org/executorch/1.5/tutorials/devtools-integration-tutorial.html). VGF cycle analysis additionally requires VGF profiling data in the ETDump. An ordinary runtime-only capture can provide source timings, but it can't provide VGF counters or companion VGF associations.
+For artifact generation, see the [ExecuTorch 1.5 profiling tutorial](https://docs.pytorch.org/executorch/1.5/tutorials/devtools-integration-tutorial.html). For VGF-specific guidance, see [VGF neural accelerator statistics in ETDump](https://docs.pytorch.org/executorch/stable/backends/arm-vgf/vgf-neural-statistics.html) to enable statistics collection. The [ExecuTorch 1.0 Arm VGF backend tutorial](https://docs.pytorch.org/executorch/1.0/tutorial-arm-vgf.html) demonstrates building and running a VGF-delegated model with `executor_runner`. Use the compatible toolchain version specified in the installation steps when generating your artifacts.
+
+VGF cycle analysis additionally requires VGF profiling data in the ETDump. An ordinary runtime-only capture can provide source timings, but it can't provide VGF counters or companion VGF associations.
 
 Run the remaining commands from `mlia-demo`. Copy your artifacts into a new `et-profile` directory and use the example filenames above, or substitute their paths in the commands. Keep the original files together so that you can confirm which export and execution produced them.
 
@@ -81,7 +83,7 @@ The check confirms that MLIA produced successful measured performance results an
 
 ## (Optional) Open the profiling views in Model Explorer
 
-Use Model Explorer `0.2.0`, which supports MLIA core `0.13.x`. Install its `executorch` extra in the same environment, even if you installed the `vgf` extra during setup:
+Use MLIA Model Explorer `0.2.0`, which supports MLIA core `0.13.x`. Install its `executorch` extra in the same environment, even if you installed the `vgf` extra during setup:
 
 ```bash
 python -m pip install "mlia-model-explorer[executorch]==0.2.0"
@@ -118,6 +120,8 @@ Select a mapped operator or group to navigate between related views. Compiler tr
 ## Interpret runtime timings and NX counters
 
 Ordinary runtime timings use milliseconds. VGF counters use cycles and describe recorded accelerator activity. Cycle counters don't reconstruct idle gaps or establish elapsed latency.
+
+For older captures missing decoder metadata, MLIA assumes statistics mode `1` and the Mali-G2 device layout. Check the reported assumptions against your capture settings.
 
 Repeated executions provide averages, minimum, maximum, P50, and execution counts where supported. Independent observations are combined within each recorded execution before summaries are calculated. Don't add minimum, maximum, P50, or execution counts across operators. Averages can be combined only when their measurements are independent and cover the same executions.
 

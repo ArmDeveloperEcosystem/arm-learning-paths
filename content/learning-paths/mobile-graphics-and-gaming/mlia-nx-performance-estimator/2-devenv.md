@@ -80,7 +80,7 @@ If `pip` reports that no matching distribution exists for `mlia-neural-technolog
 
 ## (Optional) Prepare Model Explorer visualizations
 
-The [MLIA Model Explorer plugin](https://pypi.org/project/mlia-model-explorer/) adds graph visualizations with performance overlays. Version `0.2.0` supports MLIA core `0.13.x`. The `vgf` extra includes the adapter for the compiled model you'll inspect later. The plugin generates a standalone HTML page, so you don't need to install or start a separate Model Explorer server.
+The [MLIA Model Explorer plugin](https://pypi.org/project/mlia-model-explorer/) adds graph visualizations with performance overlays. Version `0.2.0` supports MLIA core `0.13.x`. The `vgf` extra includes the adapter for the compiled model you'll inspect later. The plugin generates a standalone HTML page that you can open directly in your browser. You don't need to install Model Explorer separately or run additional services.
 
 Install the plugin in the same environment:
 

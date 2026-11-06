@@ -253,6 +253,8 @@ mlia check nx-demo/baseline.vgf \
 
 The command opens Model Explorer with the capture's results already loaded. In the generated MLIA hierarchy, select a cycle metric using the node-data controls. Expand the hierarchy and select an entity to inspect its reported cycle count. Follow the source mapping, where available, to see related operations in **Source Model**.
 
+A source mapping associates operations with measured execution groups. It doesn't necessarily provide an independent cycle measurement for each operation. Several operations can share the same group measurement, so don't sum their displayed cycle counts as separate costs.
+
 These overlays show the capture's measurements. Only entities with reported metrics have values; a missing value doesn't mean zero cycles. The `951,154` cycles in the reference CLI output describe the whole-model result, rather than the selected convolution.
 
 MLIA saves the visualization in `runs/baseline-measured-visualized/mlia-output/model-explorer/bundle/index.html`. Open this self-contained file to revisit or share the results without rerunning the capture or starting a server.

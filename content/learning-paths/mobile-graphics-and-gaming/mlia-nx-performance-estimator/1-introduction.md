@@ -13,7 +13,9 @@ Arm ML Inference Advisor (MLIA) helps you evaluate a model for an Arm target bef
 
 You'll use the `mlia-neural-technology` package to evaluate two pretrained, quantized MobileNet V1 image classifiers from the TensorFlow public model catalog. You'll compare a baseline with a smaller-input variant under the same Neural Technology configuration. You don't need a model stored in this repository or a device to run the estimator.
 
-The reference example, recorded with Neural Technology `0.2.0` and LiteRT converter `0.1.2`, reduces estimated total cycles from `136,962` to `79,824`. The setup uses updated packages; compare the reports you generate with those versions. These are compiler estimates, not device measurements or an accuracy result. You'll learn about the model and configuration assumptions behind this comparison in [Compare a smaller model under the same target profile](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/6-iterate-and-compare/).
+The reference example, recorded with Neural Technology `0.2.0` and LiteRT converter `0.1.2`, reduces estimated total cycles from `136,962` to `79,824`. These are compiler estimates, not device measurements or an accuracy result. You'll learn about the model and configuration assumptions behind this comparison in [Compare a smaller model under the same target profile](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/6-iterate-and-compare/).
+
+The setup installs Neural Technology `0.3.0` and LiteRT converter `0.1.3`, so your generated estimates can differ from this reference. Neural Technology `0.3.0` is required for the optional ETRecord and ETDump VGF profiling workflow.
 
 If you have a neural accelerator (NX)-capable Android device and a compatible native Vulkan driver, you can execute the model on the device. You can then bring a measured capture back to MLIA. For more information, see [(Optional) Run and profile the model on an NX device](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/7-run-on-nx-device/).
 
