@@ -4,7 +4,6 @@ description: Install and verify the wash CLI for wasmCloud on Arm Linux so you c
 minutes_to_complete: 10
 official_docs: https://wasmcloud.com/docs/installation/
 author: Jason Andrews
-draft: true
 additional_search_terms:
   - wash
   - WebAssembly
