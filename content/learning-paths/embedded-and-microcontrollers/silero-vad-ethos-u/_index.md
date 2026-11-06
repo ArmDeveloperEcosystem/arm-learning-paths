@@ -13,7 +13,9 @@ learning_objectives:
     - Validate simulated speech probabilities against a host-generated reference.
 
 prerequisites:
-    - A Linux host using `x86_64` or `arm64`, or an Apple silicon macOS host
+    - A Linux host using `x86_64` or `arm64` with glibc 2.28 or later, or an Apple silicon host running macOS 15 or later
+    - On Linux, libstdc++.so.6 providing GLIBCXX_3.4.26 or later for the Corstone-320 FVP
+    - Python 3.12 with development headers and virtual-environment support
     - Basic familiarity with PyTorch models and command-line development tools
 
 # START generated_summary_faq
@@ -32,8 +34,8 @@ generated_summary_faq:
   faq_source_hash: f56e6a716c01c38d2eb7f19f379804a0bf8d1f3faac81c75121ddb3470cfb799
   summary: >-
     You'll deploy the stateful Silero VAD model on an Arm Ethos-U85 virtual target.
-    First, you'll prepare ExecuTorch, the model, and audio clips. Then, you'll build host quantized operators,
-    export a `.pte` model, and create a host reference. Finally, you'll package the model and validation clip
+    First, you'll prepare ExecuTorch, the model, and validation audio. Then, you'll
+    export a `.pte` model and create a host reference. Finally, you'll package the model and validation clip
     into a Cortex-M85 application, run it on the Corstone-320 FVP, and compare its speech decisions with
     the host reference.
   faqs:
@@ -95,7 +97,7 @@ further_reading:
         type: documentation
     - resource:
         title: Silero VAD Ethos-U example source
-        link: https://github.com/pytorch/executorch/tree/main/examples/arm/silero_vad_example_ethos_u
+        link: https://github.com/pytorch/executorch/tree/d78bc1b0ba1c33a90d2d93662de118577f37efd4/examples/arm/silero_vad_example_ethos_u
         type: repository
     - resource:
         title: Silero VAD project
