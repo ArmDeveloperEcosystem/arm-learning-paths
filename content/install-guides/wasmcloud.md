@@ -45,6 +45,14 @@ There are two ways to install `wash`. The install script is a single command tha
 
 ### Install using the install script
 
+Install `curl`:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y curl
+```
+
+
 Run the install script to download and install `wash`:
 
 ```bash
