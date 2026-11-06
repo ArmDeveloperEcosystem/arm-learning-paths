@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="840"
+   height="459"
+   viewBox="90 190 1390 760"
+   role="img"
+   aria-labelledby="title description"
+   version="1.1"
+   id="svg28"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <title
+     id="title">One program. Three execution paths.</title>
+  <desc
+     id="description">A simplified view of the simulated Corstone-300 target in the FVP. The Cortex-M CPU runs the ExecuTorch runtime and executes model.pte. It dispatches the stride-one convolution to the separate Ethos-U55 NPU. On the same Cortex-M core, CMSIS-NN runs the stride-four convolution and the portable FP32 kernel runs topk. CPU and NPU both connect to shared SRAM. The connections are schematic and execution routes are chosen during export.</desc>
+  <metadata
+     id="metadata1">Architecture references: https://arm-software.github.io/CMSIS-Ethos-U/main/general/index.html ; https://docs.pytorch.org/executorch/stable/backends/arm-cortex-m/arm-cortex-m-overview.html</metadata>
+  <defs
+     id="defs7">
+    <pattern
+       xlink:href="#sram-cells"
+       id="pattern2"
+       patternTransform="scale(1)" />
+    <pattern
+       xlink:href="#mac-cells"
+       id="pattern28"
+       patternTransform="matrix(1.247055,0,0,1.4861134,-282.10492,-225.31047)" />
+    <linearGradient
+       id="chip-top"
+       x1="90.209213"
+       y1="315.3558"
+       x2="90.209213"
+       y2="1254.384"
+       gradientTransform="matrix(1.4078384,0,0,0.71030879,-2.7136201,0)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#f0f4f4"
+         id="stop1" />
+      <stop
+         offset="1"
+         stop-color="#e6eded"
+         id="stop2" />
+    </linearGradient>
+    <linearGradient
+       id="cpu-top"
+       x1="144.48589"
+       y1="383.13776"
+       x2="144.48589"
+       y2="835.26495"
+       gradientTransform="scale(1.2319542,0.81171848)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#fff"
+         id="stop3" />
+      <stop
+         offset="1"
+         stop-color="#f4f7f7"
+         id="stop4" />
+    </linearGradient>
+    <linearGradient
+       id="npu-top"
+       x1="999.20154"
+       y1="308.4473"
+       x2="999.20154"
+       y2="672.43494"
+       gradientTransform="scale(0.99179193,1.008276)"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#edf8f5"
+         id="stop5" />
+      <stop
+         offset="1"
+         stop-color="#d9eeea"
+         id="stop6" />
+    </linearGradient>
+    <marker
+       id="dispatch-tip"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="8"
+       markerHeight="8"
+       orient="auto">
+      <path
+         d="M 1,1 9,5 1,9"
+         fill="none"
+         stroke="#61777a"
+         stroke-width="1.4"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         id="path6" />
+    </marker>
+    <pattern
+       id="mac-cells"
+       width="48"
+       height="40"
+       patternUnits="userSpaceOnUse"
+       x="1054"
+       y="430">
+      <rect
+         x="0"
+         y="0"
+         width="35"
+         height="27"
+         rx="5"
+         fill="#6eafa3"
+         id="rect6" />
+    </pattern>
+    <pattern
+       id="sram-cells"
+       width="30"
+       height="20"
+       patternUnits="userSpaceOnUse"
+       x="215"
+       y="817">
+      <rect
+         x="0"
+         y="0"
+         width="22"
+         height="12"
+         rx="2"
+         fill="#c3d5d4"
+         id="rect7" />
+    </pattern>
+    <style
+       id="style7">
+      text { font-family: 'Segoe UI', Arial, sans-serif; fill: #23383d; }
+      .muted { fill: #5d7276; }
+      .heading { font-size: 28px; font-weight: 600; }
+      .label { font-size: 24px; }
+      .small { font-size: 21px; }
+      .number { font-size: 22px; font-weight: 600; fill: #ffffff; text-anchor: middle; }
+    </style>
+  </defs>
+  <rect
+     width="1327.7334"
+     height="696.27472"
+     fill="#ffffff"
+     id="rect8"
+     x="122.11291"
+     y="220.70778"
+     style="stroke-width:0.745366" />
+  <!-- A shallow chip cutaway keeps all compute blocks inside one system. -->
+  <path
+     d="m 128,257 h 1320 v 628 q 0,30 -30,30 H 158 q -30,0 -30,-30 z"
+     fill="#cbd8d8"
+     id="path9" />
+  <rect
+     x="125.28638"
+     y="225"
+     width="1320"
+     height="665"
+     rx="30"
+     fill="url(#chip-top)"
+     stroke="#b9caca"
+     stroke-width="2"
+     id="rect10"
+     style="fill:url(#chip-top)" />
+  <text
+     x="181"
+     y="274"
+     class="small muted"
+     letter-spacing="2"
+     id="text10">Target</text>
+  <!-- Shared data connections end at processor and memory boundaries. -->
+  <path
+     d="m 467,685 v 75 m 690,-75 v 75"
+     fill="none"
+     stroke="#8fa7a8"
+     stroke-width="4"
+     id="path10" />
+  <!-- One physical CPU, with its two software execution paths visible. -->
+  <rect
+     x="187"
+     y="326"
+     width="555"
+     height="365"
+     rx="22"
+     fill="#b8c9ca"
+     id="rect11" />
+  <rect
+     x="179"
+     y="312"
+     width="555"
+     height="365"
+     rx="22"
+     fill="url(#cpu-top)"
+     stroke="#adbec0"
+     stroke-width="2"
+     id="rect12"
+     style="fill:url(#cpu-top)" />
+  <text
+     x="215"
+     y="362"
+     class="heading"
+     id="text12">Cortex-M CPU</text>
+  <text
+     x="215"
+     y="403"
+     class="label"
+     id="text13">ExecuTorch runtime</text>
+  <text
+     x="697"
+     y="403"
+     text-anchor="end"
+     class="small muted"
+     id="text14">model.pte</text>
+  <path
+     d="M 215,430 H 698"
+     stroke="#d8e1e1"
+     stroke-width="2"
+     id="path14" />
+  <circle
+     cx="234"
+     cy="482"
+     fill="#137f72"
+     id="circle14"
+     r="20" />
+  <text
+     x="234"
+     y="490"
+     class="number"
+     id="text15">2</text>
+  <circle
+     cx="234"
+     cy="590"
+     r="20"
+     fill="#137f72"
+     id="circle17" />
+  <text
+     x="234"
+     y="598"
+     class="number"
+     id="text18">3</text>
+  <!-- The NPU is a separate hardware block, beside the CPU. -->
+  <rect
+     x="1000"
+     y="326"
+     width="359"
+     height="365"
+     rx="22"
+     fill="#a4c9c1"
+     id="rect20" />
+  <rect
+     x="992"
+     y="312"
+     width="359"
+     height="365"
+     rx="22"
+     fill="url(#npu-top)"
+     stroke="#a0c5bc"
+     stroke-width="2"
+     id="rect21"
+     style="fill:url(#npu-top)" />
+  <text
+     x="1063.2771"
+     y="379.18625"
+     class="heading"
+     id="text21">Ethos-U55 NPU</text>
+  <rect
+     x="1032.291"
+     y="413.71829"
+     width="283.08148"
+     height="218.45866"
+     fill="url(#mac-cells)"
+     id="rect22"
+     style="fill:url(#pattern28);stroke-width:1.36134" />
+  <circle
+     cx="859.42377"
+     cy="359.82425"
+     r="20"
+     fill="#137f72"
+     id="circle22" />
+  <text
+     x="860.32831"
+     y="366.91971"
+     class="number"
+     id="text22">1</text>
+  <text
+     x="756.12457"
+     y="435.61469"
+     class="label"
+     id="text23">Stride-1 convolution</text>
+  <text
+     x="266.61703"
+     y="483.99261"
+     class="label"
+     id="text23-8"
+     style="font-size:24px;font-family:'Segoe UI', Arial, sans-serif;fill:#23383d">Stride-4 convolution</text>
+  <text
+     x="268.30963"
+     y="589.46991"
+     class="label"
+     id="text23-8-5"
+     style="font-size:24px;font-family:'Segoe UI', Arial, sans-serif;fill:#23383d">topk operation</text>
+  <text
+     x="266.78229"
+     y="513.9472"
+     class="label"
+     id="text23-8-2"
+     style="font-size:24px;font-family:'Segoe UI', Arial, sans-serif;fill:#23383d">Supported by <tspan
+   style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Segoe UI', Arial, sans-serif;-inkscape-font-specification:'Segoe UI, Arial, sans-serif Bold'"
+   id="tspan29">CMSIS-NN</tspan></text>
+  <text
+     x="267.63675"
+     y="618.16956"
+     class="label"
+     id="text23-8-2-1"
+     style="font-size:24px;font-family:'Segoe UI', Arial, sans-serif;fill:#23383d">Supported by Executorch <tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Segoe UI', Arial, sans-serif;-inkscape-font-specification:'Segoe UI, Arial, sans-serif'"
+   id="tspan30">Portable kernels</tspan></text>
+  <text
+     x="815.46796"
+     y="410.10205"
+     class="label"
+     id="text23-9"
+     style="font-size:24px;font-family:'Segoe UI', Arial, sans-serif;fill:#23383d">Dispatch</text>
+  <!-- One arrow means control only; tensor data stays on the memory links. -->
+  <path
+     d="M 734,449 H 990"
+     fill="none"
+     stroke="#61777a"
+     stroke-width="2.5"
+     stroke-dasharray="7, 7"
+     marker-end="url(#dispatch-tip)"
+     id="path24" />
+  <rect
+     x="187"
+     y="768"
+     width="1172"
+     height="90"
+     rx="15"
+     fill="#bdcdce"
+     id="rect25" />
+  <rect
+     x="179"
+     y="756"
+     width="1172"
+     height="90"
+     rx="15"
+     fill="#f7fafa"
+     stroke="#b4c8c8"
+     stroke-width="2"
+     id="rect26" />
+  <text
+     x="215"
+     y="797"
+     class="label"
+     font-weight="600"
+     id="text26">Shared SRAM</text>
+  <text
+     x="1314"
+     y="797"
+     text-anchor="end"
+     class="small muted"
+     id="text27">Input, intermediate tensors, output</text>
+  <rect
+     x="215"
+     y="817"
+     width="1100"
+     height="15"
+     fill="url(#sram-cells)"
+     id="rect27"
+     style="fill:url(#pattern2)" />
+</svg>
