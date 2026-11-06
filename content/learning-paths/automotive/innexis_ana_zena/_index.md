@@ -2,6 +2,10 @@
 title: Get Started with Arm Zena CSS on Siemens Innexis ANA
 description: With Siemens Innexis ANA 2026.2, start a Zena CSS virtual platform, boot EWAOL Linux, connect to the guest, and exchange a file.
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 60
 
 who_is_this_for: Automotive and embedded Linux developers with access to an Innexis ANA chamber.
