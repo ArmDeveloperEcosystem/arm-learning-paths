@@ -7,26 +7,25 @@ weight: 4
 layout: learningpathall
 ---
 
-## Add Content Credentials to an image
+## Create a signed copy of the sample image
 
-You will add Content Credentials to the image prepared in the previous chapter. You will save the
+Now that you've downloaded a sample image, you'll add Content Credentials to the image. You'll save the
 signed image as a separate file, preserving the unsigned original.
 
-## Create the manifest definition
+### Create the manifest definition
 
-A manifest definition tells C2PA Tool which information to include in the manifest. An [*assertion*](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_assertion)
+A manifest definition tells the Coalition for Content Provenance and Authenticity (C2PA) Tool which information to include in the manifest. An [assertion](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_assertion)
 is a structured statement about an asset. Assertions can describe creation and editing actions,
-identify source assets used as ingredients, or record metadata. See the
-[C2PA standard assertion summary](https://spec.c2pa.org/specifications/specifications/2.4/specs/ContentCredentials.html#_standard_c2pa_assertion_summary)
-for the standard assertion types and links to their definitions. This example uses an actions assertion
-to declare how the image was created.
+identify source assets used as ingredients, or record metadata. 
 
-The [*claim generator*](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#claim-generator-definition) is the software that assembles the claim and its references to assertions for
-signing. In this exercise, C2PA Tool performs that work using the example identity you supply below.
+For the standard assertion types and their definitions, see the
+[C2PA standard assertion summary](https://spec.c2pa.org/specifications/specifications/2.4/specs/ContentCredentials.html#_standard_c2pa_assertion_summary). This example uses an actions assertion to declare how the image was created.
+
+The [claim generator](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#claim-generator-definition) is the software that assembles the claim and its references to assertions for
+signing. C2PA Tool performs that work using the example identity that you'll provide.
 
 In your text editor, create a file named `manifest.json` in your `c2pa-demo` working
-directory with these contents. On Windows, enable **File name extensions** in File Explorer and
-confirm that the filename is `manifest.json`, rather than `manifest.json.txt`:
+directory with the following contents:
 
 ```json
 {
@@ -56,61 +55,62 @@ confirm that the filename is `manifest.json`, rather than `manifest.json.txt`:
 }
 ```
 
-The manifest definition identifies the signing workflow and records the image's declared origin:
+On Windows, enable **File name extensions** in File Explorer. Confirm that the filename is `manifest.json`, rather than `manifest.json.txt`.
 
-- **`claim_generator_info`** names your signing workflow `Arm Learning Path C2PA Example`, version
-  `1.0.0`. This version identifies the tutorial workflow; it is separate from the installed C2PA Tool
+The manifest definition identifies the signing workflow and records the declared origin of the image:
+
+- `claim_generator_info` names your signing workflow `Arm Learning Path C2PA Example`, version
+  `1.0.0`. This version identifies the tutorial workflow. It's separate from the installed C2PA Tool
   version.
 
-- **`com.arm.learning_path.tool`** records the tool's name and version. Set `version` to the value
+- `com.arm.learning_path.tool` records the name and version of the tool. Set `version` to the value
   reported by `c2patool --version`. The `com.arm` prefix identifies this as a custom field, following
-  C2PA's [rules for extending claim-generator information](https://spec.c2pa.org/specifications/specifications/2.4/specs/ContentCredentials.html#_generator_info_map).
+  the C2PA [rules for extending claim-generator information](https://spec.c2pa.org/specifications/specifications/2.4/specs/ContentCredentials.html#_generator_info_map).
 
-- **`assertions`** contains a `c2pa.actions.v2` assertion. Its `data.actions` array records a
-  `c2pa.created` action, with `digitalSourceType` declaring digital capture as the image's origin.
+- `assertions` contains a `c2pa.actions.v2` assertion. Its `data.actions` array records a
+  `c2pa.created` action, with `digitalSourceType` declaring digital capture as the origin of the image.
 
-  You supply this declaration for the exercise. C2PA Tool does not verify how the image was created.
-  Signing makes changes to the declaration detectable, but does not establish that it is true.
+  You'll supply this declaration to complete the Learning Path. C2PA Tool doesn't verify how the image was created.
+  Signing makes changes to the declaration detectable. Signing doesn't establish that it's true.
 
   An action can also include `softwareAgent` to identify the software or hardware that performed it.
-  You omit that field because the sample's original capture agent is unknown. C2PA Tool generates the
-  claim, but did not capture the image.
+  You omit that field because the original capture agent of the sample is unknown. C2PA Tool generates the
+  claim but doesn't capture the image.
 
-You supply the provenance fields above. C2PA Tool generates the claim, content-binding data, and signature
-when it builds the signed manifest; you do not write those cryptographic structures by hand.
+C2PA Tool generates the claim, content-binding data, and signature when it builds the signed manifest. You don't write those cryptographic structures by hand.
 
 C2PA Tool also offers a command-line shortcut: with an empty `assertions` array, `--create digitalCapture`
 adds the creation action. If you omit `claim_generator_info`, the tool supplies its own name and
 version instead of this example label. Keep the explicit claim-generator information to retain the
-Learning Path label. You have already defined the creation action in `manifest.json`, so omit `--create` when signing the image.
+Learning Path label. You've already defined the creation action in `manifest.json`, so omit `--create` when signing the image.
 
-## Understand the development credential
+### Understand the development credentials
 
-The example uses the private key and signing certificate built into C2PA Tool. These test credentials
-let you practise signing, but do not establish a production identity or trust by public validators.
-Do not use them to sign production content. Keep the development credential for this exercise so
-that your validation results match the following chapters.
+The example development credentials use the private key and signing certificate that are built into C2PA Tool. These credentials
+let you practice signing, but don't establish a production identity or trust by public validators.
+Don't use them to sign production content. Use the development credentials to complete the Learning Path for consistent validation results.
 
-For production, C2PA Tool supports an external signer that supplies the certificate chain and uses
-the corresponding private key without exposing it to the tool. Once you have such a signer,
+For production, C2PA Tool supports an external signer. The signer supplies the certificate chain and uses
+the corresponding private key without exposing it to the tool. When you have such a signer,
 the command takes this form:
 
 ```console
 c2patool image.jpg --manifest manifest.json --signer-path /path/to/production-signer --output image-production-signed.jpg
 ```
 
-This is an illustrative alternative, not a step to run in this exercise.
-`/path/to/production-signer` is a placeholder for an executable implementing
-[C2PA Tool's signer protocol](https://github.com/contentauth/c2patool/blob/main/docs/signing.md),
-not a certificate file. The signer supplies its certificate chain and signing algorithm and
-manages access to the private key. Do not copy production private keys into the manifest definition.
+This is an illustrative alternative. Don't run the command.
 
-For production conformance requirements, see [C2PA Conformance Program](../1-understand-the-c2pa/#c2pa-conformance-program).
+`/path/to/production-signer` is a placeholder for an executable implementing the
+[C2PA Tool signer protocol](https://github.com/contentauth/c2patool/blob/main/docs/signing.md). It's
+not a certificate file. 
 
-## Sign the image
+The signer supplies its certificate chain and signing algorithm, and it manages access to the private key. Don't copy production private keys into the manifest definition.
 
-Run this command from your `c2pa-demo` directory. The output filename must not already exist. If it
-does, move or rename that earlier output before you continue.
+For production conformance requirements, see [C2PA Conformance Program](/learning-paths/embedded-and-microcontrollers/c2pa-on-arm/1-understand-the-c2pa/#c2pa-conformance-program).
+
+### Sign the image
+
+Sign the image in the `c2pa-demo` directory. Ensure that a file with the same name as the output doesn't already exist. If it does, move or rename the existing file before you continue:
 
 ```console
 c2patool image.jpg --manifest manifest.json --output image-signed.jpg
@@ -119,7 +119,9 @@ c2patool image.jpg --manifest manifest.json --output image-signed.jpg
 `--manifest manifest.json` supplies your definition. `--output image-signed.jpg` writes the
 signed image to a separate file, leaving `image.jpg` unchanged.
 
-The command exits with status 0 when signing succeeds. The expected development warning is:
+The command exits with status `0` when signing succeeds. 
+
+The output includes the following development warning:
 
 ```output
 Note: Using default private key and signing certificate. This is only valid for development.
@@ -127,7 +129,7 @@ A permanent key and cert should be provided in the manifest definition or in the
 ```
 
 The command also prints the generated manifest report. Its generated identifiers differ between runs.
-You will inspect that report in the next chapter.
+You'll inspect the report later.
 
 ## Confirm that the signed file contains a manifest
 
@@ -146,13 +148,16 @@ One manifest
 ```
 
 `One manifest` confirms that the output contains a C2PA manifest. `signingCredential.untrusted` is the
-expected trust result for this development certificate; it does not mean that signing failed.
-The byte counts and percentages also printed by this command can vary.
+expected trust result for this development certificate. It doesn't mean that signing failed.
+
+The byte counts and percentages printed by this command can vary.
 
 ## What you've accomplished and what's next
 
-You have defined the provenance information, signed the image, and confirmed that the output contains
-a manifest. Keep these three files for the remaining chapters:
+You've defined the provenance information, signed the image, and confirmed that the output contains
+a manifest. 
+
+Keep the following three files to complete the rest of the Learning Path:
 
 | File | Purpose |
 | --- | --- |
@@ -160,4 +165,4 @@ a manifest. Keep these three files for the remaining chapters:
 | `image.jpg` | The unchanged unsigned source image |
 | `image-signed.jpg` | The signed image containing the C2PA manifest |
 
-Next, inspect the generated manifest and confirm that C2PA Tool reports a valid signature and content binding.
+Next, you'll inspect the generated manifest and confirm that C2PA Tool reports a valid signature and content binding.
