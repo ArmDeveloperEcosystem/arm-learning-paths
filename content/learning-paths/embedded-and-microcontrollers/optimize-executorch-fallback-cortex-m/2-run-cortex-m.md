@@ -27,13 +27,14 @@ The exporter first prepares and converts the model with `CortexMQuantizer`:
 ```python
 quantizer = CortexMQuantizer()
 
-prepared = prepare_pt2e(exported_program.module(), quantizer)
-prepared(*example_inputs)
+prepared = prepare_pt2e(captured_graph, quantizer)
+for calibration_input in calibration_inputs:
+    prepared(calibration_input)
 quantized_model = convert_pt2e(prepared)
 quantized_exported_program = torch.export.export(quantized_model, example_inputs)
 ```
 
-The prepared model is run once with the example input to calibrate activation
+The prepared model is run with both calibration samples to measure activation
 ranges. `convert_pt2e()` uses those ranges to choose quantization parameters and
 insert the operations that move values between FP32 and INT8.
 
@@ -47,7 +48,7 @@ edge_program_manager = to_edge(
 )
 
 edge_program_manager._edge_programs["forward"] = CortexMPassManager(
-    edge_program_manager.exported_program()
+    edge_program_manager.exported_program(), use_explicit_layout=True
 ).transform()
 ```
 
@@ -70,7 +71,7 @@ node until the Ethos-U partitioner is added on the next page.
 
 ## Export the model for Cortex-M
 
-Use the provided script to lower the model to Cortex-M only, by specifying `-mode cortex-m`:
+Use the provided script to lower the model to Cortex-M only, by specifying `--mode cortex-m`:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux and macOS" language="bash">}}

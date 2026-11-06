@@ -52,7 +52,7 @@ outside the delegate:
 
 ```python
 edge_program_manager._edge_programs["forward"] = CortexMPassManager(
-    edge_program_manager.exported_program()
+    edge_program_manager.exported_program(), use_explicit_layout=True
 ).transform()
 ```
 
@@ -78,7 +78,7 @@ python .\export_cortex_m_fallback.py `
   {{< /tab >}}
 {{< /tabpane >}}
 
-Vela prints a summary for the region it compiles:
+The export script prints a summary of the graph before and after Cortex-M lowering:
 
 ```output
 Relevant targets before Cortex-M lowering:
@@ -98,7 +98,7 @@ executorch_call_delegate: 1
 The final graph contains all three execution paths:
 - `executorch_call_delegate` contains the stride-one convolution accepted by
   Ethos-U55.
-- `cortex_m.quantized_conv2d` is the stride-four convolution rejected by
+- `cortex_m.quantized_conv2d_nhwc` is the stride-four convolution rejected by
   Ethos-U55 and lowered to CMSIS-NN.
 - `aten.topk` remains a portable FP32 operation.
 

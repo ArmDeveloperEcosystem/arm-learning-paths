@@ -156,13 +156,13 @@ copy the four working files into the CMSIS-Executorch project root:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux and macOS" language="bash">}}
-curl -fL "https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/e234c59f4b64b7b41e3d82b90dca21775572363f/code-examples-e234c59f4b64b7b41e3d82b90dca21775572363f.tar.gz?path=learning-paths/embedded-and-microcontrollers/optimize-executorch-fallback-cortex-m" -o lp-assets.tar.gz
+curl -fL "https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/5eb4e50676d4085c90e926abec1c978f257d1bde/code-examples-5eb4e50676d4085c90e926abec1c978f257d1bde.tar.gz?path=learning-paths/embedded-and-microcontrollers/optimize-executorch-fallback-cortex-m" -o lp-assets.tar.gz
 mkdir -p lp-assets
 tar -xzf lp-assets.tar.gz -C lp-assets --strip-components=4
 cp lp-assets/*.py lp-assets/*.patch .
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell">}}
-curl.exe -fL "https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/e234c59f4b64b7b41e3d82b90dca21775572363f/code-examples-e234c59f4b64b7b41e3d82b90dca21775572363f.tar.gz?path=learning-paths/embedded-and-microcontrollers/optimize-executorch-fallback-cortex-m" -o lp-assets.tar.gz
+curl.exe -fL "https://gitlab.arm.com/learning-code-examples/code-examples/-/archive/5eb4e50676d4085c90e926abec1c978f257d1bde/code-examples-5eb4e50676d4085c90e926abec1c978f257d1bde.tar.gz?path=learning-paths/embedded-and-microcontrollers/optimize-executorch-fallback-cortex-m" -o lp-assets.tar.gz
 New-Item -ItemType Directory -Force lp-assets | Out-Null
 tar -xzf lp-assets.tar.gz -C lp-assets --strip-components=4
 Copy-Item lp-assets\*.py, lp-assets\*.patch .

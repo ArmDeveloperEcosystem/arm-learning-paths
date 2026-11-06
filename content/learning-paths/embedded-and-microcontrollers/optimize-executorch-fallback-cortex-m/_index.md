@@ -15,7 +15,7 @@ learning_objectives:
     - Understand when and why to use the ExecuTorch CMSIS Pack
 
 prerequisites:
-    - A Windows, Linux, or macOS machine with Git, VS Code, and Python 3.10 to 3.13
+    - Git, VS Code, and Python 3.10 to 3.13 on Windows, macOS, or x86-64 Linux
     - Docker Desktop for FVP simulation on macOS
     - An internet connection and command-line access
     - Familiarity with PyTorch
