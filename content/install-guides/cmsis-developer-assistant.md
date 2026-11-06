@@ -108,17 +108,7 @@ If the agent does not expose slash commands, ask:
 Check my CMSIS Developer Assistant setup. Report whether you can reach its MCP tools and find the procedure for creating a project for a supported board.
 ```
 
-The agent should report a working connection and available CMSIS workflows:
-
-| Command | Use it for |
-|---|---|
-| `/cmsis-bootstrap` | Start from an empty VS Code window and get a project building and debugging. |
-| `/cmsis-project` | Create, extend or retarget CMSIS and Zephyr projects. |
-| `/add-board-layer` | Add a board layer to an existing csolution. |
-| `/cmsis-debug-live` | Investigate faults, hangs, wrong values or silent peripherals on hardware. |
-| `/cmsis-pack-docs` | Look up registers, peripherals, errata and board facts with page citations. |
-| `/create-csolution-github-action` | Add continuous integration for builds or FVP tests. |
-| `/cmsis-help` | Show available capabilities. |
+`/cmsis-help` checks the connection and helps the agent find guidance for your task. Describe your goal in plain language; the agent searches the knowledge base for relevant procedures. To explore that guidance yourself, run **CMSIS Developer Assistant: Open Knowledge Browser** from the Command Palette.
 
 Ask it to list the VS Code windows through Developer Assistant and identify your workspace. If several windows are open, select the intended one using **CMSIS Developer Assistant: Select Target Window**, or ask the agent to pin it.
 
@@ -155,7 +145,7 @@ Complete the board vendor's initial setup, including any required firmware, debu
 Tell your agent which board you are using, and how you have connected it. Then give it the following prompt.
 
 ```input
-Using CMSIS Developer Assistant, create a Blinky example for my board. Ask me if you are unsure which board you should be using. Create the project in a suitable workspace, and ask me to confirm where if necessary, reusing the vendor's board support and startup code. Confirm the selected example and target before programming. Build, load and debug through the CMSIS tools, stop at main, then run the application. Report the build result, breakpoint location and expected LED behaviour. Ask me to handle any tool download, licence or workspace-trust prompts.
+Using CMSIS Developer Assistant, create a Blinky example for my board. Ask me if you are unsure which board you should be using. Create the project in a suitable workspace, and ask me to confirm where if necessary, reusing the vendor's board support and startup code. Confirm the selected example and target before programming. Build, load and debug through the CMSIS tools, stop at main, then run the application. Verify the actual LED behaviour against the example's expected behaviour, and report the build result, breakpoint location and what you observed. Ask me to handle any tool download, licence or workspace-trust prompts.
 ```
 
 Answer any required setup questions. Finish by asking the agent to clear its breakpoints and stop debugging.
@@ -176,11 +166,11 @@ Continue the conversation as you would with a tutor. Ask for a simpler explanati
 Walk me through the path from main to the LED update, one step at a time. Explain how the update interval is set and how I could verify it with the debugger. Ask me a question to check my understanding before suggesting changes.
 ```
 
-### Create an AI application running on the Arm Ethos-U NPU
+### Run an inference example on your Ethos-U target
 
-Use an Ethos-U-equipped Cortex-M board, such as an Alif E8 Appkit or DevKit, or use a Corstone FVP. Start with a small model and test inputs supplied by a compatible CMSIS example.
+Use an Ethos-U-equipped Cortex-M board or a supported Corstone FVP. Start with the [CMSIS-Ethos-U Test-Ethos-U application](https://github.com/ARM-software/CMSIS-Ethos-U/tree/main/examples/Test-Ethos-U), which supplies small models, test inputs and reference outputs.
 
-The [CMSIS-Ethos-U integration examples](https://arm-software.github.io/CMSIS-Ethos-U/main/integration/index.html) provide starting points for Ethos-U55, Ethos-U65 and Ethos-U85. Select the example for your accelerator, then use the board support and model configuration for your actual target.
+The application includes solutions for Ethos-U55, Ethos-U65 and Ethos-U85. Ask the agent to select the solution and supported target that match your hardware, following the application's README and the [CMSIS-Ethos-U integration guide](https://arm-software.github.io/CMSIS-Ethos-U/main/integration/index.html).
 
 | Target | What the agent must establish |
 |---|---|
@@ -194,7 +184,7 @@ Tell your agent which board or FVP you are using, and how to find it.
 Then send this request:
 
 ```input
-Create a small inference application for Ethos-U. If you are unsure which board or FVP you should use, ask. Once you know, check which Ethos-U configuration it uses. Use CMSIS Developer Assistant to find a compatible CMSIS-Ethos-U example and reuse its board support, runtime and supplied model/test inputs. Confirm the target configuration and test criteria before implementation. Compile the model for this target if required, configure the project and debugger, build, and deploy or start the simulation. Run the supplied inputs and compare the complete outputs with the supplied references using their documented tolerances. Repeat the first input and verify consistent results. Inspect accelerator submission and successful completion so that a correct output alone is not treated as proof of NPU execution. Show the source changes, build result and target evidence when finished. Ask me for required setup actions or information; if platform support is missing, identify it before proceeding.
+Use CMSIS Developer Assistant to set up the CMSIS-Ethos-U Test-Ethos-U application from https://github.com/ARM-software/CMSIS-Ethos-U/tree/main/examples/Test-Ethos-U in a new folder. Ask me to confirm my board or FVP and its connection if needed. Identify the Cortex-M core, Ethos-U variant, MAC configuration and memory setup. Read the example's README and select the matching solution and supported target. Reuse its platform support, runtime, models, test inputs and reference outputs. Propose any configuration changes and test criteria for my review before making changes. If the example lacks support for my target, explain what is missing and stop before attempting a new board port. Compile the models for this target if required, configure the debugger, build, and deploy or start the simulation. Run the supplied tests and compare the complete outputs with the reference outputs using their documented tolerances. Repeat an input to check consistency. Inspect accelerator submission and successful completion to confirm NPU execution. Report the selected solution, target configuration, changes, build result and observed test results. Ask me to handle required tool, licence, provisioning or workspace-trust steps.
 ```
 
 Answer required questions and review the changes and programming actions according to your agent settings. Workspace trust, tool downloads and licence acceptance can still require your input.
@@ -203,10 +193,15 @@ Check that:
 
 - The selected board or FVP and Ethos-U configuration match your request.
 - The application builds and runs on that target.
+- Model outputs match the supplied references within their documented tolerances.
 - Repeating an input produces consistent output.
 - Live target evidence confirms successful NPU execution.
 
 If a check fails, ask the agent to investigate the live target and verify its repair. Successful build and inference return codes alone are insufficient.
+
+Keep this check to targets supported by the example. Developing a new board port is outside this install guide. Once the reference tests work, you can ask the agent to help adapt the application to your own model and inputs.
+
+Once this is working, you can instead try creating a new application by providing a model, and use-case, and asking your agent to use CMSIS Developer Assistant and the Test-Ethos-U project as an example.
 
 ### Use an existing application
 
