@@ -11,7 +11,7 @@ layout: learningpathall
 
 You'll open the signed image `image-signed.jpg` in the
 [Content Authenticity Initiative (CAI) web validator](https://verify.contentauthenticity.org/). The CAI web validator is
-a browser-based tool for inspecting and validating Content Provenance and Authenticity (C2PA) Content Credentials. 
+a browser-based tool for inspecting and validating C2PA Content Credentials.
 The site calls this tool **Verify**. You'll read the recorded provenance and compare the validation results with your
 C2PA Tool report.
 
@@ -38,12 +38,12 @@ If you use another computer, copy `image-signed.jpg` without modifying or recomp
 
 In the Content Credentials panel, look for **Unrecognized** beside `image-signed.jpg`, as shown in
 the screenshot that follows. The orange notice indicates that the CAI web validator doesn't recognize the issuer of the credential under its
-trust policy. As explained in [Understand the development credentials](/learning-paths/embedded-and-microcontrollers/c2pa-on-arm/3-add-content-credentials/#understand-the-development-credential),
+trust policy. As explained in [Understand the development credentials](/learning-paths/embedded-and-microcontrollers/c2pa-on-arm/3-add-content-credentials/#understand-the-development-credentials),
 the built-in signing certificate is for development. It doesn't establish a production identity.
 
 <a id="figure-2"></a>
 
-![The CAI web validator shows image-signed.jpg with an Unrecognized status and an orange notice about its issuer.#center](images/verify-unrecognized.jpg "Figure 2. Expected result for the development credential")
+![The CAI web validator shows image-signed.jpg with an Unrecognized status and an orange notice about its issuer.#center](images/verify-unrecognized.jpg "Expected result for the development credential")
 
 {{% notice Note %}}
 If no Content Credentials appear, check that you selected `image-signed.jpg`, not `image.jpg`.
@@ -58,7 +58,7 @@ for the recorded action and app or device name. Expand **About this Content Cred
 
 <a id="figure-3"></a>
 
-![The CAI web validator's details panel shows captured media, the Created action, C2PA Signer, and issuer C2PA Test Signing Cert. Locate the creation and issuer fields in this panel.#center](images/verify-credential-details.jpg "Figure 3. Recorded provenance and test-certificate issuer")
+![The CAI web validator's details panel shows captured media, the Created action, C2PA Signer, and issuer C2PA Test Signing Cert. Locate the creation and issuer fields in this panel.#center](images/verify-credential-details.jpg "Recorded provenance and test-certificate issuer")
 
 ## Compare the result with your C2PA Tool report
 

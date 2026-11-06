@@ -1,7 +1,7 @@
 ---
 title: Create and verify C2PA Content Credentials on Arm
 
-description: Understand why digital media needs verifiable provenance. Add Content Credentials to an image on an Arm device. Inspect its C2PA manifest. Validate it with an external validator. Observe a content-binding validation failure after a controlled change to the image.
+description: Use C2PA Tool on an Arm device to sign and inspect a sample image, then validate its Content Credentials and detect a content-binding failure.
 
 minutes_to_complete: 55
 
@@ -10,7 +10,7 @@ who_is_this_for: This is an introductory topic for developers who want to add an
 learning_objectives:
     - Understand what C2PA is, the content provenance problem it addresses, and why provenance matters.
     - Add Content Credentials to a sample image on an Arm device.
-    - Inspect the manifest and interpret the content-binding, signature, and trust results.
+    - Inspect the manifest, interpret content-binding, signature, and trust results.
     - Validate Content Credentials with an external validator.
     - Identify a content-binding failure after a controlled change to the image.
 

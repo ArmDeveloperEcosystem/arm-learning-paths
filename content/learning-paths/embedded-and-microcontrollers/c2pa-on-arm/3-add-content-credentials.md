@@ -1,5 +1,5 @@
 ---
-title: Add Content Credentials to an image
+title: Create a signed copy of an image with Content Credentials
 description: Define provenance assertions and sign a JPEG with C2PA Tool's development credential while preserving the unsigned source image.
 weight: 4
 

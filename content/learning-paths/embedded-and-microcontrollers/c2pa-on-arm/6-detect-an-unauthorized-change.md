@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Confirm jpegtran is available
 
-After inspecting and validating Content Credentials, you can now test detecting content-binding failures. You'll use libjpeg-turbo for creating a grayscaled copy of the signed image. For installation instructions, see the [libjpeg-turbo install guide](/install-guides/libjpeg-turbo/).
+After validating the signed image, use `jpegtran` from libjpeg-turbo to create a grayscale copy and test its content binding. For installation instructions, see the [libjpeg-turbo install guide](/install-guides/libjpeg-turbo/).
 
 Run the platform-independent version check:
 
@@ -27,7 +27,7 @@ libjpeg-turbo version 3.1.4.1 (build 20260327)
 
 Continue in your `c2pa-demo` directory. 
 
-Create a grayscale copy of `image-signed.jpg` while keeping its embedded Content Provenance and Authenticity (C2PA) manifest unchanged:
+Create a grayscale copy of `image-signed.jpg` while keeping its embedded C2PA manifest unchanged:
 
 ```console
 jpegtran -copy all -grayscale -outfile image-modified.jpg image-signed.jpg
@@ -46,7 +46,7 @@ it already exists.
 Preserve the manifest with `-copy all`. Otherwise, you'll be testing
 missing metadata instead of a change to the image. Removing the manifest can't turn a failed
 binding check into trusted provenance. For more information, see
-[Why stripping provenance doesn't establish trust](/learning-paths/embedded-and-microcontrollers/c2pa-on-arm/1-understand-the-c2pa/#why-stripping-provenance-does-not-establish-trust).
+[Why stripping provenance doesn't establish trust](/learning-paths/embedded-and-microcontrollers/c2pa-on-arm/1-understand-the-c2pa/#why-stripping-provenance-doesnt-establish-trust).
 {{% /notice %}}
 
 ## Inspect the modified image in the web validator
