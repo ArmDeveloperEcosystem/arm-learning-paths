@@ -8,6 +8,9 @@ additional_search_terms:
   - MCP
   - Codex
   - Cortex-M
+  - Ethos-U
+  - CMSIS
+  - CMSIS Developer Assistant
   - embedded development
   - AI agent
 weight: 1
