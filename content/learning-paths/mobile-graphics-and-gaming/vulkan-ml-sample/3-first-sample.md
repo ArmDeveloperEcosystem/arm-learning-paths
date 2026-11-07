@@ -14,7 +14,7 @@ The **Simple Tensor and Data Graph** sample is a starting point for working with
 
 With the environment set up, clone the sample code from the Khronos Group repository:
 
-```bash
+```powershell
 git clone --recurse-submodules https://github.com/KhronosGroup/Vulkan-Samples.git
 cd Vulkan-Samples
 ```
@@ -31,13 +31,13 @@ Enable [Developer Mode](https://learn.microsoft.com/en-us/windows/apps/get-start
 
 Generate Visual Studio project files using CMake:
 
-```bash
+```powershell
 cmake -G "Visual Studio 17 2022" -A x64 -S . -Bbuild/windows
 ```
 
 Compile the `vulkan_samples` target in Release mode:
 
-```bash
+```powershell
 cmake --build build/windows --config Release --target vulkan_samples
 ```
 
@@ -45,7 +45,7 @@ cmake --build build/windows --config Release --target vulkan_samples
 
 Run the built executable using the following command:
 
-```bash
+```powershell
 build\windows\app\bin\Release\AMD64\vulkan_samples.exe sample simple_tensor_and_data_graph
 ```
 
@@ -55,7 +55,7 @@ The sample creates input and output tensors, binds them with descriptor sets and
 
 ## Summary and next steps
 
-By running this sample, you've stepped through a complete Vulkan data graph pipeline powered by ML Extensions for Vulkan. You've created tensors, set up descriptors, built a SPIR-V-encoded ML graph, and dispatched inference without custom shaders. This workflow provides a foundation for neural graphics and extends to more complex graphics scenarios.
+By running this sample, you've seen how a Vulkan application creates tensors, configures a data graph pipeline, and dispatches an ML workload using the ML Extensions for Vulkan. This provides a foundation for exploring more complex ML and graphics workloads.
 
 You can also explore the remaining data graph pipeline samples. Each sample's documentation is in its directory under `samples/extensions/tensor_and_data_graph/`.
 

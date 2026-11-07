@@ -1,5 +1,5 @@
 ---
-title: Explore performance gains by increasing the Linux kernel page size on Arm
+title: Explore performance gains from larger Linux pages on Arm
 description: Learn how to install and configure Linux kernels with 16K or 64K page sizes on Arm systems, then evaluate the memory and performance trade-offs.
 
 minutes_to_complete: 30

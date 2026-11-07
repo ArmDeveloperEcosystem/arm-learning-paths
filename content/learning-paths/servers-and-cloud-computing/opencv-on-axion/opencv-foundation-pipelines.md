@@ -283,7 +283,7 @@ cat > index.html <<'EOF'
 
 <h2>Live Video Feed</h2>
 
-<img id="img" src="latest.jpg" width="640">
+<img id="img" src="latest.jpg" width="640" alt="Latest frame from the live video pipeline">
 
 <script>
 setInterval(function(){

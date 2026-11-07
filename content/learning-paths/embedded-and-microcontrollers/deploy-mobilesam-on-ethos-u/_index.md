@@ -15,6 +15,8 @@ learning_objectives:
 
 prerequisites:
     - A Linux development machine with glibc 2.28 or later, or an Apple silicon Mac running macOS 15 or later
+    - On Linux, libstdc++.so.6 providing GLIBCXX_3.4.26 or later for the Corstone-320 FVP
+    - Python 3.12 with development headers and virtual-environment support
     - Familiarity with PyTorch model export and embedded cross-compilation
 
 # START generated_summary_faq
@@ -40,7 +42,7 @@ generated_summary_faq:
   - question: How do I know my host is supported before I start?
     answer: >-
       Run the preflight check to verify macOS 15 or later on Apple silicon, or glibc 2.28 or later on Linux.
-      You'll also check the required tools, including `python3.12`, `git`, `cmake`, `c++`, and either `Ninja` or `Make`.
+      You'll also check `python3.12`, `git`, `c++`, `ninja`, `curl`, `pkg-config`, and `xz`.
   - question: Which directory should I run commands from during export and build?
     answer: >-
       Run commands from the `ExecuTorch` repository root. Activate your Python environment and source
@@ -91,7 +93,7 @@ operatingsystems:
 further_reading:
     - resource:
         title: ExecuTorch MobileSAM prompt segmentation example
-        link: https://github.com/pytorch/executorch/tree/main/examples/arm/mobilesam_prompt_segmentation_example_ethos_u
+        link: https://github.com/pytorch/executorch/tree/fe93a8b0fc8d363fbb3bfa2aa18e253507fd13f8/examples/arm/mobilesam_prompt_segmentation_example_ethos_u
         type: repository
     - resource:
         title: ExecuTorch Arm Ethos-U backend documentation

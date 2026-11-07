@@ -13,7 +13,9 @@ Arm ML Inference Advisor (MLIA) helps you evaluate a model for an Arm target bef
 
 You'll use the `mlia-neural-technology` package to evaluate two pretrained, quantized MobileNet V1 image classifiers from the TensorFlow public model catalog. You'll compare a baseline with a smaller-input variant under the same Neural Technology configuration. You don't need a model stored in this repository or a device to run the estimator.
 
-The tested example reduces estimated total cycles from `136,962` to `79,824`. These are compiler estimates, not device measurements or an accuracy result. You'll learn about the model and configuration assumptions behind this comparison in [Compare a smaller model under the same target profile](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/6-iterate-and-compare/).
+The reference example, recorded with Neural Technology `0.2.0` and LiteRT converter `0.1.2`, reduces estimated total cycles from `136,962` to `79,824`. These are compiler estimates, not device measurements or an accuracy result. You'll learn about the model and configuration assumptions behind this comparison in [Compare a smaller model under the same target profile](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/6-iterate-and-compare/).
+
+The setup installs Neural Technology `0.3.0` and LiteRT converter `0.1.3`, so your generated estimates can differ from this reference. Neural Technology `0.3.0` is required for the optional ETRecord and ETDump VGF profiling workflow.
 
 If you have a neural accelerator (NX)-capable Android device and a compatible native Vulkan driver, you can execute the model on the device. You can then bring a measured capture back to MLIA. For more information, see [(Optional) Run and profile the model on an NX device](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/7-run-on-nx-device/).
 
@@ -21,7 +23,9 @@ If you have a neural accelerator (NX)-capable Android device and a compatible na
 
 The [Analyze Ethos-U models with MLIA Learning Path](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/) applies the same workflow to Arm Ethos-U: select a target profile, check compatibility, inspect performance, and use the advice to guide your next change. It uses Vela for compiler estimates and Corstone for whole-model NPU performance counters. In this Learning Path, you'll use the Neural Technology plugin and NX Performance Estimator, with optional measurements from an Android device.
 
-The report-reading approach carries across targets, but their backends, supported operators, and performance metrics differ. Don't compare cycle counts across targets assuming that they describe the same hardware configuration.
+The report-reading approach carries across targets, but their backends, supported operators, and performance metrics differ. Don't compare cycle counts across targets assuming that they describe the same hardware configuration. For an editor-based visual workflow, see the [Ethos-U VS Code and Model Explorer walkthrough](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/).
+
+If you already have an ExecuTorch ETRecord and matching ETDump from a deployed program, you can also [analyze recorded runtime timings and VGF profiling](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/8-executorch-profiling/). This optional workflow uses different artifacts from the Scenario Runner capture directory.
 
 ## Understand the conversion and analysis flow
 

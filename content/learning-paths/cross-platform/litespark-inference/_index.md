@@ -1,5 +1,5 @@
 ---
-title: Run and benchmark BitNet-2B inference on Arm CPUs with Litespark-Inference
+title: Benchmark BitNet-2B inference on Arm with Litespark-Inference
 description: Run and benchmark BitNet-2B on Arm CPUs with Litespark-Inference, compare memory use and performance with PyTorch, and measure energy per token on Apple silicon.
 
 minutes_to_complete: 25

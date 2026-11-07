@@ -1,5 +1,5 @@
 ---
-title: Build ML Workflow Pipelines with Flyte and gRPC on Google Cloud C4A Axion processors
+title: Build Flyte and gRPC ML workflows on Google Axion
 description: Learn how to build scalable machine learning workflow pipelines on Google Cloud C4A Axion processors using Flyte for workflow orchestration and gRPC for distributed service communication.
 
 minutes_to_complete: 30

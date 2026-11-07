@@ -1,5 +1,5 @@
 ---
-title: Run optimized Whisper speech transcription models from the Arm AI Portal on Arm-powered Android devices
+title: Run Arm AI Portal Whisper models on Android
 
 description: Run Arm-optimized Whisper models with LiteRT and ExecuTorch locally on Android, then extend Whisper Journal for another compatible model or adapter.
 

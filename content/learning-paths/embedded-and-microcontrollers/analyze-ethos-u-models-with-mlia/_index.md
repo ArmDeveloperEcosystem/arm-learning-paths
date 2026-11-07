@@ -1,5 +1,5 @@
 ---
-title: Analyze machine learning models for Arm Ethos-U with Arm ML Inference Advisor
+title: Analyze Arm Ethos-U models with Arm ML Inference Advisor
 
 description: Use Arm ML Inference Advisor (MLIA) from the command line to check model compatibility, estimate performance, and identify target-aware model improvement opportunities for Ethos-U.
 

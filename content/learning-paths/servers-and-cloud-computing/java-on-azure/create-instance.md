@@ -1,5 +1,5 @@
 ---
-title: Create an Arm-based cloud virtual machine using Microsoft Cobalt 100 CPU 
+title: Create an Azure Cobalt 100 Arm VM
 weight: 3
 
 ### FIXED, DO NOT MODIFY

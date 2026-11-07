@@ -1,5 +1,5 @@
 ---
-title: Deploy ML models to Arm edge devices using Edge Impulse and AWS IoT Greengrass
+title: Deploy Edge Impulse models with AWS IoT Greengrass on Arm
 
 description: Learn how to deploy Edge Impulse ML models to Arm-based Linux edge devices using AWS IoT Greengrass custom components.
 

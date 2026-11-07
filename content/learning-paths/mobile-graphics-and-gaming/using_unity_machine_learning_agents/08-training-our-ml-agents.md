@@ -534,7 +534,7 @@ Within this yaml you have the ability to set-up 2 separate brains. One named _Pa
 
 1. Next to the _Easy Battle Brain_ there is a circle. Click it to pop-up the _Select NN Model_ menu, as per Figure 2.
 
-    !["NN Model Pop-up"](images/battle-enviroment-controller-battle-brain.png "Figure 2. Select an NN Model asset for each difficulty")
+    ![NN Model Pop-up#center](images/battle-enviroment-controller-battle-brain.png "Figure 2. Select an NN Model asset for each difficulty")
     Note that you can use the slider in the pop-up to change the icon size. Drag fully to the left to reduce to list detail view if needed.
 
 1. For each brain there is already a pre-trained version you can use, or if your training has completed use that. Match up each Battle Brain property to an appropriate NN Model. We have used the name "BossBattle" in this learning path.

@@ -1,5 +1,5 @@
 ---
-title: "Measure cross-platform performance with topdown-tool and Perf PMU counters"
+title: "Measure performance with topdown-tool and Perf PMU counters"
 weight: 7
 
 ### FIXED, DO NOT MODIFY

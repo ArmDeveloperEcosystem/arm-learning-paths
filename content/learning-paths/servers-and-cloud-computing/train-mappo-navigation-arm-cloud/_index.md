@@ -1,5 +1,5 @@
 ---
-title: Train multi-agent reinforcement learning policies with MAPPO on an Arm-based cloud instance
+title: Train MAPPO navigation policies on an Arm cloud instance
 
 description: Train a MAPPO navigation policy with BenchMARL and VMAS on an Arm-based cloud instance, deploy the checkpoint to a visualization GUI, and export an actor-only inference artifact.
 

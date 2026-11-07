@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Deploy Memcached as a cache for Postgres on an Azure Arm based Instance"
+title: "Deploy Memcached for PostgreSQL on an Azure Arm VM"
 
 weight: 6 # 1 is first, 2 is second, etc.
 

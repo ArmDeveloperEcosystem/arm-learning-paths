@@ -1,0 +1,104 @@
+{{ define "page-head" }}
+<meta name="robots" content="noindex,nofollow">
+{{ $css := resources.Get "search-lab/style.css" | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{ end }}
+
+{{ define "main" }}
+{{- $records := slice -}}
+{{- range site.Pages -}}
+  {{- $path := "" -}}
+  {{- with .File }}{{ $path = .Path }}{{ end -}}
+  {{- $isLP := and (eq .Section "learning-paths") (eq (len (split $path "/")) 4) (strings.HasSuffix $path "/_index.md") -}}
+  {{- $isGuide := and (eq .Section "install-guides") .Params.tool_install (not .Params.multitool_install_part) -}}
+  {{/* Explicit checks keep drafts out even when previewing with --buildDrafts. */}}
+  {{- $visible := not .Draft -}}
+  {{- if and (not .PublishDate.IsZero) (.PublishDate.After now) }}{{ $visible = false }}{{ end -}}
+  {{- if and (not .ExpiryDate.IsZero) (.ExpiryDate.Before now) }}{{ $visible = false }}{{ end -}}
+  {{- range .Ancestors -}}
+    {{- if or .Draft (and (not .PublishDate.IsZero) (.PublishDate.After now)) (and (not .ExpiryDate.IsZero) (.ExpiryDate.Before now)) }}{{ $visible = false }}{{ end -}}
+  {{- end -}}
+  {{- if and $visible (or $isLP $isGuide) -}}
+    {{- $kind := cond $isLP "learning-path" "install-guide" -}}
+    {{- $category := "" -}}
+    {{- if $isLP }}{{ $category = index (split $path "/") 1 }}{{ end -}}
+    {{- $summary := "" -}}
+    {{- $faq := slice -}}
+    {{- with .Params.generated_summary_faq -}}
+      {{- $summary = .summary | default "" -}}
+      {{- range .faqs -}}
+        {{- with .question }}{{ $faq = $faq | append (. | markdownify | plainify | htmlUnescape) }}{{ end -}}
+        {{- with .answer }}{{ $faq = $faq | append (. | markdownify | plainify | htmlUnescape) }}{{ end -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $prerequisites := "" -}}
+    {{- with .Params.prerequisites -}}
+      {{- if reflect.IsSlice . -}}
+        {{- $prerequisites = delimit . " " -}}
+      {{- else -}}
+        {{- $prerequisites = . -}}
+      {{- end -}}
+      {{- $prerequisites = $prerequisites | markdownify | plainify | htmlUnescape -}}
+    {{- end -}}
+    {{- $lastUpdated := .Lastmod.UTC -}}
+    {{- if $isLP }}{{ $lastUpdated = partial "server-side-processing/calculate-last-update.html" . }}{{ end -}}
+    {{- $updated := "" -}}
+    {{- if not $lastUpdated.IsZero }}{{ $updated = $lastUpdated.Format "2006-01-02" }}{{ end -}}
+    {{- $authors := slice -}}
+    {{- with .Params.author -}}
+      {{- if reflect.IsSlice . -}}
+        {{- range . }}{{ $authors = $authors | append . }}{{ end -}}
+      {{- else -}}
+        {{- $authors = $authors | append . -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $metadata := slice -}}
+    {{- range slice .Params.learning_objectives .Params.who_is_this_for .Params.additional_search_terms .Params.subjects .Params.platforms .Params.armips .Params.operatingsystems .Params.tools_software_languages .Params.skilllevels -}}
+      {{- with . }}{{ $metadata = $metadata | append (printf "%v" .) }}{{ end -}}
+    {{- end -}}
+    {{- $records = $records | append (dict "id" .RelPermalink "url" .Permalink "title" .Title "description" (.Description | default "") "summary" $summary "prerequisites" $prerequisites "faq" (delimit $faq " ") "authors" $authors "lastUpdated" $updated "metadata" (delimit $metadata " ") "type" $kind "category" $category) -}}
+  {{- end -}}
+{{- end -}}
+{{- $index := resources.FromString "search-lab/index.json" (dict "version" 1 "records" $records | jsonify) | fingerprint -}}
+{{- $engine := resources.Get "search-lab/engine.mjs" | fingerprint -}}
+{{- $workerSource := resources.Get "search-lab/worker.js" -}}
+{{- $workerCode := replace $workerSource.Content "'./engine.mjs'" (printf "'%s'" $engine.RelPermalink) -}}
+{{- $worker := resources.FromString "search-lab/worker.js" $workerCode | fingerprint -}}
+{{- $app := resources.Get "search-lab/app.js" | fingerprint -}}
+{{/* Publish worker dependencies without adding them to the main site's bundles. */}}
+{{- $engineURL := $engine.RelPermalink -}}
+<main id="browser-search" class="browser-search" data-index="{{ $index.RelPermalink }}" data-worker="{{ $worker.RelPermalink }}" aria-labelledby="search-heading">
+<header class="search-intro">
+<p class="search-eyebrow">EARLY ACCESS FEATURE</p>
+<h2 id="search-heading">Try an alternative search</h2>
+<p>Explore Learning Paths and install guides by topic, tool, platform, or author.</p>
+</header>
+<form id="search-form" class="search-panel" role="search"><label for="query">What do you want to find?</label>
+<div class="query-row"><div class="query-field"><input id="query" name="q" type="search" maxlength="300" placeholder="Search topics, tools, or authors" autocomplete="off"><button id="clear-blank-search" class="query-clear" type="button" aria-label="Clear search results" hidden><span aria-hidden="true">×</span></button></div><button class="search-button" type="submit">Search</button></div>
+<div class="search-examples" aria-label="Example searches"><span>Try:</span><button type="button" data-query="llama.cpp">llama.cpp</button><button type="button" data-query="Hermes">Hermes</button><button type="button" data-query="Graviton">Graviton</button><button type="button" data-query="Docker">Docker</button><button type="button" data-query="gcc">gcc</button></div>
+<div class="filters"><div><label for="type">Content</label><select id="type"><option value="">All content</option><option value="learning-path">Learning Paths</option><option value="install-guide">Install guides</option></select></div>
+<div><label for="category">Learning Path category</label><select id="category"><option value="">All categories</option></select></div>
+<div><label for="sort">Sort by</label><select id="sort"><option value="relevance">Relevance (newest first if blank)</option><option value="updated">Last updated (newest first)</option></select></div></div></form>
+<section class="search-results" aria-label="Search results">
+<p id="status" role="status" aria-live="polite">Loading search index…</p>
+<div id="search-diagnostics" class="search-diagnostics muted" aria-label="Search performance" hidden>
+<p id="performance"></p><p id="metrics"></p>
+</div>
+<ol id="results"></ol><button id="more" class="search-button search-button-secondary" hidden type="button">Show more results</button>
+</section>
+<section id="agent-tools" class="agent-section" aria-labelledby="agent-heading">
+<header class="search-intro">
+<h2 id="agent-heading">Search with an agent</h2>
+<p>Browser agents can search the same Learning Paths and install guides through the WebMCP tool. Use the tester below to explore how it works.</p>
+</header>
+<p>If you don’t see “WebMCP registered” below, open <code>chrome://flags/#enable-webmcp-testing</code> in Chrome, set <strong>WebMCP for testing</strong> to <strong>Enabled</strong>, then relaunch Chrome and reopen this page.</p>
+<p id="webmcp" role="status">Checking WebMCP support…</p>
+<details class="search-panel search-tools"><summary>Try the agent search tool</summary>
+<h3>Try the agent search tool</h3>
+<p>This tester calls the same search tool available to browser agents. You can use it even if your browser does not support WebMCP.</p>
+<label for="tool-input">Tool arguments (JSON)</label><textarea id="tool-input" rows="4" spellcheck="false">{"query":"llama.cpp Graviton","limit":5}</textarea>
+<button id="run-tool" class="search-button search-button-secondary" type="button">Run search_arm_content</button><pre id="tool-output" aria-live="polite"></pre></details>
+</section>
+<noscript>Enable JavaScript to search, or browse <a href="{{ "/learning-paths/" | relURL }}">Learning Paths</a> and <a href="{{ "/install-guides/" | relURL }}">install guides</a>.</noscript>
+</main><script type="module" src="{{ $app.RelPermalink }}"></script>
+{{ end }}

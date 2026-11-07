@@ -1,5 +1,5 @@
 ---
-title: Deploy ExecuTorch firmware on NXP FRDM i.MX 93 for Ethos-U65 acceleration
+title: Deploy ExecuTorch on NXP FRDM i.MX 93 with Ethos-U65
 
 description: Learn how to bring up ExecuTorch executor_runner firmware on the NXP FRDM i.MX 93 Cortex-M33 using Linux RemoteProc, compile .pte models for Ethos-U65, and run inference with NPU acceleration.
 

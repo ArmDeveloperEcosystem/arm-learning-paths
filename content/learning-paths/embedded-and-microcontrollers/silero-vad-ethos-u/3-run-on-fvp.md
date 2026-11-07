@@ -18,78 +18,68 @@ Continue from the ExecuTorch repository root. Activate the environment and build
 ```bash
 source .venv/bin/activate
 source examples/arm/arm-scratch/setup_path.sh
+if [ "$(uname -s)" = Darwin ]; then
+  export PATH="$PWD/examples/arm/arm-scratch/FVPs-on-Mac/bin:$PATH"
+  export FVP_MOUNT_DIR="$PWD"
+fi
 
 cmake --preset arm-baremetal \
   -DCMAKE_BUILD_TYPE=Release \
-  -B cmake-out-arm
-cmake --build cmake-out-arm --target install --parallel
+  -DTARGET_CPU=cortex-m85 \
+  -B cmake-out-arm -S .
+cmake --build cmake-out-arm --target install --parallel 2
 ```
 
 The installed libraries provide the ExecuTorch runtime, portable operators, and Ethos-U backend used by the application.
 
 ## Build the Silero VAD application
 
-Configure the application with the exported model, validation audio, and a speech threshold of `0.55`. 
+Configure the application with the exported model, validation audio, and the default speech threshold of `0.5`. The command selects the UART address required by FVPs-on-Mac:
 
-Select your host operating system:
+```bash
+runtime_cmake_args=()
+if [ "$(uname -s)" = Darwin ]; then
+  runtime_cmake_args+=(-DUART0_BASE=0x49303000)
+fi
 
-{{< tabpane code=true >}}
-  {{< tab header="Linux" language="bash" >}}
 cmake \
-  -S examples/arm/silero_vad_example_ethos_u/runtime \
-  -B silero-vad-work/app \
+  "${runtime_cmake_args[@]}" \
   -DCMAKE_TOOLCHAIN_FILE="$PWD/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake" \
-  -DET_BUILD_DIR_PATH="$PWD/cmake-out-arm" \
+  -DCMAKE_BUILD_TYPE=Release \
   -DTARGET_CPU=cortex-m85 \
-  -DET_PTE_FILE_PATH="$PWD/silero-vad-work/export/silero_vad_ethos_u.pte" \
-  -DAUDIO_PATH="$PWD/silero-vad-work/assets/validation.wav" \
-  -DVAD_THRESHOLD=0.55 \
-  -DPYTHON_EXECUTABLE="$(command -v python)"
-  {{< /tab >}}
-  {{< tab header="macOS" language="bash" >}}
-cmake \
-  -S examples/arm/silero_vad_example_ethos_u/runtime \
-  -B silero-vad-work/app \
-  -DCMAKE_TOOLCHAIN_FILE="$PWD/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake" \
-  -DET_BUILD_DIR_PATH="$PWD/cmake-out-arm" \
-  -DTARGET_CPU=cortex-m85 \
-  -DET_PTE_FILE_PATH="$PWD/silero-vad-work/export/silero_vad_ethos_u.pte" \
-  -DAUDIO_PATH="$PWD/silero-vad-work/assets/validation.wav" \
-  -DVAD_THRESHOLD=0.55 \
-  -DUART0_BASE=0x49303000 \
-  -DPYTHON_EXECUTABLE="$(command -v python)"
-  {{< /tab >}}
-{{< /tabpane >}}
+  -DET_PTE_FILE_PATH="$PWD/silero_vad_ethos_u.pte" \
+  -DAUDIO_PATH="$PWD/silero-vad/validation.wav" \
+  -B examples/arm/silero_vad_ethos_u \
+  -S examples/arm/silero_vad_example_ethos_u/runtime
+```
 
 Build the configured application:
 
 ```bash
-cmake --build silero-vad-work/app \
-  --target silero_vad_ethos_u --parallel
+cmake --build examples/arm/silero_vad_ethos_u \
+  --target silero_vad_ethos_u --parallel 2
 ```
 
-The build creates `silero-vad-work/app/silero_vad_ethos_u`. This ELF image contains both the `.pte` model and the 2.5-second validation clip.
+The build creates `examples/arm/silero_vad_ethos_u/silero_vad_ethos_u`. This ELF image contains both the `.pte` model and the 2.5-second validation clip.
 
 ## Run Silero VAD on the FVP
 
 Run the application and save its simulated UART output to `fvp.log`:
 
 ```bash
-mkdir -p silero-vad-work/fvp
 set -o pipefail
 bash backends/arm/scripts/run_fvp.sh \
-  --elf=silero-vad-work/app/silero_vad_ethos_u \
+  --elf=examples/arm/silero_vad_ethos_u/silero_vad_ethos_u \
   --target=ethos-u85-256 \
-  --timeout=300 2>&1 | tee silero-vad-work/fvp/fvp.log
+  --timeout=300 2>&1 | tee fvp.log
 ```
 
-The application prints one speech probability every 32 ms. Near the end, it reports a summary and stops the simulation:
-
-The output is similar to:
+The application processes one audio frame every 32 ms of recording time, then prints the probabilities and a summary. The output is similar to:
 
 ```output
-1 segments, 79 frames, 2.5s
-Speech: 57/79 frames (72.2%)
+2 segments, 79 frames, 2.5s
+Speech: 56/79 frames (70.9%)
+Model executed successfully.
 Simulation complete, 0
 No problems found!
 ```
@@ -100,8 +90,8 @@ Confirm that the application and its serial log exist:
 
 ```bash
 for artifact in \
-  silero-vad-work/app/silero_vad_ethos_u \
-  silero-vad-work/fvp/fvp.log; do
+  examples/arm/silero_vad_ethos_u/silero_vad_ethos_u \
+  fvp.log; do
   test -s "$artifact" || {
     echo "Missing target artifact: $artifact" >&2
     exit 1

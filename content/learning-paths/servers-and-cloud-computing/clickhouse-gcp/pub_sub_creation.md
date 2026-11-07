@@ -1,5 +1,5 @@
 ---
-title: Set up GCP Pub/Sub and IAM for ClickHouse real-time analytics on Axion
+title: Set up Pub/Sub and IAM for ClickHouse on Google Axion
 weight: 5
 
 ### FIXED, DO NOT MODIFY

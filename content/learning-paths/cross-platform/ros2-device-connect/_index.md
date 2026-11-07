@@ -1,5 +1,5 @@
 ---
-title: Expose an Arm-based ROS 2 system as a discoverable device on Device Connect 
+title: Expose a ROS 2 system on Arm through Device Connect
     
 description: Learn how to expose a ROS 2 system running in Docker on an Arm-based Linux device as a discoverable Device Connect device, and inspect its ROS 2 graph through remote procedure calls.
 

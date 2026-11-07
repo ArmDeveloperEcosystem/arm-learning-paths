@@ -5,8 +5,6 @@ minutes_to_complete: 20
 official_docs: https://github.com/contentauth/c2patool
 author: Kostiantyn Perehuda
 
-draft: true
-
 test_maintenance: false
 
 ### FIXED, DO NOT MODIFY
@@ -17,19 +15,13 @@ multitool_install_part: false
 layout: installtoolsall
 ---
 
-## Overview
+Content Credentials use the Coalition for Content Provenance and Authenticity (C2PA) standard to record media provenance. [C2PA Tool](https://github.com/contentauth/c2patool), invoked as `c2patool`, reads, creates, and validates Content Credentials in supported media files. 
 
-[C2PA Tool](https://github.com/contentauth/c2patool), invoked as `c2patool`, reads, creates, and
-validates Content Credentials in supported media files. Content Credentials use the
-Coalition for Content Provenance and Authenticity (C2PA) standard to record media provenance.
+You can install C2PA Tool on 64-bit Arm Linux, macOS on Apple silicon, or Windows on Arm. The Linux instructions in this guide cover Ubuntu and Debian.
 
-You can install C2PA Tool on 64-bit Arm Linux, macOS on Apple silicon, or Windows on Arm.
-The Linux instructions cover Ubuntu and Debian.
+On macOS, you'll install C2PA Tool with Homebrew. 
 
-On macOS, install C2PA Tool with Homebrew. On Arm Linux and Windows on Arm, the following
-steps use Cargo, Rust's package manager, to download the source code, compile it for Arm,
-and install the executable. Building from source produces an executable that runs natively
-on your Arm system.
+On Arm Linux and Windows on Arm, use Cargo, the Rust package manager, to install C2PA Tool. With Cargo, you'll download the source code and compile it for Arm. This produces an executable for your Arm platform.
 
 Homebrew and Cargo install the version available from their package source. For release
 information, see [C2PA Tool releases](https://github.com/contentauth/c2patool/releases).
@@ -67,7 +59,7 @@ Build C2PA Tool from source with the ARM64 Rust toolchain to install a native AR
 on Windows on Arm.
 
 Install the Microsoft C++ Build Tools and [Rust](https://www.rust-lang.org/tools/install) with the
-MSVC toolchain for ARM64. Install [7-Zip](https://www.7-zip.org/) and add its installation
+Microsoft Visual C++ (MSVC) toolchain for ARM64. Install [7-Zip](https://www.7-zip.org/) and add its installation
 directory (typically `C:\Program Files\7-Zip`) to your `PATH`.
 
 Open a new PowerShell window and confirm that 7-Zip is available:
@@ -76,7 +68,9 @@ Open a new PowerShell window and confirm that 7-Zip is available:
 7z -h
 ```
 
-The output displays the 7-Zip version and command usage. Then build and install C2PA Tool from source:
+The output displays the 7-Zip version and command usage. 
+
+Then, build and install C2PA Tool from source:
 
 ```console
 cargo install c2patool --locked
@@ -106,7 +100,7 @@ The expected output starts with:
 Tool for displaying and creating C2PA manifests.
 ```
 
-## Troubleshooting
+## Troubleshoot installation issues
 
 If your shell can't find `c2patool`, open a new terminal. For a Cargo installation, confirm that
 `$HOME/.cargo/bin` on Linux or `%USERPROFILE%\.cargo\bin` on Windows is in your `PATH`.
@@ -139,3 +133,7 @@ For a Cargo installation, run:
 ```console
 cargo uninstall c2patool
 ```
+
+## Next steps
+
+You can now use the C2PA Tool to work with Content Credentials on Arm. 

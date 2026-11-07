@@ -1,5 +1,5 @@
 ---
-title: Deploy nginx on Arm 
+title: Deploy NGINX on Arm 
 weight: 6
 
 ### FIXED, DO NOT MODIFY

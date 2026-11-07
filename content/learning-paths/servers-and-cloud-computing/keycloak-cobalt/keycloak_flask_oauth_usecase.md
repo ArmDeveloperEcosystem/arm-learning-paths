@@ -1,5 +1,5 @@
 ---
-title: Integrate a Flask OAuth2 application with Keycloak on an Azure Cobalt 100-based Arm64 virtual machine
+title: Integrate Flask OAuth2 with Keycloak on Azure Cobalt 100
 description: Learn how to configure a Keycloak realm, create an OpenID Connect client, build a Flask OAuth2 demo application, and validate user login.
 weight: 6
 

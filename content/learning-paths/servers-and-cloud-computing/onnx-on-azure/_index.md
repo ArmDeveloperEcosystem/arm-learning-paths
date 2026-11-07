@@ -1,5 +1,5 @@
 ---
-title: Deploy SqueezeNet 1.0 INT8 model with ONNX Runtime on Azure Cobalt 100
+title: Deploy INT8 SqueezeNet with ONNX Runtime on Azure Cobalt 100
 
 minutes_to_complete: 60   
 

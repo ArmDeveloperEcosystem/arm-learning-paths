@@ -1,5 +1,5 @@
 ---
-title: Optimize C++ applications on Windows on Arm using profile-guided optimization
+title: Optimize Windows on Arm C++ apps with profile-guided optimization
 
 description: Learn how to apply Profile-Guided Optimization (PGO) to build performance-tuned C++ binaries and measure improvements using Google Benchmark on Windows on Arm.
 

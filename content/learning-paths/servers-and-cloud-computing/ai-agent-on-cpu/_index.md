@@ -1,5 +1,5 @@
 ---
-title: Deploy an AI Agent on Arm with llama.cpp and llama-cpp-agent using KleidiAI
+title: Deploy an AI agent on Arm with llama.cpp and KleidiAI
 description: Learn how to build and deploy an AI agent application on Arm servers using llama.cpp and llama-cpp-agent with KleidiAI optimization for efficient LLM inference and function calling.
 
 minutes_to_complete: 45

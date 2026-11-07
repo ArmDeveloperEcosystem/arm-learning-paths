@@ -10,8 +10,8 @@ To enable Lumen in your Unreal project, open the Project Settings window, select
 
 Next, select **Lumen** as the reflection method in the **Reflections** section, as shown below.
 
-![](images/enable_lumen.png "Figure 1. Select Lumen as Global Illumination and Reflections method.")
+![Unreal Editor Project Settings under Engine > Rendering, with Dynamic Global Illumination Method and Reflection Method both set to Lumen.#center](images/enable_lumen.png "Figure 1. Select Lumen as Global Illumination and Reflections method.")
 
 Alternatively, another way to enable Lumen is by creating a **Post Process Volume** actor in the scene and selecting **Lumen** in the **Global Illumination** sections in the Post Process Volume details panel, as shown in the following image. You can also select **Lumen** as the reflection method here as well.
 
-![](images/postprocess.png "Figure 2. Select Lumen as Global Illumination and Reflections method in Post Process Volume details panel.")
+![Unreal Editor Post Process Volume details panel with the Global Illumination and Reflections Method checkboxes enabled and both methods set to Lumen.#center](images/postprocess.png "Figure 2. Select Lumen as Global Illumination and Reflections method in Post Process Volume details panel.")
