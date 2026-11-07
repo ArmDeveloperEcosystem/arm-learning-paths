@@ -20,6 +20,7 @@ Use the [Bootstrap](https://github.com/veraison/services/tree/main/deployments/a
 ```bash
 cd $HOME
 git clone https://github.com/veraison/services.git
+git -C services checkout ebadb73
 cd services/deployments/aws
 make bootstrap
 ```
