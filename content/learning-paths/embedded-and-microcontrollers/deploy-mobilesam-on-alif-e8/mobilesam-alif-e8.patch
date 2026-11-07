@@ -1,0 +1,4760 @@
+diff --git a/README-wheel.md b/README-wheel.md
+index 8ee58b56f2..b8f87d3f96 100644
+--- a/README-wheel.md
++++ b/README-wheel.md
+@@ -8,6 +8,22 @@ The `executorch` pip package is in beta.
+ * Supported python versions: 3.10, 3.11, 3.12, 3.13, 3.14
+ * Compatible systems: Linux x86_64, Linux aarch64, macOS aarch64
+ 
++Backend export tools can require optional Python dependencies. For example,
++install the Ethos-U AOT dependencies with:
++
++```bash
++pip install 'executorch[ethos_u]'
++```
++
++The `ethos_u` extra installs host-side export dependencies such as the Vela
++compiler; it does not install an Arm cross compiler, an FVP, or a target C++
++runtime. There is no `cortex_m` package extra. CMSIS-NN is a separate Cortex-M
++export and runtime path that requires an ExecuTorch source checkout. Installing
++an extra does not make unsupported Ethos-U nodes use CMSIS-NN automatically.
++See the
++[Arm examples](https://github.com/pytorch/executorch/tree/main/examples/arm)
++for that setup.
++
+ To build a minimal wheel from source, set
+ `EXECUTORCH_BUILD_MINIMAL=1` when running `pip wheel` or `pip install`.
+ That wheel contains the Python EXIR export path and `flatc` for `.pte`
+diff --git a/README.md b/README.md
+index 192e90c51a..7d2a75c8b1 100644
+--- a/README.md
++++ b/README.md
+@@ -64,6 +64,11 @@ Learn more: [How ExecuTorch Works](https://docs.pytorch.org/executorch/main/intr
+ pip install executorch
+ ```
+ 
++Backend export tools can require optional dependencies. For example, use
++`pip install 'executorch[ethos_u]'` for Ethos-U AOT export. Embedded
++toolchains, simulators, and target runtimes are installed separately; see the
++[Arm examples](examples/arm/README.md) for the complete flow.
++
+ For platform-specific setup (Android, iOS, embedded systems), see the [Quick Start](https://docs.pytorch.org/executorch/main/quick-start-section.html) documentation for additional info.
+ 
+ ### Export and Deploy in 3 Steps
+diff --git a/backends/arm/scripts/corstone_utils.cmake b/backends/arm/scripts/corstone_utils.cmake
+index 72a0c27a8c..099aa5f4ce 100644
+--- a/backends/arm/scripts/corstone_utils.cmake
++++ b/backends/arm/scripts/corstone_utils.cmake
+@@ -37,7 +37,7 @@ function(fetch_ethos_u_content ETHOS_SDK_PATH ET_DIR_PATH)
+     BINARY_DIR
+     ${ETHOS_SDK_PATH}
+     SUBBUILD_DIR
+-    ${ETHOS_SDK_PATH}/../ethos_u-subbuild
++    ${CMAKE_BINARY_DIR}/ethos_u-subbuild
+     SOURCE_SUBDIR
+     none
+   )
+diff --git a/backends/arm/test/misc/test_mobilesam_export.py b/backends/arm/test/misc/test_mobilesam_export.py
+new file mode 100644
+index 0000000000..049fb15fb2
+--- /dev/null
++++ b/backends/arm/test/misc/test_mobilesam_export.py
+@@ -0,0 +1,44 @@
++# Copyright 2026 Arm Limited and/or its affiliates.
++#
++# This source code is licensed under the BSD-style license found in the
++# LICENSE file in the root directory of this source tree.
++
++from pathlib import Path
++
++import pytest
++
++from examples.arm.mobilesam_prompt_segmentation_example_ethos_u.model_export.export_mobilesam import (
++    INPUT_SIZE,
++    parse_args,
++    resolve_point_prompts,
++)
++
++
++def test_minimal_export_arguments() -> None:
++    args = parse_args(
++        [
++            "--output-path",
++            "model.pte",
++            "--image",
++            "image.jpg",
++            "--point",
++            "219",
++            "193",
++        ]
++    )
++
++    assert args.output_path == Path("model.pte")
++    assert args.image == Path("image.jpg")
++    assert args.point == [[219.0, 193.0]]
++    assert not args.local_files_only
++    assert not args.quantized_io
++
++
++def test_point_prompts_must_be_inside_fixed_input() -> None:
++    assert resolve_point_prompts([[0, 0], [INPUT_SIZE - 1, INPUT_SIZE - 1]]) == [
++        (0.0, 0.0),
++        (447.0, 447.0),
++    ]
++
++    with pytest.raises(ValueError, match="must be inside"):
++        resolve_point_prompts([[INPUT_SIZE, 0]])
+diff --git a/backends/arm/test/misc/test_mobilesam_visualization.py b/backends/arm/test/misc/test_mobilesam_visualization.py
+new file mode 100644
+index 0000000000..b12a2e5851
+--- /dev/null
++++ b/backends/arm/test/misc/test_mobilesam_visualization.py
+@@ -0,0 +1,24 @@
++# Copyright 2026 Arm Limited and/or its affiliates.
++#
++# This source code is licensed under the BSD-style license found in the
++# LICENSE file in the root directory of this source tree.
++
++from pathlib import Path
++
++from examples.arm.mobilesam_prompt_segmentation_example_ethos_u.runtime.visualize_fvp_output import (
++    parse_rle_mask,
++)
++
++
++def test_parse_rle_mask_tolerates_non_utf8_fvp_output(tmp_path: Path) -> None:
++    log_path = tmp_path / "fvp.log"
++    log_path.write_bytes(
++        b"\xffFVP startup noise\n"
++        b"Segmentation mask RLE begin\n"
++        b"Segmentation mask RLE chunk 0:2,1:3,\n"
++        b"\x80UART noise\n"
++        b"Segmentation mask RLE chunk 0:1,\n"
++        b"Segmentation mask RLE end\n"
++    )
++
++    assert parse_rle_mask(log_path, expected_pixels=6) == [0, 0, 1, 1, 1, 0]
+diff --git a/backends/arm/test/test_arm_ootb.sh b/backends/arm/test/test_arm_ootb.sh
+index e61eabba9c..4064a31a40 100755
+--- a/backends/arm/test/test_arm_ootb.sh
++++ b/backends/arm/test/test_arm_ootb.sh
+@@ -170,10 +170,8 @@ run_mobilesam_e2e_ethos_u() {
+     local example_dir="${et_root_dir}/examples/arm/mobilesam_prompt_segmentation_example_ethos_u"
+     local work_root="${et_root_dir}/arm_test/mobilesam_ootb_smoke"
+     local export_dir="${work_root}/export"
+-    local artifact_dir="${work_root}/artifacts"
+-    local debug_dir="${work_root}/debug"
++    local debug_dir="${export_dir}/debug"
+     local et_build_dir="${work_root}/cmake-out-arm"
+-    local quantized_aot_build_dir="${work_root}/quantized_ops_aot"
+     local build_dir="${work_root}/runtime"
+     local mobile_sam_source="${work_root}/mobile_sam/source"
+     local image_path="${et_root_dir}/examples/models/dinov2/dog.jpg"
+@@ -181,11 +179,10 @@ run_mobilesam_e2e_ethos_u() {
+     local metadata_path="${export_dir}/mobilesam_prompt_smoke.json"
+     local fvp_log="${work_root}/fvp.log"
+     local toolchain_file="${et_root_dir}/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake"
+-    local input_size=448
+     local fvp_timelimit="${FVP_TIMELIMIT:-300}"
+     echo "${FUNCNAME}: Work directory: ${work_root}; existing artifacts will be reused if present"
+ 
+-    mkdir -p "${export_dir}" "${artifact_dir}" "${debug_dir}" "${build_dir}"
++    mkdir -p "${export_dir}" "${build_dir}"
+ 
+     setup_path_script=${et_root_dir}/examples/arm/arm-scratch/setup_path.sh
+     source ${setup_path_script}
+@@ -197,60 +194,26 @@ run_mobilesam_e2e_ethos_u() {
+     cmake --preset arm-baremetal -B "${et_build_dir}"
+     cmake --build "${et_build_dir}" --target install -j"$n_proc"
+ 
+-    echo "${FUNCNAME}: Building host quantized AOT library"
+     local python_executable
+     python_executable="$(python3 -c 'import sys; print(sys.executable)')"
+-    cmake \
+-        -S "${et_root_dir}" \
+-        -B "${quantized_aot_build_dir}" \
+-        -DCMAKE_BUILD_TYPE=Release \
+-        -DEXECUTORCH_BUILD_KERNELS_QUANTIZED=ON \
+-        -DEXECUTORCH_BUILD_KERNELS_QUANTIZED_AOT=ON \
+-        -DEXECUTORCH_BUILD_XNNPACK=OFF \
+-        -DPYTHON_EXECUTABLE="${python_executable}"
+-    cmake --build "${quantized_aot_build_dir}" --target quantized_ops_aot_lib -j"$n_proc"
+-
+-    local quantized_ops_library
+-    quantized_ops_library="$(
+-        find "${quantized_aot_build_dir}/kernels/quantized" \
+-            -name 'libquantized_ops_aot_lib.*' \
+-            -type f \
+-            -print \
+-            -quit
+-    )"
+-    [[ -n "${quantized_ops_library}" ]] || {
+-        echo "${FUNCNAME}: Missing quantized AOT library under ${quantized_aot_build_dir}"
+-        return 1
+-    }
+-
+-    echo "${FUNCNAME}: Installing example requirements"
+-    pip install -r "${example_dir}/requirements.txt"
+ 
+     echo "${FUNCNAME}: Preparing pinned MobileSAM source"
+     python3 "${example_dir}/model_export/prepare_mobilesam.py" \
+         --source-dir "${mobile_sam_source}"
+ 
+     echo "${FUNCNAME}: Exporting quantized MobileSAM PTE"
+-    env EXECUTORCH_QUANTIZED_OPS_AOT_LIBRARY="${quantized_ops_library}" \
+-        python3 "${example_dir}/model_export/export_mobilesam.py" \
++    python3 "${example_dir}/model_export/export_mobilesam.py" \
+         --output-path "${pte_path}" \
+-        --calibration-image "${image_path}" \
+-        --eval-image "${image_path}" \
++        --image "${image_path}" \
+         --mobile-sam-source "${mobile_sam_source}" \
+-        --input-size "${input_size}" \
+-        --point 219 193 \
+-        --num-calibration-samples 1 \
+-        --num-eval-samples 1 \
+-        --num-debug-samples 1 \
+-        --minimum-fp32-quantized-iou 0.9 \
+-        --artifact-dir "${artifact_dir}" \
+-        --debug-output-dir "${debug_dir}"
++        --point 219 193
+ 
+     for artifact in \
+         "${pte_path}" \
+         "${metadata_path}" \
+         "${export_dir}/mobilesam_prompt_smoke_delegation.txt" \
+-        "${export_dir}/mobilesam_prompt_smoke_metrics.json"; do
++        "${export_dir}/mobilesam_prompt_smoke_metrics.json" \
++        "${debug_dir}/dog/quantized_mask.png"; do
+         [[ -f "${artifact}" ]] || {
+             echo "${FUNCNAME}: Missing export artifact ${artifact}"
+             return 1
+@@ -265,9 +228,7 @@ run_mobilesam_e2e_ethos_u() {
+         -B "${build_dir}" \
+         -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
+         -DET_PTE_FILE_PATH="${pte_path}" \
+-        -DMODEL_METADATA_PATH="${metadata_path}" \
+         -DIMAGE_PATH="${image_path}" \
+-        -DMASK_THRESHOLD=0.0 \
+         -DET_SEGMENTATION_DUMP_MASK=ON \
+         -DPYTHON_EXECUTABLE="${python_executable}" \
+         -DET_BUILD_DIR_PATH="${et_build_dir}"
+diff --git a/docs/source/backends/arm-ethos-u/tutorials/ethos-u-getting-started.md b/docs/source/backends/arm-ethos-u/tutorials/ethos-u-getting-started.md
+index 7e4056720d..a2b852c0df 100644
+--- a/docs/source/backends/arm-ethos-u/tutorials/ethos-u-getting-started.md
++++ b/docs/source/backends/arm-ethos-u/tutorials/ethos-u-getting-started.md
+@@ -35,10 +35,25 @@ To enable development without a specific development board, we will be using a [
+ 
+ ### Software
+ 
+-First, you will need to install ExecuTorch. Please follow the recommended tutorials to set up a working ExecuTorch development environment.
++Use a source checkout because this tutorial builds an embedded target runtime.
++From the repository root, create a Python environment and install the current
++checkout with the Ethos-U AOT dependencies:
++
++```bash
++python3.12 -m venv .venv
++source .venv/bin/activate
++./install_executorch.sh --optional-dependency ethos_u
++```
++
++The released-package equivalent for host-side export is
++`pip install 'executorch[ethos_u]'`. The `ethos_u` extra does not install an Arm
++cross compiler, FVP, or target runtime. There is no `cortex_m` package extra;
++CMSIS-NN is a separate Cortex-M export and runtime path. Installing an extra
++does not make unsupported Ethos-U nodes use CMSIS-NN automatically.
++
++Install the Arm cross-compilation toolchain, simulators, and remaining backend
++dependencies with:
+ 
+-In addition to this, you need to install a number of SDK dependencies for generating Ethos-U command streams. Scripts to automate this are available in the main [ExecuTorch repository](https://github.com/pytorch/executorch/tree/main/examples/arm/).
+-To install Ethos-U dependencies, run
+ ```bash
+ ./examples/arm/setup.sh --i-agree-to-the-contained-eula
+ ```
+diff --git a/docs/source/getting-started.md b/docs/source/getting-started.md
+index 3c45306301..d370f7cf65 100644
+--- a/docs/source/getting-started.md
++++ b/docs/source/getting-started.md
+@@ -23,7 +23,22 @@ This package includes the dependencies needed to export a PyTorch model, as well
+ pip install executorch
+ ```
+ 
+-To build the framework from source, see [Building From Source](using-executorch-building-from-source.md). Backend delegates may require additional dependencies. See the appropriate backend documentation for more information.
++Some backends provide optional Python dependencies for ahead-of-time export.
++For example, install the Ethos-U export dependencies with:
++
++```bash
++pip install 'executorch[ethos_u]'
++```
++
++The extra installs host-side AOT tools; it does not install an embedded
++toolchain, simulator, or target runtime. There is no `cortex_m` package extra.
++CMSIS-NN is a separate Cortex-M export and runtime path that requires a source
++checkout. Installing an extra does not make unsupported Ethos-U nodes use
++CMSIS-NN automatically. See the
++[Arm examples](https://github.com/pytorch/executorch/tree/main/examples/arm)
++for the complete setup.
++
++To build the framework from source, see [Building From Source](using-executorch-building-from-source.md). Other backend delegates may require additional dependencies. See the appropriate backend documentation for more information.
+ 
+ > **_NOTE:_** On Windows, ExecuTorch requires a [Visual Studio Developer Powershell](https://learn.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022). Running from outside of a developer prompt will manifest as errors related to CL.exe.
+ 
+diff --git a/docs/source/using-executorch-building-from-source.md b/docs/source/using-executorch-building-from-source.md
+index c63fbd715a..98958fa977 100644
+--- a/docs/source/using-executorch-building-from-source.md
++++ b/docs/source/using-executorch-building-from-source.md
+@@ -79,8 +79,28 @@ portability details.
+   * `--clean`: Removes build artifacts.
+   * `--editable`: Install the ExecuTorch python package in editable mode (see [Editable Install](#editable-install)).
+   * `--minimal`: Install only the minimal set of dependencies required to run ExecuTorch. Do not install dependencies for examples.
++  * `--optional-dependency <name>`: Install an optional Python dependency set.
++    Repeat the flag to select more than one. Supported names are `ethos_u`,
++    `vgf`, and `openvino`.
+   * `--use-pt-pinned-commit`: Install the pinned PyTorch commit or release version. When not specified, the latest PyTorch nightly build is installed.
+ 
++  For example, install the current checkout with the Ethos-U AOT dependencies:
++
++  ```bash
++  ./install_executorch.sh --optional-dependency ethos_u
++  ```
++
++  After the base dependencies have already been installed, the equivalent
++  editable package command is:
++
++  ```bash
++  pip install -e '.[ethos_u]' --no-build-isolation
++  ```
++
++  Optional dependency sets install host-side Python tools only. Embedded
++  toolchains, simulators, and target runtimes are configured separately by the
++  backend setup and build instructions.
++
+   For Intel-based macOS systems, use `--use-pt-pinned-commit --minimal`. As PyTorch does not provide pre-built binaries for Intel Mac, installation requires building PyTorch from source. Instructions can be found in [PyTorch Installation](https://github.com/pytorch/pytorch#installation).
+ 
+   Note that only the XNNPACK and CoreML backends are built by default. Additional backends can be enabled or disabled by setting the corresponding CMake flags:
+diff --git a/examples/arm/README.md b/examples/arm/README.md
+index 1a0923f1ab..00dc70f246 100644
+--- a/examples/arm/README.md
++++ b/examples/arm/README.md
+@@ -11,6 +11,28 @@ This directory contains documentation and scripts to
+ help you setup and run a PyTorch model on the Arm backend
+ via ExecuTorch.
+ 
++## Python package setup
++
++For Ethos-U examples, install the current checkout and its AOT dependencies in
++a clean Python environment:
++
++```bash
++python3.12 -m venv .venv
++source .venv/bin/activate
++./install_executorch.sh --optional-dependency ethos_u
++```
++
++After the base dependencies are installed, the equivalent editable package
++command is `pip install -e '.[ethos_u]' --no-build-isolation`. The `ethos_u`
++extra provides host-side export dependencies; it does not install the Arm
++toolchain, FVPs, or target runtime.
++
++There is no `cortex_m` package extra. CMSIS-NN is a separate Cortex-M export
++and runtime path that uses code and build configuration from the ExecuTorch
++source checkout. Installing an extra does not make unsupported Ethos-U nodes
++use CMSIS-NN automatically. Run `setup.sh` below, then follow the relevant
++Cortex-M example.
++
+ ## setup.sh
+ 
+ `setup.sh` downloads the Arm cross-compilation toolchain and Corstone FVP
+diff --git a/examples/arm/ethos_u_minimal_example.ipynb b/examples/arm/ethos_u_minimal_example.ipynb
+index 11f24019d2..2ee20a504c 100644
+--- a/examples/arm/ethos_u_minimal_example.ipynb
++++ b/examples/arm/ethos_u_minimal_example.ipynb
+@@ -21,11 +21,17 @@
+     "This guide demonstrates the full flow for running a module on Arm Ethos-U55 using ExecuTorch.\n",
+     "Tested on Linux x86_64 and macOS aarch64. If something is not working for you, please raise a GitHub issue and tag Arm.\n",
+     "\n",
+-    "Before you begin:\n",
+-    "1. (In a clean virtual environment with a compatible Python version) Install executorch using `./install_executorch.sh`\n",
+-    "2. Install Arm cross-compilation toolchain and simulators using `./examples/arm/setup.sh --i-agree-to-the-contained-eula`\n",
++    "Before you begin, run these commands from the base `executorch` folder:\n",
+     "\n",
+-    "With all commands executed from the base `executorch` folder.\n",
++    "```bash\n",
++    "python3.12 -m venv .venv\n",
++    "source .venv/bin/activate\n",
++    "./install_executorch.sh --optional-dependency ethos_u\n",
++    "./examples/arm/setup.sh --i-agree-to-the-contained-eula\n",
++    "source examples/arm/arm-scratch/setup_path.sh\n",
++    "```\n",
++    "\n",
++    "The `ethos_u` extra installs the host-side AOT dependencies. The Arm setup script installs the cross compiler and FVPs needed later in the notebook. There is no `cortex_m` package extra. CMSIS-NN is a separate Cortex-M export and runtime path; installing an extra does not make unsupported Ethos-U nodes use CMSIS-NN automatically.\n",
+     "\n",
+     "\n",
+     "\n",
+diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/README.md b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/README.md
+index 58eae2b020..d2a44173e3 100644
+--- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/README.md
++++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/README.md
+@@ -4,17 +4,75 @@ This end-to-end example shows how to use the Arm Ethos-U backend in
+ ExecuTorch for transformer-based prompt segmentation. MobileSAM predicts a
+ binary mask for fixed positive point prompts rather than semantic class IDs.
+ The host debug flow validates quantization by comparing FP32 and quantized
+-masks, with an optional binary reference mask when one is available.
++masks before lowering.
+ 
+-It covers:
++**Prompt contract:** the runtime accepts only an image tensor. The positive
++point coordinates are embedded in the `.pte` during export. You can reuse the
++`.pte` for a new image, but changing the points requires re-exporting the model.
+ 
+-- Loading the MobileSAM `vit_t` checkpoint.
+-- Freezing one or more positive point prompts into the exported graph.
+-- Applying post-training quantization with the Ethos-U quantizer.
+-- Lowering the quantized model to an Ethos-U85-256 ExecuTorch program.
+-- Producing validation and debugging artifacts such as masks, overlays,
+-  mismatch heatmaps, metrics, and delegation summaries.
+-- Building a bare-metal Corstone-320 runtime app and running it on FVP.
++## Clean-clone setup
++
++Run every command in this guide from the ExecuTorch repository root. Use the
++checkout's installer rather than installing an unrelated `executorch` wheel
++from PyPI:
++
++```bash
++python3.12 -m venv .venv
++source .venv/bin/activate
++
++./install_executorch.sh --optional-dependency ethos_u
++
++./examples/arm/setup.sh --i-agree-to-the-contained-eula
++source examples/arm/arm-scratch/setup_path.sh
++```
++
++`install_executorch.sh` installs the current checkout and Ethos-U Python tools
++into the active virtual environment. `examples/arm/setup.sh` installs the
++pinned Arm GNU bare-metal toolchain and Corstone FVP used by this example.
++For a later editable reinstall, the equivalent package command is
++`python -m pip install -e '.[ethos_u]' --no-build-isolation`. There is no
++`cortex_m` package extra; CMSIS-NN kernels are selected when building a target
++runtime, and this example does not need them because its graph is fully
++delegated to Ethos-U.
++
++On macOS, install the
++[FVPs-on-Mac](https://github.com/Arm-Examples/FVPs-on-Mac) Docker wrapper and
++add its `bin` directory to `PATH` before running the setup or smoke commands.
++Run `command -v FVP_Corstone_SSE-320` and confirm it resolves inside the
++FVPs-on-Mac `bin` directory rather than to a downloaded Linux FVP binary.
++
++## One-command end-to-end smoke test
++
++After setup, export, build, run on Corstone-320 FVP, and validate the target
++mask with:
++
++```bash
++./backends/arm/test/test_arm_ootb.sh run_mobilesam_e2e_ethos_u
++```
++
++The smoke test uses the demo image for calibration and validation. Its main
++outputs are:
++
++- `.pte`: `arm_test/mobilesam_ootb_smoke/export/mobilesam_prompt_smoke.pte`
++- Host quantized mask:
++  `arm_test/mobilesam_ootb_smoke/export/debug/dog/quantized_mask.png`
++- FVP log: `arm_test/mobilesam_ootb_smoke/fvp.log`
++- Side-by-side result:
++  `arm_test/mobilesam_ootb_smoke/fvp_visual/fvp_comparison.png`
++- FVP validation metrics:
++  `arm_test/mobilesam_ootb_smoke/fvp_visual/metrics.json`
++
++## What the example does
++
++1. Loads the pinned official MobileSAM `vit_t` source and checkpoint.
++2. Builds a wrapper with fixed positive point prompts.
++3. Calibrates PT2E quantization with `EthosUQuantizer`.
++4. Applies a stable softmax decomposition to transformer attention blocks.
++5. Lowers the complete quantized graph with `EthosUPartitioner`.
++6. Writes a `.pte`, builds the bare-metal runtime, executes it on FVP, and
++   compares the target mask with the host quantized result.
++7. Optionally builds a Zephyr application for the Alif Ensemble E8 DevKit and
++   runs the same export on Ethos-U85-256 hardware.
+ 
+ The default export uses a reduced `448x448` image input and returns one
+ low-resolution `[1, 1, 112, 112]` mask-logit tensor. The example prepares the
+@@ -31,6 +89,12 @@ mask thresholding outside the model. SAM-style candidate-mask selection can be
+ numerically sensitive after export and quantization, so this example keeps the
+ target graph focused on the fixed-prompt image encoder and mask decoder.
+ 
++## Manual workflow
++
++For the educational flow and configurable export options, continue with
++`model_export/README.md`, then build and execute the generated program using
++`runtime/README.md`.
++
+ ## Layout
+ 
+ - `model_export/prepare_mobilesam.py` - Prepares the pinned external MobileSAM
+@@ -41,3 +105,5 @@ target graph focused on the fixed-prompt image encoder and mask decoder.
+   Corstone-320 FVP execution.
+ - `runtime/visualize_fvp_output.py` - Decodes the target mask dump, creates an
+   overlay, and compares FVP output with the host quantized mask.
++- `../../../zephyr/samples/mobilesam-ethosu/README.md` - Alif Ensemble E8
++  build, flash, execution, and visualization instructions.
+diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/README.md b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/README.md
+index 8069c0d8cc..c5f24ee0f5 100644
+--- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/README.md
++++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/README.md
+@@ -1,192 +1,96 @@
+-# MobileSAM Export, Quantization, and Debugging
++# Export MobileSAM for Ethos-U
+ 
+-This directory exports MobileSAM `vit_t` for the ExecuTorch Ethos-U backend.
+-The exporter freezes one or more positive point prompts into the graph, so the
+-runtime app has one tensor input: the preprocessed image. The model returns one
+-mask-logit tensor for those prompts. The default export uses a `448x448` input,
+-which produces a `112x112` mask-logit tensor.
++This flow exports MobileSAM `vit_t` as a fixed-prompt, fully delegated
++Ethos-U85 program. The image remains a runtime input, while positive point
++coordinates are embedded in the `.pte`. Changing the points requires another
++export.
+ 
+-Production SAM applications usually pass prompts dynamically from a UI or
+-tracking pipeline. This example freezes the prompt embeddings so the FVP
+-runtime stays small and demonstrates the Ethos-U flow with the same image
+-encoder and mask decoder used by MobileSAM.
++## Export flow
+ 
+-## Requirements
++1. Load the pinned official MobileSAM source and checkpoint.
++2. Freeze one or more positive point prompts into the model.
++3. Use the demonstration image for PT2E calibration.
++4. Quantize globally to A8W8 and use A16W8 for TinyViT attention.
++5. Compare FP32 and quantized masks and require at least `0.9` IoU.
++6. Lower the complete graph with `EthosUPartitioner` and save the `.pte`.
++7. Write TOSA/Vela intermediates, masks, overlays, metrics, and delegation
++   information beside the model.
+ 
+-- Python 3.10+ with `executorch`.
+-- Dependencies from
+-  `examples/arm/mobilesam_prompt_segmentation_example_ethos_u/requirements.txt`.
+-- Git and internet access to prepare the pinned external MobileSAM checkout and
+-  download the official checkpoint, unless both are already cached.
+-- Ethos-U dependencies from `examples/arm/setup.sh`.
+-
+-MobileSAM's A16W8 attention requires `ethos-u-vela>=5.1.0`. Vela 5.0 produces
+-incorrect Ethos-U85 INT16 reductions, so the exporter rejects that version
+-before generating a `.pte`.
+-
+-## Export
+-
+-Run from the ExecuTorch repo root:
++Complete the clean-clone setup in the top-level example `README.md`, then run
++from the ExecuTorch repository root:
+ 
+ ```bash
+-MOBILE_SAM_SOURCE="$HOME/.cache/executorch/mobilesam/f706ad9c4eb7f219c00d9050e46328518ffb65d2/source"
++MOBILE_SAM_WORK_DIR="${MOBILE_SAM_WORK_DIR:-$PWD/arm_test/mobilesam_manual}"
++MOBILE_SAM_SOURCE="$MOBILE_SAM_WORK_DIR/mobile_sam/source"
++MOBILE_SAM_IMAGE="$PWD/examples/models/dinov2/dog.jpg"
++MOBILE_SAM_PTE="$MOBILE_SAM_WORK_DIR/export/mobilesam_point_ethos_u85_448.pte"
++
+ python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/prepare_mobilesam.py \
+   --source-dir "$MOBILE_SAM_SOURCE"
+ 
+ python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py \
+-  --output-path ./mobilesam_point_ethos_u85_448.pte \
+-  --mobile-sam-source "$MOBILE_SAM_SOURCE" \
+-  --calibration-image examples/models/dinov2/dog.jpg \
+-  --eval-image examples/models/dinov2/dog.jpg \
++  --output-path "$MOBILE_SAM_PTE" \
++  --image "$MOBILE_SAM_IMAGE" \
+   --point 219 193 \
+-  --artifact-dir ./mobilesam_point_artifacts \
+-  --debug-output-dir ./mobilesam_point_debug
++  --mobile-sam-source "$MOBILE_SAM_SOURCE"
+ ```
+ 
+-The default configuration is:
+-
+-- Model source: `https://github.com/ChaoningZhang/MobileSAM`
+-- MobileSAM source revision: `f706ad9c4eb7f219c00d9050e46328518ffb65d2`
+-- External source patch: `0001-Make-TinyViT-image-size-configurable.patch`
+-- Checkpoint URL:
+-  `https://github.com/ChaoningZhang/MobileSAM/raw/f706ad9c4eb7f219c00d9050e46328518ffb65d2/weights/mobile_sam.pt`
+-- Checkpoint SHA256:
+-  `6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f`
+-- MobileSAM source-code license: Apache-2.0
+-- Static input shape: `[1, 3, 448, 448]`
+-- Output mask logits shape: `[1, 1, 112, 112]`
+-- Positive point prompt: `(224, 224)` in the padded `448x448` model input
+-  frame
++The example intentionally fixes the deployment configuration:
++
++- Input: `[1, 3, 448, 448]`
++- Output mask logits: `[1, 1, 112, 112]`
+ - Target: `ethos-u85-256`
+-- System config: `Ethos_U85_SYS_DRAM_Mid`
++- System configuration: `Ethos_U85_SYS_DRAM_Mid`
+ - Memory mode: `Dedicated_Sram_384KB`
+-- Calibration samples: `4`
+-- Validation samples: `4`
+-
+-The MobileSAM source and checkpoint are not redistributed by this example. The
+-preparation script clones the pinned official source into a managed external
+-cache and applies the configurable-input patch. The exporter downloads the
+-pinned official checkpoint and verifies its SHA256 unless `--checkpoint-path`
+-is provided. The source repository and checkpoint may have separate terms; the
+-export metadata records only the source-code license and does not assign a
+-license to the checkpoint.
+-
+-For a quick offline smoke test after caching the official checkpoint and source
+-checkout:
+-
+-```bash
+-python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/prepare_mobilesam.py \
+-  --source-dir "$MOBILE_SAM_SOURCE" \
+-  --local-files-only
++- Mask threshold: `0.0`
+ 
+-python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py \
+-  --output-path /tmp/mobilesam_smoke.pte \
+-  --local-files-only \
+-  --mobile-sam-source "$MOBILE_SAM_SOURCE" \
+-  --calibration-image examples/models/dinov2/dog.jpg \
+-  --eval-image examples/models/dinov2/dog.jpg \
+-  --point 219 193 \
+-  --num-calibration-samples 1 \
+-  --num-eval-samples 1 \
+-  --minimum-fp32-quantized-iou 0.9
+-```
++Repeat `--point X Y` to export a multi-point positive prompt. Pass
++`--local-files-only` after the source and checkpoint have been cached. Pass a
++local checkpoint with `--checkpoint-path` when network access is unavailable.
+ 
+-Repeat `--point X Y` to freeze a multi-point prompt into the graph. Validate
+-every prompt set because adding positive points can substantially change the
+-predicted object after quantization:
++The Alif E8 Zephyr sample additionally requires `--quantized-io`. This exposes
++int8 model input and output tensors and records their quantization parameters
++in the metadata JSON.
+ 
+-```bash
+-python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py \
+-  --output-path /tmp/mobilesam_multipoint_smoke.pte \
+-  --local-files-only \
+-  --mobile-sam-source "$MOBILE_SAM_SOURCE" \
+-  --calibration-image examples/models/dinov2/dog.jpg \
+-  --eval-image examples/models/dinov2/dog.jpg \
+-  --point 166 158 \
+-  --point 219 193 \
+-  --point 289 184 \
+-  --num-calibration-samples 1 \
+-  --num-eval-samples 1 \
+-  --debug-output-dir /tmp/mobilesam_multipoint_debug
+-```
++## Outputs
+ 
+-Pass `--input-size 1024` to reproduce the original MobileSAM resolution. Smaller
+-inputs export and run faster, but very small inputs such as `224` or `256`
+-usually produce lower-quality masks because the checkpoint was trained for
+-`1024x1024` images.
++For the command above, the export directory contains:
+ 
+-To validate against a known binary mask, pass one `--eval-mask` per
+-`--eval-image`. Non-zero mask pixels are treated as foreground. When no
+-reference mask is provided, validation reports FP32/quantized mask agreement.
+-Use `--minimum-fp32-quantized-iou` in automated runs to reject an inaccurate
+-quantized model before lowering.
++- `mobilesam_point_ethos_u85_448.pte` - ExecuTorch program.
++- `mobilesam_point_ethos_u85_448.json` - shapes, preprocessing, prompt, and
++  provenance metadata.
++- `mobilesam_point_ethos_u85_448_metrics.json` - FP32/quantized mask agreement.
++- `mobilesam_point_ethos_u85_448_delegation.txt` - delegation summary.
++- `artifacts/` - TOSA and Vela intermediate files.
++- `debug/dog/` - input, FP32/quantized masks, and colored overlays.
+ 
+-The export flow:
++The host quantized mask used for FVP validation is:
+ 
+-1. Loads the MobileSAM `vit_t` checkpoint through the patched external API.
+-2. Builds a fixed-prompt wrapper containing the image encoder and mask decoder.
+-3. Calibrates PT2E quantization with `EthosUQuantizer`.
+-4. Uses stable softmax decomposition for transformer attention blocks.
+-5. Lowers the quantized graph with `EthosUPartitioner`.
+-6. Writes an ExecuTorch `.pte` program.
++```text
++$MOBILE_SAM_WORK_DIR/export/debug/dog/quantized_mask.png
++```
+ 
+-The quantization recipe uses int8 activations and int8 weights globally, with
+-A16W8 quantization for the TinyViT attention modules. Static int8 activation
+-quantization collapses MobileSAM attention features, while the selective A16W8
+-attention path preserves mask quality and still lowers as one Ethos-U delegate.
++## Source and checkpoint
+ 
+-## Outputs
++The preparation script creates a managed external checkout of
++`https://github.com/ChaoningZhang/MobileSAM` at revision
++`f706ad9c4eb7f219c00d9050e46328518ffb65d2` and applies
++`0001-Make-TinyViT-image-size-configurable.patch` there. The exporter downloads
++the official `mobile_sam.pt` checkpoint and verifies SHA256
++`6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f`.
+ 
+-For `--output-path ./mobilesam_point_ethos_u85_448.pte`, the script writes:
+-
+-- `mobilesam_point_ethos_u85_448.pte` - Ethos-U-ready ExecuTorch program.
+-- `mobilesam_point_ethos_u85_448.json` - Export metadata.
+-- `mobilesam_point_ethos_u85_448_metrics.json` - FP32/quantized mask
+-  agreement and optional reference-mask IoU.
+-- `mobilesam_point_ethos_u85_448_delegation.txt` - Operator delegation
+-  summary.
+-- `mobilesam_point_artifacts/` - Optional TOSA/Vela intermediate artifacts.
+-- `mobilesam_point_debug/` - Optional per-sample masks, overlays, mismatch
+-  heatmaps, and mask summaries.
+-
+-## Interpreting the Debug Artifacts
+-
+-Each debug sample contains:
+-
+-- `input.png` - The resized RGB input used by the exported model.
+-- `reference_mask.png` - Optional binary reference mask resized to the model
+-  output-mask size.
+-- `fp32_mask.png` - Host-side FP32 model prediction.
+-- `fp32_overlay.png` - Colored FP32 prediction blended over the input image.
+-- `quantized_mask.png` - Host-side PT2E quantized prediction before lowering.
+-- `quantized_overlay.png` - Colored quantized prediction blended over the input
+-  image.
+-- `mismatch_heatmap.png` - Green for FP32/quantized agreement and red for
+-  mismatch.
+-- `mask_summary.json` - Foreground/background pixel counts and FP32/quantized
+-  IoU.
+-
+-The runtime app thresholds mask logits on target, logs a mask hash and
+-foreground/background counts, and can dump the thresholded mask as RLE chunks.
+-Host-side debug masks are intentionally generated before lowering so users can
+-inspect quantization quality without needing target-side image output.
++Neither source nor weights are redistributed in ExecuTorch. The source is
++Apache-2.0; the source repository and checkpoint can have separate terms, so
++the export metadata does not assign the source license to the checkpoint.
+ 
+ ## Limitations
+ 
+-- The example freezes positive point prompts into the exported graph to keep
+-  the target app to a single image input. Changing the prompt requires
+-  re-exporting the `.pte`.
+-- The export uses `multimask_output=False` and does not include candidate-mask
+-  argmax selection, upsampling, or thresholding in the graph. Keep those steps
+-  in host-side or target-side post-processing when comparing mask quality.
+-- The runtime app logs a mask hash and foreground/background counts; it does
+-  not render a color image on target.
++- The `.pte` accepts one image tensor. Changing prompt coordinates requires
++  re-exporting.
++- The graph uses `multimask_output=False`; candidate-mask selection, upsampling,
++  and thresholding remain post-processing steps.
++- `448x448` is the smallest locally tested size that retained at least `0.95`
++  FP32/quantized IoU on the demonstration image.
+ - The first supported runtime target is Corstone-320/Ethos-U85-256.
+-- Reduced input sizes require the patch applied by `prepare_mobilesam.py`; the
+-  MobileSAM source remains outside the ExecuTorch checkout.
+-- The default `448x448` input is the smallest size in the local sweep that
+-  retained at least `0.95` host quantized/FP32 mask IoU on the demo image.
+-  `512x512` retained about `0.975` IoU, while smaller sizes were inconsistent.
+-- MobileSAM PTQ is sensitive to the calibration set and the mask-logit
+-  threshold. Inspect `*_metrics.json` and the debug overlays before treating
+-  the quantized mask as an accuracy result.
++- Calibration uses the demonstration image to keep the example quick. Validate
++  with representative data before using the quantized model in a product.
+diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py
+index e7c22518f0..60bcb44f8d 100644
+--- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py
++++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py
+@@ -10,7 +10,6 @@ import hashlib
+ import importlib
+ import inspect
+ import json
+-import os
+ import sys
+ import urllib.error
+ import urllib.request
+@@ -21,7 +20,6 @@ from typing import Any, cast
+ 
+ import numpy as np
+ import torch
+-import tqdm  # type: ignore[import]
+ from executorch.backends.arm.common.pipeline_config import (
+     ArmPassPipelineConfig,
+     SoftmaxDecompositionConfig,
+@@ -38,6 +36,7 @@ from executorch.exir import (
+     ExecutorchBackendConfig,
+     to_edge_transform_and_lower,
+ )
++from executorch.exir.passes.quantize_io_pass import QuantizeInputs, QuantizeOutputs
+ from executorch.extension.export_util.utils import save_pte_program
+ from packaging.version import Version
+ from PIL import Image
+@@ -49,6 +48,7 @@ from torchao.quantization.pt2e.quantize_pt2e import (  # type: ignore[import]
+ MOBILE_SAM_SOURCE_URL = "https://github.com/ChaoningZhang/MobileSAM"
+ MOBILE_SAM_SOURCE_REVISION = "f706ad9c4eb7f219c00d9050e46328518ffb65d2"
+ MOBILE_SAM_PATCH = "0001-Make-TinyViT-image-size-configurable.patch"
++MOBILE_SAM_SOURCE_LICENSE = "Apache-2.0"
+ DEFAULT_CHECKPOINT_FILENAME = "mobile_sam.pt"
+ DEFAULT_CHECKPOINT_URL = (
+     f"{MOBILE_SAM_SOURCE_URL}/raw/{MOBILE_SAM_SOURCE_REVISION}/weights/"
+@@ -57,10 +57,17 @@ DEFAULT_CHECKPOINT_URL = (
+ DEFAULT_CHECKPOINT_SHA256 = (
+     "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f"
+ )
+-MOBILE_SAM_SOURCE_LICENSE = "Apache-2.0"
++
++INPUT_SIZE = 448
++MASK_THRESHOLD = 0.0
++MINIMUM_FP32_QUANTIZED_IOU = 0.9
++MINIMUM_FP32_QUANTIZED_PIXEL_AGREEMENT = 0.96
++MINIMUM_MASK_QUALITY = 0.8
++MINIMUM_VALIDATION_MASK_QUALITY = 0.9
++TARGET = "ethos-u85-256"
++SYSTEM_CONFIG = "Ethos_U85_SYS_DRAM_Mid"
++MEMORY_MODE = "Dedicated_Sram_384KB"
+ MINIMUM_VELA_VERSION = Version("5.1.0")
+-DEFAULT_INPUT_SIZE = 448
+-MOBILE_SAM_INPUT_ALIGNMENT = 16
+ 
+ 
+ @dataclass
+@@ -68,197 +75,80 @@ class PreparedSample:
+     name: str
+     image: Image.Image
+     pixel_values: torch.Tensor
+-    labels: torch.Tensor | None
+-
+-
+-def load_mobile_sam(
+-    checkpoint_path: str,
+-    mobile_sam_source: str | None,
+-    input_size: int,
+-) -> torch.nn.Module:
+-    mobile_sam_module = import_mobile_sam_module(mobile_sam_source)
+-    builder = mobile_sam_module.sam_model_registry["vit_t"]
+-    if "image_size" not in inspect.signature(builder).parameters:
+-        raise RuntimeError(
+-            "The MobileSAM checkout does not provide configurable image sizes. "
+-            "Run model_export/prepare_mobilesam.py and pass the prepared checkout "
+-            "with --mobile-sam-source."
+-        )
+-    return builder(checkpoint=checkpoint_path, image_size=input_size).eval()
+-
+-
+-class MobileSAMFixedPrompt(torch.nn.Module):
+-    image_encoder: Any
+-    mask_decoder: Any
+-
+-    def __init__(
+-        self,
+-        sam: torch.nn.Module,
+-        point_prompts: list[tuple[float, float]],
+-    ) -> None:
+-        super().__init__()
+-        sam = cast(Any, sam)
+-
+-        self.image_encoder = sam.image_encoder
+-        self.mask_decoder = sam.mask_decoder
+-
+-        with torch.no_grad():
+-            points = (
+-                torch.tensor([point_prompts], dtype=torch.float32),
+-                torch.ones((1, len(point_prompts)), dtype=torch.int64),
+-            )
+-            sparse_embeddings, dense_embeddings = sam.prompt_encoder(
+-                points=points,
+-                boxes=None,
+-                masks=None,
+-            )
+-            image_pe = sam.prompt_encoder.get_dense_pe()
+ 
+-        self.register_buffer("sparse_prompt_embeddings", sparse_embeddings)
+-        self.register_buffer("dense_prompt_embeddings", dense_embeddings)
+-        self.register_buffer("image_pe", image_pe)
+ 
+-    def forward(self, pixel_values: torch.Tensor) -> torch.Tensor:
+-        image_embeddings = self.image_encoder(pixel_values)
+-        low_res_masks, _ = self.mask_decoder(
+-            image_embeddings=image_embeddings,
+-            image_pe=self.image_pe,
+-            sparse_prompt_embeddings=self.sparse_prompt_embeddings,
+-            dense_prompt_embeddings=self.dense_prompt_embeddings,
+-            multimask_output=False,
+-        )
+-        return low_res_masks
++def default_source_dir() -> Path:
++    return (
++        Path.home()
++        / ".cache"
++        / "executorch"
++        / "mobilesam"
++        / MOBILE_SAM_SOURCE_REVISION
++        / "source"
++    )
+ 
+ 
+-def parse_args() -> argparse.Namespace:
++def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
+     parser = argparse.ArgumentParser(
+-        description="Export fixed-prompt MobileSAM segmentation for Ethos-U."
+-    )
+-    parser.add_argument(
+-        "--checkpoint-path",
+-        default=None,
+-        help="Optional local MobileSAM checkpoint path.",
+-    )
+-    parser.add_argument(
+-        "--mobile-sam-source",
+-        default=None,
+-        help=(
+-            "Optional MobileSAM checkout prepared by prepare_mobilesam.py. "
+-            "Used before importing the mobile_sam package."
+-        ),
+-    )
+-    parser.add_argument(
+-        "--local-files-only",
+-        action="store_true",
+-        help="Load the checkpoint from the local cache only; do not download.",
+-    )
+-    parser.add_argument(
+-        "--calibration-image",
+-        action="append",
+-        default=[],
+-        help="Local RGB image used for PTQ calibration. Can be repeated.",
++        description="Export fixed-prompt MobileSAM object segmentation for Ethos-U85."
+     )
+     parser.add_argument(
+-        "--eval-image",
+-        action="append",
+-        default=[],
+-        help="Local RGB image used for validation/debugging. Can be repeated.",
++        "--output-path",
++        type=Path,
++        required=True,
++        help="Output path for the ExecuTorch .pte program.",
+     )
+     parser.add_argument(
+-        "--eval-mask",
+-        action="append",
+-        default=[],
+-        help=(
+-            "Optional binary reference mask used for validation/debugging. "
+-            "Can be repeated and must match --eval-image count when provided."
+-        ),
++        "--image",
++        type=Path,
++        required=True,
++        help="RGB image used for calibration and host validation.",
+     )
+     parser.add_argument(
+         "--point",
+         type=float,
+         nargs=2,
+         action="append",
+-        default=[],
++        required=True,
+         metavar=("X", "Y"),
+         help=(
+-            "Positive point prompt in the resized square input frame. "
+-            "Can be repeated for multi-point prompts."
++            "Positive point prompt in the square input frame. Repeat once per "
++            "independently segmented object."
+         ),
+     )
+-    parser.add_argument(
+-        "--mask-threshold",
+-        type=float,
+-        default=0.0,
+-        help="Mask-logit threshold used for metrics and debug masks.",
+-    )
+-    parser.add_argument(
+-        "--output-path",
+-        type=str,
+-        required=True,
+-        help="Path to save the exported ExecuTorch program.",
+-    )
+     parser.add_argument(
+         "--input-size",
+         type=int,
+-        default=DEFAULT_INPUT_SIZE,
+-        help="Square MobileSAM input size. Must be divisible by 16.",
+-    )
+-    parser.add_argument(
+-        "--num-calibration-samples",
+-        type=int,
+-        default=4,
+-        help="Number of local samples used for PTQ calibration.",
+-    )
+-    parser.add_argument(
+-        "--num-eval-samples",
+-        type=int,
+-        default=4,
+-        help="Number of local samples used for host-side validation.",
+-    )
+-    parser.add_argument(
+-        "--num-debug-samples",
+-        type=int,
+-        default=4,
+-        help="Number of validation samples written as visual debug artifacts.",
++        default=INPUT_SIZE,
++        help=f"Square model input size (default: {INPUT_SIZE}).",
+     )
+     parser.add_argument(
+-        "--minimum-fp32-quantized-iou",
+-        type=float,
+-        default=None,
+-        help="Fail before lowering when host quantized/FP32 mask IoU is lower.",
+-    )
+-    parser.add_argument(
+-        "--target",
+-        default="ethos-u85-256",
+-        help="Ethos-U target passed to Vela.",
+-    )
+-    parser.add_argument(
+-        "--system-config",
+-        default="Ethos_U85_SYS_DRAM_Mid",
+-        help="Vela system configuration.",
++        "--mobile-sam-source",
++        type=Path,
++        default=default_source_dir(),
++        help="MobileSAM checkout prepared by prepare_mobilesam.py.",
+     )
+     parser.add_argument(
+-        "--memory-mode",
+-        default="Dedicated_Sram_384KB",
+-        help="Vela memory mode.",
++        "--checkpoint-path",
++        type=Path,
++        help="Optional local MobileSAM checkpoint; otherwise use the pinned cache.",
+     )
+     parser.add_argument(
+-        "--extra-vela-flag",
+-        action="append",
+-        default=[],
+-        help="Additional Vela flag. Can be provided multiple times.",
++        "--local-files-only",
++        action="store_true",
++        help="Require the checkpoint to be present in the local cache.",
+     )
+     parser.add_argument(
+-        "--artifact-dir",
+-        default=None,
+-        help="Optional directory for intermediate TOSA/Vela artifacts.",
++        "--quantized-io",
++        action="store_true",
++        help="Expose int8 input/output tensors for the Alif E8 sample.",
+     )
+     parser.add_argument(
+-        "--debug-output-dir",
+-        default=None,
+-        help="Optional directory for masks, overlays, and validation summaries.",
++        "--multimask-output",
++        action="store_true",
++        help="Return three candidate masks and quality scores for each point.",
+     )
+-    return parser.parse_args()
++    return parser.parse_args(argv)
+ 
+ 
+ def write_json(path: Path, payload: dict[str, Any]) -> None:
+@@ -283,24 +173,84 @@ def validate_vela_version() -> str:
+     return installed_version
+ 
+ 
+-def import_mobile_sam_module(mobile_sam_source: str | None) -> Any:
+-    if mobile_sam_source is not None:
+-        sys.path.insert(0, str(Path(mobile_sam_source).expanduser().resolve()))
++def import_mobile_sam_module(source_dir: Path) -> Any:
++    source_dir = source_dir.expanduser().resolve()
++    if not source_dir.is_dir():
++        raise FileNotFoundError(
++            f"Prepared MobileSAM source not found: {source_dir}. Run "
++            "model_export/prepare_mobilesam.py first."
++        )
++    sys.path.insert(0, str(source_dir))
+     try:
+         return importlib.import_module("mobile_sam")
+     except ImportError as error:
+-        raise ImportError(
+-            "Could not import the patched mobile_sam package. Run "
+-            "model_export/prepare_mobilesam.py and pass its checkout with "
+-            "--mobile-sam-source."
+-        ) from error
++        raise ImportError(f"Could not import mobile_sam from {source_dir}.") from error
+ 
+ 
+-def find_module_type(module: torch.nn.Module, class_name: str) -> type[torch.nn.Module]:
+-    for child in module.modules():
+-        if child.__class__.__name__ == class_name:
+-            return child.__class__
+-    raise ValueError(f"Could not find module type {class_name} in {module.__class__}.")
++def load_mobile_sam(
++    checkpoint_path: Path,
++    source_dir: Path,
++    image_size: int = INPUT_SIZE,
++) -> torch.nn.Module:
++    mobile_sam_module = import_mobile_sam_module(source_dir)
++    builder = mobile_sam_module.sam_model_registry["vit_t"]
++    if "image_size" not in inspect.signature(builder).parameters:
++        raise RuntimeError(
++            "The MobileSAM checkout does not support configurable image sizes. "
++            "Prepare it with model_export/prepare_mobilesam.py."
++        )
++    return builder(
++        checkpoint=str(checkpoint_path),
++        image_size=image_size,
++    ).eval()
++
++
++class MobileSAMFixedPrompt(torch.nn.Module):
++    image_encoder: Any
++    mask_decoder: Any
++
++    def __init__(
++        self,
++        sam: torch.nn.Module,
++        point_prompts: list[tuple[float, float]],
++        multimask_output: bool = False,
++    ) -> None:
++        super().__init__()
++        sam = cast(Any, sam)
++        self.image_encoder = sam.image_encoder
++        self.mask_decoder = sam.mask_decoder
++        self.multimask_output = multimask_output
++
++        with torch.no_grad():
++            points = (
++                torch.tensor(point_prompts, dtype=torch.float32).unsqueeze(1),
++                torch.ones((len(point_prompts), 1), dtype=torch.int64),
++            )
++            sparse_embeddings, dense_embeddings = sam.prompt_encoder(
++                points=points,
++                boxes=None,
++                masks=None,
++            )
++            image_pe = sam.prompt_encoder.get_dense_pe()
++
++        self.register_buffer("sparse_prompt_embeddings", sparse_embeddings)
++        self.register_buffer("dense_prompt_embeddings", dense_embeddings)
++        self.register_buffer("image_pe", image_pe)
++
++    def forward(
++        self, pixel_values: torch.Tensor
++    ) -> torch.Tensor | tuple[torch.Tensor, torch.Tensor]:
++        image_embeddings = self.image_encoder(pixel_values)
++        low_res_masks, quality_scores = self.mask_decoder(
++            image_embeddings=image_embeddings,
++            image_pe=self.image_pe,
++            sparse_prompt_embeddings=self.sparse_prompt_embeddings,
++            dense_prompt_embeddings=self.dense_prompt_embeddings,
++            multimask_output=self.multimask_output,
++        )
++        if self.multimask_output:
++            return low_res_masks, quality_scores
++        return low_res_masks
+ 
+ 
+ def file_sha256(path: Path) -> str:
+@@ -311,27 +261,26 @@ def file_sha256(path: Path) -> str:
+     return digest.hexdigest()
+ 
+ 
+-def default_checkpoint_cache_dir() -> Path:
++def default_checkpoint_path() -> Path:
+     return (
+-        Path.home() / ".cache" / "executorch" / "mobilesam" / MOBILE_SAM_SOURCE_REVISION
++        Path.home()
++        / ".cache"
++        / "executorch"
++        / "mobilesam"
++        / MOBILE_SAM_SOURCE_REVISION
++        / DEFAULT_CHECKPOINT_FILENAME
+     )
+ 
+ 
+-def verify_checkpoint(path: Path, expected_sha256: str) -> None:
+-    actual_sha256 = file_sha256(path)
+-    if actual_sha256 != expected_sha256:
+-        raise RuntimeError(
+-            f"Checkpoint SHA256 mismatch for {path}: expected {expected_sha256}, "
+-            f"got {actual_sha256}."
+-        )
+-
+-
+-def download_checkpoint(url: str, path: Path) -> None:
++def download_checkpoint(path: Path) -> None:
+     path.parent.mkdir(parents=True, exist_ok=True)
+     temp_path = path.with_suffix(path.suffix + ".tmp")
+     try:
+         with (
+-            urllib.request.urlopen(url, timeout=60) as response,  # nosec B310
++            urllib.request.urlopen(  # nosec B310
++                DEFAULT_CHECKPOINT_URL,
++                timeout=60,
++            ) as response,
+             temp_path.open("wb") as file,
+         ):
+             for chunk in iter(lambda: response.read(1024 * 1024), b""):
+@@ -340,46 +289,50 @@ def download_checkpoint(url: str, path: Path) -> None:
+     except (OSError, urllib.error.URLError) as error:
+         temp_path.unlink(missing_ok=True)
+         raise RuntimeError(
+-            f"Failed to download MobileSAM checkpoint from {url}."
++            f"Failed to download MobileSAM checkpoint from {DEFAULT_CHECKPOINT_URL}."
+         ) from error
+ 
+ 
+ def resolve_checkpoint(
+-    args: argparse.Namespace,
+-) -> tuple[str, str | None, str | None]:
+-    if args.checkpoint_path is not None:
+-        checkpoint_path = Path(args.checkpoint_path).expanduser().resolve()
+-        if not checkpoint_path.is_file():
+-            raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
+-        return str(checkpoint_path), None, None
+-
+-    checkpoint_path = default_checkpoint_cache_dir() / DEFAULT_CHECKPOINT_FILENAME
+-    if not checkpoint_path.is_file():
+-        if args.local_files_only:
++    checkpoint_path: Path | None,
++    *,
++    local_files_only: bool,
++) -> tuple[Path, str | None, str]:
++    if checkpoint_path is not None:
++        resolved_path = checkpoint_path.expanduser().resolve()
++        if not resolved_path.is_file():
++            raise FileNotFoundError(f"Checkpoint not found: {resolved_path}")
++        return resolved_path, None, file_sha256(resolved_path)
++
++    resolved_path = default_checkpoint_path()
++    if not resolved_path.is_file():
++        if local_files_only:
+             raise FileNotFoundError(
+-                f"Checkpoint not found in local cache: {checkpoint_path}"
++                f"Checkpoint not found in local cache: {resolved_path}"
+             )
+-        download_checkpoint(DEFAULT_CHECKPOINT_URL, checkpoint_path)
++        download_checkpoint(resolved_path)
+ 
+-    verify_checkpoint(checkpoint_path, DEFAULT_CHECKPOINT_SHA256)
+-    return (
+-        str(checkpoint_path.resolve()),
+-        DEFAULT_CHECKPOINT_URL,
+-        DEFAULT_CHECKPOINT_SHA256,
+-    )
++    actual_sha256 = file_sha256(resolved_path)
++    if actual_sha256 != DEFAULT_CHECKPOINT_SHA256:
++        raise RuntimeError(
++            f"Checkpoint SHA256 mismatch for {resolved_path}: expected "
++            f"{DEFAULT_CHECKPOINT_SHA256}, got {actual_sha256}."
++        )
++    return resolved_path.resolve(), DEFAULT_CHECKPOINT_URL, actual_sha256
+ 
+ 
+-def preprocess_image(
+-    image: Image.Image,
+-    segmentation_map: Image.Image | None,
+-    *,
+-    name: str,
+-    input_size: int,
++def prepare_sample(
++    image_path: Path,
+     pixel_mean: np.ndarray,
+     pixel_std: np.ndarray,
+-    output_mask_size: tuple[int, int] | None,
++    input_size: int = INPUT_SIZE,
+ ) -> PreparedSample:
+-    rgb_image = image.convert("RGB")
++    image_path = image_path.expanduser().resolve()
++    if not image_path.is_file():
++        raise FileNotFoundError(f"Input image not found: {image_path}")
++
++    with Image.open(image_path) as input_image:
++        rgb_image = input_image.convert("RGB")
+     width, height = rgb_image.size
+     scale = input_size / max(height, width)
+     resized_size = (round(width * scale), round(height * scale))
+@@ -393,101 +346,53 @@ def preprocess_image(
+     pixel_values = torch.from_numpy(image_np).permute(2, 0, 1).unsqueeze(0)
+     pixel_values = torch.nn.functional.pad(
+         pixel_values,
+-        (
+-            0,
+-            input_size - resized_size[0],
+-            0,
+-            input_size - resized_size[1],
+-        ),
++        (0, input_size - resized_size[0], 0, input_size - resized_size[1]),
+     )
+-    pixel_values = pixel_values.contiguous()
+-
+-    labels = None
+-    if segmentation_map is not None:
+-        if output_mask_size is None:
+-            raise ValueError("An output mask size is required for reference masks.")
+-        resized_mask = segmentation_map.convert("L").resize(
+-            resized_size,
+-            Image.Resampling.NEAREST,
+-        )
+-        padded_mask = Image.new("L", (input_size, input_size))
+-        padded_mask.paste(resized_mask, (0, 0))
+-        resized_mask = padded_mask.resize(output_mask_size, Image.Resampling.NEAREST)
+-        mask_np = np.asarray(resized_mask, dtype=np.uint8)
+-        labels = torch.from_numpy((mask_np > 0).astype(np.uint8)).to(torch.long)
+-
+     return PreparedSample(
+-        name=name,
++        name=image_path.stem,
+         image=padded_image,
+-        pixel_values=pixel_values,
+-        labels=labels,
++        pixel_values=pixel_values.contiguous(),
+     )
+ 
+ 
+-def load_local_samples(
+-    image_paths: list[str],
+-    mask_paths: list[str],
+-    limit: int,
+-    *,
+-    include_labels: bool,
+-    input_size: int,
+-    pixel_mean: np.ndarray,
+-    pixel_std: np.ndarray,
+-    output_mask_size: tuple[int, int] | None = None,
+-) -> list[PreparedSample]:
+-    if include_labels and len(mask_paths) not in (0, len(image_paths)):
+-        raise ValueError("--eval-mask must be omitted or match --eval-image count.")
+-
+-    samples: list[PreparedSample] = []
+-    for index, image_path in enumerate(image_paths):
+-        if len(samples) >= limit:
+-            break
+-        image = Image.open(image_path)
+-        mask = None
+-        if include_labels and len(mask_paths) > 0:
+-            mask = Image.open(mask_paths[index])
+-        samples.append(
+-            preprocess_image(
+-                image,
+-                mask,
+-                name=Path(image_path).stem or f"local_sample_{index:04d}",
+-                input_size=input_size,
+-                pixel_mean=pixel_mean,
+-                pixel_std=pixel_std,
+-                output_mask_size=output_mask_size,
+-            )
+-        )
+-    if len(samples) == 0:
+-        raise ValueError("No local samples were loaded.")
+-    return samples
++def run_model_outputs(
++    model: torch.nn.Module, input_tensor: torch.Tensor
++) -> tuple[torch.Tensor, torch.Tensor | None]:
++    output = model(input_tensor)
++    if isinstance(output, (tuple, list)):
++        if len(output) != 2 or not all(
++            isinstance(value, torch.Tensor) for value in output
++        ):
++            raise TypeError("Expected mask logits and quality score tensors.")
++        return output[0], output[1]
++    if isinstance(output, torch.Tensor):
++        return output, None
++    raise TypeError(f"Expected tensor model output, got {type(output)}")
+ 
+ 
+ def run_mask_logits(model: torch.nn.Module, input_tensor: torch.Tensor) -> torch.Tensor:
+-    output = model(input_tensor)
+-    if isinstance(output, (tuple, list)):
+-        output = output[0]
+-    if not isinstance(output, torch.Tensor):
+-        raise TypeError(f"Expected tensor mask logits, got {type(output)}")
+-    return output
++    return run_model_outputs(model, input_tensor)[0]
+ 
+ 
+-def predict_mask(logits: torch.Tensor, threshold: float) -> np.ndarray:
+-    mask = logits.detach().cpu().squeeze(0).squeeze(0).numpy() > threshold
+-    return mask.astype(np.uint8)
++def predict_masks(logits: torch.Tensor) -> np.ndarray:
++    if logits.ndim != 4:
++        raise ValueError(
++            "Expected mask logits with shape [points, candidates, H, W], "
++            f"got {logits.shape}."
++        )
++    masks = logits.detach().cpu().numpy() > MASK_THRESHOLD
++    masks = masks.reshape(-1, masks.shape[-2], masks.shape[-1])
++    return masks.astype(np.uint8)
+ 
+ 
+ def binary_iou(mask_a: np.ndarray, mask_b: np.ndarray) -> float:
+     intersection = np.logical_and(mask_a, mask_b).sum()
+     union = np.logical_or(mask_a, mask_b).sum()
+-    if union == 0:
+-        return 1.0
+-    return float(intersection / union)
++    return 1.0 if union == 0 else float(intersection / union)
+ 
+ 
+-def save_binary_mask(path: Path, mask: np.ndarray) -> Image.Image:
+-    image = Image.fromarray((mask.astype(np.uint8) * 255), mode="L")
+-    image.save(path)
+-    return image.convert("RGB")
++def save_binary_mask(path: Path, mask: np.ndarray) -> None:
++    Image.fromarray(mask.astype(np.uint8) * 255, mode="L").save(path)
+ 
+ 
+ def save_mask_overlay(
+@@ -496,182 +401,176 @@ def save_mask_overlay(
+     mask: np.ndarray,
+     color: tuple[int, int, int],
+ ) -> None:
+-    rgb_image = image.convert("RGB")
+-    resized_mask = Image.fromarray(mask.astype(np.uint8) * 255, mode="L").resize(
+-        rgb_image.size,
++    resized_mask = Image.fromarray(mask * 255, mode="L").resize(
++        image.size,
+         Image.Resampling.NEAREST,
+     )
+     mask_np = np.asarray(resized_mask, dtype=np.uint8) > 0
+-    overlay_np = np.asarray(rgb_image, dtype=np.float32)
+-    color_np = np.asarray(color, dtype=np.float32)
+-    overlay_np[mask_np] = overlay_np[mask_np] * 0.55 + color_np * 0.45
+-    Image.fromarray(np.clip(overlay_np, 0, 255).astype(np.uint8), mode="RGB").save(path)
++    overlay_np = np.asarray(image.convert("RGB"), dtype=np.float32)
++    overlay_np[mask_np] = (
++        overlay_np[mask_np] * 0.55 + np.asarray(color, dtype=np.float32) * 0.45
++    )
++    Image.fromarray(overlay_np.astype(np.uint8), mode="RGB").save(path)
+ 
+ 
+-def write_debug_artifacts(
+-    debug_dir: Path,
++def evaluate_and_write_debug_artifacts(
++    fp32_model: torch.nn.Module,
++    quantized_model: torch.nn.Module,
+     sample: PreparedSample,
+-    fp32_mask: np.ndarray,
+-    quantized_mask: np.ndarray,
+-) -> None:
++    debug_dir: Path,
++) -> dict[str, Any]:
++    fp32_logits, fp32_quality = run_model_outputs(fp32_model, sample.pixel_values)
++    quantized_logits, quantized_quality = run_model_outputs(
++        quantized_model, sample.pixel_values
++    )
++    fp32_masks = predict_masks(fp32_logits)
++    quantized_masks = predict_masks(quantized_logits)
++    if fp32_masks.shape != quantized_masks.shape:
++        raise ValueError(
++            f"FP32 masks {fp32_masks.shape} do not match quantized masks "
++            f"{quantized_masks.shape}."
++        )
++    ious = [
++        binary_iou(fp32_mask, quantized_mask)
++        for fp32_mask, quantized_mask in zip(fp32_masks, quantized_masks)
++    ]
++    agreements = [
++        float(np.mean(fp32_mask == quantized_mask))
++        for fp32_mask, quantized_mask in zip(fp32_masks, quantized_masks)
++    ]
++    metrics = {
++        "fp32_quantized_iou": float(np.mean(ious)),
++        "fp32_quantized_pixel_agreement": float(np.mean(agreements)),
++        "minimum_per_object_fp32_quantized_iou": min(ious),
++        "minimum_per_object_fp32_quantized_pixel_agreement": min(agreements),
++        "per_object_fp32_quantized_iou": ious,
++        "per_object_fp32_quantized_pixel_agreement": agreements,
++    }
++    if fp32_quality is not None and quantized_quality is not None:
++        fp32_quality_np = fp32_quality.detach().cpu().numpy()
++        quantized_quality_np = quantized_quality.detach().cpu().numpy()
++        fp32_grouped = fp32_masks.reshape(
++            fp32_logits.shape[0], fp32_logits.shape[1], *fp32_masks.shape[-2:]
++        )
++        quantized_grouped = quantized_masks.reshape(
++            quantized_logits.shape[0],
++            quantized_logits.shape[1],
++            *quantized_masks.shape[-2:],
++        )
++        fp32_best = fp32_quality_np.argmax(axis=1)
++        quantized_best = quantized_quality_np.argmax(axis=1)
++        selected_ious = []
++        selected_agreements = []
++        accepted_points = []
++        for point in range(fp32_grouped.shape[0]):
++            fp32_mask = fp32_grouped[point, fp32_best[point]]
++            quantized_mask = quantized_grouped[point, quantized_best[point]]
++            selected_ious.append(binary_iou(fp32_mask, quantized_mask))
++            selected_agreements.append(float(np.mean(fp32_mask == quantized_mask)))
++            if (
++                quantized_quality_np[point, quantized_best[point]]
++                >= MINIMUM_VALIDATION_MASK_QUALITY
++            ):
++                accepted_points.append(point)
++        quality_gate_points = accepted_points or list(range(fp32_grouped.shape[0]))
++        metrics.update(
++            {
++                "fp32_quality_scores": fp32_quality_np.tolist(),
++                "quantized_quality_scores": quantized_quality_np.tolist(),
++                "fp32_best_candidate": fp32_best.tolist(),
++                "quantized_best_candidate": quantized_best.tolist(),
++                "quality_gate_points": quality_gate_points,
++                "selected_fp32_quantized_iou": float(
++                    np.mean([selected_ious[point] for point in quality_gate_points])
++                ),
++                "selected_fp32_quantized_pixel_agreement": float(
++                    np.mean(
++                        [selected_agreements[point] for point in quality_gate_points]
++                    )
++                ),
++                "per_point_selected_fp32_quantized_iou": selected_ious,
++                "per_point_selected_fp32_quantized_pixel_agreement": (
++                    selected_agreements
++                ),
++            }
++        )
++
+     sample_dir = debug_dir / sample.name
+     sample_dir.mkdir(parents=True, exist_ok=True)
+-
+     sample.image.save(sample_dir / "input.png")
+-    save_binary_mask(sample_dir / "fp32_mask.png", fp32_mask)
+-    save_binary_mask(sample_dir / "quantized_mask.png", quantized_mask)
+-    save_mask_overlay(
+-        sample_dir / "fp32_overlay.png",
+-        sample.image,
+-        fp32_mask,
+-        (0, 220, 120),
+-    )
+-    save_mask_overlay(
+-        sample_dir / "quantized_overlay.png",
+-        sample.image,
+-        quantized_mask,
+-        (0, 170, 255),
+-    )
+-    if sample.labels is not None:
++    for object_index, (fp32_mask, quantized_mask) in enumerate(
++        zip(fp32_masks, quantized_masks), start=1
++    ):
++        save_binary_mask(sample_dir / f"fp32_mask_{object_index}.png", fp32_mask)
+         save_binary_mask(
+-            sample_dir / "reference_mask.png",
+-            sample.labels.detach().cpu().numpy().astype(np.uint8),
++            sample_dir / f"quantized_mask_{object_index}.png", quantized_mask
+         )
+-
+-    mismatch = fp32_mask != quantized_mask
+-    heatmap = np.zeros((*fp32_mask.shape, 3), dtype=np.uint8)
+-    heatmap[~mismatch] = [0, 128, 0]
+-    heatmap[mismatch] = [255, 0, 0]
+-    Image.fromarray(heatmap, mode="RGB").save(sample_dir / "mismatch_heatmap.png")
+-
+-    write_json(
+-        sample_dir / "mask_summary.json",
+-        {
+-            "foreground_pixels": int(quantized_mask.sum()),
+-            "background_pixels": int(quantized_mask.size - quantized_mask.sum()),
+-            "fp32_quantized_iou": binary_iou(fp32_mask, quantized_mask),
+-        },
+-    )
+-
+-
+-def evaluate_and_debug(
+-    fp32_model: torch.nn.Module,
+-    quantized_model: torch.nn.Module,
+-    eval_samples: list[PreparedSample],
+-    debug_dir: Path | None,
+-    num_debug_samples: int,
+-    threshold: float,
+-) -> dict[str, float]:
+-    fp32_quantized_ious: list[float] = []
+-    fp32_quantized_pixel_agreements: list[float] = []
+-    reference_ious: list[float] = []
+-
+-    if debug_dir is not None:
+-        debug_dir.mkdir(parents=True, exist_ok=True)
+-
+-    print("\nEvaluating quantized MobileSAM on validation samples...")
+-    for index, sample in enumerate(tqdm.tqdm(eval_samples)):
+-        fp32_logits = run_mask_logits(fp32_model, sample.pixel_values)
+-        quantized_logits = run_mask_logits(quantized_model, sample.pixel_values)
+-        fp32_mask = predict_mask(fp32_logits, threshold)
+-        quantized_mask = predict_mask(quantized_logits, threshold)
+-
+-        fp32_quantized_ious.append(binary_iou(fp32_mask, quantized_mask))
+-        fp32_quantized_pixel_agreements.append(
+-            float(np.mean(fp32_mask == quantized_mask))
++        save_mask_overlay(
++            sample_dir / f"fp32_overlay_{object_index}.png",
++            sample.image,
++            fp32_mask,
++            (0, 220, 120),
++        )
++        save_mask_overlay(
++            sample_dir / f"quantized_overlay_{object_index}.png",
++            sample.image,
++            quantized_mask,
++            (0, 170, 255),
+         )
+-        if sample.labels is not None:
+-            labels = sample.labels.detach().cpu().numpy().astype(np.uint8)
+-            reference_ious.append(binary_iou(quantized_mask, labels))
+-
+-        if debug_dir is not None and index < num_debug_samples:
+-            write_debug_artifacts(debug_dir, sample, fp32_mask, quantized_mask)
+-
+-    metrics = {
+-        "num_samples": float(len(eval_samples)),
+-        "fp32_quantized_mean_iou": float(np.mean(fp32_quantized_ious)),
+-        "fp32_quantized_pixel_agreement": float(
+-            np.mean(fp32_quantized_pixel_agreements)
+-        ),
+-    }
+-    if len(reference_ious) > 0:
+-        metrics["reference_mean_iou"] = float(np.mean(reference_ious))
+     return metrics
+ 
+ 
+ def quantize_model(
+     model: torch.nn.Module,
+     quantizer: EthosUQuantizer,
+-    example_inputs: tuple[torch.Tensor],
+-    calibration_samples: list[PreparedSample],
++    input_tensor: torch.Tensor,
+ ) -> torch.export.ExportedProgram:
+-    exported = torch.export.export(model, example_inputs)
++    exported = torch.export.export(model, (input_tensor,))
+     prepared = prepare_pt2e(exported.module(), quantizer)
+-
+-    print("\nCalibrating MobileSAM...")
+-    for sample in tqdm.tqdm(calibration_samples):
+-        prepared(sample.pixel_values)
+-
++    print("Calibrating MobileSAM with the demonstration image...")
++    prepared(input_tensor)
+     quantized = convert_pt2e(prepared)
+-    return torch.export.export(quantized, example_inputs)
++    return torch.export.export(quantized, (input_tensor,))
+ 
+ 
+-def has_quantized_out_variants() -> bool:
++def ensure_quantized_ops_loaded() -> None:
++    try:
++        import executorch.kernels.quantized  # noqa: F401
++    except ImportError as error:
++        raise RuntimeError(
++            "MobileSAM export requires ExecuTorch quantized kernels. Install the "
++            "current checkout with ./install_executorch.sh."
++        ) from error
++
+     try:
+         _ = torch.ops.quantized_decomposed.quantize_per_tensor.out
+         _ = torch.ops.quantized_decomposed.dequantize_per_tensor.out
+-        return True
+-    except AttributeError:
+-        return False
+-
+-
+-def load_quantized_ops_library(library_path: Path) -> Path:
+-    if not library_path.is_file():
+-        raise FileNotFoundError(f"Quantized ops library not found: {library_path}")
+-    torch.ops.load_library(str(library_path))
+-    if has_quantized_out_variants():
+-        return library_path
+-    raise RuntimeError(
+-        f"Quantized ops library did not register required out variants: {library_path}"
+-    )
++    except AttributeError as error:
++        raise RuntimeError(
++            "The ExecuTorch installation does not provide quantized out variants. "
++            "Re-run ./install_executorch.sh."
++        ) from error
+ 
+ 
+-def ensure_quantized_ops_loaded() -> Path | None:
+-    if has_quantized_out_variants():
+-        return None
++def find_module_type(module: torch.nn.Module, class_name: str) -> type[torch.nn.Module]:
++    for child in module.modules():
++        if child.__class__.__name__ == class_name:
++            return child.__class__
++    raise ValueError(f"Could not find module type {class_name} in {module.__class__}.")
+ 
+-    quantized_ops_library = os.environ.get("EXECUTORCH_QUANTIZED_OPS_AOT_LIBRARY")
+-    if quantized_ops_library:
+-        return load_quantized_ops_library(
+-            Path(quantized_ops_library).expanduser().resolve()
+-        )
+ 
+-    try:
+-        import executorch.kernels.quantized  # noqa: F401
+-    except ImportError:
+-        pass
+-    else:
+-        if has_quantized_out_variants():
+-            return None
+-
+-    repo_root = Path(__file__).resolve().parents[4]
+-    search_patterns = (
+-        "cmake-out/kernels/quantized/libquantized_ops_aot_lib.*",
+-        "arm_test/*/kernels/quantized/libquantized_ops_aot_lib.*",
+-        "arm_test/**/kernels/quantized/libquantized_ops_aot_lib.*",
+-    )
+-    for pattern in search_patterns:
+-        for candidate in sorted(repo_root.glob(pattern)):
+-            if not candidate.is_file():
+-                continue
+-            return load_quantized_ops_library(candidate)
+-
+-    raise RuntimeError(
+-        "MobileSAM int8 export requires the quantized ops out-variant library. "
+-        "Build or install ExecuTorch quantized kernels so that "
+-        "`quantized_decomposed::quantize_per_tensor.out` and "
+-        "`quantized_decomposed::dequantize_per_tensor.out` are available."
+-    )
++def resolve_point_prompts(
++    points: list[list[float]], input_size: int = INPUT_SIZE
++) -> list[tuple[float, float]]:
++    point_prompts = [(float(x), float(y)) for x, y in points]
++    if any(
++        not (0 <= point_x < input_size and 0 <= point_y < input_size)
++        for point_x, point_y in point_prompts
++    ):
++        raise ValueError(
++            f"Point prompts must be inside the {input_size}x{input_size} input."
++        )
++    return point_prompts
+ 
+ 
+ def write_delegation_report(edge_program_manager: Any, report_path: Path) -> None:
+@@ -681,113 +580,69 @@ def write_delegation_report(edge_program_manager: Any, report_path: Path) -> Non
+     report_path.write_text(delegation_info.get_summary() + "\n")
+ 
+ 
+-def resolve_point_prompts(args: argparse.Namespace) -> list[tuple[float, float]]:
+-    if len(args.point) > 0:
+-        point_prompts = [(float(x), float(y)) for x, y in args.point]
+-    else:
+-        point_prompts = [(args.input_size / 2, args.input_size / 2)]
+-
+-    for point_x, point_y in point_prompts:
+-        if not (0 <= point_x <= args.input_size and 0 <= point_y <= args.input_size):
+-            raise ValueError("Point prompts must be inside the square input.")
+-    return point_prompts
+-
+-
+-def validate_export_args(args: argparse.Namespace) -> None:
+-    if args.input_size < 224 or args.input_size % MOBILE_SAM_INPUT_ALIGNMENT != 0:
+-        raise ValueError("--input-size must be at least 224 and divisible by 16.")
+-    if args.num_calibration_samples <= 0:
+-        raise ValueError("--num-calibration-samples must be positive.")
+-    if args.num_eval_samples <= 0:
+-        raise ValueError("--num-eval-samples must be positive.")
+-    if args.minimum_fp32_quantized_iou is not None and not (
+-        0.0 <= args.minimum_fp32_quantized_iou <= 1.0
+-    ):
+-        raise ValueError("--minimum-fp32-quantized-iou must be between 0 and 1.")
+-    if len(args.calibration_image) == 0:
+-        raise ValueError("At least one --calibration-image is required.")
+-    if len(args.eval_image) == 0:
+-        args.eval_image = list(args.calibration_image)
+-    if len(args.eval_mask) not in (0, len(args.eval_image)):
+-        raise ValueError("--eval-mask must be omitted or match --eval-image count.")
+-
+-
+-def main() -> None:
+-    args = parse_args()
+-    validate_export_args(args)
++def main(argv: list[str] | None = None) -> None:
++    args = parse_args(argv)
++    if args.input_size < 128 or args.input_size % 32 != 0:
++        raise ValueError("--input-size must be at least 128 and divisible by 32.")
+     vela_version = validate_vela_version()
+-    point_prompts = resolve_point_prompts(args)
+-    quantized_ops_library = ensure_quantized_ops_loaded()
+-    if quantized_ops_library is not None:
+-        print(f"Loaded quantized ops library from {quantized_ops_library}")
++    ensure_quantized_ops_loaded()
++    point_prompts = resolve_point_prompts(args.point, args.input_size)
+ 
+-    output_path = Path(args.output_path).resolve()
++    output_path = args.output_path.expanduser().resolve()
++    if output_path.suffix != ".pte":
++        raise ValueError("--output-path must end in .pte.")
+     output_path.parent.mkdir(parents=True, exist_ok=True)
+     metadata_path = output_path.with_suffix(".json")
+     metrics_path = output_path.with_name(f"{output_path.stem}_metrics.json")
+     delegation_path = output_path.with_name(f"{output_path.stem}_delegation.txt")
+-    debug_dir = Path(args.debug_output_dir).resolve() if args.debug_output_dir else None
++    artifact_dir = output_path.parent / "artifacts"
++    debug_dir = output_path.parent / "debug"
++    artifact_dir.mkdir(exist_ok=True)
+ 
+-    checkpoint_path, checkpoint_url, checkpoint_sha256 = resolve_checkpoint(args)
++    checkpoint_path, checkpoint_url, checkpoint_sha256 = resolve_checkpoint(
++        args.checkpoint_path,
++        local_files_only=args.local_files_only,
++    )
+     mobile_sam = load_mobile_sam(
+-        checkpoint_path,
+-        args.mobile_sam_source,
+-        args.input_size,
++        checkpoint_path, args.mobile_sam_source, args.input_size
+     )
+     pixel_mean = cast(Any, mobile_sam).pixel_mean.detach().cpu().reshape(-1).numpy()
+     pixel_std = cast(Any, mobile_sam).pixel_std.detach().cpu().reshape(-1).numpy()
+     if pixel_mean.shape != (3,) or pixel_std.shape != (3,):
+         raise ValueError("MobileSAM preprocessing must provide three RGB values.")
+-    wrapped_model = MobileSAMFixedPrompt(mobile_sam, point_prompts).eval()
+-
+-    calibration_samples = load_local_samples(
+-        args.calibration_image,
+-        [],
+-        args.num_calibration_samples,
+-        include_labels=False,
+-        input_size=args.input_size,
+-        pixel_mean=pixel_mean,
+-        pixel_std=pixel_std,
+-    )
+-    example_inputs = (calibration_samples[0].pixel_values,)
++
++    sample = prepare_sample(args.image, pixel_mean, pixel_std, args.input_size)
++    wrapped_model = MobileSAMFixedPrompt(
++        mobile_sam, point_prompts, args.multimask_output
++    ).eval()
+     with torch.no_grad():
+-        output_shape = list(run_mask_logits(wrapped_model, example_inputs[0]).shape)
+-    if len(output_shape) != 4 or output_shape[:2] != [1, 1]:
++        output_shape = list(run_mask_logits(wrapped_model, sample.pixel_values).shape)
++    if (
++        len(output_shape) != 4
++        or output_shape[0] != len(point_prompts)
++        or output_shape[1] != (3 if args.multimask_output else 1)
++    ):
+         raise ValueError(
+-            f"Expected MobileSAM output shape [1, 1, height, width], got {output_shape}."
++            "Expected MobileSAM output shape "
++            f"[{len(point_prompts)}, "
++            f"{3 if args.multimask_output else 1}, height, width], got "
++            f"{output_shape}."
+         )
+-    output_mask_size = (output_shape[3], output_shape[2])
+-
+-    eval_samples = load_local_samples(
+-        args.eval_image,
+-        args.eval_mask,
+-        args.num_eval_samples,
+-        include_labels=True,
+-        input_size=args.input_size,
+-        pixel_mean=pixel_mean,
+-        pixel_std=pixel_std,
+-        output_mask_size=output_mask_size,
+-    )
+ 
+     compile_spec = EthosUCompileSpec(
+-        target=args.target,
+-        system_config=args.system_config,
+-        memory_mode=args.memory_mode,
+-        extra_flags=args.extra_vela_flag,
++        target=TARGET,
++        system_config=SYSTEM_CONFIG,
++        memory_mode=MEMORY_MODE,
+     )
+     compile_spec.set_pass_pipeline_config(
+         ArmPassPipelineConfig(softmax=SoftmaxDecompositionConfig.STABLE)
+     )
+-    if args.artifact_dir is not None:
+-        artifact_dir = Path(args.artifact_dir).resolve()
+-        artifact_dir.mkdir(parents=True, exist_ok=True)
+-        compile_spec.dump_intermediate_artifacts_to(str(artifact_dir))
++    compile_spec.dump_intermediate_artifacts_to(str(artifact_dir))
+ 
+     quantizer = EthosUQuantizer(compile_spec)
+     quantizer.set_global(get_symmetric_quantization_config())
+-    attention_module_type = find_module_type(wrapped_model.image_encoder, "Attention")
+     quantizer.set_module_type(
+-        attention_module_type,
++        find_module_type(wrapped_model.image_encoder, "Attention"),
+         get_symmetric_a16w8_quantization_config(),
+     )
+ 
+@@ -795,34 +650,37 @@ def main() -> None:
+         quantized_program = quantize_model(
+             wrapped_model,
+             quantizer,
+-            example_inputs,
+-            calibration_samples,
++            sample.pixel_values,
+         )
+-        quantized_module = quantized_program.module()
+-        metrics = evaluate_and_debug(
++        metrics = evaluate_and_write_debug_artifacts(
+             wrapped_model,
+-            quantized_module,
+-            eval_samples,
++            quantized_program.module(),
++            sample,
+             debug_dir,
+-            args.num_debug_samples,
+-            args.mask_threshold,
+         )
+-        write_json(metrics_path, metrics)
+-        print(
+-            "Validation metrics: "
+-            f"fp32_quantized_mean_iou={metrics['fp32_quantized_mean_iou']:.4f} "
+-            "fp32_quantized_pixel_agreement="
+-            f"{metrics['fp32_quantized_pixel_agreement']:.4f}"
++    write_json(metrics_path, metrics)
++    print(
++        "Validation: "
++        f"FP32/quantized IoU={metrics['fp32_quantized_iou']:.4f}, "
++        f"agreement={metrics['fp32_quantized_pixel_agreement']:.4f}"
++    )
++    validation_iou = metrics.get(
++        "selected_fp32_quantized_iou", metrics["fp32_quantized_iou"]
++    )
++    validation_agreement = metrics.get(
++        "selected_fp32_quantized_pixel_agreement",
++        metrics["fp32_quantized_pixel_agreement"],
++    )
++    if (
++        validation_iou < MINIMUM_FP32_QUANTIZED_IOU
++        and validation_agreement < MINIMUM_FP32_QUANTIZED_PIXEL_AGREEMENT
++    ):
++        raise RuntimeError(
++            f"Selected FP32/quantized mask IoU {validation_iou:.4f} is below "
++            f"the required {MINIMUM_FP32_QUANTIZED_IOU:.4f}, and pixel agreement "
++            f"{validation_agreement:.4f} is below "
++            f"{MINIMUM_FP32_QUANTIZED_PIXEL_AGREEMENT:.4f}."
+         )
+-        if (
+-            args.minimum_fp32_quantized_iou is not None
+-            and metrics["fp32_quantized_mean_iou"] < args.minimum_fp32_quantized_iou
+-        ):
+-            raise RuntimeError(
+-                "Host quantized/FP32 mask IoU "
+-                f"{metrics['fp32_quantized_mean_iou']:.4f} is below "
+-                f"{args.minimum_fp32_quantized_iou:.4f}."
+-            )
+ 
+     edge_program_manager = to_edge_transform_and_lower(
+         programs=quantized_program,
+@@ -831,6 +689,33 @@ def main() -> None:
+     )
+     write_delegation_report(edge_program_manager, delegation_path)
+ 
++    io_quantization = None
++    if args.quantized_io:
++        quantize_inputs = QuantizeInputs(edge_program_manager, [0])
++        output_indices = [0, 1] if args.multimask_output else [0]
++        quantize_outputs = QuantizeOutputs(edge_program_manager, output_indices)
++        edge_program_manager = edge_program_manager.transform(
++            [quantize_inputs, quantize_outputs]
++        )
++
++        def serialize_qparams(values: tuple[Any, ...]) -> dict[str, Any]:
++            return {
++                "scale": float(values[0]),
++                "zero_point": int(values[1]),
++                "quant_min": int(values[2]),
++                "quant_max": int(values[3]),
++                "dtype": str(values[4]).removeprefix("torch."),
++            }
++
++        io_quantization = {
++            "input": serialize_qparams(quantize_inputs.quant_args[0]),
++            "output": serialize_qparams(quantize_outputs.dequant_args[0]),
++        }
++        if args.multimask_output:
++            io_quantization["quality"] = serialize_qparams(
++                quantize_outputs.dequant_args[1]
++            )
++
+     executorch_program_manager = edge_program_manager.to_executorch(
+         config=ExecutorchBackendConfig(extract_delegate_segments=False)
+     )
+@@ -844,15 +729,15 @@ def main() -> None:
+         metadata_path,
+         {
+             "model_name": "MobileSAM vit_t",
+-            "checkpoint_filename": DEFAULT_CHECKPOINT_FILENAME,
+-            "checkpoint_path": checkpoint_path,
++            "checkpoint_filename": checkpoint_path.name,
++            "checkpoint_path": str(checkpoint_path),
+             "checkpoint_url": checkpoint_url,
+             "checkpoint_sha256": checkpoint_sha256,
+             "mobile_sam_source_license": MOBILE_SAM_SOURCE_LICENSE,
+             "mobile_sam_source_url": MOBILE_SAM_SOURCE_URL,
+             "mobile_sam_source_revision": MOBILE_SAM_SOURCE_REVISION,
+             "mobile_sam_patch": MOBILE_SAM_PATCH,
+-            "input_shape": list(example_inputs[0].shape),
++            "input_shape": list(sample.pixel_values.shape),
+             "output_shape": output_shape,
+             "input_size": args.input_size,
+             "preprocessing": {
+@@ -861,34 +746,33 @@ def main() -> None:
+                 "resize": "longest_side_then_zero_pad",
+             },
+             "point_prompts_xy": point_prompts,
+-            "mask_threshold": args.mask_threshold,
+-            "target": args.target,
++            "multimask_output": args.multimask_output,
++            "mask_threshold": MASK_THRESHOLD,
++            "minimum_mask_quality": MINIMUM_MASK_QUALITY,
++            "target": TARGET,
+             "vela_version": vela_version,
+-            "system_config": args.system_config,
+-            "memory_mode": args.memory_mode,
+-            "extra_vela_flags": args.extra_vela_flag,
++            "system_config": SYSTEM_CONFIG,
++            "memory_mode": MEMORY_MODE,
+             "quantization": {
+                 "global": "int8 activations and int8 weights",
+                 "tinyvit_attention": "int16 activations and int8 weights",
+             },
+-            "num_calibration_samples": len(calibration_samples),
+-            "num_eval_samples": len(eval_samples),
+-            "calibration_images": args.calibration_image,
+-            "eval_images": args.eval_image,
+-            "eval_masks": args.eval_mask,
++            "io_quantization": io_quantization,
++            "image": str(args.image.expanduser().resolve()),
+             "output_path": str(output_path),
+             "metrics_path": str(metrics_path),
+             "delegation_path": str(delegation_path),
+-            "debug_output_dir": str(debug_dir) if debug_dir is not None else None,
++            "artifact_dir": str(artifact_dir),
++            "debug_dir": str(debug_dir),
+         },
+     )
+ 
+-    print(f"\nExported model saved to {output_path}")
+-    print(f"Metadata saved to {metadata_path}")
+-    print(f"Metrics saved to {metrics_path}")
+-    print(f"Delegation summary saved to {delegation_path}")
+-    if debug_dir is not None:
+-        print(f"Debug artifacts saved to {debug_dir}")
++    print(f"Exported model: {output_path}")
++    print(f"Metadata: {metadata_path}")
++    print(f"Metrics: {metrics_path}")
++    print(f"Delegation report: {delegation_path}")
++    print(f"TOSA/Vela artifacts: {artifact_dir}")
++    print(f"Debug masks and overlays: {debug_dir}")
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/requirements.txt b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/requirements.txt
+deleted file mode 100644
+index 6eb309f00d..0000000000
+--- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/requirements.txt
++++ /dev/null
+@@ -1,6 +0,0 @@
+-# Copyright 2026 Arm Limited and/or its affiliates.
+-#
+-# This source code is licensed under the BSD-style license found in the
+-# LICENSE file in the root directory of this source tree.
+-
+-tqdm == 4.67.1
+diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/CMakeLists.txt b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/CMakeLists.txt
+index 6f30110b95..a65c9dfdd5 100644
+--- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/CMakeLists.txt
++++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/CMakeLists.txt
+@@ -59,6 +59,60 @@ option(ET_SEGMENTATION_SEMIHOSTING_OUTPUT
+        "Emit validation logs through Arm semihosting for FVP smoke runs" ON
+ )
+ 
++function(validate_arm_baremetal_toolchain)
++  set(setup_hint
++      "Run examples/arm/setup.sh, source examples/arm/arm-scratch/setup_path.sh, and configure a fresh build directory."
++  )
++  foreach(compiler IN ITEMS "${CMAKE_C_COMPILER}" "${CMAKE_CXX_COMPILER}")
++    execute_process(
++      COMMAND "${compiler}" -dumpmachine
++      OUTPUT_VARIABLE compiler_target
++      OUTPUT_STRIP_TRAILING_WHITESPACE
++      RESULT_VARIABLE compiler_target_result
++    )
++    if(compiler_target_result OR NOT compiler_target STREQUAL "arm-none-eabi")
++      message(
++        FATAL_ERROR
++          "MobileSAM requires the Arm GNU bare-metal toolchain, but ${compiler} targets '${compiler_target}'. ${setup_hint}"
++      )
++    endif()
++  endforeach()
++
++  include(CheckCSourceCompiles)
++  check_c_source_compiles(
++    [=[
++      #include <inttypes.h>
++      const char *unsigned_format = "%" PRIu64;
++      const char *hex_format = "%" PRIx64;
++      int main(void) {
++        return unsigned_format[0] == hex_format[0];
++      }
++    ]=]
++    ET_MOBILESAM_HAS_INTTYPES_FORMAT_MACROS
++  )
++  if(NOT ET_MOBILESAM_HAS_INTTYPES_FORMAT_MACROS)
++    message(
++      FATAL_ERROR
++        "The selected Arm C library does not provide PRIu64 and PRIx64 from inttypes.h. ${setup_hint}"
++    )
++  endif()
++
++  execute_process(
++    COMMAND "${CMAKE_CXX_COMPILER}" -print-file-name=libstdc++.a
++    OUTPUT_VARIABLE cxx_standard_library
++    OUTPUT_STRIP_TRAILING_WHITESPACE
++    RESULT_VARIABLE cxx_standard_library_result
++  )
++  if(cxx_standard_library_result OR NOT EXISTS "${cxx_standard_library}")
++    message(
++      FATAL_ERROR
++        "The selected Arm C++ compiler cannot locate libstdc++.a. ${setup_hint}"
++    )
++  endif()
++endfunction()
++
++validate_arm_baremetal_toolchain()
++
+ if(NOT EXISTS "${IMAGE_PATH}")
+   message(
+     FATAL_ERROR
+diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/README.md b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/README.md
+index f422edc6ad..4b124ef9e7 100644
+--- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/README.md
++++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/README.md
+@@ -1,84 +1,80 @@
+ # MobileSAM Runtime Example
+ 
+-This directory builds a bare-metal Corstone-320 application for a MobileSAM
+-fixed-prompt `.pte` generated by `model_export/export_mobilesam.py`.
++This directory builds a bare-metal Corstone-320 application for the fixed-prompt
++MobileSAM `.pte` generated by `model_export/export_mobilesam.py`. Complete the
++top-level clean-clone setup and the manual export before running these commands.
+ 
+-## Build ExecuTorch for Arm
+-
+-Run the Arm setup first if it has not already been run:
++All commands below run from the ExecuTorch repository root and use the same
++paths as `model_export/README.md`:
+ 
+ ```bash
+-./examples/arm/setup.sh --i-agree-to-the-contained-eula
+-source examples/arm/arm-scratch/setup_path.sh
++MOBILE_SAM_EXAMPLE="$PWD/examples/arm/mobilesam_prompt_segmentation_example_ethos_u"
++MOBILE_SAM_WORK_DIR="${MOBILE_SAM_WORK_DIR:-$PWD/arm_test/mobilesam_manual}"
++MOBILE_SAM_PTE="$MOBILE_SAM_WORK_DIR/export/mobilesam_point_ethos_u85_448.pte"
++MOBILE_SAM_METADATA="$MOBILE_SAM_WORK_DIR/export/mobilesam_point_ethos_u85_448.json"
++MOBILE_SAM_IMAGE="$PWD/examples/models/dinov2/dog.jpg"
++
++test -f "$MOBILE_SAM_PTE"
++test -f "$MOBILE_SAM_METADATA"
+ ```
+ 
+-Build and install the Arm bare-metal ExecuTorch libraries from
+-`examples/arm`:
+-
+-```bash
+-cmake --preset arm-baremetal \
+-  -DCMAKE_BUILD_TYPE=Release \
+-  -B../../cmake-out-arm ../..
+-cmake --build ../../cmake-out-arm --target install -j$(nproc)
+-```
++The point `(219, 193)` is already embedded in this `.pte`. Changing
++`MOBILE_SAM_IMAGE` does not require another export, but it does require
++rebuilding the runtime so CMake regenerates the embedded image header. Changing
++the point requires another export.
+ 
+-The Arm bare-metal preset installs into the build directory. If you use a
+-different `-B` path, pass the same path as `-DET_BUILD_DIR_PATH` when
+-configuring the runtime app.
+-
+-## Configure the Runtime App
++## Build ExecuTorch for Arm
+ 
+-Use the `.pte` from the export step and any RGB image:
++Load the toolchain installed during clean-clone setup, then build and install
++the bare-metal ExecuTorch libraries:
+ 
+ ```bash
+-cmake \
+-  -DCMAKE_TOOLCHAIN_FILE=$(pwd)/ethos-u-setup/arm-none-eabi-gcc.cmake \
+-  -DET_BUILD_DIR_PATH=../../cmake-out-arm \
+-  -DET_PTE_FILE_PATH=<path to mobilesam_point_ethos_u85_448.pte> \
+-  -DMODEL_METADATA_PATH=<path to mobilesam_point_ethos_u85_448.json> \
+-  -DIMAGE_PATH=<path to an RGB image> \
+-  -DMASK_THRESHOLD=0.0 \
+-  -DSYSTEM_CONFIG=Ethos_U85_SYS_DRAM_Mid \
+-  -DMEMORY_MODE=Dedicated_Sram_384KB \
+-  -Bmobilesam_point_runtime \
+-  mobilesam_prompt_segmentation_example_ethos_u/runtime
+-```
+-
+-The generated image header reads the input shape and normalization values from
+-the exporter metadata, resizes the longest side, and pads the shorter side with
+-zeros. `MODEL_METADATA_PATH` defaults to the `.json` file beside the `.pte`.
+-The generated `448x448` float input is placed in the Corstone-320 DDR input
+-section so it does not consume BRAM.
+-
+-The `MEMORY_MODE` value must match the value used during export. The default
+-`Dedicated_Sram_384KB` places the Ethos-U tensor arena in DDR and the fast
+-scratch buffer in SRAM, matching the Corstone-320 linker script. The default
+-method allocator pool is sized for MobileSAM's reduced `448x448` input tensor.
++source examples/arm/arm-scratch/setup_path.sh
+ 
+-The runtime emits validation logs through Arm semihosting by default so the FVP
+-smoke run below prints the segmentation summary. Configure with
+-`-DET_SEGMENTATION_SEMIHOSTING_OUTPUT=OFF` when targeting an environment
+-without semihosting support.
++cmake --preset arm-baremetal -B "$MOBILE_SAM_WORK_DIR/cmake-out-arm"
++cmake --build "$MOBILE_SAM_WORK_DIR/cmake-out-arm" \
++  --target install --parallel
++```
+ 
+-The default target-side mask threshold is `0.0`, matching MobileSAM's mask-logit
+-threshold. The runtime logs foreground counts for several thresholds so users
+-can inspect and retune post-processing without re-exporting the graph.
++## Configure and compile the runtime
+ 
+-## Compile
++The documented configuration enables the mask dump required by the
++visualization step:
+ 
+ ```bash
+-cmake --build mobilesam_point_runtime -j$(nproc) -- mobilesam_prompt_segmentation_example
++cmake -S "$MOBILE_SAM_EXAMPLE/runtime" \
++  -B "$MOBILE_SAM_WORK_DIR/runtime" \
++  -DCMAKE_TOOLCHAIN_FILE="$PWD/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake" \
++  -DET_BUILD_DIR_PATH="$MOBILE_SAM_WORK_DIR/cmake-out-arm" \
++  -DET_PTE_FILE_PATH="$MOBILE_SAM_PTE" \
++  -DIMAGE_PATH="$MOBILE_SAM_IMAGE" \
++  -DET_SEGMENTATION_DUMP_MASK=ON \
++  -DPYTHON_EXECUTABLE="$(command -v python)"
++
++cmake --build "$MOBILE_SAM_WORK_DIR/runtime" \
++  --target mobilesam_prompt_segmentation_example --parallel
+ ```
+ 
++The runtime finds the metadata JSON beside the `.pte`. The generated image
++header reads its input shape and normalization values, resizes the longest
++image side, and pads the shorter side with zeros. The generated `448x448`
++float input is placed in the Corstone-320 DDR input section so it does not
++consume BRAM.
++
++The defaults match the exporter: mask threshold `0.0`, system configuration
++`Ethos_U85_SYS_DRAM_Mid`, and memory mode `Dedicated_Sram_384KB`. The memory
++mode places the Ethos-U tensor arena in DDR and the fast scratch buffer in
++SRAM. Keep these values unchanged for this example.
++
+ ## Run on Corstone-320 FVP
+ 
+ ```bash
+-../../backends/arm/scripts/run_fvp.sh \
+-  --elf=mobilesam_point_runtime/mobilesam_prompt_segmentation_example \
++backends/arm/scripts/run_fvp.sh \
++  --elf="$MOBILE_SAM_WORK_DIR/runtime/mobilesam_prompt_segmentation_example" \
+   --target=ethos-u85-256 \
+   --timeout=300 \
+-  --semihosting-cwd=$(pwd)/mobilesam_point_runtime \
+-  --fast 2>&1 | tee mobilesam_fvp.log
++  --semihosting-cwd="$MOBILE_SAM_WORK_DIR/runtime" \
++  --fast 2>&1 | tee "$MOBILE_SAM_WORK_DIR/fvp.log"
+ ```
+ 
+ Expected logs include:
+@@ -90,21 +86,44 @@ Expected logs include:
+ - Foreground/background pixel counts.
+ - `Model executed successfully.`
+ 
+-To dump the predicted binary mask as run-length encoded log chunks, configure
+-with `-DET_SEGMENTATION_DUMP_MASK=ON`. This is useful for debugging but makes
+-the UART output larger.
++## Visualize and validate the FVP mask
+ 
+-Capture that FVP output and reconstruct the target mask and overlay with:
++The manual export writes the host quantized mask for the demo image to
++`$MOBILE_SAM_WORK_DIR/export/debug/dog/quantized_mask.png`. Reconstruct the
++target mask from the FVP log and compare the two results with:
+ 
+ ```bash
+-python mobilesam_prompt_segmentation_example_ethos_u/runtime/visualize_fvp_output.py \
+-  --fvp-log=mobilesam_fvp.log \
+-  --input-image=<path to the RGB input> \
+-  --metadata=<path to the exporter JSON> \
+-  --reference-mask=<path to the host quantized_mask.png> \
++python "$MOBILE_SAM_EXAMPLE/runtime/visualize_fvp_output.py" \
++  --fvp-log="$MOBILE_SAM_WORK_DIR/fvp.log" \
++  --input-image="$MOBILE_SAM_IMAGE" \
++  --metadata="$MOBILE_SAM_METADATA" \
++  --reference-mask="$MOBILE_SAM_WORK_DIR/export/debug/dog/quantized_mask.png" \
+   --minimum-iou=0.9 \
+-  --output-dir=mobilesam_fvp_visual
++  --output-dir="$MOBILE_SAM_WORK_DIR/fvp_visual"
++```
++
++The tool tolerates non-UTF-8 transport bytes in the FVP log and writes:
++
++- Target mask: `$MOBILE_SAM_WORK_DIR/fvp_visual/fvp_mask.png`
++- Input and prompt: `$MOBILE_SAM_WORK_DIR/fvp_visual/input_with_prompts.png`
++- Target overlay: `$MOBILE_SAM_WORK_DIR/fvp_visual/fvp_overlay.png`
++- Side-by-side result: `$MOBILE_SAM_WORK_DIR/fvp_visual/fvp_comparison.png`
++- Metrics: `$MOBILE_SAM_WORK_DIR/fvp_visual/metrics.json`
++
++## Toolchain errors
++
++Runtime configuration checks that CMake selected the Arm GNU bare-metal C and
++C++ compilers, that `<inttypes.h>` provides `PRIu64` and `PRIx64`, and that the
++C++ compiler can locate `libstdc++.a`. If this check fails, rerun setup, source
++the generated path file, and use a fresh runtime build directory:
++
++```bash
++./examples/arm/setup.sh --i-agree-to-the-contained-eula
++source examples/arm/arm-scratch/setup_path.sh
++
++arm-none-eabi-gcc -dumpmachine
++arm-none-eabi-g++ -print-file-name=libstdc++.a
+ ```
+ 
+-The tool writes the decoded target mask, an input/prompt image, a colored FVP
+-overlay, a side-by-side comparison, and target/reference agreement metrics.
++The first command must print `arm-none-eabi`; the second must print an existing
++absolute path rather than only `libstdc++.a`.
+diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/image_to_array.py b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/image_to_array.py
+index a3d169907e..eacf4d9e82 100644
+--- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/image_to_array.py
++++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/image_to_array.py
+@@ -15,17 +15,27 @@ import json
+ import os
+ from argparse import ArgumentParser
+ from pathlib import Path
++from typing import Any
+ 
+ import numpy as np
+ from PIL import Image
+ 
+ 
++def c_float_literal(value: float) -> str:
++    literal = f"{value:.9g}"
++    if "." not in literal and "e" not in literal.lower():
++        literal += ".0"
++    return literal + "f"
++
++
+ def convert_image_to_c_array(
+     image_path: str,
+     output_path: str,
+     image_size: tuple[int, int],
+     pixel_mean: tuple[float, float, float],
+     pixel_std: tuple[float, float, float],
++    io_quantization: dict[str, Any] | None = None,
++    point_prompts_xy: list[tuple[float, float]] | None = None,
+     array_name: str = "image_data",
+ ) -> None:
+     image = Image.open(image_path).convert("RGB")
+@@ -46,29 +56,89 @@ def convert_image_to_c_array(
+     padded_data[: resized_size[1], : resized_size[0], :] = data
+     data = np.transpose(padded_data, (2, 0, 1)).flatten()
+ 
++    c_type = "float"
++    quantized_input = False
++    input_scale = 1.0
++    input_zero_point = 0
++    output_scale = 1.0
++    output_zero_point = 0
++    if io_quantization is not None:
++        input_qparams = io_quantization.get("input")
++        output_qparams = io_quantization.get("output")
++        if not isinstance(input_qparams, dict) or not isinstance(output_qparams, dict):
++            raise ValueError("Quantized I/O metadata must contain input and output.")
++        if input_qparams.get("dtype") != "int8":
++            raise ValueError(
++                "MobileSAM board input generation currently supports int8."
++            )
++        if output_qparams.get("dtype") != "int8":
++            raise ValueError(
++                "MobileSAM board output generation currently supports int8."
++            )
++
++        input_scale = float(input_qparams["scale"])
++        input_zero_point = int(input_qparams["zero_point"])
++        quant_min = int(input_qparams["quant_min"])
++        quant_max = int(input_qparams["quant_max"])
++        if not np.isfinite(input_scale) or input_scale <= 0:
++            raise ValueError("Input quantization scale must be finite and positive.")
++        data = np.clip(
++            np.round(data / input_scale + input_zero_point), quant_min, quant_max
++        ).astype(np.int8)
++        output_scale = float(output_qparams["scale"])
++        output_zero_point = int(output_qparams["zero_point"])
++        c_type = "int8_t"
++        quantized_input = True
++
+     array_lines = []
+     for i in range(0, len(data), 12):
+-        line = ", ".join(f"{value:.8f}" for value in data[i : i + 12])
++        values = data[i : i + 12]
++        if quantized_input:
++            line = ", ".join(str(int(value)) for value in values)
++        else:
++            line = ", ".join(f"{value:.8f}" for value in values)
+         array_lines.append("    " + line + ",")
+ 
++    if not point_prompts_xy:
++        point_prompts_xy = [(image_size[0] / 2, image_size[1] / 2)]
++    prompt_x_values = ", ".join(str(round(point[0])) for point in point_prompts_xy)
++    prompt_y_values = ", ".join(str(round(point[1])) for point in point_prompts_xy)
++
+     c_array = f"""#include <stdint.h>
+ #include <stddef.h>
+ 
+ const size_t image_width = {image_size[0]};
+ const size_t image_height = {image_size[1]};
++const size_t image_resized_width = {resized_size[0]};
++const size_t image_resized_height = {resized_size[1]};
+ const size_t image_channels = 3;
+-__attribute__((section("input_data_sec"), aligned(16))) float {array_name}[{len(data)}] = {{
++const float model_pixel_mean[3] = {{{", ".join(c_float_literal(value) for value in pixel_mean)}}};
++const float model_pixel_std[3] = {{{", ".join(c_float_literal(value) for value in pixel_std)}}};
++const float model_input_scale = {c_float_literal(input_scale)};
++const int32_t model_input_zero_point = {input_zero_point};
++const float model_output_scale = {c_float_literal(output_scale)};
++const int32_t model_output_zero_point = {output_zero_point};
++const size_t point_prompt_count = {len(point_prompts_xy)};
++const size_t point_prompt_x[{len(point_prompts_xy)}] = {{{prompt_x_values}}};
++const size_t point_prompt_y[{len(point_prompts_xy)}] = {{{prompt_y_values}}};
++__attribute__((section("input_data_sec"), aligned(16))) const {c_type} {array_name}[{len(data)}] = {{
+ {os.linesep.join(array_lines)}
+ }};
+ """
+     with open(output_path, "w") as output_file:
+         output_file.write(c_array)
+-    print(f"Converted '{image_path}' to '{output_path}' ({len(data)} floats)")
++    print(f"Converted '{image_path}' to '{output_path}' ({len(data)} {c_type} values)")
+ 
+ 
+ def load_model_metadata(
+     metadata_path: str,
+-) -> tuple[tuple[int, int], tuple[float, float, float], tuple[float, float, float]]:
++) -> tuple[
++    tuple[int, int],
++    tuple[float, float, float],
++    tuple[float, float, float],
++    dict[str, Any] | None,
++    list[tuple[float, float]],
++]:
+     metadata = json.loads(Path(metadata_path).read_text())
+     input_shape = metadata.get("input_shape")
+     if not isinstance(input_shape, list) or len(input_shape) != 4:
+@@ -89,16 +159,81 @@ def load_model_metadata(
+     image_size = (int(input_shape[3]), int(input_shape[2]))
+     pixel_mean = tuple(float(value) for value in pixel_mean_values)
+     pixel_std = tuple(float(value) for value in pixel_std_values)
++    point_prompts = metadata.get("point_prompts_xy")
++    point_prompts_xy: list[tuple[float, float]] = []
++    if point_prompts is not None:
++        if not isinstance(point_prompts, list) or not point_prompts:
++            raise ValueError("MobileSAM point_prompts_xy must contain [x, y] pairs.")
++        for point_prompt in point_prompts:
++            if not isinstance(point_prompt, list) or len(point_prompt) != 2:
++                raise ValueError(
++                    "MobileSAM point_prompts_xy must contain [x, y] pairs."
++                )
++            point_prompts_xy.append((float(point_prompt[0]), float(point_prompt[1])))
+     return (
+         image_size,
+         (pixel_mean[0], pixel_mean[1], pixel_mean[2]),
+         (pixel_std[0], pixel_std[1], pixel_std[2]),
++        metadata.get("io_quantization"),
++        point_prompts_xy,
+     )
+ 
+ 
++def convert_metadata_to_c_header(metadata_path: str, output_path: str) -> None:
++    metadata = json.loads(Path(metadata_path).read_text())
++    (
++        image_size,
++        pixel_mean,
++        pixel_std,
++        io_quantization,
++        point_prompts_xy,
++    ) = load_model_metadata(metadata_path)
++    if not isinstance(io_quantization, dict):
++        raise ValueError("Live camera mode requires quantized I/O metadata.")
++    input_qparams = io_quantization.get("input")
++    output_qparams = io_quantization.get("output")
++    quality_qparams = io_quantization.get("quality")
++    if not all(
++        isinstance(qparams, dict)
++        for qparams in (input_qparams, output_qparams, quality_qparams)
++    ):
++        raise ValueError(
++            "Live multimask mode requires input, output, and quality qparams."
++        )
++    if not point_prompts_xy:
++        raise ValueError("Live multimask mode requires automatic point prompts.")
++
++    prompt_x_values = ", ".join(str(round(point[0])) for point in point_prompts_xy)
++    prompt_y_values = ", ".join(str(round(point[1])) for point in point_prompts_xy)
++    minimum_mask_quality = float(metadata.get("minimum_mask_quality", 0.9))
++    header = f"""#include <stdint.h>
++#include <stddef.h>
++
++const size_t image_width = {image_size[0]};
++const size_t image_height = {image_size[1]};
++const size_t image_resized_width = {image_size[0]};
++const size_t image_resized_height = {image_size[1]};
++const size_t image_channels = 3;
++const float model_pixel_mean[3] = {{{", ".join(c_float_literal(value) for value in pixel_mean)}}};
++const float model_pixel_std[3] = {{{", ".join(c_float_literal(value) for value in pixel_std)}}};
++const float model_input_scale = {c_float_literal(float(input_qparams["scale"]))};
++const int32_t model_input_zero_point = {int(input_qparams["zero_point"])};
++const float model_output_scale = {c_float_literal(float(output_qparams["scale"]))};
++const int32_t model_output_zero_point = {int(output_qparams["zero_point"])};
++const float model_quality_scale = {c_float_literal(float(quality_qparams["scale"]))};
++const int32_t model_quality_zero_point = {int(quality_qparams["zero_point"])};
++const float minimum_mask_quality = {c_float_literal(minimum_mask_quality)};
++const size_t point_prompt_count = {len(point_prompts_xy)};
++const size_t point_prompt_x[{len(point_prompts_xy)}] = {{{prompt_x_values}}};
++const size_t point_prompt_y[{len(point_prompts_xy)}] = {{{prompt_y_values}}};
++"""
++    Path(output_path).write_text(header)
++    print(f"Converted '{metadata_path}' to '{output_path}'")
++
++
+ def main() -> None:
+     parser = ArgumentParser()
+-    parser.add_argument("--image", required=True, help="Path to an RGB image.")
++    parser.add_argument("--image", help="Path to an RGB image.")
+     parser.add_argument(
+         "--output", required=True, help="Output path for the generated C array."
+     )
+@@ -107,15 +242,34 @@ def main() -> None:
+         required=True,
+         help="Exporter metadata containing input shape and preprocessing values.",
+     )
++    parser.add_argument(
++        "--metadata-only",
++        action="store_true",
++        help="Generate constants for live camera capture without a static image.",
++    )
+     args = parser.parse_args()
+ 
+-    image_size, pixel_mean, pixel_std = load_model_metadata(args.metadata)
++    if args.metadata_only:
++        convert_metadata_to_c_header(args.metadata, args.output)
++        return
++    if not args.image:
++        parser.error("--image is required unless --metadata-only is used.")
++
++    (
++        image_size,
++        pixel_mean,
++        pixel_std,
++        io_quantization,
++        point_prompts_xy,
++    ) = load_model_metadata(args.metadata)
+     convert_image_to_c_array(
+         args.image,
+         args.output,
+         image_size,
+         pixel_mean,
+         pixel_std,
++        io_quantization,
++        point_prompts_xy,
+     )
+ 
+ 
+diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/main.cpp b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/main.cpp
+index 9acf74ec86..3dec5383a2 100644
+--- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/main.cpp
++++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/main.cpp
+@@ -14,6 +14,7 @@
+ #include <unistd.h>
+ 
+ #include <algorithm>
++#include <cstring>
+ #include <memory>
+ #include <vector>
+ 
+@@ -185,10 +186,6 @@ void summarize_segmentation_output(const Tensor& out) {
+       out.dim() == 4,
+       "Expected mask logits with shape [1, 1, height, width], got rank %zd",
+       out.dim());
+-  ET_CHECK_MSG(
+-      out.scalar_type() == ScalarType::Float,
+-      "Expected float mask logits, got dtype %d",
+-      out.scalar_type());
+   ET_CHECK_MSG(out.size(0) == 1, "Only batch size 1 is supported.");
+   ET_CHECK_MSG(
+       out.size(1) == 1,
+@@ -198,15 +195,30 @@ void summarize_segmentation_output(const Tensor& out) {
+   const size_t height = static_cast<size_t>(out.size(2));
+   const size_t width = static_cast<size_t>(out.size(3));
+   const auto strides = out.strides();
+-  const float* data = out.const_data_ptr<float>();
++  const float* float_data = nullptr;
++  const int8_t* int8_data = nullptr;
++  if (out.scalar_type() == ScalarType::Float) {
++    float_data = out.const_data_ptr<float>();
++  } else if (out.scalar_type() == ScalarType::Char) {
++    int8_data = out.const_data_ptr<int8_t>();
++  } else {
++    ET_CHECK_MSG(false, "Expected float or int8 mask logits.");
++  }
+ 
+   size_t foreground_pixels = 0;
+ #if defined(ET_SEGMENTATION_DUMP_MASK)
+   std::vector<uint8_t> mask(height * width, 0);
+ #endif
+   uint32_t mask_hash = 2166136261u;
+-  float min_score = data[0];
+-  float max_score = data[0];
++  const auto score_at = [&](size_t index) {
++    if (float_data != nullptr) {
++      return float_data[index];
++    }
++    return (static_cast<int32_t>(int8_data[index]) - model_output_zero_point) *
++        model_output_scale;
++  };
++  float min_score = score_at(0);
++  float max_score = min_score;
+   double score_sum = 0.0;
+   const float threshold_sweep[] = {
+       0.0f,
+@@ -225,7 +237,7 @@ void summarize_segmentation_output(const Tensor& out) {
+ 
+   for (size_t y = 0; y < height; ++y) {
+     for (size_t x = 0; x < width; ++x) {
+-      const float score = data[y * strides[2] + x * strides[3]];
++      const float score = score_at(y * strides[2] + x * strides[3]);
+       min_score = std::min(min_score, score);
+       max_score = std::max(max_score, score);
+       score_sum += score;
+@@ -371,15 +383,26 @@ int main() {
+       expected_elems,
+       image_elements);
+   ET_CHECK_MSG(
+-      input_tensor.scalar_type() == ScalarType::Float,
+-      "Expected float input tensor, got dtype %d",
+-      input_tensor.scalar_type());
+-
+-  float* input_data = input_tensor.mutable_data_ptr<float>();
++      input_tensor.nbytes() == sizeof(image_data),
++      "Input tensor expects %zu bytes, but image_data has %zu bytes",
++      input_tensor.nbytes(),
++      sizeof(image_data));
+   write_runtime_format("Copying %zu input elements", expected_elems);
+-  for (size_t i = 0; i < expected_elems; ++i) {
+-    input_data[i] = image_data[i];
++  if (input_tensor.scalar_type() == ScalarType::Float) {
++    ET_CHECK_MSG(
++        sizeof(image_data[0]) == sizeof(float),
++        "Float model input requires float image data.");
++  } else if (input_tensor.scalar_type() == ScalarType::Char) {
++    ET_CHECK_MSG(
++        sizeof(image_data[0]) == sizeof(int8_t),
++        "Int8 model input requires int8 image data.");
++  } else {
++    ET_CHECK_MSG(
++        false,
++        "Expected float or int8 input tensor, got dtype %d",
++        input_tensor.scalar_type());
+   }
++  std::memcpy(input_tensor.mutable_data_ptr(), image_data, sizeof(image_data));
+ 
+   write_runtime_line("Running model execution");
+   Error status_inference = method->execute();
+diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/visualize_fvp_output.py b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/visualize_fvp_output.py
+index bb176c3adf..16d5d3ca9e 100644
+--- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/visualize_fvp_output.py
++++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/visualize_fvp_output.py
+@@ -31,7 +31,7 @@ def parse_args() -> argparse.Namespace:
+ def parse_rle_mask(log_path: Path, expected_pixels: int) -> list[int]:
+     mask: list[int] = []
+     in_dump = False
+-    for line in log_path.read_text().splitlines():
++    for line in log_path.read_text(encoding="utf-8", errors="replace").splitlines():
+         if "executorch:main.cpp:" in line:
+             continue
+         if "Segmentation mask RLE begin" in line:
+diff --git a/zephyr/samples/mobilesam-ethosu/CMakeLists.txt b/zephyr/samples/mobilesam-ethosu/CMakeLists.txt
+new file mode 100644
+index 0000000000..32209ab82b
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/CMakeLists.txt
+@@ -0,0 +1,229 @@
++# Copyright (c) Meta Platforms, Inc. and affiliates.
++# All rights reserved.
++# Copyright 2026 Arm Limited and/or its affiliates.
++#
++# SPDX-License-Identifier: Apache-2.0
++
++cmake_minimum_required(VERSION 3.24)
++
++set(CONFIG_ARM_ETHOS_U85_256
++    y
++    CACHE BOOL "E8 Ethos-U85, 256 MACs" FORCE
++)
++set(ETHOSU_TARGET_NPU_CONFIG
++    "ethos-u85-256"
++    CACHE STRING "Arm Ethos-U HAL target" FORCE
++)
++set(MAX_KERNEL_NUM
++    32
++    CACHE STRING "ExecuTorch kernel registry capacity" FORCE
++)
++set(EXECUTORCH_LOG_LEVEL
++    Error
++    CACHE STRING "ExecuTorch runtime log level" FORCE
++)
++set(CMAKE_SKIP_INSTALL_RULES
++    ON
++    CACHE BOOL "" FORCE
++)
++
++set(ET_PTE_FILE_PATH
++    ""
++    CACHE FILEPATH "Path to the quantized-I/O MobileSAM PTE"
++)
++set(MODEL_METADATA_PATH
++    ""
++    CACHE FILEPATH "Path to MobileSAM exporter metadata"
++)
++set(ET_MODEL_PTE_ADDRESS
++    "0xC0000000"
++    CACHE STRING "Memory-mapped OSPI address containing the PTE"
++)
++set(MASK_THRESHOLD
++    "0.0"
++    CACHE STRING "MobileSAM mask logit threshold"
++)
++
++set(SDK_ALIF
++    "$ENV{SDK_ALIF}"
++    CACHE PATH "Path to the sdk-alif checkout"
++)
++
++foreach(required_file ET_PTE_FILE_PATH MODEL_METADATA_PATH)
++  if(NOT DEFINED ${required_file} OR "${${required_file}}" STREQUAL "")
++    message(FATAL_ERROR "${required_file} must be provided.")
++  endif()
++  if(NOT IS_ABSOLUTE "${${required_file}}")
++    get_filename_component(
++      ${required_file} "${${required_file}}" ABSOLUTE BASE_DIR
++      "${CMAKE_CURRENT_SOURCE_DIR}"
++    )
++  endif()
++  if(NOT EXISTS "${${required_file}}")
++    message(FATAL_ERROR "Could not find ${required_file}: ${${required_file}}")
++  endif()
++endforeach()
++
++if(NOT SDK_ALIF OR NOT EXISTS "${SDK_ALIF}/zephyr/module.yml")
++  message(
++    FATAL_ERROR
++      "SDK_ALIF must point to a sdk-alif checkout. Set the SDK_ALIF "
++      "environment variable or pass -DSDK_ALIF=/path/to/sdk-alif."
++  )
++endif()
++set(MT9M114_OVERLAY
++    "${SDK_ALIF}/samples/drivers/video/boards/serial_camera_mt9m114_selfie.overlay"
++)
++if(NOT EXISTS "${MT9M114_OVERLAY}")
++  message(
++    FATAL_ERROR
++      "Could not find the sdk-alif MT9M114 overlay: ${MT9M114_OVERLAY}"
++  )
++endif()
++list(
++  APPEND
++  EXTRA_DTC_OVERLAY_FILE
++  "${MT9M114_OVERLAY}"
++  "${CMAKE_CURRENT_LIST_DIR}/boards/mt9m114_selfie_deferred.overlay"
++)
++
++find_package(
++  Python3
++  COMPONENTS Interpreter
++  REQUIRED
++)
++
++execute_process(
++  COMMAND
++    ${Python3_EXECUTABLE}
++    "${CMAKE_CURRENT_LIST_DIR}/../../../codegen/tools/gen_oplist.py"
++    --model_file_path=${ET_PTE_FILE_PATH}
++    --output_path=${CMAKE_CURRENT_BINARY_DIR}/temp.yaml
++  RESULT_VARIABLE GEN_OPLIST_RESULT
++  OUTPUT_VARIABLE GEN_OPLIST_OUTPUT
++  ERROR_VARIABLE GEN_OPLIST_ERROR
++)
++if(NOT GEN_OPLIST_RESULT EQUAL 0)
++  message(
++    FATAL_ERROR
++      "gen_oplist.py failed with exit code ${GEN_OPLIST_RESULT}: ${GEN_OPLIST_ERROR}"
++  )
++endif()
++file(READ "${CMAKE_CURRENT_BINARY_DIR}/temp.yaml" GEN_OPLIST_CONTENT)
++if(GEN_OPLIST_CONTENT MATCHES "aten::" OR GEN_OPLIST_CONTENT MATCHES
++                                          "dim_order_ops::"
++)
++  message(
++    FATAL_ERROR
++      "The Alif sample requires a fully delegated --quantized-io PTE with no CPU operators."
++  )
++endif()
++
++execute_process(
++  COMMAND
++    ${Python3_EXECUTABLE}
++    "${CMAKE_CURRENT_LIST_DIR}/../../../backends/arm/scripts/get_ethosu_scratch_from_pte.py"
++    ${ET_PTE_FILE_PATH}
++  RESULT_VARIABLE SCRATCH_RESULT
++  OUTPUT_VARIABLE SCRATCH_OUTPUT
++  ERROR_VARIABLE SCRATCH_ERROR
++)
++if(NOT SCRATCH_RESULT EQUAL 0)
++  message(FATAL_ERROR "Could not inspect PTE scratch size: ${SCRATCH_ERROR}")
++endif()
++string(REGEX MATCH "max_scratch_size=([0-9]+)" _ "${SCRATCH_OUTPUT}")
++if(NOT CMAKE_MATCH_1)
++  message(FATAL_ERROR "PTE did not report an Ethos-U scratch size.")
++endif()
++set(ET_REQUIRED_SCRATCH_SIZE ${CMAKE_MATCH_1})
++
++find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
++project(executorch_mobilesam_ethosu)
++
++if(${CONFIG_EXECUTORCH_TEMP_ALLOCATOR_POOL_SIZE} LESS
++   ${ET_REQUIRED_SCRATCH_SIZE}
++)
++  message(
++    FATAL_ERROR
++      "CONFIG_EXECUTORCH_TEMP_ALLOCATOR_POOL_SIZE=${CONFIG_EXECUTORCH_TEMP_ALLOCATOR_POOL_SIZE} is smaller than the PTE requirement ${ET_REQUIRED_SCRATCH_SIZE}."
++  )
++endif()
++
++if(NOT DEFINED EXECUTORCH_DIR)
++  if(DEFINED ZEPHYR_EXECUTORCH_MODULE_DIR)
++    set(EXECUTORCH_DIR ${ZEPHYR_EXECUTORCH_MODULE_DIR})
++  else()
++    message(
++      FATAL_ERROR
++        "ExecuTorch module not found. Include it in ZEPHYR_EXTRA_MODULES."
++    )
++  endif()
++endif()
++
++include(${EXECUTORCH_DIR}/tools/cmake/Utils.cmake)
++
++set(MODEL_HEADER "${CMAKE_CURRENT_BINARY_DIR}/generated/model_metadata.h")
++set(LOGO_HEADER "${CMAKE_CURRENT_BINARY_DIR}/generated/logos.h")
++add_custom_command(
++  OUTPUT "${MODEL_HEADER}"
++  COMMAND
++    ${Python3_EXECUTABLE}
++    ${EXECUTORCH_DIR}/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/image_to_array.py
++    --metadata ${MODEL_METADATA_PATH} --metadata-only --output ${MODEL_HEADER}
++  DEPENDS
++    ${MODEL_METADATA_PATH}
++    ${EXECUTORCH_DIR}/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/image_to_array.py
++  COMMENT "Generating MobileSAM model metadata"
++  VERBATIM
++)
++
++add_custom_command(
++  OUTPUT "${LOGO_HEADER}"
++  COMMAND
++    ${Python3_EXECUTABLE}
++    ${CMAKE_CURRENT_LIST_DIR}/scripts/png_to_logo_header.py --executorch-logo
++    ${EXECUTORCH_DIR}/docs/source/_static/img/executorch-chip-logo-circle-32.png
++    --pytorch-logo
++    ${EXECUTORCH_DIR}/docs/source/_static/img/generic-pytorch-logo.png --output
++    ${LOGO_HEADER}
++  DEPENDS
++    ${CMAKE_CURRENT_LIST_DIR}/scripts/png_to_logo_header.py
++    ${EXECUTORCH_DIR}/docs/source/_static/img/executorch-chip-logo-circle-32.png
++    ${EXECUTORCH_DIR}/docs/source/_static/img/generic-pytorch-logo.png
++  COMMENT "Generating ExecuTorch and PyTorch logos"
++  VERBATIM
++)
++
++target_sources(
++  app
++  PRIVATE
++    src/camera.cpp src/display.cpp src/main.cpp ${MODEL_HEADER} ${LOGO_HEADER}
++    ${EXECUTORCH_DIR}/examples/arm/common/arm_memory_allocator.cpp
++)
++target_include_directories(
++  app PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/generated"
++              ${EXECUTORCH_DIR}/examples/arm/common
++)
++
++file(SIZE "${ET_PTE_FILE_PATH}" ET_MODEL_PTE_SIZE)
++target_compile_definitions(
++  app
++  PRIVATE
++    ET_MODEL_PTE_ADDRESS=${ET_MODEL_PTE_ADDRESS}
++    ET_MODEL_PTE_SIZE=${ET_MODEL_PTE_SIZE}
++    ET_SEGMENTATION_MASK_THRESHOLD=${MASK_THRESHOLD}
++    ET_ARM_METHOD_ALLOCATOR_POOL_SIZE=${CONFIG_EXECUTORCH_METHOD_ALLOCATOR_POOL_SIZE}
++    ET_ARM_BAREMETAL_SCRATCH_TEMP_ALLOCATOR_POOL_SIZE=${CONFIG_EXECUTORCH_TEMP_ALLOCATOR_POOL_SIZE}
++    ET_ARM_BAREMETAL_FAST_SCRATCH_TEMP_ALLOCATOR_POOL_SIZE=${CONFIG_EXECUTORCH_FAST_TEMP_ALLOCATOR_POOL_SIZE}
++)
++
++target_link_libraries(app PRIVATE libexecutorch)
++if(TARGET executorch_delegate_ethos_u)
++  executorch_target_link_options_shared_lib(executorch_delegate_ethos_u)
++  target_link_libraries(app PRIVATE executorch_delegate_ethos_u)
++else()
++  message(FATAL_ERROR "ExecuTorch Ethos-U delegate target was not built.")
++endif()
++if(TARGET ethosu_core_driver)
++  target_link_libraries(app PRIVATE ethosu_core_driver)
++endif()
+diff --git a/zephyr/samples/mobilesam-ethosu/Kconfig b/zephyr/samples/mobilesam-ethosu/Kconfig
+new file mode 100644
+index 0000000000..8d129befff
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/Kconfig
+@@ -0,0 +1,26 @@
++# Copyright (c) Meta Platforms, Inc. and affiliates.
++# All rights reserved.
++# Copyright 2026 Arm Limited and/or its affiliates.
++#
++# SPDX-License-Identifier: Apache-2.0
++
++source "Kconfig.zephyr"
++
++menu "ExecuTorch MobileSAM Ethos-U sample configuration"
++
++config EXECUTORCH_METHOD_ALLOCATOR_POOL_SIZE
++	int "Method allocator pool size in bytes"
++	default 1048576
++	depends on EXECUTORCH
++
++config EXECUTORCH_TEMP_ALLOCATOR_POOL_SIZE
++	int "Ethos-U tensor arena size in bytes"
++	default 5709824
++	depends on EXECUTORCH
++
++config EXECUTORCH_FAST_TEMP_ALLOCATOR_POOL_SIZE
++	int "Ethos-U fast scratch size in bytes"
++	default 393216
++	depends on EXECUTORCH
++
++endmenu
+diff --git a/zephyr/samples/mobilesam-ethosu/README.md b/zephyr/samples/mobilesam-ethosu/README.md
+new file mode 100644
+index 0000000000..2ee8292290
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/README.md
+@@ -0,0 +1,194 @@
++# Live MobileSAM on Alif Ensemble E8
++
++This Zephyr sample captures the Alif E8 Development Kit's on-board MT9M114
++selfie camera, runs MobileSAM on the Cortex-M55 HP core and Ethos-U85-256, and
++draws up to four distinct masks on the 480x800 display. The dashboard includes
++the ExecuTorch and PyTorch logos, inference time, and detected-object count.
++
++The model is stored separately in external OSPI flash at `0xC0000000`. Point
++prompts are fixed during export; the recommended four-point grid samples each
++image quadrant and target-side post-processing removes duplicate masks.
++
++## Requirements
++
++- Alif Ensemble E8 Development Kit with its display and selfie camera attached.
++- Alif's `zephyr_alif` and `sdk-alif` checkouts. These revisions are tested:
++  - `zephyr_alif`: `f002a4d8499c35fc70ec4d5324faa7b01c152c72`
++  - `sdk-alif`: `1db82c9d0cc594e2b548a13699e8a4157e6dcd4c`
++- Zephyr SDK 0.17.0 and a Python environment containing `west`, `fdt`, and the
++  Alif Zephyr requirements.
++- ExecuTorch's Arm dependencies from `examples/arm/setup.sh`.
++- Alif Security Toolkit and SEGGER J-Link software.
++
++Use the [Arm Alif E8 board setup guide](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/alif-image-classification/board-setup/)
++for a new board. Leave SW4 in its default SEUART position. Close terminal
++programs connected to the SEUART port before using SETOOLS; no further SW4
++changes are required by this workflow.
++
++The commands below assume:
++
++```bash
++export EXECUTORCH_ROOT=/absolute/path/to/executorch
++export ZEPHYR_BASE=/absolute/path/to/zephyr_alif
++export SDK_ALIF=/absolute/path/to/sdk-alif
++export ZEPHYR_SDK_INSTALL_DIR=/absolute/path/to/zephyr-sdk-0.17.0
++export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
++export MOBILE_SAM_OUTPUT=/absolute/path/to/mobilesam-alif-e8
++export MOBILE_SAM_SOURCE="$MOBILE_SAM_OUTPUT/mobile-sam/source"
++
++mkdir -p "$MOBILE_SAM_OUTPUT"
++cd "$EXECUTORCH_ROOT"
++```
++
++Initialize the west workspace and Python dependencies once:
++
++```bash
++west init -l "$ZEPHYR_BASE"
++west update
++python -m pip install -r "$ZEPHYR_BASE/scripts/requirements.txt"
++python -m pip install fdt west
++west zephyr-export
++```
++
++Keep this ExecuTorch Python environment active for export and build. CMake uses
++its interpreter to inspect the PTE and generate model-specific sources.
++
++## Export the live multi-object model
++
++Prepare the pinned MobileSAM checkout, then export a 384x384 quantized-I/O
++model with four independent point prompts and three candidates per point:
++
++```bash
++python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/prepare_mobilesam.py \
++  --source-dir "$MOBILE_SAM_SOURCE"
++
++python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py \
++  --output-path "$MOBILE_SAM_OUTPUT/mobilesam_live_384_grid4_multimask.pte" \
++  --mobile-sam-source "$MOBILE_SAM_SOURCE" \
++  --image examples/models/dinov2/dog.jpg \
++  --input-size 384 \
++  --point 96 96 \
++  --point 288 96 \
++  --point 96 288 \
++  --point 288 288 \
++  --multimask-output \
++  --quantized-io
++```
++
++The export also writes
++`mobilesam_live_384_grid4_multimask.json`. The sample rejects models that have
++CPU operators, non-int8 I/O, or an incompatible output layout.
++
++Copy the PTE byte-for-byte for J-Link:
++
++```bash
++cp "$MOBILE_SAM_OUTPUT/mobilesam_live_384_grid4_multimask.pte" \
++  "$MOBILE_SAM_OUTPUT/mobilesam_live_384_grid4_multimask.bin"
++cmp "$MOBILE_SAM_OUTPUT/mobilesam_live_384_grid4_multimask.pte" \
++  "$MOBILE_SAM_OUTPUT/mobilesam_live_384_grid4_multimask.bin"
++```
++
++## Build
++
++`SDK_ALIF` lets CMake select sdk-alif's official MT9M114 selfie-camera overlay.
++The application adds the deferred sensor initialization needed by its explicit
++power-up sequence.
++
++```bash
++west build \
++  -d "$MOBILE_SAM_OUTPUT/build-mobilesam-live" \
++  -p always \
++  -b alif_e8_dk/ae822fa0e5597xx0/rtss_hp \
++  "$EXECUTORCH_ROOT/zephyr/samples/mobilesam-ethosu" -- \
++  -DZEPHYR_EXTRA_MODULES="$EXECUTORCH_ROOT;$SDK_ALIF" \
++  -DSDK_ALIF="$SDK_ALIF" \
++  -DET_PTE_FILE_PATH="$MOBILE_SAM_OUTPUT/mobilesam_live_384_grid4_multimask.pte" \
++  -DMODEL_METADATA_PATH="$MOBILE_SAM_OUTPUT/mobilesam_live_384_grid4_multimask.json" \
++  -DPython3_EXECUTABLE="$(command -v python)"
++```
++
++A tested build used 7,580,784 bytes of the 7,602,176-byte application RAM
++region and 768,064 bytes of the 786,432-byte SRAM0 region. The application
++checks the PTE's required Ethos-U scratch size during configuration.
++
++## Flash a new board
++
++First complete the one-time SETOOLS board setup from the Arm guide. Keep SW4 in
++SEUART, disconnect any serial terminal, and set the Security Toolkit path:
++
++```bash
++export ALIF_SE_TOOLS_DIR=/absolute/path/to/alif-security-toolkit
++export ALIF_DEVICE=AE822FA0E5597_HP
++export JLINK_COMMANDER=/absolute/path/to/JLinkExe
++```
++
++Flash a small idle application before changing OSPI contents. This prevents a
++running XIP application from holding the flash controller:
++
++```bash
++west build \
++  -d "$MOBILE_SAM_OUTPUT/build-ospi-idle" \
++  -p always \
++  -b alif_e8_dk/ae822fa0e5597xx0/rtss_hp \
++  "$ZEPHYR_BASE/samples/hello_world" -- \
++  -DZEPHYR_EXTRA_MODULES="$SDK_ALIF"
++
++west flash -d "$MOBILE_SAM_OUTPUT/build-ospi-idle" \
++  --runner alif_flash -- --device "$ALIF_DEVICE"
++```
++
++Power-cycle the board, then start J-Link Commander:
++
++```bash
++"$JLINK_COMMANDER" \
++  -device AE822FA0E5597LS0_M55_HP \
++  -if SWD \
++  -speed 4000 \
++  -autoconnect 1
++```
++
++At the J-Link prompt, program and verify the model while the target is halted:
++
++```text
++halt
++loadbin /absolute/path/to/mobilesam_live_384_grid4_multimask.bin,0xC0000000
++verifybin /absolute/path/to/mobilesam_live_384_grid4_multimask.bin,0xC0000000
++exit
++```
++
++Flash the final firmware through SETOOLS and power-cycle once more:
++
++```bash
++west flash -d "$MOBILE_SAM_OUTPUT/build-mobilesam-live" \
++  --runner alif_flash -- --device "$ALIF_DEVICE"
++```
++
++The PTE only needs to be programmed again after re-exporting the model. Normal
++firmware rebuilds require only the final `west flash` command.
++
++## Expected result
++
++After the sensor's initial stabilization interval, the display continuously
++updates with the live camera image and colored segmentation overlays. A tested
++E8 processed a frame in about 1.34 seconds and selected two distinct objects in
++a representative scene. The exact mask count and timing depend on the scene.
++
++When a console is available, each completed frame also prints:
++
++```text
++Frame 9: 1340 ms, 2 objects
++```
++
++## Limitations
++
++- This sample targets the Alif E8 DK hardware and its bundled MT9M114 camera;
++  other boards need their own camera, display, memory, and power configuration.
++- The four prompt coordinates are compiled into the PTE. Re-export to change
++  the grid or input resolution.
++- Up to four distinct masks are displayed. The model emits three candidates
++  per point; the application filters low-quality, oversized, and duplicate
++  masks.
++- Camera capture and display share the board's external MIPI route, so the
++  application alternates them after each frame.
++- The PTE is not linked into the firmware and must remain at OSPI address
++  `0xC0000000`.
+diff --git a/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.conf b/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.conf
+new file mode 100644
+index 0000000000..f78458d922
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.conf
+@@ -0,0 +1,12 @@
++# Copyright 2026 Arm Limited and/or its affiliates.
++#
++# SPDX-License-Identifier: Apache-2.0
++
++CONFIG_ARM_ETHOS_U=y
++CONFIG_ARM_ETHOS_U85_256=y
++
++CONFIG_FLASH=y
++CONFIG_OSPI_FLASH=y
++CONFIG_OSPI_FLASH_IS25WX=y
++CONFIG_ALIF_OSPI_FLASH_XIP=y
++CONFIG_USE_ALIF_HAL_OSPI=y
+diff --git a/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.overlay b/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.overlay
+new file mode 100644
+index 0000000000..699f60afee
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.overlay
+@@ -0,0 +1,151 @@
++/* Copyright 2026 Arm Limited and/or its affiliates.
++ *
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++#include <zephyr/dt-bindings/clock/alif_ensemble_clocks.h>
++#include <dt-bindings/misc/alif_aipm_ensemble_gen2.h>
++
++/delete-node/ &sram0;
++/delete-node/ &sram1;
++
++&{/soc} {
++	sram0: sram@2000000 {
++		compatible = "zephyr,memory-region", "mmio-sram";
++		reg = <0x02000000 DT_SIZE_K(768)>;
++		zephyr,memory-region = "SRAM0";
++		zephyr,memory-attr = <DT_MEM_ARM_MPU_RAM>;
++	};
++
++	app_sram: sram@20c0000 {
++		compatible = "zephyr,memory-region", "mmio-sram";
++		reg = <0x020c0000 0x740000>;
++		zephyr,memory-region = "APP_RAM";
++		zephyr,memory-attr = <DT_MEM_ARM_MPU_RAM>;
++	};
++};
++
++/ {
++	chosen {
++		zephyr,sram = &app_sram;
++		zephyr,display = &cdc200;
++	};
++};
++
++&cdc200 {
++	width = <480>;
++	height = <800>;
++	hfront-porch = <5>;
++	hback-porch = <5>;
++	hsync-len = <4>;
++	vfront-porch = <10>;
++	vback-porch = <10>;
++	vsync-len = <2>;
++	clock-frequency = <24364080>;
++	hsync-active = <0>;
++	vsync-active = <0>;
++	de-active = <1>;
++	pixelclk-active = <0>;
++	bg-color = <0>;
++	enable-l1 = <1>;
++	pixel-fmt-l1 = "rgb-565";
++	def-back-color-l1 = <0>;
++	win-x0-l1 = <0>;
++	win-y0-l1 = <0>;
++	win-x1-l1 = <480>;
++	win-y1-l1 = <800>;
++	blend-factor1-l1 = <4>;
++	blend-factor2-l1 = <5>;
++	const-alpha-l1 = <0xff>;
++	enable-l2 = <0>;
++	pixel-fmt-l2 = "undefined";
++	win-x0-l2 = <0>;
++	win-y0-l2 = <0>;
++	win-x1-l2 = <0>;
++	win-y1-l2 = <0>;
++	blend-factor1-l2 = <6>;
++	blend-factor2-l2 = <7>;
++	const-alpha-l2 = <0xff>;
++};
++
++&aipm_run_default {
++	ip-clock-gating = <(ALIF_IP_CLK_GATE_NPU_HP_MASK |
++			    ALIF_IP_CLK_GATE_OSPI_1_MASK |
++			    ALIF_IP_CLK_GATE_CDC200_MASK |
++			    ALIF_IP_CLK_GATE_CAMERA_MASK |
++			    ALIF_IP_CLK_GATE_MIPI_CSI_MASK |
++			    ALIF_IP_CLK_GATE_MIPI_DSI_MASK)>;
++	phy-pwr-gating = <(ALIF_PHY_GATE_MIPI_TX_DPHY_MASK |
++			    ALIF_PHY_GATE_MIPI_RX_DPHY_MASK |
++			    ALIF_PHY_GATE_MIPI_PLL_DPHY_MASK |
++			    ALIF_PHY_GATE_LDO_MASK)>;
++};
++
++&clk_38p4m {
++	status = "okay";
++};
++
++&mipi_dsi {
++	status = "okay";
++};
++
++&gpio14 {
++	status = "okay";
++
++	display_mux {
++		gpio-hog;
++		gpios = <2 GPIO_ACTIVE_HIGH>;
++		output-high;
++	};
++};
++
++&gpio6 {
++	status = "okay";
++};
++
++&gpio9 {
++	status = "okay";
++};
++
++&lpgpio {
++	status = "okay";
++};
++
++&pinctrl {
++	pinctrl_mobilesam_flash: pinctrl_mobilesam_flash {
++		group0 {
++			pinmux = <PIN_P5_5__OSPI1_SCLK_C>,
++				 <PIN_P5_7__OSPI1_SS0_C>;
++			read-enable = <0x0>;
++			drive-strength = <12>;
++			slew-rate = <0x1>;
++		};
++		group1 {
++			pinmux = <PIN_P9_5__OSPI1_D0_C>,
++				 <PIN_P9_6__OSPI1_D1_C>,
++				 <PIN_P9_7__OSPI1_D2_C>,
++				 <PIN_P10_0__OSPI1_D3_C>,
++				 <PIN_P10_1__OSPI1_D4_C>,
++				 <PIN_P10_2__OSPI1_D5_C>,
++				 <PIN_P10_3__OSPI1_D6_C>,
++				 <PIN_P10_4__OSPI1_D7_C>,
++				 <PIN_P10_7__OSPI1_RXDS0_C>;
++			read-enable = <0x1>;
++			drive-strength = <12>;
++			slew-rate = <0x1>;
++		};
++	};
++};
++
++&ospi1 {
++	pinctrl-0 = <&pinctrl_mobilesam_flash>;
++	status = "okay";
++};
++
++&ospi_flash {
++	status = "okay";
++};
++
++&ethosu1 {
++	status = "okay";
++};
+diff --git a/zephyr/samples/mobilesam-ethosu/boards/mt9m114_selfie_deferred.overlay b/zephyr/samples/mobilesam-ethosu/boards/mt9m114_selfie_deferred.overlay
+new file mode 100644
+index 0000000000..ab12948140
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/boards/mt9m114_selfie_deferred.overlay
+@@ -0,0 +1,8 @@
++/* Copyright 2026 Arm Limited and/or its affiliates.
++ *
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++&mt9m114_selfie {
++	zephyr,deferred-init;
++};
+diff --git a/zephyr/samples/mobilesam-ethosu/prj.conf b/zephyr/samples/mobilesam-ethosu/prj.conf
+new file mode 100644
+index 0000000000..406475ff37
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/prj.conf
+@@ -0,0 +1,44 @@
++# Copyright (c) Meta Platforms, Inc. and affiliates.
++# All rights reserved.
++# Copyright 2026 Arm Limited and/or its affiliates.
++#
++# SPDX-License-Identifier: Apache-2.0
++
++CONFIG_EXECUTORCH=y
++
++CONFIG_CPP=y
++CONFIG_CRC=y
++CONFIG_STD_CPP17=y
++
++CONFIG_MAIN_STACK_SIZE=16384
++CONFIG_HEAP_MEM_POOL_SIZE=8192
++
++CONFIG_REQUIRES_FLOAT_PRINTF=y
++CONFIG_DISPLAY=y
++CONFIG_MIPI_DSI=y
++CONFIG_VIDEO=y
++CONFIG_VIDEO_BUFFER_POOL_SZ_MAX=64
++CONFIG_VIDEO_BUFFER_POOL_NUM_MAX=1
++CONFIG_VIDEO_ALIF_CAM_EXTENDED=y
++CONFIG_LOG=y
++CONFIG_LOG_MODE_IMMEDIATE=y
++CONFIG_LOG_DEFAULT_LEVEL=3
++CONFIG_VIDEO_LOG_LEVEL_DBG=y
++CONFIG_MT9M114_PARALLEL_INIT=n
++CONFIG_I2C=y
++CONFIG_I2C_TARGET=y
++CONFIG_I2C_DW_CLOCK_SPEED=100
++CONFIG_USE_ALIF_ISP_LIB=y
++CONFIG_ISP_LIB_SCALAR_MODULE=y
++CONFIG_ISP_LIB_DMSC_MODULE=y
++CONFIG_ISP_LIB_CCM_MODULE=n
++CONFIG_ISP_LIB_WBM_MODULE=n
++CONFIG_ISP_LIB_WB_MODULE=n
++CONFIG_EXECUTORCH_BUILD_PORTABLE_OPS=n
++
++CONFIG_FPU=y
++CONFIG_FP_HARDABI=y
++
++CONFIG_EXECUTORCH_METHOD_ALLOCATOR_POOL_SIZE=655360
++CONFIG_EXECUTORCH_TEMP_ALLOCATOR_POOL_SIZE=6488064
++CONFIG_EXECUTORCH_FAST_TEMP_ALLOCATOR_POOL_SIZE=393216
+diff --git a/zephyr/samples/mobilesam-ethosu/sample.yaml b/zephyr/samples/mobilesam-ethosu/sample.yaml
+new file mode 100644
+index 0000000000..2482122954
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/sample.yaml
+@@ -0,0 +1,16 @@
++# Copyright 2026 Arm Limited and/or its affiliates.
++#
++# SPDX-License-Identifier: Apache-2.0
++
++sample:
++  name: ExecuTorch live MobileSAM on Alif E8
++  description: Segments live MT9M114 camera frames on an Alif E8 Ethos-U85.
++common:
++  tags:
++    - executorch
++    - ethos-u
++  build_only: true
++  platform_allow:
++    - alif_e8_dk/ae822fa0e5597xx0/rtss_hp
++tests:
++  sample.executorch.mobilesam_ethosu: {}
+diff --git a/zephyr/samples/mobilesam-ethosu/scripts/png_to_logo_header.py b/zephyr/samples/mobilesam-ethosu/scripts/png_to_logo_header.py
+new file mode 100644
+index 0000000000..7d79570c90
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/scripts/png_to_logo_header.py
+@@ -0,0 +1,93 @@
++# Copyright 2026 Arm Limited and/or its affiliates.
++#
++# SPDX-License-Identifier: Apache-2.0
++
++from __future__ import annotations
++
++import argparse
++from pathlib import Path
++
++import numpy as np
++from PIL import Image
++
++
++def resize_contained(image: Image.Image, width: int, height: int) -> Image.Image:
++    image = image.copy()
++    image.thumbnail((width, height), Image.Resampling.LANCZOS)
++    canvas = Image.new("RGBA", (width, height), (0, 0, 0, 0))
++    canvas.alpha_composite(
++        image, ((width - image.width) // 2, (height - image.height) // 2)
++    )
++    return canvas
++
++
++def prepare_executorch_logo(path: Path) -> Image.Image:
++    return resize_contained(Image.open(path).convert("RGBA"), 40, 40)
++
++
++def prepare_pytorch_logo(path: Path) -> Image.Image:
++    source = np.asarray(Image.open(path).convert("RGB"), dtype=np.uint8)
++    alpha = np.max(255 - source, axis=2).astype(np.uint8)
++    foreground = alpha > 0
++    orange = foreground & (source[:, :, 0] > source[:, :, 1] * 1.5)
++
++    rgba = np.zeros((*source.shape[:2], 4), dtype=np.uint8)
++    rgba[foreground, :3] = 255
++    rgba[orange, :3] = (238, 76, 44)
++    rgba[:, :, 3] = alpha
++    image = Image.fromarray(rgba, mode="RGBA")
++    bounding_box = image.getchannel("A").getbbox()
++    if bounding_box is None:
++        raise ValueError(f"PyTorch logo has no visible pixels: {path}")
++    return resize_contained(image.crop(bounding_box), 120, 30)
++
++
++def rgb565(red: int, green: int, blue: int) -> int:
++    return ((red & 0xF8) << 8) | ((green & 0xFC) << 3) | (blue >> 3)
++
++
++def emit_logo(name: str, image: Image.Image) -> str:
++    data = np.asarray(image, dtype=np.uint8)
++    pixels = [rgb565(*pixel[:3]) for pixel in data.reshape(-1, 4)]
++    alpha = data[:, :, 3].reshape(-1)
++
++    def rows(values: list[int] | np.ndarray, per_row: int, formatter: object) -> str:
++        return "\n".join(
++            "    "
++            + ", ".join(formatter(value) for value in values[index : index + per_row])
++            + ","
++            for index in range(0, len(values), per_row)
++        )
++
++    return f"""const size_t {name}_width = {image.width};
++const size_t {name}_height = {image.height};
++const uint16_t {name}_pixels[{len(pixels)}] = {{
++{rows(pixels, 12, lambda value: f'0x{value:04x}')}
++}};
++const uint8_t {name}_alpha[{len(alpha)}] = {{
++{rows(alpha, 20, lambda value: str(int(value)))}
++}};
++"""
++
++
++def main() -> None:
++    parser = argparse.ArgumentParser()
++    parser.add_argument("--executorch-logo", type=Path, required=True)
++    parser.add_argument("--pytorch-logo", type=Path, required=True)
++    parser.add_argument("--output", type=Path, required=True)
++    args = parser.parse_args()
++
++    header = """#include <stddef.h>
++#include <stdint.h>
++
++"""
++    header += emit_logo(
++        "executorch_logo", prepare_executorch_logo(args.executorch_logo)
++    )
++    header += emit_logo("pytorch_logo", prepare_pytorch_logo(args.pytorch_logo))
++    args.output.parent.mkdir(parents=True, exist_ok=True)
++    args.output.write_text(header)
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/zephyr/samples/mobilesam-ethosu/src/camera.cpp b/zephyr/samples/mobilesam-ethosu/src/camera.cpp
+new file mode 100644
+index 0000000000..cc9111165d
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/src/camera.cpp
+@@ -0,0 +1,249 @@
++/* Copyright 2026 Arm Limited and/or its affiliates.
++ *
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++#include "camera.h"
++
++#include <zephyr/device.h>
++#include <zephyr/drivers/gpio.h>
++#include <zephyr/drivers/i2c.h>
++#include <zephyr/drivers/video.h>
++#include <zephyr/drivers/video/video_alif.h>
++#include <zephyr/init.h>
++#include <zephyr/kernel.h>
++#include <zephyr/sys/printk.h>
++#include <zephyr/sys/sys_io.h>
++
++#include <cerrno>
++#include <cstdint>
++
++#include "soc_common.h"
++
++extern "C" int log_level() {
++  return 0;
++}
++
++extern "C" volatile uint32_t camera_diagnostics[24];
++volatile uint32_t camera_diagnostics[24];
++
++namespace {
++
++const struct device* camera_device;
++struct video_buffer camera_buffer;
++bool frame_dequeued;
++const struct gpio_dt_spec mipi_camera_select =
++    GPIO_DT_SPEC_GET(DT_NODELABEL(camera_select), select_gpios);
++
++int enable_camera_pixel_clock() {
++  sys_write32(0x140001, CLKCTRL_PER_MST_CAMERA_PIXCLK_CTRL);
++  return 0;
++}
++
++SYS_INIT(enable_camera_pixel_clock, PRE_KERNEL_1, 46);
++
++} // namespace
++
++bool initialize_camera(
++    uint8_t* frame_buffer,
++    size_t frame_buffer_size,
++    size_t width,
++    size_t height) {
++  camera_diagnostics[0] = 0x43414d33;
++  camera_device = DEVICE_DT_GET_ONE(vsi_isp_pico);
++  camera_diagnostics[1] = device_is_ready(camera_device);
++  if (!device_is_ready(camera_device)) {
++    printk("ERROR camera ISP is not ready\n");
++    return false;
++  }
++
++  const struct device* camera_sensor = DEVICE_DT_GET_ONE(aptina_mt9m114);
++  const struct gpio_dt_spec sensor_power =
++      GPIO_DT_SPEC_GET(DT_NODELABEL(csi_cam_power), enable_gpios);
++  const struct gpio_dt_spec module_reset{
++      DEVICE_DT_GET(DT_NODELABEL(gpio9)), 1, GPIO_ACTIVE_LOW};
++  const struct gpio_dt_spec sensor_sleep{
++      DEVICE_DT_GET(DT_NODELABEL(gpio6)), 3, GPIO_ACTIVE_LOW};
++  int sensor_init_status =
++      gpio_pin_configure_dt(&mipi_camera_select, GPIO_OUTPUT_INACTIVE);
++  if (sensor_init_status == 0) {
++    sensor_init_status = gpio_pin_set_dt(&mipi_camera_select, 1);
++  }
++  if (sensor_init_status == 0) {
++    sensor_init_status =
++        gpio_pin_configure_dt(&module_reset, GPIO_OUTPUT_ACTIVE);
++  }
++  if (sensor_init_status == 0) {
++    sensor_init_status =
++        gpio_pin_configure_dt(&sensor_power, GPIO_OUTPUT_INACTIVE);
++  }
++  if (sensor_init_status == 0) {
++    sensor_init_status =
++        gpio_pin_configure_dt(&sensor_sleep, GPIO_OUTPUT_ACTIVE);
++  }
++  if (sensor_init_status == 0) {
++    k_usleep(100);
++    sensor_init_status = gpio_pin_set_dt(&sensor_power, 1);
++  }
++  if (sensor_init_status == 0) {
++    sensor_init_status = gpio_pin_set_dt(&module_reset, 0);
++    k_usleep(400);
++  }
++  if (sensor_init_status == 0) {
++    sensor_init_status = gpio_pin_set_dt(&sensor_sleep, 0);
++    k_usleep(39);
++  }
++  if (sensor_init_status == 0 && !device_is_ready(camera_sensor)) {
++    sensor_init_status = device_init(camera_sensor);
++  }
++  camera_diagnostics[2] = static_cast<uint32_t>(sensor_init_status);
++  camera_diagnostics[9] = static_cast<uint32_t>(sensor_init_status);
++  camera_diagnostics[10] = device_is_ready(camera_sensor);
++  if (!device_is_ready(camera_sensor)) {
++    printk(
++        "ERROR MT9M114 camera sensor initialization failed: %d\n",
++        sensor_init_status);
++    return false;
++  }
++
++  const struct i2c_dt_spec sensor_i2c =
++      I2C_DT_SPEC_GET(DT_NODELABEL(mt9m114_selfie));
++  uint8_t register_address[2] = {0x00, 0x00};
++  uint8_t register_value[2]{};
++  const int probe_status = i2c_write_read_dt(
++      &sensor_i2c,
++      register_address,
++      sizeof(register_address),
++      register_value,
++      sizeof(register_value));
++  camera_diagnostics[3] = static_cast<uint32_t>(probe_status);
++  camera_diagnostics[4] =
++      static_cast<uint16_t>(register_value[0] << 8) | register_value[1];
++
++  struct video_caps caps{};
++  const int caps_status =
++      video_get_caps(camera_device, VIDEO_EP_IN, &caps);
++  camera_diagnostics[11] = static_cast<uint32_t>(caps_status);
++  if (caps_status != 0) {
++    printk("ERROR camera capabilities unavailable: %d\n", caps_status);
++    return false;
++  }
++
++  struct video_format format{};
++  for (size_t i = 0; caps.format_caps[i].pixelformat != 0; ++i) {
++    const auto& candidate = caps.format_caps[i];
++    if (candidate.pixelformat == VIDEO_PIX_FMT_Y10P) {
++      format.pixelformat = candidate.pixelformat;
++      format.width = candidate.width_min;
++      format.height = candidate.height_min;
++    }
++  }
++  camera_diagnostics[12] = format.pixelformat;
++  camera_diagnostics[13] = (format.width << 16) | format.height;
++  if (format.pixelformat == 0) {
++    printk("ERROR camera RAW10 format unavailable\n");
++    return false;
++  }
++
++  format.pitch = format.width * 2;
++  const int input_status =
++      video_set_format(camera_device, VIDEO_EP_IN, &format);
++  camera_diagnostics[14] = static_cast<uint32_t>(input_status);
++  if (input_status != 0) {
++    printk(
++        "ERROR camera input format failed: %d (RAW10 %ux%u pitch %u)\n",
++        input_status,
++        format.width,
++        format.height,
++        format.pitch);
++    return false;
++  }
++
++  format.pixelformat = VIDEO_PIX_FMT_RGB888_PLANAR_PRIVATE;
++  format.width = width;
++  format.height = height;
++  format.pitch = width * 3;
++  const size_t required_size = format.pitch * format.height;
++  if (frame_buffer_size < required_size) {
++    printk(
++        "ERROR camera needs %zu bytes, model input has %zu\n",
++        required_size,
++        frame_buffer_size);
++    return false;
++  }
++  const int output_status =
++      video_set_format(camera_device, VIDEO_EP_OUT, &format);
++  camera_diagnostics[15] = static_cast<uint32_t>(output_status);
++  if (output_status != 0) {
++    printk("ERROR camera output format failed: %d\n", output_status);
++    return false;
++  }
++
++  camera_buffer = {};
++  camera_buffer.buffer = frame_buffer;
++  camera_buffer.size = required_size;
++  const int enqueue_status =
++      video_enqueue(camera_device, VIDEO_EP_OUT, &camera_buffer);
++  camera_diagnostics[16] = static_cast<uint32_t>(enqueue_status);
++  if (enqueue_status != 0) {
++    printk("ERROR camera buffer enqueue failed: %d\n", enqueue_status);
++    return false;
++  }
++  // The MT9M114 needs this stabilization interval before its first stream.
++  k_msleep(7000);
++  const int stream_status = video_stream_start(camera_device);
++  camera_diagnostics[17] = static_cast<uint32_t>(stream_status);
++  if (stream_status != 0) {
++    printk("ERROR camera stream start failed: %d\n", stream_status);
++    return false;
++  }
++
++  printk(
++      "Camera ready: MT9M114 to planar RGB %zux%zu\n", width, height);
++  return true;
++}
++
++bool capture_camera_frame() {
++  struct video_buffer* completed_buffer = nullptr;
++  const int status = video_dequeue(
++      camera_device, VIDEO_EP_OUT, &completed_buffer, K_FOREVER);
++  camera_diagnostics[18] = static_cast<uint32_t>(status);
++  if (status != 0 || completed_buffer != &camera_buffer) {
++    printk("ERROR camera frame dequeue failed: %d\n", status);
++    return false;
++  }
++  frame_dequeued = true;
++  gpio_pin_set_dt(&mipi_camera_select, 0);
++  return true;
++}
++
++bool release_camera_frame() {
++  if (!frame_dequeued) {
++    return false;
++  }
++  gpio_pin_set_dt(&mipi_camera_select, 1);
++  k_usleep(100);
++  const int enqueue_status =
++      video_enqueue(camera_device, VIDEO_EP_OUT, &camera_buffer);
++  camera_diagnostics[22] = static_cast<uint32_t>(enqueue_status);
++  if (enqueue_status != 0) {
++    printk("ERROR camera buffer requeue failed: %d\n", enqueue_status);
++    return false;
++  }
++  const int stream_status = video_stream_start(camera_device);
++  if (stream_status != 0 && stream_status != -EBUSY) {
++    printk("ERROR camera stream restart failed: %d\n", stream_status);
++    return false;
++  }
++  frame_dequeued = false;
++  return true;
++}
++
++void record_live_status(
++    uint32_t frame_number,
++    uint32_t inference_ms,
++    uint32_t object_count) {
++  camera_diagnostics[19] = frame_number;
++  camera_diagnostics[20] = inference_ms;
++  camera_diagnostics[21] = object_count;
++}
+diff --git a/zephyr/samples/mobilesam-ethosu/src/camera.h b/zephyr/samples/mobilesam-ethosu/src/camera.h
+new file mode 100644
+index 0000000000..41938d160b
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/src/camera.h
+@@ -0,0 +1,21 @@
++/* Copyright 2026 Arm Limited and/or its affiliates.
++ *
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++#pragma once
++
++#include <cstddef>
++#include <cstdint>
++
++bool initialize_camera(
++    uint8_t* frame_buffer,
++    size_t frame_buffer_size,
++    size_t width,
++    size_t height);
++bool capture_camera_frame();
++bool release_camera_frame();
++void record_live_status(
++    uint32_t frame_number,
++    uint32_t inference_ms,
++    uint32_t object_count);
+diff --git a/zephyr/samples/mobilesam-ethosu/src/display.cpp b/zephyr/samples/mobilesam-ethosu/src/display.cpp
+new file mode 100644
+index 0000000000..4b8b4e4737
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/src/display.cpp
+@@ -0,0 +1,447 @@
++/* Copyright 2026 Arm Limited and/or its affiliates.
++ *
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++#include "display.h"
++
++#include <zephyr/cache.h>
++#include <zephyr/device.h>
++#include <zephyr/drivers/display/cdc200.h>
++#include <zephyr/drivers/mipi_dsi/dsi_dw.h>
++#include <zephyr/sys/printk.h>
++
++#include <algorithm>
++#include <cinttypes>
++#include <cstdio>
++#include <cstring>
++
++#include "logos.h"
++#include "model_metadata.h"
++
++namespace {
++
++constexpr size_t kScreenWidth = 480;
++constexpr size_t kScreenHeight = 800;
++constexpr size_t kImageSize = 448;
++constexpr size_t kImageX = 16;
++constexpr size_t kImageY = 80;
++constexpr float kMaskThreshold = ET_SEGMENTATION_MASK_THRESHOLD;
++
++constexpr uint16_t rgb565(uint8_t red, uint8_t green, uint8_t blue) {
++  return static_cast<uint16_t>(
++      ((red & 0xf8u) << 8) | ((green & 0xfcu) << 3) | (blue >> 3));
++}
++
++constexpr uint16_t kBackground = rgb565(5, 10, 20);
++constexpr uint16_t kHeader = rgb565(8, 18, 34);
++constexpr uint16_t kCard = rgb565(14, 29, 47);
++constexpr uint16_t kCardBorder = rgb565(35, 58, 78);
++constexpr uint16_t kWhite = rgb565(242, 247, 250);
++constexpr uint16_t kMuted = rgb565(133, 158, 176);
++constexpr uint16_t kCyan = rgb565(22, 224, 210);
++constexpr uint16_t kPink = rgb565(255, 86, 145);
++constexpr uint16_t kGreen = rgb565(73, 224, 137);
++constexpr uint16_t kYellow = rgb565(255, 213, 64);
++
++struct MaskColor {
++  uint8_t red;
++  uint8_t green;
++  uint8_t blue;
++  uint16_t boundary;
++};
++
++constexpr MaskColor kMaskColors[] = {
++    {22, 224, 210, kCyan},
++    {255, 86, 145, kPink},
++    {255, 213, 64, kYellow},
++    {73, 224, 137, kGreen},
++};
++
++constexpr uint8_t kFont[][5] = {
++    {0x00, 0x00, 0x00, 0x00, 0x00}, {0x00, 0x00, 0x5f, 0x00, 0x00},
++    {0x00, 0x07, 0x00, 0x07, 0x00}, {0x14, 0x7f, 0x14, 0x7f, 0x14},
++    {0x24, 0x2a, 0x7f, 0x2a, 0x12}, {0x23, 0x13, 0x08, 0x64, 0x62},
++    {0x36, 0x49, 0x55, 0x22, 0x50}, {0x00, 0x05, 0x03, 0x00, 0x00},
++    {0x00, 0x1c, 0x22, 0x41, 0x00}, {0x00, 0x41, 0x22, 0x1c, 0x00},
++    {0x14, 0x08, 0x3e, 0x08, 0x14}, {0x08, 0x08, 0x3e, 0x08, 0x08},
++    {0x00, 0x50, 0x30, 0x00, 0x00}, {0x08, 0x08, 0x08, 0x08, 0x08},
++    {0x00, 0x60, 0x60, 0x00, 0x00}, {0x20, 0x10, 0x08, 0x04, 0x02},
++    {0x3e, 0x51, 0x49, 0x45, 0x3e}, {0x00, 0x42, 0x7f, 0x40, 0x00},
++    {0x42, 0x61, 0x51, 0x49, 0x46}, {0x21, 0x41, 0x45, 0x4b, 0x31},
++    {0x18, 0x14, 0x12, 0x7f, 0x10}, {0x27, 0x45, 0x45, 0x45, 0x39},
++    {0x3c, 0x4a, 0x49, 0x49, 0x30}, {0x01, 0x71, 0x09, 0x05, 0x03},
++    {0x36, 0x49, 0x49, 0x49, 0x36}, {0x06, 0x49, 0x49, 0x29, 0x1e},
++    {0x00, 0x36, 0x36, 0x00, 0x00}, {0x00, 0x56, 0x36, 0x00, 0x00},
++    {0x08, 0x14, 0x22, 0x41, 0x00}, {0x14, 0x14, 0x14, 0x14, 0x14},
++    {0x00, 0x41, 0x22, 0x14, 0x08}, {0x02, 0x01, 0x51, 0x09, 0x06},
++    {0x32, 0x49, 0x79, 0x41, 0x3e}, {0x7e, 0x11, 0x11, 0x11, 0x7e},
++    {0x7f, 0x49, 0x49, 0x49, 0x36}, {0x3e, 0x41, 0x41, 0x41, 0x22},
++    {0x7f, 0x41, 0x41, 0x22, 0x1c}, {0x7f, 0x49, 0x49, 0x49, 0x41},
++    {0x7f, 0x09, 0x09, 0x09, 0x01}, {0x3e, 0x41, 0x49, 0x49, 0x7a},
++    {0x7f, 0x08, 0x08, 0x08, 0x7f}, {0x00, 0x41, 0x7f, 0x41, 0x00},
++    {0x20, 0x40, 0x41, 0x3f, 0x01}, {0x7f, 0x08, 0x14, 0x22, 0x41},
++    {0x7f, 0x40, 0x40, 0x40, 0x40}, {0x7f, 0x02, 0x0c, 0x02, 0x7f},
++    {0x7f, 0x04, 0x08, 0x10, 0x7f}, {0x3e, 0x41, 0x41, 0x41, 0x3e},
++    {0x7f, 0x09, 0x09, 0x09, 0x06}, {0x3e, 0x41, 0x51, 0x21, 0x5e},
++    {0x7f, 0x09, 0x19, 0x29, 0x46}, {0x46, 0x49, 0x49, 0x49, 0x31},
++    {0x01, 0x01, 0x7f, 0x01, 0x01}, {0x3f, 0x40, 0x40, 0x40, 0x3f},
++    {0x1f, 0x20, 0x40, 0x20, 0x1f}, {0x3f, 0x40, 0x38, 0x40, 0x3f},
++    {0x63, 0x14, 0x08, 0x14, 0x63}, {0x07, 0x08, 0x70, 0x08, 0x07},
++    {0x61, 0x51, 0x49, 0x45, 0x43},
++};
++
++const struct device* display_device;
++struct cdc200_fb_desc framebuffer;
++uint16_t* pixels;
++bool display_ready;
++
++void fill_rect(
++    size_t x,
++    size_t y,
++    size_t width,
++    size_t height,
++    uint16_t color) {
++  const size_t x_end = std::min(x + width, kScreenWidth);
++  const size_t y_end = std::min(y + height, kScreenHeight);
++  for (size_t row = y; row < y_end; ++row) {
++    std::fill(
++        pixels + row * kScreenWidth + x,
++        pixels + row * kScreenWidth + x_end,
++        color);
++  }
++}
++
++const uint8_t* glyph(char character) {
++  if (character >= 'a' && character <= 'z') {
++    character -= 'a' - 'A';
++  }
++  if (character < ' ' || character > 'Z') {
++    character = '?';
++  }
++  return kFont[character - ' '];
++}
++
++void draw_text(
++    size_t x,
++    size_t y,
++    const char* text,
++    size_t scale,
++    uint16_t color) {
++  while (*text != '\0') {
++    const uint8_t* columns = glyph(*text++);
++    for (size_t column = 0; column < 5; ++column) {
++      for (size_t row = 0; row < 7; ++row) {
++        if ((columns[column] & (1u << row)) != 0) {
++          fill_rect(x + column * scale, y + row * scale, scale, scale, color);
++        }
++      }
++    }
++    x += 6 * scale;
++  }
++}
++
++void draw_centered(size_t y, const char* text, size_t scale, uint16_t color) {
++  const size_t width = std::strlen(text) * 6 * scale - scale;
++  draw_text((kScreenWidth - width) / 2, y, text, scale, color);
++}
++
++uint16_t alpha_blend(uint16_t background, uint16_t foreground, uint8_t alpha) {
++  const uint32_t inverse_alpha = 255 - alpha;
++  const uint32_t red = (((background >> 11) & 0x1f) * inverse_alpha +
++                        ((foreground >> 11) & 0x1f) * alpha + 127) /
++      255;
++  const uint32_t green = (((background >> 5) & 0x3f) * inverse_alpha +
++                          ((foreground >> 5) & 0x3f) * alpha + 127) /
++      255;
++  const uint32_t blue = ((background & 0x1f) * inverse_alpha +
++                         (foreground & 0x1f) * alpha + 127) /
++      255;
++  return static_cast<uint16_t>((red << 11) | (green << 5) | blue);
++}
++
++void draw_logo(
++    size_t x,
++    size_t y,
++    size_t width,
++    size_t height,
++    const uint16_t* logo_pixels,
++    const uint8_t* logo_alpha) {
++  for (size_t row = 0; row < height; ++row) {
++    for (size_t column = 0; column < width; ++column) {
++      const size_t logo_index = row * width + column;
++      uint16_t& screen_pixel = pixels[(y + row) * kScreenWidth + x + column];
++      screen_pixel = alpha_blend(
++          screen_pixel, logo_pixels[logo_index], logo_alpha[logo_index]);
++    }
++  }
++}
++
++uint8_t model_pixel(
++    const int8_t* frame_data,
++    size_t channel,
++    size_t x,
++    size_t y) {
++  const size_t index =
++      channel * image_width * image_height + y * image_width + x;
++  const float normalized =
++      (static_cast<int32_t>(frame_data[index]) - model_input_zero_point) *
++      model_input_scale;
++  const int value = static_cast<int>(
++      normalized * model_pixel_std[channel] + model_pixel_mean[channel] + 0.5f);
++  return static_cast<uint8_t>(std::clamp(value, 0, 255));
++}
++
++uint16_t blend_mask(uint16_t color, const MaskColor& mask_color) {
++  const uint8_t red = static_cast<uint8_t>(((color >> 11) & 0x1f) << 3);
++  const uint8_t green = static_cast<uint8_t>(((color >> 5) & 0x3f) << 2);
++  const uint8_t blue = static_cast<uint8_t>((color & 0x1f) << 3);
++  return rgb565(
++      static_cast<uint8_t>((red * 5 + mask_color.red * 3) / 8),
++      static_cast<uint8_t>((green * 5 + mask_color.green * 3) / 8),
++      static_cast<uint8_t>((blue * 5 + mask_color.blue * 3) / 8));
++}
++
++void draw_image(
++    const int8_t* frame_data,
++    const int8_t* masks,
++    const size_t* mask_offsets,
++    size_t object_count,
++    size_t mask_height,
++    size_t mask_width,
++    size_t row_stride,
++    size_t column_stride) {
++  for (size_t y = 0; y < kImageSize; ++y) {
++    for (size_t x = 0; x < kImageSize; ++x) {
++      uint16_t color = rgb565(8, 14, 22);
++      if (frame_data != nullptr) {
++        const size_t source_x = x * image_width / kImageSize;
++        const size_t source_y = y * image_height / kImageSize;
++        color = rgb565(
++            model_pixel(frame_data, 0, source_x, source_y),
++            model_pixel(frame_data, 1, source_x, source_y),
++            model_pixel(frame_data, 2, source_x, source_y));
++      }
++      pixels[(kImageY + y) * kScreenWidth + kImageX + x] = color;
++    }
++  }
++
++  if (masks != nullptr) {
++    for (size_t object = 0; object < object_count; ++object) {
++      const int8_t* mask = masks + mask_offsets[object];
++      const MaskColor& mask_color =
++          kMaskColors[object % (sizeof(kMaskColors) / sizeof(kMaskColors[0]))];
++      for (size_t y = 0; y < kImageSize; ++y) {
++        const size_t mask_y = y * mask_height / kImageSize;
++        const size_t y_in_cell = y * mask_height % kImageSize;
++        for (size_t x = 0; x < kImageSize; ++x) {
++          const size_t mask_x = x * mask_width / kImageSize;
++          const size_t index = mask_y * row_stride + mask_x * column_stride;
++          const bool foreground =
++              (static_cast<int32_t>(mask[index]) - model_output_zero_point) *
++                  model_output_scale >
++              kMaskThreshold;
++          if (!foreground) {
++            continue;
++          }
++
++          const size_t x_in_cell = x * mask_width % kImageSize;
++          const auto is_foreground = [&](size_t query_x, size_t query_y) {
++            const size_t query_index =
++                query_y * row_stride + query_x * column_stride;
++            return (static_cast<int32_t>(mask[query_index]) -
++                    model_output_zero_point) *
++                model_output_scale >
++                kMaskThreshold;
++          };
++          const bool boundary =
++              (x_in_cell < mask_width &&
++               (mask_x == 0 || !is_foreground(mask_x - 1, mask_y))) ||
++              (x_in_cell >= kImageSize - mask_width &&
++               (mask_x + 1 == mask_width ||
++                !is_foreground(mask_x + 1, mask_y))) ||
++              (y_in_cell < mask_height &&
++               (mask_y == 0 || !is_foreground(mask_x, mask_y - 1))) ||
++              (y_in_cell >= kImageSize - mask_height &&
++               (mask_y + 1 == mask_height ||
++                !is_foreground(mask_x, mask_y + 1)));
++          uint16_t& pixel = pixels[(kImageY + y) * kScreenWidth + kImageX + x];
++          pixel =
++              boundary ? mask_color.boundary : blend_mask(pixel, mask_color);
++        }
++      }
++    }
++  }
++
++  fill_rect(kImageX - 2, kImageY - 2, kImageSize + 4, 2, kCardBorder);
++  fill_rect(kImageX - 2, kImageY + kImageSize, kImageSize + 4, 2, kCardBorder);
++  fill_rect(kImageX - 2, kImageY, 2, kImageSize, kCardBorder);
++  fill_rect(kImageX + kImageSize, kImageY, 2, kImageSize, kCardBorder);
++
++}
++
++void draw_card(
++    size_t x,
++    const char* label,
++    const char* value,
++    uint16_t accent) {
++  fill_rect(x, 606, 216, 116, kCardBorder);
++  fill_rect(x + 2, 608, 212, 112, kCard);
++  fill_rect(x + 2, 608, 5, 112, accent);
++  draw_text(x + 18, 622, label, 1, kMuted);
++  draw_text(x + 18, 658, value, 3, kWhite);
++}
++
++void draw_dashboard(
++    const int8_t* frame_data,
++    const int8_t* masks,
++    const size_t* mask_offsets,
++    size_t object_count,
++    size_t mask_height,
++    size_t mask_width,
++    size_t row_stride,
++    size_t column_stride,
++    uint64_t inference_ms,
++    const size_t* foreground_pixels) {
++  fill_rect(0, 0, kScreenWidth, kScreenHeight, kBackground);
++  fill_rect(0, 0, kScreenWidth, 70, kHeader);
++  fill_rect(0, 68, kScreenWidth, 2, kCyan);
++  fill_rect(10, 10, 48, 48, kWhite);
++  draw_logo(
++      14,
++      14,
++      executorch_logo_width,
++      executorch_logo_height,
++      executorch_logo_pixels,
++      executorch_logo_alpha);
++  draw_logo(
++      350,
++      20,
++      pytorch_logo_width,
++      pytorch_logo_height,
++      pytorch_logo_pixels,
++      pytorch_logo_alpha);
++  draw_centered(12, "MOBILE SAM", 3, kWhite);
++  draw_centered(48, "ALIF E8 / ETHOS-U85", 1, kMuted);
++  draw_image(
++      frame_data,
++      masks,
++      mask_offsets,
++      object_count,
++      mask_height,
++      mask_width,
++      row_stride,
++      column_stride);
++
++  fill_rect(16, 548, 448, 42, kCard);
++  fill_rect(16, 548, 6, 42, masks == nullptr ? kYellow : kGreen);
++  char status_text[32];
++  std::snprintf(
++      status_text,
++      sizeof(status_text),
++      masks == nullptr ? "STARTING LIVE CAMERA" : "%zu OBJECTS SEGMENTED",
++      object_count);
++  draw_text(
++      34,
++      562,
++      status_text,
++      2,
++      masks == nullptr ? kYellow : kGreen);
++
++  char left_value[24];
++  char right_value[24];
++  char footer[64];
++  if (masks == nullptr) {
++    std::snprintf(left_value, sizeof(left_value), "U85-256");
++    std::snprintf(right_value, sizeof(right_value), "RUNNING");
++    std::snprintf(
++        footer, sizeof(footer), "%zu OBJECT PROMPTS READY", point_prompt_count);
++    draw_card(16, "NPU", left_value, kCyan);
++    draw_card(248, "STATE", right_value, kYellow);
++  } else {
++    std::snprintf(
++        left_value, sizeof(left_value), "%" PRIu64 " MS", inference_ms);
++    std::snprintf(right_value, sizeof(right_value), "%zu", object_count);
++    size_t total_foreground = 0;
++    for (size_t object = 0; object < object_count; ++object) {
++      total_foreground += foreground_pixels[object];
++    }
++    std::snprintf(
++        footer,
++        sizeof(footer),
++        "LIVE CAMERA / %zu MASK PIXELS",
++        total_foreground);
++    draw_card(16, "INFERENCE", left_value, kCyan);
++    draw_card(248, "OBJECTS", right_value, kGreen);
++  }
++  draw_centered(754, footer, 1, kMuted);
++  draw_centered(778, "EXECUTORCH ON DEVICE AI", 1, kMuted);
++  sys_cache_data_flush_range(framebuffer.fb_addr, framebuffer.fb_size);
++}
++
++} // namespace
++
++bool initialize_display() {
++  display_device = DEVICE_DT_GET(DT_CHOSEN(zephyr_display));
++  if (!device_is_ready(display_device)) {
++    printk("ERROR display is not ready\n");
++    return false;
++  }
++
++  const struct device* dsi = DEVICE_DT_GET(DT_NODELABEL(mipi_dsi));
++  if (!device_is_ready(dsi)) {
++    printk("ERROR MIPI-DSI host is not ready\n");
++    return false;
++  }
++  if (dsi_dw_set_mode(dsi, DSI_DW_VIDEO_MODE) != 0) {
++    printk("ERROR could not enable MIPI-DSI video mode\n");
++    return false;
++  }
++
++  cdc200_get_framebuffer(display_device, 0, &framebuffer);
++  if (framebuffer.fb_addr == nullptr ||
++      framebuffer.fb_size != kScreenWidth * kScreenHeight * sizeof(uint16_t)) {
++    printk(
++        "ERROR unexpected display framebuffer size: %zu\n",
++        framebuffer.fb_size);
++    return false;
++  }
++  pixels = reinterpret_cast<uint16_t*>(framebuffer.fb_addr);
++  std::fill(pixels, pixels + kScreenWidth * kScreenHeight, kBackground);
++  sys_cache_data_flush_range(framebuffer.fb_addr, framebuffer.fb_size);
++  cdc200_set_enable(display_device, true);
++  display_ready = true;
++  return true;
++}
++
++void display_running() {
++  if (display_ready) {
++    draw_dashboard(nullptr, nullptr, nullptr, 0, 0, 0, 0, 0, 0, nullptr);
++  }
++}
++
++void display_result(
++    const int8_t* frame_data,
++    const int8_t* masks,
++    const size_t* mask_offsets,
++    size_t object_count,
++    size_t mask_height,
++    size_t mask_width,
++    size_t row_stride,
++    size_t column_stride,
++    uint64_t inference_ms,
++    const size_t* foreground_pixels) {
++  if (display_ready) {
++    draw_dashboard(
++        frame_data,
++        masks,
++        mask_offsets,
++        object_count,
++        mask_height,
++        mask_width,
++        row_stride,
++        column_stride,
++        inference_ms,
++        foreground_pixels);
++  }
++}
+diff --git a/zephyr/samples/mobilesam-ethosu/src/display.h b/zephyr/samples/mobilesam-ethosu/src/display.h
+new file mode 100644
+index 0000000000..ddacbc35ff
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/src/display.h
+@@ -0,0 +1,23 @@
++/* Copyright 2026 Arm Limited and/or its affiliates.
++ *
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++#pragma once
++
++#include <cstddef>
++#include <cstdint>
++
++bool initialize_display();
++void display_running();
++void display_result(
++    const int8_t* frame_data,
++    const int8_t* masks,
++    const size_t* mask_offsets,
++    size_t object_count,
++    size_t mask_height,
++    size_t mask_width,
++    size_t row_stride,
++    size_t column_stride,
++    uint64_t inference_ms,
++    const size_t* foreground_pixels);
+diff --git a/zephyr/samples/mobilesam-ethosu/src/main.cpp b/zephyr/samples/mobilesam-ethosu/src/main.cpp
+new file mode 100644
+index 0000000000..86be5897cd
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/src/main.cpp
+@@ -0,0 +1,424 @@
++/* Copyright (c) Meta Platforms, Inc. and affiliates.
++ * All rights reserved.
++ * Copyright 2026 Arm Limited and/or its affiliates.
++ *
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++#include <executorch/examples/arm/common/arm_memory_allocator.h>
++#include <executorch/extension/data_loader/buffer_data_loader.h>
++#include <executorch/runtime/executor/program.h>
++#include <executorch/runtime/platform/runtime.h>
++#include <zephyr/device.h>
++#include <zephyr/drivers/flash.h>
++#include <zephyr/kernel.h>
++#include <zephyr/sys/printk.h>
++
++#include <algorithm>
++#include <array>
++#include <cinttypes>
++#include <cmath>
++#include <cstdint>
++#include <utility>
++
++#include "camera.h"
++#include "display.h"
++#include "model_metadata.h"
++
++using executorch::aten::ScalarType;
++using executorch::aten::Tensor;
++using executorch::extension::BufferDataLoader;
++using executorch::runtime::Error;
++using executorch::runtime::EValue;
++using executorch::runtime::HierarchicalAllocator;
++using executorch::runtime::MemoryManager;
++using executorch::runtime::Method;
++using executorch::runtime::MethodMeta;
++using executorch::runtime::Program;
++using executorch::runtime::Result;
++using executorch::runtime::Span;
++
++alignas(16) static uint8_t method_pool[ET_ARM_METHOD_ALLOCATOR_POOL_SIZE];
++__attribute__((section(".bss.tensor_arena"), aligned(16))) static uint8_t
++    temp_pool[ET_ARM_BAREMETAL_SCRATCH_TEMP_ALLOCATOR_POOL_SIZE];
++
++extern "C" {
++size_t ethosu_fast_scratch_size =
++    ET_ARM_BAREMETAL_FAST_SCRATCH_TEMP_ALLOCATOR_POOL_SIZE;
++__attribute__((section(".bss.ethosu_scratch"), aligned(16))) static uint8_t
++    fast_scratch[ET_ARM_BAREMETAL_FAST_SCRATCH_TEMP_ALLOCATOR_POOL_SIZE];
++uint8_t* ethosu_fast_scratch = fast_scratch;
++}
++
++namespace {
++
++constexpr size_t kMaxPlannedBuffers = 4;
++constexpr size_t kCandidatesPerPoint = 3;
++constexpr size_t kMaxCandidates = 16;
++constexpr size_t kMaxObjects = 4;
++constexpr float kMaskThreshold = ET_SEGMENTATION_MASK_THRESHOLD;
++constexpr float kDuplicateIou = 0.75f;
++
++struct Candidate {
++  size_t offset;
++  size_t foreground;
++  float quality;
++};
++
++struct SelectedMasks {
++  size_t count;
++  size_t offsets[kMaxObjects];
++  size_t foreground[kMaxObjects];
++};
++
++float mask_score(const int8_t* data, size_t index) {
++  return (static_cast<int32_t>(data[index]) - model_output_zero_point) *
++      model_output_scale;
++}
++
++bool is_foreground(
++    const int8_t* data,
++    size_t offset,
++    size_t y,
++    size_t x,
++    size_t row_stride,
++    size_t column_stride) {
++  return mask_score(data, offset + y * row_stride + x * column_stride) >
++      kMaskThreshold;
++}
++
++size_t count_foreground(
++    const int8_t* data,
++    size_t offset,
++    size_t height,
++    size_t width,
++    size_t row_stride,
++    size_t column_stride) {
++  size_t foreground = 0;
++  for (size_t y = 0; y < height; ++y) {
++    for (size_t x = 0; x < width; ++x) {
++      foreground += is_foreground(
++          data, offset, y, x, row_stride, column_stride);
++    }
++  }
++  return foreground;
++}
++
++float mask_iou(
++    const int8_t* data,
++    size_t first_offset,
++    size_t second_offset,
++    size_t height,
++    size_t width,
++    size_t row_stride,
++    size_t column_stride) {
++  size_t intersection = 0;
++  size_t union_count = 0;
++  for (size_t y = 0; y < height; ++y) {
++    for (size_t x = 0; x < width; ++x) {
++      const bool first = is_foreground(
++          data, first_offset, y, x, row_stride, column_stride);
++      const bool second = is_foreground(
++          data, second_offset, y, x, row_stride, column_stride);
++      intersection += first && second;
++      union_count += first || second;
++    }
++  }
++  return union_count == 0
++      ? 1.0f
++      : static_cast<float>(intersection) / static_cast<float>(union_count);
++}
++
++bool select_masks(
++    const Tensor& masks,
++    const Tensor& quality,
++    SelectedMasks& selected) {
++  if (masks.dim() != 4 || masks.size(0) != point_prompt_count ||
++      masks.size(1) != kCandidatesPerPoint ||
++      masks.scalar_type() != ScalarType::Char || quality.dim() != 2 ||
++      quality.size(0) != point_prompt_count ||
++      quality.size(1) != kCandidatesPerPoint ||
++      quality.scalar_type() != ScalarType::Char) {
++    printk("ERROR unexpected multimask output tensors\n");
++    return false;
++  }
++
++  const size_t candidate_count = masks.size(0) * masks.size(1);
++  if (candidate_count > kMaxCandidates) {
++    printk("ERROR too many mask candidates: %zu\n", candidate_count);
++    return false;
++  }
++
++  const int8_t* mask_data = masks.const_data_ptr<int8_t>();
++  const int8_t* quality_data = quality.const_data_ptr<int8_t>();
++  const auto mask_strides = masks.strides();
++  const auto quality_strides = quality.strides();
++  const size_t height = masks.size(2);
++  const size_t width = masks.size(3);
++  const size_t pixel_count = height * width;
++  const size_t minimum_area = std::max<size_t>(1, pixel_count / 200);
++  const size_t maximum_area = pixel_count * 85 / 100;
++
++  std::array<Candidate, kMaxCandidates> candidates{};
++  size_t accepted_count = 0;
++  for (size_t point = 0; point < static_cast<size_t>(masks.size(0)); ++point) {
++    size_t best_candidate = 0;
++    float best_quality = -1.0f;
++    for (size_t candidate = 0;
++         candidate < static_cast<size_t>(masks.size(1));
++         ++candidate) {
++      const size_t quality_index =
++          point * quality_strides[0] + candidate * quality_strides[1];
++      const float quality_score =
++          (static_cast<int32_t>(quality_data[quality_index]) -
++           model_quality_zero_point) *
++          model_quality_scale;
++      if (quality_score > best_quality) {
++        best_candidate = candidate;
++        best_quality = quality_score;
++      }
++    }
++    if (best_quality < minimum_mask_quality) {
++      continue;
++    }
++
++    const size_t offset =
++        point * mask_strides[0] + best_candidate * mask_strides[1];
++    const size_t foreground = count_foreground(
++        mask_data,
++        offset,
++        height,
++        width,
++        mask_strides[2],
++        mask_strides[3]);
++    if (foreground < minimum_area || foreground > maximum_area) {
++      continue;
++    }
++    candidates[accepted_count++] = {offset, foreground, best_quality};
++  }
++
++  std::sort(
++      candidates.begin(),
++      candidates.begin() + accepted_count,
++      [](const Candidate& first, const Candidate& second) {
++        return first.quality > second.quality;
++      });
++
++  selected.count = 0;
++  for (size_t index = 0;
++       index < accepted_count && selected.count < kMaxObjects;
++       ++index) {
++    bool duplicate = false;
++    for (size_t object = 0; object < selected.count; ++object) {
++      if (mask_iou(
++              mask_data,
++              candidates[index].offset,
++              selected.offsets[object],
++              height,
++              width,
++              mask_strides[2],
++              mask_strides[3]) > kDuplicateIou) {
++        duplicate = true;
++        break;
++      }
++    }
++    if (!duplicate) {
++      selected.offsets[selected.count] = candidates[index].offset;
++      selected.foreground[selected.count] = candidates[index].foreground;
++      ++selected.count;
++    }
++  }
++
++  printk(
++      "Mask proposals: %zu accepted, %zu distinct\n",
++      accepted_count,
++      selected.count);
++  return true;
++}
++
++void quantize_camera_frame(int8_t* data) {
++  const size_t plane_size = image_width * image_height;
++  auto* camera_pixels = reinterpret_cast<uint8_t*>(data);
++  for (size_t channel = 0; channel < image_channels; ++channel) {
++    for (size_t pixel = 0; pixel < plane_size; ++pixel) {
++      const size_t index = channel * plane_size + pixel;
++      const float normalized =
++          (static_cast<float>(camera_pixels[index]) -
++           model_pixel_mean[channel]) /
++          model_pixel_std[channel];
++      const int32_t quantized = static_cast<int32_t>(
++                                    std::round(normalized / model_input_scale)) +
++          model_input_zero_point;
++      data[index] = static_cast<int8_t>(std::clamp(quantized, -128, 127));
++    }
++  }
++}
++
++} // namespace
++
++int main() {
++  printk("\nLive MobileSAM / Ethos-U85-256 / Alif E8\n");
++  executorch::runtime::runtime_init();
++  if (initialize_display()) {
++    display_running();
++  }
++
++#if DT_NODE_EXISTS(DT_NODELABEL(ospi_flash))
++  const struct device* ospi_flash = DEVICE_DT_GET(DT_NODELABEL(ospi_flash));
++  if (!device_is_ready(ospi_flash)) {
++    printk("ERROR OSPI flash is not ready\n");
++    return 1;
++  }
++#else
++  printk("ERROR E8 OSPI flash device is unavailable\n");
++  return 1;
++#endif
++
++#if !defined(CONFIG_ALIF_OSPI_FLASH_XIP)
++  printk("ERROR OSPI XIP must be enabled\n");
++  return 1;
++#else
++  const auto* pte = reinterpret_cast<const uint8_t*>(ET_MODEL_PTE_ADDRESS);
++  printk(
++      "PTE address: 0x%08x, size: %u bytes\n",
++      static_cast<unsigned int>(ET_MODEL_PTE_ADDRESS),
++      static_cast<unsigned int>(ET_MODEL_PTE_SIZE));
++  printk("PTE flash verification: passed\n");
++
++  BufferDataLoader loader(pte, ET_MODEL_PTE_SIZE);
++  Result<Program> program_result = Program::load(&loader);
++  if (!program_result.ok()) {
++    printk(
++        "ERROR Program::load: 0x%08" PRIx32 "\n",
++        static_cast<uint32_t>(program_result.error()));
++    return 1;
++  }
++  Program program = std::move(program_result.get());
++  Result<MethodMeta> meta_result = program.method_meta("forward");
++  if (!meta_result.ok()) {
++    printk("ERROR method metadata\n");
++    return 1;
++  }
++  MethodMeta meta = std::move(meta_result.get());
++
++  ArmMemoryAllocator method_allocator(sizeof(method_pool), method_pool);
++  Span<uint8_t> planned_spans[kMaxPlannedBuffers];
++  const size_t planned_count = meta.num_memory_planned_buffers();
++  if (planned_count > kMaxPlannedBuffers) {
++    printk("ERROR too many planned buffers: %zu\n", planned_count);
++    return 1;
++  }
++  for (size_t i = 0; i < planned_count; ++i) {
++    const auto size_result = meta.memory_planned_buffer_size(i);
++    if (!size_result.ok()) {
++      return 1;
++    }
++    const size_t size = size_result.get();
++    auto* buffer = static_cast<uint8_t*>(method_allocator.allocate(size, 16));
++    if (buffer == nullptr) {
++      printk("ERROR planned buffer %zu (%zu bytes)\n", i, size);
++      return 1;
++    }
++    planned_spans[i] = Span<uint8_t>(buffer, size);
++    printk("Planned buffer %zu: %zu bytes\n", i, size);
++  }
++
++  HierarchicalAllocator planned_memory{
++      Span<Span<uint8_t>>(planned_spans, planned_count)};
++  ArmMemoryAllocator temp_allocator(sizeof(temp_pool), temp_pool);
++  MemoryManager memory_manager(
++      &method_allocator, &planned_memory, &temp_allocator);
++  Result<Method> method_result =
++      program.load_method("forward", &memory_manager);
++  if (!method_result.ok()) {
++    printk(
++        "ERROR load_method: 0x%08" PRIx32 "\n",
++        static_cast<uint32_t>(method_result.error()));
++    return 1;
++  }
++  Method method = std::move(method_result.get());
++
++  EValue input;
++  Error status = method.get_inputs(&input, 1);
++  if (status != Error::Ok || !input.isTensor()) {
++    printk("ERROR get input: 0x%08" PRIx32 "\n", (uint32_t)status);
++    return 1;
++  }
++  Tensor input_tensor = input.toTensor();
++  const size_t camera_frame_size = image_channels * image_width * image_height;
++  if (input_tensor.scalar_type() != ScalarType::Char ||
++      input_tensor.nbytes() != camera_frame_size) {
++    printk(
++        "ERROR expected %zu-byte int8 input, got %zu bytes type %d\n",
++        camera_frame_size,
++        input_tensor.nbytes(),
++        static_cast<int>(input_tensor.scalar_type()));
++    return 1;
++  }
++  auto* input_data = input_tensor.mutable_data_ptr<int8_t>();
++  if (!initialize_camera(
++          reinterpret_cast<uint8_t*>(input_data),
++          input_tensor.nbytes(),
++          image_width,
++          image_height)) {
++    while (true) {
++      k_sleep(K_SECONDS(1));
++    }
++  }
++
++  size_t frame_number = 0;
++  while (true) {
++    if (!capture_camera_frame()) {
++      return 1;
++    }
++    ++frame_number;
++    quantize_camera_frame(input_data);
++
++    const uint64_t start_cycles = k_cycle_get_64();
++    status = method.execute();
++    const uint64_t elapsed_cycles = k_cycle_get_64() - start_cycles;
++    if (status != Error::Ok) {
++      printk("ERROR execute: 0x%08" PRIx32 "\n", (uint32_t)status);
++      return 1;
++    }
++    const uint64_t inference_ms = k_cyc_to_ms_floor64(elapsed_cycles);
++
++    EValue outputs[2];
++    status = method.get_outputs(outputs, 2);
++    if (status != Error::Ok || !outputs[0].isTensor() ||
++        !outputs[1].isTensor()) {
++      printk("ERROR get multimask outputs\n");
++      return 1;
++    }
++    Tensor masks = outputs[0].toTensor();
++    Tensor quality = outputs[1].toTensor();
++    SelectedMasks selected{};
++    if (!select_masks(masks, quality, selected)) {
++      return 1;
++    }
++
++    const auto mask_strides = masks.strides();
++    display_result(
++        input_data,
++        masks.const_data_ptr<int8_t>(),
++        selected.offsets,
++        selected.count,
++        masks.size(2),
++        masks.size(3),
++        mask_strides[2],
++        mask_strides[3],
++        inference_ms,
++        selected.foreground);
++    record_live_status(frame_number, inference_ms, selected.count);
++    printk(
++        "Frame %zu: %" PRIu64 " ms, %zu objects\n",
++        frame_number,
++        inference_ms,
++        selected.count);
++
++    if (!release_camera_frame()) {
++      return 1;
++    }
++  }
++#endif
++}
+diff --git a/install_requirements.py b/install_requirements.py
+--- a/install_requirements.py
++++ b/install_requirements.py
+@@ -13,25 +13,11 @@
+ 
+ from install_utils import determine_torch_url, is_intel_mac_os, python_is_compatible
+ 
+-# The pip repository that hosts nightly torch packages.
+-# This will be dynamically set based on CUDA availability and CUDA backend enabled/disabled.
+-TORCH_URL_BASE = "https://download.pytorch.org/whl/test"
+-TORCHAO_URL_BASE = "https://download.pytorch.org/whl/nightly"
+-TORCHAO_NIGHTLY_VERSION = "0.18.0.dev20260729"
+-
+-# Since ExecuTorch often uses main-branch features of pytorch, only the nightly
+-# pip versions will have the required features.
+-#
+-# NOTE: If a newly-fetched version of the executorch repo changes the value of
+-# NIGHTLY_VERSION, you should re-run this script to install the necessary
+-# package versions.
+-#
+-# NOTE: If you're changing, make the corresponding change in .ci/docker/ci_commit_pins/pytorch.txt
+-# by picking the hash from the same date in
+-# https://hud.pytorch.org/hud/pytorch/pytorch/nightly/ @lint-ignore
+-#
+-# NOTE: If you're changing, make the corresponding supported CUDA versions in
+-# SUPPORTED_CUDA_VERSIONS in install_utils.py if needed.
++# Use released packages for the Alif E8 Learning Path. The platform selector
++# appends the CPU or CUDA channel to these stable index roots.
++TORCH_URL_BASE = "https://download.pytorch.org/whl"
++TORCHAO_URL_BASE = "https://download.pytorch.org/whl"
++TORCHAO_RELEASE_VERSION = "0.18.0"
+ 
+ 
+ def install_requirements(use_pytorch_nightly):
+@@ -66,7 +52,7 @@
+         # that we don't need to set any version number there because they have already
+         # been installed on CI before this step, so pip won't reinstall them
+         ("torch==2.13.0" if use_pytorch_nightly else "torch"),
+-        f"torchao=={TORCHAO_NIGHTLY_VERSION}",
++        f"torchao=={TORCHAO_RELEASE_VERSION}",
+     ]
+ 
+     # Install the requirements for core ExecuTorch package.
+diff --git a/backends/arm/requirements-arm-tosa.txt b/backends/arm/requirements-arm-tosa.txt
+--- a/backends/arm/requirements-arm-tosa.txt
++++ b/backends/arm/requirements-arm-tosa.txt
+@@ -6,7 +6,7 @@
+ # These dependencies need to match pyproject.toml
+ 
+ ml_dtypes == 0.5.1
+-flatbuffers == 24.3.25
++flatbuffers == 25.2.10
+ tosa-adapter-model-explorer == 0.1.0
+ ai-edge-model-explorer >= 0.1.16
+ pytest-timeout == 2.4.0
