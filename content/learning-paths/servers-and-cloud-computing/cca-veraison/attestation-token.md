@@ -15,8 +15,8 @@ First, start by removing any existing Go installation. Next, obtain the install 
 ```bash
 sudo rm -rf /usr/local/go
 
-wget https://go.dev/dl/go1.23.3.linux-$(dpkg --print-architecture).tar.gz
-sudo tar -C /usr/local -xzf go1.23.3.linux-$(dpkg --print-architecture).tar.gz
+wget https://go.dev/dl/go1.26.10.linux-$(dpkg --print-architecture).tar.gz
+sudo tar -C /usr/local -xzf go1.26.10.linux-$(dpkg --print-architecture).tar.gz
 ```
 
 Export the installation path and add it to your `$PATH environment` variable:
@@ -50,15 +50,14 @@ sudo apt install jq
 
 ## Download the Example CCA Attestation Token
 
-Using your preferred web browser, navigate to the [token in the TrustedFirmware-M tools repository](https://github.com/TrustedFirmware-M/tf-m-tools/blob/main/iat-verifier/tests/data/cca_example_token.cbor).
+Using `curl` download the example token in your `$HOME` directory.
 
-Use GitHub's download button, located on the right of the upper toolbar, to download the token as a `raw` binary file.
+```bash
+cd $HOME
+curl -sLO https://github.com/TrustedFirmware-M/tf-m-tools/raw/2508bc0da2e6e71ffc44700185743a3b7bf8d439/iat-verifier/tests/data/cca_example_token_legacy.cbor
+```
 
-![download_raw.png](./download_raw.png)
-
-Place this file in the `$HOME` folder, while retaining the file name. 
-
-The rest of this Learning Path uses the notation `$HOME/cca_example_token.cbor` as the file path.
+The rest of this Learning Path uses the notation `$HOME/cca_example_token_legacy.cbor` as the file path.
 
 {{% notice Note %}}
 You will notice that the filename extension on the example token is `.cbor`, which also denotes the format of the data. CBOR is an acronym for Concise Binary Object Representation. You might already be familiar with JSON (the JavaScript Object Notation). JSON provides a standard way of conveying the nested structures of key-value pairs. CBOR is conceptually the same as JSON. The difference is that CBOR is a binary format, rather than a text-based format like JSON. CBOR is designed for compactness and machine-readability, but at the expense of human-readability. You can learn more about [CBOR](https://cbor.io/).
@@ -75,6 +74,7 @@ Clone the source code using git as follows:
 ```bash
 cd $HOME
 git clone https://github.com/veraison/evcli.git
+git -C evcli checkout c825bcd31
 ```
 Change the directory and build the tool:
 
@@ -92,15 +92,15 @@ Now that you have built the `evcli` command-line tool, you can use it to inspect
 Run the following command:
 
 ```bash
-./evcli cca print --token $HOME/cca_example_token.cbor
+./evcli cca print --token $HOME/cca_example_token_legacy.cbor
 ```
 
 The contents of the token are displayed as JSON. Check that the output matches the below. Some of the output has been removed for better readability.
 
 ```output
-{
+}
   "cca-platform-token": {
-    "cca-platform-profile": "tag:arm.com,2023:cca_platform#1.0.0",
+    "cca-platform-profile": "http://arm.com/CCA-SSD/1.0.0",
     "cca-platform-challenge": "tZc8touqn8VVWHhrfsZ/aeQN9bpaqSHNDCf0BYegEeo=",
     "cca-platform-implementation-id": "f0VMRgIBAQAAAAAAAAAAAAMAPgABAAAAUFgAAAAAAAA=",
     "cca-platform-instance-id": "AQcGBQQDAgEADw4NDAsKCQgXFhUUExIREB8eHRwbGhkY",
@@ -125,7 +125,6 @@ The contents of the token are displayed as JSON. Check that the output matches t
     "cca-platform-hash-algo-id": "sha-256"
   },
   "cca-realm-delegated-token": {
-    "cca-realm-profile": "tag:arm.com,2023:realm#1.0.0"
     "cca-realm-challenge": "bobW2XzHE7xt1D285JGmtAMRwCeov4WjnaY+nORMEyqKEZ0pb65qaZnpvz5EcbDOASRdiJQkwx6JeTs7HWsVBA==",
     "cca-realm-personalization-value": "VGhlIHF1aWNrIGJyb3duIGZveCBqdW1wcyBvdmVyIDEzIGxhenkgZG9ncy5UaGUgcXVpY2sgYnJvd24gZm94IA==",
     "cca-realm-initial-measurement": "MRMUq3NiA1DPdYg0rlxl2ejC3H/r5ufZZUu+hk4wDUk=",
