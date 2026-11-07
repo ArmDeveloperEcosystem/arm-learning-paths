@@ -8,13 +8,14 @@ layout: learningpathall
 
 ## Build the arc tool
 
-You are already familiar with the evcli tool, which you can use to process attestation tokens. There is a very similar tool called `arc`, which you can use to process attestation results. The `arc` tool is also part of the Veraison project. 
+You are already familiar with the evcli tool, which you can use to process attestation tokens. There is a very similar tool called `arc`, which you can use to process attestation results. The `arc` tool is also part of the Veraison project.
 
 Clone its repository as follows:
 
 ```bash
 cd $HOME
 git clone https://github.com/veraison/ear.git
+git -C ear checkout 79dc9670
 ```
 
 The arc tool is in a subdirectory of this repo, so change directory as follows:
@@ -41,16 +42,6 @@ This command produces quite a lot of output. However, you will notice that a lar
 
 ```output
 [trustworthiness vectors]
-submod(CCA_REALM):
-Instance Identity [affirming]: recognized and not compromised
-Configuration [none]: no claim being made
-Executables [warning]: unrecognized run-time
-File System [none]: no claim being made
-Hardware [none]: no claim being made
-Runtime Opaque [none]: no claim being made
-Storage Opaque [none]: no claim being made
-Sourced Data [none]: no claim being made
-
 submod(CCA_SSD_PLATFORM):
 Instance Identity [affirming]: recognized and not compromised
 Configuration [affirming]: all recognized and approved
@@ -59,6 +50,16 @@ File System [none]: no claim being made
 Hardware [affirming]: genuine
 Runtime Opaque [affirming]: memory encryption
 Storage Opaque [affirming]: encrypted secrets with HW-backed keys
+Sourced Data [none]: no claim being made
+
+submod(CCA_REALM):
+Instance Identity [affirming]: recognized and not compromised
+Configuration [none]: no claim being made
+Executables [warning]: unrecognized run-time
+File System [none]: no claim being made
+Hardware [none]: no claim being made
+Runtime Opaque [none]: no claim being made
+Storage Opaque [none]: no claim being made
 Sourced Data [none]: no claim being made
 ```
 
