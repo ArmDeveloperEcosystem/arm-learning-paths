@@ -15,7 +15,7 @@ The source is [Video Codec Test rush hour 1080p25.y4m.webm](https://commons.wiki
 
 ### Download and convert the moving video
 
-On your **Mac**, download the original WebM video from Wikimedia Commons. Check its SHA-256 before conversion:
+On your local machine, download the original WebM video from Wikimedia Commons. Check its SHA-256 before conversion:
 
 <!-- VERIFY: Rerun this reader-formatted download command and hash check before publication. The original source and hash passed in the author run. -->
 ```bash

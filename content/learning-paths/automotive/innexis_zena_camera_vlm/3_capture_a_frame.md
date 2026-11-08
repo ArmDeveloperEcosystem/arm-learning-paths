@@ -50,7 +50,7 @@ Capture status: 0
 632e0ade2f7827eb33d9d099a615069a94f8254104f7770694a48b1dace3798a  /root/zena-camera-vlm/frames/file-after-control.jpg
 ```
 
-After transfer to the Mac, the SHA-256 matched and file inspection showed a 640 × 480 JPEG. Visual inspection showed the row of parked vehicles from the selected source video. This validates one complete file-to-virtual-camera-to-guest-JPEG run.
+After transfer to the local machine, the SHA-256 matched and file inspection showed a 640 × 480 JPEG. Visual inspection showed the row of parked vehicles from the selected source video. This validates one complete file-to-virtual-camera-to-guest-JPEG run.
 
 ![JPEG captured from the Zena CSS virtual camera showing parked cars#center](ana_automotive_camera_frame.jpg "A captured virtual camera frame")
 

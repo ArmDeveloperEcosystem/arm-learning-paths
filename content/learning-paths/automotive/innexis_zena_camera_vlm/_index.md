@@ -14,7 +14,7 @@ learning_objectives:
 
 prerequisites:
     - Access to a Zena CSS virtual platform in Siemens Innexis ANA and console or authorized SSH access to its EWAOL Linux guest after startup.
-    - Complete Run Local LLM Inference with llama.cpp on Arm Zena CSS in the same guest, so its llama-cli binary is available.
+    - Complete Run Local LLM Inference with llama.cpp on Arm Zena CSS in the same Linux guest OS, so its llama-cli binary is available.
     - Permission to configure a virtual camera file input, and `ffmpeg` and `ffprobe` on your local computer to prepare video from public source media.
     - Enough guest storage and memory for a vision model; check the actual guest before downloading files.
     - A working guest file-transfer route and basic Linux command-line knowledge.

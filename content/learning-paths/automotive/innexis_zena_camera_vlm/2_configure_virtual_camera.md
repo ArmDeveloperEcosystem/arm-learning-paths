@@ -13,7 +13,11 @@ Create a three-second H.264 MP4 from a public photograph of parked cars. The sou
 
 ### Download the source and create the camera video
 
-On your **Mac**, create a local media directory:
+On your local machine, create a media directory:
+
+{{% notice Note %}}
+This Learning Path was tested with an Apple Silicon Mac as the local machine. Commands, file paths, and interface details may differ on other operating systems.
+{{% /notice %}}
 
 ```bash
 MEDIA_DIR="$HOME/zena-camera-media" ; mkdir -p "$MEDIA_DIR"
@@ -26,7 +30,7 @@ Open the [source photograph on Wikimedia Commons](https://commons.wikimedia.org/
 MEDIA_DIR="$HOME/zena-camera-media" ; SOURCE_IMAGE="$MEDIA_DIR/parked-cars-original.jpg" ; printf 'b37d713f4fb70409e18e678dac73743b9b64ad358e3023ffce06e5d72b897c3  %s\n' "$SOURCE_IMAGE" | shasum -a 256 -c -
 ```
 
-On your **Mac**, crop the photograph and create a three-second camera video. Run the following commands together:
+On your local machine, crop the photograph and create a three-second camera video. Run the following commands together:
 
 <!-- VERIFY: Run these reader-formatted commands verbatim on the Mac. The same conversion settings reproduced the reported MP4 hash from the saved source image. -->
 ```bash
@@ -53,9 +57,11 @@ In ANA Web IDE, open **Explorer** and drag `automotive-parked-cars-640x480.mp4` 
 
 ### Select the ANA camera input
 
-Stop the VP before changing its camera settings. In **Lab Manager → Device Connections → Audio/Video Inputs**, find `vsock-camera-0` under **Camera Inputs**. Select **None**, save, and start the VP. You will choose the uploaded file from the guest after startup, as documented in the Siemens ANA Zena CSS guide. The screenshot shows where to find the input; its controls are unavailable because the VP was running when it was captured.
+Stop the VP before changing its camera settings. In **Lab Manager → Device Connections → Audio/Video Inputs**, find `vsock-camera-0` under **Camera Inputs**. Select **None**, click **Save**, and start the VP. You will choose the uploaded file from the guest after startup, as documented in the Siemens ANA Zena CSS guide.
 
-![ANA Lab Manager Audio/Video Inputs page showing vsock-camera-0 under Camera Inputs#center](ana_camera_inputs_none.png "Locate the virtual camera input in ANA")
+![ANA Lab Manager Audio/Video Inputs page showing vsock-camera-0 with None selected#center](ana_camera_inputs_none.png "Find vsock-camera-0 and select None")
+
+The screenshot shows where to select **None**. It was captured while the VP was running, so the controls are greyed out. Perform this step with the VP stopped.
 
 ### Start the guest bridge and choose the file
 
