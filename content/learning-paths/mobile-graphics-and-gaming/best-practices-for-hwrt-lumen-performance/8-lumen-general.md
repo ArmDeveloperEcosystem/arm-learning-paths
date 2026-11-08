@@ -9,7 +9,7 @@ layout: learningpathall
 We now look at how best to optimize with the Global Illumination settings. To use Lumen in your game scene, you can add a **Post Process Volume** actor (found under Place Actors > Visual Effects). Within the details panel of **Post Process Volume**, there are several options that you can change and amend. During the development of the Lumen content, **“Steel Arms”**, we found a few recommended values for these options that are suitable for Android devices. The following images show all of the option values that were used in **“Steel Arms”** with some additional explanation provided.
 
 ## Global Illumination Settings
-![](images/gl-setting.png "Figure1. These global illumination parameters are used in our Lumen content - Steel Arms.")
+![Unreal Editor Global Illumination settings for Steel Arms with Lumen selected, Final Gather Quality set to 1.0, Max Trace Distance to 20000, and both lighting update speeds to 0.5. These values illustrate the mobile-focused settings discussed below.#center](images/gl-setting.png "Figure1. These global illumination parameters are used in our Lumen content - Steel Arms.")
 
 ### Lumen Scene Detail
 •	Higher values ensure that smaller objects contribute to Lumen lighting but they do increase the GPU cost.
@@ -40,7 +40,7 @@ We now look at how best to optimize with the Global Illumination settings. To us
 •	<font color=#00FF00>**0.5 ~ 1.0**</font> strikes a good balance between performance and quality for mobile games.
  
  ## Lumen Reflection Settings
-![](images/reflection-setting.png "Figure 2. These reflection parameters are used in our Lumen content - Steel Arms.")
+![Unreal Editor Reflections settings for Steel Arms with Lumen selected, Quality set to 0.25, Ray Lighting Mode set to Surface Cache, and Max Reflection Bounces set to 1.#center](images/reflection-setting.png "Figure 2. These reflection parameters are used in our Lumen content - Steel Arms.")
 
 ### Reflection Quality
 •	This controls the reflection tracing quality, essentially the resolution of the reflection.

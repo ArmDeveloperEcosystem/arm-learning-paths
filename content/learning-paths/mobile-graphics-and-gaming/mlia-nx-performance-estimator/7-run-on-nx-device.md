@@ -236,6 +236,47 @@ Your cycle counts will depend on your device and its configuration.
 
 To inspect measured NX performance in Model Explorer and trace costs to Python source, follow [Capture and analyze NX profiling data with MLIA for VS Code](/learning-paths/mobile-graphics-and-gaming/profile-nx-with-mlia-vscode/).
 
+## (Optional) Explore measured performance and TOSA operations
+
+After installing the compatible Model Explorer plugin in [Set up your MLIA environment](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/2-devenv/#optional-prepare-model-explorer-visualizations), rerun the measured analysis with the same VGF and complete capture directory:
+
+```bash
+mlia check nx-demo/baseline.vgf \
+  --target-profile neural-technology \
+  --performance \
+  --profiling-data "nx-demo/captures/$CAPTURE_NAME" \
+  --output-dir runs/baseline-measured-visualized \
+  --model-explorer open
+```
+
+### View measured cycle counts
+
+The command opens Model Explorer with the capture's results already loaded. In the generated MLIA hierarchy, select a cycle metric using the node-data controls. Expand the hierarchy and select an entity to inspect its reported cycle count. Follow the source mapping, where available, to see related operations in **Source Model**.
+
+A source mapping associates operations with measured execution groups. It doesn't necessarily provide an independent cycle measurement for each operation. Several operations can share the same group measurement, so don't sum their displayed cycle counts as separate costs.
+
+These overlays show the capture's measurements. Only entities with reported metrics have values; a missing value doesn't mean zero cycles. The `951,154` cycles in the reference CLI output describe the whole-model result, rather than the selected convolution.
+
+MLIA saves the visualization in `runs/baseline-measured-visualized/mlia-output/model-explorer/bundle/index.html`. Open this self-contained file to revisit or share the results without rerunning the capture or starting a server.
+
+### Inspect a TOSA convolution
+
+In **Source Model**, inspect `nx-demo/baseline.vgf`. The reference graph contains 103 nodes. Expand `graph_segment_0` and select the first `CONV2D` node, between two `RESCALE` nodes. Your graph can differ with compiler or package changes.
+
+This view exposes the TOSA operations in the VGF graph. You can see how the original MobileNet layer is represented after MLIA's LiteRT-to-TOSA conversion and VGF generation. The screenshot shows the operation's attributes.
+
+![Model Explorer shows a TOSA CONV2D operation between two RESCALE nodes in baseline.vgf. The Attributes panel links to the TOSA CONV2D specification and shows the MobileNet source location, connecting the converted operation to its definition and original model.#center](model-explorer-conv2d.png "Inspect a TOSA convolution in the VGF graph")
+
+In **ATTRIBUTES**, **opcode** identifies the TOSA operation as `CONV2D`. Select **TOSA spec: CONV2D** in the **spec** field to open the operator definition. Compare it with the values shown for this node:
+
+| Field | Value in the reference graph | What it tells you |
+| --- | --- | --- |
+| **result type** | `uint32[1, 112, 112, 8]` | The intermediate tensor has a batch size of one, 112 × 112 spatial dimensions, and eight channels. |
+| **arg1 stride** | `int32[2, 2]` | A stride of two reduces the 224 × 224 input to 112 × 112. |
+| **debug info** | `MobilenetV1/MobilenetV1/Conv2d_0/Relu6` | Relates the TOSA operation to its source location in MobileNet. Expand the field to read the full name. |
+
+Select the following `RESCALE` node to inspect how TOSA scales the convolution's intermediate integer result into the output's quantized range. Search for `DEPTHWISE_CONV2D` and follow its specification link to compare the two convolution operators.
+
 
 ## Use the measurements
 
@@ -249,3 +290,5 @@ Check the predictions on real images as well. A faster model isn't useful if it 
 You've run the VGF file on an NX-capable device, checked that Scenario Runner completed, and confirmed that the neural statistics capture contains data. You've also returned the capture to MLIA for measured analysis.
 
 Use this evidence alongside model accuracy tests and end-to-end application profiling before making deployment decisions for your own use cases.
+
+If your deployment uses ExecuTorch, continue with [Analyze ExecuTorch ETRecord and ETDump profiling](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/8-executorch-profiling/) using artifacts from that deployed program.

@@ -129,6 +129,13 @@ original signing certificate requires the corresponding private key. Without tha
 the assertion and claim cannot make the altered content pass these checks under the original
 credential. The protection comes from the signature, not from preventing access to the manifest.
 
+{{% notice Note %}}
+The development private key bundled with C2PA Tool is publicly available. Anyone with that key can
+re-sign a modified image using the same test credential. This exercise demonstrates detection of
+an edit made without re-signing. Protection against an attacker re-signing under the original
+credential depends on keeping a production private key secret and secure.
+{{% /notice %}}
+
 See the [C2PA validation rules](https://spec.c2pa.org/specifications/specifications/2.4/specs/ContentCredentials.html#_validation)
 for these checks.
 

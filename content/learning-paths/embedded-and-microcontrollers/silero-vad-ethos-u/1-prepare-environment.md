@@ -23,7 +23,7 @@ Use the FVP for functional validation. The FVP's Ethos-U model is cycle accurate
 
 ## Check your development machine
 
-Run the following preflight check before downloading the source:
+Use Python 3.12 with development headers and virtual-environment support. The release wheels require glibc 2.28 or later on Linux, or macOS 15 or later on Apple silicon. On Linux, the FVP also requires `libstdc++.so.6` providing `GLIBCXX_3.4.26` or later. Run the following preflight check before downloading the source; CMake is installed in the virtual environment later:
 
 ```bash
 case "$(uname -s)/$(uname -m)" in
@@ -36,7 +36,7 @@ case "$(uname -s)/$(uname -m)" in
     ;;
 esac
 
-for tool in python3 git cmake c++ curl; do
+for tool in python3.12 git c++ curl; do
   command -v "$tool" >/dev/null || {
     echo "Missing required tool: $tool" >&2
     exit 1
@@ -51,34 +51,18 @@ fi
 printf 'int main() { return 0; }\n' | \
   c++ -std=c++17 -x c++ -fsyntax-only -
 
-python3 - <<'PY'
-import re
-import subprocess
-import sys
-
-if not (3, 10) <= sys.version_info[:2] <= (3, 13):
-    raise SystemExit("Python 3.10 through 3.13 is required")
-
-output = subprocess.check_output(["cmake", "--version"], text=True)
-version = tuple(map(int, re.search(r"\d+(?:\.\d+)+", output).group().split(".")[:2]))
-if version < (3, 24):
-    raise SystemExit("CMake 3.24 or later is required")
-
-print(f"Python {sys.version.split()[0]}")
-print(output.splitlines()[0])
-PY
+python3.12 --version
 ```
 
 ## Create an isolated ExecuTorch environment
 
-The Silero VAD Ethos-U example is available in the upstream ExecuTorch repository. Use the tested main-branch commit so that the commands and generated artifacts match the Learning Path.
-
-Clone ExecuTorch and check out the tested revision:
+Use the source revision from the Silero VAD end-to-end example with the released ExecuTorch `1.5.1` Python package:
 
 ```bash
 git clone https://github.com/pytorch/executorch.git
 cd executorch
-git checkout 4fd161058ebe2b9d80d11242a9d21811c0e92dac
+git fetch origin d78bc1b0ba1c33a90d2d93662de118577f37efd4
+git checkout d78bc1b0ba1c33a90d2d93662de118577f37efd4
 git submodule sync --recursive
 git submodule update --init --recursive
 ```
@@ -92,24 +76,60 @@ git rev-parse --short=12 HEAD
 The expected output is:
 
 ```output
-4fd161058ebe
+d78bc1b0ba1c
 ```
 
 Create and activate a Python virtual environment:
 
 ```bash
-python3 -m venv .venv
+python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install --upgrade pip
 ```
 
-Install ExecuTorch and its Python dependencies:
+## Install the Arm backend tools
+
+The Arm setup script installs the Arm GNU Toolchain and, on Linux, the Corstone FVPs. Review the license terms presented by the script before using its EULA acceptance option.
+
+{{% notice macOS %}}
+Before running Arm setup, install [Docker Desktop](/install-guides/docker/docker-desktop/) and start Docker. Install the [FVPs-on-Mac wrappers](https://github.com/Arm-Examples/FVPs-on-Mac) at the revision for FVP `11.31.28`:
 
 ```bash
-CMAKE_ARGS="-DEXECUTORCH_BUILD_MLX=OFF" \
-  env -u DEBUG ./install_executorch.sh \
-  --minimal --optional-dependency ethos_u
+mkdir -p examples/arm/arm-scratch "$HOME/.armlm"
+git clone https://github.com/Arm-Examples/FVPs-on-Mac.git \
+  examples/arm/arm-scratch/FVPs-on-Mac
+git -C examples/arm/arm-scratch/FVPs-on-Mac checkout --detach \
+  cc7a4be5456db085619647811fac29e9795f806e
+bash examples/arm/arm-scratch/FVPs-on-Mac/build.sh
+export PATH="$PWD/examples/arm/arm-scratch/FVPs-on-Mac/bin:$PATH"
+export FVP_MOUNT_DIR="$PWD"
+FVP_Corstone_SSE-320 --version
+```
+{{% /notice %}}
 
+Install released PyTorch and run Arm setup from the ExecuTorch repository root. The setup options select the cross-compiler and FVPs; the next section installs the Python export tools:
+
+```bash
+python -m pip install "torch==2.14.0" --index-url https://download.pytorch.org/whl/cpu
+./examples/arm/setup.sh --i-agree-to-the-contained-eula \
+  --disable-ethos-u-deps --enable-baremetal-toolchain --enable-fvps
+```
+
+## Install ExecuTorch
+
+Install the released ExecuTorch package and its Ethos-U dependencies:
+
+```bash
+python -m pip install "executorch[ethos_u]==1.5.1" "torchao==0.18.0" "cmake<4" pytest
+source examples/arm/arm-scratch/setup_path.sh
+```
+
+The path script adds the downloaded cross-compiler and, on Linux, FVP binaries to the current shell. Check the target tools and Python installation:
+
+```bash
+command -v arm-none-eabi-g++
+command -v FVP_Corstone_SSE-320
+python -m pip check
 python - <<'PY'
 import executorch.codegen.tools.selective_build
 from executorch.backends.arm.ethosu import EthosUPartitioner
@@ -119,94 +139,50 @@ print("ExecuTorch installation verified")
 PY
 ```
 
-The installation script initializes the Git submodules that are needed by the build. The script also installs the matching PyTorch and ExecuTorch packages. The command omits the unrelated MLX backend and optional packages used by other examples.
+The Python checks should report `No broken requirements found.` and `ExecuTorch installation verified`.
 
-## Install the Arm backend tools
-
-The Arm setup script downloads the Arm GNU Toolchain, Ethos-U Vela compiler, and supporting Python packages. On Linux, the script also installs the Corstone FVPs. Review the license terms presented by the script before using its EULA acceptance option.
-
-{{% notice macOS %}}
-Before you run the Arm setup command on macOS, install [Docker Desktop](/install-guides/docker/docker-desktop/) and follow the [AVH FVPs on macOS install guide](/install-guides/fvps-on-macos/). Add the FVPs-on-Mac `bin` directory to `PATH`. Confirm that Docker is running and that `FVP_Corstone_SSE-320` resolves to the wrapper:
+In each new shell, return to the ExecuTorch repository root and restore the environment and tool paths:
 
 ```bash
-docker info >/dev/null
-command -v FVP_Corstone_SSE-320
-```
-{{% /notice %}}
-
-Run the setup script from the ExecuTorch repository root:
-
-```bash
-./examples/arm/setup.sh --i-agree-to-the-contained-eula
+source .venv/bin/activate
 source examples/arm/arm-scratch/setup_path.sh
+if [ "$(uname -s)" = Darwin ]; then
+  export PATH="$PWD/examples/arm/arm-scratch/FVPs-on-Mac/bin:$PATH"
+  export FVP_MOUNT_DIR="$PWD"
+fi
 ```
-
-The second command adds the downloaded cross-compiler and, on Linux, FVP binaries to the current shell environment. If you start a new shell, you'll need to run the command again.
-
-Check that the two target tools are available:
-
-```bash
-command -v arm-none-eabi-g++
-command -v FVP_Corstone_SSE-320
-```
-
-The compiler resolves under `examples/arm/arm-scratch/`. On Linux, the FVP also resolves under this directory. On macOS, the FVP resolves under the FVPs-on-Mac wrapper directory. If the compiler is missing, source `examples/arm/arm-scratch/setup_path.sh` again. If the FVP is missing on macOS, add the wrapper directory to `PATH`.
 
 ## Download the model and sample audio
 
-Create one workspace for the files generated in this Learning Path:
+Create a directory for the model and audio inputs:
 
 ```bash
-mkdir -p silero-vad-work/{assets,export}
+mkdir -p silero-vad
 ```
 
 Download the model and sample audio from the tested Silero VAD revision:
 
 ```bash
 curl --fail --location \
-  --output silero-vad-work/assets/silero_vad.jit \
+  --output silero-vad/silero_vad.jit \
   https://raw.githubusercontent.com/snakers4/silero-vad/dbacf536adadf42210f37ae50fbaf75f6235b3cf/src/silero_vad/data/silero_vad.jit
 
 curl --fail --location \
-  --output silero-vad-work/assets/test.wav \
+  --output silero-vad/test.wav \
   https://raw.githubusercontent.com/snakers4/silero-vad/dbacf536adadf42210f37ae50fbaf75f6235b3cf/tests/data/test.wav
 ```
 
-## Create two audio clips
+## Create the validation clip
 
-The target processes 2.5 seconds of audio. Copy the following snippet once to create a calibration clip and a separate validation clip:
+Use the example's helper to take the first 40,000 samples of `test.wav`. This creates a 2.5-second validation clip that fits the runtime's audio limit and produces 79 frames:
 
 ```bash
-python3 - <<'PY'
-import wave
-from pathlib import Path
-
-source_path = Path("silero-vad-work/assets/test.wav")
-clips = (("calibration.wav", 0.0), ("validation.wav", 2.5))
-
-with wave.open(str(source_path), "rb") as source:
-    parameters = source.getparams()
-    if (
-        parameters.nchannels,
-        parameters.sampwidth,
-        parameters.framerate,
-        parameters.comptype,
-    ) != (1, 2, 16000, "NONE"):
-        raise SystemExit("test.wav must be mono, 16 kHz, 16-bit PCM")
-    if source.getnframes() < 5 * parameters.framerate:
-        raise SystemExit("test.wav does not contain five seconds of audio")
-    for name, start_seconds in clips:
-        source.setpos(int(start_seconds * parameters.framerate))
-        frames = source.readframes(int(2.5 * parameters.framerate))
-        if len(frames) != 40000 * parameters.sampwidth:
-            raise SystemExit(f"Could not create a 2.5-second {name} clip")
-        with wave.open(str(source_path.with_name(name)), "wb") as target:
-            target.setparams(parameters)
-            target.writeframes(frames)
-PY
+python examples/arm/silero_vad_example_ethos_u/model_export/generate_smoke_audio.py \
+  --source-wav silero-vad/test.wav \
+  --output silero-vad/validation.wav
 ```
 
-Use `calibration.wav` to calibrate quantization. The FVP will process the separate `validation.wav` clip.
+Use `test.wav` for calibration and `validation.wav` for the host reference and FVP. These recordings overlap to check deployment consistency. Use representative calibration audio and separate validation recordings when measuring model quality.
 
 ## What you've accomplished and what's next
 

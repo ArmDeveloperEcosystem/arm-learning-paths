@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Perform an environment check
 
-Use an x86-64 Ubuntu 24.04 LTS development host with CPython 3.12. The `mlia-neural-technology` version `0.2.0` wheel is published for CPython 3.12 on x86-64 Linux with glibc version 2.39 or later. Ubuntu 22.04, other Python versions, native macOS, and native Linux on Arm aren't supported by this wheel.
+Use an x86-64 Ubuntu 24.04 LTS development host with CPython 3.12. The `mlia-neural-technology` version `0.3.0` wheel is published for CPython 3.12 on x86-64 Linux with glibc version 2.39 or later. Ubuntu 22.04, other Python versions, native macOS, and native Linux on Arm aren't supported by this wheel.
 
 Check your architecture, Python version, and glibc version:
 
@@ -40,7 +40,7 @@ cd mlia-demo
 python3.12 -m venv mlia-venv
 source mlia-venv/bin/activate
 python -m pip install --upgrade pip
-python -m pip install mlia-neural-technology==0.2.0 mlia-converters-litert==0.1.2
+python -m pip install mlia==0.13.0 mlia-neural-technology==0.3.0 mlia-converters-litert==0.1.3
 python -m pip check
 ```
 
@@ -51,6 +51,8 @@ These are public PyPI packages. The Neural Technology plugin installs the follow
 - Tensor Operator Set Architecture (TOSA) tools
 
 The LiteRT converter plugin lets MLIA analyze `.tflite` files directly. You don't need TensorFlow, a GPU driver, or a separate model-training environment for this example.
+
+Neural Technology `0.3.0` requires MLIA core `0.13.x`. LiteRT converter `0.1.3` supports this core version. Upgrade these packages together when reusing an existing environment.
 
 The expected output is:
 
@@ -75,6 +77,19 @@ The estimator executable is bundled with the public wheel. MLIA offers to instal
 {{% notice Note %}}
 If `pip` reports that no matching distribution exists for `mlia-neural-technology`, check the three host requirements again and upgrade `pip` inside the environment. A virtual environment doesn't change the host architecture or glibc version. Don't substitute an older Python version or Ubuntu 22.04 for this release.
 {{% /notice %}}
+
+## (Optional) Prepare Model Explorer visualizations
+
+The [MLIA Model Explorer plugin](https://pypi.org/project/mlia-model-explorer/) adds graph visualizations with performance overlays. Version `0.2.0` supports MLIA core `0.13.x`. The `vgf` extra includes the adapter for the compiled model you'll inspect later. The plugin generates a standalone HTML page that you can open directly in your browser. You don't need to install Model Explorer separately or run additional services.
+
+Install the plugin in the same environment:
+
+```bash
+python -m pip install "mlia-model-explorer[vgf]==0.2.0"
+python -m pip check
+```
+
+The expected output from `pip check` is `No broken requirements found.` The [ExecuTorch profiling steps](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/8-executorch-profiling/) install an additional extra for ETRecord and PTE adapters.
 
 ## What you've accomplished and what's next
 

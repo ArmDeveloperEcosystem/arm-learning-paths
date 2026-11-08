@@ -1,6 +1,6 @@
 ---
 title: Run a local speech translation pipeline
-description: Build Compute Flow on your Mac and connect three Compute Flow bricks to translate an English recording into French speech.
+description: Build Compute Flow on your device and connect three Compute Flow bricks to translate an English recording into French speech.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -9,9 +9,9 @@ layout: learningpathall
 
 ## Prepare your host device
 
-You'll install three model packages, build Compute Flow for your device, and create an application.
+You'll install three model packages, build Compute Flow for your device, and create an application. 
 
-First, check your CPU architecture:
+First, check the CPU architecture of your device:
 
 ```bash
 uname -m
@@ -25,7 +25,7 @@ If `uv` isn't installed, use the [uv standalone installer](https://docs.astral.s
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-Next, if compiling natively for MacOS and Apple developer tools aren't installed, [install Xcode Command Line Tools](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools/). The package includes Git, Clang, and the macOS SDK. If you already have Xcode or the Command Line Tools installed, use those tools.
+Next, [install Xcode Command Line Tools](https://developer.apple.com/documentation/xcode/installing-the-command-line-tools/) if you're compiling natively for MacOS on Apple® silicon. The package includes Git, Clang, and the macOS SDK. If you already have Xcode or the Command Line Tools installed, use those tools.
 
 Check that the tools are available:
 
@@ -36,9 +36,11 @@ command -v cc
 command -v c++
 ```
 
-If you are targeting an Android device with cross compilation. You will also need to [install the Android Platform Tools](https://developer.android.com/tools/releases/platform-tools) with the `adb` utility. 
+If you're targeting an Android device with cross compilation, [install the Android Platform Tools](https://developer.android.com/tools/releases/platform-tools) with the `adb` utility. 
 
-Finally, remove any previously installed `llama.cpp` versions. For example, if installed with the `brew` package manager, run the following command:
+Finally, remove any previously installed `llama.cpp` versions. 
+
+For example, if `llama.cpp` was previously installed using `brew` package manager, run the following command:
 
 ```bash
 brew uninstall llama.cpp
@@ -143,7 +145,7 @@ compute-flow model info lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation
 compute-flow model info tts:qwen3-tts qwen3-tts-0-6b-custom-voice
 ```
 
-## Build for your Device
+## Build for your device
 
 Build the installed bricks:
 
@@ -159,7 +161,7 @@ compute-flow build native
 compute-flow build android_arm64
 ```
 
-**Please Note:** As of November 2026, the Android NDK does not support cross-compilation from Linux Arm64 hosts. You must instead use a macOS or Linux x86-64 host system.
+Note that as of November 2026, the Android NDK doesn't support cross-compilation from Linux Arm64 hosts. Instead, use a macOS or Linux x86-64 host system.
 
 {{< /tab >}}
 {{< /tabpane-normal >}}
@@ -173,7 +175,7 @@ If successful, the output is similar to:
 ╰───────────────────────────────────────────────────────────────────────────────╯
 ```
 
-The build command downloads inference runtimes optimized for your deployment platform. It packages them with your installed brick implementations into an application SDK available at `build_native/sdk`. 
+The build command downloads inference runtimes that are optimized for your deployment platform. It packages them with your installed brick implementations into an application SDK available at `build_native/sdk`. 
 
 ## Create the application
 
@@ -319,7 +321,7 @@ if __name__ == "__main__":
 {{< /tab >}}
 {{< tab header="Cross-compile for Android Arm64" >}}
 
-Save the following code as `audio_translation_example/audio_translation.cpp`
+Save the following code as `audio_translation_example/audio_translation.cpp`:
 
 ```cpp
 //Translate speech between languages with three Compute Flow bricks.
@@ -546,7 +548,7 @@ int32_t main(int32_t argc, char** argv) {
 }
 ```
 
-Then create a CMakeLists.txt file in the same directory.
+Then, create a `CMakeLists.txt` file in the same directory.
 
 ```cmake
 cmake_minimum_required(VERSION 3.24)
@@ -574,10 +576,13 @@ All three bricks share these deployment methods, documented in [Brick Runtime In
 
 ## Translate a pre-recorded sample
 
-Resolve the package locations through Brick Manager instead of hard-coding cache paths. Then, run your application using the sample supplied with Parakeet:
+Resolve the package locations through Brick Manager instead of hard-coding cache paths. Then, run your application using the sample supplied with Parakeet.
 
 {{< tabpane-normal >}}
 {{< tab header="Native Arm64" >}}
+
+Run the application: 
+
 ```bash
 PARAKEET_PACKAGE="$(compute-flow model path stt:parakeet-tdt parakeet-tdt-0-6b-v3-int8-dynamic)"
 HY_MT2_PACKAGE="$(compute-flow model path lm_text:lm-text-generic hy-mt2-1-8b-2bit-translation)"
@@ -594,7 +599,7 @@ python audio_translation_example/audio_translation.py \
 ```
 {{< /tab >}}
 {{< tab header="Cross-compile for Android Arm64" >}}
-Compile the application.
+Compile the application:
 ```bash
 cmake -S audio_translation_example -B build_audio_translation_android \
   -DCOMPUTE_FLOW_SDK_DIR="$PWD/build_android_arm64/sdk" \
@@ -602,7 +607,7 @@ cmake -S audio_translation_example -B build_audio_translation_android \
   -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-28 -DCMAKE_BUILD_TYPE=Release
 cmake --build build_audio_translation_android --parallel
 ```
-Connect your Android device via `adb` and push the model files to the device.
+Connect your Android device using `adb` and push the model files to the device:
 
 ```bash
 adb shell mkdir -p /data/local/tmp/compute-flow/audio-translation/stt \
@@ -616,12 +621,12 @@ adb push --sync "$(compute-flow model path tts:qwen3-tts qwen3-tts-0-6b-custom-v
   /data/local/tmp/compute-flow/audio-translation/tts/
 ```
 
-Next, push the binary to the device.
+Next, push the binary to the device:
 
 ```bash
 adb push --sync build_audio_translation_android/audio_translation /data/local/tmp/compute-flow/audio-translation/
 ```
-Finally, run the application and retrieve the French translation.
+Finally, run the application and retrieve the French translation:
 
 ```bash
 adb shell 'cd /data/local/tmp/compute-flow/audio-translation &&
@@ -639,8 +644,6 @@ adb pull /data/local/tmp/compute-flow/audio-translation/translated_french.wav au
 {{< /tab >}}
 {{< /tabpane-normal >}}
 
-
-
 The expected output is:
 
 ```output
@@ -648,7 +651,9 @@ Transcription: Ever tried, ever failed. No matter. Try again. Fail again. Fail b
 Translation: Avez-vous déjà essayé, avez-vous déjà échoué. Peu importe. Essayez à nouveau. Échouez encore. Échouez mieux.
 ```
 
-Check that the transcription matches the English recording and that the translation preserves its meaning. An accurate translation in the polite form is as follows:
+Check that the transcription matches the English recording and that the translation preserves its meaning. 
+
+An accurate translation in the polite form is as follows:
 
 ```text
 Avez-vous déjà essayé, avez-vous déjà échoué. Peu importe. Essayez à nouveau. Échouez encore. Échouez mieux.
