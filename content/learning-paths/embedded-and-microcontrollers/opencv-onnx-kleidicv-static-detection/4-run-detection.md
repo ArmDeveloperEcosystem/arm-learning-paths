@@ -1,5 +1,5 @@
 ---
-title: "Compile and run static-image detection"
+title: "Compile and run YOLOX static-image detection"
 description: Run the YOLOX C++ application with baseline and default KleidiCV OpenCV builds and compare the labeled detection results.
 
 weight: 5
