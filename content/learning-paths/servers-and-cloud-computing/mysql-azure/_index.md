@@ -1,17 +1,17 @@
 ---
-title: Deploy MySQL on Microsoft Azure Cobalt 100 processors
+title: Deploy MySQL on Microsoft Azure Cobalt 200 processors
 
 minutes_to_complete: 30
 
 who_is_this_for: This is an introductory topic for developers migrating MySQL applications from x86_64 to Arm.
 
 learning_objectives:
-    - Provision an Azure Arm64 virtual machine (VM) using the console, with Ubuntu Pro 24.04 LTS as the base image.
+    - Provision an Azure Arm64 virtual machine (VM) using the console, with Ubuntu 24.04 LTS as the base image.
     - Deploy MySQL on the Ubuntu VM.
     - Perform MySQL baseline testing and benchmarking on Arm64 VMs.
 
 prerequisites:
-    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100 based instances (Dpsv6)
+    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 200 based instances (Dpsv7)
     - Familiarity with relational databases and the basics of [MySQL](https://dev.mysql.com/doc/refman/8.0/en/introduction.html)
 
 # START generated_summary_faq
@@ -29,16 +29,16 @@ generated_summary_faq:
   faq_generated_at: '2026-10-01T19:36:26Z'
   faq_source_hash: 2a34346f8cd7954362d479429942c9b66c863f4470d3e7cdf49efbc6093c54cd
   summary: >-
-    You'll deploy MySQL on an Arm64 Azure virtual machine powered by Cobalt 100, and establish a performance baseline.
-    First, you'll provision an Ubuntu Pro 24.04 LTS Dpsv6 VM in the Azure portal, then install, secure,
+    You'll deploy MySQL on an Arm64 Azure virtual machine powered by Cobalt 200, and establish a performance baseline.
+    First, you'll provision an Ubuntu 24.04 LTS Dpsv7 VM in the Azure portal, then install, secure,
     and validate MySQL. After creating sample data, you'll use `mysqlslap` to run read and write
     benchmarks. You'll interpret the reported timings and capture results that you can use in later
     comparisons.
   faqs:
   - question: Which Azure VM size and image should I select?
     answer: >-
-      Use a general-purpose Dpsv6 series instance based on Azure Cobalt 100, and choose Ubuntu
-      Pro 24.04 LTS as the base image.
+      Use a general-purpose Dpsv7 series instance based on Azure Cobalt 200, and choose Ubuntu
+      24.04 LTS as the base image.
   - question: What do I use to connect to the VM after deployment?
     answer: >-
       Use the private SSH key that you downloaded when you created the VM, along with the administrator
@@ -49,8 +49,8 @@ generated_summary_faq:
       the functional validation to confirm queries run and users can authenticate.
   - question: What does mysql_secure_installation help me configure?
     answer: >-
-      The interactive script helps you set a strong root password and remove anonymous users. It also helps disable
-      remote root access, remove test databases, and reload the privilege tables.
+      Use the interactive script to review password validation and remove anonymous users. You can also disable
+      remote root access, remove test databases, and reload the privilege tables. On Ubuntu, retain socket authentication for root and administer MySQL with `sudo mysql`.
   - question: What should I do before running mysqlslap, and what output should I expect?
     answer: >-
       Connect to MySQL and create the sample database and table before benchmarking. `mysqlslap`
@@ -75,7 +75,6 @@ armips:
 tools_software_languages:
     - MySQL
     - SQL
-    - Docker
 
 operatingsystems:
     - Linux
