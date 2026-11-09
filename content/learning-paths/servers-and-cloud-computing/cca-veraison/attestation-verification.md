@@ -31,17 +31,20 @@ This is a simple call to query the well-known characteristics of the verificatio
     "y": "IBOL-C3BttVivg-lSreASjpkttcsz-1rb7btKLv8EX4"
   },
   "media-types": [
-    "application/vnd.parallaxsecond.key-attestation.tpm",
-    "application/eat-cwt; profile=\http://arm.com/psa/2.0.0\",
-    "application/eat+cwt; eat_profile=\"tag:psacertified.org,2023:psa#tfm\"",
-    "application/eat-collection; profile=\http://arm.com/CCA-SSD/1.0.0\",
-    "application/eat+cwt; eat_profile=\"tag:psacertified.org,2019:psa#legacy\"",
-    "application/vnd.enacttrust.tpm-evidence",
     "application/vnd.parallaxsecond.key-attestation.cca",
+    "application/vnd.parallaxsecond.key-attestation.tpm",
+    "application/pem-certificate-chain",
+    "application/vnd.veraison.tsm-report+cbor",
+    "application/vnd.veraison.tsm-report+json",
+    "application/eat+cwt; eat_profile=\"tag:github.com,2025:veraison/ratsd/cmw\"",
+    "application/eat-collection; profile=\"http://arm.com/CCA-SSD/1.0.0\"",
     "application/psa-attestation-token",
-    "application/pem-certificate-chain"
+    "application/eat-cwt; profile=\"http://arm.com/psa/2.0.0\"",
+    "application/eat+cwt; eat_profile=\"tag:psacertified.org,2023:psa#tfm\"",
+    "application/eat+cwt; eat_profile=\"tag:psacertified.org,2019:psa#legacy\"",
+    "application/vnd.enacttrust.tpm-evidence"
   ],
-  "version": "commit-2063e7e",
+  "version": "0.0.2606+f997c52",
   "service-state": "READY",
   "api-endpoints": {
     "newChallengeResponseSession": "/challenge-response/v1/newSession"
@@ -81,7 +84,7 @@ export API_SERVER=https://veraison.test.linaro.org:8443/challenge-response/v1/ne
 Now submit the token using the following command. The output of this command is an attestation result, which will be saved in a file called `attestation_result.jwt`:
 
 ```bash
-./evcli cca verify-as relying-party --token $HOME/cca_example_token.cbor | tr -d \" > $HOME/attestation_result.jwt
+./evcli cca verify-as relying-party --token $HOME/cca_example_token_legacy.cbor | tr -d \" > $HOME/attestation_result.jwt
 ```
 
 {{% notice Note%}}
