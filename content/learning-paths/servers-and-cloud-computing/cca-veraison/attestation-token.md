@@ -35,6 +35,7 @@ go version
 Verify that `git` is installed by using the command below. It should produce an output that lists the version available on your computer:
 
 ```bash
+sudo apt install -y git
 git --version
 ```
 
@@ -45,7 +46,15 @@ The jq utility is a popular command-line tool that you can use to parse and mani
 To install it, you can use your local package manager, for instance:
 
 ```bash
-sudo apt install jq
+sudo apt install -y jq
+```
+
+## Install curl
+
+Install curl as it will be needed in the next step:
+
+```bash
+sudo apt install -y curl
 ```
 
 ## Download the Example CCA Attestation Token
