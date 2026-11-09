@@ -6,11 +6,11 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Cobalt 100 Arm-based processor
+## Cobalt 200 Arm-based processor
 
-Azure Cobalt 100 is Microsoft’s first-generation Arm-based processor, designed for cloud-native, scale-out Linux workloads. Based on Arm’s Neoverse-N2 architecture, it is a 64-bit CPU that delivers improved performance and energy efficiency. Running at 3.4 GHz, it provides a dedicated physical core for each vCPU, ensuring consistent and predictable performance. Typical workloads include web and application servers, data analytics, open-source databases, and caching systems.
+Azure Cobalt 200 is Microsoft’s second-generation Arm-based processor, built on Arm Neoverse Compute Subsystems V3 (CSS V3). It supports cloud-native Linux workloads, including relational databases such as MySQL. In this Learning Path, you use a general-purpose Dpsv7 virtual machine powered by Cobalt 200.
 
-To learn more, see the Microsoft blog [Announcing the preview of new Azure virtual machines based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
+To learn more, see Microsoft’s [introduction to Azure Cobalt 200 virtual machines](https://azure.microsoft.com/en-us/blog/new-azure-cobalt-200-vms-deliver-50-performance-improvement-fully-optimized-for-modern-agentic-ai-workloads/).
 
 ## MySQL
 
