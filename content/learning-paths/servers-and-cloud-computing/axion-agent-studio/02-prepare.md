@@ -62,6 +62,8 @@ docker buildx version
 
 The Python output must report 3.12 and the Node.js output must report 22. Docker must be running with a Buildx builder capable of producing `linux/arm64` images. The model download and staging step retain two copies of the approximately 4.6 GB GGUF file; allow additional space for Docker images and its build cache.
 
+Python must also have a working trusted certificate store for the source and model downloads. If it reports `CERTIFICATE_VERIFY_FAILED`, repair the installation's CA configuration before continuing. On macOS, when `/etc/ssl/cert.pem` is your approved system CA bundle, `export SSL_CERT_FILE=/etc/ssl/cert.pem` selects it for this terminal. Keep certificate verification enabled; see [Python's certificate lookup configuration](https://docs.python.org/3.12/library/ssl.html#ssl.get_default_verify_paths).
+
 ## Arrange access before building
 
 An administrator must allow creation and deletion of a dedicated Namespace, which is a cluster-scoped resource. Your deployment identity needs permission to read the cluster and create, patch, update, and delete the tutorial's namespaced resources: Sandbox objects, Deployments, Services, ServiceAccounts, Roles, RoleBindings, NetworkPolicies, and a ResourceQuota.
