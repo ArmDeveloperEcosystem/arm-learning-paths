@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for Android and machine learning develope
 learning_objectives:
     - Prepare the Android command-line tools and connect an Arm-based Android phone.
     - Run Whisper Base with LiteRT, then compare it with Whisper Tiny running with ExecuTorch.
-    - Understand how the importer installs model packages, the recorder captures audio, and the two supplied adapters run LiteRT or ExecuTorch and decode a transcript.
+    - Understand how the importer installs model packages, the recorder captures audio, and the three supplied adapters run LiteRT or ExecuTorch and decode a transcript.
     - Register another compatible model or generate and validate a separate adapter.
 
 prerequisites:
@@ -56,13 +56,14 @@ generated_summary_faq:
       authorized, uses the `arm64-v8a` ABI, and runs Android 9 (API 28) or later.
   - question: Which adapter should I use for my Whisper package?
     answer: >-
-      Select Whisper Base for the first workflow and Whisper Tiny for the guided comparison. The
-      application registry chooses the LiteRT adapter for Base and the ExecuTorch adapter for Tiny.
-      It also registers LiteRT profiles for Medium and Large V3 and the ExecuTorch adapter for Small.
+      Select **Whisper Base · LiteRT** for the first workflow and **Whisper Tiny · ExecuTorch** for
+      the comparison. You can also run Base with ExecuTorch through `ExecuTorchSplitWhisperAdapter`,
+      which uses encoder, prefill, and decode programs. The registry also includes Small with
+      ExecuTorch and Medium and Large V3 with LiteRT.
   - question: What result should I expect after running inference?
     answer: >-
-      The app records audio and produces an English transcript in a journal entry. Inference runs
-      locally on the Android CPU, and the app doesn't upload the recording to a server.
+      You record audio and receive an English transcript in a journal entry. Inference runs
+      locally on the Android CPU, and your recording stays on the device.
   - question: How do I extend the app for a speech model that's not in the registered list?
     answer: >-
       Compare the model's task, runtime, package files, callable methods or signatures, tensors,

@@ -130,7 +130,7 @@ adb push "$MODEL_PACKAGE" /sdcard/Download/
   {{< /tab >}}
 {{< /tabpane >}}
 
-The downloader selects `pte_optimized/whisper_tiny_vivo_executorch_optimized.pte` and packages it with the audio preprocessor and matching `tokenizer.json` as `whisper-tiny-int8-xnnpack-executorch.zip`.
+The downloader selects `whisper_tiny_vivo_executorch_optimized.pte` and packages it with the audio preprocessor and matching `tokenizer.json` as `whisper-tiny-int8-xnnpack-executorch.zip`.
 
 Start or return to Whisper Journal:
 
@@ -161,8 +161,9 @@ Whisper Journal recognizes the following packages:
 
 | Model | Runtime | Hugging Face repository ID | Import this package |
 | --- | --- | --- | --- |
-| [Whisper Base INT8](https://huggingface.co/Arm/whisper-base-int8-litert) | LiteRT | `Arm/whisper-base-int8-litert` | `whisper-base-int8-litert.zip` |
+| [Whisper Base INT8 (LiteRT)](https://huggingface.co/Arm/whisper-base-int8-litert) | LiteRT | `Arm/whisper-base-int8-litert` | `whisper-base-int8-litert.zip` |
 | [Whisper Tiny INT8](https://huggingface.co/Arm/whisper-tiny-int8-xnnpack-executorch) | ExecuTorch | `Arm/whisper-tiny-int8-xnnpack-executorch` | `whisper-tiny-int8-xnnpack-executorch.zip` |
+| [Whisper Base INT8 (ExecuTorch)](https://huggingface.co/Arm/whisper-base-int8-xnnpack-executorch-vivo-x300) | ExecuTorch | `Arm/whisper-base-int8-xnnpack-executorch-vivo-x300` | `whisper-base-int8-xnnpack-executorch-vivo-x300.zip` |
 | [Whisper Small INT8](https://huggingface.co/Arm/whisper-small-int8-xnnpack-executorch) | ExecuTorch | `Arm/whisper-small-int8-xnnpack-executorch` | `whisper-small-int8-xnnpack-executorch.zip` |
 | [Whisper Medium INT8](https://huggingface.co/Arm/whisper-medium-int8-litert) | LiteRT | `Arm/whisper-medium-int8-litert` | `whisper-medium-int8-litert.zip` |
 | [Whisper Large V3 INT8](https://huggingface.co/Arm/whisper-large-v3-int8-litert) | LiteRT | `Arm/whisper-large-v3-int8-litert` | `whisper-large-v3-int8-litert.zip` |

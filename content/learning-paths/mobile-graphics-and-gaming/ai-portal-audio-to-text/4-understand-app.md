@@ -13,9 +13,10 @@ layout: learningpathall
 
 `MainActivity.java` moves model loading and inference onto a single background thread so the Android user interface remains responsive.
 
-Whisper Journal supplies two adapters:
+Whisper Journal supplies three adapters:
 
-- `ExecuTorchWhisperAdapter.java` runs the optimized Whisper Tiny and Small packages.
+- `ExecuTorchWhisperAdapter.java` runs the optimized Executorch Whisper Tiny and Small packages.
+- `ExecuTorchSplitWhisperAdapter.java` runs an Executorch Whisper Base model split across three `.pte` files: encoder, prefill, and decode.
 - `LiteRtWhisperAdapter.java` has profiles for the Whisper Base, Medium, and Large V3 LiteRT packages.
 
 `AdapterRegistry.java` selects the adapter registered for the current model. `MainActivity.java` supplies the recorded 16 kHz waveform and displays the returned `TranscriptionResult`.
@@ -31,6 +32,7 @@ Whisper Journal supplies two adapters:
 - Suggested package filename
 - Mel-bin count
 - Vocabulary size
+- Configuration ID for the adapter profile
 
 The importer doesn't require the outer ZIP to use that filename.
 
@@ -38,7 +40,8 @@ The importer doesn't require the outer ZIP to use that filename.
 
 | Adapter | Required files after import | Runtime contract |
 | --- | --- | --- |
-| ExecuTorch | `model.pte`, `whisper_preprocessor.pte`, `tokenizer.json` | Main program exposes `encoder` and `text_decoder` |
+| ExecuTorch Tiny and Small | `model.pte`, `whisper_preprocessor.pte`, `tokenizer.json` | Main program exposes `encoder` and `text_decoder` |
+| ExecuTorch Base | `encoder.pte`, `decoder_prefill.pte`, `decoder_decode.pte`, `whisper_preprocessor.pte`, `tokenizer.json` | Each program exposes `forward`; decoder caches match the split adapter's expected layout |
 | LiteRT | `model.tflite`, `tokenizer.json` | Model exposes `encode` and `decode` signatures matching a registered decoder profile |
 
 An ExecuTorch package on the AI Portal can contain baseline and optimized directories. The importer prefers files in an optimized directory, then stores the selected model, preprocessor, and tokenizer under fixed names. For LiteRT, the importer prefers a `.tflite` filename containing `int8`, ignores filenames containing `fp32` or `float`, and otherwise accepts a remaining `.tflite` candidate. 
@@ -55,7 +58,7 @@ Models remain outside the Android application package (APK). This keeps builds s
 
 The application caps recordings at 30 seconds to match the registered Whisper input contracts: 3,000 feature frames at a 10 millisecond hop. LiteRT preprocessing pads or trims audio to that window. The ExecuTorch path delegates feature padding and trimming to `whisper_preprocessor.pte`. Whisper Journal rejects recordings shorter than half a second and recordings that are nearly silent before starting model inference.
 
-### How the ExecuTorch adapter works
+### How the Tiny and Small ExecuTorch adapter works
 
 `ExecuTorchWhisperAdapter.java` memory-maps the main model with four CPU threads and the preprocessor with two. It checks that the main program contains `encoder` and `text_decoder`, then reads the backend reported by the encoder metadata.
 
@@ -67,6 +70,20 @@ The adapter runs the ExecuTorch package in four stages:
 4. Decode the generated token IDs using `tokenizer.json`.
 
 The decoder applies the English transcription prefix and suppresses tokens that shouldn't be generated. It selects the highest-scoring token and stops at the end token, repetition guard, or generation limit.
+
+### How the split ExecuTorch adapter works
+
+`ExecuTorchSplitWhisperAdapter.java` runs the encoder, prefill, and decode programs from one Whisper Base model. A separate `whisper_preprocessor.pte` program prepares the audio features. Each program exposes a `forward` method.
+
+The adapter runs the package in five stages:
+
+1. Pass the waveform to the preprocessor to create log-Mel features.
+2. Run the encoder once to create the encoder hidden state.
+3. Run prefill once with the English transcription prompt and encoder output. This initializes the attention caches and produces scores for the first generated token.
+4. Run decode one token at a time, passing the attention caches between calls.
+5. Convert the generated token IDs into text using `tokenizer.json`.
+
+The adapter maps the prefill caches into the order expected by decode. It selects the highest-scoring allowed token and stops at the end token, repetition guard, or generation limit. All four modules use the same four-thread setting because ExecuTorch shares a worker thread pool.
 
 ### How the LiteRT adapter works
 
@@ -101,6 +118,6 @@ XNNPACK is the CPU backend that's used by the LiteRT adapter and the supplied Ex
 
 ## What you've learned and what's next
 
-You've learned how the sample application works and can now trace both supplied adapters from ZIP import to an English transcript. The ExecuTorch adapter runs separate preprocessing, encoder, and decoder programs. The LiteRT adapter prepares features in Java and runs the `encode` and `decode` signatures from one model file. Both connect to the same journal interface through `SpeechToTextAdapter.java`.
+You can now trace all three adapters from ZIP import to an English transcript. Tiny and Small use encoder and decoder methods in one main ExecuTorch program. Base with ExecuTorch uses three model programs. Both ExecuTorch adapters use a separate preprocessor. LiteRT prepares features in Java and runs two signatures from one model file. All three connect to the journal interface through `SpeechToTextAdapter.java`.
 
 Next, you'll learn how to use models that aren't currently supported by the application.

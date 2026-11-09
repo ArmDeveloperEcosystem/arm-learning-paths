@@ -16,7 +16,7 @@ You can try one of two hands-on routes to use a model that Whisper Journal doesn
 - Register the model directly when it matches a supplied adapter
 - Use the coding-agent workflow to generate another adapter
 
-Record the following information for the model and compare it with the two supplied adapters before changing code:
+Record the following information for the model and compare it with the three supplied adapters before changing code:
 
 - Runtime and package files
 - Callable methods
@@ -255,7 +255,7 @@ Give your coding agent the following files from the project:
 - `SpeechToTextAdapter.java`, `WhisperModelDescriptor.java`, `TranscriptionResult.java`, and `ProgressListener.java`
 - `AudioRecorder.java`, `ModelPackageImporter.java`, and `download_model.py`
 - `AdapterRegistry.java`, `GeneratedAdapterRegistry.java`, and `app/generated-runtime-dependencies.gradle.kts`
-- `ExecuTorchWhisperAdapter.java` and `LiteRtWhisperAdapter.java` as examples
+- `ExecuTorchWhisperAdapter.java`, `ExecuTorchSplitWhisperAdapter.java`, and `LiteRtWhisperAdapter.java` as examples
 - `WhisperFeatureExtractor.java` and both `WhisperTokenizer.java` implementations
 
 The prompt tells the coding agent to preserve the supplied contracts when they fit. The agent can add a documented LiteRT profile or create a runtime-specific adapter. It can register the adapter and model in `GeneratedAdapterRegistry.java`, update package handling, and add a required runtime dependency to `app/generated-runtime-dependencies.gradle.kts`.
