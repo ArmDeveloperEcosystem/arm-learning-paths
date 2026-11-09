@@ -137,3 +137,5 @@ cargo uninstall c2patool
 ## Next steps
 
 You can now use the C2PA Tool to work with Content Credentials on Arm. 
+
+To learn how to create and verify Content Credentials with C2PA on Arm, see [Create and verify C2PA Content Credentials on Arm](/learning-paths/embedded-and-microcontrollers/c2pa-on-arm/).

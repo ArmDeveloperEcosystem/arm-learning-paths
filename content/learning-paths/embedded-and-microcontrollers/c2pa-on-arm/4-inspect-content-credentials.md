@@ -151,7 +151,7 @@ fetching through the Online Certificate Status Protocol (OCSP) was skipped.
 The `Valid` result doesn't establish that an online revocation check succeeded. Read the result alongside the individual
 status codes.
 
-## Locate the C2PA structures inside the JPEG
+## Locate the C2PA structures inside the JPEG with ExifTool
 
 The JSON report is a readable interpretation of the embedded data, not its storage format. In this
 JPEG, the C2PA manifest store is carried in application metadata segments called APP11 segments.
@@ -182,7 +182,7 @@ Look for the following labels:
 | `c2pa.claim.v2` | The claim that references the assertions and signature |
 | `c2pa.signature` | The claim-signature container |
 
-## Trace the stored assertions, hard binding, and claim
+## Trace claim connection to assertions and the hard binding
 
 ExifTool verbose listing lets you trace how the following components connect within the nested JUMBF boxes of the image:
 
@@ -190,7 +190,9 @@ ExifTool verbose listing lets you trace how the following components connect wit
 - Hard-binding parameters
 - Claim references  
 
-This view exposes the stored metadata behind the fields in the C2PA Tool report. You can save the metadata to `metadata.txt` and explore it in a text editor:
+This view exposes the stored metadata behind the fields in the C2PA Tool report. 
+
+You can save the metadata to `metadata.txt` and explore it in a text editor:
 
 ```console
 exiftool -v2 image-signed.jpg > metadata.txt
@@ -214,9 +216,8 @@ C2PA signature or content binding. The image remains unchanged.
 
 ## What you've accomplished and what's next
 
-You've inspected the recorded provenance, distinguished signature and content-binding results from
-signer trust, and traced the report's fields to the structures inside the JPEG. The development
-credential remains untrusted; reading these records does not establish that their assertions are true.
+You've inspected the recorded provenance, as well as distinguished signature and content-binding results from
+signer trust. You've also traced report fields to the structures inside the JPEG. 
 
 Keep `image-signed.jpg` unchanged, along with `report.json` and `metadata.txt`. 
 

@@ -60,7 +60,7 @@ On Windows, enable **File name extensions** in File Explorer. Confirm that the f
 The manifest definition identifies the signing workflow and records the declared origin of the image:
 
 - `claim_generator_info` names your signing workflow `Arm Learning Path C2PA Example`, version
-  `1.0.0`. This version identifies the tutorial workflow. It's separate from the installed C2PA Tool
+  `1.0.0`. This version identifies the Learning Path workflow. It's separate from the installed C2PA Tool
   version.
 
 - `com.arm.learning_path.tool` records the name and version of the tool. Set `version` to the value
@@ -71,13 +71,14 @@ The manifest definition identifies the signing workflow and records the declared
   `c2pa.created` action, with `digitalSourceType` declaring digital capture as the origin of the image.
 
   You'll supply this declaration to complete the Learning Path. C2PA Tool doesn't verify how the image was created.
+  
   Signing makes changes to the declaration detectable. Signing doesn't establish that it's true.
 
   An action can also include `softwareAgent` to identify the software or hardware that performed it.
   You omit that field because the original capture agent of the sample is unknown. C2PA Tool generates the
   claim but doesn't capture the image.
 
-C2PA Tool generates the claim, content-binding data, and signature when it builds the signed manifest. You don't write those cryptographic structures by hand.
+C2PA Tool generates the claim, content-binding data, and signature when it builds the signed manifest. You don't write those cryptographic structures manually.
 
 C2PA Tool also offers a command-line shortcut: with an empty `assertions` array, `--create digitalCapture`
 adds the creation action. If you omit `claim_generator_info`, the tool supplies its own name and

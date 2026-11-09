@@ -45,7 +45,7 @@ it already exists.
 
 Preserve the manifest with `-copy all`. Otherwise, you'll be testing
 missing metadata instead of a change to the image. Removing the manifest can't turn a failed
-binding check into trusted provenance. For more information, see
+binding check into trusted provenance, as described in
 [Why stripping provenance doesn't establish trust](/learning-paths/embedded-and-microcontrollers/c2pa-on-arm/1-understand-the-c2pa/#why-stripping-provenance-doesnt-establish-trust).
 {{% /notice %}}
 
@@ -107,7 +107,7 @@ Compare `report-modified.json` with `report.json` and the web result for the ori
 | Check | Original signed image | Modified copy |
 | --- | --- | --- |
 | Image appearance | Color | Grayscale |
-| Embedded manifest | Present | Present; unchanged |
+| Embedded manifest | Present | Present |
 | Claim signature | `claimSignature.validated` | `claimSignature.validated` |
 | Asset binding | `assertion.dataHash.match` | `assertion.dataHash.mismatch` |
 | Development credential | `signingCredential.untrusted` | `signingCredential.untrusted` |

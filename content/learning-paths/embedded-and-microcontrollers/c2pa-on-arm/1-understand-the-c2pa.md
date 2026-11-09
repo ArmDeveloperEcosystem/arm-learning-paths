@@ -15,7 +15,7 @@ captured media by appearance alone.
 
 This ambiguity creates opportunities for misinformation, impersonation, and fraud. It also affects
 legitimate content. When origin and edit history are missing, you can't reliably trace where a file
-came from. You can't identify what tools changed a file, or whether it's being presented in its original context.
+came from. You can't identify what tools changed a file, or whether the file is being presented in its original context.
 
 The problem isn't the existence of synthetic media. The problem is the loss of reliable context as
 media moves between people, tools, and services. Media needs provenance information that remains
@@ -30,8 +30,9 @@ AI-generated or manipulated.
 
 Separate disclosure rules apply to people and organizations that deploy AI systems. Deepfakes need to
 be clearly disclosed to the people who encounter them. Certain AI-generated or manipulated text
-published to inform the public on matters of public interest also needs to be disclosed. The Act includes
-scope conditions and exceptions, so machine-readable provenance is one part of meeting these
+published to inform the public on matters of public interest also needs to be disclosed. 
+
+The Act includes scope conditions and exceptions, so machine-readable provenance is one part of meeting these
 transparency obligations. It's not a complete legal solution.
 
 ## How C2PA Content Credentials help
@@ -62,11 +63,20 @@ For images, signatories following the Code generally combine that layer with imp
 watermarking. They also integrate a detection solution that meets effectiveness, reliability, robustness, and
 interoperability requirements. 
 
-In this Learning Path, you'll work with only C2PA metadata, which doesn't establish compliance on its own.
+In this Learning Path, you'll work with only C2PA metadata associated with a sample JPEG image. The metadata doesn't establish compliance on its own.
 
 ## Understand the C2PA workflow
 
-The following figure shows how a C2PA workflow connects a digital asset to a signed provenance record. A claim generator records
+The following figure shows how a C2PA workflow connects a digital asset to a signed provenance record:
+
+<a id="figure-1"></a>
+
+![A C2PA manifest contains assertions, including a hash-based binding to the digital asset, a claim, and its signature. Consumers independently validate the manifest of the distributed digital asset.#center](images/c2pa-manifest-workflow.svg "C2PA manifest structure and workflow")
+
+The figure summarizes the model defined by the
+[C2PA technical specification](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html).
+
+A claim generator records
 statements about the digital asset as [assertions](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_assertions). These assertions can describe how the digital asset was created, and
 the actions applied to it. They also describe the information that was used to bind the manifest to the digital asset.
 
@@ -81,7 +91,7 @@ to the recorded binding detectable.
 
 The digital asset and manifest are distributed together, either in one file or separately. 
 
-The consumer of the digital asset uses a validator to check the following details:
+The consumer of the digital asset uses a validator to check the following:
 
 - The integrity of the manifest
 - The binding of the manifest to the digital asset
@@ -89,23 +99,16 @@ The consumer of the digital asset uses a validator to check the following detail
 
 The validator checks the structure and signature of the manifest. It evaluates the signing credential against its trust policy.
 
-<a id="figure-1"></a>
-
-![A C2PA manifest contains assertions, including a hash-based binding to the digital asset, a claim, and its signature. Consumers independently validate the manifest of the distributed digital asset.#center](images/c2pa-manifest-workflow.svg "C2PA manifest structure and workflow")
-
-The figure summarizes the model defined by the
-[C2PA technical specification](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html).
-
 ## Understand trust in Content Credentials
 
 The [C2PA trust model](https://spec.c2pa.org/specifications/specifications/2.4/specs/C2PA_Specification.html#_trust_model) distinguishes a valid manifest from a trusted manifest. 
 
 A manifest is valid when it meets the following criteria:
 
-- It's well-formed
-- It hasn't changed since it was signed
-- It passes the required signature and validity-period checks
-- It hasn't been rejected because its signing credential was revoked 
+- It's well-formed.
+- It hasn't changed since it was signed.
+- It passes the required signature and validity-period checks.
+- It hasn't been rejected because its signing credential was revoked.
 
 A valid manifest doesn't necessarily mean that an online revocation check succeeded. A trusted manifest is valid and its signing credential is also trusted. A validator
 can establish credential trust through configured trust anchors such as those anchors from the

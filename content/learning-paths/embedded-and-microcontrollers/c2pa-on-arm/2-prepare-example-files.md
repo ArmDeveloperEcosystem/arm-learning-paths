@@ -25,7 +25,7 @@ without full paths.
 
 ## Confirm C2PA Tool is available
 
-Install the Coalition for Content Provenance and Authenticity (C2PA) Tool. For instructions, see the [C2PA Tool install guide](/install-guides/c2patool/).
+Ensure that you've installed the Coalition for Content Provenance and Authenticity (C2PA) Tool. For instructions, see the [C2PA Tool install guide](/install-guides/c2patool/).
 
 Run the platform-independent version check:
 
