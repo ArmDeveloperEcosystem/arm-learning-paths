@@ -1,21 +1,21 @@
 ---
-title: Serve Muse Glimmer locally on the GPU
+title: Serve Muse Glimmer locally on a GPU
 description: Connect over SSH, build the ExecuTorch CUDA worker, and start a localhost model endpoint.
 weight: 2
 layout: learningpathall
 ---
 
-## Build a local agent on DGX Spark
+## Use Hermes and Muse Glimmer for a local agent on DGX Spark
 
-[Hermes Agent](https://hermes-agent.nousresearch.com/docs) is an open-source agent framework from Nous Research, [first released on February 25, 2026](https://nousresearch.com/releases). It sends model requests to tools and returns their results. Hermes runs on the Arm CPU of the DGX Spark and executes shell commands in a restricted Docker container.
+[Hermes Agent](https://hermes-agent.nousresearch.com/docs) is an open-source agent framework from Nous Research, [first released on February 25, 2026](https://nousresearch.com/releases). It sends model requests to tools and returns their results. Hermes runs on the Arm-based CPU of the DGX Spark and executes shell commands in a restricted Docker container.
 
-[Muse Glimmer](https://huggingface.co/meta-models/Muse-Glimmer-30B) is an open-weight, approximately 30-billion-parameter model designed by Meta for local agent tasks. These tasks include multi-step reasoning, tool use, and code repair. Meta [released Muse Glimmer on August 10, 2026](https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model). The model supports text and image inputs. Muse Glimmer chooses the commands and code changes, while Hermes executes the requested tools and returns their output.
+[Muse Glimmer](https://huggingface.co/meta-models/Muse-Glimmer-30B) is an open-weight, approximately 30-billion-parameter model designed by Meta for local agent tasks. These tasks include multi-step reasoning, tool use, and code repair. Meta [released Muse Glimmer on August 10, 2026](https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model). The model supports text and image inputs. 
 
 [ExecuTorch](https://pytorch.org/projects/executorch/) is the PyTorch framework for running AI models locally on devices, including laptops, mobile phones, and embedded systems. It was [first introduced on October 17, 2023](https://pytorch.org/blog/pytorch-edge-enabling-on-device-inference-across-mobile-and-edge-devices-with-executorch/). ExecuTorch loads and runs the exported Muse Glimmer model. The ExecuTorch CUDA backend runs Muse Glimmer on the NVIDIA Blackwell GPU of the DGX Spark. Its server exposes a local endpoint for Hermes.
 
 [CUDA](https://developer.nvidia.com/cuda-toolkit) is the NVIDIA platform for GPU computing. The CUDA toolkit provides compilers and libraries for building GPU code. The NVIDIA driver lets applications run that code on the GPU. Here, CUDA accelerates the tensor operations used for Muse Glimmer inference.
 
-You'll use the Hermes Agent framework and the Muse Glimmer 30B model to create a local agent running on DGX Spark. The agent will be capable of a variety of tasks, such as debugging and coding. You'll test this agent by tasking it to repair a broken Python release checker, verifying through tests that the Python code is corrected.
+You'll use the Hermes Agent framework and the Muse Glimmer 30B model to create a local agent running on DGX Spark. The agent will be capable of a variety of tasks, such as debugging and coding. Muse Glimmer chooses the commands and code changes, while Hermes runs the requested tools and returns their output.
 
 ```text
 Laptop --SSH--> DGX Spark
@@ -23,6 +23,8 @@ Laptop --SSH--> DGX Spark
                    |-- localhost HTTP --> ExecuTorch --> NVIDIA GPU
                    `-- terminal tools --> Docker sandbox (no network)
 ```
+
+You'll test this agent by tasking it to repair a broken Python release checker, verifying through tests that the Python code is corrected.
 
 ## Connect and check the system
 
@@ -186,9 +188,9 @@ python -m executorch.examples.models.muse_glimmer.export.export_solo \
 
 The [export script](https://github.com/pytorch/executorch/blob/0a4a05e84d9642460d87ec2bbbd0e397667ec9c8/examples/models/muse-glimmer/export/export_solo.py) performs three steps:
 
-1. Loads the GGUF weights and captures the inference methods of the model as graphs with `torch.export.export()`.
-2. Calls `executorch.exir.to_edge_transform_and_lower()` with `CudaPartitioner` to select and delegate supported graph regions to `CudaBackend`. That backend uses [AOTInductor](https://docs.pytorch.org/docs/stable/torch.compiler_aot_inductor.html), the PyTorch ahead-of-time compiler, to turn the exported computation into compiled CUDA code during setup. ExecuTorch loads that code for inference.
-3. Calls `.to_executorch()` to prepare the runtime program and memory plan. It then saves `model.pte`, its external delegate data in `aoti_cuda_blob.ptd`, and the vision position-embedding table in `pos_embed.bin`.
+1. It loads the GGUF weights and captures the inference methods of the model as graphs with `torch.export.export()`.
+2. It then calls `executorch.exir.to_edge_transform_and_lower()` with `CudaPartitioner` to select and delegate supported graph regions to `CudaBackend`. That backend uses [AOTInductor](https://docs.pytorch.org/docs/stable/torch.compiler_aot_inductor.html), the PyTorch ahead-of-time compiler, to turn the exported computation into compiled CUDA code during setup. ExecuTorch loads that code for inference.
+3. It calls `.to_executorch()` to prepare the runtime program and memory plan. It then saves `model.pte`, its external delegate data in `aoti_cuda_blob.ptd`, and the vision position-embedding table in `pos_embed.bin`.
 
 `--mmproj` adds the exported `vision_encoder` method. `--max-seq-len 65536` sets the exported context limit. `MAX_JOBS` and `TORCHINDUCTOR_COMPILE_THREADS` limit build parallelism.
 

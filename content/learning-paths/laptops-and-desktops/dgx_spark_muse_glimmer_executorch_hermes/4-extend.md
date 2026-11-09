@@ -28,7 +28,7 @@ Choose a tool or interface to add to Hermes:
 - Connect existing tools: Follow [Hermes MCP integration](https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp) to connect a local tool server. Enable only the tools that your task needs, and check where the server runs. MCP tools don't automatically inherit the restrictions of the terminal container.
 - Schedule a project check: Use [Hermes scheduled tasks](https://hermes-agent.nousresearch.com/docs/user-guide/features/cron) to run a recurring check and save a report. Start with reporting only, and explicitly configure tool access for the scheduled agent.
 
-Check that any capability you want to add supports the Hermes version pinned in the Learning Path. Skills contain reusable instructions, while tools and plugins run code. Add one capability at a time and check which files, networks, devices, and credentials it can access.
+Check that any capability you want to add is supported by the Hermes version pinned in the Learning Path. Skills contain reusable instructions, while tools and plugins run code. Add one capability at a time and check which files, networks, devices, and credentials it can access.
 
 ## What you've learned
 

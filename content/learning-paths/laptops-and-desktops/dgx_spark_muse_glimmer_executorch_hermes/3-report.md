@@ -9,11 +9,11 @@ layout: learningpathall
 
 After setting up Hermes, you can prepare a broken release checker and use Hermes and Muse Glimmer to fix it. 
 
-A release checker reads test results and decides whether deployment can proceed. You'll use a broken release checker that can approve a release despite failed tests and return the wrong exit status. The example image is an illustrative release-summary dashboard showing an incorrect deployment decision. Ask Hermes to read the image and identify the problem, inspect the code, and repair it so that the tests pass.
+A release checker reads test results and decides whether deployment can proceed. You'll use a broken release checker that can approve a release despite failed tests and return the wrong exit status. The example image is a release-summary dashboard showing an incorrect deployment decision. Ask Hermes to read the image and identify the problem, inspect the code, and repair it so that the tests pass.
 
 ![Example release summary showing one passed test, one failed test, and one skipped test, with an incorrect READY decision#center](files/release-summary.png "Illustrative release-summary dashboard")
 
-Use `release_tool.py` and `test_release_tool.py` that you downloaded earlier. Copy them into the workspace:
+Use `release_tool.py` and `test_release_tool.py` that you downloaded earlier. Copy the files into the workspace:
 
 ```bash
 cd ~/muse-agent
@@ -70,7 +70,7 @@ Watch the trace for the failed test run, code inspection, edits, and successful 
 
 The exact commands and explanation can vary. If Hermes requests approval, inspect the command and its target paths before responding. For this Learning Path, writes should stay under `/demo/output`. Don't approve changes to host or sandbox configuration.
 
-## Verify the repair manually
+## Verify the repair 
 
 From the SSH session that you used to inspect the Docker container, run the same acceptance tests independently:
 
@@ -93,10 +93,10 @@ The setup helper saves the Hermes configuration in `~/muse-agent/hermes-home/con
 | --- | --- |
 | Hermes can't reach Muse Glimmer | Keep the server running in its SSH session. On the Spark, run `curl --fail http://127.0.0.1:8000/health` and check the server terminal for errors. |
 | Hermes rejects the context length | Match the export `--max-seq-len 65536`, the server `--max-context 65536`, and `context_length: 65536` in the Hermes configuration. |
-| Hermes replies but doesn't execute tools | Launch it with `--cli --toolsets terminal`. Check that the server uses `--tool-parser atem` and that the `spark-local` configuration retains the sampling settings of the helper and null `reasoning_effort` override. |
-| Hermes can't process the image | Use the vision export and its `--pos-embed-path`. Check `agent.image_input_mode: native` in the Hermes configuration and the image path on Spark. |
-| The agent can't find the code or tests | Check that the preparation commands copied the files into `~/muse-agent/demo/input` and `demo/output`. Inspect the container mounts: ensure that they appear as `/demo/input` and `/demo/output`. |
-| Hermes asks for command approval | Read the command before approving it. Allow exercise edits only under `/demo/output`, and reject changes to host or sandbox settings. |
+| Hermes replies but doesn't run tools | Launch Hermes with `--cli --toolsets terminal`. Check that the server uses `--tool-parser atem`. Ensure that the `spark-local` configuration retains the sampling settings of the helper and null `reasoning_effort` override. |
+| Hermes can't process the image | Use the vision export and its `--pos-embed-path`. Check `agent.image_input_mode: native` in the Hermes configuration and the image path on the Spark. |
+| The agent can't find the code or tests | Check that the preparation commands copied the files into `~/muse-agent/demo/input` and `demo/output`. Inspect the container mounts and ensure that they appear as `/demo/input` and `/demo/output`. |
+| Hermes asks for command approval | Read the command before approving it. Allow edits only under `/demo/output`, and reject changes to host or sandbox settings. |
 | Tests still fail after the repair | Give Hermes the failing test output and ask it to revise the working copy. Keep `/demo/input` read-only and rerun the independent host tests. |
 
 ## Stop and resume Hermes
