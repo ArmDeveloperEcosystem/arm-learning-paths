@@ -6,11 +6,11 @@ description: Run Hermes on the Arm CPU and Muse Glimmer on the Blackwell GPU of 
 
 minutes_to_complete: 90
 
-who_is_this_for: Developers who want to run a local AI agent on NVIDIA DGX Spark using Hermes Agent framework and the Muse Glimmer 30B parameter model.
+who_is_this_for: Developers who want to run a local AI agent on NVIDIA DGX Spark using the Hermes Agent framework and the Muse Glimmer 30B parameter model.
 
 learning_objectives:
     - Serve Muse Glimmer 30B with text and image input through a local ExecuTorch CUDA endpoint.
-    - Connect Hermes Agent on the Arm CPU to the local model server.
+    - Connect Hermes Agent on the Arm-based CPU to the local model server.
     - Restrict agent tools to a dedicated workspace and a network-disabled container.
     - Use image and text inputs to diagnose a release error and verify the agent-generated code repair against acceptance tests.
 
