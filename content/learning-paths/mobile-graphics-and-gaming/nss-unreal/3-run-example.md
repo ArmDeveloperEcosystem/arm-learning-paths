@@ -27,7 +27,7 @@ Run `ShowFlag.VisualizeTemporalUpscaler 0` to disable the overview. To visualize
 
 The screenshot was captured in Standalone Game. Play In Editor also displays the same 16 labeled outputs, including history color, depth, motion vectors, and temporal feedback. See [Wrapping up](/learning-paths/mobile-graphics-and-gaming/nss-unreal/6-wrapping-up/) for more about these outputs.
 
-![Unreal Engine NSS debug view showing 16 labeled outputs in a 4×4 grid, including history color, depth, motion vectors, and temporal feedback#center](./images/nss_debug_1.1.1_ue5.6.png "NSS debug outputs in Unreal Engine 5.6 Standalone Game.")
+![Unreal Engine NSS debug view showing 16 labeled outputs in a 4×4 grid, including history color, depth, motion vectors, and temporal feedback#center](./images/nss_debug_1.1.1_ue5.6.webp "NSS debug outputs in Unreal Engine 5.6 Standalone Game.")
 
 ## NSS console variables
 
