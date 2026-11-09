@@ -173,12 +173,13 @@ On Linux or macOS, run:
 curl -fsSL https://pethost.dev/install.sh | sh
 ```
 
-The output is similar to this example. The version and next steps depend on the release installed and your `PATH`:
+The output is similar to:
 
 ```output
 pethost 0.2.6 is in ~/.local/bin (checksum verified).
 Next: cd into your app, and run   pethost deploy
 ```
+The version and next steps depend on the release installed and your `PATH`.
 
 On Windows, run the following command in PowerShell:
 
@@ -222,7 +223,7 @@ On macOS, the output is similar to:
 /Users/user/.local/bin/pethost: Mach-O 64-bit executable arm64
 ```
 
-On Windows, the hash you compared confirms that you installed the ARM64 build.
+On Windows, the hash that you compared confirms that you installed the ARM64 build.
 
 ## Troubleshoot installation issues
 
