@@ -1,5 +1,5 @@
 ---
-title: Extend your local agent
+title: Extend your local Hermes and Muse Glimmer agent
 description: Explore image input, faster decoding, voice interaction, custom tools, or scheduled tasks with your local Hermes and Muse Glimmer agent.
 weight: 5
 layout: learningpathall
