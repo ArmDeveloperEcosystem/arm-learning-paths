@@ -42,16 +42,6 @@ This command produces quite a lot of output. However, you will notice that a lar
 
 ```output
 [trustworthiness vectors]
-submod(CCA_SSD_PLATFORM):
-Instance Identity [affirming]: recognized and not compromised
-Configuration [affirming]: all recognized and approved
-Executables [affirming]: recognized and approved boot- and run-time
-File System [none]: no claim being made
-Hardware [affirming]: genuine
-Runtime Opaque [affirming]: memory encryption
-Storage Opaque [affirming]: encrypted secrets with HW-backed keys
-Sourced Data [none]: no claim being made
-
 submod(CCA_REALM):
 Instance Identity [affirming]: recognized and not compromised
 Configuration [none]: no claim being made
@@ -60,6 +50,16 @@ File System [none]: no claim being made
 Hardware [none]: no claim being made
 Runtime Opaque [none]: no claim being made
 Storage Opaque [none]: no claim being made
+Sourced Data [none]: no claim being made
+
+submod(CCA_SSD_PLATFORM):
+Instance Identity [affirming]: recognized and not compromised
+Configuration [affirming]: all recognized and approved
+Executables [affirming]: recognized and approved boot- and run-time
+File System [none]: no claim being made
+Hardware [affirming]: genuine
+Runtime Opaque [affirming]: memory encryption
+Storage Opaque [affirming]: encrypted secrets with HW-backed keys
 Sourced Data [none]: no claim being made
 ```
 
