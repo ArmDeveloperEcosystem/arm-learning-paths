@@ -1,5 +1,6 @@
 ---
 title: CMSIS Developer Assistant
+draft: true
 description: Install CMSIS Developer Assistant in VS Code on Windows, Linux or macOS, connect an AI coding agent, and verify CMSIS project and debugger access.
 minutes_to_complete: 30
 author: Matt Cossins
