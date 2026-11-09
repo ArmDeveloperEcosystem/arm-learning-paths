@@ -1,9 +1,6 @@
 ---
 title: Build Muse Glimmer 30B with Hermes and ExecuTorch on DGX Spark
 
-draft: true
-cascade:
-    draft: true
     
 description: Run Hermes on the Arm CPU and Muse Glimmer on the Blackwell GPU of NVIDIA DGX Spark, then use the local agent with text and image capabilities to investigate and repair a broken Python checker.
 
@@ -12,17 +9,17 @@ minutes_to_complete: 90
 who_is_this_for: Developers who want to run a local AI agent on NVIDIA DGX Spark using Hermes Agent framework and the Muse Glimmer 30B parameter model.
 
 learning_objectives:
-    - Serve Muse Glimmer 30B with text and image input through a local ExecuTorch CUDA endpoint
-    - Connect Hermes Agent on the Arm CPU to the local model server
-    - Restrict agent tools to a dedicated workspace and a network-disabled container
-    - Use image and text inputs to diagnose a release error and verify the agent-generated code repair against acceptance tests
+    - Serve Muse Glimmer 30B with text and image input through a local ExecuTorch CUDA endpoint.
+    - Connect Hermes Agent on the Arm CPU to the local model server.
+    - Restrict agent tools to a dedicated workspace and a network-disabled container.
+    - Use image and text inputs to diagnose a release error and verify the agent-generated code repair against acceptance tests.
 
 prerequisites:
-    - SSH access to an NVIDIA DGX Spark running Ubuntu 24.04-based DGX OS, NVIDIA driver 580 or newer, and the CUDA 13.0 development toolkit
+    - SSH access to an NVIDIA DGX Spark running Ubuntu 24.04-based DGX OS, NVIDIA driver 580 or later, and the CUDA 13.0 development toolkit
     - Docker Engine installed and permission to run containers
-    - Python 3.12 with venv and pip support, curl, Git, a C++17 compiler, Make, and CMake 3.26 or newer
+    - Python 3.12 with venv and pip support, curl, Git, as well as C++17 compiler, Make, and CMake 3.26 or later
     - At least 100 GiB of available disk space and 80 GiB of available system memory before the native model export
-    - Internet access to GitHub, PyPI, the PyTorch and NVIDIA package indexes, Hugging Face, Docker Hub, npm, and the official Hermes installer download services during setup
+    - Internet access to download services during setup
 
 author: Matt Cossins
 
