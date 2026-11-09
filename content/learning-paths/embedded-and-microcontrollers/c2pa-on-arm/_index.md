@@ -10,7 +10,7 @@ who_is_this_for: This is an introductory topic for developers who want to add an
 learning_objectives:
     - Understand what C2PA is, the content provenance problem it addresses, and why provenance matters.
     - Add Content Credentials to a sample image on an Arm device.
-    - Inspect the manifest, interpret content-binding, signature, and trust results.
+    - Inspect the manifest and interpret content-binding, signature, and trust results.
     - Validate Content Credentials with an external validator.
     - Identify a content-binding failure after a controlled change to the image.
 
