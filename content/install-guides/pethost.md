@@ -59,7 +59,7 @@ The expected output is:
 ARM64
 ```
 
-If you see `x86_64` on a Mac with Apple silicon, or `AMD64` on Windows on Arm, your terminal runs under x86-64 emulation. For a resolution, see [Troubleshoot installation issues](#troubleshooting).
+If you see `x86_64` on a Mac with Apple silicon, or `AMD64` on Windows on Arm, your terminal runs under x86-64 emulation. For a resolution, see [Troubleshoot installation issues](#troubleshoot-installation-issues).
 
 ## Install the Pethost CLI
 
