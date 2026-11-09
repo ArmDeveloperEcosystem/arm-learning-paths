@@ -1,7 +1,7 @@
 ---
 title: CMSIS Developer Assistant
 draft: true
-description: Install CMSIS Developer Assistant in VS Code on Windows, Linux or macOS, connect an AI coding agent, and verify CMSIS project and debugger access.
+description: Install CMSIS Developer Assistant in VS Code on Windows, Linux or macOS and verify your AI coding agent's connection to its MCP tools and CMSIS guidance.
 minutes_to_complete: 30
 author: Matt Cossins
 official_docs: https://github.com/Open-CMSIS-Pack/CMSIS-Developer-Assistant
@@ -43,7 +43,9 @@ You can use it for the following tasks:
 
 ## Before you begin
 
-Install desktop VS Code from the [Visual Studio Code download page](https://code.visualstudio.com/download), selecting your host operating system and architecture.
+Install desktop VS Code 1.109.0 or newer from the [Visual Studio Code download page](https://code.visualstudio.com/download), selecting your host operating system and architecture.
+
+Your host computer runs VS Code, the assistant and the CMSIS tools; the Arm Cortex-M device or FVP is the target that runs your firmware. CMSIS-Toolbox provides host packages for Windows and Linux on x86-64 or Arm64, and macOS on Apple silicon. See the [CMSIS-Toolbox supported platforms](https://github.com/Open-CMSIS-Pack/cmsis-toolbox/releases) and check that your project's compiler, debug probe software and FVP support your host. Toolbox availability alone does not establish support for every project tool. For optional FVP workflows on macOS, use the Docker wrapper described in [AVH FVPs on macOS](/install-guides/fvps-on-macos/).
 
 Install and sign in to an MCP-capable coding agent. The extension has been tested with [Codex CLI](/install-guides/codex-cli/), [Claude Code](/install-guides/claude-code/), [GitHub Copilot](/install-guides/github-copilot/), and Kimi Code.
 
@@ -115,6 +117,8 @@ Check my CMSIS Developer Assistant setup. Report whether you can reach its MCP t
 `/cmsis-help` checks the connection and helps the agent find guidance for your task. Describe your goal in plain language; the agent searches the knowledge base for relevant procedures. To explore that guidance yourself, run **CMSIS Developer Assistant: Open Knowledge Browser** from the Command Palette.
 
 Ask it to list the VS Code windows through Developer Assistant and identify your workspace. If several windows are open, select the intended one using **CMSIS Developer Assistant: Select Target Window**, or ask the agent to pin it.
+
+The setup check passes when the agent can reach the MCP tools, identify the intended workspace and retrieve the project-creation procedure from the knowledge base. If any check fails, use the troubleshooting table before continuing.
 
 ## Using CMSIS Developer Assistant
 
@@ -215,7 +219,7 @@ You can also use Developer Assistant to investigate and debug an existing CMSIS 
 
 | Symptom | What to check |
 |---|---|
-| The extension command is missing | Confirm installation in the active VS Code instance and reload the window. |
+| The extension command is missing | Confirm that the active VS Code instance is version 1.109.0 or newer, confirm extension installation and reload the window. |
 | The agent cannot see CMSIS tools | Run Configure Agent again for that agent, then restart its session. Use `/cmsis-help` to check the connection. |
 | A new project window is absent from the agent's window list | Check Workspace Trust and tools prompts in that window; allow its extensions to activate before retrying. |
 | Calls target another project | Select or pin the intended target window and confirm the reported workspace. |
