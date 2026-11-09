@@ -8,24 +8,24 @@ layout: learningpathall
 
 ## Baseline test NGINX with a static website
 
-Once NGINX is installed and serving the default welcome page, verify that it can serve your own content. A baseline test with a simple static HTML site confirms that NGINX is correctly configured and working as expected on your Ubuntu Pro 24.04 LTS virtual machine.
+Once NGINX is installed and serving the default welcome page, verify that it can serve your own content. A baseline test with a simple static HTML site confirms that NGINX is correctly configured and working as expected on your Ubuntu 24.04 LTS virtual machine.
 
 ## Create a static website directory  
 Prepare a folder to host your HTML content:
 ```console
-mkdir -p /var/www/my-static-site
+sudo mkdir -p /var/www/my-static-site
 cd /var/www/my-static-site
 ```
 
 ## Create an HTML file
 
-Create a simple HTML page to replace the default NGINX welcome page. Using a file editor of your choice, create `index.html` with the following content:
+Create a simple HTML page to replace the default NGINX welcome page. Run `sudo nano index.html` and enter the following content:
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Welcome to NGINX on Azure Ubuntu Pro</title>
+  <title>Welcome to NGINX on Azure Ubuntu</title>
   <style>
     body {
       background: linear-gradient(to right, #4facfe, #00f2fe);
@@ -55,7 +55,7 @@ Create a simple HTML page to replace the default NGINX welcome page. Using a fil
 </head>
 <body>
   <div class="box">
-    <h1>Welcome to NGINX on Azure Ubuntu Pro 24.04 LTS!</h1>
+    <h1>Welcome to NGINX on Azure Ubuntu 24.04 LTS!</h1>
     <p>Your static site is running beautifully on Arm64</p>
   </div>
 </body>
@@ -74,7 +74,7 @@ Point NGINX to serve files from your new directory by creating a dedicated confi
 sudo nano /etc/nginx/conf.d/static-site.conf
 ```
 Add the following configuration:
-```console
+```nginx
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -98,10 +98,12 @@ Make sure the path to your `index.html` file is correct before saving.
 {{% /notice %}}
 
 ## Disable the default site  
-NGINX ships with a packaged default site configuration. Since you created a custom config, disable the default to avoid conflicts:
+Some NGINX installations enable a packaged default site at `/etc/nginx/sites-enabled/default`. If present, remove it to avoid a conflict with your custom server block, which also uses `default_server`:
 ```console
-sudo unlink /etc/nginx/sites-enabled/default
+sudo rm -f /etc/nginx/sites-enabled/default
 ```
+
+If the default site is absent, this command makes no changes. Continue with the configuration test below.
 
 ## Test the NGINX configuration  
 Before applying your changes, test the configuration for syntax errors:
@@ -114,16 +116,15 @@ nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
 ```
 
-## Reload or restart NGINX  
-Apply your changes by reloading or restarting the NGINX service:
+## Reload NGINX
+Apply your changes by reloading the NGINX service:
 ```console
 sudo nginx -s reload
-sudo systemctl restart nginx
 ```
 
 ## Test the static website in a browser  
 Access your website at your public IP on port 80:
-```console
+```text
 http://<your-vm-public-ip>/
 ```
 
