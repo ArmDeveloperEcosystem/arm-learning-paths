@@ -11277,14 +11277,14 @@
     open_prs: 10
 - date: '2026-11-09'
   content:
-    total: 613
-    install-guides: 108
+    total: 624
+    install-guides: 113
     automotive: 15
-    cross-platform: 56
-    embedded-and-microcontrollers: 92
-    laptops-and-desktops: 92
+    cross-platform: 58
+    embedded-and-microcontrollers: 95
+    laptops-and-desktops: 95
     mobile-graphics-and-gaming: 101
-    servers-and-cloud-computing: 286
+    servers-and-cloud-computing: 289
   individual_authors:
     adnan-alsinan: 3
     ajeet-singh-raina: 1
