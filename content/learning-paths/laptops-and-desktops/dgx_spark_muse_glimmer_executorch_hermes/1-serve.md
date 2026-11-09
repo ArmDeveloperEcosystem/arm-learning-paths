@@ -1,5 +1,5 @@
 ---
-title: Serve Muse Glimmer locally on a GPU
+title: Serve Muse Glimmer locally on the GPU
 description: Connect over SSH, build the ExecuTorch CUDA worker, and start a localhost model endpoint.
 weight: 2
 layout: learningpathall
