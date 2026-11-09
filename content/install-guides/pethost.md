@@ -1,8 +1,6 @@
 ---
 title: Pethost CLI
 
-draft: true
-
 description: Install the Pethost CLI on Arm Linux, macOS on Apple silicon, or Windows on Arm, and verify it so you can deploy and manage Pethost projects from the terminal.
 
 additional_search_terms:
@@ -27,13 +25,15 @@ multitool_install_part: false
 layout: installtoolsall
 ---
 
-[Pethost](https://pethost.dev/) hosts your Docker Compose projects on a Linux machine sized according to your plan. Its command-line interface (CLI), `pethost`, deploys a folder with one command. You can also inspect logs and requests, open a shell, and manage secrets and domains.
+[Pethost](https://pethost.dev/) hosts your Docker Compose projects on a Linux machine sized according to your plan. Its command-line interface (CLI), `pethost`, deploys a folder with one command. You can also use the CLI to inspect logs and requests, open a shell, and manage secrets and domains.
 
-The CLI is open source under the MIT license. Each release includes `arm64` builds for Linux and macOS, and an ARM64 build for Windows on Arm. The CLI is a single executable. To install it manually, download the file for your platform, verify its checksum, and put it in a directory on your `PATH`.
+The CLI is open source under the MIT license. Each release includes `arm64` builds for Linux and macOS, and an ARM64 build for Windows on Arm. 
 
 ## Before you begin
 
-Confirm you're using a 64-bit Arm computer. On Linux, run:
+Confirm that you're using a 64-bit Arm computer. 
+
+On Linux, run:
 
 ```bash { target="ubuntu:latest" }
 uname -m
@@ -59,17 +59,19 @@ The expected output is:
 ARM64
 ```
 
-If you see `x86_64` on a Mac with Apple silicon, or `AMD64` on Windows on Arm, your terminal runs under x86-64 emulation. See [Troubleshooting](#troubleshooting).
+If you see `x86_64` on a Mac with Apple silicon, or `AMD64` on Windows on Arm, your terminal runs under x86-64 emulation. For a resolution, see [Troubleshoot installation issues](#troubleshooting).
 
-## How do I install the Pethost CLI?
+## Install the Pethost CLI
+
+The CLI is a single executable. To install it manually, download the file for your platform, verify its checksum, and put it in a directory on your `PATH`.
 
 {{% notice Note %}}
-The manual installation commands use Pethost CLI version 0.2.5. To install another version, replace `0.2.5` in the download URLs. To find the latest version, see the [Pethost CLI releases](https://github.com/pethost-dev/cli/releases).
+The manual installation commands use Pethost CLI version `0.2.5`. To install another version, replace `0.2.5` in the download URLs. To find the latest version, see the [Pethost CLI releases](https://github.com/pethost-dev/cli/releases).
 {{% /notice %}}
 
-### Install on Arm Linux
+### Install manually on Arm Linux
 
-Download the `arm64` binary and the release's checksums:
+Download the `arm64` binary and the release checksums:
 
 ```bash { target="ubuntu:latest" }
 curl -fsSLO https://github.com/pethost-dev/cli/releases/download/v0.2.5/pethost-linux-arm64
@@ -102,9 +104,9 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```
 
-### Install on macOS
+### Install manually on macOS
 
-Download the `arm64` binary for macOS and the release's checksums, then check the binary:
+Download the `arm64` binary for macOS and the release checksums, then check the binary:
 
 ```console
 curl -fsSLO https://github.com/pethost-dev/cli/releases/download/v0.2.5/pethost-darwin-arm64
@@ -118,7 +120,7 @@ The expected output is:
 pethost-darwin-arm64: OK
 ```
 
-Install it in `~/.local/bin`, and add that directory to your `PATH` in zsh, the default shell on macOS:
+Install it in `~/.local/bin`, and add the directory to your `PATH` in `zsh`, the default shell on macOS:
 
 ```console
 mkdir -p ~/.local/bin
@@ -127,16 +129,16 @@ echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-### Install on Windows on Arm
+### Install manually on Windows on Arm
 
-In PowerShell, download the ARM64 binary and the release's checksums:
+In PowerShell, download the ARM64 binary and the release checksums:
 
 ```console
 Invoke-WebRequest -UseBasicParsing -Uri https://github.com/pethost-dev/cli/releases/download/v0.2.5/pethost-windows-arm64.exe -OutFile pethost-windows-arm64.exe
 Invoke-WebRequest -UseBasicParsing -Uri https://github.com/pethost-dev/cli/releases/download/v0.2.5/checksums.txt -OutFile checksums.txt
 ```
 
-Compare the binary's SHA-256 hash with the matching entry in `checksums.txt`:
+Compare the SHA-256 hash of the binary with the matching entry in `checksums.txt`:
 
 ```console
 $expected = (Select-String -Path checksums.txt -Pattern ' pethost-windows-arm64.exe$').Line.Split(' ')[0]
@@ -185,7 +187,7 @@ irm https://pethost.dev/install.ps1 | iex
 
 The scripts don't change your shell configuration or `PATH`. If the installation directory isn't on your `PATH`, run the command printed by the script, then open a new terminal.
 
-## How do I verify the installation?
+## Verify the installation
 
 Print the installed version. This command works on Linux, macOS, and in PowerShell:
 
@@ -193,13 +195,13 @@ Print the installed version. This command works on Linux, macOS, and in PowerShe
 pethost --version
 ```
 
-For the manual installation of version 0.2.5, the expected output is:
+For the manual installation of version `0.2.5`, the expected output is:
 
 ```output
 pethost 0.2.5
 ```
 
-If you used an install script, the output shows the latest release available when you ran it. The version can differ from this example.
+If you used an install script, the output shows the latest release available when you ran it. The version can differ from the example.
 
 On Linux and macOS, confirm that the installed file is the `arm64` build:
 
@@ -221,7 +223,9 @@ On macOS, the output is similar to:
 
 On Windows, the hash you compared confirms that you installed the ARM64 build.
 
-## Troubleshooting
+## Troubleshoot installation issues
+
+Use the following guidance to troubleshoot issues with installing `pethost`.
 
 ### The x86-64 build is installed on Apple silicon
 
@@ -249,8 +253,8 @@ To deploy, you need a Pethost account with a plan. In a folder with a `Dockerfil
 pethost deploy
 ```
 
-On your first deployment, your browser opens the Pethost panel so you can sign in. The command asks for a project name, which becomes its address. It then sends the folder to your Pethost machine to build and start the project, and prints the address.
+On your first deployment, your browser opens the Pethost panel so that you can sign in. The command asks for a project name, which becomes its address. It then sends the folder to your Pethost machine to build and start the project, and prints the address.
 
-To update the CLI later, run `pethost update`. It verifies the latest release's checksum before replacing the installed executable.
+To update the CLI later, run `pethost update`. It verifies the checksum of the latest release before replacing the installed executable.
 
 For every command and its flags, see the [Pethost CLI reference](https://pethost.dev/docs/cli/).
