@@ -9,7 +9,7 @@ layout: learningpathall
 
 Keep the model server running in the first SSH session. Use the second SSH session, where you checked the endpoint, for Hermes.
 
-Use `setup-hermes-cli.sh`, that you downloaded earlier, to install Hermes:
+Install Hermes using the `setup-hermes-cli.sh` script that you downloaded earlier:
 
 ```bash
 cd ~/muse-agent

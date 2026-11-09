@@ -32,6 +32,6 @@ Check that any capability you want to add supports the Hermes version pinned in 
 
 ## What you've learned
 
-You've learned different ways in which you can extend the Hermes-Muse Glimmer coding agent. You've explored Muse Glimmer capabilities, as well as tools and interfaces that you can add to Hermes. 
+You've identified possible extensions for the Hermes-Muse Glimmer coding agent.
 
 To use the agent for your own project, mount a dedicated working directory. Keep acceptance tests outside the writable area of the agent.

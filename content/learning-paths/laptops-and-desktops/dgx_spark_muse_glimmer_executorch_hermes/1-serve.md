@@ -97,7 +97,7 @@ cd ~/muse-agent
 bash check-prereqs.sh "$HOME/muse-agent"
 ```
 
-Expect `PASS`. Resolve any reported failure before continuing. Reserve 100 GiB of free disk and 80 GiB of available memory for the build and export. Other model services can consume most of the unified memor of the Spark.
+Expect `PASS`. Resolve any reported failure before continuing. Reserve 100 GiB of free disk and 80 GiB of available memory for the build and export. Other model services can consume most of the unified memory of the Spark.
 
 ## Download the ExecuTorch source and create the environment
 

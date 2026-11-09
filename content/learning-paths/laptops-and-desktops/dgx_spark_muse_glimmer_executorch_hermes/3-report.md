@@ -9,7 +9,7 @@ layout: learningpathall
 
 After setting up Hermes, you can prepare a broken release checker and use Hermes and Muse Glimmer to fix it. 
 
-A release checker reads test results and decides whether deployment can proceed. You'll use a broken release checker that can approve a release despite failed tests, and had the wrong exit status. The example image is an illustrative release-summary dashboard showing an incorrect deployment decision. Ask Hermes to read the image and identify the problem, inspect the code, and repair it so that the tests pass.
+A release checker reads test results and decides whether deployment can proceed. You'll use a broken release checker that can approve a release despite failed tests and return the wrong exit status. The example image is an illustrative release-summary dashboard showing an incorrect deployment decision. Ask Hermes to read the image and identify the problem, inspect the code, and repair it so that the tests pass.
 
 ![Example release summary showing one passed test, one failed test, and one skipped test, with an incorrect READY decision#center](files/release-summary.png "Illustrative release-summary dashboard")
 
@@ -87,7 +87,7 @@ Expect all four tests to pass and `OK`. The diff should show the readiness check
 
 ## Troubleshoot if the task doesn't finish
 
-The setup helper saves the Hermes configuration in `~/muse-agent/hermes-home/config.yaml`. It calls the local model connection `spark-local`.  That entry points to the Muse Glimmer server on Spark.
+The setup helper saves the Hermes configuration in `~/muse-agent/hermes-home/config.yaml`. It calls the local model connection `spark-local`. That entry points to the Muse Glimmer server on Spark.
 
 | Symptom | What to check |
 | --- | --- |
@@ -134,6 +134,6 @@ No repeat export or installation is needed.
 
 ## What you've accomplished
 
-You've verified that the agent interpreted the image and reproduced the failure. You also confirmed that the agent repaired the checker, and passed the read-only tests. 
+You've verified that the agent interpreted the image and reproduced the failure. The agent repaired the checker. The repaired checker passed the read-only tests.
 
 Next, you'll explore ways to extend the agent with Muse Glimmer features and additional Hermes tools.
