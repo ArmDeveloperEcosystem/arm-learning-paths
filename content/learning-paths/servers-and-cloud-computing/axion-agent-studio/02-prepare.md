@@ -45,11 +45,28 @@ The node pools must have the following **custom labels**. These labels are disti
 | `c4a-sandbox` | One C4A node, 16 vCPUs | gVisor |
 | `n4a-sandbox` | One N4A node, 8 vCPUs | gVisor |
 
-All three pools must report `kubernetes.io/arch=arm64`. Sandbox nodes must report `sandbox.gke.io/runtime=gvisor`. Keep separate capacity for system workloads. Verify the node's allocatable resources rather than assuming its advertised capacity is entirely available to Pods.
+All three pools must report `kubernetes.io/arch=arm64`. Sandbox nodes must report `sandbox.gke.io/runtime=gvisor`. Keep separate capacity for system workloads. Verify the node's allocatable resources rather than assuming its advertised capacity is entirely available to Pods. To reproduce the shared-worker placement in this Learning Path, use exactly one eligible C4A node with enough allocatable capacity for all three workers. If several nodes have the `c4a-sandbox` label, Kubernetes can place the workers on different nodes.
+
+## Check your workstation tools
+
+Use Python 3.12 and Node.js 22 for the companion's Python and frontend checks. Confirm that the command-line tools are available before downloading the model or building images:
+
+```bash
+python3.12 --version
+node --version
+gcloud version
+gke-gcloud-auth-plugin --version
+kubectl version --client
+docker buildx version
+```
+
+The Python output must report 3.12 and the Node.js output must report 22. Docker must be running with a Buildx builder capable of producing `linux/arm64` images. The model download and staging step retain two copies of the approximately 4.6 GB GGUF file; allow additional space for Docker images and its build cache.
 
 ## Arrange access before building
 
-An administrator must allow creation and deletion of a dedicated Namespace, which is a cluster-scoped resource. Your deployment identity needs permission to read the cluster and create the tutorial's namespaced resources: Sandbox objects, Services, ServiceAccounts, Roles, RoleBindings, NetworkPolicies, and a ResourceQuota.
+An administrator must allow creation and deletion of a dedicated Namespace, which is a cluster-scoped resource. Your deployment identity needs permission to read the cluster and create, patch, update, and delete the tutorial's namespaced resources: Sandbox objects, Deployments, Services, ServiceAccounts, Roles, RoleBindings, NetworkPolicies, and a ResourceQuota.
+
+The inspection steps also require reading Nodes, RuntimeClasses, the Sandbox CRD, controller and application Deployments, Pods, events, and the Kubernetes Service's EndpointSlices or Endpoints. Readiness waits require `watch` access to Deployments, Sandboxes, and Pods. Reading Pod logs requires `get` on `pods/log`; dashboard access requires `create` on `pods/portforward`. If you run the companion README's optional checkpoint, arrange `create` on `pods/exec` for the manager as well. Have the administrator confirm these permissions before deployment.
 
 For dashboard node details, an administrator also needs to apply the generated cluster-scoped observer role and binding. These permissions are limited to the named tutorial nodes.
 
@@ -65,19 +82,53 @@ Replace both project identifiers when arranging the binding. The workers and val
 
 The manifests assume enforced NetworkPolicy and the GKE Dataplane V2 metadata route. They permit the trusted manager to reach its worker services, the validator, DNS, the verified Kubernetes API endpoint, the metadata endpoint, and public HTTPS. The HTTPS rule is not a hostname allowlist. The sandbox workloads do not receive general internet egress or an automatically mounted Kubernetes token.
 
-## Companion source release pending
+## Download and verify the companion source
 
-This draft is available for documentation review. The companion application source is not included in this pull request because its public release and licensing still need owner approval. A public source location and immutable revision or checksum must be added before this Learning Path can be followed end to end.
+Use the [2026-11-09 companion source archive](https://raw.githubusercontent.com/ranimandepudi/arm-learning-paths/84b9bcb7e8989113345c0a504cb668c34d10765f/content/learning-paths/servers-and-cloud-computing/axion-agent-studio/assets/axion-agent-studio-2026-11-09.zip) and its [SHA-256 manifest](https://raw.githubusercontent.com/ranimandepudi/arm-learning-paths/84b9bcb7e8989113345c0a504cb668c34d10765f/content/learning-paths/servers-and-cloud-computing/axion-agent-studio/assets/axion-agent-studio-2026-11-09.zip.sha256). Both links pin the source commit. The archive includes BSD-3-Clause-Clear sample code, CC BY-SA 4.0 documentation, and separate dependency/model notices. It excludes model weights, credentials, private deployment configuration, and recorded runs.
 
-The remaining commands describe the intended workflow after that source release is available. After you obtain the approved source, set the path to its extracted directory. All subsequent application commands run from that directory:
+Download the archive, verify its checksum, and extract it into a new source directory. The command stops if that source directory already exists:
 
 ```bash
-export LP_WORKDIR="$HOME/axion-lp-review/axion-agent-studio"
+python3.12 - <<'PY'
+import hashlib
+import io
+from pathlib import Path
+import urllib.request
+import zipfile
+
+base = "https://raw.githubusercontent.com/ranimandepudi/arm-learning-paths/84b9bcb7e8989113345c0a504cb668c34d10765f/content/learning-paths/servers-and-cloud-computing/axion-agent-studio/assets"
+name = "axion-agent-studio-2026-11-09.zip"
+expected = "aa64b1f04c8c18ab6440e6bdddb7b4a7ff23f4431fac791f3d3f2964297fb451"
+destination = Path.home() / "axion-lp-review-2026-11-09"
+if (destination / "axion-agent-studio").exists():
+    raise SystemExit("Source directory already exists; choose a new review directory.")
+with urllib.request.urlopen(f"{base}/{name}", timeout=60) as response:
+    data = response.read()
+actual = hashlib.sha256(data).hexdigest()
+if actual != expected:
+    raise SystemExit(f"Source checksum mismatch: {actual}")
+destination.mkdir(parents=True, exist_ok=True)
+(destination / name).write_bytes(data)
+with zipfile.ZipFile(io.BytesIO(data)) as archive:
+    archive.extractall(destination)
+print(f"Verified {name}: {actual}")
+PY
+export LP_WORKDIR="$HOME/axion-lp-review-2026-11-09/axion-agent-studio"
+cd "$LP_WORKDIR"
+```
+
+Expect `Verified` followed by the archive name and the checksum shown in the command. Read `LICENSE`, `LICENSE-SAMPLECODE`, `LICENSE-SUMMARY`, `NOTICE.md`, `MODEL_SOURCES.md`, and `VALIDATION.md` in the extracted directory. The validation record distinguishes local checks from the fresh GKE walkthrough, which remains pending for this draft.
+
+Prepare the Python environment and run the companion's checks. Keep the same terminal and source directory for all subsequent application commands:
+
+```bash
 cd "$LP_WORKDIR"
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements-dev.txt
-python -m pytest tests -q
+python -m pytest tests infra/test_manifests.py -q
+node --check web/app.js
+node --test tests/frontend_live_console.test.cjs
 ```
 
 Local tests exercise contracts, validation logic, and application behavior using controlled inputs. They do not prove live Gemini access, model quality, or GKE isolation. Review the source release license and notices before using the application.
