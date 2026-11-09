@@ -11,7 +11,7 @@ layout: learningpathall
 
 You'll open the signed image `image-signed.jpg` in the
 [Content Authenticity Initiative (CAI) web validator](https://verify.contentauthenticity.org/). The CAI web validator is
-a browser-based tool for inspecting and validating C2PA Content Credentials.
+a browser-based tool for inspecting and validating Coalition for Content Provenance and Authenticity (C2PA) Content Credentials.
 The site calls this tool **Verify**. You'll read the recorded provenance and compare the validation results with your
 C2PA Tool report.
 
@@ -37,14 +37,14 @@ If you use another computer, copy `image-signed.jpg` without modifying or recomp
 
 ## Inspect the validation result
 
-In the Content Credentials panel, look for **Unrecognized** under `image-signed.jpg`, as shown in
+In the **Content Credentials** panel, look for **Unrecognized** under `image-signed.jpg`, as shown in
 the following screenshot:
 
 <a id="figure-2"></a>
 
 ![The CAI web validator shows image-signed.jpg with an Unrecognized status and an orange notice about its issuer.#center](images/verify-unrecognized.jpg "Expected result for the development credential")
 
- The orange notice indicates that the CAI web validator doesn't recognize the issuer of the credential under its
+The orange notice indicates that the CAI web validator doesn't recognize the issuer of the credential under its
 trust policy. As described in [Understand the development credentials](/learning-paths/embedded-and-microcontrollers/c2pa-on-arm/3-add-content-credentials/#understand-the-development-credentials),
 the built-in signing certificate is for development. It doesn't establish a production identity.
 
@@ -55,7 +55,7 @@ If you transferred the file, retry with a copy of the original signed output.
 
 ## Read the recorded provenance
 
-Scroll through the Content Credentials panel. Read **Content summary**, then expand **Process**
+Scroll through the **Content Credentials** panel. Read **Content summary**, then expand **Process**
 for the recorded action and app or device name. Expand **About this Content Credential** to find
 **Issued by**, as shown in the following screenshot:
 

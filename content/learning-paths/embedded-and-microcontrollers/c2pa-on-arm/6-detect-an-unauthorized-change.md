@@ -27,7 +27,7 @@ libjpeg-turbo version 3.1.4.1 (build 20260327)
 
 Continue in your `c2pa-demo` directory. 
 
-Create a grayscale copy of `image-signed.jpg` while keeping its embedded C2PA manifest unchanged:
+Create a grayscale copy of `image-signed.jpg` while keeping its embedded Coalition for Content Provenance and Authenticity (C2PA) manifest unchanged:
 
 ```console
 jpegtran -copy all -grayscale -outfile image-modified.jpg image-signed.jpg
