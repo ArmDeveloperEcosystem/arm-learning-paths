@@ -10,7 +10,8 @@ Render a generated summary paragraph and FAQ block for Learning Path introductio
 	        answer: ...
 */}}
 
-{{ $generated := .Params.generated_summary_faq }}
+{{ $generated := .context.Params.generated_summary_faq }}
+{{ $mode := .mode }}
 {{ if $generated }}
 	{{ $summary := $generated.summary }}
 	{{ $faqs := $generated.faqs }}
@@ -18,7 +19,7 @@ Render a generated summary paragraph and FAQ block for Learning Path introductio
 
 	{{ if or $summary $faqs }}
 		<div id="generated-summary-faq" class="u-margin-top-2">
-			{{ with $summary }}
+			{{ if ne $mode "faqs" }}{{ with $summary }}
 				<div class="generated-summary-faq__heading">
 					<h3>Summary</h3>
 					{{ if $ai_assisted }}
@@ -44,11 +45,11 @@ Render a generated summary paragraph and FAQ block for Learning Path introductio
 				<div class="u-margin-left-1">
 					{{ . | markdownify }}
 				</div>
-			{{ end }}
+			{{ end }}{{ end }}
 
-			{{ with $faqs }}
+			{{ if ne $mode "summary" }}{{ with $faqs }}
 				<div class="generated-summary-faq__heading u-margin-top-2">
-					<h3>Frequently asked questions</h3>
+					{{ if eq $mode "faqs" }}<h2>Frequently asked questions</h2>{{ else }}<h3>Frequently asked questions</h3>{{ end }}
 					{{ if $ai_assisted }}
 						<span class="generated-summary-faq__assist">
 							<ads-tag class="generated-summary-faq__ai-tag">AI-assisted</ads-tag>
@@ -70,14 +71,14 @@ Render a generated summary paragraph and FAQ block for Learning Path introductio
 					{{ end }}
 				</div>
 				{{ range . }}
-					<ads-expansion-panel class="generated-summary-faq__panel u-margin-left-1 u-margin-bottom-1">
+					<ads-expansion-panel class="generated-summary-faq__panel {{ if ne $mode "faqs" }}u-margin-left-1 {{ end }}u-margin-bottom-1">
 						<span slot="toggle">{{ .question }}</span>
 						<div slot="content" class="u-margin-top-1">
 							{{ .answer | markdownify }}
 						</div>
 					</ads-expansion-panel>
 				{{ end }}
-			{{ end }}
+			{{ end }}{{ end }}
 
 			{{ if $ai_assisted }}
 				<script>
