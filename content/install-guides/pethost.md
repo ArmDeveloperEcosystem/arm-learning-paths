@@ -248,7 +248,9 @@ Add the installation directory to your `PATH` using the instructions for your pl
 
 ## Next steps
 
-To deploy, you need a Pethost account with a plan. In a folder with a `Dockerfile` or a compose file, run:
+You can now host Docker compose projects on Pethost on Arm.
+
+To deploy a project using `pethost`, you need a Pethost account with a plan. In a folder with a `Dockerfile` or a compose file, run:
 
 ```console
 pethost deploy
