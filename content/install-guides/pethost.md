@@ -6,6 +6,7 @@ description: Install the Pethost CLI on Arm Linux, macOS on Apple silicon, or Wi
 additional_search_terms:
 
 - docker compose
+- pethost
 
 minutes_to_complete: 5
 
