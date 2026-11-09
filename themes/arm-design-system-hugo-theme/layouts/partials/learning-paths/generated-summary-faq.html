@@ -49,7 +49,7 @@ Render a generated summary paragraph and FAQ block for Learning Path introductio
 
 			{{ if ne $mode "summary" }}{{ with $faqs }}
 				<div class="generated-summary-faq__heading u-margin-top-2">
-					{{ if eq $mode "faqs" }}<h2>Frequently asked questions</h2>{{ else }}<h3>Frequently asked questions</h3>{{ end }}
+					<h2>Review frequently asked questions</h2>
 					{{ if $ai_assisted }}
 						<span class="generated-summary-faq__assist">
 							<ads-tag class="generated-summary-faq__ai-tag">AI-assisted</ads-tag>
