@@ -132,7 +132,7 @@ cd ~/muse-agent
 
 No repeat export or installation is needed.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
 You've verified that the agent interpreted the image and reproduced the failure. The agent repaired the checker. The repaired checker passed the read-only tests.
 
