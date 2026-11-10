@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 After setting up the YOLOX model and the test image, you can now run static-image detection. 
 
-The example application is stored with the Learning Path. Start by downloading the C++ source and CMake project:
+The example application is stored with the Learning Path. Download the C++ source and CMake project:
 
 ```bash
 cd ~/opencv-kleidicv-lab/static-detection
@@ -27,12 +27,12 @@ wget -O CMakeLists.txt \
 
 Use the following functions in `yolox_static.cpp` to connect the pipeline stages to their implementation:
 
-| Code | Role |
+| Function | Role |
 |---|---|
-| `runPipeline()` | Calls the explicit preprocessing operations, then feeds the tensor to `network.setInput()` and runs inference with `network.forward()` |
-| `postprocess()` | Decodes the model output, maps boxes to the original image, and applies non-maximum suppression |
-| `renderDetections()` | Draws the retained boxes, class labels, and confidence scores |
-| `main()` | Loads the inputs, selects the OpenCV CPU backend, runs warm-up and measured iterations, and prints the timing summaries |
+| `runPipeline()` | Calls the preprocessing operations, then feeds the tensor to `network.setInput()` and runs inference with `network.forward()`. |
+| `postprocess()` | Decodes the model output, maps boxes to the original image, and applies non-maximum suppression. |
+| `renderDetections()` | Draws the retained boxes, class labels, and confidence scores. |
+| `main()` | Loads the inputs, selects the OpenCV CPU backend, runs warm-up and measured iterations, and prints the timing summaries. |
 
 Within `runPipeline()`, pairs of `Clock::now()` calls surround each stage and store its elapsed time in `StageTimes`. The inference timer includes input setup and the forward pass. Model loading, image-file decoding, and the final JPEG write are outside these timers.
 

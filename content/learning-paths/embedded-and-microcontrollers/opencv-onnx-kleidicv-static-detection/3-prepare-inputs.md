@@ -11,7 +11,7 @@ layout: "learningpathall"
 
 After creating baseline and default KleidiCV 26.06 OpenCV installations, you can prepare the YOLOX model and test image. 
 
-Start by creating a directory for the source code, model, labels, and test image:
+Create a directory for the source code, model, labels, and test image:
 
 ```bash
 cd ~/opencv-kleidicv-lab

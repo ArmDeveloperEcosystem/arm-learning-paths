@@ -20,7 +20,7 @@ The application combines four components:
 
 ## What YOLOX is
 
-You'll run inference on the pretrained YOLOX-S object detection model from OpenCV Zoo in the ONNX format. Trained on the Common Objects in Context (COCO) dataset, YOLOX recognizes 80 object classes. It predicts a bounding box, class, and confidence score for each detected object. 
+YOLOX is a pretrained YOLOX-S object detection model from OpenCV Zoo in the ONNX format that you'll run inference on. Trained on the Common Objects in Context (COCO) dataset, YOLOX recognizes 80 object classes. It predicts a bounding box, class, and confidence score for each detected object. 
 
 ## Understand the image-processing pipeline
 
@@ -32,7 +32,7 @@ Non-maximum suppression removes duplicate detections before the application draw
 
 The letterbox operation resizes the image while preserving its aspect ratio and pads the unused area so that the result is `640 x 640`, which is the YOLOX input size. The application then converts the OpenCV blue-green-red (BGR) image to red-green-blue (RGB). It changes the element type from unsigned 8-bit integers to 32-bit floating-point values. Pixel values remain in the `0` to `255` range expected by this YOLOX model.
 
-OpenCV packs the prepared image into a tensor in batch, channel, height, width (NCHW) order with this shape:
+OpenCV packs the prepared image into a tensor with this shape:
 
 ```text
 [1, 3, 640, 640]
@@ -70,8 +70,8 @@ network.forward(outputs, network.getUnconnectedOutLayersNames());
 
 The benchmark distinguishes two preprocessing metrics:
 
-- Image operations subtotal (primary): Resize, BGR-to-RGB conversion, and uint8-to-float32 conversion, the operations eligible for KleidiCV HAL acceleration
-- Full preprocessing: All three operations plus padding and tensor packing
+- Image operations subtotal (primary): Includes resizing, BGR-to-RGB conversion, and uint8-to-float32 conversion. These operations are eligible for KleidiCV HAL acceleration.
+- Full preprocessing: Includes the three image operations as well as padding and tensor packing.
 
 Individual preprocessing operations and DNN inference are also timed separately.
 

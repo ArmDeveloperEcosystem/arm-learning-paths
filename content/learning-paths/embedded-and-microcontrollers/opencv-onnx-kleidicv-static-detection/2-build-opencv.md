@@ -32,7 +32,7 @@ lscpu
 Keep this information with your benchmark results. KleidiCV selects supported implementations for the available CPU features.
 
 {{% notice Note %}}
-The reference measurements described in this Learning Path were collected on a
+The reference measurements listed in this Learning Path were collected on a
 [Radxa Orion O6](https://radxa.com/products/orion/o6/) running Debian 12.
 The board has eight Cortex-A720 CPUs and four Cortex-A520 CPUs. You can use
 another arm64 Linux system, but CPU topology, supported extensions, and

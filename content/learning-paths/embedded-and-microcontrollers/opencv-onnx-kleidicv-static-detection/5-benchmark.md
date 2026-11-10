@@ -53,7 +53,9 @@ export ITERATIONS=100
 export ROUND=1
 ```
 
-Keep the CPU frequency governor unchanged across both builds and all rounds. The reference measurement was recorded using `performance`. Use the same governor if you want to compare with those results. Only change the frequency policy with permission, and restore the original settings afterward. On platforms without Linux CPU frequency governors, keep the platform frequency-management settings consistent instead.
+Keep the CPU frequency governor unchanged across both builds and all rounds. The reference measurement was recorded using `performance`. Use the same governor if you want to compare with those results. 
+
+Only change the frequency policy with permission, and restore the original settings afterward. On platforms without Linux CPU frequency governors, keep the platform frequency-management settings consistent instead.
 
 ## Run the benchmarks
 
@@ -99,7 +101,7 @@ Use the image operations subtotal as your primary metric. Full preprocessing, pr
 
 For a more stable comparison, run six rounds, running each build once per round and alternating their order:
 
-| Rounds | Execution order |
+| Rounds | Running order |
 |---|---|
 | 1, 3, and 5 | Baseline, KleidiCV |
 | 2, 4, and 6 | KleidiCV, baseline |
@@ -124,7 +126,7 @@ Calculate the KleidiCV build latency reduction relative to baseline using those 
 reduction (%) = (baseline time - optimized time) / baseline time * 100
 ```
 
-A positive result means the optimized build took less time. A negative result means it took longer. Report the measured values even when the difference is small or negative.
+A positive result means that the optimized build took less time. A negative result means that it took longer. Report the measured values even when the difference is small or negative.
 
 ## Review a reference measurement
 
@@ -137,8 +139,8 @@ The reference measurement was recorded using the following components:
 - Linux kernel `6.12.111+deb12-arm64`, GCC `12.2.0`, and CMake `3.25.1`
 - OpenCV and the application compiled in Release mode, with compiler optimizations enabled
 - Four Cortex-A720 CPUs (`5,6,9,11`) with the `performance` frequency governor: 2.3 GHz for CPUs `5,6`, 2.4 GHz for CPU `9`, and 2.5 GHz for CPU `11`
-- The original OpenCV `messi5.jpg` photograph supplied in this Learning Path, with no segmentation overlay: `548 x 342` pixels and three channels, resized to `640 x 399` and padded to `640 x 640`
-- Six rounds per configuration, each run using four OpenCV threads, 10 warm-up iterations, and 100 measured iterations
+- The original OpenCV `messi5.jpg` photograph provided in the Learning Path, with no segmentation overlay: `548 x 342` pixels and three channels, resized to `640 x 399` and padded to `640 x 640`
+- Six rounds per configuration, with each run using four OpenCV threads, 10 warm-up iterations, and 100 measured iterations
 
 {{% notice Note %}}
 The image operations subtotal fell from 1.660 ms to 0.883 ms with default
@@ -163,7 +165,7 @@ The following table includes a comparison of median latencies across six runs pe
 | Rendering | 0.148 ms | 0.149 ms | -1.0% |
 | End-to-end | 313.206 ms | 312.152 ms | 0.3% |
 
-Values are rounded for display. Reductions use the unrounded medians. Each median is calculated independently, so stage medians don't necessarily sum to the median total.
+Values are rounded for display. Reductions were calculated using the unrounded medians. Each median is calculated independently, so stage medians don't necessarily sum to the median total.
 
 The six-run preprocessing means ranged from `2.337` to `3.002` ms for baseline and `1.643` to `2.267` ms for KleidiCV. Pipeline means ranged from `312.674` to `314.673` ms and `311.214` to `322.207` ms respectively.
 
@@ -185,7 +187,7 @@ For the reference image, you resize three-channel uint8 data from `548 x 342` to
 
 The [OpenCV baseline implementation](https://github.com/opencv/opencv/blob/4.13.0/modules/imgproc/src/resize.cpp) already uses Single Instruction, Multiple Data (SIMD). However, its three-channel horizontal loop advances one pixel at a time. 
 
-The [KleidiCV Neon implementation](https://gitlab.arm.com/kleidi/kleidicv/-/blob/26.06/kleidicv/src/resize/resize_linear_generic_u8_neon.h) loads contiguous byte blocks. It uses register-table lookups to select neighboring samples for 16 channel values at a time. The implementation completes vertical and horizontal interpolation within each vector block. It avoids the intermediate 32-bit row-buffer writes and reads used by OpenCV.
+The [KleidiCV Neon implementation](https://gitlab.arm.com/kleidi/kleidicv/-/blob/26.06/kleidicv/src/resize/resize_linear_generic_u8_neon.h) loads contiguous byte blocks. It uses register-table lookups to select neighboring samples for 16 channel values at a time. The implementation completes vertical and horizontal interpolation within each vector block. It avoids the intermediate 32-bit row-buffer writes and reads that are used by OpenCV.
 
 KleidiCV also uses interpolation weights with eight fractional bits and narrower intermediate arithmetic, compared with OpenCV 11-bit coefficients. This supports compact vector calculations, but changes quantization and rounding. 
 
