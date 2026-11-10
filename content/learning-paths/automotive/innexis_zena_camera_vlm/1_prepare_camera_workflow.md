@@ -9,13 +9,13 @@ layout: learningpathall
 
 ## Prepare the camera-to-VLM workflow
 
-This Learning Path extends [Run Local LLM Inference with llama.cpp on Arm Zena CSS](../innexis_zena_llamacpp/). Continue in the same guest OS where you built and ran `llama.cpp`. You will give Siemens Innexis ANA a video file, read one frame through the Zena CSS Linux guest OS virtual camera, and run a vision-language model (VLM) on that saved frame **inside the guest**. Keep the image and response together so another developer can inspect the result.
+This Learning Path extends [Run Local LLM Inference with llama.cpp on Arm Zena CSS](../innexis_zena_llamacpp/). Continue in the same guest OS where you built and ran `llama.cpp`. You will give Siemens Innexis ANA a video file, read one frame through the Zena CSS Linux guest OS virtual camera, and run a vision-language model (VLM) on that saved frame **inside the guest**.
 
 The path has four parts: ANA file input → virtual camera bridge → guest OS `/dev/video0` → vision-capable model running with the existing `llama.cpp` binary. The video source and its license are identified on the next page. The model runs on the frame captured in the guest; a separate download of the source photograph is not required. This tutorial adds a vision model and projector to the previous [Run Local LLM Inference with llama.cpp on Arm Zena CSS](../innexis_zena_llamacpp/) environment. It checks functional integration using one frame; it does not measure real-time video performance or physical hardware.
 
 The 90-minute completion time is an estimate. It has not been measured from start to finish in a fresh chamber.
 
-Run in the **Zena EWAOL Linux guest OS**:
+Run in the **Zena Edge Workloads for Automotive Linux (EWAOL) guest OS**:
 
 ```bash
 cat /etc/os-release
@@ -28,7 +28,7 @@ for tool in systemctl gst-launch-1.0 gst-inspect-1.0 sha256sum; do
 done
 ```
 
-the tested guest reported EWAOL v2.1.0 (`styhead`), `aarch64`, Linux `6.6.54-yocto-standard`, 8,120,232 kB total memory, and 25 GB available on `/`. All four tools were found under `/usr/bin`. Your available memory and disk space will depend on the current VP session.
+The tested guest reported the following as per the output below. All four tools were found under `/usr/bin`. Your available memory and disk space will depend on the current VP session.
 
 ```output
 ID=ewaol
@@ -63,12 +63,11 @@ If the binary is absent, complete the preceding [Learning Path](../innexis_zena_
 
 Create one directory for the camera image and VLM results:
 
-<!-- VERIFY: Check that this path is writable and persists for the duration of the VP session. -->
 ```bash
 WORK_DIR=/root/zena-camera-vlm ; mkdir -p "$WORK_DIR/frames" "$WORK_DIR/results" "$WORK_DIR/models" ; df -h "$WORK_DIR"
 ```
 
-ANA's Auto Shutdown setting is configurable. Check the selected duration in Lab Manager before starting a long model download, and save your files before the VP stops.
+ANA's Auto Shutdown setting is configurable. Check the remaining session time in Lab Manager before starting a long model download, and save your files before the virtual platform (VP) stops.
 
 ## What you have learned
 
