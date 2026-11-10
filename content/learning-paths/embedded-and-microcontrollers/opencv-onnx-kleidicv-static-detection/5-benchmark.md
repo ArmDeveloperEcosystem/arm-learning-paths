@@ -39,7 +39,7 @@ Set `CPU_LIST` to your chosen CPUs:
 ```bash
 export CPU_LIST=5,6,9,11
 ```
- The reference measurement was recorded using four Cortex-A720 CPUs.
+The reference measurement was recorded using four Cortex-A720 CPUs.
 
 Don't copy this value without checking your system. CPU numbering and heterogeneous core placement vary by platform.
 
@@ -165,7 +165,9 @@ The following table includes a comparison of median latencies across six runs pe
 
 Values are rounded for display. Reductions use the unrounded medians. Each median is calculated independently, so stage medians don't necessarily sum to the median total.
 
-The six-run preprocessing means ranged from `2.337` to `3.002` ms for baseline and `1.643` to `2.267` ms for KleidiCV. Pipeline means ranged from `312.674` to `314.673` ms and `311.214` to `322.207` ms respectively. The pipeline ranges overlap, so the small median reduction isn't evidence of a consistent pipeline-level speedup. All six runs were retained, and both builds detected three objects with equivalent classes and bounding boxes.
+The six-run preprocessing means ranged from `2.337` to `3.002` ms for baseline and `1.643` to `2.267` ms for KleidiCV. Pipeline means ranged from `312.674` to `314.673` ms and `311.214` to `322.207` ms respectively.
+
+The pipeline ranges overlap, so the small median reduction isn't evidence of a consistent pipeline-level speedup. All six runs were retained, and both builds detected three objects with equivalent classes and bounding boxes.
 
 ## Interpret the measurements
 
@@ -179,7 +181,7 @@ The reported end-to-end value sums the timed in-memory stages, including renderi
 
 ## Understand the resize speedup
 
-For the reference image, you resize three-channel uint8 data from `548 x 342` to `640 x 399` with bilinear interpolation. KleidiCV 26.06 selects a Neon implementation under the default build settings. Although Scalable Vector Extention 2 (SVE2) support is enabled, `KLEIDICV_LIMIT_SVE2_TO_SELECTED_ALGORITHMS=ON` excludes this resize implementation from SVE2 dispatch. For more information, see the [KleidiCV build defaults](https://gitlab.arm.com/kleidi/kleidicv/-/blob/26.06/kleidicv/CMakeLists.txt) and [dispatch definitions](https://gitlab.arm.com/kleidi/kleidicv/-/blob/26.06/kleidicv/include/kleidicv/dispatch.h).
+For the reference image, you resize three-channel uint8 data from `548 x 342` to `640 x 399` with bilinear interpolation. KleidiCV 26.06 selects a Neon implementation under the default build settings. Although Scalable Vector Extension 2 (SVE2) support is enabled, `KLEIDICV_LIMIT_SVE2_TO_SELECTED_ALGORITHMS=ON` excludes this resize implementation from SVE2 dispatch. For more information, see the [KleidiCV build defaults](https://gitlab.arm.com/kleidi/kleidicv/-/blob/26.06/kleidicv/CMakeLists.txt) and [dispatch definitions](https://gitlab.arm.com/kleidi/kleidicv/-/blob/26.06/kleidicv/include/kleidicv/dispatch.h).
 
 The [OpenCV baseline implementation](https://github.com/opencv/opencv/blob/4.13.0/modules/imgproc/src/resize.cpp) already uses Single Instruction, Multiple Data (SIMD). However, its three-channel horizontal loop advances one pixel at a time. 
 

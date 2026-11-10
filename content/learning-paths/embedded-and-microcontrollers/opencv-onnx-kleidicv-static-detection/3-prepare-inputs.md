@@ -42,7 +42,7 @@ c5c2d13e59ae883e6af3b45daea64af4833a4951c92d116ec270d9ddbe998063  object_detecti
 ```
 
 {{% notice Note %}}
-The model and the YOLOX files in OpenCV Zoo are licensed under the Apache License 2.0. For more information, see the [model directory](https://github.com/opencv/opencv_zoo/tree/main/models/object_detection_yolox).
+The model and the YOLOX files in OpenCV Zoo are licensed under the Apache License 2.0. For more information, see the [OpenCV Zoo YOLOX model directory](https://github.com/opencv/opencv_zoo/tree/main/models/object_detection_yolox).
 {{% /notice %}}
 
 ## Download the COCO class names

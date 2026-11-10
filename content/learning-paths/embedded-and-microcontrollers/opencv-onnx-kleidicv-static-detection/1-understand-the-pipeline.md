@@ -1,5 +1,5 @@
 ---
-title: "Understand the object detection pipeline"
+title: "Understand YOLOX and KleidiCV in the detection pipeline"
 description: Understand the YOLOX detection pipeline and how to measure preprocessing with KleidiCV on arm64 Linux.
 
 weight: 2

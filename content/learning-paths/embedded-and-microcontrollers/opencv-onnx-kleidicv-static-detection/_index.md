@@ -1,5 +1,5 @@
 ---
-title: Build and profile a YOLOX pipeline with KleidiCV on arm64
+title: Build an OpenCV YOLOX pipeline to benchmark KleidiCV preprocessing
 description: Build a YOLOX object detection pipeline on arm64 Linux and compare baseline and KleidiCV preprocessing and pipeline latency.
 
 lastmod: 2026-10-29
