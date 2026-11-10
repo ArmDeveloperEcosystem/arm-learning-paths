@@ -236,7 +236,7 @@ Use the following guidance to troubleshoot issues with installing and using CMSI
 | Symptom | What to check |
 |---|---|
 | The extension command is missing | Confirm that the active VS Code instance is version 1.109.0 or later, confirm extension installation, and reload the window. |
-| The agent cannot see CMSIS tools | Run **CMSIS Developer Assistant: Configure Agent** again for that agent, then restart its session. Use `/cmsis-help` to check the connection. |
+| The agent can't see CMSIS tools | Run **CMSIS Developer Assistant: Configure Agent** again for that agent, then restart its session. Use `/cmsis-help` to check the connection. |
 | A new project window is absent from the agent window list | Check **Workspace Trust** and tools prompts in that window. Allow its extensions to activate before retrying. |
 | Calls target another project | Select or pin the intended target window and confirm the reported workspace. |
 | The wrong FVP solution is active | In directories containing several solutions, explicitly select the solution for your accelerator and confirm its target. Wait for tool installation to finish before retrying. |
