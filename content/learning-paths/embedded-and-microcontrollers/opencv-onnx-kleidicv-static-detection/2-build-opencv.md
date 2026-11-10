@@ -31,8 +31,8 @@ lscpu
 
 Keep this information with your benchmark results. KleidiCV selects supported implementations for the available CPU features.
 
-{{% notice Reference platform %}}
-The reference measurements in this Learning Path were collected on a
+{{% notice Note %}}
+The reference measurements described in this Learning Path were collected on a
 [Radxa Orion O6](https://radxa.com/products/orion/o6/) running Debian 12.
 The board has eight Cortex-A720 CPUs and four Cortex-A520 CPUs. You can use
 another arm64 Linux system, but CPU topology, supported extensions, and
@@ -101,17 +101,17 @@ The expected output is:
 26.06
 ```
 
-OpenCV 4.13.0 downloads KleidiCV 0.7.0 when `KLEIDICV_SOURCE_PATH` is not provided. This Learning Path selects KleidiCV 26.06 explicitly because it supports the three-channel, arbitrary-ratio resize used by the letterbox stage.
+OpenCV 4.13.0 downloads KleidiCV 0.7.0 when `KLEIDICV_SOURCE_PATH` isn't provided. For the Learning Path, KleidiCV 26.06 is explicitly selected. This is because KleidiCV 26.06 supports the three-channel, arbitrary-ratio resize used by the letterbox stage.
 
 Both builds use the same OpenCV source tree, compiler, and common CMake options. The intended difference is enabling KleidiCV with its default dispatch policy.
 
-{{% notice Experiment scope %}}
-Leave OpenCV 4.13.0 unpatched in both builds. The KleidiCV 26.06 OpenCV integration patch adds a `copyMakeBorder()` HAL hook that is absent from this OpenCV release. This experiment compares preprocessing without that patch; padding therefore remains an OpenCV operation. Applying the patch creates a different experiment and requires new measurements.
+{{% notice Note %}}
+Leave OpenCV 4.13.0 unpatched in both builds. The KleidiCV 26.06 OpenCV integration patch adds a `copyMakeBorder()` Hardware Acceleration Layer (HAL) hook that's absent from this OpenCV release. You'll compare preprocessing without that patch, so padding remains an OpenCV operation. Applying the patch creates a different test and requires new measurements.
 {{% /notice %}}
 
 ## Build the baseline OpenCV installation
 
-Configure OpenCV without KleidiCV:
+Configure a baseline OpenCV installation without KleidiCV:
 
 ```bash
 cd ~/opencv-kleidicv-lab
@@ -130,7 +130,7 @@ cmake -S opencv -B build-baseline -G Ninja \
     -DWITH_KLEIDICV=OFF
 ```
 
-Build and install it:
+Build and install the baseline:
 
 ```bash
 cmake --build build-baseline --parallel "$(nproc)"
@@ -223,4 +223,6 @@ libkleidicv_thread.a
 
 ## What you've accomplished and what's next
 
-You've created baseline and default KleidiCV 26.06 OpenCV installations from the same unpatched source. Next, you'll download the YOLOX model and a static test image.
+You've created baseline and default KleidiCV 26.06 OpenCV installations from the same unpatched source. 
+
+Next, you'll download the YOLOX model and a static test image.

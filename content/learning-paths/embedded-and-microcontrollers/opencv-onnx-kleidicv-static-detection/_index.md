@@ -2,10 +2,6 @@
 title: Build and profile a YOLOX pipeline with KleidiCV on arm64
 description: Build a YOLOX object detection pipeline on arm64 Linux and compare baseline and KleidiCV preprocessing and pipeline latency.
 
-draft: true
-cascade:
-    draft: true
-
 lastmod: 2026-10-29
 
 minutes_to_complete: 90
@@ -13,9 +9,9 @@ minutes_to_complete: 90
 who_is_this_for: This is an advanced topic for C++ developers who want to deploy ONNX computer vision models and measure image-processing performance on arm64 Linux boards.
 
 learning_objectives:
-  - Build matching baseline and default KleidiCV versions of OpenCV
-  - Deploy a YOLOX ONNX model and label objects in a static image
-  - Compare image-operation, full preprocessing, and pipeline latency to distinguish local optimization from application-level improvement
+  - Build matching baseline and default KleidiCV versions of OpenCV.
+  - Deploy a YOLOX ONNX model and label objects in a static image.
+  - Compare image-operation, full preprocessing, and pipeline latency to distinguish local optimization from application-level improvement.
 
 prerequisites:
   - An arm64 development board running 64-bit Debian or Ubuntu

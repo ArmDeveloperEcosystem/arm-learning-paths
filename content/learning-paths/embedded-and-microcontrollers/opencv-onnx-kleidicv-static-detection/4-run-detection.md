@@ -9,7 +9,9 @@ layout: "learningpathall"
 
 ## Download the application source
 
-The example application is stored with this Learning Path. Download the C++ source and CMake project:
+After setting up the YOLOX model and the test image, you can now run static-image detection. 
+
+The example application is stored with the Learning Path. Start by downloading the C++ source and CMake project:
 
 ```bash
 cd ~/opencv-kleidicv-lab/static-detection
@@ -23,7 +25,7 @@ wget -O CMakeLists.txt \
 
 ## Find the pipeline in the source
 
-Use these functions in `yolox_static.cpp` to connect the pipeline stages to their implementation:
+Use the following functions in `yolox_static.cpp` to connect the pipeline stages to their implementation:
 
 | Code | Role |
 |---|---|
@@ -83,7 +85,7 @@ End-to-end:          mean=  359.696 ms  min=  359.696 ms  stddev=    0.000 ms
 Output image: result-baseline.jpg
 ```
 
-Timing values depend on the board and input image. With one measured iteration, the mean and minimum are equal and the standard deviation is zero.
+Timing values depend on the board and input image. With one measured iteration, the mean and minimum are equal, and the standard deviation is zero.
 
 ## Inspect the result
 
@@ -123,10 +125,12 @@ LD_LIBRARY_PATH=$HOME/opencv-kleidicv-lab/install-kleidicv-default/lib \
     --iterations=1
 ```
 
-Both builds should report three detections for the supplied image. Open `result-baseline.jpg` and `result-kleidicv-default.jpg` and compare the classes and bounding boxes with the reference image. If your board has no desktop, copy the files to your workstation to view them.
+Both builds report three detections for the supplied image. Open `result-baseline.jpg` and `result-kleidicv-default.jpg` and compare the classes and bounding boxes with the reference image. If your board has no desktop, copy the files to your workstation to view them.
 
-The results should contain two `person` detections and one `sports ball` detection with equivalent bounding boxes. Small numerical and JPEG encoding differences are possible, so byte-for-byte image equality is not required. A matching detection count alone is not a complete correctness check.
+The results contain two `person` detections and one `sports ball` detection with equivalent bounding boxes. Small numerical and JPEG encoding differences are possible, so byte-for-byte image equality isn't required. A matching detection count alone isn't a complete correctness check.
 
 ## What you've accomplished and what's next
 
-You've run YOLOX static-image detection with both OpenCV builds and checked the labeled output images. Next, you'll compare image-operation and full preprocessing latency and interpret the pipeline-level effect.
+You've run YOLOX static-image detection with both OpenCV builds and checked the labeled output images. 
+
+Next, you'll compare image-operation and full preprocessing latency and interpret the pipeline-level effect.
