@@ -101,7 +101,7 @@ Use the image operations subtotal as your primary metric. Full preprocessing, pr
 
 For a more stable comparison, run six rounds, running each build once per round and alternating their order:
 
-| Rounds | Running order |
+| Rounds | Run order |
 |---|---|
 | 1, 3, and 5 | Baseline, KleidiCV |
 | 2, 4, and 6 | KleidiCV, baseline |
