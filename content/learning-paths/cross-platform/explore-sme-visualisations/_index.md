@@ -2,6 +2,10 @@
 title: Explore SME matrix operations with interactive visualizations
 description: Explore nine interactive views of ZA layout, transposition, operand preparation, and matrix multiplication to understand Arm SME data movement.
 
+draft: true
+cascade:
+    draft: true
+    
 minutes_to_complete: 40
 
 who_is_this_for: You want to understand Arm SME matrix data movement before reading or writing SME2 code.
