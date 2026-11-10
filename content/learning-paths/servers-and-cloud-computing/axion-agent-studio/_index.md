@@ -1,7 +1,7 @@
 ---
 title: Run AI coding agents with GKE Agent Sandbox on Google Axion
 description: Use hosted Gemini planning and local Gemma inference on Arm-based Axion CPUs to implement, test, and preview an e-commerce checkout change.
-lastmod: 2026-11-06
+lastmod: 2026-11-09
 minutes_to_complete: 120
 who_is_this_for: This is an advanced topic for developers familiar with Python, containers, and Kubernetes who want to run and validate a bounded coding-agent workflow on Arm-based cloud infrastructure.
 learning_objectives:
@@ -12,9 +12,9 @@ learning_objectives:
 prerequisites:
   - An existing GKE Standard cluster with Workload Identity Federation, enforced NetworkPolicy, and the compatible Agent Sandbox API described in Prepare your environment
   - Available C4A and N4A node capacity, Artifact Registry access, and a Google Cloud project with billing and Vertex AI model access
-  - A Linux or macOS workstation with Bash, Python 3.12, Google Cloud CLI, the GKE authentication plugin, kubectl, and Docker Buildx
+  - A Linux or macOS workstation with Bash, Git, Python 3.12, Node.js 22, Google Cloud CLI, the GKE authentication plugin, kubectl, and Docker Buildx
   - Permission to deploy namespaced Kubernetes resources and an administrator who can configure node pools and the required IAM binding
-  - Access to the companion application source after its public release and licensing are approved, plus permission to use the model and application code
+  - The versioned companion source linked in Prepare your environment, plus permission to use the model and application code under their respective licenses
 author: Rani Chowdary Mandepudi
 generate_summary_faq: true
 rerun_summary: false

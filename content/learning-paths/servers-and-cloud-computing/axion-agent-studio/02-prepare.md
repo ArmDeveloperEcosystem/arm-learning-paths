@@ -1,6 +1,6 @@
 ---
 title: Prepare your environment
-description: Check the cluster API, Arm node pools, permissions, and source bundle before deploying the workflow.
+description: Check the cluster API, Arm node pools, permissions, and source repository before deploying the workflow.
 weight: 3
 layout: learningpathall
 ---
@@ -45,11 +45,31 @@ The node pools must have the following **custom labels**. These labels are disti
 | `c4a-sandbox` | One C4A node, 16 vCPUs | gVisor |
 | `n4a-sandbox` | One N4A node, 8 vCPUs | gVisor |
 
-All three pools must report `kubernetes.io/arch=arm64`. Sandbox nodes must report `sandbox.gke.io/runtime=gvisor`. Keep separate capacity for system workloads. Verify the node's allocatable resources rather than assuming its advertised capacity is entirely available to Pods.
+All three pools must report `kubernetes.io/arch=arm64`. Sandbox nodes must report `sandbox.gke.io/runtime=gvisor`. Keep separate capacity for system workloads. Verify the node's allocatable resources rather than assuming its advertised capacity is entirely available to Pods. To reproduce the shared-worker placement in this Learning Path, use exactly one eligible C4A node with enough allocatable capacity for all three workers. If several nodes have the `c4a-sandbox` label, Kubernetes can place the workers on different nodes.
+
+## Check your workstation tools
+
+Use Python 3.12 and Node.js 22 for the companion's Python and frontend checks. Confirm that the command-line tools are available before downloading the model or building images:
+
+```bash
+git --version
+python3.12 --version
+node --version
+gcloud version
+gke-gcloud-auth-plugin --version
+kubectl version --client
+docker buildx version
+```
+
+The Python output must report 3.12 and the Node.js output must report 22. Docker must be running with a Buildx builder capable of producing `linux/arm64` images. The model download and staging step retain two copies of the approximately 4.6 GB GGUF file; allow additional space for Docker images and its build cache.
+
+Python must also have a working trusted certificate store for the model download. If it reports `CERTIFICATE_VERIFY_FAILED`, repair the installation's CA configuration before continuing. On macOS, when `/etc/ssl/cert.pem` is your approved system CA bundle, `export SSL_CERT_FILE=/etc/ssl/cert.pem` selects it for this terminal. Keep certificate verification enabled; see [Python's certificate lookup configuration](https://docs.python.org/3.12/library/ssl.html#ssl.get_default_verify_paths).
 
 ## Arrange access before building
 
-An administrator must allow creation and deletion of a dedicated Namespace, which is a cluster-scoped resource. Your deployment identity needs permission to read the cluster and create the tutorial's namespaced resources: Sandbox objects, Services, ServiceAccounts, Roles, RoleBindings, NetworkPolicies, and a ResourceQuota.
+An administrator must allow creation and deletion of a dedicated Namespace, which is a cluster-scoped resource. Your deployment identity needs permission to read the cluster and create, patch, update, and delete the tutorial's namespaced resources: Sandbox objects, Deployments, Services, ServiceAccounts, Roles, RoleBindings, NetworkPolicies, and a ResourceQuota.
+
+The inspection steps also require reading Nodes, RuntimeClasses, the Sandbox CRD, controller and application Deployments, Pods, events, and the Kubernetes Service's EndpointSlices or Endpoints. Readiness waits require `watch` access to Deployments, Sandboxes, and Pods. Reading Pod logs requires `get` on `pods/log`; dashboard access requires `create` on `pods/portforward`. If you run the companion README's optional checkpoint, arrange `create` on `pods/exec` for the manager as well. Have the administrator confirm these permissions before deployment.
 
 For dashboard node details, an administrator also needs to apply the generated cluster-scoped observer role and binding. These permissions are limited to the named tutorial nodes.
 
@@ -65,19 +85,35 @@ Replace both project identifiers when arranging the binding. The workers and val
 
 The manifests assume enforced NetworkPolicy and the GKE Dataplane V2 metadata route. They permit the trusted manager to reach its worker services, the validator, DNS, the verified Kubernetes API endpoint, the metadata endpoint, and public HTTPS. The HTTPS rule is not a hostname allowlist. The sandbox workloads do not receive general internet egress or an automatically mounted Kubernetes token.
 
-## Companion source release pending
+## Clone the companion source
 
-This draft is available for documentation review. The companion application source is not included in this pull request because its public release and licensing still need owner approval. A public source location and immutable revision or checksum must be added before this Learning Path can be followed end to end.
+Clone the [Axion Agent Studio repository](https://github.com/ranimandepudi/axion-agent-studio) and select the [tested source commit](https://github.com/ranimandepudi/axion-agent-studio/tree/65b24eda61d6d6c1e04ef78cd2c46bc7a0609b32). The repository includes BSD-3-Clause-Clear sample code, CC BY-SA 4.0 documentation, and separate dependency/model notices. It excludes model weights, credentials, private deployment configuration, and recorded runs.
 
-The remaining commands describe the intended workflow after that source release is available. After you obtain the approved source, set the path to its extracted directory. All subsequent application commands run from that directory:
+Use a new directory for this checkout. If the destination already exists, choose a different `LP_WORKDIR` before running the commands:
 
 ```bash
-export LP_WORKDIR="$HOME/axion-lp-review/axion-agent-studio"
+export LP_WORKDIR="$HOME/axion-lp-review-2026-11-09/axion-agent-studio"
+export SOURCE_COMMIT="65b24eda61d6d6c1e04ef78cd2c46bc7a0609b32"
+git clone https://github.com/ranimandepudi/axion-agent-studio.git "$LP_WORKDIR"
+cd "$LP_WORKDIR"
+git checkout --detach "$SOURCE_COMMIT"
+git rev-parse HEAD
+```
+
+The final command must print the full commit in `SOURCE_COMMIT`. Keep this revision for the walkthrough. Read `LICENSE`, `LICENSE-SAMPLECODE`, `LICENSE-SUMMARY`, `NOTICE.md`, `MODEL_SOURCES.md`, and `VALIDATION.md` in the checkout. The validation record distinguishes local checks from the fresh GKE walkthrough, which remains pending for this draft.
+
+For later development, the repository's `main` branch supports `git pull --ff-only`. After preserving any local changes, use `git switch main` followed by `git pull --ff-only` to update it. The tutorial checkout is detached at its tested commit, so return to `main` before pulling updates.
+
+Prepare the Python environment and run the companion's checks. Keep the same terminal and source directory for all subsequent application commands:
+
+```bash
 cd "$LP_WORKDIR"
 python3.12 -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements-dev.txt
-python -m pytest tests -q
+python -m pytest tests infra/test_manifests.py -q
+node --check web/app.js
+node --test tests/frontend_live_console.test.cjs
 ```
 
 Local tests exercise contracts, validation logic, and application behavior using controlled inputs. They do not prove live Gemini access, model quality, or GKE isolation. Review the source release license and notices before using the application.
