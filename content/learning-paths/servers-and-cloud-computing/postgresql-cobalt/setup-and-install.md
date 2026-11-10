@@ -1,5 +1,5 @@
 ---
-title: Install and configure PostgreSQL on Cobalt 100
+title: Install and configure PostgreSQL on Cobalt 200
 weight: 4
 
 ### FIXED, DO NOT MODIFY
@@ -8,21 +8,21 @@ layout: learningpathall
 
 ## Prepare PostgreSQL for Arm deployment
 
-In this section, you install and configure PostgreSQL on an Azure Ubuntu 24.04 Pro Arm64 virtual machine running on Cobalt 100 processors.
+In this section, you install and configure PostgreSQL on an Azure Ubuntu 24.04 LTS Arm64 virtual machine running on Cobalt 200 processors.
 
 At the end of this section, PostgreSQL is:
 
 * Installed and running as a database service
-* Configured for remote access
+* Accessible locally using an application user
 * Ready for application workloads
-* Tuned for Arm64 performance
+* Configured with resource settings for the selected VM
 
 ## Update system
 
-Update the operating system to ensure all packages are current.
+Refresh the package lists.
 
 ```bash
-sudo apt update && sudo apt upgrade -y
+sudo apt update
 ```
 
 ## Install PostgreSQL
@@ -44,7 +44,7 @@ psql --version
 The output is similar to:
 
 ```output
-psql (PostgreSQL) 16.13 (Ubuntu 16.13-0ubuntu0.24.04.1)
+psql (PostgreSQL) 16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)
 ```
 
 ## Start PostgreSQL
@@ -54,9 +54,9 @@ Enable and start the PostgreSQL service.
 ```bash
 sudo systemctl enable postgresql
 sudo systemctl start postgresql
-sudo systemctl status postgresql
+sudo systemctl status postgresql@16-main
 ```
-The service should be active and running.
+The cluster service should show `active (running)`. The parent `postgresql` service can show `active (exited)`; use the cluster service above to check the database process.
 
 ## Create database and user
 
@@ -69,83 +69,59 @@ sudo -u postgres psql
 ```sql
 CREATE USER appuser WITH PASSWORD 'StrongPassword123';
 CREATE DATABASE appdb OWNER appuser;
-GRANT ALL PRIVILEGES ON DATABASE appdb TO appuser;
 ```
 
 **Exit the PostgreSQL shell:**
 
-```bash
+```text
 \q
 ```
 
-## Enable remote access
+Replace `StrongPassword123` with a strong password of your choice and use it for subsequent `appuser` connections.
 
-Edit the PostgreSQL configuration file.
+## Validate local access
 
-```bash
-sudo nano /etc/postgresql/16/main/postgresql.conf
+Keep PostgreSQL’s default local-only listener and host authentication settings. From your SSH session, connect over the loopback interface:
+
+```console
+psql -h localhost -U appuser -d appdb
 ```
 
-**Search for listen_addresses and update it as follows:**
+Enter your application user’s password when prompted. At the `appdb=>` prompt, run:
 
-- listen_addresses = '*'
-
-## Edit authentication:
-
-Edit the host-based authentication file.
-
-```bash
-sudo nano /etc/postgresql/16/main/pg_hba.conf
+```sql
+SELECT current_user, current_database();
+\q
 ```
 
-**Add the following line:**
-
-```text
-host    all     all     0.0.0.0/0     md5
-```
-
-**Restart PostgreSQL to apply changes:**
-
-```bash
-sudo systemctl restart postgresql
-```
+You do not need to modify `listen_addresses`, add a network-wide authentication rule, or open port 5432 for this Learning Path.
 
 ## Performance tuning (ARM64)
 
-Tune PostgreSQL settings to better utilize Cobalt 100 resources.
+The following starting settings match the **4-vCPU, 16-GiB Standard_D4ps_v7** VM. They are workload settings rather than architecture-specific optimizations. Reduce memory allocations if other services share the VM.
 
-```bash
+```console
 sudo nano /etc/postgresql/16/main/postgresql.conf
 ```
 
-**Update or add the following parameters:**
+Update the existing parameters or add them if absent:
 
 ```text
-# Controls how much memory PostgreSQL uses for caching data pages.
-# Set to 25-40% of total RAM. A 2GB shared buffer suits a VM with 8GB RAM.
-shared_buffers = 2GB
+# Shared cache: 25% of the selected VM's memory.
+shared_buffers = 4GB
 
-# Memory allocated per sort or hash operation within a query.
-# Higher values improve complex sort and hash join performance.
-work_mem = 64MB
+# Per sort/hash operation; concurrent operations can multiply memory use.
+work_mem = 16MB
 
-# Memory for maintenance operations such as VACUUM and CREATE INDEX.
-# A larger value speeds up index builds and table maintenance.
+# Memory for maintenance operations such as index creation.
 maintenance_work_mem = 512MB
 
-# Planner estimate of the total memory available for caching.
-# Helps the planner choose index scans over sequential scans.
-# Set to 75% of total RAM.
-effective_cache_size = 6GB
+# Planner estimate of memory available for caching, not an allocation.
+effective_cache_size = 12GB
 
-# Maximum number of background parallel workers across all queries.
-# Match this to the number of vCPUs on the Cobalt 100 instance.
-max_parallel_workers = 8
-
-# Maximum parallel workers a single query can use.
-# Cobalt 100 dedicates one physical core per vCPU, so 4 workers
-# lets queries use half the cores without contention.
-max_parallel_workers_per_gather = 4
+# Parallel worker limits for the selected four-vCPU VM.
+max_parallel_workers = 4
+max_parallel_workers_per_gather = 2
 ```
 
 **Restart PostgreSQL:**
@@ -160,7 +136,7 @@ You've successfully installed and configured PostgreSQL on an Azure Ubuntu Arm64
 
 - PostgreSQL is installed and running as a system service
 - Database and application user configured
-- Remote connectivity enabled
-- Performance tuning applied to Arm64 systems
+- Local application connectivity validated
+- Resource settings aligned with the selected VM
 
 Next, you'll create database schemas, load data, and run transactional and analytical queries.
