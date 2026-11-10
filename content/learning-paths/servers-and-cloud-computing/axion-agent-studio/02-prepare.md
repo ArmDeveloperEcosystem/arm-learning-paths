@@ -1,6 +1,6 @@
 ---
 title: Prepare your environment
-description: Check the cluster API, Arm node pools, permissions, and source bundle before deploying the workflow.
+description: Check the cluster API, Arm node pools, permissions, and source repository before deploying the workflow.
 weight: 3
 layout: learningpathall
 ---
@@ -52,6 +52,7 @@ All three pools must report `kubernetes.io/arch=arm64`. Sandbox nodes must repor
 Use Python 3.12 and Node.js 22 for the companion's Python and frontend checks. Confirm that the command-line tools are available before downloading the model or building images:
 
 ```bash
+git --version
 python3.12 --version
 node --version
 gcloud version
@@ -62,7 +63,7 @@ docker buildx version
 
 The Python output must report 3.12 and the Node.js output must report 22. Docker must be running with a Buildx builder capable of producing `linux/arm64` images. The model download and staging step retain two copies of the approximately 4.6 GB GGUF file; allow additional space for Docker images and its build cache.
 
-Python must also have a working trusted certificate store for the source and model downloads. If it reports `CERTIFICATE_VERIFY_FAILED`, repair the installation's CA configuration before continuing. On macOS, when `/etc/ssl/cert.pem` is your approved system CA bundle, `export SSL_CERT_FILE=/etc/ssl/cert.pem` selects it for this terminal. Keep certificate verification enabled; see [Python's certificate lookup configuration](https://docs.python.org/3.12/library/ssl.html#ssl.get_default_verify_paths).
+Python must also have a working trusted certificate store for the model download. If it reports `CERTIFICATE_VERIFY_FAILED`, repair the installation's CA configuration before continuing. On macOS, when `/etc/ssl/cert.pem` is your approved system CA bundle, `export SSL_CERT_FILE=/etc/ssl/cert.pem` selects it for this terminal. Keep certificate verification enabled; see [Python's certificate lookup configuration](https://docs.python.org/3.12/library/ssl.html#ssl.get_default_verify_paths).
 
 ## Arrange access before building
 
@@ -84,42 +85,24 @@ Replace both project identifiers when arranging the binding. The workers and val
 
 The manifests assume enforced NetworkPolicy and the GKE Dataplane V2 metadata route. They permit the trusted manager to reach its worker services, the validator, DNS, the verified Kubernetes API endpoint, the metadata endpoint, and public HTTPS. The HTTPS rule is not a hostname allowlist. The sandbox workloads do not receive general internet egress or an automatically mounted Kubernetes token.
 
-## Download and verify the companion source
+## Clone the companion source
 
-Use the [2026-11-09 companion source archive](https://raw.githubusercontent.com/ranimandepudi/arm-learning-paths/84b9bcb7e8989113345c0a504cb668c34d10765f/content/learning-paths/servers-and-cloud-computing/axion-agent-studio/assets/axion-agent-studio-2026-11-09.zip) and its [SHA-256 manifest](https://raw.githubusercontent.com/ranimandepudi/arm-learning-paths/84b9bcb7e8989113345c0a504cb668c34d10765f/content/learning-paths/servers-and-cloud-computing/axion-agent-studio/assets/axion-agent-studio-2026-11-09.zip.sha256). Both links pin the source commit. The archive includes BSD-3-Clause-Clear sample code, CC BY-SA 4.0 documentation, and separate dependency/model notices. It excludes model weights, credentials, private deployment configuration, and recorded runs.
+Clone the [Axion Agent Studio repository](https://github.com/ranimandepudi/axion-agent-studio) and select the [tested source commit](https://github.com/ranimandepudi/axion-agent-studio/tree/65b24eda61d6d6c1e04ef78cd2c46bc7a0609b32). The repository includes BSD-3-Clause-Clear sample code, CC BY-SA 4.0 documentation, and separate dependency/model notices. It excludes model weights, credentials, private deployment configuration, and recorded runs.
 
-Download the archive, verify its checksum, and extract it into a new source directory. The command stops if that source directory already exists:
+Use a new directory for this checkout. If the destination already exists, choose a different `LP_WORKDIR` before running the commands:
 
 ```bash
-python3.12 - <<'PY'
-import hashlib
-import io
-from pathlib import Path
-import urllib.request
-import zipfile
-
-base = "https://raw.githubusercontent.com/ranimandepudi/arm-learning-paths/84b9bcb7e8989113345c0a504cb668c34d10765f/content/learning-paths/servers-and-cloud-computing/axion-agent-studio/assets"
-name = "axion-agent-studio-2026-11-09.zip"
-expected = "aa64b1f04c8c18ab6440e6bdddb7b4a7ff23f4431fac791f3d3f2964297fb451"
-destination = Path.home() / "axion-lp-review-2026-11-09"
-if (destination / "axion-agent-studio").exists():
-    raise SystemExit("Source directory already exists; choose a new review directory.")
-with urllib.request.urlopen(f"{base}/{name}", timeout=60) as response:
-    data = response.read()
-actual = hashlib.sha256(data).hexdigest()
-if actual != expected:
-    raise SystemExit(f"Source checksum mismatch: {actual}")
-destination.mkdir(parents=True, exist_ok=True)
-(destination / name).write_bytes(data)
-with zipfile.ZipFile(io.BytesIO(data)) as archive:
-    archive.extractall(destination)
-print(f"Verified {name}: {actual}")
-PY
 export LP_WORKDIR="$HOME/axion-lp-review-2026-11-09/axion-agent-studio"
+export SOURCE_COMMIT="65b24eda61d6d6c1e04ef78cd2c46bc7a0609b32"
+git clone https://github.com/ranimandepudi/axion-agent-studio.git "$LP_WORKDIR"
 cd "$LP_WORKDIR"
+git checkout --detach "$SOURCE_COMMIT"
+git rev-parse HEAD
 ```
 
-Expect `Verified` followed by the archive name and the checksum shown in the command. Read `LICENSE`, `LICENSE-SAMPLECODE`, `LICENSE-SUMMARY`, `NOTICE.md`, `MODEL_SOURCES.md`, and `VALIDATION.md` in the extracted directory. The validation record distinguishes local checks from the fresh GKE walkthrough, which remains pending for this draft.
+The final command must print the full commit in `SOURCE_COMMIT`. Keep this revision for the walkthrough. Read `LICENSE`, `LICENSE-SAMPLECODE`, `LICENSE-SUMMARY`, `NOTICE.md`, `MODEL_SOURCES.md`, and `VALIDATION.md` in the checkout. The validation record distinguishes local checks from the fresh GKE walkthrough, which remains pending for this draft.
+
+For later development, the repository's `main` branch supports `git pull --ff-only`. After preserving any local changes, use `git switch main` followed by `git pull --ff-only` to update it. The tutorial checkout is detached at its tested commit, so return to `main` before pulling updates.
 
 Prepare the Python environment and run the companion's checks. Keep the same terminal and source directory for all subsequent application commands:
 

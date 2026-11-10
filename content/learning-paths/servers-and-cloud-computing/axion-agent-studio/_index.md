@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
   - An existing GKE Standard cluster with Workload Identity Federation, enforced NetworkPolicy, and the compatible Agent Sandbox API described in Prepare your environment
   - Available C4A and N4A node capacity, Artifact Registry access, and a Google Cloud project with billing and Vertex AI model access
-  - A Linux or macOS workstation with Bash, Python 3.12, Node.js 22, Google Cloud CLI, the GKE authentication plugin, kubectl, and Docker Buildx
+  - A Linux or macOS workstation with Bash, Git, Python 3.12, Node.js 22, Google Cloud CLI, the GKE authentication plugin, kubectl, and Docker Buildx
   - Permission to deploy namespaced Kubernetes resources and an administrator who can configure node pools and the required IAM binding
   - The versioned companion source linked in Prepare your environment, plus permission to use the model and application code under their respective licenses
 author: Rani Chowdary Mandepudi
