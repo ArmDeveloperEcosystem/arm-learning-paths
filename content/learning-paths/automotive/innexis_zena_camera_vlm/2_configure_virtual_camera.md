@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Configure and check the virtual camera
 
-We will create a 3 second H.264 MP4 clip from a public photograph of parked car available under CC0 1.0 on Wikimedia Commons. The short clip gives you a recognizable scene for this single-frame exercise. You will download the source photograph yourself.
+We will create a 3 second H.264 MP4 clip from a public photograph of parked car available under CC0 1.0 on Wikimedia Commons. The short clip gives you a recognizable scene for this single-frame exercise. You will download the source photograph yourself. To test the complete virtual-camera-to-model workflow, you will turn a still photograph into a short video and use it as ANA’s camera input. You will then capture one frame through the guest’s camera device and pass it to the VLM. Repeating the same photograph makes the expected camera image easy to verify.
 
 ### Download the source and create the camera video
 
