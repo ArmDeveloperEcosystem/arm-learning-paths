@@ -99,7 +99,7 @@ file object_detection_yolox_2022nov.onnx coco.names input.jpg
 
 The output identifies the ONNX model as data, the labels as text, and `input.jpg` as a JPEG image. You can replace `input.jpg` with your own photograph later.
 
-The image contains a football player and ball:
+The image shows a football player kicking a ball:
 
 ![Input photograph of a football player kicking a ball, used to test YOLOX object detection#center](detection-input.jpg "YOLOX static-image detection input")
 
