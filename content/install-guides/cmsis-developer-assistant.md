@@ -21,7 +21,7 @@ multitool_install_part: false
 layout: installtoolsall
 ---
 
-The CMSIS Developer Assistant is an Model Context Protocol (MCP) Server. It connects your AI coding agent to CMSIS tools in Visual Studio Code (VS Code). Your agent can use it to configure projects, build and program firmware, and inspect Arm Cortex-M targets and Ethos-U accelerators.
+The CMSIS Developer Assistant is a Model Context Protocol (MCP) Server. It connects your AI coding agent to CMSIS tools in Visual Studio Code (VS Code). Your agent can use it to configure projects, build and program firmware, and inspect Arm Cortex-M targets and Ethos-U accelerators.
 
 You'll install the tool and learn how to get the most value out of it. You'll verify the installation with the provided use-cases and prompts.
 
@@ -124,7 +124,7 @@ Check my CMSIS Developer Assistant setup. Report whether you can reach its MCP t
 
 Prompt your coding agent to list the VS Code windows through Developer Assistant and identify your workspace. If several windows are open, select the intended one using **CMSIS Developer Assistant: Select Target Window**, or ask the agent to pin it.
 
-The setup check passes when the agent can succesfully complete the following tasks:
+The setup check passes when the agent can successfully complete the following tasks:
 
 - Reach the MCP tools
 - Identify the intended workspace
@@ -148,7 +148,7 @@ An Arm FVP simulates a target system on the host. The [Corstone-320 FVP](https:/
 
 Follow the [Arm FVP installation guide](/install-guides/fm_fvp/) for your chosen FVP and host. On macOS, use [AVH FVPs on macOS](/install-guides/fvps-on-macos/) for the Docker wrapper and its prerequisites.
 
-Complete the installation and licence steps before continuing. Give the agent the FVP executable path and indicate whether it runs natively or in a container. Ask the agent to use the FVP setup procedure available through `/cmsis-help` to configure the CMSIS debugger connection.
+Complete the installation and licence steps before continuing. Give the agent the FVP executable path and indicate whether it runs directly on the host or in a container. Ask the agent to use the FVP setup procedure available through `/cmsis-help` to configure the CMSIS debugger connection.
 
 Then, prompt your agent to use CMSIS Developer Assistant and create a Blinky example:
 
