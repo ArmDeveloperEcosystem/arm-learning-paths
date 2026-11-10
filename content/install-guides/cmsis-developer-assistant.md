@@ -124,7 +124,7 @@ Check my CMSIS Developer Assistant setup. Report whether you can reach its MCP t
 
 Prompt your coding agent to list the VS Code windows through Developer Assistant and identify your workspace. If several windows are open, select the intended one using **CMSIS Developer Assistant: Select Target Window**, or ask the agent to pin it.
 
-The setup check passes when the agent can successfully complete the following tasks:
+The setup check passes when the agent can complete the following tasks:
 
 - Reach the MCP tools
 - Identify the intended workspace
@@ -174,7 +174,7 @@ Answer any required setup questions. Finish by prompting the agent to clear its 
 
 ### Explore your project with the assistant
 
-After either Blinky check, keep the project open and ask the agent to explain how it works:
+After either Blinky check, keep the project open and prompt the agent to explain how it works:
 
 ```input
 Using CMSIS Developer Assistant, identify the device, board or FVP, and software packs configured in this project. Explain which peripherals Blinky uses and how the code changes the LED state. Use the project source and available target documentation, and cite the relevant files and manual sections. Tell me if any required documentation is unavailable.
@@ -182,7 +182,7 @@ Using CMSIS Developer Assistant, identify the device, board or FVP, and software
 
 The answer should identify your configured target and connect the explanation to its source code and documentation. Check the cited files and references. This verifies that the assistant can retrieve project and device information as well as build and debug.
 
-Continue the conversation as you would with a tutor. Ask for a simpler explanation, question an assumption, or request a walkthrough of a function. For example:
+Continue the conversation as you would with a tutor. Prompt for a simpler explanation, question an assumption, or request a walkthrough of a function. For example:
 
 ```input
 Walk me through the path from main to the LED update, one step at a time. Explain how the update interval is set and how I could verify it with the debugger. Ask me a question to check my understanding before suggesting changes.
@@ -194,10 +194,10 @@ Use an Ethos-U-equipped Cortex-M board or a supported Corstone FVP. Start with t
 
 The application includes solutions for Ethos-U55, Ethos-U65, and Ethos-U85. Prompt the agent to select the solution and supported target that match your hardware, following the application README and the [CMSIS-Ethos-U integration guide](https://arm-software.github.io/CMSIS-Ethos-U/main/integration/index.html).
 
-| Target | What the agent needs to establish |
+| Target | Required information |
 |---|---|
-| FVP | The model executable, supported CMSIS example, accelerator variant and MAC configuration, and simulation debugger connection. Corstone-320 provides an Ethos-U85 target. |
-| Physical board | The exact board and core, Board Support Pack (BSP) and Device Family Pack (DFP), probe, and accelerator. Configuration, accessible memory, and any vendor provisioning. |
+| FVP | The agent needs to identify the model executable, supported CMSIS example, accelerator variant and MAC configuration, and simulation debugger connection. Corstone-320 provides an Ethos-U85 target. |
+| Physical board | The agent needs to identify the exact board, core, Board Support Pack (BSP), and Device Family Pack (DFP). The agent also needs to confirm probe and accelerator, as well as configuration, accessible memory, and any vendor provisioning. |
 
 A model compiled for one target isn't automatically suitable for another, even when both use the same Ethos-U variant. The compiled model, driver, linker placement, and memory configuration need to be compatible. The agent should reuse verified platform support and report any missing support. It shouldn't guess register addresses or reuse the binary of another board.
 
@@ -223,7 +223,7 @@ If a check fails, prompt the agent to investigate the live target and verify its
 
 Keep this check to targets supported by the example. Developing a new board port is beyond the scope of the install guide. After the reference tests work, you can prompt the agent to adapt the application to your own model and inputs.
 
-After this is working, you can instead try creating a new application by providing a model and use-case. Prompt your agent to use CMSIS Developer Assistant and the Test-Ethos-U project as an example.
+After this is working, you can try creating a new application by providing a model and use-case. Prompt your agent to use CMSIS Developer Assistant and the Test-Ethos-U project as an example.
 
 ### Use an existing application
 
@@ -239,7 +239,7 @@ Use the following guidance to troubleshoot issues with installing and using CMSI
 | The agent can't see CMSIS tools | Run **CMSIS Developer Assistant: Configure Agent** again for that agent, then restart its session. Use `/cmsis-help` to check the connection. |
 | A new project window is absent from the agent window list | Check **Workspace Trust** and tools prompts in that window. Allow its extensions to activate before retrying. |
 | Calls target another project | Select or pin the intended target window and confirm the reported workspace. |
-| The wrong FVP solution is active | In directories containing several solutions, explicitly select the solution for your accelerator and confirm its target. Wait for tool installation to finish before retrying. |
+| The wrong FVP solution is active | In directories containing several solutions, select the solution for your accelerator and confirm its target. Wait for tool installation to finish before retrying. |
 | Build works but debugging does not | Check the selected probe and target, board power, and vendor setup. Prompt for session status and recent problems before retrying. |
 | A continuously running FVP won't pause or stop | If stopping through CMSIS fails, stop only that test model container in Docker Desktop before relaunching. |
 | The debugger remains unresponsive | Stop debugging. If needed, reconnect the board or probe. After reconnecting, reload the workspace. Collect **CMSIS Developer Assistant: Copy Recent Problems** for a report. |
