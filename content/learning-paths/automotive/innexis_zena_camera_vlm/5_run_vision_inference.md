@@ -9,13 +9,11 @@ layout: learningpathall
 
 ## Run and record image inference
 
-Run llama.cpp **inside the Zena guest** on the JPEG captured from `/dev/video0`. Use the model and projector verified on page 4. This connects the ANA camera input to a local vision-model response.
+Run llama.cpp **inside the Zena guest** on the JPEG captured from `/dev/video0` using the models downloaded in the previous page. This connects the ANA camera input to a local vision-model response.
 
 ### Run inference on the captured frame
 
 Copy the entire block into the guest shell. It saves the raw log and exit status under `/root/zena-camera-vlm/results/`.
-
-<!-- VERIFY: Rerun this reader-formatted command exactly as written before publication. Its arguments and output files match the successful reported run. -->
 
 ```bash
 WORK_DIR=/root/zena-camera-vlm ; FRAME_FILE="$WORK_DIR/frames/file-after-control.jpg" ; MODEL_FILE="$WORK_DIR/models/SmolVLM2-500M-Video-Instruct-Q8_0.gguf" ; MMPROJ_FILE="$WORK_DIR/models/mmproj-SmolVLM2-500M-Video-Instruct-Q8_0.gguf" ; LLAMA_CLI=/root/zena-llamacpp/llama.cpp/build/bin/llama-cli
@@ -39,8 +37,6 @@ Check that `vision-run.exit` contains `0`, the log names `file-after-control.jpg
 The reported response matches the parked-car frame. Your model might use different words; compare the answer with your saved image instead of expecting this exact sentence.
 
 ### Save the evidence and stop the VP
-
-Keep the captured JPEG, `vision-run.log`, `vision-run.exit`, and their file hashes together. Record any mismatch between the image and answer without changing the raw log.
 
 Transfer the files through your chamber's authorized route. Then stop the VP and confirm its state in Lab Manager. If you continue to the optional moving-scene exercise, begin with the VP stopped so you can check its camera input before starting it again. Check the current Auto Shutdown setting before any longer run.
 
