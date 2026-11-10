@@ -86,6 +86,13 @@ ALTER TABLE customers OWNER TO appuser;
 ALTER TABLE orders OWNER TO appuser;
 ```
 
+Refresh table statistics after loading the data so that the planner can estimate row counts:
+
+```sql
+ANALYZE customers;
+ANALYZE orders;
+```
+
 ## Run analytical queries
 
 The queries in this section are analytical (OLAP-style) queries running against the transactional (OLTP) dataset you just loaded. PostgreSQL handles both workload types, which makes it well suited to applications that need operational reporting without a separate data warehouse.
@@ -100,18 +107,18 @@ SELECT SUM(amount) FROM orders WHERE status = 'completed';
 - Filters only completed orders
 - Calculates the total revenue generated
 
-The output is similar to:
+The output is similar to the following. Values vary because the data is generated randomly:
 
 ```output
              sum
 -----------------------------
- 125444891.15572856461471770
+ 124414860.65033803348711829
 (1 row)
 ```
 
 **What the output means:**
 
-- Total revenue ≈ 125 million
+- Total revenue ≈ 124 million
 - This represents the overall business earnings from completed transactions
 
 ## Top customers by spending
@@ -129,18 +136,18 @@ LIMIT 10;
 The output is similar to:
 
 ```output
- customer_id |    total_spent
--------------+--------------------
-       45136 | 9402.1803173247709
-       70670 |  9179.385512892869
-       57604 | 8936.2102913510321
-        3594 | 8885.8026615034014
-       68349 |  8817.484402872083
-       45974 | 8761.6822572100911
-       20049 | 8739.8605561353213
-       79794 |  8615.155198629147
-       67514 |  8573.093324224081
-       49210 |  8497.876121330483
+ customer_id |     total_spent
+-------------+---------------------
+       16021 | 9757.17849691554412
+       65362 |   9480.616339618432
+       23655 |   9475.396800278951
+       63338 |   9115.408319627621
+       14210 |   8984.348823019261
+       83829 | 8816.20850098299377
+       24426 |   8813.805309608848
+       72351 |  8678.9592274794816
+        6402 |  8669.9254814219292
+       96090 |  8667.1985959082242
 (10 rows)
 ```
 
@@ -170,16 +177,16 @@ The output is similar to:
 ```output
     name    | count
 ------------+-------
- user_24831 |    17
- user_59573 |    16
- user_92684 |    16
- user_20049 |    16
- user_99775 |    16
- user_35090 |    16
- user_39820 |    16
- user_45879 |    15
- user_18306 |    15
- user_45974 |    15
+ user_16021 |    17
+ user_6402  |    17
+ user_89555 |    17
+ user_55403 |    17
+ user_83829 |    16
+ user_44560 |    16
+ user_13394 |    16
+ user_78553 |    15
+ user_72351 |    15
+ user_86515 |    15
 (10 rows)
 ```
 
@@ -204,7 +211,7 @@ Connect using the application user.
 psql -h localhost -U appuser -d appdb
 ```
 
-When prompted for a password, enter `StrongPassword123`.
+When prompted, enter the password you chose for `appuser`. Run `SELECT COUNT(*) FROM orders;` to confirm that you can read the 500,000 rows. Run `\q` to return to your VM terminal before continuing.
 
 ## What you've learned and what's next
 
