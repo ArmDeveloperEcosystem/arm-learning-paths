@@ -1,15 +1,11 @@
 ---
-title: Build a Camera-to-VLM Pipeline on Arm Zena CSS
-
-draft: true
-cascade:
-    draft: true
+title: Build a camera-to-VLM pipeline on Arm Zena CSS
     
 description: Capture a virtual camera frame in a Zena CSS Linux guest and submit it to a local vision-language model for a recorded functional check.
 
 minutes_to_complete: 90
 
-who_is_this_for: AI and vision developers who can access an Arm Zena CSS virtual platform in Siemens Innexis ANA.
+who_is_this_for: This Learning Path is for AI and vision developers who can access an Arm Zena CSS virtual platform in Siemens Innexis ANA.
 
 learning_objectives:
     - Configure a reproducible video input for the Zena CSS virtual camera.
@@ -18,15 +14,16 @@ learning_objectives:
     - Run one local image prompt and save the input and response together.
 
 prerequisites:
-    - Access to a Zena CSS virtual platform in Siemens Innexis ANA and console or authorized SSH access to its EWAOL Linux guest after startup.
-    - Complete Run Local LLM Inference with llama.cpp on Arm Zena CSS in the same Linux guest OS, so its llama-cli binary is available.
-    - Permission to configure a virtual camera file input, and `ffmpeg` and `ffprobe` on your local computer to prepare video from public source media.
-    - Enough guest storage and memory for a vision model; check the actual guest before downloading files.
-    - A working guest file-transfer route and basic Linux command-line knowledge.
+    - Access to a Zena CSS virtual platform in Siemens Innexis ANA and console, or authorized SSH access to its EWAOL Linux guest after startup
+    - Completion of [Run local LLM inference with llama.cpp on Arm Zena CSS](/learning-paths/automotive/innexis_zena_llamacpp/) in the same Linux guest OS, so its llama-cli binary is available
+    - Permission to configure a virtual camera file input
+    - The `ffmpeg` and `ffprobe` tools on your local computer to prepare video from public source media
+    - Enough guest storage and memory for a vision model
+    - A working guest file-transfer route and basic Linux command-line knowledge
 
 author: Odin Shen
 
-generate_summary_faq: false
+generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
