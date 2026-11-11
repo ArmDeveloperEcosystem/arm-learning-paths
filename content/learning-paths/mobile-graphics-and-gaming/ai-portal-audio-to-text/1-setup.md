@@ -1,6 +1,6 @@
 ---
-title: Prepare the Android command-line tools for building Whisper Journal
-description: Install and verify the Android command-line tools and SDK packages needed to build Whisper Journal.
+title: Prepare the Android command-line tools for building Speech Journal
+description: Install and verify the Android command-line tools and SDK packages needed to build Speech Journal.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
@@ -11,7 +11,7 @@ layout: learningpathall
 
 The [Arm AI Portal](https://developer.arm.com/ai/models) is a catalog of AI models across different runtimes, use cases, and profiles that are optimized for Arm-based targets. The AI Portal provides benchmarking and compatibility data, code examples, and deployment methods.
 
-You'll use an example application called Whisper Journal to run optimized Whisper speech recognition models from the Arm AI Portal on an Arm-based Android device.
+You'll use an example application called Speech Journal to run optimized audio transcription models from the Arm AI Portal on an Arm-based Android device.
 
 ## Check the host development tools
 
@@ -172,4 +172,4 @@ The final two checks return no output on macOS or Linux when the directories exi
 
 You've now installed the Android command-line tools and verified the required SDK packages.
 
-Next, you'll connect an Arm-based Android phone and build Whisper Journal.
+Next, you'll connect an Arm-based Android phone and build Speech Journal.

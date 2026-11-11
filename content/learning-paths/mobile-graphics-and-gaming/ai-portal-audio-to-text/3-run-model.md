@@ -7,15 +7,15 @@ weight: 4
 layout: learningpathall
 ---
 
-## Whisper Journal adapters
+## Speech Journal adapters
 
 An adapter is application code that connects the shared Android interface to a model task and runtime. It validates a compatible model, prepares its inputs, invokes [LiteRT for Android](https://ai.google.dev/edge/litert/android) or [ExecuTorch for Android](https://docs.pytorch.org/executorch/stable/using-executorch-android.html), and converts the outputs into results the application can display.
 
-Whisper Journal uses a separate adapter for each supported runtime. The adapter connects the shared recording interface to the runtime and handles each model’s preprocessing and decoding requirements. After you select a registered model, the application chooses the matching adapter automatically.
+Speech Journal supplies four adapters across two runtimes. Each adapter handles a supported combination of model programs, input tensors, preprocessing, and decoding. After you select a registered model, the application chooses the matching adapter automatically.
 
-## Speech recognition with Whisper Journal
+## Speech recognition with Speech Journal
 
-Whisper Journal records mono audio at 16 kHz and generates an English transcript locally on the Android CPU. It doesn't upload the recording to a server.
+Speech Journal records mono audio at 16 kHz and generates an English transcript locally on the Android CPU. It doesn't upload the recording to a server.
 
 Start with Whisper Base INT8 and its LiteRT adapter. You can use another supported model after completing the default workflow. Run the commands from the project directory in the same terminal session that you used during setup.
 
@@ -63,7 +63,7 @@ The final command copies the package to the phone's **Downloads** directory.
 
 ### Import and transcribe with LiteRT
 
-In Whisper Journal:
+In Speech Journal:
 
 1. Expand **AI model**.
 2. Select **Whisper Base · LiteRT**.
@@ -71,7 +71,7 @@ In Whisper Journal:
 4. Open **Downloads** in the Android document picker and select `whisper-base-int8-litert.zip`.
 5. Wait until the model panel reports **Installed and ready for private on-device transcription**.
 
-![Whisper Journal with Whisper Base and LiteRT selected. The model status confirms that the package is installed and ready for private on-device transcription.#center](whisper-model-ready.png "Whisper Base loaded and ready in Whisper Journal")
+![Speech Journal with Whisper Base and LiteRT selected. The model status confirms that the package is installed and ready for private on-device transcription.#center](whisper-model-ready.png "Whisper Base loaded and ready in Speech Journal")
 
 The importer copies the required model and tokenizer files into application-private storage. You can delete the package from Android's **Downloads** directory after the import completes.
 
@@ -87,13 +87,13 @@ Wait while the LiteRT adapter prepares the audio, runs the model, and decodes th
 
 The completed journal entry shows the English transcript, word count, adapter transcription time, and LiteRT with XNNPACK as the runtime backend. The time includes preprocessing, model inference, and token decoding. It doesn't include recording, model import, or model loading.
 
-![Whisper Journal showing a completed English transcript with its word count, transcription time, LiteRT and XNNPACK backend, and entry action buttons.#center](whisper-generated.png "A completed on-device transcript using Whisper Base and LiteRT")
+![Speech Journal showing a completed English transcript with its word count, transcription time, LiteRT and XNNPACK backend, and entry action buttons.#center](whisper-generated.png "A completed on-device transcript using Whisper Base and LiteRT")
 
 Treat the displayed transcription time as an application measurement rather than a benchmark.
 
 ## Compare with Whisper Tiny and ExecuTorch
 
-Next, run the Whisper Tiny INT8 package with the ExecuTorch adapter. This comparison changes both the model and the runtime. It demonstrates how Whisper Journal switches between registered adapters, but it isn't a controlled LiteRT-versus-ExecuTorch benchmark.
+Next, run the Whisper Tiny INT8 package with the ExecuTorch adapter. This comparison changes both the model and the runtime. It demonstrates how Speech Journal switches between registered adapters, but it isn't a controlled LiteRT-versus-ExecuTorch benchmark.
 
 ### Download and copy Whisper Tiny
 
@@ -132,10 +132,10 @@ adb push "$MODEL_PACKAGE" /sdcard/Download/
 
 The downloader selects `whisper_tiny_vivo_executorch_optimized.pte` and packages it with the audio preprocessor and matching `tokenizer.json` as `whisper-tiny-int8-xnnpack-executorch.zip`.
 
-Start or return to Whisper Journal:
+Start or return to Speech Journal:
 
 ```console
-adb shell am start -n org.arm.learningpath.whisper/.MainActivity
+adb shell am start -n org.arm.learningpath.speech/.MainActivity
 ```
 
 ### Import and transcribe with ExecuTorch
@@ -157,7 +157,7 @@ Enable airplane mode and repeat one recording. A new transcript confirms that in
 
 ## Use another supported model
 
-Whisper Journal recognizes the following packages:
+Speech Journal recognizes the following packages:
 
 | Model | Runtime | Hugging Face repository ID | Import this package |
 | --- | --- | --- | --- |
@@ -167,6 +167,7 @@ Whisper Journal recognizes the following packages:
 | [Whisper Small INT8](https://huggingface.co/Arm/whisper-small-int8-xnnpack-executorch) | ExecuTorch | `Arm/whisper-small-int8-xnnpack-executorch` | `whisper-small-int8-xnnpack-executorch.zip` |
 | [Whisper Medium INT8](https://huggingface.co/Arm/whisper-medium-int8-litert) | LiteRT | `Arm/whisper-medium-int8-litert` | `whisper-medium-int8-litert.zip` |
 | [Whisper Large V3 INT8](https://huggingface.co/Arm/whisper-large-v3-int8-litert) | LiteRT | `Arm/whisper-large-v3-int8-litert` | `whisper-large-v3-int8-litert.zip` |
+| [Conformer CTC INT8](https://huggingface.co/Arm/conformer-ctc-int8-xnnpack-executorch-vivo-x300) | ExecuTorch | `Arm/conformer-ctc-int8-xnnpack-executorch-vivo-x300` | `conformer-ctc-int8-xnnpack-executorch-vivo-x300.zip` |
 
 The first two rows are the models used in the guided workflows.
 

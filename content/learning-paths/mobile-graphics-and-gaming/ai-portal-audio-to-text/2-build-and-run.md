@@ -1,6 +1,6 @@
 ---
-title: Connect an Arm-based Android device and run Whisper Journal
-description: Connect an Arm-based Android phone, prepare the Whisper Journal repository, and verify that the application starts.
+title: Connect an Arm-based Android device and run Speech Journal
+description: Connect an Arm-based Android phone, prepare the Speech Journal repository, and verify that the application starts.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -62,7 +62,7 @@ The later commands invoke the environment's Python executable directly, so the P
 
 If Python reports that `venv` is unavailable on Debian or Ubuntu, install the `python3-venv` package and rerun the command.
 
-## Build and run the Whisper Journal application
+## Build and run the Speech Journal application
 
 Use the Gradle wrapper to build and lint the debug Android package (APK):
 
@@ -78,19 +78,19 @@ chmod +x gradlew
 
 You don't need to install Gradle separately because the repository includes the wrapper.
 
-Install the APK and start Whisper Journal with the commands used on every operating system:
+Install the APK and start Speech Journal with the commands used on every operating system:
 
 ```console
 adb install -r app/build/outputs/apk/debug/app-debug.apk
-adb shell am start -n org.arm.learningpath.whisper/.MainActivity
+adb shell am start -n org.arm.learningpath.speech/.MainActivity
 ```
 
-On a first install, Whisper Journal opens with recording disabled because no model has been imported. Installing with `adb install -r` preserves any model imported previously.
+On a first install, Speech Journal opens with recording disabled because no model has been imported. Installing with `adb install -r` preserves any model imported previously.
 
-![Whisper Journal first-launch screen with an empty journal entry, no model installed, and recording disabled. The model setup message shows that you must import a model before recording.#center](whisper-startup.png "Whisper Journal before a model is imported")
+![Speech Journal first-launch screen with an empty journal entry, no model installed, and recording disabled. The model setup message shows that you must import a model before recording.#center](whisper-startup.png "Speech Journal before a model is imported")
 
 ## What you've accomplished and what's next
 
-You've connected an Arm-based Android phone, prepared the model downloader, and confirmed that Whisper Journal builds and starts.
+You've connected an Arm-based Android phone, prepared the model downloader, and confirmed that Speech Journal builds and starts.
 
 Next, you'll download an optimized speech transcription model from the Arm AI Portal and transcribe speech locally.
