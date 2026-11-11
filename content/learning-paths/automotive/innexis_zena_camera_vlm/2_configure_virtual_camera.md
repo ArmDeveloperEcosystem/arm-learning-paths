@@ -41,7 +41,7 @@ Set `MEDIA_DIR` and `SOURCE_IMAGE` to the directory and filename you used:
 MEDIA_DIR="$HOME/zena-camera-media" ; SOURCE_IMAGE="$MEDIA_DIR/parked-cars-original.jpg"
 ```
 
-On your local machine, crop the photograph and create a three-second camera video. Run the following commands together:
+On your local machine, crop the photograph and create a three-second camera video:
 
 ```bash
 MEDIA_DIR="$HOME/zena-camera-media" ; SOURCE_IMAGE="$MEDIA_DIR/parked-cars-original.jpg" ;

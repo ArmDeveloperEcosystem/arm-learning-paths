@@ -15,7 +15,7 @@ Use the `llama-cli` binary that you built in the [llama.cpp Learning Path](/lear
 
 ### Check guest capacity
 
-The following commands prepare the model and results directories, then report available guest storage and memory:
+Prepare the model and results directories, then report available guest storage and memory:
 
 ```bash
 WORK_DIR=/root/zena-camera-vlm

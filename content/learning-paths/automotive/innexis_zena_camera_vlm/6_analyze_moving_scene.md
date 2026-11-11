@@ -51,9 +51,9 @@ The hash might differ depending on the `ffmpeg` version that you used.
 
 ### Send the moving clip through ANA
 
-Reuse the camera path that you configured earlier. Upload the verified MP4 to the root of your Architecture Native Acceleration (ANA) virtual platform workspace.
+Reuse the camera path that you configured earlier. Upload the verified MP4 to the root of your Innexis Architecture Native Acceleration (ANA) virtual platform workspace.
 
-In **Lab Manager → Device Connections → Audio/Video Inputs**, check that `vsock-camera-0` is set to **None**. If not, stop the virtual platform, modify the settings, and start the virtual platform. 
+In **Lab Manager → Device Connections → Audio/Video Inputs**, check that `vsock-camera-0` is set to **None**. If not, stop the virtual platform and modify the settings. After updating the settings, start the virtual platform. 
 
 Start `virtualcam-bridge@1.service` in the guest:
 
@@ -125,7 +125,7 @@ Use the pinned [SmolVLM2-2.2B-Instruct-GGUF revision](https://huggingface.co/ggm
 - [Q4_K_M model](https://huggingface.co/ggml-org/SmolVLM2-2.2B-Instruct-GGUF/blob/1bc3c9f74ceafd4c8d4411cc9cf188bba3798f91/SmolVLM2-2.2B-Instruct-Q4_K_M.gguf)
 - [Q8_0 multimodal projector](https://huggingface.co/ggml-org/SmolVLM2-2.2B-Instruct-GGUF/blob/1bc3c9f74ceafd4c8d4411cc9cf188bba3798f91/mmproj-SmolVLM2-2.2B-Instruct-Q8_0.gguf)
 
-Together, the files are about 1.7 GB. 
+Together, the size of the files is about 1.7 GB. 
 
 Each download command checks its SHA-256 before moving the file to its final path:
 
@@ -155,7 +155,7 @@ WORK_DIR=/root/zena-camera-vlm ; FRAME_FILE="$WORK_DIR/frames/moving-traffic-2.j
 
 Confirm that both runs completed with exit status `0`, then compare their descriptions of the same captured frame.
 
-The 500M model described traffic, cars and trucks. The 2.2B model reported: “A traffic jam on a busy city street with cars and a fountain in the background.”
+During testing, the 500M model described traffic, cars, and trucks. The 2.2B model reported: “A traffic jam on a busy city street with cars and a fountain in the background.”
 
 Inspect the captured image and check which details support each description. Note any objects that the models omitted or described incorrectly. 
 

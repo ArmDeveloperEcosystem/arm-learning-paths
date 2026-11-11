@@ -8,7 +8,9 @@ layout: learningpathall
 ---
 ## Run inference on the captured frame
 
-Run llama.cpp inside the Zena guest on the JPEG captured from `/dev/video0` using the models that you downloaded earlier. This connects the virtual camera input to a local vision-language model (VLM) response.
+Now that you've prepared a vision-language model (VLM), run inference on the image frame that you captured earlier.
+
+Run llama.cpp inside the Zena guest on the JPEG captured from `/dev/video0` using the models that you downloaded earlier. This connects the virtual camera input to a local VLM response.
 
 Copy and run the entire block in the guest shell:
 
@@ -27,24 +29,24 @@ The commands save the raw log and exit status under `/root/zena-camera-vlm/resul
 
 Check the results for the following details:
 
-- `vision-run.exit` contains `0`
-- The log names `file-after-control.jpg` after `Loaded media from`
-- The response describes the saved JPEG
+- `vision-run.exit` contains `0`.
+- The log shows `file-after-control.jpg` after `Loaded media from`.
+- The response describes the saved JPEG.
 
 When testing the workflow, all three checks passed. 
 
-The model responded:
+During testing, the model responded:
 
 ```output
 > Describe what you can see in this image in one short sentence.
  A row of cars are parked in a parking lot, with a building in the background.
 ```
 
-The response matched the parked-car frame. Your model might use different words. Compare the answer with your saved image instead of expecting this exact sentence.
+The response matched the parked-car frame. Your model might use different words. Compare the answer with your saved image.
 
 ## Save the evidence and stop the virtual platform
 
-Transfer the files through the authorized route for your chamber. Then, stop the virtual platform and confirm its state in **Lab Manager**. Check the current **Auto Shutdown** setting before any longer run.
+Transfer the files through the authorized route for your chamber. After file transfer, stop the virtual platform and confirm its state in **Lab Manager**. Check the current **Auto Shutdown** setting before any longer run.
 
 This result confirms that a camera frame reached a local VLM in the guest. Note that the result isn't indicative of detection accuracy, continuous video rate, accelerator use, or physical-silicon performance.
 

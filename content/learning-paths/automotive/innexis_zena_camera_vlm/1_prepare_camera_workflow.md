@@ -76,7 +76,7 @@ Create one directory for the camera image and VLM results:
 WORK_DIR=/root/zena-camera-vlm ; mkdir -p "$WORK_DIR/frames" "$WORK_DIR/results" "$WORK_DIR/models" ; df -h "$WORK_DIR"
 ```
 
-The ANA Auto Shutdown setting is configurable. Check the remaining session time in Lab Manager before starting a long model download. Save your files before the virtual platform stops.
+The ANA **Auto Shutdown** setting is configurable. Check the remaining session time in **Lab Manager** before starting a long model download. Save your files before the virtual platform stops.
 
 ## What you've accomplished and what's next
 
