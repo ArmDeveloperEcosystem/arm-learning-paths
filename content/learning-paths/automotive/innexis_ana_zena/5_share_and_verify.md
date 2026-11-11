@@ -74,6 +74,6 @@ Before stopping, save the boot marker, guest environment output, SSH check, file
 
 For a persistence check, start the **same project** again. In the tested run, the shared folder and files remained in the ANA workspace, but Linux needed the 9p mount command again after the VP restarted. Remount the share and read **lp1-check.txt** to confirm it is still available. Stop the virtual platform again when you finish this check.
 
-## What you have accomplished
+## What you have learned
 
 You have completed this Learning Path when you have a recorded Linux boot, guest environment details, a successful SSH connection, a verified file round trip, and a stopped virtual platform. These results establish a boot and guest-access baseline on this virtual platform. They do not measure physical-silicon performance or validate its security properties.

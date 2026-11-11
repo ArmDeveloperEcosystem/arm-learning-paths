@@ -16,7 +16,11 @@ In **Lab Manager > Networking > Port Mapping** (or **Device Access Ports**), sel
 
 ![ANA Port Mapping panel with the Authorize button and generated SSH tunnel command#center](ana_port_mapping.png "Authorize an ANA SSH tunnel")
 
-Find the TCP entry whose **target port** is `22`. Record its target IP and external port in your private run notes. Read the network prefix from the guest interface. Do not treat every listed external port as an SSH port.
+        1. Find the TCP entry whose **target port** is `22`. 
+        2. Record its target IP and external port in your private run notes. 
+        3. Read the network prefix from the guest interface. 
+
+        NOTE: Do not treat every listed external port as an SSH port.
 
 ![ANA Port Mapping table showing the external TCP port mapped to guest port 22#center](ana_port_mapping2.png "Find the SSH port mapping")
 
@@ -61,7 +65,11 @@ systemctl is-active sshd.socket
 
 ## Authorize the tunnel and connect
 
-In ANA, select or register your local SSH public key and choose **Authorize** for this VP. Copy the complete tunnel command that ANA generates and run it on your **local computer**. Keep that terminal open. Do not include the generated endpoint or key material in a published example.
+In ANA dashboard:
+
+        1. Select or register your local SSH public key and choose **Authorize** for this VP. 
+        2. Copy the complete tunnel command that ANA generates and run it on your **local computer**. 
+        3. Keep that terminal open. Do not include the generated endpoint or key material in a published example.
 
 In a second **local terminal**, enter the external port from the mapping whose target port is `22`:
 
