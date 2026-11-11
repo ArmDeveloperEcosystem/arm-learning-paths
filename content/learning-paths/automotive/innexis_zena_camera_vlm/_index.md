@@ -1,5 +1,10 @@
 ---
 title: Build a camera-to-VLM pipeline on Arm Zena CSS
+
+draft: true
+cascade:
+    draft: true
+    
     
 description: Capture a virtual camera frame in a Zena CSS Linux guest and submit it to a local vision-language model for a recorded functional check.
 
