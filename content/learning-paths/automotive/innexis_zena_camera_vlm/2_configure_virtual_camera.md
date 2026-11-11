@@ -11,14 +11,14 @@ layout: learningpathall
 
 After preparing directories for input and output, you can prepare camera input.
 
-You'll create a 3 second H.264 MP4 clip from a public photograph of parked car available under CC0 1.0 on Wikimedia Commons. The short clip gives you a recognizable scene for the Learning Path.  You'll use the video as input for the virtual camera. 
+You'll create a three-second H.264 MP4 clip from a public photograph of parked cars available under CC0 1.0 on Wikimedia Commons. The short clip gives you a recognizable scene for the Learning Path. You'll use the video as input for the virtual camera.
 
 You'll then capture one frame through the guest camera device and pass it to the vision-language model (VLM). Repeating the same photograph makes the expected camera image easy to verify.
 
 ### Download the source and create the camera video
 
 {{% notice Note %}}
-This Learning Path was tested with an Apple® silicon Mac as the local machine. Commands, file paths, and interface details might differ on other operating systems. E
+This Learning Path was tested with an Apple® silicon Mac as the local machine. Commands, file paths, and interface details might differ on other operating systems.
 
 Ensure that your local machine has `ffmpeg`. For example, on Mac, you can install it using the `brew` package manager with the following command:
 
@@ -34,6 +34,8 @@ MEDIA_DIR="$HOME/zena-camera-media" ; mkdir -p "$MEDIA_DIR"
 ```
 
 Open the [source photograph on Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Car_parking_(25737623545).jpg). Select **Original file** under the download button, and save the file in the media directory as `parked-cars-original.jpg`.
+
+Set `MEDIA_DIR` and `SOURCE_IMAGE` to the directory and filename you used:
 
 ```bash
 MEDIA_DIR="$HOME/zena-camera-media" ; SOURCE_IMAGE="$MEDIA_DIR/parked-cars-original.jpg"
@@ -84,7 +86,7 @@ If **None** isn't selected, stop the virtual platform. Select **None**, then sel
 
 {{% notice Note%}}
 
-If you restart the virtual platform, you might need to restablish SSH tunnelling as per the instructions in the [introductory learning path](/learning-paths/automotive/innexis_ana_zena/).
+If you restart the virtual platform, you might need to reestablish SSH tunnelling as described in the [Arm Zena CSS setup Learning Path](/learning-paths/automotive/innexis_ana_zena/).
 
 {{% /notice %}}
 
@@ -104,7 +106,7 @@ Discover the camera command port of the virtual platform:
 CMD_PORT=$(printf 'vsock-camera-0:cmd\n' | socat -T5 - VSOCK-CONNECT:2:5000) ; LOOKUP_STATUS=$? ; printf 'Command port: <%s>\nLookup status: %s\n' "$CMD_PORT" "$LOOKUP_STATUS" ; if [ "$LOOKUP_STATUS" -eq 0 ] && [ -n "$CMD_PORT" ]; then printf 'INPUT\n' | socat -T5 - "VSOCK-CONNECT:2:$CMD_PORT" ; printf 'Input query status: %s\n' "$?" ; fi
 ```
 
-The port value can change after a restart
+The port value can change after a restart.
 
 In the example run, the lookup returned port `6001` and initial input `NONE`. Continue only if your lookup succeeds and returns a number. 
 

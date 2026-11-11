@@ -29,7 +29,7 @@ Check the results for the following details:
 
 - `vision-run.exit` contains `0`
 - The log names `file-after-control.jpg` after `Loaded media from`
-- The response describes the saved JPEG.
+- The response describes the saved JPEG
 
 When testing the workflow, all three checks passed. 
 
@@ -48,11 +48,11 @@ Transfer the files through the authorized route for your chamber. Then, stop the
 
 This result confirms that a camera frame reached a local VLM in the guest. Note that the result isn't indicative of detection accuracy, continuous video rate, accelerator use, or physical-silicon performance.
 
-## What you've accomplished
+## What you've accomplished and what's next
 
-You've used a captured a virtual camera frame as input for a local VLM, and used the VLM to perform inference. 
+You've used a captured virtual camera frame as input for a local VLM and run inference.
 
-You can extend the Learning Path to analyze other images or [optionally complete steps to analyze a moving scene](/learning-paths/automotive/innexis_zena_llamacpp/5_iterate_and_collect/). 
+You can extend the Learning Path to analyze other images or [optionally complete steps to analyze a moving scene](/learning-paths/automotive/innexis_zena_camera_vlm/6_analyze_moving_scene/). 
 
 If you choose to perform optional inference on a moving scene, begin with the virtual platform stopped. With the virtual platform stopped, you can check its camera input before starting it again.
 

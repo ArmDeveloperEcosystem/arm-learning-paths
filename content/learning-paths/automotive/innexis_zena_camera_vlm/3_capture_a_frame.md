@@ -51,7 +51,7 @@ Capture status: 0
 632e0ade2f7827eb33d9d099a615069a94f8254104f7770694a48b1dace3798a  /root/zena-camera-vlm/frames/file-after-control.jpg
 ```
 
-Transfer the captured camera frame to your local computer. If the shared directory from the [introductory learning path](/learning-paths/automotive/innexis_ana_zena/) is still mounted, run the following command in the guest shell:
+Transfer the captured camera frame to your local computer. If the shared directory from the [Arm Zena CSS setup Learning Path](/learning-paths/automotive/innexis_ana_zena/) is still mounted, run the following command in the guest shell:
 
 ```bash
 cp /root/zena-camera-vlm/frames/file-after-control.jpg /mnt/ana-share/

@@ -13,9 +13,9 @@ Now that you've established an input image, you can prepare the vision-language 
 
 Use the `llama-cli` binary that you built in the [llama.cpp Learning Path](/learning-paths/automotive/innexis_zena_llamacpp/) and verified earlier. You'll add the two files needed for image inference: a vision-language model and its matching multimodal projector (`mmproj`). For more information, see the [llama.cpp multimodal documentation](https://github.com/ggml-org/llama.cpp/blob/master/docs/multimodal.md).
 
-### Check image support and guest capacity
+### Check guest capacity
 
-The following checks confirm how much storage is available, and that`llama-cli` runs:
+The following commands prepare the model and results directories, then report available guest storage and memory:
 
 ```bash
 WORK_DIR=/root/zena-camera-vlm

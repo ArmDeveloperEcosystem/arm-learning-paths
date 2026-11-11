@@ -79,7 +79,7 @@ if [ -n "$CMD_PORT" ]; then INPUT_REPLY=$(printf '%s\n' 'INPUT=${project_loc}/au
 
 The output is similar to:
 
-```ouptput
+```output
 Set input response: <OK>
 Set input status: 0
 ${project_loc}/automotive-moving-traffic-640x480.mp4
@@ -108,7 +108,7 @@ Compare the 500M and 2.2B models on the same captured JPEG. Use the same prompt 
 
 ### Check the frame and rerun the 500M model
 
-Select a captured frame that shows the moving traffic scene. The example run used `moving-traffic-2.jpg`, which passed its SHA-256 check. Run the 500M model from on this frame:
+Select a captured frame that shows the moving traffic scene. The example run used `moving-traffic-2.jpg`, which passed its SHA-256 check. Run the 500M model on this frame:
 
 ```bash
 WORK_DIR=/root/zena-camera-vlm ; FRAME_FILE="$WORK_DIR/frames/moving-traffic-2.jpg" ; MODEL_FILE="$WORK_DIR/models/SmolVLM2-500M-Video-Instruct-Q8_0.gguf" ; MMPROJ_FILE="$WORK_DIR/models/mmproj-SmolVLM2-500M-Video-Instruct-Q8_0.gguf" ; LLAMA_CLI=/root/zena-llamacpp/llama.cpp/build/bin/llama-cli ; mkdir -p "$WORK_DIR/results" ; START_TIME=$(date +%s) ; timeout 180s "$LLAMA_CLI" -m "$MODEL_FILE" --mmproj "$MMPROJ_FILE" --no-mmproj-offload --image "$FRAME_FILE" -ngl 0 -t 4 -tb 4 -c 4096 -n 96 --temp 0 --seed 42 --single-turn --simple-io -p 'Describe what you can see in this image in one short sentence.' > "$WORK_DIR/results/moving-500m.log" 2>&1 ; RUN_STATUS=$? ; END_TIME=$(date +%s) ; printf '%s\n' "$RUN_STATUS" > "$WORK_DIR/results/moving-500m.exit" ; printf '500M run status: %s\nElapsed wall seconds: %s\n' "$RUN_STATUS" "$((END_TIME - START_TIME))" ; tail -n 40 "$WORK_DIR/results/moving-500m.log"
@@ -134,6 +134,8 @@ WORK_DIR=/root/zena-camera-vlm ; MODEL_REV=1bc3c9f74ceafd4c8d4411cc9cf188bba3798
 ```
 
 In the example guest run, the downloaded `Q4_K_M` file passed SHA-256, and the final status was `0`. `ls -lh` showed 1.1G.
+
+Download and verify the projector in the same guest:
 
 ```bash
 WORK_DIR=/root/zena-camera-vlm ; MODEL_REV=1bc3c9f74ceafd4c8d4411cc9cf188bba3798f91 ; MMPROJ_FILE="$WORK_DIR/models/mmproj-SmolVLM2-2.2B-Instruct-Q8_0.gguf" ; wget -nv -c -O "$MMPROJ_FILE.part" "https://huggingface.co/ggml-org/SmolVLM2-2.2B-Instruct-GGUF/resolve/$MODEL_REV/mmproj-SmolVLM2-2.2B-Instruct-Q8_0.gguf" && printf 'ae07ea1facd07dd3230c4483b63e8cda96c6944ad2481f33d531f79e892dd024  %s\n' "$MMPROJ_FILE.part" | sha256sum -c - && mv "$MMPROJ_FILE.part" "$MMPROJ_FILE" && ls -lh "$MMPROJ_FILE" ; printf 'Projector download status: %s\n' "$?"
@@ -161,6 +163,8 @@ Inspect the captured image and check which details support each description. Not
 The results validate functional inference on the virtual platform. They don't establish model accuracy, measure physical-silicon performance, or demonstrate continuous video inference.
 {{% /notice %}}
 
-## What you've accomplished
+## What you've accomplished 
 
 You've used a recorded moving scene to check that the virtual camera supplies changing images. You've also inspected how two local vision models describe the same captured input.
+
+You can use the saved frames and responses to investigate specific scene details or repeat the check with another input.

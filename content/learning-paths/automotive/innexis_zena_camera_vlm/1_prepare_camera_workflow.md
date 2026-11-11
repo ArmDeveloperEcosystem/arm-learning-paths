@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Validate the virtual platform for the camera-to-VLM workflow
 
-This Learning Path extends [Run local LLM inference with llama.cpp on Arm Zena CSS](/learning-paths/automotive/innexis_zena_llamacpp/) by adding a vision model and projector. Continue in the same guest OS where you built and ran `llama.cpp`. You'll give Siemens Innexis Architecture Native Acceleration (ANA) a video file. You'll read one frame through the Zena CSS Linux guest OS virtual camera. Then, you'll run a vision-language model (VLM) on that saved frame inside the guest.
+This Learning Path extends [Run local LLM inference with llama.cpp on Arm Zena CSS](/learning-paths/automotive/innexis_zena_llamacpp/) by adding a vision model and projector. Continue in the same guest OS where you built and ran llama.cpp. You'll give Siemens Innexis Architecture Native Acceleration (ANA) a video file. You'll read one frame through the Zena CSS Linux guest OS virtual camera. Then, you'll run a vision-language model (VLM) on that saved frame inside the guest.
 
 The workflow has four parts: 
 
