@@ -1,15 +1,15 @@
 ---
-title: Transpose and packing
-description: Visualize transpose and packing of matrix A using Arm SME.
+title: Transpose and pack matrix A
+description: Step through an interactive view that loads matrix A into ZA rows and writes ZA columns to a packed, zero padded output buffer.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Prepare A for matrix multiplication
+## Prepare matrix A for multiplication
 
-Packing changes the order of values in memory so that a matrix multiplication kernel can load those values more efficiently. This visualisation loads **Input Matrix A** values into rows of ZA, and writes columns of ZA into **Output Packed Data**. Packing changes the layout of data, but does not calculate the matrix product.
+Packing changes the order of values in memory so that a matrix multiplication kernel can load those values more efficiently. This visualization loads **Input Matrix A** values into rows of ZA, and writes columns of ZA into **Output Packed Data**. Packing changes the layout of data, but doesn't calculate the matrix product.
 
 ## Use the playback controls
 
@@ -19,9 +19,9 @@ Select the **rightmost double-arrow button (⏩)** to advance one step or the **
 
 Press play or advance manually to follow the algorithm:
 
-1. The first ten steps load rows from **Input Matrix A** into rows of ZA0 - ZA2. Note that because different implementations can have different Scalable Vector Length, predicates are used to determine which rows are active.
-2. The next twelve steps write columns of ZA data into rows of **Output Packed Data**.
-3. Notice that the last four steps write zero-padded values, because the rows of **Input Matrix A** are not an exact multiple of the ZA tile height. Predicates control which rows of ZA2 are active, and thus which elements of **Output Packed Data** are zero-padded.
+1. The first 10 steps load rows from **Input Matrix A** into rows of ZA0 - ZA2. Note that because different implementations can have different Scalable Vector Length, predicates are used to determine which rows are active.
+2. The next 12 steps write columns of ZA data into rows of **Output Packed Data**.
+3. Notice that the last four steps write zero-padded values, because the rows of **Input Matrix A** aren't an exact multiple of the ZA tile height. Predicates control which rows of ZA2 are active, and thus which elements of **Output Packed Data** are zero-padded.
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/pack32-a"
@@ -36,6 +36,6 @@ If you need more space then use the "Full screen" button at the top-right, or [o
 
 ## What you've accomplished
 
-You have traced a change in matrix A's memory layout. The packed GEMM view later in this path begins with this kind of prepared A data. First, prepare its other operand, B.
+You have traced a change in matrix A's memory layout. The packed GEMM visualization begins with this kind of prepared A data. First, prepare its other operand, B.
 
 The [preprocessing example in the SME2 matrix multiplication Learning Path](/learning-paths/cross-platform/multiplying-matrices-with-sme2/5-outer-product/#preprocessing-with-preprocess_l) shows how a C kernel prepares its left-hand matrix. Its precise layout belongs to that implementation.

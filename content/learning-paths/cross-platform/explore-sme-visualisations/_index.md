@@ -8,7 +8,7 @@ cascade:
     
 minutes_to_complete: 40
 
-who_is_this_for: You want to understand Arm SME matrix data movement before reading or writing SME2 code.
+who_is_this_for: This is an introductory topic for software developers who want to understand how Arm SME moves matrix data before they read or write SME2 code.
 
 learning_objectives:
     - Understand how ZA storage and ZA tiles are affected by Streaming Vector Length and data element size.
@@ -19,7 +19,9 @@ prerequisites:
     - A browser with JavaScript enabled
     - Basic familiarity with vectors and matrix multiplication
 
-author: Chris Sidebottom
+author:
+    - Chris Sidebottom
+    - Andrew Pickard
 
 generate_summary_faq: false
 rerun_summary: false
@@ -31,7 +33,6 @@ subjects: Performance and Architecture
 armips:
     - Arm C1
 tools_software_languages:
-    - SME
     - SME2
 
 operatingsystems:
@@ -43,6 +44,7 @@ operatingsystems:
 shared_path: true
 shared_between:
     - mobile-graphics-and-gaming
+    - laptops-and-desktops
 
 further_reading:
     - resource:
@@ -52,10 +54,6 @@ further_reading:
     - resource:
         title: Accelerate matrix multiplication performance with SME2
         link: /learning-paths/cross-platform/multiplying-matrices-with-sme2/
-        type: website
-    - resource:
-        title: Scalable Visualisations source code
-        link: https://github.com/Arm-Debug/visualising-sme
         type: website
     - resource:
         title: Matrix-matrix multiplication with Neon, SVE, and SME compared
