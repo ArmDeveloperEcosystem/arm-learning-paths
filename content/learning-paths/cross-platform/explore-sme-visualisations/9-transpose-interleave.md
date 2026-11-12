@@ -21,15 +21,19 @@ The visualization shows the output **Interleaved Matrix** as a 16 x 16 matrix. I
 
 If the embedded visualization doesn't load, [open the A interleave visualization in a full browser tab](/apps/sme-visualisations/#/sme/pack32-2x2-a). Switch between the Learning Path and the visualization tab.
 
-Follow the algorithm that transposes and interleaves the **Input Matrix** data:
+Use the step ranges to follow how **Input Matrix** becomes **Interleaved Matrix**:
 
-1. The first eight steps load partial rows of **Input Matrix** data into rows of the ZA0 and ZA1 tiles.
-2. The next eight steps load partial rows of **Input Matrix** data into rows of the ZA2 and ZA3 tiles.
-3. The next eight steps store columns of ZA0 and ZA2 into rows of the **Interleaved Matrix** output buffer.
-4. The next eight steps store columns of ZA1 and ZA3 into the next two rows of the **Interleaved Matrix** output buffer.
-5. The next 32 steps repeat this procedure for the remainder of the horizontal strip of **Input Matrix** that's being processed. The matrix has exactly 16 columns and 16 rows. As a result, the remainder of the horizontal strip happens to be the top-right quadrant.
-6. After the first two-tile-deep horizontal strip is complete, the algorithm moves to the next one. The next 32 steps process the bottom-left quadrant of **Input Matrix** into four rows of the **Interleaved Matrix** output buffer.
-7. The final 32 steps process the remainder of this horizontal strip into the last four rows of the **Interleaved Matrix** output buffer. This happens to be the bottom-right quadrant.
+| Stage | Visualization steps | Operation |
+|---|---|---|
+| Load the first region | 1–8 | Load partial rows of **Input Matrix** into rows of ZA0 and ZA1. |
+| Load the next rows | 9–16 | Load partial rows into rows of ZA2 and ZA3. |
+| Store the first output rows | 17–24 | Store columns of ZA0 and ZA2 into rows of **Interleaved Matrix**. |
+| Store the next output rows | 25–32 | Store columns of ZA1 and ZA3 into the next two output rows. |
+| Process the top-right region | 33–64 | Repeat the load-and-store pattern for the rest of the first horizontal strip. |
+| Process the bottom-left region | 65–96 | Move to the next horizontal strip and write four more output rows. |
+| Process the bottom-right region | 97–128 | Finish the strip and write the final four output rows. |
+
+The **Input Matrix** has 16 rows and 16 columns. The first 32 steps process its top-left quadrant; the remaining stages cover the other three quadrants.
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/pack32-2x2-a"

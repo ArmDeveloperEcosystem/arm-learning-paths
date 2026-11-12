@@ -37,7 +37,7 @@ After you accumulate the fourth partial result, you've fully calculated the resu
 More results would have been calculated from the same number of instructions in the following circumstances:
 
 - If smaller data types were used
-- If the device used had a larger Streaming Vector Length 
+- If the device used had a larger scalable vector length 
 
 ## Optimize memory access
 
@@ -56,7 +56,7 @@ Where the final strip doesn't contain the same number of rows as the others, pad
 
 For data element size larger than 8 bits, there are multiple ZA tiles available. Using all of them allows you to achieve the greatest data reuse and minimize memory system access.
 
-In the diagram that follows, four tiles of results are processed at a time. The matrix B data is accessed sequentially from memory. The matrix A data is accessed as columns within horizontal strips, shown as a blue strip and a yellow strip. The height of each strip depends on the Scalable Vector Length.
+In the diagram that follows, four tiles of results are processed at a time. Matrix B data is accessed sequentially from memory. Matrix A data is accessed as columns within horizontal strips, shown as a blue strip and a yellow strip. The height of each strip depends on the scalable vector length.
 
 The ZA0 partial results are generated from an outer product of the blue and green data. The ZA1 partial results are generated from an outer product of the blue and red data. For the remaining tiles, you also need to load the yellow data. The ZA2 partial results are generated from an outer product of the yellow and green data. The ZA3 partial results are generated from an outer product of the yellow and red data.
 

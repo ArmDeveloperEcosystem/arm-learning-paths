@@ -15,15 +15,17 @@ This final General Matrix Multiplication (GEMM) visualization begins with matrix
 
 If the embedded visualization doesn't load, [open the interleaved GEMM visualization in a full browser tab](/apps/sme-visualisations/#/sme/gemm32-2x2-interleave). Switch between the Learning Path and the visualization tab.
 
-Follow the algorithm as contiguous data is loaded from the input matrices:
+Follow the same stages as the gather-load GEMM and compare how matrix A reaches Z2 and Z3:
 
-1. The first four steps load a row of **B Input Data** into Z0 and Z1, and two rows of **A Input Data** into Z2 and Z3. The **A Input Data** is loaded from contiguous memory addresses.
-2. The next four steps perform matrix outer product calculations to store the first partial results into the ZA0 - ZA3 tiles.
-3. The next eight steps load the second row of **B Input Data** and the third and fourth rows of **A Input Data**. They accumulate outer product results into the ZA0 - ZA3 tiles.
-4. The next eight steps do the same for the third row of **B Input Data** and the fifth and sixth rows of **A Input Data**.
-5. The next eight steps address the last row of **B Input Data** and the last two rows of **A Input Data**.
-6. After the results are fully calculated, the next eight steps store ZA0 and ZA1 in **Output Matrix Data**. 
-7. A further eight steps store ZA2 and ZA3.
+| Stage | Visualization steps | Operation |
+|---|---|---|
+| Load the first inputs | 1–4 | Load the first row of **B Input Data** into Z0–Z1 and the first two rows of **A Input Data** into Z2–Z3. The A loads use contiguous addresses. |
+| Calculate the first outer products | 5–8 | Accumulate the first partial results in ZA0–ZA3. |
+| Process the second inputs | 9–16 | Load the second row of B and the third and fourth rows of A, then accumulate outer products. |
+| Process the third inputs | 17–24 | Repeat for the third row of B and the fifth and sixth rows of A. |
+| Process the fourth inputs | 25–32 | Repeat for the fourth row of B and the last two rows of A. |
+| Store the first results | 33–40 | Write ZA0 and ZA1 to **Output Matrix Data**. |
+| Store the remaining results | 41–48 | Write ZA2 and ZA3 to **Output Matrix Data**. |
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/gemm32-2x2-interleave"

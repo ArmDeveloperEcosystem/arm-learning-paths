@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Prepare matrix A for multiplication
 
-Packing changes the order of values in memory so that a matrix multiplication kernel can load those values more efficiently. This visualization loads **Input Matrix A** values into rows of ZA, and writes columns of ZA into **Output Packed Data**. Packing changes the layout of data, but doesn't calculate the matrix product.
+Packing changes the order of values in memory so that a matrix multiplication kernel can load those values more efficiently. The following visualization loads **Input Matrix A** values into rows of ZA, and writes columns of ZA into **Output Packed Data**. Packing changes the layout of data, but it doesn't calculate the matrix product.
 
 If the embedded visualization doesn't load, [open the Pack A visualization in a full browser tab](/apps/sme-visualisations/#/sme/pack32-a). Switch between the Learning Path and the visualization tab.
 
@@ -32,7 +32,7 @@ Select the play button or advance manually to follow the algorithm:
 
 ## What you've learned and what's next
 
-You've traced a change in the memory layout of matrix A. The packed GEMM (General Matrix Multiplication) visualization begins with this kind of prepared A data. 
+You've traced a change in the memory layout of matrix A. The packed General Matrix Multiplication (GEMM) visualization begins with this kind of prepared A data. 
 
 The [preprocessing example in the SME2 matrix multiplication Learning Path](/learning-paths/cross-platform/multiplying-matrices-with-sme2/5-outer-product/#preprocessing-with-preprocess_l) shows how a C kernel prepares its left-hand matrix. Its precise layout belongs to that implementation.
 
