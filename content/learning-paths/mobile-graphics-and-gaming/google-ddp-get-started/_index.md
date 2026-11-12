@@ -5,22 +5,23 @@ draft: true
 cascade:
     draft: true
 
-description: Set up Google Developer Device Platform, verify CLI access, and direct an AI agent to explore Arm SVE2 and TinyStories performance on a remote Pixel phone.
+description: Use Google Developer Device Platform and an AI agent to compare TinyStories CPU inference with and without KleidiAI optimizations on a remote Pixel phone.
 
 minutes_to_complete: 45
 
-who_is_this_for: Developers who want to access remote Android hardware through Google Cloud and direct a coding agent to inspect and use a real Arm-based phone.
+who_is_this_for: Developers who want to use a coding agent to access remote Android hardware and compare machine learning performance on an Arm-based phone.
 
 learning_objectives:
-    - Configure a Google Cloud project and local tools for Developer Device Platform
-    - Verify CLI authentication, enabled services, and device catalog access
-    - Use Google's agent skill to discover, reserve, inspect, and release a remote phone
-    - Direct an on-phone TinyStories experiment with runtime feature checks and a measured performance report
+    - Configure a Google Cloud project and local tools for Developer Device Platform (DDP).
+    - Verify CLI authentication, enabled DDP services, and device catalog access.
+    - Use Google's DDP agent skill with Antigravity to discover, reserve, inspect, and release a remote phone.
+    - Use Antigravity to compare TinyStories CPU inference with and without KleidiAI optimizations.
 
 prerequisites:
-    - A development machine with a terminal and internet access
-    - The [Google Cloud CLI](/install-guides/gcloud/) and permission to install its beta commands
-    - A coding agent that supports Agent Skills and can run local commands and inspect screenshots, such as [Google Antigravity](/install-guides/antigravity/)
+    - Access to a Google Cloud project with billing enabled and permissions to enable APIs and reserve Developer Device Platform devices
+    - A local macOS or Ubuntu 26.04 computer with a desktop session and permission to install software
+    - The [Google Cloud CLI](/install-guides/gcloud/) and permission to install beta commands
+    - The [Antigravity CLI](/install-guides/antigravity/) coding agent
 
 author: Annie Tallund
 
@@ -35,8 +36,9 @@ armips:
 tools_software_languages:
     - Google Cloud
     - Agent Skills
-    - Android
+    - Antigravity
     - llama.cpp
+    - KleidiAI
 operatingsystems:
     - Android
 

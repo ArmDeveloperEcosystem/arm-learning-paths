@@ -1,6 +1,6 @@
 ---
-title: Ask the agent to benchmark TinyStories
-description: Describe a TinyStories CPU comparison in natural language and let the agent select stable tools, verify Arm optimizations, report uplift, and release the phone.
+title: Ask Antigravity to benchmark TinyStories
+description: Direct Antigravity to compare TinyStories CPU inference with and without KleidiAI using llama.cpp, review the results, and release the remote phone.
 weight: 5
 layout: learningpathall
 ---
@@ -9,31 +9,32 @@ layout: learningpathall
 
 Use the connected phone to explore how Arm optimizations affect a small language model's inference performance. TinyStories keeps the experiment small enough to build and run on the phone inside Termux, an Android terminal environment. KleidiAI provides optimized Arm CPU kernels that llama.cpp can use for inference.
 
-Continue in the same agent conversation and give it the second prompt:
+Continue in the same `agy` session and enter the second prompt:
 
 ```text
 On our DDP phone, compare a small TinyStories model's CPU inference
 with and without Arm KleidiAI optimizations using the latest stable
 Termux and llama.cpp releases. Check output agreement and which Arm
-kernels actually run, including SVE/SVE2 where usable. Repeat with
-the same model and settings, and report prompt-processing and
+kernels actually run, including SVE2 where usable. Keep the model,
+quantization, inputs, thread count, and CPU placement the same for both
+paths. Repeat with the same model and settings, and report prompt-processing and
 token-generation uplift. Save the results locally and release the
 phone within our approved limits.
 ```
 
-The prompt gives the agent the workload, comparison, and expected result. It can choose compatible software and model files, prepare the phone, and collect the measurements. You can use it after the connection prompt without attaching these pages or copying version numbers and build settings into the conversation.
+The prompt gives Antigravity the workload, comparison, and expected result. It can choose compatible software and model files, prepare the phone, and collect the measurements. You can use it after the connection prompt without attaching these pages or copying version numbers and build settings into the conversation.
 
-## Let the agent prepare and run the experiment
+## Let Antigravity prepare and run the experiment
 
-The agent should obtain the latest stable releases from the official [Termux releases](https://github.com/termux/termux-app/releases/latest) and [llama.cpp releases](https://github.com/ggml-org/llama.cpp/releases/latest), then install the tools and build and run the workload on the phone. It records the versions it selected in the saved report so you can revisit the experiment later.
+Antigravity should obtain the latest stable releases from the official [Termux releases](https://github.com/termux/termux-app/releases/latest) and [llama.cpp releases](https://github.com/ggml-org/llama.cpp/releases/latest), then install the tools and build and run the workload on the phone. It records the versions it selected in the saved report so you can revisit the experiment later.
 
-The Arm feature check is part of that work. The agent needs to establish which optimizations the phone exposes, which ones the selected model and runtime can use, and which kernels actually execute. If SVE or SVE2 isn't usable for that combination, it should explain the reason and identify the compatible path it measured.
+The Arm feature check is part of that work. Antigravity needs to establish which optimizations the phone exposes, which ones the selected model and runtime can use, and which kernels actually execute. If SVE or SVE2 isn't usable for that combination, it should explain the reason and identify the compatible path it measured.
 
-For a fair comparison, the agent should keep the model, quantization, inputs, thread count, and CPU placement the same, with GPU offload disabled. It should check output agreement before timing and use repeated, warmed-up measurements. You can review the resulting comparison without choosing compiler flags, kernel dispatch settings, or numerical tolerances yourself.
+For a fair comparison, Antigravity should keep the model, quantization, inputs, thread count, and CPU placement the same, with GPU offload disabled. It should check output agreement before timing and use repeated, warmed-up measurements. You can review the resulting comparison without choosing compiler flags, kernel dispatch settings, or numerical tolerances yourself.
 
 ## Review the performance report
 
-Look for separate results for prompt processing and token generation. The report should show the baseline and optimized throughput, the uplift, and the variation across measurements. Check the agent's explanation of the kernels responsible for the result, including any fallback or regression.
+Look for separate results for prompt processing and token generation. The report should show the baseline and optimized throughput, the uplift, and the variation across measurements. Check Antigravity's explanation of the kernels responsible for the result, including any fallback or regression.
 
 The following reference results were measured on November 5, 2026, on a physical Pixel 11 with Tensor G6 and Android 17 (API 37). Each value is the median of five alternating measurement pairs, using the same TinyStories Q4_0 model and one CPU thread:
 
@@ -45,16 +46,16 @@ The following reference results were measured on November 5, 2026, on a physical
 Higher tokens per second is better. Calculate `speedup = optimized / baseline` and `throughput uplift (%) = 100 × (speedup − 1)` from the median throughput for each path. These results measure warmed-up inference and exclude model loading and initial weight packing.
 
 {{% notice Note %}}
-Your agent selects the latest stable releases and a compatible model for your run, so its results can differ.
+Antigravity selects the latest stable releases and a compatible model for your run, so its results may differ.
 {{% /notice %}}
 
 
 ## Confirm the results are saved and the phone is released
 
-The prompt includes saving the results and releasing the phone. Check that the agent gives you a readable local report with the measurements, device details, software versions, and kernel evidence.
+The prompt includes saving the results and releasing the phone. Check that Antigravity gives you a readable local report with the measurements, device details, software versions, and kernel evidence.
 
-The agent should cancel the recorded DDP session, confirm that its cloud state is `FINISHED` or `EXPIRED`, and close the viewer and connection. Closing a window alone doesn't stop device-time billing. If the task stops early, ask the agent to release the session and verify that it has ended.
+Antigravity should cancel the recorded DDP session, confirm that its cloud state is `FINISHED` or `EXPIRED`, and close the viewer and connection. Closing a window alone doesn't stop device-time billing. If the task stops early, ask Antigravity in your `agy` session to release the session and verify that it has ended.
 
 ## What you've accomplished
 
-You've used natural language to connect to remote Arm hardware and investigate a performance question. The agent handled device access, software selection, setup, kernel checks, measurement, and cleanup. You chose the task and spending limits, then reviewed the screen, results, and explanation.
+You've used Antigravity CLI and natural language to connect to remote Arm hardware and investigate a performance question. Antigravity handled device access, software selection, setup, kernel checks, measurement, and cleanup. You chose the task and spending limits, then reviewed the screen, results, and explanation.
