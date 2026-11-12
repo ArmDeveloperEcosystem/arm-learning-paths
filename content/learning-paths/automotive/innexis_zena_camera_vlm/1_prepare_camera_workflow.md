@@ -7,15 +7,23 @@ weight: 2
 layout: learningpathall
 ---
 
-## Prepare the camera-to-VLM workflow
+## Validate the virtual platform for the camera-to-VLM workflow
 
-This Learning Path extends [Run Local LLM Inference with llama.cpp on Arm Zena CSS](../innexis_zena_llamacpp/). Continue in the same guest OS where you built and ran `llama.cpp`. You will give Siemens Innexis ANA a video file, read one frame through the Zena CSS Linux guest OS virtual camera, and run a vision-language model (VLM) on that saved frame **inside the guest**.
+This Learning Path extends [Run local LLM inference with llama.cpp on Arm Zena CSS](/learning-paths/automotive/innexis_zena_llamacpp/) by adding a vision model and projector. Continue in the same guest OS where you built and ran llama.cpp. You'll give Siemens Innexis Architecture Native Acceleration (ANA) a video file. You'll read one frame through the Zena CSS Linux guest OS virtual camera. Then, you'll run a vision-language model (VLM) on that saved frame inside the guest.
 
-The path has four parts: ANA file input → virtual camera bridge → guest OS `/dev/video0` → vision-capable model running with the existing `llama.cpp` binary. The video source and its license are identified on the next page. The model runs on the frame captured in the guest; a separate download of the source photograph is not required. This tutorial adds a vision model and projector to the previous [Run Local LLM Inference with llama.cpp on Arm Zena CSS](../innexis_zena_llamacpp/) environment. It checks functional integration using one frame; it does not measure real-time video performance or physical hardware.
+The workflow has four parts: 
 
-The 90-minute completion time is an estimate. It has not been measured from start to finish in a fresh chamber.
+```text
+ANA file input → virtual camera bridge → guest OS `/dev/video0` → vision-capable model running with the existing `llama.cpp` binary
+```
 
-Run in the **Zena Edge Workloads for Automotive Linux (EWAOL) guest OS**:
+The model runs on the frame captured in the guest, so you don't need a separate download of the source photograph. It checks functional integration using one frame. It doesn't measure real-time video performance or physical hardware.
+
+{{% notice Note %}}
+The 90-minute Learning Path completion time is an estimate. It hasn't been measured from start to finish in a fresh chamber.
+{{% /notice %}}
+
+Run the following commands in the Zena Edge Workloads for Automotive Linux (EWAOL) guest OS:
 
 ```bash
 cat /etc/os-release
@@ -28,7 +36,7 @@ for tool in systemctl gst-launch-1.0 gst-inspect-1.0 sha256sum; do
 done
 ```
 
-The tested guest reported the following as per the output below. All four tools were found under `/usr/bin`. Your available memory and disk space will depend on the current VP session.
+The guest that was used to test the Learning Path reported the following values: 
 
 ```output
 ID=ewaol
@@ -44,14 +52,15 @@ Filesystem      Size  Used Avail Use% Mounted on
 /usr/bin/gst-inspect-1.0
 /usr/bin/sha256sum
 ```
+All four tools were found under `/usr/bin`. Your available memory and disk space will depend on the current virtual platform session.
 
-Confirm that the `llama-cli` binary from the preceding Learning Path is available in this **same guest OS**:
+Confirm that the `llama-cli` binary from the preceding Learning Path is available in this same guest OS:
 
 ```bash
 LLAMA_CLI=/root/zena-llamacpp/llama.cpp/build/bin/llama-cli ; test -x "$LLAMA_CLI" && "$LLAMA_CLI" --version ; printf 'llama-cli prerequisite status: %s\n' "$?"
 ```
 
-In the current guest OS, the binary reported:
+The output is similar to:
 
 ```output
 version: 0.6.0-dev (build 11482, commit b86d2f075)
@@ -59,7 +68,7 @@ built with GNU 14.2.0 for Linux aarch64
 llama-cli prerequisite status: 0
 ```
 
-If the binary is absent, complete the preceding [Learning Path](../innexis_zena_llamacpp/) in this guest OS before continuing. This Learning Path does not repeat its source and build steps.
+## Create directories for input and output
 
 Create one directory for the camera image and VLM results:
 
@@ -67,8 +76,10 @@ Create one directory for the camera image and VLM results:
 WORK_DIR=/root/zena-camera-vlm ; mkdir -p "$WORK_DIR/frames" "$WORK_DIR/results" "$WORK_DIR/models" ; df -h "$WORK_DIR"
 ```
 
-ANA's Auto Shutdown setting is configurable. Check the remaining session time in Lab Manager before starting a long model download, and save your files before the virtual platform (VP) stops.
+The ANA **Auto Shutdown** setting is configurable. Check the remaining session time in **Lab Manager** before starting a long model download. Save your files before the virtual platform stops.
 
-## What you have learned
+## What you've accomplished and what's next
 
-You have identified the guest OS and prepared a place to preserve the camera input and inference result. The next page configures the virtual camera source.
+You've identified the guest OS and prepared a place to preserve the camera input and inference result. 
+
+Next, you'll configure the virtual camera source.

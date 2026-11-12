@@ -6,14 +6,13 @@ weight: 6
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Run inference on the captured frame
 
-## Run and record image inference
+Now that you've prepared a vision-language model (VLM), run inference on the image frame that you captured earlier.
 
-Run llama.cpp **inside the Zena guest** on the JPEG captured from `/dev/video0` using the models downloaded in the previous page. This connects the ANA camera input to a local vision-model response.
+Run llama.cpp inside the Zena guest on the JPEG captured from `/dev/video0` using the models that you downloaded earlier. This connects the virtual camera input to a local VLM response.
 
-### Run inference on the captured frame
-
-Copy the entire block into the guest shell. It saves the raw log and exit status under `/root/zena-camera-vlm/results/`.
+Copy and run the entire block in the guest shell:
 
 ```bash
 WORK_DIR=/root/zena-camera-vlm ; FRAME_FILE="$WORK_DIR/frames/file-after-control.jpg" ; MODEL_FILE="$WORK_DIR/models/SmolVLM2-500M-Video-Instruct-Q8_0.gguf" ; MMPROJ_FILE="$WORK_DIR/models/mmproj-SmolVLM2-500M-Video-Instruct-Q8_0.gguf" ; LLAMA_CLI=/root/zena-llamacpp/llama.cpp/build/bin/llama-cli
@@ -24,24 +23,39 @@ else
     printf 'A required camera frame, model, projector, or binary is missing.\n'
 fi
 ```
+The commands save the raw log and exit status under `/root/zena-camera-vlm/results/`.
 
-### Check the result
+## Check the result
 
-Check that `vision-run.exit` contains `0`, the log names `file-after-control.jpg` after `Loaded media from`, and the response describes the saved JPEG. In the reported run, all three checks passed. The model responded:
+Check the results for the following details:
+
+- `vision-run.exit` contains `0`.
+- The log shows `file-after-control.jpg` after `Loaded media from`.
+- The response describes the saved JPEG.
+
+When testing the workflow, all three checks passed. 
+
+During testing, the model responded:
 
 ```output
 > Describe what you can see in this image in one short sentence.
  A row of cars are parked in a parking lot, with a building in the background.
 ```
 
-The reported response matches the parked-car frame. Your model might use different words; compare the answer with your saved image instead of expecting this exact sentence.
+The response matched the parked-car frame. Your model might use different words. Compare the answer with your saved image.
 
-### Save the evidence and stop the VP
+## Save the evidence and stop the virtual platform
 
-Transfer the files through your chamber's authorized route. Then stop the VP and confirm its state in Lab Manager. If you continue to the optional moving-scene exercise, begin with the VP stopped so you can check its camera input before starting it again. Check the current Auto Shutdown setting before any longer run.
+Transfer the files through the authorized route for your chamber. After file transfer, stop the virtual platform and confirm its state in **Lab Manager**. Check the current **Auto Shutdown** setting before any longer run.
 
-This result confirms a camera frame reached a local VLM in the guest. It does not measure detection accuracy, continuous video rate, accelerator use, or physical-silicon performance.
+This result confirms that a camera frame reached a local VLM in the guest. Note that the result isn't indicative of detection accuracy, continuous video rate, accelerator use, or physical-silicon performance.
 
-## What you have learned
+## What you've accomplished and what's next
 
-You have captured a virtual camera frame, run an image prompt in the guest, and saved the image and response for review.
+You've used a captured virtual camera frame as input for a local VLM and run inference.
+
+You can extend the Learning Path to analyze other images or [optionally complete steps to analyze a moving scene](/learning-paths/automotive/innexis_zena_camera_vlm/6_analyze_moving_scene/). 
+
+If you choose to perform optional inference on a moving scene, begin with the virtual platform stopped. With the virtual platform stopped, you can check its camera input before starting it again.
+
+
