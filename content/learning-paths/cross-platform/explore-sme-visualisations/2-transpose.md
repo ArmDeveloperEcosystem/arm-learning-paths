@@ -39,7 +39,7 @@ The original matrix had data increasing sequentially along each row. The resulti
 
 ## Why the data is mirrored left-to-right
 
-Reload the page to reset the visualization, and advance one step. The first 8 values of **Matrix Data** read as follows:
+Reload the page to reset the visualization, and advance one step. The first eight values of **Matrix Data** read as follows:
 
 ```text
 0, 1, 2, 3, 4, 5, 6, 7
