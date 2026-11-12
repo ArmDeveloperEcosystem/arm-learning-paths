@@ -19,7 +19,7 @@ The visualization processes horizontal blocks of three ZA tiles at a time, accum
 
 The visualization stores the results and resets the tiles again to calculate the last three tiles, which cover the final two rows. In total, it processes nine tiles of matrix data.
 
-![GEMM using packed transposed matrix A and padded matrix B#center](images/gemm_packed.png "GEMM using packed transposed matrix A and padded matrix B")
+![Matrix A is transposed and matrix B is padded before their values enter Z registers. Three ZA tiles accumulate a horizontal block of output results, then the process repeats for later rows.#center](images/gemm_packed.png "GEMM using packed transposed matrix A and padded matrix B")
 
 ## Why use a linear arrangement of three tiles
 
@@ -33,7 +33,7 @@ Note that for larger scalable vector lengths, the calculus can change. For scala
 
 In this visualization, the code is functionally correct on all devices regardless of scalable vector length. However, it's optimized for devices with scalable vector length equal to 128 bits.
 
-## Step through the example visualization
+## Trace packed GEMM loads and ZA accumulation
 
 If the embedded view doesn't load, [open the GEMM visualization in a full browser tab](/apps/sme-visualisations/#/sme/gemm32-packed). Switch between the Learning Path and the visualization tab.
 
@@ -48,11 +48,11 @@ Follow the data from input through accumulation and storage:
 7. Next, all of the previous steps repeat, using the next four rows of **A Packed Data** and going back to the beginning of **B Padded Data**. The algorithm has moved down by a tile-sized block and starts again at the leftmost column of the matrix. 
 
     Processing the new row of tile-sized blocks involves another 43 steps:
-    - Four rows x seven steps to load data for each row and calculate the output product
+    - Four rows x seven steps to load data for each row and calculate the outer product
     - 12 steps to write the result to **Output Matrix Data**
     - Three steps to zero the ZA tiles
 8. The next 34 steps deal with the final block of three tiles, as follows:
-    - Four rows x seven steps to load data for each row and calculate the output product
+    - Four rows x seven steps to load data for each row and calculate the outer product
     - Six steps to write the result to **Output Matrix Data**, because there are only two rows
 
 {{< fullscreen-iframe

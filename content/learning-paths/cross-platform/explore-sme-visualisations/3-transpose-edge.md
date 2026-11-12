@@ -15,7 +15,7 @@ If the embedded visualization doesn't work, [open the incomplete-edge transpose 
 
 ## Follow the edge values
 
-Press the play button or advance manually to follow the algorithm. Focus on how the last two columns of **Input Matrix Data** are loaded into ZA0 - ZA2 as partial rows in step 5:
+Select the **Play or Pause button** or advance manually to follow the algorithm. Focus on how the last two columns of **Input Matrix Data** are loaded into ZA0 - ZA2 as partial rows in step 5:
 
 1. The first 10 steps load rows from the first four columns of the input matrix into rows of ZA0-ZA2.
 2. The next 12 steps store data sequentially into the output matrix from columns of ZA0-ZA2.

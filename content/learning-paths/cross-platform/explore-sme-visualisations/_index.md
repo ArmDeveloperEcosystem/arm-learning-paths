@@ -1,6 +1,6 @@
 ---
 title: Explore SME matrix operations with interactive visualizations
-description: Explore nine interactive views of ZA layout, transposition, operand preparation, and matrix multiplication to understand Arm SME data movement.
+description: Trace Arm SME data movement through interactive ZA layout, operand preparation, and matrix multiplication visualizations.
     
 minutes_to_complete: 40
 
@@ -9,7 +9,7 @@ who_is_this_for: This is an introductory topic for software developers who want 
 learning_objectives:
     - Understand how ZA storage and ZA tiles are affected by Streaming Vector Length and data element size.
     - Explore transposition, packing, and padding to optimize memory layout.
-    - Compare three matrix multiplication implementations and explain how their input layouts affect data movement efficiency.
+    - Trace three GEMM visualizations and compare how gather-load and interleaved input layouts affect data movement.
 
 prerequisites:
     - A browser with JavaScript enabled

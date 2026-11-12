@@ -15,7 +15,7 @@ If the embedded visualization doesn't load, [open the Pack A visualization in a 
 
 ## Follow the transpose and pack algorithm
 
-Press play or advance manually to follow the algorithm:
+Select the **Play or Pause button** or advance manually to follow the algorithm:
 
 1. The first 10 steps load rows from **Input Matrix A** into rows of ZA0 - ZA2. Predicates are used to determine which rows are active because different implementations can have different scalable vector lengths.
 2. The next 12 steps write columns of ZA data into rows of **Output Packed Data**.

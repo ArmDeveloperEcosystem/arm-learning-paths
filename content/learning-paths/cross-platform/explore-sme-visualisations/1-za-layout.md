@@ -26,9 +26,11 @@ SME2 builds on this programming model with the following additional features:
 - A range prefetch hint
 - Compressed neural network support using lookup table instructions
 
-You'll view a set of interactive ZA visualizations in this Learning Path, starting with the ZA Tile Layout view. All visualizations runs in your browser, so you don't need an SME2 device. The browser isn't running SME2 instructions.
+You'll view a set of interactive ZA visualizations in this Learning Path, starting with the ZA Tile Layout view. All visualizations run in your browser, so you don't need an SME2 device. The browser isn't running SME2 instructions.
 
 {{% notice Note %}}
+Use the following controls to explore the visualizations:
+
 - If you need more space to view any of the visualizations in the Learning Path, use the **Full screen** button.
 - If a visualization includes playback, select the rightmost **double-arrow button (⏩)** to advance one step at a time. The leftmost **double-arrow button (⏪)** goes back one step. The middle **Play or Pause button** runs or pauses the remaining sequence. Reload the page to return to the initial state.
 {{% /notice %}}
@@ -51,11 +53,11 @@ Use the selectors and grid to explore the ZA storage and ZA tile views:
 
     Also notice that the rows of the logical tiles are interleaved in the ZA storage. Hovering over the ZA storage highlights the corresponding row in a logical tile. Hovering over a logical tile highlights the corresponding row in the ZA storage.
 4. Select or tap a logical tile or the ZA storage to toggle highlighting of columns instead of rows. Hovering over a column in the ZA0 tile maps to the same cell in alternate rows of the ZA storage.
-6. Update **Data Type** to **int32**. 
+5. Update **Data Type** to **int32**.
     
     When **Scalable Vector Length** equals 128 bits, there are four 32-bit elements in each row. There are four rows in each logical tile. The ZA storage is still 16 rows high, so there are now four logical tiles, ZA0 to ZA3. Hovering over the logical tiles or the ZA storage highlights the mapping of rows and columns.
 
-7. Update **Scalable Vector Length** to **256-bit**. 
+6. Update **Scalable Vector Length** to **256-bit**.
 
     Now, each row of the ZA storage and the logical tiles is 256 bits. This is 32 bytes or 8 elements of 32 bits. The ZA storage is now 32 rows high. There are still four logical tiles, each of 8 x 8 elements. 
 
