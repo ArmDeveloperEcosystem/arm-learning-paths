@@ -73,7 +73,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: Agentic AI
 platforms:
   - AWS Graviton
   - Microsoft Azure Cobalt
