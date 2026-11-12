@@ -1,31 +1,37 @@
 ---
 title: Set up Google Developer Device Platform
-description: Understand DDP's device catalog, automation, streaming, and agent workflows, then configure the project and connection tools.
+description: Install the local tools and configure a Google Cloud project and credentials for a Google Developer Device Platform session.
 weight: 2
 layout: learningpathall
 ---
 
 ## About the platform
 
-Google Developer Device Platform (DDP) gives you access to real Android devices through Google Cloud, without buying and maintaining your own device farm. You can try a new feature across different phone models and Android versions, compare its performance, and check how games and other graphics applications look and respond on each device.
+Google Developer Device Platform (DDP) gives you access to physical Android devices through Google Cloud, without buying and maintaining your own device farm. You can try a new feature across different phone models and Android versions, compare performance, and check how games and other graphics applications look and respond on each device.
 
 Google's [DDP agent skill](https://docs.cloud.google.com/developer-device-platform/agent-skill) lets you describe that work in natural language. Your coding agent can select a device configuration, reserve a phone, connect through Android Debug Bridge (ADB), and install the tools your experiment needs. It handles the commands and connection details while you choose what to test and approve access and spending.
 
-The agent sends experiment commands to the remote phone, where they run on real hardware. It can inspect the screen, interact with your app, and collect screenshots and measurements for you to review.
+The agent sends commands to the remote phone, where they run on real hardware. It can inspect the screen, interact with your app, and collect screenshots and measurements for you to review.
 
 The Device Catalog helps you or your agent find an available device and confirm streaming support. Device Streaming provides the interactive connection, and Device Run supports automated tests and executables. See the [DDP overview](https://docs.cloud.google.com/developer-device-platform/overview) for more about these capabilities.
 
-You'll prepare your workstation and apply this workflow to a small TinyStories experiment on a remote Pixel 11. The agent checks Arm SVE2 support, compares a CPU baseline with an optimized kernel path, and reports the measured performance.
+You'll prepare your workstation and benchmark a small language model trained on the TinyStories dataset on a remote Pixel 11. The agent checks Arm SVE2 support, compares a CPU baseline with an optimized kernel path, and reports the measured performance.
 
-## Know which tools run where
+{{% notice Note %}}
+The examples use [Antigravity CLI](/install-guides/antigravity/) as the coding agent. Other agents that support Agent Skills may also work.
+{{% /notice %}}
 
-Your development computer runs the coding agent, Google's DDP skill, and the Google Cloud CLI. Python and ADB keep it connected to the phone, and scrcpy opens the phone's screen in a desktop window. Screenshots, logs, and the final report are saved on your computer.
+## Understand the local development tools
 
-The remote Pixel does the model work. Inside Termux, an Android terminal environment, the agent downloads llama.cpp and the TinyStories model, builds the code with Clang, checks the phone's Arm features, and runs the benchmark.
+Your development computer runs the Antigravity CLI, Google's DDP skill, and the Google Cloud CLI.
+
+Python and ADB keep it connected to the phone, and `scrcpy` opens the phone's screen in a desktop window. Screenshots, logs, and the final report are saved on your computer.
+
+The remote Pixel runs Termux, an Android terminal environment. Antigravity uses Termux to download llama.cpp and the TinyStories model, build the code with Clang, check the phone's Arm architecture features, and run the benchmark.
 
 ## Check and install the local tools
 
-With the Google Cloud CLI already installed, check the other tools in the terminal your coding agent will use:
+With the Google Cloud CLI and Antigravity CLI (`agy`) already installed, check the other tools in your terminal:
 
 ```bash
 python3 --version
@@ -36,14 +42,14 @@ curl --version
 adb version
 ```
 
-You need Python 3.10 or later, a supported Node.js LTS release with npm and npx, curl, and Android platform-tools (`adb`). Python runs Google's ADB forwarder, npx installs the agent skill, curl downloads files, and ADB runs commands on the remote phone.
+You need Python 3.10 or later, a supported Node.js LTS release with `npm` and `npx`, `curl`, and Android platform-tools (`adb`). Python runs Google's ADB forwarder, `npx` installs the agent skill, `curl` downloads files, and ADB runs commands on the remote phone.
 
-If a command isn't found or the version is too old, use the instructions for your operating system below. Run the installation steps only for the tools you need. A full Android Studio installation or host NDK isn't required.
+If a command isn't found or its version is too old, use the instructions for your operating system to install or update the tool. Run the installation steps only for the tools you need. A full Android Studio installation or host NDK isn't required.
 
 {{< tabpane-normal >}}
-  {{< tab header="Linux (Ubuntu 26.04)" >}}
-
-Install Python with virtual-environment support, curl, and ADB. Git is used by the Node Version Manager and scrcpy installation steps:
+  {{< tab header="Ubuntu 26.04" >}}
+  
+Install Python with virtual-environment support, `curl`, and ADB. Git is used by the Node Version Manager and `scrcpy` installation steps:
 
 ```bash
 sudo apt update
@@ -81,9 +87,17 @@ brew install --cask android-platform-tools
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
-Repeat the version checks after installation. Each command should print a version and exit successfully. If you installed Node.js with nvm, restart your coding agent from a terminal that can find `node`, `npm`, and `npx`.
+Repeat the version checks after installation. Each command should print a version and exit successfully. If you installed Node.js with `nvm`, restart `agy` from a terminal that can find `node`, `npm`, and `npx`.
 
-DDP's CLI commands use the beta component. Install it before continuing:
+DDP's CLI commands use the beta component. Newer versions of `gcloud` don't require the beta component to be installed; it's already available.
+
+You can test if the beta command is already available by running:
+
+```bash
+gcloud beta help
+```
+
+If you see a help message, it's installed and you are ready to go. If not, you should install it before continuing:
 
 ```bash
 gcloud components install beta
@@ -96,9 +110,7 @@ If your package-managed CLI disables the component manager, follow [Google's com
 [scrcpy](https://github.com/Genymobile/scrcpy) displays an Android device in a desktop window and lets you control it with your keyboard and mouse. Install it on your development computer before reserving a phone. Use a local desktop session so the viewer can open a window.
 
 {{< tabpane-normal >}}
-  {{< tab header="Linux (Ubuntu 26.04)" >}}
-
-The upstream project marks Ubuntu's packaged scrcpy version as obsolete. The following commands build scrcpy 5.0.1 using its [upstream Linux installation procedure](https://github.com/Genymobile/scrcpy/blob/v5.0.1/doc/linux.md). These commands use Ubuntu 26.04, which provides the required SDL3 packages for Arm64 and x86-64 hosts. For another distribution or release, follow the upstream instructions for its dependencies.
+  {{< tab header="Ubuntu 26.04" >}} The following commands build scrcpy 5.0.1 using its [upstream Linux installation procedure](https://github.com/Genymobile/scrcpy/blob/v5.0.1/doc/linux.md). These commands use Ubuntu 26.04, which provides the required SDL3 packages. For another distribution or release, follow the upstream instructions for its dependencies.
 
 Install the viewer's runtime and build dependencies:
 
@@ -137,18 +149,18 @@ Confirm that the viewer is available:
 scrcpy --version
 ```
 
-You'll open the viewer after the agent connects to the reserved phone and returns its ADB serial.
+You'll open the viewer after Antigravity connects to the reserved phone and returns its ADB serial.
 
 ## Create the agent workspace
 
-Create a directory for the agent and evidence:
+Create a directory for Antigravity and the benchmark evidence:
 
 ```bash
 mkdir -p "$HOME/ddp-first-device/results"
 cd "$HOME/ddp-first-device"
 ```
 
-For a concrete agent example, use [Google Antigravity](/install-guides/antigravity/), which is named in [Google's DDP agent documentation](https://docs.cloud.google.com/developer-device-platform/agent-skill). Start it in this directory so the agent can run the local tools, install the project skill, and save screenshots and reports under `results/`.
+You'll run Antigravity CLI from this directory so it can run the local tools, discover the project skill, and save screenshots and reports under `results/`.
 
 ## Prepare the Google Cloud project
 
