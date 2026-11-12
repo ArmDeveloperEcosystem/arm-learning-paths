@@ -10,7 +10,7 @@ layout: learningpathall
 
 Link-time optimization delivers measurable improvements across a range of workloads. The [SPEC CPU®2017](https://www.spec.org/cpu2017/) integer rate (SPECint2017 rate) benchmark suite provides a standardized way to measure these gains. SPEC CPU is an industry-standard benchmark widely used by CPU vendors and compiler teams to evaluate and compare performance. While these benchmarks don't necessarily reflect the characteristics of every real-world application, they illustrate LTO's potential impact across different optimization patterns.
 
-In this example, we compiled the benchmarks with GCC 15.1, with and without LTO, and executed them on an Arm Neoverse V2 CPU running Ubuntu 20.04 LTS.
+In this example, we compiled the benchmarks with and without LTO, and executed them on an Arm AGI CPU running Ubuntu 24.04 LTS.
 
 Common optimization flags between runs were as follows:
 
@@ -18,21 +18,21 @@ Common optimization flags between runs were as follows:
 -mcpu=native -Ofast -fomit-frame-pointer --param ipa-cp-eval-threshold=1 --param ipa-cp-unit-growth=80
 ```
 
-Across the benchmark suite, enabling LTO resulted in an improvement in the geometric mean score of approximately 3.4%. Some workloads benefited more noticeably:
+Across the benchmark suite, enabling LTO resulted in an improvement in the geometric mean score of approximately 3.6%. Some workloads benefited more noticeably:
 
-- `mcf` (+11%)
-- `deepsjeng` (+9.9%)
-- `leela` (+6.6%)
+- `mcf` (+13.6%)
+- `deepsjeng` (+9.5%)
+- `leela` (+5.9%)
   
 These results highlight how workloads with significant cross-module interaction—particularly those with many function calls across translation units—benefit from the additional whole-program visibility provided by LTO.
 
-![Bar chart showing percentage performance improvements across SPEC CPU 2017 integer benchmarks with LTO enabled, displaying improvements ranging from near zero to 11 percent, with mcf showing the highest gain at 11 percent, deepsjeng at 9.9 percent, and leela at 6.6 percent alt-txt#center](specint_lto_improv.png "Performance uplift to Specint2017")
+![Bar chart showing percentage performance improvements across SPEC CPU 2017 integer benchmarks with LTO enabled, displaying improvements ranging from near zero to 14 percent, with mcf showing the highest gain at 13.6 percent, deepsjeng at 9.5 percent, and leela at 5.9 percent alt-txt#center](specint_lto_improv.png "Performance uplift to Specint2017")
 
 ### Code size considerations
 
 While performance improvements are often the primary motivation for enabling LTO, its impact isn't limited to execution speed. Link-time optimization can also significantly affect the final code size of an executable, with results varying depending on the application's structure.
 
-As shown in the chart above, LTO's impact on code size varies across different benchmarks. Some applications experience modest reductions (up to 10%), while others see increases of 15% or more. The variation reflects the balance between dead code elimination and aggressive optimizations like inlining and loop unrolling.
+As shown in the chart above, LTO's impact on code size varies across different benchmarks. Some applications experience significant reductions (up to 46%), while others see increases of 10% or more. The variation reflects the balance between dead code elimination and aggressive optimizations like inlining and loop unrolling.
 
 
 ![Bar chart displaying code size changes as percentages across SPEC CPU 2017 integer benchmarks with LTO enabled, showing both positive increases and negative reductions in binary size, with most benchmarks exhibiting modest changes between minus 10 and plus 15 percent alt-txt#center](specint_lto_size.png "Code size reduction to Specint2017")
