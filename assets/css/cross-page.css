@@ -202,6 +202,12 @@ arm-top-navigation:not(:defined) {
     background-color: var(--ads-ui-ink-100);
 }
 
+/* AI features sign-in banner */
+#ai-sign-in-banner {
+    background-color: #F0F0F0;
+    overflow: hidden;
+}
+
 /* Fix Masthead Height */
 #expanded-masthead  {
         min-height: 100px;                  /* Keep baseline height for short titles */
