@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Arrange input matrix A for adjacent loads
 
-To eliminate the need for Gather Loads, transform the **Input Matrix**. Process four ZA tiles at a time, arranged in a 2 x 2 grid. The top ZA tiles need four rows of the first column (shown in dark red). The bottom ZA tiles need the next four rows of the first column (shown in dark orange). These rows need to be adjacent in the output memory buffer. Continue for the subsequent columns, until all have been arranged contiguously in memory. Do the same for the next set of rows, shown in green and blue.
+To eliminate the need for Gather Loads, transform the **Input Matrix**. Process four ZA tiles at a time, arranged in a 2 x 2 grid. The top ZA tiles need four rows of the first column, shown in dark red. The bottom ZA tiles need the next four rows of the first column, shown in dark orange. These rows need to be adjacent in the output memory buffer. Continue for the subsequent columns, until all have been arranged contiguously in memory. Do the same for the next set of rows, shown in green and blue.
 
 ![Colored regions of the input matrix are rearranged into an output memory buffer. Values from the red and orange regions sit together, followed by values from the green and blue regions.#center](images/transpose_interleave.png "Transposing and interleaving the input matrix")
 
