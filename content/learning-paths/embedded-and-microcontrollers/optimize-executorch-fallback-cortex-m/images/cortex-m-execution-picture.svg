@@ -13,7 +13,7 @@
   <title
      id="title">One program. Three execution paths.</title>
   <desc
-     id="description">A simplified view of the simulated Corstone-300 target in the FVP. The Cortex-M CPU runs the ExecuTorch runtime and executes model.pte. It dispatches the stride-one convolution to the separate Ethos-U55 NPU. On the same Cortex-M core, CMSIS-NN runs the stride-four convolution and the portable FP32 kernel runs topk. CPU and NPU both connect to shared SRAM. The connections are schematic and execution routes are chosen during export.</desc>
+     id="description">A simplified view of the simulated Corstone-300 target in the FVP. The Cortex-M CPU runs the ExecuTorch runtime and executes model.pte. It dispatches the stride-1 convolution to the separate Ethos-U55 NPU. On the same Cortex-M core, CMSIS-NN runs the stride-4 convolution and the portable FP32 kernel runs topk. CPU and NPU both connect to shared SRAM. The connections are schematic and execution routes are chosen during export.</desc>
   <metadata
      id="metadata1">Architecture references: https://arm-software.github.io/CMSIS-Ethos-U/main/general/index.html ; https://docs.pytorch.org/executorch/stable/backends/arm-cortex-m/arm-cortex-m-overview.html</metadata>
   <defs
@@ -284,13 +284,13 @@
      x="756.12457"
      y="435.61469"
      class="label"
-     id="text23">Stride-1 convolution</text>
+     id="text23">stride-1 convolution</text>
   <text
      x="266.61703"
      y="483.99261"
      class="label"
      id="text23-8"
-     style="font-size:24px;font-family:'Segoe UI', Arial, sans-serif;fill:#23383d">Stride-4 convolution</text>
+     style="font-size:24px;font-family:'Segoe UI', Arial, sans-serif;fill:#23383d">stride-4 convolution</text>
   <text
      x="268.30963"
      y="589.46991"
@@ -310,9 +310,9 @@
      y="618.16956"
      class="label"
      id="text23-8-2-1"
-     style="font-size:24px;font-family:'Segoe UI', Arial, sans-serif;fill:#23383d">Supported by Executorch <tspan
+     style="font-size:24px;font-family:'Segoe UI', Arial, sans-serif;fill:#23383d">Supported by ExecuTorch <tspan
    style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Segoe UI', Arial, sans-serif;-inkscape-font-specification:'Segoe UI, Arial, sans-serif'"
-   id="tspan30">Portable kernels</tspan></text>
+   id="tspan30">portable kernels</tspan></text>
   <text
      x="815.46796"
      y="410.10205"
