@@ -75,7 +75,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
     - Ethos-U
 tools_software_languages:

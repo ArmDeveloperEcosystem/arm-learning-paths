@@ -72,7 +72,7 @@ rerun_faqs: false
 skilllevels: Advanced
 armips:
     - Neoverse
-subjects: ML
+subjects: AI/ML
 platforms:
   - Microsoft Azure Cobalt
 operatingsystems:

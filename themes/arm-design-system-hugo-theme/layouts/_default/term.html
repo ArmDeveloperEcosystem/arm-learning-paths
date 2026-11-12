@@ -21,10 +21,14 @@ Calls to:
 
 <!-- Sort pages with this term by most recently changed first -->
 {{ $is_ai_collection := eq .RelPermalink ("tag/ml/" | relURL) }}
+{{ $is_ai_ml_collection := eq .RelPermalink ("tag/ai-ml/" | relURL) }}
 {{ $is_agentic_collection := eq .RelPermalink ("tag/agentic-ai/" | relURL) }}
 {{ $paths_to_list := .Data.Pages }}
 {{ if $is_ai_collection }}
-    {{/* Keep the existing AI URL inclusive when an LP's primary subject changes. */}}
+    {{/* Keep the established AI collection URL while subjects have their own pages. */}}
+    {{ with site.GetPage "/subjects/ai/ml" }}
+        {{ $paths_to_list = union $paths_to_list .Pages }}
+    {{ end }}
     {{ with site.GetPage "/subjects/agentic-ai" }}
         {{ $paths_to_list = union $paths_to_list .Pages }}
     {{ end }}
@@ -118,9 +122,11 @@ Calls to:
 
     <!-- Search & Results on Right -->
     <div class="c-col">
-        {{ if or $is_ai_collection $is_agentic_collection }}
+        {{ if or $is_ai_collection $is_ai_ml_collection $is_agentic_collection }}
             <nav aria-label="AI collections" class="u-margin-bottom-1">
                 <a href="{{ "tag/ml/" | relURL }}"{{ if $is_ai_collection }} aria-current="page"{{ end }}>All AI</a>
+                <span aria-hidden="true"> · </span>
+                <a href="{{ "tag/ai-ml/" | relURL }}"{{ if $is_ai_ml_collection }} aria-current="page"{{ end }}>AI/ML</a>
                 <span aria-hidden="true"> · </span>
                 <a href="{{ "tag/agentic-ai/" | relURL }}"{{ if $is_agentic_collection }} aria-current="page"{{ end }}>Agentic AI</a>
             </nav>

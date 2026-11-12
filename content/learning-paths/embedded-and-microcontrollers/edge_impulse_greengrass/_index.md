@@ -73,7 +73,7 @@ rerun_faqs: false
 skilllevels: Introductory
 platforms:
     - AWS Graviton
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-M
     - Cortex-A

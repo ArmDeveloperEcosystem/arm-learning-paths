@@ -75,7 +75,7 @@ rerun_summary: false
 rerun_faqs: false
 
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
     - Mali
 tools_software_languages:

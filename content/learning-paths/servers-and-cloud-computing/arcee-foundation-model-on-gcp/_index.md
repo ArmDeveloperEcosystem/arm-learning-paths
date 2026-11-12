@@ -69,7 +69,7 @@ rerun_faqs: false
 # Tags
 # Tagging metadata, see the Learning Path guide for the allowed values
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 platforms:
   - Google Axion
 armips:
