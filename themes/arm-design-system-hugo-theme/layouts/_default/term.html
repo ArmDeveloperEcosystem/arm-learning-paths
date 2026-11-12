@@ -20,7 +20,16 @@ Calls to:
 {{ define "main" }}
 
 <!-- Sort pages with this term by most recently changed first -->
-{{ $paths_to_list := (sort .Data.Pages ".Lastmod").Reverse }}
+{{ $is_ai_collection := eq .RelPermalink ("tag/ml/" | relURL) }}
+{{ $is_agentic_collection := eq .RelPermalink ("tag/agentic-ai/" | relURL) }}
+{{ $paths_to_list := .Data.Pages }}
+{{ if $is_ai_collection }}
+    {{/* Keep the existing AI URL inclusive when an LP's primary subject changes. */}}
+    {{ with site.GetPage "/subjects/agentic-ai" }}
+        {{ $paths_to_list = union $paths_to_list .Pages }}
+    {{ end }}
+{{ end }}
+{{ $paths_to_list = (sort $paths_to_list ".Lastmod").Reverse }}
 
 
 
@@ -109,6 +118,13 @@ Calls to:
 
     <!-- Search & Results on Right -->
     <div class="c-col">
+        {{ if or $is_ai_collection $is_agentic_collection }}
+            <nav aria-label="AI collections" class="u-margin-bottom-1">
+                <a href="{{ "tag/ml/" | relURL }}"{{ if $is_ai_collection }} aria-current="page"{{ end }}>All AI</a>
+                <span aria-hidden="true"> · </span>
+                <a href="{{ "tag/agentic-ai/" | relURL }}"{{ if $is_agentic_collection }} aria-current="page"{{ end }}>Agentic AI</a>
+            </nav>
+        {{ end }}
         
         {{if eq "platform" .Data.Singular}}
             {{ partial "filter-search-sort/csp-term-page.html" (dict  "context" . "content_to_list" $paths_to_list "page_type" "learning paths")}} 

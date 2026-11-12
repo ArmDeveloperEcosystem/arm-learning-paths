@@ -20,11 +20,12 @@ operatingsystems_filter:
 - RTOS: 14
 - Windows: 14
 subjects_filter:
+- Agentic AI: 2
 - CI-CD: 7
 - Containers and Virtualization: 11
 - Embedded Linux: 6
 - Libraries: 5
-- ML: 34
+- ML: 33
 - Performance and Architecture: 26
 - RTOS Fundamentals: 8
 - Security: 5

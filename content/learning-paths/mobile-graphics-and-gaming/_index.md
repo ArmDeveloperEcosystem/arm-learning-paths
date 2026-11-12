@@ -18,10 +18,11 @@ operatingsystems_filter:
 - macOS: 27
 - Windows: 26
 subjects_filter:
+- Agentic AI: 0
 - Gaming: 6
 - Graphics: 11
-- ML: 48
-- Performance and Architecture: 38
+- ML: 50
+- Performance and Architecture: 39
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech.
 title: Mobile, Graphics, and Gaming
 tools_software_languages_filter:

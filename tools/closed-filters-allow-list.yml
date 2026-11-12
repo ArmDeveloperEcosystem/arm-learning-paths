@@ -24,6 +24,7 @@ operatingsystems:
 subjects:
   servers-and-cloud-computing:
     - ML
+    - Agentic AI
     - CI-CD
     - Performance and Architecture
     - Containers and Virtualization
@@ -35,6 +36,7 @@ subjects:
     - Migration to Arm
     - CI-CD
     - ML
+    - Agentic AI
     - Performance and Architecture
     - Containers and Virtualization
   mobile-graphics-and-gaming:
@@ -42,10 +44,12 @@ subjects:
     - AR-VR
     - Graphics
     - ML
+    - Agentic AI
     - CI-CD
     - Performance and Architecture
   embedded-and-microcontrollers:
     - ML
+    - Agentic AI
     - CI-CD
     - Performance and Architecture
     - Containers and Virtualization
@@ -56,6 +60,7 @@ subjects:
     - Embedded Linux
   automotive:
     - ML
+    - Agentic AI
     - CI-CD
     - Performance and Architecture
     - Containers and Virtualization
