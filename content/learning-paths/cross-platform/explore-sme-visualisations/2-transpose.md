@@ -19,7 +19,7 @@ The description of each step appears immediately under the **32-bit Transpose** 
 
 With Scalable Vector Length equal to 256 bits and accessing 32-bit data elements, there are four logical ZA tiles available. The algorithm uses all of them to maximize memory efficiency.
 
-The transpose is achieved by loading data into rows and storing it back from columns. Select the **Play or Pause button** or advance manually to follow the algorithm:
+The transpose is achieved by loading data into rows and storing it back from columns. Select the play button or advance manually to follow the algorithm:
 
 1. The first 16 steps load data sequentially from memory into rows of the ZA0 and ZA1 tiles.
 2. The next 16 steps load data sequentially from memory into rows of the ZA2 and ZA3 tiles.

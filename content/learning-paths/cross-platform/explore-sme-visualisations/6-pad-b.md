@@ -12,7 +12,7 @@ layout: learningpathall
 Unaligned vector loads from memory, although supported, have drawbacks. Vectors can straddle cache lines, and loop code is complicated by the need to adjust the pointer register at the end of every row. If a matrix has a column count that isn't an exact multiple of the number of ZA tile columns for a given data element size, then padding the data might be a better solution. This results in cleaner loop code and fully sequential memory access.
 
 {{% notice Important %}}
-Scalable vector length can vary between devices. This visualization zero-pads the data for the device's tile size. Running the same code on a different device with a different scalable vector length can result in a different output data structure. Specifically, for larger scalable vector lengths, there's likely to be more padding. However, it depends on the number of columns.
+Scalable vector length can vary between devices. This visualization zero-pads the data for the tile size of the device. Running the same code on a different device with a different scalable vector length can result in a different output data structure. Specifically, for larger scalable vector lengths, there's likely to be more padding. However, it depends on the number of columns.
 {{% /notice %}}
 
 The same code running on different devices can produce different output data structures, and that isn't a problem. Each device generates a data structure for its own ZA tile width. Each device later uses that data structure with its ZA tiles, to compose input vectors for the Outer Product operation. Although the data structure can vary between devices, the Outer Product results are the same across all devices.
@@ -39,6 +39,6 @@ Compare a complete group with one at the edge:
 
 ## What you've learned and what's next
 
-You've seen how the visualization pads an input matrix with zeros so that it aligns with the device's tile width. You've learned that this padded structure can vary on devices with a different scalable vector length. However, the final matrix multiplication result is identical on all devices.
+You've seen how the visualization pads an input matrix with zeros so that it aligns with the tile width of the device. You've learned that this padded structure can vary on devices with a different scalable vector length. However, the final matrix multiplication result is identical on all devices.
 
 Next, you'll view a visualization that starts with packed A and padded B, then multiplies them into an output matrix.
