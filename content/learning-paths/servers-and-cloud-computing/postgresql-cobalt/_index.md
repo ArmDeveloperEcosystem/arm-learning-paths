@@ -39,6 +39,7 @@ tools_software_languages:
     - PostgreSQL
     - SQL
     - pgbench
+    - Azure Cobalt 200
 
 operatingsystems:
     - Linux

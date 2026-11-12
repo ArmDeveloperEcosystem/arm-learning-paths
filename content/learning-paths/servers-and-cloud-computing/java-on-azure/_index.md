@@ -72,6 +72,7 @@ armips:
 tools_software_languages:
     - Java
     - JMH
+    - Azure Cobalt 200
 
 operatingsystems:
     - Linux

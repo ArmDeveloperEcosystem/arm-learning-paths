@@ -75,6 +75,7 @@ armips:
 tools_software_languages:
     - MySQL
     - SQL
+    - Azure Cobalt 200
 
 operatingsystems:
     - Linux
