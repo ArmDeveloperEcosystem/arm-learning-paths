@@ -76,6 +76,7 @@ armips:
 tools_software_languages:
     - NGINX
     - ApacheBench
+    - Azure Cobalt 200
 
 operatingsystems:
     - Linux

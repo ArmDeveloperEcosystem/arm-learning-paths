@@ -81,6 +81,7 @@ tools_software_languages:
     - MongoDB
     - mongotop
     - mongostat
+    - Azure Cobalt 200
 
 operatingsystems:
     - Linux
