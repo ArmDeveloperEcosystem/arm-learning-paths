@@ -1,6 +1,10 @@
 ---
 title: Optimize ML model deployment on microcontrollers with CMSIS-NN kernels
 
+draft: true
+cascade:
+    draft: true
+    
 description: Build an ExecuTorch 1.5.1 application from the published ExecuTorch CMSIS Pack, that uses CMSIS-NN for optimized Cortex-M fallback.
 
 minutes_to_complete: 60
