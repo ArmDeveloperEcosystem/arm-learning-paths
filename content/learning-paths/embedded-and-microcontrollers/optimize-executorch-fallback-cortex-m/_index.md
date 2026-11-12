@@ -34,7 +34,7 @@ test_maintenance: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-M
     - Ethos-U
