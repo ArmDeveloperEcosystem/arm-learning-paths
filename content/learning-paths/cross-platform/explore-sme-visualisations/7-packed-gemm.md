@@ -37,7 +37,7 @@ In this visualization, the code is functionally correct on all devices regardles
 
 If the embedded view doesn't load, [open the GEMM visualization in a full browser tab](/apps/sme-visualisations/#/sme/gemm32-packed). Switch between the Learning Path and the visualization tab.
 
-Follow the data from input through accumulation and storage. The following table summarizes how the visualization processes the input matrices:
+Follow the data from input through accumulation and storage. The following table summarizes how the visualization processes the input matrices in blocks:
 
 | Stage | Visualization steps | Operation |
 |---|---|---|
@@ -50,7 +50,7 @@ Follow the data from input through accumulation and storage. The following table
 
 ### Processing subsequent blocks
 
-After clearing ZA0–ZA2, the algorithm moves down by one tile-sized block in **A Packed Data** and returns to the leftmost column of **B Padded Data**.
+After clearing ZA0–ZA2, the algorithm moves down by one tile-sized block in **A Packed Data**. It returns to the leftmost column of **B Padded Data**.
 
 Processing the next block requires 43 steps:
 

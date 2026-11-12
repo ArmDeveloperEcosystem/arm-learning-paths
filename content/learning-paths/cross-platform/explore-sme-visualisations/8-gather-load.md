@@ -29,7 +29,7 @@ Focus on how matrix A data is loaded into Z2 and Z3:
 |---|---|---|
 | Load the first inputs | 1–4 | Read the first row of **B Input Data** into Z0–Z1 and the first column of **A Input Data** into Z2–Z3. |
 | Calculate the first outer products | 5–8 | Use Z0–Z3 to calculate the first matrix outer products. |
-| Process the second inputs | 9–16 | Read the second row of B and second column of A, then accumulate the outer products. |
+| Process the second inputs | 9–16 | Read the second row of B and second column of A. Calculate the matrix outer products with accumulation of the result. |
 | Process the third inputs | 17–24 | Repeat for the third row of B and third column of A. |
 | Process the fourth inputs | 25–32 | Repeat for the fourth row of B and fourth column of A. |
 | Store the first results | 33–40 | Write ZA0 and ZA1 to **Output Matrix Data**. |

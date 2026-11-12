@@ -1,5 +1,5 @@
 ---
-title: Trace GEMM with interleaved A
+title: Trace GEMM with interleaved matrix A
 description: Step through a 2 x 2 tile GEMM that loads interleaved matrix A from contiguous addresses, and compare its output with the gather-load version.
 weight: 11
 
@@ -19,11 +19,11 @@ Follow the same stages as the gather-load GEMM and compare how matrix A reaches 
 
 | Stage | Visualization steps | Operation |
 |---|---|---|
-| Load the first inputs | 1–4 | Load the first row of **B Input Data** into Z0–Z1 and the first two rows of **A Input Data** into Z2–Z3. The A loads use contiguous addresses. |
-| Calculate the first outer products | 5–8 | Accumulate the first partial results in ZA0–ZA3. |
-| Process the second inputs | 9–16 | Load the second row of B and the third and fourth rows of A, then accumulate outer products. |
+| Load the first inputs | 1–4 | Load the first row of **B Input Data** into Z0–Z1 and the first two rows of **A Input Data** into Z2–Z3. The **A Input Data** is loaded from contiguous memory addresses. |
+| Calculate the first outer products | 5–8 | Calculate matrix outer product and accumulate the first partial results in ZA0–ZA3. |
+| Process the second inputs | 9–16 | Load the second row of B and the third and fourth rows of A, then accumulate outer products in ZA0–ZA3. |
 | Process the third inputs | 17–24 | Repeat for the third row of B and the fifth and sixth rows of A. |
-| Process the fourth inputs | 25–32 | Repeat for the fourth row of B and the last two rows of A. |
+| Process the fourth inputs | 25–32 | Repeat for the fourth row of B and the final two rows of A. |
 | Store the first results | 33–40 | Write ZA0 and ZA1 to **Output Matrix Data**. |
 | Store the remaining results | 41–48 | Write ZA2 and ZA3 to **Output Matrix Data**. |
 

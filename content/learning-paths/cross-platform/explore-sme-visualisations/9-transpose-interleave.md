@@ -27,13 +27,13 @@ Use the step ranges to follow how **Input Matrix** becomes **Interleaved Matrix*
 |---|---|---|
 | Load the first region | 1–8 | Load partial rows of **Input Matrix** into rows of ZA0 and ZA1. |
 | Load the next rows | 9–16 | Load partial rows into rows of ZA2 and ZA3. |
-| Store the first output rows | 17–24 | Store columns of ZA0 and ZA2 into rows of **Interleaved Matrix**. |
-| Store the next output rows | 25–32 | Store columns of ZA1 and ZA3 into the next two output rows. |
+| Store the first output rows | 17–24 | Store columns of ZA0 and ZA2 into rows of the **Interleaved Matrix** output buffer. |
+| Store the next output rows | 25–32 | Store columns of ZA1 and ZA3 into the next two rows of the **Interleaved Matrix** output buffer. |
 | Process the top-right region | 33–64 | Repeat the load-and-store pattern for the rest of the first horizontal strip. |
 | Process the bottom-left region | 65–96 | Move to the next horizontal strip and write four more output rows. |
 | Process the bottom-right region | 97–128 | Finish the strip and write the final four output rows. |
 
-The **Input Matrix** has 16 rows and 16 columns. The first 32 steps process its top-left quadrant; the remaining stages cover the other three quadrants.
+The **Input Matrix** has 16 rows and 16 columns. The first 32 steps process the top-left quadrant of the input. The remaining stages cover the other three quadrants.
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/pack32-2x2-a"
