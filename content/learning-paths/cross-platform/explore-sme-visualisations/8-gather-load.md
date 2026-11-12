@@ -16,7 +16,7 @@ These instructions are available in Streaming SVE mode only if `FEAT_SME_FA64` i
 This visualization uses Gather Loads to access columns of matrix A data. The elements are separated by the length of a full row of matrix A.
 
 {{% notice Note %}}
-Gather Loads and Scatter Stores stress the memory system more than contiguous loads. They could potentially require multiple cache line loads before the operation can complete. Both these effects can impact performance.
+Gather Loads and Scatter Stores stress the memory system more than contiguous loads. They might potentially require multiple cache line loads before the operation can complete. Both these effects can impact performance.
 {{% /notice %}}
 
 ## Compare the input path
