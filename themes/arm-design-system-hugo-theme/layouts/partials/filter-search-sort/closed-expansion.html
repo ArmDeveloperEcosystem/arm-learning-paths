@@ -25,7 +25,10 @@ Calls to:
     <!-- Figure out if the type is a string (if filter doesn't come with an initial count, such as the Skill Level) or array (like the tools_software_languages) -->
     {{ if ne (printf "%T" $y) "string" }}
             {{range $name, $count := $y}}
+                {{/* Keep allowed subjects in metadata, but hide empty choices. */}}
+                {{ if or (ne $.displayname "Subjects") (gt (int $count) 0) }}
                     {{ $tag_entries = $tag_entries | append (dict "name" $name "count" $count "sortkey" (lower $name)) }}
+                {{ end }}
             {{end}}
     {{else}}
             {{ $tag_entries = $tag_entries | append (dict "name" $y "count" "NA" "sortkey" (lower $y)) }}
