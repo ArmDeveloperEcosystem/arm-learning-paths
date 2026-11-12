@@ -51,12 +51,12 @@ Calls to:
                 <!-- Radio buttons -->
                 {{if eq $input_type "radio"}}
                     <div class="form-group ads-radio-style">
-                        <input type="radio" id="{{$name | urlize}}" class="tag-{{$name | urlize}} group-{{$group_name}}" data-urlized-name="{{$name | urlize}}" name="{{$group_name}}" onchange="filterHandler_radio_LearningPaths(this)"></input>
-                        <label for="{{$name | urlize}}">{{$name}}</label>
+                        <input type="radio" id="{{replace $name "/" "-" | urlize}}" class="tag-{{replace $name "/" "-" | urlize}} group-{{$group_name}}" data-urlized-name="{{replace $name "/" "-" | urlize}}" name="{{$group_name}}" onchange="filterHandler_radio_LearningPaths(this)"></input>
+                        <label for="{{replace $name "/" "-" | urlize}}">{{$name}}</label>
                     </div>
                 <!-- Checkboxes -->
                 {{else}}
-                    <ads-checkbox class="is-small tag-{{$name | urlize}} group-{{$group_name}}" data-urlized-name="{{$name | urlize}}" name="{{$name}}" onclick="filterHandler_LearningPaths(this)"  tabindex="0">
+                    <ads-checkbox class="is-small tag-{{replace $name "/" "-" | urlize}} group-{{$group_name}}" data-urlized-name="{{replace $name "/" "-" | urlize}}" name="{{$name}}" onclick="filterHandler_LearningPaths(this)"  tabindex="0">
                             {{ $name }} 
                     </ads-checkbox>
                 {{end}}

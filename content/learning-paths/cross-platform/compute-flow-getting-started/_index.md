@@ -78,7 +78,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips: []
 tools_software_languages:
     - Compute Flow

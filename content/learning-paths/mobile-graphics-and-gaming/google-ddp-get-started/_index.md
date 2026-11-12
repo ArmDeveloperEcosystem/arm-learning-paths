@@ -29,7 +29,7 @@ rerun_summary: false
 rerun_faqs: false
 
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
     - Arm C1
 tools_software_languages:

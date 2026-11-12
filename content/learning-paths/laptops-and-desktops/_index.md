@@ -18,10 +18,10 @@ operatingsystems_filter:
 - Windows: 50
 subjects_filter:
 - Agentic AI: 4
+- AI/ML: 16
 - CI-CD: 7
 - Containers and Virtualization: 8
 - Migration to Arm: 30
-- ML: 16
 - Performance and Architecture: 34
 subtitle: Build native Windows on Arm applications that are fast and efficient.
 title: Laptops and Desktops

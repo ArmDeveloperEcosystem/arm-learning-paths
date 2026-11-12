@@ -27,11 +27,11 @@ pinned_modules:
     - migration
 subjects_filter:
 - Agentic AI: 4
+- AI/ML: 48
 - CI-CD: 14
 - Containers and Virtualization: 54
 - Databases: 29
 - Libraries: 9
-- ML: 48
 - Performance and Architecture: 112
 - Storage: 2
 - Web: 21

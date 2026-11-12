@@ -21,11 +21,11 @@ operatingsystems_filter:
 - Windows: 14
 subjects_filter:
 - Agentic AI: 2
+- AI/ML: 33
 - CI-CD: 7
 - Containers and Virtualization: 11
 - Embedded Linux: 6
 - Libraries: 5
-- ML: 33
 - Performance and Architecture: 26
 - RTOS Fundamentals: 8
 - Security: 5

@@ -80,7 +80,7 @@ author:
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-A
 tools_software_languages:
