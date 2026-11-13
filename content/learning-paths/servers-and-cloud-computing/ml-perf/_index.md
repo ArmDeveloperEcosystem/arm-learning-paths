@@ -71,7 +71,7 @@ test_maintenance: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 platforms:
   - AWS Graviton
   - Oracle Cloud Infrastructure (OCI) Ampere Compute

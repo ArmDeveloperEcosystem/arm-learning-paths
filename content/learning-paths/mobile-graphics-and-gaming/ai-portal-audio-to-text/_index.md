@@ -1,7 +1,7 @@
 ---
-title: Run Arm AI Portal Whisper models on Android
+title: Run Arm AI Portal Speech Transcription models on Android
 
-description: Run Arm-optimized Whisper models with LiteRT and ExecuTorch locally on Android, then extend Whisper Journal for another compatible model or adapter.
+description: Run Arm-optimized Speech Transcription models with LiteRT and ExecuTorch locally via an Android app, then learn how to extend the application for another compatible model or adapter.
 
 minutes_to_complete: 35
 
@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for Android and machine learning develope
 learning_objectives:
     - Prepare the Android command-line tools and connect an Arm-based Android phone.
     - Run Whisper Base with LiteRT, then compare it with Whisper Tiny running with ExecuTorch.
-    - Understand how the importer installs model packages, the recorder captures audio, and the two supplied adapters run LiteRT or ExecuTorch and decode a transcript.
+    - Understand how the importer installs model packages, the recorder captures audio, and the supplied adapters run LiteRT or ExecuTorch and decode a transcript.
     - Register another compatible model or generate and validate a separate adapter.
 
 prerequisites:
@@ -40,7 +40,7 @@ generated_summary_faq:
   faq_generated_at: '2026-08-20T16:37:40Z'
   faq_source_hash: 8f7ec47b76b780d899d9d42c1166aae9fab6e75c2b48707b5bb45f7f05d1abc8
   summary: >-
-    You'll set up Android command-line tools, connect an Arm-based Android phone, and run an application called Whisper
+    You'll set up Android command-line tools, connect an Arm-based Android phone, and run an application called Speech
     Journal locally. First, you'll transcribe speech with Whisper Base and LiteRT, then compare it with
     Whisper Tiny and ExecuTorch using the same recording conditions. Next, you'll trace how the importer,
     recorder, registry, and adapters connect each model package to an English transcript. Finally, you'll
@@ -54,21 +54,21 @@ generated_summary_faq:
     answer: >-
       Use Android Debug Bridge (`adb`) from Android SDK Platform-Tools to confirm that the phone is
       authorized, uses the `arm64-v8a` ABI, and runs Android 9 (API 28) or later.
-  - question: Which adapter should I use for my Whisper package?
+  - question: Which adapter should I use for my speech model package?
     answer: >-
-      Select Whisper Base for the first workflow and Whisper Tiny for the guided comparison. The
-      application registry chooses the LiteRT adapter for Base and the ExecuTorch adapter for Tiny.
-      It also registers LiteRT profiles for Medium and Large V3 and the ExecuTorch adapter for Small.
+      Select **Whisper Base · LiteRT** for the first workflow and **Whisper Tiny · ExecuTorch** for
+      the comparison. The app also provides the opportunity to experiment with other models pre-provided in the registry.
   - question: What result should I expect after running inference?
     answer: >-
-      The app records audio and produces an English transcript in a journal entry. Inference runs
-      locally on the Android CPU, and the app doesn't upload the recording to a server.
+      You record audio and receive an English transcript in a journal entry. Inference runs
+      locally on the Android CPU, and your recording stays on the device.
   - question: How do I extend the app for a speech model that's not in the registered list?
     answer: >-
       Compare the model's task, runtime, package files, callable methods or signatures, tensors,
       audio preprocessing, tokenizer, decoder behavior, and output format with the supplied adapters.
-      If the model doesn't match an adapter, modify an adapter or create a new one. Register it in
-      `AdapterRegistry` and update the decoder profile when needed.
+      Add a compatible model descriptor to `CompatibleModelRegistry.models()`. For a new adapter,
+      register its instance in `GeneratedAdapterRegistry.adapters()` and its descriptor in
+      `GeneratedAdapterRegistry.models()`, then rebuild and test the app on your phone.
 # END generated_summary_faq
 
 author: 
@@ -81,7 +81,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-A
 tools_software_languages:

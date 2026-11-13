@@ -1,5 +1,5 @@
 ---
-title: "Understand the object detection pipeline"
+title: "Understand YOLOX and KleidiCV in the detection pipeline"
 description: Understand the YOLOX detection pipeline and how to measure preprocessing with KleidiCV on arm64 Linux.
 
 weight: 2
@@ -7,44 +7,49 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## Understand the components
+## Understand the components of the pipeline
 
 You'll deploy a YOLOX object detection application on an arm64 Linux board and measure its image operations and full preprocessing latency. You'll compare two OpenCV builds: a baseline without KleidiCV and a KleidiCV build using its default dispatch policy. A Radxa Orion O6 running 64-bit Debian is one suitable platform.
 
 The application combines four components:
 
-- **YOLOX** is the object detection model.
-- **ONNX** is the file format used to store the trained model.
-- **OpenCV DNN** loads the ONNX file and runs the neural network.
-- **KleidiCV** accelerates supported OpenCV image-processing operations on Arm CPUs.
+- YOLOX is the object detection model.
+- Open Neural Network Exchange (ONNX) is the file format that's used to store the trained model.
+- OpenCV deep neural network (DNN) loads the ONNX file and runs the neural network.
+- KleidiCV accelerates supported OpenCV image-processing operations on Arm CPUs.
 
-## What is YOLOX?
+## What YOLOX is
 
-You'll use the pretrained YOLOX-S object detection model from OpenCV Zoo in Open Neural Network Exchange (ONNX) format. Trained on the COCO dataset, it recognizes 80 object classes and predicts a bounding box, class, and confidence score for each detected object. You run inference without training the model.
+YOLOX is a pretrained YOLOX-S object detection model from OpenCV Zoo in the ONNX format that you'll run inference on. Trained on the Common Objects in Context (COCO) dataset, YOLOX recognizes 80 object classes. It predicts a bounding box, class, and confidence score for each detected object. 
 
 ## Understand the image-processing pipeline
 
 The application processes the image in these stages:
 
-![YOLOX pipeline grouped into image preprocessing, model inference, and output processing. Resize and the two conversions are marked as eligible for KleidiCV HAL acceleration, while padding and tensor packing remain part of full preprocessing.#center](pipeline.svg "YOLOX processing stages and KleidiCV-eligible operations")
+![YOLOX pipeline grouped into image preprocessing, model inference, and output processing. Resize and the two conversions are marked as eligible for KleidiCV acceleration through the Hardware Acceleration Layer, while padding and tensor packing remain part of full preprocessing.#center](pipeline.svg "YOLOX processing stages and KleidiCV-eligible operations")
 
 Non-maximum suppression removes duplicate detections before the application draws bounding boxes.
 
-The *letterbox* operation resizes the image while preserving its aspect ratio and pads the unused area so that the result is `640 x 640`, which is the YOLOX input size. The application then converts the OpenCV BGR image to RGB and changes the element type from unsigned 8-bit integers to 32-bit floating-point values. Pixel values remain in the `0` to `255` range expected by this YOLOX model.
+The letterbox operation resizes the image while preserving its aspect ratio and pads the unused area so that the result is `640 x 640`, which is the YOLOX input size. The application then converts the OpenCV blue-green-red (BGR) image to red-green-blue (RGB). It changes the element type from unsigned 8-bit integers to 32-bit floating-point values. Pixel values remain in the `0` to `255` range expected by this YOLOX model.
 
-OpenCV packs the prepared image into an NCHW tensor with this shape:
+OpenCV packs the prepared image into a tensor with this shape:
 
 ```text
 [1, 3, 640, 640]
 ```
 
-The dimensions represent one image, three color channels, a height of 640 pixels, and a width of 640 pixels.
+The tensor represents the following dimensions:
+
+- A batch size (N) of one image
+- Three color channels (C)
+- A height (H) of 640 pixels
+- A width (W) of 640 pixels
 
 ## Understand where KleidiCV is used
 
-OpenCV integrates KleidiCV through its Hardware Acceleration Layer (HAL), so you continue to call standard OpenCV functions. Acceleration depends on the build configuration, operation parameters, data type, and CPU features.
+OpenCV integrates KleidiCV through its Hardware Acceleration Layer (HAL), so you can continue to call standard OpenCV functions. Acceleration depends on the build configuration, operation parameters, data type, and CPU features.
 
-The application uses explicit OpenCV image-processing calls so their costs can be measured separately:
+The application uses explicit OpenCV image-processing calls so that their costs can be measured separately:
 
 ```cpp
 cv::resize(image, resized, resizedSize, 0.0, 0.0, cv::INTER_LINEAR);
@@ -54,9 +59,9 @@ cv::cvtColor(padded, rgb, cv::COLOR_BGR2RGB);
 rgb.convertTo(floatImage, CV_32F);
 ```
 
-The final `blobFromImage()` call only packs the tensor; it does not resize, swap channels, or scale values. Tensor packing belongs to OpenCV DNN, not the KleidiCV HAL.
+The final `blobFromImage()` call only packs the tensor and doesn't resize, swap channels, or scale values. Tensor packing belongs to OpenCV DNN, not the KleidiCV HAL.
 
-KleidiCV does not directly run the neural network. The OpenCV DNN call remains:
+KleidiCV doesn't directly run the neural network. The OpenCV DNN call remains:
 
 ```cpp
 network.setInput(blob);
@@ -65,11 +70,13 @@ network.forward(outputs, network.getUnconnectedOutLayersNames());
 
 The benchmark distinguishes two preprocessing metrics:
 
-- *Image operations subtotal* (primary): Resize, BGR-to-RGB conversion, and uint8-to-float32 conversion, the operations eligible for KleidiCV HAL acceleration
-- *Full preprocessing*: All three operations plus padding and tensor packing
+- Image operations subtotal (primary): Includes resizing, BGR-to-RGB conversion, and uint8-to-float32 conversion. These operations are eligible for KleidiCV HAL acceleration.
+- Full preprocessing: Includes the three image operations as well as padding and tensor packing.
 
 Individual preprocessing operations and DNN inference are also timed separately.
 
 ## What you've learned and what's next
 
-You've identified the role of each component and the explicit preprocessing, inference, and output stages of the application. Next, you'll build matching baseline and KleidiCV installations to measure preprocessing and pipeline behavior.
+You've identified the role of each component and the explicit preprocessing, inference, and output stages of the application. 
+
+Next, you'll build matching baseline and KleidiCV installations to measure preprocessing and pipeline behavior.

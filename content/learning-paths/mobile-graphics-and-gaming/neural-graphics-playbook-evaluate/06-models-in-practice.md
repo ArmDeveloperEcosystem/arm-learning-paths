@@ -39,7 +39,7 @@ The quickest way to get signal is to enable NFRU in Unreal Engine using Arm's in
 A strong baseline flow is:
 
 - [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/)
-- [Enable Neural Super Sampling in Unreal Engine with ML Extensions](/learning-paths/mobile-graphics-and-gaming/nss-unreal/)
+- [Enable Neural Super Sampling for Unreal Engine with ML Extensions](/learning-paths/mobile-graphics-and-gaming/nss-unreal/)
 - [Validate the lower-level Vulkan data graph path using sample applications](/learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/)
 
 

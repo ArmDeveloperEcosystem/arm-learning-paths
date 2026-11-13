@@ -42,16 +42,18 @@ Called from:
                     </ads-button>
                 </div>
             {{else}}
-                <!-- On next steps page, provide CTA to return to all LPS -->
-                {{ range where $.context.Site.Pages "Params.maintopic" true}}
-                    {{if in $.context.File.Dir .File.Dir}}  <!-- If the maintopic path is in this file's path (part of this main topic) -->
-                        {{ with .Site.GetPage .File.Dir }}
-                            <ads-cta-link link="{{.Permalink}}">
-                                <span>Back to all learning paths under {{.Title}}</span>
-                            </ads-cta-link>  
-                        {{ end }}
+                <!-- On next steps page, provide CTA to return to all LPs -->
+                <div class="c-col">
+                    {{ range where $.context.Site.Pages "Params.maintopic" true}}
+                        {{if in $.context.File.Dir .File.Dir}}
+                            {{ with .Site.GetPage .File.Dir }}
+                                <ads-button name="Return to {{.Title}}" class="inner-learning-path-navbtn-element" style="float:right" onclick="window.location.href={{.Permalink}}" level="primary">
+                                    Return to {{.Title}}
+                                </ads-button>
+                            {{ end }}
+                        {{end}}
                     {{end}}
-                {{end}}
+                </div>
             {{ end }}
         {{end}}
         {{ $counter = add $counter 1 }}

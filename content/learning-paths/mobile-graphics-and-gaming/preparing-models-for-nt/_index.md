@@ -73,7 +73,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
     - Mali
 tools_software_languages:
@@ -102,7 +102,7 @@ further_reading:
         link: /learning-paths/mobile-graphics-and-gaming/vulkan-ml-sample/
         type: learningpath
     - resource:
-        title: Enable Neural Super Sampling in Unreal Engine with ML Extensions
+        title: Enable Neural Super Sampling for Unreal Engine with ML Extensions
         link: /learning-paths/mobile-graphics-and-gaming/nss-unreal/
         type: learningpath
     - resource:

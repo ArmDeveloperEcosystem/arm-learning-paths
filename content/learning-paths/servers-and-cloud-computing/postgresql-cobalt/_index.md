@@ -1,19 +1,19 @@
 ---
-title: Deploy PostgreSQL on Azure Cobalt 100 Arm64 virtual machines
+title: Deploy PostgreSQL on Azure Cobalt 200 Arm64 virtual machines
 
 minutes_to_complete: 30
 
 who_is_this_for: This learning path is designed for developers, DevOps engineers, and platform engineers who want to deploy, manage, and optimize PostgreSQL databases on Arm-based cloud infrastructure.
 
 learning_objectives:
-    - Install and configure PostgreSQL on Azure Cobalt 100 Arm64 virtual machines
+    - Install and configure PostgreSQL on Azure Cobalt 200 Arm64 virtual machines
     - Deploy a relational database schema for transactional workloads
     - Execute analytical SQL queries on operational data
     - Benchmark PostgreSQL performance using pgbench
     - Monitor and optimize query performance using built-in PostgreSQL tools
 
 prerequisites:
-  - A [Microsoft Azure account](https://azure.microsoft.com/) with access to Cobalt 100 based instances (Dpsv6)
+  - A [Microsoft Azure account](https://azure.microsoft.com/) with access to Cobalt 200 based instances (Dpsv7)
   - Basic knowledge of Linux command-line operations
   - Familiarity with SSH and remote server access
   - Basic understanding of databases and SQL
@@ -24,7 +24,7 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 
-description: Deploy PostgreSQL on Azure Cobalt 100 Arm64 virtual machines, load a relational schema with transactional data, and benchmark and optimize query performance using pgbench and pg_stat_statements.
+description: Deploy PostgreSQL on Azure Cobalt 200 Arm64 virtual machines, load a relational schema with transactional data, and benchmark and optimize query performance using pgbench and pg_stat_statements.
 
 ### Tags
 skilllevels: Introductory
@@ -39,6 +39,7 @@ tools_software_languages:
     - PostgreSQL
     - SQL
     - pgbench
+    - Azure Cobalt 200
 
 operatingsystems:
     - Linux
@@ -57,8 +58,8 @@ further_reading:
       link: https://www.postgresql.org/docs/current/pgbench.html
       type: documentation
   - resource:
-      title: Azure Cobalt 100 processors
-      link: https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353
+      title: Azure Cobalt 200 processors
+      link: https://azure.microsoft.com/en-us/blog/new-azure-cobalt-200-vms-deliver-50-performance-improvement-fully-optimized-for-modern-agentic-ai-workloads/
       type: documentation
 ### FIXED, DO NOT MODIFY
 # ================================================================================

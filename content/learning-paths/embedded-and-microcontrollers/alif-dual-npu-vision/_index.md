@@ -74,7 +74,7 @@ rerun_summary: false
 rerun_faqs: false
 
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-M
     - Ethos-U

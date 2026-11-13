@@ -6,15 +6,15 @@ weight: 6
 layout: learningpathall
 ---
 
-## The benefits of validation 
+## The benefits of validation
 
-After installing MySQL on your Azure Cobalt 100 Arm64 VM, run a functional test to confirm that the database is operational and ready for use. Beyond checking service status, validation ensures the following:
+After installing MySQL on your Azure Cobalt 200 Arm64 VM, run a functional test to confirm that the database is operational and ready for use. Beyond checking service status, validation ensures the following:
 
 - MySQL is processing queries correctly
 - Users can authenticate
 - The environment is correctly configured for cloud workloads
 
-## Start MySQL 
+## Start MySQL
 
 Ensure MySQL is running and configured to start on boot by running the following:
 
@@ -22,9 +22,9 @@ Ensure MySQL is running and configured to start on boot by running the following
 sudo systemctl start mysql
 sudo systemctl enable mysql
 ```
-You’ve now validated that MySQL is running correctly and can store, retrieve, and organize data on your Azure Cobalt 100 Arm64 virtual machine. This confirms your environment is ready for development or production workloads. 
+MySQL is now started and enabled. Continue with the queries below to validate authentication and data operations.
 
-## Connect to MySQL 
+## Connect to MySQL
 
 Connect using the MySQL client:
 
@@ -62,14 +62,10 @@ mysql> SHOW DATABASES;
 | Database           |
 +--------------------+
 | baseline_test      |
-| benchmark_db       |
 | information_schema |
-| mydb               |
-| mysql              |
 | performance_schema |
-| sys                |
 +--------------------+
-7 rows in set (0.00 sec)
+3 rows in set (0.00 sec)
 
 mysql> USE baseline_test;
 Database changed
@@ -124,10 +120,10 @@ Once the table is created, you can populate it with sample rows. This validates 
 
 Run the following SQL command inside the baseline_test database:
 ```sql
-INSERT INTO test_table (name, value) 
-VALUES 
-('Alice', 100), 
-('Bob', 200), 
+INSERT INTO test_table (name, value)
+VALUES
+('Alice', 100),
+('Bob', 200),
 ('Charlie', 300);
 ```
 - `INSERT INTO test_table (name, value)` - specifies which table and columns to insert into
@@ -156,4 +152,6 @@ mysql> SELECT * FROM test_table;
 ```
 This confirms that rows were successfully inserted, the auto-increment primary key (id) is working correctly and the query engine can read data from disk or memory and return results instantly.
 
-The functional test was successful. The test_table contains the expected three rows (Alice, Bob, and Charlie) with their respective values. This confirms that MySQL is working correctly on your Cobalt 100 Arm-based VM, completing the installation and validation phase.
+The functional test was successful. The test_table contains the expected three rows (Alice, Bob, and Charlie) with their respective values. This confirms that MySQL is working correctly on your Cobalt 200 Arm-based VM, completing the installation and validation phase.
+
+Run `EXIT;` to leave the MySQL shell before continuing to the benchmarking section.

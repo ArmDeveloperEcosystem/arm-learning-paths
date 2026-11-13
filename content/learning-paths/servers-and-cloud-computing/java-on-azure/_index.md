@@ -1,18 +1,18 @@
 ---
-title: Deploy Java applications on Azure Cobalt 100 processors 
+title: Deploy Java applications on Azure Cobalt 200 processors
 
-minutes_to_complete: 30   
+minutes_to_complete: 30
 
-description: Deploy Java on Azure Cobalt 100 Arm virtual machines and benchmark application performance with JMH microbenchmarks.
-who_is_this_for: This is an introductory topic about Java deployment and benchmarking on Microsoft Azure Cobalt 100 Arm-based virtual machines (VMs). It is designed for developers migrating Java applications from x86_64 to Arm architecture.
+description: Deploy Java on Azure Cobalt 200 Arm virtual machines and benchmark application performance with JMH microbenchmarks.
+who_is_this_for: This is an introductory topic about Java deployment and benchmarking on Microsoft Azure Cobalt 200 Arm-based virtual machines (VMs). It is designed for developers migrating Java applications from x86_64 to Arm architecture.
 
-learning_objectives: 
-    - Provision an Azure Arm-based VM using Azure console, with Ubuntu Pro 24.04 LTS as the base image.
+learning_objectives:
+    - Provision an Azure Arm-based VM using Azure console, with Ubuntu 24.04 LTS as the base image.
     - Deploy Java on the Azure Arm64 VM.
     - Perform Java baseline testing and benchmarking on the Arm64 VM.
 
 prerequisites:
-    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 100-based instances (Dpsv6)
+    - A [Microsoft Azure](https://azure.microsoft.com/) account with access to Cobalt 200-based instances (Dpsv7)
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -29,18 +29,18 @@ generated_summary_faq:
   faq_generated_at: '2026-09-15T21:18:20Z'
   faq_source_hash: 762f1a48dc462eaf80807f8247b3970888f01762b4e55e84f0a9f1449b4944f4
   summary: >-
-    You'll provision an Arm64 Azure VM powered by Cobalt 100 with Ubuntu Pro 24.04 LTS, install OpenJDK,
-    and verify the Java runtime and compiler. First, you'll run a Java baseline to separate Java Virtual Machine (JVM)
-    execution from framework overhead. Then, you'll use Java Microbenchmark Harness (JMH) to measure throughput or timing while
+    You'll provision an Arm64 Azure VM powered by Cobalt 200 with Ubuntu 24.04 LTS, install OpenJDK,
+    and verify the Java runtime and compiler. First, you'll compile and run a Java program that constructs
+    an HTTP response in memory. Then, you'll use Java Microbenchmark Harness (JMH) to measure throughput while
     accounting for warmup and just-in-time (JIT) effects. Finally, you'll have benchmark results that provide a
     baseline for further experiments.
   faqs:
   - question: What Azure VM instance type should I use?
     answer: >-
-      Use the `D4ps_v6` instance type in the Dpsv6 (D-series v6) family. 
+      Use the `D4ps_v7` instance type in the Dpsv7 (D-series v7) family.
   - question: Which OS image and architecture should I select when creating the VM?
     answer: >-
-      Choose Ubuntu Pro 24.04 LTS on Arm64. 
+      Choose Ubuntu 24.04 LTS on Arm64.
   - question: Does installing default-jdk give me everything I need to run and build Java code?
     answer: >-
       `default-jdk` installs the Java runtime and compiler. For the JMH benchmark, install Maven separately before creating and running the benchmark project.
@@ -72,6 +72,7 @@ armips:
 tools_software_languages:
     - Java
     - JMH
+    - Azure Cobalt 200
 
 operatingsystems:
     - Linux

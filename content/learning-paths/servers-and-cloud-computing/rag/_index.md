@@ -29,7 +29,7 @@ rerun_faqs: false
 skilllevels: Advanced
 armips:
     - Neoverse
-subjects: ML
+subjects: AI/ML
 platforms:
   - Google Axion
 operatingsystems:
