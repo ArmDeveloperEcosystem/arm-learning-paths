@@ -28,7 +28,7 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
   - Cortex-A
 tools_software_languages:
