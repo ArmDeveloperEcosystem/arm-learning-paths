@@ -31,7 +31,7 @@ Antigravity should obtain the latest stable releases from the official [Termux r
 The Arm feature check is part of that work. Antigravity needs to establish the following details:
 - Which optimizations the phone exposes
 - Which optimizations the selected model and runtime can use
-- Which kernels ru
+- Which kernels run during inference
 
 If Scalable Vector Extension (SVE) or SVE2 isn't usable for that combination, Antigravity should explain the reason. It should identify the compatible path that it measured.
 
@@ -73,4 +73,4 @@ Antigravity should cancel the recorded DDP session and confirm that its cloud st
 
 You've used Antigravity CLI and natural language to connect to remote Arm hardware and investigate a performance question. Antigravity handled device access, software selection, and setup. It also handled kernel checks, measurement, and cleanup. You chose the task and spending limits, then reviewed the screen, results, and explanation.
 
-You can extend the Learning Path for testing on remote Arm hardware for your own use cases. 
+You can adapt this Learning Path to test your own workloads on remote Arm hardware.

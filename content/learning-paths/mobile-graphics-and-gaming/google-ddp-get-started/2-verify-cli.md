@@ -1,5 +1,5 @@
 ---
-title: Verify the CLI and discover a remote device
+title: Verify DDP setup and find a device configuration
 description: Check your Google Cloud identity, project, credentials, and enabled services, then find the Pixel 11 configuration for your device session.
 weight: 3
 layout: learningpathall

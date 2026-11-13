@@ -28,7 +28,7 @@ The agent sends commands to the remote phone, where the commands run on real har
 
 The Device Catalog helps you or your agent find an available device and confirm streaming support. Device Streaming provides the interactive connection, and Device Run supports automated tests and executables. For more information about these capabilities, see [DDP overview](https://docs.cloud.google.com/developer-device-platform/overview).
 
-You'll prepare your workstation and benchmark a small language model trained on the TinyStories dataset on a remote Pixel 11. The agent checks Arm Scalable Vector Extention 2 (SVE2) support. It compares a CPU baseline with an optimized kernel path, and reports the measured performance.
+You'll prepare your workstation and benchmark a small language model trained on the TinyStories dataset on a remote Pixel 11. The agent checks Arm Scalable Vector Extension 2 (SVE2) support. It compares a CPU baseline with an optimized kernel path, and reports the measured performance.
 
 {{% notice Note %}}
 The example coding agent for this Learning Path is [Antigravity CLI](/install-guides/antigravity/). Other agents that support Agent Skills might also work.
@@ -125,7 +125,9 @@ If your package-managed CLI disables the component manager, follow [Google compo
 [scrcpy](https://github.com/Genymobile/scrcpy) displays an Android device in a desktop window and lets you control it with your keyboard and mouse. Install it on your development computer before reserving a phone. Use a local desktop session so that the viewer can open a window.
 
 {{< tabpane-normal >}}
-  {{< tab header="Ubuntu 26.04" >}} The following commands build `scrcpy` 5.0.1 using its [upstream Linux installation procedure](https://github.com/Genymobile/scrcpy/blob/v5.0.1/doc/linux.md). These commands use Ubuntu 26.04, which provides the required SDL3 packages. For another distribution or release, follow the upstream instructions for its dependencies.
+  {{< tab header="Ubuntu 26.04" >}}
+
+The following commands build `scrcpy` 5.0.1 using the [scrcpy Linux installation instructions](https://github.com/Genymobile/scrcpy/blob/v5.0.1/doc/linux.md). These commands use Ubuntu 26.04, which provides the required SDL3 packages. For another distribution or release, follow the upstream instructions for its dependencies.
 
 Install the viewer runtime and build dependencies:
 
@@ -149,7 +151,7 @@ cd "$HOME/ddp-tools/scrcpy"
   {{< /tab >}}
   {{< tab header="macOS" >}}
 
-Install the viewer using the [upstream Homebrew instructions](https://github.com/Genymobile/scrcpy/blob/master/doc/macos.md). It uses the `adb` installation:
+Install the viewer using the [scrcpy macOS installation instructions](https://github.com/Genymobile/scrcpy/blob/master/doc/macos.md). It uses the `adb` installation:
 
 ```bash
 brew install scrcpy

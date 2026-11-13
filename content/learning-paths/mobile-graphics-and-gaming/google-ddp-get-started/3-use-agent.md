@@ -56,7 +56,7 @@ The `scrcpy` window should show the current screen of the reserved phone. Check 
 
 Click to tap, drag to swipe, and use your keyboard to type into a text field. Try opening the app drawer and returning to the home screen. Antigravity can also save and inspect a screenshot through the same connection:
 
-<img src="/learning-paths/mobile-graphics-and-gaming/google-ddp-get-started/images/ddp-connected-phone.jpg" width="240" alt="Home screen of the remote Pixel 11 captured through its exact ADB connection. Seeing the phone screen confirms the screenshot route works before the agent starts interacting with Termux." title="Inspect a real screenshot from the reserved phone" class="content-uploaded-image centered" />
+<img src="/learning-paths/mobile-graphics-and-gaming/google-ddp-get-started/images/ddp-connected-phone.jpg" width="240" alt="Home screen of the remote Pixel 11, with app icons and navigation controls visible." title="Inspect a real screenshot from the reserved phone" class="content-uploaded-image centered" />
 <span class="content-image-caption centered">Inspect a real screenshot from the reserved phone</span>
 
 If the screen doesn't appear or control doesn't work, describe the issue in `agy`. Antigravity can inspect the connection, correct the viewer settings, and try again within the existing session. You can review its observations without managing ports or issuing device commands yourself.

@@ -1,5 +1,5 @@
 ---
-title: Use Google Developer Device Platform with an AI agent
+title: Benchmark TinyStories with Google DDP and an AI agent
 
 description: Use Google Developer Device Platform and an AI agent to compare TinyStories CPU inference with and without KleidiAI optimizations on a remote Pixel phone.
 
