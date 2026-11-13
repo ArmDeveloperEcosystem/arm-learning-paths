@@ -1,10 +1,6 @@
 ---
 title: Use Google Developer Device Platform with an AI agent
 
-draft: true
-cascade:
-    draft: true
-
 description: Use Google Developer Device Platform and an AI agent to compare TinyStories CPU inference with and without KleidiAI optimizations on a remote Pixel phone.
 
 minutes_to_complete: 45
@@ -14,11 +10,11 @@ who_is_this_for: Developers who want to use a coding agent to access remote Andr
 learning_objectives:
     - Configure a Google Cloud project and local tools for Developer Device Platform (DDP).
     - Verify CLI authentication, enabled DDP services, and device catalog access.
-    - Use Google's DDP agent skill with Antigravity to discover, reserve, inspect, and release a remote phone.
+    - Use the Google DDP agent skill with Antigravity to discover, reserve, inspect, and release a remote phone.
     - Use Antigravity to compare TinyStories CPU inference with and without KleidiAI optimizations.
 
 prerequisites:
-    - Access to a Google Cloud project with billing enabled and permissions to enable APIs and reserve Developer Device Platform devices
+    - Access to a Google Cloud project with billing enabled and permissions to enable APIs and reserve DDP devices
     - A local macOS or Ubuntu 26.04 computer with a desktop session and permission to install software
     - The [Google Cloud CLI](/install-guides/gcloud/) and permission to install beta commands
     - The [Antigravity CLI](/install-guides/antigravity/) coding agent
