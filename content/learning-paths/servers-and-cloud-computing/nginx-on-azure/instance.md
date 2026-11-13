@@ -48,8 +48,6 @@ When you have made your selection, select **Create**, then **Download private ke
 
 Your virtual machine should soon be ready and start running. You can SSH into the virtual machine using the private key and the **Public IP** details.
 
-![Azure portal VM creation example#center](images/final-vm.png "VM deployment confirmation in Azure portal")
-
 {{% notice Note %}} To find out more about Arm-based virtual machines on Azure, see the section *Getting Started with Microsoft Azure* within the Learning Path [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/). {{% /notice %}}
 
 For example, connect from your local terminal using the username, private key, and public IP address for your VM:
