@@ -121,7 +121,7 @@ gcloud components install beta
 
 If your package-managed CLI disables the component manager, follow [Google component installation instructions](https://docs.cloud.google.com/sdk/docs/components) for your installation method.
 
-## Install scrcpy to view and control the phone
+## Install `scrcpy` to view and control the phone
 
 [scrcpy](https://github.com/Genymobile/scrcpy) displays an Android device in a desktop window and lets you control it with your keyboard and mouse. Install it on your development computer before reserving a phone. Use a local desktop session so that the viewer can open a window.
 
