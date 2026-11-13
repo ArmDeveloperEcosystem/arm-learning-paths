@@ -27,7 +27,7 @@ To get started, launch the Azure portal and navigate to **Virtual Machines**. Th
 
 - Select **Create**, then select **Virtual machine** from the drop-down list.
 - In the **Basics** tab, fill in information about the instance such as **Virtual machine name** and **Region**.
-- Select the image for your virtual machine (for example, Ubuntu 24.04 LTS) and select **Arm64** as the VM architecture. Ubuntu Pro is optional; the commands in this Learning Path were validated on Ubuntu 24.04 LTS.
+- Select the image for your virtual machine (for example, Ubuntu 24.04 LTS) and select **Arm64** as the VM architecture.
 - In the **Size** field, select **See all sizes**, select the **D-series v7** family of virtual machines, then select **D4ps_v7**.
 
 {{% notice Note %}}
