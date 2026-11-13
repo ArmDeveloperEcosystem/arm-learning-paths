@@ -112,6 +112,3 @@ The following results were collected on an Azure Cobalt 200 **Standard_D4ps_v7**
 
 ## Interpret the Cobalt 200 baseline
 
-The zero failed requests confirm that NGINX served all requests in this test. The throughput and timing values are an example from one short run; your results will vary.
-
-Because ApacheBench runs on the NGINX VM, the client and server share CPU resources and traffic uses the loopback interface. This test validates the setup, but does not measure external network performance or production capacity. For capacity testing, use a separate load generator and longer, repeated tests with representative content and concurrency. These results do not establish a performance or cost comparison with other VM types.
