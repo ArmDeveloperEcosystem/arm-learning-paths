@@ -72,12 +72,12 @@ SELECT
 FROM generate_series(1, 500000) AS i;
 ```
 
-**This generates:**
+This generates:
 
 - 100,000 customers
 - 500,000 orders
 
-## Fix ownership (important)
+## Fix ownership 
 
 Ensure the application user owns the tables to allow schema changes and indexing.
 
