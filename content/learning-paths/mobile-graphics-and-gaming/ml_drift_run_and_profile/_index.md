@@ -1,5 +1,10 @@
 ---
 title: Run and Profile ML Drift on Arm Mali GPUs
+
+draft: true
+cascade:
+    draft: true
+    
 description: Build and run Stable Diffusion on an Android Mali GPU with ML Drift, inspect a unified shader, and profile GPU activity with Arm Streamline.
 minutes_to_complete: 30
 lastmod: 2026-10-30
