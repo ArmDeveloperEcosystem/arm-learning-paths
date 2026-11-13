@@ -72,12 +72,12 @@ SELECT
 FROM generate_series(1, 500000) AS i;
 ```
 
-**This generates:**
+This generates:
 
 - 100,000 customers
 - 500,000 orders
 
-## Fix ownership (important)
+## Fix ownership 
 
 Ensure the application user owns the tables to allow schema changes and indexing.
 
@@ -151,10 +151,7 @@ The output is similar to:
 (10 rows)
 ```
 
-**The output means:**
-
-- Shows the top 10 highest-paying customers
-- Helps identify:
+The output shows the top 10 highest-paying customers and helps identify:
   - High-value users
   - VIP customers
   - Revenue concentration
@@ -190,12 +187,7 @@ The output is similar to:
 (10 rows)
 ```
 
-**The output means:**
-
-- Shows most active customers
-- Useful for:
-  - Engagement analysis
-  - Identifying frequent buyers
+The output shows most active customers and is useful for engagement analysis and identifying frequent buyers.
 
 ## Validate as application user
 

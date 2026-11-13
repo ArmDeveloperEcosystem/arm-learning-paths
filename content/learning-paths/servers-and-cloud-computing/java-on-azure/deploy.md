@@ -6,7 +6,7 @@ weight: 4
 layout: learningpathall
 ---
 
-## Install Java on Azure Ubuntu 24.04 LTS (Arm64)
+## Install Java on Azure Cobalt 200 (Arm64)
 
 In this section, you will install Java on your Arm-based Ubuntu virtual machine. The goal is to ensure you have both the Java Runtime Environment (JRE) for running Java applications and the Java Development Kit (JDK) for compiling code and running benchmarks.
 
