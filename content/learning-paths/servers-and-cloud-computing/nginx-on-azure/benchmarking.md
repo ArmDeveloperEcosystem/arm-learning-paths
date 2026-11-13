@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Benchmark NGINX with ApacheBench (ab) on Ubuntu 24.04 LTS
+## Benchmark NGINX with ApacheBench on Arm
 
 Use ApacheBench (**ab**) to measure NGINX performance on your Arm64 Azure VM. This section shows you how to install the tool, run a basic benchmark, interpret key metrics, and review a sample result from an Azure **D4ps_v7** instance.
 
