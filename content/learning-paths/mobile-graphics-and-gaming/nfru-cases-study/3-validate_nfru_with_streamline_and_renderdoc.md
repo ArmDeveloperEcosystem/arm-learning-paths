@@ -24,7 +24,7 @@ For Moku, multiple sequences are prepared for demonstration, including 30-second
 
 ![Animated sample test sequence showing the Moku camera path replayed for repeatable NFRU comparisons#center](./images/sample_test_sequence.gif)
 
-Different device profiles are configured to control whether NFRU is enabled, disabled, or running in debug mode. For example:
+Different device profiles are configured to control whether NFRU is enabled, disabled, or running in debug mode. The following profiles cover these test scenarios:
 ```ini
 [Moku_SM5_NoNeural DeviceProfile]
 DeviceType=Android
@@ -52,9 +52,21 @@ adb shell am start -S -n [package_name]/com.epicgames.unreal.GameActivity --es c
 
 For additional visual debugging, use `r.NFRU.ShowDebugView` to display the frame interpolation debug view. Use `r.NFRU.OnlyInterpolatedFrames` when you want to focus only on generated frames. Use `r.NFRU.CaptureDebugUI` when the debug UI or overlays need to be included in the captured path.
 
-`r.NFRU.ShowDebugView` and `r.NFRU.OnlyInterpolatedFrames` are intended for development and test builds, and might not be available in shipping builds.
+`r.NFRU.ShowDebugView` and `r.NFRU.OnlyInterpolatedFrames` are available in Debug, Development, and Test builds; they are not exposed as console controls in Shipping builds.
 
 In NFRU debug resource names, `tm1` means time minus one (`t-1`) and `tp1` means time plus one (`t+1`) relative to the generated frame time. These names might not always match the simpler "previous" or "current" labels used in comparison images.
+
+### Record the shader path and output mode
+
+Record `r.NFRU.UseFragmentShader` with your captures to identify the preprocessing and postprocessing shader path. If you compare the compute path (`0`) with the fragment path (`1`), keep the remaining test conditions consistent. The neural interpolation workload is separate from this shader-path selection.
+
+Use `r.NFRU.OnlyInterpolatedFrames=1` only when inspecting generated frames; restore `0` for normal presentation tests. Keep debug views disabled during performance measurements. For engine-specific debugging workarounds, check the [plugin's known issues](https://github.com/arm/neural-graphics-for-unreal/blob/ue5/README.md#known-issues).
+
+### Capture provenance
+
+The visual scenarios show the Moku builds used for those captures. They illustrate those builds rather than certify the behavior of another plugin release. Record the plugin commit, SDK submodule revision, engine version, shader path, and device driver with your own captures.
+
+When comparing releases, replay the same scene and inspect the same regions before attributing a difference to a plugin change. Consult the [plugin release notes](https://github.com/arm/neural-graphics-for-unreal/releases) for fixes relevant to your build.
 
 ## Profile NFRU with Streamline
 
@@ -129,4 +141,4 @@ You've now learned how to validate NFRU using Streamline and RenderDoc. Streamli
 
 Together, these tools make smoother NFRU presentation measurable and its edge cases actionable.
 
-Next, you'll evaluate NFRU performance and visual quality in representative gameplay scenarios.
+Next, you'll compare camera movement and a moving object to see how NFRU preserves scene structure and object shape during a fast camera turn and object movement.

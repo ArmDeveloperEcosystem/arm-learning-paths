@@ -9,10 +9,10 @@ layout: learningpathall
 
 ## What Project Moku is
 
-Project Moku is an Unreal Engine sample project developed by Arm that demonstrates neural rendering technologies for mobile platforms. Built on Unreal 5.6, the project provides a controlled environment for testing Neural Frame Rate Upscaling (NFRU), along with complementary neural rendering techniques such as Neural Super Sampling (NSS) and Neural Super Sampling and Denoising (NSSD). Project Moku is designed to exercise dedicated neural accelerators on GPUs with built-in neural processing support.
+Project Moku is an internal Unreal Engine sample project developed by Arm that demonstrates neural rendering technologies for mobile platforms. It is not currently available to external developers. You can use its captures as case-study references and follow the evaluation workflow with your own Unreal Engine project. Moku provides a controlled environment for testing Neural Frame Rate Upscaling (NFRU), along with complementary neural rendering techniques such as Neural Super Sampling (NSS). Project Moku is designed to exercise dedicated neural accelerators on GPUs with built-in neural processing support.
 
 {{% notice Info %}}
-To learn more about neural graphics techniques — including NFRU — and evaluate how they fit your game, see the [Neural Technology Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/) Learning Path.
+To learn more about neural graphics techniques - including NFRU - and evaluate how they fit your game, see the [Neural Technology Playbook - Evaluate](/learning-paths/mobile-graphics-and-gaming/neural-graphics-playbook-evaluate/) Learning Path.
 {{% /notice %}}
 
 ![Project Moku corridor scene used as a controlled environment for comparing NFRU-generated and rendered frames#center](./images/moku_intro.webp "Project Moku corridor scene")
@@ -33,7 +33,7 @@ Watch this explainer for an overview of how Neural Frame Rate Upscaling generate
 
 For repeatable testing, the case study uses reference cuts from Project Moku that replay the same camera paths and gameplay actions across runs. To follow along, you'll need similar reference cuts from your game.
 
-The cuts create a consistent development and test environment, making it easier to compare NFRU disabled and enabled captures, inspect visual artifacts, and measure performance changes. The following screenshots show examples of the cuts from Project Moku.
+The cuts create a consistent development and test environment, making it easier to compare NFRU disabled and enabled captures, inspect visual artifacts, and measure performance changes. The following screenshots show scenarios from selected Project Moku cuts.
 
 | ![Reference cut 02 showing a Moku corridor lighting-change scenario for repeatable NFRU testing#center](./images/reference-cut-02.webp "Reference cut 02") | ![Reference cut 03 showing a Moku scene variation used to compare NFRU output across repeatable camera actions#center](./images/reference-cut-03.webp "Reference cut 03") | ![Reference cut 04 showing a Moku particle-effects scenario used to evaluate NFRU-generated frames#center](./images/reference-cut-04.webp "Reference cut 04") |
 | --- | --- | --- |

@@ -1,40 +1,31 @@
 ---
 title: Enable the Arm Neural Graphics plugin
-description: Enable the Arm Neural Graphics plugin in an Unreal Engine project and configure the project to detect and load the plugin for NFRU testing.
+description: Prepare your Unreal Engine project for NFRU evaluation using the Arm Neural Graphics plugin and the existing integration setup guides.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
-## Install the required tools and dependencies
 
-Before enabling the Arm Neural Graphics plugin, make sure that you've installed and configured all required tools and dependencies. For complete setup instructions, see [Set up the development environment](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment/).
+## Prepare your Unreal project for NFRU evaluation
 
+Project Moku is an internal Arm project and is not currently available to external developers. Its captures provide the case-study scenarios; you can follow the setup and evaluation workflow with your own Unreal Engine project.
 
-## Set up the Arm Neural Graphics plugin
+Follow the [NFRU integration Learning Path](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/) for current plugin compatibility and setup requirements. Use an existing compatible Unreal Engine C++ project, or create the template project described in that guide.
 
-If you cloned `armng-unreal` outside your Unreal project directory, create a symbolic link in your project `Plugins` folder. The symbolic link allows Unreal Engine to detect the plugin as part of your project.
+Follow the relevant setup instructions:
 
-Run the following command in **Command Prompt**. Replace the paths with your project path and the location of the `armng-unreal` clone:
+- [Set up the development environment](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/2-set_up_the_development_environment/) for tools, plugin source, dependencies, and Windows ML emulation layers
+- [Set up the Unreal project with NFRU enabled](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/3-set_up_the_unreal_project/) for installing the complete plugin folder, rebuilding the project, selecting Vulkan, and configuring the backbuffer and NFRU settings
 
-```console
-mklink /D "C:\Path\To\YourProject\Plugins\armng-unreal" "C:\Path\To\armng-unreal"
-```
+Use the complete plugin copy described in the integration guide. If your project already contains a plugin copy, check its version before replacing it. Keep the plugin and SDK from the same checkout.
 
-After creating the symbolic link, regenerate your Visual Studio solution so Unreal Engine can detect the plugin. Use one of the following methods:
+## Confirm your test configuration
 
-1. Use the Windows context menu: Select your `.uproject` file in **File Explorer**, then select **Generate Visual Studio project files**.
+Open your project and confirm that the plugin loads with NFRU enabled. Use [Validate NFRU in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/4-validate_nfru_in_unreal_engine/) for the initial activation check and troubleshooting.
 
-2. Use the command line: Open **Command Prompt** and run the following command, replacing the paths with your Unreal Engine installation path and project path.
+Record the plugin commit, SDK submodule revision, and Unreal Engine version with your test results. This identifies the build behind your captures when you compare visual quality or performance across versions.
 
-    ```console
-    "C:\Program Files\Epic Games\UE_5.6\Engine\Binaries\DotNET\UnrealBuildTool\UnrealBuildTool.exe" -projectfiles -project="C:\PathToYourProject\YourProject.uproject" -game -engine
-    ```
+Choose a scene with camera or object movement that you can replay consistently. You can use the Moku comparisons as visual references while capturing your own scene.
 
-After regenerating the Visual Studio solution, follow [Set up the Unreal project](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/3-set_up_the_unreal_project/) to enable the plugin in your `.uproject` file or through the Unreal Editor **Plugins** window. Then, rebuild the project, confirm that it uses Vulkan RHI, and verify that NFRU functions correctly.
-
-## What you've accomplished and what's next
-
-You've now created a symbolic link to the plugin source and regenerated the Visual Studio solution. This configuration enables Unreal Engine to detect and load the Arm Neural Graphics plugin.
-
-Next, you'll confirm that NFRU is active, inspect generated frames, and start comparing visual quality and performance.
+Next, use Streamline and RenderDoc to validate NFRU and inspect generated frames in your project.
