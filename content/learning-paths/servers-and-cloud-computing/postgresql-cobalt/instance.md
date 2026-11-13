@@ -1,5 +1,5 @@
 ---
-title: Create an Azure Cobalt 100 Arm64 virtual machine
+title: Create an Azure Cobalt 200 Arm64 virtual machine
 weight: 3
 
 ### FIXED, DO NOT MODIFY
@@ -8,34 +8,35 @@ layout: learningpathall
 
 ## Provision Azure infrastructure for PostgreSQL
 
-Create an Arm-based Cobalt 100 virtual machine to host your PostgreSQL database.
+Create an Arm-based Cobalt 200 virtual machine to host your PostgreSQL database.
 
 ## Prerequisites and setup
 
-There are several common ways to create an Arm-based Cobalt 100 virtual machine, and you can choose the method that best fits your workflow or requirements:
+There are several common ways to create an Arm-based Cobalt 200 virtual machine, and you can choose the method that best fits your workflow or requirements:
 
 - The Azure Portal
 - The Azure CLI
 - An infrastructure as code (IaC) tool
 
-In this section, you will launch the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
+In this section, you will launch the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 200 processor.
 
-The Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
+Use a general-purpose **Standard_D4ps_v7** VM in the **Dpsv7** series, with 4 vCPUs and 16 GiB of memory. See Microsoft’s [Cobalt 200 VM families overview](https://azure.microsoft.com/en-us/blog/new-azure-cobalt-200-vms-deliver-50-performance-improvement-fully-optimized-for-modern-agentic-ai-workloads/) for details.
 
-While the steps to create this instance are included here for convenience, you can also refer to the [Deploy a Cobalt 100 virtual machine on Azure Learning Path](/learning-paths/servers-and-cloud-computing/cobalt/).
+Your subscription and selected region must have access to Dpsv7 sizes and sufficient vCPU quota. This Learning Path was validated in **West US 2** on **Ubuntu 24.04 LTS (Arm64)**. 
 
 ## Create an Arm-based Azure virtual machine
 
-Creating a virtual machine based on Azure Cobalt 100 is no different from creating any other virtual machine in Azure. To create an Azure virtual machine:
+Creating a virtual machine based on Azure Cobalt 200 is no different from creating any other virtual machine in Azure. To create an Azure virtual machine:
 
 - Launch the Azure portal and navigate to **Virtual Machines**.
 - Select **Create**, and select **Virtual Machine** from the drop-down list.
 - Inside the **Basic** tab, fill in the instance details such as **Virtual machine name** and **Region**.
-- Select the image for your virtual machine (for example, Ubuntu Pro 24.04 LTS) and select **Arm64** as the VM architecture.
-- In the **Size** field, select **See all sizes** and select the D-Series v6 family of virtual machines.
-- Select **D4ps_v6** from the list as shown in the diagram below:
+- Select the image for your virtual machine (for example, Ubuntu 24.04 LTS) and select **Arm64** as the VM architecture.
+- In the **Size** field, select **See all sizes** and select the D-series v7 family of virtual machines.
+- Select **D4ps_v7** from the list.
 
-![Azure Portal VM size selection showing the D-Series v6 (Dpsv6) family highlighted with D4ps_v6 option selected for Arm64 architecture#center](images/instance.png "Select D4ps_v6 from the D-Series v6 family")
+
+![Azure portal VM size selection#center](images/instance.png "VM size selection in the Azure portal")
 
 - For **Authentication type**, select **SSH public key**.
 
@@ -55,9 +56,7 @@ RSA offers better security with keys longer than 3072 bits.
 
 ![Azure Portal inbound port rules configuration showing HTTP (80) and SSH (22) selected as allowed incoming traffic#center](images/instance1.png "Configure inbound port rules for HTTP and SSH access")
 
-- Now select the **Review + Create** tab and review the configuration for your virtual machine. It should look like the following:
-
-![Azure Portal Review + Create tab showing VM configuration summary with Ubuntu Pro 24.04 LTS image, D4ps_v6 size, and networking settings configured#center](images/ubuntu-pro.png "Review VM configuration before creation")
+- Now select the **Review + Create** tab and review the configuration for your virtual machine.
 
 - When you are happy with your selection, select the **Create** button and then **Download Private key and Create Resource** button.
 
@@ -65,16 +64,29 @@ RSA offers better security with keys longer than 3072 bits.
 
 Your virtual machine should be ready and running in a few minutes. You can SSH into the virtual machine using the private key, along with the public IP details.
 
-![Azure Portal showing successful VM deployment with green checkmark, VM name, resource group, and public IP address displayed in the confirmation notification#center](images/final-vm.png "Successful VM deployment confirmation")
 
 {{% notice Note %}}To learn more about Arm-based virtual machines in Azure, see "Getting Started with Microsoft Azure" in [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/azure/).{{% /notice %}}
 
-## What you've learned and what's next
+## Connect to your VM
 
-You've successfully:
+Connect from your local terminal using your VM’s private key, administrator username, and public IP address:
 
-- Created an Azure Cobalt 100 Arm-based virtual machine using the D-Series v6 (Dpsv6) family
-- Selected Ubuntu Pro 24.04 LTS as the operating system
-- Configured SSH authentication for secure access
+```console
+ssh -i <path-to-private-key.pem> <admin-username>@<your-vm-public-ip>
+```
 
-Your Azure Cobalt 100 Arm64 virtual machine is now ready. Next, you'll install PostgreSQL to deploy a relational database system and start running transactional and analytical queries on your data.
+After connecting, verify the architecture and CPU model:
+
+```console
+uname -m
+lscpu | grep 'Model name'
+```
+
+The output is similar to:
+
+```output
+aarch64
+Model name:                              Neoverse-V3
+```
+
+Your Cobalt 200 VM is ready. Next, install and configure PostgreSQL.

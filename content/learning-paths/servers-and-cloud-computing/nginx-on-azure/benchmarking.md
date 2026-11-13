@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-## Benchmark NGINX with ApacheBench (ab) on Ubuntu 24.04 LTS
+## Benchmark NGINX with ApacheBench on Arm
 
 Use ApacheBench (**ab**) to measure NGINX performance on your Arm64 Azure VM. This section shows you how to install the tool, run a basic benchmark, interpret key metrics, and review a sample result from an Azure **D4ps_v7** instance.
 
@@ -95,7 +95,7 @@ ApacheBench produces a variety of metrics, but the most useful ones highlight ho
 
 ## Benchmark summary on Arm64
 
-The following results were collected on November 9, 2026, on an Azure Cobalt 200 **Standard_D4ps_v7** VM (4 vCPUs) in **West US 2**, running **Ubuntu 24.04 LTS** with **NGINX 1.24.0**. ApacheBench ran on the same VM against the 880-byte static page created in the previous section.
+The following results were collected on an Azure Cobalt 200 **Standard_D4ps_v7** VM (4 vCPUs) in **West US 2**, running **Ubuntu 24.04 LTS** with **NGINX 1.24.0**. ApacheBench ran on the same VM against the 880-byte static page created in the previous section.
 
 | Metric | Value |
 |--------|-------|
@@ -110,8 +110,8 @@ The following results were collected on November 9, 2026, on an Azure Cobalt 200
 | HTML transferred | 880,000 bytes |
 | Transfer rate | 44,043.06 Kbytes/sec |
 
-## Interpret the Cobalt 200 baseline
+## Summary
 
-The zero failed requests confirm that NGINX served all requests in this test. The throughput and timing values are an example from one short run; your results will vary.
+Your NGINX deployment on Azure Cobalt 200 successfully handled all 1,000 requests with 50 concurrent connections and no failures. You now have a working static website and an initial performance baseline to guide further testing.
 
-Because ApacheBench runs on the NGINX VM, the client and server share CPU resources and traffic uses the loopback interface. This test validates the setup, but does not measure external network performance or production capacity. For capacity testing, use a separate load generator and longer, repeated tests with representative content and concurrency. These results do not establish a performance or cost comparison with other VM types.
+ApacheBench ran on the same VM as NGINX, so these results reflect local request handling. To evaluate production capacity, run longer, repeated tests from a separate load generator using representative content and traffic patterns. Keep the test conditions consistent when comparing configurations or VM types.

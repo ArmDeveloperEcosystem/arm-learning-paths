@@ -6,11 +6,11 @@ weight: 4
 layout: learningpathall
 ---
 
-# Install and verify NGINX on Ubuntu 24.04 LTS (Azure Arm64)
+## Install and verify NGINX on Arm
 
 In this section, you install and configure NGINX, a high-performance web server and reverse proxy, on your Azure Arm64 (Cobalt 200) virtual machine. NGINX is widely used to serve static content, handle large volumes of connections efficiently, and act as a load balancer. Running it on your Azure Cobalt 200 virtual machine allows you to serve web traffic securely and reliably.
 
-## Install NGINX (apt)
+## Install NGINX
 
 Install NGINX from Ubuntu’s repositories on Ubuntu 24.04 LTS.
 

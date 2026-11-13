@@ -75,7 +75,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
     - Arm C1
 tools_software_languages:

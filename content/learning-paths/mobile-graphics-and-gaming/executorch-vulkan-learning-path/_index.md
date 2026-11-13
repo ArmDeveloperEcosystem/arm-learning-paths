@@ -73,7 +73,7 @@ test_maintenance: false
 
 skilllevels: Advanced
 
-subjects: ML
+subjects: AI/ML
 
 operatingsystems:
   - Linux

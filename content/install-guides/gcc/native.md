@@ -1,94 +1,100 @@
 ---
-additional_search_terms:
-- compiler
-layout: installtoolsall
-minutes_to_complete: 15
+title: Native compiler
+description: Install GCC and G++ on Arm Linux to compile C and C++ applications directly on your Arm system.
+
 author: Jason Andrews
-multi_install: false
-multitool_install_part: true
+minutes_to_complete: 10
 official_docs: https://gcc.gnu.org/onlinedocs/
 ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=GNU%20Toolchain%20%28GCC%29
+
+test_maintenance: false
 test_images:
 - ubuntu:latest
-- fedora:latest
-test_link: null
-test_maintenance: true
-title: Native compiler
-description: Install native GCC and G++ packages on Arm Linux so you can compile C and C++ applications directly on an Arm machine.
+
+layout: installtoolsall
+multi_install: false
+multitool_install_part: true
 tool_install: false
-weight: 2
+weight: 4
+
+additional_search_terms:
+- compiler
+- native
+- aarch64
+- Arm Linux
 ---
-GCC is available on all Linux distributions and can be installed using the package manager.
 
-## What do I need before installing GCC?
+Install GCC and G++ on your Arm Linux machine to build and run C and C++ applications.
 
-Follow the instructions below to install GCC on an Arm Linux distribution. This covers `gcc` and `g++` for compiling C and C++ applications.
+## Confirm you are on Arm Linux
 
-Confirm you are using an Arm machine by running:
+Before installing, verify you're running on an Arm system:
 
 ```bash
 uname -m
 ```
 
-The output should be:
+The expected output is:
 
 ```output
 aarch64
 ```
 
-If you see a different result, you are not using an Arm computer running 64-bit Linux.
+If you see `x86_64` instead, you need a [cross-compiler](../cross), not a native compiler.
 
-## How do I download a native GCC compiler on Linux?
+## Install GCC
 
-The Linux package manager downloads the required files so there are no special instructions.
+Install GCC and G++ using the commands for your Linux distribution:
 
-## How do I install a native GCC compiler on Linux?
-
-### Installing on Debian based distributions such as Ubuntu
-
-Use the `apt` command to install software packages on any Debian based Linux distribution, including Ubuntu.
-
-```bash { target="ubuntu:latest" }
+{{< tabpane code=true >}}
+  {{< tab header="Ubuntu / Debian" language="bash" >}}
 sudo apt update
-sudo apt install gcc g++ -y
-```
-
-Another meta-package on Ubuntu is ``build-essential``. This will install the most common tools and libraries with a single command.
-
-```bash { target="ubuntu:latest" }
 sudo apt install build-essential -y
-```
+  {{< /tab >}}
+  {{< tab header="Fedora / RHEL / Amazon Linux" language="bash" >}}
+sudo dnf install gcc gcc-c++ -y
+  {{< /tab >}}
+{{< /tabpane >}}
 
-### Installing on Red Hat / Fedora / Amazon Linux
+On Ubuntu and Debian, `build-essential` also installs `make` and other common build tools. On Fedora, RHEL, and Amazon Linux, the `gcc-c++` package provides G++. The GCC version depends on your distribution release.
 
-These Linux distributions use `dnf` as the package manager.
+## Verify the installation
 
-To install the most common development tools use the commands below. If the machine has `sudo` you can use it.
-
-```bash { target="fedora:latest" }
-sudo dnf update -y
-sudo dnf group install "development-tools" -y
-```
-If `sudo` is not available become _root_ and omit the `sudo`.
-```console
-dnf update -y
-dnf group install "development-tools" -y
-```
-## Does GCC require a license?
-
-GCC is open source and freely available for use.
-
-## How do I get started with GCC? {#start}
-
-To confirm the installation is complete run:
+Verify GCC is installed:
 
 ```bash
 gcc --version
 ```
 
-To compile an example program, create a text file named hello-world.c with the contents below.
+The output is similar to:
 
-```C { file_name="hello-world.c" }
+```output
+gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+Copyright (C) 2025 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+Verify G++ is also installed:
+
+```bash
+g++ --version
+```
+
+The output is similar to:
+
+```output
+g++ (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+Copyright (C) 2025 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+## Compile and run a program
+
+Create a file named `hello.c`:
+
+```C { file_name="hello.c" }
 #include <stdio.h>
 
 int main()
@@ -97,12 +103,19 @@ int main()
     return 0;
 }
 ```
-To compile and run the application use:
+
+Compile `hello.c` with GCC, then run the resulting `hello` executable:
+
 ```bash
-gcc -o hello-world hello-world.c
-./hello-world
+gcc -o hello hello.c
+./hello
 ```
-Observe the output:
+
+The expected output is:
+
 ```output
 Hello, Arm World!
 ```
+
+You can now compile C and C++ applications on your Arm Linux machine.
+
