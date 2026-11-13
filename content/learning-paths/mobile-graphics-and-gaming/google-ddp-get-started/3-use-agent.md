@@ -7,6 +7,8 @@ layout: learningpathall
 
 ## Install the DDP agent skill
 
+After reviewing Google Developer Device Platform (DDP) and a suitable Pixel configuration, you can connect to a remote phone.
+
 In the `$HOME/ddp-first-device` workspace from platform setup, install the skill from the [Google Developer Device Platform (DDP) agent documentation](https://docs.cloud.google.com/developer-device-platform/agent-skill):
 
 ```bash
@@ -21,7 +23,7 @@ Start a fresh Antigravity CLI session in this workspace so that it discovers the
 agy
 ```
 
-Confirm that `developer-device-platform-basics` is available in your `agy` session. The skill teaches Antigravity how to find and reserve a device, manage the session, and establish the connection. You can now describe the phone that you want in natural language.
+Confirm that `developer-device-platform-basics` is available in your `agy` session. The skill teaches Antigravity how to find and reserve a device, manage the session, and establish the connection. You can now describe the phone that you want to connect to in natural language.
 
 ## Ask for a phone and its screen
 
@@ -36,7 +38,7 @@ I should run in another terminal to connect to the device using adb on my
 local computer.
 ```
 
-Antigravity looks up the current device configuration, checks availability, and prepares the connection. You don't need to translate your request into catalog IDs, Android API levels, or connection commands. If the requested phone or Android version isn't available, Antigravity explains the options before reserving an alternative.
+Antigravity looks up the current device configuration, checks availability, and prepares the connection. You don't need to translate your request into catalog IDs, Android API levels, or connection commands. If the requested phone or Android version isn't available, Antigravity returns an explanation of the options before reserving an alternative.
 
 {{% notice Note %}}
 As with all prompts, you might need to provide more details depending on the model and settings that you select in `agy`. The Learning Path was tested with Gemini 4 Argon medium. Other models and reasoning settings haven't been tested. Describe any missing behavior or error in your `agy` session so that the agent can investigate.
@@ -44,7 +46,7 @@ As with all prompts, you might need to provide more details depending on the mod
 
 ## Approve the reservation
 
-The DDP skill asks for explicit approval before creating a billable session. Review the project, phone, Android version, duration, and estimated cost that Antigravity proposes. Check the [current price for Google DDP](https://cloud.google.com/products/developer-device-platform#pricing), then answer the approval question in `agy`. If the proposed session exceeds your budget, ask Antigravity to reduce the duration before approving it.
+The DDP skill asks for approval before creating a billable session. Review the project, phone, Android version, duration, and estimated cost that Antigravity proposes. Check the [current price for Google DDP](https://cloud.google.com/products/developer-device-platform#pricing), then answer the approval question in `agy`. If the proposed session exceeds your budget, ask Antigravity to reduce the duration before approving it.
 
 Keep the approval to one session within the limits of the prompt. Antigravity sets the expiration, connects to the reserved phone, and reports when the session ends. Complete any sign-in or consent steps.
 
@@ -59,7 +61,7 @@ Click to tap, drag to swipe, and use your keyboard to type into a text field. Tr
 <img src="/learning-paths/mobile-graphics-and-gaming/google-ddp-get-started/images/ddp-connected-phone.jpg" width="240" alt="Home screen of the remote Pixel 11, with app icons and navigation controls visible." title="Inspect a real screenshot from the reserved phone" class="content-uploaded-image centered" />
 <span class="content-image-caption centered">Inspect a real screenshot from the reserved phone</span>
 
-If the screen doesn't appear or control doesn't work, describe the issue in `agy`. Antigravity can inspect the connection, correct the viewer settings, and try again within the existing session. You can review its observations without managing ports or issuing device commands yourself.
+If the screen doesn't appear or control doesn't work, describe the issue in `agy`. Antigravity can inspect the connection, correct the viewer settings, and try again within the existing session. 
 
 Antigravity also provides commands that you can run in another terminal to access the phone. Replace `51795` in these commands with the port reported in your `agy` session.
 
@@ -81,11 +83,11 @@ adb -s localhost:51795 shell getprop ro.build.version.release
 adb -s localhost:51795 shell getprop ro.product.cpu.abi
 ```
 
-## See what Antigravity handled
+## Review what Antigravity handled
 
-Your request gave Antigravity a device, an outcome, and spending limits. It translated that into device discovery, a reservation, a connection, and a working screen. Its report should include the session expiration and the location of a saved screenshot. The report should also include enough device information to confirm that it connected to the phone that you approved.
+Your request gave Antigravity a device, an outcome, and spending limits. Antigravity translated that into device discovery, a reservation, a connection, and a working screen. Its report should include the session expiration and the location of a saved screenshot. The report should also include enough device information to confirm that Antigraviity connected to the phone that you approved.
 
-Keep the same `agy` session open for the TinyStories Arm performance experiment that you'll perform next. Antigravity will use this connection to install the tools, choose compatible Arm optimizations, measure their effect, and release the phone.
+Keep the same `agy` session open for the Arm performance experiment that you'll perform next. Antigravity will use this connection to install the tools, choose compatible Arm optimizations, measure their effect, and release the phone.
 
 ## What you've accomplished and what's next
 

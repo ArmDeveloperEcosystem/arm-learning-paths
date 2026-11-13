@@ -11,16 +11,16 @@ Google Developer Device Platform (DDP) gives you access to physical Android devi
 
 You can use DDP to accomplish the following tasks:
 
-- Try a new feature across different phone models and Android versions
-- Compare performance across devices
-- Check how games and other graphics applications look and respond on different devices
+- Test a new feature across different phone models and Android versions.
+- Compare performance across devices.
+- Evaluate how games and other graphics applications look and respond on different devices.
 
 You can use the Google [DDP agent skill](https://docs.cloud.google.com/developer-device-platform/agent-skill) to describe that work in natural language. Your coding agent can use the skill to perform the following tasks:
 
-- Select a device configuration
-- Reserve a phone
-- Connect through Android Debug Bridge (`adb`)
-- Install the tools that your experiment needs
+- Device configuration selection
+- Phone reservation
+- Connection through Android Debug Bridge (`adb`)
+- Installation of tools required for your experiment
 
 The agent handles the commands and connection details. You choose what to test, and approve access and spending.
 
@@ -62,14 +62,14 @@ Use the instructions for your operating system to install or update any tools th
 {{< tabpane-normal >}}
   {{< tab header="Ubuntu 26.04" >}}
   
-Install Python with virtual-environment support, `curl`, and `adb`. Git is used by the Node Version Manager and to install `scrcpy`:
+Install Python with virtual-environment support, `curl`, and `adb`. Git is used by the Node Version Manager (`nvm`) and to install `scrcpy`:
 
 ```bash
 sudo apt update
 sudo apt install -y python3 python3-venv curl adb ca-certificates git
 ```
 
-If you need Node.js, install [Node Version Manager (nvm)](https://github.com/nvm-sh/nvm#installing-and-updating). Load it into this terminal, and install the current LTS release. This also installs `npm` and `npx`:
+If you need Node.js, install [nvm](https://github.com/nvm-sh/nvm#installing-and-updating). Load it into this terminal, and install the current LTS release. This also installs `npm` and `npx`:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/v0.41.0/install.sh | bash
@@ -83,13 +83,14 @@ On other Linux distributions, install the equivalent tools with the package mana
   {{< /tab >}}
   {{< tab header="macOS" >}}
 
-Use [Homebrew](https://brew.sh/) to install any missing tools. If Homebrew isn't installed, follow its installation instructions first. Complete the steps it prints to add `brew` to your `PATH`.
+Use [Homebrew](https://brew.sh/) to install any missing tools. If Homebrew isn't installed, follow its installation instructions first. Complete the steps that it prints to add `brew` to your `PATH`.
 
-Install Python, Node.js (which includes `npm` and `npx`), and `curl`:
+Install Python, Node.js, and `curl`:
 
 ```bash
 brew install python node curl
 ```
+Node.js includes `npm` and `npx`.
 
 Install `android-platform-tools` to provide `adb`:
 
@@ -102,15 +103,15 @@ brew install --cask android-platform-tools
 
 Repeat the version checks after installation. Each command should print a version and exit successfully. If you installed Node.js with `nvm`, restart `agy` from a terminal that can find `node`, `npm`, and `npx`.
 
-Google DDP CLI commands use the beta component. Newer versions of `gcloud` don't require the beta component to be installed because it's already available.
+Google DDP CLI commands use the beta component. You don't need to install the beta component on newer versions of `gcloud` because it's already available.
 
-You can test if the beta command is already available by running:
+Test if the beta command is already available:
 
 ```bash
 gcloud beta help
 ```
 
-If you see a help message, it's installed and you can continue. 
+If you see a help message, it's installed. You can continue. 
 
 If you don't see a help message, install the beta component before continuing:
 
@@ -227,6 +228,6 @@ The Cloud Testing API is required by Device Streaming during preview. If your or
 
 ## What you've accomplished and what's next
 
-You've identified DDP's capabilities, prepared the workstation tools, and configured a Google Cloud project and credentials.
+You've identified DDP capabilities, prepared the workstation tools, and configured a Google Cloud project and credentials.
 
 Next, you'll verify that the CLI can reach the platform. You'll inspect a device configuration without reserving it.

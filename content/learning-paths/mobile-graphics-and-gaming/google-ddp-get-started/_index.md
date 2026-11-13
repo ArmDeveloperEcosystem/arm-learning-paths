@@ -61,9 +61,7 @@ generated_summary_faq:
   - question: How do I review the TinyStories comparison?
     answer: >-
       Check that GPU offload was disabled and that both paths used the same model,
-      quantization, inputs, thread count, and CPU placement. Look for output agreement,
-      repeated warmed-up measurements, and separate prompt-processing and token-generation
-      results. Review the saved report for throughput, variation, and evidence of which Arm
+      quantization, inputs, thread count, and CPU placement. Check that Antigravity confirmed output agreement before timing and used repeated, warmed-up measurements. Review prompt-processing and token-generation results separately. Review the saved report for throughput, variation, and evidence of which Arm
       kernels ran.
   - question: How do I confirm that the billable device session ended?
     answer: >-
