@@ -75,7 +75,7 @@ FVP_MODEL=FVP_Corstone_SSE-300_Ethos-U55 bash .vscode/fvp.sh -f board/Corstone-3
   {{< /tab >}}
 {{< /tabpane >}}
 
-The relevant output is:
+The output is similar to:
 
 ```output
 Ethos-U version info:
@@ -87,6 +87,8 @@ Output: 10 element(s): 0.0532 -0.0239 0.0541 0.1064 0.0706 0.0395 0.0881 0.1340 
 Test_result: PASS
 ```
 
+The runner prints `Test_result: PASS` when inference returns successfully with a nonempty output list. Check that the preceding line also reports ten output values, as shown above. The runner does not assert the tensor shape, data type, or numerical accuracy. To validate a trained model, compare its outputs against a reference using the same input data and a tolerance appropriate to the quantization.
+
 {{% notice Note %}}
 On Windows, the FVP can print warnings that `python3.dll` is unavailable and
 that the VIO or VSI bridges are disabled. This headless example doesn't use
@@ -95,23 +97,18 @@ successfully.
 {{% /notice %}}
 
 
-
-The FVP result proves functional execution, not physical-device latency or
-power. Measure the complete graph on your target hardware before drawing
-performance conclusions because delegation boundaries and tensor conversions
-also have a cost.
+This run checks successful execution of the mixed graph. To measure latency or power, benchmark the complete graph on your target hardware, including delegation boundaries and tensor conversions.
 
 ## What you've accomplished
 
-You have built and run one ExecuTorch program across three execution paths, and used CMSIS-ExecuTorch to make setup easier:
+You have built and run one ExecuTorch program across three execution paths, and used CMSIS-Executorch to make setup easier:
 
 - The supported convolution runs in an Ethos-U55 delegate.
-- The unsupported stride-four convolution runs on Cortex-M55 through the
+- The unsupported stride-4 convolution runs on Cortex-M55 through the
   ExecuTorch wrapper and optimized CMSIS-NN kernel.
 - `topk` runs through the portable ExecuTorch CPU kernel.
 
-You also verified the implementation. The exported graph shows ownership, the compilation database shows the
-compiled Pack sources, and the FVP confirms that the combined firmware runs.
+You also checked the implementation: the exported graph identifies each execution path, the compilation database identifies the selected Pack sources, and the successful build and FVP run confirm that the combined firmware executes.
 
 This build uses Ethos-U55 to make one unsupported convolution predictable. The same
 Pack workflow applies to another Ethos-U target when its delegated graph leaves

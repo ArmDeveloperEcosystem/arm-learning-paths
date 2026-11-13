@@ -11,39 +11,32 @@ layout: learningpathall
 
 ExecuTorch is PyTorch’s runtime for deploying machine learning models on edge devices, including embedded systems. It converts trained models into programs that can run within the limited memory and compute resources of a microcontroller.
 
-Many microcontrollers use Arm Cortex-M CPUs, and others integrate both Cortex-M CPUs, and Arm Ethos-U NPUs.
+Many microcontrollers use Arm Cortex-M CPUs. Some also integrate an Arm Ethos-U NPU to accelerate neural-network operations.
 
 For combined Cortex-M and Ethos-U systems, ExecuTorch lets one model use both processors: supported operations are dispatched to the Ethos-U NPU, while remaining operations run on the Cortex-M CPU.
 
-This Learning Path will demonstrate how developers can better optimize ExecuTorch deployment, either when running models directly on a Cortex-M CPU, or in a scenario where unsupported operators fallback from an Ethos-U to the Cortex-M CPU.
+You will export a model, select CMSIS-NN kernels for its Cortex-M operations, and run a mixed CPU and NPU application on a Corstone-300 FVP. The checks show which implementations the model uses and confirm that inference completes. Measure latency and power on your target hardware to quantify the benefit for your application.
 
-## Ethos-U vs CMSIS-NN vs Portable Kernels
+## Choose where each operation runs
 
-You will use the ExecuTorch ahead-of-time export flow to divide one model across
-three execution paths:
+The example model uses three execution paths:
 
-- A stride-one convolution that Ethos-U55 accepts.
-- A stride-four convolution that Ethos-U55 rejects but CMSIS-NN supports.
-- A `topk` operation that remains an ExecuTorch portable FP32 operation.
-
-This is illustrated in the following diagram:
-
-![Diagram of the simulated Corstone-300 FVP target showing the Cortex-M CPU running the ExecuTorch runtime and dispatching a stride-one convolution to Ethos-U55, while CMSIS-NN executes the stride-four convolution and a portable kernel executes topk on Cortex-M#center](images/cortex-m-execution-picture.svg "ExecuTorch execution paths")
-
-The three execution paths have different roles:
-
-| Technology | Role in this Learning Path | Expected performance |
+| Execution path | What runs there | Why |
 | --- | --- | --- |
-| [Ethos-U55](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u55) | Runs supported graph regions on the NPU. (eg: Stride-1 convolution) | Expected to provide the best performance and energy efficiency for supported neural-network operations. |
-| [CMSIS-NN](https://arm-software.github.io/CMSIS-NN/latest/index.html) | Supplies optimized Cortex-M kernels for quantized CPU operations that are unsupported by the NPU. (eg: Stride-4 convolution) | Preferred CPU fallback when a matching CMSIS-NN-backed operator is available. |
-| ExecuTorch portable kernels | Supply general CPU implementations for operations without an accelerated backend implementation. (eg: `topk` operation) | Compatibility fallback rather than the preferred performance path. |
+| [Ethos-U55 NPU](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u55) | The stride-1 convolution | The NPU supports this convolution configuration. |
+| [CMSIS-NN kernels on Cortex-M](https://arm-software.github.io/CMSIS-NN/latest/index.html) | The stride-4 convolution | Ethos-U55 does not support this configuration, so the CPU runs it with an optimized CMSIS-NN kernel. |
+| ExecuTorch portable kernels on Cortex-M | The `topk` operation | This operation uses a general CPU implementation. |
+
+The diagram shows the NPU path alongside the two paths that execute on the Cortex-M CPU:
+
+![Diagram of the simulated Corstone-300 target showing the Cortex-M CPU dispatching the stride-1 convolution to Ethos-U55, running the stride-4 convolution with CMSIS-NN, and running topk with a portable ExecuTorch kernel#center](images/cortex-m-execution-picture.svg "ExecuTorch execution paths")
 
 Fallback here is planned during export. It isn't recovery from an NPU failure
 at runtime. The exporter determines which regions the target Ethos-U delegate
 supports, then assigns known remaining patterns to the Cortex-M backend.
 
 {{% notice Why this example uses Ethos-U55 %}}
-Ethos-U55 is used because its unsupported stride-four convolution creates a
+Ethos-U55 is used because its unsupported stride-4 convolution creates a
 predictable fallback region. Ethos-U85 supports more operator configurations,
 so it will typically have less CPU fallback than Ethos-U55. The same workflow still
 applies when a model contains operations that remain outside the U85 delegate.
@@ -53,9 +46,32 @@ In this Learning Path, you will clone a [CMSIS-Executorch example](https://githu
 runner, memory configuration, and Fixed Virtual Platform (FVP) settings. You
 will then inspect and modify it to observe Cortex-M fallback using optimized CMSIS-NN microkernels.
 
+## Check the host tools
+
+VS Code is required for the Keil Studio workflow. Before cloning the project, check that Git and Python 3.10–3.13 are available in your host terminal:
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux and macOS" language="bash">}}
+git --version
+python3 --version
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell">}}
+git --version
+python --version
+  {{< /tab >}}
+{{< /tabpane >}}
+
+If either command is unavailable, install [Git](https://git-scm.com/downloads) or a supported [Python version](https://www.python.org/downloads/) before continuing. Python 3.14 is excluded because the pinned TOSA export dependency has no wheel for it. On Linux, your Python installation must also include `venv` support; install your distribution's matching `python3-venv` package if needed.
+
+{{% notice Note %}}
+The macOS exporter requires Apple silicon and macOS 15 or later. The pinned ExecuTorch and TOSA packages do not provide Intel macOS wheels. Docker supplies the FVP on macOS; the Python exporter runs on the host.
+{{% /notice %}}
+
+On Windows, enable [long-path support](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) before installing the export dependencies.
+
 ## Clone the example project
 
-Begin by cloning the CMSIS-Executorch project used by this Learning Path:
+Clone the CMSIS-Executorch example and select the tested revision:
 
 ```console
 git clone https://github.com/Arm-Examples/CMSIS-Executorch.git
@@ -63,28 +79,65 @@ cd CMSIS-Executorch
 git checkout 4002b63dcc3e27eb7444946a0dbf69b9a74d6fc9
 ```
 
-The explicit checkout pins the project to a revision that has been tested and validated.
+The `CMSIS-Executorch` directory is the **project root**. Open this folder in VS Code and use it as the working directory for every command below.
 
-## Set up the project in VS Code
+## Install the VS Code extensions
 
-Install [Visual Studio Code](https://code.visualstudio.com/), the
-[Keil Studio Pack](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack),
-and the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python).
-Install Python 3.10–3.13 on your host; Python 3.14 is not supported by the
-pinned export dependencies. On Windows, enable
-[long-path support](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation).
+In VS Code's **Extensions** view, install the [Keil Studio Pack](https://marketplace.visualstudio.com/items?itemName=Arm.keil-studio-pack) and the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python). Keil Studio Pack includes Arm Tools Environment Manager and the CMSIS Solution extension used by this project.
 
-1. Open the cloned `CMSIS-Executorch` folder in VS Code.
-2. Allow Arm Environment Manager to install the tools declared in
-   `vcpkg-configuration.json` and wait for installation to finish.
-3. In the **CMSIS** view, select **... > Open Solution in Workspace**
-   and choose `cmsis-executorch-u55.csolution.yml`.
-4. Select **Terminal > Run Task > Create Python environment (pip)**. Wait for the
-   task to create `.venv` and install the pinned dependencies.
-5. Open a new VS Code terminal in the project folder so it receives the Arm tool
-   environment. Run all subsequent commands in this terminal.
+![VS Code extension details for Arm Keil Studio Pack. The Disable and Uninstall buttons confirm that the extension pack is installed.#center](images/keil-studio-pack.png "Keil Studio Pack installed in VS Code")
 
-Activate the Python environment in each new terminal:
+## Activate the Arm tools and license
+
+When you open the project folder, Arm Tools Environment Manager automatically activates `vcpkg-configuration.json` by default. If prompted, allow it to download the declared tools. Wait for the **Arm Tools** status-bar indicator to finish loading. Hover over it to check the installed tools, or open **Arm Tools > View Log** to inspect activation errors.
+
+![VS Code Arm Tools status bar showing seven activated tools. The tooltip lists CMSIS-Toolbox 2.15.0 and Arm Compiler 6.24.0 among the tools added to the integrated terminal's PATH.#center](images/arm-tools-activated.png "Confirm that the project's Arm tools are active")
+
+If activation does not start, right-click `vcpkg-configuration.json` in the **Explorer** view and select **Activate Environment**. You can also select **Activate Environment** from the **Arm Tools** status-bar menu when the configuration is detected.
+
+Arm Compiler for Embedded requires an activated license. Select the license indicator next to **Arm Tools**, then choose **Activate Arm Keil MDK Community Edition** for evaluation or non-commercial use, or **Activate or manage Arm licenses** to use your existing license. Confirm that the indicator shows an active license before building. See [Keil Studio license activation](https://mdk-packs.github.io/vscode-cmsis-solution-docs/installation.html#activating-keil-studio) for the available options.
+
+In the **CMSIS** view, select **... > Open Solution in Workspace** and choose `cmsis-executorch-u55.csolution.yml`. Confirm that the active target is `SSE-300-U55`.
+
+![VS Code Manage Solution Target screen for cmsis-executorch-u55.csolution.yml. SSE-300-U55 is selected and the cmsis-executorch project uses the Debug build type.#center](images/select-u55-target.png "Select the Corstone-300 Ethos-U55 target")
+
+## Create the Python environment
+
+Select **Terminal > Run Task > Create Python environment (pip)**.
+
+![VS Code task picker with Create Python environment (pip) selected. Run this task to create .venv and install the model-export dependencies.#center](images/create-python-environment.png "Run the pip environment setup task")
+
+The task runs `setup_venv.sh` on Linux and macOS, or `setup_venv.bat` on Windows. Both invoke `setup_venv.py`, which:
+
+- Creates `.venv` using the host Python interpreter.
+- Installs `requirements.txt`, including ExecuTorch 1.5.1, PyTorch 2.14.0, TorchAO 0.18.0, and Vela 5.1.0.
+- Installs `requirements-arm-tosa.txt` with `--no-deps` to preserve the exporter's required serialization versions.
+- Checks that the ExecuTorch Arm quantizer imports successfully.
+
+Wait for the task to exit successfully and print a message similar to:
+
+```output
+venv ready: .../CMSIS-Executorch/.venv
+```
+
+This task installs the Python dependencies for you. Use the setup script when repairing the environment so that both requirements files are installed with the correct options.
+
+If the task selects a different Python version from the supported one you installed, run the setup explicitly from the project root. For example, with Python 3.12 installed:
+
+{{< tabpane code=true >}}
+  {{< tab header="Linux and macOS" language="bash">}}
+PYTHON=python3.12 ./setup_venv.sh
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell">}}
+py -3.12 setup_venv.py
+  {{< /tab >}}
+{{< /tabpane >}}
+
+## Open and verify the working terminal
+
+After Arm tool activation and Python setup finish, select **Terminal > New Terminal**. Use a Bash-compatible shell on Linux and macOS, or PowerShell on Windows. This new integrated terminal receives the activated Arm tool environment.
+
+Activate `.venv` in this terminal:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux and macOS" language="bash">}}
@@ -95,45 +148,33 @@ source .venv/bin/activate
   {{< /tab >}}
 {{< /tabpane >}}
 
-### Additional macOS setup
+Check the working directory and Python interpreter:
 
-Install and start [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/).
-The FVP runs inside a Linux container because there is no native macOS FVP.
-Keep the project under your home directory so the wrapper can mount it into
-Docker. Confirm Docker is running and select the Ethos-U55 model in each new terminal:
-
-```bash
-docker info
-export FVP_MODEL=FVP_Corstone_SSE-300_Ethos-U55
+```console
+python -c "from pathlib import Path; import sys; print('Project:', Path.cwd()); print('Python:', sys.executable)"
 ```
 
-The final chapter uses the repository's `.vscode/fvp.sh` wrapper to run the
-application on macOS. Its first run builds the container image.
+The output is similar to:
+
+```output
+Project: .../CMSIS-Executorch
+Python: .../CMSIS-Executorch/.venv/bin/python
+```
+
+On Windows, the interpreter path ends in `.venv\Scripts\python.exe`. Both paths must belong to the same project. Keep using this terminal for subsequent commands. Repeat environment activation and this check whenever you open a new terminal.
 
 ## Verify the environment
 
-The Python package and CMSIS Pack versions must match because the embedded
-runtime loads the program produced by the exporter. Check the host tools, Arm
-build tools, and Python packages:
+Check the activated Arm tools and Python package versions:
 
-{{< tabpane code=true >}}
-  {{< tab header="Linux and macOS" language="bash">}}
+```console
 python --version
 cbuild --version
 armclang --version
 python -c "from importlib.metadata import version; print('ExecuTorch', version('executorch')); print('PyTorch', version('torch'))"
-  {{< /tab >}}
-  {{< tab header="Windows PowerShell" language="powershell">}}
-python --version
-cbuild --version
-armclang --version
-python -c "from importlib.metadata import version; print('ExecuTorch', version('executorch')); print('PyTorch', version('torch'))"
-  {{< /tab >}}
-{{< /tabpane >}}
+```
 
-Confirm that Python is between 3.10 and 3.13,
-`cbuild` reports 2.15.0 or later, Arm Compiler for Embedded reports 6.24, and the final
-two lines are:
+Confirm that Python is between 3.10 and 3.13, `cbuild` reports 2.15.0 or later, Arm Compiler for Embedded reports 6.24, and the final two lines are:
 
 ```output
 ExecuTorch 1.5.1
@@ -141,18 +182,24 @@ PyTorch 2.14.0
 ```
 
 {{% notice Note %}}
-CMSIS-Toolbox 2.15.0 or later is required for the commands and MLOps workflow in
-this Learning Path. If `cbuild --version` reports an older version, update the
-toolbox or activate the project's 2.15.0 installation through Arm Environment
-Manager, then open a new VS Code terminal.
+If a tool is unavailable or its version differs, reactivate the project's Arm tools and open a new integrated terminal. Activate `.venv` again before repeating these checks. The ExecuTorch Python package and CMSIS Pack versions must match because the embedded runtime loads the program produced by the exporter.
 {{% /notice %}}
+
+### Set up Docker on macOS
+
+On macOS, install and start [Docker Desktop](https://docs.docker.com/desktop/setup/install/mac-install/). The FVP runs inside a Linux container because there is no native macOS FVP. Check that Docker is running:
+
+```bash
+docker info
+```
+
+The project's `.vscode/fvp.sh` wrapper mounts the project directory into the container, including when it is outside your home directory. Its first run builds the FVP container image.
 
 ## Download the Learning Path assets
 
 Download this Learning Path's example folder from the code examples repository.
 The archive is pinned to a commit and includes the fallback model, integration
-patch, inspection helpers, and their license. Extract it into `lp-assets`, then
-copy the four working files into the CMSIS-Executorch project root:
+patch, inspection helpers, and their license. Run the commands from the project root. They create `lp-assets` for the downloaded originals, then copy the four working files into the project root:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux and macOS" language="bash">}}
@@ -168,6 +215,28 @@ tar -xzf lp-assets.tar.gz -C lp-assets --strip-components=4
 Copy-Item lp-assets\*.py, lp-assets\*.patch .
   {{< /tab >}}
 {{< /tabpane >}}
+
+### Keep track of the project files
+
+The working files now have these roles. The `artifacts/` and `out/` directories are created in later chapters; `ai_layer/` already exists in the cloned example and will be regenerated for your model.
+
+```text
+CMSIS-Executorch/
+├── lp-assets/                       Downloaded originals and license
+├── mixed_backend_cnn.py             Model to copy into model/model.py
+├── export_cortex_m_fallback.py       Export and inspect both graph variants
+├── enable_cortex_m_fallback.patch   Add CMSIS-NN fallback to the project exporter
+├── verify_pack_sources.py           Check the build's Pack source paths
+├── model/model.py                   Working model used by both exporters
+├── .venv/                           Python export environment
+├── create_ai_layer.py               Project exporter, patched in chapter 3
+├── cmsis-executorch-u55.csolution.yml
+├── artifacts/                       Inspection exports from chapters 2 and 3
+├── ai_layer/                        Generated model and firmware component list
+└── out/                             Compiled firmware and compilation database
+```
+
+The inspection script writes its `.pte` and graph-summary `.json` files into `artifacts/`. The firmware embeds `ai_layer/model.pte`, which `create_ai_layer.py` generates in chapter 3. Keep all commands rooted in `CMSIS-Executorch` so these paths continue to refer to the same files.
 
 ## Use a simple convolution example
 
@@ -209,7 +278,7 @@ values, _ = torch.topk(values, k=1, dim=-1)
 The *stride* controls how far a convolution filter moves between positions. A
 stride of one visits adjacent positions. A stride of four moves four positions
 at a time and produces a smaller output. For this Ethos-U55 target and tensor shape,
-the first convolution can be delegated to the NPU, while the stride-four convolution
+the first convolution can be delegated to the NPU, while the stride-4 convolution
 remains outside the delegate. `topk` selects the largest spatial response for
 each of the ten output channels.
 

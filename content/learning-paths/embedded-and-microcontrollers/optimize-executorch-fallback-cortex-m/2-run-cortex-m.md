@@ -103,7 +103,7 @@ cortex_m.quantized_conv2d_nhwc.default: 2
 cortex_m.transpose.default: 1
 ```
 
-Before lowering, the graph contained two general convolution operations (Stride-1 and Stride-4). The `aten` prefix identifies PyTorch’s ATen operator namespace. These operators describe the computation, but not the hardware or kernel that will perform it. Lowering replaces both with `cortex_m.quantized_conv2d_nhwc`, an INT8 convolution using NHWC layout.
+Before lowering, the graph contained two general convolution operations (stride-1 and stride-4). The `aten` prefix identifies PyTorch’s ATen operator namespace. These operators describe the computation, but not the hardware or kernel that will perform it. Lowering replaces both with `cortex_m.quantized_conv2d_nhwc`, an INT8 convolution using NHWC layout.
 
 `aten.topk` is unchanged, so it will use the portable CPU kernel. The `cortex_m.quantize_*`
 and `cortex_m.dequantize_*` operators mark boundaries between floating-point (FP32) and INT8

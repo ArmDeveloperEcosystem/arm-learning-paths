@@ -96,13 +96,13 @@ executorch_call_delegate: 1
 ```
 
 The final graph contains all three execution paths:
-- `executorch_call_delegate` contains the stride-one convolution accepted by
+- `executorch_call_delegate` contains the stride-1 convolution accepted by
   Ethos-U55.
-- `cortex_m.quantized_conv2d_nhwc` is the stride-four convolution rejected by
+- `cortex_m.quantized_conv2d_nhwc` is the stride-4 convolution rejected by
   Ethos-U55 and lowered to CMSIS-NN.
 - `aten.topk` remains a portable FP32 operation.
 
-## Using the CMSIS-ExecuTorch project workflow
+## Using the CMSIS-Executorch project workflow
 
 The CMSIS-Executorch project workflow uses `create_ai_layer.py` to export a model, generate a `.pte`, and select the source components required to execute it. 
 
