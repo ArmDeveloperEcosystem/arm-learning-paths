@@ -19,9 +19,62 @@ prerequisites:
     - The [Google Cloud CLI](/install-guides/gcloud/) and permission to install beta commands
     - The [Antigravity CLI](/install-guides/antigravity/) coding agent
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-11-13T19:27:07Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 0aa08259f8eb66b7c96c727f2a48b338a557ddd908638ea4fe2907dbfe854519
+  summary_generated_at: '2026-11-13T19:27:07Z'
+  summary_source_hash: 0aa08259f8eb66b7c96c727f2a48b338a557ddd908638ea4fe2907dbfe854519
+  faq_generated_at: '2026-11-13T19:27:07Z'
+  faq_source_hash: 0aa08259f8eb66b7c96c727f2a48b338a557ddd908638ea4fe2907dbfe854519
+  summary: >-
+    You'll use Google DDP and Antigravity to compare TinyStories CPU
+    inference on a remote Arm-based phone. First, you'll set up a Google Cloud project and local tools,
+    then verify credentials, services, and device catalog access. After connecting to a phone,
+    you'll ask Antigravity to benchmark llama.cpp with and without KleidiAI. You'll review throughput
+    and kernel evidence, check the saved report, and confirm that the billable session has ended.
+  faqs:
+  - question: What do I need to prepare before requesting a Developer Device Platform phone?
+    answer: >-
+      Have the Google Cloud CLI, Antigravity CLI, and Python installed. Ensure that Node.js, `curl`, `adb`, and
+      `scrcpy` are available on your development computer. Use a Google Cloud project with
+      billing enabled and the necessary permissions. Sign in to the CLI, configure
+      Application Default Credentials (ADC), and enable the three DDP services.
+  - question: What should I verify before reserving a device?
+    answer: >-
+      Check that `gcloud` shows your intended active account and project, and that ADC
+      can obtain a token. Confirm that `devicerun.googleapis.com`,
+      `devicestreaming.googleapis.com`, and `testing.googleapis.com` are enabled.
+      Inspect the device catalog for a physical configuration with streaming support.
+  - question: What does Antigravity handle, and what do I approve?
+    answer: >-
+      You describe the phone and task in `agy`. Antigravity checks availability,
+      prepares the reservation, connects the phone, and opens its screen. Before a
+      billable session starts, review the proposed project, device, Android version,
+      duration, and estimated cost. After review, approve the reservation in `agy`.
+  - question: How do I review the TinyStories comparison?
+    answer: >-
+      Check that GPU offload was disabled and that both paths used the same model,
+      quantization, inputs, thread count, and CPU placement. Look for output agreement,
+      repeated warmed-up measurements, and separate prompt-processing and token-generation
+      results. Review the saved report for throughput, variation, and evidence of which Arm
+      kernels ran.
+  - question: How do I confirm that the billable device session ended?
+    answer: >-
+      Check that Antigravity canceled the recorded DDP session and confirmed its cloud
+      state is `FINISHED` or `EXPIRED`. Closing the viewer alone doesn't stop billing.
+      If the task stops early, ask Antigravity to release the session and verify its state.
+# END generated_summary_faq
+
 author: Annie Tallund
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
