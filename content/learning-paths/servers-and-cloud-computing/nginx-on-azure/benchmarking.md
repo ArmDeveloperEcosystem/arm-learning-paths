@@ -95,7 +95,7 @@ ApacheBench produces a variety of metrics, but the most useful ones highlight ho
 
 ## Benchmark summary on Arm64
 
-The following results were collected on November 9, 2026, on an Azure Cobalt 200 **Standard_D4ps_v7** VM (4 vCPUs) in **West US 2**, running **Ubuntu 24.04 LTS** with **NGINX 1.24.0**. ApacheBench ran on the same VM against the 880-byte static page created in the previous section.
+The following results were collected on an Azure Cobalt 200 **Standard_D4ps_v7** VM (4 vCPUs) in **West US 2**, running **Ubuntu 24.04 LTS** with **NGINX 1.24.0**. ApacheBench ran on the same VM against the 880-byte static page created in the previous section.
 
 | Metric | Value |
 |--------|-------|
