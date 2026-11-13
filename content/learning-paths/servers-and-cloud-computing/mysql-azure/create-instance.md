@@ -31,22 +31,16 @@ Creating a virtual machine based on Azure Cobalt 200 is no different to creating
 - In the **Size** field, select **See all sizes** and select the D-series v7 family of virtual machines.
 - Select **D4ps_v7** from the list as shown in the diagram below:
 
-
 ![Azure portal VM creation example#center](images/instance.png "VM size selection in the Azure portal")
 
-- For **Authentication type**, select **SSH public key**. {{% notice Note %}}
-Azure generates an SSH key pair for you and lets you save it for future use. This method is fast, secure, and easy for connecting to your virtual machine.
-{{% /notice %}}
+- For **Authentication type**, select **SSH public key**.
 - Fill in the **Administrator username** for your VM.
-- Select **Generate new key pair**, and select **RSA SSH Format** as the SSH Key Type. {{% notice Note %}}
-RSA offers better security with keys longer than 3072 bits.
-{{% /notice %}}
+- Select **Generate new key pair**, and select **RSA SSH Format** as the SSH Key Type. 
 - Give your SSH key a key pair name.
 - In the **Inbound port rules**, select **HTTP (80)** and **SSH (22)** as the inbound ports, as shown below:
 ![Azure portal VM creation example#center](images/instance1.png "Allow inbound port rules")
 
 - Now select the **Review + Create** tab and review the configuration for your virtual machine.
-
 - When you are happy with your selection, select the **Create** button and then **Download Private key and Create Resource** button.
 
 ![Azure portal VM creation example#center](images/instance4.png "Download private key and create resource")
