@@ -11,7 +11,7 @@ layout: learningpathall
 
 Packing changes the order of values in memory so that a matrix multiplication kernel can load those values more efficiently. The following visualization loads **Input Matrix A** values into rows of ZA, and writes columns of ZA into **Output Packed Data**. Packing changes the layout of data, but it doesn't calculate the matrix product.
 
-If the embedded visualization doesn't load, [open the Pack A visualization in a full browser tab](/apps/sme-visualisations/#/sme/pack32-a). Switch between the Learning Path and the visualization tab.
+If the embedded visualization doesn't load, [open the Pack A visualization in a separate browser tab](/apps/sme-visualisations/#/sme/pack32-a). Switch between the Learning Path and the visualization tab.
 
 ## Follow the transpose and pack algorithm
 

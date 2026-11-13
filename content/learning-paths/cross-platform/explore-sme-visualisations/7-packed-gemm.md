@@ -35,7 +35,7 @@ In this visualization, the code is functionally correct on all devices regardles
 
 ## Trace packed GEMM loads and ZA accumulation
 
-If the embedded view doesn't load, [open the GEMM visualization in a full browser tab](/apps/sme-visualisations/#/sme/gemm32-packed). Switch between the Learning Path and the visualization tab.
+If the embedded view doesn't load, [open the GEMM visualization in a separate browser tab](/apps/sme-visualisations/#/sme/gemm32-packed). Switch between the Learning Path and the visualization tab.
 
 Follow the data from input through accumulation and storage. The following table summarizes how the visualization processes the input matrices in blocks:
 
@@ -90,7 +90,7 @@ For larger scalable vector lengths, the efficiency is much higher. Every time th
 
 ## What you've learned and what's next
 
-You've traced loads, outer product accumulations, and stores in a GEMM that uses prepared operands. The visualization models data movement. It doesn't measure performance or prove which instructions a processor executes.
+You've traced loads, outer product accumulations, and stores in a GEMM that uses prepared operands. The visualization models data movement. It doesn't measure performance or prove which instructions a processor runs.
 
 For executable code built around the same outer-product idea, see [matrix multiplication using SME2 intrinsics in C](/learning-paths/cross-platform/multiplying-matrices-with-sme2/7-sme2-matmul-intr/). The code uses its own FP32 data layout and instruction sequence.
 

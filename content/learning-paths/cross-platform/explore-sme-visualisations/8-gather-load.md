@@ -13,7 +13,7 @@ The previous General Matrix Multiplication (GEMM) began with an input matrix A t
 
 These instructions are available in Streaming SVE mode only if `FEAT_SME_FA64` is implemented and enabled. Scalable Matrix Extension (SME) functionality requires Streaming SVE mode to be enabled. If `FEAT_SME_FA64` isn't enabled, Gather Load and Scatter Store are illegal instructions while in Streaming SVE mode.
 
-This visualization uses Gather Loads to access columns of matrix A data. The elements are separated by the length of a full row of matrix A.
+The following visualization uses Gather Loads to access columns of matrix A data. The elements are separated by the length of a full row of matrix A.
 
 {{% notice Note %}}
 Gather Loads and Scatter Stores stress the memory system more than contiguous loads. They might potentially require multiple cache line loads before the operation can complete. Both these effects can impact performance.
@@ -21,7 +21,7 @@ Gather Loads and Scatter Stores stress the memory system more than contiguous lo
 
 ## Compare the input path
 
-If the embedded visualization doesn't load, [open the gather-load GEMM visualization in a full browser tab](/apps/sme-visualisations/#/sme/gemm32-2x2). Switch between the Learning Path and the visualization tab.
+If the embedded visualization doesn't load, [open the gather-load GEMM visualization in a separate browser tab](/apps/sme-visualisations/#/sme/gemm32-2x2). Switch between the Learning Path and the visualization tab.
 
 Focus on how matrix A data is loaded into Z2 and Z3:
 

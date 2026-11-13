@@ -9,15 +9,15 @@ layout: learningpathall
 
 ## Why pad matrix B
 
-Unaligned vector loads from memory, although supported, have drawbacks. Vectors can straddle cache lines. Loop code is complicated by the need to adjust the pointer register at the end of every row. 
+Although unaligned vector loads from memory are supported, they have drawbacks. Vectors can straddle cache lines. Loop code is complicated by the need to adjust the pointer register at the end of every row. 
 
-Consider a matrix with a column count that isn't an exact multiple of the ZA tile column count for a given data element size. For such a matrix, padding the data might be a better solution. This results in cleaner loop code and fully sequential memory access.
+Consider a matrix with a column count that isn't an exact multiple of the ZA tile column count for a given data element size. For such a matrix, padding the data might be a better solution. Padding results in cleaner loop code and fully sequential memory access.
 
 The same code running on different devices can produce different output data structures, and that isn't a problem. Each device generates a data structure for its own ZA tile width. Each device later uses that data structure with its ZA tiles to compose input vectors for the Outer Product operation. Although the data structure can vary between devices, the Outer Product results are the same across all devices.
 
 ## Inspect the padded result
 
-The following visualization depicts the padded matrix B. If the embedded visualization doesn't load, [open the Pad B visualization in a full browser tab](/apps/sme-visualisations/#/sme/pad32-b). Switch between the Learning Path and the visualization tab.
+The following visualization depicts the padded matrix B. If the embedded visualization doesn't load, [open the Pad B visualization in a separate browser tab](/apps/sme-visualisations/#/sme/pad32-b). Switch between the Learning Path and the visualization tab.
 
 Compare a complete group with one at the edge:
 

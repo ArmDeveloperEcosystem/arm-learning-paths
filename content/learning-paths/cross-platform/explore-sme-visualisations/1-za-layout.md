@@ -32,14 +32,14 @@ You'll view a set of interactive ZA visualizations in this Learning Path, starti
 Use the following controls to explore the visualizations:
 
 - If you need more space to view any of the visualizations in the Learning Path, use the **Full screen** button.
-- If a visualization includes playback, select the rightmost **double-arrow button (⏩)** to advance one step at a time. The leftmost **double-arrow button (⏪)** goes back one step. The middle **Play or Pause button** runs or pauses the remaining sequence. Reload the page to return to the initial state.
+- If a visualization includes playback, select the rightmost **double-arrow (⏩)** button to advance one step at a time. The leftmost **double-arrow (⏪)** button goes back one step. The middle button runs or pauses the remaining sequence. Reload the page to return to the initial state.
 {{% /notice %}}
 
 The ZA Tile Layout interactive view shows the same ZA storage as a full array and as logical tiles. The values and colors illustrate register layout. 
 
 ## Explore ZA storage and logical tiles
 
-If the embedded visualization doesn't load, [open the ZA layout visualization in a full browser tab](/apps/sme-visualisations/#/sme/layout). Switch between the Learning Path and the visualization tab.
+If the embedded visualization doesn't load, [open the ZA layout visualization in a separate browser tab](/apps/sme-visualisations/#/sme/layout). Switch between the Learning Path and the visualization tab.
 
 Use the visualization to explore how the data type and scalable vector length affect the organization of ZA storage.
 
@@ -95,7 +95,7 @@ The following table summarizes how the data type and scalable vector length affe
 
 Increasing the element size reduces the number of elements per row and increases the number of logical tiles.
 
-Increasing the scalable vector length from 128 bits to 256 bits for `int32` increases the dimensions of each logical tile. However, there's no change in the number of tiles.
+Increasing the scalable vector length from 128 bits to 256 bits for `int32` increases the number of elements in each logical tile. However, there's no change in the number of logical tiles.
 
 ### Read ZA tile addresses
 
@@ -105,7 +105,7 @@ ZA0H.H[0] can be decoded as follows:
 
 - ZA0 represents the logical tile.
 - H represents horizontal tile slice access.
-- .H represents half-word (16-bit) 
+- .H represents half-word (16-bit).
 - [0] represents the first row. 
 
 Similarly, the third column of ZA1 from the right is addressed as ZA1V.H[2].

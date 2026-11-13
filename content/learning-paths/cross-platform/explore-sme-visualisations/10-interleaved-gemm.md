@@ -9,13 +9,13 @@ layout: learningpathall
 
 ## Compare input layouts in GEMM
 
-This final General Matrix Multiplication (GEMM) visualization begins with matrix A in transposed-and-interleaved layout. It loads input values into Z registers, accumulates outer products in ZA, and writes the output matrix. Compared to the gather-load version, all loads from **A Input Data** are from contiguous addresses.
+This final General Matrix Multiplication (GEMM) visualization begins with matrix A in transposed-and-interleaved layout. It loads input values into Z registers, accumulates outer products in ZA, and writes the output matrix. Compared to the Gather Load version, all loads from **A Input Data** are from contiguous addresses.
 
 ## Trace the interleaved loads
 
-If the embedded visualization doesn't load, [open the interleaved GEMM visualization in a full browser tab](/apps/sme-visualisations/#/sme/gemm32-2x2-interleave). Switch between the Learning Path and the visualization tab.
+If the embedded visualization doesn't load, [open the interleaved GEMM visualization in a separate browser tab](/apps/sme-visualisations/#/sme/gemm32-2x2-interleave). Switch between the Learning Path and the visualization tab.
 
-Follow the same stages as the gather-load GEMM and compare how matrix A reaches Z2 and Z3:
+Follow the same stages as the Gather Load GEMM and compare how matrix A reaches Z2 and Z3:
 
 | Stage | Visualization steps | Operation |
 |---|---|---|

@@ -54,7 +54,7 @@ Where the final strip doesn't contain the same number of rows as the others, pad
 
 ## Use multiple ZA tiles
 
-For data element size larger than 8 bits, there are multiple ZA tiles available. Using all of them allows you to achieve the greatest data reuse and minimize memory system access.
+For data element size larger than 8 bits, there are multiple ZA tiles available. Use all of them to achieve the greatest data reuse and minimize memory system access.
 
 In the diagram that follows, four tiles of results are processed at a time. Matrix B data is accessed sequentially from memory. Matrix A data is accessed as columns within horizontal strips, shown as a blue strip and a yellow strip. The height of each strip depends on the scalable vector length.
 
