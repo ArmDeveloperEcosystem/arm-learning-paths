@@ -55,7 +55,7 @@ sudo -u postgres pgbench -c 20 -j 4 -T 60 appdb
 - `-j 4` → worker threads
 - `-T 60` → duration (seconds)
 
-The following result was collected on November 9, 2026, on a **Standard_D4ps_v7** Cobalt 200 VM (4 vCPUs, 16 GiB) in **West US 2**, running **Ubuntu 24.04 LTS** and **PostgreSQL 16.15** with the settings from the installation section:
+The following result was collected on a **Standard_D4ps_v7** Cobalt 200 VM (4 vCPUs, 16 GiB) in **West US 2**, running **Ubuntu 24.04 LTS** and **PostgreSQL 16.15** with the settings from the installation section:
 
 ```output
 pgbench (16.15 (Ubuntu 16.15-0ubuntu0.24.04.1))
