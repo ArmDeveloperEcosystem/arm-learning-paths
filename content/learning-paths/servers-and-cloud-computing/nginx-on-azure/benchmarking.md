@@ -110,5 +110,8 @@ The following results were collected on an Azure Cobalt 200 **Standard_D4ps_v7**
 | HTML transferred | 880,000 bytes |
 | Transfer rate | 44,043.06 Kbytes/sec |
 
-## Interpret the Cobalt 200 baseline
+## Summary
 
+Your NGINX deployment on Azure Cobalt 200 successfully handled all 1,000 requests with 50 concurrent connections and no failures. You now have a working static website and an initial performance baseline to guide further testing.
+
+ApacheBench ran on the same VM as NGINX, so these results reflect local request handling. To evaluate production capacity, run longer, repeated tests from a separate load generator using representative content and traffic patterns. Keep the test conditions consistent when comparing configurations or VM types.
