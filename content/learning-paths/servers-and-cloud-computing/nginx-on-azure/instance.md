@@ -30,10 +30,6 @@ To get started, launch the Azure portal and navigate to **Virtual Machines**. Th
 - Select the image for your virtual machine (for example, Ubuntu 24.04 LTS) and select **Arm64** as the VM architecture.
 - In the **Size** field, select **See all sizes**, select the **D-series v7** family of virtual machines, then select **D4ps_v7**.
 
-{{% notice Note %}}
-The portal screenshots show an earlier VM setup. Follow the text instructions to select **D4ps_v7** and **Ubuntu 24.04 LTS (Arm64)** for Cobalt 200.
-{{% /notice %}}
-
 ![Azure portal VM creation example#center](images/instance.png "VM size selection in the Azure portal")
 
 - Now select **SSH public key** as the authentication type. Azure can generate an SSH key pair for you and store it for future use. It is a fast, simple, and secure way to connect to your virtual machine.
