@@ -1,12 +1,16 @@
 ---
-title: Understand the Zena CSS virtual platform
+title: Introduction to the Zena CSS virtual platform in Siemens Innexis ANA
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Understand the Zena CSS virtual platform
+## Introduction to the Siemens Innexis Architecture Native Acceleration
+
+[Siemens Innexis Architecture Native Acceleration (ANA)](https://resources.sw.siemens.com/en-US/fact-sheet-innexis-ana/) is a virtual system-on-chip (vSoC) platform that enables engineering teams to develop, debug, and test embedded software before physical chips or boards are available. It provides configurable virtual hardware—including processors, memory, and peripherals—and runs software natively on Arm-based servers, delivering substantially faster execution than traditional instruction-set simulation. Its [cloud service](https://aws.amazon.com/marketplace/pp/prodview-o5nb3mu4upsc4) offers browser-based access, scalable computing resources, and APIs for automated testing, allowing distributed teams to collaborate on operating systems, drivers, middleware, and applications. The core benefit is earlier software readiness: teams can identify integration issues sooner, reduce dependence on physical prototypes, and shorten development cycles for software-defined vehicles and other complex embedded products.
+
+## Introduction to the Zena CSS virtual platform in Innexis ANA
 
 In [Innexis ANA](https://www.siemens.com/en-gb/products/ic/hav/innexis/architecture-native-acceleration/), a *chamber* provides the environment in which you create and run a virtual platform. The **Arm-Zena-CSS** vSoC describes the virtual hardware. The [**Arm-Zena-CSS EWAOL Software Stack**](https://arm-zena-css.docs.arm.com/en/v2.2/overview.html) supplies the software images used to boot it.
 
@@ -29,6 +33,6 @@ The firmware consoles help you see how the virtual system reaches Linux. They do
 
 For this Learning Path, your first working result is the **EWAOL Linux login prompt on the primary-compute console**. You will then inspect the guest from its shell. You do not need to change firmware or rebuild the software stack.
 
-## Check your understanding
+## What you have learned
 
 Before continuing, locate **Arm-Zena-CSS** and its **EWAOL Software Stack** in your chamber. If either is absent, ask the chamber administrator which Zena assets are available.
