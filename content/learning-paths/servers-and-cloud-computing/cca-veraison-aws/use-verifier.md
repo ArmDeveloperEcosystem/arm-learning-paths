@@ -43,10 +43,14 @@ echo $VERAISON_DEB
 ./bin/veraison delete-signing-key
 ./bin/veraison delete-key-pair
 ./bin/veraison delete-deb
-./bin/veraison delete-stack vpc
 
 # Force delete the Cloud Formation stacks
+aws cloudformation delete-stack --stack-name veraison-support
+aws cloudformation wait stack-delete-complete --stack-name veraison-support
 aws cloudformation delete-stack --stack-name veraison-support --deletion-mode FORCE_DELETE_STACK
+
+aws cloudformation delete-stack --stack-name veraison-vpc
+aws cloudformation wait stack-delete-complete --stack-name veraison-vpc
 aws cloudformation delete-stack --stack-name veraison-vpc --deletion-mode FORCE_DELETE_STACK
 
 # Force delete the secret without deletion delay
