@@ -22,6 +22,7 @@ startup.sh
 nohup.out
 
 venv/
+.venv/
 z_local_saved/
 /.idea/
 /tools/.python-version
