@@ -44,6 +44,18 @@ export AWS_DEFAULT_REGION=${AWS_REGION}
 # Verify what bootstrap will use.
 python --version
 python -m pip --version
+
+# make sure we have cocli
+mkdir -p "$HOME/.local/bin"
+
+GOBIN="$HOME/.local/bin" go install github.com/veraison/cocli@v0.1.0
+GOBIN="$HOME/.local/bin" go install github.com/veraison/evcli/v2@0e253e8
+
+export PATH="$HOME/.local/bin:$PATH"
+hash -r
+
+command -v cocli
+command -v evcli
 ```
 
 You should see output similar to:
@@ -68,17 +80,54 @@ Use the [Bootstrap](https://github.com/veraison/services/blob/ebadb733d44ba2f8ff
 
 The pinned services revision uses CoRIM-store commit `a2a60b6a11ad`, as specified in its [dependency file](https://github.com/veraison/services/blob/ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800/go.mod#L44). Its AWS deployment script still selects an older CoRIM-store tool for the sentinel image. Update that tool's pin before creating the image so database initialization includes the migrations required by the services, including the `tokens` table.
 
+Download the [Veraison services repo patch scripts](../cca-veraison-aws-upstream-fixes.tar.gz) to your HOME directory on the Ubuntu host and unzip:
+
+```bash
+cd $HOME
+tar xzpf $HOME/cca-veraison-aws-upstream-fixes.tar.gz
+```
+
+Then:
+
 ```bash
 mkdir $HOME/cca_veraison
 cd $HOME/cca_veraison
 git clone https://github.com/veraison/services.git
 git -C services checkout ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800
+
+# patch the veraison repo to fix several issues with it so the build steps complete.
+$HOME/cca-veraison-aws-upstream-fixes/apply.sh --check $HOME/cca_veraison/services
+$HOME/cca-veraison-aws-upstream-fixes/apply.sh --apply $HOME/cca_veraison/services
+```
+
+Patching output should resemble:
+
+```outputHEAD is now at ebadb73 Add details for psa-iot and arm-cca evidence apraisal (#509)
+Target: /home/danson/cca_veraison/services
+HEAD: ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800
+  patches/0001-bootstrap-and-environment.patch: pending
+  patches/0002-cli-and-package-build.patch: pending
+  patches/0003-aws-templates-and-store-compatibility.patch: pending
+  patches/0004-end-to-end-failure-handling.patch: pending
+  patches/0005-deployment-regression-tests.patch: pending
+  patches/0006-aws-quickstart-documentation.patch: pending
+Dry run passed. Run again with --apply to update the clone.
+Target: /home/danson/cca_veraison/services
+HEAD: ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800
+  patches/0001-bootstrap-and-environment.patch: pending
+  patches/0002-cli-and-package-build.patch: pending
+  patches/0003-aws-templates-and-store-compatibility.patch: pending
+  patches/0004-end-to-end-failure-handling.patch: pending
+  patches/0005-deployment-regression-tests.patch: pending
+  patches/0006-aws-quickstart-documentation.patch: pending
+Applied 6 patch groups.
+Review with: git -C /home/danson/cca_veraison/services diff
+```
+
+If the patching succeeds, then we can bootstrap everything:
+
+```bash
 cd services/deployments/aws
-
-# Match the sentinel's CoRIM-store tool to the services dependency.
-sed -i "s/default='9e4ba68b'/default='a2a60b6a11ad'/" bin/veraison
-grep -F "default='a2a60b6a11ad'" bin/veraison
-
 make bootstrap
 ```
 
@@ -123,6 +172,30 @@ Please add the following to your `misc/arm.cfg` as well below `VERAISON_AWS_REGI
 AWS_DEFAULT_REGION="$VERAISON_AWS_REGION"
 AWS_REGION="$VERAISON_AWS_REGION"
 ```
+
+An example of a configured `misc/arm.cfg` looks something like this (your AWS region and DNS name may/will likely be different though):
+
+```output
+##############################################################################
+# Veraison Deployment Account-specific settings.
+# These settings are specific to the Arm account used by the core development
+# team. Users without access to this account must provide their own version of
+# this file (or configure these settings inside deployment.cfg).
+##############################################################################
+VERAISON_AWS_REGION=us-east-1
+AWS_DEFAULT_REGION="$VERAISON_AWS_REGION"
+AWS_REGION="$VERAISON_AWS_REGION"
+VERAISON_AWS_ADMIN_CIDR=217.140.96.0/20
+VERAISON_AWS_VPC_CIDR=10.1.0.0/16
+VERAISON_AWS_DNS_NAME=veraison-example.com
+IAM_LOGGER_ROLE_NAME=
+IAM_INSTANCE_PROFILE_NAME=
+IAM_PERMISSION_BOUNDARY_ARN=
+```
+
+{{% notice Note %}}
+Some AWS accounts may have permissions boundaries enabled (such as assumed role accounts). In this case you will need to create the logger and instance profile roles and specify the permissions boundary arn specifically. Most standard AWS accounts do not require this though so you can just leave them empty. 
+{{% /notice %}}
 
 Once the account-specific config file is created, define `AWS_ACCOUNT_CFG` environment variable to point to it and then create the deployment:
 
