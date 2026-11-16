@@ -12,7 +12,7 @@ layout: learningpathall
 After understanding the CMSIS Packs needed by the project, you can explore how the project works. 
 
 `cmsis-executorch-u55.csolution.yml` defines the complete Ethos-U55 build context.
-Open the file and inspect it:
+The target definition in the solution file includes:
 
 ```yaml
 target-types:

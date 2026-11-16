@@ -1,5 +1,5 @@
 ---
-title: Optimize ML model deployment on microcontrollers with CMSIS-NN kernels
+title: Optimize ExecuTorch fallback with CMSIS-NN on Cortex-M
     
 description: Build an ExecuTorch 1.5.1 application from the published ExecuTorch CMSIS Pack and use CMSIS-NN kernels for Cortex-M fallback.
 
@@ -14,7 +14,7 @@ learning_objectives:
     - Build and run the application on a Corstone-300 Ethos-U55 Fixed Virtual Platform (FVP).
 
 prerequisites:
-    - A host machine -  Windows or Linux PC — or an Apple silicon Mac running macOS 15 or later
+    - A Windows or Linux PC, or an Apple silicon Mac running macOS 15 or later
     - Visual Studio Code installed
     - Familiarity with PyTorch
     - Basic familiarity with Cortex-M processors and Ethos-U NPUs

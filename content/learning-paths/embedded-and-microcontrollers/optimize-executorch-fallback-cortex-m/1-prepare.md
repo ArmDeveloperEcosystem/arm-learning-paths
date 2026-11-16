@@ -193,7 +193,7 @@ If a tool is unavailable or its version differs, reactivate the Arm tools and op
 
 ### Set up Docker on macOS
 
-On macOS, install and start [Docker Desktop](/install-guides/docker/docker-desktop/). The FVP runs inside a Linux container because there's no native macOS FVP. 
+On macOS, install and start [Docker Desktop](/install-guides/docker/docker-desktop/). The FVP runs inside a Linux container because it isn't available as a macOS application.
 
 Check that Docker is running:
 
@@ -286,7 +286,7 @@ values = torch.flatten(values, start_dim=2)
 values, _ = torch.topk(values, k=1, dim=-1)
 ```
 
-The `stride` controls how far a convolution filter moves between positions. `stride=1` visits adjacent positions. `stride=4`moves four positions
+The `stride` controls how far a convolution filter moves between positions. `stride=1` visits adjacent positions. `stride=4` moves four positions
 at a time and produces a smaller output. For this Ethos-U55 target and tensor shape,
 the first convolution can be delegated to the NPU. The stride-4 convolution
 remains outside the delegate. `topk` selects the largest spatial response for

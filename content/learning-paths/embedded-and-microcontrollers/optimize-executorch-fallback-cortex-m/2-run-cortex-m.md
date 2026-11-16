@@ -1,7 +1,7 @@
 ---
 title: Lower a model to the Cortex-M backend
 weight: 3
-description: Export a Cortex-M model and identify CMSIS-NN accelerated convolutions
+description: Export a Cortex-M model and identify CMSIS-NN accelerated convolutions.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

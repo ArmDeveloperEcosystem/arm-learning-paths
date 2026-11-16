@@ -114,5 +114,5 @@ To adapt the project, complete the following steps:
 
 - Replace `model/model.py`.
 - Provide representative calibration inputs.
-- Rreserve or update the tensor interface of the runner.
+- Preserve or update the tensor interface of the runner.
 - Regenerate the AI layer before rebuilding.

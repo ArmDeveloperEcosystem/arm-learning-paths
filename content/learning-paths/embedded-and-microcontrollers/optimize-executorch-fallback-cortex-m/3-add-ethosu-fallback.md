@@ -12,20 +12,15 @@ layout: learningpathall
 After seeing what running the model exclusively on Cortex-M looks like, set up deployment across Cortex-M and the Ethos-U NPU. 
 
 Re-use the same exporter script as earlier, this time creating a fallback. The exporter uses `EthosUPartitioner` to
-create an Ethos-U55 delegate region as a fallback, represented by `executorch_call_delegate`.
+create an Ethos-U55 delegate region, represented by `executorch_call_delegate`.
 It then applies `CortexMPassManager` to operations left outside that
 delegate. The exporter lowers its supported convolution to a registered Cortex-M operator
 implemented by CMSIS-NN.
 
 ### See how the export script creates a fallback
 
-For supported neural-network operations, the expected order is as follows:
-
-```text
-Ethos-U NPU -> CMSIS-NN on the Cortex-M CPU -> A portable CPU kernel
-```
-
-This order keeps as much work as possible on the NPU. It gives unsupported quantized work an optimized
+For supported neural-network operations, the expected order is Ethos-U NPU,
+then CMSIS-NN on the Cortex-M CPU, then a portable CPU kernel. This keeps as much work as possible on the NPU. It gives unsupported quantized work an optimized
 CPU route before using a general implementation.
 
 ![Flow diagram showing that the graph is quantized, supported work is partitioned for Ethos-U, the supported remainder is lowered to Cortex-M operators, and the final remainder stays portable. This order preserves eligible NPU work before CPU lowering.#center](images/executorch-export-flow.svg "ExecuTorch partitioning and lowering order")
