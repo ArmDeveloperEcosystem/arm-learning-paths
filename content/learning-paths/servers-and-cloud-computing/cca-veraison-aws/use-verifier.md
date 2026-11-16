@@ -69,5 +69,5 @@ done
 ```
 
 {{% notice Note %}}
-The above deletion steps will delete most of the AWS resources created by this learning path. However, any failed deployments may partially/wholly remain and will require manual deletion from the AWS console. Be sure to double check via the AWS console including examining AWS dashboardds for:  Cloud Formation, ElastiCache, RDS and Aurora, Secrets Manager, and EC2 for any residual resources that might be dangling after the above deletions.
+The above deletion steps will delete most of the AWS resources created by this learning path. However, any failed deployments may partially/wholly remain and will require manual deletion from the AWS console. Be sure to double check via the AWS console including examining AWS dashboards for:  Cloud Formation, ElastiCache, RDS and Aurora, Secrets Manager, and EC2 for any residual resources that might be dangling after the above deletions.
 {{% /notice %}}
