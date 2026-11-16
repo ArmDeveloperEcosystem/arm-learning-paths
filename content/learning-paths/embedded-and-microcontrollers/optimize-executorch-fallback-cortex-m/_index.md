@@ -1,9 +1,5 @@
 ---
 title: Optimize ML model deployment on microcontrollers with CMSIS-NN kernels
-
-draft: true
-cascade:
-    draft: true
     
 description: Build an ExecuTorch 1.5.1 application from the published ExecuTorch CMSIS Pack and use CMSIS-NN kernels for Cortex-M fallback.
 
@@ -12,13 +8,13 @@ minutes_to_complete: 60
 who_is_this_for: This Learning Path is for embedded machine learning developers building ExecuTorch applications for Cortex-M CPUs and Ethos-U NPUs.
 
 learning_objectives:
-    - Export an ExecuTorch graph with Ethos-U, CMSIS-NN, and portable-kernel execution regions
-    - Lower quantized CPU fallback operations to CMSIS-NN-backed Cortex-M operators
-    - Trace the exported operators to selected components in the published ExecuTorch 1.5.1 and CMSIS-NN Packs
-    - Build and run the application on a Corstone-300 Ethos-U55 FVP
+    - Export an ExecuTorch graph with Ethos-U, CMSIS-NN, and portable-kernel execution regions.
+    - Lower quantized CPU fallback operations to CMSIS-NN-backed Cortex-M operators.
+    - Trace the exported operators to selected components in the published ExecuTorch 1.5.1 and CMSIS-NN Packs.
+    - Build and run the application on a Corstone-300 Ethos-U55 Fixed Virtual Platform (FVP).
 
 prerequisites:
-    - A host machine -  Windows or Linux PC, or an Apple silicon Mac running macOS 15 or later
+    - A host machine -  Windows or Linux PC — or an Apple silicon Mac running macOS 15 or later
     - Visual Studio Code installed
     - Familiarity with PyTorch
     - Basic familiarity with Cortex-M processors and Ethos-U NPUs
