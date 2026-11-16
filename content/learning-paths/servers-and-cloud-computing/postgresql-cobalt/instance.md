@@ -36,7 +36,7 @@ Creating a virtual machine based on Azure Cobalt 200 is no different from creati
 - Select **D4ps_v7** from the list.
 
 
-![Azure portal VM size selection#center](images/instance.png "VM size selection in the Azure portal")
+![Azure portal VM size selection#center](images/instance.webp "VM size selection in the Azure portal")
 
 - For **Authentication type**, select **SSH public key**.
 
