@@ -27,7 +27,7 @@ Follow the same stages as the Gather Load GEMM and compare how matrix A reaches 
 | Store the first results | 33–40 | Write ZA0 and ZA1 to **Output Matrix Data**. |
 | Store the remaining results | 41–48 | Write ZA2 and ZA3 to **Output Matrix Data**. |
 
-The **A Input Data** is loaded from contiguous memory addresses. 
+**A Input Data** is loaded from contiguous memory addresses. 
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/gemm32-2x2-interleave"
