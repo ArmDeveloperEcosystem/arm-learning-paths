@@ -1,5 +1,8 @@
 ---
 title: Build a CCA Attestation Service on AWS with Veraison
+draft: true
+cascade:
+    draft: true
 description: Learn how to deploy a scalable Arm CCA attestation verifier service on AWS using Veraison components with platform endorsement provisioning.
 
 minutes_to_complete: 90

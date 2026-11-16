@@ -9,29 +9,31 @@ layout: learningpathall
 
 ## Arrange input matrix A for adjacent loads
 
-To eliminate the need for Gather Loads, transform the **Input Matrix**. Process four ZA tiles at a time, arranged in a 2 x 2 grid. The top ZA tiles need four rows of the first column (shown in dark red), and the bottom ZA tiles need the next four rows of the first column (shown in dark orange). These rows must be adjacent in the output memory buffer. Continue for the subsequent columns, until all have been arranged contiguously in memory. Then do the same for the next set of rows, shown in green and blue.
+To eliminate the need for Gather Loads, transform the **Input Matrix**. Process four ZA tiles at a time, arranged in a 2 x 2 grid. The top ZA tiles need four rows of the first column, shown in dark red. The bottom ZA tiles need the next four rows of the first column, shown in dark orange. These rows need to be adjacent in the output memory buffer. Continue for the subsequent columns until all have been arranged contiguously in memory. Do the same for the next set of rows, shown in green and blue.
 
-![Transposing and interleaving the input matrix#center](images/transpose_interleave.png "Transposing and interleaving the input matrix")
+![Colored regions of the input matrix are rearranged into an output memory buffer. Values from the red and orange regions sit together, followed by values from the green and blue regions.#center](images/transpose_interleave.png "Transposing and interleaving the input matrix")
 
-The visualization shows the output **Interleaved Matrix** as a 16 x 16 matrix. If you represent the output memory buffer as a 16 x 16 matrix, it looks like this:
+The visualization shows the output **Interleaved Matrix** as a 16 x 16 matrix. If you represent the output memory buffer as a 16 x 16 matrix, it looks similar to:
 
-![Transposed interleaved output buffer shown as 16-column array#center](images/transpose_interleave_wide.png "Transposed interleaved output buffer shown as 16-column array")
-
-## Use the playback controls
-
-Select the **rightmost double-arrow button (⏩)** to advance one step and read the current-step description. The **leftmost double-arrow button (⏪)** goes back one step. The **middle Play/Pause button** runs or pauses the remaining sequence. Reload the page to return to the initial state.
+![The same interleaved output memory buffer viewed as a 16-column grid. Red and orange blocks alternate across the first eight rows, and green and blue blocks alternate across the next eight rows.#center](images/transpose_interleave_wide.png "Transposed interleaved output buffer shown as 16-column array")
 
 ## Follow the transpose and interleave
 
-Follow the algorithm that transposes and interleaves the **Input Matrix** data:
+If the embedded visualization doesn't load, [open the A interleave visualization in a separate browser tab](/apps/sme-visualisations/#/sme/pack32-2x2-a). Switch between the Learning Path and the visualization tab.
 
-1. The first 8 steps load partial rows of **Input Matrix** data into rows of the ZA0 and ZA1 tiles.
-2. The next 8 steps load partial rows of **Input Matrix** data into rows of the ZA2 and ZA3 tiles.
-3. The next 8 steps store columns of ZA0 and ZA2 into rows of the **Interleaved Matrix** output buffer.
-4. The next 8 steps store columns of ZA1 and ZA3 into the next two rows of the **Interleaved Matrix** output buffer.
-5. The next 32 steps repeat this procedure for the remainder of the horizontal strip of **Input Matrix** that is being processed. Because the matrix has exactly 16 columns and 16 rows, the remainder of the horizontal strip happens to be the top-right quadrant.
-6. After the first two-tile-deep horizontal strip is complete, the algorithm moves to the next one. The next 32 steps process the bottom-left quadrant of **Input Matrix** into four rows of the **Interleaved Matrix** output buffer.
-7. The final 32 steps process the remainder of this horizontal strip which happens to be the bottom-right quadrant, into the last four rows of the **Interleaved Matrix** output buffer.
+Use the step ranges to follow how the **Input Matrix** becomes an **Interleaved Matrix**:
+
+| Stage | Visualization steps | Operation |
+|---|---|---|
+| Load the first region | 1–8 | Load partial rows of **Input Matrix** into rows of ZA0 and ZA1. |
+| Load the next rows | 9–16 | Load partial rows into rows of ZA2 and ZA3. |
+| Store the first output rows | 17–24 | Store columns of ZA0 and ZA2 into rows of the **Interleaved Matrix** output buffer. |
+| Store the next output rows | 25–32 | Store columns of ZA1 and ZA3 into the next two rows of the **Interleaved Matrix** output buffer. |
+| Process the top-right region | 33–64 | Repeat the load-and-store pattern for the rest of the first horizontal strip. |
+| Process the bottom-left region | 65–96 | Move to the next horizontal strip and write four more output rows. |
+| Process the bottom-right region | 97–128 | Finish the strip and write the final four output rows. |
+
+The **Input Matrix** has 16 rows and 16 columns. The first 32 steps process the top-left quadrant of the input. The remaining stages cover the other three quadrants.
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/pack32-2x2-a"
@@ -42,10 +44,8 @@ Follow the algorithm that transposes and interleaves the **Input Matrix** data:
     loading="lazy"
 >}}
 
-If you need more space then use the "Full screen" button at the top-right, or [open the A interleave visualization in a full browser tab](/apps/sme-visualisations/#/sme/pack32-2x2-a) if the embedded view does not load.
+## What you've learned and what's next
 
-## What you've accomplished
+You've followed the transpose and interleave of **Input Matrix** data. The visualization arranges it so that a General Matrix Multiplication (GEMM) can load the data it needs contiguously from memory.
 
-You have followed the transpose and interleave of **Input Matrix** data, arranging it so that a GEMM can load the data it needs contiguously from memory.
-
-Next, explore a GEMM that uses this data layout for efficient matrix multiplication.
+Next, you'll explore a GEMM that uses this data layout for efficient matrix multiplication.
