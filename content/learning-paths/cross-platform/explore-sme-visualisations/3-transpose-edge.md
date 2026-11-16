@@ -15,18 +15,18 @@ If the embedded visualization doesn't work, [open the incomplete-edge transpose 
 
 ## Follow the edge values
 
-Select the play button or advance manually to follow the algorithm. Focus on how the last two columns of **Input Matrix Data** are loaded into ZA0 - ZA2 as partial rows in step 5:
+Select the play button or advance manually to follow the algorithm. The table shows how each group of **Input Matrix Data** columns moves through ZA0–ZA2:
 
-1. The first 10 steps load rows from the first four columns of the input matrix into rows of ZA0-ZA2.
-2. The next 12 steps store data sequentially into the output matrix from columns of ZA0-ZA2.
-3. The next 10 steps load rows from the next four columns of the input matrix into rows of ZA0-ZA2.
-4. The next 12 steps store data sequentially into the output matrix from columns of ZA0-ZA2.
-5. The next 10 steps load rows from the last two columns of the input matrix into rows of ZA0-ZA2. 
-    
-    Only two data values per row are loaded into ZA tiles. This is achieved by using a predicate mask that marks only two columns as active.
-6. The last six steps store data sequentially into the output matrix from columns of ZA0-ZA2. 
-    
-    Only two columns are active, which is why only six steps are needed instead of 12.
+| Stage | Visualization steps | Operation |
+| --- | --- | --- |
+| Load the first block | 1–10 | Load rows from the first four columns of **Input Matrix Data** into rows of ZA0–ZA2. |
+| Store the first block | 11–22 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. |
+| Load the second block | 23–32 | Load rows from the next four columns of **Input Matrix Data** into rows of ZA0–ZA2. |
+| Store the second block | 33–44 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. |
+| Load the edge block | 45–54 | Load partial rows from the last two columns of **Input Matrix Data** into rows of ZA0–ZA2. |
+| Store the edge block | 55–60 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. |
+
+During steps 45–54, only two data values per row are loaded into the ZA tiles. A predicate mask marks only two columns as active. Only two columns are active during the final store, so it takes six steps instead of 12.
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/transpose32-overflow2"
