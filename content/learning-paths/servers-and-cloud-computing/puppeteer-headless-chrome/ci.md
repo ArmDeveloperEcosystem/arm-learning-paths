@@ -9,11 +9,7 @@ layout: "learningpathall"
 
 ## Run tests on pull requests
 
-You can run Puppeteer tests automatically on pull requests to check changes before merging them. You'll create a workflow that performs the following tasks: 
-
-- Checks out the repository
-- Starts Hugo
-- Runs all three Puppeteer scripts  
+You can run Puppeteer tests automatically on pull requests to check changes before merging them. You'll create a workflow that checks out the repository, starts Hugo, and runs all three Puppeteer scripts.  
 
 If any script exits with a non-zero code, the workflow fails.
 
