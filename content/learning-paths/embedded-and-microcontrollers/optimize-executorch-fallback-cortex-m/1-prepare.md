@@ -19,13 +19,13 @@ For combined Cortex-M and Ethos-U systems, ExecuTorch lets one model use both pr
 
 The example model uses three execution paths:
 
-| Execution path | What runs there | Why |
+| Execution path | What operation runs there | Why the operation runs there |
 | --- | --- | --- |
 | [Ethos-U55 NPU](https://www.arm.com/products/silicon-ip-cpu/ethos/ethos-u55) | The stride-1 convolution | The NPU supports this convolution configuration. |
 | [CMSIS-NN kernels on Cortex-M](https://arm-software.github.io/CMSIS-NN/latest/index.html) | The stride-4 convolution | Ethos-U55 doesn't support this configuration, so the CPU runs it with an optimized CMSIS-NN kernel. |
 | ExecuTorch portable kernels on Cortex-M | The `topk` operation | This operation uses a general CPU implementation. |
 
-The following diagram shows the NPU path alongside the two paths that execute on the Cortex-M CPU:
+The following diagram shows the NPU path alongside the two paths that run on the Cortex-M CPU:
 
 ![Diagram of the simulated Corstone-300 target showing the Cortex-M CPU dispatching the stride-1 convolution to Ethos-U55, running the stride-4 convolution with CMSIS-NN, and running topk with a portable ExecuTorch kernel#center](images/cortex-m-execution-picture.svg "ExecuTorch execution paths")
 
@@ -99,7 +99,9 @@ When you open the project folder, Arm Tools Environment Manager automatically ac
 
 If activation doesn't start, right-click `vcpkg-configuration.json` in the **Explorer** view and select **Activate Environment**. You can also select **Activate Environment** from the **Arm Tools** status-bar menu when the configuration is detected.
 
-Arm Compiler for Embedded requires an activated license. Select the license indicator next to **Arm Tools**, then choose **Activate Arm Keil MDK Community Edition** for evaluation or non-commercial use, or **Activate or manage Arm licenses** to use your existing license. Confirm that the indicator shows an active license before building. For available options, see [Keil Studio license activation](https://mdk-packs.github.io/vscode-cmsis-solution-docs/installation.html#activating-keil-studio).
+Arm Compiler for Embedded requires an activated license. Select the license indicator next to **Arm Tools**, then select **Activate Arm Keil MDK Community Edition** for evaluation or non-commercial use. Alternatively, you can select **Activate or manage Arm licenses** to use your existing license.
+
+ Confirm that the indicator shows an active license before building. For available options, see [Keil Studio license activation](https://mdk-packs.github.io/vscode-cmsis-solution-docs/installation.html#activating-keil-studio).
 
 In the **CMSIS** view, select **... > Open Solution in Workspace** and choose `cmsis-executorch-u55.csolution.yml`. Confirm that the active target is `SSE-300-U55`.
 
@@ -139,7 +141,9 @@ py -3.12 setup_venv.py
 
 ## Open and verify the working terminal
 
-After Arm tool activation and Python setup, select **Terminal > New Terminal**. Use a Bash-compatible shell on Linux and macOS, or PowerShell on Windows. This new integrated terminal receives the activated Arm tool environment.
+After Arm tool activation and Python setup, select **Terminal > New Terminal**. 
+
+Use a Bash-compatible shell on Linux and macOS, or PowerShell on Windows. This new integrated terminal receives the activated Arm tool environment.
 
 Activate `.venv` in this terminal:
 

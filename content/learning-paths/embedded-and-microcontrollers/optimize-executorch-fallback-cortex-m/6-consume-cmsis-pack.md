@@ -9,12 +9,13 @@ layout: learningpathall
 
 ## Build the application
 
-Now that you've understood how the application works, you can build and run it. 
+Now that you've understood how the application works, build and run it. 
 
 In the Visual Studio Code (VS Code) **CMSIS** view, confirm that
 `cmsis-executorch-u55.csolution.yml` is the active solution. Confirm that
-`SSE-300-U55` is the selected target. Then, select **Build** to compile the application
-using the AI layer that you generated earlier.
+`SSE-300-U55` is the selected target. 
+
+Then, select **Build** to compile the application using the AI layer that you generated earlier.
 
 CMSIS-Toolbox combines the App, Board, and AI layers, resolves their selected
 components, and invokes Arm Compiler for Embedded. Check that the build task
@@ -31,8 +32,9 @@ The `.axf` file contains the linked executable and debug information. The
 ## Verify the compiled source paths
 
 A successful build proves that an image was produced, but it doesn't by itself
-show which implementation supplied each operation. In the VS Code terminal, ensure that `.venv` is activated and you're in the project root directory. Then, run the
-verification helper against the compilation database:
+show which implementation supplied each operation. In the VS Code terminal, ensure that `.venv` is activated and you're in the project root directory. 
+
+Then, run the verification helper against the compilation database:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux and macOS" language="bash">}}
@@ -60,7 +62,7 @@ ExecuTorch Pack provides the `quantized_conv2d` wrapper. The CMSIS-NN
 Pack provides the convolution implementation that wrapper calls.
 
 Together with `cmsis-executorch-u55.cbuild-pack.yml`, the compilation database
-shows both the resolved Pack versions and the source files actually compiled.
+shows that both the resolved Pack versions and the source files compiled.
 
 ## Run the image on the FVP
 
@@ -88,10 +90,12 @@ Output: 10 element(s): 0.0532 -0.0239 0.0541 0.1064 0.0706 0.0395 0.0881 0.1340 
 Test_result: PASS
 ```
 
-The runner prints `Test_result: PASS` when inference returns successfully with a nonempty output list. Check that the preceding line also reports ten output values, as shown. The runner doesn't assert the tensor shape, data type, or numerical accuracy. To validate a trained model, compare its outputs against a reference. Use the same input data and a tolerance appropriate to the quantization.
+The runner prints `Test_result: PASS` when inference returns successfully with a nonempty output list. Check that the preceding line also reports ten output values, as shown. 
+
+The runner doesn't assert the tensor shape, data type, or numerical accuracy. To validate a trained model, compare its outputs against a reference. Use the same input data and a tolerance appropriate to the quantization.
 
 {{% notice Note %}}
-On Windows, the FVP can print warnings that `python3.dll` is unavailable and
+On Windows, the FVP can print warnings indicating that `python3.dll` is unavailable and
 that the VIO or VSI bridges are disabled. This headless example doesn't use
 those bridges. If the run reaches `Test_result: PASS`, inference completed
 successfully.

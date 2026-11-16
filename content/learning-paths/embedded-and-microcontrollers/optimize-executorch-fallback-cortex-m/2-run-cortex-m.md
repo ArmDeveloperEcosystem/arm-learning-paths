@@ -9,7 +9,9 @@ layout: learningpathall
 
 ## Start with only Cortex-M
 
-Before you see fallback from an Ethos-U, you'll see what running a model exclusively on Cortex-M looks like. Not every microcontroller has an onboard NPU, so some use-cases will involve running TinyML directly on the CPU. In such a case, any optimizations can be the vital difference between functional performance and an impractical application.
+Before you see fallback from an Ethos-U, you'll see what running a model exclusively on Cortex-M looks like. 
+
+Not every microcontroller has an onboard NPU, so some use-cases will involve running TinyML directly on the CPU. In such a case, any optimizations can be the vital difference between functional performance and an impractical application.
 
 ### See how the export script lowers the graph
 

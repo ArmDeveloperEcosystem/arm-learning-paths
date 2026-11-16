@@ -25,7 +25,7 @@ CPU route before using a general implementation.
 
 ![Flow diagram showing that the graph is quantized, supported work is partitioned for Ethos-U, the supported remainder is lowered to Cortex-M operators, and the final remainder stays portable. This order preserves eligible NPU work before CPU lowering.#center](images/executorch-export-flow.svg "ExecuTorch partitioning and lowering order")
 
-Ordering matters. If Cortex-M lowering runs first, it can rewrite a
+The ordering matters. If Cortex-M lowering runs first, it can rewrite a
 convolution that should be offered to the NPU.
 
 The exporter first creates an Ethos-U55 compile specification and configures
@@ -64,7 +64,7 @@ described earlier.
 
 ### Export the model for Cortex-M and Ethos-U
 
-Run the export script in mixed Cortex-M + Ethos-U mode:
+Run the export script in mixed Cortex-M and Ethos-U mode:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux and macOS" language="bash">}}
