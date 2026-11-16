@@ -9,10 +9,13 @@ layout: learningpathall
 
 ## Build the application
 
-In VS Code's **CMSIS** view, confirm that
-`cmsis-executorch-u55.csolution.yml` is the active solution and
-`SSE-300-U55` is the selected target. Select **Build** to compile the application
-using the AI layer generated in chapter 3.
+Now that you've understood how the application works, build and run it. 
+
+In the Visual Studio Code (VS Code) **CMSIS** view, confirm that
+`cmsis-executorch-u55.csolution.yml` is the active solution. Confirm that
+`SSE-300-U55` is the selected target. 
+
+Then, select **Build** to compile the application using the AI layer that you generated earlier.
 
 CMSIS-Toolbox combines the App, Board, and AI layers, resolves their selected
 components, and invokes Arm Compiler for Embedded. Check that the build task
@@ -24,14 +27,14 @@ out/cmsis-executorch/SSE-300-U55/Debug/
 ```
 
 The `.axf` file contains the linked executable and debug information. The
-`.hex` file contains the image loaded into the FVP.
+`.hex` file contains the image loaded into the Fixed Virtual Platform (FVP).
 
 ## Verify the compiled source paths
 
 A successful build proves that an image was produced, but it doesn't by itself
-show which implementation supplied each operation. In the VS Code terminal,
-with `.venv` activated and the project root as the current directory, run the
-verification helper against the compilation database:
+show which implementation supplied each operation. In the VS Code terminal, ensure that `.venv` is activated and you're in the project root directory. 
+
+Then, run the verification helper against the compilation database:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux and macOS" language="bash">}}
@@ -55,16 +58,16 @@ PASS: ExecuTorch portable topk kernel was compiled from its declared CMSIS Pack
 ```
 
 These checks distinguish the two layers of the optimized fallback. The
-ExecuTorch Pack provides the `quantized_conv2d` wrapper, while the CMSIS-NN
+ExecuTorch Pack provides the `quantized_conv2d` wrapper. The CMSIS-NN
 Pack provides the convolution implementation that wrapper calls.
 
 Together with `cmsis-executorch-u55.cbuild-pack.yml`, the compilation database
-shows both the resolved Pack versions and the source files actually compiled.
+shows that both the resolved Pack versions and the source files compiled.
 
 ## Run the image on the FVP
 
 In the same VS Code terminal, start the Corstone-300 model and load the generated
-HEX image. On macOS, use the Docker wrapper configured during setup:
+HEX image. On macOS, use the Docker wrapper that you configured during setup:
 
 {{< tabpane code=true >}}
   {{< tab header="Linux and Windows" language="console">}}
@@ -87,33 +90,33 @@ Output: 10 element(s): 0.0532 -0.0239 0.0541 0.1064 0.0706 0.0395 0.0881 0.1340 
 Test_result: PASS
 ```
 
-The runner prints `Test_result: PASS` when inference returns successfully with a nonempty output list. Check that the preceding line also reports ten output values, as shown above. The runner does not assert the tensor shape, data type, or numerical accuracy. To validate a trained model, compare its outputs against a reference using the same input data and a tolerance appropriate to the quantization.
+The runner prints `Test_result: PASS` when inference returns successfully with a nonempty output list. Check that the preceding line also reports ten output values, as shown. 
+
+The runner doesn't assert the tensor shape, data type, or numerical accuracy. To validate a trained model, compare its outputs against a reference. Use the same input data and a tolerance appropriate to the quantization.
 
 {{% notice Note %}}
-On Windows, the FVP can print warnings that `python3.dll` is unavailable and
+On Windows, the FVP can print warnings indicating that `python3.dll` is unavailable and
 that the VIO or VSI bridges are disabled. This headless example doesn't use
 those bridges. If the run reaches `Test_result: PASS`, inference completed
 successfully.
 {{% /notice %}}
 
 
-This run checks successful execution of the mixed graph. To measure latency or power, benchmark the complete graph on your target hardware, including delegation boundaries and tensor conversions.
+This run checks that the mixed graph ran successfully. To measure latency or power, benchmark the complete graph on your target hardware, including delegation boundaries and tensor conversions.
 
 ## What you've accomplished
 
-You have built and run one ExecuTorch program across three execution paths, and used CMSIS-Executorch to make setup easier:
+You've built and run one ExecuTorch program across three execution paths, and used CMSIS-Executorch to make setup easier.
 
-- The supported convolution runs in an Ethos-U55 delegate.
-- The unsupported stride-4 convolution runs on Cortex-M55 through the
-  ExecuTorch wrapper and optimized CMSIS-NN kernel.
-- `topk` runs through the portable ExecuTorch CPU kernel.
-
-You also checked the implementation: the exported graph identifies each execution path, the compilation database identifies the selected Pack sources, and the successful build and FVP run confirm that the combined firmware executes.
+The supported convolution runs in an Ethos-U55 delegate. The unsupported stride-4 convolution runs on Cortex-M55 through the ExecuTorch wrapper and optimized CMSIS-NN kernel. `topk` runs through the portable ExecuTorch CPU kernel.
 
 This build uses Ethos-U55 to make one unsupported convolution predictable. The same
 Pack workflow applies to another Ethos-U target when its delegated graph leaves
 operations for Cortex-M execution.
 
-To adapt the project, replace `model/model.py`, provide representative
-calibration inputs, preserve or update the runner's tensor interface, and
-regenerate the AI layer before rebuilding.
+To adapt the project, complete the following steps:
+
+- Replace `model/model.py`.
+- Provide representative calibration inputs.
+- Preserve or update the tensor interface of the runner.
+- Regenerate the AI layer before rebuilding.

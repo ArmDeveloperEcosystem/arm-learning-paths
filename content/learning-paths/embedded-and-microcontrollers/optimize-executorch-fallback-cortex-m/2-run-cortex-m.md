@@ -1,25 +1,26 @@
 ---
 title: Lower a model to the Cortex-M backend
 weight: 3
-description: Export a Cortex-M model and identify CMSIS-NN accelerated convolutions
+description: Export a Cortex-M model and identify CMSIS-NN accelerated convolutions.
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## First use only Cortex-M
+## Start with only Cortex-M
 
-Before we demonstrate fallback from an Ethos-U, we will briefly look at running a model exclusively on Cortex-M. Not every microcontroller has an onboard NPU, so some use-cases will involve running TinyML directly on the CPU. In this case, any optimizations can be the vital difference between functional performance, and an impractical application.
+Before you see fallback from an Ethos-U, you'll see what running a model exclusively on Cortex-M looks like. 
 
-## See how the export script lowers the graph
+Not every microcontroller has an onboard NPU, so some use-cases will involve running TinyML directly on the CPU. In such a case, any optimizations can be the vital difference between functional performance and an impractical application.
+
+### See how the export script lowers the graph
 
 {{% notice Note %}}
-The ExecuTorch Cortex-M backend is in **beta** in the 1.5 release used here.
+The ExecuTorch Cortex-M backend is in beta in the 1.5 release that's used for these steps.
 Validation covers MLPerf Tiny models and MobileNetV2.
 It combines optimized CMSIS-NN implementations with portable FP32 operators
-for operations outside its accelerated coverage. See the
-[Cortex-M backend documentation](https://docs.pytorch.org/executorch/stable/backends/arm-cortex-m/arm-cortex-m-overview.html)
-for supported operators and limitations.
+for operations outside its accelerated coverage. For supported operators and limitations, see the
+[Cortex-M backend documentation](https://docs.pytorch.org/executorch/stable/backends/arm-cortex-m/arm-cortex-m-overview.html).
 {{% /notice %}}
 
 The exporter first prepares and converts the model with `CortexMQuantizer`:
@@ -56,20 +57,20 @@ This step rewrites supported patterns as `cortex_m.*` operators. Unsupported
 operations, including `aten.topk`, remain in the portable graph.
 
 The Cortex-M backend is broader than CMSIS-NN. In this model, the quantized
-convolutions use CMSIS-NN, while quantize and dequantize use Cortex-M operators
+convolutions use CMSIS-NN. Quantize and dequantize use Cortex-M operators
 with Arm Helium vector implementations. A `cortex_m.*` target therefore means
 that the Cortex-M backend owns the operator, not necessarily that CMSIS-NN
 implements it.
 
 {{% notice Important %}}
-The Cortex-M backend is not a delegate. Delegation replaces a graph region with
+The Cortex-M backend isn't a delegate. Delegation replaces a graph region with
 a call to a separately compiled backend. Cortex-M lowering instead rewrites
 supported patterns as registered `cortex_m.*` operators that the ExecuTorch
-runtime dispatches normally. You will not see an `executorch_call_delegate`
-node until the Ethos-U partitioner is added on the next page.
+runtime dispatches normally. You won't see an `executorch_call_delegate`
+node until you add the Ethos-U partitioner.
 {{% /notice %}}
 
-## Export the model for Cortex-M
+### Export the model for Cortex-M
 
 Use the provided script to lower the model to Cortex-M only, by specifying `--mode cortex-m`:
 
@@ -88,7 +89,7 @@ python .\export_cortex_m_fallback.py `
   {{< /tab >}}
 {{< /tabpane >}}
 
-The relevant output is:
+The expected output is:
 
 ```output
 Relevant targets before Cortex-M lowering:
@@ -103,7 +104,7 @@ cortex_m.quantized_conv2d_nhwc.default: 2
 cortex_m.transpose.default: 1
 ```
 
-Before lowering, the graph contained two general convolution operations (stride-1 and stride-4). The `aten` prefix identifies PyTorch’s ATen operator namespace. These operators describe the computation, but not the hardware or kernel that will perform it. Lowering replaces both with `cortex_m.quantized_conv2d_nhwc`, an INT8 convolution using NHWC layout.
+Before lowering, the graph contained two general convolution operations: stride-1 and stride-4. The `aten` prefix identifies the PyTorch ATen operator namespace. These operators describe the computation, but not the hardware or kernel that will perform it. Lowering replaces both with `cortex_m.quantized_conv2d_nhwc`, an INT8 convolution using NHWC layout.
 
 `aten.topk` is unchanged, so it will use the portable CPU kernel. The `cortex_m.quantize_*`
 and `cortex_m.dequantize_*` operators mark boundaries between floating-point (FP32) and INT8
@@ -111,11 +112,11 @@ regions.
 
 ## What you've accomplished and what's next
 
-You have seen how Cortex-M lowering replaces supported patterns with optimized
+You've seen how Cortex-M lowering replaces supported patterns with optimized
 Cortex-M operators. The convolutions use CMSIS-NN, quantize and dequantize use
 Helium vector implementations, and `topk` remains an ExecuTorch portable
 kernel.
 
-Next, you will see how CMSIS-NN provides optimized CPU fallback when deploying a
+Next, you'll see how CMSIS-NN provides optimized CPU fallback when deploying a
 model to an Ethos-U NPU. The resulting graph combines Ethos-U delegation,
 CMSIS-NN-backed Cortex-M operators, and a portable CPU kernel.
