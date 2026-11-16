@@ -14,7 +14,7 @@ learning_objectives:
     - Build and run the application on a Corstone-300 Ethos-U55 Fixed Virtual Platform (FVP).
 
 prerequisites:
-    - A Windows or Linux PC, or an Apple silicon Mac running macOS 15 or later
+    - A Windows or Linux host machine, or an Apple silicon Mac running macOS 15 or later
     - Visual Studio Code installed
     - Familiarity with PyTorch
     - Basic familiarity with Cortex-M processors and Ethos-U NPUs
