@@ -101,7 +101,7 @@ If activation doesn't start, right-click `vcpkg-configuration.json` in the **Exp
 
 Arm Compiler for Embedded requires an activated license. Select the license indicator next to **Arm Tools**, then select **Activate Arm Keil MDK Community Edition** for evaluation or non-commercial use. Alternatively, you can select **Activate or manage Arm licenses** to use your existing license.
 
- Confirm that the indicator shows an active license before building. For available options, see [Keil Studio license activation](https://mdk-packs.github.io/vscode-cmsis-solution-docs/installation.html#activating-keil-studio).
+Confirm that the indicator shows an active license before building. For available options, see [Keil Studio license activation](https://mdk-packs.github.io/vscode-cmsis-solution-docs/installation.html#activating-keil-studio).
 
 In the **CMSIS** view, select **... > Open Solution in Workspace** and choose `cmsis-executorch-u55.csolution.yml`. Confirm that the active target is `SSE-300-U55`.
 
@@ -207,9 +207,9 @@ docker info
 
 The project `.vscode/fvp.sh` wrapper mounts the project directory into the container, including when it's outside your home directory. Its first run builds the FVP container image.
 
-## Download the example assets
+## Download the Learning Path assets
 
-Download the example folder from the code examples repository.
+Download the example folder for the Learning Path from the code examples repository.
 The archive is pinned to a commit and includes the fallback model, integration
 patch, inspection helpers, and their license. Run the commands from the project root. They create `lp-assets` for the downloaded originals, then copy the four working files into the project root:
 
