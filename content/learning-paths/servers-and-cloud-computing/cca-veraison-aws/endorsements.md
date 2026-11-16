@@ -14,6 +14,18 @@ Now that your Veraison services are deployed into AWS, the next step is to provi
 Return to the command shell where you created the Veraison AWS deployment, and run the following command:
 
 ```bash
+# make sure we have cocli
+mkdir -p "$HOME/.local/bin"
+
+GOBIN="$HOME/.local/bin" go install github.com/veraison/cocli@v0.1.0
+GOBIN="$HOME/.local/bin" go install github.com/veraison/evcli/v2@0e253e8
+
+export PATH="$HOME/.local/bin:$PATH"
+hash -r
+
+command -v cocli
+command -v evcli
+
 cd $HOME/cca_veraison/services/end-to-end
 SCHEME=cca ./end-to-end-aws provision
 ```
@@ -21,6 +33,10 @@ SCHEME=cca ./end-to-end-aws provision
 This command sends the CCA endorsements to your AWS-hosted Veraison deployment. You should see output similar to the following:
 
 ```output
+go: github.com/veraison/cocli@v0.1.0 requires go >= 1.25.0; switching to go1.26.11
+go: github.com/veraison/evcli/v2@v2.2.1-0.20261013091050-0e253e803cfb requires go >= 1.25.0; switching to go1.26.11
+/home/danson/.local/bin/cocli
+/home/danson/.local/bin/evcli
 cocli corim submit --config=/tmp/veraison-aws-client-configs/cocli/config.yaml --corim-file=/home/danson/cca_veraison/services/end-to-end/input/cca-endorsements.cbor '--media-type=application/rim+cbor; profile="tag:arm.com,2025:cca_platform#1.0.0"'
 cocli corim submit --config=/tmp/veraison-aws-client-configs/cocli/config.yaml --corim-file=/home/danson/cca_veraison/services/end-to-end/input/cca-realm-endorsements.cbor '--media-type=application/rim+cbor; profile="tag:arm.com,2025:cca_realm#1.0.0"'
 ```

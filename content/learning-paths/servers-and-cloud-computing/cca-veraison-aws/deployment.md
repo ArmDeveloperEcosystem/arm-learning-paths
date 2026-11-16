@@ -44,18 +44,6 @@ export AWS_DEFAULT_REGION=${AWS_REGION}
 # Verify what bootstrap will use.
 python --version
 python -m pip --version
-
-# make sure we have cocli
-mkdir -p "$HOME/.local/bin"
-
-GOBIN="$HOME/.local/bin" go install github.com/veraison/cocli@v0.1.0
-GOBIN="$HOME/.local/bin" go install github.com/veraison/evcli/v2@0e253e8
-
-export PATH="$HOME/.local/bin:$PATH"
-hash -r
-
-command -v cocli
-command -v evcli
 ```
 
 You should see output similar to:
@@ -63,10 +51,6 @@ You should see output similar to:
 ```output
 Python 3.12.3
 pip 24.0 from /usr/lib/python3/dist-packages/pip (python 3.12)
-go: github.com/veraison/cocli@v0.1.0 requires go >= 1.25.0; switching to go1.26.11
-go: github.com/veraison/evcli/v2@v2.2.1-0.20261013091050-0e253e803cfb requires go >= 1.25.0; switching to go1.26.11
-/home/danson/.local/bin/cocli
-/home/danson/.local/bin/evcli
 ```
 
 Your Ubuntu environment is now ready for creating the Veraison deployment
