@@ -19,7 +19,7 @@ Models share an adapter when they use the same runtime, import flow, confidence 
 
 ### How Scene Detector resolves and validates the model
 
-`ModelRegistry.java` records the exact filename, model name, and runtime label for each package. It also records adapter ID, detector configuration, and default confidence threshold. `ModelImporter.java` rejects unregistered filenames and files larger than 700 MB.
+`ModelRegistry.java` records the exact filename, model name, and runtime label for each package. It also records adapter ID, detector configuration, and default confidence threshold. `ModelImporter.java` rejects unregistered filenames and files larger than 700 MB. The downloader assigns unique import names when a package publishes a generic filename, such as `model.pte`.
 
 The importer copies the file to temporary application-private storage. It then asks the adapter named by the descriptor to create and close a runner before the file replaces the installed model. 
 
@@ -54,29 +54,31 @@ The detector profiles isolate the parts that differ:
 | Strategy | Supplied models | Main responsibility |
 | --- | --- | --- |
 | `ExecuTorchYoloDetector.java` | YOLOv5s, YOLOv8s, and YOLOv9s | Select the matching YOLO input and output profile |
+| `ExecuTorchYoloxDetector.java` | YOLOX-S | Prepare BGR input and decode separate prediction heads |
 | `LiteRtYoloDetector.java` | YOLO11n and YOLO26n | Select input precision, XNNPACK flags, and output decoding |
 
 ### How Scene Detector prepares and decodes YOLO models
 
-`ExecuTorchYoloDetector.java` selects a profile from the descriptor. The three YOLO models share a float32 RGB tensor with shape `[1, 3, 640, 640]`, but they don't share the complete input and output contract. 
+`ExecuTorchYoloDetector.java`, `ExecuTorchYoloxDetector.java`, and `LiteRtYoloDetector.java` implement the registered detector profiles. The ExecuTorch models accept float32 tensors with shape `[1, 3, 640, 640]`. Their channel order, pixel range, image preparation, and outputs depend on the profile.
 
-The following table compares output, score calculation, and non-maximum suppression (NMS) intersection-over-union (IoU) between the three YOLO models: 
+The following table compares image preparation, output, score calculation, and non-maximum suppression (NMS) intersection-over-union (IoU) between the profiles:
 
 | Profile | Image preparation | Output | Score calculation |  NMS IoU |
 | --- | --- | --- | --- | --- |
 | YOLOv5 | Resize directly to `640 × 640`, values in `[0, 1]` | `[1, 25200, 85]` | Objectness × best class score | `0.45` |
 | YOLOv8 | Resize directly to `640 × 640`, values in `[0, 1]` | `[1, 84, N]` | Best class score | `0.45` |
 | YOLOv9 | Letterbox to `640 × 640`, padding with `114/255` | `[1, 84, 8400]` | Every class score above the threshold | `0.70` |
+| YOLOX-S | Letterbox to `640 × 640`, top-left anchored, BGR values in `[0, 255]`, padding with `114` | Nine tensors: box `[1, 4, H, W]`, objectness `[1, 1, H, W]`, and class `[1, 80, H, W]` at `H = W = 80, 40, 20` | Sigmoid objectness × sigmoid best class logit | `0.65` |
 | YOLO26 | Letterbox to `640 × 640`, padding with `114/255` | `[1, 300, 6]` | Confidence supplied in each detection row | `0.40` |
 | YOLO11 | Letterbox to `640 × 640`, padding with `114/255`, then quantize to INT8 | `[1, 84, 8400]` | Every class score above the threshold | `0.70` |
 
 Direct resizing changes the image aspect ratio. The application scales the decoded coordinates independently across width and height to return to the original image.
 
-Letterboxing preserves the aspect ratio. The application records the resize scale and padding, subtracts the padding from each decoded box, then divides by the scale.
+Letterboxing preserves the aspect ratio. The application records the resize scale and padding, subtracts the padding from each decoded box, then divides by the scale. YOLOX-S anchors the resized image at the top left, so padding appears only below and to the right and the coordinate offsets are zero.
 
 ### How Scene Detector runs an ExecuTorch detector
 
-The supplied YOLO detector memory-maps the imported `.pte` file, loads its `forward` method, and checks that the method declares the XNNPACK backend. It converts the prepared bitmap to a channels-first float array and runs one inference call.
+The supplied ExecuTorch detectors memory-map the imported `.pte` file, load its `forward` method, and check that the method declares the XNNPACK backend. Each detector converts the prepared bitmap to a channels-first float array and runs one inference call.
 
 The model packages use INT8-quantized operations internally, but their application input and output tensors are float32. Quantization is part of the exported graph rather than an instruction to pass an INT8 bitmap from Java.
 
@@ -90,9 +92,11 @@ YOLO26 accepts a float32 channels-first input and returns 300 six-value detectio
 
 YOLOv5, YOLOv8, YOLOv9, and YOLO11 output box coordinates as center `x`, center `y`, width, and height. The detector converts these values to left, top, right, and bottom coordinates. YOLO26 already returns left, top, right, and bottom coordinates.
 
-YOLOv5 includes a separate objectness value. YOLOv8 and YOLOv9 don't. YOLOv9 also uses multi-label decoding, so one candidate can produce more than one class entry before filtering.
+YOLOv5 and YOLOX-S include a separate objectness value. YOLOv8 and YOLOv9 don't. YOLOv9 also uses multi-label decoding, so one candidate can produce more than one class entry before filtering.
 
-The application applies a sigmoid only when a score falls outside `[0, 1]`, which indicates that the package returned logits rather than probabilities.
+YOLOX-S returns raw prediction heads at strides 8, 16, and 32. Its detector adds each cell's grid position to the predicted center offsets and multiplies by the stride. It exponentiates predicted widths and heights and multiplies them by the stride. It applies sigmoid to the objectness and class logits, multiplies objectness by the highest class probability, and maps retained boxes back to the original image.
+
+The YOLOv5, YOLOv8, YOLOv9, and LiteRT profiles apply sigmoid only when scores fall outside `[0, 1]`, indicating logits rather than probabilities. YOLOX-S always applies sigmoid because its separate prediction heads contain logits.
 
 ### How Scene Detector handles duplicate detections
 
