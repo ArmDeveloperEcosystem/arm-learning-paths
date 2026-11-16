@@ -80,7 +80,7 @@ In the ANA Web IDE, open **Explorer** and drag `automotive-parked-cars-640x480.m
 
 In **Lab Manager → Device Connections → Audio/Video Inputs**, find `vsock-camera-0` under **Camera Inputs**. Confirm that **None** is currently selected. The following screenshot was captured while the virtual platform was running, so the controls are greyed out:
 
-![ANA Lab Manager Audio/Video Inputs page showing vsock-camera-0 with None selected#center](ana_camera_inputs_none.png "Find vsock-camera-0 and select None")
+![ANA Lab Manager Audio/Video Inputs page showing vsock-camera-0 with None selected#center](ana_camera_inputs_none.webp "Find vsock-camera-0 and select None")
 
 If **None** isn't selected, stop the virtual platform. Select **None**, then select **Save** and restart the virtual platform.
 

@@ -31,7 +31,7 @@ Now follow these steps:
 - Choose the image for your virtual machine (for example, **Ubuntu 24.04 LTS**) and select **Arm64** as the **VM architecture**.
 - In the **Size** field, select **See all sizes** and select the **D-series v7** family of virtual machines. Select **D4ps_v7** from the list.
 
-![Azure portal VM size selection#center](images/instance.png "Select a VM size")
+![Azure portal VM size selection#center](images/instance.webp "Select a VM size")
 
 - Next, select **SSH public key** as the **Authentication type**. Azure can generate an **SSH key pair** for you and store it for future use. This is a fast, simple, and secure way to connect to your virtual machine.
 - Enter the **Administrator username** for your VM.

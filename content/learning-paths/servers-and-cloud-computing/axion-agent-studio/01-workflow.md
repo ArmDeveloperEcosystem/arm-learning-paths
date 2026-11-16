@@ -15,7 +15,7 @@ The prepared repository contains a working storefront, catalog, and checkout. Yo
 
 ![Technical deployment diagram showing hosted Gemini outside GKE, an N4A manager, three separate Gemma sandbox Pods sharing one C4A VM, and an N4A validator. The manager coordinates all service calls and enables the shop only after validation passes.#center](images/architecture-technical.svg "Deployment boundaries and numbered workflow stages. VM capacity is distinct from Pod requests and limits.")
 
-[Open the full-size architecture diagram (SVG)](../images/architecture-technical.svg) · [Download the high-resolution PNG](../images/architecture-technical.png)
+[Open the full-size architecture diagram (SVG)](../images/architecture-technical.svg) · [Download the high-resolution PNG](../images/architecture-technical.webp)
 
 1. The **manager** calls hosted Gemini through Vertex AI to extract a supported policy and a plan for three roles.
 2. The **Backend Engineer** and **Frontend Engineer** run concurrently. Each calls its own local Gemma server. The backend produces `pricing.py`. The frontend produces four constrained fragments that the worker assembles into the existing `checkout.html`.
