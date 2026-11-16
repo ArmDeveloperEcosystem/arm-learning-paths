@@ -188,7 +188,9 @@ Some AWS accounts may have permissions boundaries enabled (such as assumed role 
 Once the account-specific config file is created, define `AWS_ACCOUNT_CFG` environment variable to point to it and then create the deployment:
 
 ```bash
-export AWS_ACCOUNT_CFG=misc/arm.cfg  # replace with path to your config
+cp ./misc/arm.cfg $HOME/varaison-aws.cfg
+export AWS_ACCOUNT_CFG="$HOME/veraison-aws.cfg"
+source env/env.bash "$AWS_ACCOUNT_CFG"
 make deploy
 ```
 
