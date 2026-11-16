@@ -28,7 +28,7 @@ Compare a complete group with one at the edge:
 | Load the remaining rows | 7–12 | Load the third and fourth rows into ZA1–ZA2. |
 | Store the padded data | 13–24 | Write the rows of ZA0–ZA2 into **Output Padded Data**. |
 
-A predicate register controls which columns are active and limits the load in the third step to two columns. This leaves the other columns zero-padded. The padded data store happens with all columns active, so zero padding is copied verbatim to the output buffer. 
+A predicate register controls which columns are active and limits the third step of the first row load to two columns. This leaves the other columns zero-padded. The padded data store happens with all columns active, so zero padding is copied verbatim to the output buffer. 
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/pad32-b"
