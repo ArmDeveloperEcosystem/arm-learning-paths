@@ -21,10 +21,14 @@ The following visualization depicts the padded matrix B. If the embedded visuali
 
 Compare a complete group with one at the edge:
 
-1. The first three steps load the first row of **Input Matrix B** into rows of ZA0. The third step loads only the last two columns of the matrix, and leaves the other columns zero-padded. This is achieved by using a predicate register to control which columns are active.
-2. The next three steps load the second row of **Input Matrix B** into rows of ZA0 - ZA1. The final load is zero-padded.
-3. The following six steps finish loading the third and fourth rows into ZA1 - ZA2.
-4. The next 12 steps write the rows of ZA0 to ZA2 into rows of **Output Padded Data**. The rows are written with all columns active, so the zero padding is copied verbatim to the output buffer.
+| Stage | Visualization steps | Operation |
+| --- | --- | --- |
+| Load the first row | 1–3 | Load the first row of **Input Matrix B** into ZA0. |
+| Load the second row | 4–6 | Load the second row of **Input Matrix B** into ZA0–ZA1, with zero padding on the final load. |
+| Load the remaining rows | 7–12 | Load the third and fourth rows into ZA1–ZA2. |
+| Store the padded data | 13–24 | Write the rows of ZA0–ZA2 into **Output Padded Data**. |
+
+A predicate register controls which columns are active and limits the load in the third step to two columns. This leaves the other columns zero-padded. The padded data store happens with all columns active, so zero padding is copied verbatim to the output buffer. 
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/pad32-b"
