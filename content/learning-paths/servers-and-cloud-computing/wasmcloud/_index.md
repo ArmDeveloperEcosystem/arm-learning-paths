@@ -37,30 +37,30 @@ generated_summary_faq:
     `wash dev` and verify its response. Then, you'll measure warm request time, latency, and throughput
     under one connection and concurrent load. Finally, you'll interpret the results and consider
     when wasmCloud instance pooling can help your application.
-  # faqs:
-  # - question: How do I know the wasmCloud development host started correctly?
-  #   answer: >-
-  #     Wait until `wash dev` prints `INFO listening for HTTP requests address=http://127.0.0.1:8000`.
-  #     Keep that terminal running while you send requests from your second SSH terminal.
-  # - question: Which endpoint should I send HTTP requests to during testing?
-  #   answer: >-
-  #     Send requests to `http://127.0.0.1:8000/` from the second SSH terminal on the same server.
-  #     The development host listens on the server's loopback interface.
-  # - question: Where do I modify the HTTP response, and how do I confirm the change?
-  #   answer: >-
-  #     Change the greeting in `src/lib.rs`, stop `wash dev` with **Ctrl+C**, and start `wash dev`
-  #     again. After the listener message appears, send another request and check that the body
-  #     says `hello from Graviton`.
-  # - question: What metrics should I record for each test?
-  #   answer: >-
-  #     For the five timed `curl` requests, record the HTTP status and total time. For the
-  #     one-connection and 32-connection `wrk` tests, save latency, requests per second, and any
-  #     errors or timeouts.
-  # - question: What should I check if my results vary between runs?
-  #   answer: >-
-  #     Keep `wash dev` running and stop other load tests or builds. Run the client on the same
-  #     server, then repeat each test with the same duration, thread count, and connection count.
-  #     Compare complete runs before drawing conclusions from small differences.
+  faqs:
+  - question: How do I know the wasmCloud development host started correctly?
+    answer: >-
+      Wait until `wash dev` prints `INFO listening for HTTP requests address=http://127.0.0.1:8000`.
+      Keep that terminal running while you send requests from your second SSH terminal.
+  - question: Which endpoint should I send HTTP requests to during testing?
+    answer: >-
+      Send requests to `http://127.0.0.1:8000/` from the second SSH terminal on the same server.
+      The development host listens on the server's loopback interface.
+  - question: Where do I modify the HTTP response, and how do I confirm the change?
+    answer: >-
+      Change the greeting in `src/lib.rs`, stop `wash dev` with **Ctrl+C**, and start `wash dev`
+      again. After the listener message appears, send another request and check that the body
+      says `hello from Graviton`.
+  - question: What metrics should I record for each test?
+    answer: >-
+      For the five timed `curl` requests, record the HTTP status and total time. For the
+      one-connection and 32-connection `wrk` tests, save latency, requests per second, and any
+      errors or timeouts.
+  - question: What should I check if my results vary between runs?
+    answer: >-
+      Keep `wash dev` running and stop other load tests or builds. Run the client on the same
+      server, then repeat each test with the same duration, thread count, and connection count.
+      Compare complete runs before drawing conclusions from small differences.
 # END generated_summary_faq
 
 author:

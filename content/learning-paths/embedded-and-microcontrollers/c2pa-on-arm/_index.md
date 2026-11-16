@@ -40,32 +40,32 @@ generated_summary_faq:
     credential. Then, you'll inspect the manifest and distinguish signature, content-binding, and
     signer-trust results. You'll compare the provenance of the image in the Content Authenticity Initiative (CAI) web validator.
     Finally, you'll modify a copy and identify the resulting content-binding failure.
-#   faqs:
-#   - question: Which files do I need before signing the image?
-#     answer: >-
-#       Keep the unsigned `image.jpg` and your `manifest.json` definition in the same `c2pa-demo`
-#       directory. Run the signing command from that directory so you can use their filenames
-#       without full paths.
-#   - question: How do I read the C2PA Tool result for the signed image?
-#     answer: >-
-#       Check `claimSignature.validated` for the signature and `assertion.dataHash.match` for the
-#       image binding. You'll also see `signingCredential.untrusted` because the example uses a
-#       development certificate. Read these codes alongside the `Valid` validation state.
-#   - question: Does signing overwrite my original image?
-#     answer: >-
-#       No. You write the signed copy to `image-signed.jpg`, leaving the unsigned `image.jpg`
-#       unchanged.
-#   - question: What should I compare in the CAI web validator?
-#     answer: >-
-#       Open `image-signed.jpg` and compare its displayed origin, creation action, and issuer
-#       with your C2PA Tool report. You'll see an **Unrecognized** issuer warning for the
-#       development credential. The web panel doesn't show separate signature or binding
-#       status codes.
-#   - question: How do I identify a content-binding failure after changing the image?
-#     answer: >-
-#       Check `image-modified.jpg` in the web validator for an **Invalid** status. In the
-#       C2PA Tool report, `assertion.dataHash.mismatch` identifies the failed image binding,
-#       while `claimSignature.validated` shows that the unchanged claim signature still verifies.
+  faqs:
+  - question: Which files do I need before signing the image?
+    answer: >-
+      Keep the unsigned `image.jpg` and your `manifest.json` definition in the same `c2pa-demo`
+      directory. Run the signing command from that directory so you can use their filenames
+      without full paths.
+  - question: How do I read the C2PA Tool result for the signed image?
+    answer: >-
+      Check `claimSignature.validated` for the signature and `assertion.dataHash.match` for the
+      image binding. You'll also see `signingCredential.untrusted` because the example uses a
+      development certificate. Read these codes alongside the `Valid` validation state.
+  - question: Does signing overwrite my original image?
+    answer: >-
+      No. You write the signed copy to `image-signed.jpg`, leaving the unsigned `image.jpg`
+      unchanged.
+  - question: What should I compare in the CAI web validator?
+    answer: >-
+      Open `image-signed.jpg` and compare its displayed origin, creation action, and issuer
+      with your C2PA Tool report. You'll see an **Unrecognized** issuer warning for the
+      development credential. The web panel doesn't show separate signature or binding
+      status codes.
+  - question: How do I identify a content-binding failure after changing the image?
+    answer: >-
+      Check `image-modified.jpg` in the web validator for an **Invalid** status. In the
+      C2PA Tool report, `assertion.dataHash.mismatch` identifies the failed image binding,
+      while `claimSignature.validated` shows that the unchanged claim signature still verifies.
 # END generated_summary_faq
 
 author:

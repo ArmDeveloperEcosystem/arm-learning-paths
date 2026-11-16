@@ -34,26 +34,26 @@ generated_summary_faq:
     arrays on an Arm server. First, you'll learn how MATCH compares vector elements with search keys.
     Then, you'll write scalar, vectorized, and unrolled search functions. Finally, you'll add a benchmark harness,
     compile the program, and compare latency, throughput, and speedups at different hit rates.
-#   faqs:
-#   - question: What should I check before building and running the code?
-#     answer: >-
-#       You need an Arm-based instance with SVE2 support or an Arm AGI CPU platform running Ubuntu
-#       24.04. You also need a GCC compiler with SVE support.
-#   - question: Where do I add the scalar and SVE2 MATCH implementations?
-#     answer: >-
-#       Add the search functions to `sve2_match_demo.c`, then append the benchmark harness after
-#       those functions.
-#   - question: What does a successful search return?
-#     answer: >-
-#       A successful search returns `1` when any array element matches any key, and `0` otherwise.
-#    - question: How does hit rate affect the SVE2 MATCH comparison?
-#     answer: >-
-#       You'll see larger speedups at low hit rates in the sample results. As matches become more
-#       frequent, early termination narrows the difference between SVE2 MATCH and scalar search.
-#   - question: How do I change the benchmark’s hit rate?
-#     answer: >-
-#       Pass a hit probability as the third argument to `./sve2_match_demo`, after the array
-#       length and iteration count.
+  faqs:
+  - question: What should I check before building and running the code?
+    answer: >-
+      Use an Arm system with SVE2 support, such as an Arm AGI CPU platform, and a GCC compiler
+      with SVE support. This guide uses Ubuntu 24.04.
+  - question: Where do I add the scalar and SVE2 MATCH implementations?
+    answer: >-
+      Add the search functions to `sve2_match_demo.c`, then append the benchmark harness after
+      those functions.
+  - question: What does a successful search return?
+    answer: >-
+      A successful search returns `1` when any array element matches any key, and `0` otherwise.
+  - question: How does hit rate affect the SVE2 MATCH comparison?
+    answer: >-
+      You'll see larger speedups at low hit rates in the sample results. As matches become more
+      frequent, early termination narrows the difference between SVE2 MATCH and scalar search.
+  - question: How do I change the benchmark’s hit rate?
+    answer: >-
+      Pass a hit probability as the third argument to `./sve2_match_demo`, after the array
+      length and iteration count.
 # END generated_summary_faq
 
 author: Pareena Verma

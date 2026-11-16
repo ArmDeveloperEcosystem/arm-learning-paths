@@ -22,31 +22,31 @@ generated_summary_faq:
     warm pool, claim a sandbox, and verify its restrictions. Next, you'll correct a failing CSV
     analysis and retrieve reports. You'll then inspect the environment interactively, connect
     Antigravity to run code remotely, and clean up cloud resources.
-  # faqs:
-  # - question: Which node pool should I use to run sandboxes on Google Axion?
-  #   answer: >-
-  #     Use the Arm gVisor pool backed by `c4a-standard-2` machines. The provided
-  #     `sandbox.yaml` selects that node pool for your Python sandbox workloads.
-  # - question: What should I set in my terminal before running the cluster commands?
-  #   answer: >-
-  #     Keep `LP_WORKDIR` set and run `cd "$LP_WORKDIR"` before continuing. If you open
-  #     a new terminal, source `env.sh` if you saved it, or re-export variables such as
-  #     `LOCATION`, `REGION`, `CLUSTER_NAME`, `NODE_POOL_NAME`, and `MACHINE_TYPE`.
-  # - question: How do I verify the sandbox runs as non-root and has restricted filesystem access?
-  #   answer: >-
-  #     Run the Python test and check that it reports UID 1000. You should also see a
-  #     denied write under `/etc` and a successful write to `/workspace`. Later, use
-  #     `kubectl exec` to inspect the running sandbox interactively.
-  # - question: What result should I expect from the CSV analysis demo?
-  #   answer: >-
-  #     Your first run with `analyze_sales_initial.py` fails as expected. The runner
-  #     replaces it with `analyze_sales.py` in the same sandbox workspace, runs six
-  #     tests, and retrieves `summary.json` and `report.html`.
-  # - question: How do I keep Antigravity from running code on my local machine?
-  #   answer: >-
-  #     In `agy`, open `/permissions` and select **Project**. Allow
-  #     `mcp(gke-sandbox/*)` and deny `command(*)`, `read_file(*)`, and
-  #     `write_file(*)`. Check that your session uses the `gke-sandbox` tools.
+  faqs:
+  - question: Which node pool should I use to run sandboxes on Google Axion?
+    answer: >-
+      Use the Arm gVisor pool backed by `c4a-standard-2` machines. The provided
+      `sandbox.yaml` selects that node pool for your Python sandbox workloads.
+  - question: What should I set in my terminal before running the cluster commands?
+    answer: >-
+      Keep `LP_WORKDIR` set and run `cd "$LP_WORKDIR"` before continuing. If you open
+      a new terminal, source `env.sh` if you saved it, or re-export variables such as
+      `LOCATION`, `REGION`, `CLUSTER_NAME`, `NODE_POOL_NAME`, and `MACHINE_TYPE`.
+  - question: How do I verify the sandbox runs as non-root and has restricted filesystem access?
+    answer: >-
+      Run the Python test and check that it reports UID 1000. You should also see a
+      denied write under `/etc` and a successful write to `/workspace`. Later, use
+      `kubectl exec` to inspect the running sandbox interactively.
+  - question: What result should I expect from the CSV analysis demo?
+    answer: >-
+      Your first run with `analyze_sales_initial.py` fails as expected. The runner
+      replaces it with `analyze_sales.py` in the same sandbox workspace, runs six
+      tests, and retrieves `summary.json` and `report.html`.
+  - question: How do I block Antigravity's built-in local tools?
+    answer: >-
+      In `agy`, open `/permissions` and select **Project**. Allow
+      `mcp(gke-sandbox/*)` and deny `command(*)`, `read_file(*)`, and
+      `write_file(*)`. Check that your session uses the `gke-sandbox` tools.
 # END generated_summary_faq
 
 author: Jason Andrews

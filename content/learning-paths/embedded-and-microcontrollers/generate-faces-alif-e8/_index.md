@@ -40,31 +40,30 @@ generated_summary_faq:
     transformer and decoder to the Arm Ethos-U85 NPU. Next, you'll provision the Cortex-M55 boot and
     debug flow, build the application, and generate human faces. Finally, you'll verify NPU execution
     through the DevKit LCD, UART output, and performance counters.
-#   faqs:
-#   - question: What should I check on the DevKit before connecting it to my computer?
-#     answer: >-
-#       Before you connect the DevKit, unplug all USB cables before changing any jumpers. Verify
-#       that the jumpers match the factory defaults documented in the DK-E8 User Guide. This helps
-#       you avoid power or boot issues during setup.
-#   - question: Which USB port do I use for programming, and how do I confirm the board is powered?
-#     answer: >-
-#       Connect a USB-C cable to the PRG USB port on the bottom edge of the DevKit. You can confirm
-#       that the board has power when a green LED illuminates near the E1 device.
-#   - question: Which repository branch do I need for this example?
-#     answer: >-
-#       Clone the CMSIS-ExecuTorch repository using the `hackathon-pico-faces` branch. Use the
-#       `--branch hackathon-pico-faces --single-branch` options, then open the workspace in VS Code.
-#   - question: Which serial settings and switch position should I use to view application output?
-#     answer: >-
-#       Set **SW4** to **UART4** and open **Serial Monitor** on the **PRG USB** port at `115200` baud,
-#       eight data bits, no parity, and one stop bit. If the port was open before changing **SW4**,
-#       close and reopen it.
-#   - question: What result should I expect when I start a debug session and run the firmware?
-#     answer: >-
-#       From the **CMSIS** view, select **Build**, then **Debug**. Keil Studio starts the J-Link GDB
-#       server over SWD and loads the application into MRAM, stopping at `main`. Press **F5** to
-#       continue. The DevKit displays a 128 x 128 RGB face, and UART output confirms Arm Ethos-U85
-#       execution.
+  faqs:
+  - question: What should I check on the DevKit before connecting it to my computer?
+    answer: >-
+      Before you connect the DevKit, unplug all USB cables before changing any jumpers. Keep
+      **JP5** on pins **1–2** and **JP7** on pins **3–4**, and set **SW4** to **SEUART**.
+  - question: Which USB port do I use for programming, and how do I confirm the board is powered?
+    answer: >-
+      Connect a USB-C cable to the PRG USB port on the bottom edge of the DevKit. You can confirm
+      that the board has power when its power LED lights.
+  - question: Which repository branch do I need for this example?
+    answer: >-
+      Clone the CMSIS-ExecuTorch repository using the `hackathon-pico-faces` branch. Use the
+      `--branch hackathon-pico-faces --single-branch` options, then open the workspace in VS Code.
+  - question: Which serial settings and switch position should I use to view application output?
+    answer: >-
+      Set **SW4** to **UART4** and open **Serial Monitor** on the **PRG USB** port at `115200` baud,
+      eight data bits, no parity, and one stop bit. If the port was open before changing **SW4**,
+      close and reopen it.
+  - question: What result should I expect when I start a debug session and run the firmware?
+    answer: >-
+      From the **CMSIS** view, select **Build**, then **Debug**. Keil Studio starts the J-Link GDB
+      server over SWD and loads the application into MRAM, stopping at `main`. Press **F5** to
+      continue. Check the displayed face and `Test_result: PASS` for functional operation.
+      Check for nonzero NPU counters in the UART output to verify Arm Ethos-U85 activity.
 # END generated_summary_faq
 
 author: Ash Naik

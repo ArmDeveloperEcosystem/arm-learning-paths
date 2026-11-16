@@ -40,30 +40,30 @@ generated_summary_faq:
     incomplete-edge transposes. Next, you'll see how outer products accumulate results, then pack
     matrix A and pad matrix B for a GEMM. Finally, you'll compare gather loads with a transposed-and-interleaved
     layout and confirm that both produce the same output.
-  # faqs:
-  # - question: How do data type and vector length change the ZA tile layout?
-  #   answer: >-
-  #     Use **Data Type** and **Scalable Vector Length** to change the layout view. You'll see
-  #     how the same ZA storage maps to different numbers and sizes of logical tiles.
-  # - question: How do I check a transpose with an incomplete edge?
-  #   answer: >-
-  #     Compare **Input Matrix Data** with **Output Matrix Data**. You can follow the highlighted
-  #     edge values to confirm that each reaches its transposed position without being lost or duplicated.
-  # - question: How does a vector outer product contribute to matrix C?
-  #   answer: >-
-  #     Follow one column of matrix A and the corresponding row of matrix B. You'll see their
-  #     outer product add a partial result to multiple elements of matrix C at the same time.
-  #     Repeat for each column and row pair to see the complete result accumulate in ZA.
-  # - question: What should I check after packing A and padding B?
-  #   answer: >-
-  #     In **Output Packed Data**, you should see matrix A's values in the new order, with zeros
-  #     where its final tile has no input rows. In **Output Padded Data**, check that matrix B's
-  #     original values remain in order and zeros fill the inactive columns.
-  # - question: What changes between the gather-load and interleaved GEMM views?
-  #   answer: >-
-  #     Compare how each view loads matrix A. With gather loads, you read values from non-contiguous
-  #     addresses. With the transposed-and-interleaved layout, you load from contiguous addresses. You can
-  #     compare **Output Matrix Data** in both views to confirm that the results are identical.
+  faqs:
+  - question: How do data type and vector length change the ZA tile layout?
+    answer: >-
+      Use **Data Type** and **Scalable Vector Length** to change the layout view. You'll see
+      how the same ZA storage maps to different numbers and sizes of logical tiles.
+  - question: How do I check a transpose with an incomplete edge?
+    answer: >-
+      Compare **Input Matrix Data** with **Output Matrix Data**. You can follow the highlighted
+      edge values to confirm that each reaches its transposed position without being lost or duplicated.
+  - question: How does a vector outer product contribute to matrix C?
+    answer: >-
+      Follow one column of matrix A and the corresponding row of matrix B. You'll see their
+      outer product add a partial result to multiple elements of matrix C at the same time.
+      Repeat for each column and row pair to see the complete result accumulate in ZA.
+  - question: What should I check after packing A and padding B?
+    answer: >-
+      In **Output Packed Data**, you should see matrix A's values in the new order, with zeros
+      where its final tile has no input rows. In **Output Padded Data**, check that matrix B's
+      original values remain in order and zeros fill the inactive columns.
+  - question: What changes between the gather-load and interleaved GEMM views?
+    answer: >-
+      Compare how each view loads matrix A. With gather loads, you read values from non-contiguous
+      addresses. With the transposed-and-interleaved layout, you load from contiguous addresses. You can
+      compare **Output Matrix Data** in both views to confirm that the results are identical.
 # END generated_summary_faq
 
 author:

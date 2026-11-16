@@ -33,28 +33,28 @@ generated_summary_faq:
   faq_source_hash: a97a3dc25f0e6079af133571a970e3ac8a2587589c0ad21e7db60d99f72f2230
   summary: >-
     You'll build a small arm64 Mach-O fixture on macOS. Then, you'll use `otool` and `llvm-objdump` to inspect it for SME and SME2 instructions. You'll compare strings and symbols with decoded executable code, checking instruction bytes, operands, addresses, and surrounding context. You'll also test comparison binaries, then combine the `llvm-objdump` and `awk` checks in a reusable script. 
-  # faqs:
-  # - question: How do I know I'm inspecting the correct architecture slice?
-  #   answer: >-
-  #     Select the `arm64` slice when you inspect a universal Mach-O binary. Use options such as
-  #     `-arch arm64` with `otool`, `strings`, and `nm`, and confirm the slice with `lipo -info`.
-  # - question: Do SME2-related strings or symbols prove that the binary contains SME2 instructions?
-  #   answer: >-
-  #     No. Strings and symbol names can suggest that the program relates to SME2, but that alone
-  #     doesn't establish that SME or SME2 instructions are present. Inspect decoded executable code instead.
-  # - question: How can I confirm that a decoded instruction matches its encoding?
-  #   answer: >-
-  #     Compare the instruction bytes, mnemonic, operands, and address in `llvm-objdump` output.
-  #     Cross-check the decoded instruction and address with `otool` for the same binary.
-  # - question: What does finding SME2 instructions in the binary tell me about runtime behavior?
-  #   answer: >-
-  #     It confirms that the instructions are present in the inspected executable code. It doesn't
-  #     show whether the application calls that code or whether running it improves performance.
-  # - question: How do I use the verification script with a comparison binary?
-  #   answer: >-
-  #     Put `verify-static-sme2.sh`, `strict-sme2.awk`, and the compiled binaries in the working
-  #     directory. Run the script with the binary name; the positive fixture should pass, while
-  #     the string-only control should report no matching instructions.
+  faqs:
+  - question: How do I know I'm inspecting the correct architecture slice?
+    answer: >-
+      Select the `arm64` slice when you inspect a universal Mach-O binary. Use options such as
+      `-arch arm64` with `otool`, `strings`, and `nm`, and confirm the slice with `lipo -info`.
+  - question: Do SME2-related strings or symbols prove that the binary contains SME2 instructions?
+    answer: >-
+      No. Strings and symbol names can suggest that the program relates to SME2, but that alone
+      doesn't establish that SME or SME2 instructions are present. Inspect decoded executable code instead.
+  - question: How can I confirm that a decoded instruction matches its encoding?
+    answer: >-
+      Compare the instruction bytes, mnemonic, operands, and address in `llvm-objdump` output.
+      Cross-check the decoded instruction and address with `otool` for the same binary.
+  - question: What does finding SME2 instructions in the binary tell me about runtime behavior?
+    answer: >-
+      It confirms that the instructions are present in the inspected executable code. It doesn't
+      show whether the application calls that code or whether running it improves performance.
+  - question: How do I use the verification script with a comparison binary?
+    answer: >-
+      Put `verify-static-sme2.sh`, `strict-sme2.awk`, and the compiled binaries in the working
+      directory. Run the script with the binary name; the positive fixture should pass, while
+      the string-only control should report no matching instructions.
 # END generated_summary_faq
 
 author: Geremy Cohen

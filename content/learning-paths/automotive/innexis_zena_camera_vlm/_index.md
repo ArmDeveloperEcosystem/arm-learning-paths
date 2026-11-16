@@ -46,30 +46,31 @@ generated_summary_faq:
     inspect a JPEG from `/dev/video0`, and download a matching model and projector for
     `llama-cli`. Finally, you'll save the image-inference log and exit status. Optionally, you can capture
     frames from moving traffic and compare two model responses.
-  # faqs:
-  # - question: Do I need to run this in the same guest where I built llama.cpp?
-  #   answer: >-
-  #     Yes. You use the same Zena CSS Linux guest as the prerequisite Learning Path so your
-  #     `llama-cli` binary is available.
-  # - question: How do I check that the virtual camera is configured and reachable from the guest?
-  #   answer: >-
-  #     Check that `virtualcam-bridge@1.service` is active, the file-input command returns `OK`,
-  #     and the `INPUT` readback shows your selected file. Then capture a JPEG from `/dev/video0`
-  #     and inspect it to confirm that the intended image arrived.
-  # - question: Which GStreamer elements should be present before I try to capture a frame?
-  #   answer: >-
-  #     You need `v4l2src`, `videoconvert`, `jpegenc`, `filesink`, and `waylandsink`. Check each
-  #     element with `gst-inspect-1.0` before you capture a frame.
-  # - question: How do I verify the model and `mmproj` files are set correctly for `llama.cpp` image
-  #     inference?
-  #   answer: >-
-  #     You download the pinned model and matching multimodal projector (`mmproj`) from the
-  #     specified revision. Check that both files pass their SHA-256 checks before inference.
-  # - question: What outputs should I expect after running the final command block?
-  #   answer: >-
-  #     You should find `vision-run.exit` and `vision-run.log` in
-  #     `/root/zena-camera-vlm/results/`. Check for exit status `0`, confirm that the log names
-  #     the captured JPEG after `Loaded media from`, and compare the response with your saved image.
+  faqs:
+  - question: Do I need to run this in the same guest where I built llama.cpp?
+    answer: >-
+      Yes. You use the same Zena CSS Linux guest as the prerequisite Learning Path so your
+      `llama-cli` binary is available.
+  - question: How do I check that the virtual camera is configured and reachable from the guest?
+    answer: >-
+      Check that `virtualcam-bridge@1.service` is active, the file-input command returns `OK`,
+      and the `INPUT` readback shows your selected file. Then capture a JPEG from `/dev/video0`
+      and inspect it to confirm that the intended image arrived.
+  - question: Which GStreamer elements should be present before I try to capture a frame?
+    answer: >-
+      Check `v4l2src`, `videoconvert`, `jpegenc`, `filesink`, and `waylandsink` with
+      `gst-inspect-1.0`. The JPEG capture pipeline uses the first four elements;
+      `waylandsink` is checked but isn't part of that pipeline.
+  - question: How do I verify the model and `mmproj` files are set correctly for `llama.cpp` image
+      inference?
+    answer: >-
+      You download the pinned model and matching multimodal projector (`mmproj`) from the
+      specified revision. Check that both files pass their SHA-256 checks before inference.
+  - question: What outputs should I expect after running the final command block?
+    answer: >-
+      You should find `vision-run.exit` and `vision-run.log` in
+      `/root/zena-camera-vlm/results/`. Check for exit status `0`, confirm that the log names
+      the captured JPEG after `Loaded media from`, and compare the response with your saved image.
 # END generated_summary_faq
 
 author: Odin Shen
