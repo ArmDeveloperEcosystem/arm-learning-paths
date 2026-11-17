@@ -40,13 +40,13 @@ device=/sys/class/remoteproc/remoteproc0 name=5000000.m4fss state=running firmwa
 root@pocketbeagle2:~#
 ```
 
-We can also verify that the AWS IoT Greengrass service, from our [Part 1](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/deployment/) series, continues to run:
+We can also verify that the AWS IoT Greengrass service, from [Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/), continues to run:
 
 ```bash
 systemctl status --with-dependencies greengrass-lite.target
 ```
 
-Linux must still report `aarch64`, the M4 must report `running`, and Greengrass services should remain healthy. Use the [Part 1 component verification](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/deployment/) to confirm that `com.arm.HelloGreengrassLiteWorld` still produces its minute-by-minute message if you kept it deployed.
+Linux must still report `aarch64`, the M4 must report `running`, and Greengrass services should remain healthy. Use the verification steps in [Deploy to the thing group and verify Hello World](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/deployment/) to confirm that `com.arm.HelloGreengrassLiteWorld` still produces its minute-by-minute message if you kept it deployed.
 
 Successful completion requires both observations at the same time: the MCU counter advances on MCU_UART0, and Linux remains reachable with its services running. Remoteproc's `running` state alone cannot prove the firmware prints correctly or that a peripheral is configured correctly.
 
@@ -54,7 +54,7 @@ Successful completion requires both observations at the same time: the MCU count
 
 | Symptom | What to inspect |
 | --- | --- |
-| `pb2-m4` is missing | Boot the updated Part 1 image; copying an older bundle does not update an installed root filesystem |
+| `pb2-m4` is missing | Boot the updated Yocto image; copying an older bundle does not update an installed root filesystem |
 | No M4 remote processor | Loaded AM6254 DTB, M4 kernel driver, mailbox, reserved memory, and boot logs |
 | Core is `attached` or `detached` | Bootloader ownership; obtain an offline core rather than forcing a live replacement |
 | ELF header check fails | Use `zephyr.elf` from the M4 build, not an A53 executable or raw binary |
