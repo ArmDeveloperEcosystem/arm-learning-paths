@@ -99,7 +99,20 @@ ads-breadcrumbs:not(:defined) {
     --ads-card-border-radius: 8px;
     --ads-card-padding: 0;
     --ads-card-min-height: 116px;
+    --ads-card-transform-hover: none;
     border: 1px solid transparent;
+    transition: border-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.homepage-topic-card:hover,
+.homepage-topic-card:focus-within {
+    --ads-card-border-color-hover: #848192;
+    --ads-card-box-shadow-hover: #000 @50%, X:0 Y: 3 B:12;
+    border-color: #848192;
+}
+
+.homepage-topic-card:hover {
+    transform: scale(1.01);
 }
 
 .homepage-card-link,
