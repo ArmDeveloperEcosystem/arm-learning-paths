@@ -1,13 +1,13 @@
 ---
 title: "Prepare Yocto Linux and the MCU serial console"
-description: Check the Part 1 M4 integration and connect a 3.3 V serial adapter to MCU_UART0.
+description: Check the M4 integration in your Yocto image and connect a 3.3 V serial adapter to MCU_UART0.
 weight: 3
 layout: "learningpathall"
 ---
 
-## Check the updated Part 1 image
+## Check the updated Yocto image
 
-Continue with the same pocketbeagle2 board, Yocto image, and Greengrass identity from Part 1. Part 2 creates no new AWS resources or IAM roles.
+Continue with the same pocketbeagle2 board, Yocto image, and Greengrass identity from [Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/). This Learning Path creates no new AWS resources or IAM roles.
 
 On the pocketbeagle2 board, check your Linux architecture and M4 support:
 
@@ -27,9 +27,9 @@ The remoteproc index can differ. The helper selects the M4 by its device name; i
 
 {{% notice Important Note %}}
 
-### Update an earlier Part 1 build
+### Update an earlier Yocto image build
 
-Skip this section if your image includes `pb2-m4` and the M4 device appears. If you built Part 1 before the Part 2 additions, download its updated [build bundle](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/pocketbeagle2-scarthgap-build.zip). Back up your local bundle edits, then extract the new bundle over the original bundle directory on the Linux build host:
+Skip this section if your image includes `pb2-m4` and the M4 device appears. If you built the image in [Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/) before the M4 additions, download its updated [build bundle](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/pocketbeagle2-scarthgap-build.zip). Back up your local bundle edits, then extract the new bundle over the original bundle directory on the Linux build host:
 
 ```bash
 unzip -o pocketbeagle2-scarthgap-build.zip -d "$HOME/ti"
@@ -38,9 +38,9 @@ WORKDIR="$HOME/yocto-pocketbeagle2" JOBS=4 \
   ./build-pocketbeagle2.sh --no-sdk
 ```
 
-Reuse the work directory from Part 1. The updated script packages `pb2-m4-tools` and builds a kernel with the M4 driver. Its AM6254 device-tree patch reserves the regions beginning at `0x9cb00000` and `0x9cc00000`, enables the M4 mailbox and remoteproc node, and leaves MCU_UART0 disabled in Linux. Other board revisions are outside this tutorial's scope.
+Reuse the work directory from [Build the PocketBeagle 2 Yocto image](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/build/). The updated script packages `pb2-m4-tools` and builds a kernel with the M4 driver. Its AM6254 device-tree patch reserves the regions beginning at `0x9cb00000` and `0x9cc00000`, enables the M4 mailbox and remoteproc node, and leaves MCU_UART0 disabled in Linux. Other board revisions are outside this tutorial's scope.
 
-Boot the rebuilt image using the [Part 1 flashing instructions](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/setup/). Use a spare card if you need to preserve the current installation. A fresh image does not contain your device credentials or configuration database: repeat Part 1 networking and provisioning before continuing, using the same board identity only on this board. Do not reset a working Greengrass configuration merely to install the MCU helper.
+Boot the rebuilt image using the instructions in [Boot the image and connect the board](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/setup/). Use a spare card if you need to preserve the current installation. A fresh image does not contain your device credentials or configuration database: repeat [Boot the image and connect the board](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/setup/) and [Register and provision the Greengrass core device](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/provision/) before continuing, using the same board identity only on this board. Do not reset a working Greengrass configuration merely to install the MCU helper.
 
 Copying the helper alone is insufficient when the running device tree lacks the M4's reserved memory. Loading a new device tree requires a restart. After boot, rerun `pb2-m4 status` and confirm the core is `offline`.
 

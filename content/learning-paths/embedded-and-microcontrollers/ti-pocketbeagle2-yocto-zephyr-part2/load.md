@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Transfer the ELF to the board
 
-Keep the MCU serial terminal open. From the development host, copy the built executable over the Part 1 network connection:
+Keep the MCU serial terminal open. From the development host, copy the built executable over the network connection you set up in [Boot the image and connect the board](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/setup/):
 
 ```bash
 cd "$HOME/pb2-zephyr-workspace"
