@@ -1,8 +1,6 @@
 ---
 title: E2B
 
-draft: true
-
 description: Install a self-hosted E2B sandbox environment on Arm Linux with Docker Compose, KVM, and Firecracker microVMs.
 
 minutes_to_complete: 25
@@ -24,20 +22,20 @@ E2B provides isolated Linux sandboxes for AI agents and generated code. A self-h
 
 You'll install [E2B Embed](https://github.com/e2b-dev/runtime/tree/main/embed/compose), the official single-host deployment, on an Arm Linux system. E2B Embed uses Docker Compose to run the control plane, Firecracker orchestrator, dashboard, and supporting services on one host.
 
-These instructions are for Ubuntu 24.04 LTS on `aarch64`. E2B requires KVM and Linux kernel 6.10 or later on Arm.
+These instructions are for Ubuntu 24.04 LTS on `aarch64`. E2B requires kernel-based virtual machine (KVM) and Linux kernel 6.10 or later on Arm.
 
 ## Before you begin
 
-Use a dedicated Arm Linux host with KVM, such as an Arm AGI CPU platform or an Arm-based bare-metal cloud instance. The installation loads kernel modules, reserves huge pages, creates host directories and network namespaces, and changes host networking and system settings.
+Use a dedicated Arm Linux host with KVM, such as an Arm AGI CPU platform or an Arm-based bare-metal cloud instance. The installation loads kernel modules and reserves huge pages. It creates host directories and network namespaces, and changes host networking and system settings.
 
-You need:
+You need the following prerequisites:
 
 - Ubuntu 24.04 LTS on `aarch64`
 - Linux kernel 6.10 or later
 - KVM and the TUN/TAP device
 - A 4 KiB page-size kernel and cgroup v2
 - Sudo access
-- Docker Engine 27 or later and Docker Compose 2.24 or later
+- Docker Engine 27 or later, and Docker Compose 2.24 or later
 - 12 GiB of RAM and 20 GiB of free disk space, as recommended by E2B
 - Internet access to Docker Hub, Google Artifact Registry, Google Cloud Storage and GitHub
 
@@ -54,15 +52,16 @@ getconf PAGESIZE
 stat -fc %T /sys/fs/cgroup
 ```
 
-Confirm that the output shows:
+Confirm that the output shows the following values:
 
 - `aarch64` for the architecture
 - Kernel version 6.10 or later
 - `4096` for the page size
 - `cgroup2fs` for the cgroup filesystem
 
-{{% notice 64 KiB page-size kernels %}}
-The E2B Embed version used in this guide doesn't support 64 KiB-page kernels on Arm. E2B requires a 4 KiB-page kernel, and Firecracker currently supports only 4 KiB host and guest kernels on `aarch64`. Support for 64 KiB pages is tracked as a [Firecracker feature request](https://github.com/firecracker-microvm/firecracker/issues/6381), not as an experimental E2B feature. If `getconf PAGESIZE` returns `65536`, switch to a 4 KiB-page kernel before continuing. See the [E2B Embed host requirements](https://github.com/e2b-dev/runtime/tree/main/embed/compose#requirements) for more information.
+{{% notice Note %}}
+- The E2B Embed version used in this guide doesn't support 64 KiB-page kernels on Arm. E2B requires a 4 KiB-page kernel, and Firecracker currently supports only 4 KiB host and guest kernels on `aarch64`. Support for 64 KiB pages is currently tracked as a [Firecracker feature request](https://github.com/firecracker-microvm/firecracker/issues/6381). 
+- If `getconf PAGESIZE` returns `65536`, switch to a 4 KiB-page kernel before continuing. For more information, see [E2B Embed host requirements](https://github.com/e2b-dev/runtime/tree/main/embed/compose#requirements).
 {{% /notice %}}
 
 If Ubuntu 24.04 is still using its original 6.8 kernel, install the current hardware enablement kernel:
@@ -122,9 +121,9 @@ sudo apt update
 sudo apt install -y ca-certificates curl e2fsprogs iproute2 iptables python3-venv rsync
 ```
 
-### Install Docker
+### Confirm Docker installation
 
-If Docker isn't already installed, follow the [Docker Engine install guide](/install-guides/docker/docker-engine/).
+If Docker isn't already installed, follow the [Docker Engine install guide](/install-guides/docker/docker-engine/).  
 
 Add your user to the `docker` group so that the E2B commands don't require `sudo`:
 
@@ -162,7 +161,7 @@ mkdir -p ~/e2b
 cd ~/e2b
 ```
 
-{{% notice Pinned E2B runtime revision %}}
+{{% notice Note %}}
 These commands pin E2B runtime commit `780b991b5e4d814f5a7ef625a21033d75416e0f1` because `main` changes over time and release tag `2026.30` doesn't contain the Embed Compose files. This revision provides matching `compose.yaml` and `.env` files, pins E2B API v0.30.0, and was validated on an Arm AGI CPU. If you select another commit from the [E2B runtime repository](https://github.com/e2b-dev/runtime), download both files from that commit.
 {{% /notice %}}
 
@@ -188,10 +187,10 @@ Start E2B and wait for the base sandbox template to become ready:
 docker compose up -d --wait
 ```
 
-The first run performs host checks, configures the host, downloads the Firecracker artifacts and container images, initializes the databases, and builds the `base` template. The download and build can take several minutes.
+The first run performs host checks, configures the host, and downloads the Firecracker artifacts and container images. It also initializes the databases and builds the `base` template. The download and build can take several minutes.
 
 {{% notice Warning %}}
-The E2B Compose file publishes multiple service ports on every host interface. Keep the host behind a firewall. Only expose ports 3000, 3001, and 3002 to trusted clients, if needed. In particular, don't expose the unauthenticated orchestrator API on port 5008.
+The E2B Compose file publishes multiple service ports on every host interface. Keep the host behind a firewall. Expose ports 3000, 3001, and 3002 only to trusted clients, if needed. In particular, don't expose the unauthenticated orchestrator API on port 5008.
 {{% /notice %}}
 
 ## Verify the installation
@@ -204,13 +203,21 @@ docker compose ps
 
 In the output, confirm that the `ready` service has a status beginning with `Up`. E2B uses this service to indicate that the stack and the `base` template are usable. The other long-running services should also show `Up` and, when a health check is configured, `(healthy)`.
 
-To include the one-time setup services in the output, run:
+Include the one-time setup services in the output:
 
 ```bash
 docker compose ps -a
 ```
+The following setup services should show `Exited (0)`:
 
-Setup services such as `preflight`, `host-setup`, `fetch-artifacts`, the database migrators, `seed`, and `base-template` should show `Exited (0)`. A nonzero exit code or a long-running service that isn't `Up` indicates a failed installation.
+- `preflight`
+- `host-setup`
+- `fetch-artifacts`
+- Database migrators
+- `seed`
+- `base-template`
+
+A nonzero exit code or a long-running service that isn't `Up` indicates a failed installation.
 
 Run the packaged smoke test:
 
@@ -218,13 +225,15 @@ Run the packaged smoke test:
 docker compose --profile test run --rm smoke
 ```
 
-The test creates a sandbox through the E2B SDK, runs a command in the Firecracker microVM, reaches a test service through the client proxy, and deletes the sandbox. Docker prints container status updates before the test result. The final line is similar to:
+The test creates a sandbox through the E2B SDK and runs a command in the Firecracker microVM. It reaches a test service through the client proxy and deletes the sandbox. Docker prints container status updates before the test result. 
+
+The final line of the output is similar to:
 
 ```output
 smoke: ok sandbox=i7hkvuw9l8pybg2bfreo8 port 8080 reached through http://127.0.0.1:3002
 ```
 
-The sandbox ID differs on each run. Confirm that the final line begins with `smoke: ok`, reports that port 8080 was reached through `http://127.0.0.1:3002`.
+The sandbox ID differs on each run. Confirm that the final line begins with `smoke: ok` and reports that port 8080 was reached through `http://127.0.0.1:3002`.
 
 ### Run Python in an E2B sandbox
 
@@ -269,7 +278,7 @@ aarch64
 
 This confirms that the E2B API created an Arm64 Firecracker sandbox and ran commands inside it.
 
-## Troubleshoot E2B
+## Troubleshoot E2B installation
 
 If `docker compose up` fails, identify the failing service:
 
@@ -285,7 +294,7 @@ docker compose logs preflight host-setup fetch-artifacts base-template
 
 Look for a line beginning with `FIX:`, correct the reported problem, and run `docker compose up -d --wait` again. The setup steps are idempotent and skip work that already succeeded.
 
-If sandbox creation fails on Arm with `Failed to UFFD object`, the running kernel lacks the userfaultfd write-protect support E2B needs. Install the Ubuntu 24.04 hardware enablement kernel, reboot, and confirm that `uname -r` reports kernel 6.10 or later.
+If sandbox creation fails on Arm with `Failed to UFFD object`, the running kernel lacks the userfaultfd write-protect support that E2B needs. Install the Ubuntu 24.04 hardware enablement kernel, reboot, and confirm that `uname -r` reports kernel 6.10 or later.
 
 If the stack reports insufficient huge pages, check the current allocation:
 
@@ -301,7 +310,7 @@ If the smoke test fails, inspect the main runtime logs:
 docker compose logs api orchestrator client-proxy
 ```
 
-After a host reboot, return to `~/e2b` and run `docker compose up -d --wait` to restore the host networking state required by E2B.
+After a host reboot, return to `~/e2b`. Run `docker compose up -d --wait` to restore the host networking state that's required by E2B.
 
 ## Next steps
 
