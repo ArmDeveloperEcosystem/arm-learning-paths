@@ -1,6 +1,8 @@
 ---
 title: E2B
 
+draft: true
+
 description: Install a self-hosted E2B sandbox environment on Arm Linux with Docker Compose, KVM, and Firecracker microVMs.
 
 minutes_to_complete: 25
