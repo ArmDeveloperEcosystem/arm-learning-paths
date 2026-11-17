@@ -20,13 +20,15 @@ The following diagram from the [Neoverse Reference Design documentation](https:/
 
 ## Stage 1: Security validation starts (RSE)
 
-After BL2, the Runtime Security Engine (RSE, Cortex-M55) authenticates critical firmware components that include SCP, UEFI, and kernel images, using secure-boot mechanisms. It performs cryptographic measurements and establishes a Root of Trust (RoT) before allowing other processors to start.
+At platform reset, the Runtime Security Engine (RSE, Cortex-M55) starts executing Trusted Firmware-M (TF-M) boot firmware from RSE ROM while SCP and MCP remain in reset. The RSE boot stages authenticate and load TF-M BL2 (MCUboot), which authenticates and loads the SCP and MCP firmware images and TF-A BL1. RSE records boot measurements and releases SCP and MCP from reset after loading their firmware.
+
+TF-M BL2 runs on RSE and is separate from TF-A BL2, which runs later on the application processor (AP).
 
 ***RSE acts as the platform’s security gatekeeper.***
 
 ## Stage 2: Early hardware initialization (SCP/MCP)
 
-Once RSE completes verification, the System Control Processor (SCP, Cortex-M7) and the Manageability Control Processor (MCP, where present) are released from reset.
+After TF-M BL2 authenticates and loads their firmware, RSE releases the System Control Processor (SCP, Cortex-M7) and the Manageability Control Processor (MCP, where present) from reset.
 
 They perform essential bring-up:
 * Initializing clocks, reset lines, and power domains
@@ -37,7 +39,7 @@ They perform essential bring-up:
 
 ## Stage 3: Secure execution setup (TF-A)
 
-When the AP is released, it begins executing Trusted Firmware-A (TF-A) at EL3 from the reset vector address programmed during boot-image layout. TF-A configures the secure world, sets up exception levels, and prepares for handoff to UEFI.
+When SCP releases the AP from reset, the AP begins executing Trusted Firmware-A (TF-A) BL1 from AP SRAM. TF-A continues the authenticated boot chain on the AP and prepares for handoff to UEFI through BL31, the runtime Root Monitor.
 
 ***TF-A is the ignition controller, launching the next stages securely.***
 
@@ -71,11 +73,12 @@ Each stage of the boot chain is backed by a dedicated component, such as secure 
 ### RSE: Runtime Security Engine (Cortex-M55) (Stage 1: Security Validation)
 
 RSE firmware runs on the Cortex‑M55 and plays a critical role in platform attestation and integrity enforcement.
-* Authenticates BL2, SCP, and UEFI firmware images (Secure Boot)
-* Records boot-time measurements (for example, PCRs, ROT)
-* Releases boot authorization only after successful validation
 
-RSE acts as the second layer of the chain of trust, maintaining a monitored and secure environment throughout early boot.
+* Runs TF-M BL2 (MCUboot), which authenticates and loads SCP, MCP, LCP, and TF-A BL1 firmware images
+* Records boot measurements and receives measurements from TF-A for platform attestation
+* Releases SCP and MCP from reset after their firmware has been authenticated and loaded
+
+RSE starts the platform's chain of trust, which TF-A continues on the AP.
 
 
 ### SCP: System Control Processor (Cortex‑M7) (Stage 2: Early Hardware Bring-up)
@@ -84,12 +87,13 @@ RSE acts as the second layer of the chain of trust, maintaining a monitored and 
 * Manages DRAM setup and enables power for the AP
 * Coordinates boot readiness with RSE via the Message Handling Unit (MHU)
 
-### TF-A: Trusted Firmware-A (BL1/BL2) (Stage 3)
+### TF-A: Trusted Firmware-A (BL1/BL2/BL31) (Stage 3)
 
-* **BL1** executes from ROM, initializes minimal hardware (clocks, UART), and loads BL2  
-* **BL2** validates and loads SCP, RSE, and UEFI images, setting up secure handover to later stages
+* **BL1** executes from AP SRAM after being authenticated and loaded by TF-M BL2, then authenticates and loads TF-A BL2
+* **BL2** authenticates and loads TF-A BL31, the Realm Management Monitor (RMM), and UEFI (BL33)
+* **BL31** acts as the runtime Root Monitor, sets up the TF-RMM interface, and triggers RMM initialization. When RMM returns control, BL31 hands off to UEFI (BL33)
 
-TF-A establishes the system’s chain of trust and ensures downstream components are authenticated and loaded from trusted sources.
+SCP and RSE are already running before TF-A BL2 executes. For details of authentication on the AP, see the [RD-V3 chain of trust documentation](https://neoverse-reference-design.docs.arm.com/en/rd-infra-2025.07.03/shared/cot_cca.html).
 
 ### UEFI, GRUB, and the Linux kernel (Stages 4–5)
 
@@ -112,19 +116,19 @@ LCP support depends on the FVP model and can be omitted in simplified setups.
 
 The RD-V3 boot sequence follows a multi-stage, dependency-driven handshake model, where each firmware module validates, powers, or authorizes the next.
 
-| Stage(s) | Dependency chain     | Description                                                                   |
-|------:|----------------------|-------------------------------------------------------------------------------|
-| 1     | RSE ← BL2            | RSE is loaded and triggered by BL2 to begin security validation              |
-| 2     | SCP ← BL2 + RSE      | SCP initialization requires BL2 and authorization from RSE                   |
-| 3     | AP ← SCP + RSE       | The AP starts only after SCP sets power and RSE permits                      |
-| 4-5     | UEFI → GRUB → Linux  | UEFI launches GRUB, which loads the kernel and enters the OS                 |
+| Stage(s) | Dependency chain | Description |
+|------:|------------------|-------------|
+| 1 | TF-M BL1_1 → BL1_2 → BL2 | RSE starts in ROM and reaches TF-M BL2 (MCUboot) through its boot stages |
+| 2 | SCP/MCP ← RSE TF-M BL2 | TF-M BL2 authenticates and loads controller firmware, then releases the controllers from reset |
+| 3 | AP ← SCP + RSE | RSE loads TF-A BL1 into AP SRAM; SCP releases the AP to execute TF-A BL1, followed by BL2 and BL31 |
+| 4–5 | UEFI → GRUB → Linux | BL31 hands off to UEFI after RMM initialization; UEFI launches GRUB, which loads the kernel |
 
 This handshake ensures no stage proceeds unless its dependencies have securely initialized and authorized the next step.
 
 {{% notice Note %}}
-In the table, arrows (←) indicate **dependency** - the component on the left depends on the component(s) on the right to be triggered or authorized.  
-For example, `RSE ← BL2` means BL2 loads/triggers RSE; `AP ← SCP + RSE` means the AP can start only after SCP has initialized hardware and RSE has granted authorization.  
-The right-facing arrows in `UEFI → GRUB → Linux` indicate a **direct execution path**—each stage passes control directly to the next.
+In the table, arrows (←) indicate **dependency**: the component on the left depends on the component(s) on the right. For example, `SCP/MCP ← RSE TF-M BL2` means the controllers depend on TF-M BL2 running on RSE to load their firmware and release them from reset. The AP depends on RSE loading TF-A BL1 and SCP releasing it from reset.
+
+Right-facing arrows (→) indicate an **execution sequence**, either through the RSE boot stages or from UEFI through GRUB to Linux. TF-M BL2 on RSE and TF-A BL2 on the AP are separate bootloaders.
 {{% /notice %}}
 
 This layered approach supports modular testing, independent debugging, and early simulation, which is essential for secure and robust platform bring-up.

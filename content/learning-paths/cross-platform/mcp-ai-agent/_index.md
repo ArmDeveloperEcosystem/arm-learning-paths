@@ -69,7 +69,7 @@ rerun_summary: false
 rerun_faqs: false
 
 skilllevels: Introductory
-subjects: ML
+subjects: Agentic AI
 armips:
     - Cortex-A
 tools_software_languages:

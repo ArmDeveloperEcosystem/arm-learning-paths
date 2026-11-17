@@ -26,7 +26,7 @@ backends/arm/scripts/build_executor_runner.sh \
   '--extra_build_flags=-DSEMIHOSTING=ON -DET_COMPILED_PTE=ON'
 ```
 
-The script builds the required ExecuTorch libraries and the runner for Corstone-320. `ET_COMPILED_PTE=ON` embeds `mobilesam.pte` in the Executable and Linkable Format (ELF) file named `arm_executor_runner`, under `arm_test/mobilesam/runner/`.
+The script builds the required ExecuTorch libraries and the runner for Corstone-320. The model selected by `--pte` is embedded in the Executable and Linkable Format (ELF) file named `arm_executor_runner`, under `arm_test/mobilesam/runner/`.
 
 `SEMIHOSTING=ON` lets the simulated target read input tensors from host files and write its output tensors back to the host.
 
@@ -68,6 +68,8 @@ backends/arm/scripts/run_fvp.sh \
 ```
 
 The runner reads the tensor specified by `-i input.bin` and writes its first output tensor to `output-0.bin` under `arm_test/mobilesam/io/`. The console transcript is saved to `arm_test/mobilesam/fvp.log`; validation reads the tensor file.
+
+`--fast` selects functional validation and reports CPU timing, CPU/NPU ratios, and NPU performance monitoring unit (PMU) counters as `N/A`. To collect simulated NPU counters, omit `--fast` and set `--timeout=7200`. CPU timing and CPU/NPU ratios remain unavailable; the simulated NPU counters are not measurements of real-device latency.
 
 Confirm that the run created the output file before continuing:
 

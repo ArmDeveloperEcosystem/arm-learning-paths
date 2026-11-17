@@ -35,7 +35,7 @@ prerequisites:
 
 skilllevels: Introductory
 
-subjects: ML
+subjects: AI/ML
 
 test_maintenance: false
 

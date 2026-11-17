@@ -15,7 +15,7 @@ Run a performance check with the same model and target profile:
 mlia check models/baseline.tflite --target-profile neural-technology --performance --output-dir runs/baseline
 ```
 
-With the tested packages and `neural-technology` profile, expect an estimated `136,962` total cycles and about `0.09131 ms` per inference. 
+The reference run with Neural Technology `0.2.0`, LiteRT converter `0.1.2`, and the `neural-technology` profile produced an estimated `136,962` total cycles and about `0.09131 ms` per inference. The setup now uses Neural Technology `0.3.0` and LiteRT converter `0.1.3`; use your generated report for the current result. These figures are compiler estimates, rather than timings measured on a device.
 
 ## Locate and read the reports
 
@@ -48,7 +48,7 @@ for name in ("total_cycles", "compute_cycles", "dram_cycles", "inference_time", 
 PY
 ```
 
-The expected output is:
+The reference output is:
 
 ```output
 total_cycles: 136962 cycles
@@ -63,6 +63,30 @@ The full report also includes `target_utilization`, memory traffic, and compiled
 For the baseline, `dram_cycles` is `94,396`, compared with `34,976` compute cycles. This gives you a reason to investigate memory traffic.
 
 Use `results[].breakdowns` and their `entity_id` links to `results[].entities` to inspect individual chains and cascades. These are compiler scheduling groups. They're not necessarily one framework layer each. Source-operator provenance helps you relate those groups to the original graph. Some metrics overlap or use non-additive aggregation policies, so don't sum every breakdown to recreate the model total.
+
+## (Optional) Explore results in Model Explorer
+
+After installing the compatible Model Explorer plugin in [Set up your MLIA environment](/learning-paths/mobile-graphics-and-gaming/mlia-nx-performance-estimator/2-devenv/#optional-prepare-model-explorer-visualizations), rerun the check into a separate directory with visualization enabled:
+
+```bash
+mlia check models/baseline.tflite \
+  --target-profile neural-technology \
+  --performance \
+  --output-dir runs/baseline-visualized \
+  --model-explorer open
+```
+
+`--model-explorer open` creates a self-contained HTML visualization and opens it in your browser. Use `--model-explorer files` to generate the files without opening a browser. If the browser doesn't open, open `runs/baseline-visualized/mlia-output/model-explorer/bundle/index.html` manually.
+
+Inspect the generated MLIA hierarchy alongside **Source Model**:
+
+1. Select a cycle metric in the node-data controls to color the hierarchy by cost.
+2. Expand the hierarchy and select a chain or cascade to read its reported values.
+3. Follow its mapping to **Source Model**, where available, to find the related model operations.
+
+Use these overlays to find scheduling groups worth investigating. A group can contain several operations, so its cost isn't a separate measurement for each operation. Keep using the model-level report for whole-model totals.
+
+For the editor workflow, follow the [Ethos-U VS Code and Model Explorer walkthrough](/learning-paths/embedded-and-microcontrollers/analyze-ethos-u-models-with-mlia/7-vscode-plugin/). Its example uses Ethos-U and Vela; use the NX metrics from this analysis when exploring your results.
 
 ## (Optional) Compare a different built-in profile
 

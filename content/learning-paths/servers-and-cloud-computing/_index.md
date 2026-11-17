@@ -26,14 +26,15 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
+- Agentic AI: 4
+- AI/ML: 48
 - CI-CD: 14
-- Containers and Virtualization: 55
+- Containers and Virtualization: 54
 - Databases: 29
 - Libraries: 9
-- ML: 49
 - Performance and Architecture: 112
 - Storage: 2
-- Web: 20
+- Web: 21
 subtitle: Migrate and optimize cloud native apps on Arm-based servers.
 title: Servers and Cloud Computing
 tools_software_languages_filter:

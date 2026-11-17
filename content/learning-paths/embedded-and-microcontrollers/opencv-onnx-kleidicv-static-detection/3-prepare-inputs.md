@@ -9,6 +9,8 @@ layout: "learningpathall"
 
 ## Create the application directory
 
+After creating baseline and default KleidiCV 26.06 OpenCV installations, you can prepare the YOLOX model and test image. 
+
 Create a directory for the source code, model, labels, and test image:
 
 ```bash
@@ -40,19 +42,21 @@ c5c2d13e59ae883e6af3b45daea64af4833a4951c92d116ec270d9ddbe998063  object_detecti
 ```
 
 {{% notice Note %}}
-The model and the YOLOX files in OpenCV Zoo are licensed under the Apache License 2.0. See the model directory linked in the further reading resources for details.
+The model and the YOLOX files in OpenCV Zoo are licensed under the Apache License 2.0. For more information, see the [OpenCV Zoo YOLOX model directory](https://github.com/opencv/opencv_zoo/tree/main/models/object_detection_yolox).
 {{% /notice %}}
 
 ## Download the COCO class names
 
-The model recognizes 80 classes from the COCO dataset. Download the label file published with this Learning Path:
+The model recognizes 80 classes from the COCO dataset. 
+
+Download the label file that's published with the Learning Path:
 
 ```bash
 wget -O coco.names \
     https://learn.arm.com/learning-paths/embedded-and-microcontrollers/opencv-onnx-kleidicv-static-detection/coco.names
 ```
 
-If you're following a preview of this Learning Path, replace `https://learn.arm.com` in the attachment download commands with the preview site's origin, including its port if needed. Use the same site when downloading the application source in the next section.
+If you're following a preview of the Learning Path, replace `https://learn.arm.com` in the attachment download commands with the origin of the preview site. Include its port if needed. Use the same site when downloading the application source later.
 
 Count the labels:
 
@@ -68,14 +72,14 @@ The expected output is:
 
 ## Download a static test image
 
-Download the original football photograph from the OpenCV 4.13.0 sample data:
+Download the original photograph from the OpenCV 4.13.0 sample data:
 
 ```bash
 wget -O input.jpg \
     https://raw.githubusercontent.com/opencv/opencv/4.13.0/samples/data/messi5.jpg
 ```
 
-This image has no segmentation overlay. Verify that you downloaded the same image used for the reference measurements:
+This image has no segmentation overlay. Verify that you downloaded the same image that was used for the reference measurements:
 
 ```bash
 sha256sum input.jpg
@@ -95,7 +99,7 @@ file object_detection_yolox_2022nov.onnx coco.names input.jpg
 
 The output identifies the ONNX model as data, the labels as text, and `input.jpg` as a JPEG image. You can replace `input.jpg` with your own photograph later.
 
-The supplied image contains a football player and ball:
+The image shows a football player kicking a ball:
 
 ![Input photograph of a football player kicking a ball, used to test YOLOX object detection#center](detection-input.jpg "YOLOX static-image detection input")
 
@@ -106,4 +110,6 @@ For licensing information, see the
 
 ## What you've accomplished and what's next
 
-You've prepared a verified YOLOX ONNX model, its 80 COCO labels, and a repeatable input image. Next, you'll compile the static-image application and verify its detection output.
+You've prepared a verified YOLOX ONNX model, its 80 COCO labels, and a repeatable input image. 
+
+Next, you'll compile the static-image application and verify its detection output.

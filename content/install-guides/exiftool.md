@@ -97,3 +97,5 @@ release. After checking, run `sudo apt update` again.
 ## Next steps
 
 You can now use ExifTool to read and write media metadata on Arm.
+
+For a Learning Path that involves using ExifTool, see [Create and verify C2PA Content Credentials on Arm](/learning-paths/embedded-and-microcontrollers/c2pa-on-arm/).

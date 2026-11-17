@@ -9,6 +9,7 @@
 /tools/social_card_generation/.social-card-manifest.json*
 __pycache__/
 resources/
+reports/
 node_modules/
 package-lock.json
 .hugo_build.lock
@@ -21,6 +22,7 @@ startup.sh
 nohup.out
 
 venv/
+.venv/
 z_local_saved/
 /.idea/
 /tools/.python-version

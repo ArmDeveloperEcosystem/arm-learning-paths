@@ -80,7 +80,7 @@ shared_between:
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-A
     - Neoverse

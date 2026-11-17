@@ -304,11 +304,11 @@ Called from:
                         </td>
                         <td id="tags-for-content" class="td-metadata-value">
                             <span>
-                                {{ if .Params.subjects}}
-                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.subjects | urlize}}' style="margin-bottom: 4px;">
+                                {{ range .GetTerms "subjects" }}
+                                    <ads-tag    href='{{ .RelPermalink }}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                         <span class="fa-solid fa-tag"></span>
-                                        {{ .Params.subjects }}
+                                        {{ .LinkTitle }}
                                     </ads-tag>
                                 {{end}}
                                 {{ range .Params.platforms }}
@@ -435,11 +435,11 @@ Called from:
                         <tr>
                             <td id="tags-for-content" class="td-metadata-value margin-l-0">
                                 <span>
-                                {{ if .Params.subjects}}
-                                    <ads-tag    href='{{ "/" | relLangURL}}tag/{{.Params.subjects | urlize}}' style="margin-bottom: 4px;">
+                                {{ range .GetTerms "subjects" }}
+                                    <ads-tag    href='{{ .RelPermalink }}' style="margin-bottom: 4px;">
                                         <span class="u-flex u-flex-row u-align-items-center u-gap-1/2">
                                         <span class="fa-solid fa-tag"></span>
-                                        {{ .Params.subjects }}
+                                        {{ .LinkTitle }}
                                     </ads-tag>
                                 {{end}}
                                 {{ range .Params.platforms }}

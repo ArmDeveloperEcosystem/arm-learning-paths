@@ -1,0 +1,13 @@
+{{ if eq (getenv "HUGO_CHATBOT_ENABLED") "true" }}
+<div id="ai-sign-in-banner" hidden>
+    <div class="is-responsive-width">
+        <ads-alert
+            id="ai-sign-in-alert"
+            theme="dark"
+            level="default"
+            has-close-button="true"
+            text="Sign in with your Arm account to use Arm Virtual Assistant, your AI-powered chatbot for Learning Paths and developer guidance."
+        ></ads-alert>
+    </div>
+</div>
+{{ end }}

@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for machine learning (ML) engineers and g
 learning_objectives:
     - Install the public Arm ML Inference Advisor (MLIA) Neural Technology plugin and discover its target profiles and backend.
     - Analyze public quantized MobileNet models with automatic model conversion.
-    - Check operator compatibility and interpret NX Performance Estimator reports.
+    - Check operator compatibility and interpret NX estimates, measured profiling results, and optional Model Explorer overlays.
     - Compare model variants under the same target configuration and identify accuracy tradeoffs.
 
 prerequisites:
@@ -77,7 +77,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
     - Mali
 tools_software_languages:

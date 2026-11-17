@@ -86,7 +86,7 @@ further_reading:
         type: documentation
     - resource:
         title: SME Insights
-        link: /insights/sme/
+        link: https://learn.arm.com/insights/sme
         type: website
 
 ### FIXED, DO NOT MODIFY

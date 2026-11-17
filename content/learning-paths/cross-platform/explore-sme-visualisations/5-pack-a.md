@@ -1,27 +1,29 @@
 ---
-title: Transpose and packing
-description: Visualize transpose and packing of matrix A using Arm SME.
+title: Transpose and pack matrix A
+description: Step through an interactive view that loads matrix A into ZA rows and writes ZA columns to a packed, zero padded output buffer.
 weight: 6
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Prepare A for matrix multiplication
+## Prepare matrix A for multiplication
 
-Packing changes the order of values in memory so that a matrix multiplication kernel can load those values more efficiently. This visualisation loads **Input Matrix A** values into rows of ZA, and writes columns of ZA into **Output Packed Data**. Packing changes the layout of data, but does not calculate the matrix product.
+Packing changes the order of values in memory so that a matrix multiplication kernel can load those values more efficiently. The following visualization loads **Input Matrix A** values into rows of ZA, and writes columns of ZA into **Output Packed Data**. Packing changes the layout of data, but it doesn't calculate the matrix product.
 
-## Use the playback controls
-
-Select the **rightmost double-arrow button (⏩)** to advance one step or the **leftmost double-arrow button (⏪)** to go back one step. The **middle Play/Pause button** runs or pauses the remaining sequence. Reload the page to return to the initial state.
+If the embedded visualization doesn't load, [open the Pack A visualization in a separate browser tab](/apps/sme-visualisations/#/sme/pack32-a). Switch between the Learning Path and the visualization tab.
 
 ## Follow the transpose and pack algorithm
 
-Press play or advance manually to follow the algorithm:
+Select the play button or advance manually to follow the algorithm:
 
-1. The first ten steps load rows from **Input Matrix A** into rows of ZA0 - ZA2. Note that because different implementations can have different Scalable Vector Length, predicates are used to determine which rows are active.
-2. The next twelve steps write columns of ZA data into rows of **Output Packed Data**.
-3. Notice that the last four steps write zero-padded values, because the rows of **Input Matrix A** are not an exact multiple of the ZA tile height. Predicates control which rows of ZA2 are active, and thus which elements of **Output Packed Data** are zero-padded.
+| Stage | Visualization steps | Operation |
+| --- | --- | --- |
+| Load matrix A | 1–10 | Load **Input Matrix A** into rows of ZA0–ZA2. |
+| Store packed data | 11–22 | Write columns of ZA data into rows of **Output Packed Data**. |
+| Pad the final rows | 23–26 | Write zero-padded values because the rows of **Input Matrix A** aren't an exact multiple of the ZA tile height. |
+
+During matrix A load, predicates determine which rows are active because different implementations can have different scalable vector lengths. Predicates also control which elements of **Output Packed Data** are zero-padded.
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/pack32-a"
@@ -32,10 +34,10 @@ Press play or advance manually to follow the algorithm:
     loading="lazy"
 >}}
 
-If you need more space then use the "Full screen" button at the top-right, or [open the Pack A visualization in a full browser tab](/apps/sme-visualisations/#/sme/pack32-a) if the embedded view does not load.
+## What you've learned and what's next
 
-## What you've accomplished
-
-You have traced a change in matrix A's memory layout. The packed GEMM view later in this path begins with this kind of prepared A data. First, prepare its other operand, B.
+You've traced a change in the memory layout of matrix A. The packed General Matrix Multiplication (GEMM) visualization begins with this kind of prepared A data. 
 
 The [preprocessing example in the SME2 matrix multiplication Learning Path](/learning-paths/cross-platform/multiplying-matrices-with-sme2/5-outer-product/#preprocessing-with-preprocess_l) shows how a C kernel prepares its left-hand matrix. Its precise layout belongs to that implementation.
+
+Next, you'll view a visualization that prepares the other operand for the GEMM visualization, matrix B.

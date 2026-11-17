@@ -43,8 +43,18 @@ export function createEngine(records) {
     if (!Number.isInteger(limit) || limit < 1 || limit > 100) throw Error('Limit must be an integer from 1 to 100.');
     if (!Number.isInteger(offset) || offset < 0) throw Error('Offset must be a non-negative integer.');
     if (!['updated', 'relevance'].includes(sort)) throw Error('Unknown sort order.');
-    const terms = [...new Set(tokenize(query).filter(t => !stop.has(t)))];
-    const browsing = !query.trim();
+    // Parse exclusion operators before tokenising the positive query.
+    // Supports: -term (dash prefix) and NOT term (uppercase NOT only, so lowercase "not" stays a literal word).
+    // Exclusions use exact token matching — no prefix expansion or typo correction — so a near-miss never silently hides results.
+    const excludedRaw = [];
+    let cleanQuery = query
+      .replace(/(^|\s)-(\S+)/g, (_, sp, w) => { excludedRaw.push(w); return sp; })
+      .replace(/(^|\s)NOT\s+(\S+)/g, (_, sp, w) => { excludedRaw.push(w); return sp; })
+      .replace(/\s+/g, ' ')
+      .trim();
+    const excluded = new Set(tokenize(excludedRaw.join(' ')).filter(t => t));
+    const terms = [...new Set(tokenize(cleanQuery).filter(t => !stop.has(t)))];
+    const browsing = !cleanQuery.trim();
     if (!browsing && !terms.length) return { total: 0, results: [] };
     const expansions = terms.map(term => {
       const candidates = [{ token: term, weight: 1 }];
@@ -66,6 +76,10 @@ export function createEngine(records) {
     const ranked = [];
     for (const doc of docs) {
       if ((type && doc.record.type !== type) || (type !== 'install-guide' && category && doc.record.category !== category)) continue;
+      if (excluded.size) {
+        const docTokens = new Set(doc.fields.flatMap(f => [...f.counts.keys()]));
+        if ([...excluded].some(ex => docTokens.has(ex))) continue;
+      }
       if (browsing) {
         ranked.push({ record: { ...doc.record, score: 0 }, tier: 0 });
         continue;

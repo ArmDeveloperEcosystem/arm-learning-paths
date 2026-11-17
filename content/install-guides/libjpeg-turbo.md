@@ -100,3 +100,5 @@ release. Then, run `sudo apt update` again.
 ## Next steps
 
 You can now encode, decode, and transform JPEG images on Arm using `libjpeg-turbo`. 
+
+For a Learning Path that involves using `libjpeg-turbo`, see [Create and verify C2PA Content Credentials on Arm](/learning-paths/embedded-and-microcontrollers/c2pa-on-arm/).

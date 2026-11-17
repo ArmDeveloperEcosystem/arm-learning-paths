@@ -23,6 +23,8 @@ Start with YOLOv8s because it provides the shortest path to a result. You can us
 
 {{% notice Note %}}
 Arm AI Portal models are hosted on Hugging Face. The `download_model.py` script uses `huggingface_hub` and connects to `https://huggingface.co` by default.
+
+Some packages publish generic filenames, so the downloader gives those files unique import names.
 {{% /notice %}}
 
 ## Run YOLOv8s with ExecuTorch
@@ -176,11 +178,12 @@ Scene Detector also supports the following Arm AI Portal model packages:
 | [YOLOv5s INT8](https://huggingface.co/Arm/yolov5s-int8-xnnpack-executorch) | ExecuTorch | `Arm/yolov5s-int8-xnnpack-executorch` | `yolov5s_raspberry_executorch_optimized.pte` | YOLOv5 objectness and class scores |
 | [YOLOv8s INT8](https://huggingface.co/Arm/yolov8s-int8-xnnpack-executorch) (default) | ExecuTorch | `Arm/yolov8s-int8-xnnpack-executorch` | `yolov8s_raspberry_executorch_optimized.pte` | YOLOv8 candidate decoding |
 | [YOLOv9s INT8](https://huggingface.co/Arm/yolov9s-int8-xnnpack-executorch) | ExecuTorch | `Arm/yolov9s-int8-xnnpack-executorch` | `yolov9s_raspberry_executorch_optimized.pte` | Letterboxing and multi-label decoding |
+| [YOLOX-S INT8](https://huggingface.co/Arm/nota-yolox-s-int8-xnnpack-executorch-vivo-x300) | ExecuTorch | `Arm/nota-yolox-s-int8-xnnpack-executorch-vivo-x300` | `yolox-s-int8-executorch.pte` | Top-left letterboxing and separate prediction heads |
 | [YOLO26n FP16](https://huggingface.co/Arm/yolo26n-fp16-litert) | LiteRT | `Arm/yolo26n-fp16-litert` | `yolo26n_conv2d_f16_weights.tflite` | Forced FP16 execution and six-value detection rows |
 | [YOLO26n INT8 weight-only](https://huggingface.co/Arm/yolo26n-int8w-litert) | LiteRT | `Arm/yolo26n-int8w-litert` | `yolo26n_conv_fc_f16_int8w.tflite` | INT8 weights, FP16 execution, and six-value detection rows |
 | [YOLO11n INT8](https://huggingface.co/Arm/yolo11n-int8-litert-vivo-x300) | LiteRT | `Arm/yolo11n-int8-litert-vivo-x300` | `yolo11n_android_litert_optimized.tflite` | INT8 input and `[1, 84, 8400]` multi-label decoding |
 
-To use one of these models, set `MODEL_ID` to a repository ID from the table and repeat the download and import workflow.
+To use one of these models, set `MODEL_ID` to a repository ID from the table and repeat the download and import workflow. The registered profile sets the default confidence threshold: `75%` for YOLOv5s, YOLOv8s, and YOLOv9s, and `25%` for YOLOX-S and the LiteRT models.
 
 ## What you've accomplished and what's next
 

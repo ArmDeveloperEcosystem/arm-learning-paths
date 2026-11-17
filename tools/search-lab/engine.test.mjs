@@ -168,3 +168,52 @@ test('offset pagination preserves keyword rankings', () => {
   const all = search({ query: 'chatbot' });
   assert.deepEqual(search({ query: 'chatbot', offset: 1, limit: 1 }).results, all.results.slice(1, 2));
 });
+
+test('NOT and - operators exclude documents containing the specified term', () => {
+  const s = createEngine([
+    { id: '/llama/', title: 'Deploy llama.cpp', description: 'Run on Graviton', type: 'learning-path', category: 'servers-and-cloud-computing' },
+    { id: '/docker/', title: 'Docker container', description: 'Run on Graviton', type: 'learning-path', category: 'servers-and-cloud-computing' },
+    { id: '/both/', title: 'llama.cpp in Docker', type: 'learning-path', category: 'servers-and-cloud-computing' }
+  ]);
+  // dash prefix and uppercase NOT are equivalent
+  assert.equal(s({ query: 'Graviton -docker' }).total, 1);
+  assert.equal(s({ query: 'Graviton -docker' }).results[0].id, '/llama/');
+  assert.deepEqual(s({ query: 'Graviton NOT docker' }), s({ query: 'Graviton -docker' }));
+  // the user-reported case: topic search with one technology excluded
+  assert.equal(s({ query: 'llama.cpp NOT docker' }).total, 1);
+  assert.equal(s({ query: 'llama.cpp NOT docker' }).results[0].id, '/llama/');
+  // exclusion checks every field — /both/ is excluded because docker appears in its title
+  assert.equal(s({ query: 'llama.cpp -docker' }).results[0].id, '/llama/');
+  // exclusion-only query browses all content except the excluded term
+  assert.equal(s({ query: '-docker' }).total, 1);
+  assert.equal(s({ query: 'NOT docker' }).total, 1);
+  // type filter still applies alongside exclusions
+  assert.equal(s({ query: 'Graviton -docker', type: 'install-guide' }).total, 0);
+});
+
+test('lowercase not is a search word, not an exclusion operator', () => {
+  const s = createEngine([
+    { id: '/a/', title: 'Docker guide', type: 'install-guide' },
+    { id: '/b/', title: 'Kubernetes guide', type: 'install-guide' }
+  ]);
+  // lowercase "not" is absent from the stopword list so it is searched for literally;
+  // neither doc contains "not" but both contain the other query words, so both are returned
+  assert.equal(s({ query: 'docker not kubernetes' }).total, 2);
+  // uppercase NOT excludes kubernetes
+  assert.equal(s({ query: 'docker NOT kubernetes' }).total, 1);
+  assert.equal(s({ query: 'docker NOT kubernetes' }).results[0].id, '/a/');
+});
+
+test('exclusions use exact token matching with no prefix or typo expansion', () => {
+  const s = createEngine([
+    { id: '/docker/', title: 'Docker container', type: 'install-guide' },
+    { id: '/other/', title: 'Python guide', type: 'install-guide' }
+  ]);
+  // a one-edit typo in the excluded term does not accidentally exclude docker
+  assert.equal(s({ query: '-dokcer' }).total, 2);
+  // a prefix shorter than the full token does not accidentally exclude docker
+  assert.equal(s({ query: '-dock' }).total, 2);
+  // the exact token does exclude it
+  assert.equal(s({ query: '-docker' }).total, 1);
+  assert.equal(s({ query: '-docker' }).results[0].id, '/other/');
+});
