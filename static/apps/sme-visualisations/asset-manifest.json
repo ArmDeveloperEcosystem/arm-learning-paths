@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/apps/sme-visualisations/static/css/main.790bcbb3.css",
-    "main.js": "/apps/sme-visualisations/static/js/main.e89101d3.js",
+    "main.js": "/apps/sme-visualisations/static/js/main.dcdf4c1f.js",
     "static/media/Lato-Black.ttf": "/apps/sme-visualisations/static/media/Lato-Black.0f56360fd2c505dd13fa.ttf",
     "static/media/Lato-Regular.ttf": "/apps/sme-visualisations/static/media/Lato-Regular.2b7b7f6c8554ad96436b.ttf",
     "index.html": "/apps/sme-visualisations/index.html",
     "main.790bcbb3.css.map": "/apps/sme-visualisations/static/css/main.790bcbb3.css.map",
-    "main.e89101d3.js.map": "/apps/sme-visualisations/static/js/main.e89101d3.js.map"
+    "main.dcdf4c1f.js.map": "/apps/sme-visualisations/static/js/main.dcdf4c1f.js.map"
   },
   "entrypoints": [
     "static/css/main.790bcbb3.css",
-    "static/js/main.e89101d3.js"
+    "static/js/main.dcdf4c1f.js"
   ]
 }
