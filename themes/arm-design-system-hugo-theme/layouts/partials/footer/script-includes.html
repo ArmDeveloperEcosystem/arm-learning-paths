@@ -135,3 +135,14 @@ Called from:
         {{end}}
     {{end}}
 {{end}}
+
+<script>
+    // The native content link supplies the card's keyboard tab stop.
+    customElements.whenDefined('ads-card').then(() => {
+        document.querySelectorAll('ads-card.path-card, ads-card.tool-card').forEach((card) => {
+            card.componentOnReady().then(() => {
+                card.shadowRoot?.querySelector('.c-card')?.removeAttribute('tabindex');
+            });
+        });
+    });
+</script>
