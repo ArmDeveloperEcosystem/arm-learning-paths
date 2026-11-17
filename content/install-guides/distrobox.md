@@ -2,7 +2,6 @@
 title: Distrobox
 description: Install Distrobox on Arm Linux or a ChromeOS or Googlebook OS device and run an Ubuntu 26.04 container that integrates with your home directory.
 
-draft: true
 
 additional_search_terms:
 - distrobox
@@ -31,42 +30,46 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-[Distrobox](https://distrobox.it/) lets you run any Linux distribution inside a container while sharing your home directory with the host. It uses Podman or Docker underneath, so you can create a container, enter it like a normal shell, install packages with the native package manager, and remove it when you're done. Your files stay on the host, which makes containers safe to experiment with and quick to throw away.
+You can use [Distrobox](https://distrobox.it/) to run any Linux distribution inside a container while sharing your home directory with the host. Distrobox uses Podman or Docker underneath, so that you can create a container and enter it similar to a normal shell. You can install packages with the package manager for the distribution, and remove the container when you're done. Your files stay on the host, which makes the containers safe to experiment with and quick to throw away.
 
 Distrobox is useful on Arm systems when you want a different distribution than your host or a clean build environment for testing.
 
 You'll learn how to install Distrobox and run an Ubuntu container on Arm Linux or a ChromeOS or Googlebook OS device.
 
-Everything in this guide targets the `aarch64` (64-bit Arm) architecture. Your device needs an Arm CPU, and the containers you create run `arm64` software.
+The steps in this guide target the `aarch64` (64-bit Arm) architecture. Your device needs an Arm CPU, and the containers that you create run `arm64` software.
 
 ## Before you begin
 
-Make sure you're using a system running Arm Linux. You can use a physical Arm device, an Arm-based virtual machine, or the Linux development environment on a ChromeOS or Googlebook OS device.
+Make sure that you're using a system running Arm Linux. You can use a physical Arm device, an Arm-based virtual machine, or the Linux development environment on a ChromeOS or Googlebook OS device.
 
-To confirm the architecture, run:
+Confirm the architecture:
 
 ```bash
 uname -m
 ```
 
-The output should be `aarch64` for 64-bit Arm systems.
+The expected output for 64-bit Arm systems is `aarch64`.
 
-Distrobox needs a container engine. This guide uses Podman because it runs containers without root privileges, which suits both Arm Linux and the ChromeOS and Googlebook OS Linux environment.
+Distrobox needs a container engine. Podman is used in the install guide because it runs containers without root privileges. This suits both Arm Linux and the ChromeOS and Googlebook OS Linux environment.
 
 {{% notice Note %}}
-On a ChromeOS or Googlebook OS device, set up the Linux development environment first. On ChromeOS, open **Settings**, go to **About ChromeOS**, select **Developers**, and turn on **Linux development environment**. On Googlebook OS, open the **Terminal** app from the app drawer and follow the prompts to initialize the Linux environment. This creates a managed Debian environment where you install and run Distrobox, and it already provides the user namespace and `subuid` and `subgid` configuration that rootless Podman needs.
+On a ChromeOS or Googlebook OS device, set up the Linux development environment first. On ChromeOS, open **Settings**. Navigate to **About ChromeOS** and select **Developers**. Then, turn on **Linux development environment**. 
+
+On Googlebook OS, open the **Terminal** app from the app drawer. Follow the prompts to initialize the Linux environment. This creates a managed Debian environment where you install and run Distrobox. The environment already provides the user namespace and `subuid` and `subgid` configuration that rootless Podman needs.
 {{% /notice %}}
 
 ## Install Distrobox on Arm Linux
 
-The following steps use a Debian-based distribution, such as Ubuntu or the Debian environment on a ChromeOS or Googlebook OS device. Install Podman, Distrobox, and the `uidmap` package for rootless containers:
+The following steps are for a Debian-based distribution. This can be Ubuntu, or the Debian environment on a ChromeOS or Googlebook OS device. 
+
+Install Podman, Distrobox, and the `uidmap` package for rootless containers:
 
 ```bash
 sudo apt update
 sudo apt install -y podman distrobox uidmap curl
 ```
 
-Confirm the tools are installed:
+Confirm that the tools are installed:
 
 ```bash
 distrobox version
@@ -92,9 +95,13 @@ The expected output is:
 true
 ```
 
-A `true` result confirms rootless mode is working, so you can create and enter containers as your normal user.
+A `true` result confirms that rootless mode is working. You can create and enter containers as your normal user.
 
-## Create an Ubuntu 26.04 container
+## Verify Distrobox installation
+
+You'll now verify Distrobox installation by creating a container and running a variety of commands.
+
+### Create an Ubuntu 26.04 container
 
 Create a container named `ubuntu26` from the official Ubuntu 26.04 image. Podman automatically pulls the `arm64` variant of the image for your Arm CPU:
 
@@ -113,7 +120,7 @@ To enter, run:
 distrobox enter ubuntu26
 ```
 
-## Enter the container
+### Enter the container
 
 The first time you enter a container, Distrobox sets up your user, sudo access, and the shared home directory. This takes a moment. Later entries are fast.
 
@@ -123,7 +130,9 @@ Enter the container:
 distrobox enter ubuntu26
 ```
 
-When setup finishes, your shell prompt changes to show you're inside the container. Confirm the distribution and architecture:
+When setup finishes, your shell prompt changes to show that you're inside the container. 
+
+Confirm the distribution and architecture:
 
 ```bash
 grep PRETTY_NAME /etc/os-release
@@ -137,7 +146,7 @@ PRETTY_NAME="Ubuntu 26.04.1 LTS"
 aarch64
 ```
 
-You're now in an Ubuntu 26.04 environment on Arm. Your home directory is shared with the host, so files you create are visible in both places. Confirm this by listing your home directory:
+You're now in an Ubuntu 26.04 environment on Arm. Your home directory is shared with the host, so files that you create are visible in both places. Confirm this by listing your home directory:
 
 ```bash
 ls $HOME
@@ -151,20 +160,16 @@ sudo apt install -y htop
 ```
 
 {{% notice Note %}}
-Any software you install inside the container must have an `arm64` build. Most packages in the Ubuntu repositories provide one, so `apt` installs work as expected on your Arm device.
+Any software that you install inside the container needs to have an `arm64` build. Most packages in the Ubuntu repositories provide one, so `apt` installs work as expected on your Arm device.
 {{% /notice %}}
 
-## Exit the container
+### Exit the container
 
-To leave the container and return to your host shell, type `exit` or press `Ctrl+D`:
+To leave the container and return to your host shell, press **Ctrl+D**.
 
-```bash
-exit
-```
+The container keeps running in the background after you exit. You can enter it again without waiting for setup.
 
-The container keeps running in the background after you exit, so you can enter it again without waiting for setup.
-
-## Run a command without entering the container
+### Run a command in the container from the host
 
 To run a single command inside the container from your host, pass it after `--`:
 
@@ -178,9 +183,9 @@ The output is similar to:
 aarch64
 ```
 
-## List your containers
+### View container status
 
-To see the containers you've created and their status, run:
+See a list of containers that you've created, and their status:
 
 ```bash
 distrobox list
@@ -193,31 +198,33 @@ ID           | NAME                 | STATUS             | IMAGE
 56452187200e | ubuntu26             | Up 23 minutes      | docker.io/library/ubuntu:26.04
 ```
 
-## Stop a container
+## Stop the container
 
-To stop a running container without deleting it, run:
+Stop the running container without deleting it:
 
 ```bash
 distrobox stop ubuntu26
 ```
 
-The container's files and installed packages stay in place. Enter it again at any time to resume work.
+The container files and installed packages stay in place. Enter the container again at any time to resume work.
 
-## Delete a container
+## Delete the container
 
-When you no longer need a container, make sure it's stopped first (with `distrobox stop ubuntu26`), and then delete it:
+When you no longer need a container, make sure that it's stopped first, then delete it.
+
+Delete the test container:
 
 ```bash
 distrobox rm ubuntu26
 ```
 
-Deleting a container removes its installed packages, but your home directory stays on the host because it's shared rather than stored inside the container.
+Deleting a container removes its installed packages. Your home directory stays on the host because it's shared rather than stored inside the container.
 
-## Find other distributions
+## Find other distributions for Distrobox
 
-Distrobox doesn't have its own catalog of distributions. It creates containers from standard container images hosted on registries such as Docker Hub and quay.io, so any distribution with a suitable image works.
+Distrobox doesn't have its own catalog of distributions. It creates containers from standard container images that are hosted on registries such as Docker Hub and quay.io. Any distribution with a suitable image works with Distrobox.
 
-To list the images the Distrobox project has tested, run:
+List the images tested for the Distrobox project:
 
 ```bash
 distrobox create --compatibility
@@ -235,10 +242,12 @@ quay.io/toolbx-images/alpine-toolbox:edge
 
 The list changes as new releases are tested. The [Distrobox compatibility page](https://distrobox.it/compatibility/#containers-distros) shows the same information in a table, grouped by distribution.
 
-To create a container from any image in the list, or from an image you find on a registry, pass its name to the `--image` option as you did for Ubuntu.
-
 {{% notice Note %}}
-The compatibility list doesn't say which images support Arm. Before you use an image, check that its registry page lists an `arm64` variant. Most official images from Ubuntu, Debian, Fedora, and Alpine provide one.
+The compatibility list doesn't indicate which images support Arm. Before you use an image, check that its registry page lists an `arm64` variant. Most official images from Ubuntu, Debian, Fedora, and Alpine provide one.
 {{% /notice %}}
 
+## Next steps
+
 You're now ready to use Distrobox to run Ubuntu 26.04 and other distributions on your Arm device.
+
+To create a container from any image in the compatibility list or on a registry, pass its name to the `--image` option.
