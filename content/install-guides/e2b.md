@@ -1,5 +1,5 @@
 ---
-title: E2B d
+title: E2B
 
 description: Install a self-hosted E2B sandbox environment on Arm Linux with Docker Compose, KVM, and Firecracker microVMs.
 
