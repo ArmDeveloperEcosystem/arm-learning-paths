@@ -43,11 +43,11 @@ generated_summary_faq:
       Create the `mysql-data` Docker volume and mount it at `/var/lib/mysql`, as shown in the
       `docker run` command. Your database files then remain in the volume when you replace the
       container.
-  - question: What should I check if `docker exec` cannot connect to the MySQL container?
+  - question: What should I check if Docker can't to the MySQL container?
     answer: >-
       Run `docker ps --filter name=mysql-arm` to check that the container is running. Check
-      `docker logs mysql-arm` and wait for MySQL to report that it is ready for connections.
-      Use the container name you chose if it differs from `mysql-arm`.
+      `docker logs mysql-arm` and wait for MySQL to report that it's ready for connections.
+      Use the container name that you chose if it differs from `mysql-arm`.
   - question: How do I connect and create the sample database?
     answer: >-
       Run `docker exec -it mysql-arm mysql -uroot -p` and enter your root password. At the

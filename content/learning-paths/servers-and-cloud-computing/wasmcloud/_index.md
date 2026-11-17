@@ -38,14 +38,14 @@ generated_summary_faq:
     under one connection and concurrent load. Finally, you'll interpret the results and consider
     when wasmCloud instance pooling can help your application.
   faqs:
-  - question: How do I know the wasmCloud development host started correctly?
+  - question: How do I know that the wasmCloud development host started correctly?
     answer: >-
       Wait until `wash dev` prints `INFO listening for HTTP requests address=http://127.0.0.1:8000`.
       Keep that terminal running while you send requests from your second SSH terminal.
   - question: Which endpoint should I send HTTP requests to during testing?
     answer: >-
       Send requests to `http://127.0.0.1:8000/` from the second SSH terminal on the same server.
-      The development host listens on the server's loopback interface.
+      The development host listens on the server loopback interface.
   - question: Where do I modify the HTTP response, and how do I confirm the change?
     answer: >-
       Change the greeting in `src/lib.rs`, stop `wash dev` with **Ctrl+C**, and start `wash dev`

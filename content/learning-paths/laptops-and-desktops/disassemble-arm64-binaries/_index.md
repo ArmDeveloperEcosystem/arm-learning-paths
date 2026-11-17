@@ -34,14 +34,14 @@ generated_summary_faq:
   summary: >-
     You'll build a small arm64 Mach-O fixture on macOS. Then, you'll use `otool` and `llvm-objdump` to inspect it for SME and SME2 instructions. You'll compare strings and symbols with decoded executable code, checking instruction bytes, operands, addresses, and surrounding context. You'll also test comparison binaries, then combine the `llvm-objdump` and `awk` checks in a reusable script. 
   faqs:
-  - question: How do I know I'm inspecting the correct architecture slice?
+  - question: How do I know that I'm inspecting the correct architecture slice?
     answer: >-
       Select the `arm64` slice when you inspect a universal Mach-O binary. Use options such as
       `-arch arm64` with `otool`, `strings`, and `nm`, and confirm the slice with `lipo -info`.
   - question: Do SME2-related strings or symbols prove that the binary contains SME2 instructions?
     answer: >-
-      No. Strings and symbol names can suggest that the program relates to SME2, but that alone
-      doesn't establish that SME or SME2 instructions are present. Inspect decoded executable code instead.
+      No. Strings and symbol names can suggest that the program relates to SME2. However, they alone
+      don't establish that SME or SME2 instructions are present. Inspect decoded executable code instead.
   - question: How can I confirm that a decoded instruction matches its encoding?
     answer: >-
       Compare the instruction bytes, mnemonic, operands, and address in `llvm-objdump` output.
@@ -53,7 +53,7 @@ generated_summary_faq:
   - question: How do I use the verification script with a comparison binary?
     answer: >-
       Put `verify-static-sme2.sh`, `strict-sme2.awk`, and the compiled binaries in the working
-      directory. Run the script with the binary name; the positive fixture should pass, while
+      directory. Run the script with the binary name. The positive fixture should pass, while
       the string-only control should report no matching instructions.
 # END generated_summary_faq
 

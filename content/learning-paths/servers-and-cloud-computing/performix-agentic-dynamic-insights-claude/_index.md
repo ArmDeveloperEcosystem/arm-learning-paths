@@ -48,9 +48,9 @@ generated_summary_faq:
       When runs are available, request their IDs, targets, workloads, and creation times to choose one.
   - question: Which MCP configuration method should I use?
     answer: >-
-      Configure through the extension’s MCP interface, run `claude mcp add`, or edit
+      Configure through the MCP interface of the extension, run `claude mcp add`, or edit
       `~/.claude.json`. The extension and Claude CLI share the same MCP configuration, so you
-      only need one method.
+      need only one method.
   - question: Where should I configure the Performix MCP server when using VS Code?
     answer: >-
       Configure the server on the host where Claude Code runs. For a local VS Code session, set

@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for embedded ML developers who want to ca
 
 learning_objectives:
     - Prepare a quantized Conformer model with Arm and Alif MLEK for ExecuTorch deployment.
-    - Build and run ASR on the Corstone-320 Fixed Virtual Platform (FVP) using recorded audio.
+    - Build and run automatic speech recognition (ASR) on the Corstone-320 Fixed Virtual Platform (FVP) using recorded audio.
     - Build and flash the E8 application and its external-flash model.
     - Validate live transcription, Ethos-U85 execution, and standalone restart on the E8.
 

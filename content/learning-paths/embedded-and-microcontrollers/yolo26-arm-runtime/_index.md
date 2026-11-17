@@ -41,7 +41,7 @@ generated_summary_faq:
   faqs:
     - question: Does Arm Runtime use the Raspberry Pi 5 CPU or GPU?
       answer: >-
-        You run inference on the Raspberry Pi 5 CPU. The runtime uses Cortex-A76
+       Inference runs on the Raspberry Pi 5 CPU. The runtime uses Cortex-A76
         cores, a fixed schedule, planned memory reuse, and fused operations.
     - question: How do I run detection on my own video or a PiCamera feed?
       answer: >-
@@ -52,7 +52,7 @@ generated_summary_faq:
       answer: >-
         When you create the detector, the Python session checks the model
         manifest and binary, then loads the shared library. The runtime loads
-        the converted model and prepares XNNPACK operations; the example
+        the converted model and prepares XNNPACK operations. The example
         reuses the detector across frames.
     - question: Which settings should I match for a fair NCNN comparison?
       answer: >-
@@ -63,7 +63,7 @@ generated_summary_faq:
       answer: >-
         Confirm both runs use the same checkpoint, dataset, input size, and
         batch size. Stop other CPU workloads and use matching power, cooling,
-        and CPU settings; internal precision and operation fusion can still
+        and CPU settings. Internal precision and operation fusion can still
         differ between runtimes.
 # END generated_summary_faq
 

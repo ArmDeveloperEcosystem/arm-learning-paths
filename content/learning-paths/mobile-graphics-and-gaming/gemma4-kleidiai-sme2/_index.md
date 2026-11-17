@@ -39,7 +39,7 @@ generated_summary_faq:
     Finally, you'll check the model response and use a separate profiled run to verify the accelerated
     operator.
   faqs:
-  - question: How do I know my Mac supports SME2 before I start building?
+  - question: How do I know that my Mac supports SME2?
     answer: >-
       Run `uname -m`, `sysctl hw.optional.arm.FEAT_SME`, and `sysctl hw.optional.arm.FEAT_SME2`.
       On a supported Apple M4 system, expect `arm64` and a value of `1` for both feature flags.
@@ -57,8 +57,8 @@ generated_summary_faq:
   - question: How do I compare the baseline and optimized XNNPACK variants correctly?
     answer: >-
       Run both variants with the provided function, using the same model and settings at one and
-      four CPU threads. For each build and thread count, discard the first iteration as warm-up,
-      then average `Prefill Speed` and `Decode Speed` from the second and third iterations separately.
+      four CPU threads. For each build and thread count, discard the first iteration as warm-up.
+      Average `Prefill Speed` and `Decode Speed` from the second and third iterations separately.
   - question: What should I check if the throughput numbers look off or don’t match between runs?
     answer: >-
       Check that both variants use the same model, thread counts, and benchmark settings, with

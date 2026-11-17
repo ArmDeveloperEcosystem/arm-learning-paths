@@ -42,28 +42,28 @@ generated_summary_faq:
     nodes, you'll add their OSDs and increase replication. Finally, you'll stop and restart an OSD to
     check continued access and recovery.
   faqs:
-  - question: Which `cephadm` release should I install on Ubuntu 26.04 and why?
+  - question: Which cephadm release should I install on Ubuntu 26.04?
     answer: >-
       Use `cephadm` 19.2.6 to match the Ceph Squid 19.2.6 cluster release. Ubuntu 26.04 repositories
       provide Ceph 20.2.0, so download `cephadm` 19.2.6 directly to keep the deployment tools and
       cluster on the same version.
-  - question: 'Where do I run commands during each phase: host setup, VM prep, and cluster operations?'
+  - question: Where do I run commands during the host setup, VM prep, and cluster operation phases?
     answer: >-
       Run VM creation commands on the Arm AGI CPU host. Run preparation commands inside each VM.
-      During expansion, authorize the cluster's SSH key on the new nodes from the AGI host. Run
+      During expansion, authorize the cluster SSH key on the new nodes from the AGI host. Run
       cluster bootstrap, RBD usage, and the remaining expansion commands inside `ceph1`.
-  - question: How do I know each VM is ready before bootstrapping Ceph?
+  - question: How do I know that each VM is ready before bootstrapping Ceph?
     answer: >-
-      Confirm each VM has 4 vCPUs, 4 GB memory, a 20 GB OS disk, a separate unused data disk of
-      at least 10 GB, stable IP addressing, SSH access, hostname resolution, and synchronized
+      Confirm each VM has 4 vCPUs, 4 GB memory, a 20 GB OS disk, and a separate unused data disk of
+      at least 10 GB. Also ensure that each VM has stable IP addressing, SSH access, hostname resolution, and synchronized
       clocks. Identify the empty data disk that Ceph will use on each node.
   - question: What device should appear after mapping the RBD image, and how do I verify persistence?
     answer: >-
       You should see a block device such as `/dev/rbd0`. Format and mount it, write a test file, then
-      unmap and remap the image and compare checksums to verify the file persists in Ceph.
+      unmap and remap the image. Compare checksums to verify that the file persists in Ceph.
   - question: What changes when expanding to three nodes, and how is replication tested?
     answer: >-
-      You add two more Ceph nodes so the cluster runs one OSD per node. A controlled OSD failure
+      You add two more Ceph nodes so that the cluster runs one OSD per node. A controlled OSD failure
       tests whether you can keep reading and writing the RBD volume. After the OSD returns, you
       verify that Ceph repairs changed objects and both the original and outage files retain their
       checksums.

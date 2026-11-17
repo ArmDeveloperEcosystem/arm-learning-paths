@@ -60,9 +60,9 @@ generated_summary_faq:
     answer: >-
       Multiply the bytes per token reported by `llama-roofline inspect` by your measured
       decode tokens per second. Compare that achieved bandwidth with the measured ceiling,
-      or use the report's percentage of the ceiling. If it approaches the ceiling, memory
+      or use the percentage of the ceiling listed in the report. If it approaches the ceiling, memory
       bandwidth limits decode performance, so adding threads might not help.
-  - question: What result should I expect from the `llama-bench` thread sweep, and how do I pick
+  - question: What result should I expect from the llama-bench thread sweep, and how do I pick
       a thread count?
     answer: >-
       Read the `llama-bench` table, which reports threads and tokens per second (`t/s`).

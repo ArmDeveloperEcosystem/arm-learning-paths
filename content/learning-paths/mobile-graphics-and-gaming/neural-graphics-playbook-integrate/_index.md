@@ -57,12 +57,12 @@ generated_summary_faq:
     answer: >-
       Use the ML Emulation Layer for desktop development and testing. Don't treat its performance
       as representative of production hardware. Validate performance-critical decisions on an Arm
-      GPU with a neural accelerator (NX).
+      GPU with a neural accelerator.
   - question: Which motion data does NFRU need, and how do I check it?
     answer: >-
       Supply color, depth, motion vectors, camera data, and metadata from your engine. Check the
-      motion-vector format and coordinate system, and confirm that the data aligns with neighboring
-      rendered frames. NFRU uses optical flow within its motion-estimation stage; you don't supply
+      motion-vector format and coordinate system. Confirm that the data aligns with neighboring
+      rendered frames. NFRU uses optical flow within its motion-estimation stage. You don't supply
       it as a separate engine input.
 # END generated_summary_faq
 

@@ -8,12 +8,13 @@ who_is_this_for: This is an introductory topic for database developers, performa
 
 learning_objectives:
   - Understand the purpose and function of SVE2 MATCH instructions.
-  - Implement a search algorithm using both scalar and SVE2-based MATCH approaches.
+  - Implement a search algorithm using both scalar and Scalable Vector Extension 2 (SVE2)-based MATCH approaches.
   - Benchmark and compare performance between scalar and vectorized implementations.
   - Analyze speedups and efficiency gains on Arm Neoverse-based instances with SVE2.
 
 prerequisites:
-- Access to an [AWS Graviton, Google Axion, or Azure Cobalt 100 virtual machine](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider, or an Arm AGI CPU platform.
+- An [Arm-based Ubuntu 24.04 virtual machine](/learning-paths/servers-and-cloud-computing/csp/) with SVE2 support, or an Arm AGI CPU platform running Ubuntu 24.04
+- A GCC compiler with SVE support 
 
 # START generated_summary_faq
 generated_summary_faq:
@@ -37,8 +38,8 @@ generated_summary_faq:
   faqs:
   - question: What should I check before building and running the code?
     answer: >-
-      Use an Arm system with SVE2 support, such as an Arm AGI CPU platform, and a GCC compiler
-      with SVE support. This guide uses Ubuntu 24.04.
+      Check that you're using an Arm system with SVE2 support running Ubuntu 24.04, such as an Arm AGI CPU platform. Ensure that you're using a GCC compiler
+      with SVE support. 
   - question: Where do I add the scalar and SVE2 MATCH implementations?
     answer: >-
       Add the search functions to `sve2_match_demo.c`, then append the benchmark harness after
@@ -50,7 +51,7 @@ generated_summary_faq:
     answer: >-
       You'll see larger speedups at low hit rates in the sample results. As matches become more
       frequent, early termination narrows the difference between SVE2 MATCH and scalar search.
-  - question: How do I change the benchmark’s hit rate?
+  - question: How do I change the hit rate of the benchmark?
     answer: >-
       Pass a hit probability as the third argument to `./sve2_match_demo`, after the array
       length and iteration count.

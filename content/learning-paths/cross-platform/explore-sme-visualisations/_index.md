@@ -56,9 +56,9 @@ generated_summary_faq:
       Repeat for each column and row pair to see the complete result accumulate in ZA.
   - question: What should I check after packing A and padding B?
     answer: >-
-      In **Output Packed Data**, you should see matrix A's values in the new order, with zeros
-      where its final tile has no input rows. In **Output Padded Data**, check that matrix B's
-      original values remain in order and zeros fill the inactive columns.
+      In **Output Packed Data**, you should see the values of matrix A in the new order, with zeros
+      where its final tile has no input rows. In **Output Padded Data**, check that the original values of matrix B
+      remain in order and zeros fill the inactive columns.
   - question: What changes between the gather-load and interleaved GEMM views?
     answer: >-
       Compare how each view loads matrix A. With gather loads, you read values from non-contiguous
