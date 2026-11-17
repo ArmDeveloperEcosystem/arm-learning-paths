@@ -24,6 +24,8 @@ const REDIRECT_URI    = window.location.origin + "/";
 // const REDIRECT_URI = "https://learn.arm.com/";
 
 const AUTHORITY = `https://${B2C_DOMAIN}/tfp/${TENANT_DOMAIN}/${POLICY}/`;
+const SKIP_AUTO_SIGN_IN_KEY = "learningPaths.skipAutoSignIn";
+const AUTO_SIGN_IN_ATTEMPT_KEY = "learningPaths.autoSignInAttempted";
 
 window.msalConfig = {
   auth: {
@@ -98,6 +100,32 @@ function isExpectedAccount(account) {
     policy.toLowerCase() === POLICY.toLowerCase();
 }
 
+function shouldAttemptAutomaticSignIn() {
+  return window.armLearningPathsAutoSignInEligible === true;
+}
+
+async function tryAutomaticSignIn() {
+  if (
+    window.self !== window.top ||
+    sessionStorage.getItem(SKIP_AUTO_SIGN_IN_KEY) ||
+    sessionStorage.getItem(AUTO_SIGN_IN_ATTEMPT_KEY) ||
+    !shouldAttemptAutomaticSignIn()
+  ) {
+    return;
+  }
+
+  // This MSAL version requires a login hint for ssoSilent. A top-level request
+  // with prompt=none can reuse the B2C cookie without prompting for credentials.
+  sessionStorage.setItem(AUTO_SIGN_IN_ATTEMPT_KEY, "true");
+  try {
+    await msalInstance.loginRedirect({ ...window.loginRequest, prompt: "none" });
+    return true;
+  } catch (error) {
+    console.debug("Automatic Arm ID sign-in unavailable:", error);
+    return false;
+  }
+}
+
 async function getIdTokenClaimsForAccount(account) {
   if (!account) return null;
 
@@ -149,20 +177,25 @@ async function initAuth() {
         // await msalInstance.initialize(); // recommended in newer msal-browser docs, but we don't have newest version
     
         const result = await msalInstance.handleRedirectPromise(); // safe to call every load
+
+        if (result) sessionStorage.removeItem(AUTO_SIGN_IN_ATTEMPT_KEY);
     
         if (isExpectedAccount(result?.account)) {
           msalInstance.setActiveAccount(result.account);
-        } else {
-          getAccount();
         }
+
+        if (!getAccount() && await tryAutomaticSignIn()) return;
 
         await updateDigitalDataForCurrentUser();
     
         renderAuthInTopNav();
+        window.finishArmAuthLoading?.();
       })().catch((e) => {
         console.log("Auth init failed:", e);
+        sessionStorage.removeItem(AUTO_SIGN_IN_ATTEMPT_KEY);
         clearDigitalDataUser();
         renderAuthInTopNav();
+        window.finishArmAuthLoading?.();
       });
     
       return authInitPromise;
@@ -270,6 +303,7 @@ document.addEventListener('arm-account-signout', (event) => {
     }
 
   clearDigitalDataUser();
+  sessionStorage.setItem(SKIP_AUTO_SIGN_IN_KEY, "true");
 
   const account = getAccount();
   window.dispatchEvent(new Event('VFAE-logout'));
@@ -283,6 +317,7 @@ document.addEventListener('arm-account-signout', (event) => {
 });
 
 document.addEventListener('arm-account-signin', (event) => {
+  sessionStorage.removeItem(SKIP_AUTO_SIGN_IN_KEY);
   
   var shadowRoot = document.querySelector('arm-top-navigation').shadowRoot;
   if (shadowRoot) {

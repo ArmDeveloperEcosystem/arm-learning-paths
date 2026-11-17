@@ -1,0 +1,76 @@
+<style>
+  #arm-auth-status { display: none; }
+  html.arm-auth-pending body > :not(#arm-auth-status) { display: none !important; }
+  html.arm-auth-pending #arm-auth-status {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    align-items: center;
+    justify-content: center;
+    background: #111827;
+    color: #fff;
+    font: 1rem sans-serif;
+  }
+  .arm-loading-spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: arm-loading-spin 0.8s linear infinite;
+  }
+  .arm-loading-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+  @keyframes arm-loading-spin {
+    to { transform: rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .arm-loading-spinner { animation: none; }
+  }
+</style>
+<script>
+  (function () {
+    var timeoutId;
+    window.finishArmAuthLoading = function () {
+      window.clearTimeout(timeoutId);
+      document.documentElement.classList.remove("arm-auth-pending");
+      document.documentElement.removeAttribute("aria-busy");
+    };
+
+    try {
+      if (window.self !== window.top) return;
+
+      var localTest = ["localhost", "127.0.0.1"].includes(window.location.hostname) &&
+        new URLSearchParams(window.location.search).has("autoSignIn");
+      var armReferral = false;
+      try {
+        var referrer = new URL(document.referrer);
+        armReferral = referrer.protocol === "https:" &&
+          ["developer.arm.com", "www.arm.com"].includes(referrer.hostname) &&
+          referrer.origin !== window.location.origin;
+      } catch (_) { }
+
+      window.armLearningPathsAutoSignInEligible = localTest || armReferral;
+      if (
+        !sessionStorage.getItem("learningPaths.skipAutoSignIn") &&
+        (window.armLearningPathsAutoSignInEligible ||
+          sessionStorage.getItem("learningPaths.autoSignInAttempted"))
+      ) {
+        document.documentElement.classList.add("arm-auth-pending");
+        document.documentElement.setAttribute("aria-busy", "true");
+        // Never leave the page hidden if the authentication script fails to load.
+        timeoutId = window.setTimeout(window.finishArmAuthLoading, 10000);
+      }
+    } catch (_) {
+      window.armLearningPathsAutoSignInEligible = false;
+      window.finishArmAuthLoading();
+    }
+  })();
+</script>
