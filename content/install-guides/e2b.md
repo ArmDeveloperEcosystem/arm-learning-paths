@@ -26,7 +26,7 @@ These instructions are for Ubuntu 24.04 LTS on `aarch64`. E2B requires kernel-ba
 
 ## Before you begin
 
-Use a dedicated Arm Linux host with KVM, such as an Arm AGI CPU platform or an Arm-based bare-metal cloud instance. The installation loads kernel modules, reserves huge pages, creates host directories and network namespaces, and changes host networking and system settings.
+Use a dedicated Arm Linux host with KVM, such as an Arm AGI CPU platform or an Arm-based bare-metal cloud instance. The installation loads kernel modules and reserves huge pages. It creates host directories and network namespaces, and changes host networking and system settings.
 
 You need the following prerequisites:
 
@@ -52,7 +52,7 @@ getconf PAGESIZE
 stat -fc %T /sys/fs/cgroup
 ```
 
-Confirm that the output shows:
+Confirm that the output shows the following values:
 
 - `aarch64` for the architecture
 - Kernel version 6.10 or later
@@ -219,7 +219,7 @@ Run the packaged smoke test:
 docker compose --profile test run --rm smoke
 ```
 
-The test creates a sandbox through the E2B SDK and runs a command in the Firecracker microVM. It reaches a test service through the client proxy, and deletes the sandbox. Docker prints container status updates before the test result. 
+The test creates a sandbox through the E2B SDK and runs a command in the Firecracker microVM. It reaches a test service through the client proxy and deletes the sandbox. Docker prints container status updates before the test result. 
 
 The final line of the output is similar to:
 
