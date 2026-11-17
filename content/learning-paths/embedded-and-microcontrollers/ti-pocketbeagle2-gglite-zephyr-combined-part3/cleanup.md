@@ -29,7 +29,7 @@ components.pop('com.arm.PocketBeagle2.ZephyrExternalTemperature', None)
 components.pop('com.arm.PocketBeagle2.ExternalTemperatureBridge', None)
 Path('remove-deployment.json').write_text(json.dumps({
     'targetArn': os.environ['GROUP_ARN'],
-    'deploymentName': 'Remove PocketBeagle2 Part 3 temperature applications',
+    'deploymentName': 'Remove PocketBeagle2 temperature applications',
     'components': components
 }, indent=2) + '\n')
 PYTHON
@@ -39,7 +39,7 @@ aws greengrassv2 list-effective-deployments --core-device-thing-name "$THING_NAM
 aws greengrassv2 list-installed-components --core-device-thing-name "$THING_NAME"
 ```
 
-Wait for `REMOVE_ID` to succeed. If another group deployment, a direct thing deployment, a local deployment, or another component dependency still requests either component, remove that request too. The two Part 3 recipes do not keep each other installed through dependencies. Canceling a deployment, deleting a component version, deleting the core-device cloud record, or merely removing thing-group membership does not provide this controlled teardown.
+Wait for `REMOVE_ID` to succeed. If another group deployment, a direct thing deployment, a local deployment, or another component dependency still requests either component, remove that request too. The two recipes in this Learning Path do not keep each other installed through dependencies. Canceling a deployment, deleting a component version, deleting the core-device cloud record, or merely removing thing-group membership does not provide this controlled teardown.
 
 ## Check the actual stop behavior
 
@@ -67,4 +67,4 @@ Wait for both components to run again and observe new sensor messages. Then crea
 
 ## What you have learned
 
-You have learned how to remove both applications through revised deployment state and verify that the M4 stops, the bridge closes its resources, and installed application files are removed. You can test redeployment without rebooting, recognize an abnormal termination that needs recovery, and retire this path's cloud resources while preserving the Part 1 setup.
+You have learned how to remove both applications through revised deployment state and verify that the M4 stops, the bridge closes its resources, and installed application files are removed. You can test redeployment without rebooting, recognize an abnormal termination that needs recovery, and retire this path's cloud resources while preserving the setup from [Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/).

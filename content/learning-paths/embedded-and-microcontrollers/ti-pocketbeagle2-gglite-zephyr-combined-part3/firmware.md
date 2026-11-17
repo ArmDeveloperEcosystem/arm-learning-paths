@@ -5,9 +5,9 @@ weight: 4
 layout: "learningpathall"
 ---
 
-## Build with the Part 2 toolchain
+## Build with the Zephyr toolchain
 
-On the Ubuntu host, reactivate the Part 2 virtual environment and verify the existing checkout:
+On the Ubuntu host, reactivate the virtual environment from [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/) and verify the existing checkout:
 
 ```bash
 source "$HOME/pb2-zephyr-venv/bin/activate"
@@ -16,7 +16,7 @@ git describe --tags --exact-match
 cat SDK_VERSION
 ```
 
-Expect `v4.3.0` and `0.17.4`. Use the working Python 3.12 environment from Part 2. If creating a new environment on Ubuntu 22.04, install Python **3.12 and its matching venv package**; Part 2's example package line names Python 3.11 even though its subsequent commands invoke 3.12.
+Expect `v4.3.0` and `0.17.4`. Use the working Python 3.12 environment from [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/). If creating a new environment on Ubuntu 22.04, install Python **3.12 and its matching venv package**; that Learning Path's example package line names Python 3.11 even though its subsequent commands invoke 3.12.
 
 Build the new application from the west workspace:
 
@@ -122,7 +122,7 @@ First, lets ensure we have a good serial terminal program on our ubuntu host:
 sudo apt install gtkterm
 ```
 
-Also, using the A 3.3 V logic USB-to-UART adapter from [Part 2](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/), connect the ground (GND - black) to the pocketbeagle2's P2.22 pin. Temporarily unplug the P2.07 pin (should be jumpered to P1.32 as defined previously... we'll return the jumper when done) and temporarily connect the adapter's RX (orange) to P2.07.  Connect the adapter itself to a USB port on your Ubuntu host. 
+Also, using the A 3.3 V logic USB-to-UART adapter from [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/), connect the ground (GND - black) to the pocketbeagle2's P2.22 pin. Temporarily unplug the P2.07 pin (should be jumpered to P1.32 as defined previously... we'll return the jumper when done) and temporarily connect the adapter's RX (orange) to P2.07.  Connect the adapter itself to a USB port on your Ubuntu host. 
 
 Bring up gtkterm in the Ubuntu host desktop and connect to /dev/ACM0 (should be your pocketbeagle2) at 115200 baud.
 
@@ -185,9 +185,9 @@ The BMP280 returns to sleep between samples, approximately five seconds apart. A
 
 ## Implement actual M4 shutdown
 
-The pinned [Linux driver](https://github.com/beagleboard/linux/blob/2eea568f445af33f3280261904bf1027b02512d8/drivers/remoteproc/ti_k3_common.c) sends mailbox `0xffffff14`, waits for acknowledgment `0xffffff15`, checks CPU WFI, and asserts reset. The Part 1 mailbox wiring uses FIFO 1 toward the M4 and FIFO 0 toward Linux. The new app registers directly with Zephyr's mailbox driver; it does not also enable an IPM/OpenAMP consumer of the same channel.
+The pinned [Linux driver](https://github.com/beagleboard/linux/blob/2eea568f445af33f3280261904bf1027b02512d8/drivers/remoteproc/ti_k3_common.c) sends mailbox `0xffffff14`, waits for acknowledgment `0xffffff15`, checks CPU WFI, and asserts reset. The mailbox wiring in the Yocto image uses FIFO 1 toward the M4 and FIFO 0 toward Linux. The new app registers directly with Zephyr's mailbox driver; it does not also enable an IPM/OpenAMP consumer of the same channel.
 
-On a shutdown message, the interrupt callback wakes the main thread. The main thread finishes acquisition, requests BMP280 sleep, releases SCL/SDA, sends the acknowledgment, disables interrupts, and enters WFI. It also replies to the driver's echo request. This is the firmware support that Part 2 deliberately omitted.
+On a shutdown message, the interrupt callback wakes the main thread. The main thread finishes acquisition, requests BMP280 sleep, releases SCL/SDA, sends the acknowledgment, disables interrupts, and enters WFI. It also replies to the driver's echo request. This is the firmware support that the heartbeat firmware in [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/) deliberately omitted.
 
 ## Understand the Linux firmware manager
 
@@ -198,7 +198,7 @@ On a shutdown message, the interrupt callback wakes the main thread. The main th
 3. **Supervise:** keep running in the component unit and detect an unexpected remoteproc state.
 4. **Terminate:** request `stop`, require `offline`, restore the previous firmware filename, and delete the owned ELF, staged install directory, and ownership record.
 
-Both phases request root privileges because the manager writes remoteproc sysfs and `/lib/firmware`. The firmware is loaded into M4 memory; it does not flash the separate MSPM0. The manager does not overwrite TI's default firmware file or use the Part 2 `pb2-m4 load` helper, which was designed for a one-shot heartbeat.
+Both phases request root privileges because the manager writes remoteproc sysfs and `/lib/firmware`. The firmware is loaded into M4 memory; it does not flash the separate MSPM0. The manager does not overwrite TI's default firmware file or use the `pb2-m4 load` helper from [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/), which was designed for a one-shot heartbeat.
 
 On a normal restart, the manager stages the immutable artifact again if cleanup removed the installed copy. A stop failure preserves the ownership record and reports an error; it must never be hidden as successful cleanup. The later deployment page makes repeated stop/start a required hardware acceptance test.
 

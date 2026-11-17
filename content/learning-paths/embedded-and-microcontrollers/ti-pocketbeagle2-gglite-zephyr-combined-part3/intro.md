@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Extend the first two parts
 
-Use the existing Part 1 Yocto image on the Cortex-A53 and the Part 2 Zephyr toolchain for the AM6254 Cortex-M4F. You will publish two custom components and deploy them to the existing `PocketBeagleDevices` thing group. Linux runs both Greengrass lifecycle supervisors; the first supervisor loads the actual Zephyr ELF onto the M4.
+Use the existing Yocto image from [Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/) on the Cortex-A53 and the Zephyr toolchain from [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/) for the AM6254 Cortex-M4F. You will publish two custom components and deploy them to the existing `PocketBeagleDevices` thing group. Linux runs both Greengrass lifecycle supervisors; the first supervisor loads the actual Zephyr ELF onto the M4.
 
 | Component | S3 artifacts | Install lifecycle | Run lifecycle and normal removal |
 | --- | --- | --- | --- |
@@ -26,7 +26,7 @@ This path targets the supplied **Bosch BMP280 module over I2C**, powered at 3.3 
 
 ## Resolve the lifecycle differences
 
-Part 2's heartbeat cannot acknowledge a Linux stop request. This path supplies new firmware that handles the pinned driver's shutdown message and enters WFI before reset. Do not reuse the heartbeat ELF as the temperature artifact.
+The heartbeat firmware from [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/) cannot acknowledge a Linux stop request. This path supplies new firmware that handles the pinned driver's shutdown message and enters WFI before reset. Do not reuse the heartbeat ELF as the temperature artifact.
 
 [Nucleus Lite 2.6.0](https://github.com/aws-greengrass/aws-greengrass-lite/blob/v2.6.0/docs/RECIPE_SUPPORT_CHANGES.md) does not implement a recipe `shutdown` step. These recipes use `install` and foreground `run` processes. Their SIGTERM handling performs cleanup when Lite stops the component's systemd unit. Do not replace the foreground process with `nohup`, a detached daemon, or a separately enabled application service.
 
@@ -38,7 +38,7 @@ This is a hardware integration example. The firmware, deployment, and cleanup se
 
 | Area | Primary source |
 | --- | --- |
-| Existing image, provisioning, and M4 baseline | [Part 1](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/) and [Part 2](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/) |
+| Existing image, provisioning, and M4 baseline | [Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/) and [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/) |
 | Box contents and header wiring | [PocketBeagle 2 quick start](https://docs.beagleboard.org/boards/pocketbeagle-2/02-quick-start.html) and [expansion tables](https://docs.beagleboard.org/boards/pocketbeagle-2/04-expansion.html) |
 | Zephyr M4 target, memory, and mailbox | [v4.3.0 board common DTS](https://github.com/zephyrproject-rtos/zephyr/blob/v4.3.0/boards/beagle/pocketbeagle_2/pocketbeagle_2_m4-common.dtsi), [SoC DTS](https://github.com/zephyrproject-rtos/zephyr/blob/v4.3.0/dts/arm/ti/am62x_m4.dtsi), and [mailbox driver](https://github.com/zephyrproject-rtos/zephyr/blob/v4.3.0/drivers/mbox/mbox_ti_omap.c) |
 | GPIO pin groups and open-drain limitation | [v4.3.0 pinctrl groups](https://github.com/zephyrproject-rtos/zephyr/blob/v4.3.0/boards/beagle/pocketbeagle_2/pocketbeagle_2_m4-pinctrl.dtsi) and [DaVinci GPIO driver](https://github.com/zephyrproject-rtos/zephyr/blob/v4.3.0/drivers/gpio/gpio_davinci.c) |

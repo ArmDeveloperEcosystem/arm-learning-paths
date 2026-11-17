@@ -24,9 +24,9 @@ aws --version
 
 Your aws cli version should now be greater than 2.17.34.
 
-## Reuse the Part 1 AWS identity
+## Reuse the AWS identity
 
-Run this page on the Ubuntu administrative workstation, in the source workspace. Retain the actual Region and existing device role alias from Part 1:
+Run this page on the Ubuntu administrative workstation, in the source workspace. Retain the actual Region and existing device role alias from [Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/):
 
 ```bash
 cd "$HOME/pb2-temperature-part3"
@@ -70,7 +70,7 @@ The example uses S3-managed encryption and a bucket in the same account. If usin
 
 ## Grant artifact downloads to the existing device role
 
-Part 1's inline Hello World needed no S3 permission. Add the following narrowly scoped policy to its **existing token-exchange IAM role**, following [AWS's artifact-access guidance](https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html#device-service-role-access-s3-bucket):
+The inline Hello World component in [Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/) needed no S3 permission. Add the following narrowly scoped policy to its **existing token-exchange IAM role**, following [AWS's artifact-access guidance](https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html#device-service-role-access-s3-bucket):
 
 ```bash
 python3 - <<'PYTHON'
@@ -90,7 +90,7 @@ aws iam put-role-policy --role-name "$ROLE_NAME" \
   --policy-document file://artifact-access.json
 ```
 
-Use a fresh inline-policy name if that name is already used for another purpose. Preserve the role trust, permissions boundary, role alias, and Part 1 policies. A boundary or explicit deny must also permit these reads. The role does not need S3 write access; the workstation identity performs uploads and component registration.
+Use a fresh inline-policy name if that name is already used for another purpose. Preserve the role trust, permissions boundary, role alias, and existing policies. A boundary or explicit deny must also permit these reads. The role does not need S3 write access; the workstation identity performs uploads and component registration.
 
 ## Grant the device certificate the exact MQTT topic
 
