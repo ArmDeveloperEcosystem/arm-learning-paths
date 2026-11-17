@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for embedded ML developers who want to ca
 
 learning_objectives:
     - Prepare a quantized Conformer model with Arm and Alif MLEK for ExecuTorch deployment.
-    - Build and run ASR on the Corstone-320 Fixed Virtual Platform (FVP) using recorded audio.
+    - Build and run automatic speech recognition (ASR) on the Corstone-320 Fixed Virtual Platform (FVP) using recorded audio.
     - Build and flash the E8 application and its external-flash model.
     - Validate live transcription, Ethos-U85 execution, and standalone restart on the E8.
 
@@ -41,30 +41,30 @@ generated_summary_faq:
     firmware, program the model in external flash, and capture speech through the onboard
     microphones. Finally, you'll check the displayed transcription, Ethos-U85 activity, and standalone
     restart.
-#   faqs:
-#   - question: How do I know the FVP ASR application ran correctly before moving to the E8 board?
-#     answer: >-
-#       Check that the FVP console identifies the audio sample and prints a `Decoded output:` line
-#       with recognized text. You can then move on to the E8 build.
-#   - question: Which application do I build for the E8 and which core does it target?
-#     answer: >-
-#       Select the Alif MLEK `alif_asr` application with `-DUSE_CASE_BUILD=alif_asr`, then build
-#       the `mlek_alif_asr` target. You deploy it to the E8's high-performance Cortex-M55 subsystem.
-#   - question: Which build option selects the Ethos-U85 NPU for the E8 firmware?
-#     answer: >-
-#       Set `-DETHOS_U_NPU_ID=U85` when you configure the E8 firmware. You can check for nonzero
-#       `NPU ACTIVE` and `NPU TOTAL` counters in the UART log after inference.
-#   - question: What should I set up on the E8 before opening the serial console, and what settings do I use?
-#     answer: >-
-#       Keep the **PRG USB** cable connected and set **SW4** to **UART4**. Open the board's serial
-#       port at 115200 baud, eight data bits, no parity, and one stop bit. If the port was already
-#       open when you changed **SW4**, close and reopen it.
-#   - question: How do I know the E8 is ready to capture speech, and how do I record a phrase?
-#     answer: >-
-#       Press **RESET (SW1)** and wait for `Model initialisation complete` in the UART log and
-#       **Conformer ASR (ExecuTorch)** on the display. Hold down the joystick center while you
-#       speak, then release it. Check the display for a transcription and the console for a
-#       `Decoded output:` line.
+  faqs:
+  - question: How do I know the FVP ASR application ran correctly before moving to the E8 board?
+    answer: >-
+      Check that the FVP console identifies the audio sample and prints a `Decoded output:` line
+      with recognized text. You can then move on to the E8 build.
+  - question: Which application do I build for the E8 and which core does it target?
+    answer: >-
+      Select the Alif MLEK `alif_asr` application with `-DUSE_CASE_BUILD=alif_asr`, then build
+      the `mlek_alif_asr` target. You deploy it to the E8's high-performance Cortex-M55 subsystem.
+  - question: Which build option selects the Ethos-U85 NPU for the E8 firmware?
+    answer: >-
+      Set `-DETHOS_U_NPU_ID=U85` when you configure the E8 firmware. You can check for nonzero
+      `NPU ACTIVE` and `NPU TOTAL` counters in the UART log after inference.
+  - question: What should I set up on the E8 before opening the serial console, and what settings do I use?
+    answer: >-
+      Keep the **PRG USB** cable connected and set **SW4** to **UART4**. Open the board's serial
+      port at 115200 baud, eight data bits, no parity, and one stop bit. If the port was already
+      open when you changed **SW4**, close and reopen it.
+  - question: How do I know the E8 is ready to capture speech, and how do I record a phrase?
+    answer: >-
+      Press **RESET (SW1)** and wait for `Model initialisation complete` in the UART log and
+      **Conformer ASR (ExecuTorch)** on the display. Hold down the joystick center while you
+      speak, then release it. Check the display for a transcription and the console for a
+      `Decoded output:` line.
 # END generated_summary_faq
 
 author:

@@ -33,30 +33,30 @@ generated_summary_faq:
     architecture and Docker connection. Then, you'll start an Arm64 MySQL container with a persistent
     volume. You'll connect to the MySQL client, create a test database, and add a sample
     table. Finally, you'll insert rows into the table and verify the stored data.
-  # faqs:
-  # - question: How do I check that my server is ready to run the Arm64 MySQL image?
-  #   answer: >-
-  #     Run `uname -m` and confirm that it prints `aarch64`. Then run `docker info` to check that
-  #     your Docker client can reach Docker Engine. If it can't, use the linked Docker install guide.
-  # - question: How do I keep my MySQL data when I replace the container?
-  #   answer: >-
-  #     Create the `mysql-data` Docker volume and mount it at `/var/lib/mysql`, as shown in the
-  #     `docker run` command. Your database files then remain in the volume when you replace the
-  #     container.
-  # - question: What should I check if `docker exec` cannot connect to the MySQL container?
-  #   answer: >-
-  #     Run `docker ps --filter name=mysql-arm` to check that the container is running. Check
-  #     `docker logs mysql-arm` and wait for MySQL to report that it is ready for connections.
-  #     Use the container name you chose if it differs from `mysql-arm`.
-  # - question: How do I connect and create the sample database?
-  #   answer: >-
-  #     Run `docker exec -it mysql-arm mysql -uroot -p` and enter your root password. At the
-  #     `mysql>` prompt, run `CREATE DATABASE arm_test;`. You can confirm its creation with
-  #     `SHOW DATABASES;`.
-  # - question: How do I verify that the sample table stores data?
-  #   answer: >-
-  #     Select `arm_test`, create the `book` table, and insert the seven sample rows. Run
-  #     `SELECT * FROM book;` and confirm that the query returns seven rows.
+  faqs:
+  - question: How do I check that my server is ready to run the Arm64 MySQL image?
+    answer: >-
+      Run `uname -m` and confirm that it prints `aarch64`. Then run `docker info` to check that
+      your Docker client can reach Docker Engine. If it can't, use the linked Docker install guide.
+  - question: How do I keep my MySQL data when I replace the container?
+    answer: >-
+      Create the `mysql-data` Docker volume and mount it at `/var/lib/mysql`, as shown in the
+      `docker run` command. Your database files then remain in the volume when you replace the
+      container.
+  - question: What should I check if Docker can't to the MySQL container?
+    answer: >-
+      Run `docker ps --filter name=mysql-arm` to check that the container is running. Check
+      `docker logs mysql-arm` and wait for MySQL to report that it's ready for connections.
+      Use the container name that you chose if it differs from `mysql-arm`.
+  - question: How do I connect and create the sample database?
+    answer: >-
+      Run `docker exec -it mysql-arm mysql -uroot -p` and enter your root password. At the
+      `mysql>` prompt, run `CREATE DATABASE arm_test;`. You can confirm its creation with
+      `SHOW DATABASES;`.
+  - question: How do I verify that the sample table stores data?
+    answer: >-
+      Select `arm_test`, create the `book` table, and insert the seven sample rows. Run
+      `SELECT * FROM book;` and confirm that the query returns seven rows.
 # END generated_summary_faq
 
 author: Jason Andrews

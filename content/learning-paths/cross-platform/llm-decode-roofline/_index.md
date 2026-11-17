@@ -41,32 +41,33 @@ generated_summary_faq:
     read bandwidth and inspect how many bytes each model reads per token. Finally, you'll compare
     decode and prefill across thread counts. You'll diagnose memory limits, and choose a model size and
     thread settings.
-#   faqs:
-#   - question: How do I confirm my system is 64-bit Arm and see which CPU features are present?
-#     answer: >-
-#       Run `uname -m` and `grep -m1 Features /proc/cpuinfo`. Look for `aarch64` and flags such as
-#       `asimd` (Neon) and `asimddp` (DotProd). llama.cpp detects DotProd at build time and uses it
-#       for quantized kernels on the Cortex-A76.
-#   - question: What should I check before measuring memory bandwidth?
-#     answer: >-
-#       Close other applications and ensure your system is idle. Use `uptime` and `free -m` to
-#       confirm low load and that available memory exceeds the largest model file (1,066 MB).
-#       Background load lowers measured bandwidth and distorts results that depend on it.
-#   - question: How do I see how many bytes per token a model reads during decode?
-#     answer: >-
-#       Run `llama-roofline inspect` on the GGUF file. Check the `per token` line in its report to
-#       see how many megabytes decode reads from the file for each token.
-#   - question: How do I know whether decode is memory-bound after inspection and measurement?
-#     answer: >-
-#       Compare the bytes per token reported by `llama-roofline inspect` with the measured
-#       bandwidth ceiling. If decode approaches that ceiling, memory bandwidth limits performance,
-#       so adding threads might not help.
-#   - question: What result should I expect from the `llama-bench` thread sweep, and how do I pick
-#       a thread count?
-#     answer: >-
-#       Read the `llama-bench` table, which reports threads and tokens per second (`t/s`). Choose
-#       the thread count with the highest `t/s` for your test. Decode can saturate quickly when
-#       memory-bound, while prefill can benefit from more threads.
+  faqs:
+  - question: How do I confirm my system is 64-bit Arm and see which CPU features are present?
+    answer: >-
+      Run `uname -m` and `grep -m1 Features /proc/cpuinfo`. Look for `aarch64` and flags such as
+      `asimd` (Neon) and `asimddp` (DotProd). On the Raspberry Pi 5's Cortex-A76,
+      llama.cpp detects DotProd at build time and uses it for quantized kernels.
+  - question: What should I check before measuring memory bandwidth?
+    answer: >-
+      Close other applications and ensure your system is idle. Use `uptime` and `free -m` to
+      confirm low load and that available memory exceeds the largest model file (1,066 MB).
+      Background load lowers measured bandwidth and distorts results that depend on it.
+  - question: How do I see how many bytes per token a model reads during decode?
+    answer: >-
+      Run `llama-roofline inspect` on the GGUF file. Check the `per token` line in its report to
+      see the estimated model data read per generated token, in megabytes.
+  - question: How do I know whether decode is memory-bound after inspection and measurement?
+    answer: >-
+      Multiply the bytes per token reported by `llama-roofline inspect` by your measured
+      decode tokens per second. Compare that achieved bandwidth with the measured ceiling,
+      or use the percentage of the ceiling listed in the report. If it approaches the ceiling, memory
+      bandwidth limits decode performance, so adding threads might not help.
+  - question: What result should I expect from the llama-bench thread sweep, and how do I pick
+      a thread count?
+    answer: >-
+      Read the `llama-bench` table, which reports threads and tokens per second (`t/s`).
+      Choose the best thread count separately for `tg128` decode and `pp512` prefill.
+      Decode can saturate quickly when memory-bound, while prefill can benefit from more threads.
 # END generated_summary_faq
 
 author: Manu Nicholas Jacob

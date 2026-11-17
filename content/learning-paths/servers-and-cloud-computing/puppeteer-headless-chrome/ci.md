@@ -9,11 +9,7 @@ layout: "learningpathall"
 
 ## Run tests on pull requests
 
-You can run Puppeteer tests automatically on pull requests to check changes before merging them. You'll create a workflow that performs the following tasks: 
-
-- Checks out the repository
-- Starts Hugo
-- Runs all three Puppeteer scripts  
+You can run Puppeteer tests automatically on pull requests to check changes before merging them. You'll create a workflow that checks out the repository, starts Hugo, and runs all three Puppeteer scripts.  
 
 If any script exits with a non-zero code, the workflow fails.
 
@@ -70,7 +66,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install Chrome
         run: |
@@ -116,7 +112,7 @@ Each step in the workflow accomplishes the following tasks:
 - `actions/checkout@v4` clones the repository onto the runner.
 - `peaceiris/actions-hugo@v3` installs the Hugo extended binary at the pinned version. The `extended: true` flag is required because the dashboard uses Hugo Pipes for asset processing.
 - `hugo server --port 1313 &` starts the development server in the background. The `&` is essential because without it, the step never finishes.
-- `actions/setup-node@v4` installs Node.js 20 and adds `npm` to the path.
+- `actions/setup-node@v4` installs Node.js 22 and adds `npm` to the path.
 - `Install Chrome` downloads the official Google arm64 `.deb` package and installs it with `apt`. This is the same package that you installed on your server earlier.
 - `Install Puppeteer` runs `npm install puppeteer-core` inside the `puppeteer-tests` directory where your test scripts live.
 - `npx wait-on` polls `http://localhost:1313` until Hugo responds or the 30-second timeout expires. This prevents the test steps from starting before the server is ready.

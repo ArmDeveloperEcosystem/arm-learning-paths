@@ -39,34 +39,35 @@ generated_summary_faq:
     compatibility. Then, you'll inspect performance reports and compare a smaller-input variant
     under the same target profile. If you have a compatible Android
     device, you can also capture and analyze measured performance.
-  # faqs:
-  # - question: How do I verify my host meets the wheel requirements before installing?
-  #   answer: >-
-  #     Run `uname -m`, `python3.12 --version`, and `getconf GNU_LIBC_VERSION`. You need `x86_64`,
-  #     CPython `3.12.x`, and glibc `2.39` or later on Ubuntu 24.04. You can't use this wheel on
-  #     Ubuntu 22.04, native macOS, or native Linux on Arm.
-  # - question: MLIA prompted me to install the NX Performance Estimator. What should I do?
-  #   answer: >-
-  #     Confirm the installation when prompted, read the Arm license, and continue only if you agree.
-  #     If you've already installed the backend, you can proceed without repeating setup.
-  # - question: Which command do I use to check operator compatibility, and where do the results go?
-  #   answer: >-
-  #     Run `mlia check models/baseline.tflite --target-profile neural-technology --compatibility
-  #     --output-dir runs/baseline-compatibility`. Read the result in
-  #     `runs/baseline-compatibility/mlia-output/mlia-output.json`. Check that its compatibility
-  #     status is `ok` and that no operator checks failed.
-  # - question: What result should I expect from the baseline performance check and how do I interpret it?
-  #   answer: >-
-  #     Run `mlia check models/baseline.tflite --target-profile neural-technology --performance
-  #     --output-dir runs/baseline`. With the tested packages and profile, you should see about
-  #     `136,962` total cycles and `0.09131 ms` per inference. Treat these as compiler estimates,
-  #     not timings measured on a device.
-  # - question: How do I compare a smaller-input MobileNet variant with the baseline?
-  #   answer: >-
-  #     Run compatibility and performance checks for `models/smaller.tflite` with the same
-  #     `neural-technology` target profile, writing each report to a separate directory. Compare
-  #     your reports with the baseline, then validate task accuracy, preprocessing, and runtime
-  #     behavior on representative data before deployment.
+  faqs:
+  - question: How do I verify my host meets the wheel requirements before installing?
+    answer: >-
+      Run `uname -m`, `python3.12 --version`, and `getconf GNU_LIBC_VERSION`. You need `x86_64`,
+      CPython `3.12.x`, and glibc `2.39` or later on Ubuntu 24.04. You can't use this wheel on
+      Ubuntu 22.04, macOS, or Linux on Arm.
+  - question: How do I complete the installation of NX Performance Estimator?
+    answer: >-
+      Confirm the installation when prompted, read the Arm license, and continue only if you agree.
+      If you've already installed the backend, proceed without repeating setup.
+  - question: Which command do I use to check operator compatibility, and where do the results go?
+    answer: >-
+      Run `mlia check models/baseline.tflite --target-profile neural-technology --compatibility
+      --output-dir runs/baseline-compatibility`. Read its report in
+      `runs/baseline-compatibility/mlia-output/mlia-output.json`. Check that its compatibility
+      status is `ok` and that no operator checks failed.
+  - question: How do I interpret the baseline performance estimate?
+    answer: >-
+      Run `mlia check models/baseline.tflite --target-profile neural-technology --performance
+      --output-dir runs/baseline`. The reference result of `136,962` total cycles and
+      `0.09131 ms` per inference used Neural Technology `0.2.0` and LiteRT converter `0.1.2`.
+      Your setup uses versions `0.3.0` and `0.1.3`, so use your generated report for the current
+      estimate. These are compiler estimates, not timings measured on a device.
+  - question: How do I compare a smaller-input MobileNet variant with the baseline?
+    answer: >-
+      Run compatibility and performance checks for `models/smaller.tflite` with the same
+      `neural-technology` target profile, writing each report to a separate directory. Compare
+      your reports with the baseline, then validate task accuracy, preprocessing, and runtime
+      behavior on representative data before deployment.
 # END generated_summary_faq
 
 author: Annie Tallund

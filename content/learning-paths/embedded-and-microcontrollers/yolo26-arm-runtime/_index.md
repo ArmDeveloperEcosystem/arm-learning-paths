@@ -38,33 +38,33 @@ generated_summary_faq:
     operations for reuse across frames. Finally, you'll export the checkpoint to
     NCNN and compare latency with the same dataset, input size, batch, and
     system conditions.
-  # faqs:
-  #   - question: Does Arm Runtime use the Raspberry Pi 5 CPU or GPU?
-  #     answer: >-
-  #       You run inference on the Raspberry Pi 5 CPU. The runtime uses Cortex-A76
-  #       cores, a fixed schedule, planned memory reuse, and fused operations.
-  #   - question: How do I run detection on my own video or a PiCamera feed?
-  #     answer: >-
-  #       For a video with at least 200 frames, run `make example-video
-  #       VIDEO=/path/to/your-video.mp4`. For a live PiCamera feed, install the
-  #       camera packages and run `make example-camera`.
-  #   - question: What happens when I create the detector?
-  #     answer: >-
-  #       When you create the detector, the Python session checks the model
-  #       manifest and binary, then loads the shared library. The runtime loads
-  #       the converted model and prepares XNNPACK operations; the example
-  #       reuses the detector across frames.
-  #   - question: Which settings should I match for a fair NCNN comparison?
-  #     answer: >-
-  #       Use Ultralytics 8.4.108 and the same YOLO26n checkpoint,
-  #       `coco-128-by-sa` dataset, 640 × 640 input, and batch size one. Stop
-  #       other CPU workloads and use the same power, cooling, and CPU settings.
-  #   - question: What should I check if the runtimes report different latency or accuracy?
-  #     answer: >-
-  #       Confirm both runs use the same checkpoint, dataset, input size, and
-  #       batch size. Stop other CPU workloads and use matching power, cooling,
-  #       and CPU settings; internal precision and operation fusion can still
-  #       differ between runtimes.
+  faqs:
+    - question: Does Arm Runtime use the Raspberry Pi 5 CPU or GPU?
+      answer: >-
+       Inference runs on the Raspberry Pi 5 CPU. The runtime uses Cortex-A76
+        cores, a fixed schedule, planned memory reuse, and fused operations.
+    - question: How do I run detection on my own video or a PiCamera feed?
+      answer: >-
+        For a video with at least 200 frames, run `make example-video
+        VIDEO=/path/to/your-video.mp4`. For a live PiCamera feed, install the
+        camera packages and run `make example-camera`.
+    - question: What happens when I create the detector?
+      answer: >-
+        When you create the detector, the Python session checks the model
+        manifest and binary, then loads the shared library. The runtime loads
+        the converted model and prepares XNNPACK operations. The example
+        reuses the detector across frames.
+    - question: Which settings should I match for a fair NCNN comparison?
+      answer: >-
+        Use Ultralytics 8.4.108 and the same YOLO26n checkpoint,
+        `coco-128-by-sa` dataset, 640 × 640 input, and batch size one. Stop
+        other CPU workloads and use the same power, cooling, and CPU settings.
+    - question: What should I check if the runtimes report different latency or accuracy?
+      answer: >-
+        Confirm both runs use the same checkpoint, dataset, input size, and
+        batch size. Stop other CPU workloads and use matching power, cooling,
+        and CPU settings. Internal precision and operation fusion can still
+        differ between runtimes.
 # END generated_summary_faq
 
 author:
