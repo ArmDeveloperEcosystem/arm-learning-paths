@@ -142,6 +142,12 @@ Called from:
         document.querySelectorAll('ads-card.path-card, ads-card.tool-card').forEach((card) => {
             card.componentOnReady().then(() => {
                 card.shadowRoot?.querySelector('.c-card')?.removeAttribute('tabindex');
+                // Let the stretched link use the full card as its containing block.
+                const content = card.querySelector('ads-card-content');
+                customElements.whenDefined('ads-card-content').then(() => content.componentOnReady()).then(() => {
+                    const wrapper = content.shadowRoot?.querySelector('.c-card-content');
+                    if (wrapper) wrapper.style.position = 'static';
+                });
             });
         });
     });

@@ -429,7 +429,32 @@ a.listing-card-link:focus {
     text-decoration: none;
 }
 
+/* Stretch each native link across the card, including its padding. */
+ads-card.path-card,
+ads-card.tool-card {
+    position: relative;
+}
+
+ads-card.path-card ads-card-content,
+ads-card.tool-card ads-card-content,
+a.listing-card-link {
+    position: static;
+}
+
+a.listing-card-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: var(--ads-card-border-radius);
+    cursor: pointer;
+}
+
 a.listing-card-link:focus-visible {
+    outline: none;
+}
+
+a.listing-card-link:focus-visible::after {
     outline: 2px solid var(--ads-ui-violet-40);
     outline-offset: 2px;
 }
