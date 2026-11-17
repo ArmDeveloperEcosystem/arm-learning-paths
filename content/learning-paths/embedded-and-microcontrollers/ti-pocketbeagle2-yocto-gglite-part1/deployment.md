@@ -107,7 +107,7 @@ For service-level faults, inspect `systemctl --failed` and the `ggl.core.iotcore
 
 ## Optional: remove the test application
 
-If you are continuing to Part 2, keep the board provisioned and Greengrass running. You can keep the Hello World component deployed for the later verification.
+If you are continuing to [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/), keep the board provisioned and Greengrass running. You can keep the Hello World component deployed for the later verification.
 
 To stop the application through the same group target, revise the group's deployment to omit the component. This is accomplished on the Ubuntu host:
 
@@ -134,4 +134,4 @@ Wait for this revision to succeed and confirm the application stops. If you adde
 
 You built a Yocto image for an Arm board, provisioned its Greengrass identity, published a custom component, and verified execution after a thing group deployment. To extend the exercise, replace the message loop with a sensor application, publish a new component version, and revise the group deployment to select it.
 
-Continue with [Part 2: run Zephyr on the PocketBeagle 2 MCU](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/) to add a real-time application alongside Linux.
+Continue with [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/) to add a real-time application alongside Linux.
