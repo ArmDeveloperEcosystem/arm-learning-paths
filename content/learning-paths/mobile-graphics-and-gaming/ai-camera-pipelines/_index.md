@@ -1,5 +1,5 @@
 ---
-title: Accelerate Denoising, Background Blur and Low-Light Camera Effects with SME2
+title: Accelerate camera effects with SME2 on Arm
 
 description: Learn how to build and optimize AI-powered camera pipeline applications on Arm Linux using KleidiAI, KleidiCV, and SME2 to accelerate denoising, background blur, and low-light effects.
 

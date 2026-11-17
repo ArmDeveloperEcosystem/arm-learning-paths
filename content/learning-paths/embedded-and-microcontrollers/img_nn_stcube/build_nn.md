@@ -1,6 +1,6 @@
 ---
 # User change
-title: Build an image classification NN model trained with the CIFAR-10 dataset
+title: Train a CIFAR-10 image classifier for STM32L4 Discovery
 description: Train an image classification model with the CIFAR-10 dataset and prepare it for deployment with STM32 tools.
 
 weight: 3 # 1 is first, 2 is second, etc.

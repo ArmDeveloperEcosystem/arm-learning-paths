@@ -15,4 +15,9 @@ The URL for the Veraison server provided by Linaro is `https://veraison.test.lin
 
 Instead of this URL, use the one for your own Veraison service, which will be of the form `https://services.example-veraison.com:8443`, although you need to replace `example-veraison.com` with your AWS domain.
 
-Apart from this URL change, all other steps in the Learning Path remain the same.
+Apart from this URL change, you also need to use a newer versions of `evcli`.
+
+When cloning `evcli` source code use commit:
+``` bash
+git -C evcli checkout 0e253e8
+```

@@ -6,9 +6,9 @@ weight: 4
 layout: learningpathall
 ---
 
-## Install Java on Azure Ubuntu Pro 24.04 LTS (Arm64)
+## Install Java on Azure Cobalt 200 (Arm64)
 
-In this section, you will install Java on your Arm-based Ubuntu Pro virtual machine. The goal is to ensure you have both the Java Runtime Environment (JRE) for running Java applications and the Java Development Kit (JDK) for compiling code and running benchmarks.
+In this section, you will install Java on your Arm-based Ubuntu virtual machine. The goal is to ensure you have both the Java Runtime Environment (JRE) for running Java applications and the Java Development Kit (JDK) for compiling code and running benchmarks.
 
 
 ## Install OpenJDK (JRE + JDK)
@@ -30,13 +30,14 @@ java -version
 javac -version
 ```
 
-You see the version information printed: 
+You see the version information printed:
 
 ```output
 aarch64
-openjdk version "21.0.8" 2025-07-15
-OpenJDK Runtime Environment (build 21.0.8+9-Ubuntu-0ubuntu124.04.1)
-OpenJDK 64-Bit Server VM (build 21.0.8+9-Ubuntu-0ubuntu124.04.1, mixed mode, sharing)
+openjdk version "21.0.13.0.3" 2026-10-24
+OpenJDK Runtime Environment (build 21.0.13.0.3+1-1-24.04.1-Ubuntu)
+OpenJDK 64-Bit Server VM (build 21.0.13.0.3+1-1-24.04.1-Ubuntu, mixed mode, sharing)
+javac 21.0.13.0.3
 ```
 
 Check to ensure that the JDK is properly installed:
@@ -56,14 +57,14 @@ Set the Java Environment Variables to point to the root directory of your JDK in
 
 Use a text editor to edit the file `$HOME/.bashrc` and add the 2 environment variables.
 
-```console 
+```console
 export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-arm64
 export PATH=$JAVA_HOME/bin:$PATH
 ```
 Source the updated `$HOME/.bashrc` file.
 
 ```console
-source ~/.bashrc 
+source ~/.bashrc
 ```
 
 Confirm the new settings.
@@ -83,6 +84,5 @@ The output is:
 ```
 
 {{% notice Note %}}
-Ubuntu Pro 24.04 LTS provides OpenJDK 21 by default. Ensure your OpenJDK for Arm64 is **11.0.9 or newer** if you must run Java 11; releases before 11.0.9 can suffer performance issues due to false‑sharing cache contention. See the Arm community blog: [Java performance on Neoverse N1](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1). You can also consult the [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) for package guidance on Arm Neoverse Linux systems.
+This Learning Path was validated with the Ubuntu OpenJDK 21 package. Ensure your OpenJDK for Arm64 is **11.0.9 or newer** if you must run Java 11; releases before 11.0.9 can suffer performance issues due to false‑sharing cache contention. See the Arm community blog: [Java performance on Neoverse N1](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/java-performance-on-neoverse-n1). You can also consult the [Arm Ecosystem Dashboard](https://developer.arm.com/ecosystem-dashboard/) for package guidance on Arm Neoverse Linux systems.
 {{% /notice %}}
-

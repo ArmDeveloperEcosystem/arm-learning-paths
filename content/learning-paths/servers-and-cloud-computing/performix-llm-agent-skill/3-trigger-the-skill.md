@@ -1,5 +1,5 @@
 ---
-title: Best practices for prompting AI assistants to use the arm-performix skill
+title: Prompt AI assistants to use the arm-performix skill
 description: Write prompts that activate the arm-performix skill by providing profiling intent, an Arm target, an absolute binary path, and a repeatable workload.
 weight: 4
 

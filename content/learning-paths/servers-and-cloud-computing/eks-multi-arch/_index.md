@@ -1,5 +1,5 @@
 ---
-title: Learn how to build and deploy a multi-architecture application on Amazon EKS
+title: Build and deploy a multi-architecture app on Amazon EKS
 description: Learn how to use docker buildx and docker manifest to build and deploy multi-architecture container images with x86/amd64 and arm64 support on Amazon EKS.
 
 minutes_to_complete: 60

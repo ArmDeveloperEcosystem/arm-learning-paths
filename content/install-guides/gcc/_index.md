@@ -6,6 +6,16 @@ additional_search_terms:
 - compiler
 - GCC
 - linux
+- arm-none-eabi
+- embedded
+- cross-compiler
+- Cortex-M
+- Cortex-R
+- Cortex-A
+- microcontroller
+
+# Navigation buttons in the sections replace the automatic install guide cards.
+hide_install_guide_cards: true
 
 ### FIXED, DO NOT MODIFY
 weight: 1                       # Defines page ordering. Must be 1 for first (or only) page.
@@ -15,23 +25,75 @@ multitool_install_part: false   # Set to true if a sub-page of a multi-page arti
 layout: installtoolsall         # DO NOT MODIFY. Always true for tool install articles
 ---
 
-## What should I consider to determine the correct GCC flavor?
+The GNU Compiler Collection (GCC) is available in several toolchains for Arm. Each supports a specific combination of host machine, target architecture, and runtime environment.
 
-There are multiple flavors of [GCC, the GNU Compiler Collection](https://gcc.gnu.org/), for the Arm architecture, and for different use cases. To determine which flavor you need, consider the variables below:
+## Select your toolchain
 
-- Target environment where you want the compiled software to run: bare metal or real time operating system (RTOS), Linux kernel and applications, Android applications, or Windows applications.
+Choose a toolchain based on where your software runs and where you compile it:
 
-- Host machine, where you will do the compiling: Windows, Linux, or macOS
+<div class="gcc-toolchain-table">
 
-- Architecture of the host machine: x86 or Arm
+| Choose this toolchain | When to use it |
+|-----------------------|----------------|
+| Arm GNU Toolchain | You build bare-metal software or software that uses a real-time operating system (RTOS) |
+| Linux cross-compiler | You build on Linux for a different target architecture |
+| Native compiler | You build and run software on the same Arm Linux machine |
 
-This section provides installation instructions for GCC targeting the Arm architecture. Navigate to the section of interest.
+</div>
 
-## How do I use GCC as a native compiler on Arm Linux?
-Use this option to install GCC using the Linux package manager and build applications on an Arm Linux system. 
+### Arm GNU Toolchain
 
-## How do I use GCC as a cross-compiler on Arm Linux?
-Use this option to install GCC using the Linux package manager and build Linux applications by cross compiling them for the Arm architecture from an x86 or Arm Linux host machine. For bare-metal and embedded targets, use the Arm GNU Toolchain option below instead.
+Use the Arm GNU Toolchain to build firmware, an RTOS, or bare-metal software for Cortex-M, Cortex-R, and Cortex-A processors.
 
-## How do I use GCC from the Arm GNU Toolchain?
-Use this option to download and install a version of GCC produced by Arm. It is available from the Arm Developer website and works on Linux, Windows, and macOS host machines. It supports bare-metal and Linux targets. 
+This is the right option for most embedded developers. The toolchain is maintained by Arm and released through the Arm GNU Toolchain GitLab repository.
+
+The Arm GNU Toolchain provides pre-built binaries for Windows, Linux, and macOS.
+
+For Cortex-A and Cortex-R, check your board or RTOS documentation to determine whether your project uses 32-bit or 64-bit software. Choose the compiler that matches your software target:
+
+<div class="gcc-toolchain-table">
+
+| Compiler | Target |
+|----------|--------|
+| `arm-none-eabi-gcc` | Cortex-M software |
+| `arm-none-eabi-gcc` | 32-bit software for supported Cortex-R and Cortex-A processors (AArch32) |
+| `aarch64-none-elf-gcc` | 64-bit software for supported Cortex-R and Cortex-A processors (AArch64) |
+
+</div>
+
+<a class="c-button is-primary" href="{{< relref "arm-gnu.md" >}}">Install Arm GNU Toolchain</a>
+
+### Linux cross-compiler
+
+Use a GCC cross-compiler to build Arm Linux applications for a different target architecture. The compiled applications run on Arm Linux systems, not bare-metal hardware.
+
+You need a Linux host. Install the cross-compiler using your Linux package manager.
+
+Examples include compiling from x86-64 to 64-bit Arm, or from 64-bit Arm to 32-bit Arm. Choose the compiler that matches your software target:
+
+<div class="gcc-toolchain-table">
+
+| Compiler | Target |
+|----------|--------|
+| `aarch64-linux-gnu-gcc` | 64-bit Arm Linux applications (AArch64) |
+| `arm-linux-gnueabihf-gcc` | 32-bit Arm Linux applications (AArch32, hard float) |
+
+</div>
+
+<a class="c-button is-primary" href="{{< relref "cross.md" >}}">Install a Linux cross-compiler</a>
+
+### Native compiler
+
+Use GCC to build C and C++ applications directly on the Arm Linux machine where you run them.
+
+You need an Arm Linux machine, such as a Neoverse server, Raspberry Pi, or another Arm development board. Install GCC using your Linux package manager.
+
+<div class="gcc-toolchain-table">
+
+| Compiler | Target |
+|----------|--------|
+| `gcc` | Arm Linux (native) |
+
+</div>
+
+<a class="c-button is-primary" href="{{< relref "native.md" >}}">Install GCC on Arm Linux</a>

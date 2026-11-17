@@ -6,10 +6,10 @@ minutes_to_complete: 60
 who_is_this_for: This Learning Path is for game developers, graphics engineers, and technical leads who understand Arm Neural Technology and want to plan an integration for a mobile game.
 
 learning_objectives:
-    - Choose the Arm Neural Technology integration route that matches your game and team
-    - Plan an NFRU evaluation using public Arm tools and representative game content
-    - Decide when advanced NSSD exploration with Arm fits your visual goals
-    - Use Model Gym, MLIA, and Streamline to plan model development and validation for NX
+    - Choose the Arm Neural Technology integration route that matches your game and team.
+    - Plan an Neural Frame Rate Upscaling (NFRU) evaluation using public Arm tools and representative game content.
+    - Decide when advanced Neural Super Sampling and Denoising (NSSD) exploration with Arm fits your visual goals.
+    - Use Model Gym, Arm ML Inference Advisor (MLIA), and Streamline to plan model development and validation for neural accelerator (NX).
 
 prerequisites:
     - Familiarity with Arm Neural Technology and its NSS, NFRU, and NSSD use cases
@@ -19,50 +19,51 @@ prerequisites:
 # START generated_summary_faq
 generated_summary_faq:
   template_version: summary-faq-v3
-  generated_at: '2026-09-03T20:30:03Z'
+  generated_at: '2026-10-26T15:47:56Z'
   generator: ai
   ai_assisted: true
   ai_review_required: true
   model: gpt-5
   prompt_template: summary-faq-v3
-  source_hash: 53bb7773b2ef4f0886f2a6c7cc10734df7bc7acf70618086ea1461e9780f161f
-  summary_generated_at: '2026-09-03T20:30:03Z'
-  summary_source_hash: 53bb7773b2ef4f0886f2a6c7cc10734df7bc7acf70618086ea1461e9780f161f
-  faq_generated_at: '2026-09-03T20:30:03Z'
-  faq_source_hash: 53bb7773b2ef4f0886f2a6c7cc10734df7bc7acf70618086ea1461e9780f161f
+  source_hash: 48fb2106c848266d9b29f50ed3d56d189b263e7946d18c4956fe172e707c780d
+  summary_generated_at: '2026-10-26T15:47:56Z'
+  summary_source_hash: 48fb2106c848266d9b29f50ed3d56d189b263e7946d18c4956fe172e707c780d
+  faq_generated_at: '2026-10-26T15:47:56Z'
+  faq_source_hash: 48fb2106c848266d9b29f50ed3d56d189b263e7946d18c4956fe172e707c780d
   summary: >-
-    You choose between public NFRU and NSS integration routes, evaluate whether NFRU meets your
-    game's quality and frame-pacing targets, and plan experimental NSSD exploration through Arm's
-    Early Access Program. You trace NFRU through the engine, rehearse repeatable testing with Project
-    Moku, scope model training for NX, and use MLIA estimates and Streamline device measurements
-    to guide model decisions. Finally, you record your decision in a short integration brief.
-  faqs:
-  - question: Which neural technology should I start with if I need smoother motion without rendering
-      every frame?
-    answer: >-
-      Start with NFRU. If you use Unreal Engine, evaluate the public NFRU plugin against repeatable
-      content. If you own a custom engine, use the public Neural Graphics SDK and plan the Vulkan
-      inputs, dispatch, presentation, and frame-pacing evaluation.
-  - question: What should I capture from Unreal to fairly test NFRU?
-    answer: >-
-      Use controlled scenes that exercise occlusion, particle effects, lighting changes, and frame-pacing
-      stress, as shown in the Project Moku NFRU case study. Keep runs repeatable so you can compare
-      output consistently.
-  - question: How do I validate that NFRU behaves correctly during evaluation?
-    answer: >-
-      Validate the workload and pacing with Streamline, and inspect generated frames with RenderDoc
-      for Arm GPUs. Look for a consistent intermediate frame between neighboring rendered frames
-      and check for visible artifacts.
-  - question: When should I consider exploring NSSD instead of focusing on NFRU?
-    answer: >-
-      Explore NSSD when the goal is to reconstruct a clean, higher-resolution image from low-resolution,
-      noisy inputs for advanced lighting or ray-tracing workflows. It is a more ambitious route,
-      so decide when collaboration with Arm aligns with your visual targets.
-  - question: What should I include in the short integration brief?
-    answer: >-
-      Record your chosen route, representative test content, measurable targets, and named owners.
-      Include relevant captures and measurements, label any MLIA results as estimates, and define
-      your fallback.
+    You'll choose an Arm Neural Technology route for your game's visual goal and engine.
+    You'll examine Neural Frame Rate Upscaling (NFRU) inputs and frame pacing, then set pass
+    criteria and test game content. Next, you'll decide whether NSSD merits experimental exploration with Arm. If a measured gap justifies
+    model work, you'll use Model Gym, MLIA, and Streamline to assess candidates. You'll finish
+    with an integration brief separating estimates from device measurements.
+#   faqs:
+#   - question: How do I choose between NFRU, NSS, and NSSD?
+#     answer: >-
+#       Start with your player-facing goal and the resources your engine can provide. Choose the public
+#       NFRU route for smoother presentation or the public NSS route for neural upscaling. If your
+#       lighting goals call for denoising and super sampling together, consider NSSD as an experimental
+#       exploration with Arm. You can start with a published model and defer custom model work.
+#   - question: What pass condition confirms NFRU is viable for my game?
+#     answer: >-
+#       Set your presentation, image-quality, latency, power, and thermal limits before testing.
+#       Compare the same representative action with NFRU disabled and enabled under fixed conditions.
+#       Continue only if your measured result meets your presentation target within those limits.
+#   - question: What should I record during the NFRU test run?
+#     answer: >-
+#       Record render FPS, present FPS, frame-time distribution, and your image-quality observations.
+#       Capture latency, power, and thermal data against the limits you set. Use the Project Moku case
+#       study to establish a repeatable capture method, then apply it to representative game content.
+#   - question: How should I treat desktop results from the ML Emulation Layer?
+#     answer: >-
+#       Use the ML Emulation Layer for desktop development and testing. Don't treat its performance
+#       as representative of production hardware. Validate performance-critical decisions on an Arm
+#       GPU with a neural accelerator (NX).
+#   - question: Which motion data does NFRU need, and how do I check it?
+#     answer: >-
+#       Supply color, depth, motion vectors, camera data, and metadata from your engine. Check the
+#       motion-vector format and coordinate system, and confirm that the data aligns with neighboring
+#       rendered frames. NFRU uses optical flow within its motion-estimation stage; you don't supply
+#       it as a separate engine input.
 # END generated_summary_faq
 
 author: Annie Tallund

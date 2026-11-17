@@ -1,5 +1,5 @@
 ---
-title: Create and train a PyTorch model for digit classification using the MNIST dataset
+title: Train a PyTorch MNIST digit classifier on Arm
 
 minutes_to_complete: 160
 
@@ -74,7 +74,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-A
     - Neoverse

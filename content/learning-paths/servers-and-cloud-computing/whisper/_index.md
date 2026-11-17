@@ -27,7 +27,7 @@ rerun_faqs: false
 skilllevels: Introductory
 armips:
     - Neoverse
-subjects: ML
+subjects: AI/ML
 platforms:
   - AWS Graviton
   - Microsoft Azure Cobalt

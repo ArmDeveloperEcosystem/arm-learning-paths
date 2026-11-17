@@ -23,7 +23,7 @@ To process and analyze the telemetry data you are streaming to Azure IoT Hub, yo
 1. Sign in to the Azure Portal.
 2. Click **Create a resource**, type “Stream Analytics job” into the search box, and press **Enter**.
 3. From the search results, select **Stream Analytics job**, then click **Create**:
-![img9 alt-text#center](figures/09.webp)
+![Azure Marketplace search results for Stream Analytics job, with the Microsoft Stream Analytics job tile and its Create menu visible.#center](figures/09.webp)
 4. Provide the necessary information:
 * Subscription: choose the Azure subscription you want to use for this job.
 * Resource group: select the resource group you previously created (e.g., your IoT project's resource group).
@@ -32,7 +32,7 @@ To process and analyze the telemetry data you are streaming to Azure IoT Hub, yo
 * Hosting environment: select Cloud for Azure-managed infrastructure.
 * Streaming units: set this to 1 (appropriate for initial testing and smaller workloads, you can scale up later).
 
-![img10 alt-text#center](figures/10.png)
+![Azure New Stream Analytics job Basics form with a resource group and job name entered, Cloud selected as the hosting environment, and one streaming unit set.#center](figures/10.png)
 
 5. After reviewing your settings carefully, click **Review + create**, confirm that all details are correct, and then click **Create** to deploy your Azure Stream Analytics job.
 
@@ -43,7 +43,7 @@ After successfully creating the Stream Analytics job, you will need to configure
 1. Navigate to your newly created Stream Analytics job in the Azure Portal.
 2. On the left-hand menu, under the **Job topology** section, select **Inputs**.
 3. Click **Add input**, and choose **IoT Hub** as the input type.
-![img11 alt-text#center](figures/11.png)
+![Azure Stream Analytics job Inputs page with the Add input menu open and IoT Hub listed as a stream input source.#center](figures/11.png)
 4. Enter the following configuration details:
 * Input Alias: provide a name, such as `IoTHubInput`.
 * IoT Hub: select the Azure IoT Hub you created earlier.
@@ -55,7 +55,7 @@ After successfully creating the Stream Analytics job, you will need to configure
 * Encoding: Choose **UTF-8**.
 * Event compression type: Set this to None.
 
-![img12 alt-text#center](figures/12.webp)
+![Azure Stream Analytics IoT Hub input form with alias IoTHubInput, an IoT Hub and consumer group selected, deviceId as the partition key, and JSON with UTF-8 encoding.#center](figures/12.webp)
 
 5. After entering these details, carefully verify them for accuracy and completeness. Click **Save** to apply the changes and successfully link your Azure IoT Hub as the input source for your Stream Analytics job. 
 
@@ -81,7 +81,7 @@ This straightforward query selects all relevant fields (deviceId, temperature, p
 
 Before running this query, ensure your Python IoT simulator `iot_simulator.py` is actively sending telemetry data. After the simulator begins transmitting data, you can test and verify your Stream Analytics query within the Azure Portal using the built-in Test query feature. Doing this allows you to view live-streamed sensor data in real-time and confirm that your streaming pipeline is working as expected:
 
-![img13 alt-text#center](figures/13.webp)
+![Azure Stream Analytics Query page showing a query that selects device ID, temperature, pressure, humidity, and timestamp from IoTHubInput, with sample sensor readings in the input preview below.#center](figures/13.webp)
 
 Constructing queries in Azure Stream Analytics involves using a straightforward SQL-like syntax specifically optimized for real-time stream processing. Typically, a query contains a `SELECT` statement to specify which fields from the incoming telemetry data to process, and a `FROM` statement to indicate the source stream. Queries can be expanded with advanced features such as filtering, aggregations, and temporal window functions to handle more complex scenarios.
 

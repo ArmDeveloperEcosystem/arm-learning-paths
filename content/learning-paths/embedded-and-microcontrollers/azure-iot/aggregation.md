@@ -162,23 +162,23 @@ func start
 ```
 
 Once running, observe the HTTP trigger endpoint, which should appear similar to the following:
-![img36 alt-text#center](figures/36.webp)
+![Terminal output from func start showing GetAverageTemperature running at a local HTTP endpoint, confirming the Azure Function is ready for a browser request.#center](figures/36.webp)
 
 Next, start the simulator to stream sensor data and open the HTTP trigger endpoint URL in your web browser. You will see the calculated average temperature displayed:
-![img37 alt-text#center](figures/37.png)
+![Browser response from the local average temperature endpoint showing a Success message and an averageTemperature value of 23.45.#center](figures/37.png)
 
 ## Deploy to Azure Function App
 Now that your Azure Function is fully tested and ready, it's time to deploy it to Azure, making it accessible online and available for integration with other services and applications. Visual Studio Code provides an easy and efficient way to deploy Azure Functions directly from your local development environment. Follow these steps to deploy your function
 1. In Visual Studio Code, open the Command Palette (Ctrl+Shift+P on Windows/Linux, or Cmd+Shift+P on macOS) and search for "Azure Functions: Deploy to Function App":
-![img38 alt-text#center](figures/38.png)
+![Visual Studio Code Command Palette with Azure Functions: Deploy to Function App selected to publish the local function.#center](figures/38.png)
 2. The deployment wizard will guide you through the following selections:
 * Subscription: choose the Azure subscription you wish to use,
 * Select a function app: Select the Function App that you previously created in Azure (in this example, "IoTTemperatureAlertFunc")
 * Confirm your deployment:
-![img39 alt-text#center](figures/39.png)
+![Visual Studio Code deployment confirmation warning that publishing to IoTTemperatureAlertFunc will overwrite its previous deployment, with Deploy available to continue.#center](figures/39.png)
 3. Wait for the deployment to complete. This process typically takes a few moments. Once deployed, your Azure Function is hosted in Azure and ready for use.
 4. Open the Azure Portal, and go to your function app (in this example, "IoTTemperatureAlertFunc"). You will see the deployed functions:
-![img40 alt-text#center](figures/40.webp)
+![Azure Function App overview showing both cosmosdb_trigger and GetAverageTemperature listed as enabled functions after deployment.#center](figures/40.webp)
 
 ## Configure Function App Settings
 You have just deployed the functions to Azure. Previously, when testing the functions locally, you used the `local.settings.json` file to store the Cosmos DB connection string. However, this local configuration file is not deployed to Azure. Therefore, you need to update the corresponding settings directly within the Azure portal.
@@ -191,7 +191,7 @@ Follow these steps to configure the Cosmos DB connection string
 3. Click the **+ Add** button.
 4. Enter the name you used in your code (such as "armiotcosmosdb_DOCUMENTDB").
 5. Paste the Cosmos DB connection string into the Value field:
-![img41 alt-text#center](figures/41.webp)
+![Azure Function App Environment variables page with the Add/Edit application setting pane open for the Cosmos DB connection string name and value.#center](figures/41.webp)
 6. Click **Apply** to add the setting.
 7. Click **Apply** at the bottom to apply changes. Then, confirm to save changes
 
@@ -200,11 +200,11 @@ Once you've configured the connection string, test your deployed Azure Function 
 1. Return to the Overview page of your Azure Function App.
 2. Click on your HTTP-triggered function (GetAverageTemperature).
 3. Click Get function URL and copy the displayed URL (under default):
-![img42 alt-text#center](figures/42.webp)
+![Azure GetAverageTemperature Code and Test page with the Get Function URL pane open and a copy button beside the default function URL.#center](figures/42.webp)
 4. Open this URL in your web browser.
 5. Start your IoT simulator to begin streaming telemetry data to Cosmos DB.
 6. Refresh or access the function URL again, and you should see the calculated average temperature displayed:
-![img43 alt-text#center](figures/43.png)
+![Browser response from the deployed GetAverageTemperature endpoint showing a Success message and an averageTemperature value of 26.04.#center](figures/43.png)
 
 This confirms your Azure Function successfully connects to Cosmos DB, retrieves real-time data, and calculates the average temperature as intended
 

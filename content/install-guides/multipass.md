@@ -67,7 +67,7 @@ To upgrade an existing installation, run the new installer in the same way. Exis
 
 The following instructions use the command line interface. If you prefer the graphical interface, open Multipass from **Applications**. You can use it to create, start, and stop virtual machines.
 
-![Screenshot of the Multipass graphical interface showing the Welcome to Multipass window with cards for Ubuntu Server, Ubuntu Core, Fedora, and Debian, each with Launch and Configure buttons alt-text#center](/install-guides/_images/multipass-gui.png "The Multipass graphical interface on macOS")
+![Screenshot of the Multipass graphical interface showing the Welcome to Multipass window with cards for Ubuntu Server, Ubuntu Core, Fedora, and Debian, each with Launch and Configure buttons alt-text#center](/install-guides/_images/multipass-gui.webp "The Multipass graphical interface on macOS")
 
 ### Select the macOS virtualization driver
 

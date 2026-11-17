@@ -36,15 +36,6 @@ python3 -m json.tool arm_test/mobilesam/export/metrics.json
 
 The `fp32_quantized_iou` value must also be at least `0.9`.
 
-A reference run at the pinned commit produced these scores:
-
-| Comparison | IoU |
-| --- | --- |
-| Floating-point and quantized host masks | 0.9550 |
-| FVP and quantized host masks | 0.9809 |
-
-This run used Python 3.12.13, PyTorch 2.14.0, Vela 5.1.0, and Corstone-320 FVP 11.31.28 on macOS 26.6.2 with Apple silicon. Treat these scores as examples; use the two `0.9` thresholds to check your own run.
-
 ## Confirm Ethos-U delegation
 
 Display the delegation report written during export:
@@ -53,15 +44,19 @@ Display the delegation report written during export:
 sed -n '1,120p' arm_test/mobilesam/export/delegation.txt
 ```
 
-Confirm that `Total delegated subgraphs` is `1`. The exporter checks this before writing the `.pte`. The reference run above produced:
+Confirm that `Total delegated subgraphs` is `1`. The exporter checks this before writing the `.pte`. The output includes:
 
 ```output
 Total delegated subgraphs: 1
-Number of delegated nodes: 5076
-Number of non-delegated nodes: 3
 ```
 
 Node counts can vary with dependency versions. Use the values from your export when reporting delegation.
+
+In `arm_test/mobilesam/fvp.log`, also confirm `NPU delegations: 1`. This count records a completed NPU invocation at runtime; the export report shows how the model was partitioned.
+
+{{% notice Note %}}
+The FVP reports CPU timing and CPU/NPU ratios as `N/A`. Fast mode also marks NPU PMU counters as unavailable; timing mode reports simulated NPU counters. Use the delegation count and mask comparison to validate execution. Simulated counters are not measurements of real-device latency.
+{{% /notice %}}
 
 ## Inspect the visual result
 

@@ -77,7 +77,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: Agentic AI
 armips:
     - Neoverse
     # - Cortex-A

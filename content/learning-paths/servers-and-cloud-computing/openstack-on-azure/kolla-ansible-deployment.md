@@ -1,5 +1,5 @@
 ---
-title: Deploy OpenStack using Kolla-Ansible on an Azure Ubuntu Arm64 virtual machine
+title: Deploy OpenStack on an Azure Arm VM with Kolla-Ansible
 weight: 6
 
 ### FIXED, DO NOT MODIFY

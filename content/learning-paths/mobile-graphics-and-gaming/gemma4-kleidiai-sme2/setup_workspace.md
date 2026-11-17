@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## What you'll build
 
-Benchmark Gemma 4 CPU inference with LiteRT-LM and KleidiAI on macOS. Compare
+You'll benchmark Gemma 4 CPU inference with LiteRT-LM and KleidiAI on macOS. You'll compare
 baseline and optimized XNNPACK builds to measure prefill and decode throughput.
 
 The optimized build improves one-thread decode by 53.6% on Apple M4 Pro and
@@ -18,9 +18,10 @@ compare both phases using the same model and settings.
 
 ## Confirm SME2 support on your device
 
-Use an SME2-capable Mac, such as an M4-family Mac. See the
-[devices with native SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices)
-for Mac and Android examples. The setup here uses macOS.
+Use an SME2-capable Mac, such as an M4-family Mac. For Mac and Android examples, see the
+[devices with native SME2 support](/learning-paths/cross-platform/multiplying-matrices-with-sme2/1-get-started/#devices).
+
+A macOS device is used as an example in this Learning Path.
 
 Confirm the host architecture and SME feature flags:
 
@@ -38,8 +39,8 @@ hw.optional.arm.FEAT_SME: 1
 hw.optional.arm.FEAT_SME2: 1
 ```
 
-If either feature reports `0`, XNNPACK cannot dispatch the SME2 kernels and the
-macOS performance comparison is not valid.
+If either feature reports `0`, XNNPACK can't dispatch the SME2 kernels and the
+macOS performance comparison isn't valid.
 
 ## Create the workspace
 
@@ -53,7 +54,7 @@ cd $HOME/gemma4-prefill-bench
 ## Clone the sources
 
 {{% notice Note %}}
-The commands check out specific revisions so you can reproduce the benchmark results.
+The commands check out specific revisions so that you can reproduce the benchmark results.
 {{% /notice %}}
 
 Clone LiteRT-LM, KleidiAI, and XNNPACK:
@@ -79,6 +80,9 @@ SME2 support; the optimized build adds the static INT2 SME2 kernels.
 git -C xnnpack worktree add --detach ../xnnpack-baseline \
   c6b52536d3f614793f21ab4a17ae1cde73cc0333
 ```
+## What you've accomplished and what's next
 
-You've prepared the sources and baseline. Next, install the build tools and
+You've prepared the sources and baseline.
+
+Next, you'll install the build tools and
 download the Gemma 4 model.

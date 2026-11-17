@@ -1,5 +1,5 @@
 ---
-title: Optimize application performance using Arm Performix CPU microarchitecture analysis
+title: Analyze CPU microarchitecture with Arm Performix
 
 minutes_to_complete: 60
 

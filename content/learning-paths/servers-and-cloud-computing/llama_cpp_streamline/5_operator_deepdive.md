@@ -1,5 +1,5 @@
 ---
-title: Implement operator-level performance analysis with channel annotations
+title: Analyze operators with channel annotations
 weight: 6
 
 ### FIXED, DO NOT MODIFY

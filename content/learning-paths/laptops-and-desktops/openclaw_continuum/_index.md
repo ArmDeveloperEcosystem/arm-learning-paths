@@ -78,7 +78,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
-subjects: ML
+subjects: Agentic AI
 armips:
     - Cortex-A
     - Cortex-X

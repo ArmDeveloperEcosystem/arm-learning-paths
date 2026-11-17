@@ -1,5 +1,5 @@
 ---
-title: Getting started with Microsoft Azure Cobalt 100, Azure Linux 3.0, and Apache Spark
+title: Explore Spark on Azure Cobalt 100 and Azure Linux 3.0
 weight: 2
 
 ### FIXED, DO NOT MODIFY

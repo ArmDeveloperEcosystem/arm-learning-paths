@@ -1,5 +1,5 @@
 ---
-title: Understand Azure Cobalt 100 VMs and Elasticsearch benchmarking with ESRally
+title: Explore Elasticsearch benchmarking on Azure Cobalt 100
 
 weight: 2
 

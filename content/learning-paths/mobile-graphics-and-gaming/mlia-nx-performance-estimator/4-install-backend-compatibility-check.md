@@ -40,7 +40,7 @@ assert not failed_checks, "Review the non-passing operator checks."
 PY
 ```
 
-The expected output for the pinned packages and baseline is:
+The reference output for the baseline is:
 
 ```output
 Compatibility status: ok
