@@ -53,7 +53,7 @@ WORKDIR="$HOME/yocto-pocketbeagle2" JOBS=4 \
 
 The script packages the board integration recipes, builds LTTng modules and Weston, and builds `pocketbeagle2-dev-image`. The image includes Nucleus Lite, Python, development tools, SSH, and USB Ethernet support. Weston is included but is not needed for Hello World.
 
-For Part 2, the image also includes `pb2-m4`, the M4 remoteproc driver, and the AM6254 reserved-memory settings.
+To support [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/), the image also includes `pb2-m4`, the M4 remoteproc driver, and the AM6254 reserved-memory settings.
 
 Omit `--no-sdk` to build both image and SDK. The script regenerates `local.conf` and `bblayers.conf`. Store persistent overrides in `$WORKDIR/build/conf/pocketbeagle2-extra.conf`; keep the bundle at its original location because `bblayers.conf` references it.
 

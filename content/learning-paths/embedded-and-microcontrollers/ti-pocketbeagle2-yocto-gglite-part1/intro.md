@@ -35,7 +35,7 @@ The bundle pins Yocto Scarthgap layers and Greengrass nucleus lite 2.6.0. The ge
 
 Allow several additional hours for a first uncached build beyond the hands-on time shown for this Learning Path. AWS services can incur charges; use a dedicated development thing group.
 
-This image also prepares the board for [Part 2: run Zephyr alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/). To follow both parts, use PocketBeagle 2 revision A1 and have a 3.3 V USB-to-UART adapter and jumper wires.
+This image also prepares the board for [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/). To follow both Learning Paths, use PocketBeagle 2 revision A1 and have a 3.3 V USB-to-UART adapter and jumper wires.
 
 ## What you have learned
 
