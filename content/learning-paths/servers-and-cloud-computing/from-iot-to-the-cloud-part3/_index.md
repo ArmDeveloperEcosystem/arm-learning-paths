@@ -1,5 +1,5 @@
 ---
-title: Deploy an application to Azure Kubernetes Service on Arm-based virtual machines
+title: Deploy an app to Azure Kubernetes Service on Arm VMs
 description: Learn how to create an Azure Kubernetes Service cluster with Arm64 virtual machines and deploy a containerized application to AKS.
 
 minutes_to_complete: 45

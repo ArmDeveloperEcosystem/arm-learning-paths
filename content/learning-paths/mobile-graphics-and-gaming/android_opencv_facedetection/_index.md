@@ -70,7 +70,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-A
 operatingsystems:

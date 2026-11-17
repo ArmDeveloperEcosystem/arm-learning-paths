@@ -1,5 +1,5 @@
 ---
-title: Measure application resource and power usage on Windows on Arm with FFmpeg and PowerShell
+title: Measure Windows on Arm resource usage with FFmpeg and PowerShell
 
 description: Learn how to measure application resource usage, benchmark video encoding tasks, and monitor CPU, memory, and power consumption on Windows on Arm using FFmpeg and PowerShell.
 

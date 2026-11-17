@@ -1,12 +1,12 @@
 ---
-title: Build multi-architecture applications with Red Hat OpenShift Pipelines on AWS
+title: Build multi-architecture apps with Red Hat OpenShift Pipelines on AWS
 
 minutes_to_complete: 30
 
 who_is_this_for: This topic is for OpenShift administrators who want to migrate their applications to Arm.
 
 learning_objectives: 
-  - Migrate existing OpenShift applications to Arm-based nodes
+  - Migrate existing OpenShift applications to Arm-based nodes.
 
 prerequisites:
   - An AWS account with an OpenShift 4.18 cluster running x86 compute nodes

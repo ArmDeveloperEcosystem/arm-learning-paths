@@ -1,5 +1,5 @@
 ---
-title: Explore deployment profiles and try the adapter with a Raspberry Pi 5 camera
+title: Test deployment profiles with a Raspberry Pi 5 camera
 description: Use a ros2-device-connect profile to run the adapter with a Raspberry Pi 5 camera, and review how the PuppyPi robot profile exposes selected capabilities.
 weight: 5
 

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="720"
+  height="104"
+  viewBox="0 40 1460 210"
+  role="img"
+  aria-labelledby="title description">
+  <title id="title">ExecuTorch export and lowering flow</title>
+  <desc id="description">A four-stage flow from quantizing the graph, through Ethos-U partitioning and Cortex-M lowering, to the portable operations that remain.</desc>
+
+  <defs>
+    <style>
+      text {
+        font-family: "Segoe UI", Arial, sans-serif;
+        fill: #23383d;
+        font-size: 25px;
+        font-weight: 600;
+        text-anchor: middle;
+      }
+      .card {
+        fill: #f7fafa;
+        stroke: #b4c8c8;
+        stroke-width: 2;
+      }
+      .ethosu-card {
+        fill: #edf8f5;
+        stroke: #a0c5bc;
+        stroke-width: 2;
+      }
+    </style>
+    <marker
+      id="arrow-tip"
+      viewBox="0 0 10 10"
+      refX="9"
+      refY="5"
+      markerWidth="8"
+      markerHeight="8"
+      orient="auto">
+      <path
+        d="M 1 1 L 9 5 L 1 9"
+        fill="none"
+        stroke="#61777a"
+        stroke-width="1.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+    </marker>
+  </defs>
+
+  <rect width="1460" height="300" fill="#ffffff"/>
+
+  <rect x="27" y="79" width="310" height="150" rx="18" fill="#cbd8d8"/>
+  <rect class="card" x="20" y="70" width="310" height="150" rx="18"/>
+  <text x="175" y="154">Quantize the graph</text>
+
+  <path d="M 342 145 H 378" fill="none" stroke="#61777a" stroke-width="2.5" marker-end="url(#arrow-tip)"/>
+
+  <rect x="397" y="79" width="310" height="150" rx="18" fill="#a4c9c1"/>
+  <rect class="ethosu-card" x="390" y="70" width="310" height="150" rx="18"/>
+  <text x="545" y="154">Ethos-U partition</text>
+
+  <path d="M 712 145 H 748" fill="none" stroke="#61777a" stroke-width="2.5" marker-end="url(#arrow-tip)"/>
+
+  <rect x="767" y="79" width="310" height="150" rx="18" fill="#cbd8d8"/>
+  <rect class="card" x="760" y="70" width="310" height="150" rx="18"/>
+  <text x="915" y="154">Cortex-M lowering</text>
+
+  <path d="M 1082 145 H 1118" fill="none" stroke="#61777a" stroke-width="2.5" marker-end="url(#arrow-tip)"/>
+
+  <rect x="1137" y="79" width="310" height="150" rx="18" fill="#cbd8d8"/>
+  <rect class="card" x="1130" y="70" width="310" height="150" rx="18"/>
+  <text x="1285" y="140">
+    <tspan x="1285" dy="0">Portable operations</tspan>
+    <tspan x="1285" dy="34">remain</tspan>
+  </text>
+</svg>

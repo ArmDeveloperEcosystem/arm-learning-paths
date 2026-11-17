@@ -1,19 +1,19 @@
 ---
-title: "What are Cobalt 100 and MongoDB?"
+title: "What are Cobalt 200 and MongoDB?"
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
-## Cobalt 100 Arm-based processor
+## Cobalt 200 Arm-based processor
 
-Azure’s Cobalt 100 is Microsoft’s first-generation Arm-based processor. Built on the Arm Neoverse N2 architecture, the 64-bit CPU improves performance and energy efficiency for a wide range of cloud-native, scale-out Linux workloads. These include web and application servers, data analytics, open-source databases, caching systems, and more. Running at 3.4 GHz, the Cobalt 100 processor allocates a dedicated physical core for each vCPU to ensure consistent, predictable performance.
+Azure Cobalt 200 is Microsoft’s second-generation Arm-based processor, built on Arm Neoverse Compute Subsystems V3 (CSS V3). It supports cloud-native Linux workloads, including document databases such as MongoDB. In this Learning Path, you use a general-purpose **Standard_D4ps_v7** virtual machine with 4 vCPUs.
 
-See the [Azure Cobalt 100 announcement blog](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353) to find out more.
+See Microsoft’s [introduction to Azure Cobalt 200 virtual machines](https://azure.microsoft.com/en-us/blog/new-azure-cobalt-200-vms-deliver-50-performance-improvement-fully-optimized-for-modern-agentic-ai-workloads/) to find out more.
 
 ## MongoDB
 
-MongoDB is an open-source NoSQL database known for high performance, scalability, and flexibility. It stores data in JSON-like BSON documents, making it ideal for applications that need dynamic, schema-less data structures. Developers commonly use MongoDB for web, mobile, IoT, and real-time analytics workloads. 
+MongoDB is an open-source NoSQL database known for high performance, scalability, and flexibility. It stores data in JSON-like BSON documents, making it ideal for applications that need dynamic, schema-less data structures. Developers commonly use MongoDB for web, mobile, IoT, and real-time analytics workloads.
 
 To find out more, see the [MongoDB website](https://www.mongodb.com/) and the [MongoDB documentation](https://www.mongodb.com/docs/).

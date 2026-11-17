@@ -1,5 +1,5 @@
 ---
-title: Identify application bottlenecks with the CPU Microarchitecture recipe
+title: Find bottlenecks with the CPU Microarchitecture recipe
 weight: 3
 
 ### FIXED, DO NOT MODIFY

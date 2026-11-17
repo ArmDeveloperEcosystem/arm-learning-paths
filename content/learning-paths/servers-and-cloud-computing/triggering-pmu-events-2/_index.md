@@ -1,5 +1,5 @@
 ---
-title: Learn about Neoverse Non-cache PMU events using C and Assembly Language 
+title: Explore Neoverse non-cache PMU events with C and assembly
 
 minutes_to_complete: 30
 

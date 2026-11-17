@@ -143,7 +143,7 @@ Make sure you have saved all three files (index.html, main.js, and styles.css). 
 
 You should now see real-time temperature readings displayed:
 
-![img44 alt-text#center](figures/44.png)
+![Locally opened IoT Solution web page with the Get temperature button and a returned temperature reading of 24.09 degrees Celsius.#center](figures/44.png)
 
 ## Deployment to Azure Blob Storage
 You will now deploy the web portal you have created to Azure Blob Storage, making it accessible online.
@@ -153,21 +153,21 @@ You will now deploy the web portal you have created to Azure Blob Storage, makin
 2. Create a Storage Account:
 * Click **Create a resource**.
 * Search for “Storage account”.
-![img45 alt-text#center](figures/45.webp)
+![Azure Marketplace search results for storage account, with the Microsoft Storage account tile among the results.#center](figures/45.webp)
 * Click **Create**.
-![img46 alt-text#center](figures/46.png)
+![Azure Marketplace Storage account product page with its plan selected and the Create button available.#center](figures/46.png)
 3. Provide the required details:
 * Subscription, resource group, and storage account name (e.g. armiotstorage).
 * For Primary service, choose **Azure Blob Storage** or **Azure Data Lake Storage Gen 2**.
 * Select **Standard performance** and **Locally-redundant storage (LRS)**.
-![img47 alt-text#center](figures/47.webp)
+![Azure Create a storage account Basics form with an account name entered, Azure Blob Storage selected as the primary service, Standard performance, and locally redundant storage.#center](figures/47.webp)
 * Click "Review + create", then "Create".
 3. Enable Static Website Hosting:
 * Navigate to your newly created storage account.
 * Under Data management, click **Static website**.
 * Select **Enabled**.
 * Set index.html as the index document name.
-![img48 alt-text#center](figures/48.webp)
+![Azure Storage account Static website settings with Enabled selected and index.html entered as the index document name.#center](figures/48.webp)
 * Click **Save**.
 
 After saving, Azure provides you with a URL like: https://<storage-account-name>.z22.web.core.windows.net/. 
@@ -180,14 +180,14 @@ You can upload your website files directly using the Azure Portal or via Azure S
 3. Open the container named ”$web” (created automatically when enabling static websites).
 4. Click **Upload** and select your three website files (index.html, main.js, styles.css), and upload them.
 
-![img49 alt-text#center](figures/49.webp)
+![Azure Storage $web container listing the uploaded index.html, main.js, and styles.css files for the IoT web portal.#center](figures/49.webp)
 
 ### Verify the Deployment
 After uploading your files, open a browser and navigate to https://<storage-account-name>.z22.web.core.windows.net/. 
 
 Your static website should load, allowing you to test the **Get temperature** button (to see temperatures make sure to start the IoT simulator):
 
-![img50 alt-text#center](figures/50.png)
+![Deployed IoT Solution web page at an Azure Storage static website address, with the Get temperature button and a returned reading of 24.26 degrees Celsius.#center](figures/50.png)
 
 ## Summary
 In this Learning Path, you successfully built a complete, end-to-end prototype of an IoT solution. You started with a simulator streaming realistic telemetry data to Azure through IoT Hub. You used Azure Stream Analytics to process and route this streaming data directly into Cosmos DB, providing scalable and reliable storage. Additionally, you developed two Azure Functions: the first continuously monitors incoming temperature readings, sending email notifications whenever the temperature exceeds a predefined threshold, ensuring proactive alerts. The second Azure Function aggregates recent temperature data from the last minute and provides this information via an HTTP endpoint. Finally, you utilized this aggregation function within our user-friendly web portal, enabling real-time visualization of temperature data, thus building out a complete IoT solution.

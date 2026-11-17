@@ -109,6 +109,25 @@ table {
     }
 }
 
+/* Align all overview table columns without changing other install guides. */
+.gcc-toolchain-table table {
+    table-layout: fixed;
+}
+
+.gcc-toolchain-table th:first-child {
+    width: 35%;
+}
+
+.gcc-toolchain-table th,
+.gcc-toolchain-table td {
+    overflow-wrap: anywhere;
+    white-space: normal;
+}
+
+.gcc-toolchain-table table code {
+    white-space: normal;
+}
+
 /* Fix codeblock spacing in content when only direct decendent of paragraph (not including formatted code blocks, which are in a 'pre' element) (add space before and after, not done right) */
 p > code {
     margin-left: 4px;

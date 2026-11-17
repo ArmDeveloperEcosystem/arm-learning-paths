@@ -1,5 +1,5 @@
 ---
-title: Inspect model artifacts and runtime profiles with Google Model Explorer and Arm extensions
+title: Inspect Arm model artifacts with Google Model Explorer
     
 description: Inspect ExecuTorch PTE, TOSA, VGF, ETRecord, and ETDump model artifacts with Google Model Explorer and Arm extensions.
 
@@ -79,7 +79,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
   - Cortex-A
   - Cortex-M

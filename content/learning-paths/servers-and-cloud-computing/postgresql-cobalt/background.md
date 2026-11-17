@@ -1,20 +1,20 @@
 ---
-title: Understand PostgreSQL on Azure Cobalt 100
+title: Understand PostgreSQL on Azure Cobalt 200
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
-## Why run PostgreSQL on Azure Cobalt 100
+## Why run PostgreSQL on Azure Cobalt 200
 
-PostgreSQL on Arm-based Azure Cobalt 100 processors delivers efficient database performance for both transactional and analytical workloads. Cobalt 100's dedicated physical cores per vCPU provide consistent performance that suits PostgreSQL's multi-process architecture and parallel query execution.
+PostgreSQL provides Arm64 packages for Linux, allowing you to run transactional and analytical queries on Azure Cobalt 200 virtual machines. In this Learning Path, you deploy PostgreSQL on a general-purpose **Standard_D4ps_v7** VM and validate it with sample data and a local benchmark.
 
-## Azure Cobalt 100 Arm-based processor
+## Azure Cobalt 200 Arm-based processor
 
-Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads such as web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which helps ensure consistent and predictable performance.
+Azure Cobalt 200 is Microsoft’s second-generation Arm-based processor, built on Arm Neoverse Compute Subsystems V3 (CSS V3). It supports cloud-native Linux workloads, including relational databases such as PostgreSQL.
 
-To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
+To learn more, see Microsoft’s [introduction to Azure Cobalt 200 virtual machines](https://azure.microsoft.com/en-us/blog/new-azure-cobalt-200-vms-deliver-50-performance-improvement-fully-optimized-for-modern-agentic-ai-workloads/).
 
 ## PostgreSQL
 
@@ -24,58 +24,51 @@ Learn more in the [PostgreSQL documentation](https://www.postgresql.org/docs/).
 
 PostgreSQL supports advanced features such as:
 
-- ACID-compliant transactions for data consistency  
-- Complex queries, joins, and aggregations  
-- Indexing and query optimization  
-- Extensibility with custom functions and extensions  
-- Support for JSON and semi-structured data  
+- ACID-compliant transactions for data consistency
+- Complex queries, joins, and aggregations
+- Indexing and query optimization
+- Extensibility with custom functions and extensions
+- Support for JSON and semi-structured data
 
 These capabilities make PostgreSQL suitable for a wide range of use cases, including:
 
-- Web and mobile application backends  
-- Financial and transactional systems  
-- Analytics and reporting workloads  
-- Data warehousing and hybrid workloads  
+- Web and mobile application backends
+- Financial and transactional systems
+- Analytics and reporting workloads
+- Data warehousing and hybrid workloads
 
 ## Key PostgreSQL components
 
 PostgreSQL consists of several core components that work together to manage data efficiently:
 
-- **PostgreSQL Server:**  
+- **PostgreSQL Server:**
   The main database engine is responsible for processing queries, managing data storage, and handling client connections.
 
-- **Client Tools (psql):**  
+- **Client Tools (psql):**
   Command-line interface used to interact with the database, execute queries, and manage database objects.
 
-- **Storage Engine:**  
+- **Storage Engine:**
   Handles how data is stored on disk, including tables, indexes, and write-ahead logging (WAL) for durability and crash recovery.
 
-- **Query Planner and Executor:**  
+- **Query Planner and Executor:**
   Optimizes SQL queries and determines the most efficient way to execute them.
 
-- **Extensions (for example, pg_stat_statements, pgbench):**  
+- **Extensions (for example, pg_stat_statements) and tools (for example, pgbench):**
   Provide additional functionality such as performance monitoring and benchmarking.
 
 
-## PostgreSQL on Arm (Cobalt 100)
+## PostgreSQL on Arm (Cobalt 200)
 
-Running PostgreSQL on Arm-based processors like Cobalt 100 provides several advantages:
-
-- Efficient CPU utilization with dedicated cores per vCPU  
-- Improved performance per watt for database workloads  
-- Strong performance for parallel query execution  
-- Cost-effective scaling for cloud-native applications  
-
-PostgreSQL’s multi-process architecture and parallel execution capabilities align well with Arm-based infrastructure, making it a strong choice for modern cloud deployments.
+You use the same SQL syntax and PostgreSQL tools on Arm64 as on other supported architectures. This Learning Path establishes a functional baseline on Cobalt 200; performance depends on the VM size, storage, configuration, and workload.
 
 ## What this learning path covers
 
 In this learning path, you will:
 
-- Install and configure PostgreSQL on Azure Cobalt 100 Arm64 virtual machines  
-- Deploy a relational schema for transactional workloads  
-- Run analytical queries on operational data  
-- Benchmark PostgreSQL performance using pgbench  
-- Monitor and optimize query execution  
+- Install and configure PostgreSQL on Azure Cobalt 200 Arm64 virtual machines
+- Deploy a relational schema for transactional workloads
+- Run analytical queries on operational data
+- Benchmark PostgreSQL performance using pgbench
+- Monitor and optimize query execution
 
-By the end, you will have a fully functional PostgreSQL deployment optimized for Arm-based cloud environments.
+By the end, you will have a fully functional PostgreSQL deployment configured and benchmarked on Arm-based cloud infrastructure.

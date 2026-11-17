@@ -1,5 +1,5 @@
 ---
-title: Deploy Apache Kafka on Arm-based Microsoft Azure Cobalt 100 virtual machines 
+title: Deploy Kafka on Azure Cobalt 100 Arm64 VMs
 
 minutes_to_complete: 30   
 

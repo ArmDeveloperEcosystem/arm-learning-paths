@@ -77,7 +77,7 @@ jobs:
           
           if [ -f spellcheck-output.txt ]; then
             # Count total issues
-            ISSUE_COUNT=$(grep -c "^" spellcheck-output.txt || echo "0")
+            ISSUE_COUNT=$(awk 'END { print NR }' spellcheck-output.txt)
             echo "**Total spelling issues found:** $ISSUE_COUNT" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
             

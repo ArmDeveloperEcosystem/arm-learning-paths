@@ -1,5 +1,5 @@
 ---
-title: Get started with the arm-performix agent skill for profiling and improving Arm workloads
+title: Profile Arm workloads with the arm-performix agent skill
 
 description: Install the arm-performix skill to provide an AI coding assistant profiling context so it can drive Arm Performix, find code hotspots, diagnose pipeline stalls, and propose measured improvements on Arm Neoverse.
 

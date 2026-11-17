@@ -30,7 +30,7 @@ After installation, you'll find RenderDoc for Arm GPUs in the Windows **Start** 
 
 ## Prepare a Windows non-editor build
 
-NFRU does not run in Development Editor, DebugGame Editor, or Debug Editor. Use the editor only to cook content, and prepare the same non-editor build you used to validate NFRU:
+NFRU does not run in Play In Editor. For a RenderDoc capture, prepare a Windows game build:
 
 1. Start the project using **Development Editor**.
 2. Select **Platforms > Windows > Cook Content** and wait for cooking to finish.

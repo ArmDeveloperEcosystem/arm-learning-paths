@@ -1,5 +1,5 @@
 ---
-title: Validate Pointer Authentication and Branch Target Identification in OpenJDK on Google Cloud C4A
+title: Validate PAC/BTI in OpenJDK on Google Axion C4A
 
 description: Test Pointer Authentication (PAC) and Branch Target Identification (BTI) support in OpenJDK on Google Cloud C4A. Learn to validate hardware security capabilities and verify JVM compiler support for Arm security features.
     

@@ -38,7 +38,9 @@ mkdir -p out prof heatmap
 - **heatmap**: Stores heatmap visualizations and related metrics
 
 ## Compile the input program {#compile}
+
 Next, compile the input program.  
+
 Because BOLT and other profile-guided optimization pipelines often involve multiple build stages, you will refer to this initial binary as the **stage-0 binary**.
 
 For this example, you must preserve the original function order from the source file. 

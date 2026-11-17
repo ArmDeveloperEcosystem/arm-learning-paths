@@ -38,28 +38,28 @@ generated_summary_faq:
     translation with Gemma 4 E2B and LiteRT-LM, and speech synthesis with Supertonic 3. Finally,
     you'll connect these stages in Gradio and verify the transcript, translation, spoken result, and
     offline operation.
-#   faqs:
-#   - question: How do I confirm that my microphone transcription works before adding translation?
-#     answer: >-
-#       Run `python stt.py` to record five seconds of audio. Confirm that the transcript contains the
-#       words you spoke. If it's empty, check the selected microphone and your terminal's permission.
-#   - question: How do I test Spanish translation before connecting the microphone?
-#     answer: >-
-#       Run `python translate.py Spanish` and enter a short English sentence at the prompt. You should
-#       see the Spanish translation appear as Gemma generates it.
-#   - question: How do I test text-to-speech and verify audio playback?
-#     answer: >-
-#       Run `python tts.py Spanish` and paste a Spanish sentence to synthesize and play speech. If you
-#       don't hear audio, confirm that macOS has selected your intended output device.
-#   - question: Which files should exist before launching the Gradio app?
-#     answer: >-
-#       Make sure `stt.py`, `translate.py`, `tts.py`, and `languages.py` are in your project directory.
-#       Then create `app.py` to connect them to a local Gradio interface.
-#   - question: Can I translate into a language other than Spanish?
-#     answer: >-
-#       Yes. Select another language listed in `LANGUAGES`. To add a new supported target language,
-#       update `LANGUAGES` in `languages.py`. For a non-English source language, you need a different
-#       speech recognition model and configuration.
+  faqs:
+  - question: How do I confirm that my microphone transcription works before adding translation?
+    answer: >-
+      Run `python stt.py` to record five seconds of audio. Confirm that the transcript contains the
+      words you spoke. If it's empty, check the selected microphone and your terminal's permission.
+  - question: How do I test Spanish translation before connecting the microphone?
+    answer: >-
+      Run `python translate.py Spanish` and enter a short English sentence at the prompt. You should
+      see the Spanish translation appear as Gemma generates it.
+  - question: How do I test text-to-speech and verify audio playback?
+    answer: >-
+      Run `python tts.py Spanish` and paste a Spanish sentence to synthesize and play speech. If you
+      don't hear audio, confirm that macOS has selected your intended output device.
+  - question: Which files should exist before launching the Gradio app?
+    answer: >-
+      Make sure `stt.py`, `translate.py`, `tts.py`, and `languages.py` are in your project directory.
+      Then create `app.py` to connect them to a local Gradio interface.
+  - question: Can I translate into a language other than Spanish?
+    answer: >-
+      Yes. Select another language listed in `LANGUAGES`. To add a new supported target language,
+      update `LANGUAGES` in `languages.py`. For a non-English source language, you need a different
+      speech recognition model and configuration.
 # END generated_summary_faq
 
 author: Sammy Sahnine
@@ -76,7 +76,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-A
 tools_software_languages:

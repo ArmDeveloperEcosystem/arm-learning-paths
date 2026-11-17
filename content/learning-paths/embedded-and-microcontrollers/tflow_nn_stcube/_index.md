@@ -1,5 +1,5 @@
 ---
-title: Build and run a letter recognition NN model on an STM32L4 Discovery board
+title: Run a neural network model on an STM32L4 Discovery board
 
 description: Build a letter recognition neural network model using TensorFlow and deploy it on an STM32 B-L475E-IOT01A2 board.
 
@@ -69,7 +69,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-M
 operatingsystems:

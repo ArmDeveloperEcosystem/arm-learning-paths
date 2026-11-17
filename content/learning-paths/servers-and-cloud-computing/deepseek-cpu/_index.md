@@ -65,7 +65,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 platforms:
   - AWS Graviton
   - Microsoft Azure Cobalt

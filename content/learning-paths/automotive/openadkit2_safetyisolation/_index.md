@@ -1,5 +1,5 @@
 ---
-title: Prototype safety-critical isolation for autonomous driving systems on Neoverse
+title: Prototype autonomous driving safety isolation on Arm Neoverse
 description: Learn how to implement functional safety isolation for autonomous driving systems on Arm Neoverse using DDS-based communication, containerized deployment, and ISO 26262 compliance principles.
 
 minutes_to_complete: 60

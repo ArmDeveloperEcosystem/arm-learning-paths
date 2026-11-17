@@ -1,5 +1,5 @@
 ---
-title: Fine-tune SmolVLA for an SO-101 pick-and-place task on an NVIDIA DGX Spark
+title: Fine-tune SmolVLA for SO-101 on NVIDIA DGX Spark
 
 description: Record SO-101 demonstrations, fine-tune SmolVLA on an Arm-based NVIDIA DGX Spark, and evaluate the model with LeRobot.
 
@@ -81,7 +81,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-X
     - Cortex-A

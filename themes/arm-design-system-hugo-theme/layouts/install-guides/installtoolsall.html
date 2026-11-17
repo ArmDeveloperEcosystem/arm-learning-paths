@@ -101,10 +101,10 @@ Calls to:
             {{partial "general-formatting/markdown-content-formatting.html" .Content}}
         </div>
 
-        <!-- Multi-tool routing to subtool pages, only for main multi_install page -->
-        {{if .Params.multi_install}}
+        <!-- Show install guide cards by default; overviews with their own navigation can opt out. -->
+        {{if and .Params.multi_install (not .Params.hide_install_guide_cards)}}
             <div class="content-box markdown-content-div">
-                <h2>Select a specific tool for install instructions:</h2> 
+                <h2>Select an install guide:</h2> 
                 <div class="c-row">
                     <div class="c-col">
                         <div class="u-display-grid u-gap-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3 u-margin-top-1">

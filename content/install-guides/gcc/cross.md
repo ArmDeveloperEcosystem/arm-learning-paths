@@ -1,94 +1,90 @@
 ---
-additional_search_terms:
-- compiler
-layout: installtoolsall
-minutes_to_complete: 15
+title: Cross-compiler
+description: Install GCC cross-compilers on Linux to build 32-bit or 64-bit Arm Linux applications from an x86 or Arm host.
+
 author: Jason Andrews
-multi_install: false
-multitool_install_part: true
+minutes_to_complete: 10
 official_docs: https://gcc.gnu.org/onlinedocs/
+
+test_maintenance: false
 test_images:
 - ubuntu:latest
-- fedora:latest
-test_link: null
-test_maintenance: true
-title: Cross-compiler
-description: Install GCC cross-compilers on Linux so you can build 32-bit or 64-bit Arm Linux applications from a non-target host.
+
+layout: installtoolsall
+multi_install: false
+multitool_install_part: true
 tool_install: false
 weight: 3
+
+additional_search_terms:
+- compiler
+- cross-compiler
+- aarch64-linux-gnu
+- arm-linux-gnueabihf
 ---
-GCC is available on all Linux distributions and can be installed using the package manager.
 
-This covers `gcc` and `g++` for compiling C and C++ as a cross-compiler targeting the Arm Linux architecture. For bare-metal and embedded targets such as `arm-none-eabi`, see the [Arm GNU Toolchain](../arm-gnu) install guide.
+Install GCC cross-compilers on an x86-64 or Arm Linux host running Ubuntu or Debian to build applications for Arm Linux systems.
 
-## Before you begin
+{{% notice Note %}}
+For bare-metal software or software that uses a real-time operating system (RTOS), use the [Arm GNU Toolchain](../arm-gnu) instead. It supports firmware development for Cortex-M, Cortex-R, and Cortex-A processors. Linux cross-compilers target applications that run on Arm Linux.
+{{% /notice %}}
 
-GCC is used to cross-compile Linux applications targeting Arm. Applications can be compiled for 32-bit or 64-bit Arm Linux systems.
+## Install cross-compilers
 
-The executables for 32-bit are `arm-linux-gnueabihf-gcc` and `arm-linux-gnueabihf-g++`.
+On Ubuntu or Debian, install the C and C++ cross-compilers for 32-bit and 64-bit Arm Linux:
 
-The executables for 64-bit are `aarch64-linux-gnu-gcc` and `aarch64-linux-gnu-g++`.
-
-Software can be compiled on an `x86_64` or `Arm` host machine.
-
-## How do I download a GCC cross compiler targeting Arm?
-
-The Linux package manager downloads the required files. No manual download is needed.
-
-## How do I install a GCC cross compiler on Linux?
-
-You can install a GCC cross compiler with Arm as a target architecture using Linux package managers.
-
-### Installing on Debian based distributions such as Ubuntu
-
-Use the `apt` command to install the cross-compilers for 32-bit and 64-bit Arm Linux targets.
-
-```bash { target="ubuntu:latest" }
+```bash
 sudo apt update
-sudo apt install gcc-arm-linux-gnueabihf -y
-sudo apt install gcc-aarch64-linux-gnu -y
+sudo apt install gcc gcc-aarch64-linux-gnu g++-aarch64-linux-gnu \
+    gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf -y
 ```
 
-The GCC version installed is tied to your Ubuntu release. For example, Ubuntu 24.04 LTS provides GCC 13 and Ubuntu 25.10 provides GCC 15. This is normal Ubuntu packaging behaviour.
+The `gcc` package installs the native C compiler and its assembler and linker dependencies, which are also needed when building 64-bit Arm applications on a 64-bit Arm host.
 
-### Installing on Fedora
+| Compiler | Target |
+|----------|--------|
+| `aarch64-linux-gnu-gcc` | 64-bit Arm Linux applications (AArch64) |
+| `arm-linux-gnueabihf-gcc` | 32-bit Arm Linux applications (AArch32, hard float) |
 
-Fedora uses the `dnf` package manager.
+The corresponding C++ compilers are `aarch64-linux-gnu-g++` and `arm-linux-gnueabihf-g++`.
 
-- If the machine has `sudo` you can use it:
+## Verify the installation
 
-  ```bash { target="fedora:latest" }
-  sudo dnf update -y
-  sudo dnf install gcc-aarch64-linux-gnu -y
-  sudo dnf install gcc-arm-linux-gnu -y
-  ```
+Verify the 64-bit cross-compiler is installed:
 
-- If `sudo` is not available become _root_ and omit the `sudo` from the above commands:
-
-  ```console
-  dnf update -y
-  dnf install gcc-aarch64-linux-gnu -y
-  dnf install gcc-arm-linux-gnu -y
-  ```
-
-On Fedora, only building kernels is currently supported. Support for cross-building user space programs is not currently provided, as that would massively multiply the number of packages.
-
-## Setting up product license {#license}
-
-GCC is open source and freely available for use.
-
-## Get started {#start}
-
-To confirm the installations are successful, enter:
-
-```bash { target="ubuntu:latest" }
+```bash
 aarch64-linux-gnu-gcc --version
+```
+
+The output is similar to:
+
+```output
+aarch64-linux-gnu-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+Copyright (C) 2025 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+Verify the 32-bit cross-compiler is installed:
+
+```bash
 arm-linux-gnueabihf-gcc --version
 ```
 
-To cross-compile an example program, create a text file named `hello-world.c` with the contents below.
+The output is similar to:
 
-```C { file_name="hello-world.c" }
+```output
+arm-linux-gnueabihf-gcc (Ubuntu 15.2.0-16ubuntu1) 15.2.0
+Copyright (C) 2025 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+```
+
+## Cross-compile a program
+
+Create a file named `hello.c`:
+
+```C { file_name="hello.c" }
 #include <stdio.h>
 
 int main()
@@ -98,14 +94,52 @@ int main()
 }
 ```
 
-To cross-compile for a 64-bit Arm Linux target. On Fedora, only building kernels is currently supported, so these examples apply to Ubuntu.
+Cross-compile for 64-bit Arm Linux:
 
-```bash { target="ubuntu:latest" }
-aarch64-linux-gnu-gcc hello-world.c -o hello-world-aarch64.elf
+```bash
+aarch64-linux-gnu-gcc hello.c -o hello-arm64
 ```
 
-To cross-compile for a 32-bit Arm Linux target:
+Cross-compile for 32-bit Arm Linux:
 
-```bash { target="ubuntu:latest" }
-arm-linux-gnueabihf-gcc hello-world.c -o hello-world-arm.elf
+```bash
+arm-linux-gnueabihf-gcc hello.c -o hello-arm32
 ```
+
+## Test with QEMU (optional)
+
+QEMU user-mode emulation lets you run the compiled Arm Linux applications on your host. You don't need QEMU to cross-compile.
+
+On Ubuntu or Debian, install QEMU:
+
+```bash
+sudo apt install qemu-user -y
+```
+
+The `-L` option points QEMU to the target's runtime libraries.
+
+Test the 64-bit binary with QEMU:
+
+```bash
+qemu-aarch64 -L /usr/aarch64-linux-gnu ./hello-arm64
+```
+
+The output is similar to:
+
+```output
+Hello, Arm World!
+```
+
+Test the 32-bit binary with QEMU:
+
+```bash
+qemu-arm -L /usr/arm-linux-gnueabihf ./hello-arm32
+```
+
+The output is similar to:
+
+```output
+Hello, Arm World!
+```
+
+You can now cross-compile C and C++ applications for Arm Linux from your Linux host.

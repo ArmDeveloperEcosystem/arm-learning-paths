@@ -28,7 +28,7 @@ BOLT supports several profiling methods, each with different trade-offs:
 
 - Finally, [PMU profiling](/learning-paths/servers-and-cloud-computing/bolt/pmu/) works on any system with standard performance monitoring support. It samples events like instructions or cycles, providing less detailed control-flow information but serving as a reliable fallback when other methods aren't available.
 
-For each profiling method, you'll collect a profile, convert it to BOLT's format, and generate an optimized binary. After optimization, you'll measure the performance improvement using hardware metrics.
+For each profiling method, you'll collect a profile, convert it to BOLT's format, and generate an optimized binary. After optimization, you'll measure the performance improvement using hardware metrics. You'll also generate heatmaps from profiles collected from the original and optimized binaries to compare their code layouts. The example uses BRBE profiling, with alternatives provided for other profiling methods.
 
 ## What you've learned and what's next
 

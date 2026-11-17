@@ -1,5 +1,5 @@
 ---
-title: Set up Arm-based Linux systems for network performance testing with iPerf3
+title: Set up Arm Linux for network testing with iPerf3
 weight: 2
 
 ### FIXED, DO NOT MODIFY

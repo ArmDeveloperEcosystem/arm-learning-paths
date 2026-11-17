@@ -1,5 +1,5 @@
 ---
-title: Validate OpenStack deployment and launch a virtual machine on Azure Cobalt 100
+title: Validate OpenStack and launch a VM on Azure Cobalt 100
 weight: 7
 
 ### FIXED, DO NOT MODIFY

@@ -1,0 +1,8 @@
+cmake_minimum_required(VERSION 3.16)
+project(yolox_static LANGUAGES CXX)
+
+find_package(OpenCV 4.13 REQUIRED COMPONENTS core imgproc imgcodecs dnn)
+
+add_executable(yolox_static yolox_static.cpp)
+target_compile_features(yolox_static PRIVATE cxx_std_17)
+target_link_libraries(yolox_static PRIVATE ${OpenCV_LIBS})

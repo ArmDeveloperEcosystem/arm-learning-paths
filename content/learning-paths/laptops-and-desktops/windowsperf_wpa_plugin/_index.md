@@ -1,5 +1,5 @@
 ---
-title: Get started with the Windows Performance Analyzer plugin for WindowsPerf
+title: Use the Windows Performance Analyzer plugin for WindowsPerf
 
 description: Learn how to import WindowsPerf data in Windows Performance Analyzer (WPA) and visualize timeline and telemetry data using the WPA plugin.
 

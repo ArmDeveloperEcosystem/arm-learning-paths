@@ -1,5 +1,5 @@
 ---
-title: (Optional) Use a model not currently supported by Whisper Journal
+title: (Optional) Use a model not currently supported by Speech Journal
 description: Register a compatible mobile speech recognition model or generate and validate support for a model that needs another adapter.
 weight: 6
 
@@ -9,14 +9,14 @@ layout: learningpathall
 
 ## Choose an implementation route
 
-Whisper Journal already supports the LiteRT and ExecuTorch models listed in the supported model table on [Run and compare registered speech recognition models](/learning-paths/mobile-graphics-and-gaming/ai-portal-audio-to-text/3-run-model/). You don't need to change the application to use those models.
+Speech Journal already supports the LiteRT and ExecuTorch models listed in the supported model table on [Run and compare registered speech recognition models](/learning-paths/mobile-graphics-and-gaming/ai-portal-audio-to-text/3-run-model/). You don't need to change the application to use those models.
 
-You can try one of two hands-on routes to use a model that Whisper Journal doesn't currently support:
+You can try one of two hands-on routes to use a model that Speech Journal doesn't currently support:
 
 - Register the model directly when it matches a supplied adapter
 - Use the coding-agent workflow to generate another adapter
 
-Record the following information for the model and compare it with the two supplied adapters before changing code:
+Record the following information for the model and compare it with the four supplied adapters before changing code:
 
 - Runtime and package files
 - Callable methods
@@ -64,9 +64,9 @@ If the repository contains more than one primary `.tflite` or `.pte` model file,
 Add one descriptor to the list returned by `CompatibleModelRegistry.models()`. The following example registers a LiteRT package that uses the same complete decoder profile as Whisper Base:
 
 ```java
-static List<WhisperModelDescriptor> models() {
+static List<SpeechModelDescriptor> models() {
     return List.of(
-            new WhisperModelDescriptor(
+            new SpeechModelDescriptor(
                     "my-whisper-base-litert",
                     "My Whisper model · LiteRT",
                     AdapterRegistry.LITERT_ID,
@@ -80,7 +80,7 @@ static List<WhisperModelDescriptor> models() {
 }
 ```
 
-Import `org.arm.learningpath.whisper.litert.LiteRtWhisperAdapter` in `CompatibleModelRegistry.java` when you use this LiteRT configuration constant.
+Import `org.arm.learningpath.speech.litert.LiteRtWhisperAdapter` in `CompatibleModelRegistry.java` when you use this LiteRT configuration constant.
 
 The package filename must match the ZIP created by the downloader. Select the supplied adapter and configuration that match the complete model package, then rebuild and install the APK. Importing the package automatically activates its registered adapter.
 
@@ -211,19 +211,15 @@ printf 'Model runtime: '
 read -r MODEL_RUNTIME
 export MODEL_ID MODEL_RUNTIME
 
-export MODEL_FILE="$(.hf-venv/bin/python adapter-generation/download_model_package.py \
-  --repo-id "$MODEL_ID" \
-  --print-model-path)"
-export MODEL_DIR="$(dirname "$MODEL_FILE")"
+export MODEL_DIR="$(.hf-venv/bin/python adapter-generation/download_model_package.py \
+  --repo-id "$MODEL_ID")"
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell" >}}
 $MODEL_ID = Read-Host "Arm model repository ID"
 $MODEL_RUNTIME = Read-Host "Model runtime"
 
-$MODEL_FILE = .\.hf-venv\Scripts\python.exe adapter-generation/download_model_package.py `
-  --repo-id "$MODEL_ID" `
-  --print-model-path
-$MODEL_DIR = Split-Path -Parent "$MODEL_FILE"
+$MODEL_DIR = .\.hf-venv\Scripts\python.exe adapter-generation/download_model_package.py `
+  --repo-id "$MODEL_ID"
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -252,11 +248,11 @@ Give your coding agent the following files from the project:
 
 - `model-summary.json`
 - `adapter-generation/generate_mobile_adapter_prompt.txt`
-- `SpeechToTextAdapter.java`, `WhisperModelDescriptor.java`, `TranscriptionResult.java`, and `ProgressListener.java`
+- `SpeechToTextAdapter.java`, `SpeechModelDescriptor.java`, `TranscriptionResult.java`, and `ProgressListener.java`
 - `AudioRecorder.java`, `ModelPackageImporter.java`, and `download_model.py`
-- `AdapterRegistry.java`, `GeneratedAdapterRegistry.java`, and `app/generated-runtime-dependencies.gradle.kts`
-- `ExecuTorchWhisperAdapter.java` and `LiteRtWhisperAdapter.java` as examples
-- `WhisperFeatureExtractor.java` and both `WhisperTokenizer.java` implementations
+- `ModelRegistry.java`, `AdapterRegistry.java`, `CompatibleModelRegistry.java`, `GeneratedAdapterRegistry.java`, and `app/generated-runtime-dependencies.gradle.kts`
+- `ExecuTorchWhisperAdapter.java`, `ExecuTorchSplitWhisperAdapter.java`, `LiteRtWhisperAdapter.java`, and `ExecuTorchCtcAdapter.java` as examples
+- `WhisperFeatureExtractor.java`, both `WhisperTokenizer.java` implementations, `CtcAudioProcessor.java`, and `CtcDecoder.java`
 
 The prompt tells the coding agent to preserve the supplied contracts when they fit. The agent can add a documented LiteRT profile or create a runtime-specific adapter. It can register the adapter and model in `GeneratedAdapterRegistry.java`, update package handling, and add a required runtime dependency to `app/generated-runtime-dependencies.gradle.kts`.
 
@@ -274,11 +270,11 @@ Review the generated source. The coding agent should run the included file check
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
 .hf-venv/bin/python adapter-generation/validate_generated_adapter.py \
-  --adapter "app/src/main/java/org/arm/learningpath/whisper/YourGeneratedSpeechAdapter.java"
+  --adapter "app/src/main/java/org/arm/learningpath/speech/YourGeneratedSpeechAdapter.java"
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell" >}}
 .\.hf-venv\Scripts\python.exe adapter-generation/validate_generated_adapter.py `
-  --adapter "app/src/main/java/org/arm/learningpath/whisper/YourGeneratedSpeechAdapter.java"
+  --adapter "app/src/main/java/org/arm/learningpath/speech/YourGeneratedSpeechAdapter.java"
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -319,6 +315,6 @@ Select the model added by the generated adapter and import the copied ZIP packag
 
 ## What you've accomplished
 
-You've learned how you can extend Whisper Journal to use a speech recognition model that's not currently supported.
+You've learned how you can extend Speech Journal to use a speech recognition model that's not currently supported.
 
 You can now register a compatible model with a supplied adapter or generate, build, and validate another adapter for a model with a different contract.

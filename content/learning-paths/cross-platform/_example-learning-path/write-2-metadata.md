@@ -72,7 +72,8 @@ Specifies the primary subject the Learning Path covers. Can only be one subject 
 |---------|---------|---------|---------|---------|------|
 | CI-CD | CI-CD | CI-CD | CI-CD | CI-CD | CI-CD |
 | Performance and Architecture | Performance and Architecture | Performance and Architecture | Performance and Architecture | Performance and Architecture | Performance and Architecture |
-| ML | ML | ML | ML | ML | ML |
+| AI/ML | AI/ML | AI/ML | AI/ML | AI/ML | AI/ML |
+| Agentic AI | Agentic AI | Agentic AI | Agentic AI | Agentic AI | Agentic AI |
 | Containers and Virtualization | Containers and Virtualization | Containers and Virtualization | Containers and Virtualization | Gaming | Containers and Virtualization |
 | Libraries | Libraries | Libraries | Migration to Arm  | Libraries | |
 | Virtual Hardware | Virtual Hardware | Storage | | Graphics | |
@@ -81,6 +82,10 @@ Specifies the primary subject the Learning Path covers. Can only be one subject 
 | RTOS Fundamentals | | | | | |
 
 
+
+Use `Agentic AI` when the primary outcome is building, running, or equipping an AI agent that invokes tools or performs a multistep workflow. Also include tutorials that build or validate sandbox infrastructure explicitly intended to isolate agent-generated code or support agentic AI execution, even if connecting an agent is a subsequent step. General-purpose sandboxing, inference, retrieval-augmented generation (RAG), or reinforcement learning alone does not qualify. Tutorials that primarily teach migration or performance optimization should retain that primary subject even if an agent assists.
+
+The AI collection at `/tag/ml/` includes both `AI/ML` and `Agentic AI`. The dedicated subject collections are at `/tag/ai-ml/` and `/tag/agentic-ai/`.
 
 ### operatingsystems (closed)
 

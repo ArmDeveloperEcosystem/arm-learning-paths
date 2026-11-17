@@ -1,5 +1,5 @@
 ---
-title: Build and install Yocto images for NXP S32G-VNP-GLDBOX3 with UltraEdge
+title: Build Yocto images for NXP S32G-VNP-GLDBOX3 with UltraEdge
 
 weight: 4
 

@@ -1,5 +1,5 @@
 ---
-title: Deploy a LLM-based vision chatbot with PyTorch and Hugging Face transformers on Google Axion processors
+title: Deploy a PyTorch vision chatbot on Google Axion
 
 minutes_to_complete: 45
 
@@ -74,7 +74,7 @@ rerun_faqs: false
 skilllevels: Advanced
 armips:
     - Neoverse
-subjects: ML
+subjects: AI/ML
 platforms:
   - Google Axion
 operatingsystems:

@@ -19,12 +19,13 @@ jobs:
       - name: Run hugo command to test site builds
         run: |
           hugo
-      - name: Get all changed markdown files
+      - name: Get changed Learning Path and install guide markdown files
         id: changed-markdown-files
         uses: tj-actions/changed-files@v46
         with:
           files: |
-             content/**/**.md
+             content/learning-paths/**/*.md
+             content/install-guides/**/*.md
       - name: Check for capital letters or spaces in content directory
         run: |
           echo "Checking for capital letters or spaces in content directory paths (excluding file extensions)..."
@@ -63,7 +64,7 @@ jobs:
         run: |
           echo "Checking YAML fields for changed learning paths..."
           python3 tools/verify_index_fields.py ${{ steps.changed-markdown-files.outputs.all_changed_files }}
-      - name: Run test suite for all changed .md files
+      - name: Run test suite for changed Learning Paths and install guides
         id: run-suite
         if: steps.changed-markdown-files.outputs.any_changed == 'true'
         # Run the test suite
@@ -71,7 +72,7 @@ jobs:
               set -o pipefail; ./tools/test_lp.sh ${{ steps.changed-markdown-files.outputs.all_changed_files }} 2>&1 | tee test-lp-output.txt
       - name: Parse test suite errors
         id: test-suite-state
-        if: success()
+        if: success() && steps.changed-markdown-files.outputs.any_changed == 'true'
         # Catch any missed errors if running multiple tests
         run: |
             cat test-lp-output.txt | grep -q 'Tests failed in test suite' && echo "TEST_SUITE_ERRORS=true" >> "$GITHUB_ENV" \
@@ -83,7 +84,7 @@ jobs:
           exit 1
       - name: Parse test maintenance off
         id: maintenance-state
-        if: success()
+        if: success() && steps.changed-markdown-files.outputs.any_changed == 'true'
         # Check if maintenance is turned off
         run: |
             cat test-lp-output.txt | grep -q 'maintenance is turned off' && echo "MAINTENANCE=off" >> "$GITHUB_ENV" \

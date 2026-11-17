@@ -1,5 +1,5 @@
 ---
-title: Accelerate multimodal Voice Assistant performance with KleidiAI and SME2
+title: Accelerate a voice assistant with KleidiAI and SME2
 description: Learn how to build and optimize a multimodal Voice Assistant application on Android using KleidiAI and SME2 for accelerated performance.
 
 minutes_to_complete: 30

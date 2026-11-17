@@ -1,5 +1,5 @@
 ---
-title: Develop cross-platform desktop applications with Electron on Windows on Arm
+title: Develop Electron desktop apps for Windows on Arm
 
 description: Learn how to develop and build cross-platform desktop applications using the Electron Framework on Windows on Arm devices.
 

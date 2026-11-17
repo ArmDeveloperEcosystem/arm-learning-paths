@@ -1,5 +1,5 @@
 ---
-title: Measure and modify Go garbage collection behavior on AWS Graviton-based compute
+title: Tune Go garbage collection on AWS Graviton
 
 description: Learn how to run Go benchmarks on AWS Graviton-based compute, capture GC metrics and pprof profiles with Benchstat, establish a reproducible default garbage collection baseline for memory-intensive workloads on Arm, and experiment with modifying garbage collection behavior.
 

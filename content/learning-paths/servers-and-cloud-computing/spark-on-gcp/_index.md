@@ -1,5 +1,5 @@
 ---
-title: Deploy Apache Spark on Google Axion processors
+title: Deploy Apache Spark on Google Axion
 
 minutes_to_complete: 60
 
