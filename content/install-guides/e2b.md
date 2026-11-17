@@ -123,7 +123,13 @@ sudo apt install -y ca-certificates curl e2fsprogs iproute2 iptables python3-ven
 
 ### Confirm Docker installation
 
-If Docker isn't already installed, follow the [Docker Engine install guide](/install-guides/docker/docker-engine/) to install and add your user to the `docker` group.  
+If Docker isn't already installed, follow the [Docker Engine install guide](/install-guides/docker/docker-engine/).  
+
+Add your user to the `docker` group so that the E2B commands don't require `sudo`:
+
+```bash
+sudo usermod -aG docker "$USER"
+```
 
 Activate the new group membership:
 
