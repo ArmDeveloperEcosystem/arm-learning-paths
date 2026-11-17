@@ -31,7 +31,7 @@ An illustrative published message is:
 }
 ```
 
-`timestamp` is Linux's UTC receipt time, not an MCU wall clock. Keep the board's clock synchronized as in Part 1. `sequence` and `mcuUptimeMs` restart when the M4 restarts; `linuxBootId` identifies the Linux boot. QoS 1 can deliver duplicates. The bridge logs publish failures and drops the affected samples, then attempts later samples again. This exercise provides live monitoring without a persistent offline queue or a lossless-delivery promise.
+`timestamp` is Linux's UTC receipt time, not an MCU wall clock. Keep the board's clock synchronized as in [Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/). `sequence` and `mcuUptimeMs` restart when the M4 restarts; `linuxBootId` identifies the Linux boot. QoS 1 can deliver duplicates. The bridge logs publish failures and drops the affected samples, then attempts later samples again. This exercise provides live monitoring without a persistent offline queue or a lossless-delivery promise.
 
 The bridge uses the [AWS IoT Device SDK for Python v2](https://github.com/aws/aws-iot-device-sdk-python-v2/tree/v1.26.0), pinned here as `awsiotsdk==1.26.0`, with its required `awscrt==0.28.1`. Greengrass provides the IPC socket and component authentication environment. The [MQTT IPC authorization guide](https://docs.aws.amazon.com/greengrass/v2/developerguide/ipc-iot-core-mqtt.html) defines the recipe's topic-limited `aws.greengrass.ipc.mqttproxy` permission.
 
@@ -62,7 +62,7 @@ staging/
     awscrt-0.28.1-...aarch64.whl
 ```
 
-If Python differs on your image, rebuild the wheel selection for that interpreter and verify it on the target before deployment. The example assumes the unchanged Part 1 Scarthgap image's Python 3.12 and glibc environment.
+If Python differs on your image, rebuild the wheel selection for that interpreter and verify it on the target before deployment. The example assumes the unchanged Scarthgap image from [Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/) and its Python 3.12 and glibc environment.
 
 ## Understand offline installation and cleanup
 

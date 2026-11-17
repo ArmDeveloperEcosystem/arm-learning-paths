@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Return the M4 to an offline state
 
-Save work, shut down Linux, disconnect power, and power up again to end Part 2's heartbeat. Do not issue `stop` against that older firmware: it has no shutdown acknowledgment. On the board, check:
+Save work, shut down Linux, disconnect power, and power up again to end the heartbeat firmware from [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/). Do not issue `stop` against that older firmware: it has no shutdown acknowledgment. On the board, check:
 
 ```bash
 uname -m
@@ -17,11 +17,11 @@ python3 -m pip --version
 systemctl status --with-dependencies greengrass-lite.target
 ```
 
-Expect `aarch64`, Python 3.12 from the Scarthgap image, healthy Greengrass services, and the M4 named `5000000.m4fss` in state `offline`. If it is attached or running after a power cycle, resolve bootloader ownership as described in Part 2 before continuing. No service should automatically load the heartbeat.
+Expect `aarch64`, Python 3.12 from the Scarthgap image, healthy Greengrass services, and the M4 named `5000000.m4fss` in state `offline`. If it is attached or running after a power cycle, resolve bootloader ownership as described in [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/) before continuing. No service should automatically load the heartbeat.
 
 ## Check exclusive peripheral ownership
 
-This example uses MCU GPIO0 pins 16 and 15 for software I2C, and MCU_UART0 for telemetry. The Part 1 image already disables Linux's MCU_UART0 and enables MAIN_UART0. The Zephyr GPIO driver initializes the entire MCU GPIO0 bank to inputs, so this application requires exclusive ownership of that bank. Do not use a cape or Linux GPIO consumer that controls it or any of the paired header pads.
+This example uses MCU GPIO0 pins 16 and 15 for software I2C, and MCU_UART0 for telemetry. The Yocto image already disables Linux's MCU_UART0 and enables MAIN_UART0. The Zephyr GPIO driver initializes the entire MCU GPIO0 bank to inputs, so this application requires exclusive ownership of that bank. Do not use a cape or Linux GPIO consumer that controls it or any of the paired header pads.
 
 On the board, inspect line consumers and the UART mapping:
 
@@ -61,7 +61,7 @@ Four-pin I2C modules normally strap CSB and the address internally; follow the m
 
 Fit pull-ups from SCL and SDA to **3.3 V**, typically 4.7 kΩ, unless the breakout already provides suitable pull-ups. Keep wires short. The software releases a line by making it an input and drives it only low, because the pinned GPIO driver rejects hardware open-drain mode. No Linux `i2cdetect` scan can find this private software bus.
 
-Do not connect a 5 V pull-up, a UART adapter's power lead, or two UART transmitters together. P1.30, the Linux UART TX, is unused. You may retain Part 2's USB UART adapter as an output-only monitor on P2.07 and GND, with its TX lead disconnected. The bridge runs on PocketBeagle 2 and needs no USB UART adapter.
+Do not connect a 5 V pull-up, a UART adapter's power lead, or two UART transmitters together. P1.30, the Linux UART TX, is unused. You may retain the USB UART adapter from [Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/) as an output-only monitor on P2.07 and GND, with its TX lead disconnected. The bridge runs on PocketBeagle 2 and needs no USB UART adapter.
 
 Power up and rerun `pb2-m4 status`:
 
@@ -99,7 +99,7 @@ PING google.com (172.217.72.102) 56(84) bytes of data.
 
 ## Prepare the source bundle
 
-Download [the Part 3 source bundle](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-gglite-zephyr-combined-part3/pb2-temperature-part3.zip) to the Ubuntu host and extract it:
+Download [the source bundle](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-gglite-zephyr-combined-part3/pb2-temperature-part3.zip) to the Ubuntu host and extract it:
 
 ```bash
 mkdir -p "$HOME/pb2-temperature-part3"

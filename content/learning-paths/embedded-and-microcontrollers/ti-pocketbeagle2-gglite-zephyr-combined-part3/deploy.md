@@ -24,7 +24,7 @@ aws greengrassv2 get-deployment --deployment-id "$BASE_DEPLOYMENT_ID" \
   > previous-deployment.json
 ```
 
-If Part 1's group has no deployment because it was never deployed, first complete Part 1. If its latest revision removes Hello World, an empty `components` object is valid. The following update preserves whichever components remain in that latest revision, including Hello World if retained:
+If the thing group from [Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/) has no deployment because it was never deployed, first complete that Learning Path. If its latest revision removes Hello World, an empty `components` object is valid. The following update preserves whichever components remain in that latest revision, including Hello World if retained:
 
 ```bash
 python3 - <<'PYTHON'
@@ -42,7 +42,7 @@ components['com.arm.PocketBeagle2.ExternalTemperatureBridge'] = {
 }
 request = {
     'targetArn': os.environ['GROUP_ARN'],
-    'deploymentName': 'PocketBeagle2 external temperature Part 3',
+    'deploymentName': 'PocketBeagle2 external temperature',
     'components': components
 }
 Path('deployment.json').write_text(json.dumps(request, indent=2) + '\n')
