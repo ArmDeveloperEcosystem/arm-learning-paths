@@ -22,7 +22,7 @@ The following commands use three default models. To use a different supported AI
 {{% notice Note %}}
 Arm AI Portal models are hosted on Hugging Face. The `download_model.py` script uses `huggingface_hub` and connects to `https://huggingface.co` by default.
 
-MobileNetV3 Small ExecuTorch and CLIP both publish a file named `optimized.pte`, so the script gives those two files unique names when it downloads them.
+Some models publish model packages with the same filename, so the download script gives those files unique names.
 {{% /notice %}}
 
 ## Run MobileNetV3 Small with LiteRT
@@ -181,7 +181,10 @@ The application ranks only the descriptions that you enter. Change the descripti
 
 ## Use another supported model
 
-The three default models keep the main workflow predictable. The application also supports the following Arm AI Portal model packages:
+The three default models keep the main workflow predictable. The application also supports the following Arm AI Portal model packages.
+
+<details>
+<summary>Show all 22 supported models</summary>
 
 | Model | Runtime | Repository ID | Import this file | Behavior |
 | --- | --- | --- | --- | --- |
@@ -199,6 +202,16 @@ The three default models keep the main workflow predictable. The application als
 | [Swin Tiny ExecuTorch](https://huggingface.co/Arm/swin-tiny-int8-xnnpack-executorch) | ExecuTorch | `Arm/swin-tiny-int8-xnnpack-executorch` | `swin_tiny_dynamic_raspberry_executorch_optimized.pte` | Ranks 1,000 ImageNet classes |
 | [ViT Base ExecuTorch](https://huggingface.co/Arm/vit-base-int8-xnnpack-executorch) | ExecuTorch | `Arm/vit-base-int8-xnnpack-executorch` | `google__vit-base-patch16-224_raspberry_executorch_optimized.pte` | Ranks 1,000 ImageNet classes |
 | [CLIP ViT-B/32 ExecuTorch](https://huggingface.co/Arm/clip-vit-base-patch32-int8-xnnpack-executorch) (default) | ExecuTorch | `Arm/clip-vit-base-patch32-int8-xnnpack-executorch` | `clip-vit-base-patch32-int8-executorch.pte` | Ranks descriptions that you enter |
+| [Wide ResNet-50 ExecuTorch](https://huggingface.co/Arm/wideresnet50-int8-xnnpack-executorch-vivo-x300) | ExecuTorch | `Arm/wideresnet50-int8-xnnpack-executorch-vivo-x300` | `wideresnet50-int8-executorch-vivo-x300.pte` | Ranks 1,000 ImageNet classes |
+| [Inception V3 ExecuTorch](https://huggingface.co/Arm/inception-v3-int8-xnnpack-executorch-vivo-x300) | ExecuTorch | `Arm/inception-v3-int8-xnnpack-executorch-vivo-x300` | `inception-v3-int8-executorch-vivo-x300.pte` | Ranks 1,000 ImageNet classes |
+| [EfficientNet-B4 ExecuTorch](https://huggingface.co/Arm/efficientnet-b4-int8-xnnpack-executorch-vivo-x300) | ExecuTorch | `Arm/efficientnet-b4-int8-xnnpack-executorch-vivo-x300` | `efficientnet-b4-int8-executorch-vivo-x300.pte` | Ranks 1,000 ImageNet classes |
+| [SqueezeNet 1.0 ExecuTorch](https://huggingface.co/Arm/squeezenet-1-0-int8-xnnpack-executorch-vivo-x300) | ExecuTorch | `Arm/squeezenet-1-0-int8-xnnpack-executorch-vivo-x300` | `squeezenet-1-0-int8-executorch-vivo-x300.pte` | Ranks 1,000 ImageNet classes |
+| [DeiT-Tiny (Nota) ExecuTorch](https://huggingface.co/Arm/nota-deit-tiny-int8-xnnpack-executorch-vivo-x300) | ExecuTorch | `Arm/nota-deit-tiny-int8-xnnpack-executorch-vivo-x300` | `nota-deit-tiny-int8-executorch-vivo-x300.pte` | Ranks 1,000 ImageNet classes |
+| [Swin-T ExecuTorch](https://huggingface.co/Arm/swin-t-int8-xnnpack-executorch-vivo-x300) | ExecuTorch | `Arm/swin-t-int8-xnnpack-executorch-vivo-x300` | `swin-t-int8-executorch-vivo-x300.pte` | Ranks 1,000 ImageNet classes |
+| [ViT-B/16 ExecuTorch](https://huggingface.co/Arm/vit-b-16-int8-xnnpack-executorch-vivo-x300) | ExecuTorch | `Arm/vit-b-16-int8-xnnpack-executorch-vivo-x300` | `vit-b-16-int8-executorch-vivo-x300.pte` | Ranks 1,000 ImageNet classes |
+| [GoogLeNet (Nota) ExecuTorch](https://huggingface.co/Arm/nota-googlenet-int8-xnnpack-executorch-vivo-x300) | ExecuTorch | `Arm/nota-googlenet-int8-xnnpack-executorch-vivo-x300` | `nota-googlenet-int8-executorch-vivo-x300.pte` | Ranks 1,000 ImageNet classes |
+
+</details>
 
 Set `MODEL_ID` to a repository ID from the table and repeat the matching download and import workflow.
 

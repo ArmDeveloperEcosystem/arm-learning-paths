@@ -1,5 +1,5 @@
 ---
-title: Manage the machine learning lifecycle with MLflow on a Google Cloud C4A Axion virtual machine
+title: Manage ML workflows with MLflow on Google Axion C4A
 
 description: Set up MLflow on Google Cloud C4A Axion Arm VMs running SUSE Linux to track ML experiments, version models with the Model Registry, and deploy a trained model as a REST API.
 
@@ -69,7 +69,7 @@ rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 platforms:
   - Google Axion
 

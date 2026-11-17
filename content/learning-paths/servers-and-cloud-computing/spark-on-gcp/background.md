@@ -1,5 +1,5 @@
 ---
-title: Getting started with Apache Spark on Google Axion C4A (Arm Neoverse-V2)
+title: Explore Apache Spark on Google Axion C4A 
 
 weight: 2
 

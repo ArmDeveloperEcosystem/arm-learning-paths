@@ -1,5 +1,5 @@
 ---
-title: Build multi-architecture container images with GitHub Arm-hosted runners
+title: Build multi-architecture images with GitHub Arm-hosted runners
 
 minutes_to_complete: 30
 

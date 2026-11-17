@@ -1,5 +1,5 @@
 ---
-title: Deploy multi-network device meshes using Device Connect server and NATS
+title: Deploy device meshes with Device Connect and NATS
 
 description: Connect an example edge device, secondary devices, and AI agents across networks using Device Connect server. Learn to provision NATS credentials, commission devices, manage persistent registry, and orchestrate multi-network IoT fleets with secure authentication.
 minutes_to_complete: 30

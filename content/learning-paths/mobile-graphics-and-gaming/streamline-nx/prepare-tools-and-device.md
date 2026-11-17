@@ -13,7 +13,7 @@ Install the package for your host using the [Arm Performance Studio install guid
 
 Confirm that you're using Streamline version 9.9 or later. On macOS, select **Streamline > About Streamline** to check the version. An older installation can support general GPU profiling without supporting the neural accelerator (NX) workflow.
 
-![About Streamline dialog showing version 9.9.0 over the Start view, with Android (adb) selected and no device selected#center](./images/streamline_startscreen.png "About Streamline reports version 9.9.0, which supports ML for Vulkan profiling.")
+![About Streamline dialog showing version 9.9.0 over the Start view, with Android (adb) selected and no device selected#center](./images/streamline_startscreen.webp "About Streamline reports version 9.9.0, which supports ML for Vulkan profiling.")
 
 ## Connect an Android device with adb
 

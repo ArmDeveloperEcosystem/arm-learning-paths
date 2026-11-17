@@ -1,5 +1,5 @@
 ---
-title: Create an Azure Cobalt 100 Arm virtual machine for Elasticsearch deployment
+title: Create an Azure Cobalt 100 VM for Elasticsearch
 weight: 3
 ### FIXED, DO NOT MODIFY
 layout: learningpathall

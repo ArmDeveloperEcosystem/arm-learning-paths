@@ -1,5 +1,5 @@
 ---
-title: Integrate AWS Lambda with DynamoDB for IoT applications running Windows on Arm
+title: Integrate AWS Lambda and DynamoDB for Windows on Arm IoT apps
 
 description: Learn how to implement AWS Lambda functions that process and aggregate IoT data stored in DynamoDB tables from Windows on Arm devices.
 

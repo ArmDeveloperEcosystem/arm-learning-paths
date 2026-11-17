@@ -11,12 +11,12 @@ layout: learningpathall
 
 [Arm Performix](https://developer.arm.com/servers-and-cloud-computing/arm-performix) is a performance toolkit designed to help developers identify bottlenecks and validate improvements on Arm-based systems. The toolkit turns low-level performance data into actionable insights through guided analysis paths called recipes. You can use these recipes to answer common performance questions and move quickly from observation to root cause.
 
-Arm Performix includes a local Model Context Protocol (MCP) server. MCP is a standard way for an AI assistant to discover and call tools. AI assistants such as Claude Code can use the server to query Performix recipes, targets, and runs from Visual Studio Code (VS Code) instead of relying on source-code analysis alone.
+Arm Performix includes a local Model Context Protocol (MCP) server. MCP is a standard way for an AI assistant to discover and call tools. The MCP server provides AI assistants such as Claude Code an alternative to relying on source-code analysis. AI assistants can use the MCP server to query Performix recipes, targets, and runs from Visual Studio Code (VS Code). 
 
 You'll connect the server to Claude Code, select or create a Code Hotspots run, and ask for an AI insight. The response should connect each recommendation to evidence from the selected run.
 
 {{% notice Important %}}
-The MCP server runs on the same host as Claude Code. It can make profile data, symbols, source excerpts, disassembly excerpts, and performance metrics available to the assistant. Before you continue, confirm that this use complies with your organization's data-handling policy.
+The MCP server runs on the same host as Claude Code. It can make profile data, symbols, source and disassembly excerpts, and performance metrics available to the assistant. Before you continue, confirm that this use complies with the data-handling policy of your organization.
 {{% /notice %}}
 
 Use AI-generated responses to support performance investigation. Validate important findings by reviewing the relevant data in Arm Performix and by rerunning the workload after making changes.
@@ -25,7 +25,7 @@ Use AI-generated responses to support performance investigation. Validate import
 
 Arm Performix stores profiling runs, target information, and rendered analysis data. The local MCP server exposes specific Performix capabilities as tools that an MCP-compatible assistant can call.
 
-When you ask for insights, the flow is:
+When you ask for insights, the following steps take place:
 
 1. You ask an AI assistant — in this case, Claude Code in VS Code — for an Arm Performix insight.
 2. Claude Code calls the Arm Performix MCP server.
@@ -36,6 +36,6 @@ The available evidence depends on how the run was collected. Debug symbols and s
 
 ## What you've learned and what's next
 
-You've learned about Arm Performix's local MCP server and how AI-assisted insights are generated.
+You've learned about the Arm Performix local MCP server and how AI-assisted insights are generated.
 
 Next, you'll configure the local MCP server and verify that Claude Code can use its tools.

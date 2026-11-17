@@ -1,5 +1,5 @@
 ---
-title: Add Arm nodes to your GKE cluster using a multi-architecture Ollama container image 
+title: Add Arm nodes to GKE with a multi-architecture Ollama image
 
 minutes_to_complete: 30
 

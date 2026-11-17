@@ -392,6 +392,14 @@ def checker(report = 'all', update_md_files = False):
     
         # Initalize status_dic
         status_dic['subjects'][dir_main_category] = {}
+        # Keep Agentic AI available in every category, even before its first LP.
+        if 'Agentic AI' in dic_allow_list['subjects'][dir_main_category]:
+            status_dic['subjects'][dir_main_category]['Agentic AI'] = {
+                'allowed': True,
+                'count': 0,
+                'learning-path-titles': [],
+            }
+
         status_dic['operatingsystems'][dir_main_category] = {}
         status_dic['tools_software_languages'][dir_main_category] = {}
         if dir_main_category == "servers-and-cloud-computing":

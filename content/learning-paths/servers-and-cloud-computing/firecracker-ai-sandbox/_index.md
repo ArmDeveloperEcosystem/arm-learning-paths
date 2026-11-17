@@ -73,7 +73,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: Containers and Virtualization
+subjects: Agentic AI
 armips:
     - Neoverse
 platforms:

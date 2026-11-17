@@ -11,16 +11,20 @@ layout: learningpathall
 
 If you already have a supported Code Hotspots run, skip to [Generate Arm Performix AI insights for a Code Hotspots run](/learning-paths/servers-and-cloud-computing/performix-agentic-dynamic-insights-claude/generate_ai_insights/).
 
-For a new run, choose a workload that represents the behavior you want to optimize. Specify the executable with an absolute path because Performix doesn't support relative workload paths. Build it with debug symbols when possible so Performix can attribute samples to functions and source lines. Aim for at least 20 seconds of representative activity; a very short run might not collect enough samples for useful analysis.
+If you haven't configured an Arm Linux target yet, follow [Set up Arm Performix](/learning-paths/servers-and-cloud-computing/performix-get-started/add_target/) before continuing.
 
-Before profiling, make sure you know:
+For a new run, choose a workload that represents the behavior that you want to optimize. Specify the executable with an absolute path because Performix doesn't support relative workload paths. Build it with debug symbols when possible so that Performix can attribute samples to functions and source lines. 
+
+Aim for at least 20 seconds of representative activity. A very short run might not collect enough samples for useful analysis.
+
+Before profiling, identify the following information:
 
 - The Performix target name
 - The executable path and arguments on the target
-- The workload's working directory and required environment variables
+- The working directory and required environment variables of the workload
 - Whether running the workload has side effects
 
-## Create a run with Claude Code
+### Create a run with Claude Code
 
 First, ask Claude Code to list the configured targets:
 
@@ -28,7 +32,7 @@ First, ask Claude Code to list the configured targets:
 Use the Arm Performix MCP server to list the configured targets. Include each target's name and connection status when available.
 ```
 
-Choose the correct target, then ask Claude Code to run Code Hotspots. Keep collection and analysis as separate requests so you can record the run ID before requesting an insight:
+Choose the correct target, then ask Claude Code to run Code Hotspots. Keep collection and analysis as separate requests so that you can record the run ID before requesting an insight:
 
 ```text
 Use Arm Performix to run the Code Hotspots recipe on target "<target-name>" with workload "<command>". When the run completes, return its run ID and collection status.
@@ -47,23 +51,20 @@ Use Arm Performix to run the Code Hotspots recipe on target "graviton-dev" with 
 
 Claude Code uses the MCP server to start the recipe. Review any permission request before allowing the assistant to run a command on the target.
 
-## Create a run with the Arm Performix CLI
+### Create a run with the Arm Performix CLI
 
-If you prefer to control collection from a terminal, first check that the recipe dependencies and workload are ready:
+If you prefer to control collection from a terminal, first check that the recipe dependencies and workload are ready.
+
+The following single-line commands work in `bash`, `zsh`, and PowerShell when `apx` is on your `PATH`. For host-specific PATH setup, see [Use the Arm Performix CLI](/install-guides/performix/#use-the-arm-performix-cli). Replace `my-target` and the example workload with your target name and workload command:
 
 ```bash
-apx recipe ready code_hotspots \
-    --target my-target \
-    --workload "/opt/myapp/bin/my_app --input /data/input.dat"
+apx recipe ready code_hotspots --target my-target --workload "/opt/myapp/bin/my_app --input /data/input.dat"
 ```
 
-If Performix reports missing or outdated target tools, deploy them as part of the run:
+Run the recipe to collect a profile. The `--deploy-tools` option deploys any missing or outdated target tools as part of the run:
 
 ```bash
-apx recipe run code_hotspots \
-    --target my-target \
-    --workload "/opt/myapp/bin/my_app --input /data/input.dat" \
-    --timeout 30
+apx recipe run code_hotspots --target my-target --deploy-tools --workload "/opt/myapp/bin/my_app --input /data/input.dat" --timeout 30
 ```
 
 The `--timeout 30` option limits profiling to 30 seconds and doesn't make a short workload run longer. Use a duration that captures representative behavior.
@@ -80,7 +81,7 @@ Confirm that the new run completed successfully and record its run ID.
 
 ## Troubleshoot remote target authentication
 
-If remote target authentication fails, check that:
+If remote target authentication fails, verify that the following conditions are met:
 
 - SSH key-based authentication works without an interactive password prompt.
 - The private key doesn't require an interactive passphrase.
@@ -91,11 +92,11 @@ If remote target authentication fails, check that:
 Use the Arm Performix target test to check the configured connection independently of Claude Code:
 
 ```bash
-apx target test --target <target-name>
+apx target test --target "<target-name>"
 ```
 
 ## What you've accomplished and what's next
 
-You now have the stable identifier Claude Code needs to analyze the intended profile.
+You now have the stable identifier that Claude Code needs to analyze the intended profile.
 
-Next, you'll generate AI insights from a Code Hotspots run.
+Next, you'll generate AI insights from the Code Hotspots run.

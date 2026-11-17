@@ -1,5 +1,5 @@
 ---
-title: Find GPT-2 hotspots and profile with the Arm Performix Instruction Mix recipe
+title: Find GPT-2 hotspots with the Arm Performix Instruction Mix recipe
 description: Use Arm Performix Code Hotspots and Instruction Mix recipes to confirm that scalar matrix multiplication dominates GPT-2 baseline runtime.
 weight: 4
 

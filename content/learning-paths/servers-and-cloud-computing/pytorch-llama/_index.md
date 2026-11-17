@@ -1,5 +1,5 @@
 ---
-title: Run a Large Language Model (LLM) chatbot with PyTorch using KleidiAI on Arm servers
+title: Run a PyTorch LLM chatbot with KleidiAI on Arm
 
 minutes_to_complete: 30
 
@@ -26,7 +26,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 platforms:
   - AWS Graviton
   - Microsoft Azure Cobalt

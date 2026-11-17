@@ -1,5 +1,5 @@
 ---
-title: Understand UltraEdge HPC-I architecture for edge AI and mixed workloads
+title: Explore UltraEdge HPC-I architecture for edge AI
 
 weight: 2
 

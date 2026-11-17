@@ -1,5 +1,5 @@
 ---
-title: Deploy and validate the storefront baseline on the Google N4A node pool
+title: Deploy and validate the storefront on a Google N4A node pool
 description: Deploy the Online Boutique storefront on N4A and confirm that the assistant service hasn't been deployed yet.
 weight: 4
 layout: "learningpathall"

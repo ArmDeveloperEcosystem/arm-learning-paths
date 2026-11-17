@@ -6,7 +6,7 @@ description: Generate, style-review, and patch AI-assisted Learning Path summari
 # Summary and FAQ workflow
 
 Use this skill when a user asks to generate, review, or style-fix the
-`generated_summary_faq` block in Learning Path `_index.md` files.
+`generated_summary_faq` block in Learning Path `_index.md` files. The summary renders on the introductory page with `who_is_this_for`, `learning_objectives`, and `prerequisites`. The FAQs render on the next steps page with `further_reading`.
 
 If subagents are available, use three roles:
 

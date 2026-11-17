@@ -36,34 +36,34 @@ generated_summary_faq:
     criteria and test game content. Next, you'll decide whether NSSD merits experimental exploration with Arm. If a measured gap justifies
     model work, you'll use Model Gym, MLIA, and Streamline to assess candidates. You'll finish
     with an integration brief separating estimates from device measurements.
-#   faqs:
-#   - question: How do I choose between NFRU, NSS, and NSSD?
-#     answer: >-
-#       Start with your player-facing goal and the resources your engine can provide. Choose the public
-#       NFRU route for smoother presentation or the public NSS route for neural upscaling. If your
-#       lighting goals call for denoising and super sampling together, consider NSSD as an experimental
-#       exploration with Arm. You can start with a published model and defer custom model work.
-#   - question: What pass condition confirms NFRU is viable for my game?
-#     answer: >-
-#       Set your presentation, image-quality, latency, power, and thermal limits before testing.
-#       Compare the same representative action with NFRU disabled and enabled under fixed conditions.
-#       Continue only if your measured result meets your presentation target within those limits.
-#   - question: What should I record during the NFRU test run?
-#     answer: >-
-#       Record render FPS, present FPS, frame-time distribution, and your image-quality observations.
-#       Capture latency, power, and thermal data against the limits you set. Use the Project Moku case
-#       study to establish a repeatable capture method, then apply it to representative game content.
-#   - question: How should I treat desktop results from the ML Emulation Layer?
-#     answer: >-
-#       Use the ML Emulation Layer for desktop development and testing. Don't treat its performance
-#       as representative of production hardware. Validate performance-critical decisions on an Arm
-#       GPU with a neural accelerator (NX).
-#   - question: Which motion data does NFRU need, and how do I check it?
-#     answer: >-
-#       Supply color, depth, motion vectors, camera data, and metadata from your engine. Check the
-#       motion-vector format and coordinate system, and confirm that the data aligns with neighboring
-#       rendered frames. NFRU uses optical flow within its motion-estimation stage; you don't supply
-#       it as a separate engine input.
+  faqs:
+  - question: How do I choose between NFRU, NSS, and NSSD?
+    answer: >-
+      Start with your player-facing goal and the resources your engine can provide. Choose the public
+      NFRU route for smoother presentation or the public NSS route for neural upscaling. If your
+      lighting goals call for denoising and super sampling together, consider NSSD as an experimental
+      exploration with Arm. You can start with a published model and defer custom model work.
+  - question: What pass condition confirms NFRU is viable for my game?
+    answer: >-
+      Set your presentation, image-quality, latency, power, and thermal limits before testing.
+      Compare the same representative action with NFRU disabled and enabled under fixed conditions.
+      Continue only if your measured result meets your presentation target within those limits.
+  - question: What should I record during the NFRU test run?
+    answer: >-
+      Record render FPS, present FPS, frame-time distribution, and your image-quality observations.
+      Capture latency, power, and thermal data against the limits you set. Use the Project Moku case
+      study to establish a repeatable capture method, then apply it to representative game content.
+  - question: How should I treat desktop results from the ML Emulation Layer?
+    answer: >-
+      Use the ML Emulation Layer for desktop development and testing. Don't treat its performance
+      as representative of production hardware. Validate performance-critical decisions on an Arm
+      GPU with a neural accelerator.
+  - question: Which motion data does NFRU need, and how do I check it?
+    answer: >-
+      Supply color, depth, motion vectors, camera data, and metadata from your engine. Check the
+      motion-vector format and coordinate system. Confirm that the data aligns with neighboring
+      rendered frames. NFRU uses optical flow within its motion-estimation stage. You don't supply
+      it as a separate engine input.
 # END generated_summary_faq
 
 author: Annie Tallund

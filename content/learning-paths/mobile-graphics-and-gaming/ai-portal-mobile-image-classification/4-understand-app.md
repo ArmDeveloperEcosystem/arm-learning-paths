@@ -77,15 +77,22 @@ Model-specific preprocessing is important because a model can load and run with 
 
 ### How Photo Insight runs an ExecuTorch classifier
 
-`ExecuTorchImageClassificationAdapter.java` selects one of three preprocessing profiles for the imported model. It creates `ExecuTorchImageClassifier.java`, which memory-maps the `.pte` file, loads the `forward` method, and checks that the program declares the XNNPACK backend.
+`ExecuTorchImageClassificationAdapter.java` selects the preprocessing profile registered for the imported model. It creates `ExecuTorchImageClassifier.java`, which memory-maps the `.pte` file, loads the `forward` method, and checks that the program declares the XNNPACK backend.
 
 The supported ExecuTorch classifiers share one execution contract: a float32 RGB tensor in `NCHW` layout and one float32 output tensor with shape `[1, 1000]`. Their preprocessing differs:
 
 | Profile | Resize and crop | Normalization | Current models |
 | --- | --- | --- | --- |
-| `IMAGENET_CROP_256` | Resize the shorter edge to 256, then center-crop to `224 × 224` | ImageNet mean and standard deviation | DEiT Tiny, GoogLeNet, MobileNetV3 Small, ResNet-18, ResNet-50, ShuffleNet V2, SqueezeNet 1.1 |
-| `IMAGENET_CROP_232` | Resize the shorter edge to 232, then center-crop to `224 × 224` | ImageNet mean and standard deviation | Swin Tiny |
-| `SYMMETRIC_DIRECT_RESIZE` | Resize directly to `224 × 224` | Mean `0.5`, standard deviation `0.5` | ViT Base |
+| `IMAGENET_CROP_256` | Bicubic resize of the shorter edge to 256, then center-crop to `224 × 224` | ImageNet mean and standard deviation | DEiT Tiny, GoogLeNet, MobileNetV3 Small, ResNet-18, ResNet-50, ShuffleNet V2, SqueezeNet 1.1 |
+| `IMAGENET_BILINEAR_CROP_256` | Bilinear resize of the shorter edge to 256, then center-crop to `224 × 224` | ImageNet mean and standard deviation | Wide ResNet-50, SqueezeNet 1.0, ViT-B/16, GoogLeNet (Nota) |
+| `IMAGENET_CROP_232` | Bicubic resize of the shorter edge to 232, then center-crop to `224 × 224` | ImageNet mean and standard deviation | Swin Tiny |
+| `IMAGENET_CROP_384` | Bicubic resize of the shorter edge to 384, then center-crop to `384 × 384` | ImageNet mean and standard deviation | EfficientNet-B4 |
+| `IMAGENET_DIRECT_RESIZE` | Bicubic resize directly to `224 × 224` | ImageNet mean and standard deviation | Swin-T |
+| `SYMMETRIC_CROP_341` | Bicubic resize of the shorter edge to 341, then center-crop to `299 × 299` | Mean `0.5`, standard deviation `0.5` | Inception V3 |
+| `SYMMETRIC_DIRECT_RESIZE` | Bicubic resize directly to `224 × 224` | Mean `0.5`, standard deviation `0.5` | ViT Base |
+| `SYMMETRIC_BILINEAR_DIRECT_RESIZE` | Bilinear resize directly to `224 × 224` | Mean `0.5`, standard deviation `0.5` | DeiT-Tiny (Nota) |
+
+Profiles use the preprocessing configuration published with the model, or the linked upstream model's evaluation settings when the package doesn't include one. Model-specific resizing, cropping, and normalization matter even when two models have the same input shape.
 
 After one `forward` call, the classifier applies softmax, selects the five highest scores, and maps them to the ImageNet label file bundled with the application.
 

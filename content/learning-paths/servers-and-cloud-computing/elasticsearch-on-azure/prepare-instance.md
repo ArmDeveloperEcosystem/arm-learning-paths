@@ -1,5 +1,5 @@
 ---
-title: Install Elasticsearch and ESRally on the Cobalt 100 virtual machine instance
+title: Install Elasticsearch and ESRally on Azure Cobalt 100
 
 weight: 4
 

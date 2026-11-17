@@ -1,6 +1,6 @@
 ---
 title: "Set up Chrome and Node.js for headless testing"
-description: "Install and verify Google Chrome and Node.js v20 on Ubuntu 24.04 or Amazon Linux 2023 (arm64) for headless testing."
+description: "Install and verify Google Chrome and Node.js 22 on Ubuntu 24.04 or Amazon Linux 2023 (arm64) for headless testing."
 
 weight: 3
 
@@ -25,15 +25,15 @@ Google Chrome 155.0.8059.84
 
 ## Install and verify Node.js
 
-Puppeteer requires Node.js 18 or later. Install Node.js v20 LTS by using the package manager for your distribution:
+Puppeteer requires Node.js 22.12 or later. Install Node.js 22 by using the package manager for your distribution:
 
 {{< tabpane code=true >}}
   {{< tab header="Ubuntu 24.04" language="bash" >}}
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt install -y nodejs
   {{< /tab >}}
   {{< tab header="Amazon Linux 2023" language="bash" >}}
-sudo dnf install -y nodejs npm
+sudo dnf install -y nodejs22 nodejs22-npm
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -44,12 +44,7 @@ node --version
 npm --version
 ```
 
-The output is similar to:
-
-```output
-v20.20.2
-10.8.2
-```
+Confirm that Node.js reports version 22.12 or later. The npm version can vary.
 
 ## What you've accomplished and what's next
 

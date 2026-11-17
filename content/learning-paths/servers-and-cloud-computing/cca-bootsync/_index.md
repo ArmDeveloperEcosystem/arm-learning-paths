@@ -1,10 +1,10 @@
 ---
-title: Secure Realms during boot using Arm Confidential Compute Architecture BootSync
+title: Secure Realm boot with Arm CCA BootSync
 description: Use Arm CCA BootSync on an RME-enabled FVP to inject UEFI variables and secrets to unlock the disk during boot, then verify Secure Boot and encrypted root file system startup.
 
 minutes_to_complete: 60
 
-who_is_this_for: This Learning Path is for developers who want to understand how Arm CCA BootSync supports early Realm boot workflows such as UEFI Secure Boot and encrypted disk boot.
+who_is_this_for: This Learning Path is for developers who want to understand how Arm Confidential Compute Architecture (CCA) BootSync supports early Realm boot workflows such as UEFI Secure Boot and encrypted disk boot.
 
 learning_objectives:
   - Understand why BootSync is needed before the Realm guest operating system has networking.
@@ -14,7 +14,7 @@ learning_objectives:
 
 prerequisites:
   - A cloud-based instance or an AArch64 or x86_64 computer running Linux. For more information about using cloud-based instances, see the [Arm cloud service providers](/learning-paths/servers-and-cloud-computing/csp/) Learning Path.
-  - Completion of the [Run an application in a Realm using the Arm Confidential Compute Architecture (CCA)](/learning-paths/servers-and-cloud-computing/cca-container/) Learning Path
+  - Completion of the [Run an application in a Realm using Arm CCA](/learning-paths/servers-and-cloud-computing/cca-container/) Learning Path
 
 # START generated_summary_faq
 generated_summary_faq:

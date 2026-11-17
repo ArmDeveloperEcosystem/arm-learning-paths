@@ -1,5 +1,5 @@
 ---
-title: Create firewall rules on GCP for Apache Arrow, MinIO, and Arrow Flight
+title: Set up GCP firewall rules for Arrow Flight and MinIO
 weight: 3
 
 ### FIXED, DO NOT MODIFY

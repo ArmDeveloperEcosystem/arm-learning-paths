@@ -1,5 +1,5 @@
 ---
-title: Understand Keycloak for identity and access management on Azure Cobalt 100-based virtual machines
+title: Explore Keycloak identity management on Azure Cobalt 100
 description: Learn how Keycloak provides IAM, OAuth2/OpenID Connect, and single sign-on for applications running on Arm-based Azure infrastructure.
 weight: 2
 

@@ -1,6 +1,6 @@
 ---
 # User change
-title: "Generate optimized Halide pipelines for Android using ahead-of-time cross-compilation"
+title: "Cross-compile optimized Halide pipelines for Android"
 
 weight: 5
 

@@ -1,0 +1,200 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1430" viewBox="0 0 1800 1430" role="img" aria-labelledby="title desc">
+<title id="title">Axion Agent Studio — deployment and execution architecture</title>
+<desc id="desc">A browser submits a request to a regular N4A manager Pod. Hosted Gemini plans and summarizes work through Vertex AI. The manager dispatches to three gVisor sandbox Pods on one shared C4A virtual machine, each containing a worker API and local Gemma model server. Backend and frontend build in parallel, then QA generates tests. A separate N4A validator executes protected checks and generated tests, and serves accepted pricing calculations. Only passed validation enables the shop preview served by the manager. A separate C4A system node is shown. VM sizes describe provisioned capacity, not Pod limits.</desc>
+<defs>
+  <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="0.8" fill="#D9E5F0"/></pattern>
+  <marker id="blue" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0,0 L7,3.5 L0,7 Z" fill="#2475C7"/></marker>
+  <marker id="violet" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0,0 L7,3.5 L0,7 Z" fill="#7254CF"/></marker>
+  <marker id="green" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto-start-reverse"><path d="M0,0 L7,3.5 L0,7 Z" fill="#16836F"/></marker>
+</defs>
+<rect width="1800" height="1430" fill="#FFFFFF"/>
+<g font-family="Arial, Helvetica, sans-serif">
+
+<text x="60" y="49" fill="#487297" font-size="15" font-weight="700" text-anchor="start">DEPLOYMENT + EXECUTION FLOW</text>
+<text x="60" y="103" fill="#102744" font-size="46" font-weight="700" text-anchor="start">Axion Agent Studio</text>
+<text x="1760" y="58" fill="#7254CF" font-size="14" font-weight="700" text-anchor="end">HOSTED PLANNING</text>
+<text x="1760" y="87" fill="#2475C7" font-size="14" font-weight="700" text-anchor="end">LOCAL CPU EXECUTION</text>
+<text x="1760" y="116" fill="#16836F" font-size="14" font-weight="700" text-anchor="end">INDEPENDENT VALIDATION</text>
+<rect x="60" y="157" width="440" height="144" rx="16" fill="#F8FBFF" stroke="#C7D9EC" stroke-width="1.5"/>
+<circle cx="93" cy="191" r="18" fill="#2475C7"/>
+<text x="93" y="197" fill="#fff" font-size="17" font-weight="700" text-anchor="middle">01</text>
+<text x="124" y="199" fill="#193B60" font-size="26" font-weight="700" text-anchor="start">Developer / browser</text>
+<text x="84" y="238" fill="#4A607B" font-size="21" font-weight="400" text-anchor="start">Submit request · inspect evidence</text>
+<text x="84" y="275" fill="#5F738B" font-size="17" font-weight="400" text-anchor="start">Local access through kubectl port-forward</text>
+<rect x="1100" y="157" width="640" height="144" rx="16" fill="#F6F2FF" stroke="#CBBBEF" stroke-width="1.5"/>
+<circle cx="1136" cy="191" r="18" fill="#7254CF"/>
+<text x="1136" y="197" fill="#fff" font-size="17" font-weight="700" text-anchor="middle">02</text>
+<text x="1166" y="199" fill="#543394" font-size="27" font-weight="700" text-anchor="start">Gemini · Vertex AI</text>
+<text x="1124" y="238" fill="#59457B" font-size="22" font-weight="400" text-anchor="start">Plan tasks · summarize results</text>
+<rect x="1124" y="258" width="346" height="28" rx="7" fill="#E9DFFF" stroke="none" stroke-width="1.5"/>
+<text x="1297.0" y="277" fill="#6741AB" font-size="14" font-weight="600" text-anchor="middle">Hosted inference · outside workload VMs</text>
+<rect x="60" y="354" width="1680" height="936" rx="24" fill="#F7FAFD" stroke="#A7C2DD" stroke-width="2"/>
+<rect x="61" y="355" width="1678" height="934" rx="23" fill="url(#grid)" stroke="none" stroke-width="1.5"/>
+<text x="92" y="394" fill="#245E93" font-size="19" font-weight="700" text-anchor="start">GKE STANDARD</text>
+<text x="630" y="394" fill="#183B5E" font-size="23" font-weight="600" text-anchor="start">Google Axion · Arm workload nodes</text>
+<rect x="1404" y="372" width="306" height="28" rx="7" fill="#E5EFF8" stroke="none" stroke-width="1.5"/>
+<text x="1557.0" y="391" fill="#345B80" font-size="16" font-weight="600" text-anchor="middle">4 VMs · 28 provisioned vCPUs</text>
+<rect x="100" y="443" width="420" height="788" rx="17" fill="#EAF3FC" stroke="#95B9DD" stroke-width="1.7"/>
+<rect x="126" y="470" width="28" height="28" rx="5" fill="none" stroke="#2475C7" stroke-width="2"/>
+<rect x="133" y="477" width="14" height="14" rx="2" fill="none" stroke="#2475C7" stroke-width="1.6"/>
+<line x1="121" y1="477" x2="126" y2="477" stroke="#2475C7" stroke-width="2"/>
+<line x1="154" y1="477" x2="159" y2="477" stroke="#2475C7" stroke-width="2"/>
+<line x1="133" y1="465" x2="133" y2="470" stroke="#2475C7" stroke-width="2"/>
+<line x1="133" y1="498" x2="133" y2="503" stroke="#2475C7" stroke-width="2"/>
+<line x1="121" y1="484" x2="126" y2="484" stroke="#2475C7" stroke-width="2"/>
+<line x1="154" y1="484" x2="159" y2="484" stroke="#2475C7" stroke-width="2"/>
+<line x1="140" y1="465" x2="140" y2="470" stroke="#2475C7" stroke-width="2"/>
+<line x1="140" y1="498" x2="140" y2="503" stroke="#2475C7" stroke-width="2"/>
+<line x1="121" y1="491" x2="126" y2="491" stroke="#2475C7" stroke-width="2"/>
+<line x1="154" y1="491" x2="159" y2="491" stroke="#2475C7" stroke-width="2"/>
+<line x1="147" y1="465" x2="147" y2="470" stroke="#2475C7" stroke-width="2"/>
+<line x1="147" y1="498" x2="147" y2="503" stroke="#2475C7" stroke-width="2"/>
+<text x="175" y="478" fill="#1F5D97" font-size="22" font-weight="700" text-anchor="start">VM 01 · N4A</text>
+<text x="175" y="506" fill="#4B6783" font-size="18" font-weight="400" text-anchor="start">n4a-standard-2 · 2 vCPUs</text>
+<rect x="124" y="532" width="372" height="675" rx="12" fill="#fff" stroke="#B6CCE0" stroke-width="1.5"/>
+<text x="148" y="573" fill="#163C61" font-size="28" font-weight="700" text-anchor="start">Agent manager</text>
+<rect x="148" y="589" width="214" height="28" rx="7" fill="#EAF3FC" stroke="none" stroke-width="1.5"/>
+<text x="255.0" y="608" fill="#3D6388" font-size="13" font-weight="600" text-anchor="middle">FASTAPI · REGULAR POD</text>
+<line x1="148" y1="635" x2="472" y2="635" stroke="#DCE5EE" stroke-width="1"/>
+<text x="148" y="673" fill="#1E4C77" font-size="23" font-weight="600" text-anchor="start">Coordinate</text>
+<text x="148" y="704" fill="#50657D" font-size="19" font-weight="400" text-anchor="start">Plan · dispatch · merge</text>
+<text x="148" y="732" fill="#50657D" font-size="18" font-weight="400" text-anchor="start">Prepared shop repository</text>
+<text x="148" y="785" fill="#1E4C77" font-size="23" font-weight="600" text-anchor="start">Run control</text>
+<text x="148" y="815" fill="#50657D" font-size="19" font-weight="400" text-anchor="start">One active request</text>
+<text x="148" y="843" fill="#50657D" font-size="18" font-weight="400" text-anchor="start">One bounded repair round</text>
+<text x="148" y="896" fill="#1E4C77" font-size="23" font-weight="600" text-anchor="start">Observability</text>
+<text x="148" y="926" fill="#50657D" font-size="19" font-weight="400" text-anchor="start">Status · CPU · memory</text>
+<text x="148" y="954" fill="#50657D" font-size="18" font-weight="400" text-anchor="start">VM placement + test evidence</text>
+<line x1="148" y1="983" x2="472" y2="983" stroke="#DCE5EE" stroke-width="1"/>
+<rect x="148" y="1010" width="324" height="169" rx="12" fill="#EAF8F2" stroke="#A8D8C4" stroke-width="1.5"/>
+<circle cx="177" cy="1044" r="18" fill="#16836F"/>
+<text x="177" y="1050" fill="#fff" font-size="17" font-weight="700" text-anchor="middle">05</text>
+<text x="204" y="1052" fill="#176A54" font-size="24" font-weight="700" text-anchor="start">Validated shop</text>
+<text x="168" y="1092" fill="#286D59" font-size="18" font-weight="600" text-anchor="start">Enabled after checks pass</text>
+<text x="168" y="1123" fill="#436C5E" font-size="17" font-weight="400" text-anchor="start">HTML served by manager</text>
+<text x="168" y="1152" fill="#436C5E" font-size="17" font-weight="400" text-anchor="start">Pricing runs in the validator</text>
+<rect x="610" y="443" width="1090" height="490" rx="17" fill="#F3F8FC" stroke="#95B9DD" stroke-width="1.7"/>
+<rect x="637" y="470" width="28" height="28" rx="5" fill="none" stroke="#2475C7" stroke-width="2"/>
+<rect x="644" y="477" width="14" height="14" rx="2" fill="none" stroke="#2475C7" stroke-width="1.6"/>
+<line x1="632" y1="477" x2="637" y2="477" stroke="#2475C7" stroke-width="2"/>
+<line x1="665" y1="477" x2="670" y2="477" stroke="#2475C7" stroke-width="2"/>
+<line x1="644" y1="465" x2="644" y2="470" stroke="#2475C7" stroke-width="2"/>
+<line x1="644" y1="498" x2="644" y2="503" stroke="#2475C7" stroke-width="2"/>
+<line x1="632" y1="484" x2="637" y2="484" stroke="#2475C7" stroke-width="2"/>
+<line x1="665" y1="484" x2="670" y2="484" stroke="#2475C7" stroke-width="2"/>
+<line x1="651" y1="465" x2="651" y2="470" stroke="#2475C7" stroke-width="2"/>
+<line x1="651" y1="498" x2="651" y2="503" stroke="#2475C7" stroke-width="2"/>
+<line x1="632" y1="491" x2="637" y2="491" stroke="#2475C7" stroke-width="2"/>
+<line x1="665" y1="491" x2="670" y2="491" stroke="#2475C7" stroke-width="2"/>
+<line x1="658" y1="465" x2="658" y2="470" stroke="#2475C7" stroke-width="2"/>
+<line x1="658" y1="498" x2="658" y2="503" stroke="#2475C7" stroke-width="2"/>
+<text x="686" y="478" fill="#1F5D97" font-size="22" font-weight="700" text-anchor="start">VM 02 · C4A</text>
+<text x="686" y="506" fill="#446682" font-size="20" font-weight="400" text-anchor="start">c4a-standard-16 · 16 vCPUs shared by all three engineers</text>
+<rect x="1478" y="460" width="196" height="28" rx="7" fill="#E1EEF9" stroke="none" stroke-width="1.5"/>
+<text x="1576.0" y="479" fill="#31618C" font-size="13" font-weight="600" text-anchor="middle">LOCAL CPU MODELS</text>
+<path d="M 496 623 H 566 V 563 H 1510" fill="none" stroke="#2475C7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#blue)"/>
+<path d="M 800 563 V 583" fill="none" stroke="#2475C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#blue)"/>
+<path d="M 1155 563 V 583" fill="none" stroke="#2475C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#blue)"/>
+<path d="M 1510 563 V 583" fill="none" stroke="#2475C7" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#blue)"/>
+<rect x="650" y="523" width="674" height="27" rx="5" fill="#F3F8FC" stroke="none" stroke-width="1.5"/>
+<text x="666" y="545" fill="#2B6398" font-size="18" font-weight="600" text-anchor="start">03  Tasks + scoped code ⇄ changes / tests · HTTP :8081</text>
+<rect x="634" y="583" width="332" height="292" rx="14" fill="#fff" stroke="#087F8C" stroke-width="1.8" stroke-dasharray="6 4"/>
+<rect x="635" y="584" width="330" height="53" rx="13" fill="#E7F6F5" stroke="none" stroke-width="1.5"/>
+<text x="654" y="618" fill="#087F8C" font-size="23" font-weight="700" text-anchor="start">Backend Engineer</text>
+<text x="654" y="656" fill="#4D6078" font-size="16" font-weight="500" text-anchor="start">gVisor sandbox Pod</text>
+<rect x="654" y="676" width="292" height="45" rx="8" fill="#F6F8FB" stroke="#D9E2EC" stroke-width="1.5"/>
+<text x="800" y="705" fill="#253B57" font-size="19" font-weight="600" text-anchor="middle">Worker API · :8081</text>
+<path d="M 800 721 V 743" fill="none" stroke="#2475C7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#blue)"/>
+<rect x="654" y="745" width="292" height="70" rx="9" fill="#E7F6F5" stroke="none" stroke-width="1.5"/>
+<text x="800" y="773" fill="#1D3652" font-size="19" font-weight="600" text-anchor="middle">llama.cpp · local Gemma</text>
+<text x="800" y="799" fill="#475E77" font-size="17" font-weight="400" text-anchor="middle">E4B · Q4_0 · CPU inference</text>
+<text x="654" y="846" fill="#087F8C" font-size="19" font-weight="600" text-anchor="start" font-family="'DejaVu Sans Mono', monospace">pricing.py</text>
+<text x="654" y="865" fill="#5C6D81" font-size="14" font-weight="400" text-anchor="start">Builds pricing and delivery logic</text>
+<rect x="989" y="583" width="332" height="292" rx="14" fill="#fff" stroke="#B94D40" stroke-width="1.8" stroke-dasharray="6 4"/>
+<rect x="990" y="584" width="330" height="53" rx="13" fill="#FFF0EB" stroke="none" stroke-width="1.5"/>
+<text x="1009" y="618" fill="#B94D40" font-size="23" font-weight="700" text-anchor="start">Frontend Engineer</text>
+<text x="1009" y="656" fill="#4D6078" font-size="16" font-weight="500" text-anchor="start">gVisor sandbox Pod</text>
+<rect x="1009" y="676" width="292" height="45" rx="8" fill="#F6F8FB" stroke="#D9E2EC" stroke-width="1.5"/>
+<text x="1155" y="705" fill="#253B57" font-size="19" font-weight="600" text-anchor="middle">Worker API · :8081</text>
+<path d="M 1155 721 V 743" fill="none" stroke="#2475C7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#blue)"/>
+<rect x="1009" y="745" width="292" height="70" rx="9" fill="#FFF0EB" stroke="none" stroke-width="1.5"/>
+<text x="1155" y="773" fill="#1D3652" font-size="19" font-weight="600" text-anchor="middle">llama.cpp · local Gemma</text>
+<text x="1155" y="799" fill="#475E77" font-size="17" font-weight="400" text-anchor="middle">E4B · Q4_0 · CPU inference</text>
+<text x="1009" y="846" fill="#B94D40" font-size="19" font-weight="600" text-anchor="start" font-family="'DejaVu Sans Mono', monospace">checkout.html</text>
+<text x="1009" y="865" fill="#5C6D81" font-size="14" font-weight="400" text-anchor="start">Updates constrained checkout fragments</text>
+<rect x="1344" y="583" width="332" height="292" rx="14" fill="#fff" stroke="#946A0B" stroke-width="1.8" stroke-dasharray="6 4"/>
+<rect x="1345" y="584" width="330" height="53" rx="13" fill="#FFF7DB" stroke="none" stroke-width="1.5"/>
+<text x="1364" y="618" fill="#946A0B" font-size="23" font-weight="700" text-anchor="start">QA Engineer</text>
+<text x="1364" y="656" fill="#4D6078" font-size="16" font-weight="500" text-anchor="start">gVisor sandbox Pod</text>
+<rect x="1364" y="676" width="292" height="45" rx="8" fill="#F6F8FB" stroke="#D9E2EC" stroke-width="1.5"/>
+<text x="1510" y="705" fill="#253B57" font-size="19" font-weight="600" text-anchor="middle">Worker API · :8081</text>
+<path d="M 1510 721 V 743" fill="none" stroke="#2475C7" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#blue)"/>
+<rect x="1364" y="745" width="292" height="70" rx="9" fill="#FFF7DB" stroke="none" stroke-width="1.5"/>
+<text x="1510" y="773" fill="#1D3652" font-size="19" font-weight="600" text-anchor="middle">llama.cpp · local Gemma</text>
+<text x="1510" y="799" fill="#475E77" font-size="17" font-weight="400" text-anchor="middle">E4B · Q4_0 · CPU inference</text>
+<text x="1364" y="846" fill="#946A0B" font-size="19" font-weight="600" text-anchor="start" font-family="'DejaVu Sans Mono', monospace">qa_tests.py</text>
+<text x="1364" y="865" fill="#5C6D81" font-size="14" font-weight="400" text-anchor="start">Generates pricing unit tests</text>
+<text x="654" y="910" fill="#415F7A" font-size="18" font-weight="600" text-anchor="start">Backend + frontend in parallel</text>
+<text x="1344" y="910" fill="#6F5F32" font-size="18" font-weight="600" text-anchor="start">QA follows both builds</text>
+<text x="634" y="977" fill="#26745D" font-size="18" font-weight="500" text-anchor="start">Candidate / test results / accepted pricing quotes</text>
+<rect x="610" y="1004" width="760" height="227" rx="17" fill="#EEF8F3" stroke="#9CCDB8" stroke-width="1.7"/>
+<rect x="637" y="1030" width="28" height="28" rx="5" fill="none" stroke="#16836F" stroke-width="2"/>
+<rect x="644" y="1037" width="14" height="14" rx="2" fill="none" stroke="#16836F" stroke-width="1.6"/>
+<line x1="632" y1="1037" x2="637" y2="1037" stroke="#16836F" stroke-width="2"/>
+<line x1="665" y1="1037" x2="670" y2="1037" stroke="#16836F" stroke-width="2"/>
+<line x1="644" y1="1025" x2="644" y2="1030" stroke="#16836F" stroke-width="2"/>
+<line x1="644" y1="1058" x2="644" y2="1063" stroke="#16836F" stroke-width="2"/>
+<line x1="632" y1="1044" x2="637" y2="1044" stroke="#16836F" stroke-width="2"/>
+<line x1="665" y1="1044" x2="670" y2="1044" stroke="#16836F" stroke-width="2"/>
+<line x1="651" y1="1025" x2="651" y2="1030" stroke="#16836F" stroke-width="2"/>
+<line x1="651" y1="1058" x2="651" y2="1063" stroke="#16836F" stroke-width="2"/>
+<line x1="632" y1="1051" x2="637" y2="1051" stroke="#16836F" stroke-width="2"/>
+<line x1="665" y1="1051" x2="670" y2="1051" stroke="#16836F" stroke-width="2"/>
+<line x1="658" y1="1025" x2="658" y2="1030" stroke="#16836F" stroke-width="2"/>
+<line x1="658" y1="1058" x2="658" y2="1063" stroke="#16836F" stroke-width="2"/>
+<text x="686" y="1042" fill="#216C54" font-size="22" font-weight="700" text-anchor="start">VM 03 · N4A</text>
+<text x="1343" y="1042" fill="#4D7466" font-size="18" font-weight="400" text-anchor="end">n4a-standard-8 · 8 vCPUs</text>
+<rect x="634" y="1067" width="712" height="140" rx="12" fill="#fff" stroke="#61AD91" stroke-width="1.7" stroke-dasharray="6 4"/>
+<circle cx="668" cy="1102" r="18" fill="#16836F"/>
+<text x="668" y="1108" fill="#fff" font-size="17" font-weight="700" text-anchor="middle">04</text>
+<text x="698" y="1110" fill="#1D644F" font-size="25" font-weight="700" text-anchor="start">Independent validator</text>
+<text x="656" y="1148" fill="#456C5E" font-size="20" font-weight="400" text-anchor="start">Protected checks + generated tests · gVisor Pod</text>
+<text x="656" y="1180" fill="#456C5E" font-size="18" font-weight="400" text-anchor="start">Executes candidate Python and accepted pricing quotes</text>
+<path d="M 496 966 H 566 V 1136 H 634" fill="none" stroke="#16836F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#green)" marker-end="url(#green)"/>
+<rect x="1400" y="1004" width="300" height="227" rx="17" fill="#F0F3F7" stroke="#C4CEDB" stroke-width="1.7"/>
+<rect x="1428" y="1030" width="28" height="28" rx="5" fill="none" stroke="#647891" stroke-width="2"/>
+<rect x="1435" y="1037" width="14" height="14" rx="2" fill="none" stroke="#647891" stroke-width="1.6"/>
+<line x1="1423" y1="1037" x2="1428" y2="1037" stroke="#647891" stroke-width="2"/>
+<line x1="1456" y1="1037" x2="1461" y2="1037" stroke="#647891" stroke-width="2"/>
+<line x1="1435" y1="1025" x2="1435" y2="1030" stroke="#647891" stroke-width="2"/>
+<line x1="1435" y1="1058" x2="1435" y2="1063" stroke="#647891" stroke-width="2"/>
+<line x1="1423" y1="1044" x2="1428" y2="1044" stroke="#647891" stroke-width="2"/>
+<line x1="1456" y1="1044" x2="1461" y2="1044" stroke="#647891" stroke-width="2"/>
+<line x1="1442" y1="1025" x2="1442" y2="1030" stroke="#647891" stroke-width="2"/>
+<line x1="1442" y1="1058" x2="1442" y2="1063" stroke="#647891" stroke-width="2"/>
+<line x1="1423" y1="1051" x2="1428" y2="1051" stroke="#647891" stroke-width="2"/>
+<line x1="1456" y1="1051" x2="1461" y2="1051" stroke="#647891" stroke-width="2"/>
+<line x1="1449" y1="1025" x2="1449" y2="1030" stroke="#647891" stroke-width="2"/>
+<line x1="1449" y1="1058" x2="1449" y2="1063" stroke="#647891" stroke-width="2"/>
+<text x="1477" y="1042" fill="#4D6279" font-size="21" font-weight="700" text-anchor="start">VM 04 · C4A</text>
+<text x="1425" y="1084" fill="#50647C" font-size="19" font-weight="400" text-anchor="start">c4a-standard-2</text>
+<text x="1425" y="1115" fill="#50647C" font-size="20" font-weight="600" text-anchor="start">2 vCPUs</text>
+<text x="1425" y="1160" fill="#63778F" font-size="18" font-weight="400" text-anchor="start">GKE system workloads</text>
+<text x="1425" y="1190" fill="#63778F" font-size="16" font-weight="400" text-anchor="start">Separate from agent work</text>
+<path d="M 280 301 V 443" fill="none" stroke="#2475C7" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#blue)" marker-end="url(#blue)"/>
+<rect x="92" y="315" width="375" height="28" rx="4" fill="#fff" stroke="none" stroke-width="1.5"/>
+<text x="280" y="336" fill="#3C6589" font-size="18" font-weight="500" text-anchor="middle">Request + dashboard / shop response</text>
+<path d="M 496 552 H 550 V 324 H 1420 V 301" fill="none" stroke="#7254CF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#violet)" marker-end="url(#violet)"/>
+<rect x="1010" y="313" width="348" height="23" rx="4" fill="#fff" stroke="none" stroke-width="1.5"/>
+<text x="1024" y="330" fill="#7254CF" font-size="17" font-weight="500" text-anchor="start">HTTPS · Workload Identity Federation</text>
+<text x="110" y="1268" fill="#47637D" font-size="19" font-weight="400" text-anchor="start">CPU capacity belongs to VMs. Each engineer Pod requests 4.25 CPUs, has a 6.5-CPU limit, and runs 4 inference threads.</text>
+<line x1="60" y1="1320" x2="1740" y2="1320" stroke="#CFDAE5" stroke-width="1"/>
+<rect x="60" y="1346" width="34" height="24" rx="5" fill="#F1F6FB" stroke="#9AB8D4" stroke-width="1.5"/>
+<text x="109" y="1365" fill="#4D6780" font-size="17" font-weight="400" text-anchor="start">VM boundary</text>
+<rect x="302" y="1346" width="34" height="24" rx="5" fill="#fff" stroke="#6F9BBA" stroke-width="1.6" stroke-dasharray="5 3"/>
+<text x="350" y="1365" fill="#4D6780" font-size="17" font-weight="400" text-anchor="start">gVisor sandbox Pod</text>
+<path d="M 601 1358 H 643" fill="none" stroke="#2475C7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" marker-start="url(#blue)" marker-end="url(#blue)"/>
+<text x="660" y="1365" fill="#4D6780" font-size="17" font-weight="400" text-anchor="start">Service calls + responses</text>
+<text x="1740" y="1365" fill="#173C60" font-size="20" font-weight="600" text-anchor="end">Gemini plans. Arm executes. Independent checks gate the preview.</text>
+<text x="60" y="1404" fill="#728298" font-size="16" font-weight="400" text-anchor="start">Recorded deployment topology · GKE control plane managed separately · No local GPU inference</text>
+</g></svg>

@@ -35,5 +35,5 @@ Calls to:
                 <li class="u-margin-left-2">{{. | markdownify}}</li>
             {{ end }}
         </ul>
-        {{ partial "learning-paths/generated-summary-faq.html" . }}
+        {{ partial "learning-paths/generated-summary-faq.html" (dict "context" . "mode" "summary") }}
 </div>

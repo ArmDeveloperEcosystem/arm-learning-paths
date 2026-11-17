@@ -38,37 +38,35 @@ generated_summary_faq:
     checkpoints, serve each model, and validate a chat response. Next, you'll prepare model-specific
     ShareGPT subsets and benchmark concurrent requests. Finally, you'll compare throughput and latency
     using matching workloads and concurrency values.
-#   faqs:
-#   - question: How do I know the vLLM server is ready to receive requests?
-#     answer: >-
-#       Wait for `Application startup complete` in the server terminal to confirm that the server
-#       is listening on port `8000`. Then send a test request with `curl` to
-#       `/v1/chat/completions`; a response with generated text confirms that inference works.
-#   - question: What should I check if the test request fails or I get a port error?
-#     answer: >-
-#       Check that only one vLLM server is using port `8000`. If another server is running,
-#       stop it with **Ctrl+C** and wait for it to exit. Start the desired model server,
-#       wait for it to become ready, and retry your request.
-#   - question: Which model IDs should I use for the BF16 and INT8/W8A8 runs?
-#     answer: >-
-#       For BF16, use `google/gemma-4-26B-A4B-it`, `unsloth/gpt-oss-20b-BF16`, or
-#       `Qwen/Qwen3-30B-A3B-Thinking-2507`. For INT8/W8A8, use
-#       `RedHatAI/Qwen3-30B-A3B-Thinking-2507-quantized.w8a8`. Set the same model ID in
-#       your serving and test-request terminals.
-#   - question: How do I run the benchmark against the active server?
-#     answer: >-
-#       Keep the model server running. In another terminal, activate `vllm_env_new` and set
-#       `MODEL` to the running model ID. Prepare the ShareGPT subset selected with that model's
-#       tokenizer, then run `vllm bench serve` against `/v1/chat/completions` with the matching
-#       subset file.
-#   - question: How should I interpret and compare the reported metrics?
-#     answer: >-
-#       Compare request and output-token throughput, time to first token (TTFT), and time per
-#       output token (TPOT) at matching concurrency values and workloads. Calculate throughput
-#       speedup as optimized throughput divided by baseline throughput: `3.25x` means a 225%
-#       increase. Calculate latency reduction as `(baseline - optimized) / baseline × 100%`.
-#       You can't recreate the historical pre-optimization baseline with this guide, and you
-#       don't evaluate model quality here.
+  faqs:
+  - question: How do I know that the vLLM server is ready to receive requests?
+    answer: >-
+      Wait for `Application startup complete` in the server terminal to confirm that the server
+      is listening on port `8000`. Then, send a test request with `curl` to
+      `/v1/chat/completions`. A response with generated text confirms that inference works.
+  - question: What should I check if the test request fails or I get a port error?
+    answer: >-
+      Check that only one vLLM server is using port `8000`. If another server is running,
+      stop it with **Ctrl+C** and wait for it to exit. Start the desired model server,
+      wait for it to become ready, and retry your request.
+  - question: Which model IDs should I use for the BF16 and INT8/W8A8 runs?
+    answer: >-
+      For BF16, use `google/gemma-4-26B-A4B-it`, `unsloth/gpt-oss-20b-BF16`, or
+      `Qwen/Qwen3-30B-A3B-Thinking-2507`. For INT8/W8A8, use
+      `RedHatAI/Qwen3-30B-A3B-Thinking-2507-quantized.w8a8`. Set the same model ID in
+      your serving and test-request terminals.
+  - question: How do I run the benchmark against the active server?
+    answer: >-
+      Keep the model server running. In another terminal, activate `vllm_env_new` and set
+      `MODEL` to the running model ID. Prepare the ShareGPT subset selected with the model
+      tokenizer, then run `vllm bench serve` against `/v1/chat/completions` with the matching
+      subset file.
+  - question: What metrics should I interpret and compare while benchmarking?
+    answer: >-
+      Compare request and output-token throughput, time to first token (TTFT), and time per
+      output token (TPOT) at matching concurrency values and workloads. Calculate throughput
+      speedup as optimized throughput divided by baseline throughput: `3.25x` means a 225%
+      increase. Calculate latency reduction as `(baseline - optimized) / baseline × 100%`.
 # END generated_summary_faq
 
 author:
@@ -81,7 +79,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
 - Neoverse
 tools_software_languages:

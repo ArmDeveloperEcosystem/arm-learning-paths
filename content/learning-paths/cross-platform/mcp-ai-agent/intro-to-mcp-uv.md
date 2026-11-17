@@ -1,5 +1,5 @@
 ---
-title: Introduction to Model Context Protocol (MCP) and Python uv package for local AI agents
+title: Explore MCP and Python uv for local AI agents
 weight: 2
 
 ### FIXED, DO NOT MODIFY

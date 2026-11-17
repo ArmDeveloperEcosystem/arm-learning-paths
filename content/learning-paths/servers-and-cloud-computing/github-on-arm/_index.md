@@ -1,5 +1,5 @@
 ---
-title: Deploy a GitHub Actions self-hosted runner on a Google Axion C4A virtual machine
+title: Deploy a GitHub Actions runner on a Google Axion VM
 description: Learn how to provision a Google Axion C4A Arm virtual machine and set up a GitHub Actions self-hosted runner for CI/CD workflows.
 
 minutes_to_complete: 15

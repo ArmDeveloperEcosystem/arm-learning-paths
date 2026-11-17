@@ -1,5 +1,5 @@
 ---
-title: Deploy High-Performance Analytics with Apache Arrow and Arrow Flight on Google Cloud C4A Axion processors
+title: Deploy Apache Arrow and Arrow Flight on Google Axion
 description: Learn how to deploy Apache Arrow and Arrow Flight on Google Cloud Axion C4A processors for high-throughput columnar data processing and low-latency data transport with MinIO integration.
 
 minutes_to_complete: 30

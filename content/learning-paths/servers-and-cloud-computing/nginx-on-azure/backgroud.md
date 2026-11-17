@@ -1,16 +1,16 @@
 ---
-title: "Overview of Azure Cobalt 100 and NGINX"
+title: "Overview of Azure Cobalt 200 and NGINX"
 
 weight: 2
 
 layout: "learningpathall"
 ---
 
-## Azure Cobalt 100 Arm-based processor
+## Azure Cobalt 200 Arm-based processor
 
-Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads such as web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which helps ensure consistent and predictable performance.
+Azure Cobalt 200 is Microsoft’s second-generation Arm-based processor, built on Arm Neoverse Compute Subsystems V3 (CSS V3). It supports cloud-native Linux workloads, including web servers such as NGINX. In this Learning Path, you use a general-purpose Dpsv7 virtual machine powered by Cobalt 200.
 
-To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
+To learn more, see Microsoft’s [introduction to Azure Cobalt 200 virtual machines](https://azure.microsoft.com/en-us/blog/new-azure-cobalt-200-vms-deliver-50-performance-improvement-fully-optimized-for-modern-agentic-ai-workloads/).
 
 ## NGINX
 

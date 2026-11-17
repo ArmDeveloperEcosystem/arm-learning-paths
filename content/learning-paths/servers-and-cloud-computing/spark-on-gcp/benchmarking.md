@@ -1,5 +1,5 @@
 ---
-title: Apache Spark performance benchmarks on Arm64 and x86_64 in Google Cloud
+title: Benchmark Spark on Arm64 and x86_64 in Google Cloud
 weight: 6
 
 layout: learningpathall

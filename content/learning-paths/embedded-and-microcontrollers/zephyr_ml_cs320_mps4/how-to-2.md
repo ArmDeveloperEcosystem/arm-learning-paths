@@ -1,5 +1,5 @@
 ---
-title: Build and run a machine learning application on the Corstone-320 MPS4 platform
+title: Build and run an ML app on Corstone-320 MPS4
 description: Port and build the ExecuTorch sample on Corstone-320 MPS4, then run it to verify inference.
 weight: 3
 

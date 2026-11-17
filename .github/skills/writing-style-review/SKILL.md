@@ -113,7 +113,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Keep heading wording consistent across related files.
 - Prefer headings that signal the user task or concept.
 - Ensure heading hierarchy has no skipped levels unless the template requires it.
-- Each Markdown file should begin with a section heading in body content.
+- Each Markdown file that contains lesson content should begin with a section heading in the body. This rule does not apply to `_index.md` or `_next-steps.md` files.
 - Use `Arm` for the brand in prose.
 - Use `arm64` or `aarch64` for CPU architecture based on tool, package, or OS convention.
 - Use `ARM64` only when referring to Windows on Arm or Microsoft documentation.

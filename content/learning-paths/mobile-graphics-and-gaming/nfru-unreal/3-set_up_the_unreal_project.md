@@ -1,13 +1,13 @@
 ---
 title: Set up the Unreal project with NFRU enabled
-description: Create an Unreal Engine C++ project, integrate the Neural Rendering plugin, and configure Vulkan as the rendering hardware interface for NFRU.
+description: Create an Unreal Engine C++ project, add the Neural Graphics plugin, and configure Vulkan and the backbuffer for NFRU.
 weight: 4
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Install Arm Neural Graphics Plugin 1.1.0
+## Install neural-graphics-for-unreal
 
 1. Open Unreal Engine 5.4 or 5.6 and create a new **Third Person** template project using the **C++** option.
 
@@ -17,7 +17,7 @@ layout: learningpathall
 
 3. Create a `Plugins` directory in the project root if it does not already exist.
 
-4. Copy the complete `neural-graphics-for-unreal` folder from the extracted Arm Neural Graphics Plugin 1.1.0 release into the project's `Plugins` directory. Do not copy selected subdirectories or create a symbolic link.
+4. Copy the complete cloned `neural-graphics-for-unreal` folder into the project's `Plugins` directory. Include the `Binaries\ThirdParty\VulkanMLEmulation\Win64` directory populated by `DownloadEmulationLayer.bat`. Do not copy selected subdirectories or create a symbolic link.
 
     The resulting directory structure starts as follows:
 
@@ -45,33 +45,46 @@ Unreal Engine uses DirectX by default on Windows. NFRU requires Vulkan:
 
     ![Project Settings with Vulkan selected as the default RHI under Targeted RHIs#center](./images/targeted_rhis.png "Set Vulkan as the default RHI")
 
-## Enable Arm Neural Graphics Plugin 1.1.0
+## Set a supported backbuffer format
 
-To enable the plugin, follow these steps:
+NFRU does not support Unreal Engine's 10-bit RGB, 2-bit alpha backbuffer format (`PF_A2B10G10R10`). In **Edit > Project Settings > Engine > Rendering**, set **Frame Buffer Pixel Format** to **8-bit RGBA**. This sets `r.DefaultBackBufferPixelFormat=0` and selects a supported backbuffer format.
+
+Alternatively, add the setting to the project's `Config/DefaultEngine.ini` under the renderer settings section:
+
+```ini
+[/Script/Engine.RendererSettings]
+r.DefaultBackBufferPixelFormat=0
+```
+
+Restart Unreal Editor after changing the setting. If the renderer settings section already exists, add only the `r.DefaultBackBufferPixelFormat=0` line to it.
+
+## Enable Arm Neural Graphics Plugin
+
+To enable the plugin:
 
 1. Open **Edit > Plugins**.
-2. Search for **Arm Neural Graphics Plugin 1.1.0**.
+2. Search for **Arm Neural Graphics Plugin**.
 3. Enable the plugin if it is not already enabled, and restart Unreal Editor if prompted.
 
 ![Unreal Engine Plugins window filtered for Arm, showing the Arm Neural Graphics Plugin enabled with its checkbox selected. This confirms that the plugin is ready to use in the project.#center](./images/confirm_plugin_enabled.png "Arm Neural Graphics Plugin enabled in Unreal Engine")
 
 ## Configure NFRU project settings
 
-Open **Edit > Project Settings > Plugins > Arm Neural Graphics Plugin 1.1.0** to view and configure the NFRU settings stored with the project.
+Open **Edit > Project Settings > Plugins > Neural Graphics 1.1.1** to view and configure the NFRU settings stored with the project.
 
-These project settings provide the persistent configuration. You can use the `r.NFRU.*` console variables documented later in this Learning Path to inspect or override NFRU behavior while a supported non-editor build is running.
+These project settings persist with your project. You can use the `r.NFRU.*` console variables to inspect or change NFRU behavior in Standalone Game or a packaged build.
 
 ## Troubleshoot issues with setup
 
-Use the following guidance to troubleshoot issues with setting up the Unreal project with NFRU.
+If NFRU doesn't start, check the following setup issues.
 
 ### "Bad Image" error for ngsdk_windows_x64.dll
 
-If Windows reports a "Bad Image" error for `ngsdk_windows_x64.dll`, check that you copied the complete `neural-graphics-for-unreal` folder from the Arm Neural Graphics Plugin 1.1.0 release. Do not mix plugin files from different releases or Unreal Engine versions.
+If Windows reports a "Bad Image" error for `ngsdk_windows_x64.dll`, check that you copied the complete `neural-graphics-for-unreal` folder from the cloned repository. Do not mix plugin files from different revisions or Unreal Engine versions.
 
 ![Windows Bad Image error for the Neural Graphics SDK DLL#center](./images/bad_image.png "A Bad Image error can indicate missing or incompatible plugin binaries")
 
-Replace any incomplete plugin copy with the complete folder from the release archive, regenerate the Visual Studio project files, and rebuild the solution.
+Replace any incomplete plugin copy with the complete folder from the clone, regenerate the Visual Studio project files, and rebuild the solution.
 
 ### Vulkan backend support error
 
@@ -79,8 +92,14 @@ If you see a "Plugin only supports Vulkan backend" error, confirm that Vulkan is
 
 ![Vulkan backend error message in Unreal Engine#center](./images/rhi_vulkan_error.png "The plugin reports an error when Vulkan is not the active RHI")
 
+### Unsupported backbuffer format
+
+![Arm NG NFRU warning that PF_A2B10G10R10 is an unsupported backbuffer format, followed by the supported formats#center](./images/backbuffer_format_warning.png "NFRU is disabled when the backbuffer uses an unsupported format")
+
+If NFRU reports `PF_A2B10G10R10` as an unsupported backbuffer format, confirm that **Frame Buffer Pixel Format** is set to **8-bit RGBA** (`r.DefaultBackBufferPixelFormat=0`). Relaunch Standalone Game after applying the setting, or package the game again with the updated project configuration.
+
 ### Missing Vulkan ML extensions
 
-If the project starts but NFRU is unavailable, confirm that you installed version 0.10.0 or later of the standalone [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan), Vulkan Configurator is running, the Graph layer is above the Tensor layer, and both emulation layers are active. The Vulkan environment must expose `VK_ARM_data_graph_optical_flow` for the NFRU optical-flow stage.
+If the project starts but NFRU is unavailable, check that `DownloadEmulationLayer.bat` completed successfully. In Vulkan Configurator, point the layer path to the plugin's `Binaries\ThirdParty\VulkanMLEmulation\Win64` directory. Enable both layers, place Graph before Tensor, and keep Vulkan Configurator running. The Vulkan environment must expose `VK_ARM_data_graph_optical_flow` for NFRU's optical-flow stage.
 
-You have now installed and configured Arm Neural Graphics Plugin 1.1.0. Next, cook the project and run a Windows non-editor build to validate NFRU.
+You have now installed and configured the plugin. Next, run Standalone Game or package a Windows game build to validate NFRU.

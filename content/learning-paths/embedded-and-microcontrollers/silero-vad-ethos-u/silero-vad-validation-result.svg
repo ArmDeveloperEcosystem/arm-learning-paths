@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 480" width="980" height="480" role="img" aria-labelledby="title desc">
   <title id="title">Host and FVP produce identical Silero VAD speech decisions</title>
-  <desc id="desc">Two matching timelines show silence, then speech from 0.224 to 2.048 seconds, then silence. The host reference and FVP output agree on all 79 frames.</desc>
+  <desc id="desc">Two matching timelines show speech from 0.096 to 0.224 seconds and from 0.288 to 1.952 seconds. The host reference and FVP output agree on all 79 frames.</desc>
   <!-- svg-source:excalidraw -->
   <rect width="980" height="480" fill="#ffffff"/>
 
   <text x="40" y="52" font-family="Nunito, Arial, sans-serif" font-size="34" font-weight="700" fill="#1e1e1e">Host and FVP found the same speech</text>
   <text x="40" y="88" font-family="Nunito, Arial, sans-serif" font-size="20" fill="#495057">Both processed the same 2.5-second audio clip</text>
-  <text x="40" y="122" font-family="Nunito, Arial, sans-serif" font-size="17" fill="#495057">Gray = silence   •   Green = speech</text>
+  <text x="40" y="122" font-family="Nunito, Arial, sans-serif" font-size="17" fill="#495057">Green = speech: 0.096–0.224 s and 0.288–1.952 s</text>
 
   <text x="40" y="204" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="700" fill="#1e1e1e">Host reference</text>
   <text x="40" y="304" font-family="Nunito, Arial, sans-serif" font-size="22" font-weight="700" fill="#1e1e1e">FVP output</text>
 
   <text x="225" y="148" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" fill="#495057">0 s</text>
-  <text x="286" y="148" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" fill="#495057">0.224 s</text>
-  <text x="782" y="148" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" fill="#495057">2.048 s</text>
+  <text x="497" y="148" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" fill="#495057">1 s</text>
+  <text x="769" y="148" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" fill="#495057">2 s</text>
   <text x="905" y="148" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="16" fill="#495057">2.5 s</text>
 
   <g stroke="#1971c2" stroke-width="2">
-    <rect x="225" y="165" width="61" height="70" rx="12" fill="#e9ecef"/>
-    <rect x="286" y="165" width="496" height="70" rx="12" fill="#b2f2bb"/>
-    <rect x="782" y="165" width="123" height="70" rx="12" fill="#e9ecef"/>
-    <rect x="225" y="265" width="61" height="70" rx="12" fill="#e9ecef"/>
-    <rect x="286" y="265" width="496" height="70" rx="12" fill="#b2f2bb"/>
-    <rect x="782" y="265" width="123" height="70" rx="12" fill="#e9ecef"/>
+    <rect x="225" y="165" width="680" height="70" rx="12" fill="#e9ecef"/>
+    <rect x="251.112" y="165" width="34.816" height="70" rx="5" fill="#b2f2bb"/>
+    <rect x="303.336" y="165" width="452.608" height="70" rx="5" fill="#b2f2bb"/>
+    <rect x="225" y="265" width="680" height="70" rx="12" fill="#e9ecef"/>
+    <rect x="251.112" y="265" width="34.816" height="70" rx="5" fill="#b2f2bb"/>
+    <rect x="303.336" y="265" width="452.608" height="70" rx="5" fill="#b2f2bb"/>
   </g>
 
   <text x="534" y="208" text-anchor="middle" font-family="Nunito, Arial, sans-serif" font-size="21" font-weight="700" fill="#1864ab">SPEECH</text>
