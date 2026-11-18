@@ -23,14 +23,23 @@ The preparation step uses MobileSAM revision `f706ad9c4eb7f219c00d9050e46328518f
 
 ## Select a calibration image
 
-Choose an RGB image representative of the camera scenes you want to segment. The exporter uses this image for both quantization calibration and its host comparison. Set its path:
+Use the public dog image from the Segment Anything example, pinned to a source revision. Download it and verify its SHA256 before export:
 
 ```bash
-export MOBILE_SAM_CALIBRATION_IMAGE=/absolute/path/to/calibration-image.jpg
-test -f "$MOBILE_SAM_CALIBRATION_IMAGE"
+export MOBILE_SAM_CALIBRATION_IMAGE="$MOBILE_SAM_OUTPUT/sam-example-dog.jpg"
+curl --fail --location \
+  https://raw.githubusercontent.com/facebookresearch/segment-anything/dca509fe793f601edb92606367a655c15ac00fdf/notebooks/images/dog.jpg \
+  --output "$MOBILE_SAM_CALIBRATION_IMAGE"
+printf '%s  %s\n' \
+  bf76876b90e3ebd521f9882b9177ba8f33e80cb7ec09c630f179b122edd125e1 \
+  "$MOBILE_SAM_CALIBRATION_IMAGE" | shasum -a 256 -c
 ```
 
-The original deployment image passed the unchanged quality gate with the released dependencies: selected-mask IoU `0.8060` and pixel agreement `0.9673`. The bundled `examples/models/dinov2/dog.jpg` failed this four-prompt configuration with selected IoU `0.7448` and agreement `0.9315`. Calibration input affects the result; require your own export to pass the gate before continuing.
+Require the checksum result `OK`. The image comes from the [Segment Anything repository](https://github.com/facebookresearch/segment-anything/tree/dca509fe793f601edb92606367a655c15ac00fdf/notebooks/images), which provides its [license](https://github.com/facebookresearch/segment-anything/blob/dca509fe793f601edb92606367a655c15ac00fdf/LICENSE).
+
+With the released dependencies and the configuration below, this image passed the unchanged host quality gate with selected-mask IoU `0.9756` and pixel agreement `0.9919`. The gate selected zero-based prompt indices 2 and 3 (the third and fourth prompts); the later section explains this selection rule. This image is different from `examples/models/dinov2/dog.jpg`.
+
+The exporter uses this image for both quantization calibration and its host comparison. You can replace it with an RGB image representative of your camera scenes, but require your export to pass the unchanged quality gate before continuing. Calibration input affects both the result and the generated model. A passing comparison on the calibration image does not measure accuracy on new scenes.
 
 ## Export four independent prompts
 
@@ -53,6 +62,8 @@ python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/e
 The points sample the four image quadrants. In this multimask mode they are independent prompt batches, giving three candidate masks and associated quality scores per point. This is different from asking SAM for one mask constrained jointly by all four points.
 
 The image encoder and decoder run on the NPU. The prompt encoder runs during export, and its fixed embeddings are stored in the model. Re-export when you change prompt coordinates, input size, or the output contract.
+
+This model contract is the same for the default camera-and-UART firmware and optional dashboard. Enabling a display does not require a different export.
 
 The export applies A8W8 globally and A16W8 to TinyViT attention, then lowers through the Arm backend and Vela for `ethos-u85-256`. The compiled configuration uses `Ethos_U85_SYS_DRAM_Mid` and `Dedicated_Sram_384KB`. Those are compiler settings; actual firmware storage and scratch placement still need to match the E8 memory map.
 
@@ -143,7 +154,7 @@ cmp "$MOBILE_SAM_OUTPUT/mobilesam_live_384_grid4_multimask.pte" \
   "$MOBILE_SAM_OUTPUT/mobilesam_live_384_grid4_multimask.bin"
 ```
 
-The validated final binary is 13,293,120 bytes, with SHA256 `895098c246cfcf0ca1a20e9dd9834dd9f4cfc3906edcb1dc901c47139e4f779d`. A fresh export can differ with dependency versions or calibration. Record the size and hash of your own PTE rather than assuming the reference hash must match.
+The fresh released-dependency export using this public image is 13,317,584 bytes, with SHA256 `a908bca09a74bac884895fa72b650d15e944cdfc7b0351b99e40ee63b6b3a7b5`. Its metadata JSON has SHA256 `36884d2ffafa1b9ee46c71c0a855b9b83b01da57e3e87a3a99fdb56f547770f7`. Its extracted scratch requirement is 5,898,256 bytes with a 393,216-byte fast scratch requirement. These identify the fresh host export; firmware and hardware checks follow in later lessons. Generated JSON records local paths, so its hash also depends on your workspace. Record the size and hashes of your own matching pair.
 
 Before proceeding, explain why `--quantized-io` matters: it removes the host-style floating-point I/O boundary from the device program, while the application performs camera normalization, quantization, and mask post-processing.
 

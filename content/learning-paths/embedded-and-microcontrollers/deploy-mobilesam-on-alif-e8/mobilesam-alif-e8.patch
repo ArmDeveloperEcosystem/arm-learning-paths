@@ -1,11 +1,11 @@
 diff --git a/README-wheel.md b/README-wheel.md
-index 8ee58b56f2..b8f87d3f96 100644
 --- a/README-wheel.md
 +++ b/README-wheel.md
-@@ -8,6 +8,22 @@ The `executorch` pip package is in beta.
+@@ -7,6 +7,22 @@
+ The `executorch` pip package is in beta.
  * Supported python versions: 3.10, 3.11, 3.12, 3.13, 3.14
  * Compatible systems: Linux x86_64, Linux aarch64, macOS aarch64
- 
++
 +Backend export tools can require optional Python dependencies. For example,
 +install the Ethos-U AOT dependencies with:
 +
@@ -21,15 +21,13 @@ index 8ee58b56f2..b8f87d3f96 100644
 +See the
 +[Arm examples](https://github.com/pytorch/executorch/tree/main/examples/arm)
 +for that setup.
-+
+ 
  To build a minimal wheel from source, set
  `EXECUTORCH_BUILD_MINIMAL=1` when running `pip wheel` or `pip install`.
- That wheel contains the Python EXIR export path and `flatc` for `.pte`
 diff --git a/README.md b/README.md
-index 192e90c51a..7d2a75c8b1 100644
 --- a/README.md
 +++ b/README.md
-@@ -64,6 +64,11 @@ Learn more: [How ExecuTorch Works](https://docs.pytorch.org/executorch/main/intr
+@@ -64,6 +64,11 @@
  pip install executorch
  ```
  
@@ -41,11 +39,22 @@ index 192e90c51a..7d2a75c8b1 100644
  For platform-specific setup (Android, iOS, embedded systems), see the [Quick Start](https://docs.pytorch.org/executorch/main/quick-start-section.html) documentation for additional info.
  
  ### Export and Deploy in 3 Steps
+diff --git a/backends/arm/requirements-arm-tosa.txt b/backends/arm/requirements-arm-tosa.txt
+--- a/backends/arm/requirements-arm-tosa.txt
++++ b/backends/arm/requirements-arm-tosa.txt
+@@ -6,7 +6,7 @@
+ # These dependencies need to match pyproject.toml
+ 
+ ml_dtypes == 0.5.1
+-flatbuffers == 24.3.25
++flatbuffers == 25.2.10
+ tosa-adapter-model-explorer == 0.1.0
+ ai-edge-model-explorer >= 0.1.16
+ pytest-timeout == 2.4.0
 diff --git a/backends/arm/scripts/corstone_utils.cmake b/backends/arm/scripts/corstone_utils.cmake
-index 72a0c27a8c..099aa5f4ce 100644
 --- a/backends/arm/scripts/corstone_utils.cmake
 +++ b/backends/arm/scripts/corstone_utils.cmake
-@@ -37,7 +37,7 @@ function(fetch_ethos_u_content ETHOS_SDK_PATH ET_DIR_PATH)
+@@ -37,7 +37,7 @@
      BINARY_DIR
      ${ETHOS_SDK_PATH}
      SUBBUILD_DIR
@@ -56,7 +65,6 @@ index 72a0c27a8c..099aa5f4ce 100644
    )
 diff --git a/backends/arm/test/misc/test_mobilesam_export.py b/backends/arm/test/misc/test_mobilesam_export.py
 new file mode 100644
-index 0000000000..049fb15fb2
 --- /dev/null
 +++ b/backends/arm/test/misc/test_mobilesam_export.py
 @@ -0,0 +1,44 @@
@@ -106,7 +114,6 @@ index 0000000000..049fb15fb2
 +        resolve_point_prompts([[INPUT_SIZE, 0]])
 diff --git a/backends/arm/test/misc/test_mobilesam_visualization.py b/backends/arm/test/misc/test_mobilesam_visualization.py
 new file mode 100644
-index 0000000000..b12a2e5851
 --- /dev/null
 +++ b/backends/arm/test/misc/test_mobilesam_visualization.py
 @@ -0,0 +1,24 @@
@@ -135,10 +142,9 @@ index 0000000000..b12a2e5851
 +
 +    assert parse_rle_mask(log_path, expected_pixels=6) == [0, 0, 1, 1, 1, 0]
 diff --git a/backends/arm/test/test_arm_ootb.sh b/backends/arm/test/test_arm_ootb.sh
-index e61eabba9c..4064a31a40 100755
 --- a/backends/arm/test/test_arm_ootb.sh
 +++ b/backends/arm/test/test_arm_ootb.sh
-@@ -170,10 +170,8 @@ run_mobilesam_e2e_ethos_u() {
+@@ -170,10 +170,8 @@
      local example_dir="${et_root_dir}/examples/arm/mobilesam_prompt_segmentation_example_ethos_u"
      local work_root="${et_root_dir}/arm_test/mobilesam_ootb_smoke"
      local export_dir="${work_root}/export"
@@ -150,7 +156,7 @@ index e61eabba9c..4064a31a40 100755
      local build_dir="${work_root}/runtime"
      local mobile_sam_source="${work_root}/mobile_sam/source"
      local image_path="${et_root_dir}/examples/models/dinov2/dog.jpg"
-@@ -181,11 +179,10 @@ run_mobilesam_e2e_ethos_u() {
+@@ -181,11 +179,10 @@
      local metadata_path="${export_dir}/mobilesam_prompt_smoke.json"
      local fvp_log="${work_root}/fvp.log"
      local toolchain_file="${et_root_dir}/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake"
@@ -163,7 +169,7 @@ index e61eabba9c..4064a31a40 100755
  
      setup_path_script=${et_root_dir}/examples/arm/arm-scratch/setup_path.sh
      source ${setup_path_script}
-@@ -197,60 +194,26 @@ run_mobilesam_e2e_ethos_u() {
+@@ -197,60 +194,26 @@
      cmake --preset arm-baremetal -B "${et_build_dir}"
      cmake --build "${et_build_dir}" --target install -j"$n_proc"
  
@@ -229,7 +235,7 @@ index e61eabba9c..4064a31a40 100755
          [[ -f "${artifact}" ]] || {
              echo "${FUNCNAME}: Missing export artifact ${artifact}"
              return 1
-@@ -265,9 +228,7 @@ run_mobilesam_e2e_ethos_u() {
+@@ -265,9 +228,7 @@
          -B "${build_dir}" \
          -DCMAKE_TOOLCHAIN_FILE="${toolchain_file}" \
          -DET_PTE_FILE_PATH="${pte_path}" \
@@ -240,14 +246,16 @@ index e61eabba9c..4064a31a40 100755
          -DPYTHON_EXECUTABLE="${python_executable}" \
          -DET_BUILD_DIR_PATH="${et_build_dir}"
 diff --git a/docs/source/backends/arm-ethos-u/tutorials/ethos-u-getting-started.md b/docs/source/backends/arm-ethos-u/tutorials/ethos-u-getting-started.md
-index 7e4056720d..a2b852c0df 100644
 --- a/docs/source/backends/arm-ethos-u/tutorials/ethos-u-getting-started.md
 +++ b/docs/source/backends/arm-ethos-u/tutorials/ethos-u-getting-started.md
-@@ -35,10 +35,25 @@ To enable development without a specific development board, we will be using a [
+@@ -35,10 +35,25 @@
  
  ### Software
  
 -First, you will need to install ExecuTorch. Please follow the recommended tutorials to set up a working ExecuTorch development environment.
+-
+-In addition to this, you need to install a number of SDK dependencies for generating Ethos-U command streams. Scripts to automate this are available in the main [ExecuTorch repository](https://github.com/pytorch/executorch/tree/main/examples/arm/).
+-To install Ethos-U dependencies, run
 +Use a source checkout because this tutorial builds an embedded target runtime.
 +From the repository root, create a Python environment and install the current
 +checkout with the Ethos-U AOT dependencies:
@@ -266,17 +274,14 @@ index 7e4056720d..a2b852c0df 100644
 +
 +Install the Arm cross-compilation toolchain, simulators, and remaining backend
 +dependencies with:
- 
--In addition to this, you need to install a number of SDK dependencies for generating Ethos-U command streams. Scripts to automate this are available in the main [ExecuTorch repository](https://github.com/pytorch/executorch/tree/main/examples/arm/).
--To install Ethos-U dependencies, run
++
  ```bash
  ./examples/arm/setup.sh --i-agree-to-the-contained-eula
  ```
 diff --git a/docs/source/getting-started.md b/docs/source/getting-started.md
-index 3c45306301..d370f7cf65 100644
 --- a/docs/source/getting-started.md
 +++ b/docs/source/getting-started.md
-@@ -23,7 +23,22 @@ This package includes the dependencies needed to export a PyTorch model, as well
+@@ -23,7 +23,22 @@
  pip install executorch
  ```
  
@@ -301,10 +306,9 @@ index 3c45306301..d370f7cf65 100644
  > **_NOTE:_** On Windows, ExecuTorch requires a [Visual Studio Developer Powershell](https://learn.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022). Running from outside of a developer prompt will manifest as errors related to CL.exe.
  
 diff --git a/docs/source/using-executorch-building-from-source.md b/docs/source/using-executorch-building-from-source.md
-index c63fbd715a..98958fa977 100644
 --- a/docs/source/using-executorch-building-from-source.md
 +++ b/docs/source/using-executorch-building-from-source.md
-@@ -79,8 +79,28 @@ portability details.
+@@ -79,7 +79,27 @@
    * `--clean`: Removes build artifacts.
    * `--editable`: Install the ExecuTorch python package in editable mode (see [Editable Install](#editable-install)).
    * `--minimal`: Install only the minimal set of dependencies required to run ExecuTorch. Do not install dependencies for examples.
@@ -312,7 +316,7 @@ index c63fbd715a..98958fa977 100644
 +    Repeat the flag to select more than one. Supported names are `ethos_u`,
 +    `vgf`, and `openvino`.
    * `--use-pt-pinned-commit`: Install the pinned PyTorch commit or release version. When not specified, the latest PyTorch nightly build is installed.
- 
++
 +  For example, install the current checkout with the Ethos-U AOT dependencies:
 +
 +  ```bash
@@ -329,18 +333,17 @@ index c63fbd715a..98958fa977 100644
 +  Optional dependency sets install host-side Python tools only. Embedded
 +  toolchains, simulators, and target runtimes are configured separately by the
 +  backend setup and build instructions.
-+
+ 
    For Intel-based macOS systems, use `--use-pt-pinned-commit --minimal`. As PyTorch does not provide pre-built binaries for Intel Mac, installation requires building PyTorch from source. Instructions can be found in [PyTorch Installation](https://github.com/pytorch/pytorch#installation).
  
-   Note that only the XNNPACK and CoreML backends are built by default. Additional backends can be enabled or disabled by setting the corresponding CMake flags:
 diff --git a/examples/arm/README.md b/examples/arm/README.md
-index 1a0923f1ab..00dc70f246 100644
 --- a/examples/arm/README.md
 +++ b/examples/arm/README.md
-@@ -11,6 +11,28 @@ This directory contains documentation and scripts to
+@@ -10,6 +10,28 @@
+ This directory contains documentation and scripts to
  help you setup and run a PyTorch model on the Arm backend
  via ExecuTorch.
- 
++
 +## Python package setup
 +
 +For Ethos-U examples, install the current checkout and its AOT dependencies in
@@ -362,12 +365,10 @@ index 1a0923f1ab..00dc70f246 100644
 +source checkout. Installing an extra does not make unsupported Ethos-U nodes
 +use CMSIS-NN automatically. Run `setup.sh` below, then follow the relevant
 +Cortex-M example.
-+
+ 
  ## setup.sh
  
- `setup.sh` downloads the Arm cross-compilation toolchain and Corstone FVP
 diff --git a/examples/arm/ethos_u_minimal_example.ipynb b/examples/arm/ethos_u_minimal_example.ipynb
-index 11f24019d2..2ee20a504c 100644
 --- a/examples/arm/ethos_u_minimal_example.ipynb
 +++ b/examples/arm/ethos_u_minimal_example.ipynb
 @@ -21,11 +21,17 @@
@@ -377,9 +378,10 @@ index 11f24019d2..2ee20a504c 100644
 -    "Before you begin:\n",
 -    "1. (In a clean virtual environment with a compatible Python version) Install executorch using `./install_executorch.sh`\n",
 -    "2. Install Arm cross-compilation toolchain and simulators using `./examples/arm/setup.sh --i-agree-to-the-contained-eula`\n",
-+    "Before you begin, run these commands from the base `executorch` folder:\n",
-     "\n",
+-    "\n",
 -    "With all commands executed from the base `executorch` folder.\n",
++    "Before you begin, run these commands from the base `executorch` folder:\n",
++    "\n",
 +    "```bash\n",
 +    "python3.12 -m venv .venv\n",
 +    "source .venv/bin/activate\n",
@@ -393,10 +395,9 @@ index 11f24019d2..2ee20a504c 100644
      "\n",
      "\n",
 diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/README.md b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/README.md
-index 58eae2b020..d2a44173e3 100644
 --- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/README.md
 +++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/README.md
-@@ -4,17 +4,75 @@ This end-to-end example shows how to use the Arm Ethos-U backend in
+@@ -4,17 +4,75 @@
  ExecuTorch for transformer-based prompt segmentation. MobileSAM predicts a
  binary mask for fixed positive point prompts rather than semantic class IDs.
  The host debug flow validates quantization by comparing FP32 and quantized
@@ -481,7 +482,7 @@ index 58eae2b020..d2a44173e3 100644
  
  The default export uses a reduced `448x448` image input and returns one
  low-resolution `[1, 1, 112, 112]` mask-logit tensor. The example prepares the
-@@ -31,6 +89,12 @@ mask thresholding outside the model. SAM-style candidate-mask selection can be
+@@ -31,6 +89,12 @@
  numerically sensitive after export and quantization, so this example keeps the
  target graph focused on the fixed-prompt image encoder and mask decoder.
  
@@ -494,14 +495,13 @@ index 58eae2b020..d2a44173e3 100644
  ## Layout
  
  - `model_export/prepare_mobilesam.py` - Prepares the pinned external MobileSAM
-@@ -41,3 +105,5 @@ target graph focused on the fixed-prompt image encoder and mask decoder.
+@@ -41,3 +105,5 @@
    Corstone-320 FVP execution.
  - `runtime/visualize_fvp_output.py` - Decodes the target mask dump, creates an
    overlay, and compares FVP output with the host quantized mask.
 +- `../../../zephyr/samples/mobilesam-ethosu/README.md` - Alif Ensemble E8
 +  build, flash, execution, and visualization instructions.
 diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/README.md b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/README.md
-index 8069c0d8cc..c5f24ee0f5 100644
 --- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/README.md
 +++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/README.md
 @@ -1,192 +1,96 @@
@@ -575,7 +575,8 @@ index 8069c0d8cc..c5f24ee0f5 100644
  ```
  
 -The default configuration is:
--
++The example intentionally fixes the deployment configuration:
+ 
 -- Model source: `https://github.com/ChaoningZhang/MobileSAM`
 -- MobileSAM source revision: `f706ad9c4eb7f219c00d9050e46328518ffb65d2`
 -- External source patch: `0001-Make-TinyViT-image-size-configurable.patch`
@@ -588,8 +589,6 @@ index 8069c0d8cc..c5f24ee0f5 100644
 -- Output mask logits shape: `[1, 1, 112, 112]`
 -- Positive point prompt: `(224, 224)` in the padded `448x448` model input
 -  frame
-+The example intentionally fixes the deployment configuration:
-+
 +- Input: `[1, 3, 448, 448]`
 +- Output mask logits: `[1, 1, 112, 112]`
  - Target: `ethos-u85-256`
@@ -598,7 +597,8 @@ index 8069c0d8cc..c5f24ee0f5 100644
  - Memory mode: `Dedicated_Sram_384KB`
 -- Calibration samples: `4`
 -- Validation samples: `4`
--
++- Mask threshold: `0.0`
+ 
 -The MobileSAM source and checkpoint are not redistributed by this example. The
 -preparation script clones the pinned official source into a managed external
 -cache and applies the configurable-input patch. The exporter downloads the
@@ -606,7 +606,10 @@ index 8069c0d8cc..c5f24ee0f5 100644
 -is provided. The source repository and checkpoint may have separate terms; the
 -export metadata records only the source-code license and does not assign a
 -license to the checkpoint.
--
++Repeat `--point X Y` to export a multi-point positive prompt. Pass
++`--local-files-only` after the source and checkpoint have been cached. Pass a
++local checkpoint with `--checkpoint-path` when network access is unavailable.
+ 
 -For a quick offline smoke test after caching the official checkpoint and source
 -checkout:
 -
@@ -614,8 +617,7 @@ index 8069c0d8cc..c5f24ee0f5 100644
 -python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/prepare_mobilesam.py \
 -  --source-dir "$MOBILE_SAM_SOURCE" \
 -  --local-files-only
-+- Mask threshold: `0.0`
- 
+-
 -python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py \
 -  --output-path /tmp/mobilesam_smoke.pte \
 -  --local-files-only \
@@ -627,17 +629,11 @@ index 8069c0d8cc..c5f24ee0f5 100644
 -  --num-eval-samples 1 \
 -  --minimum-fp32-quantized-iou 0.9
 -```
-+Repeat `--point X Y` to export a multi-point positive prompt. Pass
-+`--local-files-only` after the source and checkpoint have been cached. Pass a
-+local checkpoint with `--checkpoint-path` when network access is unavailable.
- 
+-
 -Repeat `--point X Y` to freeze a multi-point prompt into the graph. Validate
 -every prompt set because adding positive points can substantially change the
 -predicted object after quantization:
-+The Alif E8 Zephyr sample additionally requires `--quantized-io`. This exposes
-+int8 model input and output tensors and records their quantization parameters
-+in the metadata JSON.
- 
+-
 -```bash
 -python examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py \
 -  --output-path /tmp/mobilesam_multipoint_smoke.pte \
@@ -652,56 +648,40 @@ index 8069c0d8cc..c5f24ee0f5 100644
 -  --num-eval-samples 1 \
 -  --debug-output-dir /tmp/mobilesam_multipoint_debug
 -```
-+## Outputs
- 
+-
 -Pass `--input-size 1024` to reproduce the original MobileSAM resolution. Smaller
 -inputs export and run faster, but very small inputs such as `224` or `256`
 -usually produce lower-quality masks because the checkpoint was trained for
 -`1024x1024` images.
-+For the command above, the export directory contains:
- 
+-
 -To validate against a known binary mask, pass one `--eval-mask` per
 -`--eval-image`. Non-zero mask pixels are treated as foreground. When no
 -reference mask is provided, validation reports FP32/quantized mask agreement.
 -Use `--minimum-fp32-quantized-iou` in automated runs to reject an inaccurate
 -quantized model before lowering.
-+- `mobilesam_point_ethos_u85_448.pte` - ExecuTorch program.
-+- `mobilesam_point_ethos_u85_448.json` - shapes, preprocessing, prompt, and
-+  provenance metadata.
-+- `mobilesam_point_ethos_u85_448_metrics.json` - FP32/quantized mask agreement.
-+- `mobilesam_point_ethos_u85_448_delegation.txt` - delegation summary.
-+- `artifacts/` - TOSA and Vela intermediate files.
-+- `debug/dog/` - input, FP32/quantized masks, and colored overlays.
- 
+-
 -The export flow:
-+The host quantized mask used for FVP validation is:
- 
+-
 -1. Loads the MobileSAM `vit_t` checkpoint through the patched external API.
 -2. Builds a fixed-prompt wrapper containing the image encoder and mask decoder.
 -3. Calibrates PT2E quantization with `EthosUQuantizer`.
 -4. Uses stable softmax decomposition for transformer attention blocks.
 -5. Lowers the quantized graph with `EthosUPartitioner`.
 -6. Writes an ExecuTorch `.pte` program.
-+```text
-+$MOBILE_SAM_WORK_DIR/export/debug/dog/quantized_mask.png
-+```
- 
+-
 -The quantization recipe uses int8 activations and int8 weights globally, with
 -A16W8 quantization for the TinyViT attention modules. Static int8 activation
 -quantization collapses MobileSAM attention features, while the selective A16W8
 -attention path preserves mask quality and still lowers as one Ethos-U delegate.
-+## Source and checkpoint
++The Alif E8 Zephyr sample additionally requires `--quantized-io`. This exposes
++int8 model input and output tensors and records their quantization parameters
++in the metadata JSON.
  
--## Outputs
-+The preparation script creates a managed external checkout of
-+`https://github.com/ChaoningZhang/MobileSAM` at revision
-+`f706ad9c4eb7f219c00d9050e46328518ffb65d2` and applies
-+`0001-Make-TinyViT-image-size-configurable.patch` there. The exporter downloads
-+the official `mobile_sam.pt` checkpoint and verifies SHA256
-+`6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f`.
+ ## Outputs
  
 -For `--output-path ./mobilesam_point_ethos_u85_448.pte`, the script writes:
--
++For the command above, the export directory contains:
+ 
 -- `mobilesam_point_ethos_u85_448.pte` - Ethos-U-ready ExecuTorch program.
 -- `mobilesam_point_ethos_u85_448.json` - Export metadata.
 -- `mobilesam_point_ethos_u85_448_metrics.json` - FP32/quantized mask
@@ -711,11 +691,22 @@ index 8069c0d8cc..c5f24ee0f5 100644
 -- `mobilesam_point_artifacts/` - Optional TOSA/Vela intermediate artifacts.
 -- `mobilesam_point_debug/` - Optional per-sample masks, overlays, mismatch
 -  heatmaps, and mask summaries.
--
++- `mobilesam_point_ethos_u85_448.pte` - ExecuTorch program.
++- `mobilesam_point_ethos_u85_448.json` - shapes, preprocessing, prompt, and
++  provenance metadata.
++- `mobilesam_point_ethos_u85_448_metrics.json` - FP32/quantized mask agreement.
++- `mobilesam_point_ethos_u85_448_delegation.txt` - delegation summary.
++- `artifacts/` - TOSA and Vela intermediate files.
++- `debug/dog/` - input, FP32/quantized masks, and colored overlays.
+ 
 -## Interpreting the Debug Artifacts
--
++The host quantized mask used for FVP validation is:
+ 
 -Each debug sample contains:
--
++```text
++$MOBILE_SAM_WORK_DIR/export/debug/dog/quantized_mask.png
++```
+ 
 -- `input.png` - The resized RGB input used by the exported model.
 -- `reference_mask.png` - Optional binary reference mask resized to the model
 -  output-mask size.
@@ -728,11 +719,19 @@ index 8069c0d8cc..c5f24ee0f5 100644
 -  mismatch.
 -- `mask_summary.json` - Foreground/background pixel counts and FP32/quantized
 -  IoU.
--
++## Source and checkpoint
+ 
 -The runtime app thresholds mask logits on target, logs a mask hash and
 -foreground/background counts, and can dump the thresholded mask as RLE chunks.
 -Host-side debug masks are intentionally generated before lowering so users can
 -inspect quantization quality without needing target-side image output.
++The preparation script creates a managed external checkout of
++`https://github.com/ChaoningZhang/MobileSAM` at revision
++`f706ad9c4eb7f219c00d9050e46328518ffb65d2` and applies
++`0001-Make-TinyViT-image-size-configurable.patch` there. The exporter downloads
++the official `mobile_sam.pt` checkpoint and verifies SHA256
++`6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f`.
++
 +Neither source nor weights are redistributed in ExecuTorch. The source is
 +Apache-2.0; the source repository and checkpoint can have separate terms, so
 +the export metadata does not assign the source license to the checkpoint.
@@ -765,10 +764,9 @@ index 8069c0d8cc..c5f24ee0f5 100644
 +- Calibration uses the demonstration image to keep the example quick. Validate
 +  with representative data before using the quantized model in a product.
 diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py
-index e7c22518f0..60bcb44f8d 100644
 --- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py
 +++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/model_export/export_mobilesam.py
-@@ -10,7 +10,6 @@ import hashlib
+@@ -10,7 +10,6 @@
  import importlib
  import inspect
  import json
@@ -776,7 +774,7 @@ index e7c22518f0..60bcb44f8d 100644
  import sys
  import urllib.error
  import urllib.request
-@@ -21,7 +20,6 @@ from typing import Any, cast
+@@ -21,7 +20,6 @@
  
  import numpy as np
  import torch
@@ -784,7 +782,7 @@ index e7c22518f0..60bcb44f8d 100644
  from executorch.backends.arm.common.pipeline_config import (
      ArmPassPipelineConfig,
      SoftmaxDecompositionConfig,
-@@ -38,6 +36,7 @@ from executorch.exir import (
+@@ -38,6 +36,7 @@
      ExecutorchBackendConfig,
      to_edge_transform_and_lower,
  )
@@ -792,7 +790,7 @@ index e7c22518f0..60bcb44f8d 100644
  from executorch.extension.export_util.utils import save_pte_program
  from packaging.version import Version
  from PIL import Image
-@@ -49,6 +48,7 @@ from torchao.quantization.pt2e.quantize_pt2e import (  # type: ignore[import]
+@@ -49,6 +48,7 @@
  MOBILE_SAM_SOURCE_URL = "https://github.com/ChaoningZhang/MobileSAM"
  MOBILE_SAM_SOURCE_REVISION = "f706ad9c4eb7f219c00d9050e46328518ffb65d2"
  MOBILE_SAM_PATCH = "0001-Make-TinyViT-image-size-configurable.patch"
@@ -800,7 +798,7 @@ index e7c22518f0..60bcb44f8d 100644
  DEFAULT_CHECKPOINT_FILENAME = "mobile_sam.pt"
  DEFAULT_CHECKPOINT_URL = (
      f"{MOBILE_SAM_SOURCE_URL}/raw/{MOBILE_SAM_SOURCE_REVISION}/weights/"
-@@ -57,10 +57,17 @@ DEFAULT_CHECKPOINT_URL = (
+@@ -57,10 +57,17 @@
  DEFAULT_CHECKPOINT_SHA256 = (
      "6dbb90523a35330fedd7f1d3dfc66f995213d81b29a5ca8108dbcdd4e37d6c2f"
  )
@@ -821,7 +819,7 @@ index e7c22518f0..60bcb44f8d 100644
  
  
  @dataclass
-@@ -68,197 +75,80 @@ class PreparedSample:
+@@ -68,197 +75,80 @@
      name: str
      image: Image.Image
      pixel_values: torch.Tensor
@@ -870,11 +868,11 @@ index e7c22518f0..60bcb44f8d 100644
 -                masks=None,
 -            )
 -            image_pe = sam.prompt_encoder.get_dense_pe()
- 
+-
 -        self.register_buffer("sparse_prompt_embeddings", sparse_embeddings)
 -        self.register_buffer("dense_prompt_embeddings", dense_embeddings)
 -        self.register_buffer("image_pe", image_pe)
- 
+-
 -    def forward(self, pixel_values: torch.Tensor) -> torch.Tensor:
 -        image_embeddings = self.image_encoder(pixel_values)
 -        low_res_masks, _ = self.mask_decoder(
@@ -885,6 +883,11 @@ index e7c22518f0..60bcb44f8d 100644
 -            multimask_output=False,
 -        )
 -        return low_res_masks
+-
+-
+-def parse_args() -> argparse.Namespace:
++
++
 +def default_source_dir() -> Path:
 +    return (
 +        Path.home()
@@ -894,9 +897,8 @@ index e7c22518f0..60bcb44f8d 100644
 +        / MOBILE_SAM_SOURCE_REVISION
 +        / "source"
 +    )
- 
- 
--def parse_args() -> argparse.Namespace:
++
++
 +def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
      parser = argparse.ArgumentParser(
 -        description="Export fixed-prompt MobileSAM segmentation for Ethos-U."
@@ -924,19 +926,14 @@ index e7c22518f0..60bcb44f8d 100644
 -        action="append",
 -        default=[],
 -        help="Local RGB image used for PTQ calibration. Can be repeated.",
-+        description="Export fixed-prompt MobileSAM object segmentation for Ethos-U85."
-     )
-     parser.add_argument(
+-    )
+-    parser.add_argument(
 -        "--eval-image",
 -        action="append",
 -        default=[],
 -        help="Local RGB image used for validation/debugging. Can be repeated.",
-+        "--output-path",
-+        type=Path,
-+        required=True,
-+        help="Output path for the ExecuTorch .pte program.",
-     )
-     parser.add_argument(
+-    )
+-    parser.add_argument(
 -        "--eval-mask",
 -        action="append",
 -        default=[],
@@ -944,6 +941,15 @@ index e7c22518f0..60bcb44f8d 100644
 -            "Optional binary reference mask used for validation/debugging. "
 -            "Can be repeated and must match --eval-image count when provided."
 -        ),
++        description="Export fixed-prompt MobileSAM object segmentation for Ethos-U85."
++    )
++    parser.add_argument(
++        "--output-path",
++        type=Path,
++        required=True,
++        help="Output path for the ExecuTorch .pte program.",
++    )
++    parser.add_argument(
 +        "--image",
 +        type=Path,
 +        required=True,
@@ -963,7 +969,7 @@ index e7c22518f0..60bcb44f8d 100644
 +            "Positive point prompt in the square input frame. Repeat once per "
 +            "independently segmented object."
          ),
-     )
+-    )
 -    parser.add_argument(
 -        "--mask-threshold",
 -        type=float,
@@ -975,7 +981,7 @@ index e7c22518f0..60bcb44f8d 100644
 -        type=str,
 -        required=True,
 -        help="Path to save the exported ExecuTorch program.",
--    )
+     )
      parser.add_argument(
          "--input-size",
          type=int,
@@ -999,10 +1005,8 @@ index e7c22518f0..60bcb44f8d 100644
 -        type=int,
 -        default=4,
 -        help="Number of validation samples written as visual debug artifacts.",
-+        default=INPUT_SIZE,
-+        help=f"Square model input size (default: {INPUT_SIZE}).",
-     )
-     parser.add_argument(
+-    )
+-    parser.add_argument(
 -        "--minimum-fp32-quantized-iou",
 -        type=float,
 -        default=None,
@@ -1017,50 +1021,63 @@ index e7c22518f0..60bcb44f8d 100644
 -        "--system-config",
 -        default="Ethos_U85_SYS_DRAM_Mid",
 -        help="Vela system configuration.",
-+        "--mobile-sam-source",
-+        type=Path,
-+        default=default_source_dir(),
-+        help="MobileSAM checkout prepared by prepare_mobilesam.py.",
-     )
-     parser.add_argument(
+-    )
+-    parser.add_argument(
 -        "--memory-mode",
 -        default="Dedicated_Sram_384KB",
 -        help="Vela memory mode.",
-+        "--checkpoint-path",
-+        type=Path,
-+        help="Optional local MobileSAM checkpoint; otherwise use the pinned cache.",
-     )
-     parser.add_argument(
+-    )
+-    parser.add_argument(
 -        "--extra-vela-flag",
 -        action="append",
 -        default=[],
 -        help="Additional Vela flag. Can be provided multiple times.",
-+        "--local-files-only",
-+        action="store_true",
-+        help="Require the checkpoint to be present in the local cache.",
-     )
-     parser.add_argument(
+-    )
+-    parser.add_argument(
 -        "--artifact-dir",
 -        default=None,
 -        help="Optional directory for intermediate TOSA/Vela artifacts.",
-+        "--quantized-io",
-+        action="store_true",
-+        help="Expose int8 input/output tensors for the Alif E8 sample.",
-     )
-     parser.add_argument(
+-    )
+-    parser.add_argument(
 -        "--debug-output-dir",
 -        default=None,
 -        help="Optional directory for masks, overlays, and validation summaries.",
+-    )
+-    return parser.parse_args()
++        default=INPUT_SIZE,
++        help=f"Square model input size (default: {INPUT_SIZE}).",
++    )
++    parser.add_argument(
++        "--mobile-sam-source",
++        type=Path,
++        default=default_source_dir(),
++        help="MobileSAM checkout prepared by prepare_mobilesam.py.",
++    )
++    parser.add_argument(
++        "--checkpoint-path",
++        type=Path,
++        help="Optional local MobileSAM checkpoint; otherwise use the pinned cache.",
++    )
++    parser.add_argument(
++        "--local-files-only",
++        action="store_true",
++        help="Require the checkpoint to be present in the local cache.",
++    )
++    parser.add_argument(
++        "--quantized-io",
++        action="store_true",
++        help="Expose int8 input/output tensors for the Alif E8 sample.",
++    )
++    parser.add_argument(
 +        "--multimask-output",
 +        action="store_true",
 +        help="Return three candidate masks and quality scores for each point.",
-     )
--    return parser.parse_args()
++    )
 +    return parser.parse_args(argv)
  
  
  def write_json(path: Path, payload: dict[str, Any]) -> None:
-@@ -283,24 +173,84 @@ def validate_vela_version() -> str:
+@@ -283,24 +173,84 @@
      return installed_version
  
  
@@ -1083,14 +1100,16 @@ index e7c22518f0..60bcb44f8d 100644
 -            "model_export/prepare_mobilesam.py and pass its checkout with "
 -            "--mobile-sam-source."
 -        ) from error
-+        raise ImportError(f"Could not import mobile_sam from {source_dir}.") from error
- 
- 
+-
+-
 -def find_module_type(module: torch.nn.Module, class_name: str) -> type[torch.nn.Module]:
 -    for child in module.modules():
 -        if child.__class__.__name__ == class_name:
 -            return child.__class__
 -    raise ValueError(f"Could not find module type {class_name} in {module.__class__}.")
++        raise ImportError(f"Could not import mobile_sam from {source_dir}.") from error
++
++
 +def load_mobile_sam(
 +    checkpoint_path: Path,
 +    source_dir: Path,
@@ -1158,7 +1177,7 @@ index e7c22518f0..60bcb44f8d 100644
  
  
  def file_sha256(path: Path) -> str:
-@@ -311,27 +261,26 @@ def file_sha256(path: Path) -> str:
+@@ -311,27 +261,26 @@
      return digest.hexdigest()
  
  
@@ -1166,15 +1185,9 @@ index e7c22518f0..60bcb44f8d 100644
 +def default_checkpoint_path() -> Path:
      return (
 -        Path.home() / ".cache" / "executorch" / "mobilesam" / MOBILE_SAM_SOURCE_REVISION
-+        Path.home()
-+        / ".cache"
-+        / "executorch"
-+        / "mobilesam"
-+        / MOBILE_SAM_SOURCE_REVISION
-+        / DEFAULT_CHECKPOINT_FILENAME
-     )
- 
- 
+-    )
+-
+-
 -def verify_checkpoint(path: Path, expected_sha256: str) -> None:
 -    actual_sha256 = file_sha256(path)
 -    if actual_sha256 != expected_sha256:
@@ -1185,6 +1198,15 @@ index e7c22518f0..60bcb44f8d 100644
 -
 -
 -def download_checkpoint(url: str, path: Path) -> None:
++        Path.home()
++        / ".cache"
++        / "executorch"
++        / "mobilesam"
++        / MOBILE_SAM_SOURCE_REVISION
++        / DEFAULT_CHECKPOINT_FILENAME
++    )
++
++
 +def download_checkpoint(path: Path) -> None:
      path.parent.mkdir(parents=True, exist_ok=True)
      temp_path = path.with_suffix(path.suffix + ".tmp")
@@ -1198,7 +1220,7 @@ index e7c22518f0..60bcb44f8d 100644
              temp_path.open("wb") as file,
          ):
              for chunk in iter(lambda: response.read(1024 * 1024), b""):
-@@ -340,46 +289,50 @@ def download_checkpoint(url: str, path: Path) -> None:
+@@ -340,46 +289,50 @@
      except (OSError, urllib.error.URLError) as error:
          temp_path.unlink(missing_ok=True)
          raise RuntimeError(
@@ -1237,14 +1259,23 @@ index e7c22518f0..60bcb44f8d 100644
 +                f"Checkpoint not found in local cache: {resolved_path}"
              )
 -        download_checkpoint(DEFAULT_CHECKPOINT_URL, checkpoint_path)
-+        download_checkpoint(resolved_path)
- 
+-
 -    verify_checkpoint(checkpoint_path, DEFAULT_CHECKPOINT_SHA256)
 -    return (
 -        str(checkpoint_path.resolve()),
 -        DEFAULT_CHECKPOINT_URL,
 -        DEFAULT_CHECKPOINT_SHA256,
 -    )
+-
+-
+-def preprocess_image(
+-    image: Image.Image,
+-    segmentation_map: Image.Image | None,
+-    *,
+-    name: str,
+-    input_size: int,
++        download_checkpoint(resolved_path)
++
 +    actual_sha256 = file_sha256(resolved_path)
 +    if actual_sha256 != DEFAULT_CHECKPOINT_SHA256:
 +        raise RuntimeError(
@@ -1252,14 +1283,8 @@ index e7c22518f0..60bcb44f8d 100644
 +            f"{DEFAULT_CHECKPOINT_SHA256}, got {actual_sha256}."
 +        )
 +    return resolved_path.resolve(), DEFAULT_CHECKPOINT_URL, actual_sha256
- 
- 
--def preprocess_image(
--    image: Image.Image,
--    segmentation_map: Image.Image | None,
--    *,
--    name: str,
--    input_size: int,
++
++
 +def prepare_sample(
 +    image_path: Path,
      pixel_mean: np.ndarray,
@@ -1277,7 +1302,7 @@ index e7c22518f0..60bcb44f8d 100644
      width, height = rgb_image.size
      scale = input_size / max(height, width)
      resized_size = (round(width * scale), round(height * scale))
-@@ -393,101 +346,53 @@ def preprocess_image(
+@@ -393,101 +346,53 @@
      pixel_values = torch.from_numpy(image_np).permute(2, 0, 1).unsqueeze(0)
      pixel_values = torch.nn.functional.pad(
          pixel_values,
@@ -1287,8 +1312,7 @@ index e7c22518f0..60bcb44f8d 100644
 -            0,
 -            input_size - resized_size[1],
 -        ),
-+        (0, input_size - resized_size[0], 0, input_size - resized_size[1]),
-     )
+-    )
 -    pixel_values = pixel_values.contiguous()
 -
 -    labels = None
@@ -1305,16 +1329,17 @@ index e7c22518f0..60bcb44f8d 100644
 -        mask_np = np.asarray(resized_mask, dtype=np.uint8)
 -        labels = torch.from_numpy((mask_np > 0).astype(np.uint8)).to(torch.long)
 -
++        (0, input_size - resized_size[0], 0, input_size - resized_size[1]),
++    )
      return PreparedSample(
 -        name=name,
 +        name=image_path.stem,
          image=padded_image,
 -        pixel_values=pixel_values,
 -        labels=labels,
-+        pixel_values=pixel_values.contiguous(),
-     )
- 
- 
+-    )
+-
+-
 -def load_local_samples(
 -    image_paths: list[str],
 -    mask_paths: list[str],
@@ -1351,11 +1376,27 @@ index e7c22518f0..60bcb44f8d 100644
 -    if len(samples) == 0:
 -        raise ValueError("No local samples were loaded.")
 -    return samples
+-
+-
+-def run_mask_logits(model: torch.nn.Module, input_tensor: torch.Tensor) -> torch.Tensor:
++        pixel_values=pixel_values.contiguous(),
++    )
++
++
 +def run_model_outputs(
 +    model: torch.nn.Module, input_tensor: torch.Tensor
 +) -> tuple[torch.Tensor, torch.Tensor | None]:
-+    output = model(input_tensor)
-+    if isinstance(output, (tuple, list)):
+     output = model(input_tensor)
+     if isinstance(output, (tuple, list)):
+-        output = output[0]
+-    if not isinstance(output, torch.Tensor):
+-        raise TypeError(f"Expected tensor mask logits, got {type(output)}")
+-    return output
+-
+-
+-def predict_mask(logits: torch.Tensor, threshold: float) -> np.ndarray:
+-    mask = logits.detach().cpu().squeeze(0).squeeze(0).numpy() > threshold
+-    return mask.astype(np.uint8)
 +        if len(output) != 2 or not all(
 +            isinstance(value, torch.Tensor) for value in output
 +        ):
@@ -1364,21 +1405,12 @@ index e7c22518f0..60bcb44f8d 100644
 +    if isinstance(output, torch.Tensor):
 +        return output, None
 +    raise TypeError(f"Expected tensor model output, got {type(output)}")
- 
- 
- def run_mask_logits(model: torch.nn.Module, input_tensor: torch.Tensor) -> torch.Tensor:
--    output = model(input_tensor)
--    if isinstance(output, (tuple, list)):
--        output = output[0]
--    if not isinstance(output, torch.Tensor):
--        raise TypeError(f"Expected tensor mask logits, got {type(output)}")
--    return output
++
++
++def run_mask_logits(model: torch.nn.Module, input_tensor: torch.Tensor) -> torch.Tensor:
 +    return run_model_outputs(model, input_tensor)[0]
- 
- 
--def predict_mask(logits: torch.Tensor, threshold: float) -> np.ndarray:
--    mask = logits.detach().cpu().squeeze(0).squeeze(0).numpy() > threshold
--    return mask.astype(np.uint8)
++
++
 +def predict_masks(logits: torch.Tensor) -> np.ndarray:
 +    if logits.ndim != 4:
 +        raise ValueError(
@@ -1396,19 +1428,21 @@ index e7c22518f0..60bcb44f8d 100644
 -    if union == 0:
 -        return 1.0
 -    return float(intersection / union)
-+    return 1.0 if union == 0 else float(intersection / union)
- 
- 
+-
+-
 -def save_binary_mask(path: Path, mask: np.ndarray) -> Image.Image:
 -    image = Image.fromarray((mask.astype(np.uint8) * 255), mode="L")
 -    image.save(path)
 -    return image.convert("RGB")
++    return 1.0 if union == 0 else float(intersection / union)
++
++
 +def save_binary_mask(path: Path, mask: np.ndarray) -> None:
 +    Image.fromarray(mask.astype(np.uint8) * 255, mode="L").save(path)
  
  
  def save_mask_overlay(
-@@ -496,182 +401,176 @@ def save_mask_overlay(
+@@ -496,182 +401,176 @@
      mask: np.ndarray,
      color: tuple[int, int, int],
  ) -> None:
@@ -1424,23 +1458,25 @@ index e7c22518f0..60bcb44f8d 100644
 -    color_np = np.asarray(color, dtype=np.float32)
 -    overlay_np[mask_np] = overlay_np[mask_np] * 0.55 + color_np * 0.45
 -    Image.fromarray(np.clip(overlay_np, 0, 255).astype(np.uint8), mode="RGB").save(path)
+-
+-
+-def write_debug_artifacts(
 +    overlay_np = np.asarray(image.convert("RGB"), dtype=np.float32)
 +    overlay_np[mask_np] = (
 +        overlay_np[mask_np] * 0.55 + np.asarray(color, dtype=np.float32) * 0.45
 +    )
 +    Image.fromarray(overlay_np.astype(np.uint8), mode="RGB").save(path)
- 
- 
--def write_debug_artifacts(
--    debug_dir: Path,
++
++
 +def evaluate_and_write_debug_artifacts(
 +    fp32_model: torch.nn.Module,
 +    quantized_model: torch.nn.Module,
-     sample: PreparedSample,
++    sample: PreparedSample,
+     debug_dir: Path,
+-    sample: PreparedSample,
 -    fp32_mask: np.ndarray,
 -    quantized_mask: np.ndarray,
 -) -> None:
-+    debug_dir: Path,
 +) -> dict[str, Any]:
 +    fp32_logits, fp32_quality = run_model_outputs(fp32_model, sample.pixel_values)
 +    quantized_logits, quantized_quality = run_model_outputs(
@@ -1544,8 +1580,7 @@ index e7c22518f0..60bcb44f8d 100644
          save_binary_mask(
 -            sample_dir / "reference_mask.png",
 -            sample.labels.detach().cpu().numpy().astype(np.uint8),
-+            sample_dir / f"quantized_mask_{object_index}.png", quantized_mask
-         )
+-        )
 -
 -    mismatch = fp32_mask != quantized_mask
 -    heatmap = np.zeros((*fp32_mask.shape, 3), dtype=np.uint8)
@@ -1588,18 +1623,7 @@ index e7c22518f0..60bcb44f8d 100644
 -        fp32_quantized_ious.append(binary_iou(fp32_mask, quantized_mask))
 -        fp32_quantized_pixel_agreements.append(
 -            float(np.mean(fp32_mask == quantized_mask))
-+        save_mask_overlay(
-+            sample_dir / f"fp32_overlay_{object_index}.png",
-+            sample.image,
-+            fp32_mask,
-+            (0, 220, 120),
-+        )
-+        save_mask_overlay(
-+            sample_dir / f"quantized_overlay_{object_index}.png",
-+            sample.image,
-+            quantized_mask,
-+            (0, 170, 255),
-         )
+-        )
 -        if sample.labels is not None:
 -            labels = sample.labels.detach().cpu().numpy().astype(np.uint8)
 -            reference_ious.append(binary_iou(quantized_mask, labels))
@@ -1616,6 +1640,20 @@ index e7c22518f0..60bcb44f8d 100644
 -    }
 -    if len(reference_ious) > 0:
 -        metrics["reference_mean_iou"] = float(np.mean(reference_ious))
++            sample_dir / f"quantized_mask_{object_index}.png", quantized_mask
++        )
++        save_mask_overlay(
++            sample_dir / f"fp32_overlay_{object_index}.png",
++            sample.image,
++            fp32_mask,
++            (0, 220, 120),
++        )
++        save_mask_overlay(
++            sample_dir / f"quantized_overlay_{object_index}.png",
++            sample.image,
++            quantized_mask,
++            (0, 170, 255),
++        )
      return metrics
  
  
@@ -1638,10 +1676,12 @@ index e7c22518f0..60bcb44f8d 100644
 +    prepared(input_tensor)
      quantized = convert_pt2e(prepared)
 -    return torch.export.export(quantized, example_inputs)
-+    return torch.export.export(quantized, (input_tensor,))
- 
- 
+-
+-
 -def has_quantized_out_variants() -> bool:
++    return torch.export.export(quantized, (input_tensor,))
++
++
 +def ensure_quantized_ops_loaded() -> None:
 +    try:
 +        import executorch.kernels.quantized  # noqa: F401
@@ -1668,28 +1708,18 @@ index e7c22518f0..60bcb44f8d 100644
 -    raise RuntimeError(
 -        f"Quantized ops library did not register required out variants: {library_path}"
 -    )
-+    except AttributeError as error:
-+        raise RuntimeError(
-+            "The ExecuTorch installation does not provide quantized out variants. "
-+            "Re-run ./install_executorch.sh."
-+        ) from error
- 
- 
+-
+-
 -def ensure_quantized_ops_loaded() -> Path | None:
 -    if has_quantized_out_variants():
 -        return None
-+def find_module_type(module: torch.nn.Module, class_name: str) -> type[torch.nn.Module]:
-+    for child in module.modules():
-+        if child.__class__.__name__ == class_name:
-+            return child.__class__
-+    raise ValueError(f"Could not find module type {class_name} in {module.__class__}.")
- 
+-
 -    quantized_ops_library = os.environ.get("EXECUTORCH_QUANTIZED_OPS_AOT_LIBRARY")
 -    if quantized_ops_library:
 -        return load_quantized_ops_library(
 -            Path(quantized_ops_library).expanduser().resolve()
 -        )
- 
+-
 -    try:
 -        import executorch.kernels.quantized  # noqa: F401
 -    except ImportError:
@@ -1716,6 +1746,20 @@ index e7c22518f0..60bcb44f8d 100644
 -        "`quantized_decomposed::quantize_per_tensor.out` and "
 -        "`quantized_decomposed::dequantize_per_tensor.out` are available."
 -    )
++    except AttributeError as error:
++        raise RuntimeError(
++            "The ExecuTorch installation does not provide quantized out variants. "
++            "Re-run ./install_executorch.sh."
++        ) from error
++
++
++def find_module_type(module: torch.nn.Module, class_name: str) -> type[torch.nn.Module]:
++    for child in module.modules():
++        if child.__class__.__name__ == class_name:
++            return child.__class__
++    raise ValueError(f"Could not find module type {class_name} in {module.__class__}.")
++
++
 +def resolve_point_prompts(
 +    points: list[list[float]], input_size: int = INPUT_SIZE
 +) -> list[tuple[float, float]]:
@@ -1731,7 +1775,7 @@ index e7c22518f0..60bcb44f8d 100644
  
  
  def write_delegation_report(edge_program_manager: Any, report_path: Path) -> None:
-@@ -681,113 +580,69 @@ def write_delegation_report(edge_program_manager: Any, report_path: Path) -> Non
+@@ -681,113 +580,69 @@
      report_path.write_text(delegation_info.get_summary() + "\n")
  
  
@@ -1778,10 +1822,11 @@ index e7c22518f0..60bcb44f8d 100644
 -    quantized_ops_library = ensure_quantized_ops_loaded()
 -    if quantized_ops_library is not None:
 -        print(f"Loaded quantized ops library from {quantized_ops_library}")
+-
+-    output_path = Path(args.output_path).resolve()
 +    ensure_quantized_ops_loaded()
 +    point_prompts = resolve_point_prompts(args.point, args.input_size)
- 
--    output_path = Path(args.output_path).resolve()
++
 +    output_path = args.output_path.expanduser().resolve()
 +    if output_path.suffix != ".pte":
 +        raise ValueError("--output-path must end in .pte.")
@@ -1790,11 +1835,12 @@ index e7c22518f0..60bcb44f8d 100644
      metrics_path = output_path.with_name(f"{output_path.stem}_metrics.json")
      delegation_path = output_path.with_name(f"{output_path.stem}_delegation.txt")
 -    debug_dir = Path(args.debug_output_dir).resolve() if args.debug_output_dir else None
+-
+-    checkpoint_path, checkpoint_url, checkpoint_sha256 = resolve_checkpoint(args)
 +    artifact_dir = output_path.parent / "artifacts"
 +    debug_dir = output_path.parent / "debug"
 +    artifact_dir.mkdir(exist_ok=True)
- 
--    checkpoint_path, checkpoint_url, checkpoint_sha256 = resolve_checkpoint(args)
++
 +    checkpoint_path, checkpoint_url, checkpoint_sha256 = resolve_checkpoint(
 +        args.checkpoint_path,
 +        local_files_only=args.local_files_only,
@@ -1837,11 +1883,7 @@ index e7c22518f0..60bcb44f8d 100644
 +    ):
          raise ValueError(
 -            f"Expected MobileSAM output shape [1, 1, height, width], got {output_shape}."
-+            "Expected MobileSAM output shape "
-+            f"[{len(point_prompts)}, "
-+            f"{3 if args.multimask_output else 1}, height, width], got "
-+            f"{output_shape}."
-         )
+-        )
 -    output_mask_size = (output_shape[3], output_shape[2])
 -
 -    eval_samples = load_local_samples(
@@ -1854,6 +1896,11 @@ index e7c22518f0..60bcb44f8d 100644
 -        pixel_std=pixel_std,
 -        output_mask_size=output_mask_size,
 -    )
++            "Expected MobileSAM output shape "
++            f"[{len(point_prompts)}, "
++            f"{3 if args.multimask_output else 1}, height, width], got "
++            f"{output_shape}."
++        )
  
      compile_spec = EthosUCompileSpec(
 -        target=args.target,
@@ -1882,16 +1929,17 @@ index e7c22518f0..60bcb44f8d 100644
          get_symmetric_a16w8_quantization_config(),
      )
  
-@@ -795,34 +650,37 @@ def main() -> None:
+@@ -795,34 +650,37 @@
          quantized_program = quantize_model(
              wrapped_model,
              quantizer,
 -            example_inputs,
 -            calibration_samples,
-+            sample.pixel_values,
-         )
+-        )
 -        quantized_module = quantized_program.module()
 -        metrics = evaluate_and_debug(
++            sample.pixel_values,
++        )
 +        metrics = evaluate_and_write_debug_artifacts(
              wrapped_model,
 -            quantized_module,
@@ -1901,13 +1949,24 @@ index e7c22518f0..60bcb44f8d 100644
              debug_dir,
 -            args.num_debug_samples,
 -            args.mask_threshold,
-         )
+-        )
 -        write_json(metrics_path, metrics)
 -        print(
 -            "Validation metrics: "
 -            f"fp32_quantized_mean_iou={metrics['fp32_quantized_mean_iou']:.4f} "
 -            "fp32_quantized_pixel_agreement="
 -            f"{metrics['fp32_quantized_pixel_agreement']:.4f}"
+-        )
+-        if (
+-            args.minimum_fp32_quantized_iou is not None
+-            and metrics["fp32_quantized_mean_iou"] < args.minimum_fp32_quantized_iou
+-        ):
+-            raise RuntimeError(
+-                "Host quantized/FP32 mask IoU "
+-                f"{metrics['fp32_quantized_mean_iou']:.4f} is below "
+-                f"{args.minimum_fp32_quantized_iou:.4f}."
+-            )
++        )
 +    write_json(metrics_path, metrics)
 +    print(
 +        "Validation: "
@@ -1930,20 +1989,11 @@ index e7c22518f0..60bcb44f8d 100644
 +            f"the required {MINIMUM_FP32_QUANTIZED_IOU:.4f}, and pixel agreement "
 +            f"{validation_agreement:.4f} is below "
 +            f"{MINIMUM_FP32_QUANTIZED_PIXEL_AGREEMENT:.4f}."
-         )
--        if (
--            args.minimum_fp32_quantized_iou is not None
--            and metrics["fp32_quantized_mean_iou"] < args.minimum_fp32_quantized_iou
--        ):
--            raise RuntimeError(
--                "Host quantized/FP32 mask IoU "
--                f"{metrics['fp32_quantized_mean_iou']:.4f} is below "
--                f"{args.minimum_fp32_quantized_iou:.4f}."
--            )
++        )
  
      edge_program_manager = to_edge_transform_and_lower(
          programs=quantized_program,
-@@ -831,6 +689,33 @@ def main() -> None:
+@@ -831,6 +689,33 @@
      )
      write_delegation_report(edge_program_manager, delegation_path)
  
@@ -1977,7 +2027,7 @@ index e7c22518f0..60bcb44f8d 100644
      executorch_program_manager = edge_program_manager.to_executorch(
          config=ExecutorchBackendConfig(extract_delegate_segments=False)
      )
-@@ -844,15 +729,15 @@ def main() -> None:
+@@ -844,15 +729,15 @@
          metadata_path,
          {
              "model_name": "MobileSAM vit_t",
@@ -1996,7 +2046,7 @@ index e7c22518f0..60bcb44f8d 100644
              "output_shape": output_shape,
              "input_size": args.input_size,
              "preprocessing": {
-@@ -861,34 +746,33 @@ def main() -> None:
+@@ -861,34 +746,33 @@
                  "resize": "longest_side_then_zero_pad",
              },
              "point_prompts_xy": point_prompts,
@@ -2049,7 +2099,6 @@ index e7c22518f0..60bcb44f8d 100644
  if __name__ == "__main__":
 diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/requirements.txt b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/requirements.txt
 deleted file mode 100644
-index 6eb309f00d..0000000000
 --- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/requirements.txt
 +++ /dev/null
 @@ -1,6 +0,0 @@
@@ -2060,13 +2109,13 @@ index 6eb309f00d..0000000000
 -
 -tqdm == 4.67.1
 diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/CMakeLists.txt b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/CMakeLists.txt
-index 6f30110b95..a65c9dfdd5 100644
 --- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/CMakeLists.txt
 +++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/CMakeLists.txt
-@@ -59,6 +59,60 @@ option(ET_SEGMENTATION_SEMIHOSTING_OUTPUT
+@@ -58,6 +58,60 @@
+ option(ET_SEGMENTATION_SEMIHOSTING_OUTPUT
         "Emit validation logs through Arm semihosting for FVP smoke runs" ON
  )
- 
++
 +function(validate_arm_baremetal_toolchain)
 +  set(setup_hint
 +      "Run examples/arm/setup.sh, source examples/arm/arm-scratch/setup_path.sh, and configure a fresh build directory."
@@ -2120,12 +2169,10 @@ index 6f30110b95..a65c9dfdd5 100644
 +endfunction()
 +
 +validate_arm_baremetal_toolchain()
-+
+ 
  if(NOT EXISTS "${IMAGE_PATH}")
    message(
-     FATAL_ERROR
 diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/README.md b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/README.md
-index f422edc6ad..4b124ef9e7 100644
 --- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/README.md
 +++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/README.md
 @@ -1,84 +1,80 @@
@@ -2136,16 +2183,11 @@ index f422edc6ad..4b124ef9e7 100644
 +This directory builds a bare-metal Corstone-320 application for the fixed-prompt
 +MobileSAM `.pte` generated by `model_export/export_mobilesam.py`. Complete the
 +top-level clean-clone setup and the manual export before running these commands.
- 
--## Build ExecuTorch for Arm
--
--Run the Arm setup first if it has not already been run:
++
 +All commands below run from the ExecuTorch repository root and use the same
 +paths as `model_export/README.md`:
- 
- ```bash
--./examples/arm/setup.sh --i-agree-to-the-contained-eula
--source examples/arm/arm-scratch/setup_path.sh
++
++```bash
 +MOBILE_SAM_EXAMPLE="$PWD/examples/arm/mobilesam_prompt_segmentation_example_ethos_u"
 +MOBILE_SAM_WORK_DIR="${MOBILE_SAM_WORK_DIR:-$PWD/arm_test/mobilesam_manual}"
 +MOBILE_SAM_PTE="$MOBILE_SAM_WORK_DIR/export/mobilesam_point_ethos_u85_448.pte"
@@ -2154,34 +2196,67 @@ index f422edc6ad..4b124ef9e7 100644
 +
 +test -f "$MOBILE_SAM_PTE"
 +test -f "$MOBILE_SAM_METADATA"
- ```
- 
--Build and install the Arm bare-metal ExecuTorch libraries from
--`examples/arm`:
--
--```bash
--cmake --preset arm-baremetal \
--  -DCMAKE_BUILD_TYPE=Release \
--  -B../../cmake-out-arm ../..
--cmake --build ../../cmake-out-arm --target install -j$(nproc)
--```
++```
++
 +The point `(219, 193)` is already embedded in this `.pte`. Changing
 +`MOBILE_SAM_IMAGE` does not require another export, but it does require
 +rebuilding the runtime so CMake regenerates the embedded image header. Changing
 +the point requires another export.
  
--The Arm bare-metal preset installs into the build directory. If you use a
--different `-B` path, pass the same path as `-DET_BUILD_DIR_PATH` when
--configuring the runtime app.
--
--## Configure the Runtime App
-+## Build ExecuTorch for Arm
+ ## Build ExecuTorch for Arm
  
--Use the `.pte` from the export step and any RGB image:
+-Run the Arm setup first if it has not already been run:
 +Load the toolchain installed during clean-clone setup, then build and install
 +the bare-metal ExecuTorch libraries:
  
  ```bash
+-./examples/arm/setup.sh --i-agree-to-the-contained-eula
+ source examples/arm/arm-scratch/setup_path.sh
++
++cmake --preset arm-baremetal -B "$MOBILE_SAM_WORK_DIR/cmake-out-arm"
++cmake --build "$MOBILE_SAM_WORK_DIR/cmake-out-arm" \
++  --target install --parallel
+ ```
+ 
+-Build and install the Arm bare-metal ExecuTorch libraries from
+-`examples/arm`:
++## Configure and compile the runtime
++
++The documented configuration enables the mask dump required by the
++visualization step:
+ 
+ ```bash
+-cmake --preset arm-baremetal \
+-  -DCMAKE_BUILD_TYPE=Release \
+-  -B../../cmake-out-arm ../..
+-cmake --build ../../cmake-out-arm --target install -j$(nproc)
++cmake -S "$MOBILE_SAM_EXAMPLE/runtime" \
++  -B "$MOBILE_SAM_WORK_DIR/runtime" \
++  -DCMAKE_TOOLCHAIN_FILE="$PWD/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake" \
++  -DET_BUILD_DIR_PATH="$MOBILE_SAM_WORK_DIR/cmake-out-arm" \
++  -DET_PTE_FILE_PATH="$MOBILE_SAM_PTE" \
++  -DIMAGE_PATH="$MOBILE_SAM_IMAGE" \
++  -DET_SEGMENTATION_DUMP_MASK=ON \
++  -DPYTHON_EXECUTABLE="$(command -v python)"
++
++cmake --build "$MOBILE_SAM_WORK_DIR/runtime" \
++  --target mobilesam_prompt_segmentation_example --parallel
+ ```
+ 
+-The Arm bare-metal preset installs into the build directory. If you use a
+-different `-B` path, pass the same path as `-DET_BUILD_DIR_PATH` when
+-configuring the runtime app.
++The runtime finds the metadata JSON beside the `.pte`. The generated image
++header reads its input shape and normalization values, resizes the longest
++image side, and pads the shorter side with zeros. The generated `448x448`
++float input is placed in the Corstone-320 DDR input section so it does not
++consume BRAM.
+ 
+-## Configure the Runtime App
+-
+-Use the `.pte` from the export step and any RGB image:
+-
+-```bash
 -cmake \
 -  -DCMAKE_TOOLCHAIN_FILE=$(pwd)/ethos-u-setup/arm-none-eabi-gcc.cmake \
 -  -DET_BUILD_DIR_PATH=../../cmake-out-arm \
@@ -2205,52 +2280,26 @@ index f422edc6ad..4b124ef9e7 100644
 -`Dedicated_Sram_384KB` places the Ethos-U tensor arena in DDR and the fast
 -scratch buffer in SRAM, matching the Corstone-320 linker script. The default
 -method allocator pool is sized for MobileSAM's reduced `448x448` input tensor.
-+source examples/arm/arm-scratch/setup_path.sh
- 
+-
 -The runtime emits validation logs through Arm semihosting by default so the FVP
 -smoke run below prints the segmentation summary. Configure with
 -`-DET_SEGMENTATION_SEMIHOSTING_OUTPUT=OFF` when targeting an environment
 -without semihosting support.
-+cmake --preset arm-baremetal -B "$MOBILE_SAM_WORK_DIR/cmake-out-arm"
-+cmake --build "$MOBILE_SAM_WORK_DIR/cmake-out-arm" \
-+  --target install --parallel
-+```
- 
+-
 -The default target-side mask threshold is `0.0`, matching MobileSAM's mask-logit
 -threshold. The runtime logs foreground counts for several thresholds so users
 -can inspect and retune post-processing without re-exporting the graph.
-+## Configure and compile the runtime
- 
+-
 -## Compile
-+The documented configuration enables the mask dump required by the
-+visualization step:
- 
- ```bash
+-
+-```bash
 -cmake --build mobilesam_point_runtime -j$(nproc) -- mobilesam_prompt_segmentation_example
-+cmake -S "$MOBILE_SAM_EXAMPLE/runtime" \
-+  -B "$MOBILE_SAM_WORK_DIR/runtime" \
-+  -DCMAKE_TOOLCHAIN_FILE="$PWD/examples/arm/ethos-u-setup/arm-none-eabi-gcc.cmake" \
-+  -DET_BUILD_DIR_PATH="$MOBILE_SAM_WORK_DIR/cmake-out-arm" \
-+  -DET_PTE_FILE_PATH="$MOBILE_SAM_PTE" \
-+  -DIMAGE_PATH="$MOBILE_SAM_IMAGE" \
-+  -DET_SEGMENTATION_DUMP_MASK=ON \
-+  -DPYTHON_EXECUTABLE="$(command -v python)"
-+
-+cmake --build "$MOBILE_SAM_WORK_DIR/runtime" \
-+  --target mobilesam_prompt_segmentation_example --parallel
- ```
- 
-+The runtime finds the metadata JSON beside the `.pte`. The generated image
-+header reads its input shape and normalization values, resizes the longest
-+image side, and pads the shorter side with zeros. The generated `448x448`
-+float input is placed in the Corstone-320 DDR input section so it does not
-+consume BRAM.
-+
+-```
 +The defaults match the exporter: mask threshold `0.0`, system configuration
 +`Ethos_U85_SYS_DRAM_Mid`, and memory mode `Dedicated_Sram_384KB`. The memory
 +mode places the Ethos-U tensor arena in DDR and the fast scratch buffer in
 +SRAM. Keep these values unchanged for this example.
-+
+ 
  ## Run on Corstone-320 FVP
  
  ```bash
@@ -2267,7 +2316,7 @@ index f422edc6ad..4b124ef9e7 100644
  ```
  
  Expected logs include:
-@@ -90,21 +86,44 @@ Expected logs include:
+@@ -90,21 +86,44 @@
  - Foreground/background pixel counts.
  - `Model executed successfully.`
  
@@ -2295,8 +2344,10 @@ index f422edc6ad..4b124ef9e7 100644
    --minimum-iou=0.9 \
 -  --output-dir=mobilesam_fvp_visual
 +  --output-dir="$MOBILE_SAM_WORK_DIR/fvp_visual"
-+```
-+
+ ```
+ 
+-The tool writes the decoded target mask, an input/prompt image, a colored FVP
+-overlay, a side-by-side comparison, and target/reference agreement metrics.
 +The tool tolerates non-UTF-8 transport bytes in the FVP log and writes:
 +
 +- Target mask: `$MOBILE_SAM_WORK_DIR/fvp_visual/fvp_mask.png`
@@ -2318,17 +2369,14 @@ index f422edc6ad..4b124ef9e7 100644
 +
 +arm-none-eabi-gcc -dumpmachine
 +arm-none-eabi-g++ -print-file-name=libstdc++.a
- ```
- 
--The tool writes the decoded target mask, an input/prompt image, a colored FVP
--overlay, a side-by-side comparison, and target/reference agreement metrics.
++```
++
 +The first command must print `arm-none-eabi`; the second must print an existing
 +absolute path rather than only `libstdc++.a`.
 diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/image_to_array.py b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/image_to_array.py
-index a3d169907e..eacf4d9e82 100644
 --- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/image_to_array.py
 +++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/image_to_array.py
-@@ -15,17 +15,27 @@ import json
+@@ -15,9 +15,17 @@
  import os
  from argparse import ArgumentParser
  from pathlib import Path
@@ -2336,18 +2384,17 @@ index a3d169907e..eacf4d9e82 100644
  
  import numpy as np
  from PIL import Image
- 
- 
++
++
 +def c_float_literal(value: float) -> str:
 +    literal = f"{value:.9g}"
 +    if "." not in literal and "e" not in literal.lower():
 +        literal += ".0"
 +    return literal + "f"
-+
-+
+ 
+ 
  def convert_image_to_c_array(
-     image_path: str,
-     output_path: str,
+@@ -26,6 +34,8 @@
      image_size: tuple[int, int],
      pixel_mean: tuple[float, float, float],
      pixel_std: tuple[float, float, float],
@@ -2356,7 +2403,7 @@ index a3d169907e..eacf4d9e82 100644
      array_name: str = "image_data",
  ) -> None:
      image = Image.open(image_path).convert("RGB")
-@@ -46,29 +56,89 @@ def convert_image_to_c_array(
+@@ -46,29 +56,89 @@
      padded_data[: resized_size[1], : resized_size[0], :] = data
      data = np.transpose(padded_data, (2, 0, 1)).flatten()
  
@@ -2403,12 +2450,12 @@ index a3d169907e..eacf4d9e82 100644
 +        else:
 +            line = ", ".join(f"{value:.8f}" for value in values)
          array_lines.append("    " + line + ",")
- 
++
 +    if not point_prompts_xy:
 +        point_prompts_xy = [(image_size[0] / 2, image_size[1] / 2)]
 +    prompt_x_values = ", ".join(str(round(point[0])) for point in point_prompts_xy)
 +    prompt_y_values = ", ".join(str(round(point[1])) for point in point_prompts_xy)
-+
+ 
      c_array = f"""#include <stdint.h>
  #include <stddef.h>
  
@@ -2450,7 +2497,7 @@ index a3d169907e..eacf4d9e82 100644
      metadata = json.loads(Path(metadata_path).read_text())
      input_shape = metadata.get("input_shape")
      if not isinstance(input_shape, list) or len(input_shape) != 4:
-@@ -89,16 +159,81 @@ def load_model_metadata(
+@@ -89,16 +159,81 @@
      image_size = (int(input_shape[3]), int(input_shape[2]))
      pixel_mean = tuple(float(value) for value in pixel_mean_values)
      pixel_std = tuple(float(value) for value in pixel_std_values)
@@ -2469,11 +2516,12 @@ index a3d169907e..eacf4d9e82 100644
          image_size,
          (pixel_mean[0], pixel_mean[1], pixel_mean[2]),
          (pixel_std[0], pixel_std[1], pixel_std[2]),
+-    )
 +        metadata.get("io_quantization"),
 +        point_prompts_xy,
-     )
- 
- 
++    )
++
++
 +def convert_metadata_to_c_header(metadata_path: str, output_path: str) -> None:
 +    metadata = json.loads(Path(metadata_path).read_text())
 +    (
@@ -2524,8 +2572,8 @@ index a3d169907e..eacf4d9e82 100644
 +"""
 +    Path(output_path).write_text(header)
 +    print(f"Converted '{metadata_path}' to '{output_path}'")
-+
-+
+ 
+ 
  def main() -> None:
      parser = ArgumentParser()
 -    parser.add_argument("--image", required=True, help="Path to an RGB image.")
@@ -2533,7 +2581,7 @@ index a3d169907e..eacf4d9e82 100644
      parser.add_argument(
          "--output", required=True, help="Output path for the generated C array."
      )
-@@ -107,15 +242,34 @@ def main() -> None:
+@@ -107,15 +242,34 @@
          required=True,
          help="Exporter metadata containing input shape and preprocessing values.",
      )
@@ -2570,7 +2618,6 @@ index a3d169907e..eacf4d9e82 100644
  
  
 diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/main.cpp b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/main.cpp
-index 9acf74ec86..3dec5383a2 100644
 --- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/main.cpp
 +++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/main.cpp
 @@ -14,6 +14,7 @@
@@ -2581,7 +2628,7 @@ index 9acf74ec86..3dec5383a2 100644
  #include <memory>
  #include <vector>
  
-@@ -185,10 +186,6 @@ void summarize_segmentation_output(const Tensor& out) {
+@@ -185,10 +186,6 @@
        out.dim() == 4,
        "Expected mask logits with shape [1, 1, height, width], got rank %zd",
        out.dim());
@@ -2592,7 +2639,7 @@ index 9acf74ec86..3dec5383a2 100644
    ET_CHECK_MSG(out.size(0) == 1, "Only batch size 1 is supported.");
    ET_CHECK_MSG(
        out.size(1) == 1,
-@@ -198,15 +195,30 @@ void summarize_segmentation_output(const Tensor& out) {
+@@ -198,15 +195,30 @@
    const size_t height = static_cast<size_t>(out.size(2));
    const size_t width = static_cast<size_t>(out.size(3));
    const auto strides = out.strides();
@@ -2626,7 +2673,7 @@ index 9acf74ec86..3dec5383a2 100644
    double score_sum = 0.0;
    const float threshold_sweep[] = {
        0.0f,
-@@ -225,7 +237,7 @@ void summarize_segmentation_output(const Tensor& out) {
+@@ -225,7 +237,7 @@
  
    for (size_t y = 0; y < height; ++y) {
      for (size_t x = 0; x < width; ++x) {
@@ -2635,7 +2682,7 @@ index 9acf74ec86..3dec5383a2 100644
        min_score = std::min(min_score, score);
        max_score = std::max(max_score, score);
        score_sum += score;
-@@ -371,15 +383,26 @@ int main() {
+@@ -371,15 +383,26 @@
        expected_elems,
        image_elements);
    ET_CHECK_MSG(
@@ -2651,6 +2698,7 @@ index 9acf74ec86..3dec5383a2 100644
    write_runtime_format("Copying %zu input elements", expected_elems);
 -  for (size_t i = 0; i < expected_elems; ++i) {
 -    input_data[i] = image_data[i];
+-  }
 +  if (input_tensor.scalar_type() == ScalarType::Float) {
 +    ET_CHECK_MSG(
 +        sizeof(image_data[0]) == sizeof(float),
@@ -2664,16 +2712,15 @@ index 9acf74ec86..3dec5383a2 100644
 +        false,
 +        "Expected float or int8 input tensor, got dtype %d",
 +        input_tensor.scalar_type());
-   }
++  }
 +  std::memcpy(input_tensor.mutable_data_ptr(), image_data, sizeof(image_data));
  
    write_runtime_line("Running model execution");
    Error status_inference = method->execute();
 diff --git a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/visualize_fvp_output.py b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/visualize_fvp_output.py
-index bb176c3adf..16d5d3ca9e 100644
 --- a/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/visualize_fvp_output.py
 +++ b/examples/arm/mobilesam_prompt_segmentation_example_ethos_u/runtime/visualize_fvp_output.py
-@@ -31,7 +31,7 @@ def parse_args() -> argparse.Namespace:
+@@ -31,7 +31,7 @@
  def parse_rle_mask(log_path: Path, expected_pixels: int) -> list[int]:
      mask: list[int] = []
      in_dump = False
@@ -2682,12 +2729,54 @@ index bb176c3adf..16d5d3ca9e 100644
          if "executorch:main.cpp:" in line:
              continue
          if "Segmentation mask RLE begin" in line:
+diff --git a/install_requirements.py b/install_requirements.py
+--- a/install_requirements.py
++++ b/install_requirements.py
+@@ -13,25 +13,11 @@
+ 
+ from install_utils import determine_torch_url, is_intel_mac_os, python_is_compatible
+ 
+-# The pip repository that hosts nightly torch packages.
+-# This will be dynamically set based on CUDA availability and CUDA backend enabled/disabled.
+-TORCH_URL_BASE = "https://download.pytorch.org/whl/test"
+-TORCHAO_URL_BASE = "https://download.pytorch.org/whl/nightly"
+-TORCHAO_NIGHTLY_VERSION = "0.18.0.dev20260729"
+-
+-# Since ExecuTorch often uses main-branch features of pytorch, only the nightly
+-# pip versions will have the required features.
+-#
+-# NOTE: If a newly-fetched version of the executorch repo changes the value of
+-# NIGHTLY_VERSION, you should re-run this script to install the necessary
+-# package versions.
+-#
+-# NOTE: If you're changing, make the corresponding change in .ci/docker/ci_commit_pins/pytorch.txt
+-# by picking the hash from the same date in
+-# https://hud.pytorch.org/hud/pytorch/pytorch/nightly/ @lint-ignore
+-#
+-# NOTE: If you're changing, make the corresponding supported CUDA versions in
+-# SUPPORTED_CUDA_VERSIONS in install_utils.py if needed.
++# Use released packages for the Alif E8 Learning Path. The platform selector
++# appends the CPU or CUDA channel to these stable index roots.
++TORCH_URL_BASE = "https://download.pytorch.org/whl"
++TORCHAO_URL_BASE = "https://download.pytorch.org/whl"
++TORCHAO_RELEASE_VERSION = "0.18.0"
+ 
+ 
+ def install_requirements(use_pytorch_nightly):
+@@ -66,7 +52,7 @@
+         # that we don't need to set any version number there because they have already
+         # been installed on CI before this step, so pip won't reinstall them
+         ("torch==2.13.0" if use_pytorch_nightly else "torch"),
+-        f"torchao=={TORCHAO_NIGHTLY_VERSION}",
++        f"torchao=={TORCHAO_RELEASE_VERSION}",
+     ]
+ 
+     # Install the requirements for core ExecuTorch package.
 diff --git a/zephyr/samples/mobilesam-ethosu/CMakeLists.txt b/zephyr/samples/mobilesam-ethosu/CMakeLists.txt
 new file mode 100644
-index 0000000000..32209ab82b
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/CMakeLists.txt
-@@ -0,0 +1,229 @@
+@@ -0,0 +1,243 @@
 +# Copyright (c) Meta Platforms, Inc. and affiliates.
 +# All rights reserved.
 +# Copyright 2026 Arm Limited and/or its affiliates.
@@ -2716,6 +2805,19 @@ index 0000000000..32209ab82b
 +    ON
 +    CACHE BOOL "" FORCE
 +)
++
++set(ETHOSU_DRIVER_PATH
++    "$ENV{ZEPHYR_BASE}/../modules/hal/ethos_u"
++    CACHE PATH "Zephyr workspace Ethos-U core driver"
++)
++if(NOT EXISTS "${ETHOSU_DRIVER_PATH}/include/ethosu_driver.h")
++  message(FATAL_ERROR "ETHOSU_DRIVER_PATH must point to the Zephyr Ethos-U HAL module.")
++endif()
++# Compile against the same driver that Zephyr links, without fetching another SDK.
++set(ETHOS_SDK_PATH "${CMAKE_CURRENT_BINARY_DIR}/ethos-u" CACHE PATH "" FORCE)
++file(MAKE_DIRECTORY "${ETHOS_SDK_PATH}/core_platform")
++file(COPY "${ETHOSU_DRIVER_PATH}/include"
++  DESTINATION "${ETHOS_SDK_PATH}/core_software/core_driver")
 +
 +set(ET_PTE_FILE_PATH
 +    ""
@@ -2887,9 +2989,10 @@ index 0000000000..32209ab82b
 +target_sources(
 +  app
 +  PRIVATE
-+    src/camera.cpp src/display.cpp src/main.cpp ${MODEL_HEADER} ${LOGO_HEADER}
++    src/camera.cpp src/main.cpp ${MODEL_HEADER}
 +    ${EXECUTORCH_DIR}/examples/arm/common/arm_memory_allocator.cpp
 +)
++target_sources_ifdef(CONFIG_MOBILESAM_DISPLAY app PRIVATE src/display.cpp ${LOGO_HEADER})
 +target_include_directories(
 +  app PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/generated"
 +              ${EXECUTORCH_DIR}/examples/arm/common
@@ -2919,10 +3022,9 @@ index 0000000000..32209ab82b
 +endif()
 diff --git a/zephyr/samples/mobilesam-ethosu/Kconfig b/zephyr/samples/mobilesam-ethosu/Kconfig
 new file mode 100644
-index 0000000000..8d129befff
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/Kconfig
-@@ -0,0 +1,26 @@
+@@ -0,0 +1,34 @@
 +# Copyright (c) Meta Platforms, Inc. and affiliates.
 +# All rights reserved.
 +# Copyright 2026 Arm Limited and/or its affiliates.
@@ -2932,6 +3034,14 @@ index 0000000000..8d129befff
 +source "Kconfig.zephyr"
 +
 +menu "ExecuTorch MobileSAM Ethos-U sample configuration"
++
++config MOBILESAM_DISPLAY
++	bool "Enable the optional on-board dashboard"
++	depends on DISPLAY && MIPI_DSI && DT_HAS_FOCUSLCDS_MW405_ENABLED
++	default n
++	help
++	  Render camera frames and masks on the on-board display. This optional
++	  mode still reports unresolved DSI link errors on the tested board.
 +
 +config EXECUTORCH_METHOD_ALLOCATOR_POOL_SIZE
 +	int "Method allocator pool size in bytes"
@@ -2951,10 +3061,25 @@ index 0000000000..8d129befff
 +endmenu
 diff --git a/zephyr/samples/mobilesam-ethosu/README.md b/zephyr/samples/mobilesam-ethosu/README.md
 new file mode 100644
-index 0000000000..2ee8292290
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/README.md
-@@ -0,0 +1,194 @@
+@@ -0,0 +1,210 @@
++## Default camera and NPU mode
++
++The default build captures camera frames, executes the quantized model, selects masks,
++and reports progress over UART. CDC200, DSI and the panel are disabled, and the MIPI
++route stays on the camera. `CONFIG_MOBILESAM_DISPLAY` defaults to `n`.
++
++The optional dashboard retains unresolved DSI acknowledgment/packet errors on the
++tested hardware. To build that extension, add both of these CMake arguments:
++
++```bash
++-DEXTRA_CONF_FILE="$EXECUTORCH_ROOT/zephyr/samples/mobilesam-ethosu/dashboard.conf" \
++-DEXTRA_DTC_OVERLAY_FILE="$EXECUTORCH_ROOT/zephyr/samples/mobilesam-ethosu/boards/dashboard.overlay"
++```
++
++Do not use the optional display extension as the error-free deployment reference.
++
 +# Live MobileSAM on Alif Ensemble E8
 +
 +This Zephyr sample captures the Alif E8 Development Kit's on-board MT9M114
@@ -3151,7 +3276,6 @@ index 0000000000..2ee8292290
 +  `0xC0000000`.
 diff --git a/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.conf b/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.conf
 new file mode 100644
-index 0000000000..f78458d922
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.conf
 @@ -0,0 +1,12 @@
@@ -3169,10 +3293,9 @@ index 0000000000..f78458d922
 +CONFIG_USE_ALIF_HAL_OSPI=y
 diff --git a/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.overlay b/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.overlay
 new file mode 100644
-index 0000000000..699f60afee
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/boards/alif_e8_dk_ae822fa0e5597xx0_rtss_hp.overlay
-@@ -0,0 +1,151 @@
+@@ -0,0 +1,156 @@
 +/* Copyright 2026 Arm Limited and/or its affiliates.
 + *
 + * SPDX-License-Identifier: Apache-2.0
@@ -3203,11 +3326,12 @@ index 0000000000..699f60afee
 +/ {
 +	chosen {
 +		zephyr,sram = &app_sram;
-+		zephyr,display = &cdc200;
++		/delete-property/ zephyr,display;
 +	};
 +};
 +
 +&cdc200 {
++	status = "disabled";
 +	width = <480>;
 +	height = <800>;
 +	hfront-porch = <5>;
@@ -3261,7 +3385,7 @@ index 0000000000..699f60afee
 +};
 +
 +&mipi_dsi {
-+	status = "okay";
++	status = "disabled";
 +};
 +
 +&gpio14 {
@@ -3324,9 +3448,12 @@ index 0000000000..699f60afee
 +&ethosu1 {
 +	status = "okay";
 +};
++
++&mw405 {
++	status = "disabled";
++};
 diff --git a/zephyr/samples/mobilesam-ethosu/boards/mt9m114_selfie_deferred.overlay b/zephyr/samples/mobilesam-ethosu/boards/mt9m114_selfie_deferred.overlay
 new file mode 100644
-index 0000000000..ab12948140
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/boards/mt9m114_selfie_deferred.overlay
 @@ -0,0 +1,8 @@
@@ -3340,7 +3467,6 @@ index 0000000000..ab12948140
 +};
 diff --git a/zephyr/samples/mobilesam-ethosu/prj.conf b/zephyr/samples/mobilesam-ethosu/prj.conf
 new file mode 100644
-index 0000000000..406475ff37
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/prj.conf
 @@ -0,0 +1,44 @@
@@ -3360,8 +3486,8 @@ index 0000000000..406475ff37
 +CONFIG_HEAP_MEM_POOL_SIZE=8192
 +
 +CONFIG_REQUIRES_FLOAT_PRINTF=y
-+CONFIG_DISPLAY=y
-+CONFIG_MIPI_DSI=y
++CONFIG_DISPLAY=n
++CONFIG_MIPI_DSI=n
 +CONFIG_VIDEO=y
 +CONFIG_VIDEO_BUFFER_POOL_SZ_MAX=64
 +CONFIG_VIDEO_BUFFER_POOL_NUM_MAX=1
@@ -3390,7 +3516,6 @@ index 0000000000..406475ff37
 +CONFIG_EXECUTORCH_FAST_TEMP_ALLOCATOR_POOL_SIZE=393216
 diff --git a/zephyr/samples/mobilesam-ethosu/sample.yaml b/zephyr/samples/mobilesam-ethosu/sample.yaml
 new file mode 100644
-index 0000000000..2482122954
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/sample.yaml
 @@ -0,0 +1,16 @@
@@ -3412,7 +3537,6 @@ index 0000000000..2482122954
 +  sample.executorch.mobilesam_ethosu: {}
 diff --git a/zephyr/samples/mobilesam-ethosu/scripts/png_to_logo_header.py b/zephyr/samples/mobilesam-ethosu/scripts/png_to_logo_header.py
 new file mode 100644
-index 0000000000..7d79570c90
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/scripts/png_to_logo_header.py
 @@ -0,0 +1,93 @@
@@ -3511,16 +3635,16 @@ index 0000000000..7d79570c90
 +    main()
 diff --git a/zephyr/samples/mobilesam-ethosu/src/camera.cpp b/zephyr/samples/mobilesam-ethosu/src/camera.cpp
 new file mode 100644
-index 0000000000..cc9111165d
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/src/camera.cpp
-@@ -0,0 +1,249 @@
+@@ -0,0 +1,287 @@
 +/* Copyright 2026 Arm Limited and/or its affiliates.
 + *
 + * SPDX-License-Identifier: Apache-2.0
 + */
 +
 +#include "camera.h"
++#include "display.h"
 +
 +#include <zephyr/device.h>
 +#include <zephyr/drivers/gpio.h>
@@ -3581,6 +3705,11 @@ index 0000000000..cc9111165d
 +      DEVICE_DT_GET(DT_NODELABEL(gpio9)), 1, GPIO_ACTIVE_LOW};
 +  const struct gpio_dt_spec sensor_sleep{
 +      DEVICE_DT_GET(DT_NODELABEL(gpio6)), 3, GPIO_ACTIVE_LOW};
++#ifdef CONFIG_MOBILESAM_DISPLAY
++  if (!pause_display()) {
++    return false;
++  }
++#endif
 +  int sensor_init_status =
 +      gpio_pin_configure_dt(&mipi_camera_select, GPIO_OUTPUT_INACTIVE);
 +  if (sensor_init_status == 0) {
@@ -3616,7 +3745,7 @@ index 0000000000..cc9111165d
 +  camera_diagnostics[2] = static_cast<uint32_t>(sensor_init_status);
 +  camera_diagnostics[9] = static_cast<uint32_t>(sensor_init_status);
 +  camera_diagnostics[10] = device_is_ready(camera_sensor);
-+  if (!device_is_ready(camera_sensor)) {
++  if (sensor_init_status != 0 || !device_is_ready(camera_sensor)) {
 +    printk(
 +        "ERROR MT9M114 camera sensor initialization failed: %d\n",
 +        sensor_init_status);
@@ -3663,6 +3792,20 @@ index 0000000000..cc9111165d
 +  }
 +
 +  format.pitch = format.width * 2;
++  // Sensor set-format starts streaming; restore LP11 before configuring CSI.
++  const int sensor_format_status =
++      video_set_format(camera_sensor, VIDEO_EP_OUT, &format);
++  camera_diagnostics[5] = static_cast<uint32_t>(sensor_format_status);
++  if (sensor_format_status != 0) {
++    printk("ERROR camera sensor RAW10 format failed: %d\n", sensor_format_status);
++    return false;
++  }
++  const int sensor_stop_status = video_stream_stop(camera_sensor);
++  camera_diagnostics[6] = static_cast<uint32_t>(sensor_stop_status);
++  if (sensor_stop_status != 0) {
++    printk("ERROR camera sensor suspend failed: %d\n", sensor_stop_status);
++    return false;
++  }
 +  const int input_status =
 +      video_set_format(camera_device, VIDEO_EP_IN, &format);
 +  camera_diagnostics[14] = static_cast<uint32_t>(input_status);
@@ -3730,16 +3873,34 @@ index 0000000000..cc9111165d
 +    return false;
 +  }
 +  frame_dequeued = true;
-+  gpio_pin_set_dt(&mipi_camera_select, 0);
++#ifdef CONFIG_MOBILESAM_DISPLAY
++  const int route_status = gpio_pin_set_dt(&mipi_camera_select, 0);
++  if (route_status != 0) {
++    printk("ERROR MIPI display routing failed: %d\n", route_status);
++    return false;
++  }
++  k_usleep(100);
++  return resume_display();
++#else
 +  return true;
++#endif
 +}
 +
 +bool release_camera_frame() {
 +  if (!frame_dequeued) {
 +    return false;
 +  }
-+  gpio_pin_set_dt(&mipi_camera_select, 1);
++#ifdef CONFIG_MOBILESAM_DISPLAY
++  if (!pause_display()) {
++    return false;
++  }
++  const int route_status = gpio_pin_set_dt(&mipi_camera_select, 1);
++  if (route_status != 0) {
++    printk("ERROR MIPI camera routing failed: %d\n", route_status);
++    return false;
++  }
 +  k_usleep(100);
++#endif
 +  const int enqueue_status =
 +      video_enqueue(camera_device, VIDEO_EP_OUT, &camera_buffer);
 +  camera_diagnostics[22] = static_cast<uint32_t>(enqueue_status);
@@ -3766,7 +3927,6 @@ index 0000000000..cc9111165d
 +}
 diff --git a/zephyr/samples/mobilesam-ethosu/src/camera.h b/zephyr/samples/mobilesam-ethosu/src/camera.h
 new file mode 100644
-index 0000000000..41938d160b
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/src/camera.h
 @@ -0,0 +1,21 @@
@@ -3793,10 +3953,9 @@ index 0000000000..41938d160b
 +    uint32_t object_count);
 diff --git a/zephyr/samples/mobilesam-ethosu/src/display.cpp b/zephyr/samples/mobilesam-ethosu/src/display.cpp
 new file mode 100644
-index 0000000000..4b8b4e4737
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/src/display.cpp
-@@ -0,0 +1,447 @@
+@@ -0,0 +1,482 @@
 +/* Copyright 2026 Arm Limited and/or its affiliates.
 + *
 + * SPDX-License-Identifier: Apache-2.0
@@ -4213,6 +4372,41 @@ index 0000000000..4b8b4e4737
 +  return true;
 +}
 +
++bool pause_display() {
++  if (!display_ready) {
++    printk("ERROR cannot pause an unavailable display\n");
++    return false;
++  }
++  const int stop_status =
++      cdc200_disable_at_vblank(display_device, K_MSEC(100));
++  if (stop_status != 0) {
++    printk("ERROR CDC frame-boundary stop failed: %d\n", stop_status);
++    return false;
++  }
++  const struct device* dsi = DEVICE_DT_GET(DT_NODELABEL(mipi_dsi));
++  const int status = dsi_dw_suspend_video(dsi);
++  if (status != 0) {
++    printk("ERROR MIPI-DSI suspension failed: %d\n", status);
++    return false;
++  }
++  return true;
++}
++
++bool resume_display() {
++  if (!display_ready) {
++    printk("ERROR cannot resume an unavailable display\n");
++    return false;
++  }
++  const struct device* dsi = DEVICE_DT_GET(DT_NODELABEL(mipi_dsi));
++  const int status = dsi_dw_set_mode(dsi, DSI_DW_VIDEO_MODE);
++  if (status != 0) {
++    printk("ERROR MIPI-DSI video resume failed: %d\n", status);
++    return false;
++  }
++  cdc200_set_enable(display_device, true);
++  return true;
++}
++
 +void display_running() {
 +  if (display_ready) {
 +    draw_dashboard(nullptr, nullptr, nullptr, 0, 0, 0, 0, 0, 0, nullptr);
@@ -4246,10 +4440,9 @@ index 0000000000..4b8b4e4737
 +}
 diff --git a/zephyr/samples/mobilesam-ethosu/src/display.h b/zephyr/samples/mobilesam-ethosu/src/display.h
 new file mode 100644
-index 0000000000..ddacbc35ff
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/src/display.h
-@@ -0,0 +1,23 @@
+@@ -0,0 +1,25 @@
 +/* Copyright 2026 Arm Limited and/or its affiliates.
 + *
 + * SPDX-License-Identifier: Apache-2.0
@@ -4261,6 +4454,8 @@ index 0000000000..ddacbc35ff
 +#include <cstdint>
 +
 +bool initialize_display();
++bool pause_display();
++bool resume_display();
 +void display_running();
 +void display_result(
 +    const int8_t* frame_data,
@@ -4275,10 +4470,9 @@ index 0000000000..ddacbc35ff
 +    const size_t* foreground_pixels);
 diff --git a/zephyr/samples/mobilesam-ethosu/src/main.cpp b/zephyr/samples/mobilesam-ethosu/src/main.cpp
 new file mode 100644
-index 0000000000..86be5897cd
 --- /dev/null
 +++ b/zephyr/samples/mobilesam-ethosu/src/main.cpp
-@@ -0,0 +1,424 @@
+@@ -0,0 +1,431 @@
 +/* Copyright (c) Meta Platforms, Inc. and affiliates.
 + * All rights reserved.
 + * Copyright 2026 Arm Limited and/or its affiliates.
@@ -4540,9 +4734,15 @@ index 0000000000..86be5897cd
 +int main() {
 +  printk("\nLive MobileSAM / Ethos-U85-256 / Alif E8\n");
 +  executorch::runtime::runtime_init();
-+  if (initialize_display()) {
-+    display_running();
++#ifdef CONFIG_MOBILESAM_DISPLAY
++  if (!initialize_display()) {
++    printk("ERROR display initialization failed\n");
++    return 1;
 +  }
++  display_running();
++#else
++  printk("Camera + NPU mode; on-board dashboard disabled\n");
++#endif
 +
 +#if DT_NODE_EXISTS(DT_NODELABEL(ospi_flash))
 +  const struct device* ospi_flash = DEVICE_DT_GET(DT_NODELABEL(ospi_flash));
@@ -4564,7 +4764,6 @@ index 0000000000..86be5897cd
 +      "PTE address: 0x%08x, size: %u bytes\n",
 +      static_cast<unsigned int>(ET_MODEL_PTE_ADDRESS),
 +      static_cast<unsigned int>(ET_MODEL_PTE_SIZE));
-+  printk("PTE flash verification: passed\n");
 +
 +  BufferDataLoader loader(pte, ET_MODEL_PTE_SIZE);
 +  Result<Program> program_result = Program::load(&loader);
@@ -4678,6 +4877,7 @@ index 0000000000..86be5897cd
 +      return 1;
 +    }
 +
++#ifdef CONFIG_MOBILESAM_DISPLAY
 +    const auto mask_strides = masks.strides();
 +    display_result(
 +        input_data,
@@ -4690,6 +4890,7 @@ index 0000000000..86be5897cd
 +        mask_strides[3],
 +        inference_ms,
 +        selected.foreground);
++#endif
 +    record_live_status(frame_number, inference_ms, selected.count);
 +    printk(
 +        "Frame %zu: %" PRIu64 " ms, %zu objects\n",
@@ -4703,58 +4904,40 @@ index 0000000000..86be5897cd
 +  }
 +#endif
 +}
-diff --git a/install_requirements.py b/install_requirements.py
---- a/install_requirements.py
-+++ b/install_requirements.py
-@@ -13,25 +13,11 @@
- 
- from install_utils import determine_torch_url, is_intel_mac_os, python_is_compatible
- 
--# The pip repository that hosts nightly torch packages.
--# This will be dynamically set based on CUDA availability and CUDA backend enabled/disabled.
--TORCH_URL_BASE = "https://download.pytorch.org/whl/test"
--TORCHAO_URL_BASE = "https://download.pytorch.org/whl/nightly"
--TORCHAO_NIGHTLY_VERSION = "0.18.0.dev20260729"
--
--# Since ExecuTorch often uses main-branch features of pytorch, only the nightly
--# pip versions will have the required features.
--#
--# NOTE: If a newly-fetched version of the executorch repo changes the value of
--# NIGHTLY_VERSION, you should re-run this script to install the necessary
--# package versions.
--#
--# NOTE: If you're changing, make the corresponding change in .ci/docker/ci_commit_pins/pytorch.txt
--# by picking the hash from the same date in
--# https://hud.pytorch.org/hud/pytorch/pytorch/nightly/ @lint-ignore
--#
--# NOTE: If you're changing, make the corresponding supported CUDA versions in
--# SUPPORTED_CUDA_VERSIONS in install_utils.py if needed.
-+# Use released packages for the Alif E8 Learning Path. The platform selector
-+# appends the CPU or CUDA channel to these stable index roots.
-+TORCH_URL_BASE = "https://download.pytorch.org/whl"
-+TORCHAO_URL_BASE = "https://download.pytorch.org/whl"
-+TORCHAO_RELEASE_VERSION = "0.18.0"
- 
- 
- def install_requirements(use_pytorch_nightly):
-@@ -66,7 +52,7 @@
-         # that we don't need to set any version number there because they have already
-         # been installed on CI before this step, so pip won't reinstall them
-         ("torch==2.13.0" if use_pytorch_nightly else "torch"),
--        f"torchao=={TORCHAO_NIGHTLY_VERSION}",
-+        f"torchao=={TORCHAO_RELEASE_VERSION}",
-     ]
- 
-     # Install the requirements for core ExecuTorch package.
-diff --git a/backends/arm/requirements-arm-tosa.txt b/backends/arm/requirements-arm-tosa.txt
---- a/backends/arm/requirements-arm-tosa.txt
-+++ b/backends/arm/requirements-arm-tosa.txt
-@@ -6,7 +6,7 @@
- # These dependencies need to match pyproject.toml
- 
- ml_dtypes == 0.5.1
--flatbuffers == 24.3.25
-+flatbuffers == 25.2.10
- tosa-adapter-model-explorer == 0.1.0
- ai-edge-model-explorer >= 0.1.16
- pytest-timeout == 2.4.0
+diff --git a/zephyr/samples/mobilesam-ethosu/dashboard.conf b/zephyr/samples/mobilesam-ethosu/dashboard.conf
+new file mode 100644
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/dashboard.conf
+@@ -0,0 +1,6 @@
++# Copyright 2026 Arm Limited and/or its affiliates.
++# SPDX-License-Identifier: Apache-2.0
++
++CONFIG_DISPLAY=y
++CONFIG_MIPI_DSI=y
++CONFIG_MOBILESAM_DISPLAY=y
+diff --git a/zephyr/samples/mobilesam-ethosu/boards/dashboard.overlay b/zephyr/samples/mobilesam-ethosu/boards/dashboard.overlay
+new file mode 100644
+--- /dev/null
++++ b/zephyr/samples/mobilesam-ethosu/boards/dashboard.overlay
+@@ -0,0 +1,21 @@
++/* Copyright 2026 Arm Limited and/or its affiliates.
++ * SPDX-License-Identifier: Apache-2.0
++ */
++
++/ {
++	chosen {
++		zephyr,display = &cdc200;
++	};
++};
++
++&cdc200 {
++	status = "okay";
++};
++
++&mipi_dsi {
++	status = "okay";
++};
++
++&mw405 {
++	status = "okay";
++};
