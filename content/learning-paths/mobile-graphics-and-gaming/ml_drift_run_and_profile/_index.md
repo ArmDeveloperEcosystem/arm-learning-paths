@@ -18,9 +18,7 @@ prerequisites:
     - Arm Performance Studio
     - Familiarity with C++ and command-line tools
 author: Kieran Hejmadi
-draft: true
-cascade:
-    draft: true
+
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
