@@ -25,7 +25,7 @@ prerequisites:
 skilllevels: Introductory
 subjects: Performance and Architecture
 platforms:
-  - Google Cloud
+  - Google Axion
 
 armips:
   - Neoverse

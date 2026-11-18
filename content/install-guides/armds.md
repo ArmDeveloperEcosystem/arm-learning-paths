@@ -15,9 +15,7 @@ additional_search_terms:
 ### Estimated completion time in minutes (please use integer multiple of 5)
 minutes_to_complete: 10
 
-test_maintenance: true
-test_images:
-  - ubuntu:latest
+test_maintenance: false
 
 author: Ronan Synnott
 
@@ -55,35 +53,45 @@ For more information about the Product Download Hub, refer to the [Product Downl
 
 ### How do I install on Windows?
 
-Unzip the downloaded installation archive.
+Unzip the downloaded `.zip` file.
 
-It is easiest to simply double-click the installation wizard (`armds-<version>.exe`), and follow on-screen instructions.
+To use the installation wizard, run `armds-2026.0-1-win-x86_64.msi` to open the Arm Development Studio setup wizard, then follow the on-screen instructions.
 
-To install silently from the command line, use similar to the following:
+To install silently from the command line, open a command prompt with administrative privileges and run `msiexec` on the `.msi` file:
 ```command
-msiexec /i DS000-BN-00000-r23p1-00rel0\data\armds-2024.0.msi EULA=1 SKIP_DRIVERS=1 /qn
+msiexec /i armds-2026.0-1-win-x86_64.msi EULA=1 SKIP_DRIVERS=1 /qn
 ```
-{{% notice  Drivers%}}
-This command does not install the debug probe USB drivers. If these are needed, remove `SKIP_DRIVERS=1` from the above. This requires manual interaction. They can also be installed manually later (`<install_dir>\sw\driver_files\driver_install.bat`) if necessary.
+{{% notice Drivers %}}
+This command does not install the debug probe USB drivers. If these are needed, remove `SKIP_DRIVERS=1` from the command. This requires manual interaction. You can also install them later by running `<install_dir>\sw\driver_files\driver_install.bat`.
 {{% /notice %}}
 
 Full installation instructions are provided in the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/).
-* [Install Arm Development Studio on Windows using the command line](https://developer.arm.com/documentation/101469/2024-0/Installing-and-configuring-Arm-Development-Studio/Install-Arm-Development-Studio-on-Windows-using-the-command-line)
+* [Install Arm Development Studio on Windows using the command line](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Install-Arm-Development-Studio-on-Windows-using-the-command-line)
 * [Install Arm Development Studio on Windows using the installation wizard](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Install-Arm-Development-Studio-on-Windows-using-the-installation-wizard)
 
 ### How do I install on Linux?
 
-Extract the downloaded package:
+The Linux installer is a single self-extracting `.sh` script. Make it executable and run it, following the on-screen instructions:
+
 ```command
-tar -xf DS000-BN-00001-r24p0-00rel0.tgz
-cd DS000-BN-00001-r24p0-00rel0
+chmod +x armds-2026.0-1-lin-x86_64.sh
+./armds-2026.0-1-lin-x86_64.sh
 ```
-To install silently from the command line, use similar to the following.
+
+To install silently from the command line, use a command similar to the following:
+
 ```command
-sudo ./armds-2024.0.sh --i-agree-to-the-contained-eula --no-interactive -f -q
+./armds-2026.0-1-lin-x86_64.sh --i-agree-to-the-contained-eula --no-interactive -f -q
 ```
-{{% notice Libraries%}}
-The install may report that additional [libraries](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Additional-Linux-libraries) are needed to be installed.
+
+By default, the installer requires a post-install step that needs root privileges to install USB drivers for DSTREAM debug hardware. If you don't have root access, or don't need the drivers, add `--skip-post-install`. You can run the post-install step later as root:
+
+```command
+sudo <install_directory>/run_post_install_for_Arm_Development_Studio_2026.0-1.sh
+```
+
+{{% notice Libraries %}}
+The installer runs a dependency check and lists any missing Linux libraries. Install these before using Arm Development Studio. The `dependency_check_linux-x86_64.sh` script in `<install_directory>/sw/dependency_check` identifies the required libraries. For more information, see [Additional Linux libraries](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Additional-Linux-libraries).
 {{% /notice %}}
 
 Full installation instructions are provided in the Linux section of the [Arm Development Studio Getting Started Guide](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Installing-on-Linux).
@@ -100,30 +108,30 @@ or set a default version with:
 ```command
 select_default_toolchain
 ```
-{{% notice  Toolchains%}}
-By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
+{{% notice Toolchains %}}
+By default, only the supplied `Arm Toolchain for Embedded Professional` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
 {{% /notice %}}
 
 ### How do I configure the Linux command line?
 
-Navigate to `bin` directory of your install, for example:
+Navigate to the `bin` directory of your install, for example:
 ```command
-cd /opt/arm/developmentstudio-2024.0/bin
+cd $HOME/developmentstudio-2026.0-1/bin
 ```
 Use `suite_exec` to start an appropriate command prompt, for example:
 ```command
-./suite_exec --toolchain "Arm Compiler for Embedded 6" bash
+./suite_exec --toolchain "Arm Toolchain for Embedded Professional" bash
 ```
 To remove the need for the `--toolchain` option, first run:
 ```command
 ./select_default_toolchain
 ```
-and select the desired toolchain. You can then configure with simply:
+and select the desired toolchain. You can then configure with:
 ```command
 ./suite_exec bash
 ```
-{{% notice  Toolchains%}}
-By default, only the supplied `Arm Compiler for Embedded 6` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
+{{% notice Toolchains %}}
+By default, only the supplied `Arm Toolchain for Embedded Professional` is installed with Arm Development Studio. Other versions can be installed and [registered](https://developer.arm.com/documentation/101469/latest/Installing-and-configuring-Arm-Development-Studio/Register-a-compiler-toolchain).
 {{% /notice %}}
 
 ## How do I use the Arm Development Studio IDE?
@@ -145,8 +153,24 @@ Full license setup instructions are available in the [Arm Software Licensing ins
 
 ## How do I get started with Arm Development Studio?
 
-To verify everything is working OK, run the compiler from your command prompt:
+To verify everything is working, configure a toolchain and run the compiler from your command prompt. On Linux:
+
 ```command
-armclang --version
+cd $HOME/developmentstudio-2026.0-1/bin
+./suite_exec --toolchain "Arm Toolchain for Embedded Professional" bash -c "clang --version"
 ```
+
+The output is similar to:
+
+```output
+Arm Toolchain for Embedded Professional 22.1.0 build 92, based on clang version 22.1.0
+Target: aarch64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /home/ubuntu/developmentstudio-2026.0-1/sw/atfe-pro22.1.0/bin
+```
+
+{{% notice License %}}
+The compiler reports its version without a license, but running it to build code requires a valid license. See [How do I set up the product license?](#how-do-i-set-up-the-product-license) to set up an evaluation or full license.
+{{% /notice %}}
+
 You should now be ready to use Arm Development Studio. See the [Get started with Arm Development Studio](/learning-paths/embedded-and-microcontrollers/armds/) learning path for more information.

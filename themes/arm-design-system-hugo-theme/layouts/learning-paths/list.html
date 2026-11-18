@@ -144,7 +144,7 @@ Calls to:
                                     tag-{{. | urlize}}
                                 {{ end }}
                                 {{ with .learning_path.Params.subjects }}
-                                    tag-{{. | urlize}}
+                                    tag-{{replace . "/" "-" | urlize}}
                                 {{ end }}
                                 {{ with .learning_path.Params.platforms }}
                                     {{ range . }}

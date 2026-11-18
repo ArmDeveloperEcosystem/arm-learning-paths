@@ -67,7 +67,7 @@ author: Powen Yang
 
 ### Tags
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
     - Mali
     - Immortalis

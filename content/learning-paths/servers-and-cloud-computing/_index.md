@@ -7,15 +7,18 @@ key_ip:
 - Neoverse
 maintopic: true
 pinned_learning_paths:
+- firecracker-ai-sandbox
+- nested-virtualization
 - arm-mcp-server
-- learning-paths/cross-platform/vectorization-comparison
+- memory-subsystem
+- sve2-match
 - performix-microarchitecture
 operatingsystems_filter:
 - Android: 3
-- Linux: 270
-- macOS: 19
+- Linux: 286
+- macOS: 21
 - other: 1
-- Windows: 17
+- Windows: 18
 pinned_modules:
 - module:
     name: Recommended getting started learning paths
@@ -23,26 +26,29 @@ pinned_modules:
     - providers
     - migration
 subjects_filter:
+- Agentic AI: 4
+- AI/ML: 48
 - CI-CD: 14
-- Containers and Virtualization: 50
+- Containers and Virtualization: 54
 - Databases: 29
 - Libraries: 9
-- ML: 42
-- Performance and Architecture: 109
+- Performance and Architecture: 112
 - Storage: 2
-- Web: 19
+- Web: 21
 subtitle: Migrate and optimize cloud native apps on Arm-based servers.
 title: Servers and Cloud Computing
 tools_software_languages_filter:
 - 5G: 1
 - ACL: 1
 - ActiveGate: 1
+- Agent: 1
 - AI: 1
 - Alluxio: 1
-- Amazon ECS: 2
+- Amazon ECS: 3
 - Amazon EKS: 4
 - Android Studio: 1
 - Ansible: 2
+- Antigravity: 1
 - Apache: 1
 - Apache Arrow: 1
 - Apache Beam: 1
@@ -51,13 +57,15 @@ tools_software_languages_filter:
 - Apache Tomcat: 2
 - ApacheBench: 1
 - Argo CD: 1
+- Arm AI Portal: 4
 - Arm Compiler for Linux: 1
 - Arm Development Studio: 3
 - Arm ISA: 1
 - Arm Performance Libraries: 3
-- Arm Performix: 10
+- Arm Performix: 12
 - Arm Streamline: 1
 - Arm System Characterization Tool: 1
+- Arm Topo: 1
 - armclang: 1
 - armie: 1
 - ArmRAL: 1
@@ -79,9 +87,10 @@ tools_software_languages_filter:
 - Azure: 2
 - Azure CLI: 5
 - Azure Portal: 1
-- Bash: 8
+- Bash: 9
 - bash: 2
 - Bastion: 3
+- BenchMARL: 1
 - Benchstat: 1
 - BitBake: 1
 - BOLT: 2
@@ -93,19 +102,22 @@ tools_software_languages_filter:
 - Cargo: 1
 - cassandra-stress: 1
 - CCA: 10
+- Ceph: 1
 - ChromaDB: 1
+- Chrome: 1
 - CircleCI: 2
 - Clair: 1
 - Clang: 14
+- Claude Code: 1
 - ClickBench: 1
 - ClickHouse: 2
 - Cloud Build: 1
 - Cloud SQL: 1
-- CMake: 6
+- CMake: 7
 - Codex: 1
 - Confidential Containers: 1
 - Couchbase: 1
-- CPP: 21
+- CPP: 22
 - CPUFreq: 1
 - cpupower: 1
 - cqlsh: 1
@@ -116,7 +128,7 @@ tools_software_languages_filter:
 - Demo: 3
 - DevStack: 1
 - Django: 2
-- Docker: 41
+- Docker: 43
 - Docker Buildx: 1
 - dotnet: 5
 - Dynatrace: 1
@@ -125,11 +137,12 @@ tools_software_languages_filter:
 - Envoy: 3
 - Erlang: 1
 - ESRally: 1
-- ExecuTorch: 1
+- ExecuTorch: 2
 - Facter: 1
-- FastAPI: 1
+- FastAPI: 2
 - Fastpath: 1
 - fio: 1
+- Firecracker: 1
 - FlameGraph: 1
 - Flask: 4
 - Flink: 2
@@ -138,15 +151,14 @@ tools_software_languages_filter:
 - FunASR: 1
 - FVP: 9
 - Gardener: 1
-- GCC: 30
+- GCC: 32
 - gdb: 1
-- Geekbench: 1
 - Gemma: 1
-- Generative AI: 13
+- Generative AI: 15
 - Gerrit: 1
 - Git: 2
 - GitHub: 3
-- GitHub Actions: 3
+- GitHub Actions: 4
 - GitHub CLI: 1
 - GitHub Copilot: 4
 - GitLab: 2
@@ -161,17 +173,20 @@ tools_software_languages_filter:
 - Google Cloud: 2
 - Google Cloud Pub/Sub: 1
 - Google Dataflow: 1
+- Google Kubernetes Engine: 1
 - Google Test: 1
 - Grafana: 1
 - Groovy: 1
 - gRPC: 1
+- gVisor: 1
 - Hadoop: 1
 - HammerDB: 1
 - Helm: 4
 - Herd7: 1
 - Hiera: 1
 - Hive: 1
-- Hugging Face: 13
+- Hugging Face: 18
+- Hugo: 1
 - hwmon: 1
 - InnoDB: 1
 - Intrinsics: 1
@@ -179,6 +194,7 @@ tools_software_languages_filter:
 - ipmitool: 1
 - Jaeger: 1
 - Java: 11
+- Java Object Layout: 1
 - JavaScript: 1
 - JAX: 1
 - Jenkins: 1
@@ -193,58 +209,66 @@ tools_software_languages_filter:
 - Keycloak: 1
 - KinD: 1
 - Kiro: 1
+- KleidiAI: 2
 - Kolla-Ansible: 1
 - kube-bench: 1
 - kubectl: 2
 - Kubernetes: 21
 - Kustomize: 1
+- KVM: 2
+- LeRobot: 1
 - Libamath: 2
 - libbpf: 1
+- libvirt: 1
 - Linaro Forge: 1
 - Linux: 1
 - Linux kernel: 1
 - Litmus7: 1
-- llama.cpp: 4
+- llama-roofline: 1
+- llama.cpp: 5
 - LlamaIndex: 1
-- LLM: 12
+- LLM: 13
 - LLVM: 2
 - llvm-mca: 1
 - LM Evaluation Harness: 1
 - Longhorn: 1
 - LSE: 1
 - LTO: 1
+- MAPPO: 1
 - MariaDB: 1
 - Maven: 1
-- MCP: 7
+- MCP: 9
 - Memcached: 2
 - Memorystore: 1
 - Minecraft: 1
 - MinIO: 2
 - MLflow: 1
 - MLPerf: 1
-- Model Context Protocol: 1
+- Model Context Protocol: 3
 - ModelScope: 1
 - MongoDB: 4
 - mongostat: 1
 - mongotop: 1
 - mpi: 1
 - MQTT: 1
+- Multi-Agent Reinforcement Learning: 1
 - MySQL: 11
 - Neon: 8
 - Networking: 1
 - Nexmark: 1
 - NGINX: 8
 - nginx: 1
-- Node.js: 7
+- Node.js: 8
 - npm: 3
 - NumPy: 1
 - Ollama: 3
-- ONNX Runtime: 2
+- ONNX: 1
+- ONNX Runtime: 6
 - OpenBLAS: 1
 - OpenBMC: 1
 - OpenCV: 1
 - OpenEBS: 1
-- OpenJDK: 1
+- OpenJDK: 2
 - OpenJDK 17: 1
 - OpenJDK 21: 2
 - OpenRNG: 1
@@ -255,7 +279,7 @@ tools_software_languages_filter:
 - Orchard Core: 1
 - PAPI: 1
 - perf: 10
-- Perf: 2
+- Perf: 3
 - pgbench: 1
 - PGO: 1
 - PHP: 1
@@ -266,9 +290,10 @@ tools_software_languages_filter:
 - Prometheus: 1
 - psycopg2: 1
 - Puppet: 1
+- Puppeteer: 1
 - Pytest: 1
-- Python: 56
-- PyTorch: 13
+- Python: 64
+- PyTorch: 16
 - Qdrant: 1
 - QEMU: 1
 - QuantLib: 1
@@ -276,14 +301,16 @@ tools_software_languages_filter:
 - Rafay: 1
 - RAG: 1
 - Rails: 1
+- Raspberry Pi: 1
 - Ray: 1
 - rctl: 1
 - Redis: 6
 - redis-benchmark: 1
+- Reinforcement Learning: 1
 - Remote.It: 2
 - RME: 10
 - Ruby: 2
-- Runbook: 73
+- Runbook: 72
 - Rust: 3
 - scikit-learn: 2
 - Sentence Transformers: 1
@@ -309,11 +336,14 @@ tools_software_languages_filter:
 - TensorFlow: 3
 - Terraform: 12
 - Testcontainers: 1
+- Text-to-Speech: 1
 - ThirdAI: 1
 - TimescaleDB: 1
 - Tinkerblox: 1
 - topdown-tool: 1
-- Topo: 2
+- Topo: 3
+- TorchAO: 1
+- TorchRL: 1
 - Trivy: 1
 - Trusted Firmware: 1
 - Trustee: 2
@@ -325,8 +355,11 @@ tools_software_languages_filter:
 - Vectorscan: 1
 - Velox: 1
 - Veraison: 3
-- Visual Studio Code: 7
-- vLLM: 4
+- virsh: 1
+- virt-install: 1
+- Visual Studio Code: 8
+- vLLM: 5
+- VMAS: 1
 - VS Code: 1
 - vvenc: 1
 - Web Server: 1
@@ -344,9 +377,9 @@ tools_software_languages_filter:
 - ZooKeeper: 1
 weight: 1
 platforms_filter:
-- Arm AGI CPU: 11
-- AWS: 95
-- Google Cloud: 118
-- Microsoft Azure: 102
-- Oracle: 61
+- Arm AGI CPU: 26
+- AWS Graviton: 98
+- Google Axion: 119
+- Microsoft Azure Cobalt: 102
+- Oracle Cloud Infrastructure (OCI) Ampere Compute: 61
 ---

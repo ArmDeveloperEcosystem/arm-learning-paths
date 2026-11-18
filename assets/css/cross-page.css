@@ -48,6 +48,7 @@
 
 /* Local ADS v5 accent experiment */
 :root {
+    --lp-background-color: #08052E;
     --lp-accent-primary: #6023DE;   /* ADS UI Violet 65 */
     --lp-accent-secondary: #D1BAFC; /* ADS UI Violet 04 */
     --lp-hover-text: #D9D9D9;       /* ADS UI Gray 35 */
@@ -93,6 +94,14 @@ ads-search#search-box.install-guide{
 }
 ads-search {
     --ads-search-button-background-color: #7233F7;
+}
+
+html[theme='dark'] #main ads-search {
+    --ads-search-background-color: var(--lp-background-color);
+    --ads-search-background-color-fill: var(--lp-background-color);
+    --ads-search-input-background-color: var(--lp-background-color);
+    --ads-search-input-background-color-hover: var(--lp-background-color);
+    --ads-search-input-background-color-fill-hover: var(--lp-background-color);
 }
 
 /* Colors of buttons & links to match DevHub styling */
@@ -193,6 +202,12 @@ arm-top-navigation:not(:defined) {
     background-color: var(--ads-ui-ink-100);
 }
 
+/* AI features sign-in banner */
+#ai-sign-in-banner {
+    background-color: #F0F0F0;
+    overflow: hidden;
+}
+
 /* Fix Masthead Height */
 #expanded-masthead  {
         min-height: 100px;                  /* Keep baseline height for short titles */
@@ -210,12 +225,6 @@ arm-top-navigation:not(:defined) {
 /* remove bottom border from ads-masthead component */
 ads-masthead {
     --ads-masthead-border-bottom-color: transparent;
-}
-
-/* Align the alert icon with the masthead title while its surface spans the page. */
-#color-refresh-alert-container {
-    background-color: #F0F0F0;
-    overflow: hidden;
 }
 
 /* Bypass ADS's fixed 70% heading wrapper while retaining its typography. */
@@ -251,7 +260,7 @@ ads-masthead #ads-masthead-title {
 /* Replicate style of breadcrumb in masthead when alone. */
 #only-breadcrumb-masthead {
     width: 100%;
-    background-color: var(--ads-ui-ink-100);
+    background-color: var(--lp-background-color);
     padding-top: 8px;
     padding-left: 15px; /* u-padding-left-2-1/2 */
     padding-bottom: 8px; 
@@ -357,7 +366,7 @@ html[theme='light'] body {
 /* Dark Theme */
 /****************************************************/
 html[theme='dark'] body {
-    background-color: var(--ads-ui-ink-100);
+    background-color: var(--lp-background-color);
     background-image: none;
 }
 
@@ -400,4 +409,52 @@ arm-footer-navigation:not(:defined) {
 }
 #arm-footer {
     contain: layout;
+}
+
+/* Native links inside Learning Path and Install Guide listing cards. */
+ads-card.path-card ads-card-content,
+ads-card.tool-card ads-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+a.listing-card-link,
+a.listing-card-link:hover,
+a.listing-card-link:focus {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    width: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Stretch each native link across the card, including its padding. */
+ads-card.path-card,
+ads-card.tool-card {
+    position: relative;
+}
+
+ads-card.path-card ads-card-content,
+ads-card.tool-card ads-card-content,
+a.listing-card-link {
+    position: static;
+}
+
+a.listing-card-link::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: var(--ads-card-border-radius);
+    cursor: pointer;
+}
+
+a.listing-card-link:focus-visible {
+    outline: none;
+}
+
+a.listing-card-link:focus-visible::after {
+    outline: 2px solid var(--ads-ui-violet-40);
+    outline-offset: 2px;
 }

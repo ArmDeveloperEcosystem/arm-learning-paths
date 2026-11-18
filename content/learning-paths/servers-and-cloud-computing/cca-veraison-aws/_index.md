@@ -1,5 +1,8 @@
 ---
 title: Build a CCA Attestation Service on AWS with Veraison
+draft: true
+cascade:
+    draft: true
 description: Learn how to deploy a scalable Arm CCA attestation verifier service on AWS using Veraison components with platform endorsement provisioning.
 
 minutes_to_complete: 90
@@ -73,7 +76,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Performance and Architecture
 platforms:
-  - AWS
+  - AWS Graviton
 armips:
     - Neoverse
     - Cortex-A
@@ -92,6 +95,10 @@ further_reading:
     - resource:
         title: The Realm Management Monitor Specification
         link: https://developer.arm.com/documentation/den0137/latest/
+        type: documentation
+    - resource:
+        title: The Role of Attestation in Arm CCA
+        link: https://support.arm.com/documentation/111146/latest/
         type: documentation
     - resource:
         title: The Attestation Results for Secure Interactions (AR4SI) 

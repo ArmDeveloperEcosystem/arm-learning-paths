@@ -1,5 +1,5 @@
 ---
-title: Measure and accelerate the performance of Natural Language Processing (NLP) models from Hugging Face on Arm servers
+title: Benchmark and accelerate Hugging Face NLP models on Arm
 weight: 2
 
 ### FIXED, DO NOT MODIFY

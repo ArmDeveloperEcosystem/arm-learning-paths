@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" role="img" aria-labelledby="title desc">
+  <title id="title">C2PA manifest structure and workflow</title>
+  <desc id="desc">A C2PA manifest contains an assertion store, a claim, and a claim signature. The assertion store includes a hard-binding assertion recording a hash of the included digital asset data. The claim references the assertions and is signed with the signer's private key to create the claim signature. Three arrows lead from distribution of the digital asset and manifest to separate consumers, who each independently validate the manifest.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#243746"/>
+    </marker>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #1f2d3d; }
+      .step-title { font-size: 20px; font-weight: 700; text-anchor: middle; }
+      .label { font-size: 18px; font-weight: 700; text-anchor: middle; }
+      .body { font-size: 16px; text-anchor: middle; }
+      .arrow { stroke: #243746; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="650" fill="#ffffff"/>
+
+  <g aria-label="Workflow: create digital asset, record assertions, assemble and sign claim, assemble assertions, claim, and signature into a manifest, distribute digital asset and manifest, validate manifest">
+    <rect x="25" y="35" width="120" height="100" rx="12" fill="#d7eef7" stroke="#0072a8" stroke-width="2"/>
+    <text class="step-title" x="85" y="77" style="font-size:17px">Digital asset</text>
+    <text class="body" x="85" y="103">created</text>
+    <rect x="170" y="35" width="120" height="100" rx="12" fill="#dbeafe" stroke="#2878b5" stroke-width="2"/>
+    <text class="step-title" x="230" y="77" style="font-size:17px">Assertions</text>
+    <text class="body" x="230" y="103">recorded</text>
+    <rect x="315" y="35" width="120" height="100" rx="12" fill="#fff2cc" stroke="#a36b00" stroke-width="2"/>
+    <text class="step-title" x="375" y="77" style="font-size:17px">Claim</text>
+    <text class="body" x="375" y="103">assembled</text>
+    <rect x="460" y="35" width="120" height="100" rx="12" fill="#fde2e2" stroke="#a33a3a" stroke-width="2"/>
+    <text class="step-title" x="520" y="64" style="font-size:17px">Claim</text>
+    <text class="step-title" x="520" y="89" style="font-size:17px">signature</text>
+    <text class="body" x="520" y="114">created</text>
+    <rect x="605" y="35" width="190" height="100" rx="12" fill="#dce5ea" stroke="#243746" stroke-width="2"/>
+    <text class="step-title" x="700" y="77" style="font-size:17px">Manifest</text>
+    <text class="body" x="700" y="103">assembled</text>
+    <rect x="820" y="35" width="180" height="100" rx="12" fill="#f5f8fa" stroke="#243746" stroke-width="2"/>
+    <text class="step-title" x="910" y="64" style="font-size:17px">Digital asset</text>
+    <text class="step-title" x="910" y="89" style="font-size:17px">and manifest</text>
+    <text class="body" x="910" y="114">distributed</text>
+    <g aria-label="Multiple consumers independently validate the manifest">
+      <rect x="1045" y="5" width="150" height="48" rx="10" fill="#bbebd2" stroke="#16734b" stroke-width="2"/>
+      <text class="step-title" x="1120" y="24" style="font-size:16px">Consumer 1</text>
+      <text class="body" x="1120" y="43" style="font-size:14px"><tspan font-weight="700">validates</tspan> the manifest</text>
+      <rect x="1045" y="61" width="150" height="48" rx="10" fill="#bbebd2" stroke="#16734b" stroke-width="2"/>
+      <text class="step-title" x="1120" y="80" style="font-size:16px">Consumer 2</text>
+      <text class="body" x="1120" y="99" style="font-size:14px"><tspan font-weight="700">validates</tspan> the manifest</text>
+      <rect x="1045" y="117" width="150" height="48" rx="10" fill="#bbebd2" stroke="#16734b" stroke-width="2"/>
+      <text class="step-title" x="1120" y="136" style="font-size:16px">Consumer 3</text>
+      <text class="body" x="1120" y="155" style="font-size:14px"><tspan font-weight="700">validates</tspan> the manifest</text>
+    </g>
+    <path class="arrow" d="M 145 85 H 165"/>
+    <path class="arrow" d="M 290 85 H 310"/>
+    <path class="arrow" d="M 435 85 H 455"/>
+    <path class="arrow" d="M 580 85 H 600"/>
+    <path class="arrow" d="M 795 85 H 815"/>
+    <path class="arrow" d="M 1000 55 L 1040 29"/>
+    <path class="arrow" d="M 1000 85 H 1040"/>
+    <path class="arrow" d="M 1000 115 L 1040 141"/>
+  </g>
+
+  <g aria-label="Digital asset">
+    <rect x="45" y="322" width="190" height="100" rx="12" fill="#d7eef7" stroke="#0072a8" stroke-width="3"/>
+    <text class="label" x="140" y="365">Digital asset</text>
+    <text class="body" x="140" y="393">Image, audio, video,</text>
+    <text class="body" x="140" y="415">or document</text>
+  </g>
+
+  <g aria-label="C2PA manifest">
+    <rect x="330" y="190" width="825" height="350" rx="16" fill="#f5f8fa" stroke="#243746" stroke-width="3"/>
+    <path d="M 330 255 V 206 Q 330 190 346 190 H 1139 Q 1155 190 1155 206 V 255 Z" fill="#dce5ea"/>
+    <text x="742" y="231" font-size="27" font-weight="700" text-anchor="middle">C2PA manifest</text>
+
+    <rect x="350" y="275" width="260" height="245" rx="10" fill="#dbeafe" stroke="#2878b5" stroke-width="2"/>
+    <text class="label" x="480" y="303">Assertion store</text>
+    <rect x="365" y="320" width="230" height="82" rx="6" fill="#ffffff" stroke="#2878b5" stroke-width="2"/>
+    <text class="label" x="480" y="344">Hard-binding assertion</text>
+    <text class="body" x="480" y="365">Hash of included</text>
+    <text class="body" x="480" y="384">digital asset data</text>
+
+    <rect x="365" y="415" width="230" height="88" rx="6" fill="#ffffff" stroke="#2878b5" stroke-width="2"/>
+    <text class="label" x="480" y="441">Other assertions</text>
+    <text class="body" x="480" y="466">Actions, metadata,</text>
+    <text class="body" x="480" y="488">ingredients</text>
+
+    <rect x="650" y="300" width="210" height="170" rx="10" fill="#fff2cc" stroke="#a36b00" stroke-width="2"/>
+    <text class="label" x="755" y="337">Claim</text>
+    <text class="body" x="755" y="370">References the assertions</text>
+    <text class="body" x="755" y="395">and identifies the</text>
+    <text class="body" x="755" y="420">claim generator</text>
+
+    <rect x="915" y="300" width="195" height="170" rx="10" fill="#fde2e2" stroke="#a33a3a" stroke-width="2"/>
+    <text class="label" x="1012" y="337">Claim signature</text>
+    <text class="body" x="1012" y="370">Signs the claim with</text>
+    <text class="body" x="1012" y="395">the signer's</text>
+    <text class="body" x="1012" y="420">private key</text>
+
+    <path class="arrow" d="M 650 385 H 620"/>
+    <path class="arrow" d="M 915 385 H 870"/>
+  </g>
+
+  <path class="arrow" d="M 235 372 H 355"/>
+  <text x="285" y="346" font-size="16" font-weight="700" text-anchor="middle">Hash</text>
+
+  <text x="600" y="585" font-size="18" text-anchor="middle">The digital asset and its manifest can be distributed in one file or stored separately.</text>
+</svg>

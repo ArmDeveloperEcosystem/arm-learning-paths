@@ -29,6 +29,54 @@ This message shows that your installation appears to be working correctly.
          
 Note: If you do not see the message above, go to [Installing Docker](/install-guides/docker/) and follow the instructions to complete the installation.
 
+{{% notice Note %}}
+
+If you see the error:
+
+```output
+failed to connect to the Docker API at unix:///var/run/docker.sock
+```
+
+first check whether the Docker daemon failed to start:
+
+```bash
+sudo systemctl restart docker
+sudo systemctl status docker
+```
+
+If the logs contain an error similar to `nft: Protocol not supported`, the Docker service might fail to start if the host Linux kernel is missing required features. This is more likely when using a custom or patched kernel.
+
+The open source [check-config.sh](https://github.com/moby/moby/blob/275015b0e7d1e17941df3dad1503263d653588e5/contrib/check-config.sh) script from the Docker Moby project can be used to check the host’s kernel configuration and identify required or optional features that are missing. Kernel features may be built directly into the kernel (=y) or provided as loadable modules (=m). Download the bash script and run it against the current kernel configuration. 
+
+```bash
+./check-config.sh /boot/config-<kernel version>
+```
+
+You will see output similar to that below.
+
+```output
+Generally Necessary:
+- cgroup hierarchy: cgroupv2
+  Controllers:
+  - cpu: available
+  - cpuset: available
+  - io: available
+  - memory: available
+  - pids: available
+- apparmor: enabled and tools installed
+- CONFIG_NAMESPACES: enabled
+- CONFIG_NET_NS: enabled
+- CONFIG_PID_NS: enabled
+- CONFIG_IPC_NS: enabled
+...
+```
+
+For basic Docker functionality, ensure that the features reported under **Generally Necessary** are available. These cover fundamental container functionality. The script also checks a number of Optional Features, Network Drivers, and Storage Drivers. Not all of these are required. 
+
+If a required feature is configured as a module (=m), also ensure that the corresponding kernel module is installed and can be loaded. If required features are missing, refer to the instructions for building the OS or kernel for your distribution or platform to enable the missing kernel configuration options. 
+
+{{% /notice %}}
+
 The sections describe how to:
 - Build a Docker image
 - Run a Docker container

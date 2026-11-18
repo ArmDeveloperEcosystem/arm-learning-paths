@@ -28,6 +28,23 @@
     font-weight: 900;
 }
 
+/* Keep the selected reason distinct from the unselected and hover states. */
+#feedback-container .ads-radio-style input[type='radio']:checked + label:before {
+    border-color: var(--lp-accent-primary);
+}
+
+#feedback-container .ads-radio-style input[type='radio']:checked + label:after {
+    background-color: var(--lp-accent-primary);
+}
+
+html[theme='dark'] #feedback-container .ads-radio-style input[type='radio']:checked + label:before {
+    border-color: var(--lp-accent-secondary);
+}
+
+html[theme='dark'] #feedback-container .ads-radio-style input[type='radio']:checked + label:after {
+    background-color: var(--lp-accent-secondary);
+}
+
 
 /****************************************************/
 

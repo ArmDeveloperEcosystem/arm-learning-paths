@@ -1,0 +1,2 @@
+# Use the v1 SDK API deliberately; v2 uses a different server/client API.
+mcp==1.26.0

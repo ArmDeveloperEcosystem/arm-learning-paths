@@ -60,13 +60,13 @@ If you've not already installed Docker, follow the steps in the [Docker install 
 ### Start the Memgraph container
 
 {{% notice Note %}}
-The commands in this install guide use Memgraph version 3.10.1. The same steps work with other versions. Replace the version number in image tags, package filenames, and download URLs with your chosen version. To find the latest release, see the [Memgraph GitHub releases page](https://github.com/memgraph/memgraph/releases).
+The commands in this install guide use Memgraph version 3.12.0. The same steps work with other versions. Replace the version number in image tags, package filenames, and download URLs with your chosen version. To find the latest release, see the [Memgraph GitHub releases page](https://github.com/memgraph/memgraph/releases).
 {{% /notice %}}
 
 The core image is `memgraph/memgraph`, which includes the Memgraph database plus the bundled `mgconsole` CLI. Start it with:
 
 ```bash { target="ubuntu:latest" }
-docker run -p 7687:7687 -p 7444:7444 --name memgraph memgraph/memgraph:3.10.1
+docker run -p 7687:7687 -p 7444:7444 --name memgraph memgraph/memgraph:3.12.0
 ```
 
 The container exposes two ports:
@@ -77,7 +77,7 @@ The container exposes two ports:
 To confirm that the Arm image was pulled, inspect it:
 
 ```bash { target="ubuntu:latest" }
-docker inspect memgraph/memgraph:3.10.1 --format '{{.Architecture}}'
+docker inspect memgraph/memgraph:3.12.0 --format '{{.Architecture}}'
 ```
 
 The output is similar to:
@@ -101,7 +101,7 @@ Start with `memgraph/memgraph` to get the Memgraph database. If you later want P
 
 ### Connect with mgconsole inside the container
 
-The `memgraph/memgraph:3.10.1` image ships with `mgconsole` already inside the container. Run `mgconsole` in the container:
+The `memgraph/memgraph:3.12.0` image ships with `mgconsole` already inside the container. Run `mgconsole` in the container:
 
 ```bash { target="ubuntu:latest" }
 docker exec -it memgraph mgconsole
@@ -110,7 +110,7 @@ docker exec -it memgraph mgconsole
 The output is similar to:
 
 ```output
-mgconsole 1.5.2
+mgconsole 1.6.0
 Connected to 'memgraph://127.0.0.1:7687'
 Type :help for shell usage
 Quit the shell by typing Ctrl-D(eof) or :quit
@@ -135,7 +135,7 @@ Choose the package that matches your distribution from the [Memgraph Download Hu
 Download the `arm64` `.deb` package for Ubuntu 24.04 on Arm:
 
 ```bash { target="ubuntu:latest" }
-wget https://download.memgraph.com/memgraph/v3.10.1/ubuntu-24.04-aarch64/memgraph_3.10.1-1_arm64.deb
+wget https://download.memgraph.com/memgraph/v3.12.0/ubuntu-24.04-aarch64/memgraph_3.12.0-1_arm64.deb
 ```
 
 Before installing Memgraph, update the package index and install the required dependency:
@@ -148,7 +148,7 @@ sudo apt install -y libatomic1
 Install the package:
 
 ```bash { target="ubuntu:latest" }
-sudo dpkg -i memgraph_3.10.1-1_arm64.deb
+sudo dpkg -i memgraph_3.12.0-1_arm64.deb
 ```
 
 If `dpkg` reports missing dependencies, resolve them with:
@@ -163,13 +163,13 @@ sudo apt-get install -f
 Download the Fedora `aarch64` `.rpm`:
 
 ```bash
-wget https://download.memgraph.com/memgraph/v3.10.1/fedora-42-aarch64/memgraph-3.10.1_1-1.aarch64.rpm
+wget https://download.memgraph.com/memgraph/v3.12.0/fedora-42-aarch64/memgraph-3.12.0_1-1.aarch64.rpm
 ```
 
 Install the package:
 
 ```bash
-sudo dnf install ./memgraph-3.10.1_1-1.aarch64.rpm
+sudo dnf install ./memgraph-3.12.0_1-1.aarch64.rpm
 ```
 
   {{< /tab >}}
@@ -199,7 +199,7 @@ sudo journalctl --unit memgraph --no-pager | head
 The output is similar to:
 
 ```output
-You are running Memgraph v3.10.1
+You are running Memgraph v3.12.0
 ```
 
 You can find the configuration file at `/etc/memgraph/memgraph.conf`. To fine-tune Memgraph, edit the configuration file. For a full configuration reference, see the [Memgraph configuration docs](https://memgraph.com/docs/database-management/configuration). 
@@ -237,7 +237,7 @@ This setting is applied on the Linux host, so it is relevant for both the native
 
 ## (Optional) Install mgconsole separately
 
-`mgconsole` is Memgraph's command-line client for executing Cypher queries. It is already included in the Memgraph Linux packages, and in the `memgraph/memgraph:3.10.1` and `memgraph/memgraph-mage:3.10.1` Docker images. You need a separate install only if you want to run it from a different machine.
+`mgconsole` is Memgraph's command-line client for executing Cypher queries. It is already included in the Memgraph Linux packages, and in the `memgraph/memgraph:3.12.0` and `memgraph/memgraph-mage:3.12.0` Docker images. You need a separate install only if you want to run it from a different machine.
 
 To install it standalone, download the binary for your platform from the [Memgraph Download Hub](https://memgraph.com/download#individual), or pull the Docker image.
 
@@ -279,12 +279,12 @@ echo "MATCH (n) RETURN n;" | mgconsole --host localhost --port 7687
 The output is similar to:
 
 ```output
-+------------------------------+
-| n                            |
-+------------------------------+
-| (:Person {name: 'Alice'})    |
-| (:Person {name: 'Bob'})      |
-+------------------------------+
++-----------------------------+
+| n                           |
++-----------------------------+
+| (:Person {name: "Alice"})   |
+| (:Person {name: "Bob"})     |
++-----------------------------+
 ```
 
 Count the nodes:
@@ -354,11 +354,11 @@ This query returns everyone reachable from Alice in one or two `KNOWS` hops.
 
 ### MAGE with Docker
 
-Switch from the base image to `memgraph/memgraph-mage:3.10.1`, which bundles MAGE on top of the same database:
+Switch from the base image to `memgraph/memgraph-mage:3.12.0`, which bundles MAGE on top of the same database:
 
 ```bash { target="ubuntu:latest" }
 docker stop memgraph && docker rm memgraph
-docker run -p 7687:7687 -p 7444:7444 --name memgraph memgraph/memgraph-mage:3.10.1
+docker run -p 7687:7687 -p 7444:7444 --name memgraph memgraph/memgraph-mage:3.12.0
 ```
 
 Confirm that the MAGE algorithms are loaded:
@@ -375,8 +375,8 @@ The output includes entries such as `pagerank.get`.
 Memgraph provides a prebuilt MAGE `arm64` `.deb` package for Ubuntu 24.04. It's installed on top of an existing Memgraph package install:
 
 ```bash { target="ubuntu:latest" }
-wget https://download.memgraph.com/memgraph-mage/v3.10.1/ubuntu-24.04/memgraph-mage_3.10.1-1_arm64.deb
-sudo dpkg -i memgraph-mage_3.10.1-1_arm64.deb
+wget https://download.memgraph.com/memgraph-mage/v3.12.0/ubuntu-24.04/memgraph-mage_3.12.0-1_arm64.deb
+sudo dpkg -i memgraph-mage_3.12.0-1_arm64.deb
 sudo systemctl restart memgraph
 ```
 

@@ -1,5 +1,5 @@
 ---
-title: Accelerate Bitmap Scanning with Neon and SVE Instructions on Arm servers
+title: Accelerate bitmap scanning with Neon and SVE on Arm
 description: Learn how to implement and benchmark bitmap scanning operations for database workloads using scalar, Neon, and SVE instructions on Arm-based cloud instances.
 
 minutes_to_complete: 20
@@ -73,10 +73,10 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Performance and Architecture
 platforms:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
 - Neoverse
 operatingsystems:

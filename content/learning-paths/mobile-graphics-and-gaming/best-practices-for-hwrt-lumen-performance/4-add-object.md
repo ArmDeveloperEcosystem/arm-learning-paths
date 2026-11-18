@@ -10,6 +10,6 @@ As explained in the previous section, the acceleration structure stores all geom
 
 It's important to exclude actors that do not contribute to lighting from ray tracing. Additionally, exclude small actors from ray tracing since they contribute very little to the final lighting and may cause noise in indirect lighting. To do this, in the actor details panel, uncheck **Visible in Ray Tracing** to exclude these actors from ray tracing.
 
-![](images/add_object.png)
+![Unreal Editor actor details panel under Rendering > Advanced, showing the Visible in Ray Tracing checkbox cleared to exclude the actor from the acceleration structure.#center](images/add_object.png)
 
 

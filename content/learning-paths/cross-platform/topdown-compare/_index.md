@@ -1,5 +1,5 @@
 ---
-title: Compare Arm Neoverse and Intel x86 top-down performance analysis with PMU counters 
+title: Compare Arm and x86 top-down performance with PMU counters
 
 minutes_to_complete: 30
 

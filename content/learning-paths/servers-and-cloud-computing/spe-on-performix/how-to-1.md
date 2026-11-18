@@ -1,12 +1,12 @@
 ---
-title: Understand Arm Statistical Profiling Extension (Arm SPE)
+title: Understand Arm Statistical Profiling Extension 
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is Arm Statistical Profiling Extension?
+## What Arm Statistical Profiling Extension is
 
 Arm Statistical Profiling Extension (SPE) is a hardware-assisted profiling feature in the Arm A-profile architecture. It was introduced with Armv8.2-A and extended in later architecture revisions. Most modern Arm-based cloud systems support SPE.
 
@@ -18,10 +18,10 @@ For Arm Performix, this matters because SPE must be enabled to use the `Memory A
 
 On Linux, SPE is available only when all required layers are aligned:
 
-- **Architecture layer**: the CPU must implement SPE (common on Arm Neoverse systems and the Arm AGI CPU).
-- **Firmware layer**: platform firmware must advertise the SPE PMU and its interrupt path through ACPI or Device Tree. This is usually already enabled, so this check is often skipped.
-- **Kernel layer**: the running kernel must be built with Arm SPE PMU support through the `CONFIG_ARM_SPE_PMU` kernel build option.
-- **Driver layer**: the `arm_spe_pmu` driver must initialize successfully, either built-in or loaded as a module. This requires all the other layers to have Arm SPE support.
+- Architecture layer: the CPU must implement SPE (common on Arm Neoverse systems and the Arm AGI CPU).
+- Firmware layer: platform firmware must advertise the SPE PMU and its interrupt path through ACPI or Device Tree. This is usually already enabled, so this check is often skipped.
+- Kernel layer: the running kernel must be built with Arm SPE PMU support through the `CONFIG_ARM_SPE_PMU` kernel build option.
+- Driver layer: the `arm_spe_pmu` driver must initialize successfully, either built-in or loaded as a module. This requires all the other layers to have Arm SPE support.
 
 If any of these layers are missing, Linux can't expose SPE to profiling tools. Additionally, cloud-based applications usually run on top of a hypervisor that typically disables SPE.
 

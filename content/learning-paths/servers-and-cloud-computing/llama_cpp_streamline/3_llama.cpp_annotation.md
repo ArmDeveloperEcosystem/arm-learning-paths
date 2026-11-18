@@ -6,15 +6,15 @@ weight: 4
 layout: learningpathall
 ---
 
-##  Set up performance annotation markers
+## Set up performance marker annotations
 
-To visualize token generation at the Prefill and Decode stages, you can use Streamline's Annotation Marker feature.
+To visualize token generation at the Prefill and Decode stages, you can use Streamline's marker annotation feature.
 
 {{% notice Note %}}
-*Annotation markers* are code markers that you insert into your application to identify specific events or time periods during execution. When Streamline captures performance data, these markers appear in the timeline, making it easier to correlate performance data with specific application behavior.
+*Marker annotations* are code markers that you insert into your application to identify specific events or time periods during execution. When Streamline captures performance data, these annotations appear in the timeline, making it easier to correlate performance data with specific application behavior.
 {{% /notice %}}
 
-This requires integrating annotation support into the llama.cpp project. More information about the Annotation Marker API can be found in the [Streamline User Guide](https://developer.arm.com/documentation/101816/9-7/Annotate-your-code?lang=en).
+This requires integrating annotation support into the llama.cpp project. More information about the marker annotation API can be found in the [Streamline User Guide](https://developer.arm.com/documentation/101816/9-7/Annotate-your-code?lang=en).
 
 {{% notice Note %}}
 You can either build natively on an Arm platform, or cross-compile on another architecture using an Arm cross-compiler toolchain.
@@ -57,7 +57,7 @@ If you need to set up a cross-compiler, you can review the [GCC install guide](/
 
 Once complete, the static library `libstreamline_annotate.a` will be generated at `~/gator/annotate/libstreamline_annotate.a` and the header file is at `gator/annotate/streamline_annotate.h`.
 
-## Integrate annotation marker into llama.cpp
+## Integrate marker annotations into llama.cpp
 
 Next, you need to install llama.cpp to run the LLM model.
 
@@ -85,7 +85,7 @@ target_include_directories(llama-cli PRIVATE "${CMAKE_SOURCE_DIR}/streamline_ann
 target_link_libraries(llama-cli PRIVATE "${STREAMLINE_LIB_PATH}")
 ```
 
-To add Annotation Markers to `llama-cli`, edit the file `llama.cpp/tools/main/main.cpp` and make three modifications.
+To add marker annotations to `llama-cli`, edit the file `llama.cpp/tools/main/main.cpp` and make three modifications.
 
 First, add the include file at the top of `main.cpp` with the other include files:
 
@@ -101,7 +101,7 @@ Next, the find the `common_init()` call in the `main()` function and add the Str
     ANNOTATE_SETUP;
 ```
 
-Finally, add an annotation marker inside the main loop. Add the complete code instead the annotation comments so it looks like:
+Finally, add a marker annotation inside the main loop. Add the complete code instead of the annotation comments so it looks like:
 
 ```c
           for (int i = 0; i < (int) embd.size(); i += params.n_batch) {
@@ -112,13 +112,13 @@ Finally, add an annotation marker inside the main loop. Add the complete code in
 
                 LOG_DBG("eval: %s\n", string_from(ctx, embd).c_str());
 	
-                // Add annotation marker code for Streamline
+                // Add marker annotation code for Streamline
                 {
                   char printf_buf[200];
                   sprintf(printf_buf, "past %d, n_eval %d", n_past,n_eval );
                   ANNOTATE_MARKER_STR(printf_buf);
                 }
-                // End of annotation marker 
+                // End of marker annotation
 
                 if (llama_decode(ctx, llama_batch_get_one(&embd[i], n_eval))) {
                     LOG_ERR("%s : failed to eval\n", __func__);
@@ -126,7 +126,7 @@ Finally, add an annotation marker inside the main loop. Add the complete code in
                 }
 ```
 
-A string is added to the Annotation Marker to record the position of input tokens and number of tokens to be processed.
+A string is added to the marker annotation to record the position of input tokens and the number of tokens to be processed.
 
 ## Compile llama-cli with annotation support
 
@@ -197,4 +197,4 @@ After the building process completes, you can find the `llama-cli` in the `~/lla
 
 ## Summary
 
-You have successfully integrated Streamline annotations into llama.cpp and built an annotated version of `llama-cli`. The annotation markers you added will help identify token generation events during profiling. In the next section, you'll use this instrumented executable to capture performance data with Streamline and analyze the distinct characteristics between Prefill and Decode stages during LLM inference.
+You have successfully integrated Streamline annotations into llama.cpp and built an annotated version of `llama-cli`. The marker annotations you added will help identify token generation events during profiling. In the next section, you'll use this instrumented executable to capture performance data with Streamline and analyze the distinct characteristics between Prefill and Decode stages during LLM inference.

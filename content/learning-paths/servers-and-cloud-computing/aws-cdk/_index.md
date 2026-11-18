@@ -1,5 +1,5 @@
 ---
-title: Deploy containers on Arm-based compute using Amazon ECS and the AWS CDK
+title: Deploy Arm containers to Amazon ECS with the AWS CDK
 description: Learn how to define and deploy a containerized application on Arm-based compute using the AWS Cloud Development Kit.
 
 minutes_to_complete: 45
@@ -69,7 +69,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Containers and Virtualization
 platforms:
-  - AWS
+  - AWS Graviton
 armips:
     - Neoverse
 operatingsystems:

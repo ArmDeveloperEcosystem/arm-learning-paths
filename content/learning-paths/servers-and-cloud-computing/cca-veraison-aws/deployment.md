@@ -6,31 +6,127 @@ weight: 5
 layout: learningpathall
 ---
 
+## Prepare your build environment
+
+Lets first establish what AWS region will be used. On your Ubuntu host:
+
+```bash
+# Set this to the AWS region to be used
+export AWS_REGION=us-east-1
+```
+
+Now, still in your Ubuntu host, run the following:
+
+```bash
+# Leave any previous python venv...
+deactivate
+hash -r
+
+# Install virtual-environment support for Ubuntu's Python 3.12.
+sudo apt update
+sudo apt install python3.12-venv
+
+# Use a fresh directory, preserving the existing ~/venv/aws environment.
+export VERAISON_AWS_VENV="$HOME/venv/veraison-aws-py312"
+
+/usr/bin/python3.12 -m venv "$VERAISON_AWS_VENV"
+source "$VERAISON_AWS_VENV/bin/activate"
+
+# Set this to fix issues with the make deploy scripts
+export VERAISON_DEB="/tmp/veraison_0.0.261100+ebadb73_amd64.deb"
+
+# Fixes and requirements for make deploy
+sudo apt install gettext-base
+
+# Follows AWS_REGION
+export AWS_DEFAULT_REGION=${AWS_REGION}
+
+# Verify what bootstrap will use.
+python --version
+python -m pip --version
+```
+
+You should see output similar to:
+
+```output
+Python 3.12.3
+pip 24.0 from /usr/lib/python3/dist-packages/pip (python 3.12)
+```
+
+Your Ubuntu environment is now ready for creating the Veraison deployment
+
 ## Create the Veraison Deployment
 Now that your AWS account, internet domain and certificate are prepared, you are ready to deploy the Veraison services into AWS.
 
 This process is highly automated, but will take between 30 to 60 minutes, as several resources need to be created in AWS.
 
-The deployment process is documented in [Veraison's GitHub repository](https://github.com/veraison/services/blob/main/deployments/aws/README.md). 
+The deployment process is documented in [Veraison's GitHub repository](https://github.com/veraison/services/blob/ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800/deployments/aws/README.md).
 
 You can follow the instructions below to deploy the Veraison services into AWS:
 
-Use the [Bootstrap](https://github.com/veraison/services/tree/main/deployments/aws#bootstrap) process first to clone the Veraison source code from GitHub and set up your build environment. This will take care of installing the dependencies that you need on your development machine.
+Use the [Bootstrap](https://github.com/veraison/services/blob/ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800/deployments/aws/README.md#bootstrap) process first to clone the Veraison source code from GitHub and set up your build environment. This will take care of installing the dependencies that you need on your development machine.
+
+The pinned services revision uses CoRIM-store commit `a2a60b6a11ad`, as specified in its [dependency file](https://github.com/veraison/services/blob/ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800/go.mod#L44). Its AWS deployment script still selects an older CoRIM-store tool for the sentinel image. Update that tool's pin before creating the image so database initialization includes the migrations required by the services, including the `tokens` table.
 
 ```bash
-cd $HOME
+mkdir $HOME/cca_veraison
+cd $HOME/cca_veraison
 git clone https://github.com/veraison/services.git
+git -C services checkout ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800
 cd services/deployments/aws
+
+# Match the sentinel's CoRIM-store tool to the services dependency.
+sed -i "s/default='9e4ba68b'/default='a2a60b6a11ad'/" bin/veraison
+grep -F "default='a2a60b6a11ad'" bin/veraison
+
 make bootstrap
 ```
-Once your build environment is bootstrapped, you will use the [Quickstart](https://github.com/veraison/services/tree/main/deployments/aws#quickstart) procedure to provide some AWS configuration and create the deployment.
 
-You'll provide AWS-specific settings, including the IDs for your VPC and subnets, and the CIDR block allowed access to the deployment. In this deployment, you will use `misc/arm.cfg` file for example. Make sure you update `VERAISON_AWS_REGION` to the same region where you created your AWS certificate for your new domain.`VERAISON_AWS_DNS_NAME` needs to match the domain name you chose. 
+The `grep` command should show the `--rev` argument with `default='a2a60b6a11ad'`. Keep the sentinel tool's revision aligned with `services/go.mod` when changing the services revision.
 
-Once the account-specific config file is created, define `AWS_ACCOUNT_CFG` environment variable to point to it and then create the deployment.
+Once your build environment is bootstrapped, you will use the [Quickstart](https://github.com/veraison/services/blob/ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800/deployments/aws/README.md#quickstart) procedure to provide some AWS configuration and create the deployment.
+
+Next lets confirm that we have some additional requirements setup for the deployment to succeed:
 
 ```bash
 source env/env.bash
+
+# Ensure that we have the packages needed
+"$VERAISON_AWS_VENV/bin/python" -m pip install --force-reinstall "envsubst==0.1.5"
+
+# Replace the venv's command wrapper with GNU envsubst.
+ln -sf /usr/bin/envsubst "$VIRTUAL_ENV/bin/envsubst"
+hash -r
+
+envsubst --version
+"$VERAISON_AWS_VENV/bin/python" -c \
+  'from envsubst import envsubst; print("Python envsubst import OK")'
+```
+
+Your output should resemble:
+
+```output
+envsubst (GNU gettext-runtime) 0.21
+Copyright (C) 2003-2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Written by Bruno Haible.
+Python envsubst import OK
+```
+
+You'll provide AWS-specific settings, including the IDs for your VPC and subnets, and the CIDR block allowed access to the deployment. In this deployment, you will use `misc/arm.cfg` file for example. Make sure you update `VERAISON_AWS_REGION` to the same region where you created your AWS certificate for your new domain.`VERAISON_AWS_DNS_NAME` needs to match the domain name you chose.
+
+Please add the following to your `misc/arm.cfg` as well below `VERAISON_AWS_REGION`:
+
+```bash
+AWS_DEFAULT_REGION="$VERAISON_AWS_REGION"
+AWS_REGION="$VERAISON_AWS_REGION"
+```
+
+Once the account-specific config file is created, define `AWS_ACCOUNT_CFG` environment variable to point to it and then create the deployment:
+
+```bash
 export AWS_ACCOUNT_CFG=misc/arm.cfg  # replace with path to your config
 make deploy
 ```

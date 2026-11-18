@@ -1,0 +1,589 @@
+from pathlib import Path
+from io import BytesIO
+import argparse
+import base64
+import html
+import json
+
+import yaml
+from PIL import Image, ImageChops
+from playwright.sync_api import sync_playwright
+
+
+# ------------------------------------------------------------
+# Configuration
+# ------------------------------------------------------------
+
+WIDTH = 1200
+HEIGHT = 630
+
+# Rectangle in which the title is allowed to appear.
+TITLE_X = 70
+TITLE_Y = 205
+TITLE_WIDTH = 800
+TITLE_HEIGHT = 250
+
+MAX_FONT_SIZE = 60
+MIN_FONT_SIZE = 36
+FONT_WEIGHT = 500
+LINE_HEIGHT = 1.08
+
+TEXT_ALIGN = "left"
+VERTICAL_ALIGN = "start"
+
+
+# ------------------------------------------------------------
+# Files
+# ------------------------------------------------------------
+
+BASE_DIR = Path(__file__).resolve().parent
+REPO_ROOT = BASE_DIR.parents[1]
+
+SVG_PATH = BASE_DIR / "learn-social-og-template.svg"
+TITLE_FONT_PATH = BASE_DIR / "fonts" / "Aeonik-Medium.otf"
+META_FONT_PATH = BASE_DIR / "fonts" / "AeonikFono-Regular.otf"
+OUTPUT_ROOT = REPO_ROOT / "static" / "social-images"
+DEFAULT_MANIFEST_PATH = BASE_DIR / ".social-card-manifest.json"
+DEFAULT_OUTPUT_PATH = OUTPUT_ROOT / "default.webp"
+DEFAULT_TITLE = "Arm Learning Paths"
+DEFAULT_CONTENT_TYPE = "LEARN ARM"
+
+LEARNING_PATH_ROOT = REPO_ROOT / "content" / "learning-paths"
+INSTALL_GUIDE_ROOT = REPO_ROOT / "content" / "install-guides"
+INSTALL_GUIDE_TITLE_TEMPLATE = "Quickly install the\n{title}\ntool"
+
+
+def file_to_data_url(path: Path, mime_type: str) -> str:
+    encoded = base64.b64encode(path.read_bytes()).decode("ascii")
+    return f"data:{mime_type};base64,{encoded}"
+
+
+def vertical_alignment_css(value: str) -> str:
+    mapping = {
+        "start": "flex-start",
+        "center": "center",
+        "end": "flex-end",
+    }
+
+    if value not in mapping:
+        raise ValueError(
+            f"VERTICAL_ALIGN must be one of {list(mapping)}, got {value!r}"
+        )
+
+    return mapping[value]
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description=(
+            "Generate a social card from Learning Path or install guide metadata."
+        )
+    )
+    parser.add_argument(
+        "content_path",
+        nargs="?",
+        help=(
+            "Path to a Learning Path directory/_index.md or an install guide .md file."
+        ),
+    )
+    parser.add_argument(
+        "--all",
+        action="store_true",
+        help="Generate missing or retitled default, Learning Path, and install guide cards.",
+    )
+    parser.add_argument(
+        "--default",
+        action="store_true",
+        help="Generate only static/social-images/default.webp.",
+    )
+    parser.add_argument(
+        "--manifest",
+        type=Path,
+        help="JSON title manifest for --all (defaults to a local ignored file).",
+    )
+    args = parser.parse_args()
+    if sum((bool(args.content_path), args.all, args.default)) != 1:
+        parser.error("provide a content path, --all, or --default")
+    if args.manifest and not args.all:
+        parser.error("--manifest requires --all")
+    return args
+
+
+def resolve_content_path(value: str) -> Path:
+    raw_path = Path(value).expanduser()
+
+    if raw_path.is_absolute():
+        path = raw_path
+    else:
+        cwd_path = Path.cwd() / raw_path
+        repo_path = REPO_ROOT / raw_path
+        path = cwd_path if cwd_path.exists() else repo_path
+
+    if path.is_dir():
+        path = path / "_index.md"
+
+    if not path.exists():
+        raise FileNotFoundError(f"Content file not found: {path}")
+
+    if path.suffix != ".md":
+        raise ValueError(f"Content path must be a Markdown file: {path}")
+
+    return path.resolve()
+
+
+def content_type_for_path(path: Path) -> str:
+    resolved_path = path.resolve()
+
+    try:
+        resolved_path.relative_to(LEARNING_PATH_ROOT.resolve())
+        return "LEARNING PATH"
+    except ValueError:
+        pass
+
+    try:
+        resolved_path.relative_to(INSTALL_GUIDE_ROOT.resolve())
+        return "INSTALL GUIDE"
+    except ValueError:
+        pass
+
+    raise ValueError(
+        "Content path must be under content/learning-paths or content/install-guides: "
+        f"{path}"
+    )
+
+
+def output_path_for_content(path: Path) -> Path:
+    relative_path = path.relative_to((REPO_ROOT / "content").resolve())
+
+    if path.name == "_index.md" and relative_path.parent != Path("."):
+        relative_path = relative_path.parent.with_name(f"{relative_path.parent.name}.webp")
+    else:
+        relative_path = relative_path.with_suffix(".webp")
+
+    return OUTPUT_ROOT / relative_path
+
+
+def all_content_paths() -> list[Path]:
+    learning_paths = sorted(
+        path for path in LEARNING_PATH_ROOT.rglob("_index.md")
+        if len(path.relative_to(LEARNING_PATH_ROOT).parts) >= 3
+        and not any(
+            part.startswith("_")
+            for part in path.relative_to(LEARNING_PATH_ROOT).parts[:-1]
+        )
+    )
+    install_guides = sorted(
+        path for path in INSTALL_GUIDE_ROOT.rglob("*.md")
+        if (path.parent == INSTALL_GUIDE_ROOT and path.name != "_index.md")
+        or (path.parent != INSTALL_GUIDE_ROOT and path.name == "_index.md")
+    )
+    return learning_paths + install_guides
+
+
+def read_manifest(path: Path) -> dict[str, str]:
+    if not path.exists():
+        print(f"No title manifest at {path}; generating a baseline for all cards.")
+        return {}
+
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict) or not all(
+        isinstance(key, str) and isinstance(value, str)
+        for key, value in data.items()
+    ):
+        raise ValueError(f"Title manifest must map image paths to titles: {path}")
+    return data
+
+
+def write_manifest(path: Path, titles: dict[str, str]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary_path = path.with_name(f"{path.name}.tmp")
+    temporary_path.write_text(
+        json.dumps(titles, indent=2, sort_keys=True, ensure_ascii=False) + "\n",
+        encoding="utf-8",
+    )
+    temporary_path.replace(path)
+
+
+def read_front_matter(path: Path) -> dict:
+    lines = path.read_text(encoding="utf-8").splitlines()
+
+    if not lines or lines[0].strip() != "---":
+        raise ValueError(f"Missing YAML front matter delimiter at start of {path}")
+
+    for index, line in enumerate(lines[1:], start=1):
+        if line.strip() == "---":
+            front_matter = "\n".join(lines[1:index])
+            data = yaml.safe_load(front_matter) or {}
+
+            if not isinstance(data, dict):
+                raise ValueError(f"YAML front matter must be a mapping in {path}")
+
+            return data
+
+    raise ValueError(f"Missing closing YAML front matter delimiter in {path}")
+
+
+def title_for_path(path: Path) -> str:
+    front_matter = read_front_matter(path)
+    title = front_matter.get("title")
+
+    if title is None or not str(title).strip():
+        raise ValueError(f"Missing required title in front matter: {path}")
+
+    return str(title).strip()
+
+
+def render_title(raw_title: str, content_type: str) -> str:
+    if content_type != "INSTALL GUIDE":
+        return raw_title
+
+    return INSTALL_GUIDE_TITLE_TEMPLATE.replace("{title}", raw_title)
+
+
+def font_face_css(path: Path, family: str, weight: int, fallback: str) -> str:
+    if not path.exists():
+        print(
+            f"Warning: {path.name} not found. "
+            f"Using system {fallback} fallback."
+        )
+        return ""
+
+    font_url = file_to_data_url(path, "font/otf")
+
+    return f"""
+    @font-face {{
+        font-family: "{family}";
+        src: url("{font_url}") format("opentype");
+        font-style: normal;
+        font-weight: {weight};
+        font-display: block;
+    }}
+"""
+
+
+def generate_card(content_path: Path):
+    raw_title = title_for_path(content_path)
+    content_type = content_type_for_path(content_path)
+    title = render_title(raw_title, content_type)
+    output_path = output_path_for_content(content_path)
+    render_card(title, content_type, output_path)
+
+
+def render_card(title: str, content_type: str, output_path: Path):
+
+    for path in (
+        SVG_PATH,
+    ):
+        if not path.exists():
+            raise FileNotFoundError(f"Missing required file: {path}")
+
+
+    title_font_css = font_face_css(TITLE_FONT_PATH, "Aeonik", 500, "sans-serif")
+    meta_font_css = font_face_css(META_FONT_PATH, "Aeonik Fono", 400, "monospace")
+    svg_url = file_to_data_url(SVG_PATH, "image/svg+xml")
+
+    safe_title = html.escape(title)
+    safe_content_type = html.escape(content_type)
+
+    document = f"""
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<style>
+    {title_font_css}
+    {meta_font_css}
+
+    * {{
+        box-sizing: border-box;
+    }}
+
+    html,
+    body {{
+        width: {WIDTH}px;
+        height: {HEIGHT}px;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+    }}
+
+    body {{
+        background: #0d022c;
+    }}
+
+    #card {{
+        position: relative;
+        width: {WIDTH}px;
+        height: {HEIGHT}px;
+        overflow: hidden;
+    }}
+
+    #background {{
+        position: absolute;
+        inset: 0;
+        width: {WIDTH}px;
+        height: {HEIGHT}px;
+        display: block;
+    }}
+
+    #title-box {{
+        position: absolute;
+
+        left: {TITLE_X}px;
+        top: {TITLE_Y}px;
+        width: {TITLE_WIDTH}px;
+        height: {TITLE_HEIGHT}px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: {vertical_alignment_css(VERTICAL_ALIGN)};
+
+        overflow: hidden;
+    }}
+
+    #title {{
+        font-family: "Aeonik", Arial, Helvetica, sans-serif;
+        font-weight: {FONT_WEIGHT};
+        font-synthesis: none; /* Prevent browser from faking bold/italic */
+        color: #ffffff;
+        font-size: {MAX_FONT_SIZE}px;
+        line-height: {LINE_HEIGHT};
+
+        text-align: {TEXT_ALIGN};
+        white-space: pre-line;
+        text-wrap: pretty; /* options: balance, pretty, none */
+        hyphens: none;
+        overflow-wrap: break-word;
+
+        margin: 0;
+        padding: 0;
+    }}
+
+
+
+    #content-type {{
+        position: absolute;
+        left: 70px;
+        top: 155px;
+
+        font-family: "Aeonik Fono", Consolas, "Liberation Mono", Menlo, monospace;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: 0.02em;
+        color: #C7ADFC;
+    }}
+
+
+
+</style>
+</head>
+
+<body>
+
+
+
+    <div id="card">
+        <img id="background" src="{svg_url}" alt="">
+
+        <div id="content-type">{safe_content_type}</div>
+        <div id="title-box">
+            <div id="title">{safe_title}</div>
+        </div>
+
+    </div>
+
+<script>
+async function fitTitle() {{
+    await document.fonts.ready;
+
+    const title = document.getElementById("title");
+    const box = document.getElementById("title-box");
+
+    let size = {MAX_FONT_SIZE};
+
+    function fits() {{
+        /*
+         * scrollHeight catches vertical overflow.
+         * scrollWidth catches pathological horizontal overflow.
+         */
+        return (
+            title.scrollHeight <= box.clientHeight &&
+            title.scrollWidth <= box.clientWidth
+        );
+    }}
+
+    while (size > {MIN_FONT_SIZE} && !fits()) {{
+        size -= 1;
+        title.style.fontSize = size + "px";
+
+        /*
+         * Force layout before testing again.
+         */
+        void title.offsetHeight;
+    }}
+
+    window.__TITLE_RESULT__ = {{
+        fontSize: size,
+        fits: fits(),
+        scrollHeight: title.scrollHeight,
+        boxHeight: box.clientHeight,
+        scrollWidth: title.scrollWidth,
+        boxWidth: box.clientWidth
+    }};
+
+    window.__READY__ = true;
+}}
+
+fitTitle();
+</script>
+</body>
+</html>
+"""
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+
+        page = browser.new_page(
+            viewport={
+                "width": WIDTH,
+                "height": HEIGHT,
+            },
+            device_scale_factor=4,
+        )
+
+        page.set_content(document)
+
+        page.wait_for_function("window.__READY__ === true")
+
+        result = page.evaluate("window.__TITLE_RESULT__")
+
+        if not result["fits"]:
+            browser.close()
+            raise RuntimeError(
+                "Title could not fit inside the configured title box "
+                f"even at {result['fontSize']}px. "
+                "Increase TITLE_WIDTH/TITLE_HEIGHT, lower MIN_FONT_SIZE, "
+                "or shorten the title."
+            )
+
+        print(
+            f"Title fitted at {result['fontSize']}px "
+            f"inside {TITLE_WIDTH}x{TITLE_HEIGHT}px box."
+        )
+
+        # Playwright returns PNG bytes directly.
+        # No temporary PNG file is required.
+        png_bytes = page.locator("#card").screenshot(type="png")
+
+        browser.close()
+
+    with Image.open(BytesIO(png_bytes)) as image:
+        image = image.convert("RGB")
+
+        image = image.resize(
+            (WIDTH, HEIGHT),
+            Image.Resampling.LANCZOS,
+        )
+
+        # Very subtle dithering to break up gradient banding.
+        noise = Image.effect_noise(
+            image.size,
+            sigma=1.5, # 0.6  → extremely subtle. 1.0  → my starting point 1.5  → stronger anti-banding 2.0  → probably more grain than you need
+        ).convert("RGB")
+
+        dithered = ImageChops.add(
+            image,
+            noise,
+            scale=1.0,
+            offset=-128,
+        )
+
+        # Only dither darker pixels.
+        # White logo/title remain untouched.
+        luminance = image.convert("L")
+
+        mask = luminance.point(
+            lambda p: 255 if p < 190 else 0
+        )
+
+        image = Image.composite(
+            dithered,
+            image,
+            mask,
+        )
+
+
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        image.save(
+            output_path,
+            format="WEBP",
+            quality=96,
+            method=6,
+        )
+
+    print(f"Wrote: {output_path}")
+
+
+def main():
+    args = parse_args()
+    if args.content_path:
+        generate_card(resolve_content_path(args.content_path))
+        return
+    if args.default:
+        render_card(DEFAULT_TITLE, DEFAULT_CONTENT_TYPE, DEFAULT_OUTPUT_PATH)
+        return
+
+    manifest_path = args.manifest or DEFAULT_MANIFEST_PATH
+    previous_titles = read_manifest(manifest_path)
+    current_titles = {}
+    paths = all_content_paths()
+    failures = []
+    generated = 0
+    skipped = 0
+    default_key = DEFAULT_OUTPUT_PATH.relative_to(OUTPUT_ROOT).as_posix()
+    current_titles[default_key] = DEFAULT_TITLE
+    if DEFAULT_OUTPUT_PATH.is_file() and previous_titles.get(default_key) == DEFAULT_TITLE:
+        skipped += 1
+        print(f"Up to date: {DEFAULT_OUTPUT_PATH}", flush=True)
+    else:
+        try:
+            render_card(DEFAULT_TITLE, DEFAULT_CONTENT_TYPE, DEFAULT_OUTPUT_PATH)
+            generated += 1
+        except Exception as error:
+            failures.append((DEFAULT_OUTPUT_PATH, error))
+            print(f"Failed: {DEFAULT_OUTPUT_PATH}: {error}", flush=True)
+    for index, path in enumerate(paths, start=1):
+        print(f"[{index}/{len(paths)}] {path.relative_to(REPO_ROOT)}", flush=True)
+        try:
+            resolved_path = path.resolve()
+            output_path = output_path_for_content(resolved_path)
+            key = output_path.relative_to(OUTPUT_ROOT).as_posix()
+            content_type = content_type_for_path(resolved_path)
+            title = render_title(title_for_path(resolved_path), content_type)
+            current_titles[key] = title
+            if output_path.is_file() and previous_titles.get(key) == title:
+                skipped += 1
+                continue
+            render_card(title, content_type, output_path)
+            generated += 1
+        except Exception as error:
+            failures.append((path, error))
+            print(f"Failed: {error}", flush=True)
+
+    print(
+        f"Cards: {generated} generated, {skipped} already present, "
+        f"{len(failures)} failed ({len(paths) + 1} total)."
+    )
+    if failures:
+        for path, error in failures:
+            print(f"  {path.relative_to(REPO_ROOT)}: {error}")
+        raise SystemExit(1)
+    if current_titles != previous_titles:
+        write_manifest(manifest_path, current_titles)
+        print(f"Updated title manifest: {manifest_path}")
+
+
+if __name__ == "__main__":
+    main()

@@ -33,7 +33,7 @@ To compare the results you will use the Analyzer to import all three datasets bu
 
 You now have two datasets loaded, one from the unoptimized mode and one from the Burst mode. This is what the data looks like collected from our sample device.
 
-![Plain vs Burst#center](images/analyzer-plain-vs-burst.PNG)
+![Plain vs Burst#center](images/analyzer-plain-vs-burst.png)
 
 Focus on the collision-related markers by searching for _collisioncalc_ in the _Name Filter_. Select a representative frame by clicking on a later frame where both seem relatively settled (and with no odd spikes).
 
@@ -45,6 +45,6 @@ In the top 10 markers, the unoptimized data is in blue. The Burst data is in ora
 
 Follow the same process again but this time we will compare Burst against Neon.
 
-![Burst vs Neon#center](images/analyzer-burst-vs-neon.PNG)
+![Burst vs Neon#center](images/analyzer-burst-vs-neon.png)
 
 Again, we can see an improvement, mostly with the dynamic (character-character) collision detection but together it still makes a meaningful improvement.

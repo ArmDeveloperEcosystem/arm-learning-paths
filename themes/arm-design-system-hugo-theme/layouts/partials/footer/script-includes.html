@@ -48,7 +48,7 @@ Called from:
 <script src="/vendor/msal-browser.min.js" defer></script> <!-- Authentication -->
 <script src="/js/authentication.js" defer></script> <!-- Authentication -->
 {{ if eq (getenv "HUGO_CHATBOT_ENABLED") "true" }}
-<!-- Development/stage chatbot script: https://content.dev.bespin.arm.com/VirtualFAE/learnarm/stage/chat-ai.js -->
+<script src="/js/ai-sign-in-banner.js" defer></script>
 <script type="text/javascript" src="https://content.ipexplorer.arm.com/VirtualFAE/learnarm/chat-ai.js" defer></script>
 <script>
     {{/* Get the chatbot API location from GitHub Secrets */}}
@@ -57,7 +57,7 @@ Called from:
 <script src="/js/chat-ai-integration.js" defer></script>
 {{ end }}
 
-
+<script src="{{ "js/fullscreen-iframe.js" | relURL }}"></script>
 
 
 <!-- Homepage only -->
@@ -66,7 +66,7 @@ Called from:
 {{end}}
 
 <!-- List pages only -->
-{{if $is_list}}
+{{if and $is_list (not .Params.browser_search)}}
     <script src="/js/search-and-filter.js" defer></script>
     <script src="/js/filter-and-navigate-mobile-behavior.js" defer></script>
 {{end}}
@@ -135,3 +135,20 @@ Called from:
         {{end}}
     {{end}}
 {{end}}
+
+<script>
+    // The native content link supplies the card's keyboard tab stop.
+    customElements.whenDefined('ads-card').then(() => {
+        document.querySelectorAll('ads-card.path-card, ads-card.tool-card').forEach((card) => {
+            card.componentOnReady().then(() => {
+                card.shadowRoot?.querySelector('.c-card')?.removeAttribute('tabindex');
+                // Let the stretched link use the full card as its containing block.
+                const content = card.querySelector('ads-card-content');
+                customElements.whenDefined('ads-card-content').then(() => content.componentOnReady()).then(() => {
+                    const wrapper = content.shadowRoot?.querySelector('.c-card-content');
+                    if (wrapper) wrapper.style.position = 'static';
+                });
+            });
+        });
+    });
+</script>

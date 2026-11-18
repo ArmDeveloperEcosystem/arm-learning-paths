@@ -24,9 +24,9 @@ rerun_faqs: false
 
 ##### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 platforms:
-  - Google Cloud
+  - Google Axion
 
 armips:
   - Neoverse

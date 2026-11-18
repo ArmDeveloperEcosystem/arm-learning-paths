@@ -12,7 +12,7 @@ learning_objectives:
 prerequisites:
     - An [Arm-based instance](/learning-paths/servers-and-cloud-computing/csp/) from a cloud service provider or an on-premise Arm server.
 
-author: ThirdAI
+author: David Torres
 
 generate_summary_faq: true
 rerun_summary: false
@@ -20,12 +20,12 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 platforms:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
     - Neoverse
 tools_software_languages:

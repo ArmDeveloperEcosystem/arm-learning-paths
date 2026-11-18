@@ -1,5 +1,5 @@
 ---
-title: Develop cross-platform applications with Xamarin Forms on Windows on Arm
+title: Develop Xamarin Forms apps for Windows on Arm
 
 description: Learn how to create and build Xamarin Forms applications using the MVVM pattern and measure code execution performance uplift on Arm64.
 

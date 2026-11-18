@@ -10,38 +10,28 @@ layout: learningpathall
 
 To run the Vulkan Samples, you first need to set up your development environment.
 
-This setup involves two main steps:
+This setup involves three main steps:
 
-- Install the required tools on your development machine.
-- Download the ML Emulation Layers for Vulkan, which simulate the `VK_ARM_data_graph` and `VK_ARM_tensors` extensions.
+- Create a Python virtual environment and install the ML Emulation Layers for Vulkan.
+- Install the LunarG Vulkan SDK.
+- Enable the ML Emulation Layers using Vulkan Configurator.
 
-## Install required tools for development
+## Set up the development environment
 
-Before building and running the samples, install these tools on your development machine:
+Open **Windows PowerShell** from the Windows 11 Start menu. Verify that Python 3.10 or later is installed. Use a standard CPython build rather than a free-threaded build, then navigate to your user home directory:
 
-- CMake (version 3.25 or later)
-- Python 3
-- Git
-
-Install Git with the following command:
-
-```bash
-winget install --id Git.Git -e
+```powershell
+python --version
+cd $HOME
 ```
 
-In Visual Studio Code, create a folder for the project and install these Microsoft extensions:
+Create a Python virtual environment and install the following packages:
 
-- C/C++
-- CMake Tools
+- **ML Emulation Layers for Vulkan:** Provides the emulation layers introduced in the previous section.
+- **CMake:** A build tool used to configure and build the Vulkan Samples.
 
-![C/C++ tools extension](images/c-ext.png)
-
-![CMake Tools extension](images/cmake-ext.png)
-
-Create a Python virtual environment and install the required packages:
-
-```bash
-py -m venv .venv
+```powershell
+python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install --upgrade pip
 python -m pip install ai-ml-emulation-layer-for-vulkan cmake
@@ -49,7 +39,7 @@ python -m pip install ai-ml-emulation-layer-for-vulkan cmake
 
 To verify your installation, run the following commands:
 
-```bash
+```powershell
 cmake --version
 python --version
 git --version
@@ -58,39 +48,60 @@ python -m pip show ai-ml-emulation-layer-for-vulkan
 
 Each command prints the installed version of the tool or shows where the appropriate files are located.
 
-### Install the Vulkan Software Development Kit
 
-Download the Windows installer from [Getting Started with the Windows Vulkan SDK](https://vulkan.lunarg.com/sdk/home). The Vulkan Software Development Kit (SDK) includes **Vulkan Configurator**, which you use to run the emulation layers.
+## Install the Vulkan Software Development Kit
 
-{{% notice Note %}}
+Arm's ML SDK for Vulkan and the LunarG Vulkan SDK serve different purposes.
 
-Use Vulkan SDK version 1.4.321 or later.
+Arm's ML SDK for Vulkan provides the ML Emulation Layers installed earlier in this Learning Path. The LunarG Vulkan SDK provides Vulkan development tools, including Vulkan Configurator, which you'll use to enable those layers.
 
-{{% /notice %}}
+The two SDKs work together to provide a development environment where you can build and run Vulkan applications using the emulated ML extensions.
 
+Download and install the Vulkan SDK from [Getting Started with the Windows Vulkan SDK](https://vulkan.lunarg.com/sdk/home).
+
+1. Under **Windows**, select **x64 / x86**.
+2. Download the **SDK Installer** for version 1.4.321 or later. Do not select the Runtime Installer.
+3. Run the installer and accept the default installation directory.
+4. Keep the default component selections and accept the license agreement.
+5. Complete the installation.
+6. On the final screen, select **Run the Vulkan Configurator and Hardware Capabilities Viewer**, then click **Finish**.
+
+Verify that Vulkan Configurator opens successfully. You will use it in the next section to enable the ML Emulation Layers for Vulkan.
 
 ## Enable the emulation layers in Vulkan Configurator
 
-Open **Vulkan Configurator** to enable the layers that emulate the `VK_ARM_data_graph` and `VK_ARM_tensors` extensions.
+Installing the ML Emulation Layers makes them available on your system, but they must also be enabled so that Vulkan applications can discover and use the emulated ML extensions.
 
-On the **Vulkan Layers Available** tab, browse to the emulation layer folder in your virtual environment's `site-packages` directory:
+If Vulkan Configurator is not already open, launch it from the Windows Start menu.
 
-```output
-.venv/Lib/site-packages/emulation_layer/deploy/bin
-```
+In **Vulkan Configurator**, configure the emulation layers for the `VK_ARM_data_graph` and `VK_ARM_tensors` extensions.
 
-![VL available](images/vl-available.png)
+1. In the **Vulkan Layers Available** tab, add the directory containing the emulation layer manifests from your Python virtual environment:
 
-On the **Vulkan Layers Configuration** tab, set **Vulkan Loader Configuration Scope** to **Any Running Vulkan Executable**. Select **New Configuration**, then enable the **Graph Emulation** and **Tensor Emulation** layers.
+   ```text
+   .venv\Lib\site-packages\emulation_layer\deploy\bin
+   ```
 
-Ensure that the **Graph** layer is listed above the **Tensor** layer.
+   For example, if you created the virtual environment in your Windows user home directory, the path is:
 
-![VL Config](images/vl-layers.png)
+   ```text
+   C:\Users\<username>\.venv\Lib\site-packages\emulation_layer\deploy\bin
+   ```
+
+2. Verify that the following layers appear in the available layers list:
+   - `VK_LAYER_ML_Graph_Emulation`
+   - `VK_LAYER_ML_Tensor_Emulation`
+
+![Vulkan Layers Available](images/vl-available.png)
+
+3. In the **Vulkan Layers Configuration** tab, enable system Vulkan layer configuration and ensure both emulation layers are set to **Enable**.
+
+4. Verify that the **Graph Emulation** layer is listed above the **Tensor Emulation** layer.
+
+![Vulkan Layers Configuration](images/vl-layers.png)
 
 {{% notice Important %}}
-
 Keep Vulkan Configurator running while you run the Vulkan samples.
-
 {{% /notice %}}
 
-With the emulation layers configured, you're ready to build the Vulkan Samples.
+With the emulation layers configured, you're ready to build the Vulkan Samples. Continue to the next section to get started.

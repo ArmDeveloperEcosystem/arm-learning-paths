@@ -15,28 +15,33 @@ SPE requires support from both your hardware and the operating system. Many clou
 
 You need to identify a system that supports SPE using the information below. 
 
-If you are looking for an AWS system, you can use a `c6g.metal` instance running Amazon Linux 2023 (AL2023). 
+This example uses the Arm AGI CPU running Ubuntu 24.04 LTS. Alternatively, you can use an AWS bare metal instance like `c6g.metal` running Amazon Linux 2023 (AL2023). 
 
-Check the underlying Neoverse processor and operating system kernel version with the following commands: 
+Check the operating system kernel version with the following commands: 
 
 ```bash
-lscpu | grep -i "model name"
 uname -r
 ```
 
-The output includes the CPU type and kernel release version:
+The output includes the kernel release version:
 
 ```output
-Model name:                           Neoverse-N1
-6.1.134-152.225.amzn2023.aarch64
+7.0.3
 ```
 
-Next, install the prerequisite packages using the package manager:
+Next, select your operating system and install the prerequisite packages:
 
-```bash
+{{< tabpane code=true >}}
+  {{< tab header="Amazon Linux 2023" language="bash" >}}
 sudo dnf update -y
 sudo dnf install perf git gcc cmake numactl-devel -y
-```
+  {{< /tab >}}
+  {{< tab header="Ubuntu 24.04" language="bash" >}}
+sudo apt update
+sudo apt install linux-tools-common linux-tools-generic git gcc cmake libnuma-dev -y
+  {{< /tab >}}
+{{< /tabpane >}}
+
 
 Linux Perf is a userspace process and SPE is a hardware feature. The Linux kernel must be compiled with SPE support or the kernel module named `arm_spe_pmu` must be loaded.
 
@@ -60,7 +65,7 @@ If SPE is available, the output you will see is:
 arm_spe_0
 ```
 
-If the output is blank then SPE is not available.
+If the output is blank then SPE is not available. To enable Arm SPE, please refer to the [Enable Arm SPE for Performix memory access analysis learning path](/learning-paths/servers-and-cloud-computing/spe-on-performix/).
 
 ## Run Sysreport
 
@@ -70,19 +75,20 @@ See the Learning Path [Get ready for performance analysis with Sysreport](/learn
 
 Look at the Sysreport output and confirm SPE is available by checking the `perf sampling` field. 
 
-If the printed value is SPE, then SPE is available.
+If the printed value is SPE, then SPE is available. Additionally, the version of linux perf should match the major and minor version of the linux kernel.  
 
 ```output
 ...
 Performance features:
   perf tools:          True
-  perf installed at:   /usr/bin/perf
+  perf installed at:   /usr/lib/linux-tools/7.0.3-arm-agi-cpu-20260519-0.4.1-gf6d5b6032322/perf
   perf with OpenCSD:   False
   perf counters:       6
   perf sampling:       SPE
   perf HW trace:       None
   perf paranoid:       -1
-  kptr_restrict:       0
+  CAP_PERFMON:         disabled
+  kptr_restrict:       1
   perf in userspace:   disabled
 ```
 

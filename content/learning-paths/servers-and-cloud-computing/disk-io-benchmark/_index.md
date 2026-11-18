@@ -70,10 +70,10 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Performance and Architecture
 platforms:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
     - Neoverse
 tools_software_languages:

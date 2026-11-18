@@ -1,31 +1,35 @@
 ---
 additional_search_terms:
 - armclang
+- armflang
 - compiler
 - hpc
 - linux
-- allinea
+- ATfL
+- Arm Compiler for Linux
+- ACfL
 author: Florent Lebeau
 layout: installtoolsall
 minutes_to_complete: 15
 multi_install: false
 multitool_install_part: false
-description: Install Arm Compiler for Linux (ACfL) on Arm Linux (aarch64) to access the armclang C/C++ compiler, armflang Fortran compiler, and Arm Performance Libraries for HPC development.
-official_docs: https://developer.arm.com/documentation/101458/latest
+description: Install Arm Toolchain for Linux (ATfL) on Arm Linux (aarch64) to access the armclang C/C++ compiler, armflang Fortran compiler, and Arm Performance Libraries for HPC development.
+official_docs: https://support.arm.com/documentation/110477/latest
 test_images:
 - ubuntu:latest
-- fedora:latest
-test_link: null
 test_maintenance: true
-title: Arm Compiler for Linux
+title: Arm Toolchain for Linux
 tool_install: true
 weight: 1
 ---
-[Arm Compiler for Linux (ACfL)](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Linux) is a suite of tools containing Arm C/C++ Compiler (`armclang`), Arm Fortran Compiler (`armflang`), and Arm Performance Libraries (ArmPL). It is tailored to the development of High Performance Computing (HPC) applications.
 
-Arm Compiler for Linux runs on 64-bit Arm machines and supports all 64-bit Arm-based [server-class hardware](/learning-paths/servers-and-cloud-computing/intro/). It is not a cross-compiler.
+[Arm Toolchain for Linux](https://github.com/arm/arm-toolchain) (ATfL) is an open-source LLVM-based compiler suite for AArch64 Linux systems. It includes the `armclang` C/C++ compiler, the `armflang` Fortran compiler, and [Arm Performance Libraries](/install-guides/armpl/) (ArmPL). ATfL is optimized for Arm Neoverse cores and targets scientific computing, HPC, AI, and cloud-native workloads.
 
-You don't require any additional license to use Arm Compiler for Linux.
+ATfL replaces the older Arm Compiler for Linux (ACfL), which reached end of life with version 24.10. If you are migrating from ACfL, see the [Arm Toolchain for Linux User Guide](https://support.arm.com/documentation/110477/latest) for guidance.
+
+ATfL runs on 64-bit Arm Linux machines and supports all 64-bit Arm-based [server-class hardware](/learning-paths/servers-and-cloud-computing/intro/). It isn't a cross-compiler.
+
+You don't need any additional license to use Arm Toolchain for Linux.
 
 ## Before you begin
 
@@ -35,286 +39,189 @@ Confirm you are using an Arm machine by running:
 uname -m
 ```
 
-The output should be:
+The expected output is:
 
 ```output
 aarch64
 ```
 
-If you see a different result, you are not using an Arm computer running 64-bit Linux.
+If you see a different result, you aren't using an Arm computer running 64-bit Linux.
 
-Ensure you are using a [supported Linux distribution](https://developer.arm.com/Tools%20and%20Software/Arm%20Compiler%20for%20Linux#Supported-Devices). 
+ATfL is supported on the following Linux distributions:
 
-If any of the following tools are not already installed by your Linux
-distribution, install them before installing Arm Compiler for Linux.
-These packages can be installed with the appropriate package manager for your OS:
+- Ubuntu 22.04 and 24.04
+- Red Hat Enterprise Linux 8, 9, and 10
+- Amazon Linux 2023
+- SUSE Linux Enterprise Server 15 and 16
 
-  - SLES: `awk` `environment-modules` `glibc-devel` `gzip` `python3` `tar`
-  - RHEL: `environment-modules` `glibc-devel` `procps` `python3`
-  - Amazon Linux: `environment-modules` `glibc-devel` `gzip procps` `python3` `tar`
-  - Ubuntu: `environment-modules` `libc6-dev` `python3`
+## Install ATfL using the system package manager {#package}
 
-Ensure that you're running the minimum supported version for Python, which is version 3.6.
+The recommended way to install ATfL is through the [Arm Toolchains repository](/install-guides/arm-toolchains-repository/). This method installs ATfL and Arm Performance Libraries using your system package manager and handles updates automatically.
 
-Ensure that you have at least 2 GB of free hard disk space to both download and unpack the Arm Compiler for Linux package. You must also have an additional 6 GB of
-free space to install the package.
+### Ubuntu
 
-Run the following commands:
+Install the Arm Toolchains repository package and then install ATfL:
 
-```console
+```bash 
+curl -O https://developer.arm.com/packages/arm-toolchains/ubuntu/pool/arm-toolchains-repository_2-2~noble_all.deb
+sudo dpkg -i arm-toolchains-repository_2-2~noble_all.deb
 sudo apt update
-sudo apt install -y python-is-python3 libc6-dev
+sudo apt install -y arm-toolchain-for-linux
 ```
 
-You are now ready to install ACfL [manually](#manual) or with [Spack](#spack).
+{{% notice Ubuntu version %}}
+The commands shown are for Ubuntu 24.04. For Ubuntu 22.04, replace `noble` with `jammy` in the repository package filename. For other distributions, see the [Arm Toolchains repository install guide](/install-guides/arm-toolchains-repository/).
+{{% /notice %}}
 
+### Red Hat Enterprise Linux 8
 
-## Download and install ACfL using an install script
-
-Use an Arm recommended script to select, download, and install your preferred ACfL package.
+Install the repository package and then install ATfL:
 
 ```console
-bash <(curl -L https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Package/install.sh)
+sudo dnf install -y https://developer.arm.com/packages/arm-toolchains/rhel/el8/aarch64/arm-toolchains-repository-2-2.el8.noarch.rpm
+sudo dnf clean all
+sudo dnf makecache
+sudo dnf install -y arm-toolchain-for-linux
 ```
 
-## Download and install ACfL manually with wget {#manual}
+### Red Hat Enterprise Linux 9
 
-Download releases from the command line using `wget`. Install `wget` if not present.
+Install the repository package and then install ATfL:
+
+```console
+sudo dnf install -y https://developer.arm.com/packages/arm-toolchains/rhel/el9/aarch64/arm-toolchains-repository-2-2.el9.noarch.rpm
+sudo dnf clean all
+sudo dnf makecache
+sudo dnf install -y arm-toolchain-for-linux
+```
+
+### Red Hat Enterprise Linux 10
+
+Install the repository package and then install ATfL:
+
+```console
+sudo dnf install -y https://developer.arm.com/packages/arm-toolchains/rhel/el10/aarch64/arm-toolchains-repository-2-2.el10.noarch.rpm
+sudo dnf clean all
+sudo dnf makecache
+sudo dnf install -y arm-toolchain-for-linux
+```
+
+### Amazon Linux 2023
+
+Install the repository package and then install ATfL:
+
+```console
+sudo dnf install -y https://developer.arm.com/packages/arm-toolchains/amazonlinux/al2023/aarch64/arm-toolchains-repository-2-2.al2023.noarch.rpm
+sudo dnf clean all
+sudo dnf makecache
+sudo dnf install -y arm-toolchain-for-linux
+```
+
+### SUSE Linux Enterprise Server 15
+
+Install the repository package and then install ATfL:
+
+```console
+sudo zypper install -y https://developer.arm.com/packages/arm-toolchains/sles/sles15/aarch64/arm-toolchains-repository-2-2.sles15.noarch.rpm
+sudo zypper clean
+sudo zypper refresh
+sudo zypper install -y arm-toolchain-for-linux
+```
+
+### SUSE Linux Enterprise Server 16
+
+Install the repository package and then install ATfL:
+
+```console
+sudo zypper install -y https://developer.arm.com/packages/arm-toolchains/sles/sles16/aarch64/arm-toolchains-repository-2-2.sles16.noarch.rpm
+sudo zypper clean
+sudo zypper refresh
+sudo zypper install -y arm-toolchain-for-linux
+```
+
+## Set up the environment {#env}
+
+ATfL installs to `/opt/arm/arm-toolchain-for-linux`. You need to add the `bin` directory to your `PATH` before using the compilers.
+
+### Option 1: Source the environment script
+
+Source the provided `env.bash` script to configure your shell:
 
 ```bash
-sudo apt install wget
+source /opt/arm/arm-toolchain-for-linux/env.bash
 ```
 
-### Fetch the appropriate ACfL installer
+To load the environment automatically in new shells, add it to your `.bashrc`:
 
-ACfL installation packages are available to download from [Arm Developer](https://developer.arm.com/downloads/-/arm-compiler-for-linux). Individual Arm Performance Libraries (ArmPL) packages are also available.
-
-To fetch the ACfL installers, run:
-
-#### Ubuntu Linux
-
-```bash { target="ubuntu:latest" }
-wget  https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Version_24.10.1/arm-compiler-for-linux_24.10.1_Ubuntu-22.04_aarch64.tar
-```
-#### Red Hat Linux
-```bash { target="fedora:latest" }
-wget https://developer.arm.com/-/cdn-downloads/permalink/Arm-Compiler-for-Linux/Version_24.10.1/arm-compiler-for-linux_24.10.1_RHEL-9_aarch64.tar
-```
-
-### Install ACfL
-
-To install Arm Compiler for Linux on your 64-bit Linux Arm machine, extract the package and run the installation script.
-
-Each command sequence includes accepting the license agreement to automate the installation and installing Environment Modules.
-
-#### Ubuntu Linux
-
-```bash { target="ubuntu:latest" }
-sudo -E apt-get -y install environment-modules python3 libc6-dev
-tar -xvf arm-compiler-for-linux_24.10.1_Ubuntu-22.04_aarch64.tar
-cd ./arm-compiler-for-linux_24.10.1_Ubuntu-22.04
-sudo ./arm-compiler-for-linux_24.10.1_Ubuntu-22.04.sh --accept
-```
-
-#### Red Hat Linux
-
-```console
-sudo yum -y install environment-modules python3 glibc-devel
-tar -xvf arm-compiler-for-linux_24.10.1_RHEL-9_aarch64.tar
-cd ./arm-compiler-for-linux_24.10.1_RHEL-9
-sudo ./arm-compiler-for-linux_24.10.1_RHEL-9.sh --accept
-```
-
-{{% notice Warning %}}
-⚠️ On RPM based systems (such as Red Hat), if an
-alternative version of GCC (not the GCC bundled with ACfL) is installed
-**after** ACfL, you will not be able to uninstall ACfL fully. For example, a GDB
-(GNU Project Debugger) installation will install the native system GCC. If this
-install takes place **after** ACfL, you will no longer be able to fully
-uninstall ACfL.
-{{% /notice %}}
-
-## Download and install ACfL using system packages
-
-To download and install ACfL using system packages, follow these steps.
-
-### Install ACfL on Ubuntu Linux 20.04 and 22.04
-
-Arm Compiler for Linux is available to install with the Ubuntu system package manager `apt` command.
-
-#### Set up the ACfL package repository
-
-Add the ACfL `apt` package repository to your system. 
-
-{{% notice Note %}}
-These instructions are for Ubuntu 22.04. For other releases, see [available versions](https://developer.arm.com/packages/).
-{{% /notice %}}
-
-
-After adding the repository to your system, the ACfL Ubuntu package repository is now ready to use. Run the commands below to install the dependencies needed.
-
-
-```console
-sudo apt update
-sudo apt install -y wget gnupg gpg environment-modules python3 libc6-dev
-wget -qO - https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/Release.key | sudo tee /etc/apt/trusted.gpg.d/developer-arm-com.asc
-echo "deb https://developer.arm.com/packages/ACfL%3AUbuntu-22/jammy/ ./" | sudo tee /etc/apt/sources.list.d/developer-arm-com.list
-sudo apt update
-```
-
-#### Install Arm Compiler for Linux
-
-To install Arm Compiler for Linux, run:
-
-```console
-sudo apt install acfl -y
-```
-
-### Install ACfL on Amazon Linux 2023 (AL2023)
-
-Arm Compiler for Linux is available to install from the AL2023 package repository with either the `dnf` or `yum` system package manager.
-
-Install ACfL and prerequisites from the AL2023 `rpm` package repository with `dnf`:
-
-```console
-sudo dnf update -y
-sudo dnf -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo dnf config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
-sudo dnf -y install acfl
-```
-
-Or using the equivalent `yum` commands:
-
-```console
-sudo yum update -y
-sudo yum -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo yum config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3AAmazonLinux-2023/latest/ACfL%3AAmazonLinux-2023.repo
-sudo yum -y install acfl
-```
-
-The ACfL tools are now ready to use.
-
-### Install ACfL on Red Hat Enterprise Linux (RHEL) 9
-
-Arm Compiler for Linux is available to install from the RHEL 9 package repository with either the `dnf` or `yum` system package manager.
-
-Install ACfL and prerequisites from the RHEL 9 `rpm` package repository with `dnf`:
-
-```console
-sudo dnf update -y
-sudo dnf -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo dnf config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
-sudo dnf -y install acfl
-```
-
-Or using the equivalent `yum` commands:
-
-```console
-sudo yum update -y
-sudo yum -y install 'dnf-command(config-manager)' procps psmisc make environment-modules
-sudo yum config-manager addrepo --from-repofile=https://developer.arm.com/packages/ACfL%3ARHEL-9/standard/ACfL%3ARHEL-9.repo
-sudo yum -y install acfl
-```
-
-The ACfL tools are now ready to use.
-
-### Set up the environment for ACfL
-
-Arm Compiler for Linux uses environment modules to dynamically modify your user environment. Refer to the [Environment Modules documentation](https://lmod.readthedocs.io/en/latest/#id) for more information.
-
-Set up the environment, for example, in your `.bashrc` and add module files. Then, list the available modules:
-
-#### Ubuntu Linux:
-
-```bash { target="ubuntu:latest" pre_cmd=". /usr/share/modules/init/bash" pre_cmd="module use /opt/arm/modulefiles" }
-echo ". /usr/share/modules/init/bash" >> $HOME/.bashrc
-echo "module use /opt/arm/modulefiles" >> $HOME/.bashrc
+```bash
+echo 'source /opt/arm/arm-toolchain-for-linux/env.bash' >> $HOME/.bashrc
 source $HOME/.bashrc
+```
+
+### Option 2: Use environment modules
+
+ATfL provides module files for use with [Environment Modules](https://modules.readthedocs.io/). Install the `environment-modules` package if it isn't already present:
+
+```bash
+sudo apt install -y environment-modules
+```
+
+Set up your shell to use modules and load ATfL:
+
+```bash { pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles" }
+echo '. /usr/share/modules/init/bash' >> $HOME/.bashrc
+echo 'module use /opt/arm/modulefiles' >> $HOME/.bashrc
+source $HOME/.bashrc
+module load atfl/22.1
+```
+
+To see all available modules, run:
+
+```bash { pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles" }
 module avail
 ```
 
-#### Red Hat or Amazon Linux
+## Verify installation {#verify}
 
-```console
-echo ". /usr/share/Modules/init/bash" >> $HOME/.bashrc
-echo "module use /opt/arm/modulefiles" >> $HOME/.bashrc
-source $HOME/.bashrc
-module avail
-```
+After setting up the environment, verify the compiler versions:
 
-To configure Arm Compiler for Linux:
-
-```console
-module load acfl/24.10.1
-```
-
-To configure GCC:
-
-```console
-module load gnu/14.2.0
-```
-
-ACfL is now [ready to use](#armclang).
-
-## Download and install ACfL with Spack {#spack}
-
-Arm Compiler for Linux is available with the [Spack](https://spack.io/) package manager. For more information, see the [Arm Compiler for Linux and Arm PL now available in Spack](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/arm-compiler-for-linux-and-arm-pl-now-available-in-spack) blog post.
-
-### Set up Spack for ACfL
-
-Clone the Spack repository and add `bin` directory to the path:
-
-```console
-git clone -c feature.manyFiles=true https://github.com/spack/spack.git
-export PATH=/home/ubuntu/spack/bin:$PATH
-```
-
-Set up shell support:
-
-```console
-. /home/ubuntu/spack/share/spack/setup-env.sh
-```
-
-Spack is now ready to use.
-
-### Install ACfL using Spack
-
-To download and install Arm Compiler for Linux, run:
-
-```console
-spack install acfl
-```
-
-To install only the Arm Performance Libraries, use:
-
-```console
-spack install armpl-gcc
-```
-
-### Set up the environment for ACfL using Spack
-
-Use the commands below to set up the environment:
-
-```console
-spack load acfl
-spack compiler find
-```
-
-ACfL is now [ready to use](#armclang).
-
-
-## Get started with the Arm C/C++ compiler {#armclang}
-
-To get started with the Arm C/C++ Compiler and compile a simple application, follow these steps.
-
-Check that you're using the correct compiler version:
-```bash { env_source="$HOME/.bashrc", pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles; module load acfl/24.10.1" }
+```bash { env_source="/opt/arm/arm-toolchain-for-linux/env.bash" }
 armclang --version
 ```
 
+The output is similar to:
+
+```output
+Arm Toolchain for Linux 22.1.0 clang version 22.1.0 (https://github.com/arm/arm-toolchain.git c95792353373404441df364b5a762338e5642230)
+Target: aarch64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /opt/arm/arm-toolchain-for-linux/bin
+Configuration file: /opt/arm/arm-toolchain-for-linux/bin/clang.cfg
+Arm Toolchain ID: L0054 (b1c6e086)
+```
+
+Also verify the Fortran compiler:
+
+```bash { env_source="/opt/arm/arm-toolchain-for-linux/env.bash" }
+armflang --version
+```
+
+The output is similar to:
+
+```output
+Arm Toolchain for Linux 22.1.0 flang version 22.1.0 (https://github.com/arm/arm-toolchain.git c95792353373404441df364b5a762338e5642230)
+Target: aarch64-unknown-linux-gnu
+Thread model: posix
+InstalledDir: /opt/arm/arm-toolchain-for-linux/bin
+Configuration file: /opt/arm/arm-toolchain-for-linux/bin/flang.cfg
+Arm Toolchain ID: L0054 (b1c6e086)
+```
+
+## Get started with the C/C++ compiler {#armclang}
+
 Create a text file named `hello.c` with the following contents:
 
-```C { file_name="hello.c" }
+```c { file_name="hello.c" }
 #include <stdio.h>
 
 int main()
@@ -324,57 +231,52 @@ int main()
 }
 ```
 
-Build the application:
+Build and run the application:
 
-```console
+```bash { env_source="/opt/arm/arm-toolchain-for-linux/env.bash" }
 armclang hello.c -o hello
-```
-
-Run the application:
-
-```console
 ./hello
 ```
 
-The output should be:
+The output is:
 
 ```output
 Hello, C World!
 ```
 
-## Get started with the Arm Fortran compiler {#fortran}
-
-To get started with the Arm Fortran Compiler and compile a simple application, follow these steps.
-
-Check that you're using the correct compiler version:
-```bash { env_source="$HOME/.bashrc", pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles; module load acfl/24.10.1" }
-armflang --version
-```
+## Get started with the Fortran compiler {#fortran}
 
 Create a text file named `hello.f90` with the following contents:
 
 ```fortran { file_name="hello.f90" }
 program hello
-  ! This is a comment line; it is ignored by the compiler
   print *, 'Hello, Fortran World!'
 end program hello
 ```
 
-Build the application:
-```console
-armflang hello.f90 -o hello
-```
+Build and run the application:
 
-Run the application:
-```console
+```bash { env_source="/opt/arm/arm-toolchain-for-linux/env.bash" }
+armflang hello.f90 -o hello
 ./hello
 ```
 
-The output should be:
+The output is:
+
 ```output
-Hello, Fortran World!
+ Hello, Fortran World!
 ```
 
 ## Get started with Arm Performance Libraries {#armpl}
 
-To get started with the [Arm Performance Libraries](https://developer.arm.com/Tools%20and%20Software/Arm%20Performance%20Libraries) and learn how to select the optimal library for your system, see [Get started with Arm Performance Libraries](https://developer.arm.com/documentation/101004/latest).
+ATfL automatically installs [Arm Performance Libraries](/install-guides/armpl/) (ArmPL) as a dependency. ArmPL provides optimized BLAS, LAPACK, FFT, and sparse routines tuned for Arm Neoverse processors.
+
+To load the ArmPL environment module:
+
+```bash { pre_cmd=". /usr/share/modules/init/bash; module use /opt/arm/modulefiles" }
+module load arm-performance-libraries
+```
+
+This sets the `ARMPL_DIR` environment variable and configures `LD_LIBRARY_PATH` and `PKG_CONFIG_PATH`.
+
+For detailed usage instructions, see the [Arm Performance Libraries install guide](/install-guides/armpl/) and the [ArmPL documentation](https://developer.arm.com/documentation/101004/latest).

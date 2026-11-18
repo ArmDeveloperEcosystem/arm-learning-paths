@@ -9,97 +9,105 @@ key_ip:
 - Mali
 maintopic: true
 pinned_learning_paths:
-- voice-assistant
+- neural-graphics-playbook-integrate
+- gemma4-kleidiai-sme2
 - nfru-unreal
-- model-training-gym-nfru
 operatingsystems_filter:
-- Android: 42
-- Linux: 45
-- macOS: 23
-- Windows: 22
+- Android: 59
+- Linux: 56
+- macOS: 27
+- Windows: 26
 subjects_filter:
+- Agentic AI: 0
+- AI/ML: 50
 - Gaming: 6
-- Graphics: 8
-- ML: 33
-- Performance and Architecture: 36
+- Graphics: 11
+- Performance and Architecture: 39
 subtitle: Optimize Android apps and build faster games using cutting-edge Arm tech.
 title: Mobile, Graphics, and Gaming
 tools_software_languages_filter:
 - 7-Zip: 1
+- ADB: 1
 - adb: 2
-- Android: 5
-- Android NDK: 2
+- Android: 6
+- Android NDK: 4
 - Android SDK: 1
-- Android Studio: 14
+- Android Studio: 20
+- Arm AI Portal: 9
 - Arm Development Studio: 1
 - Arm Mobile Studio: 1
-- Arm Performance Studio: 5
-- Assembly: 1
+- Arm Performance Studio: 7
+- Assembly: 2
 - Bash: 2
 - Bazel: 2
-- C: 5
+- C: 7
 - CameraX: 1
 - CCA: 1
-- Clang: 12
-- CMake: 4
-- CPP: 19
+- Clang: 13
+- CMake: 6
+- CPP: 22
 - csharp: 3
-- Docker: 1
+- Docker: 2
 - ETDump: 1
 - ETRecord: 1
-- ExecuTorch: 9
+- ExecuTorch: 21
 - Frame Advisor: 1
 - GCC: 12
-- Generative AI: 2
+- Generative AI: 3
+- glslc: 1
 - Godot: 1
 - Google Pixel 8: 1
 - Google Test: 1
 - Gradio: 1
 - Halide: 1
-- Hugging Face: 6
-- Java: 7
+- Hugging Face: 16
+- Java: 13
 - Jupyter Notebook: 3
-- KleidiAI: 4
-- Kotlin: 11
-- LiteRT: 1
+- KleidiAI: 11
+- Kotlin: 14
+- LiteRT: 6
 - LiteRT-LM: 1
-- llama.cpp: 4
+- llama.cpp: 5
 - LLM: 3
-- LLVM: 1
+- LLVM: 2
 - llvm-mca: 1
+- MCP: 1
 - MediaPipe: 3
-- Model Explorer: 2
+- MLIA: 3
+- Model Explorer: 3
 - MTE: 2
-- Neon: 4
-- NX: 10
+- Neon: 5
+- NX: 14
 - ONNX: 1
-- ONNX Runtime: 3
+- ONNX Runtime: 5
 - OpenGL ES: 1
-- Python: 13
-- PyTorch: 6
+- Python: 22
+- PyTorch: 9
 - QEMU: 1
 - RenderDoc: 1
 - RME: 1
 - Runbook: 14
 - Rust: 2
 - SDDiskTool: 1
-- SME2: 12
-- SVE2: 3
+- SME: 1
+- SME2: 14
+- Streamline: 2
+- SVE2: 4
 - TensorFlow: 1
+- Topo: 1
 - TorchAO: 1
-- TOSA: 3
+- TOSA: 4
 - Transformers: 1
 - Trusted Firmware: 1
 - Unity: 6
-- Unreal Engine: 8
-- VGF: 1
+- Unreal Engine: 9
+- VGF: 5
 - Visual Studio: 4
-- Visual Studio Code: 1
-- Vulkan: 9
+- Visual Studio Code: 2
+- Vulkan: 16
 - Vulkan SDK: 3
-- XNNPACK: 3
+- XNNPACK: 10
 weight: 3
-# auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit

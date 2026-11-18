@@ -28,7 +28,7 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 
 ## Inclusive language
 
-- Use `primary/subordinate` instead of `master/slave`.
+- Replace legacy role terms with context-appropriate terms, such as `primary/replica` for databases or `controller/worker` for distributed systems.
 - Do not use gendered examples or assumptions.
 - Be mindful of cultural references that might not translate globally.
 - Avoid assumptions about a reader's physical capabilities or setup.
@@ -48,10 +48,12 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use visual breaks to prevent walls of text. Code blocks count as visual breaks.
 - If a section explains three or more things, suggest splitting it.
 - Ensure lists have a lead-in sentence or phrase ending with a colon. Ensure each item starts with a capitalized word unless the word is supposed to be styled differently. Ensure list items don't end with periods unless the item is one or more complete sentences.
+- Avoid back-to-back notices. Condense consecutive notices into a single notice with bullet list items.
+- Limit lists in paragraph to four items. Favor splitting sentences with more than four list items, or using bullets.
 
 ## Arm framing and technical depth
 
-- Default to Arm-native solutions, Arm terminology, and Arm platform assumptions.
+- Default to solutions built for Arm, Arm terminology, and Arm platform assumptions.
 - Flag x86 assumptions and suggest Arm alternatives when available.
 - Match technical depth to the stated audience, prerequisites, and skill level.
 - Keep the level of formality and technical detail consistent across related sections.
@@ -78,10 +80,11 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 - Use `such as` instead of `like`.
 - Use `after` or `when` instead of `once`.
 - Avoid slashes unless part of a technical term. Replace slashes with "and" or "or" as adequate.
+- Avoid `execute`, `kill`, `native`, `blacklist`, `whitelist`, `dummy`, `grandfathered`, `master`, `slave`, `terminate`, `suicide`, and `sanity check` in reader-facing prose. Choose a precise alternative for the context, such as `run`, `stop`, `allowlist`, `denylist`, `placeholder`, or `quick check`. Preserve exact commands, identifiers, product names, quoted output, and necessary technical terminology.
 
 ## Tone cleanup
 
-- Avoid `simply`, `just`, `obviously`, and `clearly`.
+- Avoid `simply`, `just`, `obviously`, and `clearly`. Any terms that could be condescending
 - Avoid `above`, `below`, `left`, `right`, `top`, and `bottom` when referring to content.
 - Acknowledge difficulty naturally, such as `this step can be confusing at first`.
 - Normalize errors, such as `if you see this error, here's how to fix it`.
@@ -104,18 +107,20 @@ Use this skill for granular prose, voice, readability, terminology, and style re
 
 ## Headings and terminology
 
+- Keep Learning Path titles, section titles, and subheadings under 70 characters, counting spaces and punctuation.
 - Use sentence case for headings and subheadings.
 - Capitalize only the first word and proper nouns in headings.
 - Keep heading wording consistent across related files.
 - Prefer headings that signal the user task or concept.
 - Ensure heading hierarchy has no skipped levels unless the template requires it.
-- Each Markdown file should begin with a section heading in body content.
+- Each Markdown file that contains lesson content should begin with a section heading in the body. This rule does not apply to `_index.md` or `_next-steps.md` files.
 - Use `Arm` for the brand in prose.
 - Use `arm64` or `aarch64` for CPU architecture based on tool, package, or OS convention.
 - Use `ARM64` only when referring to Windows on Arm or Microsoft documentation.
 - Capitalize `Learning Path`.
 - Use `Azure Cobalt`, `Google Axion`, and `AWS Graviton` as processor names, not VM names. `Graviton-based instances`, not `Graviton instances`, for example.
 - Do not use bold or italics for product names such as LiteRT, XNNPACK, KleidiAI, and SME2 unless they are headings or UI labels.
+- Treat llama.cpp as a product name in prose. Write llama.cpp without code, bold, or italic formatting unless it appears in a command, code sample, file path, or URL.
 
 ## Avoid AI-sounding prose
 

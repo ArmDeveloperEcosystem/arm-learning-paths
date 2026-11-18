@@ -77,50 +77,51 @@ For more information about the contents of the installation, see [Releases](http
 
 ### Download for Arm64 hosts
 
-The commands depend on the host operating system. Replace `2.13.0` with the latest version.
+The commands depend on the host operating system. Replace `2.14.1` with the latest version.
 
 {{< tabpane code=true >}}
   {{< tab header="Windows" language="shell">}}
-wget https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-windows-arm64.zip
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.14.1/cmsis-toolbox-windows-arm64.zip
 tar -xf cmsis-toolbox-windows-arm64.zip
   {{< /tab >}}
   {{< tab header="Linux" language="shell">}}
-wget https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-linux-arm64.tar.gz
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.14.1/cmsis-toolbox-linux-arm64.tar.gz
 tar -xf cmsis-toolbox-linux-arm64.tar.gz
   {{< /tab >}}
   {{< tab header="macOS" language="shell">}}
-curl -L -o cmsis-toolbox-darwin-arm64.tar.gz https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-darwin-arm64.tar.gz
+curl -L -o cmsis-toolbox-darwin-arm64.tar.gz https://artifacts.tools.arm.com/cmsis-toolbox/2.14.1/cmsis-toolbox-darwin-arm64.tar.gz
 tar -xf cmsis-toolbox-darwin-arm64.tar.gz
   {{< /tab >}}
 {{< /tabpane >}}
 
 ### Download for x86_64 hosts
 
-The commands depend on the host operating system. Replace `2.13.0` with the latest version.
+The commands depend on the host operating system. Replace `2.14.1` with the latest version.
 
 {{< tabpane code=true >}}
   {{< tab header="Windows" language="shell">}}
-wget https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-windows-amd64.zip
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.14.1/cmsis-toolbox-windows-amd64.zip
 tar -xf cmsis-toolbox-windows-amd64.zip
   {{< /tab >}}
   {{< tab header="Linux" language="shell">}}
-wget https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-linux-amd64.tar.gz
+wget https://artifacts.tools.arm.com/cmsis-toolbox/2.14.1/cmsis-toolbox-linux-amd64.tar.gz
 tar -xf cmsis-toolbox-linux-amd64.tar.gz
   {{< /tab >}}
   {{< tab header="macOS" language="shell">}}
-curl -L -o cmsis-toolbox-darwin-amd64.tar.gz https://artifacts.tools.arm.com/cmsis-toolbox/2.13.0/cmsis-toolbox-darwin-amd64.tar.gz
+curl -L -o cmsis-toolbox-darwin-amd64.tar.gz https://artifacts.tools.arm.com/cmsis-toolbox/2.14.1/cmsis-toolbox-darwin-amd64.tar.gz
 tar -xf cmsis-toolbox-darwin-amd64.tar.gz
   {{< /tab >}}
 {{< /tabpane >}}
 
 ## Available compiler toolchains 
 
-Projects can be built with Arm Compiler for Embedded 6, Arm GNU Toolchain, LLVM Embedded Toolchain, or IAR tools.
+Projects can be built with Arm Compiler for Embedded 6, Arm GNU Toolchain, Arm Toolchain for Embedded, or IAR tools.
 
 For further setup instructions, see the following Install Guides:
 
 * [Arm Compiler for Embedded](/install-guides/armclang/)
 * [Arm GNU Toolchain](/install-guides/gcc/arm-gnu/)
+* [Arm Toolchain for Embedded](/install-guides/llvm-embedded/)
 
 This Install Guide uses `Arm Compiler for Embedded`, which is supported on Windows and Linux.
 

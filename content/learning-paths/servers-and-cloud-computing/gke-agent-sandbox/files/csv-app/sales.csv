@@ -1,0 +1,13 @@
+order_id,date,product,quantity,unit_price,status
+A001,2026-01-05,Widget,2,19.99,sale
+A002,2026-01-08,Gadget,1,49.50,sale
+A003,2026-01-12,Widget,1,19.99,refund
+A004,2026-01-22,Widget,3,19.99,sale
+A005,2026-02-03,Widget,1,19.99,sale
+A006,2026-02-10,Gadget,2,49.50,sale
+A007,2026-02-12,Gadget,1,49.50,refund
+A008,2026-02-15,Widget,,19.99,sale
+A009,2026-02-18,Gadget,1,,sale
+A010,2026-02-30,Widget,1,19.99,sale
+A011,2026-03-01,Widget,4,19.99,sale
+A012,2026-03-05,Gadget,1,49.50,sale

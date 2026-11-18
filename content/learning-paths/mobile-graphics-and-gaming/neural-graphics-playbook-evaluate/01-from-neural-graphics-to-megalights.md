@@ -34,7 +34,7 @@ Arm Neural Technology answers that question. It includes a set of Vulkan-based t
 | [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/) |
 | [Arm Neural Frame Rate Upscaling model on Hugging Face](https://huggingface.co/Arm/neural-frame-rate-upscaling) |
 | [Arm Neural Technology landing page](https://developer.arm.com/mobile-graphics-and-gaming/neural-graphics) |
-| [Enable Neural Super Sampling in Unreal Engine with ML Extensions](/learning-paths/mobile-graphics-and-gaming/nss-unreal/) |
+| [Enable Neural Super Sampling for Unreal Engine with ML Extensions](/learning-paths/mobile-graphics-and-gaming/nss-unreal/) |
 | [ML SDK for Vulkan](https://github.com/arm/ai-ml-sdk-for-vulkan) |
 | [Neural Super Sampling (NSS) model](https://huggingface.co/Arm/neural-super-sampling) |
 | [ML Emulation Layer for Vulkan](https://github.com/arm/ai-ml-emulation-layer-for-vulkan) |

@@ -13,15 +13,20 @@
 <!-- Build author metadata lookup from CSV -->
 {{ $author_meta := dict }}
 {{ range $index, $row := $csv_content }}
+    {{ if gt $index 0 }}
     {{ $name := index $row 0 }}
     {{ $meta := dict
+        "name"     $name
         "company"  (cond (and (gt (len $row) 1) (ne (index $row 1) "")) (index $row 1) "")
         "github"   (cond (and (gt (len $row) 2) (ne (index $row 2) "")) (printf "https://github.com/%s" (index $row 2)) "")
         "linkedin" (cond (and (gt (len $row) 3) (ne (index $row 3) "")) (printf "https://linkedin.com/in/%s" (index $row 3)) "")
         "twitter"  (cond (and (gt (len $row) 4) (ne (index $row 4) "")) (printf "https://twitter.com/%s" (index $row 4)) "")
         "website"  (cond (and (gt (len $row) 5) (ne (index $row 5) "")) (index $row 5) "")
     }}
-    {{ $author_meta = merge $author_meta (dict $name $meta) }}
+    {{/* Match the key produced by tools/stats_data_generate.py without undoing name hyphens. */}}
+    {{ $key := replace (lower $name) " " "-" }}
+    {{ $author_meta = merge $author_meta (dict $key $meta) }}
+    {{ end }}
 {{ end }}
 
 {{ range $author_urlized, $contributions := $this_week.individual_authors }}
@@ -31,14 +36,13 @@
     {{ $twitter := "" }}
     {{ $website := "" }}
     {{ $author := replace $author_urlized "-" " " | title }}
-    {{ range $name, $meta := $author_meta }}
-        {{ if eq (lower $name) (lower $author) }}
-            {{ $company = $meta.company }}
-            {{ $github = $meta.github }}
-            {{ $linkedin = $meta.linkedin }}
-            {{ $twitter = $meta.twitter }}
-            {{ $website = $meta.website }}
-        {{ end }}
+    {{ with index $author_meta $author_urlized }}
+        {{ $author = .name }}
+        {{ $company = .company }}
+        {{ $github = .github }}
+        {{ $linkedin = .linkedin }}
+        {{ $twitter = .twitter }}
+        {{ $website = .website }}
     {{ end }}
     {{ $temp := dict "author" $author "contributions" $contributions "company" $company "github" $github "linkedin" $linkedin "twitter" $twitter "website" $website }}
     {{ $authors_dict_array = $authors_dict_array | append $temp }}

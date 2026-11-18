@@ -1,5 +1,5 @@
 ---
-title: Build and run an OrchardCore CMS app on Azure Cobalt (Arm64)
+title: Build and run an OrchardCore CMS app on Arm64
 weight: 2
 
 ### FIXED, DO NOT MODIFY

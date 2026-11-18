@@ -1,5 +1,5 @@
 ---
-title: Accelerate Natural Language Processing (NLP) models from Hugging Face on Arm servers
+title: Accelerate Hugging Face NLP models on Arm servers
 description: Learn how to deploy and accelerate PyTorch NLP sentiment analysis models from Hugging Face on Arm servers with BFloat16 fast math kernel optimization on Graviton3 processors.
 
 minutes_to_complete: 20
@@ -68,12 +68,12 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 platforms:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
     - Neoverse 
 operatingsystems:

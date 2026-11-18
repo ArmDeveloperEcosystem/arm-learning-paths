@@ -16,7 +16,9 @@ additional_search_terms:
 
 minutes_to_complete: 10
 
-author: Paschalis Mpeis, Jonathan Davies
+author:
+    - Paschalis Mpeis
+    - Jonathan Davies
 
 official_docs: https://releases.llvm.org/download.html
 ecosystem_dashboard: https://developer.arm.com/ecosystem-dashboard/linux?package=LLVM%20Toolchain

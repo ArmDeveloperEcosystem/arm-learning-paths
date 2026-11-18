@@ -1,5 +1,5 @@
 ---
-title: Deploy an AI Agent on Arm with llama.cpp and llama-cpp-agent using KleidiAI
+title: Deploy an AI agent on Arm with llama.cpp and KleidiAI
 description: Learn how to build and deploy an AI agent application on Arm servers using llama.cpp and llama-cpp-agent with KleidiAI optimization for efficient LLM inference and function calling.
 
 minutes_to_complete: 45
@@ -73,12 +73,12 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory
-subjects: ML
+subjects: Agentic AI
 platforms:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 armips:
     - Neoverse
 tools_software_languages:

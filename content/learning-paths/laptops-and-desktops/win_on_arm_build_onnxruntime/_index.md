@@ -62,7 +62,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-A
 tools_software_languages:

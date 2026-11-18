@@ -3,6 +3,6 @@ pyyaml
 inclusivewriting
 pyspellchecker
 better-profanity
-setuptools
+setuptools<81  # pin: setuptools>=81 removed bundled pkg_resources, which inclusivewriting still imports
 alive-progress
 openai

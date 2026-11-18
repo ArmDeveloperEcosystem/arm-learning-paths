@@ -1,5 +1,5 @@
 ---
-title: Deploy Apache Spark on Google Axion processors
+title: Deploy Apache Spark on Google Axion
 
 minutes_to_complete: 60
 
@@ -25,7 +25,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Performance and Architecture
 platforms:
-  - Google Cloud
+  - Google Axion
 
 armips:
   - Neoverse

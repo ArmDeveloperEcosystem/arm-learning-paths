@@ -163,4 +163,4 @@ plot_single_sample(data_sample=data[idx], label=labels[idx])
 
 Example output is shown below:
 
-![output1](images/output1.PNG)
+![output1](images/output1.png)

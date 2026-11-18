@@ -1,5 +1,5 @@
 ---
-title: Deploy a RAG-based Chatbot with llama-cpp-python using KleidiAI on Google Axion processors
+title: Deploy a RAG chatbot with KleidiAI on Google Axion
 
 minutes_to_complete: 45
 
@@ -29,9 +29,9 @@ rerun_faqs: false
 skilllevels: Advanced
 armips:
     - Neoverse
-subjects: ML
+subjects: AI/ML
 platforms:
-  - Google Cloud
+  - Google Axion
 operatingsystems:
     - Linux
 tools_software_languages:

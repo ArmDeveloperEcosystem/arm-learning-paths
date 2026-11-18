@@ -68,7 +68,7 @@ rerun_faqs: false
 
 ### Tags
 skilllevels: Introductory 
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-A
     - Neoverse
@@ -82,6 +82,9 @@ operatingsystems:
     - Linux
 
 ### Cross-platform metadata only
+platforms:
+    - Arm AGI CPU
+
 shared_path: true
 shared_between:
     - servers-and-cloud-computing

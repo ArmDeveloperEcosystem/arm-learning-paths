@@ -36,7 +36,7 @@ WebGPU is a simple system. It runs three types of functions on the GPU:
 
 Here is a simplified diagram of a WebGPU setup to draw triangles by using a vertex shader and a fragment shader:
 
-!["Triangle using WebGPU" #center](images/webgpu-draw-high-level.svg "Figure 8: Triangle using WebGPU")
+![Triangle using WebGPU#center](images/webgpu-draw-high-level.svg "Figure 8: Triangle using WebGPU")
 
 The main things to notice in the above image are:
 
@@ -61,7 +61,7 @@ In order to achieve high performance real-time 3D rendering, the GPU processes s
 
 To do so, WebGPU provides a Render Pipeline object. The figure below illustrates the sequence of data processing stages executed by the render pipeline.
 
-!["Render Pipeline" #center](images/render-pipeline.svg "Figure 9: Render Pipeline")
+![Render Pipeline#center](images/render-pipeline.svg "Figure 9: Render Pipeline")
 
 The Render Pipeline has two main types of stages, **fixed-function** and **programmable**.
 

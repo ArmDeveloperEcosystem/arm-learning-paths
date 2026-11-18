@@ -1,5 +1,5 @@
 ---
-title: Run Confidential Containers with encrypted images using Arm CCA and Trustee
+title: Run encrypted Confidential Containers with Arm CCA and Trustee
 description: Learn how to deploy Confidential Containers from encrypted images inside Arm CCA Realms using Trustee services for attestation-based authorization on an FVP with RME support.
 
 minutes_to_complete: 60
@@ -106,6 +106,10 @@ further_reading:
       title: Realm Management Monitor Specification
       link: https://developer.arm.com/documentation/den0137/latest/
       type: documentation
+  - resource:
+        title: The Role of Attestation in Arm CCA
+        link: https://support.arm.com/documentation/111146/latest/
+        type: documentation
 
 ### FIXED, DO NOT MODIFY
 # ================================================================================

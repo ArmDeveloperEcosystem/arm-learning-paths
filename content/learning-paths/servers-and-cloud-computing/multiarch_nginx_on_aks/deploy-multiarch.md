@@ -1,5 +1,5 @@
 ---
-title: Deploy nginx multiarch service on AKS
+title: Deploy an NGINX multi-architecture service on AKS
 weight: 8
 
 ### FIXED, DO NOT MODIFY

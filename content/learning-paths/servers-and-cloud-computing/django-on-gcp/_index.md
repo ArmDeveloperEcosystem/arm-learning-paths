@@ -76,7 +76,7 @@ rerun_faqs: false
 skilllevels: Introductory
 subjects: Web
 platforms:
-  - Google Cloud
+  - Google Axion
 
 armips:
   - Neoverse

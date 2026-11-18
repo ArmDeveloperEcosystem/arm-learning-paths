@@ -1,0 +1,56 @@
+{
+    "commands": [
+        {
+            "dispatch_graph": {
+                "bindings": [
+                    {
+                        "id": 0,
+                        "resource_ref": "input_0_ref",
+                        "set": 0
+                    },
+                    {
+                        "id": 1,
+                        "resource_ref": "output_0_ref",
+                        "set": 0
+                    }
+                ],
+                "graph_ref": "vgf_graph_ref",
+                "shader_substitutions": []
+            }
+        }
+    ],
+    "resources": [
+        {
+            "graph": {
+                "src": "model.vgf",
+                "uid": "vgf_graph_ref"
+            }
+        },
+        {
+            "tensor": {
+                "dims": [
+                    1,
+                    16,
+                    16,
+                    3
+                ],
+                "format": "VK_FORMAT_R8_SINT",
+                "shader_access": "readonly",
+                "uid": "input_0_ref"
+            }
+        },
+        {
+            "tensor": {
+                "dims": [
+                    1,
+                    32,
+                    32,
+                    3
+                ],
+                "format": "VK_FORMAT_R8_SINT",
+                "shader_access": "writeonly",
+                "uid": "output_0_ref"
+            }
+        }
+    ]
+}

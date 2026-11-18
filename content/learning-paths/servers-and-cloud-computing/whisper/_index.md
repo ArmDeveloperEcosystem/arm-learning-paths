@@ -27,12 +27,12 @@ rerun_faqs: false
 skilllevels: Introductory
 armips:
     - Neoverse
-subjects: ML
+subjects: AI/ML
 platforms:
-  - AWS
-  - Microsoft Azure
-  - Google Cloud
-  - Oracle
+  - AWS Graviton
+  - Microsoft Azure Cobalt
+  - Google Axion
+  - Oracle Cloud Infrastructure (OCI) Ampere Compute
 operatingsystems:
     - Linux
 tools_software_languages:

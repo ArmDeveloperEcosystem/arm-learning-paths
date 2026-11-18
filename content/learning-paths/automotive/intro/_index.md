@@ -26,6 +26,8 @@ skilllevels: Introductory
 subjects: Performance and Architecture
 armips:
     - Cortex-M
+    - Cortex-A
+    - Cortex-R
     - Ethos-U
 operatingsystems:
     - Baremetal

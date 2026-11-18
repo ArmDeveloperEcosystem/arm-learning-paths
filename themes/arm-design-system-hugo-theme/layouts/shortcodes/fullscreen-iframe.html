@@ -1,0 +1,17 @@
+<div class="iframe-container">
+  <button
+    class="iframe-fullscreen-button"
+    type="button"
+    onclick="toggleIframeFullscreen(this)"
+  >
+    Full screen
+  </button>
+
+  <iframe
+    src="{{ .Get "src" }}"
+    title="{{ with .Get "title" }}{{ . }}{{ else }}Embedded content{{ end }}"
+    style="{{ with .Get "style" }}{{ . }}{{ else }}height: {{ with .Get "height" }}{{ . }}{{ else }}600px{{ end }}; width: {{ with .Get "width" }}{{ . }}{{ else }}100%{{ end }}; border: {{ with .Get "border" }}{{ . }}{{ else }}1px solid #999{{ end }};{{ end }}"
+    loading="{{ with .Get "loading" }}{{ . }}{{ else }}lazy{{ end }}"
+    allowfullscreen
+  ></iframe>
+</div>

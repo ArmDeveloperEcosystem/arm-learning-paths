@@ -41,7 +41,7 @@ Before integrating Halide into your Android application, ensure you have the nec
 ### Create the project
 1. Open Android Studio.
 2. Select New Project > Native C++.
-![Android Studio New Project dialog showing Native C++ template selected. The dialog displays options for project name, language, and minimum SDK. The primary subject is the Native C++ template highlighted in the project creation workflow. The wider environment is a typical Android Studio interface with a neutral, technical tone. Visible text includes Native C++ and fields for configuring the new project.]
+![Android Studio New Project dialog showing Native C++ template selected. The dialog displays options for project name, language, and minimum SDK. The primary subject is the Native C++ template highlighted in the project creation workflow. The wider environment is a typical Android Studio interface with a neutral, technical tone. Visible text includes Native C++ and fields for configuring the new project.](Figures/04.webp)
 
 ### Configure the project
 1. Set the project Name to Arm.Halide.AndroidDemo.
@@ -406,9 +406,7 @@ This C++ function acts as a bridge between Java (Kotlin) and native code. Specif
 The input Java byte array (input_bytes) is accessed and pinned into native memory via GetByteArrayElements. This provides a direct pointer (inBytes) to the grayscale data sent from Kotlin. The raw grayscale byte data is wrapped into a Halide::Runtime::Buffer<uint8_t> object (inputBuffer). This buffer structure is required by the Halide pipeline. An output buffer (outputBuffer) is created with the same dimensions as the input image. This buffer will store the result produced by the Halide pipeline. The native function invokes the Halide-generated AOT function blur_threshold, passing in both the input and output buffers. After processing, a new Java byte array (outputArray) is allocated to hold the processed grayscale data. The processed data from the Halide output buffer is copied into this Java array using SetByteArrayRegion. The native input buffer (inBytes) is explicitly released using ReleaseByteArrayElements, specifying JNI_ABORT as no changes were made to the input array. Finally, the processed byte array (outputArray) is returned to Kotlin.
 
 Through this JNI bridge, Kotlin can invoke high-performance native code. You can now re-run the application. Select the Load Image button, and then Process Image. You'll see the following results:
-
-Android app screenshot showing the Arm Halide Android demo interface. The screen displays two buttons labeled Load Image and Process Image, with the Process Image button enabled. Below the buttons, an ImageView shows a grayscale photo of a camera man standing outdoors, holding a camera and tripod. The environment appears neutral and technical, with no visible emotional tone. The layout is centered and uses a simple vertical arrangement, making the interface easy to navigate for users with visual impairment.
-![img10](Figures/10.png)
+![Android app screenshot showing the Arm Halide Android demo interface. The screen displays two buttons labeled Load Image and Process Image, with the Process Image button enabled. Below the buttons, an ImageView shows a grayscale photo of a camera man standing outdoors, holding a camera and tripod. The environment appears neutral and technical, with no visible emotional tone. The layout is centered and uses a simple vertical arrangement, making the interface easy to navigate for users with visual impairment.](Figures/10.png)
 
 In the above code we created a new jbyteArray and copying the data explicitly, which can result in an additional overhead. To optimize performance by avoiding unnecessary memory copies, you can directly wrap Halide's buffer in a Java-accessible ByteBuffer like so
 ```java

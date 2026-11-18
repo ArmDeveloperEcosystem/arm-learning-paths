@@ -1,15 +1,32 @@
 ---
-title: Prepare the host and device
+title: Prepare a Linux host and Android device for ExecuTorch Vulkan
 description: Install the Android toolchain, configure ADB access, and verify Vulkan support on the target phone.
 weight: 3
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
+## Linux host architecture
 
-## Install Android SDK and NDK
+You'll run Meta Llama 3.2 1B Instruct directly on a Vivo X300 Pro or similar Android phone with ExecuTorch, using the phone GPU through the Vulkan backend.
 
-You can install the Android tools entirely from the Linux command line using Google's [Android command-line tools](https://developer.android.com/studio#command-line-tools-only) and [`sdkmanager`](https://developer.android.com/tools/sdkmanager). This workflow uses:
+You'll use a Linux host for the following:
+
+- Model export
+- Quantization
+- Graph lowering and partitioning
+- Android cross-compilation
+- `adb` deployment
+
+The Linux host doesn't need CUDA, ROCm, or a working Vulkan GPU.
+
+The following diagram shows what you'll run on the Linux host:
+
+![Diagram showing the Linux host architecture for the ExecuTorch Vulkan workflow, including PyTorch and ExecuTorch 1.4, export and quantization stages, and the generated Vulkan-enabled program artifact#center](linux-host-architecture.png "Linux host architecture for the ExecuTorch Vulkan workflow")
+
+## Install Android SDK and NDK on the host
+
+You can install the Android tools entirely from the Linux command line. Use Google's [Android command-line tools](https://developer.android.com/studio#command-line-tools-only) and [`sdkmanager`](https://developer.android.com/tools/sdkmanager) to install the following components:
 
 - Android SDK Platform-Tools
 - Android SDK Command-line Tools
@@ -20,7 +37,7 @@ If you already installed these components with Android Studio, skip to [Set Andr
 
 ### Install the command-line tools
 
-Install the host packages needed:
+Install the host packages:
 
 ```bash
 sudo apt update
@@ -51,7 +68,9 @@ printf '%s  %s\n' \
   "$ANDROID_CLI_TOOLS_ARCHIVE" | sha256sum --check
 ```
 
-The checksum command should report `OK`. Extract the tools into the directory layout expected by `sdkmanager`:
+The checksum command should report `OK`. 
+
+Extract the tools into the directory layout expected by `sdkmanager`:
 
 ```bash
 unzip -q "$ANDROID_CLI_TOOLS_ARCHIVE" -d "$ANDROID_CLI_TOOLS_TMP"
@@ -69,7 +88,7 @@ Review and accept the Android SDK licenses:
 sdkmanager --sdk_root="$ANDROID_HOME" --licenses
 ```
 
-Install the package versions used by this Learning Path:
+Install the package versions that you'll use:
 
 ```bash
 sdkmanager --sdk_root="$ANDROID_HOME" \
@@ -80,8 +99,8 @@ sdkmanager --sdk_root="$ANDROID_HOME" \
 
 The NDK supplies the Android cross-compilation toolchain. The Android SDK CMake package also includes Ninja and keeps both build tools under the SDK directory.
 
-{{% notice Android Studio alternative %}}
-You can instead use Android Studio's SDK Manager to install **Android SDK Platform-Tools**, **Android SDK Command-line Tools**, **CMake 3.31.6**, and **NDK (Side by side) 28.2.13676358**.
+{{% notice Note %}}
+You can instead use Android Studio's SDK Manager to install Android SDK Platform-Tools, Android SDK Command-line Tools, Make 3.31.6, and NDK (Side by side) 28.2.13676358.
 {{% /notice %}}
 
 ## Set Android environment variables
@@ -98,8 +117,8 @@ export PATH="$ANDROID_HOME/cmake/3.31.6/bin:$PATH"
 
 These variables remain set until you close the terminal.
 
-{{% notice Optional persistence %}}
-To make the configuration available in future terminal sessions, add the same five `export` commands to your shell startup file. For Bash, use `~/.bashrc`. Check the file first so that you do not add duplicate entries, then run `source ~/.bashrc`.
+{{% notice Note %}}
+To make the configuration available in future terminal sessions, add the same five `export` commands to your shell startup file. For Bash, use `~/.bashrc`. Check the file first to avoid duplicate entries. Then, run `source ~/.bashrc`.
 {{% /notice %}}
 
 The SDK and NDK are now located at:
@@ -121,7 +140,7 @@ test -f "$ANDROID_NDK/NOTICE" && echo "NDK OK"
 test -f "$ANDROID_NDK/build/cmake/android.toolchain.cmake" && echo "Toolchain OK"
 ```
 
-## Connect the Vivo over ADB
+## Connect to the Android device over ADB
 
 If `adb devices` shows `no permissions`, add the user to `plugdev`, install the generic Android udev helpers, and reload the rules:
 
@@ -139,7 +158,7 @@ The tested device reported this USB ID:
 Bus 002 Device 002: ID 2d95:6001 vivo vivo X300 Pro
 ```
 
-Add a Vivo-specific rule if the default rules are not enough:
+If the default rules aren't enough, add a rule specific to your device. The following rule is specific to Vivo:
 
 ```bash
 sudo tee /etc/udev/rules.d/51-vivo-android.rules >/dev/null <<'EOF'
@@ -151,7 +170,7 @@ sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
-Then restart ADB and accept the RSA prompt on the phone:
+Then, restart `adb` and accept the RSA prompt on the phone:
 
 ```bash
 adb kill-server
@@ -159,13 +178,13 @@ adb start-server
 adb devices
 ```
 
-Expected final state:
+The output is similar to:
 
-```text
+```output
 10AFB40J6Q0031C    device
 ```
 
-## Verify Vulkan support on the phone
+## Verify Vulkan support on the Android device
 
 Check the Vulkan implementation:
 
@@ -173,25 +192,33 @@ Check the Vulkan implementation:
 adb shell getprop ro.hardware.vulkan
 ```
 
-The measured device returned:
+The output is similar to:
 
 ```text
 mali
 ```
 
-Then verify the relevant Android features:
+Then, verify the relevant Android features:
 
 ```bash
 adb shell pm list features | grep -i vulkan
 ```
 
-Expected features include:
+The output is similar to:
 
-```text
+```output
 feature:android.hardware.vulkan.compute
 feature:android.hardware.vulkan.level=1
 feature:android.hardware.vulkan.version=4206592
 feature:android.software.vulkan.deqp.level=132711169
 ```
 
-`vulkan_renderengine: false` from SurfaceFlinger does not block application-side Vulkan compute. The more important signal is that the device advertises `android.hardware.vulkan.compute`.
+Ensure that the device advertises `android.hardware.vulkan.compute`.
+
+`vulkan_renderengine: false` from SurfaceFlinger doesn't block application-side Vulkan compute. 
+
+## What you've accomplished and what's next
+
+You've now prepared the Linux host and connected to the Android device. 
+
+Next, you'll install ExecuTorch and download the model on the host.

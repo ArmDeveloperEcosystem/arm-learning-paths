@@ -77,7 +77,7 @@ rerun_faqs: false
 skilllevels: Advanced
 subjects: Containers and Virtualization
 platforms:
-  - Google Cloud
+  - Google Axion
 
 armips:
     - Neoverse

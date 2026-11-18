@@ -76,7 +76,6 @@ subjects: Performance and Architecture
 armips:
     - Neoverse
     - Cortex-A
-    - Armv9-A
 
 operatingsystems:
     - Linux

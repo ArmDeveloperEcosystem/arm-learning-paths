@@ -63,7 +63,7 @@ generated_summary_faq:
       system state and troubleshoot common connection and architecture issues.
 # END generated_summary_faq
 
-author: Tinkerblox
+author: Karthik Gopalakrishnan
 
 generate_summary_faq: false
 rerun_summary: false
@@ -76,7 +76,7 @@ tools_software_languages:
   - Tinkerblox
 
 platforms:
-  - Google Cloud
+  - Google Axion
 
 armips:
   - Neoverse

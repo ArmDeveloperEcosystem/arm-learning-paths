@@ -1,5 +1,5 @@
 ---
-title: Analyze performance data with the Visual Studio extension for WindowsPerf
+title: Analyze WindowsPerf data with its Visual Studio extension
 
 description: Learn how to install and use the WindowsPerf Visual Studio extension to generate counting and sampling reports and analyze performance data in Windows Performance Analyzer.
 

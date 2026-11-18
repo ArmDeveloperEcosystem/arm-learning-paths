@@ -47,7 +47,7 @@ Open your editor and create `constants.py` with the following content:
 First, define the Docker image name:
 
 ```python
-MCP_DOCKER_IMAGE = "arm-mcp:latest"
+MCP_DOCKER_IMAGE = "arm-mcp:local"
 ```
 
 Add the initialization request. This follows the MCP protocol specification:

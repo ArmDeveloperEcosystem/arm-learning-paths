@@ -115,15 +115,27 @@ If there is no package available for your kernel version you can build Perf from
 
 Building Perf from source requires `gcc`, `flex`, `bison`, `git`, and `make`. Install these on your system.
 
-For Debian and Ubuntu run:
+For Ubuntu run:
 
 ```bash
 sudo apt update
-sudo apt install make gcc flex bison pkg-config linux-tools-generic linux-tools-$(uname -r) \
+sudo apt install git make gcc flex bison pkg-config linux-tools-generic linux-tools-$(uname -r) \
 libzstd1 libdwarf-dev libdw-dev binutils-dev libcap-dev libelf-dev libnuma-dev python3 python3-dev python3-setuptools \
-libssl-dev libunwind-dev libdwarf-dev zlib1g-dev liblzma-dev libaio-dev libtraceevent-dev debuginfod \
-libpfm4-dev libslang2-dev systemtap-sdt-dev libperl-dev binutils-dev libbabeltrace-dev libiberty-dev libzstd-dev -y
+libssl-dev libunwind-dev zlib1g-dev liblzma-dev libaio-dev libtraceevent-dev debuginfod \
+libpfm4-dev libslang2-dev systemtap-sdt-dev libperl-dev libbabeltrace-dev libiberty-dev libzstd-dev -y
 ```
+
+For Debian and Raspberry Pi OS run:
+
+```bash
+sudo apt update
+sudo apt install git make gcc flex bison pkg-config \
+libzstd1 libdwarf-dev libdw-dev binutils-dev libcap-dev libelf-dev libnuma-dev python3 python3-dev python3-setuptools \
+libssl-dev libunwind-dev zlib1g-dev liblzma-dev libaio-dev libtraceevent-dev debuginfod \
+libpfm4-dev libslang2-dev systemtap-sdt-dev libperl-dev libbabeltrace-dev libiberty-dev libzstd-dev -y
+```
+
+The `linux-tools-*` packages exist only on Ubuntu, so they are not part of the Debian and Raspberry Pi OS command.
 
 Use `git` to get the source code. Use `--branch` to specify the Linux kernel source tree closest to your kernel version.
 

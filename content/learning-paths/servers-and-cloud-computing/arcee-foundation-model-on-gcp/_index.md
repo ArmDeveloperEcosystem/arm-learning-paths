@@ -69,9 +69,9 @@ rerun_faqs: false
 # Tags
 # Tagging metadata, see the Learning Path guide for the allowed values
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 platforms:
-  - Google Cloud
+  - Google Axion
 armips:
     - Neoverse
 tools_software_languages:

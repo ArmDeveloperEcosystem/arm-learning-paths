@@ -15,9 +15,55 @@ prerequisites:
     - If you wish to analyze your own applications you will need a supported Android device.
     - Some basic familiarity with Frame Advisor. Review the [Frame Advisor](/learning-paths/mobile-graphics-and-gaming/ams/fa/) section in [Get started with Arm Performance Studio for mobile](/learning-paths/mobile-graphics-and-gaming/ams/).
 
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-08-21T17:27:25Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 74d1fee67b211c4f6d2dd6feb6b9171aa90f359f2a76d522e2414fa4fb391fe0
+  summary_generated_at: '2026-08-21T17:27:25Z'
+  summary_source_hash: 74d1fee67b211c4f6d2dd6feb6b9171aa90f359f2a76d522e2414fa4fb391fe0
+  faq_generated_at: '2026-08-21T17:27:25Z'
+  faq_source_hash: 74d1fee67b211c4f6d2dd6feb6b9171aa90f359f2a76d522e2414fa4fb391fe0
+  summary: >-
+    You'll use Arm Performance Studio and Frame Advisor render graphs to find rendering work
+    that wastes GPU resources. First, you'll capture GPU data with Streamline, then capture an affected
+    frame in Frame Advisor. After that, you'll interpret execution and resource nodes to find unused outputs,
+    unnecessary execution nodes, oversized textures, and inefficient transfers. Finally, you'll use the
+    graph and the **API Calls** view to identify code to change.
+  faqs:
+  - question: How do I enable GPU data collection in Streamline before generating a render graph?
+    answer: >-
+      Open the **Configure Capture** section of the **Start** view and configure GPU data. For
+      an Arm GPU, deselect **Use advanced mode** and select **Capture Arm GPU**.
+  - question: What should I look for in the **Render Graph** view to understand frame execution?
+    answer: >-
+      Boxes (nodes) represent execution and resources, while arrows (edges) show how data moves
+      between them. Focus on how resources produced by one node are consumed by later nodes to
+      trace the frame’s data flow.
+  - question: How do I spot unused resources in the graph?
+    answer: >-
+      Look for resources produced by an execution node that don't feed into any downstream node.
+      In the example, depth and stencil outputs are written but never consumed, indicating unnecessary
+      work.
+  - question: What should I do if an execution node produces only unused outputs?
+    answer: >-
+      Remove any API calls that represent that unused computation. Review the graph and code carefully
+      to confirm the work is truly unused before making changes.
+  - question: Why begin with Streamline before inspecting a render graph?
+    answer: >-
+      Streamline helps you identify which parts of the application are GPU‑heavy so you can target
+      the right frames. After it's identified, generate a render graph for those frames to investigate
+      specific rendering inefficiencies.
+# END generated_summary_faq
+
 author: Mark Thurman
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 
@@ -64,4 +110,3 @@ weight: 1                       # _index.md always has weight of 1 to order corr
 layout: "learningpathall"       # All files under learning paths have this same wrapper
 learning_path_main_page: "yes"  # This should be surfaced when looking for related content. Only set for _index.md of learning path content.
 ---
-
