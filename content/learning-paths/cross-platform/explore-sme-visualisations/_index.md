@@ -1,10 +1,6 @@
 ---
 title: Explore SME matrix operations with interactive visualizations
 
-draft: true
-cascade:
-    draft: true
-    
 description: Trace Arm SME data movement through interactive ZA layout, operand preparation, and matrix multiplication visualizations.
     
 minutes_to_complete: 40
