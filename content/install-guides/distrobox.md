@@ -36,7 +36,7 @@ Distrobox is useful on Arm systems when you want a different distribution than y
 
 You'll learn how to install Distrobox and run an Ubuntu container on a system running Arm Linux. 
 
-You can use any of the following systems: 
+You can use any of the following hosts: 
 
 - A physical Arm device
 - An Arm-based virtual machine
