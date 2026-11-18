@@ -1,6 +1,10 @@
 ---
 title: Review C code for security vulnerabilities with Arm's Metis (AI-powered Security Code Review)
 
+draft: true
+cascade:
+    draft: true
+    
 description: Install Arm Metis, review vulnerable C code, and triage findings from a prepared libpng target.
 
 minutes_to_complete: 45
