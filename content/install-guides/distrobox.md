@@ -34,7 +34,13 @@ You can use [Distrobox](https://distrobox.it/) to run any Linux distribution ins
 
 Distrobox is useful on Arm systems when you want a different distribution than your host, or a clean build environment for testing.
 
-You'll learn how to install Distrobox and run an Ubuntu container on a system running Arm Linux. You can use a physical Arm device, an Arm-based virtual machine, or the Linux development environment on a ChromeOS or Googlebook OS device. 
+You'll learn how to install Distrobox and run an Ubuntu container on a system running Arm Linux. 
+
+You can use any of the following systems: 
+
+- A physical Arm device
+- An Arm-based virtual machine
+- The Linux development environment on a ChromeOS or Googlebook OS device
 
 ## Before you begin
 
