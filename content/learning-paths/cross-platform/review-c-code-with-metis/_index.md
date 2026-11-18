@@ -33,7 +33,6 @@ subjects: Security
 armips:
     - Neoverse
     - Cortex-A
-    - Cortex-M
 operatingsystems:
     - Linux
     - macOS
@@ -48,7 +47,6 @@ tools_software_languages:
 
 shared_path: true
 shared_between:
-    - embedded-and-microcontrollers
     - laptops-and-desktops
     - servers-and-cloud-computing
 

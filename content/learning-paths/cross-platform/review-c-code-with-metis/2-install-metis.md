@@ -128,23 +128,17 @@ llm_provider:
 EOF
 ```
 
-The review commands select this file explicitly with `--config`. The captured reviews use `gpt-6.1-sol`; choosing another model can change the findings. Metis reads the API key from `OPENAI_API_KEY`. This provider-only configuration inherits the packaged execution graph; adding an `execution` section replaces that graph as a whole.
-
-Model IDs and availability depend on the endpoint. Use a provider that offers `gpt-6.1-sol` and supports the OpenAI Responses API; do not assume that a model ID from one provider is available at another provider's URL.
-
-For custom CA certificates, follow the [HTTPX `SSL_CERT_FILE` guidance](https://www.python-httpx.org/environment_variables/#ssl_cert_file). Keep certificate verification enabled.
-
-For other providers, follow the [Metis 2.0.0 provider setup instructions](https://github.com/arm/metis/blob/metis-v2.0.0/README.md#2-set-up-llm-provider).
+The review commands load this file with `--config` and read the API key from `OPENAI_API_KEY`. Your endpoint must support the OpenAI Responses API and the model named in the file. If you choose a different model from the captured `gpt-6.1-sol` runs, your findings might differ. For other providers, see the [Metis 2.0.0 provider setup instructions](https://github.com/arm/metis/blob/metis-v2.0.0/README.md#2-set-up-llm-provider).
 
 ## Confirm that the command starts
 
-Display the command help without starting a model-backed review. This verifies the CLI before you spend tokens on a review:
+Display the command help before starting a model-backed review. Metis 2.0.0 runs its full workflow by default, including automated triage. The exercises use `--interactive` to run review-only commands; Metis initializes each target automatically.
 
 ```bash
 metis --help
 ```
 
-The help output should include `--codebase-path`, `--config`, `--interactive`, and `--output-file`. Repeat `--output-file` to save more than one format. Metis 2.0.0 runs the configured graph by default; the packaged graph includes Initialize, Review, and Triage. Use `--interactive` to open the prompt for the exercises. Their direct review commands run Initialize prerequisites automatically, and omitting `--triage` keeps the results review-only so you can assess the findings manually afterward.
+The help output should include `--codebase-path`, `--config`, `--interactive`, and `--output-file`. Repeat `--output-file` to request more than one format.
 
 ## What you've accomplished and what's next
 

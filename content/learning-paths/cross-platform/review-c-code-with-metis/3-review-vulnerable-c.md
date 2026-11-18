@@ -9,10 +9,11 @@ layout: "learningpathall"
 
 The [Damn Vulnerable C Program](https://github.com/hardik05/Damn_Vulnerable_C_Program) contains vulnerabilities intentionally placed and labeled in one C file. Use it first to learn the Metis review process: prepare a small target, run `review_code`, save JSON and SARIF, summarize findings, and compare source locations.
 
-In your terminal, clone the repository and copy `dvcp.c` into a separate review directory. The copy keeps the review target small and avoids sending the rest of the repository to Metis:
+In your terminal, clone the repository at the tested commit and copy `dvcp.c` into a separate review directory. The copy keeps the review target small and avoids sending the rest of the repository to Metis:
 
 ```bash
-git clone --depth 1 https://github.com/hardik05/Damn_Vulnerable_C_Program.git
+git clone https://github.com/hardik05/Damn_Vulnerable_C_Program.git
+git -C Damn_Vulnerable_C_Program checkout 8dcbd202887f587783952a320a2301de701be529
 mkdir -p dvcp-review
 cp Damn_Vulnerable_C_Program/dvcp.c dvcp-review/
 ```
@@ -46,7 +47,7 @@ metis \
   --output-file ../results/dvcp.sarif
 ```
 
-At the Metis prompt, run the review, then exit after it completes. The command runs its Initialize prerequisites automatically, then performs the packaged simple LLM review and deduplication:
+At the Metis prompt, run the review, then exit after it completes. Metis initializes the project automatically, then runs the default simple LLM review and deduplicates the findings:
 
 ```console
 review_code
@@ -156,8 +157,6 @@ The captured Metis 2.0.0 JSON and SARIF reports contain ten findings. Source anc
 For each reported finding, verify the source location, attacker control, and operation. Also record known source defects that the run omitted. The goal is to practice reviewing Metis output, not to turn the finding count into a coverage score.
 
 The same review is also available in `results/dvcp.sarif`. SARIF allows code-hosting services and security tools to associate findings with source locations. Keep JSON when you want the complete Metis reasoning and SARIF when you want to integrate results into an existing code-scanning workflow.
-
-This shows that Metis can report several issues, but it is not guaranteed to find everything. Runs are non-deterministic and also depend on the model used.
 
 ## What you've accomplished and what's next
 

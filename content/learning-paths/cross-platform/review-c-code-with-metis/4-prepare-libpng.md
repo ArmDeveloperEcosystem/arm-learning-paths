@@ -24,11 +24,11 @@ The result is a deliberately vulnerable example target. Do not use it outside th
 
 ## Download the preparation script
 
-Download [the Magma libpng preparation script](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/cross-platform/review-c-code-with-metis/files/prepare_magma_libpng.py) into the exercise workspace:
+Download [the Magma libpng preparation script](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/cross-platform/review-c-code-with-metis/prepare_magma_libpng.py) into the exercise workspace:
 
 ```bash
 curl -L \
-  https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/cross-platform/review-c-code-with-metis/files/prepare_magma_libpng.py \
+  https://raw.githubusercontent.com/ArmDeveloperEcosystem/arm-learning-paths/main/content/learning-paths/cross-platform/review-c-code-with-metis/prepare_magma_libpng.py \
   -o prepare_magma_libpng.py
 ```
 
@@ -56,8 +56,6 @@ Output: /Users/you/metis-security-review/libpng-review
 ```
 
 ## Inspect the prepared source
-
-The preparation script removes Magma benchmark controls from the prepared source tree. This keeps the review target closer to a normal libpng checkout instead of a benchmark harness.
 
 Confirm that the prepared tree has local changes:
 
@@ -90,7 +88,7 @@ metis \
   --output-file ../results/libpng-live.json
 ```
 
-`--interactive` opens the command prompt instead of running the full configured graph. At the prompt, `review_file` runs the required Initialize prerequisites automatically, then the shipped simple LLM review and finding deduplication. This command omits `--triage`, so Metis does not run automated triage; you will validate a finding manually in the next section. Review the file, then exit after the review completes:
+At the Metis prompt, review the file, then exit. The results are review-only so you can validate a finding manually in the next section:
 
 ```console
 review_file pngrutil.c
@@ -103,7 +101,7 @@ Back in your shell, return to the exercise workspace:
 cd "$HOME/metis-security-review"
 ```
 
-This writes `results/libpng-live.json` and `results/libpng-live.sarif`. Use the JSON report in the next section.
+Metis writes `results/libpng-live.json` and a companion `results/libpng-live.sarif`. Use the JSON report in the next section.
   {{< /tab >}}
   {{< tab header="Use captured report" >}}
 This option creates `results/libpng-review-candidate.json` from the Metis 2.0.0 review captured with `gpt-6.1-sol` on November 2, 2026. The full run returned three findings; this example selects the row-buffer size finding for the guided triage. The finding is unchanged from the live report; only the review group's `file_path` is made relative for portability, and `_provenance` records the capture details.

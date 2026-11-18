@@ -7,9 +7,9 @@ layout: "learningpathall"
 
 ## List the reported findings
 
-Both report options provide Metis 2.0.0 review findings without automated triage verdicts. This page provides the manual validation step: compare the selected finding with source code, attacker control, build and runtime configuration, and the Magma diff before deciding its status.
+Both report options provide Metis 2.0.0 review findings without automated triage verdicts. You will check one finding against the source code, build conditions, and Magma diff before deciding its status.
 
-Optional automated Triage accepts Metis review JSON and SARIF. In 2.0.0, decisive verdicts require citations to current, in-codebase source that was displayed to the model. Those checks validate citation provenance, not the truth of the model's reasoning, so they do not replace the source and runtime checks below.
+For optional automated triage of Metis JSON or SARIF reports, see the [Metis 2.0.0 triage flow](https://github.com/arm/metis/blob/metis-v2.0.0/docs/triage-flow.md).
 
 Select the report you want to summarize:
 
@@ -63,7 +63,7 @@ If you selected the captured report, the expected output is:
   High CWE-190: Unchecked row-size arithmetic can cause a heap buffer overflow on 32-bit builds (pngrutil.c:4591)
 ```
 
-The captured example selects one high-severity finding from the three-finding `gpt-6.1-sol` run: possible row-buffer size overflow in `png_read_start_row`, anchored at `pngrutil.c:4591–4592`. Its reasoning connects that calculation to the allocations and clearing operation later in the function. If your live report includes the same issue, you can continue with it. Otherwise, set `REPORT=results/libpng-review-candidate.json` and use the captured example. The severity and confidence are model assessments, not runtime confirmation.
+If your live report includes the row-buffer finding, use it below. Otherwise, set `REPORT=results/libpng-review-candidate.json` to follow the captured example. The severity and confidence are model assessments, not runtime confirmation.
 
 ## Triage the row-buffer finding
 
@@ -141,27 +141,20 @@ Allocation bytes: 57; clear bytes: 2147483649
 
 This calculation models unsigned wraparound; it does not run libpng or prove that a decoder reaches the write. The source supports an **architecture- and configuration-dependent finding**, but this exercise does not include a native 32-bit reproducer. Record it as **unconfirmed at runtime** until you reproduce the path with the intended build and application settings. Neither the model's heap-overflow claim nor its potential code-execution impact is established by the calculation alone.
 
-## Triage additional live findings
+## Check and record other findings
 
 Your live run might return no findings, the row-buffer finding, or different findings. An empty report does not prove the target is safe. A finding outside the injected changes is not automatically false, but it is not evidence by itself that Metis discovered a new vulnerability.
 
-Classify each additional finding as **unconfirmed** until you complete more work:
+For each additional finding, check:
 
-- Check the relevant file-format specification and API contracts.
-- Trace callers and helper functions to find earlier validation or cleanup behavior.
-- Check whether build configuration makes the code reachable.
-- Create a focused reproducer and observe behavior under AddressSanitizer and UndefinedBehaviorSanitizer.
-- Search upstream issues and security advisories before reporting a new vulnerability.
+- Whether untrusted input reaches the reported operation, including through callers or helper functions.
+- Whether the build includes that code and the arithmetic and platform assumptions hold.
+- Whether an existing guard, API contract, or file-format rule invalidates the finding.
+- Whether a focused test or sanitizer reproduces the behavior and the proposed fix preserves intended behavior.
 
-## Record a triage decision
+Search upstream issues and security advisories before reporting a new vulnerability. Treat the finding as **unconfirmed** until you have enough evidence to decide otherwise.
 
-For each finding, record at least:
-
-- Status: confirmed, rejected, duplicate, accepted risk, or unconfirmed.
-- Attacker-controlled input and the path to the operation.
-- Relevant build and platform assumptions.
-- Reproduction evidence or the missing evidence needed next.
-- Proposed fix owner and test coverage.
+Record a status of **confirmed**, **rejected**, **duplicate**, **accepted risk**, or **unconfirmed**. Include the input path, build assumptions, reproduction evidence or remaining checks, proposed fix owner, and test coverage.
 
 Do not publish unverified findings against active open-source projects. Follow the project's security policy and coordinated-disclosure process if further investigation confirms an issue.
 
