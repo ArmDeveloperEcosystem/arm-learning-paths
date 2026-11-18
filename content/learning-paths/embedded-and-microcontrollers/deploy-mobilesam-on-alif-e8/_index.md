@@ -24,7 +24,7 @@ generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
   - Ethos-U
 tools_software_languages:
