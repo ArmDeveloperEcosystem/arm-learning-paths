@@ -99,7 +99,7 @@ A `true` result confirms that rootless mode is working. You can create and enter
 
 ## Verify Distrobox installation
 
-You'll now verify Distrobox installation by creating a container and running a variety of commands.
+You'll now verify Distrobox installation by creating a container and running commands in it.
 
 ### Create an Ubuntu 26.04 container
 
