@@ -32,11 +32,9 @@ layout: installtoolsall         # DO NOT MODIFY. Always true for tool install ar
 
 You can use [Distrobox](https://distrobox.it/) to run any Linux distribution inside a container while sharing your home directory with the host. Distrobox uses Podman or Docker underneath, so that you can create a container and enter it similar to a normal shell. You can install packages with the package manager for the distribution, and remove the container when you're done. Your files stay on the host, which makes the containers safe to experiment with and quick to throw away.
 
-Distrobox is useful on Arm systems when you want a different distribution than your host or a clean build environment for testing.
+Distrobox is useful on Arm systems when you want a different distribution than your host, or a clean build environment for testing.
 
-You'll learn how to install Distrobox and run an Ubuntu container on a system running Arm Linux. You can use a physical Arm device, an Arm-based virtual machine, or the Linux development environment on a ChromeOS or Googlebook OS device.
-
-The steps in this guide target the `aarch64` (64-bit Arm) architecture. Your device needs an Arm CPU, and the containers that you create run `arm64` software.
+You'll learn how to install Distrobox and run an Ubuntu container on a system running Arm Linux. You can use a physical Arm device, an Arm-based virtual machine, or the Linux development environment on a ChromeOS or Googlebook OS device. 
 
 ## Before you begin
 
@@ -99,7 +97,7 @@ A `true` result confirms that rootless mode is working. You can create and enter
 
 ## Verify Distrobox installation
 
-You'll now verify Distrobox installation by creating a container and running commands in it.
+You'll now verify Distrobox installation by creating a container and running commands in it. The container will run `arm64` software.
 
 ### Create an Ubuntu 26.04 container
 
@@ -122,7 +120,7 @@ distrobox enter ubuntu26
 
 ### Enter the container
 
-The first time you enter a container, Distrobox sets up your user, sudo access, and the shared home directory. This takes a moment. Later entries are fast.
+The first time you enter a container, Distrobox sets up your user, sudo access, and the shared home directory. This takes a moment. Later entries are faster.
 
 Enter the container:
 
@@ -152,7 +150,9 @@ You're now in an Ubuntu 26.04 environment on Arm. Your home directory is shared 
 ls $HOME
 ```
 
-You'll see the same files and directories as on your host. Install packages with `apt` as you would on any Ubuntu system:
+You'll see the same files and directories as on your host. 
+
+Install packages with `apt` as you would on any Ubuntu system:
 
 ```bash
 sudo apt update
@@ -250,4 +250,4 @@ The compatibility list doesn't indicate which images support Arm. Before you use
 
 You're now ready to use Distrobox to run Ubuntu 26.04 and other distributions on your Arm device.
 
-To create a container from any image in the compatibility list or on a registry, pass its name to the `--image` option.
+To create a container from any image on the compatibility list or a registry, pass its name to the `--image` option.
