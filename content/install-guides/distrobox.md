@@ -1,6 +1,6 @@
 ---
 title: Distrobox
-description: Install Distrobox on Arm Linux or a ChromeOS or Googlebook OS device and run an Ubuntu 26.04 container that integrates with your home directory.
+description: Install Distrobox on Arm Linux or Linux on a ChromeOS or Googlebook OS device, and run an Ubuntu 26.04 container that integrates with your home directory.
 
 
 additional_search_terms:
