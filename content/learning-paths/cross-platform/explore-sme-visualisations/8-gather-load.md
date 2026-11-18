@@ -21,7 +21,7 @@ Gather Loads and Scatter Stores stress the memory system more than contiguous lo
 
 ## Compare the input path
 
-To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/gemm32-2x2" target="_blank" rel="noopener">open the gather-load GEMM visualization in a separate browser tab</a>. Move the tab to a separate window to view them side by side.
+To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/gemm32-2x2" target="_blank" rel="noopener">open the gather-load GEMM visualization in a separate browser tab</a>. Move the tab to a separate window to view the visualization and Learning Path side by side.
 
 Focus on how matrix A data is loaded into Z2 and Z3:
 

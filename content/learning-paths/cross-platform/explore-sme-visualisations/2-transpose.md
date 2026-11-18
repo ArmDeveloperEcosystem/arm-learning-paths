@@ -11,7 +11,7 @@ layout: learningpathall
 
 A transpose exchanges rows and columns. ZA tiles make this easy because you can move vectors of values into rows. You can then extract those values back as columns, or vice versa. 
 
-The following visualization shows a transpose in-place, where no external memory is used. The transposed result overwrites the original data. To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/transpose32" target="_blank" rel="noopener">open the 32-bit transpose visualization in a separate browser tab</a>. Move the tab to a separate window to view them side by side.
+The following visualization shows a transpose in-place, where no external memory is used. The transposed result overwrites the original data. To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/transpose32" target="_blank" rel="noopener">open the 32-bit transpose visualization in a separate browser tab</a>. Move the tab to a separate window to view the visualization and Learning Path side by side.
 
 The description of each step appears immediately under the **32-bit Transpose** title. It includes the tile addressing. The highlights show the memory and ZA locations involved.
 

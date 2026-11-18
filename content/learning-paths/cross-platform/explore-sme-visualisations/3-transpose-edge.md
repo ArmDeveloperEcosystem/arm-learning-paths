@@ -11,7 +11,7 @@ layout: learningpathall
 
 Real matrices don't always divide evenly into vector-sized blocks. The following visualization adds a two-element edge beyond the complete 32-bit blocks. It separates **Input Matrix Data** from **Output Matrix Data**. That way, you can follow the remaining values without losing sight of the original input.
 
-To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/transpose32-overflow2" target="_blank" rel="noopener">open the incomplete-edge transpose visualization in a separate browser tab</a>. Move the tab to a separate window to view them side by side.
+To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/transpose32-overflow2" target="_blank" rel="noopener">open the incomplete-edge transpose visualization in a separate browser tab</a>. Move the tab to a separate window to view the visualization and Learning Path side by side.
 
 ## Follow the edge values
 
