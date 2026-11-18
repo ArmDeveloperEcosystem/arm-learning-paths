@@ -6,7 +6,7 @@ weight: 5
 layout: learningpathall
 ---
 
-In the previous section, you completed the DevStack deployment on the first VM. The Kolla-Ansible deployment runs on a separate Azure VM with two network interfaces (NICs) and a dedicated data disk.
+You completed the DevStack deployment on the first VM. The Kolla-Ansible deployment runs on a separate Azure VM with two network interfaces (NICs) and a dedicated data disk.
 
 Create a new VM using the [same base process](/learning-paths/servers-and-cloud-computing/openstack-on-azure/instance/) as the first VM with the following specifications:
 
@@ -80,6 +80,6 @@ Using a separate disk keeps OpenStack data off the OS disk and avoids filling it
 
 ## What you've accomplished and what's next
 
-In this section, you configured a second Azure Arm64 VM for Kolla-Ansible. The VM has a second NIC (`eth1`) for OpenStack's provider network, and a dedicated 32 GB data disk for Cinder and Docker volumes.
+You've configured a second Azure Arm64 VM for Kolla-Ansible. The VM has a second NIC (`eth1`) for OpenStack's provider network, and a dedicated 32 GB data disk for Cinder and Docker volumes.
 
-In the next section, you'll install Kolla-Ansible and deploy OpenStack as containers on this VM.
+Next, you'll install Kolla-Ansible and deploy OpenStack as containers on this VM.

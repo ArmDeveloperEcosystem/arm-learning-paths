@@ -6,7 +6,7 @@ weight: 6
 layout: learningpathall
 ---
 
-In this section, you'll deploy OpenStack using Kolla-Ansible on the Azure Ubuntu 24.04 Arm64 virtual machine (VM) that you created in the previous section.
+You'll deploy OpenStack using Kolla-Ansible on the Azure Ubuntu 24.04 Arm64 virtual machine (VM) that you created earlier. 
 
 Kolla-Ansible deploys OpenStack services as Docker containers, making the deployment modular, reproducible, and easier to manage.
 
@@ -335,7 +335,9 @@ All services should show `enabled` and state `up`. If any service shows `down`, 
 
 ## What you've accomplished and what's next
 
-In this section, you deployed OpenStack using Kolla-Ansible on an Azure Cobalt 100 Arm64 VM. The deployment ran all OpenStack services as Docker containers, including Nova, Neutron, Keystone, Glance, and Horizon. 
+You've now deployed OpenStack using Kolla-Ansible on an Azure Cobalt 100 Arm64 VM. The deployment ran all OpenStack services as Docker containers, including Nova, Neutron, Keystone, Glance, and Horizon. 
 
-Your environment is now ready to launch and manage virtual machines. In the next section, you'll validate the OpenStack deployment and launch a test VM instance.
+Your environment is now ready to launch and manage virtual machines. 
+
+Next, you'll validate the OpenStack deployment and launch a test VM instance.
 

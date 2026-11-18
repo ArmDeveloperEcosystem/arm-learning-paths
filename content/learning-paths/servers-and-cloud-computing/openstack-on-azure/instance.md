@@ -12,7 +12,7 @@ You can create an Arm-based Cobalt 100 virtual machine (VM) in the following way
 - The Azure CLI
 - An infrastructure as code (IaC) tool
 
-In this section, you'll use the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
+You'll use the Azure Portal to create a virtual machine with the Arm-based Azure Cobalt 100 processor.
 
 This Learning Path focuses on general-purpose virtual machines in the Dpsv6 series. For more information, see the [Microsoft Azure guide for the Dpsv6 size series](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series).
 
@@ -65,6 +65,6 @@ Your virtual machine should be ready and running in a few minutes. You can SSH i
 
 ## What you've accomplished and what's next
 
-In this section, you created an Azure Cobalt 100 Arm-based virtual machine using Ubuntu Pro 24.04 LTS on a D4ps_v6 instance. This VM is your DevStack deployment target — a single-network interface instance with at least 80 GB of disk.
+You've created an Arm-based Azure virtual machine using Ubuntu Pro 24.04 LTS on a D4ps_v6 instance. This VM is your DevStack deployment target. It's a single-network interface instance with at least 80 GB of disk.
 
-In the next section, you'll deploy OpenStack on this VM using DevStack. After that, you'll create a second VM with additional networking and storage for the Kolla-Ansible deployment.
+Next, you'll deploy OpenStack on this VM using DevStack. After that, you'll create a second VM with additional networking and storage for the Kolla-Ansible deployment.

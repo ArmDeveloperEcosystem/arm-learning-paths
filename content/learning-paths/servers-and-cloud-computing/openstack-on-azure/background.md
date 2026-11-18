@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Azure Cobalt 100 Arm-based processor
 
-Azure’s Cobalt 100 is Microsoft’s first-generation, in-house Arm-based processor. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. These workloads include web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which ensures consistent and predictable performance.
+Azure Cobalt 100 is a first-generation, in-house Arm-based processor by Microsoft. Built on Arm Neoverse N2, Cobalt 100 is a 64-bit CPU that delivers strong performance and energy efficiency for cloud-native, scale-out Linux workloads. These workloads include web and application servers, data analytics, open-source databases, and caching systems. Running at 3.4 GHz, Cobalt 100 allocates a dedicated physical core for each vCPU, which ensures consistent and predictable performance.
 
 To learn more, see the Microsoft blog [Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor](https://techcommunity.microsoft.com/blog/azurecompute/announcing-the-preview-of-new-azure-vms-based-on-the-azure-cobalt-100-processor/4146353).
 
@@ -76,6 +76,6 @@ Because the two approaches have different infrastructure requirements, you'll be
 
 ## What you've learned and what's next
 
-In this section, you learned about Azure Cobalt 100 and OpenStack. You were introduced to two approaches for deploying OpenStack on Cobalt 100, and the infrastructure requirements for each approach.
+You've learned about Azure Cobalt 100 and OpenStack. You were introduced to two approaches for deploying OpenStack on Cobalt 100, and the infrastructure requirements for each approach.
 
-In the next section, you'll create the VM for the DevStack approach for deploying OpenStack on Cobalt 100.
+Next, you'll create the VM for the DevStack approach for deploying OpenStack on Cobalt 100.

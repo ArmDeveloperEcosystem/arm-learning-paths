@@ -6,7 +6,7 @@ weight: 3
 layout: learningpathall
 ---
 
-## Setup
+## Set up Linux system
 
 This Learning Path works on any Arm Linux system with four or more CPU cores. 
 
