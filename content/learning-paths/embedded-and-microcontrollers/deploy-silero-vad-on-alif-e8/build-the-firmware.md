@@ -1,85 +1,106 @@
 ---
-title: Build the E8 Zephyr firmware
-description: Embed the exported model and recording, link the CPU operators and Ethos-U delegate, and inspect the HP firmware memory use.
+title: Build validation and live microphone firmware
+description: Build two E8 configurations from one application, preserve the SRAM NPU route, and inspect model and framebuffer memory use.
 weight: 5
 layout: learningpathall
 ---
 
-## Inspect the application configuration
+## Inspect the shared application
 
-The application in `zephyr/samples/silero-vad-ethosu` runs once over the embedded recording. It loads `forward` once and preserves that method's recurrent state for every window. Resetting the board starts an independent stream.
+The application in `zephyr/samples/silero-vad-ethosu` defaults to `CONFIG_SILERO_LIVE_AUDIO=y` and `CONFIG_SILERO_MIC_GAIN=50`. It captures the on-board microphone, preserves one loaded method's recurrent state, and updates the live dashboard. Adding `validation.conf` disables microphone capture and selects the embedded recording instead.
 
-The board-specific files select the HP Ethos-U85-256, enable its clock, and assign application SRAM beginning at `0x020C0000` with size `0x740000` bytes. This is a 7.25 MiB application region for the pinned E8 memory map. It is not portable to another board or a concurrently running application that owns the same SRAM.
+Both configurations use the HP Ethos-U85-256 and keep the display route selected continuously. They enable the CDC200, MIPI DSI host, and MW405 panel. The 480 × 800 RGB565 framebuffer uses 768,000 bytes in SRAM0. No camera is initialized.
 
-The starting allocation capacities are:
+Application SRAM starts at `0x020C0000` with size `0x740000` bytes, a 7.25 MiB region in this pinned memory map. It is separate from SRAM0 and must not overlap another application. The starting allocation capacities are:
 
 | Allocation | Capacity or source |
 | --- | --- |
 | Method and planned buffers | 2 MiB static allocator pool |
 | Temporary delegate allocations | 1 MiB static allocator pool |
-| PTE copy | Exported PTE size, aligned to 16 bytes in SRAM |
-| C/C++ heap | 64 KiB |
-| Main stack | 16 KiB |
-| Audio | Up to 40,000 normalized float32 samples generated from the PCM16 WAV |
+| PTE copy | Exported PTE size, aligned to the 32-byte CPU cache line |
+| C/C++ heap and main stack | 64 KiB and 16 KiB |
+| Validation audio only | 40,000 normalized float32 samples, 160,000 bytes |
+| Live capture only | Eight 1,024-byte PCM16 slab blocks |
 
-These are configured capacities, not measurements of model demand. The generated audio array occupies 160,000 bytes for this clip. The PTE and audio begin in the firmware image; startup copies the PTE once to SRAM for NPU access. The linker report checks the static allocation footprint. A completed board run is still needed to verify allocator demand and NPU access.
+These are reserved capacities rather than measurements of model demand. Startup copies the PTE to cache-line-aligned SRAM and cleans it for NPU access. `NPU_QCONFIG=0` and `NPU_REGIONCFG_0=0` route command and weight reads to that SRAM. Retain these settings; the driver's default external-memory command route cannot fetch this copy.
 
-## Build for the HP core
+## Build the deterministic configuration first
 
-Keep the released Python environment active. Build with absolute paths to the exact PTE and WAV from the previous lesson:
+Keep the released Python environment active. Use a fresh build directory with the exact PTE and WAV from the export lesson:
 
 ```bash
 cd "$EXECUTORCH_ROOT"
-west build \
+west -z "$ZEPHYR_BASE" build \
   -b alif_e8_dk/ae822fa0e5597xx0/rtss_hp \
   zephyr/samples/silero-vad-ethosu \
-  -d "$SILERO_BUILD" -- \
+  -d "$SILERO_VALIDATION_BUILD" -- \
   -DZEPHYR_EXTRA_MODULES="$EXECUTORCH_ROOT;$SDK_ALIF" \
   -DPython3_EXECUTABLE="$(command -v python)" \
+  -DUSER_CACHE_DIR="$SILERO_OUTPUT/cache" \
+  -DEXTRA_CONF_FILE=validation.conf \
   -DET_PTE_FILE_PATH="$SILERO_OUTPUT/silero_vad_ethos_u.pte" \
   -DAUDIO_PATH="$SILERO_OUTPUT/validation.wav"
 ```
 
-The CMake application generates the model/audio headers and selects portable CPU operators from the PTE. It links those registrations, the quantized kernels, and the Ethos-U backend into the firmware. The app also rejects inputs that do not match the single float32 `[1,576]` audio tensor and single float32 probability output.
+This configuration runs the original 79-window model test once and emits its `PROB`, `SEGMENT`, and completion records. Afterward, the dashboard loops cached results under **PRERECORDED CLIP** and **LOOPING RESULTS / NO MICROPHONE**. That replay does not call the model again or produce another probability sequence.
 
-If you change the board, PTE, WAV, or allocation configuration, rebuild in a new directory or use `west build -p always` with the complete command. This avoids keeping headers or operator selections from an earlier model.
+## Build the default microphone configuration
 
-## Check the firmware and memory placement
-
-Require the ELF and binary, then inspect the generated target and allocator configuration:
+Build the same source in a separate directory. Omit `EXTRA_CONF_FILE` and `AUDIO_PATH`: the default application captures live audio and does not embed the recording.
 
 ```bash
-test -s "$SILERO_BUILD/zephyr/zephyr.elf"
-test -s "$SILERO_BUILD/zephyr/zephyr.bin"
-rg 'CONFIG_(RTSS_HP|ARM_ETHOS_U85_256|EXECUTORCH_.*ALLOCATOR_POOL_SIZE)=' \
-  "$SILERO_BUILD/zephyr/.config"
-rg -n 'app_sram|020c0000|20c0000|ethosu' \
-  "$SILERO_BUILD/zephyr/zephyr.dts"
-"$ZEPHYR_SDK_INSTALL_DIR/arm-zephyr-eabi/bin/arm-zephyr-eabi-size" \
-  "$SILERO_BUILD/zephyr/zephyr.elf"
+west -z "$ZEPHYR_BASE" build \
+  -b alif_e8_dk/ae822fa0e5597xx0/rtss_hp \
+  zephyr/samples/silero-vad-ethosu \
+  -d "$SILERO_LIVE_BUILD" -- \
+  -DZEPHYR_EXTRA_MODULES="$EXECUTORCH_ROOT;$SDK_ALIF" \
+  -DPython3_EXECUTABLE="$(command -v python)" \
+  -DUSER_CACHE_DIR="$SILERO_OUTPUT/cache" \
+  -DET_PTE_FILE_PATH="$SILERO_OUTPUT/silero_vad_ethos_u.pte"
 ```
 
-Require the HP target and `CONFIG_ARM_ETHOS_U85_256=y`. Keep the memory-usage report printed by the linker and inspect `zephyr.map` if a region is close to its limit. The `.bss` includes allocator capacities and the PTE copy; unused space inside a pool is still reserved in the linked firmware.
+The application generates the model header and registers the portable CPU operators, quantized kernels, and Ethos-U backend required by the PTE. Both branches require one float32 `[1,576]` input and one float32 probability output. Use a fresh directory or `west build -p always` with the full command after changing the model, configuration, or audio.
 
-Successful linking proves that the firmware fits the configured static regions. It does not prove that `load_method()` or the largest delegate allocation fits at runtime. The application prints its planned buffer sizes during startup and reports allocation or execution failures; retain those messages during validation.
+## Check both configurations and memory reports
 
-The local cross-build with the pinned source, vendor modules, Zephyr SDK 0.17.0, and released Python environment passed. Its linker report is:
-
-| Region | Used | Available | Utilization |
-| --- | --- | --- | --- |
-| Flash application partition | 830,084 bytes | 3,584 KiB | 22.62% |
-| Application RAM | 3,597,440 bytes | 7,424 KiB | 47.32% |
-
-The binary is linked at `0x80200000`, including the vendor flash load offset. These are cross-build results, not measurements from a running E8. Physical execution and probability agreement remain to be checked.
-
-Record the firmware identity alongside the model inputs:
+Verify both ELFs and binaries, then inspect the selected modes:
 
 ```bash
-shasum -a 256 "$SILERO_BUILD/zephyr/zephyr.elf" \
-  "$SILERO_BUILD/zephyr/zephyr.bin" \
-  > "$SILERO_OUTPUT/firmware.sha256"
+for build in "$SILERO_VALIDATION_BUILD" "$SILERO_LIVE_BUILD"; do
+  test -s "$build/zephyr/zephyr.elf"
+  test -s "$build/zephyr/zephyr.bin"
+  rg 'CONFIG_(RTSS_HP|ARM_ETHOS_U85_256|SILERO_LIVE_AUDIO|SILERO_MIC_GAIN|AUDIO|AUDIO_DMIC|DISPLAY|MIPI_DSI|FPU_SHARING|EXECUTORCH_.*ALLOCATOR_POOL_SIZE)=' \
+    "$build/zephyr/.config"
+  "$ZEPHYR_SDK_INSTALL_DIR/arm-zephyr-eabi/bin/arm-zephyr-eabi-size" \
+    "$build/zephyr/zephyr.elf"
+done
+```
+
+Require the HP target, U85-256, display, and MIPI DSI in both builds. The live configuration must have `CONFIG_SILERO_LIVE_AUDIO=y`, `CONFIG_SILERO_MIC_GAIN=50`, microphone audio enabled, and floating-point context sharing enabled. The validation configuration must have `CONFIG_SILERO_LIVE_AUDIO` disabled. Reusing a build directory can retain the wrong input mode, so check `.config` before programming.
+
+The source builds reported these footprints:
+
+| Configuration | Flash application partition (3,584 KiB) | Application RAM (7,424 KiB) | SRAM0 framebuffer (768 KiB) |
+| --- | --- | --- | --- |
+| Deterministic validation | 846,396 bytes | 3,597,600 bytes | 768,000 bytes |
+| Live microphone | 690,312 bytes | 3,611,176 bytes | 768,000 bytes |
+
+The smaller live binary does not embed the 160,000-byte float32 recording. Both images link at `0x80200000`, including the vendor flash offset. SRAM0 has 18,432 bytes remaining after the framebuffer; application RAM is a different region. Retain each linker report and `zephyr.map` rather than adding these regions together.
+
+Successful linking proves static fit. Runtime planned-buffer allocation, completed inference, microphone capture, and display updates still require the board checks. Keep the complete allocation and delegate messages.
+
+Record separate firmware identities:
+
+```bash
+for mode in validation live; do
+  build="$SILERO_OUTPUT/build-$mode"
+  shasum -a 256 "$build/zephyr/zephyr.elf" "$build/zephyr/zephyr.bin" \
+    > "$SILERO_OUTPUT/firmware-$mode.sha256"
+done
+export SILERO_MODE=validation
+export SILERO_BUILD="$SILERO_VALIDATION_BUILD"
 ```
 
 ## What you've accomplished
 
-You have built one firmware image containing the recorded clip, exported program, CPU kernels, and U85 delegate, and checked its configured memory placement. Next, program this matching image onto the E8 HP core.
+You have built a known-input test and a live microphone application from the same source and model. The selected configuration is initially `validation`. Next, program it, verify its 79 probabilities, then repeat programming with the live image.

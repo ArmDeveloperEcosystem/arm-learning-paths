@@ -1,7 +1,7 @@
 ---
 title: Deploy Silero VAD on Alif Ensemble E8 with ExecuTorch
-description: Export a stateful Silero voice activity detector, build its Zephyr firmware for the Alif E8, and compare recorded-audio probabilities with a host reference.
-minutes_to_complete: 120
+description: Run Silero VAD on the Alif E8 on-board microphone, show live speech probabilities on its display, and verify a deterministic clip against a host reference.
+minutes_to_complete: 150
 draft: true
 cascade:
   draft: true
@@ -9,13 +9,14 @@ who_is_this_for: This Learning Path is for embedded ML developers porting stream
 learning_objectives:
   - Explain the waveform context and recurrent state retained between Silero VAD invocations
   - Export a quantized Ethos-U85 program and matching speech-probability reference using released Python packages
-  - Build E8 Zephyr firmware with the model, recorded audio, and required CPU operators
-  - Program the E8 and compare all 79 frame probabilities with the host reference
+  - Build a deterministic validation configuration and a live microphone configuration from one E8 application
+  - Program the E8, verify its MRAM payloads, and compare all 79 validation probabilities with the host reference
+  - Capture the on-board microphone and interpret live probability, audio level, and capture-rate diagnostics
 prerequisites:
-  - An [Alif Ensemble E8 Development Kit](https://alifsemi.com/support/kits/ensemble-e8devkit/) and a data-capable USB cable
+  - An [Alif Ensemble E8 Development Kit](https://alifsemi.com/support/kits/ensemble-e8devkit/) with the tested A0 part AE822FA0E5597LS0, provisioned debug access, its 480 × 800 display attached, and a data-capable USB cable
   - An Apple silicon Mac with Python 3.12, Git, CMake, Ninja, ripgrep, and a C++ build toolchain
   - Access to the E8 application UART4 console through PRG USB and the board’s SW4 selector; no separate USB-to-UART adapter is required
-  - Zephyr SDK 0.17.0, Alif Security Toolkit for your silicon revision, and SEGGER J-Link
+  - Zephyr SDK 0.17.0, Alif Security Toolkit configured for E8 A0, and SEGGER J-Link
   - Experience with PyTorch model export, C++, and Zephyr builds
 author: Usamah Zaheer
 generate_summary_faq: false

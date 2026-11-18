@@ -67,7 +67,9 @@ The export generates two artifacts that must stay paired:
 
 The host reference checks agreement with the quantized model. It is not the floating-point model's accuracy against labeled speech. Calibration and validation overlap in this example; use separate labeled recordings for an accuracy study.
 
-The pinned source and released environment were checked together: export produced a 363,392-byte PTE and 316-byte reference. Both matched the retained FVP-tested release artifacts byte for byte. This checks host export reproducibility; it does not establish physical E8 execution.
+Both application configurations use this same PTE. Live mode replaces the input source; it does not need a separate model export or altered tolerances. Keep the reference for the deterministic configuration.
+
+The documented export was rerun with the pinned source, PyTorch 2.14.0, ExecuTorch 1.5.1, TorchAO 0.18.0, Vela 5.1.0, and TOSA tools 2026.5.0. It produced a 363,392-byte PTE and 316-byte reference containing 79 finite probabilities. Inspection confirmed two Ethos-U delegates, the required CPU operators, and initialized int8 recurrent state. These are host validation results. The source-ZIP validation configuration completed its physical E8 comparison with these artifacts. The live configuration keeps the same PTE while replacing the input with microphone capture.
 
 ## Inspect the exported operators
 
@@ -96,4 +98,4 @@ shasum -a 256 \
 
 ## What you've accomplished
 
-You have exported the U85 program, preserved its initialized recurrent state, and generated a 79-window host reference from the same audio. Next, embed the program and recording in E8 firmware with the required CPU and NPU components.
+You have exported the U85 program, preserved its initialized recurrent state, and generated a 79-window host reference from the same audio. Next, build the deterministic validation firmware and the default microphone firmware with the same CPU and NPU components.

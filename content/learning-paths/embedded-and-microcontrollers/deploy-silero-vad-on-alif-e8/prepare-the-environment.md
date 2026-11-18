@@ -9,7 +9,7 @@ layout: learningpathall
 
 Use an Apple silicon Mac with Python 3.12, CMake, Ninja, Git, and ripgrep installed. Install [Zephyr SDK 0.17.0](https://github.com/zephyrproject-rtos/sdk-ng/releases/tag/v0.17.0) for macOS on Arm, including the Arm toolchain. Set its location below.
 
-The upstream Silero example supplies the exporter and audio helpers. The downloadable application adds the E8 Zephyr target. It is a local port, so use the exact source and vendor revisions in this lesson when reproducing it.
+The upstream Silero example supplies the exporter and audio helpers. The downloadable application adds the E8 Zephyr target, on-board microphone capture, and display dashboard. It is a local port, so use the exact source and vendor revisions in this lesson when reproducing it.
 
 Choose a new workspace and define the paths used throughout this Learning Path:
 
@@ -19,7 +19,8 @@ export EXECUTORCH_ROOT="$ALIF_WORK/executorch"
 export ZEPHYR_BASE="$ALIF_WORK/zephyr_alif"
 export SDK_ALIF="$ALIF_WORK/sdk-alif"
 export SILERO_OUTPUT="$ALIF_WORK/model-and-builds"
-export SILERO_BUILD="$SILERO_OUTPUT/build-alif"
+export SILERO_VALIDATION_BUILD="$SILERO_OUTPUT/build-validation"
+export SILERO_LIVE_BUILD="$SILERO_OUTPUT/build-live"
 export ZEPHYR_SDK_INSTALL_DIR=/absolute/path/to/zephyr-sdk-0.17.0
 export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
 mkdir -p "$ALIF_WORK" "$SILERO_OUTPUT"
@@ -36,7 +37,7 @@ git -C "$EXECUTORCH_ROOT" checkout --detach \
 git -C "$EXECUTORCH_ROOT" submodule update --init --recursive
 ```
 
-Download the [E8 Silero application](../silero-alif-e8.zip) and save it as `$ALIF_WORK/silero-alif-e8.zip`. The archive contains source code for `zephyr/samples/silero-vad-ethosu`, its license notices, and a README. It contains no model weights or audio.
+Download the [E8 Silero application](../silero-alif-e8.zip) and save it as `$ALIF_WORK/silero-alif-e8.zip`. The archive contains source code for `zephyr/samples/silero-vad-ethosu`, the microphone and dashboard code, a separate `validation.conf`, license notices, and a README. It contains no model weights or audio.
 
 Check the archive hash, then extract it into the new checkout:
 
@@ -46,7 +47,7 @@ unzip "$ALIF_WORK/silero-alif-e8.zip" -d "$EXECUTORCH_ROOT"
 test -f "$EXECUTORCH_ROOT/zephyr/samples/silero-vad-ethosu/src/main.cpp"
 ```
 
-The expected SHA256 is `7c671b6665bdf11d087cc4574fd8def27a75b2c5f8ec3b3db0a7ef83eac32f78`.
+The expected SHA256 is `5c7abaa6b0594a0a75a6d9ce57c3e9fee1bae6e1c53ba246806f4f63e01a1164`.
 
 ## Pin the vendor board support
 
@@ -74,12 +75,13 @@ python -m pip install "torch==2.14.0" \
   --index-url https://download.pytorch.org/whl/cpu
 python -m pip install "executorch[ethos_u]==1.5.1" \
   "torchao==0.18.0" "cmake<4" "west==1.5.0" fdt pytest
-python -m pip install -r "$ZEPHYR_BASE/scripts/requirements.txt"
+python -m pip install -r "$ZEPHYR_BASE/scripts/requirements-base.txt"
+python -m pip check
 ```
 
 These are released packages. The wheel supplies host export and code-generation components; the pinned source supplies the example scripts and the C++ runtime built for Zephyr. Keep this environment active for both operations. The source revision and wheel version are separate pins, so retain the model/firmware validation results for this combination.
 
-The `ethos_u` extra installs Vela and TOSA tooling. This board workflow uses the Zephyr SDK compiler and does not require an FVP installation. Do not run the source tree's general nightly dependency installer over this environment.
+The vendor base requirements supply the firmware build tools. The `ethos_u` extra installs Vela and TOSA tooling. This board workflow uses the Zephyr SDK compiler and does not require an FVP installation. Do not run the source tree's general nightly dependency installer over this environment.
 
 ## Initialize the vendor west workspace
 
@@ -90,7 +92,7 @@ cd "$ALIF_WORK"
 west init -l "$ZEPHYR_BASE"
 west update
 west zephyr-export
-west manifest --freeze > "$SILERO_OUTPUT/west-manifest.yml"
+west manifest --freeze --active-only > "$SILERO_OUTPUT/west-manifest.yml"
 python -m pip freeze > "$SILERO_OUTPUT/python-requirements.txt"
 cd "$EXECUTORCH_ROOT"
 ```
@@ -101,9 +103,9 @@ If resuming an existing workspace, verify its manifest instead of initializing i
 
 Install Alif Security Toolkit for your E8 silicon revision and SEGGER J-Link. Follow the Security Toolkit and debug-probe portions of the [E8 board setup guide](https://learn.arm.com/learning-paths/embedded-and-microcontrollers/alif-image-classification/board-setup/). Its CMSIS application build is a separate example.
 
-Connect the board's **PRG USB** port with a data-capable cable, retain the vendor jumper settings, and leave **SW4 on SEUART** for programming. Confirm that the host discovers the serial port and J-Link probe. Close applications holding the programming serial port.
+With board power disconnected, retain the vendor jumper settings and verify that **SW3 (JLOB) is set to EN**, as shown in Figure 1 of the [official Alif DK-E8 User Guide (AUGD0023)](https://alifsemi.com/download/AUGD0023). Connect the board's **PRG USB** port with a data-capable cable and confirm that the host discovers the J-Link probe and serial device.
 
-The E8 DevKit has an onboard USB-to-UART bridge. SW4 routes it to SEUART for programming or UART4 for the HP application console at 115200 baud, 8N1. No separate adapter is required. The programming lesson shows the single switch change to UART4 after flashing and the return to SEUART before any later programming.
+SW3 enables the onboard J-Link block. The separate SW4 selector routes the USB-to-UART bridge to **UART4** for the HP console at 115200 baud, 8N1, or **SEUART** for Security Toolkit ISP programming. This Learning Path programs application MRAM through J-Link SWD, which is independent of SW4. Close applications holding SEUART before using ISP programming.
 
 Set the installed tool locations and HP device:
 
@@ -116,7 +118,7 @@ test -x "$JLINK_COMMANDER"
 command -v west
 ```
 
-Match the toolkit's A0/A1 configuration to your actual board. The device above selects the HP core; it does not detect the silicon revision for you.
+This workflow targets the tested E8 revision A0 device, `AE822FA0E5597LS0`. Select that silicon revision in the Security Toolkit. The full device name above selects the HP core. Other silicon revisions require separately validated board and tool configurations.
 
 ## What you've accomplished
 

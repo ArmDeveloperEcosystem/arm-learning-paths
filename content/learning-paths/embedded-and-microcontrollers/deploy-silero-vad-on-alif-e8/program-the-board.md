@@ -1,115 +1,235 @@
 ---
 title: Program the Silero firmware on the E8 HP core
-description: Generate an application image configuration and program the firmware, embedded model, and audio into E8 MRAM.
+description: Preserve the boot configuration, sign the embedded-model firmware, and independently verify its MRAM installation.
 weight: 6
 layout: learningpathall
 ---
 
-## Check the firmware and programming connection
+## Use the E8 A0 SWD programming procedure
 
-The firmware contains both the PTE and validation audio. Program the single `zephyr.bin` produced by the previous lesson into MRAM. Rebuild and reprogram that firmware whenever you change the model or embedded recording.
+Each firmware contains its PTE; the validation configuration also embeds the recording. Install two MRAM payloads through J-Link SWD: the selected HP firmware and its signed Alif application table-of-contents package (AToC). No external OSPI model transfer is needed. Program and check `validation` first, then repeat this procedure for `live`.
 
-Connect the board's **PRG USB** port with a data-capable cable. For programming, leave **SW4 on SEUART** and close any terminal using the Security Toolkit's serial port. Use the Security Toolkit configured for your E8 silicon revision, with the device configuration and boot images already established in the setup lesson.
+This procedure targets **E8 A0 `AE822FA0E5597LS0`** with its display attached. Keep the validation and live firmware identities, signed packages, readbacks, and logs separate. Other silicon revisions require separate validation.
 
-Check the paths from your active shell:
+Close other debugger sessions. With board power disconnected, verify **SW3 JLOB=EN** and select **SW4 UART4** for the HP console, then connect **PRG USB** using a data-capable cable. SW4 selects the UART bridge; SWD does not require SEUART. Use SEUART only for Security Toolkit ISP operations. See the [official Alif DK-E8 User Guide](https://alifsemi.com/download/AUGD0023).
+
+## Select the configuration and evidence directory
+
+The build lesson initially selects `validation`. Preserve that selection and create its evidence directory:
 
 ```bash
-test -s "$SILERO_BUILD/zephyr/zephyr.bin"
-test -s "$SILERO_BUILD/zephyr/zephyr.elf"
-test -x "$ALIF_SE_TOOLS_DIR/app-gen-toc"
-test -x "$ALIF_SE_TOOLS_DIR/app-write-mram"
+: "${SILERO_MODE:?Select validation or live from the build/validation lesson}"
+: "${SILERO_BUILD:?Select the matching firmware build directory}"
+export SILERO_RUN_DIR="$SILERO_OUTPUT/$SILERO_MODE"
+mkdir -p "$SILERO_RUN_DIR"
 ```
 
-The pinned HP board configuration places the Zephyr application at **`0x80200000`**: MRAM base `0x80000000` plus flash load offset `0x200000`. This is the Zephyr HP partition used here. The address must agree with your generated build configuration and linker layout.
+After the 79-value comparison passes, repeat the programming steps with `SILERO_MODE=live`, `SILERO_BUILD="$SILERO_LIVE_BUILD"`, and `SILERO_RUN_DIR="$SILERO_OUTPUT/live"`. Create that directory before proceeding. Both modes require their own signed package and fresh readbacks. The helper refuses to overwrite an existing prepared run; use a new evidence directory for later rebuilds.
 
-## Preserve the existing boot configuration
+## Select the J-Link probe
 
-The Security Toolkit generates an application table of contents (AToC) from a JSON configuration. Start with the configuration already used by your working E8 boot setup. Keep its device configuration, AP images, HE images, signing options, and clock settings. This lesson changes only the HP application entry.
-
-The standard Zephyr runner uses `build/config/app-cpu-stubs.json` as its template. Use that file only after confirming that its device configuration and companion images match your E8. If your working setup uses a different application configuration, set `ALIF_APP_CONFIG` to that file instead.
-
-Save a copy of the toolkit configuration and stage the new binary under a distinct name:
+List probes and select the intended board's numeric serial number, separate from its `/dev/cu.usbmodem...` UART path:
 
 ```bash
-export ALIF_APP_CONFIG="$ALIF_SE_TOOLS_DIR/build/config/app-cpu-stubs.json"
+export JLINK_EXECUTABLE="${JLINK_EXECUTABLE:-$JLINK_COMMANDER}"
+printf 'ShowEmuList USB\nExit\n' > "$SILERO_RUN_DIR/list-probes.jlink"
+"$JLINK_EXECUTABLE" -AutoConnect 0 -NoGui 1 \
+  -CommandFile "$SILERO_RUN_DIR/list-probes.jlink"
+export JLINK_SERIAL=REPLACE_WITH_YOUR_PROBE_SERIAL
+cat > "$SILERO_RUN_DIR/jlink-selected" <<'SH'
+#!/bin/sh
+case "$JLINK_SERIAL" in
+  ''|*[!0-9]*) echo 'Set the numeric JLINK_SERIAL' >&2; exit 2;;
+esac
+exec "$JLINK_EXECUTABLE" -USB "$JLINK_SERIAL" "$@"
+SH
+chmod +x "$SILERO_RUN_DIR/jlink-selected"
+export JLINK_COMMANDER="$SILERO_RUN_DIR/jlink-selected"
+```
 
+Keep these exported variables active. `JLINK_EXECUTABLE` must name the actual SEGGER binary, never the wrapper. Select the serial again when changing boards.
+
+Check that HP can read application MRAM:
+
+```bash
+export ALIF_MRAM_CORE=HP
+export ALIF_MRAM_DEVICE=AE822FA0E5597LS0_M55_HP
+printf 'H\nMem32 0x80000000 4\nG\nExit\n' \
+  > "$SILERO_RUN_DIR/check-mram-access.jlink"
+"$JLINK_COMMANDER" -Device "$ALIF_MRAM_DEVICE" -If SWD -Speed 4000 \
+  -AutoConnect 1 -NoGui 1 -ExitOnError 1 \
+  -CommandFile "$SILERO_RUN_DIR/check-mram-access.jlink"
+```
+
+If HP reports no AHB ROM and cannot connect, set `ALIF_MRAM_CORE=HE` and `ALIF_MRAM_DEVICE=AE822FA0E5597LS0_M55_HE`, then rerun this access check. Use that fallback only if a fresh HE connection reads MRAM successfully. This debug route has also been exercised on E8 A0; the image still targets and boots HP. Keep `ALIF_DEVICE=AE822FA0E5597LS0_M55_HP`. Stop if neither core is readable.
+
+## Back up application MRAM
+
+Before downloading, save the application-MRAM region `[0x80000000, 0x80580000)` in a fresh process:
+
+```bash
+(
+set -e
+test ! -e "$SILERO_RUN_DIR/application-mram-before.bin"
+cat > "$SILERO_RUN_DIR/backup-mram.jlink" <<EOF
+H
+SaveBin "$SILERO_RUN_DIR/application-mram-before.bin" 0x80000000 0x580000
+G
+Exit
+EOF
+"$JLINK_COMMANDER" -Device "$ALIF_MRAM_DEVICE" -If SWD -Speed 4000 \
+  -AutoConnect 1 -NoGui 1 -ExitOnError 1 \
+  -CommandFile "$SILERO_RUN_DIR/backup-mram.jlink"
+python - <<'PY'
+from pathlib import Path
+import os
+backup = Path(os.environ["SILERO_RUN_DIR"]) / "application-mram-before.bin"
+assert backup.stat().st_size == 0x580000, "Incomplete application-MRAM backup"
+PY
+shasum -a 256 "$SILERO_RUN_DIR/application-mram-before.bin"
+)
+```
+
+Retain the backup and hash. Use a new output workspace for another board instead of overwriting evidence. Stop on a failed debug connection or incomplete read. This procedure assumes debug access is already provisioned; it does not replace Security Enclave firmware or system MRAM.
+
+## Stage and sign the aligned firmware
+
+Download the [MRAM preparation helper](../prepare_mram_programming.py) to `$ALIF_WORK`. Check its SHA256 using `shasum -a 256`; require:
+
+```output
+3aab6ca07ae2249609bcfc342c4aa2d17560d3fe99441f6cab2fef8c5bdd5614
+```
+
+Use the known working application JSON for this A0 board as `ALIF_APP_CONFIG`. The standard template is `build/config/app-cpu-stubs.json`; use it only after confirming its device configuration and companion images match the board. Preserve all AP/HE entries, signing settings, clocks, and referenced binaries. Create a separate HP configuration and stage the firmware before signing:
+
+```bash
+export MRAM_HELPER="$ALIF_WORK/prepare_mram_programming.py"
+export ALIF_APP_CONFIG="${ALIF_APP_CONFIG:-$ALIF_SE_TOOLS_DIR/build/config/app-cpu-stubs.json}"
 test -s "$ALIF_APP_CONFIG"
-tar -czf "$SILERO_OUTPUT/setools-config-before-silero.tar.gz" \
+test -x "$ALIF_SE_TOOLS_DIR/app-gen-toc"
+tar -czf "$SILERO_RUN_DIR/setools-config-before-silero.tar.gz" \
   -C "$ALIF_SE_TOOLS_DIR" build/config
-cp "$SILERO_BUILD/zephyr/zephyr.bin" \
-  "$ALIF_SE_TOOLS_DIR/build/images/silero-vad-hp.bin"
-```
-
-The next command reads that template, checks the build's HP flash address, and writes a separate application configuration. It leaves the original template unchanged:
-
-```bash
-python - "$SILERO_BUILD/zephyr/.config" "$ALIF_APP_CONFIG" \
-  "$SILERO_OUTPUT/silero-vad-hp.json" <<'PY'
+python - <<'PY'
 from pathlib import Path
 import json
-import sys
+import os
 
-build_config, template, destination = map(Path, sys.argv[1:])
+build = Path(os.environ["SILERO_BUILD"]) / "zephyr"
+tools = Path(os.environ["ALIF_SE_TOOLS_DIR"])
+output = Path(os.environ["SILERO_RUN_DIR"])
 values = dict(
     line.split("=", 1)
-    for line in build_config.read_text().splitlines()
+    for line in (build / ".config").read_text().splitlines()
     if line.startswith("CONFIG_") and "=" in line
 )
-assert values.get("CONFIG_RTSS_HP") == "y", "Build must target the HP core"
+assert values.get("CONFIG_RTSS_HP") == "y", "Build must target HP"
+mode = os.environ["SILERO_MODE"]
+assert mode in ("validation", "live"), "Select validation or live"
+assert (values.get("CONFIG_SILERO_LIVE_AUDIO") == "y") == (mode == "live"), \
+    "Selected mode does not match the built firmware"
 address = int(values["CONFIG_FLASH_BASE_ADDRESS"], 0) + int(
     values["CONFIG_FLASH_LOAD_OFFSET"], 0
 )
-assert address == 0x80200000, f"Unexpected HP flash address: {address:#x}"
-
-configuration = json.loads(template.read_text())
+assert address == 0x80200000, f"Unexpected HP firmware address: {address:#x}"
+configuration = json.loads(Path(os.environ["ALIF_APP_CONFIG"]).read_text())
 hp = configuration["HP_APP"]
-assert hp["cpu_id"] == "M55_HP", "Template must contain the HP application"
-hp["disabled"] = False
-hp["binary"] = "silero-vad-hp.bin"
-hp["mramAddress"] = hex(address)
+assert hp["cpu_id"] == "M55_HP" and hp.get("signed") is True
+hp.update(disabled=False, binary="silero-vad-hp.bin", mramAddress=hex(address))
 hp["flags"] = ["boot"]
 hp.pop("loadAddress", None)
-destination.write_text(json.dumps(configuration, indent=4) + "\n")
-print(json.dumps(hp, indent=2))
+image = (build / "zephyr.bin").read_bytes()
+padding = (-len(image)) % 16
+(tools / "build/images" / hp["binary"]).write_bytes(image + bytes(padding))
+(output / "silero-vad-hp.json").write_text(json.dumps(configuration, indent=4) + "\n")
+print(f"Firmware: {len(image)} bytes + {padding} zero padding bytes at {address:#x}")
 PY
 ```
 
-Review the printed HP entry. It must select `M55_HP`, name `silero-vad-hp.bin`, use `mramAddress` of `0x80200000`, and contain the `boot` flag. MRAM execution uses `mramAddress`; the template's SRAM `loadAddress` and `load` flag must be absent from this entry.
+The two source builds have different identities:
 
-Review the complete new JSON before generating images. Its other entries should match the known working template, and every referenced binary must remain available in the toolkit's `build/images` directory. Keep the existing Security Enclave table of contents (SETOC) and device clock configuration; this application update does not require replacing them.
+| Configuration | Raw binary | Zero padding | Staged binary SHA256 |
+| --- | --- | --- | --- |
+| Validation | 846,396 bytes | 4 bytes | `1af2578fbb100d1c18a1a30371b49e27c984a7b712309cc1f06ff398bf1d4a73` |
+| Live | 690,312 bytes | 8 bytes | `e594f0f853e04cd795a4aaa10ceb71c4f5d23335dd226a09510dc4eaf307e31e` |
 
-## Generate and program the application image
+The live staged image is 690,320 bytes. The command computes padding for your build before signing. Build paths and metadata can change later hashes; record your own raw and staged identities. Never pad or modify an image after signing.
 
-Run the toolkit from its installation directory so it finds its configuration and image files:
+Review the generated JSON. Only its HP entry should differ from the known working template. It must use `M55_HP`, `silero-vad-hp.bin`, MRAM address `0x80200000`, and the `boot` flag. Changing this JSON cannot relocate linked firmware.
+
+Generate the signed package and snapshot the exact staged firmware, package, and map:
 
 ```bash
-cd "$ALIF_SE_TOOLS_DIR"
-./app-gen-toc -f "$SILERO_OUTPUT/silero-vad-hp.json"
-./app-write-mram -p
-cd "$EXECUTORCH_ROOT"
+unset MRAM_RUN
+cp "$SILERO_RUN_DIR/silero-vad-hp.json" \
+  "$ALIF_SE_TOOLS_DIR/build/config/silero-vad-hp.json" &&
+(
+cd "$ALIF_SE_TOOLS_DIR" || exit
+set -o pipefail
+./app-gen-toc -f build/config/silero-vad-hp.json \
+  2>&1 | tee "$SILERO_RUN_DIR/silero-gen-toc.log"
+) &&
+python "$MRAM_HELPER" prepare \
+  --config "$SILERO_BUILD/zephyr/.config" \
+  --firmware "$ALIF_SE_TOOLS_DIR/build/images/silero-vad-hp.bin" \
+  --package "$ALIF_SE_TOOLS_DIR/build/AppTocPackage.bin" \
+  --package-map "$ALIF_SE_TOOLS_DIR/build/app-package-map.txt" \
+  --app-config "$SILERO_RUN_DIR/silero-vad-hp.json" \
+  --programming-core "$ALIF_MRAM_CORE" \
+  --output-dir "$SILERO_RUN_DIR/mram-silero" &&
+export MRAM_RUN="$SILERO_RUN_DIR/mram-silero"
 ```
 
-Select the E8's SEUART programming port when prompted. Require successful image generation and MRAM programming with no device-revision, image, authentication, or serial-port errors. Programming success establishes that the image was transferred; the next lesson checks model execution and output agreement.
+Require successful generation and helper checks before continuing. The output directory must be new or empty. Review its `manifest.json` and package map: the helper derives the AToC package address and size from **APP Package Summary**, requires 16-byte alignment, and bounds both payloads and their 16 KiB programming envelopes below `0x80580000` without overlap. It accepts the tested single signed HP-image layout; stop if your package differs.
 
-## Capture the application console
+The AToC header address is inside the package and is not its load address. Companion images, configuration, and certificates are included in the package. `AppTocPackage.bin.sign` is ISP transport authentication, not a third SWD payload. The helper checks layout and bytes; it does not authenticate signatures.
 
-The pinned E8 HP device tree selects **UART4 at 115200 baud, 8N1** for the Zephyr console. The E8 DevKit routes its onboard USB-to-UART bridge between SEUART, UART2, and UART4 using SW4. It uses the same PRG USB connection for programming and application logging; no separate serial adapter is needed.
+## Program and independently read back both payloads
 
-After programming completes, disconnect board power, move **SW4 from SEUART to UART4**, and reconnect PRG USB. Rediscover the host serial device, then set `ALIF_CONSOLE` to that device. PySerial is installed by the Zephyr requirements; use its terminal to capture one run:
+Each invocation below starts a separate process. The first downloads with `noreset`; the second reads the physical ranges with no preceding downloads, so it cannot reuse the earlier process's flash-download cache:
 
 ```bash
+(
+set -e
+test -n "${MRAM_RUN:-}"
+device=$(python -c 'import json,sys; print(json.load(open(sys.argv[1]))["programming_device"])' \
+  "$MRAM_RUN/manifest.json")
+for script in 01-program.jlink 02-readback-fresh-process.jlink; do
+  "$JLINK_COMMANDER" -Device "$device" -If SWD -Speed 4000 \
+    -AutoConnect 1 -NoGui 1 -ExitOnError 1 \
+    -CommandFile "$MRAM_RUN/$script"
+done
+python "$MRAM_HELPER" verify --manifest "$MRAM_RUN/manifest.json"
+)
+```
+
+Require both fresh readbacks to match their prepared sizes and SHA256 hashes. This verifies those two payloads; it does not compare the rest of MRAM with the backup. A successful install still needs a completed application run.
+
+## Capture UART4 before reset-pin boot
+
+Use UART4 at **115200 baud, 8N1**. If changing SW4, disconnect board power first, select UART4, then reconnect PRG USB. In a second terminal, activate the same environment and set the capture location:
+
+```bash
+source "$HOME/silero-alif-e8/.venv/bin/activate"
+export SILERO_OUTPUT="$HOME/silero-alif-e8/model-and-builds"
+export SILERO_MODE=validation
+export SILERO_RUN_DIR="$SILERO_OUTPUT/$SILERO_MODE"
 python -m serial.tools.list_ports
 export ALIF_CONSOLE=/dev/cu.replace-with-your-application-uart
 python -u -m serial.tools.miniterm "$ALIF_CONSOLE" 115200 --raw \
-  2>&1 | tee "$SILERO_OUTPUT/alif-silero.log"
+  2>&1 | tee "$SILERO_RUN_DIR/alif-silero.log"
 ```
 
-Start capture first, then press the board’s **RESET** button to begin a fresh run. Wait for all probability lines and `Model executed successfully.` before exiting the terminal with **Ctrl+]**. Keep one run per log file. If the application reports an error or the console remains silent, preserve that log and diagnose the failed stage before retrying the probability comparison.
+Adjust those paths if you chose another workspace, and set `SILERO_MODE=live` in this capture terminal when programming live mode. Each configuration writes its own `alif-silero.log`. With capture running, return to the original programming terminal and boot using a **probe-only** process:
 
-Before any later programming operation, close the terminal, disconnect board power, return **SW4 to SEUART**, and reconnect PRG USB. SETOOLS cannot communicate with the Secure Enclave while the bridge is routed to UART4.
+```bash
+"$JLINK_COMMANDER" -AutoConnect 0 -NoGui 1 -ExitOnError 1 \
+  -CommandFile "$MRAM_RUN/03-reset-probe-only.jlink"
+```
+
+That script pulses `R0`, waits 200 ms, sets `R1`, and waits 2,500 ms. It must not connect a CPU or issue generic `r`: the reset-pin pulse lets the Security Enclave boot the newly signed package. See [SEGGER Commander commands](https://kb.segger.com/J-Link_Commander).
+
+For validation, wait for all 79 `PROB` lines and `Model executed successfully.`; the display then replays cached results. For live mode, require the microphone startup message and advancing `LIVE frame=...` diagnostics while speaking and pausing. Live mode has no final completion message. Exit the capture terminal with **Ctrl+]** after the checks in the validation lesson. Keep one reset per log, retain all display/capture/delegate faults, and use a fresh log before another reset. SW4 can remain on UART4 for later SWD programming; return it to SEUART only for SETOOLS ISP.
 
 ## What you've accomplished
 
-After completing these steps, you have programmed the HP firmware with its embedded model and audio while retaining the E8's other boot-image and device settings. You have also captured a complete application run for validation.
-
-Next, compare its 79 speech probabilities with the matching quantized host reference.
+You have preserved the boot configuration, installed the embedded-model HP firmware through SWD, independently verified both MRAM payloads, and captured a fresh application run. Next, compare the validation image's 79 probabilities with the host reference, then repeat this procedure with live mode and check the microphone pipeline.
