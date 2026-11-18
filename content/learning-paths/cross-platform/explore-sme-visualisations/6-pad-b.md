@@ -17,7 +17,7 @@ The same code running on different devices can produce different output data str
 
 ## Inspect the padded result
 
-The following visualization depicts the padded matrix B. If the embedded visualization doesn't load, [open the Pad B visualization in a separate browser tab](/apps/sme-visualisations/#/sme/pad32-b). Switch between the Learning Path and the visualization tab.
+The following visualization depicts the padded matrix B. To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/pad32-b" target="_blank" rel="noopener">open the Pad B visualization in a separate browser tab</a>. Move the tab to a separate window to view the visualization and Learning Path side by side.
 
 Compare a complete group with one at the edge:
 

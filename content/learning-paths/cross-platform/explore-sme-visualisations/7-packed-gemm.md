@@ -35,7 +35,7 @@ In this visualization, the code is functionally correct on all devices regardles
 
 ## Trace packed GEMM loads and ZA accumulation
 
-If the embedded view doesn't load, [open the GEMM visualization in a separate browser tab](/apps/sme-visualisations/#/sme/gemm32-packed). Switch between the Learning Path and the visualization tab.
+To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/gemm32-packed" target="_blank" rel="noopener">open the GEMM visualization in a separate browser tab</a>. Move the tab to a separate window to view the visualization and Learning Path side by side.
 
 Follow the data from input through accumulation and storage. The following table summarizes how the visualization processes the input matrices in blocks:
 
