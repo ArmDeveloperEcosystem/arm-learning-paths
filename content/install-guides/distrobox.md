@@ -34,13 +34,13 @@ You can use [Distrobox](https://distrobox.it/) to run any Linux distribution ins
 
 Distrobox is useful on Arm systems when you want a different distribution than your host or a clean build environment for testing.
 
-You'll learn how to install Distrobox and run an Ubuntu container on Arm Linux or a ChromeOS or Googlebook OS device.
+You'll learn how to install Distrobox and run an Ubuntu container on a system running Arm Linux. You can use a physical Arm device, an Arm-based virtual machine, or the Linux development environment on a ChromeOS or Googlebook OS device.
 
 The steps in this guide target the `aarch64` (64-bit Arm) architecture. Your device needs an Arm CPU, and the containers that you create run `arm64` software.
 
 ## Before you begin
 
-Make sure that you're using a system running Arm Linux. You can use a physical Arm device, an Arm-based virtual machine, or the Linux development environment on a ChromeOS or Googlebook OS device.
+Make sure that you're using a system running Arm Linux. 
 
 Confirm the architecture:
 
@@ -50,7 +50,7 @@ uname -m
 
 The expected output for 64-bit Arm systems is `aarch64`.
 
-Distrobox needs a container engine. Podman is used in the install guide because it runs containers without root privileges. This suits both Arm Linux and the ChromeOS and Googlebook OS Linux environment.
+Distrobox needs a container engine. Podman is used in these steps because it runs containers without root privileges. This suits both Arm Linux and the ChromeOS and Googlebook OS Linux environment.
 
 {{% notice Note %}}
 On a ChromeOS or Googlebook OS device, set up the Linux development environment first. On ChromeOS, open **Settings**. Navigate to **About ChromeOS** and select **Developers**. Then, turn on **Linux development environment**. 

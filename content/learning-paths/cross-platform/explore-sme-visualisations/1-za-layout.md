@@ -39,7 +39,7 @@ The ZA Tile Layout interactive view shows the same ZA storage as a full array an
 
 ## Explore ZA storage and logical tiles
 
-If the embedded visualization doesn't load, [open the ZA layout visualization in a separate browser tab](/apps/sme-visualisations/#/sme/layout). Switch between the Learning Path and the visualization tab.
+To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/layout" target="_blank" rel="noopener">open the ZA layout visualization in a separate browser tab</a>. Move the tab to a separate window to view them side by side.
 
 Use the visualization to explore how the data type and scalable vector length affect the organization of ZA storage.
 

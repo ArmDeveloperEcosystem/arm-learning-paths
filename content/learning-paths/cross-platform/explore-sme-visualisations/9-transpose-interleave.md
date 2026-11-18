@@ -19,7 +19,7 @@ The visualization shows the output **Interleaved Matrix** as a 16 x 16 matrix. I
 
 ## Follow the transpose and interleave
 
-If the embedded visualization doesn't load, [open the A interleave visualization in a separate browser tab](/apps/sme-visualisations/#/sme/pack32-2x2-a). Switch between the Learning Path and the visualization tab.
+To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/pack32-2x2-a" target="_blank" rel="noopener">open the A interleave visualization in a separate browser tab</a>. Move the tab to a separate window to view them side by side.
 
 Use the step ranges to follow how the **Input Matrix** becomes an **Interleaved Matrix**:
 
