@@ -30,7 +30,7 @@ To connect to the remote Redis server, you need to use Redis Client (`redis-cli`
 
 ### Connect to the Redis server from local machine
 
-Execute the steps below to connect to the remote Redis server from your local machine.
+Run the following steps to connect to the remote Redis server from your local machine.
 
 1. Install redis-tools to interact with redis-server:
 ```console
