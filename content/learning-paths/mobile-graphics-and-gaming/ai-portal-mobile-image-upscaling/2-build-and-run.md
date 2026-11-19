@@ -83,14 +83,12 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 adb shell am start -n org.arm.learningpath.upscaling/.MainActivity
 ```
 
-Photo Upscale opens with **QuickSRNetSmall** selected. **Upscale photo** remains unavailable until you import its matching model and choose a saved photo. The screen provides **Add or change model**, **Choose a photo**, **Upscale photo**, **Inspect detail**, and **Save image**. Installing with `adb install -r` preserves models imported previously.
+Photo Upscale uses one ExecuTorch adapter for all supported models. Use **Add or change model** to load a model. **Upscale photo** remains unavailable until you import a supported model and choose a saved photo. **Inspect detail** and **Save image** appear after upscaling. Installing with `adb install -r` preserves models imported previously. On a first installation, the app reports **Model setup needed**.
 
-![Photo Upscale first-launch screen using the Photo Insight layout, with QuickSRNetSmall selected, an empty photo preview, and Model setup needed before importing a model.#center](images/photo-upscale-startup.png "Photo Upscale before a model or photo is added")
-
-A successful build confirms compilation and packaging. Confirming model import and plausible output on your Android device is a separate step.
+![Photo Upscale showing Model setup needed, an empty photo preview, and the disabled Upscale photo button.#center](images/photo-upscale-startup.png "Photo Upscale before importing a model or choosing a photo")
 
 ## What you've accomplished and what's next
 
 You've connected an Arm-based Android phone, prepared the model downloader, and confirmed that Photo Upscale builds and starts.
 
-Next, you'll download an optimized upscaling model from the Arm AI Portal and enlarge a saved photo.
+Next, you'll download an optimized upscaling model from the Arm AI Portal and upscale a saved photo.

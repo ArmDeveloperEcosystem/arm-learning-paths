@@ -1,12 +1,11 @@
 ---
-title: Run Arm AI Portal upscaling models on Android
-description: Build Photo Upscale, import QuickSRNetSmall, SESR-M5, or RealESR through ExecuTorch, and enlarge saved photos locally on the CPU of an Arm-based Android device.
+title: Run optimized Arm AI Portal image upscaling models on Android
+description: Build Photo Upscale, import QuickSRNetSmall, SESR-M5, or RealESR through ExecuTorch, and upscale saved photos locally on the CPU of an Arm-based Android device.
 minutes_to_complete: 40
-who_is_this_for: Android and machine learning developers who want to upscale saved photos locally on an Arm-based Android device.
+who_is_this_for: Android and machine learning developers who want to upscale saved photos locally on an Arm-based Android device using optimized models from the Arm AI Portal.
 learning_objectives:
     - Prepare the Android command-line tools and connect an Arm-based Android phone.
     - Download and run supported upscaling models from the Arm AI Portal.
-    - Compare the original and upscaled photo, verify its dimensions, and save the result.
     - Explain how the supplied adapter prepares image tiles, runs ExecuTorch, and combines the upscaled output.
 prerequisites:
     - A macOS, Linux, or Windows development machine
@@ -23,7 +22,7 @@ generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 skilllevels: Introductory
-subjects: ML
+subjects: AI/ML
 armips:
     - Cortex-A
 tools_software_languages:
@@ -32,6 +31,7 @@ tools_software_languages:
     - ExecuTorch
     - XNNPACK
     - Arm AI Portal
+    - Hugging Face
 operatingsystems:
     - Android
 further_reading:

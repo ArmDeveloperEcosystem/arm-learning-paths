@@ -1,64 +1,62 @@
 ---
 title: Understand the Photo Upscale Android application
-description: Trace model profiles, checked imports, RGB tiling, ExecuTorch CPU execution, blending, detail comparison, and PNG saving.
+description: Review how Photo Upscale imports models, upscales image tiles with ExecuTorch, and displays and saves the result.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
+## How image upscaling works
+
+Image upscaling converts a low-resolution photo into a higher-resolution image. These models use patterns learned during training to predict finer detail from the input photo. Each model here produces an image four times wider and taller—16 times as many pixels. The result may look sharper, but predicted detail may differ from the original scene.
+
 ## How Photo Upscale works
 
-The screen derives from Photo Insight and retains its theme, card layouts, model selector, shared buttons, and status/results styling. `MainActivity.java` connects the Android document picker, model selector, saved photo, progress, original and output images, detail view, and save action. It moves model import, loading, image decoding, upscaling, and saving off the main Android user-interface thread so the screen remains responsive.
+`MainActivity.java` handles photo selection, model import, progress, results, detail comparison, and saving. Time-consuming operations run on a background thread so the screen stays responsive.
 
-An adapter is the application-side integration layer between the shared Android screen and one model workflow. `ExecuTorchUpscaleAdapter.java` provides CPU photo upscaling through `UpscaleAdapter.java`. The screen supplies a bitmap and displays the returned bitmap; tensor preparation, inference, and decoding stay inside the adapter.
+`UpscaleAdapter.java` defines how the screen loads a model and upscales a bitmap. `ExecuTorchUpscaleAdapter.java` implements those operations on the CPU. Gradle packages the ExecuTorch runtime in the APK; model files are imported separately.
 
-The adapter isn't a model executable. Gradle adds the ExecuTorch Android library when it builds the application, and its prebuilt `arm64-v8a` native runtime libraries are packaged in the Android application package (APK).
+### How Photo Upscale imports and checks models
 
-### How Photo Upscale resolves and validates the model
+`ModelProfile.java` records each model's checksum, tile size, scale factor, and overlap. `models.json` supplies the downloader's repository IDs, fixed revisions, filenames, and checksums.
 
-`ModelProfile.java` is the model registry. Each descriptor records its display name, storage ID, SHA-256 identity, input tile size, scale factor, and overlap. `models.json` records the matching upstream repository, immutable revision, source filename, and checksum for the downloader.
+`ModelImporter.java` identifies the selected file by its SHA-256 checksum and stores a private copy. It rejects unsupported or modified files and files above 16 MiB. Importing another model replaces the active model without clearing the selected photo.
 
-`ModelImporter.java` copies the document-picker URI to a temporary file and checks its SHA-256 against the selected descriptor. It rejects truncated files, the wrong model, unexpected revisions, and files above 16 MiB. Only a matching file replaces the private model copy. The original package filenames needn't be unique because identity comes from the checksum.
-
-`ExecuTorchUpscaleAdapter.load` closes the previous module, memory-maps the selected program, checks for `forward` and `XnnpackBackend`, and runs a zero-valued validation tile. The returned tensor must be float32 `[1,3,512,512]`. This warm-up is outside the displayed processing time. Checksum and tensor validation establish package compatibility, not image quality.
+The adapter closes the previous module, loads the model, checks for `forward` and `XnnpackBackend`, and runs a zero-valued test tile. This warm-up checks the output tensor and is excluded from the displayed processing time.
 
 ### How Photo Upscale prepares image tiles
 
-Android's `ImageDecoder` reads the saved photo with orientation metadata, requests software decoding and sRGB color, and rejects inputs above 512 × 512 before decoding pixel data. Transparent pixels are composited on white. No image is silently resized.
+Android's `ImageDecoder` applies orientation metadata and requests sRGB color. The app rejects photos above 512 × 512 pixels and composites transparent pixels on white.
 
-Each independently inspected program takes float32 `[1,3,128,128]` in RGB order with values divided by 255. INT8 quantization and dequantization are internal to the program. There is no ImageNet mean or standard-deviation normalization and no BGR conversion.
+All three models take float32 RGB `[1,3,128,128]` tensors: one image, three color channels, and a height and width of 128 pixels. RGB values are divided by 255 to give a range of `[0,1]`. Quantized operations run inside the model.
 
-`TileMath.positions` starts at zero and advances by 120 input pixels: a 128-pixel tile with 8-pixel overlap. The final tile is anchored at the far edge. This can increase overlap at the edge. Dimensions smaller than 128 are replicate-padded. Both dimensions are handled independently, including narrow, tall photos.
+The models require fixed-size input tiles, so the app divides larger photos into overlapping tiles. `TileMath.positions` places 128-pixel tiles at 120-pixel intervals, giving an 8-pixel overlap. The last tile meets the far edge, which can increase its overlap. If either dimension is smaller than 128, the app repeats edge pixels to fill the tile.
 
 ### How Photo Upscale runs the ExecuTorch program
 
-The adapter calls `Module.execute("forward", ...)` once per tile on a single background executor. Each tile returns float32 RGB `[1,3,512,512]`. It verifies the tensor type, shape, and finite pixel values. The loaded module is reused until the model changes or the activity is destroyed.
+The adapter calls `Module.execute("forward", ...)` once per tile. It checks that each output is float32 RGB `[1,3,512,512]` with no NaN or infinite values. Progress shows completed tiles.
 
-Progress counts completed tiles, not estimated remaining seconds. The adapter releases the module before loading another model; lifecycle cleanup runs on the same executor to avoid closing a module during inference.
-
-The model program selects XNNPACK CPU execution. Kernel selection depends on CPU features, the model, and the runtime build. An SME2 label on a Portal model doesn't prove that this application used SME2 kernels. This workflow doesn't measure a kernel-level speedup.
+XNNPACK selects CPU kernels according to the model, runtime build, and available CPU features. A Portal model's SME2 label does not confirm that SME2 kernels ran on your phone.
 
 ### How Photo Upscale blends and converts output
 
-Each non-edge tile has a linear 32-output-pixel ramp at its borders, corresponding to 8 input pixels at 4× scale. The app accumulates weighted RGB values and a weight sum, then divides each output pixel by its weight. Padding is cropped to exactly four times the input width and height.
+Blending reduces visible joins where neighboring tiles predict different pixel values. The app blends overlapping tiles with linear weights across 32 output pixels. Borders at the image edge keep their full weight. It removes padding to produce exactly four times the input width and height.
 
-After blending, it rejects non-finite values, clamps to `[0,1]`, multiplies by 255, and truncates to integer RGB channels, matching the reference image conversion. An opaque Android bitmap holds the result. The app doesn't add a second interpolation or sharpening pass.
+RGB values are clamped to `[0,1]`, multiplied by 255, and truncated to integer channels in an opaque bitmap.
 
 ### How Photo Upscale displays, measures, and saves images
 
-The result summary names the model and shows input/output dimensions. `SystemClock.elapsedRealtimeNanos` measures the complete upscale call, from RGB preparation through tiled inference, blending, and bitmap creation. It excludes import, load/warm-up, photo decoding, rendering, and PNG saving.
+The result shows the model, input/output dimensions, and processing time. Timing includes RGB preparation, inference, blending, and bitmap creation. It excludes import, model loading and warm-up, photo decoding, display, and saving.
 
-`DetailView.java` draws the original or output in the same normalized scene coordinates. Pinch zoom and drag pan are retained when toggling, so you can inspect the same feature at the same displayed size. Comparing at fitted size alone can hide artifacts.
-
-The **Save image** action opens Android's document picker with the `image/png` MIME type. The application writes the displayed bitmap to the location that you select without needing broad shared-storage permission.
+`DetailView.java` keeps the zoom and position when you switch between original and upscaled images. **Save image** writes the output as a PNG through Android's document picker, without broad storage permission.
 
 ### (Optional) Support another compatible model
 
-Complete the supplied workflow before extending it. A new profile can reuse this adapter only after inspection confirms the same forward method, RGB range and layout, tensor types, static tile shape, scale, output decoding, and CPU backend. Add its pinned artifact to `models.json`, its identity and verified geometry to `ModelProfile.java`, and validate import, image quality, dimensions, switching, and saving on Android.
+A new model can reuse this adapter if its preprocessing, tensor shapes and types, scale factor, output conversion, and CPU backend match. Add its download entry to `models.json` and profile to `ModelProfile.java`, then rebuild and test import, inference, image detail, dimensions, switching, and saving.
 
-Use another adapter when preprocessing, methods, dynamic shapes, output decoding, or runtime requirements differ. Adapters and runtime libraries are compiled into the APK; importing a model doesn't add application code. The main workflow already supplies all three profiles and doesn't require generating code.
+Models with different requirements need adapter changes or a separate adapter.
 
-## What you've learned and what's next
+## What you've learned
 
-You can now trace the application from model import through RGB tiling, ExecuTorch CPU inference, feathered blending, detail comparison, and PNG output. Use the same saved photo with each supported model to compare visual results, and validate on a physical Arm-based Android phone with the required `arm64-v8a` ABI before drawing performance conclusions.
+You've seen how Photo Upscale imports models, upscales tiles, blends the output, and saves a PNG. Now you can try and use these models for your own photo upscaling applications on Arm-based CPUs.

@@ -11,11 +11,9 @@ layout: learningpathall
 
 The [Arm AI Portal](https://developer.arm.com/ai/models) is a catalog of AI models across different runtimes, use cases, and profiles that are optimized for different Arm-based targets. The AI Portal provides benchmarking and compatibility data, code examples, and deployment methods.
 
-You'll use an example application called Photo Upscale to enlarge a saved photo locally on an Arm-based Android device. You'll import the model separately from the APK, run QuickSRNetSmall first, compare image detail, and save the output as a PNG. The same supplied adapter also supports SESR-M5 and RealESR-general-x4v3 through verified model profiles.
+You'll use an example application called Photo Upscale to upscale a saved photo locally on an Arm-based Android device. You'll import a model, using QuickSRNetSmall first, run inference, compare image detail, and save the output as a PNG. The same application also supports SESR-M5 and RealESR-general-x4v3 models.
 
-Use an Arm-based Android device with the `arm64-v8a` ABI and Android 9 (API 28) or later. The application accepts images at most 512 × 512 pixels and produces an image four times wider and taller, up to 2048 × 2048. Start with the supplied 96 × 64 sample. Larger images are rejected without resizing; resize a copy in an image editor before choosing it. Tile accumulators alone can use about 64 MiB at the input limit, in addition to bitmaps and runtime memory. At the input limit, at least 256 MiB of application heap is recommended; if memory runs out, use a smaller photo.
-
-The APK contains prebuilt `arm64-v8a` ExecuTorch libraries, so you don't need an NDK or a model export environment. This app doesn't use a camera or require network or broad storage permissions.
+Use an Arm-based Android device with the `arm64-v8a` ABI and Android 9 (API 28) or later. The application accepts images at most 512 × 512 pixels and produces an image four times wider and taller, up to 2048 × 2048. Start with the supplied 96 × 64 sample. If either dimension exceeds 512 pixels, resize a copy beforehand in an image editor.
 
 ## Check the host development tools
 
