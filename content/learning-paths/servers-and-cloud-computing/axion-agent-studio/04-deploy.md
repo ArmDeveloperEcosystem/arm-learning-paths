@@ -7,7 +7,23 @@ layout: learningpathall
 
 ## Validate the manifests before applying them
 
-Continue in the same terminal and source directory. Check that the namespace is unused before a new installation. If it already contains another deployment, choose a dedicated learning cluster or coordinate with its owner; do not overwrite it.
+Continue in the same terminal and source directory. Verify that the installed Agent Sandbox controller is running, and record its configured image and the image IDs of its Pods. The following names match Google's manifest-based installation; use the actual controller namespace and Deployment name supplied by your administrator if they differ:
+
+```bash
+export SANDBOX_CONTROLLER_NAMESPACE="agent-sandbox-system"
+export SANDBOX_CONTROLLER_DEPLOYMENT="agent-sandbox-controller"
+kubectl -n "$SANDBOX_CONTROLLER_NAMESPACE" rollout status \
+  "deployment/$SANDBOX_CONTROLLER_DEPLOYMENT" --timeout=300s
+kubectl -n "$SANDBOX_CONTROLLER_NAMESPACE" get deployment \
+  "$SANDBOX_CONTROLLER_DEPLOYMENT" \
+  -o jsonpath='{range .spec.template.spec.containers[*]}{.name}{" "}{.image}{"\n"}{end}'
+kubectl -n "$SANDBOX_CONTROLLER_NAMESPACE" get pods \
+  -o custom-columns='POD:.metadata.name,OWNER:.metadata.ownerReferences[*].name,IMAGE_IDS:.status.containerStatuses[*].imageID'
+```
+
+Keep the controller version and image IDs with your run evidence. An installed CRD alone does not prove that a controller is running or that it can create the worker Pods.
+
+Check that the namespace is unused before a new installation. If it already contains another deployment, use another existing compatible learning cluster or coordinate with its owner; do not overwrite it.
 
 ```bash
 cd "$LP_WORKDIR"
@@ -21,7 +37,7 @@ kubectl create namespace "$NAMESPACE"
 kubectl apply --dry-run=server -f generated/full.json
 ```
 
-If server-side dry-run rejects the Sandbox schema, stop. Resolve API compatibility before creating resources. A successful render proves JSON construction, while server-side dry-run checks admission against the actual cluster.
+If server-side dry-run rejects the Sandbox schema, stop. Resolve API compatibility before applying the workloads. A successful render proves JSON construction, while server-side dry-run checks admission against the actual cluster. The controller creates the underlying Sandbox Pods only after you apply the resources, so their scheduling and readiness still need separate checks.
 
 After dry-run succeeds, have an identity authorized for the namespaced resources and the narrowly scoped node observer role apply the workload set:
 
@@ -36,11 +52,34 @@ Model images are large. Follow the Pod events while the init container copies mo
 
 ```bash
 kubectl -n "$NAMESPACE" get events --sort-by=.metadata.creationTimestamp
+kubectl -n "$NAMESPACE" wait --for=condition=Ready \
+  sandboxes.agents.x-k8s.io/worker-backend \
+  sandboxes.agents.x-k8s.io/worker-frontend \
+  sandboxes.agents.x-k8s.io/worker-qa \
+  sandboxes.agents.x-k8s.io/validator --timeout=900s
+kubectl -n "$NAMESPACE" wait --for=condition=Ready pod \
+  -l app=axion-agent-studio --timeout=300s
 kubectl -n "$NAMESPACE" get pods \
-  -o custom-columns='POD:.metadata.name,NODE:.spec.nodeName,RUNTIME:.spec.runtimeClassName,PHASE:.status.phase'
+  -o custom-columns='POD:.metadata.name,UID:.metadata.uid,NODE:.spec.nodeName,RUNTIME:.spec.runtimeClassName,READY:.status.containerStatuses[*].ready,IMAGE_IDS:.status.containerStatuses[*].imageID'
+kubectl get nodes \
+  -L kubernetes.io/arch,node.kubernetes.io/instance-type,studio.axion.dev/pool
 ```
 
-Confirm three worker Sandboxes and a separate validator Sandbox. Each must select `gvisor`. Match their node names to the node list from the previous page: backend, frontend, and QA share the C4A node; the manager and validator use their respective N4A nodes.
+Confirm three Ready worker Sandboxes and a separate Ready validator Sandbox. Each execution Pod must use `gvisor` and run on a node whose architecture is `arm64`. Match the actual node names and machine types: backend, frontend, and QA share the single eligible C4A node in this setup; the manager and validator use their respective N4A nodes. If a wait times out, inspect the Sandbox conditions, Pod events, and logs before proceeding.
+
+Save the workload identities, placement, configured images, resolved image IDs, and init-container results before starting a run:
+
+```bash
+mkdir -p review-evidence
+kubectl -n "$NAMESPACE" get sandboxes.agents.x-k8s.io -o json \
+  > review-evidence/sandboxes.json
+kubectl -n "$NAMESPACE" get pods -o json > review-evidence/pods.json
+kubectl get nodes \
+  -l 'studio.axion.dev/pool in (n4a-regular,c4a-sandbox,n4a-sandbox)' \
+  -o json > review-evidence/nodes.json
+```
+
+Review these files for private infrastructure details before sharing them. Node labels and resolved image IDs provide placement and artifact evidence independently of the application's health response.
 
 Inspect an actual worker rather than relying only on diagram labels:
 
