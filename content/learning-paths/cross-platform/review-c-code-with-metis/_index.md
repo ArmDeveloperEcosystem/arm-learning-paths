@@ -18,8 +18,8 @@ learning_objectives:
     - Triage Metis findings against source code and a Magma-derived libpng diff
 
 prerequisites:
-    - A macOS computer, Linux computer, or Windows computer with WSL2
-    - An API key and sufficient quota for a [Metis-supported model provider](https://github.com/arm/metis#2-set-up-llm-provider)
+    - An Arm64 computer running macOS (Apple silicon) or Ubuntu/Debian Linux, or a Windows computer with an Ubuntu/Debian WSL2 environment
+    - An API key and sufficient quota for a [Metis-supported model provider](https://github.com/arm/metis/blob/metis-v2.0.0/README.md#2-set-up-llm-provider)
     - Basic familiarity with C, Git, command-line tools, and security code-review procedures
 
 author:
