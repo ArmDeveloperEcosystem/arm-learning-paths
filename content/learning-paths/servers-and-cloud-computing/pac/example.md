@@ -1,13 +1,13 @@
 ---
 # User change
-title: Example application
+title: Create an example application 
 
 weight: 3 # 1 is first, 2 is second, etc.
 
 # Do not modify
 layout: "learningpathall"
 ---
-Create a simple `hello world` type application to demonstrate how pointer authentication works.
+Create a `hello world` application to see how pointer authentication works.
 
 The example contains a function `func2()` to start a shell, that is never called by the application.
 
@@ -80,7 +80,7 @@ dump_pac: $(PROJ)
 	gdb-multiarch -batch -ex "disassemble func1" $<
 ```
 
-## Understanding the compiler switches 
+## Understand the compiler switches 
 
 Arm Compiler for Embedded, GCC, and LLVM can all produce code making use of pointer authentication.
 

@@ -6,7 +6,7 @@ weight: 7
 layout: learningpathall
 ---
 
-In this section, you'll validate the Kolla-Ansible deployment by checking service health, uploading a test image, creating network resources, and launching a virtual machine instance.
+You'll now validate the Kolla-Ansible deployment by checking service health, uploading a test image, creating network resources, and launching a virtual machine instance.
 
 If you closed your session since the Kolla-Ansible deployment, reactivate the virtual environment and reload the admin credentials:
 
@@ -268,4 +268,6 @@ The following image shows a successfully launched instance in the OpenStack Hori
 
 ## What you've accomplished
 
-You validated your Kolla-Ansible OpenStack deployment end-to-end. You checked service health, configured OVS bridges for Arm on Azure, uploaded an Arm-compatible Debian image, created network and compute resources, and launched a running virtual machine. Your OpenStack environment is now fully functional and ready for use.
+You've validated your Kolla-Ansible OpenStack deployment end-to-end. 
+
+Your OpenStack environment is now fully functional and ready for use.
