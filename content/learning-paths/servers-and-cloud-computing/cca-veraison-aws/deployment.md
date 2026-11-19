@@ -24,7 +24,7 @@ hash -r
 
 # Install virtual-environment support for Ubuntu's Python 3.12.
 sudo apt update
-sudo apt install python3.12-venv
+sudo apt install python3.12-venv jq
 
 # Use a fresh directory, preserving the existing ~/venv/aws environment.
 export VERAISON_AWS_VENV="$HOME/venv/veraison-aws-py312"
@@ -33,7 +33,7 @@ export VERAISON_AWS_VENV="$HOME/venv/veraison-aws-py312"
 source "$VERAISON_AWS_VENV/bin/activate"
 
 # Set this to fix issues with the make deploy scripts
-export VERAISON_DEB="/tmp/veraison_0.0.261100+ebadb73_amd64.deb"
+export VERAISON_DEB=
 
 # Fixes and requirements for make deploy
 sudo apt install gettext-base
@@ -68,58 +68,21 @@ Use the [Bootstrap](https://github.com/veraison/services/blob/ebadb733d44ba2f8ff
 
 The pinned services revision uses CoRIM-store commit `a2a60b6a11ad`, as specified in its [dependency file](https://github.com/veraison/services/blob/ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800/go.mod#L44). Its AWS deployment script still selects an older CoRIM-store tool for the sentinel image. Update that tool's pin before creating the image so database initialization includes the migrations required by the services, including the `tokens` table.
 
-Download the [Veraison services repo patch scripts](../cca-veraison-aws-upstream-fixes.tar.gz) to your HOME directory on the Ubuntu host and unzip:
-
-```bash
-cd $HOME
-tar xzpf $HOME/cca-veraison-aws-upstream-fixes.tar.gz
-```
-
-Then:
+Lets initialize our deployment build environment:
 
 ```bash
 mkdir $HOME/cca_veraison
 cd $HOME/cca_veraison
 git clone https://github.com/veraison/services.git
-git -C services checkout ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800
-
-# patch the veraison repo to fix several issues with it so the build steps complete.
-$HOME/cca-veraison-aws-upstream-fixes/apply.sh --check $HOME/cca_veraison/services
-$HOME/cca-veraison-aws-upstream-fixes/apply.sh --apply $HOME/cca_veraison/services
+git -C services checkout 61cf6088c1dc4f69cdd08e6a05f75c9fd3b2c6a6
 ```
 
-Patching output should resemble:
-
-```outputHEAD is now at ebadb73 Add details for psa-iot and arm-cca evidence apraisal (#509)
-Target: /home/danson/cca_veraison/services
-HEAD: ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800
-  patches/0001-bootstrap-and-environment.patch: pending
-  patches/0002-cli-and-package-build.patch: pending
-  patches/0003-aws-templates-and-store-compatibility.patch: pending
-  patches/0004-end-to-end-failure-handling.patch: pending
-  patches/0005-deployment-regression-tests.patch: pending
-  patches/0006-aws-quickstart-documentation.patch: pending
-Dry run passed. Run again with --apply to update the clone.
-Target: /home/danson/cca_veraison/services
-HEAD: ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800
-  patches/0001-bootstrap-and-environment.patch: pending
-  patches/0002-cli-and-package-build.patch: pending
-  patches/0003-aws-templates-and-store-compatibility.patch: pending
-  patches/0004-end-to-end-failure-handling.patch: pending
-  patches/0005-deployment-regression-tests.patch: pending
-  patches/0006-aws-quickstart-documentation.patch: pending
-Applied 6 patch groups.
-Review with: git -C /home/danson/cca_veraison/services diff
-```
-
-If the patching succeeds, then we can bootstrap everything:
+Then, we can bootstrap our deployment:
 
 ```bash
 cd services/deployments/aws
 make bootstrap
 ```
-
-The `grep` command should show the `--rev` argument with `default='a2a60b6a11ad'`. Keep the sentinel tool's revision aligned with `services/go.mod` when changing the services revision.
 
 Once your build environment is bootstrapped, you will use the [Quickstart](https://github.com/veraison/services/blob/ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800/deployments/aws/README.md#quickstart) procedure to provide some AWS configuration and create the deployment.
 
@@ -188,7 +151,7 @@ Some AWS accounts may have permissions boundaries enabled (such as assumed role 
 Once the account-specific config file is created, define `AWS_ACCOUNT_CFG` environment variable to point to it and then create the deployment:
 
 ```bash
-cp ./misc/arm.cfg $HOME/varaison-aws.cfg
+cp ./misc/arm.cfg $HOME/veraison-aws.cfg
 export AWS_ACCOUNT_CFG="$HOME/veraison-aws.cfg"
 source env/env.bash "$AWS_ACCOUNT_CFG"
 make deploy
@@ -217,7 +180,7 @@ This command outputs a status report for the deployment. If successful, it inclu
 Use the following command to test the REST API endpoint of the verification service. Remember to substitute `example-veraison.com` with the domain name that you used in the initial step, but you will need to keep the `services` prefix as shown.
 
 ```bash
-curl https://services.example-veraison.com:8443/.well-known/veraison/verification
+curl https://services.example-veraison.com:8443/.well-known/veraison/verification | jq
 ```
 
 If it succeeds, this command produces some JSON output, including the EAR verification key.
@@ -225,7 +188,7 @@ If it succeeds, this command produces some JSON output, including the EAR verifi
 Use the following command to test the REST API endpoint of the endorsement provisioning service. Remember to substitute `example-veraison.com` with the domain name that you used in the initial step.
 
 ```bash
-curl https://services.example-veraison.com:9443/.well-known/veraison/provisioning
+curl https://services.example-veraison.com:9443/.well-known/veraison/provisioning | jq
 ```
 
 This command produces JSON output containing the list of supported media types for endorsement.
