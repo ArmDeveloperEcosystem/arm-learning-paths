@@ -17,14 +17,16 @@ To keep this Learning Path open while exploring, <a href="/apps/sme-visualisatio
 
 Select the play button or advance manually to follow the algorithm. The table shows how each group of **Input Matrix Data** columns moves through ZA0–ZA2:
 
-| Stage | Visualization steps | Operation |
+| Stage | Number of steps | Operation |
 | --- | --- | --- |
-| Load the first block | 1–10 | Load rows from the first four columns of **Input Matrix Data** into rows of ZA0–ZA2. |
-| Store the first block | 11–22 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. |
-| Load the second block | 23–32 | Load rows from the next four columns of **Input Matrix Data** into rows of ZA0–ZA2. |
-| Store the second block | 33–44 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. |
-| Load the edge block | 45–54 | Load partial rows from the last two columns of **Input Matrix Data** into rows of ZA0–ZA2. Only two data values per row are loaded into ZA tiles. This is achieved by using a predicate mask that marks only two columns as active. |
-| Store the edge block | 55–60 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. Only two columns are active during the final store, so it takes six steps instead of 12. |
+| Load the first block | 10 | Load rows from the first four columns of **Input Matrix Data** into rows of ZA0–ZA2. |
+| Store the first block | 12 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. |
+| Load the second block | 10 | Load rows from the next four columns of **Input Matrix Data** into rows of ZA0–ZA2. |
+| Store the second block | 12 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. |
+| Load the edge block | 10 | Load partial rows from the last two columns of **Input Matrix Data** into rows of ZA0–ZA2. Only two data values per row are loaded into ZA tiles. This is achieved by using a predicate mask that marks only two columns as active. |
+| Store the edge block | 6 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. Only two columns are active during the final store, so it takes six steps instead of 12. |
+
+&nbsp;
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/transpose32-overflow2"

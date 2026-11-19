@@ -72,6 +72,7 @@ Use the visualization to explore how the data type and scalable vector length af
 
    The visualization still shows four logical tiles, but each tile now contains more elements.
 
+&nbsp;
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/layout"

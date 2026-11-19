@@ -17,13 +17,15 @@ To keep this Learning Path open while exploring, <a href="/apps/sme-visualisatio
 
 Select the play button or advance manually to follow the algorithm:
 
-| Stage | Visualization steps | Operation |
+| Stage | Number of steps | Operation |
 | --- | --- | --- |
-| Load matrix A | 1–10 | Load **Input Matrix A** into rows of ZA0–ZA2. |
-| Store packed data | 11–22 | Write columns of ZA data into rows of **Output Packed Data**. |
-| Pad the final rows | 23–26 | Write zero-padded values because the rows of **Input Matrix A** aren't an exact multiple of the ZA tile height. |
+| Load matrix A | 10 | Load **Input Matrix A** into rows of ZA0–ZA2. |
+| Store packed data | 8 | Write full columns of ZA data into rows of **Output Packed Data**. |
+| Pad the final rows | 4 | Write zero-padded columns of ZA data into rows of **Output Packed Data**. The zero-padding happens because the rows of **Input Matrix A** aren't an exact multiple of the ZA tile height. |
 
-During matrix A load, predicates determine which rows are active because different implementations can have different scalable vector lengths. Predicates also control which elements of **Output Packed Data** are zero-padded.
+During matrix A load, predicates determine which rows are active, which in turn determines the elements of **Output Packed Data** that are zero-padded.
+
+&nbsp;
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/pack32-a"

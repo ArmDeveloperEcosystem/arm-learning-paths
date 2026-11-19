@@ -21,12 +21,16 @@ With Scalable Vector Length equal to 256 bits and accessing 32-bit data elements
 
 The transpose is achieved by loading data into rows and storing it back from columns. Select the play button or advance manually to follow the algorithm:
 
-1. The first 16 steps load data sequentially from memory into rows of the ZA0 and ZA1 tiles.
-2. The next 16 steps load data sequentially from memory into rows of the ZA2 and ZA3 tiles.
-3. The next 16 steps store data sequentially into memory from columns of the ZA0 and ZA2 tiles.
-4. The final 16 steps store data sequentially into memory from columns of the ZA1 and ZA3 tiles.
+| Stage | Number of steps | Operation |
+| --- | --- | --- |
+| Load first two tiles | 16 | Load data sequentially from memory into rows of the ZA0 and ZA1 tiles. |
+| Load next two tiles | 16 | Load data sequentially from memory into rows of the ZA2 and ZA3 tiles. |
+| Store two tiles | 16 | Store data sequentially into memory from columns of the ZA0 and ZA2 tiles. |
+| Store remaining tiles | 16 | Store data sequentially into memory from columns of the ZA1 and ZA3 tiles. |
 
 The original matrix had data increasing sequentially along each row. The resulting transposed matrix instead has data increasing sequentially down each column. To see the original data, use browser reload to reset the visualization.
+
+&nbsp;
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/transpose32"
