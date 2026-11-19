@@ -109,26 +109,26 @@ The path printed by `command -v` should end with `metis-security-review/metis/.v
 
 ## Configure the model provider
 
-Metis supports several hosted and local model providers. These examples use an OpenAI-compatible endpoint that serves the model ID `gpt-6.1-sol`. Export your API key in the same terminal that will run Metis:
+A model provider is the hosted service or local server that runs the language model Metis uses to review code. Hosted services typically require an API key, which authenticates your account and authorizes API usage. You also need access to a model and enough quota to run the reviews.
 
-```bash
-export OPENAI_API_KEY="your-api-key"
-```
+Follow the [Metis 2.0.0 provider setup instructions](https://github.com/arm/metis/blob/metis-v2.0.0/README.md#2-set-up-llm-provider), linked in the prerequisites, to configure your chosen provider. The provider guide explains which credentials, environment variables, and optional dependencies it needs. Make those credentials available in the same terminal that will run Metis. For a local provider, start its model server as described in the guide.
 
-Do not add secrets to `.metis.md`, `metis-review.yaml`, shell history, source control, or report files.
+Keep credentials out of `.metis.md`, `metis-review.yaml`, shell history, source control, and report files.
 
-Create a provider configuration outside the review targets. Replace `https://your-provider.example/v1` below with the trusted base URL of the provider that serves `gpt-6.1-sol`, including any required API prefix. The example address is a placeholder, not a service endpoint:
+Create a provider configuration outside the review targets. This example uses OpenAI and its public API base URL:
 
 ```bash
 cat > "$HOME/metis-security-review/metis-review.yaml" <<'EOF'
 llm_provider:
   name: openai
   model: gpt-6.1-sol
-  base_url: https://your-provider.example/v1
+  base_url: https://api.openai.com/v1
 EOF
 ```
 
-The review commands load this file with `--config` and read the API key from `OPENAI_API_KEY`. Your endpoint must support the OpenAI Responses API and the model named in the file. If you choose a different model from the captured `gpt-6.1-sol` runs, your findings might differ. For other providers, see the [Metis 2.0.0 provider setup instructions](https://github.com/arm/metis/blob/metis-v2.0.0/README.md#2-set-up-llm-provider).
+The review commands load this file with `--config`. Adapt `llm_provider` to your provider's guide, including its `name`, available `model`, and any required connection settings. An OpenAI-compatible proxy uses `name: openai` with the API base URL supplied by its administrator and credentials issued for that service. It must support the OpenAI Responses API.
+
+The captured runs used `gpt-6.1-sol` through an OpenAI-compatible proxy. Select a model available to your account or local server; model choice can change the findings.
 
 ## Confirm that the command starts
 
@@ -139,6 +139,33 @@ metis --help
 ```
 
 The help output should include `--codebase-path`, `--config`, `--interactive`, and `--output-file`. Repeat `--output-file` to request more than one format.
+
+## Verify model access
+
+Run a small review to check the configured provider before starting the exercises. This uses the same Metis commands for any configured provider and makes model calls that can consume API quota.
+
+Create a tiny C file and start Metis with your provider configuration:
+
+```bash
+mkdir -p "$HOME/metis-security-review/provider-check"
+printf 'int main(void) { return 0; }\n' > "$HOME/metis-security-review/provider-check/check.c"
+
+metis \
+  --interactive \
+  --codebase-path "$HOME/metis-security-review/provider-check" \
+  --config "$HOME/metis-security-review/metis-review.yaml"
+```
+
+At the Metis prompt, review the file, wait for the review to complete, then exit:
+
+```console
+review_file check.c
+exit
+```
+
+Access is working when the review completes without provider errors and Metis prints a token-usage summary. Zero findings is a valid result for this test file.
+
+If the check fails, use the error and your provider guide to check credentials, model access, API quota, and connection settings. For a local provider, also confirm that its server is running and the model is loaded. Resolve these errors before reviewing the larger examples.
 
 ## What you've accomplished and what's next
 
