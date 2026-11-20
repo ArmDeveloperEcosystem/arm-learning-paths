@@ -8,7 +8,9 @@ weight: 2 # 1 is first, 2 is second, etc.
 layout: "learningpathall"
 ---
 
-You can run Azure Kubernetes Service (AKS), a fully managed Kubernetes platform, on the Azure Dpsv5 Virtual Machine series featuring Ampere Altra Arm–based processors. Dpsv5 virtual machines offer compelling price-performance.
+You can run Azure Kubernetes Service (AKS), a fully managed Kubernetes platform, on Azure Cobalt 200 virtual machines. Azure Cobalt 200 is Microsoft's second-generation Arm-based processor, built on Arm Neoverse Compute Subsystems V3 (CSS V3). In this Learning Path, you use the general-purpose Dpsv7 virtual machine series for the AKS nodes.
+
+Your subscription and selected region must have access to Dpsv7 sizes and sufficient vCPU quota. This Learning Path was validated in **West US 2**.
 
 ## Before you begin
 
@@ -61,7 +63,7 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~>3.0"
+      version = "~>5.0"
     }
     random = {
       source  = "hashicorp/random"
@@ -87,7 +89,7 @@ variable "dns_prefix" {
   default = "arm-aks"
 }
 variable "resource_group_location" {
-  default     = "eastus2"
+  default     = "westus2"
   description = "Location of the resource group."
 }
 variable "resource_group_name_prefix" {
@@ -104,6 +106,9 @@ variable "ssh_public_key" {
 ```console
 output "resource_group_name" {
   value = azurerm_resource_group.rg.name
+}
+output "cluster_name" {
+  value = azurerm_kubernetes_cluster.k8s.name
 }
 ```
 
@@ -128,8 +133,11 @@ resource "azurerm_kubernetes_cluster" "k8s" {
   }
   default_node_pool {
     name       = "demopool"
-    vm_size    = "Standard_D2ps_v5"
+    vm_size    = "Standard_D2ps_v7"
     node_count = var.agent_count
+  }
+  node_provisioning_profile {
+    mode = "Manual"
   }
   linux_profile {
     admin_username = "ubuntu"
@@ -145,9 +153,11 @@ resource "azurerm_kubernetes_cluster" "k8s" {
 
 The block labeled `default_node_pool` is used to select the virtual machine type, size, and the number of nodes. 
 
-The nodes are specified to use the `Standard_D2ps_v5` virtual machine type which is a 2 vCPU Altra-based virtual machine with standard SSDs.
+The nodes are specified to use the `Standard_D2ps_v7` virtual machine type, which is a 2 vCPU Cobalt 200 virtual machine.
 
-There are various Arm-based virtual machines that can be selected. The [Azure VM series descriptions](https://azure.microsoft.com/en-us/pricing/details/virtual-machines/series/) shows that the Dpsv5, Dpdsv5, Dplsv5, Dpldsv5, Epsv5, Epdsv5 all use Ampere Altra. Any of these virtual machine types can be used to create an Arm-based cluster.
+The `node_provisioning_profile` block is required by the current Azure provider for Terraform. Setting `mode` to `Manual` means that you choose the node pool size and VM type yourself.
+
+There are various Arm-based virtual machines that can be selected. The Cobalt 200 series include Dpsv7, Dpdsv7, Dplsv7, Dpldsv7, Epsv7, and Epdsv7. See the [Azure Cobalt 200 virtual machines overview](https://azure.microsoft.com/en-us/blog/new-azure-cobalt-200-vms-deliver-50-performance-improvement-fully-optimized-for-modern-agentic-ai-workloads/) for details. Any of these virtual machine types can be used to create an Arm-based cluster, provided your subscription and region have access to them.
 
 ### Run the Terraform commands
 
@@ -168,11 +178,11 @@ Initializing the backend...
 
 Initializing provider plugins...
 - Finding hashicorp/random versions matching "~> 3.0"...
-- Finding hashicorp/azurerm versions matching "~> 3.0"...
-- Installing hashicorp/random v3.4.3...
-- Installed hashicorp/random v3.4.3 (signed by HashiCorp)
-- Installing hashicorp/azurerm v3.48.0...
-- Installed hashicorp/azurerm v3.48.0 (signed by HashiCorp)
+- Finding hashicorp/azurerm versions matching "~> 5.0"...
+- Installing hashicorp/random v3.9.1...
+- Installed hashicorp/random v3.9.1 (signed by HashiCorp)
+- Installing hashicorp/azurerm v5.14.0...
+- Installed hashicorp/azurerm v5.14.0 (signed by HashiCorp)
 
 Terraform has created a lock file .terraform.lock.hcl to record the provider
 selections it made above. Include this file in your version control repository
@@ -198,45 +208,38 @@ Run `terraform apply` to create the infrastructure:
 terraform apply
 ```
 
-Answer yes to the prompt to confirm you want to create Google Cloud resources.
+Answer `yes` at the prompt to confirm you want to create the Azure resources.
 
-It will take about 5 minutes to create the resources. 
+It will take about 5 to 10 minutes to create the resources. 
 
-When it completes the name of the resource group is printed.
+When it completes, the name of the resource group and the cluster are printed.
 
 ```output
 Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 
 Outputs:
 
-resource_group_name = "arm-aks-demo-rg-exact-wombat"
+cluster_name = "arm-aks-cluster-demo"
+resource_group_name = "arm-aks-demo-rg-possible-mastiff"
 ```
 
 ### Configure kubectl
 
-1. In a browser, go to the Azure Kubernetes services console, select the cluster, and click on connect.
+1. Use the Terraform outputs to get the credentials for the new cluster and add them to your `kubectl` configuration:
 
-![aks1 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/2b50015f-51fb-46f1-8ee1-28fc5db35154)
+```console
+az aks get-credentials --resource-group $(terraform output -raw resource_group_name) --name $(terraform output -raw cluster_name)
+```
 
-Instructions for running `az account` and `az aks get-credentials` will be displayed. 
-
-![aks2 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/45732e69-fe88-4757-98d4-264bf392d10c)
-
-2. Copy the 2 commands and run them
-
-Run the `az account` and `az aks get-credentials` commands you copied.
-
-There is no output from the first command.
-
-The output from the second command is similar to:
+The output is similar to:
 
 ```output
 Merged "arm-aks-cluster-demo" as current context in /home/ubuntu/.kube/config
 ```
 
-You are now ready to use `kubectl`
+You are now ready to use `kubectl`.
 
-3. Run the following command to see the status of the nodes. 
+2. Run the following command to see the status of the nodes. 
 
 ```console
 kubectl get nodes
@@ -245,10 +248,25 @@ kubectl get nodes
 Three nodes should be in the `Ready` state:
 
 ```output
-NAME                               STATUS   ROLES   AGE   VERSION
-aks-demopool-40436376-vmss000000   Ready    agent   10m   v1.24.9
-aks-demopool-40436376-vmss000001   Ready    agent   10m   v1.24.9
-aks-demopool-40436376-vmss000002   Ready    agent   10m   v1.24.9
+NAME                               STATUS   ROLES    AGE    VERSION
+aks-demopool-15110407-vmss000000   Ready    <none>   2m5s   v1.36.5
+aks-demopool-15110407-vmss000001   Ready    <none>   2m5s   v1.36.5
+aks-demopool-15110407-vmss000002   Ready    <none>   2m4s   v1.36.5
+```
+
+3. Confirm the virtual machine size and architecture of the nodes:
+
+```console
+kubectl get nodes -L node.kubernetes.io/instance-type,kubernetes.io/arch
+```
+
+The output shows that the nodes are Cobalt 200 `Standard_D2ps_v7` virtual machines with the `arm64` architecture:
+
+```output
+NAME                               STATUS   ROLES    AGE    VERSION   INSTANCE-TYPE      ARCH
+aks-demopool-15110407-vmss000000   Ready    <none>   2m5s   v1.36.5   Standard_D2ps_v7   arm64
+aks-demopool-15110407-vmss000001   Ready    <none>   2m5s   v1.36.5   Standard_D2ps_v7   arm64
+aks-demopool-15110407-vmss000002   Ready    <none>   2m4s   v1.36.5   Standard_D2ps_v7   arm64
 ```
 
 4. Run the following command to see the current pods running on the cluster.
@@ -260,56 +278,34 @@ kubectl get pods -A
 The output will be similar to:
 
 ```output
-NAMESPACE     NAME                                  READY   STATUS    RESTARTS   AGE
-kube-system   azure-ip-masq-agent-fw66d             1/1     Running   0          12m
-kube-system   azure-ip-masq-agent-q7ltm             1/1     Running   0          12m
-kube-system   azure-ip-masq-agent-qs2rp             1/1     Running   0          12m
-kube-system   cloud-node-manager-k8fdg              1/1     Running   0          12m
-kube-system   cloud-node-manager-ml5jq              1/1     Running   0          12m
-kube-system   cloud-node-manager-phng2              1/1     Running   0          12m
-kube-system   coredns-59b6bf8b4f-msdzd              1/1     Running   0          13m
-kube-system   coredns-59b6bf8b4f-wbcgl              1/1     Running   0          11m
-kube-system   coredns-autoscaler-5655d66f64-g94zj   1/1     Running   0          13m
-kube-system   csi-azuredisk-node-9njln              3/3     Running   0          12m
-kube-system   csi-azuredisk-node-mnqnz              3/3     Running   0          12m
-kube-system   csi-azuredisk-node-rjmq7              3/3     Running   0          12m
-kube-system   csi-azurefile-node-7qmdn              3/3     Running   0          12m
-kube-system   csi-azurefile-node-fbpm7              3/3     Running   0          12m
-kube-system   csi-azurefile-node-j2sf5              3/3     Running   0          12m
-kube-system   konnectivity-agent-77467c5c84-52zsj   1/1     Running   0          2m19s
-kube-system   konnectivity-agent-77467c5c84-wdhms   1/1     Running   0          2m15s
-kube-system   kube-proxy-hnbpp                      1/1     Running   0          12m
-kube-system   kube-proxy-wr6rm                      1/1     Running   0          12m
-kube-system   kube-proxy-zssbf                      1/1     Running   0          12m
-kube-system   metrics-server-5f8d84558d-5rtgs       2/2     Running   0          11m
-kube-system   metrics-server-5f8d84558d-lh2xk       2/2     Running   0          11m
+NAMESPACE     NAME                                             READY   STATUS    RESTARTS   AGE
+kube-system   azure-cns-9hlcm                                  2/2     Running   0          4m8s
+kube-system   azure-cns-9zpvw                                  2/2     Running   0          4m7s
+kube-system   azure-cns-m6xqg                                  2/2     Running   0          4m8s
+kube-system   azure-ip-masq-agent-g8nr4                        1/1     Running   0          4m7s
+kube-system   azure-ip-masq-agent-wv4zh                        1/1     Running   0          4m8s
+kube-system   azure-ip-masq-agent-zhzq6                        1/1     Running   0          4m8s
+kube-system   cloud-node-manager-8vxcc                         1/1     Running   0          4m8s
+kube-system   cloud-node-manager-dr5m5                         1/1     Running   0          4m8s
+kube-system   cloud-node-manager-vhkz5                         1/1     Running   0          4m7s
+kube-system   coredns-5bf45f87d-95zhw                          1/1     Running   0          4m34s
+kube-system   coredns-5bf45f87d-tgmx7                          1/1     Running   0          3m42s
+kube-system   coredns-autoscaler-7467554f77-b5jvl              1/1     Running   0          4m34s
+kube-system   csi-azuredisk-node-8nstr                         3/3     Running   0          4m7s
+kube-system   csi-azuredisk-node-jtjxn                         3/3     Running   0          4m7s
+kube-system   csi-azuredisk-node-rwqqz                         3/3     Running   0          4m8s
+kube-system   csi-azurefile-node-7pxf6                         4/4     Running   0          4m7s
+kube-system   csi-azurefile-node-ljgdr                         4/4     Running   0          4m7s
+kube-system   csi-azurefile-node-zgkx5                         4/4     Running   0          4m8s
+kube-system   konnectivity-agent-7d7c8bcd59-8cr8d              1/1     Running   0          3m42s
+kube-system   konnectivity-agent-7d7c8bcd59-qmc7g              1/1     Running   0          4m21s
+kube-system   konnectivity-agent-autoscaler-5b658f6697-mhpkl   1/1     Running   0          4m21s
+kube-system   kube-proxy-4td8b                                 1/1     Running   0          4m7s
+kube-system   kube-proxy-p2rxj                                 1/1     Running   0          4m7s
+kube-system   kube-proxy-zdhdm                                 1/1     Running   0          4m8s
+kube-system   metrics-server-866c8cb87d-5ptrp                  2/2     Running   0          3m36s
+kube-system   metrics-server-866c8cb87d-9jmmb                  2/2     Running   0          3m36s
 ```
-
-5. Run `kubectl` to open a shell on one of the nodes.
-
-```console
-kubectl debug node/aks-demopool-40436376-vmss000000 -it --image=ubuntu
-```
-
-The terminal will open a shell with output similar to:
-
-```output
-Creating debugging pod node-debugger-aks-demopool-40436376-vmss000000-b9tj5 with container debugger on node aks-demopool-40436376-vmss000000.
-If you don't see a command prompt, try pressing enter.
-root@aks-demopool-40436376-vmss000000:/# 
-```
-
-6. At the new shell prompt, run the `uname` command:
-
-```console
-uname -a
-```
-
-The output confirm the node is an Arm instance:
-
-```output
-Linux aks-demopool-40436376-vmss000000 5.15.0-1034-azure #41-Ubuntu SMP Fri Feb 10 19:59:55 UTC 2023 aarch64 aarch64 aarch64 GNU/Linux
-``` 
 
 You have successfully created a Kubernetes cluster on AKS using Arm-based instances. 
 

@@ -1,18 +1,18 @@
 ---
 title: Create an Arm-based cluster on Azure Kubernetes Service
 
-description: Learn how to automate the deployment of an Arm-based Kubernetes cluster on Azure AKS using Terraform and deploy a sample WordPress application as a workload.
+description: Learn how to automate the deployment of an Arm-based Kubernetes cluster on Azure AKS with Azure Cobalt 200 nodes using Terraform, and deploy a sample WordPress application as a workload.
 
 minutes_to_complete: 60   
 
 who_is_this_for: This is an advanced topic for software developers who want to deploy an Arm-based Kubernetes cluster using Azure Kubernetes Service (AKS).
 
 learning_objectives: 
-    - Automate the deployment of an Arm-based AKS cluster using Terraform
-    - Install Wordpress on AKS as an example workload
+    - Automate the deployment of an Arm-based AKS cluster with Azure Cobalt 200 nodes using Terraform
+    - Install WordPress on AKS as an example workload
 
 prerequisites:
-    - An Azure account
+    - An Azure account with access to Cobalt 200 (Dpsv7) virtual machines and sufficient vCPU quota
     - A machine with [Terraform](/install-guides/terraform/), [Azure CLI](/install-guides/azure-cli), and [Kubectl](/install-guides/kubectl/) installed
 
 # START generated_summary_faq
@@ -32,7 +32,7 @@ generated_summary_faq:
   summary: >-
     You'll automate an Arm-based Azure Kubernetes Service (AKS) cluster deployment
     with Terraform and then deploy a WordPress example workload. First, you'll configure AKS to use Azure
-    Dpsv5 virtual machines based on Ampere Altra Arm processors by following Terraform-driven
+    Dpsv7 virtual machines based on Azure Cobalt 200 Arm processors by following Terraform-driven
     provisioning steps. After the cluster is available, you'll use a concise Kubernetes setup to run
     WordPress backed by MySQL by creating three manifests: `kustomization.yaml`, `mysql-deployment.yaml`,
     and `wordpress-deployment.yaml`. The result is a working application on an Arm-based AKS node
@@ -49,9 +49,10 @@ generated_summary_faq:
       can proceed after the cluster is up and reachable with your configured tooling.
   - question: How do I ensure the AKS node pool is Arm-based?
     answer: >-
-      Configure the node pool in Terraform to use an Azure Dpsv5 VM size, which runs on Ampere
-      Altra Arm-based processors. Confirm that the VM size in your configuration references a
-      Dpsv5 option.
+      Configure the node pool in Terraform to use an Azure Dpsv7 VM size, such as `Standard_D2ps_v7`,
+      which runs on Azure Cobalt 200 Arm-based processors. After the cluster is created, run
+      `kubectl get nodes -L node.kubernetes.io/instance-type,kubernetes.io/arch` and confirm that the
+      nodes show `arm64`.
   - question: Which files do I need to create for the WordPress example?
     answer: >-
       Create `kustomization.yaml`, `mysql-deployment.yaml`, and `wordpress-deployment.yaml` exactly
@@ -89,8 +90,8 @@ operatingsystems:
 
 further_reading:
     - resource:
-        title: Azure Kubernetes Service on Arm based Ampere Altra processors
-        link: https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/aks-on-arm-based-ampere
+        title: Introducing Azure Cobalt 200 virtual machines
+        link: https://azure.microsoft.com/en-us/blog/new-azure-cobalt-200-vms-deliver-50-performance-improvement-fully-optimized-for-modern-agentic-ai-workloads/
         type: blog
     - resource:
         title: AKS documentation
