@@ -31,7 +31,7 @@ Creating a virtual machine based on Azure Cobalt 200 is no different to creating
 - In the **Size** field, select **See all sizes** and select the D-series v7 family of virtual machines.
 - Select **D4ps_v7** from the list as shown in the diagram below:
 
-![Azure portal VM creation example#center](images/instance.png "VM size selection in the Azure portal")
+![Azure portal VM creation example#center](images/instance.webp "VM size selection in the Azure portal")
 
 - For **Authentication type**, select **SSH public key**.
 - Fill in the **Administrator username** for your VM.

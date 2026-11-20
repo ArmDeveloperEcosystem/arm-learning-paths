@@ -46,9 +46,11 @@ Calls to:
                                   term-{{. | urlize}}
                               {{end}}
                           {{ end }}'>
-                  <ads-card class="tool-card" link="{{.Permalink}}">
+                  <ads-card class="tool-card">
                       <ads-card-content class="tool-card-content" slot="content">
-                          <p class="search-title install-guide-title">{{.Title}}</p>
+                          <a class="listing-card-link" href="{{.Permalink}}">
+                              <p class="search-title install-guide-title">{{.Title}}</p>
+                          </a>
                       </ads-card-content>   
                   </ads-card>
               </div>

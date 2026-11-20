@@ -20,7 +20,7 @@ weight: 1
 
 The [.NET SDK](https://dotnet.microsoft.com/en-us/) is a free, open-source, cross-platform development environment that provides tools and libraries for building applications. You can use it to create web apps, mobile apps, desktop apps, cloud services, and more.
 
-.NET 10 is the latest Long Term Support (LTS) release. .NET 9 (Standard Term Support) and .NET 8 (LTS) are also available. This guide defaults to .NET 10, with instructions for selecting an alternative version.
+.NET 10 is the Long Term Support (LTS) release, and .NET 11 is the Standard Term Support (STS) release. This guide uses .NET 10. For current support dates, see the [.NET support policy](https://dotnet.microsoft.com/en-us/platform/support/policy/dotnet-core).
 
 The .NET SDK is available for Linux distributions on Arm-based systems.
 
@@ -62,7 +62,7 @@ Use `dnf` to install the .NET 10 SDK on Fedora:
 sudo dnf install dotnet-sdk-10.0
 ```
 
-To install a different version, replace `10.0` with the version you need. For example, use `dotnet-sdk-9.0` for .NET 9 or `dotnet-sdk-8.0` for .NET 8.
+To install a different version, replace `10.0` with the version you need. For example, use `dotnet-sdk-11.0` for .NET 11.
 
 If the .NET SDK is not found in your package manager, you can install it using a script.
 
@@ -86,10 +86,10 @@ To install the latest LTS version (.NET 10), run:
 bash ./dotnet-install.sh
 ```
 
-To install the latest available version (including STS releases), run:
+To install the latest STS release, run:
 
 ```bash
-bash ./dotnet-install.sh --version latest
+bash ./dotnet-install.sh --channel STS
 ```
 
 To install a specific version channel, use the `--channel` flag. For example, to install .NET 10:
@@ -98,7 +98,7 @@ To install a specific version channel, use the `--channel` flag. For example, to
 bash ./dotnet-install.sh --channel 10.0
 ```
 
-You can also use `--channel 9.0` for .NET 9 or `--channel 8.0` for .NET 8.
+You can also use `--channel 11.0` for .NET 11.
 
 3.	Add the .dotnet folder to the PATH environment variable:
 

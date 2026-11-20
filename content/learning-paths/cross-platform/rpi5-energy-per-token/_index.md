@@ -38,33 +38,33 @@ generated_summary_faq:
     samples and align them with token-generation windows to calculate joules per token, with or
     without idle power. Finally, you'll compare clock caps and thread counts across repeated runs,
     accounting for variation and sampler overhead.
-#   faqs:
-#   - question: How do I check whether the Raspberry Pi 5 exposes power data through `hwmon`?
-#     answer: >-
-#       You can list the sensors under `/sys/class/hwmon/` and check for power or current files.
-#       On the Raspberry Pi 5, you use `vcgencmd pmic_read_adc` to read current and voltage from the
-#       onboard PMIC rails instead.
-#   - question: What does the PMIC sampling script write?
-#     answer: >-
-#       You choose the output CSV path when you run `pmic_sampler.py`, for example `idle.csv` in
-#       your working directory. In your CSV, each row contains `time_s`, `total_W`, and a watts column for
-#       each rail with both current and voltage readings.
-#   - question: How do I align power samples with token generation?
-#     answer: >-
-#       When you run `energy_per_token.py`, it starts the sampler before `llama-bench`. You can
-#       trace each generation window from the script's timestamp for a `--progress` start marker
-#       and the corresponding `samples_ns` duration; the script selects samples inside that window.
-#   - question: How do I calculate joules per token with and without idle power?
-#     answer: >-
-#       You multiply the mean power during a generation window by its duration, then divide by
-#       the generated token count for `J/token`. For `net_J/token`, you subtract the measured idle
-#       baseline from the mean window power before multiplying and dividing.
-#   - question: How should I compare clock caps and thread counts?
-#     answer: >-
-#       You set `scaling_max_freq` and check `scaling_cur_freq` during token generation to
-#       confirm the cap. You then repeat the sweep at least five times, alternating the setting order.
-#       You compare `J/token` and `net_J/token` separately, and avoid ranking settings whose
-#       differences fall within run-to-run variation.
+  faqs:
+  - question: How do I check whether the Raspberry Pi 5 exposes power data through hwmon?
+    answer: >-
+      You can list the sensors under `/sys/class/hwmon/` and check for power or current files.
+      On the Raspberry Pi 5, you use `vcgencmd pmic_read_adc` to read current and voltage from the
+      onboard PMIC rails instead.
+  - question: What does the PMIC sampling script write?
+    answer: >-
+      You choose the output CSV path when you run `pmic_sampler.py`, for example `idle.csv` in
+      your working directory. In your CSV, each row contains `time_s`, `total_W`, and a watts column for
+      each rail with both current and voltage readings.
+  - question: How do I align power samples with token generation?
+    answer: >-
+      When you run `energy_per_token.py`, it starts the sampler before `llama-bench`. You can
+      trace each generation window from the script timestamp for a `--progress` start marker,
+      and the corresponding `samples_ns` duration. The script selects samples inside that window.
+  - question: How do I calculate joules per token with and without idle power?
+    answer: >-
+      Multiply the mean power during a generation window by its duration, then divide by
+      the generated token count for `J/token`. For `net_J/token`, subtract the measured idle
+      baseline from the mean window power before multiplying and dividing.
+  - question: How should I compare clock caps and thread counts?
+    answer: >-
+      Set `scaling_max_freq` and check `scaling_cur_freq` during token generation to
+      confirm the cap. Then, repeat the sweep at least five times, alternating the setting order.
+      Compare `J/token` and `net_J/token` separately, and avoid ranking settings whose
+      differences fall within run-to-run variation.
 # END generated_summary_faq
 
 author: Manu Nicholas Jacob

@@ -9,23 +9,27 @@ layout: learningpathall
 
 ## Compare input layouts in GEMM
 
-This final General Matrix Multiplication (GEMM) visualization begins with matrix A in transposed-and-interleaved layout. It loads input values into Z registers, accumulates outer products in ZA, and writes the output matrix. Compared to the Gather Load version, all loads from **A Input Data** are from contiguous addresses.
+This final General Matrix Multiplication (GEMM) visualization begins with matrix A in transposed-and-interleaved layout. It loads input values into Z registers, accumulates outer products in ZA, and writes the output matrix. In contrast to the Gather Load version, all loads from **A Input Data** are from contiguous addresses.
 
 ## Trace the interleaved loads
 
-If the embedded visualization doesn't load, [open the interleaved GEMM visualization in a separate browser tab](/apps/sme-visualisations/#/sme/gemm32-2x2-interleave). Switch between the Learning Path and the visualization tab.
+To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/gemm32-2x2-interleave" target="_blank" rel="noopener">open the interleaved GEMM visualization in a separate browser tab</a>. Move the tab to a separate window to view the visualization and Learning Path side by side.
 
-Follow the same stages as the Gather Load GEMM and compare how matrix A reaches Z2 and Z3:
+Follow the same stages as the Gather Load GEMM and compare how matrix A data reaches Z2 and Z3:
 
-| Stage | Visualization steps | Operation |
+| Stage | Number of steps | Operation |
 |---|---|---|
-| Load the first inputs | 1–4 | Load the first row of **B Input Data** into Z0–Z1 and the first two rows of **A Input Data** into Z2–Z3. The **A Input Data** is loaded from contiguous memory addresses. |
-| Calculate the first outer products | 5–8 | Calculate matrix outer product and accumulate the first partial results in ZA0–ZA3. |
-| Process the second inputs | 9–16 | Load the second row of B and the third and fourth rows of A, then accumulate outer products in ZA0–ZA3. |
-| Process the third inputs | 17–24 | Repeat for the third row of B and the fifth and sixth rows of A. |
-| Process the fourth inputs | 25–32 | Repeat for the fourth row of B and the final two rows of A. |
-| Store the first results | 33–40 | Write ZA0 and ZA1 to **Output Matrix Data**. |
-| Store the remaining results | 41–48 | Write ZA2 and ZA3 to **Output Matrix Data**. |
+| Load the first inputs | 4 | Load the first row of **B Input Data** into Z0–Z1 and the first two rows of **A Input Data** into Z2–Z3.|
+| Calculate the first outer products | 4 | Calculate matrix outer product and accumulate the first partial results in ZA0–ZA3. |
+| Process the second inputs | 8 | Load the second row of B and the third and fourth rows of A, then accumulate outer products in ZA0–ZA3. |
+| Process the third inputs | 8 | Repeat for the third row of B and the fifth and sixth rows of A. |
+| Process the fourth inputs | 8 | Repeat for the fourth row of B and the final two rows of A. |
+| Store the first results | 8 | Write ZA0 and ZA1 to **Output Matrix Data**. |
+| Store the remaining results | 8 | Write ZA2 and ZA3 to **Output Matrix Data**. |
+
+**A Input Data** is loaded from contiguous memory addresses. 
+
+&nbsp;
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/gemm32-2x2-interleave"

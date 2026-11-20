@@ -301,7 +301,6 @@ html[theme='dark'] .incorrect-explain {color: #e86868} /* 27% lighter than arm's
     line-height: 1.1;
     margin: 0;
 }
-
 .generated-summary-faq__assist {
     align-items: center;
     display: inline-flex;
@@ -379,7 +378,57 @@ html[theme='dark'] ads-expansion-panel.generated-summary-faq__panel {
     font-size: 16px;
 }
 
+/* Keep ADS rendering while native links provide page navigation. */
+.learning-path-nav-control {
+    display: inline-block;
+    position: relative;
+}
+
+.learning-path-nav-hitarea {
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.learning-path-nav-hitarea:focus-visible {
+    outline: 2px solid var(--ads-ui-violet-40);
+    outline-offset: 3px;
+}
+
+.learning-path-nav-control:hover ads-button,
+.learning-path-nav-control:focus-within ads-button {
+    --ads-button-background-color-primary: var(--arm-green);
+    --ads-button-border-color-primary: var(--arm-green);
+    --ads-button-color-primary: var(--lp-hover-text);
+    --ads-button-border-color-secondary: var(--arm-green);
+    --ads-button-color-secondary: var(--lp-hover-text);
 /* Next Steps: resources and feedback side by side. */
+.next-steps-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem 1.5rem;
+    align-items: start;
+}
+
+@media (min-width: 900px) {
+    .next-steps-layout {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    }
+
+    .next-steps-resources { grid-column: 1; }
+    .next-steps-feedback  { grid-column: 2; }
+}
+
+@media (min-width: 1280px) {
+    .next-steps-layout {
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .next-steps-resources { grid-column: 1 / span 8; }
+    .next-steps-feedback  { grid-column: 9 / span 4; }
+}
+
 .next-steps-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr);

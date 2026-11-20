@@ -10,7 +10,7 @@ layout: learningpathall
 
 -->
 
-In this section, you'll deploy OpenStack using DevStack on the Arm-based Azure virtual machine (VM) running Azure Cobalt 100 that you created in the previous section. DevStack is a script-based installer designed for development and testing. It runs all OpenStack services directly on the host OS and deploys Nova, Keystone, Glance, and Horizon on a single node.
+You'll deploy OpenStack using DevStack on the Arm-based Azure virtual machine (VM) running Azure Cobalt 100 that you created earlier. DevStack is a script-based installer designed for development and testing. It runs all OpenStack services directly on the host OS and deploys Nova, Keystone, Glance, and Horizon on a single node.
 
 The environment that you'll create will run OpenStack services on your Azure Cobalt 100 VM, provide access to the Horizon dashboard, and support Arm64 (`aarch64`) architecture. You'll be able to access the environment using both browser and CLI.
 
@@ -325,9 +325,9 @@ The Kolla-Ansible deployment must run on a separate VM, so this step is optional
 
 ## What you've accomplished and what's next
 
-In this section, you deployed OpenStack using DevStack on an Azure Cobalt 100 Arm64 VM. You then verified the deployment using the CLI and accessed the Horizon dashboard using a browser.
+You've deployed OpenStack using DevStack on an Azure Cobalt 100 Arm64 VM. You then verified the deployment using the CLI and accessed the Horizon dashboard using a browser.
 
-In the next section, you'll create a VM for deploying OpenStack using Kolla-Ansible.
+Next, you'll create a VM for deploying OpenStack using Kolla-Ansible.
 
 
 

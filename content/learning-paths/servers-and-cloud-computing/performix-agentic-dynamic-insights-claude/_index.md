@@ -40,31 +40,31 @@ generated_summary_faq:
     verify access to recipes and runs. You'll then create or select a supported run, request an insight
     with its run ID, and open it in Arm Performix. Finally, you'll identify the run and
     compare the recommendation with profile evidence.
-  # faqs:
-  # - question: How do I verify that Claude Code can reach the Arm Performix MCP server?
-  #   answer: >-
-  #     Ask Claude Code to use Arm Performix to list supported Code Hotspots runs, including the
-  #     run ID, target, workload, and creation time. If Claude Code returns the run details, you’ve
-  #     confirmed that it can access Performix through the MCP server.
-  # - question: Which MCP configuration method should I use?
-  #   answer: >-
-  #     Configure through the extension’s MCP interface, run `claude mcp add`, or edit
-  #     `~/.claude.json`. The extension and Claude CLI share the same MCP configuration, so you
-  #     only need one method.
-  # - question: Where should I configure the Performix MCP server when using VS Code?
-  #   answer: >-
-  #     Configure the server on the host where Claude Code runs. For a local VS Code session, set
-  #     it up on the same machine.
-  # - question: What should I prepare before creating a new Code Hotspots run?
-  #   answer: >-
-  #     Choose a representative workload, specify the executable with an absolute path, and build
-  #     with debug symbols when possible. Aim for at least 20 seconds of representative execution
-  #     to capture useful samples.
-  # - question: How do I open the profiled run in Arm Performix to validate the AI recommendation?
-  #   answer: >-
-  #     From a terminal where `apx` is on your `PATH`, run `apx run info "<run-id>"`. Use the
-  #     returned workload, recipe, target, and timestamps to locate and open the matching run in
-  #     the GUI.
+  faqs:
+  - question: How do I verify that Claude Code can reach the Arm Performix MCP server?
+    answer: >-
+      Ask Claude Code to list available Performix recipes and profiling runs. If it returns
+      recipes or targets, you've confirmed the MCP connection even when the run list is empty.
+      When runs are available, request their IDs, targets, workloads, and creation times to choose one.
+  - question: Which MCP configuration method should I use?
+    answer: >-
+      Configure through the MCP interface of the extension, run `claude mcp add`, or edit
+      `~/.claude.json`. The extension and Claude CLI share the same MCP configuration, so you
+      need only one method.
+  - question: Where should I configure the Performix MCP server when using VS Code?
+    answer: >-
+      Configure the server on the host where Claude Code runs. For a local VS Code session, set
+      it up on the same machine.
+  - question: What should I prepare before creating a new Code Hotspots run?
+    answer: >-
+      Choose a representative workload, specify the executable with an absolute path, and build
+      with debug symbols when possible. Aim for at least 20 seconds of representative execution
+      to capture useful samples.
+  - question: How do I open the profiled run in Arm Performix to validate the AI recommendation?
+    answer: >-
+      From a terminal where `apx` is on your `PATH`, run `apx run info "<run-id>"`. Use the
+      returned workload, recipe, target, and timestamps to locate and open the matching run in
+      the GUI.
 # END generated_summary_faq
 
 author:

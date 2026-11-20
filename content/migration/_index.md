@@ -1,7 +1,7 @@
 ---
 title: "How can I migrate applications to Arm Neoverse?"
 layout: "migration"       # Easier for dynamic content loading, keep the same
-description: Software developers are embracing the Arm architecture for its superior price performance and energy efficiency across a wide range of applications, including containerized workloads, cloud managed services, and Linux applications. To achieve higher performance and lower cost, you can migrate your self-managed workloads to Arm virtual machines and make sure to select Arm for managed services. A three step migration process covers the most common scenarios, and provides links to additional resources.
+description: Software developers are embracing the Arm architecture for its superior price-performance and energy efficiency across a wide range of applications, including containerized workloads, cloud managed services, and Linux applications. To achieve higher performance and lower cost, you can migrate your self-managed workloads to Arm virtual machines and make sure to select Arm for managed services. A 3-step migration process covers the most common scenarios, and provides links to additional resources.
 ---
 
 ## Learn and explore
@@ -16,12 +16,12 @@ Below is a list of Neoverse CPUs, the architecture versions, and the key additio
 
 | CPU         | Architecture version | Key additions |
 | ----------- | -------------------- | --------------------------------------------------------- |
-| Neoverse-N1 | Armv8.2-A            | LSE - Large System Extensions improves multi-threaded performance. |
-| Neoverse-V1 | Armv8.4-A            | SVE - Scalable Vector Extension adds high performance vector processing for HPC and AI workloads. |
-| Neoverse-N2 | Armv9.0-A            | SVE2 - Extends SVE for improved data parallelism and wider vectors. |
-| Neoverse-V2 | Armv9.0-A            | SVE2 - Targets high single threaded performance for HPC and AI workloads. |
-| Neoverse-N3 | Armv9.2-A            | Balanced performance and power with extended SVE2 and crypto performance. |
-| Neoverse-V3 | Armv9.2-A            | High performance, confidential compute, and extended SVE2 and crypto performance. |
+| Neoverse N1 | Armv8.2-A            | LSE - Large System Extensions improves multi-threaded performance. |
+| Neoverse V1 | Armv8.4-A            | SVE - Scalable Vector Extension adds high-performance vector processing for HPC and AI workloads. |
+| Neoverse N2 | Armv9.0-A            | SVE2 - Extends SVE for improved data parallelism and wider vectors. |
+| Neoverse V2 | Armv9.0-A            | SVE2 - Targets high single threaded performance for HPC and AI workloads. |
+| Neoverse N3 | Armv9.2-A            | Balanced performance and power with extended SVE2 and crypto performance. |
+| Neoverse V3 | Armv9.2-A            | High performance, confidential compute, and extended SVE2 and crypto performance. |
 
 ### What cloud hardware is available today?
 
@@ -30,40 +30,52 @@ Review each cloud service provider below to learn about Arm-based servers.
 {{< tabpane-normal >}}
   {{< tab header="AWS">}}
 
-AWS offers more than [150 instance types with Graviton processors](https://aws.amazon.com/ec2/graviton/). The largest instance has 192 vCPUs and 1.5 TB of memory. A wide variety of instance sizes are available, including bare-metal (look for '.metal'). To find instances with Graviton processors look for 'g' in the name (C7g, M7g, and R7g). 
+AWS offers more than [150 instance types with Graviton processors](https://aws.amazon.com/ec2/graviton/). The largest instance has 192 vCPUs and 1.5 TB of memory. A wide variety of instance sizes are available, including bare-metal (look for '.metal'). To find instances with Graviton processors, look for 'g' in the name (C7g, R8g, M9g).
+
+The table lists example instance families for each generation. Performance figures are AWS estimates and vary by workload.
 
 | Generation    | Arm CPU      | Instance types | Comments                                                                    |
 |---------------|--------------|----------------|-----------------------------------------------------------------------------|
-| Graviton  | Cortex-A72   | A1             | First Arm-based instance.
-| Graviton2 | Neoverse-N1  | C6g, M6g, R6g  | 600% performance and efficiency increases.                                  |
-| Graviton3 | Neoverse-V1  | C7g, M7g, R7g  | 25% performance increase, DDR5 memory added, 50% more memory bandwidth.     |
-| Graviton4 | Neoverse-V2  | R8g            | 75% more memory bandwidth, up to 40% faster for databases and 30% faster for web applications.   |
-| Graviton5 | Neoverse-V3  | M9g            | 25% higher performance and 5X larger L3 cache.   |
+| Graviton  | Cortex-A72   | A1             | First Arm-based EC2 instance. |
+| Graviton2 | Neoverse N1  | C6g, M6g, R6g  | Up to 7 times the processor performance of the first Graviton generation. |
+| Graviton3 | Neoverse V1  | C7g, M7g, R7g  | Up to 25% better compute performance than Graviton2; DDR5 memory. |
+| Graviton4 | Neoverse V2  | R8g            | Up to 30% better compute performance than Graviton3. |
+| Graviton5 | Neoverse V3  | C9g, C9gd, M9g, M9gd, R9g, R9gd | Up to 25% better compute performance than Graviton4. |
 
   {{< /tab >}}
   {{< tab header="Google GCP">}} 
-Google GCP offers a variety of [virtual machine instances with Arm processors](https://cloud.google.com/compute/docs/instances/arm-on-compute). The latest generation of Arm-based VMs are based on Google Axion processor. The largest instance has 72 vCPUs and 576 Gb of RAM. It does not offer bare-metal instances. It offers `highcpu` and `highmem` VM instances for compute and memory intensive workloads respectively.
+Google Cloud offers a variety of [instances with Arm processors](https://cloud.google.com/compute/docs/instances/arm-on-compute), including bare-metal options. Its Arm-based instances use Google Axion, Ampere Altra, and NVIDIA processors. The `highcpu` and `highmem` machine types support compute-intensive and memory-intensive workloads, respectively.
 
 | Generation    | Arm CPU      | Instance types     | Comments  |  
 | --------------|--------------|--------------------|-----------|
-| T2A       | Neoverse-N1  | t2a-standard | Optimized for general-purpose workloads - web servers, and microservices. |
-| Axion C4A | Neoverse-V2 | c4a-standard, c4a-highmem, c4a-highcpu  | General-purpose, AI/ML workloads and high performance computing. |
-| Axion N4A | Neoverse-N3 | n4a-standard, n4a-highmem, n4a-highcpu  | General-purpose, efficient for multi-threaded workloads. |
-| A4X | Neoverse-V2 | a4x-highgpu-4g | 140 vCPUs and 884 GB of memory using NVIDIA GB200 Superchips, which have B200 GPUs that offer 186 GB memory per GPU. |
-| A4X Max | Neoverse-V2 | a4x-maxgpu-4g-metal | 144 vCPUs and 960 GB of memory using NVIDIA GB300 Superchips, which have B300 GPUs that offer 279 GB memory per GPU. |
+| T2A       | Neoverse&nbsp;N1  | t2a-standard | Optimized for general-purpose workloads - web servers, and microservices. |
+| Axion C4A | Neoverse&nbsp;V2 | c4a-standard, c4a-highmem, c4a-highcpu, c4a-standard-96-metal, c4a-highmem-96-metal | General-purpose, AI/ML workloads and high-performance computing. |
+| Axion N4A | Neoverse&nbsp;N3 | n4a-standard, n4a-highmem, n4a-highcpu  | General-purpose, efficient for multi-threaded workloads. |
+| A4X | Neoverse&nbsp;V2 | a4x-highgpu-4g | 140 vCPUs and 884 GB of memory using NVIDIA GB200 Superchips, which have B200 GPUs that offer 186 GB memory per GPU. |
+| A4X Max | Neoverse&nbsp;V2 | a4x-maxgpu-4g-metal | 144 vCPUs and 960 GB of memory using NVIDIA GB300 Superchips, which have B300 GPUs that offer 279 GB memory per GPU. |
+| A5X | NVIDIA Vera | a5x-highgpu-4g-metal | Bare-metal instance with 176 vCPUs, 1,440 GB of memory, and four NVIDIA Rubin GPUs. |
 
   {{< /tab >}}
   {{< tab header="Microsoft Azure">}}
-Microsoft Azure offers a variety of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/general-purpose/dpsv6-series). The current generation of Arm-based VMs are based on Cobalt 100 CPU. The largest instance has 96 vCPUs and 384 Gb of RAM in the 'D96ps_v6' format. It does not offer bare-metal instances. It offers compute for general-purpose workloads (Dps and Dpls) and memory-optimized workloads (Eps). The next generation VMs are based on [Azure Cobalt 200](https://techcommunity.microsoft.com/blog/azureinfrastructureblog/announcing-cobalt-200-azure’s-next-cloud-native-cpu/4469807).
+Microsoft Azure offers a variety of [virtual machine instances with Arm Neoverse processors](https://learn.microsoft.com/en-us/azure/virtual-machines/sizes/cobalt-overview). The latest generation uses the Cobalt 200 processor and offers general-purpose, memory-optimized, and storage-optimized VMs, with up to 128 vCPUs. Availability varies by region.
 
-| Generation    | Arm CPU      | Instance types     | Comments  |  
+| Generation    | Arm CPU      | Instance types     | Comments  |
 | --------------|--------------|--------------------|-----------|
-| Dpsv5      | Neoverse-N1  | Dpsv5, Epsv5       | General purpose and memory optimized instances. |
-| Dpsv6      | Neoverse-N2  | Dpsv6, Dpls6, Epsv6 | Cobalt 100 processor improves performance, Dpsv6 (general purpose 4:1 mem:cpu ratio), Dplsv6 (general purpose, 2:1 mem:cpu ratio), Epsv6 (memory-optimized, 8:1 mem:cpu ratio). |
+| Ampere Altra | Neoverse N1 | Dplsv5, Dpldsv5 | General-purpose instances for workloads with lower memory needs. |
+| Ampere Altra | Neoverse N1 | Dpsv5, Dpdsv5 | General-purpose instances. |
+| Ampere Altra | Neoverse N1 | Epsv5, Epdsv5 | Memory-optimized instances. |
+| Cobalt 100 | Neoverse N2 | Dplsv6, Dpldsv6 | General-purpose instances for workloads with lower memory needs. |
+| Cobalt 100 | Neoverse N2 | Dpsv6, Dpdsv6 | General-purpose instances. |
+| Cobalt 100 | Neoverse N2 | Epsv6, Epdsv6 | Memory-optimized instances. |
+| Cobalt 200 | Neoverse V3 | Dplsv7, Dpldsv7 | General-purpose instances with 2 GiB of memory per vCPU. |
+| Cobalt 200 | Neoverse V3 | Dpsv7, Dpdsv7 | General-purpose instances with 4 GiB of memory per vCPU. |
+| Cobalt 200 | Neoverse V3 | Epsv7, Epdsv7 | Memory-optimized instances with 8 GiB of memory per vCPU. |
+| Cobalt 200 | Neoverse V3 | Mpsv4, Mpdsv4 | High-memory instances with 16 GiB of memory per vCPU. |
+| Cobalt 200 | Neoverse V3 | Lpsv5 | Storage-optimized instances with local NVMe storage. |
 
   {{< /tab >}}
   {{< tab header="Oracle OCI">}} 
-Oracle Cloud Infrastructure (OCI) Ampere [Arm-based compute](https://www.oracle.com/cloud/compute/arm/) provides market-leading price-performance for AI, containers, big data, web services, and related workloads. The largest intsance has 160 vCPUs and 1024 Gb of RAM in the 'BM.Standard.A1' format. It offers bare-metal instances (look for 'BM' as opposed to 'VM'). 
+Oracle Cloud Infrastructure (OCI) Ampere [Arm-based compute](https://www.oracle.com/cloud/compute/arm/) provides market-leading price-performance for AI, containers, big data, web services, and related workloads. The `BM.Standard.A1.160` bare-metal shape has 160 OCPUs and 1,024 GB of RAM. OCI offers bare-metal instances (look for 'BM' as opposed to 'VM').
 
 | Generation    | Arm CPU      | Instance types         | Comments  |  
 | --------------|--------------|--------------------|-----------|
@@ -77,7 +89,7 @@ Alibaba Cloud offers [3 instance types](https://www.alibabacloud.com/help/en/ecs
 
 | Generation    | Arm CPU      | Instance types         | Comments  |  
 | --------------|--------------|--------------------|-----------|
-| Yitian710            | Neoverse-N2  | c8y, g8y, r8y  | Arm based instance|
+| Yitian710            | Neoverse N2  | c8y, g8y, r8y  | Arm based instance|
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
@@ -85,38 +97,41 @@ Read [Get started with Servers and Cloud Computing](/learning-paths/servers-and-
 
 ## STEP 1: Plan your transition
 
-Newer software is generally easier to migrate because Arm support continues to improve and performance optimizations are typically better in newer versions. Interpreted languages and Jit compilers, such as Python, Java, PHP, and Node.js are easiest to migrate. Compiled languages such as C/C++, Go, and Rust are slightly more difficult because they need to be recompiled. The most difficult situations involve a language, runtime, operating  system, or something else which is not available on Arm or would be difficult to run on Arm.
+Newer software is generally easier to migrate because Arm support continues to improve and performance optimizations are typically better in newer versions. Interpreted languages and JIT compilers, such as Python, Java, PHP, and Node.js are easiest to migrate. Compiled languages such as C/C++, Go, and Rust are slightly more difficult because they need to be recompiled. The most difficult situations involve a language, runtime, operating  system, or something else which is not available on Arm or would be difficult to run on Arm.
 
 
-### 1.1 Survey your software stack
+### Survey your software stack
 
 Step one in a typical migration journey is understanding the software stack. Make notes about operating  system versions, programming languages, development tools, container  tools, performance analysis tools, and any other important scripts included in the project. You can reference **Migrating applications to Arm servers** below for tips on how to get started - setting up a development machine, common challenges, and tips to proceed at pace.
 
 [Migrating applications to Arm servers](/learning-paths/servers-and-cloud-computing/migration/)
 
-### 1.2 Discover Arm compatibility
+### Discover Arm compatibility
 
 Step two is to look through your scripts and build files and see if you spot architecture specific files. Software migration typically falls into 3 categories:
 1. **Automatic:** The Linux package manager installs software from the main repositories without any changes, totally seamless.
 2. **Small modifications:** Software installed using scripts or binary downloads requires minor changes to strings, such as changing “x86_64” and “amd64” to “arm64” or “aarch64”.
-3. **Challenging:** A few software projects still don't support Arm Linux, some are well known projects like the Edge browser, and the others are smaller projects that haven't added Arm support, yet. Some could be blockers and others may be easy to compile yourself.
+3. **Challenging:** A few software projects still don't support Arm Linux, some are well known projects like the Edge browser, and the others are smaller projects that haven't added Arm support yet. Some could be blockers and others may be easy to compile yourself.
 
 You can quickly find out if software dependencies are available for Arm using the **Software Ecosystem Dashboard for Arm** link below - search for your package and find out which versions work on Arm and review the getting started tips. The dashboard is actively growing, and is a good place to understand if your software stack will run on Arm servers.
 
 [Software Ecosystem Dashboard for Arm.](https://www.arm.com/developer-hub/ecosystem-dashboard/) 
 
-### 1.3 Find resources to help
+### Find resources to help
 
 The below resources are curated to address migration challenges on specific cloud providers. Look through them for additional context.
 - [Porting architecture specific intrinsics](/learning-paths/cross-platform/intrinsics/) - perfect for porting intrinsics from another architecture.
 - [Arm software install guides](/install-guides/) - good for quickly installing common tools and software.
 - [simd.info](https://simd.info/) - a searchable reference tool for C intrinsics for SIMD engines.
 - [migrate-ease](https://github.com/migrate-ease/migrate-ease) - scan your source code for suggestions to migrate to Arm Neoverse, get started with [Migrate applications to Arm servers using migrate-ease](/learning-paths/servers-and-cloud-computing/migrate-ease/).
+- [Automate x86-to-Arm application migration using Arm MCP Server](/learning-paths/servers-and-cloud-computing/arm-mcp-server/) - use an AI coding assistant to check compatibility and help migrate code and containers. The Learning Path includes [setup guidance for supported assistants](/learning-paths/servers-and-cloud-computing/arm-mcp-server/1-overview/#setting-up-the-arm-mcp-server).
 - [Arm Infrastructure Solutions blog](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/) - an Arm-specific technical blog.
 - [Arm Learning Paths for Servers and Cloud](/learning-paths/servers-and-cloud-computing/) - general tutorials for Arm servers. You can search for specific platforms, including [Arm AGI](/learning-paths/servers-and-cloud-computing/?platforms-filter=arm-agi/#), [AWS](/learning-paths/servers-and-cloud-computing/?platforms-filter=aws/#), [Google Cloud](/learning-paths/servers-and-cloud-computing/?platforms-filter=google-cloud/#), [Microsoft Azure](/learning-paths/servers-and-cloud-computing/?platforms-filter=microsoft-azure/#), and [Oracle](/learning-paths/servers-and-cloud-computing/?platforms-filter=oracle/#).
      
 
 - AWS has additional resources such as the [Porting Advisor for Graviton](/install-guides/porting-advisor/) and [AWS Graviton Technical Guide](https://github.com/aws/aws-graviton-getting-started).
+
+To find Learning Paths on other topics, use [Arm Learning Paths search](/search/).
 
 Lastly, below are some specific migration helpers for various types of software:
 
@@ -134,6 +149,7 @@ Which tools are available for building and running containers on Arm servers?
 | GitHub Actions (GitHub runners) | [Build multi-architecture container images with GitHub Arm-hosted runners](/learning-paths/cross-platform/github-arm-runners/) | [Arm64 on GitHub Actions: Powering faster, more efficient build systems](https://github.blog/news-insights/product-news/arm64-on-github-actions-powering-faster-more-efficient-build-systems/) |
 | GitHub Actions (AWS Graviton runners) | [Managed, self-hosted Arm runners for GitHub Actions](/learning-paths/servers-and-cloud-computing/github-actions-runner/) |
 | GitLab (GitLab runners) | [Build a CI/CD pipeline with GitLab on Google Axion](/learning-paths/cross-platform/gitlab/) |  |
+| Kubernetes | [Migrate containers to Arm using KubeArchInspect](/learning-paths/servers-and-cloud-computing/kubearchinspect/) | |
 
   {{< /tab >}}
 
@@ -151,8 +167,8 @@ Which programming languages work on Arm servers? - Nearly all of them.
 |      | | [Optimizing Java Workloads on Azure General Purpose D-series v5 VMs with Microsoft's Build of OpenJDK](https://techcommunity.microsoft.com/t5/azure-compute-blog/optimizing-java-workloads-on-azure-general-purpose-d-series-v5/ba-p/3827610) |
 |      | | [Improving Java performance on OCI Ampere A1 compute instances](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/performance-of-specjbb2015-on-oci-ampere-a1-compute-instances) |
 | Go | [Go Install Guide](/install-guides/go/) | [Making your Go workloads up to 20% faster with Go 1.18 and AWS Graviton](https://aws.amazon.com/blogs/compute/making-your-go-workloads-up-to-20-faster-with-go-1-18-and-aws-graviton/)|
-| .NET | [.NET Install Guide](/install-guides/dotnet/) | [Arm64 Performance Improvements in .NET 7](https://devblogs.microsoft.com/dotnet/arm64-performance-improvements-in-dotnet-7/) |
-|      | [Deploy .NET application on Azure Cobalt 100 VMs](/learning-paths/servers-and-cloud-computing/azure-cobalt-cicd-aks/) | [Arm64 Performance Improvements in .NET 8](https://devblogs.microsoft.com/dotnet/this-arm64-performance-in-dotnet-8/) |
+| .NET | [.NET Install Guide](/install-guides/dotnet/) | [Performance improvements in .NET 10](https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-10/) |
+|      | [Deploy a .NET application on Microsoft Azure Cobalt 200 VMs](/learning-paths/servers-and-cloud-computing/azure-cobalt-cicd-aks/) | [Performance improvements in .NET 11](https://devblogs.microsoft.com/dotnet/performance-improvements-in-net-11/) |
 | Python | | [Python on Arm](https://community.arm.com/arm-community-blogs/b/tools-software-ides-blog/posts/python-on-arm)|
 | PHP | | [Improving performance of PHP for Arm64 and impact on AWS Graviton2 based EC2 instances](https://aws.amazon.com/blogs/compute/improving-performance-of-php-for-arm64-and-impact-on-amazon-ec2-m6g-instances/) |
 
@@ -163,11 +179,11 @@ Which key libraries are optimized for Arm servers?
 
 | Library/Framework | Learn More | Blogs |
 |-------------------|------------|-------|
-| x264/x265 | [Run x265 (H.265 codec) on Arm servers](/learning-paths/servers-and-cloud-computing/codec/) |  [Improve video encoding price/performance by up to 36% with Arm Neoverse based Amazon EC2 C6g instances](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/thirty-six-percent-better-video-encoding-with-aws-graviton2_2d00_based-c6g) |  
+| x264/x265 | [Run x265 (H.265 codec) on Arm servers](/learning-paths/servers-and-cloud-computing/codec/) |  [Improve video encoding price-performance by up to 36% with Arm Neoverse based Amazon EC2 C6g instances](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/thirty-six-percent-better-video-encoding-with-aws-graviton2_2d00_based-c6g) |
 |  |  | [Reduce H.265 High-Res Encoding Costs by over 80% with AWS Graviton2](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/reduce-h-265-high-res-encoding-costs-by-over-80-with-aws-graviton2-1207706725) |
 |  |  | [Ampere Altra Max Delivers Sustainable High-Resolution H.265 Encoding](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/ampere-altra-max-delivers-sustainable-high-resolution-h-265-video-encoding-without-compromise) |
 |  |  | [OCI Ampere A1 Compute instances can significantly reduce video encoding costs versus modern CPUs](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/oracle-cloud-infrastructure-arm-based-a1) |
-| ArmPL | [Arm Performance Libraries install guide](/install-guides/armpl/) | [Arm Compiler for Linux and Arm Performance Libraries 24.04](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/arm-compiler-for-linux-and-arm-performance-libraries-24-04) |
+| ArmPL | [Arm Performance Libraries install guide](/install-guides/armpl/) | [Arm Toolchain for Linux 22.1 release](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/arm-toolchain-for-linux-22-1-release) |
 | ArmRAL | [Get started with the Arm 5G RAN Acceleration Library (ArmRAL)](/learning-paths/servers-and-cloud-computing/ran/) | [The next chapter for Arm RAN Acceleration Library: Open-sourcing the code base & accelerating adoption](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/arm-ral-is-now-open-source) |
 | OpenSSL | | |
 | VP9 | [Run the AV1 and VP9 codecs on Arm Linux](/learning-paths/servers-and-cloud-computing/codec1/) | [Arm-based cloud instances outperform x86 instances by up to 64% on VP9 encoding](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/arm-outperforms-x86-by-up-to-64-percent-on-vp9) |
@@ -176,7 +192,7 @@ Which key libraries are optimized for Arm servers?
 | AV1 | [Run the AV1 and VP9 codecs on Arm Linux](/learning-paths/servers-and-cloud-computing/codec1/) | |
 | AES | | [AWS Graviton3 delivers leading AES-GCM encryption performance](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/aes-gcm-optimizations-for-armv8-4-on-neoverse-v1-graviton3)  |
 | Snappy | [Measure performance of compression libraries on Arm servers](/learning-paths/servers-and-cloud-computing/snappy/) | [Comparing data compression algorithm performance on AWS Graviton2](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/comparing-data-compression-algorithm-performance-on-aws-graviton2-342166113) |
-| Cloudflare zlib | [Learn how to build and use Cloudflare zlib on Arm servers](/learning-paths/servers-and-cloud-computing/zlib/) | |
+| zlib-ng | [Improve data compression performance on Arm servers with zlib-ng](/learning-paths/servers-and-cloud-computing/zlib/) | |
 
   {{< /tab >}}
 
@@ -192,13 +208,14 @@ Which databases are available on Arm servers?
 | MySQL | [Learn how to Tune MySQL](/learning-paths/servers-and-cloud-computing/mysql_tune/)  | |
 | PostgreSQL | [Learn how to deploy PostgreSQL](/learning-paths/servers-and-cloud-computing/postgresql/) | |
 | Flink | [Benchmark the performance of Flink on Arm servers](/learning-paths/servers-and-cloud-computing/flink/) |
-| Clickhouse | [Measure performance of ClickHouse on Arm servers](/learning-paths/servers-and-cloud-computing/clickhouse/) | [Improve ClickHouse Performance up to 26% by using AWS Graviton3](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/improve-clickhouse-performance-up-to-26-by-using-aws-graviton3) |
+| ClickHouse | [Measure performance of ClickHouse on Arm servers](/learning-paths/servers-and-cloud-computing/clickhouse/) | [Improve ClickHouse Performance up to 26% by using AWS Graviton3](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/improve-clickhouse-performance-up-to-26-by-using-aws-graviton3) |
+| ClickHouse | [Build a ClickHouse analytics pipeline on Google Axion](/learning-paths/servers-and-cloud-computing/clickhouse-gcp/) | |
 | MongoDB | [Test the performance of MongoDB on Arm servers](/learning-paths/servers-and-cloud-computing/mongodb/) | [MongoDB performance on Arm Neoverse based AWS Graviton2 processors](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/mongodb-performance-on-aws-with-the-arm-graviton2) |
 | Redis | [Deploy Redis on Arm](/learning-paths/servers-and-cloud-computing/redis/) | [Improve Redis performance up to 36% by deploying on Alibaba Cloud Yitian 710 instances](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/improve-redis-performance-by-deploying-on-alibaba-cloud-yitian-710-instances) |
 | Spark | [Learn how to deploy Spark on AWS Graviton2](/learning-paths/servers-and-cloud-computing/spark/) | [Spark on AWS Graviton2 best practices: K-Means clustering case study](https://developer.arm.com/community/arm-community-blogs/b/servers-and-cloud-computing-blog/posts/optimize-spark-on-aws-graviton2-best-practices-k-means-clustering) |
 | MariaDB | [Deploy MariaDB on Arm servers](/learning-paths/servers-and-cloud-computing/mariadb/) |
-| Elasticsearch/Opensearch |  |
-| Spark+Gluten+Velox |  |
+| Elasticsearch/OpenSearch | [Deploy Elasticsearch on Azure Cobalt 100](/learning-paths/servers-and-cloud-computing/elasticsearch-on-azure/) | |
+| Spark + Gluten + Velox | [Run Apache Spark SQL with Gluten and Velox on Azure Cobalt 100](/learning-paths/servers-and-cloud-computing/spark-velox-cobalt/) | |
 | Pinecone |  |
 
   {{< /tab >}}
@@ -230,6 +247,7 @@ Which AI/ML software stack can I run on Arm servers?
 | Software | Learning Paths | Other Content (Blogs/Videos) |
 |-----------|----------------|----------------------------------------|
 | MLPerf | [Measure Machine Learning Inference Performance on Arm servers](/learning-paths/servers-and-cloud-computing/ml-perf/) | |
+| PyTorch | [Measure and accelerate PyTorch inference on Arm servers](/learning-paths/servers-and-cloud-computing/torchbench/) | |
 | vLLM | [Run vLLM inference with INT4 quantization on Arm servers](/learning-paths/servers-and-cloud-computing/vllm-acceleration/) | |
 | KleidiAI | [Accelerate Generative AI workloads using KleidiAI](/learning-paths/cross-platform/kleidiai-explainer/) | |
 | Llama.cpp | [Run distributed inference with llama.cpp on Arm-based AWS Graviton4 instances](/learning-paths/servers-and-cloud-computing/distributed-inference-with-llama-cpp/) | |
@@ -241,19 +259,19 @@ Which AI/ML software stack can I run on Arm servers?
 
 Based on your initial research, decide how to proceed with trying your software on Arm. In general, you can use a top-down or bottom-up strategy to migrate to Arm. Select a methodology and use the resources above to build and run your application. 
 
-### 2.1 Top-down methodology
+### Top-down methodology
 
 Top-down porting involves moving the complete software stack to an Arm machine and trying to build and run it straightaway. You will almost certainly face errors, which you can address one at a time until the full application runs on Arm. 
 
-![Top-down porting methodology](/migration/top-down.png) 
+![Top-down migration: move the full application from x86 to Arm, then fix library errors one at a time until the application runs.](/migration/top-down.png)
 
 This methodology is great for simpler stacks, when breaking down the problem would take more time than fixing errors iteratively. 
 
-### 2.2 Bottom-up methodology
+### Bottom-up methodology
 
 Bottom-up porting is more systematic. Here, you break apart your software stack, starting with the foundations of your app to get those running on an Arm server first. Then add back one or two software packages at a time, and recompile and run to ensure it works on Arm. If errors arise, fix them or replace the incompatible package with an Arm compatible version. Continue building back your stack until it is fully formed on an Arm server. 
 
-![Bottom-up porting methodology](/migration/bottom-up.png) 
+![Bottom-up migration: start with a minimal application stack on Arm, fix errors, and add components until the full application runs.](/migration/bottom-up.png)
 
 This methodology is sensible for large stacks, where running the whole app on Arm immediately would cause too many errors to effectively work through.
 
@@ -261,9 +279,9 @@ This methodology is sensible for large stacks, where running the whole app on Ar
 
 If you've reached this step, congratulations! Your application is running on Arm. The next action is to ensure it is running optimally. 
 
-### 3.1 Measure performance
+### Measure performance
 
-Once the application is running you can measure performance. This can be as simple as timing an application or may involve using performance analysis tools.
+Once the application is running, you can measure performance. This can be as simple as timing an application or may involve using performance analysis tools.
 
 You may have some performance analysis methodologies you already follow, continue to use those. 
 
@@ -276,13 +294,13 @@ Below are some additional performance analysis tips and methodologies specific t
 - [Learn about Large System Extensions (LSE)](/learning-paths/servers-and-cloud-computing/lse/)
 - [Compare Arm Neoverse and Intel x86 top-down performance analysis with PMU counters](/learning-paths/cross-platform/topdown-compare/)
 
-### 3.2 Ask for help
+### Ask for help
 
-Your goal is to understand if the performance you see will translate into the expected price performance advantages. If you are unsure or need additional help you can ask the Arm developer community for help. Join the [Arm Developer Program](https://www.arm.com/resources/developer-program) and talk directly to other developers and Arm Experts on Discord.
+Your goal is to understand if the performance you see will translate into the expected price-performance advantages. If you are unsure or need additional help, you can ask the Arm developer community for help. Join the [Arm Developer Program](https://www.arm.com/resources/developer-program) and talk directly to other developers and Arm Experts on Discord.
 
-### DELIVER: Deploy your application to users
+### Deploy your application to users
 
-Once the price performance gains are confirmed, you can plan for a larger deployment. 
+Once the price-performance gains are confirmed, you can plan for a larger deployment.
 
 Deployment is outside the scope of this guide, but here are some concepts to keep in mind:
 - Experiment with different virtual machine sizes and instance types to find the best fit for your application.
@@ -294,4 +312,4 @@ Make sure to research the details needed for these tasks by checking any places 
 
 ## Summary
 
-With this 3 step process and the provided resources, you are well positioned to migrate your applications to Arm. Happy porting!
+With this 3-step process and the provided resources, you are well positioned to migrate your applications to Arm. Happy porting!

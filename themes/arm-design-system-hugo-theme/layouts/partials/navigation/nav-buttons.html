@@ -29,17 +29,19 @@ Called from:
             <!-- Create HTML buttons -->
             {{ if $backlink }}  <!-- Not on intro page -->
                 <div class="c-col">
-                    <ads-button name="{{$backname}}" class="inner-learning-path-navbtn-element {{$backnum}}-weight" style="float:left" onclick="window.location.href={{$backlink}}" level="secondary">
-                        Back
-                    </ads-button>
+                    <span class="learning-path-nav-control" style="float:left">
+                        <ads-button level="secondary" aria-hidden="true" inert>Back</ads-button>
+                        <a class="learning-path-nav-hitarea inner-learning-path-navbtn-element {{$backnum}}-weight" name="{{$backname}}" href="{{$backlink}}" aria-label="Back"></a>
+                    </span>
                 </div>
             {{ end }}
 
             {{ if $nextlink }} <!-- Not on last page -->
                 <div class="c-col">
-                    <ads-button name="{{$nextname}}" class="inner-learning-path-navbtn-element {{$nextnum}}-weight" style="float:right;" onclick="window.location.href={{$nextlink}}" level="primary">
-                        Next
-                    </ads-button>
+                    <span class="learning-path-nav-control" style="float:right">
+                        <ads-button level="primary" aria-hidden="true" inert>Next</ads-button>
+                        <a class="learning-path-nav-hitarea inner-learning-path-navbtn-element {{$nextnum}}-weight" name="{{$nextname}}" href="{{$nextlink}}" aria-label="Next"></a>
+                    </span>
                 </div>
             {{else}}
                 <!-- On next steps page, provide CTA to return to all LPs -->

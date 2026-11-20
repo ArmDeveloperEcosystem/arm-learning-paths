@@ -9,7 +9,8 @@
         <ads-search id="homepage-search-bar" theme="dark" has-search-button placeholder="Search all content..." search-index="learning-paths"></ads-search>
     </div>
 
-    <section class="homepage-section" aria-label="Learning Paths">
+    <section class="homepage-section" aria-labelledby="homepage-topics">
+        <h2 id="homepage-topics" class="sr-only">Explore by topic</h2>
         <div class="u-display-grid u-gap-1 sm:u-grid-columns-1 md:u-grid-columns-2 lg:u-grid-columns-2 xl:u-grid-columns-3 xxl:u-grid-columns-3">
             {{ range (where .Site.Pages "Params.maintopic" true).ByWeight }}
                 {{ $iconFilename := printf "%s.svg" (.Title | urlize) }}
@@ -20,27 +21,27 @@
                 {{ else if eq .Title "Embedded and Microcontrollers" }}
                     {{ $iconFilename = "Microcontroller.svg" }}
                 {{ end }}
-                <ads-card class="homepage-topic-card" has-hover-effect link="{{ .RelPermalink }}">
+                <ads-card class="homepage-topic-card" has-hover-effect>
                     <ads-card-content slot="content">
-                        <div class="homepage-topic-content">
+                        <a class="homepage-topic-content homepage-card-link" href="{{ .RelPermalink }}">
                             <img alt="" aria-hidden="true" src="{{ printf "img/main-topic-icons/%s" $iconFilename | relURL }}" width="60" height="45" />
                             <div>
                                 <h3>{{ replace .Title "and" "&" }}</h3>
                                 <p>{{ .Params.subtitle }}</p>
                             </div>
-                        </div>
+                        </a>
                     </ads-card-content>
                 </ads-card>
             {{ end }}
-            <ads-card class="homepage-topic-card" has-hover-effect link="{{ "tag/ml/" | relURL }}">
+            <ads-card class="homepage-topic-card" has-hover-effect>
                 <ads-card-content slot="content">
-                    <div class="homepage-topic-content">
+                    <a class="homepage-topic-content homepage-card-link" href="{{ "tag/ml/" | relURL }}">
                         <img alt="" aria-hidden="true" src="{{ "img/main-topic-icons/AI_2.svg" | relURL }}" width="60" height="45" />
                         <div>
                             <h3>AI</h3>
                             <p>Train, deploy, and optimize AI models across Arm-powered platforms.</p>
                         </div>
-                    </div>
+                    </a>
                 </ads-card-content>
             </ads-card>
         </div>
@@ -54,10 +55,12 @@
                 (dict "title" "Courses" "link" "courses/" "description" "Build deeper knowledge through structured lessons.")
                 (dict "title" "Insights" "link" "insights/" "description" "Get answers to specific technical questions.")
             }}
-                <ads-card class="homepage-resource-card" link="{{ .link | relURL }}">
+                <ads-card class="homepage-resource-card">
                     <ads-card-content slot="content">
-                        <h3>{{ .title }}</h3>
-                        <p>{{ .description }}</p>
+                        <a class="homepage-card-link" href="{{ .link | relURL }}">
+                            <h3>{{ .title }}</h3>
+                            <p>{{ .description }}</p>
+                        </a>
                     </ads-card-content>
                 </ads-card>
             {{ end }}
@@ -68,8 +71,8 @@
         <h2 id="homepage-contribute">Contribute as an author</h2>
         <p>Share your expertise with the Arm developer community. Follow our authoring guidelines to create and submit a Learning Path or Install Guide.</p>
         <div class="homepage-contribution-actions">
-            <ads-cta-button size="medium" level="primary" data-link="{{ "learning-paths/cross-platform/_example-learning-path/" | relURL }}">View Contribution Instructions</ads-cta-button>
-            <ads-cta-button size="medium" level="secondary" data-link="{{ .Param "github_repo" }}">Go to GitHub Repository</ads-cta-button>
+            <a class="c-cta-button is-primary is-medium" data-theme="dark" href="{{ "learning-paths/cross-platform/_example-learning-path/" | relURL }}">View Contribution Instructions</a>
+            <a class="c-cta-button is-secondary is-medium" data-theme="dark" href="{{ .Param "github_repo" }}">Go to GitHub Repository</a>
         </div>
     </section>
 
@@ -83,9 +86,9 @@
         window.open(developer_search_url, '_blank');
     };
 
-    document.querySelectorAll('.homepage-contribution-actions ads-cta-button').forEach((button) => {
-        button.addEventListener('click', () => {
-            window.location.href = button.dataset.link;
+    customElements.whenDefined('ads-card').then(() => {
+        document.querySelectorAll('.homepage ads-card').forEach((card) => {
+            card.shadowRoot?.querySelector('.c-card')?.removeAttribute('tabindex');
         });
     });
 </script>

@@ -38,30 +38,30 @@ generated_summary_faq:
     You'll set up Compute Flow and use it to build an audio-to-audio pipeline on an Arm-based device. First, you'll learn about Compute Flow and bricks. Then, you'll create an application that connects speech-to-text, translation,
     and text-to-speech bricks. You'll start with the Parakeet model for speech-to-text. Then, you'll switch to Moonshine by installing its implementation and model, rebuilding, and selecting its
     manifest. Finally, you'll compare speech-to-text performance between the two models.
-  # faqs:
-  # - question: How do I know my Mac is using the Arm architecture?
-  #   answer: >-
-  #     Run `uname -m` in your terminal and confirm that the output is `arm64`.
-  # - question: What should I do if Compute Flow reports missing dependencies?
-  #   answer: >-
-  #     Run `compute-flow check`, follow the suggested action for each missing dependency, and rerun
-  #     `compute-flow check` to confirm the result. The check does not install dependencies or test
-  #     whether a compiler can compile and link a program.
-  # - question: Which option should I use to switch from Parakeet to Moonshine for speech recognition?
-  #   answer: >-
-  #     Install the Moonshine speech-to-text implementation and model, rebuild with
-  #     `compute-flow build native`, then pass `moonshine_manifest_base_en.json` to your application
-  #     or CLI. You can keep your Python script unchanged because both variants implement `stt.v1`.
-  # - question: What result should I expect when the pipeline runs successfully?
-  #   answer: >-
-  #     You should see the transcription and translation in your terminal. The application saves
-  #     synthesized audio to `translated_french.wav` by default, or to the path you provide with
-  #     `--output`.
-  # - question: How do I compare the two speech-to-text variants correctly?
-  #   answer: >-
-  #     Run the built speech-to-text CLI for both models on the same 9.963-second mono 16 kHz sample,
-  #     changing only the manifest, and compare their total `run()` times. These sample timings do not
-  #     assess transcription accuracy.
+  faqs:
+  - question: How do I know that my Mac is using the Arm architecture?
+    answer: >-
+      Run `uname -m` in your terminal and confirm that the output is `arm64`.
+  - question: What should I do if Compute Flow reports missing dependencies?
+    answer: >-
+      Run `compute-flow check`, follow the suggested action for each missing dependency, and rerun
+      `compute-flow check` to confirm each dependency is available. The check doesn't install dependencies or test
+      whether a compiler can compile and link a program.
+  - question: Which option should I use to switch from Parakeet to Moonshine for speech recognition?
+    answer: >-
+      Install the Moonshine speech-to-text implementation and model, rebuild with
+      `compute-flow build native`, then pass `moonshine_manifest_base_en.json` to your application
+      or CLI. You can keep your Python script unchanged because both variants implement `stt.v1`.
+  - question: What result should I expect when the pipeline runs successfully?
+    answer: >-
+      You should see the transcription and translation in your terminal. The application saves
+      synthesized audio to `translated_french.wav` by default, or to the output file that you specify with
+      `--output`.
+  - question: How do I compare the two speech-to-text variants correctly?
+    answer: >-
+      Run the built speech-to-text CLI for both models on the same 9.963-second mono 16 kHz sample,
+      changing only the manifest. Compare their total `run()` times. These sample timings don't
+      assess transcription accuracy.
 # END generated_summary_faq
 
 author: Kieran Hejmadi

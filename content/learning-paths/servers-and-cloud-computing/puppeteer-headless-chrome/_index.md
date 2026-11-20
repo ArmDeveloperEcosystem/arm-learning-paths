@@ -37,32 +37,32 @@ generated_summary_faq:
     Then, you'll run three scripts against a local Hugo site to check page content, validate a
     documentation link, and capture a screenshot. Finally, you'll add a workflow that runs the
     scripts on an Arm runner.
-#   faqs:
-#   - question: Which Chrome package should I install on my distribution, and how do I verify it
-#       installed correctly?
-#     answer: >-
-#       Use the official arm64 Chrome package that matches your distribution: Debian-based for Ubuntu
-#       24.04 or RPM-based for Amazon Linux 2023. After installation, run `google-chrome --version`
-#       and expect a Chrome version number.
-#   - question: How do I confirm my Node.js version meets Puppeteer’s requirement?
-#     answer: >-
-#       You need Node.js 18 or later for Puppeteer. Install Node.js v20 as shown, then run
-#       `node --version` and `npm --version` to verify the installed versions.
-#   - question: What do I need in my repository before writing and running the tests against the
-#       Hugo site?
-#     answer: >-
-#       You authenticate with GitHub using `gh auth login`, then fork and clone the Ecosystem Dashboard
-#       for Arm repository. Add your Puppeteer scripts inside the clone so you can commit them for the
-#       workflow.
-#   - question: How do I verify the GitHub Actions workflow?
-#     answer: >-
-#       You can trigger it manually with **Run workflow** on the `main` branch. In a successful run,
-#       the three test steps and screenshot upload show green check marks, and you can download the
-#       `dashboard-screenshot` artifact from the run summary.
-#   - question: Which runner architecture should I choose for GitHub Actions?
-#     answer: >-
-#       Use `runs-on: ubuntu-24.04-arm` to select a GitHub-hosted runner with 64-bit Arm hardware,
-#       matching your Arm server's architecture.
+  faqs:
+  - question: Which Chrome package should I install on my distribution, and how do I verify it
+      installed correctly?
+    answer: >-
+      Use the official arm64 Chrome package that matches your distribution: Debian-based for Ubuntu
+      24.04 or RPM-based for Amazon Linux 2023. After installation, run `google-chrome --version`
+      and expect a Chrome version number.
+  - question: How do I confirm my Node.js version meets Puppeteer requirements?
+    answer: >-
+      Install Node.js 22, then run `node --version` to confirm it reports 22.12 or later.
+      Run `npm --version` to confirm that npm is available.
+  - question: What do I need in my repository before writing and running the tests against the
+      Hugo site?
+    answer: >-
+      Authenticate with GitHub using `gh auth login`, then fork and clone the Ecosystem Dashboard
+      for Arm repository. Add your Puppeteer scripts inside the clone so that you can commit them for the
+      workflow.
+  - question: How do I verify the GitHub Actions workflow?
+    answer: >-
+      You can run it manually with **Run workflow** on the `main` branch. In a successful run,
+      the three test steps and screenshot upload show green check marks. You can download the
+      `dashboard-screenshot` artifact from the run summary.
+  - question: Which runner architecture should I choose for GitHub Actions?
+    answer: >-
+      Use `runs-on: ubuntu-24.04-arm` to select a GitHub-hosted runner with 64-bit Arm hardware,
+      matching the architecture of your Arm server.
 # END generated_summary_faq
 
 author: Jason Andrews

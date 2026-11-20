@@ -14,11 +14,11 @@ pinned_learning_paths:
 - sve2-match
 - performix-microarchitecture
 operatingsystems_filter:
-- Android: 3
-- Linux: 286
-- macOS: 21
+- Android: 4
+- Linux: 290
+- macOS: 24
 - other: 1
-- Windows: 18
+- Windows: 19
 pinned_modules:
 - module:
     name: Recommended getting started learning paths
@@ -61,6 +61,7 @@ tools_software_languages_filter:
 - Arm Compiler for Linux: 1
 - Arm Development Studio: 3
 - Arm ISA: 1
+- Arm Metis: 1
 - Arm Performance Libraries: 3
 - Arm Performix: 12
 - Arm Streamline: 1
@@ -86,6 +87,7 @@ tools_software_languages_filter:
 - AWS Lambda: 1
 - Azure: 2
 - Azure CLI: 5
+- Azure Cobalt 200: 5
 - Azure Portal: 1
 - Bash: 9
 - bash: 2
@@ -97,7 +99,7 @@ tools_software_languages_filter:
 - boto3: 1
 - bpftool: 1
 - Buildkite: 1
-- C: 16
+- C: 17
 - Capstone: 1
 - Cargo: 1
 - cassandra-stress: 1
@@ -115,6 +117,7 @@ tools_software_languages_filter:
 - Cloud SQL: 1
 - CMake: 7
 - Codex: 1
+- Compute Flow: 1
 - Confidential Containers: 1
 - Couchbase: 1
 - CPP: 22
@@ -128,7 +131,7 @@ tools_software_languages_filter:
 - Demo: 3
 - DevStack: 1
 - Django: 2
-- Docker: 43
+- Docker: 42
 - Docker Buildx: 1
 - dotnet: 5
 - Dynatrace: 1
@@ -153,10 +156,10 @@ tools_software_languages_filter:
 - Gardener: 1
 - GCC: 32
 - gdb: 1
-- Gemma: 1
+- Gemma: 2
 - Generative AI: 15
 - Gerrit: 1
-- Git: 2
+- Git: 3
 - GitHub: 3
 - GitHub Actions: 4
 - GitHub CLI: 1
@@ -173,12 +176,12 @@ tools_software_languages_filter:
 - Google Cloud: 2
 - Google Cloud Pub/Sub: 1
 - Google Dataflow: 1
-- Google Kubernetes Engine: 1
+- Google Kubernetes Engine: 2
 - Google Test: 1
 - Grafana: 1
 - Groovy: 1
 - gRPC: 1
-- gVisor: 1
+- gVisor: 2
 - Hadoop: 1
 - HammerDB: 1
 - Helm: 4
@@ -199,7 +202,7 @@ tools_software_languages_filter:
 - JAX: 1
 - Jenkins: 1
 - JMH: 1
-- JSON: 1
+- JSON: 2
 - K3s: 2
 - Kafka: 2
 - Kata Containers: 1
@@ -225,7 +228,7 @@ tools_software_languages_filter:
 - Linux kernel: 1
 - Litmus7: 1
 - llama-roofline: 1
-- llama.cpp: 5
+- llama.cpp: 6
 - LlamaIndex: 1
 - LLM: 13
 - LLVM: 2
@@ -292,7 +295,7 @@ tools_software_languages_filter:
 - Puppet: 1
 - Puppeteer: 1
 - Pytest: 1
-- Python: 64
+- Python: 67
 - PyTorch: 16
 - Qdrant: 1
 - QEMU: 1
@@ -311,7 +314,8 @@ tools_software_languages_filter:
 - RME: 10
 - Ruby: 2
 - Runbook: 72
-- Rust: 3
+- Rust: 4
+- SARIF: 1
 - scikit-learn: 2
 - Sentence Transformers: 1
 - Service Mesh: 1
@@ -352,6 +356,7 @@ tools_software_languages_filter:
 - tuxmake: 1
 - TypeScript: 2
 - Ubuntu: 1
+- uv: 1
 - Vectorscan: 1
 - Velox: 1
 - Veraison: 3
@@ -362,7 +367,9 @@ tools_software_languages_filter:
 - VMAS: 1
 - VS Code: 1
 - vvenc: 1
+- wasmCloud: 1
 - Web Server: 1
+- WebAssembly: 1
 - Whisper: 1
 - WindowsPerf: 1
 - WordPress: 3
@@ -378,8 +385,8 @@ tools_software_languages_filter:
 weight: 1
 platforms_filter:
 - Arm AGI CPU: 26
-- AWS Graviton: 98
-- Google Axion: 119
-- Microsoft Azure Cobalt: 102
+- AWS Graviton: 100
+- Google Axion: 121
+- Microsoft Azure Cobalt: 103
 - Oracle Cloud Infrastructure (OCI) Ampere Compute: 61
 ---

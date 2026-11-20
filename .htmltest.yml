@@ -11,3 +11,8 @@ IgnoreURLs:
   - "127.0.0.1"
   - "192.168.64.39"
   - "/livereload.js"
+  # Single-page app that uses client-side hash routes (#/sme/...), not element IDs
+  - "^/apps/sme-visualisations/#/"
+  # Homepage cards link to sections that aren't built from this repo
+  - "^/courses/$"
+  - "^/insights/$"

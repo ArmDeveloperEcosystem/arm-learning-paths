@@ -27,41 +27,47 @@ For large matrices, the most efficient arrangement is to process four tiles at a
 
 This visualization processes three tiles at a time arranged in a 1 x 3 horizontal block. This arrangement requires four vector loads per three tiles of partial results. For a large matrix, it would be slightly less efficient than 2 x 2. However, this visualization uses a small matrix of size 10 x 10.
 
-Consider scalable vector length equal to 128 bits and 32-bit data elements. Using a 2 x 2 tile arrangement for a 10 x 10 matrix would require four passes. Using a 1 x 3 tile arrangement requires only three passes. For small matrices whose dimensions are known at compile time, the 2 x 2 configuration is sometimes outperformed by other tiling arrangements.
+Consider Scalable Vector Length of 128 bits with 32-bit data element size. Using a 2 x 2 tile arrangement for a 10 x 10 matrix would require four passes. Using a 1 x 3 tile arrangement requires only three passes. For small matrices whose dimensions are known at compile time, the 2 x 2 configuration is sometimes outperformed by other tiling arrangements.
 
-For larger scalable vector lengths, the calculus can change. For scalable vector length equal to 256 bits, the 2 x 2 configuration would require only one pass. Alternatively, the 1 x 3 configuration would require two passes. 
+For larger scalable vector lengths, the calculus can change. For Scalable Vector Length of 256 bits, the 2 x 2 configuration would require only one pass. However, the 1 x 3 configuration would require two passes. 
 
-In this visualization, the code is functionally correct on all devices regardless of scalable vector length. However, it's optimized for devices with scalable vector length equal to 128 bits.
+In this visualization, the code is functionally correct on all devices regardless of Scalable Vector Length. However, it's optimized for devices with scalable vector length equal to 128 bits.
 
 ## Trace packed GEMM loads and ZA accumulation
 
-If the embedded view doesn't load, [open the GEMM visualization in a separate browser tab](/apps/sme-visualisations/#/sme/gemm32-packed). Switch between the Learning Path and the visualization tab.
+To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/gemm32-packed" target="_blank" rel="noopener">open the GEMM visualization in a separate browser tab</a>. Move the tab to a separate window to view the visualization and Learning Path side by side.
 
-Follow the data from input through accumulation and storage. The following table summarizes how the visualization processes the input matrices in blocks:
+Follow the data from input through accumulation and storage. The following table summarizes how the visualization processes the first three tile-sized blocks, corresponding to the first four rows of input matrix data:
 
-| Stage | Visualization steps | Operation |
+| Stage | Number of steps | Operation |
 |---|---|---|
-| Load the first row | 1–4 | Load the first row of **A Packed Data** into Z0 and the first row of **B Padded Data** into Z1–Z3. |
-| Calculate the outer products | 5–7 | Calculate the matrix outer products in ZA0–ZA2. |
-| Process the second row | 8–14 | Load the second row of **A Packed Data** into Z0 and the second row of **B Padded Data** into Z1 - Z3. Accumulate the outer products in ZA0–ZA2. |
-| Process the remaining rows | 15-28| Repeat the load and accumulation operations for rows three and four. |
-| Store the results | 29-40 | Store rows of ZA0–ZA2 in **Output Matrix Data**. |
-| Clear the tiles | 41-43 | Zero the ZA0–ZA2 tiles to prepare for the next block of four rows. |
+| Load the first row | 4 | Load the first row of **A Packed Data** into Z0 and the first row of **B Padded Data** into Z1–Z3. |
+| Calculate the outer products | 3 | Calculate the matrix outer products in ZA0–ZA2. |
+| Process the second row | 7 | Load the second row of **A Packed Data** into Z0 and the second row of **B Padded Data** into Z1 - Z3. Accumulate the outer products in ZA0–ZA2. |
+| Process the remaining rows | 14 | Repeat the load and accumulation operations for rows three and four. |
+| Store the results | 12 | Store rows of ZA0–ZA2 in **Output Matrix Data**. |
+| Clear the tiles | 3 | Zero the ZA0–ZA2 tiles to prepare for the next block of four rows. |
 
 ### Processing subsequent blocks
 
 After clearing ZA0–ZA2, the algorithm moves down by one tile-sized block in **A Packed Data**. It returns to the leftmost column of **B Padded Data**.
 
-Processing the next block requires 43 steps:
+Processing the next three tile-sized blocks that correspond to the next four rows shown purple in the top diagram, requires another 43 steps:
 
-- 28 steps to load four rows and calculate their outer products
-- 12 steps to store the results in **Output Matrix Data**
-- Three steps to clear the ZA tiles
+| Stage | Number of steps | Operation |
+|---|---|---|
+| Calculate outer products | 28 | Load data and calculate outer products for four rows |
+| Store to memory | 12 | Store the results to **Output Matrix Data** |
+| Clear the ZA tiles | 3 | Clear the ZA tiles ready for the next blocks |
 
-The final block requires 34 steps:
+Processing the final three tile-sized blocks that correspond to the last two rows shown orange in the top diagram, requires 34 steps:
 
-- 28 steps to load four rows and calculate their outer products
-- Six steps to store the results in **Output Matrix Data** because only two output rows remain
+| Stage | Number of steps | Operation |
+|---|---|---|
+| Calculate outer products | 28 | Load data and calculate outer products for four rows |
+| Store to memory | 6 | Store the results to **Output Matrix Data**. Only six steps because just two rows remain. |
+
+&nbsp;
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/gemm32-packed"
@@ -86,7 +92,7 @@ This is 13 instructions, which is an efficiency of 0.08 output elements per inst
 
 Consider a larger matrix of 12 x 12. The Scalable Matrix Extension (SME) implementation would take the same 120 cycles to process 144 output elements. This is 1.44 output elements per instruction. The scalar implementation would produce the same 0.08 output elements per instruction.
 
-For larger scalable vector lengths, the efficiency is much higher. Every time the scalable vector length doubles, the efficiency quadruples for large matrices. For small matrices, edge effects can limit these gains. For example, for scalable vector length  equal to 512 bits, each ZA tile is 16 x 16 elements of 32-bit data. This is 256 elements in total. The 10 x 10 matrix is only 100 elements. It therefore uses just under 40% of the available throughput of one tile.
+For larger Scalable Vector Length, the efficiency is much higher. Every time the Scalable Vector Length doubles, the efficiency quadruples for large matrices. For small matrices, edge effects can limit these gains. For example, for Scalable Vector Length of 512 bits, each ZA tile is 16 x 16 elements of 32-bit data. This is 256 elements in total. The 10 x 10 matrix is only 100 elements. It therefore uses just under 40% of the available throughput of one tile.
 
 ## What you've learned and what's next
 

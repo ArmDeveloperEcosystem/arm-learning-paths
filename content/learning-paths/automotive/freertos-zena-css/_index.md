@@ -40,17 +40,17 @@ generated_summary_faq:
     it on the standalone Cortex-R82AE FVP. You'll then configure Zena CSS and load the binary directly
     into Safety Island Cluster 1. Next, you'll substitute the firmware to validate secure boot. Finally, you'll apply
     and inspect a Yocto patch that makes FreeRTOS selectable.
-  # faqs:
-  # - question: What should I check if the FreeRTOS application fails early on the standalone Cortex-R82AE FVP?
-  #   answer: Check each bring-up stage before moving to the next. You can use Arm Development Studio for source-level debugging or Tarmac Trace to locate where startup stops.
-  # - question: What must I change before loading FreeRTOS directly into Zena CSS Cluster 1?
-  #   answer: You need to use the Zena CSS memory map, Safety Island UART address, and Cluster 1 interrupt configuration. For direct loading, configure GIC view 0 and start the FVP reference counter so the scheduler tick can run.
-  # - question: How do I test FreeRTOS through the normal Zena CSS secure boot flow?
-  #   answer: Build the `zena_css_fvp` binary, substitute it for the Cluster 1 payload in `do_sign_images()`, rebuild the signed firmware image, and boot the Zena CSS FVP. At the SI CL1 console, enter `ping` and check for responses from cores 0 through 3.
-  # - question: How do I select FreeRTOS instead of Zephyr in the Yocto build?
-  #   answer: Apply the supplied `freertos-yocto-integration.patch` to a clean Zena CSS checkout. In `kas menu`, select **RD-Aspen Cfg2** and **FreeRTOS** under **Safety Island RTOS**, then run `kas build`.
-  # - question: How can I verify that Yocto built and booted the FreeRTOS image?
-  #   answer: Check that `pn-buildlist` contains `freertos-demos-cl1` instead of `zephyr-demos-cl1`, then inspect the deployed FreeRTOS binary and RSE flash image. Boot the FVP and enter `ping` at the SI CL1 console; responses from all four cores confirm runtime operation.
+  faqs:
+  - question: What should I check if the FreeRTOS application fails early on the standalone Cortex-R82AE FVP?
+    answer: Check each bring-up stage before moving to the next. You can use Arm Development Studio for source-level debugging or Tarmac Trace to locate where startup stops.
+  - question: What do I need to change before loading FreeRTOS directly into Zena CSS Cluster 1?
+    answer: You need to use the Zena CSS memory map, Safety Island UART address, and Cluster 1 interrupt configuration. For direct loading, configure GIC view 0 and start the FVP reference counter so that the scheduler tick can run.
+  - question: How do I test FreeRTOS through the normal Zena CSS secure boot flow?
+    answer: Build the `zena_css_fvp` binary, substitute it for the Cluster 1 payload in `do_sign_images()`, rebuild the signed firmware image, and boot the Zena CSS FVP. At the Safety Island Cluster 1 console, enter `ping` and check for responses from cores 0 through 3.
+  - question: How do I select FreeRTOS instead of Zephyr in the Yocto build?
+    answer: Apply the supplied `freertos-yocto-integration.patch` to a clean Zena CSS checkout. Run `kas menu arm-zena-css/Kconfig`, select **RD-Aspen Cfg2**, then choose **Baremetal** or **Virtualization** and **FreeRTOS** under **Safety Island RTOS**. Run `kas build`.
+  - question: How can I verify that Yocto built and booted the FreeRTOS image?
+    answer: Check that `pn-buildlist` contains `freertos-demos-cl1` instead of `zephyr-demos-cl1`. Old deploy artifacts can remain, so the presence of the file alone doesn't prove which recipe was selected. Inspect the deployed FreeRTOS binary and RSE flash image, then boot the FVP and enter `ping` at the Safety Island Cluster 1 console. Responses from all four cores confirm runtime operation.
 # END generated_summary_faq
 
 author:

@@ -27,7 +27,7 @@ Now follow these steps:
 - In **Image**, choose **Ubuntu 24.04 LTS**, then set **Architecture** to **Arm64**.
 - In **Size**, select **See all sizes**, choose the **Dpsv7 (D-series v7)** family, then select **D4ps_v7**.
 
-   ![Azure portal VM size selection#center](images/instance.png "VM size selection in the Azure portal")
+   ![Azure portal VM size selection#center](images/instance.webp "VM size selection in the Azure portal")
 - Under **Administrator account**, set **Authentication type** to **SSH public key**.
 - Enter the `Username` for the VM.
 - Select **Generate new key pair**, select **SSH key type** (**ED25519** or **RSA**), and provide a **Key pair name**.

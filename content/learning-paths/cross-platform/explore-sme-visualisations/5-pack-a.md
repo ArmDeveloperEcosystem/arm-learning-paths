@@ -11,15 +11,21 @@ layout: learningpathall
 
 Packing changes the order of values in memory so that a matrix multiplication kernel can load those values more efficiently. The following visualization loads **Input Matrix A** values into rows of ZA, and writes columns of ZA into **Output Packed Data**. Packing changes the layout of data, but it doesn't calculate the matrix product.
 
-If the embedded visualization doesn't load, [open the Pack A visualization in a separate browser tab](/apps/sme-visualisations/#/sme/pack32-a). Switch between the Learning Path and the visualization tab.
+To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/pack32-a" target="_blank" rel="noopener">open the Pack A visualization in a separate browser tab</a>. Move the tab to a separate window to view the visualization and Learning Path side by side.
 
 ## Follow the transpose and pack algorithm
 
 Select the play button or advance manually to follow the algorithm:
 
-1. The first 10 steps load rows from **Input Matrix A** into rows of ZA0 - ZA2. Predicates are used to determine which rows are active because different implementations can have different scalable vector lengths.
-2. The next 12 steps write columns of ZA data into rows of **Output Packed Data**.
-3. The last four steps write zero-padded values. This is because the rows of **Input Matrix A** aren't an exact multiple of the ZA tile height. Predicates control which rows of ZA2 are active. As a result, they control which elements of **Output Packed Data** are zero-padded.
+| Stage | Number of steps | Operation |
+| --- | --- | --- |
+| Load matrix A | 10 | Load **Input Matrix A** into rows of ZA0–ZA2. |
+| Store packed data | 8 | Write full columns of ZA data into rows of **Output Packed Data**. |
+| Pad the final rows | 4 | Write zero-padded columns of ZA data into rows of **Output Packed Data**. The zero-padding happens because the rows of **Input Matrix A** aren't an exact multiple of the ZA tile height. |
+
+During matrix A load, predicates determine which rows are active, which in turn determines the elements of **Output Packed Data** that are zero-padded.
+
+&nbsp;
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/pack32-a"

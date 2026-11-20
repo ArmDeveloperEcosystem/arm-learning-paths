@@ -38,33 +38,33 @@ generated_summary_faq:
     and four CPU threads and compare prefill and decode throughput.
     Finally, you'll check the model response and use a separate profiled run to verify the accelerated
     operator.
-#   faqs:
-#   - question: How do I know my Mac supports SME2 before I start building?
-#     answer: >-
-#       Run `uname -m`, `sysctl hw.optional.arm.FEAT_SME`, and `sysctl hw.optional.arm.FEAT_SME2`.
-#       On a supported Apple M4 system, expect `arm64` and a value of `1` for both feature flags.
-#       If either flag reports `0`, the macOS performance comparison isn't valid.
-#   - question: Where should the Gemma 4 LiteRT-LM model land, and what files should I see after
-#       download?
-#     answer: >-
-#       You'll find the model under `$HOME/gemma4-prefill-bench/models/` in the
-#       `gemma-4-E2B-it-litert-lm/` directory. Verify that it contains
-#       `gemma-4-E2B-it.litertlm` using the checksum command in the download step.
-#   - question: Where do the build outputs and benchmark results get written so I can review them?
-#     answer: >-
-#       Look under `$HOME/gemma4-prefill-bench/`: `bazel-output-base/` holds Bazel state,
-#       `bin/` holds the saved binaries, and `results/` holds benchmark logs and metrics.
-#   - question: How do I compare the baseline and optimized XNNPACK variants correctly?
-#     answer: >-
-#       Run both variants with the provided function, using the same model and settings at one and
-#       four CPU threads. For each build and thread count, discard the first iteration as warm-up,
-#       then average `Prefill Speed` and `Decode Speed` from the second and third iterations separately.
-#   - question: What should I check if the throughput numbers look off or don’t match between runs?
-#     answer: >-
-#       Check that both variants use the same model, thread counts, and benchmark settings, with
-#       caches and profiling disabled for timed runs. To verify the optimized kernel, run the separate
-#       short benchmark with profiling enabled and look for `Fully Connected (NC, PQS8, QC2W)` in its
-#       summary. Results can vary by device and conditions.
+  faqs:
+  - question: How do I know that my Mac supports SME2?
+    answer: >-
+      Run `uname -m`, `sysctl hw.optional.arm.FEAT_SME`, and `sysctl hw.optional.arm.FEAT_SME2`.
+      On a supported Apple M4 system, expect `arm64` and a value of `1` for both feature flags.
+      If either flag reports `0`, the macOS performance comparison isn't valid.
+  - question: Where should the Gemma 4 LiteRT-LM model land, and what files should I see after
+      download?
+    answer: >-
+      You'll find the model under `$HOME/gemma4-prefill-bench/models/` in the
+      `gemma-4-E2B-it-litert-lm/` directory. Verify that it contains
+      `gemma-4-E2B-it.litertlm` using the checksum command in the download step.
+  - question: Where do the build outputs and benchmark results get written so I can review them?
+    answer: >-
+      Look under `$HOME/gemma4-prefill-bench/`: `bazel-output-base/` holds Bazel state,
+      `bin/` holds the saved binaries, and `results/` holds benchmark logs and metrics.
+  - question: How do I compare the baseline and optimized XNNPACK variants correctly?
+    answer: >-
+      Run both variants with the provided function, using the same model and settings at one and
+      four CPU threads. For each build and thread count, discard the first iteration as warm-up.
+      Average `Prefill Speed` and `Decode Speed` from the second and third iterations separately.
+  - question: What should I check if the throughput numbers look off or don’t match between runs?
+    answer: >-
+      Check that both variants use the same model, thread counts, and benchmark settings, with
+      caches and profiling disabled for timed runs. To verify the optimized kernel, run the separate
+      short benchmark with profiling enabled and look for `Fully Connected (NC, PQS8, QC2W)` in its
+      summary. Results can vary by device and conditions.
 # END generated_summary_faq
 
 author: Annie Tallund

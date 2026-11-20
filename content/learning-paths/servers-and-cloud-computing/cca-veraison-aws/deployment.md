@@ -6,33 +6,154 @@ weight: 5
 layout: learningpathall
 ---
 
+## Prepare your build environment
+
+Lets first establish what AWS region will be used. On your Ubuntu host:
+
+```bash
+# Set this to the AWS region to be used
+export AWS_REGION=us-east-1
+```
+
+Now, still in your Ubuntu host, run the following:
+
+```bash
+# Leave any previous python venv...
+deactivate
+hash -r
+
+# Install virtual-environment support for Ubuntu's Python 3.12.
+sudo apt update
+sudo apt install python3.12-venv jq
+
+# Use a fresh directory, preserving the existing ~/venv/aws environment.
+export VERAISON_AWS_VENV="$HOME/venv/veraison-aws-py312"
+
+/usr/bin/python3.12 -m venv "$VERAISON_AWS_VENV"
+source "$VERAISON_AWS_VENV/bin/activate"
+
+# Set this to fix issues with the make deploy scripts
+export VERAISON_DEB=
+
+# Fixes and requirements for make deploy
+sudo apt install gettext-base
+
+# Follows AWS_REGION
+export AWS_DEFAULT_REGION=${AWS_REGION}
+
+# Verify what bootstrap will use.
+python --version
+python -m pip --version
+```
+
+You should see output similar to:
+
+```output
+Python 3.12.3
+pip 24.0 from /usr/lib/python3/dist-packages/pip (python 3.12)
+```
+
+Your Ubuntu environment is now ready for creating the Veraison deployment
+
 ## Create the Veraison Deployment
 Now that your AWS account, internet domain and certificate are prepared, you are ready to deploy the Veraison services into AWS.
 
 This process is highly automated, but will take between 30 to 60 minutes, as several resources need to be created in AWS.
 
-The deployment process is documented in [Veraison's GitHub repository](https://github.com/veraison/services/blob/main/deployments/aws/README.md). 
+The deployment process is documented in [Veraison's GitHub repository](https://github.com/veraison/services/blob/ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800/deployments/aws/README.md).
 
 You can follow the instructions below to deploy the Veraison services into AWS:
 
-Use the [Bootstrap](https://github.com/veraison/services/tree/main/deployments/aws#bootstrap) process first to clone the Veraison source code from GitHub and set up your build environment. This will take care of installing the dependencies that you need on your development machine.
+Use the [Bootstrap](https://github.com/veraison/services/blob/ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800/deployments/aws/README.md#bootstrap) process first to clone the Veraison source code from GitHub and set up your build environment. This will take care of installing the dependencies that you need on your development machine.
+
+The pinned services revision uses CoRIM-store commit `a2a60b6a11ad`, as specified in its [dependency file](https://github.com/veraison/services/blob/ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800/go.mod#L44). Its AWS deployment script still selects an older CoRIM-store tool for the sentinel image. Update that tool's pin before creating the image so database initialization includes the migrations required by the services, including the `tokens` table.
+
+Lets initialize our deployment build environment:
 
 ```bash
-cd $HOME
+mkdir $HOME/cca_veraison
+cd $HOME/cca_veraison
 git clone https://github.com/veraison/services.git
-git -C services checkout ebadb73
+git -C services checkout 61cf6088c1dc4f69cdd08e6a05f75c9fd3b2c6a6
+```
+
+Then, we can bootstrap our deployment:
+
+```bash
 cd services/deployments/aws
 make bootstrap
 ```
-Once your build environment is bootstrapped, you will use the [Quickstart](https://github.com/veraison/services/tree/main/deployments/aws#quickstart) procedure to provide some AWS configuration and create the deployment.
 
-You'll provide AWS-specific settings, including the IDs for your VPC and subnets, and the CIDR block allowed access to the deployment. In this deployment, you will use `misc/arm.cfg` file for example. Make sure you update `VERAISON_AWS_REGION` to the same region where you created your AWS certificate for your new domain.`VERAISON_AWS_DNS_NAME` needs to match the domain name you chose. 
+Once your build environment is bootstrapped, you will use the [Quickstart](https://github.com/veraison/services/blob/ebadb733d44ba2f8ffefdae49a0f0d3c1bfc9800/deployments/aws/README.md#quickstart) procedure to provide some AWS configuration and create the deployment.
 
-Once the account-specific config file is created, define `AWS_ACCOUNT_CFG` environment variable to point to it and then create the deployment.
+Next lets confirm that we have some additional requirements setup for the deployment to succeed:
 
 ```bash
 source env/env.bash
-export AWS_ACCOUNT_CFG=misc/arm.cfg  # replace with path to your config
+
+# Ensure that we have the packages needed
+"$VERAISON_AWS_VENV/bin/python" -m pip install --force-reinstall "envsubst==0.1.5"
+
+# Replace the venv's command wrapper with GNU envsubst.
+ln -sf /usr/bin/envsubst "$VIRTUAL_ENV/bin/envsubst"
+hash -r
+
+envsubst --version
+"$VERAISON_AWS_VENV/bin/python" -c \
+  'from envsubst import envsubst; print("Python envsubst import OK")'
+```
+
+Your output should resemble:
+
+```output
+envsubst (GNU gettext-runtime) 0.21
+Copyright (C) 2003-2020 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+Written by Bruno Haible.
+Python envsubst import OK
+```
+
+You'll provide AWS-specific settings, including the IDs for your VPC and subnets, and the CIDR block allowed access to the deployment. In this deployment, you will use `misc/arm.cfg` file for example. Make sure you update `VERAISON_AWS_REGION` to the same region where you created your AWS certificate for your new domain.`VERAISON_AWS_DNS_NAME` needs to match the domain name you chose.
+
+Please add the following to your `misc/arm.cfg` as well below `VERAISON_AWS_REGION`:
+
+```bash
+AWS_DEFAULT_REGION="$VERAISON_AWS_REGION"
+AWS_REGION="$VERAISON_AWS_REGION"
+```
+
+An example of a configured `misc/arm.cfg` looks something like this (your AWS region and DNS name may/will likely be different though):
+
+```output
+##############################################################################
+# Veraison Deployment Account-specific settings.
+# These settings are specific to the Arm account used by the core development
+# team. Users without access to this account must provide their own version of
+# this file (or configure these settings inside deployment.cfg).
+##############################################################################
+VERAISON_AWS_REGION=us-east-1
+AWS_DEFAULT_REGION="$VERAISON_AWS_REGION"
+AWS_REGION="$VERAISON_AWS_REGION"
+VERAISON_AWS_ADMIN_CIDR=217.140.96.0/20
+VERAISON_AWS_VPC_CIDR=10.1.0.0/16
+VERAISON_AWS_DNS_NAME=veraison-example.com
+IAM_LOGGER_ROLE_NAME=
+IAM_INSTANCE_PROFILE_NAME=
+IAM_PERMISSION_BOUNDARY_ARN=
+```
+
+{{% notice Note %}}
+Some AWS accounts may have permissions boundaries enabled (such as assumed role accounts). In this case you will need to create the logger and instance profile roles and specify the permissions boundary arn specifically. Most standard AWS accounts do not require this though so you can just leave them empty. 
+{{% /notice %}}
+
+Once the account-specific config file is created, define `AWS_ACCOUNT_CFG` environment variable to point to it and then create the deployment:
+
+```bash
+cp ./misc/arm.cfg $HOME/veraison-aws.cfg
+export AWS_ACCOUNT_CFG="$HOME/veraison-aws.cfg"
+source env/env.bash "$AWS_ACCOUNT_CFG"
 make deploy
 ```
 
@@ -59,7 +180,7 @@ This command outputs a status report for the deployment. If successful, it inclu
 Use the following command to test the REST API endpoint of the verification service. Remember to substitute `example-veraison.com` with the domain name that you used in the initial step, but you will need to keep the `services` prefix as shown.
 
 ```bash
-curl https://services.example-veraison.com:8443/.well-known/veraison/verification
+curl https://services.example-veraison.com:8443/.well-known/veraison/verification | jq
 ```
 
 If it succeeds, this command produces some JSON output, including the EAR verification key.
@@ -67,7 +188,7 @@ If it succeeds, this command produces some JSON output, including the EAR verifi
 Use the following command to test the REST API endpoint of the endorsement provisioning service. Remember to substitute `example-veraison.com` with the domain name that you used in the initial step.
 
 ```bash
-curl https://services.example-veraison.com:9443/.well-known/veraison/provisioning
+curl https://services.example-veraison.com:9443/.well-known/veraison/provisioning | jq
 ```
 
 This command produces JSON output containing the list of supported media types for endorsement.

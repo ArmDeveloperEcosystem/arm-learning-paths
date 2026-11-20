@@ -40,30 +40,30 @@ generated_summary_faq:
     matching OpenCV installations and prepare the model, labels, and image. You'll compile and run the
     C++ application against both builds. Finally, you'll check its detections, and benchmark image operations, full
     preprocessing, and in-memory pipeline latency under consistent conditions.
-  # faqs:
-  # - question: How do I know I’m running a 64-bit Arm userspace before building?
-  #   answer: >-
-  #     Run `uname -m`. The expected output is `aarch64`.
-  # - question: Where should I place the YOLOX model and the test image?
-  #   answer: >-
-  #     Store them in the `static-detection` directory created earlier under your working folder.
-  #     Use the downloaded filenames shown in the guide so the example application can find them.
-  # - question: What system information should I record with my benchmark results?
-  #   answer: >-
-  #     Record `/etc/os-release`, the kernel from `uname -r`, and `lscpu` output for topology and CPU
-  #     features. KleidiCV selects implementations based on available CPU features, so you need this
-  #     context to compare runs.
-  # - question: How should I prepare the board for consistent timing measurements?
-  #   answer: >-
-  #     Close unnecessary applications and allow the board to cool before each run. Keep the board and
-  #     operating system, OpenCV source and compiler, release build configuration, model and image,
-  #     warm-up and measured iteration counts, OpenCV thread count, CPU affinity, and CPU frequency
-  #     governor consistent.
-  # - question: How do I compare baseline and KleidiCV performance results?
-  #   answer: >-
-  #     Keep the inputs and common build settings the same, with KleidiCV enabled only in the second
-  #     OpenCV build. Compare image-operation, full preprocessing, and end-to-end timings to separate
-  #     local preprocessing gains from overall pipeline changes.
+  faqs:
+  - question: How do I know I’m running a 64-bit Arm userspace before building?
+    answer: >-
+      Run `uname -m`. The expected output is `aarch64`.
+  - question: Where should I place the YOLOX model and the test image?
+    answer: >-
+      Store them in the `static-detection` directory created earlier under your working folder.
+      Use the downloaded filenames shown in the guide so the example application can find them.
+  - question: What system information should I record with my benchmark results?
+    answer: >-
+      Record `/etc/os-release`, the kernel from `uname -r`, and `lscpu` output for topology and CPU
+      features. KleidiCV selects implementations based on available CPU features, so you need this
+      context to compare runs.
+  - question: How should I prepare the board for consistent timing measurements?
+    answer: >-
+      Close unnecessary applications and allow the board to cool before each run. Keep the board and
+      operating system, OpenCV source and compiler, release build configuration, model and image,
+      warm-up and measured iteration counts, OpenCV thread count, CPU affinity, and CPU frequency
+      governor consistent.
+  - question: How do I compare baseline and KleidiCV performance results?
+    answer: >-
+      Keep the inputs and common build settings the same, with KleidiCV enabled only in the second
+      OpenCV build. Compare image-operation, full preprocessing, and end-to-end timings to separate
+      local preprocessing gains from overall pipeline changes.
 # END generated_summary_faq
 
 author: Jett Zhou

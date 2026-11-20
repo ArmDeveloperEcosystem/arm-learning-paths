@@ -1,22 +1,64 @@
 ---
-title: Understand Arm Pointer Authentication
+title: Understand pointer authentication on Arm
 
 minutes_to_complete: 30
 
-who_is_this_for: This is an advanced topic for software developers interested in understanding Arm Pointer Authentication.
+who_is_this_for: This is an advanced topic for software developers interested in understanding Arm pointer authentication.
 
 learning_objectives:
-    - Create a simple application on an Arm server with Pointer Authentication
-    - Compile the application with and without Pointer Authentication to inspect the instructions generated
-    - Exploit the applications with and without Pointer Authentication to demonstrate how Pointer Authentication instructions enhance security.
+    - Create a simple application on an Arm server with pointer authentication.
+    - Compile the application with and without pointer authentication to inspect the instructions generated.
+    - Exploit the applications with and without pointer authentication to see how pointer authentication instructions enhance security.
 
 prerequisites:
-    - An Arm based instance from a cloud service provider, or an on-premise Arm server.
-    - If needed, review [Get started with Arm-based cloud instances](/learning-paths/servers-and-cloud-computing/csp/) to learn how to deploy Arm in the cloud. These learning paths also point to more advanced learning paths that show how to automate the deployment of Arm instances at different cloud providers.
+    - An Arm based instance from a [cloud service provider](/learning-paths/servers-and-cloud-computing/csp/), or an on-premise Arm server
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-11-18T20:22:02Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 389c20aec90a820d791237ed7444ec28dfb7334bb7fb0816134a76fc5ea60b8a
+  summary_generated_at: '2026-11-18T20:22:02Z'
+  summary_source_hash: 389c20aec90a820d791237ed7444ec28dfb7334bb7fb0816134a76fc5ea60b8a
+  faq_generated_at: '2026-11-18T20:22:02Z'
+  faq_source_hash: 389c20aec90a820d791237ed7444ec28dfb7334bb7fb0816134a76fc5ea60b8a
+  summary: >-
+    You'll compare an Arm application built with and without pointer authentication. First, you
+    prepare a vulnerable C example and inspect the instructions in both builds. Then, you run an
+    exploit against the unprotected binary and observe its effect. Finally, you try the same
+    exploit against the protected binary to see how pointer authentication changes the outcome.
+  faqs:
+  - question: Which binary should I point the exploit at?
+    answer: >-
+      Use the unprotected build named `main_nopac`. If your build uses a different name, select
+      the binary you built without pointer authentication.
+  - question: What result should I expect when the exploit succeeds on the unprotected app?
+    answer: >-
+      When the payload diverts control to `func2`, you should see the message "Hello from
+      func2!" and then an interactive shell.
+  - question: How do I confirm that my PAC-enabled build includes pointer authentication?
+    answer: >-
+      Inspect the disassembly of both binaries and look for pointer authentication instructions in the
+      protected build. Compare the instruction streams before you run the exploit.
+  - question: How do I know that the exploit is blocked on the PAC-enabled binary?
+    answer: >-
+      Run the same exploit against the protected binary and check that you don't reach `func2`
+      or spawn a shell.
+  - question: What should I check if exploit.py fails to run or does nothing?
+    answer: >-
+      Confirm that `pwntools` is installed and that the script targets the correct path to
+      the unprotected binary. Also verify that you're running on the Arm system where you built the
+      application.
+# END generated_summary_faq
 
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

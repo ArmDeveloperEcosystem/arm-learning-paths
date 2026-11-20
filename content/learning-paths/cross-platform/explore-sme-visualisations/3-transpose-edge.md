@@ -11,22 +11,22 @@ layout: learningpathall
 
 Real matrices don't always divide evenly into vector-sized blocks. The following visualization adds a two-element edge beyond the complete 32-bit blocks. It separates **Input Matrix Data** from **Output Matrix Data**. That way, you can follow the remaining values without losing sight of the original input.
 
-If the embedded visualization doesn't work, [open the incomplete-edge transpose visualization in a separate browser tab](/apps/sme-visualisations/#/sme/transpose32-overflow2). Switch between the Learning Path and the visualization tab.
+To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/transpose32-overflow2" target="_blank" rel="noopener">open the incomplete-edge transpose visualization in a separate browser tab</a>. Move the tab to a separate window to view the visualization and Learning Path side by side.
 
 ## Follow the edge values
 
-Select the play button or advance manually to follow the algorithm. Focus on how the last two columns of **Input Matrix Data** are loaded into ZA0 - ZA2 as partial rows in step 5:
+Select the play button or advance manually to follow the algorithm. The table shows how each group of **Input Matrix Data** columns moves through ZA0–ZA2:
 
-1. The first 10 steps load rows from the first four columns of the input matrix into rows of ZA0-ZA2.
-2. The next 12 steps store data sequentially into the output matrix from columns of ZA0-ZA2.
-3. The next 10 steps load rows from the next four columns of the input matrix into rows of ZA0-ZA2.
-4. The next 12 steps store data sequentially into the output matrix from columns of ZA0-ZA2.
-5. The next 10 steps load rows from the last two columns of the input matrix into rows of ZA0-ZA2. 
-    
-    Only two data values per row are loaded into ZA tiles. This is achieved by using a predicate mask that marks only two columns as active.
-6. The last six steps store data sequentially into the output matrix from columns of ZA0-ZA2. 
-    
-    Only two columns are active, which is why only six steps are needed instead of 12.
+| Stage | Number of steps | Operation |
+| --- | --- | --- |
+| Load the first block | 10 | Load rows from the first four columns of **Input Matrix Data** into rows of ZA0–ZA2. |
+| Store the first block | 12 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. |
+| Load the second block | 10 | Load rows from the next four columns of **Input Matrix Data** into rows of ZA0–ZA2. |
+| Store the second block | 12 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. |
+| Load the edge block | 10 | Load partial rows from the last two columns of **Input Matrix Data** into rows of ZA0–ZA2. Only two data values per row are loaded into ZA tiles. This is achieved by using a predicate mask that marks only two columns as active. |
+| Store the edge block | 6 | Store data sequentially in **Output Matrix Data** from columns of ZA0–ZA2. Only two columns are active during the final store, so it takes six steps instead of 12. |
+
+&nbsp;
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/transpose32-overflow2"

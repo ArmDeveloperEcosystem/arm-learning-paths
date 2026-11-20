@@ -41,33 +41,33 @@ generated_summary_faq:
     release-summary image so that Hermes can identify the incorrect deployment decision, inspect the
     Python checker, and repair it. You'll run all four acceptance tests and review the code diff.
     Finally, you'll identify ways to extend the agent and add more capabilities.
-  # faqs:
-  # - question: How do you use the three SSH sessions?
-  #   answer: >-
-  #     Keep the model server running in the first SSH session. Use the second session to install
-  #     and run Hermes after checking the endpoint. Open a third session temporarily to inspect the
-  #     Docker container, then use it to run the host-side acceptance tests after the agent repair.
-  # - question: What should you check to confirm Hermes is installed before testing the model connection?
-  #   answer: >-
-  #     Run `~/muse-agent/bin/hermes chat --help`. Expect `Hermes installed` and the CLI help
-  #     output; this confirms the CLI launches. Verify the model connection separately using the
-  #     checks in this section.
-  # - question: Why do external network calls fail from Hermes tools?
-  #   answer: >-
-  #     Your terminal tool runs inside a Docker container with network access disabled, so external
-  #     calls fail. To verify, inspect the container from your third SSH session and confirm its
-  #     network mode is `none`.
-  # - question: How do you ask Hermes to interpret the image before it repairs the checker?
-  #   answer: >-
-  #     Start Hermes with `--image "$HOME/muse-agent/release-summary.png"` and ask it to report the
-  #     passed, failed, and skipped counts, the displayed decision, and whether deployment should
-  #     proceed. Tell it not to run tools or change files yet. Then use the image as context and ask
-  #     it to diagnose and repair `/demo/output/release_tool.py`.
-  # - question: What should you expect after Hermes repairs the release checker?
-  #   answer: >-
-  #     Expect all four acceptance tests to pass and print `OK`. Read
-  #     `~/muse-agent/demo/output/fix-notes.md` and inspect the diff to confirm that the notes match
-  #     the code and test output. Confirm that failed tests block deployment.
+  faqs:
+  - question: How do I use the three SSH sessions?
+    answer: >-
+      Keep the model server running in the first SSH session. Use the second session to install
+      and run Hermes after checking the endpoint. Open a third session temporarily to inspect the
+      Docker container, then use it to run the host-side acceptance tests after the agent repair.
+  - question: What should I check to confirm Hermes is installed before testing the model connection?
+    answer: >-
+      Run `~/muse-agent/bin/hermes chat --help`. Expect `Hermes installed` and the CLI help
+      output. This confirms that the CLI launches.
+  - question: Why do external network calls fail from Hermes tools?
+    answer: >-
+      Your terminal tool runs inside a Docker container with network access disabled, so external
+      calls fail. To verify, inspect the container from your third SSH session and confirm its
+      network mode is `none`.
+  - question: How do I ask Hermes to interpret the image before it repairs the checker?
+    answer: >-
+      Start Hermes with `--image "$HOME/muse-agent/release-summary.png"` and ask it to report the
+      passed, failed, and skipped counts, the displayed decision, and whether deployment should
+      proceed. Tell it not to run tools or change files yet. Then use the image as context and ask
+      it to diagnose and repair `/demo/output/release_tool.py`.
+  - question: How do I verify a Hermes repair of the release checker?
+    answer: >-
+      Run all four acceptance tests and check for `OK`. If any test fails, use its output to
+      revise the repair and run the tests again. Read `~/muse-agent/demo/output/fix-notes.md`
+      and inspect the diff to confirm that the notes match the code and test output.
+      Confirm that failed tests block deployment.
 # END generated_summary_faq
 
 author: Matt Cossins

@@ -11,7 +11,7 @@ layout: learningpathall
 
 A transpose exchanges rows and columns. ZA tiles make this easy because you can move vectors of values into rows. You can then extract those values back as columns, or vice versa. 
 
-The following visualization shows a transpose in-place, where no external memory is used. The transposed result overwrites the original data. If the embedded visualization doesn't load, [open the 32-bit transpose visualization in a separate browser tab](/apps/sme-visualisations/#/sme/transpose32). Switch between the Learning Path and the visualization tab.
+The following visualization shows a transpose in-place, where no external memory is used. The transposed result overwrites the original data. To keep this Learning Path open while exploring, <a href="/apps/sme-visualisations/#/sme/transpose32" target="_blank" rel="noopener">open the 32-bit transpose visualization in a separate browser tab</a>. Move the tab to a separate window to view the visualization and Learning Path side by side.
 
 The description of each step appears immediately under the **32-bit Transpose** title. It includes the tile addressing. The highlights show the memory and ZA locations involved.
 
@@ -21,12 +21,16 @@ With Scalable Vector Length equal to 256 bits and accessing 32-bit data elements
 
 The transpose is achieved by loading data into rows and storing it back from columns. Select the play button or advance manually to follow the algorithm:
 
-1. The first 16 steps load data sequentially from memory into rows of the ZA0 and ZA1 tiles.
-2. The next 16 steps load data sequentially from memory into rows of the ZA2 and ZA3 tiles.
-3. The next 16 steps store data sequentially into memory from columns of the ZA0 and ZA2 tiles.
-4. The final 16 steps store data sequentially into memory from columns of the ZA1 and ZA3 tiles.
+| Stage | Number of steps | Operation |
+| --- | --- | --- |
+| Load first two tiles | 16 | Load data sequentially from memory into rows of the ZA0 and ZA1 tiles. |
+| Load next two tiles | 16 | Load data sequentially from memory into rows of the ZA2 and ZA3 tiles. |
+| Store two tiles | 16 | Store data sequentially into memory from columns of the ZA0 and ZA2 tiles. |
+| Store remaining tiles | 16 | Store data sequentially into memory from columns of the ZA1 and ZA3 tiles. |
 
 The original matrix had data increasing sequentially along each row. The resulting transposed matrix instead has data increasing sequentially down each column. To see the original data, use browser reload to reset the visualization.
+
+&nbsp;
 
 {{< fullscreen-iframe
     src="/apps/sme-visualisations/#/sme/transpose32"

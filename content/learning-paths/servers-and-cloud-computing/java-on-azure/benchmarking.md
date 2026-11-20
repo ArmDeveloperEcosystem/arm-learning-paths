@@ -174,7 +174,7 @@ These results were collected on a **Standard_D4ps_v7** Cobalt 200 VM (4 vCPUs, 1
 - **Mode (`thrpt`)** measures operations per unit of time. Here, one operation constructs and returns one response string.
 - **Cnt** is the number of measured iterations across all forks: two forks with three measurements each give six samples.
 - **Score** is the mean measured throughput in operations per second.
-- **Error** is the half-width of JMH’s reported confidence interval; it is not the standard deviation.
+- **Error** is the half-width of the confidence interval that JMH reports; it is not the standard deviation.
 - **Warmup** lets the JVM compile and optimize code before collecting measurements.
 
 Use `results.json` to inspect the per-iteration results and reported uncertainty. Longer measurements and additional forks can help investigate variability, but do not guarantee repeatability.

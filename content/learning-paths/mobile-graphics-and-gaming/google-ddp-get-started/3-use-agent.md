@@ -85,7 +85,7 @@ adb -s localhost:51795 shell getprop ro.product.cpu.abi
 
 ## Review what Antigravity handled
 
-Your request gave Antigravity a device, an outcome, and spending limits. Antigravity translated that into device discovery, a reservation, a connection, and a working screen. Its report should include the session expiration and the location of a saved screenshot. The report should also include enough device information to confirm that Antigraviity connected to the phone that you approved.
+Your request gave Antigravity a device, an outcome, and spending limits. Antigravity translated that into device discovery, a reservation, a connection, and a working screen. Its report should include the session expiration and the location of a saved screenshot. The report should also include enough device information to confirm that Antigravity connected to the phone that you approved.
 
 Keep the same `agy` session open for the Arm performance experiment that you'll perform next. Antigravity will use this connection to install the tools, choose compatible Arm optimizations, measure their effect, and release the phone.
 

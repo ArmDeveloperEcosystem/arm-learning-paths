@@ -9,19 +9,19 @@ layout: learningpathall
 
 ## Understand what the CMSIS Pack provides
 
-The [ExecuTorch CMSIS Pack](https://www.keil.arm.com/packs/executorch-pytorch/overview/) is a *source Pack*, not a prebuilt runtime library. It supplies the ExecuTorch runtime, registration code, backends, and
+After producing a model-specific AI layer using the CMSIS-ExecuTorch workflow, inspect what the CMSIS Pack provides to this implementation. 
+
+The [ExecuTorch CMSIS Pack](https://www.keil.arm.com/packs/executorch-pytorch/overview/) is a source Pack, not a prebuilt runtime library. The Pack supplies the ExecuTorch runtime, registration code, backends, and
 operators as selectable CMSIS components.
 
-A `.pack` file is a ZIP-compatible archive. Its Pack Description file, or
-PDSC, records component names, source files, dependencies, versions, and
-conditions.
+A `.pack` file is a ZIP-compatible archive. Its Pack Description file (PDSC) records component names, source files, dependencies, versions, and conditions.
 
 CMSIS-Toolbox uses that metadata to add only the chosen components to the
 application build. A CMSIS project can select only the components required by its lowered graph
 instead of maintaining one large source list. Arm Compiler then compiles those sources for the Cortex-M55
 target with the rest of the project. 
 
-## See which Packs were resolved
+### See which Packs were resolved
 
 CMSIS-Toolbox has already acquired the software Packs needed by the project.
 Inspect the generated Pack lock:
@@ -45,17 +45,17 @@ mixed model:
 
 They have different responsibilities:
 
-- `PyTorch::ExecuTorch@1.5.1` supplies the ExecuTorch runtime, Ethos-U backend,
-  Cortex-M operator wrappers, registration code, and portable operators.
-- `ARM::CMSIS-NN@8.0.0` supplies the optimized neural-network kernels called by
+- `PyTorch::ExecuTorch@1.5.1` supplies the ExecuTorch runtime, Ethos-U backend, and
+  Cortex-M operator wrappers. It also supplies registration code and portable operators.
+- `ARM::CMSIS-NN@8.0.0` supplies the optimized neural-network kernels that are called by
   the Cortex-M convolution wrapper.
 
-The Pack lock records exact resolved versions so later builds don't silently
+The Pack lock records exact resolved versions so that later builds don't silently
 move to newer installed Packs.
 
-## Trace the graph into the AI layer
+### Trace the graph into the AI layer
 
-The AI layer is a generated CMSIS software layer that embeds the model and declares the runtime, backends, operators, and libraries needed to execute it.
+The AI layer is a generated CMSIS software layer that embeds the model. It declares the runtime, backends, operators, and libraries needed to run the model.
 
 Open the AI layer generated from the `.pte` operator list:
 
@@ -96,16 +96,17 @@ This file is the handover between model export and firmware build:
 The runtime, kernel utilities, and registration components provide the common
 machinery needed to load the `.pte` and dispatch its operators.
 
-You will also see `ARM_NN_ENABLE_F32` and `ARM_NN_ENABLE_F16` definitions in
+You'll also see `ARM_NN_ENABLE_F32` and `ARM_NN_ENABLE_F16` definitions in
 the generated layer. CMSIS-NN 8.0.0 needs them because its Pack component
-compiles optional floating-point source files. The fallback convolution in
-this model remains INT8; these definitions don't change its data type.
+compiles optional floating-point source files. 
+
+The fallback convolution in this model remains INT8. These definitions don't change its data type.
 
 ## What you've learned and what's next
 
-You have followed graph targets into two versioned source Packs and a concrete
+You've followed graph targets into two versioned source Packs and a concrete
 component list. Pack acquisition, dependency resolution, and component
 selection are now one connected workflow rather than separate downloads.
 
-Next, you will see how the reusable CMSIS project combines this generated AI
+Next, you'll see how the reusable CMSIS project combines this generated AI
 layer with the Corstone-300 board and application layers.
