@@ -6,16 +6,10 @@ weight: 2
 layout: "learningpathall"
 ---
 
-## What is the Azure Cobalt 100 Arm-based processor?
+## What is the Azure Cobalt 200 Arm-based processor?
 
-Cobalt 100 is Microsoft's first Arm-based server processor, built using the Armv9 Neoverse-N2 CPU. 
+Azure Cobalt 200 is Microsoft's second-generation Arm-based server processor, built on Arm Neoverse Compute Subsystems V3 (CSS V3). It is designed for cloud-native, scale-out Linux workloads such as the CI/CD runners and containerized applications in this Learning Path.
 
-The Cobalt 100 processor is optimized for the performance of scale-out cloud-based applications. 
+Azure Cobalt 200 VMs include several series, such as the general-purpose Dpsv7 and Dplsv7 series and the memory-optimized Epsv7 series. In this Learning Path, you use the general-purpose Dpsv7 series.
 
-The Azure Cobalt 100 VM instances include two series: 
-
-* The general-purpose `Dpsv6 and Dplsv6` virtual machine series. 
-* The memory-optimized `Epsv6` virtual machine series. 
-
-To learn more about Azure Cobalt 100, refer to the blog ["Announcing the preview of new Azure VMs based on the Azure Cobalt 100 processor"](https://techcommunity.microsoft.com/t5/azure-compute-blog/announcing-the-preview-of-new-azure-vms-based-on-the-azure/ba-p/4146353).
-
+To learn more about Azure Cobalt 200, see Microsoft's [introduction to Azure Cobalt 200 virtual machines](https://azure.microsoft.com/en-us/blog/new-azure-cobalt-200-vms-deliver-50-performance-improvement-fully-optimized-for-modern-agentic-ai-workloads/).

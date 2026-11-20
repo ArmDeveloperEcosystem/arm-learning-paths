@@ -16,7 +16,7 @@ You can use the cluster to deploy an example application, WordPress.
 
 ## Deploy WordPress Example
 
-### Create Terraform files
+### Create the Kubernetes manifest files
 
 The yaml files below are a modified version of the [Kubernetes WordPress Tutorial](https://kubernetes.io/docs/tutorials/stateful-application/mysql-wordpress-persistent-volume/) in the Kubernetes documentation. 
 
@@ -89,7 +89,7 @@ spec:
         tier: mysql
     spec:
       containers:
-      - image: mysql:8.0.30
+      - image: mysql:8.4.13
         name: mysql
         env:
         - name: MYSQL_DATABASE
@@ -170,7 +170,7 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: wordpress:6.0.2-apache
+      - image: wordpress:7.1.5-apache
         name: wordpress
         env:
         - name: WORDPRESS_DB_HOST
@@ -196,7 +196,7 @@ spec:
           claimName: wp-pv-claim
 ```
 
-### Apply the Terraform files 
+### Apply the manifests
 
 Run `kubectl apply` to update the configuration:
 
@@ -218,7 +218,7 @@ deployment.apps/wordpress-mysql created
 
 ### Confirm WordPress is running
 
-1. Check on volume claims to confirm the 20 Gb of storage has been created for MySQL and WordPress:
+1. Check on volume claims to confirm the 20 GiB of storage has been created for MySQL and WordPress:
 
 ```console
 kubectl get pvc
@@ -227,9 +227,9 @@ kubectl get pvc
 The output is similar to:
 
 ```output
-NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-mysql-pv-claim   Bound    pvc-b5ed7959-9a05-4759-a178-86f7e1393be0   20Gi       RWO            managed-csi    107s
-wp-pv-claim      Bound    pvc-cb03c97b-adab-4e4f-ad91-fcfaa69b1a30   20Gi       RWO            managed-csi    107s
+NAME             STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+mysql-pv-claim   Bound    pvc-c1948fd9-1ba1-49e2-9b8e-734fe28bc03e   20Gi       RWO            managed-csi    <unset>                 11s
+wp-pv-claim      Bound    pvc-91cf7663-f500-40eb-8011-5c9a27bed3a3   20Gi       RWO            managed-csi    <unset>                 11s
 ```
 
 2. Verify the WordPress and MySQL pods are running:
@@ -242,8 +242,8 @@ The output is similar to:
 
 ```output
 NAME                               READY   STATUS    RESTARTS   AGE
-wordpress-6c5db6d5d7-zznww         1/1     Running   0          5m11s
-wordpress-mysql-75467487bf-zs5vk   1/1     Running   0          5m11s
+wordpress-7b75d8584c-sjt75         1/1     Running   0          61s
+wordpress-mysql-585c4786dd-rq74n   1/1     Running   0          61s
 ```
 
 3. Verify that the persistent volumes have been attached:
@@ -256,8 +256,8 @@ The output is similar to:
 
 ```output
 NAME                                                                   ATTACHER             PV                                         NODE                               ATTACHED   AGE
-csi-643e8fc7abcd16d5e98eeffcb0cff690c20aa2fb90a55c38889a570295fa07d2   disk.csi.azure.com   pvc-b5ed7959-9a05-4759-a178-86f7e1393be0   aks-demopool-85935132-vmss000001   true       5m52s
-csi-eecaead981dd085e638d388afaa2a325019fcda81bfcda91e867b69d41fc4482   disk.csi.azure.com   pvc-cb03c97b-adab-4e4f-ad91-fcfaa69b1a30   aks-demopool-85935132-vmss000001   true       5m52s
+csi-0637ef93dc59f8511dc360b2ea1e1e27b06b2dc01333d1e9b54a2ebd1c5dbfca   disk.csi.azure.com   pvc-c1948fd9-1ba1-49e2-9b8e-734fe28bc03e   aks-demopool-15110407-vmss000002   true       59s
+csi-f2eaeaf495901df3b7c1aeeb21b006581f4a52b52da669417b6a7c876b1f8964   disk.csi.azure.com   pvc-91cf7663-f500-40eb-8011-5c9a27bed3a3   aks-demopool-15110407-vmss000000   true       58s
 ```
 
 4. Get the external IP address of the WordPress deployment:
@@ -269,25 +269,25 @@ kubectl get svc
 The output is similar to:
 
 ```output
-NAME              TYPE           CLUSTER-IP   EXTERNAL-IP     PORT(S)        AGE
-kubernetes        ClusterIP      10.0.0.1     <none>          443/TCP        21m
-wordpress         LoadBalancer   10.0.69.21   20.10.212.247   80:31829/TCP   7m23s
-wordpress-mysql   ClusterIP      None         <none>          3306/TCP       7m22s
+NAME              TYPE           CLUSTER-IP    EXTERNAL-IP       PORT(S)        AGE
+kubernetes        ClusterIP      10.0.0.1      <none>            443/TCP        6m50s
+wordpress         LoadBalancer   10.0.90.248   172.193.248.164   80:32351/TCP   13s
+wordpress-mysql   ClusterIP      None          <none>            3306/TCP       13s
 ```
 
 The IP address in the `EXTERNAL-IP` column is the one to use.
 
 5. Open the external IP in a browser.
 
-The WordPress welcome screen will be displayed. 
+The WordPress language selection screen is displayed.
 
-![aks3 #center](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/assets/71631645/fb2ca43c-59d9-4a1f-8163-7d09759366b6)
+![WordPress installation page with a language selection list and a Continue button #center](_images/wordpress-setup.webp "WordPress language selection screen")
 
 You have successfully installed WordPress on your Arm-based AKS cluster.
 
 ### Clean up resources
 
-Run `terraform destroy` to delete all resources created.
+Run `terraform destroy` in the directory that contains your Terraform files to delete the AKS cluster and the resource group. This also deletes the WordPress volumes and the load balancer.
 
 ```console
 terraform destroy
