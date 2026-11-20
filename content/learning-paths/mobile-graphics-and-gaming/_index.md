@@ -13,13 +13,13 @@ pinned_learning_paths:
 - gemma4-kleidiai-sme2
 - nfru-unreal
 operatingsystems_filter:
-- Android: 59
-- Linux: 56
-- macOS: 27
-- Windows: 26
+- Android: 62
+- Linux: 58
+- macOS: 30
+- Windows: 27
 subjects_filter:
 - Agentic AI: 0
-- AI/ML: 50
+- AI/ML: 51
 - Gaming: 6
 - Graphics: 11
 - Performance and Architecture: 39
@@ -29,10 +29,12 @@ tools_software_languages_filter:
 - 7-Zip: 1
 - ADB: 1
 - adb: 2
+- Agent Skills: 1
 - Android: 6
 - Android NDK: 4
 - Android SDK: 1
 - Android Studio: 20
+- Antigravity: 1
 - Arm AI Portal: 9
 - Arm Development Studio: 1
 - Arm Mobile Studio: 1
@@ -41,10 +43,12 @@ tools_software_languages_filter:
 - Bash: 2
 - Bazel: 2
 - C: 7
+- C++: 1
 - CameraX: 1
 - CCA: 1
 - Clang: 13
 - CMake: 6
+- Compute Flow: 1
 - CPP: 22
 - csharp: 3
 - Docker: 2
@@ -56,6 +60,7 @@ tools_software_languages_filter:
 - Generative AI: 3
 - glslc: 1
 - Godot: 1
+- Google Cloud: 1
 - Google Pixel 8: 1
 - Google Test: 1
 - Gradio: 1
@@ -63,16 +68,17 @@ tools_software_languages_filter:
 - Hugging Face: 16
 - Java: 13
 - Jupyter Notebook: 3
-- KleidiAI: 11
+- KleidiAI: 12
 - Kotlin: 14
 - LiteRT: 6
 - LiteRT-LM: 1
-- llama.cpp: 5
+- llama.cpp: 6
 - LLM: 3
 - LLVM: 2
 - llvm-mca: 1
 - MCP: 1
 - MediaPipe: 3
+- ML Drift: 1
 - MLIA: 3
 - Model Explorer: 3
 - MTE: 2
@@ -80,8 +86,9 @@ tools_software_languages_filter:
 - NX: 14
 - ONNX: 1
 - ONNX Runtime: 5
+- OpenCL: 1
 - OpenGL ES: 1
-- Python: 22
+- Python: 23
 - PyTorch: 9
 - QEMU: 1
 - RenderDoc: 1
@@ -90,8 +97,8 @@ tools_software_languages_filter:
 - Rust: 2
 - SDDiskTool: 1
 - SME: 1
-- SME2: 14
-- Streamline: 2
+- SME2: 15
+- Streamline: 3
 - SVE2: 4
 - TensorFlow: 1
 - Topo: 1
@@ -101,6 +108,7 @@ tools_software_languages_filter:
 - Trusted Firmware: 1
 - Unity: 6
 - Unreal Engine: 9
+- uv: 1
 - VGF: 5
 - Visual Studio: 4
 - Visual Studio Code: 2
@@ -108,9 +116,6 @@ tools_software_languages_filter:
 - Vulkan SDK: 3
 - XNNPACK: 10
 weight: 3
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit
 # auto-generated padding to avoid Hugo YAML alias limit

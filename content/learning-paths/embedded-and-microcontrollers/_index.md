@@ -15,16 +15,16 @@ pinned_learning_paths:
 operatingsystems_filter:
 - Android: 1
 - Baremetal: 33
-- Linux: 68
-- macOS: 27
-- RTOS: 14
-- Windows: 14
+- Linux: 73
+- macOS: 28
+- RTOS: 16
+- Windows: 15
 subjects_filter:
 - Agentic AI: 2
-- AI/ML: 33
+- AI/ML: 34
 - CI-CD: 7
 - Containers and Virtualization: 11
-- Embedded Linux: 6
+- Embedded Linux: 9
 - Libraries: 5
 - Performance and Architecture: 26
 - RTOS Fundamentals: 8
@@ -50,20 +50,23 @@ tools_software_languages_filter:
 - Arm Streamline: 1
 - Arm Virtual Hardware: 15
 - Assembly: 1
-- AWS IoT Greengrass: 3
+- AWS IoT Greengrass: 6
 - Azure: 1
 - balenaCloud: 1
 - BalenaOS: 1
 - Baremetal: 1
 - Bash: 1
 - BitBake: 1
-- C: 13
+- C: 15
+- C++: 1
 - C2PA Tool: 1
 - ChatGPT: 1
 - Clang: 1
-- CMake: 4
-- CMSIS: 5
+- CMake: 5
+- CMSIS: 6
+- CMSIS Pack: 1
 - CMSIS-DSP: 1
+- CMSIS-NN: 1
 - CMSIS-Toolbox: 5
 - CNN: 1
 - Computer Vision: 1
@@ -79,11 +82,11 @@ tools_software_languages_filter:
 - Edge Impulse: 2
 - ETDump: 1
 - ETRecord: 1
-- ExecuTorch: 15
+- ExecuTorch: 16
 - ExifTool: 1
 - FastAPI: 2
 - Fusion 360: 1
-- FVP: 11
+- FVP: 12
 - Gazebo: 1
 - GCC: 19
 - Generative AI: 4
@@ -99,6 +102,7 @@ tools_software_languages_filter:
 - Keil MDK: 7
 - Keil RTX RTOS: 2
 - Keil Studio: 1
+- KleidiCV: 1
 - Kubernetes: 1
 - LeRobot: 1
 - libjpeg-turbo: 1
@@ -122,16 +126,17 @@ tools_software_languages_filter:
 - Neon: 1
 - NumPy: 1
 - Ollama: 2
-- ONNX: 1
+- ONNX: 2
 - ONNX Runtime: 1
+- OpenCV: 1
 - OpenSSH: 1
 - OpenSSL: 1
 - Paddle: 1
 - Performance analysis: 1
 - picocom: 1
 - Porcupine: 1
-- Python: 30
-- PyTorch: 11
+- Python: 33
+- PyTorch: 12
 - QEMU: 3
 - Raspberry Pi: 14
 - Reachy Mini: 1
@@ -158,7 +163,7 @@ tools_software_languages_filter:
 - TrustZone: 2
 - TVMC: 1
 - U-Boot: 1
-- vcpkg: 1
+- vcpkg: 2
 - Vela: 2
 - VGF: 1
 - Visual Studio Code: 3
@@ -166,9 +171,9 @@ tools_software_languages_filter:
 - XNNPACK: 1
 - YAML: 1
 - Yocto: 1
-- Yocto Project: 1
+- Yocto Project: 4
 - YOLO26: 1
 - Zenoh: 3
-- Zephyr: 7
+- Zephyr: 9
 weight: 5
 ---

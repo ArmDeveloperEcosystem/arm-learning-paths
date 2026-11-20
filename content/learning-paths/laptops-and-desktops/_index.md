@@ -11,11 +11,11 @@ pinned_learning_paths:
 - dgx_spark_isaac_robotics
 - learning-paths/cross-platform/multiplying-matrices-with-sme2
 operatingsystems_filter:
-- Android: 3
+- Android: 4
 - ChromeOS: 2
-- Linux: 54
-- macOS: 18
-- Windows: 50
+- Linux: 58
+- macOS: 21
+- Windows: 52
 subjects_filter:
 - Agentic AI: 4
 - AI/ML: 16
@@ -29,32 +29,36 @@ tools_software_languages_filter:
 - Alacritty: 1
 - Android Studio: 1
 - Arm Development Studio: 1
+- Arm Metis: 1
 - Arm Performance Libraries: 2
 - Arm64EC: 1
 - Assembly: 2
 - Bash: 7
-- C: 12
+- C: 13
 - CCA: 1
 - Clang: 14
 - CMake: 6
+- Compute Flow: 1
 - CPP: 13
 - csharp: 6
 - CSS: 1
-- Docker: 13
+- CUDA: 1
+- Docker: 14
 - dotnet: 13
-- ExecuTorch: 2
+- ExecuTorch: 3
 - FastAPI: 1
 - FFmpeg: 1
 - GCC: 13
 - Gemma 4: 1
 - Generative AI: 1
-- Git: 1
+- Git: 2
 - GitHub: 3
 - GitHub Actions: 1
 - GitLab: 2
 - Google Benchmark: 1
 - Google Test: 1
 - Gradio: 1
+- Hermes Agent: 1
 - HTML: 2
 - Hugging Face: 4
 - Hyper-V: 1
@@ -63,6 +67,7 @@ tools_software_languages_filter:
 - IsaacLab: 2
 - IsaacSim: 2
 - JavaScript: 2
+- JSON: 1
 - KleidiCV: 1
 - Kubernetes: 1
 - KVM: 1
@@ -80,6 +85,7 @@ tools_software_languages_filter:
 - MSVC: 1
 - MTE: 1
 - MuJoCo: 1
+- Muse Glimmer: 1
 - Neon: 1
 - Neovim: 1
 - Node.js: 3
@@ -90,7 +96,7 @@ tools_software_languages_filter:
 - PGO: 1
 - PowerShell: 1
 - Pytest: 1
-- Python: 25
+- Python: 28
 - PyTorch: 3
 - QEMU: 1
 - Qt: 2
@@ -101,8 +107,9 @@ tools_software_languages_filter:
 - RME: 1
 - Runbook: 17
 - Rust: 2
+- SARIF: 1
 - Sherpa-ONNX: 1
-- SME2: 3
+- SME2: 4
 - SmolVLA: 2
 - SSH: 2
 - Supertonic 3: 1
@@ -113,6 +120,7 @@ tools_software_languages_filter:
 - TorchAO: 1
 - Trusted Firmware: 1
 - Ubuntu: 1
+- uv: 1
 - Visual Studio: 14
 - Visual Studio Code: 14
 - vLLM: 1
@@ -126,6 +134,4 @@ tools_software_languages_filter:
 - Xamarin Forms: 1
 - XNNPACK: 1
 weight: 2
-# auto-generated padding to avoid Hugo YAML alias limit
-# auto-generated padding to avoid Hugo YAML alias limit
 ---
