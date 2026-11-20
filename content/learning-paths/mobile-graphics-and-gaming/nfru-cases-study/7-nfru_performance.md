@@ -1,7 +1,7 @@
 ---
 title: Analyze and adjust NFRU frame pacing
 description: Measure NFRU render FPS, present FPS, GPU and neural workload, and frame pacing, then tune the pace adjuster for a sustainable presentation rate.
-weight: 8
+weight: 9
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
@@ -34,11 +34,13 @@ There are two FPS values to distinguish:
 | Metric           | Meaning                                                 |
 |------------------|---------------------------------------------------------|
 | Render FPS       | Real frames produced by the engine                      |
-| Present FPS      | Frames shown to the display, including generated frames |
+| Present FPS      | Plugin presentation-timing counter, including generated frames |
 | Render Interval  | Time between real rendered frames                       |
-| Present Interval | Time between displayed frames                           |
+| Present Interval | Interval reported by the plugin presenter                           |
 
-Consider the following example values:
+The plugin derives Present FPS from its presenter timings. This counter does not independently verify physical display cadence or unique frames reaching the panel. Use a separate presentation or display measurement when you need that evidence.
+
+Consider the following presentation scenario:
 
 ```text
 Render FPS       = 30 FPS
@@ -104,34 +106,24 @@ R0 ---- G0 ---- R1 ---- G1 ---- R2
 
 If these frames aren't presented at regular intervals, the motion might look uneven even though more frames are being produced.
 
-## Remove common pacing limits for profiling
+## Control frame pacing for comparable profiling
 
-When you want to measure the maximum present FPS that NFRU can reach, disable the pacing systems that might cap or smooth presentation timing. Use this setup for profiling and investigation only. For normal gameplay testing, frame pacing is still important because it keeps presentation intervals stable and reduces visible stutter.
+Choose a presentation target supported by the device and keep it identical across comparison runs. Record the accepted target and the observed render and present counters. Don't assume that disabling VSync or the engine FPS cap removes Android frame pacing.
 
-The capture shows a frame-pacing issue where a large idle gap appears before the next submitted frame. Removing pacing caps can help you check whether the workload can produce higher present FPS when the platform isn't intentionally delaying presentation.
-
-![Streamline capture showing a frame-pacing gap with GPU idle time before the next submitted frame, highlighting why pacing caps can limit measured present FPS#center](./images/frame_pacing/frame_pacing_issue_2.png "Frame-pacing gap before the next submitted frame")
-
-To remove common software pacing limits for profiling, run the following console commands:
+On an Android device that supports a 120 FPS target, run the following after configuring the feature toggles:
 
 ```console
 r.NFRU.PaceAdjuster 0
-a.UseSwappyForFramePacing 0
 r.VSync 0
 t.MaxFPS 0
-r.SetFramePace 0
+r.SetFramePace 120
 ```
-Some commands are platform-specific, and the display refresh rate or compositor might still cap the final present FPS.
 
-These commands change the pacing behavior as follows:
+Disabling the pace adjuster can restore its saved default target, so apply the requested frame pace afterward. Confirm the accepted value in the device logs. A 120 FPS target is not a measured 120 FPS result.
 
-- `r.NFRU.PaceAdjuster 0` disables the NFRU adaptive pace adjuster.
-- `a.UseSwappyForFramePacing 0` disables Android Swappy pacing when Swappy is available.
-- `r.VSync 0` disables VSync.
-- `t.MaxFPS 0` removes the Unreal max FPS cap.
-- `r.SetFramePace 0` attempts to clear platform frame pacing.
+Keep Android Swappy pacing at the project's normal setting for the comparison. Changing `a.UseSwappyForFramePacing` is a separate experiment that can affect presentation behavior. Likewise, don't treat `r.SetFramePace 0` as a portable way to remove all limits; behavior depends on the platform frame pacer.
 
-After applying these settings, observe render FPS and present FPS again. If present FPS increases, one of the pacing systems was limiting presentation. If present FPS remains unchanged, the limit is more likely caused by render cost, NFRU processing cost, display refresh behavior, or another platform constraint.
+When you investigate idle gaps, compare timing traces with the accepted target. Pacing waits, synchronization, display behavior, and workload limits can all affect throughput. Keep interpolated-only output and debug views disabled for normal presentation measurements in development builds.
 
 ## Understand the achievable FPS uplift
 

@@ -9,7 +9,7 @@ who_is_this_for: This Learning Path is for game and graphics developers who want
 
 learning_objectives:
     - Understand how NFRU generates intermediate frames for smoother motion.
-    - Evaluate NFRU visual quality across occlusion, particle, and lighting-change scenarios.
+    - Evaluate NFRU visual quality during camera movement, object movement, occlusion, particles, and lighting changes.
     - Measure NFRU performance and tune frame pacing with Unreal Engine console variables.
     - Analyze generated frames with RenderDoc for Arm GPUs.
 
@@ -17,7 +17,8 @@ learning_objectives:
 prerequisites:
     - (Recommended) Complete [Enable Neural Frame Rate Upscaling in Unreal Engine](/learning-paths/mobile-graphics-and-gaming/nfru-unreal/)
     - Windows 11
-    - Unreal Engine 5.4 or 5.6 with Templates and Feature Pack enabled
+    - For Android captures, a device and driver meeting the current plugin requirements in the NFRU integration guide
+    - A compatible Unreal Engine C++ project, as described in the NFRU integration guide
     - Visual Studio with Desktop Development with C++ and .NET desktop build tools
     - Familiarity with Unreal Engine project setup and rendering settings
 
@@ -30,33 +31,35 @@ generated_summary_faq:
   model: gpt-5
   prompt_template: summary-faq-v3
   summary: >-
-    You'll use Project Moku, an Arm Unreal Engine sample, to evaluate NFRU on mobile GPUs. You'll enable the Arm Neural Graphics Plugin and create
-    repeatable reference cuts. Using the reference cuts with Streamline and RenderDoc, you'll validate frame generation,
-    inspect visual differences, and measure NFRU performance. You'll analyze occlusion, particle, and lighting-change scenarios before tuning
-    NFRU for your own Unreal Engine content.
+    You'll inspect NFRU results from Project Moku, Arm's internal Unreal Engine project, and apply the
+    evaluation workflow to your own content. You'll enable the Arm Neural Graphics Plugin and prepare
+    repeatable scenes. With Streamline and RenderDoc, you'll validate frame generation, inspect camera
+    and object motion, and analyze occlusion, particles, and lighting changes. You'll then measure
+    performance and tune presentation pacing.
   faqs:
   - question: What is Project Moku used for?
     answer: >-
-      Project Moku is an Arm Unreal Engine sample that provides a controlled environment for
-      evaluating NFRU and related neural rendering techniques on supported mobile GPUs.
+      You can inspect the captured scenarios from Project Moku, Arm's internal Unreal Engine project,
+      to understand NFRU behavior. You don't need access to Moku; apply the validation and profiling
+      workflow to repeatable scenes in your own Unreal Engine project.
   - question: How does NFRU improve perceived smoothness?
     answer: >-
-      NFRU generates an intermediate frame between rendered frames, increasing the presentation
-      cadence without requiring the engine to render every displayed frame.
+      You can use NFRU to generate an intermediate frame between rendered frames, increasing presentation
+      cadence without rendering every displayed frame.
   - question: Which tools validate NFRU?
     answer: >-
       Use Streamline to confirm NFRU activity and measure GPU and neural workload. Use RenderDoc
       to inspect frame-generation events, inputs, intermediate resources, and generated output.
   - question: Which scenes are useful for evaluating NFRU visual quality?
     answer: >-
-      Test repeatable scenes with occlusion changes, alpha-blended particles, and lighting changes.
-      These scenarios expose differences around visibility, disocclusion, transparency, and
-      screen edges.
+      You can compare fast camera turns and continuous object movement to inspect scene continuity
+      and object silhouettes. You can then test occlusion changes, alpha-blended particles, and lighting
+      changes to inspect visibility, transparency, and screen edges.
   - question: How should NFRU performance be measured?
     answer: >-
-      Compare render FPS with present FPS, then check GPU and neural workload, display limits,
-      and frame-pacing gaps. Use the pace adjuster to select a presentation target the workload
-      can sustain.
+      Compare render FPS with the plugin's present FPS counter, then check GPU and neural workload
+      and frame-pacing gaps. Verify physical display cadence separately. Use the pace adjuster
+      to select a presentation target your workload can sustain.
 # END generated_summary_faq
 
 generate_summary_faq: false
