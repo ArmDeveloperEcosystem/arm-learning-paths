@@ -1,24 +1,20 @@
 ---
-title: Review C code for security vulnerabilities with Arm's Metis (AI-powered Security Code Review)
-
-draft: true
-cascade:
-    draft: true
+title: Review C code for security vulnerabilities with Arm Metis 
     
 description: Install Arm Metis, review vulnerable C code, and triage findings from a prepared libpng target.
 
 minutes_to_complete: 45
 
-who_is_this_for: This Learning Path is for developers who want to add AI-assisted security review to an existing code-review workflow. The examples in this learning path use C, but Metis is applicable to other languages as well.
+who_is_this_for: This Learning Path is for developers who want to add AI-assisted security review to an existing code-review workflow. The code in the Learning Path is in C, but Metis is applicable to other languages as well.
 
 learning_objectives:
-    - Explain how Metis uses language-aware source analysis and model reasoning
-    - Install Metis and connect it to a supported model provider
-    - Review vulnerable C code and inspect JSON and SARIF output
-    - Triage Metis findings against source code and a Magma-derived libpng diff
+    - Identify how Metis uses language-aware source analysis and model reasoning.
+    - Install Metis and connect it to a supported model provider.
+    - Review vulnerable C code and inspect JSON and SARIF output.
+    - Triage Metis findings against source code and a Magma-derived libpng diff.
 
 prerequisites:
-    - An Arm64 computer running macOS (Apple silicon) or Ubuntu/Debian Linux, or a Windows computer with an Ubuntu/Debian WSL2 environment
+    - An Arm64 computer running macOS (Apple silicon) or Ubuntu or Debian Linux, or a Windows computer with an Ubuntu or Debian WSL2 environment
     - An API key and sufficient quota for a [Metis-supported model provider](https://github.com/arm/metis/blob/metis-v2.0.0/README.md#2-set-up-llm-provider)
     - Basic familiarity with C, Git, command-line tools, and security code-review procedures
 
@@ -27,7 +23,7 @@ author:
     - Michalis Spyrou
     - Michael Koslov
 
-generate_summary_faq: false
+generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 

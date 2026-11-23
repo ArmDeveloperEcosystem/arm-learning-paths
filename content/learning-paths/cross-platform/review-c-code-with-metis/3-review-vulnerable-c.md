@@ -5,11 +5,21 @@ weight: 4
 layout: "learningpathall"
 ---
 
-## Prepare the example program
+## Prepare the example C program
 
-The [Damn Vulnerable C Program](https://github.com/hardik05/Damn_Vulnerable_C_Program) contains vulnerabilities intentionally placed and labeled in one C file. Use it first to learn the Metis review process: prepare a small target, run `review_code`, save JSON and SARIF, summarize findings, and compare source locations.
+After setting up Arm Metis, create an example C program with vulnerabilities. 
 
-In your terminal, clone the repository at the tested commit and copy `dvcp.c` into a separate review directory. The copy keeps the review target small and avoids sending the rest of the repository to Metis:
+The [Damn Vulnerable C Program](https://github.com/hardik05/Damn_Vulnerable_C_Program) contains vulnerabilities intentionally placed and labeled in one C file. 
+
+Use the program to learn the Metis review process: 
+
+- Prepare a small target.
+- Run `review_code`.
+- Save JSON and SARIF. 
+- Summarize findings.
+- Compare source locations.
+
+In your terminal, clone the repository at the tested commit, and copy `dvcp.c` into a separate review directory:
 
 ```bash
 git clone https://github.com/hardik05/Damn_Vulnerable_C_Program.git
@@ -17,6 +27,7 @@ git -C Damn_Vulnerable_C_Program checkout 8dcbd202887f587783952a320a2301de701be5
 mkdir -p dvcp-review
 cp Damn_Vulnerable_C_Program/dvcp.c dvcp-review/
 ```
+The copy keeps the review target small and avoids sending the rest of the repository to Metis.
 
 Add a short threat-model note for the review. Metis reads `.metis.md` as project context:
 
@@ -31,11 +42,11 @@ exhaustion, input validation, and cleanup on error paths.
 EOF
 ```
 
-The note tells Metis how to treat inputs and security boundaries. The source file still contains teaching comments, which is acceptable here because this step teaches the review workflow. You will use libpng for a more realistic triage example.
+The note tells Metis how to treat inputs and security boundaries. 
 
 ## Run the review
 
-Change into the review directory and start the Metis interactive prompt with the provider configuration you created. Save JSON for detailed inspection and SARIF for code-scanning tools:
+Switch to the review directory, and start the Metis interactive prompt with the provider configuration that you created earlier. Save JSON for detailed inspection and SARIF for code-scanning tools:
 
 ```bash
 cd "$HOME/metis-security-review/dvcp-review"
@@ -47,14 +58,26 @@ metis \
   --output-file ../results/dvcp.sarif
 ```
 
-At the Metis prompt, run the review, then exit after it completes. Metis initializes the project automatically, then runs the default simple LLM review and deduplicates the findings:
+At the Metis prompt, run the review, then exit after it completes:
 
 ```console
 review_code
 exit
 ```
 
-Metis prints review progress and detailed findings under `File:`, with an `Identified issue` heading. Finding fields include `Snippet`, `Line number`, `CWE`, `Severity`, `Why`, `Mitigation`, and `Confidence`. After the findings, the export and token-usage output is similar to:
+Metis initializes the project automatically, then runs the default simple LLM review and deduplicates the findings.
+
+Metis prints review progress and detailed findings under `File:`, with an `Identified issue` heading. 
+The following fields are included in the findings:
+- `Snippet`
+- `Line number`
+- `CWE`
+- `Severity`
+- `Why`
+- `Mitigation`
+- `Confidence`
+
+After the findings, the export and token-usage output is similar to:
 
 ```output
 Results saved to ../results/dvcp.json
@@ -63,7 +86,7 @@ Token usage (review_code)
 Current (input: 8,420 · output: 3,349 · total: 11,769)
 ```
 
-Back in your shell, return to the exercise workspace:
+Back in your shell, return to the workspace:
 
 ```bash
 cd "$HOME/metis-security-review"
@@ -71,11 +94,13 @@ cd "$HOME/metis-security-review"
 
 The run sends source-derived evidence to your configured model provider. Runtime, token use, and findings depend on the model, provider, and Metis version.
 
-It can take a couple of minutes to complete.
+It can take a couple of minutes to complete the review.
 
 ## Summarize the JSON report
 
-The JSON report stores findings in `reviews[].reviews`. Source locations can appear in an `anchor`, in `primary_file` and `line_number`, or in the enclosing review group's `file` field. Use the Python interpreter from the active Metis environment to count the findings and print their issue types and source locations:
+The JSON report stores findings in `reviews[].reviews`. Source locations can appear in an `anchor`, in `primary_file` and `line_number`, or in the `file` field of the enclosing review group. 
+
+Use the Python interpreter from the active Metis environment to count the findings and print their issue types and source locations:
 
 ```bash
 python - <<'PY'
@@ -103,8 +128,6 @@ for review_group in review_groups:
 PY
 ```
 
-This example was captured on November 2, 2026 using the `metis-v2.0.0` tag ([`742b20d`](https://github.com/arm/metis/commit/742b20d685b0aeb3216b36ddfc44bc5e05ace82c)), with `gpt-6.1-sol` through an OpenAI-compatible endpoint and DVCP commit [`8dcbd20`](https://github.com/hardik05/Damn_Vulnerable_C_Program/commit/8dcbd202887f587783952a320a2301de701be529). The provider reported the model ID as `gpt-6.1-sol`. The run used the packaged simple LLM review and deduplication nodes; reachability review and automated triage were not enabled.
-
 The output is similar to:
 
 ```output
@@ -121,11 +144,15 @@ Finding count: 10
 - CWE-401 Large-quotient branch discards an allocated buffer without freeing it (dvcp.c:97)
 ```
 
-Your exact count and wording can differ. A valid report can contain zero findings. An empty report means that this run did not report any findings; it does not mean the program is safe. If you expected findings, check your provider connection and any Metis log output before judging the result.
+This example report was captured on November 2, 2026 using the `metis-v2.0.0` tag ([`742b20d`](https://github.com/arm/metis/commit/742b20d685b0aeb3216b36ddfc44bc5e05ace82c)), with `gpt-6.1-sol` through an OpenAI-compatible endpoint and DVCP commit [`8dcbd20`](https://github.com/hardik05/Damn_Vulnerable_C_Program/commit/8dcbd202887f587783952a320a2301de701be529). The provider reported the model ID as `gpt-6.1-sol`. The run used the packaged simple LLM review and deduplication nodes. 
+
+Your exact count and wording can differ. A valid report can contain zero findings. Findings are expected for this program. An empty report means that the run didn't report any findings. It doesn't mean that the program is safe. 
+
+If you don't see findings, check your provider connection and any Metis log output before judging the result.
 
 ## Compare the report with known defects
 
-Display four source regions that the program identifies as deliberately vulnerable:
+View four source regions that the program identifies as deliberately vulnerable:
 
 ```bash
 sed -n '14,28p' dvcp-review/dvcp.c
@@ -134,15 +161,17 @@ sed -n '72,87p' dvcp-review/dvcp.c
 sed -n '89,115p' dvcp-review/dvcp.c
 ```
 
-Check whether your report covers these concrete cases:
+Check whether your report covers the following concrete cases:
 
 - Signed image dimensions are combined and passed to `malloc()` without overflow or range checks.
-- `buff1` is freed, then freed again when `size1` is even or written after free when it is divisible by three.
+- `buff1` is freed, then freed again when `size1` is even, or written after free when it's divisible by three.
 - `img.height` is used as a divisor without a zero check.
 - `size3` is used as an index into fixed-size and heap buffers without bounds checks.
 - Attacker-controlled dimensions can select recursive stack exhaustion or repeated heap allocation.
 
-The captured Metis 2.0.0 JSON and SARIF reports contain ten findings. Source anchors can span multiple lines, and one finding can discuss additional sites in its reasoning. The table maps those reported regions and explanations to the known source defects:
+The captured Metis 2.0.0 JSON and SARIF reports contain ten findings. Source anchors can span multiple lines, and one finding can discuss additional sites in its reasoning. 
+
+The following table maps those reported regions and explanations to the known source defects:
 
 | Source issue | Tested-run outcome |
 | --- | --- |
@@ -154,10 +183,12 @@ The captured Metis 2.0.0 JSON and SARIF reports contain ten findings. Source anc
 | `buff4` allocation lost without being freed | `CWE-401` at `dvcp.c:97–100` |
 | Unbounded recursion and repeated heap allocation | `CWE-674` at `dvcp.c:22–27`; `CWE-400` at `dvcp.c:109–115` |
 
-For each reported finding, verify the source location, attacker control, and operation. Also record known source defects that the run omitted. The goal is to practice reviewing Metis output, not to turn the finding count into a coverage score.
+For each reported finding, verify the source location, attacker control, and operation. Also record known source defects that the run omitted. 
 
-The same review is also available in `results/dvcp.sarif`. SARIF allows code-hosting services and security tools to associate findings with source locations. Keep JSON when you want the complete Metis reasoning and SARIF when you want to integrate results into an existing code-scanning workflow.
+The same review is also available in `results/dvcp.sarif`. SARIF allows code-hosting services and security tools to associate findings with source locations. Keep JSON when you want the complete Metis reasoning. Keep SARIF when you want to integrate results into an existing code-scanning workflow.
 
 ## What you've accomplished and what's next
 
-You ran a complete Metis review, exported two report formats, and compared the reported findings with known defects. Next, you will prepare a realistic libpng target without leaving benchmark canaries or fixes in its source.
+You ran a complete Metis review, exported two report formats, and compared the reported findings with known defects. 
+
+Next, you'll prepare a realistic libpng target without leaving benchmark canaries or fixes in its source.

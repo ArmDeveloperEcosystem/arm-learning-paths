@@ -5,26 +5,24 @@ weight: 5
 layout: "learningpathall"
 ---
 
-## Why prepare a Magma libpng target?
+## Why prepare a Magma libpng target
 
-The previous section used a small labeled program to teach the Metis review process. This section prepares a larger C codebase so you can see how a Metis finding is triaged against source that looks closer to real project code.
+You used a small labeled program to learn the Metis review process. You'll now prepare a larger C codebase to see how a Metis finding is triaged against source that's similar to real project code.
 
-[Magma](https://hexhive.epfl.ch/magma/) gives you a repeatable way to prepare that target. Magma is a benchmark for evaluating fuzzers against real programs with documented vulnerabilities. A fuzzer is a testing tool that repeatedly runs a program with generated or mutated inputs to trigger crashes, hangs, memory errors, or other unexpected behavior.
-
-You use Magma here only to create a prepared libpng source tree for review. You are not using Magma to benchmark Metis. You also do not give Metis the benchmark metadata, bug names, fuzzing harnesses, canaries, or fix branches, because those details would give a review model clues that a normal codebase would not contain.
+[Magma](https://hexhive.epfl.ch/magma/) gives you a repeatable way to prepare that target. Magma is a benchmark for evaluating fuzzers against real programs with documented vulnerabilities. A fuzzer is a testing tool that repeatedly runs a program with generated or mutated inputs. Fuzzers simulate crashes, hangs, memory errors, or other unexpected behavior. Use Magma only to create a prepared libpng source tree for review.
 
 The preparation script creates the review target in four steps:
 
 1. Checks out the libpng revision selected by Magma.
 2. Applies Magma patches that introduce known vulnerable code.
-3. Removes benchmark controls so the source looks closer to a normal libpng tree.
+3. Removes benchmark controls so that the source looks closer to a normal libpng tree.
 4. Writes neutral Metis context for the review.
 
-The result is a deliberately vulnerable example target. Do not use it outside this exercise.
+The result is a deliberately vulnerable example target. Don't use the target beyond the Learning Path.
 
 ## Download the preparation script
 
-Download [the Magma libpng preparation script](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/cross-platform/review-c-code-with-metis/prepare_magma_libpng.py) into the exercise workspace:
+Download [the Magma libpng preparation script](https://github.com/ArmDeveloperEcosystem/arm-learning-paths/blob/main/content/learning-paths/cross-platform/review-c-code-with-metis/prepare_magma_libpng.py) into the workspace:
 
 ```bash
 curl -L \
@@ -64,20 +62,24 @@ git -C libpng-review status --short
 git -C libpng-review diff --stat
 ```
 
-The diff summary shows that the script applied patches that introduce known vulnerable code to libpng. During triage, you will inspect a `png.c` guard and the related `pngrutil.c` allocation. Do not send patch names, benchmark descriptions, or known vulnerability lists to Metis.
+The diff summary shows that the script applied patches that introduce known vulnerable code to libpng. During triage, you'll inspect a `png.c` guard and the related `pngrutil.c` allocation. 
+
+{{% notice Note %}}
+Don't give Metis the benchmark metadata, bug names, fuzzing harnesses, canaries, or fix branches. Those details would give a review model clues that a normal codebase wouldn't contain.
+{{% /notice %}}
 
 ## Choose a libpng report option
 
-You need a Metis report before you can triage a finding. Choose one of these options:
+You need a Metis report before you can triage a finding. Choose one of the following options:
 
 - Run a live Metis review if you have enough API quota and want to compare your model configuration.
-- Use the pre-captured report if you are interested to try Metis, but want to minimize your API usage.
+- Use the pre-captured report if you want to minimize your API usage.
 
 {{< tabpane-normal >}}
   {{< tab header="Run live review" >}}
-This option asks Metis to review only `pngrutil.c`, because the triage exercise focuses on a finding in that file.
+You'll prompt Metis to review only `pngrutil.c`, because the triage focuses on a finding in that file.
 
-The captured Metis 2.0.0 review with `gpt-6.1-sol` used 353,579 model tokens (351,293 input and 2,286 output). Usage varies with the run and model configuration. A live run can take several minutes and consume substantial API quota. Use the captured report option to avoid those model calls or if your run does not produce a finding you can triage.
+Run the review:
 
 ```bash
 cd "$HOME/metis-security-review/libpng-review"
@@ -87,24 +89,28 @@ metis \
   --config "$HOME/metis-security-review/metis-review.yaml" \
   --output-file ../results/libpng-live.json
 ```
+The example Metis 2.0.0 review was captured with `gpt-6.1-sol` and used 353,579 model tokens (351,293 input and 2,286 output). Usage varies with the run and model configuration. A live run can take several minutes and consume substantial API quota. 
 
-At the Metis prompt, review the file, then exit. The results are review-only so you can validate a finding manually in the next section:
+At the Metis prompt, review the file, then exit:
 
 ```console
 review_file pngrutil.c
 exit
 ```
+The results are review-only so that you can validate a finding manually later.
 
-Back in your shell, return to the exercise workspace:
+Back in your shell, return to the workspace:
 
 ```bash
 cd "$HOME/metis-security-review"
 ```
 
-Metis writes `results/libpng-live.json` and a companion `results/libpng-live.sarif`. Use the JSON report in the next section.
+Metis writes `results/libpng-live.json` and a companion `results/libpng-live.sarif`. You'll review the JSON report later.
   {{< /tab >}}
   {{< tab header="Use captured report" >}}
-This option creates `results/libpng-review-candidate.json` from the Metis 2.0.0 review captured with `gpt-6.1-sol` on November 2, 2026. The full run returned three findings; this example selects the row-buffer size finding for the guided triage. The finding is unchanged from the live report; only the review group's `file_path` is made relative for portability, and `_provenance` records the capture details.
+You'll create `results/libpng-review-candidate.json` from the Metis 2.0.0 review captured with `gpt-6.1-sol` on November 2, 2026. The full run returned three findings. You'll use the row-buffer size finding for the guided triage. 
+
+Create `results/libpng-review-candidate.json`:
 
 ```bash
 cat > results/libpng-review-candidate.json <<'EOF'
@@ -160,11 +166,14 @@ cat > results/libpng-review-candidate.json <<'EOF'
 }
 EOF
 ```
+The finding is unchanged from the live report. Only the review group `file_path` is made relative for portability, and `_provenance` records the capture details.
 
-This is a captured finding from the same release used in the exercises, not guaranteed output for every run. Its reasoning depends on the reviewed application using a sufficiently narrow `size_t` and image-width limits that permit very large inputs. The next section checks those conditions against the source; this capture is not a native exploit reproduction.
+The reasoning of the finding depends on the reviewed application using a sufficiently narrow `size_t`. It also depends on image-width limits that permit very large inputs.
   {{< /tab >}}
 {{< /tabpane-normal >}}
 
 ## What you've accomplished and what's next
 
-You prepared production-like vulnerable libpng source without benchmark hints and selected a report for triage. Next, you will check a reported finding against the benchmark diff and decide how to handle additional live findings.
+You've prepared production-like vulnerable libpng source without benchmark hints and selected a report for triage. 
+
+Next, you'll check a reported finding against the benchmark diff and decide how to handle additional live findings.
