@@ -1,16 +1,17 @@
 ---
 title: Verify reproducible results across scalar, Neon, and SVE
+description: Build and run scalar, Neon, and SVE Libamath `expf` examples to compare floating-point bit patterns with reproducibility enabled and disabled.
 weight: 5
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## Example: Reproducible expf
+## Create a reproducible expf example
 
 This example demonstrates reproducibility in Libamath using the single-precision exponential function, `expf()`.
 
-### Setting up your environment
+### Set up your environment
 
 This example uses GCC-14 on a Neoverse V1 machine with the [ArmPL 26.01 module](/install-guides/armpl/) installed.
 
@@ -59,7 +60,7 @@ For SVE applications, add `-march=armv8-a+sve` to the compilation command:
 $CC app.c -DAMATH_REPRO=1 -lamath_repro -march=armv8-a+sve -o app
 ```
 
-### Scalar usage
+### Set up scalar usage
 
 The starting point is a small application that uses the scalar implementation of the single-precision exponential function `armpl_exp_f32()`.
 
@@ -90,7 +91,7 @@ y = 2.613692045211792 [0x1.4e8d76p+1]
 {{< /tabpane >}}
 
 
-### Neon usage
+### Set up Neon usage
 
 Next, replace the contents of `app.c` with the following Neon application that invokes the reproducible Neon implementation of the single-precision exponential function `armpl_vexpq_f32()`. Compile and run it again with reproducibility enabled and disabled to compare the results.
 
@@ -134,9 +135,9 @@ y (lane 3) = 2.613692283630371 [0x1.4e8d78p+1]
 
 Once you run this example, each lane of `y` contains the same bit pattern as the scalar result of `armpl_exp_f32(0x1.ebe93cp-1f)` (as you can see in the *Output* tab).
 
-### SVE usage
+### Set up SVE usage
 
-Finally, replace the contents of `app.c` with the following SVE application that invokes the reproducible SVE implementation of the single-precision exponential function `armpl_svexp_f32_x()`. Compile and run using the SVE compilation command (with `-march=armv8-a+sve`), once with reproducibility enabled and once disabled.
+Finally, replace the contents of `app.c` with the following Scalable Vector Extension (SVE) application. The application invokes the reproducible SVE implementation of the single-precision exponential function `armpl_svexp_f32_x()`. Compile and run using the SVE compilation command (with `-march=armv8-a+sve`), once with reproducibility enabled and once disabled.
 
 {{< tabpane code=true >}}
   {{< tab header="C code" language="C" output_lines="15">}}
@@ -183,12 +184,14 @@ y (lane 7): 2.613692045211792 [0x1.4e8d76p+1]
 
 All active lanes of `y` are guaranteed to match the scalar and Neon results exactly.
 
-### Scope and limitations
+## Scope and limitations of the example
 
-In this section you observed that, when reproducibility is enabled (`AMATH_REPRO` enabled), `expf()` produces bitwise-identical results whether it is executed as a scalar, Neon or SVE function.
+You observed that, when reproducibility is enabled (`AMATH_REPRO` enabled), `expf()` produces bitwise-identical results. This is regardless of whether it's run as a scalar, Neon or SVE function.
 
 This behavior extends to other reproducible math routines in Libamath. Scalar, Neon, and SVE implementations are numerically aligned for all functions listed in `amath_repro.h`. Reproducible symbols are always prefixed by `armpl_` and are not provided with `ZGV` mangling. Reproducibility is available on Linux platforms, and results are independent of vector width or instruction selection. Reproducible routines prioritize determinism over peak performance.
 
-## What you've learned and what's next
+## What you've learned 
 
-In this Learning Path, you learned what numerical reproducibility means in floating-point software and explored real-world applications where it is critical. You then enabled cross-vector-extension reproducibility in Libamath and verified that scalar, Neon, and SVE code paths produce bitwise-identical results for the `expf()` function. You can now apply these techniques to your own applications using Arm Performance Libraries.
+You verified that scalar, Neon, and SVE code paths produce bitwise-identical results for the `expf()` function. 
+
+You can now apply these techniques to your own applications using Arm Performance Libraries.

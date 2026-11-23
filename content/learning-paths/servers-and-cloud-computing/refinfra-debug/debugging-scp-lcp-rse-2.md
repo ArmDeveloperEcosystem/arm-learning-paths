@@ -1,5 +1,5 @@
 ---
-title: Debugging SCP/LCP/RSE
+title: Debug SCP, LCP, and RSE
 weight: 3
 
 ### FIXED, DO NOT MODIFY

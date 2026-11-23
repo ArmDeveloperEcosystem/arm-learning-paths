@@ -1,5 +1,5 @@
 ---
-title: Debugging BL1
+title: Debug BL1
 weight: 4
 
 ### FIXED, DO NOT MODIFY

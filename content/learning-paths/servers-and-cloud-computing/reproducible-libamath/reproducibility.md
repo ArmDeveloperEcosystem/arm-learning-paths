@@ -1,12 +1,13 @@
 ---
 title: Understand numerical reproducibility in floating-point math
+description: Understand bitwise floating-point reproducibility across scalar, Neon, and SVE implementations before configuring Libamath.
 weight: 2
 
 ### FIXED, DO NOT MODIFY
 layout: learningpathall
 ---
 
-## What is reproducibility?
+## What reproducibility is
 
 In numerical software, reproducibility (also referred to as determinism) means you get the exact same floating-point bits for the same inputs, even if you run a different implementation (scalar vs Neon vs SVE).
 
