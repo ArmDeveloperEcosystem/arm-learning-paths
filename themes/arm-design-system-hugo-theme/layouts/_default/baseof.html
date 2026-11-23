@@ -3,6 +3,7 @@
 <html lang="en" theme="dark">
     <head>
         {{partial "head/head.html" .}}
+        {{partial "head/automatic-sign-in-loading.html" .}}
         {{partial "head/favicons.html" .}}
         {{partial "head/social.html" .}}
         {{partial "head/search-icons.html" .}}
@@ -16,6 +17,10 @@
         {{ end }}
     </head>
     <body>
+        <div id="arm-auth-status" role="status" aria-live="polite">
+            <span class="arm-loading-spinner" aria-hidden="true"></span>
+            <span class="arm-loading-label">Loading page</span>
+        </div>
         {{partial "header/nav-masthead.html" .}}
         {{partial "header/ai-sign-in-banner.html" .}}
 
