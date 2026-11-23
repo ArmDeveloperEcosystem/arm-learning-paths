@@ -130,7 +130,7 @@ llm_provider:
 EOF
 ```
 
-The review commands load this file with `--config`. Adapt `llm_provider` to the provider of your choice, including its `name`, available `model`, and any required connection settings. An OpenAI-compatible proxy uses `name: openai` with the API base URL supplied by its administrator and credentials issued for that service. The credentials need to support the OpenAI Responses API.
+The review commands load this file with `--config`. Adapt `llm_provider` to the provider of your choice, including its `name`, available `model`, and any required connection settings. An OpenAI-compatible proxy uses `name: openai` with the API base URL supplied by its administrator and credentials issued for that service. The proxy needs to support the OpenAI Responses API.
 
 The example runs in the Learning Path were captured with `gpt-6.1-sol` through an OpenAI-compatible proxy. Select a model available to your account or local server. Model choice can change Metis findings.
 
