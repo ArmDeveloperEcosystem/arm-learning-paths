@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## What Metis is
 
-Arm Metis is an open-source, agentic security code-review framework. It investigates security-relevant behavior and returns structured review candidates. To do this, it combines language-aware source tooling with a large language model (LLM).
+Arm Metis is an open-source, agentic security code-review framework. It investigates security-relevant behavior and returns structured review candidates. To do this, Metis combines language-aware source tooling with a large language model (LLM).
 
 Metis supports multiple programming and hardware description languages through language plugins. The code in this Learning Path is in C, but the same concepts can be applied to other supported languages.
 
