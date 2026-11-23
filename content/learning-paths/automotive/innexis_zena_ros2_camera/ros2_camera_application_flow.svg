@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 370" role="img" aria-labelledby="title desc">
+  <title id="title">Zena CSS virtual camera to ROS 2 motion event</title>
+  <desc id="desc">ANA supplies camera video to the Zena guest. The guest exposes video zero. A ROS 2 cam2image publisher sends image messages to the image topic. The motion event application reads those messages and publishes Boolean results to the motion topic.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 1 1 L 11 6 L 1 11 z" fill="#007a85"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="370" fill="#ffffff"/>
+  <rect x="20" y="42" width="410" height="260" rx="16" fill="#f0f7f8" stroke="#b9d9dc" stroke-width="2"/>
+  <rect x="450" y="42" width="200" height="260" rx="16" fill="#f3f5fa" stroke="#c5cde0" stroke-width="2"/>
+  <rect x="670" y="42" width="910" height="260" rx="16" fill="#f4f9f5" stroke="#c5ddcc" stroke-width="2"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#202a3b">
+    <text x="40" y="79" font-size="24" font-weight="700">ANA virtual platform</text>
+    <text x="470" y="79" font-size="24" font-weight="700">Zena guest</text>
+    <text x="690" y="79" font-size="24" font-weight="700">ROS 2 application</text>
+  </g>
+  <g fill="#ffffff" stroke="#62788b" stroke-width="2">
+    <rect x="40" y="130" width="170" height="110" rx="12"/>
+    <rect x="240" y="130" width="170" height="110" rx="12"/>
+    <rect x="470" y="130" width="160" height="110" rx="12"/>
+    <rect x="690" y="130" width="190" height="110" rx="12"/>
+    <rect x="920" y="130" width="130" height="110" rx="12"/>
+    <rect x="1090" y="130" width="270" height="110" rx="12"/>
+    <rect x="1400" y="130" width="150" height="110" rx="12"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#202a3b" font-size="22" text-anchor="middle">
+    <text x="125" y="173">Video input</text><text x="125" y="203" font-size="18">MP4 file</text>
+    <text x="325" y="173">Virtual</text><text x="325" y="203">camera</text>
+    <text x="550" y="193" font-family="monospace" font-size="21">/dev/video0</text>
+    <text x="785" y="176" font-family="monospace" font-size="19">cam2image</text><text x="785" y="207" font-size="17">publisher</text>
+    <text x="985" y="194" font-family="monospace" font-size="21">/image</text>
+    <text x="1225" y="178" font-family="monospace" font-size="19">motion_event.py</text><text x="1225" y="207" font-size="17">subscriber + publisher</text>
+    <text x="1475" y="194" font-family="monospace" font-size="21">/motion</text>
+  </g>
+  <g stroke="#007a85" stroke-width="4" fill="none" marker-end="url(#arrow)">
+    <path d="M 212 185 L 232 185"/>
+    <path d="M 412 185 L 462 185"/>
+    <path d="M 632 185 L 682 185"/>
+    <path d="M 882 185 L 912 185"/>
+    <path d="M 1052 185 L 1082 185"/>
+    <path d="M 1362 185 L 1392 185"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#435266" text-anchor="middle">
+    <text x="785" y="267">Container 1</text>
+    <text x="1225" y="267">Container 2</text>
+    <text x="1475" y="267">Bool result</text>
+  </g>
+  <text x="800" y="342" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#435266" text-anchor="middle">Both containers use the image built from the same Containerfile.</text>
+</svg>
