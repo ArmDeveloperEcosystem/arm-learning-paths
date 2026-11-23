@@ -62,7 +62,7 @@ git -C libpng-review status --short
 git -C libpng-review diff --stat
 ```
 
-The diff summary shows that the script applied patches that introduce known vulnerable code to libpng. During triage, you'll inspect a `png.c` guard and the related `pngrutil.c` allocation. 
+The diff summary shows that the script applied patches that introduce known vulnerable code to libpng. During triage, you'll inspect a `png.c` guard and the related `pngrutil.c` allocation.
 
 {{% notice Note %}}
 Don't give Metis the benchmark metadata, bug names, fuzzing harnesses, canaries, or fix branches. Those details would give a review model clues that a normal codebase wouldn't contain.
@@ -89,7 +89,7 @@ metis \
   --config "$HOME/metis-security-review/metis-review.yaml" \
   --output-file ../results/libpng-live.json
 ```
-The example Metis 2.0.0 review was captured with `gpt-6.1-sol` and used 353,579 model tokens (351,293 input and 2,286 output). Usage varies with the run and model configuration. A live run can take several minutes and consume substantial API quota. 
+The example Metis 2.0.0 review was captured with `gpt-6.1-sol` and used 353,579 model tokens (351,293 input and 2,286 output). Usage varies with the run and model configuration. A live run can take several minutes and consume substantial API quota.
 
 At the Metis prompt, review the file, then exit:
 
@@ -108,7 +108,7 @@ cd "$HOME/metis-security-review"
 Metis writes `results/libpng-live.json` and a companion `results/libpng-live.sarif`. You'll review the JSON report later.
   {{< /tab >}}
   {{< tab header="Use captured report" >}}
-You'll create `results/libpng-review-candidate.json` from the Metis 2.0.0 review captured with `gpt-6.1-sol` on November 2, 2026. The full run returned three findings. You'll use the row-buffer size finding for the guided triage. 
+You'll create `results/libpng-review-candidate.json` from the Metis 2.0.0 review captured with `gpt-6.1-sol` on November 2, 2026. The full run returned three findings. You'll use the row-buffer size finding for the guided triage.
 
 Create `results/libpng-review-candidate.json`:
 
@@ -174,6 +174,6 @@ The reasoning of the finding depends on the reviewed application using a suffici
 
 ## What you've accomplished and what's next
 
-You've prepared production-like vulnerable libpng source without benchmark hints and selected a report for triage. 
+You've prepared production-like vulnerable libpng source without benchmark hints and selected a report for triage.
 
 Next, you'll check a reported finding against the benchmark diff and decide how to handle additional live findings.

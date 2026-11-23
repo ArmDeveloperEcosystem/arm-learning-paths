@@ -1,6 +1,6 @@
 ---
-title: Review C code for security vulnerabilities with Arm Metis 
-    
+title: Review C code for security vulnerabilities with Arm Metis
+
 description: Install Arm Metis, review vulnerable C code, and triage findings from a prepared libpng target.
 
 minutes_to_complete: 45
@@ -10,7 +10,7 @@ who_is_this_for: This Learning Path is for developers who want to add AI-assiste
 learning_objectives:
     - Identify how Metis uses language-aware source analysis and model reasoning.
     - Install Metis and connect it to a supported model provider.
-    - Review vulnerable C code and inspect JSON and SARIF output.
+    - Review vulnerable C code, export JSON and SARIF reports, and inspect JSON findings.
     - Triage Metis findings against source code and a Magma-derived libpng diff.
 
 prerequisites:

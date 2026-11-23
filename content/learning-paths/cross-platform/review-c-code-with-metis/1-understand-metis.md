@@ -7,9 +7,11 @@ layout: "learningpathall"
 
 ## What Metis is
 
-Arm Metis is an open-source, agentic security code-review framework. It combines language-aware source tooling with a large language model (LLM) to investigate security-relevant behavior and return structured review candidates. Metis supports multiple programming and hardware description languages through language plugins. The code in this Learning Path is in C, but the same concepts can be applied to other supported languages.
+Arm Metis is an open-source, agentic security code-review framework. It investigates security-relevant behavior and returns structured review candidates. To do this, it combines language-aware source tooling with a large language model (LLM).
 
-You'll learn how to use Metis during a security review. First, you'll run Metis on a small C program with known vulnerabilities. This helps you explore the command flow, JSON output, SARIF output, and reported findings. You'll then prepare a libpng source tree from the [Magma](https://hexhive.epfl.ch/magma/) benchmark, and triage a captured Metis finding against the source diff. 
+Metis supports multiple programming and hardware description languages through language plugins. The code in this Learning Path is in C, but the same concepts can be applied to other supported languages.
+
+You'll learn how to use Metis during a security review. First, you'll run Metis on a small C program with known vulnerabilities. You'll export JSON and SARIF reports, then inspect the JSON findings. You'll then prepare a libpng source tree from the [Magma](https://hexhive.epfl.ch/magma/) benchmark and triage a captured Metis finding against the source diff.
 
 {{% notice Note %}}
 
@@ -23,8 +25,8 @@ A Metis review starts with source files and project context. Metis collects lang
 
 Metis offers two review approaches:
 
-- Simple LLM review: The model examines source code or a patch using language-specific security prompts and project guidance. It returns structured findings without requiring a code graph. This is also the review path for languages without C or C++ reachability support.
-- Optional reachability review: For C or C++, Tree-sitter builds a CodeGraph of functions, calls, and source facts. When enabled, `reachability` reviews selected functions with this evidence and surrounding caller and callee context. Graph evidence doesn't by itself prove attacker control, build reachability, or exploitability.
+- Simple LLM review: The model examines source code or a patch using language-specific security prompts and project guidance. It returns structured findings without a code graph. This approach also covers languages without C or C++ reachability support.
+- Optional reachability review: For C or C++, Tree-sitter builds a CodeGraph of functions, calls, and source facts. When enabled, `reachability` uses this evidence and surrounding caller and callee context to review selected functions. Graph evidence alone doesn't prove attacker control, build reachability, or exploitability.
 
 In Metis 2.0.0, the packaged Review stage runs `simple_llm_review`, `finding_dedup`, and `result`. `review_code` and `review_file` use simple LLM review by default. Metis builds a CodeGraph for triage, but runs reachability review only when you enable it.
 
@@ -35,15 +37,15 @@ A security review with Metis typically involves completing the following steps:
 1. Choose a codebase, directory, file, or patch to review.
 2. Add project-specific security context in `.metis.md` when needed.
 3. Run a review and save the findings as JSON or SARIF.
-4. Optionally use automated triage to check the findings against more source code and mark it  `valid`, `invalid`, or `inconclusive`. Metis checks the source lines cited for a `valid` or `invalid` verdict.
+4. Optionally use automated triage to check the findings against more source code and mark it `valid`, `invalid`, or `inconclusive`. Metis checks the source lines cited for a `valid` or `invalid` verdict.
 5. Verify the findings against the source code, build configuration, and tests.
 
 ## How you'll use Metis to complete the Learning Path
 
 You'll use the following review commands on C code:
 
-- `review_code` to review the small C codebase.
-- `review_file` to focus on `pngrutil.c` with context from the rest of the libpng codebase.
+- `review_code` to review the small C codebase
+- `review_file` to focus on `pngrutil.c` with context from the rest of the libpng codebase
 
 You'll start Metis with `--interactive` and run these commands at its prompt. Each command initializes the target automatically, so you don't need to run `init` first. You'll inspect the findings yourself without enabling automated triage.
 
@@ -67,6 +69,6 @@ You still decide whether a candidate is reachable, exploitable, already mitigate
 
 ## What you've learned and what's next
 
-You've seen how Metis reports possible issues and why each finding needs a source check. 
+You've learned what Metis reports about possible issues and why each finding needs a source check.
 
 Next, you'll install the tested release and add your provider API key.

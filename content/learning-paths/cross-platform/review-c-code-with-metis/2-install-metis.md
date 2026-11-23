@@ -1,13 +1,13 @@
 ---
 title: Install and configure Arm Metis
-description: Install a tested Metis release and configure a model provider with an API key.
+description: Install a tested Metis release and configure a model provider for security review.
 weight: 3
 layout: "learningpathall"
 ---
 
 ## Install system tools
 
-After learning about Arm Metis, install and configure the framework. 
+After learning about Arm Metis, install and configure the framework.
 
 The commands in this Learning Path use a Unix-like shell. Use Terminal on macOS, a Linux terminal, or an existing Ubuntu or Debian terminal running under WSL2 on Windows. Windows PowerShell and Command Prompt aren't covered.
 
@@ -72,7 +72,7 @@ cd "$HOME/metis-security-review"
 
 ## Clone and install Metis
 
-Clone the Metis repository at the tested [2.0.0 release](https://github.com/arm/metis/releases/tag/metis-v2.0.0):
+Clone the Metis repository at the tested [Metis 2.0.0 release](https://github.com/arm/metis/releases/tag/metis-v2.0.0):
 
 ```bash
 git clone --branch metis-v2.0.0 --depth 1 \
@@ -175,6 +175,6 @@ If the check fails, use the error and your provider guide to check credentials, 
 
 ## What you've accomplished and what's next
 
-You've installed the tested Metis 2.0.0 release and set it up with your model provider. 
+You've installed the tested Metis 2.0.0 release and set it up with your model provider.
 
 Next, you'll review a small C program and compare the report with defects that are intentionally present in its source.

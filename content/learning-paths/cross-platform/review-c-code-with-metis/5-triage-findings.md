@@ -1,5 +1,5 @@
 ---
-title: Triage a libpng finding
+title: Triage a Metis finding in libpng
 description: Check a Metis report finding against source code, attacker control, and the Magma ground-truth diff.
 weight: 6
 layout: "learningpathall"
@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## List the reported findings
 
-After choosing an Arm Metis report option, triage the findings in the report manually. 
+After choosing an Arm Metis report option, triage the findings in the report manually.
 
 Both report options provide Metis 2.0.0 review findings without automated triage verdicts. You'll check one finding against the source code, build conditions, and Magma diff before deciding its status.
 
@@ -34,7 +34,7 @@ REPORT=results/libpng-review-candidate.json
 
 The JSON reports store findings inside `reviews` groups. The following summary uses the source `anchor` of the finding when present. It then falls back to its primary file or review-group file and `line_number`.
 
- Print a compact summary:
+Print a compact summary:
 
 ```bash
 python - "$REPORT" <<'PY'
@@ -71,7 +71,7 @@ If your live report includes the row-buffer finding, use it for triage. Otherwis
 
 ## Triage the row-buffer finding
 
-This finding depends on the ABI, image limits, and selected transforms of the target application. Running Metis on an Arm64 machine doesn't establish whether a reviewed application uses 32-bit or 64-bit `size_t`.
+This finding depends on the ABI, image limits, and selected transforms of the target application. Running Metis on an arm64 machine doesn't establish whether a reviewed application uses 32-bit or 64-bit `size_t`.
 
 Inspect the reported allocation and clearing operations, the row-size macro, and the original row-size calculation:
 
@@ -144,11 +144,13 @@ Width: 536870912; aligned width: 536870912
 Allocation bytes: 57; clear bytes: 2147483649
 ```
 
-This calculation models unsigned wraparound. It doesn't run libpng or prove that a decoder reaches the write. The source supports an architecture- and configuration-dependent finding, but the Learning Path doesn't include a 32-bit reproducer. Record the finding as unconfirmed at runtime until you reproduce the path with the intended build and application settings. Neither the heap-overflow claim nor the potential code-execution impact of the model is established by the calculation alone.
+This calculation models unsigned wraparound. It doesn't run libpng or prove that a decoder reaches the write. The source supports an architecture- and configuration-dependent finding, but the Learning Path doesn't include a 32-bit reproducer.
+
+Record the finding as unconfirmed at runtime until you reproduce the path with the intended build and application settings. Neither the heap-overflow claim nor the potential code-execution impact of the model is established by the calculation alone.
 
 ## Check and record other findings
 
-Your live run might return no findings, the row-buffer finding, or different findings. An empty report doesn't prove the target is safe. 
+Your live run might return no findings, the row-buffer finding, or different findings. An empty report doesn't prove the target is safe.
 
 A finding outside the injected changes isn't automatically false. However, it's also not evidence by itself that Metis discovered a new vulnerability.
 
@@ -162,7 +164,7 @@ For each additional finding, check the following information:
 
 Search upstream issues and security advisories before reporting a new vulnerability. Treat the finding as unconfirmed until you have enough evidence to decide otherwise.
 
-Record the status of each additional finding as one of the following: 
+Record the status of each additional finding as one of the following:
 
 - Confirmed
 - Rejected
@@ -182,6 +184,6 @@ Don't publish unverified findings against active open-source projects. Follow th
 
 ## What you've accomplished and what's next
 
-You triaged Metis findings against source evidence. 
+You triaged Metis findings against source evidence.
 
 You can apply the Learning Path workflow to a bounded directory, file, or patch in your own C project. You can also extend the workflow for other languages.
