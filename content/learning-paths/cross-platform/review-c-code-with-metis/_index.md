@@ -60,7 +60,7 @@ generated_summary_faq:
   - question: How does the Magma diff help me triage the libpng finding?
     answer: >-
       Use the diff to see that preparation removed the rejection from an architecture-width check in `png.c`.
-      Check the ABI, width limits, and transforms of the application too. Keep the finding
+      Check the Application Binary Interface (ABI), width limits, and transforms of the application too. Keep the finding
       unconfirmed at runtime until you reproduce the path with the intended build and settings.
 # END generated_summary_faq
 

@@ -7,7 +7,7 @@ layout: "learningpathall"
 
 ## Why prepare a Magma libpng target
 
-You used a small labeled program to learn the Metis review process. You'll now prepare a larger C codebase to see how a Metis finding is triaged against source that's similar to real project code.
+You used a small labeled program to learn the Arm Metis review process. You'll now prepare a larger C codebase to see how a Metis finding is triaged against source that's similar to real project code.
 
 [Magma](https://hexhive.epfl.ch/magma/) gives you a repeatable way to prepare that target. Magma is a benchmark for evaluating fuzzers against real programs with documented vulnerabilities. A fuzzer is a testing tool that repeatedly runs a program with generated or mutated inputs. Fuzzers simulate crashes, hangs, memory errors, or other unexpected behavior. Use Magma only to create a prepared libpng source tree for review.
 
@@ -18,7 +18,7 @@ The preparation script creates the review target in four steps:
 3. Removes benchmark controls so that the source looks closer to a normal libpng tree.
 4. Writes neutral Metis context for the review.
 
-The result is a deliberately vulnerable example target. Don't use the target beyond the Learning Path.
+The result is a deliberately vulnerable example target. Use the target only for the Learning Path.
 
 ## Download the preparation script
 
@@ -75,6 +75,10 @@ You need a Metis report before you can triage a finding. Choose one of the follo
 - Run a live Metis review if you have enough API quota and want to compare your model configuration.
 - Use the pre-captured report if you want to minimize your API usage.
 
+{{% notice Note %}}
+Model-backed review can take several minutes and consume substantial API tokens. Use the pre-captured report if you want to complete triage without running the larger review.
+{{% /notice %}}
+
 {{< tabpane-normal >}}
   {{< tab header="Run live review" >}}
 You'll prompt Metis to review only `pngrutil.c`, because the triage focuses on a finding in that file.
@@ -89,7 +93,7 @@ metis \
   --config "$HOME/metis-security-review/metis-review.yaml" \
   --output-file ../results/libpng-live.json
 ```
-The example Metis 2.0.0 review was captured with `gpt-6.1-sol` and used 353,579 model tokens (351,293 input and 2,286 output). Usage varies with the run and model configuration. A live run can take several minutes and consume substantial API quota.
+The example Metis 2.0.0 review was captured with `gpt-6.1-sol` and used 353,579 model tokens (351,293 input and 2,286 output). Usage varies with the run and model configuration.
 
 At the Metis prompt, review the file, then exit:
 

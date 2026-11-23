@@ -1,23 +1,15 @@
 ---
-title: Understand the Metis review workflow
+title: Understand the Arm Metis review workflow
 description: Learn how Metis gathers evidence, runs security reviews, and presents findings for human triage.
 weight: 2
 layout: "learningpathall"
 ---
 
-## What Metis is
+## What Arm Metis is
 
 Arm Metis is an open-source, agentic security code-review framework. It investigates security-relevant behavior and returns structured review candidates. To do this, Metis combines language-aware source tooling with a large language model (LLM).
 
 Metis supports multiple programming and hardware description languages through language plugins. The code in this Learning Path is in C, but the same concepts can be applied to other supported languages.
-
-You'll learn how to use Metis during a security review. First, you'll run Metis on a small C program with known vulnerabilities. You'll export JSON and SARIF reports, then inspect the JSON findings. You'll then prepare a libpng source tree from the [Magma](https://hexhive.epfl.ch/magma/) benchmark and triage a captured Metis finding against the source diff.
-
-{{% notice Note %}}
-
-- The Learning Path isn't an exercise to benchmark Metis accuracy. Model choice, provider behavior, Metis version, and source changes can all affect a run. Use published benchmark results for comparative performance data.
-- Model-backed review can consume substantial API tokens. The initial Metis run is less expensive than the optional live libpng run. A pre-captured libpng report candidate is included so that you can complete triage without running the larger review.
-{{% /notice %}}
 
 ## How Metis reviews code
 
@@ -44,10 +36,14 @@ A security review with Metis typically involves completing the following steps:
 
 You'll use the following review commands on C code:
 
-- `review_code` to review the small C codebase
-- `review_file` to focus on `pngrutil.c` with context from the rest of the libpng codebase
+- `review_code` to first review a small codebase
+- `review_file` to then focus on `pngrutil.c`, with context from the rest of the larger libpng codebase
 
 You'll start Metis with `--interactive` and run these commands at its prompt. Each command initializes the target automatically, so you don't need to run `init` first. You'll inspect the findings yourself without enabling automated triage.
+
+{{% notice Note %}}
+The Learning Path isn't an exercise to benchmark Metis accuracy. Model choice, provider behavior, Metis version, and source changes can all affect a run. Use published benchmark results for comparative performance data.
+{{% /notice %}}
 
 ## How to interpret Metis findings
 

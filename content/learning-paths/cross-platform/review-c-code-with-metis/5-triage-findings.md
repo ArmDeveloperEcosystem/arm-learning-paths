@@ -1,5 +1,5 @@
 ---
-title: Triage a Metis finding in libpng
+title: Triage an Arm Metis finding in libpng
 description: Check a Metis report finding against source code, attacker control, and the Magma ground-truth diff.
 weight: 6
 layout: "learningpathall"
@@ -67,11 +67,11 @@ If you selected the captured report, the expected output is:
   High CWE-190: Unchecked row-size arithmetic can cause a heap buffer overflow on 32-bit builds (pngrutil.c:4591)
 ```
 
-If your live report includes the row-buffer finding, use it for triage. Otherwise, set `REPORT=results/libpng-review-candidate.json` to follow the example. The severity and confidence are model assessments. They don't confirm the runtime.
+If your live report includes the row-buffer finding, use it for triage. Otherwise, set `REPORT=results/libpng-review-candidate.json` to follow the example. The severity and confidence are model assessments and don't confirm the runtime.
 
 ## Triage the row-buffer finding
 
-This finding depends on the ABI, image limits, and selected transforms of the target application. Running Metis on an arm64 machine doesn't establish whether a reviewed application uses 32-bit or 64-bit `size_t`.
+The row-buffer finding depends on the Application Binary Interface (ABI), image limits, and selected transforms of the target application. Running Metis on an arm64 machine doesn't establish whether a reviewed application uses 32-bit or 64-bit `size_t`.
 
 Inspect the reported allocation and clearing operations, the row-size macro, and the original row-size calculation:
 
@@ -150,14 +150,14 @@ Record the finding as unconfirmed at runtime until you reproduce the path with t
 
 ## Check and record other findings
 
-Your live run might return no findings, the row-buffer finding, or different findings. An empty report doesn't prove the target is safe.
+Your live run might return no findings, the row-buffer finding, or different findings. An empty report doesn't prove that the target is safe.
 
 A finding outside the injected changes isn't automatically false. However, it's also not evidence by itself that Metis discovered a new vulnerability.
 
 For each additional finding, check the following information:
 
 - Whether untrusted input reaches the reported operation, including through callers or helper functions
-- Whether the build includes that code and the arithmetic and platform assumptions hold
+- Whether the build includes that code, and the arithmetic and platform assumptions hold
 - Whether an existing guard, API contract, or file-format rule invalidates the finding
 - Whether a focused test or sanitizer reproduces the behavior
 - Whether the proposed fix preserves intended behavior
@@ -180,10 +180,12 @@ Include the following information with the status of the finding:
 - Proposed fix owner
 - Test coverage
 
+{{% notice Important %}}
 Don't publish unverified findings against active open-source projects. Follow the security policy and coordinated-disclosure process of the project if further investigation confirms an issue.
+{{% /notice %}}
 
-## What you've accomplished and what's next
+## What you've accomplished 
 
-You triaged Metis findings against source evidence.
+You installed Metis, compared a review with known C defects, and prepared a realistic benchmark target. You triaged Metis findings against source evidence.
 
-You can apply the Learning Path workflow to a bounded directory, file, or patch in your own C project. You can also extend the workflow for other languages.
+You can apply the Learning Path workflow to a bounded directory, file, or patch in your own C project. You can also extend the workflow to other programming languages.

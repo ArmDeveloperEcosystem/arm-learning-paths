@@ -1,5 +1,5 @@
 ---
-title: Compare a Metis report with vulnerable C code
+title: Compare an Arm Metis report with vulnerable C code
 description: Review a vulnerable C program with Metis, export JSON and SARIF reports, and compare JSON findings with known defects.
 weight: 4
 layout: "learningpathall"
@@ -13,11 +13,11 @@ The [Damn Vulnerable C Program](https://github.com/hardik05/Damn_Vulnerable_C_Pr
 
 Use the program to learn the Metis review process:
 
-- Prepare a small target.
-- Run `review_code`.
-- Save JSON and SARIF.
-- Summarize findings.
-- Compare source locations.
+1. Prepare a small target.
+2. Run `review_code`.
+3. Save JSON and SARIF.
+4. Summarize findings.
+5. Compare source locations.
 
 In your terminal, clone the repository at the tested commit, and copy `dvcp.c` into a separate review directory:
 
@@ -65,7 +65,7 @@ review_code
 exit
 ```
 
-Metis initializes the project automatically, then runs the default simple LLM review and deduplicates the findings.
+Metis initializes the project automatically. It then runs the default simple large language model (LLM) review and deduplicates the findings.
 
 Metis prints review progress and detailed findings under `File:`, with an `Identified issue` heading.
 The following fields are included in the findings:
@@ -99,7 +99,7 @@ It can take a couple of minutes to complete the review.
 
 ## Summarize the JSON report
 
-The JSON report stores findings in `reviews[].reviews`. Source locations can appear in an `anchor`, in `primary_file` and `line_number`, or in the `file` field of the enclosing review group.
+The JSON report stores findings in `reviews[].reviews`. Source locations can appear in an `anchor` or in `primary_file` and `line_number`. They can also appear in the `file` field of the enclosing review group.
 
 Use the Python interpreter from the active Metis environment to count the findings and print their issue types and source locations:
 
@@ -147,7 +147,7 @@ Finding count: 10
 
 This example report was captured on November 2, 2026 using the `metis-v2.0.0` tag ([`742b20d`](https://github.com/arm/metis/commit/742b20d685b0aeb3216b36ddfc44bc5e05ace82c)). The run used `gpt-6.1-sol` through an OpenAI-compatible endpoint and reviewed DVCP commit [`8dcbd20`](https://github.com/hardik05/Damn_Vulnerable_C_Program/commit/8dcbd202887f587783952a320a2301de701be529). The provider reported the model ID as `gpt-6.1-sol`. The run used the packaged simple LLM review and deduplication nodes.
 
-Your exact count and wording can differ. A valid report can contain zero findings. Findings are expected for this program. An empty report means that the run didn't report any findings. It doesn't mean that the program is safe.
+The exact count and wording in your report can differ. A valid report can contain zero findings. Findings are expected for this program. An empty report means that the run didn't report any findings. It doesn't mean that the program is safe.
 
 If you don't see findings, check your provider connection and any Metis log output before judging the result.
 

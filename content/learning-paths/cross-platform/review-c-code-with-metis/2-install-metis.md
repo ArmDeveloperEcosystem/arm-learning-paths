@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 After learning about Arm Metis, install and configure the framework.
 
-The commands in this Learning Path use a Unix-like shell. Use Terminal on macOS, a Linux terminal, or an existing Ubuntu or Debian terminal running under WSL2 on Windows. Windows PowerShell and Command Prompt aren't covered.
+Run the commands in the Learning Path in a Unix-like shell. Use Terminal on macOS, a Linux terminal, or an existing Ubuntu or Debian terminal running under WSL2 on Windows. The Learning Path doesn't include guidance for Windows PowerShell and Command Prompt.
 
 Select your platform and install the compiler, Git, and command-line utilities. The utilities are used to fetch code, apply patches, and inspect reports:
 
