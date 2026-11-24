@@ -1,5 +1,5 @@
 ---
-title: "Connect PocketBeagle 2 to Greengrass nucleus lite"
+title: "Prepare to connect PocketBeagle 2 to AWS IoT Greengrass"
 description: Understand how a PocketBeagle 2 Yocto image, Greengrass nucleus lite identity, and AWS IoT thing group enable cloud application deployment.
 weight: 2
 layout: "learningpathall"

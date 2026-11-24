@@ -5,7 +5,7 @@ weight: 7
 layout: "learningpathall"
 ---
 
-## Deploy to the group
+## Deploy the component to the thing group
 
 After creating the Hello World component, deploy it to the thing group. 
 
@@ -24,7 +24,7 @@ Ensure that the member list includes `MyPocketBeagle2`. Use a dedicated group wi
 A new deployment to the same target replaces the previous component selection of that target. Keep any components that you still need. For more information, see [Create deployments](https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html) in the AWS documentation.
 {{% /notice %}}
 
-Create a deployment document targeting the group ARN, rather than the individual thing ARN. You can use either the AWS CLI or the console
+Create a deployment document targeting the group ARN, rather than the individual thing ARN. You can use either the AWS CLI or the console.
 
 To create a deployment using the CLI, run:
 
@@ -122,9 +122,9 @@ The journal adds timestamps and service prefixes. Wait for at least two messages
 
 To ensure that the component ran successfully, confirm the following details:
 
-- The thing belongs to the target group
-- This deployment succeeds on the device
-- The repeated message of the application appears in the device journal
+- The thing belongs to the target group.
+- This deployment succeeds on the device.
+- The repeated message of the application appears in the device journal.
 
 This proves that a cloud group deployment reached the runtime and ran the inline lifecycle command.
 

@@ -68,6 +68,8 @@ sudo partprobe /dev/sdX
 lsblk -o NAME,SIZE,FSTYPE,LABEL /dev/sdX
 ```
 
+The output is similar to:
+
 ```output
 NAME    SIZE FSTYPE LABEL
 sda    59.5G

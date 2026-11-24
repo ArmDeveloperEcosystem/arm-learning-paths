@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 Create a device identity for the PocketBeagle 2 that you booted.
 
-Use the same AWS account and Region for every step. You'll follow the connection kit workflow for Greengrass nucleus lite in the [pinned upstream provisioning guide](https://github.com/aws-greengrass/aws-greengrass-lite/blob/v2.6.0/docs/Provisioning.md). The workflow provisions one unique identity per board and doesn't use a fleet provisioning claim certificate.
+Use the same AWS account and Region for every step. You'll follow the connection kit workflow for Greengrass nucleus lite in the [Greengrass nucleus lite provisioning guide](https://github.com/aws-greengrass/aws-greengrass-lite/blob/v2.6.0/docs/Provisioning.md). The workflow provisions one unique identity per board and doesn't use a fleet provisioning claim certificate.
 
 {{% notice Note %}}
 This setup can incur AWS charges. AWS IoT Greengrass bills each core device that connects to AWS in a given month. AWS IoT Core bills for connectivity and messaging.
@@ -122,7 +122,7 @@ The `grep` command prints nothing when no placeholders remain.
 
 Before you finalize the Greengrass configuration, check the identity of the device in the AWS IoT console. Note the thing name, Region, data endpoint, credential provider endpoint, and role alias in `config.yaml`. In the console, find the role alias under **Security > Role aliases** and record its IAM role name. This helps if token exchange fails later. The inline Hello World component doesn't need an S3 permissions policy.
 
-Confirm that the device certificate is **ACTIVE**, is attached to this thing, and has the generated IoT policy attached. The policy needs to allow the device IoT and Greengrass communication, and `iot:AssumeRoleWithCertificate` on the role alias Amazon Resource Name (ARN). The IAM role needs to trust `credentials.iot.amazonaws.com`. To troubleshoot each association, see the [pinned upstream provisioning guide](https://github.com/aws-greengrass/aws-greengrass-lite/blob/v2.6.0/docs/Provisioning.md).
+Confirm that the device certificate is **ACTIVE**, is attached to this thing, and has the generated IoT policy attached. The policy needs to allow the device IoT and Greengrass communication, and `iot:AssumeRoleWithCertificate` on the role alias Amazon Resource Name (ARN). The IAM role needs to trust `credentials.iot.amazonaws.com`. To troubleshoot each association, see the [Greengrass nucleus lite provisioning guide](https://github.com/aws-greengrass/aws-greengrass-lite/blob/v2.6.0/docs/Provisioning.md).
 
 ## Finalize the Greengrass configuration
 
@@ -137,7 +137,7 @@ chown ggcore:ggcore device.pem.crt private.pem.key AmazonRootCA1.pem
 ls -al
 ```
 
-The command copies only the four credential and configuration files. It doesn't connect the connection kit zip.
+The command copies only the four credential and configuration files. It doesn't copy the connection kit zip.
 
 The output is similar to:
 

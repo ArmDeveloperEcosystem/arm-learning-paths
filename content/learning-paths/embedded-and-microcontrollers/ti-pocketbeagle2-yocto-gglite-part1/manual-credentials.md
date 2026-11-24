@@ -23,7 +23,7 @@ ssh root@192.168.7.2 'mkdir -p "$HOME/gg-provision"'
 
 Check that the AWS CLI uses the account that you expect. The board temporarily stores the credentials in `gg-provision` until you install them.
 
-## Create the resources
+## Create the AWS IoT resources
 
 To create resources, follow [Manual Provisioning by Creating a Thing](https://github.com/aws-greengrass/aws-greengrass-lite/blob/v2.6.0/docs/Provisioning.md#manual-provisioning-by-creating-a-thing) in the pinned upstream provisioning guide. You'll create an IAM role, an IoT role alias, an IoT policy, and a thing with a certificate. 
 
@@ -139,6 +139,6 @@ The output is similar to:
 
 ## What you've accomplished and what's next
 
-You've manually created AWS IoT Greengrass credentals for the PocketBeagle 2. 
+You've manually created AWS IoT Greengrass credentials for the PocketBeagle 2.
 
 Next, continue with [Check the identity in AWS](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/provision/#check-the-identity-in-aws). 

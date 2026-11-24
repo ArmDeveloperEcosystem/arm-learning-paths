@@ -9,7 +9,7 @@ layout: "learningpathall"
 
 You'll now create a Hello World component recipe and publish it for deployment to the PocketBeagle 2 board. Run all commands on the host computer and in the same terminal session that you used for provisioning. This ensures that the AWS account, Region, and environment variables stay set.
 
-If you needed to open a new terminal, [set the variables again](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/provision/#set-variables-on-the-host-computer).
+If you needed to open a new terminal, [set the AWS variables on the host computer](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/provision/#set-variables-on-the-host-computer).
 
 Start by creating a workspace directory that's separate from the folder holding your device credentials:
 
