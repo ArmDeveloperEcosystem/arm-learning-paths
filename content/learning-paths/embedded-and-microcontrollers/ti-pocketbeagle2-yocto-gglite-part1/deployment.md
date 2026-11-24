@@ -72,7 +72,7 @@ aws greengrassv2 list-installed-components \
   --core-device-thing-name "$THING_NAME"
 ```
 
-The group deployment can remain `ACTIVE`, because it keeps serving group members. That status alone doesn't prove installation on a particular board.
+The group deployment can remain `ACTIVE` because it keeps serving group members. The status alone doesn't prove installation on a particular board.
 
 In the `list-effective-deployments` output, find the entry whose `deploymentId` matches `$DEPLOYMENT_ID`. Its `coreDeviceExecutionStatus` is `SUCCEEDED` when the board applied the deployment. In the `list-installed-components` output, `com.arm.HelloGreengrassLiteWorld` version `1.0.1` has a `lifecycleState` of `RUNNING`. Cloud status updates can lag behind the board, so repeat the commands after a minute if needed.
 

@@ -4,6 +4,11 @@ description: Build a PocketBeagle 2 Yocto image, provision AWS IoT Greengrass nu
 
 minutes_to_complete: 180
 
+draft: true
+cascade:
+    draft: true
+
+
 who_is_this_for: This is an advanced topic for embedded Linux developers connecting an Arm-based PocketBeagle 2 to AWS IoT Greengrass.
 
 learning_objectives:
@@ -14,7 +19,7 @@ learning_objectives:
 
 prerequisites:
     - A PocketBeagle 2, a 32 GB or larger microSD card, a card reader, and a USB-C cable
-    - A host computer running Ubuntu 24.04 Linux with sudo access, 16 GB or more RAM, and 250–400 GB free disk space
+    - A host computer running Ubuntu 24.04 Linux with sudo access, 16 GB or more RAM, and 250 to 400 GB free disk space
     - An AWS account with permission to manage AWS IoT resources, publish Greengrass components, and create Greengrass deployments
     - The [AWS CLI](/install-guides/aws-cli/) v2 configured with [AWS credentials](/install-guides/aws_access_keys/) and Python 3 installed on the host computer
 
@@ -46,8 +51,7 @@ generated_summary_faq:
   - question: How do I identify the correct microSD device before writing the image?
     answer: >-
       Use `lsblk -o NAME,SIZE,MODEL,MOUNTPOINTS` to compare device size and model with your card.
-      Check the whole device path, such as `/dev/sdX`, rather than a partition before using
-      `bmaptool`.
+      Before using `bmaptool`, check the whole device path, such as `/dev/sdX`, rather than a partition.
   - question: Which AWS account and Region should I use when provisioning and deploying?
     answer: >-
       Use the same AWS account and Region for every step. If you open a new terminal, reapply

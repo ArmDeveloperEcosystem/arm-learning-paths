@@ -29,7 +29,7 @@ This workflow creates the IoT thing, a device certificate, and an IoT policy. It
 
 Don't run any installation commands that the console offers, because the Yocto image already includes the Greengrass runtime.
 
-If the console returns an error when you choose **Create thing**, follow the [manual credentials procedure](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/manual-credentials/) instead of the connection kit. That procedure returns you to this page after creating the configuration file.
+If the console returns an error when you choose **Create thing**, [create Greengrass credentials manually](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/manual-credentials/) instead of using the connection kit. Then, [check the identity in AWS](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/provision/#check-the-identity-in-aws).
 
 ## Set variables on the host computer
 
@@ -47,13 +47,15 @@ The `aws sts get-caller-identity` command confirms that the AWS CLI uses the acc
 
 ## Prepare a credentials directory on the board
 
+Proceed with using the connection kit if you were able to create the thing and download the kit successfully. 
+
 From the host computer, create a directory for the credentials on the board:
 
 ```bash
 ssh root@192.168.7.2 'mkdir -p "$HOME/gg-provision"'
 ```
 
-The single quotes make the board, not the host computer, expand `$HOME`. This directory temporarily holds the connection kit until you install it.
+This directory temporarily holds the connection kit until you install it.
 
 ## Upload the connection kit to the board
 

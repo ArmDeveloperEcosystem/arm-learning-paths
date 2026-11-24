@@ -16,7 +16,7 @@ The project has four parts:
 - Build a Yocto Linux image that includes Greengrass nucleus lite, and write it to a microSD card.
 - Boot the board and connect it to the host computer over USB, with outbound Internet access.
 - Create the AWS IoT identity for the board and connect it to AWS as a Greengrass core device.
-- Publish a Hello World component, deploy it to a thing group, and confirm in the board's journal that it runs.
+- Publish a Hello World component, deploy it to a thing group, and confirm in the board journal that it runs.
 
 At the end, the board takes deployments from AWS. You'll have a repeatable process for sending the board your own applications.
 

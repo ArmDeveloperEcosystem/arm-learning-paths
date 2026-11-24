@@ -231,7 +231,7 @@ The image usually defaults to the UTC time zone.
 
 ### (Optional) Recover USB connectivity
 
-Use the following steps if the host computer can't reach the board at `192.168.7.2`. The steps are also applicable if the USB interface shows `linkdown`, during or after setting up Internet sharing.
+Use the following steps if the host computer can't reach the board at `192.168.7.2`. The steps are also applicable if, during or after setting up internet sharing, the USB interface shows `linkdown`.
 
 A host route ending in `linkdown` indicates that the link isn't operational, even if the host computer has `192.168.7.1` assigned. Changing DNS settings won't restore the USB carrier. Keep the working upstream connection of the host computer unchanged.
 

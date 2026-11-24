@@ -25,7 +25,7 @@ Check that the AWS CLI uses the account that you expect. The board temporarily s
 
 ## Create the AWS IoT resources
 
-To create resources, follow [Manual Provisioning by Creating a Thing](https://github.com/aws-greengrass/aws-greengrass-lite/blob/v2.6.0/docs/Provisioning.md#manual-provisioning-by-creating-a-thing) in the pinned upstream provisioning guide. You'll create an IAM role, an IoT role alias, an IoT policy, and a thing with a certificate. 
+To create resources, follow [Manual Provisioning by Creating a Thing](https://github.com/aws-greengrass/aws-greengrass-lite/blob/v2.6.0/docs/Provisioning.md#manual-provisioning-by-creating-a-thing) in the Greengrass nucleus lite provisioning guide. You'll create an IAM role, an IoT role alias, an IoT policy, and a thing with a certificate.
 
 When you finish, you have the following resources ready:
 
@@ -49,7 +49,7 @@ If the alias doesn't exist, run `create-role-alias` with the same arguments. You
 
 On the host computer, keep the credentials in a private directory outside any source checkout. Identify the device certificate, the private key, and the Amazon Root CA certificate. Save copies with these file names: `device.pem.crt`, `private.pem.key`, and `AmazonRootCA1.pem`. Don't confuse the device certificate with the CA certificate or the public key.
 
-Restrict the private key permissions, then copy the three files to the board. Run these commands from the directory that holds the files:
+Restrict the private key permissions, then copy the three files to the board. Run the commands from the directory that holds the files:
 
 ```bash
 chmod 600 private.pem.key
