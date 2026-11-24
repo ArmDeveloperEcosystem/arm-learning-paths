@@ -37,12 +37,11 @@ generated_summary_faq:
     load the correct symbols during BL33 debugging.
   faqs:
   - question: What do I need to start before creating a debug connection?
-    answer: Start the Fixed Virtual Platform (FVP) model for the RD-N2 software stack. Then, open **Debug
-      Control** in Arm Development Studio and select **New Debug Connection**.
-  - question: How can I inspect SCP variables that appear optimized away?
+    answer: Start the Fixed Virtual Platform (FVP) model for the RD-N2 software stack before creating the debug connection.
+  - question: How do I inspect SCP variables that appear optimized away?
     answer: Replace `-Og` with `-O0` in the appropriate `<compiler>-Baremetal.cmake` file under
       `rd-infra/scp/cmake/Toolchain`. Rebuild before inspecting variables in the debugger.
-  - question: How can I attach the debugger before BL1 continues?
+  - question: How do I attach the debugger before BL1 continues?
     answer: Add a branch-to-self instruction, `b .`, in `bl1_entrypoint` at `<workspace>/rd-infra/tf-a/bl1/aarch64/bl1_entrypoint.S`.
       The primary CPU spins there so you can attach and set breakpoints.
   - question: How do I set a breakpoint on BL31?
