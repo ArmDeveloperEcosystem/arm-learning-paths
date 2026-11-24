@@ -45,10 +45,12 @@ $PSVersionTable.PSVersion
   {{< /tab >}}
 {{< /tabpane >}}
 
-Install any missing host tools before continuing. The Java compiler version should be 17 or later.
+Install any missing host tools before continuing. Use Python 3.10 or later and JDK 17 for this Learning Path. The application pins Android Gradle Plugin 8.7.3 and Gradle 8.9, which are validated with JDK 17. Newer JDK releases aren't validated for this workflow and can prevent Gradle from building the application.
+
+If your machine has multiple JDK versions, set `JAVA_HOME` to the JDK 17 installation before continuing. Confirm that both `java -version` and `javac -version` report version 17. See [Java versions in Android builds](https://developer.android.com/build/jdks) for JDK selection options.
 
 {{% notice Note %}}
-You can open the cloned project in Android Studio and run it on a connected phone or an Android Virtual Device (AVD). If you use an AVD, select a recent system image that supports the application's `arm64-v8a` native libraries. An emulator is useful for functional testing, but its performance isn't representative of a physical Arm-based phone.
+Android Studio is optional for inspecting and running the project. This Learning Path validates the application on a physical Arm-based Android phone. You can use an Android Virtual Device (AVD) for additional functional testing on a compatible host, but it doesn't replace the physical-phone validation. If you use an AVD, select a recent system image that supports the application's `arm64-v8a` libraries.
 {{% /notice %}}
 
 ## Install the Android command-line tools

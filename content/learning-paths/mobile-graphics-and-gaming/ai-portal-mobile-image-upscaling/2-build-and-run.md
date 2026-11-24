@@ -48,11 +48,11 @@ Create a Python virtual environment and install the package used by the download
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
 python3 -m venv .hf-venv
-.hf-venv/bin/python -m pip install --upgrade pip huggingface_hub
+.hf-venv/bin/python -m pip install "huggingface_hub==2.4.0"
   {{< /tab >}}
   {{< tab header="Windows PowerShell" language="powershell" >}}
 python -m venv .hf-venv
-.\.hf-venv\Scripts\python.exe -m pip install --upgrade pip huggingface_hub
+.\.hf-venv\Scripts\python.exe -m pip install "huggingface_hub==2.4.0"
   {{< /tab >}}
 {{< /tabpane >}}
 
@@ -61,6 +61,32 @@ The later commands invoke the environment's Python executable directly, so the P
 If Python reports that `venv` is unavailable on Debian or Ubuntu, install the `python3-venv` package and rerun the command.
 
 ## Build and run the Photo Upscale application
+
+Before building, confirm that Gradle is running with JDK 17:
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS or Linux" language="bash" >}}
+./gradlew --version
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell" >}}
+.\gradlew.bat --version
+  {{< /tab >}}
+{{< /tabpane >}}
+
+The `Launcher JVM` and `Daemon JVM` entries should report version 17. If either entry uses another version, set `JAVA_HOME` to your JDK 17 installation and stop the existing Gradle daemon before trying again:
+
+{{< tabpane code=true >}}
+  {{< tab header="macOS or Linux" language="bash" >}}
+./gradlew --stop
+  {{< /tab >}}
+  {{< tab header="Windows PowerShell" language="powershell" >}}
+.\gradlew.bat --stop
+  {{< /tab >}}
+{{< /tabpane >}}
+
+{{% notice Troubleshooting %}}
+If the build fails and the error contains only a Java version number, such as `27.0.1.1`, Gradle is using an incompatible JDK. Set `JAVA_HOME` to JDK 17, stop the Gradle daemon, confirm the version with `./gradlew --version` or `.\gradlew.bat --version`, and run the build again.
+{{% /notice %}}
 
 Use the Gradle wrapper to build and lint the debug Android package (APK):
 
@@ -76,6 +102,8 @@ chmod +x gradlew
 
 You don't need to install Gradle separately because the repository includes the wrapper.
 
+Continue when Gradle reports `BUILD SUCCESSFUL`. The APK is created at `app/build/outputs/apk/debug/app-debug.apk`.
+
 Install the APK and start Photo Upscale:
 
 ```console
@@ -83,7 +111,11 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 adb shell am start -n org.arm.learningpath.upscaling/.MainActivity
 ```
 
+The `adb install -r` command should report `Success`. The launch command should report that it started `org.arm.learningpath.upscaling/.MainActivity`.
+
 Photo Upscale uses one ExecuTorch adapter for all supported models. Use **Add or change model** to load a model. **Upscale photo** remains unavailable until you import a supported model and choose a saved photo. **Inspect detail** and **Save image** appear after upscaling. Installing with `adb install -r` preserves models imported previously. On a first installation, the app reports **Model setup needed**.
+
+Confirm that the application opens and shows **Model setup needed**, an empty photo preview, and an unavailable **Upscale photo** button, as shown in the following image.
 
 ![Photo Upscale showing Model setup needed, an empty photo preview, and the disabled Upscale photo button.#center](images/photo-upscale-startup.png "Photo Upscale before importing a model or choosing a photo")
 
