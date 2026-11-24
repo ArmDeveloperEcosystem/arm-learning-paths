@@ -120,7 +120,7 @@ grep '{{' config.yaml
 
 The `grep` command prints nothing when no placeholders remain.
 
-### Check the identity in AWS
+## Check the identity in AWS
 
 Before you finalize the Greengrass configuration, check the identity of the device in the AWS IoT console. Note the thing name, Region, data endpoint, credential provider endpoint, and role alias in `config.yaml`. In the console, find the role alias under **Security > Role aliases** and record its IAM role name. This helps if token exchange fails later. The inline Hello World component doesn't need an S3 permissions policy.
 
