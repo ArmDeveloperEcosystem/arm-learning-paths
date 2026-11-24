@@ -1,5 +1,5 @@
 ---
-title: "Deploy PocketBeagle 2 temperature sensing to AWS IoT Core with Zephyr and Greengrass Lite"
+title: Deploy PocketBeagle 2 temperature sensing to AWS IoT Core with Zephyr and Greengrass Lite
 description: Extend your PocketBeagle 2 Yocto image and Cortex-M4F Zephyr setup with two S3-backed Greengrass components that manage external temperature sensing and publish JSON to AWS IoT Core.
 
 draft: true
