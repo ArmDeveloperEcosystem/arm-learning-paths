@@ -40,17 +40,17 @@ generated_summary_faq:
       software stack.
   - question: Where do I run the build script?
     answer: From the workspace inside the container, run `./build-scripts/rdinfra/build-test-busybox.sh
-      -p rdn2 build`. Keep the `./build-scripts/` prefix; the command is run from the workspace.
+      -p rdn2 build`. Keep the `./build-scripts/` prefix because the command is run from the workspace.
   - question: How do I verify that the images are ready for the FVP?
     answer: After packaging, run `ls output/rdn2/`. Check that `grub-busybox.img`,
       `ramdisk-busybox.img`, and the `rdn2` directory are present. Run `ls output/rdn2/rdn2/ -l`
       to inspect the firmware files, including `fip-uefi.bin` and `tf-bl1.bin`.
   - question: How do I point the test at the RD-N2 model?
-    answer: Install the RD-N2 FVP, then export `MODEL` with the path to the installed `FVP_RD_N2`
+    answer: Install the RD-N2 Fixed Virtual Platform (FVP), then export `MODEL` with the path to the installed `FVP_RD_N2`
       binary.
   - question: What shows that the FVP test completed?
     answer: Check the model consoles for firmware and Linux boot messages. Reaching the BusyBox
-      shell shows that the built stack booted on the RD-N2 Fixed Virtual Platform (FVP).
+      shell shows that the built stack booted on the RD-N2 FVP.
 # END generated_summary_faq
 
 author: 

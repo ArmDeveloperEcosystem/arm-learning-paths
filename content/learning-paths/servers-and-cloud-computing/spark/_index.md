@@ -47,7 +47,7 @@ generated_summary_faq:
       region. AMI identifiers are region specific.
   - question: How do I remove the resources after testing?
     answer: Run `terraform destroy` from the Terraform project directory. Confirm the prompt
-      to delete the resources that you created for the Learning Path.
+      to delete resources.
 # END generated_summary_faq
 
 author: Jason Andrews

@@ -36,8 +36,8 @@ generated_summary_faq:
   faqs:
   - question: Where do I run the deployment commands?
     answer: From the service project directory, run `npm install --save-dev` to install the declared
-      dependencies, then run `serverless deploy`. Use the directory containing this service's
-      `serverless.yml`.
+      dependencies, then run `serverless deploy`. Use the directory containing the
+      `serverless.yml` for the service.
   - question: Where do I place the website files?
     answer: Create the `website` subdirectory inside the service project. Add `index.html`
       and the `styles.css` file there.
