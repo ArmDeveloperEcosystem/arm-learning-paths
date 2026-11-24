@@ -1,10 +1,6 @@
 ---
-title: Deploy a Hello World component to PocketBeagle 2 with AWS IoT Greengrass nucleus lite
+title: Deploy a component to PocketBeagle 2 with AWS IoT Greengrass 
 description: Build a PocketBeagle 2 Yocto image, provision AWS IoT Greengrass nucleus lite, and deploy a Hello World component through an AWS IoT thing group.
-
-draft: true
-cascade:
-    draft: true
 
 minutes_to_complete: 180
 
