@@ -10,13 +10,50 @@ learning_objectives:
     - Automate deployment of a static website to Amazon S3.    
 
 prerequisites:
-    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11 or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/).   
-    - Any code editor. [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user) is suitable.
-    - Completion of the Learning Path that shows you how to [Deploy AWS services using the Serverless Framework](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-intro/).
+    - A Windows on Arm computer such as the Lenovo Thinkpad X13s running Windows 11, or a Windows on Arm [virtual machine](/learning-paths/cross-platform/woa_azure/)  
+    - A code editor such as [Visual Studio Code for Arm64](https://code.visualstudio.com/docs/?dv=win32arm64user)
+    - Completion of the [Deploy AWS services using the Serverless Framework](/learning-paths/servers-and-cloud-computing/serverless-framework-aws-intro/) Learning Path
+
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-11-23T20:59:58Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 59aef978f93bf194e21903d53992f072568d6d4f519a54c5592c775751c6ee4b
+  summary_generated_at: '2026-11-23T20:59:58Z'
+  summary_source_hash: 59aef978f93bf194e21903d53992f072568d6d4f519a54c5592c775751c6ee4b
+  faq_generated_at: '2026-11-23T20:59:58Z'
+  faq_source_hash: 59aef978f93bf194e21903d53992f072568d6d4f519a54c5592c775751c6ee4b
+  summary: You'll deploy a static website backed by AWS Lambda and DynamoDB with the Serverless Framework.
+    First, you'll define the table, functions, permissions, and S3 website resources. You'll add the
+    site HTML and assets, then deploy the service. After deployment, you'll run `serverless info
+    --verbose` to find `WebsiteURL`. Finally, you'll open the site and use its buttons to write temperature
+    records and retrieve an average.
+  faqs:
+  - question: Where do I run the deployment commands?
+    answer: From the service project directory, run `npm install --save-dev` to install the declared
+      dependencies, then run `serverless deploy`. Use the directory containing the
+      `serverless.yml` for the service.
+  - question: Where do I place the website files?
+    answer: Create the `website` subdirectory inside the service project. Add `index.html`
+      and the `styles.css` file there.
+  - question: Where do I find the website address?
+    answer: After `serverless deploy`, run `serverless info --verbose` and look for `WebsiteURL`
+      in **Stack Outputs**. Open that URL to view the S3 website.
+  - question: What does the IAM role allow the functions to do?
+    answer: The IAM role gives the Lambda functions DynamoDB permissions. One function can write temperature records to the table, and the other can read them.
+  - question: How do I test the deployed website?
+    answer: Open `WebsiteURL`, select **Write Temperatures**, then select **Get Average Temperature**.
+      Check that the average appears on the page.
+# END generated_summary_faq
 
 author: Dawid Borycki
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

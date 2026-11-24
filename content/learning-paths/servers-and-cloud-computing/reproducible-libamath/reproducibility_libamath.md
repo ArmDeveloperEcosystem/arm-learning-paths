@@ -1,5 +1,6 @@
 ---
 title: Enable reproducibility in Libamath
+description: Compile and link C or C++ code with reproducible Libamath routines for bitwise-identical results across supported scalar, Neon, and SVE functions.
 weight: 4
 
 ### FIXED, DO NOT MODIFY

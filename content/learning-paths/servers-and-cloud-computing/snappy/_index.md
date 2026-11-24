@@ -7,16 +7,53 @@ who_is_this_for: This is an introductory topic for software developers using com
   libraries on Arm servers.
 
 learning_objectives:
-- Install and run lzbench with snappy and zstd
-- Measure compression library performance running on 64-bit Arm AWS EC2 instance
+- Install and run lzbench with snappy and zstd.
+- Measure compression library performance running on 64-bit Arm-based instance.
 
 prerequisites:
 - An [Arm based instance](/learning-paths/servers-and-cloud-computing/csp/) from an appropriate
-  cloud service provider.
+  cloud service provider
+- GNU, gcc, and g++ installed for your Arm Linux distribution, by following the [GNU compiler install guide](/install-guides/gcc/native/)
+# START generated_summary_faq
+generated_summary_faq:
+  template_version: summary-faq-v3
+  generated_at: '2026-11-23T21:00:22Z'
+  generator: ai
+  ai_assisted: true
+  ai_review_required: true
+  model: gpt-5
+  prompt_template: summary-faq-v3
+  source_hash: 9953ba5f6b5d573dd2cd19bc2983e751839e4f319c789a5283db5ae59f65045d
+  summary_generated_at: '2026-11-23T21:00:22Z'
+  summary_source_hash: 9953ba5f6b5d573dd2cd19bc2983e751839e4f319c789a5283db5ae59f65045d
+  faq_generated_at: '2026-11-23T21:00:22Z'
+  faq_source_hash: 9953ba5f6b5d573dd2cd19bc2983e751839e4f319c789a5283db5ae59f65045d
+  summary: You'll compare Snappy and Zstandard compression on Arm-based cloud servers with `lzbench`.
+    First, you'll install build tools and `lzbench` on Ubuntu 20.04, then download the Silesia data
+    set. You'll run each algorithm against the same sample file on an AWS Graviton-based or OCI Ampere
+    instance. Finally, you'll compare compression and decompression bandwidth, latency, and compression
+    ratio from the results.
+  faqs:
+  - question: How do I prepare the Silesia data set for the benchmarks?
+    answer: Download the Silesia corpus archive and extract it into a `silesia` directory beside
+      `lzbench`. Both benchmark commands then use `../silesia/dickens` as
+      their input file.
+  - question: Which packages do I install before building lzbench?
+    answer: Install `gcc` and `g++` by following the [GNU compiler install guide](/install-guides/gcc/native/). Then, install `unzip` and `make` with `sudo apt install -y unzip make`.
+  - question: How do I compare Snappy and Zstandard?
+    answer: Run `./lzbench -esnappy ../silesia/dickens` and `./lzbench -ezstd ../silesia/dickens`
+      from the `lzbench` directory. Using the same file makes the results comparable.
+  - question: Which values should I compare in the output?
+    answer: Compare compression and decompression bandwidth, latency, and compression ratio for
+      each algorithm on the same input file.
+  - question: How do I compare the algorithms on another input file?
+    answer: Replace `../silesia/dickens` in both `lzbench` commands with the path to the same other
+      file from the extracted Silesia corpus. Then compare the new results using the same metrics.
+# END generated_summary_faq
 
 author: Pareena Verma
 
-generate_summary_faq: true
+generate_summary_faq: false
 rerun_summary: false
 rerun_faqs: false
 

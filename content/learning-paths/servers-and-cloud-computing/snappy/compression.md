@@ -19,10 +19,9 @@ The latest released version of [Snappy](http://google.github.io/snappy/) and [Zs
 
 The detailed steps below have been tested on `AWS EC2` and `Oracle OCI` Arm-based servers running `Ubuntu 20.04`.
 
-## Install necessary software packages
+## Install unzip and make 
 
-* GNU gcc and g++ for your Arm Linux distribution using the [GNU compiler install guide](/install-guides/gcc/native/).
-* Unzip and make utilities
+Install unzip and make utilities:
 
 ```bash { pre_cmd="sudo apt install -y gcc g++" }
 sudo apt install -y unzip make

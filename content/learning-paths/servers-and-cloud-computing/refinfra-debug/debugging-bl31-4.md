@@ -1,5 +1,5 @@
 ---
-title: Debugging BL31
+title: Debug BL31
 weight: 5
 
 ### FIXED, DO NOT MODIFY

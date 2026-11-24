@@ -1,5 +1,5 @@
 ---
-title: Debugging BL33 / UEFI
+title: Debug BL33 and UEFI
 weight: 6
 
 ### FIXED, DO NOT MODIFY
