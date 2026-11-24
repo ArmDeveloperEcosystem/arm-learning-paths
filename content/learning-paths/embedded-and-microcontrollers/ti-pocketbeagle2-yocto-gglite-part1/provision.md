@@ -29,7 +29,7 @@ This workflow creates the IoT thing, a device certificate, and an IoT policy. It
 
 Don't run any installation commands that the console offers, because the Yocto image already includes the Greengrass runtime.
 
-If the console returns an error when you choose **Create thing**, [create Greengrass credentials manually](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/manual-credentials/) instead of using the connection kit. Then, [check the identity in AWS](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/provision/#check-the-identity-in-aws).
+If the console returns an error when you choose **Create thing**, [create Greengrass credentials manually](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/manual-credentials/) instead of using the connection kit. Then, proceed with [check the identity in AWS](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/provision/#check-the-identity-in-aws).
 
 ## Set variables on the host computer
 
