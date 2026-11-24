@@ -15,8 +15,8 @@ prerequisites:
     - An Arm-based Android phone with Android 9 or later, the `arm64-v8a` ABI, and enough storage for the application and model files
     - Basic familiarity with terminal commands and Android applications
     - Git installed on the development machine
-    - Python 3 with the `venv` and `pip` modules on the machine
-    - Java Development Kit (JDK) 17 or later on the machine, available on your `PATH`
+    - Python 3.10 or later with the `venv` and `pip` modules on the machine
+    - Java Development Kit (JDK) 17 on the machine, available on your `PATH`
     - A tool for downloading files and a tool for extracting ZIP archives on the machine
     - A data-capable USB cable
     - Network access for the first Gradle build and model downloads
