@@ -33,6 +33,8 @@ If the console returns an error when you choose **Create thing**, [create Greeng
 
 ## Set variables on the host computer
 
+Proceed with using the connection kit if you were able to create the thing and download the kit successfully. 
+
 On the host computer, set variables that you'll use for the rest of the Learning Path. Replace the Region if needed, and use an authenticated AWS CLI v2 profile:
 
 ```bash
@@ -46,8 +48,6 @@ aws iot list-thing-groups-for-thing --thing-name "$THING_NAME"
 The `aws sts get-caller-identity` command confirms that the AWS CLI uses the account that you expect. The final command confirms that the thing exists and lists its thing groups.
 
 ## Prepare a credentials directory on the board
-
-Proceed with using the connection kit if you were able to create the thing and download the kit successfully. 
 
 From the host computer, create a directory for the credentials on the board:
 
