@@ -1,5 +1,5 @@
 ---
-title: "Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux"
+title: Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux
 description: Build a Zephyr heartbeat for the PocketBeagle 2 Cortex-M4F, load it from Yocto Linux with remoteproc, and verify Linux and MCU execution together.
 
 draft: true

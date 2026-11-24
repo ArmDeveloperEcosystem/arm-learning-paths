@@ -1,27 +1,26 @@
 ---
-title: "Deploy a Hello World component to PocketBeagle 2 with Greengrass Lite"
+title: Deploy a Hello World component to PocketBeagle 2 with AWS IoT Greengrass nucleus lite
 description: Build a PocketBeagle 2 Yocto image, provision AWS IoT Greengrass nucleus lite, and deploy a Hello World component through an AWS IoT thing group.
 
 draft: true
 cascade:
     draft: true
 
-minutes_to_complete: 120
+minutes_to_complete: 180
 
-who_is_this_for: Embedded Linux developers connecting an Arm-based PocketBeagle 2 to AWS IoT Greengrass.
+who_is_this_for: This is an advanced topic for embedded Linux developers connecting an Arm-based PocketBeagle 2 to AWS IoT Greengrass.
 
 learning_objectives:
-    - Build and boot the PocketBeagle 2 Yocto development image
-    - Provision a unique device identity for Greengrass nucleus lite
-    - Publish a simple Hello World component to AWS IoT Greengrass
-    - Deploy the component through a thing group and verify execution on the board
+    - Build and boot the PocketBeagle 2 Yocto development image.
+    - Provision a unique device identity for Greengrass nucleus lite.
+    - Publish an inline Hello World component to AWS IoT Greengrass.
+    - Deploy the component through a thing group and verify that it runs on the board.
 
 prerequisites:
-    - A PocketBeagle 2, a 32 GB or larger microSD card, a card reader, and a USB-C data cable
-    - An x86_64 Ubuntu 22.04 or 24.04 build host with 16–32 GB RAM and 250–400 GB free disk on a Linux filesystem
-    - An AWS account with permission to manage IoT resources and Greengrass deployments, plus an approved token-exchange IAM role or permission to create one
-    - AWS CLI v2 configured on an administrative workstation and Python 3 for validating JSON and generating deployment documents
-    - Internet access for the build host and board, using host Internet sharing or a supported USB Ethernet adapter and host cape
+    - A PocketBeagle 2, a 32 GB or larger microSD card, a card reader, and a USB-C cable
+    - A host computer running Ubuntu 24.04 Linux with sudo access, 16 GB or more RAM, and 250–400 GB free disk space
+    - An AWS account with permission to manage AWS IoT resources, publish Greengrass components, and create Greengrass deployments
+    - The [AWS CLI](/install-guides/aws-cli/) v2 configured with [AWS credentials](/install-guides/aws_access_keys/) and Python 3 installed on the host computer
 
 author: Doug Anson
 generate_summary_faq: true
@@ -42,10 +41,6 @@ tools_software_languages:
 
 further_reading:
     - resource:
-        title: Run Zephyr on the PocketBeagle 2 MCU alongside Yocto Linux
-        link: /learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-zephyr-part2/
-        type: learningpath
-    - resource:
         title: PocketBeagle 2 quick start
         link: https://docs.beagleboard.org/boards/pocketbeagle-2/02-quick-start.html
         type: documentation
@@ -54,7 +49,7 @@ further_reading:
         link: https://docs.yoctoproject.org/scarthgap/ref-manual/system-requirements.html
         type: documentation
     - resource:
-        title: Nucleus Lite 2.6.0 provisioning
+        title: AWS IoT Greengrass nucleus lite 2.6.0 provisioning
         link: https://github.com/aws-greengrass/aws-greengrass-lite/blob/v2.6.0/docs/Provisioning.md
         type: documentation
     - resource:
