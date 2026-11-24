@@ -41,7 +41,7 @@ generated_summary_faq:
     You'll build and boot a PocketBeagle 2 Yocto image, provision Greengrass nucleus lite, and
     verify a cloud-deployed Hello World component. On an Ubuntu host, you'll use the provided script
     and write the Yocto image to a microSD card. After connecting the board, you'll create its AWS identity
-    and confirm that it is healthy. You'll then publish the component, deploy it through a thing
+    and confirm that it's healthy. You'll then publish the component, deploy it through a thing
     group, and check its output in the board journal.
   faqs:
   - question: Where should I unpack the PocketBeagle 2 build scripts?
