@@ -50,8 +50,6 @@ export DEPLOYMENT_ID=$(aws greengrassv2 create-deployment \
 printf '%s\n' "$DEPLOYMENT_ID"
 ```
 
-Keep the deployment ID for use in subsequent commands. The deployment contains only the Hello World component, because the Greengrass nucleus lite runtime is already installed in the image.
-
 To create a deployment in the console:
 
 1. Select **Greengrass devices**, then select **Deployments** and **Create**.
@@ -60,6 +58,7 @@ To create a deployment in the console:
 4. Add version `1.0.1` of `com.arm.HelloGreengrassLiteWorld`. 
 5. Review the target and component version, then select **Deploy**. 
 
+Keep the deployment ID for use in subsequent commands. The deployment contains only the Hello World component, because the Greengrass nucleus lite runtime is already installed in the image.
 
 ## Check delivery to the board
 
