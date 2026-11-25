@@ -1,0 +1,335 @@
+diff --git a/drivers/display/display_cdc200.c b/drivers/display/display_cdc200.c
+--- a/drivers/display/display_cdc200.c
++++ b/drivers/display/display_cdc200.c
+@@ -18,6 +18,13 @@
+ #include <zephyr/cache.h>
+ 
+ LOG_MODULE_REGISTER(CDC200, CONFIG_DISPLAY_LOG_LEVEL);
++
++enum cdc200_stop_state {
++	CDC200_STOP_IDLE,
++	CDC200_STOP_ARMING,
++	CDC200_STOP_PENDING,
++	CDC200_STOP_CLAIMED,
++};
+ 
+ /* Helper functions */
+ /* Global configuration setup functions. */
+@@ -636,6 +643,40 @@
+ 	}
+ }
+ 
++int cdc200_disable_at_vblank(const struct device *dev, k_timeout_t timeout)
++{
++	struct cdc200_data *data = dev->data;
++	const struct cdc200_config *config = dev->config;
++	uintptr_t regs = DEVICE_MMIO_GET(dev);
++	int ret;
++
++	if (!config->panel_cfg.vfp)
++		return -ENOTSUP;
++	/* Reap an ISR completion that arrived after an earlier caller timed out. */
++	if (atomic_get(&data->stop_state) == CDC200_STOP_CLAIMED &&
++	    k_sem_take(&data->stop_sem, K_NO_WAIT) == 0)
++		atomic_set(&data->stop_state, CDC200_STOP_IDLE);
++	if (!atomic_cas(&data->stop_state, CDC200_STOP_IDLE, CDC200_STOP_ARMING))
++		return -EBUSY;
++	if (!(sys_read32(regs + CDC_GLB_CTRL) & CDC_GLB_CTRL_CDC_EN)) {
++		atomic_set(&data->stop_state, CDC200_STOP_IDLE);
++		return 0;
++	}
++
++	k_sem_reset(&data->stop_sem);
++	atomic_set(&data->stop_state, CDC200_STOP_PENDING);
++	ret = k_sem_take(&data->stop_sem, timeout);
++	if (ret) {
++		/* A claimed request must finish before another caller can arm a stop. */
++		atomic_cas(&data->stop_state, CDC200_STOP_PENDING, CDC200_STOP_IDLE);
++		LOG_ERR("CDC did not stop at vertical blanking: position=0x%08x",
++			sys_read32(regs + CDC_POS_STAT));
++		return ret;
++	}
++	atomic_set(&data->stop_state, CDC200_STOP_IDLE);
++	return 0;
++}
++
+ void cdc200_swap_fb(const struct device *dev, uint8_t idx, struct cdc200_fb_desc *fb)
+ {
+ 	struct cdc200_data *data = dev->data;
+@@ -683,6 +724,18 @@
+ 
+ 	if (irq_st & CDC_IRQ_LINE) {
+ 		cdc200_set_irq_clear(regs, CDC_IRQ_LINE);
++		uint32_t ypos = sys_read32(regs + CDC_POS_STAT) & CDC_POS_STAT_CYPOS_MASK;
++		uint32_t active_end = sys_read32(regs + CDC_ACTW_CFG) &
++				      CDC_ACTW_CFG_AAH_MASK;
++		uint32_t total_end = sys_read32(regs + CDC_TOTALW_CFG) &
++				     CDC_TOTALW_CFG_TOTALH_MASK;
++
++		/* A delayed line IRQ must not truncate the next active frame. */
++		if (ypos > active_end && ypos <= total_end &&
++		    atomic_cas(&data->stop_state, CDC200_STOP_PENDING, CDC200_STOP_CLAIMED)) {
++			cdc200_global_disable(regs);
++			k_sem_give(&data->stop_sem);
++		}
+ 
+ 		bool swapped = false;
+ 
+@@ -787,6 +840,8 @@
+ 
+ 	data->dev = dev;
+ 	k_sem_init(&data->vsync_sem, 0, 1);
++	k_sem_init(&data->stop_sem, 0, 1);
++	atomic_set(&data->stop_state, CDC200_STOP_IDLE);
+ 
+ #if DT_ANY_INST_HAS_PROP_STATUS_OKAY(clocks)
+ 	if (!cdc200_pixel_clock_valid(dev)) {
+diff --git a/drivers/display/display_cdc200.h b/drivers/display/display_cdc200.h
+--- a/drivers/display/display_cdc200.h
++++ b/drivers/display/display_cdc200.h
+@@ -9,6 +9,7 @@
+ #include <zephyr/device.h>
+ #include <zephyr/kernel.h>
+ #include <zephyr/drivers/clock_control.h>
++#include <zephyr/sys/atomic.h>
+ 
+ /* Global Registers */
+ #define CDC_HW_VER		0x00 /* HW Version Register */
+@@ -336,6 +337,8 @@
+ 	uint8_t *next_fb[CDC_LAYER_MAX];
+ 
+ 	struct k_sem vsync_sem;
++	struct k_sem stop_sem;
++	atomic_t stop_state;
+ };
+ 
+ #endif /* _DISPLAY_CDC200_H_ */
+diff --git a/drivers/mipi_dsi/dsi_dw.c b/drivers/mipi_dsi/dsi_dw.c
+--- a/drivers/mipi_dsi/dsi_dw.c
++++ b/drivers/mipi_dsi/dsi_dw.c
+@@ -746,10 +746,70 @@
+ 		dsi_dw_video_mode_config(dev);
+ 	} else {
+ 		/* Setup the DSI as Command mode. */
+-		sys_write32(DSI_MODE_CFG_CMD_MODE, regs + DSI_MODE_CFG);
++		dsi_dw_cmd_mode_config(dev);
+ 	}
+ 	dsi_dw_pwr_up(regs);
+ 	return 0;
++}
++
++int dsi_dw_suspend_video(const struct device *dev)
++{
++	struct dsi_dw_data *data = dev->data;
++	uintptr_t regs = DEVICE_MMIO_GET(dev);
++	uint32_t mask = DSI_PHY_STATUS_PHY_STOPSTATECLKLANE |
++			DSI_PHY_STATUS_PHY_STOPSTATE0LANE;
++	uint32_t status;
++	int ret;
++
++	if (data->phy.num_lanes == 2)
++		mask |= DSI_PHY_STATUS_PHY_STOPSTATE1LANE;
++	else if (data->phy.num_lanes != 1)
++		return -EINVAL;
++
++	if (data->curr_mode == DSI_DW_VIDEO_MODE) {
++		uint32_t empty_mask = DSI_VID_PKT_STATUS_DPI_BUFF_PLD_EMPTY |
++				      DSI_VID_PKT_STATUS_DPI_PLD_W_EMPTY |
++				      DSI_VID_PKT_STATUS_DPI_CMD_W_EMPTY;
++		uint32_t data_mask = mask & ~DSI_PHY_STATUS_PHY_STOPSTATECLKLANE;
++		uint32_t video_status;
++		bool drained = false;
++
++		/* CDC must already be stopped at VFP; COMMAND mode clears these status bits. */
++		for (int i = 0; i < 100; i++) {
++			video_status = sys_read32(regs + DSI_VID_PKT_STATUS);
++			status = sys_read32(regs + DSI_PHY_STATUS);
++			if ((video_status & empty_mask) == empty_mask &&
++			    (status & (data_mask | DSI_PHY_STATUS_PHY_PHY_DIRECTION)) == data_mask) {
++				drained = true;
++				break;
++			}
++			k_sleep(K_MSEC(1));
++		}
++		if (!drained) {
++			LOG_ERR("DSI video did not drain: VID_PKT_STATUS=0x%08x PHY_STATUS=0x%08x",
++				video_status, status);
++			return -ETIMEDOUT;
++		}
++	}
++
++	ret = dsi_dw_set_mode(dev, DSI_DW_COMMAND_MODE);
++	if (ret)
++		return ret;
++
++	/* HS command panels otherwise keep the clock lane active while idle. */
++	sys_clear_bits(regs + DSI_LPCLK_CTRL, DSI_LPCLK_CTRL_PHY_TXREQUESTCLKHS);
++	for (int i = 0; i < 100; i++) {
++		status = sys_read32(regs + DSI_PHY_STATUS);
++		if ((status & (mask | DSI_PHY_STATUS_PHY_PHY_DIRECTION)) == mask) {
++			dsi_dw_pwr_down(regs);
++			return 0;
++		}
++		k_sleep(K_MSEC(1));
++	}
++
++	dsi_dw_pwr_down(regs);
++	LOG_ERR("DSI lanes did not stop before suspension: PHY_STATUS=0x%08x", status);
++	return -ETIMEDOUT;
+ }
+ 
+ /* Generic APIs */
+diff --git a/drivers/mipi_dsi/dsi_dw.h b/drivers/mipi_dsi/dsi_dw.h
+--- a/drivers/mipi_dsi/dsi_dw.h
++++ b/drivers/mipi_dsi/dsi_dw.h
+@@ -75,6 +75,10 @@
+ #define DSI_VID_VFP_LINES_ACT	0x15C /* Video VFP Current Config Register */
+ #define DSI_VID_VACT_LINES_ACT	0x160 /* Video VA Current Config Register */
+ #define DSI_VID_PKT_STATUS	0x168 /* Video Pkt Status Register */
++
++#define DSI_VID_PKT_STATUS_DPI_BUFF_PLD_EMPTY	BIT(16)
++#define DSI_VID_PKT_STATUS_DPI_PLD_W_EMPTY		BIT(2)
++#define DSI_VID_PKT_STATUS_DPI_CMD_W_EMPTY		BIT(0)
+ #define DSI_SDF_3D_ACT		0x190 /* 3D Current Config Register */
+ 
+ /* Registers Bit-fields */
+diff --git a/drivers/video/isp_pico.c b/drivers/video/isp_pico.c
+--- a/drivers/video/isp_pico.c
++++ b/drivers/video/isp_pico.c
+@@ -205,6 +205,7 @@
+ 	const struct isp_config *config = dev->config;
+ 	struct isp_data *data = dev->data;
+ 	struct video_buffer *vbuf = NULL;
++	struct video_buffer *completed_vbuf = NULL;
+ 
+ 	int ret;
+ 
+@@ -238,7 +239,7 @@
+ 
+ 	vbuf->timestamp = k_uptime_get_32();
+ 
+-	k_fifo_put(&data->fifo_out, vbuf);
++	completed_vbuf = vbuf;
+ 
+ 	vbuf = k_fifo_peek_head(&data->fifo_in);
+ 	if (vbuf == NULL) {
+@@ -260,8 +261,22 @@
+ 
+ isp_bottom_done:
+ 	if (!data->is_streaming) {
+-		video_stream_stop(config->controller);
+-		data->curr_vid_buf = 0;
++		ret = video_stream_stop(config->controller);
++		if (ret) {
++			LOG_ERR("Failed to stop controller before returning video buffer: %d", ret);
++			signal_status = VIDEO_BUF_ERROR;
++			if (completed_vbuf) {
++				k_fifo_put(&data->fifo_in, completed_vbuf);
++				completed_vbuf = NULL;
++			}
++		} else {
++			data->curr_vid_buf = 0;
++		}
++	}
++
++	/* A returned buffer lets the application switch the shared MIPI route. */
++	if (completed_vbuf) {
++		k_fifo_put(&data->fifo_out, completed_vbuf);
+ 	}
+ 
+ 	LOG_DBG("current video buffer - 0x%08x", data->curr_vid_buf);
+diff --git a/drivers/video/video_alif.c b/drivers/video/video_alif.c
+--- a/drivers/video/video_alif.c
++++ b/drivers/video/video_alif.c
+@@ -544,17 +544,24 @@
+ 	hw_enable_interrupts(regs, INTR_VSYNC | INTR_BRESP_ERR | INTR_OUTFIFO_OVERRUN |
+ 					   INTR_INFIFO_OVERRUN | INTR_STOP);
+ 
+-	/* Start the MIPI CSI-2 IP in case the MIPI CSI is available. */
++	data->is_streaming = true;
++	hw_cam_start_video_capture(dev);
++
++	/* Arm the consumer before upstream starts producing pixels. */
+ 	ret = video_stream_start(config->endpoint_dev);
+ 	if (ret) {
++		data->is_streaming = false;
++		hw_disable_interrupts(regs, INTR_VSYNC | INTR_BRESP_ERR | INTR_OUTFIFO_OVERRUN |
++					      INTR_INFIFO_OVERRUN | INTR_STOP);
++		k_work_cancel_sync(&data->cb_work, &sync);
++		hw_cam_soft_reset(regs);
++		sys_write32(sys_read32(regs + CAM_INTR), regs + CAM_INTR);
++		data->curr_vid_buf = 0;
+ 		LOG_ERR("Failed to start streaming of Video pipeline!");
+ 		return -EIO;
+ 	}
+ 
+-	hw_cam_start_video_capture(dev);
+ 	LOG_DBG("Stream started");
+-
+-	data->is_streaming = true;
+ 
+ 	return 0;
+ }
+diff --git a/drivers/video/video_csi_dw.c b/drivers/video/video_csi_dw.c
+--- a/drivers/video/video_csi_dw.c
++++ b/drivers/video/video_csi_dw.c
+@@ -425,6 +425,12 @@
+ 		return 0;
+ 	}
+ 
++	if (!data->streaming_map) {
++		/* Discard frame state retained while IPI was disabled. */
++		sys_clear_bits(regs + CSI_IPI_SOFTRSTN, CSI_IPI_SOFTRSTN_RSTN);
++		sys_set_bits(regs + CSI_IPI_SOFTRSTN, CSI_IPI_SOFTRSTN_RSTN);
++	}
++
+ 	/* Enable CSI streaming */
+ 	sys_set_bits(regs + CSI_IPI_MODE, CSI_IPI_MODE_ENABLE);
+ 	LOG_DBG("Stream started");
+@@ -433,10 +439,12 @@
+ 	if (config->sensor[data->current_sensor]) {
+ 		ret = video_stream_start(config->sensor[data->current_sensor]);
+ 		if (ret) {
++			sys_clear_bits(regs + CSI_IPI_MODE, CSI_IPI_MODE_ENABLE);
+ 			LOG_ERR("Failed to start sensor stream!");
+ 			return ret;
+ 		}
+ 	} else {
++		sys_clear_bits(regs + CSI_IPI_MODE, CSI_IPI_MODE_ENABLE);
+ 		LOG_ERR("Incorrect sensor selected!");
+ 		return -ENODEV;
+ 	}
+diff --git a/include/zephyr/drivers/display/cdc200.h b/include/zephyr/drivers/display/cdc200.h
+--- a/include/zephyr/drivers/display/cdc200.h
++++ b/include/zephyr/drivers/display/cdc200.h
+@@ -93,6 +93,13 @@
+ 		bool enable);
+ 
+ /*
++ * Disable CDC at the next vertical front porch. Returns -EAGAIN on timeout.
++ * The caller must serialize all CDC enable/disable requests, including calls to
++ * this function, and framebuffer changes.
++ */
++int cdc200_disable_at_vblank(const struct device *dev, k_timeout_t timeout);
++
++/*
+  * Swap Framebuffers for specified layer. The buffer change will happen at next vblank
+  */
+ void cdc200_swap_fb(const struct device *dev,
+diff --git a/include/zephyr/drivers/mipi_dsi/dsi_dw.h b/include/zephyr/drivers/mipi_dsi/dsi_dw.h
+--- a/include/zephyr/drivers/mipi_dsi/dsi_dw.h
++++ b/include/zephyr/drivers/mipi_dsi/dsi_dw.h
+@@ -25,6 +25,13 @@
+ int dsi_dw_set_mode(const struct device *dev,
+ 		enum dsi_dw_mode mode);
+ 
++/*
++ * After CDC is stopped at vertical blanking, drain video and stop the HS clock,
++ * wait for all active lanes to stop, then hold the host powered down.
++ * Resume with dsi_dw_set_mode(dev, DSI_DW_VIDEO_MODE).
++ */
++int dsi_dw_suspend_video(const struct device *dev);
++
+ #ifdef __cplusplus
+ }
+ #endif
