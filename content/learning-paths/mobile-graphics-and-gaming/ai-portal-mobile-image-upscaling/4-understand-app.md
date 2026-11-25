@@ -55,7 +55,7 @@ The result shows the model, input and output dimensions, and processing time. Ti
 
 `DetailView.java` keeps the zoom and position when you switch between original and upscaled images. **Save image** writes the output as a PNG through the Android document picker, without broad storage permission.
 
-## (Optional) How you can add support for another compatible model
+## (Optional) Add support for another compatible model
 
 A new model can reuse this adapter if its following components match with the supported models:
 
