@@ -61,4 +61,4 @@ Models with different requirements need adapter changes or a separate adapter.
 
 You've learned how Photo Upscale imports models, upscales tiles, blends the output, and saves a PNG.
 
-You can use the supplied application to compare supported upscaling models on an Arm-based Android phone.
+You can use Photo Upscale to compare supported upscaling models on an Arm-based Android phone.
