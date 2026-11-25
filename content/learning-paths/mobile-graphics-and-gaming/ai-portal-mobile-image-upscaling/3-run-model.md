@@ -65,7 +65,7 @@ Copy the image to the phone:
 adb push samples/photo.jpg /sdcard/Download/
 ```
 
-To use a different JPEG or PNG image, replace `samples/photo.jpg` in the `adb push` command with its path. You can also skip the copy command and select an image already stored on the phone or emulator. Use a photo with dimensions at most 512 × 512 pixels.
+To use a different JPEG or PNG image, replace `samples/photo.jpg` in the `adb push` command with its path. You can also skip the copy command and select an image that's already stored on the phone or emulator. Use a photo with dimensions at most 512 × 512 pixels.
 
 ## Run photo upscaling
 
@@ -77,7 +77,7 @@ In Photo Upscale:
 
 The importer identifies the supported model by its checksum and copies it to application-specific storage. You can delete the `.pte` from **Downloads** after import. The imported file remains until you uninstall the application or clear its storage.
 
-The application reports tile progress. It then displays the original and upscaled image, input and output dimensions, model name, and processing time. The sample produces **96 × 64 → 384 × 256**. This 4× upscaling gives sixteen times as many pixels.
+The application reports tile progress. It then displays the original and upscaled image, input and output dimensions, model name, and processing time. The sample produces **96 × 64 → 384 × 256**. This 4× upscaling gives 16 times as many pixels.
 
 **Processing time** covers RGB preparation, inference of every tile, blending, and conversion to the output bitmap. It excludes model import, loading and the validation warm-up, photo decoding, screen rendering, and saving. It's a full-image measurement.
 
@@ -107,12 +107,12 @@ Choose a second, visibly different photo and run again to confirm that the outpu
 
 ## Use another supported model
 
-Photo Upscale also supports the following Arm AI Portal model packages:
+Photo Upscale supports the following Arm AI Portal model packages:
 
 | Model | Runtime | Repository ID | Import this file | Processing profile |
 | --- | --- | --- | --- | --- |
 | [QuickSRNetSmall INT8](https://developer.arm.com/ai/models/hugging-face/Arm/qai-quicksrnetsmall-int8-xnnpack-executorch-vivo-x300/quicksrnetsmall-int8-pte) (default) | ExecuTorch CPU or XNNPACK | `Arm/qai-quicksrnetsmall-int8-xnnpack-executorch-vivo-x300` | `quicksr.pte` | RGB `[0,1]`, 128 × 128 → 512 × 512, 4×, 8-pixel overlap |
-| [SESR-M5 INT8](https://developer.arm.com/ai/models/hugging-face/Arm/sesr-m5-int8-xnnpack-executorch-vivo-x300/sesr-m5-int8-pte) | ExecuTorch CPU or XNNPACK | `Arm/sesr-m5-int8-xnnpack-executorch-vivo-x300` | `sesr.pte` | RGB `[0,1]`, 128 × 128 → 512 × 512, 4×; app chooses 8-pixel overlap |
+| [SESR-M5 INT8](https://developer.arm.com/ai/models/hugging-face/Arm/sesr-m5-int8-xnnpack-executorch-vivo-x300/sesr-m5-int8-pte) | ExecuTorch CPU or XNNPACK | `Arm/sesr-m5-int8-xnnpack-executorch-vivo-x300` | `sesr.pte` | RGB `[0,1]`, 128 × 128 → 512 × 512, 4×; the app chooses 8-pixel overlap |
 | [RealESR-general-x4v3 INT8](https://developer.arm.com/ai/models/hugging-face/Arm/realesr-general-x4v3-int8-xnnpack-executorch-vivo-x300/realesr-general-x4v3-int8-pte) | ExecuTorch CPU or XNNPACK | `Arm/realesr-general-x4v3-int8-xnnpack-executorch-vivo-x300` | `realesr.pte` | RGB `[0,1]`, 128 × 128 → 512 × 512, 4×, 8-pixel overlap |
 
 To use one of these models, set `MODEL_ID` to a repository ID from the table. After updating the ID, repeat the download and import workflow. Select **Add or change model** and import its file. The single ExecuTorch adapter detects the matching profile automatically. The selected photo stays in place, and the previous result is cleared. Select **Upscale photo** again, compare the same details, and save under a different filename.

@@ -21,7 +21,7 @@ Image upscaling converts a low-resolution photo into a higher-resolution image. 
 
 `ModelProfile.java` records the checksum, tile size, scale factor, and overlap of each model. `models.json` supplies the repository IDs, fixed revisions, filenames, and checksums of the downloader.
 
-`ModelImporter.java` identifies the selected file by its SHA-256 checksum and stores a private copy. It rejects unsupported or modified files and files above 16 MiB. Importing another model replaces the active model without clearing the selected photo.
+`ModelImporter.java` identifies the selected file by its SHA-256 checksum and stores a private copy. It rejects unsupported or modified files and files larger than 16 MiB. Importing another model replaces the active model without clearing the selected photo.
 
 The adapter closes the previous module and loads the model. It checks for `forward` and `XnnpackBackend`, and runs a zero-valued test tile. This warm-up checks the output tensor and is excluded from the displayed processing time.
 
@@ -37,11 +37,15 @@ The models require fixed-size input tiles, so the app divides larger photos into
 
 The adapter calls `Module.execute("forward", ...)` once per tile. It checks that each output is float32 RGB `[1,3,512,512]` with no NaN or infinite values. Progress shows completed tiles.
 
-XNNPACK selects CPU kernels according to the model, runtime build, and available CPU features on the phone. An SME2 label on an AI Portal model doesn't confirm that SME2 kernels ran on your phone.
+XNNPACK selects CPU kernels according to the model, runtime build, and available CPU features on the phone. 
+
+{{% notice Note %}}
+A Scalable Matrix Extension 2 (SME2) label on an AI Portal model doesn't confirm that SME2 kernels ran on your phone.
+{{% /notice %}}
 
 ### How Photo Upscale blends and converts output
 
-Blending reduces visible joins where neighboring tiles predict different pixel values. The app blends overlapping tiles with linear weights across 32 output pixels. Borders at the image edge keep their full weight. It removes padding to produce exactly four times the input width and height.
+Blending reduces visible joins where neighboring tiles predict different pixel values. Photo Upscale blends overlapping tiles with linear weights across 32 output pixels. Borders at the image edge keep their full weight. It removes padding to produce exactly four times the input width and height.
 
 RGB values are clamped to `[0,1]`, multiplied by 255, and truncated to integer channels in an opaque bitmap.
 
@@ -53,7 +57,22 @@ The result shows the model, input and output dimensions, and processing time. Ti
 
 ## (Optional) How you can add support for another compatible model
 
-A new model can reuse this adapter if its preprocessing, tensor shapes and types, scale factor, output conversion, and CPU backend match. Add its download entry to `models.json` and profile to `ModelProfile.java`. After adding the entry and profile, rebuild and test import, inference, image detail, dimensions, switching, and saving.
+A new model can reuse this adapter if its following components match with the supported models:
+
+- Preprocessing
+- Tensor shapes and types
+- Scale factor
+- Output conversion
+- CPU backend 
+
+Add its download entry to `models.json` and profile to `ModelProfile.java`. After adding the entry and profile of the model, rebuild. Test the following details:
+
+- Import
+- Inference
+- Image detail
+- Dimensions
+- Switching
+- Saving
 
 Models with different requirements need adapter changes or a separate adapter.
 
