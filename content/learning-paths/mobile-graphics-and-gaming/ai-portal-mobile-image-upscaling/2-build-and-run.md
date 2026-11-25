@@ -9,6 +9,8 @@ layout: learningpathall
 
 ## Connect an Android phone
 
+After setting up Android command-line tools, connect the phone to your development computer.
+
 Enable **Developer options** and **USB debugging** on the phone. Connect the phone to your development computer with USB, unlock it, and accept the debugging authorization prompt.
 
 Verify that your phone is listed in `adb`:
@@ -17,9 +19,9 @@ Verify that your phone is listed in `adb`:
 adb devices -l
 ```
 
-The output lists the authorized phone and its device serial. If the phone reports `unauthorized`, unlock it and accept the debugging prompt. If the phone doesn't appear, see [Run apps on a hardware device](https://developer.android.com/studio/run/device).
+The output lists the authorized phone and its device serial. If the phone reports `unauthorized`, unlock the phone and accept the debugging prompt. If the phone doesn't appear, see [Run apps on a hardware device](https://developer.android.com/studio/run/device).
 
-Confirm that the phone uses the Arm64 ABI and runs Android 9 (API 28) or later:
+Confirm that the phone uses the Arm64 Application Binary Interface (ABI) and runs Android 9 (API 28) or later:
 
 ```console
 adb shell getprop ro.product.cpu.abi
@@ -37,13 +39,13 @@ git clone https://github.com/arm-education/ai-portal-android-app-photo-upscaling
 cd ai-portal-android-app-photo-upscaling
 ```
 
-Run the remaining terminal commands from this project directory.
+Run the remaining terminal commands in the Learning Path from this project directory.
 
 ## Prepare the Arm AI Portal model downloader
 
-The sample repository includes a downloader for its supported Arm AI Portal model packages. The packages are published by Arm and hosted in Arm's Hugging Face repositories.
+The sample repository includes a downloader for its supported Arm AI Portal model packages. The packages are published by Arm and hosted in Arm Hugging Face repositories.
 
-Create a Python virtual environment and install the package used by the downloader:
+Create a Python virtual environment and install the package that's used by the downloader:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
@@ -56,7 +58,7 @@ python -m venv .hf-venv
   {{< /tab >}}
 {{< /tabpane >}}
 
-The later commands invoke the environment's Python executable directly, so the PowerShell script-execution policy doesn't need to be changed.
+The later commands invoke the environment Python executable directly. The PowerShell script-execution policy therefore doesn't need to be changed.
 
 If Python reports that `venv` is unavailable on Debian or Ubuntu, install the `python3-venv` package and rerun the command.
 
@@ -73,7 +75,11 @@ Before building, confirm that Gradle is running with JDK 17:
   {{< /tab >}}
 {{< /tabpane >}}
 
-The `Launcher JVM` and `Daemon JVM` entries should report version 17. If either entry uses another version, set `JAVA_HOME` to your JDK 17 installation and stop the existing Gradle daemon before trying again:
+The `Launcher JVM` and `Daemon JVM` entries should report version 17.
+
+If either entry uses another version, set `JAVA_HOME` to your JDK 17 installation.
+
+Stop the existing Gradle daemon before trying again:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
@@ -84,8 +90,8 @@ The `Launcher JVM` and `Daemon JVM` entries should report version 17. If either 
   {{< /tab >}}
 {{< /tabpane >}}
 
-{{% notice Troubleshooting %}}
-If the build fails and the error contains only a Java version number, such as `27.0.1.1`, Gradle is using an incompatible JDK. Set `JAVA_HOME` to JDK 17, stop the Gradle daemon, confirm the version with `./gradlew --version` or `.\gradlew.bat --version`, and run the build again.
+{{% notice Note %}}
+If the build fails and the error contains only a Java version number, Gradle is using an incompatible JDK. Set `JAVA_HOME` to JDK 17 and stop the Gradle daemon. Confirm the version with `./gradlew --version` or `.\gradlew.bat --version`, and run the build again.
 {{% /notice %}}
 
 Use the Gradle wrapper to build and lint the debug Android package (APK):
@@ -113,9 +119,9 @@ adb shell am start -n org.arm.learningpath.upscaling/.MainActivity
 
 The `adb install -r` command should report `Success`. The launch command should report that it started `org.arm.learningpath.upscaling/.MainActivity`.
 
-Photo Upscale uses one ExecuTorch adapter for all supported models. Use **Add or change model** to load a model. **Upscale photo** remains unavailable until you import a supported model and choose a saved photo. **Inspect detail** and **Save image** appear after upscaling. Installing with `adb install -r` preserves models imported previously. On a first installation, the app reports **Model setup needed**.
+Photo Upscale uses one ExecuTorch adapter for all supported models. Use **Add or change model** to load a model. **Upscale photo** remains unavailable until you import a supported model and choose a saved photo. **Inspect detail** and **Save image** appear after upscaling. Installing with `adb install -r` preserves models that were imported previously. On a first installation, the app reports **Model setup needed**.
 
-Confirm that the application opens and shows **Model setup needed**, an empty photo preview, and an unavailable **Upscale photo** button, as shown in the following image.
+Confirm that the application opens and shows **Model setup needed**, an empty photo preview, and an unavailable **Upscale photo** button:
 
 ![Photo Upscale showing Model setup needed, an empty photo preview, and the disabled Upscale photo button.#center](images/photo-upscale-startup.png "Photo Upscale before importing a model or choosing a photo")
 

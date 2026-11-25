@@ -13,13 +13,13 @@ The [Arm AI Portal](https://developer.arm.com/ai/models) is a catalog of AI mode
 
 You'll use an example application called Photo Upscale to upscale a saved photo locally on an Arm-based Android device. You'll import a model, using QuickSRNetSmall first, run inference, compare image detail, and save the output as a PNG. The same application also supports SESR-M5 and RealESR-general-x4v3 models.
 
-Use an Arm-based Android device with the `arm64-v8a` ABI and Android 9 (API 28) or later. The application accepts images at most 512 × 512 pixels and produces an image four times wider and taller, up to 2048 × 2048. Start with the supplied 96 × 64 sample. If either dimension exceeds 512 pixels, resize a copy beforehand in an image editor.
+Use an Arm-based Android device with the `arm64-v8a` Application Binary Interface (ABI) and Android 9 (API 28) or later. The application accepts images at most 512 × 512 pixels. It produces an image four times wider and taller, up to 2048 × 2048. Start with the supplied 96 × 64 sample. If either dimension exceeds 512 pixels, resize a copy beforehand in an image editor.
 
 ## Check the host development tools
 
 You'll use a terminal and a physical Arm-based Android phone. The setup commands install the Android SDK and help you verify the development environment before you build the application.
 
-Before you run the commands, ensure your development machine has the prerequisite tools installed.
+Before you run the commands, ensure that your development machine has the prerequisite tools installed.
 
 Open a terminal. On Windows, use PowerShell.
 
@@ -47,15 +47,15 @@ $PSVersionTable.PSVersion
 
 Install any missing host tools before continuing. Use Python 3.10 or later and JDK 17 for this Learning Path. The application pins Android Gradle Plugin 8.7.3 and Gradle 8.9, which are validated with JDK 17. Newer JDK releases aren't validated for this workflow and can prevent Gradle from building the application.
 
-If your machine has multiple JDK versions, set `JAVA_HOME` to the JDK 17 installation before continuing. Confirm that both `java -version` and `javac -version` report version 17. See [Java versions in Android builds](https://developer.android.com/build/jdks) for JDK selection options.
+If your machine has multiple JDK versions, set `JAVA_HOME` to the JDK 17 installation before continuing. Confirm that both `java -version` and `javac -version` report version 17. For JDK selection options, see [Java versions in Android builds](https://developer.android.com/build/jdks).
 
 {{% notice Note %}}
-Android Studio is optional for inspecting and running the project. This Learning Path validates the application on a physical Arm-based Android phone. You can use an Android Virtual Device (AVD) for additional functional testing on a compatible host, but it doesn't replace the physical-phone validation. If you use an AVD, select a recent system image that supports the application's `arm64-v8a` libraries.
+Android Studio is optional for inspecting and running the project. This Learning Path validates the application on a physical Arm-based Android phone. You can use an Android Virtual Device (AVD) for additional functional testing on a compatible host, but it doesn't replace the physical-phone validation. If you use an AVD, select a recent system image that supports the `arm64-v8a` libraries of the application.
 {{% /notice %}}
 
 ## Install the Android command-line tools
 
-The following commands download Google's [Android SDK Command-Line Tools](https://developer.android.com/tools), verify the pinned archive checksum, and place the tools under `ANDROID_HOME`:
+Download [Android SDK Command-Line Tools](https://developer.android.com/tools), verify the pinned archive checksum, and place the tools under `ANDROID_HOME`:
 
 {{< tabpane code=true >}}
   {{< tab header="macOS or Linux" language="bash" >}}
@@ -134,7 +134,7 @@ $env:Path = "$latestTools\bin;$env:ANDROID_HOME\platform-tools;$env:Path"
 
 If you already have an SDK in `ANDROID_HOME`, the commands reuse that location.
 
-The `export` commands and PowerShell environment assignments apply to the current terminal. Continue in the same terminal. If you use a new terminal, you'll need to set `ANDROID_HOME` to the same directory and add `cmdline-tools/latest/bin` and `platform-tools` to `PATH` again.
+The `export` commands and PowerShell environment assignments apply to the current terminal. Continue in the same terminal. If you use a new terminal, you'll need to set `ANDROID_HOME` to the same directory. You'll also need to add `cmdline-tools/latest/bin` and `platform-tools` to `PATH` again.
 
 ## Install and verify the required SDK packages
 
