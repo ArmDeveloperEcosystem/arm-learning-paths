@@ -65,14 +65,7 @@ A new model can reuse this adapter if its following components match with the su
 - Output conversion
 - CPU backend 
 
-Add its download entry to `models.json` and profile to `ModelProfile.java`. After adding the entry and profile of the model, rebuild. Test the following details:
-
-- Import
-- Inference
-- Image detail
-- Dimensions
-- Switching
-- Saving
+Add its download entry to `models.json` and profile to `ModelProfile.java`. After adding the entry and profile of the model, rebuild. Test import, inference, and image detail, as well as dimensions, switching, and saving.
 
 Models with different requirements need adapter changes or a separate adapter.
 
