@@ -7,9 +7,11 @@ layout: "learningpathall"
 
 ## Prepare the component workspace
 
-Run these commands on the host computer, in the same terminal session you used for provisioning, so the AWS account, Region, and variables stay set. If you opened a new terminal, set `AWS_REGION` again, as in [Set variables on the host computer](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/provision/#set-variables-on-the-host-computer).
+You'll now create a Hello World component recipe and publish it for deployment to the PocketBeagle 2 board. Run all commands on the host computer and in the same terminal session that you used for provisioning. This ensures that the AWS account, Region, and environment variables stay set.
 
-Create a workspace directory that is separate from the folder holding your device credentials:
+If you need to open a new terminal, [set the AWS variables on the host computer](/learning-paths/embedded-and-microcontrollers/ti-pocketbeagle2-yocto-gglite-part1/provision/#set-variables-on-the-host-computer).
+
+Start by creating a workspace directory that's separate from the folder holding your device credentials:
 
 ```bash
 mkdir -p "$HOME/pb2-hello-world"
@@ -18,7 +20,7 @@ cd "$HOME/pb2-hello-world"
 
 ## Create the component recipe
 
-Save the following JSON as `recipe.json` in the workspace. The component defines its application directly in the manifest's `run` lifecycle step. It prints `Hello from Greengrass nucleus lite on PocketBeagle 2!` every 60 seconds. The empty `Artifacts` list means you don't need an Amazon S3 bucket, a separate shell script, or artifact download permissions.
+Save the following JSON as `recipe.json` in the workspace:
 
 ```json
 {
@@ -45,7 +47,9 @@ Save the following JSON as `recipe.json` in the workspace. The component defines
 }
 ```
 
-The platform selector targets Linux on `aarch64` with the `aws_nucleus_lite` runtime, which is the runtime value AWS documents for Greengrass nucleus lite. The recipe has no dependency on the Java nucleus or its CLI component.
+The component defines its application directly in the `run` lifecycle step of the manifest. It prints `Hello from Greengrass nucleus lite on PocketBeagle 2!` every 60 seconds. The empty `Artifacts` list means that you don't need an Amazon S3 bucket, a separate shell script, or artifact download permissions.
+
+The platform selector targets Linux on `aarch64` with the `aws_nucleus_lite` runtime. This is the runtime value that AWS documents for Greengrass nucleus lite. The recipe has no dependency on the Java nucleus or its CLI component.
 
 Validate the JSON before publishing:
 
@@ -53,11 +57,11 @@ Validate the JSON before publishing:
 python3 -m json.tool recipe.json
 ```
 
-The command prints the formatted recipe. If it reports a parsing error, correct the JSON before you continue.
+The command prints the formatted recipe. If it reports a parsing error, correct the JSON before continuing.
 
 ## Publish the component
 
-Register version `1.0.1` as a private component in your account. Then save your account ID and list the component's published versions:
+Register version `1.0.1` as a private component in your account. Then, save your account ID and list the published versions of the component:
 
 ```bash
 aws greengrassv2 create-component-version \
@@ -87,8 +91,10 @@ The output is similar to:
 }
 ```
 
-Component versions are immutable, so publish a new version when you change the recipe. If version `1.0.1` already exists, use it only if its recipe matches this example.
+Component versions are immutable, so publish a new version when you change the recipe. If version `1.0.1` already exists, use it only if its recipe matches this example recipe.
 
-## What you have accomplished
+## What you've accomplished and what's next
 
-Your AWS account contains a versioned Hello World component that runs its application from the recipe. Next, deploy it to the dedicated thing group and verify its output on the board.
+You've created and published a versioned Hello World component to your AWS account. The component runs its application from the recipe. 
+
+Next, you'll deploy the component to the dedicated thing group and verify its output on the board.
