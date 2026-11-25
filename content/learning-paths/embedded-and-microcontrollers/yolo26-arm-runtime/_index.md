@@ -90,6 +90,10 @@ tools_software_languages:
   - AI Portal
   - Arm Runtime for YOLO26 on Raspberry Pi 5
   - XNNPACK
+  - Perception
+  - Vision
+  - Object Detection
+  - Ultralytics
 
 further_reading:
   - resource:
