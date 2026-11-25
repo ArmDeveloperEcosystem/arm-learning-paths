@@ -46,7 +46,20 @@ Calls to:
                                   term-{{. | urlize}}
                               {{end}}
                           {{ end }}'>
-                  <ads-card class="tool-card">
+                  {{- /* Metadata text for client-side search (description, author). */ -}}
+                  {{- $search_parts := slice -}}
+                  {{- with .Params.description -}}
+                    {{- $search_parts = $search_parts | append (. | markdownify | plainify | htmlUnescape) -}}
+                  {{- end -}}
+                  {{- with .Params.author -}}
+                    {{- if reflect.IsSlice . -}}
+                      {{- range . -}}{{- $search_parts = $search_parts | append (printf "%v" . | markdownify | plainify | htmlUnescape) -}}{{- end -}}
+                    {{- else -}}
+                      {{- $search_parts = $search_parts | append (printf "%v" . | markdownify | plainify | htmlUnescape) -}}
+                    {{- end -}}
+                  {{- end -}}
+                  {{- $search_text := trim (delimit $search_parts " " | replaceRE `\s+` " ") " " -}}
+                  <ads-card class="tool-card" data-search-text="{{ $search_text }}">
                       <ads-card-content class="tool-card-content" slot="content">
                           <a class="listing-card-link" href="{{.Permalink}}">
                               <p class="search-title install-guide-title">{{.Title}}</p>
