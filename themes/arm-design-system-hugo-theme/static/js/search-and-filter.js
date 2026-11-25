@@ -212,9 +212,6 @@ function turnOnFilters(filters_list) {
     for (let filter of filters_list) {
         let filter_group = filter.split('=')[0];
         let filter_name = filter.split('=')[1];
-        console.log('yo prodcessing turnOnFilters');
-        console.log(filter_group,filter_name);
-        console.log('==============================');
 
         // get checkbox elements to check (mobile and desktop apperance) by 'data-urlized-name'
         let checkbox_elements = document.querySelectorAll("ads-checkbox[data-urlized-name='"+filter_name+"']");
@@ -308,18 +305,95 @@ function filterHandler_radio_LearningPaths(element) {
 
 
 // search-logic.js
-function searchByTitle(card,search_word_array) {   
-    // Title of learning path --> title must include ALL search terms (any order or case)
-    let card_title = card.querySelector('.search-title').innerHTML.toLowerCase();
-    var title_serach_match = search_word_array.every(item => card_title.includes(item));
-    if (!title_serach_match) {
-        return true // hide it
+// Tokenization, language aliases, 3-char prefix matching, and -term / NOT term
+// exclusions aligned with assets/search-lab/engine.mjs.
+const SEARCH_STOP_WORDS = new Set('a an and are at be can do for from how i in is it me my of on or the to using what with'.split(' '));
+const SEARCH_ALIASES = new Map([['cpp', 'c++'], ['csharp', 'c#']]);
+
+function tokenizeSearchText(text) {
+    const tokens = String(text).toLowerCase().match(/[\p{L}\p{N}]+(?:[.+#-][\p{L}\p{N}+#]+)*#?/gu) || [];
+    return tokens.map(token => SEARCH_ALIASES.get(token) || token);
+}
+
+function parseSearchQuery(raw_query) {
+    if (!raw_query || !raw_query.trim()) {
+        return { terms: [], excluded: [] };
     }
-    else {
-        return false // show it
+    // Parse exclusion operators before tokenizing the positive query.
+    // Supports: -term and uppercase NOT term (lowercase "not" stays a literal word).
+    const excludedRaw = [];
+    const cleanQuery = raw_query
+        .replace(/(^|\s)-(\S+)/g, (_, sp, w) => { excludedRaw.push(w); return sp; })
+        .replace(/(^|\s)NOT\s+(\S+)/g, (_, sp, w) => { excludedRaw.push(w); return sp; })
+        .replace(/(^|\s)NOT\s*$/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    const excluded = [...new Set(tokenizeSearchText(excludedRaw.join(' ')).filter(Boolean))];
+    const rawPositive = [...new Set(tokenizeSearchText(cleanQuery).filter(Boolean))];
+    const filteredPositive = rawPositive.filter(t => !SEARCH_STOP_WORDS.has(t));
+    // Fall back to raw positive tokens if the user only typed stop words (e.g. mid-typing).
+    const terms = filteredPositive.length > 0 ? filteredPositive : rawPositive;
+
+    return { terms, excluded };
+}
+
+function getCardTokens(card) {
+    if (!card._searchTokenCache) {
+        const titleEl = card.querySelector('.search-title');
+        const searchTextEl = card.querySelector('[data-search-text]');
+        const combined = (titleEl ? titleEl.textContent : '') + ' ' + (searchTextEl ? searchTextEl.dataset.searchText : '');
+        const uniqueTokens = [...new Set(tokenizeSearchText(combined))];
+        card._searchTokenCache = {
+            set: new Set(uniqueTokens),
+            list: uniqueTokens
+        };
     }
+    return card._searchTokenCache;
+}
+
+function isCardExcluded(card, excluded) {
+    if (!excluded || excluded.length === 0) {
+        return false;
+    }
+    const { set: tokenSet } = getCardTokens(card);
+    // Exclusions always use exact token matching (no prefix expansion).
+    return excluded.some(ex => tokenSet.has(ex));
+}
+
+function searchByTitle(card, parsed) {
+    // Search the card title and the data-search-text attribute (if present).
+    // data-search-text is set by path-ads-card.html (description, who_is_this_for,
+    // learning_objectives, prerequisites, author) and install-guides/list.html
+    // (description, author).
+    // - Exclusions (-term / NOT term): exact token match hides the card.
+    // - Positive terms (AND behaviour): 1-2 char tokens require exact match
+    //   (so "go" does not match "good"); 3+ char tokens allow exact or prefix match.
+    if (!parsed || (parsed.terms.length === 0 && parsed.excluded.length === 0)) {
+        return false; // show it
+    }
+
+    if (isCardExcluded(card, parsed.excluded)) {
+        return true; // hide it
+    }
+
+    const { set: tokenSet, list: tokenList } = getCardTokens(card);
+    const allMatched = parsed.terms.every(term => {
+        if (tokenSet.has(term)) {
+            return true;
+        }
+        if (term.length >= 3) {
+            return tokenList.some(token => token.startsWith(term));
+        }
+        return false;
+    });
+
+    return !allMatched; // true = hide it, false = show it
 }
 function searchByAdditionalSearchTerm(card,search_word_array) {
+    if (!search_word_array || search_word_array.length === 0) {
+        return true;
+    }
     let result = true;
     
     let search_word_dash = search_word_array.join("-")
@@ -335,34 +409,21 @@ function searchByAdditionalSearchTerm(card,search_word_array) {
     return result
 }
 function parseParamsFromURL(url_str) {
-        // Split by & and get search string ('search=') and filters ('filter-')
-        let url_params = url_str.split('&');
-
-        // iterate over all url_params and get search / filter params. Sanitize and decode them.
+        // Parse URL query params using URLSearchParams so spaces (+) and encoded
+        // characters like C++ (%2B%2B) decode accurately.
+        const urlParams = new URLSearchParams(url_str);
         let search_str = '';
         let filters = [];
-        for (let param of url_params)
-        {
-            if (param.includes('search=')) {
-                search_str = sanitizeInput(decodeURIComponent(param.replace('?','').replace('search=','')));
+        for (const [key, value] of urlParams.entries()) {
+            if (key === 'search') {
+                search_str = sanitizeInput(value);
             }
-            else {
-                // if multiple params in the same group, split by %2C (comma)
-                if (param.includes('%2C')) {
-                    let group_filter = param.split('=')[0].replace('?','');
-                    param.split('=')[1].split('%2C').forEach(param =>
-                        filters.push(sanitizeInput(decodeURIComponent(group_filter+('=')+param)))
-                    );
-                }
-                else {
-                    filters.push(sanitizeInput(decodeURIComponent(param.replace('?',''))));
-                }
+            else if (value) {
+                value.split(',').forEach(val => {
+                    filters.push(sanitizeInput(`${key}=${val}`));
+                });
             }
         }
-        console.log('URL PARAMS:');
-        console.log(search_str);
-        console.log(filters);
-        console.log('==============================');
 
         return [search_str,filters]
 }
@@ -409,8 +470,8 @@ function applySearchAndFilters(all_path_cards, search_string, page) {
         skip_search=true; 
     }
 
-    // Filter search term
-    const search_word_array = search_string.toLowerCase().split(" ");   // 'MongoDB Arm Neoverse-N1' --> ['mongodb','arm','neoverse-n1']
+    // Parse search query once (handles tokenization, aliases, stop words, and - / NOT exclusions)
+    const parsed_query = parseSearchQuery(search_string);
 
     // store results to hide based on certain parameters
     let results_to_hide = [];
@@ -421,20 +482,23 @@ function applySearchAndFilters(all_path_cards, search_string, page) {
         // SEARCH
         if (!skip_search) {
             if (page=='paths') {
-                if (searchByTitle(card,search_word_array)) { 
+                if (searchByTitle(card,parsed_query)) { 
                     results_to_hide.push(card); // set card to be hidden
                 }
             }
 
             if (page=='openfilter') {
-                if (searchByTitle(card,search_word_array)) { 
+                if (searchByTitle(card,parsed_query)) { 
                     results_to_hide.push(card); // set card to be hidden
                 }
             }
 
             // Tool-based search only
             if (page=='tools') {
-                if (searchByTitle(card,search_word_array) && searchByAdditionalSearchTerm(card,search_word_array)) { 
+                if (isCardExcluded(card, parsed_query.excluded)) {
+                    results_to_hide.push(card); // exclusions always take precedence
+                }
+                else if (searchByTitle(card,parsed_query) && searchByAdditionalSearchTerm(card,parsed_query.terms)) { 
                     results_to_hide.push(card); // set card to be hidden
                 }
             }
@@ -452,14 +516,10 @@ function applySearchAndFilters(all_path_cards, search_string, page) {
     return results_to_hide
 }
 function sanitizeInput(potentially_unsafe_str) {
-    // Sanitize the input by only allowing the following characters through, replacing all others with nothing:
-        // a-z
-        // A-Z
-        // 0-9 digits
-        // special characters: .-=
-            // - very common in code
-            // = needed for param filtering to work easily in parseParamsFromURL
-    let sanitized_str = potentially_unsafe_str.replaceAll(/[^a-z A-Z 0-9 .=-]+/g, "");
+    // Sanitize the input by only allowing safe query/filter characters through:
+        // a-z, A-Z, 0-9, spaces
+        // special characters: .=-+#_/ (supports C++, g++, C#, llama.cpp, -exclusions, AI/ML, perf_event_open, filter=value)
+    let sanitized_str = potentially_unsafe_str.replaceAll(/[^a-zA-Z0-9 .=\-+#_/]+/g, "");
 
     return sanitized_str
 }
