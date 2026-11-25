@@ -62,12 +62,14 @@ Called from:
 
 <!-- Homepage only -->
 {{if .IsHome }}
-    <script src="/js/search-and-filter.js" defer></script>
+    {{ $search_js := resources.Get "js/search-and-filter.js" | fingerprint }}
+    <script src="{{ $search_js.RelPermalink }}" defer></script>
 {{end}}
 
 <!-- List pages only -->
 {{if and $is_list (not .Params.browser_search)}}
-    <script src="/js/search-and-filter.js" defer></script>
+    {{ $search_js := resources.Get "js/search-and-filter.js" | fingerprint }}
+    <script src="{{ $search_js.RelPermalink }}" defer></script>
     <script src="/js/filter-and-navigate-mobile-behavior.js" defer></script>
 {{end}}
 
