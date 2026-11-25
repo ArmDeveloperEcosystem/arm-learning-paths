@@ -1,6 +1,10 @@
 ---
 title: Run Hermes Agent with local Gemma 4 and llama.cpp on macOS
 
+draft: true
+cascade:
+    draft: true
+
 description: Build llama.cpp with Metal and Arm KleidiAI support on macOS, serve Gemma 4 E4B locally, and connect Hermes Agent to diagnose and fix code without cloud services.
 
 minutes_to_complete: 45
