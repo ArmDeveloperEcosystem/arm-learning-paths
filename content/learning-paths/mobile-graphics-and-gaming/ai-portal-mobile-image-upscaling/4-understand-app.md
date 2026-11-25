@@ -59,6 +59,6 @@ Models with different requirements need adapter changes or a separate adapter.
 
 ## What you've learned
 
-You've learned how Photo Upscale imports models, upscales tiles, blends the output, and saves a PNG. 
+You've learned how Photo Upscale imports models, upscales tiles, blends the output, and saves a PNG.
 
-You can now use these models for your own photo upscaling applications on Arm-based CPUs.
+You can use the supplied application to compare supported upscaling models on an Arm-based Android phone.

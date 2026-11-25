@@ -75,9 +75,9 @@ Before building, confirm that Gradle is running with JDK 17:
   {{< /tab >}}
 {{< /tabpane >}}
 
-The `Launcher JVM` and `Daemon JVM` entries should report version 17. 
+The `Launcher JVM` and `Daemon JVM` entries should report version 17.
 
-If either entry uses another version, set `JAVA_HOME` to your JDK 17 installation. 
+If either entry uses another version, set `JAVA_HOME` to your JDK 17 installation.
 
 Stop the existing Gradle daemon before trying again:
 
@@ -91,7 +91,7 @@ Stop the existing Gradle daemon before trying again:
 {{< /tabpane >}}
 
 {{% notice Note %}}
-If the build fails, and the error contains only a Java version number, Gradle is using an incompatible JDK. Set `JAVA_HOME` to JDK 17 and stop the Gradle daemon. Confirm the version with `./gradlew --version` or `.\gradlew.bat --version`, and run the build again.
+If the build fails and the error contains only a Java version number, Gradle is using an incompatible JDK. Set `JAVA_HOME` to JDK 17 and stop the Gradle daemon. Confirm the version with `./gradlew --version` or `.\gradlew.bat --version`, and run the build again.
 {{% /notice %}}
 
 Use the Gradle wrapper to build and lint the debug Android package (APK):

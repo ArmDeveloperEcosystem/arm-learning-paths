@@ -1,7 +1,7 @@
 ---
 title: Run optimized Arm AI Portal image upscaling models on Android
 
-description: Build Photo Upscale, import QuickSRNetSmall, SESR-M5, or RealESR through ExecuTorch, and upscale saved photos locally on the CPU of an Arm-based Android device.
+description: Build Photo Upscale, import QuickSRNetSmall, SESR-M5, or RealESR-general-x4v3 through ExecuTorch, and upscale saved photos locally on the CPU of an Arm-based Android device.
 minutes_to_complete: 40
 who_is_this_for: Android and machine learning developers who want to upscale saved photos locally on an Arm-based Android device using optimized models from the Arm AI Portal.
 learning_objectives:

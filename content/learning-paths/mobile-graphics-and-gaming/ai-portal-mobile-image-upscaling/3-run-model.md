@@ -9,7 +9,7 @@ layout: learningpathall
 
 ## Run QuickSRNetSmall with ExecuTorch
 
-After building and running Photo Upscaler, import upscaling models from Arm AI Portal.
+After building and running Photo Upscale, import upscaling models from Arm AI Portal.
 
 Start with QuickSRNetSmall, using the ExecuTorch runtime. You can use another supported model after completing the workflow. Run the commands from the project directory in the same terminal session that you used during setup.
 
@@ -77,7 +77,7 @@ In Photo Upscale:
 
 The importer identifies the supported model by its checksum and copies it to application-specific storage. You can delete the `.pte` from **Downloads** after import. The imported file remains until you uninstall the application or clear its storage.
 
-The application reports tile progress. It then displays the original and upscaled image, input and output dimensions, model name, and processing time. The sample produces **96 × 64 → 384 × 256**. This 4× upscaling gives sixteen times as many pixels. 
+The application reports tile progress. It then displays the original and upscaled image, input and output dimensions, model name, and processing time. The sample produces **96 × 64 → 384 × 256**. This 4× upscaling gives sixteen times as many pixels.
 
 **Processing time** covers RGB preparation, inference of every tile, blending, and conversion to the output bitmap. It excludes model import, loading and the validation warm-up, photo decoding, screen rendering, and saving. It's a full-image measurement.
 
@@ -88,12 +88,13 @@ The application reports tile progress. It then displays the original and upscale
 To inspect image detail and save the image:
 
 1. Select **Inspect detail**.
-2. Pinch to zoom and drag to pan, then use **Showing upscaled · switch to original** to compare the same region at the same displayed size. 
-3. Use **Reset zoom** returns to the fitted view. 
+2. Pinch to zoom and drag to pan, then use **Showing upscaled · switch to original** to compare the same region at the same displayed size.
 
-  Look at traffic signals, vehicle edges, and textures. With photos larger than 128 pixels in either dimension, also check for visible joins between tiles. More pixels don't guarantee more accurate detail because the model can smooth or invent texture.
+   Look at traffic signals, vehicle edges, and textures. With photos larger than 128 pixels in either dimension, also check for visible joins between tiles. More pixels don't guarantee more accurate detail because the model can smooth or invent texture.
 
-4. Select **Close detail**, then **Save image**. Android opens the document picker with a suggested `.png` filename. 
+3. Select **Reset zoom** to return to the fitted view.
+
+4. Select **Close detail**, then **Save image**. Android opens the document picker with a suggested `.png` filename.
 5. Choose a location such as **Downloads**, change the filename if needed, and select **Save**.
 
 Open the saved PNG in an image viewer. Verify the following details:
