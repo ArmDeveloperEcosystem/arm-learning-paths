@@ -71,7 +71,8 @@ cmake -B build \
     -DCMAKE_BUILD_TYPE=Release \
     -DGGML_NATIVE=ON \
     -DLLAMA_CURL=OFF \
-    -DBUILD_SHARED_LIBS=OFF
+    -DBUILD_SHARED_LIBS=OFF \
+    -DGGML_CPU_KLEIDIAI=ON
 ```
 
 This CMake invocation was used in the tested Zena run. Its output reported GNU 14.2.0 for C and C++, included the CPU backend, and ended with:
