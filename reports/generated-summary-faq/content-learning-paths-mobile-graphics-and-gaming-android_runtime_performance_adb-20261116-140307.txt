@@ -1,0 +1,16 @@
+Generate summary/FAQ local run
+timestamp: 2026-11-16T14:03:08Z
+mode: write
+openai_base_url: https://openai-api-proxy.geo.arm.com/api/providers/openai/v1/responses/
+openai_model: gpt-5
+category: 
+path_filter: content/learning-paths/mobile-graphics-and-gaming/android_runtime_performance_adb
+Selection summary: 1 selected, 0 skipped, 1 candidates.
+[1/1] Processing content/learning-paths/mobile-graphics-and-gaming/android_runtime_performance_adb/_index.md
+Wrote report to reports/generated-summary-faq/content-learning-paths-mobile-graphics-and-gaming-android_runtime_performance_adb-20261116-140307.yml
+Wrote Markdown report to reports/generated-summary-faq/content-learning-paths-mobile-graphics-and-gaming-android_runtime_performance_adb-20261116-140307.md
+Processed 1 Learning Paths: 1 added, 0 updated, 0 drift detected, 0 paths with drift, 0 skipped, 0 unchanged, 0 errors, 1 AI requests.
+Summary actions: 1 created, 0 repaired_missing, 0 rerun_requested, 0 generator_changed, 0 drift_detected_preserved.
+FAQ actions: 1 created, 0 repaired_missing, 0 rerun_requested, 0 generator_changed, 0 drift_detected_preserved.
+Flag resets: 1 generation flag sets reset, 1 rerun flag sets reset.
+- ADDED          content/learning-paths/mobile-graphics-and-gaming/android_runtime_performance_adb/_index.md | summary=created | faqs=created | reasons=initial_generation, rerun_summary, rerun_faqs, generation_flags_reset, rerun_flags_reset

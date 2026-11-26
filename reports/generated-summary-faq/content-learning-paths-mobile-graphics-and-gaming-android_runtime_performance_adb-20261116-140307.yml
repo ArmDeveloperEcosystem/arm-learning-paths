@@ -1,0 +1,264 @@
+latest_run:
+  timestamp: '2026-11-16T14:03:57Z'
+  mode: write
+  require_enable_flag: true
+  path_filter: content/learning-paths/mobile-graphics-and-gaming/android_runtime_performance_adb
+  category: ''
+  limit: 0
+  run_url: ''
+  git_ref: ''
+  git_sha: ''
+  actor: ''
+  template_version: summary-faq-v3
+  openai_base_url: https://openai-api-proxy.geo.arm.com/api/providers/openai/v1/responses/
+  openai_model: gpt-5
+  prompt_template: summary-faq-v3
+  markdown_report_file: reports/generated-summary-faq/content-learning-paths-mobile-graphics-and-gaming-android_runtime_performance_adb-20261116-140307.md
+  totals:
+    processed: 1
+    added: 1
+    updated: 0
+    unchanged: 0
+    drift_detected: 0
+    paths_with_drift: 0
+    skipped: 0
+    errors: 0
+    removed: 0
+    ai_requests: 1
+    summary_changed: 1
+    faq_changed: 1
+    generation_flags_reset: 1
+    rerun_flags_reset: 1
+  section_totals:
+    summary:
+      created: 1
+      repaired_missing: 0
+      rerun_requested: 0
+      generator_changed: 0
+      drift_detected_preserved: 0
+      unchanged: 0
+    faqs:
+      created: 1
+      repaired_missing: 0
+      rerun_requested: 0
+      generator_changed: 0
+      drift_detected_preserved: 0
+      unchanged: 0
+  reason_totals:
+    initial_generation: 1
+    missing_summary: 0
+    missing_faqs: 0
+    rerun_summary: 1
+    rerun_faqs: 1
+    generator_changed: 0
+    summary_drift_detected: 0
+    faq_drift_detected: 0
+    generation_flags_reset: 1
+    rerun_flags_reset: 1
+  paths:
+  - path: content/learning-paths/mobile-graphics-and-gaming/android_runtime_performance_adb/_index.md
+    status: added
+    changed_on_disk: true
+    managed_block_updated: true
+    ai_requested: true
+    generation_flags_reset:
+    - generate_summary_faq
+    - rerun_summary
+    - rerun_faqs
+    rerun_flags_reset:
+    - rerun_summary
+    - rerun_faqs
+    change_reasons:
+    - initial_generation
+    - rerun_summary
+    - rerun_faqs
+    - generation_flags_reset
+    - rerun_flags_reset
+    template_version_before: ''
+    template_version_after: summary-faq-v3
+    summary:
+      action: created
+      missing_before: false
+      rerun_requested: true
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: e37c08b32761ed7070a526ef01709ed90b65020241fdbea1440c54866be8748f
+      current_source_hash: e37c08b32761ed7070a526ef01709ed90b65020241fdbea1440c54866be8748f
+      generated_at_before: ''
+      generated_at_after: '2026-11-16T14:03:08Z'
+      preview_before: ''
+      preview_after: This Learning Path shows how to measure Android runtime performance on Arm-based
+        devices using ADB and Perfetto. You set up a macOS host with Android SDK tools, enable wireless
+        debugging, and clone th...
+      preview_generated: This Learning Path shows how to measure Android runtime performance on Arm-based
+        devices using ADB and Perfetto. You set up a macOS host with Android SDK tools, enable wireless
+        debugging, and clone th...
+    faqs:
+      action: created
+      missing_before: false
+      rerun_requested: true
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: e37c08b32761ed7070a526ef01709ed90b65020241fdbea1440c54866be8748f
+      current_source_hash: e37c08b32761ed7070a526ef01709ed90b65020241fdbea1440c54866be8748f
+      generated_at_before: ''
+      generated_at_after: '2026-11-16T14:03:08Z'
+      before_count: 0
+      after_count: 5
+      generated_count: 5
+      change_details:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - How do I know the device is ready for wireless ADB?
+        - Should I keep the USB cable connected while collecting data?
+        - Which parts of PhotoTalk do I modify to log LiteRT-LM metrics?
+        - What should I do in PhotoTalk before starting a capture?
+        - What result should I expect after running the monitoring script?
+        removed_questions: []
+        updated_questions: []
+      generated_diff:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - How do I know the device is ready for wireless ADB?
+        - Should I keep the USB cable connected while collecting data?
+        - Which parts of PhotoTalk do I modify to log LiteRT-LM metrics?
+        - What should I do in PhotoTalk before starting a capture?
+        - What result should I expect after running the monitoring script?
+        removed_questions: []
+        updated_questions: []
+history:
+- timestamp: '2026-11-16T14:03:57Z'
+  mode: write
+  require_enable_flag: true
+  path_filter: content/learning-paths/mobile-graphics-and-gaming/android_runtime_performance_adb
+  category: ''
+  limit: 0
+  run_url: ''
+  git_ref: ''
+  git_sha: ''
+  actor: ''
+  template_version: summary-faq-v3
+  openai_base_url: https://openai-api-proxy.geo.arm.com/api/providers/openai/v1/responses/
+  openai_model: gpt-5
+  prompt_template: summary-faq-v3
+  markdown_report_file: reports/generated-summary-faq/content-learning-paths-mobile-graphics-and-gaming-android_runtime_performance_adb-20261116-140307.md
+  totals:
+    processed: 1
+    added: 1
+    updated: 0
+    unchanged: 0
+    drift_detected: 0
+    paths_with_drift: 0
+    skipped: 0
+    errors: 0
+    removed: 0
+    ai_requests: 1
+    summary_changed: 1
+    faq_changed: 1
+    generation_flags_reset: 1
+    rerun_flags_reset: 1
+  section_totals:
+    summary:
+      created: 1
+      repaired_missing: 0
+      rerun_requested: 0
+      generator_changed: 0
+      drift_detected_preserved: 0
+      unchanged: 0
+    faqs:
+      created: 1
+      repaired_missing: 0
+      rerun_requested: 0
+      generator_changed: 0
+      drift_detected_preserved: 0
+      unchanged: 0
+  reason_totals:
+    initial_generation: 1
+    missing_summary: 0
+    missing_faqs: 0
+    rerun_summary: 1
+    rerun_faqs: 1
+    generator_changed: 0
+    summary_drift_detected: 0
+    faq_drift_detected: 0
+    generation_flags_reset: 1
+    rerun_flags_reset: 1
+  paths:
+  - path: content/learning-paths/mobile-graphics-and-gaming/android_runtime_performance_adb/_index.md
+    status: added
+    changed_on_disk: true
+    managed_block_updated: true
+    ai_requested: true
+    generation_flags_reset:
+    - generate_summary_faq
+    - rerun_summary
+    - rerun_faqs
+    rerun_flags_reset:
+    - rerun_summary
+    - rerun_faqs
+    change_reasons:
+    - initial_generation
+    - rerun_summary
+    - rerun_faqs
+    - generation_flags_reset
+    - rerun_flags_reset
+    template_version_before: ''
+    template_version_after: summary-faq-v3
+    summary:
+      action: created
+      missing_before: false
+      rerun_requested: true
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: e37c08b32761ed7070a526ef01709ed90b65020241fdbea1440c54866be8748f
+      current_source_hash: e37c08b32761ed7070a526ef01709ed90b65020241fdbea1440c54866be8748f
+      generated_at_before: ''
+      generated_at_after: '2026-11-16T14:03:08Z'
+      preview_before: ''
+      preview_after: This Learning Path shows how to measure Android runtime performance on Arm-based
+        devices using ADB and Perfetto. You set up a macOS host with Android SDK tools, enable wireless
+        debugging, and clone th...
+      preview_generated: This Learning Path shows how to measure Android runtime performance on Arm-based
+        devices using ADB and Perfetto. You set up a macOS host with Android SDK tools, enable wireless
+        debugging, and clone th...
+    faqs:
+      action: created
+      missing_before: false
+      rerun_requested: true
+      changed: true
+      drift_detected: false
+      source_hash_before: ''
+      source_hash_after: e37c08b32761ed7070a526ef01709ed90b65020241fdbea1440c54866be8748f
+      current_source_hash: e37c08b32761ed7070a526ef01709ed90b65020241fdbea1440c54866be8748f
+      generated_at_before: ''
+      generated_at_after: '2026-11-16T14:03:08Z'
+      before_count: 0
+      after_count: 5
+      generated_count: 5
+      change_details:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - How do I know the device is ready for wireless ADB?
+        - Should I keep the USB cable connected while collecting data?
+        - Which parts of PhotoTalk do I modify to log LiteRT-LM metrics?
+        - What should I do in PhotoTalk before starting a capture?
+        - What result should I expect after running the monitoring script?
+        removed_questions: []
+        updated_questions: []
+      generated_diff:
+        before_count: 0
+        after_count: 5
+        added_questions:
+        - How do I know the device is ready for wireless ADB?
+        - Should I keep the USB cable connected while collecting data?
+        - Which parts of PhotoTalk do I modify to log LiteRT-LM metrics?
+        - What should I do in PhotoTalk before starting a capture?
+        - What result should I expect after running the monitoring script?
+        removed_questions: []
+        updated_questions: []
