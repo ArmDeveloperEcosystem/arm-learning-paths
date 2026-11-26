@@ -90,15 +90,15 @@ CMake also reported that OpenMP was not found. That warning did not prevent conf
 After configuration succeeds, compile the CPU binary:
 
 ```bash
-cmake --build build --config Release -j4
+cmake --build build --config Release -j$(nproc)
 ./build/bin/llama-cli --version
 ```
 
 The tested Zena build output reached `Built target llama-cli`, and the binary returned:
 
 ```output
-version: 0.6.0-dev (build 11482, commit b86d2f075)
-built with GNU 14.2.0 for Linux aarch64
+version: 1.1.0-dev (build 12790, commit 436d7e81c)
+built with GNU 14.2.0 for Linux aarch6
 ```
 
 The full build also downloaded UI assets from Hugging Face during compilation, so that build required network access. `-j4` limits build jobs; it does not set the virtual platform's CPU count. The supplied excerpts do not include a complete build log or numeric exit status. If the build fails, save its error output and check the work filesystem before retrying.
