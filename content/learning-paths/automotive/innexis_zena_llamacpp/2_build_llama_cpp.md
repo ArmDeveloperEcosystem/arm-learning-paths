@@ -23,16 +23,20 @@ cmake --version
 sh: cmake: command not found
 ```
 
-Use the [Kitware CMake 3.28.6 release](https://github.com/Kitware/CMake/releases/tag/v3.28.6) for Linux AArch64 in the Zena work directory. This does not change the guest's system packages:
+Install the [Kitware CMake 3.28.6 release](https://github.com/Kitware/CMake/releases/tag/v3.28.6) for Linux AArch64 in the Zena work directory.
 
 ```bash
-cd "$LP2_WORK_DIR" &&
-wget -O cmake-3.28.6-linux-aarch64.tar.gz.part \
-    https://github.com/Kitware/CMake/releases/download/v3.28.6/cmake-3.28.6-linux-aarch64.tar.gz &&
-    mv cmake-3.28.6-linux-aarch64.tar.gz.part cmake-3.28.6-linux-aarch64.tar.gz &&
-sha256sum cmake-3.28.6-linux-aarch64.tar.gz &&
-tar -xzf cmake-3.28.6-linux-aarch64.tar.gz &&
-export PATH="$LP2_WORK_DIR/cmake-3.28.6-linux-aarch64/bin:$PATH" &&
+pushd /tmp &&
+wget https://github.com/Kitware/CMake/releases/download/v3.28.6/cmake-3.28.6-linux-aarch64.tar.gz &&
+mkdir -p /opt /usr/local/bin &&
+tar -xzf cmake-3.28.6-linux-aarch64.tar.gz -C /opt &&
+ln -s /opt/cmake-3.28.6-linux-aarch64/bin/cmake /usr/local/bin/cmake &&
+popd
+```
+
+Confirm `cmake` is available.
+
+```bash
 cmake --version
 ```
 
@@ -45,32 +49,24 @@ cmake version 3.28.6
 
 The SHA-256 value identifies the downloaded file used in this run; it has not been checked against a publisher-supplied checksum. If the download or extraction fails on your guest, keep the error output and stop before the llama.cpp build. Keep this shell open so the CMake path remains available.
 
-## Get the source at a fixed revision
+## Get the source
 
-Clone llama.cpp and check out the full commit used in the tested Zena run:
+Clone llama.cpp. 
 
 ```bash
-LP2_LLAMA_COMMIT=b86d2f07542b29ab099aed34fd6b6d1b2fd4b81c
-git clone https://github.com/ggml-org/llama.cpp.git "$LP2_WORK_DIR/llama.cpp" &&
-cd "$LP2_WORK_DIR/llama.cpp" &&
-git checkout --detach "$LP2_LLAMA_COMMIT" &&
-git rev-parse HEAD
-```
-
-The final command returned the requested full commit:
-
-```output
-b86d2f07542b29ab099aed34fd6b6d1b2fd4b81c
+git clone https://github.com/ggml-org/llama.cpp.git "$LP2_WORK_DIR/llama.cpp"
+cd "$LP2_WORK_DIR/llama.cpp"
+# uncomment below to go to specific working commit
+# LP2_LLAMA_COMMIT=b86d2f07542b29ab099aed34fd6b6d1b2fd4b81c && git checkout --detach "$LP2_LLAMA_COMMIT"
 ```
 
 If your checkout reports another commit, stop before configuring the build.
 
 ## Configure a CPU build
 
-In the same **Zena guest shell**, configure the pinned source for a CPU build:
+In the same **Zena guest shell**, configure the source for a CPU build:
 
 ```bash
-cd "$LP2_WORK_DIR/llama.cpp"
 cmake -B build \
     -DCMAKE_BUILD_TYPE=Release \
     -DGGML_NATIVE=ON \
