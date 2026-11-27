@@ -9,9 +9,7 @@ layout: learningpathall
 
 ## Prepare and verify a text model
 
-Use one small GGUF text model so you can focus on application bring-up. The tested Zena run used the [Qwen2.5 0.5B Instruct Q4_0 GGUF file](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/blob/main/qwen2.5-0.5b-instruct-q4_0.gguf). The publisher lists an Apache-2.0 license and SHA-256 value for this file. The downloaded file matched that hash before inference.
-
-Use the file's [full upload commit](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/commit/6dd44a1fb35d11b5d1b28902876ce3cc9e882d0e) instead of the moving `main` branch. The file in the tested Zena run was 428,730,208 bytes. Verify its hash in your guest before loading it.
+Use one small GGUF text model so you can focus on application bring-up. The tested Zena run used the [Qwen2.5 0.5B Instruct Q4_0 GGUF file](https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/blob/main/qwen2.5-0.5b-instruct-q4_0.gguf) available under an Apache-2.0 license.
 
 ## Choose the model location
 
@@ -39,9 +37,8 @@ If this guest can reach Hugging Face, download the file from the fixed repositor
 
 ```bash
 LP2_MODEL_REV=6dd44a1fb35d11b5d1b28902876ce3cc9e882d0e
-wget -q -O "$LP2_MODEL_FILE.part" \
-    "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/$LP2_MODEL_REV/qwen2.5-0.5b-instruct-q4_0.gguf?download=true" &&
-    mv "$LP2_MODEL_FILE.part" "$LP2_MODEL_FILE"
+wget -q -O "$LP2_MODEL_FILE" \
+    "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/$LP2_MODEL_REV/qwen2.5-0.5b-instruct-q4_0.gguf?download=true"
 printf 'Download exit status: %s\n' "$?"
 ```
 
@@ -52,8 +49,6 @@ Download exit status: 0
 ```
 
 Continue only if the download exit status is `0`. A successful download command does not establish that the file has the expected contents; check it below.
-
-If the guest cannot download directly, obtain the same approved file through a transfer route configured for this VP. The [Zena CSS onboarding Learning Path](../innexis_ana_zena/) describes ANA Host Access and an authorized SSH tunnel; each new VP needs its own access configuration. Set `LP2_MODEL_FILE` to the transferred file's actual path and verify its hash before continuing.
 
 ## Check the file identity
 

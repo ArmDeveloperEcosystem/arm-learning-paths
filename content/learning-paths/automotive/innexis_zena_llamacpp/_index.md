@@ -7,7 +7,7 @@ cascade:
     
 description: Build llama.cpp in a Zena CSS Linux guest, verify a text model, and run two recorded CPU inference requests.
 
-minutes_to_complete: 60
+minutes_to_complete: 15
 
 who_is_this_for: AI and application developers who can access a Zena CSS virtual platform in Siemens Innexis ANA.
 
