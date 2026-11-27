@@ -1,57 +1,83 @@
 ---
-title: Inspect a gear in the browser
+title: Run a gear inspection and check the result
 weight: 5
 layout: learningpathall
 ---
 
-## Start the application
+## Start the inspection services
 
-In the **guest shell**, start the services from the application directory. Use a fresh inspection session. Shutting down the services clears active captures. If you already have results to keep, archive them from the dashboard first.
+In the **Zena dashboard terminal**, start the services from the demo directory.
 
-```bash
-cd /root/gear-inspection-demo
+```sh
+cd /root/code-examples/learning-paths/automotive/visual-inspection-with-siemens-ana
 ./scripts/manage-services.sh start
 ./scripts/manage-services.sh status
 ```
 
-Look for `RUNNING` beside each service. Once the model has loaded, check its health endpoint.
+Look for `RUNNING` beside each service. If startup fails, check the corresponding log under `scripts/logs/`.
 
-```bash
-wget -qO- http://127.0.0.1:8081/health
+You can also check the inspection session through its HTTP API. Run this in the same terminal:
+
+```sh
+wget -qO- http://127.0.0.1:8091/api/status
 ```
 
-```text
-{"status":"ok"}
+A fresh session reports:
+
+```json
+{"status":"READY","captured":0,"pending":0}
 ```
 
-## Open the local dashboard
+## Inspect a gear
 
-Run `exit` to return to the **local shell** where you set `SSH_PORT`. Keep the original ANA tunnel running. Start the following forward and leave this terminal open while you use the dashboard.
+On your **host workstation**, open the [inspection dashboard](http://127.0.0.1:8090). Confirm that gears move across the preview, then select **Start inspection**. The application calibrates against the exposed belt before capturing gears. Run the status command again to see the session enter `RUNNING`. The `captured` count shows how many gear images have been saved and `pending` shows how many are waiting for a result.
 
-```bash
-ssh -N \
-  -L 8090:127.0.0.1:8090 \
-  -L 8091:127.0.0.1:8091 \
-  -L 8093:127.0.0.1:8093 \
-  -L 8094:127.0.0.1:8094 \
-  -p "${SSH_PORT}" \
-  root@127.0.0.1
+Wait for a completed entry in the inspection log. Select **View image** and compare the engraved serial, batch number, and tooth condition with the simulator’s **Ground-truth batch manifest**. The worker maps an intact gear to **Pass** and a broken tooth to **Discard**. A prediction can differ from the manifest.
+
+![Inspection dashboard showing the camera preview and a completed gear reading#center](dashboard.png "Gear inspection on the Zena vSoC")
+
+You can also read the predictions from the **Zena dashboard terminal**. The results endpoint on port `8090` returns a JSON array with one entry per completed inspection, or an empty array while the first result is pending.
+
+```sh
+wget -qO- http://127.0.0.1:8090/api/results | python3 -m json.tool
 ```
 
-Open [the local dashboard](http://127.0.0.1:8090). Confirm the preview shows gears moving across the belt, then select **Start inspection**. If the preview stays black, check playback in ANA. Calibration needs the exposed belt in the upper part of the frame before the detector can capture a gear.
+Example response with one completed inspection:
 
-Wait for a completed entry in the inspection log. Open its crop and compare the engraved serial, five-digit batch, and visible teeth with the model's reading. The worker maps an intact gear to **Pass**, a chip to **Discard**, and a burr to **Rework**. The disposition is a prediction and can differ from what you see.
+```json
+[
+  {
+    "id": "1795784452299148",
+    "serial": "SG-1JRHZ",
+    "batch": "26017",
+    "condition": "intact",
+    "disposition": "pass",
+    "duplicate": false,
+    "conflict": false,
+    "error": null,
+    "seconds": 8.92
+  }
+]
+```
 
-![Inspection dashboard showing the conveyor and a completed gear reading#center](dashboard.png "Gear inspection running on the virtual SoC")
+Here the model classified the teeth as `intact`, which the worker mapped to `pass`. Compare the prediction for your serial number with the manifest.
 
 ## Finish the session
 
-Select **Stop** to pause capture and inference. Select **Reset** after stopping to archive the session under `/tmp/gear-inspection/history/` and clear the dashboard. Copy any archive you want to keep before rebooting the guest.
+Select **Stop** to stop capture and inference. To keep the results, select **Reset** while stopped to archive them under `/tmp/gear-inspection/history/`. Close the inspection dashboard tab. In the **Zena dashboard terminal**, shut down the services and check their status:
 
-Press `Ctrl+C` in the dashboard tunnel terminal. With the original ANA tunnel still running, shut down the services from your local shell.
-
-```bash
-ssh -p "$SSH_PORT" root@127.0.0.1 /root/gear-inspection-demo/scripts/manage-services.sh stop
+```sh
+./scripts/manage-services.sh stop
+./scripts/manage-services.sh status
 ```
 
-You have run an industrial vision pipeline from camera input to an image-backed inspection result. For your own application, select another recording or live feed in ANA. The inspection prompt, accepted labels, and request settings live in `dashboard/backend/qwen_worker.py`. The model, projector, and server inference settings are in `scripts/manage-services.sh`. The gear-specific capture logic is in `inspection/gear_capture.cpp`.
+Close the port forward and the Innexis tunnel with `Ctrl+C` in each host workstation terminal.
+
+## Summary and Next Steps
+
+You generated a conveyor video, ran a vision-language model on the Zena vSoC, and checked its gear inspections against the batch manifest. This minimal educational example is designed for you to adapt to your own use case under the [BSD-3-Clause-Clear license](https://gitlab.arm.com/learning-code-examples/code-examples/-/blob/main/learning-paths/automotive/visual-inspection-with-siemens-ana/LICENSE.txt).
+
+- Change the conveyor speed, export a new MP4, and check which gears the application captures.
+- Try another vision-language model from the [Arm AI Portal](https://developer.arm.com/ai/models/). Choose one compatible with llama.cpp and update the model and projector paths in `scripts/manage-services.sh`.
+- Update the inspection prompt in `dashboard/qwen_worker.py` to describe the defect you want to detect. If you introduce a new condition, update the worker’s accepted labels and the dashboard labels to match.
+- Try a live video feed by selecting **Camera** under the Innexis audio/video inputs. For a different part or background, adapt the detection and cropping logic in `inspection/gear_capture.cpp`.
