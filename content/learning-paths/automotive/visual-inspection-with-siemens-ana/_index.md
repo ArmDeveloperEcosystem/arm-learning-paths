@@ -1,16 +1,16 @@
 ---
 title: Run an industrial AI visual inspection application on Siemens Innexis ANA
-minutes_to_complete: 45
-who_is_this_for: Industrial AI developers running camera-based inspection applications on virtual hardware.
+minutes_to_complete: 30
+who_is_this_for: Industrial AI developers building camera-based inspection applications and engineers testing workload functionality before Arm-based hardware is available.
 learning_objectives:
-    - Configure an Innexis virtual camera to play a sample conveyor recording.
-    - Build llama.cpp from source on an Arm Linux guest.
-    - Deploy a pre-optimized vision-language model and its matching projector.
+    - Generate a conveyor video and use it as the Innexis virtual camera input.
+    - Build the inspection application with CMake on an Arm Linux guest.
+    - Deploy a pre-optimized vision-language model.
     - Verify a gear inspection result in a local browser.
 prerequisites:
     - Complete the [introductory Innexis ANA Learning Path](https://github.com/odincodeshen/arm-learning-paths/tree/main/content/learning-paths/automotive/innexis_ana_zena).
-    - Access to a Zena CSS virtual platform with the Innexis camera-enabled Linux image, root SSH access, and outbound HTTPS to GitHub and Hugging Face.
-    - A local development computer with Git, OpenSSH, a shell, and a web browser.
+    - Access to a Zena CSS virtual platform.
+    - A host workstation with OpenSSH, a shell, and desktop browser.
 author: 
     - Kieran Hejmadi
     - Pramod Mynampati
@@ -28,10 +28,6 @@ tools_software_languages:
 operatingsystems:
     - Linux
 further_reading:
-    - resource:
-        title: Siemens Innexis ANA user guide
-        link: https://arm-262-g4-alb-1313921337.us-west-2.elb.amazonaws.com/docs/user-guide/overview/introduction.html
-        type: documentation
     - resource:
         title: Arm AI Portal
         link: https://developer.arm.com/ai
