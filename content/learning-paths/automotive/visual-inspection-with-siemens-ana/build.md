@@ -1,62 +1,70 @@
 ---
-title: Build llama.cpp on the virtual SoC
-weight: 3
+title: Build the inspection application with CMake
+weight: 4
 layout: learningpathall
 ---
 
-Run these commands in the **guest SSH shell**. This Learning Path was validated with llama.cpp **v1.0.0**, commit `b1b770d`. Official llama.cpp releases use semantic versioning (`vX.Y.Z`). Nightly tags use a build number (`bNNNN`). Pin the release to reproduce this exercise. If you choose a later version, review its release notes and check that the final inspection produces a result with both model files loaded. [Upstream versioning policy](https://github.com/ggml-org/ggml/discussions/1579) · [v1.0.0 release notes](https://github.com/ggml-org/llama.cpp/releases/tag/v1.0.0)
+## Get the example
 
-## Prepare the build tools
+In the **Zena dashboard terminal**, clone the example repository and enter the demo directory.
 
-The validation guest had 16 vCPUs, 7.7 GiB RAM, and 16 GiB of free disk space before the build. Check that your image includes the compiler, Git, Make, wget, and the camera dependencies. Each command should find the requested tool or package.
-
-```bash
-command -v c++ git make wget python3 pkg-config flock v4l2-ctl gst-launch-1.0
-pkg-config --modversion gstreamer-1.0 gstreamer-app-1.0 gstreamer-video-1.0 libjpeg
-ls /usr/bin/virtualcam-listener.py
-df -h /root
+```sh
+cd /root
+git clone https://gitlab.arm.com/learning-code-examples/code-examples.git &&
+cd code-examples/learning-paths/automotive/visual-inspection-with-siemens-ana
 ```
 
-Use the ANA camera-enabled development image if the listener or development packages are missing. Install the AArch64 CMake distribution in your build directory for this shell.
+## How the inspection works
 
-```bash
-mkdir -p /root/industrial-ai-build
-cd /root/industrial-ai-build
-wget https://github.com/Kitware/CMake/releases/download/v3.28.6/cmake-3.28.6-linux-aarch64.tar.gz
-tar -xzf cmake-3.28.6-linux-aarch64.tar.gz
-export PATH="$PWD/cmake-3.28.6-linux-aarch64/bin:$PATH"
+![The worker sends each gear crop and inspection prompt to Qwen. The dashboard serves the saved prediction. Codex ImageGen prompt: Draw four connected blocks on a transparent background showing V4L2 camera input, JPEG gear capture, Qwen inference over HTTP, and results from GET /api/results.#center](inspection-pipeline.png "ImageGen prompt (abridged): Draw four connected blocks on a transparent background showing V4L2 camera input, JPEG gear capture, Qwen inference over HTTP, and results from GET /api/results.")
+
+This minimal example captures one gear at a time. The task-specific code in `inspection/gear_capture.cpp` detects a gear on the belt and crops its image. The Python worker sends the JPEG crop and inspection prompt over HTTP to Qwen running on the llama.cpp server. The source build enables Arm KleidiAI support for CPU inference. The worker saves the prediction in `result.json`, and the dashboard serves it through `GET /api/results`. To adapt the inspection criteria, edit the prompt and accepted conditions in `dashboard/qwen_worker.py`.
+
+## Install CMake for AArch64
+
+In the **Zena dashboard terminal**, check which version is available. Include `/usr/local/bin` so the shell can find an existing installation there.
+
+```sh
+export PATH="/usr/local/bin:$PATH"
 cmake --version
 ```
 
-## Build the inference server
+If the version is 3.20 or later, continue to **Build the application**. If CMake is missing or older, install version 3.28.6 as follows.
 
-Clone the tagged source and build the server on the guest. Six parallel compile jobs were used on the validation guest. Reduce the job count if memory is limited.
-
-```bash
-git clone --depth 1 --branch v1.0.0 https://github.com/ggml-org/llama.cpp.git
-cd llama.cpp
-cmake -S . -B build \
-  -DCMAKE_BUILD_TYPE=Release \
-  -DLLAMA_BUILD_IS_DEV=OFF \
-  -DBUILD_SHARED_LIBS=ON \
-  -DGGML_OPENMP=OFF \
-  -DLLAMA_OPENSSL=OFF \
-  -DLLAMA_USE_PREBUILT_UI=OFF
-cmake --build build --target llama-server --parallel 6
-```
-
-Install the server and its shared libraries together where the demo launcher looks for them. Preserve the library symlinks.
+In the same terminal, start Bash with `bash` if you are using another shell, then run the following block. It installs CMake under `/opt`, makes it available in this shell, and returns you to the demo directory.
 
 ```bash
-runtime=/root/qwen/armv9/bin
-mkdir -p "$runtime"
-cp -a build/bin/llama-server build/bin/*.so* "$runtime/"
-LD_LIBRARY_PATH="$runtime" "$runtime/llama-server" --version
+pushd /tmp &&
+wget https://github.com/Kitware/CMake/releases/download/v3.28.6/cmake-3.28.6-linux-aarch64.tar.gz &&
+mkdir -p /opt /usr/local/bin &&
+tar -xzf cmake-3.28.6-linux-aarch64.tar.gz -C /opt &&
+ln -sfn /opt/cmake-3.28.6-linux-aarch64/bin/cmake /usr/local/bin/cmake &&
+popd
 ```
 
-The validation guest reported the following version. The build number can vary with the checkout history.
+Verify the installation:
+
+```sh
+cmake --version
+```
+
+The first line should read:
 
 ```text
-version: 1.0.0 (build 1, commit b1b770d)
-built with GNU 14.2.0 for Linux aarch64
+cmake version 3.28.6
+```
+
+## Build the application
+
+From the demo directory, configure and build the application. CMake uses an existing working `llama-server` or downloads and builds the runtime when needed. Allow about 2–3 minutes for a fresh build on a 16-vCPU vSoC.
+
+```sh
+cmake -S . -B build && cmake --build build --parallel "$(nproc)"
+```
+
+When CMake builds the runtime from source, successful output ends with lines like these:
+
+```text
+[100%] Completed 'llama_runtime'
+[100%] Built target llama_runtime
 ```
