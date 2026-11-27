@@ -1,5 +1,5 @@
 ---
-title: Run an industrial AI vision application on Siemens Innexis ANA
+title: Run an industrial AI visual inspection application on Siemens Innexis ANA
 minutes_to_complete: 45
 who_is_this_for: Industrial AI developers running camera-based inspection applications on virtual hardware.
 learning_objectives:
@@ -11,7 +11,9 @@ prerequisites:
     - Complete the [introductory Innexis ANA Learning Path](https://github.com/odincodeshen/arm-learning-paths/tree/main/content/learning-paths/automotive/innexis_ana_zena).
     - Access to a Zena CSS virtual platform with the Innexis camera-enabled Linux image, root SSH access, and outbound HTTPS to GitHub and Hugging Face.
     - A local development computer with Git, OpenSSH, a shell, and a web browser.
-author: Kieran Hejmadi
+author: 
+    - Kieran Hejmadi
+    - Pramod Mynampati
 generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
