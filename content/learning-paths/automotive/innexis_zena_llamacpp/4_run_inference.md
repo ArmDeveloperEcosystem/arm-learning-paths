@@ -13,10 +13,7 @@ Run a short text prompt with the binary and model you prepared.
 
 ## Run a text-generation smoke test
 
-Create a results directory and save the prompt beside the application output:
-
-Run the following command on the **Zena Linux guest**. It requests zero GPU layers with `-ngl 0` and saves both the log and exit code:
-
+Run the following command on the **Zena Linux guest**. It requests zero GPU layers with `-ngl 0`.
 ```bash
 LP2_LLAMA_CLI="$LP2_WORK_DIR/llama.cpp/build/bin/llama-cli"
 
