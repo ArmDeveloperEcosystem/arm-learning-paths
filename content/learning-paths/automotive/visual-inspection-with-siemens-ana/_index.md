@@ -18,7 +18,7 @@ generate_summary_faq: true
 rerun_summary: false
 rerun_faqs: false
 skilllevels: Advanced
-subjects: ML
+subjects: AI/ML
 armips:
     - Zena CSS
 tools_software_languages:
