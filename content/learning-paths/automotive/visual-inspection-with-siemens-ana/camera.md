@@ -6,7 +6,9 @@ layout: learningpathall
 
 ## Generate your camera input
 
-On your **host workstation**, download [simulator.html from the example repository](https://gitlab.arm.com/learning-code-examples/code-examples/-/blob/main/learning-paths/automotive/visual-inspection-with-siemens-ana/samples/simulator.html) using GitLab’s **Download** button. Open the downloaded file in desktop Chrome. Keep the default settings for this run: first batch number `26017`, 16 gears in total, and two gears with broken teeth.
+On your **host workstation**, download [simulator.html from the example repository](https://gitlab.arm.com/learning-code-examples/code-examples/-/blob/main/learning-paths/automotive/visual-inspection-with-siemens-ana/samples/simulator.html) using GitLab’s **Download** button. The simulator generates a video of gears moving along a manufacturing line, each engraved with a serial number and a batch number. Broken teeth are the only defect in this example.
+
+Open the downloaded file in desktop Chrome. Keep the default settings for this run: first batch number `26017`, 16 gears in total, and two gears with broken teeth.
 
 Select **Start run** to preview the conveyor. Look for missing or shortened teeth as the gears pass.
 
